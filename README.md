@@ -28,7 +28,7 @@ npm run build
 
 ## Important: what this preview does not yet provide
 
-A separate **free-plan** Supabase project named `monarch-workspace` has now been created in the ap-south-1 region. The unrelated `whatsapp-ai-saathi` project was not changed. Two migrations are applied: the private workspace/RLS foundation and a revision-checked workspace-state sync function. Email/password sign-up is enabled with email confirmation; the current Arena preview URL is allowed as an auth redirect.
+A separate **free-plan** Supabase project named `monarch-workspace` has been created in the ap-south-1 region. The unrelated `whatsapp-ai-saathi` project was not changed. Two migrations are applied: the private workspace/RLS foundation and a revision-checked workspace-state sync function. Email/password sign-up is enabled with email confirmation; the Arena preview and deployed Vercel URLs are allowed as auth redirects. A Vercel Hobby deployment is live at https://monarch-workspace-beryl.vercel.app (deployed from the current Arena branch).
 
 Once you create and confirm your Monarch account in the preview, low-volume work records (tasks, ideas, scripts, projects, chat summaries, notes, and Vault conversations) sync to the private `workspace_state` record, so they can follow your account across devices. A revision check prevents a stale device from silently overwriting a newer saved version. The first account gets its own private workspace.
 
@@ -39,7 +39,7 @@ The team roster can read the cloud membership list, but email invitations and ro
 ## Cloud foundation notes
 
 1. Project setup uses only a publishable Supabase key in the browser; no service-role key is included in the app.
-2. Auth confirmation and redirects are configured for the live preview and localhost. Add the final Vercel domain to the redirect allow-list when production hosting is chosen.
+2. Auth confirmation and redirects are configured for the Arena preview, the deployed Vercel host, and localhost. The current deployment is from the session branch; future Vercel deployments may need to be triggered manually unless Git auto-deploy is enabled.
 3. The private Vault bucket and RLS are set up, but cloud file upload, resumable transfers, backup/restore, and invitation email are pending before team files are used for real work.
 4. Keep the workspace on the free plan unless you explicitly choose otherwise. Watch provider quotas; don't assume included storage or bandwidth will cover large media.
 5. Before inviting teammates, test separate accounts and verify Owner/Admin/Editor/Contributor/Viewer permissions in the live cloud project.
