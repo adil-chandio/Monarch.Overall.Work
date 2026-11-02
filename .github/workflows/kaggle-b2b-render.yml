@@ -38,21 +38,61 @@ jobs:
         env:
           RAW_USER: ${{ secrets.KAGGLE_USERNAME }}
           RAW_KEY: ${{ secrets.KAGGLE_KEY }}
+          RAW_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+          RAW_KAGGLE_TOKEN: ${{ secrets.KAGGLE_TOKEN }}
+          RAW_JSON: ${{ secrets.KAGGLE_JSON }}
+          RAW_KAGGLE: ${{ secrets.KAGGLE }}
+          RAW_MONARCH: ${{ secrets.MONARCH }}
+          VAR_USER: ${{ vars.KAGGLE_USERNAME }}
+          VAR_KEY: ${{ vars.KAGGLE_KEY }}
         run: |
           python - <<'PY'
           import json, os, pathlib
 
-          u = (os.environ.get("RAW_USER") or "").strip()
-          k = (os.environ.get("RAW_KEY") or "").strip()
+          diag = {
+              k: bool((os.environ.get(k) or "").strip())
+              for k in (
+                  "RAW_USER", "RAW_KEY", "RAW_TOKEN", "RAW_KAGGLE_TOKEN",
+                  "RAW_JSON", "RAW_KAGGLE", "RAW_MONARCH", "VAR_USER", "VAR_KEY"
+              )
+          }
+          print(f"::notice::Secret presence flags: {json.dumps(diag)}", flush=True)
+
+          u = (os.environ.get("RAW_USER") or os.environ.get("VAR_USER") or "").strip()
+          k = (
+              os.environ.get("RAW_KEY")
+              or os.environ.get("RAW_TOKEN")
+              or os.environ.get("RAW_KAGGLE_TOKEN")
+              or os.environ.get("RAW_JSON")
+              or os.environ.get("RAW_KAGGLE")
+              or os.environ.get("RAW_MONARCH")
+              or os.environ.get("VAR_KEY")
+              or ""
+          ).strip()
           tok = ""
 
-          if k.startswith("{"):
-              data = json.loads(k)
-              u = u or str(data.get("username") or "").strip()
-              k = str(data.get("key") or "").strip()
-          elif k.startswith("KGAT_"):
+          for cand in (u, k):
+              if cand.startswith("{"):
+                  try:
+                      data = json.loads(cand)
+                      u = str(data.get("username") or u).strip()
+                      k = str(data.get("key") or data.get("token") or k).strip()
+                  except Exception:
+                      pass
+
+          if ":" in k and not k.startswith("KGAT_"):
+              left, right = k.split(":", 1)
+              u = u or left.strip()
+              k = right.strip()
+
+          if k.startswith("KGAT_"):
               tok = k
               k = "placeholder"
+          elif u.startswith("KGAT_"):
+              tok = u
+              u = ""
+              if not k:
+                  k = "placeholder"
 
           for s in (k, tok):
               if s and s != "placeholder":
@@ -60,7 +100,7 @@ jobs:
 
           if "@" in u:
               u = ""
-          if not u:
+          if not u and (tok or k):
               if tok:
                   os.environ["KAGGLE_API_TOKEN"] = tok
                   os.environ["KAGGLE_USERNAME"] = "placeholder"
@@ -77,7 +117,8 @@ jobs:
                   u = "compali"
 
           if not u or (not tok and not k):
-              raise SystemExit("Missing KAGGLE_USERNAME or KAGGLE_KEY in GitHub Actions Secrets")
+              print("::error::No Kaggle secret detected in Repository Actions Secrets (checked KAGGLE_USERNAME, KAGGLE_KEY, KAGGLE_API_TOKEN, MONARCH, KAGGLE_JSON, KAGGLE).", flush=True)
+              raise SystemExit(1)
 
           kdir = pathlib.Path.home() / ".kaggle"
           kdir.mkdir(parents=True, exist_ok=True)
@@ -90,7 +131,7 @@ jobs:
               fh.write(f"KAGGLE_KEY={k}\n")
               if tok:
                   fh.write(f"KAGGLE_API_TOKEN={tok}\n")
-          print(f"::notice::Authenticated Kaggle user: {u} (token_mode={bool(tok)})")
+          print(f"::notice::Authenticated Kaggle user: {u} (token_mode={bool(tok)})", flush=True)
           PY
 
       - name: Render 8 Real AI Motion Clips on Kaggle Dual T4 (4 GPUs across 2 Kernels)
