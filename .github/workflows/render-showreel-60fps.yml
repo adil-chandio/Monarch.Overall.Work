@@ -1,6 +1,13 @@
 name: Render MONARCH 1080p60 HyperFrames Showreel
 
 on:
+  push:
+    branches:
+      - arena/9960286a-monarch-overall-work
+    paths:
+      - 'showreel/render_60fps.mjs'
+      - 'public/showreel/index.html'
+      - '.github/workflows/render-showreel-60fps.yml'
   workflow_dispatch:
 
 permissions:
@@ -42,5 +49,5 @@ jobs:
           git config user.name "monarch-render-bot"
           git config user.email "workadilchandio@gmail.com"
           git add public/demo-preview.mp4 public/demo-poster.jpg deliverables/MON-DEMO26_Master_60fps.enc
-          git commit -m "chore(showreel): render Proof Over Promises 1080p60 master & preview"
+          git commit -m "chore(showreel): render Proof Over Promises 1080p60 master & preview [skip ci]"
           git push origin HEAD:${{ github.ref_name }}
