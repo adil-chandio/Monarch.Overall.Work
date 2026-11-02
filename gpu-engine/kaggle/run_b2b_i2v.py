@@ -28,9 +28,9 @@ def ensure_deps() -> None:
 
     pkgs = []
     for mod, pkg in (
-        ("diffusers", "diffusers>=0.33.0"),
-        ("transformers", "transformers>=4.49.0"),
-        ("accelerate", "accelerate>=1.2.0"),
+        ("diffusers", "diffusers>=0.32"),
+        ("transformers", "transformers>=4.49"),
+        ("accelerate", "accelerate"),
         ("imageio_ffmpeg", "imageio-ffmpeg"),
         ("ftfy", "ftfy"),
         ("sentencepiece", "sentencepiece"),
@@ -41,18 +41,8 @@ def ensure_deps() -> None:
         except ModuleNotFoundError:
             pkgs.append(pkg)
     if pkgs:
-        log(f"Installing packages: {' '.join(pkgs)}")
-        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-U", *pkgs], check=True)
-    else:
-        # Ensure diffusers has WanImageToVideoPipeline
-        try:
-            from diffusers import WanImageToVideoPipeline  # noqa: F401
-        except Exception:
-            log("Upgrading diffusers + transformers for Wan 2.2 support...")
-            subprocess.run(
-                [sys.executable, "-m", "pip", "install", "-q", "-U", "diffusers>=0.33.0", "transformers>=4.49.0", "accelerate"],
-                check=True,
-            )
+        log(f"Installing missing packages: {' '.join(pkgs)}")
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", *pkgs], check=False)
 
 
 class MotionEngine:

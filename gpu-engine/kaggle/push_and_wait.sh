@@ -3,14 +3,17 @@ set -uo pipefail
 
 CHUNKS="${1:-s01,s02,s03,s04;s05,s06,s07,s08}"
 OUT_CLIPS="${2:-gpu-engine/clips}"
-SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v1}"
-POLL_MAX="${POLL_MAX:-90}"
+SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v2}"
+POLL_MAX="${POLL_MAX:-110}"
 POLL_SLEEP="${POLL_SLEEP:-35}"
 BRANCH="${GITHUB_REF_NAME:-arena/9960286a-monarch-overall-work}"
 
 mkdir -p "$OUT_CLIPS" /tmp/kwork
 
 echo "::notice::Kaggle user=${KAGGLE_USERNAME} | chunks=${CHUNKS}"
+mkdir -p /tmp/v1diag && kaggle kernels output "${KAGGLE_USERNAME}/monarch-b2b-v1-1" -p /tmp/v1diag >/dev/null 2>&1 || true
+V1_TAIL=$(cat /tmp/v1diag/*.log 2>/dev/null | tr '\n' ' ' | tail -c 600 || true)
+[ -n "$V1_TAIL" ] && echo "::notice::v1-1 diag: $V1_TAIL"
 
 IFS=';' read -ra PARTS <<< "$CHUNKS"
 REFS=()
@@ -74,9 +77,10 @@ for i in "${!REFS[@]}"; do
         break
         ;;
       *ERROR*|*error*|*CANCEL*|*cancel*|*FAIL*)
-        echo "::error::$REF failed: $ST"
+        mkdir -p "$KDIR/out"
         kaggle kernels output "$REF" -p "$KDIR/out" 2>&1 || true
-        cat "$KDIR/out"/*.log 2>/dev/null | tail -n 80 || true
+        ERR_SNIP=$(cat "$KDIR/out"/*.log "$KDIR/out"/*.txt 2>/dev/null | tr '\n' ' ' | tail -c 900)
+        echo "::error::$REF failed ($ST) | tail: $ERR_SNIP"
         exit 1
         ;;
     esac
