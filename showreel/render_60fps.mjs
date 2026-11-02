@@ -97,8 +97,13 @@ async function renderFramesParallel(port) {
   fs.rmSync(FRAMES_OUT, { recursive: true, force: true });
   fs.mkdirSync(FRAMES_OUT, { recursive: true });
 
+  const sysChrome = ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium-browser']
+    .find((p) => fs.existsSync(p));
+  console.log(`  Using browser binary: ${sysChrome || 'Playwright bundled Chromium'}`);
+
   const browser = await chromium.launch({
     headless: true,
+    ...(sysChrome ? { executablePath: sysChrome } : {}),
     args: ['--no-sandbox', '--disable-dev-shm-usage', '--font-render-hinting=none'],
   });
 

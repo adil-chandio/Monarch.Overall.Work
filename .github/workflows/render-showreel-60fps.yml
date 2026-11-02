@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   render-60fps:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Checkout branch
@@ -24,16 +24,17 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 1
 
-      - name: Setup Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install FFmpeg & Playwright Chromium
+      - name: Install Playwright & Verify FFmpeg/Chrome
         run: |
-          sudo apt-get update -y && sudo apt-get install -y ffmpeg
-          npm install --no-save playwright@1.51.0
-          npx playwright install chromium
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -y && sudo apt-get install -y ffmpeg
+          fi
+          npm install --no-save playwright
+          if [ ! -x /usr/bin/google-chrome ] && [ ! -x /usr/bin/google-chrome-stable ]; then
+            npx playwright install chromium
+          fi
+          ffmpeg -version | head -n 1
+          google-chrome --version || true
 
       - name: Render 1920x1080 @ 60fps Master + Vault Preview
         run: node showreel/render_60fps.mjs
