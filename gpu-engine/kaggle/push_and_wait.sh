@@ -11,9 +11,29 @@ BRANCH="${GITHUB_REF_NAME:-arena/9960286a-monarch-overall-work}"
 mkdir -p "$OUT_CLIPS" /tmp/kwork
 
 echo "::notice::Kaggle user=${KAGGLE_USERNAME} | chunks=${CHUNKS}"
-mkdir -p /tmp/v1diag && kaggle kernels output "${KAGGLE_USERNAME}/monarch-b2b-v1-1" -p /tmp/v1diag >/dev/null 2>&1 || true
-V1_TAIL=$(cat /tmp/v1diag/*.log 2>/dev/null | tr '\n' ' ' | tail -c 600 || true)
-[ -n "$V1_TAIL" ] && echo "::notice::v1-1 diag: $V1_TAIL"
+mkdir -p /tmp/v2diag && kaggle kernels output "${KAGGLE_USERNAME}/monarch-b2b-v2-1" -p /tmp/v2diag >/dev/null 2>&1 || true
+python3 - <<'PY'
+import glob, json
+for p in glob.glob("/tmp/v2diag/*.log"):
+    try:
+        items = json.loads(open(p).read())
+        lines = [x.get("data", "") for x in items if "NbConvertApp" not in x.get("data", "") and "SyntaxWarning" not in x.get("data", "") and "cells[i]" not in x.get("data", "") and "Escape underscores" not in x.get("data", "")]
+        joined = "".join(lines).replace("\n", " | ")
+        print(f"::notice::v2-1 FULL LOG: {joined[-1800:]}", flush=True)
+    except Exception as e:
+        print(f"::notice::v2-1 parse err: {e}", flush=True)
+for p in glob.glob("/tmp/v2diag/*"):
+    print(f"::notice::v2-1 file: {p}", flush=True)
+for p in glob.glob("/tmp/v2diag/*.ipynb") + glob.glob("/tmp/v2diag/*.html"):
+    try:
+        raw = open(p, errors="ignore").read()
+        import re
+        txt = re.sub(r"<[^>]+>", " ", raw)
+        txt = re.sub(r"\s+", " ", txt)
+        print(f"::notice::v2-1 DOC TAIL: {txt[-1800:]}", flush=True)
+    except Exception:
+        pass
+PY
 
 IFS=';' read -ra PARTS <<< "$CHUNKS"
 REFS=()
@@ -79,8 +99,22 @@ for i in "${!REFS[@]}"; do
       *ERROR*|*error*|*CANCEL*|*cancel*|*FAIL*)
         mkdir -p "$KDIR/out"
         kaggle kernels output "$REF" -p "$KDIR/out" 2>&1 || true
-        ERR_SNIP=$(cat "$KDIR/out"/*.log "$KDIR/out"/*.txt 2>/dev/null | tr '\n' ' ' | tail -c 900)
-        echo "::error::$REF failed ($ST) | tail: $ERR_SNIP"
+        KOUT_DIR="$KDIR/out" REF_NAME="$REF" ST_MSG="$ST" python3 - <<'PY'
+import glob, json, os
+kout = os.environ["KOUT_DIR"]
+joined = ""
+for p in glob.glob(f"{kout}/*.log"):
+    try:
+        items = json.loads(open(p).read())
+        lines = [x.get("data", "") for x in items if "NbConvertApp" not in x.get("data", "") and "SyntaxWarning" not in x.get("data", "")]
+        joined += "".join(lines)
+    except Exception:
+        joined += open(p, errors="ignore").read()
+for p in glob.glob(f"{kout}/*.txt"):
+    joined += "\n" + open(p, errors="ignore").read()[-1200:]
+clean = joined.replace("\r", " ").replace("\n", " | ")
+print(f"::error::{os.environ['REF_NAME']} failed ({os.environ['ST_MSG']}): {clean[-1800:]}", flush=True)
+PY
         exit 1
         ;;
     esac
