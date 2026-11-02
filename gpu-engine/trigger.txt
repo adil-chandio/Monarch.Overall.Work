@@ -1,1 +1,1 @@
-run-10: harvest v4-2 + SSD HF_CACHE (/kaggle/working/_hf_cache) + 3x Dual-T4 parallel kernels
+run-11: harvest s04+s05 from v5-2 + pre-encode T5-XXL once + 2x Zero-OOM Dual-T4 direct-CUDA kernels

@@ -2,29 +2,19 @@
 set -uo pipefail
 
 OUT_CLIPS="${2:-gpu-engine/clips}"
-SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v5}"
+SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v6}"
 POLL_MAX="${POLL_MAX:-110}"
-POLL_SLEEP="${POLL_SLEEP:-30}"
+POLL_SLEEP="${POLL_SLEEP:-25}"
 BRANCH="${GITHUB_REF_NAME:-arena/9960286a-monarch-overall-work}"
 
 mkdir -p "$OUT_CLIPS" /tmp/kwork
 
-echo "::notice::Kaggle user=${KAGGLE_USERNAME} | harvesting any completed prior kernels first..."
+echo "::notice::Kaggle user=${KAGGLE_USERNAME} | harvesting completed prior kernels first..."
 
-# Harvest any clips already completed on v4-1 / v4-2 so zero GPU work is wasted!
-for PREV_SLUG in monarch-b2b-v4-2 monarch-b2b-v4-1; do
+for PREV_SLUG in monarch-b2b-v5-2 monarch-b2b-v5-1 monarch-b2b-v4-2 monarch-b2b-v4-1; do
   PREV_REF="${KAGGLE_USERNAME}/${PREV_SLUG}"
   PREV_ST=$(kaggle kernels status "$PREV_REF" 2>&1 | tail -n 1 || true)
   echo "Prior kernel $PREV_REF -> $PREV_ST"
-  # If v4-2 is still finishing right now, wait up to 4 minutes for it!
-  if echo "$PREV_ST" | grep -qi "running"; then
-    for w in $(seq 1 8); do
-      sleep 30
-      PREV_ST=$(kaggle kernels status "$PREV_REF" 2>&1 | tail -n 1 || true)
-      echo "  waiting $PREV_REF -> $PREV_ST"
-      echo "$PREV_ST" | grep -qi "running" || break
-    done
-  fi
   if echo "$PREV_ST" | grep -qi "complete"; then
     mkdir -p "/tmp/kwork/${PREV_SLUG}_out"
     kaggle kernels output "$PREV_REF" -p "/tmp/kwork/${PREV_SLUG}_out" 2>&1 || true
@@ -36,7 +26,6 @@ done
 HARVESTED=$(find "$OUT_CLIPS" -name "s*.mp4" -size +20k | sort | tr '\n' ' ')
 echo "::notice::Harvested prior clips: ${HARVESTED:-none}"
 
-# Compute exact missing scenes out of s01..s08
 MISSING=()
 for SID in s01 s02 s03 s04 s05 s06 s07 s08; do
   if [ ! -s "${OUT_CLIPS}/${SID}.mp4" ]; then
@@ -47,23 +36,18 @@ done
 echo "Missing scenes (${#MISSING[@]}): ${MISSING[*]:-none}"
 
 if [ "${#MISSING[@]}" -gt 0 ]; then
-  # Split missing scenes across up to 3 parallel Dual-T4 kernels (max 6 T4 GPUs!) so each GPU renders ~1 scene (~6 min total!)
+  # STRICTLY MAX 2 CONCURRENT KERNELS (Kaggle batch GPU session limit = 2; each kernel uses 2x T4 GPUs = 4 GPUs total!)
   N_MISS="${#MISSING[@]}"
-  if [ "$N_MISS" -le 2 ]; then
-    PARTS=("$(IFS=,; echo "${MISSING[*]}")")
-  elif [ "$N_MISS" -le 4 ]; then
-    P1=("${MISSING[@]:0:2}")
-    P2=("${MISSING[@]:2:2}")
-    PARTS=("$(IFS=,; echo "${P1[*]}")" "$(IFS=,; echo "${P2[*]}")")
+  if [ "$N_MISS" -le 1 ]; then
+    PARTS=("${MISSING[0]}")
   else
-    P1=("${MISSING[@]:0:3}")
-    P2=("${MISSING[@]:3:3}")
-    P3=("${MISSING[@]:6:2}")
+    HALF=$(( (N_MISS + 1) / 2 ))
+    P1=("${MISSING[@]:0:$HALF}")
+    P2=("${MISSING[@]:$HALF}")
     PARTS=("$(IFS=,; echo "${P1[*]}")" "$(IFS=,; echo "${P2[*]}")")
-    [ "${#P3[@]}" -gt 0 ] && PARTS+=("$(IFS=,; echo "${P3[*]}")")
   fi
 
-  echo "::notice::Dispatching ${#PARTS[@]} Dual-T4 kernels for missing scenes: ${PARTS[*]}"
+  echo "::notice::Dispatching ${#PARTS[@]} Zero-OOM Dual-T4 kernels: ${PARTS[*]}"
 
   REFS=()
   DIRS=()
@@ -86,17 +70,16 @@ if [ "${#MISSING[@]}" -gt 0 ]; then
     PUSH_OUT=$(kaggle kernels push -p "$KDIR" 2>&1)
     PUSH_RC=$?
     echo "$PUSH_OUT"
-    if [ "$PUSH_RC" -ne 0 ]; then
+    if [ "$PUSH_RC" -ne 0 ] || echo "$PUSH_OUT" | grep -qi "error"; then
       echo "::error::Failed pushing $REF: $PUSH_OUT"
       exit 1
     fi
-    echo "::notice::Pushed Kaggle Dual-T4 kernel $REF ($ONLY) -> $PUSH_OUT"
+    echo "::notice::Pushed Zero-OOM Dual-T4 kernel $REF ($ONLY) -> $PUSH_OUT"
     REFS+=("$REF")
     DIRS+=("$KDIR")
-    sleep 10
+    sleep 8
   done
 
-  # Poll all kernels concurrently in a single unified loop so finished kernels harvest immediately!
   DONE_FLAGS=()
   for i in "${!REFS[@]}"; do DONE_FLAGS[$i]=0; done
 

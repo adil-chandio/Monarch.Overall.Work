@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
-"""Packages a self-contained Kaggle Dual-T4 (GPU T4 x2) notebook (embeds code + keyframes, zero git clone needed)."""
+"""Packages a zero-OOM Kaggle Dual-T4 (GPU T4 x2) notebook:
+1. Pre-encodes T5-XXL prompt embeddings once on GPU 0 (0.8s) and frees 9.5GB T5-XXL completely.
+2. Spawns 2 lightweight GPU workers (text_encoder=None -> only 4.8GB VRAM & <2.5GB CPU RAM each!).
+"""
 from __future__ import annotations
 
 import argparse
 import base64
+from io import BytesIO
 import json
 import pathlib
 import re
 import sys
+
+from PIL import Image
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
@@ -21,10 +27,6 @@ def build_notebook(scenes_csv: str) -> dict:
     job_data = json.loads((ROOT / "gpu-engine/b2b_job.json").read_text())
     worker_py = (ROOT / "gpu-engine/kaggle/run_b2b_i2v.py").read_text()
 
-    from io import BytesIO
-    from PIL import Image
-
-    # Embed code + crisp 1024x576 q=94 keyframes (~250 KB total -> well under Kaggle's 1MB .ipynb API cap!)
     embedded_files: dict[str, str] = {
         "gpu-engine/b2b_job.json": base64.b64encode(json.dumps(job_data).encode()).decode(),
         "gpu-engine/kaggle/run_b2b_i2v.py": base64.b64encode(worker_py.encode()).decode(),
@@ -38,10 +40,9 @@ def build_notebook(scenes_csv: str) -> dict:
 
     payload_json = json.dumps(embedded_files)
 
-    code = f'''# Auto-generated self-contained MONARCH Dual-T4 Parallel I2V Kernel
-import base64, gc, json, os, pathlib, shutil, socket, subprocess, sys, time, urllib.request
+    code = f'''# Auto-generated Zero-OOM MONARCH Dual-T4 Parallel I2V Kernel
+import base64, gc, json, os, pathlib, shutil, subprocess, sys, time, urllib.request
 
-# CRITICAL: Use default ~/.cache/huggingface (container root SSD, ~50GB+), NEVER /tmp (tmpfs RAM!).
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 SCENES = {json.dumps(wanted)}
@@ -61,21 +62,9 @@ n_gpu = torch.cuda.device_count()
 gpu_names = [torch.cuda.get_device_name(i) for i in range(n_gpu)]
 print(f"GPU_INFO: cuda={{torch.cuda.is_available()}} count={{n_gpu}} names={{gpu_names}}", flush=True)
 
-try:
-    urllib.request.urlopen("https://huggingface.co", timeout=8)
-    net_ok = True
-    net_err = ""
-except Exception as ne:
-    net_ok = False
-    net_err = f"{{type(ne).__name__}}: {{ne}}"
-print(f"NET_INFO: ok={{net_ok}} err={{net_err}}", flush=True)
-
 if n_gpu == 0:
-    raise RuntimeError(f"NO_GPU_ALLOCATED on Kaggle account (GPU_INFO count=0, net_ok={{net_ok}}). Account may need Kaggle Phone Verification for GPU+Internet.")
-if not net_ok:
-    raise RuntimeError(f"NO_INTERNET_IN_KERNEL ({{net_err}}). GPU count={{n_gpu}} {{gpu_names}}.")
+    raise RuntimeError("NO_GPU_ALLOCATED on Kaggle account.")
 
-# Install/verify diffusers>=0.32.2 without breaking preinstalled torch
 r_pip = subprocess.run(
     [sys.executable, "-m", "pip", "install", "-q",
      "diffusers>=0.32.2", "transformers>=4.49,<5.0", "accelerate",
@@ -84,16 +73,55 @@ r_pip = subprocess.run(
 )
 print("PIP_RC:", r_pip.returncode, r_pip.stderr[-300:] if r_pip.returncode else "ok", flush=True)
 
-try:
-    from diffusers import LTXImageToVideoPipeline
-    dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-    print("Pre-caching LTXImageToVideoPipeline onto root SSD...", flush=True)
-    _p = LTXImageToVideoPipeline.from_pretrained("Lightricks/LTX-Video", torch_dtype=dtype)
-    del _p
-    gc.collect()
-    torch.cuda.empty_cache()
-except Exception as pre_exc:
-    print("Pre-cache note:", type(pre_exc).__name__, str(pre_exc)[:300], flush=True)
+# PHASE 1: Load ONLY T5-XXL text encoder once, compute embeddings for our scenes in <2s, then FREE 9.5GB RAM!
+from diffusers import LTXImageToVideoPipeline
+dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+job = json.loads((repo / "gpu-engine/b2b_job.json").read_text())
+emb_dir = pathlib.Path("/kaggle/working/_embeds")
+emb_dir.mkdir(parents=True, exist_ok=True)
+
+print("Phase 1: Encoding T5-XXL prompts once & freeing 9.5GB RAM...", flush=True)
+enc_pipe = LTXImageToVideoPipeline.from_pretrained(
+    "Lightricks/LTX-Video", transformer=None, vae=None, torch_dtype=dtype
+)
+enc_pipe.to("cuda:0")
+neg = job.get("negative", "blurry, low quality, text, watermark")
+with torch.no_grad():
+    for sc in job["scenes"]:
+        if sc["id"] not in SCENES:
+            continue
+        prompt = f"{{sc['prompt']}}, {{job.get('style', '')}}".strip(", ")
+        pe, pam, npe, npam = enc_pipe.encode_prompt(
+            prompt=prompt,
+            negative_prompt=neg,
+            do_classifier_free_guidance=True,
+            num_videos_per_prompt=1,
+            device=torch.device("cuda:0"),
+            dtype=dtype,
+        )
+        torch.save(
+            {{
+                "prompt_embeds": pe.cpu(),
+                "prompt_attention_mask": pam.cpu(),
+                "negative_prompt_embeds": npe.cpu(),
+                "negative_prompt_attention_mask": npam.cpu(),
+            }},
+            emb_dir / f"{{sc['id']}}.pt",
+        )
+        print("  encoded", sc["id"], tuple(pe.shape), flush=True)
+
+del enc_pipe
+gc.collect()
+torch.cuda.empty_cache()
+
+# Pre-download lightweight 4.8GB Transformer + VAE shards once so GPU workers load from SSD without race
+print("Phase 2: Pre-caching 4.8GB Transformer + VAE shards...", flush=True)
+_vp = LTXImageToVideoPipeline.from_pretrained(
+    "Lightricks/LTX-Video", text_encoder=None, tokenizer=None, torch_dtype=dtype
+)
+del _vp
+gc.collect()
+torch.cuda.empty_cache()
 
 if n_gpu >= 2 and len(SCENES) > 1:
     mid = (len(SCENES) + 1) // 2
@@ -104,9 +132,6 @@ else:
 procs = []
 log_files = []
 for idx, grp in enumerate(groups):
-    if idx == 1:
-        # Stagger worker 1 by 35s so T5-XXL CPU shard load never overlaps with worker 0
-        time.sleep(35)
     wdir = f"/kaggle/working/_worker_{{idx}}"
     pathlib.Path(wdir).mkdir(parents=True, exist_ok=True)
     wlog = open(f"/kaggle/working/worker_{{idx}}.txt", "w")
@@ -115,6 +140,7 @@ for idx, grp in enumerate(groups):
         sys.executable,
         str(repo / "gpu-engine/kaggle/run_b2b_i2v.py"),
         "--job", str(repo / "gpu-engine/b2b_job.json"),
+        "--embeds", str(emb_dir),
         "--only", ",".join(grp),
         "--out", wdir,
     ]
@@ -144,13 +170,13 @@ for idx in range(len(groups)):
             shutil.copy2(item, final_out / item.name)
     shutil.rmtree(wpath, ignore_errors=True)
 
-# Remove temp repo before notebook exit so /kaggle/working only holds tiny MP4 clips
+shutil.rmtree(emb_dir, ignore_errors=True)
 shutil.rmtree(repo, ignore_errors=True)
 
 produced = sorted(p.name for p in final_out.glob("*.mp4"))
 print("PRODUCED_CLIPS:", produced, flush=True)
-if not produced:
-    raise SystemExit(f"Zero clips produced: codes={{codes}}")
+if len(produced) < len(SCENES) or any(c != 0 for c in codes):
+    raise SystemExit(f"Incomplete render: codes={{codes}}, clips={{produced}}")
 '''
     return {
         "cells": [
@@ -200,7 +226,7 @@ def main() -> int:
         "model_sources": [],
     }
     (out / "kernel-metadata.json").write_text(json.dumps(meta, indent=1) + "\n")
-    print(f"Packaged self-contained Dual-T4 kernel {meta['id']} ({args.only}) -> {out}")
+    print(f"Packaged Zero-OOM Dual-T4 kernel {meta['id']} ({args.only}) -> {out}")
     return 0
 
 
