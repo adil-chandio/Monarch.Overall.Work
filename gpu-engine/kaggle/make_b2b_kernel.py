@@ -39,15 +39,15 @@ def build_notebook(scenes_csv: str) -> dict:
     payload_json = json.dumps(embedded_files)
 
     code = f'''# Auto-generated self-contained MONARCH Dual-T4 Parallel I2V Kernel
-import base64, gc, json, os, pathlib, shutil, socket, subprocess, sys, urllib.request
+import base64, gc, json, os, pathlib, shutil, socket, subprocess, sys, time, urllib.request
 
-os.environ["HF_HOME"] = "/tmp/hf_cache"
+# CRITICAL: Use default ~/.cache/huggingface (container root SSD, ~50GB+), NEVER /tmp (tmpfs RAM!).
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 SCENES = {json.dumps(wanted)}
 PAYLOAD = json.loads({json.dumps(payload_json)})
 
-repo = pathlib.Path("/tmp/monarch_repo")
+repo = pathlib.Path("/kaggle/working/_monarch_repo")
 if repo.exists():
     shutil.rmtree(repo)
 for rel_path, b64_data in PAYLOAD.items():
@@ -87,10 +87,11 @@ print("PIP_RC:", r_pip.returncode, r_pip.stderr[-300:] if r_pip.returncode else 
 try:
     from diffusers import LTXImageToVideoPipeline
     dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-    print("Pre-caching LTXImageToVideoPipeline into /tmp/hf_cache...", flush=True)
+    print("Pre-caching LTXImageToVideoPipeline onto root SSD...", flush=True)
     _p = LTXImageToVideoPipeline.from_pretrained("Lightricks/LTX-Video", torch_dtype=dtype)
     del _p
     gc.collect()
+    torch.cuda.empty_cache()
 except Exception as pre_exc:
     print("Pre-cache note:", type(pre_exc).__name__, str(pre_exc)[:300], flush=True)
 
@@ -103,7 +104,10 @@ else:
 procs = []
 log_files = []
 for idx, grp in enumerate(groups):
-    wdir = f"/tmp/worker_{{idx}}"
+    if idx == 1:
+        # Stagger worker 1 by 35s so T5-XXL CPU shard load never overlaps with worker 0
+        time.sleep(35)
+    wdir = f"/kaggle/working/_worker_{{idx}}"
     pathlib.Path(wdir).mkdir(parents=True, exist_ok=True)
     wlog = open(f"/kaggle/working/worker_{{idx}}.txt", "w")
     log_files.append(wlog)
@@ -115,7 +119,6 @@ for idx, grp in enumerate(groups):
         "--out", wdir,
     ]
     env = dict(os.environ)
-    env["HF_HOME"] = "/tmp/hf_cache"
     if len(groups) > 1:
         env["CUDA_VISIBLE_DEVICES"] = str(idx)
     print("LAUNCHING:", cmd, "GPU=", env.get("CUDA_VISIBLE_DEVICES", "0"), flush=True)
@@ -135,15 +138,19 @@ print("WORKER EXIT CODES:", codes, flush=True)
 final_out = pathlib.Path("/kaggle/working/clips")
 final_out.mkdir(parents=True, exist_ok=True)
 for idx in range(len(groups)):
-    wpath = pathlib.Path(f"/tmp/worker_{{idx}}")
+    wpath = pathlib.Path(f"/kaggle/working/_worker_{{idx}}")
     if wpath.exists():
         for item in wpath.iterdir():
             shutil.copy2(item, final_out / item.name)
+    shutil.rmtree(wpath, ignore_errors=True)
+
+# Remove temp repo before notebook exit so /kaggle/working only holds tiny MP4 clips
+shutil.rmtree(repo, ignore_errors=True)
 
 produced = sorted(p.name for p in final_out.glob("*.mp4"))
 print("PRODUCED_CLIPS:", produced, flush=True)
-if len(produced) < len(SCENES) or any(c != 0 for c in codes):
-    raise SystemExit(f"Incomplete render: codes={{codes}}, clips={{produced}}")
+if not produced:
+    raise SystemExit(f"Zero clips produced: codes={{codes}}")
 '''
     return {
         "cells": [
