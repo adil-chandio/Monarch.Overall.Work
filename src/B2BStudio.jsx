@@ -329,6 +329,67 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
                 </div>
               </aside>
             </div>
+
+            {/* EMBEDDED 60FPS COMMERCIAL SHOWREEL */}
+            <div
+              style={{
+                marginTop: 28,
+                padding: '18px 20px',
+                borderRadius: 20,
+                background: 'rgba(16, 16, 20, 0.92)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: 10,
+                  marginBottom: 12,
+                }}
+              >
+                <div>
+                  <small
+                    style={{
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: 11,
+                      color: '#ff8e96',
+                      letterSpacing: '0.12em',
+                    }}
+                  >
+                    LIVE 60FPS BROADCAST SHOWREEL · -14 LUFS STEREO
+                  </small>
+                  <h3 style={{ margin: '4px 0 0', fontFamily: 'Syne, sans-serif', fontSize: 19 }}>
+                    Night Shift — MONARCH® Commercial &amp; Locked-Preview Vault Demo
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  className="m-btn m-btn-crimson"
+                  onClick={() => onOpenPortal('MON-DEMO26')}
+                >
+                  Inspect Inside Client Vault (MON-DEMO26) <ArrowRight size={14} />
+                </button>
+              </div>
+              <video
+                src="/demo-preview.mp4"
+                poster="/demo-poster.jpg"
+                controls
+                playsInline
+                preload="metadata"
+                controlsList="nodownload"
+                style={{
+                  width: '100%',
+                  borderRadius: 14,
+                  border: '1px solid rgba(210, 31, 43, 0.35)',
+                  background: '#050507',
+                  display: 'block',
+                  maxHeight: 520,
+                }}
+              />
+            </div>
           </div>
         </section>
 
@@ -881,19 +942,40 @@ export function ClientPortalView({ portalCode, onBackToStudio, onSwitchPortal, o
                     <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 22, margin: '6px 0 10px', zIndex: 2 }}>
                       {portal.project_title}
                     </h3>
-                    <p style={{ color: '#d2cec4', fontSize: 13.5, maxWidth: 460, margin: '0 0 18px', zIndex: 2 }}>
+                    <p style={{ color: '#d2cec4', fontSize: 13.5, maxWidth: 460, margin: '0 0 16px', zIndex: 2 }}>
                       {portal.preview_notes}
                     </p>
-                    {portal.preview_url && (
-                      <a
-                        href={portal.preview_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="m-btn m-btn-crimson"
-                        style={{ position: 'relative', zIndex: 2 }}
-                      >
-                        Launch Live Preview Stage <ExternalLink size={14} />
-                      </a>
+                    {portal.preview_url && /\.(mp4|webm|mov)(\?|$)/i.test(portal.preview_url) ? (
+                      <div style={{ width: '100%', position: 'relative', zIndex: 2 }}>
+                        <video
+                          src={portal.preview_url}
+                          poster="/demo-poster.jpg"
+                          controls
+                          playsInline
+                          preload="metadata"
+                          controlsList="nodownload"
+                          onContextMenu={(e) => e.preventDefault()}
+                          style={{
+                            width: '100%',
+                            borderRadius: 12,
+                            border: '1px solid rgba(210, 31, 43, 0.45)',
+                            background: '#050507',
+                            display: 'block',
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      portal.preview_url && (
+                        <a
+                          href={portal.preview_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="m-btn m-btn-crimson"
+                          style={{ position: 'relative', zIndex: 2 }}
+                        >
+                          Launch Live Preview Stage <ExternalLink size={14} />
+                        </a>
+                      )
                     )}
                   </div>
 
