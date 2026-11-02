@@ -3,7 +3,7 @@ set -uo pipefail
 
 CHUNKS="${1:-s01,s02,s03,s04;s05,s06,s07,s08}"
 OUT_CLIPS="${2:-gpu-engine/clips}"
-SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v3}"
+SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v4}"
 POLL_MAX="${POLL_MAX:-110}"
 POLL_SLEEP="${POLL_SLEEP:-35}"
 BRANCH="${GITHUB_REF_NAME:-arena/9960286a-monarch-overall-work}"

@@ -36,11 +36,8 @@ jobs:
 
       - name: Configure Kaggle Credentials Safely
         env:
-          S_ALIELITEE: ${{ secrets.ALIELITEE }}
-          S_KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          S_KAGGLE_USER: ${{ secrets.KAGGLE_USER }}
-          S_USERNAME: ${{ secrets.USERNAME }}
           S_COMPALI: ${{ secrets.COMPALI }}
+          S_MONARCH: ${{ secrets.MONARCH }}
           S_KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
           S_KAGGLE_API_KEY: ${{ secrets.KAGGLE_API_KEY }}
           S_KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
@@ -48,7 +45,13 @@ jobs:
           S_KAGGLE_SECRET: ${{ secrets.KAGGLE_SECRET }}
           S_KAGGLE_JSON: ${{ secrets.KAGGLE_JSON }}
           S_KAGGLE: ${{ secrets.KAGGLE }}
-          S_MONARCH: ${{ secrets.MONARCH }}
+          S_WORKADILCHANDIO: ${{ secrets.WORKADILCHANDIO }}
+          S_ADILCHANDIO: ${{ secrets.ADILCHANDIO }}
+          S_ADIL: ${{ secrets.ADIL }}
+          S_ALIELITEE: ${{ secrets.ALIELITEE }}
+          S_KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          S_KAGGLE_USER: ${{ secrets.KAGGLE_USER }}
+          S_USERNAME: ${{ secrets.USERNAME }}
           V_KAGGLE_USERNAME: ${{ vars.KAGGLE_USERNAME }}
           V_KAGGLE_USER: ${{ vars.KAGGLE_USER }}
           V_KAGGLE_KEY: ${{ vars.KAGGLE_KEY }}
@@ -62,7 +65,14 @@ jobs:
           present = [k for k in sorted(keys) if (os.environ.get(k) or "").strip()]
           print(f"::notice::Present credential slots: {present}", flush=True)
 
-          u = (
+          # Mask all secret values immediately
+          for slot in present:
+              val = (os.environ.get(slot) or "").strip()
+              for line in val.splitlines():
+                  if line.strip():
+                      print(f"::add-mask::{line.strip()}", flush=True)
+
+          explicit_u = (
               os.environ.get("S_KAGGLE_USERNAME")
               or os.environ.get("S_KAGGLE_USER")
               or os.environ.get("S_USERNAME")
@@ -70,83 +80,90 @@ jobs:
               or os.environ.get("V_KAGGLE_USER")
               or ""
           ).strip()
-          k = (
-              os.environ.get("S_ALIELITEE")
-              or os.environ.get("S_KAGGLE_KEY")
-              or os.environ.get("S_KAGGLE_API_KEY")
-              or os.environ.get("S_KAGGLE_API_TOKEN")
-              or os.environ.get("S_KAGGLE_TOKEN")
-              or os.environ.get("S_KAGGLE_SECRET")
-              or os.environ.get("S_KAGGLE_JSON")
-              or os.environ.get("S_KAGGLE")
-              or os.environ.get("S_MONARCH")
-              or os.environ.get("S_COMPALI")
-              or os.environ.get("V_KAGGLE_KEY")
-              or os.environ.get("V_KAGGLE_API_TOKEN")
-              or os.environ.get("V_MONARCH")
-              or ""
-          ).strip()
-          default_u = "alielitee" if (os.environ.get("S_ALIELITEE") or "").strip() else "compali"
-          if not u and (os.environ.get("S_COMPALI") or "").strip():
-              u = "compali"
-          tok = ""
+          if "@" in explicit_u:
+              explicit_u = ""
 
-          for cand in (u, k):
-              if cand.startswith("{"):
+          # Ordered preference: newly added/verified account slots BEFORE S_ALIELITEE (unverified)
+          ordered_slots = [
+              ("S_COMPALI", "compali"),
+              ("S_MONARCH", "compali"),
+              ("S_KAGGLE_KEY", explicit_u or "compali"),
+              ("S_KAGGLE_API_TOKEN", explicit_u or "compali"),
+              ("S_KAGGLE_API_KEY", explicit_u or "compali"),
+              ("S_KAGGLE_TOKEN", explicit_u or "compali"),
+              ("S_KAGGLE_JSON", explicit_u or "compali"),
+              ("S_KAGGLE", explicit_u or "compali"),
+              ("S_KAGGLE_SECRET", explicit_u or "compali"),
+              ("S_WORKADILCHANDIO", "workadilchandio"),
+              ("S_ADILCHANDIO", "adilchandio"),
+              ("S_ADIL", "compali"),
+              ("V_KAGGLE_KEY", explicit_u or "compali"),
+              ("V_KAGGLE_API_TOKEN", explicit_u or "compali"),
+              ("V_MONARCH", "compali"),
+              ("S_ALIELITEE", explicit_u or "compali"),
+          ]
+
+          def probe_handle(tok_val: str, key_val: str, hint_u: str) -> str:
+              env = dict(os.environ)
+              if tok_val:
+                  env["KAGGLE_API_TOKEN"] = tok_val
+                  env["KAGGLE_USERNAME"] = hint_u
+                  env["KAGGLE_KEY"] = "placeholder"
+              else:
+                  env.pop("KAGGLE_API_TOKEN", None)
+                  env["KAGGLE_USERNAME"] = hint_u
+                  env["KAGGLE_KEY"] = key_val
+              for subcmd in (
+                  ["kaggle", "kernels", "list", "--mine", "--page-size", "10", "-v"],
+                  ["kaggle", "datasets", "list", "--mine", "-v"],
+              ):
                   try:
-                      data = json.loads(cand)
-                      u = str(data.get("username") or u).strip()
-                      k = str(data.get("key") or data.get("token") or k).strip()
+                      r = subprocess.run(subcmd, capture_output=True, text=True, env=env, timeout=20)
+                      for line in r.stdout.splitlines()[1:]:
+                          ref = line.split(",", 1)[0].strip()
+                          if "/" in ref and not ref.lower().startswith("ref"):
+                              return ref.split("/", 1)[0].strip()
                   except Exception:
                       pass
+              return ""
 
-          if ":" in k and not k.startswith("KGAT_"):
-              left, right = k.split(":", 1)
-              u = u or left.strip()
-              k = right.strip()
+          candidates = []
+          for slot_name, fallback_u in ordered_slots:
+              raw = (os.environ.get(slot_name) or "").strip()
+              if not raw:
+                  continue
+              u_cand = explicit_u
+              k_cand = raw
+              tok_cand = ""
+              if raw.startswith("{"):
+                  try:
+                      d = json.loads(raw)
+                      u_cand = str(d.get("username") or u_cand).strip()
+                      k_cand = str(d.get("key") or d.get("token") or k_cand).strip()
+                  except Exception:
+                      pass
+              elif ":" in raw and not raw.startswith("KGAT_"):
+                  left, right = raw.split(":", 1)
+                  u_cand = u_cand or left.strip()
+                  k_cand = right.strip()
+              if k_cand.startswith("KGAT_"):
+                  tok_cand = k_cand
+                  k_cand = "placeholder"
+              for s in (k_cand, tok_cand):
+                  if s and s != "placeholder":
+                      print(f"::add-mask::{s}", flush=True)
+              discovered = probe_handle(tok_cand, k_cand, u_cand or fallback_u)
+              final_u = discovered or u_cand or fallback_u
+              print(f"::notice::Slot {slot_name} -> discovered={discovered or 'none'}, final_u={final_u}", flush=True)
+              candidates.append((slot_name, final_u, k_cand, tok_cand))
 
-          if k.startswith("KGAT_"):
-              tok = k
-              k = "placeholder"
-          elif u.startswith("KGAT_"):
-              tok = u
-              u = ""
-              if not k:
-                  k = "placeholder"
-
-          for s in (k, tok):
-              if s and s != "placeholder":
-                  print(f"::add-mask::{s}", flush=True)
-
-          if "@" in u:
-              u = ""
-
-          if not u and (tok or k):
-              if tok:
-                  os.environ["KAGGLE_API_TOKEN"] = tok
-                  os.environ["KAGGLE_USERNAME"] = default_u
-                  os.environ["KAGGLE_KEY"] = "placeholder"
-              else:
-                  os.environ["KAGGLE_USERNAME"] = default_u
-                  os.environ["KAGGLE_KEY"] = k
-              # Probe `kaggle kernels list --mine -v` to auto-discover exact Kaggle handle if any kernel exists
-              try:
-                  r = subprocess.run(
-                      ["kaggle", "kernels", "list", "--mine", "--page-size", "5", "-v"],
-                      capture_output=True, text=True, timeout=20,
-                  )
-                  for line in r.stdout.splitlines()[1:]:
-                      ref = line.split(",", 1)[0].strip()
-                      if "/" in ref and not ref.lower().startswith("ref"):
-                          u = ref.split("/", 1)[0].strip()
-                          break
-              except Exception:
-                  pass
-              u = u or default_u
-
-          if not u or (not tok and not k):
-              print("::error::No Kaggle credentials found in Actions Repository Secrets of adil-chandio/Monarch.Overall.Work.", flush=True)
+          if not candidates:
+              print("::error::No Kaggle credentials found in Actions Repository Secrets.", flush=True)
               raise SystemExit(1)
+
+          # Prefer any account whose handle is NOT unverified 'alielitee' if multiple exist
+          chosen = next((c for c in candidates if c[1].lower() != "alielitee"), candidates[0])
+          slot_used, u, k, tok = chosen
 
           kdir = pathlib.Path.home() / ".kaggle"
           kdir.mkdir(parents=True, exist_ok=True)
@@ -159,7 +176,7 @@ jobs:
               fh.write(f"KAGGLE_KEY={k}\n")
               if tok:
                   fh.write(f"KAGGLE_API_TOKEN={tok}\n")
-          print(f"::notice::Authenticated Kaggle user: {u} (token_mode={bool(tok)})", flush=True)
+          print(f"::notice::Selected slot={slot_used} | Kaggle user={u} (token_mode={bool(tok)})", flush=True)
           PY
 
       - name: Render 8 Real AI Motion Clips on Kaggle Dual T4 (4 GPUs across 2 Kernels)

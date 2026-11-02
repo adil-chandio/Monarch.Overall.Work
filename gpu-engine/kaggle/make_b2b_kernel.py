@@ -187,7 +187,6 @@ def main() -> int:
         "is_private": True,
         "enable_gpu": True,
         "enable_internet": True,
-        "machine_shape": "NvidiaTeslaT4",
         "dataset_sources": [],
         "competition_sources": [],
         "kernel_sources": [],
