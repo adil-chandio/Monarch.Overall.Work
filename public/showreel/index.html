@@ -867,7 +867,7 @@
           FOUNDER-LED BY ADIL CHANDIO · PAKISTAN × WORLDWIDE
         </div>
         <h2 class="display" id="s6-title" style="font-size:172px;color:#FFFFFF;letter-spacing:0.03em;">
-          MONARCH<span style="color:#D21F2B;">®</span> STUDIO
+          MONARCH<sup style="color:#D21F2B;font-family:'ManropeLocal',sans-serif;font-size:56px;font-weight:800;vertical-align:top;margin:0 8px 0 4px;">®</sup>STUDIO
         </h2>
         <p style="font-size:30px;color:#D6D2C9;font-weight:700;margin-top:18px;letter-spacing:0.02em;">
           Signature Interactive Websites · High-Retention Films · Autonomous AI Systems
@@ -957,7 +957,7 @@
         el.style.display = 'none';
         return false;
       }
-      el.style.display = '';
+      el.style.display = el.id === 's6' ? 'flex' : 'block';
       let tx = 0, ty = 0, sc = 1, blur = 0, op = 1;
 
       // Entry (14 frames = 0.23s power4.out from 12% offset)
