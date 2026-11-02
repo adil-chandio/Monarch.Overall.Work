@@ -61,16 +61,15 @@ class MotionEngine:
 
         self.torch = torch
         self.job = job
-        # Tesla T4 (sm_75) native fast tensor cores = float16; VAE kept in float32 to prevent NaN/black frames
-        cap = torch.cuda.get_device_capability(0) if torch.cuda.is_available() else (7, 5)
-        self.dtype = torch.bfloat16 if cap[0] >= 8 else torch.float16
+        # Use bfloat16 for LTX-Video / Wan2.2 T5/UMT5 numerical stability; VAE tiled for 16GB T4
+        self.dtype = torch.bfloat16
         self.pipe = None
         self.kind = None
-        self.width = int(job.get("width", 832))
-        self.height = int(job.get("height", 480))
-        self.frames = int(job.get("frames", 49))
-        self.steps = int(job.get("steps", 18))
-        log(f"CUDA device: {torch.cuda.get_device_name(0)} | cap={cap} | dtype={self.dtype}")
+        self.width = 768
+        self.height = 448
+        self.frames = 49
+        self.steps = 28
+        log(f"CUDA device: {torch.cuda.get_device_name(0)} | dtype={self.dtype}")
 
     def load_wan(self, sequential: bool = False) -> None:
         from diffusers import AutoencoderKLWan, WanImageToVideoPipeline
@@ -100,7 +99,7 @@ class MotionEngine:
     def load_ltx(self) -> None:
         from diffusers import LTXImageToVideoPipeline
 
-        log("Fallback -> Loading Lightricks/LTX-Video (768x448, 49f)...")
+        log("Loading Lightricks/LTX-Video (768x448, 49f, 28 steps, T4-native model offload)...")
         pipe = LTXImageToVideoPipeline.from_pretrained("Lightricks/LTX-Video", torch_dtype=self.dtype)
         pipe.enable_model_cpu_offload()
         try:
@@ -110,24 +109,19 @@ class MotionEngine:
         pipe.set_progress_bar_config(disable=True)
         self.pipe = pipe
         self.kind = "ltx_i2v_2b"
-        self.width, self.height = 768, 448
+        self.width, self.height, self.frames = 768, 448, 49
 
     def ensure_loaded(self) -> None:
         if self.pipe is not None:
             return
         try:
-            self.load_wan(sequential=False)
+            self.load_ltx()
         except Exception as exc:
-            log(f"Wan model offload load issue ({type(exc).__name__}: {str(exc)[:220]}) -> trying sequential...")
+            log(f"LTX-Video load issue ({type(exc).__name__}: {str(exc)[:220]}) -> falling back to Wan 2.2...")
             gc.collect()
             self.torch.cuda.empty_cache()
-            try:
-                self.load_wan(sequential=True)
-            except Exception as exc2:
-                log(f"Wan sequential also failed ({type(exc2).__name__}: {str(exc2)[:220]}) -> switching to LTX-Video")
-                gc.collect()
-                self.torch.cuda.empty_cache()
-                self.load_ltx()
+            self.width, self.height, self.frames, self.steps = 832, 480, 33, 12
+            self.load_wan(sequential=True)
 
     def generate_clip(self, scene: dict, img_path: pathlib.Path, out_mp4: pathlib.Path) -> dict:
         from diffusers.utils import export_to_video, load_image
@@ -164,7 +158,7 @@ class MotionEngine:
                             height=self.height,
                             width=self.width,
                             num_frames=self.frames,
-                            num_inference_steps=24,
+                            num_inference_steps=28,
                             guidance_scale=3.2,
                             decode_timestep=0.03,
                             decode_noise_scale=0.025,
@@ -180,7 +174,8 @@ class MotionEngine:
                 log(f"QC {scene['id']}: luma={luma:.1f}, motion_delta={motion_delta:.2f}")
                 if not np.isfinite(luma) or luma < 3.0:
                     raise RuntimeError(f"Dark/NaN frame detected (luma={luma}) — triggering fallback")
-                export_to_video(frames, str(raw_tmp), fps=int(self.job.get("fps", 16)))
+                out_fps = 24 if self.kind == "ltx_i2v_2b" else int(self.job.get("fps", 16))
+                export_to_video(frames, str(raw_tmp), fps=out_fps)
 
                 # Encode clean H.264 yuv420p clip
                 ffmpeg_bin = shutil.which("ffmpeg")
@@ -227,11 +222,11 @@ class MotionEngine:
                 self.pipe = None
                 gc.collect()
                 torch.cuda.empty_cache()
-                if attempt == 1 and self.kind == "wan22_ti2v_5b":
-                    log("Retrying with sequential CPU offload on Wan 2.2...")
+                if self.kind == "ltx_i2v_2b":
+                    log("Switching fallback to Wan 2.2 TI2V-5B...")
+                    self.width, self.height, self.frames, self.steps = 832, 480, 33, 12
                     self.load_wan(sequential=True)
                 else:
-                    log("Switching to LTX-Video 2B for guaranteed completion...")
                     self.load_ltx()
         raise RuntimeError(f"All attempts exhausted for scene {scene['id']}")
 

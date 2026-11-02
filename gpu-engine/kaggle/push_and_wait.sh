@@ -35,10 +35,25 @@ for ONLY in "${PARTS[@]}"; do
   PUSH_OUT=$(kaggle kernels push -p "$KDIR" 2>&1)
   PUSH_RC=$?
   echo "$PUSH_OUT"
+  if [ "$PUSH_RC" -ne 0 ] && [ "$KAGGLE_USERNAME" != "compali" ]; then
+    echo "Retrying push with fallback handle compali..."
+    KAGGLE_USERNAME="compali"
+    REF="${KAGGLE_USERNAME}/${SLUG}"
+    python3 gpu-engine/kaggle/make_b2b_kernel.py \
+      --user "$KAGGLE_USERNAME" \
+      --slug "$SLUG" \
+      --only "$ONLY" \
+      --branch "$BRANCH" \
+      --out "$KDIR"
+    PUSH_OUT=$(kaggle kernels push -p "$KDIR" 2>&1)
+    PUSH_RC=$?
+    echo "$PUSH_OUT"
+  fi
   if [ "$PUSH_RC" -ne 0 ]; then
     echo "::error::Failed pushing $REF: $PUSH_OUT"
     exit 1
   fi
+  echo "::notice::Pushed Kaggle Dual-T4 kernel $REF ($ONLY) -> $PUSH_OUT"
   REFS+=("$REF")
   DIRS+=("$KDIR")
   sleep 12

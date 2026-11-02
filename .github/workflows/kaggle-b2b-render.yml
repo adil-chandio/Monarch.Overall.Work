@@ -36,6 +36,7 @@ jobs:
 
       - name: Configure Kaggle Credentials Safely
         env:
+          S_ALIELITEE: ${{ secrets.ALIELITEE }}
           S_KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           S_KAGGLE_USER: ${{ secrets.KAGGLE_USER }}
           S_USERNAME: ${{ secrets.USERNAME }}
@@ -55,7 +56,7 @@ jobs:
           V_MONARCH: ${{ vars.MONARCH }}
         run: |
           python - <<'PY'
-          import json, os, pathlib
+          import json, os, pathlib, subprocess
 
           keys = [k for k in os.environ if k.startswith(("S_", "V_"))]
           present = [k for k in sorted(keys) if (os.environ.get(k) or "").strip()]
@@ -70,7 +71,8 @@ jobs:
               or ""
           ).strip()
           k = (
-              os.environ.get("S_KAGGLE_KEY")
+              os.environ.get("S_ALIELITEE")
+              or os.environ.get("S_KAGGLE_KEY")
               or os.environ.get("S_KAGGLE_API_KEY")
               or os.environ.get("S_KAGGLE_API_TOKEN")
               or os.environ.get("S_KAGGLE_TOKEN")
@@ -84,6 +86,7 @@ jobs:
               or os.environ.get("V_MONARCH")
               or ""
           ).strip()
+          default_u = "alielitee" if (os.environ.get("S_ALIELITEE") or "").strip() else "compali"
           if not u and (os.environ.get("S_COMPALI") or "").strip():
               u = "compali"
           tok = ""
@@ -117,21 +120,29 @@ jobs:
 
           if "@" in u:
               u = ""
+
           if not u and (tok or k):
               if tok:
                   os.environ["KAGGLE_API_TOKEN"] = tok
-                  os.environ["KAGGLE_USERNAME"] = "placeholder"
+                  os.environ["KAGGLE_USERNAME"] = default_u
                   os.environ["KAGGLE_KEY"] = "placeholder"
-              elif k:
-                  os.environ["KAGGLE_USERNAME"] = "compali"
+              else:
+                  os.environ["KAGGLE_USERNAME"] = default_u
                   os.environ["KAGGLE_KEY"] = k
+              # Probe `kaggle kernels list --mine -v` to auto-discover exact Kaggle handle if any kernel exists
               try:
-                  from kaggle.api.kaggle_api_extended import KaggleApi
-                  api = KaggleApi()
-                  api.authenticate()
-                  u = api.get_config_value("username") or "compali"
+                  r = subprocess.run(
+                      ["kaggle", "kernels", "list", "--mine", "--page-size", "5", "-v"],
+                      capture_output=True, text=True, timeout=20,
+                  )
+                  for line in r.stdout.splitlines()[1:]:
+                      ref = line.split(",", 1)[0].strip()
+                      if "/" in ref and not ref.lower().startswith("ref"):
+                          u = ref.split("/", 1)[0].strip()
+                          break
               except Exception:
-                  u = "compali"
+                  pass
+              u = u or default_u
 
           if not u or (not tok and not k):
               print("::error::No Kaggle credentials found in Actions Repository Secrets of adil-chandio/Monarch.Overall.Work.", flush=True)

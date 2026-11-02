@@ -33,9 +33,14 @@ subprocess.run(["git", "clone", "--depth", "1", "-b", BRANCH, REPO, str(repo)], 
 subprocess.run(
     [sys.executable, "-m", "pip", "install", "-q", "-U",
      "diffusers>=0.33.0", "transformers>=4.49.0", "accelerate>=1.2.0",
-     "imageio-ffmpeg", "ftfy", "sentencepiece", "safetensors"],
+     "huggingface_hub", "imageio-ffmpeg", "ftfy", "sentencepiece", "safetensors", "protobuf"],
     check=True,
 )
+
+# Pre-warm LTX-Video weights once into shared HF cache so GPU-0 and GPU-1 never race on cache locks
+from huggingface_hub import snapshot_download
+print("Pre-warming Lightricks/LTX-Video into local SSD cache...", flush=True)
+snapshot_download("Lightricks/LTX-Video")
 
 import torch
 n_gpu = torch.cuda.device_count()
@@ -77,8 +82,10 @@ for idx in range(len(groups)):
         for item in wpath.iterdir():
             shutil.copy2(item, final_out / item.name)
 
-# Clean cloned repo so /kaggle/working output stays lightweight for fast download
+# Clean cloned repo and temp worker dirs so /kaggle/working output stays tiny for instant download
 shutil.rmtree(repo, ignore_errors=True)
+for idx in range(len(groups)):
+    shutil.rmtree(f"/kaggle/working/worker_{{idx}}", ignore_errors=True)
 produced = sorted(p.name for p in final_out.glob("*.mp4"))
 print("PRODUCED_CLIPS:", produced, flush=True)
 if not produced or any(c != 0 for c in codes):
