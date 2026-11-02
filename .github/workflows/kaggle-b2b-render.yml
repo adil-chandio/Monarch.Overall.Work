@@ -32,7 +32,7 @@ jobs:
       - name: Install Kaggle CLI & FFmpeg
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          python -m pip install --disable-pip-version-check -q -U kaggle requests six
+          python -m pip install --disable-pip-version-check -q -U kaggle requests six pillow
 
       - name: Configure Kaggle Credentials Safely
         env:

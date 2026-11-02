@@ -3,7 +3,7 @@ set -uo pipefail
 
 CHUNKS="${1:-s01,s02,s03,s04;s05,s06,s07,s08}"
 OUT_CLIPS="${2:-gpu-engine/clips}"
-SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v2}"
+SLUG_PREFIX="${SLUG_PREFIX:-monarch-b2b-v3}"
 POLL_MAX="${POLL_MAX:-110}"
 POLL_SLEEP="${POLL_SLEEP:-35}"
 BRANCH="${GITHUB_REF_NAME:-arena/9960286a-monarch-overall-work}"
@@ -11,29 +11,6 @@ BRANCH="${GITHUB_REF_NAME:-arena/9960286a-monarch-overall-work}"
 mkdir -p "$OUT_CLIPS" /tmp/kwork
 
 echo "::notice::Kaggle user=${KAGGLE_USERNAME} | chunks=${CHUNKS}"
-mkdir -p /tmp/v2diag && kaggle kernels output "${KAGGLE_USERNAME}/monarch-b2b-v2-1" -p /tmp/v2diag >/dev/null 2>&1 || true
-python3 - <<'PY'
-import glob, json
-for p in glob.glob("/tmp/v2diag/*.log"):
-    try:
-        items = json.loads(open(p).read())
-        lines = [x.get("data", "") for x in items if "NbConvertApp" not in x.get("data", "") and "SyntaxWarning" not in x.get("data", "") and "cells[i]" not in x.get("data", "") and "Escape underscores" not in x.get("data", "")]
-        joined = "".join(lines).replace("\n", " | ")
-        print(f"::notice::v2-1 FULL LOG: {joined[-1800:]}", flush=True)
-    except Exception as e:
-        print(f"::notice::v2-1 parse err: {e}", flush=True)
-for p in glob.glob("/tmp/v2diag/*"):
-    print(f"::notice::v2-1 file: {p}", flush=True)
-for p in glob.glob("/tmp/v2diag/*.ipynb") + glob.glob("/tmp/v2diag/*.html"):
-    try:
-        raw = open(p, errors="ignore").read()
-        import re
-        txt = re.sub(r"<[^>]+>", " ", raw)
-        txt = re.sub(r"\s+", " ", txt)
-        print(f"::notice::v2-1 DOC TAIL: {txt[-1800:]}", flush=True)
-    except Exception:
-        pass
-PY
 
 IFS=';' read -ra PARTS <<< "$CHUNKS"
 REFS=()

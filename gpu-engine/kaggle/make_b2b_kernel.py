@@ -1,50 +1,89 @@
 #!/usr/bin/env python3
-"""Packages a Kaggle Dual-T4 (GPU T4 x2) notebook + kernel-metadata.json."""
+"""Packages a self-contained Kaggle Dual-T4 (GPU T4 x2) notebook (embeds code + keyframes, zero git clone needed)."""
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import pathlib
 import re
 import sys
 
-REPO_URL = "https://github.com/adil-chandio/Monarch.Overall.Work.git"
-DEFAULT_BRANCH = "arena/9960286a-monarch-overall-work"
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
 def slugify(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:48]
 
 
-def build_notebook(scenes_csv: str, branch: str) -> dict:
-    code = f'''# Auto-generated MONARCH Dual-T4 (2x 16GB) Parallel I2V Kernel
-import gc, json, os, pathlib, shutil, subprocess, sys
+def build_notebook(scenes_csv: str) -> dict:
+    wanted = [s.strip() for s in scenes_csv.split(",") if s.strip()]
+    job_data = json.loads((ROOT / "gpu-engine/b2b_job.json").read_text())
+    worker_py = (ROOT / "gpu-engine/kaggle/run_b2b_i2v.py").read_text()
+
+    from io import BytesIO
+    from PIL import Image
+
+    # Embed code + crisp 1024x576 q=94 keyframes (~250 KB total -> well under Kaggle's 1MB .ipynb API cap!)
+    embedded_files: dict[str, str] = {
+        "gpu-engine/b2b_job.json": base64.b64encode(json.dumps(job_data).encode()).decode(),
+        "gpu-engine/kaggle/run_b2b_i2v.py": base64.b64encode(worker_py.encode()).decode(),
+    }
+    for sc in job_data["scenes"]:
+        if sc["id"] in wanted:
+            kf = ROOT / sc["image"]
+            buf = BytesIO()
+            Image.open(kf).convert("RGB").resize((1024, 576), Image.Resampling.LANCZOS).save(buf, format="JPEG", quality=94)
+            embedded_files[sc["image"]] = base64.b64encode(buf.getvalue()).decode()
+
+    payload_json = json.dumps(embedded_files)
+
+    code = f'''# Auto-generated self-contained MONARCH Dual-T4 Parallel I2V Kernel
+import base64, gc, json, os, pathlib, shutil, socket, subprocess, sys, urllib.request
 
 os.environ["HF_HOME"] = "/tmp/hf_cache"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-BRANCH = "{branch}"
-REPO = "{REPO_URL}"
-SCENES = [s.strip() for s in "{scenes_csv}".split(",") if s.strip()]
+SCENES = {json.dumps(wanted)}
+PAYLOAD = json.loads({json.dumps(payload_json)})
 
 repo = pathlib.Path("/tmp/monarch_repo")
 if repo.exists():
     shutil.rmtree(repo)
-subprocess.run(["git", "clone", "--depth", "1", "-b", BRANCH, REPO, str(repo)], check=True)
-
-# Match proven Monarch-Studio dependency install (no -U flag to avoid breaking Kaggle preinstalled torch/tf)
-subprocess.run(
-    [sys.executable, "-m", "pip", "install", "-q",
-     "diffusers>=0.32.2", "transformers>=4.49,<5.0", "accelerate",
-     "imageio-ffmpeg", "ftfy", "sentencepiece", "safetensors", "regex"],
-    check=False,
-)
+for rel_path, b64_data in PAYLOAD.items():
+    dest = repo / rel_path
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_bytes(base64.b64decode(b64_data))
+print("Unpacked embedded repo files:", len(PAYLOAD), flush=True)
 
 import torch
 n_gpu = torch.cuda.device_count()
-print("DETECTED GPUS:", n_gpu, [torch.cuda.get_device_name(i) for i in range(n_gpu)], flush=True)
+gpu_names = [torch.cuda.get_device_name(i) for i in range(n_gpu)]
+print(f"GPU_INFO: cuda={{torch.cuda.is_available()}} count={{n_gpu}} names={{gpu_names}}", flush=True)
 
-# Pre-download ONLY active LTX-Video diffusers pipeline files into /tmp/hf_cache once (avoids 45GB root checkpoints & worker race)
+try:
+    urllib.request.urlopen("https://huggingface.co", timeout=8)
+    net_ok = True
+    net_err = ""
+except Exception as ne:
+    net_ok = False
+    net_err = f"{{type(ne).__name__}}: {{ne}}"
+print(f"NET_INFO: ok={{net_ok}} err={{net_err}}", flush=True)
+
+if n_gpu == 0:
+    raise RuntimeError(f"NO_GPU_ALLOCATED on Kaggle account (GPU_INFO count=0, net_ok={{net_ok}}). Account may need Kaggle Phone Verification for GPU+Internet.")
+if not net_ok:
+    raise RuntimeError(f"NO_INTERNET_IN_KERNEL ({{net_err}}). GPU count={{n_gpu}} {{gpu_names}}.")
+
+# Install/verify diffusers>=0.32.2 without breaking preinstalled torch
+r_pip = subprocess.run(
+    [sys.executable, "-m", "pip", "install", "-q",
+     "diffusers>=0.32.2", "transformers>=4.49,<5.0", "accelerate",
+     "imageio-ffmpeg", "ftfy", "sentencepiece", "safetensors", "regex"],
+    capture_output=True, text=True,
+)
+print("PIP_RC:", r_pip.returncode, r_pip.stderr[-300:] if r_pip.returncode else "ok", flush=True)
+
 try:
     from diffusers import LTXImageToVideoPipeline
     dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
@@ -53,7 +92,7 @@ try:
     del _p
     gc.collect()
 except Exception as pre_exc:
-    print("Pre-cache note:", type(pre_exc).__name__, str(pre_exc)[:240], flush=True)
+    print("Pre-cache note:", type(pre_exc).__name__, str(pre_exc)[:300], flush=True)
 
 if n_gpu >= 2 and len(SCENES) > 1:
     mid = (len(SCENES) + 1) // 2
@@ -71,6 +110,7 @@ for idx, grp in enumerate(groups):
     cmd = [
         sys.executable,
         str(repo / "gpu-engine/kaggle/run_b2b_i2v.py"),
+        "--job", str(repo / "gpu-engine/b2b_job.json"),
         "--only", ",".join(grp),
         "--out", wdir,
     ]
@@ -130,13 +170,13 @@ def main() -> int:
     ap.add_argument("--slug", required=True)
     ap.add_argument("--only", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--branch", default=DEFAULT_BRANCH)
+    ap.add_argument("--branch", default="")
     args = ap.parse_args()
 
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     slug = slugify(args.slug)
-    (out / "main.ipynb").write_text(json.dumps(build_notebook(args.only, args.branch), indent=1) + "\n")
+    (out / "main.ipynb").write_text(json.dumps(build_notebook(args.only), indent=1) + "\n")
 
     meta = {
         "id": f"{args.user}/{slug}",
@@ -154,7 +194,7 @@ def main() -> int:
         "model_sources": [],
     }
     (out / "kernel-metadata.json").write_text(json.dumps(meta, indent=1) + "\n")
-    print(f"Packaged Dual-T4 kernel {meta['id']} ({args.only}) -> {out}")
+    print(f"Packaged self-contained Dual-T4 kernel {meta['id']} ({args.only}) -> {out}")
     return 0
 
 
