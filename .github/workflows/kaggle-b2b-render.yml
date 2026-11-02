@@ -1,0 +1,111 @@
+name: Kaggle B2B GPU Render
+
+on:
+  push:
+    branches:
+      - arena/9960286a-monarch-overall-work
+    paths:
+      - "gpu-engine/trigger.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kaggle-b2b-render
+  cancel-in-progress: true
+
+jobs:
+  kaggle-dual-t4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/9960286a-monarch-overall-work
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Kaggle CLI & FFmpeg
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check -q -U kaggle requests six
+
+      - name: Configure Kaggle Credentials Safely
+        env:
+          RAW_USER: ${{ secrets.KAGGLE_USERNAME }}
+          RAW_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+
+          u = (os.environ.get("RAW_USER") or "").strip()
+          k = (os.environ.get("RAW_KEY") or "").strip()
+          tok = ""
+
+          if k.startswith("{"):
+              data = json.loads(k)
+              u = u or str(data.get("username") or "").strip()
+              k = str(data.get("key") or "").strip()
+          elif k.startswith("KGAT_"):
+              tok = k
+              k = "placeholder"
+
+          for s in (k, tok):
+              if s and s != "placeholder":
+                  print(f"::add-mask::{s}", flush=True)
+
+          if "@" in u:
+              u = ""
+          if not u:
+              if tok:
+                  os.environ["KAGGLE_API_TOKEN"] = tok
+                  os.environ["KAGGLE_USERNAME"] = "placeholder"
+                  os.environ["KAGGLE_KEY"] = "placeholder"
+              elif k:
+                  os.environ["KAGGLE_USERNAME"] = "compali"
+                  os.environ["KAGGLE_KEY"] = k
+              try:
+                  from kaggle.api.kaggle_api_extended import KaggleApi
+                  api = KaggleApi()
+                  api.authenticate()
+                  u = api.get_config_value("username") or "compali"
+              except Exception:
+                  u = "compali"
+
+          if not u or (not tok and not k):
+              raise SystemExit("Missing KAGGLE_USERNAME or KAGGLE_KEY in GitHub Actions Secrets")
+
+          kdir = pathlib.Path.home() / ".kaggle"
+          kdir.mkdir(parents=True, exist_ok=True)
+          if not tok:
+              (kdir / "kaggle.json").write_text(json.dumps({"username": u, "key": k}))
+              os.chmod(kdir / "kaggle.json", 0o600)
+
+          with open(os.environ["GITHUB_ENV"], "a") as fh:
+              fh.write(f"KAGGLE_USERNAME={u}\n")
+              fh.write(f"KAGGLE_KEY={k}\n")
+              if tok:
+                  fh.write(f"KAGGLE_API_TOKEN={tok}\n")
+          print(f"::notice::Authenticated Kaggle user: {u} (token_mode={bool(tok)})")
+          PY
+
+      - name: Render 8 Real AI Motion Clips on Kaggle Dual T4 (4 GPUs across 2 Kernels)
+        run: |
+          chmod +x gpu-engine/kaggle/push_and_wait.sh
+          bash gpu-engine/kaggle/push_and_wait.sh "s01,s02,s03,s04;s05,s06,s07,s08" gpu-engine/clips
+
+      - name: Commit Rendered Clips Back to Session Branch
+        run: |
+          git config user.name "MONARCH GPU Runner"
+          git config user.email "gpu@monarch.studio"
+          git add -f gpu-engine/clips/*.mp4 gpu-engine/clips/*.json
+          git commit -m "chore(gpu): add 8 Kaggle T4x2 AI motion clips [skip ci]" || exit 0
+          for attempt in 1 2 3; do
+            git pull --rebase origin arena/9960286a-monarch-overall-work && \
+            git push origin HEAD:arena/9960286a-monarch-overall-work && break
+            sleep 5
+          done
