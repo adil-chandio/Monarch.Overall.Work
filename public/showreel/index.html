@@ -144,7 +144,7 @@
     #s1-obsidian {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 72% 42%, rgba(210,31,43,0.24), #07070A 64%);
+      background: radial-gradient(circle at 72% 42%, rgba(210,31,43,0.28), transparent 62%), #07070A;
       color: #F6F3EC;
       padding: 64px 88px;
       display: flex;
@@ -802,8 +802,10 @@
 
             <div style="position:relative;border-radius:20px;overflow:hidden;height:430px;border:1px solid rgba(255,255,255,0.14);">
               <img src="/proof/work-film.jpg" style="width:100%;height:100%;object-fit:cover;" alt="" />
-              <div id="s5-wm-ribbon" class="mono" style="position:absolute;inset:0;background:rgba(7,7,10,0.58);display:flex;align-items:center;justify-content:center;font-size:24px;color:#FFF;font-weight:700;letter-spacing:0.16em;">
-                MONARCH® PREVIEW · LOCKED
+              <div id="s5-wm-ribbon" class="mono" style="position:absolute;inset:0;background:rgba(7,7,10,0.68);display:flex;align-items:center;justify-content:center;padding:22px;">
+                <span id="s5-wm-pill" style="padding:14px 28px;border-radius:999px;background:rgba(12,12,18,0.92);border:1px solid rgba(255,255,255,0.22);font-size:21px;color:#FFF;font-weight:700;letter-spacing:0.14em;box-shadow:0 16px 38px rgba(0,0,0,0.55);">
+                  MONARCH® PREVIEW · LOCKED
+                </span>
               </div>
             </div>
 
@@ -1074,6 +1076,10 @@
 
         // 3D Orbit -> Target Brackets (f=435) -> Crash-Zoom-Punch (f=450..458)!
         const cam = document.getElementById('s2-camera');
+        const s2Head = document.getElementById('s2-header');
+        const headOut = prog(f, 444, 454);
+        s2Head.style.opacity = (1 - headOut).toFixed(3);
+        s2Head.style.transform = `translateY(${lerp(0, -34, headOut).toFixed(1)}px)`;
         const brackets = document.querySelectorAll('#pcard-0 .bracket');
         const lockTag = document.getElementById('lock-tag');
 
@@ -1204,6 +1210,7 @@
         const btn = document.getElementById('s5-unlock-btn');
         const badge = document.getElementById('s5-badge');
         const rib = document.getElementById('s5-wm-ribbon');
+        const wmPill = document.getElementById('s5-wm-pill');
         const fstate = document.getElementById('s5-file-state');
         if (f >= 1560) {
           btn.classList.add('unlocked');
@@ -1211,8 +1218,11 @@
           badge.style.background = 'rgba(16,185,129,0.22)';
           badge.style.borderColor = '#10B981';
           badge.textContent = '✓ VERIFIED · CLEAN MASTER UNLOCKED';
-          rib.style.background = 'rgba(5,150,105,0.35)';
-          rib.textContent = '✓ WATERMARK REMOVED · 1080P60 MASTER READY';
+          rib.style.background = 'linear-gradient(to top, rgba(6,24,19,0.75) 0%, rgba(6,24,19,0.0) 52%)';
+          rib.style.alignItems = 'flex-end';
+          wmPill.style.background = 'rgba(5,150,105,0.96)';
+          wmPill.style.borderColor = '#34D399';
+          wmPill.textContent = '✓ WATERMARK REMOVED · 1080P60 MASTER READY';
           fstate.style.color = '#34D399';
           fstate.textContent = 'UNLOCKED ✓';
         } else {
@@ -1221,8 +1231,11 @@
           badge.style.background = 'rgba(210,31,43,0.2)';
           badge.style.borderColor = '#FF4754';
           badge.textContent = '● WATERMARKED REVIEW STAGE';
-          rib.style.background = 'rgba(7,7,10,0.58)';
-          rib.textContent = 'MONARCH® PREVIEW · LOCKED';
+          rib.style.background = 'rgba(7,7,10,0.68)';
+          rib.style.alignItems = 'center';
+          wmPill.style.background = 'rgba(12,12,18,0.92)';
+          wmPill.style.borderColor = 'rgba(255,255,255,0.22)';
+          wmPill.textContent = 'MONARCH® PREVIEW · LOCKED';
           fstate.style.color = '#FBBF24';
           fstate.textContent = 'ENCRYPTED CLOUD LINK';
         }
