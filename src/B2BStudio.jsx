@@ -359,10 +359,10 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
                       letterSpacing: '0.12em',
                     }}
                   >
-                    LIVE 60FPS BROADCAST SHOWREEL · -14 LUFS STEREO
+                    DUAL-GPU AI MOTION SHOWREEL · 1080P · -14.3 LUFS BROADCAST MIX
                   </small>
                   <h3 style={{ margin: '4px 0 0', fontFamily: 'Syne, sans-serif', fontSize: 19 }}>
-                    Night Shift — MONARCH® Commercial &amp; Locked-Preview Vault Demo
+                    THREE SECONDS. — MONARCH® Flagship AI Commercial &amp; Vault Demo
                   </h3>
                 </div>
                 <button
@@ -374,8 +374,8 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
                 </button>
               </div>
               <video
-                src="/demo-preview.mp4"
-                poster="/demo-poster.jpg"
+                src="/demo-preview.mp4?v=flagship1"
+                poster="/demo-poster.jpg?v=flagship1"
                 controls
                 playsInline
                 preload="metadata"
@@ -937,7 +937,7 @@ export function ClientPortalView({ portalCode, onBackToStudio, onSwitchPortal, o
                     <span className="m-kicker" style={{ position: 'relative', zIndex: 2 }}>
                       {portal.preview_type === 'website_staging'
                         ? 'INTERACTIVE WEB STAGING PREVIEW'
-                        : 'WATERMARKED 60FPS REVIEW STAGE'}
+                        : 'WATERMARKED 1080P BROADCAST REVIEW STAGE'}
                     </span>
                     <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 22, margin: '6px 0 10px', zIndex: 2 }}>
                       {portal.project_title}
@@ -949,7 +949,7 @@ export function ClientPortalView({ portalCode, onBackToStudio, onSwitchPortal, o
                       <div style={{ width: '100%', position: 'relative', zIndex: 2 }}>
                         <video
                           src={portal.preview_url}
-                          poster="/demo-poster.jpg"
+                          poster="/demo-poster.jpg?v=flagship1"
                           controls
                           playsInline
                           preload="metadata"
