@@ -36,40 +36,76 @@ jobs:
 
       - name: Configure Kaggle Credentials Safely
         env:
-          RAW_USER: ${{ secrets.KAGGLE_USERNAME }}
-          RAW_KEY: ${{ secrets.KAGGLE_KEY }}
-          RAW_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
-          RAW_KAGGLE_TOKEN: ${{ secrets.KAGGLE_TOKEN }}
-          RAW_JSON: ${{ secrets.KAGGLE_JSON }}
-          RAW_KAGGLE: ${{ secrets.KAGGLE }}
-          RAW_MONARCH: ${{ secrets.MONARCH }}
-          VAR_USER: ${{ vars.KAGGLE_USERNAME }}
-          VAR_KEY: ${{ vars.KAGGLE_KEY }}
+          SECRETS_JSON: ${{ toJSON(secrets) }}
+          VARS_JSON: ${{ toJSON(vars) }}
         run: |
           python - <<'PY'
-          import json, os, pathlib
+          import json, os, pathlib, re
 
-          diag = {
-              k: bool((os.environ.get(k) or "").strip())
-              for k in (
-                  "RAW_USER", "RAW_KEY", "RAW_TOKEN", "RAW_KAGGLE_TOKEN",
-                  "RAW_JSON", "RAW_KAGGLE", "RAW_MONARCH", "VAR_USER", "VAR_KEY"
-              )
+          raw_secrets = json.loads(os.environ.get("SECRETS_JSON") or "{}")
+          raw_vars = json.loads(os.environ.get("VARS_JSON") or "{}")
+
+          user_secrets = {
+              k: str(v).strip()
+              for k, v in raw_secrets.items()
+              if k.lower() != "github_token" and str(v or "").strip()
           }
-          print(f"::notice::Secret presence flags: {json.dumps(diag)}", flush=True)
+          user_vars = {
+              k: str(v).strip()
+              for k, v in raw_vars.items()
+              if str(v or "").strip()
+          }
 
-          u = (os.environ.get("RAW_USER") or os.environ.get("VAR_USER") or "").strip()
+          for val in user_secrets.values():
+              for line in val.splitlines():
+                  if line.strip():
+                      print(f"::add-mask::{line.strip()}", flush=True)
+
+          print(
+              f"::notice::Detected Actions secret names={list(user_secrets.keys())} var names={list(user_vars.keys())}",
+              flush=True,
+          )
+
+          merged = {**user_vars, **user_secrets}
+          upper_map = {k.upper(): v for k, v in merged.items()}
+
+          u = (
+              upper_map.get("KAGGLE_USERNAME")
+              or upper_map.get("KAGGLE_USER")
+              or upper_map.get("USERNAME")
+              or ""
+          ).strip()
           k = (
-              os.environ.get("RAW_KEY")
-              or os.environ.get("RAW_TOKEN")
-              or os.environ.get("RAW_KAGGLE_TOKEN")
-              or os.environ.get("RAW_JSON")
-              or os.environ.get("RAW_KAGGLE")
-              or os.environ.get("RAW_MONARCH")
-              or os.environ.get("VAR_KEY")
+              upper_map.get("KAGGLE_KEY")
+              or upper_map.get("KAGGLE_API_TOKEN")
+              or upper_map.get("KAGGLE_API_KEY")
+              or upper_map.get("KAGGLE_TOKEN")
+              or upper_map.get("KAGGLE_JSON")
+              or upper_map.get("KAGGLE")
+              or upper_map.get("MONARCH")
               or ""
           ).strip()
           tok = ""
+
+          # Also inspect arbitrary secret names (e.g. if user put Kaggle username as secret Name and token/key as Secret value)
+          if not k:
+              for skey, sval in user_secrets.items():
+                  if sval.startswith("KGAT_") or sval.startswith("{") or re.fullmatch(r"[0-9a-fA-F]{32}", sval):
+                      k = sval
+                      if not u and not skey.upper().startswith("KAGGLE") and skey.upper() != "MONARCH":
+                          u = skey.lower()
+                      break
+              if not k and len(user_secrets) == 1:
+                  only_k, only_v = next(iter(user_secrets.items()))
+                  k = only_v
+                  if not only_k.upper().startswith("KAGGLE"):
+                      u = only_k.lower()
+              elif not k and len(user_secrets) >= 2:
+                  items = list(user_secrets.items())
+                  # Shorter value is usually username, longer value is key/token
+                  items.sort(key=lambda kv: len(kv[1]))
+                  u = u or items[0][1]
+                  k = k or items[-1][1]
 
           for cand in (u, k):
               if cand.startswith("{"):
@@ -117,7 +153,10 @@ jobs:
                   u = "compali"
 
           if not u or (not tok and not k):
-              print("::error::No Kaggle secret detected in Repository Actions Secrets (checked KAGGLE_USERNAME, KAGGLE_KEY, KAGGLE_API_TOKEN, MONARCH, KAGGLE_JSON, KAGGLE).", flush=True)
+              print(
+                  f"::error::Repository Actions Secrets has 0 Kaggle secrets (found keys={list(user_secrets.keys())}, vars={list(user_vars.keys())}).",
+                  flush=True,
+              )
               raise SystemExit(1)
 
           kdir = pathlib.Path.home() / ".kaggle"
