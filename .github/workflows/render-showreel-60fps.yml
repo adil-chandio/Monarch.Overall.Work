@@ -1,0 +1,46 @@
+name: Render MONARCH 1080p60 HyperFrames Showreel
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render-60fps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install FFmpeg & Playwright Chromium
+        run: |
+          sudo apt-get update -y && sudo apt-get install -y ffmpeg
+          npm install --no-save playwright@1.51.0
+          npx playwright install chromium
+
+      - name: Render 1920x1080 @ 60fps Master + Vault Preview
+        run: node showreel/render_60fps.mjs
+
+      - name: Verify 1080p60 Technical QC
+        run: |
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=width,height,r_frame_rate,nb_frames,duration \
+            -of default=noprint_wrappers=1 public/demo-preview.mp4
+
+      - name: Commit & Push Rendered Preview + Encrypted Master
+        run: |
+          git config user.name "monarch-render-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add public/demo-preview.mp4 public/demo-poster.jpg deliverables/MON-DEMO26_Master_60fps.enc
+          git commit -m "chore(showreel): render Proof Over Promises 1080p60 master & preview"
+          git push origin HEAD:${{ github.ref_name }}

@@ -1,0 +1,41 @@
+{
+  "fps": 60,
+  "total_frames": 1920,
+  "duration_s": 32.0,
+  "bpm": 120,
+  "card_deals": [
+    258,
+    276,
+    291,
+    303,
+    313,
+    321
+  ],
+  "quad_pops": [
+    582,
+    594,
+    606,
+    618
+  ],
+  "rail_ticks": [
+    1410,
+    1440,
+    1470,
+    1500
+  ],
+  "seams": {
+    "hook_click_invert": 120,
+    "to_deck_deal": 240,
+    "target_brackets": 435,
+    "crash_zoom_punch": 450,
+    "to_quad_films": 570,
+    "quad_hero_badge": 780,
+    "to_web_3d": 960,
+    "web_slide_maya": 1110,
+    "web_slide_store": 1215,
+    "web_vault_click": 1314,
+    "to_vault_unlock": 1350,
+    "vault_unlock_click": 1560,
+    "to_finale_lockup": 1680
+  }
+}

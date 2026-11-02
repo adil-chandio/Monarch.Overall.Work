@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, initial-scale=1.0" />
+  <title>MONARCH® STUDIO — Proof Over Promises (60fps Master Stage)</title>
+  <style>
+    @font-face {
+      font-family: 'AntonLocal';
+      src: url('./fonts/Anton-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'ManropeLocal';
+      src: url('./fonts/Manrope-700.ttf') format('truetype');
+      font-weight: 700;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'ManropeLocal';
+      src: url('./fonts/Manrope-800.ttf') format('truetype');
+      font-weight: 800;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'PlexMonoLocal';
+      src: url('./fonts/IBMPlexMono-400.ttf') format('truetype');
+      font-weight: 400;
+      font-display: block;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #07070A; /* seam-craft opaque stage-ground guard */
+      overflow: hidden;
+      font-family: 'ManropeLocal', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #07070A;
+    }
+
+    #stage {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      background: #07070A;
+      overflow: hidden;
+      transform-origin: center center;
+    }
+
+    /* Subtle cinema grain + vignette */
+    #grain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 80;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 58%, rgba(0,0,0,0.52) 100%);
+    }
+
+    /* Top / Bottom subtle cinema progress bar */
+    #progress-track {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 5px;
+      background: rgba(255,255,255,0.07);
+      z-index: 95;
+    }
+    #progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #D21F2B, #FF5E6C);
+      box-shadow: 0 0 18px rgba(210,31,43,0.9);
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      will-change: transform, opacity, filter;
+      display: none;
+    }
+
+    .mono { font-family: 'PlexMonoLocal', monospace; letter-spacing: 0.12em; text-transform: uppercase; }
+    .display { font-family: 'AntonLocal', Impact, sans-serif; letter-spacing: 0.015em; text-transform: uppercase; line-height: 0.94; }
+
+    /* ================= BEAT 01: CREAM -> OBSIDIAN HOOK ================= */
+    #s1-cream {
+      position: absolute;
+      inset: 0;
+      background: #F4EFE6;
+      color: #0B0B0F;
+      padding: 64px 88px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(11,11,15,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(11,11,15,0.06) 1px, transparent 1px);
+      background-size: 160px 160px;
+      pointer-events: none;
+    }
+    #s1-portrait {
+      position: absolute;
+      right: 90px;
+      bottom: -20px;
+      height: 920px;
+      object-fit: contain;
+      filter: contrast(1.06) drop-shadow(-24px 18px 44px rgba(0,0,0,0.22));
+      z-index: 3;
+    }
+    #s1-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: #0B0B0F;
+      color: #F4EFE6;
+      padding: 22px 38px;
+      border-radius: 999px;
+      font-size: 22px;
+      font-weight: 800;
+      width: fit-content;
+      box-shadow: 0 22px 48px rgba(11,11,15,0.24);
+      position: relative;
+      z-index: 5;
+    }
+    #s1-cta .dot { width: 13px; height: 13px; border-radius: 50%; background: #D21F2B; }
+
+    #s1-obsidian {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 72% 42%, rgba(210,31,43,0.24), #07070A 64%);
+      color: #F6F3EC;
+      padding: 64px 88px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 8;
+      clip-path: circle(0% at 340px 885px);
+    }
+    #s1-portrait-dark {
+      position: absolute;
+      right: 82px;
+      bottom: -20px;
+      height: 940px;
+      object-fit: contain;
+      filter: contrast(1.12) drop-shadow(0 0 65px rgba(210,31,43,0.42));
+    }
+
+    /* ================= BEAT 02: DECK-DEAL-FLYIN PROOF WALL ================= */
+    #s2 {
+      background:
+        radial-gradient(circle at 46% 24%, rgba(210,31,43,0.18), transparent 55%),
+        linear-gradient(135deg, #0D0E14 0%, #060609 100%);
+      color: #F6F3EC;
+      perspective: 1350px;
+    }
+    #s2-header {
+      position: absolute;
+      top: 52px; left: 78px; right: 78px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      z-index: 20;
+    }
+    #s2-camera {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    #s2-board {
+      position: absolute;
+      left: 110px;
+      top: 175px;
+      width: 1700px;
+      height: 820px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 24px;
+      transform-style: preserve-3d;
+    }
+    .proof-card {
+      background: rgba(18, 19, 27, 0.94);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 26px 28px;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.62);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      will-change: transform, opacity;
+    }
+    .proof-card.hero-kpi {
+      grid-row: 1 / span 2;
+      background: linear-gradient(165deg, rgba(28,15,20,0.97), rgba(11,11,16,0.98));
+      border: 2px solid rgba(210,31,43,0.62);
+    }
+    .proof-ss {
+      width: 100%;
+      height: 225px;
+      object-fit: cover;
+      object-position: center 22%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .bracket {
+      position: absolute;
+      width: 34px; height: 34px;
+      border-color: #FF3B49;
+      border-style: solid;
+      opacity: 0;
+      z-index: 30;
+    }
+    .b-tl { top: 14px; left: 14px; border-width: 4px 0 0 4px; }
+    .b-tr { top: 14px; right: 14px; border-width: 4px 4px 0 0; }
+    .b-bl { bottom: 14px; left: 14px; border-width: 0 0 4px 4px; }
+    .b-br { bottom: 14px; right: 14px; border-width: 0 4px 4px 0; }
+
+    /* ================= BEAT 03: QUAD-SPLIT REAL MONARCH FILMS ================= */
+    #s3 {
+      background: #07070A;
+      padding: 28px;
+    }
+    #s3-grid {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+    }
+    .q-cell {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      padding: 28px 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(255,255,255,0.1);
+      will-change: transform, opacity;
+    }
+    .q-cream { background: #F4EFE6; color: #0B0B0F; }
+    .q-obsidian { background: #0E0F15; color: #F6F3EC; }
+    .q-crimson { background: linear-gradient(135deg, #22090E, #0D0B10); color: #F6F3EC; border-color: rgba(210,31,43,0.45); }
+    .q-slate { background: #10131C; color: #F6F3EC; }
+    .reel-frame {
+      width: 248px;
+      height: 440px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #050507;
+      border: 2px solid rgba(255,255,255,0.18);
+      box-shadow: 0 22px 48px rgba(0,0,0,0.45);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .q-cream .reel-frame { border-color: rgba(11,11,15,0.2); }
+    .reel-frame video, .reel-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    #s3-center-pill {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      background: rgba(9, 9, 13, 0.94);
+      border: 2px solid #D21F2B;
+      color: #FFFFFF;
+      padding: 20px 42px;
+      border-radius: 999px;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.82), 0 0 40px rgba(210,31,43,0.45);
+      z-index: 40;
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    /* ================= BEAT 04: 3D SIGNATURE WEB FLYOVER ================= */
+    #s4 {
+      background:
+        radial-gradient(circle at 20% 25%, rgba(210,31,43,0.2), transparent 50%),
+        radial-gradient(circle at 82% 78%, rgba(65,105,225,0.14), transparent 52%),
+        #07070A;
+      color: #F6F3EC;
+      perspective: 1500px;
+    }
+    #s4-browser {
+      position: absolute;
+      left: 190px;
+      top: 135px;
+      width: 1540px;
+      height: 830px;
+      background: #0F1016;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 50px 120px rgba(0,0,0,0.82), 0 0 60px rgba(210,31,43,0.18);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .b-chrome {
+      height: 58px;
+      background: #171821;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 18px;
+    }
+    .b-dots { display: flex; gap: 9px; }
+    .b-dots span { width: 13px; height: 13px; border-radius: 50%; }
+    .b-url {
+      flex: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      background: #0C0D12;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 10px;
+      padding: 8px 20px;
+      text-align: center;
+      color: #C9C5BC;
+      font-size: 15px;
+    }
+    .web-slide {
+      position: absolute;
+      left: 0; right: 0; top: 58px; bottom: 0;
+      padding: 44px 54px;
+      display: none;
+    }
+
+    /* ================= BEAT 05: CLIENT VAULT & 4-RAIL UNLOCK ================= */
+    #s5 {
+      background:
+        radial-gradient(circle at 70% 35%, rgba(16,185,129,0.12), transparent 52%),
+        radial-gradient(circle at 25% 65%, rgba(210,31,43,0.18), transparent 52%),
+        #07070A;
+      color: #F6F3EC;
+      padding: 68px 88px;
+    }
+    #s5-vault {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1.08fr 1fr;
+      gap: 34px;
+      height: 760px;
+    }
+    .vault-pane {
+      background: rgba(16, 17, 24, 0.95);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .rail-item {
+      padding: 20px 24px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: none;
+    }
+    .rail-item.active {
+      background: rgba(210,31,43,0.16);
+      border-color: #FF4754;
+      box-shadow: 0 12px 32px rgba(210,31,43,0.22);
+    }
+    #s5-unlock-btn {
+      width: 100%;
+      padding: 24px 32px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, #D21F2B, #F03240);
+      color: #FFF;
+      font-size: 23px;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 20px 48px rgba(210,31,43,0.42);
+    }
+    #s5-unlock-btn.unlocked {
+      background: linear-gradient(90deg, #059669, #10B981);
+      box-shadow: 0 20px 54px rgba(16,185,129,0.5);
+    }
+
+    /* ================= BEAT 06: FINALE SIGNATURE LOCKUP ================= */
+    #s6 {
+      background:
+        radial-gradient(circle at 50% 44%, rgba(210,31,43,0.25), rgba(7,7,10,0.98) 62%),
+        #060609;
+      color: #F6F3EC;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* ================= OVERSIZED CURSOR (7cqw = 134px @ 1920) ================= */
+    #cursor-layer {
+      position: absolute;
+      left: 0; top: 0;
+      z-index: 90;
+      pointer-events: none;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    #click-ring {
+      position: absolute;
+      left: 0; top: 0;
+      width: 110px; height: 110px;
+      margin-left: -55px; margin-top: -55px;
+      border-radius: 50%;
+      border: 4px solid #FF3B49;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 89;
+    }
+
+    /* Live interactive play overlay (hidden automatically in ?headless=1) */
+    #live-controls {
+      position: fixed;
+      right: 24px;
+      top: 24px;
+      z-index: 200;
+      display: flex;
+      gap: 10px;
+    }
+    .ctrl-btn {
+      background: rgba(12,12,18,0.88);
+      color: #F6F3EC;
+      border: 1px solid rgba(210,31,43,0.6);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-family: 'PlexMonoLocal', monospace;
+      font-size: 13px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+    body.headless #live-controls { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="live-controls">
+    <button class="ctrl-btn" id="btn-play">▶ REPLAY WITH SOUND (60FPS)</button>
+  </div>
+
+  <div id="viewport">
+    <div id="stage">
+      <!-- ==================== BEAT 01: HOOK ==================== -->
+      <section class="scene" id="s1">
+        <div id="s1-cream">
+          <div class="grid-lines"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:4;">
+            <span class="mono" style="font-size:19px;font-weight:700;">MONARCH® STUDIO // ADIL CHANDIO</span>
+            <span class="mono" style="font-size:18px;color:#555;">PORTFOLIO v37 · EST. MARCH 2024</span>
+          </div>
+
+          <div style="position:relative;z-index:4;max-width:1180px;margin:20px 0;">
+            <div class="mono" style="font-size:21px;color:#D21F2B;margin-bottom:18px;font-weight:700;">01 // INDUSTRY REALITY CHECK</div>
+            <h1 class="display" id="s1-h1" style="font-size:138px;color:#0B0B0F;">
+              MOST AGENCIES SELL<br/>GENERIC AI TEMPLATES.
+            </h1>
+            <p style="font-size:30px;font-weight:700;color:#333;margin-top:24px;">
+              Stock clips. Robotic copy. Zero retention proof.
+            </p>
+          </div>
+
+          <div id="s1-cta">
+            <span class="dot"></span>
+            <span>SHOW VERIFIED MONARCH® PROOF</span>
+            <span style="color:#FF6470;">↗</span>
+          </div>
+
+          <img id="s1-portrait" src="/proof/portrait-masked.png" alt="Adil Chandio Monarch" />
+        </div>
+
+        <div id="s1-obsidian">
+          <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:4;">
+            <span class="mono" style="font-size:19px;color:#FF6B76;">MONARCH® PRODUCTION ENGINE // ACTIVE</span>
+            <span class="mono" style="font-size:18px;color:#A29E96;">60FPS CODE MOTION · REAL METRICS</span>
+          </div>
+
+          <div style="position:relative;z-index:4;max-width:1200px;">
+            <div class="mono" style="font-size:22px;color:#FF5260;margin-bottom:16px;">VERIFIED TRACK RECORD // NOT PROMISES</div>
+            <h2 class="display" style="font-size:142px;color:#FFFFFF;">
+              WE SHIP SYSTEMS<br/><span style="color:#FF3B49;">THAT HOLD EYES.</span>
+            </h2>
+            <div style="display:flex;gap:18px;margin-top:30px;">
+              <div class="mono" style="padding:14px 24px;border-radius:12px;background:rgba(210,31,43,0.22);border:1px solid #FF4754;font-size:20px;color:#FFF;">583,290 VIEWS (1 SHORT)</div>
+              <div class="mono" style="padding:14px 24px;border-radius:12px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);font-size:20px;color:#FFF;">80.5% VIEWED VS SWIPED</div>
+              <div class="mono" style="padding:14px 24px;border-radius:12px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);font-size:20px;color:#FFF;">92.5% PEAK RETENTION</div>
+            </div>
+          </div>
+
+          <div class="mono" style="font-size:18px;color:#8E8A82;position:relative;z-index:4;">
+            ADIL CHANDIO · WEBSITES · HIGH-RETENTION FILMS · AI AUTOMATION
+          </div>
+          <img id="s1-portrait-dark" src="/proof/portrait-masked.png" alt="Adil Masked" />
+        </div>
+      </section>
+
+      <!-- ==================== BEAT 02: DECK-DEAL PROOF WALL ==================== -->
+      <section class="scene" id="s2">
+        <div id="s2-header">
+          <div>
+            <div class="mono" style="color:#FF5B67;font-size:19px;">02 // YOUTUBE STUDIO ANALYTICS · UNEDITED PROOF</div>
+            <h2 class="display" style="font-size:74px;margin-top:6px;">NUMBERS YOU CAN AUDIT.</h2>
+          </div>
+          <div class="mono" style="font-size:20px;color:#B8B4AC;background:rgba(255,255,255,0.06);padding:12px 22px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);">
+            RETENTION-ENGINEERED STORYTELLING
+          </div>
+        </div>
+
+        <div id="s2-camera">
+          <div id="s2-board">
+            <!-- Card 0: Hero KPI + Live SVG Retention Curve -->
+            <div class="proof-card hero-kpi" id="pcard-0">
+              <div class="bracket b-tl"></div><div class="bracket b-tr"></div>
+              <div class="bracket b-bl"></div><div class="bracket b-br"></div>
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span class="mono" style="color:#FF6672;font-size:17px;">SINGLE SHORT BREAKOUT</span>
+                  <span class="mono" id="lock-tag" style="opacity:0;background:#FF3B49;color:#FFF;padding:5px 12px;border-radius:6px;font-size:14px;font-weight:700;">LOCKED PROOF</span>
+                </div>
+                <div class="display" id="kpi-views" style="font-size:126px;color:#FFF;margin-top:10px;">0</div>
+                <div style="font-size:25px;color:#D8D4CC;font-weight:700;">Organic Views · +1,600 Subscribers</div>
+              </div>
+
+              <div style="margin:18px 0;background:rgba(0,0,0,0.42);border-radius:18px;padding:22px;border:1px solid rgba(255,255,255,0.08);">
+                <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                  <span class="mono" style="font-size:15px;color:#AAA;">AUDIENCE RETENTION CURVE</span>
+                  <span class="mono" style="font-size:17px;color:#34D399;font-weight:700;">80.5% STAYED · 74.4% @ 0:40</span>
+                </div>
+                <svg viewBox="0 0 560 180" width="100%" height="175">
+                  <defs>
+                    <linearGradient id="retGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#FF3B49" stop-opacity="0.48"/>
+                      <stop offset="100%" stop-color="#FF3B49" stop-opacity="0.0"/>
+                    </linearGradient>
+                  </defs>
+                  <line x1="0" y1="45" x2="560" y2="45" stroke="rgba(255,255,255,0.1)" stroke-dasharray="6 6"/>
+                  <line x1="0" y1="95" x2="560" y2="95" stroke="rgba(255,255,255,0.1)" stroke-dasharray="6 6"/>
+                  <line x1="0" y1="145" x2="560" y2="145" stroke="rgba(255,255,255,0.1)" stroke-dasharray="6 6"/>
+                  <path id="ret-area" d="M0,18 C95,24 190,34 290,46 C390,56 475,64 560,72 L560,175 L0,175 Z" fill="url(#retGrad)" opacity="0"/>
+                  <path id="ret-line" d="M0,18 C95,24 190,34 290,46 C390,56 475,64 560,72" fill="none" stroke="#FF4754" stroke-width="6" stroke-linecap="round" stroke-dasharray="650" stroke-dashoffset="650"/>
+                </svg>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span class="mono" style="font-size:16px;color:#9CA3AF;">SWIPE-AWAY ONLY 19.5%</span>
+                <span class="mono" style="font-size:16px;color:#34D399;">TOP 1% SHORTS BENCHMARK ✓</span>
+              </div>
+            </div>
+
+            <!-- Card 1: Real Screenshot proof-1.jpg -->
+            <div class="proof-card" id="pcard-1">
+              <div class="mono" style="font-size:15px;color:#FF7580;">RAW STUDIO CAPTURE #01</div>
+              <img class="proof-ss" src="/proof/proof-1.jpg" alt="583.2K Proof" />
+              <div style="display:flex;justify-content:space-between;align-items:baseline;">
+                <b style="font-size:30px;">583.2K Views</b>
+                <span class="mono" style="color:#34D399;font-size:17px;">74.4% AVP</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Real Screenshot proof-2.jpg -->
+            <div class="proof-card" id="pcard-2">
+              <div class="mono" style="font-size:15px;color:#FF7580;">SUBSCRIBER VELOCITY #02</div>
+              <img class="proof-ss" src="/proof/proof-2.jpg" alt="+1.6K Subs Proof" />
+              <div style="display:flex;justify-content:space-between;align-items:baseline;">
+                <b style="font-size:30px;">+1,600 Subs</b>
+                <span class="mono" style="color:#34D399;font-size:17px;">SINGLE UPLOAD</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Real Screenshot proof-5.jpg -->
+            <div class="proof-card" id="pcard-3">
+              <div class="mono" style="font-size:15px;color:#FF7580;">PEAK HOLD PROOF #03</div>
+              <img class="proof-ss" src="/proof/proof-5.jpg" alt="92.5% Retention Proof" />
+              <div style="display:flex;justify-content:space-between;align-items:baseline;">
+                <b style="font-size:30px;">92.5% Retention</b>
+                <span class="mono" style="color:#34D399;font-size:17px;">16.6K VIEWS</span>
+              </div>
+            </div>
+
+            <!-- Card 4: Audio & Pacing Spec -->
+            <div class="proof-card" id="pcard-4" style="background:linear-gradient(145deg,#171926,#0E1018);">
+              <div class="mono" style="font-size:15px;color:#60A5FA;">BROADCAST ENGINEERING</div>
+              <div class="display" style="font-size:74px;color:#FFF;">-14 LUFS</div>
+              <div style="font-size:21px;color:#C8C4BC;line-height:1.4;">
+                Frame-locked cuts · True Peak ≤ -1.5 dBTP · 17-Gate Automated QC
+              </div>
+              <div class="mono" style="color:#60A5FA;font-size:16px;">MONARCH-STUDIO ENGINE v2</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BEAT 03: QUAD-SPLIT REAL FILMS ==================== -->
+      <section class="scene" id="s3">
+        <div id="s3-grid">
+          <!-- Q1: Portfolio v37 Intro Film -->
+          <div class="q-cell q-cream" id="qcell-0">
+            <div style="max-width:540px;padding-right:20px;">
+              <div class="mono" style="font-size:16px;color:#D21F2B;font-weight:700;">FILM 01 // EDITORIAL MOTION</div>
+              <h3 class="display" style="font-size:66px;margin:10px 0 14px;color:#0B0B0F;">PORTFOLIO<br/>INTRO REEL</h3>
+              <p style="font-size:22px;font-weight:700;color:#333;line-height:1.35;">
+                Geometric crosshair motion, 3D isometric typography &amp; mixed-media collage.
+              </p>
+              <div class="mono" style="margin-top:20px;font-size:16px;color:#111;background:rgba(0,0,0,0.08);padding:8px 16px;border-radius:8px;width:fit-content;">
+                28s · KINETIC IDENTITY
+              </div>
+            </div>
+            <div class="reel-frame">
+              <video id="vid-intro" src="/proof/intro.mp4" muted loop playsinline preload="auto"></video>
+              <img id="seq-intro" style="display:none;" alt="" />
+            </div>
+          </div>
+
+          <!-- Q2: Law One Cinema Film -->
+          <div class="q-cell q-obsidian" id="qcell-1">
+            <div style="max-width:540px;padding-right:20px;">
+              <div class="mono" style="font-size:16px;color:#FBBF24;">FILM 02 // CUSTOM CHARACTER RIG</div>
+              <h3 class="display" style="font-size:66px;margin:10px 0 14px;color:#FFF;">LAW ONE:<br/>ROYAL EDITION</h3>
+              <p style="font-size:22px;color:#C8C4BC;line-height:1.35;">
+                Custom MONARCH® masked character bible, editorial Urdu-English typography &amp; 3D metaphors.
+              </p>
+              <div class="mono" style="margin-top:20px;font-size:16px;color:#FBBF24;background:rgba(251,191,36,0.12);padding:8px 16px;border-radius:8px;width:fit-content;">
+                63s · STORYTELLING MASTER
+              </div>
+            </div>
+            <div class="reel-frame">
+              <video id="vid-lawone" src="/proof/lawone.web.mp4" muted loop playsinline preload="auto"></video>
+              <img id="seq-lawone" style="display:none;" alt="" />
+            </div>
+          </div>
+
+          <!-- Q3: Paanch / Powerful Personality -->
+          <div class="q-cell q-crimson" id="qcell-2">
+            <div style="max-width:540px;padding-right:20px;">
+              <div class="mono" style="font-size:16px;color:#FF6B76;">FILM 03 // DIAGONAL SPLIT SYSTEM</div>
+              <h3 class="display" style="font-size:66px;margin:10px 0 14px;color:#FFF;">POWERFUL<br/>PRESENCE</h3>
+              <p style="font-size:22px;color:#E2DDD5;line-height:1.35;">
+                Beat-synced kinetic headlines, live audio waveform bars &amp; zero dead holds.
+              </p>
+              <div class="mono" style="margin-top:20px;font-size:16px;color:#FF858E;background:rgba(210,31,43,0.22);padding:8px 16px;border-radius:8px;width:fit-content;">
+                75s · RETENTION ARCHITECTURE
+              </div>
+            </div>
+            <div class="reel-frame">
+              <video id="vid-paanch" src="/proof/paanch.web.mp4" muted loop playsinline preload="auto"></video>
+              <img id="seq-paanch" style="display:none;" alt="" />
+            </div>
+          </div>
+
+          <!-- Q4: Live 17-Gate Production Engine -->
+          <div class="q-cell q-slate" id="qcell-3" style="flex-direction:column;align-items:flex-start;justify-content:space-between;">
+            <div style="width:100%;display:flex;justify-content:space-between;align-items:center;">
+              <span class="mono" style="font-size:16px;color:#34D399;">SYSTEM 04 // MONARCH-STUDIO PIPELINE</span>
+              <span class="mono" style="font-size:15px;color:#9CA3AF;">937 FILES · CRASH-PROOF</span>
+            </div>
+            <h3 class="display" style="font-size:62px;color:#FFF;">17-GATE QUALITY ENFORCEMENT</h3>
+            <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ 0.2s HOOK OPEN-LOOP</div>
+              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ CHARACTER BIBLE LOCK</div>
+              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ -14 LUFS / -1.5 dBTP</div>
+              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ ZERO STOCK B-ROLL BAN</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="s3-center-pill" class="mono" style="font-size:21px;font-weight:700;">
+          ★ REAL IN-HOUSE PRODUCTIONS · ZERO GENERIC TEMPLATES ★
+        </div>
+      </section>
+
+      <!-- ==================== BEAT 04: 3D WEB ARCHITECTURE FLYOVER ==================== -->
+      <section class="scene" id="s4">
+        <div style="position:absolute;top:44px;left:88px;right:88px;display:flex;justify-content:space-between;align-items:center;z-index:20;">
+          <span class="mono" style="font-size:19px;color:#FF5E6A;">04 // FULL-STACK WEB &amp; AI SYSTEMS</span>
+          <span class="mono" style="font-size:18px;color:#A5A199;">REACT · VITE · SUPABASE · KOTLIN AI OS</span>
+        </div>
+
+        <div id="s4-browser">
+          <div class="b-chrome">
+            <div class="b-dots">
+              <span style="background:#FF5F56;"></span>
+              <span style="background:#FFBD2E;"></span>
+              <span style="background:#27C93F;"></span>
+            </div>
+            <div class="b-url mono" id="s4-url">https://adil-chandio.github.io/portfolio/</div>
+            <span class="mono" style="font-size:14px;color:#34D399;">● 99 LIGHTHOUSE</span>
+          </div>
+
+          <!-- Slide A: Portfolio v37 -->
+          <div class="web-slide" id="wslide-0" style="display:grid;grid-template-columns:1.15fr 1fr;gap:38px;align-items:center;background:#F4EFE6;color:#0B0B0F;">
+            <div>
+              <div class="mono" style="color:#D21F2B;font-size:17px;font-weight:700;">LIVE PRODUCTION SITE #01</div>
+              <h3 class="display" style="font-size:88px;margin:10px 0 18px;color:#0B0B0F;">PORTFOLIO v37<br/>EDITORIAL HUB</h3>
+              <p style="font-size:24px;color:#2B2B30;font-weight:700;line-height:1.4;">
+                Zero-bloat custom typography, embedded sound-on film stage, interactive proof gallery &amp; instant Supabase lead intake.
+              </p>
+              <div style="display:flex;gap:14px;margin-top:26px;">
+                <span class="mono" style="background:#0B0B0F;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">31KB CORE HTML</span>
+                <span class="mono" style="background:#D21F2B;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">BESPOKE MOTION</span>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+              <img src="/proof/work-site.jpg" style="width:100%;height:320px;object-fit:cover;border-radius:18px;box-shadow:0 18px 36px rgba(0,0,0,0.2);" alt="" />
+              <img src="/proof/work-intro.jpg" style="width:100%;height:320px;object-fit:cover;border-radius:18px;box-shadow:0 18px 36px rgba(0,0,0,0.2);margin-top:44px;" alt="" />
+            </div>
+          </div>
+
+          <!-- Slide B: Maya AI OS + Monarch Agent -->
+          <div class="web-slide" id="wslide-1" style="display:grid;grid-template-columns:1.1fr 1fr;gap:38px;align-items:center;background:#0C0E16;color:#F6F3EC;">
+            <div>
+              <div class="mono" style="color:#60A5FA;font-size:17px;">AUTONOMOUS AI ENGINEERING #02</div>
+              <h3 class="display" style="font-size:86px;margin:10px 0 18px;color:#FFF;">MAYA AI OS &amp;<br/>MONARCH AGENT</h3>
+              <p style="font-size:24px;color:#C8C4BC;line-height:1.4;">
+                Native Kotlin voice-first Android OS (Awaz · Dimaag · Haath) + 404-file Python content intelligence engine.
+              </p>
+              <div style="display:flex;gap:14px;margin-top:26px;">
+                <span class="mono" style="background:rgba(96,165,250,0.18);border:1px solid #60A5FA;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">VOICE WAKE-WORD</span>
+                <span class="mono" style="background:rgba(52,211,153,0.16);border:1px solid #34D399;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">22 PUBLIC REPOS</span>
+              </div>
+            </div>
+            <div style="background:#131622;border:1px solid rgba(255,255,255,0.12);border-radius:22px;padding:30px;font-family:'PlexMonoLocal',monospace;font-size:18px;line-height:1.75;color:#E5E7EB;">
+              <div style="color:#60A5FA;">$ python -m monarch qc --stage render</div>
+              <div style="color:#34D399;">[PASS] 01 Research &amp; Niche DNA Verified</div>
+              <div style="color:#34D399;">[PASS] 07 First-8s Open Loop Locked</div>
+              <div style="color:#34D399;">[PASS] 13 Layered Audio Bus (-14 LUFS)</div>
+              <div style="color:#34D399;">[PASS] 17 Click-Debt Paid in Payoff</div>
+              <div style="color:#FBBF24;margin-top:10px;">→ Ready for Client Vault Delivery</div>
+            </div>
+          </div>
+
+          <!-- Slide C: B2B Storefront -> Click Client Vault -->
+          <div class="web-slide" id="wslide-2" style="display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(circle at 75% 25%,rgba(210,31,43,0.24),#0B0C11 65%);color:#F6F3EC;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="mono" style="font-size:18px;color:#FF6B76;">MONARCH® B2B STUDIO STOREFRONT</span>
+              <span class="mono" style="font-size:16px;color:#34D399;">SUPABASE + VERCEL EDGE LIVE</span>
+            </div>
+            <div style="max-width:1050px;">
+              <h3 class="display" style="font-size:94px;color:#FFF;">INSPECT YOUR PROJECT<br/>BEFORE YOU PAY.</h3>
+              <p style="font-size:25px;color:#D0CCC4;margin-top:16px;">
+                Every website &amp; commercial ships inside a private, code-gated Client Vault.
+              </p>
+            </div>
+            <div style="display:flex;align-items:center;gap:24px;">
+              <div id="s4-vault-btn" style="background:#D21F2B;color:#FFF;padding:22px 42px;border-radius:16px;font-size:24px;font-weight:800;box-shadow:0 20px 44px rgba(210,31,43,0.45);">
+                Open Client Vault (MON-DEMO26) →
+              </div>
+              <span class="mono" style="font-size:18px;color:#A39E93;">ZERO BLIND UPFRONT RISK</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BEAT 05: CLIENT VAULT UNLOCK ==================== -->
+      <section class="scene" id="s5">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+          <div>
+            <div class="mono" style="color:#FF6470;font-size:19px;">05 // PROTECTED CLIENT VAULT · CODE: MON-DEMO26</div>
+            <h2 class="display" style="font-size:74px;margin-top:6px;">REVIEW FIRST. UNLOCK IN ONE TAP.</h2>
+          </div>
+          <div id="s5-badge" class="mono" style="padding:14px 26px;border-radius:999px;background:rgba(210,31,43,0.2);border:1px solid #FF4754;color:#FFF;font-size:19px;font-weight:700;">
+            ● WATERMARKED REVIEW STAGE
+          </div>
+        </div>
+
+        <div id="s5-vault">
+          <!-- Left: Deliverable Stage -->
+          <div class="vault-pane">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="mono" style="font-size:17px;color:#A8A29E;">DELIVERABLE BUNDLE</span>
+              <span class="mono" id="s5-file-state" style="font-size:16px;color:#FBBF24;">ENCRYPTED CLOUD LINK</span>
+            </div>
+
+            <div style="position:relative;border-radius:20px;overflow:hidden;height:430px;border:1px solid rgba(255,255,255,0.14);">
+              <img src="/proof/work-film.jpg" style="width:100%;height:100%;object-fit:cover;" alt="" />
+              <div id="s5-wm-ribbon" class="mono" style="position:absolute;inset:0;background:rgba(7,7,10,0.58);display:flex;align-items:center;justify-content:center;font-size:24px;color:#FFF;font-weight:700;letter-spacing:0.16em;">
+                MONARCH® PREVIEW · LOCKED
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:26px;font-weight:800;">1080p60 Master + Source Code</div>
+                <div class="mono" style="font-size:15px;color:#9CA3AF;margin-top:4px;">WORLDWIDE PERPETUAL COMMERCIAL LICENSE</div>
+              </div>
+              <div class="display" style="font-size:56px;color:#FFF;">$240</div>
+            </div>
+          </div>
+
+          <!-- Right: 4 Global + Local Settlement Rails -->
+          <div class="vault-pane">
+            <div class="mono" style="font-size:17px;color:#FF7580;">FRICTIONLESS LOCAL &amp; GLOBAL RAILS (ZERO P2P RISK)</div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="rail-item" id="rail-0">
+                <div>
+                  <b style="font-size:22px;">Pakistan Instant PKR</b>
+                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">RAAST · SADAPAY · IBAN TRANSFER</div>
+                </div>
+                <span class="mono" style="color:#34D399;font-size:16px;">PKR 67,000</span>
+              </div>
+
+              <div class="rail-item" id="rail-1">
+                <div>
+                  <b style="font-size:22px;">International USD / EUR</b>
+                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">NAMED US ACH · WIRE · WISE</div>
+                </div>
+                <span class="mono" style="color:#60A5FA;font-size:16px;">0% INBOUND FEE</span>
+              </div>
+
+              <div class="rail-item" id="rail-2">
+                <div>
+                  <b style="font-size:22px;">Apple Pay &amp; Credit Card</b>
+                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">CONTRA PROTECTED ESCROW</div>
+                </div>
+                <span class="mono" style="color:#FBBF24;font-size:16px;">0% COMMISSION</span>
+              </div>
+
+              <div class="rail-item" id="rail-3">
+                <div>
+                  <b style="font-size:22px;">Instant Global USDC / USDT</b>
+                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">SOLANA · POLYGON (&lt;$0.01 FEE)</div>
+                </div>
+                <span class="mono" style="color:#34D399;font-size:16px;">INSTANT SETTLE</span>
+              </div>
+            </div>
+
+            <div id="s5-unlock-btn">
+              Verify Settlement &amp; Unlock 1080p60 Master →
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BEAT 06: FINALE LOCKUP ==================== -->
+      <section class="scene" id="s6">
+        <div class="mono" style="font-size:21px;color:#FF5E6A;margin-bottom:22px;">
+          FOUNDER-LED BY ADIL CHANDIO · PAKISTAN × WORLDWIDE
+        </div>
+        <h2 class="display" id="s6-title" style="font-size:172px;color:#FFFFFF;letter-spacing:0.03em;">
+          MONARCH<span style="color:#D21F2B;">®</span> STUDIO
+        </h2>
+        <p style="font-size:30px;color:#D6D2C9;font-weight:700;margin-top:18px;letter-spacing:0.02em;">
+          Signature Interactive Websites · High-Retention Films · Autonomous AI Systems
+        </p>
+
+        <div id="s6-sig-wrap" style="margin:38px 0 34px;overflow:hidden;width:360px;height:110px;display:flex;align-items:center;justify-content:center;">
+          <img src="/proof/sig-adil.png" style="height:96px;object-fit:contain;filter:invert(1) brightness(1.8);" alt="Adil Chandio Signature" />
+        </div>
+
+        <div style="display:flex;gap:20px;align-items:center;">
+          <div class="mono" style="padding:18px 34px;border-radius:999px;background:#D21F2B;color:#FFF;font-size:22px;font-weight:700;box-shadow:0 18px 48px rgba(210,31,43,0.5);">
+            monarch-workspace-beryl.vercel.app
+          </div>
+          <div class="mono" style="padding:18px 30px;border-radius:999px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);color:#E5E7EB;font-size:20px;">
+            workadilchandio@gmail.com
+          </div>
+        </div>
+      </section>
+
+      <!-- Oversized Protagonist Cursor (134px @ 1920) + Click Shockwave -->
+      <div id="click-ring"></div>
+      <div id="cursor-layer">
+        <svg width="134" height="134" viewBox="0 0 64 64" style="filter:drop-shadow(0 12px 22px rgba(0,0,0,0.55));">
+          <path d="M10 6 L10 50 L22 39 L31 56 L39 52 L30 35 L46 35 Z" fill="#FFFFFF" stroke="#0B0B0F" stroke-width="3.2" stroke-linejoin="round"/>
+        </svg>
+        <div class="mono" style="position:absolute;left:78px;top:76px;background:#D21F2B;color:#FFF;padding:7px 16px;border-radius:999px;font-size:15px;font-weight:700;white-space:nowrap;box-shadow:0 10px 24px rgba(0,0,0,0.45);border:2px solid #FFF;">
+          MONARCH®
+        </div>
+      </div>
+
+      <div id="grain"></div>
+      <div id="progress-track"><div id="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <audio id="master-audio" src="/showreel/audio_master_60fps.m4a" preload="auto"></audio>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const IS_HEADLESS = params.get('headless') === '1';
+    if (IS_HEADLESS) document.body.classList.add('headless');
+
+    const FPS = 60;
+    const TOTAL_FRAMES = 1920; // 32.00s
+
+    // Responsive fit for live browser viewing while keeping exact 1920x1080 in headless Chrome
+    function fitStage() {
+      const st = document.getElementById('stage');
+      if (IS_HEADLESS) {
+        st.style.transform = 'none';
+        return;
+      }
+      const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      st.style.transform = `scale(${s})`;
+    }
+    window.addEventListener('resize', fitStage);
+    fitStage();
+
+    // Easing library (hyperframes cut-the-curve power4 + spring overshoot)
+    const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+    const prog = (f, f0, f1) => clamp((f - f0) / Math.max(1, f1 - f0));
+    const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+    const easeInQuart = (t) => t * t * t * t;
+    const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const easeOutBack = (t, s = 1.35) => {
+      const c3 = s + 1;
+      return 1 + c3 * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2);
+    };
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    // Switch between <video> (live mode) and pre-decoded JPEG sequence (headless 60fps mode)
+    const seqMap = {
+      intro: { vid: document.getElementById('vid-intro'), img: document.getElementById('seq-intro'), count: 130 },
+      lawone: { vid: document.getElementById('vid-lawone'), img: document.getElementById('seq-lawone'), count: 130 },
+      paanch: { vid: document.getElementById('vid-paanch'), img: document.getElementById('seq-paanch'), count: 130 },
+    };
+    if (IS_HEADLESS) {
+      Object.values(seqMap).forEach(({ vid, img }) => {
+        vid.style.display = 'none';
+        img.style.display = 'block';
+      });
+    }
+
+    // Apply `cut-the-curve` peak-velocity exit/entry seam wrapper transform
+    function applySeam(el, f, startF, endF, enterAxis = 'x', exitAxis = 'x') {
+      if (f < startF || f >= endF) {
+        el.style.display = 'none';
+        return false;
+      }
+      el.style.display = '';
+      let tx = 0, ty = 0, sc = 1, blur = 0, op = 1;
+
+      // Entry (14 frames = 0.23s power4.out from 12% offset)
+      if (startF > 0 && f < startF + 14) {
+        const u = easeOutQuart(prog(f, startF, startF + 14));
+        if (enterAxis === 'x') tx = lerp(220, 0, u);
+        else if (enterAxis === '-x') tx = lerp(-220, 0, u);
+        else if (enterAxis === 'z') sc = lerp(0.84, 1, u);
+        else if (enterAxis === 'blur') sc = lerp(1.06, 1, u);
+        blur = lerp(14, 0, u);
+      }
+      // Exit (10 frames = 0.17s power4.in to -12% offset)
+      if (endF < TOTAL_FRAMES && f >= endF - 10) {
+        const u = easeInQuart(prog(f, endF - 10, endF));
+        if (exitAxis === 'x') tx = lerp(0, -220, u);
+        else if (exitAxis === '-x') tx = lerp(0, 220, u);
+        else if (exitAxis === 'z') sc = lerp(1, 1.18, u);
+        else if (exitAxis === 'blur') { sc = lerp(1, 0.95, u); op = lerp(1, 0.25, u); }
+        blur = Math.max(blur, lerp(0, 14, u));
+      }
+
+      el.style.opacity = op;
+      el.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) scale(${sc.toFixed(4)})`;
+      el.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
+      return true;
+    }
+
+    function setCursor(x, y, scale = 1, opacity = 1) {
+      const c = document.getElementById('cursor-layer');
+      c.style.opacity = opacity;
+      c.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+    }
+
+    function triggerRing(f, clickF, x, y, color = '#FF3B49') {
+      const r = document.getElementById('click-ring');
+      if (f < clickF || f > clickF + 26) return false;
+      const u = prog(f, clickF, clickF + 26);
+      r.style.borderColor = color;
+      r.style.opacity = (1 - u).toFixed(3);
+      r.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${lerp(0.35, 2.35, easeOutQuart(u)).toFixed(3)})`;
+      return true;
+    }
+
+    const scenes = {
+      s1: document.getElementById('s1'),
+      s2: document.getElementById('s2'),
+      s3: document.getElementById('s3'),
+      s4: document.getElementById('s4'),
+      s5: document.getElementById('s5'),
+      s6: document.getElementById('s6'),
+    };
+
+    async function renderFrame(f) {
+      document.getElementById('progress-fill').style.width = `${((f / (TOTAL_FRAMES - 1)) * 100).toFixed(2)}%`;
+      document.getElementById('click-ring').style.opacity = 0;
+      setCursor(2100, 1200, 1, 0);
+
+      // ==================== BEAT 01 (0..240) ====================
+      if (applySeam(scenes.s1, f, 0, 240, 'none', 'x')) {
+        const h1 = document.getElementById('s1-h1');
+        const enterU = easeOutQuart(prog(f, 0, 26));
+        h1.style.transform = `translateY(${lerp(65, 0, enterU).toFixed(1)}px)`;
+        h1.style.opacity = enterU.toFixed(3);
+
+        const p1 = document.getElementById('s1-portrait');
+        p1.style.transform = `translate3d(${lerp(60, 0, enterU).toFixed(1)}px, ${lerp(40, -10 * (f/240), enterU).toFixed(1)}px, 0)`;
+
+        // Oversized cursor enters f=82..120, clicks CTA at f=120!
+        if (f >= 82 && f <= 168) {
+          const moveU = easeInOutCubic(prog(f, 82, 118));
+          const cx = lerp(1750, 340, moveU);
+          const cy = lerp(980, 885, moveU);
+          const tap = (f >= 119 && f <= 125) ? 0.84 : 1.0;
+          const fadeOut = f > 144 ? 1 - prog(f, 144, 168) : 1;
+          setCursor(cx, cy, tap, fadeOut);
+        }
+        triggerRing(f, 120, 355, 895, '#FF3B49');
+
+        // Circular Iris Inversion into Obsidian stage at f=120..154!
+        const obs = document.getElementById('s1-obsidian');
+        if (f >= 120) {
+          const irisU = easeOutQuart(prog(f, 120, 154));
+          obs.style.clipPath = `circle(${lerp(0, 150, irisU).toFixed(2)}% at 340px 885px)`;
+          const pd = document.getElementById('s1-portrait-dark');
+          pd.style.transform = `scale(${lerp(1.06, 1.0, irisU).toFixed(4)}) translateX(${lerp(24, 0, irisU).toFixed(1)}px)`;
+        } else {
+          obs.style.clipPath = 'circle(0% at 340px 885px)';
+        }
+      }
+
+      // ==================== BEAT 02: DECK-DEAL + CRASH-ZOOM (240..570) ====================
+      if (applySeam(scenes.s2, f, 240, 570, 'x', 'x')) {
+        const cues = [258, 276, 291, 303, 313];
+        for (let k = 0; k < 5; k++) {
+          const card = document.getElementById(`pcard-${k}`);
+          const cf = cues[k];
+          if (f < cf - 12) {
+            card.style.opacity = 0;
+          } else {
+            const u = prog(f, cf - 12, cf + 10);
+            const eb = easeOutBack(u, 1.25);
+            const zArc = Math.sin(u * Math.PI) * 95;
+            card.style.opacity = clamp(u * 2.2).toFixed(3);
+            card.style.transform = `translate3d(${lerp(-260, 0, eb).toFixed(1)}px, ${lerp(140, 0, eb).toFixed(1)}px, ${zArc.toFixed(1)}px) scale(${lerp(0.86, 1, eb).toFixed(4)})`;
+          }
+        }
+
+        // Count up 583,290 views + draw SVG retention curve
+        const countU = easeOutQuart(prog(f, 262, 365));
+        document.getElementById('kpi-views').textContent = Math.round(583290 * countU).toLocaleString();
+        const lineU = easeInOutCubic(prog(f, 275, 380));
+        document.getElementById('ret-line').style.strokeDashoffset = (650 * (1 - lineU)).toFixed(1);
+        document.getElementById('ret-area').style.opacity = clamp((lineU - 0.25) * 1.3).toFixed(3);
+
+        // 3D Orbit -> Target Brackets (f=435) -> Crash-Zoom-Punch (f=450..458)!
+        const cam = document.getElementById('s2-camera');
+        const brackets = document.querySelectorAll('#pcard-0 .bracket');
+        const lockTag = document.getElementById('lock-tag');
+
+        if (f >= 435) {
+          const bu = easeOutBack(prog(f, 435, 447), 1.4);
+          brackets.forEach((b) => {
+            b.style.opacity = 1;
+            b.style.transform = `scale(${lerp(1.45, 1, bu).toFixed(3)})`;
+          });
+          lockTag.style.opacity = f >= 442 ? 1 : 0;
+        } else {
+          brackets.forEach((b) => (b.style.opacity = 0));
+          lockTag.style.opacity = 0;
+        }
+
+        let rx = lerp(17, 9, prog(f, 240, 435));
+        let ry = lerp(-11, -3, prog(f, 240, 435));
+        let cz = 1.0, cx = 0, cy = 0;
+        if (f >= 442 && f < 450) {
+          // 8f pull-back anticipation (-3.5%)
+          cz = lerp(1.0, 0.965, prog(f, 442, 450));
+        } else if (f >= 450) {
+          // 8f crash-zoom-punch onto Hero KPI card + 6f settle!
+          const zu = f < 458 ? easeInQuart(prog(f, 450, 458)) : 1;
+          const settle = f >= 458 ? easeOutQuart(prog(f, 458, 468)) : 0;
+          cz = f < 458 ? lerp(0.965, 1.58, zu) : lerp(1.58, 1.50, settle);
+          cx = lerp(0, 430, f < 458 ? zu : 1);
+          cy = lerp(0, 35, f < 458 ? zu : 1);
+          rx = lerp(9, 0, f < 458 ? zu : 1);
+          ry = lerp(-3, 0, f < 458 ? zu : 1);
+          triggerRing(f, 456, 560, 540, '#34D399');
+        }
+        cam.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0) scale(${cz.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      }
+
+      // ==================== BEAT 03: QUAD-SPLIT REAL MONARCH FILMS (570..960) ====================
+      if (applySeam(scenes.s3, f, 570, 960, 'x', 'z')) {
+        const pops = [582, 594, 606, 618];
+        for (let q = 0; q < 4; q++) {
+          const cell = document.getElementById(`qcell-${q}`);
+          const pf = pops[q];
+          const u = prog(f, pf - 10, pf + 8);
+          const eb = easeOutBack(u, 1.2);
+          // Subtle continuous 4% drift after entrance so no quadrant is ever dead
+          const creep = 1 + 0.03 * prog(f, pf, 960);
+          cell.style.opacity = clamp(u * 2.5).toFixed(3);
+          cell.style.transform = `scale(${(lerp(0.88, 1.0, eb) * (u >= 1 ? creep : 1)).toFixed(4)})`;
+        }
+
+        // Advance real film frame sequences deterministically in headless mode!
+        if (IS_HEADLESS) {
+          const localIdx = Math.max(1, Math.min(130, Math.floor((f - 570) / 3) + 1));
+          const pad = String(localIdx).padStart(4, '0');
+          const decodes = [];
+          for (const key of ['intro', 'lawone', 'paanch']) {
+            const img = seqMap[key].img;
+            const nextSrc = `/showreel/_tmp_frames/${key}/${pad}.jpg`;
+            if (img.getAttribute('data-cur') !== nextSrc) {
+              img.setAttribute('data-cur', nextSrc);
+              img.src = nextSrc;
+              decodes.push(img.decode().catch(() => {}));
+            }
+          }
+          if (decodes.length) await Promise.all(decodes);
+        }
+
+        const pill = document.getElementById('s3-center-pill');
+        if (f >= 780) {
+          const pu = easeOutBack(prog(f, 780, 796), 1.45);
+          pill.style.opacity = clamp(prog(f, 780, 788)).toFixed(3);
+          pill.style.transform = `translate(-50%, -50%) scale(${lerp(0.65, 1.0, pu).toFixed(4)})`;
+        } else {
+          pill.style.opacity = 0;
+        }
+      }
+
+      // ==================== BEAT 04: 3D WEB ARCHITECTURE FLYOVER (960..1350) ====================
+      if (applySeam(scenes.s4, f, 960, 1350, 'z', 'z')) {
+        const br = document.getElementById('s4-browser');
+        const orbitU = easeInOutCubic(prog(f, 960, 1320));
+        const rx = lerp(14, 2, orbitU);
+        const ry = lerp(-18, 4, orbitU);
+        const sc = f >= 1300 ? lerp(1.0, 1.12, easeInQuart(prog(f, 1300, 1350))) : lerp(0.94, 1.0, easeOutQuart(prog(f, 960, 1010)));
+        br.style.transform = `scale(${sc.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+
+        const s0 = document.getElementById('wslide-0');
+        const s1 = document.getElementById('wslide-1');
+        const s2 = document.getElementById('wslide-2');
+        const url = document.getElementById('s4-url');
+        s0.style.display = f < 1110 ? 'grid' : 'none';
+        s1.style.display = (f >= 1110 && f < 1215) ? 'grid' : 'none';
+        s2.style.display = f >= 1215 ? 'flex' : 'none';
+        url.textContent = f < 1110
+          ? 'https://adil-chandio.github.io/portfolio/'
+          : (f < 1215 ? 'monarch://maya-ai-os-and-agent-engine' : 'https://monarch-workspace-beryl.vercel.app/');
+
+        // Oversized cursor flies to "Open Client Vault (MON-DEMO26)" and clicks at f=1314!
+        if (f >= 1265 && f <= 1345) {
+          const cu = easeInOutCubic(prog(f, 1265, 1312));
+          const cx = lerp(1680, 490, cu);
+          const cy = lerp(960, 845, cu);
+          const tap = (f >= 1313 && f <= 1319) ? 0.84 : 1.0;
+          setCursor(cx, cy, tap, 1);
+        }
+        triggerRing(f, 1314, 505, 855, '#FF3B49');
+      }
+
+      // ==================== BEAT 05: CLIENT VAULT & 4-RAIL UNLOCK (1350..1680) ====================
+      if (applySeam(scenes.s5, f, 1350, 1680, 'z', 'blur')) {
+        const railCues = [1410, 1440, 1470, 1500];
+        for (let r = 0; r < 4; r++) {
+          const el = document.getElementById(`rail-${r}`);
+          if (f >= railCues[r]) el.classList.add('active');
+          else el.classList.remove('active');
+        }
+
+        // Cursor flies to Unlock button and clicks at f=1560!
+        if (f >= 1512 && f <= 1610) {
+          const cu = easeInOutCubic(prog(f, 1512, 1558));
+          const cx = lerp(1760, 1360, cu);
+          const cy = lerp(420, 880, cu);
+          const tap = (f >= 1559 && f <= 1565) ? 0.84 : 1.0;
+          const op = f > 1588 ? 1 - prog(f, 1588, 1610) : 1;
+          setCursor(cx, cy, tap, op);
+        }
+        triggerRing(f, 1560, 1375, 890, '#10B981');
+
+        const btn = document.getElementById('s5-unlock-btn');
+        const badge = document.getElementById('s5-badge');
+        const rib = document.getElementById('s5-wm-ribbon');
+        const fstate = document.getElementById('s5-file-state');
+        if (f >= 1560) {
+          btn.classList.add('unlocked');
+          btn.textContent = '✓ Master Bundle Unlocked · Downloading 1080p60 MP4';
+          badge.style.background = 'rgba(16,185,129,0.22)';
+          badge.style.borderColor = '#10B981';
+          badge.textContent = '✓ VERIFIED · CLEAN MASTER UNLOCKED';
+          rib.style.background = 'rgba(5,150,105,0.35)';
+          rib.textContent = '✓ WATERMARK REMOVED · 1080P60 MASTER READY';
+          fstate.style.color = '#34D399';
+          fstate.textContent = 'UNLOCKED ✓';
+        } else {
+          btn.classList.remove('unlocked');
+          btn.textContent = 'Verify Settlement & Unlock 1080p60 Master →';
+          badge.style.background = 'rgba(210,31,43,0.2)';
+          badge.style.borderColor = '#FF4754';
+          badge.textContent = '● WATERMARKED REVIEW STAGE';
+          rib.style.background = 'rgba(7,7,10,0.58)';
+          rib.textContent = 'MONARCH® PREVIEW · LOCKED';
+          fstate.style.color = '#FBBF24';
+          fstate.textContent = 'ENCRYPTED CLOUD LINK';
+        }
+      }
+
+      // ==================== BEAT 06: FINALE SIGNATURE LOCKUP (1680..1920) ====================
+      if (applySeam(scenes.s6, f, 1680, 1920, 'blur', 'none')) {
+        const u = easeOutQuart(prog(f, 1680, 1735));
+        document.getElementById('s6-title').style.transform = `scale(${lerp(1.14, 1.0, u).toFixed(4)})`;
+        const sigU = easeInOutCubic(prog(f, 1715, 1785));
+        document.getElementById('s6-sig-wrap').style.clipPath = `inset(0 ${(100 * (1 - sigU)).toFixed(1)}% 0 0)`;
+      }
+    }
+
+    window.__setFrame = renderFrame;
+
+    // Live 60fps interactive player when opened in browser
+    if (!IS_HEADLESS) {
+      let startTs = performance.now();
+      const audio = document.getElementById('master-audio');
+      Object.values(seqMap).forEach(({ vid }) => vid.play().catch(() => {}));
+
+      function tick(now) {
+        let sec = !audio.paused && audio.currentTime > 0
+          ? audio.currentTime
+          : ((now - startTs) / 1000) % (TOTAL_FRAMES / FPS);
+        const f = Math.min(TOTAL_FRAMES - 1, Math.floor(sec * FPS));
+        renderFrame(f);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      document.getElementById('btn-play').addEventListener('click', () => {
+        audio.currentTime = 0;
+        startTs = performance.now();
+        audio.play().catch(() => {});
+        Object.values(seqMap).forEach(({ vid }) => { vid.currentTime = 0; vid.play().catch(() => {}); });
+      });
+    } else {
+      renderFrame(0);
+    }
+  </script>
+</body>
+</html>

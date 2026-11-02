@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -25,6 +26,56 @@ import { supabase } from './lib/supabase';
 
 const INTAKE_EDGE_URL = 'https://oeqeqlgatdlqbuywktnu.supabase.co/functions/v1/public-intake';
 const PORTFOLIO_URL = 'https://adil-chandio.github.io/portfolio/';
+
+const SHOWCASE_TABS = [
+  {
+    id: 'flagship',
+    label: '60fps Agency Showreel',
+    kicker: 'HYPERFRAMES × SHOTCRAFT · 1080P 60FPS · -15.3 LUFS',
+    title: 'Proof Over Promises — Real Work, Real Retention & Vault Demo',
+    type: 'video',
+    aspect: '16/9',
+    src: '/demo-preview.mp4?v=proof60',
+    poster: '/demo-poster.jpg?v=proof60',
+  },
+  {
+    id: 'intro',
+    label: 'Portfolio v37 Intro',
+    kicker: 'REAL PRODUCTION #01 · KINETIC IDENTITY (28S)',
+    title: 'Adil Chandio — Geometric Crosshair, 3D Isometric & Collage Intro',
+    type: 'video',
+    aspect: '9/16',
+    src: '/proof/intro.mp4',
+    poster: '/proof/work-intro.jpg',
+  },
+  {
+    id: 'lawone',
+    label: 'Law One Film',
+    kicker: 'REAL PRODUCTION #02 · CUSTOM CHARACTER RIG (63S)',
+    title: 'Law One (Never Outshine) — Custom MONARCH® Character & Editorial Motion',
+    type: 'video',
+    aspect: '9/16',
+    src: '/proof/lawone.web.mp4',
+    poster: '/proof/work-film.jpg',
+  },
+  {
+    id: 'paanch',
+    label: 'Powerful Presence',
+    kicker: 'REAL PRODUCTION #03 · DIAGONAL SPLIT SYSTEM (75S)',
+    title: 'Powerful Presence — Beat-Locked Typography & Waveform Architecture',
+    type: 'video',
+    aspect: '9/16',
+    src: '/proof/paanch.web.mp4',
+    poster: '/proof/work-site.jpg',
+  },
+  {
+    id: 'analytics',
+    label: '583.2K Retention Proof',
+    kicker: 'UNEDITED YOUTUBE STUDIO CAPTURES · VERIFIED RESULTS',
+    title: '583,290 Organic Views · +1,600 Subs · 80.5% Stay Rate · 92.5% Peak Retention',
+    type: 'proof_grid',
+  },
+];
 
 const DEFAULT_SERVICES = [
   {
@@ -126,6 +177,7 @@ function CopyRow({ label, value }) {
 export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
   const [services, setServices] = useState(DEFAULT_SERVICES);
   const [portalInput, setPortalInput] = useState('');
+  const [activeShowcase, setActiveShowcase] = useState('flagship');
   const [brief, setBrief] = useState({
     client_name: '',
     client_email: '',
@@ -262,14 +314,19 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
             </div>
 
             <div className="m-hero-grid">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+              >
                 <h1>
-                  Signature Websites &amp; <span>High-Retention Films</span> Built to Convert.
+                  Websites &amp; <span>Retention-Locked Films</span> Backed by Real Numbers.
                 </h1>
                 <p className="m-hero-lead">
-                  Two specialized B2B production engines by Adil Chandio. Review watermarked 60fps cuts and live
-                  interactive web staging inside your private <b>MONARCH Client Portal</b> — settle via US Bank (ACH),
-                  Card, Instant USDC, or Local PKR to unlock master deliverables immediately.
+                  Built by Adil Chandio — creator of <b>Portfolio v37</b>, <b>MONARCH-Studio</b>, and shorts holding{' '}
+                  <b>80.5% stay rate across 583,290 organic views</b>. Inspect your finished cut or live staging site
+                  inside your private <b>MONARCH Client Vault</b> before final settlement via PKR Raast, US ACH, Card,
+                  or Instant USDC.
                 </p>
 
                 <div className="m-hero-ctas">
@@ -282,28 +339,33 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
                     rel="noopener noreferrer"
                     className="m-btn m-btn-ghost"
                   >
-                    Inspect Flagship Portfolio <ArrowUpRight size={15} />
+                    Open Portfolio v37 <ArrowUpRight size={15} />
                   </a>
                 </div>
 
                 <div className="m-trust-strip">
                   <span className="m-trust-pill">
-                    <ShieldCheck size={14} /> Watermarked Preview Before Final Payment
+                    <ShieldCheck size={14} /> 583.2K+ Single-Short Views · 92.5% Peak Retention
                   </span>
                   <span className="m-trust-pill">
-                    <Globe size={14} /> US ACH · Apple Pay/Card · USDC · Raast PKR
+                    <Globe size={14} /> PKR Raast · US ACH · Card · Instant USDC
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* CLIENT PORTAL QUICK ACCESS */}
-              <aside className="m-portal-box">
+              <motion.aside
+                className="m-portal-box"
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 250, damping: 26, delay: 0.08 }}
+              >
                 <div className="m-portal-box-top">
                   <small>LOCKED-PREVIEW CLIENT VAULT</small>
                   <h2>Open Your Client Portal</h2>
                   <p>
-                    Have a project code from MONARCH®? Enter it below to inspect your live preview, submit milestone
-                    settlement, and unlock unwatermarked master files.
+                    Already have a project code? Enter it below to review your watermarked 60fps cut or live website
+                    staging, verify milestone payment, and download clean master files.
                   </p>
                   <form className="m-code-form" onSubmit={handlePortalLookup}>
                     <input
@@ -327,69 +389,192 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
                     MON-WEB26 (Website)
                   </button>
                 </div>
-              </aside>
+              </motion.aside>
             </div>
 
-            {/* EMBEDDED 60FPS COMMERCIAL SHOWREEL */}
-            <div
-              style={{
-                marginTop: 28,
-                padding: '18px 20px',
-                borderRadius: 20,
-                background: 'rgba(16, 16, 20, 0.92)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  flexWrap: 'wrap',
-                  gap: 10,
-                  marginBottom: 12,
-                }}
-              >
-                <div>
-                  <small
+            {/* INTERACTIVE MULTI-REEL REAL WORK & 60FPS SHOWCASE */}
+            {(() => {
+              const cur = SHOWCASE_TABS.find((t) => t.id === activeShowcase) || SHOWCASE_TABS[0];
+              return (
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 240, damping: 28, delay: 0.14 }}
+                  style={{
+                    marginTop: 28,
+                    padding: '20px 22px',
+                    borderRadius: 20,
+                    background: 'rgba(14, 14, 19, 0.95)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 24px 64px rgba(0, 0, 0, 0.48)',
+                  }}
+                >
+                  <div
                     style={{
-                      fontFamily: 'JetBrains Mono, monospace',
-                      fontSize: 11,
-                      color: '#ff8e96',
-                      letterSpacing: '0.12em',
+                      display: 'flex',
+                      gap: 8,
+                      flexWrap: 'wrap',
+                      marginBottom: 16,
+                      paddingBottom: 14,
+                      borderBottom: '1px solid rgba(255, 255, 255, 0.07)',
                     }}
                   >
-                    DUAL-GPU AI MOTION SHOWREEL · 1080P · -14.3 LUFS BROADCAST MIX
-                  </small>
-                  <h3 style={{ margin: '4px 0 0', fontFamily: 'Syne, sans-serif', fontSize: 19 }}>
-                    THREE SECONDS. — MONARCH® Flagship AI Commercial &amp; Vault Demo
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  className="m-btn m-btn-crimson"
-                  onClick={() => onOpenPortal('MON-DEMO26')}
-                >
-                  Inspect Inside Client Vault (MON-DEMO26) <ArrowRight size={14} />
-                </button>
-              </div>
-              <video
-                src="/demo-preview.mp4?v=flagship1"
-                poster="/demo-poster.jpg?v=flagship1"
-                controls
-                playsInline
-                preload="metadata"
-                controlsList="nodownload"
-                style={{
-                  width: '100%',
-                  borderRadius: 14,
-                  border: '1px solid rgba(210, 31, 43, 0.35)',
-                  background: '#050507',
-                  display: 'block',
-                  maxHeight: 520,
-                }}
-              />
-            </div>
+                    {SHOWCASE_TABS.map((tab) => {
+                      const isAct = tab.id === cur.id;
+                      return (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          onClick={() => setActiveShowcase(tab.id)}
+                          style={{
+                            padding: '8px 14px',
+                            borderRadius: 999,
+                            fontSize: 12.5,
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            border: isAct ? '1px solid #ff4754' : '1px solid rgba(255,255,255,0.12)',
+                            background: isAct ? 'rgba(210, 31, 43, 0.24)' : 'rgba(255,255,255,0.03)',
+                            color: isAct ? '#ffffff' : '#b8b4ac',
+                          }}
+                        >
+                          {tab.label}
+                        </button>
+                      );
+                    })}
+                    <a
+                      href="/showreel/index.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        marginLeft: 'auto',
+                        padding: '8px 14px',
+                        borderRadius: 999,
+                        fontSize: 12,
+                        fontFamily: 'JetBrains Mono, monospace',
+                        textDecoration: 'none',
+                        border: '1px solid rgba(255,255,255,0.16)',
+                        color: '#e5e1d8',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 6,
+                      }}
+                    >
+                      Launch Live 60fps DOM Stage <ArrowUpRight size={13} />
+                    </a>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: 10,
+                      marginBottom: 14,
+                    }}
+                  >
+                    <div>
+                      <small
+                        style={{
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: 11,
+                          color: '#ff8e96',
+                          letterSpacing: '0.12em',
+                        }}
+                      >
+                        {cur.kicker}
+                      </small>
+                      <h3 style={{ margin: '4px 0 0', fontFamily: 'Syne, sans-serif', fontSize: 19 }}>
+                        {cur.title}
+                      </h3>
+                    </div>
+                    <button
+                      type="button"
+                      className="m-btn m-btn-crimson"
+                      onClick={() => onOpenPortal('MON-DEMO26')}
+                    >
+                      Inspect Inside Client Vault (MON-DEMO26) <ArrowRight size={14} />
+                    </button>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={cur.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {cur.type === 'proof_grid' ? (
+                        <div
+                          style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                            gap: 14,
+                          }}
+                        >
+                          {[
+                            { img: '/proof/proof-1.jpg', stat: '583,290 Views', sub: '74.4% Retention @ 0:40' },
+                            { img: '/proof/proof-2.jpg', stat: '+1,600 Subscribers', sub: 'From One Organic Short' },
+                            { img: '/proof/proof-5.jpg', stat: '92.5% Retention', sub: '16,698 Organic Views' },
+                          ].map((p) => (
+                            <div
+                              key={p.stat}
+                              style={{
+                                background: '#09090d',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                borderRadius: 14,
+                                padding: 12,
+                              }}
+                            >
+                              <img
+                                src={p.img}
+                                alt={p.stat}
+                                style={{
+                                  width: '100%',
+                                  maxHeight: 380,
+                                  objectFit: 'contain',
+                                  borderRadius: 10,
+                                  background: '#050507',
+                                  display: 'block',
+                                }}
+                              />
+                              <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between' }}>
+                                <b style={{ fontSize: 15 }}>{p.stat}</b>
+                                <span style={{ fontSize: 12, color: '#34d399', fontFamily: 'JetBrains Mono, monospace' }}>
+                                  {p.sub}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div style={{ display: 'flex', justifyContent: 'center', background: '#050507', borderRadius: 14 }}>
+                          <video
+                            key={cur.src}
+                            src={cur.src}
+                            poster={cur.poster}
+                            controls
+                            playsInline
+                            preload="metadata"
+                            controlsList="nodownload"
+                            style={{
+                              width: cur.aspect === '9/16' ? 'auto' : '100%',
+                              maxWidth: '100%',
+                              maxHeight: 540,
+                              borderRadius: 14,
+                              border: '1px solid rgba(210, 31, 43, 0.35)',
+                              background: '#050507',
+                              display: 'block',
+                            }}
+                          />
+                        </div>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })()}
           </div>
         </section>
 
@@ -949,7 +1134,7 @@ export function ClientPortalView({ portalCode, onBackToStudio, onSwitchPortal, o
                       <div style={{ width: '100%', position: 'relative', zIndex: 2 }}>
                         <video
                           src={portal.preview_url}
-                          poster="/demo-poster.jpg?v=flagship1"
+                          poster="/demo-poster.jpg?v=proof60"
                           controls
                           playsInline
                           preload="metadata"
