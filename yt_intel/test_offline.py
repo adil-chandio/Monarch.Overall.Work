@@ -160,6 +160,16 @@ def t_reverse():
     ok("replication always actionable", rep["change"] and rep["beat"])
 
 
+def t_comment_noise_floor():
+    """One comment out of a hundred is not "the audience's objection"."""
+    tiny = [{"text": "this did not work", "likes": 1}] + [{"text": "lol", "likes": 5}] * 99
+    r = forensic.comment_mining(tiny)
+    ok("1% is not a reading", "nothing cleared" in r["reading"])
+    ok("...but the bucket still shows the raw count", r["objections"][0]["n"] == 1)
+    real = [{"text": "please make a part 2", "likes": 2}] * 8 + [{"text": "nice", "likes": 1}] * 92
+    ok("8% is a reading", "asking for more" in forensic.comment_mining(real)["reading"])
+
+
 def t_go_needs_a_mechanism():
     """GO may not claim a readable mechanism while the mechanism part says otherwise."""
     sat = {"status": "ok", "top3_share": 0.44, "fresh_share_30d": 0.18,
@@ -202,7 +212,7 @@ def t_ideas():
 if __name__ == "__main__":
     print("yt-intel offline tests")
     for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
-               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
+               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
     sys.exit(0)

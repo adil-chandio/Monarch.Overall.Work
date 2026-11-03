@@ -42,9 +42,25 @@ export function candidates(dir = OUT) {
   return out.sort((a, b) => b.comments - a.comments || b.at - a.at);
 }
 
+/**
+ * Pick a video whose comment field can actually brief a video.
+ *
+ * "Most comments" is the wrong objective and the first real run proved it: it chose an
+ * entertainment video with 10,418 comments, where the top-liked comments were jokes about a
+ * YouTuber's haircut. Useful comments come from videos whose audience is trying to DO
+ * something — so how-to intent in the title/description breaks the tie, and a raw comment
+ * count only decides within that group.
+ */
+const HOW_TO = /\b(how to|how i|tutorial|guide|step by step|setup|workflow|tips|free)\b/i;
+
 const picked = explicit
   ? [{ id: explicit, comments: null, title: '(named explicitly)', topic: '' }]
-  : candidates();
+  : candidates().sort((a, b) => {
+      const aHow = HOW_TO.test(`${a.title} ${a.topic}`) ? 1 : 0;
+      const bHow = HOW_TO.test(`${b.title} ${b.topic}`) ? 1 : 0;
+      if (aHow !== bHow) return bHow - aHow;
+      return b.comments - a.comments || b.at - a.at;
+    });
 
 if (!picked.length) {
   console.log('no API-lane report with comment counts yet — nothing to mine');

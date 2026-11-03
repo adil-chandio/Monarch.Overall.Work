@@ -365,7 +365,18 @@ def comment_mining(comments: list[dict], min_n: int = 20) -> dict:
     }
 
 
+# 1 in 40 comments is the floor for calling something a pattern. The first real run mined
+# a 100-comment sample from an entertainment video and reported "the loudest objection is
+# said it did not work (1%)" — one person. A phrase that appears once is an anecdote, and a
+# tool that dresses it as the audience's mind is the exact dishonesty this package avoids.
+MIN_COMMENT_SHARE = 0.025
+
+
 def _comment_reading(asks: list[dict], objections: list[dict], wants: list[dict]) -> str:
+    def real(hits):
+        return [h for h in hits if h["share"] >= MIN_COMMENT_SHARE]
+
+    asks, objections, wants = real(asks), real(objections), real(wants)
     parts = []
     if asks:
         parts.append(f"the audience is asking for more: {asks[0]['label']} ({asks[0]['share']:.0%})")
@@ -374,5 +385,7 @@ def _comment_reading(asks: list[dict], objections: list[dict], wants: list[dict]
     if wants:
         parts.append(f"{wants[0]['label']} ({wants[0]['share']:.0%}) is the conversion surface")
     if not parts:
-        return "no request, objection or asset-ask cleared the threshold — this comment field cannot brief a video"
+        return ("nothing cleared the 2.5% floor — this comment field cannot brief a video. "
+                "That is a real finding: choose a video whose audience is asking, not one that "
+                "merely has the most comments")
     return "; ".join(parts)
