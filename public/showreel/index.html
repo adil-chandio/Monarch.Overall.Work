@@ -3,909 +3,599 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=1920, initial-scale=1.0" />
-  <title>MONARCH® STUDIO — Proof Over Promises (60fps Master Stage)</title>
+  <title>MONARCH® STUDIO — Proof Over Promises (v3 Absolute Cinema 1080p60)</title>
   <style>
-    @font-face {
-      font-family: 'AntonLocal';
-      src: url('./fonts/Anton-Regular.ttf') format('truetype');
-      font-weight: 400;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'ManropeLocal';
-      src: url('./fonts/Manrope-700.ttf') format('truetype');
-      font-weight: 700;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'ManropeLocal';
-      src: url('./fonts/Manrope-800.ttf') format('truetype');
-      font-weight: 800;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'PlexMonoLocal';
-      src: url('./fonts/IBMPlexMono-400.ttf') format('truetype');
-      font-weight: 400;
-      font-display: block;
-    }
+    @font-face { font-family: 'AntonLocal'; src: url('./fonts/Anton-Regular.ttf') format('truetype'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'ManropeLocal'; src: url('./fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'ManropeLocal'; src: url('./fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; font-display: block; }
+    @font-face { font-family: 'PlexMonoLocal'; src: url('./fonts/IBMPlexMono-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
     html, body {
-      width: 100%;
-      height: 100%;
-      background: #07070A; /* seam-craft opaque stage-ground guard */
-      overflow: hidden;
-      font-family: 'ManropeLocal', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      width: 100%; height: 100%; background: #06060A; overflow: hidden;
+      font-family: 'ManropeLocal', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
     }
-
-    #viewport {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #07070A;
-    }
-
+    #viewport { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #06060A; }
     #stage {
-      position: relative;
-      width: 1920px;
-      height: 1080px;
-      background: #07070A;
-      overflow: hidden;
-      transform-origin: center center;
+      position: relative; width: 1920px; height: 1080px; background: #06060A;
+      overflow: hidden; transform-origin: center center; isolation: isolate;
     }
 
-    /* Subtle cinema grain + vignette */
-    #grain {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 80;
-      background:
-        radial-gradient(circle at 50% 50%, transparent 58%, rgba(0,0,0,0.52) 100%);
-    }
+    /* ---------- type ---------- */
+    .mono { font-family: 'PlexMonoLocal', monospace; text-transform: uppercase; letter-spacing: 0.16em; }
+    .display { font-family: 'AntonLocal', Impact, sans-serif; text-transform: uppercase; line-height: 0.9; letter-spacing: 0.008em; }
+    .ink { color: #0B0B10; } .paper { color: #F5F1E8; }
 
-    /* Top / Bottom subtle cinema progress bar */
-    #progress-track {
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 5px;
-      background: rgba(255,255,255,0.07);
-      z-index: 95;
-    }
-    #progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #D21F2B, #FF5E6C);
-      box-shadow: 0 0 18px rgba(210,31,43,0.9);
-    }
+    .scene { position: absolute; inset: 0; width: 1920px; height: 1080px; display: none; overflow: hidden; }
 
-    .scene {
-      position: absolute;
-      inset: 0;
-      width: 1920px;
-      height: 1080px;
-      will-change: transform, opacity, filter;
-      display: none;
-    }
-
-    .mono { font-family: 'PlexMonoLocal', monospace; letter-spacing: 0.12em; text-transform: uppercase; }
-    .display { font-family: 'AntonLocal', Impact, sans-serif; letter-spacing: 0.015em; text-transform: uppercase; line-height: 0.94; }
-
-    /* ================= BEAT 01: CREAM -> OBSIDIAN HOOK ================= */
-    #s1-cream {
-      position: absolute;
-      inset: 0;
-      background: #F4EFE6;
-      color: #0B0B0F;
-      padding: 64px 88px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .grid-lines {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(11,11,15,0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(11,11,15,0.06) 1px, transparent 1px);
+    /* ---------- BEAT 01 : CREAM EDITORIAL HOOK ---------- */
+    #s1-cream { position: absolute; inset: 0; background: #F4EFE6; color: #0B0B10; padding: 66px 92px; }
+    #s1-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(11,11,16,0.07) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(11,11,16,0.07) 1px, transparent 1px);
       background-size: 160px 160px;
-      pointer-events: none;
     }
+    #s1-top { position: absolute; top: 58px; left: 92px; right: 92px; display: flex; justify-content: space-between; align-items: baseline; font-size: 17px; color: #55504A; }
+    #s1-h1 { position: absolute; left: 92px; top: 196px; font-size: 178px; }
+    #s1-h1 .ln { display: block; overflow: hidden; }
+    #s1-h1 .ln > span { display: inline-block; transform-origin: left bottom; }
+    #s1-h1 .red { color: #C41726; }
+    #s1-kicker { position: absolute; left: 96px; top: 132px; font-size: 16px; color: #8A8378; }
     #s1-portrait {
-      position: absolute;
-      right: 90px;
-      bottom: -20px;
-      height: 920px;
-      object-fit: contain;
-      filter: contrast(1.06) drop-shadow(-24px 18px 44px rgba(0,0,0,0.22));
-      z-index: 3;
+      position: absolute; right: 96px; bottom: -34px; height: 950px; object-fit: contain;
+      filter: contrast(1.07) drop-shadow(-26px 20px 54px rgba(11,11,16,0.24)); z-index: 3;
     }
     #s1-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      background: #0B0B0F;
-      color: #F4EFE6;
-      padding: 22px 38px;
-      border-radius: 999px;
-      font-size: 22px;
-      font-weight: 800;
-      width: fit-content;
-      box-shadow: 0 22px 48px rgba(11,11,15,0.24);
-      position: relative;
-      z-index: 5;
+      position: absolute; left: 96px; bottom: 196px; display: inline-flex; align-items: center; gap: 18px;
+      background: #0B0B10; color: #F4EFE6; padding: 26px 44px; border-radius: 999px;
+      font-size: 23px; font-weight: 800; letter-spacing: 0.01em;
+      box-shadow: 0 26px 60px rgba(11,11,16,0.28), 0 0 0 1px rgba(11,11,16,0.08); z-index: 6;
     }
-    #s1-cta .dot { width: 13px; height: 13px; border-radius: 50%; background: #D21F2B; }
+    #s1-cta .dot { width: 14px; height: 14px; border-radius: 50%; background: #C41726; box-shadow: 0 0 22px #C41726; }
+    #s1-foot { position: absolute; left: 96px; bottom: 96px; font-size: 15px; color: #6D675F; display: flex; gap: 40px; }
 
+    /* obsidian inversion layer */
     #s1-obsidian {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 72% 42%, rgba(210,31,43,0.28), transparent 62%), #07070A;
-      color: #F6F3EC;
-      padding: 64px 88px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 8;
-      clip-path: circle(0% at 340px 885px);
+      position: absolute; inset: 0; background: radial-gradient(circle at 74% 34%, rgba(196,23,38,0.30), transparent 58%), radial-gradient(circle at 20% 88%, rgba(255,120,60,0.10), transparent 55%), #07070A;
+      color: #F6F2E9; clip-path: circle(0% at 340px 885px);
     }
-    #s1-portrait-dark {
-      position: absolute;
-      right: 82px;
-      bottom: -20px;
-      height: 940px;
-      object-fit: contain;
-      filter: contrast(1.12) drop-shadow(0 0 65px rgba(210,31,43,0.42));
+    #s1-obs-glow { position: absolute; inset: -20%; background: radial-gradient(circle at 50% 50%, rgba(255,60,70,0.16), transparent 60%); }
+    #s1-bignum {
+      position: absolute; left: 92px; top: 286px; font-size: 322px; letter-spacing: -0.01em;
+      color: #FBF7EF; text-shadow: 0 0 90px rgba(255,80,90,0.28);
     }
+    #s1-bignum .ghost { position: absolute; inset: 0; color: rgba(255,60,72,0.55); mix-blend-mode: screen; }
+    #s1-obs-kicker { position: absolute; left: 96px; top: 176px; font-size: 17px; color: #FF8A93; letter-spacing: 0.34em; }
+    #s1-obs-sub { position: absolute; left: 100px; top: 690px; font-size: 26px; font-weight: 800; color: #D9D2C6; letter-spacing: 0.01em; }
+    #s1-obs-sub b { color: #FF4D5A; }
+    #s1-obs-meta { position: absolute; left: 100px; bottom: 168px; display: flex; gap: 54px; font-size: 15px; color: #8E877C; }
+    #s1-obs-meta div b { display: block; font-family: 'PlexMonoLocal', monospace; font-size: 30px; color: #FBF7EF; margin-top: 8px; letter-spacing: 0.02em; }
+    #s1-portrait-dark { position: absolute; right: 70px; bottom: -30px; height: 980px; object-fit: contain; filter: grayscale(0.55) contrast(1.18) brightness(0.86) drop-shadow(0 40px 90px rgba(0,0,0,0.7)); opacity: 0.92; }
+    #s1-redslash { position: absolute; left: -80px; top: 560px; width: 1500px; height: 8px; background: linear-gradient(90deg, transparent, #E01B2B 18%, #FF6A73 50%, #E01B2B 82%, transparent); box-shadow: 0 0 60px rgba(224,27,43,0.9); transform-origin: left center; }
 
-    /* ================= BEAT 02: DECK-DEAL-FLYIN PROOF WALL ================= */
-    #s2 {
-      background:
-        radial-gradient(circle at 46% 24%, rgba(210,31,43,0.18), transparent 55%),
-        linear-gradient(135deg, #0D0E14 0%, #060609 100%);
-      color: #F6F3EC;
-      perspective: 1350px;
+    /* ---------- BEAT 02 : PROOF DECK ---------- */
+    #s2 { background: radial-gradient(circle at 26% 24%, rgba(196,23,38,0.20), transparent 56%), #08080C; perspective: 1900px; }
+    #s2-floor {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 120px 120px;
+      transform: perspective(700px) rotateX(66deg) translateY(430px) scale(2.4);
+      mask-image: linear-gradient(to top, rgba(0,0,0,0.55), transparent 62%);
+      opacity: 0.55;
     }
-    #s2-header {
-      position: absolute;
-      top: 52px; left: 78px; right: 78px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      z-index: 20;
-    }
-    #s2-camera {
-      position: absolute;
-      inset: 0;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-    #s2-board {
-      position: absolute;
-      left: 110px;
-      top: 175px;
-      width: 1700px;
-      height: 820px;
-      display: grid;
-      grid-template-columns: 1.25fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 24px;
-      transform-style: preserve-3d;
-    }
-    .proof-card {
-      background: rgba(18, 19, 27, 0.94);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 24px;
-      padding: 26px 28px;
-      box-shadow: 0 32px 64px rgba(0,0,0,0.62);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    #s2-camera { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+    #s2-header { position: absolute; left: 0; right: 0; top: 62px; text-align: center; }
+    #s2-header .k { font-size: 15px; color: #FF7A84; letter-spacing: 0.4em; }
+    #s2-header h2 { margin-top: 14px; font-size: 60px; color: #F7F3EA; }
+    #s2-header h2 em { font-style: normal; color: #E01B2B; }
+
+    .card {
+      position: absolute; border-radius: 22px; overflow: hidden;
+      background: linear-gradient(160deg, rgba(24,24,32,0.94), rgba(12,12,17,0.96));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 46px 90px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.10);
       will-change: transform, opacity;
     }
-    .proof-card.hero-kpi {
-      grid-row: 1 / span 2;
-      background: linear-gradient(165deg, rgba(28,15,20,0.97), rgba(11,11,16,0.98));
-      border: 2px solid rgba(210,31,43,0.62);
-    }
-    .proof-ss {
-      width: 100%;
-      height: 225px;
-      object-fit: cover;
-      object-position: center 22%;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .bracket {
-      position: absolute;
-      width: 34px; height: 34px;
-      border-color: #FF3B49;
-      border-style: solid;
-      opacity: 0;
-      z-index: 30;
-    }
-    .b-tl { top: 14px; left: 14px; border-width: 4px 0 0 4px; }
-    .b-tr { top: 14px; right: 14px; border-width: 4px 4px 0 0; }
-    .b-bl { bottom: 14px; left: 14px; border-width: 0 0 4px 4px; }
-    .b-br { bottom: 14px; right: 14px; border-width: 0 4px 4px 0; }
+    #pcard-0 { left: 118px; top: 196px; width: 726px; height: 664px; padding: 40px 44px; }
+    #pcard-0 .lbl { font-size: 14px; color: #FF8A93; letter-spacing: 0.30em; }
+    #pcard-0 .num { font-size: 172px; color: #FCF8F0; margin-top: 6px; line-height: 0.92; }
+    #pcard-0 .unit { font-size: 20px; color: #9C958A; margin-top: 12px; letter-spacing: 0.22em; }
+    #pcard-0 .divider { height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.22), transparent); margin: 30px 0 22px; }
+    #retwrap { position: relative; width: 100%; height: 210px; }
+    #retwrap .cap { position: absolute; right: 0; top: -6px; font-size: 13px; color: #8F887E; }
+    #pcard-0 .foot { position: absolute; left: 44px; right: 44px; bottom: 34px; display: flex; justify-content: space-between; font-family: 'PlexMonoLocal', monospace; font-size: 14px; color: #8F887E; }
+    #pcard-0 .foot b { color: #34D399; }
 
-    /* ================= BEAT 03: QUAD-SPLIT REAL MONARCH FILMS ================= */
-    #s3 {
-      background: #07070A;
-      padding: 28px;
+    .pcard-sm { padding: 0; }
+    .pcard-sm img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.04) contrast(1.03); }
+    .pcard-sm .tag {
+      position: absolute; left: 14px; bottom: 14px; padding: 8px 13px; border-radius: 8px;
+      background: rgba(6,6,10,0.82); border: 1px solid rgba(255,255,255,0.14);
+      font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.1em; color: #F2EDE3;
     }
-    #s3-grid {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 16px;
+    #pcard-1 { left: 884px; top: 196px; width: 386px; height: 312px; }
+    #pcard-2 { left: 1290px; top: 196px; width: 386px; height: 312px; }
+    #pcard-3 { left: 884px; top: 528px; width: 386px; height: 332px; }
+    #pcard-4 { left: 1290px; top: 528px; width: 386px; height: 332px; }
+
+    .bracket { position: absolute; width: 46px; height: 46px; border: 4px solid #34D399; opacity: 0; }
+    .bracket.tl { left: -10px; top: -10px; border-right: 0; border-bottom: 0; border-radius: 12px 0 0 0; }
+    .bracket.tr { right: -10px; top: -10px; border-left: 0; border-bottom: 0; border-radius: 0 12px 0 0; }
+    .bracket.bl { left: -10px; bottom: -10px; border-right: 0; border-top: 0; border-radius: 0 0 0 12px; }
+    .bracket.br { right: -10px; bottom: -10px; border-left: 0; border-top: 0; border-radius: 0 0 12px 0; }
+    #lock-tag {
+      position: absolute; left: 44px; top: 44px; padding: 10px 16px; border-radius: 999px; opacity: 0;
+      background: rgba(52,211,153,0.16); border: 1px solid #34D399; color: #6EE7B7;
+      font-family: 'PlexMonoLocal', monospace; font-size: 14px; letter-spacing: 0.22em;
     }
-    .q-cell {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      padding: 28px 34px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid rgba(255,255,255,0.1);
+    #s2-footer { position: absolute; left: 0; right: 0; bottom: 74px; text-align: center; font-family: 'PlexMonoLocal', monospace; font-size: 15px; color: #7C766D; letter-spacing: 0.3em; }
+
+    /* ---------- BEAT 03 : CINEMA MONOLITHS ---------- */
+    #s3 { background: #05050A; perspective: 1500px; }
+    #s3-beams { position: absolute; inset: -30%; background: conic-gradient(from 210deg at 50% 10%, transparent 0deg, rgba(196,23,38,0.18) 22deg, transparent 52deg, rgba(255,150,80,0.10) 96deg, transparent 130deg); filter: blur(6px); opacity: 0.9; }
+    #s3-van { position: absolute; inset: 0; background: radial-gradient(circle at 50% 54%, transparent 26%, #05050A 78%); }
+    #s3-corridor { position: absolute; inset: 0; transform-style: preserve-3d; }
+    .monolith {
+      position: absolute; top: 176px; width: 424px; height: 690px; border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14); background: #0A0A10;
+      box-shadow: 0 60px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05), inset 0 0 60px rgba(0,0,0,0.6);
       will-change: transform, opacity;
     }
-    .q-cream { background: #F4EFE6; color: #0B0B0F; }
-    .q-obsidian { background: #0E0F15; color: #F6F3EC; }
-    .q-crimson { background: linear-gradient(135deg, #22090E, #0D0B10); color: #F6F3EC; border-color: rgba(210,31,43,0.45); }
-    .q-slate { background: #10131C; color: #F6F3EC; }
-    .reel-frame {
-      width: 248px;
-      height: 440px;
-      border-radius: 22px;
-      overflow: hidden;
-      background: #050507;
-      border: 2px solid rgba(255,255,255,0.18);
-      box-shadow: 0 22px 48px rgba(0,0,0,0.45);
-      flex-shrink: 0;
-      position: relative;
-    }
-    .q-cream .reel-frame { border-color: rgba(11,11,15,0.2); }
-    .reel-frame video, .reel-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .monolith video, .monolith img.seq { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+    .monolith .grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,4,8,0.92) 0%, rgba(4,4,8,0.18) 34%, rgba(4,4,8,0) 60%); }
+    .monolith .cap { position: absolute; left: 20px; bottom: 22px; right: 20px; }
+    .monolith .cap .n { font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.3em; color: #FF8A93; }
+    .monolith .cap .t { margin-top: 8px; font-size: 25px; font-weight: 800; color: #F7F3EA; letter-spacing: -0.01em; }
+    .monolith .cap .m { margin-top: 6px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; color: #A49C90; letter-spacing: 0.12em; }
+    .monolith .edge { position: absolute; inset: 0; border-radius: 18px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10); }
+    #mon-0 { left: 214px; } #mon-1 { left: 748px; } #mon-2 { left: 1272px; }
+
+    #s3-mosaic { position: absolute; inset: 0; display: none; }
+    #s3-mosaic .mgrid { position: absolute; left: 150px; top: 168px; width: 1620px; height: 700px; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; }
+    #s3-mosaic .mgrid .mt { position: relative; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: #0B0B11; }
+    #s3-mosaic .mgrid .mt img { width: 100%; height: 100%; object-fit: cover; opacity: 0.95; }
+    #s3-mosaic .mgrid .mt .ml { position: absolute; left: 14px; bottom: 12px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.14em; color: #EDE7DB; background: rgba(5,5,9,0.78); padding: 7px 10px; border-radius: 6px; }
+    #s3-mosaic .mgrid .mt.span2 { grid-column: span 2; }
     #s3-center-pill {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%) scale(0.7);
-      background: rgba(9, 9, 13, 0.94);
-      border: 2px solid #D21F2B;
-      color: #FFFFFF;
-      padding: 20px 42px;
-      border-radius: 999px;
-      box-shadow: 0 26px 70px rgba(0,0,0,0.82), 0 0 40px rgba(210,31,43,0.45);
-      z-index: 40;
-      opacity: 0;
-      white-space: nowrap;
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 20;
+      padding: 22px 42px; border-radius: 999px; background: rgba(7,7,12,0.88);
+      border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(10px);
+      font-family: 'PlexMonoLocal', monospace; font-size: 19px; letter-spacing: 0.26em; color: #FBF7EF;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.7);
+    }
+    #s3-center-pill i { font-style: normal; color: #E01B2B; }
+
+    /* ---------- BEAT 04 : WEB Z-TUNNEL ---------- */
+    #s4 { background: radial-gradient(circle at 50% 46%, rgba(40,40,70,0.55), #05050A 72%); perspective: 1200px; perspective-origin: 50% 46%; }
+    #s4-tunnel { position: absolute; inset: 0; transform-style: preserve-3d; }
+    .tunnel-ring {
+      position: absolute; left: 50%; top: 46%; width: 1500px; height: 860px; margin-left: -750px; margin-top: -430px;
+      border: 1px solid rgba(140,150,255,0.16); border-radius: 22px; transform-style: preserve-3d;
+    }
+    #s4-shutter { position: absolute; inset: 0; }
+    .s4-speed { position: absolute; left: 50%; top: 46%; width: 2px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.55), transparent); transform-origin: 50% 0; }
+    .slidepane {
+      position: absolute; left: 190px; top: 132px; width: 1540px; height: 816px; border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.16); background: #0A0A11;
+      box-shadow: 0 70px 140px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.05);
+      will-change: transform, opacity; display: none;
+    }
+    .chrome { position: absolute; left: 0; right: 0; top: 0; height: 46px; background: #15151D; border-bottom: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; gap: 10px; padding: 0 18px; }
+    .chrome .d { width: 11px; height: 11px; border-radius: 50%; background: #3A3A46; }
+    .chrome .d.r { background: #E01B2B; }
+    #s4-url { margin-left: 16px; font-family: 'PlexMonoLocal', monospace; font-size: 13px; color: #9E97A8; letter-spacing: 0.04em; }
+    .pane-body { position: absolute; inset: 46px 0 0 0; }
+
+    /* slide 0 — portfolio */
+    #wslide-0 .pane-body { display: grid; grid-template-columns: 1.15fr 1fr; background: #F4EFE6; color: #0B0B10; }
+    #wslide-0 .left { padding: 44px 40px; }
+    #wslide-0 .left .k { font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.26em; color: #7A736A; }
+    #wslide-0 .left h3 { font-family: 'AntonLocal', sans-serif; font-size: 86px; line-height: 0.9; margin-top: 16px; letter-spacing: 0.01em; }
+    #wslide-0 .left p { margin-top: 20px; font-size: 17px; line-height: 1.5; color: #4C4740; max-width: 430px; }
+    #wslide-0 .left .chips { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+    #wslide-0 .left .chip { padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(11,11,16,0.16); font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.1em; color: #38332D; }
+    #wslide-0 .right { position: relative; overflow: hidden; }
+    #wslide-0 .right img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* slide 1 — maya agent */
+    #wslide-1 .pane-body { display: grid; grid-template-columns: 1fr 1.25fr; background: #07070C; color: #E9E4DA; }
+    #wslide-1 .left { padding: 38px 34px; border-right: 1px solid rgba(255,255,255,0.08); }
+    #wslide-1 .left .k { font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.26em; color: #7E86FF; }
+    #wslide-1 .left h3 { font-family: 'AntonLocal', sans-serif; font-size: 62px; line-height: 0.94; margin-top: 14px; }
+    #wslide-1 .left .row { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; color: #A9A2B4; letter-spacing: 0.1em; }
+    #wslide-1 .left .row .pulse { width: 8px; height: 8px; border-radius: 50%; background: #34D399; box-shadow: 0 0 14px #34D399; }
+    #wslide-1 .console { padding: 34px 36px; font-family: 'PlexMonoLocal', monospace; font-size: 14px; line-height: 2.05; color: #B9B2C6; }
+    #wslide-1 .console .ok { color: #4ADE80; } #wslide-1 .console .warn { color: #FBBF24; } #wslide-1 .console .dim { color: #6C657C; }
+    #wslide-1 .console .k { color: #93A0FF; }
+
+    /* slide 2 — storefront */
+    #wslide-2 .pane-body { background: linear-gradient(160deg, #0B0B12, #07070C 60%); color: #F2EDE3; padding: 34px 40px; }
+    #wslide-2 .topbar { display: flex; justify-content: space-between; align-items: center; }
+    #wslide-2 .topbar .brand { font-family: 'AntonLocal', sans-serif; font-size: 30px; letter-spacing: 0.04em; }
+    #wslide-2 .topbar .brand span { color: #E01B2B; }
+    #wslide-2 .topbar .nav { display: flex; gap: 26px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.16em; color: #9C958A; }
+    #wslide-2 .hero-line { margin-top: 26px; font-size: 46px; font-weight: 800; letter-spacing: -0.02em; }
+    #wslide-2 .hero-line em { font-style: normal; color: #E01B2B; }
+    #wslide-2 .prods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+    #wslide-2 .prod { border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #101018; position: relative; height: 268px; }
+    #wslide-2 .prod img { width: 100%; height: 100%; object-fit: cover; opacity: 0.94; }
+    #wslide-2 .prod .pl { position: absolute; left: 12px; bottom: 10px; font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.1em; background: rgba(5,5,9,0.82); padding: 6px 9px; border-radius: 5px; }
+    #s4-cta {
+      position: absolute; left: 300px; bottom: 62px; padding: 20px 34px; border-radius: 12px;
+      background: linear-gradient(120deg, #E01B2B, #FF5566); color: #FFF; font-size: 20px; font-weight: 800;
+      box-shadow: 0 24px 60px rgba(224,27,43,0.45); letter-spacing: 0.01em;
     }
 
-    /* ================= BEAT 04: 3D SIGNATURE WEB FLYOVER ================= */
-    #s4 {
-      background:
-        radial-gradient(circle at 20% 25%, rgba(210,31,43,0.2), transparent 50%),
-        radial-gradient(circle at 82% 78%, rgba(65,105,225,0.14), transparent 52%),
-        #07070A;
-      color: #F6F3EC;
-      perspective: 1500px;
-    }
-    #s4-browser {
-      position: absolute;
-      left: 190px;
-      top: 135px;
-      width: 1540px;
-      height: 830px;
-      background: #0F1016;
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: 0 50px 120px rgba(0,0,0,0.82), 0 0 60px rgba(210,31,43,0.18);
-      overflow: hidden;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-    .b-chrome {
-      height: 58px;
-      background: #171821;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-      gap: 18px;
-    }
-    .b-dots { display: flex; gap: 9px; }
-    .b-dots span { width: 13px; height: 13px; border-radius: 50%; }
-    .b-url {
-      flex: 1;
-      max-width: 680px;
-      margin: 0 auto;
-      background: #0C0D12;
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 10px;
-      padding: 8px 20px;
-      text-align: center;
-      color: #C9C5BC;
-      font-size: 15px;
-    }
-    .web-slide {
-      position: absolute;
-      left: 0; right: 0; top: 58px; bottom: 0;
-      padding: 44px 54px;
-      display: none;
-    }
-
-    /* ================= BEAT 05: CLIENT VAULT & 4-RAIL UNLOCK ================= */
-    #s5 {
-      background:
-        radial-gradient(circle at 70% 35%, rgba(16,185,129,0.12), transparent 52%),
-        radial-gradient(circle at 25% 65%, rgba(210,31,43,0.18), transparent 52%),
-        #07070A;
-      color: #F6F3EC;
-      padding: 68px 88px;
-    }
-    #s5-vault {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: 1.08fr 1fr;
-      gap: 34px;
-      height: 760px;
-    }
-    .vault-pane {
-      background: rgba(16, 17, 24, 0.95);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 28px;
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-    }
-    .rail-item {
-      padding: 20px 24px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.09);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* ---------- BEAT 05 : VAULT ---------- */
+    #s5 { background: radial-gradient(circle at 72% 40%, rgba(16,185,129,0.10), transparent 52%), radial-gradient(circle at 22% 60%, rgba(196,23,38,0.14), transparent 56%), #06060B; }
+    #s5-grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 90px 90px; opacity: 0.7; }
+    #s5-head { position: absolute; left: 92px; top: 74px; }
+    #s5-head .k { font-family: 'PlexMonoLocal', monospace; font-size: 14px; letter-spacing: 0.36em; color: #6EE7B7; }
+    #s5-head h2 { margin-top: 14px; font-family: 'AntonLocal', sans-serif; font-size: 66px; color: #F7F3EA; line-height: 0.94; }
+    #s5-head h2 em { font-style: normal; color: #34D399; }
+    #s5-rails { position: absolute; left: 92px; top: 300px; width: 780px; display: flex; flex-direction: column; gap: 20px; }
+    .rail {
+      position: relative; height: 118px; border-radius: 16px; padding: 20px 26px;
+      background: rgba(16,16,24,0.86); border: 1px solid rgba(255,255,255,0.10);
+      display: flex; align-items: center; gap: 20px; overflow: hidden;
       transition: none;
     }
-    .rail-item.active {
-      background: rgba(210,31,43,0.16);
-      border-color: #FF4754;
-      box-shadow: 0 12px 32px rgba(210,31,43,0.22);
+    .rail .ic { width: 54px; height: 54px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'PlexMonoLocal', monospace; font-size: 15px; color: #0A0A10; background: #8E877C; font-weight: 700; }
+    .rail .tx .t { font-size: 22px; font-weight: 800; color: #EDE7DC; }
+    .rail .tx .s { margin-top: 5px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.14em; color: #8B847A; }
+    .rail .st { margin-left: auto; font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.14em; color: #6E675E; }
+    .rail .bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #10B981, #6EE7B7); }
+    .rail.active { border-color: rgba(52,211,153,0.55); box-shadow: 0 0 40px rgba(16,185,129,0.22), inset 0 0 30px rgba(16,185,129,0.06); }
+    .rail.active .ic { background: #34D399; }
+    .rail.active .st { color: #6EE7B7; }
+
+    #s5-door { position: absolute; right: 96px; top: 138px; width: 700px; height: 700px; }
+    #s5-ring-svg { position: absolute; inset: 0; }
+    #s5-door-core {
+      position: absolute; left: 50%; top: 50%; width: 300px; height: 300px; margin: -150px 0 0 -150px; border-radius: 50%;
+      background: radial-gradient(circle at 44% 38%, rgba(52,211,153,0.20), rgba(8,10,14,0.96) 62%);
+      border: 1px solid rgba(110,231,183,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 0 90px rgba(16,185,129,0.22), inset 0 0 60px rgba(0,0,0,0.7);
     }
+    #s5-door-core .lk { font-size: 52px; }
+    #s5-door-core .lb { margin-top: 10px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.26em; color: #6EE7B7; }
     #s5-unlock-btn {
-      width: 100%;
-      padding: 24px 32px;
-      border-radius: 18px;
-      background: linear-gradient(90deg, #D21F2B, #F03240);
-      color: #FFF;
-      font-size: 23px;
-      font-weight: 800;
-      text-align: center;
-      box-shadow: 0 20px 48px rgba(210,31,43,0.42);
+      position: absolute; left: 1050px; bottom: 116px; padding: 24px 40px; border-radius: 14px;
+      background: linear-gradient(120deg, #E01B2B, #FF4D5A); color: #FFF; font-size: 21px; font-weight: 800;
+      box-shadow: 0 28px 70px rgba(224,27,43,0.42); border: 1px solid rgba(255,255,255,0.18);
     }
-    #s5-unlock-btn.unlocked {
-      background: linear-gradient(90deg, #059669, #10B981);
-      box-shadow: 0 20px 54px rgba(16,185,129,0.5);
+    #s5-unlock-btn.unlocked { background: linear-gradient(120deg, #059669, #34D399); box-shadow: 0 28px 70px rgba(16,185,129,0.45); color: #04231A; }
+    #s5-badge {
+      position: absolute; left: 1050px; bottom: 214px; padding: 11px 18px; border-radius: 999px;
+      background: rgba(224,27,43,0.18); border: 1px solid #FF4754; color: #FF9AA2;
+      font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.2em;
     }
+    #s5-watermark { position: absolute; inset: 0; pointer-events: none; }
+    #s5-wm-ribbon { position: absolute; right: 0; bottom: 0; width: 780px; height: 420px; background: rgba(7,7,10,0.68); display: flex; align-items: center; justify-content: center; }
+    #s5-wm-pill { padding: 16px 26px; border-radius: 12px; background: rgba(12,12,18,0.92); border: 1px solid rgba(255,255,255,0.22); font-family: 'PlexMonoLocal', monospace; font-size: 14px; letter-spacing: 0.2em; color: #D9D2C6; }
+    #s5-files { position: absolute; left: 92px; bottom: 78px; display: flex; gap: 46px; font-family: 'PlexMonoLocal', monospace; font-size: 13px; color: #7E776E; letter-spacing: 0.1em; }
+    #s5-files b { display: block; margin-top: 7px; font-size: 19px; color: #EDE7DC; letter-spacing: 0.04em; }
+    #s5-burst { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: rgba(52,211,153,0.9); opacity: 0; }
 
-    /* ================= BEAT 06: FINALE SIGNATURE LOCKUP ================= */
-    #s6 {
-      background:
-        radial-gradient(circle at 50% 44%, rgba(210,31,43,0.25), rgba(7,7,10,0.98) 62%),
-        #060609;
-      color: #F6F3EC;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+    /* ---------- BEAT 06 : FINALE ---------- */
+    #s6 { background: #05050A; align-items: center; justify-content: center; }
+    #s6-bloom { position: absolute; left: 50%; top: 46%; width: 1700px; height: 1000px; margin: -500px 0 0 -850px; background: radial-gradient(ellipse at center, rgba(196,23,38,0.26), rgba(120,20,40,0.10) 42%, transparent 68%); filter: blur(4px); }
+    #s6-core { position: absolute; left: 0; right: 0; top: 300px; text-align: center; }
+    #s6-kicker { font-family: 'PlexMonoLocal', monospace; font-size: 15px; letter-spacing: 0.46em; color: #FF8A93; }
+    #s6-title { margin-top: 26px; font-family: 'AntonLocal', sans-serif; font-size: 158px; color: #FBF7EF; line-height: 0.9; letter-spacing: 0.01em; }
+    #s6-title sup { font-size: 44px; vertical-align: super; letter-spacing: 0; color: #E01B2B; }
+    #s6-sub { margin-top: 22px; font-size: 27px; font-weight: 800; letter-spacing: 0.44em; color: #C7C0B4; }
+    #s6-rule { margin: 40px auto 0; width: 0px; height: 2px; background: linear-gradient(90deg, transparent, #E01B2B, transparent); }
+    #s6-sig-wrap { position: absolute; left: 50%; bottom: 196px; width: 460px; margin-left: -230px; height: 132px; overflow: hidden; clip-path: inset(0 100% 0 0); }
+    #s6-sig { width: 100%; height: 100%; object-fit: contain; filter: invert(1) brightness(1.7); opacity: 0.94; }
+    #s6-handle { position: absolute; left: 50%; bottom: 132px; transform: translateX(-50%); font-family: 'PlexMonoLocal', monospace; font-size: 15px; letter-spacing: 0.24em; color: #8F887E; }
+    #s6-tags { position: absolute; left: 0; right: 0; bottom: 74px; display: flex; justify-content: center; gap: 34px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.22em; color: #6E675E; }
 
-    /* ================= OVERSIZED CURSOR (7cqw = 134px @ 1920) ================= */
-    #cursor-layer {
-      position: absolute;
-      left: 0; top: 0;
-      z-index: 90;
-      pointer-events: none;
-      opacity: 0;
-      will-change: transform, opacity;
-    }
-    #click-ring {
-      position: absolute;
-      left: 0; top: 0;
-      width: 110px; height: 110px;
-      margin-left: -55px; margin-top: -55px;
-      border-radius: 50%;
-      border: 4px solid #FF3B49;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 89;
-    }
+    /* ---------- GLOBAL CINEMA FX ---------- */
+    #fx-canvas { position: absolute; inset: 0; z-index: 60; pointer-events: none; mix-blend-mode: screen; }
+    #rays { position: absolute; left: 50%; top: 20%; width: 2600px; height: 2600px; margin-left: -1300px; margin-top: -1300px; z-index: 59; pointer-events: none; mix-blend-mode: screen; opacity: 0; background: conic-gradient(from 0deg, transparent 0deg, rgba(255,80,95,0.22) 6deg, transparent 14deg, transparent 40deg, rgba(255,150,90,0.14) 48deg, transparent 58deg, transparent 96deg, rgba(255,80,95,0.18) 104deg, transparent 114deg); filter: blur(10px); }
+    #flare { position: absolute; left: 0; top: 0; width: 2200px; height: 3px; z-index: 61; pointer-events: none; mix-blend-mode: screen; opacity: 0; background: linear-gradient(90deg, transparent, rgba(120,200,255,0.55) 24%, rgba(255,255,255,0.95) 50%, rgba(255,140,150,0.6) 74%, transparent); box-shadow: 0 0 40px rgba(150,210,255,0.55); }
+    #eq { position: absolute; left: 0; right: 0; bottom: 74px; height: 150px; z-index: 62; display: flex; align-items: flex-end; justify-content: center; gap: 7px; pointer-events: none; opacity: 0; }
+    #eq i { width: 9px; height: 8px; border-radius: 3px 3px 0 0; background: linear-gradient(to top, rgba(224,27,43,0.95), rgba(255,150,110,0.95)); box-shadow: 0 0 16px rgba(224,27,43,0.5); }
+    #scan { position: absolute; inset: 0; z-index: 63; pointer-events: none; opacity: 0.16; background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.055) 0 1px, transparent 1px 4px); }
+    #grain { position: absolute; inset: 0; z-index: 64; pointer-events: none; opacity: 0.34; mix-blend-mode: overlay;
+      background-image: radial-gradient(rgba(255,255,255,0.85) 0.5px, transparent 0.6px), radial-gradient(rgba(0,0,0,0.7) 0.5px, transparent 0.6px);
+      background-size: 3px 3px, 4px 4px; background-position: 0 0, 1px 2px; }
+    #vignette { position: absolute; inset: 0; z-index: 65; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 46%, rgba(0,0,0,0.62) 100%); }
+    #bars { position: absolute; inset: 0; z-index: 66; pointer-events: none; }
+    #bars .b { position: absolute; left: 0; right: 0; height: 0px; background: #05050A; }
+    #bars .b.t { top: 0; } #bars .b.b { bottom: 0; }
+    #hud { position: absolute; inset: 0; z-index: 67; pointer-events: none; font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.2em; color: rgba(240,234,222,0.55); }
+    #hud .tl { position: absolute; left: 54px; top: 46px; }
+    #hud .tr { position: absolute; right: 54px; top: 46px; color: #FF8A93; }
+    #hud .bl { position: absolute; left: 54px; bottom: 44px; }
+    #hud .br { position: absolute; right: 54px; bottom: 44px; }
+    #progress-track { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(255,255,255,0.08); z-index: 90; }
+    #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #C41726, #FF8A93); box-shadow: 0 0 20px rgba(224,27,43,0.9); }
 
-    /* Live interactive play overlay (hidden automatically in ?headless=1) */
-    #live-controls {
-      position: fixed;
-      right: 24px;
-      top: 24px;
-      z-index: 200;
-      display: flex;
-      gap: 10px;
-    }
-    .ctrl-btn {
-      background: rgba(12,12,18,0.88);
-      color: #F6F3EC;
-      border: 1px solid rgba(210,31,43,0.6);
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-family: 'PlexMonoLocal', monospace;
-      font-size: 13px;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-    }
+    #cursor-layer { position: absolute; left: 0; top: 0; z-index: 85; width: 0; height: 0; opacity: 0; }
+    #cursor-layer .body { position: absolute; left: 0; top: 0; width: 46px; height: 46px; transform: translate(-6px, -4px); }
+    #click-ring { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 3px solid #FF3B49; z-index: 86; opacity: 0; pointer-events: none; }
+
+    #live-controls { position: fixed; left: 26px; bottom: 26px; z-index: 999; display: flex; gap: 12px; }
+    .ctrl-btn { padding: 13px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(10,10,16,0.86); color: #F2EDE3; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.16em; cursor: pointer; }
+    .ctrl-btn:hover { background: rgba(224,27,43,0.22); border-color: #FF5566; }
     body.headless #live-controls { display: none !important; }
   </style>
 </head>
 <body>
-  <div id="live-controls">
-    <button class="ctrl-btn" id="btn-play">▶ REPLAY WITH SOUND (60FPS)</button>
-  </div>
-
   <div id="viewport">
     <div id="stage">
-      <!-- ==================== BEAT 01: HOOK ==================== -->
+
+      <!-- ================= BEAT 01 ================= -->
       <section class="scene" id="s1">
         <div id="s1-cream">
-          <div class="grid-lines"></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:4;">
-            <span class="mono" style="font-size:19px;font-weight:700;">MONARCH® STUDIO // ADIL CHANDIO</span>
-            <span class="mono" style="font-size:18px;color:#555;">PORTFOLIO v37 · EST. MARCH 2024</span>
+          <div id="s1-grid"></div>
+          <div id="s1-top" class="mono"><span>MONARCH® STUDIO</span><span>SHOWREEL 2026 · 1080P60</span></div>
+          <div id="s1-kicker" class="mono">Independent design &amp; film practice · Hyderabad, PK</div>
+          <div id="s1-h1" class="display">
+            <span class="ln"><span id="w0">PROOF</span></span>
+            <span class="ln"><span id="w1" class="red">OVER</span></span>
+            <span class="ln"><span id="w2">PROMISES</span></span>
           </div>
+          <img id="s1-portrait" src="./../proof/portrait-masked.png" alt="" />
+          <div id="s1-cta"><span class="dot"></span><span>See the real numbers</span></div>
+          <div id="s1-foot" class="mono"><span>583,290 REAL VIEWS</span><span>92.5% PEAK RETENTION</span><span>ZERO BOUGHT NUMBERS</span></div>
 
-          <div style="position:relative;z-index:4;max-width:1180px;margin:20px 0;">
-            <div class="mono" style="font-size:21px;color:#D21F2B;margin-bottom:18px;font-weight:700;">01 // INDUSTRY REALITY CHECK</div>
-            <h1 class="display" id="s1-h1" style="font-size:138px;color:#0B0B0F;">
-              MOST AGENCIES SELL<br/>GENERIC AI TEMPLATES.
-            </h1>
-            <p style="font-size:30px;font-weight:700;color:#333;margin-top:24px;">
-              Stock clips. Robotic copy. Zero retention proof.
-            </p>
-          </div>
-
-          <div id="s1-cta">
-            <span class="dot"></span>
-            <span>SHOW VERIFIED MONARCH® PROOF</span>
-            <span style="color:#FF6470;">↗</span>
-          </div>
-
-          <img id="s1-portrait" src="/proof/portrait-masked.png" alt="Adil Chandio Monarch" />
-        </div>
-
-        <div id="s1-obsidian">
-          <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:4;">
-            <span class="mono" style="font-size:19px;color:#FF6B76;">MONARCH® PRODUCTION ENGINE // ACTIVE</span>
-            <span class="mono" style="font-size:18px;color:#A29E96;">60FPS CODE MOTION · REAL METRICS</span>
-          </div>
-
-          <div style="position:relative;z-index:4;max-width:1200px;">
-            <div class="mono" style="font-size:22px;color:#FF5260;margin-bottom:16px;">VERIFIED TRACK RECORD // NOT PROMISES</div>
-            <h2 class="display" style="font-size:142px;color:#FFFFFF;">
-              WE SHIP SYSTEMS<br/><span style="color:#FF3B49;">THAT HOLD EYES.</span>
-            </h2>
-            <div style="display:flex;gap:18px;margin-top:30px;">
-              <div class="mono" style="padding:14px 24px;border-radius:12px;background:rgba(210,31,43,0.22);border:1px solid #FF4754;font-size:20px;color:#FFF;">583,290 VIEWS (1 SHORT)</div>
-              <div class="mono" style="padding:14px 24px;border-radius:12px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);font-size:20px;color:#FFF;">80.5% VIEWED VS SWIPED</div>
-              <div class="mono" style="padding:14px 24px;border-radius:12px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);font-size:20px;color:#FFF;">92.5% PEAK RETENTION</div>
+          <div id="s1-obsidian">
+            <div id="s1-redslash"></div>
+            <div id="s1-obs-kicker" class="mono">YOUTUBE STUDIO · UNEDITED CAPTURE</div>
+            <div id="s1-bignum" class="display"><span id="s1-bignum-v">0</span><span class="ghost" id="s1-bignum-g">0</span></div>
+            <div id="s1-obs-sub">Nobody asked for another pitch deck. <b>They asked for numbers.</b></div>
+            <div id="s1-obs-meta" class="mono">
+              <div>VIEWS<b id="m-views">0</b></div>
+              <div>VIEWED VS SWIPED<b>80.5%</b></div>
+              <div>PEAK RETENTION<b>92.5%</b></div>
             </div>
+            <img id="s1-portrait-dark" src="./../proof/portrait-masked.png" alt="" />
           </div>
-
-          <div class="mono" style="font-size:18px;color:#8E8A82;position:relative;z-index:4;">
-            ADIL CHANDIO · WEBSITES · HIGH-RETENTION FILMS · AI AUTOMATION
-          </div>
-          <img id="s1-portrait-dark" src="/proof/portrait-masked.png" alt="Adil Masked" />
         </div>
       </section>
 
-      <!-- ==================== BEAT 02: DECK-DEAL PROOF WALL ==================== -->
+      <!-- ================= BEAT 02 ================= -->
       <section class="scene" id="s2">
-        <div id="s2-header">
-          <div>
-            <div class="mono" style="color:#FF5B67;font-size:19px;">02 // YOUTUBE STUDIO ANALYTICS · UNEDITED PROOF</div>
-            <h2 class="display" style="font-size:74px;margin-top:6px;">NUMBERS YOU CAN AUDIT.</h2>
-          </div>
-          <div class="mono" style="font-size:20px;color:#B8B4AC;background:rgba(255,255,255,0.06);padding:12px 22px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);">
-            RETENTION-ENGINEERED STORYTELLING
-          </div>
-        </div>
-
+        <div id="s2-floor"></div>
         <div id="s2-camera">
-          <div id="s2-board">
-            <!-- Card 0: Hero KPI + Live SVG Retention Curve -->
-            <div class="proof-card hero-kpi" id="pcard-0">
-              <div class="bracket b-tl"></div><div class="bracket b-tr"></div>
-              <div class="bracket b-bl"></div><div class="bracket b-br"></div>
-              <div>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                  <span class="mono" style="color:#FF6672;font-size:17px;">SINGLE SHORT BREAKOUT</span>
-                  <span class="mono" id="lock-tag" style="opacity:0;background:#FF3B49;color:#FFF;padding:5px 12px;border-radius:6px;font-size:14px;font-weight:700;">LOCKED PROOF</span>
-                </div>
-                <div class="display" id="kpi-views" style="font-size:126px;color:#FFF;margin-top:10px;">0</div>
-                <div style="font-size:25px;color:#D8D4CC;font-weight:700;">Organic Views · +1,600 Subscribers</div>
-              </div>
-
-              <div style="margin:18px 0;background:rgba(0,0,0,0.42);border-radius:18px;padding:22px;border:1px solid rgba(255,255,255,0.08);">
-                <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
-                  <span class="mono" style="font-size:15px;color:#AAA;">AUDIENCE RETENTION CURVE</span>
-                  <span class="mono" style="font-size:17px;color:#34D399;font-weight:700;">80.5% STAYED · 74.4% @ 0:40</span>
-                </div>
-                <svg viewBox="0 0 560 180" width="100%" height="175">
-                  <defs>
-                    <linearGradient id="retGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#FF3B49" stop-opacity="0.48"/>
-                      <stop offset="100%" stop-color="#FF3B49" stop-opacity="0.0"/>
-                    </linearGradient>
-                  </defs>
-                  <line x1="0" y1="45" x2="560" y2="45" stroke="rgba(255,255,255,0.1)" stroke-dasharray="6 6"/>
-                  <line x1="0" y1="95" x2="560" y2="95" stroke="rgba(255,255,255,0.1)" stroke-dasharray="6 6"/>
-                  <line x1="0" y1="145" x2="560" y2="145" stroke="rgba(255,255,255,0.1)" stroke-dasharray="6 6"/>
-                  <path id="ret-area" d="M0,18 C95,24 190,34 290,46 C390,56 475,64 560,72 L560,175 L0,175 Z" fill="url(#retGrad)" opacity="0"/>
-                  <path id="ret-line" d="M0,18 C95,24 190,34 290,46 C390,56 475,64 560,72" fill="none" stroke="#FF4754" stroke-width="6" stroke-linecap="round" stroke-dasharray="650" stroke-dashoffset="650"/>
-                </svg>
-              </div>
-
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span class="mono" style="font-size:16px;color:#9CA3AF;">SWIPE-AWAY ONLY 19.5%</span>
-                <span class="mono" style="font-size:16px;color:#34D399;">TOP 1% SHORTS BENCHMARK ✓</span>
-              </div>
+          <div class="card" id="pcard-0">
+            <div class="lbl mono">CHANNEL REACH · ALL TIME</div>
+            <div class="num display" id="kpi-views">0</div>
+            <div class="unit mono">VERIFIED VIEWS · NOT AN ESTIMATE</div>
+            <div class="divider"></div>
+            <div id="retwrap">
+              <div class="cap mono">RETENTION CURVE · LAST 90 DAYS</div>
+              <svg width="638" height="210" viewBox="0 0 638 210" fill="none">
+                <defs>
+                  <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#E01B2B" stop-opacity="0.42" />
+                    <stop offset="100%" stop-color="#E01B2B" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+                  <line x1="0" y1="52" x2="638" y2="52" /><line x1="0" y1="104" x2="638" y2="104" /><line x1="0" y1="156" x2="638" y2="156" />
+                </g>
+                <path id="ret-area" d="M0 168 C 70 44, 120 30, 190 48 C 260 66, 300 88, 380 96 C 460 104, 520 118, 638 138 L638 210 L0 210 Z" fill="url(#ag)" opacity="0" />
+                <path id="ret-line" d="M0 168 C 70 44, 120 30, 190 48 C 260 66, 300 88, 380 96 C 460 104, 520 118, 638 138" stroke="#FF4D5A" stroke-width="4" stroke-linecap="round" stroke-dasharray="650" stroke-dashoffset="650" />
+              </svg>
             </div>
-
-            <!-- Card 1: Real Screenshot proof-1.jpg -->
-            <div class="proof-card" id="pcard-1">
-              <div class="mono" style="font-size:15px;color:#FF7580;">RAW STUDIO CAPTURE #01</div>
-              <img class="proof-ss" src="/proof/proof-1.jpg" alt="583.2K Proof" />
-              <div style="display:flex;justify-content:space-between;align-items:baseline;">
-                <b style="font-size:30px;">583.2K Views</b>
-                <span class="mono" style="color:#34D399;font-size:17px;">74.4% AVP</span>
-              </div>
-            </div>
-
-            <!-- Card 2: Real Screenshot proof-2.jpg -->
-            <div class="proof-card" id="pcard-2">
-              <div class="mono" style="font-size:15px;color:#FF7580;">SUBSCRIBER VELOCITY #02</div>
-              <img class="proof-ss" src="/proof/proof-2.jpg" alt="+1.6K Subs Proof" />
-              <div style="display:flex;justify-content:space-between;align-items:baseline;">
-                <b style="font-size:30px;">+1,600 Subs</b>
-                <span class="mono" style="color:#34D399;font-size:17px;">SINGLE UPLOAD</span>
-              </div>
-            </div>
-
-            <!-- Card 3: Real Screenshot proof-5.jpg -->
-            <div class="proof-card" id="pcard-3">
-              <div class="mono" style="font-size:15px;color:#FF7580;">PEAK HOLD PROOF #03</div>
-              <img class="proof-ss" src="/proof/proof-5.jpg" alt="92.5% Retention Proof" />
-              <div style="display:flex;justify-content:space-between;align-items:baseline;">
-                <b style="font-size:30px;">92.5% Retention</b>
-                <span class="mono" style="color:#34D399;font-size:17px;">16.6K VIEWS</span>
-              </div>
-            </div>
-
-            <!-- Card 4: Audio & Pacing Spec -->
-            <div class="proof-card" id="pcard-4" style="background:linear-gradient(145deg,#171926,#0E1018);">
-              <div class="mono" style="font-size:15px;color:#60A5FA;">BROADCAST ENGINEERING</div>
-              <div class="display" style="font-size:74px;color:#FFF;">-14 LUFS</div>
-              <div style="font-size:21px;color:#C8C4BC;line-height:1.4;">
-                Frame-locked cuts · True Peak ≤ -1.5 dBTP · 17-Gate Automated QC
-              </div>
-              <div class="mono" style="color:#60A5FA;font-size:16px;">MONARCH-STUDIO ENGINE v2</div>
-            </div>
+            <div class="foot"><span>SAMPLE · 41 UPLOADS</span><span><b>NO PURCHASED TRAFFIC</b></span></div>
+            <div class="bracket tl"></div><div class="bracket tr"></div><div class="bracket bl"></div><div class="bracket br"></div>
+            <div id="lock-tag">PROOF LOCKED</div>
           </div>
+          <div class="card pcard-sm" id="pcard-1"><img src="./../proof/proof-1.jpg" alt="" /><div class="tag">STUDIO: VIEWS REALITY</div></div>
+          <div class="card pcard-sm" id="pcard-2"><img src="./../proof/proof-2.jpg" alt="" /><div class="tag">CTR · IMPRESSIONS</div></div>
+          <div class="card pcard-sm" id="pcard-3"><img src="./../proof/proof-5.jpg" alt="" /><div class="tag">WATCH TIME · 92.5%</div></div>
+          <div class="card pcard-sm" id="pcard-4"><img src="./../proof/proof-loop.web.mp4" alt="" style="display:none" /><img src="./../proof/work-film.jpg" alt="" /><div class="tag">SHORTS LOOP · 41 FILMS</div></div>
+          <div id="s2-header">
+            <div class="k mono">BEAT 02 · THE PROOF DECK</div>
+            <h2 class="display">NUMBERS <em>OR IT DIDN'T HAPPEN</em></h2>
+          </div>
+          <div id="s2-footer">SCREENSHOTS · YOUTUBE STUDIO · UNEDITED</div>
         </div>
       </section>
 
-      <!-- ==================== BEAT 03: QUAD-SPLIT REAL FILMS ==================== -->
+      <!-- ================= BEAT 03 ================= -->
       <section class="scene" id="s3">
-        <div id="s3-grid">
-          <!-- Q1: Portfolio v37 Intro Film -->
-          <div class="q-cell q-cream" id="qcell-0">
-            <div style="max-width:540px;padding-right:20px;">
-              <div class="mono" style="font-size:16px;color:#D21F2B;font-weight:700;">FILM 01 // EDITORIAL MOTION</div>
-              <h3 class="display" style="font-size:66px;margin:10px 0 14px;color:#0B0B0F;">PORTFOLIO<br/>INTRO REEL</h3>
-              <p style="font-size:22px;font-weight:700;color:#333;line-height:1.35;">
-                Geometric crosshair motion, 3D isometric typography &amp; mixed-media collage.
-              </p>
-              <div class="mono" style="margin-top:20px;font-size:16px;color:#111;background:rgba(0,0,0,0.08);padding:8px 16px;border-radius:8px;width:fit-content;">
-                28s · KINETIC IDENTITY
-              </div>
-            </div>
-            <div class="reel-frame">
-              <video id="vid-intro" src="/proof/intro.mp4" muted loop playsinline preload="auto"></video>
-              <img id="seq-intro" style="display:none;" alt="" />
-            </div>
+        <div id="s3-beams"></div>
+        <div id="s3-van"></div>
+        <div id="s3-corridor">
+          <div class="monolith" id="mon-0">
+            <video id="vid-intro" src="./../proof/intro.mp4" muted loop playsinline></video>
+            <img class="seq" id="seq-intro" alt="" />
+            <div class="grad"></div>
+            <div class="cap"><div class="n">FILM 01</div><div class="t">Portfolio Intro</div><div class="m">SELF-BRAND · 60FPS</div></div>
+            <div class="edge"></div>
           </div>
-
-          <!-- Q2: Law One Cinema Film -->
-          <div class="q-cell q-obsidian" id="qcell-1">
-            <div style="max-width:540px;padding-right:20px;">
-              <div class="mono" style="font-size:16px;color:#FBBF24;">FILM 02 // CUSTOM CHARACTER RIG</div>
-              <h3 class="display" style="font-size:66px;margin:10px 0 14px;color:#FFF;">LAW ONE:<br/>ROYAL EDITION</h3>
-              <p style="font-size:22px;color:#C8C4BC;line-height:1.35;">
-                Custom MONARCH® masked character bible, editorial Urdu-English typography &amp; 3D metaphors.
-              </p>
-              <div class="mono" style="margin-top:20px;font-size:16px;color:#FBBF24;background:rgba(251,191,36,0.12);padding:8px 16px;border-radius:8px;width:fit-content;">
-                63s · STORYTELLING MASTER
-              </div>
-            </div>
-            <div class="reel-frame">
-              <video id="vid-lawone" src="/proof/lawone.web.mp4" muted loop playsinline preload="auto"></video>
-              <img id="seq-lawone" style="display:none;" alt="" />
-            </div>
+          <div class="monolith" id="mon-1">
+            <video id="vid-lawone" src="./../proof/lawone.web.mp4" muted loop playsinline></video>
+            <img class="seq" id="seq-lawone" alt="" />
+            <div class="grad"></div>
+            <div class="cap"><div class="n">FILM 02</div><div class="t">Law One · Digital Defense</div><div class="m">COUNSEL SITE + MOTION</div></div>
+            <div class="edge"></div>
           </div>
-
-          <!-- Q3: Paanch / Powerful Personality -->
-          <div class="q-cell q-crimson" id="qcell-2">
-            <div style="max-width:540px;padding-right:20px;">
-              <div class="mono" style="font-size:16px;color:#FF6B76;">FILM 03 // DIAGONAL SPLIT SYSTEM</div>
-              <h3 class="display" style="font-size:66px;margin:10px 0 14px;color:#FFF;">POWERFUL<br/>PRESENCE</h3>
-              <p style="font-size:22px;color:#E2DDD5;line-height:1.35;">
-                Beat-synced kinetic headlines, live audio waveform bars &amp; zero dead holds.
-              </p>
-              <div class="mono" style="margin-top:20px;font-size:16px;color:#FF858E;background:rgba(210,31,43,0.22);padding:8px 16px;border-radius:8px;width:fit-content;">
-                75s · RETENTION ARCHITECTURE
-              </div>
-            </div>
-            <div class="reel-frame">
-              <video id="vid-paanch" src="/proof/paanch.web.mp4" muted loop playsinline preload="auto"></video>
-              <img id="seq-paanch" style="display:none;" alt="" />
-            </div>
-          </div>
-
-          <!-- Q4: Live 17-Gate Production Engine -->
-          <div class="q-cell q-slate" id="qcell-3" style="flex-direction:column;align-items:flex-start;justify-content:space-between;">
-            <div style="width:100%;display:flex;justify-content:space-between;align-items:center;">
-              <span class="mono" style="font-size:16px;color:#34D399;">SYSTEM 04 // MONARCH-STUDIO PIPELINE</span>
-              <span class="mono" style="font-size:15px;color:#9CA3AF;">937 FILES · CRASH-PROOF</span>
-            </div>
-            <h3 class="display" style="font-size:62px;color:#FFF;">17-GATE QUALITY ENFORCEMENT</h3>
-            <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ 0.2s HOOK OPEN-LOOP</div>
-              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ CHARACTER BIBLE LOCK</div>
-              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ -14 LUFS / -1.5 dBTP</div>
-              <div class="mono" style="padding:14px 18px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.35);font-size:16px;color:#ECFDF5;">✓ ZERO STOCK B-ROLL BAN</div>
-            </div>
+          <div class="monolith" id="mon-2">
+            <video id="vid-paanch" src="./../proof/paanch.web.mp4" muted loop playsinline></video>
+            <img class="seq" id="seq-paanch" alt="" />
+            <div class="grad"></div>
+            <div class="cap"><div class="n">FILM 03</div><div class="t">Powerful Presence</div><div class="m">STAGE FILM · BRAND SYSTEM</div></div>
+            <div class="edge"></div>
           </div>
         </div>
-
-        <div id="s3-center-pill" class="mono" style="font-size:21px;font-weight:700;">
-          ★ REAL IN-HOUSE PRODUCTIONS · ZERO GENERIC TEMPLATES ★
+        <div id="s3-mosaic">
+          <div class="mgrid">
+            <div class="mt span2"><img src="./../proof/work-site.jpg" alt="" /><div class="ml">PORTFOLIO V37 · SITE</div></div>
+            <div class="mt"><img src="./../proof/proof-1.jpg" alt="" /><div class="ml">STUDIO PROOF</div></div>
+            <div class="mt"><img src="./../proof/work-film.jpg" alt="" /><div class="ml">FILM CRAFT</div></div>
+            <div class="mt"><img src="./../proof/proof-5.jpg" alt="" /><div class="ml">RETENTION</div></div>
+            <div class="mt"><img src="./../proof/work-intro.jpg" alt="" /><div class="ml">TITLE SYSTEM</div></div>
+          </div>
         </div>
+        <div id="s3-center-pill">3 FILMS · <i>ONE CRAFT</i></div>
       </section>
 
-      <!-- ==================== BEAT 04: 3D WEB ARCHITECTURE FLYOVER ==================== -->
+      <!-- ================= BEAT 04 ================= -->
       <section class="scene" id="s4">
-        <div style="position:absolute;top:44px;left:88px;right:88px;display:flex;justify-content:space-between;align-items:center;z-index:20;">
-          <span class="mono" style="font-size:19px;color:#FF5E6A;">04 // FULL-STACK WEB &amp; AI SYSTEMS</span>
-          <span class="mono" style="font-size:18px;color:#A5A199;">REACT · VITE · SUPABASE · KOTLIN AI OS</span>
+        <div id="s4-tunnel">
+          <div class="tunnel-ring" id="tr0"></div>
+          <div class="tunnel-ring" id="tr1"></div>
+          <div class="tunnel-ring" id="tr2"></div>
+          <div class="tunnel-ring" id="tr3"></div>
+          <div class="tunnel-ring" id="tr4"></div>
+          <div class="tunnel-ring" id="tr5"></div>
+        </div>
+        <div id="s4-shutter">
+          <div class="s4-speed" style="left: 6%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 18%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 31%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 68%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 81%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 93%; height: 92vh; top: -20vh;"></div>
         </div>
 
-        <div id="s4-browser">
-          <div class="b-chrome">
-            <div class="b-dots">
-              <span style="background:#FF5F56;"></span>
-              <span style="background:#FFBD2E;"></span>
-              <span style="background:#27C93F;"></span>
+        <div class="slidepane" id="wslide-0">
+          <div class="chrome"><div class="d r"></div><div class="d"></div><div class="d"></div><div id="s4-url">https://adil-chandio.github.io/portfolio/</div></div>
+          <div class="pane-body">
+            <div class="left">
+              <div class="k">PORTFOLIO V37 · LIVE</div>
+              <h3>DESIGN<br />THAT<br />SHIPS.</h3>
+              <p>Seventeen gate quality enforcement, motion systems, and real client deployments — built solo, end to end.</p>
+              <div class="chips"><div class="chip">REACT</div><div class="chip">MOTION</div><div class="chip">SHOPIFY</div><div class="chip">SUPABASE</div></div>
             </div>
-            <div class="b-url mono" id="s4-url">https://adil-chandio.github.io/portfolio/</div>
-            <span class="mono" style="font-size:14px;color:#34D399;">● 99 LIGHTHOUSE</span>
+            <div class="right"><img src="./../proof/work-site.jpg" alt="" /></div>
           </div>
+        </div>
 
-          <!-- Slide A: Portfolio v37 -->
-          <div class="web-slide" id="wslide-0" style="display:grid;grid-template-columns:1.15fr 1fr;gap:38px;align-items:center;background:#F4EFE6;color:#0B0B0F;">
-            <div>
-              <div class="mono" style="color:#D21F2B;font-size:17px;font-weight:700;">LIVE PRODUCTION SITE #01</div>
-              <h3 class="display" style="font-size:88px;margin:10px 0 18px;color:#0B0B0F;">PORTFOLIO v37<br/>EDITORIAL HUB</h3>
-              <p style="font-size:24px;color:#2B2B30;font-weight:700;line-height:1.4;">
-                Zero-bloat custom typography, embedded sound-on film stage, interactive proof gallery &amp; instant Supabase lead intake.
-              </p>
-              <div style="display:flex;gap:14px;margin-top:26px;">
-                <span class="mono" style="background:#0B0B0F;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">31KB CORE HTML</span>
-                <span class="mono" style="background:#D21F2B;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">BESPOKE MOTION</span>
-              </div>
+        <div class="slidepane" id="wslide-1">
+          <div class="chrome"><div class="d r"></div><div class="d"></div><div class="d"></div><div id="s4-url-2">monarch://maya-ai-os</div></div>
+          <div class="pane-body">
+            <div class="left">
+              <div class="k">MAYA AI OS · AGENT ENGINE</div>
+              <h3>AGENTS<br />THAT<br />FINISH.</h3>
+              <div class="row"><span class="pulse"></span><span>SHIPGUARD · ONLINE</span></div>
+              <div class="row"><span class="pulse"></span><span>17 GATES · ARMED</span></div>
+              <div class="row"><span class="pulse"></span><span>ZERO HUMAN NUDGE</span></div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-              <img src="/proof/work-site.jpg" style="width:100%;height:320px;object-fit:cover;border-radius:18px;box-shadow:0 18px 36px rgba(0,0,0,0.2);" alt="" />
-              <img src="/proof/work-intro.jpg" style="width:100%;height:320px;object-fit:cover;border-radius:18px;box-shadow:0 18px 36px rgba(0,0,0,0.2);margin-top:44px;" alt="" />
-            </div>
-          </div>
-
-          <!-- Slide B: Maya AI OS + Monarch Agent -->
-          <div class="web-slide" id="wslide-1" style="display:grid;grid-template-columns:1.1fr 1fr;gap:38px;align-items:center;background:#0C0E16;color:#F6F3EC;">
-            <div>
-              <div class="mono" style="color:#60A5FA;font-size:17px;">AUTONOMOUS AI ENGINEERING #02</div>
-              <h3 class="display" style="font-size:86px;margin:10px 0 18px;color:#FFF;">MAYA AI OS &amp;<br/>MONARCH AGENT</h3>
-              <p style="font-size:24px;color:#C8C4BC;line-height:1.4;">
-                Native Kotlin voice-first Android OS (Awaz · Dimaag · Haath) + 404-file Python content intelligence engine.
-              </p>
-              <div style="display:flex;gap:14px;margin-top:26px;">
-                <span class="mono" style="background:rgba(96,165,250,0.18);border:1px solid #60A5FA;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">VOICE WAKE-WORD</span>
-                <span class="mono" style="background:rgba(52,211,153,0.16);border:1px solid #34D399;color:#FFF;padding:12px 20px;border-radius:10px;font-size:16px;">22 PUBLIC REPOS</span>
-              </div>
-            </div>
-            <div style="background:#131622;border:1px solid rgba(255,255,255,0.12);border-radius:22px;padding:30px;font-family:'PlexMonoLocal',monospace;font-size:18px;line-height:1.75;color:#E5E7EB;">
-              <div style="color:#60A5FA;">$ python -m monarch qc --stage render</div>
-              <div style="color:#34D399;">[PASS] 01 Research &amp; Niche DNA Verified</div>
-              <div style="color:#34D399;">[PASS] 07 First-8s Open Loop Locked</div>
-              <div style="color:#34D399;">[PASS] 13 Layered Audio Bus (-14 LUFS)</div>
-              <div style="color:#34D399;">[PASS] 17 Click-Debt Paid in Payoff</div>
-              <div style="color:#FBBF24;margin-top:10px;">→ Ready for Client Vault Delivery</div>
+            <div class="console">
+              <div><span class="dim">$</span> <span class="k">monarch</span> build --client mon-demo26</div>
+              <div><span class="ok">✓</span> storyboard locked · 6 beats</div>
+              <div><span class="ok">✓</span> audio mastered · -14.4 LUFS</div>
+              <div><span class="ok">✓</span> 2,160 frames rendered · 1080p60</div>
+              <div><span class="warn">→</span> independent visual audit: 10/10 frames clean</div>
+              <div><span class="ok">✓</span> delivered · vault unlocked</div>
+              <div><span class="dim">$</span> <span class="k">monarch</span> status</div>
+              <div><span class="ok">READY</span> · nothing left to babysit.</div>
             </div>
           </div>
+        </div>
 
-          <!-- Slide C: B2B Storefront -> Click Client Vault -->
-          <div class="web-slide" id="wslide-2" style="display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(circle at 75% 25%,rgba(210,31,43,0.24),#0B0C11 65%);color:#F6F3EC;">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span class="mono" style="font-size:18px;color:#FF6B76;">MONARCH® B2B STUDIO STOREFRONT</span>
-              <span class="mono" style="font-size:16px;color:#34D399;">SUPABASE + VERCEL EDGE LIVE</span>
+        <div class="slidepane" id="wslide-2">
+          <div class="chrome"><div class="d r"></div><div class="d"></div><div class="d"></div><div id="s4-url-3">https://monarch-workspace-beryl.vercel.app/</div></div>
+          <div class="pane-body">
+            <div class="topbar"><div class="brand">MONARCH<span>®</span></div><div class="nav"><span>WORK</span><span>STUDIO</span><span>VAULT</span><span>CONTACT</span></div></div>
+            <div class="hero-line">Fixed scope. Fixed price. <em>Watermarked proof first.</em></div>
+            <div class="prods">
+              <div class="prod"><img src="./../proof/work-site.jpg" alt="" /><div class="pl">SITES · $450</div></div>
+              <div class="prod"><img src="./../proof/work-film.jpg" alt="" /><div class="pl">FILMS · $240</div></div>
+              <div class="prod"><img src="./../proof/paanch.web.mp4" alt="" style="display:none" /><img src="./../proof/work-intro.jpg" alt="" /><div class="pl">BRAND SYSTEMS</div></div>
             </div>
-            <div style="max-width:1050px;">
-              <h3 class="display" style="font-size:94px;color:#FFF;">INSPECT YOUR PROJECT<br/>BEFORE YOU PAY.</h3>
-              <p style="font-size:25px;color:#D0CCC4;margin-top:16px;">
-                Every website &amp; commercial ships inside a private, code-gated Client Vault.
-              </p>
-            </div>
-            <div style="display:flex;align-items:center;gap:24px;">
-              <div id="s4-vault-btn" style="background:#D21F2B;color:#FFF;padding:22px 42px;border-radius:16px;font-size:24px;font-weight:800;box-shadow:0 20px 44px rgba(210,31,43,0.45);">
-                Open Client Vault (MON-DEMO26) →
-              </div>
-              <span class="mono" style="font-size:18px;color:#A39E93;">ZERO BLIND UPFRONT RISK</span>
-            </div>
+            <div id="s4-cta">Open Client Vault (MON-DEMO26) →</div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== BEAT 05: CLIENT VAULT UNLOCK ==================== -->
+      <!-- ================= BEAT 05 ================= -->
       <section class="scene" id="s5">
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;">
-          <div>
-            <div class="mono" style="color:#FF6470;font-size:19px;">05 // PROTECTED CLIENT VAULT · CODE: MON-DEMO26</div>
-            <h2 class="display" style="font-size:74px;margin-top:6px;">REVIEW FIRST. UNLOCK IN ONE TAP.</h2>
-          </div>
-          <div id="s5-badge" class="mono" style="padding:14px 26px;border-radius:999px;background:rgba(210,31,43,0.2);border:1px solid #FF4754;color:#FFF;font-size:19px;font-weight:700;">
-            ● WATERMARKED REVIEW STAGE
-          </div>
+        <div id="s5-grid"></div>
+        <div id="s5-head">
+          <div class="k">BEAT 05 · THE VAULT</div>
+          <h2>REVIEW IT HERE.<br /><em>OWN IT THERE.</em></h2>
+        </div>
+        <div id="s5-rails">
+          <div class="rail" id="rail-0"><div class="ic">PK</div><div class="tx"><div class="t">Local PKR · Raast / SadaPay</div><div class="s">INSTANT BANK RAIL · 125,000 PKR</div></div><div class="st">PENDING</div><div class="bar"></div></div>
+          <div class="rail" id="rail-1"><div class="ic">$</div><div class="tx"><div class="t">US ACH · Wise / Mercury</div><div class="s">FOREIGN USD SETTLEMENT · $450</div></div><div class="st">PENDING</div><div class="bar"></div></div>
+          <div class="rail" id="rail-2"><div class="ic">◈</div><div class="tx"><div class="t">Contra · Card / Apple Pay</div><div class="s">ESCROW PROTECTED CHECKOUT</div></div><div class="st">PENDING</div><div class="bar"></div></div>
+          <div class="rail" id="rail-3"><div class="ic">◎</div><div class="tx"><div class="t">USDC · Solana / Polygon</div><div class="s">ON-CHAIN · SUB-CENT FEES</div></div><div class="st">PENDING</div><div class="bar"></div></div>
         </div>
 
-        <div id="s5-vault">
-          <!-- Left: Deliverable Stage -->
-          <div class="vault-pane">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span class="mono" style="font-size:17px;color:#A8A29E;">DELIVERABLE BUNDLE</span>
-              <span class="mono" id="s5-file-state" style="font-size:16px;color:#FBBF24;">ENCRYPTED CLOUD LINK</span>
-            </div>
+        <div id="s5-door">
+          <svg id="s5-ring-svg" width="700" height="700" viewBox="0 0 700 700" fill="none">
+            <circle id="vr-out" cx="350" cy="350" r="326" stroke="rgba(255,255,255,0.10)" stroke-width="2" stroke-dasharray="26 16" />
+            <circle id="vr-mid" cx="350" cy="350" r="272" stroke="rgba(224,27,43,0.42)" stroke-width="3" stroke-dasharray="120 40" />
+            <circle id="vr-in" cx="350" cy="350" r="222" stroke="rgba(52,211,153,0.40)" stroke-width="2" stroke-dasharray="8 12" />
+            <circle id="vr-prog" cx="350" cy="350" r="180" stroke="#34D399" stroke-width="7" stroke-linecap="round"
+              stroke-dasharray="1131" stroke-dashoffset="1131" transform="rotate(-90 350 350)" />
+          </svg>
+          <div id="s5-door-core"><div class="lk" id="s5-lock-ic">🔒</div><div class="lb" id="s5-lock-lb">AES-256 · LOCKED</div></div>
+          <div id="s5-burst"></div>
+        </div>
 
-            <div style="position:relative;border-radius:20px;overflow:hidden;height:430px;border:1px solid rgba(255,255,255,0.14);">
-              <img src="/proof/work-film.jpg" style="width:100%;height:100%;object-fit:cover;" alt="" />
-              <div id="s5-wm-ribbon" class="mono" style="position:absolute;inset:0;background:rgba(7,7,10,0.68);display:flex;align-items:center;justify-content:center;padding:22px;">
-                <span id="s5-wm-pill" style="padding:14px 28px;border-radius:999px;background:rgba(12,12,18,0.92);border:1px solid rgba(255,255,255,0.22);font-size:21px;color:#FFF;font-weight:700;letter-spacing:0.14em;box-shadow:0 16px 38px rgba(0,0,0,0.55);">
-                  MONARCH® PREVIEW · LOCKED
-                </span>
-              </div>
-            </div>
+        <div id="s5-badge">● WATERMARKED REVIEW STAGE</div>
+        <div id="s5-unlock-btn">Verify Settlement &amp; Unlock 1080p60 Master →</div>
 
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div>
-                <div style="font-size:26px;font-weight:800;">1080p60 Master + Source Code</div>
-                <div class="mono" style="font-size:15px;color:#9CA3AF;margin-top:4px;">WORLDWIDE PERPETUAL COMMERCIAL LICENSE</div>
-              </div>
-              <div class="display" style="font-size:56px;color:#FFF;">$240</div>
-            </div>
-          </div>
+        <div id="s5-watermark">
+          <div id="s5-wm-ribbon"><div id="s5-wm-pill">MONARCH® PREVIEW · LOCKED</div></div>
+        </div>
 
-          <!-- Right: 4 Global + Local Settlement Rails -->
-          <div class="vault-pane">
-            <div class="mono" style="font-size:17px;color:#FF7580;">FRICTIONLESS LOCAL &amp; GLOBAL RAILS (ZERO P2P RISK)</div>
-
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div class="rail-item" id="rail-0">
-                <div>
-                  <b style="font-size:22px;">Pakistan Instant PKR</b>
-                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">RAAST · SADAPAY · IBAN TRANSFER</div>
-                </div>
-                <span class="mono" style="color:#34D399;font-size:16px;">PKR 67,000</span>
-              </div>
-
-              <div class="rail-item" id="rail-1">
-                <div>
-                  <b style="font-size:22px;">International USD / EUR</b>
-                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">NAMED US ACH · WIRE · WISE</div>
-                </div>
-                <span class="mono" style="color:#60A5FA;font-size:16px;">0% INBOUND FEE</span>
-              </div>
-
-              <div class="rail-item" id="rail-2">
-                <div>
-                  <b style="font-size:22px;">Apple Pay &amp; Credit Card</b>
-                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">CONTRA PROTECTED ESCROW</div>
-                </div>
-                <span class="mono" style="color:#FBBF24;font-size:16px;">0% COMMISSION</span>
-              </div>
-
-              <div class="rail-item" id="rail-3">
-                <div>
-                  <b style="font-size:22px;">Instant Global USDC / USDT</b>
-                  <div class="mono" style="font-size:14px;color:#9CA3AF;margin-top:3px;">SOLANA · POLYGON (&lt;$0.01 FEE)</div>
-                </div>
-                <span class="mono" style="color:#34D399;font-size:16px;">INSTANT SETTLE</span>
-              </div>
-            </div>
-
-            <div id="s5-unlock-btn">
-              Verify Settlement &amp; Unlock 1080p60 Master →
-            </div>
-          </div>
+        <div id="s5-files">
+          <div>MASTER<b>12.44 MB · 1080P60</b></div>
+          <div>PREVIEW<b>WATERMARKED · 9.10 MB</b></div>
+          <div>STATE<b id="s5-file-state">ENCRYPTED CLOUD LINK</b></div>
         </div>
       </section>
 
-      <!-- ==================== BEAT 06: FINALE LOCKUP ==================== -->
+      <!-- ================= BEAT 06 ================= -->
       <section class="scene" id="s6">
-        <div class="mono" style="font-size:21px;color:#FF5E6A;margin-bottom:22px;">
-          FOUNDER-LED BY ADIL CHANDIO · PAKISTAN × WORLDWIDE
+        <div id="s6-bloom"></div>
+        <div id="s6-core">
+          <div id="s6-kicker">MONARCH® STUDIO · 2026</div>
+          <div id="s6-title">MONARCH<sup>®</sup></div>
+          <div id="s6-sub">PROOF OVER PROMISES</div>
+          <div id="s6-rule"></div>
         </div>
-        <h2 class="display" id="s6-title" style="font-size:172px;color:#FFFFFF;letter-spacing:0.03em;">
-          MONARCH<sup style="color:#D21F2B;font-family:'ManropeLocal',sans-serif;font-size:56px;font-weight:800;vertical-align:top;margin:0 8px 0 4px;">®</sup>STUDIO
-        </h2>
-        <p style="font-size:30px;color:#D6D2C9;font-weight:700;margin-top:18px;letter-spacing:0.02em;">
-          Signature Interactive Websites · High-Retention Films · Autonomous AI Systems
-        </p>
-
-        <div id="s6-sig-wrap" style="margin:38px 0 34px;overflow:hidden;width:360px;height:110px;display:flex;align-items:center;justify-content:center;">
-          <img src="/proof/sig-adil.png" style="height:96px;object-fit:contain;filter:invert(1) brightness(1.8);" alt="Adil Chandio Signature" />
-        </div>
-
-        <div style="display:flex;gap:20px;align-items:center;">
-          <div class="mono" style="padding:18px 34px;border-radius:999px;background:#D21F2B;color:#FFF;font-size:22px;font-weight:700;box-shadow:0 18px 48px rgba(210,31,43,0.5);">
-            monarch-workspace-beryl.vercel.app
-          </div>
-          <div class="mono" style="padding:18px 30px;border-radius:999px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);color:#E5E7EB;font-size:20px;">
-            workadilchandio@gmail.com
-          </div>
-        </div>
+        <div id="s6-sig-wrap"><img id="s6-sig" src="./../proof/sig-adil.png" alt="" /></div>
+        <div id="s6-handle">ADIL CHANDIO · WORKADILCHANDIO@GMAIL.COM</div>
+        <div id="s6-tags"><span>1080P60</span><span>36.00 SEC</span><span>ZERO AI SLOP</span><span>REAL METRICS ONLY</span></div>
       </section>
 
-      <!-- Oversized Protagonist Cursor (134px @ 1920) + Click Shockwave -->
-      <div id="click-ring"></div>
-      <div id="cursor-layer">
-        <svg width="134" height="134" viewBox="0 0 64 64" style="filter:drop-shadow(0 12px 22px rgba(0,0,0,0.55));">
-          <path d="M10 6 L10 50 L22 39 L31 56 L39 52 L30 35 L46 35 Z" fill="#FFFFFF" stroke="#0B0B0F" stroke-width="3.2" stroke-linejoin="round"/>
-        </svg>
-        <div class="mono" style="position:absolute;left:78px;top:76px;background:#D21F2B;color:#FFF;padding:7px 16px;border-radius:999px;font-size:15px;font-weight:700;white-space:nowrap;box-shadow:0 10px 24px rgba(0,0,0,0.45);border:2px solid #FFF;">
-          MONARCH®
-        </div>
+      <!-- ================= GLOBAL FX ================= -->
+      <canvas id="fx-canvas" width="1920" height="1080"></canvas>
+      <div id="rays"></div>
+      <div id="flare"></div>
+      <div id="eq"></div>
+      <div id="scan"></div>
+      <div id="grain"></div>
+      <div id="vignette"></div>
+      <div id="bars"><div class="b t" id="bar-t"></div><div class="b b" id="bar-b"></div></div>
+
+      <div id="hud">
+        <div class="tl">MONARCH® STUDIO</div>
+        <div class="tr" id="hud-chapter">BEAT 01 · THE HOOK</div>
+        <div class="bl" id="hud-tc">00:00:00:00</div>
+        <div class="br">1080P60 · 36.00S</div>
       </div>
 
-      <div id="grain"></div>
       <div id="progress-track"><div id="progress-fill"></div></div>
+
+      <div id="click-ring"></div>
+      <div id="cursor-layer">
+        <svg class="body" viewBox="0 0 46 46" fill="none">
+          <path d="M8 4 L8 38 L17 29.5 L23 42 L29.5 39 L23.5 26.5 L36 26 Z" fill="#0B0B10" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round" />
+        </svg>
+      </div>
     </div>
   </div>
 
   <audio id="master-audio" src="/showreel/audio_master_60fps.m4a" preload="auto"></audio>
+
+  <div id="live-controls">
+    <button class="ctrl-btn" id="btn-play">▶ REPLAY WITH SOUND (60FPS)</button>
+  </div>
 
   <script>
     const params = new URLSearchParams(location.search);
@@ -913,56 +603,90 @@
     if (IS_HEADLESS) document.body.classList.add('headless');
 
     const FPS = 60;
-    const TOTAL_FRAMES = 1920; // 32.00s
+    const TOTAL_FRAMES = 2160; // 36.000s
 
-    // Responsive fit for live browser viewing while keeping exact 1920x1080 in headless Chrome
+    const $ = (id) => document.getElementById(id);
+
     function fitStage() {
-      const st = document.getElementById('stage');
-      if (IS_HEADLESS) {
-        st.style.transform = 'none';
-        return;
-      }
+      const st = $('stage');
+      if (IS_HEADLESS) { st.style.transform = 'none'; return; }
       const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
       st.style.transform = `scale(${s})`;
     }
     window.addEventListener('resize', fitStage);
     fitStage();
 
-    // Easing library (hyperframes cut-the-curve power4 + spring overshoot)
+    // ---------- easing ----------
     const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
     const prog = (f, f0, f1) => clamp((f - f0) / Math.max(1, f1 - f0));
     const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
     const easeInQuart = (t) => t * t * t * t;
-    const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    const easeOutBack = (t, s = 1.35) => {
-      const c3 = s + 1;
-      return 1 + c3 * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2);
-    };
+    const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    const easeInOutQuint = (t) => (t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2);
+    const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+    const easeOutBack = (t, s = 1.35) => { const c3 = s + 1; return 1 + c3 * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2); };
     const lerp = (a, b, t) => a + (b - a) * t;
 
-    // Switch between <video> (live mode) and pre-decoded JPEG sequence (headless 60fps mode)
+    // ---------- beat map (mirrors showreel/beat_sheet.json) ----------
+    const B = {
+      hookClick: 148,
+      deckIn: 288,
+      cardDeals: [308, 323, 337, 350, 362],
+      laserLock: 496,
+      crashZoom: 516,
+      monolithsIn: 648,
+      monoPops: [666, 680, 694, 708],
+      mosaicFlip: 852,
+      tunnelIn: 1050,
+      slide1: 1185,
+      slide2: 1300,
+      vaultClick: 1392,
+      vaultIn: 1428,
+      railTicks: [1488, 1522, 1556, 1590],
+      unlockClick: 1656,
+      finaleIn: 1800,
+    };
+
+    const CHAPTERS = [
+      [0, 'BEAT 01 · THE HOOK'],
+      [148, 'BEAT 01 · THE NUMBERS'],
+      [288, 'BEAT 02 · THE PROOF DECK'],
+      [648, 'BEAT 03 · THREE FILMS'],
+      [1050, 'BEAT 04 · THE ECOSYSTEM'],
+      [1428, 'BEAT 05 · THE VAULT'],
+      [1800, 'BEAT 06 · THE SIGNATURE'],
+    ];
+
+    // ---------- real film sequences ----------
     const seqMap = {
-      intro: { vid: document.getElementById('vid-intro'), img: document.getElementById('seq-intro'), count: 130 },
-      lawone: { vid: document.getElementById('vid-lawone'), img: document.getElementById('seq-lawone'), count: 130 },
-      paanch: { vid: document.getElementById('vid-paanch'), img: document.getElementById('seq-paanch'), count: 130 },
+      intro: { vid: $('vid-intro'), img: $('seq-intro'), count: 130 },
+      lawone: { vid: $('vid-lawone'), img: $('seq-lawone'), count: 130 },
+      paanch: { vid: $('vid-paanch'), img: $('seq-paanch'), count: 130 },
     };
     if (IS_HEADLESS) {
-      Object.values(seqMap).forEach(({ vid, img }) => {
-        vid.style.display = 'none';
-        img.style.display = 'block';
-      });
+      Object.values(seqMap).forEach(({ vid, img }) => { vid.style.display = 'none'; img.style.display = 'block'; });
+    } else {
+      Object.values(seqMap).forEach(({ vid, img }) => { vid.style.display = 'block'; img.style.display = 'none'; });
     }
 
-    // Apply `cut-the-curve` peak-velocity exit/entry seam wrapper transform
+    // ---------- audio reactive telemetry ----------
+    let AUD = { sub: null, mid: null, high: null, bins: null };
+    const REACTIVE_URL = '/showreel/audio_reactive.json';
+    const audioReady = fetch(REACTIVE_URL)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d && d.sub) AUD = d; })
+      .catch(() => {});
+    const subAt = (f) => (AUD.sub ? AUD.sub[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : 0.35);
+    const midAt = (f) => (AUD.mid ? AUD.mid[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : 0.35);
+    const highAt = (f) => (AUD.high ? AUD.high[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : 0.3);
+    const binsAt = (f) => (AUD.bins ? AUD.bins[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : null);
+
+    // ---------- seam wrapper ----------
     function applySeam(el, f, startF, endF, enterAxis = 'x', exitAxis = 'x') {
-      if (f < startF || f >= endF) {
-        el.style.display = 'none';
-        return false;
-      }
+      if (f < startF || f >= endF) { el.style.display = 'none'; return false; }
       el.style.display = el.id === 's6' ? 'flex' : 'block';
       let tx = 0, ty = 0, sc = 1, blur = 0, op = 1;
-
-      // Entry (14 frames = 0.23s power4.out from 12% offset)
       if (startF > 0 && f < startF + 14) {
         const u = easeOutQuart(prog(f, startF, startF + 14));
         if (enterAxis === 'x') tx = lerp(220, 0, u);
@@ -971,7 +695,6 @@
         else if (enterAxis === 'blur') sc = lerp(1.06, 1, u);
         blur = lerp(14, 0, u);
       }
-      // Exit (10 frames = 0.17s power4.in to -12% offset)
       if (endF < TOTAL_FRAMES && f >= endF - 10) {
         const u = easeInQuart(prog(f, endF - 10, endF));
         if (exitAxis === 'x') tx = lerp(0, -220, u);
@@ -980,7 +703,6 @@
         else if (exitAxis === 'blur') { sc = lerp(1, 0.95, u); op = lerp(1, 0.25, u); }
         blur = Math.max(blur, lerp(0, 14, u));
       }
-
       el.style.opacity = op;
       el.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) scale(${sc.toFixed(4)})`;
       el.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
@@ -988,13 +710,12 @@
     }
 
     function setCursor(x, y, scale = 1, opacity = 1) {
-      const c = document.getElementById('cursor-layer');
+      const c = $('cursor-layer');
       c.style.opacity = opacity;
       c.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
     }
-
     function triggerRing(f, clickF, x, y, color = '#FF3B49') {
-      const r = document.getElementById('click-ring');
+      const r = $('click-ring');
       if (f < clickF || f > clickF + 26) return false;
       const u = prog(f, clickF, clickF + 26);
       r.style.borderColor = color;
@@ -1003,135 +724,366 @@
       return true;
     }
 
-    const scenes = {
-      s1: document.getElementById('s1'),
-      s2: document.getElementById('s2'),
-      s3: document.getElementById('s3'),
-      s4: document.getElementById('s4'),
-      s5: document.getElementById('s5'),
-      s6: document.getElementById('s6'),
-    };
+    // ---------- deterministic particles ----------
+    const cv = $('fx-canvas');
+    const ctx = cv.getContext('2d');
+    function mulberry32(a) {
+      return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    const rnd = mulberry32(20261103);
+    const DUST = Array.from({ length: 64 }, () => ({
+      x: rnd() * 1920, y: rnd() * 1080, r: 0.7 + rnd() * 2.6,
+      sx: 0.15 + rnd() * 0.55, sy: -0.1 - rnd() * 0.5, ph: rnd() * 6.283, a: 0.18 + rnd() * 0.5,
+    }));
+    const STREAKS = Array.from({ length: 12 }, (_, i) => ({ y: rnd() * 1080, len: 200 + rnd() * 460, sp: 0.6 + rnd() * 1.5, off: rnd() * 1920 }));
 
-    async function renderFrame(f) {
-      document.getElementById('progress-fill').style.width = `${((f / (TOTAL_FRAMES - 1)) * 100).toFixed(2)}%`;
-      document.getElementById('click-ring').style.opacity = 0;
-      setCursor(2100, 1200, 1, 0);
+    function drawFX(f, beatIdx) {
+      ctx.clearRect(0, 0, 1920, 1080);
+      const sub = subAt(f), mid = midAt(f), hi = highAt(f);
+      const isVault = beatIdx === 5, isDeck = beatIdx === 2, isMono = beatIdx === 3, isTunnel = beatIdx === 4;
 
-      // ==================== BEAT 01 (0..240) ====================
-      if (applySeam(scenes.s1, f, 0, 240, 'none', 'x')) {
-        const h1 = document.getElementById('s1-h1');
-        const enterU = easeOutQuart(prog(f, 0, 26));
-        h1.style.transform = `translateY(${lerp(65, 0, enterU).toFixed(1)}px)`;
-        h1.style.opacity = enterU.toFixed(3);
-
-        const p1 = document.getElementById('s1-portrait');
-        p1.style.transform = `translate3d(${lerp(60, 0, enterU).toFixed(1)}px, ${lerp(40, -10 * (f/240), enterU).toFixed(1)}px, 0)`;
-
-        // Oversized cursor enters f=82..120, clicks CTA at f=120!
-        if (f >= 82 && f <= 168) {
-          const moveU = easeInOutCubic(prog(f, 82, 118));
-          const cx = lerp(1750, 340, moveU);
-          const cy = lerp(980, 885, moveU);
-          const tap = (f >= 119 && f <= 125) ? 0.84 : 1.0;
-          const fadeOut = f > 144 ? 1 - prog(f, 144, 168) : 1;
-          setCursor(cx, cy, tap, fadeOut);
+      // god rays (soft additive wedges)
+      if (beatIdx >= 1) {
+        const rayA = 0.10 + hi * 0.24;
+        ctx.save();
+        ctx.translate(960, isVault ? 420 : 300);
+        ctx.rotate((f * 0.0035) % (Math.PI * 2));
+        for (let i = 0; i < 5; i++) {
+          const a0 = (i / 5) * Math.PI * 2;
+          const g = ctx.createLinearGradient(0, 0, 900, 0);
+          g.addColorStop(0, `rgba(255,110,120,${(rayA * 0.55).toFixed(3)})`);
+          g.addColorStop(1, 'rgba(255,110,120,0)');
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.arc(0, 0, 1500, a0, a0 + 0.20);
+          ctx.closePath();
+          ctx.fillStyle = g;
+          ctx.fill();
         }
-        triggerRing(f, 120, 355, 895, '#FF3B49');
+        ctx.restore();
+      }
 
-        // Circular Iris Inversion into Obsidian stage at f=120..154!
-        const obs = document.getElementById('s1-obsidian');
-        if (f >= 120) {
-          const irisU = easeOutQuart(prog(f, 120, 154));
-          obs.style.clipPath = `circle(${lerp(0, 150, irisU).toFixed(2)}% at 340px 885px)`;
-          const pd = document.getElementById('s1-portrait-dark');
-          pd.style.transform = `scale(${lerp(1.06, 1.0, irisU).toFixed(4)}) translateX(${lerp(24, 0, irisU).toFixed(1)}px)`;
-        } else {
-          obs.style.clipPath = 'circle(0% at 340px 885px)';
+      // floating dust / bokeh
+      if (beatIdx !== 0) {
+        for (const d of DUST) {
+          const x = (d.x + f * d.sx * 1.6) % 1920;
+          const y = (d.y + f * d.sy * 1.1 + Math.sin((f * 0.02) + d.ph) * 14 + 1080) % 1080;
+          const r = d.r * (1 + sub * 0.9);
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, 6.2832);
+          ctx.fillStyle = `rgba(255,225,215,${(d.a * (0.30 + hi * 0.7)).toFixed(3)})`;
+          ctx.fill();
         }
       }
 
-      // ==================== BEAT 02: DECK-DEAL + CRASH-ZOOM (240..570) ====================
-      if (applySeam(scenes.s2, f, 240, 570, 'x', 'x')) {
-        const cues = [258, 276, 291, 303, 313];
+      // speed streaks during tunnel & deck
+      if (isTunnel || isDeck) {
+        const inten = isTunnel ? 0.22 + hi * 0.5 : 0.10 + mid * 0.26;
+        ctx.strokeStyle = `rgba(255,255,255,${inten.toFixed(3)})`;
+        ctx.lineWidth = 1.6;
+        for (const s of STREAKS) {
+          const x = ((f * s.sp * 16) + s.off) % 2400 - 240;
+          ctx.beginPath();
+          ctx.moveTo(x, s.y);
+          ctx.lineTo(x - s.len, s.y);
+          ctx.stroke();
+        }
+      }
+
+      // emerald unlock burst particles
+      if (beatIdx === 5 && f >= B.unlockClick) {
+        const u = prog(f, B.unlockClick, B.unlockClick + 110);
+        const cx = 1400, cy = 488;
+        for (let i = 0; i < 46; i++) {
+          const ang = (i / 46) * Math.PI * 2;
+          const rad = 60 + easeOutCubic(u) * (420 + (i % 7) * 42);
+          const px = cx + Math.cos(ang) * rad;
+          const py = cy + Math.sin(ang) * rad * 0.92;
+          ctx.beginPath();
+          ctx.arc(px, py, (1 - u) * 3.6 + 0.6, 0, 6.2832);
+          ctx.fillStyle = `rgba(120,255,200,${(0.5 * (1 - u)).toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+
+      // finale feather-light flare dust
+      if (beatIdx === 6) {
+        const u = prog(f, B.finaleIn, B.finaleIn + 120);
+        for (let i = 0; i < 30; i++) {
+          const a = (i / 30) * Math.PI * 2 + f * 0.004;
+          const rad = 260 + Math.sin(i * 2.1 + f * 0.03) * 180 + easeOutCubic(u) * 240;
+          const px = 960 + Math.cos(a) * rad;
+          const py = 470 + Math.sin(a) * rad * 0.5;
+          ctx.beginPath();
+          ctx.arc(px, py, 1.4 + (i % 4) * 0.7, 0, 6.2832);
+          ctx.fillStyle = `rgba(255,210,190,${(0.20 + hi * 0.35).toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+    }
+
+    // ---------- HUD ----------
+    const tcEl = $('hud-tc'), chapEl = $('hud-chapter');
+    function timecode(f) {
+      const s = f / FPS;
+      const ss = Math.floor(s);
+      const ff = Math.round((s - ss) * FPS) % FPS;
+      return `00:00:${String(ss).padStart(2, '0')}:${String(ff).padStart(2, '0')}`;
+    }
+
+    // ---------- EQ bars ----------
+    const eqEl = $('eq');
+    for (let i = 0; i < 40; i++) {
+      const b = document.createElement('i');
+      b.style.height = '8px';
+      eqEl.appendChild(b);
+    }
+    const eqBars = Array.from(eqEl.children);
+    const mirror = '0123456789' + '9876543210';
+
+    // ==================== MAIN RENDER ====================
+    async function renderFrame(f) {
+      $('progress-fill').style.width = `${((f / (TOTAL_FRAMES - 1)) * 100).toFixed(2)}%`;
+      $('click-ring').style.opacity = 0;
+      setCursor(2100, 1200, 1, 0);
+
+      const beatIdx = f < 288 ? (f < B.hookClick ? 0 : 1) : f < 648 ? 2 : f < 1050 ? 3 : f < 1428 ? 4 : f < 1800 ? 5 : 6;
+      const sub = subAt(f), mid = midAt(f), hi = highAt(f);
+
+      // HUD
+      tcEl.textContent = timecode(f);
+      let chap = CHAPTERS[0][1];
+      for (const [cf, cl] of CHAPTERS) if (f >= cf) chap = cl;
+      chapEl.textContent = chap;
+
+      // letterbox breathing bars
+      const lb = beatIdx === 6 ? lerp(96, 24, easeOutQuart(prog(f, B.finaleIn, B.finaleIn + 60))) : 42;
+      $('bar-t').style.height = `${lb.toFixed(0)}px`;
+      $('bar-b').style.height = `${lb.toFixed(0)}px`;
+
+      // grain shimmer (deterministic per frame)
+      const gEl = $('grain');
+      gEl.style.backgroundPosition = `${(f * 7) % 12}px ${(f * 11) % 12}px, ${(f * 5) % 16}px ${(f * 3) % 16}px`;
+      gEl.style.opacity = (0.26 + hi * 0.16).toFixed(3);
+      $('scan').style.opacity = beatIdx >= 2 ? (0.10 + hi * 0.08).toFixed(3) : '0.05';
+
+      // anamorphic flare sweep
+      const flare = $('flare');
+      if (f >= 500 && f < 560) {
+        const u = prog(f, 500, 558);
+        flare.style.opacity = (0.85 * Math.sin(Math.PI * u)).toFixed(3);
+        flare.style.transform = `translate3d(${lerp(-1400, 2000, easeOutCubic(u)).toFixed(0)}px, ${(500 + 30 * Math.sin(u * 3)).toFixed(0)}px, 0) rotate(-4deg)`;
+      } else if (f >= 1770 && f < 1840) {
+        const u = prog(f, 1770, 1838);
+        flare.style.opacity = (0.95 * Math.sin(Math.PI * u)).toFixed(3);
+        flare.style.transform = `translate3d(${lerp(-1600, 2200, easeOutCubic(u)).toFixed(0)}px, 470px, 0) rotate(-2deg)`;
+      } else {
+        flare.style.opacity = 0;
+      }
+
+      // rays overlay
+      const rays = $('rays');
+      rays.style.opacity = beatIdx === 0 ? '0' : (0.16 + hi * 0.34).toFixed(3);
+      rays.style.transform = `rotate(${(f * 0.25).toFixed(1)}deg) scale(${(1 + sub * 0.10).toFixed(3)})`;
+
+      // holographic EQ
+      if (beatIdx >= 2 && beatIdx <= 5) {
+        eqEl.style.opacity = (0.34 + mid * 0.5).toFixed(3);
+        const bins = binsAt(f);
+        for (let i = 0; i < eqBars.length; i++) {
+          const mi = mirror[i % mirror.length] | 0;
+          const v = bins ? bins[Math.min(23, mi + (i > 19 ? 6 : 0))] / 100 : 0.3;
+          const h = 6 + Math.pow(v, 1.25) * 128 * (0.55 + mid * 0.75);
+          eqBars[i].style.height = `${h.toFixed(1)}px`;
+        }
+      } else if (beatIdx === 6) {
+        eqEl.style.opacity = (0.5 * (1 - prog(f, B.finaleIn, B.finaleIn + 90))).toFixed(3);
+        const bins = binsAt(f);
+        for (let i = 0; i < eqBars.length; i++) {
+          const mi = mirror[i % mirror.length] | 0;
+          const v = bins ? bins[Math.min(23, mi)] / 100 : 0.2;
+          eqBars[i].style.height = `${(6 + v * 90).toFixed(1)}px`;
+        }
+      } else {
+        eqEl.style.opacity = 0;
+      }
+
+      // ==================== BEAT 01A : CREAM HOOK (0..148) ====================
+      if (applySeam($('s1'), f, 0, 288, 'none', 'x')) {
+        const cream = $('s1-cream');
+        const obs = $('s1-obsidian');
+
+        // headline staggered clip-reveal
+        const words = ['w0', 'w1', 'w2'];
+        for (let i = 0; i < 3; i++) {
+          const u = easeOutExpo(prog(f, 6 + i * 9, 40 + i * 9));
+          const el = $(words[i]);
+          el.style.transform = `translateY(${lerp(112, 0, u).toFixed(1)}%) skewY(${lerp(7, 0, u).toFixed(2)}deg)`;
+        }
+
+        const enterU = easeOutQuart(prog(f, 0, 30));
+        $('s1-kicker').style.opacity = enterU.toFixed(3);
+        $('s1-top').style.opacity = enterU.toFixed(3);
+
+        const p1 = $('s1-portrait');
+        p1.style.transform = `translate3d(${lerp(90, 0, enterU).toFixed(1)}px, ${lerp(54, 0, enterU).toFixed(1)}px, 0) scale(${lerp(1.045, 1, enterU).toFixed(4)})`;
+        p1.style.opacity = clamp(enterU * 1.6).toFixed(3);
+
+        // CTA magnetic scale + cursor glide
+        const cta = $('s1-cta');
+        const near = clamp(1 - Math.abs(prog(f, 96, 148) - 0.85) * 2.4);
+        cta.style.transform = `scale(${(1 + 0.045 * near).toFixed(3)})`;
+        cta.style.boxShadow = `0 26px 60px rgba(11,11,16,${0.28 + near * 0.3}), 0 0 ${(28 * near).toFixed(0)}px rgba(196,23,38,${(0.35 * near).toFixed(2)})`;
+
+        $('s1-foot').style.opacity = (enterU * 0.9).toFixed(3);
+
+        if (f >= 82 && f <= 190) {
+          const mu = easeInOutQuint(prog(f, 82, 146));
+          const cx = lerp(1760, 350, mu);
+          const cy = lerp(1000, 888, mu);
+          const tap = f >= 147 && f <= 153 ? 0.82 : 1;
+          const fade = f > 168 ? 1 - prog(f, 168, 190) : 1;
+          setCursor(cx, cy, tap, fade);
+        }
+        triggerRing(f, B.hookClick, 356, 892, '#C41726');
+
+        // iris inversion (solid ground guard so nothing bleeds)
+        if (f >= B.hookClick) {
+          const irisU = easeOutQuart(prog(f, B.hookClick, B.hookClick + 34));
+          obs.style.clipPath = `circle(${lerp(0, 152, irisU).toFixed(2)}% at 350px 890px)`;
+          cream.style.filter = `blur(${(8 * prog(f, B.hookClick, B.hookClick + 30)).toFixed(2)}px) brightness(${(1 - 0.6 * prog(f, B.hookClick, B.hookClick + 30)).toFixed(2)})`;
+        } else {
+          obs.style.clipPath = 'circle(0% at 350px 890px)';
+          cream.style.filter = 'none';
+        }
+
+        // obsidian hero numbers
+        const countU = easeOutQuart(prog(f, 158, 250));
+        const val = Math.round(583290 * countU);
+        const str = val.toLocaleString('en-US');
+        $('s1-bignum-v').textContent = str;
+        $('s1-bignum-g').textContent = str;
+        $('m-views').textContent = str;
+        const ghostOff = 6 + sub * 16;
+        const ghost = $('s1-bignum-g');
+        ghost.style.transform = `translate3d(${ghostOff.toFixed(1)}px, ${(ghostOff * 0.25).toFixed(1)}px, 0)`;
+        ghost.style.opacity = (0.18 + sub * 0.4).toFixed(3);
+        $('s1-bignum').style.transform = `scale(${lerp(1.06, 1, easeOutQuart(prog(f, 154, 200))).toFixed(4)})`;
+
+        $('s1-obs-kicker').style.opacity = prog(f, 154, 168).toFixed(3);
+        $('s1-obs-sub').style.opacity = easeOutCubic(prog(f, 176, 214)).toFixed(3);
+        $('s1-obs-meta').style.opacity = easeOutCubic(prog(f, 200, 244)).toFixed(3);
+
+        const slash = $('s1-redslash');
+        const su = easeInOutQuint(prog(f, 172, 226));
+        slash.style.transform = `scaleX(${su.toFixed(3)}) skewY(-3.2deg)`;
+        slash.style.opacity = (su * (0.55 + mid * 0.6)).toFixed(3);
+
+        const pd = $('s1-portrait-dark');
+        pd.style.transform = `scale(${lerp(1.08, 1, easeOutQuart(prog(f, 148, 240))).toFixed(4)}) translateX(${lerp(30, 0, prog(f, 148, 240)).toFixed(1)}px)`;
+      }
+
+      // ==================== BEAT 02 : PROOF DECK (288..648) ====================
+      if (applySeam($('s2'), f, B.deckIn, 648, 'x', 'x')) {
         for (let k = 0; k < 5; k++) {
-          const card = document.getElementById(`pcard-${k}`);
-          const cf = cues[k];
+          const card = $(`pcard-${k}`);
+          const cf = B.cardDeals[k];
           if (f < cf - 12) {
             card.style.opacity = 0;
           } else {
             const u = prog(f, cf - 12, cf + 10);
             const eb = easeOutBack(u, 1.25);
-            const zArc = Math.sin(u * Math.PI) * 95;
+            const zArc = Math.sin(u * Math.PI) * 120;
             card.style.opacity = clamp(u * 2.2).toFixed(3);
-            card.style.transform = `translate3d(${lerp(-260, 0, eb).toFixed(1)}px, ${lerp(140, 0, eb).toFixed(1)}px, ${zArc.toFixed(1)}px) scale(${lerp(0.86, 1, eb).toFixed(4)})`;
+            card.style.transform = `perspective(1400px) translate3d(${lerp(-300, 0, eb).toFixed(1)}px, ${lerp(150, 0, eb).toFixed(1)}px, ${zArc.toFixed(1)}px) rotateY(${lerp(16, 0, eb).toFixed(2)}deg) rotateX(${lerp(-9, 0, eb).toFixed(2)}deg) scale(${lerp(0.88, 1, eb).toFixed(4)})`;
           }
         }
 
-        // Count up 583,290 views + draw SVG retention curve
-        const countU = easeOutQuart(prog(f, 262, 365));
-        document.getElementById('kpi-views').textContent = Math.round(583290 * countU).toLocaleString();
-        const lineU = easeInOutCubic(prog(f, 275, 380));
-        document.getElementById('ret-line').style.strokeDashoffset = (650 * (1 - lineU)).toFixed(1);
-        document.getElementById('ret-area').style.opacity = clamp((lineU - 0.25) * 1.3).toFixed(3);
+        const countU = easeOutQuart(prog(f, 320, 430));
+        $('kpi-views').textContent = Math.round(583290 * countU).toLocaleString('en-US');
+        const lineU = easeInOutCubic(prog(f, 330, 448));
+        $('ret-line').style.strokeDashoffset = (650 * (1 - lineU)).toFixed(1);
+        $('ret-area').style.opacity = clamp((lineU - 0.22) * 1.35).toFixed(3);
 
-        // 3D Orbit -> Target Brackets (f=435) -> Crash-Zoom-Punch (f=450..458)!
-        const cam = document.getElementById('s2-camera');
-        const s2Head = document.getElementById('s2-header');
-        const headOut = prog(f, 444, 454);
-        s2Head.style.opacity = (1 - headOut).toFixed(3);
-        s2Head.style.transform = `translateY(${lerp(0, -34, headOut).toFixed(1)}px)`;
+        const head = $('s2-header');
+        const headOut = prog(f, 480, 500);
+        head.style.opacity = (1 - headOut).toFixed(3);
+        head.style.transform = `translateY(${lerp(0, -60, headOut).toFixed(1)}px) scale(${lerp(1, 0.94, headOut).toFixed(3)})`;
+        $('s2-footer').style.opacity = (0.85 * (1 - headOut)).toFixed(3);
+
         const brackets = document.querySelectorAll('#pcard-0 .bracket');
-        const lockTag = document.getElementById('lock-tag');
-
-        if (f >= 435) {
-          const bu = easeOutBack(prog(f, 435, 447), 1.4);
+        const lockTag = $('lock-tag');
+        if (f >= B.laserLock) {
+          const bu = easeOutBack(prog(f, B.laserLock, B.laserLock + 12), 1.4);
           brackets.forEach((b) => {
             b.style.opacity = 1;
-            b.style.transform = `scale(${lerp(1.45, 1, bu).toFixed(3)})`;
+            b.style.transform = `scale(${lerp(1.5, 1, bu).toFixed(3)})`;
+            b.style.boxShadow = `0 0 ${(18 + sub * 26).toFixed(0)}px rgba(52,211,153,0.7)`;
           });
-          lockTag.style.opacity = f >= 442 ? 1 : 0;
+          lockTag.style.opacity = f >= B.laserLock + 6 ? 1 : 0;
         } else {
           brackets.forEach((b) => (b.style.opacity = 0));
           lockTag.style.opacity = 0;
         }
 
-        let rx = lerp(17, 9, prog(f, 240, 435));
-        let ry = lerp(-11, -3, prog(f, 240, 435));
-        let cz = 1.0, cx = 0, cy = 0;
-        if (f >= 442 && f < 450) {
-          // 8f pull-back anticipation (-3.5%)
-          cz = lerp(1.0, 0.965, prog(f, 442, 450));
-        } else if (f >= 450) {
-          // 8f crash-zoom-punch onto Hero KPI card + 6f settle!
-          const zu = f < 458 ? easeInQuart(prog(f, 450, 458)) : 1;
-          const settle = f >= 458 ? easeOutQuart(prog(f, 458, 468)) : 0;
-          cz = f < 458 ? lerp(0.965, 1.58, zu) : lerp(1.58, 1.50, settle);
-          cx = lerp(0, 430, f < 458 ? zu : 1);
-          cy = lerp(0, 35, f < 458 ? zu : 1);
-          rx = lerp(9, 0, f < 458 ? zu : 1);
-          ry = lerp(-3, 0, f < 458 ? zu : 1);
-          triggerRing(f, 456, 560, 540, '#34D399');
+        const cam = $('s2-camera');
+        let rx = lerp(17, 8, prog(f, B.deckIn, 500));
+        let ry = lerp(-12, -3, prog(f, B.deckIn, 500));
+        let cz = 1, cx = 0, cy = 0;
+        if (f >= B.crashZoom - 8 && f < B.crashZoom) {
+          cz = lerp(1, 0.962, prog(f, B.crashZoom - 8, B.crashZoom));
+        } else if (f >= B.crashZoom) {
+          const zu = f < B.crashZoom + 8 ? easeInQuart(prog(f, B.crashZoom, B.crashZoom + 8)) : 1;
+          const settle = f >= B.crashZoom + 8 ? easeOutQuart(prog(f, B.crashZoom + 8, B.crashZoom + 20)) : 0;
+          cz = f < B.crashZoom + 8 ? lerp(0.962, 1.62, zu) : lerp(1.62, 1.52, settle);
+          cx = lerp(0, 420, f < B.crashZoom + 8 ? zu : 1);
+          cy = lerp(0, 40, f < B.crashZoom + 8 ? zu : 1);
+          rx = lerp(8, 0, f < B.crashZoom + 8 ? zu : 1);
+          ry = lerp(-3, 0, f < B.crashZoom + 8 ? zu : 1);
         }
+        // slow continued drift so it never dies
+        const drift = prog(f, B.crashZoom + 20, 648);
+        cx += 10 * drift;
+        cy -= 8 * drift;
+        cz *= 1 + 0.02 * drift;
         cam.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0) scale(${cz.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
       }
 
-      // ==================== BEAT 03: QUAD-SPLIT REAL MONARCH FILMS (570..960) ====================
-      if (applySeam(scenes.s3, f, 570, 960, 'x', 'z')) {
-        const pops = [582, 594, 606, 618];
-        for (let q = 0; q < 4; q++) {
-          const cell = document.getElementById(`qcell-${q}`);
-          const pf = pops[q];
-          const u = prog(f, pf - 10, pf + 8);
-          const eb = easeOutBack(u, 1.2);
-          // Subtle continuous 4% drift after entrance so no quadrant is ever dead
-          const creep = 1 + 0.03 * prog(f, pf, 960);
-          cell.style.opacity = clamp(u * 2.5).toFixed(3);
-          cell.style.transform = `scale(${(lerp(0.88, 1.0, eb) * (u >= 1 ? creep : 1)).toFixed(4)})`;
+      // ==================== BEAT 03 : CINEMA MONOLITHS (648..1050) ====================
+      if (applySeam($('s3'), f, B.monolithsIn, 1050, 'z', 'blur')) {
+        const corridor = $('s3-corridor');
+        const mosaic = $('s3-mosaic');
+        const flip = prog(f, B.mosaicFlip, B.mosaicFlip + 18);
+
+        corridor.style.opacity = (1 - easeInOutCubic(flip)).toFixed(3);
+        corridor.style.display = flip >= 1 ? 'none' : 'block';
+        mosaic.style.display = flip > 0 ? 'block' : 'none';
+        mosaic.style.opacity = easeInOutCubic(flip).toFixed(3);
+        mosaic.style.transform = `scale(${lerp(1.08, 1, easeInOutCubic(flip)).toFixed(4)})`;
+
+        for (let k = 0; k < 3; k++) {
+          const m = $(`mon-${k}`);
+          const pf = B.monoPops[k];
+          const u = prog(f, pf - 12, pf + 12);
+          const eb = easeOutBack(u, 1.15);
+          // parallax + audio-driven push
+          const push = prog(f, pf, 1050);
+          const z = lerp(-460, 0, eb) + push * 130 + sub * 26;
+          const rotY = (k - 1) * lerp(-26, -15, eb) + Math.sin(f * 0.012 + k) * 1.5;
+          const rotX = lerp(10, 3, eb) - sub * 1.4;
+          const yOff = lerp(70, 0, eb) + Math.sin(f * 0.02 + k * 1.3) * 5;
+          m.style.opacity = clamp(u * 2.4).toFixed(3);
+          m.style.transform = `translate3d(0, ${yOff.toFixed(1)}px, ${z.toFixed(1)}px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) scale(${lerp(0.92, 1, eb).toFixed(4)})`;
         }
 
-        // Advance real film frame sequences deterministically in headless mode!
-        if (IS_HEADLESS) {
-          const localIdx = Math.max(1, Math.min(130, Math.floor((f - 570) / 3) + 1));
+        // real film frames advance deterministically
+        if (IS_HEADLESS && f >= B.monolithsIn) {
+          const localIdx = Math.max(1, Math.min(130, Math.floor((f - B.monolithsIn) / 3) + 1));
           const pad = String(localIdx).padStart(4, '0');
           const decodes = [];
           for (const key of ['intro', 'lawone', 'paanch']) {
@@ -1146,79 +1098,149 @@
           if (decodes.length) await Promise.all(decodes);
         }
 
-        const pill = document.getElementById('s3-center-pill');
-        if (f >= 780) {
-          const pu = easeOutBack(prog(f, 780, 796), 1.45);
-          pill.style.opacity = clamp(prog(f, 780, 788)).toFixed(3);
-          pill.style.transform = `translate(-50%, -50%) scale(${lerp(0.65, 1.0, pu).toFixed(4)})`;
+        const pill = $('s3-center-pill');
+        const popF = 762;
+        if (f >= popF) {
+          const pu = easeOutBack(prog(f, popF, popF + 14), 1.5);
+          pill.style.opacity = clamp(prog(f, popF, popF + 8) * (1 - prog(f, 940, 960))).toFixed(3);
+          pill.style.transform = `translate(-50%, -50%) scale(${lerp(0.7, 1.02, pu).toFixed(4)})`;
         } else {
           pill.style.opacity = 0;
         }
+
+        document.querySelectorAll('#s3-mosaic .mt').forEach((t, i) => {
+          const u = easeOutCubic(prog(f, B.mosaicFlip + 4 + i * 5, B.mosaicFlip + 26 + i * 5));
+          t.style.opacity = (0.1 + 0.9 * u).toFixed(3);
+          t.style.transform = `translateY(${lerp(46, 0, u).toFixed(1)}px) scale(${lerp(0.96, 1, u).toFixed(3)})`;
+        });
+
+        $('s3-beams').style.transform = `rotate(${(f * 0.12).toFixed(1)}deg) scale(${(1 + mid * 0.12).toFixed(3)})`;
       }
 
-      // ==================== BEAT 04: 3D WEB ARCHITECTURE FLYOVER (960..1350) ====================
-      if (applySeam(scenes.s4, f, 960, 1350, 'z', 'z')) {
-        const br = document.getElementById('s4-browser');
-        const orbitU = easeInOutCubic(prog(f, 960, 1320));
-        const rx = lerp(14, 2, orbitU);
-        const ry = lerp(-18, 4, orbitU);
-        const sc = f >= 1300 ? lerp(1.0, 1.12, easeInQuart(prog(f, 1300, 1350))) : lerp(0.94, 1.0, easeOutQuart(prog(f, 960, 1010)));
-        br.style.transform = `scale(${sc.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      // ==================== BEAT 04 : WEB Z-TUNNEL (1050..1428) ====================
+      if (applySeam($('s4'), f, B.tunnelIn, 1428, 'z', 'z')) {
+        // tunnel rings fly at camera
+        const rings = ['tr0', 'tr1', 'tr2', 'tr3', 'tr4', 'tr5'];
+        for (let i = 0; i < rings.length; i++) {
+          const rEl = $(rings[i]);
+          const phase = ((f * 0.9 + i * 60) % 360) / 360;
+          const z = lerp(-1450, 480, phase);
+          const op = Math.sin(Math.PI * phase) * (0.20 + hi * 0.45);
+          rEl.style.opacity = op.toFixed(3);
+          rEl.style.transform = `translateZ(${z.toFixed(0)}px) scale(${lerp(0.9, 1.05, phase).toFixed(3)})`;
+        }
 
-        const s0 = document.getElementById('wslide-0');
-        const s1 = document.getElementById('wslide-1');
-        const s2 = document.getElementById('wslide-2');
-        const url = document.getElementById('s4-url');
-        s0.style.display = f < 1110 ? 'grid' : 'none';
-        s1.style.display = (f >= 1110 && f < 1215) ? 'grid' : 'none';
-        s2.style.display = f >= 1215 ? 'flex' : 'none';
-        url.textContent = f < 1110
-          ? 'https://adil-chandio.github.io/portfolio/'
-          : (f < 1215 ? 'monarch://maya-ai-os-and-agent-engine' : 'https://monarch-workspace-beryl.vercel.app/');
+        const slides = [
+          { id: 'wslide-0', f0: B.tunnelIn, f1: B.slide1 },
+          { id: 'wslide-1', f0: B.slide1, f1: B.slide2 },
+          { id: 'wslide-2', f0: B.slide2, f1: 1428 },
+        ];
+        for (let i = 0; i < slides.length; i++) {
+          const sl = slides[i];
+          const el = $(sl.id);
+          if (f < sl.f0 - 6 || f >= sl.f1) { el.style.display = 'none'; continue; }
+          el.style.display = 'block';
+          const inU = easeOutExpo(prog(f, sl.f0, sl.f0 + 16));
+          const outU = easeInQuart(prog(f, sl.f1 - 10, sl.f1));
+          const z = lerp(-780, 0, inU) + outU * 900;
+          const sc = lerp(0.74, 1, inU) * lerp(1, 1.6, outU);
+          const rot = (i - 1) * lerp(-6, 0, inU) + (i === 1 ? Math.sin(f * 0.02) * 0.5 : 0);
+          el.style.opacity = (clamp(inU * 2) * (1 - clamp(outU * 1.12))).toFixed(3);
+          el.style.transform = `translate3d(${lerp((i - 1) * 60, 0, inU).toFixed(1)}px, ${lerp(40, 0, inU).toFixed(1)}px, ${z.toFixed(0)}px) rotateY(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+          el.style.filter = `blur(${(outU * 9).toFixed(1)}px)`;
+        }
 
-        // Oversized cursor flies to "Open Client Vault (MON-DEMO26)" and clicks at f=1314!
-        if (f >= 1265 && f <= 1345) {
-          const cu = easeInOutCubic(prog(f, 1265, 1312));
-          const cx = lerp(1680, 490, cu);
-          const cy = lerp(960, 845, cu);
-          const tap = (f >= 1313 && f <= 1319) ? 0.84 : 1.0;
+        $('s4-shutter').style.opacity = (0.16 + hi * 0.5).toFixed(3);
+        $('s4-shutter').style.transform = `scaleY(${(1 + mid * 0.05).toFixed(3)})`;
+
+        // cursor → vault CTA click at 1392
+        if (f >= 1340 && f <= 1420) {
+          const cu = easeInOutQuint(prog(f, 1340, 1390));
+          const cx = lerp(1700, 470, cu);
+          const cy = lerp(980, 900, cu);
+          const tap = f >= 1391 && f <= 1397 ? 0.82 : 1;
           setCursor(cx, cy, tap, 1);
         }
-        triggerRing(f, 1314, 505, 855, '#FF3B49');
+        const cta = $('s4-cta');
+        const near = prog(f, 1360, 1400);
+        cta.style.transform = `scale(${(1 + 0.05 * near).toFixed(3)})`;
+        cta.style.boxShadow = `0 ${(24 + near * 16).toFixed(0)}px ${(60 + near * 40).toFixed(0)}px rgba(224,27,43,${(0.45 + near * 0.28).toFixed(2)})`;
+        triggerRing(f, B.vaultClick, 500, 912, '#FF3B49');
       }
 
-      // ==================== BEAT 05: CLIENT VAULT & 4-RAIL UNLOCK (1350..1680) ====================
-      if (applySeam(scenes.s5, f, 1350, 1680, 'z', 'blur')) {
-        const railCues = [1410, 1440, 1470, 1500];
+      // ==================== BEAT 05 : VAULT (1428..1800) ====================
+      if (applySeam($('s5'), f, B.vaultIn, 1800, 'z', 'blur')) {
+        const unlocked = f >= B.unlockClick;
+        let activeCount = 0;
         for (let r = 0; r < 4; r++) {
-          const el = document.getElementById(`rail-${r}`);
-          if (f >= railCues[r]) el.classList.add('active');
-          else el.classList.remove('active');
+          const el = $(`rail-${r}`);
+          const tick = B.railTicks[r];
+          const on = f >= tick;
+          if (on) activeCount++;
+          el.classList.toggle('active', on);
+          el.querySelector('.st').textContent = on ? 'VERIFIED ✓' : 'PENDING';
+          const bar = el.querySelector('.bar');
+          const bu = easeOutCubic(prog(f, tick, tick + 18));
+          bar.style.width = `${(on ? 100 * bu : 0).toFixed(1)}%`;
+          el.style.transform = on ? `translateX(${(4 * (1 - prog(f, tick, tick + 12))).toFixed(1)}px)` : 'translateX(0px)';
         }
 
-        // Cursor flies to Unlock button and clicks at f=1560!
-        if (f >= 1512 && f <= 1610) {
-          const cu = easeInOutCubic(prog(f, 1512, 1558));
-          const cx = lerp(1760, 1360, cu);
-          const cy = lerp(420, 880, cu);
-          const tap = (f >= 1559 && f <= 1565) ? 0.84 : 1.0;
-          const op = f > 1588 ? 1 - prog(f, 1588, 1610) : 1;
+        // vault dial rotation + progress arc
+        const pU = unlocked ? 1 : easeInOutCubic(prog(f, B.vaultIn + 10, B.unlockClick - 6));
+        $('vr-prog').style.strokeDashoffset = (1131 * (1 - pU)).toFixed(1);
+        $('vr-prog').setAttribute('stroke', unlocked ? '#34D399' : '#FF4D5A');
+        $('vr-mid').style.transform = `rotate(${(f * (unlocked ? 3.2 : 0.5)).toFixed(1)}deg)`;
+        $('vr-mid').style.transformOrigin = '350px 350px';
+        $('vr-out').style.transform = `rotate(${(-f * 0.35).toFixed(1)}deg)`;
+        $('vr-out').style.transformOrigin = '350px 350px';
+        $('vr-in').style.transform = `rotate(${(f * 0.8).toFixed(1)}deg)`;
+        $('vr-in').style.transformOrigin = '350px 350px';
+
+        const lockIc = $('s5-lock-ic'), lockLb = $('s5-lock-lb'), core = $('s5-door-core');
+        if (unlocked) {
+          const pu = easeOutBack(prog(f, B.unlockClick, B.unlockClick + 16), 2.0);
+          lockIc.textContent = '✓';
+          lockLb.textContent = 'MASTER UNLOCKED';
+          core.style.transform = `scale(${lerp(1, 1.06, pu).toFixed(4)})`;
+          core.style.borderColor = 'rgba(52,211,153,0.85)';
+          core.style.boxShadow = `0 0 ${(120 + sub * 80).toFixed(0)}px rgba(16,185,129,${(0.32 + sub * 0.3).toFixed(2)}), inset 0 0 60px rgba(0,0,0,0.7)`;
+        } else {
+          lockIc.textContent = '🔒';
+          lockLb.textContent = 'AES-256 · LOCKED';
+          core.style.transform = `scale(${(1 + sub * 0.012).toFixed(4)})`;
+          core.style.borderColor = 'rgba(110,231,183,0.35)';
+          core.style.boxShadow = `0 0 90px rgba(16,185,129,${(0.18 + sub * 0.16).toFixed(2)}), inset 0 0 60px rgba(0,0,0,0.7)`;
+        }
+
+        const burst = $('s5-burst');
+        if (unlocked) {
+          const bu = prog(f, B.unlockClick, B.unlockClick + 40);
+          burst.style.opacity = (0.85 * (1 - bu)).toFixed(3);
+          burst.style.transform = `translate3d(1400px, 488px, 0) scale(${(1 + easeOutCubic(bu) * 260).toFixed(1)})`;
+        } else {
+          burst.style.opacity = 0;
+        }
+
+        // cursor to unlock
+        if (f >= 1600 && f <= 1700) {
+          const cu = easeInOutQuint(prog(f, 1600, 1652));
+          const cx = lerp(1720, 1180, cu);
+          const cy = lerp(430, 905, cu);
+          const tap = f >= 1655 && f <= 1661 ? 0.82 : 1;
+          const op = f > 1680 ? 1 - prog(f, 1680, 1700) : 1;
           setCursor(cx, cy, tap, op);
         }
-        triggerRing(f, 1560, 1375, 890, '#10B981');
+        triggerRing(f, B.unlockClick, 1190, 918, '#10B981');
 
-        const btn = document.getElementById('s5-unlock-btn');
-        const badge = document.getElementById('s5-badge');
-        const rib = document.getElementById('s5-wm-ribbon');
-        const wmPill = document.getElementById('s5-wm-pill');
-        const fstate = document.getElementById('s5-file-state');
-        if (f >= 1560) {
+        const btn = $('s5-unlock-btn'), badge = $('s5-badge'), rib = $('s5-wm-ribbon'), wmPill = $('s5-wm-pill'), fstate = $('s5-file-state');
+        if (unlocked) {
           btn.classList.add('unlocked');
           btn.textContent = '✓ Master Bundle Unlocked · Downloading 1080p60 MP4';
           badge.style.background = 'rgba(16,185,129,0.22)';
           badge.style.borderColor = '#10B981';
+          badge.style.color = '#6EE7B7';
           badge.textContent = '✓ VERIFIED · CLEAN MASTER UNLOCKED';
-          rib.style.background = 'linear-gradient(to top, rgba(6,24,19,0.75) 0%, rgba(6,24,19,0.0) 52%)';
+          rib.style.background = 'linear-gradient(to top, rgba(6,24,19,0.78) 0%, rgba(6,24,19,0) 54%)';
           rib.style.alignItems = 'flex-end';
           wmPill.style.background = 'rgba(5,150,105,0.96)';
           wmPill.style.borderColor = '#34D399';
@@ -1228,8 +1250,9 @@
         } else {
           btn.classList.remove('unlocked');
           btn.textContent = 'Verify Settlement & Unlock 1080p60 Master →';
-          badge.style.background = 'rgba(210,31,43,0.2)';
+          badge.style.background = 'rgba(224,27,43,0.18)';
           badge.style.borderColor = '#FF4754';
+          badge.style.color = '#FF9AA2';
           badge.textContent = '● WATERMARKED REVIEW STAGE';
           rib.style.background = 'rgba(7,7,10,0.68)';
           rib.style.alignItems = 'center';
@@ -1239,42 +1262,63 @@
           fstate.style.color = '#FBBF24';
           fstate.textContent = 'ENCRYPTED CLOUD LINK';
         }
+
+        $('s5-grid').style.opacity = (0.55 + mid * 0.4).toFixed(3);
       }
 
-      // ==================== BEAT 06: FINALE SIGNATURE LOCKUP (1680..1920) ====================
-      if (applySeam(scenes.s6, f, 1680, 1920, 'blur', 'none')) {
-        const u = easeOutQuart(prog(f, 1680, 1735));
-        document.getElementById('s6-title').style.transform = `scale(${lerp(1.14, 1.0, u).toFixed(4)})`;
-        const sigU = easeInOutCubic(prog(f, 1715, 1785));
-        document.getElementById('s6-sig-wrap').style.clipPath = `inset(0 ${(100 * (1 - sigU)).toFixed(1)}% 0 0)`;
+      // ==================== BEAT 06 : FINALE (1800..2160) ====================
+      if (applySeam($('s6'), f, B.finaleIn, TOTAL_FRAMES, 'blur', 'none')) {
+        const u = easeOutQuart(prog(f, B.finaleIn, B.finaleIn + 46));
+        const t = $('s6-title');
+        t.style.transform = `scale(${lerp(1.16, 1, u).toFixed(4)})`;
+        t.style.letterSpacing = `${lerp(0.16, 0.01, u).toFixed(3)}em`;
+        t.style.opacity = clamp(u * 1.5).toFixed(3);
+
+        $('s6-kicker').style.opacity = easeOutCubic(prog(f, B.finaleIn + 4, B.finaleIn + 34)).toFixed(3);
+        $('s6-sub').style.opacity = easeOutCubic(prog(f, B.finaleIn + 26, B.finaleIn + 70)).toFixed(3);
+        $('s6-sub').style.letterSpacing = `${lerp(0.70, 0.42, easeOutCubic(prog(f, B.finaleIn + 26, B.finaleIn + 90))).toFixed(3)}em`;
+
+        const sigU = easeInOutQuint(prog(f, B.finaleIn + 62, B.finaleIn + 140));
+        $('s6-sig-wrap').style.clipPath = `inset(0 ${(100 * (1 - sigU)).toFixed(2)}% 0 0)`;
+
+        $('s6-rule').style.width = `${lerp(0, 520, easeOutCubic(prog(f, B.finaleIn + 40, B.finaleIn + 110))).toFixed(0)}px`;
+        $('s6-handle').style.opacity = easeOutCubic(prog(f, B.finaleIn + 96, B.finaleIn + 140)).toFixed(3);
+        $('s6-tags').style.opacity = (0.9 * easeOutCubic(prog(f, B.finaleIn + 110, B.finaleIn + 160))).toFixed(3);
+
+        const bloom = $('s6-bloom');
+        bloom.style.opacity = (0.75 + sub * 0.6).toFixed(3);
+        bloom.style.transform = `scale(${(1 + sub * 0.06).toFixed(3)})`;
       }
+
+      // global canvas FX
+      drawFX(f, beatIdx);
     }
 
     window.__setFrame = renderFrame;
 
-    // Live 60fps interactive player when opened in browser
     if (!IS_HEADLESS) {
       let startTs = performance.now();
-      const audio = document.getElementById('master-audio');
+      const audio = $('master-audio');
       Object.values(seqMap).forEach(({ vid }) => vid.play().catch(() => {}));
 
       function tick(now) {
-        let sec = !audio.paused && audio.currentTime > 0
+        const sec = !audio.paused && audio.currentTime > 0
           ? audio.currentTime
           : ((now - startTs) / 1000) % (TOTAL_FRAMES / FPS);
         const f = Math.min(TOTAL_FRAMES - 1, Math.floor(sec * FPS));
         renderFrame(f);
         requestAnimationFrame(tick);
       }
-      requestAnimationFrame(tick);
+      audioReady.then(() => requestAnimationFrame(tick));
 
-      document.getElementById('btn-play').addEventListener('click', () => {
+      $('btn-play').addEventListener('click', () => {
         audio.currentTime = 0;
         startTs = performance.now();
         audio.play().catch(() => {});
         Object.values(seqMap).forEach(({ vid }) => { vid.currentTime = 0; vid.play().catch(() => {}); });
       });
     } else {
+      audioReady.then(() => renderFrame(0));
       renderFrame(0);
     }
   </script>

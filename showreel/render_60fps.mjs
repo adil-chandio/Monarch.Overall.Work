@@ -9,13 +9,13 @@ const ROOT = process.cwd();
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const TMP_SEQ_DIR = path.join(PUBLIC_DIR, 'showreel', '_tmp_frames');
 const FRAMES_OUT = '/tmp/sr_frames_60fps';
-const CLEAN_MASTER = '/tmp/MON-DEMO26_Proof_Over_Promises_1080p60_Master.mp4';
+const CLEAN_MASTER = process.env.CLEAN_MASTER || '/tmp/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4';
 const PREVIEW_OUT = path.join(PUBLIC_DIR, 'demo-preview.mp4');
 const POSTER_OUT = path.join(PUBLIC_DIR, 'demo-poster.jpg');
-const ENC_OUT = path.join(ROOT, 'deliverables', 'MON-DEMO26_Master_60fps.enc');
+const ENC_OUT = path.join(ROOT, 'deliverables', 'MON-DEMO26_v3_Master_60fps.enc');
 const AUDIO_IN = path.join(PUBLIC_DIR, 'showreel', 'audio_master_60fps.m4a');
 
-const TOTAL_FRAMES = 1920; // 32.00s @ 60fps
+const TOTAL_FRAMES = 2160; // 36.00s @ 60fps (v3 Absolute Cinema)
 const WORKERS = 4;
 
 const RSA_PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
@@ -165,7 +165,7 @@ function encodeMasters() {
   console.log('[3/5] Encoding Clean 1080p60 Master + Watermarked Client Vault Preview + Poster...');
 
   // 1. Poster frame (f=390 -> 6.50s: 3D YouTube Studio Proof Deck + 583,290 Views + Retention Curve)
-  fs.copyFileSync(path.join(FRAMES_OUT, 'frame_00390.jpg'), POSTER_OUT);
+  fs.copyFileSync(path.join(FRAMES_OUT, 'frame_00430.jpg'), POSTER_OUT);
 
   // 2. Clean Unwatermarked Master (1920x1080 @ 60.0 fps, -crf 17, stream-copied -15.3 LUFS / -2.1 dBTP AAC)
   execFileSync('ffmpeg', [
@@ -175,7 +175,7 @@ function encodeMasters() {
     '-i', AUDIO_IN,
     '-c:v', 'libx264',
     '-preset', 'slow',
-    '-crf', '17',
+    '-crf', '16',
     '-pix_fmt', 'yuv420p',
     '-r', '60',
     '-c:a', 'copy',

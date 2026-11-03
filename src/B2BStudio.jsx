@@ -35,7 +35,7 @@ const SHOWCASE_TABS = [
     title: 'Proof Over Promises — Real Work, Real Retention & Vault Demo',
     type: 'video',
     aspect: '16/9',
-    src: '/demo-preview.mp4?v=proof60',
+    src: '/demo-preview.mp4?v=cinema360',
     poster: '/demo-poster.jpg?v=proof60',
   },
   {

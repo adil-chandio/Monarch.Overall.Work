@@ -6,6 +6,8 @@ on:
       - arena/9960286a-monarch-overall-work
     paths:
       - 'showreel/render_60fps.mjs'
+      - 'showreel/beat_sheet.json'
+      - 'showreel/build_audio_60fps.py'
       - 'public/showreel/index.html'
       - '.github/workflows/render-showreel-60fps.yml'
   workflow_dispatch:
@@ -16,13 +18,19 @@ permissions:
 jobs:
   render-60fps:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 1
+
+      - name: Install Python DSP deps (numpy / scipy / imageio-ffmpeg)
+        run: pip3 install --break-system-packages --quiet numpy scipy imageio-ffmpeg
+
+      - name: Render 60fps soundtrack + FFT telemetry (Python DSP)
+        run: python3 showreel/build_audio_60fps.py
 
       - name: Install Playwright & Verify FFmpeg/Chrome
         run: |
@@ -49,6 +57,6 @@ jobs:
         run: |
           git config user.name "monarch-render-bot"
           git config user.email "workadilchandio@gmail.com"
-          git add public/demo-preview.mp4 public/demo-poster.jpg deliverables/MON-DEMO26_Master_60fps.enc
-          git commit -m "chore(showreel): render Proof Over Promises 1080p60 master & preview [skip ci]"
+          git add public/demo-preview.mp4 public/demo-poster.jpg deliverables/MON-DEMO26_v3_Master_60fps.enc public/showreel/audio_master_60fps.m4a public/showreel/audio_reactive.json
+          git commit -m "chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]"
           git push origin HEAD:${{ github.ref_name }}

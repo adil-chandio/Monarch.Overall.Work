@@ -3,9 +3,9 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 
 const ROOT = process.cwd();
-const ENC_IN = path.join(ROOT, 'deliverables', 'MON-DEMO26_Master_60fps.enc');
+const ENC_IN = process.env.ENC_IN || path.join(ROOT, 'deliverables', 'MON-DEMO26_v3_Master_60fps.enc');
 const KEY_PATH = process.argv[2] || '/tmp/monarch_master_rsa.pem';
-const OUT_MP4 = path.join(ROOT, 'deliverables', 'MON-DEMO26_Proof_Over_Promises_1080p60_Master.mp4');
+const OUT_MP4 = process.env.OUT_MP4 || path.join(ROOT, 'deliverables', 'MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4');
 
 const packet = fs.readFileSync(ENC_IN);
 const privPem = fs.readFileSync(KEY_PATH, 'utf8');

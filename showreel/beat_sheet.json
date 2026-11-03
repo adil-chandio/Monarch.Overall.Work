@@ -1,41 +1,40 @@
 {
   "fps": 60,
-  "total_frames": 1920,
-  "duration_s": 32.0,
-  "bpm": 120,
+  "total_frames": 2160,
+  "duration_s": 36.0,
+  "bpm": 125.0,
   "card_deals": [
-    258,
-    276,
-    291,
-    303,
-    313,
-    321
+    308,
+    323,
+    337,
+    350,
+    362
   ],
   "quad_pops": [
-    582,
-    594,
-    606,
-    618
+    666,
+    680,
+    694,
+    708
   ],
   "rail_ticks": [
-    1410,
-    1440,
-    1470,
-    1500
+    1488,
+    1522,
+    1556,
+    1590
   ],
   "seams": {
-    "hook_click_invert": 120,
-    "to_deck_deal": 240,
-    "target_brackets": 435,
-    "crash_zoom_punch": 450,
-    "to_quad_films": 570,
-    "quad_hero_badge": 780,
-    "to_web_3d": 960,
-    "web_slide_maya": 1110,
-    "web_slide_store": 1215,
-    "web_vault_click": 1314,
-    "to_vault_unlock": 1350,
-    "vault_unlock_click": 1560,
-    "to_finale_lockup": 1680
+    "hook_click_portal": 148,
+    "to_deck_deal": 288,
+    "laser_scan_lock": 496,
+    "crash_zoom_punch": 516,
+    "to_cinema_monoliths": 648,
+    "monolith_reframe_matrix": 852,
+    "to_web_tunnel": 1050,
+    "tunnel_zoom_maya": 1185,
+    "tunnel_zoom_store": 1300,
+    "web_vault_click": 1392,
+    "to_vault_unlock": 1428,
+    "vault_unlock_click": 1656,
+    "to_finale_cinema": 1800
   }
 }
