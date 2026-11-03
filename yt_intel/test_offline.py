@@ -160,6 +160,21 @@ def t_reverse():
     ok("replication always actionable", rep["change"] and rep["beat"])
 
 
+def t_go_needs_a_mechanism():
+    """GO may not claim a readable mechanism while the mechanism part says otherwise."""
+    sat = {"status": "ok", "top3_share": 0.44, "fresh_share_30d": 0.18,
+           "winner_ratio": 3.5, "median_views": 113940}
+    weak = {"status": "ok", "share": {"number_in_title": 0.0}}
+    strong = {"status": "ok", "share": {"number_in_title": 0.5, "question": 0.4,
+                                        "you_form": 0.4, "contrarian": 0.4}}
+    a = decide.greenlight({"score": 83.9}, sat, weak, {"status": "ok", "strength": "firm"})
+    b = decide.greenlight({"score": 83.9}, sat, strong, {"status": "ok", "strength": "firm"})
+    ok("high score + no mechanism is not GO", a["verdict"] != "GO")
+    ok("...and it says why", "cannot yet see how the winners are built" in a["reason"])
+    ok("high score + clear mechanism is GO", b["verdict"] == "GO")
+    ok("every verdict still carries a reason", all(x["reason"] for x in (a, b)))
+
+
 def t_comment_mining():
     """Comment shares must name what was said, and refuse to invent a pattern."""
     sample = [{"text": "Please make part 2", "likes": 40, "replies": 1},
@@ -187,7 +202,7 @@ def t_ideas():
 if __name__ == "__main__":
     print("yt-intel offline tests")
     for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
-               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_mining, t_reverse, t_ideas]:
+               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
     sys.exit(0)

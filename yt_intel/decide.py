@@ -165,8 +165,24 @@ def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
     if not against:
         against.append("no objection found in the data — which itself is a reason to check the sample")
 
-    if score >= 70 and confidence >= 0.6:
+    # GO means all three of its own words are true: demand, entry room *and* a readable
+    # mechanism. A live case scored 70 with mechanism 25 and was labelled GO with the reason
+    # "a readable mechanism" — the verdict was copying its own template, not its evidence.
+    mechanism_clear = parts["mechanism"] is None or parts["mechanism"] >= 55
+    if score >= 70 and confidence >= 0.6 and mechanism_clear:
         verdict, reason = "GO", "demand, entry room and a readable mechanism all clear"
+    elif score >= 70 and confidence >= 0.6:
+        verdict, reason = "SHARPEN", (
+            "the topic is live but we cannot yet see how the winners are built — "
+            "teardown the top 5 before committing a production day"
+        )
+    elif score >= 52 and (parts["mechanism"] or 100) < 55:
+        # Same score band, different bottleneck: say which one it is, because the next action
+        # differs (fix the mechanism vs. sharpen the angle).
+        verdict, reason = "SHARPEN", (
+            "the topic is live but we cannot yet see how the winners are built — "
+            "teardown the top 5 before committing a production day"
+        )
     elif score >= 52:
         verdict, reason = "SHARPEN", "the topic is live but the angle is not yet differentiated"
     else:
