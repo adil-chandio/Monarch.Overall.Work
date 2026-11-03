@@ -11,7 +11,7 @@
  * Usage: node scripts/yt-queue.mjs [--limit 30] [--max 4] [--only "topic fragment"]
  */
 import { execFile } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { promisify } from 'node:util';
 
@@ -19,6 +19,8 @@ const run = promisify(execFile);
 const PY = process.env.PYTHON_BIN || 'python3';
 const OUT = process.env.YT_INTEL_OUT || join('public', 'yt-intel');
 const QUEUE = process.env.YT_QUEUE || join('config', 'topic-queue.json');
+// Public, append-only, and written by nobody else — see the note at the write site.
+const LEDGER = process.env.YT_LEDGER || join(OUT, 'queue-runs.jsonl');
 
 const arg = (name, fallback) => {
   const i = process.argv.indexOf(`--${name}`);
@@ -123,9 +125,12 @@ for (const [i, item] of plan.entries()) {
 }
 
 // Keep the run itself on the record, so a topic that keeps returning RETRY is visible.
-const ledger = join(OUT, 'queue-runs.jsonl');
-const prev = existsSync(ledger) ? readFileSync(ledger, 'utf8') : '';
-writeFileSync(ledger, prev + JSON.stringify({ at: new Date().toISOString(), results }) + '\n');
+//
+// Appended, NEVER rewritten. Rewriting the whole file (read + write) makes every run a
+// whole-file diff, so two writers — the CI job and a human or agent pushing at the same
+// time — conflict on this one line forever. Today that produced four rejected pushes in a
+// row. `appendFileSync` keeps the diff to a single added line, which git can merge.
+appendFileSync(LEDGER, JSON.stringify({ at: new Date().toISOString(), results }) + '\n');
 
 console.log('\nsummary');
 for (const r of results) {
