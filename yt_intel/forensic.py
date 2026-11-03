@@ -361,6 +361,11 @@ def comment_mining(comments: list[dict], min_n: int = 20) -> dict:
         return {
             "status": "insufficient", "n": len(texts), "required": min_n,
             "detail": "too few comments to read a pattern; widen the sample or pick a bigger video",
+            # A refusal still has to say something on a desk. The first sweep produced a card
+            # with an empty reading because the selected video had six comments — the tool was
+            # right to refuse and wrong to be silent about it.
+            "reading": (f"only {len(texts)} comments on this video, and {min_n} are needed before a "
+                        f"pattern means anything — this video was too quiet to brief from"),
         }
 
     def share(bucket):

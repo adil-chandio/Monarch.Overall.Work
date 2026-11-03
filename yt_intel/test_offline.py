@@ -248,6 +248,16 @@ def t_go_needs_a_mechanism():
     ok("every verdict still carries a reason", all(x["reason"] for x in (a, b)))
 
 
+def t_comment_refusal_speaks():
+    """A refusal must say why on the card, and the miner must not pick a video that cannot
+    clear the gate. The first sweep produced one card with an empty reading (a 6-comment
+    video) and spent a quota unit to be told what the row count already said."""
+    from . import forensic
+    r = forensic.comment_mining([{"text": "nice", "likes": 1}] * 6)
+    ok("a too-small sample is refused", r["status"] == "insufficient")
+    ok("the refusal carries a reading, not an empty string", bool(r.get("reading")) and "6 comments" in r["reading"])
+
+
 def t_comment_mining():
     """Comment shares must name what was said, and refuse to invent a pattern."""
     sample = [{"text": "Please make part 2", "likes": 40, "replies": 1},
@@ -275,7 +285,7 @@ def t_ideas():
 if __name__ == "__main__":
     print("yt-intel offline tests")
     for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
-               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
+               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_comment_refusal_speaks, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
     sys.exit(0)

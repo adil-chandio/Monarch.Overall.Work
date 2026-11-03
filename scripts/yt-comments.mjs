@@ -61,8 +61,12 @@ export function candidates(dir = OUT) {
 const HOW_TO = /\b(how to|how i|tutorial|guide|step by step|setup|workflow|tips|free)\b/i;
 
 /** Best single candidate inside one report: how-to intent first, then raw comment count. */
+// `forensic.comments` refuses below 20 comments; mining a video under that line spends a
+// unit to be told the obvious. The first sweep did exactly that on a 6-comment video.
+const MIN_COMMENTS = 20;
+
 function bestIn(report) {
-  const rows = (report.rows || []).filter((r) => r?.id && r.comments);
+  const rows = (report.rows || []).filter((r) => r?.id && (r.comments || 0) >= MIN_COMMENTS);
   if (!rows.length) return null;
   return rows.sort((a, b) => {
     const aHow = HOW_TO.test(`${a.title || ''} ${report.topic || ''}`) ? 1 : 0;
@@ -90,7 +94,7 @@ export function picksPerTopic(dir = OUT) {
     // A video can be the top row in several topic reports. Mining the same comment field
     // twice under two topic names would look like two independent audience readings and be
     // one. Chosen ids are global to this run, not per topic.
-    const rows = (d.rows || []).filter((r) => r?.id && r.comments && !chosen.has(r.id));
+    const rows = (d.rows || []).filter((r) => r?.id && (r.comments || 0) >= MIN_COMMENTS && !chosen.has(r.id));
     const best = bestIn({ ...d, rows });
     if (!best) continue;
     chosen.add(best.id);
