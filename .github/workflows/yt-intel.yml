@@ -71,15 +71,19 @@ jobs:
       - name: Resolve the key secret
         env:
           KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
-          KEY_ALT: ${{ secrets.YTAPI1 }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+          KEY_ALT_2: ${{ secrets.YTAPI1 }}
         # The key secret must be named YOUTUBE_API_KEY for the tool to pick it up. A closely
-        # named secret (YTAPI1) is a very easy mistake to make in a mobile browser, so both
-        # are accepted here and normalised into one name — and the log says which one won.
+        # near-miss secret (YTAP1) is a very easy mistake to make in a mobile browser, so the
+        # likely spellings are accepted here and normalised into one name — and the log says
+        # which one won. This step itself shipped with a typo'd name once and proved why the
+        # check has to exist rather than be assumed.
         # The value is masked; only its length and first four characters are printed.
         run: |
           KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          [ -z "$KEY" ] && KEY="$KEY_ALT_2"
           if [ -z "$KEY" ]; then
-            echo "no key secret (YOUTUBE_API_KEY or YTAPI1) — staying keyless"
+            echo "no key secret (YOUTUBE_API_KEY / YTAP1 / YTAPI1) — staying keyless"
             exit 0
           fi
           echo "::add-mask::$KEY"
@@ -87,7 +91,7 @@ jobs:
           if [ -n "$KEY_PRIMARY" ]; then
             echo "using secret YOUTUBE_API_KEY (${#KEY} chars)"
           else
-            echo "using secret YTAPI1 (${#KEY} chars) — rename it to YOUTUBE_API_KEY when convenient"
+            echo "using secret YTAP1 (${#KEY} chars) — rename it to YOUTUBE_API_KEY when convenient"
           fi
 
       - name: Which lane are we in?
