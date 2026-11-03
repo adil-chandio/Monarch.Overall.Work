@@ -1278,7 +1278,7 @@
           const on = f >= tick;
           if (on) activeCount++;
           el.classList.toggle('active', on);
-          el.querySelector('.st').textContent = on ? 'VERIFIED ✓' : 'PENDING';
+          el.querySelector('.st').textContent = on ? 'VERIFIED' : 'PENDING';
           const bar = el.querySelector('.bar');
           const bu = easeOutCubic(prog(f, tick, tick + 18));
           bar.style.width = `${(on ? 100 * bu : 0).toFixed(1)}%`;
@@ -1366,7 +1366,8 @@
         const spec = $('s5-spec');
         if (spec) {
           const yieldU = easeOutCubic(prog(f, B.unlockClick, B.unlockClick + 16));
-          spec.style.opacity = (1 - yieldU * 0.94).toFixed(3);
+          spec.style.opacity = (1 - yieldU).toFixed(3);
+          spec.style.visibility = yieldU > 0.98 ? 'hidden' : 'visible';
           spec.style.transform = `translateY(${(yieldU * 26).toFixed(1)}px)`;
         }
 
