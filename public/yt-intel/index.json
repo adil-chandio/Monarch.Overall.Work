@@ -1,6 +1,40 @@
 {
-  "updated": "2026-11-03T18:49:57.184Z",
+  "updated": "2026-11-03T19:10:47.008Z",
   "reports": [
+    {
+      "topic": "ai b roll generation",
+      "at": "2026-11-03T19:10:45.000Z",
+      "file": "ai-b-roll-generation.json",
+      "lane": "api",
+      "order": "thisMonth",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 59.5,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 73.8,
+        "winnability": 70,
+        "mechanism": 25,
+        "fit": null,
+        "timing": null
+      },
+      "strongest_against": [
+        "the sample is too new to judge — median 10 views with 100% uploaded in the last 30 days, so 'nobody owns it' may just mean 'nobody has watched it yet'"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.986,
+        "winner_ratio": 22921.1,
+        "fresh_share_30d": 1,
+        "median_views": 10,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
+      },
+      "confidence": 0.75,
+      "mechanism": 25,
+      "vph_median": 0
+    },
     {
       "topic": "shorts retention hook",
       "at": "2026-11-03T18:49:56.000Z",
@@ -172,40 +206,6 @@
       "confidence": 0.85,
       "mechanism": 10,
       "vph_median": 75
-    },
-    {
-      "topic": "ai b roll generation",
-      "at": "2026-11-03T15:10:16.000Z",
-      "file": "ai-b-roll-generation.json",
-      "lane": "web",
-      "order": "thisMonth",
-      "status": "ok",
-      "count": 20,
-      "verdict": "SHARPEN",
-      "score": 52.3,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
-      "parts": {
-        "demand": 73.8,
-        "winnability": 48.199999999999996,
-        "mechanism": 25,
-        "fit": null,
-        "timing": null
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 48)"
-      ],
-      "saturation": {
-        "videos": 19,
-        "top3_share": 0.798,
-        "winner_ratio": 508.9,
-        "fresh_share_30d": 1,
-        "median_views": 1626,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
-      },
-      "confidence": 0.75,
-      "mechanism": 25,
-      "vph_median": 16
     }
   ],
   "comments": [
@@ -214,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (6%) is the conversion surface",
-      "at": "2026-11-03T18:49:56.856Z",
+      "at": "2026-11-03T19:10:46.814Z",
       "asks": [
         {
           "label": "asked for a sequel",
