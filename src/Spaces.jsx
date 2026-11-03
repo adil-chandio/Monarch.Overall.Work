@@ -339,8 +339,9 @@ function ResearchPanel({ onNavigate }) {
     ]).then(([payload, lanes]) => {
       if (!live) return;
       setState(payload
-        ? { status: 'ok', reports: payload.reports || [], comments: payload.comments || [], lanes }
-        : { status: 'none', reports: [], comments: [], lanes });
+        ? { status: 'ok', reports: payload.reports || [], comments: payload.comments || [],
+            thumbnails: payload.thumbnails || null, lanes }
+        : { status: 'none', reports: [], comments: [], thumbnails: null, lanes });
     });
     return () => { live = false; };
   }, []);
@@ -495,6 +496,45 @@ function ResearchPanel({ onNavigate }) {
               )}
             </article>
           ))}
+        </div>
+      )}
+
+      {state.thumbnails && (
+        <div className="research-thumbs">
+          <div className="research-comments-head">
+            <b>Thumbnail forensics</b>
+            <span>
+              {state.thumbnails.n} thumbnails from “{state.thumbnails.topic}” · fetched by the CI
+              runner, not the browser
+            </span>
+          </div>
+          <p className="research-thumb-reading">{state.thumbnails.reading}</p>
+          <div className="research-thumb-strip">
+            {state.thumbnails.samples.map((s) => (
+              <a
+                key={s.id}
+                className="research-thumb"
+                href={`https://www.youtube.com/watch?v=${s.id}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={`https://i.ytimg.com/vi/${s.id}/mqdefault.jpg`} alt="" loading="lazy" />
+                <span className="mono">
+                  <i style={{ background: s.hex || 'transparent' }} />
+                  {s.hex || '—'} · face {Math.round((s.face || 0) * 100)}%
+                </span>
+              </a>
+            ))}
+          </div>
+          <div className="research-thumb-families mono">
+            {(state.thumbnails.hue_families || []).map(([name, n]) => (
+              <span key={name}>
+                {name} {n}/{state.thumbnails.n}
+              </span>
+            ))}
+            <span>contrast {state.thumbnails.avg_contrast}</span>
+            <span>busy {state.thumbnails.avg_busy}</span>
+          </div>
         </div>
       )}
 

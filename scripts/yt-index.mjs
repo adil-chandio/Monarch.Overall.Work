@@ -25,7 +25,7 @@ export const OUT = process.env.YT_INTEL_OUT || join('public', 'yt-intel');
 //   doctor.json the key check's verdict
 // Any `*.json` that is not in this set AND has no `decision` block is also treated as a side
 // file below — a topic report always carries a decision, so that test is safe.
-const SIDE_FILES = new Set(['index.json', 'lanes.json', 'doctor.json']);
+const SIDE_FILES = new Set(['index.json', 'lanes.json', 'doctor.json', 'thumbnails.json']);
 
 export function entryFor(file) {
   const data = JSON.parse(readFileSync(file, 'utf8'));
@@ -134,7 +134,34 @@ export function buildIndex(only = null, out = OUT) {
   }
   comments.sort((a, b) => String(b.at).localeCompare(String(a.at)));
 
-  writeFileSync(index, JSON.stringify({ updated: new Date().toISOString(), reports: merged, comments }, null, 2) + '\n');
+  // Thumbnail forensics is a different question — what the winners' packaging looks like —
+  // and only the CI runner can fetch i.ytimg.com. It lands as a side file; the desk shows it
+  // when present and says nothing when the network refused.
+  let thumbnails = null;
+  const thumbsFile = join(out, 'thumbnails.json');
+  if (existsSync(thumbsFile)) {
+    try {
+      const t = JSON.parse(readFileSync(thumbsFile, 'utf8'));
+      if (t.status === 'ok' && t.n) {
+        thumbnails = {
+          topic: t.topic || '',
+          n: t.n,
+          face_rate: t.face_rate,
+          avg_contrast: t.avg_contrast,
+          avg_busy: t.avg_busy,
+          reading: t.reading || '',
+          hue_families: (t.hue_families || []).slice(0, 3),
+          samples: (t.samples || []).slice(0, 3).map((s) => ({
+            id: s.id,
+            hex: s.dominant?.hex || null,
+            face: s.face_upper_half,
+          })),
+        };
+      }
+    } catch { /* a malformed thumbnail file must not break the desk */ }
+  }
+
+  writeFileSync(index, JSON.stringify({ updated: new Date().toISOString(), reports: merged, comments, thumbnails }, null, 2) + '\n');
   return { index, count: merged.length, reports: merged, comments: comments.length };
 }
 

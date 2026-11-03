@@ -1213,3 +1213,15 @@
 .research-probe{margin:0;font-size:7.5px;color:#7f8b7c;line-height:1.55}
 .research-probe b{color:#5c6b5c}
 .research-foot{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #f1f3ee;padding-top:8px;margin-top:10px;font-size:6.5px;color:#aab1a7;letter-spacing:.5px;flex-wrap:wrap}
+
+/* Thumbnail forensics. Small on purpose: the strip is a sample, not a gallery — three
+   thumbnails at 96px read as "there is a human, and the accent is red" which is the whole
+   finding. Anything bigger turns a measurement into a mood board. */
+.research-thumbs{display:flex;flex-direction:column;gap:8px;margin-top:12px;padding:12px;border:1px solid #e6e9df;border-radius:12px;background:#fbfcfa}
+.research-thumb-reading{margin:0;font-size:8px;line-height:1.6;color:#4f5c4c}
+.research-thumb-strip{display:flex;gap:8px;flex-wrap:wrap}
+.research-thumb{display:flex;flex-direction:column;gap:4px;width:104px;text-decoration:none}
+.research-thumb img{width:104px;height:58px;object-fit:cover;border-radius:6px;border:1px solid #e6e9df;background:#eef1ea}
+.research-thumb span{display:flex;align-items:center;gap:4px;font-size:6.5px;color:#8b9688;letter-spacing:.02em}
+.research-thumb span i{width:7px;height:7px;border-radius:2px;border:1px solid rgba(0,0,0,.12);flex:none}
+.research-thumb-families{display:flex;gap:10px;flex-wrap:wrap;font-size:6.5px;letter-spacing:.06em;text-transform:uppercase;color:#9aa495}
