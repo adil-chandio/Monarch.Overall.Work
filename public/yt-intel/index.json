@@ -1,9 +1,9 @@
 {
-  "updated": "2026-11-03T15:22:47.120Z",
+  "updated": "2026-11-03T15:24:44.188Z",
   "reports": [
     {
       "topic": "lanes",
-      "at": "2026-11-03T15:22:46.651Z",
+      "at": "2026-11-03T15:24:43.981Z",
       "file": "lanes.json",
       "lane": "web",
       "order": null,
@@ -22,19 +22,19 @@
     },
     {
       "topic": "ai video editing",
-      "at": "2026-11-03T15:22:46.000Z",
+      "at": "2026-11-03T15:24:43.000Z",
       "file": "ai-video-editing.json",
       "lane": "web",
       "order": "relevance",
       "status": "ok",
       "count": 17,
       "verdict": "SHARPEN",
-      "score": 67.7,
+      "score": 66.4,
       "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
       "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
       "parts": {
-        "demand": 83.9,
-        "winnability": 87.54285714285714,
+        "demand": 83.4,
+        "winnability": 83.52857142857142,
         "mechanism": 25,
         "fit": null,
         "timing": 55
@@ -44,15 +44,15 @@
       ],
       "saturation": {
         "videos": 17,
-        "top3_share": 0.456,
+        "top3_share": 0.439,
         "winner_ratio": 3.5,
-        "fresh_share_30d": 0.29,
+        "fresh_share_30d": 0.24,
         "median_views": 113940,
         "reading": "distributed — no single video owns it, entry is feasible"
       },
       "confidence": 0.85,
       "mechanism": 25,
-      "vph_median": 46
+      "vph_median": 31
     },
     {
       "topic": "ai b roll generation",
