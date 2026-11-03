@@ -6,6 +6,8 @@ Read in this order:
 2. **[02-REPO-REGISTRY.md](./02-REPO-REGISTRY.md)** — all 22 GitHub repos, classified: core / satellite / asset-store / archive, plus the archive procedure.
 3. **[03-SPACE-OPERATING-MODEL.md](./03-SPACE-OPERATING-MODEL.md)** — how each of the five mini spaces actually runs: pipeline, assets, scoreboard, allowed agents.
 4. **[04-BUILD-WAVES.md](./04-BUILD-WAVES.md)** — the five shipping waves, each with its own verify list and rollback.
+5. **[05-SPACES-OPERATING-MODEL.md](./05-SPACES-OPERATING-MODEL.md)** — the as-built space model.
+6. **[06-YT-INTEL.md](./06-YT-INTEL.md)** — the research desk as it actually runs: lanes, report format, what is proven and what is still borrowed confidence.
 
 ## The short version
 
