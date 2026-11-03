@@ -7,6 +7,11 @@
 
 ---
 
+> **Current cut:** the 60 fps "Absolute Cinema" showreel supersedes this pack's
+> showreel numbers. See [`MON-DEMO26_v4_Showreel_Delivery.md`](./MON-DEMO26_v4_Showreel_Delivery.md)
+> for the v4 master (−14.0 LUFS / −4.0 dBTP, 10.7 dB sectional dynamics) and its
+> measured audio-QC table. The B2B commercial described below is unchanged.
+
 ## 1. Unlocked Master Assets & Cloud Delivery Links
 
 - **Primary Clean Broadcast Master (`1920x1080`, `30fps`, `42.633s`, Unwatermarked):**  
