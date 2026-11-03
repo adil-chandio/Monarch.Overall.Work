@@ -250,3 +250,65 @@ node scripts/yt-index.mjs
 > chala aur sample **poora 1–3 saal purana** nikla — us par `NO` aaya jo asal mein
 > "market" ka nahi, "archive" ka faisla tha. Filter lagane ke baad `ai b roll generation`
 > ka sample 1–28 din purana aaya, median 9 views (naya topic), aur verdict badal gaya.
+
+---
+
+## Key lagne ke baad: pehla asli run (8 commands, ~3 minute)
+
+Ye order mein chalao. Har step ke saamne likha hai "acha" kya dikhna chahiye — agar kuch
+aur dikhe to usi jagah ruk jao, aage mat barho.
+
+```bash
+# 1. key environment mein hai?
+export YOUTUBE_API_KEY="AIza…"
+python -m yt_intel lanes
+#    good: lane api · quota 10000
+#    bura:  lane web  -> key load nahi hui (shell restart / .env.local check)
+
+# 2. key asal mein kaam karti hai?
+python -m yt_intel doctor
+#    good: PASS api key accepted · Data API v3 reachable · quota left 10000
+#    bura: 403 accessNotConfigured -> Step 3 (API enable) chhoot gaya
+#          403 keyInvalid          -> key galat paste hui
+#          timeout                 -> network, key ka masla nahi
+
+# 3. pehla topic (1 search = 100 units)
+python -m yt_intel topic "ai video editing" --limit 30 \
+  --json public/yt-intel/ai-video-editing.json
+#    good: TOP VIDEOS mein asli views, phir DECISION (GO / SHARPEN / NO)
+#    bura: RETRY -> lane web par gir gaya, step 1 dobara
+
+# 4. comment mining (1 unit — sabse sasta asli signal)
+python -m yt_intel comments <WO_VIDEO_ID> --limit 100
+#    good: n=NN · asks / objections / wants ke saath shares
+#    bura: error 403 commentsDisabled -> us video par comments band hain, doosri chuno
+
+# 5. channel (RSS lane, 0 units)
+python -m yt_intel channel @mkbhd
+
+# 6. UI ka index
+node scripts/yt-index.mjs
+#    good: index: N reports -> public/yt-intel/index.json
+
+# 7. browser: workspace -> YouTube Automation -> Research desk
+#    har card par verdict + conf + median views + views/hour dikhna chahiye
+
+# 8. CI ko bhi de do (secret pehle lag chuka hona chahiye)
+printf 'ai b roll generation\nthisMonth\n' > yt-intel-trigger.txt
+git add yt-intel-trigger.txt && git commit -m "ci: first keyed topic run" && git push
+#    gh run watch  -> "Key doctor" step PASS hona chahiye, skip nahi
+```
+
+> **Quota ka hisaab:** step 3 ≈ 101 units (1 search + 1 videos.list), step 4 = 1 unit.
+> 10,000 units/day ka matlab ≈ 99 topics/day. Queue `max_per_run: 4` par capped hai, aur
+> cache (`.cache/yt-intel/`) same query dobara chalane par 0 units leta hai.
+
+### Ab tak kya kya unproven hai (honest list)
+
+| cheez | status |
+|---|---|
+| keyless web lane (search, ages, views/hour) | **live** — CI par 6 topics measure ho chuke |
+| `doctor` / quota accounting | likha hua, **kabhi key ke saath chala nahi** |
+| Data API lane ke parsers (`videos.list` shape) | likha hua, key ke baghair test nahi ho sakta |
+| comment mining ke phrase lists | synthetic comments par 8 assertions pass; asli comments par nahi |
+| `style.py` ka cut threshold (0.22) | ek 36s film par tuned — doosri reference chahiye |
