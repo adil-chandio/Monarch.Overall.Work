@@ -63,7 +63,10 @@ jobs:
       - name: Runtime deps (all free, all pip)
         run: |
           python -m pip install --quiet --upgrade pip
-          python -m pip install --quiet numpy pillow yt-dlp pytrends
+          # imageio-ffmpeg ships a static ffmpeg binary, so the film analysis has an encoder
+          # on a runner that does not preinstall one. Without it style.py can only report
+          # "ffmpeg not found" — which is honest, but useless.
+          python -m pip install --quiet numpy pillow yt-dlp pytrends imageio-ffmpeg
 
       - name: Offline self-test (fail fast if the maths broke)
         run: python -m yt_intel.test_offline
@@ -183,6 +186,15 @@ jobs:
           else
             node scripts/yt-comments.mjs || echo "::warning::comment mining did not run — see public/yt-intel/comments-*.json"
           fi
+
+      - name: Film-analysis self-test (builds a 3-cut fixture, checks the detector)
+        id: film
+        if: always()
+        continue-on-error: true
+        # style.py has only ever run by hand. A shipped analysis path that no job executes is a
+        # claim, not a feature — this makes every run prove ffmpeg + the detector + pacing work
+        # on the actual runner. ~2 seconds.
+        run: python scripts/film-selftest.py
 
       - name: Thumbnail fingerprint (keyless, needs a network that serves i.ytimg.com)
         id: thumbs
