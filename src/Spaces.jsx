@@ -331,16 +331,16 @@ function ResearchPanel({ onNavigate }) {
     Promise.all([
       fetch('/yt-intel/index.json', { cache: 'no-cache' })
         .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-        .then((d) => d.reports || [])
+        .then((d) => d)
         .catch(() => null),
       fetch('/yt-intel/lanes.json', { cache: 'no-cache' })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
-    ]).then(([reports, lanes]) => {
+    ]).then(([payload, lanes]) => {
       if (!live) return;
-      setState(reports
-        ? { status: 'ok', reports, lanes }
-        : { status: 'none', reports: [], lanes });
+      setState(payload
+        ? { status: 'ok', reports: payload.reports || [], comments: payload.comments || [], lanes }
+        : { status: 'none', reports: [], comments: [], lanes });
     });
     return () => { live = false; };
   }, []);
@@ -450,6 +450,51 @@ function ResearchPanel({ onNavigate }) {
               </span>
             </>
           )}
+        </div>
+      )}
+
+      {(state.comments || []).length > 0 && (
+        <div className="research-comments">
+          <div className="research-comments-head">
+            <b>Comment mining</b>
+            <span>what the audience of a winning video actually asked for · API lane only</span>
+          </div>
+          {state.comments.slice(0, 2).map((c) => (
+            <article className="research-comment-card" key={c.video}>
+              <header>
+                <a href={`https://www.youtube.com/watch?v=${c.video}`} target="_blank" rel="noreferrer">
+                  {c.video}
+                </a>
+                <span className="mono">{c.n} comments</span>
+              </header>
+              <p>{c.reading}</p>
+              <div className="research-comment-lists">
+                {[['asked', c.asks], ['objected', c.objections], ['wanted', c.wants]].map(([label, rows]) =>
+                  (rows || []).length ? (
+                    <div key={label}>
+                      <span className="mono">{label}</span>
+                      <ul>
+                        {rows.map((h) => (
+                          <li key={h.label}>
+                            <b className="mono">{Math.round(h.share * 100)}%</b> {h.label}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null,
+                )}
+              </div>
+              {(c.top_liked || []).length > 0 && (
+                <ul className="research-top-liked">
+                  {c.top_liked.map((t) => (
+                    <li key={t.text}>
+                      <b className="mono">{fmtCount(t.likes)}♥</b> {t.text}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
         </div>
       )}
 

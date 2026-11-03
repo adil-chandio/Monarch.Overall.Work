@@ -111,11 +111,34 @@ export function buildIndex(only = null, out = OUT) {
     .sort((a, b) => String(b.at).localeCompare(String(a.at)))
     .slice(0, 40);
 
-  writeFileSync(index, JSON.stringify({ updated: new Date().toISOString(), reports: merged }, null, 2) + '\n');
-  return { index, count: merged.length, reports: merged };
+  // Comment mining results live beside the reports. They are not topics, so they are not
+  // cards — but a desk that shows verdicts and hides "6% of that audience wants to buy
+  // teaching" is hiding the most actionable number it has.
+  const comments = [];
+  for (const f of existsSync(out) ? readdirSync(out).filter((x) => x.startsWith('comments-') && x.endsWith('.json')) : []) {
+    try {
+      const c = JSON.parse(readFileSync(join(out, f), 'utf8'));
+      if (c.status !== 'ok') continue;
+      comments.push({
+        video: c.video,
+        file: f,
+        n: c.n,
+        reading: c.reading || '',
+        at: statSync(join(out, f)).mtime.toISOString(),
+        asks: (c.asks || []).slice(0, 3),
+        objections: (c.objections || []).slice(0, 2),
+        wants: (c.wants || []).slice(0, 2),
+        top_liked: (c.top_liked || []).slice(0, 2).map((x) => ({ likes: x.likes, text: (x.text || '').slice(0, 140) })),
+      });
+    } catch { /* a malformed comment file must not break the desk */ }
+  }
+  comments.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+
+  writeFileSync(index, JSON.stringify({ updated: new Date().toISOString(), reports: merged, comments }, null, 2) + '\n');
+  return { index, count: merged.length, reports: merged, comments: comments.length };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { index, count } = buildIndex(process.argv[2]);
-  console.log(`index: ${count} reports -> ${index}`);
+  const { index, count, comments } = buildIndex(process.argv[2]);
+  console.log(`index: ${count} reports, ${comments} comment analyses -> ${index}`);
 }

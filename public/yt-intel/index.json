@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T18:35:49.861Z",
+  "updated": "2026-11-03T18:37:22.051Z",
   "reports": [
     {
       "topic": "youtube automation",
@@ -206,6 +206,40 @@
       "confidence": 0.75,
       "mechanism": 25,
       "vph_median": 16
+    }
+  ],
+  "comments": [
+    {
+      "video": "xwNRyKItpOk",
+      "file": "comments-xwNRyKItpOk.json",
+      "n": 100,
+      "reading": "wants to buy time/teaching (6%) is the conversion surface",
+      "at": "2026-11-03T18:37:15.824Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 6,
+          "share": 0.06
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 3103,
+          "text": "Awesome content and I wish I have watched this before starting my channel. But at the end of the day the most important thing is how popular"
+        },
+        {
+          "likes": 2321,
+          "text": "To the person reading this, I pray you become a successful youtuber"
+        }
+      ]
     }
   ]
 }
