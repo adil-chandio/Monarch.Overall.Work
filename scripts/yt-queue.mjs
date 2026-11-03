@@ -50,7 +50,24 @@ if (existsSync(budgetFile)) {
 const perTopic = 101; // 1 search (100) + 1 videos.list (1); keyless costs nothing
 const affordable = Math.floor(remaining / perTopic);
 
-const plan = list.slice(0, Math.max(0, Math.min(cap, affordable)));
+// Rotation, not truncation. With a cap smaller than the queue, `slice(0, cap)` re-measures
+// the first entries every week and the queue's tail silently never runs — the two topics at
+// the bottom had never been measured at all. Oldest measurement goes first; queue order is
+// the tiebreaker, so a fresh queue still reads top-down on its first pass.
+const measuredAt = (item) => {
+  const slug = item.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+  const f = join(OUT, `${slug}.json`);
+  if (!existsSync(f)) return 0; // never measured -> first
+  try {
+    const d = JSON.parse(readFileSync(f, 'utf8'));
+    return d.status === 'ok' && d.count > 0 ? Number(d.fetched_at || 0) || 1 : 1;
+  } catch { return 1; }
+};
+const rotated = list
+  .map((item, i) => ({ item, i, at: measuredAt(item) }))
+  .sort((a, b) => a.at - b.at || a.i - b.i)
+  .map((x) => x.item);
+const plan = rotated.slice(0, Math.max(0, Math.min(cap, affordable)));
 console.log(`queue: ${list.length} topics · cap ${cap} · quota allows ${affordable} → running ${plan.length}`);
 if (!plan.length) {
   console.log('not enough quota left today; the schedule will pick this up tomorrow');
