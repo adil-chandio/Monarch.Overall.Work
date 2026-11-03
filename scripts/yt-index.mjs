@@ -19,6 +19,14 @@ import { fileURLToPath } from 'node:url';
 
 export const OUT = process.env.YT_INTEL_OUT || join('public', 'yt-intel');
 
+// Not research reports, but they live in the same folder and the workflow writes them:
+//   index.json  the menu itself
+//   lanes.json  which access lane the last run used
+//   doctor.json the key check's verdict
+// Any `*.json` that is not in this set AND has no `decision` block is also treated as a side
+// file below — a topic report always carries a decision, so that test is safe.
+const SIDE_FILES = new Set(['index.json', 'lanes.json', 'doctor.json']);
+
 export function entryFor(file) {
   const data = JSON.parse(readFileSync(file, 'utf8'));
   const d = data.decision || {};
@@ -66,7 +74,7 @@ export function buildIndex(only = null, out = OUT) {
   const index = join(out, 'index.json');
   if (!existsSync(out)) mkdirSync(out, { recursive: true });
   const files = existsSync(out)
-    ? readdirSync(out).filter((f) => f.endsWith('.json') && f !== 'index.json')
+    ? readdirSync(out).filter((f) => f.endsWith('.json') && !SIDE_FILES.has(f))
     : [];
   const picked = only ? files.filter((f) => f.replace(/\.json$/, '').includes(only)) : files;
 
@@ -74,8 +82,32 @@ export function buildIndex(only = null, out = OUT) {
   if (existsSync(index)) {
     try { previous = JSON.parse(readFileSync(index, 'utf8')); } catch { /* rebuild from scratch */ }
   }
-  const fresh = picked.map((f) => entryFor(join(out, f)));
-  const merged = [...fresh, ...(previous.reports || []).filter((r) => !fresh.some((f) => f.topic === r.topic))]
+  // A malformed side file must never take the whole index down: the index is what the UI
+  // reads, and one bad byte in doctor.json skipped the commit step for three runs.
+  const fresh = [];
+  for (const f of picked) {
+    try {
+      const data = JSON.parse(readFileSync(join(out, f), 'utf8'));
+      if (!data || typeof data !== 'object' || !data.decision) continue; // not a report
+      fresh.push(entryFor(join(out, f)));
+    } catch (e) {
+      console.warn(`index: skipped ${f} — ${String(e.message).slice(0, 120)}`);
+    }
+  }
+  // Stale entries must go too: an earlier run indexed `lanes` as if it were a topic, and
+  // carrying it forward forever is how a phantom card survives in the UI.
+  const KNOWN = new Set(fresh.map((f) => f.topic));
+  const carried = (previous.reports || []).filter((r) => {
+    if (KNOWN.has(r.topic)) return false;
+    const file = r.file ? join(out, r.file) : null;
+    if (file && !existsSync(file)) return false;       // report deleted
+    if (!file && r.topic !== 'lanes') return true;
+    try {
+      const d = JSON.parse(readFileSync(file, 'utf8'));
+      return Boolean(d && d.decision);                 // still a real report
+    } catch { return false; }
+  });
+  const merged = [...fresh, ...carried]
     .sort((a, b) => String(b.at).localeCompare(String(a.at)))
     .slice(0, 40);
 
