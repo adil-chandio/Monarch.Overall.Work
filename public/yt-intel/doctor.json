@@ -3,12 +3,12 @@
     {
       "check": "key present",
       "ok": true,
-      "detail": "AIzaSy\u2026zpvE (39 chars)"
+      "detail": "AIzaSy…zpvE (39 chars)"
     },
     {
       "check": "key shape looks right",
       "ok": true,
-      "detail": "starts with AIza\u2026"
+      "detail": "starts with AIza…"
     },
     {
       "check": "channels.list",
@@ -21,5 +21,6 @@
       "detail": "lane=api status=ok items=1 (100 quota units)"
     }
   ],
-  "quota_used": 102
+  "quota_used": 102,
+  "quota_remaining": 9898
 }
