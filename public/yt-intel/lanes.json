@@ -4,5 +4,12 @@
   "key_secret_name": "missing",
   "key_starts_with_aiza": false,
   "quota_used": 0,
-  "quota_remaining": 10000
+  "quota_remaining": 10000,
+  "secrets_seen": {
+    "YOUTUBE_API_KEY": false,
+    "YTAP1": false,
+    "YT_KEY": false
+  },
+  "event": "push",
+  "ref": "refs/heads/arena/9960286a-monarch-overall-work"
 }
