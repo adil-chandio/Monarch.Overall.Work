@@ -1,6 +1,40 @@
 {
-  "updated": "2026-11-03T19:13:30.539Z",
+  "updated": "2026-11-03T19:24:35.118Z",
   "reports": [
+    {
+      "topic": "ai video editing",
+      "at": "2026-11-03T19:24:29.000Z",
+      "file": "ai-video-editing.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 71.9,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 84,
+        "winnability": 93.80000000000001,
+        "mechanism": 35,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "no objection found in the data — which itself is a reason to check the sample"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.462,
+        "winner_ratio": 12.3,
+        "fresh_share_30d": 0.41,
+        "median_views": 131595,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 35,
+      "vph_median": 80
+    },
     {
       "topic": "ai b roll generation",
       "at": "2026-11-03T19:13:29.000Z",
@@ -172,40 +206,6 @@
       "confidence": 0.85,
       "mechanism": 50,
       "vph_median": 31
-    },
-    {
-      "topic": "ai video editing",
-      "at": "2026-11-03T18:33:11.000Z",
-      "file": "ai-video-editing.json",
-      "lane": "api",
-      "order": "relevance",
-      "status": "ok",
-      "count": 30,
-      "verdict": "SHARPEN",
-      "score": 64.6,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
-      "parts": {
-        "demand": 83.6,
-        "winnability": 89.3,
-        "mechanism": 10,
-        "fit": null,
-        "timing": 55
-      },
-      "strongest_against": [
-        "no objection found in the data — which itself is a reason to check the sample"
-      ],
-      "saturation": {
-        "videos": 30,
-        "top3_share": 0.507,
-        "winner_ratio": 20.1,
-        "fresh_share_30d": 0.44,
-        "median_views": 80673,
-        "reading": "distributed — no single video owns it, entry is feasible"
-      },
-      "confidence": 0.85,
-      "mechanism": 10,
-      "vph_median": 75
     }
   ],
   "comments": [
@@ -214,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (6%) is the conversion surface",
-      "at": "2026-11-03T19:13:30.115Z",
+      "at": "2026-11-03T19:24:34.558Z",
       "asks": [
         {
           "label": "asked for a sequel",
