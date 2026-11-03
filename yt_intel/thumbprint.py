@@ -150,6 +150,18 @@ def analyse(a: np.ndarray, size: str = "") -> dict:
     }
 
 
+FAMILY_NAMES = ("red", "amber", "green", "teal", "blue", "magenta")
+
+
+def _hue_families(hues: list[int]) -> list:
+    """Count thumbnails per 60-degree hue family. Sums to at most len(hues)."""
+    buckets = [0] * 6
+    for h in hues:
+        buckets[(h % 360) // 60] += 1
+    named = [(FAMILY_NAMES[i], n) for i, n in enumerate(buckets) if n]
+    return sorted(named, key=lambda kv: (-kv[1], kv[0]))
+
+
 def channel_fingerprint(video_ids: list[str], sample: int = 24) -> dict:
     """Aggregate the last N thumbnails into a channel-level style profile."""
     out = []
@@ -173,17 +185,28 @@ def channel_fingerprint(video_ids: list[str], sample: int = 24) -> dict:
         "avg_contrast": round(statistics.mean(r["contrast"] for r in out), 3),
         "avg_busy": round(statistics.mean(r["busy"] for r in out), 2),
         "text_band_energy": round(statistics.mean(r["text_edge_energy"]["lower"] for r in out), 2),
-        # family = 60-degree bucket (red / amber / green / cyan / blue / magenta). Two
-        # thumbnails at #018afb and #0b7fd0 are the same brand colour; counting exact hexes
-        # reported twelve accents with a count of one each and read as "no house colour",
-        # which was wrong about a channel that plainly has one.
-        "hue_families": sorted(
-            {fam_f: sum(1 for x in fam if x // 60 == fam_f // 60) for fam_f in fam}.items(),
-            key=lambda kv: -kv[1])[:4] if fam else [],
+        # family = 60-degree bucket, named. Two thumbnails at #018afb and #0b7fd0 are the
+        # same brand colour; counting exact hexes reported twelve accents with a count of one
+        # each, which reads as "no house colour" for a channel that plainly has one.
+        #
+        # Keyed by BUCKET, not by the observed hue: the first version keyed by hue and counted
+        # by bucket, so 22 degrees and 7 degrees appeared as two separate families with 6 each
+        # out of 12 thumbnails — a total of 22 over a sample of 12.
+        "hue_families": _hue_families(fam),
         "top_hexes": sorted({h: hexes.count(h) for h in hexes}.items(), key=lambda kv: -kv[1])[:5],
         "samples": out[:6],
-        "reading": (
-            "face-led channel: people are the product" if sum(faces) / len(out) > 0.5
-            else "graphic-led channel: the idea is the product"
-        ),
+        "reading": _reading(sum(faces) / len(out), _hue_families(fam), len(out)),
     }
+
+
+def _reading(face_rate: float, families: list, n: int) -> str:
+    """One sentence that a producer can act on. States the sample in the sentence itself."""
+    face = ("face-led: people are the product" if face_rate > 0.5
+            else "graphic-led: the idea is the product")
+    if families and families[0][1] >= 0.4 * n:
+        house = f"house colour is {families[0][0]} ({families[0][1]}/{n} thumbnails)"
+    elif families:
+        house = f"no single house colour — {families[0][0]} leads at only {families[0][1]}/{n}"
+    else:
+        house = "no measurable accent colour"
+    return f"{face}; {house}"

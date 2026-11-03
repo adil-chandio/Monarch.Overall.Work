@@ -73,6 +73,17 @@ def t_thumbprint_accent():
     ok("a flat grey frame has no accent to report", thumbprint.analyse(flat, "synthetic")["dominant"] is None)
 
 
+def t_hue_families_sum():
+    """Families must partition the sample. Regression: 22 and 7 degrees listed separately,
+    each with 6, over a sample of 12 thumbnails — 22 counted faces in a 12-face sample."""
+    from . import thumbprint
+    fam = thumbprint._hue_families([22, 7, 202, 187, 7, 22, 7, 22, 202, 187, 7, 22])
+    ok("families sum to exactly the sample size", sum(n for _, n in fam) == 12)
+    ok("22 and 7 degrees are one family", [n for name, n in fam if name == "red"] == [8])
+    ok("families are named, not degree numbers", all(isinstance(k, str) for k, _ in fam))
+    ok("an empty sample yields no families", thumbprint._hue_families([]) == [])
+
+
 def t_style_calibration():
     """The shipped cut threshold must not be the one that under-counts by a third."""
     from . import style
@@ -253,7 +264,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_thumbprint_accent, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
