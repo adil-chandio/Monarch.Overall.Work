@@ -29,6 +29,12 @@ jobs:
       - name: Install Python DSP deps (numpy / scipy / imageio-ffmpeg)
         run: pip3 install --break-system-packages --quiet numpy scipy imageio-ffmpeg
 
+      - name: Audio delivery gates (BS.1770, clicks, mono fold, harshness)
+        run: |
+          python3 -m showreel.audio_qc.gates public/showreel/audio_master_60fps.m4a \
+            --profile web --json public/showreel/audio_qc.json
+        # fails the build instead of shipping a master that misses its numbers
+
       - name: Render 60fps soundtrack + FFT telemetry (Python DSP)
         run: python3 showreel/build_audio_60fps.py
 
@@ -57,6 +63,8 @@ jobs:
         run: |
           git config user.name "monarch-render-bot"
           git config user.email "workadilchandio@gmail.com"
-          git add public/demo-preview.mp4 public/demo-poster.jpg deliverables/MON-DEMO26_v3_Master_60fps.enc public/showreel/audio_master_60fps.m4a public/showreel/audio_reactive.json
+          git add public/demo-preview.mp4 public/demo-poster.jpg deliverables/MON-DEMO26_v3_Master_60fps.enc \
+                  public/showreel/audio_master_60fps.m4a public/showreel/audio_reactive.json \
+                  public/showreel/audio_qc.json showreel/beat_sheet.json
           git commit -m "chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]"
           git push origin HEAD:${{ github.ref_name }}

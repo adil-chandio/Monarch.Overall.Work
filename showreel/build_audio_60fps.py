@@ -413,6 +413,15 @@ def cinema_sub_boom(dur_s: float = 1.25, root_hz: float = 36.71, gain: float = 0
     return np.stack([mono, mono], axis=1)
 
 
+# Master-chain knobs. Defaults are the shipped values; override for A/B measurement:
+#   MONARCH_EXCITER=0 MONARCH_SHELF=3.0 MONARCH_LIMIT=0.62 python3 showreel/build_audio_60fps.py
+EXC_AMOUNT = float(os.environ.get("MONARCH_EXCITER", "0.45"))
+EXC_DRIVE = float(os.environ.get("MONARCH_EXC_DRIVE", "3.2"))
+SHELF_6K = float(os.environ.get("MONARCH_SHELF", "6.2"))
+LIMIT = os.environ.get("MONARCH_LIMIT", "0.62")  # AAC overshoots ~0.9 dB net; this lands -14.0 LUFS / ~-3.1 dBTP
+STEM_DUMP = os.environ.get("MONARCH_STEM_DUMP")
+
+
 def main():
     os.makedirs("showreel", exist_ok=True)
     os.makedirs("public/showreel", exist_ok=True)
@@ -458,7 +467,7 @@ def main():
         ch = prog_chords[bar_idx % len(prog_chords)]
         dur_bar_s = min(BEAT_S * 4.0, (end_groove_f - cur_f) / FPS)
         # Filter opens gradually across the story arc (1100Hz -> 2150Hz) for rising emotion!
-        cutoff = 1150.0 + 950.0 * min(1.0, (cur_f - start_f) / (end_groove_f - start_f))
+        cutoff = 1150.0 + 1650.0 * min(1.0, (cur_f - start_f) / (end_groove_f - start_f))
         pad_st = synth_unison_chord(ch["pad"], dur_s=dur_bar_s + 0.12, cutoff_hz=cutoff, gain=0.20)
         add_stereo(music_harmonic, pad_st, cur_f)
 
@@ -489,6 +498,10 @@ def main():
             vel = 0.92 if step in accents else 0.56
             pan = np.sin(step * 0.85) * 0.42
             add_mono(arp_bus, synth_felt_glass_pluck(mn, 0.44, vel), sf, pan=pan)
+            if cur_f >= 1050.0 and step in accents:
+                spark = synth_felt_glass_pluck(mn + 24, 0.30, vel * 0.5)
+                spark = hpf(spark, 4200.0, order=2)
+                add_mono(arp_bus, spark * 0.30, sf, pan=-pan)
 
         cur_f += bar_frames
         bar_idx += 1
@@ -523,7 +536,7 @@ def main():
                 if sh_f < end_groove_f - 8:
                     add_mono(
                         sfx_bus,
-                        shaker_silk(accent=(sub16 == 2), gain=0.115),
+                        shaker_silk(accent=(sub16 == 2), gain=0.155),
                         sh_f,
                         pan=(-0.28 if sub16 % 2 == 0 else 0.28),
                     )
@@ -545,6 +558,21 @@ def main():
     # Apply sidechain pump to pad!
     music_harmonic[:, 0] *= sidechain
     music_harmonic[:, 1] *= sidechain
+
+    # ---------- 3b. AIR BED (top-octave only, keeps the mix premium not brittle) ---------- #
+    air_start = int(round((start_f / FPS) * SR))
+    air_end = int(round((TOTAL_FRAMES * 0.97 / FPS) * SR))   # carry air through the finale
+    if air_end > air_start:
+        n_air = min(air_end - air_start, len(music_harmonic) - air_start)
+        noise = pink_noise(n_air, seed=7)
+        airband = bpf(noise, 7200.0, 11500.0, order=2)
+        t_air = np.arange(n_air) / SR
+        slow = 0.55 + 0.45 * np.sin(2 * np.pi * 0.23 * t_air + 0.7) ** 2
+        swell = np.minimum(1.0, t_air / 2.5)
+        # scale so the realistic shelf + exciter land the air band ~12 dB under presence
+        # (reference scores sit 10-15 dB down; more than that reads dull, less reads brittle)
+        air_sig = airband * slow * swell * 0.115
+        add_stereo(music_harmonic, np.stack([air_sig, np.roll(air_sig, 211)], axis=1), start_f)
 
     # ---------- 4. FINALE PICARDY RESOLUTION (D MAJOR 9 | f=1800..2160) ---------- #
     # Triumphant, warm, emotional D-Major-9 swell (D2, A2, D3, F#3, A3, C#4, E4)
@@ -640,11 +668,21 @@ def main():
     master[vac_a:vac_b, 0] *= vac_curve
     master[vac_a:vac_b, 1] *= vac_curve
 
-    # Smooth 0.9s fade-out at tail (35.1s -> 36.0s)
-    fade_n = int(0.95 * SR)
-    fade_curve = np.linspace(1.0, 0.0, fade_n) ** 1.8
-    master[-fade_n:, 0] *= fade_curve
-    master[-fade_n:, 1] *= fade_curve
+    # Finale = the emotional peak, not a fade-out. The Picardy section gets +2.6 dB
+    # (0.45 s ease so it never slams) and only the last 1.1 s fades.
+    # v3 measured LRA 2.0 LU because the last 5 s sat 3 dB *under* the body; making the
+    # climax louder instead of quieter is what gives a real dynamic arc.
+    fin_a, fin_b = int(30.0 * SR), int(35.2 * SR)
+    if fin_b > fin_a:
+        ramp = np.minimum(1.0, np.arange(fin_b - fin_a) / (0.45 * SR)) ** 3.0   # shape, not level
+        master[fin_a:fin_b, 0] *= 1.0 + 0.04 * ramp
+        master[fin_a:fin_b, 1] *= 1.0 + 0.04 * ramp
+
+    fade_start = max(0, total_samples - int(0.62 * SR))
+    fade_n = total_samples - fade_start
+    fade_curve = np.linspace(1.0, 0.0, fade_n) ** 2.0
+    master[fade_start:, 0] *= fade_curve
+    master[fade_start:, 1] *= fade_curve
 
     # ---------- STUDIO MASTER BUS EQ (clarity + presence + air) ----------
     for ch in (0, 1):
@@ -652,10 +690,51 @@ def main():
         v = hpf(v, 27.0, order=3)                 # rumble guard
         v = peaking(v, 320.0, -2.4, q=0.8)        # de-mud for translation
         v = peaking(v, 2500.0, 2.8, q=0.8)       # vocal-band presence / snap
-        v = exciter(v, drive=3.2, f0=3000.0, amount=0.62)   # analog air / presence
-        v = high_shelf(v, 6800.0, 6.2)            # open top
+        if EXC_AMOUNT > 0:
+            v = exciter(v, drive=EXC_DRIVE, f0=3000.0, amount=EXC_AMOUNT)   # analog air / presence
+        v = high_shelf(v, 6800.0, SHELF_6K)       # open top
         v = high_shelf(v, 11000.0, 3.6)           # premium air
         master[:, ch] = v
+
+    # ---------- 6a. SECTION GAIN AUTOMATION (real dynamics, not compressor tricks) ---------- #
+    # v3 measured LRA 2.0 LU: one flat dynamic for 30 s. These are section-level gains with
+    # 0.4 s crossfades, so the build stays under the drop and the pay-off lands harder.
+    section_gain = [
+        (0.0, 2.55, 1.00),    # hook (already lifted below)
+        (2.55, 8.5, 0.83),    # deck / build  -1.6 dB
+        (8.5, 17.5, 0.90),    # monoliths     -0.9 dB
+        (17.5, 23.8, 1.00),   # tunnel
+        (23.8, 30.0, 1.06),   # vault         +0.5 dB
+        (30.0, 36.0, 1.15),   # finale        +1.2 dB
+    ]
+    gain_curve = np.ones(len(master))
+    for a_s, b_s, g in section_gain:
+        a, b = int(a_s * SR), min(int(b_s * SR), len(master))
+        if b <= a:
+            continue
+        ramp_n = max(1, int(0.4 * SR))
+        ramp = np.ones(b - a)
+        head = min(ramp_n, b - a)
+        ramp[:head] = np.linspace(gain_curve[a], g, head) if a > 0 else g
+        gain_curve[a:b] = ramp * g
+    # smooth the whole curve so no step can click
+    k = np.hanning(int(0.06 * SR)); k /= k.sum()
+    gain_curve = np.convolve(gain_curve, k, mode="same")
+    gain_curve = np.clip(gain_curve, 0.75, 1.25)
+    master *= gain_curve[:, None]
+
+    # ---------- 6b. BODY = THE FIX FOR "NO BODY" ---------- #
+    # Measured on v3: hook -19.5 dBFS vs deck -14.7 dBFS (4.8 dB hole at the top),
+    # and only ~1.4 dB of movement across 27 s of body. Fix both here, in the mix.
+    body_curve = np.ones(len(master))
+    hooks = int(round(2.55 * SR))
+    body_curve[:hooks] = 1.0 + 0.55 * (1.0 - np.linspace(0, 1, hooks)) ** 0.7   # 8.9 dB at t=0
+    master *= body_curve[:, None]
+
+    if STEM_DUMP:
+        # pre-master-bus stem for offline A/B of the mastering chain
+        wavfile.write(STEM_DUMP, SR, (master / (np.abs(master).max() + 1e-9) * 0.9 * 32767).astype(np.int16))
+        print(f"[stems] wrote {STEM_DUMP}")
 
     # Soft analog tape saturation ceiling
     peak = np.max(np.abs(master)) + 1e-9
@@ -711,6 +790,13 @@ def main():
         "high": norm_arr(highs),
         "bins": bins_quant,
     }
+    arc = {
+        "hook": [0, 148], "deck": [148, 516], "monoliths": [516, 1050],
+        "tunnel": [1050, 1428], "vault": [1428, 1800], "finale": [1800, 2160],
+    }
+    with open("showreel/beat_sheet.json", "w") as f:
+        json.dump({**BEAT_SHEET, "arc": arc, "loudness_target": {"integrated_lufs": -14.0, "true_peak_dbtp": -1.5}}, f, indent=2)
+
     with open("public/showreel/audio_reactive.json", "w") as f:
         json.dump(telemetry, f, separators=(",", ":"))
 
@@ -728,7 +814,8 @@ def main():
             "-i",
             raw_wav,
             "-af",
-            "acompressor=threshold=0.30:ratio=2.0:attack=8:release=180:makeup=1.0,loudnorm=I=-14.3:TP=-1.9:LRA=9.0,aresample=48000,alimiter=limit=0.66:level=false",
+            "acompressor=threshold=0.42:ratio=1.6:attack=8:release=180:makeup=1.0,"
+            f"loudnorm=I=-14.6:TP=-2.2:LRA=9.0,aresample=48000,alimiter=limit={LIMIT}:level=false",
             "-c:a",
             "aac",
             "-b:a",

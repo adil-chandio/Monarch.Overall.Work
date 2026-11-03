@@ -9,6 +9,7 @@ Four house skills plus a licensed-library map, written from a forensic read of f
 | "audio isn't clean/loud enough" | [`mix-master`](./mix-master/SKILL.md) | BS.1770 measurement, pass/fail gates, the loudnorm→aresample→limiter chain |
 | "motion should move more" | [`motion-graphics`](./motion-graphics/SKILL.md) | five laws, frame-exact timing maths, 8 shot recipes, still-QC before render |
 | "we keep re-downloading sounds" | [`sfx-library`](./sfx-library/SKILL.md) | folder contract, manifest schema, licence gate, analysis pass |
+| "it still doesn't sound like the reference" | [`reference-match`](./reference-match/SKILL.md) | measure both, get a numeric fix list per band and per section |
 
 ## Where these came from
 

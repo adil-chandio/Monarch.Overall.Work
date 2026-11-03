@@ -2,14 +2,14 @@
 
 Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 
-**931 skills across 26 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
+**932 skills across 26 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
 
 ## Routing
 
 | Space | Skills | Packs |
 |---|---|---|
 | `ops` | 650 | agent-reach, book-to-skill, claude-skills, deep-research, elephant-goldfish, ffmpeg-skill, humanizer, last30days, marketingskills, openmontage, planning-with-files, ponytail, prompt-master, scrapling, skill-seekers, wshobson-agents |
-| `monarch-studio` | 185 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, monarch-video-lab, openmontage, video-shotcraft, vox-collage-motion, wshobson-agents |
+| `monarch-studio` | 186 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, monarch-video-lab, openmontage, video-shotcraft, vox-collage-motion, wshobson-agents |
 | `personal-brand` | 80 | baoyu-skills, claude-skills, marketingskills, wshobson-agents |
 | `portfolio` | 10 | claude-skills, marketingskills, website-cloner, wshobson-agents |
 | `yt-automation` | 6 | baoyu-skills, claude-skills, html-video, openmontage, wshobson-agents |
@@ -63,6 +63,7 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `monarch-mix-master` | monarch-video-lab | 5.2 KB | `skills/monarch-video-lab/mix-master/SKILL.md` |
 | `monarch-motion-graphics` | monarch-video-lab | 6.4 KB | `skills/monarch-video-lab/motion-graphics/SKILL.md` |
 | `monarch-music-score` | monarch-video-lab | 7.4 KB | `skills/monarch-video-lab/music-score/SKILL.md` |
+| `monarch-reference-match` | monarch-video-lab | 5.2 KB | `skills/monarch-video-lab/reference-match/SKILL.md` |
 | `monarch-sfx-library` | monarch-video-lab | 4.6 KB | `skills/monarch-video-lab/sfx-library/SKILL.md` |
 | `monarch-sound-design` | monarch-video-lab | 9.0 KB | `skills/monarch-video-lab/sound-design/SKILL.md` |
 | `3d-asset-generation` | openmontage | 4.8 KB | `skills/openmontage/.agents/skills/3d-asset-generation/SKILL.md` |

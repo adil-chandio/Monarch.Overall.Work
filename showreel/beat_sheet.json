@@ -36,5 +36,35 @@
     "to_vault_unlock": 1428,
     "vault_unlock_click": 1656,
     "to_finale_cinema": 1800
+  },
+  "arc": {
+    "hook": [
+      0,
+      148
+    ],
+    "deck": [
+      148,
+      516
+    ],
+    "monoliths": [
+      516,
+      1050
+    ],
+    "tunnel": [
+      1050,
+      1428
+    ],
+    "vault": [
+      1428,
+      1800
+    ],
+    "finale": [
+      1800,
+      2160
+    ]
+  },
+  "loudness_target": {
+    "integrated_lufs": -14.0,
+    "true_peak_dbtp": -1.5
   }
 }
