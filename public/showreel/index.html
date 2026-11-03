@@ -126,7 +126,7 @@
     .bracket.bl { left: -10px; bottom: -10px; border-right: 0; border-top: 0; border-radius: 0 0 0 12px; }
     .bracket.br { right: -10px; bottom: -10px; border-left: 0; border-top: 0; border-radius: 0 0 12px 0; }
     #lock-tag {
-      position: absolute; left: 44px; top: 44px; padding: 10px 16px; border-radius: 999px; opacity: 0;
+      position: absolute; right: 44px; top: 44px; padding: 10px 16px; border-radius: 999px; opacity: 0;
       background: rgba(52,211,153,0.16); border: 1px solid #34D399; color: #6EE7B7;
       font-family: 'PlexMonoLocal', monospace; font-size: 14px; letter-spacing: 0.22em;
     }
@@ -342,7 +342,7 @@
       -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 26%, transparent 62%);
     }
     #flare { position: absolute; left: 0; top: 0; width: 2200px; height: 3px; z-index: 61; pointer-events: none; mix-blend-mode: screen; opacity: 0; background: linear-gradient(90deg, transparent, rgba(120,200,255,0.55) 24%, rgba(255,255,255,0.95) 50%, rgba(255,140,150,0.6) 74%, transparent); box-shadow: 0 0 40px rgba(150,210,255,0.55); }
-    #eq { position: absolute; right: 90px; left: auto; width: 620px; bottom: 236px; height: 104px; z-index: 62; display: flex; align-items: flex-end; justify-content: center; gap: 7px; pointer-events: none; opacity: 0; }
+    #eq { position: absolute; right: 90px; left: auto; width: 620px; bottom: 262px; height: 92px; z-index: 62; display: flex; align-items: flex-end; justify-content: center; gap: 7px; pointer-events: none; opacity: 0; }
     #eq i { width: 8px; height: 8px; border-radius: 3px 3px 0 0; background: linear-gradient(to top, rgba(224,27,43,0.95), rgba(255,150,110,0.95)); box-shadow: 0 0 16px rgba(224,27,43,0.5); }
     #scan { position: absolute; inset: 0; z-index: 63; pointer-events: none; opacity: 0.16; background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.055) 0 1px, transparent 1px 4px); }
     #grain { position: absolute; inset: 0; z-index: 64; pointer-events: none; opacity: 0.34; mix-blend-mode: overlay;
@@ -1361,6 +1361,13 @@
           wmPill.textContent = 'MONARCH® PREVIEW · LOCKED';
           fstate.style.color = '#FBBF24';
           fstate.textContent = 'ENCRYPTED CLOUD LINK';
+        }
+
+        const spec = $('s5-spec');
+        if (spec) {
+          const yieldU = easeOutCubic(prog(f, B.unlockClick, B.unlockClick + 16));
+          spec.style.opacity = (1 - yieldU * 0.94).toFixed(3);
+          spec.style.transform = `translateY(${(yieldU * 26).toFixed(1)}px)`;
         }
 
         $('s5-grid').style.opacity = (0.55 + mid * 0.4).toFixed(3);
