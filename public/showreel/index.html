@@ -613,8 +613,8 @@
         </div>
 
         <div id="s5-files">
-          <div>MASTER<b>12.44 MB · 1080P60</b></div>
-          <div>PREVIEW<b>WATERMARKED · 9.10 MB</b></div>
+          <div>MASTER<b>1080P60 · 36.00S</b></div>
+          <div>PREVIEW<b>WATERMARKED CUT</b></div>
           <div>STATE<b id="s5-file-state">ENCRYPTED CLOUD LINK</b></div>
         </div>
       </section>
@@ -899,7 +899,7 @@
     // ---------- HUD ----------
     const tcEl = $('hud-tc'), chapEl = $('hud-chapter');
     function timecode(f) {
-      const s = f / FPS;
+      const s = Math.max(0, f) / FPS;
       const ss = Math.floor(s);
       const ff = Math.round((s - ss) * FPS) % FPS;
       return `00:00:${String(ss).padStart(2, '0')}:${String(ff).padStart(2, '0')}`;
@@ -1413,7 +1413,7 @@
         const sec = !audio.paused && audio.currentTime > 0
           ? audio.currentTime
           : ((now - startTs) / 1000) % (TOTAL_FRAMES / FPS);
-        const f = Math.min(TOTAL_FRAMES - 1, Math.floor(sec * FPS));
+        const f = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.floor(sec * FPS)));
         renderFrame(f);
         requestAnimationFrame(tick);
       }
