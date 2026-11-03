@@ -1,0 +1,81 @@
+name: Render MONARCH 1080p60 HyperFrames Showreel
+
+on:
+  push:
+    branches:
+      - arena/9960286a-monarch-overall-work
+    paths:
+      - 'showreel/render_60fps.mjs'
+      - 'showreel/beat_sheet.json'
+      - 'showreel/build_audio_60fps.py'
+      - 'public/showreel/index.html'
+      - '.github/workflows/render-showreel-60fps.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render-60fps:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+
+      - name: Install Python DSP deps (numpy / scipy / imageio-ffmpeg)
+        run: pip3 install --break-system-packages --quiet numpy scipy imageio-ffmpeg
+
+      - name: Audio delivery gates (BS.1770, clicks, mono fold, harshness)
+        run: |
+          python3 -m showreel.audio_qc.gates public/showreel/audio_master_60fps.m4a \
+            --profile web --json public/showreel/audio_qc.json
+        # fails the build instead of shipping a master that misses its numbers
+
+      - name: Render 60fps soundtrack + FFT telemetry (Python DSP)
+        run: python3 showreel/build_audio_60fps.py
+
+      - name: Install Playwright & Verify FFmpeg/Chrome
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -y && sudo apt-get install -y ffmpeg
+          fi
+          npm install --no-save playwright
+          if [ ! -x /usr/bin/google-chrome ] && [ ! -x /usr/bin/google-chrome-stable ]; then
+            npx playwright install chromium
+          fi
+          ffmpeg -version | head -n 1
+          google-chrome --version || true
+
+      - name: Render 1920x1080 @ 60fps Master + Vault Preview
+        run: node showreel/render_60fps.mjs
+
+      - name: Verify 1080p60 Technical QC
+        run: |
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=width,height,r_frame_rate,nb_frames,duration \
+            -of default=noprint_wrappers=1 public/demo-preview.mp4
+
+      - name: Commit & Push Rendered Preview + Encrypted Master
+        run: |
+          git config user.name "monarch-render-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add -A public/demo-preview.mp4 public/demo-poster.jpg \
+                     public/showreel/audio_master_60fps.m4a public/showreel/audio_reactive.json \
+                     public/showreel/audio_qc.json showreel/beat_sheet.json \
+                     deliverables || true
+          if git diff --cached --quiet; then
+            echo "No render changes to commit (images already current)."
+            exit 0
+          fi
+          git commit -m "chore(showreel): render v4 Absolute Cinema 1080p60 master & preview [skip ci]"
+          # the branch may have moved while we rendered; rebase then retry, never force-push
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin ${{ github.ref_name }} || true
+            if git push origin HEAD:${{ github.ref_name }}; then exit 0; fi
+            sleep 5
+          done
+          echo "push failed after 3 attempts"; exit 1

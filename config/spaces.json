@@ -1,0 +1,72 @@
+{
+  "$schema": "./_schema.md",
+  "version": 1,
+  "updated": "2026-11-03",
+  "spaces": [
+    {
+      "id": "yt-automation",
+      "label": "YouTube Automation",
+      "short": "YT",
+      "tagline": "Three faceless channels, run as a factory.",
+      "route": "/space/yt-automation",
+      "color": "#e85b43",
+      "icon": "Youtube",
+      "tables": ["channels", "content_items"],
+      "config": ["channels.json"],
+      "public": false,
+      "touches_money": false
+    },
+    {
+      "id": "monarch-studio",
+      "label": "Monarch Studio",
+      "short": "STUDIO",
+      "tagline": "Films, websites, clients, settlement.",
+      "route": "/space/monarch-studio",
+      "color": "#c9a961",
+      "icon": "Clapperboard",
+      "tables": ["client_inquiries", "client_portals", "payment_submissions", "agency_services"],
+      "config": ["services.json", "payment-rails.json"],
+      "public": false,
+      "touches_money": true
+    },
+    {
+      "id": "personal-brand",
+      "label": "Personal Brand",
+      "short": "PERSONAL",
+      "tagline": "Motivational, AI-BTS, and the showcase identity.",
+      "route": "/space/personal-brand",
+      "color": "#a27bce",
+      "icon": "Sparkles",
+      "tables": ["channels", "content_items"],
+      "config": ["social.json"],
+      "public": false,
+      "touches_money": false
+    },
+    {
+      "id": "portfolio",
+      "label": "Portfolio",
+      "short": "PROOF",
+      "tagline": "Public proof surface. Real numbers only.",
+      "route": "/space/portfolio",
+      "color": "#799a62",
+      "icon": "Globe",
+      "tables": ["client_portals"],
+      "config": ["repos.json"],
+      "public": true,
+      "touches_money": false
+    },
+    {
+      "id": "ops",
+      "label": "Ops",
+      "short": "OPS",
+      "tagline": "Money, calendar, agents, repo health.",
+      "route": "/space/ops",
+      "color": "#6f8fa8",
+      "icon": "Gauge",
+      "tables": ["tasks", "projects", "knowledge_notes", "saved_conversations", "github_repos"],
+      "config": ["repos.json", "payment-rails.json"],
+      "public": false,
+      "touches_money": true
+    }
+  ]
+}

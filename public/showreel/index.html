@@ -1,0 +1,1434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, initial-scale=1.0" />
+  <title>MONARCH® STUDIO — Proof Over Promises (v3 Absolute Cinema 1080p60)</title>
+  <style>
+    @font-face { font-family: 'AntonLocal'; src: url('./fonts/Anton-Regular.ttf') format('truetype'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'ManropeLocal'; src: url('./fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'ManropeLocal'; src: url('./fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; font-display: block; }
+    @font-face { font-family: 'PlexMonoLocal'; src: url('./fonts/IBMPlexMono-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    html, body {
+      width: 100%; height: 100%; background: #06060A; overflow: hidden;
+      font-family: 'ManropeLocal', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+    }
+    #viewport { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #06060A; }
+    #stage {
+      position: relative; width: 1920px; height: 1080px; background: #06060A;
+      overflow: hidden; transform-origin: center center; isolation: isolate;
+    }
+
+    /* ---------- type ---------- */
+    .mono { font-family: 'PlexMonoLocal', monospace; text-transform: uppercase; letter-spacing: 0.16em; }
+    .display { font-family: 'AntonLocal', Impact, sans-serif; text-transform: uppercase; line-height: 0.9; letter-spacing: 0.008em; }
+    .ink { color: #0B0B10; } .paper { color: #F5F1E8; }
+
+    .scene { position: absolute; inset: 0; width: 1920px; height: 1080px; display: none; overflow: hidden; }
+
+    /* ---------- BEAT 01 : CREAM EDITORIAL HOOK ---------- */
+    #s1-cream { position: absolute; inset: 0; background: #F4EFE6; color: #0B0B10; padding: 66px 92px; }
+    #s1-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(11,11,16,0.07) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(11,11,16,0.07) 1px, transparent 1px);
+      background-size: 160px 160px;
+    }
+    #s1-top { position: absolute; top: 58px; left: 92px; right: 92px; display: flex; justify-content: space-between; align-items: baseline; font-size: 17px; color: #55504A; }
+    #s1-h1 { position: absolute; left: 92px; top: 196px; font-size: 178px; }
+    #s1-h1 .ln { display: block; overflow: hidden; }
+    #s1-h1 .ln > span { display: inline-block; transform-origin: left bottom; }
+    #s1-h1 .red { color: #C41726; }
+    #s1-kicker { position: absolute; left: 96px; top: 132px; font-size: 16px; color: #8A8378; }
+    #s1-portrait {
+      position: absolute; right: 96px; bottom: -34px; height: 950px; object-fit: contain;
+      filter: contrast(1.07) drop-shadow(-26px 20px 54px rgba(11,11,16,0.24)); z-index: 3;
+    }
+    #s1-cta {
+      position: absolute; left: 96px; bottom: 196px; display: inline-flex; align-items: center; gap: 18px;
+      background: #0B0B10; color: #F4EFE6; padding: 26px 44px; border-radius: 999px;
+      font-size: 23px; font-weight: 800; letter-spacing: 0.01em;
+      box-shadow: 0 26px 60px rgba(11,11,16,0.28), 0 0 0 1px rgba(11,11,16,0.08); z-index: 6;
+    }
+    #s1-cta .dot { width: 14px; height: 14px; border-radius: 50%; background: #C41726; box-shadow: 0 0 22px #C41726; }
+    #s1-foot { position: absolute; left: 96px; bottom: 96px; font-size: 15px; color: #6D675F; display: flex; gap: 40px; }
+
+    /* obsidian inversion layer */
+    #s1-obsidian {
+      position: absolute; inset: 0; background: radial-gradient(circle at 74% 34%, rgba(196,23,38,0.30), transparent 58%), radial-gradient(circle at 20% 88%, rgba(255,120,60,0.10), transparent 55%), #07070A;
+      color: #F6F2E9; clip-path: circle(0% at 340px 885px);
+    }
+    #s1-obs-glow { position: absolute; inset: -20%; background: radial-gradient(circle at 50% 50%, rgba(255,60,70,0.16), transparent 60%); }
+    #s1-bignum {
+      position: absolute; left: 92px; top: 286px; font-size: 322px; letter-spacing: -0.01em;
+      color: #FBF7EF; text-shadow: 0 0 90px rgba(255,80,90,0.28);
+    }
+    #s1-bignum .ghost { position: absolute; inset: 0; color: rgba(255,60,72,0.55); mix-blend-mode: screen; }
+    #s1-obs-kicker { position: absolute; left: 96px; top: 176px; font-size: 17px; color: #FF8A93; letter-spacing: 0.34em; }
+    #s1-obs-sub { position: absolute; left: 100px; top: 690px; font-size: 26px; font-weight: 800; color: #D9D2C6; letter-spacing: 0.01em; }
+    #s1-obs-sub b { color: #FF4D5A; }
+    #s1-obs-meta { position: absolute; left: 100px; bottom: 168px; display: flex; gap: 54px; font-size: 15px; color: #8E877C; }
+    #s1-obs-meta div b { display: block; font-family: 'PlexMonoLocal', monospace; font-size: 30px; color: #FBF7EF; margin-top: 8px; letter-spacing: 0.02em; }
+    #s1-portrait-dark { position: absolute; right: 70px; bottom: -30px; height: 980px; object-fit: contain; filter: grayscale(0.55) contrast(1.18) brightness(0.86) drop-shadow(0 40px 90px rgba(0,0,0,0.7)); opacity: 0.92; }
+    #s1-redslash { position: absolute; left: -80px; top: 560px; width: 1500px; height: 8px; background: linear-gradient(90deg, transparent, #E01B2B 18%, #FF6A73 50%, #E01B2B 82%, transparent); box-shadow: 0 0 60px rgba(224,27,43,0.9); transform-origin: left center; }
+
+    /* ---------- BEAT 02 : PROOF DECK ---------- */
+    #s2 { background: radial-gradient(circle at 26% 24%, rgba(196,23,38,0.20), transparent 56%), #08080C; perspective: 1900px; }
+    #s2-floor {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 120px 120px;
+      transform: perspective(700px) rotateX(66deg) translateY(430px) scale(2.4);
+      mask-image: linear-gradient(to top, rgba(0,0,0,0.55), transparent 62%);
+      opacity: 0.55;
+    }
+    #s2-camera { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+    #s2-header { position: absolute; left: 0; right: 0; top: 62px; text-align: center; }
+    #s2-header .k { font-size: 15px; color: #FF7A84; letter-spacing: 0.4em; }
+    #s2-header h2 { margin-top: 14px; font-size: 60px; color: #F7F3EA; }
+    #s2-header h2 em { font-style: normal; color: #E01B2B; }
+
+    .card {
+      position: absolute; border-radius: 22px; overflow: hidden;
+      background: linear-gradient(160deg, rgba(24,24,32,0.94), rgba(12,12,17,0.96));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 46px 90px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.10);
+      will-change: transform, opacity;
+    }
+    #pcard-0 { left: 118px; top: 196px; width: 726px; height: 664px; padding: 40px 44px; }
+    #pcard-0 .lbl { font-size: 14px; color: #FF8A93; letter-spacing: 0.30em; }
+    #pcard-0 .num { font-size: 172px; color: #FCF8F0; margin-top: 6px; line-height: 0.92; }
+    #pcard-0 .unit { font-size: 20px; color: #9C958A; margin-top: 12px; letter-spacing: 0.22em; }
+    #pcard-0 .divider { height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.22), transparent); margin: 30px 0 22px; }
+    #retwrap { position: relative; width: 100%; height: 210px; }
+    #retwrap .cap { position: absolute; right: 0; top: -6px; font-size: 13px; color: #8F887E; }
+    #pcard-0 .foot { position: absolute; left: 44px; right: 44px; bottom: 34px; display: flex; justify-content: space-between; font-family: 'PlexMonoLocal', monospace; font-size: 14px; color: #8F887E; }
+    #pcard-0 .foot b { color: #34D399; }
+
+    .pcard-sm { padding: 0; }
+    .pcard-sm img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.04) contrast(1.03); }
+    .pcard-sm .tag {
+      position: absolute; left: 14px; bottom: 14px; padding: 8px 13px; border-radius: 8px;
+      background: rgba(6,6,10,0.82); border: 1px solid rgba(255,255,255,0.14);
+      font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.1em; color: #F2EDE3;
+    }
+    #pcard-1 { left: 884px; top: 196px; width: 386px; height: 312px; }
+    #pcard-2 { left: 1290px; top: 196px; width: 386px; height: 312px; }
+    #pcard-3 { left: 884px; top: 528px; width: 386px; height: 332px; }
+    #pcard-4 { left: 1290px; top: 528px; width: 386px; height: 332px; }
+
+    .bracket { position: absolute; width: 46px; height: 46px; border: 4px solid #34D399; opacity: 0; }
+    .bracket.tl { left: -10px; top: -10px; border-right: 0; border-bottom: 0; border-radius: 12px 0 0 0; }
+    .bracket.tr { right: -10px; top: -10px; border-left: 0; border-bottom: 0; border-radius: 0 12px 0 0; }
+    .bracket.bl { left: -10px; bottom: -10px; border-right: 0; border-top: 0; border-radius: 0 0 0 12px; }
+    .bracket.br { right: -10px; bottom: -10px; border-left: 0; border-top: 0; border-radius: 0 0 12px 0; }
+    #lock-tag {
+      position: absolute; right: 44px; top: 44px; padding: 10px 16px; border-radius: 999px; opacity: 0;
+      background: rgba(52,211,153,0.16); border: 1px solid #34D399; color: #6EE7B7;
+      font-family: 'PlexMonoLocal', monospace; font-size: 14px; letter-spacing: 0.22em;
+    }
+    #s2-footer { position: absolute; left: 0; right: 0; bottom: 74px; text-align: center; font-family: 'PlexMonoLocal', monospace; font-size: 15px; color: #7C766D; letter-spacing: 0.3em; }
+
+    /* ---------- BEAT 03 : CINEMA MONOLITHS ---------- */
+    #s3 { background: #05050A; perspective: 1500px; }
+    #s3-beams { position: absolute; inset: -30%; background: conic-gradient(from 210deg at 50% 10%, transparent 0deg, rgba(196,23,38,0.18) 22deg, transparent 52deg, rgba(255,150,80,0.10) 96deg, transparent 130deg); filter: blur(6px); opacity: 0.9; }
+    #s3-van { position: absolute; inset: 0; background: radial-gradient(circle at 50% 54%, transparent 26%, #05050A 78%); }
+    #s3-corridor { position: absolute; inset: 0; transform-style: preserve-3d; }
+    .monolith {
+      position: absolute; top: 176px; width: 424px; height: 690px; border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14); background: #0A0A10;
+      box-shadow: 0 60px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05), inset 0 0 60px rgba(0,0,0,0.6);
+      will-change: transform, opacity;
+    }
+    .monolith video, .monolith img.seq { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+    .monolith .grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,4,8,0.92) 0%, rgba(4,4,8,0.18) 34%, rgba(4,4,8,0) 60%); }
+    .monolith .cap { position: absolute; left: 20px; bottom: 22px; right: 20px; }
+    .monolith .cap .n { font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.3em; color: #FF8A93; }
+    .monolith .cap .t { margin-top: 8px; font-size: 25px; font-weight: 800; color: #F7F3EA; letter-spacing: -0.01em; }
+    .monolith .cap .m { margin-top: 6px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; color: #A49C90; letter-spacing: 0.12em; }
+    .monolith .edge { position: absolute; inset: 0; border-radius: 18px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10); }
+    #mon-0 { left: 214px; } #mon-1 { left: 748px; } #mon-2 { left: 1272px; }
+
+    #s3-mosaic { position: absolute; inset: 0; display: none; }
+    #s3-mosaic .mgrid { position: absolute; left: 150px; top: 168px; width: 1620px; height: 700px; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; }
+    #s3-mosaic .mgrid .mt { position: relative; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: #0B0B11; }
+    #s3-mosaic .mgrid .mt img { width: 100%; height: 100%; object-fit: cover; opacity: 0.95; }
+    #s3-mosaic .mgrid .mt .ml { position: absolute; left: 14px; bottom: 12px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.14em; color: #EDE7DB; background: rgba(5,5,9,0.78); padding: 7px 10px; border-radius: 6px; }
+    #s3-mosaic .mgrid .mt.span2 { grid-column: span 2; }
+    #s3-center-pill {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 20;
+      padding: 22px 42px; border-radius: 999px; background: rgba(7,7,12,0.88);
+      border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(10px);
+      font-family: 'PlexMonoLocal', monospace; font-size: 19px; letter-spacing: 0.26em; color: #FBF7EF;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.7);
+    }
+    #s3-center-pill i { font-style: normal; color: #E01B2B; }
+
+    /* ---------- BEAT 04 : WEB Z-TUNNEL ---------- */
+    #s4 { background: radial-gradient(circle at 50% 46%, rgba(40,40,70,0.55), #05050A 72%); perspective: 1200px; perspective-origin: 50% 46%; }
+    #s4-tunnel { position: absolute; inset: 0; transform-style: preserve-3d; }
+    .tunnel-ring {
+      position: absolute; left: 50%; top: 46%; width: 1500px; height: 860px; margin-left: -750px; margin-top: -430px;
+      border: 1px solid rgba(140,150,255,0.16); border-radius: 22px; transform-style: preserve-3d;
+    }
+    #s4-shutter { position: absolute; inset: 0; }
+    .s4-speed { position: absolute; left: 50%; top: 46%; width: 2px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.55), transparent); transform-origin: 50% 0; }
+    .slidepane {
+      position: absolute; left: 190px; top: 132px; width: 1540px; height: 816px; border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.16); background: #0A0A11;
+      box-shadow: 0 70px 140px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.05);
+      will-change: transform, opacity; display: none;
+    }
+    .chrome { position: absolute; left: 0; right: 0; top: 0; height: 46px; background: #15151D; border-bottom: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; gap: 10px; padding: 0 18px; }
+    .chrome .d { width: 11px; height: 11px; border-radius: 50%; background: #3A3A46; }
+    .chrome .d.r { background: #E01B2B; }
+    #s4-url { margin-left: 16px; font-family: 'PlexMonoLocal', monospace; font-size: 13px; color: #9E97A8; letter-spacing: 0.04em; }
+    .pane-body { position: absolute; inset: 46px 0 0 0; }
+
+    /* slide 0 — portfolio */
+    #s4-rail {
+      position: absolute; left: 26px; top: 196px; width: 150px; display: flex; flex-direction: column; gap: 14px;
+      font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.22em; color: rgba(240,234,222,0.55);
+    }
+    #s4-rail .rr { display: flex; align-items: center; gap: 9px; }
+    #s4-rail .rr .dot2 { width: 6px; height: 6px; border-radius: 50%; background: #34D399; box-shadow: 0 0 10px #34D399; opacity: 0.35; }
+    #s4-rail .rr.on .dot2 { opacity: 1; }
+    #s4-rail .rr.on { color: #F4EFE6; }
+    #s4-title {
+      position: absolute; left: 26px; bottom: 150px; width: 160px;
+      font-family: 'AntonLocal', sans-serif; font-size: 34px; line-height: 0.94; text-transform: uppercase;
+      color: rgba(244,239,230,0.42); letter-spacing: 0.02em;
+    }
+    #wslide-0 .pane-body { display: grid; grid-template-columns: 1.15fr 1fr; background: #F4EFE6; color: #0B0B10; }
+    #wslide-0 .left { padding: 44px 40px; }
+    #wslide-0 .left .k { font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.26em; color: #7A736A; }
+    #wslide-0 .left h3 { font-family: 'AntonLocal', sans-serif; font-size: 86px; line-height: 0.9; margin-top: 16px; letter-spacing: 0.01em; }
+    #wslide-0 .left p { margin-top: 20px; font-size: 17px; line-height: 1.5; color: #4C4740; max-width: 430px; }
+    #wslide-0 .left .chips { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+    #wslide-0 .left .chip { padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(11,11,16,0.16); font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.1em; color: #38332D; }
+    #wslide-0 .right { position: relative; overflow: hidden; }
+    #wslide-0 .right img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* slide 1 — maya agent */
+    #wslide-1 .pane-body { display: grid; grid-template-columns: 1fr 1.25fr; background: #07070C; color: #E9E4DA; }
+    #wslide-1 .left { padding: 38px 34px; border-right: 1px solid rgba(255,255,255,0.08); }
+    #wslide-1 .left .k { font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.26em; color: #7E86FF; }
+    #wslide-1 .left h3 { font-family: 'AntonLocal', sans-serif; font-size: 62px; line-height: 0.94; margin-top: 14px; }
+    #wslide-1 .left .row { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; color: #A9A2B4; letter-spacing: 0.1em; }
+    #wslide-1 .left .row .pulse { width: 8px; height: 8px; border-radius: 50%; background: #34D399; box-shadow: 0 0 14px #34D399; }
+    #wslide-1 .console { padding: 34px 36px; font-family: 'PlexMonoLocal', monospace; font-size: 14px; line-height: 2.05; color: #B9B2C6; }
+    #wslide-1 .console .ok { color: #4ADE80; } #wslide-1 .console .warn { color: #FBBF24; } #wslide-1 .console .dim { color: #6C657C; }
+    #wslide-1 .console .k { color: #93A0FF; }
+    #gate-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 26px; }
+    #gate-grid i {
+      width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center;
+      font-family: 'PlexMonoLocal', monospace; font-size: 10px; font-style: normal; color: #04231A;
+      background: #34D399; box-shadow: 0 0 12px rgba(52,211,153,0.35);
+    }
+    #gate-cap { margin-top: 14px; font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.2em; color: #6C657C; }
+
+    /* slide 2 — storefront */
+    #wslide-2 .pane-body { background: linear-gradient(160deg, #0B0B12, #07070C 60%); color: #F2EDE3; padding: 34px 40px; }
+    #wslide-2 .topbar { display: flex; justify-content: space-between; align-items: center; }
+    #wslide-2 .topbar .brand { font-family: 'AntonLocal', sans-serif; font-size: 30px; letter-spacing: 0.04em; }
+    #wslide-2 .topbar .brand span { color: #E01B2B; }
+    #wslide-2 .topbar .nav { display: flex; gap: 26px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.16em; color: #9C958A; }
+    #wslide-2 .hero-line { margin-top: 26px; font-size: 46px; font-weight: 800; letter-spacing: -0.02em; }
+    #wslide-2 .hero-line em { font-style: normal; color: #E01B2B; }
+    #wslide-2 .prods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+    #wslide-2 .prod { border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #101018; position: relative; height: 268px; }
+    #wslide-2 .prod img { width: 100%; height: 100%; object-fit: cover; opacity: 0.94; }
+    #wslide-2 .prod .pl { position: absolute; left: 12px; bottom: 10px; font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.1em; background: rgba(5,5,9,0.82); padding: 6px 9px; border-radius: 5px; }
+    #s4-cta {
+      position: absolute; left: 300px; bottom: 62px; padding: 20px 34px; border-radius: 12px;
+      background: linear-gradient(120deg, #E01B2B, #FF5566); color: #FFF; font-size: 20px; font-weight: 800;
+      box-shadow: 0 24px 60px rgba(224,27,43,0.45); letter-spacing: 0.01em;
+    }
+
+    /* ---------- BEAT 05 : VAULT ---------- */
+    #s5 { background: radial-gradient(circle at 72% 40%, rgba(16,185,129,0.10), transparent 52%), radial-gradient(circle at 22% 60%, rgba(196,23,38,0.14), transparent 56%), #06060B; }
+    #s5-grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 90px 90px; opacity: 0.7; }
+    #s5-head { position: absolute; left: 92px; top: 74px; }
+    #s5-head .k { font-family: 'PlexMonoLocal', monospace; font-size: 14px; letter-spacing: 0.36em; color: #6EE7B7; }
+    #s5-head h2 { margin-top: 14px; font-family: 'AntonLocal', sans-serif; font-size: 66px; color: #F7F3EA; line-height: 0.94; }
+    #s5-head h2 em { font-style: normal; color: #34D399; }
+    #s5-rails { position: absolute; left: 92px; top: 300px; width: 780px; display: flex; flex-direction: column; gap: 20px; }
+    .rail {
+      position: relative; height: 118px; border-radius: 16px; padding: 20px 26px;
+      background: rgba(16,16,24,0.86); border: 1px solid rgba(255,255,255,0.10);
+      display: flex; align-items: center; gap: 20px; overflow: hidden;
+      transition: none;
+    }
+    .rail .ic { width: 54px; height: 54px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'PlexMonoLocal', monospace; font-size: 15px; color: #0A0A10; background: #8E877C; font-weight: 700; }
+    .rail .tx .t { font-size: 22px; font-weight: 800; color: #EDE7DC; }
+    .rail .tx .s { margin-top: 5px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.14em; color: #8B847A; }
+    .rail .st { margin-left: auto; font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.14em; color: #6E675E; }
+    .rail .bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #10B981, #6EE7B7); }
+    .rail.active { border-color: rgba(52,211,153,0.55); box-shadow: 0 0 40px rgba(16,185,129,0.22), inset 0 0 30px rgba(16,185,129,0.06); }
+    .rail.active .ic { background: #34D399; }
+    .rail.active .st { color: #6EE7B7; }
+
+    #s5-door { position: absolute; right: 96px; top: 138px; width: 700px; height: 700px; }
+    #s5-ring-svg { position: absolute; inset: 0; }
+    #s5-door-core {
+      position: absolute; left: 50%; top: 50%; width: 300px; height: 300px; margin: -150px 0 0 -150px; border-radius: 50%;
+      background: radial-gradient(circle at 44% 38%, rgba(52,211,153,0.20), rgba(8,10,14,0.96) 62%);
+      border: 1px solid rgba(110,231,183,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 0 90px rgba(16,185,129,0.22), inset 0 0 60px rgba(0,0,0,0.7);
+    }
+    #s5-door-core .lk { font-size: 52px; }
+    #s5-door-core .lb { margin-top: 10px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.26em; color: #6EE7B7; }
+    #s5-unlock-btn {
+      position: absolute; left: 1050px; bottom: 116px; padding: 24px 40px; border-radius: 14px;
+      background: linear-gradient(120deg, #E01B2B, #FF4D5A); color: #FFF; font-size: 21px; font-weight: 800;
+      box-shadow: 0 28px 70px rgba(224,27,43,0.42); border: 1px solid rgba(255,255,255,0.18);
+    }
+    #s5-unlock-btn.unlocked { background: linear-gradient(120deg, #059669, #34D399); box-shadow: 0 28px 70px rgba(16,185,129,0.45); color: #04231A; }
+    #s5-spec {
+      position: absolute; left: 1050px; top: 292px; width: 700px; padding: 24px 26px; border-radius: 16px;
+      background: rgba(12,12,18,0.72); border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(6px);
+    }
+    #s5-spec .k { font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.30em; color: #6EE7B7; }
+    #s5-spec .grid { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 26px; }
+    #s5-spec .grid span { display: block; font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.18em; color: #7E776E; }
+    #s5-spec .grid b { display: block; margin-top: 4px; font-size: 17px; font-weight: 800; color: #EDE7DC; letter-spacing: 0.01em; }
+    #s5-spec .note { margin-top: 16px; font-family: 'PlexMonoLocal', monospace; font-size: 11px; letter-spacing: 0.08em; color: #8B847A; line-height: 1.7; }
+    #s5-badge {
+      position: absolute; left: 1050px; bottom: 206px; padding: 11px 18px; border-radius: 999px;
+      background: rgba(224,27,43,0.18); border: 1px solid #FF4754; color: #FF9AA2;
+      font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.2em;
+    }
+    #s5-watermark { position: absolute; inset: 0; pointer-events: none; }
+    #s5-wm-ribbon { position: absolute; inset: 0; background: transparent; display: block; }
+    #s5-wm-pill { position: absolute; right: 96px; top: 108px; padding: 14px 22px; border-radius: 12px; background: rgba(12,12,18,0.92); border: 1px solid rgba(255,255,255,0.22); font-family: 'PlexMonoLocal', monospace; font-size: 14px; letter-spacing: 0.2em; color: #D9D2C6; }
+    #s5-files { position: absolute; left: 92px; bottom: 96px; display: flex; gap: 46px; font-family: 'PlexMonoLocal', monospace; font-size: 13px; color: #7E776E; letter-spacing: 0.1em; }
+    #s5-files b { display: block; margin-top: 7px; font-size: 19px; color: #EDE7DC; letter-spacing: 0.04em; }
+    #s5-burst { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: rgba(52,211,153,0.9); opacity: 0; }
+
+    /* ---------- BEAT 06 : FINALE ---------- */
+    #s6 { background: #05050A; align-items: center; justify-content: center; }
+    #s6-bloom { position: absolute; left: 50%; top: 46%; width: 1700px; height: 1000px; margin: -500px 0 0 -850px; background: radial-gradient(ellipse at center, rgba(214,38,54,0.20), rgba(120,20,40,0.07) 44%, transparent 70%); filter: blur(10px); }
+    #s6-core { position: absolute; left: 0; right: 0; top: 300px; text-align: center; }
+    #s6-kicker { font-family: 'PlexMonoLocal', monospace; font-size: 15px; letter-spacing: 0.46em; color: #FF8A93; }
+    #s6-title { margin-top: 26px; font-family: 'AntonLocal', sans-serif; font-size: 158px; color: #FBF7EF; line-height: 0.9; letter-spacing: 0.01em; }
+    #s6-title sup { position: absolute; margin-left: 8px; margin-top: 12px; font-family: 'ManropeLocal', sans-serif; font-weight: 800; font-size: 40px; letter-spacing: 0; color: #E01B2B; }
+    #s6-sub { margin-top: 22px; font-size: 27px; font-weight: 800; letter-spacing: 0.44em; color: #C7C0B4; }
+    #s6-rule { margin: 40px auto 0; width: 0px; height: 2px; background: linear-gradient(90deg, transparent, #E01B2B, transparent); }
+    #s6-sig-wrap { position: absolute; left: 50%; bottom: 196px; width: 460px; margin-left: -230px; height: 132px; overflow: hidden; clip-path: inset(0 100% 0 0); }
+    #s6-sig { width: 100%; height: 100%; object-fit: contain; filter: invert(1) brightness(1.7); opacity: 0.94; }
+    #s6-handle { position: absolute; left: 50%; bottom: 132px; transform: translateX(-50%); font-family: 'PlexMonoLocal', monospace; font-size: 15px; letter-spacing: 0.24em; color: #8F887E; }
+    #s6-tags { position: absolute; left: 0; right: 0; bottom: 74px; display: flex; justify-content: center; gap: 34px; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.22em; color: #6E675E; }
+
+    /* ---------- GLOBAL CINEMA FX ---------- */
+    #fx-canvas { position: absolute; inset: 0; z-index: 60; pointer-events: none; mix-blend-mode: screen; }
+    #rays {
+      position: absolute; left: 50%; top: 6%; width: 2400px; height: 2400px; margin-left: -1200px; margin-top: -1200px;
+      z-index: 59; pointer-events: none; mix-blend-mode: screen; opacity: 0;
+      background: conic-gradient(from 0deg,
+        transparent 0deg, rgba(255,120,135,0.10) 3deg, transparent 8deg,
+        transparent 30deg, rgba(255,170,120,0.07) 34deg, transparent 40deg,
+        transparent 72deg, rgba(255,120,135,0.09) 76deg, transparent 82deg,
+        transparent 116deg, rgba(255,170,120,0.06) 120deg, transparent 126deg,
+        transparent 160deg, rgba(255,120,135,0.08) 164deg, transparent 170deg,
+        transparent 210deg, rgba(255,170,120,0.06) 214deg, transparent 220deg,
+        transparent 258deg, rgba(255,120,135,0.09) 262deg, transparent 268deg,
+        transparent 306deg, rgba(255,170,120,0.07) 310deg, transparent 316deg);
+      filter: blur(22px) saturate(1.05);
+      mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 26%, transparent 62%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 26%, transparent 62%);
+    }
+    #flare { position: absolute; left: 0; top: 0; width: 2200px; height: 3px; z-index: 61; pointer-events: none; mix-blend-mode: screen; opacity: 0; background: linear-gradient(90deg, transparent, rgba(120,200,255,0.55) 24%, rgba(255,255,255,0.95) 50%, rgba(255,140,150,0.6) 74%, transparent); box-shadow: 0 0 40px rgba(150,210,255,0.55); }
+    #eq { position: absolute; right: 90px; left: auto; width: 620px; bottom: 262px; height: 92px; z-index: 62; display: flex; align-items: flex-end; justify-content: center; gap: 7px; pointer-events: none; opacity: 0; }
+    #eq i { width: 8px; height: 8px; border-radius: 3px 3px 0 0; background: linear-gradient(to top, rgba(224,27,43,0.95), rgba(255,150,110,0.95)); box-shadow: 0 0 16px rgba(224,27,43,0.5); }
+    #scan { position: absolute; inset: 0; z-index: 63; pointer-events: none; opacity: 0.16; background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.055) 0 1px, transparent 1px 4px); }
+    #grain { position: absolute; inset: 0; z-index: 64; pointer-events: none; opacity: 0.34; mix-blend-mode: overlay;
+      background-image: radial-gradient(rgba(255,255,255,0.85) 0.5px, transparent 0.6px), radial-gradient(rgba(0,0,0,0.7) 0.5px, transparent 0.6px);
+      background-size: 3px 3px, 4px 4px; background-position: 0 0, 1px 2px; }
+    #vignette { position: absolute; inset: 0; z-index: 65; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 46%, rgba(0,0,0,0.62) 100%); }
+    #bars { position: absolute; inset: 0; z-index: 66; pointer-events: none; }
+    #bars .b { position: absolute; left: 0; right: 0; height: 0px; background: #05050A; }
+    #bars .b.t { top: 0; } #bars .b.b { bottom: 0; }
+    #hud { position: absolute; inset: 0; z-index: 67; pointer-events: none; font-family: 'PlexMonoLocal', monospace; font-size: 13px; letter-spacing: 0.2em; color: rgba(240,234,222,0.55); }
+    #hud .tl { position: absolute; left: 54px; top: 46px; }
+    #hud .tr { position: absolute; right: 54px; top: 46px; color: #FF8A93; }
+    #hud .bl { position: absolute; left: 54px; bottom: 44px; }
+    #hud .br { position: absolute; right: 54px; bottom: 44px; }
+    #progress-track { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(255,255,255,0.08); z-index: 90; }
+    #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #C41726, #FF8A93); box-shadow: 0 0 20px rgba(224,27,43,0.9); }
+
+    #cursor-layer { position: absolute; left: 0; top: 0; z-index: 85; width: 0; height: 0; opacity: 0; }
+    #cursor-layer .body { position: absolute; left: 0; top: 0; width: 46px; height: 46px; transform: translate(-6px, -4px); }
+    #click-ring { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 3px solid #FF3B49; z-index: 86; opacity: 0; pointer-events: none; }
+
+    #live-controls { position: fixed; left: 26px; bottom: 26px; z-index: 999; display: flex; gap: 12px; }
+    .ctrl-btn { padding: 13px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(10,10,16,0.86); color: #F2EDE3; font-family: 'PlexMonoLocal', monospace; font-size: 12px; letter-spacing: 0.16em; cursor: pointer; }
+    .ctrl-btn:hover { background: rgba(224,27,43,0.22); border-color: #FF5566; }
+    body.headless #live-controls { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="viewport">
+    <div id="stage">
+
+      <!-- ================= BEAT 01 ================= -->
+      <section class="scene" id="s1">
+        <div id="s1-cream">
+          <div id="s1-grid"></div>
+          <div id="s1-top" class="mono"><span>MONARCH® STUDIO</span><span>SHOWREEL 2026 · 1080P60</span></div>
+          <div id="s1-kicker" class="mono">Independent design &amp; film practice · Hyderabad, PK</div>
+          <div id="s1-h1" class="display">
+            <span class="ln"><span id="w0">PROOF</span></span>
+            <span class="ln"><span id="w1" class="red">OVER</span></span>
+            <span class="ln"><span id="w2">PROMISES</span></span>
+          </div>
+          <img id="s1-portrait" src="./../proof/portrait-masked.png" alt="" />
+          <div id="s1-cta"><span class="dot"></span><span>See the real numbers</span></div>
+          <div id="s1-foot" class="mono"><span>583,290 REAL VIEWS</span><span>92.5% PEAK RETENTION</span><span>ZERO BOUGHT NUMBERS</span></div>
+
+          <div id="s1-obsidian">
+            <div id="s1-redslash"></div>
+            <div id="s1-obs-kicker" class="mono">YOUTUBE STUDIO · UNEDITED CAPTURE</div>
+            <div id="s1-bignum" class="display"><span id="s1-bignum-v">0</span><span class="ghost" id="s1-bignum-g">0</span></div>
+            <div id="s1-obs-sub">Nobody asked for another pitch deck. <b>They asked for numbers.</b></div>
+            <div id="s1-obs-meta" class="mono">
+              <div>VIEWS<b id="m-views">0</b></div>
+              <div>VIEWED VS SWIPED<b>80.5%</b></div>
+              <div>PEAK RETENTION<b>92.5%</b></div>
+            </div>
+            <img id="s1-portrait-dark" src="./../proof/portrait-masked.png" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BEAT 02 ================= -->
+      <section class="scene" id="s2">
+        <div id="s2-floor"></div>
+        <div id="s2-camera">
+          <div class="card" id="pcard-0">
+            <div class="lbl mono">CHANNEL REACH · ALL TIME</div>
+            <div class="num display" id="kpi-views">0</div>
+            <div class="unit mono">VERIFIED VIEWS · NOT AN ESTIMATE</div>
+            <div class="divider"></div>
+            <div id="retwrap">
+              <div class="cap mono">RETENTION CURVE · LAST 90 DAYS</div>
+              <svg width="638" height="210" viewBox="0 0 638 210" fill="none">
+                <defs>
+                  <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#E01B2B" stop-opacity="0.42" />
+                    <stop offset="100%" stop-color="#E01B2B" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+                  <line x1="0" y1="52" x2="638" y2="52" /><line x1="0" y1="104" x2="638" y2="104" /><line x1="0" y1="156" x2="638" y2="156" />
+                </g>
+                <path id="ret-area" d="M0 168 C 70 44, 120 30, 190 48 C 260 66, 300 88, 380 96 C 460 104, 520 118, 638 138 L638 210 L0 210 Z" fill="url(#ag)" opacity="0" />
+                <path id="ret-line" d="M0 168 C 70 44, 120 30, 190 48 C 260 66, 300 88, 380 96 C 460 104, 520 118, 638 138" stroke="#FF4D5A" stroke-width="4" stroke-linecap="round" stroke-dasharray="650" stroke-dashoffset="650" />
+              </svg>
+            </div>
+            <div class="foot"><span>SAMPLE · 41 UPLOADS</span><span><b>NO PURCHASED TRAFFIC</b></span></div>
+            <div class="bracket tl"></div><div class="bracket tr"></div><div class="bracket bl"></div><div class="bracket br"></div>
+            <div id="lock-tag">PROOF LOCKED</div>
+          </div>
+          <div class="card pcard-sm" id="pcard-1"><img src="./../proof/proof-1.jpg" alt="" /><div class="tag">STUDIO: VIEWS REALITY</div></div>
+          <div class="card pcard-sm" id="pcard-2"><img src="./../proof/proof-2.jpg" alt="" /><div class="tag">CTR · IMPRESSIONS</div></div>
+          <div class="card pcard-sm" id="pcard-3"><img src="./../proof/proof-5.jpg" alt="" /><div class="tag">WATCH TIME · 92.5%</div></div>
+          <div class="card pcard-sm" id="pcard-4"><img src="./../proof/proof-loop.web.mp4" alt="" style="display:none" /><img src="./../proof/work-film.jpg" alt="" /><div class="tag">SHORTS LOOP · 41 FILMS</div></div>
+          <div id="s2-header">
+            <div class="k mono">BEAT 02 · THE PROOF DECK</div>
+            <h2 class="display">NUMBERS <em>OR IT DIDN'T HAPPEN</em></h2>
+          </div>
+          <div id="s2-footer">SCREENSHOTS · YOUTUBE STUDIO · UNEDITED</div>
+        </div>
+      </section>
+
+      <!-- ================= BEAT 03 ================= -->
+      <section class="scene" id="s3">
+        <div id="s3-beams"></div>
+        <div id="s3-van"></div>
+        <div id="s3-corridor">
+          <div class="monolith" id="mon-0">
+            <video id="vid-intro" src="./../proof/intro.mp4" muted loop playsinline></video>
+            <img class="seq" id="seq-intro" alt="" />
+            <div class="grad"></div>
+            <div class="cap"><div class="n">FILM 01</div><div class="t">Portfolio Intro</div><div class="m">SELF-BRAND · 60FPS</div></div>
+            <div class="edge"></div>
+          </div>
+          <div class="monolith" id="mon-1">
+            <video id="vid-lawone" src="./../proof/lawone.web.mp4" muted loop playsinline></video>
+            <img class="seq" id="seq-lawone" alt="" />
+            <div class="grad"></div>
+            <div class="cap"><div class="n">FILM 02</div><div class="t">Law One · Digital Defense</div><div class="m">COUNSEL SITE + MOTION</div></div>
+            <div class="edge"></div>
+          </div>
+          <div class="monolith" id="mon-2">
+            <video id="vid-paanch" src="./../proof/paanch.web.mp4" muted loop playsinline></video>
+            <img class="seq" id="seq-paanch" alt="" />
+            <div class="grad"></div>
+            <div class="cap"><div class="n">FILM 03</div><div class="t">Powerful Presence</div><div class="m">STAGE FILM · BRAND SYSTEM</div></div>
+            <div class="edge"></div>
+          </div>
+        </div>
+        <div id="s3-mosaic">
+          <div class="mgrid">
+            <div class="mt span2"><img src="./../proof/work-site.jpg" alt="" /><div class="ml">PORTFOLIO V37 · SITE</div></div>
+            <div class="mt"><img src="./../proof/proof-1.jpg" alt="" /><div class="ml">STUDIO PROOF</div></div>
+            <div class="mt"><img src="./../proof/work-film.jpg" alt="" /><div class="ml">FILM CRAFT</div></div>
+            <div class="mt"><img src="./../proof/proof-5.jpg" alt="" /><div class="ml">RETENTION</div></div>
+            <div class="mt"><img src="./../proof/work-intro.jpg" alt="" /><div class="ml">TITLE SYSTEM</div></div>
+          </div>
+        </div>
+        <div id="s3-center-pill">3 FILMS · <i>ONE CRAFT</i></div>
+      </section>
+
+      <!-- ================= BEAT 04 ================= -->
+      <section class="scene" id="s4">
+        <div id="s4-tunnel">
+          <div class="tunnel-ring" id="tr0"></div>
+          <div class="tunnel-ring" id="tr1"></div>
+          <div class="tunnel-ring" id="tr2"></div>
+          <div class="tunnel-ring" id="tr3"></div>
+          <div class="tunnel-ring" id="tr4"></div>
+          <div class="tunnel-ring" id="tr5"></div>
+        </div>
+        <div id="s4-shutter">
+          <div class="s4-speed" style="left: 6%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 18%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 31%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 68%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 81%; height: 92vh; top: -20vh;"></div>
+          <div class="s4-speed" style="left: 93%; height: 92vh; top: -20vh;"></div>
+        </div>
+
+        <div id="s4-rail">
+          <div class="rr" data-rr="0"><span class="dot2"></span><span>PORTFOLIO V37</span></div>
+          <div class="rr" data-rr="1"><span class="dot2"></span><span>MAYA AI OS</span></div>
+          <div class="rr" data-rr="2"><span class="dot2"></span><span>STORE + VAULT</span></div>
+          <div class="rr" data-rr="3"><span class="dot2"></span><span>17-GATE QA</span></div>
+          <div class="rr" data-rr="4"><span class="dot2"></span><span>CLOUD INTAKE</span></div>
+        </div>
+        <div id="s4-title">THE<br />ECOSYSTEM</div>
+
+        <div class="slidepane" id="wslide-0">
+          <div class="chrome"><div class="d r"></div><div class="d"></div><div class="d"></div><div id="s4-url">https://adil-chandio.github.io/portfolio/</div></div>
+          <div class="pane-body">
+            <div class="left">
+              <div class="k">PORTFOLIO V37 · LIVE</div>
+              <h3>DESIGN<br />THAT<br />SHIPS.</h3>
+              <p>Seventeen gate quality enforcement, motion systems, and real client deployments — built solo, end to end.</p>
+              <div class="chips"><div class="chip">REACT</div><div class="chip">MOTION</div><div class="chip">SHOPIFY</div><div class="chip">SUPABASE</div></div>
+            </div>
+            <div class="right"><img src="./../proof/work-site.jpg" alt="" /></div>
+          </div>
+        </div>
+
+        <div class="slidepane" id="wslide-1">
+          <div class="chrome"><div class="d r"></div><div class="d"></div><div class="d"></div><div id="s4-url-2">monarch://maya-ai-os</div></div>
+          <div class="pane-body">
+            <div class="left">
+              <div class="k">MAYA AI OS · AGENT ENGINE</div>
+              <h3>AGENTS<br />THAT<br />FINISH.</h3>
+              <div class="row"><span class="pulse"></span><span>SHIPGUARD · ONLINE</span></div>
+              <div class="row"><span class="pulse"></span><span>17 GATES · ARMED</span></div>
+              <div class="row"><span class="pulse"></span><span>ZERO HUMAN NUDGE</span></div>
+              <div id="gate-grid"></div>
+              <div id="gate-cap">17 / 17 GATES PASSED · 0 BUGS SHIPPED</div>
+            </div>
+            <div class="console">
+              <div><span class="dim">$</span> <span class="k">monarch</span> build --client mon-demo26</div>
+              <div><span class="ok">✓</span> storyboard locked · 6 beats</div>
+              <div><span class="ok">✓</span> audio mastered · -14.0 LUFS</div>
+              <div><span class="ok">✓</span> 2,160 frames rendered · 1080p60</div>
+              <div><span class="warn">→</span> independent visual audit: 10/10 frames clean</div>
+              <div><span class="ok">✓</span> delivered · vault unlocked</div>
+              <div><span class="dim">$</span> <span class="k">monarch</span> status</div>
+              <div><span class="ok">READY</span> · nothing left to babysit.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slidepane" id="wslide-2">
+          <div class="chrome"><div class="d r"></div><div class="d"></div><div class="d"></div><div id="s4-url-3">https://monarch-workspace-beryl.vercel.app/</div></div>
+          <div class="pane-body">
+            <div class="topbar"><div class="brand">MONARCH<span>®</span></div><div class="nav"><span>WORK</span><span>STUDIO</span><span>VAULT</span><span>CONTACT</span></div></div>
+            <div class="hero-line">Fixed scope. Fixed price. <em>Watermarked proof first.</em></div>
+            <div class="prods">
+              <div class="prod"><img src="./../proof/work-site.jpg" alt="" /><div class="pl">SITES · $450</div></div>
+              <div class="prod"><img src="./../proof/work-film.jpg" alt="" /><div class="pl">FILMS · $240</div></div>
+              <div class="prod"><img src="./../proof/paanch.web.mp4" alt="" style="display:none" /><img src="./../proof/work-intro.jpg" alt="" /><div class="pl">BRAND SYSTEMS</div></div>
+            </div>
+            <div id="s4-cta">Open Client Vault (MON-DEMO26) →</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BEAT 05 ================= -->
+      <section class="scene" id="s5">
+        <div id="s5-grid"></div>
+        <div id="s5-head">
+          <h2>REVIEW IT HERE.<br /><em>OWN IT THERE.</em></h2>
+        </div>
+        <div id="s5-rails">
+          <div class="rail" id="rail-0"><div class="ic">PK</div><div class="tx"><div class="t">Local PKR · Raast / SadaPay</div><div class="s">INSTANT BANK RAIL · 125,000 PKR</div></div><div class="st">PENDING</div><div class="bar"></div></div>
+          <div class="rail" id="rail-1"><div class="ic">$</div><div class="tx"><div class="t">US ACH · Wise / Mercury</div><div class="s">FOREIGN USD SETTLEMENT · $450</div></div><div class="st">PENDING</div><div class="bar"></div></div>
+          <div class="rail" id="rail-2"><div class="ic">◈</div><div class="tx"><div class="t">Contra · Card / Apple Pay</div><div class="s">ESCROW PROTECTED CHECKOUT</div></div><div class="st">PENDING</div><div class="bar"></div></div>
+          <div class="rail" id="rail-3"><div class="ic">◎</div><div class="tx"><div class="t">USDC · Solana / Polygon</div><div class="s">ON-CHAIN · SUB-CENT FEES</div></div><div class="st">PENDING</div><div class="bar"></div></div>
+        </div>
+
+        <div id="s5-door">
+          <svg id="s5-ring-svg" width="700" height="700" viewBox="0 0 700 700" fill="none">
+            <circle id="vr-out" cx="350" cy="350" r="326" stroke="rgba(255,255,255,0.10)" stroke-width="2" stroke-dasharray="26 16" />
+            <circle id="vr-mid" cx="350" cy="350" r="272" stroke="rgba(224,27,43,0.42)" stroke-width="3" stroke-dasharray="120 40" />
+            <circle id="vr-in" cx="350" cy="350" r="222" stroke="rgba(52,211,153,0.40)" stroke-width="2" stroke-dasharray="8 12" />
+            <circle id="vr-prog" cx="350" cy="350" r="180" stroke="#34D399" stroke-width="7" stroke-linecap="round"
+              stroke-dasharray="1131" stroke-dashoffset="1131" transform="rotate(-90 350 350)" />
+          </svg>
+          <div id="s5-door-core"><div class="lk" id="s5-lock-ic">🔒</div><div class="lb" id="s5-lock-lb">AES-256 · LOCKED</div></div>
+          <div id="s5-burst"></div>
+        </div>
+
+        <div id="s5-spec">
+          <div class="k">MASTER SPEC · FINAL</div>
+          <div class="grid">
+            <div><span>RESOLUTION</span><b>1920 × 1080</b></div>
+            <div><span>FRAME RATE</span><b>60.000 FPS</b></div>
+            <div><span>FRAMES</span><b>2,160</b></div>
+            <div><span>DURATION</span><b>36.00 S</b></div>
+            <div><span>VIDEO CODEC</span><b>H.264 HIGH</b></div>
+            <div><span>AUDIO</span><b>48K AAC STEREO</b></div>
+            <div><span>LOUDNESS</span><b>−14.0 LUFS</b></div>
+            <div><span>TRUE PEAK</span><b>−4.0 dBFS</b></div>
+          </div>
+          <div class="note">Watermarked review copy now · clean master + license on settlement.</div>
+        </div>
+
+        <div id="s5-badge">● WATERMARKED REVIEW STAGE</div>
+        <div id="s5-unlock-btn">Verify Settlement &amp; Unlock 1080p60 Master →</div>
+
+        <div id="s5-watermark">
+          <div id="s5-wm-ribbon"><div id="s5-wm-pill">MONARCH® PREVIEW · LOCKED</div></div>
+        </div>
+
+        <div id="s5-files">
+          <div>MASTER<b>1080P60 · 36.00S</b></div>
+          <div>PREVIEW<b>WATERMARKED CUT</b></div>
+          <div>STATE<b id="s5-file-state">ENCRYPTED CLOUD LINK</b></div>
+        </div>
+      </section>
+
+      <!-- ================= BEAT 06 ================= -->
+      <section class="scene" id="s6">
+        <div id="s6-bloom"></div>
+        <div id="s6-core">
+          <div id="s6-kicker">MONARCH® STUDIO · 2026</div>
+          <div id="s6-title" style="position:relative;display:inline-block;">MONARCH<sup>®</sup></div>
+          <div id="s6-sub">PROOF OVER PROMISES</div>
+          <div id="s6-rule"></div>
+        </div>
+        <div id="s6-sig-wrap"><img id="s6-sig" src="./../proof/sig-adil.png" alt="" /></div>
+        <div id="s6-handle">ADIL CHANDIO · WORKADILCHANDIO@GMAIL.COM</div>
+        <div id="s6-tags"><span>1080P60</span><span>36.00 SEC</span><span>ZERO AI SLOP</span><span>REAL METRICS ONLY</span></div>
+      </section>
+
+      <!-- ================= GLOBAL FX ================= -->
+      <canvas id="fx-canvas" width="1920" height="1080"></canvas>
+      <div id="rays"></div>
+      <div id="flare"></div>
+      <div id="eq"></div>
+      <div id="scan"></div>
+      <div id="grain"></div>
+      <div id="vignette"></div>
+      <div id="bars"><div class="b t" id="bar-t"></div><div class="b b" id="bar-b"></div></div>
+
+      <div id="hud">
+        <div class="tr" id="hud-chapter">BEAT 01 · THE HOOK</div>
+        <div class="bl" id="hud-tc">00:00:00:00</div>
+        <div class="br">1080P60 · 36.00S</div>
+      </div>
+
+      <div id="progress-track"><div id="progress-fill"></div></div>
+
+      <div id="click-ring"></div>
+      <div id="cursor-layer">
+        <svg class="body" viewBox="0 0 46 46" fill="none">
+          <path d="M8 4 L8 38 L17 29.5 L23 42 L29.5 39 L23.5 26.5 L36 26 Z" fill="#0B0B10" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <audio id="master-audio" src="/showreel/audio_master_60fps.m4a" preload="auto"></audio>
+
+  <div id="live-controls">
+    <button class="ctrl-btn" id="btn-play">▶ REPLAY WITH SOUND (60FPS)</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const IS_HEADLESS = params.get('headless') === '1';
+    if (IS_HEADLESS) document.body.classList.add('headless');
+
+    const FPS = 60;
+    const TOTAL_FRAMES = 2160; // 36.000s
+
+    const $ = (id) => document.getElementById(id);
+
+    function fitStage() {
+      const st = $('stage');
+      if (IS_HEADLESS) { st.style.transform = 'none'; return; }
+      const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      st.style.transform = `scale(${s})`;
+    }
+    window.addEventListener('resize', fitStage);
+    fitStage();
+
+    // ---------- easing ----------
+    const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+    const prog = (f, f0, f1) => clamp((f - f0) / Math.max(1, f1 - f0));
+    const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+    const easeInQuart = (t) => t * t * t * t;
+    const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    const easeInOutQuint = (t) => (t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2);
+    const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+    const easeOutBack = (t, s = 1.35) => { const c3 = s + 1; return 1 + c3 * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2); };
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    // ---------- beat map (mirrors showreel/beat_sheet.json) ----------
+    const B = {
+      hookClick: 148,
+      deckIn: 288,
+      cardDeals: [308, 323, 337, 350, 362],
+      laserLock: 496,
+      crashZoom: 516,
+      monolithsIn: 648,
+      monoPops: [666, 680, 694, 708],
+      mosaicFlip: 852,
+      tunnelIn: 1050,
+      slide1: 1185,
+      slide2: 1300,
+      vaultClick: 1392,
+      vaultIn: 1428,
+      railTicks: [1488, 1522, 1556, 1590],
+      unlockClick: 1656,
+      finaleIn: 1800,
+    };
+
+    const CHAPTERS = [
+      [0, 'BEAT 01 · THE HOOK'],
+      [148, 'BEAT 01 · THE NUMBERS'],
+      [288, 'BEAT 02 · THE PROOF DECK'],
+      [648, 'BEAT 03 · THREE FILMS'],
+      [1050, 'BEAT 04 · THE ECOSYSTEM'],
+      [1428, 'BEAT 05 · THE VAULT'],
+      [1800, 'BEAT 06 · THE SIGNATURE'],
+    ];
+
+    // ---------- real film sequences ----------
+    const seqMap = {
+      intro: { vid: $('vid-intro'), img: $('seq-intro'), count: 130 },
+      lawone: { vid: $('vid-lawone'), img: $('seq-lawone'), count: 130 },
+      paanch: { vid: $('vid-paanch'), img: $('seq-paanch'), count: 130 },
+    };
+    if (IS_HEADLESS) {
+      Object.values(seqMap).forEach(({ vid, img }) => { vid.style.display = 'none'; img.style.display = 'block'; });
+    } else {
+      Object.values(seqMap).forEach(({ vid, img }) => { vid.style.display = 'block'; img.style.display = 'none'; });
+    }
+
+    // ---------- audio reactive telemetry ----------
+    let AUD = { sub: null, mid: null, high: null, bins: null };
+    const REACTIVE_URL = '/showreel/audio_reactive.json';
+    const audioReady = fetch(REACTIVE_URL)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d && d.sub) AUD = d; })
+      .catch(() => {});
+    const subAt = (f) => (AUD.sub ? AUD.sub[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : 0.35);
+    const midAt = (f) => (AUD.mid ? AUD.mid[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : 0.35);
+    const highAt = (f) => (AUD.high ? AUD.high[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : 0.3);
+    const binsAt = (f) => (AUD.bins ? AUD.bins[clamp(f, 0, TOTAL_FRAMES - 1) | 0] : null);
+
+    // ---------- seam wrapper ----------
+    function applySeam(el, f, startF, endF, enterAxis = 'x', exitAxis = 'x') {
+      if (f < startF || f >= endF) { el.style.display = 'none'; return false; }
+      el.style.display = el.id === 's6' ? 'flex' : 'block';
+      let tx = 0, ty = 0, sc = 1, blur = 0, op = 1;
+      if (startF > 0 && f < startF + 14) {
+        const u = easeOutQuart(prog(f, startF, startF + 14));
+        if (enterAxis === 'x') tx = lerp(220, 0, u);
+        else if (enterAxis === '-x') tx = lerp(-220, 0, u);
+        else if (enterAxis === 'z') sc = lerp(0.84, 1, u);
+        else if (enterAxis === 'blur') sc = lerp(1.06, 1, u);
+        blur = lerp(14, 0, u);
+      }
+      if (endF < TOTAL_FRAMES && f >= endF - 10) {
+        const u = easeInQuart(prog(f, endF - 10, endF));
+        if (exitAxis === 'x') tx = lerp(0, -220, u);
+        else if (exitAxis === '-x') tx = lerp(0, 220, u);
+        else if (exitAxis === 'z') sc = lerp(1, 1.18, u);
+        else if (exitAxis === 'blur') { sc = lerp(1, 0.95, u); op = lerp(1, 0.25, u); }
+        blur = Math.max(blur, lerp(0, 14, u));
+      }
+      el.style.opacity = op;
+      el.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) scale(${sc.toFixed(4)})`;
+      el.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
+      return true;
+    }
+
+    function setCursor(x, y, scale = 1, opacity = 1) {
+      const c = $('cursor-layer');
+      c.style.opacity = opacity;
+      c.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+    }
+    function triggerRing(f, clickF, x, y, color = '#FF3B49') {
+      const r = $('click-ring');
+      if (f < clickF || f > clickF + 26) return false;
+      const u = prog(f, clickF, clickF + 26);
+      r.style.borderColor = color;
+      r.style.opacity = (1 - u).toFixed(3);
+      r.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${lerp(0.35, 2.35, easeOutQuart(u)).toFixed(3)})`;
+      return true;
+    }
+
+    // ---------- deterministic particles ----------
+    const cv = $('fx-canvas');
+    const ctx = cv.getContext('2d');
+    function mulberry32(a) {
+      return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    const rnd = mulberry32(20261103);
+    const DUST = Array.from({ length: 64 }, () => ({
+      x: rnd() * 1920, y: rnd() * 1080, r: 0.7 + rnd() * 2.6,
+      sx: 0.15 + rnd() * 0.55, sy: -0.1 - rnd() * 0.5, ph: rnd() * 6.283, a: 0.18 + rnd() * 0.5,
+    }));
+    const STREAKS = Array.from({ length: 12 }, (_, i) => ({ y: rnd() * 1080, len: 200 + rnd() * 460, sp: 0.6 + rnd() * 1.5, off: rnd() * 1920 }));
+
+    function drawFX(f, beatIdx) {
+      ctx.clearRect(0, 0, 1920, 1080);
+      const sub = subAt(f), mid = midAt(f), hi = highAt(f);
+      const isVault = beatIdx === 5, isDeck = beatIdx === 2, isMono = beatIdx === 3, isTunnel = beatIdx === 4;
+
+      // god rays (soft additive wedges)
+      if (beatIdx >= 1) {
+        const rayA = 0.10 + hi * 0.24;
+        ctx.save();
+        ctx.translate(960, isVault ? 420 : 300);
+        ctx.rotate((f * 0.0035) % (Math.PI * 2));
+        for (let i = 0; i < 5; i++) {
+          const a0 = (i / 5) * Math.PI * 2;
+          const g = ctx.createLinearGradient(0, 0, 900, 0);
+          g.addColorStop(0, `rgba(255,110,120,${(rayA * 0.55).toFixed(3)})`);
+          g.addColorStop(1, 'rgba(255,110,120,0)');
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.arc(0, 0, 1500, a0, a0 + 0.20);
+          ctx.closePath();
+          ctx.fillStyle = g;
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      // floating dust / bokeh
+      if (beatIdx !== 0) {
+        for (const d of DUST) {
+          const x = (d.x + f * d.sx * 1.6) % 1920;
+          const y = (d.y + f * d.sy * 1.1 + Math.sin((f * 0.02) + d.ph) * 14 + 1080) % 1080;
+          const r = d.r * (1 + sub * 0.9);
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, 6.2832);
+          ctx.fillStyle = `rgba(255,225,215,${(d.a * (0.30 + hi * 0.7)).toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+
+      // speed streaks during tunnel & deck
+      if (isTunnel || isDeck) {
+        const inten = isTunnel ? 0.22 + hi * 0.5 : 0.10 + mid * 0.26;
+        ctx.strokeStyle = `rgba(255,255,255,${inten.toFixed(3)})`;
+        ctx.lineWidth = 1.6;
+        for (const s of STREAKS) {
+          const x = ((f * s.sp * 16) + s.off) % 2400 - 240;
+          ctx.beginPath();
+          ctx.moveTo(x, s.y);
+          ctx.lineTo(x - s.len, s.y);
+          ctx.stroke();
+        }
+      }
+
+      // emerald unlock burst particles
+      if (beatIdx === 5 && f >= B.unlockClick) {
+        const u = prog(f, B.unlockClick, B.unlockClick + 110);
+        const cx = 1400, cy = 488;
+        for (let i = 0; i < 46; i++) {
+          const ang = (i / 46) * Math.PI * 2;
+          const rad = 60 + easeOutCubic(u) * (420 + (i % 7) * 42);
+          const px = cx + Math.cos(ang) * rad;
+          const py = cy + Math.sin(ang) * rad * 0.92;
+          ctx.beginPath();
+          ctx.arc(px, py, (1 - u) * 3.6 + 0.6, 0, 6.2832);
+          ctx.fillStyle = `rgba(120,255,200,${(0.5 * (1 - u)).toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+
+      // finale feather-light flare dust
+      if (beatIdx === 6) {
+        const u = prog(f, B.finaleIn, B.finaleIn + 120);
+        for (let i = 0; i < 30; i++) {
+          const a = (i / 30) * Math.PI * 2 + f * 0.004;
+          const rad = 260 + Math.sin(i * 2.1 + f * 0.03) * 180 + easeOutCubic(u) * 240;
+          const px = 960 + Math.cos(a) * rad;
+          const py = 470 + Math.sin(a) * rad * 0.5;
+          ctx.beginPath();
+          ctx.arc(px, py, 1.4 + (i % 4) * 0.7, 0, 6.2832);
+          ctx.fillStyle = `rgba(255,210,190,${(0.20 + hi * 0.35).toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+    }
+
+    // ---------- HUD ----------
+    const tcEl = $('hud-tc'), chapEl = $('hud-chapter');
+    function timecode(f) {
+      const s = Math.max(0, f) / FPS;
+      const ss = Math.floor(s);
+      const ff = Math.round((s - ss) * FPS) % FPS;
+      return `00:00:${String(ss).padStart(2, '0')}:${String(ff).padStart(2, '0')}`;
+    }
+
+    // ---------- 17-gate matrix ----------
+    (() => {
+      const g = document.getElementById('gate-grid');
+      if (!g) return;
+      for (let i = 1; i <= 17; i++) {
+        const cell = document.createElement('i');
+        cell.textContent = String(i);
+        g.appendChild(cell);
+      }
+    })();
+
+    // ---------- EQ bars ----------
+    const eqEl = $('eq');
+    for (let i = 0; i < 40; i++) {
+      const b = document.createElement('i');
+      b.style.height = '8px';
+      eqEl.appendChild(b);
+    }
+    const eqBars = Array.from(eqEl.children);
+    const mirror = '0123456789' + '9876543210';
+
+    // ==================== MAIN RENDER ====================
+    async function renderFrame(f) {
+      $('progress-fill').style.width = `${((f / (TOTAL_FRAMES - 1)) * 100).toFixed(2)}%`;
+      $('click-ring').style.opacity = 0;
+      setCursor(2100, 1200, 1, 0);
+
+      const beatIdx = f < 288 ? (f < B.hookClick ? 0 : 1) : f < 648 ? 2 : f < 1050 ? 3 : f < 1428 ? 4 : f < 1800 ? 5 : 6;
+      const sub = subAt(f), mid = midAt(f), hi = highAt(f);
+
+      // HUD
+      tcEl.textContent = timecode(f);
+      let chap = CHAPTERS[0][1];
+      for (const [cf, cl] of CHAPTERS) if (f >= cf) chap = cl;
+      chapEl.textContent = chap;
+
+      // letterbox breathing bars
+      const lb = beatIdx === 6 ? lerp(96, 24, easeOutQuart(prog(f, B.finaleIn, B.finaleIn + 60))) : 42;
+      $('bar-t').style.height = `${lb.toFixed(0)}px`;
+      $('bar-b').style.height = `${lb.toFixed(0)}px`;
+
+      // grain shimmer (deterministic per frame)
+      const gEl = $('grain');
+      gEl.style.backgroundPosition = `${(f * 7) % 12}px ${(f * 11) % 12}px, ${(f * 5) % 16}px ${(f * 3) % 16}px`;
+      gEl.style.opacity = (0.26 + hi * 0.16).toFixed(3);
+      $('scan').style.opacity = beatIdx >= 2 ? (0.10 + hi * 0.08).toFixed(3) : '0.05';
+
+      // anamorphic flare sweep
+      const flare = $('flare');
+      if (f >= 500 && f < 560) {
+        const u = prog(f, 500, 558);
+        flare.style.opacity = (0.85 * Math.sin(Math.PI * u)).toFixed(3);
+        flare.style.transform = `translate3d(${lerp(-1400, 2000, easeOutCubic(u)).toFixed(0)}px, ${(500 + 30 * Math.sin(u * 3)).toFixed(0)}px, 0) rotate(-4deg)`;
+      } else if (f >= 1770 && f < 1840) {
+        const u = prog(f, 1770, 1838);
+        flare.style.opacity = (0.95 * Math.sin(Math.PI * u)).toFixed(3);
+        flare.style.transform = `translate3d(${lerp(-1600, 2200, easeOutCubic(u)).toFixed(0)}px, 470px, 0) rotate(-2deg)`;
+      } else {
+        flare.style.opacity = 0;
+      }
+
+      // rays overlay
+      const rays = $('rays');
+      rays.style.opacity = beatIdx === 0 ? '0' : (0.16 + hi * 0.34).toFixed(3);
+      rays.style.transform = `rotate(${(f * 0.25).toFixed(1)}deg) scale(${(1 + sub * 0.10).toFixed(3)})`;
+
+      // holographic EQ
+      if (beatIdx >= 2 && beatIdx <= 5) {
+        eqEl.style.opacity = (0.34 + mid * 0.5).toFixed(3);
+        const bins = binsAt(f);
+        for (let i = 0; i < eqBars.length; i++) {
+          const mi = mirror[i % mirror.length] | 0;
+          const v = bins ? bins[Math.min(23, mi + (i > 19 ? 6 : 0))] / 100 : 0.3;
+          const h = 6 + Math.pow(v, 1.25) * 128 * (0.55 + mid * 0.75);
+          eqBars[i].style.height = `${h.toFixed(1)}px`;
+        }
+      } else if (beatIdx === 6) {
+        eqEl.style.opacity = (0.5 * (1 - prog(f, B.finaleIn, B.finaleIn + 90))).toFixed(3);
+        const bins = binsAt(f);
+        for (let i = 0; i < eqBars.length; i++) {
+          const mi = mirror[i % mirror.length] | 0;
+          const v = bins ? bins[Math.min(23, mi)] / 100 : 0.2;
+          eqBars[i].style.height = `${(6 + v * 90).toFixed(1)}px`;
+        }
+      } else {
+        eqEl.style.opacity = 0;
+      }
+
+      // ==================== BEAT 01A : CREAM HOOK (0..148) ====================
+      if (applySeam($('s1'), f, 0, 288, 'none', 'x')) {
+        const cream = $('s1-cream');
+        const obs = $('s1-obsidian');
+
+        // headline staggered clip-reveal
+        const words = ['w0', 'w1', 'w2'];
+        for (let i = 0; i < 3; i++) {
+          const u = easeOutExpo(prog(f, 6 + i * 9, 40 + i * 9));
+          const el = $(words[i]);
+          el.style.transform = `translateY(${lerp(112, 0, u).toFixed(1)}%) skewY(${lerp(7, 0, u).toFixed(2)}deg)`;
+        }
+
+        const enterU = easeOutQuart(prog(f, 0, 30));
+        $('s1-kicker').style.opacity = enterU.toFixed(3);
+        $('s1-top').style.opacity = enterU.toFixed(3);
+
+        const p1 = $('s1-portrait');
+        p1.style.transform = `translate3d(${lerp(90, 0, enterU).toFixed(1)}px, ${lerp(54, 0, enterU).toFixed(1)}px, 0) scale(${lerp(1.045, 1, enterU).toFixed(4)})`;
+        p1.style.opacity = clamp(enterU * 1.6).toFixed(3);
+
+        // CTA magnetic scale + cursor glide
+        const cta = $('s1-cta');
+        const near = clamp(1 - Math.abs(prog(f, 96, 148) - 0.85) * 2.4);
+        cta.style.transform = `scale(${(1 + 0.045 * near).toFixed(3)})`;
+        cta.style.boxShadow = `0 26px 60px rgba(11,11,16,${0.28 + near * 0.3}), 0 0 ${(28 * near).toFixed(0)}px rgba(196,23,38,${(0.35 * near).toFixed(2)})`;
+
+        $('s1-foot').style.opacity = (enterU * 0.9).toFixed(3);
+
+        if (f >= 82 && f <= 190) {
+          const mu = easeInOutQuint(prog(f, 82, 146));
+          const cx = lerp(1760, 350, mu);
+          const cy = lerp(1000, 888, mu);
+          const tap = f >= 147 && f <= 153 ? 0.82 : 1;
+          const fade = f > 168 ? 1 - prog(f, 168, 190) : 1;
+          setCursor(cx, cy, tap, fade);
+        }
+        triggerRing(f, B.hookClick, 356, 892, '#C41726');
+
+        // iris inversion (solid ground guard so nothing bleeds)
+        if (f >= B.hookClick) {
+          const irisU = easeOutQuart(prog(f, B.hookClick, B.hookClick + 34));
+          obs.style.clipPath = `circle(${lerp(0, 152, irisU).toFixed(2)}% at 350px 890px)`;
+          cream.style.filter = `blur(${(8 * prog(f, B.hookClick, B.hookClick + 30)).toFixed(2)}px) brightness(${(1 - 0.6 * prog(f, B.hookClick, B.hookClick + 30)).toFixed(2)})`;
+        } else {
+          obs.style.clipPath = 'circle(0% at 350px 890px)';
+          cream.style.filter = 'none';
+        }
+
+        // obsidian hero numbers
+        const countU = easeOutQuart(prog(f, 158, 250));
+        const val = Math.round(583290 * countU);
+        const str = val.toLocaleString('en-US');
+        $('s1-bignum-v').textContent = str;
+        $('s1-bignum-g').textContent = str;
+        $('m-views').textContent = str;
+        const ghostOff = 6 + sub * 16;
+        const ghost = $('s1-bignum-g');
+        ghost.style.transform = `translate3d(${ghostOff.toFixed(1)}px, ${(ghostOff * 0.25).toFixed(1)}px, 0)`;
+        ghost.style.opacity = (0.18 + sub * 0.4).toFixed(3);
+        $('s1-bignum').style.transform = `scale(${lerp(1.06, 1, easeOutQuart(prog(f, 154, 200))).toFixed(4)})`;
+
+        $('s1-obs-kicker').style.opacity = prog(f, 154, 168).toFixed(3);
+        $('s1-obs-sub').style.opacity = easeOutCubic(prog(f, 176, 214)).toFixed(3);
+        $('s1-obs-meta').style.opacity = easeOutCubic(prog(f, 200, 244)).toFixed(3);
+
+        const slash = $('s1-redslash');
+        const su = easeInOutQuint(prog(f, 172, 226));
+        slash.style.transform = `scaleX(${su.toFixed(3)}) skewY(-3.2deg)`;
+        slash.style.opacity = (su * (0.55 + mid * 0.6)).toFixed(3);
+
+        const pd = $('s1-portrait-dark');
+        pd.style.transform = `scale(${lerp(1.08, 1, easeOutQuart(prog(f, 148, 240))).toFixed(4)}) translateX(${lerp(30, 0, prog(f, 148, 240)).toFixed(1)}px)`;
+      }
+
+      // ==================== BEAT 02 : PROOF DECK (288..648) ====================
+      if (applySeam($('s2'), f, B.deckIn, 648, 'x', 'x')) {
+        for (let k = 0; k < 5; k++) {
+          const card = $(`pcard-${k}`);
+          const cf = B.cardDeals[k];
+          if (f < cf - 12) {
+            card.style.opacity = 0;
+          } else {
+            const u = prog(f, cf - 12, cf + 10);
+            const eb = easeOutBack(u, 1.25);
+            const zArc = Math.sin(u * Math.PI) * 120;
+            card.style.opacity = clamp(u * 2.2).toFixed(3);
+            card.style.transform = `perspective(1400px) translate3d(${lerp(-300, 0, eb).toFixed(1)}px, ${lerp(150, 0, eb).toFixed(1)}px, ${zArc.toFixed(1)}px) rotateY(${lerp(16, 0, eb).toFixed(2)}deg) rotateX(${lerp(-9, 0, eb).toFixed(2)}deg) scale(${lerp(0.88, 1, eb).toFixed(4)})`;
+          }
+        }
+
+        const countU = easeOutQuart(prog(f, 320, 430));
+        $('kpi-views').textContent = Math.round(583290 * countU).toLocaleString('en-US');
+        const lineU = easeInOutCubic(prog(f, 330, 448));
+        $('ret-line').style.strokeDashoffset = (650 * (1 - lineU)).toFixed(1);
+        $('ret-area').style.opacity = clamp((lineU - 0.22) * 1.35).toFixed(3);
+
+        const head = $('s2-header');
+        const headOut = prog(f, 480, 500);
+        head.style.opacity = (1 - headOut).toFixed(3);
+        head.style.transform = `translateY(${lerp(0, -60, headOut).toFixed(1)}px) scale(${lerp(1, 0.94, headOut).toFixed(3)})`;
+        $('s2-footer').style.opacity = (0.85 * (1 - headOut)).toFixed(3);
+
+        const brackets = document.querySelectorAll('#pcard-0 .bracket');
+        const lockTag = $('lock-tag');
+        if (f >= B.laserLock) {
+          const bu = easeOutBack(prog(f, B.laserLock, B.laserLock + 12), 1.4);
+          brackets.forEach((b) => {
+            b.style.opacity = 1;
+            b.style.transform = `scale(${lerp(1.5, 1, bu).toFixed(3)})`;
+            b.style.boxShadow = `0 0 ${(18 + sub * 26).toFixed(0)}px rgba(52,211,153,0.7)`;
+          });
+          lockTag.style.opacity = f >= B.laserLock + 6 ? 1 : 0;
+        } else {
+          brackets.forEach((b) => (b.style.opacity = 0));
+          lockTag.style.opacity = 0;
+        }
+
+        const cam = $('s2-camera');
+        let rx = lerp(17, 8, prog(f, B.deckIn, 500));
+        let ry = lerp(-12, -3, prog(f, B.deckIn, 500));
+        let cz = 1, cx = 0, cy = 0;
+        if (f >= B.crashZoom - 8 && f < B.crashZoom) {
+          cz = lerp(1, 0.962, prog(f, B.crashZoom - 8, B.crashZoom));
+        } else if (f >= B.crashZoom) {
+          const zu = f < B.crashZoom + 8 ? easeInQuart(prog(f, B.crashZoom, B.crashZoom + 8)) : 1;
+          const settle = f >= B.crashZoom + 8 ? easeOutQuart(prog(f, B.crashZoom + 8, B.crashZoom + 20)) : 0;
+          cz = f < B.crashZoom + 8 ? lerp(0.962, 1.28, zu) : lerp(1.28, 1.24, settle);
+          cx = lerp(0, 152, f < B.crashZoom + 8 ? zu : 1);
+          cy = lerp(0, 34, f < B.crashZoom + 8 ? zu : 1);
+          rx = lerp(8, 0, f < B.crashZoom + 8 ? zu : 1);
+          ry = lerp(-3, 0, f < B.crashZoom + 8 ? zu : 1);
+        }
+        // slow continued drift so it never dies
+        const drift = prog(f, B.crashZoom + 20, 648);
+        cx += 10 * drift;
+        cy -= 8 * drift;
+        cz *= 1 + 0.02 * drift;
+        cam.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0) scale(${cz.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      }
+
+      // ==================== BEAT 03 : CINEMA MONOLITHS (648..1050) ====================
+      if (applySeam($('s3'), f, B.monolithsIn, 1050, 'z', 'blur')) {
+        const corridor = $('s3-corridor');
+        const mosaic = $('s3-mosaic');
+        const flip = prog(f, B.mosaicFlip, B.mosaicFlip + 18);
+
+        corridor.style.opacity = (1 - easeInOutCubic(flip)).toFixed(3);
+        corridor.style.display = flip >= 1 ? 'none' : 'block';
+        mosaic.style.display = flip > 0 ? 'block' : 'none';
+        mosaic.style.opacity = easeInOutCubic(flip).toFixed(3);
+        mosaic.style.transform = `scale(${lerp(1.08, 1, easeInOutCubic(flip)).toFixed(4)})`;
+
+        for (let k = 0; k < 3; k++) {
+          const m = $(`mon-${k}`);
+          const pf = B.monoPops[k];
+          const u = prog(f, pf - 12, pf + 12);
+          const eb = easeOutBack(u, 1.15);
+          // parallax + audio-driven push
+          const push = prog(f, pf, 1050);
+          const z = lerp(-460, 0, eb) + push * 130 + sub * 26;
+          const rotY = (k - 1) * lerp(-26, -15, eb) + Math.sin(f * 0.012 + k) * 1.5;
+          const rotX = lerp(10, 3, eb) - sub * 1.4;
+          const yOff = lerp(70, 0, eb) + Math.sin(f * 0.02 + k * 1.3) * 5;
+          m.style.opacity = clamp(u * 2.4).toFixed(3);
+          m.style.transform = `translate3d(0, ${yOff.toFixed(1)}px, ${z.toFixed(1)}px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) scale(${lerp(0.92, 1, eb).toFixed(4)})`;
+        }
+
+        // real film frames advance deterministically
+        if (IS_HEADLESS && f >= B.monolithsIn) {
+          const localIdx = Math.max(1, Math.min(130, Math.floor((f - B.monolithsIn) / 3) + 1));
+          const pad = String(localIdx).padStart(4, '0');
+          const decodes = [];
+          for (const key of ['intro', 'lawone', 'paanch']) {
+            const img = seqMap[key].img;
+            const nextSrc = `/showreel/_tmp_frames/${key}/${pad}.jpg`;
+            if (img.getAttribute('data-cur') !== nextSrc) {
+              img.setAttribute('data-cur', nextSrc);
+              img.src = nextSrc;
+              decodes.push(img.decode().catch(() => {}));
+            }
+          }
+          if (decodes.length) await Promise.all(decodes);
+        }
+
+        const pill = $('s3-center-pill');
+        const popF = 762;
+        if (f >= popF) {
+          const pu = easeOutBack(prog(f, popF, popF + 14), 1.5);
+          pill.style.opacity = clamp(prog(f, popF, popF + 8) * (1 - prog(f, 940, 960))).toFixed(3);
+          pill.style.transform = `translate(-50%, -50%) scale(${lerp(0.7, 1.02, pu).toFixed(4)})`;
+        } else {
+          pill.style.opacity = 0;
+        }
+
+        document.querySelectorAll('#s3-mosaic .mt').forEach((t, i) => {
+          const u = easeOutCubic(prog(f, B.mosaicFlip + 4 + i * 5, B.mosaicFlip + 26 + i * 5));
+          t.style.opacity = (0.1 + 0.9 * u).toFixed(3);
+          t.style.transform = `translateY(${lerp(46, 0, u).toFixed(1)}px) scale(${lerp(0.96, 1, u).toFixed(3)})`;
+        });
+
+        $('s3-beams').style.transform = `rotate(${(f * 0.12).toFixed(1)}deg) scale(${(1 + mid * 0.12).toFixed(3)})`;
+      }
+
+      // ==================== BEAT 04 : WEB Z-TUNNEL (1050..1428) ====================
+      if (applySeam($('s4'), f, B.tunnelIn, 1428, 'z', 'z')) {
+        // tunnel rings fly at camera
+        const rings = ['tr0', 'tr1', 'tr2', 'tr3', 'tr4', 'tr5'];
+        for (let i = 0; i < rings.length; i++) {
+          const rEl = $(rings[i]);
+          const phase = ((f * 0.9 + i * 60) % 360) / 360;
+          const z = lerp(-1450, 480, phase);
+          const op = Math.sin(Math.PI * phase) * (0.20 + hi * 0.45);
+          rEl.style.opacity = op.toFixed(3);
+          rEl.style.transform = `translateZ(${z.toFixed(0)}px) scale(${lerp(0.9, 1.05, phase).toFixed(3)})`;
+        }
+
+        const slides = [
+          { id: 'wslide-0', f0: B.tunnelIn, f1: B.slide1 },
+          { id: 'wslide-1', f0: B.slide1, f1: B.slide2 },
+          { id: 'wslide-2', f0: B.slide2, f1: 1428 },
+        ];
+        for (let i = 0; i < slides.length; i++) {
+          const sl = slides[i];
+          const el = $(sl.id);
+          if (f < sl.f0 - 6 || f >= sl.f1) { el.style.display = 'none'; continue; }
+          el.style.display = 'block';
+          const inU = easeOutExpo(prog(f, sl.f0, sl.f0 + 16));
+          const outU = easeInQuart(prog(f, sl.f1 - 10, sl.f1));
+          const z = lerp(-780, 0, inU) + outU * 900;
+          const sc = lerp(0.74, 1, inU) * lerp(1, 1.6, outU);
+          const rot = (i - 1) * lerp(-6, 0, inU) + (i === 1 ? Math.sin(f * 0.02) * 0.5 : 0);
+          el.style.opacity = (clamp(inU * 2) * (1 - clamp(outU * 1.12))).toFixed(3);
+          el.style.transform = `translate3d(${lerp((i - 1) * 60, 0, inU).toFixed(1)}px, ${lerp(40, 0, inU).toFixed(1)}px, ${z.toFixed(0)}px) rotateY(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+          el.style.filter = `blur(${(outU * 9).toFixed(1)}px)`;
+        }
+
+        const activeSlide = f < B.slide1 ? 0 : f < B.slide2 ? 1 : 2;
+        document.querySelectorAll('#s4-rail .rr').forEach((r, i) => {
+          const on = i <= activeSlide + 1;
+          r.classList.toggle('on', on);
+          r.style.opacity = (on ? 1 : 0.45).toFixed(2);
+        });
+        const gates = document.querySelectorAll('#gate-grid i');
+        if (gates.length) {
+          const lit = Math.min(17, Math.max(0, Math.floor(prog(f, B.tunnelIn + 6, B.tunnelIn + 96) * 17)));
+          gates.forEach((g, i) => {
+            const on = i < lit;
+            g.style.background = on ? '#34D399' : 'rgba(255,255,255,0.08)';
+            g.style.color = on ? '#04231A' : '#5A5468';
+            g.style.boxShadow = on ? '0 0 12px rgba(52,211,153,0.35)' : 'none';
+          });
+        }
+
+        $('s4-rail').style.opacity = easeOutCubic(prog(f, B.tunnelIn + 4, B.tunnelIn + 30)).toFixed(3);
+        $('s4-title').style.opacity = easeOutCubic(prog(f, B.tunnelIn + 10, B.tunnelIn + 40)).toFixed(3);
+
+        $('s4-shutter').style.opacity = (0.16 + hi * 0.5).toFixed(3);
+        $('s4-shutter').style.transform = `scaleY(${(1 + mid * 0.05).toFixed(3)})`;
+
+        // cursor → vault CTA click at 1392
+        if (f >= 1340 && f <= 1420) {
+          const cu = easeInOutQuint(prog(f, 1340, 1390));
+          const cx = lerp(1700, 470, cu);
+          const cy = lerp(980, 900, cu);
+          const tap = f >= 1391 && f <= 1397 ? 0.82 : 1;
+          setCursor(cx, cy, tap, 1);
+        }
+        const cta = $('s4-cta');
+        const near = prog(f, 1360, 1400);
+        cta.style.transform = `scale(${(1 + 0.05 * near).toFixed(3)})`;
+        cta.style.boxShadow = `0 ${(24 + near * 16).toFixed(0)}px ${(60 + near * 40).toFixed(0)}px rgba(224,27,43,${(0.45 + near * 0.28).toFixed(2)})`;
+        triggerRing(f, B.vaultClick, 500, 912, '#FF3B49');
+      }
+
+      // ==================== BEAT 05 : VAULT (1428..1800) ====================
+      if (applySeam($('s5'), f, B.vaultIn, 1800, 'z', 'blur')) {
+        const unlocked = f >= B.unlockClick;
+        let activeCount = 0;
+        for (let r = 0; r < 4; r++) {
+          const el = $(`rail-${r}`);
+          const tick = B.railTicks[r];
+          const on = f >= tick;
+          if (on) activeCount++;
+          el.classList.toggle('active', on);
+          el.querySelector('.st').textContent = on ? 'VERIFIED' : 'PENDING';
+          const bar = el.querySelector('.bar');
+          const bu = easeOutCubic(prog(f, tick, tick + 18));
+          bar.style.width = `${(on ? 100 * bu : 0).toFixed(1)}%`;
+          el.style.transform = on ? `translateX(${(4 * (1 - prog(f, tick, tick + 12))).toFixed(1)}px)` : 'translateX(0px)';
+        }
+
+        // vault dial rotation + progress arc
+        const pU = unlocked ? 1 : easeInOutCubic(prog(f, B.vaultIn + 10, B.unlockClick - 6));
+        $('vr-prog').style.strokeDashoffset = (1131 * (1 - pU)).toFixed(1);
+        $('vr-prog').setAttribute('stroke', unlocked ? '#34D399' : '#FF4D5A');
+        $('vr-mid').style.transform = `rotate(${(f * (unlocked ? 3.2 : 0.5)).toFixed(1)}deg)`;
+        $('vr-mid').style.transformOrigin = '350px 350px';
+        $('vr-out').style.transform = `rotate(${(-f * 0.35).toFixed(1)}deg)`;
+        $('vr-out').style.transformOrigin = '350px 350px';
+        $('vr-in').style.transform = `rotate(${(f * 0.8).toFixed(1)}deg)`;
+        $('vr-in').style.transformOrigin = '350px 350px';
+
+        const lockIc = $('s5-lock-ic'), lockLb = $('s5-lock-lb'), core = $('s5-door-core');
+        if (unlocked) {
+          const pu = easeOutBack(prog(f, B.unlockClick, B.unlockClick + 16), 2.0);
+          lockIc.textContent = '✓';
+          lockLb.textContent = 'MASTER UNLOCKED';
+          core.style.transform = `scale(${lerp(1, 1.06, pu).toFixed(4)})`;
+          core.style.borderColor = 'rgba(52,211,153,0.85)';
+          core.style.boxShadow = `0 0 ${(120 + sub * 80).toFixed(0)}px rgba(16,185,129,${(0.32 + sub * 0.3).toFixed(2)}), inset 0 0 60px rgba(0,0,0,0.7)`;
+        } else {
+          lockIc.textContent = '🔒';
+          lockLb.textContent = 'AES-256 · LOCKED';
+          core.style.transform = `scale(${(1 + sub * 0.012).toFixed(4)})`;
+          core.style.borderColor = 'rgba(110,231,183,0.35)';
+          core.style.boxShadow = `0 0 90px rgba(16,185,129,${(0.18 + sub * 0.16).toFixed(2)}), inset 0 0 60px rgba(0,0,0,0.7)`;
+        }
+
+        const burst = $('s5-burst');
+        if (unlocked) {
+          const bu = prog(f, B.unlockClick, B.unlockClick + 40);
+          burst.style.opacity = (0.85 * (1 - bu)).toFixed(3);
+          burst.style.transform = `translate3d(1400px, 488px, 0) scale(${(1 + easeOutCubic(bu) * 260).toFixed(1)})`;
+        } else {
+          burst.style.opacity = 0;
+        }
+
+        // cursor to unlock
+        if (f >= 1600 && f <= 1700) {
+          const cu = easeInOutQuint(prog(f, 1600, 1652));
+          const cx = lerp(1720, 1180, cu);
+          const cy = lerp(430, 905, cu);
+          const tap = f >= 1655 && f <= 1661 ? 0.82 : 1;
+          const op = f > 1680 ? 1 - prog(f, 1680, 1700) : 1;
+          setCursor(cx, cy, tap, op);
+        }
+        triggerRing(f, B.unlockClick, 1190, 918, '#10B981');
+
+        const btn = $('s5-unlock-btn'), badge = $('s5-badge'), rib = $('s5-wm-ribbon'), wmPill = $('s5-wm-pill'), fstate = $('s5-file-state');
+        if (unlocked) {
+          btn.classList.add('unlocked');
+          btn.textContent = '✓ Master Bundle Unlocked · Downloading 1080p60 MP4';
+          badge.style.background = 'rgba(16,185,129,0.22)';
+          badge.style.borderColor = '#10B981';
+          badge.style.color = '#6EE7B7';
+          badge.textContent = '✓ VERIFIED · CLEAN MASTER UNLOCKED';
+          rib.style.background = 'linear-gradient(to top, rgba(6,24,19,0.78) 0%, rgba(6,24,19,0) 54%)';
+          rib.style.alignItems = 'flex-end';
+          wmPill.style.background = 'rgba(5,150,105,0.96)';
+          wmPill.style.borderColor = '#34D399';
+          wmPill.textContent = '✓ WATERMARK REMOVED · 1080P60 MASTER READY';
+          fstate.style.color = '#34D399';
+          fstate.textContent = 'UNLOCKED ✓';
+        } else {
+          btn.classList.remove('unlocked');
+          btn.textContent = 'Verify Settlement & Unlock 1080p60 Master →';
+          badge.style.background = 'rgba(224,27,43,0.18)';
+          badge.style.borderColor = '#FF4754';
+          badge.style.color = '#FF9AA2';
+          badge.textContent = '● WATERMARKED REVIEW STAGE';
+          rib.style.background = 'rgba(7,7,10,0.68)';
+          rib.style.alignItems = 'center';
+          wmPill.style.background = 'rgba(12,12,18,0.92)';
+          wmPill.style.borderColor = 'rgba(255,255,255,0.22)';
+          wmPill.textContent = 'MONARCH® PREVIEW · LOCKED';
+          fstate.style.color = '#FBBF24';
+          fstate.textContent = 'ENCRYPTED CLOUD LINK';
+        }
+
+        const spec = $('s5-spec');
+        if (spec) {
+          const yieldU = easeOutCubic(prog(f, B.unlockClick, B.unlockClick + 16));
+          spec.style.opacity = (1 - yieldU).toFixed(3);
+          spec.style.visibility = yieldU > 0.98 ? 'hidden' : 'visible';
+          spec.style.transform = `translateY(${(yieldU * 26).toFixed(1)}px)`;
+        }
+
+        $('s5-grid').style.opacity = (0.55 + mid * 0.4).toFixed(3);
+      }
+
+      // ==================== BEAT 06 : FINALE (1800..2160) ====================
+      if (applySeam($('s6'), f, B.finaleIn, TOTAL_FRAMES, 'blur', 'none')) {
+        const u = easeOutQuart(prog(f, B.finaleIn, B.finaleIn + 46));
+        const t = $('s6-title');
+        t.style.transform = `scale(${lerp(1.16, 1, u).toFixed(4)})`;
+        t.style.letterSpacing = `${lerp(0.16, 0.01, u).toFixed(3)}em`;
+        t.style.opacity = clamp(u * 1.5).toFixed(3);
+
+        $('s6-kicker').style.opacity = easeOutCubic(prog(f, B.finaleIn + 4, B.finaleIn + 34)).toFixed(3);
+        $('s6-sub').style.opacity = easeOutCubic(prog(f, B.finaleIn + 26, B.finaleIn + 70)).toFixed(3);
+        $('s6-sub').style.letterSpacing = `${lerp(0.70, 0.42, easeOutCubic(prog(f, B.finaleIn + 26, B.finaleIn + 90))).toFixed(3)}em`;
+
+        const sigU = easeInOutQuint(prog(f, B.finaleIn + 62, B.finaleIn + 140));
+        $('s6-sig-wrap').style.clipPath = `inset(0 ${(100 * (1 - sigU)).toFixed(2)}% 0 0)`;
+
+        $('s6-rule').style.width = `${lerp(0, 520, easeOutCubic(prog(f, B.finaleIn + 40, B.finaleIn + 110))).toFixed(0)}px`;
+        $('s6-handle').style.opacity = easeOutCubic(prog(f, B.finaleIn + 96, B.finaleIn + 140)).toFixed(3);
+        $('s6-tags').style.opacity = (0.9 * easeOutCubic(prog(f, B.finaleIn + 110, B.finaleIn + 160))).toFixed(3);
+
+        const bloom = $('s6-bloom');
+        bloom.style.opacity = (0.75 + sub * 0.6).toFixed(3);
+        bloom.style.transform = `scale(${(1 + sub * 0.06).toFixed(3)})`;
+      }
+
+      // global canvas FX
+      drawFX(f, beatIdx);
+    }
+
+    window.__setFrame = renderFrame;
+
+    if (!IS_HEADLESS) {
+      let startTs = performance.now();
+      const audio = $('master-audio');
+      Object.values(seqMap).forEach(({ vid }) => vid.play().catch(() => {}));
+
+      function tick(now) {
+        const sec = !audio.paused && audio.currentTime > 0
+          ? audio.currentTime
+          : ((now - startTs) / 1000) % (TOTAL_FRAMES / FPS);
+        const f = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.floor(sec * FPS)));
+        renderFrame(f);
+        requestAnimationFrame(tick);
+      }
+      audioReady.then(() => requestAnimationFrame(tick));
+
+      $('btn-play').addEventListener('click', () => {
+        audio.currentTime = 0;
+        startTs = performance.now();
+        audio.play().catch(() => {});
+        Object.values(seqMap).forEach(({ vid }) => { vid.currentTime = 0; vid.play().catch(() => {}); });
+      });
+    } else {
+      audioReady.then(() => renderFrame(0));
+      renderFrame(0);
+    }
+  </script>
+</body>
+</html>

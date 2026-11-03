@@ -1,0 +1,323 @@
+name: YT Intel — topic research
+
+# Runs the same tool a human runs locally, on a schedule, so the topic pool never goes
+# stale and the weekly Ops review has fresh numbers without anyone remembering to click.
+on:
+  push:
+    # `main` is listed so the desk keeps updating after this work is merged; the marker-file
+    # path filter keeps ordinary code pushes from spending quota.
+    branches:
+      - main
+      - arena/9960286a-monarch-overall-work
+    paths:
+      - "yt-intel-trigger.txt"
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Topic to research (blank = use config/topic-queue.json)'
+        required: false
+        default: ''
+      limit:
+        description: 'How many search results to analyse'
+        required: false
+        default: '30'
+      order:
+        description: 'Search filter: relevance | date | viewCount | thisMonth | thisWeek'
+        required: false
+        default: ''
+      comments_max:
+        description: 'How many topics to mine comments for (one video each = 1 quota unit); 99 = all'
+        required: false
+        default: '4'
+  schedule:
+    # Mondays 04:00 UTC — before the week's planning session
+    - cron: '0 4 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The default GITHUB_TOKEN cannot push to a protected branch or, in this repo, has
+      # been unreliable for the render job. An SSH deploy key with write access is the
+      # durable answer. If the secret is absent the job still runs and still produces the
+      # report as a downloadable artifact — it just cannot commit it.
+      - name: Wire the commit key (optional)
+        env:
+          YT_COMMIT_KEY: ${{ secrets.YT_COMMIT_KEY }}
+        # `if: env.YT_COMMIT_KEY != ''` never fired: the `secrets` context is not available to
+        # step conditionals, so this step was skipped on every run since it was written.
+        run: |
+          if [ -z "$YT_COMMIT_KEY" ]; then
+            echo "no YT_COMMIT_KEY secret — the default token will try the commit instead"
+            exit 0
+          fi
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$YT_COMMIT_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null
+          git remote set-url origin git@github.com:${{ github.repository }}.git
+          ssh -T -o StrictHostKeyChecking=accept-new git@github.com || true
+
+      - name: Runtime deps (all free, all pip)
+        run: |
+          python -m pip install --quiet --upgrade pip
+          # imageio-ffmpeg ships a static ffmpeg binary, so the film analysis has an encoder
+          # on a runner that does not preinstall one. Without it style.py can only report
+          # "ffmpeg not found" — which is honest, but useless.
+          python -m pip install --quiet numpy pillow yt-dlp pytrends imageio-ffmpeg
+
+      - name: Offline self-test (fail fast if the maths broke)
+        run: python -m yt_intel.test_offline
+
+      - name: Resolve the key secret
+        id: key
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+          KEY_ALT_2: ${{ secrets.YTAPI1 }}
+          YT_KEY_UPPER: ${{ secrets.YT_KEY }}
+          YT_API_KEY_ALT: ${{ secrets.YT_API_KEY }}
+        # The key secret must be named YOUTUBE_API_KEY for the tool to pick it up. A closely
+        # near-miss secret (YTAP1) is a very easy mistake to make in a mobile browser, so the
+        # likely spellings are accepted here and normalised into one name — and the log says
+        # which one won. This step itself shipped with a typo'd name once and proved why the
+        # check has to exist rather than be assumed.
+        # The value is masked; only its length and first four characters are printed.
+        run: |
+          # Printed so the answer is decidable from the run page without any log download.
+          echo "repository : $GITHUB_REPOSITORY"
+          echo "ref        : $GITHUB_REF"
+          echo "secrets seen: YOUTUBE_API_KEY=$([ -n "$KEY_PRIMARY" ] && echo present || echo absent)" \
+               "YTAP1=$([ -n "$KEY_ALT" ] && echo present || echo absent)" \
+               "YTAPI1=$([ -n "$KEY_ALT_2" ] && echo present || echo absent)" \
+               "YT_KEY=$([ -n "$YT_KEY_UPPER" ] && echo present || echo absent)" \
+               "YT_API_KEY=$([ -n "$YT_API_KEY_ALT" ] && echo present || echo absent)"
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          [ -z "$KEY" ] && KEY="$KEY_ALT_2"
+          [ -z "$KEY" ] && KEY="$YT_KEY_UPPER"
+          [ -z "$KEY" ] && KEY="$YT_API_KEY_ALT"
+          if [ -z "$KEY" ]; then
+            echo "no key secret (YOUTUBE_API_KEY / YTAP1 / YTAPI1) — staying keyless"
+            echo "state=missing" >> "$GITHUB_OUTPUT"
+            echo "::warning::No API key secret resolved. The run will be keyless (web lane)."
+            exit 0
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          if [ -n "$KEY_PRIMARY" ]; then
+            echo "state=YOUTUBE_API_KEY" >> "$GITHUB_OUTPUT"
+            echo "using secret YOUTUBE_API_KEY (${#KEY} chars)"
+          else
+            echo "state=YTAP1" >> "$GITHUB_OUTPUT"
+            echo "using secret YTAP1 (${#KEY} chars) — rename it to YOUTUBE_API_KEY when convenient"
+          fi
+          # The value is never printed. Its *shape* is, because a secret that resolves but is
+          # not a Google key behaves identically to one that resolved correctly until the
+          # first API call — and that failure is expensive to diagnose from a red build.
+          case "$KEY" in
+            AIza*) echo "key shape: starts with AIza (expected)" ;;
+            *) echo "::warning::key resolved but does not start with AIza — check what was pasted" ;;
+          esac
+
+      - name: Which lane are we in?
+        run: python -m yt_intel lanes
+
+      - name: Key doctor (proves the key before trusting it)
+        id: doctor
+        # no key configured? skip instead of failing the schedule — keyless mode still works.
+        # The report is written to the repo as well as the log: the log is not downloadable
+        # from every environment, and "doctor failed" without its reason is not actionable.
+        continue-on-error: true
+        run: |
+          mkdir -p public/yt-intel
+          if [ -z "$YOUTUBE_API_KEY" ]; then
+            echo "no key secret — staying keyless"
+            echo '{"status":"skipped","detail":"no key secret"}' > public/yt-intel/doctor.json
+            exit 0
+          fi
+          # `--json-only` guarantees stdout is exactly one JSON document. The earlier attempt
+          # captured human lines and then tried to slice the object out of them, which still
+          # shipped a two-document file — the fix belongs in the command, not in a regex.
+          python -m yt_intel doctor --json-only > public/yt-intel/doctor.json 2>/tmp/doctor.err || true
+          python -c "import json;json.load(open('public/yt-intel/doctor.json'))" \
+            || printf '{"status":"error","detail":%s}' \
+               "$(python -c 'import json;print(json.dumps(open("/tmp/doctor.err").read()[-600:]))')" \
+               > public/yt-intel/doctor.json
+          head -c 400 public/yt-intel/doctor.json; echo
+          python -m yt_intel doctor || echo "::warning::doctor did not pass — see public/yt-intel/doctor.json"
+
+      - name: Resolve the run plan (marker file or queue)
+        id: plan
+        run: |
+          if [ -f yt-intel-trigger.txt ]; then
+            TOPIC="$(sed -n 1p yt-intel-trigger.txt | sed 's/#.*//' | xargs)"
+            # optional second line: the search filter (relevance | date | viewCount | thisMonth | thisWeek)
+            ORDER="$(sed -n 2p yt-intel-trigger.txt | sed 's/#.*//' | xargs)"
+            echo "topic=$TOPIC" >> "$GITHUB_OUTPUT"
+            echo "order=$ORDER" >> "$GITHUB_OUTPUT"
+            # optional `KEY=value` lines, so a marker file can ask for a sweep without the UI
+            CM="$(sed -n 's/^COMMENTS_MAX=//p' yt-intel-trigger.txt | head -1 | xargs)"
+            echo "comments_max=$CM" >> "$GITHUB_OUTPUT"
+            echo "from marker file: topic=${TOPIC:-<queue>} order=${ORDER:-<default>} comments_max=${CM:-<default 4>}"
+          else
+            echo "topic=" >> "$GITHUB_OUTPUT"
+            echo "order=" >> "$GITHUB_OUTPUT"
+            echo "comments_max=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Research (one topic, or the whole queue)
+        env:
+          YT_INTEL_MAX_TOPICS: '4'
+          # 99 = sweep every measured topic in one run; default keeps a weekly run cheap
+          COMMENTS_MAX: ${{ github.event.inputs.comments_max || steps.plan.outputs.comments_max || '4' }}
+        run: |
+          TOPIC="${{ github.event.inputs.topic || steps.plan.outputs.topic }}"
+          LIMIT="${{ github.event.inputs.limit || '30' }}"
+          if [ -n "$TOPIC" ]; then
+            ORDER="${{ github.event.inputs.order || steps.plan.outputs.order }}"
+            echo "single topic: $TOPIC (order ${ORDER:-relevance})"
+            python -m yt_intel topic "$TOPIC" --limit "$LIMIT" ${ORDER:+--order "$ORDER"} \
+              --json "public/yt-intel/$(echo "$TOPIC" | tr '[:upper:] ' '[:lower:]-').json"
+          else
+            echo "no topic given -> walking config/topic-queue.json (quota-capped)"
+            node scripts/yt-queue.mjs --limit "$LIMIT"
+          fi
+          # Comment mining is API-only and cheap (1 unit / 100 comments). It runs on the video
+          # with the most comments in the freshest api-lane report, so the desk always has at
+          # least one real comment analysis next to the topic verdicts.
+          if [ -z "$YOUTUBE_API_KEY" ]; then
+            echo "no key — skipping comment mining"
+          else
+            # One video per measured topic, skipping any already mined. A sweep
+            # (--comments-max 99 via workflow_dispatch) covers every topic; the normal cap
+            # keeps a weekly run at ~4 quota units.
+            node scripts/yt-comments.mjs --per-topic --max "${COMMENTS_MAX:-4}" \
+              || echo "::warning::comment mining did not run — see public/yt-intel/comments-*.json"
+          fi
+
+      - name: Film-analysis self-test (builds a 3-cut fixture, checks the detector)
+        id: film
+        if: always()
+        continue-on-error: true
+        # style.py has only ever run by hand. A shipped analysis path that no job executes is a
+        # claim, not a feature — this makes every run prove ffmpeg + the detector + pacing work
+        # on the actual runner. ~2 seconds.
+        run: python scripts/film-selftest.py
+
+      - name: Thumbnail fingerprint (keyless, needs a network that serves i.ytimg.com)
+        id: thumbs
+        if: always()
+        continue-on-error: true
+        # thumbprint.py has been unit-tested since it was written but never run against a real
+        # thumbnail: i.ytimg.com is blocked in the agent's sandbox. GitHub's runners can reach
+        # it, so this is where the module finally meets an image it did not invent.
+        run: python scripts/thumbnails.py public/yt-intel/thumbnails.json
+
+      - name: Record the lane and the doctor verdict
+        if: always()
+        env:
+          KEY_STATE: ${{ steps.key.outputs.state }}
+          DOCTOR_OUTCOME: ${{ steps.doctor.outcome }}
+          S_YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          S_YTAP1: ${{ secrets.YTAP1 }}
+          S_YTKEY: ${{ secrets.YT_KEY }}
+          S_YTAPI1: ${{ secrets.YTAPI1 }}
+        # NOTE: `python - <<'PY' > file` sends the heredoc itself to `file` — the redirect
+        # applies to the heredoc, not to python's stdout. That is exactly what happened here:
+        # lanes.json ended up holding the script source, node failed to parse it, and the
+        # commit step was skipped. Write to a temp file and run it.
+        run: |
+          cat > /tmp/record_lane.py <<'PY'
+          import json, os, sys
+          sys.path.insert(0, ".")
+          from yt_intel import client
+          keys = {k: bool(os.environ.get("S_" + k)) for k in
+                  ("YOUTUBE_API_KEY", "YTAP1", "YTAPI1", "YT_KEY")}
+          doctor = {"ran": False, "outcome": os.environ.get("DOCTOR_OUTCOME") or "skipped"}
+          print(json.dumps({
+              "lane": client.lane(),
+              "key_present": bool(client.API_KEY),
+              "key_secret_name": os.environ.get("KEY_STATE") or "missing",
+              "key_starts_with_aiza": (client.API_KEY or "").startswith("AIza"),
+              "quota_used": client.BUDGET.state.get("used", 0),
+              "quota_remaining": client.BUDGET.remaining,
+              # presence only, never the value: this file is committed and served publicly
+              "secrets_seen": keys,
+              "doctor": doctor,
+              "event": os.environ.get("GITHUB_EVENT_NAME"),
+              "ref": os.environ.get("GITHUB_REF"),
+          }, indent=2))
+          PY
+          python /tmp/record_lane.py > public/yt-intel/lanes.json
+          cat public/yt-intel/lanes.json
+
+      - name: Refresh the UI index (public/yt-intel/index.json)
+        run: node scripts/yt-index.mjs
+
+      - name: Upload the report even if nothing could be committed
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yt-intel-report
+          path: public/yt-intel/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Commit the report
+        id: commit
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add public/yt-intel yt-intel-trigger.txt || true
+          # The trace lives in its OWN file. The bot used to stamp yt-intel-trigger.txt, which
+          # is also edited by humans and by the agent's pushes — the two writers collided on
+          # every run that overlapped a push, forcing a rebase mid-pipeline. One writer per
+          # file is the only version of this that stays stable.
+          python scripts/append-run-log.py public/yt-intel/run-log.jsonl
+          git add public/yt-intel/run-log.jsonl
+          git reset -q yt-intel-trigger.txt || true
+          if git diff --cached --quiet; then echo "no change"; echo "committed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git commit -m "chore(yt-intel): refresh topic research [skip ci]"
+          for i in 1 2 3; do
+            # append-only JSONL: if a human pushed while we ran, a text conflict here is
+            # resolved by keeping BOTH sides in order. --autostash keeps our report files.
+            git pull --rebase --autostash \
+              -c merge.conflictstyle=merge \
+              -X ours \
+              origin ${{ github.ref_name }} || git rebase --abort || true
+            if git push origin HEAD:${{ github.ref_name }}; then
+              echo "committed=true" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            sleep 5
+          done
+          echo "committed=false" >> "$GITHUB_OUTPUT"
+          echo "::warning::push failed after 3 attempts — the report is in the run artifact instead"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### YT Intel run" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          f = pathlib.Path("public/yt-intel/index.json")
+          if not f.exists():
+              print("no index produced"); raise SystemExit
+          d = json.loads(f.read_text())
+          rows = d.get("reports", [])[:5]
+          print("| topic | verdict | score | status |")
+          print("|---|---|---|---|")
+          for r in rows:
+              print(f"| {r.get('topic')} | {r.get('verdict')} | {r.get('score')} | {r.get('status')} |")
+          PY
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Committed: ${{ steps.commit.outputs.committed }}" >> "$GITHUB_STEP_SUMMARY" 

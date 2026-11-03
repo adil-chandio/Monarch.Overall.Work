@@ -1,0 +1,33 @@
+{
+  "name": "monarch-workspace",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node src/lib/normalise.test.mjs",
+    "ctr": "python3 -m showreel.ctr",
+    "yt:lanes": "node scripts/yt-intel.mjs lanes",
+    "yt:topic": "node scripts/yt-intel.mjs topic",
+    "yt:comments": "node scripts/yt-comments.mjs",
+    "yt:queue": "node scripts/yt-queue.mjs",
+    "yt:index": "node scripts/yt-index.mjs",
+    "test:yt": "python3 -m yt_intel.test_offline",
+    "yt:doctor": "python3 -m yt_intel doctor"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "animejs": "^4.5.0",
+    "gsap": "^3.15.0",
+    "lucide-react": "^0.468.0",
+    "motion": "^14.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
+    "vite": "^7.3.7"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "job_id": "monarch-b2b-flagship-v1",
+  "title": "MONARCH Studio — Three Seconds Flagship Commercial",
+  "width": 832,
+  "height": 480,
+  "frames": 33,
+  "fps": 16,
+  "steps": 14,
+  "style": "cinematic commercial film cinematography, ARRI Alexa Mini LF, smooth natural camera motion, razor sharp focus, high contrast chiaroscuro lighting, photorealistic",
+  "negative": "blurry, static freeze frame, morphing, melting, deformed, text, letters, watermark, logo, low quality, cartoon, oversaturated",
+  "scenes": [
+    {
+      "id": "s01",
+      "image": "gpu-engine/keyframes/s01.png",
+      "seed": 101,
+      "prompt": "Slow-motion macro explosion as crystalline smartphone glass shards and glowing crimson-amber sparks fly outward toward the camera while dark rain droplets fall in background, dramatic push-in camera motion"
+    },
+    {
+      "id": "s02",
+      "image": "gpu-engine/keyframes/s02.png",
+      "seed": 202,
+      "prompt": "Massive matte-black obsidian monolith with glowing molten crimson core rising upward as thick grey volumetric smoke swirls and pale paper fragments blow away in wind, low-angle crane camera movement"
+    },
+    {
+      "id": "s03",
+      "image": "gpu-engine/keyframes/s03.png",
+      "seed": 303,
+      "prompt": "Smooth orbital dolly camera move around the levitating dark-titanium laptop and glass display as luminous golden and crimson light waves ripple fluidly across both screens above wet black volcanic stone"
+    },
+    {
+      "id": "s04",
+      "image": "gpu-engine/keyframes/s04.png",
+      "seed": 404,
+      "prompt": "Macro anamorphic cinema camera lens barrel smoothly rotating its mechanical focus ring while warm amber and crimson optical flares shift inside the glass elements and dust motes drift through light beam"
+    },
+    {
+      "id": "s05",
+      "image": "gpu-engine/keyframes/s05.png",
+      "seed": 505,
+      "prompt": "Heavy precision brass gears rotating and black-titanium vault cylinder locking smoothly into place as the bright crimson laser beam scans across brushed metal surface, crisp macro push-in"
+    },
+    {
+      "id": "s06",
+      "image": "gpu-engine/keyframes/s06.png",
+      "seed": 606,
+      "prompt": "Subtle handheld cinema camera push over the executive shoulder as rain streaks trickle down the night skyscraper window and warm crimson-amber cinema reflections flicker alive on the glass tablet"
+    },
+    {
+      "id": "s07",
+      "image": "gpu-engine/keyframes/s07.png",
+      "seed": 707,
+      "prompt": "Dark obsidian 3D globe slowly rotating on its stone pedestal while glowing golden and crimson light arcs pulse and travel across continents through volumetric dark studio haze, smooth dolly push"
+    },
+    {
+      "id": "s08",
+      "image": "gpu-engine/keyframes/s08.png",
+      "seed": 808,
+      "prompt": "Atmospheric dark mist drifting across reflective black water around the faceted black-titanium monolith as crimson rim-light intensifies along its geometric edges, slow majestic pull-back camera move"
+    }
+  ]
+}

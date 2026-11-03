@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "updated": "2026-11-03",
+  "space": "monarch-studio",
+  "note": "Mirrors DEFAULT_SERVICES in src/B2BStudio.jsx and the agency_services rows. Edit here first, then sync both.",
+  "services": [
+    {
+      "slug": "signature-websites",
+      "badge": "FLAGSHIP B2B WEB SYSTEM",
+      "title": "Signature Interactive Websites & Launch Hubs",
+      "price_usd": [280, 650],
+      "price_pkr": [78000, 180000],
+      "turnaround": "5-7 days",
+      "advance_pct": 50,
+      "revisions": 2,
+      "portal_sample": "MON-WEB26",
+      "pipeline": ["inquiry", "scoped", "advance_paid", "production", "watermarked_preview", "settlement", "clean_master"]
+    },
+    {
+      "slug": "cinematic-video-ai",
+      "badge": "HIGH-RETENTION FILM & REELS",
+      "title": "High-Retention Video Editing & AI Commercials",
+      "price_usd": [180, 480],
+      "price_pkr": [50000, 135000],
+      "turnaround": "48-72 hours",
+      "advance_pct": 50,
+      "revisions": 1,
+      "portal_sample": "MON-DEMO26",
+      "pipeline": ["inquiry", "scoped", "advance_paid", "production", "watermarked_preview", "settlement", "clean_master"]
+    }
+  ]
+}

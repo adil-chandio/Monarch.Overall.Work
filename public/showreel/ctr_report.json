@@ -1,0 +1,255 @@
+{
+  "thumbnails": {
+    "A-number-slam": {
+      "score": 91.9,
+      "grade": "A",
+      "subscores": {
+        "mobile_survival": 100.0,
+        "contrast": 100.0,
+        "focal_gravity": 100.0,
+        "palette_discipline": 45.7,
+        "accent_presence": 100.0
+      },
+      "raw": {
+        "mobile_survival": 0.9806,
+        "contrast": 0.9414,
+        "focal_gravity": 0.7089,
+        "palette_entropy": 0.7942,
+        "accent_presence": 0.1007,
+        "badge_zone_busy": 0.0184
+      },
+      "hard_fails": []
+    },
+    "B-face-words": {
+      "score": 97.3,
+      "grade": "A",
+      "subscores": {
+        "mobile_survival": 100.0,
+        "contrast": 99.4,
+        "focal_gravity": 100.0,
+        "palette_discipline": 83.0,
+        "accent_presence": 100.0
+      },
+      "raw": {
+        "mobile_survival": 0.9451,
+        "contrast": 0.4473,
+        "focal_gravity": 0.7315,
+        "palette_entropy": 0.6267,
+        "accent_presence": 0.1468,
+        "badge_zone_busy": 0.0244
+      },
+      "hard_fails": []
+    },
+    "C-contrast-split": {
+      "score": 94.6,
+      "grade": "A",
+      "subscores": {
+        "mobile_survival": 100.0,
+        "contrast": 100.0,
+        "focal_gravity": 100.0,
+        "palette_discipline": 63.9,
+        "accent_presence": 100.0
+      },
+      "raw": {
+        "mobile_survival": 0.9782,
+        "contrast": 0.9514,
+        "focal_gravity": 0.742,
+        "palette_entropy": 0.7123,
+        "accent_presence": 0.1401,
+        "badge_zone_busy": 0.1
+      },
+      "hard_fails": []
+    }
+  },
+  "titles": [
+    {
+      "title": "How a solo studio ships 1080p60 alone",
+      "chars": 37,
+      "words": 7,
+      "score": 85.9,
+      "grade": "A",
+      "subscores": {
+        "front_load": 71.4,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 72.5,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "title": "The 1080p60 pipeline a solo studio actually uses",
+      "chars": 48,
+      "words": 8,
+      "score": 85.0,
+      "grade": "A",
+      "subscores": {
+        "front_load": 50.0,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 100.0,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "title": "583,290 views \u2014 here's every frame that earned it",
+      "chars": 49,
+      "words": 8,
+      "score": 84.5,
+      "grade": "B",
+      "subscores": {
+        "front_load": 50.0,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 97.5,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "title": "Everyone pitches. We shipped 1080p60 instead.",
+      "chars": 45,
+      "words": 6,
+      "score": 83.5,
+      "grade": "B",
+      "subscores": {
+        "front_load": 50.0,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 92.5,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "title": "583,290 views. Zero bought numbers.",
+      "chars": 35,
+      "words": 5,
+      "score": 81.5,
+      "grade": "B",
+      "subscores": {
+        "front_load": 60.0,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 67.5,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "title": "36 seconds, 1080p60, one take \u2014 proof first",
+      "chars": 43,
+      "words": 7,
+      "score": 76.1,
+      "grade": "B",
+      "subscores": {
+        "front_load": 28.6,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 87.5,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "title": "Pitch decks are dead. Here's the 1080p60 proof.",
+      "chars": 47,
+      "words": 8,
+      "score": 73.2,
+      "grade": "B",
+      "subscores": {
+        "front_load": 12.5,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 97.5,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "title": "1080p60 \u00b7 36s \u00b7 2,160 frames \u00b7 measured",
+      "chars": 39,
+      "words": 5,
+      "score": 71.5,
+      "grade": "C",
+      "subscores": {
+        "front_load": 20.0,
+        "specificity": 100.0,
+        "number": 100.0,
+        "length_fit": 77.5,
+        "filler_free": 100.0
+      },
+      "hard_fails": []
+    }
+  ],
+  "hooks": [
+    {
+      "script": "583,290 views. Zero bought numbers.",
+      "on_screen": "583,290 / ZERO BOUGHT",
+      "spoken_seconds": 2.18,
+      "score": 100.0,
+      "grade": "A",
+      "subscores": {
+        "claim_in_1_5s": 100.0,
+        "specificity": 100.0,
+        "onscreen_adds_info": 100.0,
+        "spoken_fits_window": 100.0,
+        "motion_at_frame0": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "script": "Everybody pitches. Nobody ships.",
+      "on_screen": "PITCH \u2192 SHIP",
+      "spoken_seconds": 1.45,
+      "score": 67.5,
+      "grade": "C",
+      "subscores": {
+        "claim_in_1_5s": 75.0,
+        "specificity": 0.0,
+        "onscreen_adds_info": 100.0,
+        "spoken_fits_window": 100.0,
+        "motion_at_frame0": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "script": "36 seconds. 2,160 frames. One take.",
+      "on_screen": "36.00s / 2,160F / 1 TAKE",
+      "spoken_seconds": 2.55,
+      "score": 100.0,
+      "grade": "A",
+      "subscores": {
+        "claim_in_1_5s": 100.0,
+        "specificity": 100.0,
+        "onscreen_adds_info": 100.0,
+        "spoken_fits_window": 100.0,
+        "motion_at_frame0": 100.0
+      },
+      "hard_fails": []
+    },
+    {
+      "script": "Here's the Studio screenshot. Unedited.",
+      "on_screen": "UNEDITED CAPTURE",
+      "spoken_seconds": 2.18,
+      "score": 75.0,
+      "grade": "B",
+      "subscores": {
+        "claim_in_1_5s": 100.0,
+        "specificity": 0.0,
+        "onscreen_adds_info": 100.0,
+        "spoken_fits_window": 100.0,
+        "motion_at_frame0": 100.0
+      },
+      "hard_fails": []
+    }
+  ],
+  "weights": {
+    "mobile_survival": 0.3,
+    "contrast": 0.2,
+    "focal_gravity": 0.2,
+    "palette_discipline": 0.15,
+    "accent_presence": 0.15
+  }
+}

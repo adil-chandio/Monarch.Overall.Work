@@ -1,0 +1,603 @@
+{
+  "updated": "2026-11-03T20:56:31.086Z",
+  "reports": [
+    {
+      "topic": "ai video editing",
+      "at": "2026-11-03T20:56:14.000Z",
+      "file": "ai-video-editing.json",
+      "lane": "api",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 65.6,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 84,
+        "winnability": 72.1,
+        "mechanism": 35,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "almost nobody uploaded on this in the last 30 days — could be satiated or dead"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.279,
+        "winner_ratio": 5.9,
+        "fresh_share_30d": 0,
+        "median_views": 3435467,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 35,
+      "vph_median": 412
+    },
+    {
+      "topic": "youtube automation",
+      "at": "2026-11-03T20:21:09.000Z",
+      "file": "youtube-automation.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 59.4,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 80.5,
+        "winnability": 57.42857142857143,
+        "mechanism": 50,
+        "fit": null,
+        "timing": 20
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 57)",
+        "interest is decaying — this is a topic of last quarter"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.5,
+        "winner_ratio": 38.8,
+        "fresh_share_30d": 0.17,
+        "median_views": 49595,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 50,
+      "vph_median": 31
+    },
+    {
+      "topic": "ai b roll generation",
+      "at": "2026-11-03T20:17:51.000Z",
+      "file": "ai-b-roll-generation.json",
+      "lane": "api",
+      "order": "thisMonth",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 59.5,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 73.8,
+        "winnability": 70,
+        "mechanism": 25,
+        "fit": null,
+        "timing": null
+      },
+      "strongest_against": [
+        "the sample is too new to judge — median 10 views with 100% uploaded in the last 30 days, so 'nobody owns it' may just mean 'nobody has watched it yet'"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.986,
+        "winner_ratio": 22974.3,
+        "fresh_share_30d": 1,
+        "median_views": 10,
+        "reading": "too young to judge — this sample is almost entirely under 30 days old, so the view counts are a stopwatch, not a verdict; ask again when it has run"
+      },
+      "confidence": 0.75,
+      "mechanism": 25,
+      "vph_median": 0
+    },
+    {
+      "topic": "shorts retention hook",
+      "at": "2026-11-03T18:49:56.000Z",
+      "file": "shorts-retention-hook.json",
+      "lane": "api",
+      "order": "thisMonth",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 53.4,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 57.9,
+        "winnability": 70,
+        "mechanism": 25,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "the sample is too new to judge — median 74 views with 100% uploaded in the last 30 days, so 'nobody owns it' may just mean 'nobody has watched it yet'"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.477,
+        "winner_ratio": 24.5,
+        "fresh_share_30d": 1,
+        "median_views": 74,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 25,
+      "vph_median": 2
+    },
+    {
+      "topic": "faceless youtube channel",
+      "at": "2026-11-03T18:41:00.000Z",
+      "file": "faceless-youtube-channel.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 56.5,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 80.7,
+        "winnability": 33.328571428571436,
+        "mechanism": 50,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 33)"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.741,
+        "winner_ratio": 63.9,
+        "fresh_share_30d": 0.17,
+        "median_views": 145211,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
+      },
+      "confidence": 0.85,
+      "mechanism": 50,
+      "vph_median": 52
+    },
+    {
+      "topic": "video editing workflow",
+      "at": "2026-11-03T18:40:46.000Z",
+      "file": "video-editing-workflow.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "NO",
+      "score": 51,
+      "reason": "the numbers do not support a day of production",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 80.8,
+        "winnability": 34.4,
+        "mechanism": 25,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 34)",
+        "almost nobody uploaded on this in the last 30 days — could be satiated or dead"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.616,
+        "winner_ratio": 77,
+        "fresh_share_30d": 0.07,
+        "median_views": 29295,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 25,
+      "vph_median": 4
+    }
+  ],
+  "comments": [
+    {
+      "video": "pdLEHfkwgV8",
+      "file": "comments-pdLEHfkwgV8.json",
+      "n": 99,
+      "reading": "the loudest objection is objected to cost (3%) — fix that in the remake",
+      "at": "2026-11-03T20:56:17.093Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 2,
+          "share": 0.02
+        },
+        {
+          "label": "asked for a sibling topic",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "objections": [
+        {
+          "label": "objected to cost",
+          "n": 3,
+          "share": 0.03
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants the asset",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 2249,
+          "text": "Never thought in my life would be learning video editing from messi"
+        },
+        {
+          "likes": 1161,
+          "text": "\"You're still here, aren't you?\"- DAMN. Got me"
+        }
+      ]
+    },
+    {
+      "video": "OTLxMmrMyYo",
+      "file": "comments-OTLxMmrMyYo.json",
+      "n": 100,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-03T20:56:16.624Z",
+      "asks": [],
+      "objections": [
+        {
+          "label": "objected to pacing/clarity",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 288,
+          "text": "If you are watching this for the first time in 2026 gatherer here"
+        },
+        {
+          "likes": 265,
+          "text": "I create mine 2 days ago. Wish me good luck! Please 😅"
+        }
+      ]
+    },
+    {
+      "video": "J-suhuECjBw",
+      "file": "comments-J-suhuECjBw.json",
+      "n": 100,
+      "reading": "wants to buy time/teaching (4%) is the conversion surface",
+      "at": "2026-11-03T20:56:16.082Z",
+      "asks": [],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 4,
+          "share": 0.04
+        },
+        {
+          "label": "wants the asset",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 418,
+          "text": "If you watch this one video, you won’t need to watch any other videos about YouTube automation for the next three months. It’s super informa"
+        },
+        {
+          "likes": 260,
+          "text": "WOW!! Thank you from a 79-year-old with the heart of a 25-year-old. I intend to be one of your BEST students yet!"
+        }
+      ]
+    },
+    {
+      "video": "xJhbirj2tnw",
+      "file": "comments-xJhbirj2tnw.json",
+      "n": 100,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-03T20:56:15.597Z",
+      "asks": [],
+      "objections": [
+        {
+          "label": "objected to pacing/clarity",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "wants": [],
+      "top_liked": [
+        {
+          "likes": 7666,
+          "text": "Dosto, 1 LIKE👍aur 1 Subscriibe🔔karke aap Apne Questions Pucho!!!👇\nNiche Comment Karo✍ I'll check it, Correct it and Tell you How to go Vi"
+        },
+        {
+          "likes": 5979,
+          "text": "आज पहली बार पता चला कि comment पर 2 बार क्लिक करने से Like होता है...😂"
+        }
+      ]
+    },
+    {
+      "video": "5tOADMwGeBI",
+      "file": "comments-5tOADMwGeBI.json",
+      "n": 100,
+      "reading": "wants to buy time/teaching (11%) is the conversion surface",
+      "at": "2026-11-03T20:55:40.497Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [
+        {
+          "label": "objected to cost",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 11,
+          "share": 0.11
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 653,
+          "text": "میرا آپ سے گذارش ہے کہ جس بھائی نے میرا کمینٹ دیکھا وہ آقا صلی اللہ علیہ وسلم پر ایک بار درود شریف ضرور پڑھیں جزاک اللہ 💔💔💔"
+        },
+        {
+          "likes": 218,
+          "text": "Sir g Mazak ke elava ap jesa channel ma ne aj tak YouTube par kabhi mhe dikha Allah pak ap ko mazed kamyab lare ammen ❤❤❤❤"
+        }
+      ]
+    },
+    {
+      "video": "954L0eVIdaE",
+      "file": "comments-954L0eVIdaE.json",
+      "n": 100,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-03T20:55:40.497Z",
+      "asks": [
+        {
+          "label": "asked for a sibling topic",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [
+        {
+          "label": "said it did not work",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants the asset",
+          "n": 2,
+          "share": 0.02
+        },
+        {
+          "label": "wants to buy time/teaching",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 3412,
+          "text": "nowdays, we people judge a video by it's views only but when you watch the whole video , you realise we shouldn't judge, this video is so we"
+        },
+        {
+          "likes": 1174,
+          "text": "1. Mindset shift:\nA. Story first, tools later \nB. Think like your audience eg should it be super energetic, what kind of music: sophisticate"
+        }
+      ]
+    },
+    {
+      "video": "Bbjv9-00tv0",
+      "file": "comments-Bbjv9-00tv0.json",
+      "n": 100,
+      "reading": "the loudest objection is objected to cost (3%) — fix that in the remake; wants to buy time/teaching (10%) is the conversion surface",
+      "at": "2026-11-03T20:55:40.497Z",
+      "asks": [],
+      "objections": [
+        {
+          "label": "objected to cost",
+          "n": 3,
+          "share": 0.03
+        },
+        {
+          "label": "said it did not work",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 10,
+          "share": 0.1
+        },
+        {
+          "label": "wants the asset",
+          "n": 4,
+          "share": 0.04
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 493,
+          "text": "Fabio, I can’t thank you enough for uploading this course on YouTube for free. That means you actually want us to succeed. I’ve been trying "
+        },
+        {
+          "likes": 454,
+          "text": "Things l've learned so far on YouTube:\n1. Post fast, don't overthink\n2. First 50 videos = practice\n3. Title + thumbnail do matter\n4. Hook vi"
+        }
+      ]
+    },
+    {
+      "video": "CV-k6rPJvJY",
+      "file": "comments-CV-k6rPJvJY.json",
+      "n": 100,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-03T20:55:40.497Z",
+      "asks": [
+        {
+          "label": "asked for a sibling topic",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants the asset",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 89,
+          "text": "Free skills: https://www.skool.com/ai-automation-society/classroom/2f7c4aea?md=263d927bda6d49758d1ceecacbe41a10"
+        },
+        {
+          "likes": 15,
+          "text": "Claude creates the complete blueprint and code for the video\n, but external scripts and rendering tools are required to actually process and"
+        }
+      ]
+    },
+    {
+      "video": "Yhl3J1L1yFE",
+      "file": "comments-Yhl3J1L1yFE.json",
+      "n": 100,
+      "reading": "wants the asset (6%) is the conversion surface",
+      "at": "2026-11-03T20:55:40.497Z",
+      "asks": [],
+      "objections": [
+        {
+          "label": "objected to cost",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants the asset",
+          "n": 6,
+          "share": 0.06
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 570,
+          "text": "Tool name : Google Flow \ntool Link : https://labs.google/fx/tools/flow\n\nJoin FREE AI WhatsApp Group  : https://yt.aigrowthcampus.com/\nLearn "
+        },
+        {
+          "likes": 1,
+          "text": "Amazing tool ❤"
+        }
+      ]
+    },
+    {
+      "video": "xwNRyKItpOk",
+      "file": "comments-xwNRyKItpOk.json",
+      "n": 100,
+      "reading": "wants to buy time/teaching (5%) is the conversion surface",
+      "at": "2026-11-03T20:55:40.497Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 5,
+          "share": 0.05
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 3103,
+          "text": "Awesome content and I wish I have watched this before starting my channel. But at the end of the day the most important thing is how popular"
+        },
+        {
+          "likes": 2321,
+          "text": "To the person reading this, I pray you become a successful youtuber"
+        }
+      ]
+    }
+  ],
+  "thumbnails": {
+    "topic": "ai video editing",
+    "n": 12,
+    "face_rate": 0.67,
+    "avg_contrast": 0.246,
+    "avg_busy": 2.06,
+    "reading": "face-led: people are the product; house colour is red (10/12 thumbnails)",
+    "hue_families": [
+      [
+        "red",
+        10
+      ],
+      [
+        "magenta",
+        1
+      ],
+      [
+        "teal",
+        1
+      ]
+    ],
+    "samples": [
+      {
+        "id": "nGWkCAaIlNM",
+        "hex": "#625d1f",
+        "face": 0.028
+      },
+      {
+        "id": "MyGyzvT9ubI",
+        "hex": "#9f7c65",
+        "face": 0.017
+      },
+      {
+        "id": "xJhbirj2tnw",
+        "hex": "#bb845f",
+        "face": 0.125
+      }
+    ]
+  }
+}

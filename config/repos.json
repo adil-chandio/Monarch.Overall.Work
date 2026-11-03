@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "updated": "2026-11-03",
+  "owner": "adil-chandio",
+  "core": "Monarch.Overall.Work",
+  "rule": "Satellites are referenced, never merged. This repo never exceeds ~1 GB.",
+  "repos": [
+    { "name": "Monarch.Overall.Work", "role": "core", "space": "all", "size_mb": 580, "language": "JavaScript", "status": "active", "note": "The OS: app, config, docs, showreel pipeline" },
+    { "name": "Monarch-Studio", "role": "satellite", "space": "monarch-studio", "size_mb": 1003, "language": "Python", "status": "active", "note": "Durable multi-style video editing and animation system" },
+    { "name": "Monarch.Stickman", "role": "satellite", "space": "monarch-studio", "size_mb": 916, "language": "Python", "status": "active", "note": "Animation rig work" },
+    { "name": "Social-media-Ref-Content-", "role": "asset-store", "space": "personal-brand", "size_mb": 404, "language": null, "status": "active", "note": "Reference content library; reference only" },
+    { "name": "World-Channel-", "role": "asset-store", "space": "yt-automation", "size_mb": 145, "language": null, "status": "active", "note": "YouTube channel media store" },
+    { "name": "portfolio", "role": "satellite", "space": "portfolio", "size_mb": 26, "language": "CSS", "status": "active", "note": "Portfolio v37, GitHub Pages public proof surface" },
+    { "name": "Monarch-Agent", "role": "satellite", "space": "ops", "size_mb": 12, "language": "Python", "status": "active", "note": "17-gate QC CLI, approval ladder, production law" },
+    { "name": "Mana-android", "role": "satellite", "space": "ops", "size_mb": 5, "language": "HTML", "status": "active", "note": "Native Android voice AI OS" },
+    { "name": "Maya", "role": "satellite", "space": "ops", "size_mb": 2, "language": "TypeScript", "status": "active", "note": "Maya AI OS web surface" },
+    { "name": "ali.", "role": "archive", "space": null, "size_mb": 4, "language": "HTML", "status": "merge-candidate", "note": "Old experiment; archive after duplicate check" },
+    { "name": "empty.", "role": "archive", "space": null, "size_mb": 2, "language": null, "status": "merge-candidate", "note": "Archive after duplicate check" },
+    { "name": "adil-chandio", "role": "archive", "space": null, "size_mb": 0, "language": null, "status": "paused", "note": "Profile README repo" },
+    { "name": "empty..", "role": "archive", "space": null, "size_mb": 0, "language": "HTML", "status": "archived-candidate", "note": "Empty" },
+    { "name": "old.porfolio.vercel", "role": "archive", "space": null, "size_mb": 0, "language": "TypeScript", "status": "archived-candidate", "note": "Superseded by portfolio" },
+    { "name": "Adil-chandio-", "role": "archive", "space": null, "size_mb": 0, "language": null, "status": "archived-candidate", "note": "Empty" },
+    { "name": "Monarch-Assistant-", "role": "archive", "space": null, "size_mb": 0, "language": "JavaScript", "status": "archived-candidate", "note": "Empty" },
+    { "name": "Monarch-domain", "role": "archive", "space": null, "size_mb": 0, "language": "TypeScript", "status": "archived-candidate", "note": "Empty" },
+    { "name": "M-Domain", "role": "archive", "space": null, "size_mb": 0, "language": null, "status": "archived-candidate", "note": "Empty" },
+    { "name": "Automonarch", "role": "archive", "space": null, "size_mb": 0, "language": null, "status": "archived-candidate", "note": "Empty" },
+    { "name": "creatorreach-ai", "role": "archive", "space": null, "size_mb": 0, "language": "TypeScript", "status": "archived-candidate", "note": "Empty; outreach CRM now lives in core DB" },
+    { "name": "Monarch-automation-", "role": "archive", "space": null, "size_mb": 0, "language": null, "status": "archived-candidate", "note": "Empty" },
+    { "name": "Social.Automation", "role": "archive", "space": null, "size_mb": 0, "language": null, "status": "archived-candidate", "note": "Empty" }
+  ]
+}
