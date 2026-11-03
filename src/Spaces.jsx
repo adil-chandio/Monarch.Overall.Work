@@ -322,13 +322,26 @@ const fmtCount = (n) => (n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(
  * a dashboard starts lying quietly.
  */
 function ResearchPanel({ onNavigate }) {
-  const [state, setState] = useState({ status: 'loading', reports: [] });
+  const [state, setState] = useState({ status: 'loading', reports: [], lanes: null });
   useEffect(() => {
     let live = true;
-    fetch('/yt-intel/index.json', { cache: 'no-cache' })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then((d) => live && setState({ status: 'ok', reports: d.reports || [] }))
-      .catch(() => live && setState({ status: 'none', reports: [] }));
+    // Two files, deliberately: the reports and the lane the last CI run actually used. The
+    // lane file is written by the workflow itself, so this panel can never claim the API is
+    // in use when the run that produced these numbers was keyless.
+    Promise.all([
+      fetch('/yt-intel/index.json', { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+        .then((d) => d.reports || [])
+        .catch(() => null),
+      fetch('/yt-intel/lanes.json', { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null),
+    ]).then(([reports, lanes]) => {
+      if (!live) return;
+      setState(reports
+        ? { status: 'ok', reports, lanes }
+        : { status: 'none', reports: [], lanes });
+    });
     return () => { live = false; };
   }, []);
 
@@ -412,6 +425,31 @@ function ResearchPanel({ onNavigate }) {
               </article>
             );
           })}
+        </div>
+      )}
+
+      {state.lanes && (
+        <div className={`research-lane-state ${state.lanes.key_present ? 'lane-api' : 'lane-web'}`}>
+          {state.lanes.key_present ? (
+            <>
+              <b>Data API lane</b>
+              <span>
+                last CI run used <code>{state.lanes.key_secret_name}</code> · quota {state.lanes.quota_remaining} units left
+              </span>
+            </>
+          ) : (
+            <>
+              <b>Keyless lane</b>
+              <span>
+                the last CI run measured these reports without an API key
+                {state.lanes.secrets_seen && Object.values(state.lanes.secrets_seen).every((v) => !v)
+                  ? ' — no key secret reached the run at all'
+                  : ' — a key exists but did not resolve; check the secret name'}
+                . View counts and ages are parsed from public pages, so exact likes, comment
+                counts and comment mining are unavailable until a key lands.
+              </span>
+            </>
+          )}
         </div>
       )}
 

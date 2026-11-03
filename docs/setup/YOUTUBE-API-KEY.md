@@ -313,3 +313,48 @@ git add yt-intel-trigger.txt && git commit -m "ci: first keyed topic run" && git
 | Data API lane ke parsers (`videos.list` shape) | likha hua, key ke baghair test nahi ho sakta |
 | comment mining ke phrase lists | synthetic comments par 8 assertions pass; asli comments par nahi |
 | `style.py` ka cut threshold (0.22) | ek 36s film par tuned — doosri reference chahiye |
+
+---
+
+## Agar secret add karne ke baad bhi lane `web` rahe (jo ab hua)
+
+Ye is repo par **asal mein hua**: screenshot mein `YTAP1` secret maujood tha, magar har run
+keyless chala. Guess mat karo — repo khud jawab likh deta hai:
+
+```bash
+git pull
+cat public/yt-intel/lanes.json
+```
+
+```json
+{
+  "lane": "web",
+  "key_present": false,
+  "key_secret_name": "missing",
+  "secrets_seen": { "YOUTUBE_API_KEY": false, "YTAP1": false, "YT_KEY": false }
+}
+```
+
+| `secrets_seen` | matlab | fix |
+|---|---|---|
+| sab `false` | koi secret run tak **pahuncha hi nahi** | neeche checklist |
+| koi ek `true`, phir bhi `lane: web` | naam resolve nahi hua | `YOUTUBE_API_KEY` naam se dobara banao |
+| `key_present: true`, `lane: api` | ho gaya — `doctor` chalao | — |
+
+**Checklist (jahan hum atke hain):**
+
+1. **Sahi repo?** Secret usi repo par hona chahiye jahan workflow chalta hai:
+   `adil-chandio/Monarch.Overall.Work`. Fork/organisation par ban gaya to run ko nahi milega.
+2. **Sahi tab?** Settings → Secrets and variables → **Actions** → *Repository secrets*.
+   *Environment secrets* aur *Dependabot* alag hote hain aur `research` job ko nahi milte.
+3. **Value khali to nahi?** Secret add karte waqt box khali chhod diya ho to GitHub bhi khali
+   value rakhta hai — UI phir bhi "secret added" dikhata hai.
+4. **Naam:** `YOUTUBE_API_KEY` (workflow `YTAP1` / `YTAPI1` / `YT_KEY` / `YT_API_KEY` bhi
+   maanta hai, magar standard naam hi rakho).
+5. **Public repo par bhi secrets kaam karte hain** — fork se aane wale PR par nahi, lekin
+   apne branch ke push par hamesha.
+6. Phir bhi na chale to: secret delete karke **dobara** banao, aur ek naya commit push karo
+   (`yt-intel-trigger.txt` ki teesri line badal do — wahi run trigger karti hai).
+
+> `lanes.json` sirf **presence** likhta hai (`true`/`false`), value kabhi nahi — wo file public
+> hai aur site par serve hoti hai. Key ka sirf pehla 4 characters (`AIza`) check hota hai.
