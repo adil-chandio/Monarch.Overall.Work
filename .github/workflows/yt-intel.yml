@@ -161,6 +161,9 @@ jobs:
         if: always()
         env:
           KEY_STATE: ${{ steps.key.outputs.state }}
+          S_YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          S_YTAP1: ${{ secrets.YTAP1 }}
+          S_YTKEY: ${{ secrets.YT_KEY }}
         run: |
           python - <<'PY' > public/yt-intel/lanes.json
           import json, os, sys
@@ -173,6 +176,14 @@ jobs:
               "key_starts_with_aiza": (client.API_KEY or "").startswith("AIza"),
               "quota_used": client.BUDGET.state.get("used", 0),
               "quota_remaining": client.BUDGET.remaining,
+              # presence only, never the value: this file is committed and served publicly
+              "secrets_seen": {
+                  "YOUTUBE_API_KEY": bool(os.environ.get("S_YOUTUBE_API_KEY")),
+                  "YTAP1": bool(os.environ.get("S_YTAP1")),
+                  "YT_KEY": bool(os.environ.get("S_YTKEY")),
+              },
+              "event": os.environ.get("GITHUB_EVENT_NAME"),
+              "ref": os.environ.get("GITHUB_REF"),
           }, indent=2))
           PY
           cat public/yt-intel/lanes.json
