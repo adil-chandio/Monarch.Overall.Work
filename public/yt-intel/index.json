@@ -1,6 +1,44 @@
 {
-  "updated": "2026-11-03T14:46:45.101Z",
+  "updated": "2026-11-03T14:50:46.763Z",
   "reports": [
+    {
+      "topic": "shorts retention hook",
+      "at": "2026-11-03T14:50:46.000Z",
+      "file": "shorts-retention-hook.json",
+      "lane": "web",
+      "status": "ok",
+      "count": 20,
+      "verdict": "NO",
+      "score": 47.1,
+      "reason": "the numbers do not support a day of production",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 57.8,
+        "winnability": 28.700000000000003,
+        "mechanism": 50,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 29)"
+      ],
+      "saturation": {
+        "videos": 20,
+        "top3_share": 0.993,
+        "winner_ratio": 2595.2,
+        "fresh_share_30d": 1,
+        "median_views": 16,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
+      },
+      "confidence": 0.85,
+      "mechanism": 50,
+      "vph_median": 0,
+      "title_signal": {
+        "strength": "weak",
+        "read": "titles containing a number performed -44% vs those without (n=20, R2=0.20)",
+        "n": 20
+      }
+    },
     {
       "topic": "ai b roll generation",
       "at": "2026-11-03T14:46:44.000Z",
@@ -150,41 +188,6 @@
         "read": "titles containing a number performed +206% vs those without (n=20, R2=0.12)",
         "n": 20
       }
-    },
-    {
-      "topic": "shorts retention hook",
-      "at": "2026-11-03T14:31:11.000Z",
-      "file": "shorts-retention-hook.json",
-      "lane": "web",
-      "status": "ok",
-      "count": 11,
-      "verdict": "NO",
-      "score": 41.7,
-      "reason": "the numbers do not support a day of production",
-      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
-      "parts": {
-        "demand": 57.8,
-        "winnability": 17.000000000000004,
-        "mechanism": null,
-        "fit": null,
-        "timing": 55
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 17)",
-        "almost nobody uploaded on this in the last 30 days — could be satiated or dead"
-      ],
-      "saturation": {
-        "videos": 11,
-        "top3_share": 0.83,
-        "winner_ratio": 17.2,
-        "fresh_share_30d": 0,
-        "median_views": 290730,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
-      },
-      "confidence": 0.65,
-      "mechanism": null,
-      "vph_median": 21,
-      "title_signal": null
     },
     {
       "topic": "ai video editing",
