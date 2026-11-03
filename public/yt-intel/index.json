@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-03T18:28:30.606Z",
+  "updated": "2026-11-03T18:33:12.357Z",
   "reports": [
     {
       "topic": "ai video editing",
-      "at": "2026-11-03T18:28:29.000Z",
+      "at": "2026-11-03T18:33:11.000Z",
       "file": "ai-video-editing.json",
       "lane": "api",
       "order": "relevance",
       "status": "ok",
       "count": 30,
       "verdict": "SHARPEN",
-      "score": 71.1,
+      "score": 64.6,
       "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
       "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
       "parts": {
-        "demand": 83.4,
-        "winnability": 91.7,
-        "mechanism": 35,
+        "demand": 83.6,
+        "winnability": 89.3,
+        "mechanism": 10,
         "fit": null,
         "timing": 55
       },
@@ -25,15 +25,15 @@
       ],
       "saturation": {
         "videos": 30,
-        "top3_share": 0.483,
-        "winner_ratio": 19.8,
-        "fresh_share_30d": 0.43,
-        "median_views": 81907,
+        "top3_share": 0.507,
+        "winner_ratio": 20.1,
+        "fresh_share_30d": 0.44,
+        "median_views": 80673,
         "reading": "distributed — no single video owns it, entry is feasible"
       },
       "confidence": 0.85,
-      "mechanism": 35,
-      "vph_median": 80
+      "mechanism": 10,
+      "vph_median": 75
     },
     {
       "topic": "faceless youtube channel",
