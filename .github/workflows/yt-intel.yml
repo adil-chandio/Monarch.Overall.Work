@@ -43,6 +43,13 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python -m yt_intel lanes
 
+      - name: Key doctor (proves the key before trusting it)
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        # no key configured? skip instead of failing the schedule — keyless mode still works
+        run: |
+          if [ -z "$YOUTUBE_API_KEY" ]; then echo "no key secret — staying keyless"; else python -m yt_intel doctor; fi
+
       - name: Research the topic
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}

@@ -66,6 +66,62 @@ def cmd_lanes(args):
         print(f"note            {n}")
 
 
+def cmd_doctor(args):
+    """Prove the key works before it is trusted with a research run.
+
+    Order matters: the cheapest possible call first (channels.list, 1 unit), then a
+    single search (100 units) only if the first one passed. A key that is valid but has
+    the API disabled returns 403 accessNotConfigured, which looks like a bad key — this
+    separates the two.
+    """
+    checks = []
+
+    def rec(name, ok, detail=""):
+        checks.append({"check": name, "ok": ok, "detail": detail})
+        mark = "PASS" if ok else "FAIL"
+        print(f"  {mark}  {name}" + (f" — {detail}" if detail else ""))
+
+    key = client.API_KEY
+    if not key:
+        print("\nDOCTOR\n  FAIL  no YOUTUBE_API_KEY in the environment")
+        print("  → see docs/setup/YOUTUBE-API-KEY.md (5 minutes, free, no card)")
+        return 1
+    rec("key present", True, f"{key[:6]}…{key[-4:]} ({len(key)} chars)")
+    # shape is a hint, not a gate: the only real proof is a successful call
+    shape_ok = key.startswith("AIza")
+    rec("key shape looks right", True,
+        f"starts with {key[:4]}…{'' if shape_ok else ' (expected AIza — check you copied the whole key)'}")
+
+    try:
+        data = client._api("channels", {"part": "snippet,statistics", "id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"}, "channels")
+        n = len(data.get("items", []))
+        rec("channels.list", n > 0, f"{n} channel returned (1 quota unit)")
+    except Exception as e:  # noqa: BLE001
+        msg = str(e)[:200]
+        if "accessNotConfigured" in msg:
+            rec("channels.list", False, "API not enabled on this project — enable YouTube Data API v3")
+        elif "API_KEY_INVALID" in msg or "400" in msg:
+            rec("channels.list", False, "key rejected — check for a stray space or a deleted key")
+        else:
+            rec("channels.list", False, msg)
+        print("\n  Quota spent so far:", client.BUDGET.state["used"])
+        return 1
+
+    try:
+        d = client.demand.analyse  # noqa: F841  (import check only)
+        c = client.search("api test", limit=1)
+        rec("search.list", c.status == "ok", f"lane={c.lane} status={c.status} items={len(c.items)} (100 quota units)")
+    except Exception as e:  # noqa: BLE001
+        rec("search.list", False, str(e)[:160])
+
+    print(f"\n  quota used today : {client.BUDGET.state['used']} / {client.BUDGET.DAILY} units")
+    print(f"  searches left    : {client.BUDGET.remaining // 100}")
+    print("  next             : python -m yt_intel topic \"your topic\" --limit 30")
+    if args.json:
+        _p({"checks": checks, "quota_used": client.BUDGET.state["used"]})
+    return 0 if all(c["ok"] for c in checks) else 1
+
+
 def cmd_demand(args):
     d = demand_mod.analyse(args.topic, deep=args.deep, with_trends=not args.no_trends)
     data = d.to_dict()
@@ -272,6 +328,10 @@ def main(argv=None):
     s = sub.add_parser("lanes", help="which access lane is active and how much quota is left")
     s.add_argument("--json", action="store_true")
     s.set_defaults(fn=cmd_lanes)
+
+    s = sub.add_parser("doctor", help="prove the API key works before trusting it")
+    s.add_argument("--json", action="store_true")
+    s.set_defaults(fn=cmd_doctor)
 
     s = sub.add_parser("demand", help="is anyone actually asking for this?")
     s.add_argument("topic")

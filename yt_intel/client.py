@@ -105,8 +105,11 @@ BUDGET = Budget()
 def _api(path: str, params: dict, op: str) -> dict:
     if not BUDGET.can(op):
         raise http.RateLimited(f"daily Data API quota exhausted ({BUDGET.DAILY} units)")
+    # spend only AFTER the response lands: a request that never reached Google (DNS, TLS,
+    # blocked network) costs nothing, and counting it would make the budget lie low.
+    data = http.get_json(f"{API_BASE}/{path}", {**params, "key": API_KEY})
     BUDGET.spend(op)
-    return http.get_json(f"{API_BASE}/{path}", {**params, "key": API_KEY})
+    return data
 
 
 # --------------------------------------------------------------------------- search

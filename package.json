@@ -12,7 +12,8 @@
     "yt:lanes": "node scripts/yt-intel.mjs lanes",
     "yt:topic": "node scripts/yt-intel.mjs topic",
     "yt:index": "node scripts/yt-index.mjs",
-    "test:yt": "python3 -m yt_intel.test_offline"
+    "test:yt": "python3 -m yt_intel.test_offline",
+    "yt:doctor": "python3 -m yt_intel doctor"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
