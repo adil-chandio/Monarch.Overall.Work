@@ -48,7 +48,7 @@ yt_intel/
   decide.py      GO / SHARPEN / NO / RETRY with parts, objections, missing signals, next probe
   ideas.py       trend family + 12 evergreen curiosity structures + WTF bank
   cli.py         demand · topic · channel · reverse · style · ideas · lanes
-  test_offline.py 82 assertions, no network required
+  test_offline.py 91 assertions, no network required
 ```
 
 ### The four verdicts, and why RETRY exists
@@ -107,20 +107,33 @@ are now structurally different.
 3. **Transcript reliability** — depends on captions existing and on yt-dlp's signature
    work keeping up. `transcript_status` says `auto` vs `manual` vs `no_captions`, and that
    must never be collapsed into "ok".
-4. **`style.py` thresholds — calibrated, with a caveat.** `cut_threshold` was 0.22, tuned on
-   one 36-second film. `python -m yt_intel.calibrate_style` builds films whose shot lists are
-   known exactly (0, 3, 7 and 19 cuts) and sweeps the threshold against them:
+4. **`style.py` cut detection — two wrong answers before the right question.** This one is
+   worth reading in full, because the first correction was *confidently wrong*.
 
-   | threshold | exact cases | abs error | hard-cut film | fast-cut film |
-   |---|---|---|---|---|
-   | 0.22 (old) | 2/4 | 5 | 6 of 7 | 15 of 19 |
-   | 0.14 (now) | 4/4 | 0 | 7 of 7 | 19 of 19 |
+   The threshold was 0.22, tuned on one 36-second film. Synthetic fixtures with known shot
+   lists (0, 3, 7 and 19 cuts) said 0.22 under-counted (6 of 7, 15 of 19) and that 0.14 was
+   exact on all four. That shipped — and then real graded footage disagreed:
 
-   The old value hid a third of the cuts in fast-paced footage — an error that flatters a
-   slow edit, which is the worst direction for a pacing judge. On our own master film the
-   change moves 3 cuts / 5.0 cpm to 4 cuts / 6.7 cpm.
-   **Still open:** solid-colour concat is the easiest possible case. Graded footage with fast
-   pans and dissolves needs its own reference pass before these numbers are quoted publicly.
+   | threshold | synthetic fixtures | **real graded master** (5 known hard cuts) |
+   |---|---|---|
+   | 0.22 (original) | 2 of 7/15/19 … under-counts | **0 of 5** |
+   | 0.14 (first fix) | 4/4 exact | **4 of 5** |
+   | 0.10 (shipped) | 4/4 exact | **5 of 5**, 2 false positives |
+
+   The graded fixture is six real segments of our own master concatenated with hard cuts —
+   real footage, real grade, exact ground truth. Solid-colour shots are the easiest case that
+   exists, so a synthetic-only calibration is a *necessary* check that can still be very wrong.
+
+   **The deeper finding, which no threshold can fix:** on this film a real cut can carry a
+   *lower* frame delta (0.074) than a whip-pan or flash that is not a cut (peak 0.406). The
+   ranges overlap. There is no single absolute number that separates them, so `analyse()` now
+   reports a second opinion (`adaptive_cuts`, local-spike detection) beside the primary count,
+   with a `cut_agreement` verdict. On our master: 11 primary, 16 adaptive, **"the two methods
+   disagree — treat cuts_per_minute as a range, not a number"**. Two detectors that disagree is
+   information; one detector is a guess with a decimal point.
+
+   **Still open:** dissolves and fades are not detected by either method, and a film graded per
+   scene will need the threshold re-derived from its own footage.
 5. **Thumbnail forensics — live, and it found two bugs in itself.** `thumbprint.py` had never
    seen a real thumbnail until a CI step was added for it (`scripts/thumbnails.py` →
    `public/yt-intel/thumbnails.json`); `i.ytimg.com` is TLS-blocked in the agent's sandbox, and
@@ -151,7 +164,7 @@ are now structurally different.
 ```bash
 export YOUTUBE_API_KEY=...        # free, Google Cloud console, YouTube Data API v3
 python -m yt_intel lanes          # expect: lane api, quota 10000
-python -m yt_intel.test_offline   # 82 assertions, no network
+python -m yt_intel.test_offline   # 91 assertions, no network
 python -m yt_intel topic "ai video editing" --limit 30 --json public/yt-intel/ai-video-editing.json
 node scripts/yt-index.mjs         # rebuild the index the UI reads
 python scripts/thumbnails.py   # needs a network that serves i.ytimg.com

@@ -85,10 +85,22 @@ def t_hue_families_sum():
 
 
 def t_style_calibration():
-    """The shipped cut threshold must not be the one that under-counts by a third."""
+    """The shipped cut threshold must survive graded footage, not just synthetic fixtures.
+
+    History this encodes: 0.22 found 0 of 5 known cuts on real graded segments, 0.14 found 4 of
+    5, 0.10 finds 5 of 5. The synthetic sweep alone called 0.14 "exact" — which is why the
+    assertion is pinned to the graded answer and why the old value may never come back.
+    """
     from . import style
-    ok("threshold is the calibrated value, not the old 0.22", style.CUT_THRESHOLD <= 0.16)
-    ok("threshold still ignores noise-level motion", style.CUT_THRESHOLD >= 0.08)
+    ok("threshold is the graded-footage value", style.CUT_THRESHOLD <= 0.11)
+    ok("threshold is not tuned so low it fires on motion", style.CUT_THRESHOLD >= 0.08)
+    ok("the value that found 0 of 5 real cuts is gone", style.CUT_THRESHOLD < 0.22)
+
+    # agreement reporting must exist and must be able to say "they disagree"
+    agree = style._agreement([1.0, 2.0], [1.0, 3.0, 4.0, 5.0])
+    ok("agreement counts the match", agree["matched"] == 1)
+    ok("agreement says so when they disagree", "disagree" in agree["verdict"])
+    ok("agreement is silent-ish when they agree", "agree" in style._agreement([1.0], [1.05])["verdict"])
 
 
 def t_saturation():

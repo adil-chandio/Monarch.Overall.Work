@@ -18,3 +18,6 @@ deliverables/*.mp4
 .cache/yt-intel/
 .harvest/
 public/yt-intel/runs.jsonl
+
+# local python env for the film-analysis rig (never commit a virtualenv)
+.venv/
