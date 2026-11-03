@@ -58,18 +58,40 @@ if (!plan.length) {
 }
 
 const results = [];
+let kept = 0; // topics whose last real measurement survived this run
 for (const [i, item] of plan.entries()) {
   const limit = String(item.limit || defaultLimit);
   const slug = item.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
   const file = join(OUT, `${slug}.json`);
-  console.log(`\n[${i + 1}/${plan.length}] ${item.topic} (limit ${limit})`);
+  console.log(`\n[${i + 1}/${plan.length}] ${item.topic} (limit ${limit}${item.order ? `, order ${item.order}` : ''})`);
+  // A retry is not a measurement. If the sample did not arrive (rate_limited, no key, blocked
+  // IP), keep the last report that actually measured something instead of overwriting a real
+  // result with a RETRY stub — the stub belongs in the ledger, not in the research index.
+  const previousRaw = existsSync(file) ? readFileSync(file, 'utf8') : null;
+  let previous = null;
+  try { previous = previousRaw ? JSON.parse(previousRaw) : null; } catch { previous = null; }
   try {
-    const { stdout } = await run(PY, ['-m', 'yt_intel', 'topic', item.topic, '--limit', limit, '--json', file],
+    // `order` lets the queue ask the same question a different way: relevance answers "who
+    // holds this topic", `date` answers "what is landing right now". Both matter, and they
+    // disagree — so a topic can carry `"order": "date"` rather than being re-typed by hand.
+    const extra = item.order ? ['--order', item.order] : [];
+    const { stdout } = await run(PY, ['-m', 'yt_intel', 'topic', item.topic, '--limit', limit, '--json', file, ...extra],
       { maxBuffer: 32 * 1024 * 1024 });
     const data = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null;
     const d = data?.decision || {};
     console.log(`  ${d.verdict || '?'} ${d.score ?? '—'} — ${d.reason || stdout.trim()}`);
-    results.push({ topic: item.topic, verdict: d.verdict, score: d.score, status: data?.status, count: data?.count, why: item.why });
+    if (data?.status !== 'ok' && previous?.status === 'ok' && previous?.count > 0) {
+      // Timestamping matters: fetched_at is not always written by the branch that produced the
+      // report, and the UI sorts on it. Stamp only when it is missing.
+      if (!previous.fetched_at) previous.fetched_at = Math.floor(Date.now() / 1000);
+      writeFileSync(file, JSON.stringify(previous, null, 2) + '\n');
+      console.log(`  kept the previous measured report (${previous.count} videos)`);
+      kept = (kept || 0) + 1;
+    }
+    results.push({
+      topic: item.topic, verdict: d.verdict, score: d.score, status: data?.status, count: data?.count, why: item.why,
+      kept_previous: data?.status !== 'ok' && previous?.status === 'ok' ? true : undefined,
+    });
   } catch (e) {
     console.error(`  failed: ${String(e.message).slice(0, 300)}`);
     results.push({ topic: item.topic, verdict: 'ERROR', error: String(e.message).slice(0, 200), why: item.why });
@@ -83,5 +105,6 @@ writeFileSync(ledger, prev + JSON.stringify({ at: new Date().toISOString(), resu
 
 console.log('\nsummary');
 for (const r of results) {
-  console.log(`  ${String(r.verdict || '?').padEnd(8)} ${String(r.score ?? '—').padEnd(5)} ${r.topic}`);
+  console.log(`  ${String(r.verdict || '?').padEnd(8)} ${String(r.score ?? '—').padEnd(5)} ${r.topic}${r.kept_previous ? '  (kept last measured report)' : ''}`);
 }
+if (kept) console.log(`\n${kept} topic(s) could not be re-measured; their previous measured report was kept.`);

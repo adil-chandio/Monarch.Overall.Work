@@ -1,14 +1,40 @@
 {
   "version": 1,
   "updated": "2026-11-03",
-  "note": "The queue the weekly research run walks, top-down. Each entry is a real question we want answered before spending a production day. Edit this file, not the workflow.",
+  "note": "The queue the weekly research run walks, top-down. Each entry is a real question we want answered before spending a production day. Edit this file, not the workflow. `order` is optional: 'relevance' (default) shows who holds the topic, 'date' shows what is landing right now, 'viewCount' shows the all-time ceiling.",
   "max_per_run": 4,
   "topics": [
-    { "topic": "ai video editing",        "why": "core studio capability; check who owns it and whether a small studio can enter", "limit": 30 },
-    { "topic": "faceless youtube channel", "why": "CH-01/CH-03 are faceless; find the format that is not saturated", "limit": 30 },
-    { "topic": "video editing workflow",   "why": "evergreen search intent, low saturation risk", "limit": 30 },
-    { "topic": "youtube automation",       "why": "space-level topic; verify demand vs the wave of tool-spam videos", "limit": 30 },
-    { "topic": "shorts retention hook",    "why": "directly feeds the hook-lab gate", "limit": 20 },
-    { "topic": "ai b roll generation",     "why": "production cost lever for the studio", "limit": 20 }
+    {
+      "topic": "ai video editing",
+      "why": "core studio capability; check who owns it and whether a small studio can enter",
+      "limit": 30
+    },
+    {
+      "topic": "faceless youtube channel",
+      "why": "CH-01/CH-03 are faceless; find the format that is not saturated",
+      "limit": 30
+    },
+    {
+      "topic": "video editing workflow",
+      "why": "evergreen search intent, low saturation risk",
+      "limit": 30
+    },
+    {
+      "topic": "youtube automation",
+      "why": "space-level topic; verify demand vs the wave of tool-spam videos",
+      "limit": 30
+    },
+    {
+      "topic": "shorts retention hook",
+      "why": "directly feeds the hook-lab gate; date order reads the current wave, not the all-time winners",
+      "limit": 20,
+      "order": "date"
+    },
+    {
+      "topic": "ai b roll generation",
+      "why": "production cost lever for the studio",
+      "limit": 20,
+      "order": "date"
+    }
   ]
 }

@@ -36,7 +36,19 @@ function entryFor(file) {
       top3_share: data.saturation.top3_share,
       winner_ratio: data.saturation.winner_ratio,
       fresh_share_30d: data.saturation.fresh_share_30d,
+      median_views: data.saturation.median_views,
+      reading: data.saturation.reading,
     } : null,
+    // The headline number on the card. `score` alone is not enough to act on: 57 with
+    // confidence 0.85 and 57 with confidence 0.3 are different instructions.
+    confidence: d.confidence ?? null,
+    mechanism: d.parts?.mechanism ?? null,
+    vph_median: (() => {
+      const v = (data.rows || []).map((r) => r.vph).filter((x) => typeof x === 'number' && x > 0);
+      if (!v.length) return null;
+      v.sort((a, b) => a - b);
+      return Math.round(v[Math.floor(v.length / 2)]);
+    })(),
     title_signal: data.title_signal?.status === 'ok' ? {
       strength: data.title_signal.strength, read: data.title_signal.read, n: data.title_signal.n,
     } : null,

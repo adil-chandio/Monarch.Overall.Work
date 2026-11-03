@@ -307,6 +307,8 @@ export function CommandPalette({ open, onClose, data, onGo }) {
   );
 }
 
+const fmtCount = (n) => (n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(n >= 1e4 ? 0 : 1)}k` : `${n}`);
+
 /**
  * ResearchPanel — the yt_intel bridge, on screen.
  *
@@ -369,6 +371,7 @@ function ResearchPanel({ onNavigate }) {
                     <b>{r.topic}</b>
                     <small className="mono">
                       {r.lane} lane · {r.count ?? 0} videos · {r.status}
+                      {d.confidence != null && ` · conf ${Math.round(d.confidence * 100)}%`}
                     </small>
                   </div>
                   <span className={`research-verdict v-${(d.verdict || 'none').toLowerCase()}`}>
@@ -377,6 +380,16 @@ function ResearchPanel({ onNavigate }) {
                   </span>
                 </header>
                 <p className="research-reason">{d.reason}</p>
+                {(() => {
+                  // The numbers that decide whether an angle is worth a day. Joined as one
+                  // string so the line still reads correctly when copied or spoken.
+                  const stats = [
+                    r.saturation?.median_views != null ? `median ${fmtCount(r.saturation.median_views)} views` : null,
+                    r.vph_median != null ? `${fmtCount(r.vph_median)} views/hour` : null,
+                    r.saturation?.reading || null,
+                  ].filter(Boolean);
+                  return stats.length ? <p className="research-stats mono">{stats.join(' · ')}</p> : null;
+                })()}
                 {retry ? (
                   <p className="research-probe"><b>Next probe:</b> {d.next_probe}</p>
                 ) : (

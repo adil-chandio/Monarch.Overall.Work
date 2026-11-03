@@ -69,6 +69,11 @@ are now structurally different.
 
 ## 3. Measurement rigour (the part that is easy to get wrong)
 
+0. **A retry is not a measurement.** When the sample does not arrive (`rate_limited`, no
+   key, blocked IP) the report is a `RETRY` stub; the queue now *keeps* the previous
+   measured report rather than overwriting a real result with it, and stamps `fetched_at`
+   at write time so the index can order reports honestly. The retry itself is recorded in
+   `public/yt-intel/queue-runs.jsonl`, which is the audit trail, not the research desk.
 1. **Refuse small samples.** `title_signal` returns `insufficient` below 20 rows;
    `funnel`/`psych_profile` below 15. A regression on 12 rows is astrology with decimals.
 2. **Ridge penalty scales with n.** A fixed λ=2.0 on standardised data over-shrank a
@@ -98,8 +103,14 @@ are now structurally different.
    on one 36-second film with 3 cuts. It needs calibration against a known-cut-heavy
    reference before its `cuts_per_minute` is quoted anywhere public.
 5. **Multi-country trending** — keyless trending pages differ per region; not implemented.
-6. **Scheduled research** — the workflow exists (`.github/workflows/yt-intel.yml`, Mondays
-   04:00 UTC) but has not run yet; until it does, `public/yt-intel/` holds one real report.
+6. **Scheduled research** — the workflow runs (`.github/workflows/yt-intel.yml`, Mondays
+   04:00 UTC, plus push on `yt-intel-trigger.txt`) and has produced reports keylessly from
+   the keyless web lane. The Data API lane has never executed: no key has been present on
+   any run yet, so `quota`, `commentThreads` and the API parsers remain unproven in CI.
+7. **`search.list` order** — every report so far is relevance-ordered, which is why a
+   2-year-old video can sit at rank 3 in a "2026" topic. `--order date` and
+   `--order viewCount` exist and must be run to read fresh-wave velocity rather than
+   all-time authority.
 
 ---
 

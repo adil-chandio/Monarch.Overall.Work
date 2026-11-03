@@ -16,6 +16,7 @@ import argparse
 import json
 import os
 import sys
+import time
 
 from . import client, decide, demand as demand_mod, forensic, ideas as ideas_mod, reverse
 
@@ -151,13 +152,23 @@ def cmd_demand(args):
         print(f"  note: {n}")
 
 
+def _decorate(row: dict) -> dict:
+    """Add the derived columns every downstream measurement reads.
+
+    One function, called from every command that scores rows, so a new command cannot
+    quietly skip the age normalisation and report a different number for the same video.
+    """
+    row["age_days"] = forensic.parse_age_days(row.get("published", ""))
+    row["vph"] = forensic.vph(row.get("views"), row["age_days"])
+    row["duration_s"] = forensic.parse_duration(row.get("duration", ""))
+    return row
+
+
 def cmd_topic(args):
     corpus = client.search(args.topic, limit=args.limit, order=args.order)
     rows = [dict(r) for r in corpus.items]
     for r in rows:
-        r["age_days"] = forensic.parse_age_days(r.get("published", ""))
-        r["vph"] = forensic.vph(r.get("views"), r["age_days"])
-        r["duration_s"] = forensic.parse_duration(r.get("duration", ""))
+        _decorate(r)
     sat = forensic.saturation(rows)
     t_sig = forensic.title_signal(rows)
     words = forensic.word_signal(rows)
@@ -172,6 +183,9 @@ def cmd_topic(args):
         access={"status": corpus.status, "detail": corpus.detail},
     )
     out = {
+        # Everything in the report is downstream of this one fetch. Without a timestamp the
+        # index cannot order reports by recency, and a report looks timeless when it is stale.
+        "fetched_at": int(time.time()),
         "topic": args.topic, "lane": corpus.lane, "status": corpus.status,
         "detail": corpus.detail, "count": len(rows),
         "rows": rows, "saturation": sat, "title_signal": t_sig,
