@@ -17,6 +17,7 @@ import hashlib
 import json
 import os
 import random
+import re
 import time
 import urllib.error
 import urllib.parse
@@ -43,6 +44,24 @@ class Blocked(RateLimited):
 def _cache_path(url: str, body: str | None = None) -> str:
     h = hashlib.sha256((url + "|" + (body or "")).encode()).hexdigest()[:32]
     return os.path.join(CACHE_DIR, h + ".json")
+
+
+_SECRET_PARAMS = ("key", "api_key", "apikey", "access_token", "token")
+
+
+def scrub(text: str) -> str:
+    """Remove credentials from any string that might be logged, raised or committed.
+
+    This is not cosmetic. `RateLimited` messages are written into `public/yt-intel/*.json`
+    (the `access.detail` field) and those files are committed and served by the site — so a
+    raw `…&key=AIza…` inside an error message is a published API key. Nothing in this
+    package should ever stringify a URL that still carries a credential.
+    """
+    if not text:
+        return text
+    for p in _SECRET_PARAMS:
+        text = re.sub(rf"([?&]{p}=)[^&\s\"']+", r"\1<redacted>", text, flags=re.I)
+    return text
 
 
 def _wait() -> None:
@@ -104,13 +123,13 @@ def get(
                 _RATE["last"] = time.time() + 2 ** attempt
                 continue
             if e.code in (401, 403):
-                raise Blocked(f"{e.code} for {url}") from e
+                raise Blocked(scrub(f"{e.code} for {url}")) from e
             raise
         except (urllib.error.URLError, TimeoutError, OSError) as e:
             last_err = e
             _RATE["last"] = time.time() + 2 ** attempt
             continue
-    raise RateLimited(f"gave up after {retries} attempts on {url}: {last_err}")
+    raise RateLimited(scrub(f"gave up after {retries} attempts on {url}: {last_err}"))
 
 
 def get_json(url: str, params: dict[str, Any] | None = None, **kw) -> Any:

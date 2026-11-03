@@ -7,7 +7,7 @@ publishing a confident number derived from nothing.
 import random
 import sys
 
-from . import client, decide, demand, forensic, ideas, reverse
+from . import client, decide, demand, forensic, http, ideas, reverse
 
 PASS = 0
 
@@ -78,6 +78,16 @@ def t_title_signal_recovers():
     ok("fits", r["status"] == "ok" and r["n"] == 120)
     ok("detects the planted number effect", r["effect_pct"]["has_number_pct"] > 100, r["effect_pct"])
     ok("reports fit", 0 <= r["fit"]["r2"] <= 1, r["fit"])
+
+
+def t_no_secret_escapes():
+    """An error string is committed to public JSON — the key must never be inside it."""
+    leaky = "gave up on https://www.googleapis.com/youtube/v3/channels?part=x&key=AIzaSECRET123"
+    clean = http.scrub(leaky)
+    ok("query key is redacted", "AIzaSECRET123" not in clean and "<redacted>" in clean)
+    ok("other params survive", "part=x" in clean)
+    ok("headers-style key is redacted too", "abc" not in http.scrub("x?access_token=abc"))
+    ok("empty stays empty", http.scrub("") == "")
 
 
 def t_young_sample():
@@ -176,7 +186,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
