@@ -48,7 +48,7 @@ yt_intel/
   decide.py      GO / SHARPEN / NO / RETRY with parts, objections, missing signals, next probe
   ideas.py       trend family + 12 evergreen curiosity structures + WTF bank
   cli.py         demand · topic · channel · reverse · style · ideas · lanes
-  test_offline.py 91 assertions, no network required
+  test_offline.py 104 assertions, no network required
 ```
 
 ### The four verdicts, and why RETRY exists
@@ -152,6 +152,27 @@ are now structurally different.
    view/like/comment counts, ISO publish times, quota accounting, and comment mining. Every
    run writes `public/yt-intel/lanes.json` (lane, key presence, which secret name, quota
    used) so the state of the pipeline is readable from the repo rather than from a log.
+8. **Age handling, and what a young sample is allowed to say.** `--order date` ran for the
+   first time and produced a report where every row had `age_days: 0` and `vph: None`: ISO
+   timestamps were truncated to whole dates, so a video published at 19:28 today was exactly
+   0.0 days old, and `vph` treats zero as "no age". The one search order whose entire purpose
+   is velocity had a blank velocity column.
+
+   With sub-day ages, the same report then contradicted itself out loud — the saturation
+   reading said "too young to judge" while the decision said `SHARPEN 62.2` at confidence 0.75.
+   Three separate faults, all now fixed and pinned:
+
+   - `vph` refuses ages under 6 hours: a two-hour-old video "doing" 400 views/hour is a spike,
+     not a rate.
+   - youngness is read from `median_age_days < 14`, not from a low view count. The guard used
+     to require `median_views < 100`, and the live sample's median was 238 — so it slipped
+     through by having slightly too many views to look suspicious.
+   - a young sample's winnability is a **placeholder of 50**, it is excluded from the
+     confidence figure, and it is narrated as "could not be measured" — never as "a few videos
+     already own this topic", which is a claim about a market nobody has measured.
+
+   Live effect on the same topic: `SHARPEN 62.2 @ 0.75` → `NO 49-51 @ 0.5-0.6`.
+
 8. **`search.list` order** — every report so far is relevance-ordered, which is why a
    2-year-old video can sit at rank 3 in a "2026" topic. `--order date` and
    `--order viewCount` exist and must be run to read fresh-wave velocity rather than
@@ -164,7 +185,7 @@ are now structurally different.
 ```bash
 export YOUTUBE_API_KEY=...        # free, Google Cloud console, YouTube Data API v3
 python -m yt_intel lanes          # expect: lane api, quota 10000
-python -m yt_intel.test_offline   # 91 assertions, no network
+python -m yt_intel.test_offline   # 104 assertions, no network
 python -m yt_intel topic "ai video editing" --limit 30 --json public/yt-intel/ai-video-editing.json
 node scripts/yt-index.mjs         # rebuild the index the UI reads
 python scripts/thumbnails.py   # needs a network that serves i.ytimg.com
