@@ -1,6 +1,44 @@
 {
-  "updated": "2026-11-03T14:43:03.275Z",
+  "updated": "2026-11-03T14:46:45.101Z",
   "reports": [
+    {
+      "topic": "ai b roll generation",
+      "at": "2026-11-03T14:46:44.000Z",
+      "file": "ai-b-roll-generation.json",
+      "lane": "web",
+      "status": "ok",
+      "count": 20,
+      "verdict": "SHARPEN",
+      "score": 52.6,
+      "reason": "the topic is live but the angle is not yet differentiated",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 73.8,
+        "winnability": 29.1,
+        "mechanism": 50,
+        "fit": null,
+        "timing": null
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 29)"
+      ],
+      "saturation": {
+        "videos": 20,
+        "top3_share": 0.989,
+        "winner_ratio": 48129.7,
+        "fresh_share_30d": 1,
+        "median_views": 9,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
+      },
+      "confidence": 0.75,
+      "mechanism": 50,
+      "vph_median": 0,
+      "title_signal": {
+        "strength": "weak",
+        "read": "titles containing a number performed +459% vs those without (n=20, R2=0.36)",
+        "n": 20
+      }
+    },
     {
       "topic": "youtube automation",
       "at": "2026-11-03T14:43:03.000Z",
@@ -112,40 +150,6 @@
         "read": "titles containing a number performed +206% vs those without (n=20, R2=0.12)",
         "n": 20
       }
-    },
-    {
-      "topic": "ai b roll generation",
-      "at": "2026-11-03T14:42:26.000Z",
-      "file": "ai-b-roll-generation.json",
-      "lane": "web",
-      "status": "ok",
-      "count": 20,
-      "verdict": "SHARPEN",
-      "score": 52.6,
-      "reason": "the topic is live but the angle is not yet differentiated",
-      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
-      "parts": {
-        "demand": 73.8,
-        "winnability": 29.200000000000003,
-        "mechanism": 50,
-        "fit": null,
-        "timing": null
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 29)"
-      ],
-      "saturation": {
-        "videos": 19,
-        "top3_share": 0.988,
-        "winner_ratio": 25675.6,
-        "fresh_share_30d": 1,
-        "median_views": 9,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
-      },
-      "confidence": 0.75,
-      "mechanism": 50,
-      "vph_median": 1,
-      "title_signal": null
     },
     {
       "topic": "shorts retention hook",
