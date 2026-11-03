@@ -257,6 +257,13 @@ def t_young_sample_is_not_confident():
        decide.winnability(young) == decide.YOUNG_SAMPLE_PLACEHOLDER == 50.0)
     ok("a 238-view sample under 12 hours old is still young",
        decide.is_young_sample(live) and decide.winnability(live) == 50.0)
+    # a placeholder must not be narrated as an observation about the market
+    r = decide.greenlight({"score": 57.8}, live, {"status": "ok", "share": {"number_in_title": 0.5}},
+                          {"status": "ok", "strength": "firm"})
+    ok("no ownership claim is made from a placeholder",
+       not any("already own this topic" in a for a in r["strongest_against"]))
+    ok("the reason says it could not be measured",
+       any("could not be measured" in f for f in r["strongest_for"]))
     ok("the same shape scores differently when settled",
        decide.winnability(settled) != decide.winnability(young))
 

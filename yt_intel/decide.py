@@ -182,7 +182,12 @@ def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
 
     if parts["demand"] is not None and parts["demand"] >= 65:
         for_.append(f"demand signal {parts['demand']:.0f}/100 (autocomplete + trends)")
-    if parts["winnability"] is not None:
+    # A placeholder must never be narrated as an observation. Live case: a young sample got
+    # "a few videos already own this topic (winnability 50)" — a claim about ownership, made
+    # from a number that exists precisely because ownership could not be measured.
+    if placeholder_used:
+        for_.append("winnability could not be measured — the sample is too new to concentrate")
+    elif parts["winnability"] is not None:
         if parts["winnability"] >= 60:
             for_.append(f"the topic is not owned by one video (winnability {parts['winnability']:.0f})")
         else:
