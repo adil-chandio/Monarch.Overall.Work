@@ -137,6 +137,22 @@ def t_reverse():
     ok("replication always actionable", rep["change"] and rep["beat"])
 
 
+def t_comment_mining():
+    """Comment shares must name what was said, and refuse to invent a pattern."""
+    sample = [{"text": "Please make part 2", "likes": 40, "replies": 1},
+              {"text": "what app did you use? where can i get the template", "likes": 9, "replies": 0},
+              {"text": "this didn't work on davinci", "likes": 5, "replies": 3}] * 7
+    r = forensic.comment_mining(sample)
+    ok("comment mining ok above the gate", r["status"] == "ok" and r["n"] == 21)
+    ok("finds the sequel ask", any("sequel" in a["label"] for a in r["asks"]))
+    ok("finds the tool question", any("tool" in a["label"] for a in r["asks"]))
+    ok("finds the objection", any("did not work" in o["label"] for o in r["objections"]))
+    ok("names the asset want", any("asset" in w["label"] for w in r["wants"]))
+    ok("reading is one actionable line", isinstance(r["reading"], str) and "objection" in r["reading"])
+    ok("refuses a tiny sample", forensic.comment_mining(sample[:3])["status"] == "insufficient")
+    ok("empty is insufficient, not 'no complaints'", forensic.comment_mining([])["status"] == "insufficient")
+
+
 def t_ideas():
     out = ideas.generate("ai video", {"suggestions": ["ai video editing", "ai video editing free"]})
     ok("has both families", {i["family"] for i in out} >= {"trend", "curiosity"})
@@ -148,7 +164,7 @@ def t_ideas():
 if __name__ == "__main__":
     print("yt-intel offline tests")
     for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_title_signal_refuses, t_title_signal_recovers,
-               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_reverse, t_ideas]:
+               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
     sys.exit(0)

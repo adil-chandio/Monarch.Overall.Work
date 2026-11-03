@@ -48,7 +48,7 @@ yt_intel/
   decide.py      GO / SHARPEN / NO / RETRY with parts, objections, missing signals, next probe
   ideas.py       trend family + 12 evergreen curiosity structures + WTF bank
   cli.py         demand · topic · channel · reverse · style · ideas · lanes
-  test_offline.py 43 assertions, no network required
+  test_offline.py 53 assertions, no network required
 ```
 
 ### The four verdicts, and why RETRY exists
@@ -89,9 +89,15 @@ are now structurally different.
 
 ## 4. Still missing (ranked by how much it costs us)
 
-1. **Comment mining** — the highest-value gap. Not implemented: comment threads need the
-   Data API (`commentThreads`, 1 unit) or an innertube continuation call. With a key this
-   is ~50 lines; without one it is a parser fight.
+1. **Comment mining — implemented, unproven.** `yt_intel comments <id>` now exists:
+   `commentThreads` (1 unit/page, up to 100 comments), mined into three actionable buckets
+   — what the audience *asked for* (sequel / sibling topic / which tool), what they
+   *objected to* (did not work / cost / pacing), and what asset they *wanted* (file,
+   template, course). Deliberately phrase-led, not sentiment-scored: "sentiment 0.62"
+   cannot be written into a script, "9 of 100 asked for part 2" can.
+   Not yet run against a live key, and the keyless lane returns `unavailable` rather than
+   an empty list — so until the first keyed run, treat the phrase lists as untested
+   against real comments (they are unit-tested against synthetic ones).
 2. **Live validation in this sandbox** — every network probe here fails with
    `SSL_ERROR_SYSCALL`. The parsers (`_rich_grid`, `_from_lockup`) are written against
    YouTube's 2024+ `lockupViewModel` layout but have not yet seen a real response. First
@@ -119,7 +125,7 @@ are now structurally different.
 ```bash
 export YOUTUBE_API_KEY=...        # free, Google Cloud console, YouTube Data API v3
 python -m yt_intel lanes          # expect: lane api, quota 10000
-python -m yt_intel.test_offline   # 43 assertions, no network
+python -m yt_intel.test_offline   # 53 assertions, no network
 python -m yt_intel topic "ai video editing" --limit 30 --json public/yt-intel/ai-video-editing.json
 node scripts/yt-index.mjs         # rebuild the index the UI reads
 python -m yt_intel style reference.mp4 --compare deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4

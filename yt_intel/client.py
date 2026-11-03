@@ -344,6 +344,45 @@ def videos(ids: list[str]) -> Corpus:
     return Corpus("videos", "web", "", out, "ok" if out else "blocked")
 
 
+# --------------------------------------------------------------------------- comments
+def comments(video_id: str, limit: int = 100, order: str = "relevance") -> Corpus:
+    """Top comments for a video (API lane only; `commentThreads` = 1 quota unit per page).
+
+    Why comments at all: a title tells you what the uploader promised, the comments tell
+    you what the audience actually wanted next. Every "part 2?", "what about X?" and
+    "this didn't work because Y" is a scripted brief for the next video, free.
+
+    The keyless lane has no honest way to do this yet (the innertube continuation call is a
+    parser fight that breaks weekly), so it returns `unavailable` with the reason instead of
+    an empty list that reads like "this video has no comments".
+    """
+    if lane() != "api":
+        return Corpus("comments", "web", video_id, [], "unavailable",
+                      "comments need the Data API lane (commentThreads); no key in this environment")
+    try:
+        data = _api("commentThreads", {
+            "part": "snippet", "videoId": video_id, "maxResults": min(100, limit),
+            "order": order, "textFormat": "plainText",
+        }, "commentThreads")
+    except http.RateLimited as e:
+        return Corpus("comments", "api", video_id, [], "rate_limited", str(e))
+    except Exception as e:  # noqa: BLE001 - a disabled-comments video is a result, not a crash
+        return Corpus("comments", "api", video_id, [], "error", repr(e))
+
+    out = []
+    for item in data.get("items", []):
+        sn = item.get("snippet", {})
+        top = sn.get("topLevelComment", {}).get("snippet", {})
+        out.append({
+            "text": top.get("textDisplay", ""),
+            "likes": int(top.get("likeCount") or 0),
+            "replies": int(sn.get("totalReplyCount") or 0),
+            "author": top.get("authorDisplayName", ""),
+            "published": top.get("publishedAt", ""),
+        })
+    return Corpus("comments", "api", video_id, out, "ok" if out else "empty")
+
+
 # --------------------------------------------------------------------------- channel
 def channel(handle_or_id: str) -> Corpus:
     """Channel profile + recent uploads via the channel's public RSS feed.

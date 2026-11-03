@@ -301,3 +301,78 @@ def saturation(rows: list[dict]) -> dict:
             "distributed — no single video owns it, entry is feasible"
         ) if total else "",
     }
+
+
+# --------------------------------------------------------------------------- comments
+DEMAND_PHRASES = [
+    # a request for more / next: the cheapest content brief that exists
+    (r"\b(part|pt\.?)\s*(2|ii|two)\b|\bnext video\b|\bmore (of )?this\b|\bplease make\b|\bdo more\b", "asked for a sequel"),
+    (r"\bwhat about\b|\bcan you (do|make|cover)\b|\bhow (do|did) you\b|\btutorial (on|for)\b", "asked for a sibling topic"),
+    (r"\bwhere (can|do) i (get|find|download)\b|\bwhat (app|tool|software|site)\b|\bwhich (tool|software)\b", "asked which tool (buying intent)"),
+]
+OBJECTION_PHRASES = [
+    (r"\b(didn'?t|doesn'?t|not) work\b|\bwrong\b|\bmisleading\b|\bclickbait\b", "said it did not work"),
+    (r"\bexpensive\b|\btoo (much|costly)\b|\bpaid\b|\bnot free\b", "objected to cost"),
+    (r"\btoo (fast|slow|long|short)\b|\bconfus(ing|ed)\b|\bhard to follow\b", "objected to pacing/clarity"),
+]
+WANT_PHRASES = [
+    (r"\b(file|download|template|preset|project|link|checklist)\b", "wants the asset"),
+    (r"\bcourse\b|\bmentorship\b|\bcoaching\b|\bconsult\b|\bhire\b", "wants to buy time/teaching"),
+]
+
+
+def comment_mining(comments: list[dict], min_n: int = 20) -> dict:
+    """What the audience said, sorted into the three things that change a script.
+
+    Deliberately phrase-led, not sentiment-scored: a general "sentiment: 0.62" reading is
+    unfalsifiable and cannot be written into a video. "9 of 100 asked for part 2, 6 said it
+    did not work" can be acted on tomorrow and checked next month.
+
+    Refuses below `min_n` for the same reason as the title regression: shares computed on
+    nine comments are a rumour with a decimal point.
+    """
+    texts = [c.get("text", "") for c in comments if c.get("text")]
+    if len(texts) < min_n:
+        return {
+            "status": "insufficient", "n": len(texts), "required": min_n,
+            "detail": "too few comments to read a pattern; widen the sample or pick a bigger video",
+        }
+
+    def share(bucket):
+        hits = []
+        for rx, label in bucket:
+            n = sum(1 for t in texts if re.search(rx, t, re.I))
+            if n:
+                hits.append({"label": label, "n": n, "share": round(n / len(texts), 3)})
+        return sorted(hits, key=lambda h: -h["n"])
+
+    demand_asks = share(DEMAND_PHRASES)
+    objections = share(OBJECTION_PHRASES)
+    wants = share(WANT_PHRASES)
+
+    top = sorted(comments, key=lambda c: -(c.get("likes") or 0))[:5]
+    return {
+        "status": "ok",
+        "n": len(texts),
+        "asks": demand_asks,
+        "objections": objections,
+        "wants": wants,
+        "top_liked": [{"likes": c.get("likes"), "replies": c.get("replies"),
+                       "text": (c.get("text") or "")[:220]} for c in top],
+        "reading": _comment_reading(demand_asks, objections, wants),
+        "caveat": "shares are of the comments fetched, not of everyone who watched; "
+                  "a silent majority is invisible here by construction",
+    }
+
+
+def _comment_reading(asks: list[dict], objections: list[dict], wants: list[dict]) -> str:
+    parts = []
+    if asks:
+        parts.append(f"the audience is asking for more: {asks[0]['label']} ({asks[0]['share']:.0%})")
+    if objections:
+        parts.append(f"the loudest objection is {objections[0]['label']} ({objections[0]['share']:.0%}) — fix that in the remake")
+    if wants:
+        parts.append(f"{wants[0]['label']} ({wants[0]['share']:.0%}) is the conversion surface")
+    if not parts:
+        return "no request, objection or asset-ask cleared the threshold — this comment field cannot brief a video"
+    return "; ".join(parts)

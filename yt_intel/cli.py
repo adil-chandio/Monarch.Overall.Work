@@ -233,6 +233,40 @@ def cmd_topic(args):
     print(f"      → next probe: {verdict['next_probe']}")
 
 
+def cmd_comments(args):
+    """Mine the comment field of one video: asks, objections, asset wants."""
+    c = client.comments(args.video, limit=args.limit, order=args.order)
+    mined = forensic.comment_mining(c.items)
+    # When the lane cannot fetch at all, mining an empty list would report "insufficient
+    # sample" — a measurement problem — instead of "no access", which is the real one.
+    out = {"video": args.video, "status": c.status, "detail": c.detail, "lane": c.lane,
+           **({"status": c.status, "detail": c.detail} if c.status != "ok" else {}),
+           **(mined if c.status == "ok" else {"mining": "skipped — nothing was fetched",
+                                               "caveat": "no comment data; this is an access result"})}
+    if args.json:
+        with open(args.json, "w") as f:
+            json.dump(out, f, indent=2, ensure_ascii=False)
+        print(f"wrote {args.json} ({mined.get('n', 0)} comments)")
+        return
+    print(f"\nCOMMENTS · {args.video}   [{c.lane} lane · {c.status}]")
+    if c.detail:
+        print(f"  detail: {c.detail}")
+    if c.status != "ok":
+        print("  not a comment pattern — nothing was fetched; fix access and re-run")
+        return
+    if mined.get("status") != "ok":
+        print(f"  {mined.get('status')}: {mined.get('detail')}")
+        return
+    print(f"  {mined['n']} comments · {mined['reading']}")
+    for bucket in ("asks", "objections", "wants"):
+        for h in mined[bucket][:4]:
+            print(f"    {bucket:<11} {h['share']:>5.0%}  {h['label']}")
+    print("\n  most-liked")
+    for c_ in mined["top_liked"][:3]:
+        print(f"    {c_['likes']:>5}♥  {c_['text'][:110]}")
+    print(f"\n  caveat: {mined['caveat']}")
+
+
 def cmd_channel(args):
     c = client.channel(args.channel)
     if c.status != "ok":
@@ -362,6 +396,13 @@ def main(argv=None):
     s.add_argument("--no-trends", action="store_true")
     s.add_argument("--json", help="write the full report to this path")
     s.set_defaults(fn=cmd_topic)
+
+    s = sub.add_parser("comments", help="comment mining: what the audience asked for and objected to")
+    s.add_argument("video", help="video id")
+    s.add_argument("--limit", type=int, default=100)
+    s.add_argument("--order", default="relevance", choices=["relevance", "time"])
+    s.add_argument("--json")
+    s.set_defaults(fn=cmd_comments)
 
     s = sub.add_parser("channel", help="channel roster + thumbnail fingerprint")
     s.add_argument("channel", help="@handle or UC… id")
