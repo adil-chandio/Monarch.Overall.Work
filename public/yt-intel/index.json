@@ -1,6 +1,40 @@
 {
-  "updated": "2026-11-03T15:02:08.017Z",
+  "updated": "2026-11-03T15:10:16.671Z",
   "reports": [
+    {
+      "topic": "ai b roll generation",
+      "at": "2026-11-03T15:10:16.000Z",
+      "file": "ai-b-roll-generation.json",
+      "lane": "web",
+      "order": "thisMonth",
+      "status": "ok",
+      "count": 20,
+      "verdict": "SHARPEN",
+      "score": 52.3,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 73.8,
+        "winnability": 48.199999999999996,
+        "mechanism": 25,
+        "fit": null,
+        "timing": null
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 48)"
+      ],
+      "saturation": {
+        "videos": 19,
+        "top3_share": 0.798,
+        "winner_ratio": 508.9,
+        "fresh_share_30d": 1,
+        "median_views": 1626,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
+      },
+      "confidence": 0.75,
+      "mechanism": 25,
+      "vph_median": 16
+    },
     {
       "topic": "video editing workflow",
       "at": "2026-11-03T15:02:07.000Z",
@@ -101,40 +135,6 @@
         "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
       },
       "confidence": 0.85,
-      "mechanism": 50,
-      "vph_median": 0
-    },
-    {
-      "topic": "ai b roll generation",
-      "at": "2026-11-03T15:01:30.000Z",
-      "file": "ai-b-roll-generation.json",
-      "lane": "web",
-      "order": "thisMonth",
-      "status": "ok",
-      "count": 20,
-      "verdict": "SHARPEN",
-      "score": 66.2,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
-      "parts": {
-        "demand": 73.8,
-        "winnability": 70,
-        "mechanism": 50,
-        "fit": null,
-        "timing": null
-      },
-      "strongest_against": [
-        "the sample is too new to judge — median 37 views with 100% uploaded in the last 30 days, so 'nobody owns it' may just mean 'nobody has watched it yet'"
-      ],
-      "saturation": {
-        "videos": 19,
-        "top3_share": 0.989,
-        "winner_ratio": 6246.3,
-        "fresh_share_30d": 1,
-        "median_views": 37,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
-      },
-      "confidence": 0.75,
       "mechanism": 50,
       "vph_median": 0
     },
