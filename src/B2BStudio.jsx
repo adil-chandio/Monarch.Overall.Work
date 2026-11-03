@@ -31,7 +31,7 @@ const SHOWCASE_TABS = [
   {
     id: 'flagship',
     label: '60fps Agency Showreel',
-    kicker: 'HYPERFRAMES × SHOTCRAFT · 1080P 60FPS · -15.3 LUFS',
+    kicker: 'ABSOLUTE CINEMA CUT · 1080P 60FPS · 36.00S · -14.0 LUFS',
     title: 'Proof Over Promises — Real Work, Real Retention & Vault Demo',
     type: 'video',
     aspect: '16/9',
