@@ -21,12 +21,19 @@ import { OUT } from './yt-index.mjs';
 
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
-const explicit = args.find((a) => !a.startsWith('--'));
+// One video per measured topic, instead of one video overall. Six topics were on the desk and
+// exactly one of them had had its audience listened to — the other five verdicts were being
+// written without ever reading a comment on those topics.
+const perTopic = args.includes('--per-topic');
+const maxFlag = args.indexOf('--max');
+const maxTopics = maxFlag >= 0 ? Number(args[maxFlag + 1]) || 4 : 4;
+const explicit = args.find((a) => !a.startsWith('--') && !/^\d+$/.test(a));
 
 /** Candidates: api-lane reports only — the web lane has no comment counts at all. */
 export function candidates(dir = OUT) {
   if (!existsSync(dir)) return [];
   const out = [];
+  const chosen = new Set(mined);
   for (const f of readdirSync(dir)) {
     if (!f.endsWith('.json') || f.startsWith('comments-')) continue;
     let d;
@@ -53,14 +60,54 @@ export function candidates(dir = OUT) {
  */
 const HOW_TO = /\b(how to|how i|tutorial|guide|step by step|setup|workflow|tips|free)\b/i;
 
+/** Best single candidate inside one report: how-to intent first, then raw comment count. */
+function bestIn(report) {
+  const rows = (report.rows || []).filter((r) => r?.id && r.comments);
+  if (!rows.length) return null;
+  return rows.sort((a, b) => {
+    const aHow = HOW_TO.test(`${a.title || ''} ${report.topic || ''}`) ? 1 : 0;
+    const bHow = HOW_TO.test(`${b.title || ''} ${report.topic || ''}`) ? 1 : 0;
+    if (aHow !== bHow) return bHow - aHow;
+    return (b.comments || 0) - (a.comments || 0);
+  })[0];
+}
+
+/** One pick per api-lane report, skipping videos we have already mined. */
+export function picksPerTopic(dir = OUT) {
+  if (!existsSync(dir)) return [];
+  const mined = new Set(
+    readdirSync(dir)
+      .filter((f) => f.startsWith('comments-') && f.endsWith('.json'))
+      .map((f) => f.replace(/^comments-/, '').replace(/\.json$/, '')),
+  );
+  const out = [];
+  const chosen = new Set(mined);
+  for (const f of readdirSync(dir)) {
+    if (!f.endsWith('.json') || f.startsWith('comments-')) continue;
+    let d;
+    try { d = JSON.parse(readFileSync(join(dir, f), 'utf8')); } catch { continue; }
+    if (d?.lane !== 'api' || d?.status !== 'ok') continue;
+    // A video can be the top row in several topic reports. Mining the same comment field
+    // twice under two topic names would look like two independent audience readings and be
+    // one. Chosen ids are global to this run, not per topic.
+    const rows = (d.rows || []).filter((r) => r?.id && r.comments && !chosen.has(r.id));
+    const best = bestIn({ ...d, rows });
+    if (!best) continue;
+    chosen.add(best.id);
+    out.push({ id: best.id, comments: best.comments, title: best.title || '', topic: d.topic || '', at: d.fetched_at || 0 });
+  }
+  // Freshest report first: an audience's asks age faster than its size does.
+  return out.sort((a, b) => b.at - a.at);
+}
+
 const picked = explicit
   ? [{ id: explicit, comments: null, title: '(named explicitly)', topic: '' }]
-  : candidates().sort((a, b) => {
+  : (perTopic ? picksPerTopic() : candidates().sort((a, b) => {
       const aHow = HOW_TO.test(`${a.title} ${a.topic}`) ? 1 : 0;
       const bHow = HOW_TO.test(`${b.title} ${b.topic}`) ? 1 : 0;
       if (aHow !== bHow) return bHow - aHow;
       return b.comments - a.comments || b.at - a.at;
-    });
+    }));
 
 if (!picked.length) {
   console.log('no API-lane report with comment counts yet — nothing to mine');
@@ -68,18 +115,33 @@ if (!picked.length) {
   process.exit(0);
 }
 
-const target = picked[0];
-console.log(`mining ${target.id} · ${target.comments ?? '?'} comments · ${target.title.slice(0, 60) || target.topic}`);
+const targets = perTopic ? picked.slice(0, maxTopics) : picked.slice(0, 1);
+console.log(perTopic
+  ? `mining ${targets.length} topic(s), one video each — 1 quota unit per video`
+  : `mining ${targets[0].id} · ${targets[0].comments ?? '?'} comments · ${targets[0].title.slice(0, 60) || targets[0].topic}`);
 if (dryRun) {
+  for (const t of targets) console.log(`  would mine ${t.id} · ${t.topic} · ${t.comments} comments`);
   console.log('dry run — no quota spent');
   process.exit(0);
 }
 
-const { file, data } = await commentReport(target.id);
-if (!data || data.status !== 'ok') {
-  console.error(`comment mining produced no usable report (status: ${data?.status ?? 'missing'})`);
-  console.error(data?.detail || '');
+let okCount = 0;
+const failures = [];
+for (const t of targets) {
+  console.log(`\n[${t.topic || 'explicit'}] ${t.id} · ${t.comments ?? '?'} comments · ${t.title.slice(0, 60)}`);
+  const { file, data } = await commentReport(t.id);
+  if (!data || data.status !== 'ok') {
+    console.error(`  no usable report (status: ${data?.status ?? 'missing'}) ${data?.detail || ''}`);
+    failures.push(t.topic || t.id);
+    continue;
+  }
+  okCount += 1;
+  console.log(`  ${file}`);
+  console.log(`  ${data.n} comments · ${data.reading}`);
+}
+
+if (!okCount) {
+  console.error('comment mining produced nothing usable');
   process.exit(1);
 }
-console.log(`${file}`);
-console.log(`  ${data.n} comments · ${data.reading}`);
+console.log(`\n${okCount}/${targets.length} mined${failures.length ? ` — failed: ${failures.join(', ')}` : ''}`);

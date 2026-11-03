@@ -22,6 +22,10 @@ on:
         description: 'Search filter: relevance | date | viewCount | thisMonth | thisWeek'
         required: false
         default: ''
+      comments_max:
+        description: 'How many topics to mine comments for (one video each = 1 quota unit); 99 = all'
+        required: false
+        default: '4'
   schedule:
     # Mondays 04:00 UTC — before the week's planning session
     - cron: '0 4 * * 1'
@@ -157,15 +161,21 @@ jobs:
             ORDER="$(sed -n 2p yt-intel-trigger.txt | sed 's/#.*//' | xargs)"
             echo "topic=$TOPIC" >> "$GITHUB_OUTPUT"
             echo "order=$ORDER" >> "$GITHUB_OUTPUT"
-            echo "from marker file: topic=${TOPIC:-<queue>} order=${ORDER:-<default>}"
+            # optional `KEY=value` lines, so a marker file can ask for a sweep without the UI
+            CM="$(sed -n 's/^COMMENTS_MAX=//p' yt-intel-trigger.txt | head -1 | xargs)"
+            echo "comments_max=$CM" >> "$GITHUB_OUTPUT"
+            echo "from marker file: topic=${TOPIC:-<queue>} order=${ORDER:-<default>} comments_max=${CM:-<default 4>}"
           else
             echo "topic=" >> "$GITHUB_OUTPUT"
             echo "order=" >> "$GITHUB_OUTPUT"
+            echo "comments_max=" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Research (one topic, or the whole queue)
         env:
           YT_INTEL_MAX_TOPICS: '4'
+          # 99 = sweep every measured topic in one run; default keeps a weekly run cheap
+          COMMENTS_MAX: ${{ github.event.inputs.comments_max || steps.plan.outputs.comments_max || '4' }}
         run: |
           TOPIC="${{ github.event.inputs.topic || steps.plan.outputs.topic }}"
           LIMIT="${{ github.event.inputs.limit || '30' }}"
@@ -184,7 +194,11 @@ jobs:
           if [ -z "$YOUTUBE_API_KEY" ]; then
             echo "no key — skipping comment mining"
           else
-            node scripts/yt-comments.mjs || echo "::warning::comment mining did not run — see public/yt-intel/comments-*.json"
+            # One video per measured topic, skipping any already mined. A sweep
+            # (--comments-max 99 via workflow_dispatch) covers every topic; the normal cap
+            # keeps a weekly run at ~4 quota units.
+            node scripts/yt-comments.mjs --per-topic --max "${COMMENTS_MAX:-4}" \
+              || echo "::warning::comment mining did not run — see public/yt-intel/comments-*.json"
           fi
 
       - name: Film-analysis self-test (builds a 3-cut fixture, checks the detector)
