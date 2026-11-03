@@ -109,9 +109,11 @@ def cmd_doctor(args):
         return 1
 
     try:
-        d = client.demand.analyse  # noqa: F841  (import check only)
+        # This used to touch `client.demand`, which does not exist — so this check failed
+        # unconditionally with "module has no attribute 'demand'" even on a perfectly good key.
         c = client.search("api test", limit=1)
-        rec("search.list", c.status == "ok", f"lane={c.lane} status={c.status} items={len(c.items)} (100 quota units)")
+        rec("search.list", c.status == "ok",
+            f"lane={c.lane} status={c.status} items={len(c.items)} (100 quota units)")
     except Exception as e:  # noqa: BLE001
         rec("search.list", False, str(e)[:160])
 
