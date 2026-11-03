@@ -1,6 +1,40 @@
 {
-  "updated": "2026-11-03T18:25:13.754Z",
+  "updated": "2026-11-03T18:28:30.606Z",
   "reports": [
+    {
+      "topic": "ai video editing",
+      "at": "2026-11-03T18:28:29.000Z",
+      "file": "ai-video-editing.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 71.1,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 83.4,
+        "winnability": 91.7,
+        "mechanism": 35,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "no objection found in the data — which itself is a reason to check the sample"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.483,
+        "winner_ratio": 19.8,
+        "fresh_share_30d": 0.43,
+        "median_views": 81907,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 35,
+      "vph_median": 80
+    },
     {
       "topic": "faceless youtube channel",
       "at": "2026-11-03T18:25:13.000Z",
@@ -69,40 +103,6 @@
       "confidence": 0.85,
       "mechanism": 50,
       "vph_median": 31
-    },
-    {
-      "topic": "ai video editing",
-      "at": "2026-11-03T18:21:21.000Z",
-      "file": "ai-video-editing.json",
-      "lane": "api",
-      "order": "relevance",
-      "status": "ok",
-      "count": 30,
-      "verdict": "SHARPEN",
-      "score": 71.3,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
-      "parts": {
-        "demand": 84,
-        "winnability": 91.7,
-        "mechanism": 35,
-        "fit": null,
-        "timing": 55
-      },
-      "strongest_against": [
-        "no objection found in the data — which itself is a reason to check the sample"
-      ],
-      "saturation": {
-        "videos": 30,
-        "top3_share": 0.483,
-        "winner_ratio": 19.8,
-        "fresh_share_30d": 0.43,
-        "median_views": 81909,
-        "reading": "distributed — no single video owns it, entry is feasible"
-      },
-      "confidence": 0.85,
-      "mechanism": 35,
-      "vph_median": 80
     },
     {
       "topic": "video editing workflow",
