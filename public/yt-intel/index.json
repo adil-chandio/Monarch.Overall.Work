@@ -1,26 +1,39 @@
 {
-  "updated": "2026-11-03T18:43:16.828Z",
+  "updated": "2026-11-03T18:49:57.184Z",
   "reports": [
     {
       "topic": "shorts retention hook",
-      "at": "2026-11-03T18:43:15.000Z",
+      "at": "2026-11-03T18:49:56.000Z",
       "file": "shorts-retention-hook.json",
       "lane": "api",
       "order": "thisMonth",
-      "status": "error",
-      "count": 0,
-      "verdict": "RETRY",
-      "score": null,
-      "reason": "could not measure (error) — this is an access problem, not a demand problem",
-      "next_probe": "run the same command with YOUTUBE_API_KEY set (free, 10k units/day), or from a residential network / a browser session. A datacenter IP gets throttled by YouTube by design — that is the tool telling the truth, not the topic failing.",
-      "parts": {},
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 53.4,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 57.9,
+        "winnability": 70,
+        "mechanism": 25,
+        "fit": null,
+        "timing": 55
+      },
       "strongest_against": [
-        "no data: <HTTPError 400: 'Bad Request'>"
+        "the sample is too new to judge — median 74 views with 100% uploaded in the last 30 days, so 'nobody owns it' may just mean 'nobody has watched it yet'"
       ],
-      "saturation": null,
-      "confidence": 0,
-      "mechanism": null,
-      "vph_median": null
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.477,
+        "winner_ratio": 24.5,
+        "fresh_share_30d": 1,
+        "median_views": 74,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 25,
+      "vph_median": 2
     },
     {
       "topic": "faceless youtube channel",
@@ -201,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (6%) is the conversion surface",
-      "at": "2026-11-03T18:43:16.640Z",
+      "at": "2026-11-03T18:49:56.856Z",
       "asks": [
         {
           "label": "asked for a sequel",
