@@ -48,7 +48,7 @@ yt_intel/
   decide.py      GO / SHARPEN / NO / RETRY with parts, objections, missing signals, next probe
   ideas.py       trend family + 12 evergreen curiosity structures + WTF bank
   cli.py         demand · topic · channel · reverse · style · ideas · lanes
-  test_offline.py 73 assertions, no network required
+  test_offline.py 82 assertions, no network required
 ```
 
 ### The four verdicts, and why RETRY exists
@@ -121,13 +121,25 @@ are now structurally different.
    change moves 3 cuts / 5.0 cpm to 4 cuts / 6.7 cpm.
    **Still open:** solid-colour concat is the easiest possible case. Graded footage with fast
    pans and dissolves needs its own reference pass before these numbers are quoted publicly.
-5. **Multi-country trending** — keyless trending pages differ per region; not implemented.
-6. **Scheduled research** — the workflow runs (`.github/workflows/yt-intel.yml`, Mondays
+5. **Thumbnail forensics — live, and it found two bugs in itself.** `thumbprint.py` had never
+   seen a real thumbnail until a CI step was added for it (`scripts/thumbnails.py` →
+   `public/yt-intel/thumbnails.json`); `i.ytimg.com` is TLS-blocked in the agent's sandbox, and
+   the module correctly reported `unavailable` rather than inventing a profile. On 12 real
+   thumbnails from the newest measured topic:
+
+   - the "dominant colour" was near-black in 10 of 12 (`#0c1213`, `#080c0c`, …) — a biggest-RGB-cube
+     vote that near-black wins in every thumbnail ever made. Now hue-clustered, 15° bins, luma
+     floor, 4% cluster minimum.
+   - `hue_families` listed 22° and 7° as different families with 6 each, totalling 22 over a
+     12-thumbnail sample. Now bucketed, then named; the totals must partition the sample.
+   - the current read: `face-led: people are the product; house colour is red (6/12)`.
+6. **Multi-country trending** — keyless trending pages differ per region; not implemented.
+7. **Scheduled research** — the workflow runs (`.github/workflows/yt-intel.yml`, Mondays
    04:00 UTC, plus push on `yt-intel-trigger.txt`) and now executes the **API lane**: exact
    view/like/comment counts, ISO publish times, quota accounting, and comment mining. Every
    run writes `public/yt-intel/lanes.json` (lane, key presence, which secret name, quota
    used) so the state of the pipeline is readable from the repo rather than from a log.
-7. **`search.list` order** — every report so far is relevance-ordered, which is why a
+8. **`search.list` order** — every report so far is relevance-ordered, which is why a
    2-year-old video can sit at rank 3 in a "2026" topic. `--order date` and
    `--order viewCount` exist and must be run to read fresh-wave velocity rather than
    all-time authority.
@@ -139,9 +151,11 @@ are now structurally different.
 ```bash
 export YOUTUBE_API_KEY=...        # free, Google Cloud console, YouTube Data API v3
 python -m yt_intel lanes          # expect: lane api, quota 10000
-python -m yt_intel.test_offline   # 73 assertions, no network
+python -m yt_intel.test_offline   # 82 assertions, no network
 python -m yt_intel topic "ai video editing" --limit 30 --json public/yt-intel/ai-video-editing.json
 node scripts/yt-index.mjs         # rebuild the index the UI reads
+python scripts/thumbnails.py   # needs a network that serves i.ytimg.com
+python -m yt_intel.calibrate_style  # cut-detector calibration on synthetic films
 python -m yt_intel style reference.mp4 --compare deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4
 ```
 
