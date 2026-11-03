@@ -186,7 +186,7 @@ def cmd_topic(args):
         # Everything in the report is downstream of this one fetch. Without a timestamp the
         # index cannot order reports by recency, and a report looks timeless when it is stale.
         "fetched_at": int(time.time()),
-        "topic": args.topic, "lane": corpus.lane, "status": corpus.status,
+        "topic": args.topic, "lane": corpus.lane, "order": args.order, "status": corpus.status,
         "detail": corpus.detail, "count": len(rows),
         "rows": rows, "saturation": sat, "title_signal": t_sig,
         "word_signal": words, "funnel": fun, "psych": psych,
@@ -357,7 +357,7 @@ def main(argv=None):
     s = sub.add_parser("topic", help="saturation + title math + hook patterns + verdict")
     s.add_argument("topic")
     s.add_argument("--limit", type=int, default=30)
-    s.add_argument("--order", default="relevance", choices=["relevance", "viewCount", "date"])
+    s.add_argument("--order", default="relevance", choices=sorted(client.SP))
     s.add_argument("--no-demand", action="store_true")
     s.add_argument("--no-trends", action="store_true")
     s.add_argument("--json", help="write the full report to this path")

@@ -141,6 +141,19 @@ def autocomplete(q: str, gl: str = "US") -> list[str]:
 _VIDEO_ID = re.compile(r'"videoId":"([A-Za-z0-9_-]{11})"')
 
 
+# YouTube search filters, as the `sp` query parameter. These are the exact base64 tokens the
+# UI puts in the URL when you click the filter chip; the keyless lane has no other way to ask.
+# Verified against the tokens YouTube's own filter menu produces (type=video, sort, upload).
+SP = {
+    "relevance": "",
+    "date": "CAI%3D",            # sort by upload date
+    "viewCount": "CAM%3D",       # sort by view count
+    "thisMonth": "EgQIBBAB",     # this month
+    "thisWeek": "EgQIBRAB",      # this week
+    "videoOnly": "EgIQAQ%3D%3D",  # videos only
+}
+
+
 def _web_search_page(q: str, sp: str = "") -> str:
     from urllib.parse import quote
     url = f"https://www.youtube.com/results?search_query={quote(q)}"
@@ -265,14 +278,17 @@ def search(q: str, limit: int = 30, order: str = "relevance", published_after_da
         except Exception as e:  # noqa: BLE001 - report, never crash a corpus run
             return Corpus("search", "api", q, [], "error", repr(e))
 
+    # The keyless lane used to ignore `order` completely, then sort locally by viewCount when
+    # asked — which reads as "sorted by views" while actually being relevance-ordered, truncated
+    # to 20 rows. That is a lie the caller cannot see. Ask the server instead.
     try:
-        rows = _rich_grid(_web_search_page(q))
+        rows = _rich_grid(_web_search_page(q, SP.get(order, "")))
     except http.Blocked as e:
         return Corpus("search", "web", q, [], "blocked", str(e))
     except http.RateLimited as e:
         return Corpus("search", "web", q, [], "rate_limited", str(e))
-    if order == "viewCount":
-        rows.sort(key=lambda r: r.get("views") or 0, reverse=True)
+    if order not in SP:
+        return Corpus("search", "web", q, [], "error", f"unknown order {order!r}; known: {sorted(SP)}")
     return Corpus("search", "web", q, rows[:limit], "ok" if rows else "empty")
 
 

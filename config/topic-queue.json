@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-11-03",
-  "note": "The queue the weekly research run walks, top-down. Each entry is a real question we want answered before spending a production day. Edit this file, not the workflow. `order` is optional: 'relevance' (default) shows who holds the topic, 'date' shows what is landing right now, 'viewCount' shows the all-time ceiling.",
+  "note": "The queue the weekly research run walks, top-down. Each entry is a real question we want answered before spending a production day. Edit this file, not the workflow. `order` is optional: 'relevance' (default) shows who holds the topic, 'date' shows what is landing right now, 'viewCount' shows the all-time ceiling. The keyless lane honours the same filters (`thisMonth`, `thisWeek`) as the API, because on a fast-moving topic a relevance sample is a museum.",
   "max_per_run": 4,
   "topics": [
     {
@@ -26,15 +26,15 @@
     },
     {
       "topic": "shorts retention hook",
-      "why": "directly feeds the hook-lab gate; date order reads the current wave, not the all-time winners",
+      "why": "directly feeds the hook-lab gate; relevance order returned a 2-3 year old sample, so this asks for the last month specifically and judges the current wave instead",
       "limit": 20,
-      "order": "date"
+      "order": "thisMonth"
     },
     {
       "topic": "ai b roll generation",
       "why": "production cost lever for the studio",
       "limit": 20,
-      "order": "date"
+      "order": "thisMonth"
     }
   ]
 }

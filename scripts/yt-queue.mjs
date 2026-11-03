@@ -89,8 +89,8 @@ for (const [i, item] of plan.entries()) {
   try { previous = previousRaw ? JSON.parse(previousRaw) : null; } catch { previous = null; }
   try {
     // `order` lets the queue ask the same question a different way: relevance answers "who
-    // holds this topic", `date` answers "what is landing right now". Both matter, and they
-    // disagree — so a topic can carry `"order": "date"` rather than being re-typed by hand.
+    // holds this topic", `thisMonth` answers "what is landing right now". Both matter, and
+    // they disagree — so a topic carries its own filter rather than being re-typed by hand.
     const extra = item.order ? ['--order', item.order] : [];
     const { stdout } = await run(PY, ['-m', 'yt_intel', 'topic', item.topic, '--limit', limit, '--json', file, ...extra],
       { maxBuffer: 32 * 1024 * 1024 });
