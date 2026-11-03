@@ -312,8 +312,8 @@ const fmtCount = (n) => (n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(
 /**
  * ResearchPanel — the yt_intel bridge, on screen.
  *
- * It reads `public/yt-intel/index.json` (written by `scripts/yt-intel.mjs`, which is only
- * a bridge to the Python tool). Three states, all honest:
+ * It reads `public/yt-intel/index.json` (written by `scripts/yt-index.mjs`, which is only a
+ * bridge to the Python tool). Three states, all honest:
  *   no index      -> explain the two commands that produce one
  *   verdict RETRY -> say the sample never arrived, and name the fix (API key / network)
  *   verdict GO/…  -> score, parts, objections, next probe
@@ -351,8 +351,8 @@ function ResearchPanel({ onNavigate }) {
           <b>No research has been run yet.</b>
           <span>Two commands produce a report. Nothing is generated in the browser, so what you see here is always a real measurement.</span>
           <div className="research-cmd mono">
-            <code>python -m yt_intel topic "your topic" --limit 30 --json public/yt-intel/your-topic.json</code>
-            <code>python scripts/yt-intel.mjs topic "your topic"</code>
+            <code>npm run yt:topic -- "your topic"</code>
+            <code>python -m yt_intel topic "your topic" --limit 30 --order thisMonth --json public/yt-intel/your-topic.json</code>
           </div>
         </div>
       )}

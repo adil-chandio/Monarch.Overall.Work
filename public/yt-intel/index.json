@@ -1,11 +1,12 @@
 {
-  "updated": "2026-11-03T14:54:28.977Z",
+  "updated": "2026-11-03T14:57:43.386Z",
   "reports": [
     {
       "topic": "youtube automation",
       "at": "2026-11-03T14:54:28.000Z",
       "file": "youtube-automation.json",
       "lane": "web",
+      "order": "relevance",
       "status": "ok",
       "count": 20,
       "verdict": "SHARPEN",
@@ -33,18 +34,14 @@
       },
       "confidence": 0.85,
       "mechanism": 75,
-      "vph_median": 45,
-      "title_signal": {
-        "strength": "weak",
-        "read": "titles containing a number performed -78% vs those without (n=20, R2=0.25)",
-        "n": 20
-      }
+      "vph_median": 45
     },
     {
       "topic": "video editing workflow",
       "at": "2026-11-03T14:54:16.000Z",
       "file": "video-editing-workflow.json",
       "lane": "web",
+      "order": "relevance",
       "status": "ok",
       "count": 20,
       "verdict": "SHARPEN",
@@ -72,18 +69,14 @@
       },
       "confidence": 0.85,
       "mechanism": 50,
-      "vph_median": 8,
-      "title_signal": {
-        "strength": "weak",
-        "read": "titles containing a number performed -47% vs those without (n=20, R2=0.04)",
-        "n": 20
-      }
+      "vph_median": 8
     },
     {
       "topic": "faceless youtube channel",
       "at": "2026-11-03T14:54:04.000Z",
       "file": "faceless-youtube-channel.json",
       "lane": "web",
+      "order": "relevance",
       "status": "ok",
       "count": 20,
       "verdict": "SHARPEN",
@@ -110,18 +103,14 @@
       },
       "confidence": 0.85,
       "mechanism": 50,
-      "vph_median": 103,
-      "title_signal": {
-        "strength": "weak",
-        "read": "titles containing a number performed +212% vs those without (n=20, R2=0.19)",
-        "n": 20
-      }
+      "vph_median": 103
     },
     {
       "topic": "ai video editing",
       "at": "2026-11-03T14:53:52.000Z",
       "file": "ai-video-editing.json",
       "lane": "web",
+      "order": "relevance",
       "status": "ok",
       "count": 17,
       "verdict": "GO",
@@ -148,14 +137,14 @@
       },
       "confidence": 0.85,
       "mechanism": 25,
-      "vph_median": 46,
-      "title_signal": null
+      "vph_median": 46
     },
     {
       "topic": "shorts retention hook",
       "at": "2026-11-03T14:52:28.000Z",
       "file": "shorts-retention-hook.json",
       "lane": "web",
+      "order": "relevance",
       "status": "ok",
       "count": 14,
       "verdict": "NO",
@@ -182,14 +171,14 @@
       },
       "confidence": 0.65,
       "mechanism": null,
-      "vph_median": 17,
-      "title_signal": null
+      "vph_median": 17
     },
     {
       "topic": "ai b roll generation",
       "at": "2026-11-03T14:46:44.000Z",
       "file": "ai-b-roll-generation.json",
       "lane": "web",
+      "order": "thisMonth",
       "status": "ok",
       "count": 20,
       "verdict": "SHARPEN",
@@ -216,12 +205,7 @@
       },
       "confidence": 0.75,
       "mechanism": 50,
-      "vph_median": 0,
-      "title_signal": {
-        "strength": "weak",
-        "read": "titles containing a number performed +459% vs those without (n=20, R2=0.36)",
-        "n": 20
-      }
+      "vph_median": 0
     }
   ]
 }

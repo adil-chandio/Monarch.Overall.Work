@@ -11,6 +11,8 @@
     "ctr": "python3 -m showreel.ctr",
     "yt:lanes": "node scripts/yt-intel.mjs lanes",
     "yt:topic": "node scripts/yt-intel.mjs topic",
+    "yt:comments": "node scripts/yt-intel.mjs comments",
+    "yt:queue": "node scripts/yt-queue.mjs",
     "yt:index": "node scripts/yt-index.mjs",
     "test:yt": "python3 -m yt_intel.test_offline",
     "yt:doctor": "python3 -m yt_intel doctor"

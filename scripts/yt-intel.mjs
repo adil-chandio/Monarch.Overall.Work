@@ -9,8 +9,9 @@
  */
 import { execFile } from 'node:child_process';
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
+import { buildIndex } from './yt-index.mjs';
 
 const run = promisify(execFile);
 const PY = process.env.PYTHON_BIN || 'python3';
@@ -20,14 +21,29 @@ export async function topicReport(topic, { limit = 30, out } = {}) {
   mkdirSync(OUT, { recursive: true });
   const slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
   const file = out || join(OUT, `${slug}.json`);
+  // A retry is not a measurement. If this run could not fetch (no key, throttled IP), keep
+  // the last report that actually measured something — otherwise one bad hour replaces a
+  // real result with a stub that reads like a verdict. Same rule as scripts/yt-queue.mjs.
+  const before = existsSync(file) ? readFileSync(file, 'utf8') : null;
   const { stdout, stderr } = await run(
     PY,
     ['-m', 'yt_intel', 'topic', topic, '--limit', String(limit), '--json', file],
     { maxBuffer: 32 * 1024 * 1024 },
   );
-  const data = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null;
-  if (data) writeIndex(topic, file, data);
-  return { file, stdout: stdout.trim(), stderr: stderr.trim(), data };
+  let data = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null;
+  let kept = false;
+  if (data && data.status !== 'ok' && before) {
+    let prev = null;
+    try { prev = JSON.parse(before); } catch { prev = null; }
+    if (prev?.status === 'ok' && prev?.count > 0) {
+      if (!prev.fetched_at) prev.fetched_at = Math.floor(Date.now() / 1000);
+      writeFileSync(file, JSON.stringify(prev, null, 2) + '\n');
+      data = prev;
+      kept = true;
+    }
+  }
+  if (data) writeIndex();
+  return { file, stdout: stdout.trim(), stderr: stderr.trim(), data, kept };
 }
 
 export async function demandReport(topic) {
@@ -41,34 +57,13 @@ export async function lanes() {
 }
 
 /**
- * The index the UI reads. Small, newest-first, capped: it is a menu, not the archive —
- * each entry points at the full report file next to it.
+ * The index the UI reads is built in one place only — `scripts/yt-index.mjs`.
+ * This used to keep a second, subtly different copy here (no confidence, no saturation
+ * shape, and every card timestamped with the current clock). Importing the builder is the
+ * fix: one file, one shape, no drift.
  */
-export function writeIndex(topic, reportPath, data) {
-  mkdirSync(OUT, { recursive: true });
-  const file = join(OUT, 'index.json');
-  let current = { reports: [] };
-  if (existsSync(file)) {
-    try { current = JSON.parse(readFileSync(file, 'utf8')); } catch { current = { reports: [] }; }
-  }
-  const d = data?.decision || {};
-  const entry = {
-    topic,
-    at: new Date().toISOString(),
-    file: reportPath.split(/[\\/]/).slice(-1)[0],
-    lane: data?.lane || 'unknown',
-    status: data?.status || 'unknown',
-    count: data?.count ?? 0,
-    verdict: d.verdict || null,
-    score: d.score ?? null,
-    reason: d.reason || '',
-    next_probe: d.next_probe || '',
-    parts: d.parts || {},
-    strongest_against: d.strongest_against || [],
-  };
-  const reports = [entry, ...(current.reports || []).filter((r) => r.topic !== topic)].slice(0, 40);
-  writeFileSync(file, JSON.stringify({ updated: entry.at, reports }, null, 2) + '\n');
-  return file;
+export function writeIndex() {
+  return buildIndex(null, OUT);
 }
 
 /** Append a measurement to the local ledger — one JSONL row per run, never overwritten. */
@@ -87,13 +82,18 @@ if (process.argv[1]?.endsWith('yt-intel.mjs')) {
     topicReport(rest.join(' ')).then((r) => {
       const d = r.data?.decision;
       console.log(`${topicReport.name}: ${r.file}`);
+      if (r.kept) console.log('  (could not re-measure; kept the previous measured report)');
       if (d) console.log(`  verdict ${d.verdict} ${d.score} — ${d.reason}`);
       else console.log(`  ${r.stdout}`);
       if (r.stderr) console.error(r.stderr);
     }).catch((e) => { console.error(String(e.message).slice(0, 500)); process.exit(1); });
+  } else if (cmd === 'comments') {
+    run(PY, ['-m', 'yt_intel', 'comments', rest[0] || '', '--limit', '100'])
+      .then(({ stdout, stderr }) => { console.log(stdout.trim()); if (stderr) console.error(stderr); })
+      .catch((e) => { console.error(String(e.message).slice(0, 500)); process.exit(1); });
   } else if (cmd === 'lanes') {
     lanes().then((l) => console.log(JSON.stringify(l, null, 2))).catch((e) => { console.error(e.message); process.exit(1); });
   } else {
-    console.log('usage: node scripts/yt-intel.mjs topic "<topic>" | lanes');
+    console.log('usage: node scripts/yt-intel.mjs topic "<topic>" | comments <videoId> | lanes');
   }
 }
