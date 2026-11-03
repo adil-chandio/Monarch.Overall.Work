@@ -80,6 +80,19 @@ def t_title_signal_recovers():
     ok("reports fit", 0 <= r["fit"]["r2"] <= 1, r["fit"])
 
 
+def t_order_vocabulary():
+    """Both lanes must understand the same words for 'what is landing right now'."""
+    ok("thisMonth maps to date order", client.normalise_order("thisMonth") == "date")
+    ok("thisMonth sets a 30-day window", client.API_WINDOW_DAYS["thisMonth"] == 30)
+    ok("thisWeek sets a 7-day window", client.API_WINDOW_DAYS["thisWeek"] == 7)
+    ok("every keyless filter is accepted", all(o in client.API_ORDER for o in client.SP))
+    try:
+        client.normalise_order("lastQuarter")
+        ok("nonsense is rejected", False)
+    except ValueError:
+        ok("nonsense is rejected", True)
+
+
 def t_no_secret_escapes():
     """An error string is committed to public JSON — the key must never be inside it."""
     leaky = "gave up on https://www.googleapis.com/youtube/v3/channels?part=x&key=AIzaSECRET123"
@@ -211,7 +224,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")

@@ -153,6 +153,22 @@ SP = {
     "videoOnly": "EgIQAQ%3D%3D",  # videos only
 }
 
+# The two lanes accept different words for the same intent: the Data API has
+# order={relevance,date,rating,title,videoCount} plus a `publishedAfter` timestamp, while the
+# keyless lane has base64 filter tokens. Passing one lane's vocabulary to the other is how
+# `--order thisMonth` on a keyed machine returned HTTP 400 and became a RETRY with no
+# explanation. Normalise here, once.
+API_ORDER = {"relevance": "relevance", "viewCount": "viewCount", "date": "date",
+             "thisMonth": "date", "thisWeek": "date", "videoOnly": "relevance"}
+API_WINDOW_DAYS = {"thisMonth": 30, "thisWeek": 7}
+
+
+def normalise_order(order: str) -> str:
+    """Map the shared vocabulary onto the Data API's, or fail loudly."""
+    if order not in SP:
+        raise ValueError(f"unknown order {order!r}; known: {sorted(SP)}")
+    return API_ORDER[order]
+
 
 def _web_search_page(q: str, sp: str = "") -> str:
     from urllib.parse import quote
@@ -273,12 +289,23 @@ def _from_renderer(v: dict) -> dict:
 
 
 def search(q: str, limit: int = 30, order: str = "relevance", published_after_days: int = 0) -> Corpus:
-    """Search videos. API lane when a key exists, keyless web lane otherwise."""
+    """Search videos. API lane when a key exists, keyless web lane otherwise.
+
+    `order` is the shared vocabulary (see SP): `thisMonth` / `thisWeek` mean "sorted newest,
+    published within the window", and both lanes understand them.
+    """
     if lane() == "api":
-        params = {"part": "snippet", "q": q, "type": "video", "maxResults": min(50, limit), "order": order}
+        try:
+            api_order = normalise_order(order)
+        except ValueError as e:
+            return Corpus("search", "api", q, [], "error", str(e))
+        published_after_days = published_after_days or API_WINDOW_DAYS.get(order, 0)
+
+        params = {"part": "snippet", "q": q, "type": "video",
+                  "maxResults": min(50, limit), "order": api_order}
         if published_after_days:
             import datetime as dt
-            since = dt.datetime.utcnow() - dt.timedelta(days=published_after_days)
+            since = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=published_after_days)
             params["publishedAfter"] = since.strftime("%Y-%m-%dT%H:%M:%SZ")
         try:
             data = _api("search", params, "search")

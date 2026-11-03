@@ -18,7 +18,7 @@ python -m yt_intel channel @mkbhd                       # roster + thumbnail fin
 python -m yt_intel reverse dQw4w9WgXcQ                  # teardown a video that won
 python -m yt_intel comments dQw4w9WgXcQ                 # mine the comment field (API lane)
 python -m yt_intel ideas   "ai video editing"            # trend + evergreen families
-python -m yt_intel.test_offline                         # 68 assertions, no network needed
+python -m yt_intel.test_offline                         # 73 assertions, no network needed
 ```
 
 ## What each module measures
@@ -57,5 +57,5 @@ yt_intel/
   decide.py      greenlight decision with objections
   ideas.py       idea families + WTF bank
   cli.py         every command above
-  test_offline.py  68 assertions, no network
+  test_offline.py  73 assertions, no network
 ```
