@@ -9,7 +9,20 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, rmSync, cpSync, existsSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const [, , repo, slugArg, licenseNote = ''] = process.argv;
+const argv = process.argv.slice(2);
+const opt = (name) => {
+  const i = argv.indexOf(`--${name}`);
+  if (i === -1) return null;
+  const v = argv[i + 1];
+  argv.splice(i, 2);
+  return v ?? true;
+};
+// include globs, e.g. --include data/** --include prompts/**
+const includes = [];
+for (let i = argv.length - 1; i >= 0; i -= 1) {
+  if (argv[i] === '--include') { includes.unshift(argv[i + 1]); argv.splice(i, 2); }
+}
+const [repo, slugArg, licenseNote = ''] = argv;
 const slug = slugArg || repo.split('/')[1].toLowerCase();
 const root = process.cwd();
 const tmp = join(root, '.harvest', slug);
@@ -17,7 +30,8 @@ const dest = join(root, 'skills', slug);
 
 const sh = (cmd, args, opts = {}) => execFileSync(cmd, args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, ...opts });
 
-const sha = sh('gh', ['api', `repos/${repo}/commits/HEAD`, '--jq', '.sha']).trim();
+const defaultBranch = sh('gh', ['api', `repos/${repo}`, '--jq', '.default_branch']).trim();
+const sha = sh('gh', ['api', `repos/${repo}/commits/${defaultBranch}`, '--jq', '.sha']).trim();
 
 rmSync(tmp, { recursive: true, force: true });
 mkdirSync(tmp, { recursive: true });
@@ -26,10 +40,13 @@ try {
   sh('git', ['clone', '--depth', '1', '--filter=blob:none', '--no-checkout', `https://github.com/${repo}.git`, tmp]);
   sh('git', ['-C', tmp, 'sparse-checkout', 'init', '--no-cone']);
   writeFileSync(join(tmp, '.git', 'info', 'sparse-checkout'), [
-    '/SKILL.md', '/AGENTS.md', '/CLAUDE.md', '/README.md', '/LICENSE*', '/NOTICE*',
+    '/SKILL.md', '/AGENTS.md', '/CLAUDE.md', '/README.md', '/LICENSE*', '/NOTICE*', '/ROADMAP.md',
     '/*/SKILL.md', '/*/*/SKILL.md', '/*/*/*/SKILL.md', '/*/*/*/*/SKILL.md',
     '/skills/**', '/references/**', '/*/references/**', '/*/*/references/**',
     '/scripts/**', '/*/scripts/**',
+    '/.agents/skills/**', '/.claude/skills/**', '/.codex/skills/**',
+    '/docs/**', '/docs/adr/**', '/assets/scripts/**',
+    ...includes.map((g) => `/${g}`),
   ].join('\n'));
   sh('git', ['-C', tmp, 'checkout', '--quiet']);
 } catch (error) {
@@ -75,4 +92,4 @@ const header = `# ${repo}
 writeFileSync(join(dest, 'MONARCH-PROVENANCE.md'), header);
 
 rmSync(tmp, { recursive: true, force: true });
-console.log(JSON.stringify({ repo, slug, sha, files, skillFiles, dropped, brokenLinks: droppedLinks, ok: true }));
+console.log(JSON.stringify({ repo, slug, sha, files, skillFiles, dropped, brokenLinks: droppedLinks, includes, ok: true }));

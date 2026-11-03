@@ -43,6 +43,9 @@ const PACK_SPACE = {
   'claude-skills': 'ops', 'wshobson-agents': 'ops', ponytail: 'ops', 'planning-with-files': 'ops',
   'skill-seekers': 'ops', 'prompt-master': 'ops', 'book-to-skill': 'ops', 'elephant-goldfish': 'ops',
   'website-cloner': 'monarch-studio', 'html-anything': 'monarch-studio',
+  openmontage: 'monarch-studio', filmcraft: 'monarch-studio', zzfx: 'monarch-studio',
+  pyloudnorm: 'monarch-studio', tonejs: 'monarch-studio', 'monarch-video-lab': 'monarch-studio',
+  'opus55-video-vault': 'monarch-studio',
 };
 
 const KEYWORD_SPACE = [

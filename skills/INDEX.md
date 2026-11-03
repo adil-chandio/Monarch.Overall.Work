@@ -2,17 +2,17 @@
 
 Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 
-**786 skills across 24 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
+**931 skills across 26 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
 
 ## Routing
 
 | Space | Skills | Packs |
 |---|---|---|
-| `ops` | 648 | agent-reach, book-to-skill, claude-skills, deep-research, elephant-goldfish, ffmpeg-skill, humanizer, last30days, marketingskills, planning-with-files, ponytail, prompt-master, scrapling, skill-seekers, wshobson-agents |
+| `ops` | 650 | agent-reach, book-to-skill, claude-skills, deep-research, elephant-goldfish, ffmpeg-skill, humanizer, last30days, marketingskills, openmontage, planning-with-files, ponytail, prompt-master, scrapling, skill-seekers, wshobson-agents |
+| `monarch-studio` | 185 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, monarch-video-lab, openmontage, video-shotcraft, vox-collage-motion, wshobson-agents |
 | `personal-brand` | 80 | baoyu-skills, claude-skills, marketingskills, wshobson-agents |
-| `monarch-studio` | 43 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, video-shotcraft, vox-collage-motion, wshobson-agents |
 | `portfolio` | 10 | claude-skills, marketingskills, website-cloner, wshobson-agents |
-| `yt-automation` | 5 | baoyu-skills, claude-skills, html-video, wshobson-agents |
+| `yt-automation` | 6 | baoyu-skills, claude-skills, html-video, openmontage, wshobson-agents |
 
 ## All skills
 
@@ -60,6 +60,148 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `reverse-any-video` | hyperframes | 5.0 KB | `skills/hyperframes/reverse-any-video/SKILL.md` |
 | `seam-craft` | hyperframes | 4.8 KB | `skills/hyperframes/seam-craft/SKILL.md` |
 | `video` | marketingskills | 16.9 KB | `skills/marketingskills/skills/video/SKILL.md` |
+| `monarch-mix-master` | monarch-video-lab | 5.2 KB | `skills/monarch-video-lab/mix-master/SKILL.md` |
+| `monarch-motion-graphics` | monarch-video-lab | 6.4 KB | `skills/monarch-video-lab/motion-graphics/SKILL.md` |
+| `monarch-music-score` | monarch-video-lab | 7.4 KB | `skills/monarch-video-lab/music-score/SKILL.md` |
+| `monarch-sfx-library` | monarch-video-lab | 4.6 KB | `skills/monarch-video-lab/sfx-library/SKILL.md` |
+| `monarch-sound-design` | monarch-video-lab | 9.0 KB | `skills/monarch-video-lab/sound-design/SKILL.md` |
+| `3d-asset-generation` | openmontage | 4.8 KB | `skills/openmontage/.agents/skills/3d-asset-generation/SKILL.md` |
+| `acestep` | openmontage | 9.0 KB | `skills/openmontage/.agents/skills/acestep/SKILL.md` |
+| `acestep` | openmontage | 9.0 KB | `skills/openmontage/.claude/skills/acestep/SKILL.md` |
+| `agents` | openmontage | 9.9 KB | `skills/openmontage/.agents/skills/agents/SKILL.md` |
+| `agents` | openmontage | 9.9 KB | `skills/openmontage/.claude/skills/agents/SKILL.md` |
+| `ai-video-gen` | openmontage | 11.6 KB | `skills/openmontage/.agents/skills/ai-video-gen/SKILL.md` |
+| `ai-video-gen` | openmontage | 11.0 KB | `skills/openmontage/.claude/skills/ai-video-gen/SKILL.md` |
+| `atlas-cloud` | openmontage | 4.5 KB | `skills/openmontage/.agents/skills/atlas-cloud/SKILL.md` |
+| `avatar-video` | openmontage | 6.5 KB | `skills/openmontage/.agents/skills/avatar-video/SKILL.md` |
+| `avatar-video` | openmontage | 6.5 KB | `skills/openmontage/.claude/skills/avatar-video/SKILL.md` |
+| `azure-speech-to-text` | openmontage | 5.2 KB | `skills/openmontage/.agents/skills/azure-speech-to-text/SKILL.md` |
+| `azure-speech-to-text` | openmontage | 5.2 KB | `skills/openmontage/.claude/skills/azure-speech-to-text/SKILL.md` |
+| `azure-text-to-speech` | openmontage | 5.4 KB | `skills/openmontage/.agents/skills/azure-text-to-speech/SKILL.md` |
+| `azure-text-to-speech` | openmontage | 5.4 KB | `skills/openmontage/.claude/skills/azure-text-to-speech/SKILL.md` |
+| `beautiful-mermaid` | openmontage | 5.0 KB | `skills/openmontage/.agents/skills/beautiful-mermaid/SKILL.md` |
+| `beautiful-mermaid` | openmontage | 5.0 KB | `skills/openmontage/.claude/skills/beautiful-mermaid/SKILL.md` |
+| `bfl-api` | openmontage | 9.7 KB | `skills/openmontage/.agents/skills/bfl-api/SKILL.md` |
+| `bfl-api` | openmontage | 9.7 KB | `skills/openmontage/.claude/skills/bfl-api/SKILL.md` |
+| `canvas-procedural-animation` | openmontage | 1.3 KB | `skills/openmontage/.agents/skills/canvas-procedural-animation/SKILL.md` |
+| `character-animation-qa` | openmontage | 1.5 KB | `skills/openmontage/.agents/skills/character-animation-qa/SKILL.md` |
+| `character-rigging` | openmontage | 1.8 KB | `skills/openmontage/.agents/skills/character-rigging/SKILL.md` |
+| `comfyui` | openmontage | 7.9 KB | `skills/openmontage/.agents/skills/comfyui/SKILL.md` |
+| `create-video` | openmontage | 5.2 KB | `skills/openmontage/.agents/skills/create-video/SKILL.md` |
+| `create-video` | openmontage | 5.2 KB | `skills/openmontage/.claude/skills/create-video/SKILL.md` |
+| `d3-viz` | openmontage | 21.3 KB | `skills/openmontage/.agents/skills/d3-viz/SKILL.md` |
+| `d3-viz` | openmontage | 21.3 KB | `skills/openmontage/.claude/skills/d3-viz/SKILL.md` |
+| `dashscope` | openmontage | 6.0 KB | `skills/openmontage/.agents/skills/dashscope/SKILL.md` |
+| `elevenlabs` | openmontage | 13.0 KB | `skills/openmontage/.agents/skills/elevenlabs/SKILL.md` |
+| `elevenlabs` | openmontage | 10.7 KB | `skills/openmontage/.claude/skills/elevenlabs/SKILL.md` |
+| `faceswap` | openmontage | 7.1 KB | `skills/openmontage/.agents/skills/faceswap/SKILL.md` |
+| `faceswap` | openmontage | 7.1 KB | `skills/openmontage/.claude/skills/faceswap/SKILL.md` |
+| `ffmpeg` | openmontage | 12.9 KB | `skills/openmontage/.agents/skills/ffmpeg/SKILL.md` |
+| `ffmpeg` | openmontage | 12.9 KB | `skills/openmontage/.claude/skills/ffmpeg/SKILL.md` |
+| `fish-audio-tts` | openmontage | 5.3 KB | `skills/openmontage/.agents/skills/fish-audio-tts/SKILL.md` |
+| `flux-best-practices` | openmontage | 4.2 KB | `skills/openmontage/.agents/skills/flux-best-practices/SKILL.md` |
+| `flux-best-practices` | openmontage | 4.2 KB | `skills/openmontage/.claude/skills/flux-best-practices/SKILL.md` |
+| `framer-motion` | openmontage | 3.2 KB | `skills/openmontage/.agents/skills/framer-motion/SKILL.md` |
+| `framer-motion` | openmontage | 3.2 KB | `skills/openmontage/.claude/skills/framer-motion/SKILL.md` |
+| `gemini-omni` | openmontage | 9.7 KB | `skills/openmontage/.agents/skills/gemini-omni/SKILL.md` |
+| `grok-media` | openmontage | 3.7 KB | `skills/openmontage/.agents/skills/grok-media/SKILL.md` |
+| `gsap-core` | openmontage | 14.4 KB | `skills/openmontage/.agents/skills/gsap-core/SKILL.md` |
+| `gsap-frameworks` | openmontage | 6.4 KB | `skills/openmontage/.agents/skills/gsap-frameworks/SKILL.md` |
+| `gsap-performance` | openmontage | 4.0 KB | `skills/openmontage/.agents/skills/gsap-performance/SKILL.md` |
+| `gsap-plugins` | openmontage | 20.4 KB | `skills/openmontage/.agents/skills/gsap-plugins/SKILL.md` |
+| `gsap-react` | openmontage | 6.4 KB | `skills/openmontage/.agents/skills/gsap-react/SKILL.md` |
+| `gsap-scrolltrigger` | openmontage | 18.0 KB | `skills/openmontage/.agents/skills/gsap-scrolltrigger/SKILL.md` |
+| `gsap-timeline` | openmontage | 4.3 KB | `skills/openmontage/.agents/skills/gsap-timeline/SKILL.md` |
+| `gsap-utils` | openmontage | 11.8 KB | `skills/openmontage/.agents/skills/gsap-utils/SKILL.md` |
+| `heygen` | openmontage | 5.7 KB | `skills/openmontage/.agents/skills/heygen/SKILL.md` |
+| `heygen` | openmontage | 5.7 KB | `skills/openmontage/.claude/skills/heygen/SKILL.md` |
+| `hyperframes` | openmontage | 16.8 KB | `skills/openmontage/.agents/skills/hyperframes/SKILL.md` |
+| `hyperframes-animation` | openmontage | 7.0 KB | `skills/openmontage/.agents/skills/hyperframes-animation/SKILL.md` |
+| `hyperframes-cli` | openmontage | 9.4 KB | `skills/openmontage/.agents/skills/hyperframes-cli/SKILL.md` |
+| `hyperframes-core` | openmontage | 6.9 KB | `skills/openmontage/.agents/skills/hyperframes-core/SKILL.md` |
+| `hyperframes-creative` | openmontage | 5.3 KB | `skills/openmontage/.agents/skills/hyperframes-creative/SKILL.md` |
+| `hyperframes-media` | openmontage | 11.2 KB | `skills/openmontage/.agents/skills/hyperframes-media/SKILL.md` |
+| `hyperframes-registry` | openmontage | 4.4 KB | `skills/openmontage/.agents/skills/hyperframes-registry/SKILL.md` |
+| `kling-official` | openmontage | 9.2 KB | `skills/openmontage/.agents/skills/kling-official/SKILL.md` |
+| `lottie-bodymovin` | openmontage | 3.6 KB | `skills/openmontage/.agents/skills/lottie-bodymovin/SKILL.md` |
+| `lottie-bodymovin` | openmontage | 3.6 KB | `skills/openmontage/.claude/skills/lottie-bodymovin/SKILL.md` |
+| `ltx2` | openmontage | 7.0 KB | `skills/openmontage/.agents/skills/ltx2/SKILL.md` |
+| `ltx2` | openmontage | 7.0 KB | `skills/openmontage/.claude/skills/ltx2/SKILL.md` |
+| `lyria` | openmontage | 7.8 KB | `skills/openmontage/.agents/skills/lyria/SKILL.md` |
+| `manim-composer` | openmontage | 4.6 KB | `skills/openmontage/.agents/skills/manim-composer/SKILL.md` |
+| `manim-composer` | openmontage | 4.6 KB | `skills/openmontage/.claude/skills/manim-composer/SKILL.md` |
+| `manimce-best-practices` | openmontage | 5.8 KB | `skills/openmontage/.agents/skills/manimce-best-practices/SKILL.md` |
+| `manimce-best-practices` | openmontage | 5.8 KB | `skills/openmontage/.claude/skills/manimce-best-practices/SKILL.md` |
+| `manimgl-best-practices` | openmontage | 7.3 KB | `skills/openmontage/.agents/skills/manimgl-best-practices/SKILL.md` |
+| `manimgl-best-practices` | openmontage | 7.3 KB | `skills/openmontage/.claude/skills/manimgl-best-practices/SKILL.md` |
+| `media-use` | openmontage | 5.6 KB | `skills/openmontage/.agents/skills/media-use/SKILL.md` |
+| `minimax-h3` | openmontage | 2.3 KB | `skills/openmontage/.agents/skills/minimax-h3/SKILL.md` |
+| `motion-graphics` | openmontage | 13.4 KB | `skills/openmontage/.agents/skills/motion-graphics/SKILL.md` |
+| `music` | openmontage | 3.3 KB | `skills/openmontage/.agents/skills/music/SKILL.md` |
+| `music` | openmontage | 3.3 KB | `skills/openmontage/.claude/skills/music/SKILL.md` |
+| `music-to-video` | openmontage | 15.8 KB | `skills/openmontage/.agents/skills/music-to-video/SKILL.md` |
+| `playwright-recording` | openmontage | 12.4 KB | `skills/openmontage/.agents/skills/playwright-recording/SKILL.md` |
+| `playwright-recording` | openmontage | 12.4 KB | `skills/openmontage/.claude/skills/playwright-recording/SKILL.md` |
+| `pose-library-design` | openmontage | 1.4 KB | `skills/openmontage/.agents/skills/pose-library-design/SKILL.md` |
+| `provider-model-refresh` | openmontage | 5.7 KB | `skills/openmontage/.agents/skills/provider-model-refresh/SKILL.md` |
+| `provider-refresh-oct23` | openmontage | 8.4 KB | `skills/openmontage/.agents/skills/provider-refresh-oct23/SKILL.md` |
+| `remotion` | openmontage | 6.0 KB | `skills/openmontage/.agents/skills/remotion/SKILL.md` |
+| `remotion` | openmontage | 6.0 KB | `skills/openmontage/.claude/skills/remotion/SKILL.md` |
+| `remotion-best-practices` | openmontage | 4.1 KB | `skills/openmontage/.agents/skills/remotion-best-practices/SKILL.md` |
+| `remotion-best-practices` | openmontage | 4.1 KB | `skills/openmontage/.claude/skills/remotion-best-practices/SKILL.md` |
+| `remotion-to-hyperframes` | openmontage | 9.9 KB | `skills/openmontage/.agents/skills/remotion-to-hyperframes/SKILL.md` |
+| `seedance-2-0` | openmontage | 17.4 KB | `skills/openmontage/.agents/skills/seedance-2-0/SKILL.md` |
+| `seedance-2-5` | openmontage | 12.4 KB | `skills/openmontage/.agents/skills/seedance-2-5/SKILL.md` |
+| `setup-api-key` | openmontage | 2.8 KB | `skills/openmontage/.agents/skills/setup-api-key/SKILL.md` |
+| `setup-api-key` | openmontage | 2.8 KB | `skills/openmontage/.claude/skills/setup-api-key/SKILL.md` |
+| `sound-effects` | openmontage | 3.9 KB | `skills/openmontage/.agents/skills/sound-effects/SKILL.md` |
+| `sound-effects` | openmontage | 3.9 KB | `skills/openmontage/.claude/skills/sound-effects/SKILL.md` |
+| `speech-to-text` | openmontage | 7.8 KB | `skills/openmontage/.agents/skills/speech-to-text/SKILL.md` |
+| `speech-to-text` | openmontage | 7.8 KB | `skills/openmontage/.claude/skills/speech-to-text/SKILL.md` |
+| `svg-character-animation` | openmontage | 1.6 KB | `skills/openmontage/.agents/skills/svg-character-animation/SKILL.md` |
+| `synthetic-screen-recording` | openmontage | 9.7 KB | `skills/openmontage/.agents/skills/synthetic-screen-recording/SKILL.md` |
+| `tailwind-design-system` | openmontage | 21.8 KB | `skills/openmontage/.agents/skills/tailwind-design-system/SKILL.md` |
+| `tailwind-design-system` | openmontage | 21.8 KB | `skills/openmontage/.claude/skills/tailwind-design-system/SKILL.md` |
+| `text-to-speech` | openmontage | 1.3 KB | `skills/openmontage/.agents/skills/text-to-speech/SKILL.md` |
+| `text-to-speech` | openmontage | 9.5 KB | `skills/openmontage/.claude/skills/text-to-speech/SKILL.md` |
+| `threejs-animation` | openmontage | 12.3 KB | `skills/openmontage/.agents/skills/threejs-animation/SKILL.md` |
+| `threejs-animation` | openmontage | 12.3 KB | `skills/openmontage/.claude/skills/threejs-animation/SKILL.md` |
+| `threejs-fundamentals` | openmontage | 11.3 KB | `skills/openmontage/.agents/skills/threejs-fundamentals/SKILL.md` |
+| `threejs-fundamentals` | openmontage | 11.3 KB | `skills/openmontage/.claude/skills/threejs-fundamentals/SKILL.md` |
+| `threejs-geometry` | openmontage | 13.5 KB | `skills/openmontage/.agents/skills/threejs-geometry/SKILL.md` |
+| `threejs-geometry` | openmontage | 13.5 KB | `skills/openmontage/.claude/skills/threejs-geometry/SKILL.md` |
+| `threejs-interaction` | openmontage | 15.9 KB | `skills/openmontage/.agents/skills/threejs-interaction/SKILL.md` |
+| `threejs-interaction` | openmontage | 15.9 KB | `skills/openmontage/.claude/skills/threejs-interaction/SKILL.md` |
+| `threejs-lighting` | openmontage | 11.7 KB | `skills/openmontage/.agents/skills/threejs-lighting/SKILL.md` |
+| `threejs-lighting` | openmontage | 11.7 KB | `skills/openmontage/.claude/skills/threejs-lighting/SKILL.md` |
+| `threejs-loaders` | openmontage | 13.7 KB | `skills/openmontage/.agents/skills/threejs-loaders/SKILL.md` |
+| `threejs-loaders` | openmontage | 13.7 KB | `skills/openmontage/.claude/skills/threejs-loaders/SKILL.md` |
+| `threejs-materials` | openmontage | 13.1 KB | `skills/openmontage/.agents/skills/threejs-materials/SKILL.md` |
+| `threejs-materials` | openmontage | 13.1 KB | `skills/openmontage/.claude/skills/threejs-materials/SKILL.md` |
+| `threejs-postprocessing` | openmontage | 14.1 KB | `skills/openmontage/.agents/skills/threejs-postprocessing/SKILL.md` |
+| `threejs-postprocessing` | openmontage | 14.1 KB | `skills/openmontage/.claude/skills/threejs-postprocessing/SKILL.md` |
+| `threejs-shaders` | openmontage | 13.7 KB | `skills/openmontage/.agents/skills/threejs-shaders/SKILL.md` |
+| `threejs-shaders` | openmontage | 13.7 KB | `skills/openmontage/.claude/skills/threejs-shaders/SKILL.md` |
+| `threejs-textures` | openmontage | 13.3 KB | `skills/openmontage/.agents/skills/threejs-textures/SKILL.md` |
+| `threejs-textures` | openmontage | 13.3 KB | `skills/openmontage/.claude/skills/threejs-textures/SKILL.md` |
+| `threejs-world-generation` | openmontage | 8.0 KB | `skills/openmontage/.agents/skills/threejs-world-generation/SKILL.md` |
+| `vercel-composition-patterns` | openmontage | 3.1 KB | `skills/openmontage/.agents/skills/vercel-composition-patterns/SKILL.md` |
+| `vercel-composition-patterns` | openmontage | 3.1 KB | `skills/openmontage/.claude/skills/vercel-composition-patterns/SKILL.md` |
+| `vercel-react-best-practices` | openmontage | 7.0 KB | `skills/openmontage/.agents/skills/vercel-react-best-practices/SKILL.md` |
+| `vercel-react-best-practices` | openmontage | 7.0 KB | `skills/openmontage/.claude/skills/vercel-react-best-practices/SKILL.md` |
+| `video-download` | openmontage | 3.5 KB | `skills/openmontage/.agents/skills/video-download/SKILL.md` |
+| `video-download` | openmontage | 3.5 KB | `skills/openmontage/.claude/skills/video-download/SKILL.md` |
+| `video-edit` | openmontage | 3.3 KB | `skills/openmontage/.agents/skills/video-edit/SKILL.md` |
+| `video-edit` | openmontage | 3.3 KB | `skills/openmontage/.claude/skills/video-edit/SKILL.md` |
+| `video-toolkit` | openmontage | 14.8 KB | `skills/openmontage/.agents/skills/video-toolkit/SKILL.md` |
+| `video-toolkit` | openmontage | 14.8 KB | `skills/openmontage/.claude/skills/video_toolkit/SKILL.md` |
+| `video-translate` | openmontage | 10.7 KB | `skills/openmontage/.agents/skills/video-translate/SKILL.md` |
+| `video-translate` | openmontage | 10.7 KB | `skills/openmontage/.claude/skills/video-translate/SKILL.md` |
+| `video-understand` | openmontage | 3.3 KB | `skills/openmontage/.agents/skills/video-understand/SKILL.md` |
+| `video-understand` | openmontage | 3.3 KB | `skills/openmontage/.claude/skills/video-understand/SKILL.md` |
+| `visual-style` | openmontage | 6.1 KB | `skills/openmontage/.agents/skills/visual-style/SKILL.md` |
+| `visual-style` | openmontage | 6.1 KB | `skills/openmontage/.claude/skills/visual-style/SKILL.md` |
+| `website-to-video` | openmontage | 11.8 KB | `skills/openmontage/.agents/skills/website-to-video/SKILL.md` |
 | `video-shotcraft` | video-shotcraft | 21.2 KB | `skills/video-shotcraft/SKILL.md` |
 | `muapi-director` | vox-collage-motion | 2.7 KB | `skills/vox-collage-motion/SKILL.md` |
 | `file-conversion` | wshobson-agents | 8.0 KB | `skills/wshobson-agents/plugins/file-conversion/skills/file-conversion/SKILL.md` |
@@ -478,6 +620,8 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `customer-research` | marketingskills | 14.8 KB | `skills/marketingskills/skills/customer-research/SKILL.md` |
 | `directory-submissions` | marketingskills | 26.5 KB | `skills/marketingskills/skills/directory-submissions/SKILL.md` |
 | `marketing-plan` | marketingskills | 24.9 KB | `skills/marketingskills/skills/marketing-plan/SKILL.md` |
+| `web-design-guidelines` | openmontage | 1.2 KB | `skills/openmontage/.agents/skills/web-design-guidelines/SKILL.md` |
+| `web-design-guidelines` | openmontage | 1.2 KB | `skills/openmontage/.claude/skills/web-design-guidelines/SKILL.md` |
 | `planning-with-files` | planning-with-files | 37.7 KB | `skills/planning-with-files/.agents/skills/planning-with-files/SKILL.md` |
 | `planning-with-files` | planning-with-files | 13.7 KB | `skills/planning-with-files/.codebuddy/skills/planning-with-files/SKILL.md` |
 | `planning-with-files` | planning-with-files | 13.4 KB | `skills/planning-with-files/.codex/skills/planning-with-files/SKILL.md` |
@@ -825,4 +969,5 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `channel-economics` | claude-skills | 12.6 KB | `skills/claude-skills/commercial/skills/channel-economics/SKILL.md` |
 | `youtube-full` | claude-skills | 6.7 KB | `skills/claude-skills/marketing-skill/skills/youtube-full/SKILL.md` |
 | `frame-creative-voltage` | html-video | 3.5 KB | `skills/html-video/templates/frame-creative-voltage/SKILL.md` |
+| `doubao-tts` | openmontage | 4.0 KB | `skills/openmontage/.agents/skills/doubao-tts/SKILL.md` |
 | `shellcheck-configuration` | wshobson-agents | 1.6 KB | `skills/wshobson-agents/plugins/shell-scripting/skills/shellcheck-configuration/SKILL.md` |
