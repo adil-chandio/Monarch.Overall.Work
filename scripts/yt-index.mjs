@@ -60,6 +60,12 @@ export function entryFor(file) {
     // confidence 0.85 and 57 with confidence 0.3 are different instructions.
     confidence: d.confidence ?? null,
     mechanism: d.parts?.mechanism ?? null,
+    // How the sample was asked for. `relevance` shows who owns a topic, `thisMonth` shows
+    // what is landing now, `viewCount` shows the all-time ceiling — three different questions
+    // that produce three different scores. Without this line a report cannot be told apart
+    // from one asked a different way, which is how "median 4 views/hour" and "median 97
+    // views/hour" sat on the same desk looking comparable.
+    order: data.order || 'relevance',
     vph_median: (() => {
       const v = (data.rows || []).map((r) => r.vph).filter((x) => typeof x === 'number' && x > 0);
       if (!v.length) return null;

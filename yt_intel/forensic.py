@@ -288,19 +288,44 @@ def saturation(rows: list[dict]) -> dict:
     top3 = sum(views[:3])
     ages = [a for a in (r.get("age_days") for r in data) if a]
     fresh = sum(1 for a in ages if a <= 30) / len(ages) if ages else None
+    share = round(top3 / total, 3) if total else None
     return {
         "status": "ok", "videos": n,
         "total_views": total,
         "median_views": views[n // 2],
-        "top3_share": round(top3 / total, 3) if total else None,
+        "top3_share": share,
         "winner_ratio": round(views[0] / max(1, views[n // 2]), 1),
         "fresh_share_30d": round(fresh, 2) if fresh is not None else None,
-        "reading": (
-            "concentrated — a few videos own the topic, a new entrant must out-execute them"
-            if total and top3 / total > 0.7 else
-            "distributed — no single video owns it, entry is feasible"
-        ) if total else "",
+        "reading": _concentration_reading(share, views[n // 2], fresh),
     }
+
+
+def _concentration_reading(share: float | None, median_views: int, fresh: float | None) -> str:
+    """Turn a top-3 share into a sentence that is still true of the *sample*.
+
+    The bug this replaces: a `thisMonth` sample is by construction 100% fresh, so its videos
+    have had no time to accumulate views. Every such sample produced "median 10 views" and a
+    top-3 share over 0.7, which the old reading called "concentrated — a few videos own the
+    topic". That is backwards. Those ten views are not a verdict, they are a stopwatch that
+    started days ago, and a young market was being reported as a crowded one.
+
+    So freshness gates the concentration claim: concentration is only a fair reading of a
+    sample that has had time to settle.
+    """
+    if share is None:
+        return ""
+    young = fresh is not None and fresh >= 0.9
+    if young:
+        return ("too young to judge — this sample is almost entirely under 30 days old, so the "
+                "view counts are a stopwatch, not a verdict; ask again when it has run")
+    # volume before concentration: a top-3 share over 0.7 is arithmetic, not a moat, when the
+    # whole sample has 54 views. "A few videos own the topic" needs owners worth out-executing.
+    if median_views < 50:
+        return ("thin volume — no one has made this work yet, which is either the gap or the "
+                "answer, and one more probe decides which")
+    if share > 0.7:
+        return "concentrated — a few videos own the topic, a new entrant must out-execute them"
+    return "distributed — no single video owns it, entry is feasible"
 
 
 # --------------------------------------------------------------------------- comments

@@ -398,6 +398,8 @@ function ResearchPanel({ onNavigate }) {
                   // The numbers that decide whether an angle is worth a day. Joined as one
                   // string so the line still reads correctly when copied or spoken.
                   const stats = [
+                    // the ask itself, first: a median without its search order is unreadable
+                    r.order ? `asked as ${r.order}` : null,
                     r.saturation?.median_views != null ? `median ${fmtCount(r.saturation.median_views)} views` : null,
                     r.vph_median != null ? `${fmtCount(r.vph_median)} views/hour` : null,
                     r.saturation?.reading || null,

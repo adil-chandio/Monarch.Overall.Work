@@ -98,6 +98,16 @@ def t_saturation():
     ok("total", s["total_views"] == 10000)
     ok("empty", forensic.saturation([])["status"] == "empty")
 
+    # Regression: a `thisMonth` sample is 100% fresh and freshly-published, so its views are
+    # a stopwatch, not a verdict. It used to be read as "concentrated — a new entrant must
+    # out-execute them", which libelled an empty market as a crowded one.
+    young = [{"views": v, "age_days": 3} for v in (2, 5, 9, 40)]
+    ok("young sample is not called concentrated", "too young" in forensic.saturation(young)["reading"])
+    settled = [{"views": v, "age_days": 400} for v in (1000, 2000, 3000, 90000)]
+    ok("settled sample still reads concentration", "concentrated" in forensic.saturation(settled)["reading"])
+    thin = [{"views": v, "age_days": 400} for v in (4, 8, 12, 30)]
+    ok("low-volume settled sample reads thin, not concentrated", "thin volume" in forensic.saturation(thin)["reading"])
+
 
 def t_title_signal_refuses():
     small = [{"title": f"t{i}", "views": 100 * i} for i in range(1, 8)]
