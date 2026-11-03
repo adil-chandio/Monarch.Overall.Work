@@ -84,7 +84,30 @@ def fit_score(fit: dict | None) -> float | None:
 
 
 def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
-               trends: dict | None = None, fit: dict | None = None) -> dict:
+               trends: dict | None = None, fit: dict | None = None,
+               access: dict | None = None) -> dict:
+    """`access` = {"status": "ok"|"rate_limited"|"blocked", "detail": "..."}.
+
+    This distinction is the whole point of the function. "We measured nothing" and "we
+    could not measure" produce the same empty numbers and completely different advice:
+    the first is a NO, the second is a RETRY from another network. Collapsing them is how
+    a good topic gets killed by a blocked IP.
+    """
+    access = access or {}
+    if access.get("status") in ("rate_limited", "blocked", "error"):
+        return {
+            "verdict": "RETRY", "score": None, "confidence": 0.0,
+            "reason": f"could not measure ({access['status']}) — this is an access problem, not a demand problem",
+            "parts": {}, "weights": WEIGHTS,
+            "strongest_for": [], "strongest_against": [f"no data: {access.get('detail','')[:160]}"],
+            "missing": ["everything — the sample never arrived"],
+            "next_probe": (
+                "run the same command with YOUTUBE_API_KEY set (free, 10k units/day), or from a "
+                "residential network / a browser session. A datacenter IP gets throttled by YouTube "
+                "by design — that is the tool telling the truth, not the topic failing."
+            ),
+            "access": access,
+        }
     parts = {
         "demand": demand.get("score") if isinstance(demand, dict) else None,
         "winnability": winnability(sat),
@@ -137,6 +160,7 @@ def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
     probe = _next_probe(parts, sat, demand)
     return {
         "verdict": verdict, "score": score, "confidence": confidence, "reason": reason,
+        "access": access or {"status": "ok"},
         "parts": parts, "weights": WEIGHTS,
         "strongest_for": for_ or ["nothing cleared a threshold"],
         "strongest_against": against,

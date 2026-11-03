@@ -17,7 +17,17 @@ import json
 import os
 import sys
 
-from . import client, decide, demand as demand_mod, forensic, ideas as ideas_mod, reverse, thumbprint
+from . import client, decide, demand as demand_mod, forensic, ideas as ideas_mod, reverse
+
+
+def thumbprint():
+    """Imported lazily: it needs numpy + pillow, and the demand/forensic path does not.
+
+    A topic report must keep working on a machine where only the standard library is
+    installed — the image forensics is the optional part, not the price of entry.
+    """
+    from . import thumbprint as tp
+    return tp
 
 
 def _p(obj):
@@ -103,6 +113,7 @@ def cmd_topic(args):
     verdict = decide.greenlight(
         dem.to_dict() if dem else {}, sat, fun, t_sig,
         trends=(dem.trends if dem else None),
+        access={"status": corpus.status, "detail": corpus.detail},
     )
     out = {
         "topic": args.topic, "lane": corpus.lane, "status": corpus.status,
@@ -158,7 +169,11 @@ def cmd_channel(args):
         return _p({"status": c.status, "detail": c.detail})
     ids = [i["id"] for i in c.items]
     print(f"\nCHANNEL · {args.channel}  ({len(ids)} recent uploads)")
-    fps = thumbprint.channel_fingerprint(ids)
+    try:
+        fps = thumbprint().channel_fingerprint(ids)
+    except ImportError as e:
+        fps = {"status": "unavailable", "detail": f"numpy/pillow not installed: {e}"}
+        print(f"  thumbnails   skipped ({fps['detail']})")
     if fps.get("status") == "ok":
         print(f"  thumbnails   face-led rate {fps['face_rate']:.0%} · {fps['reading']}")
         print(f"  colour       {fps['top_hexes']}")

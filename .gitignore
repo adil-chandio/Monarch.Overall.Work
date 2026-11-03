@@ -13,3 +13,8 @@ deliverables/*.mp4
 
 # transient clone workspace for skill vendoring
 .harvest/
+
+# yt-intel local cache and harvested clones
+.cache/yt-intel/
+.harvest/
+public/yt-intel/runs.jsonl

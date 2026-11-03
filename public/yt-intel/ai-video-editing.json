@@ -1,0 +1,78 @@
+{
+  "topic": "ai video editing",
+  "lane": "web",
+  "status": "rate_limited",
+  "detail": "gave up after 3 attempts on https://www.youtube.com/results?search_query=ai%20video%20editing: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+  "count": 0,
+  "rows": [],
+  "saturation": {
+    "status": "empty"
+  },
+  "title_signal": {
+    "status": "insufficient",
+    "n": 0,
+    "required": 20,
+    "detail": "a coefficient fitted on fewer rows than this is noise dressed as insight"
+  },
+  "word_signal": {
+    "status": "insufficient",
+    "n": 0,
+    "required": 10
+  },
+  "funnel": {
+    "status": "insufficient",
+    "n": 0,
+    "required": 15
+  },
+  "psych": {
+    "status": "insufficient",
+    "detail": "psych prof_iles need a real sample; with 0 videos this would be astrology"
+  },
+  "demand": {
+    "topic": "ai video editing",
+    "suggestions": [],
+    "position": null,
+    "spread": 0,
+    "expansion": {},
+    "intent": [],
+    "long_tail": [],
+    "trends": {
+      "status": "unavailable",
+      "detail": "pip install pytrends"
+    },
+    "score": null,
+    "confidence": 0.0,
+    "parts": {
+      "position": null
+    },
+    "notes": [
+      "NO AUTocomplete RESPONSE from this host — the demand signal is unavailable, not zero. This environment cannot reach suggestqueries.google.com; run the same command from a machine with outbound access (or a YOUTUBE_API_KEY, which sidesteps autocomplete)."
+    ]
+  },
+  "decision": {
+    "verdict": "RETRY",
+    "score": null,
+    "confidence": 0.0,
+    "reason": "could not measure (rate_limited) — this is an access problem, not a demand problem",
+    "parts": {},
+    "weights": {
+      "demand": 0.3,
+      "winnability": 0.25,
+      "mechanism": 0.2,
+      "fit": 0.15,
+      "timing": 0.1
+    },
+    "strongest_for": [],
+    "strongest_against": [
+      "no data: gave up after 3 attempts on https://www.youtube.com/results?search_query=ai%20video%20editing: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:9"
+    ],
+    "missing": [
+      "everything — the sample never arrived"
+    ],
+    "next_probe": "run the same command with YOUTUBE_API_KEY set (free, 10k units/day), or from a residential network / a browser session. A datacenter IP gets throttled by YouTube by design — that is the tool telling the truth, not the topic failing.",
+    "access": {
+      "status": "rate_limited",
+      "detail": "gave up after 3 attempts on https://www.youtube.com/results?search_query=ai%20video%20editing: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    }
+  }
+}

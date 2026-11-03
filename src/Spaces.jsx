@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { ArrowRight, ArrowUpRight, ChevronRight, CircleDot, Search } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ArrowRight, ArrowUpRight, ChevronRight, CircleDot, Play, RotateCw, Search } from 'lucide-react';
 import { spaceList, sectionsFor, spaceCounts, spaceSources } from './lib/spaces.js';
 import channelsFile from '../config/channels.json';
 import reposFile from '../config/repos.json';
@@ -123,6 +123,8 @@ export function SpaceHome({ spaceId, data, counts, onNavigate, onOpenPage }) {
           </div>
         </section>
       )}
+
+      {spaceId === 'yt-automation' && <ResearchPanel onNavigate={onNavigate} />}
 
       {spaceId === 'monarch-studio' && (
         <section className="space-panel">
@@ -302,5 +304,108 @@ export function CommandPalette({ open, onClose, data, onGo }) {
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * ResearchPanel — the yt_intel bridge, on screen.
+ *
+ * It reads `public/yt-intel/index.json` (written by `scripts/yt-intel.mjs`, which is only
+ * a bridge to the Python tool). Three states, all honest:
+ *   no index      -> explain the two commands that produce one
+ *   verdict RETRY -> say the sample never arrived, and name the fix (API key / network)
+ *   verdict GO/…  -> score, parts, objections, next probe
+ *
+ * The panel never computes a score itself. Two implementations of the same number is how
+ * a dashboard starts lying quietly.
+ */
+function ResearchPanel({ onNavigate }) {
+  const [state, setState] = useState({ status: 'loading', reports: [] });
+  useEffect(() => {
+    let live = true;
+    fetch('/yt-intel/index.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then((d) => live && setState({ status: 'ok', reports: d.reports || [] }))
+      .catch(() => live && setState({ status: 'none', reports: [] }));
+    return () => { live = false; };
+  }, []);
+
+  const recent = [...state.reports].sort((a, b) => (b.at || '').localeCompare(a.at || '')).slice(0, 6);
+
+  return (
+    <section className="space-panel">
+      <div className="section-head">
+        <div>
+          <h2>Research desk</h2>
+          <p>Demand → saturation → mechanism → verdict, computed by <code>yt_intel</code> and cached in the repo.</p>
+        </div>
+        <span className="mono research-lane">{state.status === 'ok' ? `${state.reports.length} reports` : 'no reports yet'}</span>
+      </div>
+
+      {state.status === 'loading' && <div className="space-empty">Reading the research index…</div>}
+
+      {state.status === 'none' && (
+        <div className="research-empty">
+          <b>No research has been run yet.</b>
+          <span>Two commands produce a report. Nothing is generated in the browser, so what you see here is always a real measurement.</span>
+          <div className="research-cmd mono">
+            <code>python -m yt_intel topic "your topic" --limit 30 --json public/yt-intel/your-topic.json</code>
+            <code>python scripts/yt-intel.mjs topic "your topic"</code>
+          </div>
+        </div>
+      )}
+
+      {recent.length > 0 && (
+        <div className="research-list">
+          {recent.map((r) => {
+            // two shapes reach this panel: the full report (decision.verdict) and the slim
+            // index entry (verdict at top level). Support both rather than rendering "—".
+            const d = r.decision || r;
+            const retry = d.verdict === 'RETRY';
+            return (
+              <article className={`research-card ${retry ? 'research-retry' : ''}`} key={`${r.topic}-${r.at}`}>
+                <header>
+                  <div>
+                    <b>{r.topic}</b>
+                    <small className="mono">
+                      {r.lane} lane · {r.count ?? 0} videos · {r.status}
+                    </small>
+                  </div>
+                  <span className={`research-verdict v-${(d.verdict || 'none').toLowerCase()}`}>
+                    {retry ? <RotateCw size={11} /> : <Play size={11} />}
+                    {d.verdict || '—'}{d.score != null ? ` ${d.score}` : ''}
+                  </span>
+                </header>
+                <p className="research-reason">{d.reason}</p>
+                {retry ? (
+                  <p className="research-probe"><b>Next probe:</b> {d.next_probe}</p>
+                ) : (
+                  <>
+                    <div className="research-parts">
+                      {Object.entries(d.parts || {}).map(([k, v]) => (
+                        <div key={k} className="research-part">
+                          <span>{k}</span>
+                          <div className="research-meter"><i style={{ width: `${Math.max(0, Math.min(100, v ?? 0))}%` }} /></div>
+                          <b className="mono">{v == null ? '—' : Math.round(v)}</b>
+                        </div>
+                      ))}
+                    </div>
+                    {d.strongest_against?.length > 0 && (
+                      <ul className="research-against">{d.strongest_against.slice(0, 2).map((a) => <li key={a}>{a}</li>)}</ul>
+                    )}
+                    {d.next_probe && <p className="research-probe"><b>Next probe:</b> {d.next_probe}</p>}
+                  </>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      )}
+
+      <div className="research-foot mono">
+        <span>keyless by default · API key optional</span>
+        <span>1 request/second, cached to disk</span>
+      </div>
+    </section>
   );
 }

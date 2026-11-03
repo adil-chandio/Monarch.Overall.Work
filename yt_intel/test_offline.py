@@ -87,6 +87,13 @@ def t_demand_scoring():
     ok("partial data -> partial confidence", s2 is not None and 0 < c2 < 1)
 
 
+def t_decide_access():
+    r = decide.greenlight({}, {"status": "empty"}, {"status": "insufficient"}, {},
+                          access={"status": "rate_limited", "detail": "429"})
+    ok("blocked -> RETRY, not NO", r["verdict"] == "RETRY")
+    ok("RETRY names the fix", "API_KEY" in r["next_probe"])
+
+
 def t_decide_never_silent():
     r = decide.greenlight({}, {"status": "empty"}, {"status": "insufficient"}, {})
     ok("no data -> NO", r["verdict"] == "NO")
@@ -124,7 +131,7 @@ def t_ideas():
 if __name__ == "__main__":
     print("yt-intel offline tests")
     for fn in [t_duration, t_age_vph, t_saturation, t_title_signal_refuses, t_title_signal_recovers,
-               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_never_silent, t_reverse, t_ideas]:
+               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
     sys.exit(0)
