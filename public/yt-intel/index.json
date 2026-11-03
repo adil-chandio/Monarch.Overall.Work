@@ -1,6 +1,41 @@
 {
-  "updated": "2026-11-03T20:18:06.571Z",
+  "updated": "2026-11-03T20:21:24.197Z",
   "reports": [
+    {
+      "topic": "youtube automation",
+      "at": "2026-11-03T20:21:09.000Z",
+      "file": "youtube-automation.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 59.4,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 80.5,
+        "winnability": 57.42857142857143,
+        "mechanism": 50,
+        "fit": null,
+        "timing": 20
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 57)",
+        "interest is decaying — this is a topic of last quarter"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.5,
+        "winner_ratio": 38.8,
+        "fresh_share_30d": 0.17,
+        "median_views": 49595,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 50,
+      "vph_median": 31
+    },
     {
       "topic": "ai b roll generation",
       "at": "2026-11-03T20:17:51.000Z",
@@ -171,41 +206,6 @@
       "confidence": 0.85,
       "mechanism": 25,
       "vph_median": 4
-    },
-    {
-      "topic": "youtube automation",
-      "at": "2026-11-03T18:35:46.000Z",
-      "file": "youtube-automation.json",
-      "lane": "api",
-      "order": "relevance",
-      "status": "ok",
-      "count": 30,
-      "verdict": "SHARPEN",
-      "score": 58.8,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
-      "parts": {
-        "demand": 80.5,
-        "winnability": 55.22857142857143,
-        "mechanism": 50,
-        "fit": null,
-        "timing": 20
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 55)",
-        "interest is decaying — this is a topic of last quarter"
-      ],
-      "saturation": {
-        "videos": 30,
-        "top3_share": 0.522,
-        "winner_ratio": 37.2,
-        "fresh_share_30d": 0.17,
-        "median_views": 51628,
-        "reading": "distributed — no single video owns it, entry is feasible"
-      },
-      "confidence": 0.85,
-      "mechanism": 50,
-      "vph_median": 31
     }
   ],
   "comments": [
@@ -214,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (5%) is the conversion surface",
-      "at": "2026-11-03T20:17:52.348Z",
+      "at": "2026-11-03T20:21:10.392Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -243,41 +243,33 @@
     }
   ],
   "thumbnails": {
-    "topic": "ai b roll generation",
+    "topic": "youtube automation",
     "n": 12,
-    "face_rate": 0.67,
-    "avg_contrast": 0.187,
-    "avg_busy": 2.28,
-    "reading": "face-led: people are the product; house colour is red (7/12 thumbnails)",
+    "face_rate": 1,
+    "avg_contrast": 0.309,
+    "avg_busy": 2.96,
+    "reading": "face-led: people are the product; house colour is red (12/12 thumbnails)",
     "hue_families": [
       [
         "red",
-        7
-      ],
-      [
-        "teal",
-        2
-      ],
-      [
-        "amber",
-        1
+        12
       ]
     ],
     "samples": [
       {
-        "id": "0O3qpiT6yZo",
-        "hex": "#a56d61",
-        "face": 0
+        "id": "9r71jF5SZcQ",
+        "hex": "#cb4740",
+        "face": 0.207
       },
       {
-        "id": "EB3m2RfXwb4",
-        "hex": null,
-        "face": 0
+        "id": "zXE_PpJ5WUc",
+        "hex": "#b0765a",
+        "face": 0.412
       },
       {
-        "id": "YSF4qs6KxtA",
-        "hex": "#969f23",
-        "face": 0.141
+        "id": "xwNRyKItpOk",
+        "hex": "#eb231d",
+        "face": 0.136
       }
     ]
   }

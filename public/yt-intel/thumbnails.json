@@ -1,47 +1,35 @@
 {
   "status": "ok",
   "n": 12,
-  "face_rate": 0.67,
-  "avg_contrast": 0.187,
-  "avg_busy": 2.28,
-  "text_band_energy": 1.68,
+  "face_rate": 1.0,
+  "avg_contrast": 0.309,
+  "avg_busy": 2.96,
+  "text_band_energy": 2.88,
   "hue_families": [
     [
       "red",
-      7
-    ],
-    [
-      "teal",
-      2
-    ],
-    [
-      "amber",
-      1
-    ],
-    [
-      "green",
-      1
+      12
     ]
   ],
   "top_hexes": [
     [
-      "#a56d61",
+      "#cb4740",
       1
     ],
     [
-      "#969f23",
+      "#b0765a",
       1
     ],
     [
-      "#a46b52",
+      "#eb231d",
       1
     ],
     [
-      "#1fb4cc",
+      "#ce544b",
       1
     ],
     [
-      "#e49147",
+      "#e39e75",
       1
     ]
   ],
@@ -50,144 +38,148 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.019,
-      "face_present": false,
-      "face_upper_half": 0.0,
-      "contrast": 0.122,
-      "brightness": 0.04,
-      "accent_share": 0.479,
+      "face_share": 0.232,
+      "face_present": true,
+      "face_upper_half": 0.207,
+      "contrast": 0.359,
+      "brightness": 0.425,
+      "accent_share": 0.417,
       "dominant": {
-        "hex": "#a56d61",
-        "share": 0.479,
+        "hex": "#cb4740",
+        "share": 0.417,
         "hue_deg": 7
       },
       "text_edge_energy": {
-        "upper": 1.37,
-        "lower": 1.0,
-        "centre": 2.81
+        "upper": 1.59,
+        "lower": 3.42,
+        "centre": 2.75
       },
-      "text_row_span": 3,
-      "busy": 2.29,
-      "id": "0O3qpiT6yZo"
-    },
-    {
-      "size": "sddefault",
-      "w": 640,
-      "h": 480,
-      "face_share": 0.0,
-      "face_present": false,
-      "face_upper_half": 0.0,
-      "contrast": 0.0,
-      "brightness": 0.0,
-      "accent_share": 0.0,
-      "dominant": null,
-      "text_edge_energy": {
-        "upper": 0.0,
-        "lower": 0.0,
-        "centre": 0.0
-      },
-      "text_row_span": 0,
-      "busy": 0.0,
-      "id": "EB3m2RfXwb4"
+      "text_row_span": 51,
+      "busy": 2.3,
+      "id": "9r71jF5SZcQ"
     },
     {
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.169,
+      "face_share": 0.375,
       "face_present": true,
-      "face_upper_half": 0.141,
-      "contrast": 0.31,
-      "brightness": 0.383,
-      "accent_share": 0.176,
+      "face_upper_half": 0.412,
+      "contrast": 0.313,
+      "brightness": 0.381,
+      "accent_share": 0.636,
       "dominant": {
-        "hex": "#969f23",
-        "share": 0.176,
-        "hue_deg": 67
-      },
-      "text_edge_energy": {
-        "upper": 7.93,
-        "lower": 3.85,
-        "centre": 3.74
-      },
-      "text_row_span": 106,
-      "busy": 4.77,
-      "id": "YSF4qs6KxtA"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
-      "face_share": 0.168,
-      "face_present": true,
-      "face_upper_half": 0.124,
-      "contrast": 0.259,
-      "brightness": 0.409,
-      "accent_share": 0.467,
-      "dominant": {
-        "hex": "#a46b52",
-        "share": 0.467,
+        "hex": "#b0765a",
+        "share": 0.636,
         "hue_deg": 22
       },
       "text_edge_energy": {
-        "upper": 3.71,
-        "lower": 3.85,
-        "centre": 4.34
+        "upper": 6.83,
+        "lower": 6.45,
+        "centre": 3.4
       },
-      "text_row_span": 60,
-      "busy": 3.74,
-      "id": "-WZLyGRfbWk"
+      "text_row_span": 245,
+      "busy": 4.47,
+      "id": "zXE_PpJ5WUc"
     },
     {
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.0,
-      "face_present": false,
-      "face_upper_half": 0.0,
-      "contrast": 0.126,
-      "brightness": 0.069,
-      "accent_share": 0.331,
+      "face_share": 0.149,
+      "face_present": true,
+      "face_upper_half": 0.136,
+      "contrast": 0.328,
+      "brightness": 0.495,
+      "accent_share": 0.349,
       "dominant": {
-        "hex": "#1fb4cc",
-        "share": 0.331,
-        "hue_deg": 187
+        "hex": "#eb231d",
+        "share": 0.349,
+        "hue_deg": 7
       },
       "text_edge_energy": {
-        "upper": 2.2,
-        "lower": 1.83,
-        "centre": 2.32
+        "upper": 5.62,
+        "lower": 4.42,
+        "centre": 4.44
       },
-      "text_row_span": 157,
-      "busy": 2.13,
-      "id": "3P781sa8goo"
+      "text_row_span": 71,
+      "busy": 4.68,
+      "id": "xwNRyKItpOk"
     },
     {
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.035,
+      "face_share": 0.205,
       "face_present": true,
-      "face_upper_half": 0.034,
-      "contrast": 0.162,
-      "brightness": 0.126,
-      "accent_share": 0.314,
+      "face_upper_half": 0.12,
+      "contrast": 0.34,
+      "brightness": 0.401,
+      "accent_share": 0.449,
       "dominant": {
-        "hex": "#e49147",
-        "share": 0.314,
+        "hex": "#ce544b",
+        "share": 0.449,
+        "hue_deg": 7
+      },
+      "text_edge_energy": {
+        "upper": 2.36,
+        "lower": 3.51,
+        "centre": 2.6
+      },
+      "text_row_span": 90,
+      "busy": 2.74,
+      "id": "VjpY2cETzy4"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.188,
+      "face_present": true,
+      "face_upper_half": 0.218,
+      "contrast": 0.326,
+      "brightness": 0.319,
+      "accent_share": 0.67,
+      "dominant": {
+        "hex": "#e39e75",
+        "share": 0.67,
         "hue_deg": 22
       },
       "text_edge_energy": {
-        "upper": 2.71,
-        "lower": 0.83,
-        "centre": 2.64
+        "upper": 2.38,
+        "lower": 1.86,
+        "centre": 3.27
       },
-      "text_row_span": 41,
-      "busy": 1.95,
-      "id": "b8e_u6nWSRA"
+      "text_row_span": 22,
+      "busy": 2.43,
+      "id": "NbxaQUbOys0"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.331,
+      "face_present": true,
+      "face_upper_half": 0.25,
+      "contrast": 0.317,
+      "brightness": 0.515,
+      "accent_share": 0.676,
+      "dominant": {
+        "hex": "#b27a5c",
+        "share": 0.676,
+        "hue_deg": 22
+      },
+      "text_edge_energy": {
+        "upper": 2.85,
+        "lower": 4.19,
+        "centre": 4.18
+      },
+      "text_row_span": 56,
+      "busy": 3.99,
+      "id": "i5kVq6IDIaI"
     }
   ],
-  "reading": "face-led: people are the product; house colour is red (7/12 thumbnails)",
-  "topic": "ai b roll generation",
+  "reading": "face-led: people are the product; house colour is red (12/12 thumbnails)",
+  "topic": "youtube automation",
   "taken_from": "newest measured report"
 }
