@@ -1,42 +1,9 @@
 {
-  "updated": "2026-11-03T14:22:14.376Z",
+  "updated": "2026-11-03T14:23:47.851Z",
   "reports": [
     {
-      "topic": "faceless youtube channel",
-      "at": "2026-11-03T14:22:14.366Z",
-      "file": "faceless-youtube-channel.json",
-      "lane": "web",
-      "status": "ok",
-      "count": 20,
-      "verdict": "SHARPEN",
-      "score": 56.1,
-      "reason": "the topic is live but the angle is not yet differentiated",
-      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
-      "parts": {
-        "demand": 100,
-        "winnability": 8.199999999999996,
-        "mechanism": 50,
-        "fit": null,
-        "timing": null
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 8)"
-      ],
-      "saturation": {
-        "videos": 20,
-        "top3_share": 0.798,
-        "winner_ratio": 59.2,
-        "fresh_share_30d": null
-      },
-      "title_signal": {
-        "strength": "weak",
-        "read": "titles containing a number performed +119% vs those without (n=20, R2=0.11)",
-        "n": 20
-      }
-    },
-    {
       "topic": "video editing workflow",
-      "at": "2026-11-03T14:22:14.366Z",
+      "at": "2026-11-03T14:23:47.836Z",
       "file": "video-editing-workflow.json",
       "lane": "web",
       "status": "ok",
@@ -69,7 +36,7 @@
     },
     {
       "topic": "youtube automation",
-      "at": "2026-11-03T14:22:14.366Z",
+      "at": "2026-11-03T14:23:47.836Z",
       "file": "youtube-automation.json",
       "lane": "web",
       "status": "ok",
@@ -98,31 +65,64 @@
       "title_signal": null
     },
     {
+      "topic": "faceless youtube channel",
+      "at": "2026-11-03T14:23:47.835Z",
+      "file": "faceless-youtube-channel.json",
+      "lane": "web",
+      "status": "ok",
+      "count": 20,
+      "verdict": "SHARPEN",
+      "score": 56.1,
+      "reason": "the topic is live but the angle is not yet differentiated",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 100,
+        "winnability": 8.199999999999996,
+        "mechanism": 50,
+        "fit": null,
+        "timing": null
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 8)"
+      ],
+      "saturation": {
+        "videos": 20,
+        "top3_share": 0.798,
+        "winner_ratio": 59.2,
+        "fresh_share_30d": null
+      },
+      "title_signal": {
+        "strength": "weak",
+        "read": "titles containing a number performed +119% vs those without (n=20, R2=0.11)",
+        "n": 20
+      }
+    },
+    {
       "topic": "ai video editing",
-      "at": "2026-11-03T14:22:14.365Z",
+      "at": "2026-11-03T14:23:47.830Z",
       "file": "ai-video-editing.json",
       "lane": "web",
       "status": "ok",
       "count": 17,
       "verdict": "SHARPEN",
-      "score": 57.4,
+      "score": 64.3,
       "reason": "the topic is live but the angle is not yet differentiated",
-      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
       "parts": {
         "demand": 83.9,
-        "winnability": 52.400000000000006,
+        "winnability": 75.77142857142857,
         "mechanism": 25,
         "fit": null,
         "timing": 55
       },
       "strongest_against": [
-        "a few videos already own this topic (winnability 52)"
+        "no objection found in the data — which itself is a reason to check the sample"
       ],
       "saturation": {
         "videos": 17,
-        "top3_share": 0.476,
-        "winner_ratio": 4.9,
-        "fresh_share_30d": null
+        "top3_share": 0.448,
+        "winner_ratio": 3.5,
+        "fresh_share_30d": 0.18
       },
       "title_signal": null
     }
