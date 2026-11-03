@@ -1,9 +1,9 @@
 {
-  "updated": "2026-11-03T15:24:44.188Z",
+  "updated": "2026-11-03T15:26:14.742Z",
   "reports": [
     {
       "topic": "lanes",
-      "at": "2026-11-03T15:24:43.981Z",
+      "at": "2026-11-03T15:26:14.536Z",
       "file": "lanes.json",
       "lane": "web",
       "order": null,
@@ -22,20 +22,20 @@
     },
     {
       "topic": "ai video editing",
-      "at": "2026-11-03T15:24:43.000Z",
+      "at": "2026-11-03T15:26:14.000Z",
       "file": "ai-video-editing.json",
       "lane": "web",
       "order": "relevance",
       "status": "ok",
-      "count": 17,
-      "verdict": "SHARPEN",
-      "score": 66.4,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "count": 20,
+      "verdict": "GO",
+      "score": 77.3,
+      "reason": "demand, entry room and a readable mechanism all clear",
+      "next_probe": "write the hook and title first; if they score under 80, the topic will not save them",
       "parts": {
         "demand": 83.4,
-        "winnability": 83.52857142857142,
-        "mechanism": 25,
+        "winnability": 92.8857142857143,
+        "mechanism": 60,
         "fit": null,
         "timing": 55
       },
@@ -43,16 +43,16 @@
         "no objection found in the data — which itself is a reason to check the sample"
       ],
       "saturation": {
-        "videos": 17,
-        "top3_share": 0.439,
-        "winner_ratio": 3.5,
-        "fresh_share_30d": 0.24,
-        "median_views": 113940,
+        "videos": 20,
+        "top3_share": 0.414,
+        "winner_ratio": 4.9,
+        "fresh_share_30d": 0.3,
+        "median_views": 81891,
         "reading": "distributed — no single video owns it, entry is feasible"
       },
       "confidence": 0.85,
-      "mechanism": 25,
-      "vph_median": 31
+      "mechanism": 60,
+      "vph_median": 46
     },
     {
       "topic": "ai b roll generation",
