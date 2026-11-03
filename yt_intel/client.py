@@ -283,7 +283,16 @@ def search(q: str, limit: int = 30, order: str = "relevance", published_after_da
         try:
             data = _api("search", params, "search")
             ids = [i["id"]["videoId"] for i in data.get("items", []) if i.get("id", {}).get("videoId")]
-            stats = videos(ids).items if ids else []
+            if not ids:
+                # An empty API result is not automatically "nothing exists". Google answers a
+                # placeholder/invalid key with HTTP 200 and zero items, which used to land as
+                # status "ok" with an empty corpus — indistinguishable from a genuinely empty
+                # topic, and the worst possible way to be wrong. Say what it probably is.
+                return Corpus("search", "api", q, [], "empty",
+                              "the API returned zero items for a normal query — usually a "
+                              "placeholder or unactivated key, or a quota of 0. Verify with: "
+                              "python -m yt_intel doctor")
+            stats = videos(ids).items
             return Corpus("search", "api", q, stats)
         except http.RateLimited as e:
             return Corpus("search", "api", q, [], "rate_limited", str(e))
