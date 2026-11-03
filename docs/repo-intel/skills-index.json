@@ -1,13 +1,13 @@
 {
   "generated": "2026-11-03",
-  "total": 934,
-  "packs": 26,
+  "total": 958,
+  "packs": 28,
   "bySpace": {
-    "monarch-studio": 187,
-    "ops": 650,
-    "personal-brand": 80,
+    "monarch-studio": 189,
+    "ops": 657,
+    "personal-brand": 90,
     "portfolio": 10,
-    "yt-automation": 7
+    "yt-automation": 12
   },
   "entries": [
     {
@@ -1481,6 +1481,22 @@
       "path": "skills/openmontage/.agents/skills/website-to-video/SKILL.md",
       "bytes": 12132,
       "license": ""
+    },
+    {
+      "name": "ad-library-teardown",
+      "pack": "social-research-skills",
+      "space": "monarch-studio",
+      "path": "skills/social-research-skills/skills/ad-library-teardown/SKILL.md",
+      "bytes": 3786,
+      "license": "MIT"
+    },
+    {
+      "name": "product-demand-research",
+      "pack": "social-research-skills",
+      "space": "monarch-studio",
+      "path": "skills/social-research-skills/skills/product-demand-research/SKILL.md",
+      "bytes": 2542,
+      "license": "MIT"
     },
     {
       "name": "video-shotcraft",
@@ -5059,6 +5075,54 @@
       "license": "Complete terms in LICENSE.txt"
     },
     {
+      "name": "self-media-content-analytics",
+      "pack": "self-media-workflow",
+      "space": "ops",
+      "path": "skills/self-media-workflow/skills/self-media-content-analytics/SKILL.md",
+      "bytes": 2853,
+      "license": ""
+    },
+    {
+      "name": "self-media-content-brief",
+      "pack": "self-media-workflow",
+      "space": "ops",
+      "path": "skills/self-media-workflow/skills/self-media-content-brief/SKILL.md",
+      "bytes": 2398,
+      "license": ""
+    },
+    {
+      "name": "self-media-content-delivery",
+      "pack": "self-media-workflow",
+      "space": "ops",
+      "path": "skills/self-media-workflow/skills/self-media-content-delivery/SKILL.md",
+      "bytes": 2555,
+      "license": ""
+    },
+    {
+      "name": "self-media-content-strategy",
+      "pack": "self-media-workflow",
+      "space": "ops",
+      "path": "skills/self-media-workflow/skills/self-media-content-strategy/SKILL.md",
+      "bytes": 2758,
+      "license": ""
+    },
+    {
+      "name": "self-media-trend-radar",
+      "pack": "self-media-workflow",
+      "space": "ops",
+      "path": "skills/self-media-workflow/skills/self-media-trend-radar/SKILL.md",
+      "bytes": 3521,
+      "license": ""
+    },
+    {
+      "name": "self-media-wechat-publisher",
+      "pack": "self-media-workflow",
+      "space": "ops",
+      "path": "skills/self-media-workflow/skills/self-media-wechat-publisher/SKILL.md",
+      "bytes": 3648,
+      "license": ""
+    },
+    {
       "name": "golden-chat",
       "pack": "skill-seekers",
       "space": "ops",
@@ -5264,6 +5328,14 @@
       "space": "ops",
       "path": "skills/skill-seekers/skills/skill-seekers/SKILL.md",
       "bytes": 3073,
+      "license": ""
+    },
+    {
+      "name": "scrapecreators-api",
+      "pack": "social-research-skills",
+      "space": "ops",
+      "path": "skills/social-research-skills/skills/scrapecreators-api/SKILL.md",
+      "bytes": 16054,
       "license": ""
     },
     {
@@ -7331,6 +7403,86 @@
       "license": ""
     },
     {
+      "name": "audience-research",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/audience-research/SKILL.md",
+      "bytes": 2537,
+      "license": "MIT"
+    },
+    {
+      "name": "comment-mining",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/comment-mining/SKILL.md",
+      "bytes": 4067,
+      "license": "MIT"
+    },
+    {
+      "name": "competitor-social-research",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/competitor-social-research/SKILL.md",
+      "bytes": 4221,
+      "license": "MIT"
+    },
+    {
+      "name": "content-repurposing",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/content-repurposing/SKILL.md",
+      "bytes": 2253,
+      "license": "MIT"
+    },
+    {
+      "name": "creator-profile-teardown",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/creator-profile-teardown/SKILL.md",
+      "bytes": 2200,
+      "license": "MIT"
+    },
+    {
+      "name": "influencer-prospecting",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/influencer-prospecting/SKILL.md",
+      "bytes": 2527,
+      "license": "MIT"
+    },
+    {
+      "name": "outlier-post-finder",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/outlier-post-finder/SKILL.md",
+      "bytes": 6140,
+      "license": "MIT"
+    },
+    {
+      "name": "social-listening-brief",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/social-listening-brief/SKILL.md",
+      "bytes": 2583,
+      "license": "MIT"
+    },
+    {
+      "name": "transcript-intelligence",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/transcript-intelligence/SKILL.md",
+      "bytes": 3771,
+      "license": "MIT"
+    },
+    {
+      "name": "trend-discovery",
+      "pack": "social-research-skills",
+      "space": "personal-brand",
+      "path": "skills/social-research-skills/skills/trend-discovery/SKILL.md",
+      "bytes": 3157,
+      "license": "MIT"
+    },
+    {
       "name": "block-no-verify-hook",
       "pack": "wshobson-agents",
       "space": "personal-brand",
@@ -7467,11 +7619,51 @@
       "license": "MIT"
     },
     {
+      "name": "monarch-yt-intel",
+      "pack": "monarch-video-lab",
+      "space": "yt-automation",
+      "path": "skills/monarch-video-lab/yt-intel/SKILL.md",
+      "bytes": 5136,
+      "license": "MIT"
+    },
+    {
       "name": "doubao-tts",
       "pack": "openmontage",
       "space": "yt-automation",
       "path": "skills/openmontage/.agents/skills/doubao-tts/SKILL.md",
       "bytes": 4058,
+      "license": ""
+    },
+    {
+      "name": "self-media-content-workflow",
+      "pack": "self-media-workflow",
+      "space": "yt-automation",
+      "path": "skills/self-media-workflow/skills/self-media-content-workflow/SKILL.md",
+      "bytes": 12990,
+      "license": ""
+    },
+    {
+      "name": "self-media-platform-copywriting",
+      "pack": "self-media-workflow",
+      "space": "yt-automation",
+      "path": "skills/self-media-workflow/skills/self-media-platform-copywriting/SKILL.md",
+      "bytes": 3799,
+      "license": ""
+    },
+    {
+      "name": "self-media-short-video",
+      "pack": "self-media-workflow",
+      "space": "yt-automation",
+      "path": "skills/self-media-workflow/skills/self-media-short-video/SKILL.md",
+      "bytes": 5658,
+      "license": ""
+    },
+    {
+      "name": "self-media-video-publisher",
+      "pack": "self-media-workflow",
+      "space": "yt-automation",
+      "path": "skills/self-media-workflow/skills/self-media-video-publisher/SKILL.md",
+      "bytes": 5458,
       "license": ""
     },
     {

@@ -12,6 +12,7 @@ Four house skills plus a licensed-library map, written from a forensic read of f
 | "it still doesn't sound like the reference" | [`reference-match`](./reference-match/SKILL.md) | measure both, get a numeric fix list per band and per section |
 | "CTR is flat / which thumbnail?" | [`thumbnail-craft`](./thumbnail-craft/SKILL.md) | three archetypes, scored at 168×94 like a phone feed |
 | "people swipe in the first second" | [`hook-lab`](./hook-lab/SKILL.md) | score the script, and the measured audio lift behind it |
+| "should we make this video at all?" | [`yt-intel`](./yt-intel/SKILL.md) | demand → saturation → mechanism → teardown → verdict, keyless |
 
 ## Where these came from
 

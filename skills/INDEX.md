@@ -2,17 +2,17 @@
 
 Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 
-**934 skills across 26 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
+**958 skills across 28 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
 
 ## Routing
 
 | Space | Skills | Packs |
 |---|---|---|
-| `ops` | 650 | agent-reach, book-to-skill, claude-skills, deep-research, elephant-goldfish, ffmpeg-skill, humanizer, last30days, marketingskills, openmontage, planning-with-files, ponytail, prompt-master, scrapling, skill-seekers, wshobson-agents |
-| `monarch-studio` | 187 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, monarch-video-lab, openmontage, video-shotcraft, vox-collage-motion, wshobson-agents |
-| `personal-brand` | 80 | baoyu-skills, claude-skills, marketingskills, wshobson-agents |
+| `ops` | 657 | agent-reach, book-to-skill, claude-skills, deep-research, elephant-goldfish, ffmpeg-skill, humanizer, last30days, marketingskills, openmontage, planning-with-files, ponytail, prompt-master, scrapling, self-media-workflow, skill-seekers, social-research-skills, wshobson-agents |
+| `monarch-studio` | 189 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, monarch-video-lab, openmontage, social-research-skills, video-shotcraft, vox-collage-motion, wshobson-agents |
+| `personal-brand` | 90 | baoyu-skills, claude-skills, marketingskills, social-research-skills, wshobson-agents |
+| `yt-automation` | 12 | baoyu-skills, claude-skills, html-video, monarch-video-lab, openmontage, self-media-workflow, wshobson-agents |
 | `portfolio` | 10 | claude-skills, marketingskills, website-cloner, wshobson-agents |
-| `yt-automation` | 7 | baoyu-skills, claude-skills, html-video, monarch-video-lab, openmontage, wshobson-agents |
 
 ## All skills
 
@@ -204,6 +204,8 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `visual-style` | openmontage | 6.1 KB | `skills/openmontage/.agents/skills/visual-style/SKILL.md` |
 | `visual-style` | openmontage | 6.1 KB | `skills/openmontage/.claude/skills/visual-style/SKILL.md` |
 | `website-to-video` | openmontage | 11.8 KB | `skills/openmontage/.agents/skills/website-to-video/SKILL.md` |
+| `ad-library-teardown` | social-research-skills | 3.7 KB | `skills/social-research-skills/skills/ad-library-teardown/SKILL.md` |
+| `product-demand-research` | social-research-skills | 2.5 KB | `skills/social-research-skills/skills/product-demand-research/SKILL.md` |
 | `video-shotcraft` | video-shotcraft | 21.2 KB | `skills/video-shotcraft/SKILL.md` |
 | `muapi-director` | vox-collage-motion | 2.7 KB | `skills/vox-collage-motion/SKILL.md` |
 | `file-conversion` | wshobson-agents | 8.0 KB | `skills/wshobson-agents/plugins/file-conversion/skills/file-conversion/SKILL.md` |
@@ -656,6 +658,12 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `ponytail-review` | ponytail | 5.0 KB | `skills/ponytail/skills/ponytail-review/SKILL.md` |
 | `prompt-master` | prompt-master | 32.7 KB | `skills/prompt-master/SKILL.md` |
 | `scrapling-official` | scrapling | 25.4 KB | `skills/scrapling/SKILL.md` |
+| `self-media-content-analytics` | self-media-workflow | 2.8 KB | `skills/self-media-workflow/skills/self-media-content-analytics/SKILL.md` |
+| `self-media-content-brief` | self-media-workflow | 2.3 KB | `skills/self-media-workflow/skills/self-media-content-brief/SKILL.md` |
+| `self-media-content-delivery` | self-media-workflow | 2.5 KB | `skills/self-media-workflow/skills/self-media-content-delivery/SKILL.md` |
+| `self-media-content-strategy` | self-media-workflow | 2.7 KB | `skills/self-media-workflow/skills/self-media-content-strategy/SKILL.md` |
+| `self-media-trend-radar` | self-media-workflow | 3.4 KB | `skills/self-media-workflow/skills/self-media-trend-radar/SKILL.md` |
+| `self-media-wechat-publisher` | self-media-workflow | 3.6 KB | `skills/self-media-workflow/skills/self-media-wechat-publisher/SKILL.md` |
 | `golden-chat` | skill-seekers | 3.4 KB | `skills/skill-seekers/tests/golden/phase2/chat/SKILL.md` |
 | `golden-chat-empty` | skill-seekers | 1.1 KB | `skills/skill-seekers/tests/golden/phase2/chat_empty/SKILL.md` |
 | `golden-chat-single` | skill-seekers | 1.2 KB | `skills/skill-seekers/tests/golden/phase2/chat_single/SKILL.md` |
@@ -682,6 +690,7 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `golden-word` | skill-seekers | 2.5 KB | `skills/skill-seekers/tests/golden/phase2/word/SKILL.md` |
 | `skill-builder` | skill-seekers | 4.3 KB | `skills/skill-seekers/distribution/claude-plugin/skills/skill-builder/SKILL.md` |
 | `skill-builder` | skill-seekers | 3.0 KB | `skills/skill-seekers/skills/skill-seekers/SKILL.md` |
+| `scrapecreators-api` | social-research-skills | 15.7 KB | `skills/social-research-skills/skills/scrapecreators-api/SKILL.md` |
 | `accessibility-compliance` | wshobson-agents | 2.3 KB | `skills/wshobson-agents/plugins/ui-design/skills/accessibility-compliance/SKILL.md` |
 | `ai-debt-detector` | wshobson-agents | 3.3 KB | `skills/wshobson-agents/plugins/skill-forge-essentials/skills/ai-debt-detector/SKILL.md` |
 | `airflow-dag-patterns` | wshobson-agents | 3.1 KB | `skills/wshobson-agents/plugins/data-engineering/skills/airflow-dag-patterns/SKILL.md` |
@@ -945,6 +954,16 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `site-architecture` | marketingskills | 13.7 KB | `skills/marketingskills/skills/site-architecture/SKILL.md` |
 | `sms` | marketingskills | 18.0 KB | `skills/marketingskills/skills/sms/SKILL.md` |
 | `social` | marketingskills | 18.0 KB | `skills/marketingskills/skills/social/SKILL.md` |
+| `audience-research` | social-research-skills | 2.5 KB | `skills/social-research-skills/skills/audience-research/SKILL.md` |
+| `comment-mining` | social-research-skills | 4.0 KB | `skills/social-research-skills/skills/comment-mining/SKILL.md` |
+| `competitor-social-research` | social-research-skills | 4.1 KB | `skills/social-research-skills/skills/competitor-social-research/SKILL.md` |
+| `content-repurposing` | social-research-skills | 2.2 KB | `skills/social-research-skills/skills/content-repurposing/SKILL.md` |
+| `creator-profile-teardown` | social-research-skills | 2.1 KB | `skills/social-research-skills/skills/creator-profile-teardown/SKILL.md` |
+| `influencer-prospecting` | social-research-skills | 2.5 KB | `skills/social-research-skills/skills/influencer-prospecting/SKILL.md` |
+| `outlier-post-finder` | social-research-skills | 6.0 KB | `skills/social-research-skills/skills/outlier-post-finder/SKILL.md` |
+| `social-listening-brief` | social-research-skills | 2.5 KB | `skills/social-research-skills/skills/social-listening-brief/SKILL.md` |
+| `transcript-intelligence` | social-research-skills | 3.7 KB | `skills/social-research-skills/skills/transcript-intelligence/SKILL.md` |
+| `trend-discovery` | social-research-skills | 3.1 KB | `skills/social-research-skills/skills/trend-discovery/SKILL.md` |
 | `block-no-verify-hook` | wshobson-agents | 7.3 KB | `skills/wshobson-agents/plugins/block-no-verify/skills/block-no-verify-hook/SKILL.md` |
 | `social-evidence-research` | wshobson-agents | 5.6 KB | `skills/wshobson-agents/plugins/content-marketing/skills/social-evidence-research/SKILL.md` |
 
@@ -972,5 +991,10 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `youtube-full` | claude-skills | 6.7 KB | `skills/claude-skills/marketing-skill/skills/youtube-full/SKILL.md` |
 | `frame-creative-voltage` | html-video | 3.5 KB | `skills/html-video/templates/frame-creative-voltage/SKILL.md` |
 | `monarch-thumbnail-craft` | monarch-video-lab | 4.6 KB | `skills/monarch-video-lab/thumbnail-craft/SKILL.md` |
+| `monarch-yt-intel` | monarch-video-lab | 5.0 KB | `skills/monarch-video-lab/yt-intel/SKILL.md` |
 | `doubao-tts` | openmontage | 4.0 KB | `skills/openmontage/.agents/skills/doubao-tts/SKILL.md` |
+| `self-media-content-workflow` | self-media-workflow | 12.7 KB | `skills/self-media-workflow/skills/self-media-content-workflow/SKILL.md` |
+| `self-media-platform-copywriting` | self-media-workflow | 3.7 KB | `skills/self-media-workflow/skills/self-media-platform-copywriting/SKILL.md` |
+| `self-media-short-video` | self-media-workflow | 5.5 KB | `skills/self-media-workflow/skills/self-media-short-video/SKILL.md` |
+| `self-media-video-publisher` | self-media-workflow | 5.3 KB | `skills/self-media-workflow/skills/self-media-video-publisher/SKILL.md` |
 | `shellcheck-configuration` | wshobson-agents | 1.6 KB | `skills/wshobson-agents/plugins/shell-scripting/skills/shellcheck-configuration/SKILL.md` |
