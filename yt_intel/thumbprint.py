@@ -87,18 +87,41 @@ def analyse(a: np.ndarray, size: str = "") -> dict:
     mx = a.max(axis=2)
     mn = a.min(axis=2)
     sat = (mx - mn) / (mx + 1e-6)
-    vivid = sat > 0.30
+    # Vivid, not merely dark, and grouped by HUE. The first version quantised RGB into
+    # 32-step cubes and took the biggest cube — on twelve real thumbnails that returned
+    # `#0c1213` ten times over, because "darkest corner of the frame" wins that vote in
+    # almost every thumbnail ever made. A one-hue accent is what the docstring promises, so
+    # the grouping is hue-based and pixels below 0.22 luma are excluded: near-black carries no
+    # hue information worth voting on.
+    vivid = (sat > 0.30) & (_luma(a) > 0.22)
     accent_share = float(vivid.mean())
     dominant = None
     if vivid.sum() > 50:
         px = (a[vivid] * 255).astype(np.int32)
-        q = (px // 32)
-        keys, counts = np.unique(q, axis=0, return_counts=True)
-        pick = keys[counts.argmax()]
-        sel = px[(q == pick).all(axis=1)]
-        if len(sel):
+        r, g, b = px[:, 0], px[:, 1], px[:, 2]
+        mxv = px.max(axis=1)
+        mnv = px.min(axis=1)
+        d = (mxv - mnv).astype(np.float64)
+        d[d == 0] = 1.0
+        hue = np.zeros(len(px))
+        red = mxv == r
+        green = (mxv == g) & ~red
+        blue = (mxv == b) & ~red & ~green
+        hue[red] = (60 * ((g[red] - b[red]) / d[red])) % 360
+        hue[green] = 60 * ((b[green] - r[green]) / d[green]) + 120
+        hue[blue] = 60 * ((r[blue] - g[blue]) / d[blue]) + 240
+        bins = (hue // 15).astype(np.int32) % 24
+        names, counts = np.unique(bins, return_counts=True)
+        # require a real cluster: one 15-degree sliver of a random gradient is not an accent
+        if counts.max() >= max(50, 0.04 * len(px)):
+            pick = names[counts.argmax()]
+            sel = px[bins == pick]
             rgb = sel.mean(axis=0).astype(int)
-            dominant = {"hex": "#%02x%02x%02x" % tuple(rgb), "share": round(float(counts.max() / len(px)), 3)}
+            dominant = {
+                "hex": "#%02x%02x%02x" % tuple(rgb),
+                "share": round(float(counts.max() / len(px)), 3),
+                "hue_deg": int(pick * 15 + 7),
+            }
             accent_share = float(counts.max() / len(px))
 
     # text-likeness: horizontal edge energy in the bands where burned-in text sits
@@ -142,14 +165,22 @@ def channel_fingerprint(video_ids: list[str], sample: int = 24) -> dict:
     # threshold is not 0: a heavily graded portrait (red rim light, tight mask) lands
     # around 1.5-5 % of the frame, so 0.012 is "a human is present", not "a tan wall"
     faces = [r["face_upper_half"] > 0.012 for r in out]
-    hues = [r["dominant"]["hex"] for r in out if r.get("dominant")]
+    fam = [r["dominant"]["hue_deg"] for r in out if r.get("dominant")]
+    hexes = [r["dominant"]["hex"] for r in out if r.get("dominant")]
     return {
         "status": "ok", "n": len(out),
         "face_rate": round(sum(faces) / len(out), 2),
         "avg_contrast": round(statistics.mean(r["contrast"] for r in out), 3),
         "avg_busy": round(statistics.mean(r["busy"] for r in out), 2),
         "text_band_energy": round(statistics.mean(r["text_edge_energy"]["lower"] for r in out), 2),
-        "top_hexes": sorted({h: hues.count(h) for h in hues}.items(), key=lambda kv: -kv[1])[:5],
+        # family = 60-degree bucket (red / amber / green / cyan / blue / magenta). Two
+        # thumbnails at #018afb and #0b7fd0 are the same brand colour; counting exact hexes
+        # reported twelve accents with a count of one each and read as "no house colour",
+        # which was wrong about a channel that plainly has one.
+        "hue_families": sorted(
+            {fam_f: sum(1 for x in fam if x // 60 == fam_f // 60) for fam_f in fam}.items(),
+            key=lambda kv: -kv[1])[:4] if fam else [],
+        "top_hexes": sorted({h: hexes.count(h) for h in hexes}.items(), key=lambda kv: -kv[1])[:5],
         "samples": out[:6],
         "reading": (
             "face-led channel: people are the product" if sum(faces) / len(out) > 0.5

@@ -51,6 +51,28 @@ def t_age_vph():
     ok("vph needs age", forensic.vph(1000, None) is None)
 
 
+def t_thumbprint_accent():
+    """The accent must be a colour, not the darkest corner of the frame.
+
+    Regression: the first version quantised RGB and took the biggest cube. On twelve real
+    thumbnails it returned #0c1213, #080c0c, #0d0705 — near-black — for every one, and the
+    channel-level hex table read as "no house colour" for a channel that clearly had one.
+    """
+    import numpy as np
+    from . import thumbprint
+
+    dark = np.full((360, 480, 3), 0.03, np.float32)
+    dark[100:250, 120:380] = np.array([0.02, 0.45, 0.95], np.float32)
+    r = thumbprint.analyse(dark, "synthetic")
+    ok("accent is the blue block, not the black frame",
+       r["dominant"] is not None and r["dominant"]["hue_deg"] is not None
+       and 190 <= r["dominant"]["hue_deg"] <= 240)
+    ok("accent hex is blue-dominant", int(r["dominant"]["hex"][5:7], 16) > int(r["dominant"]["hex"][1:3], 16))
+
+    flat = np.full((360, 480, 3), 0.5, np.float32)
+    ok("a flat grey frame has no accent to report", thumbprint.analyse(flat, "synthetic")["dominant"] is None)
+
+
 def t_style_calibration():
     """The shipped cut threshold must not be the one that under-counts by a third."""
     from . import style
@@ -231,7 +253,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_thumbprint_accent, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
