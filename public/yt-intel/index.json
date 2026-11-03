@@ -1,21 +1,21 @@
 {
-  "updated": "2026-11-03T19:57:52.149Z",
+  "updated": "2026-11-03T20:02:51.401Z",
   "reports": [
     {
       "topic": "ai video editing",
-      "at": "2026-11-03T19:57:33.000Z",
+      "at": "2026-11-03T20:02:37.000Z",
       "file": "ai-video-editing.json",
       "lane": "api",
       "order": "relevance",
       "status": "ok",
       "count": 30,
       "verdict": "SHARPEN",
-      "score": 71.8,
+      "score": 71.7,
       "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
       "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
       "parts": {
-        "demand": 84,
-        "winnability": 93.29999999999998,
+        "demand": 83.4,
+        "winnability": 93.69999999999999,
         "mechanism": 35,
         "fit": null,
         "timing": 55
@@ -25,15 +25,15 @@
       ],
       "saturation": {
         "videos": 30,
-        "top3_share": 0.467,
-        "winner_ratio": 14,
-        "fresh_share_30d": 0.43,
-        "median_views": 115894,
+        "top3_share": 0.463,
+        "winner_ratio": 12.3,
+        "fresh_share_30d": 0.41,
+        "median_views": 131595,
         "reading": "distributed — no single video owns it, entry is feasible"
       },
       "confidence": 0.85,
       "mechanism": 35,
-      "vph_median": 94
+      "vph_median": 80
     },
     {
       "topic": "ai b roll generation",
@@ -214,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (5%) is the conversion surface",
-      "at": "2026-11-03T19:57:38.205Z",
+      "at": "2026-11-03T20:02:38.467Z",
       "asks": [
         {
           "label": "asked for a sequel",

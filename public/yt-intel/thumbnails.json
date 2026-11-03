@@ -5,25 +5,43 @@
   "avg_contrast": 0.272,
   "avg_busy": 3.25,
   "text_band_energy": 2.67,
+  "hue_families": [
+    [
+      22,
+      6
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      202,
+      5
+    ],
+    [
+      187,
+      5
+    ]
+  ],
   "top_hexes": [
     [
-      "#0c1213",
+      "#c4825c",
       1
     ],
     [
-      "#018afb",
+      "#259cf1",
       1
     ],
     [
-      "#06120f",
+      "#e56a25",
       1
     ],
     [
-      "#0d0705",
+      "#a76c4d",
       1
     ],
     [
-      "#080c0c",
+      "#2db9bc",
       1
     ]
   ],
@@ -37,10 +55,11 @@
       "face_upper_half": 0.104,
       "contrast": 0.264,
       "brightness": 0.476,
-      "accent_share": 0.083,
+      "accent_share": 0.208,
       "dominant": {
-        "hex": "#0c1213",
-        "share": 0.083
+        "hex": "#c4825c",
+        "share": 0.208,
+        "hue_deg": 22
       },
       "text_edge_energy": {
         "upper": 3.53,
@@ -60,10 +79,11 @@
       "face_upper_half": 0.1,
       "contrast": 0.252,
       "brightness": 0.617,
-      "accent_share": 0.185,
+      "accent_share": 0.405,
       "dominant": {
-        "hex": "#018afb",
-        "share": 0.185
+        "hex": "#259cf1",
+        "share": 0.405,
+        "hue_deg": 202
       },
       "text_edge_energy": {
         "upper": 3.07,
@@ -83,10 +103,11 @@
       "face_upper_half": 0.076,
       "contrast": 0.313,
       "brightness": 0.383,
-      "accent_share": 0.322,
+      "accent_share": 0.546,
       "dominant": {
-        "hex": "#06120f",
-        "share": 0.322
+        "hex": "#e56a25",
+        "share": 0.546,
+        "hue_deg": 22
       },
       "text_edge_energy": {
         "upper": 4.94,
@@ -106,10 +127,11 @@
       "face_upper_half": 0.145,
       "contrast": 0.25,
       "brightness": 0.186,
-      "accent_share": 0.234,
+      "accent_share": 0.881,
       "dominant": {
-        "hex": "#0d0705",
-        "share": 0.234
+        "hex": "#a76c4d",
+        "share": 0.881,
+        "hue_deg": 22
       },
       "text_edge_energy": {
         "upper": 2.87,
@@ -129,10 +151,11 @@
       "face_upper_half": 0.135,
       "contrast": 0.362,
       "brightness": 0.418,
-      "accent_share": 0.2,
+      "accent_share": 0.385,
       "dominant": {
-        "hex": "#080c0c",
-        "share": 0.2
+        "hex": "#2db9bc",
+        "share": 0.385,
+        "hue_deg": 187
       },
       "text_edge_energy": {
         "upper": 3.92,
@@ -152,10 +175,11 @@
       "face_upper_half": 0.31,
       "contrast": 0.258,
       "brightness": 0.321,
-      "accent_share": 0.152,
+      "accent_share": 0.346,
       "dominant": {
-        "hex": "#0b0c10",
-        "share": 0.152
+        "hex": "#b46c5c",
+        "share": 0.346,
+        "hue_deg": 7
       },
       "text_edge_energy": {
         "upper": 6.83,
