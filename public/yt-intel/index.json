@@ -1,6 +1,75 @@
 {
-  "updated": "2026-11-03T18:37:22.051Z",
+  "updated": "2026-11-03T18:41:00.918Z",
   "reports": [
+    {
+      "topic": "faceless youtube channel",
+      "at": "2026-11-03T18:41:00.000Z",
+      "file": "faceless-youtube-channel.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 56.5,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 80.7,
+        "winnability": 33.328571428571436,
+        "mechanism": 50,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 33)"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.741,
+        "winner_ratio": 63.9,
+        "fresh_share_30d": 0.17,
+        "median_views": 145211,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
+      },
+      "confidence": 0.85,
+      "mechanism": 50,
+      "vph_median": 52
+    },
+    {
+      "topic": "video editing workflow",
+      "at": "2026-11-03T18:40:46.000Z",
+      "file": "video-editing-workflow.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "NO",
+      "score": 51,
+      "reason": "the numbers do not support a day of production",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 80.8,
+        "winnability": 34.4,
+        "mechanism": 25,
+        "fit": null,
+        "timing": 55
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 34)",
+        "almost nobody uploaded on this in the last 30 days — could be satiated or dead"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.616,
+        "winner_ratio": 77,
+        "fresh_share_30d": 0.07,
+        "median_views": 29295,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 25,
+      "vph_median": 4
+    },
     {
       "topic": "youtube automation",
       "at": "2026-11-03T18:35:46.000Z",
@@ -69,75 +138,6 @@
       "confidence": 0.85,
       "mechanism": 10,
       "vph_median": 75
-    },
-    {
-      "topic": "faceless youtube channel",
-      "at": "2026-11-03T18:25:13.000Z",
-      "file": "faceless-youtube-channel.json",
-      "lane": "api",
-      "order": "relevance",
-      "status": "ok",
-      "count": 30,
-      "verdict": "SHARPEN",
-      "score": 55.5,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
-      "parts": {
-        "demand": 80.7,
-        "winnability": 30,
-        "mechanism": 50,
-        "fit": null,
-        "timing": 55
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 30)"
-      ],
-      "saturation": {
-        "videos": 30,
-        "top3_share": 0.74,
-        "winner_ratio": 63.9,
-        "fresh_share_30d": 0.14,
-        "median_views": 145211,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
-      },
-      "confidence": 0.85,
-      "mechanism": 50,
-      "vph_median": 44
-    },
-    {
-      "topic": "video editing workflow",
-      "at": "2026-11-03T15:31:59.000Z",
-      "file": "video-editing-workflow.json",
-      "lane": "web",
-      "order": "relevance",
-      "status": "ok",
-      "count": 20,
-      "verdict": "NO",
-      "score": 46,
-      "reason": "the numbers do not support a day of production",
-      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
-      "parts": {
-        "demand": 80.8,
-        "winnability": 17.414285714285715,
-        "mechanism": 25,
-        "fit": null,
-        "timing": 55
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 17)",
-        "almost nobody uploaded on this in the last 30 days — could be satiated or dead"
-      ],
-      "saturation": {
-        "videos": 20,
-        "top3_share": 0.763,
-        "winner_ratio": 77,
-        "fresh_share_30d": 0.05,
-        "median_views": 29295,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
-      },
-      "confidence": 0.85,
-      "mechanism": 25,
-      "vph_median": 6
     },
     {
       "topic": "shorts retention hook",
@@ -214,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (6%) is the conversion surface",
-      "at": "2026-11-03T18:37:15.824Z",
+      "at": "2026-11-03T18:41:00.672Z",
       "asks": [
         {
           "label": "asked for a sequel",
