@@ -184,6 +184,15 @@ jobs:
             node scripts/yt-comments.mjs || echo "::warning::comment mining did not run — see public/yt-intel/comments-*.json"
           fi
 
+      - name: Thumbnail fingerprint (keyless, needs a network that serves i.ytimg.com)
+        id: thumbs
+        if: always()
+        continue-on-error: true
+        # thumbprint.py has been unit-tested since it was written but never run against a real
+        # thumbnail: i.ytimg.com is blocked in the agent's sandbox. GitHub's runners can reach
+        # it, so this is where the module finally meets an image it did not invent.
+        run: python scripts/thumbnails.py public/yt-intel/thumbnails.json
+
       - name: Record the lane and the doctor verdict
         if: always()
         env:
