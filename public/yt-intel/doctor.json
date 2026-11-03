@@ -1,22 +1,14 @@
-  PASS  key present — AIzaSy…zpvE (39 chars)
-  PASS  key shape looks right — starts with AIza…
-  PASS  channels.list — 1 channel returned (1 quota unit)
-  FAIL  search.list — module 'yt_intel.client' has no attribute 'demand'
-
-  quota used today : 1 / 10000 units
-  searches left    : 99
-  next             : python -m yt_intel topic "your topic" --limit 30
 {
   "checks": [
     {
       "check": "key present",
       "ok": true,
-      "detail": "AIzaSy…zpvE (39 chars)"
+      "detail": "AIzaSy\u2026zpvE (39 chars)"
     },
     {
       "check": "key shape looks right",
       "ok": true,
-      "detail": "starts with AIza…"
+      "detail": "starts with AIza\u2026"
     },
     {
       "check": "channels.list",
@@ -25,9 +17,9 @@
     },
     {
       "check": "search.list",
-      "ok": false,
-      "detail": "module 'yt_intel.client' has no attribute 'demand'"
+      "ok": true,
+      "detail": "lane=api status=ok items=1 (100 quota units)"
     }
   ],
-  "quota_used": 1
+  "quota_used": 102
 }

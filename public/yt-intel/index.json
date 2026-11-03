@@ -1,39 +1,39 @@
 {
-  "updated": "2026-11-03T18:15:36.080Z",
+  "updated": "2026-11-03T18:17:37.669Z",
   "reports": [
     {
       "topic": "ai video editing",
-      "at": "2026-11-03T18:13:49.000Z",
+      "at": "2026-11-03T18:17:34.000Z",
       "file": "ai-video-editing.json",
       "lane": "api",
       "order": "relevance",
       "status": "ok",
       "count": 30,
       "verdict": "SHARPEN",
-      "score": 59.6,
-      "reason": "the topic is live but the angle is not yet differentiated",
-      "next_probe": "write the hook and title first; if they score under 80, the topic will not save them",
+      "score": 72.4,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
       "parts": {
-        "demand": 83.4,
-        "winnability": 80.6,
-        "mechanism": 0,
+        "demand": 100,
+        "winnability": 89.3,
+        "mechanism": 10,
         "fit": null,
-        "timing": 55
+        "timing": null
       },
       "strongest_against": [
         "no objection found in the data — which itself is a reason to check the sample"
       ],
       "saturation": {
         "videos": 30,
-        "top3_share": 0.594,
-        "winner_ratio": 28.1,
-        "fresh_share_30d": 0.43,
-        "median_views": 81908,
+        "top3_share": 0.507,
+        "winner_ratio": 20.1,
+        "fresh_share_30d": 0.44,
+        "median_views": 80636,
         "reading": "distributed — no single video owns it, entry is feasible"
       },
-      "confidence": 0.85,
-      "mechanism": 0,
-      "vph_median": 80
+      "confidence": 0.75,
+      "mechanism": 10,
+      "vph_median": 75
     },
     {
       "topic": "video editing workflow",
