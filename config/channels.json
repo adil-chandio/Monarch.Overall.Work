@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "updated": "2026-11-03",
+  "space": "yt-automation",
+  "note": "Names and handles carried over from the existing workspace defaults. Confirm or rename; nothing here is invented.",
+  "channels": [
+    {
+      "id": "ch-01",
+      "slot": "CH-01",
+      "name": "Monarch Lab",
+      "handle": "@monarchlab",
+      "niche": "AI, tools & making things",
+      "format": "long-form",
+      "cadence": "2 / week",
+      "length_target": "8-12 min + 3 shorts",
+      "color": "#e85b43",
+      "status": "setup",
+      "kpi": { "primary": "avg_view_duration_pct", "target": 50 },
+      "pillars": ["tools I actually use", "build in public", "one concept, one demo"],
+      "banned": ["stock b-roll as hero", "reaction-only videos", "clickbait with no payoff"]
+    },
+    {
+      "id": "ch-02",
+      "slot": "CH-02",
+      "name": "Mindful Momentum",
+      "handle": "@mindfulmomentum",
+      "niche": "Motivation & personal growth",
+      "format": "shorts",
+      "cadence": "1 / day",
+      "length_target": "30-45 s vertical",
+      "color": "#a27bce",
+      "status": "setup",
+      "kpi": { "primary": "swipe_away_pct", "target": 25, "direction": "below" },
+      "pillars": ["discipline over motivation", "start before ready", "quiet consistency"],
+      "banned": ["hustle-porn", "fake quotes", "generic stock montage"],
+      "conflict_flag": "Overlaps with the personal-brand motivational account. Decide: one owns motivational shorts, the other owns long-form talk. Do not run both on the same voice."
+    },
+    {
+      "id": "ch-03",
+      "slot": "CH-03",
+      "name": "Curious Miles",
+      "handle": "@curiousmiles",
+      "niche": "Exploration & learning",
+      "format": "long-form",
+      "cadence": "1 / week",
+      "length_target": "6-10 min",
+      "color": "#df9b4b",
+      "status": "setup",
+      "kpi": { "primary": "ctr_pct", "target": 6 },
+      "pillars": ["how it actually works", "one place, one lesson", "myth vs measured"],
+      "banned": ["voice-over stock documentary", "unsourced claims"]
+    }
+  ]
+}

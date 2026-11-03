@@ -1,6 +1,47 @@
-# Monarch — modular personal work platform
+# MONARCH OS — `Monarch.Overall.Work`
 
-Monarch is being shaped as one workspace with focused mini-apps: YouTube Studio, Social Studio, Projects, AI & Agent Library, Knowledge Base, Team & Access, and Monarch Vault. Each area has its own workflow; shared navigation, search, tasks, and workspace context tie them together.
+**One repo. One deploy. Five work domains. Every other GitHub repo is a linked satellite.**
+
+| Space | Route | What it runs | Detail |
+|---|---|---|---|
+| **YouTube Automation** | `/space/yt-automation` | 3 faceless channels + the production factory that feeds them | [03](./docs/architecture/03-SPACE-OPERATING-MODEL.md#space-1--yt-automation-youtube-automation-business) |
+| **Monarch Studio** | `/space/monarch-studio` | video editing + website development, clients, portals, settlement | [03](./docs/architecture/03-SPACE-OPERATING-MODEL.md#space-2--monarch-studio-video-editing--website-development) |
+| **Personal Brand** | `/space/personal-brand` | motivational/youth account + AI-BTS account + showcase identity | [03](./docs/architecture/03-SPACE-OPERATING-MODEL.md#space-3--personal-brand) |
+| **Portfolio** | `/space/portfolio` | the public proof surface — real numbers only | [03](./docs/architecture/03-SPACE-OPERATING-MODEL.md#space-4--portfolio) |
+| **Ops** | `/space/ops` | money, calendar, agents, repo health | [03](./docs/architecture/03-SPACE-OPERATING-MODEL.md#space-5--ops) |
+
+Start here → **[docs/architecture/](./docs/architecture/README.md)**
+
+- **[01 — Repository structure](./docs/architecture/01-REPO-STRUCTURE.md)**: layout, five spaces, data model, hard rules
+- **[02 — Repo registry](./docs/architecture/02-REPO-REGISTRY.md)**: all 22 repos classified core / satellite / asset-store / archive
+- **[03 — Space operating model](./docs/architecture/03-SPACE-OPERATING-MODEL.md)**: pipeline, assets, scoreboard, allowed agents per space
+- **[04 — Build waves](./docs/architecture/04-BUILD-WAVES.md)**: five shippable waves with verify lists and rollback
+
+## Repo health
+
+```bash
+node scripts/audit-repos.mjs            # live drift check against GitHub
+node scripts/audit-repos.mjs --offline  # config only
+```
+
+Last run: **22 repos · 3,207 MB · 11 empty · 10 archive candidates**, no drift.
+
+## Config is the source of truth
+
+`config/spaces.json`, `channels.json`, `social.json`, `services.json`, `repos.json`, `payment-rails.json`.
+Read through `src/lib/config.js`. **Never hardcode these lists in a component.**
+
+## Run it
+
+```bash
+npm install
+npm run dev     # Vite dev server (Arena preview host allowed)
+npm run build
+```
+
+Routes that must never break: `/`, `/?portal=CODE`, `/?workspace=1`, `/showreel/`.
+
+---
 
 ## Run the current private preview
 

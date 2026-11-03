@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "updated": "2026-11-03",
+  "space": "monarch-studio",
+  "note": "Labels and instructions only. No account numbers, no keys. Live values live in Supabase payment_rails_config (admin-only).",
+  "rails": [
+    { "id": "pkr_local", "label": "Pakistan local", "methods": ["Raast", "SadaPay", "Easypaisa", "bank transfer"], "settlement": "instant", "fee_pct": 0 },
+    { "id": "foreign_fiat", "label": "Foreign fiat", "methods": ["Contra card/Apple Pay", "USD ACH via nsave / Elevate Pay", "Wise to IBAN"], "settlement": "1-3 days", "fee_pct": 1 },
+    { "id": "global_crypto", "label": "Global crypto", "methods": ["USDC Solana", "USDC Polygon", "USDT TRC20"], "settlement": "minutes", "fee_pct": 0 }
+  ],
+  "unavailable_from_pakistan": ["Stripe", "Wise Business", "PayPal business"],
+  "terms": { "advance_pct": 50, "on_delivery_pct": 50, "clean_master_after": "settlement verified" }
+}

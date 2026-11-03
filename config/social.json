@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "updated": "2026-11-03",
+  "space": "personal-brand",
+  "note": "Two personal-brand accounts plus the showcase identity. Handles carried from existing workspace defaults; confirm handles before publishing.",
+  "accounts": [
+    {
+      "id": "soc-01",
+      "role": "motivational-youth",
+      "label": "Motivational / youth growth",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts"],
+      "handle": "@mycreatorpage",
+      "status": "setup",
+      "voice": "direct, Roman-Urdu + English, no lecture tone",
+      "audience": "16-25, Pakistan-first",
+      "content_unit": "30-45 s vertical + save-worthy carousel",
+      "pillars": ["discipline", "self-respect", "starting from zero"],
+      "kpi": { "primary": "saves_plus_shares_rate", "target": 4 },
+      "cadence": "5 / week"
+    },
+    {
+      "id": "soc-02",
+      "role": "ai-bts",
+      "label": "AI behind-the-scenes",
+      "platforms": ["Instagram", "X", "LinkedIn"],
+      "handle": null,
+      "status": "needs_setup",
+      "voice": "technical honesty, show the failure too",
+      "audience": "builders, prospective clients",
+      "content_unit": "20-60 s vertical or 6-slide carousel",
+      "pillars": ["how it is made", "what broke", "cost in rupees"],
+      "kpi": { "primary": "profile_visits_to_inquiry", "target": 2 },
+      "cadence": "3 / week"
+    },
+    {
+      "id": "soc-03",
+      "role": "portfolio-showcase",
+      "label": "Portfolio / showcase",
+      "platforms": ["Instagram", "LinkedIn"],
+      "handle": null,
+      "status": "needs_setup",
+      "voice": "editorial, sparse, no hype",
+      "audience": "buyers of design and film work",
+      "content_unit": "case-study post + 3 stills",
+      "pillars": ["delivered work", "before/after", "process proof"],
+      "kpi": { "primary": "inbound_inquiries", "target": 1 },
+      "cadence": "2 / week"
+    }
+  ],
+  "rule": "One production session produces posts for all three accounts. Never one post per session."
+}
