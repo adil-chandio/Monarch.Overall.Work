@@ -74,6 +74,8 @@ jobs:
           KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
           KEY_ALT: ${{ secrets.YTAP1 }}
           KEY_ALT_2: ${{ secrets.YTAPI1 }}
+          YT_KEY_UPPER: ${{ secrets.YT_KEY }}
+          YT_API_KEY_ALT: ${{ secrets.YT_API_KEY }}
         # The key secret must be named YOUTUBE_API_KEY for the tool to pick it up. A closely
         # near-miss secret (YTAP1) is a very easy mistake to make in a mobile browser, so the
         # likely spellings are accepted here and normalised into one name — and the log says
@@ -81,8 +83,18 @@ jobs:
         # check has to exist rather than be assumed.
         # The value is masked; only its length and first four characters are printed.
         run: |
+          # Printed so the answer is decidable from the run page without any log download.
+          echo "repository : $GITHUB_REPOSITORY"
+          echo "ref        : $GITHUB_REF"
+          echo "secrets seen: YOUTUBE_API_KEY=$([ -n "$KEY_PRIMARY" ] && echo present || echo absent)" \
+               "YTAP1=$([ -n "$KEY_ALT" ] && echo present || echo absent)" \
+               "YTAPI1=$([ -n "$KEY_ALT_2" ] && echo present || echo absent)" \
+               "YT_KEY=$([ -n "$YT_KEY_UPPER" ] && echo present || echo absent)" \
+               "YT_API_KEY=$([ -n "$YT_API_KEY_ALT" ] && echo present || echo absent)"
           KEY="${KEY_PRIMARY:-$KEY_ALT}"
           [ -z "$KEY" ] && KEY="$KEY_ALT_2"
+          [ -z "$KEY" ] && KEY="$YT_KEY_UPPER"
+          [ -z "$KEY" ] && KEY="$YT_API_KEY_ALT"
           if [ -z "$KEY" ]; then
             echo "no key secret (YOUTUBE_API_KEY / YTAP1 / YTAPI1) — staying keyless"
             echo "state=missing" >> "$GITHUB_OUTPUT"
