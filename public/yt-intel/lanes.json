@@ -1,14 +1,19 @@
 {
-  "lane": "web",
-  "key_present": false,
-  "key_secret_name": "missing",
-  "key_starts_with_aiza": false,
-  "quota_used": 0,
-  "quota_remaining": 10000,
+  "lane": "api",
+  "key_present": true,
+  "key_secret_name": "YOUTUBE_API_KEY",
+  "key_starts_with_aiza": true,
+  "quota_used": 103,
+  "quota_remaining": 9897,
   "secrets_seen": {
-    "YOUTUBE_API_KEY": false,
+    "YOUTUBE_API_KEY": true,
     "YTAP1": false,
+    "YTAPI1": false,
     "YT_KEY": false
+  },
+  "doctor": {
+    "ran": false,
+    "outcome": "success"
   },
   "event": "push",
   "ref": "refs/heads/arena/9960286a-monarch-overall-work"
