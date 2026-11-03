@@ -1,21 +1,21 @@
 {
-  "updated": "2026-11-03T20:08:15.487Z",
+  "updated": "2026-11-03T20:10:09.445Z",
   "reports": [
     {
       "topic": "ai video editing",
-      "at": "2026-11-03T20:07:03.000Z",
+      "at": "2026-11-03T20:09:55.000Z",
       "file": "ai-video-editing.json",
       "lane": "api",
       "order": "relevance",
       "status": "ok",
       "count": 30,
       "verdict": "SHARPEN",
-      "score": 71.6,
+      "score": 71.5,
       "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
       "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
       "parts": {
         "demand": 84,
-        "winnability": 92.6,
+        "winnability": 92.30000000000001,
         "mechanism": 35,
         "fit": null,
         "timing": 55
@@ -25,15 +25,15 @@
       ],
       "saturation": {
         "videos": 30,
-        "top3_share": 0.474,
-        "winner_ratio": 19.8,
+        "top3_share": 0.477,
+        "winner_ratio": 12.3,
         "fresh_share_30d": 0.43,
-        "median_views": 81909,
+        "median_views": 131586,
         "reading": "distributed — no single video owns it, entry is feasible"
       },
       "confidence": 0.85,
       "mechanism": 35,
-      "vph_median": 80
+      "vph_median": 97
     },
     {
       "topic": "ai b roll generation",
@@ -214,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (5%) is the conversion surface",
-      "at": "2026-11-03T20:00:42.702Z",
+      "at": "2026-11-03T20:09:56.268Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -246,20 +246,20 @@
     "topic": "ai video editing",
     "n": 12,
     "face_rate": 0.92,
-    "avg_contrast": 0.272,
-    "avg_busy": 3.25,
-    "reading": "face-led: people are the product; house colour is red (6/12 thumbnails)",
+    "avg_contrast": 0.28,
+    "avg_busy": 2.93,
+    "reading": "face-led: people are the product; house colour is red (5/12 thumbnails)",
     "hue_families": [
       [
         "red",
-        6
+        5
       ],
       [
         "teal",
         5
       ],
       [
-        "blue",
+        "amber",
         1
       ]
     ],
@@ -270,14 +270,14 @@
         "face": 0.104
       },
       {
-        "id": "AgUATWAOaKY",
-        "hex": "#259cf1",
-        "face": 0.1
-      },
-      {
         "id": "VVWiJm0sA7Y",
         "hex": "#e56a25",
         "face": 0.076
+      },
+      {
+        "id": "AgUATWAOaKY",
+        "hex": "#259cf1",
+        "face": 0.1
       }
     ]
   }
