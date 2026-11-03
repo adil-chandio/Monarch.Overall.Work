@@ -1,6 +1,40 @@
 {
-  "updated": "2026-11-03T20:14:51.546Z",
+  "updated": "2026-11-03T20:18:06.571Z",
   "reports": [
+    {
+      "topic": "ai b roll generation",
+      "at": "2026-11-03T20:17:51.000Z",
+      "file": "ai-b-roll-generation.json",
+      "lane": "api",
+      "order": "thisMonth",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 59.5,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 73.8,
+        "winnability": 70,
+        "mechanism": 25,
+        "fit": null,
+        "timing": null
+      },
+      "strongest_against": [
+        "the sample is too new to judge — median 10 views with 100% uploaded in the last 30 days, so 'nobody owns it' may just mean 'nobody has watched it yet'"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.986,
+        "winner_ratio": 22974.3,
+        "fresh_share_30d": 1,
+        "median_views": 10,
+        "reading": "too young to judge — this sample is almost entirely under 30 days old, so the view counts are a stopwatch, not a verdict; ask again when it has run"
+      },
+      "confidence": 0.75,
+      "mechanism": 25,
+      "vph_median": 0
+    },
     {
       "topic": "ai video editing",
       "at": "2026-11-03T20:09:55.000Z",
@@ -34,40 +68,6 @@
       "confidence": 0.85,
       "mechanism": 35,
       "vph_median": 97
-    },
-    {
-      "topic": "ai b roll generation",
-      "at": "2026-11-03T19:13:29.000Z",
-      "file": "ai-b-roll-generation.json",
-      "lane": "api",
-      "order": "thisMonth",
-      "status": "ok",
-      "count": 30,
-      "verdict": "SHARPEN",
-      "score": 59.5,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
-      "parts": {
-        "demand": 73.8,
-        "winnability": 70,
-        "mechanism": 25,
-        "fit": null,
-        "timing": null
-      },
-      "strongest_against": [
-        "the sample is too new to judge — median 10 views with 100% uploaded in the last 30 days, so 'nobody owns it' may just mean 'nobody has watched it yet'"
-      ],
-      "saturation": {
-        "videos": 30,
-        "top3_share": 0.986,
-        "winner_ratio": 22925.8,
-        "fresh_share_30d": 1,
-        "median_views": 10,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
-      },
-      "confidence": 0.75,
-      "mechanism": 25,
-      "vph_median": 0
     },
     {
       "topic": "shorts retention hook",
@@ -214,7 +214,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (5%) is the conversion surface",
-      "at": "2026-11-03T20:00:42.702Z",
+      "at": "2026-11-03T20:17:52.348Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -243,20 +243,20 @@
     }
   ],
   "thumbnails": {
-    "topic": "ai video editing",
+    "topic": "ai b roll generation",
     "n": 12,
-    "face_rate": 0.92,
-    "avg_contrast": 0.28,
-    "avg_busy": 2.93,
-    "reading": "face-led: people are the product; house colour is red (5/12 thumbnails)",
+    "face_rate": 0.67,
+    "avg_contrast": 0.187,
+    "avg_busy": 2.28,
+    "reading": "face-led: people are the product; house colour is red (7/12 thumbnails)",
     "hue_families": [
       [
         "red",
-        5
+        7
       ],
       [
         "teal",
-        5
+        2
       ],
       [
         "amber",
@@ -265,19 +265,19 @@
     ],
     "samples": [
       {
-        "id": "C0jOKDJtK9s",
-        "hex": "#c4825c",
-        "face": 0.104
+        "id": "0O3qpiT6yZo",
+        "hex": "#a56d61",
+        "face": 0
       },
       {
-        "id": "VVWiJm0sA7Y",
-        "hex": "#e56a25",
-        "face": 0.076
+        "id": "EB3m2RfXwb4",
+        "hex": null,
+        "face": 0
       },
       {
-        "id": "AgUATWAOaKY",
-        "hex": "#259cf1",
-        "face": 0.1
+        "id": "YSF4qs6KxtA",
+        "hex": "#969f23",
+        "face": 0.141
       }
     ]
   }
