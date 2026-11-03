@@ -69,6 +69,7 @@ jobs:
         run: python -m yt_intel.test_offline
 
       - name: Resolve the key secret
+        id: key
         env:
           KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
           KEY_ALT: ${{ secrets.YTAP1 }}
@@ -84,15 +85,26 @@ jobs:
           [ -z "$KEY" ] && KEY="$KEY_ALT_2"
           if [ -z "$KEY" ]; then
             echo "no key secret (YOUTUBE_API_KEY / YTAP1 / YTAPI1) — staying keyless"
+            echo "state=missing" >> "$GITHUB_OUTPUT"
+            echo "::warning::No API key secret resolved. The run will be keyless (web lane)."
             exit 0
           fi
           echo "::add-mask::$KEY"
           echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
           if [ -n "$KEY_PRIMARY" ]; then
+            echo "state=YOUTUBE_API_KEY" >> "$GITHUB_OUTPUT"
             echo "using secret YOUTUBE_API_KEY (${#KEY} chars)"
           else
+            echo "state=YTAP1" >> "$GITHUB_OUTPUT"
             echo "using secret YTAP1 (${#KEY} chars) — rename it to YOUTUBE_API_KEY when convenient"
           fi
+          # The value is never printed. Its *shape* is, because a secret that resolves but is
+          # not a Google key behaves identically to one that resolved correctly until the
+          # first API call — and that failure is expensive to diagnose from a red build.
+          case "$KEY" in
+            AIza*) echo "key shape: starts with AIza (expected)" ;;
+            *) echo "::warning::key resolved but does not start with AIza — check what was pasted" ;;
+          esac
 
       - name: Which lane are we in?
         run: python -m yt_intel lanes
@@ -132,6 +144,26 @@ jobs:
             echo "no topic given -> walking config/topic-queue.json (quota-capped)"
             node scripts/yt-queue.mjs --limit "$LIMIT"
           fi
+
+      - name: Record the lane (so a keyless run is visible in the repo, not just the logs)
+        if: always()
+        env:
+          KEY_STATE: ${{ steps.key.outputs.state }}
+        run: |
+          python - <<'PY' > public/yt-intel/lanes.json
+          import json, os, sys
+          sys.path.insert(0, ".")
+          from yt_intel import client
+          print(json.dumps({
+              "lane": client.lane(),
+              "key_present": bool(client.API_KEY),
+              "key_secret_name": os.environ.get("KEY_STATE") or "missing",
+              "key_starts_with_aiza": (client.API_KEY or "").startswith("AIza"),
+              "quota_used": client.BUDGET.state.get("used", 0),
+              "quota_remaining": client.BUDGET.remaining,
+          }, indent=2))
+          PY
+          cat public/yt-intel/lanes.json
 
       - name: Refresh the UI index (public/yt-intel/index.json)
         run: node scripts/yt-index.mjs
