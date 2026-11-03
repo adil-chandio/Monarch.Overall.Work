@@ -262,15 +262,16 @@ aur dikhe to usi jagah ruk jao, aage mat barho.
 # 1. key environment mein hai?
 export YOUTUBE_API_KEY="AIza…"
 python -m yt_intel lanes
-#    good: lane api · quota 10000
+#    good: lane api · quota 10000 remaining
 #    bura:  lane web  -> key load nahi hui (shell restart / .env.local check)
 
 # 2. key asal mein kaam karti hai?
 python -m yt_intel doctor
-#    good: PASS api key accepted · Data API v3 reachable · quota left 10000
-#    bura: 403 accessNotConfigured -> Step 3 (API enable) chhoot gaya
-#          403 keyInvalid          -> key galat paste hui
-#          timeout                 -> network, key ka masla nahi
+#    good: PASS key present / key shape / channels.list / search.list,
+#          phir "quota used today : 101 / 10000 units" aur "searches left : 98"
+#    bura: "API not enabled on this project" -> Step 3 (API enable) chhoot gaya
+#          "key rejected"                   -> key galat paste hui (space / delete ho gayi)
+#          timeout / SSL                    -> network, key ka masla nahi
 
 # 3. pehla topic (1 search = 100 units)
 python -m yt_intel topic "ai video editing" --limit 30 \
@@ -288,7 +289,7 @@ python -m yt_intel channel @mkbhd
 
 # 6. UI ka index
 node scripts/yt-index.mjs
-#    good: index: N reports -> public/yt-intel/index.json
+#    good: index: 6 reports -> public/yt-intel/index.json
 
 # 7. browser: workspace -> YouTube Automation -> Research desk
 #    har card par verdict + conf + median views + views/hour dikhna chahiye
