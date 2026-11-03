@@ -122,9 +122,19 @@ jobs:
         run: python -m yt_intel lanes
 
       - name: Key doctor (proves the key before trusting it)
-        # no key configured? skip instead of failing the schedule — keyless mode still works
+        # no key configured? skip instead of failing the schedule — keyless mode still works.
+        # The report is written to the repo as well as the log: the log is not downloadable
+        # from every environment, and "doctor failed" without its reason is not actionable.
+        continue-on-error: true
         run: |
-          if [ -z "$YOUTUBE_API_KEY" ]; then echo "no key secret — staying keyless"; else python -m yt_intel doctor; fi
+          mkdir -p public/yt-intel
+          if [ -z "$YOUTUBE_API_KEY" ]; then
+            echo "no key secret — staying keyless"
+            echo '{"status":"skipped","detail":"no key secret"}' > public/yt-intel/doctor.json
+            exit 0
+          fi
+          python -m yt_intel doctor --json > public/yt-intel/doctor.json 2>&1 || true
+          python -m yt_intel doctor || echo "::warning::doctor did not pass — see public/yt-intel/doctor.json"
 
       - name: Resolve the run plan (marker file or queue)
         id: plan
