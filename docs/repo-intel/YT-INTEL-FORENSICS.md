@@ -48,7 +48,7 @@ yt_intel/
   decide.py      GO / SHARPEN / NO / RETRY with parts, objections, missing signals, next probe
   ideas.py       trend family + 12 evergreen curiosity structures + WTF bank
   cli.py         demand · topic · channel · reverse · style · ideas · lanes
-  test_offline.py 42 assertions, no network required
+  test_offline.py 38 assertions, no network required
 ```
 
 ### The four verdicts, and why RETRY exists
@@ -108,7 +108,7 @@ are now structurally different.
 ```bash
 export YOUTUBE_API_KEY=...        # free, Google Cloud console, YouTube Data API v3
 python -m yt_intel lanes          # expect: lane api, quota 10000
-python -m yt_intel.test_offline   # 42 assertions, no network
+python -m yt_intel.test_offline   # 38 assertions, no network
 python -m yt_intel topic "ai video editing" --limit 30 --json public/yt-intel/ai-video-editing.json
 node scripts/yt-index.mjs         # rebuild the index the UI reads
 python -m yt_intel style reference.mp4 --compare deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4

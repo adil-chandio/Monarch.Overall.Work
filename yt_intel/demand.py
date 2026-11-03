@@ -170,8 +170,16 @@ def analyse(topic: str, gl: str = "US", deep: bool = False, with_trends: bool = 
     return d
 
 
+TOTAL_WEIGHT = 1.0   # position .35 + spread .25 + expansion .20 + trends .20
+
+
 def score(d: Demand) -> tuple[dict, float | None, float]:
-    """Weighted, explainable, and honest about missing inputs."""
+    """Weighted, explainable, and honest about missing inputs.
+
+    `confidence` divides by the FULL scheme weight, not by the weights that happened to be
+    present. Normalising by the present weights makes confidence 1.0 the moment one signal
+    exists — which is how a two-signal topic gets reported as a certainty.
+    """
     parts: dict[str, float | None] = {}
     weights: dict[str, float] = {}
 
@@ -206,11 +214,10 @@ def score(d: Demand) -> tuple[dict, float | None, float]:
 
     if not weights:
         return parts, None, 0.0
-    total_w = sum(weights.values())
     got = sum(parts[k] * w for k, w in weights.items() if parts.get(k) is not None)
     got_w = sum(w for k, w in weights.items() if parts.get(k) is not None)
     score_val = round(got / got_w, 1) if got_w else None
-    confidence = round(got_w / total_w, 2)
+    confidence = round(got_w / TOTAL_WEIGHT, 2)
     return parts, score_val, confidence
 
 
