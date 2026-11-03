@@ -3,6 +3,11 @@ name: YT Intel — topic research
 # Runs the same tool a human runs locally, on a schedule, so the topic pool never goes
 # stale and the weekly Ops review has fresh numbers without anyone remembering to click.
 on:
+  push:
+    branches:
+      - arena/9960286a-monarch-overall-work
+    paths:
+      - "yt-intel-trigger.txt"
   workflow_dispatch:
     inputs:
       topic:
@@ -66,12 +71,23 @@ jobs:
         run: |
           if [ -z "$YOUTUBE_API_KEY" ]; then echo "no key secret — staying keyless"; else python -m yt_intel doctor; fi
 
+      - name: Resolve the run plan (marker file or queue)
+        id: plan
+        run: |
+          if [ -f yt-intel-trigger.txt ]; then
+            TOPIC="$(head -1 yt-intel-trigger.txt | sed 's/#.*//' | xargs)"
+            echo "topic=$TOPIC" >> "$GITHUB_OUTPUT"
+            echo "from marker file: ${TOPIC:-<queue>}"
+          else
+            echo "topic=" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Research (one topic, or the whole queue)
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           YT_INTEL_MAX_TOPICS: '4'
         run: |
-          TOPIC="${{ github.event.inputs.topic }}"
+          TOPIC="${{ github.event.inputs.topic || steps.plan.outputs.topic }}"
           LIMIT="${{ github.event.inputs.limit || '30' }}"
           if [ -n "$TOPIC" ]; then
             echo "single topic: $TOPIC"
