@@ -134,21 +134,15 @@ jobs:
             echo '{"status":"skipped","detail":"no key secret"}' > public/yt-intel/doctor.json
             exit 0
           fi
-          # `doctor --json` prints human lines AND the JSON object; the file must be the JSON.
-          # Filtering to the object keeps doctor.json parseable, which is what broke the index.
-          python -m yt_intel doctor --json > /tmp/doctor.out 2>/tmp/doctor.err || true
-          python - <<'PY' > public/yt-intel/doctor.json
-          import json, re
-          raw = open("/tmp/doctor.out").read()
-          start = raw.find("\n{")
-          payload = {"status": "error", "detail": raw[-800:] or open("/tmp/doctor.err").read()[-800:]}
-          if start != -1:
-              try:
-                  payload = json.loads(raw[start:])
-              except Exception as e:
-                  payload["parse_error"] = str(e)[:200]
-          print(json.dumps(payload, indent=2))
-          PY
+          # `--json-only` guarantees stdout is exactly one JSON document. The earlier attempt
+          # captured human lines and then tried to slice the object out of them, which still
+          # shipped a two-document file — the fix belongs in the command, not in a regex.
+          python -m yt_intel doctor --json-only > public/yt-intel/doctor.json 2>/tmp/doctor.err || true
+          python -c "import json;json.load(open('public/yt-intel/doctor.json'))" \
+            || printf '{"status":"error","detail":%s}' \
+               "$(python -c 'import json;print(json.dumps(open("/tmp/doctor.err").read()[-600:]))')" \
+               > public/yt-intel/doctor.json
+          head -c 400 public/yt-intel/doctor.json; echo
           python -m yt_intel doctor || echo "::warning::doctor did not pass — see public/yt-intel/doctor.json"
 
       - name: Resolve the run plan (marker file or queue)

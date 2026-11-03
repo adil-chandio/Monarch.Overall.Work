@@ -76,16 +76,25 @@ def cmd_doctor(args):
     separates the two.
     """
     checks = []
+    quiet = getattr(args, "json_only", False)  # machine-readable mode: stdout carries JSON only
+
+    def say(line=""):
+        if not quiet:
+            print(line)
 
     def rec(name, ok, detail=""):
         checks.append({"check": name, "ok": ok, "detail": detail})
         mark = "PASS" if ok else "FAIL"
-        print(f"  {mark}  {name}" + (f" — {detail}" if detail else ""))
+        say(f"  {mark}  {name}" + (f" — {detail}" if detail else ""))
 
     key = client.API_KEY
     if not key:
-        print("\nDOCTOR\n  FAIL  no YOUTUBE_API_KEY in the environment")
-        print("  → see docs/setup/YOUTUBE-API-KEY.md (5 minutes, free, no card)")
+        say("\nDOCTOR\n  FAIL  no YOUTUBE_API_KEY in the environment")
+        say("  → see docs/setup/YOUTUBE-API-KEY.md (5 minutes, free, no card)")
+        if args.json or quiet:
+            _p({"checks": [{"check": "key present", "ok": False,
+                            "detail": "no YOUTUBE_API_KEY in the environment"}],
+                "quota_used": client.BUDGET.state["used"]})
         return 1
     rec("key present", True, f"{key[:6]}…{key[-4:]} ({len(key)} chars)")
     # shape is a hint, not a gate: the only real proof is a successful call
@@ -105,7 +114,7 @@ def cmd_doctor(args):
             rec("channels.list", False, "key rejected — check for a stray space or a deleted key")
         else:
             rec("channels.list", False, msg)
-        print("\n  Quota spent so far:", client.BUDGET.state["used"])
+        say("\n  Quota spent so far: " + str(client.BUDGET.state["used"]))
         return 1
 
     try:
@@ -117,11 +126,12 @@ def cmd_doctor(args):
     except Exception as e:  # noqa: BLE001
         rec("search.list", False, str(e)[:160])
 
-    print(f"\n  quota used today : {client.BUDGET.state['used']} / {client.BUDGET.DAILY} units")
-    print(f"  searches left    : {client.BUDGET.remaining // 100}")
-    print("  next             : python -m yt_intel topic \"your topic\" --limit 30")
-    if args.json:
-        _p({"checks": checks, "quota_used": client.BUDGET.state["used"]})
+    say(f"\n  quota used today : {client.BUDGET.state['used']} / {client.BUDGET.DAILY} units")
+    say(f"  searches left    : {client.BUDGET.remaining // 100}")
+    say("  next             : python -m yt_intel topic \"your topic\" --limit 30")
+    if args.json or quiet:
+        _p({"checks": checks, "quota_used": client.BUDGET.state["used"],
+            "quota_remaining": client.BUDGET.remaining})
     return 0 if all(c["ok"] for c in checks) else 1
 
 
@@ -381,6 +391,8 @@ def main(argv=None):
 
     s = sub.add_parser("doctor", help="prove the API key works before trusting it")
     s.add_argument("--json", action="store_true")
+    s.add_argument("--json-only", action="store_true",
+                   help="stdout is ONLY the JSON object — for CI files, never for humans")
     s.set_defaults(fn=cmd_doctor)
 
     s = sub.add_parser("demand", help="is anyone actually asking for this?")
