@@ -304,15 +304,20 @@ git add yt-intel-trigger.txt && git commit -m "ci: first keyed topic run" && git
 > 10,000 units/day ka matlab ≈ 99 topics/day. Queue `max_per_run: 4` par capped hai, aur
 > cache (`.cache/yt-intel/`) same query dobara chalane par 0 units leta hai.
 
-### Ab tak kya kya unproven hai (honest list)
+### Ab kya proven hai (2026-11-03, is repo par chala hua)
 
 | cheez | status |
 |---|---|
-| keyless web lane (search, ages, views/hour) | **live** — CI par 6 topics measure ho chuke |
-| `doctor` / quota accounting | likha hua, **kabhi key ke saath chala nahi** |
-| Data API lane ke parsers (`videos.list` shape) | likha hua, key ke baghair test nahi ho sakta |
-| comment mining ke phrase lists | synthetic comments par 8 assertions pass; asli comments par nahi |
-| `style.py` ka cut threshold (0.22) | ek 36s film par tuned — doosri reference chahiye |
+| Data API lane | **live** — CI par 6 topics, har report mein exact views/likes/comment counts |
+| `doctor` | **4/4 PASS** in CI — `channels.list` + `search.list`, quota 102 units |
+| quota accounting | **live** — `lanes.json` mein `quota_used` har run ke saath |
+| comment mining (`commentThreads`) | **live** — 100 comments par chala, asli reading nikli |
+| keyless web lane | live (fallback), magar ab API hi default hai |
+| `style.py` ka cut threshold (0.22) | **abhi bhi** ek 36s film par tuned — doosri reference chahiye |
+
+**Comment mining ka pehla asli nateeja** (100 comments, ek 3,768-comment automation video):
+`wants to buy time/teaching (6%) is the conversion surface` — yani audience course/coaching
+kharidna chahti hai. Ye number keyless lane se **kabhi** nahi milta.
 
 ---
 

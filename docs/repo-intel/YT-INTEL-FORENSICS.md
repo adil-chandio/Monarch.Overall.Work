@@ -89,19 +89,21 @@ are now structurally different.
 
 ## 4. Still missing (ranked by how much it costs us)
 
-1. **Comment mining — implemented, unproven.** `yt_intel comments <id>` now exists:
+1. **Comment mining — implemented and live (2026-11-03).** `yt_intel comments <id>`:
    `commentThreads` (1 unit/page, up to 100 comments), mined into three actionable buckets
    — what the audience *asked for* (sequel / sibling topic / which tool), what they
    *objected to* (did not work / cost / pacing), and what asset they *wanted* (file,
    template, course). Deliberately phrase-led, not sentiment-scored: "sentiment 0.62"
    cannot be written into a script, "9 of 100 asked for part 2" can.
-   Not yet run against a live key, and the keyless lane returns `unavailable` rather than
-   an empty list — so until the first keyed run, treat the phrase lists as untested
-   against real comments (they are unit-tested against synthetic ones).
-2. **Live validation in this sandbox** — every network probe here fails with
-   `SSL_ERROR_SYSCALL`. The parsers (`_rich_grid`, `_from_lockup`) are written against
-   YouTube's 2024+ `lockupViewModel` layout but have not yet seen a real response. First
-   run on a normal network must be treated as a shakedown.
+   First real run: 100 comments from a step-by-step automation video →
+   `wants to buy time/teaching (6%) is the conversion surface`. Two corrections came out of
+   it: a **2.5% floor** (one comment in a hundred was being reported as "the loudest
+   objection"), and the picker now prefers how-to intent over raw comment volume, because
+   the first pick was an entertainment video whose top comments were jokes.
+2. **Live validation** — solved for the API side: GitHub Actions runs now execute the whole
+   pipeline with a real key (`doctor` 4/4 PASS, 6 topics, comment mining). The *keyless*
+   parsers (`_rich_grid`, `_from_lockup`) remain validated only through CI's web-lane runs,
+   which do work, but they are now the fallback rather than the main path.
 3. **Transcript reliability** — depends on captions existing and on yt-dlp's signature
    work keeping up. `transcript_status` says `auto` vs `manual` vs `no_captions`, and that
    must never be collapsed into "ok".
@@ -110,9 +112,10 @@ are now structurally different.
    reference before its `cuts_per_minute` is quoted anywhere public.
 5. **Multi-country trending** — keyless trending pages differ per region; not implemented.
 6. **Scheduled research** — the workflow runs (`.github/workflows/yt-intel.yml`, Mondays
-   04:00 UTC, plus push on `yt-intel-trigger.txt`) and has produced reports keylessly from
-   the keyless web lane. The Data API lane has never executed: no key has been present on
-   any run yet, so `quota`, `commentThreads` and the API parsers remain unproven in CI.
+   04:00 UTC, plus push on `yt-intel-trigger.txt`) and now executes the **API lane**: exact
+   view/like/comment counts, ISO publish times, quota accounting, and comment mining. Every
+   run writes `public/yt-intel/lanes.json` (lane, key presence, which secret name, quota
+   used) so the state of the pipeline is readable from the repo rather than from a log.
 7. **`search.list` order** — every report so far is relevance-ordered, which is why a
    2-year-old video can sit at rank 3 in a "2026" topic. `--order date` and
    `--order viewCount` exist and must be run to read fresh-wave velocity rather than

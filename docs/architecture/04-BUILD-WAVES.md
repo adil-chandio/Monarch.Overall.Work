@@ -71,13 +71,15 @@ No wave requires the previous wave to be perfect — only deployed and reachable
 > [`05-SPACES-OPERATING-MODEL.md`](./05-SPACES-OPERATING-MODEL.md) for the as-built model
 > and the concrete W3 scope.
 >
-> **What the research desk actually proves today:** the pipeline is real (a scheduled run
-> fetches, measures, decides, commits and indexes — run `41652813373` onward, all steps
-> green), and each card shows its verdict *with* confidence, median views and views/hour.
-> What it does **not** yet prove: anything from the Data API lane. No `YOUTUBE_API_KEY` has
-> ever been present, so exact view counts, comment mining and quota accounting are written
-> and unit-tested but have never been executed against Google. That is one secret away, and
-> `docs/setup/YOUTUBE-API-KEY.md` is the five-minute path.
+> **What the research desk proves today (2026-11-03):** the whole pipeline, on the real
+> Data API. A scheduled run fetches, measures, decides, commits and indexes; `doctor` is
+> 4/4 PASS in CI; 6 topics carry exact view/like/comment counts; comment mining has run
+> against real comments and produced an actionable reading; each card shows its verdict
+> *with* confidence, median views, views/hour and the lane that produced it.
+> `public/yt-intel/lanes.json` states which lane the last run used and how much quota it
+> spent — so the desk can never claim the API while serving parsed web pages.
+> Still open: `style.py`'s cut threshold is calibrated on one 36-second film, and the
+> keyless parsers are now a fallback path rather than the main one.
 
 ## Definition of done (per wave)
 
