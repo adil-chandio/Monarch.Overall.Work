@@ -80,6 +80,19 @@ def t_title_signal_recovers():
     ok("reports fit", 0 <= r["fit"]["r2"] <= 1, r["fit"])
 
 
+def t_young_sample():
+    """A sample that is all fresh and tiny is young, not crowded — and must say so."""
+    young = {"status": "ok", "top3_share": 0.99, "fresh_share_30d": 1.0,
+             "winner_ratio": 2595.0, "median_views": 16}
+    mature = dict(young, median_views=113940, fresh_share_30d=0.18)
+    ok("young sample is not judged concentrated", decide.winnability(young) == 70.0)
+    ok("mature concentrated sample still scores low", decide.winnability(mature) < 40)
+    r = decide.greenlight({"score": 57.8}, young, {"status": "ok", "share": {"number_in_title": 0.5}},
+                          {"status": "ok", "strength": "firm"})
+    ok("youngness reaches the objections", any("too new to judge" in a for a in r["strongest_against"]))
+    ok("youngness asks for the older sample", any("older comparable sample" in m for m in r["missing"]))
+
+
 def t_funnel_gate():
     ok("funnel refuses small", forensic.funnel([{"views": 1, "title": "x"}])["status"] == "insufficient")
     ok("psych refuses small", forensic.psych_profile([{"views": 1, "title": "x"}])["status"] == "insufficient")
@@ -163,7 +176,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")

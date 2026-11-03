@@ -32,6 +32,13 @@ def winnability(sat: dict) -> float | None:
     top3 = sat.get("top3_share")
     fresh = sat.get("fresh_share_30d")
     ratio = sat.get("winner_ratio")
+    median = sat.get("median_views")
+    # A sample where almost nothing has double-digit views is not a crowded topic — it is a
+    # young one. Concentration measured on unreleased/just-released videos says nothing about
+    # who owns the market, and scoring it as "a few videos own this" inverts the advice.
+    # (Live case: a thisMonth sample with a 16-view median scored winnability 29 and NO.)
+    if median is not None and median < 100 and (fresh or 0) >= 0.8:
+        return 70.0
     if top3 is None:
         return None
     # concentrated topics are hard; fresh uploads mean the topic is still live
@@ -144,6 +151,14 @@ def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
         against.append(f"studio fit is {parts['fit']:.0f}/100 — we would be learning on camera")
     if sat.get("status") == "ok" and sat.get("fresh_share_30d") is not None and sat["fresh_share_30d"] < 0.1:
         against.append("almost nobody uploaded on this in the last 30 days — could be satiated or dead")
+    if (sat.get("status") == "ok" and sat.get("median_views") is not None
+            and sat["median_views"] < 100 and (sat.get("fresh_share_30d") or 0) >= 0.8):
+        against.append(
+            f"the sample is too new to judge — median {sat['median_views']} views with "
+            f"{sat['fresh_share_30d']:.0%} uploaded in the last 30 days, so 'nobody owns it' "
+            "may just mean 'nobody has watched it yet'"
+        )
+        missing.append("an older comparable sample (relevance order) to judge the real ceiling")
     for k, label in (("fit", "studio fit data"), ("timing", "trend direction")):
         if parts[k] is None:
             missing.append(label)
