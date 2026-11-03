@@ -255,3 +255,4 @@ main().catch((err) => {
 // v3 Absolute Cinema — 2,160 deterministic frames @ 60fps (36.000s), Python-DSP soundtrack baked in CI.
 
 // v3.1 — QC pass: softer bloom rays, in-frame crash zoom, vault spec panel, ecosystem rail, crisp ®.
+
