@@ -2,17 +2,17 @@
 
 Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 
-**932 skills across 26 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
+**934 skills across 26 packs.** Every pack is vendored read-only with provenance in its `MONARCH-PROVENANCE.md`.
 
 ## Routing
 
 | Space | Skills | Packs |
 |---|---|---|
 | `ops` | 650 | agent-reach, book-to-skill, claude-skills, deep-research, elephant-goldfish, ffmpeg-skill, humanizer, last30days, marketingskills, openmontage, planning-with-files, ponytail, prompt-master, scrapling, skill-seekers, wshobson-agents |
-| `monarch-studio` | 186 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, monarch-video-lab, openmontage, video-shotcraft, vox-collage-motion, wshobson-agents |
+| `monarch-studio` | 187 | capcut-cli, claude-skills, director, distilly, ffmpeg-skill, html-video, hyperframes, marketingskills, monarch-video-lab, openmontage, video-shotcraft, vox-collage-motion, wshobson-agents |
 | `personal-brand` | 80 | baoyu-skills, claude-skills, marketingskills, wshobson-agents |
 | `portfolio` | 10 | claude-skills, marketingskills, website-cloner, wshobson-agents |
-| `yt-automation` | 6 | baoyu-skills, claude-skills, html-video, openmontage, wshobson-agents |
+| `yt-automation` | 7 | baoyu-skills, claude-skills, html-video, monarch-video-lab, openmontage, wshobson-agents |
 
 ## All skills
 
@@ -60,6 +60,7 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `reverse-any-video` | hyperframes | 5.0 KB | `skills/hyperframes/reverse-any-video/SKILL.md` |
 | `seam-craft` | hyperframes | 4.8 KB | `skills/hyperframes/seam-craft/SKILL.md` |
 | `video` | marketingskills | 16.9 KB | `skills/marketingskills/skills/video/SKILL.md` |
+| `monarch-hook-lab` | monarch-video-lab | 4.1 KB | `skills/monarch-video-lab/hook-lab/SKILL.md` |
 | `monarch-mix-master` | monarch-video-lab | 5.2 KB | `skills/monarch-video-lab/mix-master/SKILL.md` |
 | `monarch-motion-graphics` | monarch-video-lab | 6.4 KB | `skills/monarch-video-lab/motion-graphics/SKILL.md` |
 | `monarch-music-score` | monarch-video-lab | 7.4 KB | `skills/monarch-video-lab/music-score/SKILL.md` |
@@ -970,5 +971,6 @@ Generated 2026-11-03 by `scripts/build-skill-index.mjs`. Do not edit by hand.
 | `channel-economics` | claude-skills | 12.6 KB | `skills/claude-skills/commercial/skills/channel-economics/SKILL.md` |
 | `youtube-full` | claude-skills | 6.7 KB | `skills/claude-skills/marketing-skill/skills/youtube-full/SKILL.md` |
 | `frame-creative-voltage` | html-video | 3.5 KB | `skills/html-video/templates/frame-creative-voltage/SKILL.md` |
+| `monarch-thumbnail-craft` | monarch-video-lab | 4.6 KB | `skills/monarch-video-lab/thumbnail-craft/SKILL.md` |
 | `doubao-tts` | openmontage | 4.0 KB | `skills/openmontage/.agents/skills/doubao-tts/SKILL.md` |
 | `shellcheck-configuration` | wshobson-agents | 1.6 KB | `skills/wshobson-agents/plugins/shell-scripting/skills/shellcheck-configuration/SKILL.md` |

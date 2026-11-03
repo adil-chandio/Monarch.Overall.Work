@@ -10,6 +10,8 @@ Four house skills plus a licensed-library map, written from a forensic read of f
 | "motion should move more" | [`motion-graphics`](./motion-graphics/SKILL.md) | five laws, frame-exact timing maths, 8 shot recipes, still-QC before render |
 | "we keep re-downloading sounds" | [`sfx-library`](./sfx-library/SKILL.md) | folder contract, manifest schema, licence gate, analysis pass |
 | "it still doesn't sound like the reference" | [`reference-match`](./reference-match/SKILL.md) | measure both, get a numeric fix list per band and per section |
+| "CTR is flat / which thumbnail?" | [`thumbnail-craft`](./thumbnail-craft/SKILL.md) | three archetypes, scored at 168×94 like a phone feed |
+| "people swipe in the first second" | [`hook-lab`](./hook-lab/SKILL.md) | score the script, and the measured audio lift behind it |
 
 ## Where these came from
 

@@ -47,6 +47,23 @@ export const repoHealth = () => {
   return { count: repos.length, totalMb: total, empty, archiveCandidates: candidates };
 };
 
+/**
+ * Async refresh of config/spaces.json. The bundled copy is the compiled default;
+ * this lets an edited JSON file take effect without a rebuild (dev + preview).
+ * Returns null on any failure so callers keep the bundled list.
+ */
+export const loadSpaces = async () => {
+  try {
+    const res = await fetch('/config/spaces.json', { cache: 'no-cache' });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (!Array.isArray(json?.spaces) || !json.spaces.length) return null;
+    return json.spaces;
+  } catch {
+    return null;
+  }
+};
+
 /** Fail loudly in dev if a space references a config file that does not exist. */
 export const validateConfig = () => {
   const problems = [];

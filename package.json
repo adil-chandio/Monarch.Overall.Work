@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node src/lib/normalise.test.mjs",
+    "ctr": "python3 -m showreel.ctr"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",

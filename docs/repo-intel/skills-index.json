@@ -1,13 +1,13 @@
 {
   "generated": "2026-11-03",
-  "total": 932,
+  "total": 934,
   "packs": 26,
   "bySpace": {
-    "monarch-studio": 186,
+    "monarch-studio": 187,
     "ops": 650,
     "personal-brand": 80,
     "portfolio": 10,
-    "yt-automation": 6
+    "yt-automation": 7
   },
   "entries": [
     {
@@ -329,6 +329,14 @@
       "path": "skills/marketingskills/skills/video/SKILL.md",
       "bytes": 17331,
       "license": ""
+    },
+    {
+      "name": "monarch-hook-lab",
+      "pack": "monarch-video-lab",
+      "space": "monarch-studio",
+      "path": "skills/monarch-video-lab/hook-lab/SKILL.md",
+      "bytes": 4248,
+      "license": "MIT"
     },
     {
       "name": "monarch-mix-master",
@@ -7449,6 +7457,14 @@
       "path": "skills/html-video/templates/frame-creative-voltage/SKILL.md",
       "bytes": 3575,
       "license": ""
+    },
+    {
+      "name": "monarch-thumbnail-craft",
+      "pack": "monarch-video-lab",
+      "space": "yt-automation",
+      "path": "skills/monarch-video-lab/thumbnail-craft/SKILL.md",
+      "bytes": 4757,
+      "license": "MIT"
     },
     {
       "name": "doubao-tts",
