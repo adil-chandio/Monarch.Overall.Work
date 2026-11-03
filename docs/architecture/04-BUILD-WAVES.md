@@ -65,7 +65,8 @@ No wave requires the previous wave to be perfect — only deployed and reachable
 ---
 
 > **Status (2026-11-03):** W1 done, **W2 done** (`9ec3b55` — space shell, deep links,
-> ⌘K), W5 partially done (`09a73cb` — proof surface). See
+> ⌘K), **W3 partially done** (`dc26a09` — research desk: demand → saturation → mechanism →
+> verdict, backed by `yt_intel/`), W5 partially done (`09a73cb` — proof surface). See
 > [`05-SPACES-OPERATING-MODEL.md`](./05-SPACES-OPERATING-MODEL.md) for the as-built model
 > and the concrete W3 scope.
 
