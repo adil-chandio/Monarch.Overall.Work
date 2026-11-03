@@ -13,6 +13,7 @@ const CLEAN_MASTER = process.env.CLEAN_MASTER || '/tmp/MON-DEMO26_Proof_Over_Pro
 const PREVIEW_OUT = path.join(PUBLIC_DIR, 'demo-preview.mp4');
 const POSTER_OUT = path.join(PUBLIC_DIR, 'demo-poster.jpg');
 const ENC_OUT = path.join(ROOT, 'deliverables', 'MON-DEMO26_v3_Master_60fps.enc');
+// v4 audio: -14.0 LUFS / section-automated dynamics (see showreel/audio_qc)
 const AUDIO_IN = path.join(PUBLIC_DIR, 'showreel', 'audio_master_60fps.m4a');
 
 const TOTAL_FRAMES = 2160; // 36.00s @ 60fps (v3 Absolute Cinema)
