@@ -105,9 +105,16 @@ for (const [i, item] of plan.entries()) {
       console.log(`  kept the previous measured report (${previous.count} videos)`);
       kept = (kept || 0) + 1;
     }
+    if (!data) {
+      // Python rejected an argument before it ever measured (bad --limit, unknown --order).
+      // That used to enter the ledger with no verdict at all, which reads as "measured, no score".
+      results.push({ topic: item.topic, verdict: 'ERROR', status: 'no_report',
+        error: `no report written; python said: ${stdout.trim().slice(-200)}`, why: item.why });
+      continue;
+    }
     results.push({
-      topic: item.topic, verdict: d.verdict, score: d.score, status: data?.status, count: data?.count, why: item.why,
-      kept_previous: data?.status !== 'ok' && previous?.status === 'ok' ? true : undefined,
+      topic: item.topic, verdict: d.verdict, score: d.score, status: data.status, count: data.count, why: item.why,
+      kept_previous: data.status !== 'ok' && previous?.status === 'ok' ? true : undefined,
     });
   } catch (e) {
     console.error(`  failed: ${String(e.message).slice(0, 300)}`);

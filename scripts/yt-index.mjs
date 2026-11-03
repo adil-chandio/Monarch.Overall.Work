@@ -8,7 +8,7 @@
  *
  * Usage: node scripts/yt-index.mjs [slug]   (slug = refresh just that report, optional)
  */
-import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { join, basename } from 'node:path';
 
 const OUT = process.env.YT_INTEL_OUT || join('public', 'yt-intel');
@@ -20,7 +20,11 @@ function entryFor(file) {
   const d = data.decision || {};
   return {
     topic: data.topic || basename(file, '.json'),
-    at: data.fetched_at ? new Date(data.fetched_at * 1000).toISOString() : new Date().toISOString(),
+    // Never `now`: a report written three weeks ago would look like it was measured today,
+    // and the panel sorts on this. Fall back to the file's own mtime, not the clock.
+    at: data.fetched_at
+      ? new Date(data.fetched_at * 1000).toISOString()
+      : statSync(file).mtime.toISOString(),
     file: basename(file),
     lane: data.lane || 'unknown',
     status: data.status || 'unknown',
