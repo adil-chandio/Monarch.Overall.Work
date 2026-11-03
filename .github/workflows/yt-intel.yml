@@ -240,12 +240,13 @@ jobs:
           git config user.name "monarch-yt-bot"
           git config user.email "workadilchandio@gmail.com"
           git add public/yt-intel yt-intel-trigger.txt || true
-          # The marker file is staged above but was never actually rewritten by the job, so a
-          # queue run left no trace in history and "did the queue run?" was unanswerable.
-          if [ -z "$(sed -n 1p yt-intel-trigger.txt | sed 's/#.*//' | xargs)" ]; then
-            { echo ""; echo "# queue run $(date -u +%Y-%m-%dT%H:%MZ)"; } > yt-intel-trigger.txt
-            git add yt-intel-trigger.txt
-          fi
+          # The trace lives in its OWN file. The bot used to stamp yt-intel-trigger.txt, which
+          # is also edited by humans and by the agent's pushes — the two writers collided on
+          # every run that overlapped a push, forcing a rebase mid-pipeline. One writer per
+          # file is the only version of this that stays stable.
+          python scripts/append-run-log.py public/yt-intel/run-log.jsonl
+          git add public/yt-intel/run-log.jsonl
+          git reset -q yt-intel-trigger.txt || true
           if git diff --cached --quiet; then echo "no change"; echo "committed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "chore(yt-intel): refresh topic research [skip ci]"
           for i in 1 2 3; do
