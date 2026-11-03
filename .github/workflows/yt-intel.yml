@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       topic:
-        description: 'Topic to research'
-        required: true
-        default: 'ai video editing'
+        description: 'Topic to research (blank = use config/topic-queue.json)'
+        required: false
+        default: ''
       limit:
         description: 'How many search results to analyse'
         required: false
@@ -30,6 +30,22 @@ jobs:
         with:
           python-version: '3.12'
 
+      # The default GITHUB_TOKEN cannot push to a protected branch or, in this repo, has
+      # been unreliable for the render job. An SSH deploy key with write access is the
+      # durable answer. If the secret is absent the job still runs and still produces the
+      # report as a downloadable artifact — it just cannot commit it.
+      - name: Wire the commit key (optional)
+        if: ${{ env.YT_COMMIT_KEY != '' }}
+        env:
+          YT_COMMIT_KEY: ${{ secrets.YT_COMMIT_KEY }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$YT_COMMIT_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null
+          git remote set-url origin git@github.com:${{ github.repository }}.git
+          ssh -T -o StrictHostKeyChecking=accept-new git@github.com || true
+
       - name: Runtime deps (all free, all pip)
         run: |
           python -m pip install --quiet --upgrade pip
@@ -50,25 +66,68 @@ jobs:
         run: |
           if [ -z "$YOUTUBE_API_KEY" ]; then echo "no key secret — staying keyless"; else python -m yt_intel doctor; fi
 
-      - name: Research the topic
+      - name: Research (one topic, or the whole queue)
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YT_INTEL_MAX_TOPICS: '4'
         run: |
-          TOPIC="${{ github.event.inputs.topic || 'ai video editing' }}"
+          TOPIC="${{ github.event.inputs.topic }}"
           LIMIT="${{ github.event.inputs.limit || '30' }}"
-          python -m yt_intel topic "$TOPIC" --limit "$LIMIT" --json "public/yt-intel/$(echo "$TOPIC" | tr '[:upper:] ' '[:lower:]-').json"
+          if [ -n "$TOPIC" ]; then
+            echo "single topic: $TOPIC"
+            python -m yt_intel topic "$TOPIC" --limit "$LIMIT" \
+              --json "public/yt-intel/$(echo "$TOPIC" | tr '[:upper:] ' '[:lower:]-').json"
+          else
+            echo "no topic given -> walking config/topic-queue.json (quota-capped)"
+            node scripts/yt-queue.mjs --limit "$LIMIT"
+          fi
 
       - name: Refresh the UI index (public/yt-intel/index.json)
-        run: |
-          TOPIC="${{ github.event.inputs.topic || 'ai video editing' }}"
-          node scripts/yt-index.mjs "$TOPIC"
+        run: node scripts/yt-index.mjs
 
-      - name: Commit the report (never blocks a run)
+      - name: Upload the report even if nothing could be committed
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yt-intel-report
+          path: public/yt-intel/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Commit the report
+        id: commit
         run: |
           git config user.name "monarch-yt-bot"
           git config user.email "workadilchandio@gmail.com"
           git add public/yt-intel || true
-          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          if git diff --cached --quiet; then echo "no change"; echo "committed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "chore(yt-intel): refresh topic research [skip ci]"
-          for i in 1 2 3; do git pull --rebase --autostash origin ${{ github.ref_name }} || true; git push origin HEAD:${{ github.ref_name }} && exit 0; sleep 5; done
-          exit 0
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin ${{ github.ref_name }} || true
+            if git push origin HEAD:${{ github.ref_name }}; then
+              echo "committed=true" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            sleep 5
+          done
+          echo "committed=false" >> "$GITHUB_OUTPUT"
+          echo "::warning::push failed after 3 attempts — the report is in the run artifact instead"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### YT Intel run" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          f = pathlib.Path("public/yt-intel/index.json")
+          if not f.exists():
+              print("no index produced"); raise SystemExit
+          d = json.loads(f.read_text())
+          rows = d.get("reports", [])[:5]
+          print("| topic | verdict | score | status |")
+          print("|---|---|---|---|")
+          for r in rows:
+              print(f"| {r.get('topic')} | {r.get('verdict')} | {r.get('score')} | {r.get('status')} |")
+          PY
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Committed: ${{ steps.commit.outputs.committed }}" >> "$GITHUB_STEP_SUMMARY" 

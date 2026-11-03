@@ -141,3 +141,72 @@ Budget state yahan rehta hai: `.cache/yt-intel/budget.json` (gitignored).
 - ❌ screenshot/chat mein
 - ✅ GitHub Secrets, ya local env var
 - ✅ agar leak ho jaye: Cloud console → Credentials → key → **Delete** → nayi banao (30 second)
+
+---
+
+# GitHub Secrets — exactly kaunsi secret, kahan, kyun
+
+Repo: `adil-chandio/Monarch.Overall.Work` → **Settings → Secrets and variables → Actions**
+
+## Teen secrets (sirf pehli zaroori hai)
+
+| # | Name | Value | Kyun chahiye | Na ho to kya hota hai |
+|---|---|---|---|---|
+| 1 | `YOUTUBE_API_KEY` | `AIza...` | exact stats + comment mining + koi throttle nahi | keyless mode chal jata hai; datacenter IP se YouTube block karta hai → har run `RETRY` (aaj yahi ho raha hai) |
+| 2 | `YT_COMMIT_KEY` | ek SSH **deploy key** (private half) | bot ko `public/yt-intel/index.json` commit karne de | report ban jaati hai lekin commit nahi hoti; run artifact se download karni padegi |
+| 3 | *(optional)* `SUPABASE_*` | — | cloud workspace | abhi zaroorat nahi |
+
+**Sirf local par test karna hai?** Koi secret nahi chahiye — `export YOUTUBE_API_KEY=...` kafi hai.
+
+## Deploy key kaise banayein (secret #2)
+
+Local terminal par:
+
+```bash
+ssh-keygen -t ed25519 -C "monarch-yt-intel" -f ~/.ssh/monarch_yt -N ""
+cat ~/.ssh/monarch_yt.pub          # PUBLIC half -> GitHub
+cat ~/.ssh/monarch_yt             # PRIVATE half -> secret YT_COMMIT_KEY
+```
+
+1. **Public half** → repo → **Settings → Deploy keys → Add deploy key** → paste → **✅ Allow write access** tick → Add key
+2. **Private half** → **Settings → Secrets and variables → Actions → New repository secret** → name `YT_COMMIT_KEY` → paste (poora block, `-----BEGIN...` se `-----END...` tak) → Add secret
+
+Phir workflow khud `git remote set-url` karke `git@github.com:` par push karega.
+
+> **Kyoon deploy key aur `GITHUB_TOKEN` nahi?** Repo ka `GITHUB_TOKEN` is branch par push
+> mein pehle hi fail ho chuka hai (render run `41595732667`), aur protected branch / fork
+> se aane wale run par wo kabhi push nahi kar sakta. Deploy key durable hai.
+
+## Verify karo ke secrets lag gaye
+
+```bash
+gh secret list -R adil-chandio/Monarch.Overall.Work
+```
+Expected:
+```
+YOUTUBE_API_KEY   2026-11-03T…
+YT_COMMIT_KEY     2026-11-03T…
+```
+(Values kabhi print nahi hoti — sirf naam aur date.)
+
+Manual run chalao (secret par password/token kabhi chat mein na bhejo, sirf repo settings mein):
+
+```bash
+gh workflow run "YT Intel — topic research" -R adil-chandio/Monarch.Overall.Work -f topic="ai video editing"
+gh run watch $(gh run list --workflow="YT Intel — topic research" -L 1 --json databaseId -q '.[0].databaseId')
+```
+
+## Schedules (do, aur wo bhi free)
+
+| workflow | kab | kya |
+|---|---|---|
+| `yt-intel.yml` | har **Somwar 04:00 UTC** (PK 09:00) | `config/topic-queue.json` ke top 4 topics, quota dekh kar |
+| `render-showreel-60fps.yml` | push par | showreel render + audio gates |
+
+CI minutes public repo par **unlimited aur free** hain — koi card nahi.
+
+## Ek zaroori baat
+
+GitHub Actions ka runner bhi ek **datacenter IP** hai. Iska matlab: agar `YOUTUBE_API_KEY`
+set **nahi** hai to CI bhi wahi `RETRY` dega jo is sandbox ne diya. Key lagne ke baad hi
+CI se asli numbers aayenge — ye workflow ka issue nahi, network ki asliyat hai.
