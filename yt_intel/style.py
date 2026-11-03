@@ -194,8 +194,33 @@ def analyse(path: str, fps: float = 4.0, cut_threshold: float | None = None) -> 
         "contrast_mean": round(float(np.mean(contrast)), 3),
         "overlay_density_mean": round(float(np.mean(lower_edges)), 4),
         "overlay_density_peak": round(float(np.max(lower_edges)), 4),
-        "pacing_verdict": _pacing(len(cut_times), dur),
+        "pacing_verdict": _pacing(_effective_cuts(cut_times, adaptive), dur),
+        "detector_note": _detector_note(cut_times, adaptive, float((diffs_a < 0.05).mean())),
     }
+
+
+def _effective_cuts(primary: list[float], adaptive: list[float]) -> int:
+    """Which count to read pacing from.
+
+    On a film that is mostly a static frame with changing type — motion graphics, UI capture,
+    most of our own proof films — the primary detector sees almost nothing: the pixels that
+    change are a few percent of the frame, so the mean delta never clears the threshold. Our
+    own 30 s demo scores 0 cuts on the primary and 6 on the adaptive, and the video has six
+    hard scene changes. Reading pacing from the primary there produces "slow — only survives on
+    authority", which is the opposite of what the film does.
+
+    So: when the primary finds nothing at all and the second opinion finds cuts, pacing is read
+    from the second opinion and `detector_note` says why.
+    """
+    return len(adaptive) if (not primary and adaptive) else len(primary)
+
+
+def _detector_note(primary: list[float], adaptive: list[float], quiet_share: float) -> str | None:
+    if not primary and adaptive:
+        return (f"the primary detector saw no cuts on a {quiet_share:.0%}-quiet film; "
+                f"{len(adaptive)} from the adaptive one — static frames with changing type are "
+                f"nearly invisible to a whole-frame difference")
+    return None
 
 
 def _pacing(cuts: int, dur: float) -> str:

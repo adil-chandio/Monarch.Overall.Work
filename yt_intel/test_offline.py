@@ -72,6 +72,26 @@ def t_age_vph():
     ok("vph needs age", forensic.vph(1000, None) is None)
 
 
+def t_static_frame_pacing():
+    """A quiet film with changing type is not a slow film.
+
+    Regression: our own 30 s demo scored 0 cuts / "slow — only survives on authority" on the
+    primary detector, while the adaptive one found 6 — the video has six hard scene changes.
+    Every scene shares the same dark background and the text that changes is a few percent of
+    the frame, so a whole-frame mean delta never fires. Most of our proof films are built that
+    way.
+    """
+    from . import style
+    ok("no primary cuts falls back to the second opinion",
+       style._effective_cuts([], [1.0, 2.0, 3.0]) == 3)
+    ok("primary wins when it found anything",
+       style._effective_cuts([1.0, 2.0], [1.0, 2.0, 3.0, 4.0]) == 2)
+    ok("a genuinely static film stays at zero", style._effective_cuts([], []) == 0)
+    note = style._detector_note([], [1.0, 2.0], 0.97)
+    ok("the fallback explains itself", note and "97%" in note and "adaptive" in note)
+    ok("no note when the primary saw cuts", style._detector_note([1.0], [1.0], 0.97) is None)
+
+
 def t_thumbprint_accent():
     """The accent must be a colour, not the darkest corner of the frame.
 
@@ -355,7 +375,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_subday, t_age_vph, t_style_calibration, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_subday, t_age_vph, t_style_calibration, t_static_frame_pacing, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_young_sample_is_not_confident, t_decide_never_silent, t_comment_noise_floor, t_comment_refusal_speaks, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
