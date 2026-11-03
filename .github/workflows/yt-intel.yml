@@ -4,7 +4,10 @@ name: YT Intel — topic research
 # stale and the weekly Ops review has fresh numbers without anyone remembering to click.
 on:
   push:
+    # `main` is listed so the desk keeps updating after this work is merged; the marker-file
+    # path filter keeps ordinary code pushes from spending quota.
     branches:
+      - main
       - arena/9960286a-monarch-overall-work
     paths:
       - "yt-intel-trigger.txt"
