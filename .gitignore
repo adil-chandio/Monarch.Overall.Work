@@ -21,3 +21,9 @@ public/yt-intel/runs.jsonl
 
 # local python env for the film-analysis rig (never commit a virtualenv)
 .venv/
+
+# v2 render intermediates — the mix and the silent master are rebuildable in place
+public/demo/v2-mix.wav
+public/demo/v2-silent.mp4
+showreel/v2/frames.rgba
+showreel/v2/render.log
