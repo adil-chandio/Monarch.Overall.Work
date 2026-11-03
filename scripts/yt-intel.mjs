@@ -46,6 +46,23 @@ export async function topicReport(topic, { limit = 30, out } = {}) {
   return { file, stdout: stdout.trim(), stderr: stderr.trim(), data, kept };
 }
 
+/**
+ * Comment mining, written next to the topic reports so the desk can read it.
+ * Only meaningful on the API lane: the keyless lane reports `unavailable` rather than
+ * pretending the video has no comments.
+ */
+export async function commentReport(videoId, { limit = 100, out } = {}) {
+  mkdirSync(OUT, { recursive: true });
+  const file = out || join(OUT, `comments-${videoId}.json`);
+  const { stdout } = await run(
+    PY,
+    ['-m', 'yt_intel', 'comments', videoId, '--limit', String(limit), '--json', file],
+    { maxBuffer: 32 * 1024 * 1024 },
+  );
+  const data = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null;
+  return { file, data, stdout: stdout.trim() };
+}
+
 export async function demandReport(topic) {
   const { stdout } = await run(PY, ['-m', 'yt_intel', 'demand', topic, '--json'], { maxBuffer: 8 * 1024 * 1024 });
   return JSON.parse(stdout);
@@ -88,8 +105,15 @@ if (process.argv[1]?.endsWith('yt-intel.mjs')) {
       if (r.stderr) console.error(r.stderr);
     }).catch((e) => { console.error(String(e.message).slice(0, 500)); process.exit(1); });
   } else if (cmd === 'comments') {
-    run(PY, ['-m', 'yt_intel', 'comments', rest[0] || '', '--limit', '100'])
-      .then(({ stdout, stderr }) => { console.log(stdout.trim()); if (stderr) console.error(stderr); })
+    commentReport(rest[0] || '')
+      .then(({ file, data, stdout }) => {
+        if (data?.status === 'ok') {
+          console.log(`comments: ${file}`);
+          console.log(`  ${data.n} comments · ${data.reading}`);
+        } else {
+          console.log(stdout || `no comment report for ${rest[0]}`);
+        }
+      })
       .catch((e) => { console.error(String(e.message).slice(0, 500)); process.exit(1); });
   } else if (cmd === 'lanes') {
     lanes().then((l) => console.log(JSON.stringify(l, null, 2))).catch((e) => { console.error(e.message); process.exit(1); });

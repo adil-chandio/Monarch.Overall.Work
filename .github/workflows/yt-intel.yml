@@ -175,6 +175,35 @@ jobs:
             echo "no topic given -> walking config/topic-queue.json (quota-capped)"
             node scripts/yt-queue.mjs --limit "$LIMIT"
           fi
+          # Comment mining is API-only and cheap (1 unit / 100 comments). It runs on the best
+          # video from the freshest report, so the desk always has at least one real comment
+          # analysis next to the topic verdicts.
+          if [ -n "$YOUTUBE_API_KEY" ]; then
+            cat > /tmp/pick_video.py <<'PY'
+          import glob, json
+          def rank(p):
+              try:
+                  d = json.load(open(p))
+                  if d.get("lane") != "api" or d.get("status") != "ok":
+                      return None
+                  rows = [r for r in d.get("rows", []) if r.get("comments")]
+                  if not rows:
+                      return None
+                  r = max(rows, key=lambda x: x["comments"])
+                  return (r["comments"], r["id"], d.get("topic", ""))
+              except Exception:
+                  return None
+          scored = [s for s in (rank(p) for p in glob.glob("public/yt-intel/*.json")) if s]
+          print(max(scored)[1] if scored else "")
+          PY
+          BEST="$(python /tmp/pick_video.py)"
+            if [ -n "$BEST" ]; then
+              echo "comment mining on $BEST"
+              node scripts/yt-intel.mjs comments "$BEST" || echo "::warning::comment mining failed"
+            else
+              echo "no API-lane report with comment counts yet — skipping comment mining"
+            fi
+          fi
 
       - name: Record the lane and the doctor verdict
         if: always()
