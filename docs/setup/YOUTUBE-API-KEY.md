@@ -210,3 +210,43 @@ CI minutes public repo par **unlimited aur free** hain — koi card nahi.
 GitHub Actions ka runner bhi ek **datacenter IP** hai. Iska matlab: agar `YOUTUBE_API_KEY`
 set **nahi** hai to CI bhi wahi `RETRY` dega jo is sandbox ne diya. Key lagne ke baad hi
 CI se asli numbers aayenge — ye workflow ka issue nahi, network ki asliyat hai.
+
+## Ek topic abhi chalana ho (bina key ke bhi chalega)
+
+Key na ho to bhi `yt-intel` keyless lane se chalta hai — bas `search.list` jaisi
+precision nahi milti, aur datacenter IP par YouTube throttle kar deta hai (`RETRY`).
+Do tareeqe hain:
+
+**1. Marker file (recommended — key chahiye nahi, sirf edit + push):**
+
+`yt-intel-trigger.txt` ki pehli line = topic, doosri line = filter (optional):
+
+```
+ai b roll generation
+thisMonth
+```
+
+Khali file = poora queue (`config/topic-queue.json`) chalega.
+
+Filter ke allowed values (keyless lane aur API lane dono samajhte hain):
+
+| value | matlab | kab |
+|---|---|---|
+| `relevance` (default) | YouTube ka apna order | "is topic ko kaun hold karta hai" |
+| `date` | newest first | naya kya aa raha hai |
+| `viewCount` | sabse zyada views | all-time ceiling |
+| `thisMonth` | pichhle 30 din | fast-moving topic par **yehi** — warna sample museum ban jata hai |
+| `thisWeek` | pichhle 7 din | trend break dekhne ke liye |
+
+**2. Terminal (local machine par, key ke saath):**
+
+```bash
+python -m yt_intel topic "ai b roll generation" --limit 30 --order thisMonth \
+  --json public/yt-intel/ai-b-roll-generation.json
+node scripts/yt-index.mjs
+```
+
+> **Kyun `thisMonth` likha hai:** pehla `shorts retention hook` run relevance order par
+> chala aur sample **poora 1–3 saal purana** nikla — us par `NO` aaya jo asal mein
+> "market" ka nahi, "archive" ka faisla tha. Filter lagane ke baad `ai b roll generation`
+> ka sample 1–28 din purana aaya, median 9 views (naya topic), aur verdict badal gaya.

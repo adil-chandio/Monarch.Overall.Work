@@ -18,6 +18,10 @@ on:
         description: 'How many search results to analyse'
         required: false
         default: '30'
+      order:
+        description: 'Search filter: relevance | date | viewCount | thisMonth | thisWeek'
+        required: false
+        default: ''
   schedule:
     # Mondays 04:00 UTC — before the week's planning session
     - cron: '0 4 * * 1'
@@ -75,11 +79,15 @@ jobs:
         id: plan
         run: |
           if [ -f yt-intel-trigger.txt ]; then
-            TOPIC="$(head -1 yt-intel-trigger.txt | sed 's/#.*//' | xargs)"
+            TOPIC="$(sed -n 1p yt-intel-trigger.txt | sed 's/#.*//' | xargs)"
+            # optional second line: the search filter (relevance | date | viewCount | thisMonth | thisWeek)
+            ORDER="$(sed -n 2p yt-intel-trigger.txt | sed 's/#.*//' | xargs)"
             echo "topic=$TOPIC" >> "$GITHUB_OUTPUT"
-            echo "from marker file: ${TOPIC:-<queue>}"
+            echo "order=$ORDER" >> "$GITHUB_OUTPUT"
+            echo "from marker file: topic=${TOPIC:-<queue>} order=${ORDER:-<default>}"
           else
             echo "topic=" >> "$GITHUB_OUTPUT"
+            echo "order=" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Research (one topic, or the whole queue)
@@ -90,8 +98,9 @@ jobs:
           TOPIC="${{ github.event.inputs.topic || steps.plan.outputs.topic }}"
           LIMIT="${{ github.event.inputs.limit || '30' }}"
           if [ -n "$TOPIC" ]; then
-            echo "single topic: $TOPIC"
-            python -m yt_intel topic "$TOPIC" --limit "$LIMIT" \
+            ORDER="${{ github.event.inputs.order || steps.plan.outputs.order }}"
+            echo "single topic: $TOPIC (order ${ORDER:-relevance})"
+            python -m yt_intel topic "$TOPIC" --limit "$LIMIT" ${ORDER:+--order "$ORDER"} \
               --json "public/yt-intel/$(echo "$TOPIC" | tr '[:upper:] ' '[:lower:]-').json"
           else
             echo "no topic given -> walking config/topic-queue.json (quota-capped)"

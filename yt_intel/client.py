@@ -224,11 +224,23 @@ def _from_lockup(lv: dict) -> dict:
             t = _txt(p.get("text"))
             if t:
                 rows.append(t)
+    published = next((r for r in rows if "ago" in r.lower()), "")
+    views = _parse_count(next((r for r in rows if "view" in r.lower()), ""))
+    # Two states look like data and are not:
+    #   "No views"  -> _parse_count reads the word 'views' as nothing and a missing count
+    #                  became a 0 in downstream medians, i.e. a video that was simply too new
+    #                  to have a count was averaged in as a total failure.
+    #   "Streamed 2 years ago" / "Premiered ..." -> an age, but not a publish date; and a live
+    #                  stream's view count is not comparable to a normal video's.
+    if views is None and re.search(r"\bno views\b", " ".join(rows), re.I):
+        views = 0
+    if re.match(r"^\s*(streamed|premiered|scheduled)", published, re.I):
+        published = re.sub(r"^\s*(streamed|premiered|scheduled( for)?)\s*", "", published, flags=re.I)
     return {
         "id": vid, "title": title, "channel": rows[0] if rows else "",
         "meta": " · ".join(rows[1:]) if len(rows) > 1 else "",
-        "views": _parse_count(next((r for r in rows if "view" in r.lower()), "")),
-        "published": next((r for r in rows if "ago" in r.lower()), ""),
+        "views": views,
+        "published": published,
     }
 
 

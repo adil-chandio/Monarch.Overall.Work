@@ -7,7 +7,7 @@ publishing a confident number derived from nothing.
 import random
 import sys
 
-from . import decide, demand, forensic, ideas, reverse
+from . import client, decide, demand, forensic, ideas, reverse
 
 PASS = 0
 
@@ -25,6 +25,18 @@ def t_duration():
     ok("12:03", forensic.parse_duration("12:03") == 723)
     ok("1:00:00", forensic.parse_duration("1:00:00") == 3600)
     ok("empty", forensic.parse_duration("") == 0)
+
+
+def t_lockup_states():
+    """'No views' and 'Streamed 2 years ago' are states, not missing data."""
+    lv = {"contentId": "x", "metadata": {"lockupMetadataViewModel": {
+        "title": {"simpleText": "t"},
+        "metadata": {"contentMetadataViewModel": {"metadataRows": [
+            {"metadataParts": [{"text": {"content": "Chan"}}, {"text": {"content": "No views"}},
+                               {"text": {"content": "Streamed 2 years ago"}}]}]}}}}}
+    r = client._from_lockup(lv)
+    ok("'No views' reads as 0, not None", r["views"] == 0)
+    ok("'Streamed 2 years ago' still yields an age", forensic.parse_age_days(r["published"]) == 730)
 
 
 def t_age_vph():
@@ -135,7 +147,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_age_vph, t_saturation, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
