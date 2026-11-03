@@ -13,6 +13,7 @@ import './styles.css';
 import { supabase, cloudEnabled } from './lib/supabase';
 import { MonarchPublicStudio, ClientPortalView, B2BRevenueCenter } from './B2BStudio';
 import { SpaceBar, SpaceHome, CommandPalette } from './Spaces.jsx';
+import { ProofSurface } from './ProofSurface.jsx';
 import { spaceList, getSpaceMeta, sectionsFor, spaceCounts, spaceForPage, showsChannels } from './lib/spaces.js';
 import { loadSpaces } from './lib/config.js';
 
@@ -125,7 +126,8 @@ const sectionTitle=(sectionsFor(activeSpace).find(x=>x.id===page)?.label)||title
     {page==='overview'&&activeSpace==='personal-brand'&&<Overview data={data} openTasks={openTasks} progress={progress} navigate={navigate} setModal={setModal} setChannel={setChannel} />}
     {page==='inbox'&&<InboxPage data={data} update={update} setModal={setModal} notify={notify} filter={filter} setFilter={setFilter} />}
     {page==='calendar'&&<CalendarPage data={data} setModal={setModal} />}
-    {page==='projects'&&<ProjectsPage data={data} setModal={setModal} notify={notify} update={update} />}
+    {page==='projects'&&activeSpace==='portfolio'&&<ProofSurface onOpenPage={onOpenPublicStudio} />}
+    {page==='projects'&&activeSpace!=='portfolio'&&<ProjectsPage data={data} setModal={setModal} notify={notify} update={update} />}
     {page==='youtube'&&<YouTubePage data={data} channel={channel} setChannel={setChannel} setModal={setModal} update={update} notify={notify} />}
     {page==='social'&&<SocialPage data={data} socialAccount={socialAccount} setSocialAccount={setSocialAccount} setModal={setModal} update={update} />}
     {page==='agents'&&<AgentsPage data={data} setModal={setModal} update={update} activeChat={activeChat} setActiveChat={setActiveChat} />}

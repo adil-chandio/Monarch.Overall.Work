@@ -1108,3 +1108,54 @@
 .space-list-head{font-size:6.5px;letter-spacing:.9px;color:#a7afa5;padding:0 0 7px;border-bottom:1px solid #e9ede6;margin-bottom:2px}
 .state-service{background:#eef2f8;color:#5b7391}
 .kind-service{background:#eef2f8;color:#5b7391}
+
+/* ---- proof surface (portfolio case study) ---- */
+.proof-surface{display:flex;flex-direction:column;gap:12px}
+.proof-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:1px solid #e9ede6;padding-bottom:16px;flex-wrap:wrap}
+.proof-eyebrow{font-size:7.5px;letter-spacing:1.3px;color:#9aa298;font-weight:700}
+.proof-head h1{font:800 29px Manrope;letter-spacing:-1.3px;margin:7px 0 5px;color:#24312a}
+.proof-head h1 em{font-style:normal;color:#718c55}
+.proof-head p{margin:0;font-size:9.5px;color:#8b948a}
+.proof-actions{display:flex;gap:8px}
+.proof-actions a{text-decoration:none}
+.proof-panel{border:1px solid #e9ede6;border-radius:12px;background:#fff;padding:15px 16px}
+.proof-panel-slim{padding-bottom:13px}
+.proof-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:12px}
+.proof-panel-head h2{font:700 13px Manrope;margin:0 0 4px;color:#2d3b30}
+.proof-panel-head p{margin:0;font-size:8.5px;color:#949d93;max-width:560px;line-height:1.55}
+.proof-panel-head code{background:#f3f5f0;border-radius:4px;padding:1px 4px;font-size:8px;color:#6d7c69}
+.proof-state{display:inline-flex;align-items:center;gap:4px;font-size:7px;font-weight:700;letter-spacing:.4px;border-radius:20px;padding:3px 8px;background:#f1f4ed;color:#7c8877;white-space:nowrap;text-transform:lowercase}
+.proof-state.ok{background:#edf5e7;color:#5b8a45}
+.proof-state.bad{background:#fdeeec;color:#b4543f}
+.proof-state.unknown{background:#f4f5f2;color:#97a094}
+.proof-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+.proof-metric{position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 8px;border:1px solid #eef1ea;border-radius:8px;padding:9px 10px;background:#fcfdfb}
+.proof-metric-label{font-size:8px;color:#8b958a;grid-column:1}
+.proof-metric-value{font-size:11px;color:#2f3f33;grid-column:1;font-weight:600}
+.proof-metric-target{grid-column:1;font-size:7px;color:#a6aea4}
+.proof-metric .proof-state{grid-column:2;grid-row:1 / span 2;align-self:center}
+.proof-metric small{grid-column:1/-1;font-size:6.5px;color:#a9b0a6;line-height:1.45;margin-top:3px}
+.proof-checks{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #f1f3ee}
+.proof-empty{padding:16px;border:1px dashed #e3e8dd;border-radius:8px;font-size:8.5px;color:#98a294;background:#fbfcfa;line-height:1.6}
+.proof-empty code{background:#f1f4ed;border-radius:4px;padding:1px 4px;font-size:8px}
+.proof-thumbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.proof-thumb{margin:0;border:1px solid #eef1ea;border-radius:9px;overflow:hidden;background:#fcfdfb}
+.proof-thumb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#141416}
+.proof-thumb figcaption{padding:9px 10px}
+.proof-thumb-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.proof-thumb-top b{font-size:9px;color:#3d4c40;text-transform:capitalize}
+.proof-grade{font-size:7px;font-weight:800;letter-spacing:.4px;border-radius:20px;padding:3px 7px;background:#eef2ea;color:#68815a}
+.grade-B{background:#fdf6e8;color:#a0783c}
+.grade-C{background:#fdf0ec;color:#b0654c}
+.grade-D{background:#fdecea;color:#b4543f}
+.proof-thumb-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;font-size:6px;color:#a3aba1}
+.proof-thumb-fail{margin:6px 0 0;font-size:7px;color:#b4543f}
+.proof-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.proof-list{display:flex;flex-direction:column}
+.proof-list-head{font-size:6.5px;letter-spacing:.9px;color:#a7afa5;padding-bottom:6px;border-bottom:1px solid #e9ede6}
+.proof-list-row{display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px solid #f3f5f0;font-size:8.5px;color:#7d877e}
+.proof-list-row b{color:#43513f;font-size:9px;font-weight:600;flex:1;min-width:0}
+.proof-list-row span{color:#9aa298;white-space:nowrap}
+.proof-paths{display:flex;flex-wrap:wrap;gap:6px;font-size:7px;color:#8b958a}
+.proof-paths span{background:#f3f5f0;border:1px solid #e9ede6;border-radius:5px;padding:4px 7px}
+@media (max-width:800px){.proof-two{grid-template-columns:1fr}.proof-head{align-items:flex-start}}
