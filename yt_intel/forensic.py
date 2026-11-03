@@ -310,18 +310,22 @@ def saturation(rows: list[dict]) -> dict:
     ages = [a for a in (r.get("age_days") for r in data) if a]
     fresh = sum(1 for a in ages if a <= 30) / len(ages) if ages else None
     share = round(top3 / total, 3) if total else None
+    ages_all = [a for a in (r.get("age_days") for r in data) if a is not None]
+    median_age = round(float(sorted(ages_all)[len(ages_all) // 2]), 2) if ages_all else None
     return {
         "status": "ok", "videos": n,
+        "median_age_days": median_age,
         "total_views": total,
         "median_views": views[n // 2],
         "top3_share": share,
         "winner_ratio": round(views[0] / max(1, views[n // 2]), 1),
         "fresh_share_30d": round(fresh, 2) if fresh is not None else None,
-        "reading": _concentration_reading(share, views[n // 2], fresh),
+        "reading": _concentration_reading(share, views[n // 2], fresh, median_age),
     }
 
 
-def _concentration_reading(share: float | None, median_views: int, fresh: float | None) -> str:
+def _concentration_reading(share: float | None, median_views: int, fresh: float | None,
+                           median_age: float | None = None) -> str:
     """Turn a top-3 share into a sentence that is still true of the *sample*.
 
     The bug this replaces: a `thisMonth` sample is by construction 100% fresh, so its videos
@@ -335,7 +339,8 @@ def _concentration_reading(share: float | None, median_views: int, fresh: float 
     """
     if share is None:
         return ""
-    young = fresh is not None and fresh >= 0.9
+    # age first: it is the direct measurement; freshness is the same fact rounded to a month
+    young = (median_age is not None and median_age < 14) or (fresh is not None and fresh >= 0.9)
     if young:
         return ("too young to judge — this sample is almost entirely under 30 days old, so the "
                 "view counts are a stopwatch, not a verdict; ask again when it has run")

@@ -191,7 +191,11 @@ def t_young_sample():
     young = {"status": "ok", "top3_share": 0.99, "fresh_share_30d": 1.0,
              "winner_ratio": 2595.0, "median_views": 16}
     mature = dict(young, median_views=113940, fresh_share_30d=0.18)
-    ok("young sample is not judged concentrated", decide.winnability(young) == 70.0)
+    # Was 70.0: "not concentrated" was being expressed as a *good* score with full confidence.
+    # Now it is a neutral placeholder that confidence refuses to credit — see
+    # t_young_sample_is_not_confident. The assertion moved deliberately, not to make a test pass.
+    ok("young sample is not judged concentrated", decide.winnability(young) == decide.YOUNG_SAMPLE_PLACEHOLDER)
+    ok("the placeholder is neutral rather than good", decide.YOUNG_SAMPLE_PLACEHOLDER == 50.0)
     ok("mature concentrated sample still scores low", decide.winnability(mature) < 40)
     r = decide.greenlight({"score": 57.8}, young, {"status": "ok", "share": {"number_in_title": 0.5}},
                           {"status": "ok", "strength": "firm"})
@@ -228,6 +232,33 @@ def t_decide_access():
                           access={"status": "rate_limited", "detail": "429"})
     ok("blocked -> RETRY, not NO", r["verdict"] == "RETRY")
     ok("RETRY names the fix", "API_KEY" in r["next_probe"])
+
+
+def t_young_sample_is_not_confident():
+    """A placeholder must not buy confidence.
+
+    Live case: a `--order date` sample (median 238 views, every row <12 h old) scored
+    SHARPEN 62.2 while the saturation reading on the same report said "too young to judge".
+    The verdict and the honest reading contradicted each other in the same card, because
+    winnability returned a fixed 70 and confidence charged it as a real measurement.
+    """
+    from . import decide
+    young = {"status": "ok", "median_views": 238, "fresh_share_30d": 1.0,
+             "top3_share": 0.505, "winner_ratio": 5, "median_age_days": 0.21}
+    settled = {"status": "ok", "median_views": 24000, "fresh_share_30d": 0.1,
+               "top3_share": 0.505, "winner_ratio": 5, "median_age_days": 420}
+    # the exact live sample: 30 rows, 0.10-0.46 days old, median 238 views. The old guard
+    # required median_views < 100, so 238 slipped through and this scored SHARPEN 62.3.
+    live = {"status": "ok", "median_views": 238, "fresh_share_30d": 1.0,
+            "top3_share": 0.505, "winner_ratio": 5, "median_age_days": 0.21}
+    ok("a young sample is recognised", decide.is_young_sample(young))
+    ok("a settled sample is not", not decide.is_young_sample(settled))
+    ok("young winnability is neutral, not a good score",
+       decide.winnability(young) == decide.YOUNG_SAMPLE_PLACEHOLDER == 50.0)
+    ok("a 238-view sample under 12 hours old is still young",
+       decide.is_young_sample(live) and decide.winnability(live) == 50.0)
+    ok("the same shape scores differently when settled",
+       decide.winnability(settled) != decide.winnability(young))
 
 
 def t_decide_never_silent():
@@ -318,7 +349,7 @@ def t_ideas():
 if __name__ == "__main__":
     print("yt-intel offline tests")
     for fn in [t_duration, t_lockup_states, t_age_subday, t_age_vph, t_style_calibration, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
-               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_comment_refusal_speaks, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
+               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_young_sample_is_not_confident, t_decide_never_silent, t_comment_noise_floor, t_comment_refusal_speaks, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
     sys.exit(0)
