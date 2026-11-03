@@ -107,9 +107,20 @@ are now structurally different.
 3. **Transcript reliability** — depends on captions existing and on yt-dlp's signature
    work keeping up. `transcript_status` says `auto` vs `manual` vs `no_captions`, and that
    must never be collapsed into "ok".
-4. **`style.py` thresholds** — `cut_threshold=0.22` on normalised RGB distance was tuned
-   on one 36-second film with 3 cuts. It needs calibration against a known-cut-heavy
-   reference before its `cuts_per_minute` is quoted anywhere public.
+4. **`style.py` thresholds — calibrated, with a caveat.** `cut_threshold` was 0.22, tuned on
+   one 36-second film. `python -m yt_intel.calibrate_style` builds films whose shot lists are
+   known exactly (0, 3, 7 and 19 cuts) and sweeps the threshold against them:
+
+   | threshold | exact cases | abs error | hard-cut film | fast-cut film |
+   |---|---|---|---|---|
+   | 0.22 (old) | 2/4 | 5 | 6 of 7 | 15 of 19 |
+   | 0.14 (now) | 4/4 | 0 | 7 of 7 | 19 of 19 |
+
+   The old value hid a third of the cuts in fast-paced footage — an error that flatters a
+   slow edit, which is the worst direction for a pacing judge. On our own master film the
+   change moves 3 cuts / 5.0 cpm to 4 cuts / 6.7 cpm.
+   **Still open:** solid-colour concat is the easiest possible case. Graded footage with fast
+   pans and dissolves needs its own reference pass before these numbers are quoted publicly.
 5. **Multi-country trending** — keyless trending pages differ per region; not implemented.
 6. **Scheduled research** — the workflow runs (`.github/workflows/yt-intel.yml`, Mondays
    04:00 UTC, plus push on `yt-intel-trigger.txt`) and now executes the **API lane**: exact

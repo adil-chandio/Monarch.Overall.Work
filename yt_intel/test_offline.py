@@ -51,6 +51,13 @@ def t_age_vph():
     ok("vph needs age", forensic.vph(1000, None) is None)
 
 
+def t_style_calibration():
+    """The shipped cut threshold must not be the one that under-counts by a third."""
+    from . import style
+    ok("threshold is the calibrated value, not the old 0.22", style.CUT_THRESHOLD <= 0.16)
+    ok("threshold still ignores noise-level motion", style.CUT_THRESHOLD >= 0.08)
+
+
 def t_saturation():
     rows = [{"views": v} for v in (1000, 2000, 3000, 4000)]
     s = forensic.saturation(rows)
@@ -224,7 +231,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")

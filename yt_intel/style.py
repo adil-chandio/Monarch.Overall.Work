@@ -67,9 +67,25 @@ def duration(path: str) -> float:
     return 0.0
 
 
-def analyse(path: str, fps: float = 4.0, cut_threshold: float = 0.22) -> dict:
-    """cut_threshold is on normalised RGB distance; 0.22 catches hard cuts in graded
-    footage without firing on a whip-pan. Tune it, do not trust it blindly."""
+# Calibrated against synthetic films with a known shot list (`python -m yt_intel.calibrate_style`):
+#   0.22  under-counted: 6/7 cuts on a hard-cut film, 15/19 on a fast-cut film
+#   0.14  exact on all four cases (0, 3, 7 and 19 cuts)
+# The old value was tuned on one 36 s film and silently hid a third of the cuts in anything
+# fast-paced — the error ran in the direction that flatters a slow edit, which is the worst
+# direction for a tool used to judge pacing.
+CUT_THRESHOLD = 0.14
+
+
+def analyse(path: str, fps: float = 4.0, cut_threshold: float | None = None) -> dict:
+    """cut_threshold is on normalised RGB distance between consecutive sampled frames.
+
+    Default comes from `CUT_THRESHOLD`, which is calibrated but not universal: solid-colour
+    concat is the easiest case (no motion, no dissolves). Graded footage with fast pans needs
+    its own pass — `calibrate_style.sweep()` shows how, and the numbers here are a starting
+    point, never a certificate.
+    """
+    if cut_threshold is None:
+        cut_threshold = CUT_THRESHOLD
     prev = None
     diffs, motion, sat, contrast, lower_edges, times = [], [], [], [], [], []
     h = w = 0
