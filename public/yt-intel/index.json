@@ -1,21 +1,21 @@
 {
-  "updated": "2026-11-03T19:24:35.118Z",
+  "updated": "2026-11-03T19:57:52.149Z",
   "reports": [
     {
       "topic": "ai video editing",
-      "at": "2026-11-03T19:24:29.000Z",
+      "at": "2026-11-03T19:57:33.000Z",
       "file": "ai-video-editing.json",
       "lane": "api",
       "order": "relevance",
       "status": "ok",
       "count": 30,
       "verdict": "SHARPEN",
-      "score": 71.9,
+      "score": 71.8,
       "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
       "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
       "parts": {
         "demand": 84,
-        "winnability": 93.80000000000001,
+        "winnability": 93.29999999999998,
         "mechanism": 35,
         "fit": null,
         "timing": 55
@@ -25,15 +25,15 @@
       ],
       "saturation": {
         "videos": 30,
-        "top3_share": 0.462,
-        "winner_ratio": 12.3,
-        "fresh_share_30d": 0.41,
-        "median_views": 131595,
+        "top3_share": 0.467,
+        "winner_ratio": 14,
+        "fresh_share_30d": 0.43,
+        "median_views": 115894,
         "reading": "distributed — no single video owns it, entry is feasible"
       },
       "confidence": 0.85,
       "mechanism": 35,
-      "vph_median": 80
+      "vph_median": 94
     },
     {
       "topic": "ai b roll generation",
@@ -213,8 +213,8 @@
       "video": "xwNRyKItpOk",
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
-      "reading": "wants to buy time/teaching (6%) is the conversion surface",
-      "at": "2026-11-03T19:24:34.558Z",
+      "reading": "wants to buy time/teaching (5%) is the conversion surface",
+      "at": "2026-11-03T19:57:38.205Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -226,8 +226,8 @@
       "wants": [
         {
           "label": "wants to buy time/teaching",
-          "n": 6,
-          "share": 0.06
+          "n": 5,
+          "share": 0.05
         }
       ],
       "top_liked": [

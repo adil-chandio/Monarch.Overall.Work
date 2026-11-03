@@ -1,0 +1,173 @@
+{
+  "status": "ok",
+  "n": 12,
+  "face_rate": 0.92,
+  "avg_contrast": 0.272,
+  "avg_busy": 3.25,
+  "text_band_energy": 2.67,
+  "top_hexes": [
+    [
+      "#0c1213",
+      1
+    ],
+    [
+      "#018afb",
+      1
+    ],
+    [
+      "#06120f",
+      1
+    ],
+    [
+      "#0d0705",
+      1
+    ],
+    [
+      "#080c0c",
+      1
+    ]
+  ],
+  "samples": [
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.113,
+      "face_present": true,
+      "face_upper_half": 0.104,
+      "contrast": 0.264,
+      "brightness": 0.476,
+      "accent_share": 0.083,
+      "dominant": {
+        "hex": "#0c1213",
+        "share": 0.083
+      },
+      "text_edge_energy": {
+        "upper": 3.53,
+        "lower": 2.26,
+        "centre": 4.87
+      },
+      "text_row_span": 25,
+      "busy": 3.66,
+      "id": "C0jOKDJtK9s"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.064,
+      "face_present": true,
+      "face_upper_half": 0.1,
+      "contrast": 0.252,
+      "brightness": 0.617,
+      "accent_share": 0.185,
+      "dominant": {
+        "hex": "#018afb",
+        "share": 0.185
+      },
+      "text_edge_energy": {
+        "upper": 3.07,
+        "lower": 2.44,
+        "centre": 4.25
+      },
+      "text_row_span": 35,
+      "busy": 3.42,
+      "id": "AgUATWAOaKY"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.056,
+      "face_present": true,
+      "face_upper_half": 0.076,
+      "contrast": 0.313,
+      "brightness": 0.383,
+      "accent_share": 0.322,
+      "dominant": {
+        "hex": "#06120f",
+        "share": 0.322
+      },
+      "text_edge_energy": {
+        "upper": 4.94,
+        "lower": 2.58,
+        "centre": 5.14
+      },
+      "text_row_span": 85,
+      "busy": 4.11,
+      "id": "VVWiJm0sA7Y"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.174,
+      "face_present": true,
+      "face_upper_half": 0.145,
+      "contrast": 0.25,
+      "brightness": 0.186,
+      "accent_share": 0.234,
+      "dominant": {
+        "hex": "#0d0705",
+        "share": 0.234
+      },
+      "text_edge_energy": {
+        "upper": 2.87,
+        "lower": 1.81,
+        "centre": 2.2
+      },
+      "text_row_span": 119,
+      "busy": 1.87,
+      "id": "sATBBCpsk6U"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.115,
+      "face_present": true,
+      "face_upper_half": 0.135,
+      "contrast": 0.362,
+      "brightness": 0.418,
+      "accent_share": 0.2,
+      "dominant": {
+        "hex": "#080c0c",
+        "share": 0.2
+      },
+      "text_edge_energy": {
+        "upper": 3.92,
+        "lower": 3.6,
+        "centre": 2.86
+      },
+      "text_row_span": 57,
+      "busy": 3.16,
+      "id": "RwynWBXuRaA"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.234,
+      "face_present": true,
+      "face_upper_half": 0.31,
+      "contrast": 0.258,
+      "brightness": 0.321,
+      "accent_share": 0.152,
+      "dominant": {
+        "hex": "#0b0c10",
+        "share": 0.152
+      },
+      "text_edge_energy": {
+        "upper": 6.83,
+        "lower": 7.38,
+        "centre": 5.01
+      },
+      "text_row_span": 174,
+      "busy": 5.78,
+      "id": "2mp7u1c_07E"
+    }
+  ],
+  "reading": "face-led channel: people are the product",
+  "topic": "ai video editing",
+  "taken_from": "newest measured report"
+}
