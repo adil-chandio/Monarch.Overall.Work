@@ -1,6 +1,41 @@
 {
-  "updated": "2026-11-03T18:33:12.357Z",
+  "updated": "2026-11-03T18:35:49.861Z",
   "reports": [
+    {
+      "topic": "youtube automation",
+      "at": "2026-11-03T18:35:46.000Z",
+      "file": "youtube-automation.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 58.8,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+      "parts": {
+        "demand": 80.5,
+        "winnability": 55.22857142857143,
+        "mechanism": 50,
+        "fit": null,
+        "timing": 20
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 55)",
+        "interest is decaying — this is a topic of last quarter"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.522,
+        "winner_ratio": 37.2,
+        "fresh_share_30d": 0.17,
+        "median_views": 51628,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 50,
+      "vph_median": 31
+    },
     {
       "topic": "ai video editing",
       "at": "2026-11-03T18:33:11.000Z",
@@ -68,41 +103,6 @@
       "confidence": 0.85,
       "mechanism": 50,
       "vph_median": 44
-    },
-    {
-      "topic": "youtube automation",
-      "at": "2026-11-03T18:24:46.000Z",
-      "file": "youtube-automation.json",
-      "lane": "api",
-      "order": "relevance",
-      "status": "ok",
-      "count": 30,
-      "verdict": "SHARPEN",
-      "score": 58.9,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
-      "parts": {
-        "demand": 80.5,
-        "winnability": 55.82857142857142,
-        "mechanism": 50,
-        "fit": null,
-        "timing": 20
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 56)",
-        "interest is decaying — this is a topic of last quarter"
-      ],
-      "saturation": {
-        "videos": 30,
-        "top3_share": 0.516,
-        "winner_ratio": 38.8,
-        "fresh_share_30d": 0.17,
-        "median_views": 49595,
-        "reading": "distributed — no single video owns it, entry is feasible"
-      },
-      "confidence": 0.85,
-      "mechanism": 50,
-      "vph_median": 31
     },
     {
       "topic": "video editing workflow",
