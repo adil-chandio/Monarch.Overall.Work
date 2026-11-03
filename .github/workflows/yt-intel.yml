@@ -44,10 +44,15 @@ jobs:
       # durable answer. If the secret is absent the job still runs and still produces the
       # report as a downloadable artifact — it just cannot commit it.
       - name: Wire the commit key (optional)
-        if: ${{ env.YT_COMMIT_KEY != '' }}
         env:
           YT_COMMIT_KEY: ${{ secrets.YT_COMMIT_KEY }}
+        # `if: env.YT_COMMIT_KEY != ''` never fired: the `secrets` context is not available to
+        # step conditionals, so this step was skipped on every run since it was written.
         run: |
+          if [ -z "$YT_COMMIT_KEY" ]; then
+            echo "no YT_COMMIT_KEY secret — the default token will try the commit instead"
+            exit 0
+          fi
           mkdir -p ~/.ssh && chmod 700 ~/.ssh
           printf '%s\n' "$YT_COMMIT_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
@@ -63,14 +68,32 @@ jobs:
       - name: Offline self-test (fail fast if the maths broke)
         run: python -m yt_intel.test_offline
 
-      - name: Which lane are we in?
+      - name: Resolve the key secret
         env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAPI1 }}
+        # The key secret must be named YOUTUBE_API_KEY for the tool to pick it up. A closely
+        # named secret (YTAPI1) is a very easy mistake to make in a mobile browser, so both
+        # are accepted here and normalised into one name — and the log says which one won.
+        # The value is masked; only its length and first four characters are printed.
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then
+            echo "no key secret (YOUTUBE_API_KEY or YTAPI1) — staying keyless"
+            exit 0
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          if [ -n "$KEY_PRIMARY" ]; then
+            echo "using secret YOUTUBE_API_KEY (${#KEY} chars)"
+          else
+            echo "using secret YTAPI1 (${#KEY} chars) — rename it to YOUTUBE_API_KEY when convenient"
+          fi
+
+      - name: Which lane are we in?
         run: python -m yt_intel lanes
 
       - name: Key doctor (proves the key before trusting it)
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         # no key configured? skip instead of failing the schedule — keyless mode still works
         run: |
           if [ -z "$YOUTUBE_API_KEY" ]; then echo "no key secret — staying keyless"; else python -m yt_intel doctor; fi
@@ -92,7 +115,6 @@ jobs:
 
       - name: Research (one topic, or the whole queue)
         env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           YT_INTEL_MAX_TOPICS: '4'
         run: |
           TOPIC="${{ github.event.inputs.topic || steps.plan.outputs.topic }}"
