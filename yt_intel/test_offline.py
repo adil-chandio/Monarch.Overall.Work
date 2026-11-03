@@ -29,6 +29,11 @@ def t_duration():
 
 def t_age_vph():
     ok("3 weeks ago", forensic.parse_age_days("3 weeks ago") == 21)
+    ok("8d ago (web lane)", forensic.parse_age_days("8d ago") == 8)
+    ok("2w ago", forensic.parse_age_days("2w ago") == 14)
+    ok("1mo ago is a month", forensic.parse_age_days("1mo ago") == 30.4)
+    ok("2y ago", forensic.parse_age_days("2y ago") == 730)
+    ok("45 min ago", forensic.parse_age_days("45 min ago") < 0.05)
     ok("iso date", forensic.parse_age_days("2026-11-01") is not None)
     ok("vph", forensic.vph(1000, 10) == round(1000 / 240, 2))
     ok("vph needs age", forensic.vph(1000, None) is None)

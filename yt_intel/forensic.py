@@ -44,15 +44,38 @@ def parse_duration(s: str) -> int:
     return secs
 
 
+_REL = re.compile(r"^\s*(\d+)\s*(s|sec|m|min|h|hr|d|day|w|wk|mo|month|y|yr)?\s*(?:ago)?\s*$", re.I)
+_ABBR = [
+    # order matters: 'mo' before 'm', 'min' before 'm'
+    (re.compile(r"^\s*(\d+)\s*(?:mo|month)s?\s*(?:ago)?", re.I), 30.4),
+    (re.compile(r"^\s*(\d+)\s*(?:min|minute)s?\s*(?:ago)?", re.I), 1 / 1440),
+    (re.compile(r"^\s*(\d+)\s*(?:y|yr|year)s?\s*(?:ago)?", re.I), 365.0),
+    (re.compile(r"^\s*(\d+)\s*(?:w|wk|week)s?\s*(?:ago)?", re.I), 7.0),
+    (re.compile(r"^\s*(\d+)\s*(?:d|day)s?\s*(?:ago)?", re.I), 1.0),
+    (re.compile(r"^\s*(\d+)\s*(?:h|hr|hour)s?\s*(?:ago)?", re.I), 1 / 24),
+    (re.compile(r"^\s*(\d+)\s*(?:s|sec|second)s?\s*(?:ago)?", re.I), 1 / 86400),
+]
+
+
 def parse_age_days(published: str) -> float | None:
-    """'3 weeks ago' / ISO date -> age in days."""
+    """'3 weeks ago' / '8d ago' / '1mo ago' / ISO date -> age in days.
+
+    The web lane abbreviates, and the long-form regex missed every abbreviation silently —
+    which is why the first live run produced a full sample with every views/hour blank.
+    A missing age is not a small gap: it silently disables the only fair speed metric.
+    """
     if not published:
         return None
     m = re.search(r"(\d+)\s*(second|minute|hour|day|week|month|year)", published, re.I)
     if m:
         n, unit = int(m.group(1)), m.group(2).lower()
-        mult = {"second": 1/86400, "minute": 1/1440, "hour": 1/24, "day": 1, "week": 7, "month": 30.4, "year": 365}.get(unit, 1)
+        mult = {"second": 1/86400, "minute": 1/1440, "hour": 1/24, "day": 1, "week": 7,
+                "month": 30.4, "year": 365}[unit]
         return round(n * mult, 2)
+    for pat, mult in _ABBR:
+        m = pat.match(published)
+        if m:
+            return round(int(m.group(1)) * mult, 2)
     m = re.match(r"(\d{4})-(\d{2})-(\d{2})", published)
     if m:
         import datetime as dt
