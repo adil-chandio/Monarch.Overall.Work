@@ -221,6 +221,34 @@ def cmd_reverse(args):
             print(f"    {k:<6} {v}")
 
 
+def cmd_style(args):
+    """Production-style forensics on a local file (our own cut, or a reference clip)."""
+    from . import style as style_mod
+    res = style_mod.analyse(args.file)
+    if res.get("status") != "ok":
+        return _p(res)
+    if args.compare:
+        other = style_mod.analyse(args.compare)
+        res["compare"] = style_mod.compare(res, other)
+    if args.json:
+        with open(args.json, "w") as f:
+            json.dump(res, f, indent=2)
+        print(f"wrote {args.json}")
+        return
+    print(f"\nPRODUCTION STYLE · {res['path']}  ({res['duration_s']}s)")
+    print(f"  cuts            {res['cuts']}  ({res['cuts_per_minute']}/min)")
+    print(f"  hook cuts 0-3s  {res['hook_cuts_first_3s']}")
+    print(f"  shot length     median {res['shot_median_s']}s · p10 {res['shot_p10_s']} · p90 {res['shot_p90_s']} · longest {res['longest_shot_s']}")
+    print(f"  motion          mean {res['motion_mean']} · peak {res['motion_peak']} · quiet {res['motion_quiet_share']:.0%}")
+    print(f"  look            saturation {res['saturation_mean']} · contrast {res['contrast_mean']}")
+    print(f"  lower-third     edge density mean {res['overlay_density_mean']} · peak {res['overlay_density_peak']}")
+    print(f"  pacing          {res['pacing_verdict']}")
+    if res.get("compare"):
+        print("\n  VS REFERENCE")
+        for k, v in res["compare"].items():
+            print(f"    {k:<22} ours {v['ours']:<8} theirs {v['theirs']:<8} ratio {v['ratio']}")
+
+
 def cmd_ideas(args):
     dem = demand_mod.analyse(args.topic, deep=False, with_trends=False)
     out = ideas_mod.generate(args.topic, dem.to_dict(), limit=args.limit, **{k: v for k, v in {
@@ -271,6 +299,12 @@ def main(argv=None):
     s.add_argument("--no-transcript", action="store_true")
     s.add_argument("--json")
     s.set_defaults(fn=cmd_reverse)
+
+    s = sub.add_parser("style", help="production-style forensics: cuts, pacing, look (local file)")
+    s.add_argument("file")
+    s.add_argument("--compare", help="a second file to diff against (e.g. a reference clip)")
+    s.add_argument("--json")
+    s.set_defaults(fn=cmd_style)
 
     s = sub.add_parser("ideas", help="trend + evergreen curiosity idea families")
     s.add_argument("topic")
