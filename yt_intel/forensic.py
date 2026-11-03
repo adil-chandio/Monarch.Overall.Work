@@ -76,17 +76,38 @@ def parse_age_days(published: str) -> float | None:
         m = pat.match(published)
         if m:
             return round(int(m.group(1)) * mult, 2)
-    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", published)
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}))?", published)
     if m:
         import datetime as dt
-        then = dt.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
-        return round((dt.date.today() - then).days, 2)
+        year, month, day = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        hour = int(m.group(4) or 0)
+        minute = int(m.group(5) or 0)
+        then = dt.datetime(year, month, day, hour, minute, tzinfo=dt.timezone.utc)
+        delta = dt.datetime.now(dt.timezone.utc) - then
+        age = max(0.0, delta.total_seconds() / 86400)
+        # Sub-day ages used to be truncated to date-days, which made every video published
+        # today exactly 0 days old. `vph` refuses a zero age, so the entire views/hour column
+        # came back None on `--order date` runs — the one search order whose whole point is
+        # velocity. Keep two decimals: an 8-hour-old video is 0.33 days, not zero.
+        return round(age, 2)
     return None
 
 
+# A video two hours old with 800 views "does" 400 views/hour and means nothing: the first
+# hours of a publish are a spike, not a rate. `--order date` returns almost nothing else, so
+# without this floor every fresh-wave sample reads as explosive velocity.
+MIN_VPH_AGE_HOURS = 6
+
+
 def vph(views: int | None, age_days: float | None) -> float | None:
-    """Views per hour since publish. The only fair cross-video speed metric."""
+    """Views per hour since publish. The only fair cross-video speed metric.
+
+    Returns None under `MIN_VPH_AGE_HOURS`: too early to be a rate. The raw age and view count
+    are still on the row, so a young video is visible without being scored.
+    """
     if views is None or not age_days or age_days <= 0:
+        return None
+    if age_days * 24 < MIN_VPH_AGE_HOURS:
         return None
     return round(views / (age_days * 24), 2)
 

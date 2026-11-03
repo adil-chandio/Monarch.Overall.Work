@@ -39,6 +39,27 @@ def t_lockup_states():
     ok("'Streamed 2 years ago' still yields an age", forensic.parse_age_days(r["published"]) == 730)
 
 
+def t_age_subday():
+    """Age must not be truncated to whole date-days.
+
+    Regression with a cost: a video published at 19:28 today parsed as exactly 0 days old, and
+    `vph` treats 0 as "no age" and returns None — so every `--order date` run produced a full
+    sample with the entire views/hour column blank. That order exists to measure velocity.
+    """
+    from . import forensic
+    import datetime as dt
+    now = dt.datetime.now(dt.timezone.utc)
+    two_h = (now - dt.timedelta(hours=2)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    age = forensic.parse_age_days(two_h)
+    ok("a two-hour-old video is not zero days old", age is not None and 0 < age < 0.2, age)
+    ok("a sub-day age is still refused by vph as a rate", forensic.vph(800, age) is None)
+    eight_h = (now - dt.timedelta(hours=8)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    a8 = forensic.parse_age_days(eight_h)
+    ok("eight hours is old enough to be a rate", forensic.vph(800, a8) is not None)
+    ok("vph floor is not silently zero", forensic.MIN_VPH_AGE_HOURS == 6)
+    ok("plain ISO date still parses", forensic.parse_age_days("2026-01-01") is not None)
+
+
 def t_age_vph():
     ok("3 weeks ago", forensic.parse_age_days("3 weeks ago") == 21)
     ok("8d ago (web lane)", forensic.parse_age_days("8d ago") == 8)
@@ -296,7 +317,7 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+    for fn in [t_duration, t_lockup_states, t_age_subday, t_age_vph, t_style_calibration, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
                t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_comment_refusal_speaks, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
