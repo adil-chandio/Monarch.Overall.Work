@@ -65,10 +65,19 @@ No wave requires the previous wave to be perfect — only deployed and reachable
 ---
 
 > **Status (2026-11-03):** W1 done, **W2 done** (`9ec3b55` — space shell, deep links,
-> ⌘K), **W3 partially done** (`dc26a09` — research desk: demand → saturation → mechanism →
-> verdict, backed by `yt_intel/`), W5 partially done (`09a73cb` — proof surface). See
+> ⌘K), **W3 partially done** (`dc26a09` + `96b348c…` — research desk: demand → saturation →
+> mechanism → verdict, backed by `yt_intel/`; the desk now runs unattended in CI and holds six
+> real topic reports), W5 partially done (`09a73cb` — proof surface). See
 > [`05-SPACES-OPERATING-MODEL.md`](./05-SPACES-OPERATING-MODEL.md) for the as-built model
 > and the concrete W3 scope.
+>
+> **What the research desk actually proves today:** the pipeline is real (a scheduled run
+> fetches, measures, decides, commits and indexes — run `41652813373` onward, all steps
+> green), and each card shows its verdict *with* confidence, median views and views/hour.
+> What it does **not** yet prove: anything from the Data API lane. No `YOUTUBE_API_KEY` has
+> ever been present, so exact view counts, comment mining and quota accounting are written
+> and unit-tested but have never been executed against Google. That is one secret away, and
+> `docs/setup/YOUTUBE-API-KEY.md` is the five-minute path.
 
 ## Definition of done (per wave)
 
