@@ -170,12 +170,23 @@
        stool with a different bag on it — a different object, in a different
        place, at a different size. This is the reference's own composition. -->
   <section class="scene" id="s5" style="opacity:0;">
-    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-he.png'); filter:none;"></div>
+    <!-- Plate is the GREY state of this shot, not a frame that still has the
+         colour sweep in it. Using 2.45 s carried the field's colour transition
+         into the plate, so this scene showed a green field with green bag while
+         the reference had already gone grey with a grey bag — a colour state that
+         belongs to an earlier moment, baked into a later one. -->
+    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-grey.png'); filter:none;"></div>
     <!-- "NO" is a separate layer because it is not in the plate yet at the frame the
          plate was taken from: the reference brings HE SAID first and NO slams in
          after it. It was cut by unmixing two of the reference's own frames — the
          one with NO and the one without — which gives a real alpha instead of a
          red threshold and leaves no white fringe on the letterforms. -->
+    <!-- HE SAID and NO arrive as two beats, so they are two layers: the plate has
+         neither. Both cut by unmixing two of the reference's own frames, which
+         gives a real alpha and no fringe. -->
+    <div class="layer" id="s5he" style="left:112px; top:336px; width:464px; height:62px;
+         background:url('./assets/ref/s5-he-layer.png') center/100% 100% no-repeat; opacity:0;
+         will-change:transform,opacity;"></div>
     <div class="layer" id="s5no" style="left:110px; top:387px; width:490px; height:205px;
          background:url('./assets/ref/s5-no.png') center/100% 100% no-repeat; opacity:0;
          will-change:transform,opacity;"></div>
@@ -428,8 +439,12 @@
     { filter: "brightness(1.0)", duration: 0.9, ease: "power2.out" }, 1.30);
   /* NO is not in the plate; it slams in on its own, big and fast, the way the
      reference does it — measured absent at 2.05 s, fully arrived by 2.95 s. */
+  /* two beats, measured: HE SAID lands around 2.5 s, NO slams at 2.3 and is fully
+     in by 2.95. NO is the bigger, harder hit, so it moves further and faster. */
+  tl.fromTo("#s5he", { opacity: 0, scale: 1.25, y: 14 },
+    { opacity: 1, scale: 1.0, y: 0, duration: 0.18, ease: "power3.out" }, 2.42);
   tl.fromTo("#s5no", { opacity: 0, scale: 1.55, y: -26 },
-    { opacity: 1, scale: 1.0, y: 0, duration: 0.20, ease: "power4.out" }, 2.30);
+    { opacity: 1, scale: 1.0, y: 0, duration: 0.20, ease: "power4.out" }, 2.55);
 
   /* ================= S6 · the reveal plate ================================
      Reference: the mark spins up, the money arrives, "2008" fades up, then the
