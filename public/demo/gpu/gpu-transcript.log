@@ -1,77 +1,82 @@
-::notice::packaging kernel compali/monarch-v3-voice-014331 for compali
-packaged compali/monarch-v3-voice-014331 (gpu T4 x2) -> /tmp/vkwork/monarch-v3-voice-014331
-::notice::pushing compali/monarch-v3-voice-014331
-Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-014331
-[01:43:33] compali/monarch-v3-voice-014331 -> compali/monarch-v3-voice-014331 has status "KernelWorkerStatus.QUEUED"
-[01:43:54] compali/monarch-v3-voice-014331 -> compali/monarch-v3-voice-014331 has status "KernelWorkerStatus.RUNNING"
-[01:44:14] compali/monarch-v3-voice-014331 -> compali/monarch-v3-voice-014331 has status "KernelWorkerStatus.ERROR"
-  0%|          | 0.00/27.6k [00:00<?, ?B/s]100%|██████████| 27.6k/27.6k [00:00<00:00, 939kB/s]
+::notice::packaging kernel compali/monarch-v3-voice-014735 for compali
+packaged compali/monarch-v3-voice-014735 (gpu T4 x2) -> /tmp/vkwork/monarch-v3-voice-014735
+::notice::pushing compali/monarch-v3-voice-014735
+Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-014735
+[01:47:38] compali/monarch-v3-voice-014735 -> compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.QUEUED"
+[01:47:58] compali/monarch-v3-voice-014735 -> compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.RUNNING"
+[01:48:19] compali/monarch-v3-voice-014735 -> compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.ERROR"
+  0%|          | 0.00/27.6k [00:00<?, ?B/s]100%|██████████| 27.6k/27.6k [00:00<00:00, 2.85MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014331/out/vo/03-gap.mp3
-Downloading 04-lie.mp3 to /tmp/vkwork/monarch-v3-voice-014331/out/vo
-  0%|          | 0.00/25.2k [00:00<?, ?B/s]100%|██████████| 25.2k/25.2k [00:00<00:00, 727kB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/03-gap.mp3
+Downloading 04-lie.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
+  0%|          | 0.00/25.2k [00:00<?, ?B/s]100%|██████████| 25.2k/25.2k [00:00<00:00, 2.27MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014331/out/vo/04-lie.mp3
-Downloading 05-shift.mp3 to /tmp/vkwork/monarch-v3-voice-014331/out/vo
-  0%|          | 0.00/25.3k [00:00<?, ?B/s]100%|██████████| 25.3k/25.3k [00:00<00:00, 669kB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/04-lie.mp3
+Downloading 05-shift.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
+  0%|          | 0.00/25.3k [00:00<?, ?B/s]100%|██████████| 25.3k/25.3k [00:00<00:00, 2.64MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014331/out/vo/05-shift.mp3
-Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-014331/out/vo
-  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 1.63MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/05-shift.mp3
+Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
+  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 2.92MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014331/out/vo/06-audience.mp3
-Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-014331/out/vo
-  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 556kB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/06-audience.mp3
+Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
+  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 1.89MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014331/out/vo/07-end.mp3
-Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-014331/out/monarch-v3-voice-014331.log 
-/tmp/vkwork/monarch-v3-voice-014331/out:
-total 16
--rw-r--r-- 1 runner runner 9015 Nov  4 01:44 monarch-v3-voice-014331.log
-drwxr-xr-x 2 runner runner 4096 Nov  4 01:44 vo
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/07-end.mp3
+Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/monarch-v3-voice-014735.log 
+/tmp/vkwork/monarch-v3-voice-014735/out:
+total 12
+-rw-r--r-- 1 runner runner 6433 Nov  4 01:48 monarch-v3-voice-014735.log
+drwxr-xr-x 2 runner runner 4096 Nov  4 01:48 vo
 
-/tmp/vkwork/monarch-v3-voice-014331/out/vo:
+/tmp/vkwork/monarch-v3-voice-014735/out/vo:
 total 176
--rw-r--r-- 1 runner runner 17901 Nov  4 01:44 01-hook.mp3
--rw-r--r-- 1 runner runner 24813 Nov  4 01:44 02-rest.mp3
--rw-r--r-- 1 runner runner 28269 Nov  4 01:44 03-gap.mp3
--rw-r--r-- 1 runner runner 25773 Nov  4 01:44 04-lie.mp3
--rw-r--r-- 1 runner runner 25869 Nov  4 01:44 05-shift.mp3
--rw-r--r-- 1 runner runner 21549 Nov  4 01:44 06-audience.mp3
--rw-r--r-- 1 runner runner 18093 Nov  4 01:44 07-end.mp3
-::error::kernel compali/monarch-v3-voice-014331 produced no words.json (status: compali/monarch-v3-voice-014331 has status "KernelWorkerStatus.ERROR")
-ile \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
-,{"stream_name":"stderr","time":19.567701519,"data":"    raise_for_execution_errors(nb, output_path)\n"}
-,{"stream_name":"stderr","time":19.567704254,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":19.567706744,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
-,{"stream_name":"stderr","time":19.567724149,"data":"    raise error\n"}
-,{"stream_name":"stderr","time":19.567728501,"data":"papermill.exceptions.PapermillExecutionError: \n"}
-,{"stream_name":"stderr","time":19.567732774,"data":"---------------------------------------------------------------------------\n"}
-,{"stream_name":"stderr","time":19.56773684,"data":"Exception encountered at \"In [1]\":\n"}
-,{"stream_name":"stderr","time":19.567741336,"data":"---------------------------------------------------------------------------\n"}
-,{"stream_name":"stderr","time":19.567745889,"data":"CalledProcessError                        Traceback (most recent call last)\n"}
-,{"stream_name":"stderr","time":19.56774983,"data":"/tmp/ipykernel_23/2936624875.py in \u003ccell line: 0\u003e()\n"}
-,{"stream_name":"stderr","time":19.567753902,"data":"     17 # sys.executable in produced FileNotFoundError inside Kaggle.\n"}
-,{"stream_name":"stderr","time":19.567757672,"data":"     18 import sys as _sys\n"}
-,{"stream_name":"stderr","time":19.567761281,"data":"---\u003e 19 subprocess.run([_sys.executable, \"-m\", \"pip\", \"install\", \"-q\", \"--no-input\",\n"}
-,{"stream_name":"stderr","time":19.567765631,"data":"     20                 \"faster-whisper==1.0.3\"], check=True)\n"}
-,{"stream_name":"stderr","time":19.567769604,"data":"     21 \n"}
-,{"stream_name":"stderr","time":19.567779929,"data":"\n"}
-,{"stream_name":"stderr","time":19.567782639,"data":"/usr/lib/python3.13/subprocess.py in run(input, capture_output, timeout, check, *popenargs, **kwargs)\n"}
-,{"stream_name":"stderr","time":19.567785289,"data":"    576         retcode = process.poll()\n"}
-,{"stream_name":"stderr","time":19.567787741,"data":"    577         if check and retcode:\n"}
-,{"stream_name":"stderr","time":19.567790187,"data":"--\u003e 578             raise CalledProcessError(retcode, process.args,\n"}
-,{"stream_name":"stderr","time":19.567792859,"data":"    579                                      output=stdout, stderr=stderr)\n"}
-,{"stream_name":"stderr","time":19.567804331,"data":"    580     return CompletedProcess(process.args, retcode, stdout, stderr)\n"}
-,{"stream_name":"stderr","time":19.567807086,"data":"\n"}
-,{"stream_name":"stderr","time":19.567810455,"data":"CalledProcessError: Command '['/usr/bin/python3', '-m', 'pip', 'install', '-q', '--no-input', 'faster-whisper==1.0.3']' returned non-zero exit status 1.\n"}
-,{"stream_name":"stderr","time":19.567827941,"data":"\n"}
-,{"stream_name":"stderr","time":21.957360281,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":21.957388724,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":22.132377562,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":22.132403234,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":22.925969436,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
-,{"stream_name":"stderr","time":23.004147508,"data":"[NbConvertApp] Writing 226594 bytes to __notebook__.ipynb\n"}
-,{"stream_name":"stderr","time":25.673445435,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
-,{"stream_name":"stderr","time":26.236458647,"data":"[NbConvertApp] Writing 520038 bytes to __results__.html\n"}
-]
+-rw-r--r-- 1 runner runner 17901 Nov  4 01:47 01-hook.mp3
+-rw-r--r-- 1 runner runner 24813 Nov  4 01:47 02-rest.mp3
+-rw-r--r-- 1 runner runner 28269 Nov  4 01:47 03-gap.mp3
+-rw-r--r-- 1 runner runner 25773 Nov  4 01:47 04-lie.mp3
+-rw-r--r-- 1 runner runner 25869 Nov  4 01:47 05-shift.mp3
+-rw-r--r-- 1 runner runner 21549 Nov  4 01:47 06-audience.mp3
+-rw-r--r-- 1 runner runner 18093 Nov  4 01:47 07-end.mp3
+::error::kernel compali/monarch-v3-voice-014735 produced no words.json (status: compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.ERROR")
+/usr/local/lib/python3.13/dist-packages/nbformat/validator.py:434: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  _validate(nbdict, ref, version, version_minor, relax_add_props)
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+unpacked VO files: ['01-hook.mp3', '02-rest.mp3', '03-gap.mp3', '04-lie.mp3', '05-shift.mp3', '06-audience.mp3', '07-end.mp3']
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys;import papermill as pm;pm.execute_notebook("__notebook__.ipynb","__notebook__.ipynb",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)
+                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 131, in execute_notebook
+    raise_for_execution_errors(nb, output_path)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+    raise error
+papermill.exceptions.PapermillExecutionError: 
+---------------------------------------------------------------------------
+Exception encountered at "In [1]":
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_22/3227194187.py in <cell line: 0>()
+     32     return f"{spec}: rc={r.returncode}"
+     33 
+---> 34 install_log = [ensure("faster_whisper", "faster-whisper>=1.0.3"),
+     35                ensure("ctranslate2", "ctranslate2>=4.4.0")]
+     36 print(install_log, flush=True)
+/tmp/ipykernel_22/3227194187.py in ensure(module, spec)
+     22     except Exception:
+     23         pass
+---> 24     r = subprocess.run([sys.executable, "-m", "pip", "install", "--no-input",
+     25                         "--no-cache-dir", "--disable-pip-version-check",
+     26                         "--break-system-packages", spec],
+NameError: name 'sys' is not defined
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
