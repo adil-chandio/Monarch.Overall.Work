@@ -8,6 +8,8 @@ OUT_DIR="${OUT_DIR:-public/demo/gpu}"
 POLL_MAX="${POLL_MAX:-90}"
 POLL_SLEEP="${POLL_SLEEP:-20}"
 
+python3 -m pip install --disable-pip-version-check -q -U kaggle six requests 2>/dev/null || true
+
 mkdir -p "$OUT_DIR" /tmp/vkwork
 STAMP=$(date -u +%H%M%S)
 SLUG="${SLUG_PREFIX}-${STAMP}"

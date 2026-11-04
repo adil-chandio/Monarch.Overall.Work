@@ -29,7 +29,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install Kaggle CLI
-        run: python -m pip install --disable-pip-version-check -q -U kaggle
+        run: python -m pip install --disable-pip-version-check -q -U kaggle six requests
 
       - name: Resolve a working Kaggle credential (secret COMPALI)
         id: creds
