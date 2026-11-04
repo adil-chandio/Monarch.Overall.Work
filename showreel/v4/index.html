@@ -17,7 +17,7 @@
   @font-face { font-family:"PM";     src:url("./vendor/Poppins-Medium.ttf") format("truetype"); font-weight:500; font-display:block; }
 
   :root{
-    --green-plate:#2e8b22;   /* measured plate green, sampled from the reference bag shot */
+    --green-plate:#2f8f22;   /* measured plate green, sampled from the reference bag shot */
     --green-deep:#13400b;
     --red-plate:#a21a1b;     /* measured: 2008 plate base */
     --red-ink:#9d090a;       /* measured: HE SAID / NO */
@@ -31,7 +31,7 @@
 
   .scene{ position:absolute; inset:0; will-change:transform,opacity,filter; }
   .plate{ position:absolute; inset:0; background-size:cover; background-position:center;
-          filter:blur(1.1px); }
+          filter:blur(2px); }
   .grading{ position:absolute; inset:0; pointer-events:none; }
   .grain{ position:absolute; inset:0; pointer-events:none; opacity:.014; mix-blend-mode:overlay;
           background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>"); }
@@ -163,6 +163,12 @@
     <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
     <div class="t bill" id="s11b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
   </section>
+  <section class="scene" id="s15" style="opacity:0;">
+    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
+    <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
+    <div class="t bill" id="s15b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
+  </section>
+
   <section class="scene" id="s12" style="opacity:0;">
     <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 58%; filter:brightness(1.10);"></div>
   </section>
@@ -229,10 +235,10 @@
     ["s7",   9.133,  0.00,  11.700],
     ["s8",  11.700,  0.00,  12.167],
     ["s9",  12.167,  0.00,  12.467],
-    ["s10", 12.467,  0.10,  12.967],
+    ["s10", 12.467,  0.10,  12.667],
+    ["s15", 12.667,  0.10,  12.967],
     ["s11", 12.967,  0.10,  13.333],
-    ["s12", 13.333,  0.00,  13.700],
-    ["s13", 13.700,  0.37,  14.800],
+    ["s13", 13.333,  0.37,  14.800],
     ["s14", 14.800,  0.00,  99.000]
   ];
 
@@ -339,6 +345,8 @@
   tl.set("#s9b", { x: 300, opacity: 0, filter: "blur(14px)" }, 0);
   tl.to("#s9b", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.09, ease: "power3.out" }, 12.167);
 
+  tl.set("#s15b", { rotation: -7, scale: 1.05 }, 0);
+  tl.to("#s15b", { scale: 1, duration: 0.14, ease: "power2.out" }, 12.667);
   tl.set("#s11b", { rotation: -7, scale: 1.05 }, 0);
   tl.to("#s11b", { scale: 1, duration: 0.14, ease: "power2.out" }, 12.967);
 
