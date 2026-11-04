@@ -116,7 +116,7 @@
   .ratio-line { position: absolute; height: 4px; background: rgba(255,176,32,.85); transform-origin: left center; }
 
   /* ---------------------------------------------------------------- scene 4 · top five */
-  .row { position: absolute; left: 150px; width: 1420px; height: 118px; border-radius: 12px;
+  .row { position: absolute; left: 150px; width: 1420px; height: 108px; border-radius: 12px;
          background: rgba(124,135,158,.06); display: flex; align-items: center; }
   .row.hot { background: rgba(255,45,70,.10); border: 2px solid rgba(255,45,70,.45); }
   .row.hot::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 7px; background: #ff2d46; border-radius: 12px 0 0 12px; }
@@ -144,7 +144,12 @@
   .ret-tick { position: absolute; width: 4px; background: rgba(244,246,251,.55); transform-origin: 50% 100%; }
 
   /* ---------------------------------------------------------------- inserts */
-  .ins { position: absolute; inset: 0; opacity: 0; }
+  /* The insert TAKES the frame. Without its own opaque ground the scene underneath
+     showed through and the two compositions read as garbage on the same pixels. */
+  .ins { position: absolute; inset: 0; opacity: 0;
+         background:
+           radial-gradient(circle at 50% 46%, rgba(255,45,70,.13), rgba(5,6,10,0) 58%),
+           linear-gradient(180deg, #05060a 0%, #090c15 50%, #05060a 100%); }
   .ins .ray { position: absolute; transform-origin: left center; height: 4px;
               background: linear-gradient(90deg, rgba(255,45,70,.55), rgba(255,45,70,0)); }
   .ins .big { position: absolute; width: 1920px; text-align: center; font-family: "Anton"; font-size: 300px; letter-spacing: -4px;
@@ -185,14 +190,17 @@
       <div class="s1-num"       id="s1num"   style="left:1245px; top:170px;">0%</div>
 
       <!-- headline: waterfall entry, words are separate spans -->
-      <div class="wf" id="w1" style="left:190px; top:330px; font-size:122px; color:#fff;">EK</div>
-      <div class="wf" id="w2" style="left:340px; top:300px; font-size:196px; color:#ff2d46; letter-spacing:-2px;">VIDEO</div>
-      <div class="wf" id="w3" style="left:770px; top:330px; font-size:122px; color:#fff;">HAR</div>
-      <div class="wf" id="w4" style="left:960px; top:330px; font-size:122px; color:#fff;">VIEW</div>
-      <div class="wf" id="w5" style="left:1250px; top:330px; font-size:122px; color:#fff;">KA</div>
+      <!-- measured layout: line 1 EK(110)+26+VIDEO(399)=535 -> 190..725,
+           line 2 HAR(181)+26+VIEW(226)+26+KA(119)=578 -> 190..768.
+           The bar column starts at 1180, so both lines clear it by >400px. -->
+      <div class="wf" id="w1" style="left:190px;  top:300px; font-size:122px; color:#fff;">EK</div>
+      <div class="wf" id="w2" style="left:326px;  top:270px; font-size:196px; color:#ff2d46; letter-spacing:-2px;">VIDEO</div>
+      <div class="wf" id="w3" style="left:190px;  top:520px; font-size:122px; color:#fff;">HAR</div>
+      <div class="wf" id="w4" style="left:397px;  top:520px; font-size:122px; color:#fff;">VIEW</div>
+      <div class="wf" id="w5" style="left:650px;  top:520px; font-size:122px; color:#fff;">KA</div>
 
-      <div class="s1-rule" id="s1rule" style="left:190px; top:600px; width:660px;"></div>
-      <div id="s1ticks" style="position:absolute; left:190px; top:700px; width:620px; height:30px;"></div>
+      <div class="s1-rule" id="s1rule" style="left:190px; top:700px; width:660px;"></div>
+      <div id="s1ticks" style="position:absolute; left:190px; top:760px; width:620px; height:30px;"></div>
     </div>
   </section>
 
@@ -201,11 +209,12 @@
     <div class="plate" style="--accent:#22d3ee">
       <div class="ct-1"></div><div class="ct-2"></div>
       <div class="ghost" style="left:-20px; top:100px; color:#22d3ee; font-size:640px;">29</div>
-      <div id="cells" style="position:absolute; left:790px; top:200px; width:820px; height:480px;"></div>
-      <div class="t-anton" id="s2num" style="position:absolute; left:170px; top:200px; font-size:330px; color:#fff;">0%</div>
-      <div class="t-psb"  id="s2lbl" style="position:absolute; left:180px; top:545px; font-size:60px; color:#22d3ee;">BAANT RAHE HAIN</div>
-      <div class="t-pm"   id="s2sub" style="position:absolute; left:184px; top:620px; font-size:38px; color:#7c879e;">UNTEES VIDEOS · 75% SAB KA</div>
-      <div id="ladder" style="position:absolute; left:180px; top:690px; width:120px; height:300px;"></div>
+      <div id="cells" style="position:absolute; left:830px; top:190px; width:760px; height:480px;"></div>
+      <!-- 75% at Anton 240 measures 493px -> 170..663; the grid starts at 830 -->
+      <div class="t-anton" id="s2num" style="position:absolute; left:170px; top:220px; font-size:240px; color:#fff;">0%</div>
+      <div class="t-psb"  id="s2lbl" style="position:absolute; left:180px; top:500px; font-size:56px; color:#22d3ee;">BAANT RAHE HAIN</div>
+      <div class="t-pm"   id="s2sub" style="position:absolute; left:184px; top:578px; font-size:36px; color:#7c879e;">UNTEES VIDEOS · 75% SAB KA</div>
+      <div id="ladder" style="position:absolute; left:180px; top:650px; width:120px; height:270px;"></div>
     </div>
   </section>
 
@@ -238,8 +247,8 @@
       <div class="ct-1"></div><div class="ct-2"></div>
       <div class="t-psb" id="s4kick" style="position:absolute; left:160px; top:168px; font-size:42px; color:#7c879e;">TOP FIVE MEIN TEEN</div>
       <div class="t-anton" id="s4tally" style="position:absolute; left:1500px; top:150px; font-size:62px; color:#ff2d46;">0/5</div>
-      <div id="rows" style="position:absolute; left:0; top:236px; width:1920px; height:600px;"></div>
-      <div id="s4verdict" style="position:absolute; left:150px; top:820px; width:1420px;">
+      <div id="rows" style="position:absolute; left:0; top:206px; width:1920px; height:620px;"></div>
+      <div id="s4verdict" style="position:absolute; left:150px; top:838px; width:1420px;">
         <div style="height:5px; background:#ffb020; transform-origin:left center;" id="s4ul"></div>
         <div class="t-psb" style="font-size:40px; color:#ffb020; margin-top:14px;">KOI NAHI BATATA: KAUN CHHOD GAYA</div>
       </div>
@@ -406,7 +415,7 @@
   ROWS.forEach(function (r, i) {
     var el = d.createElement("div");
     el.className = "row" + (r[3] ? " hot" : "");
-    el.style.top = (i * 132) + "px";
+    el.style.top = (i * 124) + "px";
     el.innerHTML = '<div class="n" style="color:' + (r[3] ? "#ff2d46" : "#7c879e") + '">' + r[0] + "</div>"
       + '<div class="lbl">' + r[1] + "</div>"
       + '<div class="v" style="color:' + (r[3] ? "#ff2d46" : "#7c879e") + '">' + r[2] + "</div>";

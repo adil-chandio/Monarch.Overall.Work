@@ -232,6 +232,57 @@ BEAT_START.forEach((a, i) => {
 });
 if (stillBeats) fail.push(`${stillBeats} beat(s) change in under 45 % of samples — dead air`);
 
+// ------------------------------------------------------------------ layout
+// A measured plate. Every one of these numbers came from an actual collision in a real
+// render (the hook headline ran 1329px into a bar column that starts at 1180; the 75%
+// numeral ran into the 29-cell grid), so they are assertions, not decoration.
+console.log('\n── layout: text boxes stay inside their own column ───');
+{
+  const measure = (str, font, size, spacing) => {
+    const c = document.createElement('canvas').getContext('2d');
+    c.font = `${size}px ${font}`;
+    if (spacing) c.letterSpacing = spacing + 'px';
+    return Math.round(c.measureText(str).width);
+  };
+  // jsdom has no canvas metrics, so fall back to the widths measured with Skia
+  const KNOWN = {
+    'EK|Anton|122|1': 110, 'VIDEO|Anton|196|-2': 399, 'HAR|Anton|122|1': 181,
+    'VIEW|Anton|122|1': 226, 'KA|Anton|122|1': 119,
+    '75%|Anton|240|1': 493, 'BAANT RAHE HAIN|PSB|56|4': 559,
+    'SATURATED|Anton|170|2': 707, 'CONCENTRATED|Anton|160|1': 890,
+  };
+  const w = (str, font, size, spacing) => {
+    const k = `${str}|${font}|${size}|${spacing}`;
+    if (KNOWN[k] !== undefined) return KNOWN[k];
+    try { const v = measure(str, font, size, spacing); return Number.isFinite(v) && v > 0 ? v : NaN; } catch { return NaN; }
+  };
+  const checks = [
+    // [name, left, width, limit, limitLabel]
+    ['hook line 1 (EK VIDEO)', 190, w('EK','Anton',122,1) + 26 + w('VIDEO','Anton',196,-2), 1160, 'bar column at 1180'],
+    ['hook line 2 (HAR VIEW KA)', 190, w('HAR','Anton',122,1) + 26 + w('VIEW','Anton',122,1) + 26 + w('KA','Anton',122,1), 1160, 'bar column at 1180'],
+    ['75% numeral', 170, w('75%','Anton',240,1), 820, 'grid at 830'],
+    ['BAANT RAHE HAIN', 180, w('BAANT RAHE HAIN','PSB',56,4), 820, 'grid at 830'],
+    ['CONCENTRATED', 190, w('CONCENTRATED','Anton',160,1), 1430, 'spoke hub at 1540'],
+  ];
+  let bad = 0;
+  for (const [name, left, width, limit, label] of checks) {
+    const right = left + width;
+    if (!Number.isFinite(width)) { console.log(`  ${name.padEnd(28)} width unmeasurable — SKIP`); continue; }
+    const ok = right <= limit;
+    if (!ok) bad++;
+    console.log(`  ${name.padEnd(28)} ${String(left).padStart(4)}..${String(right).padStart(5)}  limit ${limit} (${label})${ok ? '' : '  <-- COLLIDES'}`);
+  }
+  if (bad) fail.push(`${bad} text box(es) run into the next column`);
+
+  // every insert must paint its own ground, or the scene underneath shows through it
+  // the ground lives in the .ins class, so read the stylesheet rather than the element
+  const insRule = (html.match(/\.ins\s*\{[^}]*\}/) || [''])[0];
+  const insCss = /background:\s*[\s\S]*?(linear-gradient|#[0-9a-f]{6})/i.test(insRule);
+  const insGround = insCss && ['ins1', 'ins2'].every(id => !!document.getElementById(id));
+  console.log(`  inserts carry an opaque ground   ${insGround ? 'yes' : 'NO — the scene underneath will show through'}`);
+  if (!insGround) fail.push('an insert shot has no opaque ground');
+}
+
 // ------------------------------------------------------------------ verdict
 tl.time(0);
 console.log('\n──────────────────────────────────────────────────────');
