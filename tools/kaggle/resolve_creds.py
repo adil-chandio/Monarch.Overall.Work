@@ -228,10 +228,17 @@ def main() -> int:
                    if chosen else None),
     }, indent=1) + "\n")
 
-    summary = "; ".join(
-        f"{r['slot']}:{r['shape']}:{'ok-' + (r.get('tried') or [{}])[0].get('handle', '')
-                                  if r['verdict'] == 'authenticated' else 'rejected'}"
-        for r in rows if r["present"]) or "no credential slots present"
+    summary_bits = []
+    for r in rows:
+        if not r["present"]:
+            continue
+        if r["verdict"] == "authenticated":
+            tried = (r.get("tried") or [{}])[0]
+            summary_bits.append(f"{r['slot']}:{r['shape']}:ok:{tried.get('handle', '')}")
+        else:
+            errs = "; ".join((t.get("error") or "no handle")[:80] for t in (r.get("tried") or []))
+            summary_bits.append(f"{r['slot']}:{r['shape']}:rejected:{errs}")
+    summary = " | ".join(summary_bits) or "no credential slots present"
     print(f"::notice::CRED_SUMMARY {summary} | net={'up' if rows_net['reachable'] else 'down'}",
           flush=True)
 
