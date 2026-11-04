@@ -28,6 +28,12 @@ function arg(name, fallback = null) {
 const OUT = arg("out", "public/demo/v4-silent.mp4");
 const FPS = Number(arg("fps", "30"));
 const ONLY = arg("only", null);
+/* A checkpoint render: stop the picture at a fraction of the film so the first
+   shots can be judged before the rest is built. `--part 0.30` renders 0.000 to
+   30 % of the duration; `--part-tag` names the output so a checkpoint can never be
+   confused with, or overwrite, the full master. */
+const PART = Number(arg("part", "1"));
+const PART_TAG = arg("part-tag", null);
 const FRAMES_DIR = path.join(ROOT, "public/demo/v4-frames");
 
 const COMPOSITION = path.join(ROOT, "showreel/v4/index.html");
@@ -97,7 +103,8 @@ async function main() {
 
   const frameCount = Math.round(total * fps);
   const times = [];
-  for (let i = 0; i < frameCount; i++) times.push(i / fps);
+  const partFrames = Math.max(1, Math.round(frameCount * PART));
+  for (let i = 0; i < partFrames; i++) times.push(i / fps);
 
   // warm pass: paint a couple of frames and throw them away, then come back to 0.
   // Without this the very first captured frame came out fully black — the browser
@@ -155,8 +162,8 @@ async function main() {
   const outPath = path.join(ROOT, OUT);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   const onDisk = fs.readdirSync(FRAMES_DIR).filter((f) => /^f_\d{5}\.png$/.test(f)).length;
-  if (onDisk !== frameCount) {
-    throw new Error(`frame dir holds ${onDisk} PNGs but the film is ${frameCount} frames`);
+  if (onDisk !== partFrames) {
+    throw new Error(`frame dir holds ${onDisk} PNGs but this render is ${partFrames} frames`);
   }
   const ff = spawnSync(
     "ffmpeg",
@@ -166,7 +173,7 @@ async function main() {
          muxed 700 frames out of a directory that still held 701 PNGs from the
          previous run, and the extra frame came from a different build of the film */
       "-start_number", "0", "-i", path.join(FRAMES_DIR, "f_%05d.png"),
-      "-frames:v", String(frameCount), "-fps_mode", "cfr", "-r", String(fps),
+      "-frames:v", String(partFrames), "-fps_mode", "cfr", "-r", String(fps),
       /* REF-01 is a 980 kb/s 720p30 master. A near-lossless encode here would
          measure twice the edge density of the reference for no delivery benefit,
          so the film is encoded into the same band it will be published in. */
@@ -189,10 +196,11 @@ async function main() {
   );
   const got = parseInt((counted.stdout || "").trim(), 10);
   if (Number.isFinite(got) && got !== frameCount) {
-    throw new Error(`encode has ${got} frames, expected ${frameCount}`);
+    throw new Error(`encode has ${got} frames, expected ${partFrames}`);
   }
   const mb = (fs.statSync(outPath).size / 1e6).toFixed(2);
-  console.log(`wrote ${OUT} (${frameCount} frames, ${mb} MB)`);
+  console.log(`wrote ${OUT} (${partFrames} frames, ${mb} MB)` +
+    (PART < 1 ? ` — checkpoint at ${(PART * 100).toFixed(0)} %${PART_TAG ? ` (${PART_TAG})` : ""}` : ""));
 }
 
 main().catch((e) => {

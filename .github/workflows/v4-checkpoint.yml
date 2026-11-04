@@ -1,0 +1,78 @@
+name: v4 checkpoint (first 30 %)
+
+# Why this exists: the full film is a 7-minute render behind a 12-step gate, and a
+# wrong turn in the first seven seconds — where all the motion is — costs the whole
+# cycle to discover. This renders the first 30 % on its own and stops, so the hook
+# and the first four shots can be approved before anything else is built. The full
+# render is a separate job and is not blocked by this one.
+
+on:
+  push:
+    branches: ["arena/**"]
+    paths: ["showreel/v4/**", "tools/**", ".github/workflows/v4-checkpoint.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v4-checkpoint-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg and fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu >/dev/null
+          ffmpeg -version | head -1
+
+      - name: Provision chrome-headless-shell
+        run: |
+          npm install --no-save --silent puppeteer-core@23 puppeteer@23
+          npx puppeteer browsers install chrome-headless-shell
+          echo "CHROME=$(node -e "console.log(require('puppeteer').executablePath())")" >> $GITHUB_ENV
+
+      - name: Gates — no scene outlives its window, nothing leaks
+        run: |
+          npm install --no-save --silent jsdom@30 gsap@3
+          node tools/timeline_probe.mjs showreel/v4/index.html
+          node tools/verify_v4.mjs
+
+      - name: Render the first 30 %
+        run: |
+          node tools/render_v4.mjs --out public/demo/v4-30-silent.mp4 --part 0.30 --part-tag "first 30%"
+
+      - name: Cut the reference to the same window
+        run: python3 tools/make_checkpoint_ref.py 0.30
+
+      - name: Check the checkpoint frames
+        run: |
+          python3 tools/check_render.py public/demo/v4-30-silent.mp4 --frames public/demo/v4-frames --out analysis/v4-build/check-30.json
+          ls -la public/demo/v4-30-silent.mp4 public/demo/ref30.mp4
+
+      - name: Publish the checkpoint
+        if: always()
+        run: |
+          git config user.name "monarch-forensics-bot"
+          git config user.email "forensics@monarch.studio"
+          git add -f public/demo/v4-30-silent.mp4 public/demo/ref30.mp4 2>/dev/null || true
+          git commit -m "checkpoint(v4): first 30 % for approval [skip ci]" || echo "nothing to commit"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push skipped"
