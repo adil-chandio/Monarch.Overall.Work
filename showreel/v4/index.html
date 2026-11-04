@@ -88,7 +88,7 @@
 
   <!-- ===================== S1 · 0.00–0.53  TWENTY on white ===================== -->
   <section class="scene" id="s1">
-    <div class="plate" style="background:#bababa;"></div>
+    <div class="plate" id="s1plate" style="background:#bababa;"></div>
     <div class="grading" style="background:radial-gradient(78% 58% at 46% 46%, rgba(255,255,255,.62), rgba(186,186,186,0) 72%);"></div>
     <div class="t kicker" id="s1w" style="left:120px; top:640px; color:#5ea015; opacity:0;">TWENTY</div>
   </section>
@@ -104,19 +104,19 @@
 
   <!-- ===================== S3 · 0.83–1.00  green macro ===================== -->
   <section class="scene" id="s3" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.58) saturate(1.10) contrast(1.06);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.62) saturate(.82) hue-rotate(-6deg) contrast(1.06);"></div>
   </section>
 
   <!-- ===================== S4 · 1.00–1.30  bag on green ===================== -->
   <section class="scene" id="s4" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.22) saturate(.78) hue-rotate(-6deg);"></div>
     <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
     <div class="t bill" id="s4b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
   </section>
 
   <!-- ===================== S5 · 1.30–3.13  the match-move ===================== -->
   <section class="scene" id="s5" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); filter:brightness(1.12);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); filter:brightness(1.10) saturate(.92);"></div>
     <div class="t kicker" id="s5he"  style="left:130px; top:250px; color:var(--red-ink); opacity:0;">HE</div>
     <div class="t kicker" id="s5said" style="left:222px; top:250px; color:var(--red-ink); opacity:0;">SAID</div>
     <div class="t hero"   id="s5no"  style="left:126px; top:352px; color:var(--red-ink); opacity:0;">NO</div>
@@ -158,11 +158,11 @@
     <div class="t" id="s9b" style="left:224px; top:545px; font-size:157px; color:#5ea015;">BILLION</div>
   </section>
   <section class="scene" id="s10" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.58) saturate(1.10) contrast(1.06);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.62) saturate(.82) hue-rotate(-6deg) contrast(1.06);"></div>
   </section>
 
   <section class="scene" id="s15" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.22) saturate(.78) hue-rotate(-6deg);"></div>
     <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
     <div class="t bill" id="s15b" style="left:52px; top:150px; font-size:84px;">BILLION</div>
   </section>
@@ -171,7 +171,7 @@
     <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 58%; filter:brightness(1.10);"></div>
   </section>
   <section class="scene" id="s13" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 52%; filter:saturate(.30) brightness(1.30) contrast(1.12);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 52%; filter:saturate(.26) brightness(1.26) contrast(1.14);"></div>
     <div class="t kicker" id="s13he"   style="left:130px; top:250px; color:var(--red-ink); opacity:0;">HE</div>
     <div class="t kicker" id="s13said" style="left:222px; top:250px; color:var(--red-ink); opacity:0;">SAID</div>
     <div class="t hero"   id="s13no"   style="left:126px; top:352px; color:var(--red-ink); opacity:0;">NO</div>
@@ -180,10 +180,10 @@
   <!-- ===================== S14 · 14.80–23.35  the CTA ===================== -->
   <section class="scene" id="s14" style="opacity:0;">
     <div class="plate" id="s14plate" style="background:
-        radial-gradient(120% 90% at 52% 26%, #e02f26 0%, #bb1c14 44%, #7b100b 100%);"></div>
+        radial-gradient(120% 90% at 52% 26%, #cf2f26 0%, #a81d16 44%, #6d100b 100%);"></div>
     <div class="plate" id="s14img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; filter:brightness(1.70) saturate(1.06);"></div>
     <div class="grading" id="s14warm" style="opacity:0; mix-blend-mode:soft-light;
-       background:linear-gradient(180deg, rgba(220,40,30,.55), rgba(120,10,8,.15) 60%, rgba(0,0,0,0) 100%);"></div>
+       background:linear-gradient(180deg, rgba(205,45,34,.42), rgba(110,12,9,.12) 60%, rgba(0,0,0,0) 100%);"></div>
     <div class="grading" id="s14red" style="opacity:0; mix-blend-mode:screen;
          background:radial-gradient(38% 14% at 47% 30%, rgba(255,40,40,.95), rgba(255,40,40,.12) 55%, rgba(255,40,40,0) 78%);"></div>
     <div class="vig"></div>
@@ -287,7 +287,12 @@
   }
 
   /* ================= S1 · slow green reveal on white ================= */
-  tl.fromTo("#s1w", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" }, 0.02);
+  /* the hook has to move: 0.108 motion in the reference's first second, measured.
+     A word fading up cannot reach that, so the plate pushes and the word rises into
+     it — the same trick the reference uses before its first cut. */
+  tl.fromTo("#s1plate", { scale: 1.14 }, { scale: 1.0, duration: 0.62, ease: "power2.out" }, 0);
+  tl.fromTo("#s1w", { opacity: 0, y: 34, scale: 0.94 },
+    { opacity: 1, y: 0, scale: 1, duration: 0.34, ease: "power3.out" }, 0.06);
 
   /* ================= S2 · TWENTY slides in, BILLION snaps onto it ===== */
   tl.set("#s2a", { x: -260, opacity: 0, filter: "blur(14px)" }, 0);
