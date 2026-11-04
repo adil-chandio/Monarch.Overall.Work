@@ -207,8 +207,13 @@ async function main() {
      "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", outPath],
     { encoding: "utf8" }
   );
+  /* Compare against THIS render's frame count, not the whole film's. A checkpoint
+     render is 210 frames by construction, so testing it against frameCount (701)
+     failed every checkpoint while the encode was perfectly correct — the error even
+     read "encode has 210 frames, expected 210", because the message used the right
+     number and the test used the wrong one. */
   const got = parseInt((counted.stdout || "").trim(), 10);
-  if (Number.isFinite(got) && got !== frameCount) {
+  if (Number.isFinite(got) && got !== partFrames) {
     throw new Error(`encode has ${got} frames, expected ${partFrames}`);
   }
   const mb = (fs.statSync(outPath).size / 1e6).toFixed(2);
