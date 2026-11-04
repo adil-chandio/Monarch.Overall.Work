@@ -147,18 +147,21 @@ for (const c of CUTS) {
 note(`${activeCuts}/${CUTS.length} measured cuts produce a visible change`);
 
 // ---- 5. at most one scene alive outside a dissolve -------------------------
-const DISSOLVES = [
-  [0.833, 1.3],   // s3 -> s4 (measured 0.50 / 0.43 s)
-  [1.3, 1.58],
-  [12.467, 12.97],
-  [12.967, 13.46],
-  [12.97, 13.34],
-  [13.333, 13.71],
-];
+// the overlap windows are derived from the composition's own scene table instead of a
+// hand-written list: a dissolve is allowed to lay one plate over another exactly
+// inside its own window (that is what makes the cut read), and nowhere else.
+const SCENE_TABLE = window.__scenes || [];
+const DISSOLVES = SCENE_TABLE.filter((r) => r[2] > 0).map((r) => [
+  r[1] - 2 / fps,
+  r[1] + Math.max(r[2] * 0.75, 2 / fps) + 1 / fps,
+]);
+if (DISSOLVES.length === 0) fail("composition published no dissolve windows");
 const inDissolve = (t) => DISSOLVES.some(([a, b]) => t >= a && t <= b);
 const busy = [];
 for (let t = FPS_STEP; t < dur; t += FPS_STEP) {
   if (inDissolve(t)) continue;
+  tl.pause();
+  tl.time(t, false);   // the loop must move the timeline itself, not read time 0
   const vis = visible();
   if (vis.length > 1) busy.push({ t: +t.toFixed(3), vis: vis.map((v) => v.id).join("+") });
 }
