@@ -84,10 +84,25 @@ git add showreel/v3 && git commit -m "tweak" && git push
 `chrome-headless-shell`:
 
 1. `npx hyperframes lint` + `validate`
-2. `node tools/verify_v3.mjs` — the composition gate
-3. `npx hyperframes render … --fps 30 --quality delivery`
-4. builds the mix, measures it, masters to −14 LUFS / −1.5 dBTP / 48 kHz
-5. commits `public/demo/viral-short-v3.mp4` back to the branch
+2. `node tools/verify_v3.mjs` — the composition gate (timeline, seams, exit
+   velocity, per-beat activity, and the layout geometry: every text box against
+   the column and the 820 px plate it lives in)
+3. `node tools/verify_sync.mjs` — the voice gate, driven by word timings measured
+   by Whisper large-v3 on **Kaggle GPU T4 x2** (`docs/demo/V3-GPU-ALIGNMENT.md`)
+4. `npx hyperframes render … --fps 30 --quality delivery`
+5. builds the mix, measures it, masters to −14 LUFS / −1.5 dBTP / 48 kHz
+6. commits `public/demo/viral-short-v3.mp4` back to the branch
+
+## The master (as committed)
+
+`public/demo/viral-short-v3.mp4` — 42.30 s, 1920×1080, 30 fps, h264 High
+yuv420p bt709 at 3994 kb/s + AAC 48 kHz stereo 262 kb/s, 22,513,095 bytes.
+Loudness **−13.85 LUFS**, true peak **−0.80 dBTP**.
+Visual QA was done frame by frame on the shipped file, not on the intent: all
+seven beats were inspected at 2.8 s intervals plus spot frames at the comments
+and end beats, after three layout defects (hook collision, `75%` vs the grid,
+and elements authored in 1080-space inside an 820-tall plate) were measured and
+fixed.
 
 ## Honest limits
 
