@@ -43,15 +43,20 @@ jobs:
           sudo apt-get install -y -qq ffmpeg fonts-dejavu >/dev/null
           ffmpeg -version | head -1
 
-      - name: Provision chrome-headless-shell
+      # ONE install for every node dependency this job needs. A second
+      # `npm install --no-save` for just the gate's packages prunes whatever is not
+      # in package.json — it removed puppeteer, and the render step then failed on a
+      # missing module after the gates had already passed.
+      - name: Install renderer, gate and chrome-headless-shell
         run: |
-          npm install --no-save --silent puppeteer-core@23 puppeteer@23
-          npx puppeteer browsers install chrome-headless-shell
-          echo "CHROME=$(node -e "console.log(require('puppeteer').executablePath())")" >> $GITHUB_ENV
+          npm install --no-save --silent jsdom@30 gsap@3 puppeteer-core@23
+          npx --yes @puppeteer/browsers install chrome-headless-shell@stable --path "$PWD/.browsers"
+          CHROME_PATH=$(find "$PWD/.browsers" -name 'chrome-headless-shell' -type f | head -n 1)
+          echo "CHROME=$CHROME_PATH" >> $GITHUB_ENV
+          test -x "$CHROME_PATH" && echo "chrome ok: $CHROME_PATH"
 
       - name: Gates — no scene outlives its window, nothing leaks
         run: |
-          npm install --no-save --silent jsdom@30 gsap@3
           node tools/timeline_probe.mjs showreel/v4/index.html
           node tools/verify_v4.mjs
 
