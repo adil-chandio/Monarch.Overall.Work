@@ -24,7 +24,23 @@ SR = 48000
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SEAMS = ROOT / "showreel/v2/seams.json"
 DEFAULT_OUT = ROOT / "public/demo/v2-mix.wav"
-FFMPEG = ROOT / ".venv/lib/python3.11/site-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+def _ffmpeg() -> str:
+    """the venv binary when it exists, otherwise whatever is on PATH (CI runner)."""
+    venv = ROOT / ".venv/lib/python3.11/site-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+    if venv.exists():
+        return str(venv)
+    import shutil
+    found = shutil.which("ffmpeg")
+    if not found:
+        try:
+            import imageio_ffmpeg
+            return imageio_ffmpeg.get_ffmpeg_exe()
+        except Exception:
+            raise SystemExit("no ffmpeg available — install ffmpeg or imageio-ffmpeg")
+    return found
+
+
+FFMPEG = _ffmpeg()
 
 BPM = 120.0
 BEAT = 60.0 / BPM          # 0.5 s
@@ -198,7 +214,7 @@ def snare(gain=0.30, seed=13):
 def load_vo(path: Path) -> np.ndarray:
     """decode an mp3 to mono float32 at SR with ffmpeg"""
     raw = subprocess.run(
-        [str(FFMPEG), "-v", "error", "-i", str(path), "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"],
+        [FFMPEG, "-v", "error", "-i", str(path), "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"],
         capture_output=True, check=True,
     ).stdout
     return np.frombuffer(raw, dtype="<f4").astype(np.float64)

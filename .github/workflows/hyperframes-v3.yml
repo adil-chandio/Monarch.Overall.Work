@@ -100,6 +100,13 @@ jobs:
       # ---------------------------------------------------------------- sound
       - name: Build the score and the frame-locked SFX
         run: |
+          # audio.py resolves its ffmpeg from .venv (the sandbox path). On the runner
+          # ffmpeg is on PATH, so point it there explicitly and fail loudly if the VO
+          # or a dependency is missing instead of dying inside the mixer.
+          set -euo pipefail
+          test -f public/demo/vo/timing.json || { echo "::error::VO timing.json missing"; exit 1; }
+          ls public/demo/vo/*.mp3 | head -10
+          python -c "import numpy, scipy; print('numpy', numpy.__version__, 'scipy', scipy.__version__)"
           python showreel/v2/audio.py \
             --seams showreel/v3/seams.json \
             --out public/demo/v3-mix.wav
