@@ -184,10 +184,10 @@
     <!-- HE SAID and NO arrive as two beats, so they are two layers: the plate has
          neither. Both cut by unmixing two of the reference's own frames, which
          gives a real alpha and no fringe. -->
-    <div class="layer" id="s5he" style="left:114px; top:235px; width:468px; height:163px;
+    <div class="layer" id="s5he" style="left:117px; top:235px; width:465px; height:163px;
          background:url('./assets/ref/s5-he-layer.png') center/100% 100% no-repeat; opacity:0;
          will-change:transform,opacity;"></div>
-    <div class="layer" id="s5no" style="left:112px; top:388px; width:480px; height:196px;
+    <div class="layer" id="s5no" style="left:115px; top:391px; width:477px; height:193px;
          background:url('./assets/ref/s5-no.png') center/100% 100% no-repeat; opacity:0;
          will-change:transform,opacity;"></div>
   </section>
@@ -451,10 +451,15 @@
   /* HE SAID and NO are two beats, not one: HE SAID is a faint pre-echo in the
      reference from about 2.2 s and solid by 2.45, NO slams 2.35 -> 2.95 and is the
      harder hit, so it travels further. */
-  tl.fromTo("#s5he", { opacity: 0, scale: 1.25, y: 14 },
-    { opacity: 1, scale: 1.0, y: 0, duration: 0.30, ease: "power3.out" }, 2.15);
-  tl.fromTo("#s5no", { opacity: 0, scale: 1.55, y: -26 },
-    { opacity: 1, scale: 1.0, y: 0, duration: 0.20, ease: "power4.out" }, 2.55);
+  /* Measured arrival, not a guess: HE SAID is faint from 2.10 and solid by 2.45,
+     a fade with almost no scale. NO is not there at 2.50 and is 461 px wide at
+     2.60 — full size inside a tenth of a second — so it does not fly in, it
+     arrives. A big scale-in was the one thing this scene was doing that the
+     reference never does. */
+  tl.fromTo("#s5he", { opacity: 0, scale: 1.06, y: 6 },
+    { opacity: 1, scale: 1.0, y: 0, duration: 0.35, ease: "power2.out" }, 2.10);
+  tl.fromTo("#s5no", { opacity: 0, scale: 1.05, y: 6 },
+    { opacity: 1, scale: 1.0, y: 0, duration: 0.10, ease: "none" }, 2.54);
 
   /* ================= S6 · the reveal plate ================================
      Reference: the mark spins up, the money arrives, "2008" fades up, then the

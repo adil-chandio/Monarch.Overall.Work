@@ -30,7 +30,7 @@ from ffbin import ffmpeg
 
 REF = "analysis/attachment-filename-How-to-Edit-VIRAL-RE/reference.mp4"
 OUT = Path("showreel/v4/assets/ref")
-PLATE_T, CLEAN_T, FULL_T = 2.10, 2.05, 2.95
+PLATE_T, CLEAN_T, FULL_T = 2.05, 2.05, 2.95
 FF = ffmpeg()
 
 
@@ -41,28 +41,30 @@ def grab(t: float) -> np.ndarray:
     return np.asarray(Image.open(io.BytesIO(raw)).convert("RGB")).astype(np.float32)
 
 
-def unmix(name: str, sel: np.ndarray, full: np.ndarray, base: np.ndarray) -> list[int]:
-    """Recover C and alpha from full = C*a + base*(1-a), given where the type is.
+def cut_out(name: str, sel: np.ndarray, full: np.ndarray) -> list[int]:
+    """Cut the element out of the reference's own final frame.
 
-    Two frames of the same shot, one with the element and one without, so the
-    difference is the element. Keying by colour instead leaves a pale fringe on
-    every glyph edge; solving for C does not.
+    Solving for alpha against an earlier frame was wrong in a way that looked like
+    a bug and was not: the type in the reference is opaque, so the difference
+    between the two frames is not the element's alpha, it is the element's colour
+    over whatever the background changed by. Dividing by that difference gave a
+    partial alpha, the plate showed through the letters, and the threshold that
+    cleaned it up drew a straight line across them.
+
+    The element is opaque, so the layer is the final frame's own pixels, masked by
+    the glyph shape and feathered by a pixel or two to sit on the plate.
     """
-    d = np.abs(full - base).max(axis=2)
-    al = np.where(sel, np.clip(d / 210.0, 0, 1), 0).astype(np.float32)
-    solid = (al > 0.30).astype(np.uint8)
-    n, lbl, st, _ = cv2.connectedComponentsWithStats(solid, 8)
-    keep = np.zeros_like(solid)
-    for i in range(1, n):
-        if st[i, cv2.CC_STAT_AREA] > 1500:
-            keep[lbl == i] = 1
-    al = cv2.GaussianBlur((keep * 255).astype(np.uint8), (0, 0), 1.0).astype(np.float32) / 255
-    a = np.clip(al, 1e-3, 1)[..., None]
-    c = np.clip((full - (1 - a) * base) / a, 0, 255)
-    ys, xs = np.where(al > 0.05)
+    shape = cv2.dilate(sel.astype(np.uint8), np.ones((5, 5), np.uint8))
+    al = cv2.GaussianBlur(shape.astype(np.float32), (0, 0), 1.6)
+    al = np.clip(al / max(al.max(), 1e-6), 0, 1) * (shape > 0)
+
+    ys, xs = np.where(al > 0.02)
     x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
-    x0, y0 = max(0, x0 - 6), max(0, y0 - 6)
-    rgba = np.dstack([c, al * 255]).astype(np.uint8)[y0:y1, x0:x1]
+    x0, y0 = max(0, x0 - 3), max(0, y0 - 3)
+
+    colour = full[y0:y1, x0:x1]
+    alpha = al[y0:y1, x0:x1]
+    rgba = np.dstack([colour, alpha * 255]).astype(np.uint8)
     cv2.imwrite(str(OUT / f"{name}.png"), cv2.cvtColor(rgba, cv2.COLOR_RGBA2BGRA))
     box = [int(x0), int(y0), int(x1 - x0), int(y1 - y0)]
     json.dump({"box": box}, open(OUT / f"{name}.json", "w"))
@@ -74,7 +76,7 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     plate, full, clean = grab(PLATE_T), grab(FULL_T), grab(CLEAN_T)
 
-    for name, f in (("plate 2.10", plate), ("full 2.95", full)):
+    for name, f in (("plate 2.05", plate), ("full 2.95", full)):
         r, g, b = f[:, :, 0], f[:, :, 1], f[:, :, 2]
         red = (r > 80) & (r - g > 35) & (r - b > 35)
         print(f"  {name}: {int(red.sum())} red pixels")
@@ -89,8 +91,8 @@ def main() -> None:
 
     up = np.zeros_like(red); up[:band, :] = True; up &= red
     lo = np.zeros_like(red); lo[band:, :] = True; lo &= red
-    unmix("s5-he-layer", up, full, clean)
-    unmix("s5-no", lo, full, clean)
+    cut_out("s5-he-layer", up, full)
+    cut_out("s5-no", lo, full)
 
     # the measured colour endpoints, so the page animates to something real
     swept = plate.mean(axis=(0, 1)).round(1)
