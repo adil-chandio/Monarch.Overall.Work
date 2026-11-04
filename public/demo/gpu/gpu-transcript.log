@@ -1,56 +1,94 @@
-::notice::packaging kernel compali/monarch-v3-voice-014735 for compali
-packaged compali/monarch-v3-voice-014735 (gpu T4 x2) -> /tmp/vkwork/monarch-v3-voice-014735
-::notice::pushing compali/monarch-v3-voice-014735
-Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-014735
-[01:47:38] compali/monarch-v3-voice-014735 -> compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.QUEUED"
-[01:47:58] compali/monarch-v3-voice-014735 -> compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.RUNNING"
-[01:48:19] compali/monarch-v3-voice-014735 -> compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.ERROR"
-  0%|          | 0.00/27.6k [00:00<?, ?B/s]100%|██████████| 27.6k/27.6k [00:00<00:00, 2.85MB/s]
+::notice::packaging kernel compali/monarch-v3-voice-015229 for compali
+packaged compali/monarch-v3-voice-015229 (gpu T4 x2) -> /tmp/vkwork/monarch-v3-voice-015229
+::notice::pushing compali/monarch-v3-voice-015229
+Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-015229
+[01:52:31] compali/monarch-v3-voice-015229 -> compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.QUEUED"
+[01:52:52] compali/monarch-v3-voice-015229 -> compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.RUNNING"
+[01:53:12] compali/monarch-v3-voice-015229 -> compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.RUNNING"
+[01:53:33] compali/monarch-v3-voice-015229 -> compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.RUNNING"
+[01:53:53] compali/monarch-v3-voice-015229 -> compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.RUNNING"
+[01:54:14] compali/monarch-v3-voice-015229 -> compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.RUNNING"
+[01:54:34] compali/monarch-v3-voice-015229 -> compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.ERROR"
+  0%|          | 0.00/27.6k [00:00<?, ?B/s]100%|██████████| 27.6k/27.6k [00:00<00:00, 14.1MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/03-gap.mp3
-Downloading 04-lie.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
-  0%|          | 0.00/25.2k [00:00<?, ?B/s]100%|██████████| 25.2k/25.2k [00:00<00:00, 2.27MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-015229/out/vo/03-gap.mp3
+Downloading 04-lie.mp3 to /tmp/vkwork/monarch-v3-voice-015229/out/vo
+  0%|          | 0.00/25.2k [00:00<?, ?B/s]100%|██████████| 25.2k/25.2k [00:00<00:00, 11.1MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/04-lie.mp3
-Downloading 05-shift.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
-  0%|          | 0.00/25.3k [00:00<?, ?B/s]100%|██████████| 25.3k/25.3k [00:00<00:00, 2.64MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-015229/out/vo/04-lie.mp3
+Downloading 05-shift.mp3 to /tmp/vkwork/monarch-v3-voice-015229/out/vo
+  0%|          | 0.00/25.3k [00:00<?, ?B/s]100%|██████████| 25.3k/25.3k [00:00<00:00, 14.8MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/05-shift.mp3
-Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
-  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 2.92MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-015229/out/vo/05-shift.mp3
+Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-015229/out/vo
+  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 18.7MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/06-audience.mp3
-Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-014735/out/vo
-  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 1.89MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-015229/out/vo/06-audience.mp3
+Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-015229/out/vo
+  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 18.3MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/vo/07-end.mp3
-Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-014735/out/monarch-v3-voice-014735.log 
-/tmp/vkwork/monarch-v3-voice-014735/out:
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-015229/out/vo/07-end.mp3
+Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-015229/out/monarch-v3-voice-015229.log 
+/tmp/vkwork/monarch-v3-voice-015229/out:
+total 20
+drwxr-xr-x 5 runner runner  4096 Nov  4 01:55 models
+-rw-r--r-- 1 runner runner 10968 Nov  4 01:55 monarch-v3-voice-015229.log
+drwxr-xr-x 2 runner runner  4096 Nov  4 01:55 vo
+
+/tmp/vkwork/monarch-v3-voice-015229/out/models:
 total 12
--rw-r--r-- 1 runner runner 6433 Nov  4 01:48 monarch-v3-voice-014735.log
-drwxr-xr-x 2 runner runner 4096 Nov  4 01:48 vo
+-rw-r--r-- 1 runner runner  191 Nov  4 01:53 CACHEDIR.TAG
+drwxr-xr-x 3 runner runner 4096 Nov  4 01:54 blobs
+drwxr-xr-x 5 runner runner 4096 Nov  4 01:55 models--Systran--faster-whisper-large-v3
 
-/tmp/vkwork/monarch-v3-voice-014735/out/vo:
-total 176
--rw-r--r-- 1 runner runner 17901 Nov  4 01:47 01-hook.mp3
--rw-r--r-- 1 runner runner 24813 Nov  4 01:47 02-rest.mp3
--rw-r--r-- 1 runner runner 28269 Nov  4 01:47 03-gap.mp3
--rw-r--r-- 1 runner runner 25773 Nov  4 01:47 04-lie.mp3
--rw-r--r-- 1 runner runner 25869 Nov  4 01:47 05-shift.mp3
--rw-r--r-- 1 runner runner 21549 Nov  4 01:47 06-audience.mp3
--rw-r--r-- 1 runner runner 18093 Nov  4 01:47 07-end.mp3
-::error::kernel compali/monarch-v3-voice-014735 produced no words.json (status: compali/monarch-v3-voice-014735 has status "KernelWorkerStatus.ERROR")
-/usr/local/lib/python3.13/dist-packages/nbformat/validator.py:434: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
-  _validate(nbdict, ref, version, version_minor, relax_add_props)
-0.00s - Debugger warning: It seems that frozen modules are being used, which may
-0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
-0.00s - to python to disable frozen modules.
-0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
-0.00s - Debugger warning: It seems that frozen modules are being used, which may
-0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
-0.00s - to python to disable frozen modules.
-0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
-unpacked VO files: ['01-hook.mp3', '02-rest.mp3', '03-gap.mp3', '04-lie.mp3', '05-shift.mp3', '06-audience.mp3', '07-end.mp3']
+/tmp/vkwork/monarch-v3-voice-015229/out/models/blobs:
+total 4
+drwxr-xr-x 2 runner runner 4096 Nov  4 01:55 28
+
+/tmp/vkwork/monarch-v3-voice-015229/out/models/blobs/28:
+total 3014936
+-rw-r--r-- 1 runner runner 3087284237 Nov  4 01:54 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a
+-rw-r--r-- 1 runner runner          0 Nov  4 01:53 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.lock
+-rw-r--r-- 1 runner runner        112 Nov  4 01:53 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.refs
+
+/tmp/vkwork/monarch-v3-voice-015229/out/models/models--Systran--faster-whisper-large-v3:
+total 12
+drwxr-xr-x 2 runner runner 4096 Nov  4 01:55 blobs
+drwxr-xr-x 2 runner runner 4096 Nov  4 01:55 refs
+drwxr-xr-x 2 runner runner 4096 Nov  4 01:55 trees
+
+/tmp/vkwork/monarch-v3-voice-015229/out/models/models--Systran--faster-whisper-large-v3/blobs:
+total 3476
+-rw-r--r-- 1 runner runner 1068114 Nov  4 01:53 0adcd01e7c237205d593b707e66dd5d7bc785d2d
+-rw-r--r-- 1 runner runner 2480617 Nov  4 01:53 3a5e2ba63acdcac9a19ba56cf9bd27f185bfff61
+-rw-r--r-- 1 runner runner    2394 Nov  4 01:53 75336feae814999bae6ccccdecf177639ffc6f9d
+-rw-r--r-- 1 runner runner     340 Nov  4 01:53 931c77a740890c46365c7ae0c9d350ba3cca908f
+
+/tmp/vkwork/monarch-v3-voice-015229/out/models/models--Systran--faster-whisper-large-v3/refs:
+total 4
+-rw-r--r-- 1 runner runner 40 Nov  4 01:53 main
+
+/tmp/vkwork/monarch-v3-voice-015229/out/models/models--Systran--faster-whisper-large-v3/trees:
+::error::kernel compali/monarch-v3-voice-015229 produced no words.json (status: compali/monarch-v3-voice-015229 has status "KernelWorkerStatus.ERROR")
+ "devices": [
+  {
+   "index": 0,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  },
+  {
+   "index": 1,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  }
+ ],
+ "nvidia_smi": "GPU 0: Tesla T4 (UUID: GPU-ca2a7d1c-5fe7-6beb-e356-783efd7c7f05)\nGPU 1: Tesla T4 (UUID: GPU-7248924c-44d9-1b7c-29fa-2dc68dd2a9d5)"
+}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+backend: faster-whisper large-v3 float16 cuda
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
     import sys;import papermill as pm;pm.execute_notebook("__notebook__.ipynb","__notebook__.ipynb",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)
@@ -64,19 +102,31 @@ papermill.exceptions.PapermillExecutionError:
 ---------------------------------------------------------------------------
 Exception encountered at "In [1]":
 ---------------------------------------------------------------------------
-NameError                                 Traceback (most recent call last)
-/tmp/ipykernel_22/3227194187.py in <cell line: 0>()
-     32     return f"{spec}: rc={r.returncode}"
-     33 
----> 34 install_log = [ensure("faster_whisper", "faster-whisper>=1.0.3"),
-     35                ensure("ctranslate2", "ctranslate2>=4.4.0")]
-     36 print(install_log, flush=True)
-/tmp/ipykernel_22/3227194187.py in ensure(module, spec)
-     22     except Exception:
-     23         pass
----> 24     r = subprocess.run([sys.executable, "-m", "pip", "install", "--no-input",
-     25                         "--no-cache-dir", "--disable-pip-version-check",
-     26                         "--break-system-packages", spec],
-NameError: name 'sys' is not defined
+TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_24/919469713.py in <cell line: 0>()
+     88     words, text_parts, seg_rows = [], [], []
+     89     if backend.startswith("faster-whisper"):
+---> 90         segments, info = model.transcribe(
+     91             str(VO / name), language="hi", task="transcribe", word_timestamps=True,
+     92             vad_filter=True, beam_size=5, condition_on_previous_text=False)
+/usr/local/lib/python3.13/dist-packages/faster_whisper/transcribe.py in transcribe(self, audio, language, task, log_progress, beam_size, best_of, patience, length_penalty, repetition_penalty, no_repeat_ngram_size, temperature, compression_ratio_threshold, log_prob_threshold, no_speech_threshold, condition_on_previous_text, prompt_reset_on_temperature, initial_prompt, prefix, suppress_blank, suppress_tokens, without_timestamps, max_initial_timestamp, word_timestamps, prepend_punctuations, append_punctuations, multilingual, vad_filter, vad_parameters, max_new_tokens, chunk_length, clip_timestamps, hallucination_silence_threshold, hotwords, language_detection_threshold, language_detection_segments)
+    874 
+    875         if not isinstance(audio, np.ndarray):
+--> 876             audio = decode_audio(audio, sampling_rate=sampling_rate)
+    877 
+    878         duration = audio.shape[0] / sampling_rate
+/usr/local/lib/python3.13/dist-packages/faster_whisper/audio.py in decode_audio(input_file, sampling_rate, split_stereo)
+     44     dtype = None
+     45 
+---> 46     with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+     47         frames = container.decode(audio=0)
+     48         frames = _ignore_invalid_frames(frames)
+/usr/local/lib/python3.13/dist-packages/av/container/core.py in av.container.core.open()
+    477 
+    478 
+--> 479 def open(
+    480     file,
+    481     mode=None,
+TypeError: open() got an unexpected keyword argument 'metadata_errors'
   cells[i][c] = re.sub('\\\\\|', '|', cell)
   text = re.sub(r'_', '\_', text) # Escape underscores in display text
