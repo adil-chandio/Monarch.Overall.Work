@@ -112,6 +112,16 @@ async function main() {
     await new Promise((r) => setTimeout(r, 60));
   }
 
+  // force the timeline to actually evaluate t=0: a zero-duration set at time 0 can be
+  // pending on the first capture, which is how frame 0 came out black
+  await page.evaluate(() => {
+    const tl = window.__timelines.main;
+    tl.time(1 / 30, false);
+    tl.time(0, false);
+  });
+  await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+  await new Promise((r) => setTimeout(r, 80));
+
   const target = ONLY ? [Number(ONLY)] : times;
   let n = 0;
   for (const t of target) {

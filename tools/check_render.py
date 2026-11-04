@@ -118,16 +118,18 @@ def main() -> None:
         # frames only vote if they are clearly inside the shot
         edge = any(abs(t - s["in"]) < 1.0 / fps or abs(t - s["out"]) < 1.0 / fps for s in scenes)
         if owner in by_scene and not edge:
-            by_scene[owner].append(np.median(fr.reshape(-1, 3), axis=0))
+            # mean, not median: a mostly-dark frame that is correct (shot 7 is a moody
+            # close-up) has a median of 0 and would look like a black scene
+            by_scene[owner].append(fr.reshape(-1, 3).mean(axis=0))
 
     sig: dict[str, np.ndarray] = {}
     for sid, cols in by_scene.items():
         if not cols:
             continue
-        med = np.median(np.stack(cols), axis=0)
+        med = np.median(np.stack(cols), axis=0)  # median over frames, mean within one
         # a scene whose own signature is black means the build is broken, not that the
         # frame matches: refuse to use it rather than pass everything against it
-        if float(med.mean()) < 6.0:
+        if float(med.mean()) < 3.0:
             problems.append(f"scene {sid} renders black (signature {med.round(1).tolist()})")
             continue
         sig[sid] = med
@@ -146,7 +148,7 @@ def main() -> None:
             continue
         if any(a - 1.5 / fps <= t <= b + 1.5 / fps for a, b in table.get("flashes", [])):
             continue
-        col = np.median(fr.reshape(-1, 3), axis=0)
+        col = fr.reshape(-1, 3).mean(axis=0)
         own = np.linalg.norm(col - sig[sid])
         others = {k: np.linalg.norm(col - v) for k, v in sig.items() if k != sid}
         best_other, best_d = min(others.items(), key=lambda kv: kv[1])
@@ -168,7 +170,12 @@ def main() -> None:
                 f"{len(names)} PNGs in {args.frames} but the film is {expect} frames — "
                 f"a stale frame dir will be muxed into the wrong length")
 
+    mean_luma = float(lumas.mean())
+    if mean_luma < 12.0:
+        problems.append(f"the film averages {mean_luma:.1f} luma — that is not a picture")
+
     report = {
+        "mean_luma": round(mean_luma, 2),
         "video": os.path.basename(args.video),
         "duration": info["duration"],
         "fps": info["fps"],
