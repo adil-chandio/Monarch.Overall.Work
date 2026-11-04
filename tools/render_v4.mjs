@@ -27,6 +27,19 @@ function arg(name, fallback = null) {
 
 const OUT = arg("out", "public/demo/v4-silent.mp4");
 const FPS = Number(arg("fps", "30"));
+const TRACE = path.join(ROOT, arg("trace", "analysis/v4-build/render-part.log"));
+
+/* Workflow logs are not always retrievable from this environment, and a blind
+   failure costs a whole render cycle. So the renderer narrates itself to a file
+   that the job commits: the run's own log, from inside the failure. */
+function trace(msg) {
+  const line = `[${new Date().toISOString()}] ${msg}`;
+  console.log(line);
+  try {
+    fs.mkdirSync(path.dirname(TRACE), { recursive: true });
+    fs.appendFileSync(TRACE, line + "\n");
+  } catch {}
+}
 const ONLY = arg("only", null);
 /* A checkpoint render: stop the picture at a fraction of the film so the first
    shots can be judged before the rest is built. `--part 0.30` renders 0.000 to
@@ -149,7 +162,7 @@ async function main() {
       fsMod.writeFileSync(path.join(ROOT, "public/demo/v4-frame0.png"), probe);
     }
     n++;
-    if (n % 60 === 0) console.log(`  ${n}/${target.length} frames`);
+    if (n % 60 === 0) trace(`  ${n}/${target.length} frames`);
   }
 
   await browser.close();

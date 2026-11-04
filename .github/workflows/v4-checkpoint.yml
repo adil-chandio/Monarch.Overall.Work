@@ -62,7 +62,15 @@ jobs:
 
       - name: Render the first 30 %
         run: |
-          node tools/render_v4.mjs --out public/demo/v4-30-silent.mp4 --part 0.30 --part-tag "first 30%"
+          set +e
+          node tools/render_v4.mjs --out public/demo/v4-30-silent.mp4 --part 0.30 --part-tag "first 30%" 2>&1 | tee /tmp/render-part.out
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            # a ::error:: annotation is readable through the API even when the raw
+            # job log cannot be downloaded
+            echo "::error title=checkpoint render failed::$(tail -c 1200 /tmp/render-part.out | tr '\n' ' ')"
+          fi
+          exit "$status"
 
       - name: Cut the reference to the same window
         run: python3 tools/make_checkpoint_ref.py 0.30
@@ -77,7 +85,7 @@ jobs:
         run: |
           git config user.name "monarch-forensics-bot"
           git config user.email "forensics@monarch.studio"
-          git add -f public/demo/v4-30-silent.mp4 public/demo/ref30.mp4 2>/dev/null || true
+          git add -f public/demo/v4-30-silent.mp4 public/demo/ref30.mp4 analysis/v4-build/render-part.log 2>/dev/null || true
           git commit -m "checkpoint(v4): first 30 % for approval [skip ci]" || echo "nothing to commit"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
           git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push skipped"
