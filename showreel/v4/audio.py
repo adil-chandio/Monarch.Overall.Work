@@ -27,8 +27,11 @@ from typing import Iterable
 import numpy as np
 
 SR = 44100
-TOTAL = 23.35
 FPS = 30
+# the film is 701 frames (23.35 s x 30 = 700.5, rounded up), so the bed lasts exactly
+# 701/30 s. A bed that is one frame short makes the mux cut the last frame.
+FRAMES = 701
+TOTAL = FRAMES / FPS
 
 # the reference's measured cut list, in seconds (REF-01 §2)
 CUTS = [0.533, 0.833, 1.000, 1.300, 3.133, 9.133, 11.700,

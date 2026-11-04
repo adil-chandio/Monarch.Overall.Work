@@ -78,8 +78,13 @@ jobs:
           set -o pipefail
           node tools/render_v4.mjs --out public/demo/v4-silent.mp4 2>&1 | tee analysis/v4-build/render.log
 
+      # the check runs on the file this job just produced. Reading the published
+      # master instead measured the PREVIOUS build whenever an earlier step failed,
+      # which is exactly how a 698-frame master survived three green-looking runs.
       - name: Frame-level render check (pixels against the scene table)
-        run: python3 tools/check_render.py public/demo/v4.mp4 --out analysis/v4-build/check.json
+        run: |
+          python3 tools/check_render.py public/demo/v4-silent.mp4 \
+            --out analysis/v4-build/check.json
 
       - name: Probe the picture
         run: |
@@ -91,7 +96,8 @@ jobs:
         run: |
           set -euo pipefail
           ffmpeg -y -i public/demo/v4-silent.mp4 -i public/demo/v4-mix.wav \
-            -c:v copy -c:a aac -b:a 192k -ar 44100 -shortest public/demo/v4-mux.mp4
+            -c:v copy -c:a aac -b:a 192k -ar 44100 public/demo/v4-mux.mp4
+          # -shortest used to cut the picture to the bed's length; the bed is now exact
           ffmpeg -y -i public/demo/v4-mux.mp4 \
             -af "loudnorm=I=-14.02:TP=-0.31:LRA=11" -ar 44100 -c:v copy -c:a aac -b:a 192k \
             -movflags +faststart public/demo/v4.mp4
@@ -101,6 +107,9 @@ jobs:
           ffprobe -v error -show_entries format=duration,size \
             -show_entries stream=codec_name,width,height,r_frame_rate,sample_rate,channels \
             -of default=noprint_wrappers=1 public/demo/v4.mp4
+
+      - name: Frame-level check of the delivered master
+        run: python3 tools/check_render.py public/demo/v4.mp4 --out analysis/v4-build/check-master.json
 
       - name: Measure the rebuild with the same rig that measured the reference
         run: |
