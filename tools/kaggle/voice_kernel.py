@@ -98,43 +98,44 @@ receipt["model"] = backend
 print("backend:", backend, flush=True)
 
 
-def to_wav(src):
-    """Decode with ffmpeg to exactly what Whisper wants.
+def to_pcm(src):
+    """Decode to 16 kHz mono float32 with ffmpeg, in memory.
 
-    faster-whisper reads through PyAV, and the image's PyAV may be older than the
-    argument faster-whisper passes (`metadata_errors`). Decoding here removes that
-    dependency entirely: whoever wins the backend race, we hand it a clean
-    16 kHz mono WAV.
+    Both backends accept a numpy array, which means neither one touches PyAV:
+    the image's PyAV is older than the argument faster-whisper passes
+    (`metadata_errors`), and that TypeError has already cost three runs. ffmpeg
+    is the decoder we control, so it is the only decoder we use.
     """
-    wav = src.with_suffix(".wav")
-    r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-ac", "1",
-                        "-ar", "16000", "-c:a", "pcm_s16le", str(wav)],
-                       capture_output=True, text=True)
-    if r.returncode != 0 or not wav.exists():
+    import numpy as np
+    r = subprocess.run(["ffmpeg", "-v", "error", "-i", str(src), "-ac", "1", "-ar",
+                        "16000", "-f", "f32le", "-acodec", "pcm_f32le", "-"],
+                       capture_output=True)
+    if r.returncode != 0 or not r.stdout:
         raise RuntimeError("ffmpeg decode failed for " + src.name + ": "
-                           + (r.stderr or "")[:300])
-    return wav
+                           + (r.stderr or b"").decode("utf-8", "ignore")[:300])
+    audio = np.frombuffer(r.stdout, dtype=np.float32).copy()
+    return audio, round(len(audio) / 16000.0, 3)
 
 
-WAVS = {}
+PCM = {}
 for name in sorted(PAYLOAD):
     try:
-        WAVS[name] = to_wav(VO / name)
+        PCM[name] = to_pcm(VO / name)
     except Exception as exc:
         print("decode failed:", exc, flush=True)
-print("decoded:", sorted((k, v.stat().st_size) for k, v in WAVS.items()), flush=True)
+print("decoded:", sorted((k, len(v[0]), v[1]) for k, v in PCM.items()), flush=True)
 
 beats = []
 audio_total = 0.0
 for name in sorted(PAYLOAD):
-    if name not in WAVS:
+    if name not in PCM:
         continue
     start = TIMING["starts"][len(beats)]
     t0 = time.time()
     words, text_parts, seg_rows = [], [], []
     if backend.startswith("faster-whisper"):
         segments, info = model.transcribe(
-            str(WAVS[name]), language="hi", task="transcribe", word_timestamps=True,
+            PCM[name][0], language="hi", task="transcribe", word_timestamps=True,
             vad_filter=True, beam_size=5, condition_on_previous_text=False)
         for seg in segments:
             seg_rows.append({"start": round(seg.start, 3), "end": round(seg.end, 3),
@@ -143,10 +144,10 @@ for name in sorted(PAYLOAD):
             for w in (seg.words or []):
                 words.append({"w": w.word.strip(), "s": round(w.start, 3),
                               "e": round(w.end, 3), "p": round(float(w.probability), 3)})
-        dur = float(info.duration)
+        dur = float(PCM[name][1])
         lang, lang_prob = info.language, float(info.language_probability)
     else:
-        res = model.transcribe(str(WAVS[name]), language="hi", word_timestamps=True,
+        res = model.transcribe(PCM[name][0], language="hi", word_timestamps=True,
                                verbose=False)
         dur = float(res.get("duration") or 0.0)
         lang, lang_prob = "hi", 1.0
