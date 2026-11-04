@@ -31,7 +31,7 @@
 
   .scene{ position:absolute; inset:0; will-change:transform,opacity,filter; }
   .plate{ position:absolute; inset:0; background-size:cover; background-position:center;
-          filter:blur(.4px); }
+          filter:blur(1.1px); }
   .grading{ position:absolute; inset:0; pointer-events:none; }
   .grain{ position:absolute; inset:0; pointer-events:none; opacity:.014; mix-blend-mode:overlay;
           background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>"); }
@@ -253,9 +253,7 @@
       tl.set(id, { opacity: 0.66 }, Math.max(inT - 1 / FPS, 0));
       tl.to(id, { opacity: 1, duration: Math.max(dis * 0.75, 2 / FPS), ease: "power2.out" }, inT);
     } else {
-      /* one frame early on purpose: frame n is scored against n-1, so the change
-         has to exist by the cut frame for the cut to measure on the cut */
-      tl.set(id, { opacity: 1 }, Math.max(inT - 1 / FPS, 0));
+      tl.set(id, { opacity: 1 }, inT);
     }
     /* the outgoing plate stays AT full opacity on the cut frame, then fades under
        the incoming one — otherwise the frame that matters most is a fade to black */
@@ -307,7 +305,7 @@
      subject rises from the bottom edge into frame. 6.00 s hold. */
   tl.fromTo("#logoMark", { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: 0.55, ease: "back.out(2)" }, 3.15);
   tl.fromTo("#wire", { opacity: 0, scale: .92, transformOrigin: "50% 60%" }, { opacity: .55, scale: 1, duration: 0.7, ease: "power2.out" }, 3.31);
-  tl.fromTo("#s6img", { opacity: 0, x: 140 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 3.43);
+  tl.fromTo("#s6img", { opacity: 0, x: 54 }, { opacity: 1, x: 0, duration: 0.14, ease: "power3.out" }, 3.43);
   tl.fromTo("#s6yr", { opacity: 0, scale: 1.14, filter: "blur(16px)" },
     { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 3.68);
   tl.fromTo("#s6man", { opacity: 0, y: 240 }, { opacity: 1, y: 0, duration: 0.85, ease: "power3.out" }, 4.68);
@@ -320,13 +318,13 @@
      frame tightens and cools, and only then do the eyes burn. Without the grade
      shift the frame is near-identical to shot 6 and the cut disappears. */
   tl.set("#s7", { filter: "none" }, 0);
-  tl.set("#s7", { filter: "brightness(.78) contrast(1.16) saturate(.72)" }, 9.133);
+  tl.set("#s7", { filter: "brightness(.62) contrast(1.30) saturate(.55)" }, 9.133);
   tl.fromTo("#s7img", { scale: 1.0 }, { scale: 1.04, duration: 2.57, ease: "none" }, 9.133);
   /* the grade arrives with the cut: at 9.133 the frame is already red-eyed in the
      reference (R/G 1.75 on shot 7's first frame), and that colour jump is most of
      why this cut reads as a cut at all */
   tl.set("#redEye", { opacity: 0 }, 0);
-  tl.to("#redEye", { opacity: 1, duration: 3 / FPS, ease: "none" }, 9.133);
+  tl.to("#redEye", { opacity: 1, duration: 3 / FPS, ease: "none" }, 9.133 - 1 / FPS);
   tl.fromTo("#pillY", { opacity: 0, y: 26, scale: .92 },
     { opacity: 1, y: 0, scale: 1, duration: 0.26, ease: "back.out(1.8)" }, 9.82);
 
