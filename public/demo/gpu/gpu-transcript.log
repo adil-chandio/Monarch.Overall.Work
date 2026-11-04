@@ -1,75 +1,75 @@
-::notice::packaging kernel compali/monarch-v3-voice-020344 for compali
-packaged compali/monarch-v3-voice-020344 (machine_shape NvidiaTeslaT4, 441,184 chars)
-::notice::pushing compali/monarch-v3-voice-020344
-Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-020344
-[02:03:46] compali/monarch-v3-voice-020344 -> compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.QUEUED"
-[02:04:07] compali/monarch-v3-voice-020344 -> compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.RUNNING"
-[02:04:27] compali/monarch-v3-voice-020344 -> compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.RUNNING"
-[02:04:48] compali/monarch-v3-voice-020344 -> compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.RUNNING"
-[02:05:08] compali/monarch-v3-voice-020344 -> compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.RUNNING"
-[02:05:29] compali/monarch-v3-voice-020344 -> compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.RUNNING"
-[02:05:49] compali/monarch-v3-voice-020344 -> compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.ERROR"
-  0%|          | 0.00/199k [00:00<?, ?B/s]100%|██████████| 199k/199k [00:00<00:00, 29.6MB/s]
+::notice::packaging kernel compali/monarch-v3-voice-020957 for compali
+packaged compali/monarch-v3-voice-020957 (machine_shape NvidiaTeslaT4, 441,311 chars)
+::notice::pushing compali/monarch-v3-voice-020957
+Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-020957
+[02:10:00] compali/monarch-v3-voice-020957 -> compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.QUEUED"
+[02:10:20] compali/monarch-v3-voice-020957 -> compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.RUNNING"
+[02:10:41] compali/monarch-v3-voice-020957 -> compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.RUNNING"
+[02:11:01] compali/monarch-v3-voice-020957 -> compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.RUNNING"
+[02:11:22] compali/monarch-v3-voice-020957 -> compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.RUNNING"
+[02:11:42] compali/monarch-v3-voice-020957 -> compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.RUNNING"
+[02:12:03] compali/monarch-v3-voice-020957 -> compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.ERROR"
+  0%|          | 0.00/27.6k [00:00<?, ?B/s]100%|██████████| 27.6k/27.6k [00:00<00:00, 79.6MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-020344/out/vo/05-shift.wav
-Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-020344/out/vo
-  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 15.1MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-020957/out/vo/03-gap.mp3
+Downloading 04-lie.mp3 to /tmp/vkwork/monarch-v3-voice-020957/out/vo
+  0%|          | 0.00/25.2k [00:00<?, ?B/s]100%|██████████| 25.2k/25.2k [00:00<00:00, 52.9MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-020344/out/vo/06-audience.mp3
-Downloading 06-audience.wav to /tmp/vkwork/monarch-v3-voice-020344/out/vo
-  0%|          | 0.00/165k [00:00<?, ?B/s]100%|██████████| 165k/165k [00:00<00:00, 13.1MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-020957/out/vo/04-lie.mp3
+Downloading 05-shift.mp3 to /tmp/vkwork/monarch-v3-voice-020957/out/vo
+  0%|          | 0.00/25.3k [00:00<?, ?B/s]100%|██████████| 25.3k/25.3k [00:00<00:00, 15.9MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-020344/out/vo/06-audience.wav
-Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-020344/out/vo
-  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 42.1MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-020957/out/vo/05-shift.mp3
+Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-020957/out/vo
+  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 20.0MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-020344/out/vo/07-end.mp3
-Downloading 07-end.wav to /tmp/vkwork/monarch-v3-voice-020344/out/vo
-  0%|          | 0.00/138k [00:00<?, ?B/s]100%|██████████| 138k/138k [00:00<00:00, 19.4MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-020957/out/vo/06-audience.mp3
+Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-020957/out/vo
+  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 13.7MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-020344/out/vo/07-end.wav
-Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-020344/out/monarch-v3-voice-020344.log 
-/tmp/vkwork/monarch-v3-voice-020344/out:
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-020957/out/vo/07-end.mp3
+Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-020957/out/monarch-v3-voice-020957.log 
+/tmp/vkwork/monarch-v3-voice-020957/out:
 total 20
-drwxr-xr-x 5 runner runner  4096 Nov  4 02:06 models
--rw-r--r-- 1 runner runner 11085 Nov  4 02:06 monarch-v3-voice-020344.log
-drwxr-xr-x 2 runner runner  4096 Nov  4 02:06 vo
+drwxr-xr-x 5 runner runner  4096 Nov  4 02:12 models
+-rw-r--r-- 1 runner runner 10683 Nov  4 02:12 monarch-v3-voice-020957.log
+drwxr-xr-x 2 runner runner  4096 Nov  4 02:12 vo
 
-/tmp/vkwork/monarch-v3-voice-020344/out/models:
+/tmp/vkwork/monarch-v3-voice-020957/out/models:
 total 12
--rw-r--r-- 1 runner runner  191 Nov  4 02:04 CACHEDIR.TAG
-drwxr-xr-x 3 runner runner 4096 Nov  4 02:05 blobs
-drwxr-xr-x 5 runner runner 4096 Nov  4 02:06 models--Systran--faster-whisper-large-v3
+-rw-r--r-- 1 runner runner  191 Nov  4 02:11 CACHEDIR.TAG
+drwxr-xr-x 3 runner runner 4096 Nov  4 02:12 blobs
+drwxr-xr-x 5 runner runner 4096 Nov  4 02:12 models--Systran--faster-whisper-large-v3
 
-/tmp/vkwork/monarch-v3-voice-020344/out/models/blobs:
+/tmp/vkwork/monarch-v3-voice-020957/out/models/blobs:
 total 4
-drwxr-xr-x 2 runner runner 4096 Nov  4 02:06 28
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:12 28
 
-/tmp/vkwork/monarch-v3-voice-020344/out/models/blobs/28:
+/tmp/vkwork/monarch-v3-voice-020957/out/models/blobs/28:
 total 3014936
--rw-r--r-- 1 runner runner 3087284237 Nov  4 02:05 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a
--rw-r--r-- 1 runner runner          0 Nov  4 02:04 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.lock
--rw-r--r-- 1 runner runner        112 Nov  4 02:04 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.refs
+-rw-r--r-- 1 runner runner 3087284237 Nov  4 02:11 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a
+-rw-r--r-- 1 runner runner          0 Nov  4 02:11 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.lock
+-rw-r--r-- 1 runner runner        112 Nov  4 02:11 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.refs
 
-/tmp/vkwork/monarch-v3-voice-020344/out/models/models--Systran--faster-whisper-large-v3:
+/tmp/vkwork/monarch-v3-voice-020957/out/models/models--Systran--faster-whisper-large-v3:
 total 12
-drwxr-xr-x 2 runner runner 4096 Nov  4 02:06 blobs
-drwxr-xr-x 2 runner runner 4096 Nov  4 02:06 refs
-drwxr-xr-x 2 runner runner 4096 Nov  4 02:06 trees
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:12 blobs
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:12 refs
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:12 trees
 
-/tmp/vkwork/monarch-v3-voice-020344/out/models/models--Systran--faster-whisper-large-v3/blobs:
+/tmp/vkwork/monarch-v3-voice-020957/out/models/models--Systran--faster-whisper-large-v3/blobs:
 total 3476
--rw-r--r-- 1 runner runner 1068114 Nov  4 02:04 0adcd01e7c237205d593b707e66dd5d7bc785d2d
--rw-r--r-- 1 runner runner 2480617 Nov  4 02:04 3a5e2ba63acdcac9a19ba56cf9bd27f185bfff61
--rw-r--r-- 1 runner runner    2394 Nov  4 02:04 75336feae814999bae6ccccdecf177639ffc6f9d
--rw-r--r-- 1 runner runner     340 Nov  4 02:04 931c77a740890c46365c7ae0c9d350ba3cca908f
+-rw-r--r-- 1 runner runner 1068114 Nov  4 02:11 0adcd01e7c237205d593b707e66dd5d7bc785d2d
+-rw-r--r-- 1 runner runner 2480617 Nov  4 02:11 3a5e2ba63acdcac9a19ba56cf9bd27f185bfff61
+-rw-r--r-- 1 runner runner    2394 Nov  4 02:11 75336feae814999bae6ccccdecf177639ffc6f9d
+-rw-r--r-- 1 runner runner     340 Nov  4 02:11 931c77a740890c46365c7ae0c9d350ba3cca908f
 
-/tmp/vkwork/monarch-v3-voice-020344/out/models/models--Systran--faster-whisper-large-v3/refs:
+/tmp/vkwork/monarch-v3-voice-020957/out/models/models--Systran--faster-whisper-large-v3/refs:
 total 4
--rw-r--r-- 1 runner runner 40 Nov  4 02:04 main
+-rw-r--r-- 1 runner runner 40 Nov  4 02:11 main
 
-/tmp/vkwork/monarch-v3-voice-020344/out/models/models--Systran--faster-whisper-large-v3/trees:
-::error::kernel compali/monarch-v3-voice-020344 produced no words.json (status: compali/monarch-v3-voice-020344 has status "KernelWorkerStatus.ERROR")
+/tmp/vkwork/monarch-v3-voice-020957/out/models/models--Systran--faster-whisper-large-v3/trees:
+::error::kernel compali/monarch-v3-voice-020957 produced no words.json (status: compali/monarch-v3-voice-020957 has status "KernelWorkerStatus.ERROR")
   {
    "index": 0,
    "name": "Tesla T4",
@@ -83,12 +83,12 @@ total 4
    "cc": "7.5"
   }
  ],
- "nvidia_smi": "GPU 0: Tesla T4 (UUID: GPU-0c11ff0c-fcc2-fd81-40b1-fd68e095c316)\nGPU 1: Tesla T4 (UUID: GPU-dc7ff105-7b49-9c57-a1d5-596f9ee2f556)"
+ "nvidia_smi": "GPU 0: Tesla T4 (UUID: GPU-069815c6-b6f8-d25b-7574-a4a7f9324708)\nGPU 1: Tesla T4 (UUID: GPU-d791e31f-88e9-8ea9-dae3-7ee573527322)"
 }
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 backend: faster-whisper large-v3 float16 cuda
-decoded: [('01-hook.mp3', 139598), ('02-rest.mp3', 194638), ('03-gap.mp3', 222798), ('04-lie.mp3', 202318), ('05-shift.mp3', 203598), ('06-audience.mp3', 169038), ('07-end.mp3', 140878)]
+decoded: [('01-hook.mp3', 69760, 4.36), ('02-rest.mp3', 97280, 6.08), ('03-gap.mp3', 111360, 6.96), ('04-lie.mp3', 101120, 6.32), ('05-shift.mp3', 101760, 6.36), ('06-audience.mp3', 84480, 5.28), ('07-end.mp3', 70400, 4.4)]
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
     import sys;import papermill as pm;pm.execute_notebook("__notebook__.ipynb","__notebook__.ipynb",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)
@@ -102,31 +102,31 @@ papermill.exceptions.PapermillExecutionError:
 ---------------------------------------------------------------------------
 Exception encountered at "In [1]":
 ---------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
-/tmp/ipykernel_23/2767537537.py in <cell line: 0>()
-    134     words, text_parts, seg_rows = [], [], []
-    135     if backend.startswith("faster-whisper"):
---> 136         segments, info = model.transcribe(
-    137             str(WAVS[name]), language="hi", task="transcribe", word_timestamps=True,
-    138             vad_filter=True, beam_size=5, condition_on_previous_text=False)
-/usr/local/lib/python3.13/dist-packages/faster_whisper/transcribe.py in transcribe(self, audio, language, task, log_progress, beam_size, best_of, patience, length_penalty, repetition_penalty, no_repeat_ngram_size, temperature, compression_ratio_threshold, log_prob_threshold, no_speech_threshold, condition_on_previous_text, prompt_reset_on_temperature, initial_prompt, prefix, suppress_blank, suppress_tokens, without_timestamps, max_initial_timestamp, word_timestamps, prepend_punctuations, append_punctuations, multilingual, vad_filter, vad_parameters, max_new_tokens, chunk_length, clip_timestamps, hallucination_silence_threshold, hotwords, language_detection_threshold, language_detection_segments)
-    874 
-    875         if not isinstance(audio, np.ndarray):
---> 876             audio = decode_audio(audio, sampling_rate=sampling_rate)
-    877 
-    878         duration = audio.shape[0] / sampling_rate
-/usr/local/lib/python3.13/dist-packages/faster_whisper/audio.py in decode_audio(input_file, sampling_rate, split_stereo)
-     44     dtype = None
-     45 
----> 46     with av.open(input_file, mode="r", metadata_errors="ignore") as container:
-     47         frames = container.decode(audio=0)
-     48         frames = _ignore_invalid_frames(frames)
-/usr/local/lib/python3.13/dist-packages/av/container/core.py in av.container.core.open()
-    477 
-    478 
---> 479 def open(
-    480     file,
-    481     mode=None,
-TypeError: open() got an unexpected keyword argument 'metadata_errors'
+RuntimeError                              Traceback (most recent call last)
+/tmp/ipykernel_22/791186371.py in <cell line: 0>()
+    138             PCM[name][0], language="hi", task="transcribe", word_timestamps=True,
+    139             vad_filter=True, beam_size=5, condition_on_previous_text=False)
+--> 140         for seg in segments:
+    141             seg_rows.append({"start": round(seg.start, 3), "end": round(seg.end, 3),
+    142                              "text": seg.text.strip()})
+/usr/local/lib/python3.13/dist-packages/faster_whisper/transcribe.py in restore_speech_timestamps(segments, speech_chunks, sampling_rate)
+   1849     ts_map = SpeechTimestampsMap(speech_chunks, sampling_rate)
+   1850 
+-> 1851     for segment in segments:
+   1852         if segment.words:
+   1853             words = []
+/usr/local/lib/python3.13/dist-packages/faster_whisper/transcribe.py in generate_segments(self, features, tokenizer, options, log_progress, encoder_output)
+   1188 
+   1189             if seek > 0 or encoder_output is None:
+-> 1190                 encoder_output = self.encode(segment)
+   1191 
+   1192             if options.multilingual:
+/usr/local/lib/python3.13/dist-packages/faster_whisper/transcribe.py in encode(self, features)
+   1398         features = get_ctranslate2_storage(features)
+   1399 
+-> 1400         return self.model.encode(features, to_cpu=to_cpu)
+   1401 
+   1402     def generate_with_fallback(
+RuntimeError: Library libcublas.so.12 is not found or cannot be loaded
   cells[i][c] = re.sub('\\\\\|', '|', cell)
   text = re.sub(r'_', '\_', text) # Escape underscores in display text
