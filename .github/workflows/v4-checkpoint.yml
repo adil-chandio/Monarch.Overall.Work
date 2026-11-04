@@ -42,15 +42,23 @@ jobs:
       # made 'import numpy' fail on a runner where numpy had just been installed.
       # The runner's own python3 is newer than the 3.11 that was being pinned.
 
-      - name: What the checks need, and nothing else
-        timeout-minutes: 3
+      - name: Install ffmpeg
+        timeout-minutes: 10
         run: |
-          # This job used to apt-get install ffmpeg, fonts and numpy. ffmpeg and the
-          # fonts are already on the runner image, and the numpy install is gone —
-          # check_part.py is plain Python now. Every line here is a line that can
-          # stall, and two of them did: apt has now timed out twice on this step.
+          # ffmpeg IS needed: ubuntu-24.04 images do not ship it, which is what the
+          # last run's error said in so many words ("ffmpeg not found"). Everything
+          # else that used to be here is not: the fonts are embedded in the page, and
+          # check_part.py is plain Python since the numpy install cost two runs.
+          #
+          # The update is the slow part of apt, so it is skipped when the cached
+          # package lists are good enough to resolve ffmpeg, and only run if they
+          # are not.
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get install -y -qq --no-install-recommends ffmpeg \
+              || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg; }
+          fi
           ffmpeg -version | head -1
-          python3 --version
+          command -v ffprobe
 
       - name: Install renderer, gate and chrome-headless-shell
         run: |
