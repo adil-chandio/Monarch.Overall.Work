@@ -153,3 +153,37 @@ Two things were left, both now measured rather than described:
 and written down in `docs/v4-KYA-KIYA.md`, including the measured price of the cheap
 version and why it was not taken: an extra 2 px of global blur would pass edge_density
 at 1.59 against 1.65 and blur all 701 frames.
+
+## Checkpoint 30 % — what it shows, and what is still wrong with it
+
+`public/demo/v4-30-silent.mp4` — 210 frames, 7.00 s, `s1`→`s6` — beside
+`public/demo/ref30.mp4`, the reference cut to the same 7.005 s and encoded with
+the same settings.
+
+Measured on the checkpoint itself:
+
+| | checkpoint | REF-01 (first 7 s) |
+|---|---|---|
+| frames / duration | 210 / 7.00 s | 210 / 7.00 s |
+| frame 0 luma | 205.3 | white plate |
+| black frames | 0 | 0 |
+| edge mean | 3.109 | 1.44 |
+| s6 camera push | +3.2 %/s | +2.4 %/s |
+
+Approved by eye: the 2008 field with its raking light, the hand bringing the note,
+the mark spinning up, "2008" resolving, the man rising from the bottom edge — and
+the three planes now moving at visibly different rates.
+
+**Not right yet, and visible:**
+
+1. `s6` is built from the *wrong plate*. The reference's shot 6 is the 2008 red
+   field with a hand offering a note; this build cuts that hand out of
+   `plate-hands-red.png`, which is a different photograph (a fistful of bills over a
+   dark diamond), so the exchange reads as floating notes rather than a hand-off.
+2. `2008` never fully resolves — the far plane's tween leaves it at 0.62 alpha.
+3. The mark and the wire sit in the bottom-left where the reference has them mid-frame.
+4. `edge mean` 3.11 against 1.44: the plates are still too crisp, and now the
+   inpainting seam behind the near plane adds its own edges.
+
+None of the four is a tuning problem; 1 and 3 need the shot re-laid-out against the
+reference frame, 2 is one number, 4 is the per-shot softness noted earlier.
