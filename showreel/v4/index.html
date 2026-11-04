@@ -101,13 +101,14 @@
 
   <!-- ===================== S3 · 0.83–1.00  green macro ===================== -->
   <section class="scene" id="s3" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(1.02) saturate(1.18);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.90) saturate(1.12);"></div>
   </section>
 
   <!-- ===================== S4 · 1.00–1.30  bag on green ===================== -->
   <section class="scene" id="s4" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.16);"></div>
-    <div class="t bill" id="s4b" style="left:52px; top:132px; font-size:84px; opacity:0;">BILLION</div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
+    <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
+    <div class="t bill" id="s4b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
   </section>
 
   <!-- ===================== S5 · 1.30–3.13  the match-move ===================== -->
@@ -154,11 +155,12 @@
     <div class="t" id="s9b" style="left:246px; top:540px; font-size:200px; color:#5ea015;">BILLION</div>
   </section>
   <section class="scene" id="s10" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(1.02) saturate(1.18);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.90) saturate(1.12);"></div>
   </section>
   <section class="scene" id="s11" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.16);"></div>
-    <div class="t bill" id="s11b" style="left:52px; top:132px; font-size:84px; opacity:0;">BILLION</div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
+    <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
+    <div class="t bill" id="s11b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
   </section>
   <section class="scene" id="s12" style="opacity:0;">
     <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 58%; filter:brightness(1.10);"></div>
@@ -269,15 +271,15 @@
   tl.to("#s2b", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.10, ease: "power3.out" }, 0.567);
 
   /* ================= S3 / S4 · macro into the bag (measured dissolves) ====== */
-  tl.set("#s4b", { rotation: -7, opacity: 0, scale: 1.06 }, 0);
-  tl.to("#s4b", { opacity: 1, scale: 1, duration: 0.22, ease: "power3.out" }, 1.04);
+  tl.set("#s4b", { rotation: -7, scale: 1.05 }, 0);
+  tl.to("#s4b", { scale: 1, duration: 0.16, ease: "power2.out" }, 1.000);
 
   /* ================= S5 · the match-move ==================================
      One continuous move, no cut: the shot is born zoomed into the green plate and
      pulls back to reveal the stool in the cloudscape, then type arrives on top.
      Measured in the reference: 1.83 s hold, drift 8.3 %W, brightness ramp +39.9. */
-  tl.fromTo("#s5 .plate", { scale: 2.05, transformOrigin: "50% 58%" },
-    { scale: 1, duration: 1.05, ease: "power3.out" }, 1.30);
+  tl.fromTo("#s5 .plate", { scale: 1.26, transformOrigin: "50% 58%" },
+    { scale: 1, duration: 0.85, ease: "power3.out" }, 1.30);
   tl.fromTo("#s5", { filter: "brightness(1.18)" }, { filter: "brightness(1)", duration: 0.9, ease: "power2.out" }, 1.30);
   slam("#s5he",   2.02, -70, 0.16);
   slam("#s5said", 2.16, -90, 0.16);
@@ -321,8 +323,8 @@
   tl.set("#s9b", { x: 300, opacity: 0, filter: "blur(14px)" }, 0);
   tl.to("#s9b", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.09, ease: "power3.out" }, 12.200);
 
-  tl.set("#s11b", { rotation: -7, opacity: 0 }, 0);
-  tl.to("#s11b", { opacity: 1, duration: 0.16, ease: "power3.out" }, 13.077);
+  tl.set("#s11b", { rotation: -7, scale: 1.05 }, 0);
+  tl.to("#s11b", { scale: 1, duration: 0.14, ease: "power2.out" }, 12.967);
 
   slam("#s13he",   13.76, -70, 0.14);
   slam("#s13said", 13.88, -90, 0.14);
