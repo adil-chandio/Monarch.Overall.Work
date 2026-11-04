@@ -35,3 +35,10 @@ public/demo/v3-mix.wav
 
 # prompt-corpus per-prompt tags (regenerate with tools/prompt_corpus.py)
 .cache/prompt-corpus.json
+
+# forensic artifacts for reference videos (regenerate with tools/analyse_ref.py)
+analysis/
+refs/*.mp4
+refs/*.mov
+refs/*.webm
+refs/*.mkv
