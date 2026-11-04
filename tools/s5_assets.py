@@ -30,7 +30,7 @@ from ffbin import ffmpeg
 
 REF = "analysis/attachment-filename-How-to-Edit-VIRAL-RE/reference.mp4"
 OUT = Path("showreel/v4/assets/ref")
-ENTRY_T, PLATE_T, CLEAN_T, FULL_T = 1.45, 1.85, 2.05, 2.95
+ENTRY_T, PLATE_T, CLEAN_T, FULL_T = 1.45, 2.05, 2.05, 2.95
 FF = ffmpeg()
 
 
@@ -75,6 +75,7 @@ def cut_out(name: str, sel: np.ndarray, full: np.ndarray) -> list[int]:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     plate, full, clean = grab(PLATE_T), grab(FULL_T), grab(CLEAN_T)
+    clean = grab(2.05)
 
     # The shot enters with BILLION over the field and the bag further from the lens;
     # both are gone by 1.85. Neither state can be faked from the other, so the scene
@@ -83,6 +84,37 @@ def main() -> None:
     entry = grab(ENTRY_T)
     cv2.imwrite(str(OUT / "s5plate-entry.png"), cv2.cvtColor(entry, cv2.COLOR_RGB2BGR))
     print(f"  s5plate-entry.png the reference at {ENTRY_T}s — BILLION still over the field")
+
+    # The shot racks focus: measured on the bag, Laplacian variance is 46 at 1.85 s,
+    # 308 at 1.95 and 312 at 2.05 — it comes INTO focus exactly as the bag settles.
+    # The plate is therefore 2.05 s, which is both the sharpest moment and still free
+    # of type (HE does not appear until 2.10), and this scene dissolves into it from
+    # the soft 1.85 s frame, which is the rack focus, reproduced rather than smoothed
+    # away by a filter.
+    soft = grab(1.85)
+    cv2.imwrite(str(OUT / "s5plate-soft.png"), cv2.cvtColor(soft, cv2.COLOR_RGB2BGR))
+    print("  s5plate-soft.png  the reference at 1.85s — before the rack focus lands")
+
+    # BILLION as a layer. It is the one element of this shot that is gone before the
+    # plate's timestamp and still on screen at the cut, so it has to be its own thing.
+    # Cut from 1.45 s by darkness over the field: the letters are the only dark,
+    # neutral thing in that band, and the field under them is flat green.
+    g128 = cv2.cvtColor(entry, cv2.COLOR_RGB2GRAY)
+    band = np.zeros(g128.shape, np.uint8); band[90:400, 70:700] = 1
+    dark = ((g128 < 135) & (band > 0)).astype(np.uint8)
+    n2, lbl2, st2, _ = cv2.connectedComponentsWithStats(dark, 8)
+    keep2 = np.zeros_like(dark)
+    for i in range(1, n2):
+        if st2[i, cv2.CC_STAT_AREA] > 250:
+            keep2[lbl2 == i] = 1
+    al2 = cv2.GaussianBlur((keep2 * 255).astype(np.uint8), (0, 0), 0.7)
+    ys2, xs2 = np.where(al2 > 8)
+    bx0, bx1, by0, by1 = xs2.min(), xs2.max() + 1, ys2.min(), ys2.max() + 1
+    rgba2 = np.dstack([entry, al2])[by0:by1, bx0:bx1].astype(np.uint8)
+    cv2.imwrite(str(OUT / "s5-billion.png"), cv2.cvtColor(rgba2, cv2.COLOR_RGBA2BGRA))
+    json.dump({"box": [int(bx0), int(by0), int(bx1 - bx0), int(by1 - by0)]},
+              open(OUT / "s5-billion.json", "w"))
+    print(f"  s5-billion.png    {[int(bx0), int(by0), int(bx1 - bx0), int(by1 - by0)]}")
 
     for name, f in (("plate 2.05", plate), ("full 2.95", full)):
         r, g, b = f[:, :, 0], f[:, :, 1], f[:, :, 2]

@@ -184,8 +184,15 @@
          drains them at different rates — measured, the bag goes neutral by 2.25 s
          while the field is still 4 % green at 2.05. -->
     <div class="plate" id="s5plate0" style="background-image:url('./assets/ref/s5plate-entry.png');"></div>
+    <div class="plate" id="s5plate1" style="background-image:url('./assets/ref/s5plate-soft.png'); opacity:0;"></div>
     <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5plate-base.png'); opacity:0;"></div>
     <div class="plate" id="s5plate2" style="background-image:url('./assets/ref/s5-plate.png'); opacity:0;"></div>
+    <!-- BILLION is gone before the plate's own timestamp but is still on screen at
+         the cut, so it cannot live in any plate: it is its own layer, cut from the
+         reference at 1.45 s. -->
+    <div class="layer" id="s5billion" style="left:133px; top:260px; width:467px; height:141px;
+         background:url('./assets/ref/s5-billion.png') center/100% 100% no-repeat; opacity:0;
+         will-change:transform,opacity;"></div>
     <!-- "NO" is a separate layer because it is not in the plate yet at the frame the
          plate was taken from: the reference brings HE SAID first and NO slams in
          after it. It was cut by unmixing two of the reference's own frames — the
@@ -466,10 +473,20 @@
      and the two surfaces go at different rates — the bag is neutral by 2.25 while
      the field still holds 4 % at 2.05. So the sweep is a crossfade between the
      plate and the same frame drained, not a filter on both at once. */
-  /* the entry: BILLION over the field, and the word is gone by 1.85 */
-  tl.to("#s5plate", { opacity: 1.0, duration: 0.40, ease: "power2.inOut" }, 1.33);
+  /* The shot racks focus: the bag reads 46 on Laplacian variance at 1.85 s, 312 at
+     2.05. Three of the reference's own frames carry that — the entry at 1.45, the
+     soft one at 1.85, the sharp one at 2.05 — and the fourth is the sharp one with
+     its colour drained, which is where the sweep ends. Holding them in order is the
+     rack focus and the push, with no filter standing in for either. */
+  tl.to("#s5plate1", { opacity: 1.0, duration: 0.34, ease: "power1.inOut" }, 1.33);
+  tl.to("#s5plate", { opacity: 1.0, duration: 0.20, ease: "power2.out" }, 1.85);
   tl.to("#s5plate2", { opacity: 0.55, duration: 0.45, ease: "power2.out" }, 1.36);
   tl.to("#s5plate2", { opacity: 1.0, duration: 0.42, ease: "power1.in" }, 1.83);
+  /* and BILLION leaves the way it does in the reference: out, upward and to the
+     left, gone by about 1.75 — measured, the word is over the field at 1.45 and
+     there is no dark type anywhere above the bag by 1.85. */
+  tl.to("#s5billion", { opacity: 1, duration: 0.02 }, 1.333);
+  tl.to("#s5billion", { x: -90, y: -70, opacity: 0, duration: 0.42, ease: "power2.in" }, 1.35);
 
   /* Measured arrival, not a guess: HE SAID is faint from 2.10 and solid by 2.45,
      a fade with almost no scale. NO is not there at 2.50 and is 461 px wide at
