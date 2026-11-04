@@ -48,7 +48,8 @@
   /* ---------------------------------------------------------------- pill */
   .pill{ position:absolute; display:flex; flex-direction:column; align-items:center; justify-content:center;
          font-family:"PSB"; text-align:center; will-change:transform,opacity,filter; }
-  #pillY{ width:371px; height:144px; border-radius:72px; background:var(--yellow); color:var(--glass); }
+  #pillY, #s14pillY{ width:371px; height:144px; border-radius:72px; background:var(--yellow); color:var(--glass);
+                       box-shadow:0 10px 30px rgba(0,0,0,.28); }
   #pillG{ width:371px; height:181px; border-radius:33px; color:#fff;
           background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,.16));
           backdrop-filter:blur(14px) saturate(1.2);
@@ -232,7 +233,7 @@
     ["s2",   0.533,  0.00,   0.833],
     ["s3",   0.833,  0.17,   1.000],
     ["s4",   1.000,  0.43,   1.300],
-    ["s5",   1.300,  0.27,   3.133],
+    ["s5",   1.300,  0.00,   3.133],
     ["s6",   3.133,  0.00,   9.133],
     ["s7",   9.133,  0.00,  11.700],
     ["s8",  11.700,  0.00,  12.167],
