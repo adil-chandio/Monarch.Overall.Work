@@ -133,3 +133,23 @@ The flash was also re-measured off the reference frame by frame: it is **three**
 frames — 145, 139, 139 luma — building through 61 and decaying through 48. The
 build had it as two frames flat at 217, which is shorter and harder than the
 reference.
+
+## Pass 6 — the pill, and the gate that was asserting my own number
+
+Two things were left, both now measured rather than described:
+
+- The CTA's yellow pill arrived at 18.72 and popped in. REF-01's own frames put the
+  start at **19.03** and it is still growing at 19.9 (yellow share 0.8 → 3.1 → 4.5 →
+  6.0 → 7.5 %). It also cleared on the flash frame, stacking a second full change on
+  the flash — the reference's detector finds no cut at 20.633, and that stacking was
+  the "1 extra cut" in the diff. Now springs in over 0.92 s from 19.03 and clears at
+  20.750 into the glass card.
+- `tools/verify_v4.mjs` required `flash >= 0.9` because an earlier build ran it at
+  0.9. The reference measures 145 luma over a ~40 base, i.e. ~0.5. The gate was
+  asserting my first attempt, not the reference. It now asserts a band around the
+  measurement.
+
+`edge_density` and `palette_distance` are still failing and the fix for each is known
+and written down in `docs/v4-KYA-KIYA.md`, including the measured price of the cheap
+version and why it was not taken: an extra 2 px of global blur would pass edge_density
+at 1.59 against 1.65 and blur all 701 frames.
