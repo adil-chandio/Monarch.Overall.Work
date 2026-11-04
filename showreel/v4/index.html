@@ -32,11 +32,13 @@
   .scene{ position:absolute; inset:0; will-change:transform,opacity,filter;
           opacity:0; }   /* a scene paints only when the timeline turns it on */
   .layer{ position:absolute; }
-  .plate{ position:absolute; inset:0; background-size:cover; background-position:center;
-          /* REF-01's plates are soft. Measured on delivered frames: at 3px this
-             build reads edge 3.00 on the CTA where the reference reads 1.68, and
-             3.66 on the hook where it reads 2.23. 4px halves both gaps. */
-          filter:blur(4px); }
+  .plate{ position:absolute; inset:0; background-size:cover; background-position:center; }
+  /* The 4 px blur that used to live on .plate above was there for plates that were
+     built by hand and came out too sharp. The plates are now the reference's own
+     frames at 1:1 — blurring those can only make them worse, and it did: measured
+     on the delivered checkpoint, the s5 plates read 31 on Laplacian variance where
+     the reference frames they were copied from read 104. Nothing here needs
+     softening; what needs softening is said so at the element. */
   .grading{ position:absolute; inset:0; pointer-events:none; }
   .grain{ position:absolute; inset:0; pointer-events:none; opacity:.008; mix-blend-mode:overlay;
           background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>"); }
