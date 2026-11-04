@@ -430,25 +430,29 @@
   tl.fromTo("#s4", { scale: 1.0 }, { scale: 1.035, duration: 0.99, ease: "none" }, 0.833);
 
   /* ================= S5 · HE SAID NO ======================================
-     Plate is the reference's own 2.45 s frame, held and pushed. The reference
-     drifts 8.3 %W across this shot and ramps brightness +39.9; the type is
-     already in the plate, so it is not re-animated — animating type that is
-     already printed in the picture is what makes a rebuild look fake. */
-  tl.fromTo("#s5", { scale: 1.0 }, { scale: 1.052, duration: 1.83, ease: "none" }, 1.30);
-  tl.fromTo("#s5", { filter: "brightness(1.14)" },
-    { filter: "brightness(1.0)", duration: 0.9, ease: "power2.out" }, 1.30);
-  /* NO is not in the plate; it slams in on its own, big and fast, the way the
-     reference does it — measured absent at 2.05 s, fully arrived by 2.95 s. */
-  /* two beats, measured: HE SAID lands around 2.5 s, NO slams at 2.3 and is fully
-     in by 2.95. NO is the bigger, harder hit, so it moves further and faster. */
-  /* the colour sweep is not a cut, it is one continuous loss of saturation inside
-     this shot: measured 2.10 s (saturated) to 2.95 s (neutral). Running it here
-     means the plate can be a frame with no type in it and still end up the right
-     colour — which no single reference frame is. */
-  tl.fromTo("#s5plate", { filter: "saturate(1) brightness(1.06)" },
-    { filter: "saturate(0.06) brightness(1.0)", duration: 0.85, ease: "power2.inOut" }, 2.10);
+     The plate is the reference's own frame at 2.10 s, used 1:1 — measured against
+     the reference at the same timestamp, the bag lands within 3 px and 0.4 %, so
+     nothing here is composed by hand. What moves is only what the reference moves.
+
+     The camera push was the one thing that was wrong: 5.2 % here, while the
+     reference gains 1.0 % across this window (bag template, 1.000 -> 1.010). A
+     push that is five times too strong makes the bag read larger and lower than
+     the reference at every frame, which is what it was doing. */
+  tl.fromTo("#s5", { scale: 1.0 }, { scale: 1.010, duration: 1.83, ease: "none" }, 1.30);
+
+  /* The colour sweep, measured on the bag's own saturation: 60 at 1.60 s, peak 125
+     at 1.85, then down to 15 by 2.25 and neutral from there. So the green does not
+     fade away — it comes UP first and then sweeps out, which is why starting a
+     desaturate at 2.10 s left this shot green while the reference had gone grey. */
+  tl.fromTo("#s5plate", { filter: "saturate(1.0)" },
+    { filter: "saturate(1.55)", duration: 0.15, ease: "power2.out" }, 1.80);
+  tl.to("#s5plate", { filter: "saturate(0.12)", duration: 0.40, ease: "power1.inOut" }, 1.95);
+
+  /* HE SAID and NO are two beats, not one: HE SAID is a faint pre-echo in the
+     reference from about 2.2 s and solid by 2.45, NO slams 2.35 -> 2.95 and is the
+     harder hit, so it travels further. */
   tl.fromTo("#s5he", { opacity: 0, scale: 1.25, y: 14 },
-    { opacity: 1, scale: 1.0, y: 0, duration: 0.18, ease: "power3.out" }, 2.42);
+    { opacity: 1, scale: 1.0, y: 0, duration: 0.30, ease: "power3.out" }, 2.15);
   tl.fromTo("#s5no", { opacity: 0, scale: 1.55, y: -26 },
     { opacity: 1, scale: 1.0, y: 0, duration: 0.20, ease: "power4.out" }, 2.55);
 
