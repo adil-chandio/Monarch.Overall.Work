@@ -419,7 +419,11 @@
   tl.fromTo("#s14img", { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" }, 15.45);
   tl.fromTo("#s14img", { scale: 1.07 }, { scale: 1.0, duration: 6.6, ease: "none" }, 16.07);
   tl.to("#s14plate", { opacity: 0, duration: 0.45, ease: "none" }, 15.45);
-  tl.fromTo("#s14pillY", { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.8)" }, 18.72);
+  /* Measured off REF-01: the yellow pill starts arriving at 19.03 and is still
+     growing at 19.9 (its yellow-pixel share climbs 0.8% -> 3.1% -> 4.5% -> 6.0% ->
+     7.5% across that span). The build popped it in fully at 18.72, which is both
+     early and instant. */
+  tl.fromTo("#s14pillY", { opacity: 0, scale: .82 }, { opacity: 1, scale: 1, duration: 0.92, ease: "power2.out" }, 19.03);
 
   /* The flash, re-measured off REF-01 frame by frame (mean luma of the decoded
      picture):   49 49 49 46 46 46 61 61 145 139 139 48 47 49 48 45 45 42 40 40
@@ -435,7 +439,12 @@
   tl.set("#flash", { opacity: 0.50 }, 20.633 + 1 / FPS);
   tl.set("#flash", { opacity: 0.0 }, 20.633 + 3 / FPS);
   tl.to("#s14red", { opacity: 1, duration: 3 / FPS, ease: "none" }, 20.700);
-  tl.to("#s14pillY", { opacity: 0, scale: .96, duration: 0.16, ease: "power2.in" }, 20.633);
+  /* REF-01's cut detector finds no cut at 20.633, and neither should this build:
+     the flash alone is within what the detector absorbs. The pill was clearing on
+     exactly that frame, stacking a second full change onto the flash, which is what
+     produced "1 extra cut" in the diff. It now clears after the flash, into the
+     glass card. */
+  tl.to("#s14pillY", { opacity: 0, scale: .96, duration: 0.22, ease: "power2.in" }, 20.750);
   tl.fromTo("#glassCard", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.30, ease: "power2.out" }, 20.800);
   tl.to("#s14", { scale: 1.004, duration: 2.5, ease: "none" }, 20.85);
 
