@@ -14,7 +14,11 @@ on:
       - "arena/**"
     paths:
       - "showreel/v4/**"
-      - "tools/ref_diff.py"
+      # every tool the render depends on, not just the diff: a fix to
+      # verify_v4.mjs, check_render.py or render_v4.mjs changes what this job
+      # produces, and a filter that ignores it silently skips the run. That is how
+      # a fix could be committed and never actually built.
+      - "tools/**"
       - ".github/workflows/v4-render.yml"
   workflow_dispatch:
 
