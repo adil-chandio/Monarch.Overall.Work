@@ -10,6 +10,16 @@ on:
   push:
     branches: ["arena/**"]
     paths: ["showreel/v4/**", "tools/**", ".github/workflows/v4-checkpoint.yml"]
+
+# The checkpoint and the full render trigger on the same paths, so before this
+# they started together and raced for the apt lock: one job sat in
+# "Install ffmpeg" for twenty-five minutes with nothing to report, and the other
+# failed on the lock. They edit different outputs, but they cannot share a
+# package manager, so they are serialised instead of cancelled — the checkpoint
+# is the one that has to finish first.
+concurrency:
+  group: v4-apt-${{ github.ref_name }}
+  cancel-in-progress: false
   workflow_dispatch:
 
 permissions:
