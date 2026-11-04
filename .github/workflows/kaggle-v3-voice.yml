@@ -5,7 +5,7 @@ on:
     branches:
       - arena/8bfd4d0e-monarch-overall-work
     paths:
-      - "tools/kaggle/trigger.txt"
+      - "tools/kaggle/**"
   workflow_dispatch:
 
 permissions:
