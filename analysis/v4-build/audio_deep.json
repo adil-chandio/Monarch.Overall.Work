@@ -61,34 +61,28 @@
   ],
   "transients_on_cuts": [
     {
-      "cut": 0.5,
+      "cut": 0.533,
       "transient": 0.48,
-      "delta_ms": -20,
+      "delta_ms": -53,
       "db": -6.8
     },
     {
-      "cut": 3.1,
+      "cut": 3.133,
       "transient": 3.08,
-      "delta_ms": -20,
+      "delta_ms": -53,
       "db": -4.9
     },
     {
-      "cut": 12.167,
+      "cut": 12.233,
       "transient": 12.16,
-      "delta_ms": -7,
+      "delta_ms": -73,
       "db": -8.2
     },
     {
-      "cut": 12.467,
-      "transient": 12.43,
-      "delta_ms": -37,
+      "cut": 13.367,
+      "transient": 13.36,
+      "delta_ms": -7,
       "db": -8.6
-    },
-    {
-      "cut": 12.967,
-      "transient": 12.92,
-      "delta_ms": -47,
-      "db": -8.1
     }
   ],
   "envelope_p10_db": -15.9,
