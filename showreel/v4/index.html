@@ -198,7 +198,7 @@
   <section class="scene" id="s14" style="opacity:0;">
     <div class="plate" id="s14plate" style="background:
         radial-gradient(120% 90% at 52% 26%, #cf2f26 0%, #a81d16 44%, #6d100b 100%);"></div>
-    <div class="plate" id="s14img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; filter:brightness(1.66) saturate(1.02) contrast(1.04);"></div>
+    <div class="plate" id="s14img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; filter:brightness(1.70) saturate(1.06);"></div>
     <div class="grading" id="s14warm" style="opacity:0; mix-blend-mode:soft-light;
        background:linear-gradient(180deg, rgba(205,45,34,.42), rgba(110,12,9,.12) 60%, rgba(0,0,0,0) 100%);"></div>
     <div class="grading" id="s14red" style="opacity:0; mix-blend-mode:screen;
@@ -372,14 +372,17 @@
   /* the cut at 9.133 is not a new subject, it is a new grade: the plate goes, the
      frame tightens and cools, and only then do the eyes burn. Without the grade
      shift the frame is near-identical to shot 6 and the cut disappears. */
-  /* Shot 7 is REF-01's 2.57 s main shot and it measured [52,29,29] — a lifted
-     maroon. The build sat at [22,12,6], more than half as dark, because the grade
-     was crushing rather than grading it. These values come from solving the CSS
-     filter chain (tools/grade_sim.py) against the reference's measured colour:
-     brightness 1.7 / saturate 1.0 / contrast 1.05 lands at [52,31,27]. */
+  /* Shot 7 measures [22,12,6] in this build; REF-01's own shot 7 is [52,29,29].
+     Grading it up to the reference's colour was tried and REVERTED: at
+     brightness 1.70 the plate becomes as bright as shot 6, the 9.133 s cut stops
+     reading as a cut (13 cuts -> 12, recall 11/13, worst offset 2600 ms) and the
+     film loses a node of its edit to gain a luma point it was already passing.
+     Measured, not argued — tools/grade_sim.py solves the colour, the diff run
+     showed the price. The real fix is a different plate for this shot, not a
+     brighter grade on this one. */
   tl.set("#s7img", { filter: "none" }, 0);
-  tl.set("#s7img", { filter: "brightness(1.70) contrast(1.05) saturate(1.00)" }, 9.133);
-  tl.set("#s7img", { filter: "brightness(1.55) contrast(1.06) saturate(.95)" }, 20.700);
+  tl.set("#s7img", { filter: "brightness(.70) contrast(1.28) saturate(.55)" }, 9.133);
+  tl.set("#s7img", { filter: "brightness(.62) contrast(1.30) saturate(.50)" }, 20.700);
   tl.fromTo("#s7img", { scale: 1.0 }, { scale: 1.04, duration: 2.57, ease: "none" }, 9.133);
   /* the grade arrives with the cut: at 9.133 the frame is already red-eyed in the
      reference (R/G 1.75 on shot 7's first frame), and that colour jump is most of
