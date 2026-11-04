@@ -42,22 +42,16 @@ jobs:
       # made 'import numpy' fail on a runner where numpy had just been installed.
       # The runner's own python3 is newer than the 3.11 that was being pinned.
 
-      - name: Install ffmpeg, fonts and the Python the checks need
-        timeout-minutes: 6
+      - name: What the checks need, and nothing else
+        timeout-minutes: 3
         run: |
-          sudo apt-get update -qq
-          # numpy comes from apt, not pip: check_part.py needs it, and 'pip install
-          # numpy' sat for eight minutes on the package index during a run that
-          # otherwise takes three — a stall with no output that looked exactly like
-          # a hung job. The Ubuntu packages are prebuilt and install in seconds.
-          sudo apt-get install -y -qq ffmpeg fonts-dejavu python3-numpy >/dev/null
+          # This job used to apt-get install ffmpeg, fonts and numpy. ffmpeg and the
+          # fonts are already on the runner image, and the numpy install is gone —
+          # check_part.py is plain Python now. Every line here is a line that can
+          # stall, and two of them did: apt has now timed out twice on this step.
           ffmpeg -version | head -1
-          python3 -c "import numpy; print('numpy', numpy.__version__)"
+          python3 --version
 
-      # ONE install for every node dependency this job needs. A second
-      # `npm install --no-save` for just the gate's packages prunes whatever is not
-      # in package.json — it removed puppeteer, and the render step then failed on a
-      # missing module after the gates had already passed.
       - name: Install renderer, gate and chrome-headless-shell
         run: |
           npm install --no-save --silent jsdom@30 gsap@3 puppeteer-core@23

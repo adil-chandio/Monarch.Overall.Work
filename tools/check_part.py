@@ -13,23 +13,27 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-try:
-    import numpy as np
-except ImportError:  # say why, instead of dying with a bare ImportError
-    raise SystemExit("check_part.py needs numpy — pip install numpy")
 from ffbin import ffmpeg
 
 W, H = 480, 854
 FF = ffmpeg()
 
 
-def track(path: str) -> tuple[np.ndarray, np.ndarray]:
+def track(path: str) -> tuple[int, list[float]]:
+    """Frame count and per-frame mean luma.
+
+    Plain Python on purpose. This runs in a CI job whose only other job is to render
+    and publish, and a dependency there has twice cost more than the check is worth:
+    numpy from pip stalled for eight minutes with no output, and numpy from apt timed
+    the step out at six. Summing a bytes slice is done in C and is fast enough.
+    """
     raw = subprocess.run([FF, "-v", "error", "-i", path, "-vf", f"scale={W}:{H}",
                           "-pix_fmt", "gray", "-f", "rawvideo", "-"],
                          capture_output=True).stdout
-    n = len(raw) // (W * H)
-    f = np.frombuffer(raw[: n * W * H], dtype=np.uint8).reshape(n, H, W).astype(np.float32)
-    return f, f.mean(axis=(1, 2))
+    size = W * H
+    n = len(raw) // size
+    lum = [sum(raw[i * size:(i + 1) * size]) / size for i in range(n)]
+    return n, lum
 
 
 def main() -> int:
@@ -46,16 +50,16 @@ def main() -> int:
         if not Path(path).is_file():
             problems.append(f"{path} is missing")
             continue
-        f, lum = track(path)
-        black = int((lum < 6).sum())
-        lens[label] = len(f)
-        print(f"{Path(path).name:34s} {len(f):6d} {lum[0]:7.1f} {black:5d} {lum.mean():6.1f}")
+        n, lum = track(path)
+        black = [i for i, v in enumerate(lum) if v < 6]
+        lens[label] = n
+        print(f"{Path(path).name:34s} {n:6d} {lum[0]:7.1f} {len(black):5d} {sum(lum) / len(lum):6.1f}")
         if black:
-            problems.append(f"{label}: {black} black frame(s), first at {int(np.argmax(lum < 6)) / 30:.2f}s")
+            problems.append(f"{label}: {len(black)} black frame(s), first at {black[0] / 30:.2f}s")
         if lum[0] < 12:
             problems.append(f"{label}: frame 0 is {lum[0]:.1f} luma — the picture is not painted")
-        if label == "checkpoint" and len(f) != args.frames:
-            problems.append(f"checkpoint has {len(f)} frames, expected {args.frames}")
+        if label == "checkpoint" and n != args.frames:
+            problems.append(f"checkpoint has {n} frames, expected {args.frames}")
 
     if len(lens) == 2 and lens["checkpoint"] != lens["reference"]:
         problems.append(
