@@ -96,13 +96,13 @@
     <div class="plate" style="background:radial-gradient(70% 50% at 50% 55%, #232323, #0d0d0d 70%);"></div>
     <!-- measured from REF-01 shot 2: "TWENTY" small (≈24 % W) left, "BILLION" big (64 % W)
          right of it, sharing a baseline. 72 px and 200 px land on those widths. -->
-    <div class="t" id="s2a" style="left:58px; top:646px; font-size:72px; color:#5ea015;">TWENTY</div>
-    <div class="t" id="s2b" style="left:246px; top:540px; font-size:200px; color:#5ea015;">BILLION</div>
+    <div class="t" id="s2a" style="left:40px; top:668px; font-size:69px; color:#5ea015;">TWENTY</div>
+    <div class="t" id="s2b" style="left:224px; top:545px; font-size:157px; color:#5ea015;">BILLION</div>
   </section>
 
   <!-- ===================== S3 · 0.83–1.00  green macro ===================== -->
   <section class="scene" id="s3" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.90) saturate(1.12);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.58) saturate(1.10) contrast(1.06);"></div>
   </section>
 
   <!-- ===================== S4 · 1.00–1.30  bag on green ===================== -->
@@ -152,11 +152,11 @@
   </section>
   <section class="scene" id="s9" style="opacity:0;">
     <div class="plate" style="background:radial-gradient(70% 50% at 50% 55%, #232323, #0d0d0d 70%);"></div>
-    <div class="t" id="s9a" style="left:58px; top:646px; font-size:72px; color:#5ea015;">TWENTY</div>
-    <div class="t" id="s9b" style="left:246px; top:540px; font-size:200px; color:#5ea015;">BILLION</div>
+    <div class="t" id="s9a" style="left:40px; top:668px; font-size:69px; color:#5ea015;">TWENTY</div>
+    <div class="t" id="s9b" style="left:224px; top:545px; font-size:157px; color:#5ea015;">BILLION</div>
   </section>
   <section class="scene" id="s10" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.90) saturate(1.12);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.58) saturate(1.10) contrast(1.06);"></div>
   </section>
   <section class="scene" id="s11" style="opacity:0;">
     <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
@@ -166,7 +166,7 @@
   <section class="scene" id="s15" style="opacity:0;">
     <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
     <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
-    <div class="t bill" id="s15b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
+    <div class="t bill" id="s15b" style="left:52px; top:150px; font-size:84px;">BILLION</div>
   </section>
 
   <section class="scene" id="s12" style="opacity:0;">
@@ -288,7 +288,7 @@
   /* ================= S2 · TWENTY slides in, BILLION snaps onto it ===== */
   tl.set("#s2a", { x: -260, opacity: 0, filter: "blur(14px)" }, 0);
   tl.to("#s2a", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.10, ease: "power3.out" }, 0.533);
-  tl.set("#s2b", { x: 300, opacity: 0, filter: "blur(14px)" }, 0);
+  tl.set("#s2b", { x: 200, opacity: 0, filter: "blur(14px)" }, 0);
   tl.to("#s2b", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.10, ease: "power3.out" }, 0.567);
 
   /* ================= S3 / S4 · macro into the bag (measured dissolves) ====== */
@@ -342,7 +342,7 @@
 
   tl.set("#s9a", { x: -260, opacity: 0, filter: "blur(14px)" }, 0);
   tl.to("#s9a", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.09, ease: "power3.out" }, 12.167);
-  tl.set("#s9b", { x: 300, opacity: 0, filter: "blur(14px)" }, 0);
+  tl.set("#s9b", { x: 200, opacity: 0, filter: "blur(14px)" }, 0);
   tl.to("#s9b", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.09, ease: "power3.out" }, 12.167);
 
   tl.set("#s15b", { rotation: -7, scale: 1.05 }, 0);
@@ -359,9 +359,9 @@
      2-frame flash at 20.633 re-grades him, and the glass card holds to the end.
      8.55 s — 36 % of the film is CTA. That is the format, not an accident. */
   tl.set("#s14plate", { opacity: 1 }, 0);
-  tl.fromTo("#s14img", { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" }, 14.96);
-  tl.fromTo("#s14img", { scale: 1.07 }, { scale: 1.0, duration: 7.2, ease: "none" }, 15.58);
-  tl.to("#s14plate", { opacity: 0, duration: 0.4, ease: "none" }, 14.96);
+  tl.fromTo("#s14img", { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" }, 15.45);
+  tl.fromTo("#s14img", { scale: 1.07 }, { scale: 1.0, duration: 6.6, ease: "none" }, 16.07);
+  tl.to("#s14plate", { opacity: 0, duration: 0.45, ease: "none" }, 15.45);
   tl.fromTo("#s14pillY", { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.8)" }, 18.72);
 
   /* the flash: 2 frames, exactly as measured at 20.633 s */
