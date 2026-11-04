@@ -42,3 +42,6 @@ refs/*.mp4
 refs/*.mov
 refs/*.webm
 refs/*.mkv
+
+# downloaded browser binaries (puppeteer) — never in git
+.browsers/

@@ -26,6 +26,24 @@ function arg(name, fallback = null) {
 }
 
 const OUT = arg("out", "public/demo/v4-silent.mp4");
+
+/* ffmpeg, ffprobe and their paths: one place, the same rules as tools/ffbin.py.
+   FFMPEG env wins, then PATH, then the python imageio bundle, then imageio's own
+   resolver. Returns a path string; throws with the reason if none work. */
+function resolveBinary(name) {
+  const envKey = name === "ffmpeg" ? process.env.FFMPEG : process.env.FFPROBE;
+  if (envKey) return envKey;
+  const onPath = spawnSync("sh", ["-c", `command -v ${name}`], { encoding: "utf8" });
+  if (onPath.status === 0 && onPath.stdout.trim()) return onPath.stdout.trim();
+  const py = spawnSync(
+    "python3",
+    ["-c", `import sys; sys.path.insert(0,'tools'); from ffbin import ${name}; print(${name}())`],
+    { encoding: "utf8" }
+  );
+  if (py.status === 0 && py.stdout.trim()) return py.stdout.trim().split("\n").pop();
+  throw new Error(`${name} not found (FFMPEG env, PATH, imageio bundle all missed): ${(py.stderr || "").trim().split("\n").pop()}`);
+}
+
 const FPS = Number(arg("fps", "30"));
 const TRACE = path.join(ROOT, arg("trace", "analysis/v4-build/render-part.log"));
 
@@ -178,8 +196,16 @@ async function main() {
   if (onDisk !== partFrames) {
     throw new Error(`frame dir holds ${onDisk} PNGs but this render is ${partFrames} frames`);
   }
+  // ffmpeg and ffprobe are not guaranteed to be on PATH — the sandbox that builds
+  // this film has neither, and the CI runner has both. tools/ffbin.py already
+  // resolves all three cases (FFMPEG env, PATH, bundled), so the render asks it
+  // rather than assuming, and prints exactly which binary it used when the encode
+  // fails instead of throwing a bare "encode failed" with the reason on a stderr
+  // nobody can read.
+  const ffmpegBin = resolveBinary("ffmpeg");
+  const ffprobeBin = resolveBinary("ffprobe");
   const ff = spawnSync(
-    "ffmpeg",
+    ffmpegBin,
     [
       "-y", "-v", "error", "-framerate", String(fps),
       /* explicit start number and exact frame count: without these ffmpeg happily
@@ -195,18 +221,33 @@ async function main() {
       "-pix_fmt", "yuv420p", "-profile:v", "high", "-level", "4.1",
       "-movflags", "+faststart", outPath,
     ],
-    { stdio: "inherit" }
+    { encoding: "utf8" }
   );
-  if (ff.status !== 0) throw new Error("ffmpeg encode failed");
+  if (ff.status !== 0) {
+    const why = (ff.stderr || ff.error?.message || "").trim().split("\n").slice(-8).join(" | ");
+    throw new Error(`ffmpeg encode failed (${ffmpegBin}, exit ${ff.status}): ${why || "no stderr"}`);
+  }
 
   // the encode must contain exactly the frames we captured: an off-by-two here is
   // how the previous master ended up 698 frames long
-  const counted = spawnSync(
-    "ffprobe",
+  const counted = (() => {
+    try {
+      resolveBinary("ffprobe");
+    } catch (e) {
+      // no ffprobe here (the authoring sandbox has none). Counting frames is still
+      // possible: decode the file and divide by the frame size.
+      const raw = spawnSync(ffmpegBin, ["-v", "error", "-i", outPath, "-vf", "scale=64:114",
+        "-pix_fmt", "gray", "-f", "rawvideo", "-"], { maxBuffer: 1 << 28 });
+      const frames = Math.round(raw.stdout.length / (64 * 114));
+      return { status: 0, stdout: String(frames) };
+    }
+    return spawnSync(
+    ffprobeBin,
     ["-v", "error", "-count_frames", "-select_streams", "v:0",
      "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", outPath],
     { encoding: "utf8" }
-  );
+    );
+  })();
   /* Compare against THIS render's frame count, not the whole film's. A checkpoint
      render is 210 frames by construction, so testing it against frameCount (701)
      failed every checkpoint while the encode was perfectly correct — the error even
