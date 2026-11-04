@@ -1,14 +1,14 @@
 {
-  "video": "v4.mp4",
-  "duration": 23.4,
+  "video": "v4-silent.mp4",
+  "duration": 23.37,
   "fps": 30.0,
-  "frames": 698,
+  "frames": 701,
   "expected_frames": 701,
   "scene_signatures": {
     "s1": [
-      192.0,
-      192.0,
-      192.0
+      0.0,
+      0.0,
+      0.0
     ],
     "s2": [
       12.0,
@@ -78,8 +78,7 @@
   },
   "mismatched_frames": 2,
   "problems": [
-    "render has 698 frames, the composition is 701",
-    "20.63s shows s1 (dist 40) instead of s14 (dist 273)",
-    "20.67s shows s1 (dist 40) instead of s14 (dist 273)"
+    "20.63s shows s8 (dist 53) instead of s14 (dist 273)",
+    "20.67s shows s8 (dist 53) instead of s14 (dist 273)"
   ]
 }
