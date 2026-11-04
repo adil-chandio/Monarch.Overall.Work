@@ -18,12 +18,12 @@
 | motion_mean | 0.0566abs | 0.0604abs | ±0.004 | PASS |
 | motion_peak | 1.0abs | 1.0abs | ±0.000 | PASS |
 | static_share | 0.924abs | 0.966abs | ±0.042 | PASS |
-| saturation | 0.5066abs | 0.5026abs | ±0.004 | PASS |
-| luma | 68.17abs | 58.69abs | ±9.480 | PASS |
-| dark_share | 0.502abs | 0.554abs | ±0.052 | PASS |
+| saturation | 0.5066abs | 0.5025abs | ±0.004 | PASS |
+| luma | 68.17abs | 58.57abs | ±9.600 | PASS |
+| dark_share | 0.502abs | 0.555abs | ±0.053 | PASS |
 | bright_share | 0.064abs | 0.074abs | ±0.010 | PASS |
-| edge_density | 1.6469abs | 2.9204abs | ±1.273 | FAIL |
-| palette_distance | — | — | 42.1 rgb | FAIL |
+| edge_density | 1.6469abs | 2.9223abs | ±1.275 | FAIL |
+| palette_distance | — | — | 38.2 rgb | FAIL |
 | rms_db | -13.03dB | -12.15dB | ±0.880 | PASS |
 | lufs | -14.02LUFS | -14.37LUFS | ±0.350 | PASS |
 | true_peak | -0.31dBTP | -0.05dBTP | ±0.260 | PASS |
