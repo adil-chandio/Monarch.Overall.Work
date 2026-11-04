@@ -32,9 +32,12 @@
   .scene{ position:absolute; inset:0; will-change:transform,opacity,filter;
           opacity:0; }   /* a scene paints only when the timeline turns it on */
   .plate{ position:absolute; inset:0; background-size:cover; background-position:center;
-          filter:blur(3px); }
+          /* REF-01's plates are soft. Measured on delivered frames: at 3px this
+             build reads edge 3.00 on the CTA where the reference reads 1.68, and
+             3.66 on the hook where it reads 2.23. 4px halves both gaps. */
+          filter:blur(4px); }
   .grading{ position:absolute; inset:0; pointer-events:none; }
-  .grain{ position:absolute; inset:0; pointer-events:none; opacity:.014; mix-blend-mode:overlay;
+  .grain{ position:absolute; inset:0; pointer-events:none; opacity:.008; mix-blend-mode:overlay;
           background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>"); }
   .vig{ position:absolute; inset:0; pointer-events:none;
         background:radial-gradient(118% 82% at 50% 44%, rgba(0,0,0,0) 46%, rgba(0,0,0,.22) 100%); }
@@ -57,7 +60,7 @@
           box-shadow:0 2px 0 rgba(255,255,255,.45) inset, 0 -1px 0 rgba(0,0,0,.25) inset, 0 18px 40px rgba(0,0,0,.45); }
 
   /* ---------------------------------------------------------------- logo plate */
-  #plate2008{ background:#b81f20; overflow:hidden; }
+  #plate2008{ background:#a81d1b; overflow:hidden; }
   #plate2008 .rays{ position:absolute; inset:-10%;
       background:repeating-linear-gradient(58deg, rgba(0,0,0,.18) 0 90px, rgba(0,0,0,0) 90px 250px); }
   #plate2008 .tri{ position:absolute; width:0; height:0; border-style:solid; opacity:.5; }
@@ -163,7 +166,7 @@
 
   <!-- ===================== S8–S13 · 11.70–14.80  the loop, double speed ===================== -->
   <section class="scene" id="s8" style="opacity:0;">
-    <div class="plate" style="background:#bababa;"></div>
+    <div class="plate" style="background:#bcbbba;"></div>
     <div class="t kicker" id="s8w" style="left:120px; top:640px; color:#5ea015;">TWENTY</div>
   </section>
   <section class="scene" id="s9" style="opacity:0;">
@@ -195,7 +198,7 @@
   <section class="scene" id="s14" style="opacity:0;">
     <div class="plate" id="s14plate" style="background:
         radial-gradient(120% 90% at 52% 26%, #cf2f26 0%, #a81d16 44%, #6d100b 100%);"></div>
-    <div class="plate" id="s14img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; filter:brightness(1.70) saturate(1.06);"></div>
+    <div class="plate" id="s14img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; filter:brightness(1.66) saturate(1.02) contrast(1.04);"></div>
     <div class="grading" id="s14warm" style="opacity:0; mix-blend-mode:soft-light;
        background:linear-gradient(180deg, rgba(205,45,34,.42), rgba(110,12,9,.12) 60%, rgba(0,0,0,0) 100%);"></div>
     <div class="grading" id="s14red" style="opacity:0; mix-blend-mode:screen;
@@ -369,9 +372,14 @@
   /* the cut at 9.133 is not a new subject, it is a new grade: the plate goes, the
      frame tightens and cools, and only then do the eyes burn. Without the grade
      shift the frame is near-identical to shot 6 and the cut disappears. */
+  /* Shot 7 is REF-01's 2.57 s main shot and it measured [52,29,29] — a lifted
+     maroon. The build sat at [22,12,6], more than half as dark, because the grade
+     was crushing rather than grading it. These values come from solving the CSS
+     filter chain (tools/grade_sim.py) against the reference's measured colour:
+     brightness 1.7 / saturate 1.0 / contrast 1.05 lands at [52,31,27]. */
   tl.set("#s7img", { filter: "none" }, 0);
-  tl.set("#s7img", { filter: "brightness(.70) contrast(1.28) saturate(.55)" }, 9.133);
-  tl.set("#s7img", { filter: "brightness(.62) contrast(1.30) saturate(.50)" }, 20.700);
+  tl.set("#s7img", { filter: "brightness(1.70) contrast(1.05) saturate(1.00)" }, 9.133);
+  tl.set("#s7img", { filter: "brightness(1.55) contrast(1.06) saturate(.95)" }, 20.700);
   tl.fromTo("#s7img", { scale: 1.0 }, { scale: 1.04, duration: 2.57, ease: "none" }, 9.133);
   /* the grade arrives with the cut: at 9.133 the frame is already red-eyed in the
      reference (R/G 1.75 on shot 7's first frame), and that colour jump is most of
