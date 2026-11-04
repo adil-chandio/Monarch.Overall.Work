@@ -241,15 +241,30 @@
     var id = "#" + row[0], inT = row[1], dis = row[2], outT = row[3];
     tl.set(id, { opacity: 0 }, 0);
     if (dis > 0) {
-      /* The ramp finishes ON the cut. REF-01's alpha profiles show exactly this:
-         0 -> 0.757 in one frame at 0.833, then a slow finish to 1.0 at the cut. So
-         the incoming plate is complete when the edit says it is complete, which is
-         also why every one of these registers as a cut instead of a fade. */
-      tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: dis, ease: "none" }, inT - dis);
+      /* Jolt, then settle — this is what REF-01 actually does.
+         Its alpha profile at 0.833 reads 0 -> 0.757 in ONE frame, then a slow climb
+         to 1.0. A smooth crossfade (my first, second and third attempt) only gets
+         the incoming plate to ~17 % by the cut, so the cut frame changes by almost
+         nothing and the detector scores it 0.12 against the reference's 1.33.
+         Here the plate lands at 0.66 on the cut frame and finishes over the rest of
+         the span, while the outgoing plate fades out underneath it. The cut frame
+         then carries a two-thirds change — a cut you can feel. */
+      tl.fromTo(id, { opacity: 0 }, { opacity: 0.66, duration: 1 / FPS, ease: "none" },
+        Math.max(inT - 1 / FPS, 0));
+      tl.to(id, { opacity: 1, duration: Math.max(dis * 0.75, 2 / FPS), ease: "power2.out" }, inT);
     } else {
       tl.set(id, { opacity: 1 }, inT);
     }
-    if (outT < 90) tl.set(id, { opacity: 0 }, outT);
+    /* the outgoing plate stays AT full opacity on the cut frame, then fades under
+       the incoming one — otherwise the frame that matters most is a fade to black */
+    var next = SCENES[i + 1];
+    if (outT < 90) {
+      if (next && next[2] > 0) {
+        tl.to(id, { opacity: 0, duration: Math.max(next[2] * 0.75, 2 / FPS), ease: "none" }, outT);
+      } else {
+        tl.set(id, { opacity: 0 }, outT);
+      }
+    }
   });
 
   /* ---------------------------------------------------------------- helpers */
