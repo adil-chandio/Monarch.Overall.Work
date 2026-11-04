@@ -37,7 +37,7 @@ def build_notebook() -> dict:
     payload = json.dumps(gather_vo())
 
     code = f'''# MONARCH v3 — GPU word-level alignment (Whisper large-v3) on Kaggle T4 x2
-import base64, json, os, pathlib, subprocess, time
+import base64, json, os, pathlib, subprocess, sys, time
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 OUT = pathlib.Path("/kaggle/working/monarch_out")
@@ -110,7 +110,7 @@ except Exception as exc:
 
 if model is None:
     # second backend: whatever Kaggle's image already ships
-    import whisper
+    import torch, whisper
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = whisper.load_model("large-v3", device=device)
     backend = f"openai-whisper large-v3 {{device}}"
