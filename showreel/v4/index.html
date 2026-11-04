@@ -393,7 +393,10 @@
     frames: Math.round(TOTAL * FPS + 0.5),
     scenes: SCENES.map(function (r) {
       return { id: r[0], in: r[1], dissolve: r[2], out: r[3] };
-    })
+    }),
+    /* full-frame effects: for these frames no single plate owns the picture, so a
+       per-scene colour check must skip them rather than call them wrong */
+    flashes: [[20.633, 20.633 + 2 / FPS]]
   };
   if (d.fonts && d.fonts.ready) {
     d.fonts.ready.then(function () { d.documentElement.setAttribute("data-fonts", "ready"); });

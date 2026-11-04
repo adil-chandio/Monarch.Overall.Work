@@ -126,6 +126,8 @@ def main() -> None:
         # by analyse_ref's own boundary detector
         if any(abs(t - s["in"]) < max(s["dissolve"], 0) + 2.0 / fps for s in scenes):
             continue
+        if any(a - 1.5 / fps <= t <= b + 1.5 / fps for a, b in table.get("flashes", [])):
+            continue
         col = np.median(fr.reshape(-1, 3), axis=0)
         own = np.linalg.norm(col - sig[sid])
         others = {k: np.linalg.norm(col - v) for k, v in sig.items() if k != sid}
