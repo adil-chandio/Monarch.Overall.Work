@@ -6,8 +6,11 @@
 # of a f-string with doubled braces — means it can be compiled and linted here
 # before it ever costs a GPU run.
 import base64
+import ctypes
+import glob
 import json
 import os
+import site
 import pathlib
 import subprocess
 import sys
@@ -49,8 +52,41 @@ def ensure(module, spec):
 
 install_log = [ensure("faster_whisper", "faster-whisper>=1.0.3"),
                ensure("ctranslate2", "ctranslate2>=4.4.0"),
-               ensure("av", "av>=14.0.0")]
+               ensure("nvidia.cublas", "nvidia-cublas-cu12"),
+               ensure("nvidia.cudnn", "nvidia-cudnn-cu12")]
 print(install_log, flush=True)
+
+
+def enable_nvidia_libs():
+    """Put the CUDA 12 wheels' .so files on the loader path.
+
+    ctranslate2 4.x is built against CUDA 12; the image ships its own runtime and
+    does not put the pip wheels' lib directories on LD_LIBRARY_PATH, so encode()
+    dies with 'Library libcublas.so.12 is not found'. Preload them RTLD_GLOBAL so
+    dlopen finds them even after the loader has cached its search path.
+    """
+    roots = []
+    for sp in list(site.getsitepackages()) + [site.getusersitepackages()]:
+        roots += sorted(glob.glob(sp + "/nvidia/*/lib"))
+    if not roots:
+        return []
+    os.environ["LD_LIBRARY_PATH"] = ":".join(
+        roots + [os.environ.get("LD_LIBRARY_PATH", "")]).strip(":")
+    for lib in ("libcublas.so.12", "libcublasLt.so.12", "libcudnn.so.9",
+                "libcudnn_ops.so.9", "libcudnn_graph.so.9"):
+        for r in roots:
+            p = os.path.join(r, lib)
+            if os.path.exists(p):
+                try:
+                    ctypes.CDLL(p, mode=ctypes.RTLD_GLOBAL)
+                except Exception as exc:
+                    print("preload failed:", lib, exc, flush=True)
+                break
+    return roots
+
+
+receipt["nvidia_lib_dirs"] = enable_nvidia_libs()
+print("nvidia lib dirs:", receipt["nvidia_lib_dirs"], flush=True)
 
 receipt = {"stage": "gpu", "python": sys.version.split()[0], "install": install_log}
 try:
@@ -125,13 +161,8 @@ for name in sorted(PAYLOAD):
         print("decode failed:", exc, flush=True)
 print("decoded:", sorted((k, len(v[0]), v[1]) for k, v in PCM.items()), flush=True)
 
-beats = []
-audio_total = 0.0
-for name in sorted(PAYLOAD):
-    if name not in PCM:
-        continue
-    start = TIMING["starts"][len(beats)]
-    t0 = time.time()
+def transcribe_beat(model, backend, name):
+    """One beat -> the keepers. Raises if the backend cannot run it."""
     words, text_parts, seg_rows = [], [], []
     if backend.startswith("faster-whisper"):
         segments, info = model.transcribe(
@@ -144,24 +175,43 @@ for name in sorted(PAYLOAD):
             for w in (seg.words or []):
                 words.append({"w": w.word.strip(), "s": round(w.start, 3),
                               "e": round(w.end, 3), "p": round(float(w.probability), 3)})
-        dur = float(PCM[name][1])
-        lang, lang_prob = info.language, float(info.language_probability)
-    else:
-        res = model.transcribe(PCM[name][0], language="hi", word_timestamps=True,
-                               verbose=False)
-        dur = float(res.get("duration") or 0.0)
-        lang, lang_prob = "hi", 1.0
-        for seg in res.get("segments", []):
-            seg_rows.append({"start": round(seg["start"], 3), "end": round(seg["end"], 3),
-                             "text": str(seg.get("text", "")).strip()})
-            text_parts.append(str(seg.get("text", "")).strip())
-            for w in (seg.get("words") or []):
-                words.append({"w": str(w.get("word", "")).strip(),
-                              "s": round(float(w.get("start", 0)), 3),
-                              "e": round(float(w.get("end", 0)), 3),
-                              "p": round(float(w.get("probability", 0)), 3)})
-        if not dur:
-            dur = max([r["end"] for r in seg_rows], default=0.0)
+        return words, text_parts, seg_rows, info.language, float(info.language_probability)
+    res = model.transcribe(PCM[name][0], language="hi", word_timestamps=True,
+                           verbose=False)
+    for seg in res.get("segments", []):
+        seg_rows.append({"start": round(seg["start"], 3), "end": round(seg["end"], 3),
+                         "text": str(seg.get("text", "")).strip()})
+        text_parts.append(str(seg.get("text", "")).strip())
+        for w in (seg.get("words") or []):
+            words.append({"w": str(w.get("word", "")).strip(),
+                          "s": round(float(w.get("start", 0)), 3),
+                          "e": round(float(w.get("end", 0)), 3),
+                          "p": round(float(w.get("probability", 0)), 3)})
+    return words, text_parts, seg_rows, "hi", 1.0
+
+
+beats = []
+audio_total = 0.0
+fallbacks = []
+for name in sorted(PAYLOAD):
+    if name not in PCM:
+        continue
+    start = TIMING["starts"][len(beats)]
+    dur = PCM[name][1]
+    t0 = time.time()
+    try:
+        words, text_parts, seg_rows, lang, lang_prob = transcribe_beat(model, backend, name)
+    except Exception as exc:
+        # A CUDA-level failure must not cost the whole run: fall back to CPU int8
+        # (42 s of audio, so it is minutes, not hours) and record why.
+        msg = type(exc).__name__ + ": " + str(exc)[:300]
+        print("backend failed on", name, "->", msg, flush=True)
+        fallbacks.append({"file": name, "error": msg, "from": backend})
+        backend = "faster-whisper large-v3 int8 cpu"
+        model = WhisperModel("large-v3", device="cpu", compute_type="int8",
+                             download_root="/kaggle/working/models")
+        words, text_parts, seg_rows, lang, lang_prob = transcribe_beat(model, backend, name)
+
     audio_total += dur
     rtf = round((time.time() - t0) / max(dur, 0.01), 4)
     beats.append({"file": name, "offset": round(float(start), 3),
@@ -170,9 +220,11 @@ for name in sorted(PAYLOAD):
                   "text": " ".join(text_parts).strip(), "segments": seg_rows,
                   "words": words, "rtf": rtf})
     print("[" + str(len(beats)) + "/" + str(len(PAYLOAD)) + "] " + name
-          + "  dur=" + str(round(dur, 2)) + "s  rtf=" + str(rtf)
+          + "  dur=" + str(dur) + "s  rtf=" + str(rtf)
           + "  words=" + str(len(words)), flush=True)
 
+receipt["backend_fallbacks"] = fallbacks
+receipt["model_final"] = backend
 receipt["audio_total_s"] = round(audio_total, 3)
 receipt["wall_s"] = round(time.time() - t0, 2)
 receipt["words"] = sum(len(b["words"]) for b in beats)
