@@ -59,10 +59,15 @@ jobs:
         run: python3 showreel/v4/audio.py --out public/demo/v4-mix.wav
 
       - name: Install the renderer and the gate
-        run: npm install --no-save --silent jsdom puppeteer-core@23
+        run: npm install --no-save --silent jsdom@30 puppeteer-core@23
 
       - name: Composition gate — every element exists, no scene is left visible
-        run: node tools/verify_v4.mjs
+        run: |
+          # pin the gate's DOM to the version it was written against, and never let a
+          # missing module masquerade as a composition failure
+          node -e "require.resolve('jsdom'); console.log('jsdom', require('jsdom/package.json').version)"
+          node --version
+          node tools/verify_v4.mjs
 
       - name: Render 720x1280 @ 30 fps (real Chromium, timeline seeked per frame)
         run: |
