@@ -14,6 +14,7 @@ on:
       - "refs/*.url"
       - ".github/workflows/ref-forensics.yml"
       - "tools/analyse_ref.py"
+      - "tools/ref_shots.py"
   workflow_dispatch:
     inputs:
       ref_url:
@@ -126,6 +127,8 @@ jobs:
           NAME=$(echo "$NAME" | tr -cd 'A-Za-z0-9._-' | cut -c1-40)
           echo "ANALYSIS_DIR=analysis/$NAME" >> "$GITHUB_ENV"
           python3 tools/analyse_ref.py "${REF_FILE}" --out "analysis/$NAME"
+          cp "${REF_FILE}" "analysis/$NAME/reference.mp4"
+          python3 tools/ref_shots.py "${REF_FILE}" --analysis "analysis/$NAME"
           ls -la "analysis/$NAME"
 
       - name: Commit the dossier and the images
