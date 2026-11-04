@@ -76,11 +76,28 @@ def probe(user: str, key: str, token: str) -> str:
     return ""
 
 
+def write_report(rows: list[dict], chosen: dict | None) -> None:
+    """Evidence, not vibes: which secret *names* exist and why each was rejected.
+
+    Only names, booleans and the CLI's own error text — never a secret value.
+    """
+    out = pathlib.Path(os.environ.get("CRED_REPORT", "public/demo/gpu/cred-report.json"))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({
+        "slots_present": [r["slot"] for r in rows if r["present"]],
+        "slots_absent": [r["slot"] for r in rows if not r["present"]],
+        "attempts": rows,
+        "chosen": chosen,
+    }, indent=1) + "\n")
+
+
 def main() -> int:
     chosen = None
+    rows: list[dict] = []
     for slot, hint in SLOTS:
         raw = (os.environ.get(slot) or "").strip()
         if not raw:
+            rows.append({"slot": slot, "present": False})
             continue
         for line in raw.splitlines():
             if line.strip():
@@ -88,12 +105,21 @@ def main() -> int:
         user, key, token = parse(raw)
         if not key and not token:
             print(f"::warning::slot {slot} is not a key/token, skipping", flush=True)
+            rows.append({"slot": slot, "present": True, "verdict": "unparseable"})
             continue
         handle = probe(user or hint, key, token)
         print(f"::notice::slot {slot} -> {handle or 'not authenticated'}", flush=True)
+        rows.append({
+            "slot": slot, "present": True, "chars": len(raw),
+            "shape": ("json" if raw.startswith("{") else
+                      "token" if token else "user:key" if user else "key"),
+            "verdict": handle or "not_authenticated",
+        })
         if handle:
-            chosen = (slot, handle, key, token)
+            chosen = {"slot": slot, "handle": handle, "token_mode": bool(token)}
             break
+
+    write_report(rows, chosen)
 
     if not chosen:
         print("::error::No Kaggle secret in this repository authenticated. "
