@@ -1,0 +1,47 @@
+{
+ "slots_present": [
+  "COMPALI"
+ ],
+ "slots_absent": [
+  "KAGGLE_KEY",
+  "KAGGLE_API_TOKEN",
+  "KAGGLE_API_KEY",
+  "MONARCH",
+  "KAGGLE_JSON",
+  "KAGGLE"
+ ],
+ "attempts": [
+  {
+   "slot": "COMPALI",
+   "present": true,
+   "chars": 37,
+   "shape": "token",
+   "verdict": "not_authenticated"
+  },
+  {
+   "slot": "KAGGLE_KEY",
+   "present": false
+  },
+  {
+   "slot": "KAGGLE_API_TOKEN",
+   "present": false
+  },
+  {
+   "slot": "KAGGLE_API_KEY",
+   "present": false
+  },
+  {
+   "slot": "MONARCH",
+   "present": false
+  },
+  {
+   "slot": "KAGGLE_JSON",
+   "present": false
+  },
+  {
+   "slot": "KAGGLE",
+   "present": false
+  }
+ ],
+ "chosen": null
+}
