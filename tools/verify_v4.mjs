@@ -182,11 +182,17 @@ if (busy.length > 0) {
 }
 
 // ---- 6. the graded states ---------------------------------------------------
+// The flash's height is not a taste. REF-01's own decoded luma at 20.633 peaks at
+// 145 over a ~40 base, so a white flash over this picture comes out near 0.5 — an
+// earlier build ran it at 0.9, measured 217, and this gate was written to that
+// number instead of to the reference. Assert a band around the measurement.
 const atFlash = stateAt(20.65);
-if (atFlash.flash < 0.9) fail(`flash not on at 20.65s (opacity ${atFlash.flash})`);
-else note("flash fires on the measured frame (20.633 s)");
-const afterFlash = stateAt(20.75);
-if (afterFlash.flash > 0.05) fail(`flash still on at 20.75s (opacity ${afterFlash.flash})`);
+if (atFlash.flash < 0.35 || atFlash.flash > 0.65)
+  fail(`flash at 20.65s is opacity ${atFlash.flash}; REF-01 measures ~0.5 (145 luma over a 40 base)`);
+else note(`flash fires on the measured frame at opacity ${atFlash.flash} (~145 luma, as REF-01)`);
+// three frames, as measured: 20.633, +1, +2 — clear by the fourth
+const afterFlash = stateAt(20.78);
+if (afterFlash.flash > 0.05) fail(`flash still on at 20.78s (opacity ${afterFlash.flash})`);
 if (afterFlash.redEye < 0.9) fail(`red-eye grade not on after the flash (opacity ${afterFlash.redEye})`);
 else note("red-eye grade lands 3 frames after the flash, as measured");
 
