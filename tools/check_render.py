@@ -101,8 +101,11 @@ def main() -> None:
                 owner = s["id"]
                 break
         owner_of.append(owner or "")
-        if owner in by_scene:
-            by_scene[owner].append(fr.reshape(-1, 3).mean(0))
+        # half a frame either side of a boundary is a blend by definition, so those
+        # frames only vote if they are clearly inside the shot
+        edge = any(abs(t - s["in"]) < 1.0 / fps or abs(t - s["out"]) < 1.0 / fps for s in scenes)
+        if owner in by_scene and not edge:
+            by_scene[owner].append(np.median(fr.reshape(-1, 3), axis=0))
 
     sig: dict[str, np.ndarray] = {}
     for sid, cols in by_scene.items():
@@ -116,13 +119,18 @@ def main() -> None:
         sid = owner_of[i]
         if not sid or sid not in sig or len(sig) < 2:
             continue
-        col = fr.reshape(-1, 3).mean(0)
+        t = i / fps
+        # a frame inside a dissolve is two plates at once: skip it, the cut is checked
+        # by analyse_ref's own boundary detector
+        if any(abs(t - s["in"]) < max(s["dissolve"], 0) + 2.0 / fps for s in scenes):
+            continue
+        col = np.median(fr.reshape(-1, 3), axis=0)
         own = np.linalg.norm(col - sig[sid])
         others = {k: np.linalg.norm(col - v) for k, v in sig.items() if k != sid}
         best_other, best_d = min(others.items(), key=lambda kv: kv[1])
         # only call it a mismatch when the other plate explains the frame clearly
         # better; a genuinely similar pair (two green plates) should not trip this
-        if best_d + 25 < own:
+        if best_d + 40 < own:
             mismatched += 1
             if mismatched <= 8:
                 problems.append(

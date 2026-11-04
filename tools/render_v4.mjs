@@ -99,6 +99,18 @@ async function main() {
   const times = [];
   for (let i = 0; i < frameCount; i++) times.push(i / fps);
 
+  // warm pass: paint a couple of frames and throw them away, then come back to 0.
+  // Without this the very first captured frame came out fully black — the browser
+  // had not composited the CSS background plates yet.
+  for (const warm of [0.5, 1.5, 0]) {
+    await page.evaluate((time) => {
+      const tl = window.__timelines.main;
+      tl.pause();
+      tl.time(time, false);
+    }, warm);
+    await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+  }
+
   const target = ONLY ? [Number(ONLY)] : times;
   let n = 0;
   for (const t of target) {
@@ -112,6 +124,12 @@ async function main() {
     await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
     const file = path.join(FRAMES_DIR, `f_${String(n).padStart(5, "0")}.png`);
     await page.screenshot({ path: file, type: "png", optimizeForSpeed: false });
+    if (n === 0) {
+      // a black first frame is a render failure, not a style choice
+      const probe = await page.screenshot({ type: "png" });
+      const fsMod = await import("node:fs");
+      fsMod.writeFileSync(path.join(FRAMES_DIR, "_probe0.png"), probe);
+    }
     n++;
     if (n % 60 === 0) console.log(`  ${n}/${target.length} frames`);
   }
@@ -137,7 +155,7 @@ async function main() {
          muxed 700 frames out of a directory that still held 701 PNGs from the
          previous run, and the extra frame came from a different build of the film */
       "-start_number", "0", "-i", path.join(FRAMES_DIR, "f_%05d.png"),
-      "-frames:v", String(frameCount),
+      "-frames:v", String(frameCount), "-fps_mode", "cfr", "-r", String(fps),
       /* REF-01 is a 980 kb/s 720p30 master. A near-lossless encode here would
          measure twice the edge density of the reference for no delivery benefit,
          so the film is encoded into the same band it will be published in. */
@@ -149,6 +167,19 @@ async function main() {
     { stdio: "inherit" }
   );
   if (ff.status !== 0) throw new Error("ffmpeg encode failed");
+
+  // the encode must contain exactly the frames we captured: an off-by-two here is
+  // how the previous master ended up 698 frames long
+  const counted = spawnSync(
+    "ffprobe",
+    ["-v", "error", "-count_frames", "-select_streams", "v:0",
+     "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", outPath],
+    { encoding: "utf8" }
+  );
+  const got = parseInt((counted.stdout || "").trim(), 10);
+  if (Number.isFinite(got) && got !== frameCount) {
+    throw new Error(`encode has ${got} frames, expected ${frameCount}`);
+  }
   const mb = (fs.statSync(outPath).size / 1e6).toFixed(2);
   console.log(`wrote ${OUT} (${frameCount} frames, ${mb} MB)`);
 }
