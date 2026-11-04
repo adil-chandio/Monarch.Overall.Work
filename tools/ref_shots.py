@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from typing import Any
@@ -27,7 +28,30 @@ CARD_W = 300
 
 
 def ffmpeg_bin() -> str:
-    return os.environ.get("FFMPEG_BIN") or "ffmpeg"
+    """System ffmpeg if present, else the static build bundled with imageio."""
+    forced = os.environ.get("FFMPEG_BIN")
+    if forced:
+        return forced
+    from shutil import which
+
+    found = which("ffmpeg")
+    if found:
+        return found
+    try:
+        import imageio_ffmpeg
+
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:  # pragma: no cover - last resort
+        return "ffmpeg"
+
+
+def ffprobe_bin() -> str:
+    from shutil import which
+
+    found = which("ffprobe")
+    if found:
+        return found
+    return ""  # static build has no ffprobe; probe() falls back to ffmpeg
 
 
 def run(cmd: list[str]) -> None:
@@ -38,15 +62,25 @@ def run(cmd: list[str]) -> None:
 
 
 def probe(path: str) -> dict[str, Any]:
-    out = subprocess.run(
-        [t for t in (ffmpeg_bin().replace("ffmpeg", "ffprobe"),) if t]
-        + ["-v", "error", "-print_format", "json", "-show_format", "-show_streams", path],
-        capture_output=True,
-        text=True,
-    )
-    if out.returncode != 0:
-        raise SystemExit(f"ffprobe failed: {out.stderr[-800:]}")
-    return json.loads(out.stdout)
+    probe_bin = ffprobe_bin()
+    if probe_bin:
+        out = subprocess.run(
+            [probe_bin, "-v", "error", "-print_format", "json",
+             "-show_format", "-show_streams", path],
+            capture_output=True,
+            text=True,
+        )
+        if out.returncode == 0:
+            return json.loads(out.stdout)
+        sys.stderr.write(f"ffprobe failed, using ffmpeg: {out.stderr[-400:]}\n")
+    # static-ffmpeg fallback: parse "Duration: 00:00:23.35" and the video stream line
+    txt = subprocess.run([ffmpeg_bin(), "-hide_banner", "-i", path],
+                         capture_output=True, text=True).stderr
+    m = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.?\d*)", txt)
+    if not m:
+        raise SystemExit("cannot read duration")
+    h, mm, ss = int(m.group(1)), int(m.group(2)), float(m.group(3))
+    return {"format": {"duration": h * 3600 + mm * 60 + ss}}
 
 
 def grab(path: str, t: float, dest: str, width: int) -> bool:
@@ -73,7 +107,7 @@ def font(size: int) -> ImageFont.ImageFont:
 
 def build_shots(report: dict[str, Any], duration: float) -> list[dict[str, Any]]:
     """Turn the cut list into shots with start/end/midpoint."""
-    cuts = sorted(c["time"] for c in report.get("edit", {}).get("cuts", []))
+    cuts = sorted(float(c["time"]) for c in report.get("cuts", []))
     edges = [0.0] + cuts + [duration]
     shots = []
     for i in range(len(edges) - 1):
@@ -88,8 +122,8 @@ def build_shots(report: dict[str, Any], duration: float) -> list[dict[str, Any]]
                 "dur": round(end - start, 3),
                 "mid": round((start + end) / 2.0, 3),
                 "transition_in": next(
-                    (c.get("transition") for c in report.get("edit", {}).get("cuts", [])
-                     if abs(c["time"] - start) < 0.05),
+                    (c.get("transition") for c in report.get("cuts", [])
+                     if abs(float(c["time"]) - start) < 0.05),
                     "—" if i == 0 else "cut",
                 ),
             }
