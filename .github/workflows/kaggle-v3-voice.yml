@@ -63,18 +63,27 @@ jobs:
         run: exit 1
 
       - name: Push + wait on Kaggle GPU T4 x2
+        id: gpu
+        continue-on-error: true
         run: |
           chmod +x tools/kaggle/push_voice.sh
-          bash tools/kaggle/push_voice.sh
+          bash tools/kaggle/push_voice.sh 2>&1 | tee public/demo/gpu/gpu-transcript.log
+          exit ${PIPESTATUS[0]}
 
-      - name: Commit the GPU receipt and word timings
+      - name: Commit whatever the GPU step produced (transcript or receipt)
+        if: always()
         run: |
           git config user.name "MONARCH GPU Runner"
           git config user.email "gpu@monarch.studio"
-          git add -f public/demo/gpu/words.json public/demo/gpu/receipts_gpu.json
-          git commit -m "chore(gpu): Kaggle T4x2 word-level alignment of the v3 voice [skip ci]" || exit 0
+          git add -f public/demo/gpu/ || true
+          git commit -m "chore(gpu): T4x2 alignment transcript + receipt" || exit 0
           for attempt in 1 2 3; do
             git pull --rebase origin arena/8bfd4d0e-monarch-overall-work && \
             git push origin HEAD:arena/8bfd4d0e-monarch-overall-work && break
             sleep 5
           done
+
+      - name: Fail if the GPU step failed
+        if: steps.gpu.outcome == 'failure'
+        run: exit 1
+
