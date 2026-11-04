@@ -85,10 +85,11 @@ def enable_nvidia_libs():
     return roots
 
 
-receipt["nvidia_lib_dirs"] = enable_nvidia_libs()
-print("nvidia lib dirs:", receipt["nvidia_lib_dirs"], flush=True)
 
 receipt = {"stage": "gpu", "python": sys.version.split()[0], "install": install_log}
+# before any model is built: ctranslate2 dlopens libcublas at load time
+receipt["nvidia_lib_dirs"] = enable_nvidia_libs()
+print("nvidia lib dirs:", receipt["nvidia_lib_dirs"], flush=True)
 try:
     import torch
     receipt["torch"] = torch.__version__
