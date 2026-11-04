@@ -3,7 +3,7 @@
   "duration": 23.4,
   "fps": 30.0,
   "frames": 698,
-  "expected_frames": 700,
+  "expected_frames": 701,
   "scene_signatures": {
     "s1": [
       192.0,
@@ -78,9 +78,8 @@
   },
   "mismatched_frames": 2,
   "problems": [
-    "render has 698 frames, the composition is 700",
+    "render has 698 frames, the composition is 701",
     "20.63s shows s1 (dist 40) instead of s14 (dist 273)",
-    "20.67s shows s1 (dist 40) instead of s14 (dist 273)",
-    "701 PNGs in public/demo/v4-frames but the film is 700 frames \u2014 a stale frame dir will be muxed into the wrong length"
+    "20.67s shows s1 (dist 40) instead of s14 (dist 273)"
   ]
 }
