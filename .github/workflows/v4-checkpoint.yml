@@ -73,7 +73,9 @@ jobs:
           if [ "$status" -ne 0 ]; then
             # a ::error:: annotation is readable through the API even when the raw
             # job log cannot be downloaded
-            echo "::error title=checkpoint render failed::$(tail -c 1200 /tmp/render-part.out | tr '\n' ' ')"
+            echo "::error title=checkpoint render failed::$(tail -c 3000 /tmp/render-part.out | tr '\n' ' ')"
+            echo "--- ffmpeg stderr from the encode ---"
+            grep -v "^\s*$" /tmp/render-part.out | tail -40
           fi
           exit "$status"
 
