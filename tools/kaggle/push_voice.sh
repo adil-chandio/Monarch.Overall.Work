@@ -45,8 +45,10 @@ mkdir -p "${KDIR}/out"
 kaggle kernels output "${REF}" -p "${KDIR}/out" 2>&1 | tail -n 20 || true
 ls -lR "${KDIR}/out" | head -40
 
-cp -f "${KDIR}/out/words.json" "${OUT_DIR}/words.json" 2>/dev/null || true
-cp -f "${KDIR}/out/receipts_gpu.json" "${OUT_DIR}/receipts_gpu.json" 2>/dev/null || true
+# Kaggle returns the output tree as-is; the kernel writes into monarch_out/, so
+# search rather than assuming a depth.
+find "${KDIR}/out" -name words.json -exec cp -f {} "${OUT_DIR}/words.json" \; 2>/dev/null || true
+find "${KDIR}/out" -name receipts_gpu.json -exec cp -f {} "${OUT_DIR}/receipts_gpu.json" \; 2>/dev/null || true
 
 if [ ! -s "${OUT_DIR}/words.json" ]; then
   echo "::error::kernel ${REF} produced no words.json (status: ${STATUS})"
