@@ -76,6 +76,9 @@ jobs:
             echo "::error title=checkpoint render failed::$(tail -c 3000 /tmp/render-part.out | tr '\n' ' ')"
             echo "--- ffmpeg stderr from the encode ---"
             grep -v "^\s*$" /tmp/render-part.out | tail -40
+            # and again as one annotation, which is the only channel that is
+            # reliably readable through the API
+            echo "::error title=render tail::$(grep -v '^\s*$' /tmp/render-part.out | tail -12 | tr '\n' ' ' | tr -s ' ')"
           fi
           exit "$status"
 
