@@ -84,13 +84,29 @@ def main() -> None:
     cv2.imwrite(str(OUT / "s5-plate.png"), cv2.cvtColor(plate.astype(np.uint8), cv2.COLOR_RGB2BGR))
     print(f"  s5-plate.png   the reference at {PLATE_T}s — no type in it")
 
+    # Split the two elements where the reference actually separates them: by the
+    # empty rows between them. Splitting at a fraction of the type's total height
+    # put the boundary inside NO (its rows run 352-575 while 46 % of the span is
+    # 396), so the top strip of NO was cut into HE SAID's layer — which then moved
+    # with HE SAID's own camera offset and left a dark band across the top of NO.
     r, g, b = full[:, :, 0], full[:, :, 1], full[:, :, 2]
     red = (r > 80) & (r - g > 35) & (r - b > 35)
-    ys, _ = np.where(red)
-    band = int(ys.min() + (ys.max() - ys.min()) * 0.46)
+    rows = red.sum(axis=1)
+    filled = [i for i in range(len(rows)) if rows[i] > 200]
+    groups, start, prev = [], filled[0], filled[0]
+    for i in filled[1:]:
+        if i - prev > 4:
+            groups.append((start, prev))
+            start = i
+        prev = i
+    groups.append((start, prev))
+    print(f"  type rows: {groups}")
+    if len(groups) < 2:
+        raise SystemExit("expected two type elements, found one — check the reference window")
+    he_rows, no_rows = groups[0], tuple([groups[1][0], groups[-1][1]])
 
-    up = np.zeros_like(red); up[:band, :] = True; up &= red
-    lo = np.zeros_like(red); lo[band:, :] = True; lo &= red
+    up = np.zeros_like(red); up[he_rows[0]:he_rows[1] + 1, :] = True; up &= red
+    lo = np.zeros_like(red); lo[no_rows[0]:no_rows[1] + 1, :] = True; lo &= red
     cut_out("s5-he-layer", up, full)
     cut_out("s5-no", lo, full)
 

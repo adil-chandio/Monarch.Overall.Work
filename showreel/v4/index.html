@@ -184,10 +184,10 @@
     <!-- HE SAID and NO arrive as two beats, so they are two layers: the plate has
          neither. Both cut by unmixing two of the reference's own frames, which
          gives a real alpha and no fringe. -->
-    <div class="layer" id="s5he" style="left:117px; top:235px; width:465px; height:163px;
+    <div class="layer" id="s5he" style="left:119px; top:239px; width:463px; height:85px;
          background:url('./assets/ref/s5-he-layer.png') center/100% 100% no-repeat; opacity:0;
          will-change:transform,opacity;"></div>
-    <div class="layer" id="s5no" style="left:115px; top:391px; width:477px; height:193px;
+    <div class="layer" id="s5no" style="left:115px; top:347px; width:477px; height:231px;
          background:url('./assets/ref/s5-no.png') center/100% 100% no-repeat; opacity:0;
          will-change:transform,opacity;"></div>
   </section>
@@ -440,13 +440,18 @@
      the reference at every frame, which is what it was doing. */
   tl.fromTo("#s5", { scale: 1.0 }, { scale: 1.010, duration: 1.83, ease: "none" }, 1.30);
 
-  /* The colour sweep, measured on the bag's own saturation: 60 at 1.60 s, peak 125
-     at 1.85, then down to 15 by 2.25 and neutral from there. So the green does not
-     fade away — it comes UP first and then sweeps out, which is why starting a
-     desaturate at 2.10 s left this shot green while the reference had gone grey. */
-  tl.fromTo("#s5plate", { filter: "saturate(1.0)" },
-    { filter: "saturate(1.55)", duration: 0.15, ease: "power2.out" }, 1.80);
-  tl.to("#s5plate", { filter: "saturate(0.12)", duration: 0.40, ease: "power1.inOut" }, 1.95);
+  /* The colour of this shot, measured as the share of the frame that reads green
+     (a count of pixels, so it cannot be fooled the way a mean saturation can):
+
+         reference  1.32 s 15.2 %   1.50 8.2 %   1.70 6.2 %   2.05 4.8 %   2.25 0 %
+
+     The plate is that 4.8 % state and the field then finishes draining to nothing
+     by 2.25. So most of the drain happens BEFORE the plate's own timestamp — the
+     scene opens far greener than the frame the plate was taken from, and that is
+     why holding the plate still showed green where the reference was grey. */
+  tl.fromTo("#s5plate", { filter: "saturate(2.1)" },
+    { filter: "saturate(1.0)", duration: 0.78, ease: "power2.out" }, 1.32);
+  tl.to("#s5plate", { filter: "saturate(0.05)", duration: 0.25, ease: "power1.in" }, 2.00);
 
   /* HE SAID and NO are two beats, not one: HE SAID is a faint pre-echo in the
      reference from about 2.2 s and solid by 2.45, NO slams 2.35 -> 2.95 and is the
