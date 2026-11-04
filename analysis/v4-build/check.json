@@ -6,87 +6,81 @@
   "expected_frames": 700,
   "scene_signatures": {
     "s1": [
-      193.1,
-      193.5,
-      192.6
+      192.0,
+      192.0,
+      192.0
     ],
     "s2": [
-      19.1,
-      22.4,
-      15.7
+      12.0,
+      12.0,
+      12.0
     ],
     "s3": [
-      44.0,
-      56.8,
-      38.0
+      23.0,
+      48.0,
+      20.0
     ],
     "s4": [
-      48.4,
-      151.6,
-      79.0
+      22.0,
+      170.5,
+      73.5
     ],
     "s5": [
-      133.9,
-      139.7,
-      142.1
+      137.0,
+      141.0,
+      148.0
     ],
     "s6": [
-      43.2,
-      26.1,
-      23.8
+      23.0,
+      15.0,
+      13.0
     ],
     "s7": [
-      24.5,
-      14.9,
-      6.1
+      0.0,
+      0.0,
+      0.0
     ],
     "s8": [
-      183.5,
-      184.8,
-      183.4
+      185.0,
+      185.0,
+      185.0
     ],
     "s9": [
-      19.3,
-      23.5,
-      16.2
+      13.0,
+      13.0,
+      13.0
     ],
     "s10": [
-      45.7,
-      59.4,
-      39.6
+      24.0,
+      51.0,
+      20.0
     ],
     "s15": [
-      50.8,
-      161.3,
-      83.8
+      22.0,
+      180.0,
+      77.0
     ],
     "s12": [
-      132.2,
-      139.0,
-      141.4
+      132.0,
+      140.0,
+      147.0
     ],
     "s13": [
-      149.6,
-      147.4,
-      148.1
+      158.0,
+      154.0,
+      156.0
     ],
     "s14": [
-      79.3,
-      67.1,
-      43.0
+      81.0,
+      58.0,
+      37.0
     ]
   },
-  "mismatched_frames": 8,
+  "mismatched_frames": 2,
   "problems": [
     "render has 698 frames, the composition is 700",
-    "0.00s shows s7 (dist 29) instead of s1 (dist 334)",
-    "0.97s shows s4 (dist 28) instead of s3 (dist 75)",
-    "12.17s shows s2 (dist 7) instead of s8 (dist 290)",
-    "12.47s shows s10 (dist 0) instead of s9 (dist 50)",
-    "12.67s shows s15 (dist 0) instead of s10 (dist 111)",
-    "12.97s shows s12 (dist 0) instead of s15 (dist 102)",
-    "20.63s shows s1 (dist 39) instead of s14 (dist 266)",
-    "20.67s shows s1 (dist 39) instead of s14 (dist 266)",
+    "20.63s shows s1 (dist 40) instead of s14 (dist 273)",
+    "20.67s shows s1 (dist 40) instead of s14 (dist 273)",
     "701 PNGs in public/demo/v4-frames but the film is 700 frames \u2014 a stale frame dir will be muxed into the wrong length"
   ]
 }
