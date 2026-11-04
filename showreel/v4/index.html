@@ -29,7 +29,8 @@
   html,body{ background:#000; overflow:hidden; }
   #root{ position:relative; width:720px; height:1280px; overflow:hidden; background:#000; }
 
-  .scene{ position:absolute; inset:0; will-change:transform,opacity,filter; }
+  .scene{ position:absolute; inset:0; will-change:transform,opacity,filter;
+          opacity:0; }   /* a scene paints only when the timeline turns it on */
   .plate{ position:absolute; inset:0; background-size:cover; background-position:center;
           filter:blur(3px); }
   .grading{ position:absolute; inset:0; pointer-events:none; }
@@ -159,11 +160,7 @@
   <section class="scene" id="s10" style="opacity:0;">
     <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.58) saturate(1.10) contrast(1.06);"></div>
   </section>
-  <section class="scene" id="s11" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
-    <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
-    <div class="t bill" id="s11b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
-  </section>
+
   <section class="scene" id="s15" style="opacity:0;">
     <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.30) saturate(1.1);"></div>
     <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
@@ -355,8 +352,8 @@
 
   tl.set("#s15b", { rotation: -7, scale: 1.05 }, 0);
   tl.to("#s15b", { scale: 1, duration: 0.14, ease: "power2.out" }, 12.667);
-  tl.set("#s11b", { rotation: -7, scale: 1.05 }, 0);
-  tl.to("#s11b", { scale: 1, duration: 0.14, ease: "power2.out" }, 12.967);
+  tl.set("#s12b", { rotation: -7, scale: 1.05 }, 0);
+  tl.to("#s12b", { scale: 1, duration: 0.14, ease: "power2.out" }, 12.967);
 
   slam("#s13he",   13.76, -70, 0.14);
   slam("#s13said", 13.88, -90, 0.14);

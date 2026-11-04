@@ -100,16 +100,18 @@ for (const s of sel) if (!doc.querySelector(s)) fail(`timeline targets a missing
 note(`${sel.size} distinct targets resolved`);
 
 // ---- 3. frame sampling helpers ---------------------------------------------
-const sceneIds = Array.from({ length: 14 }, (_, i) => `#s${i + 1}`);
-const scenes = sceneIds.map((s) => doc.querySelector(s)).filter(Boolean);
-if (scenes.length !== 14) fail(`expected 14 scenes, found ${scenes.length}`);
+const scenes = Array.from(doc.querySelectorAll("section.scene"));
+if (scenes.length < 14) fail(`expected at least 14 scenes, found ${scenes.length}`);
+const tableIds = new Set((window.__scenes || []).map((r) => "#" + r[0]));
+const orphans = scenes.map((el) => "#" + el.id).filter((id) => !tableIds.has(id));
+if (orphans.length) fail(`scenes in the document but not in the timeline table: ${orphans.join(", ")}`);
 
 const opacityOf = (el) => {
   let v = parseFloat(window.getComputedStyle(el).opacity);
   return Number.isNaN(v) ? 1 : v;
 };
 const transformOf = (el) => window.getComputedStyle(el).transform || "none";
-const visible = () => scenes.map((el, i) => ({ id: `s${i + 1}`, o: opacityOf(el) })).filter((s) => s.o > 0.02);
+const visible = () => scenes.map((el) => ({ id: el.id, o: opacityOf(el) })).filter((s) => s.o > 0.02);
 
 function stateAt(t) {
   tl.pause();
