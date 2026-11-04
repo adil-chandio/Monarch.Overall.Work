@@ -51,7 +51,10 @@ for name, b64 in PAYLOAD.items():
     (VO / name).write_bytes(base64.b64decode(b64))
 print("unpacked VO files:", sorted(p.name for p in VO.glob("*.mp3")), flush=True)
 
-subprocess.run(["{sys.executable}", "-m", "pip", "install", "-q", "--no-input",
+# the *kernel's own* interpreter, never the packager's: baking this machine's
+# sys.executable in produced FileNotFoundError inside Kaggle.
+import sys as _sys
+subprocess.run([_sys.executable, "-m", "pip", "install", "-q", "--no-input",
                 "faster-whisper==1.0.3"], check=True)
 
 receipt = {{"stage": "gpu", "python": os.sys.version.split()[0]}}
