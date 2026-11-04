@@ -61,15 +61,15 @@
   ],
   "transients_on_cuts": [
     {
-      "cut": 0.5,
+      "cut": 0.533,
       "transient": 0.48,
-      "delta_ms": -20,
+      "delta_ms": -53,
       "db": -6.8
     },
     {
-      "cut": 3.1,
+      "cut": 3.133,
       "transient": 3.08,
-      "delta_ms": -20,
+      "delta_ms": -53,
       "db": -4.9
     },
     {
@@ -79,9 +79,9 @@
       "db": -8.4
     },
     {
-      "cut": 12.2,
+      "cut": 12.233,
       "transient": 12.16,
-      "delta_ms": -40,
+      "delta_ms": -73,
       "db": -8.2
     },
     {
@@ -97,9 +97,9 @@
       "db": -8.2
     },
     {
-      "cut": 13.333,
+      "cut": 13.367,
       "transient": 13.36,
-      "delta_ms": 27,
+      "delta_ms": -7,
       "db": -8.6
     }
   ],
