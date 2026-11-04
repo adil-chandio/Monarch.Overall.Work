@@ -14,16 +14,16 @@
 | median_shot | 0.42s | 0.72s | ±0.300 | FAIL |
 | hook_first_cut | 0.533s | 0.533s | ±0.000 | PASS |
 | hook_cuts_3s | 4cuts | 4cuts | ±0.000 | PASS |
-| hook_motion_1s | 0.1079abs | 0.1293abs | ±0.021 | PASS |
-| motion_mean | 0.0566abs | 0.0678abs | ±0.011 | PASS |
+| hook_motion_1s | 0.1079abs | 0.1339abs | ±0.026 | PASS |
+| motion_mean | 0.0566abs | 0.07abs | ±0.013 | PASS |
 | motion_peak | 1.0abs | 1.0abs | ±0.000 | PASS |
 | static_share | 0.924abs | 0.96abs | ±0.036 | PASS |
-| saturation | 0.5066abs | 0.4979abs | ±0.009 | PASS |
-| luma | 68.17abs | 67.8abs | ±0.370 | PASS |
-| dark_share | 0.502abs | 0.446abs | ±0.056 | PASS |
-| bright_share | 0.064abs | 0.087abs | ±0.023 | PASS |
-| edge_density | 1.6469abs | 2.9039abs | ±1.257 | FAIL |
-| palette_distance | — | — | 28.7 rgb | FAIL |
+| saturation | 0.5066abs | 0.5089abs | ±0.002 | PASS |
+| luma | 68.17abs | 67.49abs | ±0.680 | PASS |
+| dark_share | 0.502abs | 0.444abs | ±0.058 | PASS |
+| bright_share | 0.064abs | 0.08abs | ±0.016 | PASS |
+| edge_density | 1.6469abs | 2.8634abs | ±1.216 | FAIL |
+| palette_distance | — | — | 27.5 rgb | FAIL |
 | rms_db | -13.03dB | -12.15dB | ±0.880 | PASS |
 | lufs | -14.02LUFS | -14.37LUFS | ±0.350 | PASS |
 | true_peak | -0.31dBTP | -0.05dBTP | ±0.260 | PASS |
