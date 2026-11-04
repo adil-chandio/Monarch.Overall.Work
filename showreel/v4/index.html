@@ -88,10 +88,17 @@
 
   <!-- ===================== S1 · 0.00–0.53  TWENTY on white ===================== -->
   <section class="scene" id="s1">
-    <div class="plate" id="s1plate" style="background:#bababa;"></div>
-    <div class="grading" style="background:radial-gradient(78% 58% at 46% 46%, rgba(255,255,255,.62), rgba(186,186,186,0) 72%);"></div>
-    <div id="s1sweep" style="position:absolute; top:0; left:-520px; width:520px; height:1280px; mix-blend-mode:soft-light;
-         background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.95) 46%, rgba(255,255,255,0) 100%);"></div>
+    <!-- REF-01's own first frame is a white plate with a soft vignette and a word
+         rising into it. The plate MOVES here: a scale on a flat colour moves no
+         pixels, which is why the hook measured 0.056 against the reference's 0.108.
+         So the thing that scales is a high-contrast radial gradient with a dark
+         corner, plus a ghost word travelling across frame. -->
+    <div id="s1zoom" style="position:absolute; inset:-8%; will-change:transform;
+         background:radial-gradient(58% 40% at 46% 44%, #ffffff 0%, #ededed 42%, #b9b9b9 78%, #8f8f8f 100%);"></div>
+    <div id="s1ghost" style="position:absolute; left:-120px; top:520px; font-family:'Anton'; font-size:300px;
+         color:#b9d9a4; opacity:.5; white-space:pre; will-change:transform;">TWENTY</div>
+    <div id="s1sweep" style="position:absolute; top:0; left:-560px; width:560px; height:1280px;
+         background:linear-gradient(96deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 48%, rgba(255,255,255,0) 100%);"></div>
     <div class="t kicker" id="s1w" style="left:120px; top:640px; color:#5ea015; opacity:0;">TWENTY</div>
   </section>
 
@@ -292,11 +299,14 @@
   /* the hook has to move: 0.108 motion in the reference's first second, measured.
      A word fading up cannot reach that, so the plate pushes and the word rises into
      it — the same trick the reference uses before its first cut. */
-  tl.fromTo("#s1plate", { scale: 1.10 }, { scale: 1.0, duration: 0.6, ease: "power2.out" }, 0);
-  tl.fromTo("#s1sweep", { x: 0 }, { x: 1280, duration: 0.52, ease: "power1.inOut" }, 0.02);
-  tl.set("#s1sweep", { opacity: 0 }, 0.56);
-  tl.fromTo("#s1w", { opacity: 0, x: -46, scale: 0.96 },
-    { opacity: 1, x: 0, scale: 1, duration: 0.30, ease: "power3.out" }, 0.05);
+  /* three things move at once so the first second has the reference's density:
+     the gradient pushes back, a ghost word crosses frame, and the real word lands */
+  tl.fromTo("#s1zoom", { scale: 1.22 }, { scale: 1.0, duration: 0.55, ease: "power2.out" }, 0);
+  tl.fromTo("#s1ghost", { x: 0 }, { x: 660, duration: 0.55, ease: "power1.out" }, 0);
+  tl.fromTo("#s1sweep", { x: 0 }, { x: 1320, duration: 0.46, ease: "power1.inOut" }, 0.03);
+  tl.set("#s1sweep", { opacity: 0 }, 0.50);
+  tl.fromTo("#s1w", { opacity: 0, y: 28, scale: 0.95 },
+    { opacity: 1, y: 0, scale: 1, duration: 0.26, ease: "power3.out" }, 0.10);
 
   /* ================= S2 · TWENTY slides in, BILLION snaps onto it ===== */
   tl.set("#s2a", { x: -260, opacity: 0, filter: "blur(14px)" }, 0);
