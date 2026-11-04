@@ -138,15 +138,18 @@ def rows(ref: dict[str, Any], got: dict[str, Any]) -> list[tuple[str, str, str, 
     # cut alignment is its own row because one bad cut ruins the illusion
     rc = [float(c["time"]) for c in g(ref, "cuts", default=[]) or []]
     gc = [float(c["time"]) for c in g(got, "cuts", default=[]) or []]
-    deltas, worst = pair_cuts(rc, gc)
-    if deltas:
-        within = sum(1 for d in deltas if d <= 0.033)
+    # match by nearest neighbour inside one frame, then report recall AND precision:
+    # a rebuild can hit every cut by cutting everywhere, and that is not the same film
+    matched = [c for c in rc if any(abs(c - x) <= 1 / 30 + 1e-6 for x in gc)]
+    extra = [x for x in gc if not any(abs(x - c) <= 1 / 30 + 1e-6 for c in rc)]
+    if rc:
+        worst = max((min([abs(c - x) for x in gc]) if gc else 9.9) for c in rc)
         out.append((
             "cut_alignment",
             f"{len(rc)} cuts",
             f"{len(gc)} cuts",
-            f"{within}/{len(deltas)} within 1 frame (worst {worst * 1000:.0f} ms)",
-            within == len(deltas),
+            f"recall {len(matched)}/{len(rc)}, {len(extra)} extra, worst offset {worst * 1000:.0f} ms",
+            len(matched) == len(rc) and len(extra) == 0,
         ))
     return out
 
