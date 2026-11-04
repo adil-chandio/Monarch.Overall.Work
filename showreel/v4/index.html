@@ -175,7 +175,7 @@
          into the plate, so this scene showed a green field with green bag while
          the reference had already gone grey with a grey bag — a colour state that
          belongs to an earlier moment, baked into a later one. -->
-    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-grey.png'); filter:none;"></div>
+    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-plate.png'); filter:saturate(1);"></div>
     <!-- "NO" is a separate layer because it is not in the plate yet at the frame the
          plate was taken from: the reference brings HE SAID first and NO slams in
          after it. It was cut by unmixing two of the reference's own frames — the
@@ -184,10 +184,10 @@
     <!-- HE SAID and NO arrive as two beats, so they are two layers: the plate has
          neither. Both cut by unmixing two of the reference's own frames, which
          gives a real alpha and no fringe. -->
-    <div class="layer" id="s5he" style="left:112px; top:336px; width:464px; height:62px;
+    <div class="layer" id="s5he" style="left:114px; top:235px; width:468px; height:163px;
          background:url('./assets/ref/s5-he-layer.png') center/100% 100% no-repeat; opacity:0;
          will-change:transform,opacity;"></div>
-    <div class="layer" id="s5no" style="left:110px; top:387px; width:490px; height:205px;
+    <div class="layer" id="s5no" style="left:112px; top:388px; width:480px; height:196px;
          background:url('./assets/ref/s5-no.png') center/100% 100% no-repeat; opacity:0;
          will-change:transform,opacity;"></div>
   </section>
@@ -441,6 +441,12 @@
      reference does it — measured absent at 2.05 s, fully arrived by 2.95 s. */
   /* two beats, measured: HE SAID lands around 2.5 s, NO slams at 2.3 and is fully
      in by 2.95. NO is the bigger, harder hit, so it moves further and faster. */
+  /* the colour sweep is not a cut, it is one continuous loss of saturation inside
+     this shot: measured 2.10 s (saturated) to 2.95 s (neutral). Running it here
+     means the plate can be a frame with no type in it and still end up the right
+     colour — which no single reference frame is. */
+  tl.fromTo("#s5plate", { filter: "saturate(1) brightness(1.06)" },
+    { filter: "saturate(0.06) brightness(1.0)", duration: 0.85, ease: "power2.inOut" }, 2.10);
   tl.fromTo("#s5he", { opacity: 0, scale: 1.25, y: 14 },
     { opacity: 1, scale: 1.0, y: 0, duration: 0.18, ease: "power3.out" }, 2.42);
   tl.fromTo("#s5no", { opacity: 0, scale: 1.55, y: -26 },
