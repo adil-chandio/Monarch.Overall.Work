@@ -1,77 +1,150 @@
-::notice::packaging kernel compali/monarch-v3-voice-021627 for compali
-packaged compali/monarch-v3-voice-021627 (machine_shape NvidiaTeslaT4, 443,514 chars)
-::notice::pushing compali/monarch-v3-voice-021627
-Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-021627
-[02:16:30] compali/monarch-v3-voice-021627 -> compali/monarch-v3-voice-021627 has status "KernelWorkerStatus.QUEUED"
-[02:16:50] compali/monarch-v3-voice-021627 -> compali/monarch-v3-voice-021627 has status "KernelWorkerStatus.RUNNING"
-[02:17:11] compali/monarch-v3-voice-021627 -> compali/monarch-v3-voice-021627 has status "KernelWorkerStatus.RUNNING"
-[02:17:31] compali/monarch-v3-voice-021627 -> compali/monarch-v3-voice-021627 has status "KernelWorkerStatus.ERROR"
-  0%|          | 0.00/27.6k [00:00<?, ?B/s]100%|██████████| 27.6k/27.6k [00:00<00:00, 2.24MB/s]
+::notice::packaging kernel compali/monarch-v3-voice-022126 for compali
+packaged compali/monarch-v3-voice-022126 (machine_shape NvidiaTeslaT4, 443,586 chars)
+::notice::pushing compali/monarch-v3-voice-022126
+Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-022126
+[02:21:28] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.QUEUED"
+[02:21:48] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:22:09] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:22:29] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:22:50] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:23:10] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:23:31] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:23:51] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:24:12] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:24:32] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:24:52] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:25:13] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:25:33] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:25:54] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:26:14] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:26:34] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:26:55] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:27:15] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:27:36] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:27:56] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:28:17] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:28:37] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:28:57] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:29:18] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.RUNNING"
+[02:29:38] compali/monarch-v3-voice-022126 -> compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.COMPLETE"
+  0%|          | 0.00/27.6k [00:00<?, ?B/s]100%|██████████| 27.6k/27.6k [00:00<00:00, 20.1MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-021627/out/vo/03-gap.mp3
-Downloading 04-lie.mp3 to /tmp/vkwork/monarch-v3-voice-021627/out/vo
-  0%|          | 0.00/25.2k [00:00<?, ?B/s]100%|██████████| 25.2k/25.2k [00:00<00:00, 2.37MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-022126/out/vo/03-gap.mp3
+Downloading 04-lie.mp3 to /tmp/vkwork/monarch-v3-voice-022126/out/vo
+  0%|          | 0.00/25.2k [00:00<?, ?B/s]100%|██████████| 25.2k/25.2k [00:00<00:00, 75.2MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-021627/out/vo/04-lie.mp3
-Downloading 05-shift.mp3 to /tmp/vkwork/monarch-v3-voice-021627/out/vo
-  0%|          | 0.00/25.3k [00:00<?, ?B/s]100%|██████████| 25.3k/25.3k [00:00<00:00, 2.09MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-022126/out/vo/04-lie.mp3
+Downloading 05-shift.mp3 to /tmp/vkwork/monarch-v3-voice-022126/out/vo
+  0%|          | 0.00/25.3k [00:00<?, ?B/s]100%|██████████| 25.3k/25.3k [00:00<00:00, 42.4MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-021627/out/vo/05-shift.mp3
-Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-021627/out/vo
-  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 1.76MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-022126/out/vo/05-shift.mp3
+Downloading 06-audience.mp3 to /tmp/vkwork/monarch-v3-voice-022126/out/vo
+  0%|          | 0.00/21.0k [00:00<?, ?B/s]100%|██████████| 21.0k/21.0k [00:00<00:00, 75.3MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-021627/out/vo/06-audience.mp3
-Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-021627/out/vo
-  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 1.50MB/s]
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-022126/out/vo/06-audience.mp3
+Downloading 07-end.mp3 to /tmp/vkwork/monarch-v3-voice-022126/out/vo
+  0%|          | 0.00/17.7k [00:00<?, ?B/s]100%|██████████| 17.7k/17.7k [00:00<00:00, 65.8MB/s]
 
-Output file downloaded to /tmp/vkwork/monarch-v3-voice-021627/out/vo/07-end.mp3
-Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-021627/out/monarch-v3-voice-021627.log 
-/tmp/vkwork/monarch-v3-voice-021627/out:
-total 8
--rw-r--r-- 1 runner runner 5335 Nov  4 02:17 monarch-v3-voice-021627.log
-drwxr-xr-x 2 runner runner  180 Nov  4 02:17 vo
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-022126/out/vo/07-end.mp3
+Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-022126/out/monarch-v3-voice-022126.log 
+/tmp/vkwork/monarch-v3-voice-022126/out:
+total 24
+drwxr-xr-x 5 runner runner  4096 Nov  4 02:30 models
+-rw-r--r-- 1 runner runner 10957 Nov  4 02:30 monarch-v3-voice-022126.log
+drwxr-xr-x 2 runner runner  4096 Nov  4 02:30 monarch_out
+drwxr-xr-x 2 runner runner  4096 Nov  4 02:30 vo
 
-/tmp/vkwork/monarch-v3-voice-021627/out/vo:
-total 176
--rw-r--r-- 1 runner runner 17901 Nov  4 02:17 01-hook.mp3
--rw-r--r-- 1 runner runner 24813 Nov  4 02:17 02-rest.mp3
--rw-r--r-- 1 runner runner 28269 Nov  4 02:17 03-gap.mp3
--rw-r--r-- 1 runner runner 25773 Nov  4 02:17 04-lie.mp3
--rw-r--r-- 1 runner runner 25869 Nov  4 02:17 05-shift.mp3
--rw-r--r-- 1 runner runner 21549 Nov  4 02:17 06-audience.mp3
--rw-r--r-- 1 runner runner 18093 Nov  4 02:17 07-end.mp3
-::error::kernel compali/monarch-v3-voice-021627 produced no words.json (status: compali/monarch-v3-voice-021627 has status "KernelWorkerStatus.ERROR")
-0.00s - Debugger warning: It seems that frozen modules are being used, which may
-0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
-0.00s - to python to disable frozen modules.
-0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
-0.00s - Debugger warning: It seems that frozen modules are being used, which may
-0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
-0.00s - to python to disable frozen modules.
-0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
-unpacked VO files: ['01-hook.mp3', '02-rest.mp3', '03-gap.mp3', '04-lie.mp3', '05-shift.mp3', '06-audience.mp3', '07-end.mp3']
-pip faster-whisper>=1.0.3 rc= 0
-['faster-whisper>=1.0.3: rc=0', 'ctranslate2>=4.4.0: present', 'nvidia-cublas-cu12: present', 'nvidia-cudnn-cu12: present']
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-    import sys;import papermill as pm;pm.execute_notebook("__notebook__.ipynb","__notebook__.ipynb",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)
-                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 131, in execute_notebook
-    raise_for_execution_errors(nb, output_path)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 251, in raise_for_execution_errors
-    raise error
-papermill.exceptions.PapermillExecutionError: 
----------------------------------------------------------------------------
-Exception encountered at "In [1]":
----------------------------------------------------------------------------
-NameError                                 Traceback (most recent call last)
-/tmp/ipykernel_22/3029138018.py in <cell line: 0>()
-     86 
-     87 
----> 88 receipt["nvidia_lib_dirs"] = enable_nvidia_libs()
-     89 print("nvidia lib dirs:", receipt["nvidia_lib_dirs"], flush=True)
-     90 
-NameError: name 'receipt' is not defined
+/tmp/vkwork/monarch-v3-voice-022126/out/models:
+total 12
+-rw-r--r-- 1 runner runner  191 Nov  4 02:22 CACHEDIR.TAG
+drwxr-xr-x 3 runner runner 4096 Nov  4 02:29 blobs
+drwxr-xr-x 5 runner runner 4096 Nov  4 02:30 models--Systran--faster-whisper-large-v3
+
+/tmp/vkwork/monarch-v3-voice-022126/out/models/blobs:
+total 4
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:30 28
+
+/tmp/vkwork/monarch-v3-voice-022126/out/models/blobs/28:
+total 3014936
+-rw-r--r-- 1 runner runner 3087284237 Nov  4 02:29 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a
+-rw-r--r-- 1 runner runner          0 Nov  4 02:22 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.lock
+-rw-r--r-- 1 runner runner        112 Nov  4 02:22 28bbcc8f4671df0a8411524f1973dbc978d276b79cac96059a737abadf3c134a.refs
+
+/tmp/vkwork/monarch-v3-voice-022126/out/models/models--Systran--faster-whisper-large-v3:
+total 12
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:30 blobs
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:30 refs
+drwxr-xr-x 2 runner runner 4096 Nov  4 02:30 trees
+
+/tmp/vkwork/monarch-v3-voice-022126/out/models/models--Systran--faster-whisper-large-v3/blobs:
+total 3476
+-rw-r--r-- 1 runner runner 1068114 Nov  4 02:22 0adcd01e7c237205d593b707e66dd5d7bc785d2d
+-rw-r--r-- 1 runner runner 2480617 Nov  4 02:22 3a5e2ba63acdcac9a19ba56cf9bd27f185bfff61
+-rw-r--r-- 1 runner runner    2394 Nov  4 02:22 75336feae814999bae6ccccdecf177639ffc6f9d
+-rw-r--r-- 1 runner runner     340 Nov  4 02:22 931c77a740890c46365c7ae0c9d350ba3cca908f
+
+/tmp/vkwork/monarch-v3-voice-022126/out/models/models--Systran--faster-whisper-large-v3/refs:
+total 4
+-rw-r--r-- 1 runner runner 40 Nov  4 02:22 main
+
+::error::kernel compali/monarch-v3-voice-022126 produced no words.json (status: compali/monarch-v3-voice-022126 has status "KernelWorkerStatus.COMPLETE")
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cusparselt/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/nccl/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/nvjitlink/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/nvshmem/lib"
+ ],
+ "torch": "2.11.0+cu130",
+ "cuda_available": true,
+ "gpu_count": 2,
+ "devices": [
+  {
+   "index": 0,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  },
+  {
+   "index": 1,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  }
+ ],
+ "nvidia_smi": "GPU 0: Tesla T4 (UUID: GPU-a454ee23-b8b5-f97a-e956-b2208f1bac40)\nGPU 1: Tesla T4 (UUID: GPU-f502fe6d-d1ce-025f-4892-e014037159b4)"
+}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+backend: faster-whisper large-v3 float16 cuda
+decoded: [('01-hook.mp3', 69760, 4.36), ('02-rest.mp3', 97280, 6.08), ('03-gap.mp3', 111360, 6.96), ('04-lie.mp3', 101120, 6.32), ('05-shift.mp3', 101760, 6.36), ('06-audience.mp3', 84480, 5.28), ('07-end.mp3', 70400, 4.4)]
+[1/7] 01-hook.mp3  dur=4.36s  rtf=0.372  words=13
+[2/7] 02-rest.mp3  dur=6.08s  rtf=0.2192  words=15
+[3/7] 03-gap.mp3  dur=6.96s  rtf=0.2386  words=13
+[4/7] 04-lie.mp3  dur=6.32s  rtf=0.2894  words=18
+[5/7] 05-shift.mp3  dur=6.36s  rtf=0.2662  words=13
+[6/7] 06-audience.mp3  dur=5.28s  rtf=0.3199  words=14
+[7/7] 07-end.mp3  dur=4.4s  rtf=0.1913  words=7
+WROTE ['receipts_gpu.json', 'words.json']
+{
+ "gpu_count": 2,
+ "devices": [
+  {
+   "index": 0,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  },
+  {
+   "index": 1,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  }
+ ],
+ "model": "faster-whisper large-v3 float16 cuda",
+ "words": 93,
+ "mean_word_prob": 0.964,
+ "wall_s": 0.84,
+ "audio_total_s": 39.76
+}
   cells[i][c] = re.sub('\\\\\|', '|', cell)
   text = re.sub(r'_', '\_', text) # Escape underscores in display text
