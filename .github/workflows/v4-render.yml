@@ -47,11 +47,15 @@ jobs:
           python-version: "3.11"
 
       - name: Install ffmpeg, fonts and Python DSP
+        timeout-minutes: 8
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          # scipy and pillow from apt for the same reason as numpy in the checkpoint
+          # job: pip against the public index has stalled for eight minutes here,
+          # with no output, in a job whose other steps take seconds.
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core python3-numpy python3-scipy python3-pil
           ffmpeg -hide_banner -version | head -n 1
-          python -m pip install --disable-pip-version-check -q numpy scipy pillow
+          python3 -c "import numpy, scipy, PIL; print('numpy', numpy.__version__, '| scipy', scipy.__version__)"
 
       - name: Provision chrome-headless-shell
         run: |

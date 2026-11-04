@@ -42,14 +42,15 @@ jobs:
           python-version: "3.11"
 
       - name: Install ffmpeg, fonts and the Python the checks need
+        timeout-minutes: 6
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg fonts-dejavu >/dev/null
+          # numpy comes from apt, not pip: check_part.py needs it, and 'pip install
+          # numpy' sat for eight minutes on the package index during a run that
+          # otherwise takes three — a stall with no output that looked exactly like
+          # a hung job. The Ubuntu packages are prebuilt and install in seconds.
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu python3-numpy >/dev/null
           ffmpeg -version | head -1
-          # check_part.py reads frames with numpy. The render job gets it through its
-          # "Python DSP" step; this job did not, which is why its frame check exited 1
-          # on every run while the same script passed locally.
-          python3 -m pip install --quiet --upgrade numpy
           python3 -c "import numpy; print('numpy', numpy.__version__)"
 
       # ONE install for every node dependency this job needs. A second
