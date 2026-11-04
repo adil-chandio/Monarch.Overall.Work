@@ -1,0 +1,97 @@
+{
+  "has_audio": true,
+  "rms_db": -12.15,
+  "peak_db": 1.69,
+  "flatness_mean": 0.016,
+  "flatness_p10": 0.002,
+  "flatness_p90": 0.057,
+  "quietest_half_second_db": 0.001,
+  "envelope_periodicity": 0.217,
+  "period_bpm": 166.7,
+  "transient_count": 40,
+  "loudest_transients": [
+    {
+      "t": 3.08,
+      "db": -4.9
+    },
+    {
+      "t": 0.48,
+      "db": -6.8
+    },
+    {
+      "t": 9.37,
+      "db": -7.1
+    },
+    {
+      "t": 15.37,
+      "db": -7.3
+    },
+    {
+      "t": 15.11,
+      "db": -7.6
+    },
+    {
+      "t": 12.1,
+      "db": -7.7
+    },
+    {
+      "t": 15.49,
+      "db": -7.9
+    },
+    {
+      "t": 13.23,
+      "db": -8.0
+    },
+    {
+      "t": 3.23,
+      "db": -8.1
+    },
+    {
+      "t": 12.51,
+      "db": -8.1
+    },
+    {
+      "t": 12.92,
+      "db": -8.1
+    },
+    {
+      "t": 11.56,
+      "db": -8.1
+    }
+  ],
+  "transients_on_cuts": [
+    {
+      "cut": 0.5,
+      "transient": 0.48,
+      "delta_ms": -20,
+      "db": -6.8
+    },
+    {
+      "cut": 3.1,
+      "transient": 3.08,
+      "delta_ms": -20,
+      "db": -4.9
+    },
+    {
+      "cut": 12.167,
+      "transient": 12.16,
+      "delta_ms": -7,
+      "db": -8.2
+    },
+    {
+      "cut": 12.467,
+      "transient": 12.43,
+      "delta_ms": -37,
+      "db": -8.6
+    },
+    {
+      "cut": 12.967,
+      "transient": 12.92,
+      "delta_ms": -47,
+      "db": -8.1
+    }
+  ],
+  "envelope_p10_db": -15.9,
+  "envelope_p50_db": -12.7,
+  "envelope_p90_db": -9.9
+}
