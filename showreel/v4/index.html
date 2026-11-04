@@ -31,6 +31,7 @@
 
   .scene{ position:absolute; inset:0; will-change:transform,opacity,filter;
           opacity:0; }   /* a scene paints only when the timeline turns it on */
+  .layer{ position:absolute; }
   .plate{ position:absolute; inset:0; background-size:cover; background-position:center;
           /* REF-01's plates are soft. Measured on delivered frames: at 3px this
              build reads edge 3.00 on the CTA where the reference reads 1.68, and
@@ -169,7 +170,15 @@
        stool with a different bag on it — a different object, in a different
        place, at a different size. This is the reference's own composition. -->
   <section class="scene" id="s5" style="opacity:0;">
-    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-plate.png'); filter:none;"></div>
+    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-he.png'); filter:none;"></div>
+    <!-- "NO" is a separate layer because it is not in the plate yet at the frame the
+         plate was taken from: the reference brings HE SAID first and NO slams in
+         after it. It was cut by unmixing two of the reference's own frames — the
+         one with NO and the one without — which gives a real alpha instead of a
+         red threshold and leaves no white fringe on the letterforms. -->
+    <div class="layer" id="s5no" style="left:110px; top:387px; width:490px; height:205px;
+         background:url('./assets/ref/s5-no.png') center/100% 100% no-repeat; opacity:0;
+         will-change:transform,opacity;"></div>
   </section>
 
   <!-- ===================== S6 · 3.13–9.13  the reveal plate =====================
@@ -417,6 +426,10 @@
   tl.fromTo("#s5", { scale: 1.0 }, { scale: 1.052, duration: 1.83, ease: "none" }, 1.30);
   tl.fromTo("#s5", { filter: "brightness(1.14)" },
     { filter: "brightness(1.0)", duration: 0.9, ease: "power2.out" }, 1.30);
+  /* NO is not in the plate; it slams in on its own, big and fast, the way the
+     reference does it — measured absent at 2.05 s, fully arrived by 2.95 s. */
+  tl.fromTo("#s5no", { opacity: 0, scale: 1.55, y: -26 },
+    { opacity: 1, scale: 1.0, y: 0, duration: 0.20, ease: "power4.out" }, 2.30);
 
   /* ================= S6 · the reveal plate ================================
      Reference: the mark spins up, the money arrives, "2008" fades up, then the
