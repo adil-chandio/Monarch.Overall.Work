@@ -13,6 +13,7 @@ on:
       - "arena/**"
     paths:
       - "showreel/v3/**"
+      - "public/demo/gpu/words.json"
       - "showreel/v2/audio.py"
       - ".github/workflows/hyperframes-v3.yml"
   workflow_dispatch:
@@ -73,6 +74,11 @@ jobs:
         # catches the failures a browser render would only reveal as a black frame:
         # NaN transforms, all scenes composited at once, a seam that blinks black,
         # a beat where nothing moves
+
+      - name: Sync gate — every line of voice lands inside its own beat
+        run: node tools/verify_sync.mjs
+        # the timings are Whisper large-v3 on Kaggle T4 x2 (public/demo/gpu/):
+        # a line that outlives its beat is cut off mid-word, and this is how we know
 
       - name: Lint gate — refuse to render a broken composition
         run: npx hyperframes lint showreel/v3
