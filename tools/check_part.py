@@ -13,7 +13,10 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import numpy as np
+try:
+    import numpy as np
+except ImportError:  # say why, instead of dying with a bare ImportError
+    raise SystemExit("check_part.py needs numpy — pip install numpy")
 from ffbin import ffmpeg
 
 W, H = 480, 854
