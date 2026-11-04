@@ -11,6 +11,7 @@ Follows skills/monarch-video-lab/sound-design:
 
 Writes public/demo/v2-mix.wav (48 kHz, stereo, float32).
 """
+import argparse
 import json
 import subprocess
 import wave
@@ -21,7 +22,8 @@ from scipy import signal
 
 SR = 48000
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "public/demo/v2-mix.wav"
+DEFAULT_SEAMS = ROOT / "showreel/v2/seams.json"
+DEFAULT_OUT = ROOT / "public/demo/v2-mix.wav"
 FFMPEG = ROOT / ".venv/lib/python3.11/site-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
 
 BPM = 120.0
@@ -208,7 +210,14 @@ def rms_db(x: np.ndarray) -> float:
 
 
 def main() -> None:
-    seams = json.loads((ROOT / "showreel/v2/seams.json").read_text())
+    ap = argparse.ArgumentParser(description="build the score and frame-locked SFX")
+    ap.add_argument("--seams", default=str(DEFAULT_SEAMS),
+                    help="seam manifest written by the picture renderer")
+    ap.add_argument("--out", default=str(DEFAULT_OUT), help="output wav")
+    args = ap.parse_args()
+
+    seams = json.loads(Path(args.seams).read_text())
+    OUT = Path(args.out)
     total = seams["total"]
     beats = seams["beats"]
     n = int(np.ceil(total * SR))
@@ -304,6 +313,13 @@ def main() -> None:
         # a riser into the two arrivals that need tension
         if beat["name"] in ("swap", "comments"):
             place(sfx, riser(1.4, gain=0.30, seed=300 + i), at - 1.4)
+
+    # inserts are their own shots, so they get their own arrival cue
+    for ins in seams.get("inserts", []):
+        at = float(ins["start"])
+        place(sfx, silk_whoosh(0.45, 420, 3400, gain=0.50, seed=int(at * 10)), at - 0.20)
+        place(sfx, cinema_sub_boom(0.95, gain=0.70, seed=int(at * 7)), at, gain=0.85)
+        place(sfx, thock_click(0.30), at + 0.02)
 
     # UI foley: every count tick gets a quiet click — the numbers sound like instruments
     rng_at = [0.0]
