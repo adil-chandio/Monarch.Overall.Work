@@ -181,7 +181,8 @@
          because it drains the bag and the field by the same amount and the reference
          drains them at different rates — measured, the bag goes neutral by 2.25 s
          while the field is still 4 % green at 2.05. -->
-    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5plate-base.png');"></div>
+    <div class="plate" id="s5plate0" style="background-image:url('./assets/ref/s5plate-entry.png');"></div>
+    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5plate-base.png'); opacity:0;"></div>
     <div class="plate" id="s5plate2" style="background-image:url('./assets/ref/s5-plate.png'); opacity:0;"></div>
     <!-- "NO" is a separate layer because it is not in the plate yet at the frame the
          plate was taken from: the reference brings HE SAID first and NO slams in
@@ -463,6 +464,8 @@
      and the two surfaces go at different rates — the bag is neutral by 2.25 while
      the field still holds 4 % at 2.05. So the sweep is a crossfade between the
      plate and the same frame drained, not a filter on both at once. */
+  /* the entry: BILLION over the field, and the word is gone by 1.85 */
+  tl.to("#s5plate", { opacity: 1.0, duration: 0.40, ease: "power2.inOut" }, 1.33);
   tl.to("#s5plate2", { opacity: 0.55, duration: 0.45, ease: "power2.out" }, 1.36);
   tl.to("#s5plate2", { opacity: 1.0, duration: 0.42, ease: "power1.in" }, 1.83);
 

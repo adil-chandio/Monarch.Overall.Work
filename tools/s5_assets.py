@@ -30,7 +30,7 @@ from ffbin import ffmpeg
 
 REF = "analysis/attachment-filename-How-to-Edit-VIRAL-RE/reference.mp4"
 OUT = Path("showreel/v4/assets/ref")
-PLATE_T, CLEAN_T, FULL_T = 1.37, 2.05, 2.95
+ENTRY_T, PLATE_T, CLEAN_T, FULL_T = 1.45, 1.85, 2.05, 2.95
 FF = ffmpeg()
 
 
@@ -76,21 +76,30 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     plate, full, clean = grab(PLATE_T), grab(FULL_T), grab(CLEAN_T)
 
+    # The shot enters with BILLION over the field and the bag further from the lens;
+    # both are gone by 1.85. Neither state can be faked from the other, so the scene
+    # holds the entry frame and dissolves to the settled one — the word leaves the
+    # way the reference's does, in one move, rather than being invented.
+    entry = grab(ENTRY_T)
+    cv2.imwrite(str(OUT / "s5plate-entry.png"), cv2.cvtColor(entry, cv2.COLOR_RGB2BGR))
+    print(f"  s5plate-entry.png the reference at {ENTRY_T}s — BILLION still over the field")
+
     for name, f in (("plate 2.05", plate), ("full 2.95", full)):
         r, g, b = f[:, :, 0], f[:, :, 1], f[:, :, 2]
         red = (r > 80) & (r - g > 35) & (r - b > 35)
         print(f"  {name}: {int(red.sum())} red pixels")
 
     cv2.imwrite(str(OUT / "s5plate-base.png"), cv2.cvtColor(plate.astype(np.uint8), cv2.COLOR_RGB2BGR))
-    print(f"  s5plate-base.png  the reference at {PLATE_T}s — field and bag still green, no type")
+    print(f"  s5plate-base.png  the reference at {PLATE_T}s — the last frame of the shot with no type in it")
 
-    # What the plate cannot supply is the end of the colour's life: by 2.25 s the
-    # reference has drained the green out of the FIELD as well as the bag, and the
-    # plate's field is green because at 1.37 s it still is. That last stretch is a
-    # saturation and nothing else, so it can be applied to the plate itself rather
-    # than hand-painted. Everything before it comes from the frame, untouched.
-    drained = cv2.cvtColor(plate.astype(np.uint8), cv2.COLOR_RGB2HSV).astype(np.float32)
-    drained[..., 1] *= 0.02
+    # What the plate cannot supply is the END of the colour's life: by 2.25 s the
+    # reference has drained the green from the field as well as the bag. That last
+    # stretch is a saturation and nothing else, so it can be applied to the plate
+    # itself. The plate has to be 1.85 s and not 1.37 s, because BILLION is over the
+    # field at 1.37 — a plate taken there carries the word, and inpainting it out
+    # smears the bills, so the plate is the last frame of the shot that has no type.
+    drained = cv2.cvtColor(plate.astype(np.uint8), cv2.COLOR_RGB2HSV)
+    drained[..., 1] = (drained[..., 1].astype(np.float32) * 0.02).astype(np.uint8)
     cv2.imwrite(str(OUT / "s5-plate.png"),
                 cv2.cvtColor(cv2.cvtColor(drained, cv2.COLOR_HSV2RGB), cv2.COLOR_RGB2BGR))
     print("  s5-plate.png      the same frame with the colour drained — the end of the sweep")
@@ -122,10 +131,10 @@ def main() -> None:
     cut_out("s5-no", lo, full)
 
     # the measured colour endpoints, so the page animates to something real
-    swept = plate.mean(axis=(0, 1)).round(1)
-    ended = full.mean(axis=(0, 1)).round(1)
+    swept = plate.mean(axis=(0, 1)).round(0)
+    ended = full.mean(axis=(0, 1)).round(0)
     print(f"  frame mean, {PLATE_T}s {swept[0]}/{swept[1]}/{swept[2]} -> {FULL_T}s {ended[0]}/{ended[1]}/{ended[2]}")
-    print(f"  animation window: {PLATE_T}s -> {FULL_T}s, saturate 1 -> 0")
+    print("  the plate is the shot as it ENTERS the frame; the drained copy is the end state")
 
 
 if __name__ == "__main__":
