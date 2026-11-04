@@ -20,8 +20,9 @@ OUT.mkdir(parents=True, exist_ok=True)
 VO = pathlib.Path("/kaggle/working/vo")
 VO.mkdir(parents=True, exist_ok=True)
 
-PAYLOAD = json.loads(__PAYLOAD__)
-TIMING = json.loads(__TIMING__)
+# substituted as Python/JSON literals by the packager — not re-parsed
+PAYLOAD = __PAYLOAD__
+TIMING = __TIMING__
 
 for name, b64 in PAYLOAD.items():
     (VO / name).write_bytes(base64.b64decode(b64))

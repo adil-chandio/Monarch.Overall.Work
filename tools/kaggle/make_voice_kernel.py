@@ -36,7 +36,7 @@ def build_source() -> str:
 
     src = KERNEL.read_text()
     src = src.replace("__PAYLOAD__", json.dumps(payload))
-    src = src.replace("__TIMING__", json.dumps(json.dumps(timing)))
+    src = src.replace("__TIMING__", json.dumps(timing))
 
     if "__PAYLOAD__" in src or "__TIMING__" in src:
         raise SystemExit("placeholder substitution failed")
