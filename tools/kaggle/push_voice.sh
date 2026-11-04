@@ -50,9 +50,22 @@ cp -f "${KDIR}/out/receipts_gpu.json" "${OUT_DIR}/receipts_gpu.json" 2>/dev/null
 
 if [ ! -s "${OUT_DIR}/words.json" ]; then
   echo "::error::kernel ${REF} produced no words.json (status: ${STATUS})"
-  for f in "${KDIR}"/out/*.log; do
-    [ -s "$f" ] && tail -c 4000 "$f"
-  done
+  # Surface the kernel's own failure text, not just the status string: Kaggle
+  # stores the log as a JSON array of stream items.
+  python3 - "${KDIR}" <<'KLOG'
+import glob, json, sys
+kdir = sys.argv[1]
+blob = ""
+for p in glob.glob(f"{kdir}/out/*.log"):
+    try:
+        items = json.loads(open(p, errors="ignore").read())
+        blob += "".join(str(i.get("data", "")) for i in items if isinstance(i, dict))
+    except Exception:
+        blob += open(p, errors="ignore").read()
+lines = [l for l in blob.splitlines()
+         if l.strip() and "NbConvertApp" not in l and "SyntaxWarning" not in l]
+print("\n".join(lines[-60:]))
+KLOG
   exit 1
 fi
 

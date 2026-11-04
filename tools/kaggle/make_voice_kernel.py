@@ -51,11 +51,27 @@ for name, b64 in PAYLOAD.items():
     (VO / name).write_bytes(base64.b64decode(b64))
 print("unpacked VO files:", sorted(p.name for p in VO.glob("*.mp3")), flush=True)
 
-# the *kernel's own* interpreter, never the packager's: baking this machine's
-# sys.executable in produced FileNotFoundError inside Kaggle.
-import sys as _sys
-subprocess.run([_sys.executable, "-m", "pip", "install", "-q", "--no-input",
-                "faster-whisper==1.0.3"], check=True)
+# Kaggle's image already carries torch/ctranslate2; install only what is
+# missing, and let pip TALK when it fails (a quiet pip cost two runs).
+def ensure(module, spec):
+    try:
+        __import__(module)
+        return f"{{spec}}: present"
+    except Exception:
+        pass
+    r = subprocess.run([sys.executable, "-m", "pip", "install", "--no-input",
+                        "--no-cache-dir", "--disable-pip-version-check",
+                        "--break-system-packages", spec],
+                       capture_output=True, text=True)
+    print(f"pip {{spec}} rc={{r.returncode}}", flush=True)
+    if r.returncode != 0:
+        print((r.stdout or "")[-1500:], flush=True)
+        print((r.stderr or "")[-1500:], flush=True)
+    return f"{{spec}}: rc={{r.returncode}}"
+
+install_log = [ensure("faster_whisper", "faster-whisper>=1.0.3"),
+               ensure("ctranslate2", "ctranslate2>=4.4.0")]
+print(install_log, flush=True)
 
 receipt = {{"stage": "gpu", "python": os.sys.version.split()[0]}}
 try:
@@ -78,42 +94,70 @@ except Exception as exc:
     receipt["nvidia_smi"] = f"unavailable: {{exc}}"
 print(json.dumps(receipt, indent=1), flush=True)
 
-from faster_whisper import WhisperModel
+receipt["install"] = install_log
 
+backend = ""
+model = None
 t0 = time.time()
-model = WhisperModel("large-v3", device="cuda", compute_type="float16", download_root="/kaggle/working/models")
+try:
+    from faster_whisper import WhisperModel
+    model = WhisperModel("large-v3", device="cuda", compute_type="float16",
+                         download_root="/kaggle/working/models")
+    backend = "faster-whisper large-v3 float16 cuda"
+except Exception as exc:
+    receipt["faster_whisper_error"] = f"{{type(exc).__name__}}: {{str(exc)[:400]}}"
+    print("faster-whisper unusable ->", receipt["faster_whisper_error"], flush=True)
+
+if model is None:
+    # second backend: whatever Kaggle's image already ships
+    import whisper
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = whisper.load_model("large-v3", device=device)
+    backend = f"openai-whisper large-v3 {{device}}"
+
 receipt["model_load_s"] = round(time.time() - t0, 2)
-receipt["model"] = "faster-whisper large-v3 float16 cuda"
+receipt["model"] = backend
+print("backend:", backend, flush=True)
 
 beats = []
 audio_total = 0.0
 for idx, (name, start) in enumerate(zip(sorted(PAYLOAD), TIMING["starts"])):
     t0 = time.time()
-    segments, info = model.transcribe(
-        str(VO / name),
-        language="hi",
-        task="transcribe",
-        word_timestamps=True,
-        vad_filter=True,
-        beam_size=5,
-        condition_on_previous_text=False,
-    )
     words, text_parts, seg_rows = [], [], []
-    for seg in segments:
-        seg_rows.append({{"start": round(seg.start, 3), "end": round(seg.end, 3),
-                         "text": seg.text.strip()}})
-        text_parts.append(seg.text.strip())
-        for w in (seg.words or []):
-            words.append({{"w": w.word.strip(), "s": round(w.start, 3),
-                          "e": round(w.end, 3), "p": round(float(w.probability), 3)}})
-    dur = float(info.duration)
+    if backend.startswith("faster-whisper"):
+        segments, info = model.transcribe(
+            str(VO / name), language="hi", task="transcribe", word_timestamps=True,
+            vad_filter=True, beam_size=5, condition_on_previous_text=False)
+        for seg in segments:
+            seg_rows.append({{"start": round(seg.start, 3), "end": round(seg.end, 3),
+                             "text": seg.text.strip()}})
+            text_parts.append(seg.text.strip())
+            for w in (seg.words or []):
+                words.append({{"w": w.word.strip(), "s": round(w.start, 3),
+                              "e": round(w.end, 3), "p": round(float(w.probability), 3)}})
+        dur = float(info.duration)
+        lang, lang_prob = info.language, float(info.language_probability)
+    else:
+        res = model.transcribe(str(VO / name), language="hi", word_timestamps=True,
+                               verbose=False)
+        dur = float(res.get("duration") or 0.0)
+        lang, lang_prob = "hi", 1.0
+        for seg in res.get("segments", []):
+            seg_rows.append({{"start": round(seg["start"], 3), "end": round(seg["end"], 3),
+                             "text": str(seg.get("text", "")).strip()}})
+            text_parts.append(str(seg.get("text", "")).strip())
+            for w in seg.get("words", []) or []:
+                words.append({{"w": str(w.get("word", "")).strip(),
+                              "s": round(float(w.get("start", 0)), 3),
+                              "e": round(float(w.get("end", 0)), 3),
+                              "p": round(float(w.get("probability", 0)), 3)}})
     audio_total += dur
     beat = {{
         "file": name,
         "offset": round(float(start), 3),
         "duration": round(dur, 3),
-        "lang": info.language,
-        "lang_prob": round(float(info.language_probability), 3),
+        "lang": lang,
+        "lang_prob": round(lang_prob, 3),
         "text": " ".join(text_parts).strip(),
         "segments": seg_rows,
         "words": words,
