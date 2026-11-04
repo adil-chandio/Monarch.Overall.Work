@@ -1,0 +1,129 @@
+name: v4 render (reference-matched)
+
+# Why this exists: REF-01 was decoded into a measured shot list
+# (docs/reference/REF-01-nvidia-reel.md) and v4 rebuilds it shot for shot.
+# The sandbox that authors the composition has no working Chromium (libnss3 is
+# missing and there is no root), so the picture is rendered on a runner with a
+# real Chrome shell, the score is synthesised in Python, and then the SAME rig
+# that measured the reference is run on the rebuild so "same" is a number, not
+# an opinion.
+
+on:
+  push:
+    branches:
+      - "arena/**"
+    paths:
+      - "showreel/v4/**"
+      - "tools/ref_diff.py"
+      - ".github/workflows/v4-render.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v4-render-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg, fonts and Python DSP
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          ffmpeg -hide_banner -version | head -n 1
+          python -m pip install --disable-pip-version-check -q numpy scipy pillow
+
+      - name: Provision chrome-headless-shell
+        run: |
+          npx --yes @puppeteer/browsers install chrome-headless-shell@stable --path "$PWD/.browsers"
+          echo "CHROME=$(find "$PWD/.browsers" -name 'chrome-headless-shell' -type f | head -n 1)" >> "$GITHUB_ENV"
+          "$(find "$PWD/.browsers" -name 'chrome-headless-shell' -type f | head -n 1)" --version
+
+      - name: Score the film (no VO, pre-cut SFX, measured leads)
+        run: python3 showreel/v4/audio.py --out public/demo/v4-mix.wav
+
+      - name: Composition gate — every element exists, no scene is left visible
+        run: node tools/verify_v4.mjs
+
+      - name: Render 720x1280 @ 30 fps (real Chromium, timeline seeked per frame)
+        run: |
+          npm install --no-save --silent puppeteer-core@23
+          mkdir -p public/demo/v4-frames
+          node tools/render_v4.mjs --out public/demo/v4-silent.mp4
+
+      - name: Probe the picture
+        run: |
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=width,height,r_frame_rate,nb_frames,duration \
+            -of default=noprint_wrappers=1 public/demo/v4-silent.mp4
+
+      - name: Mux and land the master at the reference's own loudness
+        run: |
+          set -euo pipefail
+          ffmpeg -y -i public/demo/v4-silent.mp4 -i public/demo/v4-mix.wav \
+            -c:v copy -c:a aac -b:a 192k -ar 44100 -shortest public/demo/v4-mux.mp4
+          ffmpeg -y -i public/demo/v4-mux.mp4 \
+            -af "loudnorm=I=-14.02:TP=-0.31:LRA=11" -ar 44100 -c:v copy -c:a aac -b:a 192k \
+            -movflags +faststart public/demo/v4.mp4
+          ffmpeg -y -i public/demo/v4-mux.mp4 \
+            -af "loudnorm=I=-14.02:TP=-0.31:LRA=11:print_format=json" -f null - 2>&1 \
+            | grep -E '"input_i"|"input_tp"|"input_lra"' | tee public/demo/v4-loudness.txt
+          ffprobe -v error -show_entries format=duration,size \
+            -show_entries stream=codec_name,width,height,r_frame_rate,sample_rate,channels \
+            -of default=noprint_wrappers=1 public/demo/v4.mp4
+
+      - name: Measure the rebuild with the same rig that measured the reference
+        run: |
+          set -euo pipefail
+          python3 tools/analyse_ref.py public/demo/v4.mp4 --out analysis/v4-build
+          python3 tools/ref_shots.py public/demo/v4.mp4 --analysis analysis/v4-build
+          python3 tools/ref_deep.py public/demo/v4.mp4 --report analysis/v4-build/report.json \
+            --out analysis/v4-build --motion --audio || true
+
+      - name: Numeric diff against the reference
+        run: |
+          set -euo pipefail
+          python3 tools/ref_diff.py \
+            analysis/attachment-filename-How-to-Edit-VIRAL-RE/report.json \
+            analysis/v4-build/report.json \
+            --markdown docs/reference/REF-01-DIFF.md | tee public/demo/v4-diff.txt
+          # the step failing is information, not a crash: keep the artifacts anyway
+          exit 0
+
+      - name: Publish the render, the measurements and the diff
+        if: always()
+        run: |
+          rm -f public/demo/v4-silent.mp4 public/demo/v4-mux.mp4 public/demo/v4-mix.wav
+          git config user.name "monarch-forensics-bot"
+          git config user.email "forensics@monarch.studio"
+          git add -f public/demo/v4.mp4 public/demo/v4-loudness.txt \
+                     analysis/v4-build/*.png analysis/v4-build/*.json \
+                     docs/reference/REF-01-DIFF.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "nothing to publish"
+            exit 0
+          fi
+          git commit -m "chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            sleep 5
+          done
+          echo "::error::could not publish the render"
+          exit 1
