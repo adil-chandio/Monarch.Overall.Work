@@ -274,6 +274,24 @@ console.log('\n── layout: text boxes stay inside their own column ───'
   }
   if (bad) fail.push(`${bad} text box(es) run into the next column`);
 
+  // vertical: everything inside .plate is positioned relative to an 820px-tall box.
+  // The end headline and the top-five verdict both shipped clipped because their `top`
+  // values were written in frame space and applied inside the plate.
+  const PLATE_H = 820;
+  const vertical = [
+    ['top-five last row bottom', 64 + 4 * 114 + 100, PLATE_H],
+    ['top-five verdict baseline', 688 + 48, PLATE_H],
+    ['end WO HISSA', 470 + 118, PLATE_H],
+    ['end JO KOI …', 596 + 74, PLATE_H],
+    ['end underline', 692 + 4, PLATE_H],
+  ];
+  for (const [name, bottom, limit] of vertical) {
+    const ok = bottom <= limit;
+    if (!ok) bad++;
+    console.log(`  ${name.padEnd(28)} bottom ${String(bottom).padStart(4)}  plate ${limit}${ok ? '' : '  <-- CLIPPED'}`);
+  }
+  if (bad) fail.push('content is clipped by the plate');
+
   // every insert must paint its own ground, or the scene underneath shows through it
   // the ground lives in the .ins class, so read the stylesheet rather than the element
   const insRule = (html.match(/\.ins\s*\{[^}]*\}/) || [''])[0];

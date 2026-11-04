@@ -116,7 +116,7 @@
   .ratio-line { position: absolute; height: 4px; background: rgba(255,176,32,.85); transform-origin: left center; }
 
   /* ---------------------------------------------------------------- scene 4 · top five */
-  .row { position: absolute; left: 150px; width: 1420px; height: 108px; border-radius: 12px;
+  .row { position: absolute; left: 150px; width: 1420px; height: 100px; border-radius: 12px;
          background: rgba(124,135,158,.06); display: flex; align-items: center; }
   .row.hot { background: rgba(255,45,70,.10); border: 2px solid rgba(255,45,70,.45); }
   .row.hot::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 7px; background: #ff2d46; border-radius: 12px 0 0 12px; }
@@ -245,10 +245,10 @@
   <section class="scene" id="s4">
     <div class="plate" style="--accent:#ff2d46">
       <div class="ct-1"></div><div class="ct-2"></div>
-      <div class="t-psb" id="s4kick" style="position:absolute; left:160px; top:168px; font-size:42px; color:#7c879e;">TOP FIVE MEIN TEEN</div>
-      <div class="t-anton" id="s4tally" style="position:absolute; left:1500px; top:150px; font-size:62px; color:#ff2d46;">0/5</div>
-      <div id="rows" style="position:absolute; left:0; top:206px; width:1920px; height:620px;"></div>
-      <div id="s4verdict" style="position:absolute; left:150px; top:838px; width:1420px;">
+      <div class="t-psb" id="s4kick" style="position:absolute; left:160px; top:16px; font-size:42px; color:#7c879e;">TOP FIVE MEIN TEEN</div>
+      <div class="t-anton" id="s4tally" style="position:absolute; left:1500px; top:4px; font-size:62px; color:#ff2d46;">0/5</div>
+      <div id="rows" style="position:absolute; left:0; top:64px; width:1920px; height:640px;"></div>
+      <div id="s4verdict" style="position:absolute; left:150px; top:688px; width:1420px;">
         <div style="height:5px; background:#ffb020; transform-origin:left center;" id="s4ul"></div>
         <div class="t-psb" style="font-size:40px; color:#ffb020; margin-top:14px;">KOI NAHI BATATA: KAUN CHHOD GAYA</div>
       </div>
@@ -304,14 +304,14 @@
   <section class="scene" id="s7">
     <div class="plate" style="--accent:#ff2d46">
       <div class="ct-1"></div><div class="ct-2"></div>
-      <div id="reticle" style="position:absolute; left:960px; top:490px; transform:translate(-50%,-50%) scale(.2); opacity:0;">
+      <div id="reticle" style="position:absolute; left:960px; top:340px; transform:translate(-50%,-50%) scale(.2); opacity:0;">
         <div id="retarcs" style="position:absolute; left:-230px; top:-230px; width:460px; height:460px;"></div>
         <div id="retticks" style="position:absolute; left:-290px; top:-290px; width:580px; height:580px;"></div>
         <div style="position:absolute; left:-9px; top:-9px; width:18px; height:18px; border-radius:50%; background:#ff2d46;"></div>
       </div>
-      <div class="t-anton" id="e1" style="position:absolute; width:1920px; text-align:center; top:600px; font-size:130px; color:#fff; letter-spacing:3px;">WO HISSA</div>
-      <div class="t-anton" id="e2" style="position:absolute; width:1920px; text-align:center; top:750px; font-size:80px; color:#ff2d46; letter-spacing:2px;">JO KOI FILM NAHI KARTA</div>
-      <div id="eul" style="position:absolute; left:560px; top:862px; width:0; height:4px; background:rgba(255,45,70,.85);"></div>
+      <div class="t-anton" id="e1" style="position:absolute; width:1920px; text-align:center; top:470px; font-size:118px; color:#fff; letter-spacing:3px;">WO HISSA</div>
+      <div class="t-anton" id="e2" style="position:absolute; width:1920px; text-align:center; top:596px; font-size:74px; color:#ff2d46; letter-spacing:2px;">JO KOI FILM NAHI KARTA</div>
+      <div id="eul" style="position:absolute; left:560px; top:692px; width:0; height:4px; background:rgba(255,45,70,.85);"></div>
     </div>
   </section>
 
@@ -415,7 +415,7 @@
   ROWS.forEach(function (r, i) {
     var el = d.createElement("div");
     el.className = "row" + (r[3] ? " hot" : "");
-    el.style.top = (i * 124) + "px";
+    el.style.top = (i * 114) + "px";
     el.innerHTML = '<div class="n" style="color:' + (r[3] ? "#ff2d46" : "#7c879e") + '">' + r[0] + "</div>"
       + '<div class="lbl">' + r[1] + "</div>"
       + '<div class="v" style="color:' + (r[3] ? "#ff2d46" : "#7c879e") + '">' + r[2] + "</div>";
