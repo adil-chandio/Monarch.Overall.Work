@@ -22,11 +22,15 @@ Reported per shot:
 """
 import subprocess
 import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent))
+import sys
 
 import cv2
 import numpy as np
 
-FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+from ffbin import ffmpeg
+FF = ffmpeg()
 W, H = 720, 1280
 
 

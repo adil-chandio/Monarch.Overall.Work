@@ -10,8 +10,12 @@ artefact masquerading as a match/mismatch.
 import os
 import subprocess
 import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent))
+import sys
 
-FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+from ffbin import ffmpeg
+FF = ffmpeg()
 # the forensic copy under analysis/ is gitignored and so is absent on a runner;
 # the committed copy is the one a fresh checkout actually has
 REF_CANDIDATES = [

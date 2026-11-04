@@ -30,7 +30,11 @@ import sys
 import cv2
 import numpy as np
 
-FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent))
+from ffbin import ffmpeg
+FF = ffmpeg()
 REF = "analysis/attachment-filename-How-to-Edit-VIRAL-RE/reference.mp4"
 OUT = pathlib.Path("showreel/v4/assets/ref")
 
