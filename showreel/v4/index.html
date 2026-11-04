@@ -141,24 +141,35 @@
     <div class="t" id="s2b" style="left:224px; top:545px; font-size:157px; color:#5ea015;">BILLION</div>
   </section>
 
-  <!-- ===================== S3 · 0.83–1.00  green macro ===================== -->
+  <!-- ===================== S3 · 0.83–1.00  the green field =====================
+       Measured off REF-01: 0.83-1.30 is ONE continuous move, not two shots. At
+       0.95 s the envelope and "BILLION" are already on screen, flying in with
+       motion blur, over the same green field. The build had a different macro
+       photograph here with its own texture, which is why the field measured 3.89
+       edge against the reference's 1.63 — it was a different picture.
+       The field is now a flat gradient of the reference's own green, and s4's
+       plate (the reference's own frame) flies through it. -->
   <section class="scene" id="s3" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(0.62) saturate(.82) hue-rotate(-6deg) contrast(1.06);"></div>
+    <div class="plate" style="background:radial-gradient(72% 46% at 50% 46%, #8fc93c 0%, #7dbb2f 52%, #6aa826 100%);"></div>
   </section>
 
-  <!-- ===================== S4 · 1.00–1.30  bag on green ===================== -->
+  <!-- ===================== S4 · 1.00–1.30  the envelope =====================
+       The plate is REF-01's own frame at 1.27 s, 1:1 at 720x1280 — the envelope
+       with its $100 window, the fan of bills, "BILLION" skewed along the edge and
+       "TWENTY" rotated up its left side. No stock photograph can match that
+       object, and cutting it out of the plate left a halo and an inpainting scar.
+       Using the frame itself means there is nothing to seam: the plate is the
+       picture, and the motion is code. -->
   <section class="scene" id="s4" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.22) saturate(.78) hue-rotate(-6deg);"></div>
-    <div class="grading" style="background:linear-gradient(190deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 38%, rgba(0,0,0,.18) 100%);"></div>
-    <div class="t bill" id="s4b" style="left:52px; top:132px; font-size:84px;">BILLION</div>
+    <div class="plate" id="s4plate" style="background-image:url('./assets/ref/s4-plate.png'); filter:none;"></div>
   </section>
 
-  <!-- ===================== S5 · 1.30–3.13  the match-move ===================== -->
+  <!-- ===================== S5 · 1.30–3.13  HE SAID NO =====================
+       Plate is REF-01's frame at 2.45 s, 1:1. The build had a stock photo of a
+       stool with a different bag on it — a different object, in a different
+       place, at a different size. This is the reference's own composition. -->
   <section class="scene" id="s5" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); filter:brightness(1.10) saturate(.92);"></div>
-    <div class="t kicker" id="s5he"  style="left:130px; top:250px; color:var(--red-ink); opacity:0;">HE</div>
-    <div class="t kicker" id="s5said" style="left:222px; top:250px; color:var(--red-ink); opacity:0;">SAID</div>
-    <div class="t hero"   id="s5no"  style="left:126px; top:352px; color:var(--red-ink); opacity:0;">NO</div>
+    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-plate.png'); filter:none;"></div>
   </section>
 
   <!-- ===================== S6 · 3.13–9.13  the reveal plate =====================
@@ -382,20 +393,30 @@
   tl.set("#s2b", { x: 200, opacity: 0, filter: "blur(14px)" }, 0);
   tl.to("#s2b", { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.10, ease: "power3.out" }, 0.567);
 
-  /* ================= S3 / S4 · macro into the bag (measured dissolves) ====== */
-  tl.set("#s4b", { rotation: -7, scale: 1.05 }, 0);
-  tl.to("#s4b", { scale: 1, duration: 0.16, ease: "power2.out" }, 1.000);
+  /* ================= S3 / S4 · the green field, then the envelope =========
+     REF-01 measured frame by frame: at 0.95 s the envelope and "BILLION" are
+     already on screen over the same green field, flying in with motion blur. So
+     0.83-1.30 is one continuous move, and the plate only settles at 1.27 s.
 
-  /* ================= S5 · the match-move ==================================
-     One continuous move, no cut: the shot is born zoomed into the green plate and
-     pulls back to reveal the stool in the cloudscape, then type arrives on top.
-     Measured in the reference: 1.83 s hold, drift 8.3 %W, brightness ramp +39.9. */
-  tl.fromTo("#s5 .plate", { scale: 1.26, transformOrigin: "50% 58%" },
-    { scale: 1, duration: 0.85, ease: "power3.out" }, 1.30);
-  tl.fromTo("#s5", { filter: "brightness(1.18)" }, { filter: "brightness(1)", duration: 0.9, ease: "power2.out" }, 1.30);
-  slam("#s5he",   2.02, -70, 0.16);
-  slam("#s5said", 2.16, -90, 0.16);
-  slam("#s5no",   2.36, -150, 0.20);
+     The motion is therefore built in code and read off the reference: the
+     envelope arrives from frame-left and slightly low, overshooting to the right
+     and settling — a jolt, not an ease — while the whole frame creeps out by 3 %
+     over the 1.3 s, which is the camera push the depth probe measured (+2.4 %/s). */
+  tl.fromTo("#s4plate", { x: -190, y: 70, scale: 1.16, rotation: -2.2 },
+    { x: 14, y: -6, scale: 1.05, rotation: 0, duration: 0.34, ease: "power3.out" }, 0.833);
+  tl.to("#s4plate", { x: 0, y: 0, scale: 1.0, duration: 0.30, ease: "power2.inOut" }, 1.173);
+  /* the field breathes for the whole window: this is the push, applied to the
+     whole plate so nothing is cut and nothing can seam */
+  tl.fromTo("#s4", { scale: 1.0 }, { scale: 1.035, duration: 0.99, ease: "none" }, 0.833);
+
+  /* ================= S5 · HE SAID NO ======================================
+     Plate is the reference's own 2.45 s frame, held and pushed. The reference
+     drifts 8.3 %W across this shot and ramps brightness +39.9; the type is
+     already in the plate, so it is not re-animated — animating type that is
+     already printed in the picture is what makes a rebuild look fake. */
+  tl.fromTo("#s5", { scale: 1.0 }, { scale: 1.052, duration: 1.83, ease: "none" }, 1.30);
+  tl.fromTo("#s5", { filter: "brightness(1.14)" },
+    { filter: "brightness(1.0)", duration: 0.9, ease: "power2.out" }, 1.30);
 
   /* ================= S6 · the reveal plate ================================
      Reference: the mark spins up, the money arrives, "2008" fades up, then the
