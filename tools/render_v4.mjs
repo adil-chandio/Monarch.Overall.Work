@@ -125,11 +125,19 @@ async function main() {
 
   const outPath = path.join(ROOT, OUT);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  const onDisk = fs.readdirSync(FRAMES_DIR).filter((f) => f.endsWith(".png")).length;
+  if (onDisk !== frameCount) {
+    throw new Error(`frame dir holds ${onDisk} PNGs but the film is ${frameCount} frames`);
+  }
   const ff = spawnSync(
     "ffmpeg",
     [
       "-y", "-v", "error", "-framerate", String(fps),
-      "-i", path.join(FRAMES_DIR, "f_%05d.png"),
+      /* explicit start number and exact frame count: without these ffmpeg happily
+         muxed 700 frames out of a directory that still held 701 PNGs from the
+         previous run, and the extra frame came from a different build of the film */
+      "-start_number", "0", "-i", path.join(FRAMES_DIR, "f_%05d.png"),
+      "-frames:v", String(frameCount),
       /* REF-01 is a 980 kb/s 720p30 master. A near-lossless encode here would
          measure twice the edge density of the reference for no delivery benefit,
          so the film is encoded into the same band it will be published in. */
