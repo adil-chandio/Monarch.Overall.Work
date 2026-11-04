@@ -140,7 +140,7 @@ def main() -> None:
 
     # ---- 2. frame files on disk must be exactly this render -------------------
     if os.path.isdir(args.frames):
-        names = sorted(n for n in os.listdir(args.frames) if n.endswith(".png"))
+        names = sorted(n for n in os.listdir(args.frames) if re.fullmatch(r"f_\d{5}\.png", n))
         if names and len(names) != expect:
             problems.append(
                 f"{len(names)} PNGs in {args.frames} but the film is {expect} frames — "

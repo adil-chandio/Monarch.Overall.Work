@@ -128,7 +128,7 @@ async function main() {
       // a black first frame is a render failure, not a style choice
       const probe = await page.screenshot({ type: "png" });
       const fsMod = await import("node:fs");
-      fsMod.writeFileSync(path.join(FRAMES_DIR, "_probe0.png"), probe);
+      fsMod.writeFileSync(path.join(ROOT, "public/demo/v4-frame0.png"), probe);
     }
     n++;
     if (n % 60 === 0) console.log(`  ${n}/${target.length} frames`);
@@ -143,7 +143,7 @@ async function main() {
 
   const outPath = path.join(ROOT, OUT);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  const onDisk = fs.readdirSync(FRAMES_DIR).filter((f) => f.endsWith(".png")).length;
+  const onDisk = fs.readdirSync(FRAMES_DIR).filter((f) => /^f_\d{5}\.png$/.test(f)).length;
   if (onDisk !== frameCount) {
     throw new Error(`frame dir holds ${onDisk} PNGs but the film is ${frameCount} frames`);
   }
