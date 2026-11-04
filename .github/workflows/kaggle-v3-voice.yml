@@ -6,6 +6,7 @@ on:
       - arena/8bfd4d0e-monarch-overall-work
     paths:
       - "tools/kaggle/**"
+      - ".github/workflows/kaggle-v3-voice.yml"
   workflow_dispatch:
 
 permissions:
