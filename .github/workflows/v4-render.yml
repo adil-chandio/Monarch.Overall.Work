@@ -59,7 +59,18 @@ jobs:
         run: python3 showreel/v4/audio.py --out public/demo/v4-mix.wav
 
       - name: Install the renderer and the gate
-        run: npm install --no-save --silent jsdom@30 puppeteer-core@23
+        run: npm install --no-save --silent jsdom@30 puppeteer-core@23 gsap@3
+
+      - name: Timeline gate — no scene may outlive its own window
+        run: |
+          # GSAP is deterministic, so the composition's real timeline can be sampled
+          # here in about two seconds. This is the check that would have caught s4
+          # standing at full opacity from 1.33 s to the end of the film: its entrance
+          # tween ran to 1.3225 s while its hide was a set at 1.300 s, so the tween
+          # wrote opacity 1 back over the hide and a green money-bag plate sat under
+          # the whole film, including the 8.5 s CTA. No frame metric could attribute
+          # that to a scene; this can, by name and by second.
+          node tools/timeline_probe.mjs showreel/v4/index.html
 
       - name: Composition gate — every element exists, no scene is left visible
         run: |

@@ -80,3 +80,56 @@ Every render runs, in order:
 The audio rows all pass: −14.37 LUFS against −14.02, true peak −0.10 against −0.31,
 LRA 2.2 against 1.7, and the pre-cut transients land 17–110 ms before their cuts,
 which is what the reference's own transient table shows.
+
+## Pass 5 — the scene that never left
+
+The picture at 19 s was a portrait sitting on a khaki field, with a rotated
+BILLION in the corner and a fan of bills behind his head. None of those layers
+belong to the CTA. They belong to `s4` (1.00–1.30 s) and `s15` (12.67–12.97 s).
+
+`s15`'s layer was a red herring: on its own it is correct. The real fault was
+`s4`, and it was arithmetic, not design:
+
+```
+s4 window      1.000 → 1.300 s          (0.300 s long)
+entrance       duration = max(0.43 * 0.75, 2/30) = 0.3225 s, starting at 1.000
+               so it finishes at 1.3225 s
+hide           tl.set(s4, {opacity: 0}, 1.300)
+```
+
+The hide fires at 1.300 s, and then the still-running entrance writes
+`opacity: 1` back at its next tick. GSAP keeps rendering the last inserted tween
+on a property, so `s4` stood at full opacity from **1.33 s to the end of the
+film** — 22 seconds under every later scene, and in front of them wherever a
+later scene has a transparent or `backdrop-filter` layer.
+
+That is why the CTA measured `[118,101,70]` khaki instead of the reference's
+`[59,26,23]` maroon, and why it turned *green* after the flash: `#s14red`
+(`mix-blend-mode: screen`) screen-blends with what is underneath it, and what
+was underneath it was a green money bag.
+
+Two fixes:
+
+1. An entrance tween may never outlive its own window:
+   `entDur = min(max(dis*0.75, 2/FPS), max(outT - inT, 1/FPS))`.
+2. Frame 0 is authored in the markup, not by the timeline. A zero-duration set at
+   exactly `t = 0` is never applied — GSAP has not inserted it yet when the
+   timeline sits on 0 — so `s1` stays `opacity:1` inline and the timeline only
+   ever hides it.
+
+`tools/timeline_probe.mjs` now samples the real timeline headlessly and fails the
+build, by scene name and by second, if any scene outlives its window or if frame 0
+is unpainted. It runs before the render, so this class of fault costs two seconds
+instead of a seven-minute render.
+
+## Measured before/after (master at 19 s, right-hand background)
+
+| | before | after | REF-01 |
+|---|---|---|---|
+| CTA background | `[118,101,70]` | — | `[59,26,23]` |
+| CTA background after flash | `[100,135,92]` green | — | `[49,6,7]` |
+
+The flash was also re-measured off the reference frame by frame: it is **three**
+frames — 145, 139, 139 luma — building through 61 and decaying through 48. The
+build had it as two frames flat at 217, which is shorter and harder than the
+reference.

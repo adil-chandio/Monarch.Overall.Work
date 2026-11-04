@@ -87,7 +87,12 @@
      data-width="720" data-height="1280" data-fps="30">
 
   <!-- ===================== S1 · 0.00–0.53  TWENTY on white ===================== -->
-  <section class="scene" id="s1">
+  <!-- the opening scene is the one scene with no opacity:0 inline, because a
+       zero-duration set at exactly t=0 never renders: GSAP has not applied it when
+       the timeline sits on 0, so frame 0 was black no matter where the show was
+       placed. The first frame is therefore authored in the markup and the timeline
+       takes over from it. -->
+  <section class="scene" id="s1" style="opacity:1;">
     <!-- REF-01's own first frame is a white plate with a soft vignette and a word
          rising into it. The plate MOVES here: a scale on a flat colour moves no
          pixels, which is why the hook measured 0.056 against the reference's 0.108.
@@ -273,11 +278,23 @@
          the span, while the outgoing plate fades out underneath it. The cut frame
          then carries a two-thirds change — a cut you can feel. */
       tl.set(id, { opacity: 0.66 }, Math.max(inT - 1 / FPS, 0));
-      tl.to(id, { opacity: 1, duration: Math.max(dis * 0.75, 2 / FPS), ease: "power2.out" }, inT);
+      /* the entrance may never outlive its own window: s4's entrance ran to 1.3225 s
+         while its hide was a set at 1.300 s, so the running tween wrote opacity 1
+         straight back after the hide and s4 stood on screen until the end of the
+         film — under every later scene, and in front of them wherever a later scene
+         has a transparent or backdrop-filtered layer. Clamping the entrance to the
+         scene's own display window is what makes the hide stick. */
+      var entDur = Math.min(Math.max(dis * 0.75, 2 / FPS), Math.max(outT - inT, 1 / FPS));
+      tl.to(id, { opacity: 1, duration: entDur, ease: "power2.out" }, inT);
     } else {
-      /* set at the very start of the composition when it is the opening scene, so
-         that time 0 — the frame the renderer captures first — is already correct */
-      tl.set(id, { opacity: 1 }, inT > 0 ? inT : 0.0001);
+      /* Set at the very start of the composition when it is the opening scene, so
+         that time 0 — the frame the renderer captures first — is already correct.
+         It has to be AT 0, not at 0.0001: a set 0.1 ms in the future has not fired
+         when the timeline is at exactly 0, and seeking backwards over it restores
+         the recorded start value (opacity 0), which is why frame 0 was still black
+         after the hide collision was fixed. With no hide at 0 any more, a show at 0
+         is safe. */
+      tl.set(id, { opacity: 1 }, inT);
     }
     /* the outgoing plate stays AT full opacity on the cut frame, then fades under
        the incoming one — otherwise the frame that matters most is a fade to black */
@@ -393,10 +410,19 @@
   tl.to("#s14plate", { opacity: 0, duration: 0.45, ease: "none" }, 15.45);
   tl.fromTo("#s14pillY", { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.8)" }, 18.72);
 
-  /* the flash: 2 frames, exactly as measured at 20.633 s */
+  /* The flash, re-measured off REF-01 frame by frame (mean luma of the decoded
+     picture):   49 49 49 46 46 46 61 61 145 139 139 48 47 49 48 45 45 42 40 40
+     so it is THREE frames — 145 then 139 then 139 — building over one frame at 61
+     and decaying through 48 to a slower fall afterwards. The build had it as two
+     frames flat at 217/255 = 0.85, which is both shorter and harder than the
+     reference, so the cut at 20.633 read differently to the eye and to any
+     brightness metric. 145 luma over a ~40 base needs the white at ~0.5, not 0.9. */
   tl.set("#flash", { opacity: 0 }, 0);
-  tl.set("#flash", { opacity: 0.9 }, 20.633);
-  tl.set("#flash", { opacity: 0 }, 20.633 + 2 / FPS);
+  tl.set("#flash", { opacity: 0.22 }, 20.633 - 2 / FPS);
+  tl.set("#flash", { opacity: 0.52 }, 20.633 - 1 / FPS);
+  tl.set("#flash", { opacity: 0.50 }, 20.633);
+  tl.set("#flash", { opacity: 0.50 }, 20.633 + 1 / FPS);
+  tl.set("#flash", { opacity: 0.0 }, 20.633 + 3 / FPS);
   tl.to("#s14red", { opacity: 1, duration: 3 / FPS, ease: "none" }, 20.700);
   tl.to("#s14pillY", { opacity: 0, scale: .96, duration: 0.16, ease: "power2.in" }, 20.633);
   tl.fromTo("#glassCard", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.30, ease: "power2.out" }, 20.800);
@@ -420,7 +446,7 @@
     }),
     /* full-frame effects: for these frames no single plate owns the picture, so a
        per-scene colour check must skip them rather than call them wrong */
-    flashes: [[20.633, 20.633 + 2 / FPS]]
+    flashes: [[20.633 - 2 / FPS, 20.633 + 3 / FPS]]
   };
   if (d.fonts && d.fonts.ready) {
     d.fonts.ready.then(function () { d.documentElement.setAttribute("data-fonts", "ready"); });
