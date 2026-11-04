@@ -18,10 +18,16 @@ import time
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+# Only *results* may live under /kaggle/working: everything there is zipped into
+# the kernel output, and a 3 GB model cache there made `kaggle kernels output`
+# skip the deliverables entirely (a COMPLETE kernel with no words.json).
 OUT = pathlib.Path("/kaggle/working/monarch_out")
 OUT.mkdir(parents=True, exist_ok=True)
-VO = pathlib.Path("/kaggle/working/vo")
+SCRATCH = pathlib.Path("/kaggle/temp")
+SCRATCH.mkdir(parents=True, exist_ok=True)
+VO = SCRATCH / "vo"
 VO.mkdir(parents=True, exist_ok=True)
+MODELS = SCRATCH / "models"
 
 # substituted as Python/JSON literals by the packager — not re-parsed
 PAYLOAD = __PAYLOAD__
@@ -116,7 +122,7 @@ t0 = time.time()
 try:
     from faster_whisper import WhisperModel
     model = WhisperModel("large-v3", device="cuda", compute_type="float16",
-                         download_root="/kaggle/working/models")
+                         download_root=str(MODELS))
     backend = "faster-whisper large-v3 float16 cuda"
 except Exception as exc:
     receipt["faster_whisper_error"] = type(exc).__name__ + ": " + str(exc)[:400]
@@ -210,7 +216,7 @@ for name in sorted(PAYLOAD):
         fallbacks.append({"file": name, "error": msg, "from": backend})
         backend = "faster-whisper large-v3 int8 cpu"
         model = WhisperModel("large-v3", device="cpu", compute_type="int8",
-                             download_root="/kaggle/working/models")
+                             download_root=str(MODELS))
         words, text_parts, seg_rows, lang, lang_prob = transcribe_beat(model, backend, name)
 
     audio_total += dur
