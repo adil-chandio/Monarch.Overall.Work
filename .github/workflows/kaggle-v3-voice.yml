@@ -42,6 +42,7 @@ jobs:
           MONARCH: ${{ secrets.MONARCH }}
           KAGGLE_JSON: ${{ secrets.KAGGLE_JSON }}
           KAGGLE: ${{ secrets.KAGGLE }}
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
         run: python tools/kaggle/resolve_creds.py
 
       - name: Commit the credential report (names only, never values)
