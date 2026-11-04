@@ -42,9 +42,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+
+      # No actions/setup-python: it downloads a python, puts it first on PATH, and
+      # then the apt packages for the *system* python are invisible to it — which
+      # made 'import numpy' fail on a runner where numpy had just been installed.
+      # The runner's own python3 is newer than the 3.11 that was being pinned.
 
       - name: Install ffmpeg, fonts and Python DSP
         timeout-minutes: 8
