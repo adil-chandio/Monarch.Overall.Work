@@ -76,35 +76,7 @@ jobs:
         run: python3 tools/make_checkpoint_ref.py 0.30
 
       - name: Check the checkpoint frames
-        run: |
-          # check_render.py checks a film against the whole composition (701 frames and
-          # the full scene table), which a 210-frame checkpoint is not. Its own frame
-          # checks are done here instead, at the size of this render.
-          python3 - <<'PY'
-          import json, subprocess
-          from ffbin import ffmpeg
-          W, H, FPS = 480, 854, 30
-          FF = ffmpeg()
-          for name, path, want in (("checkpoint", "public/demo/v4-30-silent.mp4", 210),
-                                   ("reference ", "public/demo/ref30.mp4", 210)):
-              raw = subprocess.run([FF, "-v", "error", "-i", path, "-vf", f"scale={W}:{H}",
-                                    "-pix_fmt", "gray", "-f", "rawvideo", "-"],
-                                   capture_output=True).stdout
-              n = len(raw) // (W * H)
-              import numpy as np
-              f = np.frombuffer(raw[: n * W * H], dtype=np.uint8).reshape(n, H, W).astype(np.float32)
-              lum = f.mean(axis=(1, 2))
-              black = int((lum < 6).sum())
-              print(f"{name} {n} frames  frame0 luma {lum[0]:.1f}  black {black}  mean {lum.mean():.1f}")
-              # a mismatch between the two files is what makes later comparisons
-              # meaningless, so it is reported as the failure it is — but on the
-              # rebuild only, since the reference cut is generated to match it
-              if name.startswith("checkpoint"):
-                  assert n == want, f"{name}: {n} frames, expected {want}"
-              assert black == 0, f"{name}: {black} black frames"
-          print("checkpoint checks OK")
-          PY
-          ls -la public/demo/v4-30-silent.mp4 public/demo/ref30.mp4
+        run: python3 tools/check_part.py --frames 210
 
       - name: Publish the checkpoint
         if: always()
