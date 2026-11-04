@@ -6,55 +6,31 @@
  "slots_present": [
   "COMPALI"
  ],
- "slots_absent": [
-  "KAGGLE_API_TOKEN",
-  "KAGGLE_KEY",
-  "KAGGLE_API_KEY",
-  "MONARCH",
-  "KAGGLE_JSON",
-  "KAGGLE"
- ],
+ "slots_absent": [],
  "attempts": [
   {
    "slot": "COMPALI",
    "present": true,
    "chars": 37,
    "shape": "access-token",
-   "verdict": "not_authenticated",
+   "verdict": "authenticated",
    "tried": [
     {
      "shape": "access-token",
-     "authenticated": false,
-     "handle": "",
-     "auth_method": "",
-     "error": "import:ModuleNotFoundError:No module named 'six'"
+     "authenticated": true,
+     "handle": "compali",
+     "auth_method": "ACCESS_TOKEN",
+     "error": "",
+     "kernels_list_rc": 0,
+     "kernels_list_head": "ref,title,author,lastRunTime,totalVotes"
     }
    ]
-  },
-  {
-   "slot": "KAGGLE_API_TOKEN",
-   "present": false
-  },
-  {
-   "slot": "KAGGLE_KEY",
-   "present": false
-  },
-  {
-   "slot": "KAGGLE_API_KEY",
-   "present": false
-  },
-  {
-   "slot": "MONARCH",
-   "present": false
-  },
-  {
-   "slot": "KAGGLE_JSON",
-   "present": false
-  },
-  {
-   "slot": "KAGGLE",
-   "present": false
   }
  ],
- "chosen": null
+ "chosen": {
+  "slot": "COMPALI",
+  "shape": "access-token",
+  "handle": "compali",
+  "auth_method": "ACCESS_TOKEN"
+ }
 }
