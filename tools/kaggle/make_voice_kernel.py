@@ -201,7 +201,23 @@ def main() -> int:
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     slug = slugify(args.slug)
-    (out / "main.ipynb").write_text(json.dumps(build_notebook(), indent=1) + "\n")
+    nb = build_notebook()
+    # fail here, not 30 minutes later inside Kaggle: the kernel must compile and
+    # every stdlib module it names must be imported.
+    import ast
+
+    src = "".join(nb["cells"][0]["source"])
+    tree = ast.parse(src)
+    imported = {a.name.split(".")[0] for n in ast.walk(tree)
+                if isinstance(n, ast.Import) for a in n.names}
+    imported |= {n.module.split(".")[0] for n in ast.walk(tree)
+                 if isinstance(n, ast.ImportFrom) and n.module}
+    named = {n.id for n in ast.walk(tree) if isinstance(n, ast.Name)}
+    missing = sorted(m for m in ("sys", "json", "os", "pathlib", "subprocess", "time",
+                                 "base64", "re") if m in named and m not in imported)
+    if missing:
+        raise SystemExit(f"kernel names {missing} without importing them")
+    (out / "main.ipynb").write_text(json.dumps(nb, indent=1) + "\n")
     meta = {
         "id": f"{args.user}/{slug}",
         "title": slug,
