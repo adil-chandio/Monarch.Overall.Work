@@ -58,12 +58,14 @@ jobs:
       - name: Score the film (no VO, pre-cut SFX, measured leads)
         run: python3 showreel/v4/audio.py --out public/demo/v4-mix.wav
 
+      - name: Install the renderer and the gate
+        run: npm install --no-save --silent jsdom puppeteer-core@23
+
       - name: Composition gate — every element exists, no scene is left visible
         run: node tools/verify_v4.mjs
 
       - name: Render 720x1280 @ 30 fps (real Chromium, timeline seeked per frame)
         run: |
-          npm install --no-save --silent puppeteer-core@23
           mkdir -p public/demo/v4-frames
           node tools/render_v4.mjs --out public/demo/v4-silent.mp4
 
