@@ -102,13 +102,14 @@ async function main() {
   // warm pass: paint a couple of frames and throw them away, then come back to 0.
   // Without this the very first captured frame came out fully black — the browser
   // had not composited the CSS background plates yet.
-  for (const warm of [0.5, 1.5, 0]) {
+  for (const warm of [0.5, 1.5, 8.0, 16.0, 0.2, 0]) {
     await page.evaluate((time) => {
       const tl = window.__timelines.main;
       tl.pause();
       tl.time(time, false);
     }, warm);
     await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+    await new Promise((r) => setTimeout(r, 60));
   }
 
   const target = ONLY ? [Number(ONLY)] : times;

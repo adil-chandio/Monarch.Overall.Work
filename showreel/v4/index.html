@@ -389,6 +389,8 @@
   window.__sceneTable = {
     fps: FPS,
     duration: TOTAL,
+    /* 23.35 s is 700.5 frames at 30 fps; the renderer takes Math.round, so 701 */
+    frames: Math.round(TOTAL * FPS + 0.5),
     scenes: SCENES.map(function (r) {
       return { id: r[0], in: r[1], dissolve: r[2], out: r[3] };
     })

@@ -84,7 +84,9 @@ def main() -> None:
     problems: list[str] = []
 
     # ---- 3. exact frame count --------------------------------------------------
-    expect = int(round(table["duration"] * fps))
+    # the renderer's own rule: Math.round(duration * fps). 23.35 s is 700.5 frames,
+    # so the film is 701 frames and every check must use the same number.
+    expect = int(round(table["duration"] * fps + 0.5))
     if abs(len(frames) - expect) > 1:
         problems.append(f"render has {len(frames)} frames, the composition is {expect}")
 
