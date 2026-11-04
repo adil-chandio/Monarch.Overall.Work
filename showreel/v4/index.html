@@ -175,7 +175,14 @@
          into the plate, so this scene showed a green field with green bag while
          the reference had already gone grey with a grey bag — a colour state that
          belongs to an earlier moment, baked into a later one. -->
-    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5-plate.png'); filter:saturate(1);"></div>
+    <!-- Two copies of the SAME frame. The base is the reference at 1.37 s (field and bag
+         still green, no type); the top one is that frame with its colour drained, and
+         it is faded in on the measured schedule. A saturation filter cannot do this,
+         because it drains the bag and the field by the same amount and the reference
+         drains them at different rates — measured, the bag goes neutral by 2.25 s
+         while the field is still 4 % green at 2.05. -->
+    <div class="plate" id="s5plate" style="background-image:url('./assets/ref/s5plate-base.png');"></div>
+    <div class="plate" id="s5plate2" style="background-image:url('./assets/ref/s5-plate.png'); opacity:0;"></div>
     <!-- "NO" is a separate layer because it is not in the plate yet at the frame the
          plate was taken from: the reference brings HE SAID first and NO slams in
          after it. It was cut by unmixing two of the reference's own frames — the
@@ -320,8 +327,8 @@
     ["s1",   0.000,  0.00,   0.533],
     ["s2",   0.533,  0.00,   0.833],
     ["s3",   0.833,  0.17,   1.000],
-    ["s4",   1.000,  0.43,   1.300],
-    ["s5",   1.300,  0.00,   3.133],
+    ["s4",   1.000,  0.33,   1.333],
+    ["s5",   1.333,  0.00,   3.133],
     ["s6",   3.133,  0.00,   9.133],
     ["s7",   9.133,  0.00,  11.700],
     ["s8",  11.700,  0.00,  12.167],
@@ -438,7 +445,7 @@
      reference gains 1.0 % across this window (bag template, 1.000 -> 1.010). A
      push that is five times too strong makes the bag read larger and lower than
      the reference at every frame, which is what it was doing. */
-  tl.fromTo("#s5", { scale: 1.0 }, { scale: 1.010, duration: 1.83, ease: "none" }, 1.30);
+  tl.fromTo("#s5", { scale: 1.0 }, { scale: 1.010, duration: 1.80, ease: "none" }, 1.333);
 
   /* The colour of this shot, measured as the share of the frame that reads green
      (a count of pixels, so it cannot be fooled the way a mean saturation can):
@@ -449,13 +456,16 @@
      by 2.25. So most of the drain happens BEFORE the plate's own timestamp — the
      scene opens far greener than the frame the plate was taken from, and that is
      why holding the plate still showed green where the reference was grey. */
-  tl.fromTo("#s5plate", { filter: "saturate(2.1)" },
-    { filter: "saturate(1.0)", duration: 0.78, ease: "power2.out" }, 1.32);
-  tl.to("#s5plate", { filter: "saturate(0.05)", duration: 0.25, ease: "power1.in" }, 2.00);
+  /* The colour of this shot, as the share of the frame that reads green:
 
-  /* HE SAID and NO are two beats, not one: HE SAID is a faint pre-echo in the
-     reference from about 2.2 s and solid by 2.45, NO slams 2.35 -> 2.95 and is the
-     harder hit, so it travels further. */
+         reference  1.36 s 15.2 %   1.50 8.2 %   1.70 6.2 %   2.05 4.8 %   2.25 0 %
+
+     and the two surfaces go at different rates — the bag is neutral by 2.25 while
+     the field still holds 4 % at 2.05. So the sweep is a crossfade between the
+     plate and the same frame drained, not a filter on both at once. */
+  tl.to("#s5plate2", { opacity: 0.55, duration: 0.45, ease: "power2.out" }, 1.36);
+  tl.to("#s5plate2", { opacity: 1.0, duration: 0.42, ease: "power1.in" }, 1.83);
+
   /* Measured arrival, not a guess: HE SAID is faint from 2.10 and solid by 2.45,
      a fade with almost no scale. NO is not there at 2.50 and is 461 px wide at
      2.60 — full size inside a tenth of a second — so it does not fly in, it

@@ -30,7 +30,7 @@ from ffbin import ffmpeg
 
 REF = "analysis/attachment-filename-How-to-Edit-VIRAL-RE/reference.mp4"
 OUT = Path("showreel/v4/assets/ref")
-PLATE_T, CLEAN_T, FULL_T = 2.05, 2.05, 2.95
+PLATE_T, CLEAN_T, FULL_T = 1.37, 2.05, 2.95
 FF = ffmpeg()
 
 
@@ -81,8 +81,19 @@ def main() -> None:
         red = (r > 80) & (r - g > 35) & (r - b > 35)
         print(f"  {name}: {int(red.sum())} red pixels")
 
-    cv2.imwrite(str(OUT / "s5-plate.png"), cv2.cvtColor(plate.astype(np.uint8), cv2.COLOR_RGB2BGR))
-    print(f"  s5-plate.png   the reference at {PLATE_T}s — no type in it")
+    cv2.imwrite(str(OUT / "s5plate-base.png"), cv2.cvtColor(plate.astype(np.uint8), cv2.COLOR_RGB2BGR))
+    print(f"  s5plate-base.png  the reference at {PLATE_T}s — field and bag still green, no type")
+
+    # What the plate cannot supply is the end of the colour's life: by 2.25 s the
+    # reference has drained the green out of the FIELD as well as the bag, and the
+    # plate's field is green because at 1.37 s it still is. That last stretch is a
+    # saturation and nothing else, so it can be applied to the plate itself rather
+    # than hand-painted. Everything before it comes from the frame, untouched.
+    drained = cv2.cvtColor(plate.astype(np.uint8), cv2.COLOR_RGB2HSV).astype(np.float32)
+    drained[..., 1] *= 0.02
+    cv2.imwrite(str(OUT / "s5-plate.png"),
+                cv2.cvtColor(cv2.cvtColor(drained, cv2.COLOR_HSV2RGB), cv2.COLOR_RGB2BGR))
+    print("  s5-plate.png      the same frame with the colour drained — the end of the sweep")
 
     # Split the two elements where the reference actually separates them: by the
     # empty rows between them. Splitting at a fraction of the type's total height
