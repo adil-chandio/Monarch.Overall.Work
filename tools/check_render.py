@@ -83,6 +83,17 @@ def main() -> None:
     frames = decode_rgb(args.video)
     problems: list[str] = []
 
+    # ---- 0. no frame may be black ------------------------------------------
+    # this is the check that would have caught the real bug: the composition's first
+    # scene was hidden at t=0, so the film opened on six black frames. Every aggregate
+    # row looked fine because the black frames were part of the "signature".
+    lumas = np.array([float(f.reshape(-1, 3).mean()) for f in frames])
+    black = np.where(lumas < 6.0)[0]
+    if black.size:
+        problems.append(
+            f"{black.size} black frame(s): first at {black[0] / fps:.2f}s, "
+            f"last at {black[-1] / fps:.2f}s — a delivered frame cannot be black")
+
     # ---- 3. exact frame count --------------------------------------------------
     # the renderer's own rule: Math.round(duration * fps). 23.35 s is 700.5 frames,
     # so the film is 701 frames and every check must use the same number.
@@ -111,8 +122,15 @@ def main() -> None:
 
     sig: dict[str, np.ndarray] = {}
     for sid, cols in by_scene.items():
-        if cols:
-            sig[sid] = np.median(np.stack(cols), axis=0)
+        if not cols:
+            continue
+        med = np.median(np.stack(cols), axis=0)
+        # a scene whose own signature is black means the build is broken, not that the
+        # frame matches: refuse to use it rather than pass everything against it
+        if float(med.mean()) < 6.0:
+            problems.append(f"scene {sid} renders black (signature {med.round(1).tolist()})")
+            continue
+        sig[sid] = med
 
     # a frame whose colour is much closer to another scene's signature than to its
     # own is showing the wrong plate. This is the check that catches a stacked scene.

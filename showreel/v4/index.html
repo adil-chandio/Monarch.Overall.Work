@@ -259,7 +259,10 @@
 
   SCENES.forEach(function (row, i) {
     var id = "#" + row[0], inT = fr(row[1]), dis = row[2], outT = fr(row[3]);
-    tl.set(id, { opacity: 0 }, 0);
+    /* a scene that starts at 0 must not get a zero-length "hide" at 0 first: the
+       hide and the show land on the same tick and the renderer captures the hide,
+       which is why the first six frames of the film were pure black */
+    if (inT > 0) tl.set(id, { opacity: 0 }, 0);
     if (dis > 0) {
       /* Jolt, then settle — this is what REF-01 actually does.
          Its alpha profile at 0.833 reads 0 -> 0.757 in ONE frame, then a slow climb
@@ -272,7 +275,9 @@
       tl.set(id, { opacity: 0.66 }, Math.max(inT - 1 / FPS, 0));
       tl.to(id, { opacity: 1, duration: Math.max(dis * 0.75, 2 / FPS), ease: "power2.out" }, inT);
     } else {
-      tl.set(id, { opacity: 1 }, inT);
+      /* set at the very start of the composition when it is the opening scene, so
+         that time 0 — the frame the renderer captures first — is already correct */
+      tl.set(id, { opacity: 1 }, inT > 0 ? inT : 0.0001);
     }
     /* the outgoing plate stays AT full opacity on the cut frame, then fades under
        the incoming one — otherwise the frame that matters most is a fade to black */
