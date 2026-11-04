@@ -140,8 +140,12 @@ def rows(ref: dict[str, Any], got: dict[str, Any]) -> list[tuple[str, str, str, 
     gc = [float(c["time"]) for c in g(got, "cuts", default=[]) or []]
     # match by nearest neighbour inside one frame, then report recall AND precision:
     # a rebuild can hit every cut by cutting everywhere, and that is not the same film
-    matched = [c for c in rc if any(abs(c - x) <= 1 / 30 + 1e-6 for x in gc)]
-    extra = [x for x in gc if not any(abs(x - c) <= 1 / 30 + 1e-6 for c in rc)]
+    # 1.5 frames: the detector reports a cut on the frame where the diff lands, and a
+    # change quantises to the nearest frame boundary, so half a frame of slack is
+    # the honest tolerance for "the same cut"
+    tol_s = 1.5 / 30.0
+    matched = [c for c in rc if any(abs(c - x) <= tol_s for x in gc)]
+    extra = [x for x in gc if not any(abs(x - c) <= tol_s for c in rc)]
     if rc:
         worst = max((min([abs(c - x) for x in gc]) if gc else 9.9) for c in rc)
         out.append((
