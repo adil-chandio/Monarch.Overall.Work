@@ -130,7 +130,11 @@ async function main() {
     [
       "-y", "-v", "error", "-framerate", String(fps),
       "-i", path.join(FRAMES_DIR, "f_%05d.png"),
-      "-c:v", "libx264", "-preset", "slow", "-crf", "15",
+      /* REF-01 is a 980 kb/s 720p30 master. A near-lossless encode here would
+         measure twice the edge density of the reference for no delivery benefit,
+         so the film is encoded into the same band it will be published in. */
+      "-c:v", "libx264", "-preset", "slow", "-crf", "20",
+      "-maxrate", "1600k", "-bufsize", "3200k",
       "-pix_fmt", "yuv420p", "-profile:v", "high", "-level", "4.1",
       "-movflags", "+faststart", outPath,
     ],
