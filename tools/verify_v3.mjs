@@ -284,6 +284,10 @@ console.log('\n── layout: text boxes stay inside their own column ───'
     ['end WO HISSA', 470 + 118, PLATE_H],
     ['end JO KOI …', 596 + 74, PLATE_H],
     ['end underline', 692 + 4, PLATE_H],
+    // Anton's cap height is ~0.72 em, so a baseline at top+size is a safe over-estimate
+    ['comments 11 numeral', 508 + 190, PLATE_H],
+    ['comments label', 552 + 46, PLATE_H],
+    ['comments sub', 620 + 32, PLATE_H],
   ];
   for (const [name, bottom, limit] of vertical) {
     const ok = bottom <= limit;
