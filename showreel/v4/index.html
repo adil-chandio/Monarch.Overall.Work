@@ -35,7 +35,7 @@
   .grain{ position:absolute; inset:0; pointer-events:none; opacity:.020; mix-blend-mode:overlay;
           background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>"); }
   .vig{ position:absolute; inset:0; pointer-events:none;
-        background:radial-gradient(118% 82% at 50% 44%, rgba(0,0,0,0) 46%, rgba(0,0,0,.30) 100%); }
+        background:radial-gradient(118% 82% at 50% 44%, rgba(0,0,0,0) 46%, rgba(0,0,0,.22) 100%); }
 
   /* ---------------------------------------------------------------- type */
   .t{ position:absolute; font-family:"Anton"; line-height:.82; white-space:pre; will-change:transform,opacity,filter; }
@@ -68,8 +68,8 @@
 
   /* ---------------------------------------------------------------- CTA glass card */
   #s6man, #s14img{
-      -webkit-mask-image:linear-gradient(to bottom, transparent 16%, rgba(0,0,0,.35) 44%, #000 66%);
-              mask-image:linear-gradient(to bottom, transparent 16%, rgba(0,0,0,.35) 44%, #000 66%);
+      -webkit-mask-image:linear-gradient(to bottom, transparent 8%, rgba(0,0,0,.45) 30%, #000 52%);
+              mask-image:linear-gradient(to bottom, transparent 8%, rgba(0,0,0,.45) 30%, #000 52%);
     }
   #glassCard{ position:absolute; left:120px; top:1000px; width:340px; height:181px; border-radius:33px;
               background:linear-gradient(180deg, rgba(245,240,232,.62), rgba(220,214,204,.50));
@@ -85,14 +85,14 @@
 
   <!-- ===================== S1 · 0.00–0.53  TWENTY on white ===================== -->
   <section class="scene" id="s1">
-    <div class="plate" style="background:#d8d8d8;"></div>
-    <div class="grading" style="background:radial-gradient(80% 60% at 45% 46%, rgba(255,255,255,.9), rgba(196,196,196,.0) 70%);"></div>
+    <div class="plate" style="background:#bababa;"></div>
+    <div class="grading" style="background:radial-gradient(78% 58% at 46% 46%, rgba(255,255,255,.62), rgba(186,186,186,0) 72%);"></div>
     <div class="t kicker" id="s1w" style="left:120px; top:640px; color:#5ea015; opacity:0;">TWENTY</div>
   </section>
 
   <!-- ===================== S2 · 0.53–0.83  the slam ===================== -->
   <section class="scene" id="s2" style="opacity:0;">
-    <div class="plate" style="background:#0a0a0a;"></div>
+    <div class="plate" style="background:radial-gradient(70% 50% at 50% 55%, #232323, #0d0d0d 70%);"></div>
     <!-- measured from REF-01 shot 2: "TWENTY" small (≈24 % W) left, "BILLION" big (64 % W)
          right of it, sharing a baseline. 72 px and 200 px land on those widths. -->
     <div class="t" id="s2a" style="left:58px; top:646px; font-size:72px; color:#5ea015;">TWENTY</div>
@@ -101,18 +101,18 @@
 
   <!-- ===================== S3 · 0.83–1.00  green macro ===================== -->
   <section class="scene" id="s3" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(1.42) saturate(1.25);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(1.02) saturate(1.18);"></div>
   </section>
 
   <!-- ===================== S4 · 1.00–1.30  bag on green ===================== -->
   <section class="scene" id="s4" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png');"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.16);"></div>
     <div class="t bill" id="s4b" style="left:52px; top:132px; font-size:84px; opacity:0;">BILLION</div>
   </section>
 
   <!-- ===================== S5 · 1.30–3.13  the match-move ===================== -->
   <section class="scene" id="s5" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png');"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); filter:brightness(1.12);"></div>
     <div class="t kicker" id="s5he"  style="left:130px; top:250px; color:var(--red-ink); opacity:0;">HE</div>
     <div class="t kicker" id="s5said" style="left:222px; top:250px; color:var(--red-ink); opacity:0;">SAID</div>
     <div class="t hero"   id="s5no"  style="left:126px; top:352px; color:var(--red-ink); opacity:0;">NO</div>
@@ -127,13 +127,13 @@
       <div class="t hero" id="s6yr" style="left:150px; top:322px; color:rgba(215,214,216,.62); font-size:262px;">2008</div>
     </div>
     <div class="plate" id="s6img" style="background-image:url('./assets/plate-hands-red.png'); opacity:0;"></div>
-    <div class="plate" id="s6man" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; opacity:0; filter:brightness(1.22) saturate(1.05);"></div>
+    <div class="plate" id="s6man" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; opacity:0; filter:brightness(1.40) saturate(1.05);"></div>
     <div class="vig"></div>
   </section>
 
   <!-- ===================== S7 · 9.13–11.70  red-eye + yellow pill ===================== -->
   <section class="scene" id="s7" style="opacity:0;">
-    <div class="plate" id="s7img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 40%; filter:brightness(1.10) saturate(.96) contrast(1.04);"></div>
+    <div class="plate" id="s7img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 40%; filter:brightness(1.26) saturate(.96) contrast(1.04);"></div>
     <div class="grading" id="redEye" style="opacity:0; mix-blend-mode:screen;
          background:radial-gradient(38% 14% at 47% 30%, rgba(255,40,40,.95), rgba(255,40,40,.15) 55%, rgba(255,40,40,0) 78%);"></div>
     <div class="vig"></div>
@@ -145,26 +145,26 @@
 
   <!-- ===================== S8–S13 · 11.70–14.80  the loop, double speed ===================== -->
   <section class="scene" id="s8" style="opacity:0;">
-    <div class="plate" style="background:#d8d8d8;"></div>
+    <div class="plate" style="background:#bababa;"></div>
     <div class="t kicker" id="s8w" style="left:120px; top:640px; color:#5ea015;">TWENTY</div>
   </section>
   <section class="scene" id="s9" style="opacity:0;">
-    <div class="plate" style="background:#0a0a0a;"></div>
+    <div class="plate" style="background:radial-gradient(70% 50% at 50% 55%, #232323, #0d0d0d 70%);"></div>
     <div class="t" id="s9a" style="left:58px; top:646px; font-size:72px; color:#5ea015;">TWENTY</div>
     <div class="t" id="s9b" style="left:246px; top:540px; font-size:200px; color:#5ea015;">BILLION</div>
   </section>
   <section class="scene" id="s10" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(1.42) saturate(1.25);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-macro-green.png'); filter:brightness(1.02) saturate(1.18);"></div>
   </section>
   <section class="scene" id="s11" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-green.png');"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-green.png'); filter:brightness(1.16);"></div>
     <div class="t bill" id="s11b" style="left:52px; top:132px; font-size:84px; opacity:0;">BILLION</div>
   </section>
   <section class="scene" id="s12" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 58%;"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 58%; filter:brightness(1.10);"></div>
   </section>
   <section class="scene" id="s13" style="opacity:0;">
-    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 52%; filter:saturate(.35) brightness(1.02);"></div>
+    <div class="plate" style="background-image:url('./assets/plate-bag-stool.png'); background-position:center 52%; filter:saturate(.35) brightness(1.20);"></div>
     <div class="t kicker" id="s13he"   style="left:130px; top:250px; color:var(--red-ink); opacity:0;">HE</div>
     <div class="t kicker" id="s13said" style="left:222px; top:250px; color:var(--red-ink); opacity:0;">SAID</div>
     <div class="t hero"   id="s13no"   style="left:126px; top:352px; color:var(--red-ink); opacity:0;">NO</div>
@@ -173,8 +173,8 @@
   <!-- ===================== S14 · 14.80–23.35  the CTA ===================== -->
   <section class="scene" id="s14" style="opacity:0;">
     <div class="plate" id="s14plate" style="background:
-        radial-gradient(120% 90% at 52% 30%, #c4241f 0%, #96140f 46%, #5c0a07 100%);"></div>
-    <div class="plate" id="s14img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; filter:brightness(1.18) saturate(1.02);"></div>
+        radial-gradient(120% 90% at 52% 28%, #d02922 0%, #a91912 44%, #6d0d09 100%);"></div>
+    <div class="plate" id="s14img" style="background-image:url('./assets/plate-cta-hero.png'); background-position:center 42%; filter:brightness(1.42) saturate(1.06);"></div>
     <div class="grading" id="s14red" style="opacity:0; mix-blend-mode:screen;
          background:radial-gradient(38% 14% at 47% 30%, rgba(255,40,40,.95), rgba(255,40,40,.12) 55%, rgba(255,40,40,0) 78%);"></div>
     <div class="vig"></div>
@@ -237,19 +237,17 @@
 
   SCENES.forEach(function (row, i) {
     var id = "#" + row[0], inT = row[1], dis = row[2], outT = row[3];
-    var next = SCENES[i + 1];
-    var lead = dis > 0 ? inT - dis * 0.35 : inT;
-
     tl.set(id, { opacity: 0 }, 0);
     if (dis > 0) {
-      tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: dis, ease: "none" }, lead);
+      /* The ramp finishes ON the cut. REF-01's alpha profiles show exactly this:
+         0 -> 0.757 in one frame at 0.833, then a slow finish to 1.0 at the cut. So
+         the incoming plate is complete when the edit says it is complete, which is
+         also why every one of these registers as a cut instead of a fade. */
+      tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: dis, ease: "none" }, inT - dis);
     } else {
       tl.set(id, { opacity: 1 }, inT);
     }
-    /* if the next scene dissolves in, this plate has to stay underneath until that
-       dissolve has covered it — otherwise the frame goes to black mid-crossfade */
-    var tail = next && next[2] > 0 ? next[2] * 0.65 : 0;
-    if (outT < 90) tl.set(id, { opacity: 0 }, outT + tail);
+    if (outT < 90) tl.set(id, { opacity: 0 }, outT);
   });
 
   /* ---------------------------------------------------------------- helpers */
