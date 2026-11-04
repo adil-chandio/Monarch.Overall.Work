@@ -31,8 +31,12 @@ if REF is None:
 
 dur = 23.35
 upto = round(dur * PART, 3)
-subprocess.run([FF, "-v", "error", "-y", "-i", REF, "-t", str(upto), "-an",
+# -frames:v pins the reference to exactly the rebuild's frame count. -t 7.005 gave
+# 211 frames against the rebuild's 210 (the cut lands just past a frame boundary),
+# and a one-frame offset between the two files makes every later comparison wrong.
+frames = round(701 * PART)
+subprocess.run([FF, "-v", "error", "-y", "-i", REF, "-frames:v", str(frames), "-an",
                 "-c:v", "libx264", "-preset", "slow", "-crf", "20",
                 "-maxrate", "1600k", "-bufsize", "3200k", "-pix_fmt", "yuv420p",
                 OUT], check=True)
-print(f"wrote {OUT} — first {PART*100:.0f} % of the reference ({upto}s)")
+print(f"wrote {OUT} — first {PART*100:.0f} % of the reference ({frames} frames, {frames/30:.3f}s)")
