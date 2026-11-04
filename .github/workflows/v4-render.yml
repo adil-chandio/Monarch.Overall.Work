@@ -71,8 +71,12 @@ jobs:
 
       - name: Render 720x1280 @ 30 fps (real Chromium, timeline seeked per frame)
         run: |
-          mkdir -p public/demo/v4-frames
-          node tools/render_v4.mjs --out public/demo/v4-silent.mp4
+          mkdir -p public/demo/v4-frames analysis/v4-build
+          # the runner's step log is not readable from the sandbox that authors this,
+          # so the renderer's own output is captured into an artifact that gets
+          # committed even when the step fails
+          set -o pipefail
+          node tools/render_v4.mjs --out public/demo/v4-silent.mp4 2>&1 | tee analysis/v4-build/render.log
 
       - name: Frame-level render check (pixels against the scene table)
         run: python3 tools/check_render.py public/demo/v4.mp4 --out analysis/v4-build/check.json
@@ -124,6 +128,7 @@ jobs:
           git config user.email "forensics@monarch.studio"
           git add -f public/demo/v4.mp4 public/demo/v4-loudness.txt \
                      analysis/v4-build/*.png analysis/v4-build/*.json \
+                     analysis/v4-build/render.log \
                      public/demo/v4-frames/f_00000.png public/demo/v4-frames/f_00350.png \
                      docs/reference/REF-01-DIFF.md 2>/dev/null || true
           if git diff --cached --quiet; then
