@@ -514,6 +514,31 @@ def master_audio() -> tuple[Path, Path, dict]:
     ffmpeg("-i", str(soundtrack), "-t", "30.000", "-c:a", "aac", "-b:a", "192k",
            "-ar", str(SR), "-ac", "2", str(master_m4a))
     save_json(REVIEW / "master_first_pass.json", stats)
+
+    # Calibrate on an AAC rendition, not only on the PCM master. The limiter is kept
+    # at the same conservative ceiling while small integrated-loudness corrections
+    # are measured again. Three bounded passes avoid another full render for a sub-dB
+    # delivery offset; the final MP4 still has to pass technical_qc independently.
+    calibration = []
+    for pass_index in range(1, 4):
+        measured = loudness(master_m4a)
+        integrated = float(measured["input_i"])
+        true_peak = float(measured["input_tp"])
+        delta = float(np.clip(-14.20 - integrated, -3.0, 3.0))
+        calibration.append({"pass": pass_index, "before": measured, "requested_gain_db": round(delta, 4)})
+        if abs(-14.20 - integrated) <= 0.15 and true_peak <= -1.20:
+            break
+        if true_peak > -1.20:
+            delta = min(delta, -1.40 - true_peak)
+        adjusted = WORK / f"soundtrack_calibrated_{pass_index}.wav"
+        ffmpeg("-i", str(soundtrack), "-af",
+               f"volume={delta:.4f}dB,aresample=192000,alimiter=limit=0.67:level=false,aresample={SR}",
+               "-t", "30.000", "-ar", str(SR), "-ac", "2", "-c:a", "pcm_s24le", str(adjusted))
+        adjusted.replace(soundtrack)
+        ffmpeg("-i", str(soundtrack), "-t", "30.000", "-c:a", "aac", "-b:a", "192k",
+               "-ar", str(SR), "-ac", "2", str(master_m4a))
+    calibration.append({"final_aac_measurement": loudness(master_m4a)})
+    save_json(REVIEW / "master_calibration.json", calibration)
     return soundtrack, master_m4a, stats
 
 

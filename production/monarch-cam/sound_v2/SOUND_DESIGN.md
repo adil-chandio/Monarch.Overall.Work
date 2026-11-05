@@ -19,7 +19,7 @@ This is a **soundtrack-only revision** of the approved opening. The H.264 pictur
 3. One real CC0 forest-night recording at a quiet background level. It is sound-design ambience, not claimed as original NPS camera sound.
 4. Licensed pro-produced whoosh and soft-impact excerpts only on visible graphic reveals. Model ticks are short high-passed excerpts of the same impact recording, not newly synthesized tones.
 5. Voice envelope: 50 ms measurement, approximately 120 ms look-ahead, 12 ms attack and 260 ms recovery. Music receives the deepest duck; ambience and graphic SFX receive gentler ducking.
-6. Two-pass integrated-loudness mastering to approximately −14 LUFS. A conservative −3.5 dBTP intermediate target and limiter operate at loudnorm's 192 kHz internal rate before the final 48 kHz resample, leaving headroom for 192 kbps AAC inter-sample peaks.
+6. Two-pass integrated-loudness mastering to approximately −14 LUFS. A conservative −3.5 dBTP intermediate target and limiter operate at loudnorm's 192 kHz internal rate before the final 48 kHz resample. A bounded calibration loop then measures an actual AAC rendition and applies small corrective gain, if needed, while retaining the peak ceiling; the delivered MP4 is measured independently again.
 
 ## Returned evidence
 
