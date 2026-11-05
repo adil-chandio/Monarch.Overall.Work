@@ -149,7 +149,8 @@ def apply_layer(frame: np.ndarray, layer: np.ndarray, opacity: float = 1.0) -> N
         return
     alpha = np.clip(layer[:, :, 3:4] * opacity, 0.0, 1.0)
     frame *= 1.0 - alpha
-    frame += layer[:, :, :3] * 255.0 * alpha
+    # PIL text layers are RGBA while the video canvas is OpenCV BGR.
+    frame += layer[:, :, :3][:, :, ::-1] * 255.0 * alpha
 
 
 def smooth_fade(t: float, start: float, end: float, fade: float = 0.22) -> float:

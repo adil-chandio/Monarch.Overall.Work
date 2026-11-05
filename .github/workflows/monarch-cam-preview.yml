@@ -37,7 +37,12 @@ jobs:
             requests yt-dlp edge-tts numpy scipy pillow opencv-python-headless
 
       - name: Retrieve explicit public-domain NPS source
-        run: python production/monarch-cam/source_recon.py
+        run: |
+          python production/monarch-cam/source_recon.py
+          mkdir -p production/monarch-cam/preview
+          cp production/monarch-cam/work/recon/source-probe.json production/monarch-cam/preview/source_probe.json
+          cp production/monarch-cam/work/recon/review-manifest.json production/monarch-cam/preview/source_manifest.json
+          cp production/monarch-cam/work/recon/retrieval-route.txt production/monarch-cam/preview/source_url.txt
 
       - name: Build original narration and sound master first
         run: |
