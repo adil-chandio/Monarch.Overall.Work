@@ -33,9 +33,9 @@
           opacity:0; }   /* a scene paints only when the timeline turns it on */
   .layer{ position:absolute; }
   .plate{ position:absolute; inset:0; background-size:cover; background-position:center;
-          /* a plate that opts into a push grows its box by one percent instead of
-             being scaled as a composited layer */
-          inset:calc(-0.5% * var(--push, 0)); }
+          /* a plate can be shifted by whole pixels without cost; scaling it is what
+             costs detail, so nothing here scales */
+          will-change:transform; }
   /* The 4 px blur that used to live on .plate above was there for plates that were
      built by hand and came out too sharp. The plates are now the reference's own
      frames at 1:1 — blurring those can only make them worse, and it did: measured
@@ -174,7 +174,7 @@
        Plate is REF-01's frame at 2.45 s, 1:1. The build had a stock photo of a
        stool with a different bag on it — a different object, in a different
        place, at a different size. This is the reference's own composition. -->
-  <section class="scene" id="s5" style="opacity:0; will-change:opacity;">
+  <section class="scene" id="s5" style="opacity:0;">
     <!-- Plate is the GREY state of this shot, not a frame that still has the
          colour sweep in it. Using 2.45 s carried the field's colour transition
          into the plate, so this scene showed a green field with green bag while
@@ -458,24 +458,15 @@
      reference gains 1.0 % across this window (bag template, 1.000 -> 1.010). A
      push that is five times too strong makes the bag read larger and lower than
      the reference at every frame, which is what it was doing. */
-  /* The camera push is one percent. Applying it as a transform on a composited layer
-     is a bilinear resample of the finished raster, and measured, it cost the shot
-     most of its detail (a 2 px checkerboard came through the whole browser stage at
-     17 %). Growing the plate's own box instead resamples during paint, inside the
-     supersampled raster, and the encode's lanczos downscale brings it back to size. */
-  for (const id of ["s5plate0", "s5plate1", "s5plate", "s5plate2"]) {
-    tl.fromTo("#" + id, { "--push": 0 }, { "--push": 1, duration: 1.80, ease: "none" }, 1.333);
-  }
+  /* The camera move in this shot is a DRIFT, not a push: tracking the bag across
+     2.05 -> 2.95 s, it moves 0 px horizontally and 13 px down, at constant size. So
+     there is no zoom to reproduce, and that matters for detail as well as for
+     accuracy: any scale on a plate is a non-integer resample of a finished raster,
+     and measured with a 2 px checkerboard, the browser kept 17 % of its detail at
+     scale 1.0 and 28 % with a box-grown push. A whole-pixel translation resamples
+     nothing, so the plate stays as sharp as the reference frame it came from. */
+  tl.fromTo("#s5", { y: 0 }, { y: 13, duration: 0.90, ease: "none" }, 2.05);
 
-  /* The colour of this shot, measured as the share of the frame that reads green
-     (a count of pixels, so it cannot be fooled the way a mean saturation can):
-
-         reference  1.32 s 15.2 %   1.50 8.2 %   1.70 6.2 %   2.05 4.8 %   2.25 0 %
-
-     The plate is that 4.8 % state and the field then finishes draining to nothing
-     by 2.25. So most of the drain happens BEFORE the plate's own timestamp — the
-     scene opens far greener than the frame the plate was taken from, and that is
-     why holding the plate still showed green where the reference was grey. */
   /* The colour of this shot, as the share of the frame that reads green:
 
          reference  1.36 s 15.2 %   1.50 8.2 %   1.70 6.2 %   2.05 4.8 %   2.25 0 %
