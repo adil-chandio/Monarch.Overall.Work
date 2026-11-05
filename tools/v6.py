@@ -707,6 +707,81 @@ def make_lens():
     return out
 
 
+# ---------------------------------------------------------------- camera
+# AE's "camera on a large layer": render zoomed (z >= 1) and crop a 720x1280 window
+# around the shot's look point. A crop never exposes edges, costs one resize + slice,
+# and stays fast on a 2-core box (warpAffine collapses to ~15 s/frame under load).
+#
+# Each shot gets: look point, push (z0 -> z1), handheld jitter (px), crash-zoom
+# punches (t, strength) that spike and decay, and an optional white flash window.
+# The red-room shots keep their authored orbit/parallax, so the camera only adds a
+# punch there -- no second push, to keep the motion smooth instead of stacked.
+CAMERA = {
+    #            lx     ly     z0     z1    jit   punches                              flash
+    "s1":  dict(lk=(0.45, 0.55), push=(1.02, 1.05), jit=0.6, punch=[(0.10, 0.03)],
+                flash=(0.000, 0.120, 1.00)),                       # fade in from white
+    "s2":  dict(lk=(0.44, 0.50), push=(1.00, 1.00), jit=0.9, punch=[(0.541, 0.075)],
+                flash=None),                                        # the slam
+    "s3":  dict(lk=(0.46, 0.55), push=(1.05, 1.00), jit=1.2, punch=[(0.806, 0.060)],
+                flash=None),                                        # field crash
+    "s4":  dict(lk=(0.42, 0.50), push=(1.02, 1.05), jit=0.7,
+                punch=[(1.84, 0.050), (2.02, 0.075)], flash=None),  # HE / NO
+    "s5":  dict(lk=(0.50, 0.55), push=(1.00, 1.00), jit=0.0, punch=[(4.15, 0.045)],
+                flash=None),
+    "s6":  dict(lk=(0.50, 0.55), push=(1.00, 1.00), jit=0.0, punch=[(9.62, 0.045)],
+                flash=None),
+    "s7":  dict(lk=(0.45, 0.55), push=(1.02, 1.05), jit=0.9, punch=[(11.742, 0.075)],
+                flash=(11.700, 11.800, 0.85)),                      # flash into replay
+    "s8":  dict(lk=(0.45, 0.55), push=(1.00, 1.00), jit=0.9, punch=[(12.20, 0.085)],
+                flash=None),                                        # BILLION slam
+    "s9":  dict(lk=(0.46, 0.56), push=(1.07, 1.00), jit=1.3, punch=[(12.50, 0.055)],
+                flash=None),                                        # macro zoom-out
+    "s10": dict(lk=(0.40, 0.50), push=(1.05, 1.07), jit=1.0, punch=[(12.70, 0.055)],
+                flash=None),
+    "s11": dict(lk=(0.42, 0.50), push=(1.02, 1.05), jit=0.7,
+                punch=[(13.10, 0.050), (13.40, 0.050), (13.68, 0.085)], flash=None),
+    "s12": dict(lk=(0.50, 0.55), push=(1.00, 1.00), jit=0.0, punch=[(15.90, 0.045)],
+                flash=None),
+    "s13": dict(lk=(0.50, 0.50), push=(1.01, 1.03), jit=0.5, punch=[(20.70, 0.050)],
+                flash=None),                                        # flash already in scene
+}
+
+
+def camera(f: np.ndarray, t: float, u: float, fn: str) -> None:
+    """The per-shot camera move: push + crash-zoom punches + jitter + white flash."""
+    c = CAMERA.get(fn)
+    if c is None:
+        return
+    z = lerp(c["push"][0], c["push"][1], ease(u, "smooth"))
+    for pt, s in c["punch"]:
+        if t >= pt:
+            z += s * math.exp(-(t - pt) / 0.10)
+    jit = c["jit"]
+    jx = jit * (math.sin(2 * math.pi * 7.3 * t) + 0.6 * math.sin(2 * math.pi * 11.7 * t + 1.3))
+    jy = jit * (math.sin(2 * math.pi * 8.9 * t + 2.1) + 0.6 * math.sin(2 * math.pi * 13.3 * t))
+    flash_w = 0.0
+    fl = c["flash"]
+    if fl is not None:
+        ft0, ft1, fpk = fl
+        if ft0 <= t <= ft1:
+            flash_w = fpk * (1.0 - (t - ft0) / max(1e-6, ft1 - ft0))
+    if z <= 1.002 and jit == 0.0 and flash_w <= 0.01:
+        return  # nothing to move
+    f8 = np.clip(f, 0, 255).astype(np.uint8)
+    zz = max(z, 1.0)
+    sw, sh = int(round(W * zz)), int(round(H * zz))
+    g = cv2.resize(f8, (sw, sh), interpolation=cv2.INTER_LINEAR)
+    lx, ly = c["lk"]
+    cx0 = int(round(sw * lx - W / 2 + jx))
+    cy0 = int(round(sh * ly - H / 2 + jy))
+    cx0 = max(0, min(sw - W, cx0)); cy0 = max(0, min(sh - H, cy0))
+    out = g[cy0:cy0 + H, cx0:cx0 + W]
+    if flash_w > 0.01:
+        out = np.clip(out.astype(np.float32) * (1.0 - flash_w) + 255.0 * flash_w,
+                      0, 255).astype(np.uint8)
+    f[:] = out.astype(np.float32)
+
+
 def _shot_at(t: float, spec: dict) -> dict:
     return next((s for s in spec["shots"] if s["start"] <= t < s["end"]), spec["shots"][-1])
 
@@ -721,6 +796,7 @@ def _draw(i: int, spec: dict) -> np.ndarray:
     globals()[f"scene_{shot['fn']}"](f, t, u)
     if shot.get("grain", 1.2) > 0:
         grain(f, shot["grain"], i * 7919 + 13)
+    camera(f, t, u, shot["fn"])
     return f
 
 
