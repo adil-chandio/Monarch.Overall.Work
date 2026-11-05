@@ -467,6 +467,15 @@
      nothing, so the plate stays as sharp as the reference frame it came from. */
   tl.fromTo("#s5", { y: 0 }, { y: 13, duration: 0.90, ease: "none" }, 2.05);
 
+  /* And the scene darkens as it settles — measured on the sky, 146.8 at 2.05 s to
+     100.2 at 2.90, i.e. 0.83 of its own brightness, while the field goes 53.9 to
+     46.8. The plate is the 2.05 frame, so the scene was holding that exposure all
+     the way to the cut and the clouds never went as dark as the reference's. */
+  tl.fromTo("#s5plate", { filter: "brightness(1.0)" },
+    { filter: "brightness(0.84)", duration: 0.85, ease: "power1.inOut" }, 2.05);
+  tl.fromTo("#s5plate2", { filter: "brightness(1.0)" },
+    { filter: "brightness(0.84)", duration: 0.85, ease: "power1.inOut" }, 2.05);
+
   /* The colour of this shot, as the share of the frame that reads green:
 
          reference  1.36 s 15.2 %   1.50 8.2 %   1.70 6.2 %   2.05 4.8 %   2.25 0 %
