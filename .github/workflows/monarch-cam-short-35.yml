@@ -1,0 +1,155 @@
+name: Monarch Cam — 35-second vertical Short
+
+on:
+  push:
+    branches:
+      - arena/c678cc81-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-short-35.yml'
+      - 'production/monarch-cam/short_35/render_short_visual.py'
+      - 'production/monarch-cam/short_35/build_short_audio.py'
+      - 'production/monarch-cam/short_35/short_spec.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-short-35-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render-review-and-deliver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      HF_HOME: production/monarch-cam/work/hf
+      HF_HUB_DISABLE_XET: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      EARSHOT_THREADS: '4'
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/c678cc81-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install vertical media and licensed-audio production tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check -q \
+            requests edge-tts numpy scipy pillow opencv-python-headless \
+            soundfile soxr librosa pyloudnorm scikit-learn matplotlib transformers
+
+      - name: Install Earshot with CPU-only torch
+        run: |
+          python -m pip install --disable-pip-version-check -q \
+            --index-url https://download.pytorch.org/whl/cpu 'torch>=2.6'
+          python -m pip install --disable-pip-version-check -q --no-deps \
+            'git+https://github.com/Leonxlnx/earshot.git@main'
+          python -c 'import torch; from earshot import api; print("Earshot import OK; torch", torch.__version__)'
+
+      - name: Retrieve the explicitly public-domain NPS source and review frames
+        run: |
+          python production/monarch-cam/source_recon.py
+
+      - name: Render the original 35-second native-vertical picture
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/short_35/review
+          python production/monarch-cam/short_35/render_short_visual.py \
+            2>&1 | tee production/monarch-cam/short_35/review/visual_build.log
+
+      - name: Synthesize narration, design licensed sound, calibrate AAC and mux
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_35/build_short_audio.py \
+            2>&1 | tee production/monarch-cam/short_35/review/audio_build.log
+
+      - name: Run all nine measured gates on the delivered AAC stream
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4 \
+            --profile web --json production/monarch-cam/short_35/review/audio_qc.json \
+            2>&1 | tee production/monarch-cam/short_35/review/audio_qc.log
+
+      - name: Assemble the Short delivery and review summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('production/monarch-cam/short_35/review')
+          technical = json.loads((root/'technical_qc.json').read_text())
+          audio = json.loads((root/'audio_qc.json').read_text())
+          earshot = json.loads((root/'earshot_final_status.json').read_text())
+          voices = json.loads((root/'voice_ledger.json').read_text())
+          summary = {
+              'deliverable': 'deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4',
+              'package': 'This Bear Didn’t Need the Door',
+              'scope': 'Original 35-second native-vertical Short; not a crop of the horizontal test',
+              'duration_seconds': 35.0,
+              'frames': 1050,
+              'narration_words': sum(x['words'] for x in voices),
+              'all_narration_slots_pass': all(x['end_s'] <= (voices[i+1]['start'] if i+1 < len(voices) else 34.8) for i,x in enumerate(voices)),
+              'technical_pass': technical['passed'],
+              'technical_checks': technical['checks'],
+              'nine_gate_audio_pass': audio['pass'],
+              'nine_gate_audio_failed': audio['failed'],
+              'earshot_status': earshot,
+              'credits': 'production/monarch-cam/short_35/CREDITS.md',
+              'creative_lock': 'production/monarch-cam/short_35/RESEARCH_AND_CREATIVE_LOCK.md',
+              'visual_review': 'production/monarch-cam/short_35/review/vertical_contact_sheet.jpg',
+              'stems': 'production/monarch-cam/short_35/review/stems/ (Actions artifact only)',
+              'creative_review': 'Objective and model-assisted checks are evidence, not a guarantee of audience retention or virality.',
+          }
+          (root/'qc_summary.json').write_text(json.dumps(summary, indent=2))
+          if not technical['passed'] or not audio['pass'] or not summary['all_narration_slots_pass']:
+              raise SystemExit('35-second Short QC failed')
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Return failure diagnostics when a render/build/QC step fails
+        if: failure()
+        run: |
+          git config user.name "monarch-cam-short-35-bot"
+          git config user.email "monarch-cam-short-35-bot@users.noreply.github.com"
+          mkdir -p production/monarch-cam/short_35/review
+          echo "A Short 35 render, build or QC step failed; inspect adjacent logs and review JSON." \
+            > production/monarch-cam/short_35/review/workflow_failure.txt
+          git add production/monarch-cam/short_35/review
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(monarch-cam): capture 35-second Short failure diagnostics"
+            git pull --rebase origin arena/c678cc81-monarch-overall-work
+            git push origin HEAD:arena/c678cc81-monarch-overall-work
+          fi
+          exit 1
+
+      - name: Upload Short, cover, edit/source ledgers, credits, models and stems
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-this-bear-window-35s-short
+          path: |
+            deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4
+            production/monarch-cam/short_35/review/
+            production/monarch-cam/short_35/CREDITS.md
+            production/monarch-cam/short_35/short_spec.json
+            production/monarch-cam/short_35/RESEARCH_AND_CREATIVE_LOCK.md
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Return the Short MP4 and compact review record to this branch
+        run: |
+          git config user.name "monarch-cam-short-35-bot"
+          git config user.email "monarch-cam-short-35-bot@users.noreply.github.com"
+          rm -f production/monarch-cam/short_35/review/workflow_failure.txt
+          git add -f deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4
+          git add production/monarch-cam/short_35/review production/monarch-cam/short_35/CREDITS.md
+          if git diff --cached --quiet; then
+            echo "35-second Short deliverable and QC unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): deliver 35-second vertical bear Short"
+          git pull --rebase origin arena/c678cc81-monarch-overall-work
+          git push origin HEAD:arena/c678cc81-monarch-overall-work
