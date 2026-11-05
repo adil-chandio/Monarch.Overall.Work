@@ -98,6 +98,12 @@ async function main() {
       "--hide-scrollbars",
       "--disable-gpu",
       "--font-render-hinting=none",
+      /* deviceScaleFactor on the viewport alone does not magnify the page — a
+         page that is 720 CSS px wide is rasterised at 720 px either way, which is
+         why passing --ss 2 changed nothing at all in the delivered file. The page
+         has to be zoomed as well, and then the screenshot is taken at the zoomed
+         size and scaled back down to 720x1280 in the encode. */
+      ...(SS > 1 ? [`--force-device-scale-factor=${SS}`] : []),
     ],
     defaultViewport: { width: 720, height: 1280, deviceScaleFactor: SS },
   });
@@ -181,6 +187,20 @@ async function main() {
     await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
     const file = path.join(FRAMES_DIR, `f_${String(n).padStart(5, "0")}.png`);
     await page.screenshot({ path: file, type: "png", optimizeForSpeed: false });
+    if (n === 0 && SS > 1) {
+      // the whole point of --ss is a bigger raster; if it is not bigger, say so now
+      // rather than discovering it after the encode
+      const probeSize = spawnSync(ffmpegBin, ["-v", "error", "-i", file,
+        "-f", "image2pipe", "-vcodec", "png", "-"], { maxBuffer: 1 << 28 });
+      const dims = spawnSync(ffmpegBin, ["-hide_banner", "-i", file], { encoding: "utf8" });
+      const m = /,\s(\d{3,5})x(\d{3,5})/.exec(dims.stderr || "");
+      if (m && Number(m[1]) < 720 * SS * 0.98) {
+        trace(`WARNING: --ss ${SS} asked for ${720 * SS} px wide frames, got ${m[1]} — ` +
+              `the page was not zoomed, so this render has no supersampling`);
+      } else if (m) {
+        trace(`  supersampled: frames are ${m[1]}x${m[2]}`);
+      }
+    }
     if (n === 0) {
       // a black first frame is a render failure, not a style choice
       const probe = await page.screenshot({ type: "png" });
