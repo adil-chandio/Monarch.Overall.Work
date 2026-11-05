@@ -30,8 +30,8 @@ permissions:
 # render steps aside. Cancelling a render costs nothing — it is rebuilt from the same
 # commit — whereas cancelling a checkpoint costs the approval cycle.
 concurrency:
-  group: v4-apt-${{ github.ref_name }}
-  cancel-in-progress: false
+  group: v4-render-${{ github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   render:
