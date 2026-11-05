@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 314, in <module>
+    render()
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 254, in render
+    draw_top(base, scene["top"])
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 113, in draw_top
+    face = fit_font(draw, text, "Montserrat-Bold", 82, 900, 46, 8)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 42, in fit_font
+    candidate = font(name, size)
+                ^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 32, in font
+    return ImageFont.truetype(str(FONT_DIR / f"{name}.ttf"), size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/.local/lib/python3.12/site-packages/PIL/ImageFont.py", line 891, in truetype
+    return freetype(font)
+           ^^^^^^^^^^^^^^
+  File "/home/runner/.local/lib/python3.12/site-packages/PIL/ImageFont.py", line 888, in freetype
+    return FreeTypeFont(font, size, index, encoding, layout_engine)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/.local/lib/python3.12/site-packages/PIL/ImageFont.py", line 302, in __init__
+    self.font = core.getfont(
+                ^^^^^^^^^^^^^
+OSError: cannot open resource
