@@ -18,3 +18,12 @@ deliverables/*.mp4
 .cache/yt-intel/
 .harvest/
 public/yt-intel/runs.jsonl
+
+# Local film tooling and generated episode media (deliver separately, not in Git)
+.venv/
+.cache/extinct-film/
+production/extinct-life/*/audio/
+production/extinct-life/*/assets/
+
+# Procedural motion development cache
+.cache/extinct-motion-lab/
