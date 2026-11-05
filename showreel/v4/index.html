@@ -494,13 +494,21 @@
      is 0.16 s inside it, and nothing overlaps at the cut. */
   tl.to("#s5plate1", { opacity: 1.0, duration: 0.16, ease: "power1.inOut" }, 1.54);
   tl.to("#s5plate", { opacity: 1.0, duration: 0.20, ease: "power2.out" }, 1.85);
-  tl.to("#s5plate2", { opacity: 0.55, duration: 0.45, ease: "power2.out" }, 1.36);
-  tl.to("#s5plate2", { opacity: 1.0, duration: 0.42, ease: "power1.in" }, 1.83);
+  /* The drained copy is the same frame as the 2.05 plate, so it may only start once
+     that plate has fully taken over — starting it at 1.36 put the 2.05 composition on
+     screen while the entry composition was still there, which is the second bag that
+     was visible at 1.45 and 1.70. The reference's green is 4.8 % at 2.05 and 0 % by
+     2.25, so the drain runs 1.95 -> 2.25. */
+  tl.to("#s5plate2", { opacity: 0.55, duration: 0.20, ease: "power2.out" }, 1.95);
+  tl.to("#s5plate2", { opacity: 1.0, duration: 0.10, ease: "power1.in" }, 2.15);
   /* and BILLION leaves the way it does in the reference: out, upward and to the
      left, gone by about 1.75 — measured, the word is over the field at 1.45 and
      there is no dark type anywhere above the bag by 1.85. */
   tl.to("#s5billion", { opacity: 1, duration: 0.02 }, 1.333);
-  tl.to("#s5billion", { x: -90, y: -70, opacity: 0, duration: 0.42, ease: "power2.in" }, 1.35);
+  /* measured: the word is still solid and dark at 1.55 and the frame is clear of it by
+     1.85, so it leaves in 0.30 s — leaving from 1.35 made it fade while the reference's
+     is still black */
+  tl.to("#s5billion", { x: -110, y: -90, opacity: 0, duration: 0.30, ease: "power2.in" }, 1.54);
 
   /* Measured arrival, not a guess: HE SAID is faint from 2.10 and solid by 2.45,
      a fade with almost no scale. NO is not there at 2.50 and is 461 px wide at
