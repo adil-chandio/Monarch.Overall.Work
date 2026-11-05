@@ -320,9 +320,24 @@ async def synthesize() -> None:
         target = WORK / f"{narration['id']}.mp3"
         if target.exists() and target.stat().st_size > 1000:
             continue
-        communicate = edge_tts.Communicate(narration["text"], voice["name"], rate=voice["rate"])
-        await communicate.save(str(target))
-        print("Synthesized", narration["id"], flush=True)
+        # Edge TTS occasionally returns a transient NoAudioReceived response. Retry only
+        # the missing phrase with fresh state; never accept an empty/partial narration file.
+        for attempt in range(1, 5):
+            try:
+                target.unlink(missing_ok=True)
+                communicate = edge_tts.Communicate(narration["text"], voice["name"], rate=voice["rate"])
+                await communicate.save(str(target))
+                if not target.exists() or target.stat().st_size <= 1000:
+                    raise RuntimeError(f"Empty narration received for {narration['id']}")
+                print("Synthesized", narration["id"], flush=True)
+                break
+            except Exception:
+                target.unlink(missing_ok=True)
+                if attempt == 4:
+                    raise
+                delay = attempt * 2
+                print(f"Narration {narration['id']} attempt {attempt} failed; retrying in {delay}s", flush=True)
+                await asyncio.sleep(delay)
 
 
 def decode_vo(path: Path, atempo: float = 1.0) -> np.ndarray:

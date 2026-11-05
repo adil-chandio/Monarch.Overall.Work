@@ -117,6 +117,7 @@ jobs:
         run: |
           git config user.name "monarch-cam-preview-bot"
           git config user.email "monarch-cam-preview-bot@users.noreply.github.com"
+          rm -f production/monarch-cam/preview/workflow_failure.txt
           git add -f deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4
           git add production/monarch-cam/preview
           if git diff --cached --quiet; then
