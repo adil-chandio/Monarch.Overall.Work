@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the silent 10-second MONARCH adaptation of reference 06."""
 from pathlib import Path
-import math,sys,subprocess
+import argparse,math,sys,subprocess
 from functools import lru_cache
 import numpy as np,cv2
 from PIL import Image,ImageDraw,ImageFont,ImageFilter
@@ -175,15 +175,22 @@ def frame(i):
  return im.convert('RGB')
 
 def main():
- OUT.parent.mkdir(parents=True,exist_ok=True)
- proc=subprocess.Popen([ffmpeg(),'-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-','-an','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(OUT)],stdin=subprocess.PIPE)
+ parser=argparse.ArgumentParser()
+ parser.add_argument('--crop',action='store_true',help='Render only the inner card, with no surrounding BTS panel')
+ args=parser.parse_args()
+ out=OUT.with_name('monarch-reference-06-cropped.mp4') if args.crop else OUT
+ # The card is 965 pixels tall; drop its bottom pixel to keep H.264 dimensions even.
+ width,height=(CW,CH-1) if args.crop else (W,H)
+ out.parent.mkdir(parents=True,exist_ok=True)
+ proc=subprocess.Popen([ffmpeg(),'-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{width}x{height}','-r',str(FPS),'-i','-','-an','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(out)],stdin=subprocess.PIPE)
  try:
   for i in range(600):
-   proc.stdin.write(frame(i).tobytes())
+   image=card(i/FPS).convert('RGB').crop((0,0,width,height)) if args.crop else frame(i)
+   proc.stdin.write(image.tobytes())
    if i%60==0:print(f'{i}/600',flush=True)
   proc.stdin.close()
   if proc.wait()!=0:raise RuntimeError('ffmpeg failed')
  finally:
   if proc.poll() is None:proc.kill();proc.wait()
- print('Wrote',OUT)
+ print('Wrote',out)
 if __name__=='__main__':main()

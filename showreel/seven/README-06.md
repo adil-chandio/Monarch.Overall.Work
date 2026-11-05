@@ -12,4 +12,12 @@ Requires Python 3, Pillow, NumPy, OpenCV and the FFmpeg helper/dependencies used
 python3 showreel/seven/render_06.py
 ```
 
+For the main-frame-only version without the surrounding editor timeline, caption or badge:
+
+```sh
+python3 showreel/seven/render_06.py --crop
+```
+
+This renders `public/demo/monarch-reference-06-cropped.mp4` at 720 × 964, 60 fps, for 600 frames. It draws the inner card directly so no timeline shows through the rounded corners. One bottom pixel is omitted to maintain even dimensions for H.264. Like the reference, it is silent.
+
 The render does not require the original reference file. Generated assets are `assets/06-bust.png`, `assets/06-profile.png` and `assets/06-crown.png`. Fonts: Inter (`assets/Inter-OFL.txt`), Instrument Serif (`assets/InstrumentSerif-OFL.txt`) and Poppins (`assets/Poppins-OFL.txt`).
