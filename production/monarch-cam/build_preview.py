@@ -15,6 +15,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 
 import cv2
@@ -375,19 +376,19 @@ def sub_hit(duration: float = 0.75) -> np.ndarray:
 def loudnorm_file(raw_path: Path, output: Path) -> None:
     first = run([
         FFMPEG, "-y", "-hide_banner", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", str(raw_path),
-        "-af", "loudnorm=I=-14:TP=-1.5:LRA=7:print_format=json", "-f", "null", "-",
+        "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-",
     ], capture_output=True, check=True)
     match = re.search(r'\{\s*"input_i"[\s\S]*?\}', first.stderr)
     stats = json.loads(match.group(0)) if match else {}
     if stats:
         af = (
-            "loudnorm=I=-14:TP=-1.5:LRA=7:"
+            "loudnorm=I=-14:TP=-1.5:LRA=11:"
             f"measured_I={stats['input_i']}:measured_TP={stats['input_tp']}:"
             f"measured_LRA={stats['input_lra']}:measured_thresh={stats['input_thresh']}:"
             f"offset={stats['target_offset']}:linear=true,aresample={SR},alimiter=limit=0.82:level=false"
         )
     else:
-        af = f"loudnorm=I=-14:TP=-1.5:LRA=7,aresample={SR},alimiter=limit=0.82:level=false"
+        af = f"loudnorm=I=-14:TP=-1.5:LRA=11,aresample={SR},alimiter=limit=0.82:level=false"
     run([
         FFMPEG, "-y", "-hide_banner", "-loglevel", "warning",
         "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", str(raw_path),
@@ -427,6 +428,19 @@ def render_audio() -> tuple[Path, list[dict]]:
     section = np.interp(t, [0, 10.8, 11.7, 16.4, 17.1, 22.7, 23.2, 29.3, 30], [0.30, 0.30, 0.55, 0.55, 0.90, 0.90, 0.48, 0.48, 0.15])
     drone = np.stack([drone_l, drone_r], axis=1) * section[:, None] * 0.018
     background += drone.astype(np.float32)
+
+    # Very low, band-limited original night air prevents near-digital-silence between
+    # narration beats. It is ducked under the voice and contains no fake wildlife/foley.
+    rng = np.random.default_rng(20261105)
+    air = np.empty((samples, 2), dtype=np.float32)
+    air_sos = signal.butter(2, [120, 1800], btype="bandpass", fs=SR, output="sos")
+    for channel in range(2):
+        noise = signal.sosfilt(air_sos, rng.standard_normal(samples))
+        noise /= float(np.sqrt(np.mean(noise * noise)) + 1e-12)
+        air[:, channel] = noise.astype(np.float32)
+    air_section = np.interp(t, [0, 11.7, 17.1, 23.2, 30], [1.0, 0.92, 0.86, 0.94, 0.80])
+    background += (air * air_section[:, None] * 0.012).astype(np.float32)
+
     mix_into(background, whoosh(), 11.42, 0.85)
     mix_into(background, whoosh(), 22.93, 0.75)
     mix_into(background, sub_hit(), 17.08, 0.70)
@@ -470,10 +484,23 @@ def mux_and_probe(video: Path, audio: Path) -> dict:
 
 
 def main() -> int:
+    args = set(sys.argv[1:])
+    audio_only = "--audio-only" in args
+    video_only = "--video-only" in args
+    if audio_only and video_only:
+        raise ValueError("Choose only one of --audio-only / --video-only")
     if not SOURCE.exists():
         raise FileNotFoundError(f"Retrieve NPS source first: {SOURCE}")
-    asyncio.run(synthesize())
-    audio, _ = render_audio()
+    if video_only:
+        audio = WORK / "audio_master.m4a"
+        if not audio.exists():
+            raise FileNotFoundError("Render and verify the audio master before --video-only")
+    else:
+        asyncio.run(synthesize())
+        audio, _ = render_audio()
+    if audio_only:
+        print(json.dumps({"audio_master": str(audio)}, indent=2), flush=True)
+        return 0
     video = render_video()
     probe = mux_and_probe(video, audio)
     print(json.dumps({"output": str(OUT), "probe": probe}, indent=2), flush=True)

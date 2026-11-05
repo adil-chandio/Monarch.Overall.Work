@@ -39,19 +39,24 @@ jobs:
       - name: Retrieve explicit public-domain NPS source
         run: python production/monarch-cam/source_recon.py
 
-      - name: Render exactly 30 seconds with original narration and graphics
+      - name: Build original narration and sound master first
         run: |
           set -o pipefail
           mkdir -p production/monarch-cam/preview
-          python production/monarch-cam/build_preview.py 2>&1 | tee production/monarch-cam/preview/build.log
+          python production/monarch-cam/build_preview.py --audio-only 2>&1 | tee production/monarch-cam/preview/audio_build.log
 
-      - name: Run nine measured audio delivery gates
+      - name: Run nine measured audio delivery gates before video rendering
         run: |
           set -o pipefail
           python -m showreel.audio_qc.gates \
             production/monarch-cam/work/preview/audio_master.m4a \
             --profile web --json production/monarch-cam/preview/audio_qc.json \
             2>&1 | tee production/monarch-cam/preview/audio_qc.log
+
+      - name: Render exactly 900 frames and mux the verified audio
+        run: |
+          set -o pipefail
+          python production/monarch-cam/build_preview.py --video-only 2>&1 | tee production/monarch-cam/preview/video_build.log
 
       - name: Assemble delivery QC summary
         run: |
