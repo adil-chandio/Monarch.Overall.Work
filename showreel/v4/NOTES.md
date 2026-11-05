@@ -187,3 +187,22 @@ the three planes now moving at visibly different rates.
 
 None of the four is a tuning problem; 1 and 3 need the shot re-laid-out against the
 reference frame, 2 is one number, 4 is the per-shot softness noted earlier.
+
+## 2026-11-05 · where s5 stands
+
+The scene is built from the reference's own frames, in the order the reference plays
+them, and every number below is measured from the reference:
+
+| what | reference | this build |
+|---|---|---|
+| cut into the shot | 1.333 s | 1.333 s |
+| the word leaves | gone by 1.85 s | own layer, out by 1.77 s |
+| rack focus (bag acutance) | 27 → 46 → 308 | 1.45 → 1.85 → 2.05 plates |
+| green in the frame | 15.2 % → 0 by 2.25 s | crossfade to a drained copy |
+| camera push | +1.0 % | +1.0 % |
+| HE SAID | faint 2.10, solid 2.45 | 2.10, 0.35 s |
+| NO | absent 2.50, full 2.60 | 2.54, 0.10 s |
+
+Open: the render keeps 39 % of the plate's acutance where the reference keeps 115 %,
+and supersampling did not change it. The encode is proven lossless on the same PNG
+(307.7 in, 307.7 out), so the loss is between the PNG and the screenshot.
