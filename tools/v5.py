@@ -83,7 +83,7 @@ def cut(a: np.ndarray) -> np.ndarray:
 
 def draw_layer(dst: np.ndarray, layer: np.ndarray, x: float, y: float, w: float,
                opacity: float = 1.0, rot: float = 0.0, skew: float = 0.0,
-               blur: float = 0.0) -> None:
+               blur: float = 0.0, h: float | None = None) -> None:
     """Composite an RGBA layer at a target size, optionally rotated/skewed.
 
     Compositing is in BGR float32 0..255, premultiplied by alpha, so no fringe appears
@@ -92,7 +92,7 @@ def draw_layer(dst: np.ndarray, layer: np.ndarray, x: float, y: float, w: float,
     if opacity <= 0.003 or w < 2:
         return
     lh, lw = layer.shape[:2]
-    h = max(2, int(round(lh * w / lw)))
+    h = max(2, int(round(h if h is not None else lh * w / lw)))
     w = max(2, int(round(w)))
     if blur > 0.05:
         big = cv2.resize(layer, (w * 2, h * 2), interpolation=cv2.INTER_LANCZOS4)
@@ -123,6 +123,77 @@ def draw_layer(dst: np.ndarray, layer: np.ndarray, x: float, y: float, w: float,
     a = (sub[..., 3].astype(np.float32) / 255.0 * opacity)[..., None]
     dst[y0:y1, x0:x1] = sub[..., :3].astype(np.float32) * a + dst[y0:y1, x0:x1] * (1 - a)
 
+
+
+# ------------------------------------------------------------------- 3D camera
+class Cam:
+    """A pinhole camera over layers that sit at different depths.
+
+    This is the whole difference between a flat cutout and a parallax shot. A layer at
+    depth `z` is scaled by f/(f+z) and translated by the camera's own motion multiplied
+    by the same factor, so a layer twice as far moves half as much and grows half as
+    fast. The reference's red room does exactly this: the 2008 type slides across the
+    man instead of riding with him, which is only possible if they are at two depths.
+    """
+
+    def __init__(self, f: float = 1500.0):
+        self.f = f
+
+    def project(self, z: float, cx: float, cy: float, cz: float) -> tuple[float, float, float]:
+        k = self.f / max(1.0, self.f + z - cz)          # perspective scale for this depth
+        k0 = self.f / max(1.0, self.f + z)              # how much camera motion it feels
+        return k, -cx * k0, -cy * k0
+
+
+CAM = Cam()
+
+
+def place_px(dst: np.ndarray, img: np.ndarray, z: float, width: float, cx: float, cy: float,
+             cz: float, opacity: float = 1.0, blur: float = 0.0,
+             anchor: tuple[float, float] = (0.5, 0.5)) -> None:
+    """Place a layer at a measured pixel width and let the camera scale it from there.
+
+    Type is set by its ink width, so it must not be sized by `cover` -- cover answers
+    "what fills the frame", which is the wrong question for a word.
+    """
+    k, dx, dy = CAM.project(z, cx, cy, cz)
+    ih, iw = img.shape[:2]
+    w = width * k
+    h = ih * (w / iw)
+    draw_layer(dst, img, (W - w) * anchor[0] + dx, (H - h) * anchor[1] + dy,
+               w, opacity, 0.0, 0.0, blur, h=h)
+
+
+def place(dst: np.ndarray, img: np.ndarray, z: float, cx: float, cy: float, cz: float,
+          cover: float = 1.0, opacity: float = 1.0, blur: float = 0.0,
+          anchor: tuple[float, float] = (0.5, 0.5)) -> None:
+    """Composite one RGBA layer through the camera. `cover` is how it fills the frame at z=0."""
+    k, dx, dy = CAM.project(z, cx, cy, cz)
+    ih, iw = img.shape[:2]
+    need = max(W / iw, H / ih) * cover
+    w = iw * need * k
+    h = ih * need * k
+    draw_layer(dst, img, (W - w) * anchor[0] + dx, (H - h) * anchor[1] + dy,
+               w, opacity, 0.0, 0.0, blur, h=h)
+
+
+# -------------------------------------------------------------------------- colour
+def rgb(r: float, g: float, b: float) -> np.ndarray:
+    """RGB in, frame-order (BGR) out. Every colour in this file goes through here.
+
+    Two channel swaps in a row happened because literals were written in RGB and used
+    on a BGR canvas. One helper, one direction, plus a self-test in `prepare`.
+    """
+    return np.array([b, g, r], np.float32)
+
+
+def colour_selftest() -> None:
+    """Draw a known colour through the same path the scenes use and check it comes back."""
+    canvas = np.zeros((8, 8, 3), np.float32)
+    canvas[:] = rgb(255, 0, 0)
+    b, g, r = canvas[4, 4]
+    if not (r > 250 and g < 5 and b < 5):
+        raise SystemExit(f"colour path is swapped: asked for red, got BGR {(b, g, r)}")
 
 # ---------------------------------------------------------------------------- type
 _fonts: dict[tuple[str, int], ImageFont.FreeTypeFont] = {}
@@ -272,35 +343,80 @@ def scene_s4(f, t, u):
     vignette(f, 0.30)
 
 
-def scene_s5(f, t, u):
-    """3.13-9.17  the red room: 2008, the exchange, the portrait; slow push."""
-    f[:] = plate_colour((96, 16, 18))
+def feather_edges(img: np.ndarray, px: int = 46, bottom: int = 120) -> np.ndarray:
+    """Soften a cutout's own border so the cut is never the thing you see.
+
+    A cutout that ends mid-frame reads as a sticker; the reference's figure is lit into
+    the room, so the transition has to be gradual. The bottom gets a longer ramp because
+    that is where a subject is normally lost in shadow.
+    """
+    out = img.copy()
+    a = out[..., 3].astype(np.float32)
+    ramp = np.linspace(0, 1, px)[:, None]
+    a[:px] *= ramp
+    a[-bottom:] *= np.linspace(1, 0, bottom)[:, None] ** 1.4
+    ramp2 = np.linspace(0, 1, px)[None, :]
+    a[:, :px] *= ramp2
+    a[:, -px:] *= ramp2[:, ::-1]
+    out[..., 3] = np.clip(a, 0, 255).astype(np.uint8)
+    return out
+
+
+def red_field(dst: np.ndarray, strength: float = 1.0) -> np.ndarray:
+    """The room: a deep red wall, lit from the upper left, darkening toward the floor."""
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
-    d = np.sqrt(((xx - 0.18 * W) / (0.75 * W)) ** 2 + ((yy - 0.22 * H) / (0.55 * H)) ** 2)
-    # additive light is written BGR, like every other colour in this file
-    f[:] = f * (1 - 0.55 * np.clip(1 - d, 0, 1) ** 1.2)[..., None] + (8, 4, 40)
-    f[:] = np.clip(f, 0, 255)
-    draw_text(f, "2008", lerp(150, 138, u), lerp(232, 210, u), 420, (216, 214, 216),
-              opacity=0.60 * min(1.0, u * 5 + 0.2))
-    draw_layer(f, THERO, lerp(146, 130, u), lerp(392, 366, u), 512, opacity=1.0)
-    vignette(f, 0.42)
+    d = np.sqrt(((xx - 0.16 * W) / (0.92 * W)) ** 2 + ((yy - 0.16 * H) / (0.80 * H)) ** 2)
+    lit = np.clip(1 - d, 0, 1) ** 1.15
+    dark = rgb(34, 4, 6)                       # the wall away from the light
+    bright = rgb(150, 26, 26)                  # the wall where the light rakes it
+    field = dark + (bright - dark) * lit[..., None]
+    field *= (1 - 0.55 * np.clip((yy / H - 0.62) / 0.38, 0, 1) ** 1.3)[..., None]
+    dst[:] = np.clip(field * strength, 0, 255)
+
+
+def red_room(f, t, u, push: float, cx: float, cy: float, cz: float) -> None:
+    """The reference's red room as three planes at three depths.
+
+    y<0   the year sits *behind* the subject, so the camera slides it across him instead
+          of carrying it with him. That relative motion is the whole tell of parallax.
+    z=900 the figure is a real cutout with its own alpha.
+    z=1500 red haze in front separates the planes to the eye.
+    Then the floor is taken down to shadow, which is where a subject is normally lost and
+    which is also what hides a cutout's lower edge.
+    """
+    red_field(f)
+    place_px(f, T2008, -520.0, 372 * push, cx * 0.42, cy * 0.42, cz, opacity=0.33,
+             blur=1.1, anchor=(0.5, 0.055))
+    place(f, THERO, 900.0, cx, cy, cz, cover=1.0 * push, opacity=1.0,
+          anchor=(0.5, 0.52), blur=0.2)
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    haze = np.zeros((H, W, 4), np.uint8)
+    g = np.clip(1 - np.sqrt(((xx - 0.28 * W) / (1.0 * W)) ** 2 + ((yy - 0.30 * H) / (0.95 * H)) ** 2), 0, 1) ** 1.6
+    haze[..., 3] = (g * 64).astype(np.uint8)
+    place(f, haze, 1500.0, cx * 1.5, cy * 1.5, cz, cover=1.05, opacity=0.5)
+    shadow = np.clip((yy / H - 0.80) / 0.20, 0, 1)[..., None] ** 1.5
+    f[:] = f * (1 - 0.92 * shadow)
+
+
+def scene_s5(f, t, u):
+    """3.13-9.17  the red room: 2008, the figure, and a camera that pushes in."""
+    p = ease(u, "linear")
+    red_room(f, t, u, push=1.0 + 0.045 * p, cx=-10 + 22 * p, cy=-6 + 14 * p, cz=26 * p)
+    vignette(f, 0.40)
 
 
 def scene_s6(f, t, u):
-    """9.17-11.73  same frame, eyes hot red, subscribe and like."""
-    f[:] = plate_colour((92, 15, 17))
+    """9.17-11.73  same room, tighter, eyes hot, subscribe and like."""
+    p = ease(u, "linear")
+    red_room(f, t, u, push=1.10 + 0.05 * p, cx=18 - 26 * p, cy=10 - 18 * p, cz=40 * p)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
-    d = np.sqrt(((xx - 0.18 * W) / (0.75 * W)) ** 2 + ((yy - 0.22 * H) / (0.55 * H)) ** 2)
-    f[:] = np.clip(f * (1 - 0.5 * np.clip(1 - d, 0, 1) ** 1.2)[..., None] + (8, 3, 34), 0, 255)
-    draw_text(f, "2008", 138, 210, 420, (216, 214, 216), opacity=0.30)
-    draw_layer(f, THERO, 130, 366, 512, opacity=1.0, blur=0.25)
-    for cx in (0.447, 0.556):
-        dd = np.sqrt(((xx - cx * W) / (0.038 * W)) ** 2 + ((yy - 0.404 * H) / (0.011 * H)) ** 2)
+    for cx in (0.452, 0.556):
+        dd = np.sqrt(((xx - cx * W) / (0.040 * W)) ** 2 + ((yy - 0.432 * H) / (0.013 * H)) ** 2)
         hot = np.clip(1 - dd, 0, 1) ** 1.3
-        f[:] = f + np.array([38, 38, 255], np.float32) * hot[..., None] * 0.95
+        f[:] = f + np.array([34, 34, 255], np.float32) * hot[..., None] * 0.9
     a = ease(min(1.0, max(0.0, (t - 9.55) / 0.30)), "out")
     draw_pill(f, 168, lerp(824, 786, a), a)
-    vignette(f, 0.46)
+    vignette(f, 0.44)
 
 
 def draw_pill(f, x, y, a, scale=1.0):
@@ -377,21 +493,28 @@ def scene_s12(f, t, u):
 
 
 def scene_s13(f, t, u):
-    """20.63-23.27  the CTA: red reveal, the portrait, a flash, the glass card."""
-    f[:] = plate_colour((150, 22, 22))
-    draw_layer(f, THERO, 96, 352, 520, opacity=1.0, blur=0.5)
+    """20.63-23.27  the CTA: red reveal, the figure, a flash, the glass card.
+
+    The reveal itself is the camera pulling back through the planes: at the head the
+    figure is large and the wall is close behind him, and by the end there is room for
+    the card. That is a dolly, not a cross-fade between two layouts.
+    """
+    p = ease(u, "out")
+    red_room(f, t, u, push=1.22 - 0.16 * p, cx=-18 + 26 * p, cy=14 - 20 * p, cz=-60 + 44 * p)
     if 20.80 <= t < 20.86:                      # the reference's one-frame flash
-        f[:] = np.minimum(f * 1.9 + 70, 255)
+        f[:] = np.minimum(f * 1.85 + 66, 255)
     a = ease(min(1.0, max(0.0, (t - 21.10) / 0.45)), "out")
     if a > 0:
-        cardh, cardw = int(300 * lerp(0.9, 1.0, a)), int(560 * lerp(0.9, 1.0, a))
+        cardh, cardw = int(300 * lerp(0.88, 1.0, a)), int(560 * lerp(0.88, 1.0, a))
         card = np.zeros((cardh, cardw, 4), np.uint8)
-        cv2.rectangle(card, (10, 10), (cardw - 11, cardh - 11), (*GLASS[::-1], 232), -1, cv2.LINE_AA)
-        card = cv2.GaussianBlur(card, (0, 0), 1.0)
-        draw_layer(f, card, (W - cardw) // 2, 760 - cardh // 2, cardw, opacity=a)
-        draw_text(f, "2008", 150 + (W - 560) // 2 - 100, 690 - cardh // 2 + 40, 380, INK_RED,
-                  opacity=a)
-    vignette(f, 0.5)
+        cv2.rectangle(card, (12, 12), (cardw - 13, cardh - 13), (*GLASS[::-1], 236), -1, cv2.LINE_AA)
+        card = cv2.GaussianBlur(card, (0, 0), 1.2)
+        card[..., 3] = (card[..., 3] * a).astype(np.uint8)
+        draw_layer(f, card, (W - cardw) // 2, 790 - cardh // 2, cardw, opacity=a * 0.96)
+        sub = "SUBSCRIBE  •  LIKE"
+        draw_text(f, sub, (W - 380) // 2, 790 - cardh // 2 + 66, 380, (26, 20, 16), opacity=a,
+                  face="Poppins-SemiBold.ttf")
+    vignette(f, 0.48)
 
 
 # ---------------------------------------------------------------------------- spec
@@ -399,6 +522,7 @@ S: dict = {}
 TBAG: np.ndarray | None = None
 TSTOOL: np.ndarray | None = None
 THERO: np.ndarray | None = None
+T2008: np.ndarray | None = None
 THAND: np.ndarray | None = None
 
 
@@ -418,7 +542,7 @@ def load_spec(path: str) -> dict:
 
 def prepare(spec: dict) -> None:
     """Cut our object layers out of our own plates, once, before any frame is drawn."""
-    global S, TBAG, TSTOOL, THERO, THAND
+    global S, TBAG, TSTOOL, THERO, THAND, T2008
     S = spec
     TBAG = cut(asset(BAG))
     # the bag on the stool: the plate's own subject, taken by its difference from the
@@ -441,8 +565,13 @@ def prepare(spec: dict) -> None:
     alpha = np.clip((alpha - 0.3) / 0.5, 0, 1)
     TSTOOL = cut(np.dstack([pl[..., :3], (alpha * 255).astype(np.uint8)]))
     # the portrait: our cta plate's front layer, already cut by its own alpha
-    THERO = cut(asset("showreel/v4/assets/layers/plate-cta-hero-front.png"))
+    THERO = feather_edges(cut(asset("showreel/v4/assets/layers/plate-cta-hero-front.png")),
+                          px=44, bottom=250)
     THAND = cut(asset("showreel/v4/assets/layers/plate-hands-red-front.png"))
+    g = glyph("2008")
+    grey = 214
+    rgba = np.dstack([np.full(g.shape, grey, np.uint8)] * 3 + [(g * 0.92).astype(np.uint8)])
+    T2008 = rgba
 
 
 def render_frame(i: int, spec: dict, fps: int) -> np.ndarray:
@@ -486,6 +615,7 @@ def main() -> int:
     spec = load_spec(a.spec)
     t0 = time.time()
     prepare(spec)
+    colour_selftest()
     print(f"  prepare {time.time() - t0:.2f}s   bag {TBAG.shape[1]}x{TBAG.shape[0]}  "
           f"stool {TSTOOL.shape[1]}x{TSTOOL.shape[0]}  portrait {THERO.shape[1]}x{THERO.shape[0]}")
 
