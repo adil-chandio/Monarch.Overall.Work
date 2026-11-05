@@ -1,0 +1,245 @@
+{
+  "file": "deliverables/Extinct_Life_Opening_25D_Cinema_Polish_45s_1080p.mp4",
+  "theme": "Amber Atlas \u2014 Cinema Polish v2",
+  "scope": "45-second visual style comparison, not the full 6\u20138-minute episode",
+  "native_resolution": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "decoded_frames": 1350,
+  "duration_seconds": 45,
+  "bytes": 21034105,
+  "audio_reference": "deliverables/Extinct_Life_Opening_25D_Amber_Atlas_45s_1080p.mp4",
+  "decoded_45s_audio_sha256": "SHA256=e2390a6b0283d8175a9edf7b3a88519d2932b9c4b79316f30f385633211977c9",
+  "audio_identical_to_previous_25d": true,
+  "measured_encoded_audio": {
+    "input_i": "-16.20",
+    "input_tp": "-1.98",
+    "input_lra": "9.50",
+    "input_thresh": "-27.09",
+    "output_i": "-16.12",
+    "output_tp": "-2.00",
+    "output_lra": "3.90",
+    "output_thresh": "-26.74",
+    "normalization_type": "dynamic",
+    "target_offset": "0.12"
+  },
+  "black_or_freeze_events": [
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 3.633333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 1.233333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 4.866667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 4.866667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 1.566667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 6.433333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 8.166667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 3.2",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 11.366667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 16.933333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 1.5",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 18.433333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 21.833333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 0.766667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 22.6",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 22.6",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 0.866667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 23.466667",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 30.933333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 1.6",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 32.533333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_start: 32.533333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_duration: 3.033333",
+    "[Parsed_freezedetect_0 @ 0x7f2520002040] lavfi.freezedetect.freeze_end: 35.566667"
+  ],
+  "review_limits": "Ten final frames sampled; not a full creative watch, anatomical validation or competitor benchmark. No word-aligned subtitles claimed.",
+  "half_second_motion_samples": {
+    "count": 90,
+    "unique_decoded_frames": 90
+  },
+  "diagnostic_interpretation": "Freeze detector includes low-motion cartography, settled diagrams and explanatory holds; not a creative score. Full decode and sampled frame hashes are separate checks.",
+  "owner_style_approval": "pending",
+  "native_render_checks": {
+    "source_sha256": "57b43c55c2a8ba58ef5a5445af054eb098b1ca04d93cc923cf4eedda95a2d4a0",
+    "edit_sha256": "1b3fe000e825caad2db1f93c2c9ab9e9a4a9aa43af35f287393ee7c3f3f756d4",
+    "rasterizer": "@napi-rs/canvas / Skia",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 1350,
+    "camera": [
+      {
+        "t": 3.35,
+        "before": {
+          "camera": 53.98503747695496,
+          "time": 3.349
+        },
+        "at": {
+          "camera": 54,
+          "time": 3.35
+        },
+        "after": {
+          "camera": 54.01496185773303,
+          "time": 3.351
+        }
+      },
+      {
+        "t": 6.55,
+        "before": {
+          "camera": 97.98875503134258,
+          "time": 6.5489999999999995
+        },
+        "at": {
+          "camera": 98,
+          "time": 6.55
+        },
+        "after": {
+          "camera": 98.01124367920978,
+          "time": 6.551
+        }
+      },
+      {
+        "t": 11.35,
+        "before": {
+          "camera": 150.09505707865668,
+          "time": 11.349
+        },
+        "at": {
+          "camera": 150.1056246385967,
+          "time": 11.35
+        },
+        "after": {
+          "camera": 150.1161921205399,
+          "time": 11.350999999999999
+        }
+      },
+      {
+        "t": 18.4,
+        "before": {
+          "camera": 224.18801083928207,
+          "time": 18.398999999999997
+        },
+        "at": {
+          "camera": 224.1986796424975,
+          "time": 18.4
+        },
+        "after": {
+          "camera": 224.20934855245744,
+          "time": 18.401
+        }
+      },
+      {
+        "t": 23.45,
+        "before": {
+          "camera": 279.98845806345935,
+          "time": 23.448999999999998
+        },
+        "at": {
+          "camera": 280,
+          "time": 23.45
+        },
+        "after": {
+          "camera": 280.01154380083625,
+          "time": 23.451
+        }
+      },
+      {
+        "t": 27.95,
+        "before": {
+          "camera": 344.98760175094316,
+          "time": 27.948999999999998
+        },
+        "at": {
+          "camera": 345,
+          "time": 27.95
+        },
+        "after": {
+          "camera": 345.01239580177463,
+          "time": 27.951
+        }
+      },
+      {
+        "t": 30.35,
+        "before": {
+          "camera": 370.934562717002,
+          "time": 30.349
+        },
+        "at": {
+          "camera": 370.94434204239417,
+          "time": 30.35
+        },
+        "after": {
+          "camera": 370.954120971554,
+          "time": 30.351000000000003
+        }
+      },
+      {
+        "t": 35.55,
+        "before": {
+          "camera": 429.9844587843709,
+          "time": 35.549
+        },
+        "at": {
+          "camera": 430,
+          "time": 35.55
+        },
+        "after": {
+          "camera": 430.01554326377436,
+          "time": 35.550999999999995
+        }
+      },
+      {
+        "t": 40.3,
+        "before": {
+          "camera": 516.3378838244531,
+          "time": 40.299
+        },
+        "at": {
+          "camera": 516.357816734364,
+          "time": 40.3
+        },
+        "after": {
+          "camera": 516.3777500092971,
+          "time": 40.300999999999995
+        }
+      }
+    ],
+    "non_monotonic_seek_probes": [
+      {
+        "frame": 19,
+        "sha256": "ac061647b3b715265973690771c872b8c25d9d2af1516719b2a571c8bb43546c"
+      },
+      {
+        "frame": 234,
+        "sha256": "a1ca272544a3b93dc2078863f987e1afa1c49bdeacfedd2d9099f0df296e0061"
+      },
+      {
+        "frame": 428,
+        "sha256": "6c09ef5ee499e7d8a405c8f5aa383d5618a5b6f9bf8f29b6eef3fb0fa1badca4"
+      },
+      {
+        "frame": 628,
+        "sha256": "1df88407d040600811cb10d8bd39d50e404ffd452261bbaa3957613ea86f49cc"
+      },
+      {
+        "frame": 778,
+        "sha256": "650a942282af4bedc6c610462f340b97bb230dfcc82dc8aa474a715342e3461b"
+      },
+      {
+        "frame": 965,
+        "sha256": "1b762a01df840b123aca48661faa207881f4f9eab45d635ad7c798ec578047d2"
+      },
+      {
+        "frame": 1270,
+        "sha256": "3eb8b8d667671f8ae307e49108625883758e5116a25808e17d7fb9c833ef14e6"
+      }
+    ]
+  },
+  "changes": [
+    "Refined ink/teal/amber palette and lens edge falloff",
+    "Blended leg shading and hip occlusion, cleaner body silhouette",
+    "C1 Hermite camera rail and shot-specific dolly easing",
+    "Short two-scene dissolves with amber evidence carriers",
+    "Staggered reference matching and title reveals",
+    "Quieter editorial hierarchy and limits disclosures"
+  ]
+}

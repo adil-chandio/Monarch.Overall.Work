@@ -1,0 +1,123 @@
+{
+  "name": "Amber Atlas \u2014 Cinema Polish v2",
+  "duration": 45,
+  "fps": 30,
+  "cameraRail": [
+    {
+      "t": 0,
+      "v": 0
+    },
+    {
+      "t": 3.35,
+      "v": 54
+    },
+    {
+      "t": 6.55,
+      "v": 98
+    },
+    {
+      "t": 23.45,
+      "v": 280
+    },
+    {
+      "t": 27.95,
+      "v": 345
+    },
+    {
+      "t": 35.55,
+      "v": 430
+    },
+    {
+      "t": 45,
+      "v": 610
+    }
+  ],
+  "seams": [
+    {
+      "t": 3.35,
+      "duration": 0.28,
+      "type": "atmosphere-dissolve",
+      "meaning": "Ancient woodland to present-day concept coast"
+    },
+    {
+      "t": 6.55,
+      "duration": 0.3,
+      "type": "luma-match",
+      "carrier": {
+        "from": [
+          1370,
+          290
+        ],
+        "to": [
+          1224,
+          190
+        ]
+      },
+      "meaning": "Sun/light focus to approximate study locator"
+    },
+    {
+      "t": 11.35,
+      "duration": 0.38,
+      "type": "evidence-carrier",
+      "carrier": {
+        "from": [
+          1224,
+          190
+        ],
+        "to": [
+          1050,
+          530
+        ]
+      },
+      "meaning": "Geographic evidence to schematic sample; visual metaphor, not literal flight"
+    },
+    {
+      "t": 18.4,
+      "duration": 0.3,
+      "type": "fragment-match",
+      "carrier": {
+        "from": [
+          1085,
+          290
+        ],
+        "to": [
+          990,
+          380
+        ]
+      },
+      "meaning": "Fragment to conceptual reference comparison"
+    },
+    {
+      "t": 23.45,
+      "duration": 0.3,
+      "type": "reconstruction-reveal",
+      "meaning": "Evidence supports an illustrated world, not resurrection"
+    },
+    {
+      "t": 27.95,
+      "duration": 0.18,
+      "type": "scale-match",
+      "meaning": "Wide reconstruction to animal detail"
+    },
+    {
+      "t": 30.35,
+      "duration": 0.24,
+      "type": "ink-dissolve",
+      "meaning": "Appearance separated from genetic evidence"
+    },
+    {
+      "t": 35.55,
+      "duration": 0.36,
+      "type": "release",
+      "meaning": "Uncertainty to the question over the moving world"
+    },
+    {
+      "t": 40.3,
+      "duration": 0.7,
+      "type": "title-build",
+      "meaning": "Same world continues; title reveal only"
+    }
+  ],
+  "interpretation": "All scenery/animals artistic; all sample/read animations schematic. No literal lab measurements, exact animal appearance or guaranteed retention claims.",
+  "audio": "Original 45-second soundtrack retained unchanged; no new foley or narration."
+}
