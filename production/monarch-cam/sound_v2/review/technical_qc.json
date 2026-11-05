@@ -1,7 +1,7 @@
 {
   "deliverable": "deliverables/MONARCH_CAM_Bear_Opening_30s_Sound_V2.mp4",
-  "bytes": 19002087,
-  "sha256": "9d671c3b4f21fd5efd5307b4ad4bcff0b73f6973f9c5d9d1eab0b231e4ce33e9",
+  "bytes": 19002273,
+  "sha256": "08821310aecb411f4826b6518e0f371c25c368210722da7d55cfd1e4880f6b63",
   "probe": {
     "programs": [],
     "streams": [
@@ -26,22 +26,22 @@
     ],
     "format": {
       "duration": "30.000000",
-      "size": "19002087"
+      "size": "19002273"
     }
   },
   "final_aac_loudness": {
-    "input_i": "-14.66",
-    "input_tp": "-0.83",
-    "input_lra": "5.70",
-    "input_thresh": "-25.14",
-    "output_i": "-14.09",
+    "input_i": "-15.45",
+    "input_tp": "-1.66",
+    "input_lra": "5.00",
+    "input_thresh": "-25.73",
+    "output_i": "-13.89",
     "output_tp": "-1.50",
-    "output_lra": "3.30",
-    "output_thresh": "-24.45",
+    "output_lra": "3.00",
+    "output_thresh": "-24.11",
     "normalization_type": "dynamic",
-    "target_offset": "0.09"
+    "target_offset": "-0.11"
   },
-  "sample_peak_dbfs": -0.8339,
+  "sample_peak_dbfs": -1.672,
   "clipped_samples": 0,
   "extreme_sample_jumps": 0,
   "v1_video_stream_sha256": "83dc2782c6f0d15a89dedbd1de79f72515f7442022b2114d257089b5d2236345",
@@ -53,8 +53,8 @@
     "1920x1080_30fps": true,
     "stereo_48khz": true,
     "picture_stream_identical": true,
-    "loudness_minus_14_plusminus_0_75": true,
-    "aac_true_peak_at_or_below_minus_1": false,
+    "loudness_minus_14_plusminus_0_75": false,
+    "aac_true_peak_at_or_below_minus_1": true,
     "no_clipped_samples": true,
     "no_extreme_sample_discontinuities": true
   },

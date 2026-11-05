@@ -12,7 +12,7 @@ Source soft_impact: 130,468 bytes
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/music_backup.mp3 -ss 90.000000 -t 30.000 -af aresample=48000 -ac 2 -c:a pcm_s16le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0090p0.wav
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/music_backup.mp3 -ss 150.000000 -t 30.000 -af aresample=48000 -ac 2 -c:a pcm_s16le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0150p0.wav
 Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Fetching 8 files: 100%|██████████| 8/8 [00:11<00:00,  1.49s/it]Fetching 8 files: 100%|██████████| 8/8 [00:11<00:00,  1.49s/it]
+Fetching 8 files:  88%|████████▊ | 7/8 [00:00<00:00, 67.04it/s]Fetching 8 files: 100%|██████████| 8/8 [00:18<00:00,  2.36s/it]
 Synthesized vo1
 Synthesized vo2
 Synthesized vo3
@@ -27,9 +27,9 @@ Synthesized vo5
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/forest_night.mp3 -ss 18.000000 -t 30.000000 -af highpass=f=85,lowpass=f=6500,aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/soft_whoosh.mp3 -ss 2.030000 -t 1.857000 -af aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/soft_impact.mp3 -ss 0.011000 -t 2.000000 -af aresample=48000 -ac 2 -f f32le pipe:1
-+ ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/mix_raw.wav -af loudnorm=I=-14:TP=-1.8:LRA=9:print_format=json -f null -
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/mix_raw.wav -af loudnorm=I=-14:TP=-1.8:LRA=9:measured_I=-21.54:measured_TP=-5.14:measured_LRA=6.40:measured_thresh=-32.18:offset=0.94:linear=true,aresample=48000,alimiter=limit=0.79:level=false -t 30.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/review/MONARCH_CAM_Sound_V2_soundtrack.wav
-[aist#0:0/pcm_s24le @ 0x557597964d80] Guessed Channel Layout: stereo
++ ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/mix_raw.wav -af loudnorm=I=-13.8:TP=-3.5:LRA=9:print_format=json -f null -
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/mix_raw.wav -af loudnorm=I=-13.8:TP=-3.5:LRA=9:measured_I=-21.54:measured_TP=-5.14:measured_LRA=6.40:measured_thresh=-32.18:offset=1.94:linear=true,alimiter=limit=0.67:level=false,aresample=48000 -t 30.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/review/MONARCH_CAM_Sound_V2_soundtrack.wav
+[aist#0:0/pcm_s24le @ 0x5612d4c12d80] Guessed Channel Layout: stereo
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/review/MONARCH_CAM_Sound_V2_soundtrack.wav -t 30.000 -c:a aac -b:a 192k -ar 48000 -ac 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/audio_master.m4a
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/review/MONARCH_CAM_Sound_V2_soundtrack.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -ar 48000 -ac 2 -t 30.000 -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_Bear_Opening_30s_Sound_V2.mp4
 + ffprobe -v error -count_frames -show_entries format=duration,size:stream=index,codec_name,codec_type,width,height,r_frame_rate,nb_read_frames,sample_rate,channels -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_Bear_Opening_30s_Sound_V2.mp4
@@ -38,12 +38,12 @@ Synthesized vo5
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4 -map 0:v:0 -c copy -f streamhash -hash sha256 -
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_Bear_Opening_30s_Sound_V2.mp4 -map 0:v:0 -c copy -f streamhash -hash sha256 -
 Traceback (most recent call last):
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/build_sound_v2.py", line 692, in <module>
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/build_sound_v2.py", line 697, in <module>
     raise SystemExit(main())
                      ^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/build_sound_v2.py", line 681, in main
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/build_sound_v2.py", line 686, in main
     technical = technical_qc()
                 ^^^^^^^^^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/build_sound_v2.py", line 588, in technical_qc
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/sound_v2/build_sound_v2.py", line 591, in technical_qc
     raise RuntimeError("Technical QC failed: " + ", ".join(k for k, v in gates.items() if not v))
-RuntimeError: Technical QC failed: aac_true_peak_at_or_below_minus_1
+RuntimeError: Technical QC failed: loudness_minus_14_plusminus_0_75
