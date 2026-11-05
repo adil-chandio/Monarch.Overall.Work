@@ -1,7 +1,7 @@
 {
   "deliverable": "deliverables/MONARCH_CAM_Bear_Opening_30s_Sound_V2.mp4",
-  "bytes": 19002273,
-  "sha256": "08821310aecb411f4826b6518e0f371c25c368210722da7d55cfd1e4880f6b63",
+  "bytes": 18995709,
+  "sha256": "d291ca99ce04c1fe5122a6216ed263d4cd0923ebdc124ae4ff9564403a602f39",
   "probe": {
     "programs": [],
     "streams": [
@@ -26,22 +26,22 @@
     ],
     "format": {
       "duration": "30.000000",
-      "size": "19002273"
+      "size": "18995709"
     }
   },
   "final_aac_loudness": {
-    "input_i": "-15.45",
-    "input_tp": "-1.66",
-    "input_lra": "5.00",
-    "input_thresh": "-25.73",
-    "output_i": "-13.89",
-    "output_tp": "-1.50",
-    "output_lra": "3.00",
-    "output_thresh": "-24.11",
+    "input_i": "-14.25",
+    "input_tp": "-3.20",
+    "input_lra": "4.40",
+    "input_thresh": "-24.45",
+    "output_i": "-13.86",
+    "output_tp": "-2.89",
+    "output_lra": "2.70",
+    "output_thresh": "-24.02",
     "normalization_type": "dynamic",
-    "target_offset": "-0.11"
+    "target_offset": "-0.14"
   },
-  "sample_peak_dbfs": -1.672,
+  "sample_peak_dbfs": -3.204,
   "clipped_samples": 0,
   "extreme_sample_jumps": 0,
   "v1_video_stream_sha256": "83dc2782c6f0d15a89dedbd1de79f72515f7442022b2114d257089b5d2236345",
@@ -53,11 +53,11 @@
     "1920x1080_30fps": true,
     "stereo_48khz": true,
     "picture_stream_identical": true,
-    "loudness_minus_14_plusminus_0_75": false,
+    "loudness_minus_14_plusminus_0_75": true,
     "aac_true_peak_at_or_below_minus_1": true,
     "no_clipped_samples": true,
     "no_extreme_sample_discontinuities": true
   },
-  "pass": false,
+  "pass": true,
   "subjective_note": "Measured gates cannot guarantee every listener's preference; human listening remains the final creative review."
 }

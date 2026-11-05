@@ -1,0 +1,64 @@
+[
+  {
+    "pass": 1,
+    "before": {
+      "input_i": "-15.47",
+      "input_tp": "-2.97",
+      "input_lra": "4.90",
+      "input_thresh": "-25.74",
+      "output_i": "-13.86",
+      "output_tp": "-1.68",
+      "output_lra": "2.90",
+      "output_thresh": "-24.09",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.14"
+    },
+    "requested_gain_db": 1.27
+  },
+  {
+    "pass": 2,
+    "before": {
+      "input_i": "-14.67",
+      "input_tp": "-3.26",
+      "input_lra": "4.60",
+      "input_thresh": "-24.86",
+      "output_i": "-13.87",
+      "output_tp": "-2.45",
+      "output_lra": "2.80",
+      "output_thresh": "-24.04",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.13"
+    },
+    "requested_gain_db": 0.47
+  },
+  {
+    "pass": 3,
+    "before": {
+      "input_i": "-14.37",
+      "input_tp": "-3.18",
+      "input_lra": "4.50",
+      "input_thresh": "-24.56",
+      "output_i": "-13.87",
+      "output_tp": "-2.80",
+      "output_lra": "2.70",
+      "output_thresh": "-24.03",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.13"
+    },
+    "requested_gain_db": 0.17
+  },
+  {
+    "final_aac_measurement": {
+      "input_i": "-14.25",
+      "input_tp": "-3.20",
+      "input_lra": "4.40",
+      "input_thresh": "-24.45",
+      "output_i": "-13.86",
+      "output_tp": "-2.89",
+      "output_lra": "2.70",
+      "output_thresh": "-24.02",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.14"
+    }
+  }
+]
