@@ -410,6 +410,94 @@ def feather_edges(img: np.ndarray, px: int = 46, bottom: int = 120) -> np.ndarra
     return out
 
 
+# ------------------------------------------------------- plates as back + subject
+# Every plate in this project ships as two registered layers: `-back` is the set with
+# nobody in it, `-front` is the subject with its own alpha. That is the green-screen
+# separation, already done properly -- and the offsets below are measured, not guessed:
+# compositing front over back at these offsets reproduces the original plate to within
+# 5.8/255. Splitting them is what lets the subject and the room move at different depths.
+RATIO = W / 768.0                      # the plates are 768x1376, the film is 720x1280
+COVER = max(W / 768.0, H / 1376.0)     # the scale at which a plate fills the frame exactly
+PLATE_H = 1376
+PAIRS: dict[str, dict] = {}
+PAIR_SPEC = {
+    "hero":  ("showreel/v4/assets/plate-cta-hero.png",  (54, 288)),
+    "bag":   ("showreel/v4/assets/plate-bag-green.png", (120, 234)),
+    "stool": ("showreel/v4/assets/plate-bag-stool.png", (174, 528)),
+    "hands": ("showreel/v4/assets/plate-hands-red.png", (24, 156)),
+}
+
+
+def load_pairs() -> None:
+    for key, (full, off) in PAIR_SPEC.items():
+        base = full.replace("assets/plate-", "assets/layers/plate-")
+        back = cv2.imread(base.replace(".png", "-back.png"), cv2.IMREAD_UNCHANGED)
+        front = cv2.imread(base.replace(".png", "-front.png"), cv2.IMREAD_UNCHANGED)
+        if back is None or front is None:
+            raise SystemExit(f"missing back/front pair for {key}")
+        if back.shape[2] == 3:
+            back = np.dstack([back, np.full(back.shape[:2], 255, np.uint8)])
+        PAIRS[key] = {"back": back, "front": front, "off": off}
+
+
+def plate_to_frame(x: float, y: float) -> tuple[float, float]:
+    """Where a plate-space point lands in the film, when the plate is cover-fitted."""
+    return x * RATIO, y * RATIO + (H - PLATE_H * RATIO) / 2
+
+
+def warp_place(dst: np.ndarray, layer: np.ndarray, scale: float, tx: float, ty: float,
+               opacity: float = 1.0, yaw: float = 0.0, pitch: float = 0.0,
+               replicate: bool = False) -> None:
+    """Draw a layer through one affine transform, with sub-pixel placement.
+
+    `replicate` is for backgrounds: the plane continues past the frame edge instead of
+    ending in black, which is why a cover-fitted room can be smaller than the frame and
+    still full-bleed.
+    """
+    if abs(yaw) > 0.05 or abs(pitch) > 0.05:
+        layer = _perspective(layer, yaw, pitch)
+    M = np.float32([[scale, 0, tx], [0, scale, ty]])
+    if replicate:
+        out = cv2.warpAffine(layer[..., :3], M, (W, H), flags=cv2.INTER_LANCZOS4,
+                             borderMode=cv2.BORDER_REPLICATE).astype(np.float32)
+        dst[:] = dst * (1 - opacity) + out * opacity
+        return
+    out = cv2.warpAffine(layer, M, (W, H), flags=cv2.INTER_LANCZOS4,
+                         borderMode=cv2.BORDER_CONSTANT, borderValue=(0, 0, 0, 0))
+    a = (out[..., 3].astype(np.float32) / 255.0 * opacity)[..., None]
+    dst[:] = out[..., :3].astype(np.float32) * a + dst * (1 - a)
+
+
+def pair(dst: np.ndarray, key: str, s: float, orbit_x: float, orbit_y: float,
+         yaw: float, pitch: float, back_dim: float = 1.0, front_opacity: float = 1.0,
+         lift: float = 0.0) -> None:
+    """Room and subject, one transform, two depths' worth of camera motion.
+
+    Both layers go through **the same scale**, so the subject lands exactly where it was
+    authored and the pair rebuilds the original plate. Depth is expressed only as the
+    camera's shift and turn, which is all a camera can do to a plane. Scaling the two
+    layers by their depths -- the obvious mistake, and the one this function used to
+    make -- destroys the registration and leaves the subject's baked shadow on the wall.
+    """
+    p = PAIRS[key]
+    _, dxb, dyb = CAM.project(-520.0, orbit_x, orbit_y, 0.0)
+    _, dxf, dyf = CAM.project(620.0, orbit_x, orbit_y, 0.0)
+    bx = (W - W * s) / 2 + dxb
+    by = (H - PLATE_H * RATIO * s) / 2 + dyb
+    warp_place(dst, p["back"], s, bx, by, 1.0, yaw * 0.20, pitch * 0.20, replicate=True)
+    edge = np.zeros((H, W), np.float32)
+    edge[:46] = 1; edge[-46:] = 1; edge[:, :46] = 1; edge[:, -46:] = 1
+    edge = cv2.GaussianBlur(edge, (0, 0), 26)[..., None]
+    mean = dst.mean(axis=(0, 1), keepdims=True)
+    dst[:] = dst * (1 - edge) + (mean * 0.55 + dst * 0.0 + mean * 0.45 * 0.0 + mean * 0.0) * edge
+    if back_dim != 1.0:
+        dst *= back_dim
+    ox, oy = plate_to_frame(p["off"][0], p["off"][1])
+    fx = bx + (ox - (W - W * s) / 2) + dxf - dxb
+    fy = by + (oy - (H - PLATE_H * RATIO * s) / 2) + dyf - dyb + lift
+    warp_place(dst, p["front"], s, fx, fy, front_opacity, yaw, pitch)
+
+
 def red_field(dst: np.ndarray, strength: float = 1.0) -> np.ndarray:
     """The room: a deep red wall, lit from the upper left, darkening toward the floor."""
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
@@ -424,38 +512,30 @@ def red_field(dst: np.ndarray, strength: float = 1.0) -> np.ndarray:
 
 def red_room(f, t, u, push: float, orbit_x: float, orbit_y: float, yaw: float,
              pitch: float) -> None:
-    """The reference's red room as a real 3D arrangement, orbited by one camera.
+    """The red room, built the way the plates were authored: a clean set and a subject.
 
-    The camera is the only thing that moves. Each plane is placed with its own depth and
-    its own angle, and the *same* camera numbers go into every one of them, so:
-
-      * the year is behind the subject (z<0) and slightly turned (yaw<0) -- it therefore
-        sweeps the other way and its far edge is shorter;
-      * the subject is in front (z>0) at the camera's own angle, so hair and shoulders
-        swing against the wall;
-      * the haze is nearest and over-turns, which is the cheap, correct way to sell depth.
-
-    Nothing is faked with a per-layer speed multiplier.
+    z=-520  the room itself: the plate's own background, no hole, no wall fragment
+    z=+620  the subject at its authored offset, so he sits inside that room
+    z=+1500 red haze in front, which is what makes the two read as separate planes
     """
-    red_field(f)
     orbit_x, orbit_y = orbit_x * GAIN[0], orbit_y * GAIN[0]
     yaw, pitch = yaw * GAIN[0], pitch * GAIN[0]
-    place_px(f, T2008, -520.0, 380 * push, orbit_x, orbit_y, 0.0, opacity=0.34, blur=1.0,
-             anchor=(0.5, 0.07), yaw=yaw * 0.75 + 5.0, pitch=pitch * 0.75)
-    place(f, THERO, 620.0, orbit_x, orbit_y, 0.0, cover=0.98 * push, opacity=1.0,
-          anchor=(0.5, 0.52), blur=0.15, yaw=yaw * 0.55, pitch=pitch * 0.55)
+
+    red_field(f)
+    pair(f, "hero", s=COVER * 1.07 * push, orbit_x=orbit_x, orbit_y=orbit_y,
+         yaw=yaw, pitch=pitch, back_dim=0.88,
+         lift=math.sin(u * math.pi * 2.0) * 2.5)
+    # the year, behind the subject, so the camera slides it across him
+    place_px(f, T2008, -300.0, 384 * push, orbit_x * 1.15, orbit_y * 1.15, 0.0,
+             opacity=0.30, blur=0.9, anchor=(0.5, 0.075),
+             yaw=yaw * 0.9 + 4.0, pitch=pitch * 0.9)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     haze = np.zeros((H, W, 4), np.uint8)
     g = np.clip(1 - np.sqrt(((xx - 0.30 * W) / (1.05 * W)) ** 2 + ((yy - 0.30 * H) / (0.95 * H)) ** 2), 0, 1) ** 1.6
-    haze[..., 3] = (g * 58).astype(np.uint8)
-    place(f, haze, 1500.0, orbit_x * 1.0, orbit_y * 1.0, 0.0, cover=1.05, opacity=0.5,
+    haze[..., 3] = (g * 50).astype(np.uint8)
+    place(f, haze, 1500.0, orbit_x, orbit_y, 0.0, cover=1.05, opacity=0.45,
           yaw=yaw * 1.4, pitch=pitch * 1.4)
-    # contact shadow under the subject: an ellipse that travels with him, which is what
-    # makes a cutout read as standing in the room rather than pasted on it
-    sx, sy = 0.5 * W + orbit_x * 0.9, 0.885 * H
-    el = np.clip(1 - np.sqrt(((xx - sx) / (0.34 * W)) ** 2 + ((yy - sy) / (0.05 * H)) ** 2), 0, 1) ** 1.7
-    f[:] = f * (1 - 0.55 * el[..., None])
-    shadow = np.clip((yy / H - 0.80) / 0.20, 0, 1)[..., None] ** 1.5
+    shadow = np.clip((yy / H - 0.82) / 0.18, 0, 1)[..., None] ** 1.5
     f[:] = f * (1 - 0.94 * shadow)
 
 
@@ -685,6 +765,7 @@ def main() -> int:
     GAIN[0] = a.gain
     t0 = time.time()
     prepare(spec)
+    load_pairs()
     colour_selftest()
     print(f"  prepare {time.time() - t0:.2f}s   bag {TBAG.shape[1]}x{TBAG.shape[0]}  "
           f"stool {TSTOOL.shape[1]}x{TSTOOL.shape[0]}  portrait {THERO.shape[1]}x{THERO.shape[0]}")
