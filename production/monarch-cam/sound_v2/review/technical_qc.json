@@ -1,0 +1,63 @@
+{
+  "deliverable": "deliverables/MONARCH_CAM_Bear_Opening_30s_Sound_V2.mp4",
+  "bytes": 19002087,
+  "sha256": "9d671c3b4f21fd5efd5307b4ad4bcff0b73f6973f9c5d9d1eab0b231e4ce33e9",
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_read_frames": "900"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_read_frames": "1407"
+      }
+    ],
+    "format": {
+      "duration": "30.000000",
+      "size": "19002087"
+    }
+  },
+  "final_aac_loudness": {
+    "input_i": "-14.66",
+    "input_tp": "-0.83",
+    "input_lra": "5.70",
+    "input_thresh": "-25.14",
+    "output_i": "-14.09",
+    "output_tp": "-1.50",
+    "output_lra": "3.30",
+    "output_thresh": "-24.45",
+    "normalization_type": "dynamic",
+    "target_offset": "0.09"
+  },
+  "sample_peak_dbfs": -0.8339,
+  "clipped_samples": 0,
+  "extreme_sample_jumps": 0,
+  "v1_video_stream_sha256": "83dc2782c6f0d15a89dedbd1de79f72515f7442022b2114d257089b5d2236345",
+  "v2_video_stream_sha256": "83dc2782c6f0d15a89dedbd1de79f72515f7442022b2114d257089b5d2236345",
+  "old_audio_decoded_or_reused": false,
+  "gates": {
+    "duration_30_seconds": true,
+    "900_frames": true,
+    "1920x1080_30fps": true,
+    "stereo_48khz": true,
+    "picture_stream_identical": true,
+    "loudness_minus_14_plusminus_0_75": true,
+    "aac_true_peak_at_or_below_minus_1": false,
+    "no_clipped_samples": true,
+    "no_extreme_sample_discontinuities": true
+  },
+  "pass": false,
+  "subjective_note": "Measured gates cannot guarantee every listener's preference; human listening remains the final creative review."
+}

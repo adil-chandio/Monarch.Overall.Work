@@ -1,0 +1,264 @@
+{
+  "old_procedural_background_reused": false,
+  "narration": [
+    {
+      "id": "vo1",
+      "start": 0.35,
+      "duration": 3.498,
+      "tempo": 1.0,
+      "voice": "en-US-AndrewNeural",
+      "text_unchanged": true
+    },
+    {
+      "id": "vo2",
+      "start": 6.0,
+      "duration": 4.043,
+      "tempo": 1.0,
+      "voice": "en-US-AndrewNeural",
+      "text_unchanged": true
+    },
+    {
+      "id": "vo3",
+      "start": 12.0,
+      "duration": 2.202,
+      "tempo": 1.0,
+      "voice": "en-US-AndrewNeural",
+      "text_unchanged": true
+    },
+    {
+      "id": "vo4",
+      "start": 17.35,
+      "duration": 3.82,
+      "tempo": 1.0,
+      "voice": "en-US-AndrewNeural",
+      "text_unchanged": true
+    },
+    {
+      "id": "vo5",
+      "start": 23.45,
+      "duration": 4.491,
+      "tempo": 1.0,
+      "voice": "en-US-AndrewNeural",
+      "text_unchanged": true
+    }
+  ],
+  "music": {
+    "input_lufs": -20.81,
+    "target_lufs_before_peak_cap": -25.0,
+    "gain_db": -4.19,
+    "peak_cap_adjustment_db": 0.0,
+    "output_lufs": -25.0,
+    "sample_peak_dbfs": -8.288,
+    "source": "music_backup",
+    "source_start": 0.0,
+    "section_automation": "slow scene arc; sidechain range down to -12.4 dB"
+  },
+  "ambience": {
+    "input_lufs": -49.545,
+    "target_lufs_before_peak_cap": -42.0,
+    "gain_db": 7.545,
+    "peak_cap_adjustment_db": 0.0,
+    "output_lufs": -42.0,
+    "sample_peak_dbfs": -24.17,
+    "source": "forest_night",
+    "source_start": 18.0,
+    "note": "Real licensed sound-design ambience, not represented as original NPS camera audio."
+  },
+  "whoosh_trim": {
+    "query": "a single soft airy whoosh for a documentary title transition",
+    "earshot_find": {
+      "summary": "Best moments for 'a single soft airy whoosh for a documentary title transition' in soft_whoosh.mp3 (kind=event; searched all 7.1 s: 11 windows of ~1.2 s (edges snapped to the sound) to locate events, none returned + 48 onset-based candidates (one stage)): 0:02.03-0:03.89 (1.86 s event, z +2.5 plausible); 0:06.49-0:07.07 (0.58 s event, z +2.4 weak, tail cut); 0:00.94-0:02.03 (1.09 s event, z +2.1 weak, head cut, tail cut); 0:04.34-0:04.54 (0.20 s stroke, z +1.8 no match, head cut, tail cut); 0:04.06-0:04.24 (0.17 s stroke, z +1.3 no match, head cut, tail cut); 0:04.54-0:05.24 (0.70 s stroke, z +1.0 no match, head cut). start/end are sample trims in seconds (strokes / events start 5 ms before the attack; windows are snapped to the sound; a 'head cut' / 'tail cut' trim cuts into a sound).",
+      "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/soft_whoosh.mp3",
+      "query": "a single soft airy whoosh for a documentary title transition",
+      "query_kind": "event",
+      "query_kind_score": 0.226,
+      "duration": 7.066,
+      "n_candidates": 48,
+      "n_windows": 0,
+      "n_events": 48,
+      "segments": [
+        {
+          "start": 2.03,
+          "end": 3.887,
+          "duration": 1.857,
+          "score": 2.54,
+          "z": 2.54,
+          "cosine": 0.324,
+          "verdict": "plausible",
+          "kind": "event",
+          "peak_dbfs": -12.7,
+          "head_db": -23.1,
+          "tail_db": -35.3,
+          "cut": ""
+        },
+        {
+          "start": 6.49,
+          "end": 7.066,
+          "duration": 0.576,
+          "score": 1.9,
+          "z": 2.4,
+          "cosine": 0.341,
+          "verdict": "weak",
+          "kind": "event",
+          "peak_dbfs": -59.4,
+          "head_db": -24.3,
+          "tail_db": -3.6,
+          "cut": "tail cut"
+        },
+        {
+          "start": 0.938,
+          "end": 2.03,
+          "duration": 1.092,
+          "score": 1.65,
+          "z": 2.15,
+          "cosine": 0.271,
+          "verdict": "weak",
+          "kind": "event",
+          "peak_dbfs": -23.4,
+          "head_db": -10.3,
+          "tail_db": -1.9,
+          "cut": "head cut, tail cut"
+        },
+        {
+          "start": 4.34,
+          "end": 4.538,
+          "duration": 0.198,
+          "score": 1.37,
+          "z": 1.87,
+          "cosine": 0.32,
+          "verdict": "no match",
+          "kind": "stroke",
+          "peak_dbfs": -59.9,
+          "head_db": -5.3,
+          "tail_db": -8.7,
+          "cut": "head cut, tail cut"
+        },
+        {
+          "start": 4.061,
+          "end": 4.236,
+          "duration": 0.175,
+          "score": 0.89,
+          "z": 1.39,
+          "cosine": 0.272,
+          "verdict": "no match",
+          "kind": "stroke",
+          "peak_dbfs": -52.9,
+          "head_db": -1.1,
+          "tail_db": -4.4,
+          "cut": "head cut, tail cut"
+        },
+        {
+          "start": 4.538,
+          "end": 5.235,
+          "duration": 0.697,
+          "score": 0.59,
+          "z": 1.09,
+          "cosine": 0.235,
+          "verdict": "no match",
+          "kind": "stroke",
+          "peak_dbfs": -69.6,
+          "head_db": 0.0,
+          "tail_db": -27.7,
+          "cut": "head cut"
+        }
+      ]
+    },
+    "selected_source_range": {
+      "start": 2.03,
+      "end": 3.887,
+      "earshot": {
+        "start": 2.03,
+        "end": 3.887,
+        "duration": 1.857,
+        "score": 2.54,
+        "z": 2.54,
+        "cosine": 0.324,
+        "verdict": "plausible",
+        "kind": "event",
+        "peak_dbfs": -12.7,
+        "head_db": -23.1,
+        "tail_db": -35.3,
+        "cut": ""
+      }
+    },
+    "processed_excerpt": {
+      "source_start": 2.52,
+      "source_end": 3.887,
+      "duration": 1.367,
+      "local_peak_seconds": 0.48,
+      "edge_fades": true,
+      "generated_audio": false
+    }
+  },
+  "impact_trim": {
+    "query": "a single soft deep cinematic impact with a smooth decay",
+    "earshot_find": {
+      "summary": "Best moments for 'a single soft deep cinematic impact with a smooth decay' in soft_impact.mp3 (kind=event; searched all 6.0 s: 11 windows of ~1.0 s (edges snapped to the sound) to locate events, none returned + 1 onset-based candidates (one stage)): 0:00.01-0:02.01 (2.00 s stroke, z +2.0 weak). start/end are sample trims in seconds (strokes / events start 5 ms before the attack; windows are snapped to the sound; a 'head cut' / 'tail cut' trim cuts into a sound). Even the best segment is only a weak match: the recording may not contain this sound.",
+      "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/soft_impact.mp3",
+      "query": "a single soft deep cinematic impact with a smooth decay",
+      "query_kind": "event",
+      "query_kind_score": 0.103,
+      "duration": 6.0,
+      "n_candidates": 1,
+      "n_windows": 0,
+      "n_events": 1,
+      "segments": [
+        {
+          "start": 0.011,
+          "end": 2.011,
+          "duration": 2.0,
+          "score": 2.07,
+          "z": 2.07,
+          "cosine": 0.239,
+          "verdict": "weak",
+          "kind": "stroke",
+          "peak_dbfs": -0.3,
+          "head_db": -21.6,
+          "tail_db": -18.1,
+          "cut": ""
+        }
+      ]
+    },
+    "selected_source_range": {
+      "start": 0.011,
+      "end": 2.011,
+      "earshot": {
+        "start": 0.011,
+        "end": 2.011,
+        "duration": 2.0,
+        "score": 2.07,
+        "z": 2.07,
+        "cosine": 0.239,
+        "verdict": "weak",
+        "kind": "stroke",
+        "peak_dbfs": -0.3,
+        "head_db": -21.6,
+        "tail_db": -18.1,
+        "cut": ""
+      }
+    },
+    "processed_excerpt": {
+      "source_start": 0.0509,
+      "source_end": 1.8009,
+      "duration": 1.75,
+      "local_peak_seconds": 0.1,
+      "edge_fades": true,
+      "generated_audio": false
+    }
+  },
+  "model_tick": {
+    "source": "soft_impact",
+    "duration": 0.265,
+    "processing": "240 Hz high-pass, 3.6 kHz low-pass, edge fades"
+  },
+  "ducking": {
+    "voice_envelope_ms": 50,
+    "pre_roll_ms": 120,
+    "attack_ms": 12,
+    "release_ms": 260,
+    "music_min_gain": 0.24,
+    "ambience_min_gain": 0.7872,
+    "sfx_min_gain": 0.658
+  },
+  "premaster_sample_peak_dbfs": -5.141
+}

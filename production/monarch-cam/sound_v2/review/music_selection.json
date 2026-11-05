@@ -1,0 +1,706 @@
+{
+  "query": "restrained mysterious orchestral wildlife documentary underscore, slow ambient strings and piano, instrumental, gentle steady pacing",
+  "method": "Earshot CLAP ranking plus AudioSet vocal screening when available",
+  "candidates": [
+    {
+      "asset_id": "music_dark",
+      "source_start": 0.0,
+      "file": "music_dark_0000p0.wav"
+    },
+    {
+      "asset_id": "music_dark",
+      "source_start": 18.0,
+      "file": "music_dark_0018p0.wav"
+    },
+    {
+      "asset_id": "music_dark",
+      "source_start": 36.0,
+      "file": "music_dark_0036p0.wav"
+    },
+    {
+      "asset_id": "music_dark",
+      "source_start": 51.322,
+      "file": "music_dark_0051p3.wav"
+    },
+    {
+      "asset_id": "music_backup",
+      "source_start": 0.0,
+      "file": "music_backup_0000p0.wav"
+    },
+    {
+      "asset_id": "music_backup",
+      "source_start": 45.0,
+      "file": "music_backup_0045p0.wav"
+    },
+    {
+      "asset_id": "music_backup",
+      "source_start": 90.0,
+      "file": "music_backup_0090p0.wav"
+    },
+    {
+      "asset_id": "music_backup",
+      "source_start": 150.0,
+      "file": "music_backup_0150p0.wav"
+    }
+  ],
+  "ranking": {
+    "summary": "Ranked 8 files for 'restrained mysterious orchestral wildlife documentary underscore, slow ambient strings and piano, instrumental, gentle steady pacing'. Best: music_backup_0000p0.wav (z +3.3, strong), music_dark_0018p0.wav (z +3.2, strong), music_backup_0090p0.wav (z +3.2, strong). 6 strong, 2 plausible, 0 weak match(es). In a held-out test 'strong' was right 98% of the time, 61% when a close variant (a mouth pop for a cork pop) counts as wrong.",
+    "query": "restrained mysterious orchestral wildlife documentary underscore, slow ambient strings and piano, instrumental, gentle steady pacing",
+    "n_files": 8,
+    "results": [
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0000p0.wav",
+        "name": "music_backup_0000p0.wav",
+        "z": 3.38,
+        "cosine": 0.409,
+        "vocab_percentile": 99.4,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "sad and melancholic music (z +3.6)"
+      },
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0018p0.wav",
+        "name": "music_dark_0018p0.wav",
+        "z": 3.27,
+        "cosine": 0.365,
+        "vocab_percentile": 99.1,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.4)"
+      },
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0090p0.wav",
+        "name": "music_backup_0090p0.wav",
+        "z": 3.2,
+        "cosine": 0.421,
+        "vocab_percentile": 99.7,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "sad and melancholic music (z +3.4)"
+      },
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0150p0.wav",
+        "name": "music_backup_0150p0.wav",
+        "z": 3.1,
+        "cosine": 0.337,
+        "vocab_percentile": 99.7,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.3)"
+      },
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0045p0.wav",
+        "name": "music_backup_0045p0.wav",
+        "z": 3.04,
+        "cosine": 0.34,
+        "vocab_percentile": 99.7,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.2)"
+      },
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0036p0.wav",
+        "name": "music_dark_0036p0.wav",
+        "z": 3.03,
+        "cosine": 0.356,
+        "vocab_percentile": 99.1,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "cinematic orchestral music (z +3.4)"
+      },
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0000p0.wav",
+        "name": "music_dark_0000p0.wav",
+        "z": 2.99,
+        "cosine": 0.333,
+        "vocab_percentile": 98.8,
+        "verdict": "plausible",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.4)"
+      },
+      {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0051p3.wav",
+        "name": "music_dark_0051p3.wav",
+        "z": 2.8,
+        "cosine": 0.348,
+        "vocab_percentile": 99.1,
+        "verdict": "plausible",
+        "near_silent": false,
+        "sounds_most_like": "cinematic orchestral music (z +3.3)"
+      }
+    ],
+    "skipped": []
+  },
+  "selected_description": {
+    "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0000p0.wav",
+    "start": null,
+    "end": null,
+    "duration": 30.0,
+    "measurements": {
+      "duration": 30.0,
+      "peak_dbfs": -4.3,
+      "true_peak_dbtp": -4.3,
+      "rms_dbfs": -23.0,
+      "lufs": -20.7,
+      "lra_lu": 7.0,
+      "attack_ms": 34.0,
+      "brightness_hz": 401,
+      "bandwidth_hz": 3225,
+      "noise_floor_dbfs": -38.6,
+      "flatness": 0.0,
+      "harmonic_ratio": 0.988,
+      "f0_hz": 110.7,
+      "onset_count": 47,
+      "onsets_per_s": 1.57,
+      "width": "side/mid -2 dB",
+      "digital_silence_frac": 0.0012
+    },
+    "shape": "busy, 1.6 onsets/s, loudness range 7 LU",
+    "top_tags": [
+      {
+        "term": "a deep cinematic boom",
+        "category": "impacts",
+        "z": 1.47,
+        "cosine": 0.181,
+        "verdict": "no match"
+      },
+      {
+        "term": "a music box melody",
+        "category": "chimes",
+        "z": 1.33,
+        "cosine": 0.235,
+        "verdict": "no match"
+      },
+      {
+        "term": "a celesta note",
+        "category": "chimes",
+        "z": 1.29,
+        "cosine": 0.255,
+        "verdict": "no match"
+      },
+      {
+        "term": "church bells",
+        "category": "chimes",
+        "z": 1.11,
+        "cosine": 0.162,
+        "verdict": "no match"
+      },
+      {
+        "term": "a sustained glass harp tone",
+        "category": "chimes",
+        "z": 1.1,
+        "cosine": 0.125,
+        "verdict": "no match"
+      },
+      {
+        "term": "a singing bowl",
+        "category": "chimes",
+        "z": 1.05,
+        "cosine": 0.117,
+        "verdict": "no match"
+      },
+      {
+        "term": "a sub bass drop",
+        "category": "impacts",
+        "z": 1.05,
+        "cosine": 0.166,
+        "verdict": "no match"
+      },
+      {
+        "term": "a kalimba note",
+        "category": "chimes",
+        "z": 0.87,
+        "cosine": 0.168,
+        "verdict": "no match"
+      }
+    ],
+    "music_hints": [
+      {
+        "term": "sad and melancholic music",
+        "category": "music_mood",
+        "z": 3.68,
+        "cosine": 0.475
+      },
+      {
+        "term": "solo piano music",
+        "category": "music_genre",
+        "z": 3.44,
+        "cosine": 0.437
+      },
+      {
+        "term": "dark and tense music",
+        "category": "music_mood",
+        "z": 2.82,
+        "cosine": 0.387
+      },
+      {
+        "term": "a grand piano",
+        "category": "instruments",
+        "z": 2.77,
+        "cosine": 0.352
+      },
+      {
+        "term": "romantic music",
+        "category": "music_mood",
+        "z": 2.77,
+        "cosine": 0.426
+      },
+      {
+        "term": "playful children's piano music",
+        "category": "music_genre",
+        "z": 2.65,
+        "cosine": 0.369
+      },
+      {
+        "term": "warm and cozy music",
+        "category": "music_mood",
+        "z": 2.59,
+        "cosine": 0.396
+      },
+      {
+        "term": "uplifting and hopeful music",
+        "category": "music_mood",
+        "z": 2.54,
+        "cosine": 0.383
+      }
+    ],
+    "tags": {
+      "transitions": [
+        {
+          "term": "a deep cinematic whoosh",
+          "z": 0.67,
+          "cosine": 0.118
+        },
+        {
+          "term": "a soft air whoosh",
+          "z": -0.01,
+          "cosine": 0.05
+        },
+        {
+          "term": "a downlifter falling sweep",
+          "z": -0.33,
+          "cosine": 0.05
+        }
+      ],
+      "impacts": [
+        {
+          "term": "a deep cinematic boom",
+          "z": 1.47,
+          "cosine": 0.181
+        },
+        {
+          "term": "a sub bass drop",
+          "z": 1.05,
+          "cosine": 0.166
+        },
+        {
+          "term": "a low rumble",
+          "z": 0.62,
+          "cosine": 0.099
+        }
+      ],
+      "ui": [
+        {
+          "term": "a success chime",
+          "z": 0.24,
+          "cosine": 0.155
+        },
+        {
+          "term": "a notification ding",
+          "z": 0.2,
+          "cosine": 0.105
+        },
+        {
+          "term": "a chat message pop",
+          "z": 0.05,
+          "cosine": 0.154
+        }
+      ],
+      "keyboard": [
+        {
+          "term": "a deep thocky mechanical keyboard",
+          "z": -0.06,
+          "cosine": 0.118
+        },
+        {
+          "term": "a laptop keyboard typing",
+          "z": -0.14,
+          "cosine": 0.09
+        },
+        {
+          "term": "slow typing with separate key presses",
+          "z": -0.15,
+          "cosine": 0.092
+        }
+      ],
+      "foley": [
+        {
+          "term": "a finger squeaking on glass",
+          "z": 0.61,
+          "cosine": 0.08
+        },
+        {
+          "term": "glass clinking",
+          "z": 0.21,
+          "cosine": 0.056
+        },
+        {
+          "term": "footsteps on wood",
+          "z": 0.15,
+          "cosine": 0.022
+        }
+      ],
+      "water": [
+        {
+          "term": "pouring water",
+          "z": 0.56,
+          "cosine": 0.096
+        },
+        {
+          "term": "being underwater",
+          "z": 0.45,
+          "cosine": 0.112
+        },
+        {
+          "term": "bubbles underwater",
+          "z": 0.39,
+          "cosine": 0.091
+        }
+      ],
+      "nature": [
+        {
+          "term": "a bee flying by",
+          "z": -0.05,
+          "cosine": 0.044
+        },
+        {
+          "term": "insects buzzing",
+          "z": -0.18,
+          "cosine": 0.037
+        },
+        {
+          "term": "a horse galloping",
+          "z": -0.21,
+          "cosine": 0.023
+        }
+      ],
+      "chimes": [
+        {
+          "term": "a music box melody",
+          "z": 1.33,
+          "cosine": 0.235
+        },
+        {
+          "term": "a celesta note",
+          "z": 1.29,
+          "cosine": 0.255
+        },
+        {
+          "term": "church bells",
+          "z": 1.11,
+          "cosine": 0.162
+        }
+      ],
+      "ambience": [
+        {
+          "term": "an airplane flying overhead",
+          "z": 0.77,
+          "cosine": 0.118
+        },
+        {
+          "term": "a quiet room at night",
+          "z": 0.53,
+          "cosine": 0.058
+        },
+        {
+          "term": "a busy cafe",
+          "z": 0.44,
+          "cosine": -0.011
+        }
+      ],
+      "everyday": [
+        {
+          "term": "a cat meowing",
+          "z": 0.38,
+          "cosine": 0.047
+        },
+        {
+          "term": "a helicopter flying overhead",
+          "z": 0.36,
+          "cosine": 0.104
+        },
+        {
+          "term": "applause",
+          "z": 0.35,
+          "cosine": 0.073
+        }
+      ],
+      "music_genre": [
+        {
+          "term": "solo piano music",
+          "z": 3.44,
+          "cosine": 0.437
+        },
+        {
+          "term": "playful children's piano music",
+          "z": 2.65,
+          "cosine": 0.369
+        },
+        {
+          "term": "inspirational corporate background music",
+          "z": 1.99,
+          "cosine": 0.327
+        }
+      ],
+      "music_mood": [
+        {
+          "term": "sad and melancholic music",
+          "z": 3.68,
+          "cosine": 0.475
+        },
+        {
+          "term": "dark and tense music",
+          "z": 2.82,
+          "cosine": 0.387
+        },
+        {
+          "term": "romantic music",
+          "z": 2.77,
+          "cosine": 0.426
+        }
+      ],
+      "instruments": [
+        {
+          "term": "a grand piano",
+          "z": 2.77,
+          "cosine": 0.352
+        },
+        {
+          "term": "an electric piano",
+          "z": 2.3,
+          "cosine": 0.348
+        },
+        {
+          "term": "a bass guitar",
+          "z": 1.52,
+          "cosine": 0.236
+        }
+      ],
+      "voice": [
+        {
+          "term": "a voice-over narration",
+          "z": 1.53,
+          "cosine": 0.18
+        },
+        {
+          "term": "people laughing",
+          "z": 1.23,
+          "cosine": 0.045
+        },
+        {
+          "term": "singing vocals",
+          "z": 1.15,
+          "cosine": 0.155
+        }
+      ],
+      "quality": [
+        {
+          "term": "a warm sound",
+          "z": 1.81,
+          "cosine": 0.309
+        },
+        {
+          "term": "a deep sound",
+          "z": 1.02,
+          "cosine": 0.193
+        },
+        {
+          "term": "a boomy sound",
+          "z": 0.8,
+          "cosine": 0.179
+        }
+      ],
+      "production": [
+        {
+          "term": "a pure sine wave tone",
+          "z": 0.84,
+          "cosine": 0.16
+        },
+        {
+          "term": "a professionally mixed and mastered music track",
+          "z": 0.47,
+          "cosine": 0.273
+        },
+        {
+          "term": "silence",
+          "z": 0.29,
+          "cosine": 0.133
+        }
+      ]
+    },
+    "audioset": [
+      {
+        "label": "Music",
+        "p": 0.825
+      },
+      {
+        "label": "Piano",
+        "p": 0.478
+      },
+      {
+        "label": "Electric piano",
+        "p": 0.456
+      },
+      {
+        "label": "Keyboard (musical)",
+        "p": 0.391
+      },
+      {
+        "label": "Musical instrument",
+        "p": 0.193
+      }
+    ],
+    "character": [],
+    "distinct_windows": [],
+    "summary": "30.00 s busy, 1.6 onsets/s, loudness range 7 LU. Music (AudioSet Music 0.82). Unvalidated hints - genre: solo piano music (z +3.4), playful children's piano music (z +2.6); mood (wrong for ~1 in 5 tracks in a test): sad and melancholic music (z +3.6), dark and tense music (z +2.8). No sound-effect description stands out (closest: a deep cinematic boom z +1.4, a music box melody z +1.3; tentative). AudioSet: Music 0.82, Piano 0.48, Electric piano 0.46. peak -4.3 dBFS, -20.7 LUFS, brightness 401 Hz, bandwidth 3.2 kHz, side/mid -2 dB. Uniform: all 5 analysed 10 s windows read as a deep cinematic boom."
+  },
+  "vocal_screen": [
+    {
+      "candidate": "music_backup",
+      "source_start": 0.0,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0000p0.wav",
+        "name": "music_backup_0000p0.wav",
+        "z": 3.38,
+        "cosine": 0.409,
+        "vocab_percentile": 99.4,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "sad and melancholic music (z +3.6)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s busy, 1.6 onsets/s, loudness range 7 LU. Music (AudioSet Music 0.82). Unvalidated hints - genre: solo piano music (z +3.4), playful children's piano music (z +2.6); mood (wrong for ~1 in 5 tracks in a test): sad and melancholic music (z +3.6), dark and tense music (z +2.8). No sound-effect description stands out (closest: a deep cinematic boom z +1.4, a music box melody z +1.3; tentative). AudioSet: Music 0.82, Piano 0.48, Electric piano 0.46. peak -4.3 dBFS, -20.7 LUFS, brightness 401 Hz, bandwidth 3.2 kHz, side/mid -2 dB. Uniform: all 5 analysed 10 s windows read as a deep cinematic boom."
+    },
+    {
+      "candidate": "music_dark",
+      "source_start": 18.0,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0018p0.wav",
+        "name": "music_dark_0018p0.wav",
+        "z": 3.27,
+        "cosine": 0.365,
+        "vocab_percentile": 99.1,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.4)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s 13 separate events, loudness range 13 LU. Music (AudioSet Music 0.89). Unvalidated hints - genre: ambient synth pad music (z +3.3), cinematic orchestral music (z +3.3); mood (wrong for ~1 in 5 tracks in a test): dreamy and ethereal music (z +3.4), dark and tense music (z +3.0). Sounds most like: a sustained glass harp tone (z +2.2), a rising riser building tension (z +2.1), a cinematic hit with a long tail (z +1.7) [weak reading]. Other readings: a kettle whistling (everyday, z +1.3), birds singing in the morning (ambience, z +1.3). AudioSet: Music 0.89, Flute 0.28, New-age music 0.16. peak -5.3 dBFS, -19.2 LUFS, brightness 458 Hz, bandwidth 12.9 kHz, side/mid -6 dB. Windows that read differently: 0:10.00-0:20.00 a sustained glass harp tone (z +2.1; AudioSet Music 0.79); 0:20.00-0:30.00 a rising riser building tension (z +2.0; AudioSet Music 0.81)."
+    },
+    {
+      "candidate": "music_backup",
+      "source_start": 90.0,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0090p0.wav",
+        "name": "music_backup_0090p0.wav",
+        "z": 3.2,
+        "cosine": 0.421,
+        "vocab_percentile": 99.7,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "sad and melancholic music (z +3.4)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s busy, 2.0 onsets/s, loudness range 14 LU. Music (AudioSet Music 0.83). Unvalidated hints - genre: solo piano music (z +3.1), playful children's piano music (z +2.4); mood (wrong for ~1 in 5 tracks in a test): sad and melancholic music (z +3.4), romantic music (z +2.8). No sound-effect description stands out (closest: a sustained glass harp tone z +1.5, a music box melody z +1.4; tentative). AudioSet: Music 0.83, Electric piano 0.43, Piano 0.38. peak -0.3 dBFS, -17.7 LUFS, brightness 409 Hz, bandwidth 8.1 kHz, side/mid -2 dB. Windows that read differently: 0:00.00-0:10.00 a music box melody (z +1.8; AudioSet Music 0.69); 0:20.00-0:30.00 a deep cinematic boom (z +1.6; AudioSet Music 0.83)."
+    },
+    {
+      "candidate": "music_backup",
+      "source_start": 150.0,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0150p0.wav",
+        "name": "music_backup_0150p0.wav",
+        "z": 3.1,
+        "cosine": 0.337,
+        "vocab_percentile": 99.7,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.3)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s busy, 3.2 onsets/s, loudness range 2 LU. Music (AudioSet Music 0.86). Unvalidated hints - genre: ambient synth pad music (z +2.6), classical string quartet (z +2.5); mood (wrong for ~1 in 5 tracks in a test): dreamy and ethereal music (z +3.3), sad and melancholic music (z +2.7). No sound-effect description stands out (closest: a sustained glass harp tone z +1.4, a kalimba note z +1.0; tentative). AudioSet: Music 0.86, New-age music 0.40, Ambient music 0.26. peak -1.1 dBFS, -14.6 LUFS, brightness 522 Hz, bandwidth 6.5 kHz, side/mid 0 dB. Uniform: all 5 analysed 10 s windows read as a sustained glass harp tone."
+    },
+    {
+      "candidate": "music_backup",
+      "source_start": 45.0,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_backup_0045p0.wav",
+        "name": "music_backup_0045p0.wav",
+        "z": 3.04,
+        "cosine": 0.34,
+        "vocab_percentile": 99.7,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.2)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s busy, 3.3 onsets/s, loudness range 3 LU. Music (AudioSet Music 0.84). Unvalidated hints - genre: ambient synth pad music (z +2.5), solo piano music (z +2.3); mood (wrong for ~1 in 5 tracks in a test): dreamy and ethereal music (z +3.2), sad and melancholic music (z +2.7). No sound-effect description stands out (closest: a sustained glass harp tone z +1.4, a celesta note z +1.1; tentative). AudioSet: Music 0.84, New-age music 0.47, Ambient music 0.30. peak -1.3 dBFS, -14.7 LUFS, brightness 543 Hz, bandwidth 6.5 kHz, side/mid 0 dB. Uniform: all 5 analysed 10 s windows read as a sustained glass harp tone."
+    },
+    {
+      "candidate": "music_dark",
+      "source_start": 36.0,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0036p0.wav",
+        "name": "music_dark_0036p0.wav",
+        "z": 3.03,
+        "cosine": 0.356,
+        "vocab_percentile": 99.1,
+        "verdict": "strong",
+        "near_silent": false,
+        "sounds_most_like": "cinematic orchestral music (z +3.4)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s 18 separate events, loudness range 12 LU. Music (AudioSet Music 0.83). Unvalidated hints - genre: cinematic orchestral music (z +3.4), uplifting orchestral film score (z +3.2); mood (wrong for ~1 in 5 tracks in a test): dreamy and ethereal music (z +3.2), dark and tense music (z +2.8). Sounds most like: a sustained glass harp tone (z +2.2), a rising riser building tension (z +2.0), a cinematic hit with a long tail (z +1.7) [weak reading]. Other readings: a kettle whistling (everyday, z +1.4), a metal scrape (foley, z +1.4). AudioSet: Music 0.83, Ambient music 0.22, New-age music 0.16. peak -3.0 dBFS, -17.9 LUFS, brightness 431 Hz, bandwidth 8.1 kHz, side/mid -8 dB. Windows that read differently: 0:10.00-0:20.00 a rising riser building tension (z +2.1; AudioSet Music 0.83); 0:20.00-0:30.00 a sustained glass harp tone (z +3.0; AudioSet Music 0.80)."
+    },
+    {
+      "candidate": "music_dark",
+      "source_start": 0.0,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0000p0.wav",
+        "name": "music_dark_0000p0.wav",
+        "z": 2.99,
+        "cosine": 0.333,
+        "vocab_percentile": 98.8,
+        "verdict": "plausible",
+        "near_silent": false,
+        "sounds_most_like": "dreamy and ethereal music (z +3.4)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s 8 separate events, loudness range 12 LU. Music (AudioSet Music 0.91). Unvalidated hints - genre: cinematic orchestral music (z +3.2), ambient synth pad music (z +3.1); mood (wrong for ~1 in 5 tracks in a test): dreamy and ethereal music (z +3.4), dark and tense music (z +2.7). Sounds most like: a sustained glass harp tone (z +2.7), a rising riser building tension (z +2.4), a singing bowl (z +1.9) [plausible reading]. Other readings: a cinematic hit with a long tail (impacts, z +1.9), a kettle whistling (everyday, z +1.7). AudioSet: Music 0.91, Flute 0.42, Wind instrument, woodwind instrument 0.27. peak -1.7 dBFS, -16.6 LUFS, brightness 493 Hz, bandwidth 12.9 kHz, side/mid -5 dB. Windows that read differently: 0:00.00-0:10.00 a sustained glass harp tone (z +2.7; AudioSet Music 0.91); 0:20.00-0:30.00 a rising riser building tension (z +2.3; AudioSet Music 0.88)."
+    },
+    {
+      "candidate": "music_dark",
+      "source_start": 51.322,
+      "rank": {
+        "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/music_candidates/music_dark_0051p3.wav",
+        "name": "music_dark_0051p3.wav",
+        "z": 2.8,
+        "cosine": 0.348,
+        "vocab_percentile": 99.1,
+        "verdict": "plausible",
+        "near_silent": false,
+        "sounds_most_like": "cinematic orchestral music (z +3.3)"
+      },
+      "vocal_probability": 0.0,
+      "description_summary": "30.00 s 6 separate events, loudness range 8 LU. Music (AudioSet Music 0.89). Unvalidated hints - genre: cinematic orchestral music (z +3.3), uplifting orchestral film score (z +3.0); mood (wrong for ~1 in 5 tracks in a test): dreamy and ethereal music (z +3.0), dark and tense music (z +2.5). Sounds most like: a sustained glass harp tone (z +2.2), a rising riser building tension (z +2.1), a singing bowl (z +2.0) [weak reading]. Other readings: a cinematic hit with a long tail (impacts, z +1.9), a kettle whistling (everyday, z +1.7). AudioSet: Music 0.89, Ambient music 0.27, New-age music 0.26. peak -3.0 dBFS, -19.1 LUFS, brightness 559 Hz, bandwidth 8.1 kHz, side/mid -7 dB. Windows that read differently: 0:05.00-0:15.00 a sustained glass harp tone (z +2.9; AudioSet Music 0.88); 0:20.00-0:30.00 a cinematic hit with a long tail (z +2.0; AudioSet Music 0.89)."
+    }
+  ],
+  "selected": {
+    "asset_id": "music_backup",
+    "title": "Emotional Spiritual Soundtrack - Respect",
+    "creator": "MusicByMisterbates",
+    "source_start": 0.0,
+    "duration": 30.0,
+    "source_page": "https://freesound.org/people/MusicByMisterbates/sounds/603711/",
+    "license": "CC0-1.0"
+  }
+}
