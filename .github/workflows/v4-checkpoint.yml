@@ -90,6 +90,31 @@ jobs:
           fi
           exit "$status"
 
+      - name: Where the detail goes (A/B on supersampling)
+        if: always()
+        run: |
+          # The delivered checkpoint keeps only 39 % of the plate's acutance while the
+          # reference keeps 115 %, and the encode was proven lossless on the same PNG,
+          # so the loss is in the browser. This renders the same moment at 1x and 2x
+          # and measures both, so the next fix is aimed at the right stage instead of
+          # being another guess.
+          python3 - <<'PY'
+          import subprocess, sys
+          sys.path.insert(0, "tools")
+          from ffbin import ffmpeg
+          for ss in (1, 2):
+              subprocess.run([sys.executable, "tools/render_v4.mjs", "--only", "2.9",
+                              "--ss", str(ss)], check=False)
+              frames = "public/demo/v4-frames"
+              import glob, shutil
+              got = sorted(glob.glob(frames + "/f_*.png"))
+              if got:
+                  shutil.copy(got[0], f"/tmp/probe_ss{ss}.png")
+              print(f"ss={ss} -> {len(got)} frame(s)")
+          PY
+          python3 tools/sharp_probe.py --a showreel/v4/assets/ref/s5plate-base.png --b /tmp/probe_ss1.png || true
+          python3 tools/sharp_probe.py --a showreel/v4/assets/ref/s5plate-base.png --b /tmp/probe_ss2.png || true
+
       - name: Cut the reference to the same window
         run: python3 tools/make_checkpoint_ref.py 0.30
 
