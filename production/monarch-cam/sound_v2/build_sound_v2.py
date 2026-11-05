@@ -491,19 +491,22 @@ def master_audio() -> tuple[Path, Path, dict]:
     raw = WORK / "mix_raw.wav"
     first = run([
         "ffmpeg", "-hide_banner", "-i", str(raw),
-        "-af", "loudnorm=I=-14:TP=-1.8:LRA=9:print_format=json", "-f", "null", "-",
+        "-af", "loudnorm=I=-13.8:TP=-3.5:LRA=9:print_format=json", "-f", "null", "-",
     ], capture_output=True, check=True, text=True)
     match = re.search(r'\{\s*"input_i"[\s\S]*?\}', first.stderr)
     stats = json.loads(match.group(0)) if match else {}
     if stats:
         af = (
-            "loudnorm=I=-14:TP=-1.8:LRA=9:"
+            "loudnorm=I=-13.8:TP=-3.5:LRA=9:"
             f"measured_I={stats['input_i']}:measured_TP={stats['input_tp']}:"
             f"measured_LRA={stats['input_lra']}:measured_thresh={stats['input_thresh']}:"
-            f"offset={stats['target_offset']}:linear=true,aresample={SR},alimiter=limit=0.79:level=false"
+            f"offset={stats['target_offset']}:linear=true,alimiter=limit=0.67:level=false,aresample={SR}"
         )
     else:
-        af = f"loudnorm=I=-14:TP=-1.8:LRA=9,aresample={SR},alimiter=limit=0.79:level=false"
+        af = f"loudnorm=I=-13.8:TP=-3.5:LRA=9,alimiter=limit=0.67:level=false,aresample={SR}"
+    # loudnorm runs internally at 192 kHz. Limit there, before the final 48 kHz
+    # resample, so inter-sample peaks are caught instead of only post-resample samples.
+    # The extra AAC headroom addresses the first render's measured -0.83 dBTP failure.
     soundtrack = REVIEW / "MONARCH_CAM_Sound_V2_soundtrack.wav"
     master_m4a = WORK / "audio_master.m4a"
     ffmpeg("-i", str(raw), "-af", af, "-t", "30.000", "-ar", str(SR), "-ac", "2",
@@ -670,6 +673,8 @@ def main() -> int:
     args = parser.parse_args()
     for directory in (WORK, REVIEW, OUT.parent):
         directory.mkdir(parents=True, exist_ok=True)
+    for stale in ("workflow_failure.txt", "technical_qc.json", "audio_qc.json", "qc_summary.json", "earshot_final_status.json"):
+        (REVIEW / stale).unlink(missing_ok=True)
     use_earshot = not args.skip_earshot
     paths = download_assets()
     music, _, api = select_music(paths, use_earshot)
