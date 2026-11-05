@@ -1,0 +1,27 @@
+name: Fetch NOAA ocean B-roll
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [.github/workflows/duck-broll-fetch.yml]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - name: Fetch official illustrative footage
+        run: |
+          mkdir -p showreel/duck_cinema/assets
+          curl -fL --retry 3 --max-time 120 'https://oceanexplorer.noaa.gov/wp-content/uploads/2012/09/072121-highseas-1920x1080-1.mp4' -o showreel/duck_cinema/assets/noaa-highseas-2021.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 showreel/duck_cinema/assets/noaa-highseas-2021.mp4
+      - name: Commit footage to session branch
+        run: |
+          git config user.name 'MONARCH render'
+          git config user.email 'render@monarch.studio'
+          git add -f showreel/duck_cinema/assets/noaa-highseas-2021.mp4
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add NOAA illustrative ocean footage [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
