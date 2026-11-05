@@ -45,6 +45,14 @@ function resolveBinary(name) {
 }
 
 const FPS = Number(arg("fps", "30"));
+/* Supersampling factor. The plates are the reference's own 720x1280 frames, and the
+   compositions push them by a fraction of a percent — at deviceScaleFactor 1 that
+   push is a bilinear resample by a non-integer factor, which inside Chrome cost
+   more than half the detail: the plate measures 308 on Laplacian variance and came
+   out of the browser at 137, while the same PNG through the same x264 settings came
+   back at 307.7 (i.e. the encode is lossless). Rendering at 2x and downscaling with
+   lanczos in the encode keeps the detail and sharpens the type as a side effect. */
+const SS = Number(arg("ss", "2"));
 const TRACE = path.join(ROOT, arg("trace", "analysis/v4-build/render-part.log"));
 
 /* Workflow logs are not always retrievable from this environment, and a blind
@@ -91,7 +99,7 @@ async function main() {
       "--disable-gpu",
       "--font-render-hinting=none",
     ],
-    defaultViewport: { width: 720, height: 1280, deviceScaleFactor: 1 },
+    defaultViewport: { width: 720, height: 1280, deviceScaleFactor: SS },
   });
 
   const page = await browser.newPage();
@@ -213,12 +221,20 @@ async function main() {
          previous run, and the extra frame came from a different build of the film */
       "-start_number", "0", "-i", path.join(FRAMES_DIR, "f_%05d.png"),
       "-frames:v", String(partFrames), "-fps_mode", "cfr", "-r", String(fps),
+      /* back down to the delivery size, with a filter that keeps the detail the 2x
+         render captured instead of averaging it away */
+      ...(SS > 1 ? ["-vf", `scale=720:1280:flags=lanczos`] : []),
       /* REF-01 is a 980 kb/s 720p30 master. A near-lossless encode here would
          measure twice the edge density of the reference for no delivery benefit,
          so the film is encoded into the same band it will be published in. */
       "-c:v", "libx264", "-preset", "slow", "-crf", "20",
       "-maxrate", "1600k", "-bufsize", "3200k",
       "-pix_fmt", "yuv420p", "-profile:v", "high", "-level", "4.1",
+      /* the reference master is tagged tv/bt709; an untagged file is interpreted
+         per-player, and the first comparison against the reference reported a
+         brightness difference that was partly this */
+      "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
+      "-color_range", "tv",
       "-movflags", "+faststart", outPath,
     ],
     { encoding: "utf8" }
