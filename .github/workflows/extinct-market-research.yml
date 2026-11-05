@@ -1,0 +1,63 @@
+name: Extinct Life — English market research
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - arena/ba8d901e-monarch-overall-work
+    paths:
+      - .github/workflows/extinct-market-research.yml
+      - scripts/research-extinct-market.py
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline API inventory regressions
+        run: python -m unittest yt_intel.channel_test
+      - name: Resolve existing YouTube secret without exposing it
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+          KEY_ALT_2: ${{ secrets.YTAPI1 }}
+          KEY_ALT_3: ${{ secrets.YT_KEY }}
+          KEY_ALT_4: ${{ secrets.YT_API_KEY }}
+        run: |
+          KEY="${KEY_PRIMARY:-${KEY_ALT:-${KEY_ALT_2:-${KEY_ALT_3:-$KEY_ALT_4}}}}"
+          if [ -z "$KEY" ]; then
+            echo '::error::No YouTube API secret resolved in this workflow runtime'
+            exit 1
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          echo 'YouTube API key resolved (value not printed)'
+      - name: Discover recent English market sample
+        run: python scripts/research-extinct-market.py
+      - name: Publish public metadata report to this session branch
+        if: always() && github.ref == 'refs/heads/arena/ba8d901e-monarch-overall-work'
+        run: |
+          SOURCE=docs/research/data/extinct-market-2026-11-05.json
+          if [ ! -f "$SOURCE" ]; then exit 0; fi
+          mkdir -p docs/research/data
+          git config user.name 'Monarch channel audit'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add "$SOURCE"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'docs(yt): record current English market research sample'
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+      - name: Preserve report including partial/error evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extinct-life-english-market-research
+          path: docs/research/data/extinct-market-2026-11-05.json
+          if-no-files-found: warn
+          retention-days: 7
