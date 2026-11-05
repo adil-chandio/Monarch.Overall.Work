@@ -3,7 +3,7 @@
 **Production date:** 5 November 2026  
 **Working package:** **This Bear Didn’t Need the Door**  
 **Format:** 35.000 seconds · 1080×1920 · 30 fps · original English narration · original vertical edit  
-**Status:** production-locked after source/frame and factual review; virality is an objective, not a guarantee
+**Status:** delivered, QC-verified and post-render reviewed; virality is an objective, not a guarantee
 
 ## 1. Evidence used
 
@@ -109,3 +109,12 @@ Add the generated NPS/audio credits and three focused hashtags: `#Shorts #Bears 
 5. Earshot timeline/cue sync and critique returned as advisory review, not represented as human listening.
 6. Credits, exact source ranges, narration, sound cues, QC and upload metadata saved with the MP4.
 7. After upload, judge **stayed to watch, engaged views, average view duration/percentage viewed, loops and subscribers gained** in equivalent windows; do not call the Short viral in advance.
+
+
+## 8. Post-render review and final revision
+
+The first remote render failed on a nonexistent font path; the second passed all measured gates but exposed an obsolete `api.load()` call that silently disabled Earshot. The final run `42069978281` corrected both, restored model-assisted SFX selection/timeline/sheet/critique, and produced the delivered MP4 with SHA256 `df189a7ae250be4e7c1fd62b5a7ef566ec3bfed8aace28d47884407a8c09df24`.
+
+Visual review at phone scale confirmed a readable first-frame hook, clear 4:3 action window, progressive learning-loop diagram and a concise opening-angle loop. Three small weaknesses were corrected: the prevention caption now remains through 35.000 s, the action crop is 10% tighter, and the diagram reveal is faster. The nine measured audio gates and nine technical checks all pass at −14.31 LUFS / −3.30 dBTP with zero delivered click or clipping runs.
+
+Earshot's final advisory verdict was **launch-grade** with 22/23 metrics in range and no critical or major issues. Its single minor "thin bottom" suggestion was deliberately not implemented: a cinematic sub-drop would imply an unsupported event and could mask narration. The full final review is in `DELIVERY_REVIEW.md`.
