@@ -121,6 +121,20 @@ async function main() {
 
   await page.goto("file://" + COMPOSITION, { waitUntil: "load", timeout: 120000 });
 
+  /* A calibration switch, not a feature: every plate is replaced by a 2 px
+     checkerboard, which no resample can survive. Render one frame with --calibrate
+     and the frame tells you exactly what the pipeline does to detail, without
+     guessing whether a given plate is "supposed" to be sharp. */
+  if (process.argv.includes("--calibrate")) {
+    await page.evaluate(() => {
+      for (const el of document.querySelectorAll(".plate")) {
+        el.style.backgroundImage = "url('./assets/ref/_checker.png')";
+        el.style.backgroundSize = "100% 100%";
+        el.style.filter = "none";
+      }
+    });
+  }
+
   // fonts and every generated plate must be decoded before frame 0 is grabbed,
   // otherwise the first frames render with fallback type and blank plates.
   await page.evaluate(async () => {
