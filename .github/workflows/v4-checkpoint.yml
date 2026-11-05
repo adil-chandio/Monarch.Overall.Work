@@ -93,28 +93,21 @@ jobs:
       - name: Where the detail goes (calibration)
         if: always()
         run: |
-          # The delivered checkpoint keeps 40 % of a plate's acutance; the reference
-          # keeps 115 %; the same PNG through the same x264 settings is lossless. So
-          # the loss is between the PNG and the screenshot, and the question is which
-          # part of that does it. This renders one frame with every plate replaced by
-          # a 2 px checkerboard — nothing in a resample survives that — at 1x and 2x,
-          # and measures each stage.
-          mkdir -p /tmp/cal
-          for ss in 1 2; do
-            node tools/render_v4.mjs --only 2.9 --ss "$ss" --calibrate 2>&1 | tail -2
-            cp public/demo/v4-frames/f_00000.png "/tmp/cal/ss${ss}_frame.png" || true
-            ffmpeg -y -v error -i "public/demo/v4-frames/f_00000.png" \
-                   -c:v libx264 -preset slow -crf 20 -maxrate 1600k -bufsize 3200k \
-                   -pix_fmt yuv420p "/tmp/cal/ss${ss}.mp4" || true
-            ffmpeg -y -v error -i "/tmp/cal/ss${ss}.mp4" -frames:v 1 "/tmp/cal/ss${ss}_out.png" || true
-            echo "::warning title=calibration ss=$ss::$(python3 tools/sharp_probe.py \
-                 --a showreel/v4/assets/ref/_checker.png --b /tmp/cal/ss${ss}_frame.png \
-                 --box 0,0,700,1200 2>&1 | tr '\n' ' ' | tr -s ' ')"
-            echo "::warning title=calibration+encode ss=$ss::$(python3 tools/sharp_probe.py \
-                 --a showreel/v4/assets/ref/_checker.png --b /tmp/cal/ss${ss}_out.png \
+          # One frame with every plate replaced by a 2 px checkerboard, measured after
+          # the browser and again after the encode. This is the only measurement that
+          # separates "the plate is soft" from "the pipeline softens it", and the two
+          # have been confused more than once in this build.
+          node tools/render_v4.mjs --only 2.9 --calibrate 2>&1 | tail -2
+          cp public/demo/v4-frames/f_00000.png /tmp/cal_frame.png || true
+          ffmpeg -y -v error -i /tmp/cal_frame.png -c:v libx264 -preset slow -crf 20 \
+                 -maxrate 1600k -bufsize 3200k -pix_fmt yuv420p /tmp/cal.mp4 || true
+          ffmpeg -y -v error -i /tmp/cal.mp4 -frames:v 1 /tmp/cal_out.png || true
+          for pair in "after the browser:/tmp/cal_frame.png" "after the encode:/tmp/cal_out.png"; do
+            label=${pair%%:*}; file=${pair##*:}
+            echo "::warning title=calibration, $label::$(python3 tools/sharp_probe.py \
+                 --a showreel/v4/assets/ref/_checker.png --b "$file" \
                  --box 0,0,700,1200 2>&1 | tr '\n' ' ' | tr -s ' ')"
           done
-          ffprobe -v error -show_entries stream=width,height -of csv=p=0 /tmp/cal/ss2_frame.png 2>/dev/null || true
 
       - name: Cut the reference to the same window
         run: python3 tools/make_checkpoint_ref.py 0.30
