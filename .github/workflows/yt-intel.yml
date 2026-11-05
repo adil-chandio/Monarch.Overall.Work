@@ -9,8 +9,10 @@ on:
     branches:
       - main
       - arena/9960286a-monarch-overall-work
+      - arena/1f352b8e-monarch-overall-work
     paths:
       - "yt-intel-trigger.txt"
+      - "yt-channel-audit-trigger.txt"
   workflow_dispatch:
     inputs:
       channel_audit:
@@ -43,7 +45,7 @@ permissions:
 
 jobs:
   research:
-    if: ${{ !inputs.channel_audit }}
+    if: ${{ !inputs.channel_audit && !(github.event_name == 'push' && github.ref_name == 'arena/1f352b8e-monarch-overall-work') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -329,7 +331,7 @@ jobs:
           echo "Committed: ${{ steps.commit.outputs.committed }}" >> "$GITHUB_STEP_SUMMARY" 
 
   channel-audit:
-    if: ${{ inputs.channel_audit }}
+    if: ${{ inputs.channel_audit || (github.event_name == 'push' && github.ref_name == 'arena/1f352b8e-monarch-overall-work') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
