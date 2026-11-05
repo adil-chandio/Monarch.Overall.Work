@@ -6,25 +6,21 @@
   "lossy": false,
   "profile": "bundled launch films",
   "verdict": "launch-grade",
-  "score": 0.923,
-  "in_range": 21,
+  "score": 0.974,
+  "in_range": 22,
   "scored": 23,
   "critical_issues": 0,
-  "major_issues": 1,
+  "major_issues": 0,
   "partial": [],
   "actions": [
     {
-      "weight": "major",
-      "metric": "cuts_with_sound",
-      "action": "3 of 5 visual events have no onset (new attack) within +-100 ms (refs 50% .. 100%); no sound at all at 0:11.70, 0:17.10, 0:29.87: add a whoosh into the transition (peak on the cut), a hit or a UI click there"
-    },
-    {
       "weight": "minor",
       "metric": "band_sub",
-      "action": "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-20.8 dB share, refs -16.2 dB .. -4.1 dB)"
+      "action": "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-20.4 dB share, refs -16.2 dB .. -4.1 dB)"
     }
   ],
   "tips": [
+    "1 of 5 visual events get no sound at all (no onset within 100 ms, no whoosh / riser peak within 300 ms, no level peak within 150 ms; the matcher earshot timeline uses): 0:29.87; give the ones that matter a whoosh into the cut, a hit or a UI click, or keep one as a deliberate stop-down",
     "voice detected in 100% of windows: duck music 3-6 dB under the voice and keep SFX out of 1-4 kHz while it speaks"
   ],
   "metrics": [
@@ -72,7 +68,7 @@
       "metric": "p_real",
       "label": "realness (p_real)",
       "group": "realness",
-      "value": 0.795,
+      "value": 0.785,
       "unit": "p",
       "range": [
         0.77,
@@ -109,7 +105,7 @@
       "metric": "cuts_with_sound",
       "label": "onset on visual events +-100ms",
       "group": "sync",
-      "value": 0.4,
+      "value": 0.6,
       "unit": "share",
       "range": [
         0.45,
@@ -121,13 +117,10 @@
         0.56,
         0.934
       ],
-      "status": "low",
+      "status": "ok",
       "weight": "major",
       "why": "a cut or big visual change with no sound under it feels dead; viewers expect sound on motion",
-      "chance": 0.5,
-      "actions": [
-        "3 of 5 visual events have no onset (new attack) within +-100 ms (refs 50% .. 100%); no sound at all at 0:11.70, 0:17.10, 0:29.87: add a whoosh into the transition (peak on the cut), a hit or a UI click there"
-      ]
+      "chance": 0.5
     },
     {
       "metric": "lra",
@@ -153,7 +146,7 @@
       "metric": "crest_lu",
       "label": "loudest 3 s above integrated",
       "group": "loudness",
-      "value": 1.9,
+      "value": 1.8,
       "unit": "LU",
       "range": [
         0.6000000000000001,
@@ -253,7 +246,7 @@
       "metric": "onset_rate",
       "label": "onset density",
       "group": "density",
-      "value": 3.8,
+      "value": 3.83,
       "unit": "/s",
       "range": [
         2.16,
@@ -293,7 +286,7 @@
       "metric": "intro_lu",
       "label": "opening level (first 10%)",
       "group": "arc",
-      "value": 0.4,
+      "value": 0.3,
       "unit": "LU",
       "range": [
         -19.0,
@@ -353,7 +346,7 @@
       "metric": "band_sub",
       "label": "sub 20-60 Hz share",
       "group": "spectrum",
-      "value": -20.8,
+      "value": -20.4,
       "unit": "dB",
       "range": [
         -17.7,
@@ -369,7 +362,7 @@
       "weight": "minor",
       "why": "sub (20-60 Hz) weight under hits and music",
       "actions": [
-        "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-20.8 dB share, refs -16.2 dB .. -4.1 dB)"
+        "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-20.4 dB share, refs -16.2 dB .. -4.1 dB)"
       ]
     },
     {
@@ -416,7 +409,7 @@
       "metric": "band_mid",
       "label": "mid 1-4 kHz share",
       "group": "spectrum",
-      "value": -12.1,
+      "value": -12.2,
       "unit": "dB",
       "range": [
         -20.6,
@@ -456,7 +449,7 @@
       "metric": "band_air",
       "label": "air 8-16 kHz share",
       "group": "spectrum",
-      "value": -25.5,
+      "value": -25.6,
       "unit": "dB",
       "range": [
         -35.7,
@@ -637,7 +630,7 @@
       "metric": "cut_frame_sync",
       "label": "visual events with an onset +-1 frame",
       "group": "sync",
-      "value": 0.2,
+      "value": 0.4,
       "unit": "share",
       "range": [
         0.28,
@@ -652,13 +645,13 @@
       "status": "info",
       "weight": "info",
       "why": "visual events with an onset within one frame (references: near chance)",
-      "chance": 0.2
+      "chance": 0.21
     },
     {
       "metric": "cuts_on_beat",
       "label": "visual events on the beat grid +-70 ms",
       "group": "sync",
-      "value": 0.2,
+      "value": 0.4,
       "unit": "share",
       "range": [
         0.18,
@@ -679,7 +672,7 @@
       "metric": "brightness_hz",
       "label": "brightness (median spectral centroid)",
       "group": "spectrum",
-      "value": 674,
+      "value": 677,
       "unit": "Hz",
       "range": [
         1169.0,
@@ -726,13 +719,10 @@
       29.867
     ],
     "visual_without_onset": [
-      11.7,
       17.1,
       29.867
     ],
     "visual_without_any_sound": [
-      11.7,
-      17.1,
       29.867
     ],
     "visual_without_hit": [
@@ -745,10 +735,10 @@
     "hits": [
       0.524,
       0.972,
-      2.25,
-      2.99,
-      3.358,
-      3.79,
+      2.244,
+      2.988,
+      3.356,
+      3.81,
       4.426,
       5.506,
       6.082,
@@ -760,16 +750,16 @@
       9.582,
       10.568,
       11.128,
-      12.184,
+      12.004,
       13.972,
       14.174,
       15.066,
       15.818,
-      16.574,
-      17.376,
+      16.708,
+      17.39,
       17.852,
-      18.086,
-      18.3,
+      18.1,
+      18.31,
       18.514,
       20.196,
       20.646,
@@ -790,22 +780,22 @@
       [
         2.0,
         0.16,
-        19.0
+        19.5
       ],
       [
         4.24,
         0.24,
-        13.1
+        13.2
       ],
       [
         7.86,
         0.38,
-        15.2
+        15.1
       ],
       [
         25.32,
         0.18,
-        14.7
+        14.8
       ]
     ]
   },
@@ -815,10 +805,10 @@
       -1.4,
       -0.6,
       -0.5,
-      -0.3,
+      -0.2,
       -0.7,
       1.2,
-      -0.1,
+      -0.2,
       1.7,
       -0.6,
       -8.1
@@ -864,63 +854,63 @@
     ]
   },
   "realness": {
-    "p_real": 0.795,
+    "p_real": 0.785,
     "verdict": "real or pro-produced",
     "synth_windows": 0,
     "segments": [
       {
         "start": 0.0,
         "end": 4.0,
-        "p_real": 0.923,
+        "p_real": 0.914,
         "verdict": "real or pro-produced"
       },
       {
         "start": 4.0,
         "end": 8.0,
-        "p_real": 0.723,
+        "p_real": 0.729,
         "verdict": "uncertain"
       },
       {
         "start": 8.0,
         "end": 12.0,
-        "p_real": 0.726,
+        "p_real": 0.674,
         "verdict": "uncertain"
       },
       {
         "start": 12.0,
         "end": 16.0,
-        "p_real": 0.745,
+        "p_real": 0.705,
         "verdict": "uncertain"
       },
       {
         "start": 16.0,
         "end": 20.0,
-        "p_real": 0.612,
+        "p_real": 0.619,
         "verdict": "uncertain"
       },
       {
         "start": 20.0,
         "end": 24.0,
-        "p_real": 0.901,
+        "p_real": 0.904,
         "verdict": "real or pro-produced"
       },
       {
         "start": 24.0,
         "end": 28.0,
-        "p_real": 0.878,
+        "p_real": 0.884,
         "verdict": "real or pro-produced"
       },
       {
         "start": 26.0,
         "end": 30.0,
-        "p_real": 0.853,
+        "p_real": 0.852,
         "verdict": "real or pro-produced"
       }
     ],
-    "summary": "MONARCH_CAM_Sound_V2_soundtrack.wav: real or pro-produced (p_real 0.80, mean of 8 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 0 of 8 windows lean synthesized (p_real < 0.5); mean CLAP head score +1.4. No window leans synthesized (lowest p_real 0.61); that does not rule out a code-made layer under a louder real mix (most are missed): judge the source files and stems."
+    "summary": "MONARCH_CAM_Sound_V2_soundtrack.wav: real or pro-produced (p_real 0.79, mean of 8 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 0 of 8 windows lean synthesized (p_real < 0.5); mean CLAP head score +1.3. No window leans synthesized (lowest p_real 0.62); that does not rule out a code-made layer under a louder real mix (most are missed): judge the source files and stems."
   },
-  "seconds": 21.9,
+  "seconds": 21.8,
   "not_measured": {},
-  "summary": "MONARCH_CAM_Sound_V2_soundtrack.wav vs 7 reference films (bundled launch films): launch-grade - 21 of 23 scored metrics in range (weighted 92%), 0 critical and 1 major issues. Fix first: 3 of 5 visual events have no onset (new attack) within +-100 ms (refs 50% .. 100%); no sound at all at 0:11.70, 0:17.10, 0:29.87: add a whoosh into the transition (peak on the cut), a hit or a UI click there.",
-  "text": "earshot critique: MONARCH_CAM_Sound_V2_soundtrack.wav (30.0 s) vs 7 reference films (bundled launch films)\nVERDICT: launch-grade - 21 of 23 scored metrics in range (weighted 92%), 0 critical and 1 major issues.\nFIX FIRST (most important first):\n  1. [major] 3 of 5 visual events have no onset (new attack) within +-100 ms (refs 50% .. 100%); no sound at all at 0:11.70, 0:17.10, 0:29.87: add a whoosh into the transition (peak on the cut), a hit or a UI click there\n  2. [minor] thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-20.8 dB share, refs -16.2 dB .. -4.1 dB)\n  tip: voice detected in 100% of windows: duck music 3-6 dB under the voice and keep SFX out of 1-4 kHz while it speaks\nSCORECARD                                      value   ok range                        ref median  status\n  loudness integrated loudness             -14.0 LUFS   -16.0 LUFS .. -9.0 LUFS (web)   -14.8 LUFS  ok\n  loudness true peak                        -3.5 dBTP   <= -1.0 dBTP (web)                0.6 dBTP  ok\n  realness realness (p_real)                     0.80   >= 0.77 (realness model)                    ok\n  music    music presence                        100%   >= 62%                                100%  ok\n  sync     onset on visual events +-100ms         40%   >= 45%                                 81%  low (major)\n  loudness loudness range                      3.0 LU   0.7 LU .. 13.2 LU                   5.5 LU  ok\n  loudness loudest 3 s above integrated        1.9 LU   0.6 LU .. 4.0 LU                    2.3 LU  ok\n  arc      time to first sound                 0.08 s   <= 0.58 s                           0.13 s  ok\n  ending   dead air at the end                 0.12 s   <= 2.15 s                           0.04 s  ok\n  arc      longest silent gap inside           0.04 s   <= 1.91 s                           0.02 s  ok\n  ending   final moment vs integrated          1.2 LU   -3.7 LU .. 7.1 LU                   0.2 LU  ok\n  density  onset density                      3.80 /s   2.16 /s .. 8.52 /s                 5.66 /s  ok\n  density  salient hit density                1.40 /s   0.05 /s .. 1.86 /s                 1.25 /s  ok\n  arc      opening level (first 10%)           0.4 LU   -19.0 LU .. 3.7 LU                 -1.1 LU  ok\n  arc      closing level (last 10%)           -4.2 LU   -15.8 LU .. 1.2 LU                 -3.0 LU  ok\n  ending   final fade / ring-out length        0.88 s   <= 3.04 s                           0.27 s  ok\n  spectrum sub 20-60 Hz share                -20.8 dB   -17.7 dB .. -2.6 dB                -6.6 dB  low (minor)\n  spectrum low 60-250 Hz share                -4.1 dB   -8.2 dB .. -0.6 dB                 -4.2 dB  ok\n  spectrum low-mid 250-1k share               -2.9 dB   -18.3 dB .. -0.2 dB                -5.3 dB  ok\n  spectrum mid 1-4 kHz share                 -12.1 dB   -20.6 dB .. -9.0 dB               -12.4 dB  ok\n  spectrum presence 4-8 kHz share            -16.1 dB   -31.8 dB .. -11.6 dB              -17.8 dB  ok\n  spectrum air 8-16 kHz share                -25.5 dB   -35.7 dB .. -9.7 dB               -23.6 dB  ok\n  stereo   stereo width (side vs mid)         -8.5 dB   -15.5 dB .. -4.0 dB                -8.5 dB  ok\nLOUDNESS ARC (LU vs integrated at 0%, 10% .. 100% of the film; not scored):\n  this film      +1.0   -1.4   -0.6   -0.5   -0.3   -0.7   +1.2   -0.1   +1.7   -0.6   -8.1\n  refs median    -1.3   -0.8   +0.3   -0.3   -0.2   +0.2   +0.0   -0.4   +0.9   -0.3   -7.4\nNOT SCORED (style choices, shown for context):\n  voice / speech presence                                          100%   refs p10-p90 0% .. 100%\n  tempo                                                         148 BPM   refs p10-p90 115 BPM .. 136 BPM\n  position of the loudest 3 s                                      0.79   refs p10-p90 0.10 .. 0.83\n  final hit ring-out                                             2.39 s   refs p10-p90 1.06 s .. 3.58 s\n  stop-downs                                                   8.0 /min   refs p10-p90 0.0 /min .. 9.1 /min\n  visual events (cuts, big changes)                             0.17 /s   refs p10-p90 0.31 /s .. 1.42 /s\n  visual events with a salient hit +-100 ms             0% (chance 34%)   refs p10-p90 8% .. 49%\n  visual events with an onset +-1 frame                20% (chance 20%)   refs p10-p90 34% .. 59%\n  visual events on the beat grid +-70 ms               20% (chance 30%)   refs p10-p90 20% .. 45%\n  brightness (median spectral centroid)                          674 Hz   refs p10-p90 1183 Hz .. 3030 Hz\n  L/R correlation                                                  0.76   refs p10-p90 0.58 .. 0.86\nrealness: MONARCH_CAM_Sound_V2_soundtrack.wav: real or pro-produced (p_real 0.80, mean of 8 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 0 of 8 windows lean synthesized (p_real < 0.5); mean CLAP head score +1.4. No window leans synthesized (lowest p_real 0.61); that does not rule out a code-made layer under a louder real mix (most are missed): judge the source files and stems."
+  "summary": "MONARCH_CAM_Sound_V2_soundtrack.wav vs 7 reference films (bundled launch films): launch-grade - 22 of 23 scored metrics in range (weighted 97%), 0 critical and 0 major issues. Fix first: thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-20.4 dB share, refs -16.2 dB .. -4.1 dB).",
+  "text": "earshot critique: MONARCH_CAM_Sound_V2_soundtrack.wav (30.0 s) vs 7 reference films (bundled launch films)\nVERDICT: launch-grade - 22 of 23 scored metrics in range (weighted 97%), 0 critical and 0 major issues.\nFIX FIRST (most important first):\n  1. [minor] thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-20.4 dB share, refs -16.2 dB .. -4.1 dB)\n  tip: 1 of 5 visual events get no sound at all (no onset within 100 ms, no whoosh / riser peak within 300 ms, no level peak within 150 ms; the matcher earshot timeline uses): 0:29.87; give the ones that matter a whoosh into the cut, a hit or a UI click, or keep one as a deliberate stop-down\n  tip: voice detected in 100% of windows: duck music 3-6 dB under the voice and keep SFX out of 1-4 kHz while it speaks\nSCORECARD                                      value   ok range                        ref median  status\n  loudness integrated loudness             -14.0 LUFS   -16.0 LUFS .. -9.0 LUFS (web)   -14.8 LUFS  ok\n  loudness true peak                        -3.5 dBTP   <= -1.0 dBTP (web)                0.6 dBTP  ok\n  realness realness (p_real)                     0.79   >= 0.77 (realness model)                    ok\n  music    music presence                        100%   >= 62%                                100%  ok\n  sync     onset on visual events +-100ms         60%   >= 45%                                 81%  ok\n  loudness loudness range                      3.0 LU   0.7 LU .. 13.2 LU                   5.5 LU  ok\n  loudness loudest 3 s above integrated        1.8 LU   0.6 LU .. 4.0 LU                    2.3 LU  ok\n  arc      time to first sound                 0.08 s   <= 0.58 s                           0.13 s  ok\n  ending   dead air at the end                 0.12 s   <= 2.15 s                           0.04 s  ok\n  arc      longest silent gap inside           0.04 s   <= 1.91 s                           0.02 s  ok\n  ending   final moment vs integrated          1.2 LU   -3.7 LU .. 7.1 LU                   0.2 LU  ok\n  density  onset density                      3.83 /s   2.16 /s .. 8.52 /s                 5.66 /s  ok\n  density  salient hit density                1.40 /s   0.05 /s .. 1.86 /s                 1.25 /s  ok\n  arc      opening level (first 10%)           0.3 LU   -19.0 LU .. 3.7 LU                 -1.1 LU  ok\n  arc      closing level (last 10%)           -4.2 LU   -15.8 LU .. 1.2 LU                 -3.0 LU  ok\n  ending   final fade / ring-out length        0.88 s   <= 3.04 s                           0.27 s  ok\n  spectrum sub 20-60 Hz share                -20.4 dB   -17.7 dB .. -2.6 dB                -6.6 dB  low (minor)\n  spectrum low 60-250 Hz share                -4.1 dB   -8.2 dB .. -0.6 dB                 -4.2 dB  ok\n  spectrum low-mid 250-1k share               -2.9 dB   -18.3 dB .. -0.2 dB                -5.3 dB  ok\n  spectrum mid 1-4 kHz share                 -12.2 dB   -20.6 dB .. -9.0 dB               -12.4 dB  ok\n  spectrum presence 4-8 kHz share            -16.1 dB   -31.8 dB .. -11.6 dB              -17.8 dB  ok\n  spectrum air 8-16 kHz share                -25.6 dB   -35.7 dB .. -9.7 dB               -23.6 dB  ok\n  stereo   stereo width (side vs mid)         -8.5 dB   -15.5 dB .. -4.0 dB                -8.5 dB  ok\nLOUDNESS ARC (LU vs integrated at 0%, 10% .. 100% of the film; not scored):\n  this film      +1.0   -1.4   -0.6   -0.5   -0.2   -0.7   +1.2   -0.2   +1.7   -0.6   -8.1\n  refs median    -1.3   -0.8   +0.3   -0.3   -0.2   +0.2   +0.0   -0.4   +0.9   -0.3   -7.4\nNOT SCORED (style choices, shown for context):\n  voice / speech presence                                          100%   refs p10-p90 0% .. 100%\n  tempo                                                         148 BPM   refs p10-p90 115 BPM .. 136 BPM\n  position of the loudest 3 s                                      0.79   refs p10-p90 0.10 .. 0.83\n  final hit ring-out                                             2.39 s   refs p10-p90 1.06 s .. 3.58 s\n  stop-downs                                                   8.0 /min   refs p10-p90 0.0 /min .. 9.1 /min\n  visual events (cuts, big changes)                             0.17 /s   refs p10-p90 0.31 /s .. 1.42 /s\n  visual events with a salient hit +-100 ms             0% (chance 34%)   refs p10-p90 8% .. 49%\n  visual events with an onset +-1 frame                40% (chance 21%)   refs p10-p90 34% .. 59%\n  visual events on the beat grid +-70 ms               40% (chance 30%)   refs p10-p90 20% .. 45%\n  brightness (median spectral centroid)                          677 Hz   refs p10-p90 1183 Hz .. 3030 Hz\n  L/R correlation                                                  0.76   refs p10-p90 0.58 .. 0.86\nrealness: MONARCH_CAM_Sound_V2_soundtrack.wav: real or pro-produced (p_real 0.79, mean of 8 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 0 of 8 windows lean synthesized (p_real < 0.5); mean CLAP head score +1.3. No window leans synthesized (lowest p_real 0.62); that does not rule out a code-made layer under a louder real mix (most are missed): judge the source files and stems."
 }

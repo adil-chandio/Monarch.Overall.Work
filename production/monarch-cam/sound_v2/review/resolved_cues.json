@@ -22,57 +22,57 @@
     },
     {
       "id": "question:headline:whoosh",
-      "frame": 357,
-      "t": 11.9,
+      "frame": 351,
+      "t": 11.7,
       "kind": "soft_whoosh",
       "peak_dbfs": -28.0,
-      "picture": "WHY SEARCH A CAR FOR FOOD? headline is fading in (fully present at 12.08 s).",
-      "sound_need": "Short airy transition whose measured peak lands on the headline's middle fade frame.",
+      "picture": "WHY SEARCH A CAR FOR FOOD? headline fade begins on this scene-cut frame (fully present at 12.08 s).",
+      "sound_need": "Short airy transition whose measured peak lands on the headline cut/fade-start frame, before the next narration phrase.",
       "source_asset": "soft_whoosh",
       "placement": {
-        "timeline_peak": 11.9,
-        "timeline_start": 11.420021,
+        "timeline_peak": 11.7,
+        "timeline_start": 11.220021,
         "source_peak_seconds": 0.479979,
         "target_peak_dbfs": -28.0,
-        "timeline_end": 12.787021
+        "timeline_end": 12.587021
       },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
       "id": "question:headline:accent",
-      "frame": 357,
-      "t": 11.9,
+      "frame": 351,
+      "t": 11.7,
       "kind": "soft_impact",
       "peak_dbfs": -22.0,
       "picture": "Same question-headline reveal.",
       "sound_need": "One soft tonal/low accent under the whoosh, kept below narration.",
       "source_asset": "soft_impact",
       "placement": {
-        "timeline_peak": 11.9,
-        "timeline_start": 11.854938,
+        "timeline_peak": 11.7,
+        "timeline_start": 11.654938,
         "source_peak_seconds": 0.045062,
         "target_peak_dbfs": -22.0,
-        "timeline_end": 13.604958
+        "timeline_end": 13.404958
       },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
       "id": "answer:headline:whoosh",
-      "frame": 519,
-      "t": 17.3,
+      "frame": 513,
+      "t": 17.1,
       "kind": "soft_whoosh",
       "peak_dbfs": -28.0,
-      "picture": "THE CLUE IS EXPERIENCE headline is fading in (fully present at 17.48 s).",
-      "sound_need": "Short transition on the answer reveal; no repeated sub hit.",
+      "picture": "THE CLUE IS EXPERIENCE headline fade begins on this scene-cut frame (fully present at 17.48 s).",
+      "sound_need": "Short transition on the answer cut/fade-start, completed before the next narration phrase; no repeated sub hit.",
       "source_asset": "soft_whoosh",
       "placement": {
-        "timeline_peak": 17.3,
-        "timeline_start": 16.820021,
+        "timeline_peak": 17.1,
+        "timeline_start": 16.620021,
         "source_peak_seconds": 0.479979,
         "target_peak_dbfs": -28.0,
-        "timeline_end": 18.187021
+        "timeline_end": 17.987021
       },
       "supported_by_picture": true,
       "generated_audio": false

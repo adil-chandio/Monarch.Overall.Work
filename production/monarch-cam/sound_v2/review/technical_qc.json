@@ -1,7 +1,7 @@
 {
   "deliverable": "deliverables/MONARCH_CAM_Bear_Opening_30s_Sound_V2.mp4",
-  "bytes": 18995709,
-  "sha256": "d291ca99ce04c1fe5122a6216ed263d4cd0923ebdc124ae4ff9564403a602f39",
+  "bytes": 19001098,
+  "sha256": "c79dddec53833b70176d08e567e66e06c1d8a7b24653d14afe0780cef459bc1e",
   "probe": {
     "programs": [],
     "streams": [
@@ -26,22 +26,22 @@
     ],
     "format": {
       "duration": "30.000000",
-      "size": "18995709"
+      "size": "19001098"
     }
   },
   "final_aac_loudness": {
-    "input_i": "-14.25",
-    "input_tp": "-3.20",
+    "input_i": "-14.26",
+    "input_tp": "-3.26",
     "input_lra": "4.40",
-    "input_thresh": "-24.45",
-    "output_i": "-13.86",
-    "output_tp": "-2.89",
+    "input_thresh": "-24.46",
+    "output_i": "-13.85",
+    "output_tp": "-2.88",
     "output_lra": "2.70",
     "output_thresh": "-24.02",
     "normalization_type": "dynamic",
-    "target_offset": "-0.14"
+    "target_offset": "-0.15"
   },
-  "sample_peak_dbfs": -3.204,
+  "sample_peak_dbfs": -3.2649,
   "clipped_samples": 0,
   "extreme_sample_jumps": 0,
   "v1_video_stream_sha256": "83dc2782c6f0d15a89dedbd1de79f72515f7442022b2114d257089b5d2236345",
