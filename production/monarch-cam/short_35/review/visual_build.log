@@ -1,24 +1,12 @@
-Traceback (most recent call last):
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 314, in <module>
-    render()
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 254, in render
-    draw_top(base, scene["top"])
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 113, in draw_top
-    face = fit_font(draw, text, "Montserrat-Bold", 82, 900, 46, 8)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 42, in fit_font
-    candidate = font(name, size)
-                ^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_35/render_short_visual.py", line 32, in font
-    return ImageFont.truetype(str(FONT_DIR / f"{name}.ttf"), size)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/.local/lib/python3.12/site-packages/PIL/ImageFont.py", line 891, in truetype
-    return freetype(font)
-           ^^^^^^^^^^^^^^
-  File "/home/runner/.local/lib/python3.12/site-packages/PIL/ImageFont.py", line 888, in freetype
-    return FreeTypeFont(font, size, index, encoding, layout_engine)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/.local/lib/python3.12/site-packages/PIL/ImageFont.py", line 302, in __init__
-    self.font = core.getfont(
-                ^^^^^^^^^^^^^
-OSError: cannot open resource
+Rendered window_exit_hook / frames 0:64
+Rendered window_entry_answer / frames 64:130
+Rendered inside_question / frames 130:218
+Rendered food_answer / frames 218:340
+Rendered reward_lesson / frames 340:488
+Rendered learning_loop_diagram / frames 488:580
+Rendered conditioning_entry / frames 580:666
+Rendered conditioning_exit / frames 666:756
+Rendered shortcut_approach / frames 756:834
+Rendered shortcut_investigation / frames 834:910
+Rendered prevention_loop / frames 910:1050
+Saved /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/short_35_silent.mp4

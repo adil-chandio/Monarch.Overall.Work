@@ -1,0 +1,67 @@
+{
+  "expected_frames": 1050,
+  "sampled_luma": [
+    {
+      "frame": 0,
+      "time": 0.0,
+      "mean_luma": 55.314
+    },
+    {
+      "frame": 90,
+      "time": 3.0,
+      "mean_luma": 54.359
+    },
+    {
+      "frame": 180,
+      "time": 6.0,
+      "mean_luma": 46.658
+    },
+    {
+      "frame": 270,
+      "time": 9.0,
+      "mean_luma": 66.158
+    },
+    {
+      "frame": 360,
+      "time": 12.0,
+      "mean_luma": 56.253
+    },
+    {
+      "frame": 450,
+      "time": 15.0,
+      "mean_luma": 56.143
+    },
+    {
+      "frame": 540,
+      "time": 18.0,
+      "mean_luma": 29.811
+    },
+    {
+      "frame": 630,
+      "time": 21.0,
+      "mean_luma": 55.671
+    },
+    {
+      "frame": 720,
+      "time": 24.0,
+      "mean_luma": 55.285
+    },
+    {
+      "frame": 810,
+      "time": 27.0,
+      "mean_luma": 52.471
+    },
+    {
+      "frame": 900,
+      "time": 30.0,
+      "mean_luma": 52.664
+    },
+    {
+      "frame": 990,
+      "time": 33.0,
+      "mean_luma": 55.829
+    }
+  ],
+  "minimum_sampled_luma": 29.811,
+  "note": "Samples guard against an unintended black render; final stream/frame validation is in technical_qc.json."
+}

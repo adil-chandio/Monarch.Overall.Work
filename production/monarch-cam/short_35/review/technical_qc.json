@@ -1,0 +1,63 @@
+{
+  "file": "deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4",
+  "sha256": "cea09137eade6cc1e3021eb2ae3696c5950e8422d18821c803970b86b47f57ec",
+  "bytes": 14691690,
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "30/1",
+        "nb_frames": "1050",
+        "nb_read_frames": "1050"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "1642",
+        "nb_read_frames": "1641"
+      }
+    ],
+    "format": {
+      "duration": "35.000000",
+      "size": "14691690"
+    }
+  },
+  "decoded_audio_samples": 1680000,
+  "decoded_sample_rate": 48000,
+  "loudness": {
+    "input_i": "-14.33",
+    "input_tp": "-3.25",
+    "input_lra": "4.10",
+    "input_thresh": "-24.86",
+    "output_i": "-13.66",
+    "output_tp": "-2.03",
+    "output_lra": "3.70",
+    "output_thresh": "-24.04",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.34"
+  },
+  "click_runs": [],
+  "clipping_runs": 0,
+  "decoded_sample_peak_dbfs": -3.2541,
+  "checks": {
+    "duration_35s": true,
+    "frames_1050": true,
+    "vertical_1080x1920": true,
+    "fps_30": true,
+    "audio_48k_stereo": true,
+    "integrated_loudness": true,
+    "true_peak": true,
+    "no_sample_clipping_runs": true,
+    "no_click_runs": true
+  },
+  "passed": true
+}

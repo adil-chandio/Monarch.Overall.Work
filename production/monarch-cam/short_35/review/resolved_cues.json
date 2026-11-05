@@ -1,0 +1,108 @@
+{
+  "fps": 30,
+  "events": [
+    {
+      "t": 0.06666666666666667,
+      "frame": 2,
+      "kind": "impact",
+      "peak_dbfs": -23.0,
+      "label": "Window action / immediate hook",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 2.1333333333333333,
+      "frame": 64,
+      "kind": "whoosh",
+      "peak_dbfs": -28.0,
+      "label": "Window answer cut",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 4.333333333333333,
+      "frame": 130,
+      "kind": "tick",
+      "peak_dbfs": -32.0,
+      "label": "Why climb inside question",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 7.266666666666667,
+      "frame": 218,
+      "kind": "impact",
+      "peak_dbfs": -25.0,
+      "label": "Food answer",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 11.333333333333334,
+      "frame": 340,
+      "kind": "impact",
+      "peak_dbfs": -26.0,
+      "label": "Learning mechanism begins",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 16.266666666666666,
+      "frame": 488,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "label": "Diagram / search",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 16.966666666666665,
+      "frame": 509,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "label": "Diagram / food reward",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 17.666666666666668,
+      "frame": 530,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "label": "Diagram / check again",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 19.333333333333332,
+      "frame": 580,
+      "kind": "impact",
+      "peak_dbfs": -24.5,
+      "label": "Food conditioning name",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 25.2,
+      "frame": 756,
+      "kind": "whoosh",
+      "peak_dbfs": -29.0,
+      "label": "Learned shortcut consequence",
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "t": 30.333333333333332,
+      "frame": 910,
+      "kind": "impact",
+      "peak_dbfs": -25.0,
+      "label": "Prevention payoff",
+      "supported_by_picture": true,
+      "generated_audio": false
+    }
+  ],
+  "intentionally_silent": [
+    "No invented food-reward sound",
+    "No handle, door, attack or bear-vocalisation cue"
+  ]
+}

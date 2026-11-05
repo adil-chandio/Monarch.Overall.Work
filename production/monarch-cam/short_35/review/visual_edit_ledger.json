@@ -1,0 +1,170 @@
+{
+  "source": "production/monarch-cam/work/recon/media/nps_bears_in_cars.mp4",
+  "scenes": [
+    {
+      "id": "window_exit_hook",
+      "timeline_frames": [
+        0,
+        64
+      ],
+      "timeline_in": 0.0,
+      "timeline_out": 2.133333,
+      "source_in": 338.0,
+      "source_out_approx": 340.133333,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "HE DIDN'T OPEN\nTHE DOOR.",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "window_entry_answer",
+      "timeline_frames": [
+        64,
+        130
+      ],
+      "timeline_in": 2.133333,
+      "timeline_out": 4.333333,
+      "source_in": 18.0,
+      "source_out_approx": 20.2,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "THE WINDOW\nWAS ENOUGH.",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "inside_question",
+      "timeline_frames": [
+        130,
+        218
+      ],
+      "timeline_in": 4.333333,
+      "timeline_out": 7.266667,
+      "source_in": 65.0,
+      "source_out_approx": 67.933333,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "WHY CLIMB\nINSIDE?",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "food_answer",
+      "timeline_frames": [
+        218,
+        340
+      ],
+      "timeline_in": 7.266667,
+      "timeline_out": 11.333333,
+      "source_in": 316.0,
+      "source_out_approx": 320.066667,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "FOOD.\nNOT A RIDE.",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "reward_lesson",
+      "timeline_frames": [
+        340,
+        488
+      ],
+      "timeline_in": 11.333333,
+      "timeline_out": 16.266667,
+      "source_in": 352.0,
+      "source_out_approx": 356.933333,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "ONE REWARD\nCAN TEACH THIS.",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "learning_loop_diagram",
+      "timeline_frames": [
+        488,
+        580
+      ],
+      "timeline_in": 16.266667,
+      "timeline_out": 19.333333,
+      "source_in": 19.0,
+      "source_out_approx": 22.066667,
+      "rate": 1.0,
+      "layout": "diagram",
+      "top": "THE LEARNING LOOP",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "conditioning_entry",
+      "timeline_frames": [
+        580,
+        666
+      ],
+      "timeline_in": 19.333333,
+      "timeline_out": 22.2,
+      "source_in": 18.5,
+      "source_out_approx": 21.366667,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "FOOD CONDITIONING",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "conditioning_exit",
+      "timeline_frames": [
+        666,
+        756
+      ],
+      "timeline_in": 22.2,
+      "timeline_out": 25.2,
+      "source_in": 338.0,
+      "source_out_approx": 341.0,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "FOOD CONDITIONING",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "shortcut_approach",
+      "timeline_frames": [
+        756,
+        834
+      ],
+      "timeline_in": 25.2,
+      "timeline_out": 27.8,
+      "source_in": 14.0,
+      "source_out_approx": 16.6,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "THE SHORTCUT\nCAN REMAIN.",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "shortcut_investigation",
+      "timeline_frames": [
+        834,
+        910
+      ],
+      "timeline_in": 27.8,
+      "timeline_out": 30.333333,
+      "source_in": 352.0,
+      "source_out_approx": 354.533333,
+      "rate": 1.0,
+      "layout": "footage",
+      "top": "THE SHORTCUT\nCAN REMAIN.",
+      "loop_to_start_last": 0
+    },
+    {
+      "id": "prevention_loop",
+      "timeline_frames": [
+        910,
+        1050
+      ],
+      "timeline_in": 30.333333,
+      "timeline_out": 35.0,
+      "source_in": 338.0,
+      "source_out_approx": 341.266667,
+      "rate": 0.7,
+      "layout": "footage",
+      "top": "DON'T TEACH\nTHE LESSON.",
+      "loop_to_start_last": 0.35
+    }
+  ]
+}

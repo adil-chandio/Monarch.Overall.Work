@@ -1,0 +1,31 @@
+{
+  "deliverable": "deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4",
+  "package": "This Bear Didn\u2019t Need the Door",
+  "scope": "Original 35-second native-vertical Short; not a crop of the horizontal test",
+  "duration_seconds": 35.0,
+  "frames": 1050,
+  "narration_words": 70,
+  "all_narration_slots_pass": true,
+  "technical_pass": true,
+  "technical_checks": {
+    "duration_35s": true,
+    "frames_1050": true,
+    "vertical_1080x1920": true,
+    "fps_30": true,
+    "audio_48k_stereo": true,
+    "integrated_loudness": true,
+    "true_peak": true,
+    "no_sample_clipping_runs": true,
+    "no_click_runs": true
+  },
+  "nine_gate_audio_pass": true,
+  "nine_gate_audio_failed": [],
+  "earshot_status": {
+    "model_load": "AttributeError: load"
+  },
+  "credits": "production/monarch-cam/short_35/CREDITS.md",
+  "creative_lock": "production/monarch-cam/short_35/RESEARCH_AND_CREATIVE_LOCK.md",
+  "visual_review": "production/monarch-cam/short_35/review/vertical_contact_sheet.jpg",
+  "stems": "production/monarch-cam/short_35/review/stems/ (Actions artifact only)",
+  "creative_review": "Objective and model-assisted checks are evidence, not a guarantee of audience retention or virality."
+}

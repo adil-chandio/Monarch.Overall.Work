@@ -1,0 +1,178 @@
+[
+  {
+    "frame": 2,
+    "time": 0.066667,
+    "kind": "impact",
+    "peak_db": -23.0,
+    "label": "Window action / immediate hook",
+    "time_s": 0.06666666666666667,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 0.066667,
+      "timeline_start": 0.0,
+      "source_peak_seconds": 0.099083,
+      "target_peak_dbfs": -23.0,
+      "timeline_end": 0.282271
+    }
+  },
+  {
+    "frame": 64,
+    "time": 2.133333,
+    "kind": "whoosh",
+    "peak_db": -28.0,
+    "label": "Window answer cut",
+    "time_s": 2.1333333333333333,
+    "source_file": "selected_whoosh.wav",
+    "placement": {
+      "timeline_peak": 2.133333,
+      "timeline_start": 1.865896,
+      "source_peak_seconds": 0.267437,
+      "target_peak_dbfs": -28.0,
+      "timeline_end": 2.365896
+    }
+  },
+  {
+    "frame": 130,
+    "time": 4.333333,
+    "kind": "tick",
+    "peak_db": -32.0,
+    "label": "Why climb inside question",
+    "time_s": 4.333333333333333,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 4.333333,
+      "timeline_start": 4.308937,
+      "source_peak_seconds": 0.024396,
+      "target_peak_dbfs": -32.0,
+      "timeline_end": 4.548667
+    }
+  },
+  {
+    "frame": 218,
+    "time": 7.266667,
+    "kind": "impact",
+    "peak_db": -25.0,
+    "label": "Food answer",
+    "time_s": 7.266666666666667,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 7.266667,
+      "timeline_start": 7.167583,
+      "source_peak_seconds": 0.099083,
+      "target_peak_dbfs": -25.0,
+      "timeline_end": 7.482271
+    }
+  },
+  {
+    "frame": 340,
+    "time": 11.333333,
+    "kind": "impact",
+    "peak_db": -26.0,
+    "label": "Learning mechanism begins",
+    "time_s": 11.333333333333334,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 11.333333,
+      "timeline_start": 11.23425,
+      "source_peak_seconds": 0.099083,
+      "target_peak_dbfs": -26.0,
+      "timeline_end": 11.548937
+    }
+  },
+  {
+    "frame": 488,
+    "time": 16.266667,
+    "kind": "tick",
+    "peak_db": -31.0,
+    "label": "Diagram / search",
+    "time_s": 16.266666666666666,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 16.266667,
+      "timeline_start": 16.242271,
+      "source_peak_seconds": 0.024396,
+      "target_peak_dbfs": -31.0,
+      "timeline_end": 16.482
+    }
+  },
+  {
+    "frame": 509,
+    "time": 16.966667,
+    "kind": "tick",
+    "peak_db": -31.0,
+    "label": "Diagram / food reward",
+    "time_s": 16.966666666666665,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 16.966667,
+      "timeline_start": 16.942271,
+      "source_peak_seconds": 0.024396,
+      "target_peak_dbfs": -31.0,
+      "timeline_end": 17.182
+    }
+  },
+  {
+    "frame": 530,
+    "time": 17.666667,
+    "kind": "tick",
+    "peak_db": -31.0,
+    "label": "Diagram / check again",
+    "time_s": 17.666666666666668,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 17.666667,
+      "timeline_start": 17.642271,
+      "source_peak_seconds": 0.024396,
+      "target_peak_dbfs": -31.0,
+      "timeline_end": 17.882
+    }
+  },
+  {
+    "frame": 580,
+    "time": 19.333333,
+    "kind": "impact",
+    "peak_db": -24.5,
+    "label": "Food conditioning name",
+    "time_s": 19.333333333333332,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 19.333333,
+      "timeline_start": 19.23425,
+      "source_peak_seconds": 0.099083,
+      "target_peak_dbfs": -24.5,
+      "timeline_end": 19.548938
+    }
+  },
+  {
+    "frame": 756,
+    "time": 25.2,
+    "kind": "whoosh",
+    "peak_db": -29.0,
+    "label": "Learned shortcut consequence",
+    "time_s": 25.2,
+    "source_file": "selected_whoosh.wav",
+    "placement": {
+      "timeline_peak": 25.2,
+      "timeline_start": 24.932562,
+      "source_peak_seconds": 0.267437,
+      "target_peak_dbfs": -29.0,
+      "timeline_end": 25.432562
+    }
+  },
+  {
+    "frame": 910,
+    "time": 30.333333,
+    "kind": "impact",
+    "peak_db": -25.0,
+    "label": "Prevention payoff",
+    "time_s": 30.333333333333332,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 30.333333,
+      "timeline_start": 30.23425,
+      "source_peak_seconds": 0.099083,
+      "target_peak_dbfs": -25.0,
+      "timeline_end": 30.548938
+    }
+  }
+]
