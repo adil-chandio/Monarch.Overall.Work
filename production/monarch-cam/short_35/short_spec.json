@@ -56,7 +56,7 @@
     },
     {
       "id": "vo8",
-      "start": 25.20,
+      "start": 25.2,
       "text": "Even when nothing is visible, the learned shortcut can remain.",
       "caption": "EVEN WHEN NOTHING IS VISIBLE, THE SHORTCUT CAN REMAIN."
     },
@@ -75,8 +75,8 @@
       "source_start": 338.0,
       "rate": 1.0,
       "top": "HE DIDN'T OPEN\nTHE DOOR.",
-      "zoom_start": 1.20,
-      "zoom_end": 1.13,
+      "zoom_start": 1.32,
+      "zoom_end": 1.243,
       "focus": 0.58
     },
     {
@@ -86,8 +86,8 @@
       "source_start": 18.0,
       "rate": 1.0,
       "top": "THE WINDOW\nWAS ENOUGH.",
-      "zoom_start": 1.08,
-      "zoom_end": 1.14,
+      "zoom_start": 1.188,
+      "zoom_end": 1.254,
       "focus": 0.47
     },
     {
@@ -97,8 +97,8 @@
       "source_start": 65.0,
       "rate": 1.0,
       "top": "WHY CLIMB\nINSIDE?",
-      "zoom_start": 1.05,
-      "zoom_end": 1.12,
+      "zoom_start": 1.155,
+      "zoom_end": 1.232,
       "focus": 0.52
     },
     {
@@ -108,8 +108,8 @@
       "source_start": 316.0,
       "rate": 1.0,
       "top": "FOOD.\nNOT A RIDE.",
-      "zoom_start": 1.05,
-      "zoom_end": 1.13,
+      "zoom_start": 1.155,
+      "zoom_end": 1.243,
       "focus": 0.53
     },
     {
@@ -119,8 +119,8 @@
       "source_start": 352.0,
       "rate": 1.0,
       "top": "ONE REWARD\nCAN TEACH THIS.",
-      "zoom_start": 1.10,
-      "zoom_end": 1.18,
+      "zoom_start": 1.21,
+      "zoom_end": 1.298,
       "focus": 0.58
     },
     {
@@ -131,52 +131,52 @@
       "rate": 1.0,
       "layout": "diagram",
       "top": "THE LEARNING LOOP",
-      "zoom_start": 1.12,
-      "zoom_end": 1.12,
-      "focus": 0.50
+      "zoom_start": 1.232,
+      "zoom_end": 1.232,
+      "focus": 0.5
     },
     {
       "id": "conditioning_entry",
       "start": 19.35,
-      "end": 22.20,
+      "end": 22.2,
       "source_start": 18.5,
       "rate": 1.0,
       "top": "FOOD CONDITIONING",
-      "zoom_start": 1.08,
-      "zoom_end": 1.18,
+      "zoom_start": 1.188,
+      "zoom_end": 1.298,
       "focus": 0.47
     },
     {
       "id": "conditioning_exit",
-      "start": 22.20,
-      "end": 25.20,
+      "start": 22.2,
+      "end": 25.2,
       "source_start": 338.0,
       "rate": 1.0,
       "top": "FOOD CONDITIONING",
-      "zoom_start": 1.16,
-      "zoom_end": 1.08,
+      "zoom_start": 1.276,
+      "zoom_end": 1.188,
       "focus": 0.58
     },
     {
       "id": "shortcut_approach",
-      "start": 25.20,
-      "end": 27.80,
+      "start": 25.2,
+      "end": 27.8,
       "source_start": 14.0,
       "rate": 1.0,
       "top": "THE SHORTCUT\nCAN REMAIN.",
-      "zoom_start": 1.04,
-      "zoom_end": 1.10,
-      "focus": 0.50
+      "zoom_start": 1.144,
+      "zoom_end": 1.21,
+      "focus": 0.5
     },
     {
       "id": "shortcut_investigation",
-      "start": 27.80,
+      "start": 27.8,
       "end": 30.35,
       "source_start": 352.0,
       "rate": 1.0,
       "top": "THE SHORTCUT\nCAN REMAIN.",
-      "zoom_start": 1.10,
-      "zoom_end": 1.20,
+      "zoom_start": 1.21,
+      "zoom_end": 1.32,
       "focus": 0.58
     },
     {
@@ -184,18 +184,33 @@
       "start": 30.35,
       "end": 35.0,
       "source_start": 338.0,
-      "rate": 0.70,
+      "rate": 0.7,
       "top": "DON'T TEACH\nTHE LESSON.",
-      "zoom_start": 1.20,
-      "zoom_end": 1.20,
+      "zoom_start": 1.32,
+      "zoom_end": 1.32,
       "focus": 0.58,
       "loop_to_start_last": 0.35
     }
   ],
   "diagram_steps": [
-    {"number": "01", "title": "SEARCH", "subtitle": "Investigate the car", "time": 16.25},
-    {"number": "02", "title": "FOOD REWARD", "subtitle": "The behaviour pays off", "time": 16.95},
-    {"number": "03", "title": "CHECK AGAIN", "subtitle": "The shortcut can remain", "time": 17.65}
+    {
+      "number": "01",
+      "title": "SEARCH",
+      "subtitle": "Investigate the car",
+      "time": 16.25
+    },
+    {
+      "number": "02",
+      "title": "FOOD REWARD",
+      "subtitle": "The behaviour pays off",
+      "time": 16.95
+    },
+    {
+      "number": "03",
+      "title": "CHECK AGAIN",
+      "subtitle": "The shortcut can remain",
+      "time": 17.65
+    }
   ],
   "audio": {
     "music_asset": "music_backup",
@@ -205,22 +220,112 @@
     "ambience_start": 52.0,
     "ambience_lufs": -43.5,
     "sfx": {
-      "impact": {"asset": "soft_impact", "trim_start": 2.65, "trim_end": 3.2, "pre": 0.10, "post": 1.65, "description": "soft organic cinematic impact", "peak_db": -24.5},
-      "whoosh": {"asset": "soft_whoosh", "trim_start": 1.25, "trim_end": 1.75, "pre": 0.48, "post": 0.90, "description": "quick soft whoosh", "peak_db": -28.0},
-      "tick": {"asset": "soft_impact", "trim_start": 2.65, "trim_end": 3.2, "pre": 0.025, "post": 0.24, "description": "quick soft tick", "peak_db": -32.0}
+      "impact": {
+        "asset": "soft_impact",
+        "trim_start": 2.65,
+        "trim_end": 3.2,
+        "pre": 0.1,
+        "post": 1.65,
+        "description": "soft organic cinematic impact",
+        "peak_db": -24.5
+      },
+      "whoosh": {
+        "asset": "soft_whoosh",
+        "trim_start": 1.25,
+        "trim_end": 1.75,
+        "pre": 0.48,
+        "post": 0.9,
+        "description": "quick soft whoosh",
+        "peak_db": -28.0
+      },
+      "tick": {
+        "asset": "soft_impact",
+        "trim_start": 2.65,
+        "trim_end": 3.2,
+        "pre": 0.025,
+        "post": 0.24,
+        "description": "quick soft tick",
+        "peak_db": -32.0
+      }
     },
     "cues": [
-      {"frame": 2, "time": 0.066667, "kind": "impact", "peak_db": -23.0, "label": "Window action / immediate hook"},
-      {"frame": 64, "time": 2.133333, "kind": "whoosh", "peak_db": -28.0, "label": "Window answer cut"},
-      {"frame": 130, "time": 4.333333, "kind": "tick", "peak_db": -32.0, "label": "Why climb inside question"},
-      {"frame": 218, "time": 7.266667, "kind": "impact", "peak_db": -25.0, "label": "Food answer"},
-      {"frame": 340, "time": 11.333333, "kind": "impact", "peak_db": -26.0, "label": "Learning mechanism begins"},
-      {"frame": 488, "time": 16.266667, "kind": "tick", "peak_db": -31.0, "label": "Diagram / search"},
-      {"frame": 509, "time": 16.966667, "kind": "tick", "peak_db": -31.0, "label": "Diagram / food reward"},
-      {"frame": 530, "time": 17.666667, "kind": "tick", "peak_db": -31.0, "label": "Diagram / check again"},
-      {"frame": 580, "time": 19.333333, "kind": "impact", "peak_db": -24.5, "label": "Food conditioning name"},
-      {"frame": 756, "time": 25.2, "kind": "whoosh", "peak_db": -29.0, "label": "Learned shortcut consequence"},
-      {"frame": 910, "time": 30.333333, "kind": "impact", "peak_db": -25.0, "label": "Prevention payoff"}
+      {
+        "frame": 2,
+        "time": 0.066667,
+        "kind": "impact",
+        "peak_db": -23.0,
+        "label": "Window action / immediate hook"
+      },
+      {
+        "frame": 64,
+        "time": 2.133333,
+        "kind": "whoosh",
+        "peak_db": -28.0,
+        "label": "Window answer cut"
+      },
+      {
+        "frame": 130,
+        "time": 4.333333,
+        "kind": "tick",
+        "peak_db": -32.0,
+        "label": "Why climb inside question"
+      },
+      {
+        "frame": 218,
+        "time": 7.266667,
+        "kind": "impact",
+        "peak_db": -25.0,
+        "label": "Food answer"
+      },
+      {
+        "frame": 340,
+        "time": 11.333333,
+        "kind": "impact",
+        "peak_db": -26.0,
+        "label": "Learning mechanism begins"
+      },
+      {
+        "frame": 488,
+        "time": 16.266667,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / search"
+      },
+      {
+        "frame": 509,
+        "time": 16.966667,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / food reward"
+      },
+      {
+        "frame": 530,
+        "time": 17.666667,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / check again"
+      },
+      {
+        "frame": 580,
+        "time": 19.333333,
+        "kind": "impact",
+        "peak_db": -24.5,
+        "label": "Food conditioning name"
+      },
+      {
+        "frame": 756,
+        "time": 25.2,
+        "kind": "whoosh",
+        "peak_db": -29.0,
+        "label": "Learned shortcut consequence"
+      },
+      {
+        "frame": 910,
+        "time": 30.333333,
+        "kind": "impact",
+        "peak_db": -25.0,
+        "label": "Prevention payoff"
+      }
     ]
   },
   "editorial_guardrails": [

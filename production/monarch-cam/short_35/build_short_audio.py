@@ -95,8 +95,8 @@ def build_audio():
     api = None
     try:
         from earshot import api as earshot_api
-        earshot_api.load("onnx")
         api = earshot_api
+        print("Earshot API available; model-assisted SFX selection enabled", flush=True)
     except Exception as exc:
         print("Earshot unavailable during SFX selection; fixed reviewed trims remain required:", repr(exc), flush=True)
     voice = np.zeros((SAMPLES, 2), np.float32)
@@ -157,6 +157,7 @@ def build_audio():
 
     sfx = np.zeros_like(voice)
     sfx_paths = {}
+    sfx_selection_model_used = False
     for kind, definition in audio_spec["sfx"].items():
         source_path = assets[definition["asset"]]
         source_audio = sound.decode(source_path)
@@ -178,6 +179,8 @@ def build_audio():
         sf.write(path, clip, SR)
         sfx_paths[kind] = path
         save_json(REVIEW / f"sfx_{kind}_selection.json", selection)
+        if "earshot_find" in selection:
+            sfx_selection_model_used = True
 
     cue_ledger = []
     for cue in audio_spec["cues"]:
@@ -185,12 +188,31 @@ def build_audio():
         placement = sound.add_at_peak(sfx, clip, cue["frame"] / SPEC["fps"], cue["peak_db"])
         cue_ledger.append({**cue, "time_s": cue["frame"] / SPEC["fps"], "source_file": Path(sfx_paths[cue["kind"]]).name, "placement": placement})
     save_json(REVIEW / "cue_ledger.json", cue_ledger)
+    source_by_kind = {kind: definition["asset"] for kind, definition in audio_spec["sfx"].items()}
     save_json(REVIEW / "resolved_cues.json", {
-        "fps": SPEC["fps"], "events": [
-            {"t": cue["time_s"], "frame": cue["frame"], "kind": cue["kind"], "peak_dbfs": cue["peak_db"], "label": cue["label"], "supported_by_picture": True, "generated_audio": False}
-            for cue in cue_ledger
-        ],
-        "intentionally_silent": ["No invented food-reward sound", "No handle, door, attack or bear-vocalisation cue"]
+        "fps": SPEC["fps"], "duration_seconds": DURATION,
+        "picture_reference": str(OUT.relative_to(ROOT)),
+        "picture_policy": "Native-vertical edit of public-domain NPS window entry/exit action; no handle opening or food reward is depicted.",
+        "events": [{
+            "id": f"short:{cue['kind']}:{cue['frame']}",
+            "frame": cue["frame"], "t": cue["time_s"], "kind": cue["kind"],
+            "peak_dbfs": cue["peak_db"],
+            "picture": cue["label"],
+            "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+            "source_asset": source_by_kind[cue["kind"]],
+            "source_file": Path(sfx_paths[cue["kind"]]).name,
+            "placement": cue["placement"],
+            "supported_by_picture": True, "generated_audio": False
+        } for cue in cue_ledger],
+        "intentionally_silent": [{
+            "frame": 218, "t": 7.266667,
+            "picture": "Food is discussed as a possible reward; no food is visible.",
+            "reason": "No invented food-reward, eating or rustling sound is added."
+        }, {
+            "frame": 756, "t": 25.2,
+            "picture": "The learned shortcut is explained; no handle, latch or door event is visible.",
+            "reason": "No handle pull, door movement, attack or bear vocalisation is added."
+        }]
     })
 
     duck = sound.asymmetric_duck(voice)
@@ -210,6 +232,7 @@ def build_audio():
         "ambience": {**ambience_levels, "source": audio_spec["ambience_asset"], "source_start": audio_spec["ambience_start"], "native_camera_audio": False},
         "ducking": {"music_min_gain": 0.24, "ambience_min_gain": 0.7872, "sfx_min_gain": 0.658, "voice_preroll_ms": 120},
         "generated_bear_or_vehicle_foley": False,
+        "sfx_selection_model_used": sfx_selection_model_used,
         "premaster_sample_peak_dbfs": round(float(20 * np.log10(np.max(np.abs(mix)) + 1e-12)), 4)
     })
     return mix, {"voice": voice, "music": ducked_music, "ambience": ducked_ambience, "sfx": sfx}
@@ -411,7 +434,6 @@ def earshot_review(audio: np.ndarray):
     status = {}
     try:
         from earshot import api
-        api.load("onnx")
         final_audio = WORK / "earshot_final.wav"
         sf.write(final_audio, audio, SR)
         cue_path = REVIEW / "resolved_cues.json"

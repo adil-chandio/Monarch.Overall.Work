@@ -142,7 +142,7 @@ def draw_top(base: Image.Image, text: str):
 def active_caption(t: float):
     narration = SPEC["narration"]
     for i, item in enumerate(narration):
-        end = narration[i + 1]["start"] - 0.10 if i + 1 < len(narration) else 34.65
+        end = narration[i + 1]["start"] - 0.10 if i + 1 < len(narration) else DURATION
         if item["start"] <= t < end:
             return item["caption"]
     return None
@@ -165,7 +165,7 @@ def draw_caption(base: Image.Image, text: str | None):
     box = draw.multiline_textbbox((0, 0), wrapped, font=chosen, spacing=12, align="center", stroke_width=1)
     tw, th = box[2] - box[0], box[3] - box[1]
     x = (W - tw) / 2
-    y = 1300
+    y = 1240
     draw.rounded_rectangle((x - 28, y - 22, x + tw + 28, y + th + 30), radius=20, fill=(2, 6, 11, 206), outline=(255, 255, 255, 24), width=1)
     draw.multiline_text((x + 2, y + 3), wrapped, font=chosen, fill=(0, 0, 0, 255), spacing=12, align="center", stroke_width=2, stroke_fill=(0, 0, 0, 255))
     draw.multiline_text((x, y), wrapped, font=chosen, fill=WHITE, spacing=12, align="center", stroke_width=1, stroke_fill=(0, 0, 0))
@@ -195,7 +195,7 @@ def draw_diagram(base: Image.Image, t: float):
     for index, (step, y) in enumerate(zip(SPEC["diagram_steps"], row_y)):
         if t + 1e-6 < step["time"]:
             continue
-        local = max(0.0, min(1.0, (t - step["time"]) / 0.24))
+        local = max(0.0, min(1.0, (t - step["time"]) / 0.14))
         slide = int(round((1.0 - local) * 22))
         alpha = int(round(255 * local))
         number_face = font("DejaVuSansMono", 34)

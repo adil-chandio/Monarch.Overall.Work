@@ -82,7 +82,8 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p production/monarch-cam/short_35/review
-          rm -f production/monarch-cam/short_35/review/workflow_failure.txt
+          rm -f production/monarch-cam/short_35/review/workflow_failure.txt \
+                production/monarch-cam/short_35/review/tts_failures.json
           python production/monarch-cam/short_35/render_short_visual.py \
             2>&1 | tee production/monarch-cam/short_35/review/visual_build.log
 
@@ -110,6 +111,7 @@ jobs:
           audio = json.loads((root/'audio_qc.json').read_text())
           earshot = json.loads((root/'earshot_final_status.json').read_text())
           voices = json.loads((root/'voice_ledger.json').read_text())
+          mix = json.loads((root/'source_mix_report.json').read_text())
           summary = {
               'deliverable': 'deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4',
               'package': 'This Bear Didn’t Need the Door',
@@ -123,6 +125,8 @@ jobs:
               'nine_gate_audio_pass': audio['pass'],
               'nine_gate_audio_failed': audio['failed'],
               'earshot_status': earshot,
+              'earshot_model_review_pass': all(earshot.get(k) == 'complete' for k in ('timeline', 'sheet', 'critique')),
+              'earshot_sfx_selection_used': mix.get('sfx_selection_model_used', False),
               'credits': 'production/monarch-cam/short_35/CREDITS.md',
               'creative_lock': 'production/monarch-cam/short_35/RESEARCH_AND_CREATIVE_LOCK.md',
               'visual_review': 'production/monarch-cam/short_35/review/vertical_contact_sheet.jpg',
@@ -130,7 +134,7 @@ jobs:
               'creative_review': 'Objective and model-assisted checks are evidence, not a guarantee of audience retention or virality.',
           }
           (root/'qc_summary.json').write_text(json.dumps(summary, indent=2))
-          if not technical['passed'] or not audio['pass'] or not summary['all_narration_slots_pass']:
+          if not technical['passed'] or not audio['pass'] or not summary['all_narration_slots_pass'] or not summary['earshot_model_review_pass']:
               raise SystemExit('35-second Short QC failed')
           print(json.dumps(summary, indent=2))
           PY
