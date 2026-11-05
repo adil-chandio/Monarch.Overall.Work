@@ -7,7 +7,7 @@ score and a cue sheet on every cut.
 
 ## What changed, and why
 
-| | v5-34 (approved) | v6-05 |
+| | v5-34 (approved) | v6-11 |
 |---|---|---|
 | length | 0.000–7.000 s (s1–s5) | **0.000–23.267 s, all thirteen shots** |
 | frame count | 210 | **698** at 30 fps |
@@ -118,7 +118,7 @@ tools/v6.py --spec spec/v5-02.json --out public/demo/v6-04.mp4          # 698 fr
 tools/sfx_takes.py    -> audio/takes/*.wav            (16 earshot bank sounds, 48 kHz)
 tools/film_score.py   -> audio/bed-23.wav             (sections, arc, band-graded)
 tools/mix.py          -> audio/mix-23.wav             (77 cues, duck, band match, arc, TP limit)
-ffmpeg -c:v copy      -> public/demo/v6-05-final.mp4
+ffmpeg -c:v copy      -> public/demo/v6-11-final.mp4
 ```
 
 ## Open
@@ -129,3 +129,20 @@ ffmpeg -c:v copy      -> public/demo/v6-05-final.mp4
 - Nothing in this build uses a reference frame, a reference asset, or a reference audio
   sample; the reference is read only for measurements (shot table, ink boxes, spectrum,
   loudness arc, transient times).
+
+## The glitch pass (second review)
+
+The first full build passed its numeric checks and still looked wrong frame by frame. What
+was actually broken, and what fixed it:
+
+| what it looked like | cause | fix |
+|---|---|---|
+| the macro shots were **soft everywhere** | `wide_storm()` blurred the whole frame to hide where the plate ended | the plate is now native-resolution; the rest of the frame is filled by **reflecting the plate's own edge** (`BORDER_REFLECT_101`), so there is no join to hide |
+| `s8`'s green BILLION reappeared on `s10`'s notes | `render_frame()` called itself for the dissolve source, so a short shot absorbed the *previous* shot's dissolved frame (s8 → s9 at 0.5 s inside a 0.2 s shot → s10) | the dissolve source is now the previous shot's **own** frame (`_draw()`), and s9/s10's dissolve durations were cut to fit inside their shots |
+| `TWENTY` and `BILLION` overlapped in `s2` | the two words were laid out independently | `BILLION` starts where `TWENTY` ends |
+| a red-lit **blob** of hands on the wall | the hands layer carried the plate's red set through a patchy matte | the hands are cut as objects and graded down 0.62 with desaturation, so they read as a dark foreground detail |
+| a stray olive square on his chest | the wall's green marker drawn at the wrong depth | removed |
+| the card covered his face | 430 px wide at 80 % opacity | 268 px at 62 %, low in the frame, like the reference's |
+
+Verified on the delivered file: 698/698 frames, 0 black segments, 0 decode errors, muxed
+video byte-identical to the master, and **all 13 cuts have a hit within 53 ms** (median 8 ms).

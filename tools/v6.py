@@ -118,10 +118,42 @@ def defog_front(img: np.ndarray) -> np.ndarray:
     smooth = np.clip(1 - detail / 9.0, 0, 1)
     red = np.clip((r - np.maximum(b, g) * 1.25) / 70.0, 0, 1)
     m = cv2.GaussianBlur(smooth * red, (0, 0), 10.0).astype(np.float32) * 0.92
-    wall = np.array([26, 10, 12], np.float32)
-    out[..., :3] = out[..., :3] * (1 - m[..., None]) + wall * m[..., None]
-    out[..., 3] = out[..., 3] * (1 - 0.62 * m)
+    # only in the band the patch lives in: his jacket's red-lit edge is smooth red too, and
+    # it is part of the lighting, so the mask stops above the shoulder line
+    hh = out.shape[0]
+    band = np.clip((0.46 - np.linspace(0, 1, hh)) / 0.10, 0, 1)[:, None]
+    m = m * band
+    out[..., 3] = out[..., 3] * (1 - 0.96 * m)
     return np.clip(out, 0, 255).astype(np.uint8)
+
+
+def cash_only(img: np.ndarray) -> np.ndarray:
+    """Keep only the banknotes in the hands plate: the object, not the hands.
+
+    The reference cuts to hands holding cash; our plate has the same gesture, but the layer
+    it lives in is a full red frame whose edges can never be hidden on a lit wall. The notes
+    are the part that reads at speed, and they are separable by their own colour -- warm,
+    desaturated, much greener than the red set -- with a hard test that no red passes.
+    """
+    out = img.copy()
+    f = out[..., :3].astype(np.float32)
+    b, g, r = f[..., 0], f[..., 1], f[..., 2]
+    luma = 0.114 * b + 0.587 * g + 0.299 * r
+    m = ((luma > 68) & (g > r * 0.56) & (b > r * 0.34)).astype(np.uint8)
+    m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((21, 21), np.uint8))
+    m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
+    n, lab, st, cen = cv2.connectedComponentsWithStats(m, 8)
+    keep = np.zeros_like(m)
+    for k in range(1, n):
+        x, y, w, h, area = st[k]
+        if area > 2600 and w > 40 and h > 26 and w / max(h, 1) > 1.05:
+            keep[lab == k] = 1
+    keep = cv2.dilate(keep, np.ones((5, 5), np.uint8))
+    a = cv2.GaussianBlur(keep.astype(np.float32), (0, 0), 2.2)
+    out[..., 3] = (np.clip(a, 0, 1) * 255).astype(np.uint8)
+    # the notes' own brightness: no red tint left on them
+    out[..., :3] = np.clip(f * 1.06 + 6, 0, 255).astype(np.uint8)
+    return out
 
 
 def fingers_only(img: np.ndarray, thr: float = 26.0) -> np.ndarray:
@@ -230,36 +262,38 @@ def green_field(deep: float = 1.0, glow: tuple[float, float] = (0.42, 0.30)) -> 
     return np.clip(f * deep, 0, 255)
 
 
-def wide_storm(scale: float = 0.82, dy: float = 0.0, high_key: float = 1.0,
+def wide_storm(scale: float = 0.92, dy: float = 0.0, high_key: float = 1.0,
                desat: float = 0.72) -> np.ndarray:
-    """s4/s11's framing: a wide grey day, the stool small in the lower third.
+    """s4/s11's framing: a wide grey day, the stool small and low in the frame.
 
     The plate is a medium shot; the reference's shot is a wide. Covering the frame with the
     medium shot (which is what `plate_image` does) is what made this read as a different
     shot, not a different grade: so the sky is rebuilt from the plate's own top and the
-    stool is placed back into it at a fraction of the size, small and low.
+    stool is placed back into it at a fraction of the size, small and low -- then feathered
+    on **all four sides** so the plate's rectangle never shows as a seam.
     """
     pl = base.asset(A + "plate-bag-stool.png")[..., :3].astype(np.float32)
     sky = pl[: int(pl.shape[0] * 0.42)]
-    sky = cv2.resize(sky, (W, int(H * 0.78)), interpolation=cv2.INTER_LANCZOS4)
+    sky = cv2.resize(sky, (W, int(H * 0.80)), interpolation=cv2.INTER_LANCZOS4)
     sky = cv2.GaussianBlur(sky, (0, 0), 6)
-    field = np.zeros((H, W, 3), np.float32)
+    field = np.empty((H, W, 3), np.float32)
     field[: sky.shape[0]] = sky
     field[sky.shape[0]:] = sky[-1:, :, :]
-    # the whole plate, smaller, bottom-anchored, feathered into the sky
+    # the plate, smaller, bottom-anchored, and the rest of the frame *replicated from its own
+    # edge* -- not from a different image -- so there is no line to see where the plate ends
     ph = int(pl.shape[0] * (W * scale) / pl.shape[1])
-    sub = cv2.resize(pl, (int(W * scale), ph), interpolation=cv2.INTER_LANCZOS4)
-    alpha = np.ones((ph, sub.shape[1]), np.float32)
-    ramp = int(ph * 0.22)
-    alpha[:ramp] = (np.linspace(0, 1, ramp) ** 1.3)[:, None]
-    alpha = cv2.GaussianBlur(alpha, (0, 0), 9)
-    x0 = (W - sub.shape[1]) // 2
+    pw = int(W * scale)
+    sub = cv2.resize(pl, (pw, ph), interpolation=cv2.INTER_LANCZOS4)
+    x0 = (W - pw) // 2
     y0 = int(H - ph + dy * H)
-    ys0, ys1 = max(0, y0), min(H, y0 + ph)
-    xs0, xs1 = max(0, x0), min(W, x0 + sub.shape[1])
-    a = alpha[ys0 - y0:ys1 - y0, xs0 - x0:xs1 - x0][..., None]
-    field[ys0:ys1, xs0:xs1] = sub[ys0 - y0:ys1 - y0, xs0 - x0:xs1 - x0] * a + \
-        field[ys0:ys1, xs0:xs1] * (1 - a)
+    big = cv2.copyMakeBorder(sub, H, H, W, W, cv2.BORDER_REFLECT_101)
+    field = big[H - y0:H - y0 + H, W - x0:W - x0 + W].copy()
+    # a couple of pixels of blur only where the replication bands are, so the join is soft
+    soft = cv2.GaussianBlur(field, (0, 0), 3)
+    m = np.zeros((H, W), np.float32)
+    m[max(0, y0 + 2):min(H, y0 + ph - 2), max(0, x0 + 2):min(W, x0 + pw - 2)] = 1.0
+    m = cv2.GaussianBlur(m, (0, 0), 6)[..., None]
+    field = field * m + soft * (1 - m)
     lum = field.mean(axis=2, keepdims=True)
     field = field * (1 - desat * 0.55) + lum * (desat * 0.55)
     field = np.clip(field * (1.05 + 0.13 * high_key) + 14 * high_key, 0, 255)
@@ -327,34 +361,30 @@ def scene_s2(f, t, u):
     f[:] = plate_gradient([(0.55, 0.5, 0.95, (32, 32, 32))], (10, 10, 10))
     k = ease(u, "out")
     sc = pop(t, 0.541, 0.17)
-    draw_text(f, "BILLION", 211, lerp(566, 544, k), 392 * sc, GREEN, skew=0.02,
+    draw_text(f, "TWENTY", 34, lerp(566, 546, k), 176, GREEN, opacity=0.96)
+    draw_text(f, "BILLION", 226, lerp(560, 538, k), 400 * sc, GREEN, skew=0.02,
               blur=lerp(7.0, 0.0, k))
-    draw_text(f, "TWENTY", 78, lerp(572, 553, k), 176, GREEN, opacity=0.96,
-              blur=lerp(3.0, 0.0, k))
     vignette(f, 0.55)
 
 
 def scene_s3(f, t, u):
-    """0.800-1.333  the green field: the packet huge and cropped, BILLION over it.
+    """0.800-1.333  the green field: the packet large and cropped, one headline.
 
-    REF measures the headline at 650px wide inside the upper 42 % and the packet bleeding
-    off the bottom and the left edge -- a macro, not a product shot.
+    The reference prints the word twice, but its second copy is *behind* the packet and a
+    shade darker, never a lime ghost crossing the headline. Two copies at the same size and
+    opacity read as a glitch, so this shot carries one headline, set inside the frame.
     """
     f[:] = green_field(0.92, glow=(0.55, 0.22))
     k = ease(u, "out")
-    # shadow the packet throws on the field, so it is standing in front of it
     sh = np.zeros((H, W, 4), np.uint8)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
-    g = np.clip(1 - (((xx - 0.36 * W) / (0.46 * W)) ** 2 + ((yy - 0.80 * H) / (0.22 * H)) ** 2), 0, 1) ** 1.3
+    g = np.clip(1 - (((xx - 0.40 * W) / (0.46 * W)) ** 2 + ((yy - 0.82 * H) / (0.22 * H)) ** 2), 0, 1) ** 1.3
     sh[..., 3] = (g * 90).astype(np.uint8)
     draw_layer(f, sh, 0, 0, W, opacity=0.75, h=H)
-    draw_layer(f, T["bag"], lerp(4, -18, k), lerp(478, 446, k), lerp(600, 640, k),
-               opacity=lin(t, 0.803, 0.86), blur=lerp(9.0, 0.0, k), rot=-7 + 4 * k)
-    # the shallow rotated copy, the way the reference prints it twice
-    draw_text(f, "BILLION", 34, lerp(300, 268, k), 214, rgb(24, 34, 6), opacity=0.85,
-              rot=-58.0, blur=lerp(6.0, 0.0, k))
-    draw_text(f, "BILLION", lerp(96, 70, k), lerp(198, 172, k), lerp(470, 528, k),
-              rgb(20, 30, 4), opacity=lin(t, 0.806, 0.90), rot=-9.0, blur=lerp(10.0, 0.0, k))
+    draw_layer(f, T["bag"], lerp(60, 34, k), lerp(500, 470, k), lerp(566, 600, k),
+               opacity=lin(t, 0.803, 0.86), blur=lerp(8.0, 0.0, k), rot=-6 + 3 * k)
+    draw_text(f, "BILLION", lerp(84, 62, k), lerp(206, 180, k), lerp(452, 500, k),
+              rgb(20, 30, 4), opacity=lin(t, 0.806, 0.90), rot=-8.0, blur=lerp(10.0, 0.0, k))
     vignette(f, 0.26)
 
 
@@ -364,15 +394,15 @@ def scene_s4(f, t, u):
     REF: HE 78px at (126,237); NO 430px at (112,300) under it. The storm is high-key and
     the packet stays fully in frame -- this shot is the wide, the next one is the macro.
     """
-    f[:] = wide_storm(scale=lerp(0.80, 0.86, ease(u, "smooth")), dy=lerp(0.03, -0.01, u))
-    ka = ease(lin(t, 1.84, 2.04), "out")
-    draw_text(f, "HE", 126, 236, 78 * lerp(1.10, 1.0, ka), INK_RED, opacity=ka,
-              blur=lerp(5.0, 0.0, ka))
-    a = ease(lin(t, 2.02, 2.18), "out")
+    f[:] = wide_storm(scale=lerp(0.92, 0.95, ease(u, "smooth")), dy=lerp(0.02, -0.01, u))
+    ka = ease(lin(t, 1.84, 1.98), "out")
+    draw_text(f, "HE", 126, 236, 78 * lerp(1.08, 1.0, ka), INK_RED, opacity=min(1.0, ka * 2.2),
+              blur=lerp(3.0, 0.0, ka))
+    a = ease(lin(t, 2.02, 2.14), "out")
     if a > 0:
-        sc = lerp(1.35, 1.0, a)
-        draw_text(f, "NO", 112 + (1 - sc) * 120, 300 + (1 - sc) * 70, 400 * sc, INK_RED,
-                  opacity=a, rot=-2.0, blur=lerp(9.0, 0.0, a))
+        sc = lerp(1.28, 1.0, a)
+        draw_text(f, "NO", 112 + (1 - sc) * 120, 302 + (1 - sc) * 70, 400 * sc, INK_RED,
+                  opacity=min(1.0, a * 2.0), rot=-2.0, blur=lerp(5.0, 0.0, a))
     vignette(f, 0.30)
 
 
@@ -392,7 +422,7 @@ def red_room(f, t, u, push: float, orbit_x: float, orbit_y: float, yaw: float, p
         # the reference's graphic furniture: nested chevrons, a dark card, a green cell
         cv2_shapes(f, t, u, orbit_x, orbit_y)
     hero_only(f, s=base.COVER * 1.02 * push, orbit_x=orbit_x, orbit_y=orbit_y,
-              yaw=yaw, pitch=pitch, lift=52 + math.sin(u * math.pi * 2.0) * 2.5)
+              yaw=yaw, pitch=pitch, lift=52 + math.sin(u * math.pi * 2.0) * 2.5, halo=0.0)
     place_px(f, T["2008"], -300.0, 470 * push, orbit_x * 1.15 - 26, orbit_y * 1.15, 0.0,
              opacity=year, blur=0.8, anchor=(0.42, 0.045),
              yaw=yaw * 0.9 + 4.0, pitch=pitch * 0.9)
@@ -428,13 +458,6 @@ def cv2_shapes(f, t, u, ox, oy):
     w2, h2 = W * 0.30, H * 0.34
     pts = np.array([[x, y], [x + w2, y + h2 * 0.42], [x, y + h2]], np.int32)
     cv2.polylines(f, [pts], False, col, thick + 1, cv2.LINE_AA)
-    gx = (0.50 + 0.03 * math.sin(t * 0.9)) * W + dx * 1.2
-    gy = (0.46 + 0.02 * math.cos(t * 0.7)) * H + dy * 1.2
-    sx = max(8, 24 * k_)
-    cell = np.zeros((int(sx * 2.2), int(sx * 2.2), 4), np.uint8)
-    cv2.rectangle(cell, (int(sx * 0.35), int(sx * 0.35)), (int(sx * 1.85), int(sx * 1.85)),
-                  (11, 187, 125, 235), -1, cv2.LINE_AA)
-    draw_layer(f, cell, gx, gy, cell.shape[1], opacity=0.62)
 
 
 def hero_only(f, s: float, orbit_x: float, orbit_y: float, yaw: float, pitch: float,
@@ -486,9 +509,9 @@ def scene_s5(f, t, u):
              yaw=lerp(-9.0, 7.0, p), pitch=lerp(2.5, -2.0, p), year=0.30)
     hp = ease(lin(t, 4.15, 5.05), "out")
     if hp > 0:
-        place_px(f, T["hands"], 740.0, 520 * lerp(0.86, 1.0, hp), 420 - 90 * hp, 300 + 60 * hp,
-                 0.0, opacity=hp * 0.97, blur=lerp(7.0, 0.0, hp), anchor=(0.5, 0.5),
-                 yaw=lerp(-18, -7, hp), pitch=7.0)
+        place_px(f, T["cash"], 740.0, 300 * lerp(0.88, 1.0, hp), 430 - 60 * hp, 300 + 50 * hp,
+                 0.0, opacity=hp * 0.95, blur=lerp(6.0, 0.0, hp), anchor=(0.5, 0.5),
+                 yaw=lerp(-16, -6, hp), pitch=6.0)
     vignette(f, 0.42)
 
 
@@ -501,7 +524,7 @@ def scene_s6(f, t, u):
     glow(f, T.get("lens"), t)
     a = ease(lin(t, 9.62, 9.94), "out")
     if a > 0:
-        card_pill(f, 128, lerp(904, 846, a), a, "subscribe", "& like", 462)
+        card_pill(f, 226, lerp(964, 906, a), a, "subscribe", "& like", 274)
     vignette(f, 0.44)
 
 
@@ -520,7 +543,7 @@ def card_pill(f, x, y, a, line1, line2, w, face="Poppins-SemiBold.ttf"):
         return
     scale = lerp(0.90, 1.0, a)
     w = int(w * scale)
-    h = int(w * 0.50)
+    h = int(w * 0.56)
     shadow = np.zeros((h + 28, w + 28, 4), np.uint8)
     cv2.rectangle(shadow, (14, 20), (w + 14, h + 20), (0, 0, 0, 120), -1, cv2.LINE_AA)
     shadow = cv2.GaussianBlur(shadow, (0, 0), 9)
@@ -529,9 +552,9 @@ def card_pill(f, x, y, a, line1, line2, w, face="Poppins-SemiBold.ttf"):
     cv2.rectangle(canvas, (0, 0), (w - 1, h - 1), (206, 214, 228, 255), -1, cv2.LINE_AA)
     canvas = cv2.GaussianBlur(canvas, (0, 0), 1.0)
     canvas[..., 3] = (canvas[..., 3] * min(1.0, a)).astype(np.uint8)
-    draw_layer(f, canvas, x, y, w, opacity=a * 0.80)
-    draw_text(f, line1, x + w * 0.13, y + h * 0.12, w * 0.74, (34, 32, 30), opacity=a, face=face)
-    draw_text(f, line2, x + w * 0.31, y + h * 0.52, w * 0.38, (34, 32, 30), opacity=a * 0.94,
+    draw_layer(f, canvas, x, y, w, opacity=a * 0.62)
+    draw_text(f, line1, x + w * 0.14, y + h * 0.14, w * 0.72, (40, 38, 36), opacity=a * 0.95, face=face)
+    draw_text(f, line2, x + w * 0.32, y + h * 0.54, w * 0.36, (40, 38, 36), opacity=a * 0.90,
               face=face)
 
 
@@ -566,34 +589,33 @@ def scene_s9(f, t, u):
 
 
 def scene_s10(f, t, u):
-    """12.700-13.000  the packet close on green, BILLION above and a ghost behind it."""
+    """12.700-13.000  the packet close on green, one headline above it."""
     f[:] = green_field(0.90, glow=(0.55, 0.26))
     k = ease(u, "out")
-    place(f, T["macro"], 0.0, 0.0, 0.0, 0.0, cover=lerp(1.46, 1.30, k), opacity=0.96,
-          anchor=(0.56, 0.66), blur=lerp(4.0, 0.0, k))
-    draw_layer(f, T["bag"], 106, lerp(452, 424, k), lerp(560, 604, k), opacity=0.95,
-               blur=lerp(3.0, 0.0, k), rot=-4.0)
-    draw_layer(f, T["ghost"], 96, 200, 470, opacity=0.26, rot=-4.0)
-    draw_text(f, "BILLION", 96, 196, 500, rgb(22, 30, 4), opacity=1.0, rot=-4.0,
+    place(f, T["macro"], 0.0, 0.0, 0.0, 0.0, cover=lerp(1.55, 1.38, k), opacity=0.96,
+          anchor=(0.34, 0.50), blur=lerp(4.0, 0.0, k))
+    draw_layer(f, T["bag"], 168, lerp(500, 466, k), lerp(470, 500, k), opacity=0.97,
+               blur=lerp(2.0, 0.0, k), rot=-4.0)
+    draw_text(f, "BILLION", 104, 196, 470, rgb(22, 30, 4), opacity=1.0, rot=-4.0,
               blur=lerp(3.0, 0.0, k))
     vignette(f, 0.30)
 
 
 def scene_s11(f, t, u):
     """13.000-14.833  the stool; HE, HE SAID, then NO over everything."""
-    f[:] = wide_storm(scale=lerp(0.82, 0.88, ease(u, "smooth")), dy=lerp(0.01, -0.02, u),
+    f[:] = wide_storm(scale=lerp(0.93, 0.96, ease(u, "smooth")), dy=lerp(0.01, -0.02, u),
                       high_key=lerp(0.6, 1.0, lin(t, 13.10, 13.70)))
-    kh = ease(lin(t, 13.10, 13.30), "out")
-    draw_text(f, "HE", 126, 236, 78 * lerp(1.10, 1.0, kh), INK_RED, opacity=kh,
-              blur=lerp(5.0, 0.0, kh))
-    ks = ease(lin(t, 13.42, 13.62), "out")
-    draw_text(f, "SAID", 216, 250, 150 * lerp(1.08, 1.0, ks), INK_RED, opacity=ks,
-              blur=lerp(5.0, 0.0, ks))
-    a = ease(lin(t, 13.70, 13.94), "out")
+    kh = ease(lin(t, 13.10, 13.24), "out")
+    draw_text(f, "HE", 126, 236, 78 * lerp(1.08, 1.0, kh), INK_RED, opacity=min(1.0, kh * 2.2),
+              blur=lerp(3.0, 0.0, kh))
+    ks = ease(lin(t, 13.40, 13.54), "out")
+    draw_text(f, "SAID", 216, 250, 150 * lerp(1.06, 1.0, ks), INK_RED, opacity=min(1.0, ks * 2.2),
+              blur=lerp(3.0, 0.0, ks))
+    a = ease(lin(t, 13.68, 13.82), "out")
     if a > 0:
-        sc = lerp(1.32, 1.0, a)
-        draw_text(f, "NO", 96 + (1 - sc) * 120, 298 + (1 - sc) * 70, 452 * sc, INK_RED,
-                  opacity=min(1.0, a * 1.3), rot=-2.0, blur=lerp(7.0, 0.0, a))
+        sc = lerp(1.26, 1.0, a)
+        draw_text(f, "NO", 96 + (1 - sc) * 120, 300 + (1 - sc) * 70, 452 * sc, INK_RED,
+                  opacity=min(1.0, a * 2.0), rot=-2.0, blur=lerp(5.0, 0.0, a))
     vignette(f, 0.34)
 
 
@@ -605,12 +627,8 @@ def scene_s12(f, t, u):
              yaw=lerp(-8.0, 6.0, p), pitch=lerp(2.2, -1.8, p), year=0.32)
     hp = ease(lin(t, 15.90, 16.90), "out")
     if hp > 0:
-        place_px(f, T["hands"], 760.0, 480, 450 + 60 * (1 - hp), 300 - 30 * hp, 0.0,
-                 opacity=hp * 0.94, blur=lerp(8.0, 0.0, hp), yaw=lerp(16, 4, hp), pitch=-5.0)
-    hp2 = ease(lin(t, 18.40, 19.20), "out")
-    if hp2 > 0:
-        place_px(f, T["hands"], 900.0, 330, 240 - 30 * hp2, 660, 0.0, opacity=hp2 * 0.55,
-                 blur=lerp(7.0, 1.0, hp2), yaw=-10.0, pitch=4.0)
+        place_px(f, T["cash"], 760.0, 320, 452 + 50 * (1 - hp), 300 - 25 * hp, 0.0,
+                 opacity=hp * 0.92, blur=lerp(7.0, 0.0, hp), yaw=lerp(14, 4, hp), pitch=-5.0)
     vignette(f, 0.44)
 
 
@@ -623,13 +641,9 @@ def scene_s13(f, t, u):
     glow(f, T.get("lens"), t)
     if 20.700 <= t < 20.767:                       # the reference's one-frame flash
         f[:] = np.minimum(f * 1.9 + 76, 255)
-    hp = ease(lin(t, 21.20, 22.10), "out")
-    if hp > 0:
-        place_px(f, T["hands"], 700.0, 300, 190, 380, 0.0, opacity=hp * 0.5,
-                 blur=lerp(8.0, 2.0, hp), yaw=-14.0, pitch=5.0)
     a = ease(lin(t, 21.02, 21.50), "out")
     if a > 0:
-        card_pill(f, 150, lerp(930, 872, a), a, "SUBSCRIBE", "LIKE", 430)
+        card_pill(f, 232, lerp(966, 906, a), a, "SUBSCRIBE", "LIKE", 268)
     vignette(f, 0.48)
 
 
@@ -657,7 +671,16 @@ def prepare(spec: dict) -> None:
     # the hands are kept as an object, not as a full-frame plate: only the cash and the
     # fingers are cut out (their own local contrast against the red), the rest is dropped,
     # so nothing of the plate's background can ever show as a rectangle on the wall
-    T["hands"] = oval_fade(fingers_only(despill(drop_green_cells(half), erode=5)), soft=0.55)
+    hands_cut = oval_fade(fingers_only(despill(drop_green_cells(half), erode=6)), soft=0.62)
+    # graded down and desaturated: the hands become a dark detail in the room's foreground,
+    # which is how the reference uses them, instead of a lit patch on a red wall
+    _f = hands_cut[..., :3].astype(np.float32) * 0.62
+    _lum = _f.mean(axis=2, keepdims=True)
+    _f = _f * 0.55 + _lum * 0.45
+    hands_cut[..., :3] = np.clip(_f, 0, 255).astype(np.uint8)
+    T["hands"] = hands_cut
+    T["cash"] = cash_only(cv2.resize(hands, (int(hands.shape[1] * 0.62), int(hands.shape[0] * 0.62)),
+                                     interpolation=cv2.INTER_AREA))
     T["lens"] = make_lens()
 
 
@@ -684,19 +707,40 @@ def make_lens():
     return out
 
 
-def render_frame(i: int, spec: dict) -> np.ndarray:
+def _shot_at(t: float, spec: dict) -> dict:
+    return next((s for s in spec["shots"] if s["start"] <= t < s["end"]), spec["shots"][-1])
+
+
+def _draw(i: int, spec: dict) -> np.ndarray:
+    """One frame of its own shot, with no dissolve applied."""
     fps = spec["fps"]
     t = i / fps
-    shot = next((s for s in spec["shots"] if s["start"] <= t < s["end"]), spec["shots"][-1])
+    shot = _shot_at(t, spec)
     u = (t - shot["start"]) / max(1e-6, shot["end"] - shot["start"])
     f = np.zeros((H, W, 3), np.float32)
     globals()[f"scene_{shot['fn']}"](f, t, u)
     if shot.get("grain", 1.2) > 0:
         grain(f, shot["grain"], i * 7919 + 13)
+    return f
+
+
+def render_frame(i: int, spec: dict) -> np.ndarray:
+    """A frame, with its shot's dissolve resolved against the shot before it.
+
+    The dissolve source is the previous shot's **own frame**, drawn without its own
+    dissolve. Without that, a short shot nested inside another loses its type into the
+    next one (s8's word reappearing 1.5 s later on s10's packet, which is the kind of leak
+    that reads as a glitch), and the mix also darkens by squaring the cross-fades.
+    """
+    fps = spec["fps"]
+    t = i / fps
+    shot = _shot_at(t, spec)
+    f = _draw(i, spec)
     d = shot.get("dissolve_in", 0)
-    if d > 0:
+    if d > 0 and t - shot["start"] < d:
         k = ease(min(1.0, (t - shot["start"]) / d), "smooth")
-        prev = render_frame(max(0, int(round(shot["start"] * fps)) - 1), spec).astype(np.float32)
+        prev_i = max(0, int(round(shot["start"] * fps)) - 1)
+        prev = _draw(prev_i, spec)
         f = prev * (1 - k) + f * k
     return np.clip(f, 0, 255).astype(np.uint8)
 
