@@ -162,6 +162,22 @@ def main() -> None:
     cut_out("s5-he-layer", up, full)
     cut_out("s5-no", lo, full)
 
+    # A soft plate is unrecoverable: no encode quality puts detail back, and it reads
+    # as "the rebuild is blurry" at every timestamp. This shot racks focus, so the
+    # frames either side of the plate are soft on purpose — the plate must not be.
+    bag = (slice(760, 1120), slice(300, 620))
+    def acutance(frame):
+        grey = cv2.cvtColor(frame.astype(np.uint8), cv2.COLOR_RGB2GRAY)
+        return float(cv2.Laplacian(grey, cv2.CV_32F)[bag].var())
+
+    sharp = {"entry 1.45": acutance(entry), "soft  1.85": acutance(soft), "plate 2.05": acutance(plate)}
+    for k, v in sharp.items():
+        print(f"  sharpness {k}: {v:6.1f}")
+    if sharp["plate 2.05"] < 60:
+        raise SystemExit(
+            f"the plate is soft ({sharp['plate 2.05']:.0f} on Laplacian variance) — "
+            "this shot racks focus, so check which frame was picked")
+
     # the measured colour endpoints, so the page animates to something real
     swept = plate.mean(axis=(0, 1)).round(0)
     ended = full.mean(axis=(0, 1)).round(0)
