@@ -1,26 +1,17 @@
 Synthesized vo1
 Synthesized vo2
-Traceback (most recent call last):
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/build_preview.py", line 512, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/build_preview.py", line 500, in main
-    asyncio.run(synthesize())
-  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/build_preview.py", line 324, in synthesize
-    await communicate.save(str(target))
-  File "/home/runner/.local/lib/python3.12/site-packages/edge_tts/communicate.py", line 613, in save
-    async for message in self.stream():
-  File "/home/runner/.local/lib/python3.12/site-packages/edge_tts/communicate.py", line 588, in stream
-    async for message in self.__stream():
-  File "/home/runner/.local/lib/python3.12/site-packages/edge_tts/communicate.py", line 562, in __stream
-    raise NoAudioReceived(
-edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that your parameters are correct.
+Synthesized vo3
+Synthesized vo4
+Synthesized vo5
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/vo1.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/vo2.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/vo3.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/vo4.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/vo5.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -f f32le -ar 48000 -ac 2 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/mix_raw.f32 -af loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json -f null -
++ ffmpeg -y -hide_banner -loglevel warning -f f32le -ar 48000 -ac 2 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/mix_raw.f32 -af loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=-20.65:measured_TP=-5.35:measured_LRA=9.30:measured_thresh=-32.79:offset=0.87:linear=true,aresample=48000,alimiter=limit=0.82:level=false -c:a aac -b:a 192k -ar 48000 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/audio_master.m4a
+[f32le @ 0x55ebb913cf80] Estimating duration from bitrate, this may be inaccurate
+[aist#0:0/pcm_f32le @ 0x55ebb91a6e00] Guessed Channel Layout: stereo
+{
+  "audio_master": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/preview/audio_master.m4a"
+}
