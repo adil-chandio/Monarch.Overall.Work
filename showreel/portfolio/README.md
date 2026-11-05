@@ -48,3 +48,53 @@ movement is layered 2.5D rather than a new performance or true 3D animation.
 
 The source audio is unchanged and its rights should be verified before public or
 commercial distribution.
+
+## Original showcase edition (v3)
+
+`public/demo/monarch-portfolio-v3.mp4` replaces the previous repeated project panels
+with newly made editing studies and adds an opening hook, intro teasers, section
+transitions and a cleaner ending. The supplied masked character, MONARCH black/red
+identity and original reference soundtrack remain. It is 1920×1080 at 30 fps.
+
+The new studies are in `public/demo/portfolio-samples/`:
+
+- `time-edit.mp4`, `story-edit.mp4`, `motion-edit.mp4`: three different 9-second,
+  540×960 vertical motion studies, with separately synthesized original music/SFX.
+- `landscape-01.mp4` through `landscape-04.mp4`: four 960×540 silent editing studies,
+  used as video panels in the main portfolio; the main film uses its own soundtrack.
+
+These are original concept studies, **not client projects or actual documentary
+footage**. The timepiece, city, workstation, rooftop and prism plates were AI-generated
+for this build and animated as 2.5D stills. The user-supplied portrait is also a still;
+none of these simulate a live performance. There are cuts, moving text, graphics,
+pushes and procedural sound, but the clips should not be described as verified matches
+to the source tutorial's production quality.
+
+Rebuild in order (requires NumPy, SciPy, Pillow, OpenCV and imageio-ffmpeg):
+
+```sh
+python3 showreel/portfolio/create_samples.py
+python3 showreel/portfolio/render_v3.py
+```
+
+Resized intermediary footage is cached in `/tmp/monarch-portfolio-v3`; delete that
+cache after changing the source samples so the portfolio renderer regenerates them.
+The final portfolio soundtrack is stream-copied from `assets/reference-sound.m4a`.
+It may contain third-party music, so rights must be checked before public/commercial use.
+
+### Research
+
+YouTube tutorial descriptions and available transcripts were reviewed; direct video
+playback was not available in the sandbox. Techniques considered were layered imagery,
+word-by-word text, fast but readable cuts, easing and timing effects to the soundtrack:
+
+- [Sharp Motion: documentary-style editing tutorial](https://www.youtube.com/watch?v=wzPGp7X9xwQ)
+- [Drew Mahadi: viral reels and shorts in After Effects](https://www.youtube.com/watch?v=3XxmmPon_9A)
+- [Short-form hook guide](https://www.capcut.com/create/short-form-video-hooks-first-3-second-patterns)
+
+The studies use new images and type, not frames or audio from those tutorials.
+
+V3 verification: final H.264 video has 1097 frames at 30 fps; all seven studies and
+the final MP4 decoded without errors. The final's copied AAC stream hashes to
+`22d48dcc0721cb91a00e0221a0027ff0`, the same as the supplied soundtrack. Full-size
+frame review included the opening transition, intro, all showcase sections and close.
