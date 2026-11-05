@@ -10,7 +10,7 @@ import subprocess
 
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "work/recon/media/nps_bears_in_cars.mp4"
 OUT = ROOT / "review"
 RANGES = [
