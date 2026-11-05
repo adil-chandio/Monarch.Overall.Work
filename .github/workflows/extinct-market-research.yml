@@ -40,16 +40,17 @@ jobs:
           echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
           echo 'YouTube API key resolved (value not printed)'
       - name: Discover recent English market sample
-        run: python scripts/research-extinct-market.py
+        run: python scripts/research-extinct-market.py --deep-only
       - name: Publish public metadata report to this session branch
         if: always() && github.ref == 'refs/heads/arena/ba8d901e-monarch-overall-work'
         run: |
-          SOURCE=docs/research/data/extinct-market-2026-11-05.json
+          SOURCE=docs/research/data/extinct-market-deep-2026-11-05.json
           if [ ! -f "$SOURCE" ]; then exit 0; fi
           mkdir -p docs/research/data
           git config user.name 'Monarch channel audit'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add "$SOURCE"
+          if [ -d docs/research/assets/extinct-market ]; then git add docs/research/assets/extinct-market; fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'docs(yt): record current English market research sample'
           git push origin HEAD:arena/ba8d901e-monarch-overall-work
@@ -58,6 +59,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: extinct-life-english-market-research
-          path: docs/research/data/extinct-market-2026-11-05.json
+          path: docs/research/data/extinct-market-deep-2026-11-05.json
           if-no-files-found: warn
           retention-days: 7

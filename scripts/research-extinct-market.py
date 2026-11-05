@@ -117,9 +117,54 @@ def collect():
     return report
 
 
+def collect_deep():
+    """Manual relevance shortlist from discovery; first 50 uploads per channel."""
+    source = json.loads(OUT.read_text())
+    names = ['Fossil', 'BlackWater', 'Deep Science with Mark Watts', 'Discovery Lab',
+             'The Fossil Stories', 'BeyondTheBlue', 'ExtinctTracks',
+             'Vividen: Paleontology Evolved', 'Axtro Explainer', 'TimeSeed']
+    rows = [c for c in source['channels'] if c['snippet']['title'].strip() in names]
+    report = {'checked_at': dt.datetime.now(dt.timezone.utc).isoformat(),
+              'status': 'ok', 'selection': 'Manual relevance shortlist, not a representative channel sample.',
+              'scope': 'First 50 uploads per channel; top two public-view videos sampled for up to 50 top-level comments; top-video thumbnail. No playback or audience geographies.',
+              'missing_names': sorted(set(names) - {c['snippet']['title'].strip() for c in rows}),
+              'channels': []}
+    for ch in rows:
+        result = {'profile': ch}
+        try:
+            playlist = ch['contentDetails']['relatedPlaylists']['uploads']
+            data = client._api('playlistItems', {'part': 'contentDetails', 'playlistId': playlist, 'maxResults': 50}, 'playlistItems')
+            ids = [i['contentDetails']['videoId'] for i in data.get('items', []) if i.get('contentDetails', {}).get('videoId')]
+            result.update(status='ok', truncated=bool(data.get('nextPageToken')), videos=client.videos(ids).items)
+            result['comment_samples'] = []
+            leaders = sorted(result['videos'], key=lambda v: v['views'] or 0, reverse=True)[:2]
+            for v in leaders:
+                result['comment_samples'].append({'video_id': v['id'], 'sample': client.comments(v['id'], limit=50).to_dict()})
+            if leaders and leaders[0].get('thumb'):
+                v = leaders[0]
+                try:
+                    # Public API-provided thumbnail, never a copied video or private asset.
+                    raw = http.get(v['thumb'], retries=1)
+                    if not raw.startswith(b'\xff\xd8'):
+                        raise ValueError('thumbnail is not JPEG')
+                    path = Path('docs/research/assets/extinct-market') / (v['id'] + '.jpg')
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(raw)
+                    result['thumbnail'] = {'video_id': v['id'], 'path': str(path), 'status': 'ok'}
+                except Exception as e:
+                    result['thumbnail'] = {'status': 'error', 'detail': http.scrub(str(e))}
+        except Exception as e:
+            result.update(status='error', detail=http.scrub(str(e)))
+            report['status'] = 'partial'
+        report['channels'].append(result)
+    return report
+
+
 if __name__ == '__main__':
-    result = collect()
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(http.scrub(json.dumps(result, ensure_ascii=False, indent=2)) + '\n')
-    print(json.dumps({'status': result['status'], 'coverage': result.get('coverage'), 'path': str(OUT)}, indent=2))
+    deep = '--deep-only' in sys.argv
+    result = collect_deep() if deep else collect()
+    target = OUT.with_name('extinct-market-deep-2026-11-05.json') if deep else OUT
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(http.scrub(json.dumps(result, ensure_ascii=False, indent=2)) + '\n')
+    print(json.dumps({'status': result['status'], 'coverage': result.get('coverage'), 'path': str(target)}, indent=2))
     raise SystemExit(0 if result['status'] == 'ok' else 1)
