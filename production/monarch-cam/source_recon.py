@@ -57,47 +57,58 @@ def retrieve() -> tuple[Path, str]:
     print("Detected media URLs:", json.dumps(urls, indent=2), flush=True)
 
     expected = MEDIA / "nps_bears_in_cars.mp4"
-    # Try the NPS page through yt-dlp's generic video.js extraction first.
-    template = str(MEDIA / "nps_direct.%(ext)s")
-    proc = run([
-        sys.executable, "-m", "yt_dlp", "--no-playlist", "--no-part",
-        "-f", "best[height<=480]/best", "--merge-output-format", "mp4",
-        "-o", template, NPS_URL,
-    ])
-    direct = sorted(
-        p for p in MEDIA.glob("nps_direct.*")
-        if p.suffix.lower() in {".mp4", ".webm", ".mkv", ".mov"} and p.stat().st_size > 100_000
+    direct: list[Path] = []
+    route = ""
+
+    # Prefer the highest explicitly advertised NPS rendition. yt-dlp's generic page
+    # extraction otherwise chooses 640x360 even when the 854x480 master is present.
+    ordered = sorted(
+        urls,
+        key=lambda u: ("854x480" not in u, "AD_" in u, ".mp4" not in u.lower(), len(u)),
     )
-    route = "NPS direct page"
-    if not direct and urls:
-        # Prefer the highest-labelled MP4, otherwise let ffmpeg consume the first stream.
-        ordered = sorted(urls, key=lambda u: ("480" not in u, ".mp4" not in u.lower(), len(u)))
-        for index, url in enumerate(ordered):
-            candidate = MEDIA / f"nps_url_{index}.mp4"
-            got = run([
-                "ffmpeg", "-y", "-hide_banner", "-loglevel", "warning",
-                "-i", url, "-c", "copy", str(candidate),
-            ])
-            if got.returncode == 0 and candidate.exists() and candidate.stat().st_size > 100_000:
-                direct = [candidate]
-                route = url
-                break
+    for index, url in enumerate(ordered):
+        candidate = MEDIA / f"nps_url_{index}.mp4"
+        got = run([
+            "ffmpeg", "-y", "-hide_banner", "-loglevel", "warning",
+            "-i", url, "-c", "copy", str(candidate),
+        ])
+        if got.returncode == 0 and candidate.exists() and candidate.stat().st_size > 100_000:
+            direct = [candidate]
+            route = url
+            break
+
+    if not direct:
+        template = str(MEDIA / "nps_direct.%(ext)s")
+        run([
+            sys.executable, "-m", "yt_dlp", "--no-playlist", "--no-part",
+            "-f", "best[height<=480]/best", "--merge-output-format", "mp4",
+            "-o", template, NPS_URL,
+        ])
+        direct = sorted(
+            p for p in MEDIA.glob("nps_direct.*")
+            if p.suffix.lower() in {".mp4", ".webm", ".mkv", ".mov"} and p.stat().st_size > 100_000
+        )
+        route = "NPS direct page"
     if not direct:
         # Last-resort retrieval of the same 7:04 public-domain NPS compilation. The mirror's
         # own branding/intro/outro is not approved for the edit; visual review must isolate
         # the underlying NPS footage. The NPS source/rights page is archived separately.
         route = "Public-domain NPS compilation mirror; NPS-only interior shots required"
-        proc = run([
+        run([
             sys.executable, "-m", "yt_dlp", "--no-playlist", "--no-part",
             "-f", "bv*[height<=480]+ba/b[height<=480]/best[height<=480]/best",
             "--merge-output-format", "mp4", "-o", str(expected), MIRROR_URL,
         ], check=True)
         direct = [expected]
-    if proc.returncode != 0 and not direct:
+    if not direct:
         raise RuntimeError("No usable NPS media file was retrieved")
 
     source = direct[0]
-    if source.suffix.lower() != ".mp4" or source != expected:
+    if source.suffix.lower() == ".mp4":
+        if source != expected:
+            source.replace(expected)
+            source = expected
+    else:
         converted = expected
         run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "warning", "-i", str(source),
              "-c:v", "libx264", "-crf", "18", "-preset", "fast", "-c:a", "aac", "-b:a", "160k",

@@ -1,13 +1,6 @@
 name: Monarch Cam — public-domain source recon
 
 on:
-  push:
-    branches:
-      - arena/c678cc81-monarch-overall-work
-    paths:
-      - '.github/workflows/monarch-cam-source-recon.yml'
-      - 'production/monarch-cam/source_recon.py'
-      - 'production/monarch-cam/fine_recon.py'
   workflow_dispatch:
 
 permissions:
