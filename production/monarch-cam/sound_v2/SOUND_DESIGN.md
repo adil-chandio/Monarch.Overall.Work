@@ -19,7 +19,7 @@ This is a **soundtrack-only revision** of the approved opening. The H.264 pictur
 3. One real CC0 forest-night recording at a quiet background level. It is sound-design ambience, not claimed as original NPS camera sound.
 4. Licensed pro-produced whoosh and soft-impact excerpts only on visible graphic reveals. Model ticks are short high-passed excerpts of the same impact recording, not newly synthesized tones.
 5. Voice envelope: 50 ms measurement, approximately 120 ms look-ahead, 12 ms attack and 260 ms recovery. Music receives the deepest duck; ambience and graphic SFX receive gentler ducking.
-6. Two-pass integrated-loudness mastering to approximately −14 LUFS. A conservative −3.5 dBTP intermediate target and limiter operate at loudnorm's 192 kHz internal rate before the final 48 kHz resample. A bounded calibration loop then measures an actual AAC rendition and applies small corrective gain, if needed, while retaining the peak ceiling; the delivered MP4 is measured independently again.
+6. Two-pass integrated-loudness mastering to approximately −14 LUFS. A conservative −3.5 dBTP intermediate target and limiter operate at loudnorm's 192 kHz internal rate before the final 48 kHz resample. A bounded calibration loop then measures an actual AAC rendition and applies small corrective gain, if needed, while retaining the peak ceiling. The lossy rendition also passes through bounded short-run click detection; only isolated runs of at most 48 samples may be interpolated, and persistent/boundary clicks stop delivery. The delivered MP4 is measured independently again.
 
 ## Returned evidence
 
@@ -29,6 +29,7 @@ This is a **soundtrack-only revision** of the approved opening. The H.264 pictur
 - `review/stems_premaster/`: separate voice, music, ambience, SFX and full premaster WAVs (Actions artifact, not committed as large Git blobs).
 - `review/MONARCH_CAM_Sound_V2_soundtrack.wav`: mastered stereo soundtrack in the Actions artifact.
 - `review/technical_qc.json`: 30 s / 900 frames / stereo 48 kHz, loudness, AAC true peak, clipping/discontinuity checks and V1/V2 video-stream hashes.
+- `review/click_review.json` and `review/stem_click_review.json`: exact short-run locations, bounded repair operations and remaining-run checks.
 - `review/audio_qc.json`: the project's nine measured web-audio gates on the actual delivered AAC stream.
 - `review/earshot_*`: final model timeline, annotated review sheet and critique when the model route completes.
 - `CREDITS.md` and `review/YOUTUBE_DESCRIPTION_CREDITS.txt`: exact source, creator, licence and modification record.

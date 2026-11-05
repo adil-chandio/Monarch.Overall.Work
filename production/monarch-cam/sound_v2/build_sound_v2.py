@@ -191,6 +191,56 @@ def normalize_loudness(clip: np.ndarray, target_lufs: float) -> tuple[np.ndarray
     }
 
 
+def detect_click_runs(clip: np.ndarray, threshold: float = 0.35) -> list[dict]:
+    """Match the repository gate's short-run detector, retaining every run for review."""
+    mono = np.asarray(clip.mean(axis=1), dtype=np.float64)
+    jumps = np.abs(np.diff(mono))
+    indices = np.where(jumps > threshold)[0]
+    groups: list[list[int]] = []
+    current: list[int] = []
+    for index in indices:
+        i = int(index)
+        if current and i - current[-1] <= 3:
+            current.append(i)
+        else:
+            if len(current) >= 2:
+                groups.append(current)
+            current = [i]
+    if len(current) >= 2:
+        groups.append(current)
+    return [{
+        "first_jump_sample": group[0], "last_jump_sample": group[-1],
+        "jump_count": len(group), "time_seconds": round(group[0] / SR, 6),
+        "max_mono_jump": round(float(jumps[group].max()), 5),
+    } for group in groups]
+
+
+def repair_short_click_runs(clip: np.ndarray, runs: list[dict]) -> tuple[np.ndarray, list[dict]]:
+    """Interpolate only isolated short discontinuity runs; never suppress a long transient."""
+    repaired = clip.copy()
+    operations = []
+    for run in runs:
+        first = int(run["first_jump_sample"])
+        last = int(run["last_jump_sample"])
+        start = max(1, first - 2)
+        end = min(len(clip) - 1, last + 4)
+        count = end - start + 1
+        if count <= 0:
+            continue
+        if count > 48:
+            raise RuntimeError(f"Click candidate at {first / SR:.3f}s spans {count} samples; manual source review required")
+        if end + 1 >= len(clip):
+            raise RuntimeError("Click candidate touches the file boundary; manual tail review required")
+        for channel in range(repaired.shape[1]):
+            repaired[start:end + 1, channel] = np.linspace(
+                repaired[start - 1, channel], repaired[end + 1, channel], count + 2,
+                dtype=np.float32,
+            )[1:-1]
+        operations.append({"start_sample": start, "end_sample": end, "interpolated_samples": count,
+                           "time_seconds": round(start / SR, 6)})
+    return repaired, operations
+
+
 def trim_candidate(source: Path, start: float, target: Path) -> None:
     ffmpeg("-i", str(source), "-ss", f"{start:.6f}", "-t", "30.000",
            "-af", f"aresample={SR}", "-ac", "2", "-c:a", "pcm_s16le", str(target))
@@ -482,8 +532,11 @@ def make_stems(paths: dict[str, Path], music: dict, api: object,
 def write_stems(stems: dict[str, np.ndarray]) -> None:
     stem_dir = REVIEW / "stems_premaster"
     stem_dir.mkdir(parents=True, exist_ok=True)
+    stem_click_review = {}
     for name, clip in stems.items():
         sf.write(stem_dir / f"{name}.wav", clip, SR, subtype="PCM_24")
+        stem_click_review[name] = detect_click_runs(clip)
+    save_json(REVIEW / "stem_click_review.json", stem_click_review)
     sf.write(WORK / "mix_raw.wav", stems["mix"], SR, subtype="PCM_24")
 
 
@@ -537,7 +590,37 @@ def master_audio() -> tuple[Path, Path, dict]:
         adjusted.replace(soundtrack)
         ffmpeg("-i", str(soundtrack), "-t", "30.000", "-c:a", "aac", "-b:a", "192k",
                "-ar", str(SR), "-ac", "2", str(master_m4a))
-    calibration.append({"final_aac_measurement": loudness(master_m4a)})
+    calibration.append({"final_aac_measurement_before_declick": loudness(master_m4a)})
+
+    # Apply the repository's click detector to the lossy rendition as well. Only
+    # isolated <=48-sample runs are interpolated on the PCM master; each new AAC
+    # encode is measured again. Long transients or persistent clicks stop delivery.
+    click_review = {"threshold": 0.35, "max_repair_samples_per_run": 48, "passes": []}
+    for click_pass in range(1, 4):
+        decoded_aac = decode(master_m4a)
+        runs = detect_click_runs(decoded_aac)
+        pass_record = {"pass": click_pass, "before_runs": runs}
+        click_review["passes"].append(pass_record)
+        if not runs:
+            break
+        pcm, pcm_sr = sf.read(soundtrack, dtype="float32", always_2d=True)
+        if pcm_sr != SR:
+            raise RuntimeError(f"Unexpected master sample rate: {pcm_sr}")
+        repaired, operations = repair_short_click_runs(pcm, runs)
+        pass_record["operations"] = operations
+        sf.write(soundtrack, repaired, SR, subtype="PCM_24")
+        ffmpeg("-i", str(soundtrack), "-t", "30.000", "-c:a", "aac", "-b:a", "192k",
+               "-ar", str(SR), "-ac", "2", str(master_m4a))
+        remaining = detect_click_runs(decode(master_m4a))
+        pass_record["after_runs"] = remaining
+        if not remaining:
+            break
+        if click_pass == 3:
+            save_json(REVIEW / "click_review.json", click_review)
+            raise RuntimeError(f"Persistent AAC click runs after bounded repair: {remaining}")
+    click_review["final_runs"] = detect_click_runs(decode(master_m4a))
+    click_review["final_aac_measurement"] = loudness(master_m4a)
+    save_json(REVIEW / "click_review.json", click_review)
     save_json(REVIEW / "master_calibration.json", calibration)
     return soundtrack, master_m4a, stats
 
