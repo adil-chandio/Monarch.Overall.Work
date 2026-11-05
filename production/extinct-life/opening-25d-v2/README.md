@@ -1,6 +1,6 @@
 # Amber Atlas — Cinema Polish v2
 
-**Output:** `deliverables/Extinct_Life_Opening_25D_Cinema_Polish_45s_1080p.mp4`  
+**Output:** `deliverables/Extinct_Life_Opening_25D_Cinema_Polish_45s_1080p.mp4`
 **Scope:** A revised 45-second opening, not the completed 6–8-minute flagship. The original Amber Atlas MP4 and source are preserved separately.
 
 ## Implemented visual pass
