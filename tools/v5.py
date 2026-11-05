@@ -146,11 +146,13 @@ class Cam:
 
 
 CAM = Cam()
+GAIN = [1.0]        # multiplies the orbit/yaw amplitude; 1.0 is the film, >1 is proof
 
 
 def place_px(dst: np.ndarray, img: np.ndarray, z: float, width: float, cx: float, cy: float,
              cz: float, opacity: float = 1.0, blur: float = 0.0,
-             anchor: tuple[float, float] = (0.5, 0.5)) -> None:
+             anchor: tuple[float, float] = (0.5, 0.5), yaw: float = 0.0,
+             pitch: float = 0.0) -> None:
     """Place a layer at a measured pixel width and let the camera scale it from there.
 
     Type is set by its ink width, so it must not be sized by `cover` -- cover answers
@@ -160,19 +162,65 @@ def place_px(dst: np.ndarray, img: np.ndarray, z: float, width: float, cx: float
     ih, iw = img.shape[:2]
     w = width * k
     h = ih * (w / iw)
+    if abs(yaw) > 0.05 or abs(pitch) > 0.05:
+        img = _perspective(img, yaw, pitch)
+        w *= img.shape[1] / iw
+        h *= img.shape[0] / ih
     draw_layer(dst, img, (W - w) * anchor[0] + dx, (H - h) * anchor[1] + dy,
                w, opacity, 0.0, 0.0, blur, h=h)
 
 
+def _perspective(layer: np.ndarray, yaw: float, pitch: float, f: float = 900.0) -> np.ndarray:
+    """Turn a flat layer into a plane seen at an angle -- the part flat parallax lacks.
+
+    A layer rotated about its own vertical axis projects to a trapezoid: the near edge
+    gets taller and the far edge shorter, and the whole thing can move off-axis. That,
+    plus depth-scaled translation, is what reads as 3D; a pure translate never does,
+    because every point of the plane keeps the same size.
+    """
+    if abs(yaw) < 0.05 and abs(pitch) < 0.05:
+        return layer
+    h, w = layer.shape[:2]
+    cx, cy = w / 2.0, h / 2.0
+    ay, ax = math.radians(yaw), math.radians(pitch)
+    corners = np.float32([[-cx, -cy], [cx, -cy], [cx, cy], [-cx, cy]])
+    # rotate about Y then X, project with a pinhole
+    out = []
+    for x, y in corners:
+        z = 0.0
+        x1 = x * math.cos(ay) + z * math.sin(ay)
+        z1 = -x * math.sin(ay) + z * math.cos(ay)
+        y1 = y * math.cos(ax) - z1 * math.sin(ax)
+        z2 = y * math.sin(ax) + z1 * math.cos(ax)
+        k = f / (f + z2)
+        out.append([cx + x1 * k, cy + y1 * k])
+    dst = np.float32(out)
+    M = cv2.getPerspectiveTransform(corners + np.float32([cx, cy]), dst)
+    pad = int(math.ceil(abs(w * math.sin(ay)) * 0.5 + abs(h * math.sin(ax)) * 0.5)) + 2
+    moved = M.copy()
+    moved[0, 2] += pad
+    moved[1, 2] += pad
+    warped = cv2.warpPerspective(layer, moved, (w + 2 * pad, h + 2 * pad),
+                                 flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_CONSTANT,
+                                 borderValue=(0, 0, 0, 0))
+    return warped
+
+
 def place(dst: np.ndarray, img: np.ndarray, z: float, cx: float, cy: float, cz: float,
           cover: float = 1.0, opacity: float = 1.0, blur: float = 0.0,
-          anchor: tuple[float, float] = (0.5, 0.5)) -> None:
+          anchor: tuple[float, float] = (0.5, 0.5), yaw: float = 0.0,
+          pitch: float = 0.0) -> None:
     """Composite one RGBA layer through the camera. `cover` is how it fills the frame at z=0."""
     k, dx, dy = CAM.project(z, cx, cy, cz)
     ih, iw = img.shape[:2]
     need = max(W / iw, H / ih) * cover
     w = iw * need * k
     h = ih * need * k
+    if abs(yaw) > 0.05 or abs(pitch) > 0.05:
+        img = _perspective(img, yaw, pitch)
+        iw2, ih2 = img.shape[1], img.shape[0]
+        w *= iw2 / iw
+        h *= ih2 / ih
     draw_layer(dst, img, (W - w) * anchor[0] + dx, (H - h) * anchor[1] + dy,
                w, opacity, 0.0, 0.0, blur, h=h)
 
@@ -374,44 +422,61 @@ def red_field(dst: np.ndarray, strength: float = 1.0) -> np.ndarray:
     dst[:] = np.clip(field * strength, 0, 255)
 
 
-def red_room(f, t, u, push: float, cx: float, cy: float, cz: float) -> None:
-    """The reference's red room as three planes at three depths.
+def red_room(f, t, u, push: float, orbit_x: float, orbit_y: float, yaw: float,
+             pitch: float) -> None:
+    """The reference's red room as a real 3D arrangement, orbited by one camera.
 
-    y<0   the year sits *behind* the subject, so the camera slides it across him instead
-          of carrying it with him. That relative motion is the whole tell of parallax.
-    z=900 the figure is a real cutout with its own alpha.
-    z=1500 red haze in front separates the planes to the eye.
-    Then the floor is taken down to shadow, which is where a subject is normally lost and
-    which is also what hides a cutout's lower edge.
+    The camera is the only thing that moves. Each plane is placed with its own depth and
+    its own angle, and the *same* camera numbers go into every one of them, so:
+
+      * the year is behind the subject (z<0) and slightly turned (yaw<0) -- it therefore
+        sweeps the other way and its far edge is shorter;
+      * the subject is in front (z>0) at the camera's own angle, so hair and shoulders
+        swing against the wall;
+      * the haze is nearest and over-turns, which is the cheap, correct way to sell depth.
+
+    Nothing is faked with a per-layer speed multiplier.
     """
     red_field(f)
-    place_px(f, T2008, -520.0, 372 * push, cx * 0.42, cy * 0.42, cz, opacity=0.33,
-             blur=1.1, anchor=(0.5, 0.055))
-    place(f, THERO, 900.0, cx, cy, cz, cover=1.0 * push, opacity=1.0,
-          anchor=(0.5, 0.52), blur=0.2)
+    orbit_x, orbit_y = orbit_x * GAIN[0], orbit_y * GAIN[0]
+    yaw, pitch = yaw * GAIN[0], pitch * GAIN[0]
+    place_px(f, T2008, -520.0, 380 * push, orbit_x, orbit_y, 0.0, opacity=0.34, blur=1.0,
+             anchor=(0.5, 0.07), yaw=yaw * 0.75 + 5.0, pitch=pitch * 0.75)
+    place(f, THERO, 620.0, orbit_x, orbit_y, 0.0, cover=0.98 * push, opacity=1.0,
+          anchor=(0.5, 0.52), blur=0.15, yaw=yaw * 0.55, pitch=pitch * 0.55)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     haze = np.zeros((H, W, 4), np.uint8)
-    g = np.clip(1 - np.sqrt(((xx - 0.28 * W) / (1.0 * W)) ** 2 + ((yy - 0.30 * H) / (0.95 * H)) ** 2), 0, 1) ** 1.6
-    haze[..., 3] = (g * 64).astype(np.uint8)
-    place(f, haze, 1500.0, cx * 1.5, cy * 1.5, cz, cover=1.05, opacity=0.5)
+    g = np.clip(1 - np.sqrt(((xx - 0.30 * W) / (1.05 * W)) ** 2 + ((yy - 0.30 * H) / (0.95 * H)) ** 2), 0, 1) ** 1.6
+    haze[..., 3] = (g * 58).astype(np.uint8)
+    place(f, haze, 1500.0, orbit_x * 1.0, orbit_y * 1.0, 0.0, cover=1.05, opacity=0.5,
+          yaw=yaw * 1.4, pitch=pitch * 1.4)
+    # contact shadow under the subject: an ellipse that travels with him, which is what
+    # makes a cutout read as standing in the room rather than pasted on it
+    sx, sy = 0.5 * W + orbit_x * 0.9, 0.885 * H
+    el = np.clip(1 - np.sqrt(((xx - sx) / (0.34 * W)) ** 2 + ((yy - sy) / (0.05 * H)) ** 2), 0, 1) ** 1.7
+    f[:] = f * (1 - 0.55 * el[..., None])
     shadow = np.clip((yy / H - 0.80) / 0.20, 0, 1)[..., None] ** 1.5
-    f[:] = f * (1 - 0.92 * shadow)
+    f[:] = f * (1 - 0.94 * shadow)
 
 
 def scene_s5(f, t, u):
     """3.13-9.17  the red room: 2008, the figure, and a camera that pushes in."""
-    p = ease(u, "linear")
-    red_room(f, t, u, push=1.0 + 0.045 * p, cx=-10 + 22 * p, cy=-6 + 14 * p, cz=26 * p)
+    p = ease(u, "smooth")
+    red_room(f, t, u, push=1.0 + 0.05 * p,
+             orbit_x=lerp(-46, 60, p), orbit_y=lerp(16, -22, p),
+             yaw=lerp(-9.0, 7.0, p), pitch=lerp(2.5, -2.0, p))
     vignette(f, 0.40)
 
 
 def scene_s6(f, t, u):
     """9.17-11.73  same room, tighter, eyes hot, subscribe and like."""
-    p = ease(u, "linear")
-    red_room(f, t, u, push=1.10 + 0.05 * p, cx=18 - 26 * p, cy=10 - 18 * p, cz=40 * p)
+    p = ease(u, "smooth")
+    red_room(f, t, u, push=1.08 + 0.06 * p,
+             orbit_x=lerp(64, -34, p), orbit_y=lerp(-20, 26, p),
+             yaw=lerp(8.0, -10.0, p), pitch=lerp(-2.2, 3.0, p))
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     for cx in (0.452, 0.556):
-        dd = np.sqrt(((xx - cx * W) / (0.040 * W)) ** 2 + ((yy - 0.432 * H) / (0.013 * H)) ** 2)
+        dd = np.sqrt(((xx - (cx * W + 18)) / (0.040 * W)) ** 2 + ((yy - 0.436 * H) / (0.013 * H)) ** 2)
         hot = np.clip(1 - dd, 0, 1) ** 1.3
         f[:] = f + np.array([34, 34, 255], np.float32) * hot[..., None] * 0.9
     a = ease(min(1.0, max(0.0, (t - 9.55) / 0.30)), "out")
@@ -500,7 +565,9 @@ def scene_s13(f, t, u):
     the card. That is a dolly, not a cross-fade between two layouts.
     """
     p = ease(u, "out")
-    red_room(f, t, u, push=1.22 - 0.16 * p, cx=-18 + 26 * p, cy=14 - 20 * p, cz=-60 + 44 * p)
+    red_room(f, t, u, push=1.24 - 0.18 * p,
+             orbit_x=lerp(-34, 26, p), orbit_y=lerp(-18, 12, p),
+             yaw=lerp(-7.0, 4.5, p), pitch=lerp(2.0, -1.4, p))
     if 20.80 <= t < 20.86:                      # the reference's one-frame flash
         f[:] = np.minimum(f * 1.85 + 66, 255)
     a = ease(min(1.0, max(0.0, (t - 21.10) / 0.45)), "out")
@@ -610,9 +677,12 @@ def main() -> int:
     ap.add_argument("--to", dest="stop", type=float, default=None)
     ap.add_argument("--only", default=None, help="comma-separated shot ids")
     ap.add_argument("--stills", default=None, help="write PNG stills instead of a video")
+    ap.add_argument("--gain", type=float, default=1.0,
+                    help="orbit/yaw multiplier: 1.0 is the film, 2-3 exaggerates it for proof")
     a = ap.parse_args()
 
     spec = load_spec(a.spec)
+    GAIN[0] = a.gain
     t0 = time.time()
     prepare(spec)
     colour_selftest()
