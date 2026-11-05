@@ -476,11 +476,10 @@ def channel_uploads(handle_or_id: str, max_pages: int = 100) -> Corpus:
 
 
 def channel(handle_or_id: str) -> Corpus:
-    """Channel profile + recent uploads via the channel's public RSS feed.
+    """API uploads inventory when keyed; recent public RSS uploads when keyless.
 
-    RSS is the one endpoint that has stayed keyless, unauthenticated and stable for a
-    decade: `feeds/videos.xml?channel_id=…`. It gives the last 15 uploads with real
-    publish times, which is exactly what a velocity baseline needs.
+    The API lane resolves handles directly and paginates the uploads playlist.
+    The keyless fallback exposes only the feed's last 15 entries, not a full archive.
     """
     ident = handle_or_id.strip()
     if lane() == "api":
