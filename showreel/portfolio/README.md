@@ -134,3 +134,30 @@ an input. The previous v3 and standalone enhanced videos are not overwritten.
 Verification: the finished H.264 video is 1920×1080, 30 fps and 1,097 frames. Full
 frame decode, representative full-size showcase-frame review, and decoded PCM audio
 comparison to the supplied main-portfolio soundtrack were performed.
+
+## Smooth character edition (v5)
+
+`public/demo/monarch-portfolio-v5.mp4` retains the v4 layout and all seven enhanced
+showcase clips. It renders at 1920×1080, 60 fps. The character entrance uses a
+zero-velocity ease at the ends and a gentler push-in, without the earlier per-beat scale
+impulses. Character scale and position are combined in a single subpixel transform on
+the foreground layer, with premultiplied alpha to reduce edge fringing; the outro uses
+the same compositing method. Intro teaser positions were also adjusted to stay clear of
+the lower progress rule while entering. The source is still a photograph: this animates
+the foreground layer, not actual facial or body performance. A higher output frame rate
+is not a guarantee that every pre-existing source animation has unique 60 fps motion.
+
+Build from the repository root using the same dependencies and enhanced clips as v4:
+
+```sh
+python3 showreel/portfolio/render_v5.py
+```
+
+Panel intermediates live in `/tmp/monarch-portfolio-v5`; remove this cache when
+changing their source files. The reference soundtrack remains unchanged and its rights
+must be checked before public/commercial use. The standalone clips and v4 remain intact.
+
+Verification: all 2,194 H.264 frames decoded at 60 fps. Intro, showcase and ending
+frames were inspected; no identical consecutive downsampled output frames were found
+during the checked 3–8 second intro segment. Decoded audio PCM matched the complete
+main-portfolio soundtrack (MD5 `f0fb78634e642844b65445290562cc26`).
