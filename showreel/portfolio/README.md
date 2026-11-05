@@ -98,3 +98,39 @@ V3 verification: final H.264 video has 1097 frames at 30 fps; all seven studies 
 the final MP4 decoded without errors. The final's copied AAC stream hashes to
 `22d48dcc0721cb91a00e0221a0027ff0`, the same as the supplied soundtrack. Full-size
 frame review included the opening transition, intro, all showcase sections and close.
+
+## Seven-reference showcase edition (v4)
+
+`public/demo/monarch-portfolio-v4.mp4` keeps the v3 main portfolio's masked-character
+intro, black/red identity, overall 36.57-second structure and original main-portfolio
+soundtrack. The old generic sample screens have been replaced with moving excerpts from
+all seven `public/demo/monarch-reference-0N-enhanced.mp4` files:
+
+- Intro teasers: 01 and 03.
+- 12–18 seconds: 02, 04 and 06.
+- 18–25 seconds: 01, 03 and 05.
+- 25–35 seconds: 02, 07 and 04 (different excerpts, with 07 in the center).
+
+These are **selected excerpts playing simultaneously**, not the complete seven videos
+played sequentially. They are fit into landscape or portrait display panels with padding
+rather than stretched or center-cropped; the rounded panel corners/tilts may conceal a
+small part of the picture edges. Video 06 uses its enhanced main-frame-only crop, with
+no behind-the-scenes editing timeline. The showcase panels are silent in the main film:
+the supplied main-portfolio reference soundtrack is stream-copied instead of mixing all
+seven audio tracks. This soundtrack's rights must be checked before public/commercial
+use. The enhanced reference adaptations are approximations with 2D/2.5D motion, not
+fully animated 3D; see `../seven/enhanced/README.md`.
+
+Rebuild from the repo root, with Python, NumPy, Pillow, OpenCV and imageio-ffmpeg:
+
+```sh
+python3 showreel/portfolio/render_v4.py
+```
+
+The seven enhanced MP4s and `assets/reference-sound.m4a` are inputs. Resized silent
+panel clips are cached in `/tmp/monarch-portfolio-v4`; remove that cache if replacing
+an input. The previous v3 and standalone enhanced videos are not overwritten.
+
+Verification: the finished H.264 video is 1920×1080, 30 fps and 1,097 frames. Full
+frame decode, representative full-size showcase-frame review, and decoded PCM audio
+comparison to the supplied main-portfolio soundtrack were performed.
