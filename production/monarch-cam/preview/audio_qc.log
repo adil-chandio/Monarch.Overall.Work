@@ -1,14 +1,14 @@
 production/monarch-cam/work/preview/audio_master.m4a  [web]
-  I     -14.23 LUFS   target -14.0 ±0.7
-  LRA   13.28 LU          target (1.0, 10.0)
-  peak  -1.64 dBFS     ceiling -1.0
-  move  45.24 dB peak-to-peak across the body
+  I     -14.37 LUFS   target -14.0 ±0.7
+  LRA   8.06 LU          target (1.0, 10.0)
+  peak  -1.48 dBFS     ceiling -1.0
+  move  23.12 dB peak-to-peak across the body
   mono  -0.06 dB low-band loss
-  harsh -8.22 dB over high-mid
+  harsh -7.92 dB over high-mid
 
   PASS  loudness_in_range
   PASS  true_peak_ok
-  FAIL  lra_in_range
+  PASS  lra_in_range
   PASS  no_clipping
   PASS  no_clicks
   PASS  mono_compatible
@@ -16,5 +16,5 @@ production/monarch-cam/work/preview/audio_master.m4a  [web]
   PASS  not_harsh
   PASS  has_dynamics
 
-  RESULT: FAIL — lra_in_range
+  RESULT: PASS
   wrote production/monarch-cam/preview/audio_qc.json
