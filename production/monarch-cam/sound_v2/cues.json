@@ -1,0 +1,85 @@
+{
+  "fps": 30,
+  "duration_seconds": 30.0,
+  "picture_reference": "deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4",
+  "picture_policy": "Stream-copy the approved picture; do not change typography, diagrams, wording, footage or cuts.",
+  "events": [
+    {
+      "id": "opening:wordmark",
+      "frame": 4,
+      "t": 0.1333333333,
+      "kind": "soft_impact",
+      "peak_dbfs": -25.0,
+      "picture": "Opening Monarch Cam / NPS archive identity is present.",
+      "sound_need": "One restrained low-level graphic accent; no bear or vehicle action is implied."
+    },
+    {
+      "id": "question:headline:whoosh",
+      "frame": 357,
+      "t": 11.9,
+      "kind": "soft_whoosh",
+      "peak_dbfs": -28.0,
+      "picture": "WHY SEARCH A CAR FOR FOOD? headline is fading in (fully present at 12.08 s).",
+      "sound_need": "Short airy transition whose measured peak lands on the headline's middle fade frame."
+    },
+    {
+      "id": "question:headline:accent",
+      "frame": 357,
+      "t": 11.9,
+      "kind": "soft_impact",
+      "peak_dbfs": -22.0,
+      "picture": "Same question-headline reveal.",
+      "sound_need": "One soft tonal/low accent under the whoosh, kept below narration."
+    },
+    {
+      "id": "answer:headline:whoosh",
+      "frame": 519,
+      "t": 17.3,
+      "kind": "soft_whoosh",
+      "peak_dbfs": -28.0,
+      "picture": "THE CLUE IS EXPERIENCE headline is fading in (fully present at 17.48 s).",
+      "sound_need": "Short transition on the answer reveal; no repeated sub hit."
+    },
+    {
+      "id": "model:step_1",
+      "frame": 707,
+      "t": 23.5666666667,
+      "kind": "model_tick",
+      "peak_dbfs": -35.0,
+      "picture": "EARLIER VISIT diagram row appears.",
+      "sound_need": "Very quiet short processed excerpt of the licensed impact recording, high-passed to avoid a boom."
+    },
+    {
+      "id": "model:step_2",
+      "frame": 746,
+      "t": 24.8666666667,
+      "kind": "model_tick",
+      "peak_dbfs": -35.0,
+      "picture": "FOOD REWARD diagram row appears.",
+      "sound_need": "Same restrained material and level for diagram consistency."
+    },
+    {
+      "id": "model:resolved",
+      "frame": 785,
+      "t": 26.1666666667,
+      "kind": "soft_impact",
+      "peak_dbfs": -29.0,
+      "picture": "CAR CHECKED AGAIN and REWARD → MEMORY → REPEAT resolve together.",
+      "sound_need": "Soft final graphic accent, lower than the opening and question accents."
+    }
+  ],
+  "intentionally_silent": [
+    {
+      "frame": 171,
+      "t": 5.7,
+      "picture": "Entry-scene cut; the vehicle door is already open.",
+      "reason": "No handle pull, latch, door opening/closing, bear vocalisation or impact is added because none is supported as a new visible event."
+    },
+    {
+      "frame": 696,
+      "t": 23.2,
+      "picture": "Behaviour-model scene cut before its first row reveal.",
+      "reason": "The music carries the cut; an extra whoosh here would compete with the first diagram cue and narration."
+    }
+  ]
+}

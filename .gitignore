@@ -22,3 +22,6 @@ public/yt-intel/runs.jsonl
 # Monarch Cam transient source media, frames and local audio work
 production/monarch-cam/work/
 production/monarch-cam/local/
+# Sound V2 review artifacts are delivered in Actions artifacts, not duplicated as large WAVs in Git
+production/monarch-cam/sound_v2/review/stems_premaster/
+production/monarch-cam/sound_v2/review/*.wav
