@@ -347,7 +347,7 @@ jobs:
       - name: Research recent public competitor videos
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
-        run: python scripts/monarch_tier1_research.py
+        run: python scripts/monarch_broad_research.py
       - name: Upload audit artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -361,10 +361,10 @@ jobs:
         run: |
           mkdir -p docs/repo-intel
           cp audit-output/channel.json docs/repo-intel/monarchs-edit-channel.json
-          cp audit-output/tier1-competitors.json docs/repo-intel/monarchs-edit-tier1-research.json
+          cp audit-output/broad-english.json docs/repo-intel/monarchs-edit-broad-english-research.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/repo-intel/monarchs-edit-channel.json docs/repo-intel/monarchs-edit-tier1-research.json
+          git add docs/repo-intel/monarchs-edit-channel.json docs/repo-intel/monarchs-edit-broad-english-research.json
           if ! git diff --cached --quiet; then
             git commit -m 'Record MONARCHs Edit public channel inventory [skip ci]'
             git push origin HEAD:arena/1f352b8e-monarch-overall-work
