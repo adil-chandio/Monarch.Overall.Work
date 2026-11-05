@@ -1,0 +1,29 @@
+name: Fetch licensed wave B-roll
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [.github/workflows/duck-waves-fetch.yml]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - name: Fetch CC BY wave footage and extract clip
+        run: |
+          python -m pip install --quiet imageio-ffmpeg
+          curl -fL --retry 3 --max-time 180 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Overhead_view_of_waves_on_the_shore.webm' -o /tmp/waves.webm
+          FFMPEG=$(python -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')
+          mkdir -p showreel/duck_cinema/assets
+          "$FFMPEG" -y -v error -ss 10 -i /tmp/waves.webm -t 20 -an -c:v libx264 -preset fast -crf 20 -pix_fmt yuv420p showreel/duck_cinema/assets/mga-waves-excerpt.mp4
+      - name: Commit footage to session branch
+        run: |
+          git config user.name 'MONARCH render'
+          git config user.email 'render@monarch.studio'
+          git add -f showreel/duck_cinema/assets/mga-waves-excerpt.mp4
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add attributed CC BY illustrative waves [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
