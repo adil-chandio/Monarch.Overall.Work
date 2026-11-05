@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: monarch-cam-source-recon-${{ github.ref_name }}
@@ -44,3 +44,23 @@ jobs:
             production/monarch-cam/work/recon/
           if-no-files-found: error
           retention-days: 7
+
+      - name: Return small visual-review files to this branch (raw media stays out of Git)
+        run: |
+          git config user.name "monarch-cam-preview-bot"
+          git config user.email "monarch-cam-preview-bot@users.noreply.github.com"
+          mkdir -p production/monarch-cam/review
+          cp production/monarch-cam/work/recon/contact-sheets/*.jpg production/monarch-cam/review/
+          cp production/monarch-cam/work/recon/review-manifest.json \
+             production/monarch-cam/work/recon/source-probe.json \
+             production/monarch-cam/work/recon/retrieval-route.txt \
+             production/monarch-cam/work/recon/detected-media-urls.json \
+             production/monarch-cam/review/
+          git add production/monarch-cam/review
+          if git diff --cached --quiet; then
+            echo "Visual review pack unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): add NPS visual source review"
+          git pull --rebase origin arena/c678cc81-monarch-overall-work
+          git push origin HEAD:arena/c678cc81-monarch-overall-work
