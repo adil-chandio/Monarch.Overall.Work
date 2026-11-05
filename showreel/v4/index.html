@@ -488,7 +488,11 @@
      soft one at 1.85, the sharp one at 2.05 — and the fourth is the sharp one with
      its colour drained, which is where the sweep ends. Holding them in order is the
      rack focus and the push, with no filter standing in for either. */
-  tl.to("#s5plate1", { opacity: 1.0, duration: 0.34, ease: "power1.inOut" }, 1.33);
+  /* The two frames have the subject at different sizes, so a long crossfade shows
+     the bag twice. Measured: the word is still up at 1.45 and the bag is already
+     the small one by 1.70, so the change happens inside that 0.25 s — the dissolve
+     is 0.16 s inside it, and nothing overlaps at the cut. */
+  tl.to("#s5plate1", { opacity: 1.0, duration: 0.16, ease: "power1.inOut" }, 1.54);
   tl.to("#s5plate", { opacity: 1.0, duration: 0.20, ease: "power2.out" }, 1.85);
   tl.to("#s5plate2", { opacity: 0.55, duration: 0.45, ease: "power2.out" }, 1.36);
   tl.to("#s5plate2", { opacity: 1.0, duration: 0.42, ease: "power1.in" }, 1.83);
