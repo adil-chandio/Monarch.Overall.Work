@@ -420,6 +420,61 @@ def comments(video_id: str, limit: int = 100, order: str = "relevance") -> Corpu
 
 
 # --------------------------------------------------------------------------- channel
+def channel_uploads(handle_or_id: str, max_pages: int = 100) -> Corpus:
+    """API uploads inventory, not a search sample or RSS's last 15 entries.
+
+    Preserve partial results and explicitly flag truncation / unavailable video IDs.
+    An API key exposes public records only, never private Studio analytics.
+    """
+    from urllib.parse import urlparse
+    ident = handle_or_id.strip()
+    if ident.startswith(("https://", "http://")):
+        parsed = urlparse(ident)
+        if parsed.hostname not in ("youtube.com", "www.youtube.com", "m.youtube.com"):
+            return Corpus("channel", "api", ident, [], "error", "expected a YouTube channel URL")
+        parts = parsed.path.strip("/").split("/")
+        ident = parts[1] if parts[0] == "channel" and len(parts) > 1 else parts[0]
+    if max_pages < 1:
+        return Corpus("channel", "api", ident, [], "error", "max_pages must be positive")
+    rows, ids, profile = [], [], {}
+    token = ""
+    try:
+        selector = {"id": ident} if ident.startswith("UC") and len(ident) == 24 else {"forHandle": ident.lstrip("@")}
+        data = _api("channels", {"part": "snippet,statistics,contentDetails,brandingSettings", **selector}, "channels")
+        profiles = data.get("items", [])
+        if not profiles:
+            return Corpus("channel", "api", ident, [], "empty", "channel not found by API")
+        profile = profiles[0]
+        playlist = profile.get("contentDetails", {}).get("relatedPlaylists", {}).get("uploads")
+        if not playlist:
+            return Corpus("channel", "api", ident, [], "error", "channel has no uploads playlist")
+        for _ in range(max_pages):
+            params = {"part": "contentDetails", "playlistId": playlist, "maxResults": 50}
+            if token:
+                params["pageToken"] = token
+            page = _api("playlistItems", params, "playlistItems")
+            ids.extend(i["contentDetails"]["videoId"] for i in page.get("items", [])
+                       if i.get("contentDetails", {}).get("videoId"))
+            token = page.get("nextPageToken", "")
+            if not token:
+                break
+        ids = list(dict.fromkeys(ids))
+        # Fetch in batches so a later error does not discard earlier successful batches.
+        for start in range(0, len(ids), 50):
+            rows.extend(videos(ids[start:start + 50]).items)
+        missing = sorted(set(ids) - {r["id"] for r in rows})
+        detail = json.dumps({"profile": profile, "inventory_complete": not token and not missing,
+                             "playlist_exhausted": not token, "missing_video_ids": missing,
+                             "playlist_video_count": len(ids)}, ensure_ascii=False)
+        return Corpus("channel", "api", profile["id"], rows,
+                      "partial" if token or missing else ("ok" if rows else "empty"), detail)
+    except Exception as e:
+        return Corpus("channel", "api", ident, rows, "partial" if rows else "error",
+                      http.scrub(json.dumps({"error": str(e), "profile": profile,
+                                             "inventory_complete": False,
+                                             "playlist_video_count": len(ids)})))
+
+
 def channel(handle_or_id: str) -> Corpus:
     """Channel profile + recent uploads via the channel's public RSS feed.
 
@@ -428,6 +483,8 @@ def channel(handle_or_id: str) -> Corpus:
     publish times, which is exactly what a velocity baseline needs.
     """
     ident = handle_or_id.strip()
+    if lane() == "api":
+        return channel_uploads(ident)
     cid = ident if ident.startswith("UC") and len(ident) == 24 else ""
     try:
         if not cid:

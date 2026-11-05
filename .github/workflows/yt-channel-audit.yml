@@ -1,0 +1,54 @@
+name: YT Channel — public inventory audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - arena/ba8d901e-monarch-overall-work
+    paths:
+      - .github/workflows/yt-channel-audit.yml
+      - scripts/audit-yt-channel.py
+      - yt_intel/channel_test.py
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline API inventory regressions
+        run: python -m unittest yt_intel.channel_test
+      - name: Resolve existing YouTube secret without exposing it
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+          KEY_ALT_2: ${{ secrets.YTAPI1 }}
+          KEY_ALT_3: ${{ secrets.YT_KEY }}
+          KEY_ALT_4: ${{ secrets.YT_API_KEY }}
+        run: |
+          KEY="${KEY_PRIMARY:-${KEY_ALT:-${KEY_ALT_2:-${KEY_ALT_3:-$KEY_ALT_4}}}}"
+          if [ -z "$KEY" ]; then
+            echo '::error::No YouTube API secret resolved in this workflow runtime'
+            exit 1
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          echo 'YouTube API key resolved (value not printed)'
+      - name: Install optional public caption extractor
+        run: python -m pip install --quiet yt-dlp
+      - name: Audit Extinct Life public uploads and comment samples
+        run: python scripts/audit-yt-channel.py @extinct_life --transcripts --out .cache/yt-intel/extinct-life-audit
+      - name: Preserve report including partial/error evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extinct-life-public-audit
+          path: .cache/yt-intel/extinct-life-audit/
+          if-no-files-found: warn
+          retention-days: 7
