@@ -31,3 +31,20 @@ and `public/demo/demo-short-30s.mp4`; the temporary resized derivatives in
 - FFmpeg audio-stream-copy MD5 is `22d48dcc0721cb91a00e0221a0027ff0` for the
   reference video, extracted audio and finished video. The supplied audio was not
   re-encoded or altered.
+
+## Enhanced edition (v2)
+
+`public/demo/monarch-portfolio-v2.mp4` is a 1920×1080, 30 fps re-render of the
+MONARCH portfolio. Run `python3 showreel/portfolio/render_v2.py` from the repository
+root. Temporary resized footage is cached in `/tmp/monarch-portfolio-v2`; remove that
+cache when replacing source media. It preserves the supplied soundtrack by stream copy.
+
+Changes: animated foreground push and layered graphic depth; timing accents informed by
+reference audio peaks; larger moving project cards with rounded frames, shadows and a
+subtle tilt; different selections in the last section rather than repeating the first;
+section titles, a progress indicator and a branded ending. It uses the same repository
+project footage, not frames from the reference. The source character is a still, so the
+movement is layered 2.5D rather than a new performance or true 3D animation.
+
+The source audio is unchanged and its rights should be verified before public or
+commercial distribution.
