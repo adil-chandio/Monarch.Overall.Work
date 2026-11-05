@@ -13,6 +13,11 @@ on:
       - "yt-intel-trigger.txt"
   workflow_dispatch:
     inputs:
+      channel_audit:
+        description: 'Run the MONARCHs Edit channel inventory instead of topic research'
+        type: boolean
+        required: false
+        default: false
       topic:
         description: 'Topic to research (blank = use config/topic-queue.json)'
         required: false
@@ -38,6 +43,7 @@ permissions:
 
 jobs:
   research:
+    if: ${{ !inputs.channel_audit }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -321,3 +327,26 @@ jobs:
           PY
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Committed: ${{ steps.commit.outputs.committed }}" >> "$GITHUB_STEP_SUMMARY" 
+
+  channel-audit:
+    if: ${{ inputs.channel_audit }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect public channel inventory
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+        run: python scripts/channel_audit.py
+      - name: Upload audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarchs-edit-channel-audit
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 7
