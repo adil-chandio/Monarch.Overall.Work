@@ -78,6 +78,11 @@ const FRAMES_DIR = path.join(ROOT, "public/demo/v4-frames");
 const COMPOSITION = path.join(ROOT, "showreel/v4/index.html");
 
 async function main() {
+  // resolved before anything uses them: the supersampling guard below sits inside the
+  // frame loop and referenced a const that was declared near the encode, which is a
+  // temporal-dead-zone error and killed the render outright
+  const ffmpegBin = resolveBinary("ffmpeg");
+  const ffprobeBin = (() => { try { return resolveBinary("ffprobe"); } catch { return null; } })();
   const puppeteer = (await import("puppeteer-core")).default;
   const exe = process.env.CHROME || process.env.PUPPETEER_EXECUTABLE_PATH;
   if (!exe || !fs.existsSync(exe)) {
@@ -190,8 +195,6 @@ async function main() {
     if (n === 0 && SS > 1) {
       // the whole point of --ss is a bigger raster; if it is not bigger, say so now
       // rather than discovering it after the encode
-      const probeSize = spawnSync(ffmpegBin, ["-v", "error", "-i", file,
-        "-f", "image2pipe", "-vcodec", "png", "-"], { maxBuffer: 1 << 28 });
       const dims = spawnSync(ffmpegBin, ["-hide_banner", "-i", file], { encoding: "utf8" });
       const m = /,\s(\d{3,5})x(\d{3,5})/.exec(dims.stderr || "");
       if (m && Number(m[1]) < 720 * SS * 0.98) {
@@ -230,8 +233,6 @@ async function main() {
   // rather than assuming, and prints exactly which binary it used when the encode
   // fails instead of throwing a bare "encode failed" with the reason on a stderr
   // nobody can read.
-  const ffmpegBin = resolveBinary("ffmpeg");
-  const ffprobeBin = resolveBinary("ffprobe");
   const ff = spawnSync(
     ffmpegBin,
     [
@@ -267,9 +268,7 @@ async function main() {
   // the encode must contain exactly the frames we captured: an off-by-two here is
   // how the previous master ended up 698 frames long
   const counted = (() => {
-    try {
-      resolveBinary("ffprobe");
-    } catch (e) {
+    if (!ffprobeBin) {
       // no ffprobe here (the authoring sandbox has none). Counting frames is still
       // possible: decode the file and divide by the frame size.
       const raw = spawnSync(ffmpegBin, ["-v", "error", "-i", outPath, "-vf", "scale=64:114",
