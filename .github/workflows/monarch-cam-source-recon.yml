@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/monarch-cam-source-recon.yml'
       - 'production/monarch-cam/source_recon.py'
+      - 'production/monarch-cam/fine_recon.py'
   workflow_dispatch:
 
 permissions:
@@ -35,6 +36,9 @@ jobs:
 
       - name: Retrieve explicit public-domain NPS footage and build contact sheets
         run: python production/monarch-cam/source_recon.py
+
+      - name: Build fine-grained action and text-safe-area reviews
+        run: python production/monarch-cam/fine_recon.py
 
       - name: Upload source and visual review pack
         uses: actions/upload-artifact@v4
