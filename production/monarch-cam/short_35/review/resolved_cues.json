@@ -1,108 +1,242 @@
 {
   "fps": 30,
+  "duration_seconds": 35.0,
+  "picture_reference": "deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4",
+  "picture_policy": "Native-vertical edit of public-domain NPS window entry/exit action; no handle opening or food reward is depicted.",
   "events": [
     {
-      "t": 0.06666666666666667,
+      "id": "short:impact:2",
       "frame": 2,
+      "t": 0.06666666666666667,
       "kind": "impact",
       "peak_dbfs": -23.0,
-      "label": "Window action / immediate hook",
+      "picture": "Window action / immediate hook",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 0.066667,
+        "timeline_start": 0.0,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -23.0,
+        "timeline_end": 0.237292
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 2.1333333333333333,
+      "id": "short:whoosh:64",
       "frame": 64,
+      "t": 2.1333333333333333,
       "kind": "whoosh",
       "peak_dbfs": -28.0,
-      "label": "Window answer cut",
+      "picture": "Window answer cut",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 2.133333,
+        "timeline_start": 1.865896,
+        "source_peak_seconds": 0.267437,
+        "target_peak_dbfs": -28.0,
+        "timeline_end": 2.365896
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 4.333333333333333,
+      "id": "short:tick:130",
       "frame": 130,
+      "t": 4.333333333333333,
       "kind": "tick",
       "peak_dbfs": -32.0,
-      "label": "Why climb inside question",
+      "picture": "Why climb inside question",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 4.333333,
+        "timeline_start": 4.308958,
+        "source_peak_seconds": 0.024375,
+        "target_peak_dbfs": -32.0,
+        "timeline_end": 4.503667
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 7.266666666666667,
+      "id": "short:impact:218",
       "frame": 218,
+      "t": 7.266666666666667,
       "kind": "impact",
       "peak_dbfs": -25.0,
-      "label": "Food answer",
+      "picture": "Food answer",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 7.266667,
+        "timeline_start": 7.167583,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -25.0,
+        "timeline_end": 7.437292
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 11.333333333333334,
+      "id": "short:impact:340",
       "frame": 340,
+      "t": 11.333333333333334,
       "kind": "impact",
       "peak_dbfs": -26.0,
-      "label": "Learning mechanism begins",
+      "picture": "Learning mechanism begins",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 11.333333,
+        "timeline_start": 11.23425,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -26.0,
+        "timeline_end": 11.503958
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 16.266666666666666,
+      "id": "short:tick:488",
       "frame": 488,
+      "t": 16.266666666666666,
       "kind": "tick",
       "peak_dbfs": -31.0,
-      "label": "Diagram / search",
+      "picture": "Diagram / search",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 16.266667,
+        "timeline_start": 16.242292,
+        "source_peak_seconds": 0.024375,
+        "target_peak_dbfs": -31.0,
+        "timeline_end": 16.437
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 16.966666666666665,
+      "id": "short:tick:509",
       "frame": 509,
+      "t": 16.966666666666665,
       "kind": "tick",
       "peak_dbfs": -31.0,
-      "label": "Diagram / food reward",
+      "picture": "Diagram / food reward",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 16.966667,
+        "timeline_start": 16.942292,
+        "source_peak_seconds": 0.024375,
+        "target_peak_dbfs": -31.0,
+        "timeline_end": 17.137
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 17.666666666666668,
+      "id": "short:tick:530",
       "frame": 530,
+      "t": 17.666666666666668,
       "kind": "tick",
       "peak_dbfs": -31.0,
-      "label": "Diagram / check again",
+      "picture": "Diagram / check again",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 17.666667,
+        "timeline_start": 17.642292,
+        "source_peak_seconds": 0.024375,
+        "target_peak_dbfs": -31.0,
+        "timeline_end": 17.837
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 19.333333333333332,
+      "id": "short:impact:580",
       "frame": 580,
+      "t": 19.333333333333332,
       "kind": "impact",
       "peak_dbfs": -24.5,
-      "label": "Food conditioning name",
+      "picture": "Food conditioning name",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 19.333333,
+        "timeline_start": 19.23425,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -24.5,
+        "timeline_end": 19.503958
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 25.2,
+      "id": "short:whoosh:756",
       "frame": 756,
+      "t": 25.2,
       "kind": "whoosh",
       "peak_dbfs": -29.0,
-      "label": "Learned shortcut consequence",
+      "picture": "Learned shortcut consequence",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 25.2,
+        "timeline_start": 24.932562,
+        "source_peak_seconds": 0.267437,
+        "target_peak_dbfs": -29.0,
+        "timeline_end": 25.432562
+      },
       "supported_by_picture": true,
       "generated_audio": false
     },
     {
-      "t": 30.333333333333332,
+      "id": "short:impact:910",
       "frame": 910,
+      "t": 30.333333333333332,
       "kind": "impact",
       "peak_dbfs": -25.0,
-      "label": "Prevention payoff",
+      "picture": "Prevention payoff",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 30.333333,
+        "timeline_start": 30.23425,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -25.0,
+        "timeline_end": 30.503958
+      },
       "supported_by_picture": true,
       "generated_audio": false
     }
   ],
   "intentionally_silent": [
-    "No invented food-reward sound",
-    "No handle, door, attack or bear-vocalisation cue"
+    {
+      "frame": 218,
+      "t": 7.266667,
+      "picture": "Food is discussed as a possible reward; no food is visible.",
+      "reason": "No invented food-reward, eating or rustling sound is added."
+    },
+    {
+      "frame": 756,
+      "t": 25.2,
+      "picture": "The learned shortcut is explained; no handle, latch or door event is visible.",
+      "reason": "No handle pull, door movement, attack or bear vocalisation is added."
+    }
   ]
 }

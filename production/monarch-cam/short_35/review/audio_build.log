@@ -12,7 +12,7 @@ Source music_backup: 5,600,980 bytes
 Source forest_night: 2,553,542 bytes
 Source soft_whoosh: 123,547 bytes
 Source soft_impact: 130,468 bytes
-Earshot unavailable during SFX selection; fixed reviewed trims remain required: AttributeError('load')
+Earshot API available; model-assisted SFX selection enabled
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/vo1.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/vo2.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/vo3.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
@@ -25,13 +25,15 @@ Earshot unavailable during SFX selection; fixed reviewed trims remain required: 
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/music_backup.mp3 -t 35.000000 -af highpass=f=45,lowpass=f=12000,aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/forest_night.mp3 -ss 52.000000 -t 35.000000 -af highpass=f=80,lowpass=f=6500,aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/soft_impact.mp3 -af aresample=48000 -ac 2 -f f32le pipe:1
-+ ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/selected_impact.wav -af aresample=48000 -ac 2 -f f32le pipe:1
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 8 files:  12%|█▎        | 1/8 [00:00<00:00,  8.46it/s]Fetching 8 files: 100%|██████████| 8/8 [00:02<00:00,  3.24it/s]Fetching 8 files: 100%|██████████| 8/8 [00:02<00:00,  3.31it/s]
++ ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/selected_impact.wav -ss 0.042000 -t 0.463000 -af aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/soft_whoosh.mp3 -af aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/selected_whoosh.wav -af aresample=48000 -ac 2 -f f32le pipe:1
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/sound_v2/sources/soft_impact.mp3 -af aresample=48000 -ac 2 -f f32le pipe:1
-+ ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/selected_tick.wav -af aresample=48000 -ac 2 -f f32le pipe:1
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/premaster_24.wav -af loudnorm=I=-13.8:TP=-3.5:LRA=9:measured_I=-18.15:measured_TP=-2.88:measured_LRA=4.50:measured_thresh=-29.34:offset=2.18:linear=true,alimiter=limit=0.67:level=false,aresample=48000 -t 35.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav
-[aist#0:0/pcm_s24le @ 0x560084d66d80] Guessed Channel Layout: stereo
++ ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/selected_tick.wav -ss 0.042000 -t 0.463000 -af aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/premaster_24.wav -af loudnorm=I=-13.8:TP=-3.5:LRA=9:measured_I=-18.09:measured_TP=-2.85:measured_LRA=4.50:measured_thresh=-29.30:offset=2.13:linear=true,alimiter=limit=0.67:level=false,aresample=48000 -t 35.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav
+[aist#0:0/pcm_s24le @ 0x559997469d80] Guessed Channel Layout: stereo
 + ffmpeg -y -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -t 35.000 -c:a aac -b:a 192k -ar 48000 -ac 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a
 ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
@@ -58,11 +60,11 @@ Output #0, ipod, to '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work
   Stream #0:0: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 192 kb/s
     Metadata:
       encoder         : Lavc60.31.102 aac
-size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:19.54 bitrate= 107.3kbits/s speed=39.1x    [out#0/ipod @ 0x5587a56c0940] video:0kB audio:829kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.868346%
-size=     837kB time=00:00:34.98 bitrate= 195.9kbits/s speed=40.3x    
-[aac @ 0x5587a5702ac0] Qavg: 658.290
+size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:20.18 bitrate= 103.9kbits/s speed=40.3x    [out#0/ipod @ 0x55a086e98940] video:0kB audio:829kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.869278%
+size=     836kB time=00:00:34.98 bitrate= 195.7kbits/s speed=40.8x    
+[aac @ 0x55a086edaac0] Qavg: 713.864
 + ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a -map 0:a:0 -af loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json -f null -
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -af volume=1.4900dB,aresample=192000,alimiter=limit=0.67:level=false,aresample=48000 -t 35.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack_calibrated_1.wav
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -af volume=1.5000dB,aresample=192000,alimiter=limit=0.67:level=false,aresample=48000 -t 35.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack_calibrated_1.wav
 + ffmpeg -y -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -t 35.000 -c:a aac -b:a 192k -ar 48000 -ac 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a
 ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
@@ -89,9 +91,9 @@ Output #0, ipod, to '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work
   Stream #0:0: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 192 kb/s
     Metadata:
       encoder         : Lavc60.31.102 aac
-size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:18.96 bitrate= 110.6kbits/s speed=37.9x    [out#0/ipod @ 0x5591134d8940] video:0kB audio:829kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.868523%
-size=     836kB time=00:00:34.98 bitrate= 195.9kbits/s speed=39.4x    
-[aac @ 0x55911351aac0] Qavg: 633.696
+size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:18.56 bitrate= 113.0kbits/s speed=37.1x    [out#0/ipod @ 0x561144bea940] video:0kB audio:829kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.869171%
+size=     836kB time=00:00:34.98 bitrate= 195.7kbits/s speed=38.6x    
+[aac @ 0x561144c2cac0] Qavg: 645.085
 + ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a -map 0:a:0 -af loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json -f null -
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -af volume=0.6200dB,aresample=192000,alimiter=limit=0.67:level=false,aresample=48000 -t 35.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack_calibrated_2.wav
 + ffmpeg -y -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -t 35.000 -c:a aac -b:a 192k -ar 48000 -ac 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a
@@ -120,11 +122,11 @@ Output #0, ipod, to '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work
   Stream #0:0: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 192 kb/s
     Metadata:
       encoder         : Lavc60.31.102 aac
-size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:18.43 bitrate= 113.8kbits/s speed=36.8x    [out#0/ipod @ 0x5652477b0940] video:0kB audio:832kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.865859%
-size=     839kB time=00:00:34.98 bitrate= 196.4kbits/s speed=37.7x    
-[aac @ 0x5652477f2ac0] Qavg: 657.501
+size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:19.09 bitrate= 109.9kbits/s speed=38.2x    [out#0/ipod @ 0x55f9d44f6940] video:0kB audio:835kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.862404%
+size=     842kB time=00:00:34.98 bitrate= 197.2kbits/s speed=38.1x    
+[aac @ 0x55f9d4538ac0] Qavg: 669.308
 + ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a -map 0:a:0 -af loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json -f null -
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -af volume=0.2500dB,aresample=192000,alimiter=limit=0.67:level=false,aresample=48000 -t 35.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack_calibrated_3.wav
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -af volume=0.2800dB,aresample=192000,alimiter=limit=0.67:level=false,aresample=48000 -t 35.000 -ar 48000 -ac 2 -c:a pcm_s24le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack_calibrated_3.wav
 + ffmpeg -y -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/soundtrack.wav -t 35.000 -c:a aac -b:a 192k -ar 48000 -ac 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a
 ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
@@ -151,9 +153,9 @@ Output #0, ipod, to '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work
   Stream #0:0: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 192 kb/s
     Metadata:
       encoder         : Lavc60.31.102 aac
-size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:18.13 bitrate= 115.7kbits/s speed=36.3x    [out#0/ipod @ 0x564ac7db4940] video:0kB audio:835kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.862883%
-size=     842kB time=00:00:34.98 bitrate= 197.1kbits/s speed=37.9x    
-[aac @ 0x564ac7df6ac0] Qavg: 718.394
+size=       0kB time=N/A bitrate=N/A speed=N/A    size=     256kB time=00:00:18.60 bitrate= 112.8kbits/s speed=37.2x    [out#0/ipod @ 0x55688d0aa940] video:0kB audio:833kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.864629%
+size=     840kB time=00:00:34.98 bitrate= 196.7kbits/s speed=37.1x    
+[aac @ 0x55688d0ecac0] Qavg: 759.673
 + ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a -map 0:a:0 -af loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json -f null -
 + ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a -map 0:a:0 -af loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json -f null -
 + ffmpeg -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/audio_master.m4a -t 35.000000 -af aresample=48000 -ac 2 -f f32le pipe:1
@@ -177,8 +179,8 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/runner/work/Monarch.Overall.Work/
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:35.00, start: 0.000000, bitrate: 3156 kb/s
-  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 3153 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Duration: 00:00:35.00, start: 0.000000, bitrate: 3150 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 3147 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -189,8 +191,8 @@ Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/home/runner/work/Monarch.Overall.Work/
     minor_version   : 512
     compatible_brands: M4A isomiso2
     encoder         : Lavf60.16.100
-  Duration: 00:00:35.00, start: 0.000000, bitrate: 197 kb/s
-  Stream #1:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 195 kb/s (default)
+  Duration: 00:00:35.00, start: 0.000000, bitrate: 196 kb/s
+  Stream #1:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 194 kb/s (default)
     Metadata:
       handler_name    : SoundHandler
       vendor_id       : [0][0][0][0]
@@ -200,12 +202,12 @@ Output #0, mp4, to '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, q=2-31, 3153 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, q=2-31, 3147 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
       encoder         : Lavc60.31.102 libx264
-  Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 195 kb/s (default)
+  Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 194 kb/s (default)
     Metadata:
       handler_name    : SoundHandler
       vendor_id       : [0][0][0][0]
@@ -213,9 +215,9 @@ Stream mapping:
   Stream #0:0 -> #0:0 (copy)
   Stream #1:0 -> #0:1 (copy)
 Press [q] to stop, [?] for help
-size=       0kB time=-00:00:00.06 bitrate=  -0.0kbits/s speed=N/A    [mp4 @ 0x55f351965480] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x55f351a67a80] video:13474kB audio:835kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.272657%
-size=   14347kB time=00:00:34.98 bitrate=3359.4kbits/s speed=2.28e+03x    
+size=       0kB time=-00:00:00.06 bitrate=  -0.0kbits/s speed=N/A    [mp4 @ 0x55afc6969040] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x55afc6a6b700] video:13447kB audio:833kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.273366%
+size=   14319kB time=00:00:34.98 bitrate=3352.7kbits/s speed=2.14e+03x    
 + ffmpeg -y -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4 -map 0:a:0 -t 35.000 -c:a pcm_f32le -ar 48000 -ac 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_35/delivered_audio.wav
 ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
@@ -234,13 +236,13 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/runner/work/Monarch.Overall.Work/
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:35.00, start: 0.000000, bitrate: 3358 kb/s
-  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 3153 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Duration: 00:00:35.00, start: 0.000000, bitrate: 3351 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 3147 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
       encoder         : Lavc60.31.102 libx264
-  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 195 kb/s (default)
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 194 kb/s (default)
     Metadata:
       handler_name    : SoundHandler
       vendor_id       : [0][0][0][0]
@@ -258,8 +260,8 @@ Output #0, wav, to '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/
       handler_name    : SoundHandler
       vendor_id       : [0][0][0][0]
       encoder         : Lavc60.31.102 pcm_f32le
-size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    [out#0/wav @ 0x5625580955c0] video:0kB audio:13125kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000848%
-size=   13125kB time=00:00:34.98 bitrate=3073.2kbits/s speed= 527x    
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    [out#0/wav @ 0x55699065b5c0] video:0kB audio:13125kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000848%
+size=   13125kB time=00:00:34.98 bitrate=3073.2kbits/s speed= 546x    
 + ffmpeg -hide_banner -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4 -map 0:a:0 -af loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json -f null -
-Earshot final status: {'model_load': 'AttributeError: load'}
-DONE /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4 / 14691690 bytes
+Earshot final status: {'timeline': 'complete', 'sheet': 'complete', 'critique': 'complete'}
+DONE /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4 / 14662504 bytes
