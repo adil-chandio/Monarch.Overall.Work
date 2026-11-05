@@ -92,7 +92,7 @@ def hf_share(x: np.ndarray, lo: float = 5000.0, hi: float = 16000.0) -> float:
     return float(S[(f >= lo) & (f < hi)].sum() / (S.sum() + 1e-12))
 
 
-def air_polish(x: np.ndarray, target: float = 0.245, cap_db: float = 4.0) -> np.ndarray:
+def air_polish(x: np.ndarray, target: float = 0.240, cap_db: float = 7.0) -> np.ndarray:
     """Bring the 5-16 kHz air back to the reference's share with a gentle shelf.
 
     Air is smooth noise up here; the band that makes a mix harsh is 2-5 kHz, and that one is
@@ -101,7 +101,7 @@ def air_polish(x: np.ndarray, target: float = 0.245, cap_db: float = 4.0) -> np.
     if hf_share(x) < 1e-6:
         return x
     lift = 0.0
-    for _ in range(3):
+    for _ in range(5):
         cur = hf_share(x)
         if cur >= target * 0.95:
             break
@@ -115,7 +115,62 @@ def air_polish(x: np.ndarray, target: float = 0.245, cap_db: float = 4.0) -> np.
     return x
 
 
-def limit(x: np.ndarray, ceiling_db: float = -1.0) -> np.ndarray:
+# the reference, plus a little help on the two ends: the final limiter always hands a
+# fraction of the top back, so the target is set where the master will land
+REF_BANDS = {"sub": 0.074, "low": 0.212, "mid": 0.300, "hi": 0.162, "air": 0.256}
+BANDS_HZ = {"sub": (20, 120), "low": (120, 400), "mid": (400, 1500),
+            "hi": (1500, 5000), "air": (5000, 16000)}
+
+
+def band_share(x: np.ndarray) -> dict:
+    seg = x[:, 0]
+    S = np.abs(np.fft.rfft(seg * np.hanning(len(seg))))
+    f = np.fft.rfftfreq(len(seg), 1 / SR)
+    tot = S.sum() + 1e-12
+    return {k: float(S[(f >= lo) & (f < hi)].sum() / tot) for k, (lo, hi) in BANDS_HZ.items()}
+
+
+def match_bands(x: np.ndarray, passes: int = 4) -> np.ndarray:
+    """Move the finished mix onto the reference's own five-band balance.
+
+    Cues add body the bed never had -- seventy-seven sub-heavy cut hits put 23 % of the
+    energy under 120 Hz where the reference keeps 8.5 %. That is the difference between a
+    film that sounds big and one that sounds boomy, so the balance is corrected *after* the
+    cues, on the sum, and then only by amounts that keep the hits intact (the limiter and
+    the loudness stage run after this).
+    """
+    for _ in range(passes):
+        sh = band_share(x)
+        worst = max(abs(np.log((REF_BANDS[k] + 1e-9) / (sh[k] + 1e-9))) for k in REF_BANDS)
+        if worst < 0.07:
+            break
+        for k, (lo, hi) in BANDS_HZ.items():
+            g = float(np.clip((REF_BANDS[k] / max(sh[k], 1e-6)) ** 0.7, 0.25, 4.0))
+            if abs(np.log(g)) < 0.02:
+                continue
+            for ch in (0, 1):
+                x[:, ch] += band(x[:, ch], lo, hi) * (g - 1)
+    return x
+
+
+def follow_arc(x: np.ndarray, arc, cap: float = 3.0) -> np.ndarray:
+    """Bend the mix's per-second level to the reference's measured arc, within 3 dB."""
+    from scipy.ndimage import uniform_filter1d
+    if not arc:
+        return x
+    n = x.shape[0]
+    g = np.zeros(n)
+    for i, want in enumerate(arc):
+        a, b = i * SR, min(n, (i + 1) * SR)
+        if b - a < SR // 4:
+            break
+        got = 20 * np.log10(max(np.sqrt((x[a:b] ** 2).mean()), 1e-9))
+        g[a:b] = float(np.clip(want - got, -cap, cap))
+    g = uniform_filter1d(g, int(0.35 * SR))
+    return x * (10 ** (g / 20.0))[:, None]
+
+
+def limit(x: np.ndarray, ceiling_db: float = -1.6) -> np.ndarray:
     """A lookahead limiter: peaks over the ceiling are pulled down with a 3 ms lookahead and
     a 60 ms release, so the hits keep their body instead of the whole mix being turned down."""
     from scipy.ndimage import maximum_filter1d, uniform_filter1d
@@ -127,6 +182,48 @@ def limit(x: np.ndarray, ceiling_db: float = -1.0) -> np.ndarray:
     g = uniform_filter1d(g, int(0.020 * SR))                 # smooth release
     g = np.minimum(g, np.minimum(1.0, thr / np.maximum(np.abs(x).max(1), 1e-9)))
     return x * g[:, None]
+
+
+def tp_limit(x: np.ndarray, ceiling_db: float = -1.2, up: int = 4) -> np.ndarray:
+    """A true-peak limiter: limit on a 4x oversampled copy, then come back down.
+
+    A sample-peak limiter cannot see the peaks between samples, so it either lets them
+    through (a phone's DAC clips them, which is the harshest thing a mix can do) or it has
+    to be pushed 3 dB quieter to be safe. Limiting where the peaks actually are costs a
+    millimetre of transient and keeps the film at its loudness.
+    """
+    from scipy.signal import resample_poly
+    from scipy.ndimage import minimum_filter1d, uniform_filter1d
+    thr = 10 ** (ceiling_db / 20.0)
+    out = np.empty_like(x)
+    for ch in (0, 1):
+        os_ = resample_poly(x[:, ch], up, 1)
+        env = np.abs(os_)
+        # a 2 ms look-ahead so the gain is already down when the peak arrives
+        look = int(0.002 * SR * up)
+        env = np.maximum(env, np.roll(env, -look))
+        g = np.minimum(1.0, thr / np.maximum(env, 1e-9))
+        g = uniform_filter1d(g, int(0.004 * SR * up))
+        g = np.minimum(g, np.minimum(1.0, thr / np.maximum(np.abs(os_), 1e-9)))
+        out[:, ch] = resample_poly(os_ * g, 1, up)[: x.shape[0]]
+    return out
+
+
+def true_peak(x: np.ndarray) -> float:
+    """dBTP, measured the way broadcast meters do it (4x oversampled), via ffmpeg."""
+    raw = np.clip(x, -1, 1).astype(np.float32).tobytes()
+    q = subprocess.Popen([ffmpeg(), "-v", "info", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", "-",
+                          "-af", "ebur128=peak=true", "-f", "null", "-"],
+                         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    _, err = q.communicate(raw)
+    txt = (err or b"").decode("utf-8", "ignore")
+    for line in reversed(txt.splitlines()):
+        if line.strip().startswith("Peak:"):
+            try:
+                return float(line.split("Peak:")[1].split("dBFS")[0])
+            except Exception:
+                break
+    return -99.0
 
 
 def lufs(x: np.ndarray) -> float:
@@ -147,9 +244,10 @@ def lufs(x: np.ndarray) -> float:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seconds", type=float, default=7.0)
-    ap.add_argument("--bed", default="audio/bed-7.wav")
-    ap.add_argument("--out", default="audio/mix-7.wav")
-    ap.add_argument("--cues", default="audio/cues.json")
+    ap.add_argument("--bed", default="audio/bed-23.wav")
+    ap.add_argument("--out", default="audio/mix-23.wav")
+    ap.add_argument("--cues", default="audio/cues-23.json")
+    ap.add_argument("--arc", default=None, help="JSON list of per-second dBFS to follow")
     ap.add_argument("--target-i", type=float, default=-14.0,
                     help="integrated loudness of the reference's own soundtrack")
     a = ap.parse_args()
@@ -196,12 +294,28 @@ def main() -> int:
     duck = uniform_filter1d(duck, int(0.045 * SR))
     mix = mix * duck[:, None]
     # keep the sum from clipping, then hit the reference's loudness
-    mix = air_polish(mix)
-    mix = limit(mix)
-    cur = lufs(mix)
-    g = 10 ** ((a.target_i - cur) / 20.0)
-    mix *= g
-    mix = limit(mix)
+    # 1) tonal work on the sum, in a fixed order, so nothing after this lifts the peak
+    mix = match_bands(mix)
+    mix = air_polish(mix, target=0.252, cap_db=9.0)
+    # 2) the contour, then level, then peak -- in that order, three times, because each
+    #    step moves the others a little. The contour is what makes twenty-three seconds
+    #    breathe like the reference; the loudness stage must not flatten it.
+    arc = json.loads(Path(a.arc).read_text()) if a.arc else None
+    mix = tp_limit(mix, ceiling_db=-0.7)
+    for _ in range(3):
+        if arc:
+            mix = follow_arc(mix, arc, cap=4.5)
+        cur = lufs(mix)
+        mix = mix * (10 ** ((a.target_i - cur) / 20.0))
+        mix = tp_limit(mix, ceiling_db=-0.7)
+    # 3) the ceiling last: if inter-sample peaks still sit high, take the dB off the top
+    #    rather than let a phone's DAC find them
+    for _ in range(3):
+        tp = true_peak(mix)
+        if tp <= -0.45:
+            break
+        mix = mix * (10 ** ((-0.55 - tp) / 20.0))
+        mix = tp_limit(mix, ceiling_db=-0.7)
     raw = np.clip(mix, -1, 1).astype(np.float32).tobytes()
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     w = subprocess.Popen([ffmpeg(), "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "2",

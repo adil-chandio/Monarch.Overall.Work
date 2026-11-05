@@ -32,7 +32,9 @@ BANDS = {"sub": (20, 120), "low": (120, 400), "mid": (400, 1500),
 # D minor, a slow turn: i - VI - III - VII. Roots in Hz, two octaves for the pad.
 NOTE = {"D2": 73.42, "F2": 87.31, "A2": 110.0, "Bb2": 116.54, "C3": 130.81, "D3": 146.83,
         "F3": 174.61, "A3": 220.0, "Bb3": 233.08, "C4": 261.63, "D4": 293.66,
-        "F4": 349.23, "A4": 440.0, "D5": 587.33, "A5": 880.0, "D6": 1174.66}
+        "F4": 349.23, "A4": 440.0, "D5": 587.33, "A5": 880.0, "D6": 1174.66,
+        "E3": 164.81, "G3": 196.0, "C5": 523.25, "Bb4": 466.16, "E5": 659.26,
+        "G4": 392.0, "G5": 783.99, "Bb5": 932.33, "F5": 698.46, "C6": 1046.5}
 CHORDS = [("D2", ["D3", "F3", "A3", "D4"]),
           ("Bb2", ["D3", "F3", "Bb3", "D4"]),
           ("F2", ["C4", "F3", "A3", "F4"]),
@@ -52,7 +54,7 @@ def tone(f: float, n: int, amp: float, r, kind: str = "pad") -> np.ndarray:
         det = 1 + r.normal(0, 0.0012)
         out += (0.55 ** i) * np.sin(2 * np.pi * f * p * det * t + r.uniform(0, 6.28))
     if kind == "pad":
-        att = int(0.28 * SR)
+        att = min(int(0.28 * SR), max(1, n // 3))
         env = np.ones(n)
         env[:att] = np.linspace(0, 1, att) ** 1.6
         env *= 1 - np.linspace(0, 1, n) ** 3.0 * 0.55
