@@ -334,7 +334,7 @@ jobs:
     if: ${{ inputs.channel_audit || (github.event_name == 'push' && github.ref_name == 'arena/1f352b8e-monarch-overall-work') }}
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -352,3 +352,15 @@ jobs:
           path: audit-output/
           if-no-files-found: warn
           retention-days: 7
+      - name: Save public inventory to the session branch
+        if: ${{ github.ref_name == 'arena/1f352b8e-monarch-overall-work' && success() }}
+        run: |
+          mkdir -p docs/repo-intel
+          cp audit-output/channel.json docs/repo-intel/monarchs-edit-channel.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/monarchs-edit-channel.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record MONARCHs Edit public channel inventory [skip ci]'
+            git push origin HEAD:arena/1f352b8e-monarch-overall-work
+          fi
