@@ -48,7 +48,17 @@ try:
     for i in range(0, len(ids), 50):
         result = api('videos', part='snippet,contentDetails,statistics,status', id=','.join(ids[i:i+50]), maxResults=50)
         videos.extend(result.get('items', []))
-    out = {'channel': channel, 'uploads': uploads, 'videos': videos,
+    comments = {}
+    for video in videos:
+        vid = video['id']
+        try:
+            page = api('commentThreads', part='snippet', videoId=vid, maxResults=100, textFormat='plainText', order='relevance')
+            comments[vid] = [{'text': item['snippet']['topLevelComment']['snippet'].get('textDisplay', ''),
+                              'likes': item['snippet']['topLevelComment']['snippet'].get('likeCount', 0),
+                              'replies': item['snippet'].get('totalReplyCount', 0)} for item in page.get('items', [])]
+        except RuntimeError as exc:
+            comments[vid] = {'unavailable': str(exc)}
+    out = {'channel': channel, 'uploads': uploads, 'videos': videos, 'comments': comments,
            'note': 'Public data only; private videos and YouTube Studio analytics are not returned.'}
     (OUT / 'channel.json').write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding='utf-8')
     print(f"Channel: {channel['snippet']['title']}; uploads listed: {len(uploads)}; video details: {len(videos)}")
