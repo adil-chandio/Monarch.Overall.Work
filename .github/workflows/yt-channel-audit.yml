@@ -11,7 +11,7 @@ on:
       - yt_intel/channel_test.py
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
@@ -44,6 +44,19 @@ jobs:
         run: python -m pip install --quiet yt-dlp
       - name: Audit Extinct Life public uploads and comment samples
         run: python scripts/audit-yt-channel.py @extinct_life --transcripts --out .cache/yt-intel/extinct-life-audit
+      - name: Publish public metadata report to this session branch
+        if: always() && github.ref == 'refs/heads/arena/ba8d901e-monarch-overall-work'
+        run: |
+          SOURCE=.cache/yt-intel/extinct-life-audit/channel.json
+          if [ ! -f "$SOURCE" ]; then exit 0; fi
+          mkdir -p docs/research/data
+          cp "$SOURCE" docs/research/data/extinct-life-public-api.json
+          git config user.name 'Monarch channel audit'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/research/data/extinct-life-public-api.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'docs(yt): record Extinct Life public API evidence'
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
       - name: Preserve report including partial/error evidence
         if: always()
         uses: actions/upload-artifact@v4
