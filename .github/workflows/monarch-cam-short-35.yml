@@ -50,6 +50,30 @@ jobs:
             'git+https://github.com/Leonxlnx/earshot.git@main'
           python -c 'import torch; from earshot import api; print("Earshot import OK; torch", torch.__version__)'
 
+      - name: Validate Short production contracts and committed fonts
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_35/render_short_visual.py \
+            production/monarch-cam/short_35/build_short_audio.py
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+          spec = json.loads(Path('production/monarch-cam/short_35/short_spec.json').read_text())
+          fps = spec['fps']
+          assert (spec['duration'], spec['width'], spec['height'], spec['fps'], spec['frame_count']) == (35.0, 1080, 1920, 30, 1050)
+          assert len(spec['narration']) == 9 and sum(len(x['text'].split()) for x in spec['narration']) == 70
+          assert len(spec['scenes']) == 11 and len(spec['audio']['cues']) == 11
+          scene_starts = {int(round(s['start'] * fps)) for s in spec['scenes']}
+          diagram_frames = {math.ceil(s['time'] * fps - 1e-9) for s in spec['diagram_steps']}
+          for cue in spec['audio']['cues']:
+              assert round(cue['frame'] / fps, 6) == round(cue['time'], 6), cue
+              assert cue['frame'] == 2 or cue['frame'] in scene_starts or cue['frame'] in diagram_frames, cue
+          assert spec['scenes'][-1]['rate'] < 1.0
+          fonts = [Path('public/showreel/fonts') / name for name in ('Manrope-800.ttf', 'Manrope-700.ttf', 'IBMPlexMono-400.ttf', 'Anton-Regular.ttf')]
+          assert all(path.is_file() for path in fonts), fonts
+          print('Spec, cue-frame, slow-motion and committed-font contracts OK')
+          PY
+
       - name: Retrieve the explicitly public-domain NPS source and review frames
         run: |
           python production/monarch-cam/source_recon.py
@@ -58,6 +82,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p production/monarch-cam/short_35/review
+          rm -f production/monarch-cam/short_35/review/workflow_failure.txt
           python production/monarch-cam/short_35/render_short_visual.py \
             2>&1 | tee production/monarch-cam/short_35/review/visual_build.log
 

@@ -20,7 +20,16 @@ SPEC = json.loads((BASE / "short_spec.json").read_text())
 W, H, FPS = SPEC["width"], SPEC["height"], SPEC["fps"]
 DURATION = float(SPEC["duration"])
 N_FRAMES = int(SPEC["frame_count"])
-FONT_DIR = ROOT / "deliverables/monarch-cam/fonts"
+FONT_DIR = ROOT / "public/showreel/fonts"
+SYSTEM_FONT_DIR = Path("/usr/share/fonts/truetype/dejavu")
+FONT_FILES = {
+    # These are the font files actually committed in this repository. The old
+    # Montserrat / Deliverables path never existed on a clean Actions checkout.
+    "Montserrat-Bold": [FONT_DIR / "Manrope-800.ttf", FONT_DIR / "Anton-Regular.ttf"],
+    "DejaVuSansMono": [FONT_DIR / "IBMPlexMono-400.ttf", SYSTEM_FONT_DIR / "DejaVuSansMono.ttf"],
+    "DejaVuSans": [FONT_DIR / "Manrope-700.ttf", SYSTEM_FONT_DIR / "DejaVuSans.ttf"],
+    "DejaVuSans-Bold": [SYSTEM_FONT_DIR / "DejaVuSans-Bold.ttf", FONT_DIR / "Manrope-800.ttf"],
+}
 BG = (7, 13, 22)
 WHITE = (247, 247, 242)
 MUTED = (177, 190, 198)
@@ -29,7 +38,11 @@ CARD = (8, 16, 26, 238)
 
 
 def font(name: str, size: int):
-    return ImageFont.truetype(str(FONT_DIR / f"{name}.ttf"), size)
+    candidates = FONT_FILES.get(name, [FONT_DIR / f"{name}.ttf", SYSTEM_FONT_DIR / f"{name}.ttf"])
+    for candidate in candidates:
+        if candidate.exists():
+            return ImageFont.truetype(str(candidate), size)
+    raise FileNotFoundError(f"No usable font for {name}; checked {[str(x) for x in candidates]}")
 
 
 def save_json(path: Path, data):
@@ -192,7 +205,10 @@ def draw_diagram(base: Image.Image, t: float):
         draw.text((188, y + slide), step["title"], font=title_face, fill=(*WHITE, alpha), stroke_width=1, stroke_fill=(0, 0, 0, alpha))
         draw.text((192, y + 91 + slide), step["subtitle"], font=subtitle_face, fill=(*MUTED, alpha))
         if index < 2:
-            draw.text((119, y + 150), "↓", font=font("DejaVuSans-Bold", 38), fill=(*AMBER, int(alpha * 0.72)))
+            # Draw the connector rather than depending on a runner's Unicode font.
+            arrow_color = (*AMBER, int(alpha * 0.72))
+            draw.line((130, y + 150, 130, y + 185), fill=arrow_color, width=5)
+            draw.polygon([(116, y + 181), (130, y + 197), (144, y + 181)], fill=arrow_color)
     base.alpha_composite(overlay)
 
 
@@ -215,24 +231,35 @@ def render():
         end_frame = int(round(scene["end"] * FPS))
         cap = cv2.VideoCapture(str(SOURCE))
         source_fps = cap.get(cv2.CAP_PROP_FPS) or 29.97
-        cap.set(cv2.CAP_PROP_FPS, source_fps * scene.get("rate", 1.0))
-        cap.set(cv2.CAP_PROP_POS_MSEC, scene["source_start"] * 1000)
+        scene_rate = float(scene.get("rate", 1.0))
+        source_start_frame = int(round(scene["source_start"] * source_fps))
+        # CAP_PROP_FPS is generally read-only. Honor `rate` by mapping each
+        # 30 fps output frame to an explicit source-frame offset instead.
+        cap.set(cv2.CAP_PROP_POS_FRAMES, source_start_frame)
         ok, first = cap.read()
         if not ok:
             raise RuntimeError(f"Cannot read {scene['id']} at {scene['source_start']}s")
         first_content = grade(source_content(first))
         background = vertical_background(first_content, scene.get("focus", 0.5))
         layout = scene.get("layout", "footage")
+        raw = first
+        current_source_offset = 0
         for frame_index in range(start_frame, end_frame):
             local_index = frame_index - start_frame
             local_t = local_index / FPS
             t = frame_index / FPS
-            if local_index == 0:
-                raw = first
-            else:
-                ok, raw = cap.read()
-                if not ok:
-                    raw = first
+            desired_source_offset = int(round(local_index * scene_rate))
+            if desired_source_offset != current_source_offset:
+                step = desired_source_offset - current_source_offset
+                if step < 0 or step > 8:
+                    cap.set(cv2.CAP_PROP_POS_FRAMES, source_start_frame + desired_source_offset)
+                    ok, candidate = cap.read()
+                    raw = candidate if ok else first
+                else:
+                    for _ in range(step):
+                        ok, candidate = cap.read()
+                        raw = candidate if ok else first
+                current_source_offset = desired_source_offset
             content = grade(source_content(raw))
             if scene.get("loop_to_start_last") and (end_frame - frame_index) / FPS <= scene["loop_to_start_last"]:
                 content = first_content.copy()

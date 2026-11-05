@@ -6,6 +6,7 @@ import asyncio
 import hashlib
 import json
 import math
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -23,7 +24,8 @@ SPEC = json.loads((BASE / "short_spec.json").read_text())
 DURATION = float(SPEC["duration"])
 SR = 48000
 SAMPLES = int(DURATION * SR)
-TARGET_I = -14.1
+W, H, FPS = SPEC["width"], SPEC["height"], SPEC["fps"]
+TARGET_I = -14.2
 TARGET_TP = -2.2
 
 sys.path.insert(0, str(ROOT / "production/monarch-cam/sound_v2"))
@@ -79,6 +81,9 @@ async def synthesize_voice():
 
 
 def fit_length(clip: np.ndarray, samples: int = SAMPLES):
+    clip = np.asarray(clip, dtype=np.float32)
+    if clip.ndim == 1:
+        clip = np.repeat(clip[:, None], 2, axis=1)
     if len(clip) < samples:
         clip = np.pad(clip, ((0, samples - len(clip)), (0, 0)))
     return clip[:samples].astype(np.float32)
@@ -94,7 +99,7 @@ def build_audio():
         api = earshot_api
     except Exception as exc:
         print("Earshot unavailable during SFX selection; fixed reviewed trims remain required:", repr(exc), flush=True)
-    voice = np.zeros(SAMPLES, np.float32)
+    voice = np.zeros((SAMPLES, 2), np.float32)
     ledger = []
     narration = SPEC["narration"]
     for index, item in enumerate(narration):
@@ -110,7 +115,7 @@ def build_audio():
             tempo = len(clip) / allowed_samples
             if tempo > 1.12:
                 raise RuntimeError(f"{item['id']} needs excessive tempo {tempo:.3f}")
-            clip = preview.decode_vo(WORK / f"{item['id']}.mp3", tempo=tempo).astype(np.float32)
+            clip = preview.decode_vo(WORK / f"{item['id']}.mp3", atempo=tempo).astype(np.float32)
             clip = sound.fade_edges(sound.high_low_pass(clip, highpass=75), 0.018, 0.018)
         if len(clip) > allowed_samples + 2:
             raise RuntimeError(f"{item['id']} duration {len(clip) / SR:.3f}s exceeds its narration slot")
@@ -153,9 +158,13 @@ def build_audio():
     sfx = np.zeros_like(voice)
     sfx_paths = {}
     for kind, definition in audio_spec["sfx"].items():
-        source = assets[definition["asset"]]
+        source_path = assets[definition["asset"]]
+        source_audio = sound.decode(source_path)
+        excerpt = source_audio[int(definition["trim_start"] * SR):int(definition["trim_end"] * SR)]
+        if len(excerpt) < int(0.05 * SR):
+            raise RuntimeError(f"{kind} source trim is unexpectedly short")
         path = WORK / f"selected_{kind}.wav"
-        sf.write(path, source[int(definition["trim_start"] * SR):int(definition["trim_end"] * SR)], SR)
+        sf.write(path, excerpt, SR, subtype="FLOAT")
         clip, selection = sound.choose_sfx_excerpt(
             path, f"{definition['description']} clean", definition["pre"], definition["post"], api, api is not None
         )
@@ -211,93 +220,136 @@ def encode_aac(wav: Path, destination: Path):
 
 
 def decode_aac(path: Path):
-    return sound.decode(path, 0, DURATION)
+    return fit_length(sound.decode(path, 0, DURATION))
 
 
 def master_audio(mix: np.ndarray, stems: dict):
-    """Calibrate on decoded AAC, never trust only the WAV limiter reading."""
-    pre = WORK / "premaster_target.wav"
-    normalized_mix, normalization_report = sound.normalize_loudness(mix, -13.8)
-    sf.write(pre, normalized_mix, SR, subtype="PCM_24")
-    limited = WORK / "premaster_limited.wav"
-    run(["ffmpeg", "-y", "-i", pre, "-af", "aresample=192000,alimiter=limit=0.67:level=false,aresample=48000", "-t", f"{DURATION:.3f}", limited])
-    first_aac = WORK / "master_first_pass.m4a"
-    encode_aac(limited, first_aac)
-    first_mix = decode_aac(first_aac)
-    pre_loudness = sound.loudness(first_aac)
+    """Use the V2 delivery's proven AAC-domain calibration, adapted to 35 seconds."""
+    raw = WORK / "premaster_24.wav"
+    sf.write(raw, mix, SR, subtype="PCM_24")
+    first = subprocess.run([
+        "ffmpeg", "-hide_banner", "-i", raw,
+        "-af", "loudnorm=I=-13.8:TP=-3.5:LRA=9:print_format=json", "-f", "null", "-"
+    ], check=True, capture_output=True, text=True)
+    match = re.search(r'\{\s*"input_i"[\s\S]*?\}', first.stderr)
+    stats = json.loads(match.group(0)) if match else {}
+    if stats:
+        af = (
+            "loudnorm=I=-13.8:TP=-3.5:LRA=9:"
+            f"measured_I={stats['input_i']}:measured_TP={stats['input_tp']}:"
+            f"measured_LRA={stats['input_lra']}:measured_thresh={stats['input_thresh']}:"
+            f"offset={stats['target_offset']}:linear=true,"
+            f"alimiter=limit=0.67:level=false,aresample={SR}"
+        )
+    else:
+        af = f"loudnorm=I=-13.8:TP=-3.5:LRA=9,alimiter=limit=0.67:level=false,aresample={SR}"
 
-    calibration_gain = TARGET_I - float(pre_loudness["input_i"])
-    calibrated = WORK / "master_calibrated.wav"
-    run(["ffmpeg", "-y", "-i", limited, "-af", f"volume={calibration_gain:.6f}dB,aresample=192000,alimiter=limit=0.67:level=false,aresample=48000", "-t", f"{DURATION:.3f}", calibrated])
-    second_aac = WORK / "master_second_pass.m4a"
-    encode_aac(calibrated, second_aac)
-    second_loudness = sound.loudness(second_aac)
+    # loudnorm runs internally at 192 kHz; the limiter protects that domain before
+    # the final 48 kHz resample. All calibration decisions use decoded AAC measurements.
+    soundtrack = WORK / "soundtrack.wav"
+    final_aac = WORK / "audio_master.m4a"
+    run([
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "warning", "-i", raw,
+        "-af", af, "-t", f"{DURATION:.3f}", "-ar", str(SR), "-ac", "2",
+        "-c:a", "pcm_s24le", soundtrack
+    ])
+    encode_aac(soundtrack, final_aac)
+    save_json(REVIEW / "mastering_first_pass.json", stats)
 
-    # A small post-codec residual correction was necessary on the previous deliverable too.
-    residual_gain = TARGET_I - float(second_loudness["input_i"])
-    final_wav = WORK / "final_mix.wav"
-    run(["ffmpeg", "-y", "-i", calibrated, "-af", f"volume={residual_gain:.6f}dB", "-t", f"{DURATION:.3f}", final_wav])
-    final_aac = WORK / "final_audio.m4a"
-    encode_aac(final_wav, final_aac)
-    delivered_loudness = sound.loudness(final_aac)
+    calibration = []
+    for pass_index in range(1, 4):
+        measured = sound.loudness(final_aac)
+        integrated = float(measured["input_i"])
+        true_peak = float(measured["input_tp"])
+        delta = float(np.clip(TARGET_I - integrated, -3.0, 3.0))
+        calibration.append({"pass": pass_index, "before": measured, "requested_gain_db": round(delta, 4)})
+        if abs(TARGET_I - integrated) <= 0.15 and true_peak <= -1.20:
+            break
+        if true_peak > -1.20:
+            delta = min(delta, -1.40 - true_peak)
+        adjusted = WORK / f"soundtrack_calibrated_{pass_index}.wav"
+        run([
+            "ffmpeg", "-y", "-hide_banner", "-loglevel", "warning", "-i", soundtrack,
+            "-af", f"volume={delta:.4f}dB,aresample=192000,alimiter=limit=0.67:level=false,aresample={SR}",
+            "-t", f"{DURATION:.3f}", "-ar", str(SR), "-ac", "2", "-c:a", "pcm_s24le", adjusted
+        ])
+        adjusted.replace(soundtrack)
+        encode_aac(soundtrack, final_aac)
 
-    # Guard true peak after the residual codec correction; loudness tolerance is rechecked below.
-    if float(delivered_loudness["input_tp"]) > TARGET_TP - 0.01:
-        peak_guard = WORK / "final_peak_guard.wav"
-        run(["ffmpeg", "-y", "-i", final_wav, "-af", "aresample=192000,alimiter=limit=0.65:level=false,aresample=48000", "-t", f"{DURATION:.3f}", peak_guard])
-        final_wav = peak_guard
-        encode_aac(final_wav, final_aac)
-        delivered_loudness = sound.loudness(final_aac)
+    # A stricter final true-peak ceiling than the V2 gate; bounded gain reduction only.
+    peak_guard = []
+    for guard_index in range(1, 4):
+        measured = sound.loudness(final_aac)
+        true_peak = float(measured["input_tp"])
+        if true_peak <= TARGET_TP:
+            break
+        delta = min(-0.25, TARGET_TP - true_peak - 0.20)
+        guarded = WORK / f"soundtrack_peak_guard_{guard_index}.wav"
+        run([
+            "ffmpeg", "-y", "-hide_banner", "-loglevel", "warning", "-i", soundtrack,
+            "-af", f"volume={delta:.4f}dB,aresample=192000,alimiter=limit=0.65:level=false,aresample={SR}",
+            "-t", f"{DURATION:.3f}", "-ar", str(SR), "-ac", "2", "-c:a", "pcm_s24le", guarded
+        ])
+        guarded.replace(soundtrack)
+        encode_aac(soundtrack, final_aac)
+        peak_guard.append({"pass": guard_index, "before": measured, "gain_db": round(delta, 4), "after": sound.loudness(final_aac)})
 
-    final_mix = decode_aac(final_aac)
-    repair_report = {"threshold": 0.35, "max_repair_samples_per_run": 48, "passes": []}
+    before_clicks = sound.loudness(final_aac)
+    if float(before_clicks["input_tp"]) > TARGET_TP or abs(float(before_clicks["input_i"]) - TARGET_I) > 0.50:
+        raise RuntimeError(f"Mastering calibration failed on AAC: {before_clicks}")
+
+    click_review = {"threshold": 0.35, "max_repair_samples_per_run": 48, "passes": []}
+    final_wav = soundtrack
     for click_pass in range(1, 4):
-        runs = sound.detect_click_runs(final_mix)
+        decoded_aac = decode_aac(final_aac)
+        runs = sound.detect_click_runs(decoded_aac)
         pass_record = {"pass": click_pass, "before_runs": runs}
-        repair_report["passes"].append(pass_record)
+        click_review["passes"].append(pass_record)
         if not runs:
             break
         pcm, pcm_rate = sf.read(final_wav, dtype="float32", always_2d=True)
         if pcm_rate != SR:
             raise RuntimeError(f"Unexpected PCM master rate: {pcm_rate}")
-        repaired, repairs = sound.repair_short_click_runs(pcm, runs)
-        pass_record["operations"] = repairs
-        repaired_wav = WORK / f"final_mix_click_repaired_{click_pass}.wav"
+        repaired, operations = sound.repair_short_click_runs(pcm, runs)
+        pass_record["operations"] = operations
+        repaired_wav = WORK / f"soundtrack_click_repaired_{click_pass}.wav"
         sf.write(repaired_wav, repaired, SR, subtype="PCM_24")
         final_wav = repaired_wav
         encode_aac(final_wav, final_aac)
-        final_mix = decode_aac(final_aac)
-        pass_record["after_runs"] = sound.detect_click_runs(final_mix)
-        if not pass_record["after_runs"]:
+        remaining = sound.detect_click_runs(decode_aac(final_aac))
+        pass_record["after_runs"] = remaining
+        if not remaining:
             break
         if click_pass == 3:
-            save_json(REVIEW / "click_repair.json", repair_report)
-            raise RuntimeError(f"Persistent AAC click runs after bounded repair: {pass_record['after_runs']}")
-    repair_report["final_runs"] = sound.detect_click_runs(final_mix)
-    repair_report["repaired_samples"] = sum(op["interpolated_samples"] for p in repair_report["passes"] for op in p.get("operations", []))
-    save_json(REVIEW / "click_repair.json", repair_report)
+            save_json(REVIEW / "click_repair.json", click_review)
+            raise RuntimeError(f"Persistent AAC click runs after bounded repair: {remaining}")
 
-    calibration = {
+    final_mix = decode_aac(final_aac)
+    click_review["final_runs"] = sound.detect_click_runs(final_mix)
+    click_review["final_aac_measurement"] = sound.loudness(final_aac)
+    click_review["repaired_samples"] = sum(op["interpolated_samples"] for p in click_review["passes"] for op in p.get("operations", []))
+    save_json(REVIEW / "click_repair.json", click_review)
+    if click_review["final_runs"]:
+        raise RuntimeError(f"Delivered AAC still has {len(click_review['final_runs'])} click runs")
+
+    save_json(REVIEW / "mastering_calibration.json", {
         "target_integrated_lufs": TARGET_I, "target_true_peak_dbtp": TARGET_TP,
-        "premaster_normalization": normalization_report,
-        "first_pass_aac": pre_loudness, "calibration_gain_db": calibration_gain,
-        "second_pass_aac": second_loudness, "residual_gain_db": residual_gain,
-        "delivered_aac_before_final_click_check": delivered_loudness,
-        "final_aac": sound.loudness(final_aac),
-        "method": "Conservative limiting followed by measured AAC-domain integrated-loudness correction; no gate bypass."
-    }
-    save_json(REVIEW / "mastering_calibration.json", calibration)
+        "first_pass_loudnorm": stats, "calibration": calibration,
+        "peak_guard": peak_guard, "before_click_repair": before_clicks,
+        "final_aac": click_review["final_aac_measurement"],
+        "method": "V2-style two-pass loudnorm, conservative 192 kHz limiting and measured AAC-domain calibration; no gate bypass."
+    })
 
-    # Reference stems use a bounded residual fit and retain voice as the reference track.
+    # Reference stems retain the unmastered voice and use a bounded residual fit for the bed.
     bed = stems["music"] + stems["ambience"] + stems["sfx"]
     scale = float(np.sum((final_mix - stems["voice"]) * bed) / (np.sum(bed * bed) + 1e-9))
     scale = float(np.clip(scale, 0.0, 4.0))
     stem_dir = REVIEW / "stems"
     stem_dir.mkdir(parents=True, exist_ok=True)
-    sf.write(stem_dir / "01_voice.wav", stems["voice"], SR)
-    sf.write(stem_dir / "02_music.wav", stems["music"] * scale, SR)
-    sf.write(stem_dir / "03_ambience.wav", stems["ambience"] * scale, SR)
-    sf.write(stem_dir / "04_sfx.wav", stems["sfx"] * scale, SR)
+    sf.write(stem_dir / "01_voice.wav", stems["voice"], SR, subtype="PCM_24")
+    sf.write(stem_dir / "02_music.wav", stems["music"] * scale, SR, subtype="PCM_24")
+    sf.write(stem_dir / "03_ambience.wav", stems["ambience"] * scale, SR, subtype="PCM_24")
+    sf.write(stem_dir / "04_sfx.wav", stems["sfx"] * scale, SR, subtype="PCM_24")
     reconstruction = stems["voice"] + scale * bed
     save_json(REVIEW / "stem_diagnostics.json", {
         "bed_scale": scale,
@@ -316,8 +368,8 @@ def mux_and_qc(final_aac: Path):
         "-c:v", "copy", "-c:a", "copy", "-t", f"{DURATION:.3f}", "-movflags", "+faststart", OUT
     ])
     probe = json.loads(subprocess.check_output([
-        "ffprobe", "-v", "error", "-show_entries",
-        "format=duration,size:stream=index,codec_name,codec_type,width,height,r_frame_rate,nb_frames,sample_rate,channels",
+        "ffprobe", "-v", "error", "-count_frames", "-show_entries",
+        "format=duration,size:stream=index,codec_name,codec_type,width,height,r_frame_rate,nb_frames,nb_read_frames,sample_rate,channels",
         "-of", "json", str(OUT)
     ]))
     decoded_path = WORK / "delivered_audio.wav"
@@ -330,7 +382,7 @@ def mux_and_qc(final_aac: Path):
     video = next(s for s in probe["streams"] if s["codec_type"] == "video")
     audio = next(s for s in probe["streams"] if s["codec_type"] == "audio")
     duration = float(probe["format"]["duration"])
-    frames = int(video.get("nb_frames", 0))
+    frames = int(video.get("nb_read_frames") or video.get("nb_frames") or 0)
     checks = {
         "duration_35s": abs(duration - DURATION) <= 0.05,
         "frames_1050": frames == SPEC["frame_count"],
