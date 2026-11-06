@@ -1,7 +1,7 @@
 # Extinct Life — V5 production blueprint
 ## Pehle structure. Phir aapki approval. Uske baad production.
 
-**Status: OWNER APPROVED DEVELOPMENT on 2026-11-06.** Original style/asset work and the motion-development proof have started. Full-film production remains behind the agreed quality gates. Approval record: [`../film-v5-dev/APPROVAL.json`](../film-v5-dev/APPROVAL.json). The proposal below records what was approved; it is not a renewed request to approve the structure.
+**Current status: story/task structure retained; the V5 image/flat-graphics execution was subsequently REJECTED by the owner.** The correction is to enhance V4's continuous animated 3D—not replace it with slides. [Rejection/corrected direction](../film-v5-dev/OWNER-REJECTION.md); [active moving-3D work](../film-v6-motion/README.md). The historical proposal below is not blanket visual approval and not a renewed request to approve the structure.
 
 Bhai, V4 ka flow aapko theek laga, lekin usmein visual ideas kam thay. Yeh plan usi problem ko solve karta hai: **naya angle ≠ naya visual; smoother camera ≠ richer storytelling.** Aur sirf zyada text/PNGs chipka dena bhi solution nahi.
 

@@ -1,6 +1,6 @@
 # V5 — first production checkpoint
 
-**Owner approved the staged V5 direction on 2026-11-06. This is development output, not the finished 7:19 film and not a claim of cinema-quality completion.**
+**OWNER REJECTED this image/flat-graphics implementation.** This folder and its release are historical audit material, not an approved creative direction. [Owner correction](OWNER-REJECTION.md). Active corrected moving-3D work is in [film-v6-motion](../film-v6-motion/README.md). The old staged story approval did not authorize replacing the existing 3D film with slides.
 
 ## Actual work produced
 
