@@ -4,6 +4,8 @@ The owner rejected the V5 image/flat-presentation direction. This work returns t
 
 ## Latest enhancement
 
+[Revision 3: soft material sound and surface detail](REVISION-3.md) replaces the shared tonal contact recipe with material-specific gentle textures, smoother narration-aware gain, conservative spectral/headroom checks and added shoreline/surface detail. This is an ASMR-inspired design intention, not a verified listening/comfort certificate.
+
 The owner found the first moving-3D revision better and asked for further enhancement. [Action-depth revision 2](REVISION-2.md) documents the new leaf/current journey, visible transport markers, accumulating section, deposit-age bracket and continuous character/leaf contact details. This is added source animation, not extra cuts or a style-frame package.
 
 ## What is being built here
@@ -48,6 +50,7 @@ This remains stylized V4-based CGI. **Neither its 3D implementation nor its tech
 npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
 python -m venv .venv
 .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+.venv/bin/python production/extinct-life/film-v6-motion/check_sound.py -v
 python production/extinct-life/film-v6-motion/prepare.py
 node production/extinct-life/film-v6-motion/motion.test.mjs
 node production/extinct-life/film-v6-motion/action.test.mjs

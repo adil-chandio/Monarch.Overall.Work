@@ -30,40 +30,32 @@ if not mp3.exists():
  with urllib.request.urlopen(req,timeout=90) as r,mp3.open('wb') as f:
   data=r.read(35*1024*1024+1);assert len(data)<=35*1024*1024,'Unexpectedly large music response';f.write(data)
 score=pcm(mp3,2)[:N];assert len(score)==N,'Track shorter than excerpt; no unapproved looping'
-# Smooth dialogue envelope and understated scored bed; recorded/composed track, not the old tone loop.
-power=np.pad(v.astype(np.float64)**2,(2400,2399));cum=np.concatenate(([0.],np.cumsum(power)));env=np.sqrt(np.maximum(0,(cum[4800:]-cum[:-4800])/4800)).astype(np.float32);duck=1-.42*np.clip(env/.1,0,1)
-t=np.arange(N,dtype=np.float32)/SR;fade=np.minimum(1,t/1.5)*np.minimum(1,(D-t)/2);score*=.14*duck[:,None]*fade[:,None]
-rng=np.random.default_rng(160619);foley=np.zeros((N,2),np.float32)
-def contact(at,amp=.1,duration=.2,pan=0):
- i=round(at*SR);n=min(round(duration*SR),N-i)
- if n<=0 or i<0:return
- tt=np.arange(n)/SR;noise=rng.normal(0,1,n);grain=np.convolve(noise,np.ones(21)/21,mode='same');s=(grain*.7+.3*np.sin(2*np.pi*72*tt))*np.exp(-tt*22)*amp;foley[i:i+n,0]+=s*(1-pan);foley[i:i+n,1]+=s*(1+pan)
-# Continuous low-level water texture across transport/living scenes, with no sentence resets.
-for channel in range(2):
- z=rng.normal(0,1,N);bed=np.convolve(z,np.ones(101)/101,mode='same').astype(np.float32);bed*=.024*(.8+.2*np.sin(t*.4+channel))
- foley[:,channel]+=bed*fade
-living=m['segments'][2]['start_frame']/30
-for phase in [0,.25,.5,.75]:
- for cycle in range(1,8):
-  at=(cycle-phase)*3.7
-  if at<D-living:contact(living+at,.15,.22,.06 if phase>.4 else -.06)
-for offset in [5.55,5.78,6.0]:contact(living+offset,.12,.3,-.1)
-contact(cues['river_leaf_land'],.085,.32,-.08)
-for batch in cues['deposition_cohort_starts']:
- for j in range(10):contact(m['segments'][1]['start_frame']/30+batch+.9+j*.035,.025,.10,(j%3-1)*.1)
-# Two detached leaves: a soft, non-tonal rustle and a much quieter ground contact.
-i=round((living+cues['branch_leaf_release'])*SR);n=min(round(1.6*SR),N-i);tt=np.arange(n)/SR
-rustle=rng.normal(0,1,n);rustle=np.convolve(rustle,np.ones(5)/5,mode='same');rustle*=.018*np.sin(np.pi*tt/1.6)**2
-foley[i:i+n,0]+=rustle;foley[i:i+n,1]+=rustle*.85
-contact(living+cues['branch_leaf_land'],.012,.12,-.08)
-# Wing texture follows the same 10 rad/s wing cycle as the 3D pose and attenuates on departure.
-flight=np.maximum(0,t-living-5.55);wing=(t>living+5.55)*np.maximum(0,np.sin(t*10))**8*np.exp(-flight/6)
-for channel in range(2):
- noise=rng.normal(0,1,N);filtered=np.convolve(noise,np.ones(13)/13,mode='same');foley[:,channel]+=(filtered*wing*.035).astype(np.float32)
-mix=v[:,None]+score+foley;wav(C/'score-excerpt.wav',score);wav(C/'foley.wav',foley);wav(C/'mix.wav',mix)
+# Separate material textures and slow, narration-aware gain controls; no hard tone contacts.
+sys.path.insert(0,str(B))
+from sound import design,audit,smooth,REVISION
+foley,env,sound_report=design(v,m,cues)
+wav(C/'foley-unfiltered.wav',foley)
+run(['-i',C/'foley-unfiltered.wav','-af','highpass=f=70,lowpass=f=4200,equalizer=f=3200:t=q:w=0.7:g=-3',C/'foley-shaped.wav'])
+foley=pcm(C/'foley-shaped.wav',2)[:N];assert len(foley)==N
+edge=480;edgefade=smooth(np.linspace(0,1,edge));foley[:edge]*=edgefade[:,None];foley[-edge:]*=edgefade[::-1,None]
+pre=audit(foley,v);gain=1.
+if pre['voiced_region_foley_relative_db'] is not None and pre['voiced_region_foley_relative_db'] < -30:
+ gain=min(8.,10**((-28-pre['voiced_region_foley_relative_db'])/20),.08/max(1e-9,float(np.max(np.abs(foley)))))
+foley*=gain;sound_report['bus_gain']=gain;sound_report['measured']=audit(foley,v)
+check=sound_report['measured'];assert check['peak_dbfs']<=-18,check;assert check['maximum_sample_step']<.01,check;assert check['energy_fraction_above_6khz']<.001,check;assert check['endpoints_zero'],check
+if check['voiced_region_foley_relative_db'] is not None:assert check['voiced_region_foley_relative_db']<=-16,check
+# Gently shape the score's dialogue region, retaining the attributed composed recording.
+wav(C/'score-source.wav',score)
+run(['-i',C/'score-source.wav','-af','highpass=f=40,lowpass=f=14500,equalizer=f=2500:t=q:w=0.8:g=-1.5',C/'score-shaped.wav'])
+score=pcm(C/'score-shaped.wav',2)[:N];assert len(score)==N
+t=np.arange(N,dtype=np.float32)/SR;fade=smooth(t/1.5)*smooth((D-t)/2)
+score*=.14*(1-.45*smooth(env/.065))[:,None]*fade[:,None]
+mix=v[:,None]+score+foley;premaster_peak=float(np.max(np.abs(mix)));premaster_gain=min(1.,.95/max(1e-12,premaster_peak));mix*=premaster_gain;sound_report['premaster_peak_before_safety']=premaster_peak;sound_report['premaster_safety_gain']=premaster_gain
+(B/'SOUND-QC.json').write_text(json.dumps(sound_report,indent=2)+'\n')
+wav(C/'score-excerpt.wav',score);wav(C/'foley.wav',foley);wav(C/'mix.wav',mix)
 def levels(p):
- q=run(['-i',p,'-vn','-af','loudnorm=I=-16:TP=-1.8:LRA=9:print_format=json','-f','null','-']);return json.loads(q.stderr[q.stderr.rfind('{'):q.stderr.rfind('}')+1])
-a=levels(C/'mix.wav');norm='loudnorm=I=-16:TP=-1.8:LRA=9:linear=true:'+':'.join(f'{k}={a[v]}' for k,v in [('measured_I','input_i'),('measured_TP','input_tp'),('measured_LRA','input_lra'),('measured_thresh','input_thresh'),('offset','target_offset')]);norm+=',aresample=192000,alimiter=limit=0.70:level=false:attack=5:release=80:latency=1,aresample=48000'
+ q=run(['-i',p,'-vn','-af','loudnorm=I=-16:TP=-2.5:LRA=9:print_format=json','-f','null','-']);return json.loads(q.stderr[q.stderr.rfind('{'):q.stderr.rfind('}')+1])
+a=levels(C/'mix.wav');norm='loudnorm=I=-16:TP=-2.5:LRA=9:linear=true:'+':'.join(f'{k}={a[v]}' for k,v in [('measured_I','input_i'),('measured_TP','input_tp'),('measured_LRA','input_lra'),('measured_thresh','input_thresh'),('offset','target_offset')]);norm+=',aresample=192000,alimiter=limit=0.70:level=false:attack=5:release=80:latency=1,aresample=48000'
 run(['-i',C/'mix.wav','-af',norm,C/'proof.wav'])
 (B/'CREDITS.md').write_text("# Music attribution\n\n"+lic['required_credit']+'\n\n'+lic['official_track_page']+'\n\nLicence: '+lic['license_url']+'\n\n'+lic['modifications']+'.\n\nIf published on YouTube, this credit must be included in the video description. This delivery is on GitHub only. Foley is original synthesized sound design, not claimed as recorded field sound.\n')
 if '--audio-only' in sys.argv:print('Attributed composed-track candidate and existing voice prepared; no listening approval claimed');sys.exit(0)
@@ -73,5 +65,5 @@ assert cursor==m['total_frames'],(cursor,m['total_frames']);lst=C/'concat.txt';l
 run(['-f','concat','-safe','0','-i',lst,'-i',C/'proof.wav','-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','256k','-ar',SR,'-metadata','comment='+lic['required_credit']+' | '+lic['license_url'],'-t',f'{D:.9f}','-movflags','+faststart',out])
 encoded=levels(out);assert abs(float(encoded['input_i'])+16)<1.1,encoded;assert float(encoded['input_tp'])<=-1.5,encoded
 q=run(['-i',out,'-map','0:v:0','-progress','pipe:1','-nostats','-f','null','-']);decoded=int(re.findall(r'^frame=(\d+)',q.stdout,re.M)[-1]);assert decoded==m['total_frames'];assert '1920x1080' in q.stderr
-report={'status':'Selected actual-3D development excerpt, not the full film','width':1920,'height':1080,'fps':30,'native_frames':decoded,'duration_seconds':D,'script_sha256':m['script_sha256'],'voice_speed_changed':False,'new_voice_generated':False,'generated_scene_images_used':False,'old_rendered_movie_used':False,'v4_geometry_and_style_baseline_reused':True,'action_revision':cues['revision'],'new_motion':['visible leaf current tracer with surface landing rings','stream-following visible markers and spatially dispersed settlement','five visibly accumulating sediment bands with exposed marker cohorts','deposit-age bracket attached to whole section','subtle head orientation and detached leaves after branch contact','stance-phase foot locking','leg joint continuity','articulated goose neck/head flight posture and retracted feet','one-way takeoff with surface rings','geometric branch contact','source-to-sample transport','successive deposition batches'],'composed_music':lic,'music_download_sha256':hashlib.sha256(mp3.read_bytes()).hexdigest(),'foley':'Original synthesized contacts/water/wing details; not recorded field audio','encoded_audio':encoded,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'bytes':out.stat().st_size,'full_decode':True,'full_film_complete':False,'human_full_watch_listen_claimed':False,'biological_accuracy_expert_validated':False,'owner_creative_approval':False}
+report={'status':'Selected actual-3D development excerpt, not the full film','width':1920,'height':1080,'fps':30,'native_frames':decoded,'duration_seconds':D,'script_sha256':m['script_sha256'],'voice_speed_changed':False,'new_voice_generated':False,'generated_scene_images_used':False,'old_rendered_movie_used':False,'v4_geometry_and_style_baseline_reused':True,'action_revision':cues['revision'],'new_motion':['visible leaf current tracer with surface landing rings','stream-following visible markers and spatially dispersed settlement','five visibly accumulating sediment bands with exposed marker cohorts','deposit-age bracket attached to whole section','subtle head orientation and detached leaves after branch contact','stance-phase foot locking','leg joint continuity','articulated goose neck/head flight posture and retracted feet','one-way takeoff with surface rings','geometric branch contact','source-to-sample transport','successive deposition batches'],'composed_music':lic,'music_download_sha256':hashlib.sha256(mp3.read_bytes()).hexdigest(),'visual_refinements':['irregular approximate wave/sky shading','wind-responsive shore reeds with matched depth deformation','fine section-cap grain geometry','environmental marker label fade-out'],'sound_revision':REVISION,'sound_audit':sound_report['measured'],'foley':'Soft material-specific non-tonal synthesized sound design; not recorded field audio or verified binaural ASMR','encoded_audio':encoded,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'bytes':out.stat().st_size,'full_decode':True,'full_film_complete':False,'human_full_watch_listen_claimed':False,'biological_accuracy_expert_validated':False,'owner_creative_approval':False}
 (B/'QC.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
