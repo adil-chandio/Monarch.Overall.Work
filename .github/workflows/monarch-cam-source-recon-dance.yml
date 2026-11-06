@@ -1,6 +1,11 @@
 name: Monarch Cam — source review for new albatross-dance Short
 
 on:
+  push:
+    branches:
+      - arena/c678cc81-monarch-overall-work
+    paths:
+      - 'production/monarch-cam/short_dance/SOURCE_RECON_TRIGGER.md'
   workflow_dispatch:
 
 permissions:
