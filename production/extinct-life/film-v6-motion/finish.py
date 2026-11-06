@@ -22,6 +22,9 @@ v=np.concatenate(voice);assert len(v)==N
 wav(C/'voice.wav',v)
 if '--voice-only' in sys.argv:wav(C/'proof.wav',v);print('Voice-only live review audio, not final mix');sys.exit(0)
 mp3=C/'sb_hiraeth.mp3'
+# Multi-root artifact upload preserves .cache/ paths; reuse the officially downloaded source.
+nested=C/'.cache/extinct-v6/sb_hiraeth.mp3'
+if not mp3.exists() and nested.exists():mp3.write_bytes(nested.read_bytes())
 if not mp3.exists():
  req=urllib.request.Request(lic['official_download'],headers={'User-Agent':'Monarch documentary production / attributed CC-BY use'})
  with urllib.request.urlopen(req,timeout=90) as r,mp3.open('wb') as f:
@@ -61,7 +64,7 @@ if '--audio-only' in sys.argv:print('Attributed composed-track candidate and exi
 reports=sorted([json.loads(p.read_text()) for p in C.glob('render-*.json')],key=lambda r:r['from']);cursor=0;parts=[]
 for r in reports:assert r['from']==cursor and not r['page_errors'];cursor=r['to'];parts.append(C/f'part-{r["from"]}-{r["to"]}.mp4')
 assert cursor==m['total_frames'],(cursor,m['total_frames']);lst=C/'concat.txt';lst.write_text(''.join("file '"+str(p)+"'\n" for p in parts));out=C/'Extinct_Life_V6_Actual_3D_Motion_Development.mp4'
-run(['-f','concat','-safe','0','-i',lst,'-i',C/'proof.wav','-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','256k','-ar',SR,'-metadata','comment',lic['required_credit']+' | '+lic['license_url'],'-t',f'{D:.9f}','-movflags','+faststart',out])
+run(['-f','concat','-safe','0','-i',lst,'-i',C/'proof.wav','-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','256k','-ar',SR,'-metadata','comment='+lic['required_credit']+' | '+lic['license_url'],'-t',f'{D:.9f}','-movflags','+faststart',out])
 encoded=levels(out);assert abs(float(encoded['input_i'])+16)<1.1,encoded;assert float(encoded['input_tp'])<=-1.5,encoded
 q=run(['-i',out,'-map','0:v:0','-progress','pipe:1','-nostats','-f','null','-']);decoded=int(re.findall(r'^frame=(\d+)',q.stdout,re.M)[-1]);assert decoded==m['total_frames'];assert '1920x1080' in q.stderr
 report={'status':'Selected actual-3D development excerpt, not the full film','width':1920,'height':1080,'fps':30,'native_frames':decoded,'duration_seconds':D,'script_sha256':m['script_sha256'],'voice_speed_changed':False,'new_voice_generated':False,'generated_scene_images_used':False,'old_rendered_movie_used':False,'v4_geometry_and_style_baseline_reused':True,'new_motion':['stance-phase foot locking','leg joint continuity','articulated goose neck/head flight posture and retracted feet','one-way takeoff with surface rings','geometric branch contact','source-to-sample transport','successive deposition batches'],'composed_music':lic,'music_download_sha256':hashlib.sha256(mp3.read_bytes()).hexdigest(),'foley':'Original synthesized contacts/water/wing details; not recorded field audio','encoded_audio':encoded,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'bytes':out.stat().st_size,'full_decode':True,'full_film_complete':False,'human_full_watch_listen_claimed':False,'biological_accuracy_expert_validated':False,'owner_creative_approval':False}
