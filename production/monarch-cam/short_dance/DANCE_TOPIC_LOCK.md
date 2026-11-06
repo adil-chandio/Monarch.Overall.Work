@@ -1,6 +1,6 @@
 # New topic lock — They Don't Flirt. They Choreograph.
 
-**Status:** source visual review pending; previous bear/car Shorts and Sound V2 are untouched.
+**Status:** source visual review pending; previous bear/car Shorts are untouched.
 
 - New subject: **Laysan albatross courtship dance**, Midway Atoll.
 - New picture source: public-domain USFWS clip via Wikimedia Commons, 53 s, 1920×1080.
