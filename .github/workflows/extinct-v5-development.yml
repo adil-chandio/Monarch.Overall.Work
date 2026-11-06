@@ -1,0 +1,56 @@
+name: V5 development checkpoint only — not the full film
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-v5-development.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  checkpoint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ba8d901e-monarch-overall-work
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install -r production/extinct-life/film-v5-dev/requirements.txt
+          test -f /usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf || (sudo apt-get update && sudo apt-get install -y fonts-dejavu-core)
+      - name: Reproduce the approved development excerpt, not 7-minute production
+        run: |
+          python production/extinct-life/film-v5-dev/make_proof.py
+          python production/extinct-life/film-v5-dev/verify_proof.py
+          python -m unittest discover -s tests -p 'test_extinct_v5_plan.py' -q
+      - name: Attach checkpoint media using runner network
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=extinct-life-v5-development-20261106
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --target arena/ba8d901e-monarch-overall-work --prerelease --title 'V5 development checkpoint — six style frames + 60-second graphics proof' --notes 'Development only, not the finished film. Six original style compositions plus a continuous 60.23-second process/graphics excerpt using the existing approved English voice. Scenic concept plates are still images, not animated animals. Score/contact sketches are temporary. Full-film animatic, rigged animal action, final score/foley and listening review remain open. Source/limits: production/extinct-life/film-v5-dev/README.md on the session branch.'
+          fi
+          gh release upload "$TAG" .cache/extinct-v5-development/Extinct_Life_V5_Graphics_Motion_Development.mp4 .cache/extinct-v5-development/Extinct_Life_V5_Six_Style_Frames.zip production/extinct-life/film-v5-dev/English-development.srt production/extinct-life/film-v5-dev/PROOF-QC.json --clobber
+      - name: Record actual released bytes and checksums
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v5-dev');p=b/'DELIVERY.json';d=json.loads(p.read_text())
+          for a in d['assets']:
+              f=(Path('.cache/extinct-v5-development') if a['name'].endswith(('.mp4','.zip')) else b)/a['name']
+              a.update(bytes=f.stat().st_size,sha256=hashlib.sha256(f.read_bytes()).hexdigest())
+          d['delivery_status']='uploaded by successful Actions checkpoint job'
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name 'Monarch production checkpoint'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v5-dev
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record released V5 development checkpoint provenance [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
