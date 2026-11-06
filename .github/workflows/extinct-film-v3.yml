@@ -1,0 +1,97 @@
+name: Extinct Life v3 — full English production candidate
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: extinct-film-v3-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  pictures:
+    name: Native 1080p — chapter ${{ matrix.chapter }} half ${{ matrix.half }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        chapter: [0, 1, 2, 3, 4, 5, 6, 7]
+        half: [0, 1]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned renderer runtime
+        run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.6.0 numpy==2.2.6
+      - name: Check exact script, fresh speech hashes and full authored coverage
+        run: .venv/bin/python -m unittest discover -s production/extinct-life/film-v3 -p test_film.py
+      - name: Check native scene frames and deterministic seek
+        if: matrix.half == 0
+        run: node production/extinct-life/film-v3/render.mjs --chapter=${{ matrix.chapter }} --stills
+      - name: Render actual continuous 3D action, not frame interpolation
+        env:
+          CHAPTER: ${{ matrix.chapter }}
+          HALF: ${{ matrix.half }}
+        run: |
+          BOUNDS=$(.venv/bin/python -c 'import json,os; c=json.load(open("production/extinct-life/film-v3/manifest.json"))["chapters"][int(os.environ["CHAPTER"])]; h=int(os.environ["HALF"]); print("--from="+str(c["frames"]*h//2)+" --to="+str(c["frames"]*(h+1)//2))')
+          node production/extinct-life/film-v3/render.mjs --chapter=$CHAPTER $BOUNDS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: picture-${{ matrix.chapter }}-${{ matrix.half }}
+          path: .cache/extinct-v3/ch*/
+          include-hidden-files: true
+          retention-days: 30
+  assemble:
+    name: Natural English voice, original score, encode and technical QC
+    needs: pictures
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.6.0 numpy==2.2.6
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: picture-*
+          path: .cache/pictures
+      - name: Collect exactly sixteen non-overlapping continuous frame ranges
+        run: |
+          python - <<'PY'
+          import json,shutil
+          from pathlib import Path
+          source=Path('.cache/pictures');dest=Path('.cache/extinct-v3')
+          for report in source.rglob('render-*.json'):
+              data=json.loads(report.read_text());chapter=int(data['chapter'][1:])-1
+              target=dest/f'ch{chapter:02}';target.mkdir(parents=True,exist_ok=True)
+              shutil.copy2(report,target/report.name)
+              name=f'part-{data["first_frame"]}-{data["last_frame_exclusive"]}.mp4'
+              shutil.copy2(report.parent/name,target/name)
+          PY
+      - name: Assemble full candidate, measure loudness, decode every frame
+        run: .venv/bin/python production/extinct-life/film-v3/finish.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Full-English-1080p-candidate-and-QC
+          path: |
+            deliverables/Extinct_Life_v3_Full_English_1080p.mp4
+            production/extinct-life/film-v3/English-v3.srt
+            production/extinct-life/film-v3/QC.json
+          retention-days: 90
+      - name: Durable GitHub download — explicitly a production candidate, not owner-approved
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-v3-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title "Extinct Life — full English v3 production candidate" --notes "Full-length 1920×1080 / 30 fps rendered candidate. Fresh selected English voice; no voice speed changes. Original procedural score/foley. Illustrative animal stand-ins, laboratory and molecular scenes are not observed study footage or calibrated simulations. Technical QC is attached; it is not a claim of owner creative approval, a human full-length AV review, or premium/photoreal quality. No YouTube upload." deliverables/Extinct_Life_v3_Full_English_1080p.mp4 production/extinct-life/film-v3/English-v3.srt production/extinct-life/film-v3/QC.json
+          echo "Download: https://github.com/${GITHUB_REPOSITORY}/releases/tag/$TAG" >> "$GITHUB_STEP_SUMMARY"
