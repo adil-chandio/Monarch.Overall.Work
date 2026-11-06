@@ -1,10 +1,21 @@
-# Script-first rebuild — v2 review packet
+# Script-first rebuild — latest text draft v3
+
+## Latest script
+
+- [English master v3](ENGLISH-MASTER-v3.md): new original 1,048-word narration informed by the expanded actual-script studies.
+- [Paired owner review v3](OWNER-REVIEW-v3.md): the same story in English and easy Urdu-English, including the scientific limits.
+- [Science/change ledger v3](SCIENCE-LEDGER-v3.md): source continuity, metaphors and what changed.
+- Canonical paired data: `master-v3.json`; regenerate with `python production/extinct-life/script-lab/build_v3.py`.
+- Reading-rate estimate: **6:33–7:29 at 160–140 wpm**, before pauses; **not measured audio**. Urdu duration remains unknown until fresh recording.
+- V3 is text only. No fresh VO/render, retention guarantee, or independent listener/bilingual verification is claimed. V2 remains preserved below as a previous draft, not the latest narration.
+
+## Previous v2 review packet
 
 The approved 24-second moving 3D style is unchanged. Rendering remains on hold; the old audio/timeline does not narrate the revised master.
 
 ## Expanded research follow-up
 
-[Expanded script forensics](../../../docs/research/extinct-script-forensics/expanded/REPORT.md) adds 19 individually decoded actual-text cases (17 complete, two partial), including seven complete contemporary million-view long-form scripts. [Applied workflow](../../../docs/research/extinct-script-forensics/expanded/APPLIED-WORKFLOW.md) maps the new findings against all eight v2 blocks. This is an edit plan, not a silently substituted v3 master or a new narration/render. The canonical v2 remains unchanged pending the next paired revision.
+[Expanded script forensics](../../../docs/research/extinct-script-forensics/expanded/REPORT.md) adds 19 individually decoded actual-text cases (17 complete, two partial), including seven complete contemporary million-view long-form scripts. [Applied workflow](../../../docs/research/extinct-script-forensics/expanded/APPLIED-WORKFLOW.md) maps the new findings against all eight v2 blocks. That research packet records the edit plan that preceded v3. The paired v3 draft linked above now implements the revision; v2 remains preserved. Neither packet is a new narration or render.
 
 ## Read in this order
 
