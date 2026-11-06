@@ -1,0 +1,145 @@
+# Full approved 438.766667-second film. No recovery/reuse of earlier rendered movies.
+name: Full 7:19 moving-3D English master
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-v7-full.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: extinct-v7-full-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned render/audio dependencies and validate the full master
+        run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+          python production/extinct-life/film-v7-full/prepare.py
+          .venv/bin/python -m unittest discover -s tests -p 'test_extinct_v7_full.py' -v
+          .venv/bin/python production/extinct-life/film-v6-motion/check_sound.py -v
+          node production/extinct-life/film-v6-motion/motion.test.mjs
+          node production/extinct-life/film-v6-motion/action.test.mjs
+      - name: Build full narration-priority mix with two attributed non-repeating composed cues
+        run: .venv/bin/python production/extinct-life/film-v7-full/finish.py --audio-only
+      - name: Inspect all 25 stages, absolute seek, locked-camera subject motion and late encounter framing
+        run: node production/extinct-life/film-v7-full/render.mjs --stills
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v7-master-audio
+          path: .cache/extinct-v7/proof.wav
+          include-hidden-files: true
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v7-audio-qc
+          path: |
+            production/extinct-life/film-v7-full/SOUND-QC.json
+            production/extinct-life/film-v7-full/CREDITS.md
+            production/extinct-life/film-v7-full/MUSIC-LICENSE.json
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v7-native-inspection
+          path: |
+            .cache/extinct-v7/seek-QC.json
+            .cache/extinct-v7/stills/
+          include-hidden-files: true
+          retention-days: 14
+  pictures:
+    needs: preflight
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        part: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+          python production/extinct-life/film-v7-full/prepare.py
+      - name: Render fresh native 1080p frames for the exact non-overlapping master range
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          BOUNDS=$(python -c 'import os,json; n=json.load(open("production/extinct-life/film-v7-full/schedule.json"))["total_frames"]; i=int(os.environ["PART"]); print("--from="+str(n*i//36)+" --to="+str(n*(i+1)//36))')
+          node production/extinct-life/film-v7-full/render.mjs $BOUNDS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v7-native-${{ matrix.part }}
+          path: |
+            .cache/extinct-v7/part-*.mp4
+            .cache/extinct-v7/render-*.json
+          include-hidden-files: true
+          retention-days: 3
+  assemble:
+    needs: [preflight, pictures]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v7-native-*
+          path: .cache/extinct-v7
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: v7-master-audio
+          path: .cache/extinct-v7
+      - uses: actions/download-artifact@v4
+        with:
+          name: v7-audio-qc
+          path: production/extinct-life/film-v7-full
+      - name: Assemble full master; verify every decoded frame and actual encoded audio
+        run: .venv/bin/python production/extinct-life/film-v7-full/finish.py --assemble-only
+      - name: Publish the complete English master, with honest scope and music attribution
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-v7-full-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'Extinct Life — full enhanced English 3D master (7:19)' --notes "Full approved 438.766667-second English master, 1920x1080/30fps; not another 61-second excerpt. All native frames freshly rendered. Moving-3D direction retained; distinct fragment, field-exposure, extraction, reference, clean-hood control, branch-support, reconstruction-boundary, process-gap and incomplete-archive setups. 25 continuous stages, not forced cuts for each of the 58 planning beats. Unchanged approved script/voice speed. Stylized conceptual 3D, not photoreal field footage, actual reads/specimen counts or expert-validated anatomy. Soft material-specific synthesized foley, not field recordings or certified binaural ASMR. Music: 'Hiraeth' and 'Undertow' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Two non-repeating excerpts, crossfade, gentle EQ, fades and narration-priority mixing; no endorsement or claim-free guarantee. Both full credits are in CREDITS.md and movie metadata. Native/sample/signal checks do not imply uninterrupted human watch/listen, ear comfort or owner creative acceptance. No YouTube upload." .cache/extinct-v7/Extinct_Life_V7_Full_Enhanced_English_1080p.mp4 production/extinct-life/film-v7-full/QC.json production/extinct-life/film-v7-full/SOUND-QC.json production/extinct-life/film-v7-full/CREDITS.md production/extinct-life/film-v7-full/English-v7.srt
+      - name: Preserve the real full-master delivery and QC on this session branch
+        run: |
+          cp .cache/extinct-v7/seek-QC.json production/extinct-life/film-v7-full/seek-QC.json
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v7-full');q=json.load(open(b/'QC.json'));tag='extinct-life-v7-full-'+os.environ['GITHUB_RUN_ID'];base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          d={'status':'Full English master rendered; owner creative review pending','release':base+'tag/'+tag,'video':base+'download/'+tag+'/Extinct_Life_V7_Full_Enhanced_English_1080p.mp4','sha256':q['sha256'],'bytes':q['bytes'],'seconds':q['duration_seconds'],'frames':q['native_frames'],'full_film_complete':True,'full_film_creative_acceptance':False}
+          (b/'DELIVERY.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name 'Monarch full native 3D production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v7-full
+          git commit -m 'Record full English 7:19 master delivery and verified QC [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
