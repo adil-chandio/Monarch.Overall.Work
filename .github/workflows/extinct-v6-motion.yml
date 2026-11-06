@@ -1,3 +1,4 @@
+# Action-depth revision 2: fresh native rendering; no reuse of the prior accepted excerpt frames.
 name: V4-based actual 3D motion revision — selected excerpt
 on:
   push:
@@ -32,6 +33,7 @@ jobs:
           .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
           python production/extinct-life/film-v6-motion/prepare.py
           node production/extinct-life/film-v6-motion/motion.test.mjs
+          node production/extinct-life/film-v6-motion/action.test.mjs
       - name: Verify absolute seek and subject motion with a locked camera
         if: matrix.part == 0
         run: node production/extinct-life/film-v6-motion/render.mjs --stills
@@ -96,7 +98,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG="extinct-life-v6-motion-${GITHUB_RUN_ID}"
-          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'V4-based moving 3D revision — 61-second selected development excerpt' --notes "Actual native mesh animation, not generated scene-image slides. Three evolving 3D stages with transport, deposition, foot-contact changes and articulated one-way takeoff. Existing approved English voice; selected excerpts, not the finished 7:19 film. Stylized illustrative assets, NOT photoreal or expert-validated anatomy. Music: 'Hiraeth' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Music excerpted, faded and mixed under narration; no endorsement implied. Foley is original synthesis, not recorded field sound. Technical checks do not establish owner creative approval or human listening. No YouTube upload." .cache/extinct-v6/Extinct_Life_V6_Actual_3D_Motion_Development.mp4 production/extinct-life/film-v6-motion/QC.json production/extinct-life/film-v6-motion/CREDITS.md
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'Moving 3D action-depth revision 2 — selected 61-second excerpt' --notes "Actual native mesh animation, not generated scene-image slides. New action-depth revision: visible leaf advection and landing rings, channel-bound enlarged trace markers, five visibly accumulating sediment bands, exposed marker cohorts, whole-deposit age bracket, subtle head orientation and continuous detached-leaf contact action. Enlarged markers and time accumulation are schematic, not literal ancient footage or calibrated rates. Existing approved English voice; selected excerpts, not the finished 7:19 film. Stylized illustrative assets, NOT photoreal or expert-validated anatomy. Music: 'Hiraeth' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Music excerpted, faded and mixed under narration; no endorsement implied. Foley is original synthesis, not recorded field sound. Technical checks do not establish owner creative approval or human listening. No YouTube upload." .cache/extinct-v6/Extinct_Life_V6_Actual_3D_Motion_Development.mp4 production/extinct-life/film-v6-motion/QC.json production/extinct-life/film-v6-motion/CREDITS.md
           echo "${TAG}" > .cache/extinct-v6/release-tag.txt
       - name: Preserve released QC and provenance on this session branch
         run: |

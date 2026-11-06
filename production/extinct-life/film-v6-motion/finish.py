@@ -7,7 +7,7 @@ import numpy as np
 import imageio_ffmpeg
 B=Path(__file__).resolve().parent;ROOT=B.parents[2];C=ROOT/'.cache/extinct-v6';C.mkdir(parents=True,exist_ok=True);FF=imageio_ffmpeg.get_ffmpeg_exe();SR=48000
 m=json.loads((B/'schedule.json').read_text());N=m['total_frames']*1600;D=m['total_frames']/30
-lic=json.loads((B/'MUSIC-LICENSE.json').read_text())
+lic=json.loads((B/'MUSIC-LICENSE.json').read_text());cues=json.loads((B/'action-cues.json').read_text())
 def run(args):return subprocess.run([FF,'-y','-hide_banner','-loglevel','info',*map(str,args)],capture_output=True,text=True,check=True)
 def wav(p,a):
  with wave.open(str(p),'wb') as w:w.setnchannels(a.shape[1] if a.ndim>1 else 1);w.setsampwidth(2);w.setframerate(SR);w.writeframes((np.clip(a,-.999,.999)*32767).astype('<i2').tobytes())
@@ -48,8 +48,14 @@ for phase in [0,.25,.5,.75]:
   at=(cycle-phase)*3.7
   if at<D-living:contact(living+at,.15,.22,.06 if phase>.4 else -.06)
 for offset in [5.55,5.78,6.0]:contact(living+offset,.12,.3,-.1)
-for batch in [0,2.4,4.8]:
- for j in range(10):contact(m['segments'][1]['start_frame']/30+batch+j*.045,.025,.10,(j%3-1)*.1)
+contact(cues['river_leaf_land'],.085,.32,-.08)
+for batch in cues['deposition_cohort_starts']:
+ for j in range(10):contact(m['segments'][1]['start_frame']/30+batch+.9+j*.035,.025,.10,(j%3-1)*.1)
+# Two detached leaves: a soft, non-tonal rustle and a much quieter ground contact.
+i=round((living+cues['branch_leaf_release'])*SR);n=min(round(1.6*SR),N-i);tt=np.arange(n)/SR
+rustle=rng.normal(0,1,n);rustle=np.convolve(rustle,np.ones(5)/5,mode='same');rustle*=.018*np.sin(np.pi*tt/1.6)**2
+foley[i:i+n,0]+=rustle;foley[i:i+n,1]+=rustle*.85
+contact(living+cues['branch_leaf_land'],.012,.12,-.08)
 # Wing texture follows the same 10 rad/s wing cycle as the 3D pose and attenuates on departure.
 flight=np.maximum(0,t-living-5.55);wing=(t>living+5.55)*np.maximum(0,np.sin(t*10))**8*np.exp(-flight/6)
 for channel in range(2):
@@ -67,5 +73,5 @@ assert cursor==m['total_frames'],(cursor,m['total_frames']);lst=C/'concat.txt';l
 run(['-f','concat','-safe','0','-i',lst,'-i',C/'proof.wav','-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','256k','-ar',SR,'-metadata','comment='+lic['required_credit']+' | '+lic['license_url'],'-t',f'{D:.9f}','-movflags','+faststart',out])
 encoded=levels(out);assert abs(float(encoded['input_i'])+16)<1.1,encoded;assert float(encoded['input_tp'])<=-1.5,encoded
 q=run(['-i',out,'-map','0:v:0','-progress','pipe:1','-nostats','-f','null','-']);decoded=int(re.findall(r'^frame=(\d+)',q.stdout,re.M)[-1]);assert decoded==m['total_frames'];assert '1920x1080' in q.stderr
-report={'status':'Selected actual-3D development excerpt, not the full film','width':1920,'height':1080,'fps':30,'native_frames':decoded,'duration_seconds':D,'script_sha256':m['script_sha256'],'voice_speed_changed':False,'new_voice_generated':False,'generated_scene_images_used':False,'old_rendered_movie_used':False,'v4_geometry_and_style_baseline_reused':True,'new_motion':['stance-phase foot locking','leg joint continuity','articulated goose neck/head flight posture and retracted feet','one-way takeoff with surface rings','geometric branch contact','source-to-sample transport','successive deposition batches'],'composed_music':lic,'music_download_sha256':hashlib.sha256(mp3.read_bytes()).hexdigest(),'foley':'Original synthesized contacts/water/wing details; not recorded field audio','encoded_audio':encoded,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'bytes':out.stat().st_size,'full_decode':True,'full_film_complete':False,'human_full_watch_listen_claimed':False,'biological_accuracy_expert_validated':False,'owner_creative_approval':False}
+report={'status':'Selected actual-3D development excerpt, not the full film','width':1920,'height':1080,'fps':30,'native_frames':decoded,'duration_seconds':D,'script_sha256':m['script_sha256'],'voice_speed_changed':False,'new_voice_generated':False,'generated_scene_images_used':False,'old_rendered_movie_used':False,'v4_geometry_and_style_baseline_reused':True,'action_revision':cues['revision'],'new_motion':['visible leaf current tracer with surface landing rings','stream-following visible markers and spatially dispersed settlement','five visibly accumulating sediment bands with exposed marker cohorts','deposit-age bracket attached to whole section','subtle head orientation and detached leaves after branch contact','stance-phase foot locking','leg joint continuity','articulated goose neck/head flight posture and retracted feet','one-way takeoff with surface rings','geometric branch contact','source-to-sample transport','successive deposition batches'],'composed_music':lic,'music_download_sha256':hashlib.sha256(mp3.read_bytes()).hexdigest(),'foley':'Original synthesized contacts/water/wing details; not recorded field audio','encoded_audio':encoded,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'bytes':out.stat().st_size,'full_decode':True,'full_film_complete':False,'human_full_watch_listen_claimed':False,'biological_accuracy_expert_validated':False,'owner_creative_approval':False}
 (B/'QC.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

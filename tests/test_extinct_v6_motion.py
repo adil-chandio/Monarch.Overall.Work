@@ -49,6 +49,17 @@ class Moving3DRevisionTests(unittest.TestCase):
             self.assertNotIn('living-world-designed', text)
         self.assertIn('new T.Scene', (BASE / 'worlds.mjs').read_text())
 
+    def test_moving_instances_do_not_use_stale_first_frame_bounds(self):
+        self.assertIn('particles.frustumCulled=false', (BASE / 'worlds.mjs').read_text())
+
+    def test_sound_and_animation_share_action_event_cues(self):
+        cues = json.loads((BASE / 'action-cues.json').read_text())
+        self.assertEqual(cues['revision'], 'action-depth-2')
+        self.assertLess(cues['river_leaf_land'], cues['river_leaf_arrive'])
+        self.assertIn('action-cues.json', (BASE / 'finish.py').read_text())
+        self.assertIn('action-cues.json', (BASE / 'action.mjs').read_text())
+        self.assertIn("'comment='+lic['required_credit']", (BASE / 'finish.py').read_text())
+
     def test_composer_primary_source_and_credit_not_silently_substituted(self):
         music = json.loads((BASE / 'MUSIC-LICENSE.json').read_text())
         self.assertEqual(music['track'], 'Hiraeth')

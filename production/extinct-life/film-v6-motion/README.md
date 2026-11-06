@@ -2,6 +2,10 @@
 
 The owner rejected the V5 image/flat-presentation direction. This work returns to the owner-accepted V4 **moving 3D foundation**, rather than animating or panning the rejected concept images.
 
+## Latest enhancement
+
+The owner found the first moving-3D revision better and asked for further enhancement. [Action-depth revision 2](REVISION-2.md) documents the new leaf/current journey, visible transport markers, accumulating section, deposit-age bracket and continuous character/leaf contact details. This is added source animation, not extra cuts or a style-frame package.
+
 ## What is being built here
 
 A **60.97-second selected 3D development excerpt**, not the finished 7:19 film. Three evolving spatial stages cover representative transport, time-averaged deposition and the explicitly imagined living-world encounter. Original approved voice-02 excerpts are used without speed change or a rewritten script.
@@ -46,6 +50,7 @@ python -m venv .venv
 .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
 python production/extinct-life/film-v6-motion/prepare.py
 node production/extinct-life/film-v6-motion/motion.test.mjs
+node production/extinct-life/film-v6-motion/action.test.mjs
 node production/extinct-life/film-v6-motion/render.mjs --stills
 # Ranges must partition schedule.json total_frames. Render and then finish:
 node production/extinct-life/film-v6-motion/render.mjs --from=0 --to=1829

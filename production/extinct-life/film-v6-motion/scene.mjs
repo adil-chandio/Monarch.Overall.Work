@@ -7,12 +7,17 @@ const camera=new T.PerspectiveCamera(39,W/H,.025,180),schedule=await fetch('/sch
 await Promise.all([document.fonts.load('24px AtlasSans'),document.fonts.load('42px AtlasSerif')]);await document.fonts.ready;
 function line(text,x,y,size=24,color='#e9dfc6'){ctx.font=`${size}px AtlasSans`;ctx.fillStyle=color;ctx.shadowBlur=10;ctx.shadowColor='rgba(8,20,22,.8)';ctx.fillText(text,x,y);ctx.shadowBlur=0;}
 function layer(segment,f,opacity,blur){const age=(f-segment.start_frame)/30,w=worlds[segment.world];w.update(age);const pose=w.camera(window.__freezeCamera?0:age);camera.position.set(...pose.position);camera.lookAt(new T.Vector3(...pose.target));camera.updateMatrixWorld();renderer.render(w.scene,camera);ctx.globalAlpha=opacity;ctx.filter=blur?`blur(${blur}px)`:'none';ctx.drawImage(renderer.domElement,0,0,W,H);ctx.filter='none';ctx.globalAlpha=1;return {w,pose,age};}
-function tag(label){const v=new T.Vector3(...label.point).project(camera),x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H;if(v.z>1||v.z<-1)return;const xx=Math.max(105,Math.min(W-570,x+30)),yy=Math.max(215,Math.min(H-170,y-45));ctx.strokeStyle='#c9aa70';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(xx-12,yy+8);ctx.stroke();ctx.fillStyle='#dec397';ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fill();line(label.text,xx,yy,25);}
+function tag(label){
+ const v=new T.Vector3(...label.point).project(camera),x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H;if(v.z>1||v.z<-1||x<45||x>W-45||y<110||y>H-120)return;
+ ctx.save();ctx.globalAlpha=label.opacity??1;ctx.font='25px AtlasSans';const width=ctx.measureText(label.text).width,right=x+width+60<W-70;
+ const xx=Math.max(78,Math.min(W-width-78,right?x+32:x-width-32)),yy=Math.max(165,Math.min(H-170,y-45));
+ ctx.strokeStyle='#c9aa70';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(right?xx-12:xx+width+12,yy+8);ctx.stroke();ctx.fillStyle='#dec397';ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fill();line(label.text,xx,yy,25);ctx.restore();
+}
 function draw(frame){
  frame=Math.max(0,Math.min(schedule.total_frames-1,Math.round(frame)));const index=schedule.segments.findIndex(s=>frame>=s.start_frame&&frame<s.end_frame),s=schedule.segments[index],elapsed=frame-s.start_frame,blend=index>0&&elapsed<45,alpha=blend?smooth(elapsed/45):1,blur=blend?12*Math.sin(Math.PI*elapsed/45)**2:0;
  if(blend)layer(schedule.segments[index-1],frame,1,blur);
  const state=layer(s,frame,alpha,blur),v=ctx.createRadialGradient(W*.5,H*.45,H*.15,W*.5,H*.5,W*.7);v.addColorStop(0,'rgba(5,17,23,0)');v.addColorStop(1,'rgba(4,15,18,.22)');ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
- line('EXTINCT LIFE',78,70,22);ctx.fillStyle='#b79a64';ctx.fillRect(78,84,44,2);line('MOVING 3D · DEVELOPMENT',W-448,70,19,'#d2d8cc');
+ line('EXTINCT LIFE',78,70,22);ctx.fillStyle='#b79a64';ctx.fillRect(78,84,44,2);line('MOVING 3D · ACTION REVISION',W-448,70,19,'#d2d8cc');
  if(!blend||alpha>.75)state.w.labels(state.age).forEach(tag);
  line(state.w.qualifier,78,1017,23,'#d3d8cd');if(frame>schedule.total_frames-150)line('MUSIC: HIRAETH — SCOTT BUCKLEY · CC-BY 4.0 · scottbuckley.com.au',78,974,21,'#ded5bd');
  window.__state={frame,world:s.world,sequence:s.id,age:state.age,camera:state.pose,actual_mesh_scene:true,generated_scene_images_used:false,old_movie_used:false,...state.w.state};
