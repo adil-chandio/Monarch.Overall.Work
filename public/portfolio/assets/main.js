@@ -36,6 +36,7 @@ function endIntro() {
     splash.classList.remove('closing');
     unlockScroll();
     sessionStorage.setItem(KEY, '1');
+    window.dispatchEvent(new Event('monarch:intro-done'));
   }, reduced ? 0 : 480);
 }
 function playSplash() {
@@ -53,6 +54,7 @@ function boot() {
     gate.classList.add('hidden');
     splash.classList.add('hidden', 'done');
     unlockScroll();
+    window.dispatchEvent(new Event('monarch:intro-done'));
   } else {
     requestAnimationFrame(() => {
       gate.querySelector('.gate-name').classList.add('in');

@@ -15,6 +15,26 @@ and transcode the original reference audio to AAC-LC. 06 is the BTS-free crop; 0
 and were not overwritten. Full-frame posters and player sizing retain the different
 aspect ratios; the phone layout has a swipeable carousel.
 
+## MONARCH visual rebuild
+
+The portfolio now has an independent, reference-inspired multi-cursor visual rebuild.
+It plays once per browser session after the existing intro is completed or skipped;
+visitors can replay it with **REBUILD** in the navigation. It is a staged presentation
+of the existing page, not real agents or live coding. The desktop tour uses 24
+color-coded cursors (12 on mobile), temporary selection frames, a progress control and
+auto-scroll. Pause/resume, 1×/2×/3× speed, skip, replay and go-live are supported.
+Wheel, touch, page clicks or Escape return control; reduced-motion users are not
+shown the animation. No reference sound or original animation-engine code is used;
+there is no rebuild-specific soundtrack. The effect is an interpretation, not a
+pixel-identical copy. Intro and film cards are unchanged.
+
+Implementation: `public/portfolio/assets/rebuild.js` and `rebuild.css`. The intro
+flow emits `monarch:intro-done`; the effect removes temporary UI and restores page
+content when it completes, is interrupted, or encounters an animation error. The
+reference's Swarm Rebuild project credits Joel Califa and states that its code has no
+license; consult the original authors before reusing it. This implementation does not
+include that code. Reference: https://github.com/DhvanilPatel/swarm-cursors
+
 ## Review locally
 
 ```sh
@@ -46,3 +66,9 @@ and player metadata loads for the new portfolio, both retained films and the new
 showcase clips. HTTP range requests return 206. Video 06 has 720×964 cropped footage;
 video 07 has 1080×1920 footage. Sample frame posters were extracted from the actual
 videos. The original website in the separate repository has not been changed.
+
+The rebuild was exercised in desktop (1440×900) and mobile (390×844) Chromium:
+first-visit intro/skip, once-per-session auto-start, full accelerated tours,
+pause/resume, speed, skip, Escape, final controls, replay, reduced motion, cleanup,
+and retained Paanch Rules player. The tour visits all sections, leaves no hidden
+items and preserves all ten work cards.
