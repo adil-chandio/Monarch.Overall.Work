@@ -1,6 +1,6 @@
 # Full 7:18.77 storyboard — approval only
 
-**58 designed information/action beats, NOT 58 forced cuts. No film render is authorized yet.**
+**58 designed information/action beats, NOT 58 forced cuts. Owner approved development; full-film production remains behind asset/animatic quality gates.**
 
 English script and selected natural narration remain unchanged. Timings come from the existing estimated alignment, not a new verified listen-through. Text and sound below are proposed design, not claimed observations from competitor videos.
 

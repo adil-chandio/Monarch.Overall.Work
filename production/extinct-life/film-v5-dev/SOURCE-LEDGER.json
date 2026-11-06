@@ -1,0 +1,75 @@
+{
+  "assets": [
+    {
+      "file": "style/01-living-world.png",
+      "origin": "AI-generated original concept asset via image generation tool in this session",
+      "external_reference_images": false,
+      "source_pixel_size": [
+        1376,
+        768
+      ],
+      "sha256": "59b1268ef7ff364ad8ed1fbc232f9cc057df40e9fba5f887153a4d51ca1a7772",
+      "limitations": "Illustrative concept, not observed scientific footage, recovered exact appearance or a rigged/moving character; service terms apply; no exclusivity claim"
+    },
+    {
+      "file": "style/05-community.png",
+      "origin": "AI-generated original concept asset via image generation tool in this session",
+      "external_reference_images": false,
+      "source_pixel_size": [
+        1376,
+        768
+      ],
+      "sha256": "e001ed013b64d3e2959bb484af295038282e2102723b3c6344f9d5c05bf015a1",
+      "limitations": "Illustrative concept, not observed scientific footage, recovered exact appearance or a rigged/moving character; service terms apply; no exclusivity claim"
+    },
+    {
+      "file": "style/06-record.png",
+      "origin": "AI-generated original concept asset via image generation tool in this session",
+      "external_reference_images": false,
+      "source_pixel_size": [
+        1376,
+        768
+      ],
+      "sha256": "de682bd67acc0037177a072284e98047128be988cc785c55457c241f087cce35",
+      "limitations": "Illustrative concept, not observed scientific footage, recovered exact appearance or a rigged/moving character; service terms apply; no exclusivity claim"
+    },
+    {
+      "file": "style/mineral-material.png",
+      "origin": "AI-generated original concept asset via image generation tool in this session",
+      "external_reference_images": false,
+      "source_pixel_size": [
+        1376,
+        768
+      ],
+      "sha256": "7a532aa7b7b4ab89f688823076194077b90f6764226b6fa86d8c9b0e64aaa9e5",
+      "limitations": "Illustrative concept, not observed scientific footage, recovered exact appearance or a rigged/moving character; service terms apply; no exclusivity claim"
+    }
+  ],
+  "geography": {
+    "file": "geography.json",
+    "source": "https://api.github.com/repos/nvkelso/natural-earth-vector/contents/geojson/ne_110m_admin_0_countries.geojson",
+    "license": "Natural Earth public domain",
+    "locator": "Approximate formation-area locator, not a survey marker"
+  },
+  "fonts": {
+    "family": "DejaVu Sans / DejaVu Serif, installed system fonts",
+    "license_reference": "https://dejavu-fonts.github.io/License.html"
+  },
+  "motion_graphics": "Original Pillow/NumPy shapes and timelines in make_proof.py",
+  "voice": [
+    {
+      "file": "../film-v3/voice/B03.flac",
+      "sha256": "f5c321307396f7304a822bb2876a67535e2b27f5ba7b963e8786aed9dab2a589",
+      "origin": "Existing owner-approved voice-02 production"
+    },
+    {
+      "file": "../film-v3/voice/B04.flac",
+      "sha256": "12ee43caa54902f1526022e773ed344e15de2a1f5f460387c682af7160727d6f",
+      "origin": "Existing owner-approved voice-02 production"
+    }
+  ],
+  "music_sfx": "Original temporary procedural tone/contact sketches; not licensed final score or recorded foley",
+  "competitor_assets_used": false,
+  "old_film_mp4_used": false,
+  "purchases": []
+}

@@ -1,7 +1,7 @@
 # Extinct Life — V5 production blueprint
 ## Pehle structure. Phir aapki approval. Uske baad production.
 
-**Status: AWAITING OWNER APPROVAL — full-film render OFF.**
+**Status: OWNER APPROVED DEVELOPMENT on 2026-11-06.** Original style/asset work and the motion-development proof have started. Full-film production remains behind the agreed quality gates. Approval record: [`../film-v5-dev/APPROVAL.json`](../film-v5-dev/APPROVAL.json). The proposal below records what was approved; it is not a renewed request to approve the structure.
 
 Bhai, V4 ka flow aapko theek laga, lekin usmein visual ideas kam thay. Yeh plan usi problem ko solve karta hai: **naya angle ≠ naya visual; smoother camera ≠ richer storytelling.** Aur sirf zyada text/PNGs chipka dena bhi solution nahi.
 

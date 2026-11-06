@@ -1,0 +1,42 @@
+{
+  "status": "DEVELOPMENT PROOF, NOT FINAL FILM",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "frames": 1807,
+  "duration_seconds": 60.233333333333334,
+  "source_start_frame": 3514,
+  "source_end_frame": 5321,
+  "voice": "original approved voice-02, no speed change, continuous original excerpt",
+  "original_visual_tasks": [
+    "V5-18",
+    "V5-19",
+    "V5-20",
+    "V5-21",
+    "V5-22",
+    "V5-23",
+    "V5-24",
+    "V5-25",
+    "V5-26"
+  ],
+  "motion": "new authored 2D/2.5D process and comparison animation; not native 3D animal animation",
+  "style_plates": "AI-generated concept images, NOT animated in this proof",
+  "sound": "original temporary score and schematic sound sketches; final licensed score/recorded foley not selected or approved",
+  "full_export_decode": "passed",
+  "human_listen_claimed": false,
+  "anatomy_expert_approval": false,
+  "full_film_rendered": false,
+  "encoded_integrated_lufs": -16.8,
+  "encoded_true_peak_dbfs": -1.8,
+  "encoded_audio_check_passed": true,
+  "decoded_native_frames": 1807,
+  "motion_seek_checks": "four representative tasks nonstatic and deterministic",
+  "visual_inspection": "Six style frames, representative motion states and encoded frames; not full continuous playback",
+  "visual_corrections": [
+    "Reference connectors moved out of label/card paths",
+    "Receiving extraction tube is open; no delivery through a closed cap"
+  ],
+  "first_render_issue": "Initial selected-range boundary lookup failed; guard fixed and complete proof rerendered",
+  "video_sha256": "169bd91ec0ebda4060355e19fb8c4c155be803ce3dc18eaf71575c90d9d053b8",
+  "video_bytes": 7389860
+}

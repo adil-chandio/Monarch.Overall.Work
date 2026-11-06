@@ -12,7 +12,9 @@ class V5ApprovalPlanTests(unittest.TestCase):
         cls.baseline=json.loads((P.parent/'film-v3/manifest.json').read_text())
         cls.rows=cls.plan['beats']
     def test_approval_gate_still_closed(self):
-        self.assertEqual(self.plan['status'],'AWAITING_OWNER_APPROVAL')
+        self.assertEqual(self.plan['status'],'OWNER_APPROVED_FOR_STYLE_AND_ANIMATIC_DEVELOPMENT')
+        self.assertTrue(self.plan['development_render_enabled'])
+        self.assertFalse(self.plan['full_film_render_enabled'])
         self.assertFalse(self.plan['render_enabled'])
         self.assertFalse(self.plan['new_voice_authorized'])
         self.assertFalse(self.plan['competitor_media_reuse_in_film'])
@@ -38,7 +40,7 @@ class V5ApprovalPlanTests(unittest.TestCase):
         for r in self.rows:
             for key in ['new_setup','meaningful_action','proposed_short_text','handoff','designed_sound_not_observed_competitor_audio','timing_status']:
                 self.assertTrue(r[key].strip())
-            self.assertEqual(r['status'],'proposed, not rendered or approved')
+            self.assertEqual(r['status'],'direction approved; production quality not yet accepted')
         # Unique records are administrative coverage, not proof that rendered scenes will look different.
         self.assertEqual(len({r['composition_id'] for r in self.rows}),58)
     def test_long_beats_have_phrase_linked_internal_development(self):
