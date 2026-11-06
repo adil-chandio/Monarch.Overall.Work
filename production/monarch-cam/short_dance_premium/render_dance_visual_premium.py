@@ -144,7 +144,7 @@ def cinema_grade(frame: np.ndarray):
 def add_grain(main: np.ndarray, frame_index: int):
     g = np.roll(GRAIN_TILE, (frame_index % 256, (frame_index * 7) % 256), axis=(0, 1))
     g = cv2.resize(g, (ACTION_W, ACTION_H), interpolation=cv2.INTER_LINEAR)
-    return np.clip(main.astype(np.float32) + g * float(VIS["grain_amplitude"]), 0, 255).astype(np.uint8)
+    return np.clip(main.astype(np.float32) + g[..., None] * float(VIS["grain_amplitude"]), 0, 255).astype(np.uint8)
 
 
 def crop_action(content: np.ndarray, zoom: float, focus: float):
