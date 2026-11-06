@@ -1,4 +1,4 @@
-name: V5 development checkpoint only — not the full film
+name: REJECTED V5 slideshow checkpoint — disabled audit workflow
 on:
   push:
     branches: [arena/ba8d901e-monarch-overall-work]
@@ -8,6 +8,8 @@ permissions:
   contents: write
 jobs:
   checkpoint:
+    # Owner rejected this creative direction; retained for historical reproducibility only.
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
