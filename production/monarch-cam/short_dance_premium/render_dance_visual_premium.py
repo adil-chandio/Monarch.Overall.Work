@@ -121,17 +121,23 @@ def grade(frame: np.ndarray):
 
 
 def cinema_grade(frame: np.ndarray):
-    """Restrained split-tone S-curve plus vignette for the action window."""
+    """Restrained split-tone S-curve plus a shape-aware vignette."""
     x = frame.astype(np.float32) / 255.0
     x = np.clip((x - 0.5) * 1.07 + 0.5, 0.0, 1.0)
-    shadows = np.clip((0.42 - x) / 0.42, 0.0, 1.0)
-    highlights = np.clip((x - 0.62) / 0.38, 0.0, 1.0)
+    luma = x.mean(axis=2)
+    shadows = np.clip((0.42 - luma) / 0.42, 0.0, 1.0)
+    highlights = np.clip((luma - 0.62) / 0.38, 0.0, 1.0)
     # BGR: cool the shadows slightly, warm the highlights slightly.
     x[..., 0] += 0.018 * shadows - 0.010 * highlights
     x[..., 1] += 0.008 * shadows + 0.004 * highlights
     x[..., 2] += 0.006 * shadows + 0.022 * highlights
     x = np.clip(x, 0.0, 1.0)
-    x *= VIGNETTE[..., None]
+    h, w = x.shape[:2]
+    yy, xx = np.ogrid[:h, :w]
+    cx, cy = w / 2.0, h / 2.0
+    r = np.sqrt(((xx - cx) / cx) ** 2 + ((yy - cy) / cy) ** 2) / np.sqrt(2.0)
+    vignette = (1.0 - float(VIS["vignette_strength"]) * np.clip(r, 0.0, 1.0) ** 2).astype(np.float32)
+    x *= vignette[..., None]
     return (np.clip(x, 0.0, 1.0) * 255.0).astype(np.uint8)
 
 
