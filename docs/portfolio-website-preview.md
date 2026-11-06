@@ -28,9 +28,14 @@ shown the animation. No reference sound or original animation-engine code is use
 there is no rebuild-specific soundtrack. The effect is an interpretation, not a
 pixel-identical copy. Intro and film cards are unchanged.
 
-Implementation: `public/portfolio/assets/rebuild.js` and `rebuild.css`. The intro
-flow emits `monarch:intro-done`; the effect removes temporary UI and restores page
-content when it completes, is interrupted, or encounters an animation error. The
+Implementation: `public/portfolio/assets/rebuild.js` and `rebuild.css`. During the
+rebuild, native reveal and scramble animations are suspended; each element waits for
+its assigned cursor to approach, draw its outline, then reveal the element in sync
+with the cursor. The scroll pace gives unfinished work time to complete. Counters
+start after their containing element is revealed. Skip restores the usual reveal
+behavior for sections not yet visited. The intro flow emits `monarch:intro-done`;
+the effect removes temporary UI and restores page content when it completes, is
+interrupted, or encounters an animation error. The
 reference's Swarm Rebuild project credits Joel Califa and states that its code has no
 license; consult the original authors before reusing it. This implementation does not
 include that code. Reference: https://github.com/DhvanilPatel/swarm-cursors
@@ -72,3 +77,19 @@ first-visit intro/skip, once-per-session auto-start, full accelerated tours,
 pause/resume, speed, skip, Escape, final controls, replay, reduced motion, cleanup,
 and retained Paanch Rules player. The tour visits all sections, leaves no hidden
 items and preserves all ten work cards.
+
+### Browser synchronization regression test
+
+The optional integration test requires a separate `puppeteer-core` installation and
+a Chromium executable; it does not add either to the application dependencies.
+It starts the range-aware preview server on a free port. For example:
+
+```sh
+CHROME_PATH=/path/to/chromium \
+PUPPETEER_CORE_PATH=/path/to/node_modules/puppeteer-core \
+node scripts/test-portfolio-rebuild.cjs
+```
+
+The test samples both desktop and mobile tours through all sections, checking that
+waiting/drawing elements remain hidden, reveal masks and cursor positions agree,
+no native reveal escapes the rebuild, and completion clears all temporary state.

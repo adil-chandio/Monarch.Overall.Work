@@ -79,12 +79,13 @@ film.addEventListener('click', endIntro);
 /* ── Scramble + counters + reveals ───────────────────────────── */
 const GLYPHS = '█▓▒░<>/\\|=+*·01';
 function scramble(el) {
-  if (el.dataset.busy) return;
+  if (el.dataset.busy || document.body.classList.contains('monarch-build-active')) return;
   el.dataset.busy = '1';
   const final = el.dataset.txt || (el.dataset.txt = el.textContent);
   let f = 0;
   const total = 16;
   const id = setInterval(() => {
+    if (document.body.classList.contains('monarch-build-active')) { clearInterval(id); el.textContent = final; delete el.dataset.busy; return; }
     f++;
     el.textContent = final.split('').map((ch, i) =>
       (ch === ' ' || i < (f / total) * final.length) ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0]
@@ -104,16 +105,30 @@ function countUp(el) {
   })(t0);
 }
 const ioRv = new IntersectionObserver((es) => es.forEach((e) => {
-  if (!e.isIntersecting) return;
+  if (!e.isIntersecting || document.body.classList.contains('monarch-build-active')) return;
   e.target.classList.add('in');
   if (e.target.hasAttribute('data-scramble') && !reduced) scramble(e.target);
   ioRv.unobserve(e.target);
 }), { threshold: 0.18 });
 $$('[data-rv]').forEach((el) => ioRv.observe(el));
 const ioCt = new IntersectionObserver((es) => es.forEach((e) => {
-  if (e.isIntersecting) { countUp(e.target); ioCt.unobserve(e.target); }
+  if (e.isIntersecting && !document.body.classList.contains('monarch-build-active')) { countUp(e.target); ioCt.unobserve(e.target); }
 }), { threshold: 0.5 });
 $$('[data-count]').forEach((el) => ioCt.observe(el));
+// During the rebuild, counters start only when their owning cursor has completed
+// its reveal. On interruption, visible counters resume their normal behavior.
+window.addEventListener('monarch:rebuild-reveal', (event) => {
+  const el = event.detail.element;
+  if (el.matches('[data-count]')) countUp(el);
+  el.querySelectorAll('[data-count]').forEach(countUp);
+});
+window.addEventListener('monarch:rebuild-end', () => {
+  $$('[data-count]').forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) countUp(el);
+  });
+});
+
 
 /* ── Motion engine: one ticker, lerped writes, batched reads ─── */
 let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my, curOn = false;

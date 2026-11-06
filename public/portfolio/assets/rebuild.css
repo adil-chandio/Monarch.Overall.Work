@@ -1,6 +1,9 @@
 /* MONARCH visual rebuild — an independent, temporary presentation layer. */
 body.monarch-build-active .build-wait { visibility:hidden !important; }
+body.monarch-build-active main * { animation-play-state:paused!important }
 body.monarch-build-active [data-rv],body.monarch-build-active [data-rv] .ch,body.monarch-build-active [data-rv] .wd { opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important }
+/* The cursor drives this mask directly; native reveal transitions cannot race it. */
+body.monarch-build-active .build-drawing { visibility:visible!important;clip-path:inset(0 calc(100% - var(--build-reveal, 0%)) 0 0)!important;transition:none!important }
 body.monarch-build-active #cursor,body.monarch-build-active #cursorRing { opacity:0!important }
 .build-overlay { position:fixed;inset:0;z-index:110;overflow:hidden;pointer-events:none;isolation:isolate; }
 .build-cursor { position:absolute;top:0;left:0;will-change:transform;pointer-events:none;filter:drop-shadow(0 2px 3px #0008) }
