@@ -1,0 +1,1606 @@
+{
+  "status": "AWAITING_OWNER_APPROVAL",
+  "render_enabled": false,
+  "new_voice_authorized": false,
+  "master_sha256": "42e26885947d4cb9447074f9a63f4504ba4cc87906492703e8ee2f87ba5738f6",
+  "duration_seconds": 438.76666666666665,
+  "total_frames": 13163,
+  "fps": 30,
+  "voice": "reuse approved voice-02 without speed change",
+  "visual_beats_not_forced_cuts": 58,
+  "novelty_rule": "New camera angle, seed, light, recolour or label alone does not count as a new visual. Each composition must introduce a new explanatory task and substantial staging/state change. Same scientific subject may recur, but never the same rendered clip/action track as filler.",
+  "editing_rule": "No forced 3-second cuts, no 60-second static proxy showcase, no repeated blur preset. Bridges are motivated by subject/action/shape/sound. Beat count is not an edit-rate or quality claim.",
+  "competitor_media_reuse_in_film": false,
+  "human_full_competitor_av_review_claimed": false,
+  "beats": [
+    {
+      "id": "V5-01",
+      "chapter": "B01",
+      "sentence_indices": [
+        0
+      ],
+      "start_frame": 0,
+      "end_frame": 115,
+      "start_seconds": 0.0,
+      "end_seconds": 3.8333333333333335,
+      "duration_seconds": 3.8333333333333335,
+      "narration": "A mastodon left a trace in northern Greenland.",
+      "visual_family": "field-hero",
+      "composition_id": "COMPOSITION-01",
+      "new_setup": "Low eye-level woodland edge; anatomically reviewed mastodon-lineage stand-in, not the v4 toy rig",
+      "meaningful_action": "One animal brushes a branch and leaves the frame; reveal a trace, not a repeating walking showcase",
+      "proposed_short_text": "A TRACE / ILLUSTRATIVE RECONSTRUCTION",
+      "handoff": "Follow displaced sediment into a macro focus",
+      "designed_sound_not_observed_competitor_audio": "Low foot contact, bark/leaf contact; no monster roar",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-02",
+      "chapter": "B01",
+      "sentence_indices": [
+        1,
+        2
+      ],
+      "start_frame": 115,
+      "end_frame": 183,
+      "start_seconds": 3.8333333333333335,
+      "end_seconds": 6.1,
+      "duration_seconds": 2.2666666666666666,
+      "narration": "Not a bone. Not a tusk.",
+      "visual_family": "negative-evidence-type",
+      "composition_id": "COMPOSITION-02",
+      "new_setup": "Ground-backed editorial composition, not a hidden skeleton or another forest angle",
+      "meaningful_action": "Two outlined evidence alternatives are ruled out one after another; neither is portrayed as a find",
+      "proposed_short_text": "NOT A BONE. / NOT A TUSK.",
+      "handoff": "An outline becomes the outline of a fragment",
+      "designed_sound_not_observed_competitor_audio": "Two restrained material ticks, no stamp explosion",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-03",
+      "chapter": "B01",
+      "sentence_indices": [
+        3,
+        4
+      ],
+      "start_frame": 183,
+      "end_frame": 403,
+      "start_seconds": 6.1,
+      "end_seconds": 13.433333333333334,
+      "duration_seconds": 7.333333333333333,
+      "narration": "DNA. Broken pieces of genetic material, recovered from sediment roughly two million years old.",
+      "visual_family": "fragment-macro",
+      "composition_id": "COMPOSITION-03",
+      "new_setup": "One broken, discontinuous molecular fragment against a textured sediment grain",
+      "meaningful_action": "Focus resolves surviving pieces; the complete chain never appears",
+      "proposed_short_text": "DNA / ~2 MILLION YEARS — DEPOSITS",
+      "handoff": "Grain texture match to present-day gravel",
+      "designed_sound_not_observed_competitor_audio": "One fine granular movement; music opens a little",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-04",
+      "chapter": "B01",
+      "sentence_indices": [
+        5
+      ],
+      "start_frame": 403,
+      "end_frame": 502,
+      "start_seconds": 13.433333333333334,
+      "end_seconds": 16.733333333333334,
+      "duration_seconds": 3.3,
+      "narration": "Look at that place today: a polar desert.",
+      "visual_family": "present-landscape",
+      "composition_id": "COMPOSITION-04",
+      "new_setup": "New wide polar-desert shore with gravel, sparse ground and distant relief; no mammal",
+      "meaningful_action": "A measured aerial-to-ground move establishes emptiness and location",
+      "proposed_short_text": "NORTH GREENLAND · TODAY",
+      "handoff": "Hold a common ground line, not a blur preset",
+      "designed_sound_not_observed_competitor_audio": "Open air bed; pull music density back",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-05",
+      "chapter": "B01",
+      "sentence_indices": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "start_frame": 502,
+      "end_frame": 772,
+      "start_seconds": 16.733333333333334,
+      "end_seconds": 25.733333333333334,
+      "duration_seconds": 9.0,
+      "narration": "Now try to fit an elephant-like animal into the picture. Something is missing. Not just the animal. The world around it.",
+      "visual_family": "question-composition",
+      "composition_id": "COMPOSITION-05",
+      "new_setup": "Scientific scale silhouette over the modern location, explicitly an explanatory juxtaposition",
+      "meaningful_action": "Animal outline cannot explain the surroundings; the question expands from animal to world",
+      "proposed_short_text": "A MISSING WORLD",
+      "handoff": "Silhouette contour hands off to a map boundary",
+      "designed_sound_not_observed_competitor_audio": "One low tonal question cue; no failure buzzer",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-06",
+      "chapter": "B01",
+      "sentence_indices": [
+        10
+      ],
+      "start_frame": 772,
+      "end_frame": 995,
+      "start_seconds": 25.733333333333334,
+      "end_seconds": 33.166666666666664,
+      "duration_seconds": 7.433333333333334,
+      "narration": "In 2022, scientists reported evidence of a mastodon lineage from Greenland's Kap Copenhagen Formation.",
+      "visual_family": "location-publication",
+      "composition_id": "COMPOSITION-06",
+      "new_setup": "Original Greenland locator map, Kap København callout, and accurately typeset Nature 2022 source reference",
+      "meaningful_action": "World-to-region-to-formation pin resolves while year and evidence claim appear in order",
+      "proposed_short_text": "KAP KØBENHAVN / REPORTED 2022",
+      "handoff": "Map paper texture becomes a botanical examination surface",
+      "designed_sound_not_observed_competitor_audio": "Soft map movement then paper settling, not a whoosh per label",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-07",
+      "chapter": "B01",
+      "sentence_indices": [
+        11
+      ],
+      "start_frame": 995,
+      "end_frame": 1112,
+      "start_seconds": 33.166666666666664,
+      "end_seconds": 37.06666666666667,
+      "duration_seconds": 3.9,
+      "narration": "Plant remains had already hinted at a greener past.",
+      "visual_family": "botanical-evidence",
+      "composition_id": "COMPOSITION-07",
+      "new_setup": "New close illustration of plant remains on a specimen surface; not the final forest or a rotating pollen icon",
+      "meaningful_action": "A plant trace is isolated before the DNA contribution is introduced",
+      "proposed_short_text": "PLANT CLUES CAME FIRST",
+      "handoff": "Specimen contour becomes a partial-record window",
+      "designed_sound_not_observed_competitor_audio": "Fine brush/paper sound; keep the voice in front",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-08",
+      "chapter": "B01",
+      "sentence_indices": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "start_frame": 1112,
+      "end_frame": 1600,
+      "start_seconds": 37.06666666666667,
+      "end_seconds": 53.333333333333336,
+      "duration_seconds": 16.266666666666666,
+      "narration": "But the dirt held another way into that vanished landscape. And the giant was only the beginning. Because finding a trace is one thing. Working out what left it, how it survived, and what sort of world it belonged to is a very different puzzle.",
+      "visual_family": "question-route",
+      "composition_id": "COMPOSITION-08",
+      "new_setup": "Three linked evidence tasks on one evolving editorial evidence surface",
+      "meaningful_action": "SURVIVE, IDENTIFY, RECONSTRUCT unfold as questions; only the next task expands",
+      "proposed_short_text": "SURVIVE? · IDENTIFY? · WHAT WORLD?",
+      "handoff": "The survival route extends into the next biological process",
+      "designed_sound_not_observed_competitor_audio": "A restrained three-note phrase; do not ding every word",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "another way",
+          "new_information_or_action": "Plant evidence opens a second, fragment-based evidence route.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "the giant was only the beginning",
+          "new_information_or_action": "The animal entry becomes one part of a larger record, not a second walking shot.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "what left it",
+          "new_information_or_action": "Identity question receives focus.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "how it survived",
+          "new_information_or_action": "Survival question receives focus.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "what sort of world",
+          "new_information_or_action": "Community/world question becomes the destination; all three are still questions.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-09",
+      "chapter": "B02",
+      "sentence_indices": [
+        0,
+        1
+      ],
+      "start_frame": 1600,
+      "end_frame": 1834,
+      "start_seconds": 53.333333333333336,
+      "end_seconds": 61.13333333333333,
+      "duration_seconds": 7.8,
+      "narration": "An animal does not have to die in front of you to leave evidence. Living things shed biological material.",
+      "visual_family": "biological-process",
+      "composition_id": "COMPOSITION-09",
+      "new_setup": "Generic living-organism surface and surrounding material, clearly conceptual; no asserted exact mastodon coat",
+      "meaningful_action": "A small amount of biological material enters the surroundings once",
+      "proposed_short_text": "LIFE LEAVES TRACES",
+      "handoff": "Carry one representative particle into a different material state",
+      "designed_sound_not_observed_competitor_audio": "Subtle skin/leaf/water contact, not magical glitter",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-10",
+      "chapter": "B02",
+      "sentence_indices": [
+        2
+      ],
+      "start_frame": 1834,
+      "end_frame": 1925,
+      "start_seconds": 61.13333333333333,
+      "end_seconds": 64.16666666666667,
+      "duration_seconds": 3.033333333333333,
+      "narration": "After death, more breaks down.",
+      "visual_family": "decomposition-process",
+      "composition_id": "COMPOSITION-10",
+      "new_setup": "Different fallen organic matter/tissue illustration at ground level, not a discovered carcass",
+      "meaningful_action": "Material breaks down over an illustrative time progression without inventing measured decay rates",
+      "proposed_short_text": "AFTER DEATH, MORE BREAKS DOWN",
+      "handoff": "Water entering the ground takes over the screen direction",
+      "designed_sound_not_observed_competitor_audio": "Soft organic crackle dissolving into water",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-11",
+      "chapter": "B02",
+      "sentence_indices": [
+        3
+      ],
+      "start_frame": 1925,
+      "end_frame": 2147,
+      "start_seconds": 64.16666666666667,
+      "end_seconds": 71.56666666666666,
+      "duration_seconds": 7.4,
+      "narration": "Water can carry some of it away, mixing it with material from plants and other animals before it settles into sediment.",
+      "visual_family": "water-cross-section",
+      "composition_id": "COMPOSITION-11",
+      "new_setup": "New stream cross-section with banks, suspended material and a settling zone",
+      "meaningful_action": "Different illustrative sources enter; some pass through and some settle",
+      "proposed_short_text": "MIXED SOURCES",
+      "handoff": "Follow a settling particle into a diagrammatic route",
+      "designed_sound_not_observed_competitor_audio": "Water movement develops from the previous sound bed",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-12",
+      "chapter": "B02",
+      "sentence_indices": [
+        4,
+        5
+      ],
+      "start_frame": 2147,
+      "end_frame": 2519,
+      "start_seconds": 71.56666666666666,
+      "end_seconds": 83.96666666666667,
+      "duration_seconds": 12.4,
+      "narration": "Think of it as a delivery system with the address labels torn off. That is environmental DNA: genetic traces collected from the surroundings, rather than from one intact body.",
+      "visual_family": "delivery-metaphor",
+      "composition_id": "COMPOSITION-12",
+      "new_setup": "A single route diagram built from labelled source fragments, not literal postal items flying in a forest",
+      "meaningful_action": "Source labels separate from traces; mixed surroundings become the sampling target",
+      "proposed_short_text": "ENVIRONMENTAL DNA",
+      "handoff": "The missing label leads into a source-location question",
+      "designed_sound_not_observed_competitor_audio": "One small paper separation layered under water; no comedy mail sound",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "address labels torn off",
+          "new_information_or_action": "Source associations separate from representative traces; this remains an explanatory metaphor.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "environmental DNA",
+          "new_information_or_action": "The surroundings-based collection is named.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "rather than from one intact body",
+          "new_information_or_action": "The intact-body assumption is explicitly contrasted with the mixed sample.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-13",
+      "chapter": "B02",
+      "sentence_indices": [
+        6,
+        7
+      ],
+      "start_frame": 2519,
+      "end_frame": 2682,
+      "start_seconds": 83.96666666666667,
+      "end_seconds": 89.4,
+      "duration_seconds": 5.433333333333334,
+      "narration": "But delivery creates a problem. A river can bring material from somewhere else.",
+      "visual_family": "catchment-map",
+      "composition_id": "COMPOSITION-13",
+      "new_setup": "Conceptual upstream/downstream map, explicitly NOT a recovered ancient catchment",
+      "meaningful_action": "A source remains upstream while its trace travels to the sample location",
+      "proposed_short_text": "SOURCE ≠ SAMPLE LOCATION",
+      "handoff": "Route lowers into a depositional cross-section",
+      "designed_sound_not_observed_competitor_audio": "Water travels spatially; modest stereo movement, not hard panning",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-14",
+      "chapter": "B02",
+      "sentence_indices": [
+        8,
+        9,
+        10
+      ],
+      "start_frame": 2682,
+      "end_frame": 3066,
+      "start_seconds": 89.4,
+      "end_seconds": 102.2,
+      "duration_seconds": 12.8,
+      "narration": "A deposit can gather it over time. So this is not one frozen instant. And roughly two million years is the age inferred for the deposits, not a date stamped onto each molecule.",
+      "visual_family": "sediment-time",
+      "composition_id": "COMPOSITION-14",
+      "new_setup": "Layered deposit section with successive arrivals and a restrained timeline; not a radiocarbon machine",
+      "meaningful_action": "Material from different moments accumulates; the age label brackets deposits, not individual molecules",
+      "proposed_short_text": "NOT ONE INSTANT / AGE OF THE DEPOSITS",
+      "handoff": "One buried grain becomes the next macro subject",
+      "designed_sound_not_observed_competitor_audio": "Soft settling grains; broad low passage of time, no ticking molecule clock",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "gather it over time",
+          "new_information_or_action": "Successive arrivals create a new deposited state.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "not one frozen instant",
+          "new_information_or_action": "Separate arrivals remain separated on a conceptual time bracket.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "age inferred for the deposits",
+          "new_information_or_action": "Age annotation attaches to the layer bracket.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "not a date stamped onto each molecule",
+          "new_information_or_action": "Individual fragments remain undated; no molecule-age dial appears.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-15",
+      "chapter": "B02",
+      "sentence_indices": [
+        11
+      ],
+      "start_frame": 3066,
+      "end_frame": 3205,
+      "start_seconds": 102.2,
+      "end_seconds": 106.83333333333333,
+      "duration_seconds": 4.633333333333334,
+      "narration": "Before the pieces can reveal a world, they first have to survive one.",
+      "visual_family": "survival-question",
+      "composition_id": "COMPOSITION-15",
+      "new_setup": "Fresh damaged-grain macro with only a few remaining fragment elements",
+      "meaningful_action": "Many traces are lost; one unresolved survivor carries the question forward",
+      "proposed_short_text": "WHAT SURVIVES?",
+      "handoff": "Maintain the survivor as a visual anchor into the next process",
+      "designed_sound_not_observed_competitor_audio": "Brief thinning of the bed; no loud trailer hit",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-16",
+      "chapter": "B03",
+      "sentence_indices": [
+        0,
+        1
+      ],
+      "start_frame": 3205,
+      "end_frame": 3324,
+      "start_seconds": 106.83333333333333,
+      "end_seconds": 110.8,
+      "duration_seconds": 3.966666666666667,
+      "narration": "DNA is not built to last forever. Its strands break.",
+      "visual_family": "fragment-breakage",
+      "composition_id": "COMPOSITION-16",
+      "new_setup": "A different short fragment construction and physical grain face; no complete genome",
+      "meaningful_action": "One segment breaks away irreversibly and drifts outside the frame",
+      "proposed_short_text": "STRANDS BREAK",
+      "handoff": "The missing joint directs attention to damaged letters",
+      "designed_sound_not_observed_competitor_audio": "One delicate fracture sound, not glass smashing",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-17",
+      "chapter": "B03",
+      "sentence_indices": [
+        2,
+        3
+      ],
+      "start_frame": 3324,
+      "end_frame": 3514,
+      "start_seconds": 110.8,
+      "end_seconds": 117.13333333333334,
+      "duration_seconds": 6.333333333333333,
+      "narration": "Its chemical letters suffer damage. Most of the information can disappear long before anyone comes looking.",
+      "visual_family": "damage-loss",
+      "composition_id": "COMPOSITION-17",
+      "new_setup": "Typographic chemical-letter schematic marked NOT ACTUAL READS",
+      "meaningful_action": "Some letters become unreadable and disappear; they do not regenerate in the next shot",
+      "proposed_short_text": "INFORMATION IS LOST",
+      "handoff": "A remaining fragment stays while conditions change",
+      "designed_sound_not_observed_competitor_audio": "Dry micro-texture, then a little spectral space",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-18",
+      "chapter": "B03",
+      "sentence_indices": [
+        4
+      ],
+      "start_frame": 3514,
+      "end_frame": 3610,
+      "start_seconds": 117.13333333333334,
+      "end_seconds": 120.33333333333333,
+      "duration_seconds": 3.2,
+      "narration": "Yet cold conditions can slow that loss.",
+      "visual_family": "cold-mechanism",
+      "composition_id": "COMPOSITION-18",
+      "new_setup": "Conceptual colder microenvironment, not an invented numerical survival chart",
+      "meaningful_action": "Decay activity slows qualitatively; no assertion of permanent preservation",
+      "proposed_short_text": "COLD CAN SLOW LOSS",
+      "handoff": "The surviving fragment approaches a mineral surface",
+      "designed_sound_not_observed_competitor_audio": "Air bed cools subtly; no freezer-button sound",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-19",
+      "chapter": "B03",
+      "sentence_indices": [
+        5
+      ],
+      "start_frame": 3610,
+      "end_frame": 3782,
+      "start_seconds": 120.33333333333333,
+      "end_seconds": 126.06666666666666,
+      "duration_seconds": 5.733333333333333,
+      "narration": "And some DNA can bind to mineral surfaces in the sediment, which may help protect it.",
+      "visual_family": "mineral-binding",
+      "composition_id": "COMPOSITION-19",
+      "new_setup": "New plate-like mineral face with a visibly different surface arrangement",
+      "meaningful_action": "A fragment approaches and binds once, leaving unbound material outside",
+      "proposed_short_text": "MINERAL BINDING MAY HELP",
+      "handoff": "Follow the attached edge rather than changing camera angles repeatedly",
+      "designed_sound_not_observed_competitor_audio": "A quiet contact cue, no magnetic sci-fi zap",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-20",
+      "chapter": "B03",
+      "sentence_indices": [
+        6,
+        7
+      ],
+      "start_frame": 3782,
+      "end_frame": 3954,
+      "start_seconds": 126.06666666666666,
+      "end_seconds": 131.8,
+      "duration_seconds": 5.733333333333333,
+      "narration": "The dirt was not merely covering the clues. Parts of it may have helped them last.",
+      "visual_family": "protective-surface",
+      "composition_id": "COMPOSITION-20",
+      "new_setup": "Cross-section of grain surface and attached fragment; not the same looping binding animation",
+      "meaningful_action": "The surrounding material becomes a protective context while exposed traces remain vulnerable",
+      "proposed_short_text": "MORE THAN A COVERING",
+      "handoff": "The held fragment becomes the extraction problem",
+      "designed_sound_not_observed_competitor_audio": "Warm low sustain supporting the discovery, not a victory fanfare",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-21",
+      "chapter": "B03",
+      "sentence_indices": [
+        8
+      ],
+      "start_frame": 3954,
+      "end_frame": 4181,
+      "start_seconds": 131.8,
+      "end_seconds": 139.36666666666667,
+      "duration_seconds": 7.566666666666666,
+      "narration": "But protection came with a catch: material that holds on to DNA can also make it difficult to get the DNA back out.",
+      "visual_family": "extraction-catch",
+      "composition_id": "COMPOSITION-21",
+      "new_setup": "A close conceptual retention/release demonstration, clearly illustrative, not force-calibrated chemistry",
+      "meaningful_action": "The same attachment that helped retention now resists release",
+      "proposed_short_text": "PROTECTED… BUT HARD TO RELEASE",
+      "handoff": "A released trace motivates the laboratory handoff",
+      "designed_sound_not_observed_competitor_audio": "Tension develops gently; no cartoon tug/stretch noise",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-22",
+      "chapter": "B03",
+      "sentence_indices": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "start_frame": 4181,
+      "end_frame": 4564,
+      "start_seconds": 139.36666666666667,
+      "end_seconds": 152.13333333333333,
+      "duration_seconds": 12.766666666666667,
+      "narration": "Researchers had to extract and read what remained. Not an untouched instruction book. Fragments of one, mixed with fragments from many other lives. Enough to investigate, perhaps.",
+      "visual_family": "laboratory-readout",
+      "composition_id": "COMPOSITION-22",
+      "new_setup": "New clean extraction bench and original schematic readout; never a microscope visibly reading DNA letters",
+      "meaningful_action": "One pipette/extraction operation ends; short data fragments appear from the sample workflow, not an intact book",
+      "proposed_short_text": "EXTRACT → READ / FRAGMENTS, NOT A BOOK",
+      "handoff": "One unread labelled fragment moves into reference comparison",
+      "designed_sound_not_observed_competitor_audio": "One liquid event, subtle apparatus bed and restrained data texture",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "extract and read",
+          "new_information_or_action": "One extraction/transfer event finishes; focus moves to short read fragments.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "Not an untouched instruction book",
+          "new_information_or_action": "Missing regions remain visible in the record.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "many other lives",
+          "new_information_or_action": "Several distinguishable representative sources enter, without invented sample counts.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "Enough to investigate",
+          "new_information_or_action": "A fragment is selected for comparison, not silently identified.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-23",
+      "chapter": "B03",
+      "sentence_indices": [
+        13,
+        14
+      ],
+      "start_frame": 4564,
+      "end_frame": 4768,
+      "start_seconds": 152.13333333333333,
+      "end_seconds": 158.93333333333334,
+      "duration_seconds": 6.8,
+      "narration": "But a fragment does not arrive wearing a name tag. How do you know which animal you are reading?",
+      "visual_family": "identity-question",
+      "composition_id": "COMPOSITION-23",
+      "new_setup": "A single unassigned fragment above an empty identification field",
+      "meaningful_action": "The fragment offers evidence but no species name; the question remains open",
+      "proposed_short_text": "WHO LEFT THIS?",
+      "handoff": "The empty field expands into a reference workspace",
+      "designed_sound_not_observed_competitor_audio": "One unresolved musical interval; avoid a generic notification ping",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-24",
+      "chapter": "B04",
+      "sentence_indices": [
+        0,
+        1
+      ],
+      "start_frame": 4768,
+      "end_frame": 4926,
+      "start_seconds": 158.93333333333334,
+      "end_seconds": 164.2,
+      "duration_seconds": 5.266666666666667,
+      "narration": "Compare the surviving sequences with genetic references. Look for matches.",
+      "visual_family": "reference-alignment",
+      "composition_id": "COMPOSITION-24",
+      "new_setup": "Original aligned read/reference strips, visibly schematic and not published sample sequences",
+      "meaningful_action": "A candidate aligns to a reference; only matching positions illuminate",
+      "proposed_short_text": "COMPARE THE SURVIVING PIECES",
+      "handoff": "Keep alignment geometry and introduce another possible relative",
+      "designed_sound_not_observed_competitor_audio": "Soft mechanical alignment contact, not keyboard spam",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-25",
+      "chapter": "B04",
+      "sentence_indices": [
+        2
+      ],
+      "start_frame": 4926,
+      "end_frame": 5094,
+      "start_seconds": 164.2,
+      "end_seconds": 169.8,
+      "duration_seconds": 5.6,
+      "narration": "That sounds simple, until two related animals share similar stretches of DNA.",
+      "visual_family": "ambiguous-branches",
+      "composition_id": "COMPOSITION-25",
+      "new_setup": "A small family-branch graphic with two plausible neighbouring references",
+      "meaningful_action": "The same short stretch fits more than one relative; ambiguity stays visible",
+      "proposed_short_text": "SIMILAR STRETCHES · RELATED ANIMALS",
+      "handoff": "An empty reference slot emerges from the branch",
+      "designed_sound_not_observed_competitor_audio": "Two related tones, deliberately no exact-match success sound",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-26",
+      "chapter": "B04",
+      "sentence_indices": [
+        3,
+        4
+      ],
+      "start_frame": 5094,
+      "end_frame": 5321,
+      "start_seconds": 169.8,
+      "end_seconds": 177.36666666666667,
+      "duration_seconds": 7.566666666666666,
+      "narration": "Or the reference you need is missing. A match can support a family branch without identifying one exact species.",
+      "visual_family": "reference-gap",
+      "composition_id": "COMPOSITION-26",
+      "new_setup": "Different reference catalogue composition with an honest empty slot and a broad branch label",
+      "meaningful_action": "A missing comparison limits precision; the conclusion stops at a supported branch",
+      "proposed_short_text": "FAMILY BRANCH ≠ EXACT SPECIES",
+      "handoff": "Catalogue surface hands off to contamination controls",
+      "designed_sound_not_observed_competitor_audio": "Small page/slot movement; no alarming error buzzer",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-27",
+      "chapter": "B04",
+      "sentence_indices": [
+        5
+      ],
+      "start_frame": 5321,
+      "end_frame": 5497,
+      "start_seconds": 177.36666666666667,
+      "end_seconds": 183.23333333333332,
+      "duration_seconds": 5.866666666666666,
+      "narration": "There is another trap: modern contamination could resemble the signal you hoped to find.",
+      "visual_family": "contamination-control",
+      "composition_id": "COMPOSITION-27",
+      "new_setup": "Distinct sample-handling/control station with modern material visually distinguished from old sample illustration",
+      "meaningful_action": "A modern alternative enters the reasoning without implying that this specific contamination was observed",
+      "proposed_short_text": "COULD THIS BE MODERN?",
+      "handoff": "Control label becomes the alternative-explanation prompt",
+      "designed_sound_not_observed_competitor_audio": "Room tone and one cap/glove contact; no dramatic danger siren",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-28",
+      "chapter": "B04",
+      "sentence_indices": [
+        6,
+        7
+      ],
+      "start_frame": 5497,
+      "end_frame": 5696,
+      "start_seconds": 183.23333333333332,
+      "end_seconds": 189.86666666666667,
+      "duration_seconds": 6.633333333333334,
+      "narration": "So the question is not just, does this match? It is, what else could explain it?",
+      "visual_family": "alternative-explanations",
+      "composition_id": "COMPOSITION-28",
+      "new_setup": "One evolving evidence-check diagram, not a dashboard of fake confidence percentages",
+      "meaningful_action": "MATCH is insufficient; alternative explanations must remain on screen",
+      "proposed_short_text": "WHAT ELSE COULD EXPLAIN IT?",
+      "handoff": "Follow the damage-check route into a schematic fragment end",
+      "designed_sound_not_observed_competitor_audio": "A small pause in the music gives the question room",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-29",
+      "chapter": "B04",
+      "sentence_indices": [
+        8,
+        9,
+        10
+      ],
+      "start_frame": 5696,
+      "end_frame": 6113,
+      "start_seconds": 189.86666666666667,
+      "end_seconds": 203.76666666666668,
+      "duration_seconds": 13.9,
+      "narration": "Researchers assessed characteristic damage in ancient DNA, alongside other checks and filtering. Damage was not only something to work around. It could also help assess whether a signal was genuinely old.",
+      "visual_family": "damage-check",
+      "composition_id": "COMPOSITION-29",
+      "new_setup": "New diagram of characteristic damage and other checks; no invented measured histogram or real-sequence claim",
+      "meaningful_action": "Damage changes from a nuisance into one source of assessment, alongside filtering and controls",
+      "proposed_short_text": "DAMAGE IS ONE CHECK — NOT PROOF ALONE",
+      "handoff": "Multiple check paths converge without a 100%-verified stamp",
+      "designed_sound_not_observed_competitor_audio": "Fine diagnostic textures; build interest without a game-win chime",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "alongside other checks",
+          "new_information_or_action": "Damage and separate check routes are visible together.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "not only something to work around",
+          "new_information_or_action": "The damage feature changes explanatory role, not physical history.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "help assess",
+          "new_information_or_action": "It contributes to assessment; alternatives and other checks remain, with no proof/100% stamp.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-30",
+      "chapter": "B04",
+      "sentence_indices": [
+        11,
+        12
+      ],
+      "start_frame": 6113,
+      "end_frame": 6322,
+      "start_seconds": 203.76666666666668,
+      "end_seconds": 210.73333333333332,
+      "duration_seconds": 6.966666666666667,
+      "narration": "None of that turns a fragment into a complete genome. It makes the identification more careful.",
+      "visual_family": "genome-limit",
+      "composition_id": "COMPOSITION-30",
+      "new_setup": "A clean partial-record composition with incomplete segments and visible gaps",
+      "meaningful_action": "A partial record stays partial even after identification checks",
+      "proposed_short_text": "FRAGMENTS ≠ COMPLETE GENOME",
+      "handoff": "Segments become entries in a broader community record",
+      "designed_sound_not_observed_competitor_audio": "Remove some musical density; no cloning-machine sound",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-31",
+      "chapter": "B04",
+      "sentence_indices": [
+        13
+      ],
+      "start_frame": 6322,
+      "end_frame": 6560,
+      "start_seconds": 210.73333333333332,
+      "end_seconds": 218.66666666666666,
+      "duration_seconds": 7.933333333333334,
+      "narration": "And when the supported identifications came together, the story grew far beyond a single giant.",
+      "visual_family": "community-reveal",
+      "composition_id": "COMPOSITION-31",
+      "new_setup": "Evidence entries fan into a larger ecological field, not another walking-mastodon replay",
+      "meaningful_action": "The single-giant question widens to multiple supported groups",
+      "proposed_short_text": "BEYOND ONE GIANT",
+      "handoff": "First entries reveal into the next gallery",
+      "designed_sound_not_observed_competitor_audio": "A short opening chord that belongs to the musical phrase",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-32",
+      "chapter": "B05",
+      "sentence_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "start_frame": 6560,
+      "end_frame": 6675,
+      "start_seconds": 218.66666666666666,
+      "end_seconds": 222.5,
+      "duration_seconds": 3.8333333333333335,
+      "narration": "Hares. Reindeer. Geese. Rodents.",
+      "visual_family": "lineage-gallery",
+      "composition_id": "COMPOSITION-32",
+      "new_setup": "One coherent illustrated lineage gallery with four distinct habitat-linked portraits, not four split-screen video clips",
+      "meaningful_action": "Hare, reindeer, goose and rodent reveal sequentially within the composition, each with one small distinct action",
+      "proposed_short_text": "HARES · REINDEER · GEESE · RODENTS",
+      "handoff": "Move through the gallery to a different mastodon profile",
+      "designed_sound_not_observed_competitor_audio": "One grouped reveal phrase plus tiny species-appropriate physical cues; not four loud pops",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-33",
+      "chapter": "B05",
+      "sentence_indices": [
+        4
+      ],
+      "start_frame": 6675,
+      "end_frame": 6746,
+      "start_seconds": 222.5,
+      "end_seconds": 224.86666666666667,
+      "duration_seconds": 2.3666666666666667,
+      "narration": "Evidence of a mastodon lineage.",
+      "visual_family": "mastodon-profile",
+      "composition_id": "COMPOSITION-33",
+      "new_setup": "New anatomical side-profile treatment at a different scale and task from the opening hero",
+      "meaningful_action": "A supported lineage label resolves beside a restrained living portrait; no exact coat or individual claim",
+      "proposed_short_text": "MASTODON LINEAGE",
+      "handoff": "The profile margin opens into botanical layers",
+      "designed_sound_not_observed_competitor_audio": "One weight/leaf contact with a low musical accent, no roar",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-34",
+      "chapter": "B05",
+      "sentence_indices": [
+        5
+      ],
+      "start_frame": 6746,
+      "end_frame": 6983,
+      "start_seconds": 224.86666666666667,
+      "end_seconds": 232.76666666666668,
+      "duration_seconds": 7.9,
+      "narration": "And around those animal traces, plants: poplar, birch, conifers, shrubs and herbs.",
+      "visual_family": "botanical-strata",
+      "composition_id": "COMPOSITION-34",
+      "new_setup": "Distinct river-margin, canopy and ground-cover illustrations in one depth-composed botanical atlas",
+      "meaningful_action": "Poplar, birch, conifers, shrubs and herbs reveal by layer with short labels",
+      "proposed_short_text": "POPLAR · BIRCH · CONIFERS · SHRUBS · HERBS",
+      "handoff": "Living plant layers lead into the community comparison",
+      "designed_sound_not_observed_competitor_audio": "Layered leaf/needle/grain detail; one controlled rising musical phrase",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-35",
+      "chapter": "B05",
+      "sentence_indices": [
+        6,
+        7,
+        8
+      ],
+      "start_frame": 6983,
+      "end_frame": 7484,
+      "start_seconds": 232.76666666666668,
+      "end_seconds": 249.46666666666667,
+      "duration_seconds": 16.7,
+      "narration": "The impressive thing was not simply how large one animal might have been. It was how much the surroundings had changed. This combination points to a community very different from today's polar desert, not a neat copy of one familiar modern forest.",
+      "visual_family": "nonanalog-community",
+      "composition_id": "COMPOSITION-35",
+      "new_setup": "New ecological composition mixing the supported groups without claiming a photographed encounter or a familiar modern biome",
+      "meaningful_action": "Animal size becomes secondary as changed surroundings take over the frame",
+      "proposed_short_text": "NOT A COPY OF ONE MODERN FOREST",
+      "handoff": "A visible plant contour transfers to independent botanical evidence",
+      "designed_sound_not_observed_competitor_audio": "Environment opens out; no generic cinematic boom",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "not simply how large",
+          "new_information_or_action": "The animal loses visual dominance; context takes over.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "surroundings had changed",
+          "new_information_or_action": "A newly composed canopy/ground/water evidence mosaic develops, not just a recolour.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "different from today",
+          "new_information_or_action": "Modern polar setting is distinguished from the inferred past community.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "not a neat copy",
+          "new_information_or_action": "The inferred grouping stays a non-analog community, not a single modern-biome stock shot.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-36",
+      "chapter": "B05",
+      "sentence_indices": [
+        9,
+        10
+      ],
+      "start_frame": 7484,
+      "end_frame": 7728,
+      "start_seconds": 249.46666666666667,
+      "end_seconds": 257.6,
+      "duration_seconds": 8.133333333333333,
+      "narration": "And DNA did not discover that greener past alone. Pollen and visible plant remains had already provided clues.",
+      "visual_family": "independent-proxies",
+      "composition_id": "COMPOSITION-36",
+      "new_setup": "A botanical-remains examination and a pollen-slide treatment, unlike the earlier specimen macro",
+      "meaningful_action": "Two older evidence routes are established before DNA is added",
+      "proposed_short_text": "POLLEN + VISIBLE PLANT REMAINS",
+      "handoff": "A third route joins rather than replacing the first two",
+      "designed_sound_not_observed_competitor_audio": "Fine slide/paper contact, not microscope beeps",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-37",
+      "chapter": "B05",
+      "sentence_indices": [
+        11
+      ],
+      "start_frame": 7728,
+      "end_frame": 7936,
+      "start_seconds": 257.6,
+      "end_seconds": 264.53333333333336,
+      "duration_seconds": 6.933333333333334,
+      "narration": "The genetic evidence added another route, especially into animal life with scarce fossil traces.",
+      "visual_family": "animal-evidence-route",
+      "composition_id": "COMPOSITION-37",
+      "new_setup": "New sparse-fossil/trace illustration and sequence-identification route, not another generic laboratory spin",
+      "meaningful_action": "DNA adds access to animal life where body-fossil traces are scarce",
+      "proposed_short_text": "ANOTHER ROUTE INTO ANIMAL LIFE",
+      "handoff": "Evidence paths connect into the ecological picture",
+      "designed_sound_not_observed_competitor_audio": "Subtle data/material bridge; keep the sentence clearly audible",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-38",
+      "chapter": "B05",
+      "sentence_indices": [
+        12,
+        13,
+        14
+      ],
+      "start_frame": 7936,
+      "end_frame": 8381,
+      "start_seconds": 264.53333333333336,
+      "end_seconds": 279.3666666666667,
+      "duration_seconds": 14.833333333333334,
+      "narration": "Suddenly, the mastodon was no longer a strange detail floating in an empty landscape. It belonged to a larger ecological picture. But how much of that picture can we actually bring into focus?",
+      "visual_family": "ecological-focus",
+      "composition_id": "COMPOSITION-38",
+      "new_setup": "A layered community-evidence composition with known information crisp and unresolved detail soft/hatched",
+      "meaningful_action": "The giant gains context while missing detail remains visibly incomplete",
+      "proposed_short_text": "HOW MUCH CAN WE BRING INTO FOCUS?",
+      "handoff": "A deliberate focus handoff announces imagination, not observed footage",
+      "designed_sound_not_observed_competitor_audio": "Music gains warmth then leaves room for the boundary question",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "no longer a strange detail",
+          "new_information_or_action": "An isolated lineage entry joins the broader evidence record.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "larger ecological picture",
+          "new_information_or_action": "Plant and animal evidence layers become a shared context, not proven feeding/encounter links.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "how much",
+          "new_information_or_action": "Unresolved areas of the partial record become visible; not merely another defocus/orbit.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-39",
+      "chapter": "B06",
+      "sentence_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "start_frame": 8381,
+      "end_frame": 8763,
+      "start_seconds": 279.3666666666667,
+      "end_seconds": 292.1,
+      "duration_seconds": 12.733333333333333,
+      "narration": "For a moment, imagine it. An elephant-like animal moving past trees. A goose lifting from the water. Plants where today's landscape looks almost empty.",
+      "visual_family": "imagined-encounter",
+      "composition_id": "COMPOSITION-39",
+      "new_setup": "One NEW river-margin reconstruction with reviewed animal rig, canopy, water and ground-layer activity; not any previous set",
+      "meaningful_action": "Animal passes trees and one goose lifts from water; actions do not restart on a phrase",
+      "proposed_short_text": "IMAGINED RECONSTRUCTION",
+      "handoff": "A conceptual annotation enters the living scene without splitting it",
+      "designed_sound_not_observed_competitor_audio": "Motivated foot/branch/water/wing layers; do not recycle a repeated whoosh",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "imagine it",
+          "new_information_or_action": "Reconstruction qualifier is already visible.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "moving past trees",
+          "new_information_or_action": "One ongoing reviewed animal action makes contact with its surroundings.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "goose lifting",
+          "new_information_or_action": "One takeoff develops across the same spatial sequence.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "Plants where",
+          "new_information_or_action": "Attention shifts to canopy/ground layers as the first actions continue rather than restart.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-40",
+      "chapter": "B06",
+      "sentence_indices": [
+        4,
+        5
+      ],
+      "start_frame": 8763,
+      "end_frame": 9069,
+      "start_seconds": 292.1,
+      "end_seconds": 302.3,
+      "duration_seconds": 10.2,
+      "narration": "That is our reconstruction, not a recovered afternoon. The fragments do not tell us that this animal passed that tree while that bird took flight.",
+      "visual_family": "encounter-boundary",
+      "composition_id": "COMPOSITION-40",
+      "new_setup": "The same ongoing encounter is reframed by an evidence overlay, not replayed from a new angle",
+      "meaningful_action": "A single-afternoon claim is explicitly withdrawn while the scene continues",
+      "proposed_short_text": "NOT A RECOVERED AFTERNOON",
+      "handoff": "Water in the scene motivates the transport reminder",
+      "designed_sound_not_observed_competitor_audio": "Music thins; room/water remains continuous through the qualification",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-41",
+      "chapter": "B06",
+      "sentence_indices": [
+        6
+      ],
+      "start_frame": 9069,
+      "end_frame": 9242,
+      "start_seconds": 302.3,
+      "end_seconds": 308.06666666666666,
+      "duration_seconds": 5.766666666666667,
+      "narration": "Remember the delivery system: water moves material, and deposits gather it over time.",
+      "visual_family": "transport-reminder",
+      "composition_id": "COMPOSITION-41",
+      "new_setup": "A NEW overland-to-water-to-deposit route composition, not the earlier river-loop clip",
+      "meaningful_action": "Source movement and time accumulation replace the false single-event interpretation",
+      "proposed_short_text": "MOVED THROUGH SPACE · GATHERED THROUGH TIME",
+      "handoff": "One trace becomes an incomplete field-guide entry",
+      "designed_sound_not_observed_competitor_audio": "A short water-to-grain sound bridge, not the old transport audio loop",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-42",
+      "chapter": "B06",
+      "sentence_indices": [
+        7,
+        8
+      ],
+      "start_frame": 9242,
+      "end_frame": 9558,
+      "start_seconds": 308.06666666666666,
+      "end_seconds": 318.6,
+      "duration_seconds": 10.533333333333333,
+      "narration": "Nor do these traces give us the giant's exact coat, size or behaviour. The evidence can support a community without supplying every detail of its members.",
+      "visual_family": "unknown-details",
+      "composition_id": "COMPOSITION-42",
+      "new_setup": "Original field-guide plates with restrained uncertain areas for coat, size and behaviour",
+      "meaningful_action": "Supported community information remains; unknown individual details are not filled in as facts",
+      "proposed_short_text": "EXACT COAT? SIZE? BEHAVIOUR? — NOT GIVEN",
+      "handoff": "Plate annotations become an evidence/reconstruction boundary",
+      "designed_sound_not_observed_competitor_audio": "Soft page handling with space around the words; no quiz buzzer",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-43",
+      "chapter": "B06",
+      "sentence_indices": [
+        9,
+        10
+      ],
+      "start_frame": 9558,
+      "end_frame": 9849,
+      "start_seconds": 318.6,
+      "end_seconds": 328.3,
+      "duration_seconds": 9.7,
+      "narration": "That boundary matters. Without it, a plausible scene can quietly become a false memory of something scientists actually saw.",
+      "visual_family": "evidence-boundary",
+      "composition_id": "COMPOSITION-43",
+      "new_setup": "A single-frame annotated composition differentiating evidence-supported inference from artistic staging",
+      "meaningful_action": "A plausible reconstruction is prevented from turning into a claim of direct observation",
+      "proposed_short_text": "EVIDENCE / INTERPRETATION",
+      "handoff": "Keep the evidence marks and remove only invented certainty",
+      "designed_sound_not_observed_competitor_audio": "A restrained tonal pivot; no repeated lens-blur transition",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-44",
+      "chapter": "B06",
+      "sentence_indices": [
+        11,
+        12
+      ],
+      "start_frame": 9849,
+      "end_frame": 10116,
+      "start_seconds": 328.3,
+      "end_seconds": 337.2,
+      "duration_seconds": 8.9,
+      "narration": "Yet drawing the boundary does not erase the world behind it. It tells us which parts we have evidence for—and which parts we are imagining.",
+      "visual_family": "qualified-world",
+      "composition_id": "COMPOSITION-44",
+      "new_setup": "Different evidence-window composition that retains a meaningful partial community instead of erasing the whole scene",
+      "meaningful_action": "Qualification sharpens what we can say rather than turning the picture blank",
+      "proposed_short_text": "A WORLD — WITH LIMITS",
+      "handoff": "Unfilled portions of the record introduce missing-signal reasoning",
+      "designed_sound_not_observed_competitor_audio": "Warmth returns without a victory swell",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-45",
+      "chapter": "B07",
+      "sentence_indices": [
+        0,
+        1
+      ],
+      "start_frame": 10116,
+      "end_frame": 10384,
+      "start_seconds": 337.2,
+      "end_seconds": 346.1333333333333,
+      "duration_seconds": 8.933333333333334,
+      "narration": "There is a mistake we can make even when we draw nothing extra. We can assume that whatever is missing from the DNA was missing from the landscape.",
+      "visual_family": "missing-signal-question",
+      "composition_id": "COMPOSITION-45",
+      "new_setup": "A specimen record with an unfilled observation, not an empty landscape asserted to lack animals",
+      "meaningful_action": "A missing entry becomes a question rather than an automatic absence verdict",
+      "proposed_short_text": "MISSING SIGNAL ≠ MISSING LIFE",
+      "handoff": "The first failure route develops in place",
+      "designed_sound_not_observed_competitor_audio": "Brief musical space, no loud negative/error sound",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-46",
+      "chapter": "B07",
+      "sentence_indices": [
+        2
+      ],
+      "start_frame": 10384,
+      "end_frame": 10520,
+      "start_seconds": 346.1333333333333,
+      "end_seconds": 350.6666666666667,
+      "duration_seconds": 4.533333333333333,
+      "narration": "But perhaps an organism's material did not survive.",
+      "visual_family": "preservation-filter",
+      "composition_id": "COMPOSITION-46",
+      "new_setup": "New material-survival diagram using a different trace specimen and loss pattern",
+      "meaningful_action": "A trace can be lost before sampling; no sample gets magically restored later",
+      "proposed_short_text": "MAY NOT HAVE SURVIVED",
+      "handoff": "Carry the observation gap into a different mechanism",
+      "designed_sound_not_observed_competitor_audio": "Fine dissipating texture, not a recycled DNA-break sound",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-47",
+      "chapter": "B07",
+      "sentence_indices": [
+        3
+      ],
+      "start_frame": 10520,
+      "end_frame": 10600,
+      "start_seconds": 350.6666666666667,
+      "end_seconds": 353.3333333333333,
+      "duration_seconds": 2.6666666666666665,
+      "narration": "Perhaps it never reached the samples.",
+      "visual_family": "delivery-filter",
+      "composition_id": "COMPOSITION-47",
+      "new_setup": "New route ending outside the sample boundary; not the original river map played again",
+      "meaningful_action": "Material can miss the sampling location entirely",
+      "proposed_short_text": "MAY NOT HAVE REACHED THE SAMPLE",
+      "handoff": "An uncollected trace leads to a reference-recognition gap",
+      "designed_sound_not_observed_competitor_audio": "Water fades into a quiet room without restarting the score",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-48",
+      "chapter": "B07",
+      "sentence_indices": [
+        4
+      ],
+      "start_frame": 10600,
+      "end_frame": 10706,
+      "start_seconds": 353.3333333333333,
+      "end_seconds": 356.8666666666667,
+      "duration_seconds": 3.533333333333333,
+      "narration": "Perhaps the surviving pieces could not be recognised.",
+      "visual_family": "recognition-filter",
+      "composition_id": "COMPOSITION-48",
+      "new_setup": "A reference workspace at a genuinely different task, showing an unrecognised short piece",
+      "meaningful_action": "A surviving piece remains unrecognised without implying that its organism never existed",
+      "proposed_short_text": "MAY NOT HAVE BEEN RECOGNISED",
+      "handoff": "The three failure routes resolve into one statement",
+      "designed_sound_not_observed_competitor_audio": "Soft alignment that stops unresolved; no successful-match ping",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-49",
+      "chapter": "B07",
+      "sentence_indices": [
+        5
+      ],
+      "start_frame": 10706,
+      "end_frame": 10798,
+      "start_seconds": 356.8666666666667,
+      "end_seconds": 359.93333333333334,
+      "duration_seconds": 3.066666666666667,
+      "narration": "No signal is not the same as no animal.",
+      "visual_family": "absence-statement",
+      "composition_id": "COMPOSITION-49",
+      "new_setup": "Minimal kinetic typography integrated with the three routes, not a full-screen caption dump",
+      "meaningful_action": "The negation remains readable while the statement completes",
+      "proposed_short_text": "NO SIGNAL ≠ NO ANIMAL",
+      "handoff": "The inequality stroke becomes the link between evidence methods",
+      "designed_sound_not_observed_competitor_audio": "One low, restrained emphasis with a short pocket of silence",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-50",
+      "chapter": "B07",
+      "sentence_indices": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "start_frame": 10798,
+      "end_frame": 11297,
+      "start_seconds": 359.93333333333334,
+      "end_seconds": 376.56666666666666,
+      "duration_seconds": 16.633333333333333,
+      "narration": "That is why different kinds of evidence matter. In this study, DNA revealed plant groups that were not recorded there through pollen or larger remains. Different methods leave different gaps. Put them together, and the picture can grow without pretending it is complete.",
+      "visual_family": "complementary-evidence",
+      "composition_id": "COMPOSITION-50",
+      "new_setup": "A new braided-window illustration for DNA, pollen and larger remains; no fabricated study counts or table",
+      "meaningful_action": "Each method leaves different gaps; the combined record grows without becoming a census",
+      "proposed_short_text": "DIFFERENT METHODS · DIFFERENT GAPS",
+      "handoff": "Evidence windows open onto place without filling every silhouette",
+      "designed_sound_not_observed_competitor_audio": "Different fine material textures join one musical phrase, not three interface dings",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "different kinds of evidence",
+          "new_information_or_action": "Three complementary evidence windows are established.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "DNA revealed plant groups",
+          "new_information_or_action": "An additional schematic plant-group entry is recorded in the DNA window.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "not recorded there",
+          "new_information_or_action": "Pollen/larger-remains windows do not falsely show a matching entry; no unverified exact group/count is invented.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "different gaps",
+          "new_information_or_action": "Each method leaves a visibly different gap pattern, marked conceptual.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "without pretending",
+          "new_information_or_action": "Combined windows retain unknown areas; they never become a complete census.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-51",
+      "chapter": "B07",
+      "sentence_indices": [
+        10,
+        11
+      ],
+      "start_frame": 11297,
+      "end_frame": 11604,
+      "start_seconds": 376.56666666666666,
+      "end_seconds": 386.8,
+      "duration_seconds": 10.233333333333333,
+      "narration": "We cannot count every life that passed through this place. We can still discover that the place once held a world very different from the one we see now.",
+      "visual_family": "partial-world-view",
+      "composition_id": "COMPOSITION-51",
+      "new_setup": "New wide grounded location/record composition distinct from previous Arctic aerials",
+      "meaningful_action": "The picture stays incomplete while the difference between past and present becomes legible",
+      "proposed_short_text": "A PARTIAL RECORD — NOT EVERY LIFE",
+      "handoff": "Follow one surviving grain into the final return",
+      "designed_sound_not_observed_competitor_audio": "Air and a restrained broadening score; no massive trailer payoff",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-52",
+      "chapter": "B08",
+      "sentence_indices": [
+        0,
+        1,
+        2
+      ],
+      "start_frame": 11604,
+      "end_frame": 11767,
+      "start_seconds": 386.8,
+      "end_seconds": 392.23333333333335,
+      "duration_seconds": 5.433333333333334,
+      "narration": "Come back to the dirt. No tusk curling out of it. No skeleton waiting underneath.",
+      "visual_family": "closing-gravel-macro",
+      "composition_id": "COMPOSITION-52",
+      "new_setup": "A NEW handful-scale gravel composition, not the opening ground clip",
+      "meaningful_action": "The camera discovers no spectacular body-fossil reveal; the missing alternatives remain graphic, not asserted finds",
+      "proposed_short_text": "NO TUSK. NO SKELETON.",
+      "handoff": "The empty outline becomes incomplete fragment spaces",
+      "designed_sound_not_observed_competitor_audio": "Intimate grain contact and quieter room/air bed",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-53",
+      "chapter": "B08",
+      "sentence_indices": [
+        3,
+        4
+      ],
+      "start_frame": 11767,
+      "end_frame": 11953,
+      "start_seconds": 392.23333333333335,
+      "end_seconds": 398.43333333333334,
+      "duration_seconds": 6.2,
+      "narration": "No complete genome from which to rebuild a mastodon. Just surviving fragments.",
+      "visual_family": "incomplete-record",
+      "composition_id": "COMPOSITION-53",
+      "new_setup": "New surviving-fragment arrangement with deliberate gaps, not a whole genome unravelled again",
+      "meaningful_action": "Surviving fragments remain modest, not a blueprint for rebuilding an animal",
+      "proposed_short_text": "NO COMPLETE GENOME / SURVIVING FRAGMENTS",
+      "handoff": "Fragments connect to evidence entries rather than forming a living mastodon",
+      "designed_sound_not_observed_competitor_audio": "A restrained musical opening, no sci-fi resurrection effect",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-54",
+      "chapter": "B08",
+      "sentence_indices": [
+        5
+      ],
+      "start_frame": 11953,
+      "end_frame": 12177,
+      "start_seconds": 398.43333333333334,
+      "end_seconds": 405.9,
+      "duration_seconds": 7.466666666666667,
+      "narration": "Yet those fragments helped connect an animal to a vanished community, and an almost empty-looking place to a greener past.",
+      "visual_family": "evidence-connections",
+      "composition_id": "COMPOSITION-54",
+      "new_setup": "Original evidence-to-community-to-place composition with several distinct documentary marks",
+      "meaningful_action": "Small fragments connect multiple kinds of supported inference into one changed-world idea",
+      "proposed_short_text": "FRAGMENT → COMMUNITY → LANDSCAPE",
+      "handoff": "A location mark recalls the opening question without replaying its shot",
+      "designed_sound_not_observed_competitor_audio": "Fine connecting textures within one evolving musical phrase",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-55",
+      "chapter": "B08",
+      "sentence_indices": [
+        6,
+        7,
+        8
+      ],
+      "start_frame": 12177,
+      "end_frame": 12590,
+      "start_seconds": 405.9,
+      "end_seconds": 419.6666666666667,
+      "duration_seconds": 13.766666666666667,
+      "narration": "At the beginning, the puzzle was how to fit a mastodon into northern Greenland. The answer was not to squeeze the animal into today's landscape. It was to discover how different the landscape used to be.",
+      "visual_family": "opening-question-payoff",
+      "composition_id": "COMPOSITION-55",
+      "new_setup": "A fresh landscape-history graphic using the modern location as a geographic anchor",
+      "meaningful_action": "The explanation changes the inferred past landscape, not the animal forced into the modern desert",
+      "proposed_short_text": "THE LANDSCAPE HAD CHANGED",
+      "handoff": "Past information remains a record, not a portal to resurrected life",
+      "designed_sound_not_observed_competitor_audio": "Resolve the central harmonic question gently",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": [
+        {
+          "spoken_anchor": "At the beginning",
+          "new_information_or_action": "A fresh location/history composition recalls the question, without replaying opening footage.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "not to squeeze",
+          "new_information_or_action": "The literal-modern-landscape interpretation is withheld.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        },
+        {
+          "spoken_anchor": "different the landscape",
+          "new_information_or_action": "Evidence-led past-context layers resolve as an interpretation, not a physical resurrection or time portal.",
+          "timing": "proposed phrase-based sync; final word timing needs manual AV verification"
+        }
+      ]
+    },
+    {
+      "id": "V5-56",
+      "chapter": "B08",
+      "sentence_indices": [
+        9,
+        10
+      ],
+      "start_frame": 12590,
+      "end_frame": 12785,
+      "start_seconds": 419.6666666666667,
+      "end_seconds": 426.1666666666667,
+      "duration_seconds": 6.5,
+      "narration": "We have not brought that world back. We have learned to recognise some of what it left behind.",
+      "visual_family": "recognition-not-resurrection",
+      "composition_id": "COMPOSITION-56",
+      "new_setup": "New interpretation/record composition with an explicit boundary between evidence and a living world",
+      "meaningful_action": "We recognise traces; no animal is rebuilt, hatched or cloned",
+      "proposed_short_text": "RECOGNITION, NOT RESURRECTION",
+      "handoff": "A botanical trace leads into the final incomplete record",
+      "designed_sound_not_observed_competitor_audio": "Pull back effects; let narration carry the qualification",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-57",
+      "chapter": "B08",
+      "sentence_indices": [
+        11,
+        12,
+        13
+      ],
+      "start_frame": 12785,
+      "end_frame": 13025,
+      "start_seconds": 426.1666666666667,
+      "end_seconds": 434.1666666666667,
+      "duration_seconds": 8.0,
+      "narration": "That forest is gone. Those ancient lives are over. What looked like empty ground was an incomplete record.",
+      "visual_family": "forest-to-record",
+      "composition_id": "COMPOSITION-57",
+      "new_setup": "New canopy/leaf-impression-to-gravel transformation, not a montage of old forest angles",
+      "meaningful_action": "Gone lives leave an incomplete record; empty areas stay empty",
+      "proposed_short_text": "AN INCOMPLETE RECORD",
+      "handoff": "The remaining marks guide the eye toward the closing title space",
+      "designed_sound_not_observed_competitor_audio": "Leaf/air texture falls away; emotional resolution stays restrained",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    },
+    {
+      "id": "V5-58",
+      "chapter": "B08",
+      "sentence_indices": [
+        14,
+        15
+      ],
+      "start_frame": 13025,
+      "end_frame": 13163,
+      "start_seconds": 434.1666666666667,
+      "end_seconds": 438.76666666666665,
+      "duration_seconds": 4.6,
+      "narration": "And we had learned to read part of it. This is Extinct Life.",
+      "visual_family": "closing-signature",
+      "composition_id": "COMPOSITION-58",
+      "new_setup": "A single original closing composition built from the surviving record motif",
+      "meaningful_action": "Only part of the record is legible; the title resolves once with a short natural tail",
+      "proposed_short_text": "EXTINCT LIFE",
+      "handoff": "End, without an extra intro, clip replay or long branded hold",
+      "designed_sound_not_observed_competitor_audio": "One musical resolution and a soft environmental tail, not an exaggerated logo sting",
+      "timing_status": "Based on existing estimated forced alignment; final word-emphasis timing requires manual AV verification",
+      "status": "proposed, not rendered or approved",
+      "internal_phrase_cues": []
+    }
+  ]
+}
