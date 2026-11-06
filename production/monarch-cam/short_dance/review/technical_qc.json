@@ -1,0 +1,64 @@
+{
+  "file": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4",
+  "sha256": "2e276482e9d01ae1391d9d8cb3ffb152867fe19e8e6ce84b3cd35323c2f25671",
+  "bytes": 16184706,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "30/1",
+        "nb_frames": "720",
+        "nb_read_frames": "720"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "1126",
+        "nb_read_frames": "1125"
+      }
+    ],
+    "format": {
+      "duration": "24.000000",
+      "size": "16184706"
+    }
+  },
+  "decoded_audio_samples": 1152000,
+  "decoded_sample_rate": 48000,
+  "loudness": {
+    "input_i": "-14.36",
+    "input_tp": "-2.82",
+    "input_lra": "2.90",
+    "input_thresh": "-24.84",
+    "output_i": "-13.70",
+    "output_tp": "-2.09",
+    "output_lra": "2.60",
+    "output_thresh": "-24.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.30"
+  },
+  "click_runs": [],
+  "clipping_runs": 0,
+  "decoded_sample_peak_dbfs": -2.8223,
+  "checks": {
+    "duration_24s": true,
+    "frames_720": true,
+    "vertical_1080x1920": true,
+    "fps_30": true,
+    "audio_48k_stereo": true,
+    "integrated_loudness": true,
+    "true_peak": true,
+    "no_sample_clipping_runs": true,
+    "no_click_runs": true
+  },
+  "passed": true
+}
