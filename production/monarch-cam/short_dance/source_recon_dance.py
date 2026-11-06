@@ -270,8 +270,9 @@ def main() -> int:
         "  - USFWS explicitly calls these gatherings **dance parties**.\n"
         "  - Once a pair bond forms, the birds **stay bonded for life**.\n"
         f"- Animal Diversity Web, *Phoebastria immutabilis*: {ADW_PAGE}\n"
-        "  - Courtship display includes **bill-clicking**, tucking bills under wings, and **pointing bills at the sky simultaneously**.\n"
-        "  - Laysan albatrosses are monogamous and mate for life.\n"
+        "  - **Independently fetched and read on 2026-11-06.** The page says the courtship display consists of **25 different postures**, including **clicking beaks together**, tucking bills under wings, and **pointing bills at the sky simultaneously**.\n"
+        "  - Laysan albatrosses are **monogamous** and **mate for life**; pair bonds are formed over **several years**.\n"
+        "  - ADW says only first-time breeders and non-breeding birds perform this dance. That is a general species statement and is **not** used here to identify or label the two birds in the USFWS clip.\n"
         "- Commons description: filmed on **Midway Atoll**; video by Ann Bell/USFWS.\n\n"
         "Guardrail: the edit explains general species behavior. It does **not** claim these two filmed birds are juveniles, "
         "are already a lifelong pair, or have a known relationship history. No handle, door, car, food-reward, "
@@ -280,11 +281,11 @@ def main() -> int:
     )
     (BASE / "DANCE_TOPIC_LOCK.md").write_text(
         "# New topic lock — They Don't Flirt. They Choreograph.\n\n"
-        "**Status:** source visual review pending; previous bear/car Shorts are untouched.\n\n"
+        "**Status:** source reviewed, exact visual windows locked for the 24-second render; previous bear/car Shorts are untouched.\n\n"
         "- New subject: **Laysan albatross courtship dance**, Midway Atoll.\n"
-        "- New picture source: public-domain USFWS clip via Wikimedia Commons, 53 s, 1920×1080.\n"
+        "- New picture source: public-domain USFWS clip via Wikimedia Commons, 52.581 s, 1920×1080.\n"
         "- New creative angle: a ridiculous-looking dance that is actually a multi-year audition for a lifelong partner.\n"
-        "- New sound bed: CC0 comedy/orchestra music, restrained CC0 graphic accents, optional original public-domain clip ambience.\n"
+        "- New sound bed: CC0 upbeat chiptune comedy music, restrained CC0 graphic accents, and original public-domain clip ambience.\n"
         "- Rule: \"viral\" is an optimization objective, not a promise. Objective QC and model review are evidence, not audience guarantees.\n\n"
         f"- Rights: {RIGHTS_PAGE}\n- Facts: {USFWS_STORY} and {ADW_PAGE}\n",
         encoding="utf-8",

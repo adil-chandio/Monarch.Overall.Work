@@ -1,0 +1,108 @@
+{
+  "project": "MONARCH CAM — They Don't Flirt. They Choreograph.",
+  "checked_on": "2026-11-06",
+  "policy": {
+    "allowed": [
+      "CC0-1.0",
+      "Public domain (USFWS)"
+    ],
+    "rejected": [
+      "CC BY-NC",
+      "CC BY-ND",
+      "unverified",
+      "permission outreach"
+    ],
+    "note": "Every Freesound source page displays Creative Commons 0. Openverse detail records supplied and verified the direct HQ-preview URLs on 2026-11-06. The native clip audio is public-domain USFWS audio from the same Commons file."
+  },
+  "assets": [
+    {
+      "id": "music_funny",
+      "role": "music",
+      "title": "Little, happy tune - 22.10.2015",
+      "creator": "cabled_mess",
+      "source_page": "https://freesound.org/people/cabled_mess/sounds/335361/",
+      "download_urls": [
+        "https://cdn.freesound.org/previews/335/335361_5450487-hq.mp3"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page_verified": true,
+      "local_filename": "music_funny.mp3",
+      "openverse_record": "https://api.openverse.org/v1/audio/f922ffc5-e342-41d8-a6eb-8d443fa9a29f/",
+      "duration_seconds": 40.056,
+      "source_category": "Music / Solo instrument"
+    },
+    {
+      "id": "soft_whoosh",
+      "role": "transition_sfx",
+      "title": "Whoosh_Simple_ER_SFX_1.wav",
+      "creator": "Alex_hears_things",
+      "source_page": "https://freesound.org/people/Alex_hears_things/sounds/521044/",
+      "download_urls": [
+        "https://cdn.freesound.org/previews/521/521044_2309965-hq.mp3"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page_verified": true,
+      "local_filename": "soft_whoosh.mp3",
+      "openverse_record": "https://api.openverse.org/v1/audio/22756dbc-3369-434b-8838-61c2d10cf7fe/"
+    },
+    {
+      "id": "soft_impact",
+      "role": "graphic_accent_sfx",
+      "title": "Soft Cinematic Impact",
+      "creator": "Rizzard",
+      "source_page": "https://freesound.org/people/Rizzard/sounds/560156/",
+      "download_urls": [
+        "https://cdn.freesound.org/previews/560/560156_10825267-hq.mp3"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page_verified": true,
+      "local_filename": "soft_impact.mp3",
+      "openverse_record": "https://api.openverse.org/v1/audio/10342426-5513-47bd-9c73-635b2e2db687/"
+    },
+    {
+      "id": "cartoon_boing",
+      "role": "comedy_accent_sfx",
+      "title": "Cartoon Boing.wav",
+      "creator": "reelworldstudio",
+      "source_page": "https://freesound.org/people/reelworldstudio/sounds/161122/",
+      "download_urls": [
+        "https://cdn.freesound.org/previews/161/161122_2750714-hq.mp3"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page_verified": true,
+      "local_filename": "cartoon_boing.mp3",
+      "openverse_record": "https://api.openverse.org/v1/audio/b856b5cb-9109-4f75-81bf-35dfbc216d95/"
+    },
+    {
+      "id": "comedy_tick",
+      "role": "comedy_tick_sfx",
+      "title": "Comedy_Music_Samples_033.wav",
+      "creator": "jalastram",
+      "source_page": "https://freesound.org/people/jalastram/sounds/457985/",
+      "download_urls": [
+        "https://cdn.freesound.org/previews/457/457985_3905081-hq.mp3"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page_verified": true,
+      "local_filename": "comedy_tick.mp3",
+      "openverse_record": "https://api.openverse.org/v1/audio/faab9757-a14c-4525-8cf6-1a7b059a92e9/"
+    },
+    {
+      "id": "native_audio",
+      "role": "ambience",
+      "title": "Laysan Albatross Mating Dance 2016 — original clip audio",
+      "creator": "Ann Bell / U.S. Fish & Wildlife Service",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Laysan_Albatross_Mating_Dance_2016.webm",
+      "download_urls": [],
+      "local": true,
+      "license": "Public domain (USFWS / U.S. federal government work)",
+      "source_page_verified": true,
+      "local_filename": "usfws_clip_audio.wav"
+    }
+  ]
+}
