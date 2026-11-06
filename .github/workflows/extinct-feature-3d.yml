@@ -14,12 +14,13 @@ permissions:
   contents: write
 concurrency:
   group: extinct-approved-3d-production
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   authored-chapters:
     runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.manifest.outputs.matrix }}
+      enabled: ${{ steps.manifest.outputs.enabled }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,10 +32,14 @@ jobs:
           m=json.load(open('production/extinct-life/feature-3d/sequence.json'))
           chapters=[c['index'] for c in m['chapters'] if c['implemented']]
           assert chapters, 'No authored scenes: do not render fallback footage'
-          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('matrix='+json.dumps({'chapter':chapters})+'\n')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('matrix='+json.dumps({'chapter':chapters})+'\n')
+              f.write('enabled='+str(m.get('render_enabled',True)).lower()+'\n')
+          print('Render enabled:',m.get('render_enabled',True),m.get('hold_reason',''))
           PY
   render:
     needs: authored-chapters
+    if: needs.authored-chapters.outputs.enabled == 'true'
     strategy:
       fail-fast: false
       max-parallel: 8

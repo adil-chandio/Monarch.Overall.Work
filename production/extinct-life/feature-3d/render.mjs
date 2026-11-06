@@ -1,7 +1,7 @@
 // Own deterministic harness adapted from the repo's showreel capture pattern.
 import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import zlib from 'node:zlib';import {spawn,execFileSync} from 'node:child_process';import {once} from 'node:events';import {chromium} from 'playwright';import serverChromium from '@sparticuz/chromium';
 const CHAPTER=Number(process.argv.find(x=>x.startsWith('--chapter='))?.split('=')[1]||2);if(CHAPTER!==2)throw Error('This chapter has not been implemented; refusing a fallback scene');
-const manifest=JSON.parse(fs.readFileSync('production/extinct-life/feature-3d/sequence.json','utf8')),N=manifest.chapters[CHAPTER].frames;
+const manifest=JSON.parse(fs.readFileSync('production/extinct-life/feature-3d/sequence.json','utf8')),N=manifest.chapters[CHAPTER].frames;if(manifest.render_enabled===false&&!process.argv.includes('--stills'))throw Error('Render on script-review hold: '+manifest.hold_reason);
 const START=Number(process.argv.find(x=>x.startsWith('--from='))?.split('=')[1]||0);if(!Number.isInteger(START)||START<0||START>=N)throw Error('Invalid first frame');
 const root=process.cwd(),cache=path.join(root,'.cache/extinct-feature-3d/ch02');fs.mkdirSync(cache,{recursive:true});
 const FF=execFileSync(path.join(root,'.venv/bin/python'),['-c','import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'],{encoding:'utf8'}).trim();
