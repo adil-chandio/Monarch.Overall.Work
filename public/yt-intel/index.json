@@ -1,6 +1,42 @@
 {
-  "updated": "2026-11-03T21:55:07.365Z",
+  "updated": "2026-11-06T23:00:01.889Z",
   "reports": [
+    {
+      "topic": "youtube automation",
+      "at": "2026-11-06T22:59:46.000Z",
+      "file": "youtube-automation.json",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN",
+      "score": 55.7,
+      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "parts": {
+        "demand": 80.5,
+        "winnability": 44.85714285714286,
+        "mechanism": 50,
+        "fit": null,
+        "timing": 20
+      },
+      "strongest_against": [
+        "a few videos already own this topic (winnability 45)",
+        "interest is decaying — this is a topic of last quarter"
+      ],
+      "saturation": {
+        "videos": 30,
+        "top3_share": 0.58,
+        "winner_ratio": 38.1,
+        "fresh_share_30d": 0.13,
+        "median_views": 50493,
+        "median_age_days": 147.37,
+        "reading": "distributed — no single video owns it, entry is feasible"
+      },
+      "confidence": 0.85,
+      "mechanism": 50,
+      "vph_median": 29
+    },
     {
       "topic": "ai video editing",
       "at": "2026-11-03T21:54:52.000Z",
@@ -70,42 +106,6 @@
       "confidence": 0.85,
       "mechanism": 75,
       "vph_median": 1
-    },
-    {
-      "topic": "youtube automation",
-      "at": "2026-11-03T20:21:09.000Z",
-      "file": "youtube-automation.json",
-      "lane": "api",
-      "order": "relevance",
-      "status": "ok",
-      "count": 30,
-      "verdict": "SHARPEN",
-      "score": 59.4,
-      "reason": "the topic is live but we cannot yet see how the winners are built — teardown the top 5 before committing a production day",
-      "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
-      "parts": {
-        "demand": 80.5,
-        "winnability": 57.42857142857143,
-        "mechanism": 50,
-        "fit": null,
-        "timing": 20
-      },
-      "strongest_against": [
-        "a few videos already own this topic (winnability 57)",
-        "interest is decaying — this is a topic of last quarter"
-      ],
-      "saturation": {
-        "videos": 30,
-        "top3_share": 0.5,
-        "winner_ratio": 38.8,
-        "fresh_share_30d": 0.17,
-        "median_views": 49595,
-        "median_age_days": null,
-        "reading": "distributed — no single video owns it, entry is feasible"
-      },
-      "confidence": 0.85,
-      "mechanism": 50,
-      "vph_median": 31
     },
     {
       "topic": "ai b roll generation",
@@ -216,54 +216,77 @@
   ],
   "comments": [
     {
-      "video": "NAF-v1HEF2g",
-      "file": "comments-NAF-v1HEF2g.json",
-      "n": 49,
+      "video": "m8J7t1JXCLA",
+      "file": "comments-m8J7t1JXCLA.json",
+      "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:53.216Z",
-      "asks": [],
+      "at": "2026-11-06T22:59:48.243Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
       "objections": [],
       "wants": [
         {
-          "label": "wants to buy time/teaching",
+          "label": "wants the asset",
           "n": 1,
-          "share": 0.02
+          "share": 0.01
         }
       ],
       "top_liked": [
         {
-          "likes": 17,
-          "text": "My Faceless YouTube Cashflow Guide is currently on DISCOUNT: 👉https://nestuge.com/getytcashflow\n\n📚 Tutorials Mentioned in This Video:\n\n▶ H"
+          "likes": 143,
+          "text": "Transition Hook is easily the best because of the potential for unhinged comedy 😅"
         },
         {
-          "likes": 13,
-          "text": "Wow I watch as a creator too and I know how much and how long it takes to come up with such a long and awesome video. Wow good explanation d"
+          "likes": 60,
+          "text": "Really helpful"
         }
       ]
     },
     {
-      "video": "mfvdXlE46ts",
-      "file": "comments-mfvdXlE46ts.json",
-      "n": 30,
-      "reading": "the audience is asking for more: asked for a sibling topic (3%)",
-      "at": "2026-11-03T21:54:52.799Z",
+      "video": "4q9kjy_DWzk",
+      "file": "comments-4q9kjy_DWzk.json",
+      "n": 100,
+      "reading": "wants to buy time/teaching (4%) is the conversion surface",
+      "at": "2026-11-06T22:59:47.777Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
-          "n": 1,
-          "share": 0.033
-        }
-      ],
-      "objections": [],
-      "wants": [],
-      "top_liked": [
-        {
-          "likes": 172,
-          "text": "Bro taught us good hool but he himself didn't used it. Respect bro."
+          "n": 2,
+          "share": 0.02
         },
         {
-          "likes": 28,
-          "text": "Another hook is \"Do you know...\""
+          "label": "asked for a sequel",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [
+        {
+          "label": "objected to cost",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 4,
+          "share": 0.04
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 300,
+          "text": "Small YouTubers let’s gather here! 😊"
+        },
+        {
+          "likes": 222,
+          "text": "Okay I just started this channel thanks to you, I plan on posting 5 days a week (Monday to Friday) pray for me everyone."
         }
       ]
     },
@@ -272,7 +295,7 @@
       "file": "comments-5tOADMwGeBI.json",
       "n": 100,
       "reading": "wants to buy time/teaching (11%) is the conversion surface",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -310,7 +333,7 @@
       "file": "comments-954L0eVIdaE.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -353,7 +376,7 @@
       "file": "comments-Bbjv9-00tv0.json",
       "n": 100,
       "reading": "the loudest objection is objected to cost (3%) — fix that in the remake; wants to buy time/teaching (10%) is the conversion surface",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [
         {
@@ -395,7 +418,7 @@
       "file": "comments-CV-k6rPJvJY.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -427,7 +450,7 @@
       "file": "comments-DHjR3HpA0PI.json",
       "n": 32,
       "reading": "the loudest objection is said it did not work (6%) — fix that in the remake; wants to buy time/teaching (6%) is the conversion surface",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [
         {
@@ -459,7 +482,7 @@
       "file": "comments-FWE3fu_0Sfc.json",
       "n": 80,
       "reading": "wants to buy time/teaching (2%) is the conversion surface",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -507,7 +530,7 @@
       "file": "comments-IPW-MF8Kp0I.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [],
       "wants": [
@@ -533,7 +556,7 @@
       "file": "comments-J-suhuECjBw.json",
       "n": 100,
       "reading": "wants to buy time/teaching (4%) is the conversion surface",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [],
       "wants": [
@@ -560,11 +583,37 @@
       ]
     },
     {
+      "video": "NAF-v1HEF2g",
+      "file": "comments-NAF-v1HEF2g.json",
+      "n": 49,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-06T22:59:14.892Z",
+      "asks": [],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 1,
+          "share": 0.02
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 17,
+          "text": "My Faceless YouTube Cashflow Guide is currently on DISCOUNT: 👉https://nestuge.com/getytcashflow\n\n📚 Tutorials Mentioned in This Video:\n\n▶ H"
+        },
+        {
+          "likes": 13,
+          "text": "Wow I watch as a creator too and I know how much and how long it takes to come up with such a long and awesome video. Wow good explanation d"
+        }
+      ]
+    },
+    {
       "video": "O0qkkexHqZw",
       "file": "comments-O0qkkexHqZw.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -602,7 +651,7 @@
       "file": "comments-OTLxMmrMyYo.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [
         {
@@ -634,7 +683,7 @@
       "file": "comments-VjpY2cETzy4.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -671,7 +720,7 @@
       "file": "comments-WlRt8Ov4kBk.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [],
       "wants": [],
@@ -691,7 +740,7 @@
       "file": "comments-Yhl3J1L1yFE.json",
       "n": 100,
       "reading": "wants the asset (6%) is the conversion surface",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [
         {
@@ -723,7 +772,7 @@
       "file": "comments-bXpF_NHalO4.json",
       "n": 99,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [],
       "wants": [],
@@ -743,7 +792,7 @@
       "file": "comments-d_csri5M9xw.json",
       "n": 100,
       "reading": "the audience is asking for more: asked for a sibling topic (3%)",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -782,11 +831,37 @@
       ]
     },
     {
+      "video": "mfvdXlE46ts",
+      "file": "comments-mfvdXlE46ts.json",
+      "n": 30,
+      "reading": "the audience is asking for more: asked for a sibling topic (3%)",
+      "at": "2026-11-06T22:59:14.892Z",
+      "asks": [
+        {
+          "label": "asked for a sibling topic",
+          "n": 1,
+          "share": 0.033
+        }
+      ],
+      "objections": [],
+      "wants": [],
+      "top_liked": [
+        {
+          "likes": 172,
+          "text": "Bro taught us good hool but he himself didn't used it. Respect bro."
+        },
+        {
+          "likes": 28,
+          "text": "Another hook is \"Do you know...\""
+        }
+      ]
+    },
+    {
       "video": "pdLEHfkwgV8",
       "file": "comments-pdLEHfkwgV8.json",
       "n": 99,
       "reading": "the loudest objection is objected to cost (3%) — fix that in the remake",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -829,7 +904,7 @@
       "file": "comments-xJhbirj2tnw.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [],
       "objections": [
         {
@@ -855,7 +930,7 @@
       "file": "comments-xwNRyKItpOk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (5%) is the conversion surface",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -887,7 +962,7 @@
       "file": "comments-zxFZE_-w54Y.json",
       "n": 100,
       "reading": "the audience is asking for more: asked for a sibling topic (3%)",
-      "at": "2026-11-03T21:54:19.308Z",
+      "at": "2026-11-06T22:59:14.892Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -921,41 +996,33 @@
     }
   ],
   "thumbnails": {
-    "topic": "ai video editing",
+    "topic": "youtube automation",
     "n": 12,
     "face_rate": 1,
-    "avg_contrast": 0.223,
-    "avg_busy": 1.66,
-    "reading": "face-led: people are the product; house colour is red (8/12 thumbnails)",
+    "avg_contrast": 0.309,
+    "avg_busy": 3.17,
+    "reading": "face-led: people are the product; house colour is red (12/12 thumbnails)",
     "hue_families": [
       [
         "red",
-        8
-      ],
-      [
-        "teal",
-        2
-      ],
-      [
-        "blue",
-        1
+        12
       ]
     ],
     "samples": [
       {
-        "id": "xC-WsW-y2aY",
-        "hex": "#1a4d70",
-        "face": 0.073
+        "id": "9r71jF5SZcQ",
+        "hex": "#cb4740",
+        "face": 0.207
       },
       {
-        "id": "4mKKZDNrMTA",
-        "hex": "#836654",
-        "face": 0.261
+        "id": "xwNRyKItpOk",
+        "hex": "#eb231d",
+        "face": 0.136
       },
       {
-        "id": "TfI218pdB_E",
-        "hex": "#e56118",
-        "face": 0.055
+        "id": "VjpY2cETzy4",
+        "hex": "#ce544b",
+        "face": 0.12
       }
     ]
   }
