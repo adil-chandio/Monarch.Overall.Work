@@ -1,28 +1,144 @@
 {
   "samples": [
     {
+      "frame": 30,
+      "world": "river",
+      "sequence": "transport",
+      "age": 1,
+      "camera": {
+        "position": [
+          -3.2443750000000002,
+          2.5221875000000002,
+          10.55625
+        ],
+        "target": [
+          0,
+          0.4609375,
+          6.834375
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "representative_traces": 36,
+      "transport_age": 1,
+      "source_sample_distinct": true,
+      "visible_leaf": {
+        "position": [
+          -0.6137833392976201,
+          1.0490900708471231,
+          7.8
+        ],
+        "landed": false,
+        "arrived": false,
+        "travel": 0
+      },
+      "settled_trace_markers": 0
+    },
+    {
       "frame": 60,
       "world": "river",
       "sequence": "transport",
       "age": 2,
       "camera": {
         "position": [
-          -4.925,
-          2.7453125000000003,
-          9.5
+          -3.285,
+          2.5425,
+          10.15
         ],
         "target": [
           0,
-          0.1,
-          3.7265625
+          0.3125,
+          6.725
         ]
       },
       "actual_mesh_scene": true,
       "generated_scene_images_used": false,
       "old_movie_used": false,
-      "representative_traces": 96,
+      "representative_traces": 36,
       "transport_age": 2,
-      "source_sample_distinct": true
+      "source_sample_distinct": true,
+      "visible_leaf": {
+        "position": [
+          -0.20902025182843384,
+          0.06609400127909927,
+          7.8
+        ],
+        "landed": false,
+        "arrived": false,
+        "travel": 0
+      },
+      "settled_trace_markers": 0
+    },
+    {
+      "frame": 90,
+      "world": "river",
+      "sequence": "transport",
+      "age": 3,
+      "camera": {
+        "position": [
+          -3.333125,
+          2.5665625000000003,
+          9.66875
+        ],
+        "target": [
+          0,
+          0.18281250000000002,
+          6.503125
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "representative_traces": 36,
+      "transport_age": 3,
+      "source_sample_distinct": true,
+      "visible_leaf": {
+        "position": [
+          -0.21902834551920963,
+          0.055,
+          7.056470588235294
+        ],
+        "landed": true,
+        "arrived": false,
+        "travel": 0.04705882352941176
+      },
+      "settled_trace_markers": 0
+    },
+    {
+      "frame": 180,
+      "world": "river",
+      "sequence": "transport",
+      "age": 6,
+      "camera": {
+        "position": [
+          -3.5788034188034183,
+          2.696239316239316,
+          7.16068376068376
+        ],
+        "target": [
+          0,
+          0.05555555555555555,
+          4.2324786324786325
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "representative_traces": 36,
+      "transport_age": 6,
+      "source_sample_distinct": true,
+      "visible_leaf": {
+        "position": [
+          -0.13815092245759977,
+          0.055,
+          4.2682352941176465
+        ],
+        "landed": true,
+        "arrived": false,
+        "travel": 0.22352941176470587
+      },
+      "settled_trace_markers": 0
     },
     {
       "frame": 360,
@@ -31,22 +147,68 @@
       "age": 12,
       "camera": {
         "position": [
-          -5.44326923076923,
-          2.960576923076923,
-          1.7884615384615383
+          -4.166449876653958,
+          2.8938625999850487,
+          0.8492561859908799
         ],
         "target": [
           0,
-          0.09230769230769231,
-          -2.4086538461538463
+          0.1,
+          -2.029378784480825
         ]
       },
       "actual_mesh_scene": true,
       "generated_scene_images_used": false,
       "old_movie_used": false,
-      "representative_traces": 96,
+      "representative_traces": 36,
       "transport_age": 12,
-      "source_sample_distinct": true
+      "source_sample_distinct": true,
+      "visible_leaf": {
+        "position": [
+          -0.034516038833180135,
+          0.055,
+          -1.3082352941176483
+        ],
+        "landed": true,
+        "arrived": false,
+        "travel": 0.5764705882352942
+      },
+      "settled_trace_markers": 0
+    },
+    {
+      "frame": 570,
+      "world": "river",
+      "sequence": "transport",
+      "age": 19,
+      "camera": {
+        "position": [
+          -5.583733333333333,
+          3.904933333333334,
+          -2.894
+        ],
+        "target": [
+          0,
+          0.1,
+          -5.3373333333333335
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "representative_traces": 36,
+      "transport_age": 19,
+      "source_sample_distinct": true,
+      "visible_leaf": {
+        "position": [
+          0.20457691088088933,
+          0.055,
+          -7.814117647058825
+        ],
+        "landed": true,
+        "arrived": false,
+        "travel": 0.9882352941176471
+      },
+      "settled_trace_markers": 15
     },
     {
       "frame": 690,
@@ -55,22 +217,67 @@
       "age": 23,
       "camera": {
         "position": [
-          -8.1144,
-          5.9272,
-          -0.7599999999999998
+          -7.309375,
+          5.6468750000000005,
+          -0.0546875
         ],
         "target": [
           0,
-          0.2072,
-          -1.2000000000000002
+          0.1,
+          -2.640625
         ]
       },
       "actual_mesh_scene": true,
       "generated_scene_images_used": false,
       "old_movie_used": false,
-      "representative_traces": 96,
+      "representative_traces": 36,
       "transport_age": 23,
-      "source_sample_distinct": true
+      "source_sample_distinct": true,
+      "visible_leaf": {
+        "position": [
+          0.19607898127110496,
+          0.055,
+          -8
+        ],
+        "landed": true,
+        "arrived": true,
+        "travel": 1
+      },
+      "settled_trace_markers": 35
+    },
+    {
+      "frame": 780,
+      "world": "deposits",
+      "sequence": "time-averaging",
+      "age": 0.7666666666666667,
+      "camera": {
+        "position": [
+          7.4354064592592595,
+          3.8306666666666667,
+          9.058073125925926
+        ],
+        "target": [
+          0,
+          -0.2684430222222222,
+          0
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "arrival_batches": 1,
+      "surface_height": -0.38084658618966005,
+      "layer_growth": [
+        1,
+        1,
+        0.9975100406186467,
+        0,
+        0,
+        0,
+        0
+      ],
+      "age_applies_to": "deposits",
+      "individual_molecule_dates": false
     },
     {
       "frame": 800,
@@ -79,13 +286,13 @@
       "age": 1.4333333333333333,
       "camera": {
         "position": [
-          6.789863924786325,
-          3.3403693470085476,
-          8.034528681481481
+          7.37832082962963,
+          3.857333333333333,
+          9.107654162962962
         ],
         "target": [
           0,
-          0.4322740603988604,
+          -0.1961479111111111,
           0
         ]
       },
@@ -93,6 +300,84 @@
       "generated_scene_images_used": false,
       "old_movie_used": false,
       "arrival_batches": 1,
+      "surface_height": -0.0759281083748991,
+      "layer_growth": [
+        1,
+        1,
+        1,
+        0.8943290930150024,
+        0,
+        0,
+        0
+      ],
+      "age_applies_to": "deposits",
+      "individual_molecule_dates": false
+    },
+    {
+      "frame": 830,
+      "world": "deposits",
+      "sequence": "time-averaging",
+      "age": 2.433333333333333,
+      "camera": {
+        "position": [
+          7.3040701629629625,
+          3.897333333333333,
+          9.193403496296296
+        ],
+        "target": [
+          0,
+          -0.10477191111111113,
+          0
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "arrival_batches": 2,
+      "surface_height": 0.29988869519294237,
+      "layer_growth": [
+        1,
+        1,
+        1,
+        1,
+        0.9996726329204184,
+        0,
+        0
+      ],
+      "age_applies_to": "deposits",
+      "individual_molecule_dates": false
+    },
+    {
+      "frame": 914,
+      "world": "deposits",
+      "sequence": "time-averaging",
+      "age": 5.233333333333333,
+      "camera": {
+        "position": [
+          7.188856954089506,
+          3.9998323423032405,
+          9.513069871238425
+        ],
+        "target": [
+          0,
+          0.0020944830246913586,
+          0
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "arrival_batches": 3,
+      "surface_height": 0.9800000000000002,
+      "layer_growth": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
       "age_applies_to": "deposits",
       "individual_molecule_dates": false
     },
@@ -103,13 +388,13 @@
       "age": 8.766666666666667,
       "camera": {
         "position": [
-          5.949119192374465,
-          3.4223907635550215,
-          8.066100817418981
+          7.014177933476631,
+          3.9661008174189814,
+          9.66196795118221
         ],
         "target": [
           0,
-          0.508113323539886,
+          0.010045067239858905,
           0
         ]
       },
@@ -117,6 +402,16 @@
       "generated_scene_images_used": false,
       "old_movie_used": false,
       "arrival_batches": 3,
+      "surface_height": 0.9800000000000002,
+      "layer_growth": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
       "age_applies_to": "deposits",
       "individual_molecule_dates": false
     },
@@ -174,7 +469,17 @@
       ],
       "flight_age": 0,
       "goose_flying": false,
-      "branch_contact_deflection": 0
+      "branch_contact_deflection": 0,
+      "head_attention": 0,
+      "detached_leaf": {
+        "visible": false,
+        "landed": false,
+        "position": [
+          -0.9504692206775814,
+          2.220244968776625,
+          1.022154674799289
+        ]
+      }
     },
     {
       "frame": 1231,
@@ -230,7 +535,17 @@
       ],
       "flight_age": 0,
       "goose_flying": false,
-      "branch_contact_deflection": 0
+      "branch_contact_deflection": 0,
+      "head_attention": 0,
+      "detached_leaf": {
+        "visible": false,
+        "landed": false,
+        "position": [
+          -0.9504692206775814,
+          2.220244968776625,
+          1.022154674799289
+        ]
+      }
     },
     {
       "frame": 1311,
@@ -286,7 +601,17 @@
       ],
       "flight_age": 0.11666666666666714,
       "goose_flying": true,
-      "branch_contact_deflection": -0.0062293138657826715
+      "branch_contact_deflection": -0.0062293138657826715,
+      "head_attention": 0,
+      "detached_leaf": {
+        "visible": false,
+        "landed": false,
+        "position": [
+          -0.9504692206775814,
+          2.220244968776625,
+          1.022154674799289
+        ]
+      }
     },
     {
       "frame": 1341,
@@ -342,7 +667,17 @@
       ],
       "flight_age": 1.1166666666666671,
       "goose_flying": true,
-      "branch_contact_deflection": -0.032514100734455674
+      "branch_contact_deflection": -0.032514100734455674,
+      "head_attention": 0.9323472489467529,
+      "detached_leaf": {
+        "visible": false,
+        "landed": false,
+        "position": [
+          -0.9504692206775814,
+          2.220244968776625,
+          1.022154674799289
+        ]
+      }
     },
     {
       "frame": 1381,
@@ -398,7 +733,83 @@
       ],
       "flight_age": 2.45,
       "goose_flying": true,
-      "branch_contact_deflection": -0.048013116057078024
+      "branch_contact_deflection": -0.048013116057078024,
+      "head_attention": 1,
+      "detached_leaf": {
+        "visible": false,
+        "landed": false,
+        "position": [
+          -0.9504692206775814,
+          2.220244968776625,
+          1.022154674799289
+        ]
+      }
+    },
+    {
+      "frame": 1390,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 8.3,
+      "camera": {
+        "position": [
+          -5.752974133333333,
+          3.228069866666667,
+          -8.852938133333335
+        ],
+        "target": [
+          0.5250506666666667,
+          1.5055676,
+          -1.0505568
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        0.8079999999999998
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -1.01592,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.1560800000000002,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": -0.6622649626780499,
+          "ground_contact_y": 0.03284188997330591
+        },
+        {
+          "stance": false,
+          "local_z": 0.7132509922417141,
+          "ground_contact_y": -0.04398942837345392
+        }
+      ],
+      "goose_position": [
+        4.839,
+        1.824378058733764,
+        -1.750000000000001
+      ],
+      "flight_age": 2.750000000000001,
+      "goose_flying": true,
+      "branch_contact_deflection": -0.04864229725760082,
+      "head_attention": 1,
+      "detached_leaf": {
+        "visible": true,
+        "landed": false,
+        "position": [
+          -0.9504692206775814,
+          2.220244968776625,
+          1.022154674799289
+        ]
+      }
     },
     {
       "frame": 1411,
@@ -454,7 +865,83 @@
       ],
       "flight_age": 3.45,
       "goose_flying": true,
-      "branch_contact_deflection": -0.04610172480012041
+      "branch_contact_deflection": -0.04610172480012041,
+      "head_attention": 0.9645061728395059,
+      "detached_leaf": {
+        "visible": true,
+        "landed": false,
+        "position": [
+          -0.9077832861504623,
+          1.8395632958698618,
+          0.8245076159757596
+        ]
+      }
+    },
+    {
+      "frame": 1441,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 10,
+      "camera": {
+        "position": [
+          -5.483199999999999,
+          3.4208000000000003,
+          -9.139200000000002
+        ],
+        "target": [
+          0.612,
+          1.5504000000000002,
+          -1.3472000000000002
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        0.3999999999999999
+      ],
+      "feet": [
+        {
+          "stance": false,
+          "local_z": -0.620694584550767,
+          "ground_contact_y": -0.0337622509977374
+        },
+        {
+          "stance": false,
+          "local_z": 0.7285432612051452,
+          "ground_contact_y": 0.0011274900771598012
+        },
+        {
+          "stance": true,
+          "local_z": -1.0519200000000002,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.12008,
+          "ground_contact_y": -0.045
+        }
+      ],
+      "goose_position": [
+        5.3626,
+        2.90960440467905,
+        -4.13
+      ],
+      "flight_age": 4.45,
+      "goose_flying": true,
+      "branch_contact_deflection": -0.032514100734455674,
+      "head_attention": 0.13495148097342835,
+      "detached_leaf": {
+        "visible": true,
+        "landed": true,
+        "position": [
+          -0.6504692206775815,
+          -0.025,
+          0.5421546747992889
+        ]
+      }
     },
     {
       "frame": 1501,
@@ -510,7 +997,17 @@
       ],
       "flight_age": 6.45,
       "goose_flying": true,
-      "branch_contact_deflection": 0
+      "branch_contact_deflection": -0.001004686793152364,
+      "head_attention": 0,
+      "detached_leaf": {
+        "visible": true,
+        "landed": true,
+        "position": [
+          -0.6504692206775815,
+          -0.025,
+          0.5421546747992889
+        ]
+      }
     },
     {
       "frame": 1621,
@@ -566,7 +1063,17 @@
       ],
       "flight_age": 10.45,
       "goose_flying": true,
-      "branch_contact_deflection": 0
+      "branch_contact_deflection": -0.0000027643747603055507,
+      "head_attention": 0,
+      "detached_leaf": {
+        "visible": true,
+        "landed": true,
+        "position": [
+          -0.6504692206775815,
+          -0.025,
+          0.5421546747992889
+        ]
+      }
     },
     {
       "frame": 1771,
@@ -622,7 +1129,17 @@
       ],
       "flight_age": 15.45,
       "goose_flying": true,
-      "branch_contact_deflection": 0
+      "branch_contact_deflection": -4.507575973160729e-9,
+      "head_attention": 0,
+      "detached_leaf": {
+        "visible": true,
+        "landed": true,
+        "position": [
+          -0.6504692206775815,
+          -0.025,
+          0.5421546747992889
+        ]
+      }
     }
   ],
   "deterministic_seek": true,
