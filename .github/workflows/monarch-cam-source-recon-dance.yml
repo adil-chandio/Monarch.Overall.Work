@@ -1,0 +1,54 @@
+name: Monarch Cam — source review for new albatross-dance Short
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-source-recon-dance
+  cancel-in-progress: true
+
+jobs:
+  retrieve-and-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/c678cc81-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install bounded media and review tools
+        timeout-minutes: 12
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            timeout 180 sudo apt-get update -qq || true
+            timeout 300 sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -1
+          timeout 600 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 requests pillow
+
+      - name: Retrieve public-domain USFWS clip and build review sheets
+        timeout-minutes: 15
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_dance/source_recon_dance.py \
+            2>&1 | tee production/monarch-cam/short_dance/review/source_recon.log
+
+      - name: Commit source-review evidence
+        run: |
+          git config user.name "monarch-cam-source-recon-bot"
+          git config user.email "monarch-cam-source-recon-bot@users.noreply.github.com"
+          git add production/monarch-cam/short_dance/review \
+            production/monarch-cam/short_dance/DANCE_TOPIC_LOCK.md
+          if git diff --cached --quiet; then
+            echo "Source review unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): add public-domain albatross dance source review"
+          git pull --rebase origin arena/c678cc81-monarch-overall-work
+          git push origin HEAD:arena/c678cc81-monarch-overall-work
