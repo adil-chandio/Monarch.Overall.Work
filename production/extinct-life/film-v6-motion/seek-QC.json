@@ -1,0 +1,634 @@
+{
+  "samples": [
+    {
+      "frame": 60,
+      "world": "river",
+      "sequence": "transport",
+      "age": 2,
+      "camera": {
+        "position": [
+          -4.925,
+          2.7453125000000003,
+          9.5
+        ],
+        "target": [
+          0,
+          0.1,
+          3.7265625
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "representative_traces": 96,
+      "transport_age": 2,
+      "source_sample_distinct": true
+    },
+    {
+      "frame": 360,
+      "world": "river",
+      "sequence": "transport",
+      "age": 12,
+      "camera": {
+        "position": [
+          -5.44326923076923,
+          2.960576923076923,
+          1.7884615384615383
+        ],
+        "target": [
+          0,
+          0.09230769230769231,
+          -2.4086538461538463
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "representative_traces": 96,
+      "transport_age": 12,
+      "source_sample_distinct": true
+    },
+    {
+      "frame": 690,
+      "world": "river",
+      "sequence": "transport",
+      "age": 23,
+      "camera": {
+        "position": [
+          -8.1144,
+          5.9272,
+          -0.7599999999999998
+        ],
+        "target": [
+          0,
+          0.2072,
+          -1.2000000000000002
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "representative_traces": 96,
+      "transport_age": 23,
+      "source_sample_distinct": true
+    },
+    {
+      "frame": 800,
+      "world": "deposits",
+      "sequence": "time-averaging",
+      "age": 1.4333333333333333,
+      "camera": {
+        "position": [
+          6.789863924786325,
+          3.3403693470085476,
+          8.034528681481481
+        ],
+        "target": [
+          0,
+          0.4322740603988604,
+          0
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "arrival_batches": 1,
+      "age_applies_to": "deposits",
+      "individual_molecule_dates": false
+    },
+    {
+      "frame": 1020,
+      "world": "deposits",
+      "sequence": "time-averaging",
+      "age": 8.766666666666667,
+      "camera": {
+        "position": [
+          5.949119192374465,
+          3.4223907635550215,
+          8.066100817418981
+        ],
+        "target": [
+          0,
+          0.508113323539886,
+          0
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "arrival_batches": 3,
+      "age_applies_to": "deposits",
+      "individual_molecule_dates": false
+    },
+    {
+      "frame": 1141,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 0,
+      "camera": {
+        "position": [
+          -7,
+          3,
+          -8.3
+        ],
+        "target": [
+          -0.4,
+          1.5,
+          0
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        2.8
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -1.2319200000000001,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 0.94008,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": -0.7879200000000001,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": 1.27519376953125,
+          "ground_contact_y": 0.047564612968145195
+        }
+      ],
+      "goose_position": [
+        4.3,
+        -0.08,
+        0.7
+      ],
+      "flight_age": 0,
+      "goose_flying": false,
+      "branch_contact_deflection": 0
+    },
+    {
+      "frame": 1231,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 3,
+      "camera": {
+        "position": [
+          -6.6390625,
+          2.8968749999999996,
+          -7.99765625
+        ],
+        "target": [
+          -0.28515625,
+          1.4554687499999999,
+          -0.19687499999999997
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        2.08
+      ],
+      "feet": [
+        {
+          "stance": false,
+          "local_z": -0.8357679044923298,
+          "ground_contact_y": 0.16662399807508166
+        },
+        {
+          "stance": true,
+          "local_z": 0.7720799999999999,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": -0.9559200000000001,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.2160799999999998,
+          "ground_contact_y": -0.045
+        }
+      ],
+      "goose_position": [
+        4.3,
+        -0.08,
+        0.7
+      ],
+      "flight_age": 0,
+      "goose_flying": false,
+      "branch_contact_deflection": 0
+    },
+    {
+      "frame": 1311,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 5.666666666666667,
+      "camera": {
+        "position": [
+          -6.214634773662551,
+          2.991017232510288,
+          -8.26435506687243
+        ],
+        "target": [
+          0.09110403806584369,
+          1.4620563271604938,
+          -0.5666859567901235
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        1.4399999999999997
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -0.7599200000000002,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": 1.200621764592401,
+          "ground_contact_y": 0.11718320269721273
+        },
+        {
+          "stance": true,
+          "local_z": -1.20392,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 0.9680799999999999,
+          "ground_contact_y": -0.045
+        }
+      ],
+      "goose_position": [
+        4.3010480555555555,
+        -0.0795847896747592,
+        0.695236111111111
+      ],
+      "flight_age": 0.11666666666666714,
+      "goose_flying": true,
+      "branch_contact_deflection": -0.0062293138657826715
+    },
+    {
+      "frame": 1341,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 6.666666666666667,
+      "camera": {
+        "position": [
+          -6.029218106995884,
+          3.076954732510288,
+          -8.50576131687243
+        ],
+        "target": [
+          0.29917695473251027,
+          1.4771604938271605,
+          -0.7567901234567901
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        1.1999999999999997
+      ],
+      "feet": [
+        {
+          "stance": false,
+          "local_z": -0.8079407978248518,
+          "ground_contact_y": 0.15414266250169295
+        },
+        {
+          "stance": true,
+          "local_z": 0.7640800000000002,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": -0.9639199999999999,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.2080800000000003,
+          "ground_contact_y": -0.045
+        }
+      ],
+      "goose_position": [
+        4.396014722222223,
+        0.17817591636905145,
+        0.2635694444444441
+      ],
+      "flight_age": 1.1166666666666671,
+      "goose_flying": true,
+      "branch_contact_deflection": -0.032514100734455674
+    },
+    {
+      "frame": 1381,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 8,
+      "camera": {
+        "position": [
+          -5.8,
+          3.2,
+          -8.8
+        ],
+        "target": [
+          0.5,
+          1.5,
+          -1
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        0.8799999999999999
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -1.0879200000000004,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.0840799999999997,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": -0.6439200000000003,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": 0.8040717455858528,
+          "ground_contact_y": 0.08762821564152946
+        }
+      ],
+      "goose_position": [
+        4.7466,
+        1.4785767979975106,
+        -1.3300000000000003
+      ],
+      "flight_age": 2.45,
+      "goose_flying": true,
+      "branch_contact_deflection": -0.048013116057078024
+    },
+    {
+      "frame": 1411,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 9,
+      "camera": {
+        "position": [
+          -5.641511111111111,
+          3.3024888888888895,
+          -8.973511111111113
+        ],
+        "target": [
+          0.5715555555555556,
+          1.5221333333333336,
+          -1.1717333333333333
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        0.6399999999999997
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -0.84792,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": 1.323926852672457,
+          "ground_contact_y": -0.044868862578898536
+        },
+        {
+          "stance": false,
+          "local_z": -1.1898677920699416,
+          "ground_contact_y": 0.042205300459891695
+        },
+        {
+          "stance": true,
+          "local_z": 0.88008,
+          "ground_contact_y": -0.045
+        }
+      ],
+      "goose_position": [
+        5.0546,
+        2.5024717879295344,
+        -2.7300000000000004
+      ],
+      "flight_age": 3.45,
+      "goose_flying": true,
+      "branch_contact_deflection": -0.04610172480012041
+    },
+    {
+      "frame": 1501,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 12,
+      "camera": {
+        "position": [
+          -5.203377777777777,
+          3.636622222222223,
+          -9.451377777777777
+        ],
+        "target": [
+          0.6208888888888889,
+          1.5965333333333334,
+          -1.6709333333333334
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        -0.08000000000000007
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -1.0159200000000004,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.1560799999999998,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": -0.6622649626780492,
+          "ground_contact_y": 0.032841889973304964
+        },
+        {
+          "stance": false,
+          "local_z": 0.7132509922417137,
+          "ground_contact_y": -0.04398942837345381
+        }
+      ],
+      "goose_position": [
+        5.9786,
+        2.92,
+        -6.93
+      ],
+      "flight_age": 6.45,
+      "goose_flying": true,
+      "branch_contact_deflection": 0
+    },
+    {
+      "frame": 1621,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 16,
+      "camera": {
+        "position": [
+          -4.8808,
+          3.7741000000000002,
+          -10.0298
+        ],
+        "target": [
+          0.48429999999999995,
+          1.5596,
+          -2.1043
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        -1.04
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -0.9439200000000006,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.2280799999999994,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": -0.8788787717996691,
+          "ground_contact_y": 0.17959558283992583
+        },
+        {
+          "stance": true,
+          "local_z": 0.7840799999999994,
+          "ground_contact_y": -0.045
+        }
+      ],
+      "goose_position": [
+        7.2105999999999995,
+        2.92,
+        -12.53
+      ],
+      "flight_age": 10.45,
+      "goose_flying": true,
+      "branch_contact_deflection": 0
+    },
+    {
+      "frame": 1771,
+      "world": "living",
+      "sequence": "imagined-encounter",
+      "age": 21,
+      "camera": {
+        "position": [
+          -4.611466666666667,
+          3.7895999999999996,
+          -10.722133333333334
+        ],
+        "target": [
+          0.20746666666666663,
+          1.4442666666666668,
+          -2.5274666666666668
+        ]
+      },
+      "actual_mesh_scene": true,
+      "generated_scene_images_used": false,
+      "old_movie_used": false,
+      "mastodon_position": [
+        -2,
+        -0.045,
+        -2.24
+      ],
+      "feet": [
+        {
+          "stance": true,
+          "local_z": -0.6319200000000003,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": false,
+          "local_z": 0.7735401838562596,
+          "ground_contact_y": 0.05721072298488618
+        },
+        {
+          "stance": true,
+          "local_z": -1.0759200000000002,
+          "ground_contact_y": -0.045
+        },
+        {
+          "stance": true,
+          "local_z": 1.0960799999999997,
+          "ground_contact_y": -0.045
+        }
+      ],
+      "goose_position": [
+        8.750599999999999,
+        2.92,
+        -19.529999999999998
+      ],
+      "flight_age": 15.45,
+      "goose_flying": true,
+      "branch_contact_deflection": 0
+    }
+  ],
+  "deterministic_seek": true,
+  "subject_moves_with_frozen_camera": true,
+  "width": 1920,
+  "height": 1080,
+  "page_errors": [],
+  "not_a_full_watch_or_listen": true
+}
