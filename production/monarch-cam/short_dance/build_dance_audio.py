@@ -171,12 +171,13 @@ def build_audio():
         start_sample = int(round(item["start"] * SR))
         slot_end = int(round(narration[index + 1]["start"] * SR)) if index + 1 < len(narration) else SAMPLES
         slot_samples = slot_end - start_sample
-        allowed_samples = slot_samples - int(0.02 * SR)
+        allowed_samples = slot_samples - int(0.01 * SR)
         tempo = 1.0
         if len(clip) > allowed_samples:
-            # Aim below the slot guard: ffmpeg atempo can land slightly long after
-            # resampling, so request a small extra margin before checking again.
-            tempo = len(clip) / (allowed_samples - int(0.02 * SR))
+            # Aim well below the slot guard: ffmpeg atempo can land slightly long
+            # after resampling, so leave a 40 ms fitting margin before checking.
+            target_samples = allowed_samples - int(0.04 * SR)
+            tempo = len(clip) / target_samples
             if tempo > 1.15:
                 raise RuntimeError(f"{item['id']} needs excessive tempo {tempo:.3f}")
             clip = preview.decode_vo(WORK / f"{item['id']}.mp3", atempo=tempo).astype(np.float32)
