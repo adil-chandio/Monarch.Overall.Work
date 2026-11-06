@@ -1,4 +1,5 @@
 name: Extinct Life v4 — continuous-flow English production candidate
+# One-off lab delivery; no phase-wrap resets between continuous views.
 on:
   push:
     branches: [arena/ba8d901e-monarch-overall-work]
@@ -8,7 +9,7 @@ permissions:
   contents: write
 concurrency:
   group: extinct-film-v4-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   pictures:
     name: Native 1080p — chapter ${{ matrix.chapter }} half ${{ matrix.half }}

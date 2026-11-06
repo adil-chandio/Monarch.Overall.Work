@@ -26,5 +26,7 @@ class Revision(unittest.TestCase):
  def test_evidence_qualifiers_remain(self):
   s=(B/'scene.mjs').read_text()
   for v in ['NOT AN OBSERVED ENCOUNTER','NOT TO SCALE','NOT ACTUAL SEQUENCE READS','NOT STUDY FOOTAGE']:self.assertIn(v,s)
+ def test_no_wrapping_lab_delivery(self):
+  s=(B/'worlds.mjs').read_text();self.assertNotIn('act%6.2',s);self.assertIn('Math.min(act,6.2)',s)
  def test_no_false_finished_claim(self):self.assertFalse(self.m['full_film_complete'])
 if __name__=='__main__':unittest.main()
