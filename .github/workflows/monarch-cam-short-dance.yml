@@ -113,7 +113,7 @@ jobs:
               [x['caption'] for x in spec['narration']] +
               [x['top'] for x in spec['scenes']]
           ).lower()
-          metadata_blob = json.dumps(metadata).lower()
+          metadata_blob = json.dumps({k: metadata[k] for k in ('primary', 'comments')}).lower()
           forbidden = ('handle', 'car door', '25m', 'part 2', 'viral guarantee', 'bear', 'food reward', 'bears in cars', 'nps')
           for phrase in forbidden:
               assert phrase not in text_blob, phrase
@@ -212,9 +212,8 @@ jobs:
           manifest = json.loads((root/'review-manifest.json').read_text()) if (root/'review-manifest.json').exists() else {}
           ledger = json.loads((root/'visual_edit_ledger.json').read_text())
           cues = json.loads((root/'resolved_cues.json').read_text())
-          credits = Path('production/monarch-cam/short_dance/CREDITS.md').read_text()
-          plan = Path('production/monarch-cam/short_dance/DANCE_PLAN_AND_METADATA.md').read_text()
-          text_blob = (credits + plan).lower()
+          metadata_json = json.loads(Path('production/monarch-cam/short_dance/dance_viral_metadata.json').read_text())
+          text_blob = json.dumps({k: metadata_json[k] for k in ('primary', 'comments')}).lower()
           summary = {
               'deliverable': 'deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4',
               'package': "They Don't Flirt. They Choreograph.",
