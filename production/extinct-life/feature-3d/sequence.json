@@ -218,5 +218,12 @@
   ],
   "timing_method": "Existing estimated phonetic DTW, not ASR/human-verified word alignment; all original natural-speed voices preserved.",
   "render_enabled": false,
-  "hold_reason": "Owner requested transcript-led script forensics and rewrite before further film production."
+  "hold_reason": "Owner requested transcript-led script forensics and rewrite before further film production.",
+  "script_review_candidate": {
+    "path": "../script-lab/master-v2.json",
+    "version": "EP01-script-v2-transcript-led",
+    "english_words": 1045,
+    "timing_measured": false,
+    "legacy_timeline_not_v2": true
+  }
 }

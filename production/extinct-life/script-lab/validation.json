@@ -1,0 +1,102 @@
+{
+  "version": "EP01-script-v2-transcript-led",
+  "english_words_whitespace": 1045,
+  "chapters": [
+    {
+      "id": "B01",
+      "english_words": 124,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 141,
+      "claim_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ]
+    },
+    {
+      "id": "B02",
+      "english_words": 124,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 148,
+      "claim_ids": [
+        "C04",
+        "C05"
+      ]
+    },
+    {
+      "id": "B03",
+      "english_words": 141,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 180,
+      "claim_ids": [
+        "C06",
+        "C07"
+      ]
+    },
+    {
+      "id": "B04",
+      "english_words": 134,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 160,
+      "claim_ids": [
+        "C08",
+        "C09"
+      ]
+    },
+    {
+      "id": "B05",
+      "english_words": 126,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 153,
+      "claim_ids": [
+        "C03",
+        "C10",
+        "C11"
+      ]
+    },
+    {
+      "id": "B06",
+      "english_words": 131,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 161,
+      "claim_ids": [
+        "C05",
+        "C09",
+        "C12"
+      ]
+    },
+    {
+      "id": "B07",
+      "english_words": 136,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 150,
+      "claim_ids": [
+        "C02",
+        "C03",
+        "C12",
+        "C13"
+      ]
+    },
+    {
+      "id": "B08",
+      "english_words": 129,
+      "urdu_whitespace_tokens_not_comparable_to_english_words": 160,
+      "claim_ids": [
+        "C01",
+        "C07",
+        "C11",
+        "C12"
+      ]
+    }
+  ],
+  "first_three_sentences_words": 21,
+  "first_mastodon_english_word_position": 2,
+  "english_speech_only_estimate_seconds_at_160wpm": 391.88,
+  "english_speech_only_estimate_seconds_at_140wpm": 447.86,
+  "measured_v2_english_audio_seconds": null,
+  "measured_v2_urdu_audio_seconds": null,
+  "independent_translation_review": false,
+  "finished_film_review": false,
+  "automated_checks": [
+    "8 paired blocks with stable IDs",
+    "nonempty bilingual text and visual contracts",
+    "every claim ID in source ledger",
+    "mastodon at English word 2",
+    "2022 preserved in opening pair",
+    "two-million-year equivalent preserved in B01/B07"
+  ],
+  "master_sha256": "ac2f2483e662a0ef0c744d8e5b1c21f42c9bd5e7d26ae70386df3a0e460c7838"
+}

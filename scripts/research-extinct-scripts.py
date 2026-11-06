@@ -74,16 +74,30 @@ def metadata():
    hits=[{'id':x['id']['videoId'],'title':x['snippet']['title'],'channel':x['snippet']['channelTitle']} for x in data.get('items',[]) if x.get('id',{}).get('videoId')];report['title_searches'].append({'query':title,'hits':hits});ids.extend(x['id'] for x in hits)
   except Exception as e:report.setdefault('errors',[]).append(scrub(e))
  try:
-  report['videos']=client.videos(list(dict.fromkeys(ids))).items;report['status']='retrieved'
-  channels=list(dict.fromkeys(v['channel_id'] for v in report['videos']));report['channels']=client._api('channels',{'part':'snippet,statistics','id':','.join(channels)},'channels').get('items',[])
+  raw=client.videos(list(dict.fromkeys(ids))).items;fields=['id','title','channel','channel_id','published','duration','views','likes','comments'];report['videos']=[{k:v.get(k) for k in fields} for v in raw];report['status']='retrieved'
+  channels=list(dict.fromkeys(v['channel_id'] for v in report['videos']));channel_rows=client._api('channels',{'part':'snippet,statistics','id':','.join(channels)},'channels').get('items',[]);report['channels']=[{'id':c['id'],'title':c.get('snippet',{}).get('title'),'publishedAt':c.get('snippet',{}).get('publishedAt'),'statistics':c.get('statistics',{})} for c in channel_rows]
  except Exception as e:report['status']='partial';report.setdefault('errors',[]).append(scrub(e))
  return report
 
+def cached_case(case,previous,refresh=False):
+ """Reuse prior attempts; a code-only push must not retry blocked extraction.
+ Refresh is opt-in and only applies to previously successful public tracks.
+ """
+ prior=next((r for r in previous.get('cases',[]) if r['key']==case[0]),None)
+ if prior and (prior.get('status')!='timed_captions_retrieved' or not refresh):
+  row=dict(prior);row.setdefault('caption_source_checked_at',previous.get('checked_at'))
+  row['reused_prior_attempt']=True
+  return row
+ return None
+
 if __name__=='__main__':
+ path=OUT/'retrieval.json';previous=json.loads(path.read_text()) if path.exists() else {}
  report={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Purposive public script-study sample, not an exhaustive or causal viral-performance study. No retention analytics or audience-geography access.','raw_captions_published':False,'cases':[]}
  for c in CASES:
-  try:r=captions(c)
-  except Exception as e:r={'key':c[0],'public_url':c[3],'status':'unavailable','diagnostic':scrub(e)}
+  try:
+   r=cached_case(c,previous,refresh='--refresh-public-captions' in sys.argv)
+   if r is None:r=captions(c);r['caption_source_checked_at']=report['checked_at']
+  except Exception as e:r={'key':c[0],'public_url':c[3],'status':'unavailable','diagnostic':scrub(e),'caption_source_checked_at':report['checked_at']}
   report['cases'].append(r);print(c[0],r['status'],flush=True);(OUT/'retrieval.json').write_text(json.dumps(report,indent=2)+'\n')
  report['metadata']=metadata();(OUT/'retrieval.json').write_text(json.dumps(report,indent=2)+'\n')
  print('Timed-caption cases:',sum(c['status']=='timed_captions_retrieved' for c in report['cases']))

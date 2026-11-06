@@ -1,0 +1,33 @@
+{
+  "cases": [
+    {
+      "case": "eons-dna",
+      "source_url": "https://www.pbs.org/video/can-we-get-dna-from-fossils-zjwrun/",
+      "publisher_seconds": 682,
+      "caption_end_seconds": 679.866,
+      "caption_cues": 181,
+      "manually_coded_beats": 20,
+      "caption_word_count": 2009,
+      "approx_caption_tokens_per_publisher_minute": 176.74,
+      "second_grid_rows": 682,
+      "timing_precision": "caption cues, not word onsets or edit cuts",
+      "caption_sha256": "ab3db9d6892ac2c171bfd42516a341872cf81d916beb266fd0dada88d6c36f18"
+    },
+    {
+      "case": "eons-whales",
+      "source_url": "https://www.pbs.org/video/when-whales-walked-jjfimk/",
+      "publisher_seconds": 296,
+      "caption_end_seconds": 293.966,
+      "caption_cues": 79,
+      "manually_coded_beats": 16,
+      "caption_word_count": 901,
+      "approx_caption_tokens_per_publisher_minute": 182.64,
+      "second_grid_rows": 296,
+      "timing_precision": "caption cues, not word onsets or edit cuts",
+      "caption_sha256": "054d4235ece3d25f2e8668ff019c57e75397493a06e0357244fabe7cd4fe471f"
+    }
+  ],
+  "causal_retention_claim": false,
+  "full_third_party_scripts_redistributed": false,
+  "scope": "Two cue-complete PBS-edition textual case studies plus separate untimed/control discussion. Not an exhaustive current-growing-channel study."
+}
