@@ -1,0 +1,41 @@
+{
+  "threshold": 0.35,
+  "max_repair_samples_per_run": 48,
+  "passes": [
+    {
+      "pass": 1,
+      "before_runs": [
+        {
+          "first_jump_sample": 534712,
+          "last_jump_sample": 534716,
+          "jump_count": 3,
+          "time_seconds": 11.139833,
+          "max_mono_jump": 0.48568
+        }
+      ],
+      "operations": [
+        {
+          "start_sample": 534710,
+          "end_sample": 534720,
+          "interpolated_samples": 11,
+          "time_seconds": 11.139792
+        }
+      ],
+      "after_runs": []
+    }
+  ],
+  "final_runs": [],
+  "final_aac_measurement": {
+    "input_i": "-14.36",
+    "input_tp": "-2.82",
+    "input_lra": "2.90",
+    "input_thresh": "-24.84",
+    "output_i": "-13.70",
+    "output_tp": "-2.09",
+    "output_lra": "2.60",
+    "output_thresh": "-24.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.30"
+  },
+  "repaired_samples": 11
+}

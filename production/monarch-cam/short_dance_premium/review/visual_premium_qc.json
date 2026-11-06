@@ -1,0 +1,23 @@
+{
+  "cinema_grade": true,
+  "split_tone": true,
+  "vignette": true,
+  "subtle_grain": true,
+  "larger_rounded_action_window": true,
+  "macro_detail_inset": true,
+  "kinetic_caption": true,
+  "audition_progress": true,
+  "seamless_loop_crossfade": true,
+  "exact_text_thumbnails": true,
+  "action_window": [
+    20,
+    320,
+    1040,
+    880
+  ],
+  "grain_amplitude": 2.2,
+  "vignette_strength": 0.16,
+  "loop_crossfade_s": 0.3,
+  "thumbnail_manifest": "review/exact_thumbnail_manifest.json",
+  "note": "Frame-by-frame picture enhancements are objective render facts, not human approval or an audience guarantee."
+}

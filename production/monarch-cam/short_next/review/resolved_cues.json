@@ -1,0 +1,262 @@
+{
+  "fps": 30,
+  "duration_seconds": 20.0,
+  "picture_reference": "deliverables/MONARCH_CAM_Why_Bears_Check_Cars_20s_Short.mp4",
+  "picture_policy": "Retention-first 20-second native-vertical edit of public-domain NPS window entry/exit action; no handle opening or food reward is depicted.",
+  "events": [
+    {
+      "id": "next:impact:2",
+      "frame": 2,
+      "t": 0.06666666666666667,
+      "kind": "impact",
+      "peak_dbfs": -23.0,
+      "picture": "Immediate window hook",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 0.066667,
+        "timeline_start": 0.0,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -23.0,
+        "timeline_end": 0.237292
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:whoosh:39",
+      "frame": 39,
+      "t": 1.3,
+      "kind": "whoosh",
+      "peak_dbfs": -28.0,
+      "picture": "Not a ride / food answer cut",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 1.3,
+        "timeline_start": 1.032563,
+        "source_peak_seconds": 0.267437,
+        "target_peak_dbfs": -28.0,
+        "timeline_end": 1.532563
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:impact:90",
+      "frame": 90,
+      "t": 3.0,
+      "kind": "impact",
+      "peak_dbfs": -25.0,
+      "picture": "One find / shortcut setup",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 3.0,
+        "timeline_start": 2.900917,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -25.0,
+        "timeline_end": 3.170625
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:tick:150",
+      "frame": 150,
+      "t": 5.0,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "picture": "Diagram / search",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 5.0,
+        "timeline_start": 4.975625,
+        "source_peak_seconds": 0.024375,
+        "target_peak_dbfs": -31.0,
+        "timeline_end": 5.170333
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:tick:171",
+      "frame": 171,
+      "t": 5.7,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "picture": "Diagram / food reward",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 5.7,
+        "timeline_start": 5.675625,
+        "source_peak_seconds": 0.024375,
+        "target_peak_dbfs": -31.0,
+        "timeline_end": 5.870333
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:tick:192",
+      "frame": 192,
+      "t": 6.4,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "picture": "Diagram / check again",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 6.4,
+        "timeline_start": 6.375625,
+        "source_peak_seconds": 0.024375,
+        "target_peak_dbfs": -31.0,
+        "timeline_end": 6.570333
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:impact:210",
+      "frame": 210,
+      "t": 7.0,
+      "kind": "impact",
+      "peak_dbfs": -26.0,
+      "picture": "Food-conditioning badge before old drop-off",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 7.0,
+        "timeline_start": 6.900917,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -26.0,
+        "timeline_end": 7.170625
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:whoosh:264",
+      "frame": 264,
+      "t": 8.8,
+      "kind": "whoosh",
+      "peak_dbfs": -29.0,
+      "picture": "Conditioning action cut",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 8.8,
+        "timeline_start": 8.532562,
+        "source_peak_seconds": 0.267437,
+        "target_peak_dbfs": -29.0,
+        "timeline_end": 9.032562
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:impact:342",
+      "frame": 342,
+      "t": 11.4,
+      "kind": "impact",
+      "peak_dbfs": -26.0,
+      "picture": "Still checking / no visible food",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 11.4,
+        "timeline_start": 11.300917,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -26.0,
+        "timeline_end": 11.570625
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:whoosh:408",
+      "frame": 408,
+      "t": 13.6,
+      "kind": "whoosh",
+      "peak_dbfs": -29.0,
+      "picture": "Prevention setup",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 13.6,
+        "timeline_start": 13.332562,
+        "source_peak_seconds": 0.267437,
+        "target_peak_dbfs": -29.0,
+        "timeline_end": 13.832562
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:impact:468",
+      "frame": 468,
+      "t": 15.6,
+      "kind": "impact",
+      "peak_dbfs": -25.0,
+      "picture": "Secure food and lock up",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 15.6,
+        "timeline_start": 15.500917,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -25.0,
+        "timeline_end": 15.770625
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "next:impact:528",
+      "frame": 528,
+      "t": 17.6,
+      "kind": "impact",
+      "peak_dbfs": -25.0,
+      "picture": "Final window loop",
+      "sound_need": "One restrained licensed graphic accent aligned to the visible cut or diagram step; no unsupported wildlife or vehicle event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 17.6,
+        "timeline_start": 17.500917,
+        "source_peak_seconds": 0.099083,
+        "target_peak_dbfs": -25.0,
+        "timeline_end": 17.770625
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    }
+  ],
+  "intentionally_silent": [
+    {
+      "frame": 90,
+      "t": 3.0,
+      "picture": "Food is discussed as a possible reward; no food is visible.",
+      "reason": "No invented food-reward, eating or rustling sound is added."
+    },
+    {
+      "frame": 342,
+      "t": 11.4,
+      "picture": "The learned shortcut is explained; no handle, latch or door event is visible.",
+      "reason": "No handle pull, door movement, attack or bear vocalisation is added."
+    }
+  ]
+}

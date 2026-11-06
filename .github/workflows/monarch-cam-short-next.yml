@@ -1,0 +1,210 @@
+name: Monarch Cam — analytics-driven 20-second follow-up Short
+
+on:
+  push:
+    branches:
+      - arena/c678cc81-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-short-next.yml'
+      - 'production/monarch-cam/short_next/render_next_visual.py'
+      - 'production/monarch-cam/short_next/build_next_audio.py'
+      - 'production/monarch-cam/short_next/next_short_spec.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-short-next-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render-review-and-deliver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      HF_HOME: production/monarch-cam/work/hf
+      HF_HUB_DISABLE_XET: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      EARSHOT_THREADS: '4'
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/c678cc81-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install vertical media and licensed-audio production tools
+        timeout-minutes: 15
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            timeout 180 sudo apt-get update -qq || true
+            timeout 300 sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -1
+          timeout 900 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            requests edge-tts numpy scipy pillow opencv-python-headless \
+            soundfile soxr librosa pyloudnorm scikit-learn matplotlib transformers
+
+      - name: Install Earshot with CPU-only torch
+        timeout-minutes: 20
+        run: |
+          timeout 900 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            --index-url https://download.pytorch.org/whl/cpu 'torch>=2.6'
+          timeout 300 python -m pip install --disable-pip-version-check -q --no-deps --no-input \
+            --timeout 30 --retries 2 \
+            'git+https://github.com/Leonxlnx/earshot.git@main'
+          python -c 'import torch; from earshot import api; print("Earshot import OK; torch", torch.__version__)'
+
+      - name: Validate retention contracts, factual guardrails and committed fonts
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_next/render_next_visual.py \
+            production/monarch-cam/short_next/build_next_audio.py
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+          spec = json.loads(Path('production/monarch-cam/short_next/next_short_spec.json').read_text())
+          fps = spec['fps']
+          assert (spec['duration'], spec['width'], spec['height'], spec['fps'], spec['frame_count']) == (20.0, 1080, 1920, 30, 600)
+          assert spec['frame_count'] == int(spec['duration'] * fps)
+          assert len(spec['narration']) == 10 and sum(len(x['text'].split()) for x in spec['narration']) == 48
+          assert len(spec['scenes']) == 9 and len(spec['audio']['cues']) == 12 and len(spec['diagram_steps']) == 3
+          assert spec['narration'][0]['start'] <= 0.15
+          assert spec['diagram_steps'][0]['time'] <= 5.0
+          assert spec['narration'][7]['start'] <= 14.0
+          assert spec['narration'][-1]['start'] <= 18.0
+          assert spec['scenes'][-1]['rate'] < 1.0
+          scene_starts = {int(round(s['start'] * fps)) for s in spec['scenes']}
+          scene_ends = [int(round(s['end'] * fps)) for s in spec['scenes']]
+          assert scene_ends == sorted(scene_ends) and scene_ends[-1] == spec['frame_count']
+          diagram_frames = {math.ceil(s['time'] * fps - 1e-9) for s in spec['diagram_steps']}
+          interrupts = set(spec['pattern_interrupts'])
+          allowed = {2} | scene_starts | diagram_frames | interrupts
+          for cue in spec['audio']['cues']:
+              assert round(cue['frame'] / fps, 6) == round(cue['time'], 6), cue
+              assert cue['frame'] in allowed, cue
+          text_blob = ' '.join(
+              [x['text'] for x in spec['narration']] +
+              [x['caption'] for x in spec['narration']] +
+              [x['top'] for x in spec['scenes']]
+          ).lower()
+          for phrase in ('handle', 'open car door', 'used the handle', '25m', 'part 2', 'viral'):
+              assert phrase not in text_blob, phrase
+          fonts = [Path('public/showreel/fonts') / name for name in ('Manrope-800.ttf', 'Manrope-700.ttf', 'IBMPlexMono-400.ttf', 'Anton-Regular.ttf')]
+          assert all(path.is_file() for path in fonts), fonts
+          print('20s retention, cue-frame, guardrail and font contracts OK')
+          PY
+
+      - name: Retrieve the explicitly public-domain NPS source and review frames
+        run: |
+          python production/monarch-cam/source_recon.py
+
+      - name: Render the 20-second native-vertical picture
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/short_next/review
+          rm -f production/monarch-cam/short_next/review/workflow_failure.txt
+          rm -f production/monarch-cam/short_next/review/tts_failures.json
+          python production/monarch-cam/short_next/render_next_visual.py \
+            2>&1 | tee production/monarch-cam/short_next/review/visual_build.log
+
+      - name: Synthesize narration, design licensed sound, calibrate AAC and mux
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_next/build_next_audio.py \
+            2>&1 | tee production/monarch-cam/short_next/review/audio_build.log
+
+      - name: Run all nine measured gates on the delivered AAC stream
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            deliverables/MONARCH_CAM_Why_Bears_Check_Cars_20s_Short.mp4 \
+            --profile web --json production/monarch-cam/short_next/review/audio_qc.json \
+            2>&1 | tee production/monarch-cam/short_next/review/audio_qc.log
+
+      - name: Assemble the follow-up Short delivery and review summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('production/monarch-cam/short_next/review')
+          technical = json.loads((root/'technical_qc.json').read_text())
+          audio = json.loads((root/'audio_qc.json').read_text())
+          earshot = json.loads((root/'earshot_final_status.json').read_text())
+          voices = json.loads((root/'voice_ledger.json').read_text())
+          mix = json.loads((root/'source_mix_report.json').read_text())
+          summary = {
+              'deliverable': 'deliverables/MONARCH_CAM_Why_Bears_Check_Cars_20s_Short.mp4',
+              'package': 'Why Bears Keep Checking Cars',
+              'scope': 'Analytics-driven 20-second retention-first Short; separate from the delivered 35-second master',
+              'previous_35s_master_preserved': True,
+              'duration_seconds': 20.0,
+              'frames': 600,
+              'narration_words': sum(x['words'] for x in voices),
+              'all_narration_slots_pass': all(x['end_s'] <= (voices[i+1]['start'] if i+1 < len(voices) else 19.8) for i,x in enumerate(voices)),
+              'technical_pass': technical['passed'],
+              'technical_checks': technical['checks'],
+              'nine_gate_audio_pass': audio['pass'],
+              'nine_gate_audio_failed': audio['failed'],
+              'earshot_status': earshot,
+              'earshot_model_review_pass': all(earshot.get(k) == 'complete' for k in ('timeline', 'sheet', 'critique')),
+              'earshot_sfx_selection_used': mix.get('sfx_selection_model_used', False),
+              'credits': 'production/monarch-cam/short_next/CREDITS.md',
+              'analytics_brief': 'production/monarch-cam/short_next/NEXT_VIDEO_PLAN_AND_METADATA.md',
+              'metadata': 'production/monarch-cam/short_next/review/NEXT_UPLOAD_METADATA.md',
+              'visual_review': 'production/monarch-cam/short_next/review/vertical_contact_sheet.jpg',
+              'creative_review': 'Objective, model-assisted and visual checks are evidence, not a guarantee of audience retention or virality.',
+          }
+          (root/'qc_summary.json').write_text(json.dumps(summary, indent=2))
+          if not technical['passed'] or not audio['pass'] or not summary['all_narration_slots_pass'] or not summary['earshot_model_review_pass']:
+              raise SystemExit('20-second follow-up Short QC failed')
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Return failure diagnostics when a render/build/QC step fails
+        if: failure()
+        run: |
+          git config user.name "monarch-cam-short-next-bot"
+          git config user.email "monarch-cam-short-next-bot@users.noreply.github.com"
+          mkdir -p production/monarch-cam/short_next/review
+          echo "A Short-next render, build or QC step failed; inspect adjacent logs and review JSON." \
+            > production/monarch-cam/short_next/review/workflow_failure.txt
+          git add production/monarch-cam/short_next/review
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(monarch-cam): capture 20-second follow-up Short failure diagnostics"
+            git pull --rebase origin arena/c678cc81-monarch-overall-work
+            git push origin HEAD:arena/c678cc81-monarch-overall-work
+          fi
+          exit 1
+
+      - name: Upload follow-up Short, cover, ledgers, credits, model review and metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-why-bears-check-cars-20s-short
+          path: |
+            deliverables/MONARCH_CAM_Why_Bears_Check_Cars_20s_Short.mp4
+            production/monarch-cam/short_next/review/
+            production/monarch-cam/short_next/CREDITS.md
+            production/monarch-cam/short_next/next_short_spec.json
+            production/monarch-cam/short_next/NEXT_VIDEO_PLAN_AND_METADATA.md
+            production/monarch-cam/short_next/next_viral_metadata.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Return the follow-up Short MP4 and compact review record to this branch
+        run: |
+          git config user.name "monarch-cam-short-next-bot"
+          git config user.email "monarch-cam-short-next-bot@users.noreply.github.com"
+          rm -f production/monarch-cam/short_next/review/workflow_failure.txt
+          git add -f deliverables/MONARCH_CAM_Why_Bears_Check_Cars_20s_Short.mp4
+          git add production/monarch-cam/short_next/review production/monarch-cam/short_next/CREDITS.md
+          if git diff --cached --quiet; then
+            echo "20-second follow-up Short deliverable and QC unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): deliver analytics-driven 20-second Short"
+          git pull --rebase origin arena/c678cc81-monarch-overall-work
+          git push origin HEAD:arena/c678cc81-monarch-overall-work

@@ -1,0 +1,20 @@
+deliverables/MONARCH_CAM_This_Bear_Window_35s_Short.mp4  [web]
+  I     -14.35 LUFS   target -14.0 ±0.7
+  LRA   5.86 LU          target (1.0, 10.0)
+  peak  -3.35 dBFS     ceiling -1.0
+  move  18.91 dB peak-to-peak across the body
+  mono  -0.5 dB low-band loss
+  harsh -7.21 dB over high-mid
+
+  PASS  loudness_in_range
+  PASS  true_peak_ok
+  PASS  lra_in_range
+  PASS  no_clipping
+  PASS  no_clicks
+  PASS  mono_compatible
+  PASS  dc_offset_ok
+  PASS  not_harsh
+  PASS  has_dynamics
+
+  RESULT: PASS
+  wrote production/monarch-cam/short_35/review/audio_qc.json

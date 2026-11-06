@@ -1,0 +1,32 @@
+{
+  "music": {
+    "input_lufs": -19.983,
+    "target_lufs_before_peak_cap": -25.5,
+    "gain_db": -5.517,
+    "peak_cap_adjustment_db": 0.0,
+    "output_lufs": -25.5,
+    "sample_peak_dbfs": -9.615,
+    "source": "music_backup",
+    "source_start": 0.0
+  },
+  "ambience": {
+    "input_lufs": -49.692,
+    "target_lufs_before_peak_cap": -43.5,
+    "gain_db": 6.192,
+    "peak_cap_adjustment_db": 0.0,
+    "output_lufs": -43.5,
+    "sample_peak_dbfs": -24.834,
+    "source": "forest_night",
+    "source_start": 52.0,
+    "native_camera_audio": false
+  },
+  "ducking": {
+    "music_min_gain": 0.24,
+    "ambience_min_gain": 0.7872,
+    "sfx_min_gain": 0.658,
+    "voice_preroll_ms": 120
+  },
+  "generated_bear_or_vehicle_foley": false,
+  "sfx_selection_model_used": true,
+  "premaster_sample_peak_dbfs": -2.8766
+}

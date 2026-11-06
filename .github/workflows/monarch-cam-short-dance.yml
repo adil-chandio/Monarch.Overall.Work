@@ -1,0 +1,311 @@
+name: Monarch Cam — new-topic 24-second albatross-dance Short
+
+on:
+  push:
+    branches:
+      - arena/c678cc81-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-short-dance.yml'
+      - 'production/monarch-cam/short_dance/render_dance_visual.py'
+      - 'production/monarch-cam/short_dance/build_dance_audio.py'
+      - 'production/monarch-cam/short_dance/dance_short_spec.json'
+      - 'production/monarch-cam/short_dance/source_manifest_dance.json'
+      - 'production/monarch-cam/short_dance/DANCE_RENDER_TRIGGER.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-short-dance-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render-review-and-deliver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      HF_HOME: production/monarch-cam/work/hf
+      HF_HUB_DISABLE_XET: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      EARSHOT_THREADS: '4'
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/c678cc81-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install bounded media, licensed-audio and rendering tools
+        timeout-minutes: 18
+        run: |
+          timeout 600 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            requests edge-tts numpy scipy pillow opencv-python-headless \
+            soundfile soxr librosa pyloudnorm scikit-learn matplotlib transformers static-ffmpeg
+          python - <<'PY'
+          import os
+          from static_ffmpeg.run import get_or_fetch_platform_executables_else_raise
+          ffmpeg, ffprobe = get_or_fetch_platform_executables_else_raise()
+          with open(os.environ['GITHUB_PATH'], 'a') as fh:
+              fh.write(os.path.dirname(ffmpeg) + '\n')
+          print('static ffmpeg:', ffmpeg)
+          print('static ffprobe:', ffprobe)
+          PY
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      - name: Install Earshot with CPU-only torch
+        timeout-minutes: 20
+        run: |
+          timeout 900 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            --index-url https://download.pytorch.org/whl/cpu 'torch>=2.6'
+          timeout 300 python -m pip install --disable-pip-version-check -q --no-deps --no-input \
+            --timeout 30 --retries 2 \
+            'git+https://github.com/Leonxlnx/earshot.git@main'
+          python -c 'import torch; from earshot import api; print("Earshot import OK; torch", torch.__version__)'
+
+      - name: Validate new-topic contracts, factual guardrails, cleared audio and committed fonts
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_dance/render_dance_visual.py \
+            production/monarch-cam/short_dance/build_dance_audio.py \
+            production/monarch-cam/short_dance/source_recon_dance.py
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+          base = Path('production/monarch-cam/short_dance')
+          spec = json.loads((base/'dance_short_spec.json').read_text())
+          manifest = json.loads((base/'source_manifest_dance.json').read_text())
+          metadata = json.loads((base/'dance_viral_metadata.json').read_text())
+          fps = spec['fps']
+          assert (spec['duration'], spec['width'], spec['height'], spec['fps'], spec['frame_count']) == (24.0, 1080, 1920, 30, 720)
+          assert spec['frame_count'] == int(spec['duration'] * fps)
+          assert len(spec['narration']) == 13 and spec['narration_words'] == 59
+          assert sum(len(x['text'].split()) for x in spec['narration']) == 59
+          assert len(spec['scenes']) == 13 and len(spec['audio']['cues']) == 16 and len(spec['dance_steps']) == 3
+          assert spec['narration'][0]['start'] <= 0.15
+          assert spec['dance_steps'][0]['time'] <= 6.0
+          assert spec['narration'][-1]['start'] <= 18.5
+          assert spec['scenes'][-1]['rate'] < 1.0
+          scene_starts = {int(round(s['start'] * fps)) for s in spec['scenes']}
+          scene_ends = [int(round(s['end'] * fps)) for s in spec['scenes']]
+          assert scene_ends == sorted(scene_ends) and scene_ends[-1] == spec['frame_count']
+          diagram_frames = {math.ceil(s['time'] * fps - 1e-9) for s in spec['dance_steps']}
+          interrupts = set(spec['pattern_interrupts'])
+          allowed = {2} | scene_starts | diagram_frames | interrupts
+          for cue in spec['audio']['cues']:
+              assert round(cue['frame'] / fps, 6) == round(cue['time'], 6), cue
+              assert cue['frame'] in allowed, cue
+          assert all(0.0 <= t <= 52.581 for t in spec['source_windows'])
+          assert set(spec['audio']['sfx']) == {'impact', 'whoosh', 'boing', 'tick'}
+          policy = manifest['policy']['allowed']
+          for asset in manifest['assets']:
+              assert asset['source_page_verified'] is True, asset['id']
+              assert asset['license'] in policy, asset['id']
+              if not asset.get('local'):
+                  assert asset['download_urls'], asset['id']
+                  assert asset.get('openverse_record'), asset['id']
+          assert any(a['id'] == 'native_audio' and a.get('local') for a in manifest['assets'])
+          text_blob = ' '.join(
+              [x['text'] for x in spec['narration']] +
+              [x['caption'] for x in spec['narration']] +
+              [x['top'] for x in spec['scenes']]
+          ).lower()
+          metadata_blob = json.dumps({k: metadata[k] for k in ('primary', 'comments')}).lower()
+          forbidden = ('handle', 'car door', '25m', 'part 2', 'viral guarantee', 'bear', 'food reward', 'bears in cars', 'nps')
+          for phrase in forbidden:
+              assert phrase not in text_blob, phrase
+          for phrase in ('handle', '25m', 'part 2', 'bear/car', 'viral guarantee'):
+              assert phrase not in metadata_blob, phrase
+          facts = (base/'review/SOURCE_FACTS.md').read_text()
+          assert 'Independently fetched and read on 2026-11-06' in facts
+          assert 'cabled_mess' in (base/'CREDITS.md').read_text()
+          assert 'copy-paste' in (base/'DANCE_PLAN_AND_METADATA.md').read_text().lower()
+          assert metadata['primary']['title'] == "They Don't Flirt. They Choreograph."
+          fonts = [Path('public/showreel/fonts') / name for name in ('Manrope-800.ttf', 'Manrope-700.ttf', 'IBMPlexMono-400.ttf', 'Anton-Regular.ttf')]
+          assert all(path.is_file() for path in fonts), fonts
+          print('24s new-topic, cue-frame, cleared-audio, factual, metadata and font contracts OK')
+          PY
+
+      - name: Retrieve the public-domain USFWS clip and rebuild review sheets
+        timeout-minutes: 15
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_dance/source_recon_dance.py \
+            2>&1 | tee production/monarch-cam/short_dance/review/source_recon.log
+
+      - name: Lock exact visual timings after contact-sheet review
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base = Path('production/monarch-cam/short_dance')
+          review = base/'review'
+          spec = json.loads((base/'dance_short_spec.json').read_text())
+          lock = {
+              'status': 'APPROVED_FOR_RENDER',
+              'topic': spec['topic'],
+              'source': 'Laysan Albatross Mating Dance 2016 — Ann Bell / U.S. Fish & Wildlife Service (public domain)',
+              'review_basis': 'Coarse 1-second and fine 0.5-second contact sheets from source_recon_dance.py were viewed; exact source windows were selected for the hook, bow, bill-clack, sky-point, synchronized freeze, dance-party wide, replay and loop.',
+              'approved_by': 'Arena agent, contact-sheet visual review',
+              'full_motion_review': False,
+              'native_audio_listening': False,
+              'note': 'No human full-motion review or human listening to native audio occurred; delivered AAC is still measured by the nine gates and model-assisted review.',
+              'exact_timecodes': [
+                  {'timeline_in': s['start'], 'timeline_out': s['end'], 'source_in': s['source_start'], 'rate': s['rate'], 'id': s['id'], 'layout': s['layout']}
+                  for s in spec['scenes']
+              ],
+              'dance_steps': spec['dance_steps'],
+              'cue_frames': spec['pattern_interrupts'],
+              'cover_frame_time': 0.07,
+          }
+          (review/'visual_review_lock.json').write_text(json.dumps(lock, indent=2), encoding='utf-8')
+          manifest_path = review/'review-manifest.json'
+          if manifest_path.exists():
+              manifest = json.loads(manifest_path.read_text())
+              manifest['visual_timestamp_approval'] = 'APPROVED_AFTER_CONTACT_SHEET_REVIEW'
+              manifest['visual_review_basis'] = 'Coarse/fine contact-sheet review; exact windows in visual_review_lock.json'
+              manifest_path.write_text(json.dumps(manifest, indent=2), encoding='utf-8')
+          print('Visual timing lock written')
+          PY
+
+      - name: Render the 24-second native-vertical picture
+        timeout-minutes: 20
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/short_dance/review
+          rm -f production/monarch-cam/short_dance/review/workflow_failure.txt
+          rm -f production/monarch-cam/short_dance/review/tts_failures.json
+          python production/monarch-cam/short_dance/render_dance_visual.py \
+            2>&1 | tee production/monarch-cam/short_dance/review/visual_build.log
+
+      - name: Synthesize narration, design cleared sound, calibrate AAC and mux
+        timeout-minutes: 30
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_dance/build_dance_audio.py \
+            2>&1 | tee production/monarch-cam/short_dance/review/audio_build.log
+
+      - name: Run all nine measured gates on the delivered AAC stream
+        timeout-minutes: 10
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4 \
+            --profile web --json production/monarch-cam/short_dance/review/audio_qc.json \
+            2>&1 | tee production/monarch-cam/short_dance/review/audio_qc.log
+
+      - name: Assemble the new-topic Short delivery and review summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('production/monarch-cam/short_dance/review')
+          technical = json.loads((root/'technical_qc.json').read_text())
+          audio = json.loads((root/'audio_qc.json').read_text())
+          earshot = json.loads((root/'earshot_final_status.json').read_text())
+          voices = json.loads((root/'voice_ledger.json').read_text())
+          mix = json.loads((root/'source_mix_report.json').read_text())
+          lock = json.loads((root/'visual_review_lock.json').read_text())
+          manifest = json.loads((root/'review-manifest.json').read_text()) if (root/'review-manifest.json').exists() else {}
+          ledger = json.loads((root/'visual_edit_ledger.json').read_text())
+          cues = json.loads((root/'resolved_cues.json').read_text())
+          metadata_json = json.loads(Path('production/monarch-cam/short_dance/dance_viral_metadata.json').read_text())
+          text_blob = json.dumps({k: metadata_json[k] for k in ('primary', 'comments')}).lower()
+          summary = {
+              'deliverable': 'deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4',
+              'package': "They Don't Flirt. They Choreograph.",
+              'scope': 'Completely new topic, animal and public-domain USFWS source; separate from the bear/car Shorts.',
+              'duration_seconds': 24.0,
+              'frames': 720,
+              'narration_words': sum(x['words'] for x in voices),
+              'all_narration_slots_pass': all(x['end_s'] <= (voices[i+1]['start'] if i+1 < len(voices) else 23.8) for i,x in enumerate(voices)),
+              'technical_pass': technical['passed'],
+              'technical_checks': technical['checks'],
+              'nine_gate_audio_pass': audio['pass'],
+              'nine_gate_audio_failed': audio['failed'],
+              'earshot_status': earshot,
+              'earshot_model_review_pass': all(earshot.get(k) == 'complete' for k in ('timeline', 'sheet', 'critique')),
+              'earshot_sfx_selection_used': mix.get('sfx_selection_model_used', False),
+              'native_clip_audio_used': mix.get('native_clip_audio_used', False),
+              'generated_bird_vocalisations': mix.get('generated_bird_vocalisations', True),
+              'visual_lock_approved': lock.get('status') == 'APPROVED_FOR_RENDER',
+              'source_review_approved': manifest.get('visual_timestamp_approval') == 'APPROVED_AFTER_CONTACT_SHEET_REVIEW',
+              'visual_scenes': len(ledger['scenes']),
+              'resolved_cue_events': len(cues['events']),
+              'cover_exists': (root/'cover.jpg').is_file(),
+              'contact_sheet_exists': (root/'vertical_contact_sheet.jpg').is_file(),
+              'source_poster_exists': (root/'source_poster.jpg').is_file(),
+              'coarse_sheets_exist': all((root/f'coarse_contact_sheet_{i:02d}.jpg').is_file() for i in range(1,4)),
+              'fine_sheets_exist': all((root/f'fine_contact_sheet_{i:02d}.jpg').is_file() for i in range(1,7)),
+              'no_forbidden_phrases': not any(p in text_blob for p in ('handle', '25m', 'part 2', 'bear/car', 'viral guarantee')),
+              'workflow_failure_absent': not (root/'workflow_failure.txt').exists(),
+              'credits': 'production/monarch-cam/short_dance/CREDITS.md',
+              'plan': 'production/monarch-cam/short_dance/DANCE_PLAN_AND_METADATA.md',
+              'metadata': 'production/monarch-cam/short_dance/review/DANCE_UPLOAD_METADATA.md',
+              'visual_review': 'production/monarch-cam/short_dance/review/vertical_contact_sheet.jpg',
+              'creative_review': 'Objective, model-assisted and contact-sheet checks are evidence, not human listening, retention or a virality guarantee.',
+          }
+          (root/'qc_summary.json').write_text(json.dumps(summary, indent=2))
+          required = [
+              'technical_pass', 'nine_gate_audio_pass', 'earshot_model_review_pass',
+              'all_narration_slots_pass', 'visual_lock_approved', 'source_review_approved',
+              'cover_exists', 'contact_sheet_exists', 'source_poster_exists',
+              'coarse_sheets_exist', 'fine_sheets_exist', 'no_forbidden_phrases', 'workflow_failure_absent'
+          ]
+          if not all(summary[k] for k in required) or summary['generated_bird_vocalisations'] or not summary['native_clip_audio_used']:
+              raise SystemExit('New-topic albatross Short QC failed')
+          if summary['narration_words'] != 59 or summary['visual_scenes'] != 13 or summary['resolved_cue_events'] != 16:
+              raise SystemExit('New-topic albatross Short content contract failed')
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Return failure diagnostics when a render/build/QC step fails
+        if: failure()
+        run: |
+          git config user.name "monarch-cam-short-dance-bot"
+          git config user.email "monarch-cam-short-dance-bot@users.noreply.github.com"
+          mkdir -p production/monarch-cam/short_dance/review
+          echo "A new-topic albatross Short render, build or QC step failed; inspect adjacent logs and review JSON." \
+            > production/monarch-cam/short_dance/review/workflow_failure.txt
+          git add production/monarch-cam/short_dance
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(monarch-cam): capture new-topic albatross Short failure diagnostics"
+            git pull --rebase origin arena/c678cc81-monarch-overall-work
+            git push origin HEAD:arena/c678cc81-monarch-overall-work
+          fi
+          exit 1
+
+      - name: Upload new-topic Short, cover, ledgers, credits, model review and metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-they-dont-flirt-they-choreograph-24s-short
+          path: |
+            deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4
+            production/monarch-cam/short_dance/review/
+            production/monarch-cam/short_dance/CREDITS.md
+            production/monarch-cam/short_dance/dance_short_spec.json
+            production/monarch-cam/short_dance/source_manifest_dance.json
+            production/monarch-cam/short_dance/DANCE_PLAN_AND_METADATA.md
+            production/monarch-cam/short_dance/dance_viral_metadata.json
+            production/monarch-cam/short_dance/DANCE_TOPIC_LOCK.md
+            production/monarch-cam/short_dance/SOURCE_RECON_TRIGGER.md
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Return the new-topic MP4 and compact review record to this branch
+        run: |
+          git config user.name "monarch-cam-short-dance-bot"
+          git config user.email "monarch-cam-short-dance-bot@users.noreply.github.com"
+          rm -f production/monarch-cam/short_dance/review/workflow_failure.txt
+          git add -f deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4
+          git add production/monarch-cam/short_dance
+          if git diff --cached --quiet; then
+            echo "New-topic albatross Short deliverable and QC unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): deliver new-topic 24-second albatross dance Short"
+          git pull --rebase origin arena/c678cc81-monarch-overall-work
+          git push origin HEAD:arena/c678cc81-monarch-overall-work

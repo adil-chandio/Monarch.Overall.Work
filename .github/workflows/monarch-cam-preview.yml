@@ -1,0 +1,129 @@
+name: Monarch Cam — 30 second opening preview
+
+on:
+  push:
+    branches:
+      - arena/c678cc81-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-preview.yml'
+      - 'production/monarch-cam/build_preview.py'
+      - 'production/monarch-cam/source_recon.py'
+      - 'production/monarch-cam/preview_spec.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-preview-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/c678cc81-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install media, visual and neural-narration tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check -q \
+            requests yt-dlp edge-tts numpy scipy pillow opencv-python-headless
+
+      - name: Retrieve explicit public-domain NPS source
+        run: |
+          python production/monarch-cam/source_recon.py
+          mkdir -p production/monarch-cam/preview
+          cp production/monarch-cam/work/recon/source-probe.json production/monarch-cam/preview/source_probe.json
+          cp production/monarch-cam/work/recon/review-manifest.json production/monarch-cam/preview/source_manifest.json
+          cp production/monarch-cam/work/recon/retrieval-route.txt production/monarch-cam/preview/source_url.txt
+
+      - name: Build original narration and sound master first
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/preview
+          python production/monarch-cam/build_preview.py --audio-only 2>&1 | tee production/monarch-cam/preview/audio_build.log
+
+      - name: Run nine measured audio delivery gates before video rendering
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            production/monarch-cam/work/preview/audio_master.m4a \
+            --profile web --json production/monarch-cam/preview/audio_qc.json \
+            2>&1 | tee production/monarch-cam/preview/audio_qc.log
+
+      - name: Render exactly 900 frames and mux the verified audio
+        run: |
+          set -o pipefail
+          python production/monarch-cam/build_preview.py --video-only 2>&1 | tee production/monarch-cam/preview/video_build.log
+
+      - name: Assemble delivery QC summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('production/monarch-cam/preview')
+          audio = json.loads((root/'audio_qc.json').read_text())
+          visual = json.loads((root/'visual_metrics.json').read_text())
+          probe = json.loads((root/'delivery_probe.json').read_text())
+          summary = {
+              'deliverable': 'deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4',
+              'scope': 'First 30 seconds only — review stop, not a full episode',
+              'source': 'National Park Service — explicit public-domain Bears in Cars asset',
+              'audio_pass': audio['pass'],
+              'audio_failed': audio['failed'],
+              'visual_metrics': visual,
+              'technical_probe': probe,
+              'human_visual_review': 'Pending on the returned visual_qc.jpg and rendered video',
+          }
+          (root/'qc_summary.json').write_text(json.dumps(summary, indent=2))
+          if not audio['pass']:
+              raise SystemExit('Audio QC failed: ' + ', '.join(audio['failed']))
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Return failure diagnostics when a render/QC step fails
+        if: failure()
+        run: |
+          git config user.name "monarch-cam-preview-bot"
+          git config user.email "monarch-cam-preview-bot@users.noreply.github.com"
+          mkdir -p production/monarch-cam/preview
+          echo "A preview render or QC step failed; inspect the adjacent logs." > production/monarch-cam/preview/workflow_failure.txt
+          git add production/monarch-cam/preview
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(monarch-cam): capture preview failure diagnostics"
+            git pull --rebase origin arena/c678cc81-monarch-overall-work
+            git push origin HEAD:arena/c678cc81-monarch-overall-work
+          fi
+          exit 1
+
+      - name: Upload review deliverable
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-bear-opening-30s
+          path: |
+            deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4
+            production/monarch-cam/preview/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Return preview and QC to this working branch
+        run: |
+          git config user.name "monarch-cam-preview-bot"
+          git config user.email "monarch-cam-preview-bot@users.noreply.github.com"
+          rm -f production/monarch-cam/preview/workflow_failure.txt
+          git add -f deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4
+          git add production/monarch-cam/preview
+          if git diff --cached --quiet; then
+            echo "Preview and QC unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): render reviewed 30 second opening"
+          git pull --rebase origin arena/c678cc81-monarch-overall-work
+          git push origin HEAD:arena/c678cc81-monarch-overall-work

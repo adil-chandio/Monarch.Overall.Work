@@ -1,0 +1,115 @@
+{
+  "project": "MONARCH CAM — Bear/Car Opening Proof",
+  "version": 1,
+  "duration_seconds": 30.0,
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "working_title": "Why Bears Keep Checking Cars",
+  "source": {
+    "id": "MC-BEAR-01",
+    "file": "work/recon/media/nps_bears_in_cars.mp4",
+    "rights_page": "https://www.nps.gov/media/video/view.htm?id=07B1F1A5-E8DC-0BCE-DAFAE3F9B356AA73",
+    "credit": "National Park Service",
+    "usage": "Explicit public-domain declaration on the NPS asset page"
+  },
+  "voice": {
+    "provider": "edge-tts",
+    "name": "en-US-AndrewNeural",
+    "rate": "-3%"
+  },
+  "narration": [
+    {
+      "id": "vo1",
+      "start": 0.35,
+      "latest_end": 5.65,
+      "text": "The door is already open. The bear goes straight for the vehicle.",
+      "caption": "The door is already open.\nThe bear goes straight for the vehicle."
+    },
+    {
+      "id": "vo2",
+      "start": 6.0,
+      "latest_end": 11.55,
+      "text": "Moments later, it is inside, searching for anything it can eat.",
+      "caption": "Moments later, it is inside—\nsearching for anything it can eat."
+    },
+    {
+      "id": "vo3",
+      "start": 12.0,
+      "latest_end": 17.0,
+      "text": "But why would a wild bear search a car for food?",
+      "caption": ""
+    },
+    {
+      "id": "vo4",
+      "start": 17.35,
+      "latest_end": 23.15,
+      "text": "The answer is not just a stronger sense of smell. It is experience.",
+      "caption": "Not just a stronger sense of smell.\nExperience."
+    },
+    {
+      "id": "vo5",
+      "start": 23.45,
+      "latest_end": 29.65,
+      "text": "When an earlier visit ends with food, the car can become a place worth checking again.",
+      "caption": "When an earlier visit ends with food,\nthe car can become worth checking again."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "proof",
+      "start": 0.0,
+      "end": 5.7,
+      "source_start": 0.8,
+      "source_rate": 1.0,
+      "layout": "footage",
+      "kicker": "REAL FOOTAGE / 01"
+    },
+    {
+      "id": "entry",
+      "start": 5.7,
+      "end": 11.7,
+      "source_start": 15.0,
+      "layout": "footage",
+      "kicker": "THE ENTRY / 02"
+    },
+    {
+      "id": "question",
+      "start": 11.7,
+      "end": 17.1,
+      "source_start": 65.0,
+      "layout": "question",
+      "kicker": "THE QUESTION / 03",
+      "headline": "WHY SEARCH A CAR\nFOR FOOD?"
+    },
+    {
+      "id": "answer",
+      "start": 17.1,
+      "end": 23.2,
+      "source_start": 292.0,
+      "source_rate": 1.0,
+      "layout": "answer",
+      "kicker": "FOOD CONDITIONING",
+      "headline": "THE CLUE IS\nEXPERIENCE."
+    },
+    {
+      "id": "model",
+      "start": 23.2,
+      "end": 30.0,
+      "source_start": 354.0,
+      "source_rate": 0.78,
+      "layout": "model",
+      "kicker": "BEHAVIOUR MODEL",
+      "steps": [
+        "EARLIER VISIT",
+        "FOOD REWARD",
+        "CAR CHECKED AGAIN"
+      ]
+    }
+  ],
+  "editorial_notes": [
+    "The NPS source visibly shows bear/vehicle entry. The opening does not claim a handle pull unless that action is explicitly visible.",
+    "The behaviour model is general explanation, not a claim about this individual animal's unrecorded history.",
+    "Only real NPS footage and original typography/diagrams are used; no synthetic wildlife event."
+  ]
+}

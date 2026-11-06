@@ -1,0 +1,43 @@
+{
+  "deliverable": "deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4",
+  "scope": "First 30 seconds only \u2014 review stop, not a full episode",
+  "source": "National Park Service \u2014 explicit public-domain Bears in Cars asset",
+  "audio_pass": true,
+  "audio_failed": [],
+  "visual_metrics": {
+    "frames": 900,
+    "duration_seconds": 30.0,
+    "dark_frames": 0,
+    "mean_frame_difference": 2.1884,
+    "near_static_transitions": 44,
+    "visual_review": "See visual_qc.jpg; final human review required"
+  },
+  "technical_probe": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_read_frames": "900"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_read_frames": "1407"
+      }
+    ],
+    "format": {
+      "duration": "30.000000",
+      "size": "18995249"
+    }
+  },
+  "human_visual_review": "Pending on the returned visual_qc.jpg and rendered video"
+}
