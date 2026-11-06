@@ -1,5 +1,7 @@
 # Extinct Life — script microscope and editorial verdict
 
+> **Expanded follow-up:** [19 additional individual script analyses](expanded/REPORT.md): seven complete contemporary million-view long-form scripts, eleven publisher comparators, two explicitly partial cases across the new register, 267 manual analytical beats, and an applied next-revision workflow. The original packet below is retained with its original scope.
+
 **Date:** 6 November 2026. **Decision:** revise the script before more film rendering. The approved 24-second 3D style remains approved. This is a script revision, not a request to repeat that style gate.
 
 ## 1. Answer to the real question

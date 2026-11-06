@@ -2,6 +2,10 @@
 
 The approved 24-second moving 3D style is unchanged. Rendering remains on hold; the old audio/timeline does not narrate the revised master.
 
+## Expanded research follow-up
+
+[Expanded script forensics](../../../docs/research/extinct-script-forensics/expanded/REPORT.md) adds 19 individually decoded actual-text cases (17 complete, two partial), including seven complete contemporary million-view long-form scripts. [Applied workflow](../../../docs/research/extinct-script-forensics/expanded/APPLIED-WORKFLOW.md) maps the new findings against all eight v2 blocks. This is an edit plan, not a silently substituted v3 master or a new narration/render. The canonical v2 remains unchanged pending the next paired revision.
+
 ## Read in this order
 
 1. [Forensic report](../../../docs/research/extinct-script-forensics/REPORT.md): evidence, limits, old-script audit and changes.
