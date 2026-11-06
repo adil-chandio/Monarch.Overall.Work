@@ -15,7 +15,9 @@ def run(args):
 def wav(p,a):
  with wave.open(str(p),'wb') as w:
   w.setnchannels(a.shape[1] if a.ndim>1 else 1);w.setsampwidth(2);w.setframerate(SR);w.writeframes((np.clip(a,-.999,.999)*32767).astype('<i2').tobytes())
-def pcm(p,channels=1,limit=None):
+def pcm(p,channels=1,limit=None,floating=False):
+ if floating:
+  q=C/'decode.f32';run(['-i',p,*( ['-t',limit] if limit is not None else []),'-f','f32le','-ar',SR,'-ac',channels,q]);a=np.fromfile(q,dtype='<f4');q.unlink();return a.reshape(-1,channels) if channels>1 else a
  q=C/'decode.wav';run(['-i',p,*(['-t',limit] if limit is not None else []),'-ar',SR,'-ac',channels,q])
  with wave.open(str(q)) as w:a=np.frombuffer(w.readframes(w.getnframes()),'<i2').astype(np.float32)/32768
  return a.reshape(-1,channels) if channels>1 else a
@@ -42,14 +44,15 @@ def audio():
    req=urllib.request.Request(entry['official_download'],headers={'User-Agent':'Monarch full documentary / attributed CC-BY use'})
    with urllib.request.urlopen(req,timeout=90) as r:
     data=r.read(35*1024*1024+1);assert len(data)<=35*1024*1024,'Unexpectedly large primary-source music response';p.write_bytes(data)
-  source=pcm(p,2);rms=float(np.sqrt(np.mean(source*source)));source*=.075/max(rms,1e-7);sources.append(source)
-  tracks.append({'track':entry['track'],'official_download':entry['official_download'],'sha256':sha(p),'duration_seconds':len(source)/SR,'source_start_seconds':0,'license':entry['license'],'required_credit':entry['required_credit']})
+  source=pcm(p,2,floating=True);rms=float(np.sqrt(np.mean(source*source)));source_peak=float(np.max(np.abs(source)));source_gain=min(.075/max(rms,1e-7),.85/max(source_peak,1e-7));source*=source_gain;sources.append(source)
+  tracks.append({'track':entry['track'],'official_download':entry['official_download'],'sha256':sha(p),'duration_seconds':len(source)/SR,'source_start_seconds':0,'float_decode_unclipped_peak':source_peak,'level_matching_gain':source_gain,'peak_after_matching':float(np.max(np.abs(source))),'license':entry['license'],'required_credit':entry['required_credit']})
  split=max(D-len(sources[1])/SR+1.05,min(218.666667,len(sources[0])/SR-1.05))
  assert split+1<=len(sources[0])/SR and D-split+1<=len(sources[1])/SR,'Licensed music too short: no unapproved looping or procedural substitute'
  t=np.arange(N,dtype=np.float32)/SR;first_end=min(N,round((split+1)*SR));second_start=max(0,round((split-1)*SR));cross=smooth((t-(split-1))/2)
  score=np.zeros((N,2),np.float32);score[:first_end]+=sources[0][:first_end]*np.cos(np.pi*.5*cross[:first_end])[:,None];score[second_start:]+=sources[1][:N-second_start]*np.sin(np.pi*.5*cross[second_start:])[:,None]
  tracks[0].update(timeline_start_seconds=0,source_excerpt_end_seconds=first_end/SR);tracks[1].update(timeline_start_seconds=second_start/SR,source_excerpt_end_seconds=(N-second_start)/SR)
  del sources,source,cross
+ score_peak=float(np.max(np.abs(score)));score_safety=min(1.,.90/max(score_peak,1e-7));score*=score_safety
  cues=json.loads((B.parent/'film-v6-motion/action-cues.json').read_text());foley,env,report=design(v,m,cues)
  wav(C/'foley-unfiltered.wav',foley);del foley
  run(['-i',C/'foley-unfiltered.wav','-af','highpass=f=70,lowpass=f=4200,equalizer=f=3200:t=q:w=0.7:g=-3',C/'foley-shaped.wav'])
@@ -65,7 +68,7 @@ def audio():
  score=pcm(C/'score-shaped.wav',2);assert len(score)==N
  score*=.14*(1-.45*smooth(env/.065))[:,None]*(smooth(t/2.5)*smooth((D-t)/3.4))[:,None]
  mix=v[:,None]+score+foley;peak=float(np.max(np.abs(mix)));safety=min(1.,.95/max(1e-12,peak));mix*=safety
- report.update(premaster_peak_before_safety=peak,premaster_safety_gain=safety,music_sources=tracks,music_crossfade_seconds=2,music_source_audio_looped=False,full_master_frames=m['total_frames'],script_sha256=m['script_sha256'],voice_assets_sha256={c['id']:sha(ROOT/c['voice']) for c in m['chapters']})
+ report.update(premaster_peak_before_safety=peak,premaster_safety_gain=safety,music_sources=tracks,music_crossfade_seconds=2,music_source_audio_looped=False,music_before_eq_peak=score_peak,music_pre_eq_safety_gain=score_safety,full_master_frames=m['total_frames'],script_sha256=m['script_sha256'],voice_assets_sha256={c['id']:sha(ROOT/c['voice']) for c in m['chapters']})
  (B/'SOUND-QC.json').write_text(json.dumps(report,indent=2)+'\n');wav(C/'score-excerpt.wav',score);wav(C/'foley.wav',foley);wav(C/'mix.wav',mix)
  a=levels(C/'mix.wav');norm='loudnorm=I=-16:TP=-2.5:LRA=9:linear=true:'+':'.join(f'{k}={a[v]}' for k,v in [('measured_I','input_i'),('measured_TP','input_tp'),('measured_LRA','input_lra'),('measured_thresh','input_thresh'),('offset','target_offset')]);norm+=',aresample=192000,alimiter=limit=0.70:level=false:attack=5:release=80:latency=1,aresample=48000'
  run(['-i',C/'mix.wav','-af',norm,C/'proof.wav'])
