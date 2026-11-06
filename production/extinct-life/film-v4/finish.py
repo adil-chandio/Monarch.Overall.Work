@@ -110,9 +110,13 @@ for c in m['chapters']:
  assert p.exists();parts.append(p)
 concat=CACHE/'pictures.txt';concat.write_text(''.join("file '"+str(p)+"'\n" for p in parts))
 a=levels(CACHE/'mix.wav');norm='loudnorm=I=-16:TP=-1.8:LRA=9:linear=true:'+':'.join(f'{k}={a[v]}' for k,v in [('measured_I','input_i'),('measured_TP','input_tp'),('measured_LRA','input_lra'),('measured_thresh','input_thresh'),('offset','target_offset')])
+# Keep AAC reconstruction peaks below the unchanged QC ceiling; no automatic limiter makeup.
+norm+=',aresample=192000,alimiter=limit=0.70:level=false:attack=5:release=80:latency=1,aresample=48000'
 run(['-f','concat','-safe','0','-i',concat,'-i',CACHE/'mix.wav','-i',sub,'-map','0:v:0','-map','1:a:0','-map','2:s:0','-c:v','copy','-af',norm,'-c:a','aac','-b:a','256k','-ar',SR,'-c:s','mov_text','-metadata:s:s:0','language=eng','-metadata','title=The Lost World Inside a Handful of Dirt','-t',f'{D:.9f}','-movflags','+faststart',OUT])
 measured=levels(OUT)
 decode=run(['-i',OUT,'-map','0:v:0','-vf','blackdetect=d=0.7:pix_th=0.035,freezedetect=n=-48dB:d=1.5','-progress','pipe:1','-nostats','-f','null','-']);frames=int(re.findall(r'^frame=(\d+)',decode.stdout,re.M)[-1]);assert frames==m['total_frames'],(frames,m['total_frames']);assert '1920x1080' in decode.stderr
-assert abs(float(measured['input_i'])+16)<1.1;assert float(measured['input_tp'])<=-.8
+print('ENCODED_AUDIO_MEASUREMENT '+json.dumps(measured),flush=True)
+assert abs(float(measured['input_i'])+16)<1.1,measured
+assert float(measured['input_tp'])<=-.8,measured
 report={'file':str(OUT.relative_to(ROOT)),'width':1920,'height':1080,'fps':30,'decoded_frames':frames,'duration_seconds':D,'voice_seconds':m['narration_seconds'],'voice_id':'voice-02','voice_time_stretched':False,'script_sha256':m['script_sha256'],'sha256':hashlib.sha256(OUT.read_bytes()).hexdigest(),'bytes':OUT.stat().st_size,'continuous_sequences':len(m['sequences']),'semantic_audit_beats_not_cuts':len(m['shots']),'forced_three_second_cuts':False,'maximum_sequence_seconds':max((s['end_frame']-s['start_frame'])/30 for s in m['sequences']),'audio_measurement':measured,'score':'original procedural felt-key/string-style score; not a recorded orchestra or licensed stock track','foley':'original synthesized wind/water texture, foot contacts, granular and liquid events','full_video_decode_checked':True,'detector_log':decode.stderr,'direction_audit':json.loads((BASE/'direction-audit.json').read_text()),'render_complete':True,'owner_quality_approval':False,'creative_status':'Full rendered production candidate; technical checks are not owner quality approval','av_review_limit':'Representative stills and deterministic motion states checked; not a verified human full-length watch/listen','youtube_upload':False}
 (BASE/'QC.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='detector_log'},indent=2))

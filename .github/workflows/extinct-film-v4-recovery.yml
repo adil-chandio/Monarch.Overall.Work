@@ -1,4 +1,5 @@
 name: Extinct Life v4 — assembly recovery (saved renders)
+# Oversampled peak limiter protects the final AAC; existing visual frames are unchanged.
 on:
   push:
     branches: [arena/ba8d901e-monarch-overall-work]

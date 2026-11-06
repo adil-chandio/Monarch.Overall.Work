@@ -28,5 +28,7 @@ class Revision(unittest.TestCase):
   for v in ['NOT AN OBSERVED ENCOUNTER','NOT TO SCALE','NOT ACTUAL SEQUENCE READS','NOT STUDY FOOTAGE']:self.assertIn(v,s)
  def test_no_wrapping_lab_delivery(self):
   s=(B/'worlds.mjs').read_text();self.assertNotIn('act%6.2',s);self.assertIn('Math.min(act,6.2)',s)
+ def test_aac_peak_protection_not_relaxed_qc(self):
+  s=(B/'finish.py').read_text();self.assertIn('aresample=192000,alimiter=limit=0.70:level=false',s);self.assertIn("assert float(measured['input_tp'])<=-.8",s)
  def test_no_false_finished_claim(self):self.assertFalse(self.m['full_film_complete'])
 if __name__=='__main__':unittest.main()
