@@ -1,9 +1,10 @@
 Traceback (most recent call last):
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 549, in <module>
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 555, in <module>
     render()
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 445, in render
-    main = cinema_grade(main)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 130, in cinema_grade
-    x[..., 0] += 0.018 * shadows - 0.010 * highlights
-ValueError: operands could not be broadcast together with shapes (880,1040) (880,1040,3) (880,1040) 
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 454, in render
+    main = add_grain(main, frame_index)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 147, in add_grain
+    return np.clip(main.astype(np.float32) + g * float(VIS["grain_amplitude"]), 0, 255).astype(np.uint8)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ValueError: operands could not be broadcast together with shapes (880,1040,3) (880,1040) 
