@@ -18,4 +18,4 @@
 
 **Clarifying comment:** `This is general Laysan albatross courtship behavior. The clip doesn't tell us these two birds' individual history or whether they are already a pair.`
 
-**Rejected:** bear/car/handle/door claims, 25M-view claim, "part 2" promise, any claim about these two birds' relationship history, any pre-upload viral/subscribe/like/3x claim, human-listening/human-approval claim, or cluttered on-screen text.
+**Rejected:** bear/car/handle/door claims, 25M-view claim, "part 2" promise, any claim about these two birds' relationship history, any pre-upload viral/subscribe/like/3x claim, or human-listening/human-approval claim.

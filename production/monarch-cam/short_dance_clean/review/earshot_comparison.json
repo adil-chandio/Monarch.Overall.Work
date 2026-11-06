@@ -1,0 +1,90 @@
+{
+  "baseline": {
+    "source": "production/monarch-cam/short_dance/review/earshot_critique.json",
+    "score": 0.865,
+    "verdict": "close",
+    "in_range": 19,
+    "scored": 23,
+    "critical_issues": 0,
+    "major_issues": 1,
+    "metrics": {
+      "hit_rate": {
+        "value": 1.88,
+        "range": [
+          0.05,
+          1.8599999999999999
+        ]
+      },
+      "band_sub": {
+        "value": -39.7,
+        "range": [
+          -17.7,
+          -2.5999999999999996
+        ]
+      },
+      "side_to_mid_db": {
+        "value": -27.3,
+        "range": [
+          -15.5,
+          -4.0
+        ]
+      },
+      "p_real": {
+        "value": 0.73,
+        "range": [
+          0.77,
+          null
+        ]
+      }
+    }
+  },
+  "premium": {
+    "score": 0.919,
+    "verdict": "launch-grade",
+    "in_range": 20,
+    "scored": 23,
+    "critical_issues": 0,
+    "major_issues": 0,
+    "metrics": {
+      "hit_rate": {
+        "value": 1.67,
+        "range": [
+          0.05,
+          1.8599999999999999
+        ]
+      },
+      "band_sub": {
+        "value": -36.1,
+        "range": [
+          -17.7,
+          -2.5999999999999996
+        ]
+      },
+      "side_to_mid_db": {
+        "value": -24.6,
+        "range": [
+          -15.5,
+          -4.0
+        ]
+      },
+      "p_real": {
+        "value": 0.757,
+        "range": [
+          0.77,
+          null
+        ]
+      }
+    }
+  },
+  "gates": {
+    "hit_rate_in_range": true,
+    "no_major_issues": true,
+    "no_critical_issues": true,
+    "score_not_below_original": true,
+    "hit_density_improved": true,
+    "sub_weight_improved": true,
+    "stereo_width_improved": true
+  },
+  "premium_sound_pass": true,
+  "note": "Model-assisted comparison; p_real may remain uncertain. Not human listening or approval."
+}

@@ -1,0 +1,21 @@
+{
+  "hook_frame_reference": "cover_hook.jpg",
+  "hook_frame_text": null,
+  "primary": "THIS IS A JOB INTERVIEW.",
+  "ab": "WOULD YOU PASS?",
+  "outputs": [
+    {
+      "file": "cover.jpg",
+      "text": "THIS IS A JOB INTERVIEW.",
+      "sha256": "ad98dfc53dfa841f6b7c17594729932acb0c4c10f09165640eab661623dd9d63",
+      "bytes": 294715
+    },
+    {
+      "file": "cover_WOULD_YOU_PASS.jpg",
+      "text": "WOULD YOU PASS?",
+      "sha256": "5ce0ff3dd6570e93a9930bcdf38ef747f0eed19b3c4fd4cd85d2e1430150ac8f",
+      "bytes": 298317
+    }
+  ],
+  "note": "Clean exact-text thumbnails generated from the 0.07 s hook frame. The in-video hook frame itself has no extra headline. No separate human thumbnail review occurred."
+}
