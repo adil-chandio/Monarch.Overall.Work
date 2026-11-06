@@ -1,5 +1,8 @@
 name: Extinct Life v3 — full English production candidate
 on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-film-v3.yml]
   workflow_dispatch:
 permissions:
   contents: write
