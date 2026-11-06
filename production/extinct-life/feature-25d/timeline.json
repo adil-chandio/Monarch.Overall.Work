@@ -1,0 +1,448 @@
+{
+  "title": "The Lost World Inside a Handful of Dirt",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "opening_seconds": 45,
+  "body_frames": 12169,
+  "body_seconds": 405.6333333333333,
+  "total_seconds": 450.6333333333333,
+  "chapters": [
+    {
+      "index": 0,
+      "title": "The place",
+      "start_frame": 0,
+      "frames": 1573,
+      "voice_start": 0.65,
+      "voice_duration": 50.964671201814056,
+      "source": ".cache/extinct-feature/voice/01.wav"
+    },
+    {
+      "index": 1,
+      "title": "The invisible trail",
+      "start_frame": 1573,
+      "frames": 1480,
+      "voice_start": 0.65,
+      "voice_duration": 47.851836734693876,
+      "source": ".cache/extinct-feature/voice/02.wav"
+    },
+    {
+      "index": 2,
+      "title": "The mineral shelter",
+      "start_frame": 3053,
+      "frames": 1651,
+      "voice_start": 0.65,
+      "voice_duration": 53.56843537414966,
+      "source": ".cache/extinct-feature/voice/03.wav"
+    },
+    {
+      "index": 3,
+      "title": "Reading the pieces",
+      "start_frame": 4704,
+      "frames": 1386,
+      "voice_start": 0.65,
+      "voice_duration": 44.74485260770975,
+      "source": ".cache/extinct-feature/voice/04.wav"
+    },
+    {
+      "index": 4,
+      "title": "A community reappears",
+      "start_frame": 6090,
+      "frames": 1597,
+      "voice_start": 0.65,
+      "voice_duration": 51.759909297052154,
+      "source": ".cache/extinct-feature/voice/05.wav"
+    },
+    {
+      "index": 5,
+      "title": "The missing photograph",
+      "start_frame": 7687,
+      "frames": 1504,
+      "voice_start": 0.65,
+      "voice_duration": 48.66902494331066,
+      "source": ".cache/extinct-feature/voice/06.wav"
+    },
+    {
+      "index": 6,
+      "title": "Different windows",
+      "start_frame": 9191,
+      "frames": 1594,
+      "voice_start": 0.65,
+      "voice_duration": 51.65278911564626,
+      "source": ".cache/extinct-feature/voice/07.wav"
+    },
+    {
+      "index": 7,
+      "title": "What the ground kept",
+      "start_frame": 10785,
+      "frames": 1384,
+      "voice_start": 0.65,
+      "voice_duration": 44.66358276643991,
+      "source": ".cache/extinct-feature/voice/08.wav"
+    }
+  ],
+  "shots": [
+    {
+      "index": 0,
+      "chapter": 0,
+      "kind": "field",
+      "title": "The far northern edge",
+      "start_frame": 0,
+      "end_frame": 315,
+      "transition_frames": 12
+    },
+    {
+      "index": 1,
+      "chapter": 0,
+      "kind": "map",
+      "title": "A different Greenland",
+      "start_frame": 315,
+      "end_frame": 629,
+      "transition_frames": 10
+    },
+    {
+      "index": 2,
+      "chapter": 0,
+      "kind": "botany",
+      "title": "Traces of vegetation",
+      "start_frame": 629,
+      "end_frame": 944,
+      "transition_frames": 10
+    },
+    {
+      "index": 3,
+      "chapter": 0,
+      "kind": "pollen",
+      "title": "An older window",
+      "start_frame": 944,
+      "end_frame": 1258,
+      "transition_frames": 10
+    },
+    {
+      "index": 4,
+      "chapter": 0,
+      "kind": "core",
+      "title": "A second archive",
+      "start_frame": 1258,
+      "end_frame": 1573,
+      "transition_frames": 10
+    },
+    {
+      "index": 5,
+      "chapter": 1,
+      "kind": "woodland",
+      "title": "Life leaves traces",
+      "start_frame": 1573,
+      "end_frame": 1869,
+      "transition_frames": 10
+    },
+    {
+      "index": 6,
+      "chapter": 1,
+      "kind": "shedding",
+      "title": "An invisible trail",
+      "start_frame": 1869,
+      "end_frame": 2165,
+      "transition_frames": 10
+    },
+    {
+      "index": 7,
+      "chapter": 1,
+      "kind": "transport",
+      "title": "Into water and sediment",
+      "start_frame": 2165,
+      "end_frame": 2461,
+      "transition_frames": 10
+    },
+    {
+      "index": 8,
+      "chapter": 1,
+      "kind": "fragments",
+      "title": "A mixed archive",
+      "start_frame": 2461,
+      "end_frame": 2757,
+      "transition_frames": 10
+    },
+    {
+      "index": 9,
+      "chapter": 1,
+      "kind": "transport",
+      "title": "Not one afternoon",
+      "start_frame": 2757,
+      "end_frame": 3053,
+      "transition_frames": 10
+    },
+    {
+      "index": 10,
+      "chapter": 2,
+      "kind": "fragments",
+      "title": "Messages break apart",
+      "start_frame": 3053,
+      "end_frame": 3383,
+      "transition_frames": 10
+    },
+    {
+      "index": 11,
+      "chapter": 2,
+      "kind": "cold",
+      "title": "Cold conditions",
+      "start_frame": 3383,
+      "end_frame": 3713,
+      "transition_frames": 10
+    },
+    {
+      "index": 12,
+      "chapter": 2,
+      "kind": "mineral",
+      "title": "A mineral shelter",
+      "start_frame": 3713,
+      "end_frame": 4044,
+      "transition_frames": 10
+    },
+    {
+      "index": 13,
+      "chapter": 2,
+      "kind": "mineral-close",
+      "title": "Protection, not perfection",
+      "start_frame": 4044,
+      "end_frame": 4374,
+      "transition_frames": 10
+    },
+    {
+      "index": 14,
+      "chapter": 2,
+      "kind": "core",
+      "title": "Chemistry matters",
+      "start_frame": 4374,
+      "end_frame": 4704,
+      "transition_frames": 10
+    },
+    {
+      "index": 15,
+      "chapter": 3,
+      "kind": "lab",
+      "title": "Recover the fragments",
+      "start_frame": 4704,
+      "end_frame": 4981,
+      "transition_frames": 10
+    },
+    {
+      "index": 16,
+      "chapter": 3,
+      "kind": "reads",
+      "title": "Read, then compare",
+      "start_frame": 4981,
+      "end_frame": 5258,
+      "transition_frames": 10
+    },
+    {
+      "index": 17,
+      "chapter": 3,
+      "kind": "reference",
+      "title": "More than one possible relative",
+      "start_frame": 5258,
+      "end_frame": 5536,
+      "transition_frames": 10
+    },
+    {
+      "index": 18,
+      "chapter": 3,
+      "kind": "branch",
+      "title": "Where identification stops",
+      "start_frame": 5536,
+      "end_frame": 5813,
+      "transition_frames": 10
+    },
+    {
+      "index": 19,
+      "chapter": 3,
+      "kind": "lab-check",
+      "title": "Test the interpretation",
+      "start_frame": 5813,
+      "end_frame": 6090,
+      "transition_frames": 10
+    },
+    {
+      "index": 20,
+      "chapter": 4,
+      "kind": "woodland",
+      "title": "A community reappears",
+      "start_frame": 6090,
+      "end_frame": 6409,
+      "transition_frames": 10
+    },
+    {
+      "index": 21,
+      "chapter": 4,
+      "kind": "fauna",
+      "title": "Different lives, different traces",
+      "start_frame": 6409,
+      "end_frame": 6729,
+      "transition_frames": 10
+    },
+    {
+      "index": 22,
+      "chapter": 4,
+      "kind": "mastodon",
+      "title": "A mastodon lineage",
+      "start_frame": 6729,
+      "end_frame": 7048,
+      "transition_frames": 10
+    },
+    {
+      "index": 23,
+      "chapter": 4,
+      "kind": "botany",
+      "title": "Not a modern postcard",
+      "start_frame": 7048,
+      "end_frame": 7368,
+      "transition_frames": 10
+    },
+    {
+      "index": 24,
+      "chapter": 4,
+      "kind": "woodland",
+      "title": "A lost combination",
+      "start_frame": 7368,
+      "end_frame": 7687,
+      "transition_frames": 10
+    },
+    {
+      "index": 25,
+      "chapter": 5,
+      "kind": "fauna",
+      "title": "The scene is an interpretation",
+      "start_frame": 7687,
+      "end_frame": 7988,
+      "transition_frames": 10
+    },
+    {
+      "index": 26,
+      "chapter": 5,
+      "kind": "transport",
+      "title": "Across space and time",
+      "start_frame": 7988,
+      "end_frame": 8289,
+      "transition_frames": 10
+    },
+    {
+      "index": 27,
+      "chapter": 5,
+      "kind": "missing",
+      "title": "Not found does not mean absent",
+      "start_frame": 8289,
+      "end_frame": 8589,
+      "transition_frames": 10
+    },
+    {
+      "index": 28,
+      "chapter": 5,
+      "kind": "uncertain",
+      "title": "Evidence / illustration",
+      "start_frame": 8589,
+      "end_frame": 8890,
+      "transition_frames": 10
+    },
+    {
+      "index": 29,
+      "chapter": 5,
+      "kind": "mastodon",
+      "title": "Keep the distinction visible",
+      "start_frame": 8890,
+      "end_frame": 9191,
+      "transition_frames": 10
+    },
+    {
+      "index": 30,
+      "chapter": 6,
+      "kind": "pollen",
+      "title": "Different windows",
+      "start_frame": 9191,
+      "end_frame": 9510,
+      "transition_frames": 10
+    },
+    {
+      "index": 31,
+      "chapter": 6,
+      "kind": "triad",
+      "title": "Evidence together",
+      "start_frame": 9510,
+      "end_frame": 9829,
+      "transition_frames": 10
+    },
+    {
+      "index": 32,
+      "chapter": 6,
+      "kind": "reference",
+      "title": "Agreement and open questions",
+      "start_frame": 9829,
+      "end_frame": 10147,
+      "transition_frames": 10
+    },
+    {
+      "index": 33,
+      "chapter": 6,
+      "kind": "age",
+      "title": "An approximate age",
+      "start_frame": 10147,
+      "end_frame": 10466,
+      "transition_frames": 10
+    },
+    {
+      "index": 34,
+      "chapter": 6,
+      "kind": "triad",
+      "title": "A reconstruction with edges",
+      "start_frame": 10466,
+      "end_frame": 10785,
+      "transition_frames": 10
+    },
+    {
+      "index": 35,
+      "chapter": 7,
+      "kind": "fragments",
+      "title": "Not a resurrection",
+      "start_frame": 10785,
+      "end_frame": 11062,
+      "transition_frames": 10
+    },
+    {
+      "index": 36,
+      "chapter": 7,
+      "kind": "mineral-close",
+      "title": "Surviving pieces",
+      "start_frame": 11062,
+      "end_frame": 11339,
+      "transition_frames": 10
+    },
+    {
+      "index": 37,
+      "chapter": 7,
+      "kind": "dissolve-world",
+      "title": "A partly readable past",
+      "start_frame": 11339,
+      "end_frame": 11615,
+      "transition_frames": 10
+    },
+    {
+      "index": 38,
+      "chapter": 7,
+      "kind": "cold",
+      "title": "What the ground kept",
+      "start_frame": 11615,
+      "end_frame": 11892,
+      "transition_frames": 10
+    },
+    {
+      "index": 39,
+      "chapter": 7,
+      "kind": "end",
+      "title": "The animal is gone. The story isn\u2019t.",
+      "start_frame": 11892,
+      "end_frame": 12169,
+      "transition_frames": 10
+    }
+  ],
+  "source_doi": "10.1038/s41586-022-05453-y",
+  "timing_note": "Measured chapter speech; editorial shot timing, not word alignment."
+}
