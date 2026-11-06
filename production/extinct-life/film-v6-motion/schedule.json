@@ -1,0 +1,46 @@
+{
+  "status": "ACTUAL 3D DEVELOPMENT; NOT FINAL FILM",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "script_sha256": "42e26885947d4cb9447074f9a63f4504ba4cc87906492703e8ee2f87ba5738f6",
+  "total_frames": 1829,
+  "segments": [
+    {
+      "id": "transport",
+      "world": "river",
+      "start_frame": 0,
+      "end_frame": 757,
+      "source_start_frame": 1925
+    },
+    {
+      "id": "time-averaging",
+      "world": "deposits",
+      "start_frame": 757,
+      "end_frame": 1141,
+      "source_start_frame": 2682
+    },
+    {
+      "id": "imagined-encounter",
+      "world": "living",
+      "start_frame": 1141,
+      "end_frame": 1829,
+      "source_start_frame": 8381
+    }
+  ],
+  "voice_clips": [
+    {
+      "chapter": "B02",
+      "local_start_frame": 325,
+      "local_end_frame": 1466
+    },
+    {
+      "chapter": "B06",
+      "local_start_frame": 0,
+      "local_end_frame": 688
+    }
+  ],
+  "rejected_v5_image_assets_used": false,
+  "source": "V4 moving-3D infrastructure and new source animation; no old rendered video",
+  "full_film_complete": false
+}
