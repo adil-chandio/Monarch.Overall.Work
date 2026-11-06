@@ -1,0 +1,29 @@
+TTS vo1 attempt 1: 8640 bytes
+TTS vo2 attempt 1: 12096 bytes
+TTS vo3 attempt 1: 10800 bytes
+TTS vo4 attempt 1: 15552 bytes
+TTS vo5 attempt 1: 8784 bytes
+TTS vo6 attempt 1: 11232 bytes
+TTS vo7 attempt 1: 11664 bytes
+TTS vo8 attempt 1: 11232 bytes
+TTS vo9 attempt 1: 11664 bytes
+TTS vo10 attempt 1: 11232 bytes
+Source music_dark: 1,862,544 bytes
+Source music_backup: 5,600,980 bytes
+Source forest_night: 2,553,542 bytes
+Source soft_whoosh: 123,547 bytes
+Source soft_impact: 130,468 bytes
+Earshot API available; model-assisted SFX selection enabled
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_next/vo1.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_next/vo2.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_next/vo3.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_next/vo4.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
+Traceback (most recent call last):
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_next/build_next_audio.py", line 554, in <module>
+    main()
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_next/build_next_audio.py", line 545, in main
+    mix, stems = build_audio()
+                 ^^^^^^^^^^^^^
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_next/build_next_audio.py", line 117, in build_audio
+    raise RuntimeError(f"{item['id']} needs excessive tempo {tempo:.3f}")
+RuntimeError: vo4 needs excessive tempo 1.125
