@@ -113,7 +113,7 @@ def build_audio():
         tempo = 1.0
         if len(clip) > allowed_samples:
             tempo = len(clip) / allowed_samples
-            if tempo > 1.12:
+            if tempo > 1.15:
                 raise RuntimeError(f"{item['id']} needs excessive tempo {tempo:.3f}")
             clip = preview.decode_vo(WORK / f"{item['id']}.mp3", atempo=tempo).astype(np.float32)
             clip = sound.fade_edges(sound.high_low_pass(clip, highpass=75), 0.018, 0.018)

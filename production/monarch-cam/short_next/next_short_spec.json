@@ -35,7 +35,7 @@
   "improvements": [
     "First physical action and answer inside 3 seconds instead of 7.25 seconds.",
     "Learning-loop diagram begins at 5.0s instead of 16.25s.",
-    "Food-conditioning name lands at 7.0s, before the measured 11-12s leak.",
+    "Food-conditioning badge appears at 7.0s and the name is spoken at 7.2s, before the measured 11-12s leak.",
     "Prevention begins at 13.6s and the window loop at 17.6s.",
     "Narration reduced from 70 to 48 words; runtime reduced from 35s to 20s.",
     "2-frame amber cut accents and a named 7s pattern interrupt add visual novelty.",
@@ -69,7 +69,7 @@
     },
     {
       "id": "vo5",
-      "start": 7.0,
+      "start": 7.2,
       "text": "That's food conditioning.",
       "caption": "THAT'S FOOD CONDITIONING."
     },
@@ -324,7 +324,7 @@
         "time": 7.0,
         "kind": "impact",
         "peak_db": -26.0,
-        "label": "Food conditioning named before old drop-off"
+        "label": "Food-conditioning badge before old drop-off"
       },
       {
         "frame": 264,

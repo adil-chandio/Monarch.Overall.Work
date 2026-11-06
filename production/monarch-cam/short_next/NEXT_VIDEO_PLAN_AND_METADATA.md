@@ -32,7 +32,7 @@ The 11–12 s exit maps almost exactly to the old edit’s **11.35 s turn** from
 | Hook + window answer by 4.35 s | Hook at 0.00 s, food answer by 3.00 s |
 | 70 words | **48 words** |
 | Diagram at 16.25 s | Diagram at **5.00 s** |
-| “Food conditioning” named at 19.35 s | Named at **7.00 s**, before the measured leak |
+| “Food conditioning” named at 19.35 s | Badge at **7.00 s**, spoken at **7.20 s**, before the measured leak |
 | Prevention at 30.35 s | Prevention begins at **13.60 s** |
 | Loop at 30.35–35.00 s | Loop begins at **17.60 s** and holds to 20.00 s |
 | 11 scenes / 11 cues | **9 scenes / 12 cues** |
@@ -41,7 +41,7 @@ The 11–12 s exit maps almost exactly to the old edit’s **11.35 s turn** from
 | Title had hashtags pasted into it | Clean title; hashtags stay in description |
 | Auto cover at 2.20 s | Cover uses the **0.07 s hook frame** |
 
-The first 3 seconds now deliver: **window action → not a ride → food**. The learning loop arrives while attention is still alive. A named `FOOD CONDITIONING` badge appears at 7.0 s as a deliberate pattern interrupt. The final line holds through the end and returns to the opening window angle.
+The first 3 seconds now deliver: **window action → not a ride → food**. The learning loop arrives while attention is still alive. A named `FOOD CONDITIONING` badge appears at 7.0 s and the phrase is spoken at 7.2 s as a deliberate pattern interrupt. The final line holds through the end and returns to the opening window angle.
 
 ## 3. Source and factual lock
 
