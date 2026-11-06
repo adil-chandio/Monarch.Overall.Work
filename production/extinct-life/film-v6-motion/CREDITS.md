@@ -6,6 +6,6 @@ https://www.scottbuckley.com.au/library/hiraeth/
 
 Licence: https://creativecommons.org/licenses/by/4.0/
 
-Excerpted, faded, level-adjusted and ducked underneath narration; no endorsement implied.
+Excerpted, faded, gently EQ-shaped, level-adjusted and smoothly ducked underneath narration; no endorsement implied.
 
 If published on YouTube, this credit must be included in the video description. This delivery is on GitHub only. Foley is original synthesized sound design, not claimed as recorded field sound.
