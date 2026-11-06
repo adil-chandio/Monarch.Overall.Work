@@ -1,10 +1,14 @@
-Traceback (most recent call last):
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 555, in <module>
-    render()
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 454, in render
-    main = add_grain(main, frame_index)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance_premium/render_dance_visual_premium.py", line 147, in add_grain
-    return np.clip(main.astype(np.float32) + g * float(VIS["grain_amplitude"]), 0, 255).astype(np.uint8)
-                   ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ValueError: operands could not be broadcast together with shapes (880,1040,3) (880,1040) 
+Rendered premium hook_pair / frames 0:42
+Rendered premium bow_intro / frames 42:87
+Rendered premium sky_intro / frames 87:132
+Rendered premium midway_pair / frames 132:177
+Rendered premium step_bow / frames 177:219
+Rendered premium step_clack / frames 219:264
+Rendered premium step_sky / frames 264:312
+Rendered premium sync_freeze / frames 312:360
+Rendered premium dance_party / frames 360:405
+Rendered premium pair_bond / frames 405:453
+Rendered premium punchline / frames 453:504
+Rendered premium slow_replay / frames 504:549
+Rendered premium loop_question / frames 549:720
+Saved premium picture /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance_premium/dance_silent_premium.mp4
