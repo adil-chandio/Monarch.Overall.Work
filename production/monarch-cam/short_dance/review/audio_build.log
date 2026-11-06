@@ -1,0 +1,38 @@
+TTS vo1 attempt 1: 11232 bytes
+TTS vo2 attempt 1: 11232 bytes
+TTS vo3 attempt 1: 11232 bytes
+TTS retry vo4 1/5: NoAudioReceived('No audio was received. Please verify that your parameters are correct.')
+TTS vo4 attempt 2: 9216 bytes
+TTS vo5 attempt 1: 11232 bytes
+TTS vo6 attempt 1: 11808 bytes
+TTS vo7 attempt 1: 13536 bytes
+TTS vo8 attempt 1: 14256 bytes
+TTS vo9 attempt 1: 11808 bytes
+TTS vo10 attempt 1: 11232 bytes
+TTS vo11 attempt 1: 11232 bytes
+TTS vo12 attempt 1: 11232 bytes
+TTS vo13 attempt 1: 11232 bytes
+Source music_funny: 672,115 bytes
+Source soft_whoosh: 123,547 bytes
+Source soft_impact: 130,468 bytes
+Source cartoon_boing: 42,144 bytes
+Source comedy_tick: 82,233 bytes
+Source native_audio: 20,186,964 bytes
+Earshot API available; model-assisted SFX selection enabled
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo1.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo2.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo3.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo4.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo5.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo6.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo6.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.05103,aresample=48000 -ac 2 -f f32le pipe:1
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/vo7.mp3 -af silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.025,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06,areverse,atempo=1.00000,aresample=48000 -ac 2 -f f32le pipe:1
+Traceback (most recent call last):
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/build_dance_audio.py", line 600, in <module>
+    main()
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/build_dance_audio.py", line 591, in main
+    mix, stems = build_audio()
+                 ^^^^^^^^^^^^^
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/build_dance_audio.py", line 181, in build_audio
+    raise RuntimeError(f"{item['id']} needs excessive tempo {tempo:.3f}")
+RuntimeError: vo7 needs excessive tempo 1.199

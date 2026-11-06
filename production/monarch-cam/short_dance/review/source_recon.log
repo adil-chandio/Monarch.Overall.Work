@@ -1,9 +1,10 @@
-Retrieved 18139993 bytes from https://upload.wikimedia.org/wikipedia/commons/f/f4/Laysan_Albatross_Mating_Dance_2016.webm
+Candidate failed: https://upload.wikimedia.org/wikipedia/commons/f/f4/Laysan_Albatross_Mating_Dance_2016.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/f/f4/Laysan_Albatross_Mating_Dance_2016.webm')
+Retrieved 18139993 bytes from https://commons.wikimedia.org/wiki/Special:Redirect/file/Laysan_Albatross_Mating_Dance_2016.webm
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/media/laysan_albatross_dance.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/media/laysan_albatross_dance.webm -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 160k -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/media/laysan_albatross_dance.mp4
-[opus @ 0x55bac130a680] Error parsing Opus packet header.
+[opus @ 0x562cdfc07680] Error parsing Opus packet header.
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/media/laysan_albatross_dance.webm -vn -map 0:a:0 -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/usfws_clip_audio.wav
-[opus @ 0x56269c4ef4c0] Error parsing Opus packet header.
+[opus @ 0x557845d014c0] Error parsing Opus packet header.
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/media/laysan_albatross_dance.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/frames/coarse_%04d.jpg
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/media/laysan_albatross_dance.mp4 -vf fps=2,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/frames/fine_%04d.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/review/coarse_contact_sheet_01.jpg
@@ -16,14 +17,14 @@ Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/mon
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/review/fine_contact_sheet_05.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/review/fine_contact_sheet_06.jpg
 + ffmpeg -y -hide_banner -loglevel warning -ss 12 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance/media/laysan_albatross_dance.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/review/source_poster.jpg
-[image2 @ 0x55f369ad5b80] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/review/source_poster.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x55f369ad5b80] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[image2 @ 0x5598c99e6b80] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_dance/review/source_poster.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x5598c99e6b80] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
 {
   "topic": "Laysan albatross courtship dance",
   "new_topic_separate_from_prior_bear_car_short": true,
   "source_page": "https://commons.wikimedia.org/wiki/File:Laysan_Albatross_Mating_Dance_2016.webm",
   "original_file_url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Laysan_Albatross_Mating_Dance_2016.webm",
-  "retrieval_route": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Laysan_Albatross_Mating_Dance_2016.webm",
+  "retrieval_route": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Laysan_Albatross_Mating_Dance_2016.webm",
   "usfws_story": "https://www.fws.gov/story/2017-08/laysan-lovesong",
   "animal_diversity_web": "https://animaldiversity.org/accounts/Phoebastria_immutabilis/",
   "rights_declaration": "Public domain: work of a U.S. Fish & Wildlife Service employee (Ann Bell/USFWS) made as part of official duties; as a U.S. federal government work it is in the public domain.",
@@ -55,5 +56,5 @@ Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/mon
   ],
   "poster": "production/monarch-cam/short_dance/review/source_poster.jpg",
   "visual_timestamp_approval": "PENDING \u2014 no scene lock before contact-sheet review",
-  "retrieved_unix": 1793984007
+  "retrieved_unix": 1793986457
 }
