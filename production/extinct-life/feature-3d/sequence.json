@@ -1,0 +1,220 @@
+{
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "frames": 12144,
+  "seconds": 404.8,
+  "approved_reference_commit": "5892846826cf0e0b068be18bca51ebc0d86cf9e5",
+  "full_film_complete": false,
+  "chapters": [
+    {
+      "index": 0,
+      "start_frame": 0,
+      "frames": 1359,
+      "title": "جگہ اور پہلا سوال",
+      "voice_seconds": 44.96,
+      "implemented": false,
+      "scene": null,
+      "voice": "../feature-rebuild/voice/01.flac",
+      "narration_sha256": "651ff51f78711871876e566bd01fe2a8c22cdd515e174f333258de511e25ee06",
+      "voice_pcm_sha256": "0344209225df8f9f96c93bfbbec70d867a61730bd79340e6037fa8085f2bd4f0"
+    },
+    {
+      "index": 1,
+      "start_frame": 1359,
+      "frames": 1462,
+      "title": "زندگی کا نظر نہ آنے والا نشان",
+      "voice_seconds": 48.4,
+      "implemented": false,
+      "scene": null,
+      "voice": "../feature-rebuild/voice/02.flac",
+      "narration_sha256": "30904774a4ed0a9bd06e0cdf6f4e94f9cd3583b2ee960ff27dcf6e2be6a99e21",
+      "voice_pcm_sha256": "22ec8bd102ba631c7e034321f6e4dcccfecd8afa58052e0d6dae8e4187689c00"
+    },
+    {
+      "index": 2,
+      "start_frame": 2821,
+      "frames": 1563,
+      "title": "مٹی کی پناہ",
+      "voice_seconds": 51.76,
+      "implemented": true,
+      "scene": "sediment.mjs",
+      "voice": "../feature-rebuild/voice/03.flac",
+      "narration_sha256": "dd1f0efbade5b1ad63d5c31901f86ba7fd31dfe8bc4dea60e0e4537528126e18",
+      "voice_pcm_sha256": "57ab4b012eef0c54764291631d3886b753813aabd04a390869391af40f6ecae1"
+    },
+    {
+      "index": 3,
+      "start_frame": 4384,
+      "frames": 1439,
+      "title": "ٹکڑوں کو پڑھنا",
+      "voice_seconds": 47.64,
+      "implemented": false,
+      "scene": null,
+      "voice": "../feature-rebuild/voice/04.flac",
+      "narration_sha256": "26f53f4b384fb1738d5ee7a921f4888f40f7f88c735bef65d83d41078c13c2c7",
+      "voice_pcm_sha256": "b9e5ed23dca31e36fa99a71e1469eb84695a6061a2604d108fef10edb397c43d"
+    },
+    {
+      "index": 4,
+      "start_frame": 5823,
+      "frames": 1547,
+      "title": "کھوئی ہوئی زندگی",
+      "voice_seconds": 51.24,
+      "implemented": false,
+      "scene": null,
+      "voice": "../feature-rebuild/voice/05.flac",
+      "narration_sha256": "e4fcc4addbd63c275b991e694f3c33a02137cd374e4aadcc069a2365eeddbe3a",
+      "voice_pcm_sha256": "bcf62c7ff43e1a477ec48c2ad4a3713072b5f95edc7d64615290952c89f85ea2"
+    },
+    {
+      "index": 5,
+      "start_frame": 7370,
+      "frames": 1629,
+      "title": "ثبوت کی حد",
+      "voice_seconds": 53.96,
+      "implemented": false,
+      "scene": null,
+      "voice": "../feature-rebuild/voice/06.flac",
+      "narration_sha256": "0af6180b9317480a7228b3c6688e52425d48dce1ecf59039a0170bf7c54f1e0f",
+      "voice_pcm_sha256": "7af40ceb22f82eaf66add1712b78e480e51ecfabf96b8624ffe0d97a3fc23c0f"
+    },
+    {
+      "index": 6,
+      "start_frame": 8999,
+      "frames": 1558,
+      "title": "ثبوتوں کو ساتھ دیکھنا",
+      "voice_seconds": 51.6,
+      "implemented": false,
+      "scene": null,
+      "voice": "../feature-rebuild/voice/07.flac",
+      "narration_sha256": "010095f0cc1e80e0eadadc08c48d414a04757654fc56b59879f3631f6137e90a",
+      "voice_pcm_sha256": "4e1f04f81a848999ad1ffa2c8cf8382046e0cf57b28578715f0a24e58fa552f0"
+    },
+    {
+      "index": 7,
+      "start_frame": 10557,
+      "frames": 1587,
+      "title": "زمین نے کیا بچا لیا",
+      "voice_seconds": 52.56,
+      "implemented": false,
+      "scene": null,
+      "voice": "../feature-rebuild/voice/08.flac",
+      "narration_sha256": "3d5a6b89286e187410e3913b07152383227eb0d137b5271e799ce1c2152cf11c",
+      "voice_pcm_sha256": "0e57af44c6c768a309dfff9618882952b0327e8ac79152b862d5fae52f472148"
+    }
+  ],
+  "chapter_02_shots": [
+    {
+      "start_frame": 0,
+      "end_frame": 64,
+      "coverage": 0
+    },
+    {
+      "start_frame": 64,
+      "end_frame": 132,
+      "coverage": 1
+    },
+    {
+      "start_frame": 132,
+      "end_frame": 182,
+      "coverage": 2
+    },
+    {
+      "start_frame": 182,
+      "end_frame": 215,
+      "coverage": 5
+    },
+    {
+      "start_frame": 215,
+      "end_frame": 303,
+      "coverage": 2
+    },
+    {
+      "start_frame": 303,
+      "end_frame": 372,
+      "coverage": 1
+    },
+    {
+      "start_frame": 372,
+      "end_frame": 442,
+      "coverage": 2
+    },
+    {
+      "start_frame": 442,
+      "end_frame": 512,
+      "coverage": 5
+    },
+    {
+      "start_frame": 512,
+      "end_frame": 581,
+      "coverage": 3
+    },
+    {
+      "start_frame": 581,
+      "end_frame": 659,
+      "coverage": 4
+    },
+    {
+      "start_frame": 659,
+      "end_frame": 731,
+      "coverage": 2
+    },
+    {
+      "start_frame": 731,
+      "end_frame": 803,
+      "coverage": 3
+    },
+    {
+      "start_frame": 803,
+      "end_frame": 863,
+      "coverage": 5
+    },
+    {
+      "start_frame": 863,
+      "end_frame": 932,
+      "coverage": 2
+    },
+    {
+      "start_frame": 932,
+      "end_frame": 1011,
+      "coverage": 4
+    },
+    {
+      "start_frame": 1011,
+      "end_frame": 1086,
+      "coverage": 3
+    },
+    {
+      "start_frame": 1086,
+      "end_frame": 1170,
+      "coverage": 2
+    },
+    {
+      "start_frame": 1170,
+      "end_frame": 1231,
+      "coverage": 5
+    },
+    {
+      "start_frame": 1231,
+      "end_frame": 1317,
+      "coverage": 3
+    },
+    {
+      "start_frame": 1317,
+      "end_frame": 1401,
+      "coverage": 4
+    },
+    {
+      "start_frame": 1401,
+      "end_frame": 1482,
+      "coverage": 5
+    },
+    {
+      "start_frame": 1482,
+      "end_frame": 1563,
+      "coverage": 6
+    }
+  ],
+  "timing_method": "Existing estimated phonetic DTW, not ASR/human-verified word alignment; all original natural-speed voices preserved."
+}

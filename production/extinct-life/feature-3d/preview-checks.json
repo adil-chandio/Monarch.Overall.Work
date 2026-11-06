@@ -1,0 +1,19 @@
+{
+  "status": "native-preview-checked; chapter master not yet rendered",
+  "implemented_chapters": [
+    2
+  ],
+  "full_feature_complete": false,
+  "final_native_frames_inspected_seconds": [
+    6.7,
+    50.0
+  ],
+  "out_of_order_seek_check": "A/B/A passed at frame 390, final chapter frame, frame 390",
+  "corrections": [
+    "Initial split-fragment rung indexing fixed before cloud launch.",
+    "Wider breakage camera keeps both pieces visible.",
+    "Sediment bank extended beyond view; removed rectangular boundary in wider coverage."
+  ],
+  "script_voice_tests": "3 passed; encoded-media test deliberately skipped until render exists",
+  "source_sha256": "26de02273b783cffcb20fb47927614ca58b59ac296c94e1dd39db8787619053a"
+}

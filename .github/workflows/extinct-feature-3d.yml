@@ -1,0 +1,85 @@
+name: Extinct Life approved-style 3D production
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths:
+      - .github/workflows/extinct-feature-3d.yml
+      - production/extinct-life/feature-3d/*.mjs
+      - production/extinct-life/feature-3d/*.html
+      - production/extinct-life/feature-3d/*.py
+      - production/extinct-life/feature-3d/sequence.json
+      - production/extinct-life/feature-3d/requirements.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: extinct-approved-3d-production
+  cancel-in-progress: false
+jobs:
+  authored-chapters:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.manifest.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ba8d901e-monarch-overall-work
+      - id: manifest
+        run: |
+          python - <<'PY'
+          import json,os
+          m=json.load(open('production/extinct-life/feature-3d/sequence.json'))
+          chapters=[c['index'] for c in m['chapters'] if c['implemented']]
+          assert chapters, 'No authored scenes: do not render fallback footage'
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('matrix='+json.dumps({'chapter':chapters})+'\n')
+          PY
+  render:
+    needs: authored-chapters
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJSON(needs.authored-chapters.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ba8d901e-monarch-overall-work
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned renderer dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r production/extinct-life/feature-3d/requirements.txt
+          npm install --no-save --package-lock=false --ignore-scripts playwright@1.64.1 @sparticuz/chromium@153.0.0 three@0.187.0
+      - name: Validate script, natural-speed voice and authored coverage
+        run: .venv/bin/python production/extinct-life/feature-3d/test_contract.py
+      - name: Render genuinely authored native 3D frames
+        run: node production/extinct-life/feature-3d/render.mjs --chapter=${{ matrix.chapter }}
+      - name: Finish the implemented production chapter, not a fake full feature
+        run: |
+          test '${{ matrix.chapter }}' = '2'
+          .venv/bin/python production/extinct-life/feature-3d/finish.py
+          .venv/bin/python production/extinct-life/feature-3d/test_contract.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extinct-3d-chapter-${{ matrix.chapter }}-production
+          path: |
+            deliverables/Extinct_Life_3D_Chapter03_Production_1080p.mp4
+            production/extinct-life/feature-3d/render-reports/
+            .cache/extinct-feature-3d/ch02/still_*.jpg
+          retention-days: 30
+      - name: Preserve completed chapter on the session branch
+        run: |
+          git config user.name 'Monarch 3D production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/feature-3d/render-reports/
+          git add -f deliverables/Extinct_Life_3D_Chapter03_Production_1080p.mp4
+          git commit -m 'Render approved-style Extinct Life production chapter 3 [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
