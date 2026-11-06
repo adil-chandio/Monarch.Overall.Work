@@ -1,0 +1,374 @@
+{
+  "title": "Why Bears Keep Checking Cars",
+  "package": "Retention-first 20-second native-vertical Short",
+  "duration": 20.0,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "frame_count": 600,
+  "narration_words": 48,
+  "output_file": "deliverables/MONARCH_CAM_Why_Bears_Check_Cars_20s_Short.mp4",
+  "voice": {
+    "name": "en-US-AndrewNeural",
+    "rate": "+2%",
+    "volume": "+0%",
+    "pitch": "+0Hz"
+  },
+  "analytics_basis": {
+    "source": "YouTube Studio screenshots, first 19h31m, published 5 Nov 2026",
+    "views": 886,
+    "ranking_by_views": "7 of 10",
+    "usual_range": "660-1,200",
+    "average_percentage_viewed": 33.2,
+    "average_view_duration": "0:11",
+    "engaged_views": 508,
+    "stayed_to_watch": 56.7,
+    "swiped_away": 43.3,
+    "likes": 1,
+    "comments": 0,
+    "watch_time_hours": 1.9,
+    "shorts_feed_share": 97.5,
+    "mobile_watch_time_share": 90.6,
+    "not_subscribed_watch_time_share": 99.2,
+    "inferred_leak": "Viewers left around 11-12s, exactly when the 35s edit turned from concrete bear action to abstract explanation."
+  },
+  "improvements": [
+    "First physical action and answer inside 3 seconds instead of 7.25 seconds.",
+    "Learning-loop diagram begins at 5.0s instead of 16.25s.",
+    "Food-conditioning name lands at 7.0s, before the measured 11-12s leak.",
+    "Prevention begins at 13.6s and the window loop at 17.6s.",
+    "Narration reduced from 70 to 48 words; runtime reduced from 35s to 20s.",
+    "2-frame amber cut accents and a named 7s pattern interrupt add visual novelty.",
+    "Clean title without hashtags; cover uses the 0.07s hook frame.",
+    "Final prevention caption and loop line remain visible through 20.0s."
+  ],
+  "narration": [
+    {
+      "id": "vo1",
+      "start": 0.1,
+      "text": "He came through the window.",
+      "caption": "HE CAME THROUGH THE WINDOW."
+    },
+    {
+      "id": "vo2",
+      "start": 1.3,
+      "text": "Not for a ride. For food.",
+      "caption": "NOT FOR A RIDE. FOR FOOD."
+    },
+    {
+      "id": "vo3",
+      "start": 3.0,
+      "text": "One find can teach a shortcut.",
+      "caption": "ONE FIND CAN TEACH A SHORTCUT."
+    },
+    {
+      "id": "vo4",
+      "start": 5.0,
+      "text": "Search. Reward. Check again.",
+      "caption": "SEARCH. REWARD. CHECK AGAIN."
+    },
+    {
+      "id": "vo5",
+      "start": 7.0,
+      "text": "That's food conditioning.",
+      "caption": "THAT'S FOOD CONDITIONING."
+    },
+    {
+      "id": "vo6",
+      "start": 8.7,
+      "text": "A car becomes worth checking again.",
+      "caption": "A CAR BECOMES WORTH CHECKING AGAIN."
+    },
+    {
+      "id": "vo7",
+      "start": 11.4,
+      "text": "Even when nothing is visible.",
+      "caption": "EVEN WHEN NOTHING IS VISIBLE."
+    },
+    {
+      "id": "vo8",
+      "start": 13.6,
+      "text": "So don't teach the lesson.",
+      "caption": "DON'T TEACH THE LESSON."
+    },
+    {
+      "id": "vo9",
+      "start": 15.6,
+      "text": "Secure food. Lock up.",
+      "caption": "SECURE FOOD. LOCK UP."
+    },
+    {
+      "id": "vo10",
+      "start": 17.6,
+      "text": "The window was enough.",
+      "caption": "THE WINDOW WAS ENOUGH."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "window_hook",
+      "start": 0.0,
+      "end": 1.3,
+      "source_start": 338.0,
+      "rate": 1.0,
+      "top": "THE WINDOW.",
+      "zoom_start": 1.38,
+      "zoom_end": 1.3,
+      "focus": 0.58
+    },
+    {
+      "id": "food_answer",
+      "start": 1.3,
+      "end": 3.0,
+      "source_start": 18.0,
+      "rate": 1.0,
+      "top": "NOT A RIDE.",
+      "zoom_start": 1.24,
+      "zoom_end": 1.34,
+      "focus": 0.47
+    },
+    {
+      "id": "one_find",
+      "start": 3.0,
+      "end": 5.0,
+      "source_start": 316.0,
+      "rate": 1.0,
+      "top": "ONE FIND.",
+      "zoom_start": 1.18,
+      "zoom_end": 1.32,
+      "focus": 0.53
+    },
+    {
+      "id": "learning_loop_diagram",
+      "start": 5.0,
+      "end": 8.8,
+      "source_start": 19.0,
+      "rate": 1.0,
+      "layout": "diagram",
+      "top": "THE LEARNING LOOP",
+      "zoom_start": 1.25,
+      "zoom_end": 1.25,
+      "focus": 0.5
+    },
+    {
+      "id": "conditioning_name",
+      "start": 8.8,
+      "end": 11.4,
+      "source_start": 340.0,
+      "rate": 1.0,
+      "top": "FOOD CONDITIONING",
+      "zoom_start": 1.22,
+      "zoom_end": 1.36,
+      "focus": 0.52
+    },
+    {
+      "id": "still_checking",
+      "start": 11.4,
+      "end": 13.6,
+      "source_start": 352.0,
+      "rate": 1.0,
+      "top": "STILL CHECKING.",
+      "zoom_start": 1.24,
+      "zoom_end": 1.38,
+      "focus": 0.58
+    },
+    {
+      "id": "prevention_setup",
+      "start": 13.6,
+      "end": 15.6,
+      "source_start": 14.0,
+      "rate": 1.0,
+      "top": "DON'T TEACH IT.",
+      "zoom_start": 1.16,
+      "zoom_end": 1.28,
+      "focus": 0.5
+    },
+    {
+      "id": "prevention_action",
+      "start": 15.6,
+      "end": 17.6,
+      "source_start": 338.0,
+      "rate": 1.0,
+      "top": "SECURE FOOD.\nLOCK UP.",
+      "zoom_start": 1.34,
+      "zoom_end": 1.3,
+      "focus": 0.58
+    },
+    {
+      "id": "window_loop",
+      "start": 17.6,
+      "end": 20.0,
+      "source_start": 338.0,
+      "rate": 0.75,
+      "top": "THE WINDOW\nWAS ENOUGH.",
+      "zoom_start": 1.38,
+      "zoom_end": 1.38,
+      "focus": 0.58,
+      "loop_to_start_last": 0.3
+    }
+  ],
+  "diagram_steps": [
+    {
+      "number": "01",
+      "title": "SEARCH",
+      "subtitle": "Investigate the car",
+      "time": 5.0
+    },
+    {
+      "number": "02",
+      "title": "FOOD REWARD",
+      "subtitle": "The behaviour pays off",
+      "time": 5.7
+    },
+    {
+      "number": "03",
+      "title": "CHECK AGAIN",
+      "subtitle": "The shortcut can remain",
+      "time": 6.4
+    }
+  ],
+  "pattern_interrupts": [
+    0,
+    39,
+    90,
+    150,
+    210,
+    264,
+    342,
+    408,
+    468,
+    528
+  ],
+  "accent_label_time": 7.0,
+  "audio": {
+    "music_asset": "music_backup",
+    "music_start": 0.0,
+    "music_lufs": -25.5,
+    "ambience_asset": "forest_night",
+    "ambience_start": 52.0,
+    "ambience_lufs": -43.5,
+    "sfx": {
+      "impact": {
+        "asset": "soft_impact",
+        "trim_start": 2.65,
+        "trim_end": 3.2,
+        "pre": 0.1,
+        "post": 1.65,
+        "description": "soft organic cinematic impact",
+        "peak_db": -24.5
+      },
+      "whoosh": {
+        "asset": "soft_whoosh",
+        "trim_start": 1.25,
+        "trim_end": 1.75,
+        "pre": 0.48,
+        "post": 0.9,
+        "description": "quick soft whoosh",
+        "peak_db": -28.0
+      },
+      "tick": {
+        "asset": "soft_impact",
+        "trim_start": 2.65,
+        "trim_end": 3.2,
+        "pre": 0.025,
+        "post": 0.24,
+        "description": "quick soft tick",
+        "peak_db": -32.0
+      }
+    },
+    "cues": [
+      {
+        "frame": 2,
+        "time": 0.066667,
+        "kind": "impact",
+        "peak_db": -23.0,
+        "label": "Immediate window hook"
+      },
+      {
+        "frame": 39,
+        "time": 1.3,
+        "kind": "whoosh",
+        "peak_db": -28.0,
+        "label": "Not a ride / food answer cut"
+      },
+      {
+        "frame": 90,
+        "time": 3.0,
+        "kind": "impact",
+        "peak_db": -25.0,
+        "label": "One find / shortcut setup"
+      },
+      {
+        "frame": 150,
+        "time": 5.0,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / search"
+      },
+      {
+        "frame": 171,
+        "time": 5.7,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / food reward"
+      },
+      {
+        "frame": 192,
+        "time": 6.4,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / check again"
+      },
+      {
+        "frame": 210,
+        "time": 7.0,
+        "kind": "impact",
+        "peak_db": -26.0,
+        "label": "Food conditioning named before old drop-off"
+      },
+      {
+        "frame": 264,
+        "time": 8.8,
+        "kind": "whoosh",
+        "peak_db": -29.0,
+        "label": "Conditioning action cut"
+      },
+      {
+        "frame": 342,
+        "time": 11.4,
+        "kind": "impact",
+        "peak_db": -26.0,
+        "label": "Still checking / no visible food"
+      },
+      {
+        "frame": 408,
+        "time": 13.6,
+        "kind": "whoosh",
+        "peak_db": -29.0,
+        "label": "Prevention setup"
+      },
+      {
+        "frame": 468,
+        "time": 15.6,
+        "kind": "impact",
+        "peak_db": -25.0,
+        "label": "Secure food and lock up"
+      },
+      {
+        "frame": 528,
+        "time": 17.6,
+        "kind": "impact",
+        "peak_db": -25.0,
+        "label": "Final window loop"
+      }
+    ]
+  },
+  "editorial_guardrails": [
+    "Do not claim the bear opened a handle or unlocked a door; visible action is window entry/exit.",
+    "Do not claim this particular bear previously received food; conditioning is a general possibility.",
+    "Do not show or imply an unseen food reward; the diagram is an explanatory model.",
+    "Do not fabricate a bear vocalisation, attack, handle pull or native camera audio.",
+    "Do not reuse the unrelated 25M-view viral clip or its unverified history claim.",
+    "Do not promise virality, revenue, subscribers or a related full episode."
+  ]
+}
