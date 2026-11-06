@@ -1,0 +1,76 @@
+name: Moving 3D excerpt assembly recovery — reuse native renders
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-v6-motion-recovery.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ba8d901e-monarch-overall-work
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 42268164109
+          pattern: v6-*
+          path: .cache/extinct-v6
+          merge-multiple: true
+      - name: Assemble and preserve failure details without weakening QC thresholds
+        id: assemble
+        run: |
+          .venv/bin/python - <<'PY'
+          import json,runpy,traceback,subprocess
+          from pathlib import Path
+          p=Path('production/extinct-life/film-v6-motion/ASSEMBLY-FAILURE.json')
+          try:
+              runpy.run_path('production/extinct-life/film-v6-motion/finish.py',run_name='__main__')
+              if p.exists(): p.unlink()
+          except Exception as e:
+              error={'traceback':traceback.format_exc(),'exception':repr(e)}
+              if isinstance(e,subprocess.CalledProcessError): error['ffmpeg_stderr']=e.stderr[-16000:] if e.stderr else None
+              p.write_text(json.dumps(error,indent=2)+'\n')
+              raise
+          PY
+      - name: Record diagnostic or successful release QC on this session branch
+        if: always()
+        run: |
+          git config user.name 'Monarch native 3D production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v6-motion
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record actual 3D assembly measurements or explicit failure diagnostics [skip ci]'
+            git pull --rebase origin arena/ba8d901e-monarch-overall-work
+            git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          fi
+      - name: Publish only if unchanged strict checks passed
+        if: steps.assemble.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-v6-motion-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$(git rev-parse HEAD)" --prerelease --title 'V4-based moving 3D — selected 61-second development excerpt' --notes "Actual native 3D mesh animation, not generated scene-image slides. Selected development excerpt, NOT the finished 7:19 film. Original approved English voice, no speed change. Stylized illustrative assets, not photoreal or expert-validated anatomy. Music: 'Hiraeth' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Music excerpted, faded, level-adjusted and mixed under narration; no endorsement implied. Original synthesized foley, not recorded field sound. No human continuous watch/listen or owner creative approval claimed. No YouTube upload. Original native render source: workflow run 42268164109." .cache/extinct-v6/Extinct_Life_V6_Actual_3D_Motion_Development.mp4 production/extinct-life/film-v6-motion/QC.json production/extinct-life/film-v6-motion/CREDITS.md
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v6-motion');q=json.load(open(b/'QC.json'));tag='extinct-life-v6-motion-'+os.environ['GITHUB_RUN_ID'];base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          d={'status':'Selected actual-3D development excerpt; NOT the final film','release':base+'tag/'+tag,'video':base+'download/'+tag+'/Extinct_Life_V6_Actual_3D_Motion_Development.mp4','sha256':q['sha256'],'bytes':q['bytes'],'seconds':q['duration_seconds'],'original_native_run':42268164109,'full_film_complete':False}
+          (b/'DELIVERY.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          cp .cache/extinct-v6/seek-QC.json production/extinct-life/film-v6-motion/seek-QC.json
+          git add production/extinct-life/film-v6-motion
+          git commit -m 'Record published actual-motion excerpt delivery [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
