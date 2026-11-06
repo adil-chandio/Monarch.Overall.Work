@@ -270,7 +270,7 @@ jobs:
           mkdir -p production/monarch-cam/short_dance/review
           echo "A new-topic albatross Short render, build or QC step failed; inspect adjacent logs and review JSON." \
             > production/monarch-cam/short_dance/review/workflow_failure.txt
-          git add production/monarch-cam/short_dance/review
+          git add production/monarch-cam/short_dance
           if ! git diff --cached --quiet; then
             git commit -m "chore(monarch-cam): capture new-topic albatross Short failure diagnostics"
             git pull --rebase origin arena/c678cc81-monarch-overall-work
@@ -301,13 +301,7 @@ jobs:
           git config user.email "monarch-cam-short-dance-bot@users.noreply.github.com"
           rm -f production/monarch-cam/short_dance/review/workflow_failure.txt
           git add -f deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4
-          git add production/monarch-cam/short_dance/review \
-            production/monarch-cam/short_dance/CREDITS.md \
-            production/monarch-cam/short_dance/DANCE_PLAN_AND_METADATA.md \
-            production/monarch-cam/short_dance/DANCE_TOPIC_LOCK.md \
-            production/monarch-cam/short_dance/dance_short_spec.json \
-            production/monarch-cam/short_dance/source_manifest_dance.json \
-            production/monarch-cam/short_dance/dance_viral_metadata.json
+          git add production/monarch-cam/short_dance
           if git diff --cached --quiet; then
             echo "New-topic albatross Short deliverable and QC unchanged"
             exit 0
