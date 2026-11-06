@@ -54,3 +54,23 @@ audio/ref-full.wav
 audio/takes/
 audio/bed-*.wav
 audio/mix-*.wav
+# Monarch Cam transient source media, frames and local audio work
+production/monarch-cam/work/
+production/monarch-cam/local/
+# Sound V2 review artifacts are delivered in Actions artifacts, not duplicated as large WAVs in Git
+production/monarch-cam/sound_v2/review/stems_premaster/
+production/monarch-cam/sound_v2/review/*.wav
+# Short 35 reference stems stay in the Actions artifact, not Git
+production/monarch-cam/short_35/review/stems/
+production/monarch-cam/short_35/review/*.wav
+# Short-next reference stems stay in the Actions artifact, not Git
+production/monarch-cam/short_next/review/stems/
+production/monarch-cam/short_next/review/*.wav
+# Albatross-dance reference stems stay in the Actions artifact, not Git
+production/monarch-cam/short_dance/review/stems/
+production/monarch-cam/short_dance/review/*.wav
+
+# Premium albatross-dance reference stems stay in the Actions artifact, not Git
+production/monarch-cam/work/short_dance_premium/
+production/monarch-cam/short_dance_premium/review/stems/
+production/monarch-cam/short_dance_premium/review/*.wav

@@ -1,0 +1,66 @@
+{
+  "threshold": 0.35,
+  "max_repair_samples_per_run": 48,
+  "passes": [
+    {
+      "pass": 1,
+      "before_runs": [
+        {
+          "first_jump_sample": 984890,
+          "last_jump_sample": 984893,
+          "jump_count": 2,
+          "time_seconds": 20.518542,
+          "max_mono_jump": 0.42505
+        },
+        {
+          "first_jump_sample": 985423,
+          "last_jump_sample": 985424,
+          "jump_count": 2,
+          "time_seconds": 20.529646,
+          "max_mono_jump": 0.35361
+        },
+        {
+          "first_jump_sample": 985970,
+          "last_jump_sample": 985973,
+          "jump_count": 2,
+          "time_seconds": 20.541042,
+          "max_mono_jump": 0.39028
+        }
+      ],
+      "operations": [
+        {
+          "start_sample": 984888,
+          "end_sample": 984897,
+          "interpolated_samples": 10,
+          "time_seconds": 20.5185
+        },
+        {
+          "start_sample": 985421,
+          "end_sample": 985428,
+          "interpolated_samples": 8,
+          "time_seconds": 20.529604
+        },
+        {
+          "start_sample": 985968,
+          "end_sample": 985977,
+          "interpolated_samples": 10,
+          "time_seconds": 20.541
+        }
+      ],
+      "after_runs": []
+    }
+  ],
+  "final_runs": [],
+  "final_aac_measurement": {
+    "input_i": "-14.26",
+    "input_tp": "-3.26",
+    "input_lra": "4.40",
+    "input_thresh": "-24.46",
+    "output_i": "-13.85",
+    "output_tp": "-2.88",
+    "output_lra": "2.70",
+    "output_thresh": "-24.02",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.15"
+  }
+}

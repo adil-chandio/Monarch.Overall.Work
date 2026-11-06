@@ -1,0 +1,34 @@
+{
+  "music": {
+    "input_lufs": -19.431,
+    "target_lufs_before_peak_cap": -25.5,
+    "gain_db": -6.069,
+    "peak_cap_adjustment_db": -0.879,
+    "output_lufs": -26.379,
+    "sample_peak_dbfs": -8.0,
+    "source": "music_funny",
+    "source_start": 0.0
+  },
+  "ambience": {
+    "input_lufs": -20.904,
+    "target_lufs_before_peak_cap": -43.5,
+    "gain_db": -22.596,
+    "peak_cap_adjustment_db": 0.0,
+    "output_lufs": -43.5,
+    "sample_peak_dbfs": -22.297,
+    "source": "native_audio",
+    "source_start": 3.0,
+    "native_clip_audio_used": true
+  },
+  "ducking": {
+    "music_min_gain": 0.24,
+    "ambience_min_gain": 0.7872,
+    "sfx_min_gain": 0.658,
+    "voice_preroll_ms": 120
+  },
+  "native_clip_audio_used": true,
+  "generated_bird_vocalisations": false,
+  "generated_bear_or_vehicle_foley": false,
+  "sfx_selection_model_used": true,
+  "premaster_sample_peak_dbfs": -2.7112
+}

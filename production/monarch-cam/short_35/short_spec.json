@@ -1,0 +1,338 @@
+{
+  "title": "This Bear Didn’t Need the Door",
+  "duration": 35.0,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "frame_count": 1050,
+  "voice": {
+    "name": "en-US-AndrewNeural",
+    "rate": "+1%",
+    "volume": "+0%",
+    "pitch": "+0Hz"
+  },
+  "narration": [
+    {
+      "id": "vo1",
+      "start": 0.12,
+      "text": "He didn't open the door.",
+      "caption": "HE DIDN'T OPEN THE DOOR."
+    },
+    {
+      "id": "vo2",
+      "start": 2.15,
+      "text": "The window was enough.",
+      "caption": "THE WINDOW WAS ENOUGH."
+    },
+    {
+      "id": "vo3",
+      "start": 4.35,
+      "text": "But why climb into a stranger's car?",
+      "caption": "WHY CLIMB INTO A STRANGER'S CAR?"
+    },
+    {
+      "id": "vo4",
+      "start": 7.25,
+      "text": "Not for a ride. For whatever food he can find.",
+      "caption": "NOT FOR A RIDE. FOR FOOD HE CAN FIND."
+    },
+    {
+      "id": "vo5",
+      "start": 11.35,
+      "text": "If one search ends with food, the lesson can stick.",
+      "caption": "IF A SEARCH ENDS WITH FOOD, THE LESSON CAN STICK."
+    },
+    {
+      "id": "vo6",
+      "start": 16.25,
+      "text": "Search. Reward. Repeat.",
+      "caption": "SEARCH. REWARD. REPEAT."
+    },
+    {
+      "id": "vo7",
+      "start": 19.35,
+      "text": "That's food conditioning: a car becomes a place worth checking again.",
+      "caption": "FOOD CONDITIONING MAKES A CAR WORTH CHECKING AGAIN."
+    },
+    {
+      "id": "vo8",
+      "start": 25.2,
+      "text": "Even when nothing is visible, the learned shortcut can remain.",
+      "caption": "EVEN WHEN NOTHING IS VISIBLE, THE SHORTCUT CAN REMAIN."
+    },
+    {
+      "id": "vo9",
+      "start": 30.35,
+      "text": "So don't teach the lesson. Secure food and lock up.",
+      "caption": "DON'T TEACH THE LESSON. SECURE FOOD AND LOCK UP."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "window_exit_hook",
+      "start": 0.0,
+      "end": 2.15,
+      "source_start": 338.0,
+      "rate": 1.0,
+      "top": "HE DIDN'T OPEN\nTHE DOOR.",
+      "zoom_start": 1.32,
+      "zoom_end": 1.243,
+      "focus": 0.58
+    },
+    {
+      "id": "window_entry_answer",
+      "start": 2.15,
+      "end": 4.35,
+      "source_start": 18.0,
+      "rate": 1.0,
+      "top": "THE WINDOW\nWAS ENOUGH.",
+      "zoom_start": 1.188,
+      "zoom_end": 1.254,
+      "focus": 0.47
+    },
+    {
+      "id": "inside_question",
+      "start": 4.35,
+      "end": 7.25,
+      "source_start": 65.0,
+      "rate": 1.0,
+      "top": "WHY CLIMB\nINSIDE?",
+      "zoom_start": 1.155,
+      "zoom_end": 1.232,
+      "focus": 0.52
+    },
+    {
+      "id": "food_answer",
+      "start": 7.25,
+      "end": 11.35,
+      "source_start": 316.0,
+      "rate": 1.0,
+      "top": "FOOD.\nNOT A RIDE.",
+      "zoom_start": 1.155,
+      "zoom_end": 1.243,
+      "focus": 0.53
+    },
+    {
+      "id": "reward_lesson",
+      "start": 11.35,
+      "end": 16.25,
+      "source_start": 352.0,
+      "rate": 1.0,
+      "top": "ONE REWARD\nCAN TEACH THIS.",
+      "zoom_start": 1.21,
+      "zoom_end": 1.298,
+      "focus": 0.58
+    },
+    {
+      "id": "learning_loop_diagram",
+      "start": 16.25,
+      "end": 19.35,
+      "source_start": 19.0,
+      "rate": 1.0,
+      "layout": "diagram",
+      "top": "THE LEARNING LOOP",
+      "zoom_start": 1.232,
+      "zoom_end": 1.232,
+      "focus": 0.5
+    },
+    {
+      "id": "conditioning_entry",
+      "start": 19.35,
+      "end": 22.2,
+      "source_start": 18.5,
+      "rate": 1.0,
+      "top": "FOOD CONDITIONING",
+      "zoom_start": 1.188,
+      "zoom_end": 1.298,
+      "focus": 0.47
+    },
+    {
+      "id": "conditioning_exit",
+      "start": 22.2,
+      "end": 25.2,
+      "source_start": 338.0,
+      "rate": 1.0,
+      "top": "FOOD CONDITIONING",
+      "zoom_start": 1.276,
+      "zoom_end": 1.188,
+      "focus": 0.58
+    },
+    {
+      "id": "shortcut_approach",
+      "start": 25.2,
+      "end": 27.8,
+      "source_start": 14.0,
+      "rate": 1.0,
+      "top": "THE SHORTCUT\nCAN REMAIN.",
+      "zoom_start": 1.144,
+      "zoom_end": 1.21,
+      "focus": 0.5
+    },
+    {
+      "id": "shortcut_investigation",
+      "start": 27.8,
+      "end": 30.35,
+      "source_start": 352.0,
+      "rate": 1.0,
+      "top": "THE SHORTCUT\nCAN REMAIN.",
+      "zoom_start": 1.21,
+      "zoom_end": 1.32,
+      "focus": 0.58
+    },
+    {
+      "id": "prevention_loop",
+      "start": 30.35,
+      "end": 35.0,
+      "source_start": 338.0,
+      "rate": 0.7,
+      "top": "DON'T TEACH\nTHE LESSON.",
+      "zoom_start": 1.32,
+      "zoom_end": 1.32,
+      "focus": 0.58,
+      "loop_to_start_last": 0.35
+    }
+  ],
+  "diagram_steps": [
+    {
+      "number": "01",
+      "title": "SEARCH",
+      "subtitle": "Investigate the car",
+      "time": 16.25
+    },
+    {
+      "number": "02",
+      "title": "FOOD REWARD",
+      "subtitle": "The behaviour pays off",
+      "time": 16.95
+    },
+    {
+      "number": "03",
+      "title": "CHECK AGAIN",
+      "subtitle": "The shortcut can remain",
+      "time": 17.65
+    }
+  ],
+  "audio": {
+    "music_asset": "music_backup",
+    "music_start": 0.0,
+    "music_lufs": -25.5,
+    "ambience_asset": "forest_night",
+    "ambience_start": 52.0,
+    "ambience_lufs": -43.5,
+    "sfx": {
+      "impact": {
+        "asset": "soft_impact",
+        "trim_start": 2.65,
+        "trim_end": 3.2,
+        "pre": 0.1,
+        "post": 1.65,
+        "description": "soft organic cinematic impact",
+        "peak_db": -24.5
+      },
+      "whoosh": {
+        "asset": "soft_whoosh",
+        "trim_start": 1.25,
+        "trim_end": 1.75,
+        "pre": 0.48,
+        "post": 0.9,
+        "description": "quick soft whoosh",
+        "peak_db": -28.0
+      },
+      "tick": {
+        "asset": "soft_impact",
+        "trim_start": 2.65,
+        "trim_end": 3.2,
+        "pre": 0.025,
+        "post": 0.24,
+        "description": "quick soft tick",
+        "peak_db": -32.0
+      }
+    },
+    "cues": [
+      {
+        "frame": 2,
+        "time": 0.066667,
+        "kind": "impact",
+        "peak_db": -23.0,
+        "label": "Window action / immediate hook"
+      },
+      {
+        "frame": 64,
+        "time": 2.133333,
+        "kind": "whoosh",
+        "peak_db": -28.0,
+        "label": "Window answer cut"
+      },
+      {
+        "frame": 130,
+        "time": 4.333333,
+        "kind": "tick",
+        "peak_db": -32.0,
+        "label": "Why climb inside question"
+      },
+      {
+        "frame": 218,
+        "time": 7.266667,
+        "kind": "impact",
+        "peak_db": -25.0,
+        "label": "Food answer"
+      },
+      {
+        "frame": 340,
+        "time": 11.333333,
+        "kind": "impact",
+        "peak_db": -26.0,
+        "label": "Learning mechanism begins"
+      },
+      {
+        "frame": 488,
+        "time": 16.266667,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / search"
+      },
+      {
+        "frame": 509,
+        "time": 16.966667,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / food reward"
+      },
+      {
+        "frame": 530,
+        "time": 17.666667,
+        "kind": "tick",
+        "peak_db": -31.0,
+        "label": "Diagram / check again"
+      },
+      {
+        "frame": 580,
+        "time": 19.333333,
+        "kind": "impact",
+        "peak_db": -24.5,
+        "label": "Food conditioning name"
+      },
+      {
+        "frame": 756,
+        "time": 25.2,
+        "kind": "whoosh",
+        "peak_db": -29.0,
+        "label": "Learned shortcut consequence"
+      },
+      {
+        "frame": 910,
+        "time": 30.333333,
+        "kind": "impact",
+        "peak_db": -25.0,
+        "label": "Prevention payoff"
+      }
+    ]
+  },
+  "editorial_guardrails": [
+    "Do not claim the bear opened a handle or unlocked a door; the visible action is window entry/exit.",
+    "Do not claim this particular bear previously received food; the conditioning mechanism is explained as a general possibility.",
+    "Do not show or imply an unseen food reward; the diagram is explicitly a general learning model.",
+    "Do not fabricate a bear vocalisation, attack, handle pull or native camera audio.",
+    "Do not promise virality or add a nonexistent related-video link."
+  ]
+}

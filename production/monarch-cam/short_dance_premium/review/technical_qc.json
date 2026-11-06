@@ -1,0 +1,88 @@
+{
+  "file": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_PREMIUM.mp4",
+  "sha256": "fe6da9e4b1f441e6f1be76199743163cf64ecd12089e1632500d4dea92ae396c",
+  "bytes": 28059063,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "30/1",
+        "nb_frames": "720",
+        "nb_read_frames": "720"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "1126",
+        "nb_read_frames": "1125"
+      }
+    ],
+    "format": {
+      "duration": "24.000000",
+      "size": "28059063"
+    }
+  },
+  "decoded_audio_samples": 1152000,
+  "decoded_sample_rate": 48000,
+  "loudness": {
+    "input_i": "-14.30",
+    "input_tp": "-3.14",
+    "input_lra": "3.00",
+    "input_thresh": "-24.99",
+    "output_i": "-13.76",
+    "output_tp": "-2.27",
+    "output_lra": "2.70",
+    "output_thresh": "-24.43",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.24"
+  },
+  "click_runs": [],
+  "clipping_runs": 0,
+  "decoded_sample_peak_dbfs": -3.1468,
+  "checks": {
+    "duration_24s": true,
+    "frames_720": true,
+    "vertical_1080x1920": true,
+    "fps_30": true,
+    "audio_48k_stereo": true,
+    "integrated_loudness": true,
+    "true_peak": true,
+    "no_sample_clipping_runs": true,
+    "no_click_runs": true
+  },
+  "passed": true,
+  "premium": {
+    "separate_from_original": true,
+    "sound_enhancements": [
+      "salience_layering",
+      "softer_support_hits",
+      "panned_sfx",
+      "short_room",
+      "voice_aware_presence_dip",
+      "stereo_widening",
+      "sub_bloom",
+      "pchip_envelopes",
+      "gentle_voice_deharsh"
+    ],
+    "visual_enhancements": [
+      "cinematic_split_tone_grade",
+      "larger_rounded_action_window",
+      "subtle_grain_vignette",
+      "kinetic_caption",
+      "macro_detail_inset",
+      "audition_progress",
+      "seamless_loop_crossfade",
+      "exact_text_thumbnails"
+    ]
+  }
+}

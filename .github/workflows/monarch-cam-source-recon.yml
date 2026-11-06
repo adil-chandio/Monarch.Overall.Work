@@ -1,0 +1,63 @@
+name: Monarch Cam — public-domain source recon
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-source-recon-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  retrieve-and-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/c678cc81-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install media retrieval/review tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check -q requests pillow yt-dlp
+
+      - name: Retrieve explicit public-domain NPS footage and build contact sheets
+        run: python production/monarch-cam/source_recon.py
+
+      - name: Build fine-grained action and text-safe-area reviews
+        run: python production/monarch-cam/fine_recon.py
+
+      - name: Upload source and visual review pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-nps-source-recon
+          path: |
+            production/monarch-cam/work/recon/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Return small visual-review files to this branch (raw media stays out of Git)
+        run: |
+          git config user.name "monarch-cam-preview-bot"
+          git config user.email "monarch-cam-preview-bot@users.noreply.github.com"
+          mkdir -p production/monarch-cam/review
+          cp production/monarch-cam/work/recon/contact-sheets/*.jpg production/monarch-cam/review/
+          cp production/monarch-cam/work/recon/review-manifest.json \
+             production/monarch-cam/work/recon/source-probe.json \
+             production/monarch-cam/work/recon/retrieval-route.txt \
+             production/monarch-cam/work/recon/detected-media-urls.json \
+             production/monarch-cam/review/
+          git add production/monarch-cam/review
+          if git diff --cached --quiet; then
+            echo "Visual review pack unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): add NPS visual source review"
+          git pull --rebase origin arena/c678cc81-monarch-overall-work
+          git push origin HEAD:arena/c678cc81-monarch-overall-work

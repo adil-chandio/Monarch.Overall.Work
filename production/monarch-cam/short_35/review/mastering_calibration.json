@@ -1,0 +1,92 @@
+{
+  "target_integrated_lufs": -14.2,
+  "target_true_peak_dbtp": -2.2,
+  "first_pass_loudnorm": {
+    "input_i": "-18.09",
+    "input_tp": "-2.85",
+    "input_lra": "4.50",
+    "input_thresh": "-29.30",
+    "output_i": "-15.93",
+    "output_tp": "-3.50",
+    "output_lra": "4.30",
+    "output_thresh": "-26.74",
+    "normalization_type": "dynamic",
+    "target_offset": "2.13"
+  },
+  "calibration": [
+    {
+      "pass": 1,
+      "before": {
+        "input_i": "-15.70",
+        "input_tp": "-3.28",
+        "input_lra": "4.10",
+        "input_thresh": "-26.35",
+        "output_i": "-13.76",
+        "output_tp": "-1.50",
+        "output_lra": "4.00",
+        "output_thresh": "-24.33",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.24"
+      },
+      "requested_gain_db": 1.5
+    },
+    {
+      "pass": 2,
+      "before": {
+        "input_i": "-14.82",
+        "input_tp": "-3.10",
+        "input_lra": "4.20",
+        "input_thresh": "-25.38",
+        "output_i": "-13.72",
+        "output_tp": "-1.70",
+        "output_lra": "3.90",
+        "output_thresh": "-24.17",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.28"
+      },
+      "requested_gain_db": 0.62
+    },
+    {
+      "pass": 3,
+      "before": {
+        "input_i": "-14.48",
+        "input_tp": "-3.29",
+        "input_lra": "4.20",
+        "input_thresh": "-25.01",
+        "output_i": "-13.71",
+        "output_tp": "-1.96",
+        "output_lra": "3.80",
+        "output_thresh": "-24.12",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.29"
+      },
+      "requested_gain_db": 0.28
+    }
+  ],
+  "peak_guard": [],
+  "before_click_repair": {
+    "input_i": "-14.31",
+    "input_tp": "-3.30",
+    "input_lra": "4.20",
+    "input_thresh": "-24.85",
+    "output_i": "-13.72",
+    "output_tp": "-2.09",
+    "output_lra": "3.70",
+    "output_thresh": "-24.09",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.28"
+  },
+  "final_aac": {
+    "input_i": "-14.31",
+    "input_tp": "-3.30",
+    "input_lra": "4.20",
+    "input_thresh": "-24.85",
+    "output_i": "-13.72",
+    "output_tp": "-2.09",
+    "output_lra": "3.70",
+    "output_thresh": "-24.09",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.28"
+  },
+  "method": "V2-style two-pass loudnorm, conservative 192 kHz limiting and measured AAC-domain calibration; no gate bypass."
+}

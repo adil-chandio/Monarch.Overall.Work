@@ -1,0 +1,21 @@
+{
+  "hook_frame_reference": "cover_hook.jpg",
+  "hook_frame_text": "NOT A FIGHT.",
+  "primary": "THIS IS A JOB INTERVIEW.",
+  "ab": "WOULD YOU PASS?",
+  "outputs": [
+    {
+      "file": "cover.jpg",
+      "text": "THIS IS A JOB INTERVIEW.",
+      "sha256": "da444a0a3ca7853f0f119f475c64500ec2443cd9adcd705f14385beb581086fe",
+      "bytes": 446009
+    },
+    {
+      "file": "cover_WOULD_YOU_PASS.jpg",
+      "text": "WOULD YOU PASS?",
+      "sha256": "ef9dac529b3dcc976200e0bafdfe4dc119454a411d489baf420e15e82d0c1bb5",
+      "bytes": 446352
+    }
+  ],
+  "note": "Exact-text thumbnails are generated from the 0.07 s hook frame; no separate human thumbnail review occurred."
+}
