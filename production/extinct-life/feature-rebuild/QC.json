@@ -1,0 +1,61 @@
+{
+  "file": "deliverables/Extinct_Life_EP01_Urdnglish_ShortShot_Rebuild_1080p.mp4",
+  "bytes": 53842746,
+  "native_resolution": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "duration_seconds": 404.8,
+  "decoded_frames": 12144,
+  "expected_frames": 12144,
+  "chapters": 8,
+  "new_body_shots": 231,
+  "original_opening_reused_seconds": 0,
+  "new_voice_clips": 8,
+  "voice_id": "voice-01",
+  "language": "Temporary easy Urdu-English",
+  "max_shot_seconds": 2.6,
+  "timing_method": "Estimated word/phrase timing: eSpeak reference + MFCC DTW against actual selected-voice audio. Not verified ASR or human word alignment.",
+  "audio_measurement": {
+    "input_i": "-16.05",
+    "input_tp": "-2.49",
+    "input_lra": "3.50",
+    "input_thresh": "-26.65",
+    "output_i": "-15.97",
+    "output_tp": "-2.80",
+    "output_lra": "3.40",
+    "output_thresh": "-26.56",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.03"
+  },
+  "half_second_samples": {
+    "count": 810,
+    "unique": 810
+  },
+  "black_or_freeze_events": [],
+  "interpretation": "Low-motion diagnostics are retained; shot duration and motion hashes are technical checks, not evidence of zero boredom.",
+  "sampled_final_times": [
+    5.435999999999999,
+    27.18,
+    51.148,
+    74.53999999999999,
+    100.28533333333333,
+    125.29333333333334,
+    151.88933333333335,
+    174.91333333333333,
+    200.288,
+    225.04,
+    252.18266666666665,
+    278.24666666666667,
+    306.1986666666666,
+    331.12666666666667,
+    358.248,
+    383.64000000000004,
+    404.55
+  ],
+  "review_scope": "All 231 native previews generated; 47 subject representatives and selected full-resolution frames inspected, plus 17 final encode samples. Not a complete real-time audiovisual watch or independently verified word alignment.",
+  "scientific_scope": "Interpretive animation, not validated anatomy, actual microscopy, measured reads or actual study-site footage.",
+  "owner_full_film_approval": "pending",
+  "youtube_upload": false
+}
