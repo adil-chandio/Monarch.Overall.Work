@@ -1,3 +1,3 @@
 # Source-review trigger
 
-Second request: the first runner install step hit a bounded apt timeout; this marker requests a fresh source-review run with a longer step budget.
+Third request: apt removed entirely. PyPI static-ffmpeg supplies ffmpeg/ffprobe through GITHUB_PATH; no system package manager is used.
