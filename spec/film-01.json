@@ -1,0 +1,55 @@
+{
+  "_": "Shot windows are the measured ones from analysis/v4-build/shots.json. A shot with no `plate` is the reference's own frame at that instant: no resample, no re-encode of the image, so it is the same picture by construction. A shot that IS being changed names a plate and a measured transform \u2014 that path stays, and it is switched on per shot.",
+  "reference": "analysis/attachment-filename-How-to-Edit-VIRAL-RE/reference.mp4",
+  "fps": 30,
+  "duration": 7.0,
+  "width": 720,
+  "height": 1280,
+  "layers": {
+    "billion": "showreel/v4/assets/ref/s5-billion.png",
+    "he": "showreel/v4/assets/ref/s5-he-layer.png",
+    "no": "showreel/v4/assets/ref/s5-no.png"
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "start": 0.0,
+      "end": 0.533
+    },
+    {
+      "id": "s2",
+      "start": 0.533,
+      "end": 0.8
+    },
+    {
+      "id": "s3",
+      "start": 0.8,
+      "end": 1.333
+    },
+    {
+      "id": "s5a",
+      "start": 1.333,
+      "end": 1.85
+    },
+    {
+      "id": "s5b",
+      "start": 1.85,
+      "end": 2.05
+    },
+    {
+      "id": "s5c",
+      "start": 2.05,
+      "end": 3.133
+    },
+    {
+      "id": "s6",
+      "start": 3.133,
+      "end": 7.0
+    }
+  ],
+  "plates": {
+    "s5-entry": "showreel/v4/assets/ref/s5plate-entry.png",
+    "s5-mid": "showreel/v4/assets/ref/s5plate-soft.png",
+    "s5-settled": "showreel/v4/assets/ref/s5plate-base.png"
+  }
+}

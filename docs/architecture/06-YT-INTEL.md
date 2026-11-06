@@ -102,7 +102,7 @@ the honest reading is "this comment field cannot brief a video" — which is its
 | API lane (search, videos, exact counts) | **live** — `doctor` 4/4 PASS, quota spent and tracked |
 | index → UI → lane badge | **live** — verified in jsdom, not assumed |
 | comment mining | **live** — ran on a 3,768-comment how-to video; reading: 6% want to buy teaching |
-| `style.py` cut threshold | **calibrated** on synthetic films with known shot lists (0/3/7/19 cuts); graded footage still needs its own pass |
+| `style.py` cut detection | **calibrated on real graded footage** (5 of 5 known cuts), plus a second opinion it reports as a disagreement rather than hiding |
 | `thumbprint.py` on live thumbnails | written, unit-tested, not yet run against a keyed channel pull |
 | `reverse.py` transcripts | depends on captions existing; `transcript_status` never collapses to "ok" |
 | multi-country trending | not implemented |

@@ -1,0 +1,126 @@
+name: v4 checkpoint (first 30 %)
+
+# Why this exists: the full film is a 7-minute render behind a 12-step gate, and a
+# wrong turn in the first seven seconds — where all the motion is — costs the whole
+# cycle to discover. This renders the first 30 % on its own and stops, so the hook
+# and the first four shots can be approved before anything else is built. The full
+# render is a separate job and is not blocked by this one.
+
+on:
+  push:
+    branches: ["arena/**"]
+    paths: ["showreel/v4/**", "tools/**", ".github/workflows/v4-checkpoint.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# The checkpoint and the full render trigger on the same paths, so before this they
+# started together and raced for the apt lock: one job sat in "Install ffmpeg" for
+# twenty-five minutes with nothing to report, the other failed on the lock. One
+# group, serialised rather than cancelled, because both have to run.
+concurrency:
+  group: v4-apt-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # No actions/setup-python: it downloads a python, puts it first on PATH, and
+      # then the apt packages for the *system* python are invisible to it — which
+      # made 'import numpy' fail on a runner where numpy had just been installed.
+      # The runner's own python3 is newer than the 3.11 that was being pinned.
+
+      - name: Install ffmpeg
+        timeout-minutes: 10
+        run: |
+          # ffmpeg IS needed: ubuntu-24.04 images do not ship it, which is what the
+          # last run's error said in so many words ("ffmpeg not found"). Everything
+          # else that used to be here is not: the fonts are embedded in the page, and
+          # check_part.py is plain Python since the numpy install cost two runs.
+          #
+          # The update is the slow part of apt, so it is skipped when the cached
+          # package lists are good enough to resolve ffmpeg, and only run if they
+          # are not.
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get install -y -qq --no-install-recommends ffmpeg \
+              || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg; }
+          fi
+          ffmpeg -version | head -1
+          command -v ffprobe
+
+      - name: Install renderer, gate and chrome-headless-shell
+        run: |
+          npm install --no-save --silent jsdom@30 gsap@3 puppeteer-core@23
+          npx --yes @puppeteer/browsers install chrome-headless-shell@stable --path "$PWD/.browsers"
+          CHROME_PATH=$(find "$PWD/.browsers" -name 'chrome-headless-shell' -type f | head -n 1)
+          echo "CHROME=$CHROME_PATH" >> $GITHUB_ENV
+          test -x "$CHROME_PATH" && echo "chrome ok: $CHROME_PATH"
+
+      - name: Gates — no scene outlives its window, nothing leaks
+        run: |
+          node tools/timeline_probe.mjs showreel/v4/index.html
+          node tools/verify_v4.mjs
+
+      - name: Render the first 30 %
+        run: |
+          set +e
+          node tools/render_v4.mjs --out public/demo/v4-30-silent.mp4 --part 0.30 --part-tag "first 30%" 2>&1 | tee /tmp/render-part.out
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            # a ::error:: annotation is readable through the API even when the raw
+            # job log cannot be downloaded
+            echo "::error title=checkpoint render failed::$(tail -c 3000 /tmp/render-part.out | tr '\n' ' ')"
+            echo "--- ffmpeg stderr from the encode ---"
+            grep -v "^\s*$" /tmp/render-part.out | tail -40
+            # and again as one annotation, which is the only channel that is
+            # reliably readable through the API
+            echo "::error title=render tail::$(grep -v '^\s*$' /tmp/render-part.out | tail -12 | tr '\n' ' ' | tr -s ' ')"
+          fi
+          exit "$status"
+
+      - name: Where the detail goes (calibration)
+        if: always()
+        run: |
+          # One frame with every plate replaced by a 2 px checkerboard, measured after
+          # the browser and again after the encode. This is the only measurement that
+          # separates "the plate is soft" from "the pipeline softens it", and the two
+          # have been confused more than once in this build.
+          node tools/render_v4.mjs --only 2.9 --calibrate 2>&1 | tail -2
+          cp public/demo/v4-frames/f_00000.png /tmp/cal_frame.png || true
+          ffmpeg -y -v error -i /tmp/cal_frame.png -c:v libx264 -preset slow -crf 20 \
+                 -maxrate 1600k -bufsize 3200k -pix_fmt yuv420p /tmp/cal.mp4 || true
+          ffmpeg -y -v error -i /tmp/cal.mp4 -frames:v 1 /tmp/cal_out.png || true
+          for pair in "after the browser:/tmp/cal_frame.png" "after the encode:/tmp/cal_out.png"; do
+            label=${pair%%:*}; file=${pair##*:}
+            echo "::warning title=calibration, $label::$(python3 tools/sharp_probe.py \
+                 --a showreel/v4/assets/ref/_checker.png --b "$file" \
+                 --box 0,0,700,1200 2>&1 | tr '\n' ' ' | tr -s ' ')"
+          done
+
+      - name: Cut the reference to the same window
+        run: python3 tools/make_checkpoint_ref.py 0.30
+
+      - name: Check the checkpoint frames
+        run: python3 tools/check_part.py --frames 210
+
+      - name: Publish the checkpoint
+        if: always()
+        run: |
+          git config user.name "monarch-forensics-bot"
+          git config user.email "forensics@monarch.studio"
+          git add -f public/demo/v4-30-silent.mp4 public/demo/ref30.mp4 analysis/v4-build/render-part.log 2>/dev/null || true
+          git commit -m "checkpoint(v4): first 30 % for approval [skip ci]" || echo "nothing to commit"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push skipped"

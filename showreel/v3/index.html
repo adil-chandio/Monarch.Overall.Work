@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>MONARCH · YouTube automation · v3</title>
+<link rel="preload" href="./vendor/fonts/Anton-Regular.ttf" as="font" crossorigin />
+<link rel="preload" href="./vendor/fonts/Poppins-SemiBold.ttf" as="font" crossorigin />
+<script src="./vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Anton"; src: url("./vendor/fonts/Anton-Regular.ttf") format("truetype"); font-display: block; }
+  @font-face { font-family: "PSB"; src: url("./vendor/fonts/Poppins-SemiBold.ttf") format("truetype"); font-display: block; }
+  @font-face { font-family: "PM"; src: url("./vendor/fonts/Poppins-Medium.ttf") format("truetype"); font-display: block; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #05060a; }
+
+  #root {
+    width: 1920px; height: 1080px; position: relative; overflow: hidden;
+    /* seam-craft §stage-ground: the stage MUST be opaque or every mid-window cut flashes white */
+    background: #05060a;
+    font-family: "PM", sans-serif; color: #f4f6fb;
+  }
+
+  /* ---------------------------------------------------------------- world (one layer for the whole film) */
+  #world { position: absolute; inset: 0; pointer-events: none; }
+  #wm { position: absolute; inset: 0; }          /* world media: parallax + embers */
+  .grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(34,211,238,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,211,238,.045) 1px, transparent 1px);
+    background-size: 220px 220px;
+  }
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 26%, rgba(0,0,0,.78) 95%);
+  }
+  .ember { position: absolute; width: 4px; height: 4px; border-radius: 50%; }
+
+  /* ---------------------------------------------------------------- scene plates */
+  .scene { position: absolute; inset: 0; will-change: transform, opacity, filter; }
+  .plate {
+    position: absolute; left: 100px; top: 130px; width: 1720px; height: 820px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(18,23,36,.94), rgba(10,13,22,.94));
+    border: 1.5px solid rgba(255,255,255,.09);
+    overflow: hidden;
+  }
+  .plate::before, .plate::after,
+  .plate > .ct-1, .plate > .ct-2 {
+    content: ""; position: absolute; width: 26px; height: 26px;
+    border: 3px solid var(--accent, #ff2d46); opacity: .78;
+  }
+  .plate::before { left: -1px; top: -1px; border-right: 0; border-bottom: 0; }
+  .plate::after  { right: -1px; top: -1px; border-left: 0; border-bottom: 0; }
+  .plate > .ct-1 { left: -1px; bottom: -1px; border-right: 0; border-top: 0; }
+  .plate > .ct-2 { right: -1px; bottom: -1px; border-left: 0; border-top: 0; }
+
+  .ghost { position: absolute; font-family: "Anton"; font-size: 620px; line-height: .8; opacity: .05; letter-spacing: -8px; user-select: none; }
+
+  .t-anton { font-family: "Anton"; letter-spacing: 1px; }
+  .t-psb   { font-family: "PSB"; letter-spacing: 3px; }
+  .t-pm    { font-family: "PM"; letter-spacing: 2px; }
+
+  /* waterfall entry: each word is its own absolutely-placed span */
+  .wf { position: absolute; font-family: "Anton"; white-space: pre; }
+
+  /* ---------------------------------------------------------------- HUD: ribbon, beat chip, progress */
+  #hud { position: absolute; inset: 0; pointer-events: none; }
+  #ribbon { position: absolute; left: 150px; top: 1000px; width: 1620px; height: 44px; }
+  #ribbon .rw { position: absolute; background: rgba(124,135,158,.22); width: 2px; }
+  #ribbon .tick { position: absolute; width: 3px; height: 60px; top: -8px; background: #ffb020; }
+  #ribbon .tick.off { background: rgba(124,135,158,.4); }
+  #playhead { position: absolute; width: 3px; height: 68px; top: -12px; background: #f4f6fb; }
+  #bazel { position: absolute; left: 0; top: 1000px; width: 1620px; height: 44px;
+           border-top: 1px solid rgba(244,246,251,.10); border-bottom: 1px solid rgba(244,246,251,.10); }
+
+  #chip {
+    position: absolute; left: 60px; top: 34px; height: 38px; padding: 0 18px;
+    display: flex; align-items: center; border-radius: 6px;
+    background: rgba(10,13,22,.88); border: 1.5px solid rgba(255,45,70,.55);
+    font-family: "PM"; font-size: 22px; letter-spacing: 3px; color: #f4f6fb;
+  }
+  #chip::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #ff2d46; }
+
+  #bar { position: absolute; left: 0; bottom: 0; height: 8px; width: 1920px; background: rgba(244,246,251,.10); }
+  #barfill { position: absolute; left: 0; bottom: 0; height: 8px; width: 0; background: #ff2d46; }
+
+  .corner { position: absolute; width: 22px; height: 22px; border: 2px solid rgba(244,246,251,.18); }
+  .c-tl { left: 60px;  top: 60px;    border-right: 0; border-bottom: 0; }
+  .c-tr { right: 60px; top: 60px;    border-left: 0;  border-bottom: 0; }
+  .c-bl { left: 60px;  bottom: 60px; border-right: 0; border-top: 0; }
+  .c-br { right: 60px; bottom: 60px; border-left: 0;  border-top: 0; }
+
+  /* ---------------------------------------------------------------- scene 1 · hook */
+  .s1-bar-track { position: absolute; border: 2px dashed rgba(124,135,158,.38); border-radius: 10px; }
+  .s1-bar-fill  { position: absolute; background: linear-gradient(180deg, rgba(255,45,70,.30), rgba(255,45,70,.10)); }
+  .s1-bar-cap   { position: absolute; height: 6px; background: #ff2d46; }
+  .s1-num       { position: absolute; font-family: "Anton"; font-size: 190px; color: #fff; }
+  .s1-glow      { position: absolute; border-radius: 50%; filter: blur(70px); background: rgba(255,45,70,.42); }
+  .s1-rule      { position: absolute; height: 7px; background: #ff2d46; transform-origin: left center; }
+  .s1-tick      { position: absolute; width: 13px; background: rgba(124,135,158,.55); }
+
+  /* ---------------------------------------------------------------- scene 2 · the other 29 */
+  .cell { position: absolute; border-radius: 5px; background: rgba(124,135,158,.10); overflow: hidden; }
+  .cell .fill { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; background: rgba(34,211,238,.24); }
+  .cell .cap  { position: absolute; left: 0; right: 0; height: 4px; background: rgba(34,211,238,.8); }
+  .cell.empty { border: 2px dashed rgba(124,135,158,.42); background: transparent; }
+
+  /* ---------------------------------------------------------------- scene 3 · the gap */
+  .bar-track { position: absolute; background: rgba(244,246,251,.2); }
+  .bar1 { position: absolute; bottom: 0; border-radius: 3px 3px 0 0;
+          background: linear-gradient(180deg, #ff2d46, rgba(255,45,70,.14)); }
+  .bar2 { position: absolute; bottom: 0; border-radius: 3px 3px 0 0; background: rgba(124,135,158,.85); }
+  .s3-glow { position: absolute; border-radius: 50%; filter: blur(80px); background: rgba(255,45,70,.5); }
+  .ratio-line { position: absolute; height: 4px; background: rgba(255,176,32,.85); transform-origin: left center; }
+
+  /* ---------------------------------------------------------------- scene 4 · top five */
+  .row { position: absolute; left: 150px; width: 1420px; height: 100px; border-radius: 12px;
+         background: rgba(124,135,158,.06); display: flex; align-items: center; }
+  .row.hot { background: rgba(255,45,70,.10); border: 2px solid rgba(255,45,70,.45); }
+  .row.hot::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 7px; background: #ff2d46; border-radius: 12px 0 0 12px; }
+  .row .n { font-family: "Anton"; font-size: 62px; width: 130px; text-align: center; }
+  .row .lbl { font-family: "Anton"; font-size: 54px; letter-spacing: 1px; }
+  .row .v { margin-left: auto; padding-right: 40px; font-family: "Anton"; font-size: 54px; }
+
+  /* ---------------------------------------------------------------- scene 5 · saturated → concentrated */
+  .spoke { position: absolute; height: 3.5px; transform-origin: left center; background: linear-gradient(90deg, rgba(255,45,70,.85), rgba(255,45,70,.04)); }
+  .spoke-dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: #ffb020; }
+  .hub { position: absolute; border-radius: 50%; background: #ffb020; box-shadow: 0 0 34px rgba(255,176,32,.9); }
+  .hub-glow { position: absolute; border-radius: 50%; filter: blur(60px); background: rgba(255,176,32,.5); }
+  .s5-proof { position: absolute; font-family: "PSB"; font-size: 39px; letter-spacing: 3px; }
+  .s5-rule { position: absolute; height: 1.5px; background: rgba(244,246,251,.16); transform-origin: left center; }
+
+  /* ---------------------------------------------------------------- scene 6 · 11 of 100 */
+  .sq { position: absolute; width: 52px; height: 52px; border-radius: 8px; background: rgba(124,135,158,.20); }
+  .sq.on { background: #a3e635; box-shadow: 0 0 26px rgba(163,230,53,.75); }
+  .scan { position: absolute; top: 200px; width: 120px; height: 292px;
+          background: linear-gradient(90deg, rgba(163,230,53,0), rgba(163,230,53,.10), rgba(163,230,53,0)); }
+
+  /* ---------------------------------------------------------------- scene 7 · end */
+  .ret { position: absolute; border-radius: 50%; }
+  .ret-arc { position: absolute; border: 5px solid #ff2d46; border-radius: 50%; }
+  .ret-tick { position: absolute; width: 4px; background: rgba(244,246,251,.55); transform-origin: 50% 100%; }
+
+  /* ---------------------------------------------------------------- inserts */
+  /* The insert TAKES the frame. Without its own opaque ground the scene underneath
+     showed through and the two compositions read as garbage on the same pixels. */
+  .ins { position: absolute; inset: 0; opacity: 0;
+         background:
+           radial-gradient(circle at 50% 46%, rgba(255,45,70,.13), rgba(5,6,10,0) 58%),
+           linear-gradient(180deg, #05060a 0%, #090c15 50%, #05060a 100%); }
+  .ins .ray { position: absolute; transform-origin: left center; height: 4px;
+              background: linear-gradient(90deg, rgba(255,45,70,.55), rgba(255,45,70,0)); }
+  .ins .big { position: absolute; width: 1920px; text-align: center; font-family: "Anton"; font-size: 300px; letter-spacing: -4px;
+              color: #fff; text-shadow: 0 0 90px rgba(255,45,70,.7); }
+  .ins .sub { position: absolute; width: 1920px; text-align: center; font-family: "PSB"; font-size: 52px; letter-spacing: 8px; }
+</style>
+</head>
+<body>
+
+<div id="root" data-composition-id="main" data-start="0" data-duration="42.24"
+     data-width="1920" data-height="1080" data-fps="30">
+
+  <!-- ============================================================ WORLD -->
+  <div id="world">
+    <div id="wm">
+      <div class="grid-lines" id="grid"></div>
+      <div id="embers"></div>
+    </div>
+    <div class="vignette"></div>
+  </div>
+
+  <!-- light sweep: a full-frame pass that belongs to the film, not to a beat -->
+  <div id="sweep" style="position:absolute;inset:0;mix-blend-mode:screen;opacity:.5;
+       background:linear-gradient(100deg, rgba(34,211,238,0) 30%, rgba(120,190,255,.10) 47%, rgba(255,80,110,.09) 53%, rgba(255,45,70,0) 70%);
+       width:2600px;left:-340px;"></div>
+
+  <!-- ============================================================ SCENE 1 · HOOK -->
+  <section class="scene" id="s1">
+    <div class="plate" style="--accent:#ff2d46">
+      <div class="ct-1"></div><div class="ct-2"></div>
+      <div class="ghost" style="left:40px; top:120px; color:#ff2d46; font-size:640px;">25</div>
+
+      <!-- the bar: 25% of the track -->
+      <div class="s1-bar-track" id="s1track" style="left:1180px; top:290px; width:290px; height:560px;"></div>
+      <div class="s1-bar-fill"  id="s1fill"  style="left:1180px; top:0; width:290px; height:0;"></div>
+      <div class="s1-bar-cap"   id="s1cap"   style="left:1180px; top:850px; width:290px;"></div>
+      <div class="s1-glow"      id="s1glow"  style="left:1230px; top:400px; width:190px; height:190px;"></div>
+      <div class="s1-num"       id="s1num"   style="left:1245px; top:170px;">0%</div>
+
+      <!-- headline: waterfall entry, words are separate spans -->
+      <!-- measured layout: line 1 EK(110)+26+VIDEO(399)=535 -> 190..725,
+           line 2 HAR(181)+26+VIEW(226)+26+KA(119)=578 -> 190..768.
+           The bar column starts at 1180, so both lines clear it by >400px. -->
+      <div class="wf" id="w1" style="left:190px;  top:300px; font-size:122px; color:#fff;">EK</div>
+      <div class="wf" id="w2" style="left:326px;  top:270px; font-size:196px; color:#ff2d46; letter-spacing:-2px;">VIDEO</div>
+      <div class="wf" id="w3" style="left:190px;  top:520px; font-size:122px; color:#fff;">HAR</div>
+      <div class="wf" id="w4" style="left:397px;  top:520px; font-size:122px; color:#fff;">VIEW</div>
+      <div class="wf" id="w5" style="left:650px;  top:520px; font-size:122px; color:#fff;">KA</div>
+
+      <div class="s1-rule" id="s1rule" style="left:190px; top:700px; width:660px;"></div>
+      <div id="s1ticks" style="position:absolute; left:190px; top:760px; width:620px; height:30px;"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SCENE 2 · THE OTHER 29 -->
+  <section class="scene" id="s2">
+    <div class="plate" style="--accent:#22d3ee">
+      <div class="ct-1"></div><div class="ct-2"></div>
+      <div class="ghost" style="left:-20px; top:100px; color:#22d3ee; font-size:640px;">29</div>
+      <div id="cells" style="position:absolute; left:830px; top:190px; width:760px; height:480px;"></div>
+      <!-- 75% at Anton 240 measures 493px -> 170..663; the grid starts at 830 -->
+      <div class="t-anton" id="s2num" style="position:absolute; left:170px; top:220px; font-size:240px; color:#fff;">0%</div>
+      <div class="t-psb"  id="s2lbl" style="position:absolute; left:180px; top:500px; font-size:56px; color:#22d3ee;">BAANT RAHE HAIN</div>
+      <div class="t-pm"   id="s2sub" style="position:absolute; left:184px; top:578px; font-size:36px; color:#7c879e;">UNTEES VIDEOS · 75% SAB KA</div>
+      <div id="ladder" style="position:absolute; left:180px; top:650px; width:120px; height:270px;"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SCENE 3 · THE 36× GAP -->
+  <section class="scene" id="s3">
+    <div class="plate" style="--accent:#ff2d46">
+      <div class="ct-1"></div><div class="ct-2"></div>
+      <div class="ghost" style="left:-10px; top:60px; color:#ffb020; font-size:640px;">36</div>
+      <div class="s3-glow" id="s3glow" style="left:1330px; top:150px; width:330px; height:330px;"></div>
+      <div class="bar-track" id="s3base" style="left:1140px; top:730px; width:640px; height:2px;"></div>
+      <div class="bar1" id="s3bar1" style="left:1450px; width:100px; height:0;"></div>
+      <div class="bar2" id="s3bar2" style="left:1210px; width:100px; height:0;"></div>
+      <div class="t-anton" id="s3v1" style="position:absolute; left:1320px; top:640px; font-size:70px; color:#fff; width:360px; text-align:center;">19,22,751</div>
+      <div class="t-psb"  id="s3l1" style="position:absolute; left:1370px; top:790px; font-size:36px; color:#ff2d46; width:260px; text-align:center;">#1 VIDEO</div>
+      <div class="t-pm"   id="s3s1" style="position:absolute; left:1370px; top:836px; font-size:22px; color:#2a3346; width:260px; text-align:center; letter-spacing:3px;">SAME TOPIC</div>
+      <div class="t-psb"  id="s3v2" style="position:absolute; left:1100px; top:790px; font-size:36px; color:#7c879e; width:250px; text-align:center;">51,654</div>
+      <div class="t-pm"   id="s3s2" style="position:absolute; left:1100px; top:836px; font-size:22px; color:#2a3346; width:250px; text-align:center; letter-spacing:3px;">TYPICAL</div>
+
+      <div id="s3x" style="position:absolute; left:190px; top:180px; transform-origin: 0 0;">
+        <div class="t-anton" style="font-size:300px; color:#fff; line-height:.9;">36×</div>
+        <div class="t-psb" style="font-size:50px; color:#ffb020; letter-spacing:6px; margin-top:6px;">KA FARQ</div>
+      </div>
+      <div class="ratio-line" id="s3line" style="left:195px; top:520px; width:0;"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SCENE 4 · TOP FIVE -->
+  <section class="scene" id="s4">
+    <div class="plate" style="--accent:#ff2d46">
+      <div class="ct-1"></div><div class="ct-2"></div>
+      <div class="t-psb" id="s4kick" style="position:absolute; left:160px; top:16px; font-size:42px; color:#7c879e;">TOP FIVE MEIN TEEN</div>
+      <div class="t-anton" id="s4tally" style="position:absolute; left:1500px; top:4px; font-size:62px; color:#ff2d46;">0/5</div>
+      <div id="rows" style="position:absolute; left:0; top:64px; width:1920px; height:640px;"></div>
+      <div id="s4verdict" style="position:absolute; left:150px; top:688px; width:1420px;">
+        <div style="height:5px; background:#ffb020; transform-origin:left center;" id="s4ul"></div>
+        <div class="t-psb" style="font-size:40px; color:#ffb020; margin-top:14px;">KOI NAHI BATATA: KAUN CHHOD GAYA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SCENE 5 · SATURATED → CONCENTRATED -->
+  <section class="scene" id="s5">
+    <div class="plate" style="--accent:#ffb020">
+      <div class="ct-1"></div><div class="ct-2"></div>
+      <div id="spokes" style="position:absolute; left:0; top:0;"></div>
+      <div class="hub-glow" id="hubglow" style="left:1430px; top:290px; width:220px; height:220px;"></div>
+      <div class="hub" id="hub" style="left:1495px; top:355px; width:90px; height:90px; transform:scale(0);"></div>
+
+      <div id="s5a" style="position:absolute; left:190px; top:280px;">
+        <div class="t-anton" style="font-size:170px; color:#7c879e; letter-spacing:2px;">SATURATED</div>
+        <div id="s5strike" style="position:absolute; left:-12px; top:96px; height:13px; width:0; background:#ff2d46; border-radius:7px;"></div>
+      </div>
+
+      <div id="s5b" style="position:absolute; left:190px; top:280px; opacity:0; transform-origin: left center;">
+        <div class="t-anton" style="font-size:160px; color:#ffb020; letter-spacing:1px; text-shadow:0 0 60px rgba(255,176,32,.55);">CONCENTRATED</div>
+      </div>
+
+      <div id="s5proof" style="position:absolute; left:196px; top:470px;">
+        <div class="s5-proof" style="color:#fff;">EK JEETNE WALA</div>
+        <div class="s5-proof" style="color:#fff; top:58px;">UNTEES USKI COPY</div>
+        <div class="s5-proof" style="color:#ffb020; top:116px;">EK HI JAGAH</div>
+      </div>
+
+      <div id="s5bars" style="position:absolute; left:196px; top:660px; width:640px;">
+        <div class="t-psb" style="font-size:26px; color:#ffb020; letter-spacing:2px;">#1</div>
+        <div id="b1" style="height:16px; background:rgba(255,176,32,.9); width:0; margin-top:6px;"></div>
+        <div class="t-psb" style="font-size:26px; color:#7c879e; letter-spacing:2px; margin-top:18px;">29 OTHERS</div>
+        <div id="b2" style="height:16px; background:rgba(255,45,70,.5); width:0; margin-top:6px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SCENE 6 · 11 OF 100 -->
+  <section class="scene" id="s6">
+    <div class="plate" style="--accent:#a3e635">
+      <div class="ct-1"></div><div class="ct-2"></div>
+      <div class="ghost" style="right:20px; top:180px; color:#a3e635; font-size:620px; opacity:.035;">11</div>
+      <div id="sqs" style="position:absolute; left:170px; top:170px; width:1290px; height:300px;"></div>
+      <div class="scan" id="scan"></div>
+      <div class="t-anton" id="s6num" style="position:absolute; left:170px; top:508px; font-size:190px; color:#a3e635; opacity:0;">11</div>
+      <div class="t-psb"  id="s6lbl" style="position:absolute; left:360px; top:552px; font-size:46px; color:#fff; opacity:0;">PAISE DENA CHAHTE HAIN</div>
+      <div class="t-pm"   id="s6sub" style="position:absolute; left:364px; top:620px; font-size:32px; color:#7c879e; opacity:0;">100 COMMENTS MEIN SE · AUR TUTORIAL NAHI</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SCENE 7 · END -->
+  <section class="scene" id="s7">
+    <div class="plate" style="--accent:#ff2d46">
+      <div class="ct-1"></div><div class="ct-2"></div>
+      <div id="reticle" style="position:absolute; left:960px; top:340px; transform:translate(-50%,-50%) scale(.2); opacity:0;">
+        <div id="retarcs" style="position:absolute; left:-230px; top:-230px; width:460px; height:460px;"></div>
+        <div id="retticks" style="position:absolute; left:-290px; top:-290px; width:580px; height:580px;"></div>
+        <div style="position:absolute; left:-9px; top:-9px; width:18px; height:18px; border-radius:50%; background:#ff2d46;"></div>
+      </div>
+      <div class="t-anton" id="e1" style="position:absolute; width:1920px; text-align:center; top:470px; font-size:118px; color:#fff; letter-spacing:3px;">WO HISSA</div>
+      <div class="t-anton" id="e2" style="position:absolute; width:1920px; text-align:center; top:596px; font-size:74px; color:#ff2d46; letter-spacing:2px;">JO KOI FILM NAHI KARTA</div>
+      <div id="eul" style="position:absolute; left:560px; top:692px; width:0; height:4px; background:rgba(255,45,70,.85);"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ INSERTS -->
+  <div class="ins" id="ins1">
+    <div id="ins1rays"></div>
+    <div class="big" style="top:170px;">36×</div>
+    <div class="sub" style="top:640px; color:#ff2d46;">SAME TOPIC · SAME EFFORT</div>
+  </div>
+  <div class="ins" id="ins2">
+    <div id="ins2rays"></div>
+    <div class="big" style="top:170px;">1 / 29</div>
+    <div class="sub" style="top:640px; color:#ffb020;">EK JEETA · UNTEES HAARE</div>
+  </div>
+
+  <!-- ============================================================ HUD -->
+  <div id="hud">
+    <div id="bazel"></div>
+    <div id="ribbon"></div>
+    <div id="playhead"></div>
+    <div id="chip">BEAT 01 / 07 · HOOK</div>
+    <div id="bar"><div id="barfill"></div></div>
+    <div class="corner c-tl"></div><div class="corner c-tr"></div>
+    <div class="corner c-bl"></div><div class="corner c-br"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var TOTAL = 42.24;
+  var FPS = 30;
+  var d = document;
+
+  // Deterministic geometry. rnd() would make two runs of the same composition
+  // differ, which breaks frame-cache reuse and makes a render unreproducible — the
+  // HyperFrames linter rejects it outright, correctly.
+  var __seed = 0x9e3779b9;
+  function rnd() {
+    __seed |= 0; __seed = (__seed + 0x6D2B79F5) | 0;
+    var t = Math.imul(__seed ^ (__seed >>> 15), 1 | __seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+
+  /* ============================================================== build static DOM */
+  // embers
+  var embers = d.getElementById("embers");
+  for (var i = 0; i < 150; i++) {
+    var e = d.createElement("div");
+    e.className = "ember";
+    var r = rnd();
+    var col = i % 5 === 0 ? "34,211,238" : "255,45,70";
+    e.style.cssText = "left:" + (rnd() * 1920) + "px;top:" + (rnd() * 1080) + "px;"
+      + "background:rgba(" + col + "," + (0.08 + r * 0.18) + ");"
+      + "width:" + (2 + r * 3) + "px;height:" + (2 + r * 3) + "px;";
+    embers.appendChild(e);
+  }
+
+  // scene 1 ticks
+  var ticks = d.getElementById("s1ticks");
+  for (var i = 0; i < 29; i++) {
+    var t = d.createElement("div");
+    t.className = "s1-tick";
+    t.style.cssText = "left:" + (i * 21) + "px;top:0;height:13px;";
+    ticks.appendChild(t);
+  }
+
+  // scene 2 grid: 32 cells, 29 fill, 3 stay empty
+  var cells = d.getElementById("cells");
+  var CW = 74, CH = 112, GAP = 13, COLS = 8;
+  for (var i = 0; i < 32; i++) {
+    var c = d.createElement("div");
+    c.className = "cell" + (i >= 29 ? " empty" : "");
+    var cx = (i % COLS) * (CW + GAP), cy = Math.floor(i / COLS) * (CH + GAP);
+    c.style.cssText = "left:" + cx + "px;top:" + cy + "px;width:" + CW + "px;height:" + CH + "px;";
+    if (i < 29) {
+      // the cap rides on the fill's top edge; both are transformed, never laid out
+      c.innerHTML = '<div class="fill" style="height:0"></div>'
+        + '<div class="cap" style="bottom:0;transform:translateY(0)"></div>';
+    }
+    cells.appendChild(c);
+  }
+  // scene 2 ladder
+  var ladder = d.getElementById("ladder");
+  for (var i = 0; i < 29; i++) {
+    var s = d.createElement("div");
+    s.style.cssText = "position:absolute;left:0;top:" + (i * 9) + "px;height:4px;width:0;background:rgba(34,211,238,.34);";
+    ladder.appendChild(s);
+  }
+
+  // scene 4 rows
+  var ROWS = [
+    ["1", "HOW TO START", "1.92M", true],
+    ["2", "HOW TO START", "1.21M", true],
+    ["3", "BEGINNER SETUP", "767K", false],
+    ["4", "HOW TO START", "757K", true],
+    ["5", "FULL GUIDE", "675K", false]
+  ];
+  var rowsEl = d.getElementById("rows");
+  ROWS.forEach(function (r, i) {
+    var el = d.createElement("div");
+    el.className = "row" + (r[3] ? " hot" : "");
+    el.style.top = (i * 114) + "px";
+    el.innerHTML = '<div class="n" style="color:' + (r[3] ? "#ff2d46" : "#7c879e") + '">' + r[0] + "</div>"
+      + '<div class="lbl">' + r[1] + "</div>"
+      + '<div class="v" style="color:' + (r[3] ? "#ff2d46" : "#7c879e") + '">' + r[2] + "</div>";
+    rowsEl.appendChild(el);
+  });
+
+  // scene 5 spokes: 29 converging on one hub
+  var spokes = d.getElementById("spokes");
+  var HUBX = 1540, HUBY = 400;
+  for (var i = 0; i < 29; i++) {
+    var f = i / 28;
+    var a = -Math.PI / 2 + (f - 0.5) * (Math.PI * 2 * 0.16);
+    var len = 290 + 200 * Math.abs(Math.sin(f * 3.1));
+    var sp = d.createElement("div");
+    sp.className = "spoke";
+    sp.style.cssText = "left:" + (HUBX + Math.cos(a) * 92) + "px;top:" + (HUBY + Math.sin(a) * 92) + "px;"
+      + "width:" + (len - 92) + "px;transform:rotate(" + (a * 180 / Math.PI) + "deg);opacity:0;";
+    spokes.appendChild(sp);
+    var dot = d.createElement("div");
+    dot.className = "spoke-dot";
+    dot.style.cssText = "left:" + (HUBX + Math.cos(a) * len - 4) + "px;top:" + (HUBY + Math.sin(a) * len - 4) + "px;opacity:0;";
+    spokes.appendChild(dot);
+  }
+
+  // scene 6: 100 squares
+  var sqs = d.getElementById("sqs");
+  var SQS = [];
+  for (var i = 0; i < 100; i++) {
+    var q = d.createElement("div");
+    q.className = "sq";
+    q.style.cssText = "left:" + ((i % 20) * 60) + "px;top:" + (Math.floor(i / 20) * 60) + "px;";
+    sqs.appendChild(q);
+    SQS.push(q);
+  }
+
+  // scene 7 reticle
+  var arcs = d.getElementById("retarcs");
+  for (var k = 0; k < 4; k++) {
+    var a0 = k * 90 + 17;
+    var arc = d.createElement("div");
+    arc.className = "ret-arc";
+    arc.style.cssText = "left:0;top:0;width:460px;height:460px;"
+      + "clip-path:polygon(50% 50%, " + (50 + 60 * Math.cos((a0 - 12) * Math.PI / 180)) + "% "
+      + (50 + 60 * Math.sin((a0 - 12) * Math.PI / 180)) + "%, "
+      + (50 + 60 * Math.cos((a0 + 31) * Math.PI / 180)) + "% "
+      + (50 + 60 * Math.sin((a0 + 31) * Math.PI / 180)) + "%);";
+    arcs.appendChild(arc);
+  }
+  var rticks = d.getElementById("retticks");
+  for (var k = 0; k < 12; k++) {
+    var ang = k * 30;
+    var major = k % 3 === 0;
+    var tk = d.createElement("div");
+    tk.className = "ret-tick";
+    tk.style.cssText = "left:288px;top:" + (major ? 24 : 40) + "px;height:" + (major ? 54 : 40) + "px;"
+      + "transform:rotate(" + ang + "deg);transform-origin:50% 266px;opacity:" + (major ? .55 : .2) + ";";
+    rticks.appendChild(tk);
+  }
+
+  // inserts: radial rays
+  ["ins1rays", "ins2rays"].forEach(function (id) {
+    var host = d.getElementById(id);
+    for (var i = 0; i < 44; i++) {
+      var a = (i / 44) * Math.PI * 2 + 0.13;
+      var r0 = 150, r1 = r0 + 240 + rnd() * 320;
+      var ray = d.createElement("div");
+      ray.className = "ray";
+      ray.style.cssText = "left:" + (960 + Math.cos(a) * r0) + "px;top:" + (500 + Math.sin(a) * r0) + "px;"
+        + "width:" + (r1 - r0) + "px;"
+        + "transform:rotate(" + (a * 180 / Math.PI) + "deg);opacity:0;";
+      host.appendChild(ray);
+    }
+  });
+
+  // ribbon waveform (static geometry; the playhead is what moves)
+  var ribbon = d.getElementById("ribbon");
+  for (var i = 0; i < 540; i++) {
+    var ph = (i / 540) * 26;
+    var amp = (0.30 + 0.70 * Math.abs(Math.sin(ph * .7 + Math.sin(ph) * 1.4)))
+      * (0.45 + 0.55 * Math.abs(Math.sin(ph * .23 + 1.1)));
+    var h = amp * 17;
+    var w = d.createElement("div");
+    w.className = "rw";
+    w.style.cssText = "left:" + (i * 3) + "px;top:" + (22 - h) + "px;height:" + (h * 2) + "px;";
+    ribbon.appendChild(w);
+  }
+
+  /* ============================================================== seam bookkeeping */
+  // beat starts are the measured VO timestamps; the film re-times itself from them
+  var STARTS = [0.25, 4.89, 11.25, 18.49, 25.09, 31.73, 37.29];
+  var BOUND  = STARTS.slice(1).concat([TOTAL]);
+  var NAMES  = ["HOOK", "OTHERS", "GAP", "TOPFIVE", "SWAP", "COMMENTS", "END"];
+  var CUT = 0.24;   // 7 frames — the seam window
+
+  STARTS.forEach(function (s, i) {
+    var el = d.createElement("div");
+    el.className = "tick off";
+    el.style.left = ((s / TOTAL) * 1620) + "px";
+    el.id = "tick" + i;
+    ribbon.appendChild(el);
+  });
+
+  /* ============================================================== GSAP timeline */
+  var tl = gsap.timeline({ paused: true });
+
+  var B = STARTS;   // B[i] = start of scene i
+
+  /* ---------- world: never still ---------- */
+  tl.fromTo("#grid", { backgroundPosition: "0px 0px" },
+    { backgroundPosition: "-220px 220px", duration: TOTAL, ease: "none" }, 0);
+  tl.to("#wm", { x: -26, y: 18, duration: TOTAL, ease: "sine.inOut" }, 0);
+  tl.fromTo("#embers", { y: 0 }, { y: -180, duration: TOTAL, ease: "none" }, 0);
+  // the sweep crosses the frame every ~3.8 s
+  tl.fromTo("#sweep", { x: -400 }, { x: 2400, duration: 3.8, ease: "none", repeat: 10 }, 0);
+
+  // HUD: progress + playhead + beat chip
+  tl.to("#barfill", { width: 1920, duration: TOTAL, ease: "none" }, 0);
+  tl.fromTo("#playhead", { x: 0 }, { x: 1617, duration: TOTAL, ease: "none" }, 0);
+
+  NAMES.forEach(function (nm, i) {
+    tl.call(function () {
+      d.getElementById("chip").textContent =
+        "BEAT " + String(i + 1).padStart(2, "0") + " / 07 · " + nm;
+      for (var j = 0; j < NAMES.length; j++) {
+        var tk = d.getElementById("tick" + j);
+        if (tk) { tk.className = "tick" + (j <= i ? "" : " off"); }
+      }
+    }, null, B[i]);
+  });
+
+  /* ---------- CUT-THE-CURVE seams -------------------------------------------------
+     Exit: power4.in over CUT, 230px left, opacity→0.15, blur→10px  (fade completes at
+     28% of travel = q 0.73, per cut-the-curve §3 "the fade trick")
+     Entry: power4.out over CUT, from +230px, opacity 0.35→1, blur 10px→0      */
+  var S = ["#s1", "#s2", "#s3", "#s4", "#s5", "#s6", "#s7"];
+  // Every scene is hidden at t=0 AND re-asserted hidden immediately before its own
+  // seam. That second stamp matters: a fromTo() tween holds its from-value from the
+  // moment it is created, so a single set at t=0 is not enough to keep later scenes
+  // off screen (the first pass shipped with all seven scenes visible at once).
+  for (var i = 0; i < S.length; i++) {
+    tl.set(S[i], { opacity: 0, x: 230, filter: "blur(10px)" }, 0);
+    if (i > 0) tl.set(S[i], { opacity: 0 }, B[i] - CUT - 0.04);
+  }
+  tl.set("#s1", { opacity: 1, x: 0, filter: "blur(0px)" }, 0);
+
+  for (var i = 1; i < S.length; i++) {
+    var at = B[i];
+    var prev = S[i - 1], cur = S[i];
+    // OVERLAP WINDOW. seam-craft §injector: the incoming wrapper's start is pulled
+    // earlier by the transition duration, which is what creates the overlap. Without it
+    // the exit has already faded to 0 before the entry ignites and the frame blinks black
+    // on every cut — measured, not guessed (tools/verify_v3.mjs sums the scene opacities
+    // on every frame and fails if the sum ever drops below 0.9).
+    var OV = 0.08;                       // ~2.5 frames of overlap
+    // exit: still travelling when the cut lands, blur reaching its 10px peak at the swap
+    tl.set(prev, { x: 0, opacity: 1, filter: "blur(0px)" }, at - CUT);
+    tl.to(prev, { x: -230, duration: CUT, ease: "power4.in" }, at - CUT);
+    tl.to(prev, { opacity: 0.92, duration: CUT - OV, ease: "none" }, at - CUT);
+    tl.to(prev, { filter: "blur(10px)", duration: CUT * 0.92, ease: "power2.in" }, at - CUT);
+    tl.set(prev, { opacity: 0 }, at);
+    // entry: ignites mid-path at 0.45 (velocity match), and the ignition is the START of
+    // this one tween — a preceding tl.set would be overwritten by the tween's own
+    // from-value on the very same tick, leaving the scene stuck at opacity 0.
+    tl.fromTo(cur, { x: 230, opacity: 0.45, filter: "blur(10px)" },
+      { x: 0, duration: CUT, ease: "power4.out" }, at - OV);
+    tl.fromTo(cur, { opacity: 0.45 }, { opacity: 1, duration: CUT * 0.5, ease: "power2.out" }, at - OV);
+    tl.fromTo(cur, { filter: "blur(10px)" }, { filter: "blur(0px)", duration: CUT * 0.6, ease: "power2.out" }, at - OV);
+  }
+
+  /* ---------- camera: a slow push inside every beat (motion-doctrine §performance) */
+  S.forEach(function (sel, i) {
+    var a = B[i], b = BOUND[i];
+    tl.fromTo(sel, { scale: 1.0 }, { scale: 1.045, duration: b - a, ease: "none", transformOrigin: "50% 50%" }, a);
+  });
+
+  /* ============================================================== SCENE 1 · HOOK */
+  // the number ticks up and never stops
+  var counter = { v: 0 };
+  tl.to(counter, {
+    v: 25, duration: B[1] - B[0] - 0.2, ease: "power3.out",
+    onUpdate: function () { d.getElementById("s1num").textContent = Math.round(counter.v) + "%"; }
+  }, B[0]);
+  // the bar grows to exactly 25% of its track
+  tl.fromTo("#s1fill", { height: 0 }, { height: 140, duration: B[1] - B[0], ease: "power3.out" }, B[0]);
+  tl.fromTo("#s1cap", { y: 0 }, { y: -140, duration: B[1] - B[0], ease: "power3.out" }, B[0]);
+  tl.fromTo("#s1glow", { opacity: 0.2, scale: 0.6 }, { opacity: 1, scale: 1.2, duration: 1.2, ease: "power2.out" }, B[0]);
+
+  // waterfall entry: word by word, gaps decaying ×0.84, binary opacity (cut-the-curve §6)
+  var wfGap = 0.075, wfAt = B[0] + 0.02;
+  ["#w1", "#w2", "#w3", "#w4", "#w5"].forEach(function (sel, i) {
+    tl.set(sel, { opacity: 0 }, 0);
+    tl.fromTo(sel,
+      { y: 90, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.26, ease: "expo.out" },
+      wfAt);
+    wfAt += wfGap; wfGap *= 0.84;
+  });
+  tl.fromTo("#s1rule", { scaleX: 0 }, { scaleX: 1, duration: B[1] - B[0] - 0.2, ease: "power3.out" }, B[0]);
+
+  // the 29 counterpoint ticks
+  var tickEls = ticks.children;
+  for (var i = 0; i < tickEls.length; i++) {
+    tl.to(tickEls[i], { height: 26, duration: 0.18, ease: "power2.out" },
+      B[0] + 0.35 + i * 0.03);
+  }
+
+  /* ============================================================== SCENE 2 · OTHERS */
+  var pct2 = { v: 0 };
+  tl.to(pct2, {
+    v: 75, duration: B[2] - B[1], ease: "power3.out",
+    onUpdate: function () { d.getElementById("s2num").textContent = Math.round(pct2.v) + "%"; }
+  }, B[1]);
+  tl.fromTo("#s2lbl", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, B[1] + 0.1);
+  tl.fromTo("#s2sub", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, B[1] + 0.3);
+
+  var cellEls = cells.children;
+  for (var i = 0; i < 29; i++) {
+    (function (el, idx) {
+      var fill = el.querySelector(".fill");
+      var cap = el.querySelector(".cap");
+      var startAt = B[1] + 0.05 + idx * 0.055;
+      var hpx = CH * (0.55 + 0.45 * ((idx * 37) % 11) / 11);
+      tl.fromTo(fill, { scaleY: 0.001, transformOrigin: "50% 100%" },
+        { scaleY: hpx / CH, duration: 0.34, ease: "power3.out" }, startAt);
+      tl.fromTo(cap, { y: 0 }, { y: -hpx, duration: 0.34, ease: "power3.out" }, startAt);
+    })(cellEls[i], i);
+  }
+  var lads = ladder.children;
+  for (var i = 0; i < lads.length; i++) {
+    tl.to(lads[i], { width: 88, duration: 0.22, ease: "power4.out" }, B[1] + 0.02 + i * 0.03);
+  }
+
+  /* ============================================================== SCENE 3 · GAP */
+  tl.fromTo("#s3bar1", { height: 0 }, { height: 560, duration: B[3] - B[2] - 0.1, ease: "power3.out" }, B[2]);
+  tl.fromTo("#s3bar2", { height: 0 }, { height: 16, duration: 0.5, ease: "power3.out" }, B[2]);
+  tl.fromTo("#s3base", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power4.out", transformOrigin: "left center" }, B[2]);
+  tl.fromTo("#s3glow", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1.15, duration: 1.6, ease: "power2.out" }, B[2]);
+  ["#s3v1", "#s3l1", "#s3s1", "#s3v2", "#s3s2"].forEach(function (sel, i) {
+    tl.fromTo(sel, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.35, ease: "expo.out" }, B[2] + 0.18 + i * 0.07);
+  });
+  // inverse zoom-through ARRIVAL: arrives oversized (1.25) and retracts into the plane
+  tl.fromTo("#s3x", { scale: 1.25, opacity: 0.15 },
+    { scale: 1.0, opacity: 1, duration: 0.5, ease: "expo.out" }, B[2] + 0.05);
+  tl.to("#s3x", { scale: 1.035, duration: B[3] - B[2] - 0.55, ease: "none" }, B[2] + 0.55);
+  tl.fromTo("#s3line", { width: 0 }, { width: 380, duration: 0.6, ease: "power3.out" }, B[2] + 0.3);
+
+  /* ============================================================== SCENE 4 · TOP FIVE */
+  tl.fromTo("#s4kick", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, B[3] + 0.02);
+  var rowEls = rowsEl.children;
+  var g4 = 0.125, at4 = B[3] + 0.05;
+  for (var i = 0; i < rowEls.length; i++) {
+    tl.fromTo(rowEls[i], { opacity: 0, x: -150 }, { opacity: 1, x: 0, duration: 0.28, ease: "expo.out" }, at4);
+    at4 += g4; g4 *= 0.84;
+  }
+  var tally = { v: 0 };
+  tl.to(tally, {
+    v: 3, duration: 0.9, ease: "power3.out",
+    onUpdate: function () { d.getElementById("s4tally").textContent = Math.round(tally.v) + "/5"; }
+  }, B[3] + 0.4);
+  tl.fromTo("#s4verdict", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, B[3] + 3.2);
+  tl.fromTo("#s4ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, B[3] + 3.3);
+
+  /* ============================================================== SCENE 5 · SWAP */
+  var spEls = spokes.children;
+  for (var i = 0; i < spEls.length; i += 2) {
+    var st = B[4] + (i / 2) * 0.012;
+    tl.fromTo(spEls[i], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, st);
+    tl.fromTo(spEls[i + 1], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, st);
+  }
+  tl.fromTo("#hubglow", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1.1, duration: 1.0, ease: "power2.out" }, B[4]);
+  tl.fromTo("#hub", { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(1.55)" }, B[4] + 0.1);
+
+  // state A: SATURATED struck out, then shaken out of the frame
+  tl.fromTo("#s5a", { opacity: 1, x: 0 }, { opacity: 1, duration: 0.01 }, B[4]);
+  tl.fromTo("#s5strike", { width: 0 }, { width: 930, duration: 0.26, ease: "power4.out" }, B[4] + 0.85);
+  tl.to("#s5a", { x: 14, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, B[4] + 1.15);
+  tl.to("#s5a", { opacity: 0, x: -60, duration: 0.22, ease: "power2.in" }, B[4] + 1.45);
+
+  // state B: CONCENTRATED — inverse-zoom arrival, then a slow push
+  tl.fromTo("#s5b", { opacity: 0.12, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, B[4] + 1.7);
+  tl.to("#s5b", { scale: 1.03, duration: 2.2, ease: "none" }, B[4] + 2.2);
+
+  var pf = d.getElementById("s5proof").children;
+  var g5 = 0.09, at5 = B[4] + 2.3;
+  for (var i = 0; i < pf.length; i++) {
+    tl.fromTo(pf[i], { opacity: 0, x: -26 }, { opacity: 1, x: 0, duration: 0.3, ease: "power4.out" }, at5);
+    at5 += g5; g5 *= 0.84;
+  }
+  tl.fromTo("#b1", { width: 0 }, { width: 620, duration: 0.6, ease: "power3.out" }, B[4] + 2.9);
+  tl.fromTo("#b2", { width: 0 }, { width: 22, duration: 0.5, ease: "power3.out" }, B[4] + 3.1);
+
+  /* ============================================================== SCENE 6 · 11/100 */
+  var sqCount = { v: 0 };
+  tl.to(sqCount, {
+    v: 11, duration: 2.2, ease: "power4.out",
+    onUpdate: function () {
+      var n = Math.round(sqCount.v);
+      for (var i = 0; i < 100; i++) SQS[i].className = "sq" + (i < n ? " on" : "");
+    }
+  }, B[5] + 0.05);
+  // the scan column never stops
+  tl.fromTo("#scan", { x: 200 }, { x: 1330, duration: 2.4, ease: "none", repeat: 2 }, B[5]);
+  tl.fromTo("#s6num", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, B[5] + 1.4);
+  tl.fromTo("#s6lbl", { opacity: 0, x: -26 }, { opacity: 1, x: 0, duration: 0.4, ease: "power4.out" }, B[5] + 1.55);
+  tl.fromTo("#s6sub", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, B[5] + 1.75);
+
+  /* ============================================================== SCENE 7 · END */
+  // stillness before the climax: nothing but the reticle opening for the first 0.45 s
+  tl.fromTo("#reticle", { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" }, B[6] + 0.05);
+  tl.fromTo("#e1", { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 0.28, ease: "expo.out" }, B[6] + 1.15);
+  tl.fromTo("#e2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.28, ease: "expo.out" }, B[6] + 1.85);
+  tl.fromTo("#eul", { width: 0 }, { width: 800, duration: 0.5, ease: "power3.out" }, B[6] + 1.95);
+
+  /* ============================================================== INSERTS */
+  function insert(sel, raysSel, start) {
+    var DUR = 0.95;
+    tl.set(sel, { opacity: 0 }, 0);
+    // the insert takes the frame with the same vector law: in from the right, out to the left
+    tl.set(sel, { opacity: 0.35, x: 230, filter: "blur(10px)", scale: 1 }, start - CUT);
+    tl.to(sel, { opacity: 1, x: 0, filter: "blur(0px)", duration: CUT, ease: "power4.out" }, start - CUT);
+    tl.set(sel, { opacity: 1, x: 0 }, start);
+    tl.to(sel, { scale: 1.05, duration: DUR, ease: "none" }, start);
+    var rays = d.querySelectorAll(raysSel + " .ray");
+    for (var i = 0; i < rays.length; i++) {
+      tl.fromTo(rays[i], { opacity: 0, scaleX: 0.2 },
+        { opacity: 0.55, scaleX: 1, duration: 0.30, ease: "power3.out" }, start + i * 0.003);
+      tl.to(rays[i], { opacity: 0, duration: 0.5, ease: "power2.in" }, start + 0.35);
+    }
+    tl.to(sel, { opacity: 0, x: -230, filter: "blur(10px)", duration: CUT, ease: "power4.in" }, start + DUR);
+    tl.set(sel, { opacity: 0 }, start + DUR + CUT);
+  }
+  insert("#ins1", "#ins1rays", 14.30);
+  insert("#ins2", "#ins2rays", 28.60);
+
+  /* ============================================================== hand the timeline to the renderer */
+  d.getElementById("s1num").textContent = "0%";
+  d.getElementById("s2num").textContent = "0%";
+  tl.time(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+
+  // the renderer may also drive time directly; keep it honest if it does
+  window.__duration = TOTAL;
+  window.__fps = FPS;
+
+  // fonts must be ready before the first frame is captured
+  if (d.fonts && d.fonts.ready) {
+    d.fonts.ready.then(function () { document.documentElement.setAttribute("data-fonts", "ready"); });
+  }
+})();
+</script>
+</body>
+</html>

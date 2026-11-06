@@ -353,6 +353,11 @@ def cmd_style(args):
         return
     print(f"\nPRODUCTION STYLE · {res['path']}  ({res['duration_s']}s)")
     print(f"  cuts            {res['cuts']}  ({res['cuts_per_minute']}/min)")
+    agr = res.get("cut_agreement") or {}
+    if agr.get("second_only") or agr.get("primary_only"):
+        print(f"  second opinion  {res.get('adaptive_cuts')} cuts — {agr.get('verdict')}")
+    if res.get("detector_note"):
+        print(f"  note            {res['detector_note']}")
     print(f"  hook cuts 0-3s  {res['hook_cuts_first_3s']}")
     print(f"  shot length     median {res['shot_median_s']}s · p10 {res['shot_p10_s']} · p90 {res['shot_p90_s']} · longest {res['longest_shot_s']}")
     print(f"  motion          mean {res['motion_mean']} · peak {res['motion_peak']} · quiet {res['motion_quiet_share']:.0%}")

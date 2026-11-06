@@ -67,13 +67,68 @@ def duration(path: str) -> float:
     return 0.0
 
 
-# Calibrated against synthetic films with a known shot list (`python -m yt_intel.calibrate_style`):
-#   0.22  under-counted: 6/7 cuts on a hard-cut film, 15/19 on a fast-cut film
-#   0.14  exact on all four cases (0, 3, 7 and 19 cuts)
-# The old value was tuned on one 36 s film and silently hid a third of the cuts in anything
-# fast-paced — the error ran in the direction that flatters a slow edit, which is the worst
-# direction for a tool used to judge pacing.
-CUT_THRESHOLD = 0.14
+# Threshold history, in the order the evidence arrived — this is the useful part:
+#
+#   0.22  shipped for months. Tuned on one 36 s film. On synthetic hard-cut fixtures it found
+#         6 of 7 and 15 of 19 cuts.
+#   0.14  what synthetic fixtures said was exact (4/4 cases).
+#   0.14  what real graded footage said was still broken: on six real segments of our own
+#         master, concatenated with five known hard cuts, it found 4 of 5.
+#   0.10  finds 5 of 5 on the same fixture with 2 false positives; 0.22 found 0 of 5.
+#
+# The synthetic answer (0.14) was closer to the truth than 0.22 and still wrong, because
+# solid-colour shots are the easiest case that exists. Graded footage is the case that matters.
+#
+# The deeper finding: on this film a real cut can have a *lower* frame delta (0.074) than a
+# whip-pan or a flash that is not a cut (peak 0.406). No single absolute threshold separates
+# them, so the number below is a best-effort line and `adaptive_cuts` reports a second opinion
+# beside it. Two detectors that disagree is information; one detector is a guess with a decimal.
+CUT_THRESHOLD = 0.10
+
+
+def adaptive_cuts(times: list[float], diffs, k: float = 3.0, window: int = 6,
+                  floor: float = 0.035) -> list[float]:
+    """Cuts as local spikes rather than absolute values.
+
+    A hard cut is a discontinuity *for that part of that film*: a quiet conversation edited at
+    0.05 and an action sequence edited at 0.15 both cut, and neither is the other's threshold.
+    This walks the delta series, compares each frame to the median of its neighbourhood, and
+    keeps peaks that clear both that neighbourhood and an absolute floor.
+
+    It is not the primary detector — on our own graded fixture it found 4 of 5 known cuts while
+    a flat 0.10 found 5 of 5. It is here as a second opinion so that a video where the two
+    methods disagree loudly is visibly uncertain instead of confidently wrong.
+    """
+    import numpy as _np
+    d = _np.asarray(diffs, dtype=float)
+    n = len(d)
+    if n == 0:
+        return []
+    out = []
+    for i in range(n):
+        lo, hi = max(0, i - window), min(n, i + window + 1)
+        local = float(_np.median(d[lo:hi])) + 1e-4
+        if d[i] < max(floor, k * local):
+            continue
+        if i > 0 and d[i] < d[i - 1]:
+            continue
+        if i < n - 1 and d[i] < d[i + 1]:
+            continue
+        out.append(times[i])
+    return out
+
+
+def _agreement(primary: list[float], second: list[float], tol: float = 0.35) -> dict:
+    """How much the two detectors agree. Shown, never used to silently pick a winner."""
+    matched = sum(1 for a in primary if any(abs(a - b) <= tol for b in second))
+    return {
+        "matched": matched,
+        "primary_only": len(primary) - matched,
+        "second_only": len(second) - matched,
+        "verdict": ("both methods agree" if matched and len(primary) - matched <= 1 and len(second) - matched <= 1
+                    else "the two methods disagree — treat cuts_per_minute as a range, not a number"
+                    if primary or second else "neither method found a cut"),
+    }
 
 
 def analyse(path: str, fps: float = 4.0, cut_threshold: float | None = None) -> dict:
@@ -111,6 +166,10 @@ def analyse(path: str, fps: float = 4.0, cut_threshold: float | None = None) -> 
     diffs_a = np.array(diffs)
     cuts = np.where(diffs_a >= cut_threshold)[0]
     cut_times = [times[i] for i in cuts]
+    # Second opinion, reported not merged: a cut is also plausibly a spike against its own
+    # neighbourhood. When the two disagree by a wide margin the honest output is the
+    # disagreement, because on graded footage neither method is reliably right on its own.
+    adaptive = adaptive_cuts(times, diffs_a)
     shot_bounds = [0.0] + cut_times + [duration(path) or times[-1]]
     lengths = [round(b - a, 2) for a, b in zip(shot_bounds, shot_bounds[1:]) if b - a > 0.05]
     dur = duration(path) or times[-1]
@@ -122,6 +181,8 @@ def analyse(path: str, fps: float = 4.0, cut_threshold: float | None = None) -> 
         "cuts": len(cut_times),
         "cuts_per_minute": round(len(cut_times) / (dur / 60), 2) if dur else None,
         "hook_cuts_first_3s": len(first3),
+        "adaptive_cuts": len(adaptive),
+        "cut_agreement": _agreement(cut_times, adaptive),
         "shot_median_s": round(float(np.median(lengths)), 2) if lengths else None,
         "shot_p10_s": round(float(np.percentile(lengths, 10)), 2) if lengths else None,
         "shot_p90_s": round(float(np.percentile(lengths, 90)), 2) if lengths else None,
@@ -133,8 +194,33 @@ def analyse(path: str, fps: float = 4.0, cut_threshold: float | None = None) -> 
         "contrast_mean": round(float(np.mean(contrast)), 3),
         "overlay_density_mean": round(float(np.mean(lower_edges)), 4),
         "overlay_density_peak": round(float(np.max(lower_edges)), 4),
-        "pacing_verdict": _pacing(len(cut_times), dur),
+        "pacing_verdict": _pacing(_effective_cuts(cut_times, adaptive), dur),
+        "detector_note": _detector_note(cut_times, adaptive, float((diffs_a < 0.05).mean())),
     }
+
+
+def _effective_cuts(primary: list[float], adaptive: list[float]) -> int:
+    """Which count to read pacing from.
+
+    On a film that is mostly a static frame with changing type — motion graphics, UI capture,
+    most of our own proof films — the primary detector sees almost nothing: the pixels that
+    change are a few percent of the frame, so the mean delta never clears the threshold. Our
+    own 30 s demo scores 0 cuts on the primary and 6 on the adaptive, and the video has six
+    hard scene changes. Reading pacing from the primary there produces "slow — only survives on
+    authority", which is the opposite of what the film does.
+
+    So: when the primary finds nothing at all and the second opinion finds cuts, pacing is read
+    from the second opinion and `detector_note` says why.
+    """
+    return len(adaptive) if (not primary and adaptive) else len(primary)
+
+
+def _detector_note(primary: list[float], adaptive: list[float], quiet_share: float) -> str | None:
+    if not primary and adaptive:
+        return (f"the primary detector saw no cuts on a {quiet_share:.0%}-quiet film; "
+                f"{len(adaptive)} from the adaptive one — static frames with changing type are "
+                f"nearly invisible to a whole-frame difference")
+    return None
 
 
 def _pacing(cuts: int, dur: float) -> str:

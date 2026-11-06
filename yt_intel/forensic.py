@@ -76,17 +76,38 @@ def parse_age_days(published: str) -> float | None:
         m = pat.match(published)
         if m:
             return round(int(m.group(1)) * mult, 2)
-    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", published)
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}))?", published)
     if m:
         import datetime as dt
-        then = dt.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
-        return round((dt.date.today() - then).days, 2)
+        year, month, day = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        hour = int(m.group(4) or 0)
+        minute = int(m.group(5) or 0)
+        then = dt.datetime(year, month, day, hour, minute, tzinfo=dt.timezone.utc)
+        delta = dt.datetime.now(dt.timezone.utc) - then
+        age = max(0.0, delta.total_seconds() / 86400)
+        # Sub-day ages used to be truncated to date-days, which made every video published
+        # today exactly 0 days old. `vph` refuses a zero age, so the entire views/hour column
+        # came back None on `--order date` runs — the one search order whose whole point is
+        # velocity. Keep two decimals: an 8-hour-old video is 0.33 days, not zero.
+        return round(age, 2)
     return None
 
 
+# A video two hours old with 800 views "does" 400 views/hour and means nothing: the first
+# hours of a publish are a spike, not a rate. `--order date` returns almost nothing else, so
+# without this floor every fresh-wave sample reads as explosive velocity.
+MIN_VPH_AGE_HOURS = 6
+
+
 def vph(views: int | None, age_days: float | None) -> float | None:
-    """Views per hour since publish. The only fair cross-video speed metric."""
+    """Views per hour since publish. The only fair cross-video speed metric.
+
+    Returns None under `MIN_VPH_AGE_HOURS`: too early to be a rate. The raw age and view count
+    are still on the row, so a young video is visible without being scored.
+    """
     if views is None or not age_days or age_days <= 0:
+        return None
+    if age_days * 24 < MIN_VPH_AGE_HOURS:
         return None
     return round(views / (age_days * 24), 2)
 
@@ -289,18 +310,22 @@ def saturation(rows: list[dict]) -> dict:
     ages = [a for a in (r.get("age_days") for r in data) if a]
     fresh = sum(1 for a in ages if a <= 30) / len(ages) if ages else None
     share = round(top3 / total, 3) if total else None
+    ages_all = [a for a in (r.get("age_days") for r in data) if a is not None]
+    median_age = round(float(sorted(ages_all)[len(ages_all) // 2]), 2) if ages_all else None
     return {
         "status": "ok", "videos": n,
+        "median_age_days": median_age,
         "total_views": total,
         "median_views": views[n // 2],
         "top3_share": share,
         "winner_ratio": round(views[0] / max(1, views[n // 2]), 1),
         "fresh_share_30d": round(fresh, 2) if fresh is not None else None,
-        "reading": _concentration_reading(share, views[n // 2], fresh),
+        "reading": _concentration_reading(share, views[n // 2], fresh, median_age),
     }
 
 
-def _concentration_reading(share: float | None, median_views: int, fresh: float | None) -> str:
+def _concentration_reading(share: float | None, median_views: int, fresh: float | None,
+                           median_age: float | None = None) -> str:
     """Turn a top-3 share into a sentence that is still true of the *sample*.
 
     The bug this replaces: a `thisMonth` sample is by construction 100% fresh, so its videos
@@ -314,7 +339,8 @@ def _concentration_reading(share: float | None, median_views: int, fresh: float 
     """
     if share is None:
         return ""
-    young = fresh is not None and fresh >= 0.9
+    # age first: it is the direct measurement; freshness is the same fact rounded to a month
+    young = (median_age is not None and median_age < 14) or (fresh is not None and fresh >= 0.9)
     if young:
         return ("too young to judge — this sample is almost entirely under 30 days old, so the "
                 "view counts are a stopwatch, not a verdict; ask again when it has run")

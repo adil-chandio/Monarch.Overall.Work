@@ -1,0 +1,92 @@
+{
+  "mean_luma": 67.2,
+  "video": "v4-silent.mp4",
+  "duration": 23.37,
+  "fps": 30.0,
+  "frames": 701,
+  "expected_frames": 701,
+  "scene_signatures": {
+    "s1": [
+      199.3,
+      201.2,
+      198.0
+    ],
+    "s2": [
+      18.3,
+      21.0,
+      14.8
+    ],
+    "s3": [
+      108.0,
+      157.6,
+      35.6
+    ],
+    "s4": [
+      111.3,
+      135.4,
+      63.6
+    ],
+    "s5": [
+      143.3,
+      141.2,
+      138.9
+    ],
+    "s6": [
+      103.4,
+      44.1,
+      34.1
+    ],
+    "s7": [
+      25.1,
+      14.8,
+      5.4
+    ],
+    "s8": [
+      186.4,
+      184.7,
+      181.9
+    ],
+    "s9": [
+      18.3,
+      21.1,
+      14.8
+    ],
+    "s10": [
+      51.0,
+      59.5,
+      44.3
+    ],
+    "s15": [
+      67.6,
+      133.3,
+      84.5
+    ],
+    "s12": [
+      130.7,
+      137.6,
+      141.0
+    ],
+    "s13": [
+      146.9,
+      143.0,
+      143.5
+    ],
+    "s14": [
+      59.2,
+      32.7,
+      22.7
+    ]
+  },
+  "mismatched_frames": 19,
+  "problems": [
+    "14.90s shows s6 (dist 72) instead of s14 (dist 115)",
+    "14.93s shows s6 (dist 72) instead of s14 (dist 115)",
+    "14.97s shows s6 (dist 72) instead of s14 (dist 115)",
+    "15.00s shows s6 (dist 72) instead of s14 (dist 115)",
+    "15.03s shows s6 (dist 72) instead of s14 (dist 115)",
+    "15.07s shows s6 (dist 72) instead of s14 (dist 115)",
+    "15.10s shows s6 (dist 72) instead of s14 (dist 115)",
+    "15.13s shows s6 (dist 72) instead of s14 (dist 115)",
+    "...and 11 more frames show the wrong plate"
+  ]
+}

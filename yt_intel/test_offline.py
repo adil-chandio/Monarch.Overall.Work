@@ -39,6 +39,27 @@ def t_lockup_states():
     ok("'Streamed 2 years ago' still yields an age", forensic.parse_age_days(r["published"]) == 730)
 
 
+def t_age_subday():
+    """Age must not be truncated to whole date-days.
+
+    Regression with a cost: a video published at 19:28 today parsed as exactly 0 days old, and
+    `vph` treats 0 as "no age" and returns None — so every `--order date` run produced a full
+    sample with the entire views/hour column blank. That order exists to measure velocity.
+    """
+    from . import forensic
+    import datetime as dt
+    now = dt.datetime.now(dt.timezone.utc)
+    two_h = (now - dt.timedelta(hours=2)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    age = forensic.parse_age_days(two_h)
+    ok("a two-hour-old video is not zero days old", age is not None and 0 < age < 0.2, age)
+    ok("a sub-day age is still refused by vph as a rate", forensic.vph(800, age) is None)
+    eight_h = (now - dt.timedelta(hours=8)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    a8 = forensic.parse_age_days(eight_h)
+    ok("eight hours is old enough to be a rate", forensic.vph(800, a8) is not None)
+    ok("vph floor is not silently zero", forensic.MIN_VPH_AGE_HOURS == 6)
+    ok("plain ISO date still parses", forensic.parse_age_days("2026-01-01") is not None)
+
+
 def t_age_vph():
     ok("3 weeks ago", forensic.parse_age_days("3 weeks ago") == 21)
     ok("8d ago (web lane)", forensic.parse_age_days("8d ago") == 8)
@@ -49,6 +70,26 @@ def t_age_vph():
     ok("iso date", forensic.parse_age_days("2026-11-01") is not None)
     ok("vph", forensic.vph(1000, 10) == round(1000 / 240, 2))
     ok("vph needs age", forensic.vph(1000, None) is None)
+
+
+def t_static_frame_pacing():
+    """A quiet film with changing type is not a slow film.
+
+    Regression: our own 30 s demo scored 0 cuts / "slow — only survives on authority" on the
+    primary detector, while the adaptive one found 6 — the video has six hard scene changes.
+    Every scene shares the same dark background and the text that changes is a few percent of
+    the frame, so a whole-frame mean delta never fires. Most of our proof films are built that
+    way.
+    """
+    from . import style
+    ok("no primary cuts falls back to the second opinion",
+       style._effective_cuts([], [1.0, 2.0, 3.0]) == 3)
+    ok("primary wins when it found anything",
+       style._effective_cuts([1.0, 2.0], [1.0, 2.0, 3.0, 4.0]) == 2)
+    ok("a genuinely static film stays at zero", style._effective_cuts([], []) == 0)
+    note = style._detector_note([], [1.0, 2.0], 0.97)
+    ok("the fallback explains itself", note and "97%" in note and "adaptive" in note)
+    ok("no note when the primary saw cuts", style._detector_note([1.0], [1.0], 0.97) is None)
 
 
 def t_thumbprint_accent():
@@ -85,10 +126,22 @@ def t_hue_families_sum():
 
 
 def t_style_calibration():
-    """The shipped cut threshold must not be the one that under-counts by a third."""
+    """The shipped cut threshold must survive graded footage, not just synthetic fixtures.
+
+    History this encodes: 0.22 found 0 of 5 known cuts on real graded segments, 0.14 found 4 of
+    5, 0.10 finds 5 of 5. The synthetic sweep alone called 0.14 "exact" — which is why the
+    assertion is pinned to the graded answer and why the old value may never come back.
+    """
     from . import style
-    ok("threshold is the calibrated value, not the old 0.22", style.CUT_THRESHOLD <= 0.16)
-    ok("threshold still ignores noise-level motion", style.CUT_THRESHOLD >= 0.08)
+    ok("threshold is the graded-footage value", style.CUT_THRESHOLD <= 0.11)
+    ok("threshold is not tuned so low it fires on motion", style.CUT_THRESHOLD >= 0.08)
+    ok("the value that found 0 of 5 real cuts is gone", style.CUT_THRESHOLD < 0.22)
+
+    # agreement reporting must exist and must be able to say "they disagree"
+    agree = style._agreement([1.0, 2.0], [1.0, 3.0, 4.0, 5.0])
+    ok("agreement counts the match", agree["matched"] == 1)
+    ok("agreement says so when they disagree", "disagree" in agree["verdict"])
+    ok("agreement is silent-ish when they agree", "agree" in style._agreement([1.0], [1.05])["verdict"])
 
 
 def t_saturation():
@@ -158,7 +211,11 @@ def t_young_sample():
     young = {"status": "ok", "top3_share": 0.99, "fresh_share_30d": 1.0,
              "winner_ratio": 2595.0, "median_views": 16}
     mature = dict(young, median_views=113940, fresh_share_30d=0.18)
-    ok("young sample is not judged concentrated", decide.winnability(young) == 70.0)
+    # Was 70.0: "not concentrated" was being expressed as a *good* score with full confidence.
+    # Now it is a neutral placeholder that confidence refuses to credit — see
+    # t_young_sample_is_not_confident. The assertion moved deliberately, not to make a test pass.
+    ok("young sample is not judged concentrated", decide.winnability(young) == decide.YOUNG_SAMPLE_PLACEHOLDER)
+    ok("the placeholder is neutral rather than good", decide.YOUNG_SAMPLE_PLACEHOLDER == 50.0)
     ok("mature concentrated sample still scores low", decide.winnability(mature) < 40)
     r = decide.greenlight({"score": 57.8}, young, {"status": "ok", "share": {"number_in_title": 0.5}},
                           {"status": "ok", "strength": "firm"})
@@ -195,6 +252,40 @@ def t_decide_access():
                           access={"status": "rate_limited", "detail": "429"})
     ok("blocked -> RETRY, not NO", r["verdict"] == "RETRY")
     ok("RETRY names the fix", "API_KEY" in r["next_probe"])
+
+
+def t_young_sample_is_not_confident():
+    """A placeholder must not buy confidence.
+
+    Live case: a `--order date` sample (median 238 views, every row <12 h old) scored
+    SHARPEN 62.2 while the saturation reading on the same report said "too young to judge".
+    The verdict and the honest reading contradicted each other in the same card, because
+    winnability returned a fixed 70 and confidence charged it as a real measurement.
+    """
+    from . import decide
+    young = {"status": "ok", "median_views": 238, "fresh_share_30d": 1.0,
+             "top3_share": 0.505, "winner_ratio": 5, "median_age_days": 0.21}
+    settled = {"status": "ok", "median_views": 24000, "fresh_share_30d": 0.1,
+               "top3_share": 0.505, "winner_ratio": 5, "median_age_days": 420}
+    # the exact live sample: 30 rows, 0.10-0.46 days old, median 238 views. The old guard
+    # required median_views < 100, so 238 slipped through and this scored SHARPEN 62.3.
+    live = {"status": "ok", "median_views": 238, "fresh_share_30d": 1.0,
+            "top3_share": 0.505, "winner_ratio": 5, "median_age_days": 0.21}
+    ok("a young sample is recognised", decide.is_young_sample(young))
+    ok("a settled sample is not", not decide.is_young_sample(settled))
+    ok("young winnability is neutral, not a good score",
+       decide.winnability(young) == decide.YOUNG_SAMPLE_PLACEHOLDER == 50.0)
+    ok("a 238-view sample under 12 hours old is still young",
+       decide.is_young_sample(live) and decide.winnability(live) == 50.0)
+    # a placeholder must not be narrated as an observation about the market
+    r = decide.greenlight({"score": 57.8}, live, {"status": "ok", "share": {"number_in_title": 0.5}},
+                          {"status": "ok", "strength": "firm"})
+    ok("no ownership claim is made from a placeholder",
+       not any("already own this topic" in a for a in r["strongest_against"]))
+    ok("the reason says it could not be measured",
+       any("could not be measured" in f for f in r["strongest_for"]))
+    ok("the same shape scores differently when settled",
+       decide.winnability(settled) != decide.winnability(young))
 
 
 def t_decide_never_silent():
@@ -284,8 +375,8 @@ def t_ideas():
 
 if __name__ == "__main__":
     print("yt-intel offline tests")
-    for fn in [t_duration, t_lockup_states, t_age_vph, t_style_calibration, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
-               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_decide_never_silent, t_comment_noise_floor, t_comment_refusal_speaks, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
+    for fn in [t_duration, t_lockup_states, t_age_subday, t_age_vph, t_style_calibration, t_static_frame_pacing, t_thumbprint_accent, t_hue_families_sum, t_saturation, t_order_vocabulary, t_no_secret_escapes, t_young_sample, t_title_signal_refuses, t_title_signal_recovers,
+               t_funnel_gate, t_hook_parsing, t_demand_scoring, t_decide_access, t_young_sample_is_not_confident, t_decide_never_silent, t_comment_noise_floor, t_comment_refusal_speaks, t_go_needs_a_mechanism, t_comment_mining, t_reverse, t_ideas]:
         fn()
     print(f"\n{PASS} assertions passed")
     sys.exit(0)

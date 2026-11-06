@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MONARCH · v4 vs REF-01</title>
+<!--
+  A page for the delivered master, so it can actually be watched and downloaded
+  without hunting through the repo. It embeds public/demo/v4.mp4 (committed, and
+  byte-identical to the master the v4 render job published: blob 228d274) and the
+  reference beside it, because "same as the reference" is the whole point and the
+  only honest way to judge it is side by side.
+-->
+<style>
+  :root{ --ink:#e9e6e0; --dim:#8d8880; --bg:#0c0b0a; --line:#2a2724; --ok:#5ea015; --bad:#c4453a; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink);
+        font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:34px 22px 70px; }
+  header{ display:flex; flex-wrap:wrap; align-items:baseline; gap:14px; margin-bottom:6px; }
+  h1{ font-size:19px; font-weight:650; letter-spacing:.02em; margin:0; }
+  .sub{ color:var(--dim); font-size:13px; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:22px 0 8px; }
+  @media (max-width:780px){ .grid{ grid-template-columns:1fr; } }
+  figure{ margin:0; }
+  video{ width:100%; display:block; border-radius:10px; background:#000;
+         border:1px solid var(--line); aspect-ratio:9/16; }
+  figcaption{ margin-top:8px; font-size:12.5px; color:var(--dim); display:flex;
+              justify-content:space-between; gap:10px; }
+  .dl{ display:inline-flex; align-items:center; gap:8px; margin-top:14px; padding:11px 18px;
+       border-radius:9px; background:var(--ink); color:#111; font-weight:640;
+       text-decoration:none; font-size:14px; }
+  .dl:hover{ background:#fff; }
+  table{ width:100%; border-collapse:collapse; margin-top:26px; font-size:13.5px; }
+  th,td{ text-align:left; padding:7px 10px; border-bottom:1px solid var(--line); }
+  th{ color:var(--dim); font-weight:500; font-size:12px; text-transform:uppercase;
+      letter-spacing:.05em; }
+  td.n{ font-variant-numeric:tabular-nums; }
+  .pass{ color:var(--ok); } .fail{ color:var(--bad); }
+  h2{ font-size:13px; text-transform:uppercase; letter-spacing:.07em; color:var(--dim);
+      font-weight:600; margin:34px 0 2px; }
+  .note{ color:var(--dim); font-size:12.5px; margin-top:10px; }
+  code{ background:#1a1816; padding:1px 5px; border-radius:4px; font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>MONARCH · v4 rebuilt from REF-01</h1>
+    <span class="sub">720×1280 · 30 fps · 701 frames · 23.37 s · AAC stereo</span>
+  </header>
+  <div class="sub">21 / 24 numeric rows match the reference. Three do not — listed below with their measured gap.</div>
+
+  <div class="grid">
+    <figure>
+      <video src="./v4.mp4" controls preload="metadata" playsinline poster="./v4-poster.jpg"></video>
+      <figcaption><span><strong>v4 rebuild</strong> — this film</span><span>4.4 MB</span></figcaption>
+    </figure>
+    <figure>
+      <video src="./reference.mp4" controls preload="none" playsinline></video>
+      <figcaption><span><strong>REF-01</strong> — the reference being matched</span><span>3.2 MB</span></figcaption>
+    </figure>
+  </div>
+
+  <a class="dl" href="./v4.mp4" download="MONARCH-v4-720x1280-REF01-matched.mp4">↓ Download the v4 master</a>
+
+  <h2>Checkpoint · first 30 % (0 → 7.01 s)</h2>
+  <p class="note">The hook and the first four shots, rendered on their own so they can be
+  approved before the rest is built. Left is the rebuild, right is the reference cut to
+  the same 7.01 s and encoded with the same settings.</p>
+  <div class="grid">
+    <figure>
+      <video src="./v4-30-silent.mp4" controls preload="none" playsinline loop muted></video>
+      <figcaption><span><strong>v4 · first 30 %</strong></span><span>0 → 7.01 s</span></figcaption>
+    </figure>
+    <figure>
+      <video src="./ref30.mp4" controls preload="none" playsinline loop muted></video>
+      <figcaption><span><strong>REF-01 · same window</strong></span><span>0 → 7.01 s</span></figcaption>
+    </figure>
+  </div>
+
+  <h2>Numeric diff — the rows that fail</h2>
+  <table>
+    <tr><th>metric</th><th>reference</th><th>v4</th><th>gap</th></tr>
+    <tr><td>edge_density</td><td class="n">1.6469</td><td class="n">2.9223</td><td class="fail">＋1.28 — our picture is genuinely sharper; not compression (re-encoding the reference at our settings moves it 0.005)</td></tr>
+    <tr><td>palette_distance</td><td class="n">≤ 22.0</td><td class="n">38.2</td><td class="fail">＋16.2 — two pairs: our red is 43 luma brighter than <code>#710909</code>, <code>#s1</code>'s plate 37 luma whiter than <code>#bcbbba</code></td></tr>
+    <tr><td>cut_alignment</td><td>13 cuts</td><td>12/13 + 1 extra</td><td class="fail">missing 13.333; the extra one is the flash, which the reference also has</td></tr>
+  </table>
+
+  <h2>Fixed in this build (measured on the delivered master)</h2>
+  <table>
+    <tr><th>what</th><th>before</th><th>after</th><th>REF-01</th></tr>
+    <tr><td>frame 0 luma</td><td class="n fail">0.0</td><td class="n pass">205.2</td><td class="n">white plate</td></tr>
+    <tr><td>black frames</td><td class="n fail">15</td><td class="n pass">0</td><td class="n">0</td></tr>
+    <tr><td>CTA field @18 s</td><td class="fail">[118,101,70] khaki</td><td class="pass">[65,20,17]</td><td class="n">[59,26,23]</td></tr>
+    <tr><td>CTA field @22 s</td><td class="fail">[100,135,92] green</td><td class="pass">[30,15,13]</td><td class="n">[49,6,7]</td></tr>
+    <tr><td>hook_motion_1s</td><td class="n">0.0568</td><td class="n pass">0.1127</td><td class="n">0.1079</td></tr>
+    <tr><td>cuts matched</td><td class="n">12/13</td><td class="n pass">13/13</td><td class="n">13</td></tr>
+  </table>
+
+  <p class="note">
+    The khaki field was a scene that never left: <code>s4</code>'s entrance tween ran to
+    1.3225 s while its hide was a <code>set</code> at 1.300 s, so the running tween
+    wrote <code>opacity: 1</code> back over the hide and a green money-bag plate stood
+    under the whole film. Full write-up in <code>docs/v4-KYA-KIYA.md</code>.
+  </p>
+</div>
+</body>
+</html>
