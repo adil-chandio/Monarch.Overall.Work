@@ -1,0 +1,28 @@
+{
+  "score": {
+    "rms_dbfs": -36.16107177734375,
+    "peak_dbfs": -19.187776565551758
+  },
+  "foley": {
+    "rms_dbfs": -55.324378967285156,
+    "peak_dbfs": -28.482696533203125
+  },
+  "mix": {
+    "rms_dbfs": -20.91226577758789,
+    "peak_dbfs": -2.1367380619049072
+  },
+  "scope": "Local audio-only work check, NOT final encoded-film loudness or listening approval",
+  "ebu_premaster_test": {
+    "input_i": "-17.30",
+    "input_tp": "-2.09",
+    "input_lra": "3.20",
+    "input_thresh": "-27.74",
+    "output_i": "-16.11",
+    "output_tp": "-1.80",
+    "output_lra": "3.10",
+    "output_thresh": "-26.53",
+    "normalization_type": "dynamic",
+    "target_offset": "0.11"
+  },
+  "continuous_sequences": 18
+}

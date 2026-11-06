@@ -42,7 +42,7 @@ For an internal audio-only test, append `--audio-only` to `finish.py`. This does
 
 ## Durable download
 
-**Current verified state:** [full render run 42224196920](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42224196920) is running from source commit `aa33ec7`. All sixteen native frame-range jobs started and passed script/speech/coverage checks. The assembled full-length MP4 is **not yet available**. Do not treat the job link as a completed video download.
+**Subsequent verified status:** [run 42224196920](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42224196920) completed successfully and published the [full v3 candidate with QC](https://github.com/adil-chandio/Monarch.Overall.Work/releases/tag/extinct-life-v3-42224196920). The owner liked the overall film but requested substantially less repetition and smoother flow. The active correction is `../film-v4/`; this v3 film is historical, not that revised download. The original authoring manifest below is retained as a pre-render provenance record.
 
 `.github/workflows/extinct-film-v3.yml` renders sixteen non-overlapping native frame ranges, checks the coverage, assembles all eight chapters, normalizes audio and decodes every output frame. Only successful assembly produces the full MP4, subtitles and QC. The workflow then publishes an explicitly labelled **production-candidate prerelease** under tag `extinct-life-v3-RUN_ID`; it does not upload to YouTube. A queued/running workflow is **not** a finished downloadable movie.
 
