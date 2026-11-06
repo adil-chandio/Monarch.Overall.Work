@@ -1,4 +1,3 @@
 # Source-review trigger
 
-This marker is committed only to request one reproducible public-domain source-review run.
-Changing it again intentionally requests a fresh contact-sheet review; ordinary review commits do not retrigger the workflow.
+Second request: the first runner install step hit a bounded apt timeout; this marker requests a fresh source-review run with a longer step budget.

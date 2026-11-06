@@ -27,11 +27,12 @@ jobs:
           fetch-depth: 1
 
       - name: Install bounded media and review tools
-        timeout-minutes: 12
+        timeout-minutes: 18
         run: |
+          echo "ffmpeg path: $(command -v ffmpeg || true)"
           if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
             timeout 180 sudo apt-get update -qq || true
-            timeout 300 sudo apt-get install -y -qq ffmpeg
+            sudo apt-get install -y -qq ffmpeg
           fi
           ffmpeg -version | head -1
           timeout 600 python -m pip install --disable-pip-version-check -q \
