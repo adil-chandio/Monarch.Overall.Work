@@ -14,7 +14,7 @@
 
 `animals.mjs` / `sculpt.mjs` implement original illustrative articulated mastodon-lineage, reindeer, hare, rodent and goose stand-ins. Smooth-union implicit surfaces, moving knees, trunk, ears, antlers and feather wings are meshes, not panned animal pictures. They are stylized stand-ins, **not photoreal or anatomically authoritative recovered individuals**.
 
-`worlds.mjs` implements connected reconstructed habitat, polar-desert coast, shedding/river transport, sediment layers, conceptual mineral binding/fragments, pipette extraction, reference trays and evidence/pollen scenes. It uses original procedural geometry and the clay material assets already used in the approved proof. No proof footage is looped into the film. The original photographic clay assets remain in `../flow-proof/materials/`; their original provenance is retained with that production.
+`worlds.mjs` implements connected reconstructed habitat, polar-desert coast, shedding/river transport, sediment layers, conceptual mineral binding/fragments, pipette extraction, reference trays and evidence/pollen scenes. It uses original procedural geometry and the clay material assets already used in the approved proof. No proof footage is looped into the film. The original **AI-generated clay albedo** and its grayscale/autocontrast bump derivative remain in `../flow-proof/materials/`. The bump is not a measured physical height field; provenance is retained in `../flow-proof/README.md`.
 
 `scene.mjs` evaluates absolute frame time. Actor action continues across coverage cuts; seeking backwards does not accumulate transforms. Shot coverage uses a consistent side of the action. Scientific qualifications are visible in the picture. A reconstructed community is not a filmed co-occurrence; conceptual particles are not actual reads, a complete genome, or a calibrated molecular simulation.
 
@@ -22,7 +22,7 @@
 
 ## Quality status and limitations
 
-Internal native-frame checks found and corrected backwards animal framing, intersecting-ball torso silhouettes, flat marching-cube normals, floating background rocks, foreground macro occlusion, river grid-like highlights, resting T-pose wings and an unmotivated pipette motion. Representative chapter 1, 5 and 6 frames and deterministic A→B→A seeking have been exercised locally; audio-only assembly has also run successfully.
+Internal native-frame checks found and corrected backwards animal framing, intersecting-ball torso silhouettes, flat marching-cube normals, floating background rocks, foreground macro occlusion, river grid-like highlights, resting T-pose wings and an unmotivated pipette motion. All eight chapters passed native-frame generation and deterministic A→B→A seeking locally. Representative frames have been visually inspected, and short real native-motion ranges have encoded successfully. Audio-only assembly also ran successfully (premaster −17.32 LUFS / −2.65 dBTP; preliminary normalization output −16.10 LUFS / −1.80 dBTP). These are audio-only test results, not measurements of a completed movie.
 
 The animal/laboratory look remains visibly stylized. **Do not describe this candidate as photoreal, premium-quality approved, flawless, creatively validated, or already watched/listened through by a human.** Full-render completion is reported only by the actual successful render/assembly job and its generated `QC.json`. Until then, `manifest.json` truthfully remains render-pending / `full_film_complete: false`.
 
@@ -41,6 +41,8 @@ node production/extinct-life/film-v3/render.mjs --chapter=0
 For an internal audio-only test, append `--audio-only` to `finish.py`. This does **not** produce or certify a finished film. Scratch frames, browser bundles, temporary PCM, score stems and encodes live in ignored `.cache/extinct-v3/`.
 
 ## Durable download
+
+**Current verified state:** [full render run 42224196920](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42224196920) is running from source commit `aa33ec7`. All sixteen native frame-range jobs started and passed script/speech/coverage checks. The assembled full-length MP4 is **not yet available**. Do not treat the job link as a completed video download.
 
 `.github/workflows/extinct-film-v3.yml` renders sixteen non-overlapping native frame ranges, checks the coverage, assembles all eight chapters, normalizes audio and decodes every output frame. Only successful assembly produces the full MP4, subtitles and QC. The workflow then publishes an explicitly labelled **production-candidate prerelease** under tag `extinct-life-v3-RUN_ID`; it does not upload to YouTube. A queued/running workflow is **not** a finished downloadable movie.
 
