@@ -1,0 +1,18 @@
+{
+  "materials": [
+    {
+      "path": "materials/clay-albedo.jpg",
+      "sha256": "5a49a85b71154ab7588ffeb0b55662978e986e82a8f2dcd805582aa169f18d99",
+      "origin": "AI-generated clay/silt albedo texture, used only as a material on actual 3D meshes."
+    },
+    {
+      "path": "materials/clay-height.jpg",
+      "sha256": "6d5aebfff74d29342cb83351781f26129300a17c8597ce1f38c620096ec4598a",
+      "origin": "Pillow grayscale/autocontrast(cutoff=1) derivative of clay-albedo.jpg; not a measured height map."
+    }
+  ],
+  "geometry": "Original procedural Three.js meshes and original deterministic camera/action functions. No previous film footage.",
+  "spatial_accuracy": "Conceptual, uncalibrated magnification. Not molecular dynamics, measured microstructure or actual sample imagery.",
+  "speech": "Selected tool voice voice-01, Urdu; lossless voice.flac with PCM identity in voice-provenance.json.",
+  "sound": "Original deterministic synthesis in finish.py; contact texture is sonification, not an actual molecular recording."
+}
