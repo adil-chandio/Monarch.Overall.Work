@@ -22,7 +22,9 @@ import {
   Zap,
 } from 'lucide-react';
 import './b2b.css';
+import './cinematic.css';
 import { supabase } from './lib/supabase';
+import { CinematicOpen } from './CinematicOpen.jsx';
 
 const INTAKE_EDGE_URL = 'https://oeqeqlgatdlqbuywktnu.supabase.co/functions/v1/public-intake';
 const PORTFOLIO_URL = 'https://adil-chandio.github.io/portfolio/';
@@ -191,6 +193,7 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState(null);
+  const [introDone, setIntroDone] = useState(false);
 
   useEffect(() => {
     if (!supabase) return;
@@ -275,7 +278,8 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
 
   return (
     <div className="monarch-public-root">
-      <header className="m-nav">
+      {!introDone && <CinematicOpen onDone={() => setIntroDone(true)} />}
+      <header className="m-nav" data-build="nav">
         <div className="m-container m-nav-inner">
           <button type="button" className="m-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <span className="m-brand-mark">M</span>
@@ -309,7 +313,7 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
         {/* HERO */}
         <section className="m-hero">
           <div className="m-container">
-            <div className="m-kicker">
+            <div className="m-kicker" data-build="kicker">
               <Sparkles size={13} /> MONARCH® B2B CREATIVE ARCHITECTURE · GLOBAL & PAKISTAN
             </div>
 
@@ -319,7 +323,7 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 26 }}
               >
-                <h1>
+                <h1 data-build="headline">
                   Websites &amp; <span>Retention-Locked Films</span> Backed by Real Numbers.
                 </h1>
                 <p className="m-hero-lead">
@@ -329,7 +333,7 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
                   or Instant USDC.
                 </p>
 
-                <div className="m-hero-ctas">
+                <div className="m-hero-ctas" data-build="ctas">
                   <a href="#brief" className="m-btn m-btn-crimson">
                     Start Project Brief <ArrowRight size={15} />
                   </a>
@@ -356,6 +360,7 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
               {/* CLIENT PORTAL QUICK ACCESS */}
               <motion.aside
                 className="m-portal-box"
+                data-build="portal"
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 250, damping: 26, delay: 0.08 }}
@@ -397,6 +402,7 @@ export function MonarchPublicStudio({ onOpenPortal, onOpenWorkspace }) {
               const cur = SHOWCASE_TABS.find((t) => t.id === activeShowcase) || SHOWCASE_TABS[0];
               return (
                 <motion.div
+                  data-build="showcase"
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 240, damping: 28, delay: 0.14 }}

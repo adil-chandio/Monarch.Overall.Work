@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adil Chandio — AI Learner • Content Creator • Developer</title>
+<meta name="description" content="Portfolio of Adil Chandio — AI learner, content creator and developer. Reference-matched films, automation systems and original web work.">
+<meta property="og:title" content="Adil Chandio — Portfolio">
+<meta property="og:description" content="AI learner • content creator • developer. Opens with a 28-second portfolio film.">
+<meta property="og:image" content="assets/thumbs/th-power.jpg?v=64">
+<link rel="icon" type="image/png" href="assets/logo-64.png?v=14">
+<link rel="apple-touch-icon" href="assets/logo-180.png?v=14">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Adil Chandio — Portfolio">
+<meta name="twitter:description" content="AI learner • content creator • developer. Opens with a 28-second portfolio film.">
+<meta name="twitter:image" content="assets/thumbs/th-power.jpg">
+<link rel="preload" href="assets/fonts/Manrope-800.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/styles.css?v=37">
+<link rel="stylesheet" href="assets/compose.css?v=1">
+</head>
+<body class="locked">
+
+<div id="compose" class="compose" aria-label="Opening">
+  <canvas id="composeCanvas"></canvas>
+  <div class="compose-stage">
+    <div class="compose-layer compose-giant" data-layer="type">
+      <span class="fig-box" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <b>PORTFOLIO</b>
+    </div>
+    <div class="compose-layer compose-photo" data-layer="photo">
+      <span class="fig-box" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <img src="assets/portrait-masked.png" alt="">
+    </div>
+    <div class="compose-layer compose-hello" data-layer="name">
+      <span class="fig-box" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <em>Hello, I'm</em>
+      <strong>ADIL.</strong>
+      <small>EDITOR &amp; VFX · WEB SYSTEMS</small>
+    </div>
+  </div>
+  <div id="composeCursor" class="compose-cursor" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M4.2 3.4 12.8 24.2l2.5-8.4 8.5-1.6L4.2 3.4Z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    <span class="compose-ripple"></span>
+  </div>
+  <button type="button" id="composeSkip" class="compose-skip">SKIP ▸</button>
+</div>
+
+<div id="grain" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorRing" aria-hidden="true"><span id="cursorTag"></span></div>
+
+<!-- ── Intro curtains ─────────────────────────────────────────── -->
+<div id="gate" class="curtain" aria-label="Enter with sound">
+  <div class="gate-ring" aria-hidden="true"></div>
+  <img class="gate-face" src="assets/portrait-masked.png" alt="">
+  <p class="mono gate-kicker" data-scramble>PORTFOLIO FILM — 28 SEC • SOUND ON</p>
+  <h1 class="gate-name lines"><span class="ln"><i>ADIL</i></span><span class="ln"><i>CHANDIO</i></span></h1>
+  <button id="enterBtn" class="enter-btn magnet">▶&nbsp;&nbsp;ENTER WITH SOUND</button>
+  <p class="mono gate-note">headphones recommended</p>
+</div>
+
+<div id="splash" class="curtain hidden" aria-label="Portfolio film">
+  <div class="lb lb-t" aria-hidden="true"></div>
+  <video id="film" src="media/intro.mp4" playsinline preload="auto"></video>
+  <div class="lb lb-b" aria-hidden="true"></div>
+  <button id="skipBtn" class="skip-btn mono magnet">SKIP ▸</button>
+  <div class="splash-bar mono"><span>ADIL CHANDIO — PORTFOLIO FILM</span><span id="filmPct">0%</span></div>
+</div>
+
+
+<!-- ── Nav ────────────────────────────────────────────────────── -->
+<header class="nav" id="nav">
+  <a class="nav-name" href="#top"><img class="nav-logo" src="assets/logo-64.png" alt="">MONARCH<span class="red">®</span></a>
+  <nav class="nav-links mono">
+    <a href="#about">ABOUT</a><a href="#skills">SKILLS</a><a href="#work">WORK</a><a href="#contact">CONTACT</a>
+  </nav>
+  <div class="nav-act">
+    <button id="replayBtn" class="replay-btn mono magnet" title="Replay intro film">✦ <span class="rt">REPLAY INTRO</span></button>
+    <a class="hire-btn mono magnet" href="#contact">HIRE ME</a>
+  </div>
+</header>
+
+<nav class="dots" aria-label="Section navigation">
+  <a href="#top" data-lbl="TOP"></a>
+  <a href="#about" data-lbl="ABOUT"></a>
+  <a href="#skills" data-lbl="SKILLS"></a>
+  <a href="#work" data-lbl="FILMS"></a>
+  <a href="#proof" data-lbl="PROOF"></a>
+  <a href="#contact" data-lbl="CONTACT"></a>
+</nav>
+
+<main id="top">
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-stage">
+      <p class="mono hero-eye" data-rv="up" data-scramble>/ PORTFOLIO — EST. MARCH 2024 — <span id="clk">--:--:--</span> LOCAL — ©2026</p>
+      <div class="hero-wm" aria-hidden="true"><span class="wm-sub">EST. 2024 — MONARCH</span></div>
+      <div class="car-wrap">
+        <div class="hero-car">
+          <img src="assets/adil-m4-off.jpg?v=34" alt="" decoding="async">
+          <img class="car-on" src="assets/adil-m4.jpg?v=34" alt="" aria-hidden="true" decoding="async">
+          <span class="hl hl-l" aria-hidden="true"></span><span class="hl hl-r" aria-hidden="true"></span><span class="beam beam-l" aria-hidden="true"></span><span class="beam beam-r" aria-hidden="true"></span><span class="hl-gnd" aria-hidden="true"></span>
+          <span class="wm wm-l" aria-hidden="true">MON</span><span class="wm wm-r" aria-hidden="true">ARCH</span>
+        </div>
+        <p class="hero-lede-fly" data-rv="words">I’m Adil. I turn AI into films, films into channels, and channels into systems that run themselves. 21 years old, self-made, and still hungry.</p>
+      </div>
+      <p class="mono stage-tags" data-rv="up">AI • CONTENT • CODE • MOTION</p>
+    </div>
+    <h1 class="sr-name">Adil Chandio — AI learner, content creator, developer</h1>
+    <div class="hero-meta">
+      <span class="rv-wrap" data-rv="up"><a class="ghost-btn mono magnet" href="#work">SEE THE WORK ↓</a></span>
+    </div>
+    <div class="marquee" aria-hidden="true"><div class="marquee-track">
+      <span>AI LEARNER • CONTENT CREATOR • DEVELOPER •&nbsp;</span><span>AI LEARNER • CONTENT CREATOR • DEVELOPER •&nbsp;</span>
+    </div></div>
+    <i class="spark s1" aria-hidden="true"></i><i class="spark s2" aria-hidden="true"></i><i class="spark s3" aria-hidden="true"></i>
+    <span class="cue" aria-hidden="true"></span>
+  </section>
+
+  <!-- ── About ────────────────────────────────────────────────── -->
+  <section class="section" id="about">
+    <p class="sec-kick mono" data-rv="up">01 — WHO</p>
+    <h2 class="sec-title" data-rv="chars">Hey!</h2>
+    <div class="about-grid">
+      <p class="about-lede" data-rv="words">Hello, I’m Adil. I’m 21, and honestly nothing in my story started smooth. In March 2024 I put almost everything I had into a second-hand Dell for $400, and sat in front of it with one thought: let me try this properly, once, all the way. That laptop became my studio, my classroom, and my late night friend. I studied channels from abroad frame by frame, made videos, failed, made them again and the day two of them actually took off, and my channel monetized in three months, I cried a little. I won’t lie about it.</p>
+      <p class="about-body" data-rv="up">That Dell grew into my YouTube automation business — channels that plan, script and schedule themselves while I sleep. These days I’m deep in AI: learning new tools every day and folding them into my content — shorts, films, voice, motion. And I love creativity; it’s the whole reason I start.</p>
+      <blockquote class="quote urdu">
+        <p>Kabhi bhi kisi par had se <em>zyada</em> barosa mat karo. Kabhi bhi kisi se had se <em>zyada</em> pyar mat karo. Kabhi bhi kisi se had se <em>zyada</em> umeed mat lagao.</p>
+        <p class="mono q-gloss">NEVER TRUST TOO MUCH. NEVER LOVE TOO MUCH. NEVER EXPECT TOO MUCH. WHEREVER “TOO MUCH” SHOWS UP — VALUE STARTS TO FALL.</p>
+      </blockquote>
+      <ol class="timeline stagger">
+        <li data-rv="up"><b>2024</b><h4>THE $400 START</h4><p>March: a second-hand Dell for ~$400, a YouTube automation experiment, one foreign channel studied frame-by-frame. Two videos popped — channel monetized in three months.</p></li>
+        <li data-rv="up"><b>2025</b><h4>THE FALL &amp; THE LOOP</h4><p>First payout: $700. New money, old weakness — the discipline broke. Friends, films, wrong crowds, on-and-off work. A year looped, then bled into the next.</p></li>
+        <li data-rv="up"><b>2026</b><h4>THE REBUILD</h4><p>AI unlocked the fun again. And on Oct 31, 2026: no more distractions — discipline, consistency, mehnat. A community for the serious ones is coming. Setup first. Then chaos.</p></li>
+      </ol>
+      <img class="sig-img" src="assets/sig-adil.png?v=18" alt="Adil's signature" data-rv="up">
+      <p class="mono sig-cap">— ADIL, PROBABLY AT 3 AM</p>
+      <button class="letter-card" id="letterCard" data-rv="up" data-cursor="READ">
+        <span class="seal" aria-hidden="true">A</span>
+        <p class="mono lt-kick">A LETTER FROM ADIL — 31 OCT 2026</p>
+        <h3 class="lt-title">The Messy Middle.</h3>
+        <p class="lt-tease">I’m 21. A $400 Dell, a $700 payout, a broken discipline, and the night I decided to rebuild. It’s all true — read it once.</p>
+        <p class="mono lt-open">OPEN THE LETTER ↗</p>
+      </button>
+
+    </div>
+    <div class="marquee thin" aria-hidden="true"><div class="marquee-track">
+      <span>From a $400 Dell to a label of my own — discipline over mood, consistency over hype, mehnat over everything.&nbsp;</span><span>From a $400 Dell to a label of my own — discipline over mood, consistency over hype, mehnat over everything.&nbsp;</span>
+    </div></div>
+  </section>
+
+  <!-- ── Skills ───────────────────────────────────────────────── -->
+  <section class="section dark" id="skills">
+    <p class="sec-kick mono" data-rv="up">02 — STACK</p>
+    <h2 class="sec-title" data-rv="chars">What I actually do</h2>
+    <ul class="skill-grid stagger">
+      <li class="sk" data-rv="up"><span class="mono">01</span><h3>AI Learning</h3><p>I test new models and tools almost daily — and keep only what actually works.</p></li>
+      <li class="sk" data-rv="up"><span class="mono">02</span><h3>AI Content Creation</h3><p>From idea to final cut: script, frames, voice, edit.</p></li>
+      <li class="sk" data-rv="up"><span class="mono">03</span><h3>YouTube Automation</h3><p>Channels that plan, script and schedule themselves while I sleep.</p></li>
+      <li class="sk" data-rv="up"><span class="mono">04</span><h3>Workflow Automation</h3><p>Small agents and triggers that kill the repetitive work.</p></li>
+      <li class="sk" data-rv="up"><span class="mono">05</span><h3>Software Development</h3><p>Python and JS tools, web builds, code you can read at 3 AM.</p></li>
+      <li class="sk" data-rv="up"><span class="mono">06</span><h3>Monarch Agent Builds</h3><p>Custom agent stacks under my own label, Monarch.</p></li>
+      <li class="sk" data-rv="up"><span class="mono">07</span><h3>Creative Tools &amp; Systems</h3><p>Reusable rigs for mattes, frames and grades — build once, use forever.</p></li>
+      <li class="sk" data-rv="up"><span class="mono">08</span><h3>Motion &amp; Video Editing</h3><p>Cuts locked to the beat, composites, and a clean finish.</p></li>
+    </ul>
+  </section>
+
+  <div class="marquee tools" aria-hidden="true"><div class="marquee-track">
+    <span>CAPCUT • FFMPEG • PYTHON • JAVASCRIPT • DESIGN ARENA • YOUTUBE STUDIO • GIT • MONARCH AGENTS •&nbsp;</span><span>CAPCUT • FFMPEG • PYTHON • JAVASCRIPT • DESIGN ARENA • YOUTUBE STUDIO • GIT • MONARCH AGENTS •&nbsp;</span>
+  </div></div>
+
+  <!-- ── Films ───────────────────────────────────────────────── -->
+  <section class="section" id="work">
+    <p class="sec-kick mono" data-rv="up">03 — REEL</p>
+    <h2 class="sec-title" data-rv="chars">Films I made</h2>
+    <div class="work-grid stagger">
+      <button class="work-card" data-cursor="PLAY" data-rv="flip" data-tilt data-src="media/intro.mp4" data-title="Reference-Match Portfolio Film">
+        <figure><img decoding="async" src="assets/thumbs/th-film.jpg?v=65" alt="Portrait film thumbnail"><video class="trailer" muted loop playsinline preload="none"></video><span class="play mono">▶ 28S</span></figure>
+        <h3>Reference-Match Portfolio Film</h3>
+        <p class="mono"><i class="tag t-film">FILM</i> BEAT-LOCKED AUDIO • 2026</p>
+      </button>
+      <button class="work-card" data-cursor="PLAY" data-rv="flip" data-tilt data-src="media/paanch.web.mp4" data-title="Paanch Rules — Motivational Short">
+        <figure><img decoding="async" src="assets/thumbs/th-paanch.jpg?v=64" alt="Paanch Rules thumbnail"><video class="trailer" muted loop playsinline preload="none"></video><span class="play mono">▶ 75S</span></figure>
+        <h3>Paanch Rules</h3>
+        <p class="mono"><i class="tag t-short">SHORT</i> 583K+ VIEWS • URDU MOTION</p>
+      </button>
+      <button class="work-card" data-cursor="PLAY" data-rv="flip" data-tilt data-src="media/lawone.web.mp4" data-title="Monarch: Law One — Cinematic Law Story">
+        <figure><img decoding="async" src="assets/thumbs/th-lawone.jpg?v=64" alt="Law One thumbnail"><video class="trailer" muted loop playsinline preload="none"></video><span class="play mono">▶ 63S</span></figure>
+        <h3>Monarch: Law One</h3>
+        <p class="mono"><i class="tag t-mon">MONARCH</i> CINEMATIC LAW STORY</p>
+      </button>
+                        <button class="work-card" data-cursor="PLAY" data-rv="flip" data-tilt data-yt="hO9KS-lJmQM" data-title="Einstein Edit">
+        <figure><img decoding="async" src="assets/thumbs/th-einstein.jpg?v=64" loading="lazy" alt="Einstein Edit thumbnail"><span class="play mono">▶ SHORT</span></figure>
+        <h3>Einstein Edit</h3>
+        <p class="mono"><i class="tag t-short">EDIT</i> YT SHORTS • MOTION CUT</p>
+      </button>
+      <button class="work-card" data-cursor="PLAY" data-rv="flip" data-tilt data-yt="0irVNe1_XEY" data-title="Let's Play 1 Game">
+        <figure><img decoding="async" src="assets/thumbs/th-game.jpg?v=64" loading="lazy" alt="Let's Play 1 Game thumbnail"><span class="play mono">▶ SHORT</span></figure>
+        <h3>Let's Play 1 Game</h3>
+        <p class="mono"><i class="tag t-pro">GAME</i> YT SHORTS • COMMENTARY</p>
+      </button>
+<button class="work-card" data-cursor="PLAY" data-rv="flip" data-tilt data-src="media/process.web.mp4" data-title="Inside the Pipeline — AI Co-Production BTS">
+        <figure><img decoding="async" src="assets/thumbs/th-process.jpg?v=64" alt="Inside the Pipeline thumbnail"><video class="trailer" muted loop playsinline preload="none"></video><span class="play mono">▶ BTS</span></figure>
+        <h3>Inside the Pipeline</h3>
+        <p class="mono"><i class="tag t-pro">PROCESS</i> AI CO-PRODUCTION BTS</p>
+      </button>
+      <button class="work-card wide" data-cursor="PLAY" data-rv="flip" data-tilt data-yt="Y-1FLdv_aD8" data-wide="1" data-title="Powerful Personality">
+        <figure><img decoding="async" src="assets/thumbs/th-power.jpg?v=64" loading="lazy" alt="Powerful Personality thumbnail"><span class="play mono">▶ 44S • 16:9</span></figure>
+        <h3>Powerful Personality</h3>
+        <p class="mono"><i class="tag t-film">FILM</i> WIDESCREEN 16:9 • YOUTUBE</p>
+      </button>
+    </div>
+    <div class="work-plank" aria-hidden="true"><i></i></div>
+    <p class="mono work-more" data-rv="up"><a href="https://github.com/adil-chandio" target="_blank" rel="noopener">VIEW ALL ON GITHUB ↗</a></p>
+  </section>
+
+  <!-- ── Proof ──────────────────────────────────────────────── -->
+  <section class="section dark" id="proof">
+    <span class="wm" data-px="0.06" aria-hidden="true">583K</span>
+    <p class="sec-kick mono" data-rv="up">04 — NUMBERS</p>
+    <h2 class="sec-title" data-rv="chars">Receipts.</h2>
+    <div class="proof-grid">
+      <div class="proof-left stagger">
+        <p class="proof-lede" data-rv="words">I don’t like calling my own work “good” — I’d rather show the receipts. One Short, no ads, no push: <em>583,290 views</em>, <em>+1.6K subscribers</em>, 74% retention. Same pipeline as everything else on this site.</p>
+        <ul class="stats mono">
+          <li data-rv="up"><b data-count="583">0</b>K+ VIEWS / ONE SHORT</li>
+          <li data-rv="up"><b>+1.6K</b> SUBSCRIBERS</li>
+          <li data-rv="up"><b data-count="74">0</b>% AVG RETENTION</li>
+          <li data-rv="up"><b data-count="85">0</b>% WATCHED TO END</li>
+        </ul>
+        <div class="curve-wrap" data-rv="up">
+          <svg class="curve" viewBox="0 0 300 84" aria-hidden="true"><path d="M2,10 C36,16 58,26 88,36 S148,52 188,58 244,68 298,72"/><circle cx="298" cy="72" r="3.5"/></svg>
+          <span class="mono curve-lbl">AUDIENCE RETENTION — 0:40 AVG (74.4%)</span>
+        </div>
+        <p class="mono proof-src" data-rv="up">SOURCE: YOUTUBE STUDIO ANALYTICS — LIFETIME, ORGANIC</p>
+      </div>
+      <div class="phone" data-rv="zoom" aria-label="YouTube Studio analytics recording">
+        <video id="proofLoop" src="media/proof-loop.web.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+    <button class="rc-stack" id="rcStack" data-cursor="OPEN" data-rv="up" aria-label="Open channel results folder">
+      <span class="rc-fan" aria-hidden="true">
+        <img decoding="async" src="assets/proof-1.jpg" alt=""><img decoding="async" src="assets/proof-2.jpg" alt=""><img decoding="async" src="assets/proof-4.jpg" alt=""><img decoding="async" src="assets/proof-5.jpg" alt=""><img decoding="async" src="assets/proof-6.jpg" alt=""><img decoding="async" src="assets/proof-3.jpg" alt="">
+      </span>
+      <span class="rc-meta mono"><b>CHANNEL RESULTS</b> 6 RECEIPTS — YOUTUBE STUDIO <i>OPEN FOLDER ↗</i></span>
+    </button>
+  </section>
+
+  <!-- ── Solidarity ─────────────────────────────────────────── -->
+  <section class="solidarity">
+    <div class="sol-flag"><canvas id="flagCv" width="560" height="360" aria-label="Flag of Palestine, waving"></canvas></div>
+    <h2 class="fp-title" id="fpTitle" data-rv="chars">FREE PALESTINE</h2>
+  </section>
+
+  <!-- ── Contact ──────────────────────────────────────────────── -->
+  <section class="section dark" id="contact">
+    <p class="sec-kick mono" data-rv="up">05 — NEXT</p>
+    <h2 class="sec-title sweep" data-rv="chars">Let’s talk.</h2>
+    <div class="contact-grid">
+      <p class="contact-lede" data-rv="words">If you have a film to match, a workflow to fix, or a site that should feel like this one — message me. I reply fast, usually with too many ideas.</p>
+      <div class="socials" data-rv="up">
+        <a class="soc" style="--i:0" href="https://www.tiktok.com/@adil.chandiio" target="_blank" rel="noopener" aria-label="TikTok — @adil.chandiio">
+          <span class="soc-tile"><span class="soc-bob"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span></span>
+          <span class="soc-lb mono">TIKTOK ↗</span>
+        </a>
+        <a class="soc" style="--i:1" href="https://www.instagram.com/adill.chandio" target="_blank" rel="noopener" aria-label="Instagram — @adill.chandio">
+          <span class="soc-tile"><span class="soc-bob"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></span></span>
+          <span class="soc-lb mono">INSTAGRAM ↗</span>
+        </a>
+        <a class="soc" style="--i:2" href="mailto:workadilchandio@gmail.com" aria-label="Email — workadilchandio@gmail.com">
+          <span class="soc-tile"><span class="soc-bob"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></span></span>
+          <span class="soc-lb mono">WORKADILCHANDIO@GMAIL.COM ↗</span>
+        </a>
+      </div>
+      <form id="contactForm" data-rv="right">
+        <label class="mono">NAME<input name="name" required placeholder="Your name"></label>
+        <label class="mono">EMAIL<input name="email" type="email" required placeholder="you@studio.com"></label>
+        <label class="mono">PROJECT<textarea name="project" rows="4" required placeholder="What are we making?"></textarea></label>
+        <button class="enter-btn magnet" type="submit">SEND ▸</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="marquee giant" aria-hidden="true"><div class="marquee-track">
+    <span>ADIL CHANDIO ✦ ADIL CHANDIO ✦&nbsp;</span><span>ADIL CHANDIO ✦ ADIL CHANDIO ✦&nbsp;</span>
+  </div></div>
+  <div class="marquee giant rev outline" aria-hidden="true"><div class="marquee-track">
+    <span>MONARCH • MONARCH • MONARCH •&nbsp;</span><span>MONARCH • MONARCH • MONARCH •&nbsp;</span>
+  </div></div>
+  <div class="foot-bar mono">
+    <span>©2026 ADIL CHANDIO — MADE WITH CHAI &amp; CURIOSITY</span>
+    <span><i class="pulse"></i>AVAILABLE FOR WORK — <span id="clk2">--:--:--</span> LOCAL TIME</span>
+    <span class="foot-soc"><a href="https://www.tiktok.com/@adil.chandiio" target="_blank" rel="noopener"><svg class="fs-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>TIKTOK ↗</a><a href="https://www.instagram.com/adill.chandio" target="_blank" rel="noopener"><svg class="fs-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>INSTAGRAM ↗</a><a href="https://github.com/adil-chandio" target="_blank" rel="noopener"><svg class="fs-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GITHUB ↗</a></span>
+  </div>
+</footer>
+
+<div id="letter" aria-hidden="true">
+  <div class="lt-bar mono"><span>A LETTER FROM ADIL — 31 OCT 2026</span><button id="ltClose" aria-label="Close letter">✕ CLOSE [ESC]</button></div>
+  <div class="lt-scroll" id="ltScroll">
+    <div class="lt-paper">
+      <p class="lt-drop">March 2024. I bought a second-hand Dell laptop for about 400 dollars — and started a YouTube automation business with it. I found one channel from abroad, studied it frame by frame, built my content around what I learned, and laid down my own strategies. One, two videos — properly viral. Three months in, my first channel was monetized.</p>
+      <h5 class="mono">TWO MONTHS LATER — THE $700</h5>
+      <p>After the PIN, the paperwork, the waiting — my first earning landed: 700 dollars. It was new money. And I’ll be honest: it corrupted me. The discipline I had built in those first four, five months of grinding — it broke. I slowed down. Back to friends, wandering, movies, enjoyment. And the environment had a hand in it too: some wrong people walked into my life. Their mindset matched mine at the time, so I thought — these are my people, we’ll grow together, I’ll carry them with me. I was the dumb one. I spent a lot of time on them. On one of them, especially.</p>
+      <h5 class="mono">NO EXCUSES — THE MIRROR PART</h5>
+      <p>I could blame them all day. But I’m the one responsible. I chose it. Everything that happened, happened because I wanted it to. That’s the part I don’t skip.</p>
+      <h5 class="mono">2025 — THE LOOP</h5>
+      <p>I wasted 2025 the same way: work, quit, work, quit. Some days trading, some days something else, some days nothing at all. And like that, 2025 slipped into 2026.</p>
+      <h5 class="mono">2026 — AI, AND THE SAME OLD GHOST</h5>
+      <p>In 2026 I started exploring AI — and it felt amazing. Learning, creating, showing off a little creativity: it felt like play. I started properly. But the same bad habit: work hard for a while… then nothing for a while.</p>
+      <h5 class="mono">OCT 31, 2026 — TODAY</h5>
+      <p>From today: no distractions. Only discipline, consistency, mehnat. Only learning, only growing. Alone if I have to — and with the people who are actually serious. Not with the clowns. I’m 21. I grieve the two, three years I wasted, because I know how much I’m capable of and I know I didn’t do it. That regret is real. But this season of life comes to teach you — and to make you stronger.</p>
+      <h5 class="mono">WHAT’S NEXT</h5>
+      <p>Soon I’ll build a community — a room for serious people only. It’ll take a little time, because right now I’m running everything from one device: a Techno Spark Go 1. That’s the whole setup. First I build the setup. Then — we cause chaos. Thank you for reading.</p>
+      <p class="lt-sign mono">— ADIL • 31 OCT 2026 • 3 AM, OBVIOUSLY</p>
+    </div>
+  </div>
+  <p class="mono lt-hint">AUTO-READING… TOUCH OR SCROLL TO TAKE OVER</p>
+</div>
+<button id="topFab" class="fab" aria-label="Back to top"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="bg" cx="20" cy="20" r="17"/><circle class="fg" cx="20" cy="20" r="17"/></svg><span>↑</span></button>
+<div id="rcModal" aria-hidden="true">
+  <div class="rcm-bar mono"><span id="rcCount">1 / 6</span><button id="rcmClose" aria-label="Back to folder">✕ BACK TO FOLDER [ESC]</button></div>
+  <div class="rcm-stage" id="rcmStage" data-cursor="DRAG">
+    <div class="rcm-track" id="rcmTrack">
+      <figure class="rcm-card"><img decoding="async" src="assets/proof-1.jpg" alt="Short analytics: 583.2K views"><figcaption class="mono">SHORT #1 — 583.2K VIEWS</figcaption></figure>
+      <figure class="rcm-card"><img decoding="async" src="assets/proof-2.jpg" alt="Subscribers: +1.6K"><figcaption class="mono">SHORT #1 — +1.6K SUBS</figcaption></figure>
+      <figure class="rcm-card"><img decoding="async" src="assets/proof-4.jpg" alt="16,698 views, +16 subscribers"><figcaption class="mono">SHORT #2 — 16.7K VIEWS / +16 SUBS</figcaption></figure>
+      <figure class="rcm-card"><img decoding="async" src="assets/proof-5.jpg" alt="92.5% audience retention"><figcaption class="mono">SHORT #2 — 92.5% RETENTION</figcaption></figure>
+      <figure class="rcm-card"><img decoding="async" src="assets/proof-6.jpg" alt="9,470 views"><figcaption class="mono">SHORT #3 — 9.5K VIEWS</figcaption></figure>
+      <figure class="rcm-card"><img decoding="async" src="assets/proof-3.jpg" alt="470 views, +45 subscribers"><figcaption class="mono">SHORT #4 — 470 VIEWS / +45 SUBS</figcaption></figure>
+    </div>
+  </div>
+  <div class="rcm-ctrl"><button class="rc-arrow mono" id="rcmPrev" aria-label="Previous receipt">←</button><div class="rc-dots" id="rcmDots"></div><button class="rc-arrow mono" id="rcmNext" aria-label="Next receipt">→</button></div>
+</div>
+<div id="player" aria-hidden="true">
+  <div class="pl-bar"><span class="mono" id="plTitle">FILM</span><button class="mono" id="plClose" aria-label="Close player">✕ CLOSE [ESC]</button></div>
+  <video id="plVideo" controls playsinline preload="metadata"></video>
+  <div id="plFrame"></div>
+</div>
+<div id="toast" class="toast mono" role="status"></div>
+<script src="assets/main.js?v=37"></script>
+<script src="assets/compose.js?v=1"></script>
+</body>
+</html>
