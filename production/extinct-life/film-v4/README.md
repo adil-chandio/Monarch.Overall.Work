@@ -35,3 +35,7 @@ The camera test evaluates all 13,163 frames. On this revision it checks 190 old 
 Local representative native scene generation and A→B→A deterministic seeks have passed for chapters 1, 3, 5, 6 and 7. A real 45-frame native-motion range across an old cut boundary has also encoded. Audio-only assembly has run; `audio-work-check.json` records the limited scope of that test. The new score is raised and measured at the intended background level rather than leaving the old bed roughly 30 dB under the voice; its measured stem RMS is −36.16 dBFS versus the mixed dialogue-led track at −20.91 dBFS. Smooth attack/release dialogue ducking avoids sentence-by-sentence level steps. Full v4 MP4 completion is **not yet claimed**. The separate `extinct-film-v4.yml` workflow renders all frames, assembles, measures loudness and decodes the final file before publishing a clearly labelled candidate prerelease. It does not upload to YouTube.
 
 The earlier completed v3 remains historical: https://github.com/adil-chandio/Monarch.Overall.Work/releases/tag/extinct-life-v3-42224196920 . It is not the corrected v4 download.
+
+## Active full render
+
+[Run 42237420816](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42237420816), source `f24f5ec`, is in progress. It supersedes run 42237194356, which GitHub concurrency cancellation has stopped. The new full MP4 is not yet available. After successful full assembly/QC the workflow publishes the candidate under tag `extinct-life-v4-42237420816`; this is a planned output, not a current download claim.
