@@ -80,6 +80,9 @@ jobs:
           restore-keys: |
             monarch-cam-v3-sources-
 
+      - name: Clean stale workflow-failure diagnostics
+        run: rm -f production/monarch-cam/short_ranking_v3/review/workflow_failure.txt
+
       - name: Validate clean-premium V3 contracts, factual guardrails, cleared audio, fonts and preserved MP4s
         run: |
           python -m py_compile \

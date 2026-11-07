@@ -299,7 +299,7 @@ def build_audio():
                                     af="highpass=f=45,lowpass=f=12000"))
     # V3: a gentle 3.6 kHz roll-off softens beat transients without muting the
     # cleared CC0 bed; Earshot's reference band still needs a sparse hit density.
-    music = sound.high_low_pass(music, None, 3600)
+    music = sound.high_low_pass(music, None, 2600)
     music = sound.fade_edges(music, 0.35, 0.50)
     music = widen_stereo(music, PREM["stereo_width_music"])
     music, music_levels = sound.normalize_loudness(music, AUDIO["music_lufs"])
@@ -419,6 +419,7 @@ def build_audio():
 
     duck = sound.asymmetric_duck(voice)
     ducked_music = music * duck[:, None]
+    ducked_music *= 0.96
     ducked_ambience = ambience * (0.72 + 0.28 * duck)[:, None]
     ducked_sfx = sfx * (0.55 + 0.45 * duck)[:, None]
     ducked_sfx = voice_aware_presence_dip(ducked_sfx, duck, PREM["voice_presence_dip"])

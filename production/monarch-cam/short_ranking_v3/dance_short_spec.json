@@ -514,7 +514,7 @@
   "audio": {
     "music_asset": "music_funny",
     "music_start": 0.0,
-    "music_lufs": -27.5,
+    "music_lufs": -29.5,
     "music_envelope_t": [
       0.0,
       2.042,
@@ -532,24 +532,24 @@
       35.0
     ],
     "music_envelope_v": [
-      0.473,
-      0.6192,
-      0.731,
-      0.817,
-      0.86,
-      0.7052,
-      0.86,
-      0.774,
-      0.7052,
-      0.6192,
-      0.5332,
-      0.473,
-      0.3612,
-      0.215
+      0.46,
+      0.6,
+      0.71,
+      0.79,
+      0.83,
+      0.68,
+      0.83,
+      0.75,
+      0.68,
+      0.6,
+      0.52,
+      0.46,
+      0.95,
+      0.82
     ],
     "ambience_asset": "native_audio",
     "ambience_start": 0.0,
-    "ambience_lufs": -45.5,
+    "ambience_lufs": -46.5,
     "ambience_envelope_t": [
       0.0,
       2.042,
@@ -567,20 +567,20 @@
       35.0
     ],
     "ambience_envelope_v": [
-      0.6,
-      0.78,
-      0.88,
-      0.95,
-      1.0,
-      0.78,
-      0.96,
-      0.9,
-      0.84,
-      0.76,
-      0.68,
-      0.58,
-      0.46,
-      0.24
+      0.552,
+      0.7176,
+      0.8096,
+      0.874,
+      0.92,
+      0.7176,
+      0.8832,
+      0.828,
+      0.7728,
+      0.6992,
+      0.6256,
+      0.5336,
+      0.4232,
+      0.2208
     ],
     "sfx": {
       "impact": {
@@ -640,14 +640,14 @@
       "premaster_ceiling_dbfs": -1.4,
       "salience_roles": {
         "hero": 0.0,
-        "support": -9.4,
-        "breath": -11.8
+        "support": -15.4,
+        "breath": -17.8
       },
       "sub_bloom": {
         "duration_s": 0.74,
-        "peak_dbfs": -27.0,
-        "start_hz": 42.0,
-        "end_hz": 88.0,
+        "peak_dbfs": -24.0,
+        "start_hz": 38.0,
+        "end_hz": 78.0,
         "decay": 5.2
       },
       "sub_bloom_frames": [
@@ -678,10 +678,10 @@
         "peak_db": -28.0,
         "label": "Rank 5 reveal",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": -0.55,
         "pan_end": 0.55,
-        "effective_peak_db": -37.5
+        "effective_peak_db": -43.5
       },
       {
         "frame": 90,
@@ -690,10 +690,10 @@
         "peak_db": -26.0,
         "label": "Rank 5 accent",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": 0.2,
         "pan_end": -0.2,
-        "effective_peak_db": -35.5
+        "effective_peak_db": -41.5
       },
       {
         "frame": 150,
@@ -702,10 +702,10 @@
         "peak_db": -31.0,
         "label": "Rank 5 detail",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": -0.35,
         "pan_end": 0.0,
-        "effective_peak_db": -40.5
+        "effective_peak_db": -46.5
       },
       {
         "frame": 240,
@@ -726,10 +726,10 @@
         "peak_db": -28.0,
         "label": "Rank 4 accent",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": 0.55,
         "pan_end": -0.45,
-        "effective_peak_db": -37.5
+        "effective_peak_db": -43.5
       },
       {
         "frame": 330,
@@ -738,10 +738,10 @@
         "peak_db": -26.0,
         "label": "Rank 4 detail",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": -0.25,
         "pan_end": 0.25,
-        "effective_peak_db": -35.5
+        "effective_peak_db": -41.5
       },
       {
         "frame": 420,
@@ -750,10 +750,10 @@
         "peak_db": -31.0,
         "label": "Rank 3 reveal",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": 0.3,
         "pan_end": -0.3,
-        "effective_peak_db": -40.5
+        "effective_peak_db": -46.5
       },
       {
         "frame": 450,
@@ -774,10 +774,10 @@
         "peak_db": -28.0,
         "label": "Rank 3 flip",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": -0.5,
         "pan_end": 0.5,
-        "effective_peak_db": -37.5
+        "effective_peak_db": -43.5
       },
       {
         "frame": 600,
@@ -786,10 +786,10 @@
         "peak_db": -26.0,
         "label": "Rank 2 reveal",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": 0.15,
         "pan_end": -0.15,
-        "effective_peak_db": -35.5
+        "effective_peak_db": -41.5
       },
       {
         "frame": 630,
@@ -798,10 +798,10 @@
         "peak_db": -31.0,
         "label": "Rank 2 accent",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": -0.25,
         "pan_end": 0.25,
-        "effective_peak_db": -40.5
+        "effective_peak_db": -46.5
       },
       {
         "frame": 690,
@@ -822,10 +822,10 @@
         "peak_db": -28.0,
         "label": "Rank 1 reveal",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": 0.45,
         "pan_end": -0.45,
-        "effective_peak_db": -37.5
+        "effective_peak_db": -43.5
       },
       {
         "frame": 810,
@@ -834,10 +834,10 @@
         "peak_db": -26.0,
         "label": "Rank 1 accent",
         "salience_role": "support",
-        "salience_gain_db": -9.5,
+        "salience_gain_db": -15.5,
         "pan_start": -0.15,
         "pan_end": 0.15,
-        "effective_peak_db": -35.5
+        "effective_peak_db": -41.5
       },
       {
         "frame": 960,
@@ -846,10 +846,10 @@
         "peak_db": -31.0,
         "label": "Payoff question",
         "salience_role": "breath",
-        "salience_gain_db": -12.0,
+        "salience_gain_db": -18.0,
         "pan_start": 0.2,
         "pan_end": -0.2,
-        "effective_peak_db": -43.0
+        "effective_peak_db": -49.0
       }
     ]
   },
