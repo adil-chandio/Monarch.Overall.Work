@@ -365,7 +365,9 @@ jobs:
 
       - name: Generate AI motion clips
         run: |
-          if grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
+          if grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/diagnose_liveportrait.sh
+          elif grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_liveportrait_pilot.sh
           elif grep -q 'wan-batch-v4' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_wan_alternates.sh
@@ -397,7 +399,9 @@ jobs:
           fi
           git config user.name "MONARCH GPU Runner"
           git config user.email "gpu@monarch.studio"
-          if grep -q 'diagnose-v2' production/mafia-temple/trigger.txt; then
+          if grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
+            git add -f production/mafia-temple/diagnostics-liveportrait.json
+          elif grep -q 'diagnose-v2' production/mafia-temple/trigger.txt; then
             git add -f production/mafia-temple/diagnostics-v2.json
           else
             git add -f production/mafia-temple/clips/*.mp4 production/mafia-temple/clips/*.json
