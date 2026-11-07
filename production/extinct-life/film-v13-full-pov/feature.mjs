@@ -1,0 +1,58 @@
+import * as T from 'three';
+import {Sky} from 'three/addons/objects/Sky.js';
+import {buildWorld} from './worlds.mjs';
+// Full-script spatial staging. Original geometry systems reused; no earlier rendered movies read.
+export function createFeature(a){
+ const {schedule,camera,renderer,cinema,prepareHands,poseArm,sourceLab,sourceField,V,S}=a;
+ const cache=new Map(),clamp=x=>Math.max(0,Math.min(1,x)),mix=(x,y,u)=>x+(y-x)*S(u),windowed=(t,x,y,z,q)=>S((t-x)/(y-x))*(1-S((t-z)/(q-z)));
+ const macro=new Set(['trace','weather','mineral']),laboratory=new Set(['extraction','controls','reference','branch','proxies','boundary','gaps','integration']);
+ const mat=(c,r=.8)=>new T.MeshStandardMaterial({color:c,roughness:r});
+ const fabric=mat('#24292b'),paper=mat('#ded8c6'),steel=new T.MeshStandardMaterial({color:'#88999a',roughness:.24,metalness:.65}),glass=new T.MeshPhysicalMaterial({color:'#b4c9c3',roughness:.10,transparent:true,opacity:.20,depthWrite:false}),skin=mat('#aea48e'),wood=mat('#76634c');
+ function mesh(p,g,m,pos=[0,0,0]){const o=new T.Mesh(g,m);o.position.set(...pos);o.castShadow=o.receiveShadow=true;p.add(o);return o}
+ const box=(p,pos,size,m)=>{const o=mesh(p,new T.BoxGeometry(...size),m,pos);return o};
+ function card(p,words,pos,width=.22){const c=document.createElement('canvas');c.width=1024;c.height=256;const x=c.getContext('2d');x.fillStyle='#dfd9c7';x.fillRect(0,0,1024,256);x.fillStyle='#293c3a';x.font='500 65px Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(words,512,128);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;return mesh(p,new T.PlaneGeometry(width,width/4),new T.MeshBasicMaterial({map:tx,side:T.DoubleSide}),pos)}
+ function room(w){const p=w.scene;box(p,[0,-.05,0],[14,.1,14],wood);const plaster=mat('#b6b8ae',.98);box(p,[0,1.7,-4.8],[14,3.5,.10],plaster);box(p,[-5.5,1.7,0],[.1,3.5,12],plaster);box(p,[5.5,1.7,0],[.1,3.5,12],plaster);const sky=new T.MeshBasicMaterial({color:'#c7d5d3'});box(p,[-3.2,2.0,-4.72],[2.8,1.6,.018],sky);for(const x of [-4.6,-3.2,-1.8])box(p,[x,2,-4.65],[.04,1.7,.04],wood);for(let i=0;i<5;i++){box(p,[3.4,.4+i*.52,-4.3],[2.3,.035,.65],wood);for(let j=0;j<6;j++)box(p,[2.5+j*.32,.62+i*.52,-4.3],[.22,.38,.28],j%2?paper:fabric)}const task=new T.PointLight('#ffe6bd',8,5,2);task.position.set(1,2.7,1);p.add(task)}
+ function operatorProps(w){const h=prepareHands(w);w.operator=h;const vial=new T.Group();h.arms[1].palm.add(vial);vial.position.set(.0,-.008,-.065);mesh(vial,new T.CylinderGeometry(.020,.020,.095,24,1,true),glass);mesh(vial,new T.CylinderGeometry(.021,.021,.016,24),fabric,[0,.056,0]);mesh(vial,new T.CylinderGeometry(.017,.017,.025,20),skin,[0,-.031,0]);const sampleLabel=card(vial,'SAMPLE',[0,0,.021],.040);
+ const notebook=new T.Group();h.arms[0].palm.add(notebook);notebook.position.set(.05,.025,-.075);box(notebook,[0,0,0],[.16,.01,.20],fabric);const page=card(notebook,'INCOMPLETE RECORD',[0,.007,0],.15);page.rotation.x=-Math.PI/2;
+ w.held={vial,notebook};return h}
+ function prepare(s){const w=buildWorld(s);w.id=s.id;w.spec=s;w.update(0);w.isMacro=macro.has(s.world);w.isLab=laboratory.has(s.world);w.labelScale=1;w.labelOffset=0;
+  if(w.isLab){const root=new T.Group();for(const child of [...w.scene.children])if(!child.isLight&&!child.isLightProbe)root.add(child);root.scale.setScalar(.65);root.position.y=.22;w.scene.add(root);w.content=root;w.labelScale=.65;w.labelOffset=.22;room(w);}
+  if(!w.isMacro)operatorProps(w);
+  w.scene.environment=sourceLab.scene.environment;w.scene.environmentIntensity=w.isLab?.22:.14;
+  if(!w.isLab&&!w.isMacro){const sky=new Sky();sky.scale.setScalar(230);const u=sky.material.uniforms;u.turbidity.value=['coast','closing','section'].includes(s.world)?8:5;u.rayleigh.value=['coast','closing','section'].includes(s.world)?1.05:1.5;u.mieCoefficient.value=.004;u.sunPosition.value.set(-.32,.24,.8);w.scene.add(sky)}
+  // Each return receives its own human-scale context and action, not another orbit camera.
+  w.scene.traverse(o=>{if(o.isLight&&o.shadow){o.shadow.mapSize.set(1536,1536);o.shadow.radius=3}if(o.isMesh&&o.material){for(const m of Array.isArray(o.material)?o.material:[o.material])m.envMapIntensity=.25}});
+  const pins=[];if(w.isLab){for(let i=0;i<3;i++){const c=card(w.scene,['SOURCE','PRESERVATION','REFERENCE'][i],[.35+(i-1)*.34,.86,1.32],.28);c.rotation.x=-Math.PI/2;pins.push(c)}}w.pins=pins;
+  if(s.world==='community'){const rodent=new T.Group();w.scene.add(rodent);const fur=mat('#8e806b');const body=mesh(rodent,new T.SphereGeometry(1,18,12),fur);body.scale.set(.12,.085,.20);const head=mesh(rodent,new T.SphereGeometry(1,18,12),fur,[0,.04,-.17]);head.scale.set(.075,.065,.075);for(const side of [-1,1]){const e=mesh(rodent,new T.SphereGeometry(1,12,8),fur,[side*.065,.10,-.16]);e.scale.set(.035,.040,.016);const eye=mesh(rodent,new T.SphereGeometry(.008,10,8),fabric,[side*.064,.055,-.22]);}const tail=mesh(rodent,new T.TubeGeometry(new T.CatmullRomCurve3([V(0,0,.16),V(.10,-.02,.31),V(.16,-.03,.40)]),20,.009,6,false),fur);w.rodent=rodent;}
+  if(s.world==='river')w.qualifier='Illustrative transport • enlarged DNA symbols, not calibrated particles';if(['coast','closing'].includes(s.world)){w.scene.traverse(o=>{if(o.userData.fragment)o.visible=false;if(o.isGroup&&o.children.some(c=>c.geometry?.type==='TorusGeometry'))o.visible=false})}w.locked=null;return w;
+ }
+ function obtain(s){if(cache.has(s.id))return cache.get(s.id);while(cache.size>=2){const [id,old]=cache.entries().next().value;old.scene.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.isLight&&o.shadow?.map)o.shadow.map.dispose()});cache.delete(id)}const w=prepare(s);cache.set(s.id,w);return w}
+ function view(w,t,frame){const s=w.spec,kind=s.world,d=(s.end_frame-s.start_frame)/30,u=clamp(t/d);let p,q;
+  if(w.isMacro){const old=w.camera(t);p=V(...old.position);q=V(...old.target);p.lerp(q,.25);p.x+=.13*S(t/5);}
+  else if(w.isLab){const side=kind==='controls'?mix(-.45,.45,t/15):kind==='reference'?mix(-.35,.35,t/18):kind==='gaps'?mix(.4,-.25,t/15):mix(-.25,.25,u);p=V(side,1.63,2.03-.14*S(t/3));q=V(kind==='controls'?mix(-.5,.5,(t-5)/8):0,kind==='branch'?1.43:kind==='boundary'?1.24:1.15,0);if(['proxies','integration','gaps'].includes(kind))q.set(mix(-.45,.45,u),.52,.05);}
+  else if(kind==='river'){const z=w.state.leaf_position[2];p=V(.6,1.68,z-3.4);q=V(4.35,.12,z+.3);}
+  else if(kind==='section'){p=V(mix(-1.5,.85,t/8),1.68,5.0-.25*S(t/4));q=V(mix(-.7,.4,t/8),1.22,-.15);}
+  else if(['community','encounter','canopy','shedding'].includes(kind)){const hero=V(...w.state.mastodon_position),goose=V(...w.state.goose_position);p=V(-3.5+Math.min(t,10)*.04,1.70,5.2-Math.min(t,18)*.09);q=hero.clone().add(V(0,1.45,-.4));
+   if(kind==='community'){const base=q.clone();let previous=base;for(const key of s.keys){const words=key.text.toLowerCase();let focus=base.clone();if(words.startsWith('hares'))focus=V(...w.state.hare_position).add(V(0,.25,0));if(words.startsWith('reindeer'))focus=V(...w.state.deer_position).add(V(0,1.1,0));if(words.startsWith('geese'))focus=goose.clone().add(V(0,.25,0));if(words.startsWith('rodents'))focus=V(-1.5,.12,.3);q.addScaledVector(focus.clone().sub(previous),S((frame-key.frame)/24));previous=focus;}if(t>12)q.lerp(V(1.5,2,-9),.4*S((t-12)/10));}
+   if(kind==='encounter'){const look=windowed(t,4.4,5.8,9,11);q.lerp(goose.clone().add(V(0,.3,0)),look*.55);if(t>23)q.lerp(V(3.5,.12,-.8),S((t-23)/9)*.35)}
+   if(kind==='canopy'){p=V(-3+S(t/10),1.70,4-.09*t);q=V(.6,2.4,-8);}
+  }else{p=V(mix(-.45,1.2,u),1.67,4.4+1.5*S((t-8)/14));q=V(0,.25,-.3);if(kind==='closing'){p=V(mix(-.45,1.0,t/12),1.67,mix(3.3,6.0,(t-8)/17));q=V(mix(0,-3,(t-9)/17),mix(.35,1.2,(t-9)/17),mix(-.2,-10,(t-9)/17));}}
+  if(!w.locked)w.locked={p:p.clone(),q:q.clone()};if(window.__freezeCamera){p.copy(w.locked.p);q.copy(w.locked.q)}camera.position.copy(p);camera.lookAt(q);camera.updateMatrixWorld(true);return {p,q};
+ }
+ function hands(w,t,frame){if(!w.operator)return[];const h=w.operator;h.rig.position.copy(camera.position);h.rig.quaternion.copy(camera.quaternion);let l=V(-.24,-.43,-.34),r=V(.24,-.43,-.34);const kind=w.spec.world;
+  if(w.isLab){const raise=windowed(t,.4,2.4,6.2,8.3);r.lerp(V(.16,-.12,-.46),raise);l.lerp(V(-.18,-.18,-.44),raise*.65);const compare=windowed(t,8,9.6,13.2,15);l.lerp(V(-.13,-.13,-.45),compare);}
+  if(kind==='section'){l.lerp(V(-.18,-.16,-.45),windowed(t,2,4,8,10));r.lerp(V(.19,-.24,-.45),windowed(t,6,8,10.5,12));}
+  if(kind==='closing'){const seal=windowed(t,.1,2,5,7);r.lerp(V(.13,-.13,-.44),seal);l.lerp(V(-.12,-.15,-.44),seal);}
+  const gloved=w.isLab||['section','coast','closing'].includes(kind);poseArm(h.arms[0],l,.45,gloved);poseArm(h.arms[1],r,.6,gloved);h.held=w.held;w.held.vial.visible=w.isLab||['section','closing'].includes(kind);w.held.notebook.visible=w.isLab||kind==='closing';h.rig.updateMatrixWorld(true);return h.arms.map(v=>({a:v.a.scale.y,b:v.b.scale.y,clamped:v.clamped}));
+ }
+ const next=document.createElement('canvas');next.width=1920;next.height=1080;const nc=next.getContext('2d');
+ function single(frame,fc){const s=schedule.sequences.find(s=>frame>=s.start_frame&&frame<s.end_frame)||schedule.sequences.at(-1),w=obtain(s),t=(frame-s.start_frame)/30;w.update(t);if(w.rodent){w.rodent.position.set(-1.5+.05*Math.sin(t*.8),.10,.3-.055*Math.min(t,12));w.rodent.rotation.y=.06*Math.sin(t)}const cp=view(w,t,frame),joints=hands(w,t,frame);cinema.render(w);fc.clearRect(0,0,1920,1080);fc.drawImage(renderer.domElement,0,0);
+  // Crisp scene-linked concise text, not persistent upper caption cards.
+  const cue=[...s.keys].reverse().find(k=>frame>=k.frame),age=(frame-(cue?.frame??s.start_frame))/30,alpha=S(age/.6)*(1-S((age-5.4)/.8));for(const l of w.labels(t)){if(alpha<.02)continue;const p=V(...l.point).multiplyScalar(w.labelScale);p.y+=w.labelOffset;const v=p.project(camera),x=(v.x*.5+.5)*1920,y=(-v.y*.5+.5)*1080;if(v.z>1||v.z< -1||x<75||x>1480||y<100||y>940)continue;fc.save();fc.globalAlpha=alpha*(l.opacity??1);fc.font='500 27px Arial';fc.shadowColor='#132529';fc.shadowBlur=6;fc.fillStyle='#e5dbb8';fc.fillText(l.text,x+17,y-27);fc.strokeStyle='#d8c491';fc.beginPath();fc.moveTo(x,y);fc.lineTo(x+15,y-18);fc.stroke();fc.restore()}
+  if(t<4.8){fc.save();fc.globalAlpha=S(t/.7)*(1-S((t-4)/.8));fc.font='18px Arial';fc.shadowColor='#14272b';fc.shadowBlur=5;fc.fillStyle='#e3e8dc';const words=w.qualifier||'Conceptual reconstruction, not recovered footage';fc.fillText(words,58,1031);fc.restore()}
+  if(s.world==='closing'&&frame>12990){fc.save();fc.globalAlpha=S((frame-12990)/70);fc.font='500 43px Arial';fc.textAlign='center';fc.fillStyle='#e5e6d9';fc.shadowColor='#13262b';fc.shadowBlur=8;fc.fillText('EXTINCT LIFE',960,930);fc.restore()}
+  window.__state={frame,time:frame/30,sequence:s.id,world:s.world,pov:!w.isMacro,camera:cp.p.toArray(),camera_target:cp.q.toArray(),joints,full_master:true,total_frames:13163,voice_speed_changed:false,real_scale_context:!w.isMacro,conceptual_diagram:w.isMacro||w.isLab,stage_design:s.design,source_geometry_reused:true,old_movie_frames_used:false,...w.state};return s;
+ }
+ function seek(frame,fc){const f=Math.max(1925,Math.min(13162,Math.floor(frame))),s=single(f,fc),state=window.__state,age=f-s.start_frame;if(age<8){nc.clearRect(0,0,1920,1080);nc.drawImage(fc.canvas,0,0);const prev=schedule.sequences[schedule.sequences.indexOf(s)-1];if(prev){if(prev.end_frame<=1925)window.__openingSeek(prev.end_frame-1);else single(prev.end_frame-1,fc);fc.save();fc.globalAlpha=S((age+1)/8);fc.drawImage(next,0,0);fc.restore();window.__state=state}}}
+ return {seek};
+}
