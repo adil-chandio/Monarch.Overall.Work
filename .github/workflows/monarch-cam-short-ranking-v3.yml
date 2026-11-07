@@ -69,7 +69,7 @@ jobs:
             'git+https://github.com/Leonxlnx/earshot.git@main'
           python -c 'import torch; from earshot import api; print("Earshot import OK; torch", torch.__version__)'
 
-      - name: Validate clean-premium V2 contracts, factual guardrails, cleared audio, fonts and original MP4
+      - name: Validate clean-premium V3 contracts, factual guardrails, cleared audio, fonts and preserved MP4s
         run: |
           python -m py_compile \
             production/monarch-cam/short_ranking_v3/render_dance_visual_clean_v3.py \
@@ -184,7 +184,7 @@ jobs:
           print('Clean-premium V3 35s, five CC0 sources, ranking, category, audio, factual and preservation contracts OK')
           PY
 
-      - name: Retrieve the public-domain USFWS clip and rebuild clean-premium V2 review sheets
+      - name: Retrieve the five CC0 animal clips and rebuild clean-premium V3 review sheets
         timeout-minutes: 15
         run: |
           set -o pipefail
@@ -230,7 +230,7 @@ jobs:
           print('Clean-premium V3 visual timing lock written')
           PY
 
-      - name: Render the clean-premium V2 24-second native-vertical picture
+      - name: Render the clean-premium V3 35-second native-vertical picture
         timeout-minutes: 25
         run: |
           set -o pipefail
@@ -247,7 +247,7 @@ jobs:
           python production/monarch-cam/short_ranking_v3/build_dance_audio_clean_v3.py \
             2>&1 | tee production/monarch-cam/short_ranking_v3/review/audio_build.log
 
-      - name: Run all nine measured gates on the delivered clean-premium V2 AAC stream
+      - name: Run all nine measured gates on the delivered clean-premium V3 AAC stream
         timeout-minutes: 10
         run: |
           set -o pipefail
@@ -256,7 +256,7 @@ jobs:
             --profile web --json production/monarch-cam/short_ranking_v3/review/audio_qc.json \
             2>&1 | tee production/monarch-cam/short_ranking_v3/review/audio_qc.log
 
-      - name: Assemble clean-premium V2 delivery, Earshot comparison and review summary
+      - name: Assemble clean-premium V3 delivery, Earshot comparison and review summary
         run: |
           python - <<'PY'
           import hashlib, json
@@ -323,7 +323,7 @@ jobs:
               'no_macro_inset','no_source_labels','no_brand_watermark','no_cut_flashes','cinema_grade','premium_palette',
               'seamless_loop_crossfade','exact_text_thumbnails','v3_cinematic_grade','v3_halation_bloom',
               'v3_scene_crossfades','v3_tracked_captions','v3_motion_drift','v3_sound_polish','v3_rank_numbers',
-              'five_cc0_sources','no_third_party_short_form_clips','subjective_ranking_not_science'))
+              'five_cc0_sources','source_aspect_preserved','no_third_party_short_form_clips','subjective_ranking_not_science'))
           thumb_files = [root/item['file'] for item in thumbs['outputs']]
           v3_visual_pass = visual_flags and all(p.is_file() for p in thumb_files) and (root/'cover_hook.jpg').is_file()
           v3_visual_pass = v3_visual_pass and abs(vpc['action_window'][2]/vpc['action_window'][3] - 16/9) < 0.02
@@ -412,23 +412,23 @@ jobs:
           print(json.dumps(summary, indent=2))
           PY
 
-      - name: Return failure diagnostics when a clean-premium V2 render/build/QC step fails
+      - name: Return failure diagnostics when a clean-premium V3 render/build/QC step fails
         if: failure()
         run: |
           git config user.name "monarch-cam-short-ranking-v3-bot"
           git config user.email "monarch-cam-short-ranking-v3-bot@users.noreply.github.com"
           mkdir -p production/monarch-cam/short_ranking_v3/review
-          echo "A clean-premium V2 albatross Short render, build or QC step failed; inspect adjacent logs and review JSON." \
+          echo "A clean-premium V3 ranked-animal Short render, build or QC step failed; inspect adjacent logs and review JSON." \
             > production/monarch-cam/short_ranking_v3/review/workflow_failure.txt
           git add production/monarch-cam/short_ranking_v3
           if ! git diff --cached --quiet; then
-            git commit -m "chore(monarch-cam): capture clean-premium V2 albatross Short failure diagnostics"
+            git commit -m "chore(monarch-cam): capture clean-premium V3 ranked-animal Short failure diagnostics"
             git pull --rebase --autostash origin arena/390292fc-monarch-overall-work
             git push origin HEAD:arena/390292fc-monarch-overall-work
           fi
           exit 1
 
-      - name: Upload clean-premium V2 Short, exact thumbnails, ledgers, credits, model review and metadata
+      - name: Upload clean-premium V3 Short, exact thumbnails, ledgers, credits, model review and metadata
         uses: actions/upload-artifact@v4
         with:
           name: monarch-cam-5-unexpected-animal-skills-ranked-35s-short-clean-premium-v3
@@ -447,7 +447,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Return the clean-premium V2 MP4 and compact review record to this branch
+      - name: Return the clean-premium V3 MP4 and compact review record to this branch
         run: |
           git config user.name "monarch-cam-short-ranking-v3-bot"
           git config user.email "monarch-cam-short-ranking-v3-bot@users.noreply.github.com"
@@ -455,9 +455,9 @@ jobs:
           git add -f deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4
           git add production/monarch-cam/short_ranking_v3
           if git diff --cached --quiet; then
-            echo "Premium albatross Short deliverable and QC unchanged"
+            echo "Clean-premium V3 ranked-animal Short deliverable and QC unchanged"
             exit 0
           fi
-          git commit -m "chore(monarch-cam): deliver clean-premium V2 24-second albatross dance Short"
+          git commit -m "chore(monarch-cam): deliver clean-premium V3 35-second ranked-animal Short"
           git pull --rebase --autostash origin arena/390292fc-monarch-overall-work
           git push origin HEAD:arena/390292fc-monarch-overall-work

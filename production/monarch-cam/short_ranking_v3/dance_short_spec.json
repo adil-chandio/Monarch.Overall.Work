@@ -16,73 +16,73 @@
     },
     {
       "id": "vo2",
-      "start": 2.1,
+      "start": 2.3,
       "text": "Number five: a squirrel drops in.",
       "caption": "THE DROP-IN."
     },
     {
       "id": "vo3",
-      "start": 5.1,
+      "start": 5.3,
       "text": "Tiny paws. Zero hesitation.",
       "caption": "ZERO HESITATION."
     },
     {
       "id": "vo4",
-      "start": 8.1,
+      "start": 8.3,
       "text": "Number four: a crab in a broken shell.",
       "caption": "THE TINY COMMUTE."
     },
     {
       "id": "vo5",
-      "start": 11.1,
+      "start": 11.3,
       "text": "Still moving. Still improvising.",
       "caption": "STILL MOVING."
     },
     {
       "id": "vo6",
-      "start": 14.1,
+      "start": 14.3,
       "text": "Number three: a starfish flips over.",
       "caption": "THE SLOW FLIP."
     },
     {
       "id": "vo7",
-      "start": 17.1,
+      "start": 17.3,
       "text": "Slow, then suddenly fast.",
       "caption": "SUDDENLY FAST."
     },
     {
       "id": "vo8",
-      "start": 20.1,
+      "start": 20.3,
       "text": "Number two: an octopus opens a bottle.",
       "caption": "THE BOTTLE OPENER."
     },
     {
       "id": "vo9",
-      "start": 23.1,
+      "start": 23.3,
       "text": "Eight arms. One problem solved.",
       "caption": "EIGHT ARMS."
     },
     {
       "id": "vo10",
-      "start": 26.1,
+      "start": 26.3,
       "text": "Number one: a titmouse lands on a hand.",
       "caption": "THE HAND LANDING."
     },
     {
       "id": "vo11",
-      "start": 29.1,
+      "start": 29.3,
       "text": "Wild, but willing to trust.",
       "caption": "WILD TRUST."
     },
     {
       "id": "vo12",
-      "start": 32.1,
+      "start": 32.0,
       "text": "Which rank would you change?",
       "caption": "WHICH RANK?"
     },
     {
       "id": "vo13",
-      "start": 33.4,
+      "start": 33.3,
       "text": "You decide.",
       "caption": "YOU DECIDE."
     }
@@ -90,7 +90,7 @@
   "narration_words": 69,
   "voice": {
     "name": "en-US-AndrewNeural",
-    "rate": "+2%",
+    "rate": "+12%",
     "volume": "+0%",
     "pitch": "+0Hz"
   },
@@ -196,7 +196,8 @@
       "zoom_end": 1.18,
       "focus": 0.5,
       "loop_to_start_last": 0,
-      "rank": 3
+      "rank": 3,
+      "vertical_center": 0.42
     },
     {
       "id": "rank3_starfish_flip",
@@ -213,7 +214,8 @@
       "zoom_end": 1.18,
       "focus": 0.5,
       "loop_to_start_last": 0,
-      "rank": 3
+      "rank": 3,
+      "vertical_center": 0.55
     },
     {
       "id": "rank2_octopus_wide",

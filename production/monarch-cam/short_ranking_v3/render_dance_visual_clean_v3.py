@@ -31,6 +31,7 @@ DURATION = float(SPEC["duration"])
 N_FRAMES = int(SPEC["frame_count"])
 V3 = SPEC["visual"]["v3"]
 ACTION_X, ACTION_Y, ACTION_W, ACTION_H = V3["action_window"]
+SOURCE_CONTENT_BBOX = {}
 RADIUS = int(V3["action_corner_radius"])
 TRANSITION_FRAMES = int(V3["scene_transition_frames"])
 
@@ -139,9 +140,44 @@ def smoothstep(p: float):
     return p * p * (3.0 - 2.0 * p)
 
 
-def source_content(frame: np.ndarray):
-    """The CC0 Wikimedia Commons source is 16:9; keep the full frame, no 4:3 pillar-bar crop."""
-    return frame
+def source_content(frame: np.ndarray, source_id: str = "", vertical_center: float = 0.5):
+    """Return an undistorted 16:9 crop from the cleared source.
+
+    The 9:16 CC0 starfish clip is centre-cropped to the action-window aspect
+    ratio instead of being stretched; black review-sheet padding is not part of
+    the source frame. Other CC0 sources are already 16:9 and pass through.
+    """
+    h, w = frame.shape[:2]
+    key = source_id or f"{w}x{h}"
+    bbox = SOURCE_CONTENT_BBOX.get(key)
+    if bbox is None:
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        cols = np.where(gray.mean(axis=0) > 12)[0]
+        rows = np.where(gray.mean(axis=1) > 12)[0]
+        x0, x1 = (int(cols[0]), int(cols[-1]) + 1) if cols.size else (0, w)
+        y0, y1 = (int(rows[0]), int(rows[-1]) + 1) if rows.size else (0, h)
+        # Only trim substantial bars; dark but valid picture edges are preserved.
+        if x0 <= w * 0.05 and x1 >= w * 0.95:
+            x0, x1 = 0, w
+        if y0 <= h * 0.05 and y1 >= h * 0.95:
+            y0, y1 = 0, h
+        bbox = (x0, y0, x1, y1)
+        SOURCE_CONTENT_BBOX[key] = bbox
+    x0, y0, x1, y1 = bbox
+    content = frame[y0:y1, x0:x1]
+    ch, cw = content.shape[:2]
+    target_ratio = ACTION_W / ACTION_H
+    ratio = cw / ch
+    if abs(ratio - target_ratio) < 1e-3:
+        return content
+    if ratio > target_ratio:
+        new_w = max(2, int(round(ch * target_ratio)))
+        left = int(np.clip(round(cw * 0.5 - new_w / 2), 0, cw - new_w))
+        return content[:, left:left + new_w]
+    new_h = max(2, int(round(cw / target_ratio)))
+    cy = int(round(float(np.clip(vertical_center, 0.0, 1.0)) * ch))
+    top = int(np.clip(cy - new_h / 2, 0, ch - new_h))
+    return content[top:top + new_h, :]
 
 
 def grade(frame: np.ndarray):
@@ -395,7 +431,7 @@ def render():
         ok, first = cap.read()
         if not ok:
             raise RuntimeError(f"Cannot read {scene['id']} at {scene['source_start']}s")
-        first_content = grade(source_content(first))
+        first_content = grade(source_content(first, scene['source_id'], scene.get('vertical_center', 0.5)))
         if global_first_content is None:
             global_first_content = first_content.copy()
         background = vertical_background_v3(first_content, scene.get("focus", 0.5))
@@ -420,7 +456,7 @@ def render():
                         ok, candidate = cap.read()
                         raw = candidate if ok else first
                 current_source_offset = desired_source_offset
-            content = grade(source_content(raw))
+            content = grade(source_content(raw, scene['source_id'], scene.get('vertical_center', 0.5)))
             if scene.get("loop_to_start_last") and global_first_content is not None:
                 remaining = (end_frame - frame_index) / FPS
                 if remaining <= scene["loop_to_start_last"]:
@@ -535,6 +571,7 @@ def render():
         "v3_sound_polish": True,
         "v3_rank_numbers": True,
         "five_cc0_sources": True,
+        "source_aspect_preserved": True,
         "no_third_party_short_form_clips": True,
         "subjective_ranking_not_science": True,
         "action_window": [ACTION_X, ACTION_Y, ACTION_W, ACTION_H],
@@ -546,7 +583,7 @@ def render():
         "thumbnail_manifest": "review/exact_thumbnail_manifest.json",
         "note": "V3 clean visual policy: minimal tracked lower-third captions and subtle 5-to-1 rank numerals only; five CC0 sources, richer grade, cross-dissolves and motion drift, still zero extra text. Objective render facts, not human approval or an audience guarantee.",
     })
-    print(f"Saved V2 clean picture {OUT}", flush=True)
+    print(f"Saved V3 clean picture {OUT}", flush=True)
 
 
 if __name__ == "__main__":

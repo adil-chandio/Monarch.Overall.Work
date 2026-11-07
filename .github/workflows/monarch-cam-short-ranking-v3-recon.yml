@@ -6,8 +6,8 @@ on:
       - arena/390292fc-monarch-overall-work
     paths:
       - '.github/workflows/monarch-cam-short-ranking-v3-recon.yml'
-      - 'production/monarch-cam/short_ranking_v3/source_recon_ranking.py'
-      - 'production/monarch-cam/short_ranking_v3/source_manifest_ranking.json'
+      # Source reconstruction is explicit workflow_dispatch / SOURCE_RECON_TRIGGER.md only;
+      # do not list paths shared with the V3 render workflow here.
       - 'production/monarch-cam/short_ranking_v3/SOURCE_RECON_TRIGGER.md'
   workflow_dispatch:
 
