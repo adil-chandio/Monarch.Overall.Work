@@ -376,7 +376,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'stableanim-diagnose' production/mafia-temple/trigger.txt; then
+          if grep -q 'stableanim-recover-v7' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/recover_stableanim_pilot.sh
+          elif grep -q 'stableanim-diagnose' production/mafia-temple/trigger.txt; then
             PILOT_KERNEL_SLUG=monarch-run-research-42415219775 python production/mafia-temple/stableanim_diagnose.py
           elif grep -q 'stableanim-pilot' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_stableanim_pilot.sh
@@ -416,7 +418,7 @@ jobs:
           fi
           git config user.name "MONARCH GPU Runner"
           git config user.email "gpu@monarch.studio"
-          if grep -q 'stableanim-diagnose' production/mafia-temple/trigger.txt || grep -q 'stableanim-pilot' production/mafia-temple/trigger.txt; then
+          if grep -q 'stableanim-diagnose' production/mafia-temple/trigger.txt || grep -q 'stableanim-pilot' production/mafia-temple/trigger.txt || grep -q 'stableanim-recover-v7' production/mafia-temple/trigger.txt; then
             git add -f production/mafia-temple/run-pilot-output/
           elif grep -q 'portrait-recover' production/mafia-temple/trigger.txt; then
             git add -f production/mafia-temple/portrait-pilot-output/*.mp4 production/mafia-temple/portrait-pilot-output/*.json
@@ -427,5 +429,11 @@ jobs:
           else
             git add -f production/mafia-temple/clips/*.mp4 production/mafia-temple/clips/*.json
           fi
+          if git diff --cached --quiet; then
+            echo 'No new research results to save.'
+            exit 0
+          fi
           git commit -m "Add mafia temple render results [skip ci]"
+          # Preserve intervening user/session commits if the render was long-running.
+          git pull --rebase origin arena/6101616c-monarch-overall-work
           git push origin HEAD:arena/6101616c-monarch-overall-work
