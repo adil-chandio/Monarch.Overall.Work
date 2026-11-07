@@ -20,7 +20,7 @@
     "PapermillExecutionError",
     "RuntimeError"
   ],
-  "log_chars": 31542,
+  "log_chars": 19207,
   "completed_stages": [
     "STAGE 1 text embeddings only",
     "STAGE 2 transformer and VAE",
@@ -29,7 +29,7 @@
   "nonfinite_embeddings": false,
   "runtime_error_messages": [
     "RuntimeError                              Traceback (most recent call last)\\n\"}",
-    "RuntimeError: invalid argument to getCurrentStream\\n\"}"
+    "RuntimeError: Expected all tensors to be on the same device, but got mat1 is on cpu, different from other tensors on cuda:0 (when checking argument in method wrapper_CUDA_addmm)\\n\"}"
   ],
   "frame_sources": [
     [
