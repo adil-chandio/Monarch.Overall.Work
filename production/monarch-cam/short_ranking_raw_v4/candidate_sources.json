@@ -4,12 +4,13 @@
   "policy": {
     "allowed": ["CC0-1.0"],
     "rejected": ["unverified", "third-party short-form reposts", "public-domain-only claims without a CC0 dedication"],
-    "note": "Commons API extmetadata confirms CC0 1.0 for every candidate. Only raw video files with their own native audio streams are considered; no separate audio assets are downloaded."
+    "note": "Commons API extmetadata confirms CC0 1.0 for every candidate. Only raw video files with their own native audio streams are considered; no separate audio assets are downloaded. Wikimedia transcodes are used only for this probe to reduce load; the final V4 manifest uses the original CC0 files."
   },
   "assets": [
     {
       "id": "strandschnecke",
       "role": "candidate",
+      "skip_probe": true,
       "title": "Strandschnecke (grasend mit Spinne).webm",
       "creator": "Rhetos, Sabine Heim",
       "source_page": "https://commons.wikimedia.org/wiki/File:Strandschnecke_(grasend_mit_Spinne).webm",
@@ -30,6 +31,7 @@
     {
       "id": "berlin_gorilla",
       "role": "candidate",
+      "skip_probe": true,
       "title": "Berlin zoologisk hage 2026-04-07 mov05.webm",
       "creator": "LarsMueller",
       "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov05.webm",
@@ -55,6 +57,7 @@
       "source_page": "https://commons.wikimedia.org/wiki/File:Gezeitent%C3%BCmpelwurm_(unbestimmt).webm",
       "description": "An unidentified worm moves actively in a Wangerooge tide pool among living barnacles.",
       "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm.480p.vp9.webm",
         "https://upload.wikimedia.org/wikipedia/commons/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm",
         "https://commons.wikimedia.org/wiki/Special:Redirect/file/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm"
       ],
@@ -62,10 +65,10 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "local_filename": "tidepool_worm.webm",
       "duration_seconds": 22.64,
-      "width": 1920,
-      "height": 1080,
+      "width": 854,
+      "height": 480,
       "mime": "video/webm",
-      "expected_audio_codec": "vorbis"
+      "expected_audio_codec": "opus"
     },
     {
       "id": "malaga_animals",
@@ -75,6 +78,7 @@
       "source_page": "https://commons.wikimedia.org/wiki/File:Some_animals_in_Malaga.webm",
       "description": "Short CC0 animal observation filmed in Malaga.",
       "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Some_animals_in_Malaga.webm/Some_animals_in_Malaga.webm.480p.vp9.webm",
         "https://upload.wikimedia.org/wikipedia/commons/b/b3/Some_animals_in_Malaga.webm",
         "https://commons.wikimedia.org/wiki/Special:Redirect/file/Some_animals_in_Malaga.webm"
       ],
@@ -82,8 +86,8 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "local_filename": "malaga_animals.webm",
       "duration_seconds": 25.074,
-      "width": 960,
-      "height": 540,
+      "width": 854,
+      "height": 480,
       "mime": "video/webm",
       "expected_audio_codec": "opus"
     },
@@ -95,6 +99,7 @@
       "source_page": "https://commons.wikimedia.org/wiki/File:Streptopelia_orientalis_fighting_2024-04-26.webm",
       "description": "Two Oriental turtle doves fighting in Tochigi Prefecture, Japan.",
       "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm/Streptopelia_orientalis_fighting_2024-04-26.webm.1080p.vp9.webm",
         "https://upload.wikimedia.org/wikipedia/commons/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm",
         "https://commons.wikimedia.org/wiki/Special:Redirect/file/Streptopelia_orientalis_fighting_2024-04-26.webm"
       ],
@@ -108,13 +113,36 @@
       "expected_audio_codec": "opus"
     },
     {
+      "id": "kissing_gourami",
+      "role": "candidate",
+      "title": "Helostoma temminkii kissing.ogv",
+      "creator": "5snake5",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Helostoma_temminkii_kissing.ogv",
+      "description": "Kissing gouramis in an aquarium.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/9/90/Helostoma_temminkii_kissing.ogv/Helostoma_temminkii_kissing.ogv.480p.vp9.webm",
+        "https://upload.wikimedia.org/wikipedia/commons/9/90/Helostoma_temminkii_kissing.ogv",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Helostoma_temminkii_kissing.ogv"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "kissing_gourami.webm",
+      "duration_seconds": 49.036,
+      "width": 480,
+      "height": 480,
+      "mime": "video/webm",
+      "expected_audio_codec": "opus"
+    },
+    {
       "id": "sasana_squirrel",
       "role": "control_audible",
+      "cache_filename": "squirrel.webm",
       "title": "Sasana.2015.myanmar.squirrel.1.webmhd.webm",
       "creator": "Moine Sāsana",
       "source_page": "https://commons.wikimedia.org/wiki/File:Sasana.2015.myanmar.squirrel.1.webmhd.webm",
       "description": "Current V4 rank-5 squirrel; known audible native vorbis audio.",
       "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/9/93/Sasana.2015.myanmar.squirrel.1.webmhd.webm/Sasana.2015.myanmar.squirrel.1.webmhd.webm.480p.vp9.webm",
         "https://upload.wikimedia.org/wikipedia/commons/9/93/Sasana.2015.myanmar.squirrel.1.webmhd.webm",
         "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sasana.2015.myanmar.squirrel.1.webmhd.webm"
       ],
@@ -122,19 +150,21 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "local_filename": "sasana_squirrel.webm",
       "duration_seconds": 13.994,
-      "width": 1280,
-      "height": 720,
+      "width": 854,
+      "height": 480,
       "mime": "video/webm",
-      "expected_audio_codec": "vorbis"
+      "expected_audio_codec": "opus"
     },
     {
       "id": "hermit_crab",
       "role": "control_audible",
+      "cache_filename": "hermit_crab.webm",
       "title": "Einsiedlerkrebs (Wangerooge).webm",
       "creator": "Rhetos, Sabine Heim",
       "source_page": "https://commons.wikimedia.org/wiki/File:Einsiedlerkrebs_(Wangerooge).webm",
       "description": "Current V4 rank-4 hermit crab; known audible native vorbis audio.",
       "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm/Einsiedlerkrebs_%28Wangerooge%29.webm.480p.vp9.webm",
         "https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm",
         "https://commons.wikimedia.org/wiki/Special:Redirect/file/Einsiedlerkrebs_(Wangerooge).webm"
       ],
@@ -142,19 +172,21 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "local_filename": "hermit_crab.webm",
       "duration_seconds": 8.197,
-      "width": 1920,
-      "height": 1080,
+      "width": 854,
+      "height": 480,
       "mime": "video/webm",
-      "expected_audio_codec": "vorbis"
+      "expected_audio_codec": "opus"
     },
     {
       "id": "starfish",
       "role": "control_silent",
+      "cache_filename": "starfish.webm",
       "title": "Seestern (sich aufrichtend).webm",
       "creator": "Rhetos, Sabine Heim",
       "source_page": "https://commons.wikimedia.org/wiki/File:Seestern_(sich_aufrichtend).webm",
       "description": "Current V4 rank-3 starfish; audio stream is present but completely silent.",
       "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b6/Seestern_%28sich_aufrichtend%29.webm/Seestern_%28sich_aufrichtend%29.webm.480p.vp9.webm",
         "https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm",
         "https://commons.wikimedia.org/wiki/Special:Redirect/file/Seestern_(sich_aufrichtend).webm"
       ],
@@ -162,10 +194,10 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "local_filename": "starfish.webm",
       "duration_seconds": 53.12,
-      "width": 1080,
-      "height": 1920,
+      "width": 270,
+      "height": 480,
       "mime": "video/webm",
-      "expected_audio_codec": "vorbis"
+      "expected_audio_codec": "opus"
     }
   ]
 }

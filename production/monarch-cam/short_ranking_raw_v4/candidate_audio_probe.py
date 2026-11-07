@@ -9,6 +9,8 @@ import numpy as np
 import requests
 import soundfile as sf
 import pyloudnorm as pyln
+from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -17,11 +19,21 @@ WORK = ROOT / 'production/monarch-cam/work/short_ranking_raw_v4/candidates'
 REVIEW = BASE / 'review/candidates'
 MEDIA = WORK / 'media'
 FRAMES = WORK / 'frames'
+CACHE_MEDIA = ROOT / 'production/monarch-cam/work/short_ranking_v3/media'
 for p in (WORK, REVIEW, MEDIA, FRAMES):
     p.mkdir(parents=True, exist_ok=True)
 
 MANIFEST = json.loads((BASE / 'candidate_sources.json').read_text(encoding='utf-8'))
-HEADERS = {'User-Agent': 'MonarchCamRawV4/1.0 (+CC0 Wikimedia Commons candidate review)'}
+HEADERS = {'User-Agent': 'MonarchCamRawV4/1.0 (CC0 Wikimedia Commons candidate review; contact via GitHub repo owner)'}
+SESSION = requests.Session()
+RETRY = Retry(
+    total=5, backoff_factor=2,
+    status_forcelist=[429, 500, 502, 503, 504],
+    allowed_methods=frozenset(['GET']),
+    respect_retry_after_header=True, raise_on_status=False,
+)
+SESSION.mount('https://', HTTPAdapter(max_retries=RETRY))
+SESSION.mount('http://', HTTPAdapter(max_retries=RETRY))
 SR = 48000
 WINDOW_S = 0.5
 SEGMENT_S = 7.0
@@ -36,6 +48,15 @@ def run(cmd, **kw):
 def save_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+
+def load_json(path, default):
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding='utf-8'))
+        except Exception:
+            return default
+    return default
 
 
 def sha256(path):
@@ -56,19 +77,28 @@ def font(size):
 
 def download(asset):
     dest = MEDIA / asset['local_filename']
+    cache_name = asset.get('cache_filename')
+    if cache_name:
+        cached = CACHE_MEDIA / cache_name
+        if cached.exists() and cached.stat().st_size >= 100000:
+            shutil.copy2(cached, dest)
+            print('Using V3 cached', asset['id'], dest.stat().st_size, flush=True)
+            return dest
     last = None
     for url in asset['download_urls']:
         try:
-            r = requests.get(url, headers=HEADERS, timeout=180, allow_redirects=True)
+            r = SESSION.get(url, headers=HEADERS, timeout=180, allow_redirects=True)
             r.raise_for_status()
             if len(r.content) < 100000:
                 raise RuntimeError('short response')
             dest.write_bytes(r.content)
             print('Retrieved', asset['id'], len(r.content), flush=True)
+            time.sleep(3)
             return dest
         except Exception as e:
             last = e
             print('Candidate download failed', asset['id'], url, repr(e), flush=True)
+            time.sleep(10)
     raise RuntimeError('Could not retrieve ' + asset['id'] + ': ' + repr(last))
 
 
@@ -190,9 +220,29 @@ def contact_sheets(aid, raw):
 
 def main():
     started = time.time()
-    audio_report, video_ledger, all_sheets = {}, [], []
+    prev_audio = load_json(REVIEW / 'candidate_audio_probe.json', {'assets': {}})
+    prev_video_list = load_json(REVIEW / 'candidate_video_ledger.json', {'assets': []}).get('assets', [])
+    prev_video = {e['id']: e for e in prev_video_list if 'id' in e}
+    prev_manifest = load_json(REVIEW / 'candidate_review_manifest.json', {})
+    audio_report, video_ledger = {}, []
+    all_sheets = list(prev_manifest.get('contact_sheets', []))
+
     for asset in MANIFEST['assets']:
         aid = asset['id']
+        if asset.get('skip_probe'):
+            audio_report[aid] = prev_audio.get('assets', {}).get(aid, {
+                'id': aid, 'role': asset['role'], 'source_page': asset['source_page'],
+                'note': 'Previously verified; probe skipped to avoid repeated Wikimedia downloads.'
+            })
+            prev_entry = prev_video.get(aid)
+            if prev_entry:
+                video_ledger.append(prev_entry)
+                all_sheets.extend(prev_entry.get('contact_sheets', []))
+            else:
+                video_ledger.append({'id': aid, 'note': 'Previously verified; entry missing from ledger.'})
+            print('Skip already-verified', aid, flush=True)
+            continue
+
         entry = {
             'id': aid, 'role': asset['role'], 'title': asset['title'],
             'creator': asset['creator'], 'source_page': asset['source_page'],
@@ -246,7 +296,9 @@ def main():
             print('Probe FAILED', aid, repr(e), flush=True)
         audio_report[aid] = audio_entry
         video_ledger.append(entry)
+        time.sleep(5)
 
+    all_sheets = sorted(set(all_sheets))
     save_json(REVIEW / 'candidate_audio_probe.json', {
         'edition': 'raw_fullscreen_v4_replacement_probe',
         'checked_on': MANIFEST['checked_on'],

@@ -20,7 +20,7 @@ concurrency:
 jobs:
   probe-candidates:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Checkout this production branch
         uses: actions/checkout@v4
@@ -46,8 +46,17 @@ jobs:
           ffmpeg -version | head -1
           ffprobe -version | head -1
 
+      - name: Restore cached CC0 source media
+        id: v3-source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_v3/media
+          key: monarch-cam-v3-sources-${{ hashFiles('production/monarch-cam/short_ranking_v3/source_manifest_ranking.json') }}
+          restore-keys: |
+            monarch-cam-v3-sources-
+
       - name: Measure native audio and coarse visual frames for CC0 candidates
-        timeout-minutes: 30
+        timeout-minutes: 40
         run: |
           set -o pipefail
           mkdir -p production/monarch-cam/short_ranking_raw_v4/review/candidates
