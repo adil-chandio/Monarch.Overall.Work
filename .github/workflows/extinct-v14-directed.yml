@@ -1,0 +1,149 @@
+# Full approved 438.766667-second film. Float-decode/peak-safe composed sources. No recovery/reuse of earlier rendered movies.
+name: V14 forensic-directed full film — render candidate and encoded evidence
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: extinct-v14-directed-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned render/audio dependencies and validate the full master
+        run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6 pillow==12.1.0
+          .venv/bin/python -m unittest discover -s tests -p 'test_extinct_v14_directed.py' -v
+          .venv/bin/python production/extinct-life/film-v6-motion/check_sound.py -v
+          node production/extinct-life/film-v6-motion/motion.test.mjs
+          node production/extinct-life/film-v6-motion/action.test.mjs
+          node production/extinct-life/film-v14-directed/motion.test.mjs
+          node production/extinct-life/film-v14-directed/kinematics.test.mjs
+      - name: Build full narration-priority mix with two attributed non-repeating composed cues
+        run: .venv/bin/python production/extinct-life/film-v14-directed/finish.py --audio-only
+      - name: Inspect all full-film stages, absolute seek, locked-camera subject motion and late encounter framing
+        run: node production/extinct-life/film-v14-directed/render.mjs --stills
+      - name: Verify every stage and reachable fixed-length arms after native sampling
+        run: .venv/bin/python -m unittest discover -s tests -p 'test_extinct_v14_directed.py' -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v14-master-audio
+          path: .cache/extinct-v14/proof.wav
+          include-hidden-files: true
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v14-audio-qc
+          path: |
+            production/extinct-life/film-v14-directed/SOUND-QC.json
+            production/extinct-life/film-v14-directed/CREDITS.md
+            production/extinct-life/film-v14-directed/MUSIC-CREDITS.md
+            production/extinct-life/film-v14-directed/MUSIC-LICENSE.json
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v14-native-inspection
+          path: |
+            .cache/extinct-v14/seek-QC.json
+            .cache/extinct-v14/stills/
+          include-hidden-files: true
+          retention-days: 14
+  pictures:
+    needs: preflight
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        part: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6 pillow==12.1.0
+      - name: Render fresh native 1080p frames for the exact non-overlapping master range
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          BOUNDS=$(python -c 'import os,json; n=json.load(open("production/extinct-life/film-v14-directed/schedule.json"))["total_frames"]; i=int(os.environ["PART"]); print("--from="+str(n*i//48)+" --to="+str(n*(i+1)//48))')
+          node production/extinct-life/film-v14-directed/render.mjs $BOUNDS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v14-native-${{ matrix.part }}
+          path: |
+            .cache/extinct-v14/part-*.mp4
+            .cache/extinct-v14/render-*.json
+          include-hidden-files: true
+          retention-days: 3
+  assemble:
+    needs: [preflight, pictures]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6 pillow==12.1.0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v14-native-*
+          path: .cache/extinct-v14
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: v14-master-audio
+          path: .cache/extinct-v14
+      - uses: actions/download-artifact@v4
+        with:
+          name: v14-audio-qc
+          path: production/extinct-life/film-v14-directed
+      - name: Assemble full master; verify every decoded frame and actual encoded audio
+        run: .venv/bin/python production/extinct-life/film-v14-directed/finish.py --assemble-only
+      - name: Extract exact encoded candidate evidence before draft release
+        run: .venv/bin/python production/extinct-life/review-v14/extract_evidence.py
+      - name: Save draft candidate with honest scope and music attribution
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-v14-directed-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --draft --prerelease --title 'Extinct Life V14 — forensic-directed full English candidate (7:19)' --notes "V14 full 438.766667-second English candidate, 1920x1080 30fps, 13163 newly rendered frames. Original eight chapters, voice assets, speed and script preserved. Based on the V13 forensic review: authored scientific explanations, distinct species shots, opposite-bank visible takeoff, separate encounter/transport blocking, persistent conceptual qualifiers, stable collision-aware labels, improved plant-form variation and closer sample ending. Native actor-only occlusion diagnostics and complete encoded decode are technical checks, not zero-flaw certification or uninterrupted human watch/listen. Stylized conceptual 3D, not actual laboratory results, exact animal portraits, validated anatomy, calibrated particle counts or field footage. V13 and prior releases unchanged. Draft pending encoded visual review. Music: Hiraeth and Undertow by Scott Buckley, released under CC-BY 4.0, www.scottbuckley.com.au; https://creativecommons.org/licenses/by/4.0/ . Non-repeating excerpts, EQ, ducking, fades and normalization; no endorsement implied. Credits attached. GitHub only; no YouTube upload." .cache/extinct-v14/Extinct_Life_V14_Directed_English_1080p.mp4 production/extinct-life/film-v14-directed/QC.json production/extinct-life/film-v14-directed/SOUND-QC.json production/extinct-life/film-v14-directed/CREDITS.md production/extinct-life/film-v14-directed/MUSIC-CREDITS.md production/extinct-life/film-v14-directed/English.srt
+      - name: Preserve the real full-master delivery and QC on this session branch
+        run: |
+          rm -rf production/extinct-life/film-v14-directed/inspection
+          cp -r .cache/extinct-v14/stills production/extinct-life/film-v14-directed/inspection
+          cp .cache/extinct-v14/seek-QC.json production/extinct-life/film-v14-directed/seek-QC.json
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v14-directed');q=json.load(open(b/'QC.json'));tag='extinct-life-v14-directed-'+os.environ['GITHUB_RUN_ID'];base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          d={'status':'DRAFT V14 candidate rendered; encoded creative review pending','release':base+'tag/'+tag,'video':base+'download/'+tag+'/Extinct_Life_V14_Directed_English_1080p.mp4','sha256':q['sha256'],'bytes':q['bytes'],'seconds':q['duration_seconds'],'frames':q['native_frames'],'full_film_complete':True,'v9_unchanged':True,'v11_unchanged':True,'v12_unchanged':True,'full_film_creative_acceptance':False,'v13_unchanged':True,'draft':True}
+          (b/'DELIVERY.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name 'Monarch full native 3D production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v14-directed production/extinct-life/review-v14
+          git commit -m 'Record full English 7:19 master delivery and verified QC [skip ci]'
+          git pull --ff-only origin arena/ba8d901e-monarch-overall-work
+          git push origin arena/ba8d901e-monarch-overall-work
