@@ -66,6 +66,15 @@ jobs:
           restore-keys: |
             monarch-cam-v3-sources-
 
+      - name: Restore cached V4 CC0 source media
+        id: v4-media-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_raw_v4/media
+          key: monarch-cam-v4-sources-${{ hashFiles('production/monarch-cam/short_ranking_raw_v4/source_manifest_ranking.json') }}
+          restore-keys: |
+            monarch-cam-v4-sources-
+
       - name: Clean stale failure diagnostics
         run: rm -f production/monarch-cam/short_ranking_raw_v4/review/workflow_failure.txt
 
@@ -99,7 +108,7 @@ jobs:
             2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/source_audio_audit.log
 
       - name: Save V4 source media cache
-        if: always() && steps.v4-source-cache.outputs.cache-hit != 'true' && steps.recon.outcome == 'success'
+        if: always() && steps.v4-media-cache.outputs.cache-hit != 'true' && steps.recon.outcome == 'success'
         uses: actions/cache/save@v4
         with:
           path: production/monarch-cam/work/short_ranking_raw_v4/media

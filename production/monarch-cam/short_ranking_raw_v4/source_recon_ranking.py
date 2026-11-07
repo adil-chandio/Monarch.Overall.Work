@@ -5,6 +5,8 @@ from __future__ import annotations
 import hashlib, json, math, os, re, shutil, subprocess, time
 from pathlib import Path
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -21,7 +23,17 @@ for p in (OUT, REVIEW, LOCAL_MEDIA, CLIPS):
 MANIFEST = json.loads((BASE / 'source_manifest_ranking.json').read_text())
 SPEC = json.loads((BASE / 'ranking_short_spec.json').read_text())
 V3_LEDGER = {x['id']: x for x in json.loads((V3_REVIEW / 'source_video_ledger.json').read_text())}
-HEADERS = {'User-Agent': 'MonarchCamRawV4/1.0 (+CC0 Wikimedia Commons review)'}
+HEADERS = {
+    'User-Agent': 'MonarchCamRawV4/1.0 (https://github.com/adil-chandio/Monarch.Overall.Work; CC0 source review)',
+    'Accept': 'video/webm,application/octet-stream;q=0.9,*/*;q=0.8'
+}
+SESSION = requests.Session()
+SESSION.headers.update(HEADERS)
+RETRY = Retry(total=5, connect=5, read=5, status=5, backoff_factor=2,
+              status_forcelist=[429, 500, 502, 503, 504],
+              allowed_methods=['GET'], respect_retry_after_header=True)
+SESSION.mount('https://', HTTPAdapter(max_retries=RETRY))
+SESSION.mount('http://', HTTPAdapter(max_retries=RETRY))
 
 
 def run(cmd, **kw):
@@ -57,7 +69,7 @@ def get_raw(asset):
     last = None
     for url in asset['download_urls']:
         try:
-            r = requests.get(url, headers=HEADERS, timeout=60, allow_redirects=True)
+            r = SESSION.get(url, timeout=120, allow_redirects=True)
             r.raise_for_status()
             if len(r.content) < 100000:
                 raise RuntimeError('short response')
@@ -69,6 +81,7 @@ def get_raw(asset):
         except Exception as e:
             last = e
             print('Candidate failed', asset['id'], url, repr(e), flush=True)
+            time.sleep(1.0)
     raise RuntimeError('Could not retrieve ' + asset['id'] + ': ' + repr(last))
 
 
