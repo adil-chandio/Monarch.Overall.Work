@@ -1,0 +1,39 @@
+{
+  "source": "production/monarch-cam/short_dance/review/earshot_critique.json",
+  "score": 0.865,
+  "verdict": "close",
+  "in_range": 19,
+  "scored": 23,
+  "critical_issues": 0,
+  "major_issues": 1,
+  "metrics": {
+    "hit_rate": {
+      "value": 1.88,
+      "range": [
+        0.05,
+        1.8599999999999999
+      ]
+    },
+    "band_sub": {
+      "value": -39.7,
+      "range": [
+        -17.7,
+        -2.5999999999999996
+      ]
+    },
+    "side_to_mid_db": {
+      "value": -27.3,
+      "range": [
+        -15.5,
+        -4.0
+      ]
+    },
+    "p_real": {
+      "value": 0.73,
+      "range": [
+        0.77,
+        null
+      ]
+    }
+  }
+}
