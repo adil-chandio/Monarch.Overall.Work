@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ref="$KAGGLE_USERNAME/monarch-wan-pilot-42378485417"
+ref="$KAGGLE_USERNAME/monarch-wan-pilot-42378703629"
 dir=/tmp/mafia-v2-diagnostics
 mkdir -p "$dir"
 kaggle kernels status "$ref" > "$dir/status.txt" 2>&1 || true
