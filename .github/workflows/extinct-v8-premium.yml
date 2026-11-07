@@ -10,7 +10,7 @@ concurrency:
   group: extinct-v8-${{ github.ref }}
   cancel-in-progress: true
 env:
-  PRODUCTION_RENDER: 'false'
+  PRODUCTION_RENDER: 'true'
 jobs:
   lookdev:
     runs-on: ubuntu-24.04
@@ -27,7 +27,7 @@ jobs:
           .venv/bin/pip install bpy==4.2.0 numpy==1.26.4 pillow==11.3.0 imageio-ffmpeg==0.6.0
       - name: Render native 1080p asset/action inspection frames, not scene plates
         run: |
-          for F in 95 105 300 600 980 1250 1490 1740; do
+          for F in 95 300 600 980 1250 1490 1740; do
             .venv/bin/python production/extinct-life/film-v8-premium/scene.py --from=$F --to=$((F+1)) --samples=24 --out=.cache/extinct-v8/inspection
           done
           .venv/bin/python - <<'PY'
@@ -38,6 +38,14 @@ jobs:
           import shutil
           for p in Path('.cache/extinct-v8').glob('render-*.json'):shutil.copy2(p,out/p.name)
           PY
+          .venv/bin/python -m unittest discover -s tests -p test_extinct_v8_premium.py -v
+          .venv/bin/python production/extinct-life/film-v8-premium/scene.py --from=0 --to=76 --step=75 --width=480 --samples=8 --lock-camera --out=.cache/extinct-v8/motion
+          .venv/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('production/extinct-life/film-v8-premium/inspection');q=json.load(open('.cache/extinct-v8/render-0-76.json'));a,b=q['frames'];assert a['camera_matrix']==b['camera_matrix'];assert a['animal_surface_sha256']!=b['animal_surface_sha256'];q['surface_changes_with_locked_camera']=True
+          (p/'motion-QC.json').write_text(json.dumps(q,indent=2))
+          PY
       - name: Preserve original production inspection on the session branch
         run: |
           git config user.name 'Monarch native look development'
@@ -47,7 +55,7 @@ jobs:
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
           git push origin HEAD:arena/ba8d901e-monarch-overall-work
   pictures:
-    if: false
+    if: true
     needs: lookdev
     runs-on: ubuntu-24.04
     timeout-minutes: 65

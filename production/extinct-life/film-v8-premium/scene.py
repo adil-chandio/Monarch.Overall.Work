@@ -64,13 +64,14 @@ def setup(kind):
  bpy.ops.wm.read_factory_settings(use_empty=True);s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=a.samples;s.cycles.use_denoising=True;s.cycles.adaptive_threshold=.065;s.cycles.max_bounces=5;s.cycles.diffuse_bounces=3;s.cycles.glossy_bounces=3;s.cycles.transmission_bounces=4;s.render.threads_mode='FIXED';s.render.threads=min(4,os.cpu_count() or 2);s.render.use_persistent_data=True;s.render.resolution_x=a.width;s.render.resolution_y=round(a.width*9/16);s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGB';s.render.fps=30;s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.render.film_transparent=False
  w=bpy.data.worlds.new('Cold skylight' if kind=='coast' else 'Environment fill');w.use_nodes=True;w.node_tree.nodes['Background'].inputs[0].default_value=(.23,.34,.43,1) if kind=='coast' else (.29,.34,.35,1);w.node_tree.nodes['Background'].inputs[1].default_value=.35 if kind=='coast' else .25;s.world=w
  if kind in ('forest','forest-late','coast'):
-  nodes=w.node_tree.nodes;links=w.node_tree.links;sky=nodes.new('ShaderNodeTexSky');sky.sky_type='NISHITA';sky.sun_elevation=.18 if kind=='coast' else .3;sky.sun_rotation=2.5;sky.altitude=20;sky.air_density=1.15;sky.dust_density=.6;links.new(sky.outputs[0],nodes['Background'].inputs[0]);nodes['Background'].inputs[1].default_value=.18 if kind=='coast' else .22
+  nodes=w.node_tree.nodes;links=w.node_tree.links;sky=nodes.new('ShaderNodeTexSky');sky.sky_type='NISHITA';sky.sun_elevation=.18 if kind=='coast' else .3;sky.sun_rotation=2.5;sky.altitude=20;sky.air_density=1.15;sky.dust_density=.6;links.new(sky.outputs[0],nodes['Background'].inputs[0]);nodes['Background'].inputs[1].default_value=.035 if kind=='coast' else .04
  s.use_nodes=True;n=s.node_tree.nodes;n.clear();r=n.new('CompositorNodeRLayers');gl=n.new('CompositorNodeGlare');gl.glare_type='FOG_GLOW';gl.quality='HIGH';gl.threshold=2;gl.mix=-.94;out=n.new('CompositorNodeComposite');s.node_tree.links.new(r.outputs['Image'],gl.inputs['Image']);s.node_tree.links.new(gl.outputs['Image'],out.inputs['Image'])
  return s
 
 def height(x,y,cold=False):
  z=.045*math.sin(x*2.1+y*.7)+.04*math.sin(y*3.7-x*.6)
  if cold:
+  z*=.18
   z+=.27*math.sin(x*.15)*math.sin(y*.11)-.85*ease((-x-8)/9)
   z+=ease((y-18)/18)*(4.8+2.0*math.sin(x*.12+y*.08)+1.3*math.sin(x*.31-y*.14)+.6*math.sin(x*.75+y*.4))
  else:z-=.23*ease((x-1.8)/.4)
@@ -182,7 +183,7 @@ def mastodon():
 
 def forest_scene(late=False):
  if late:random.seed(81295)
- soil=material('Wet organic earth',(.065,.052,.031),.91,scale=24,bump=.42);stone=material('Slate inclusions',(.23,.24,.20),.78,scale=15,bump=.6);ground(soil);rocks(stone,100);vegetation();body,animalupdate=mastodon();area('Low amber sun',(-7,-6,10),(0,0,1),2300,(1,.69,.4),6);area('Large cool sky',(6,-1,9),(0,0,1),1600,(.57,.73,1),8);area('Coat rim',(-1,7,8),(0,0,2),2600,(1,.85,.59),5)
+ soil=material('Wet organic earth',(.065,.052,.031),.91,scale=24,bump=.42);stone=material('Slate inclusions',(.23,.24,.20),.78,scale=15,bump=.6);ground(soil,size=65);rocks(stone,100);vegetation();body,animalupdate=mastodon();area('Low amber sun',(-7,-6,10),(0,0,1),2300,(1,.69,.4),6);area('Large cool sky',(6,-1,9),(0,0,1),1600,(.57,.73,1),8);area('Coat rim',(-1,7,8),(0,0,2),2600,(1,.85,.59),5)
  water=material('Reflective quiet channel',(.04,.09,.095),.18,metal=.22,scale=8,bump=.15);box('Watercourse',(4,1,-.025),(4,35,.035),water,.01)
  cam=camera((8.8,-11,3.6),(0,-.5,1.85),42,2.8)
  if late:
@@ -218,7 +219,7 @@ def macro_scene():
  for j in range(N):
   for i in range(N):q=j*(N+1)+i;f.append((q,q+1,q+N+2,q+N+1))
  mesh('Mineral contact patch',v,f,mat);strands=[]
- for k in range(3):strands.extend(molecular_fragment(-.65+k*.65,-.3+k*.06,.055,.7-k*.1,ivory,teal))
+ for k in range(3):strands.extend(molecular_fragment(-.65+k*.65,-.3+(k%2)*.22,.005,.7-k*.1,ivory,teal))
  for k in range(32):
   x=random.uniform(-2.6,2.6);y=random.uniform(-1.8,1.8);r=random.uniform(.018,.065);ell('Mineral inclusion',(x,y,-.05),(r,r*.7,r*.35),mat,12,8)
  area('Macro softbox',(-3,-4,5),(0,0,0),430,(1,.77,.48),3);area('Macro edge',(2,3,4),(0,0,0),560,(.6,.76,1),2);cam=camera((1.8,-3,1.9),(0,.03,0),62,3.5)
@@ -231,9 +232,9 @@ def coast_scene():
  terrain=material('Polar desert — frost and shale',(.31,.32,.29),.94,scale=35,bump=.7);rock=material('Exposed weathered strata',(.24,.25,.24),.91,scale=21,bump=.65);snow=material('Old frost',(.63,.72,.75),.88,scale=45,bump=.3);ground(terrain,True,100);rocks(rock,190,35,True)
  water=material('Cold fjord',(.12,.23,.29),.19,metal=.25,scale=55,bump=.17);wn=next(n for n in water.node_tree.nodes if n.type=='TEX_NOISE');wn.noise_dimensions='4D';box('Fjord surface',(-25,0,-.35),(32,120,.08),water,.01)
  for j in range(45):
-  x=random.uniform(-25,25);y=random.uniform(-.5,24);r=random.uniform(.18,1.2);v=[(x,y,height(x,y,True)+.009)]
+  x=random.uniform(-25,25);y=random.uniform(-.5,24);r=random.uniform(.18,1.2);v=[(x,y,height(x,y,True)+.025)]
   for j in range(25):
-   ang=j/24*math.tau;xx=x+math.cos(ang)*r*(1+.12*math.sin(ang*5));yy=y+math.sin(ang)*r*.6;v.append((xx,yy,height(xx,yy,True)+.009))
+   ang=j/24*math.tau;xx=x+math.cos(ang)*r*(1+.12*math.sin(ang*5));yy=y+math.sin(ang)*r*.6;v.append((xx,yy,height(xx,yy,True)+.025))
   mesh('Conforming snow hollow',v,[(0,j+1,j+2) for j in range(24)],snow)
  area('Arctic overcast',(-10,-8,22),(0,0,0),5800,(.73,.86,1),18);area('Horizon light',(20,22,10),(0,0,1),2700,(1,.84,.65),12);cam=camera((6,-3,1.8),(0,5,.7),36,11)
  def update(t):
@@ -250,7 +251,8 @@ def strata_scene():
     for q in [j,j+1]:v.append((x,yy+.014*math.sin(x*9+q),q*.17+.024*math.sin(x*3+q*.4)))
   for k in range(N):
    n=k*4;f.extend([(n,n+4,n+5,n+1),(n+2,n+3,n+7,n+6),(n,n+2,n+6,n+4),(n+1,n+5,n+7,n+3)])
-  f.extend([(0,1,3,2),(N*4,N*4+2,N*4+3,N*4+1)]);mesh('Irregular exposed sediment bed',v,f,mats[j%5])
+  f.extend([(0,1,3,2),(N*4,N*4+2,N*4+3,N*4+1)]);bed=mesh('Irregular exposed sediment bed',v,f,mats[j%5])
+  for poly in bed.data.polygons:poly.use_smooth=False
  # Field support/guide visibly constrains the sampling sleeve.
  box('Sampler base',(2.1,-.25,2.73),(.6,1.05,.15),metal);box('Vertical guide',(2.3,.05,3.4),(.12,.12,1.5),metal)
  sleeve=box('Guided sample carriage',(1.99,-.2,3.1),(.43,.43,.55),metal);handle=box('Carriage top grip',(2,-.2,3.48),(.55,.2,.12),rubber)
