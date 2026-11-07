@@ -33,6 +33,13 @@ for directory in (OUT, REVIEW, MEDIA, FRAMES):
 MANIFEST = json.loads((BASE / "source_manifest_ranking.json").read_text())
 VIDEO_ASSETS = [a for a in MANIFEST["assets"] if a.get("role") == "video"]
 HEADERS = {"User-Agent": "MonarchCamRankingV3/1.0 (+CC0 Wikimedia Commons review)"}
+LEDGER_PATH = REVIEW / "source_video_ledger.json"
+LEDGER = {}
+if LEDGER_PATH.exists():
+    try:
+        LEDGER = {item["id"]: item for item in json.loads(LEDGER_PATH.read_text())}
+    except Exception as exc:
+        print("Cached source ledger unreadable; fetching fresh media:", repr(exc), flush=True)
 
 
 def run(cmd: list[str], **kwargs) -> subprocess.CompletedProcess:
@@ -67,10 +74,16 @@ def retrieve(asset: dict) -> str:
     except Exception as exc:
         print("Rights-page archive unavailable:", asset["id"], repr(exc), flush=True)
 
+    cached = MEDIA / asset["local_filename"]
+    expected = LEDGER.get(asset["id"], {}).get("sha256")
+    if cached.exists() and cached.stat().st_size >= 100_000 and (not expected or sha256(cached) == expected):
+        print("Using cached", asset["id"], cached.stat().st_size, "bytes", flush=True)
+        return LEDGER.get(asset["id"], {}).get("download_url") or asset["download_urls"][0]
+
     last_error = None
     for url in asset["download_urls"]:
         try:
-            response = requests.get(url, headers=HEADERS, timeout=240, allow_redirects=True)
+            response = requests.get(url, headers=HEADERS, timeout=60, allow_redirects=True)
             response.raise_for_status()
             if len(response.content) < 100_000:
                 raise RuntimeError(f"Only {len(response.content)} bytes returned")

@@ -69,6 +69,17 @@ jobs:
             'git+https://github.com/Leonxlnx/earshot.git@main'
           python -c 'import torch; from earshot import api; print("Earshot import OK; torch", torch.__version__)'
 
+      - name: Restore cached CC0 source media
+        id: v3-source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            production/monarch-cam/work/short_ranking_v3/media
+            production/monarch-cam/work/short_ranking_v3/native_ambience.wav
+          key: monarch-cam-v3-sources-${{ hashFiles('production/monarch-cam/short_ranking_v3/source_manifest_ranking.json') }}
+          restore-keys: |
+            monarch-cam-v3-sources-
+
       - name: Validate clean-premium V3 contracts, factual guardrails, cleared audio, fonts and preserved MP4s
         run: |
           python -m py_compile \
@@ -185,11 +196,20 @@ jobs:
           PY
 
       - name: Retrieve the five CC0 animal clips and rebuild clean-premium V3 review sheets
-        timeout-minutes: 15
+        timeout-minutes: 8
         run: |
           set -o pipefail
           python production/monarch-cam/short_ranking_v3/source_recon_ranking.py \
             2>&1 | tee production/monarch-cam/short_ranking_v3/review/source_recon.log
+
+      - name: Save CC0 source media cache
+        if: always() && steps.v3-source-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            production/monarch-cam/work/short_ranking_v3/media
+            production/monarch-cam/work/short_ranking_v3/native_ambience.wav
+          key: ${{ steps.v3-source-cache.outputs.cache-primary-key }}
 
       - name: Lock exact visual timings after contact-sheet review
         run: |
