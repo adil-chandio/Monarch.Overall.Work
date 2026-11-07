@@ -1,0 +1,97 @@
+name: Recover missing V8 second and publish completed opening
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-v8-recover.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: extinct-v8-recovery-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  missing_frames:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        slice: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libgl1 libxi6 libxrender1 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0
+          python -m venv .venv
+          .venv/bin/pip install bpy==4.2.0 numpy==1.26.4 pillow==11.3.0 imageio-ffmpeg==0.6.0
+      - name: Render only ten missing native frames; preserve all sixty successful seconds
+        env:
+          SLICE: ${{ matrix.slice }}
+        run: |
+          FROM=$((1770+SLICE*10))
+          TO=$((FROM+10))
+          .venv/bin/python production/extinct-life/film-v8-premium/scene.py --from=$FROM --to=$TO
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v8-recovered-frames-${{ matrix.slice }}
+          path: .cache/extinct-v8/frames/*.png
+          include-hidden-files: true
+          retention-days: 3
+  assemble:
+    needs: missing_frames
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install numpy==1.26.4 pillow==11.3.0 imageio-ffmpeg==0.6.0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v8-native-*
+          run-id: 42323227250
+          github-token: ${{ github.token }}
+          path: .cache/extinct-v8
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: v8-narration-priority-mix
+          run-id: 42323227250
+          github-token: ${{ github.token }}
+          path: .cache/extinct-v8
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v8-recovered-frames-*
+          path: .cache/extinct-v8/frames
+          merge-multiple: true
+      - name: Encode only recovered second59 and assemble saved native movie
+        run: |
+          .venv/bin/python production/extinct-life/film-v8-premium/finish.py --shard=59
+          .venv/bin/python production/extinct-life/film-v8-premium/finish.py --assemble
+      - name: Deliver the actual finished development film
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-v8-premium-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'Premium moving-3D opening — 61-second English development film' --notes-file production/extinct-life/film-v8-premium/CREDITS.md .cache/extinct-v8/Extinct_Life_V8_Premium_Opening_English_1080p.mp4 production/extinct-life/film-v8-premium/QC.json production/extinct-life/film-v8-premium/English-v8.srt production/extinct-life/film-v8-premium/CREDITS.md
+      - name: Record verified delivery on this session branch
+        run: |
+          python - <<'PY'
+          import os,json
+          from pathlib import Path
+          p=Path('production/extinct-life/film-v8-premium');q=json.load(open(p/'QC.json'));tag='extinct-life-v8-premium-'+os.environ['GITHUB_RUN_ID'];base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          (p/'DELIVERY.json').write_text(json.dumps({'status':'Rendered development film; owner creative review pending','release':base+'tag/'+tag,'video':base+'download/'+tag+'/Extinct_Life_V8_Premium_Opening_English_1080p.mp4','seconds':61,'frames':1830,'sha256':q['sha256'],'full_film':False},indent=2))
+          PY
+          git config user.name 'Monarch premium 3D production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v8-premium
+          git commit -m 'Record V8 one-minute development delivery and measured QC [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work

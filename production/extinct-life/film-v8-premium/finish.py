@@ -100,7 +100,7 @@ def assemble():
  check=run(['-v','info','-i',out,'-map','0:v:0','-vf','showinfo','-an','-f','null','-']).stderr.decode();ns=re.findall(r'Parsed_showinfo_\d+.*?n:\s*(\d+).*?s:(\d+x\d+)',check);assert len(ns)==1830,(len(ns),check[-1000:]);assert all(size=='1920x1080' for _,size in ns)
  q={'status':'Fresh native development film; owner creative review pending','engine':'Blender 4.2 Cycles CPU','samples':24,'width':1920,'height':1080,'fps':30,'frames':1830,'seconds':61,'why_61_not_60':'The approved sentence “Living things shed biological material” ends at ~60.74 s. No word is cut or sped up.','sha256':sha(out),'bytes':out.stat().st_size,'full_decode':True,'old_movie_frames_used':False,'generated_image_plates_used':False,'reference_assets_copied':False,'full_film_replacement':False,'encoded_audio':measured,'audio':aq,'script_sha256':m['script_sha256'],'not_expert_validated_anatomy':True,'not_actual_field_or_molecular_footage':True,'continuous_human_watch_listen_claimed':False}
  inspect=B/'encoded-inspection';inspect.mkdir(exist_ok=True);selected=[95,300,600,980,1250,1490,1740]
- filt='select='+ '+'.join(f'eq(n\\,{n})' for n in selected)
+ filt="select='"+ '+'.join(f'eq(n,{n})' for n in selected)+"'"
  run(['-v','warning','-i',out,'-vf',filt,'-vsync',0,'-q:v',2,inspect/'%02d.jpg'])
  q['encoded_inspection_frames']=selected
  (B/'QC.json').write_text(json.dumps(q,indent=2)+'\n');(B/'English-v8.srt').write_text('\n'.join(f'{i}\n{stamp(st)} --> {stamp(en)}\n{text}\n' for i,(st,en,text) in enumerate(CAPTIONS,1)));print(json.dumps(q,indent=2))
