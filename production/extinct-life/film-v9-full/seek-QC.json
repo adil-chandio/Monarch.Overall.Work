@@ -1,0 +1,1045 @@
+{
+  "samples": [
+    {
+      "frame": 60,
+      "sequence": "FULL-01",
+      "world": "opening",
+      "time": 2,
+      "stage": "opening",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.32
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 2,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -3.049797885642366,
+        2.75,
+        -3.557711767228795
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 131,
+      "sequence": "FULL-01",
+      "world": "opening",
+      "time": 4.366666666666666,
+      "stage": "opening",
+      "mastodon_position": [
+        2.6,
+        0,
+        1.752
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 4.366666666666666,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -2.7657177396571293,
+        2.75,
+        -4.4091900814518485
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 243,
+      "sequence": "FULL-02",
+      "world": "trace",
+      "time": 2,
+      "stage": "trace",
+      "binding_progress": 0.27520751953125,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        3.1188749999999996,
+        2.17825,
+        4.2906875
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 341,
+      "sequence": "FULL-02",
+      "world": "trace",
+      "time": 5.266666666666667,
+      "stage": "trace",
+      "binding_progress": 1,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        2.806675356481482,
+        1.9679578796296295,
+        3.930772631944444
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 463,
+      "sequence": "FULL-03",
+      "world": "coast",
+      "time": 2,
+      "stage": "coast",
+      "water_time": 2,
+      "clue_is_incomplete": true,
+      "camera": [
+        7.5,
+        3.15,
+        7.833333333333334
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 668,
+      "sequence": "FULL-03",
+      "world": "coast",
+      "time": 8.833333333333334,
+      "stage": "coast",
+      "water_time": 8.833333333333334,
+      "clue_is_incomplete": true,
+      "camera": [
+        9.208333333333334,
+        4.6875,
+        10.680555555555557
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 832,
+      "sequence": "FULL-04",
+      "world": "section",
+      "time": 2,
+      "stage": "sediment",
+      "guided_sampling": 0.103515625,
+      "deposit_age_not_dna_age": true,
+      "camera": [
+        5.7593749999999995,
+        3.50625,
+        6.671875
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 1219,
+      "sequence": "FULL-04",
+      "world": "section",
+      "time": 14.9,
+      "stage": "sediment",
+      "guided_sampling": 1,
+      "deposit_age_not_dna_age": true,
+      "camera": [
+        4.220350634765625,
+        2.85795029296875,
+        5.457550439453125
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 1453,
+      "sequence": "FULL-05",
+      "world": "extraction",
+      "time": 2,
+      "stage": "extraction",
+      "supported_carriage": true,
+      "source_contact": 0.896484375,
+      "transfer": 0,
+      "release": 0,
+      "camera": [
+        4.0358024691358025,
+        3.137037037037037,
+        5.54074074074074
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 1542,
+      "sequence": "FULL-05",
+      "world": "extraction",
+      "time": 4.966666666666667,
+      "stage": "extraction",
+      "supported_carriage": true,
+      "source_contact": 1,
+      "transfer": 0.07067671403563469,
+      "release": 0,
+      "camera": [
+        3.55272516003658,
+        2.9216851165980793,
+        5.060592455418381
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 1660,
+      "sequence": "FULL-06",
+      "world": "shedding",
+      "time": 2,
+      "stage": "shedding",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.32
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 2,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -3.049797885642366,
+        2.75,
+        -3.557711767228795
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 1834,
+      "sequence": "FULL-06",
+      "world": "shedding",
+      "time": 7.8,
+      "stage": "shedding",
+      "mastodon_position": [
+        2.6,
+        0,
+        0.9279999999999999
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        4.1,
+        -0.02,
+        -2.6839999999999997
+      ],
+      "gait_clock": 7.8,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -2.380002106891904,
+        2.75,
+        -5.57529734523888
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 1985,
+      "sequence": "FULL-07",
+      "world": "river",
+      "time": 2,
+      "stage": "transport",
+      "leaf_position": [
+        4.3,
+        0.0265702479338843,
+        -4
+      ],
+      "current_distance": 0,
+      "camera": [
+        0.6,
+        2,
+        -7.4
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 2470,
+      "sequence": "FULL-07",
+      "world": "river",
+      "time": 18.166666666666668,
+      "stage": "transport",
+      "leaf_position": [
+        4.3,
+        0.015,
+        1.1093333333333337
+      ],
+      "current_distance": 5.109333333333334,
+      "camera": [
+        0.6,
+        2,
+        -2.290666666666666
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 2742,
+      "sequence": "FULL-08",
+      "world": "section",
+      "time": 2,
+      "stage": "sediment",
+      "guided_sampling": 0.103515625,
+      "deposit_age_not_dna_age": true,
+      "camera": [
+        5.7593749999999995,
+        3.50625,
+        6.671875
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 2958,
+      "sequence": "FULL-08",
+      "world": "section",
+      "time": 9.2,
+      "stage": "sediment",
+      "guided_sampling": 1,
+      "deposit_age_not_dna_age": true,
+      "camera": [
+        4.499384375,
+        2.95933125,
+        5.716496875
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 3112,
+      "sequence": "FULL-09",
+      "world": "trace",
+      "time": 1.5333333333333334,
+      "stage": "trace",
+      "binding_progress": 0.11249924069251545,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        3.165282504629629,
+        2.2095548425925924,
+        4.344096576388888
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 3166,
+      "sequence": "FULL-09",
+      "world": "trace",
+      "time": 3.3333333333333335,
+      "stage": "trace",
+      "binding_progress": 0.8477685245466821,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        2.9827546296296297,
+        2.0863425925925925,
+        4.134201388888889
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 3265,
+      "sequence": "FULL-10",
+      "world": "weather",
+      "time": 2,
+      "stage": "weather",
+      "binding_progress": 0.27520751953125,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        3.1188749999999996,
+        2.17825,
+        4.2906875
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 3496,
+      "sequence": "FULL-10",
+      "world": "weather",
+      "time": 9.7,
+      "stage": "weather",
+      "binding_progress": 1,
+      "loss": 1,
+      "never_complete_genome": true,
+      "camera": [
+        2.726216,
+        1.9224159999999995,
+        3.8207079999999993
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 3670,
+      "sequence": "FULL-11",
+      "world": "mineral",
+      "time": 2,
+      "stage": "mineral",
+      "binding_progress": 0.27520751953125,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        3.1188749999999996,
+        2.17825,
+        4.2906875
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 4021,
+      "sequence": "FULL-11",
+      "world": "mineral",
+      "time": 13.7,
+      "stage": "mineral",
+      "binding_progress": 1,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        2.869867471605944,
+        2.0324375102788523,
+        3.959793658457155
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 4241,
+      "sequence": "FULL-12",
+      "world": "extraction",
+      "time": 2,
+      "stage": "extraction",
+      "supported_carriage": true,
+      "source_contact": 0.896484375,
+      "transfer": 0,
+      "release": 0,
+      "camera": [
+        4.0358024691358025,
+        3.137037037037037,
+        5.54074074074074
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 4456,
+      "sequence": "FULL-12",
+      "world": "extraction",
+      "time": 9.166666666666666,
+      "stage": "extraction",
+      "supported_carriage": true,
+      "source_contact": 1,
+      "transfer": 1,
+      "release": 1,
+      "camera": [
+        3.58718582104481,
+        2.9483592678326476,
+        5.043940757887517
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 4624,
+      "sequence": "FULL-13",
+      "world": "reference",
+      "time": 2,
+      "stage": "reference",
+      "partial_alignment": 0.05792000000000001,
+      "missing_reference": true,
+      "complete_genome": false,
+      "camera": [
+        3.904914285714286,
+        3.0395428571428575,
+        5.478285714285715
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 5109,
+      "sequence": "FULL-13",
+      "world": "reference",
+      "time": 18.166666666666668,
+      "stage": "reference",
+      "partial_alignment": 1,
+      "missing_reference": true,
+      "complete_genome": false,
+      "camera": [
+        3.808389298506325,
+        3.3795471504597874,
+        5.461822980173245
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 5381,
+      "sequence": "FULL-14",
+      "world": "controls",
+      "time": 2,
+      "stage": "controls",
+      "partial_alignment": 0.05792000000000001,
+      "missing_reference": true,
+      "complete_genome": false,
+      "camera": [
+        3.904914285714286,
+        3.0395428571428575,
+        5.478285714285715
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 5891,
+      "sequence": "FULL-14",
+      "world": "controls",
+      "time": 19,
+      "stage": "controls",
+      "partial_alignment": 1,
+      "missing_reference": true,
+      "complete_genome": false,
+      "camera": [
+        3.8410714285714285,
+        3.3982142857142863,
+        5.515178571428571
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 6173,
+      "sequence": "FULL-15",
+      "world": "branch",
+      "time": 2,
+      "stage": "branch",
+      "partial_alignment": 0.05792000000000001,
+      "missing_reference": true,
+      "complete_genome": false,
+      "camera": [
+        3.904914285714286,
+        3.0395428571428575,
+        5.478285714285715
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 6434,
+      "sequence": "FULL-15",
+      "world": "branch",
+      "time": 10.7,
+      "stage": "branch",
+      "partial_alignment": 1,
+      "missing_reference": true,
+      "complete_genome": false,
+      "camera": [
+        3.6063981995884773,
+        3.215042369684499,
+        5.114512560013717
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 6620,
+      "sequence": "FULL-16",
+      "world": "community",
+      "time": 2,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.32
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 2,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -3.7016976416780234,
+        2.75,
+        -4.178216971139809
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 7225,
+      "sequence": "FULL-16",
+      "world": "community",
+      "time": 22.166666666666668,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        -0.6000000000000005
+      ],
+      "goose_position": [
+        7.286333333333333,
+        2.7849999999999997,
+        -22.263333333333332
+      ],
+      "leaf_position": [
+        4.1,
+        -0.02,
+        -4.62
+      ],
+      "gait_clock": 14.166666666666668,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -2.9378734853311195,
+        2.75,
+        -7.809840330474828
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 7544,
+      "sequence": "FULL-17",
+      "world": "proxies",
+      "time": 2,
+      "stage": "proxies",
+      "evidence_complement": true,
+      "known_appearance": false,
+      "camera": [
+        3.418287037037037,
+        2.600462962962963,
+        4.600462962962963
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 8129,
+      "sequence": "FULL-17",
+      "world": "proxies",
+      "time": 21.5,
+      "stage": "proxies",
+      "evidence_complement": true,
+      "known_appearance": false,
+      "camera": [
+        3.7901656539351847,
+        2.8884476273148145,
+        4.8884476273148145
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 8441,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "time": 2,
+      "stage": "encounter",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.32
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 2,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -3.7016976416780234,
+        2.75,
+        -4.178216971139809
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 9228,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "time": 28.233333333333334,
+      "stage": "encounter",
+      "mastodon_position": [
+        2.6,
+        0,
+        -2.056
+      ],
+      "goose_position": [
+        8.135666666666665,
+        2.7849999999999997,
+        -30.756666666666664
+      ],
+      "leaf_position": [
+        4.1,
+        -0.02,
+        -6.0760000000000005
+      ],
+      "gait_clock": 20.233333333333334,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -2.9378734853311195,
+        2.75,
+        -9.265840330474827
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 9618,
+      "sequence": "FULL-19",
+      "world": "boundary",
+      "time": 2,
+      "stage": "boundary",
+      "evidence_complement": true,
+      "known_appearance": false,
+      "camera": [
+        3.418287037037037,
+        2.600462962962963,
+        4.600462962962963
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 9959,
+      "sequence": "FULL-19",
+      "world": "boundary",
+      "time": 13.366666666666667,
+      "stage": "boundary",
+      "evidence_complement": true,
+      "known_appearance": false,
+      "camera": [
+        3.1443739143947185,
+        2.239902677040466,
+        4.239902677040466
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 10176,
+      "sequence": "FULL-20",
+      "world": "gaps",
+      "time": 2,
+      "stage": "gaps",
+      "evidence_complement": false,
+      "known_appearance": false,
+      "camera": [
+        3.418287037037037,
+        2.600462962962963,
+        4.600462962962963
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 10607,
+      "sequence": "FULL-20",
+      "world": "gaps",
+      "time": 16.366666666666667,
+      "stage": "gaps",
+      "evidence_complement": false,
+      "known_appearance": false,
+      "camera": [
+        3.331792027820644,
+        2.4244298761145404,
+        4.424429876114541
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 10858,
+      "sequence": "FULL-21",
+      "world": "integration",
+      "time": 2,
+      "stage": "integration",
+      "evidence_complement": true,
+      "known_appearance": false,
+      "camera": [
+        3.418287037037037,
+        2.600462962962963,
+        4.600462962962963
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 11157,
+      "sequence": "FULL-21",
+      "world": "integration",
+      "time": 11.966666666666667,
+      "stage": "integration",
+      "evidence_complement": true,
+      "known_appearance": false,
+      "camera": [
+        3.099315572487997,
+        2.199455231910151,
+        4.199455231910151
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 11357,
+      "sequence": "FULL-22",
+      "world": "coast",
+      "time": 2,
+      "stage": "coast",
+      "water_time": 2,
+      "clue_is_incomplete": true,
+      "camera": [
+        7.5,
+        3.15,
+        7.833333333333334
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 11635,
+      "sequence": "FULL-22",
+      "world": "coast",
+      "time": 11.266666666666667,
+      "stage": "coast",
+      "water_time": 11.266666666666667,
+      "clue_is_incomplete": true,
+      "camera": [
+        9.816666666666668,
+        5.235000000000001,
+        11.694444444444446
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 11827,
+      "sequence": "FULL-23",
+      "world": "trace",
+      "time": 2,
+      "stage": "trace",
+      "binding_progress": 0.27520751953125,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        3.1188749999999996,
+        2.17825,
+        4.2906875
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 11900,
+      "sequence": "FULL-23",
+      "world": "trace",
+      "time": 4.433333333333334,
+      "stage": "trace",
+      "binding_progress": 0.9999548533950612,
+      "loss": 0,
+      "never_complete_genome": true,
+      "camera": [
+        2.8765879577546296,
+        2.0148044363425925,
+        4.01186102170139
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 12013,
+      "sequence": "FULL-24",
+      "world": "canopy",
+      "time": 2,
+      "stage": "canopy",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.32
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 2,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -9.600000000000001,
+        4.026666666666666,
+        -8.533333333333333
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 12226,
+      "sequence": "FULL-24",
+      "world": "canopy",
+      "time": 9.1,
+      "stage": "canopy",
+      "mastodon_position": [
+        2.6,
+        0,
+        0.6160000000000001
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 9.1,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -8.18,
+        4.831333333333333,
+        -10.426666666666666
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 12393,
+      "sequence": "FULL-25",
+      "world": "closing",
+      "time": 2,
+      "stage": "closing",
+      "water_time": 2,
+      "clue_is_incomplete": true,
+      "camera": [
+        2.8671875,
+        1.765625,
+        3.5765625
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 12930,
+      "sequence": "FULL-25",
+      "world": "closing",
+      "time": 19.9,
+      "stage": "closing",
+      "water_time": 19.9,
+      "clue_is_incomplete": true,
+      "camera": [
+        6.73539190266927,
+        4.2954357259114575,
+        8.411612687174479
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    },
+    {
+      "frame": 9557,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "time": 39.2,
+      "stage": "encounter",
+      "mastodon_position": [
+        2.6,
+        0,
+        -4.688000000000001
+      ],
+      "goose_position": [
+        9.671,
+        2.7849999999999997,
+        -46.11000000000001
+      ],
+      "leaf_position": [
+        4.1,
+        -0.02,
+        -8.708
+      ],
+      "gait_clock": 31.200000000000003,
+      "walk_weight": 1,
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "camera": [
+        -2.9378734853311195,
+        2.75,
+        -11.897840330474828
+      ],
+      "caption_panels": 0,
+      "organic_native_assets": true
+    }
+  ],
+  "deterministic_seek": true,
+  "subject_moves_with_frozen_camera": true,
+  "width": 1920,
+  "height": 1080,
+  "page_errors": [],
+  "not_a_full_watch_or_listen": true
+}
