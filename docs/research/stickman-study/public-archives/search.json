@@ -1,0 +1,229 @@
+[
+  {
+    "query": "mediatype:movies AND (creator:S3dV OR title:S3dV OR description:S3dV)",
+    "status": "ok",
+    "response": {
+      "numFound": 0,
+      "start": 0,
+      "docs": []
+    }
+  },
+  {
+    "query": "mediatype:movies AND (title:\"Stick Empires\" OR creator:\"Arckon Arts\")",
+    "status": "ok",
+    "response": {
+      "numFound": 0,
+      "start": 0,
+      "docs": []
+    }
+  },
+  {
+    "query": "mediatype:movies AND (title:\"Stick Figure War\" OR creator:\"SoKrispyMedia\")",
+    "status": "ok",
+    "response": {
+      "numFound": 4,
+      "start": 0,
+      "docs": [
+        {
+          "creator": "SoKrispyMedia",
+          "identifier": "youtube_-_UCKo61AAaRD00ibCWJZ321MQ_2020",
+          "title": "YouTube - UCKo61AAaRD00ibCWJZ321MQ (2020)"
+        },
+        {
+          "creator": "SoKrispyMedia",
+          "identifier": "youtube-_rb31gBRaY8",
+          "title": "Mouse Trap"
+        },
+        {
+          "creator": "SoKrispyMedia",
+          "identifier": "youtube-2cukB4_hDCI",
+          "title": "Robots testing the Bulletproof #cybertruck"
+        },
+        {
+          "creator": "SoKrispyMedia",
+          "identifier": "youtube-NE3GGT20qHU",
+          "title": "What\u2019s Real vs VFX in MrBeast's Beast Games"
+        }
+      ]
+    }
+  },
+  {
+    "query": "mediatype:movies AND creator:\"Alan Becker\"",
+    "status": "ok",
+    "response": {
+      "numFound": 135,
+      "start": 0,
+      "docs": [
+        {
+          "creator": "Alan Becker",
+          "identifier": "pink-army",
+          "title": "Pink Army"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "videoplayanimator-vs.-animation-ii-originalback-2_20221208",
+          "title": "Animator vs. Animation II (original)"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-O3JPzQYJTZk",
+          "title": "The Killer Bunny - Animation vs. Minecraft Shorts Ep. 12"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-jJWMzq4gdnc",
+          "title": "An Actual Short Compilation - Season 1 (official)"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "green-stick-figure-7416053412338437422-no-watermark",
+          "title": "I did the Carlton! (Green Stick Figure TikTok Video)"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "animator-vs.-animation-iii-tts-dub-my-version",
+          "title": "Animator vs. Animation III (TTS Dub) (My Version)"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "the-virus-animator-vs.-animation-5-3hgrw-7-qqpn-e",
+          "title": "The Virus - Animator vs. Animation 5"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "sticksfight_202308",
+          "title": "sticksfight"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "victim-animator-vs.-animation-11_202510",
+          "title": "Victim Animator Vs. Animation 11"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "ava10yearanniversary",
+          "title": "The Story of Animator vs. Animation - 10 Year Anniversary"
+        },
+        {
+          "creator": "Alan becker",
+          "identifier": "y-2mate.com-note-block-universe-animation-vs-minecraft-shorts-ep-29-720p",
+          "title": "AVM so..so sad"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "the-far-lands-animation-vs.-minecraft-shorts-ep-38-q-z-x-1-ud-jvc-m",
+          "title": "The Far Lands - Animation vs. Minecraft Shorts Ep 38"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-ZXUCbK3Au4k",
+          "title": "Texture Pack - Animation vs. Minecraft Shorts Ep 18"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-X7Mpp35EAqI",
+          "title": "Redstone Academy - Animation vs. Minecraft Shorts Ep 15"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-pCBP4M08ndE",
+          "title": "Cave Spider Roller Coaster - Animation vs. Minecraft Shorts Ep. 14"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-c0egcErkap0",
+          "title": "Note Block Battle - Animation vs. Minecraft Shorts Ep 16 (Music by AaronGrooves)"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "hardcore-manhunt-animation-vs.-minecraft-shorts-ep-37",
+          "title": "Hardcore Manhunt Animation Vs. Minecraft Shorts Ep 37"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "hardcore-manhunt-animation-vs.-minecraft-shorts-ep-37-i-sfdl-t-43bxw",
+          "title": "Hardcore Manhunt - Animation vs. Minecraft Shorts Ep 37"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "animation-vs.-minecraft-shorts-season-3-all-episodes-20-30_202603",
+          "title": "Animation Vs. Minecraft Shorts Season 3 All Episodes ( 20 30)"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "animator-vs.-animation-original",
+          "title": "Animator Vs. Animation"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-vlVUVsx6BYY",
+          "title": "Lucky Block Staff - Animation vs. Minecraft Shorts Ep 33"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-_vfSvckpQWo",
+          "title": "The Flashback - Animator vs. Animation Shorts Episode 3"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "green-stick-figure-7423434822850481454-no-watermark",
+          "title": "Mental Health check in! (Green Stick Figure TikTok Video)"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-mZ0HmfgDArk",
+          "title": "This is how I say thanks for 5 million subscribers (Otamatone Cover)"
+        },
+        {
+          "creator": "Alan Becker, Aron Jesus Gonzalez",
+          "identifier": "sneakpeek_202206",
+          "title": "-Animator vs Animation IDub: The EXTREME FANDUB - Sneak Preview"
+        }
+      ]
+    }
+  },
+  {
+    "query": "mediatype:movies AND (title:\"Animation vs. Physics\" OR title:\"Animation vs. Math\")",
+    "status": "ok",
+    "response": {
+      "numFound": 5,
+      "start": 0,
+      "docs": [
+        {
+          "creator": "Alan Becker",
+          "identifier": "animation-vs.-math-alan-becker",
+          "title": "Animation vs. Math"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "animation-vs.-physics-alan-becker",
+          "title": "Animation vs. Physics"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-B1J6Ou4q8vE",
+          "title": "Animation vs. Math"
+        },
+        {
+          "creator": "Videoteca",
+          "identifier": "vidklvanimacion2023animationvsmathalanbeckerb1j6ou4q8ve",
+          "title": "Animacion: (2023) Animation Vs. Math (Alan Becker) [B1J6Ou4Q8Ve]"
+        },
+        {
+          "creator": "Alan Becker",
+          "identifier": "youtube-ErMSHiQRnc8",
+          "title": "Animation vs. Physics"
+        }
+      ]
+    }
+  },
+  {
+    "query": "mediatype:movies AND (title:\"3D Stickman\" OR title:\"3D stick figure\")",
+    "status": "ok",
+    "response": {
+      "numFound": 0,
+      "start": 0,
+      "docs": []
+    }
+  }
+]
