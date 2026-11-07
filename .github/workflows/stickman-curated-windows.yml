@@ -1,0 +1,36 @@
+name: Stickman research — complete curated frame bursts and audio measurements
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/stickman-curated-windows.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  actual-frames:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow imageio-ffmpeg numpy
+      - name: Verify source SHA and export every frame in human-selected one-second action windows
+        timeout-minutes: 21
+        env:
+          STUDY_SHARD: ${{ matrix.shard }}
+        run: python scripts/stickman-curated-windows.py
+      - name: Preserve completed evidence even on a bounded processing failure
+        if: always()
+        run: |
+          git config user.name 'Monarch animation research'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/research/stickman-study/curated-windows
+          git diff --cached --quiet || git commit -m 'Preserve curated reference-frame bursts, shard ${{ matrix.shard }} [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work

@@ -30,7 +30,7 @@ The 27 recovered primary files are not 27 eligible animations. Actual pictures e
 | `3553f7878e8d` — item labelled Victim / AvA11, file Raining_Tacos_1 | Taco Bot 3000 and a DooneDun animation credit | Exclude mismatched file; **not Animator vs. Animation 11** |
 | `a5bae8133622` — second Animator vs. Animation archive | Same scene sequence as `ce5cb51a4085`, with visible colour/version differences | Do not count as a second independent movie |
 
-This leaves **22 distinct relevant primary animation references**, plus **four lower-reach/unverified-reach control clips**. “Relevant” includes 2D, stick-derived cartoons and hybrid references; it is **not** a claim of 22 pure rendered-3D stickman films or 22 verified million-view uploads.
+This leaves **22 distinct relevant primary animation references**, plus **four unverified-reach control clips**. “Relevant” includes 2D, stick-derived cartoons and hybrid references; it is **not** a claim of 22 pure rendered-3D stickman films or 22 verified million-view uploads.
 
 ## 3. Source-by-source visual notes
 
@@ -92,7 +92,7 @@ The times below are overview seek labels unless an exact frame/PTS is explicitly
 
 **Rafehi Studios, Stickman 3D — `149101adaa69`, 46.68 s, 1,167 decoded frames.** The sampled course, blocks, stairs, checkered gates, orbiting perspective and shadows provide a visibly three-dimensional obstacle-course scene. The character is extremely small and low-contrast relative to the textured grass and pale course, including the inspected 33.12 s detail. Many panels mainly change the view of the course, not the readability of the actor's intention. Blue title/end text competes with that already small subject. **Learning:** genuine dimensional rendering does not automatically yield a premium animation; protagonist scale, silhouette, readable contact and purposeful camera decisions still matter. No million-view claim is attached.
 
-**Epic stick figure battle, parts 1/2/3 — `ffb57ce30e33`, `1b40e0d1dba4`, `c4596dafd64f`.** Flat red/black characters on white, FlipaClip watermark, exaggerated size hierarchy, reaction/question marks, smears and title/subscribe cards. These are clearly **2D low/unverified-reach contrasts**, not replacements for the primary 3D target. Part 1's question-mark close-up at 7.33/8.03 s corresponds to 21 indexed frames in that interval with almost no reduced-resolution change. Conversely, part 3's similar-looking chin/hand overview samples at 21.94–24.97 s hide substantial intervening changes: 73 indexed frames, maximum 64×36 mean difference 37.78819, only 45 exactly zero-change frames. **Do not call that entire interval a static hold from three matching thumbnails.** This is direct evidence of the danger of sparse sampling.
+**Epic stick figure battle, parts 1/2/3 — `ffb57ce30e33`, `1b40e0d1dba4`, `c4596dafd64f`.** Flat red/black characters on white, FlipaClip watermark, exaggerated size hierarchy, reaction/question marks, smears and title/subscribe cards. These are clearly **2D unverified-reach contrasts**, not replacements for the primary 3D target. Part 1's question-mark close-up at 7.33/8.03 s corresponds to 21 indexed frames in that interval with almost no reduced-resolution change. Conversely, part 3's similar-looking chin/hand overview samples at 21.94–24.97 s hide substantial intervening changes: 73 indexed frames, maximum 64×36 mean difference 37.78819, only 45 exactly zero-change frames. **Do not call that entire interval a static hold from three matching thumbnails.** This is direct evidence of the danger of sparse sampling.
 
 ## 5. What is now evidence-backed — and what is not
 
@@ -132,3 +132,11 @@ The times below are overview seek labels unless an exact frame/PTS is explicitly
 | Trash | 70–85; 170–195 | Cart handling and the actual boat/water causal transition |
 
 This is a **worklist**, not a claim those complete intervals have already been visually reviewed. Preserve exact sources/PTS, distinguish representation from scientific fact, and preserve the approved narration/timing. The broad genuine rendered-3D/high-reach coverage and sound-study gates still need further work before the proposed minute is ready for approval.
+
+## 7. Canonical reach and version checks
+
+The follow-up Data API lookup `42383682381` returned **72 candidate records, zero API errors**. Manual title/creator/credit/content and duration matching supports **18 distinct canonical works over one million views**, plus the lower-reach official **Rushed4** contrast (**92,358 views**). See `source-identity/matched-works.json` for exact IDs, timestamps, counts and per-copy duration differences. This is a **work-level identification**, not cryptographic proof that the served archive encoding/audio is identical to the canonical upload.
+
+Examples at the newer snapshot: Math **161,264,600**; Geometry **32,376,532**; Addiction **28,805,589**; Gildedguy vs Jade **13,481,732**; Basement Busk **9,696,583**; Violet vs Dummy **1,383,688**; JzBoy/Baldi **25,786,228**. These examples are not all pure 3D.
+
+Two likely JzBoy work variants (King Slime and Wall of Flesh) differ by more than two seconds from their candidate YouTube durations and are excluded from the strict 18-work million-view count pending version alignment. The 52.59s Hyun original-portal movie also differs substantially from the 72s candidate canonical upload, so its candidate's view count is not silently transferred. The resounded Jade upload and the separate Camila/Jade opponent film are different versions/works and are not treated as the recovered 440.81s original Jade movie.
