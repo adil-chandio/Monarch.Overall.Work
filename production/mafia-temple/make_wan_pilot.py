@@ -21,8 +21,7 @@ r=subprocess.run([sys.executable,"-m","pip","install","-q","diffusers>=0.35.2","
 if r.returncode: raise RuntimeError("pip install failed: "+r.stderr[-500:])
 import torch
 from PIL import Image,ImageOps
-from diffusers import AutoencoderKLWan, WanImageToVideoPipeline, BitsAndBytesConfig as DiffusersBitsAndBytesConfig
-from diffusers.quantizers import PipelineQuantizationConfig
+from diffusers import AutoencoderKLWan, WanImageToVideoPipeline
 import gc
 from diffusers.utils import export_to_video
 if not torch.cuda.is_available(): raise RuntimeError("NO_GPU_ALLOCATED")
@@ -41,19 +40,18 @@ del enc
 gc.collect();torch.cuda.empty_cache()
 print("STAGE 2 transformer and VAE",flush=True)
 vae=AutoencoderKLWan.from_pretrained(model_id,subfolder="vae",torch_dtype=torch.float32)
-quant=PipelineQuantizationConfig(quant_mapping={"transformer": DiffusersBitsAndBytesConfig(load_in_8bit=True)})
-pipe=WanImageToVideoPipeline.from_pretrained(model_id,vae=vae,text_encoder=None,tokenizer=None,torch_dtype=torch.float16,expand_timesteps=True,quantization_config=quant)
+pipe=WanImageToVideoPipeline.from_pretrained(model_id,vae=vae,text_encoder=None,tokenizer=None,torch_dtype=torch.float16,expand_timesteps=True)
 pipe.enable_model_cpu_offload()
 pipe.vae.enable_tiling()
 pipe.set_progress_bar_config(disable=True)
-img=ImageOps.fit(Image.open(image_file).convert("RGB"),(640,352),method=Image.Resampling.LANCZOS)
+img=ImageOps.fit(Image.open(image_file).convert("RGB"),(512,288),method=Image.Resampling.LANCZOS)
 t=time.time()
 print("STAGE 3 video generation",flush=True)
 with torch.inference_mode():
- frames=pipe(image=img,prompt_embeds=pos,negative_prompt_embeds=neg,height=352,width=640,num_frames=65,num_inference_steps=20,guidance_scale=4.0,generator=torch.Generator("cpu").manual_seed(3451)).frames[0]
+ frames=pipe(image=img,prompt_embeds=pos,negative_prompt_embeds=neg,height=288,width=512,num_frames=65,num_inference_steps=20,guidance_scale=4.0,generator=torch.Generator("cpu").manual_seed(3451)).frames[0]
 out=pathlib.Path("/kaggle/working/clips");out.mkdir(exist_ok=True)
 export_to_video(frames,str(out/"wan-face-pilot.mp4"),fps=24)
-(out/"receipts_wan-face-pilot.json").write_text(json.dumps({"backend":model_id,"frames":len(frames),"width":640,"height":352,"seconds_elapsed":round(time.time()-t,1)},indent=2))
+(out/"receipts_wan-face-pilot.json").write_text(json.dumps({"backend":model_id,"frames":len(frames),"width":512,"height":288,"seconds_elapsed":round(time.time()-t,1)},indent=2))
 print("PILOT COMPLETE",len(frames),flush=True)
 '''.replace('IMAGE_PAYLOAD',repr(img))
 nb={'cells':[{'cell_type':'code','execution_count':None,'metadata':{},'outputs':[],'source':code.splitlines(True)}],'metadata':{'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'},'language_info':{'name':'python'}},'nbformat':4,'nbformat_minor':5}
