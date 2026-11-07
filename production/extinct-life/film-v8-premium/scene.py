@@ -314,7 +314,7 @@ for frame in range(a.start,a.end,a.step):
  t=(frame-start)/30
  if kind=='forest-late':fn(t,True)
  else:fn(t)
- s=bpy.context.scene
+ bpy.context.view_layer.update();s=bpy.context.scene
  if a.lock_camera:
   if locked is None:locked=s.camera.matrix_world.copy()
   else:s.camera.matrix_world=locked.copy()
