@@ -1,0 +1,169 @@
+{
+  "seconds": 61,
+  "samples": 2928000,
+  "approved_voice_assets": [
+    {
+      "voice_file": "production/extinct-life/film-v3/voice/B01.flac",
+      "sha256": "d81a15cc05d8ac68937de60a11fe2caaa32a53c5e0e9f29e558d668a957e9c32",
+      "timeline_start_sample": 0,
+      "samples_used": 2542307
+    },
+    {
+      "voice_file": "production/extinct-life/film-v3/voice/B02.flac",
+      "sha256": "2ef77a35bfdcbee9567a2eca67e682c38e1327394e431d6f8e795b88fb9e79a6",
+      "timeline_start_sample": 2560000,
+      "samples_used": 368000
+    }
+  ],
+  "voice_speed_changed": false,
+  "chapter_gap_preserved": true,
+  "no_time_stretch": true,
+  "music": {
+    "credit": "'Hiraeth' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source_url": "https://www.scottbuckley.com.au/library/wp-content/uploads/2020/06/sb_hiraeth.mp3",
+    "source_sha256": "f790c7d53b8d802981ff7cdd8c59e22cdfe103ea66aba296c6cf1a65fe7fcf01",
+    "excerpt_seconds": [
+      0,
+      61
+    ]
+  },
+  "synthetic_foley_events": [
+    {
+      "seconds": 1.4,
+      "kind": "foot",
+      "gain": 0.005,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 2.1,
+      "kind": "foot",
+      "gain": 0.006,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 2.7,
+      "kind": "foot",
+      "gain": 0.005,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 4.3,
+      "kind": "sediment",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 5.5,
+      "kind": "sediment",
+      "gain": 0.005,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 6.6,
+      "kind": "sediment",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 13.8,
+      "kind": "foot",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 14.5,
+      "kind": "foot",
+      "gain": 0.005,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 15.2,
+      "kind": "foot",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 26.6,
+      "kind": "paper",
+      "gain": 0.006,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 29.0,
+      "kind": "paper",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 30.8,
+      "kind": "paper",
+      "gain": 0.003,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 33.8,
+      "kind": "dry-leaf",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 37.4,
+      "kind": "felt-contact",
+      "gain": 0.003,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 41.6,
+      "kind": "wing-cloth",
+      "gain": 0.003,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 45.3,
+      "kind": "paper",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 48.6,
+      "kind": "felt-contact",
+      "gain": 0.003,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 54.0,
+      "kind": "foot",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 54.8,
+      "kind": "foot",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 55.6,
+      "kind": "foot",
+      "gain": 0.004,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 55.9,
+      "kind": "water",
+      "gain": 0.003,
+      "synthetic_not_field_recording": true
+    },
+    {
+      "seconds": 59.0,
+      "kind": "dry-leaf",
+      "gain": 0.003,
+      "synthetic_not_field_recording": true
+    }
+  ],
+  "peak_before_safety_gain": 0.8635299801826477,
+  "global_safety_gain": 1,
+  "procedural_stereo_air": true,
+  "continuous_human_listening_claimed": false
+}
