@@ -35,7 +35,8 @@ def main():
     peak = float(np.max(np.abs(x)))
     clipping = int(np.count_nonzero(np.abs(x) >= 0.999))
     d = np.abs(np.diff(x, axis=0))
-    clicks = int(np.count_nonzero(np.max(d, axis=1) > 0.45))
+    click_idx = np.where(np.max(d, axis=1) > 0.45)[0]
+    clicks = int(len(click_idx))
     dc = float(np.mean(x))
     corr = float(np.corrcoef(x[:, 0], x[:, 1])[0, 1]) if x.shape[1] == 2 else 1.0
     mono = np.mean(x, axis=1)
@@ -67,6 +68,7 @@ def main():
         'decoded_audio_samples': int(len(x)), 'decoded_sample_rate': sr,
         'decoded_sample_peak_dbfs': round(float(20 * np.log10(max(peak, 1e-12))), 4),
         'clipping_runs': clipping, 'click_runs': clicks,
+        'click_positions_s': [round(float(i / sr), 4) for i in click_idx[:50]],
         'dc_offset': round(dc, 6), 'channel_correlation': round(corr, 4),
         'mono_fold_loss_db': round(fold, 4),
         'loudnorm_input': {k: lj.get(k) for k in ('input_i', 'input_tp', 'input_lra', 'input_thresh')},

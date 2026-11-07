@@ -32,7 +32,10 @@
     "edge_fade_ms": 30,
     "final_gain_calibration": true,
     "final_peak_limit_linear": 0.75,
-    "final_calibration_iterations": 4
+    "final_calibration_iterations": 5,
+    "final_technical_click_threshold": 0.45,
+    "final_declick_threshold": 0.35,
+    "final_declick_width_samples": 24
   },
   "visual": {
     "full_screen": true,

@@ -62,8 +62,41 @@ def mux_deliverable(mastered):
          '-ar', str(SR), '-ac', '2', '-t', f"{SPEC['duration']:.3f}", '-movflags', '+faststart', OUT], check=True)
 
 
+def delivered_technical_click_count():
+    wav = WORK / 'delivered_click_check.wav'
+    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', OUT,
+         '-map', '0:a:0', '-vn', '-ac', '2', '-ar', str(SR), '-c:a', 'pcm_f32le', wav], check=True)
+    x, sr = sf.read(wav, dtype='float32', always_2d=True)
+    threshold = float(A['final_technical_click_threshold'])
+    return int(np.count_nonzero(np.max(np.abs(np.diff(x, axis=0)), axis=1) > threshold))
+
+
+def declick_wav(path):
+    """Repair isolated sample discontinuities with short linear interpolations."""
+    x, sr = sf.read(path, dtype='float32', always_2d=True)
+    threshold = float(A['final_declick_threshold'])
+    width = int(A['final_declick_width_samples'])
+    d = np.max(np.abs(np.diff(x, axis=0)), axis=1)
+    idx = np.where(d > threshold)[0]
+    groups = []
+    for i in idx:
+        if groups and i - groups[-1][-1] <= 4:
+            groups[-1].append(int(i))
+        else:
+            groups.append([int(i)])
+    for g in groups:
+        a = max(0, g[0] - width)
+        b = min(len(x), g[-1] + width + 2)
+        if b - a < 8:
+            continue
+        for c in range(x.shape[1]):
+            x[a:b, c] = np.linspace(x[a, c], x[b - 1, c], b - a, dtype=np.float32)
+    sf.write(path, x, sr, subtype='FLOAT')
+    return len(groups)
+
+
 def calibrate_final_gain(mastered):
-    """Measure the delivered AAC stream and apply bounded level/peak corrections only."""
+    """Measure the delivered AAC stream and apply bounded level, peak and click corrections only."""
     target = float(PROFILES['web']['lufs'])
     limit = float(A['final_peak_limit_linear'])
     iterations = int(A['final_calibration_iterations'])
@@ -72,26 +105,32 @@ def calibrate_final_gain(mastered):
         result = gate_run(str(OUT), 'web')
         measured = result['measured']
         checks = result['checks']
+        technical_clicks = delivered_technical_click_count()
         entry = {
             'iteration': i, 'integrated_lufs': measured['integrated_lufs'],
             'sample_peak_dbfs': measured['sample_peak_dbfs'],
             'loudness_in_range': checks['loudness_in_range'],
             'true_peak_ok': checks['true_peak_ok'],
+            'technical_click_runs': technical_clicks,
             'measured_on': 'delivered_aac_stream'
         }
-        if checks['loudness_in_range'] and checks['true_peak_ok']:
+        if checks['loudness_in_range'] and checks['true_peak_ok'] and technical_clicks == 0:
             entry['applied_gain_db'] = 0.0
+            entry['declick_regions'] = 0
             report.append(entry)
             break
         delta = target - measured['integrated_lufs']
-        tmp = WORK / 'native_timeline_mastered_calibrated.wav'
-        run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', mastered,
-             '-af', f"volume={delta:.3f}dB,alimiter=limit={limit}:level=disabled",
-             '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', tmp], check=True)
-        shutil.move(str(tmp), str(mastered))
+        if abs(delta) > 0.05:
+            tmp = WORK / 'native_timeline_mastered_calibrated.wav'
+            run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', mastered,
+                 '-af', f"volume={delta:.3f}dB,alimiter=limit={limit}:level=disabled",
+                 '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', tmp], check=True)
+            shutil.move(str(tmp), str(mastered))
+        regions = declick_wav(mastered)
         mux_deliverable(mastered)
-        entry['applied_gain_db'] = round(delta, 3)
-        entry['peak_limit_linear'] = limit
+        entry['applied_gain_db'] = round(delta, 3) if abs(delta) > 0.05 else 0.0
+        entry['declick_regions'] = regions
+        entry['peak_limit_linear'] = limit if abs(delta) > 0.05 else None
         report.append(entry)
     return report
 
@@ -150,6 +189,7 @@ def main():
     run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', premaster,
          '-af', f"highpass=f=20,loudnorm=I={A['target_integrated_lufs']}:TP={A['true_peak_target_dbtp']}:LRA=7:linear=true:print_format=summary",
          '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', mastered], check=True)
+    declick_wav(mastered)
     mux_deliverable(mastered)
     calibration = calibrate_final_gain(mastered) if A['final_gain_calibration'] else []
     save_json(REVIEW / 'native_audio_ledger.json', {

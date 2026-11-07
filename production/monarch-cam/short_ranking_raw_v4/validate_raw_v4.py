@@ -19,7 +19,10 @@ assert spec['audio_policy']['silent_segments'] == 0
 assert spec['audio_policy']['all_five_native_audio_audible'] is True
 assert spec['audio_policy']['final_gain_calibration'] is True
 assert spec['audio_policy']['final_peak_limit_linear'] == 0.75
-assert spec['audio_policy']['final_calibration_iterations'] == 4
+assert spec['audio_policy']['final_calibration_iterations'] == 5
+assert spec['audio_policy']['final_technical_click_threshold'] == 0.45
+assert spec['audio_policy']['final_declick_threshold'] == 0.35
+assert spec['audio_policy']['final_declick_width_samples'] == 24
 assert spec['visual']['full_screen'] and spec['visual']['cover_mode'] == 'dynamic_subject_safe_cover'
 assert spec['visual']['no_letterbox'] and spec['visual']['no_black_bars'] and spec['visual']['no_blurred_background']
 assert spec['visual']['rank_title_overlay_only'] and spec['visual']['five_moments_only']
