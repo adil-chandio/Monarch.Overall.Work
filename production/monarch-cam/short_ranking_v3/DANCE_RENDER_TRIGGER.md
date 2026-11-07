@@ -9,3 +9,5 @@ gh workflow run monarch-cam-short-ranking-v3.yml --ref arena/390292fc-monarch-ov
 ```
 
 The source-reconstruction workflow is explicit-dispatch / `SOURCE_RECON_TRIGGER.md` only, so a V3 render commit does not race it.
+
+Render re-triggered after bounding all 13 narration slots at +12% TTS rate and preserving the 9:16 CC0 starfish aspect ratio with a centred 16:9 crop.
