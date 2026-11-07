@@ -18,7 +18,7 @@ def run(args, **kw):
     subprocess.run(args, check=True, **kw)
 
 run([sys.executable,'-m','pip','install','-q','numpy<2','onnxruntime==1.20.1','onnx==1.18.0',
-     'diffusers==0.29.2','transformers==4.41.2','accelerate==0.30.1','huggingface_hub==0.27.1',
+     'diffusers==0.29.2','transformers==4.49.0','accelerate==0.30.1','huggingface_hub==0.27.1',
      'einops','scikit-image','imageio-ffmpeg','bvh','safetensors'])
 import torch
 if not torch.cuda.is_available(): raise RuntimeError('No GPU allocated')
