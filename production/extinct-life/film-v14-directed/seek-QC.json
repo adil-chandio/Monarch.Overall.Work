@@ -1,0 +1,4340 @@
+{
+  "source_fingerprint": "a31c345c2b8814ffe5a77f4e21d34cf674a702e079aa31a2830ba52c36dc1847",
+  "samples": [
+    {
+      "frame": 45,
+      "time": 1.5,
+      "world": "field",
+      "pov": true,
+      "camera": [
+        0.10288627236078117,
+        1.6700398676624326,
+        0.8290398063447482
+      ],
+      "camera_target": [
+        -0.45,
+        0.95,
+        -1.65
+      ],
+      "hands": [
+        [
+          -0.17075158409697722,
+          1.1717929353932388,
+          0.7046520336436478
+        ],
+        [
+          0.29773848788256063,
+          1.1717929353932388,
+          0.6001673340144319
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "tool-and-sample",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": false,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 1.5,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-field",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 154,
+      "time": 5.133333333333334,
+      "world": "field",
+      "pov": true,
+      "camera": [
+        -0.15000000000000002,
+        1.17,
+        -0.2999999999999998
+      ],
+      "camera_target": [
+        -0.45,
+        0.57,
+        -1.65
+      ],
+      "hands": [
+        [
+          -0.38285891943060546,
+          0.7353924311018307,
+          -0.4724541986465791
+        ],
+        [
+          -0.06556862084262073,
+          0.8520729694950692,
+          -0.657622350375224
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "tool-and-sample",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": false,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 5.133333333333334,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-field",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 260,
+      "time": 8.666666666666666,
+      "world": "micro",
+      "pov": false,
+      "camera": [
+        0.03339284058153366,
+        0.45,
+        3.027948610961577
+      ],
+      "camera_target": [
+        0.1,
+        0.25,
+        -0.45
+      ],
+      "hands": [],
+      "joints": [],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 8.666666666666666,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-micro",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 350,
+      "time": 11.666666666666666,
+      "world": "micro",
+      "pov": false,
+      "camera": [
+        0.0936760327734353,
+        0.45,
+        2.472871701238355
+      ],
+      "camera_target": [
+        0.1,
+        0.25,
+        -0.45
+      ],
+      "hands": [],
+      "joints": [],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 11.666666666666666,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-micro",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 0.9991816693944353
+    },
+    {
+      "frame": 448,
+      "time": 14.933333333333334,
+      "world": "coast",
+      "pov": true,
+      "camera": [
+        -1.1498152464591131,
+        1.6878571348012825,
+        2.8952944688390803
+      ],
+      "camera_target": [
+        -3,
+        0.65,
+        -11.5
+      ],
+      "hands": [
+        [
+          -1.4233650120681913,
+          1.236841085582312,
+          2.6496218226569512
+        ],
+        [
+          -0.9472811681918905,
+          1.236841085582312,
+          2.5884321699371826
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 14.933333333333334,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-coast",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 668,
+      "time": 22.266666666666666,
+      "world": "coast",
+      "pov": true,
+      "camera": [
+        -0.5,
+        1.68,
+        1
+      ],
+      "camera_target": [
+        0.8807420439076479,
+        1.4411620604230617,
+        -13.313965659615638
+      ],
+      "hands": [
+        [
+          -0.7098160735026615,
+          1.244911348248509,
+          0.6755387844179284
+        ],
+        [
+          -0.23203375152974842,
+          1.244911348248509,
+          0.7216262318431401
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 22.266666666666666,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-coast",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 817,
+      "time": 27.233333333333334,
+      "world": "research",
+      "pov": true,
+      "camera": [
+        -0.1,
+        1.38,
+        0.75
+      ],
+      "camera_target": [
+        -0.15,
+        1.02,
+        -0.18
+      ],
+      "hands": [
+        [
+          -0.23704685169419024,
+          1.1837886982969117,
+          0.320522364006038
+        ],
+        [
+          -0.029004813835869087,
+          1.1607966339829765,
+          0.31823746213517845
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "journal-in-hands",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": false,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 27.233333333333334,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-research",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1041,
+      "time": 34.7,
+      "world": "research",
+      "pov": true,
+      "camera": [
+        -0.17,
+        1.35,
+        0.65
+      ],
+      "camera_target": [
+        -0.22,
+        0.96,
+        -0.17
+      ],
+      "hands": [
+        [
+          -0.3738100131497507,
+          0.9074456488223895,
+          0.4293030929223008
+        ],
+        [
+          -0.07128220239457689,
+          1.0528984795195386,
+          0.29731673846901574
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.3,
+          "b": 0.30000000000000004,
+          "clamped": false
+        },
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": false,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": true,
+      "community_active": false,
+      "wind_time": 34.7,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-research",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1166,
+      "time": 38.86666666666667,
+      "world": "micro",
+      "pov": false,
+      "camera": [
+        0.014975012497024168,
+        0.45,
+        3.0919270436417214
+      ],
+      "camera_target": [
+        0.1,
+        0.25,
+        -0.45
+      ],
+      "hands": [],
+      "joints": [],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 38.86666666666667,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-micro-analysis",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 0.997545008183306
+    },
+    {
+      "frame": 1204,
+      "time": 40.13333333333333,
+      "world": "micro",
+      "pov": false,
+      "camera": [
+        0.04289283376572525,
+        0.45,
+        2.9644138629273997
+      ],
+      "camera_target": [
+        0.1,
+        0.25,
+        -0.45
+      ],
+      "hands": [],
+      "joints": [],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 40.13333333333333,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-micro-analysis",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 0.9991816693944353
+    },
+    {
+      "frame": 1247,
+      "time": 41.56666666666667,
+      "world": "coast",
+      "pov": true,
+      "camera": [
+        2.090258520116629,
+        1.69,
+        0.8997127554259681
+      ],
+      "camera_target": [
+        1.1,
+        1.65,
+        -10
+      ],
+      "hands": [
+        [
+          1.8233367564724579,
+          1.2588699009276403,
+          0.6142664211231033
+        ],
+        [
+          2.301367964123352,
+          1.2588699009276403,
+          0.5708364255920477
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": true,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 41.56666666666667,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-past-landscape",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1286,
+      "time": 42.86666666666667,
+      "world": "coast",
+      "pov": true,
+      "camera": [
+        2.7851593953772547,
+        1.69,
+        0.12760067180305068
+      ],
+      "camera_target": [
+        1.1,
+        1.65,
+        -10
+      ],
+      "hands": [
+        [
+          2.497807519386138,
+          1.2587955011291725,
+          -0.1371474717559638
+        ],
+        [
+          2.971297617407252,
+          1.2587955011291725,
+          -0.21593279447508357
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": true,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 42.86666666666667,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-past-landscape",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1355,
+      "time": 45.166666666666664,
+      "world": "research",
+      "pov": true,
+      "camera": [
+        -0.09852374839099876,
+        1.2706643132240505,
+        0.48280487805710237
+      ],
+      "camera_target": [
+        -0.04889281129324907,
+        0.84,
+        -0.2
+      ],
+      "hands": [
+        [
+          -0.33546834895152755,
+          0.741625471497568,
+          0.43205884166101305
+        ],
+        [
+          0.04714467261617869,
+          0.8113181537544787,
+          0.3391829175652391
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": false,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 45.166666666666664,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-interpretation",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1518,
+      "time": 50.6,
+      "world": "research",
+      "pov": true,
+      "camera": [
+        -0.1,
+        1.27,
+        0.48
+      ],
+      "camera_target": [
+        -0.05000000000000002,
+        0.84,
+        -0.2
+      ],
+      "hands": [
+        [
+          -0.3369459253238333,
+          0.7409236322222408,
+          0.42965294912782204
+        ],
+        [
+          0.10351575267324789,
+          0.9453715246889338,
+          0.16679449010106168
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        0.7,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "evidence",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": false,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": false,
+      "wind_time": 50.6,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-interpretation",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1645,
+      "time": 54.833333333333336,
+      "world": "living-world",
+      "pov": true,
+      "camera": [
+        -0.825761047297874,
+        1.68,
+        2.9339911148662656
+      ],
+      "camera_target": [
+        1.4701239189179303,
+        1.7,
+        -10
+      ],
+      "hands": [
+        [
+          -1.0077722073354594,
+          1.2504724767631101,
+          2.5861721326301668
+        ],
+        [
+          -0.5351602353617854,
+          1.2504724767631101,
+          2.67006446807957
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        1.0600000799999998,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "observation-and-leaf",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": true,
+      "wind_time": 54.833333333333336,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-living-world",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1834,
+      "time": 61.13333333333333,
+      "world": "living-world",
+      "pov": true,
+      "camera": [
+        -0.4,
+        1.39,
+        1.9
+      ],
+      "camera_target": [
+        -0.1499999999999999,
+        1.1,
+        0.9500000000000002
+      ],
+      "hands": [
+        [
+          -0.5462251767638626,
+          0.9687443399662784,
+          1.5911928327095841
+        ],
+        [
+          -0.20498555282734182,
+          1.109137490913517,
+          1.5518827548316692
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.3000000000000001,
+          "b": 0.30000000000000004,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        2.5720000799999987,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "observation-and-leaf",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": true,
+      "wind_time": 61.13333333333333,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-living-world",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 1970,
+      "time": 65.66666666666667,
+      "sequence": "FULL-07",
+      "world": "river",
+      "pov": true,
+      "shot": null,
+      "specific_science_action": false,
+      "camera": [
+        0.6,
+        1.68,
+        -7.4
+      ],
+      "camera_target": [
+        4.35,
+        0.12,
+        -3.7
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "transport-to-sample",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "transport",
+      "leaf_position": [
+        4.3,
+        0.1567355371900827,
+        -4
+      ],
+      "current_distance": 0,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 2470,
+      "time": 82.33333333333333,
+      "sequence": "FULL-07",
+      "world": "river",
+      "pov": true,
+      "shot": null,
+      "specific_science_action": false,
+      "camera": [
+        0.6,
+        1.68,
+        -2.290666666666666
+      ],
+      "camera_target": [
+        4.35,
+        0.12,
+        1.4093333333333338
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "transport-to-sample",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "transport",
+      "leaf_position": [
+        4.3,
+        0.015,
+        1.1093333333333337
+      ],
+      "current_distance": 5.109333333333334,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 2727,
+      "time": 90.9,
+      "sequence": "FULL-08",
+      "world": "section",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.021548197312005486,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "accumulation-and-deposit-age",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "section",
+      "conceptual_burial": true,
+      "individual_fragment_date_not_claimed": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 2958,
+      "time": 98.6,
+      "sequence": "FULL-08",
+      "world": "section",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.12083915717534119,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "accumulation-and-deposit-age",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "section",
+      "conceptual_burial": true,
+      "individual_fragment_date_not_claimed": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 3100,
+      "time": 103.33333333333333,
+      "sequence": "FULL-09",
+      "world": "trace",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.01629764957960868,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "survival-question",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "trace",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 3166,
+      "time": 105.53333333333333,
+      "sequence": "FULL-09",
+      "world": "trace",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.04743313040583631,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "survival-question",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "trace",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 3250,
+      "time": 108.33333333333333,
+      "sequence": "FULL-10",
+      "world": "weather",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.021548197312005486,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "breakage-damage-loss",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "weather",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 3496,
+      "time": 116.53333333333333,
+      "sequence": "FULL-10",
+      "world": "weather",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.12607742635264452,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "breakage-damage-loss",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "weather",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 3655,
+      "time": 121.83333333333333,
+      "sequence": "FULL-11",
+      "world": "mineral",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.021548197312005486,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "adsorption-and-retention",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "mineral",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 4021,
+      "time": 134.03333333333333,
+      "sequence": "FULL-11",
+      "world": "mineral",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.1600894531376484,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "adsorption-and-retention",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "mineral",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 4226,
+      "time": 140.86666666666667,
+      "sequence": "FULL-12",
+      "world": "extraction",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.014365464874670324,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "release-from-mineral",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "extraction",
+      "operation": "release",
+      "specific_action": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 4456,
+      "time": 148.53333333333333,
+      "sequence": "FULL-12",
+      "world": "extraction",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.08032198083005594,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "release-from-mineral",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "extraction",
+      "operation": "prepare",
+      "specific_action": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 4609,
+      "time": 153.63333333333333,
+      "sequence": "FULL-13",
+      "world": "reference",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.014365464874670324,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "candidate-and-reference-library",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "reference",
+      "comparison_alignment": 0,
+      "illustrative_not_sequence_reads": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 5109,
+      "time": 170.3,
+      "sequence": "FULL-13",
+      "world": "reference",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.11917309813494839,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "candidate-and-reference-library",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "reference",
+      "comparison_alignment": 1,
+      "illustrative_not_sequence_reads": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 5366,
+      "time": 178.86666666666667,
+      "sequence": "FULL-14",
+      "world": "controls",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.014365464874670324,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "alternative-explanations-and-damage",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "controls",
+      "control_phase": "alternative-source-contamination",
+      "hypothetical_example": true,
+      "damage_is_not_standalone_proof": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 5891,
+      "time": 196.36666666666667,
+      "sequence": "FULL-14",
+      "world": "controls",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.11984521727706995,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "alternative-explanations-and-damage",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "controls",
+      "control_phase": "characteristic-damage-assessment",
+      "hypothetical_example": true,
+      "damage_is_not_standalone_proof": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 6158,
+      "time": 205.26666666666668,
+      "sequence": "FULL-15",
+      "world": "branch",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.014365464874670324,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "supported-branch-not-genome",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "branch",
+      "lineage_assignment": true,
+      "exact_species_not_claimed": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 6434,
+      "time": 214.46666666666667,
+      "sequence": "FULL-15",
+      "world": "branch",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.09062721086994344,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "supported-branch-not-genome",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "branch",
+      "lineage_assignment": true,
+      "exact_species_not_claimed": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "reindeer",
+        "width": 228.45369318368978,
+        "height": 644.79407771246,
+        "left": 845.773153408155,
+        "right": 1074.2268465918448,
+        "top": 276.29398198800044,
+        "bottom": 921.0880597004605,
+        "clear_rays": 6,
+        "tested_rays": 6,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 6605,
+      "time": 220.16666666666666,
+      "sequence": "FULL-16",
+      "world": "community",
+      "pov": false,
+      "shot": {
+        "position": [
+          -1.1,
+          1.8,
+          -7
+        ],
+        "target": [
+          -1.1,
+          1.8,
+          -0.18
+        ],
+        "subject": "reindeer",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -1.1,
+        1.8,
+        -7
+      ],
+      "camera_target": [
+        -1.1,
+        1.8,
+        -0.18
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "wetland-community-and-browsing",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.44
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0.7
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.18
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 1.5,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999998
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 3.8900799999999998
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.14750569351179607,
+          "z": 1.2109947045060265
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.44608
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 7225,
+      "time": 240.83333333333334,
+      "sequence": "FULL-16",
+      "world": "community",
+      "pov": false,
+      "shot": {
+        "position": [
+          -5.6,
+          2.1,
+          -5.8
+        ],
+        "target": [
+          0.4,
+          1.15,
+          -0.8
+        ],
+        "subject": "ensemble",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -5.6,
+        2.1,
+        -5.8
+      ],
+      "camera_target": [
+        0.4,
+        1.15,
+        -0.8
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "wetland-community-and-browsing",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        -0.6000000000000005
+      ],
+      "goose_position": [
+        7.286333333333333,
+        2.785,
+        -22.263333333333332
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.96
+      ],
+      "leaf_position": [
+        4.1,
+        -0.02,
+        -4.62
+      ],
+      "gait_clock": 14.166666666666668,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.2272446099084046,
+          "z": -1.5934955595122153
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 0.3380799999999997
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": -1.6399200000000003
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 0.7820799999999997
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 7529,
+      "time": 250.96666666666667,
+      "sequence": "FULL-17",
+      "world": "proxies",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        -0.368,
+        2.3,
+        3.7
+      ],
+      "camera_target": [
+        -0.40249999999999997,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "pollen-remains-dna-complement",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "proxies",
+      "complementary_evidence": true,
+      "no_inventory_counts": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 8129,
+      "time": 270.96666666666664,
+      "sequence": "FULL-17",
+      "world": "proxies",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.368,
+        2.3,
+        3.7
+      ],
+      "camera_target": [
+        0.40249999999999997,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "pollen-remains-dna-complement",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "proxies",
+      "complementary_evidence": true,
+      "no_inventory_counts": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "mastodon",
+        "width": 473.47603262084374,
+        "height": 353.78988027215235,
+        "left": 674.2792359783822,
+        "right": 1147.755268599226,
+        "top": 334.5781053711114,
+        "bottom": 688.3679856432638,
+        "clear_rays": 8,
+        "tested_rays": 8,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 8426,
+      "time": 280.8666666666667,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "pov": false,
+      "shot": {
+        "position": [
+          7.8,
+          1.8,
+          3.8
+        ],
+        "target": [
+          -3.4,
+          1.4,
+          -5.64
+        ],
+        "subject": "mastodon",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        7.8,
+        1.8,
+        3.8
+      ],
+      "camera_target": [
+        -3.4,
+        1.4,
+        -5.64
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "imagined-moving-encounter",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "encounter",
+      "mastodon_position": [
+        -3.4,
+        0,
+        -5.64
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0.7
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.18
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 1.5,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -6.6119200000000005
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -4.18992
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": -4.08,
+          "y": 0.14750569351179607,
+          "z": -6.869005295493974
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -4.63392
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 9228,
+      "time": 307.6,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "pov": false,
+      "shot": {
+        "position": [
+          7.5,
+          1.2,
+          -2
+        ],
+        "target": [
+          5.1,
+          0.05,
+          -8.765863569260276
+        ],
+        "subject": "transport",
+        "mode": "conceptual-transport"
+      },
+      "specific_science_action": false,
+      "camera": [
+        7.5,
+        1.2,
+        -2
+      ],
+      "camera_target": [
+        5.1,
+        0.05,
+        -8.765863569260276
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "imagined-moving-encounter",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "encounter",
+      "mastodon_position": [
+        -3.4,
+        0,
+        -1.1440000000000001
+      ],
+      "goose_position": [
+        8.135666666666665,
+        2.785,
+        -30.756666666666664
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.96
+      ],
+      "leaf_position": [
+        4.1,
+        -0.02,
+        -6.0760000000000005
+      ],
+      "gait_clock": 20.233333333333334,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -2.059920000000001
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": -2.7199999999999998,
+          "y": 0.031274516711018475,
+          "z": 0.3266668513282076
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": -4.08,
+          "y": 0.021345224575654017,
+          "z": -2.479753426860137
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -0.08192000000000052
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 9603,
+      "time": 320.1,
+      "sequence": "FULL-19",
+      "world": "boundary",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.014365464874670324,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "reconstruction-evidence-boundary",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "boundary",
+      "reconstruction_is_not_recovery": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 9959,
+      "time": 331.96666666666664,
+      "sequence": "FULL-19",
+      "world": "boundary",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.10522562718547211,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "reconstruction-evidence-boundary",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "boundary",
+      "reconstruction_is_not_recovery": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 10161,
+      "time": 338.7,
+      "sequence": "FULL-20",
+      "world": "gaps",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.014365464874670324,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "survival-transport-reference-gaps",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "gaps",
+      "limitation": "missing-signal",
+      "not_measured_loss_rates": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 10607,
+      "time": 353.56666666666666,
+      "sequence": "FULL-20",
+      "world": "gaps",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.11592154042752238,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "survival-transport-reference-gaps",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "gaps",
+      "limitation": "reference-gaps",
+      "not_measured_loss_rates": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 10843,
+      "time": 361.43333333333334,
+      "sequence": "FULL-21",
+      "world": "integration",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.014365464874670324,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "complementary-incomplete-records",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "integration",
+      "complementary_evidence": true,
+      "no_inventory_counts": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 11157,
+      "time": 371.9,
+      "sequence": "FULL-21",
+      "world": "integration",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.09811911249656062,
+        2.35,
+        3.65
+      ],
+      "camera_target": [
+        0,
+        1.65,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": true,
+      "stage_design": "complementary-incomplete-records",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "integration",
+      "complementary_evidence": true,
+      "no_inventory_counts": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 11342,
+      "time": 378.06666666666666,
+      "sequence": "FULL-22",
+      "world": "coast",
+      "pov": true,
+      "shot": null,
+      "specific_science_action": false,
+      "camera": [
+        -0.43751822557118064,
+        1.67,
+        4.4
+      ],
+      "camera_target": [
+        0,
+        0.25,
+        -0.3
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "return-to-handful-scale",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "coast",
+      "water_time": 1.5,
+      "clue_is_incomplete": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 11635,
+      "time": 387.8333333333333,
+      "sequence": "FULL-22",
+      "world": "coast",
+      "pov": true,
+      "shot": null,
+      "specific_science_action": false,
+      "camera": [
+        0.9711657415521233,
+        1.67,
+        4.530085925925927
+      ],
+      "camera_target": [
+        0,
+        0.25,
+        -0.3
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "return-to-handful-scale",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "coast",
+      "water_time": 11.266666666666667,
+      "clue_is_incomplete": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 11812,
+      "time": 393.73333333333335,
+      "sequence": "FULL-23",
+      "world": "trace",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.021548197312005486,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "incomplete-fragments-return",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "trace",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 11900,
+      "time": 396.6666666666667,
+      "sequence": "FULL-23",
+      "world": "trace",
+      "pov": false,
+      "shot": null,
+      "specific_science_action": true,
+      "camera": [
+        0.06251000347825023,
+        2.6,
+        4
+      ],
+      "camera_target": [
+        0,
+        1.6,
+        0
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": false,
+      "conceptual_diagram": true,
+      "stage_design": "incomplete-fragments-return",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "trace",
+      "conceptual_preservation": true,
+      "not_measured_survival": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 11998,
+      "time": 399.93333333333334,
+      "sequence": "FULL-24",
+      "world": "canopy",
+      "pov": false,
+      "shot": {
+        "position": [
+          -5.99036865234375,
+          2.5,
+          9
+        ],
+        "target": [
+          1,
+          1.8,
+          -1
+        ],
+        "subject": "environment",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -5.99036865234375,
+        2.5,
+        9
+      ],
+      "camera_target": [
+        1,
+        1.8,
+        -1
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "green-world-inference-not-recovery",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "canopy",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.44
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "hare_position": [
+        0,
+        0,
+        0
+      ],
+      "deer_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 1.5,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999998
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 3.8900799999999998
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.14750569351179607,
+          "z": 1.2109947045060265
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.44608
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 12226,
+      "time": 407.53333333333336,
+      "sequence": "FULL-24",
+      "world": "canopy",
+      "pov": false,
+      "shot": {
+        "position": [
+          -5.456953537181713,
+          2.5,
+          9
+        ],
+        "target": [
+          1,
+          1.8,
+          -1
+        ],
+        "subject": "environment",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -5.456953537181713,
+        2.5,
+        9
+      ],
+      "camera_target": [
+        1,
+        1.8,
+        -1
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "green-world-inference-not-recovery",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "canopy",
+      "mastodon_position": [
+        2.6,
+        0,
+        0.6160000000000001
+      ],
+      "goose_position": [
+        0,
+        0,
+        0
+      ],
+      "hare_position": [
+        0,
+        0,
+        0
+      ],
+      "deer_position": [
+        0,
+        0,
+        0
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 9.1,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": -0.30792000000000014
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.01870829090702493,
+          "z": 2.0928877801856967
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.034550343986401374,
+          "z": -0.7127736825465665
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.6700799999999998
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 12378,
+      "time": 412.6,
+      "sequence": "FULL-25",
+      "world": "closing",
+      "pov": false,
+      "shot": {
+        "position": [
+          0.15,
+          0.65,
+          0.9
+        ],
+        "target": [
+          0,
+          0.24,
+          -0.3
+        ],
+        "subject": "sample",
+        "mode": "field"
+      },
+      "specific_science_action": false,
+      "camera": [
+        0.15,
+        0.65,
+        0.9
+      ],
+      "camera_target": [
+        0,
+        0.24,
+        -0.3
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.30000000000000004,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "present-shore-and-incomplete-record",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "closing",
+      "water_time": 1.5,
+      "clue_is_incomplete": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 12930,
+      "time": 431,
+      "sequence": "FULL-25",
+      "world": "closing",
+      "pov": false,
+      "shot": {
+        "position": [
+          1.276460352105881,
+          1.5136196032811755,
+          4.50467312673882
+        ],
+        "target": [
+          -0.22529207042117622,
+          0.8032301760529406,
+          -3.3038942722823497
+        ],
+        "subject": "sample",
+        "mode": "field"
+      },
+      "specific_science_action": false,
+      "camera": [
+        1.276460352105881,
+        1.5136196032811755,
+        4.50467312673882
+      ],
+      "camera_target": [
+        -0.22529207042117622,
+        0.8032301760529406,
+        -3.3038942722823497
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "present-shore-and-incomplete-record",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "closing",
+      "water_time": 19.9,
+      "clue_is_incomplete": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1782,
+      "time": 59.4,
+      "world": "living-world",
+      "pov": true,
+      "camera": [
+        -0.4,
+        1.4090780612965121,
+        1.9
+      ],
+      "camera_target": [
+        2.1728979322257804,
+        0.9543287325607348,
+        -5.256518455962302
+      ],
+      "hands": [
+        [
+          -0.5122405501193308,
+          1.002548026674437,
+          1.5281170331684721
+        ],
+        [
+          -0.10870575428849333,
+          1.135073626252345,
+          1.609845087434232
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        2.1560000799999988,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "observation-and-leaf",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": true,
+      "wind_time": 59.4,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-living-world",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1800,
+      "time": 60,
+      "world": "living-world",
+      "pov": true,
+      "camera": [
+        -0.4,
+        1.3900043717797275,
+        1.9
+      ],
+      "camera_target": [
+        1.2677843824620298,
+        0.979344775363198,
+        -2.6397548688823753
+      ],
+      "hands": [
+        [
+          -0.4891714395497283,
+          1.029501240667185,
+          1.5045141322871871
+        ],
+        [
+          -0.1293191906583009,
+          1.1608752255460992,
+          1.57387954815474
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        2.3000000799999993,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "observation-and-leaf",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": true,
+      "wind_time": 60,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-living-world",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "frame": 1924,
+      "time": 64.1333333,
+      "world": "living-world",
+      "pov": true,
+      "camera": [
+        -0.4,
+        1.39,
+        1.9
+      ],
+      "camera_target": [
+        -0.1499999999999999,
+        1.1,
+        0.9500000000000002
+      ],
+      "hands": [
+        [
+          -0.5462251767638626,
+          0.9687443399662784,
+          1.5911928327095841
+        ],
+        [
+          -0.20498555282734182,
+          1.109137490913517,
+          1.5518827548316692
+        ]
+      ],
+      "joints": [
+        {
+          "a": 0.3000000000000001,
+          "b": 0.30000000000000004,
+          "clamped": false
+        },
+        {
+          "a": 0.30000000000000004,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "actor_position": [
+        3.2920000720000004,
+        0,
+        -10.2
+      ],
+      "prop_contact_mode": "observation-and-leaf",
+      "no_new_generated_images": true,
+      "no_image_plates": true,
+      "existing_material_textures": 2,
+      "conceptual_reconstruction": true,
+      "photoreal_or_exact_portrait_claimed": false,
+      "cinema_layer": true,
+      "contact_ao": true,
+      "articulated_hand_detail": true,
+      "ballistic_grains_in_flight": 0,
+      "grains_settled": 0,
+      "page_turn": 0,
+      "bird_flyby_visible": false,
+      "beetle_visible": false,
+      "community_active": true,
+      "wind_time": 64.1333333,
+      "rigid_body_simulation_claimed": false,
+      "sequence": "POV-OPEN-living-world",
+      "full_master": true,
+      "total_frames": 13163,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 1925,
+      "time": 64.16666666666667,
+      "sequence": "FULL-07",
+      "world": "river",
+      "pov": true,
+      "shot": null,
+      "specific_science_action": false,
+      "camera": [
+        0.6,
+        1.68,
+        -7.4
+      ],
+      "camera_target": [
+        4.35,
+        0.12,
+        -3.7
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "transport-to-sample",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "transport",
+      "leaf_position": [
+        4.3,
+        1.4149999999999998,
+        -4
+      ],
+      "current_distance": 0,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "hare",
+        "width": 311.2253690094335,
+        "height": 605.2525899697285,
+        "left": 778.1105541687853,
+        "right": 1089.3359231782188,
+        "top": 133.26787310662667,
+        "bottom": 738.5204630763552,
+        "clear_rays": 7,
+        "tested_rays": 7,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 6570,
+      "time": 219,
+      "sequence": "FULL-16",
+      "world": "community",
+      "pov": false,
+      "shot": {
+        "position": [
+          -3.9,
+          0.6,
+          -1.6
+        ],
+        "target": [
+          -3.5,
+          0.42,
+          0.9333333333333333
+        ],
+        "subject": "hare",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -3.9,
+        0.6,
+        -1.6
+      ],
+      "camera_target": [
+        -3.5,
+        0.42,
+        0.9333333333333333
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "wetland-community-and-browsing",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.7199999999999998
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0.08882122238352444,
+        0.9333333333333333
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.039999999999999994
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 0.3333333333333333,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999996
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 3.8900799999999998
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.9120799999999998
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.22999982007912526,
+          "z": 3.88970500003963
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "reindeer",
+        "width": 227.6071191439097,
+        "height": 642.404683522381,
+        "left": 846.1964404280451,
+        "right": 1073.8035595719548,
+        "top": 277.27118951689425,
+        "bottom": 919.6758730392752,
+        "clear_rays": 6,
+        "tested_rays": 6,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 6600,
+      "time": 220,
+      "sequence": "FULL-16",
+      "world": "community",
+      "pov": false,
+      "shot": {
+        "position": [
+          -1.1,
+          1.8,
+          -7
+        ],
+        "target": [
+          -1.1,
+          1.8,
+          -0.15999999999999998
+        ],
+        "subject": "reindeer",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -1.1,
+        1.8,
+        -7
+      ],
+      "camera_target": [
+        -1.1,
+        1.8,
+        -0.15999999999999998
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "wetland-community-and-browsing",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.48
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0.7333333333333334
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.15999999999999998
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 1.3333333333333333,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999998
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 3.8900799999999998
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.2209320994290314,
+          "z": 1.3837874560836179
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.44608
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "goose",
+        "width": 693.7485756319386,
+        "height": 413.21988180221564,
+        "left": 600.8383585972808,
+        "right": 1294.5869342292194,
+        "top": 353.0800399590983,
+        "bottom": 766.299921761314,
+        "clear_rays": 6,
+        "tested_rays": 8,
+        "unobstructed_fraction": 0.75,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 6630,
+      "time": 221,
+      "sequence": "FULL-16",
+      "world": "community",
+      "pov": false,
+      "shot": {
+        "position": [
+          8.3,
+          1,
+          -3.2
+        ],
+        "target": [
+          5.1,
+          0.435,
+          -0.4
+        ],
+        "subject": "goose",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        8.3,
+        1,
+        -3.2
+      ],
+      "camera_target": [
+        5.1,
+        0.435,
+        -0.4
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "wetland-community-and-browsing",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.2399999999999998
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0.5333333333333332
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.28
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 2.3333333333333335,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999998
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.19530416833582884,
+          "z": 3.280590412664036
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.0240799999999997
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.44608
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "rodent",
+        "width": 208.83706557697974,
+        "height": 156.11831176907867,
+        "left": 837.7634559736036,
+        "right": 1046.6005215505834,
+        "top": 480.9388073691433,
+        "bottom": 637.057119138222,
+        "clear_rays": 9,
+        "tested_rays": 9,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 6655,
+      "time": 221.83333333333334,
+      "sequence": "FULL-16",
+      "world": "community",
+      "pov": false,
+      "shot": {
+        "position": [
+          -2.4,
+          0.38,
+          -1.25
+        ],
+        "target": [
+          -2.1,
+          0.15,
+          0.9
+        ],
+        "subject": "rodent",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -2.4,
+        0.38,
+        -1.25
+      ],
+      "camera_target": [
+        -2.1,
+        0.15,
+        0.9
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "wetland-community-and-browsing",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        2.04
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0.11976431239191695,
+        0.3666666666666667
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.37999999999999995
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 3.1666666666666665,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.22447164013584964,
+          "z": 0.9582960538917299
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 3.00208
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.0240799999999999
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.44608
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 0.9991816693944353
+    },
+    {
+      "visibility": {
+        "subject": "mastodon",
+        "width": 584.024225166317,
+        "height": 628.3783833232642,
+        "left": 577.8303161730015,
+        "right": 1161.8545413393185,
+        "top": 254.2248139111805,
+        "bottom": 882.6031972344447,
+        "clear_rays": 9,
+        "tested_rays": 9,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 6700,
+      "time": 223.33333333333334,
+      "sequence": "FULL-16",
+      "world": "community",
+      "pov": false,
+      "shot": {
+        "position": [
+          -1.5,
+          2,
+          -7.5
+        ],
+        "target": [
+          2.6,
+          1.9,
+          1.6799999999999997
+        ],
+        "subject": "mastodon",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        -1.5,
+        2,
+        -7.5
+      ],
+      "camera_target": [
+        2.6,
+        1.9,
+        1.6799999999999997
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "wetland-community-and-browsing",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "community",
+      "mastodon_position": [
+        2.6,
+        0,
+        1.6799999999999997
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0.06666666666666654
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.56
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 4.666666666666667,
+      "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 0.5800799999999997
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 3.0020799999999994
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.1178476617024498,
+          "z": 0.8813719161771567
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 2.5580799999999995
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "goose",
+        "width": 670.147591247686,
+        "height": 387.16402001363826,
+        "left": 666.4279986850429,
+        "right": 1336.575589932729,
+        "top": 331.3614297165959,
+        "bottom": 718.5254497302342,
+        "clear_rays": 3,
+        "tested_rays": 3,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 8535,
+      "time": 284.5,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "pov": false,
+      "shot": {
+        "position": [
+          8.2,
+          1.197,
+          2.7
+        ],
+        "target": [
+          5.1,
+          0.305,
+          -0.4
+        ],
+        "subject": "goose",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        8.2,
+        1.197,
+        2.7
+      ],
+      "camera_target": [
+        5.1,
+        0.305,
+        -0.4
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "imagined-moving-encounter",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "encounter",
+      "mastodon_position": [
+        -3.4,
+        0,
+        -4.7680066542918595
+      ],
+      "goose_position": [
+        5.1,
+        -0.015,
+        -0.4
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.616
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 5.133305607117253,
+      "walk_weight": 0.9991795722196819,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -5.755967826725349
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -3.3341499616925794
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": -4.08,
+          "y": 0.18357232941180432,
+          "z": -5.947264879501372
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -3.777785691758118
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "goose",
+        "width": 655.0241910403173,
+        "height": 375.72397566219644,
+        "left": 670.512352323333,
+        "right": 1325.5365433636503,
+        "top": 282.3832867821181,
+        "bottom": 658.1072624443145,
+        "clear_rays": 3,
+        "tested_rays": 3,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 8565,
+      "time": 285.5,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "pov": false,
+      "shot": {
+        "position": [
+          8.2,
+          1.372481887923589,
+          2.7
+        ],
+        "target": [
+          5.111909722222222,
+          1.182409439617945,
+          -0.5190972222222224
+        ],
+        "subject": "goose",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        8.2,
+        1.372481887923589,
+        2.7
+      ],
+      "camera_target": [
+        5.111909722222222,
+        1.182409439617945,
+        -0.5190972222222224
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "imagined-moving-encounter",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "encounter",
+      "mastodon_position": [
+        -3.4,
+        0,
+        -4.550134896693932
+      ],
+      "goose_position": [
+        5.111909722222222,
+        0.862409439617945,
+        -0.5190972222222224
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.736
+      ],
+      "leaf_position": [
+        2.8,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 6.041104597108617,
+      "walk_weight": 0.7202013676776912,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -5.392922077771784
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": -2.7199999999999998,
+          "y": 0.1381649078371798,
+          "z": -3.477861704843172
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -5.712691485020678
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -3.352806781396231
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "goose",
+        "width": 589.6861113504469,
+        "height": 317.479877745842,
+        "left": 686.2900294723058,
+        "right": 1275.9761408227528,
+        "top": 308.2596199042583,
+        "bottom": 625.7394976501002,
+        "clear_rays": 2,
+        "tested_rays": 2,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 8595,
+      "time": 286.5,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "pov": false,
+      "shot": {
+        "position": [
+          8.2,
+          1.4193704442880333,
+          2.7
+        ],
+        "target": [
+          5.187743055555555,
+          1.4168522214401666,
+          -1.277430555555556
+        ],
+        "subject": "goose",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        8.2,
+        1.4193704442880333,
+        2.7
+      ],
+      "camera_target": [
+        5.187743055555555,
+        1.4168522214401666,
+        -1.277430555555556
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "imagined-moving-encounter",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "encounter",
+      "mastodon_position": [
+        -3.4,
+        0,
+        -4.448609403384985
+      ],
+      "goose_position": [
+        5.187743055555555,
+        1.0968522214401666,
+        -1.277430555555556
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.856
+      ],
+      "leaf_position": [
+        2.8008737487378523,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 6.464127485895894,
+      "walk_weight": 0.14869458517502387,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": false,
+          "x": -2.7199999999999998,
+          "y": 0.012802279729283118,
+          "z": -5.439827170093482
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": -2.7199999999999998,
+          "y": 0.000028455014100374037,
+          "z": -3.3238580781503084
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -5.4908810787860585
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -3.257870880877203
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": {
+        "subject": "goose",
+        "width": 488.2347474563451,
+        "height": 256.6543729500476,
+        "left": 721.9049556235866,
+        "right": 1210.1397030799317,
+        "top": 345.1180908279277,
+        "bottom": 601.7724637779753,
+        "clear_rays": 2,
+        "tested_rays": 2,
+        "unobstructed_fraction": 1,
+        "limited_to_actor_occlusion": true
+      },
+      "frame": 8625,
+      "time": 287.5,
+      "sequence": "FULL-18",
+      "world": "encounter",
+      "pov": false,
+      "shot": {
+        "position": [
+          8.2,
+          1.5527687818723643,
+          2.7
+        ],
+        "target": [
+          5.321666666666666,
+          2.0838439093618217,
+          -2.616666666666666
+        ],
+        "subject": "goose",
+        "mode": "reconstruction-observer"
+      },
+      "specific_science_action": false,
+      "camera": [
+        8.2,
+        1.5527687818723643,
+        2.7
+      ],
+      "camera_target": [
+        5.321666666666666,
+        2.0838439093618217,
+        -2.616666666666666
+      ],
+      "joints": [],
+      "hand_palms_visible": null,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "imagined-moving-encounter",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "encounter",
+      "mastodon_position": [
+        -3.4,
+        0,
+        -4.4399999999999995
+      ],
+      "goose_position": [
+        5.321666666666666,
+        1.763843909361822,
+        -2.616666666666666
+      ],
+      "hare_position": [
+        -3.5,
+        0,
+        0
+      ],
+      "deer_position": [
+        -1.1,
+        0,
+        -0.96
+      ],
+      "leaf_position": [
+        2.893363347897386,
+        0.9299999999999999,
+        -1.45
+      ],
+      "gait_clock": 6.5,
+      "walk_weight": 0,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -5.47
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": -2.7199999999999998,
+          "y": 0,
+          "z": -3.2699999999999996
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -5.47
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": -4.08,
+          "y": 0,
+          "z": -3.2699999999999996
+        }
+      ],
+      "root_speed": 0.24,
+      "independent_actions": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 12500,
+      "time": 416.6666666666667,
+      "sequence": "FULL-25",
+      "world": "closing",
+      "pov": false,
+      "shot": {
+        "position": [
+          0.15,
+          0.65,
+          0.9
+        ],
+        "target": [
+          0,
+          0.24,
+          -0.3
+        ],
+        "subject": "sample",
+        "mode": "field"
+      },
+      "specific_science_action": false,
+      "camera": [
+        0.15,
+        0.65,
+        0.9
+      ],
+      "camera_target": [
+        0,
+        0.24,
+        -0.3
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.3,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "present-shore-and-incomplete-record",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "closing",
+      "water_time": 5.566666666666666,
+      "clue_is_incomplete": true,
+      "nonblack_fraction": 0.9983633387888707
+    },
+    {
+      "visibility": null,
+      "frame": 13050,
+      "time": 435,
+      "sequence": "FULL-25",
+      "world": "closing",
+      "pov": false,
+      "shot": {
+        "position": [
+          1.6267053260715685,
+          1.7821407499882023,
+          5.625457043429019
+        ],
+        "target": [
+          -0.2953410652143137,
+          0.9783526630357843,
+          -4.237880869524183
+        ],
+        "subject": "sample",
+        "mode": "field"
+      },
+      "specific_science_action": false,
+      "camera": [
+        1.6267053260715685,
+        1.7821407499882023,
+        5.625457043429019
+      ],
+      "camera_target": [
+        -0.2953410652143137,
+        0.9783526630357843,
+        -4.237880869524183
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "present-shore-and-incomplete-record",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "closing",
+      "water_time": 23.9,
+      "clue_is_incomplete": true,
+      "nonblack_fraction": 1
+    },
+    {
+      "visibility": null,
+      "frame": 13162,
+      "time": 438.73333333333335,
+      "sequence": "FULL-25",
+      "world": "closing",
+      "pov": false,
+      "shot": {
+        "position": [
+          1.65,
+          1.7999999999999998,
+          5.7
+        ],
+        "target": [
+          -0.3,
+          0.99,
+          -4.3
+        ],
+        "subject": "sample",
+        "mode": "field"
+      },
+      "specific_science_action": false,
+      "camera": [
+        1.65,
+        1.7999999999999998,
+        5.7
+      ],
+      "camera_target": [
+        -0.3,
+        0.99,
+        -4.3
+      ],
+      "joints": [
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        },
+        {
+          "a": 0.29999999999999993,
+          "b": 0.3,
+          "clamped": false
+        }
+      ],
+      "hand_palms_visible": true,
+      "full_master": true,
+      "total_frames": 13163,
+      "voice_speed_changed": false,
+      "real_scale_context": true,
+      "conceptual_diagram": false,
+      "stage_design": "present-shore-and-incomplete-record",
+      "source_geometry_reused": true,
+      "old_movie_frames_used": false,
+      "stage": "closing",
+      "water_time": 27.633333333333333,
+      "clue_is_incomplete": true,
+      "nonblack_fraction": 1
+    }
+  ],
+  "deterministic_seek": true,
+  "subject_moves_with_frozen_camera": true,
+  "width": 1920,
+  "height": 1080,
+  "page_errors": [],
+  "not_a_full_watch_or_listen": true
+}
