@@ -17,6 +17,12 @@ def run(cmd, **kw):
     return subprocess.run(list(map(str, cmd)), text=True, **kw)
 
 
+def json_safe(obj):
+    if isinstance(obj, np.generic):
+        return obj.item()
+    raise TypeError('Unsupported JSON type: ' + type(obj).__name__)
+
+
 def main():
     probe = run(['ffprobe', '-v', 'error', '-count_frames', '-show_format', '-show_streams', '-of', 'json', OUT], capture_output=True, check=True)
     p = json.loads(probe.stdout)
@@ -33,7 +39,7 @@ def main():
     dc = float(np.mean(x))
     corr = float(np.corrcoef(x[:, 0], x[:, 1])[0, 1]) if x.shape[1] == 2 else 1.0
     mono = np.mean(x, axis=1)
-    fold = 20 * np.log10((np.sqrt(np.mean(mono ** 2)) + 1e-12) / (np.sqrt(np.mean(x ** 2)) + 1e-12))
+    fold = float(20 * np.log10((np.sqrt(np.mean(mono ** 2)) + 1e-12) / (np.sqrt(np.mean(x ** 2)) + 1e-12)))
     loud = run(['ffmpeg', '-hide_banner', '-i', OUT, '-af',
                 'loudnorm=I=-14:TP=-1:LRA=7:print_format=json', '-f', 'null', '-'], capture_output=True, check=True)
     txt = loud.stderr
@@ -54,18 +60,19 @@ def main():
         'full_screen_cover': True,
         'rank_title_overlay_only': True
     }
+    checks = {k: bool(v) for k, v in checks.items()}
     data = {
         'file': str(OUT.relative_to(ROOT)), 'sha256': hashlib.sha256(OUT.read_bytes()).hexdigest(),
         'bytes': OUT.stat().st_size, 'probe': p,
         'decoded_audio_samples': int(len(x)), 'decoded_sample_rate': sr,
-        'decoded_sample_peak_dbfs': round(20 * np.log10(max(peak, 1e-12)), 4),
+        'decoded_sample_peak_dbfs': round(float(20 * np.log10(max(peak, 1e-12))), 4),
         'clipping_runs': clipping, 'click_runs': clicks,
         'dc_offset': round(dc, 6), 'channel_correlation': round(corr, 4),
-        'mono_fold_loss_db': round(float(fold), 4),
+        'mono_fold_loss_db': round(fold, 4),
         'loudnorm_input': {k: lj.get(k) for k in ('input_i', 'input_tp', 'input_lra', 'input_thresh')},
         'checks': checks, 'passed': all(checks.values())
     }
-    (REVIEW / 'technical_qc.json').write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+    (REVIEW / 'technical_qc.json').write_text(json.dumps(data, indent=2, ensure_ascii=False, default=json_safe) + '\n', encoding='utf-8')
     if not data['passed']:
         raise RuntimeError('V4 technical QC failed: ' + json.dumps({k: v for k, v in checks.items() if not v}))
     print('V4 technical QC OK', data['sha256'], flush=True)
