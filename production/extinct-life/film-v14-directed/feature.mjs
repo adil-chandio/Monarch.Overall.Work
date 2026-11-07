@@ -20,7 +20,7 @@ export function createFeature(a){
   if(w.isLab&&!w.directedScience){const root=new T.Group();for(const child of [...w.scene.children])if(!child.isLight&&!child.isLightProbe)root.add(child);root.scale.setScalar(.65);root.position.y=.22;w.scene.add(root);w.content=root;w.labelScale=.65;w.labelOffset=.22;room(w);}
   if(!w.isMacro&&!w.directedScience&&!['community','encounter','canopy'].includes(s.world))operatorProps(w);
   w.scene.environment=sourceLab.scene.environment;w.scene.environmentIntensity=w.isLab?.22:.14;
-  if(!w.isLab&&!w.isMacro){const sky=new Sky();sky.scale.setScalar(230);const u=sky.material.uniforms;u.turbidity.value=['coast','closing','section'].includes(s.world)?8:5;u.rayleigh.value=['coast','closing','section'].includes(s.world)?1.05:1.5;u.mieCoefficient.value=.004;u.sunPosition.value.set(-.32,.24,.8);w.scene.add(sky)}
+  if(!w.isLab&&!w.isMacro&&!w.directedScience){const sky=new Sky();sky.scale.setScalar(230);const u=sky.material.uniforms;u.turbidity.value=['coast','closing','section'].includes(s.world)?8:5;u.rayleigh.value=['coast','closing','section'].includes(s.world)?1.05:1.5;u.mieCoefficient.value=.004;u.sunPosition.value.set(-.32,.24,.8);w.scene.add(sky)}
   // Each return receives its own human-scale context and action, not another orbit camera.
   w.scene.traverse(o=>{if(o.isLight&&o.shadow){o.shadow.mapSize.set(1536,1536);o.shadow.radius=3}if(o.isMesh&&o.material){for(const m of Array.isArray(o.material)?o.material:[o.material])m.envMapIntensity=.25}});
   const pins=[];if(w.isLab&&!w.directedScience){for(let i=0;i<3;i++){const c=card(w.scene,['SOURCE','PRESERVATION','REFERENCE'][i],[.35+(i-1)*.34,.86,1.32],.28);c.rotation.x=-Math.PI/2;pins.push(c)}}w.pins=pins;

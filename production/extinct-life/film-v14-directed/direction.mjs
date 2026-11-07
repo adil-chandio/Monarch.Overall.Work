@@ -6,7 +6,7 @@ export function directedView(kind,t,state){
  const a=state.mastodon_position||[2.6,0,0],g=state.goose_position||[5.1,0,-.4],h=state.hare_position||[-.7,0,1],d=state.deer_position||[-1.1,0,0];
  if(kind==='community'){
   const subject=communitySubject(t);
-  const shots={hare:{position:[-3.9,.60,-1.6],target:[h[0],.25,h[2]]},reindeer:{position:[-3.1,1.3,-4.0],target:[d[0],.9,d[2]]},goose:{position:[7.0,.70,-2.1],target:[g[0],g[1]+.3,g[2]]},rodent:{position:[-2.4,.38,-1.25],target:[-2.1,.15,.9]},mastodon:{position:[-.4,1.8,-4.5],target:[a[0],1.55,a[2]]},plants:{position:[-7.0,1.8,-2.0],target:[-2.8,2.1,-8.2]},ensemble:{position:[-5.6,2.1,-5.8],target:[.4,1.15,-.8]}};
+  const shots={hare:{position:[-3.9,.60,-1.6],target:[h[0],.42,h[2]]},reindeer:{position:[-1.1,1.8,-7.0],target:[d[0],1.8,d[2]]},goose:{position:[8.3,1.0,-3.2],target:[g[0],g[1]+.45,g[2]]},rodent:{position:[-2.4,.38,-1.25],target:[-2.1,.15,.9]},mastodon:{position:[-1.5,2.0,-7.5],target:[a[0],1.9,a[2]]},plants:{position:[-7.0,1.8,-2.0],target:[-2.8,2.1,-8.2]},ensemble:{position:[-5.6,2.1,-5.8],target:[.4,1.15,-.8]}};
   return {...shots[subject],subject,mode:'reconstruction-observer'};
  }
  if(kind==='encounter'){
@@ -16,6 +16,7 @@ export function directedView(kind,t,state){
   if(beat==='reconstruction-limit')return {position:[-6.5,1.8,-.8],target:[-2.8,1.9,-8.2],subject:'plants',mode:'reconstruction-observer'};
   return {position:[7.8,1.8,3.8],target:[a[0],1.4,a[2]],subject:'mastodon',mode:'reconstruction-observer'};
  }
+ if(kind==='canopy')return {position:[-6+S(t/12)*.6,2.5,9],target:[1.0,1.8,-1],subject:'environment',mode:'reconstruction-observer'};
  if(kind==='closing')return {position:[.15+S((t-9)/17)*1.5, .65+S((t-9)/17)*1.15,.9+S((t-9)/17)*4.8],target:[-.3*S((t-9)/17),.24+S((t-9)/17)*.75,-.3-S((t-9)/17)*4],subject:'sample',mode:'field'};
  return null;
 }

@@ -1,0 +1,37 @@
+{
+  "base_run": 42410398404,
+  "base_commit": "77539b81f6c095b353e66e0c839a986402e2584b",
+  "base_visual_source_fingerprint": "eebab3e0ca115684f746715036517ed6e0465becaa7a06792a35a6f100b544a9",
+  "changed_ranges_including_transition_dependency": [
+    {
+      "world": "section",
+      "from": 2682,
+      "to": 3084
+    },
+    {
+      "world": "community",
+      "from": 6560,
+      "to": 7502
+    },
+    {
+      "world": "canopy",
+      "from": 11953,
+      "to": 12351
+    }
+  ],
+  "fresh_parts": [
+    9,
+    10,
+    11,
+    23,
+    24,
+    25,
+    26,
+    27,
+    43,
+    44,
+    45
+  ],
+  "reason": "Fuller naming-shot framing, no outdoor sky in scientific cutaway, and a canopy/environment shot without an accidental edge-cropped hero. All other visual code paths unchanged.",
+  "inheritance_rule": "Only exact base-run part hashes, whose entire range is outside every changed/dependent interval, may be inherited. All overlapping shards must be newly rendered. Complete new native inspection and final decode required."
+}

@@ -95,6 +95,11 @@ class DirectedMaster(unittest.TestCase):
                 self.assertGreaterEqual(vis['unobstructed_fraction'], .65, str(v['frame']))
                 self.assertGreater(vis['width'], 110)
                 self.assertGreater(vis['height'], 75)
+                if v['world'] == 'community':
+                    self.assertGreaterEqual(vis['left'], 20)
+                    self.assertLessEqual(vis['right'], 1900)
+                    self.assertGreaterEqual(vis['top'], 100)
+                    self.assertLessEqual(vis['bottom'], 1010)
         river = sorted([v for v in samples if v['world'] == 'river'], key=lambda v: v['frame'])
         self.assertGreater(sum((x-y)**2 for x, y in zip(river[0]['camera'], river[-1]['camera']))**.5, 2)
 

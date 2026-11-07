@@ -1,0 +1,171 @@
+name: V14 final framing correction — dependency-safe assembly and encoded evidence
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-v14-framing-correction.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: extinct-v14-final-framing-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  base:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - name: Await complete original V14 pictures, not an incomplete artifact set
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run watch 42410398404 --repo adil-chandio/Monarch.Overall.Work --interval 60
+          gh api 'repos/adil-chandio/Monarch.Overall.Work/actions/runs/42410398404/jobs?per_page=100' > base-jobs.json
+          python - <<'PY'
+          import json
+          jobs=json.load(open('base-jobs.json'))['jobs']
+          assert next(j for j in jobs if j['name']=='preflight')['conclusion']=='success'
+          pictures=[j for j in jobs if j['name'].startswith('pictures (')]
+          assert len(pictures)==48 and all(j['conclusion']=='success' for j in pictures)
+          assembly=next(j for j in jobs if j['name']=='assemble')
+          required=['Assemble full master; verify every decoded frame and actual encoded audio','Extract exact encoded candidate evidence before draft release','Save draft candidate with honest scope and music attribution']
+          steps={s['name']:s['conclusion'] for s in assembly['steps']}
+          assert all(steps.get(name)=='success' for name in required), steps
+          # Advancing the same branch can make only the final base metadata ff-only push fail.
+          # We require actual preflight/pictures/assembly/extraction success, never waive render errors.
+          print('All base picture artifacts, full decode, encoded evidence and draft asset verified.')
+          PY
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6 pillow==12.1.0
+          .venv/bin/python -m unittest discover -s tests -p test_extinct_v14_directed.py -v
+      - name: Re-inspect all 27 stages and critical actor shots from the corrected source
+        run: |
+          node production/extinct-life/film-v14-directed/render.mjs --stills
+          .venv/bin/python -m unittest discover -s tests -p test_extinct_v14_directed.py -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v14-corrected-inspection
+          path: |
+            .cache/extinct-v14/seek-QC.json
+            .cache/extinct-v14/stills/
+          include-hidden-files: true
+          retention-days: 14
+  pictures:
+    needs: preflight
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 11
+      matrix:
+        part: [9, 10, 11, 23, 24, 25, 26, 27, 43, 44, 45]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6 pillow==12.1.0
+      - name: Render each entire affected shard, including outgoing transition dependencies
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          BOUNDS=$(python -c 'import os,json; n=json.load(open("production/extinct-life/film-v14-directed/schedule.json"))["total_frames"]; i=int(os.environ["PART"]); print("--from="+str(n*i//48)+" --to="+str(n*(i+1)//48))')
+          node production/extinct-life/film-v14-directed/render.mjs $BOUNDS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v14-corrected-${{ matrix.part }}
+          path: |
+            .cache/extinct-v14/part-*.mp4
+            .cache/extinct-v14/render-*.json
+          include-hidden-files: true
+          retention-days: 3
+  assemble:
+    needs: [base, preflight, pictures]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6 pillow==12.1.0
+          git pull --ff-only origin arena/ba8d901e-monarch-overall-work
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 42410398404
+          github-token: ${{ github.token }}
+          pattern: v14-native-*
+          path: .cache/extinct-v14
+          merge-multiple: true
+      - name: Seal exact inherited artifact hashes before replacement
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          b=Path('.cache/extinct-v14')
+          (b/'BASE-PARTS.json').write_text(json.dumps({p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in b.glob('part-*.mp4')},indent=2)+'\n')
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v14-corrected-*
+          path: .cache/extinct-v14
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 42410398404
+          github-token: ${{ github.token }}
+          name: v14-master-audio
+          path: .cache/extinct-v14
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 42410398404
+          github-token: ${{ github.token }}
+          name: v14-audio-qc
+          path: production/extinct-life/film-v14-directed
+      - name: Assemble only proven unaffected inherited ranges plus all fresh dependent ranges
+        run: |
+          .venv/bin/python production/extinct-life/film-v14-directed/finish.py --assemble-only
+          .venv/bin/python production/extinct-life/review-v14/extract_evidence.py
+      - name: Preserve final corrected candidate privately pending encoded review
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-v14-corrected-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --draft --prerelease --title 'Extinct Life V14 — corrected full English film candidate (7:19)' --notes "Full English V14 corrected candidate. Original 438.766667-second script, voice assets and speed unchanged; 13163 native 1080p frames. Includes explicit species framing, visible takeoff, distinct scientific explanations, persistent uncertainty qualifiers, corrected cutaway environment and canopy composition. Eleven full shards rerendered including transition dependencies; all inherited parts are exact hash-verified V14 base-run artifacts outside changed ranges. V13 and prior films unchanged. Complete decode and encoded signal checks plus native/encoded samples are not uninterrupted human listening, expert scientific/anatomical approval, or a zero-flaw guarantee. Draft pending encoded creative review. Music: Hiraeth and Undertow by Scott Buckley, CC-BY 4.0, www.scottbuckley.com.au; https://creativecommons.org/licenses/by/4.0/ . Credits attached. GitHub only, no YouTube upload." .cache/extinct-v14/Extinct_Life_V14_Directed_English_1080p.mp4 production/extinct-life/film-v14-directed/QC.json production/extinct-life/film-v14-directed/SOUND-QC.json production/extinct-life/film-v14-directed/CREDITS.md production/extinct-life/film-v14-directed/MUSIC-CREDITS.md production/extinct-life/film-v14-directed/English.srt
+      - name: Save exact encoded evidence and corrected delivery identity
+        run: |
+          cp -r .cache/extinct-v14/stills production/extinct-life/film-v14-directed/inspection
+          cp .cache/extinct-v14/seek-QC.json production/extinct-life/film-v14-directed/seek-QC.json
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v14-directed');q=json.load(open(b/'QC.json'));tag='extinct-life-v14-corrected-'+os.environ['GITHUB_RUN_ID'];base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          d={'status':'Corrected V14 draft candidate rendered; encoded creative review pending','release':base+'tag/'+tag,'video':base+'download/'+tag+'/Extinct_Life_V14_Directed_English_1080p.mp4','sha256':q['sha256'],'bytes':q['bytes'],'seconds':q['duration_seconds'],'frames':q['native_frames'],'full_film_complete':True,'v13_unchanged':True,'draft':True,'full_film_creative_acceptance':False}
+          (b/'DELIVERY.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name 'Monarch V14 corrected film production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v14-directed production/extinct-life/review-v14
+          git commit -m 'Preserve corrected V14 full-master identity and exact encoded evidence [skip ci]'
+          git push origin arena/ba8d901e-monarch-overall-work
