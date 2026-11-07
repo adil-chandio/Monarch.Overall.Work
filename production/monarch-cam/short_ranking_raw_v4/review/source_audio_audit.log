@@ -1,0 +1,15 @@
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/audio_audit_squirrel.wav
+squirrel audio True audible windows 26 best -45.22
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/audio_audit_hermit_crab.wav
+hermit_crab audio True audible windows 17 best -17.95
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/starfish.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/starfish.webm -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/audio_audit_starfish.wav
+starfish audio True audible windows 0 best -120.0
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/octopus.mpg
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/octopus.mpg -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/audio_audit_octopus.wav
+octopus audio True audible windows 0 best -120.0
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/titmouse.webm
+titmouse audio False audible windows 0 best -120
+Audio audit written /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v4/review/source_audio_audit.json
