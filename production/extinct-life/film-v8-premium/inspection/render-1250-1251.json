@@ -3,7 +3,34 @@
     {
       "frame": 1250,
       "scene": "archive",
-      "render_seconds": 59.57
+      "render_seconds": 65.52,
+      "camera_matrix": [
+        [
+          0.9623638987541199,
+          -0.1265493780374527,
+          0.24050141870975494,
+          1.0326189994812012
+        ],
+        [
+          0.27176401019096375,
+          0.44813352823257446,
+          -0.8516576290130615,
+          -3.556684970855713
+        ],
+        [
+          -9.089641039849994e-09,
+          0.8849641680717468,
+          0.46565911173820496,
+          2.1593589782714844
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "animal_surface_sha256": null
     }
   ],
   "width": 1920,
@@ -11,5 +38,6 @@
   "engine": "Cycles CPU",
   "samples": 24,
   "source_frames_reused": false,
-  "scene_image_plates": false
+  "scene_image_plates": false,
+  "locked_camera": false
 }

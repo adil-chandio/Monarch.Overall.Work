@@ -3,7 +3,34 @@
     {
       "frame": 1740,
       "scene": "forest-late",
-      "render_seconds": 94.91
+      "render_seconds": 106.16,
+      "camera_matrix": [
+        [
+          0.7863433957099915,
+          -0.1528535783290863,
+          0.5985815525054932,
+          5.886600971221924
+        ],
+        [
+          0.6177896857261658,
+          0.1945572942495346,
+          -0.7618945837020874,
+          -6.688469886779785
+        ],
+        [
+          -9.191008132347633e-08,
+          0.9689082503318787,
+          0.24742020666599274,
+          2.280994415283203
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "animal_surface_sha256": "dc9ea83d39dc5106e1dd412f6fbb80e6593740e9bb24700d5f28175cae97b7b9"
     }
   ],
   "width": 1920,
@@ -11,5 +38,6 @@
   "engine": "Cycles CPU",
   "samples": 24,
   "source_frames_reused": false,
-  "scene_image_plates": false
+  "scene_image_plates": false,
+  "locked_camera": false
 }

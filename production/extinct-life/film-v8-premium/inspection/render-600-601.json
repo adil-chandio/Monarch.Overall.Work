@@ -3,7 +3,34 @@
     {
       "frame": 600,
       "scene": "coast",
-      "render_seconds": 55.89
+      "render_seconds": 68.31,
+      "camera_matrix": [
+        [
+          0.8502688407897949,
+          -0.0923185646533966,
+          0.5181893110275269,
+          7.65026330947876
+        ],
+        [
+          0.5263485908508301,
+          0.1491323709487915,
+          -0.8370882272720337,
+          -7.950789451599121
+        ],
+        [
+          -1.8218482722431872e-08,
+          0.9844982624053955,
+          0.17539435625076294,
+          4.550438404083252
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "animal_surface_sha256": null
     }
   ],
   "width": 1920,
@@ -11,5 +38,6 @@
   "engine": "Cycles CPU",
   "samples": 24,
   "source_frames_reused": false,
-  "scene_image_plates": false
+  "scene_image_plates": false,
+  "locked_camera": false
 }

@@ -3,7 +3,34 @@
     {
       "frame": 1490,
       "scene": "lab",
-      "render_seconds": 46.37
+      "render_seconds": 78.64,
+      "camera_matrix": [
+        [
+          0.8354490995407104,
+          -0.16085956990718842,
+          0.5254988670349121,
+          3.3463282585144043
+        ],
+        [
+          0.5495678782463074,
+          0.24453751742839813,
+          -0.7988595366477966,
+          -4.937063217163086
+        ],
+        [
+          1.8229442844130972e-08,
+          0.9562037587165833,
+          0.2927019000053406,
+          2.9638986587524414
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "animal_surface_sha256": null
     }
   ],
   "width": 1920,
@@ -11,5 +38,6 @@
   "engine": "Cycles CPU",
   "samples": 24,
   "source_frames_reused": false,
-  "scene_image_plates": false
+  "scene_image_plates": false,
+  "locked_camera": false
 }
