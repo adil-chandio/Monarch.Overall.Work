@@ -4,6 +4,7 @@ Retrieved squirrel 3543930
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm -ss 1.000 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/squirrel_%04d.jpg
+Candidate failed hermit_crab https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm')
 Retrieved hermit_crab 2540137
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm -ss 0.500 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4
@@ -128,5 +129,5 @@ Retrieved oriental_dove 72961667
   "visual_timestamp_approval": "LOCKED_AFTER_CONTACT_SHEET_REVIEW",
   "full_motion_review": false,
   "native_audio_listening": false,
-  "retrieved_unix": 1794075820
+  "retrieved_unix": 1794076172
 }
