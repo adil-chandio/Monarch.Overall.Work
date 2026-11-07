@@ -1,0 +1,25 @@
+{
+  "status": "research_test_failed",
+  "log_received": true,
+  "events": [
+    "[{\"stream_name\":\"stderr\",\"time\":5.8278057,\"data\":\"<path>:434: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and w",
+    "error: subprocess-exited-with-error",
+    "note: This error originates from a subprocess, and is likely not a problem with pip.",
+    "error: subprocess-exited-with-error",
+    "note: This error originates from a subprocess, and is likely not a problem with pip.",
+    "error: subprocess-exited-with-error",
+    "note: This error originates from a subprocess, and is likely not a problem with pip.",
+    "error: failed-wheel-build-for-install",
+    "\u00d7 Failed to build installable wheels for some pyproject.toml based projects",
+    "error: failed-wheel-build-for-install",
+    "\u00d7 Failed to build installable wheels for some pyproject.toml based projects",
+    "error: failed-wheel-build-for-install",
+    "\u00d7 Failed to build installable wheels for some pyproject.toml based projects",
+    "raise error",
+    "papermill.exceptions.PapermillExecutionError:",
+    "Exception encountered at \"In [1]\":",
+    "CalledProcessError                        Traceback (most recent call last)",
+    "--> 578             raise CalledProcessError(retcode, process.args,",
+    "CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy<2', 'onnxruntime==1.20.1', 'onnx==1.18.0', 'diffusers==0.29.2', 'transformers==4.41.2', 'accelerate==0.30.1', 'huggingface_hub==0.27.1', 'einops', 'scikit-image', 'imageio-ffmpeg', 'bvh', 'safetensors']' returned non-zero exit status 1."
+  ]
+}
