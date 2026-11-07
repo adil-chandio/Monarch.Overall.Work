@@ -48,7 +48,7 @@ img=ImageOps.fit(Image.open(image_file).convert("RGB"),(512,288),method=Image.Re
 t=time.time()
 print("STAGE 3 video generation",flush=True)
 with torch.inference_mode():
- frames=pipe(image=img,prompt_embeds=pos,negative_prompt_embeds=neg,height=288,width=512,num_frames=65,num_inference_steps=20,guidance_scale=4.0,generator=torch.Generator("cpu").manual_seed(3451)).frames[0]
+ frames=pipe(image=img,prompt_embeds=pos.to("cuda"),negative_prompt_embeds=neg.to("cuda"),height=288,width=512,num_frames=65,num_inference_steps=20,guidance_scale=4.0,generator=torch.Generator("cpu").manual_seed(3451)).frames[0]
 out=pathlib.Path("/kaggle/working/clips");out.mkdir(exist_ok=True)
 export_to_video(frames,str(out/"wan-face-pilot.mp4"),fps=24)
 (out/"receipts_wan-face-pilot.json").write_text(json.dumps({"backend":model_id,"frames":len(frames),"width":512,"height":288,"seconds_elapsed":round(time.time()-t,1)},indent=2))
