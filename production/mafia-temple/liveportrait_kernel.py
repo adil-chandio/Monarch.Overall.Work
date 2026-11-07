@@ -18,7 +18,7 @@ def run(args, **kwargs):
 
 # Install only missing essentials rather than downgrading Kaggle's torch/CUDA stack.
 run([sys.executable, '-m', 'pip', 'install', '-q', 'numpy<2', 'onnxruntime==1.20.1',
-     'onnx', 'tyro==0.8.5', 'pykalman==0.9.7', 'rich', 'scikit-image',
+     'onnx==1.16.1', 'ml_dtypes>=0.5.1', 'tyro==0.8.5', 'pykalman==0.9.7', 'rich', 'scikit-image',
      'imageio-ffmpeg', 'ffmpeg-python', 'huggingface_hub', 'pyyaml'])
 import torch
 if not torch.cuda.is_available():
