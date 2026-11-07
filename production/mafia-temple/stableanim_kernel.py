@@ -10,6 +10,7 @@ POSE_GENERATOR = __POSE_GENERATOR__
 work=pathlib.Path('/kaggle/working'); os.chdir(work)
 os.environ['HF_HOME']='/tmp/monarch-stableanim-hf'
 os.environ['HF_HUB_ENABLE_HF_TRANSFER']='0'
+os.environ['HF_HUB_DISABLE_XET']='1'
 os.environ['TOKENIZERS_PARALLELISM']='false'
 os.environ['USE_TF']='0'
 os.environ['USE_FLAX']='0'
@@ -73,7 +74,7 @@ patterns=['Animation/pose_net.pth','Animation/face_encoder.pth','Animation/unet.
           'stable-video-diffusion-img2vid-xt/*.json',
           'stable-video-diffusion-img2vid-xt/*/*.json',
           'stable-video-diffusion-img2vid-xt/*/*.fp16.safetensors']
-snapshot_download('FrancisRing/StableAnimator', local_dir='checkpoints', allow_patterns=patterns)
+snapshot_download('FrancisRing/StableAnimator', local_dir='checkpoints', allow_patterns=patterns, max_workers=1)
 # from_pretrained expects unqualified safetensors paths. The stored bytes are FP16.
 svd=pathlib.Path('checkpoints/stable-video-diffusion-img2vid-xt')
 for p in svd.rglob('*.fp16.safetensors'):
