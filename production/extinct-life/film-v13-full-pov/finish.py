@@ -93,6 +93,7 @@ def assemble():
  filt="select='"+'+'.join(f'eq(n,{n})' for n in selected)+"'"
  run(['-i',out,'-vf',filt,'-fps_mode','passthrough','-q:v',2,inspect/'%02d.jpg'])
  qc['encoded_inspection_frames']=selected
+ if (B/'NATIVE-RENDER-PROVENANCE.json').exists():qc['native_render_provenance']=json.loads((B/'NATIVE-RENDER-PROVENANCE.json').read_text())
  (B/'QC.json').write_text(json.dumps(qc,indent=2)+'\n');print(json.dumps(qc,indent=2))
 if __name__=='__main__':
  if '--assemble-only' not in sys.argv:audio()

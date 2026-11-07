@@ -27,7 +27,7 @@ Unchanged original voice timing, two licensed non-repeating Scott Buckley score 
 
 ## Reproducible workflow
 
-Workflow: `.github/workflows/extinct-v13-full-pov.yml`.
+Full rebuild workflow: `.github/workflows/extinct-v13-full-pov.yml`. The delivered correction uses `.github/workflows/extinct-v13-pov-correction.yml`: it retains the initial run's freshly generated V13 shards and unchanged full soundtrack, and replaces all six shard ranges touching coast/closing or their transitions. A large-cover visibility selector initially also hid small hand-cuff groups; the selector now tests torus radius >0.9m, and native guards explicitly require visible palms. `NATIVE-RENDER-PROVENANCE.json` records both runs/commits and exact corrected parts. No V9/V10/V11/V12 movie footage is used.
 
 1. Source/hash/subtitle/coverage checks and analytic motion/kinematics tests.
 2. Full soundtrack construction; native samples from every stage, critical opening contact and opening-to-full boundary. Absolute seek/determinism and locked-camera subject-motion checks.

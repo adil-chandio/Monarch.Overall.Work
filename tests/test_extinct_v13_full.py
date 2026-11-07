@@ -78,6 +78,8 @@ class FullPOVMaster(unittest.TestCase):
         for v in samples:
             self.assertEqual(v['total_frames'], 13163)
             self.assertTrue(v['full_master'])
+            if v['sequence'].startswith('FULL-') and v['world'] in ['coast', 'closing']:
+                self.assertIs(v['hand_palms_visible'], True)
             for j in v.get('joints', []):
                 self.assertAlmostEqual(j['a'], .3, places=5)
                 self.assertAlmostEqual(j['b'], .3, places=5)
