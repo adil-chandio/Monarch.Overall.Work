@@ -365,7 +365,9 @@ jobs:
 
       - name: Generate AI motion clips
         run: |
-          if grep -q 'wan-batch-v4' production/mafia-temple/trigger.txt; then
+          if grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_liveportrait_pilot.sh
+          elif grep -q 'wan-batch-v4' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_wan_alternates.sh
           elif grep -q 'wan-batch-v3' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_wan_batch.sh
@@ -380,8 +382,19 @@ jobs:
           else
             bash production/mafia-temple/run_gpu.sh
           fi
+      - name: Upload research pilot for review (no automatic Git commit)
+        uses: actions/upload-artifact@v4
+        with:
+          name: portrait-pilot-research
+          path: production/mafia-temple/portrait-pilot-output/
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Save motion clips to the session branch
         run: |
+          if grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
+            echo 'Research pilot is an Actions artifact; not committing it.'
+            exit 0
+          fi
           git config user.name "MONARCH GPU Runner"
           git config user.email "gpu@monarch.studio"
           if grep -q 'diagnose-v2' production/mafia-temple/trigger.txt; then
