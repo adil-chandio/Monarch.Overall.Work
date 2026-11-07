@@ -84,7 +84,7 @@ def audio():
   n=round(duration*SR);tt=np.arange(n)/SR;noise=rng.normal(0,1,n);kernel=np.ones(91)/91;soft=np.convolve(noise,kernel,'same');soft/=max(.001,np.max(np.abs(soft)));en=smooth(tt/.08)*smooth((duration-tt)/.22)
   if kind=='soil':soft=.6*soft+.4*np.sin(math.tau*68*tt)*np.exp(-tt*7)
   soft*=en*level;at=round(when*SR);stop=min(N,at+n);pan=.12*math.sin(when);foley[at:stop,0]+=soft[:stop-at]*(1-pan);foley[at:stop,1]+=soft[:stop-at]*(1+pan);cues.append({'time':when,'duration':duration,'kind':kind,'synthetic_not_field_recording':True})
- event(2.4,.9,.022,'soil');event(7.1,2,.012,'mineral');event(10.5,1.4,.009,'mineral');event(13.45,11.6,.009,'wind');event(27,3.2,.009,'carriage');event(33.6,1.3,.007,'plant');event(38,4,.009,'mineral');event(47.1,3.9,.009,'receiver');event(56.4,3.5,.012,'leaf-water')
+ event(2.4,.9,.022,'soil');event(7.1,2,.012,'mineral');event(10.5,1.4,.009,'mineral');event(13.45,11.6,.009,'wind');event(27,3.2,.009,'carriage');event(38,4,.009,'mineral');event(47.1,3.9,.009,'receiver');event(56.4,3.5,.012,'leaf-water')
  wav(C/'foley-unshaped.wav',foley);run(['-v','warning','-i',C/'foley-unshaped.wav','-af','highpass=f=65,lowpass=f=3500',C/'foley.wav']);foley=pcm(C/'foley.wav');foley*=smooth(t/.15)[:,None]*smooth((61-t)/.2)[:,None];mix=voice+score+foley;mix*=min(1,.85/max(1e-8,float(np.max(np.abs(mix)))));wav(C/'premaster.wav',mix)
  q=levels(C/'premaster.wav');filt=f"loudnorm=I=-16:TP=-2.5:LRA=9:measured_I={q['input_i']}:measured_TP={q['input_tp']}:measured_LRA={q['input_lra']}:measured_thresh={q['input_thresh']}:offset={q['target_offset']}:linear=true:print_format=json"
  run(['-v','warning','-i',C/'premaster.wav','-af',filt,'-ar',SR,C/'mix.wav'])

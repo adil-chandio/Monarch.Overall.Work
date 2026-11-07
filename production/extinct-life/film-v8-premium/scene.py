@@ -150,12 +150,14 @@ def mastodon():
   # Broad, small fan, not a circular primitive ear.
   v=[(side*.56,-1.59,2.9)];N=24
   for i in range(N+1):u=i/N*math.tau;v.append((side*(.59+.36*(1+math.cos(u))),-1.53+.12*math.sin(u),2.68+.56*math.sin(u)))
-  ear=mesh('Sculpted fan ear',v,[(0,i+1,i+2) for i in range(N)],skin);mod=ear.modifiers.new('Ear thickness','SOLIDIFY');mod.thickness=.035;mod=ear.modifiers.new('Soft ear edge','SUBSURF');mod.levels=2;ears.append(ear)
+  ear=mesh('Sculpted fan ear',v,[(0,i+1,i+2) for i in range(N)],skin);pivot=Vector((side*.56,-1.59,2.9))
+  for vert in ear.data.vertices:vert.co-=pivot
+  ear.location=pivot;mod=ear.modifiers.new('Ear thickness','SOLIDIFY');mod.thickness=.035;mod=ear.modifiers.new('Soft ear edge','SUBSURF');mod.levels=2;ears.append(ear)
   pts=[(side*.29,-2.32,2.23),(side*.43,-2.65,2.07),(side*.52,-3.0,2.03),(side*.55,-3.36,2.15)]
   tusk=tube('Gently curved tapered tusk',pts,[.13,.12,.085,.006],ivory,24);mod=tusk.modifiers.new('Tusk polish','SUBSURF');mod.levels=2;headparts.append(tusk)
   headparts.append(ell('Eye socket',(side*.52,-2.24,2.93),(.12,.065,.105),skin));headparts.append(ell('Eye',(side*.579,-2.283,2.94),(.046,.036,.045),eye));headparts.append(curve('Upper eyelid',[(side*.555,-2.30,2.955),(side*.583,-2.30,2.985),(side*.615,-2.27,2.961)],.014,skin))
   for j in range(3):ell('Blunt nail',(side*.68+(j-1)*.15,-1.43,.14),(.065,.035,.065),ivory)
- for side in [-1,1]:ell('Trunk nostril',(side*.035,-2.704,.52),(.025,.02,.032),dark)
+ nostrils=[ell('Trunk nostril',(side*.035,-2.704,.52),(.025,.02,.032),dark) for side in [-1,1]]
  tail=curve('Tail',[(0,1.85,2.3),(.08,2.03,1.7),(.1,2.1,1.08)],.035,skin)
  # Short fur is generated on the continuous surface, not painted onto a sphere.
  fur=material('Short warm coat',(.095,.052,.026),.87,scale=12,bump=.08);body.data.materials.append(fur)
@@ -170,6 +172,7 @@ def mastodon():
   lift=.2*(1-ease(t/2.6));m=np.exp(-((bind[:,0]+.68)/.38)**4-((y+1.03)/.55)**4)*np.clip((1.65-z)/1.2,0,1);out[:,2]+=m*lift;out[:,1]-=m*.08*(1-ease(t/2.6))
   trunk=np.clip((-y-2.32)/.3,0,1)*np.clip((2.65-z)/1.6,0,1);out[:,0]+=.12*math.sin(t*.65)*trunk;out[:,1]-=.06*math.sin(t*.8)*trunk
   body.data.vertices.foreach_set('co',out.ravel());body.data.update()
+  for i,o in enumerate(nostrils):o.location.x=(i*2-1)*.035+.12*math.sin(t*.65);o.location.y=-2.704-.06*math.sin(t*.8)
   for i,e in enumerate(ears):e.rotation_euler.z=(i*2-1)*.035*math.sin(t*.9)
   tail.rotation_euler.y=.045*math.sin(t*.8)
  root=bpy.data.objects.new('Reconstruction root',None);bpy.context.collection.objects.link(root)
