@@ -6,27 +6,27 @@
   "lossy": false,
   "profile": "bundled launch films",
   "verdict": "close",
-  "score": 0.886,
+  "score": 0.865,
   "in_range": 19,
   "scored": 22,
   "critical_issues": 0,
-  "major_issues": 1,
+  "major_issues": 2,
   "partial": [],
   "actions": [
     {
       "weight": "major",
-      "metric": "hit_rate",
-      "action": "too many salient hits (1.97/s, refs 0.10 /s .. 1.66 /s): keep the biggest for reveals, soften the rest by 3-6 dB"
+      "metric": "crest_lu",
+      "action": "the loudest 3 s are only 0.4 LU above integrated (refs 1.1 LU .. 3.5 LU): no moment stands out; let the main reveal / logo hit rise 2-3 LU above the body or ease the limiter"
     },
     {
-      "weight": "minor",
-      "metric": "p_real",
-      "action": "realness is uncertain (p_real 0.70; real or pro-produced sound scores >= 0.77); lowest-scoring 4 s windows: 0:04.00-0:08.00 (0.46), 0:12.00-0:16.00 (0.68), 0:31.00-0:35.00 (0.24): if the film should sound recorded or produced, find and replace the layer that sounds synthetic; judge each stem with `earshot realness stem.wav` (a finished mix is harder to judge than its sources)"
+      "weight": "major",
+      "metric": "hit_rate",
+      "action": "too many salient hits (1.86/s, refs 0.10 /s .. 1.66 /s): keep the biggest for reveals, soften the rest by 3-6 dB"
     },
     {
       "weight": "minor",
       "metric": "band_sub",
-      "action": "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-31.7 dB share, refs -16.2 dB .. -4.1 dB)"
+      "action": "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-31.9 dB share, refs -16.2 dB .. -4.1 dB)"
     }
   ],
   "tips": [
@@ -37,7 +37,7 @@
       "metric": "lufs_i",
       "label": "integrated loudness",
       "group": "loudness",
-      "value": -14.5,
+      "value": -14.6,
       "unit": "LUFS",
       "range": [
         -16.0,
@@ -57,7 +57,7 @@
       "metric": "true_peak",
       "label": "true peak",
       "group": "loudness",
-      "value": -3.1,
+      "value": -3.3,
       "unit": "dBTP",
       "range": [
         null,
@@ -77,7 +77,7 @@
       "metric": "p_real",
       "label": "realness (p_real)",
       "group": "realness",
-      "value": 0.699,
+      "value": 0.823,
       "unit": "p",
       "range": [
         0.77,
@@ -86,12 +86,9 @@
       "basis": "realness model",
       "median": null,
       "typical": null,
-      "status": "low",
-      "weight": "minor",
-      "why": "the reference launch films use real recordings and produced music; next to them, code-synthesized sound reads as cheap and generic",
-      "actions": [
-        "realness is uncertain (p_real 0.70; real or pro-produced sound scores >= 0.77); lowest-scoring 4 s windows: 0:04.00-0:08.00 (0.46), 0:12.00-0:16.00 (0.68), 0:31.00-0:35.00 (0.24): if the film should sound recorded or produced, find and replace the layer that sounds synthetic; judge each stem with `earshot realness stem.wav` (a finished mix is harder to judge than its sources)"
-      ]
+      "status": "ok",
+      "weight": "critical",
+      "why": "the reference launch films use real recordings and produced music; next to them, code-synthesized sound reads as cheap and generic"
     },
     {
       "metric": "music_frac",
@@ -137,7 +134,7 @@
       "metric": "lra",
       "label": "loudness range",
       "group": "loudness",
-      "value": 1.7,
+      "value": 1.6,
       "unit": "LU",
       "range": [
         0.7,
@@ -157,7 +154,7 @@
       "metric": "crest_lu",
       "label": "loudest 3 s above integrated",
       "group": "loudness",
-      "value": 1.0,
+      "value": 0.4,
       "unit": "LU",
       "range": [
         0.6000000000000001,
@@ -169,9 +166,12 @@
         1.16,
         3.32
       ],
-      "status": "ok",
+      "status": "low",
       "weight": "major",
-      "why": "how far the loudest 3 s stick out above the average level"
+      "why": "how far the loudest 3 s stick out above the average level",
+      "actions": [
+        "the loudest 3 s are only 0.4 LU above integrated (refs 1.1 LU .. 3.5 LU): no moment stands out; let the main reveal / logo hit rise 2-3 LU above the body or ease the limiter"
+      ]
     },
     {
       "metric": "first_sound_s",
@@ -197,7 +197,7 @@
       "metric": "end_silence_s",
       "label": "dead air at the end",
       "group": "ending",
-      "value": 0.06,
+      "value": 0.08,
       "unit": "s",
       "range": [
         null,
@@ -217,7 +217,7 @@
       "metric": "max_gap_s",
       "label": "longest silent gap inside",
       "group": "arc",
-      "value": 0.12,
+      "value": 0.16,
       "unit": "s",
       "range": [
         null,
@@ -237,7 +237,7 @@
       "metric": "final_lu",
       "label": "final moment vs integrated",
       "group": "ending",
-      "value": 4.9,
+      "value": 5.0,
       "unit": "LU",
       "range": [
         -3.7,
@@ -257,7 +257,7 @@
       "metric": "onset_rate",
       "label": "onset density",
       "group": "density",
-      "value": 5.31,
+      "value": 5.37,
       "unit": "/s",
       "range": [
         2.16,
@@ -277,7 +277,7 @@
       "metric": "hit_rate",
       "label": "salient hit density",
       "group": "density",
-      "value": 1.97,
+      "value": 1.86,
       "unit": "/s",
       "range": [
         0.05,
@@ -293,14 +293,14 @@
       "weight": "major",
       "why": "punch: salient hits mark the key moments; without them nothing lands",
       "actions": [
-        "too many salient hits (1.97/s, refs 0.10 /s .. 1.66 /s): keep the biggest for reveals, soften the rest by 3-6 dB"
+        "too many salient hits (1.86/s, refs 0.10 /s .. 1.66 /s): keep the biggest for reveals, soften the rest by 3-6 dB"
       ]
     },
     {
       "metric": "intro_lu",
       "label": "opening level (first 10%)",
       "group": "arc",
-      "value": 0.1,
+      "value": 0.2,
       "unit": "LU",
       "range": [
         -19.0,
@@ -340,7 +340,7 @@
       "metric": "fade_s",
       "label": "final fade / ring-out length",
       "group": "ending",
-      "value": 0.94,
+      "value": 0.92,
       "unit": "s",
       "range": [
         null,
@@ -360,7 +360,7 @@
       "metric": "band_sub",
       "label": "sub 20-60 Hz share",
       "group": "spectrum",
-      "value": -31.7,
+      "value": -31.9,
       "unit": "dB",
       "range": [
         -17.7,
@@ -376,14 +376,14 @@
       "weight": "minor",
       "why": "sub (20-60 Hz) weight under hits and music",
       "actions": [
-        "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-31.7 dB share, refs -16.2 dB .. -4.1 dB)"
+        "thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-31.9 dB share, refs -16.2 dB .. -4.1 dB)"
       ]
     },
     {
       "metric": "band_low",
       "label": "low 60-250 Hz share",
       "group": "spectrum",
-      "value": -4.0,
+      "value": -3.9,
       "unit": "dB",
       "range": [
         -8.2,
@@ -403,7 +403,7 @@
       "metric": "band_lowmid",
       "label": "low-mid 250-1k share",
       "group": "spectrum",
-      "value": -3.4,
+      "value": -3.5,
       "unit": "dB",
       "range": [
         -18.3,
@@ -423,7 +423,7 @@
       "metric": "band_mid",
       "label": "mid 1-4 kHz share",
       "group": "spectrum",
-      "value": -10.4,
+      "value": -10.2,
       "unit": "dB",
       "range": [
         -20.6,
@@ -443,7 +443,7 @@
       "metric": "band_presence",
       "label": "presence 4-8 kHz share",
       "group": "spectrum",
-      "value": -13.2,
+      "value": -13.4,
       "unit": "dB",
       "range": [
         -31.8,
@@ -463,7 +463,7 @@
       "metric": "band_air",
       "label": "air 8-16 kHz share",
       "group": "spectrum",
-      "value": -25.2,
+      "value": -25.7,
       "unit": "dB",
       "range": [
         -35.7,
@@ -483,7 +483,7 @@
       "metric": "side_to_mid_db",
       "label": "stereo width (side vs mid)",
       "group": "stereo",
-      "value": -12.5,
+      "value": -15.4,
       "unit": "dB",
       "range": [
         -15.5,
@@ -543,7 +543,7 @@
       "metric": "peak_pos",
       "label": "position of the loudest 3 s",
       "group": "arc",
-      "value": 0.6,
+      "value": 0.32,
       "unit": "0-1",
       "range": [
         0.03,
@@ -563,7 +563,7 @@
       "metric": "tail_s",
       "label": "final hit ring-out",
       "group": "ending",
-      "value": 2.88,
+      "value": 2.86,
       "unit": "s",
       "range": [
         0.13,
@@ -583,7 +583,7 @@
       "metric": "stopdowns_min",
       "label": "stop-downs",
       "group": "density",
-      "value": 3.4,
+      "value": 5.1,
       "unit": "/min",
       "range": [
         null,
@@ -683,7 +683,7 @@
       "metric": "brightness_hz",
       "label": "brightness (median spectral centroid)",
       "group": "spectrum",
-      "value": 973,
+      "value": 924,
       "unit": "Hz",
       "range": [
         1169.0,
@@ -703,7 +703,7 @@
       "metric": "correlation",
       "label": "L/R correlation",
       "group": "stereo",
-      "value": 0.89,
+      "value": 0.94,
       "unit": "r",
       "range": [
         0.52,
@@ -732,11 +732,10 @@
     "hits": [
       0.164,
       0.714,
-      1.158,
-      1.854,
+      1.34,
+      1.852,
       2.336,
       2.634,
-      2.982,
       3.27,
       4.272,
       4.77,
@@ -744,85 +743,87 @@
       5.308,
       5.576,
       6.02,
-      6.27,
-      6.966,
+      6.362,
+      6.962,
       7.52,
-      7.77,
       8.014,
       8.272,
       8.684,
-      9.02,
       9.27,
-      9.734,
-      9.966,
-      10.242,
+      9.756,
+      9.984,
+      10.172,
+      10.222,
       10.77,
-      11.008,
+      10.992,
       11.434,
       12.018,
-      12.194,
-      13.268,
+      12.202,
       13.518,
-      13.768,
       14.02,
-      14.306,
-      14.688,
+      14.336,
+      14.52,
       15.192,
-      15.618,
+      15.62,
       15.922,
-      16.394,
+      16.518,
       16.768,
       17.018,
       17.268,
       17.926,
+      18.55,
       19.018,
+      19.504,
       20.018,
-      20.36,
+      20.336,
       20.554,
-      21.23,
+      21.176,
       21.662,
-      21.94,
-      22.768,
-      23.01,
+      21.948,
+      23.028,
       23.336,
       23.646,
       24.018,
-      24.386,
       25.518,
       26.006,
-      26.36,
-      27.16,
+      26.396,
+      27.164,
       29.018,
-      29.348,
+      29.338,
       29.98,
-      30.364,
-      32.12,
-      32.872,
+      30.304,
+      32.064,
+      32.858,
       33.33
     ],
     "stopdowns": [
       [
         2.0,
         0.26,
-        17.7
+        21.5
+      ],
+      [
+        30.68,
+        1.28,
+        44.4
       ],
       [
         33.04,
         0.2,
-        32.5
+        31.8
       ]
     ]
   },
   "arc": {
     "film": [
       0.5,
-      -1.3,
-      0.3,
+      -1.5,
+      0.1,
+      -0.4,
+      0.0,
+      -0.8,
       -0.2,
-      0.2,
-      -0.2,
-      0.6,
-      -1.1,
+      -1.6,
       -0.7,
       -0.1,
       -1.0
@@ -868,73 +869,73 @@
     ]
   },
   "realness": {
-    "p_real": 0.699,
-    "verdict": "uncertain",
+    "p_real": 0.823,
+    "verdict": "real or pro-produced",
     "synth_windows": 0,
     "segments": [
       {
         "start": 0.0,
         "end": 4.0,
-        "p_real": 0.84,
+        "p_real": 0.928,
         "verdict": "real or pro-produced"
       },
       {
         "start": 4.0,
         "end": 8.0,
-        "p_real": 0.455,
+        "p_real": 0.719,
         "verdict": "uncertain"
       },
       {
         "start": 8.0,
         "end": 12.0,
-        "p_real": 0.788,
+        "p_real": 0.868,
         "verdict": "real or pro-produced"
       },
       {
         "start": 12.0,
         "end": 16.0,
-        "p_real": 0.679,
-        "verdict": "uncertain"
+        "p_real": 0.82,
+        "verdict": "real or pro-produced"
       },
       {
         "start": 16.0,
         "end": 20.0,
-        "p_real": 0.821,
+        "p_real": 0.901,
         "verdict": "real or pro-produced"
       },
       {
         "start": 20.0,
         "end": 24.0,
-        "p_real": 0.744,
-        "verdict": "uncertain"
+        "p_real": 0.904,
+        "verdict": "real or pro-produced"
       },
       {
         "start": 24.0,
         "end": 28.0,
-        "p_real": 0.846,
+        "p_real": 0.949,
         "verdict": "real or pro-produced"
       },
       {
         "start": 28.0,
         "end": 32.0,
-        "p_real": 0.877,
+        "p_real": 0.91,
         "verdict": "real or pro-produced"
       },
       {
         "start": 31.0,
         "end": 35.0,
-        "p_real": 0.242,
+        "p_real": 0.41,
         "verdict": "uncertain"
       }
     ],
-    "summary": "earshot_final.wav: uncertain (p_real 0.70, mean of 9 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 2 of 9 windows lean synthesized (p_real < 0.5); mean CLAP head score +0.9. Leaning synthesized: 0:04.00-0:08.00, 0:31.00-0:35.00; none at or below the 4 s-window threshold 0.17."
+    "summary": "earshot_final.wav: real or pro-produced (p_real 0.82, mean of 9 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 1 of 9 windows lean synthesized (p_real < 0.5); mean CLAP head score +1.6. Leaning synthesized: 0:31.00-0:35.00; none at or below the 4 s-window threshold 0.17."
   },
-  "seconds": 26.0,
+  "seconds": 11.2,
   "not_measured": {
     "fewer than 3 visual events": [
       "cuts_with_sound"
     ]
   },
-  "summary": "earshot_final.wav vs 7 reference films (bundled launch films): close - 19 of 22 scored metrics in range (weighted 89%), 0 critical and 1 major issues. Fix first: too many salient hits (1.97/s, refs 0.10 /s .. 1.66 /s): keep the biggest for reveals, soften the rest by 3-6 dB. Not measured: cuts_with_sound (fewer than 3 visual events).",
-  "text": "earshot critique: earshot_final.wav (35.0 s) vs 7 reference films (bundled launch films)\nVERDICT: close - 19 of 22 scored metrics in range (weighted 89%), 0 critical and 1 major issues.\nFIX FIRST (most important first):\n  1. [major] too many salient hits (1.97/s, refs 0.10 /s .. 1.66 /s): keep the biggest for reveals, soften the rest by 3-6 dB\n  2. [minor] realness is uncertain (p_real 0.70; real or pro-produced sound scores >= 0.77); lowest-scoring 4 s windows: 0:04.00-0:08.00 (0.46), 0:12.00-0:16.00 (0.68), 0:31.00-0:35.00 (0.24): if the film should sound recorded or produced, find and replace the layer that sounds synthetic; judge each stem with `earshot realness stem.wav` (a finished mix is harder to judge than its sources)\n  3. [minor] thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-31.7 dB share, refs -16.2 dB .. -4.1 dB)\n  tip: voice detected in 86% of windows: duck music 3-6 dB under the voice and keep SFX out of 1-4 kHz while it speaks\nNOT MEASURED: cuts_with_sound (fewer than 3 visual events)\nSCORECARD                                      value   ok range                        ref median  status\n  loudness integrated loudness             -14.5 LUFS   -16.0 LUFS .. -9.0 LUFS (web)   -14.8 LUFS  ok\n  loudness true peak                        -3.1 dBTP   <= -1.0 dBTP (web)                0.6 dBTP  ok\n  realness realness (p_real)                     0.70   >= 0.77 (realness model)                    low (minor)\n  music    music presence                         86%   >= 62%                                100%  ok\n  sync     onset on visual events +-100ms        n.a.   >= 45%                                 81%  n.a.\n  loudness loudness range                      1.7 LU   0.7 LU .. 13.2 LU                   5.5 LU  ok\n  loudness loudest 3 s above integrated        1.0 LU   0.6 LU .. 4.0 LU                    2.3 LU  ok\n  arc      time to first sound                 0.04 s   <= 0.58 s                           0.13 s  ok\n  ending   dead air at the end                 0.06 s   <= 2.15 s                           0.04 s  ok\n  arc      longest silent gap inside           0.12 s   <= 1.91 s                           0.02 s  ok\n  ending   final moment vs integrated          4.9 LU   -3.7 LU .. 7.1 LU                   0.2 LU  ok\n  density  onset density                      5.31 /s   2.16 /s .. 8.52 /s                 5.66 /s  ok\n  density  salient hit density                1.97 /s   0.05 /s .. 1.86 /s                 1.25 /s  high (major)\n  arc      opening level (first 10%)           0.1 LU   -19.0 LU .. 3.7 LU                 -1.1 LU  ok\n  arc      closing level (last 10%)           -0.1 LU   -15.8 LU .. 1.2 LU                 -3.0 LU  ok\n  ending   final fade / ring-out length        0.94 s   <= 3.04 s                           0.27 s  ok\n  spectrum sub 20-60 Hz share                -31.7 dB   -17.7 dB .. -2.6 dB                -6.6 dB  low (minor)\n  spectrum low 60-250 Hz share                -4.0 dB   -8.2 dB .. -0.6 dB                 -4.2 dB  ok\n  spectrum low-mid 250-1k share               -3.4 dB   -18.3 dB .. -0.2 dB                -5.3 dB  ok\n  spectrum mid 1-4 kHz share                 -10.4 dB   -20.6 dB .. -9.0 dB               -12.4 dB  ok\n  spectrum presence 4-8 kHz share            -13.2 dB   -31.8 dB .. -11.6 dB              -17.8 dB  ok\n  spectrum air 8-16 kHz share                -25.2 dB   -35.7 dB .. -9.7 dB               -23.6 dB  ok\n  stereo   stereo width (side vs mid)        -12.5 dB   -15.5 dB .. -4.0 dB                -8.5 dB  ok\nLOUDNESS ARC (LU vs integrated at 0%, 10% .. 100% of the film; not scored):\n  this film      +0.5   -1.3   +0.3   -0.2   +0.2   -0.2   +0.6   -1.1   -0.7   -0.1   -1.0\n  refs median    -1.3   -0.8   +0.3   -0.3   -0.2   +0.2   +0.0   -0.4   +0.9   -0.3   -7.4\nNOT SCORED (style choices, shown for context):\n  voice / speech presence                                           86%   refs p10-p90 0% .. 100%\n  tempo                                                         120 BPM   refs p10-p90 115 BPM .. 136 BPM\n  position of the loudest 3 s                                      0.60   refs p10-p90 0.10 .. 0.83\n  final hit ring-out                                             2.88 s   refs p10-p90 1.06 s .. 3.58 s\n  stop-downs                                                   3.4 /min   refs p10-p90 0.0 /min .. 9.1 /min\n  visual events (cuts, big changes)                             0.06 /s   refs p10-p90 0.31 /s .. 1.42 /s\n  brightness (median spectral centroid)                          973 Hz   refs p10-p90 1183 Hz .. 3030 Hz\n  L/R correlation                                                  0.89   refs p10-p90 0.58 .. 0.86\nrealness: earshot_final.wav: uncertain (p_real 0.70, mean of 9 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 2 of 9 windows lean synthesized (p_real < 0.5); mean CLAP head score +0.9. Leaning synthesized: 0:04.00-0:08.00, 0:31.00-0:35.00; none at or below the 4 s-window threshold 0.17."
+  "summary": "earshot_final.wav vs 7 reference films (bundled launch films): close - 19 of 22 scored metrics in range (weighted 86%), 0 critical and 2 major issues. Fix first: the loudest 3 s are only 0.4 LU above integrated (refs 1.1 LU .. 3.5 LU): no moment stands out; let the main reveal / logo hit rise 2-3 LU above the body or ease the limiter. Not measured: cuts_with_sound (fewer than 3 visual events).",
+  "text": "earshot critique: earshot_final.wav (35.0 s) vs 7 reference films (bundled launch films)\nVERDICT: close - 19 of 22 scored metrics in range (weighted 86%), 0 critical and 2 major issues.\nFIX FIRST (most important first):\n  1. [major] the loudest 3 s are only 0.4 LU above integrated (refs 1.1 LU .. 3.5 LU): no moment stands out; let the main reveal / logo hit rise 2-3 LU above the body or ease the limiter\n  2. [major] too many salient hits (1.86/s, refs 0.10 /s .. 1.66 /s): keep the biggest for reveals, soften the rest by 3-6 dB\n  3. [minor] thin bottom: add a sub layer (sub drop or kick) under reveals, or pick music with real low end (-31.9 dB share, refs -16.2 dB .. -4.1 dB)\n  tip: voice detected in 86% of windows: duck music 3-6 dB under the voice and keep SFX out of 1-4 kHz while it speaks\nNOT MEASURED: cuts_with_sound (fewer than 3 visual events)\nSCORECARD                                      value   ok range                        ref median  status\n  loudness integrated loudness             -14.6 LUFS   -16.0 LUFS .. -9.0 LUFS (web)   -14.8 LUFS  ok\n  loudness true peak                        -3.3 dBTP   <= -1.0 dBTP (web)                0.6 dBTP  ok\n  realness realness (p_real)                     0.82   >= 0.77 (realness model)                    ok\n  music    music presence                         86%   >= 62%                                100%  ok\n  sync     onset on visual events +-100ms        n.a.   >= 45%                                 81%  n.a.\n  loudness loudness range                      1.6 LU   0.7 LU .. 13.2 LU                   5.5 LU  ok\n  loudness loudest 3 s above integrated        0.4 LU   0.6 LU .. 4.0 LU                    2.3 LU  low (major)\n  arc      time to first sound                 0.04 s   <= 0.58 s                           0.13 s  ok\n  ending   dead air at the end                 0.08 s   <= 2.15 s                           0.04 s  ok\n  arc      longest silent gap inside           0.16 s   <= 1.91 s                           0.02 s  ok\n  ending   final moment vs integrated          5.0 LU   -3.7 LU .. 7.1 LU                   0.2 LU  ok\n  density  onset density                      5.37 /s   2.16 /s .. 8.52 /s                 5.66 /s  ok\n  density  salient hit density                1.86 /s   0.05 /s .. 1.86 /s                 1.25 /s  high (major)\n  arc      opening level (first 10%)           0.2 LU   -19.0 LU .. 3.7 LU                 -1.1 LU  ok\n  arc      closing level (last 10%)           -0.1 LU   -15.8 LU .. 1.2 LU                 -3.0 LU  ok\n  ending   final fade / ring-out length        0.92 s   <= 3.04 s                           0.27 s  ok\n  spectrum sub 20-60 Hz share                -31.9 dB   -17.7 dB .. -2.6 dB                -6.6 dB  low (minor)\n  spectrum low 60-250 Hz share                -3.9 dB   -8.2 dB .. -0.6 dB                 -4.2 dB  ok\n  spectrum low-mid 250-1k share               -3.5 dB   -18.3 dB .. -0.2 dB                -5.3 dB  ok\n  spectrum mid 1-4 kHz share                 -10.2 dB   -20.6 dB .. -9.0 dB               -12.4 dB  ok\n  spectrum presence 4-8 kHz share            -13.4 dB   -31.8 dB .. -11.6 dB              -17.8 dB  ok\n  spectrum air 8-16 kHz share                -25.7 dB   -35.7 dB .. -9.7 dB               -23.6 dB  ok\n  stereo   stereo width (side vs mid)        -15.4 dB   -15.5 dB .. -4.0 dB                -8.5 dB  ok\nLOUDNESS ARC (LU vs integrated at 0%, 10% .. 100% of the film; not scored):\n  this film      +0.5   -1.5   +0.1   -0.4   +0.0   -0.8   -0.2   -1.6   -0.7   -0.1   -1.0\n  refs median    -1.3   -0.8   +0.3   -0.3   -0.2   +0.2   +0.0   -0.4   +0.9   -0.3   -7.4\nNOT SCORED (style choices, shown for context):\n  voice / speech presence                                           86%   refs p10-p90 0% .. 100%\n  tempo                                                         120 BPM   refs p10-p90 115 BPM .. 136 BPM\n  position of the loudest 3 s                                      0.32   refs p10-p90 0.10 .. 0.83\n  final hit ring-out                                             2.86 s   refs p10-p90 1.06 s .. 3.58 s\n  stop-downs                                                   5.1 /min   refs p10-p90 0.0 /min .. 9.1 /min\n  visual events (cuts, big changes)                             0.06 /s   refs p10-p90 0.31 /s .. 1.42 /s\n  brightness (median spectral centroid)                          924 Hz   refs p10-p90 1183 Hz .. 3030 Hz\n  L/R correlation                                                  0.94   refs p10-p90 0.58 .. 0.86\nrealness: earshot_final.wav: real or pro-produced (p_real 0.82, mean of 9 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 1 of 9 windows lean synthesized (p_real < 0.5); mean CLAP head score +1.6. Leaning synthesized: 0:31.00-0:35.00; none at or below the 4 s-window threshold 0.17."
 }

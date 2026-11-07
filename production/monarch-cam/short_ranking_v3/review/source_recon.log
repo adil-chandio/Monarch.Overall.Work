@@ -8,8 +8,8 @@ Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/mon
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_squirrel_contact_sheet_01.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_squirrel_contact_sheet_02.jpg
 + ffmpeg -y -hide_banner -loglevel warning -ss 2.799 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/squirrel.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_squirrel.jpg
-[image2 @ 0x55ecd64854c0] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_squirrel.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x55ecd64854c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[image2 @ 0x563756b304c0] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_squirrel.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x563756b304c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
 Candidate failed: hermit_crab https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm')
 Retrieved 2540137 bytes for hermit_crab from https://commons.wikimedia.org/wiki/Special:Redirect/file/Einsiedlerkrebs_(Wangerooge).webm
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.webm
@@ -20,8 +20,8 @@ Retrieved 2540137 bytes for hermit_crab from https://commons.wikimedia.org/wiki/
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_hermit_crab_contact_sheet_01.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_hermit_crab_contact_sheet_01.jpg
 + ffmpeg -y -hide_banner -loglevel warning -ss 1.639 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_hermit_crab.jpg
-[image2 @ 0x561651a31740] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_hermit_crab.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x561651a31740] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[image2 @ 0x55573fe3d740] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_hermit_crab.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x55573fe3d740] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
 Candidate failed: starfish https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm')
 Retrieved 13746304 bytes for starfish from https://commons.wikimedia.org/wiki/Special:Redirect/file/Seestern_(sich_aufrichtend).webm
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.webm
@@ -38,8 +38,8 @@ Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/mon
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_05.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_06.jpg
 + ffmpeg -y -hide_banner -loglevel warning -ss 10.624 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_starfish.jpg
-[image2 @ 0x55b6a64f3000] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_starfish.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x55b6a64f3000] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[image2 @ 0x558dd6e63000] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_starfish.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x558dd6e63000] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
 Candidate failed: octopus https://upload.wikimedia.org/wikipedia/commons/c/cc/OctopusFeedingCSS.mpg HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/c/cc/OctopusFeedingCSS.mpg')
 Retrieved 18509824 bytes for octopus from https://commons.wikimedia.org/wiki/Special:Redirect/file/OctopusFeedingCSS.mpg
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mpg
@@ -55,13 +55,13 @@ Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/mon
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_04.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_05.jpg
 + ffmpeg -y -hide_banner -loglevel warning -ss 9.263 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_octopus.jpg
-[image2 @ 0x5568d4e8d3c0] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_octopus.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x5568d4e8d3c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[image2 @ 0x55708a8af3c0] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_octopus.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x55708a8af3c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
 Candidate failed: titmouse https://upload.wikimedia.org/wikipedia/commons/9/9a/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/9/9a/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm')
 Retrieved 4315773 bytes for titmouse from https://commons.wikimedia.org/wiki/Special:Redirect/file/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.webm -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 160k -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4
-[out#0/mp4 @ 0x559b44f4dbc0] Codec AVOption b:a (set bitrate (in bits/s)) has not been used for any stream. The most likely reason is either wrong type (e.g. a video option with no video streams) or that it is a private option of some decoder which was not actually used for any stream.
+[out#0/mp4 @ 0x562839789bc0] Codec AVOption b:a (set bitrate (in bits/s)) has not been used for any stream. The most likely reason is either wrong type (e.g. a video option with no video streams) or that it is a private option of some decoder which was not actually used for any stream.
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/titmouse_coarse_%04d.jpg
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4 -vf fps=2,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/titmouse_fine_%04d.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_titmouse_contact_sheet_01.jpg
@@ -71,8 +71,8 @@ Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/mon
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_03.jpg
 Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_04.jpg
 + ffmpeg -y -hide_banner -loglevel warning -ss 7.427 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_titmouse.jpg
-[image2 @ 0x5604ad33b840] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_titmouse.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x5604ad33b840] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[image2 @ 0x55ea86540840] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_titmouse.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x55ea86540840] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
 {
   "topic": "5 Unexpected Animal Skills, Ranked",
   "new_topic_separate_from_prior_bear_car_and_albatross_shorts": true,
@@ -147,5 +147,5 @@ Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/mon
   "visual_timestamp_approval": "PENDING \u2014 no scene lock before contact-sheet review",
   "full_motion_review": false,
   "native_audio_listening": false,
-  "retrieved_unix": 1794057399
+  "retrieved_unix": 1794062499
 }

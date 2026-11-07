@@ -78,36 +78,36 @@
     }
   },
   "v3": {
-    "score": 0.886,
+    "score": 0.865,
     "verdict": "close",
     "in_range": 19,
     "scored": 22,
     "critical_issues": 0,
-    "major_issues": 1,
+    "major_issues": 2,
     "metrics": {
       "hit_rate": {
-        "value": 1.97,
+        "value": 1.86,
         "range": [
           0.05,
           1.8599999999999999
         ]
       },
       "band_sub": {
-        "value": -31.7,
+        "value": -31.9,
         "range": [
           -17.7,
           -2.5999999999999996
         ]
       },
       "side_to_mid_db": {
-        "value": -12.5,
+        "value": -15.4,
         "range": [
           -15.5,
           -4.0
         ]
       },
       "p_real": {
-        "value": 0.699,
+        "value": 0.823,
         "range": [
           0.77,
           null
@@ -116,11 +116,11 @@
     }
   },
   "gates": {
-    "hit_rate_in_range": false,
+    "hit_rate_in_range": true,
     "no_major_issues": false,
     "no_critical_issues": true,
     "score_not_below_v2": false,
-    "hit_density_not_degraded": false,
+    "hit_density_not_degraded": true,
     "sub_weight_not_degraded": true,
     "stereo_width_not_degraded": true,
     "premaster_ceiling_bounded": true,

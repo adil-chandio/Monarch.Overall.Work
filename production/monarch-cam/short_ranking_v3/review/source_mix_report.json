@@ -1,22 +1,22 @@
 {
   "music": {
-    "input_lufs": -18.42,
-    "target_lufs_before_peak_cap": -25.5,
-    "gain_db": -7.08,
-    "peak_cap_adjustment_db": -0.475,
-    "output_lufs": -25.975,
-    "sample_peak_dbfs": -8.0,
+    "input_lufs": -18.418,
+    "target_lufs_before_peak_cap": -27.5,
+    "gain_db": -9.082,
+    "peak_cap_adjustment_db": 0.0,
+    "output_lufs": -27.5,
+    "sample_peak_dbfs": -9.528,
     "stereo_width": 0.88,
     "source": "music_funny",
     "source_start": 0.0
   },
   "ambience": {
     "input_lufs": -29.063,
-    "target_lufs_before_peak_cap": -43.5,
-    "gain_db": -14.437,
+    "target_lufs_before_peak_cap": -45.5,
+    "gain_db": -16.437,
     "peak_cap_adjustment_db": 0.0,
-    "output_lufs": -43.5,
-    "sample_peak_dbfs": -24.48,
+    "output_lufs": -45.5,
+    "sample_peak_dbfs": -26.48,
     "stereo_width": 0.6,
     "source": "native_audio",
     "source_start": 0.0,
@@ -32,8 +32,8 @@
   "premium": {
     "salience_roles": {
       "hero": 0.0,
-      "support": -4.4,
-      "breath": -6.8
+      "support": -9.4,
+      "breath": -11.8
     },
     "stereo_width_music": 0.88,
     "stereo_width_ambience": 0.6,
@@ -55,5 +55,5 @@
   "generated_animal_vocalisations": false,
   "generated_bear_or_vehicle_foley": false,
   "sfx_selection_model_used": true,
-  "premaster_sample_peak_dbfs": -2.5943
+  "premaster_sample_peak_dbfs": -2.6989
 }
