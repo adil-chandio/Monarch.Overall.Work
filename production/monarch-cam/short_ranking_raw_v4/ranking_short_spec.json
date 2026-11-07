@@ -29,7 +29,10 @@
     "true_peak_target_dbtp": -2.2,
     "sample_rate": 48000,
     "channels": 2,
-    "edge_fade_ms": 30
+    "edge_fade_ms": 30,
+    "final_gain_calibration": true,
+    "final_peak_limit_linear": 0.75,
+    "final_calibration_iterations": 4
   },
   "visual": {
     "full_screen": true,

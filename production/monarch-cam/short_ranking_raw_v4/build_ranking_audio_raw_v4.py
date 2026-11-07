@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 # Assemble only the native source audio from each selected V4 window, then mux.
 from __future__ import annotations
-import hashlib, json, os, subprocess
+import hashlib, json, os, shutil, subprocess, sys
 from pathlib import Path
 import numpy as np
 import soundfile as sf
 import pyloudnorm as pyln
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT))
+from showreel.audio_qc.gates import PROFILES, run as gate_run
+
 BASE = ROOT / 'production/monarch-cam/short_ranking_raw_v4'
 WORK = ROOT / 'production/monarch-cam/work/short_ranking_raw_v4'
 REVIEW = BASE / 'review'
@@ -50,6 +53,47 @@ def decode_window(scene):
     x = x[:, :2]
     x = x - np.mean(x, axis=0, keepdims=True)
     return x
+
+
+def mux_deliverable(mastered):
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', SILENT_VIDEO, '-i', mastered,
+         '-map', '0:v:0', '-map', '1:a:0', '-c:v', 'libx264', '-crf', '18', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k',
+         '-ar', str(SR), '-ac', '2', '-t', f"{SPEC['duration']:.3f}", '-movflags', '+faststart', OUT], check=True)
+
+
+def calibrate_final_gain(mastered):
+    """Measure the delivered AAC stream and apply bounded level/peak corrections only."""
+    target = float(PROFILES['web']['lufs'])
+    limit = float(A['final_peak_limit_linear'])
+    iterations = int(A['final_calibration_iterations'])
+    report = []
+    for i in range(iterations):
+        result = gate_run(str(OUT), 'web')
+        measured = result['measured']
+        checks = result['checks']
+        entry = {
+            'iteration': i, 'integrated_lufs': measured['integrated_lufs'],
+            'sample_peak_dbfs': measured['sample_peak_dbfs'],
+            'loudness_in_range': checks['loudness_in_range'],
+            'true_peak_ok': checks['true_peak_ok'],
+            'measured_on': 'delivered_aac_stream'
+        }
+        if checks['loudness_in_range'] and checks['true_peak_ok']:
+            entry['applied_gain_db'] = 0.0
+            report.append(entry)
+            break
+        delta = target - measured['integrated_lufs']
+        tmp = WORK / 'native_timeline_mastered_calibrated.wav'
+        run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', mastered,
+             '-af', f"volume={delta:.3f}dB,alimiter=limit={limit}:level=disabled",
+             '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', tmp], check=True)
+        shutil.move(str(tmp), str(mastered))
+        mux_deliverable(mastered)
+        entry['applied_gain_db'] = round(delta, 3)
+        entry['peak_limit_linear'] = limit
+        report.append(entry)
+    return report
 
 
 def main():
@@ -106,10 +150,8 @@ def main():
     run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', premaster,
          '-af', f"highpass=f=20,loudnorm=I={A['target_integrated_lufs']}:TP={A['true_peak_target_dbtp']}:LRA=7:linear=true:print_format=summary",
          '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', mastered], check=True)
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', SILENT_VIDEO, '-i', mastered,
-         '-map', '0:v:0', '-map', '1:a:0', '-c:v', 'libx264', '-crf', '18', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k',
-         '-ar', str(SR), '-ac', '2', '-t', f"{SPEC['duration']:.3f}", '-movflags', '+faststart', OUT], check=True)
+    mux_deliverable(mastered)
+    calibration = calibrate_final_gain(mastered) if A['final_gain_calibration'] else []
     save_json(REVIEW / 'native_audio_ledger.json', {
         'edition': 'raw_fullscreen_v4', 'policy': A, 'segments': ledger, 'placements': placements,
         'no_spoken_voice_over': True, 'no_score': True, 'no_effects': True,
@@ -118,6 +160,7 @@ def main():
         'source_audio_present_segments': sum(1 for item in ledger if item['audio_stream_present']),
         'silent_segments': sum(1 for item in ledger if item['silent']),
         'all_five_native_audio_audible': all(item['native_audio_audible'] for item in ledger),
+        'final_gain_calibration': calibration,
         'premaster': str(premaster.relative_to(ROOT)), 'mastered': str(mastered.relative_to(ROOT)),
         'deliverable_sha256': hashlib.sha256(OUT.read_bytes()).hexdigest(),
         'deliverable_bytes': OUT.stat().st_size

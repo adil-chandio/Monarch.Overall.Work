@@ -8,4 +8,4 @@ All five picture sources are CC0 1.0 via Wikimedia Commons; attribution is given
 - Western lowland gorilla: LarsMueller - `Berlin zoologisk hage 2026-04-07 mov05.webm`
 - Oriental turtle doves: Asanagi - `Streptopelia orientalis fighting 2024-04-26.webm`
 
-No spoken voice-over, score, or added layers are used. DC removal and a 20 Hz high-pass safety filter are technical corrections. Only original source audio from each selected window is present; all five selected windows have audible native audio. No fabricated animal calls are used. A Wikimedia 1080p VP9/WebM transcode of the CC0 dove source is used to reduce transfer size.
+No spoken voice-over, score, or added layers are used. DC removal, a 20 Hz high-pass safety filter, level alignment, measured final gain calibration and peak safety are technical corrections. Only original source audio from each selected window is present; all five selected windows have audible native audio. No fabricated animal calls are used. A Wikimedia 1080p VP9/WebM transcode of the CC0 dove source is used to reduce transfer size.
