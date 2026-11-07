@@ -7,7 +7,7 @@ out={'log_received':False,'exception_classes':[],'flags':{},'last_diagnostic_lin
 try:
  api=KaggleApi();api.authenticate()
  with api.build_kaggle_client() as k:
-  req=ApiListKernelSessionOutputRequest();req.user_name=os.environ['KAGGLE_USERNAME'];req.kernel_slug='monarch-face-research-42404334568';req.page_size=1
+  req=ApiListKernelSessionOutputRequest();req.user_name=os.environ['KAGGLE_USERNAME'];req.kernel_slug='monarch-face-research-42405072811';req.page_size=1
   result=k.kernels.kernels_api_client.list_kernel_session_output(req)
   text=result.log or ''
   out['log_received']=bool(text);out['log_chars']=len(text)
