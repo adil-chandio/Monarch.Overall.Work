@@ -1,0 +1,81 @@
+{
+  "selected_direction": "B",
+  "selection": "User selected option 1 of 2 for artwork B; neither A option selected, no A artwork saved.",
+  "artwork_source": "AI-generated editorial illustration informed by actual film reference frames; not an encoded still or real expedition photograph.",
+  "style_limit": "Selected artwork is more detailed than the simplified film. ILLUSTRATION label and description identify reconstruction; no promise of real footage.",
+  "source_file": "thumbnails/artwork-B.png",
+  "source_dimensions": [
+    1536,
+    1024
+  ],
+  "source_sha256": "e02802a7f2b6b1d3e79b5ad269d5aa127380a56824b623743aefc9232b319109",
+  "reference_frames": [
+    "../review-v14/full-resolution/412.jpg",
+    "../review-v14/full-resolution/286.jpg"
+  ],
+  "postproduction": "Centre-fit 3:2 source to 16:9, contrast gradient, deterministic typography, Lanczos resize and JPEG export. 3840 export is resized artwork, not a claim of native 4K generation or 4K film.",
+  "typography": [
+    {
+      "text": "2 MILLION",
+      "font_pixels_at_1920": 196,
+      "bounds_at_1920": [
+        78,
+        566,
+        808,
+        740
+      ]
+    },
+    {
+      "text": "YEARS",
+      "font_pixels_at_1920": 248,
+      "bounds_at_1920": [
+        78,
+        770,
+        647,
+        992
+      ]
+    }
+  ],
+  "exports": [
+    {
+      "file": "thumbnails/thumbnail-B.jpg",
+      "size": [
+        3840,
+        2160
+      ],
+      "bytes": 1137906,
+      "quality": 94,
+      "sha256": "533306242a7994e53b63dea59fd3b2ab658b95ba061a2b65eccffbb3d5b23518"
+    },
+    {
+      "file": "thumbnails/thumbnail-B-1280.jpg",
+      "size": [
+        1280,
+        720
+      ],
+      "bytes": 226761,
+      "quality": 94,
+      "sha256": "2b48881ae25498c5eb036e9272ca47b2793abe3c746711769957c1218b8b7208"
+    },
+    {
+      "file": "thumbnails/preview-B-320.jpg",
+      "size": [
+        320,
+        180
+      ],
+      "bytes": 24190,
+      "quality": 94,
+      "sha256": "2e26a25d9f91ddd5d67ea05644b11b399f2109b2f15e51edf84d1e50d7cf0a31"
+    },
+    {
+      "file": "thumbnails/preview-B-160.jpg",
+      "size": [
+        160,
+        90
+      ],
+      "bytes": 7946,
+      "quality": 94,
+      "sha256": "1958c33712b6a5682fef52be7fb4a478ac87c451427396bfb9edc0a467c37594"
+    }
+  ]
+}

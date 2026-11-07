@@ -1,0 +1,54 @@
+{
+  "checks_passed": 22,
+  "checks": [
+    "20 successful public-page records",
+    "20 distinct video IDs",
+    "15 fetched million-plus comparators, not all twenty",
+    "honest metadata scope, no false complete-watch flags",
+    "15 correctly counted titles, at most 100 characters",
+    "selected launch title matches shortlist B",
+    "description within 5000 characters",
+    "tags conservatively within 500 characters including separators",
+    "copy-paste and JSON descriptions identical",
+    "included English captions byte-identical to approved master",
+    "language and full-film duration agree with final schedule",
+    "eight chapters beginning 00:00",
+    "chapter timings derived from actual master schedule",
+    "ascending chapters, each at least ten seconds",
+    "all chapter lines in upload description",
+    "music credits and core scientific/reconstruction boundaries retained",
+    "no fabricated upload or guaranteed outcome",
+    "thumbnail-B.jpg: correct RGB JPEG dimensions",
+    "thumbnail-B.jpg: under conservative 2 MB export target",
+    "thumbnail-B-1280.jpg: correct RGB JPEG dimensions",
+    "thumbnail-B-1280.jpg: under conservative 2 MB export target",
+    "both selected B thumbnail exports present"
+  ],
+  "thumbnail_exports": [
+    {
+      "file": "thumbnails/thumbnail-B.jpg",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "bytes": 1137906
+    },
+    {
+      "file": "thumbnails/thumbnail-B-1280.jpg",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "bytes": 226761
+    }
+  ],
+  "missing_thumbnail_exports": [],
+  "production_status": "complete package exports",
+  "not_certified": [
+    "virality",
+    "CTR",
+    "million views",
+    "owner acceptance",
+    "full-video creative quality"
+  ]
+}
