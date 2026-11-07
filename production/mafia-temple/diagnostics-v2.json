@@ -23,6 +23,20 @@
     "Tried to allocate 44.00 MiB"
   ],
   "log_chars": 21508,
+  "frame_sources": [
+    [
+      "validator.py",
+      "434"
+    ],
+    [
+      "mistune.py",
+      "435"
+    ],
+    [
+      "filter_links.py",
+      "36"
+    ]
+  ],
   "traceback_functions": [
     "execute_notebook",
     "raise_for_execution_errors"
