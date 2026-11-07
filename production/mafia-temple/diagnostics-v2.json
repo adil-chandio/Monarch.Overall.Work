@@ -22,5 +22,18 @@
     "CUDA out of memory",
     "Tried to allocate 108.00 MiB"
   ],
-  "log_chars": 21516
+  "log_chars": 21516,
+  "traceback_functions": [
+    "execute_notebook",
+    "raise_for_execution_errors"
+  ],
+  "known_stages": {
+    "vae_decode": false,
+    "vae_encode": true,
+    "attention": true,
+    "text_encoder": false,
+    "pipeline_loading": false,
+    "denoise": false,
+    "tiling": false
+  }
 }
