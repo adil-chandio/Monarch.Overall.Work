@@ -297,6 +297,9 @@ def build_audio():
 
     music = fit_length(sound.decode(assets[AUDIO["music_asset"]], AUDIO["music_start"], DURATION,
                                     af="highpass=f=45,lowpass=f=12000"))
+    # V3: a gentle 3.6 kHz roll-off softens beat transients without muting the
+    # cleared CC0 bed; Earshot's reference band still needs a sparse hit density.
+    music = sound.high_low_pass(music, None, 3600)
     music = sound.fade_edges(music, 0.35, 0.50)
     music = widen_stereo(music, PREM["stereo_width_music"])
     music, music_levels = sound.normalize_loudness(music, AUDIO["music_lufs"])
