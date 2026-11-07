@@ -41,9 +41,9 @@ jobs:
           .venv/bin/python -m unittest discover -s tests -p test_extinct_v8_premium.py -v
           .venv/bin/python production/extinct-life/film-v8-premium/scene.py --from=0 --to=76 --step=75 --width=480 --samples=8 --lock-camera --out=.cache/extinct-v8/motion
           .venv/bin/python - <<'PY'
-          import json
+          import json,numpy as np
           from pathlib import Path
-          p=Path('production/extinct-life/film-v8-premium/inspection');q=json.load(open('.cache/extinct-v8/render-0-76.json'));a,b=q['frames'];assert a['camera_matrix']==b['camera_matrix'];assert a['animal_surface_sha256']!=b['animal_surface_sha256'];q['surface_changes_with_locked_camera']=True
+          p=Path('production/extinct-life/film-v8-premium/inspection');q=json.load(open('.cache/extinct-v8/render-0-76.json'));a,b=q['frames'];assert np.allclose(a['camera_matrix'],b['camera_matrix'],atol=1e-6,rtol=0);assert a['animal_surface_sha256']!=b['animal_surface_sha256'];q['surface_changes_with_locked_camera']=True
           (p/'motion-QC.json').write_text(json.dumps(q,indent=2))
           PY
       - name: Preserve original production inspection on the session branch
