@@ -10,4 +10,4 @@ Pinned comment: `Which moment deserves #1?`
 
 Hashtags belong in the description, not the title field: `#Shorts #Animals #Wildlife`.
 
-See `review/UPLOAD_METADATA_RANKING_V4.txt` for the copy-paste description and notes.
+The description credits all five CC0 sources and notes that all five selected windows have audible native source audio. See `review/UPLOAD_METADATA_RANKING_V4.txt` for the copy-paste description and notes.

@@ -9,7 +9,7 @@
       "unverified",
       "third-party short-form reposts"
     ],
-    "note": "Five independently verified CC0 1.0 Wikimedia Commons clips. V4 uses each selected window picture and, where present, its native audio stream only. No separate audio assets are downloaded."
+    "note": "Five independently verified CC0 1.0 Wikimedia Commons clips. Every selected window has its own audible native audio stream. A Wikimedia 1080p VP9/WebM transcode is used for the dove clip to reduce transfer size; it is derived from the same CC0 source. No separate audio assets are downloaded."
   },
   "assets": [
     {
@@ -57,70 +57,71 @@
       "moment_label": "THE TINY COMMUTE"
     },
     {
-      "id": "starfish",
+      "id": "strandschnecke",
       "role": "video",
-      "title": "Seestern (sich aufrichtend).webm",
+      "title": "Strandschnecke (grasend mit Spinne).webm",
       "creator": "Rhetos, Sabine Heim",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Seestern_(sich_aufrichtend).webm",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Strandschnecke_(grasend_mit_Spinne).webm",
       "download_urls": [
-        "https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Seestern_(sich_aufrichtend).webm"
+        "https://upload.wikimedia.org/wikipedia/commons/c/c1/Strandschnecke_%28grasend_mit_Spinne%29.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Strandschnecke_%28grasend_mit_Spinne%29.webm"
       ],
       "license": "CC0-1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page_verified": true,
       "attribution_required": false,
-      "local_filename": "starfish.webm",
-      "duration_seconds": 53.12,
+      "local_filename": "strandschnecke.webm",
+      "duration_seconds": 61.046,
       "width": 1080,
       "height": 1920,
       "mime": "video/webm",
       "rank": 3,
-      "moment_label": "THE SLOW FLIP"
+      "moment_label": "THE SHELL GLIDE"
     },
     {
-      "id": "octopus",
+      "id": "berlin_gorilla",
       "role": "video",
-      "title": "OctopusFeedingCSS.mpg",
-      "creator": "Shuoli1999",
-      "source_page": "https://commons.wikimedia.org/wiki/File:OctopusFeedingCSS.mpg",
+      "title": "Berlin zoologisk hage 2026-04-07 mov05.webm",
+      "creator": "LarsMueller",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov05.webm",
       "download_urls": [
-        "https://upload.wikimedia.org/wikipedia/commons/c/cc/OctopusFeedingCSS.mpg",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/OctopusFeedingCSS.mpg"
+        "https://upload.wikimedia.org/wikipedia/commons/c/c9/Berlin_zoologisk_hage_2026-04-07_mov05.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Berlin_zoologisk_hage_2026-04-07_mov05.webm"
       ],
       "license": "CC0-1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page_verified": true,
       "attribution_required": false,
-      "local_filename": "octopus.mpg",
-      "duration_seconds": 46.333,
-      "width": 1920,
-      "height": 1080,
-      "mime": "video/mpeg",
+      "local_filename": "berlin_gorilla.webm",
+      "duration_seconds": 15.448,
+      "width": 1080,
+      "height": 1920,
+      "mime": "video/webm",
       "rank": 2,
-      "moment_label": "THE BOTTLE OPENER"
+      "moment_label": "THE GENTLE GRAB"
     },
     {
-      "id": "titmouse",
+      "id": "oriental_dove",
       "role": "video",
-      "title": "Slow Motion Hand-Feeding a Tufted Titmouse.webm",
-      "creator": "Equationsmith",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm",
+      "title": "Streptopelia orientalis fighting 2024-04-26.webm",
+      "creator": "Asanagi",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Streptopelia_orientalis_fighting_2024-04-26.webm",
       "download_urls": [
-        "https://upload.wikimedia.org/wikipedia/commons/9/9a/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm"
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm/Streptopelia_orientalis_fighting_2024-04-26.webm.1080p.vp9.webm",
+        "https://upload.wikimedia.org/wikipedia/commons/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Streptopelia_orientalis_fighting_2024-04-26.webm"
       ],
       "license": "CC0-1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page_verified": true,
       "attribution_required": false,
-      "local_filename": "titmouse.webm",
-      "duration_seconds": 37.133,
+      "local_filename": "oriental_dove.webm",
+      "duration_seconds": 35.021,
       "width": 1920,
       "height": 1080,
       "mime": "video/webm",
       "rank": 1,
-      "moment_label": "THE HAND LANDING"
+      "moment_label": "THE WING DUEL"
     }
   ]
 }

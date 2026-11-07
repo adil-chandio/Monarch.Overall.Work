@@ -90,7 +90,7 @@ jobs:
           python production/monarch-cam/short_ranking_raw_v4/source_recon_ranking.py \
             2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/source_recon.log
 
-      - name: Audit native source audio across candidate windows
+      - name: Audit native source audio across the five selected windows
         id: audio_audit
         timeout-minutes: 10
         run: |
@@ -190,10 +190,9 @@ jobs:
               'no_effects': native['no_effects'],
               'no_added_layers': native['no_added_layers'],
               'no_fabricated_animal_calls': native['no_fabricated_animal_calls'],
-              'source_audio_present_segments': native['source_audio_present_segments'] == 4,
-              'silent_segments': native['silent_segments'] == 1,
-              'titmouse_moment_silent': native['titmouse_moment_silent'],
-              'titmouse_moment_shortened': native['titmouse_moment_shortened'],
+              'source_audio_present_segments': native['source_audio_present_segments'] == 5,
+              'silent_segments': native['silent_segments'] == 0,
+              'all_five_native_audio_audible': native['all_five_native_audio_audible'],
               'full_screen_pass': visual['full_screen_cover'] and visual['no_letterbox'] and visual['no_black_bars'] and visual['no_blurred_background'],
               'rank_title_overlay_pass': visual['rank_title_overlay_only'],
               'five_moments_only': visual['five_moments_only'],

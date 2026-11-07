@@ -19,7 +19,7 @@ WORK.mkdir(parents=True, exist_ok=True)
 MANIFEST = json.loads((BASE / 'source_manifest_ranking.json').read_text())
 SR = 48000
 WIN = 0.5
-SEG = 8.0
+SEG = 7.0
 
 
 def run(cmd, **kw):
@@ -62,7 +62,7 @@ def main():
         entry = {
             'id': aid, 'file': str(raw.relative_to(ROOT)), 'duration_seconds': round(duration, 3),
             'audio_stream_present': audio is not None, 'audio_codec': (audio or {}).get('codec_name'),
-            'windows': [], 'top_8s_windows': []
+            'windows': [], 'top_segment_windows': []
         }
         if audio is not None:
             wav = WORK / ('audio_audit_' + aid + '.wav')
@@ -87,7 +87,7 @@ def main():
                 rms, peak, n = chunk_stats(x, SR, st, min(SEG, duration - st))
                 segs.append({'start': st, 'end': round(min(duration, st + SEG), 3), 'rms_dbfs': rms, 'peak_dbfs': peak, 'samples': n})
             segs.sort(key=lambda z: z['rms_dbfs'], reverse=True)
-            entry['top_8s_windows'] = segs[:12]
+            entry['top_segment_windows'] = segs[:12]
             entry['audible_window_count'] = sum(1 for w in entry['windows'] if w['rms_dbfs'] > -55.0)
             entry['peak_window'] = max(entry['windows'], key=lambda z: z['rms_dbfs']) if entry['windows'] else None
         else:

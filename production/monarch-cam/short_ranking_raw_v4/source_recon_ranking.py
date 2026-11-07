@@ -144,6 +144,12 @@ def copy_v3_sheets():
         if p.exists():
             q = REVIEW / name
             shutil.copy2(p, q)
+    candidate_dir = REVIEW / 'candidates'
+    if candidate_dir.is_dir():
+        for p in sorted(candidate_dir.glob('candidate_*_sheet_*.jpg')):
+            q = REVIEW / p.name
+            shutil.copy2(p, q)
+            copied.append(str(q.relative_to(ROOT)))
     return copied
 
 

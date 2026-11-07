@@ -114,9 +114,10 @@ def main():
         'edition': 'raw_fullscreen_v4', 'policy': A, 'segments': ledger, 'placements': placements,
         'no_spoken_voice_over': True, 'no_score': True, 'no_effects': True,
         'no_added_layers': True, 'no_fabricated_animal_calls': True,
-        'native_source_audio_only': True, 'source_audio_present_segments': 4,
-        'silent_segments': 1, 'titmouse_source_audio_absent': True,
-        'titmouse_moment_silent': True, 'titmouse_moment_shortened': True,
+        'native_source_audio_only': True,
+        'source_audio_present_segments': sum(1 for item in ledger if item['audio_stream_present']),
+        'silent_segments': sum(1 for item in ledger if item['silent']),
+        'all_five_native_audio_audible': all(item['native_audio_audible'] for item in ledger),
         'premaster': str(premaster.relative_to(ROOT)), 'mastered': str(mastered.relative_to(ROOT)),
         'deliverable_sha256': hashlib.sha256(OUT.read_bytes()).hexdigest(),
         'deliverable_bytes': OUT.stat().st_size

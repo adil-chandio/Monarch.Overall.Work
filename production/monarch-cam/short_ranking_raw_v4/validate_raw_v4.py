@@ -13,6 +13,10 @@ assert len(spec['scenes']) == 5 and [s['rank'] for s in spec['scenes']] == [5, 4
 assert abs(sum(s['duration'] for s in spec['scenes']) - 35.0) < 1e-9
 assert spec['audio_policy']['raw_only'] and spec['audio_policy']['no_spoken_voice_over'] and spec['audio_policy']['no_score'] and spec['audio_policy']['no_effects']
 assert spec['audio_policy']['no_added_layers'] and spec['audio_policy']['no_fabricated_animal_calls']
+assert all(s['audio_present'] for s in spec['scenes'])
+assert spec['audio_policy']['source_audio_present_segments'] == 5
+assert spec['audio_policy']['silent_segments'] == 0
+assert spec['audio_policy']['all_five_native_audio_audible'] is True
 assert spec['visual']['full_screen'] and spec['visual']['cover_mode'] == 'dynamic_subject_safe_cover'
 assert spec['visual']['no_letterbox'] and spec['visual']['no_black_bars'] and spec['visual']['no_blurred_background']
 assert spec['visual']['rank_title_overlay_only'] and spec['visual']['five_moments_only']

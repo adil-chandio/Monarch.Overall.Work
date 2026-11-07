@@ -22,11 +22,9 @@
     "no_added_layers": true,
     "no_fabricated_animal_calls": true,
     "native_source_audio_only": true,
-    "source_audio_present_segments": 4,
-    "silent_segments": 1,
-    "titmouse_source_audio_absent": true,
-    "titmouse_moment_silent": true,
-    "titmouse_moment_shortened": true,
+    "source_audio_present_segments": 5,
+    "silent_segments": 0,
+    "all_five_native_audio_audible": true,
     "target_integrated_lufs": -14.2,
     "true_peak_target_dbtp": -2.2,
     "sample_rate": 48000,
@@ -96,10 +94,10 @@
     {
       "id": "rank5_squirrel",
       "start": 0.0,
-      "end": 8.0,
+      "end": 7.0,
       "source_id": "squirrel",
       "source_start": 1.0,
-      "duration": 8.0,
+      "duration": 7.0,
       "rank": 5,
       "title": "THE DROP-IN",
       "focus_x": 0.5,
@@ -111,11 +109,11 @@
     },
     {
       "id": "rank4_hermit_crab",
-      "start": 8.0,
-      "end": 16.0,
+      "start": 7.0,
+      "end": 14.0,
       "source_id": "hermit_crab",
-      "source_start": 0.1,
-      "duration": 8.0,
+      "source_start": 0.5,
+      "duration": 7.0,
       "rank": 4,
       "title": "THE TINY COMMUTE",
       "focus_x": 0.5,
@@ -126,52 +124,52 @@
       "audio_codec": "vorbis"
     },
     {
-      "id": "rank3_starfish",
-      "start": 16.0,
-      "end": 24.0,
-      "source_id": "starfish",
-      "source_start": 36.0,
-      "duration": 8.0,
+      "id": "rank3_strandschnecke",
+      "start": 14.0,
+      "end": 21.0,
+      "source_id": "strandschnecke",
+      "source_start": 21.5,
+      "duration": 7.0,
       "rank": 3,
-      "title": "THE SLOW FLIP",
+      "title": "THE SHELL GLIDE",
       "focus_x": 0.5,
-      "focus_y": 0.57,
-      "zoom_start": 1.0,
-      "zoom_end": 1.04,
+      "focus_y": 0.55,
+      "zoom_start": 1.02,
+      "zoom_end": 1.08,
       "audio_present": true,
       "audio_codec": "vorbis"
     },
     {
-      "id": "rank2_octopus",
-      "start": 24.0,
-      "end": 32.0,
-      "source_id": "octopus",
-      "source_start": 22.5,
-      "duration": 8.0,
+      "id": "rank2_berlin_gorilla",
+      "start": 21.0,
+      "end": 28.0,
+      "source_id": "berlin_gorilla",
+      "source_start": 1.0,
+      "duration": 7.0,
       "rank": 2,
-      "title": "THE BOTTLE OPENER",
-      "focus_x": 0.55,
-      "focus_y": 0.5,
+      "title": "THE GENTLE GRAB",
+      "focus_x": 0.5,
+      "focus_y": 0.55,
       "zoom_start": 1.02,
       "zoom_end": 1.08,
       "audio_present": true,
-      "audio_codec": "mp2"
+      "audio_codec": "vorbis"
     },
     {
-      "id": "rank1_titmouse",
-      "start": 32.0,
+      "id": "rank1_oriental_dove",
+      "start": 28.0,
       "end": 35.0,
-      "source_id": "titmouse",
-      "source_start": 15.5,
-      "duration": 3.0,
+      "source_id": "oriental_dove",
+      "source_start": 8.0,
+      "duration": 7.0,
       "rank": 1,
-      "title": "THE HAND LANDING",
-      "focus_x": 0.62,
-      "focus_y": 0.48,
-      "zoom_start": 1.04,
-      "zoom_end": 1.1,
-      "audio_present": false,
-      "audio_codec": null
+      "title": "THE WING DUEL",
+      "focus_x": 0.5,
+      "focus_y": 0.5,
+      "zoom_start": 1.18,
+      "zoom_end": 1.28,
+      "audio_present": true,
+      "audio_codec": "opus"
     }
   ],
   "rank_steps": [
@@ -179,58 +177,58 @@
       "rank": 5,
       "title": "THE DROP-IN",
       "timeline_in": 0.0,
-      "timeline_out": 8.0
+      "timeline_out": 7.0
     },
     {
       "rank": 4,
       "title": "THE TINY COMMUTE",
-      "timeline_in": 8.0,
-      "timeline_out": 16.0
+      "timeline_in": 7.0,
+      "timeline_out": 14.0
     },
     {
       "rank": 3,
-      "title": "THE SLOW FLIP",
-      "timeline_in": 16.0,
-      "timeline_out": 24.0
+      "title": "THE SHELL GLIDE",
+      "timeline_in": 14.0,
+      "timeline_out": 21.0
     },
     {
       "rank": 2,
-      "title": "THE BOTTLE OPENER",
-      "timeline_in": 24.0,
-      "timeline_out": 32.0
+      "title": "THE GENTLE GRAB",
+      "timeline_in": 21.0,
+      "timeline_out": 28.0
     },
     {
       "rank": 1,
-      "title": "THE HAND LANDING",
-      "timeline_in": 32.0,
+      "title": "THE WING DUEL",
+      "timeline_in": 28.0,
       "timeline_out": 35.0
     }
   ],
   "source_windows": {
     "squirrel": {
       "start": 1.0,
-      "end": 9.0,
-      "duration": 8.0
+      "end": 8.0,
+      "duration": 7.0
     },
     "hermit_crab": {
-      "start": 0.1,
-      "end": 8.1,
-      "duration": 8.0
+      "start": 0.5,
+      "end": 7.5,
+      "duration": 7.0
     },
-    "starfish": {
-      "start": 36.0,
-      "end": 44.0,
-      "duration": 8.0
+    "strandschnecke": {
+      "start": 21.5,
+      "end": 28.5,
+      "duration": 7.0
     },
-    "octopus": {
-      "start": 22.5,
-      "end": 30.5,
-      "duration": 8.0
+    "berlin_gorilla": {
+      "start": 1.0,
+      "end": 8.0,
+      "duration": 7.0
     },
-    "titmouse": {
-      "start": 15.5,
-      "end": 18.5,
-      "duration": 3.0
+    "oriental_dove": {
+      "start": 8.0,
+      "end": 15.0,
+      "duration": 7.0
     }
   },
   "design_basis": "Reference ranking mechanic only; no third-party short-form footage reused.",
