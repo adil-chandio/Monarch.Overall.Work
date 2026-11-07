@@ -3,10 +3,14 @@
 The packed image is a user-approved AI keyframe, not the reference photo.
 """
 import argparse,base64,json,pathlib,re
+from io import BytesIO
+from PIL import Image
 root=pathlib.Path(__file__).resolve().parents[2]
 p=argparse.ArgumentParser();p.add_argument('--user',required=True);p.add_argument('--slug',required=True);p.add_argument('--out',required=True);a=p.parse_args();out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True)
 slug=re.sub(r'[^a-z0-9]+','-',a.slug.lower()).strip('-')[:48]
-img=base64.b64encode((root/'production/mafia-temple/keyframes/v2-close-start.png').read_bytes()).decode()
+buf=BytesIO()
+Image.open(root/'production/mafia-temple/keyframes/v2-close-start.png').convert('RGB').resize((1024,576),Image.Resampling.LANCZOS).save(buf,format='JPEG',quality=94)
+img=base64.b64encode(buf.getvalue()).decode()
 code='''import base64, os, pathlib, subprocess, sys, time, json
 os.environ["TOKENIZERS_PARALLELISM"]="false"
 os.environ["PYTORCH_CUDA_ALLOC_CONF"]="expandable_segments:True"
