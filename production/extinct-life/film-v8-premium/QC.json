@@ -1,0 +1,122 @@
+{
+  "status": "Fresh native development film; owner creative review pending",
+  "engine": "Blender 4.2 Cycles CPU",
+  "samples": 24,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "frames": 1830,
+  "seconds": 61,
+  "why_61_not_60": "The approved sentence \u201cLiving things shed biological material\u201d ends at ~60.74 s. No word is cut or sped up.",
+  "sha256": "b70d78e96b9a9edb1e1fd16a0a4e1018dee626049dfc754db6d7a470cc638700",
+  "bytes": 66588015,
+  "full_decode": true,
+  "old_movie_frames_used": false,
+  "generated_image_plates_used": false,
+  "reference_assets_copied": false,
+  "full_film_replacement": false,
+  "encoded_audio": {
+    "input_i": "-16.23",
+    "input_tp": "-2.31",
+    "input_lra": "3.10",
+    "input_thresh": "-26.49",
+    "output_i": "-16.16",
+    "output_tp": "-2.50",
+    "output_lra": "3.00",
+    "output_thresh": "-26.44",
+    "normalization_type": "dynamic",
+    "target_offset": "0.16"
+  },
+  "audio": {
+    "voice_speed_changed": false,
+    "voice_assets": [
+      {
+        "path": "production/extinct-life/film-v3/voice/B01.flac",
+        "sha256": "d81a15cc05d8ac68937de60a11fe2caaa32a53c5e0e9f29e558d668a957e9c32"
+      },
+      {
+        "path": "production/extinct-life/film-v3/voice/B02.flac",
+        "sha256": "2ef77a35bfdcbee9567a2eca67e682c38e1327394e431d6f8e795b88fb9e79a6"
+      }
+    ],
+    "music_source_sha256": "f790c7d53b8d802981ff7cdd8c59e22cdfe103ea66aba296c6cf1a65fe7fcf01",
+    "synthetic_foley_cues": [
+      {
+        "time": 2.4,
+        "duration": 0.9,
+        "kind": "soil",
+        "synthetic_not_field_recording": true
+      },
+      {
+        "time": 7.1,
+        "duration": 2,
+        "kind": "mineral",
+        "synthetic_not_field_recording": true
+      },
+      {
+        "time": 10.5,
+        "duration": 1.4,
+        "kind": "mineral",
+        "synthetic_not_field_recording": true
+      },
+      {
+        "time": 13.45,
+        "duration": 11.6,
+        "kind": "wind",
+        "synthetic_not_field_recording": true
+      },
+      {
+        "time": 27,
+        "duration": 3.2,
+        "kind": "carriage",
+        "synthetic_not_field_recording": true
+      },
+      {
+        "time": 38,
+        "duration": 4,
+        "kind": "mineral",
+        "synthetic_not_field_recording": true
+      },
+      {
+        "time": 47.1,
+        "duration": 3.9,
+        "kind": "receiver",
+        "synthetic_not_field_recording": true
+      },
+      {
+        "time": 56.4,
+        "duration": 3.5,
+        "kind": "leaf-water",
+        "synthetic_not_field_recording": true
+      }
+    ],
+    "foley_peak_dbfs": -39.938719272613525,
+    "human_comfort_certified": false,
+    "mix_sha256": "11e51aca56cdfb3f0a54b1c690c8a9c180ab113b74e03123ec58621c5aad9577",
+    "mix_levels": {
+      "input_i": "-16.19",
+      "input_tp": "-2.48",
+      "input_lra": "3.00",
+      "input_thresh": "-26.45",
+      "output_i": "-16.15",
+      "output_tp": "-2.50",
+      "output_lra": "3.00",
+      "output_thresh": "-26.43",
+      "normalization_type": "dynamic",
+      "target_offset": "0.15"
+    }
+  },
+  "script_sha256": "42e26885947d4cb9447074f9a63f4504ba4cc87906492703e8ee2f87ba5738f6",
+  "not_expert_validated_anatomy": true,
+  "not_actual_field_or_molecular_footage": true,
+  "continuous_human_watch_listen_claimed": false,
+  "encoded_inspection_frames": [
+    95,
+    300,
+    600,
+    980,
+    1250,
+    1490,
+    1740
+  ]
+}
