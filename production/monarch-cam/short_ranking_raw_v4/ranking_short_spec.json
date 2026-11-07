@@ -1,0 +1,244 @@
+{
+  "title": "5 Unexpected Animal Skills, Ranked.",
+  "package": "5 Unexpected Animal Skills, Ranked. - Raw Full-Screen V4",
+  "topic": "5 Unexpected Animal Skills, Ranked",
+  "edition": "raw_fullscreen_v4",
+  "status": "upload_ready_raw_fullscreen_v4",
+  "duration": 35.0,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "frame_count": 1050,
+  "video_category": "Entertainment",
+  "youtube_category_id": 24,
+  "deliverable": "deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4",
+  "new_v4_file": true,
+  "preserve_previous": true,
+  "audio_policy": {
+    "raw_only": true,
+    "no_spoken_voice_over": true,
+    "no_score": true,
+    "no_effects": true,
+    "no_added_layers": true,
+    "no_fabricated_animal_calls": true,
+    "native_source_audio_only": true,
+    "source_audio_present_segments": 4,
+    "silent_segments": 1,
+    "titmouse_source_audio_absent": true,
+    "titmouse_moment_silent": true,
+    "titmouse_moment_shortened": true,
+    "target_integrated_lufs": -14.2,
+    "true_peak_target_dbtp": -2.2,
+    "sample_rate": 48000,
+    "channels": 2,
+    "edge_fade_ms": 30
+  },
+  "visual": {
+    "full_screen": true,
+    "cover_mode": "dynamic_subject_safe_cover",
+    "source_aspect_preserved": true,
+    "no_letterbox": true,
+    "no_black_bars": true,
+    "no_blurred_background": true,
+    "no_action_window": true,
+    "rank_title_overlay_only": true,
+    "five_moments_only": true,
+    "rank_steps": [
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
+    "rank_numbers": true,
+    "no_bottom_captions": true,
+    "no_extra_text": true,
+    "no_badges": true,
+    "no_progress": true,
+    "no_footer": true,
+    "no_source_labels": true,
+    "no_brand_watermark": true,
+    "no_cut_flashes": true,
+    "no_hook_scene": true,
+    "no_payoff_scene": true,
+    "no_loop": true,
+    "hard_cuts_only": true,
+    "native_color_only": true,
+    "light_contrast_lift": 1.02,
+    "top_scrim_height": 360,
+    "overlay_y": 132,
+    "rank_font_size": 74,
+    "title_font_size": 40,
+    "rank_gap": 28,
+    "text_tracking_px": 2,
+    "text_color": [
+      244,
+      241,
+      232
+    ],
+    "accent_color": [
+      111,
+      207,
+      192
+    ],
+    "scrim_color": [
+      4,
+      9,
+      16
+    ],
+    "cover_text_primary": "WHICH ONE IS #1?",
+    "cover_text_ab": "RANK THESE 5.",
+    "cover_hook_frame_time": 0.07,
+    "five_cc0_sources": true,
+    "subjective_ranking_not_science": true
+  },
+  "scenes": [
+    {
+      "id": "rank5_squirrel",
+      "start": 0.0,
+      "end": 8.0,
+      "source_id": "squirrel",
+      "source_start": 1.0,
+      "duration": 8.0,
+      "rank": 5,
+      "title": "THE DROP-IN",
+      "focus_x": 0.5,
+      "focus_y": 0.5,
+      "zoom_start": 1.02,
+      "zoom_end": 1.08,
+      "audio_present": true,
+      "audio_codec": "vorbis"
+    },
+    {
+      "id": "rank4_hermit_crab",
+      "start": 8.0,
+      "end": 16.0,
+      "source_id": "hermit_crab",
+      "source_start": 0.1,
+      "duration": 8.0,
+      "rank": 4,
+      "title": "THE TINY COMMUTE",
+      "focus_x": 0.5,
+      "focus_y": 0.52,
+      "zoom_start": 1.18,
+      "zoom_end": 1.24,
+      "audio_present": true,
+      "audio_codec": "vorbis"
+    },
+    {
+      "id": "rank3_starfish",
+      "start": 16.0,
+      "end": 24.0,
+      "source_id": "starfish",
+      "source_start": 36.0,
+      "duration": 8.0,
+      "rank": 3,
+      "title": "THE SLOW FLIP",
+      "focus_x": 0.5,
+      "focus_y": 0.57,
+      "zoom_start": 1.0,
+      "zoom_end": 1.04,
+      "audio_present": true,
+      "audio_codec": "vorbis"
+    },
+    {
+      "id": "rank2_octopus",
+      "start": 24.0,
+      "end": 32.0,
+      "source_id": "octopus",
+      "source_start": 22.5,
+      "duration": 8.0,
+      "rank": 2,
+      "title": "THE BOTTLE OPENER",
+      "focus_x": 0.55,
+      "focus_y": 0.5,
+      "zoom_start": 1.02,
+      "zoom_end": 1.08,
+      "audio_present": true,
+      "audio_codec": "mp2"
+    },
+    {
+      "id": "rank1_titmouse",
+      "start": 32.0,
+      "end": 35.0,
+      "source_id": "titmouse",
+      "source_start": 15.5,
+      "duration": 3.0,
+      "rank": 1,
+      "title": "THE HAND LANDING",
+      "focus_x": 0.62,
+      "focus_y": 0.48,
+      "zoom_start": 1.04,
+      "zoom_end": 1.1,
+      "audio_present": false,
+      "audio_codec": null
+    }
+  ],
+  "rank_steps": [
+    {
+      "rank": 5,
+      "title": "THE DROP-IN",
+      "timeline_in": 0.0,
+      "timeline_out": 8.0
+    },
+    {
+      "rank": 4,
+      "title": "THE TINY COMMUTE",
+      "timeline_in": 8.0,
+      "timeline_out": 16.0
+    },
+    {
+      "rank": 3,
+      "title": "THE SLOW FLIP",
+      "timeline_in": 16.0,
+      "timeline_out": 24.0
+    },
+    {
+      "rank": 2,
+      "title": "THE BOTTLE OPENER",
+      "timeline_in": 24.0,
+      "timeline_out": 32.0
+    },
+    {
+      "rank": 1,
+      "title": "THE HAND LANDING",
+      "timeline_in": 32.0,
+      "timeline_out": 35.0
+    }
+  ],
+  "source_windows": {
+    "squirrel": {
+      "start": 1.0,
+      "end": 9.0,
+      "duration": 8.0
+    },
+    "hermit_crab": {
+      "start": 0.1,
+      "end": 8.1,
+      "duration": 8.0
+    },
+    "starfish": {
+      "start": 36.0,
+      "end": 44.0,
+      "duration": 8.0
+    },
+    "octopus": {
+      "start": 22.5,
+      "end": 30.5,
+      "duration": 8.0
+    },
+    "titmouse": {
+      "start": 15.5,
+      "end": 18.5,
+      "duration": 3.0
+    }
+  },
+  "design_basis": "Reference ranking mechanic only; no third-party short-form footage reused.",
+  "measurement": "Compare 24h / 3d / 7d stayed-to-watch, engaged views, average percentage viewed, loops, likes, comments, shares and subscribers gained; no result is promised.",
+  "guardrails": [
+    "Subjective entertainment ranking, not science.",
+    "Only independently verified CC0 Wikimedia Commons sources.",
+    "No third-party short-form reposts.",
+    "No pre-upload audience promise."
+  ]
+}

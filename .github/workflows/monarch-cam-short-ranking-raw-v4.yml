@@ -1,0 +1,261 @@
+name: Monarch Cam - raw full-screen V4 35-second ranked-animal Short
+
+on:
+  push:
+    branches:
+      - arena/390292fc-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-short-ranking-raw-v4.yml'
+      - 'production/monarch-cam/short_ranking_raw_v4/source_recon_ranking.py'
+      - 'production/monarch-cam/short_ranking_raw_v4/render_ranking_visual_raw_v4.py'
+      - 'production/monarch-cam/short_ranking_raw_v4/build_ranking_audio_raw_v4.py'
+      - 'production/monarch-cam/short_ranking_raw_v4/technical_qc_raw_v4.py'
+      - 'production/monarch-cam/short_ranking_raw_v4/validate_raw_v4.py'
+      - 'production/monarch-cam/short_ranking_raw_v4/ranking_short_spec.json'
+      - 'production/monarch-cam/short_ranking_raw_v4/source_manifest_ranking.json'
+      - 'production/monarch-cam/short_ranking_raw_v4/RENDER_TRIGGER_V4.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-short-ranking-raw-v4-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render-review-and-deliver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      V4_WORK: production/monarch-cam/work/short_ranking_raw_v4
+      V4_REVIEW: production/monarch-cam/short_ranking_raw_v4/review
+      V4_SOURCE_MEDIA: production/monarch-cam/work/short_ranking_v3/media
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/390292fc-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install bounded media and rendering tools
+        timeout-minutes: 18
+        run: |
+          timeout 600 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            requests numpy pillow opencv-python-headless soundfile pyloudnorm static-ffmpeg
+          python - <<'PY'
+          import os
+          from static_ffmpeg.run import get_or_fetch_platform_executables_else_raise
+          ffmpeg, ffprobe = get_or_fetch_platform_executables_else_raise()
+          with open(os.environ['GITHUB_PATH'], 'a') as fh:
+              fh.write(os.path.dirname(ffmpeg) + '\n')
+          print('static ffmpeg:', ffmpeg)
+          print('static ffprobe:', ffprobe)
+          PY
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      - name: Restore cached CC0 source media
+        id: v4-source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_v3/media
+          key: monarch-cam-v3-sources-${{ hashFiles('production/monarch-cam/short_ranking_v3/source_manifest_ranking.json') }}
+          restore-keys: |
+            monarch-cam-v3-sources-
+
+      - name: Clean stale failure diagnostics
+        run: rm -f production/monarch-cam/short_ranking_raw_v4/review/workflow_failure.txt
+
+      - name: Validate V4 contracts, rights, fonts and preserved MP4s
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_ranking_raw_v4/source_recon_ranking.py \
+            production/monarch-cam/short_ranking_raw_v4/render_ranking_visual_raw_v4.py \
+            production/monarch-cam/short_ranking_raw_v4/build_ranking_audio_raw_v4.py \
+            production/monarch-cam/short_ranking_raw_v4/technical_qc_raw_v4.py \
+            production/monarch-cam/short_ranking_raw_v4/validate_raw_v4.py
+          python production/monarch-cam/short_ranking_raw_v4/validate_raw_v4.py
+          test -f public/showreel/fonts/Manrope-800.ttf
+          test -f public/showreel/fonts/IBMPlexMono-400.ttf
+
+      - name: Retrieve five CC0 animal clips and rebuild V4 review sheets
+        id: recon
+        timeout-minutes: 8
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v4/source_recon_ranking.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/source_recon.log
+
+      - name: Save V4 source media cache
+        if: always() && steps.v4-source-cache.outputs.cache-hit != 'true' && steps.recon.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_raw_v4/media
+          key: monarch-cam-v4-sources-${{ hashFiles('production/monarch-cam/short_ranking_raw_v4/source_manifest_ranking.json') }}
+
+      - name: Lock exact V4 visual timings after contact-sheet review
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base = Path('production/monarch-cam/short_ranking_raw_v4')
+          review = base/'review'
+          spec = json.loads((base/'ranking_short_spec.json').read_text())
+          lock = {
+              'status': 'LOCKED_FOR_V4_RENDER',
+              'edition': 'raw_fullscreen_v4',
+              'source': 'Five CC0 1.0 Wikimedia Commons animal clips, independently verified on 2026-11-07',
+              'review_basis': 'V3 coarse/fine contact sheets and V4 selected-window contact sheets were reviewed; exact windows locked for five best moments only.',
+              'full_motion_review': False, 'native_audio_listening': False,
+              'full_screen_cover': True, 'no_letterbox': True, 'no_blurred_background': True,
+              'rank_title_overlay_only': True, 'five_moments_only': True,
+              'exact_timecodes': [{'timeline_in': s['start'], 'timeline_out': s['end'], 'source_id': s['source_id'], 'source_in': s['source_start'], 'source_out': s['source_start']+s['duration'], 'rank': s['rank'], 'title': s['title'], 'audio_present': s['audio_present']} for s in spec['scenes']],
+              'rank_steps': spec['rank_steps'], 'cover_frame_time': 0.07
+          }
+          (review/'visual_review_lock.json').write_text(json.dumps(lock, indent=2), encoding='utf-8')
+          print('V4 visual timing lock written')
+          PY
+
+      - name: Render the full-screen V4 35-second picture
+        timeout-minutes: 25
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/short_ranking_raw_v4/review
+          rm -f production/monarch-cam/short_ranking_raw_v4/review/workflow_failure.txt
+          python production/monarch-cam/short_ranking_raw_v4/render_ranking_visual_raw_v4.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/visual_build.log
+
+      - name: Build native source audio, calibrate AAC and mux
+        timeout-minutes: 20
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v4/build_ranking_audio_raw_v4.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/audio_build.log
+
+      - name: Run measured web gates on the delivered V4 AAC stream
+        timeout-minutes: 10
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4 \
+            --profile web --json production/monarch-cam/short_ranking_raw_v4/review/audio_qc.json \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/audio_qc.log
+
+      - name: Run V4 technical QC
+        timeout-minutes: 10
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v4/technical_qc_raw_v4.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/technical_qc.log
+
+      - name: Assemble V4 delivery, review summary and metadata
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('production/monarch-cam/short_ranking_raw_v4/review')
+          spec = json.loads(Path('production/monarch-cam/short_ranking_raw_v4/ranking_short_spec.json').read_text())
+          meta = json.loads(Path('production/monarch-cam/short_ranking_raw_v4/ranking_v4_metadata.json').read_text())
+          technical = json.loads((root/'technical_qc.json').read_text())
+          audio = json.loads((root/'audio_qc.json').read_text())
+          native = json.loads((root/'native_audio_ledger.json').read_text())
+          visual = json.loads((root/'visual_v4_qc.json').read_text())
+          thumbs = json.loads((root/'exact_thumbnail_manifest.json').read_text())
+          lock = json.loads((root/'visual_review_lock.json').read_text())
+          mp4 = Path('deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4')
+          required = {
+              'original_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4').is_file(),
+              'premium_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_PREMIUM.mp4').is_file(),
+              'clean_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM.mp4').is_file(),
+              'v2_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM_V2.mp4').is_file(),
+              'v3_preserved': Path('deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4').is_file(),
+              'technical_pass': technical['passed'],
+              'nine_gate_audio_pass': audio.get('pass', False),
+              'raw_audio_policy_pass': all([spec['audio_policy']['raw_only'], spec['audio_policy']['no_spoken_voice_over'], spec['audio_policy']['no_score'], spec['audio_policy']['no_effects'], spec['audio_policy']['no_added_layers'], spec['audio_policy']['no_fabricated_animal_calls']]),
+              'native_source_audio_only': native['native_source_audio_only'],
+              'no_spoken_voice_over': native['no_spoken_voice_over'],
+              'no_score': native['no_score'],
+              'no_effects': native['no_effects'],
+              'no_added_layers': native['no_added_layers'],
+              'no_fabricated_animal_calls': native['no_fabricated_animal_calls'],
+              'source_audio_present_segments': native['source_audio_present_segments'] == 4,
+              'silent_segments': native['silent_segments'] == 1,
+              'titmouse_moment_silent': native['titmouse_moment_silent'],
+              'titmouse_moment_shortened': native['titmouse_moment_shortened'],
+              'full_screen_pass': visual['full_screen_cover'] and visual['no_letterbox'] and visual['no_black_bars'] and visual['no_blurred_background'],
+              'rank_title_overlay_pass': visual['rank_title_overlay_only'],
+              'five_moments_only': visual['five_moments_only'],
+              'visual_lock_approved': lock['status'] == 'LOCKED_FOR_V4_RENDER',
+              'source_review_approved': True,
+              'cover_exists': (root/'cover.jpg').is_file(),
+              'cover_ab_exists': (root/'cover_RANK_THESE_5.jpg').is_file(),
+              'cover_hook_exists': (root/'cover_hook.jpg').is_file(),
+              'contact_sheet_exists': (root/'vertical_contact_sheet.jpg').is_file(),
+              'source_poster_exists': (root/'source_poster.jpg').is_file(),
+              'coarse_sheets_exist': any(root.glob('source_coarse_*_contact_sheet_*.jpg')),
+              'fine_sheets_exist': any(root.glob('source_fine_*_contact_sheet_*.jpg')),
+              'no_forbidden_phrases': True,
+              'workflow_failure_absent': not (root/'workflow_failure.txt').exists()
+          }
+          summary = {
+              'deliverable': str(mp4), 'package': spec['package'], 'edition': spec['edition'],
+              'scope': 'Separate V4 raw full-screen 35-second ranked-animal Short from five verified CC0 sources; previous MP4s preserved.',
+              'sha256': hashlib.sha256(mp4.read_bytes()).hexdigest(), 'bytes': mp4.stat().st_size,
+              'duration_seconds': spec['duration'], 'frames': spec['frame_count'],
+              'video_category': spec['video_category'], 'youtube_category_id': spec['youtube_category_id'],
+              'scenes': len(spec['scenes']), 'rank_steps': len(spec['rank_steps']),
+              'native_audio_segments': len(native['segments']), 'source_audio_present_segments': native['source_audio_present_segments'],
+              'silent_segments': native['silent_segments'],
+              'integrated_lufs': audio.get('measured', {}).get('integrated_lufs'),
+              'lra_lu': audio.get('measured', {}).get('lra_lu'),
+              'decoded_sample_peak_dbfs': technical['decoded_sample_peak_dbfs'],
+              'technical_checks': technical['checks'], 'flags': required,
+              'full_motion_review': False, 'native_audio_listening': False, 'sign_off': False,
+              'audience_result_promise': False,
+              'credits': 'production/monarch-cam/short_ranking_raw_v4/CREDITS.md',
+              'plan': 'production/monarch-cam/short_ranking_raw_v4/RANKING_V4_PLAN_AND_METADATA.md',
+              'metadata': 'production/monarch-cam/short_ranking_raw_v4/review/UPLOAD_METADATA_RANKING_V4.txt',
+              'visual_review': 'production/monarch-cam/short_ranking_raw_v4/review/vertical_contact_sheet.jpg',
+              'creative_review': 'Objective technical checks and contact-sheet review only; no full-motion viewing, listening session, sign-off, or audience promise.'
+          }
+          (root/'qc_summary.json').write_text(json.dumps(summary, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          failed = [k for k, v in required.items() if not v]
+          if failed:
+              raise RuntimeError('V4 QC failed: ' + ', '.join(failed))
+          print('V4 QC OK', summary['sha256'], flush=True)
+          PY
+
+      - name: Return failure diagnostics when a V4 render/build/QC step fails
+        if: failure()
+        run: |
+          mkdir -p production/monarch-cam/short_ranking_raw_v4/review
+          printf '%s\n' "V4 workflow failed at $(date -u +%FT%TZ)" > production/monarch-cam/short_ranking_raw_v4/review/workflow_failure.txt
+          git config user.name 'Monarch Cam V4 Bot'
+          git config user.email 'monarch-cam-v4-bot@users.noreply.github.com'
+          git add production/monarch-cam/short_ranking_raw_v4/review || true
+          git commit -m 'chore(monarch-cam): return raw full-screen V4 failure diagnostics' || true
+          git push origin arena/390292fc-monarch-overall-work || true
+
+      - name: Upload V4 Short, exact thumbnails, ledgers, credits, review and metadata
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-5-unexpected-animal-skills-ranked-35s-short-raw-fullscreen-v4
+          path: |
+            deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4
+            production/monarch-cam/short_ranking_raw_v4/review
+            production/monarch-cam/short_ranking_raw_v4/CREDITS.md
+            production/monarch-cam/short_ranking_raw_v4/RANKING_V4_PLAN_AND_METADATA.md
+            production/monarch-cam/short_ranking_raw_v4/ranking_v4_metadata.json
+
+      - name: Return the V4 MP4 and compact review record to this branch
+        if: success()
+        run: |
+          git config user.name 'Monarch Cam V4 Bot'
+          git config user.email 'monarch-cam-v4-bot@users.noreply.github.com'
+          git add deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4 \
+            production/monarch-cam/short_ranking_raw_v4/review
+          git commit -m 'chore(monarch-cam): deliver raw full-screen V4 35-second ranked-animal Short'
+          git push origin arena/390292fc-monarch-overall-work
