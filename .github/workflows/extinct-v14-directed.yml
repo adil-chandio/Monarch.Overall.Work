@@ -1,6 +1,9 @@
 # Full approved 438.766667-second film. Float-decode/peak-safe composed sources. No recovery/reuse of earlier rendered movies.
 name: V14 forensic-directed full film — render candidate and encoded evidence
 on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-v14-directed.yml]
   workflow_dispatch:
 permissions:
   contents: write
