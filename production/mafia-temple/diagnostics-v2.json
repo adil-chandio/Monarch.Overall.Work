@@ -27,6 +27,10 @@
     "STAGE 3 video generation"
   ],
   "nonfinite_embeddings": false,
+  "runtime_error_messages": [
+    "RuntimeError                              Traceback (most recent call last)\\n\"}",
+    "RuntimeError: invalid argument to getCurrentStream\\n\"}"
+  ],
   "frame_sources": [
     [
       "validator.py",
