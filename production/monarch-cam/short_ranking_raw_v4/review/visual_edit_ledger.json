@@ -1,0 +1,68 @@
+{
+  "edition": "raw_fullscreen_v4",
+  "scenes": [
+    {
+      "id": "rank5_squirrel",
+      "rank": 5,
+      "title": "THE DROP-IN",
+      "timeline_in": 0.0,
+      "timeline_out": 8.0,
+      "source_in": 1.0,
+      "source_out": 9.0,
+      "frames": 240,
+      "full_screen": true
+    },
+    {
+      "id": "rank4_hermit_crab",
+      "rank": 4,
+      "title": "THE TINY COMMUTE",
+      "timeline_in": 8.0,
+      "timeline_out": 16.0,
+      "source_in": 0.1,
+      "source_out": 8.1,
+      "frames": 240,
+      "full_screen": true
+    },
+    {
+      "id": "rank3_starfish",
+      "rank": 3,
+      "title": "THE SLOW FLIP",
+      "timeline_in": 16.0,
+      "timeline_out": 24.0,
+      "source_in": 36.0,
+      "source_out": 44.0,
+      "frames": 240,
+      "full_screen": true
+    },
+    {
+      "id": "rank2_octopus",
+      "rank": 2,
+      "title": "THE BOTTLE OPENER",
+      "timeline_in": 24.0,
+      "timeline_out": 32.0,
+      "source_in": 22.5,
+      "source_out": 30.5,
+      "frames": 240,
+      "full_screen": true
+    },
+    {
+      "id": "rank1_titmouse",
+      "rank": 1,
+      "title": "THE HAND LANDING",
+      "timeline_in": 32.0,
+      "timeline_out": 35.0,
+      "source_in": 15.5,
+      "source_out": 18.5,
+      "frames": 90,
+      "full_screen": true
+    }
+  ],
+  "frames": [
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_05_00.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_04_08.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_03_16.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_02_24.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_01_32.00s.jpg"
+  ],
+  "full_screen": true
+}
