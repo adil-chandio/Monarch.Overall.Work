@@ -1,0 +1,39 @@
+name: Stickman research — broaden actual 3D public source discovery
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/stickman-3d-public.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  public-3d:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Public 3D source discovery, without bypassing restrictions
+        run: python scripts/stickman-3d-public-probe.py
+      - name: Read existing decode-job progress without exposing credentials
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p .cache
+          gh api repos/adil-chandio/Monarch.Overall.Work/actions/jobs/128428736293/logs > .cache/decode-job.log || true
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          p=Path('.cache/decode-job.log')
+          rows=[v for v in p.read_text(errors='replace').splitlines() if re.search(r' (True|False) (None|[0-9]+)$',v)] if p.exists() else []
+          Path('docs/research/stickman-study/three-d-public-routes/decode-progress.json').write_text(json.dumps({'job':128428736293,'completed_source_log_lines':rows,'not_a_visual_review':True},indent=2)+'\n')
+          PY
+      - name: Save source evidence
+        if: always()
+        run: |
+          git config user.name 'Monarch animation research'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/research/stickman-study/three-d-public-routes
+          git diff --cached --quiet || git commit -m 'Record broadened 3D public-source discovery [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
