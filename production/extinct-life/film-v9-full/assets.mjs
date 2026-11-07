@@ -13,7 +13,7 @@ export function animal(kind){
   for(const {mesh,bind,name} of parts){const p=mesh.geometry.attributes.position;const wing=/wing|primary/i.test(name),trunk=/Unified.sculpt|nostril/i.test(name);
    for(let i=0;i<p.count;i++){const n=i*3,x=bind[n],y=bind[n+1],z=bind[n+2];let xx=x,yy=y,zz=z;
     if(dims){for(const side of [-1,1])for(let j=0;j<2;j++){const phase=(side>0?.5:0)+(j?.25:0),f=footState(t,phase),w=(1-smooth((Math.abs(x-side*dims.x)-dims.r*.95)/(dims.r*.5)))*(1-smooth((Math.abs(z-dims.z[j])-dims.r*1.4)/(dims.r*.4)))*clamp((dims.hip-y)/(dims.hip*.75));zz-=f.z*w*walk*(kind==='mastodon'?1:.5);yy+=f.lift*w*walk*(kind==='mastodon'?1:.5);}
-     yy+=.012*Math.sin(t*1.7)*clamp((y-dims.hip*.7)/dims.hip);}
+     xx+=.035*Math.sin(t*1.7)*clamp((y-dims.hip*.6)/dims.hip);yy+=.012*Math.sin(t*1.7)*clamp((y-dims.hip*.7)/dims.hip);}
     if(kind==='mastodon'){
      if(/ear/i.test(name)){const side=x<0?-1:1,angle=side*.045*Math.sin(t*.9),dx=xx-side*.56,dz=zz-1.59;xx=side*.56+dx*Math.cos(angle)+dz*Math.sin(angle);zz=1.59+dz*Math.cos(angle)-dx*Math.sin(angle);}
      if(/tail/i.test(name))xx+=.045*Math.sin(t*.8)*clamp((-z-1.8)/.3);
