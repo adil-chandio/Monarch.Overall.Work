@@ -9,14 +9,18 @@ try:
   text=client.kernels.kernels_api_client.list_kernel_session_output(req).log or ''
   result['log_received']=bool(text)
   events=[]
+  tail=[]
   for line in text.splitlines():
    try:
     x=json.loads(line.lstrip(',')); msg=x.get('data','')
    except Exception: msg=line
+   if len(msg) < 400 and not re.search(r'(?i)secret|password|KGAT|authorization|SOURCE_JPEG|BVH_TEXT|api.token', msg):
+    tail.append(re.sub(r'(?:/[^ :\s]+)+','<path>',msg).strip())
    if re.search(r'(?i)(error:|error\b|exception|PILOT_DONE|Starting pose|Downloading selected|GPU |No module named|failed|out of memory|no space|building wheel|subprocess-exited|Could not|rust|cargo|cmake|metadata|requires.python|tokenizers|pykalman|failed to build|╰─>|File |import |numpy|dtypes)',msg) and not re.search(r'(?i)secret|password|KGAT|authorization|SOURCE_JPEG|BVH_TEXT|api.token',msg):
     clean=re.sub(r'(?:/[^ :\s]+)+','<path>',msg).strip()
     events.append(clean[:350])
   result['events']=events[-100:]
+  result['tail']=tail[-25:]
 except Exception as ex:
  result['diagnostic_error']=type(ex).__name__
 path=pathlib.Path('production/mafia-temple/run-pilot-output/run-pilot-diagnostics.json')
