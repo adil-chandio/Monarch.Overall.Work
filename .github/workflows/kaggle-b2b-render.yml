@@ -365,7 +365,9 @@ jobs:
 
       - name: Generate AI motion clips
         run: |
-          if grep -q 'native-motion-v2' production/mafia-temple/trigger.txt; then
+          if grep -q 'diagnose-v2' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/diagnose_v2.sh
+          elif grep -q 'native-motion-v2' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_v2.sh
           elif grep -q 'walking-retry' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_retry.sh
@@ -376,6 +378,10 @@ jobs:
         run: |
           git config user.name "MONARCH GPU Runner"
           git config user.email "gpu@monarch.studio"
-          git add -f production/mafia-temple/clips/*.mp4 production/mafia-temple/clips/*.json
-          git commit -m "Add generated mafia temple motion clips [skip ci]"
+          if grep -q 'diagnose-v2' production/mafia-temple/trigger.txt; then
+            git add -f production/mafia-temple/diagnostics-v2.json
+          else
+            git add -f production/mafia-temple/clips/*.mp4 production/mafia-temple/clips/*.json
+          fi
+          git commit -m "Add mafia temple render results [skip ci]"
           git push origin HEAD:arena/6101616c-monarch-overall-work
