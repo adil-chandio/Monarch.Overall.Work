@@ -13,8 +13,12 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+      - run: python -m pip install pillow imageio-ffmpeg numpy
       - name: Public 3D source discovery, without bypassing restrictions
         run: python scripts/stickman-3d-public-probe.py
+      - name: Verify actual small movies and make consecutive-frame research quotes
+        timeout-minutes: 5
+        run: python scripts/stickman-quick-archive-preview.py
       - name: Read existing decode-job progress without exposing credentials
         env:
           GH_TOKEN: ${{ github.token }}
@@ -33,7 +37,7 @@ jobs:
         run: |
           git config user.name 'Monarch animation research'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add docs/research/stickman-study/three-d-public-routes
+          git add docs/research/stickman-study/three-d-public-routes docs/research/stickman-study/quick-footage
           git diff --cached --quiet || git commit -m 'Record broadened 3D public-source discovery [skip ci]'
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
           git push origin HEAD:arena/ba8d901e-monarch-overall-work
