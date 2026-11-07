@@ -1,7 +1,1 @@
-Traceback (most recent call last):
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v4/technical_qc_raw_v4.py", line 82, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v4/technical_qc_raw_v4.py", line 77, in main
-    raise RuntimeError('V4 technical QC failed: ' + json.dumps({k: v for k, v in checks.items() if not v}))
-RuntimeError: V4 technical QC failed: {"no_click_runs": false}
+V4 technical QC OK 2bc12b0bc0422c93b401b0af67499dba3a034584abbe15e3712f51f7f994af28

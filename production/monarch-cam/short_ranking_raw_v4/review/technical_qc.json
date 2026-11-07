@@ -1,7 +1,7 @@
 {
   "file": "deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4",
-  "sha256": "49b08dee113fa25430d088c34f665f03cecf5baea5ea0b8b2c231ec55e301cc4",
-  "bytes": 57358079,
+  "sha256": "2bc12b0bc0422c93b401b0af67499dba3a034584abbe15e3712f51f7f994af28",
+  "bytes": 57405096,
   "probe": {
     "streams": [
       {
@@ -34,7 +34,7 @@
         "start_time": "0.000000",
         "duration_ts": 537600,
         "duration": "35.000000",
-        "bit_rate": "12908572",
+        "bit_rate": "12919227",
         "bits_per_raw_sample": "8",
         "nb_frames": "1050",
         "nb_read_frames": "1050",
@@ -89,7 +89,7 @@
         "start_time": "0.000000",
         "duration_ts": 1680000,
         "duration": "35.000000",
-        "bit_rate": "193841",
+        "bit_rate": "193931",
         "nb_frames": "1642",
         "nb_read_frames": "1641",
         "extradata_size": 5,
@@ -130,8 +130,8 @@
       "format_long_name": "QuickTime / MOV",
       "start_time": "0.000000",
       "duration": "35.000000",
-      "size": "57358079",
-      "bit_rate": "13110418",
+      "size": "57405096",
+      "bit_rate": "13121164",
       "probe_score": 100,
       "tags": {
         "major_brand": "isom",
@@ -145,10 +145,11 @@
   "decoded_sample_rate": 48000,
   "decoded_sample_peak_dbfs": -2.0438,
   "clipping_runs": 0,
-  "click_runs": 16,
-  "dc_offset": -3e-06,
-  "channel_correlation": 0.7941,
-  "mono_fold_loss_db": -0.4723,
+  "click_runs": 0,
+  "click_positions_s": [],
+  "dc_offset": 2.7e-05,
+  "channel_correlation": 0.7942,
+  "mono_fold_loss_db": -0.472,
   "loudnorm_input": {
     "input_i": "-14.50",
     "input_tp": "-2.04",
@@ -162,7 +163,7 @@
     "fps_30": true,
     "audio_48k_stereo": true,
     "no_sample_clipping_runs": true,
-    "no_click_runs": false,
+    "no_click_runs": true,
     "dc_offset_ok": true,
     "mono_compatible": true,
     "no_added_audio_layers": true,
@@ -170,5 +171,5 @@
     "full_screen_cover": true,
     "rank_title_overlay_only": true
   },
-  "passed": false
+  "passed": true
 }

@@ -18,7 +18,10 @@
     "edge_fade_ms": 30,
     "final_gain_calibration": true,
     "final_peak_limit_linear": 0.75,
-    "final_calibration_iterations": 4
+    "final_calibration_iterations": 5,
+    "final_technical_click_threshold": 0.45,
+    "final_declick_threshold": 0.35,
+    "final_declick_width_samples": 24
   },
   "segments": [
     {
@@ -152,11 +155,13 @@
     {
       "iteration": 0,
       "integrated_lufs": -15.25,
-      "sample_peak_dbfs": -1.78,
+      "sample_peak_dbfs": -2.05,
       "loudness_in_range": false,
       "true_peak_ok": true,
+      "technical_click_runs": 0,
       "measured_on": "delivered_aac_stream",
       "applied_gain_db": 1.25,
+      "declick_regions": 4,
       "peak_limit_linear": 0.75
     },
     {
@@ -165,12 +170,14 @@
       "sample_peak_dbfs": -2.04,
       "loudness_in_range": true,
       "true_peak_ok": true,
+      "technical_click_runs": 0,
       "measured_on": "delivered_aac_stream",
-      "applied_gain_db": 0.0
+      "applied_gain_db": 0.0,
+      "declick_regions": 0
     }
   ],
   "premaster": "production/monarch-cam/work/short_ranking_raw_v4/native_timeline.wav",
   "mastered": "production/monarch-cam/work/short_ranking_raw_v4/native_timeline_mastered.wav",
-  "deliverable_sha256": "49b08dee113fa25430d088c34f665f03cecf5baea5ea0b8b2c231ec55e301cc4",
-  "deliverable_bytes": 57358079
+  "deliverable_sha256": "2bc12b0bc0422c93b401b0af67499dba3a034584abbe15e3712f51f7f994af28",
+  "deliverable_bytes": 57405096
 }

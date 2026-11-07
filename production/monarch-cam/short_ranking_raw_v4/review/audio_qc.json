@@ -6,7 +6,7 @@
     "lra_lu": 7.95,
     "sample_peak_dbfs": -2.04,
     "clipped_samples": 0,
-    "dc_offset": 2e-06,
+    "dc_offset": 3.1e-05,
     "duration_s": 35.008,
     "movement_db": 11.74,
     "mono_fold_loss_db": -0.63,
@@ -15,17 +15,17 @@
       "first_click_s": null
     },
     "band_db_rel_total": {
-      "sub": -13.95,
+      "sub": -13.94,
       "bass": -8.75,
       "low_mid": -5.37,
       "mid": -5.22,
       "high_mid": -7.34,
       "presence": -14.08,
-      "harsh": -20.74,
-      "air": -25.83
+      "harsh": -20.76,
+      "air": -25.96
     },
-    "harsh_over_high_mid_db": -13.4,
-    "air_over_high_mid_db": -18.49
+    "harsh_over_high_mid_db": -13.42,
+    "air_over_high_mid_db": -18.62
   },
   "targets": {
     "lufs": -14.0,
@@ -284,15 +284,15 @@
     ],
     [
       29.0,
-      -22.85
+      -22.78
     ],
     [
       29.5,
-      -22.86
+      -22.85
     ],
     [
       30.0,
-      -27.59
+      -27.6
     ],
     [
       30.5,
@@ -328,7 +328,7 @@
     ],
     [
       34.5,
-      -21.76
+      -21.75
     ]
   ]
 }
