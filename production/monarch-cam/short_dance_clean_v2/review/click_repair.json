@@ -1,0 +1,24 @@
+{
+  "threshold": 0.35,
+  "max_repair_samples_per_run": 48,
+  "passes": [
+    {
+      "pass": 1,
+      "before_runs": []
+    }
+  ],
+  "final_runs": [],
+  "final_aac_measurement": {
+    "input_i": "-14.31",
+    "input_tp": "-3.30",
+    "input_lra": "3.10",
+    "input_thresh": "-24.99",
+    "output_i": "-13.75",
+    "output_tp": "-2.13",
+    "output_lra": "2.80",
+    "output_thresh": "-24.42",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.25"
+  },
+  "repaired_samples": 0
+}

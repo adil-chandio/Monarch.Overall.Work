@@ -4,8 +4,8 @@
 
 - **Laysan Albatross Mating Dance 2016**, Midway Atoll, Ann Bell / U.S. Fish & Wildlife Service. Public domain.
 - Rights page: https://commons.wikimedia.org/wiki/File:Laysan_Albatross_Mating_Dance_2016.webm
-- Original 24-second retention-first vertical edit, narration, mirror-split freeze and sound design: Monarch Cam production.
-- V2 picture: minimal tracked lower-third captions only, filmic grade with restrained halation/bloom, very subtle grain/vignette, double-smoothstep zoom, motion drift, five-frame scene cross-dissolves, elegant tracked captions, an undistorted rounded 16:9 action window, deep-navy/ivory/teal palette, loop crossfade and exact-text thumbnails. No badges, cards, progress bars, footers, macro inset or persistent labels.
+- Original 24-second retention-first vertical edit, narration, dance-card animation, mirror-split freeze and sound design: Monarch Cam production.
+- V2 picture: minimal lower-third captions only, filmic grade with restrained halation/bloom, very subtle grain/vignette, double-smoothstep zoom, motion drift, five-frame scene cross-dissolves, elegant tracked captions, an undistorted rounded 16:9 action window, deep-navy/ivory/teal palette, loop crossfade and exact-text thumbnails. No badges, cards, progress bars, footers, macro inset or persistent labels.
 - Exact timeline/source ranges: `review/visual_edit_ledger.json`.
 
 ## Audio
@@ -18,7 +18,7 @@
 - CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/
 - Original public-domain USFWS clip audio retained at low level as ambience; not represented as generated bird sound.
 - Narration: AI-generated with Microsoft Edge TTS `en-US-AndrewNeural`.
-- V2 sound polish: salience-layered softer CC0 hits, motion panning, a slightly longer original room, voice-aware presence dip, slightly wider music/ambience, PCHIP envelopes, four slightly weighted original sub-blooms, gentle voice de-harsh and a bounded -1.4 dBFS premaster ceiling. The sub-bloom and room are original production effects, not wildlife recordings. No new third-party audio asset.
+- Premium sound design: salience-layered softer CC0 hits, motion panning, a short original room, voice-aware presence dip, wider music/ambience, PCHIP envelopes, four low-level original sub-blooms and gentle voice de-harsh. The sub-bloom and room are original production effects, not wildlife recordings.
 - No generated bird vocalisation, attack, bear, car, handle, door or food-reward sound was added.
 - No human full-motion review, native-audio listening or human approval occurred. Objective, model-assisted and contact-sheet checks are evidence, not audience guarantees.
 - This is a separate V2 clean-premium edition; the original 24-second Short, PREMIUM edition, CLEAN edition, 35-second Master, 20-second follow-up and historical Sound V2 remain unchanged.

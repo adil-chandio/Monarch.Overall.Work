@@ -1,0 +1,66 @@
+{
+  "query": "soft organic cinematic impact clean",
+  "earshot_find": {
+    "summary": "Best moments for 'soft organic cinematic impact clean' in selected_impact.wav (kind=event; searched all 0.6 s: 1 windows of ~0.6 s (edges snapped to the sound) to locate events, none returned + 14 onset-based candidates (one stage)): 0:00.04-0:00.51 (0.46 s event, z +1.9 no match, head cut, tail cut). start/end are sample trims in seconds (strokes / events start 5 ms before the attack; windows are snapped to the sound; a 'head cut' / 'tail cut' trim cuts into a sound). Even the best segment is not a match: the recording may not contain this sound.",
+    "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_dance_clean_v2/selected_impact.wav",
+    "query": "soft organic cinematic impact clean",
+    "query_kind": "event",
+    "query_kind_score": 0.291,
+    "duration": 0.55,
+    "n_candidates": 14,
+    "n_windows": 0,
+    "n_events": 14,
+    "segments": [
+      {
+        "start": 0.042,
+        "end": 0.505,
+        "duration": 0.463,
+        "score": 1.47,
+        "z": 1.97,
+        "cosine": 0.248,
+        "verdict": "no match",
+        "kind": "event",
+        "peak_dbfs": -24.3,
+        "head_db": -11.6,
+        "tail_db": -9.6,
+        "cut": "head cut, tail cut"
+      }
+    ]
+  },
+  "selected_source_range": {
+    "start": 0.042,
+    "end": 0.505,
+    "earshot": {
+      "start": 0.042,
+      "end": 0.505,
+      "duration": 0.463,
+      "score": 1.47,
+      "z": 1.97,
+      "cosine": 0.248,
+      "verdict": "no match",
+      "kind": "event",
+      "peak_dbfs": -24.3,
+      "head_db": -11.6,
+      "tail_db": -9.6,
+      "cut": "head cut, tail cut"
+    }
+  },
+  "processed_excerpt": {
+    "source_start": 0.2353,
+    "source_end": 0.505,
+    "duration": 0.2697,
+    "local_peak_seconds": 0.1,
+    "edge_fades": true,
+    "generated_audio": false
+  },
+  "premium": {
+    "highpass_hz": 38,
+    "lowpass_hz": 6000,
+    "short_room_mix": 0.12,
+    "short_room_decay_ms": 140,
+    "edge_fade_in_s": 0.014,
+    "processed_duration_s": 0.2697,
+    "generated_audio": false,
+    "room_is_original_effect": true
+  }
+}
