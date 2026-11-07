@@ -61,7 +61,7 @@ def area(name,loc,target,power,color,size):
  bpy.ops.object.light_add(type='AREA',location=loc);o=bpy.context.object;o.name=name;o.data.energy=power;o.data.color=color;o.data.shape='DISK';o.data.size=size;track(o,target)
 
 def setup(kind):
- bpy.ops.wm.read_factory_settings(use_empty=True);s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=a.samples;s.cycles.use_denoising=True;s.cycles.adaptive_threshold=.065;s.cycles.max_bounces=5;s.cycles.diffuse_bounces=3;s.cycles.glossy_bounces=3;s.cycles.transmission_bounces=4;s.render.threads_mode='FIXED';s.render.threads=2;s.render.resolution_x=a.width;s.render.resolution_y=round(a.width*9/16);s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGB';s.render.fps=30;s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.render.film_transparent=False
+ bpy.ops.wm.read_factory_settings(use_empty=True);s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=a.samples;s.cycles.use_denoising=True;s.cycles.adaptive_threshold=.065;s.cycles.max_bounces=5;s.cycles.diffuse_bounces=3;s.cycles.glossy_bounces=3;s.cycles.transmission_bounces=4;s.render.threads_mode='FIXED';s.render.threads=min(4,os.cpu_count() or 2);s.render.use_persistent_data=True;s.render.resolution_x=a.width;s.render.resolution_y=round(a.width*9/16);s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGB';s.render.fps=30;s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.render.film_transparent=False
  w=bpy.data.worlds.new('Cold skylight' if kind=='coast' else 'Environment fill');w.use_nodes=True;w.node_tree.nodes['Background'].inputs[0].default_value=(.23,.34,.43,1) if kind=='coast' else (.29,.34,.35,1);w.node_tree.nodes['Background'].inputs[1].default_value=.35 if kind=='coast' else .25;s.world=w
  if kind in ('forest','forest-late','coast'):
   nodes=w.node_tree.nodes;links=w.node_tree.links;sky=nodes.new('ShaderNodeTexSky');sky.sky_type='NISHITA';sky.sun_elevation=.18 if kind=='coast' else .3;sky.sun_rotation=2.5;sky.altitude=20;sky.air_density=1.15;sky.dust_density=.6;links.new(sky.outputs[0],nodes['Background'].inputs[0]);nodes['Background'].inputs[1].default_value=.18 if kind=='coast' else .22
@@ -232,9 +232,9 @@ def coast_scene():
   for j in range(25):
    ang=j/24*math.tau;xx=x+math.cos(ang)*r*(1+.12*math.sin(ang*5));yy=y+math.sin(ang)*r*.6;v.append((xx,yy,height(xx,yy,True)+.009))
   mesh('Conforming snow hollow',v,[(0,j+1,j+2) for j in range(24)],snow)
- area('Arctic overcast',(-10,-8,22),(0,0,0),5800,(.73,.86,1),18);area('Horizon light',(20,22,10),(0,0,1),2700,(1,.84,.65),12);cam=camera((11,-9,4.4),(0,8,1.8),36,11)
+ area('Arctic overcast',(-10,-8,22),(0,0,0),5800,(.73,.86,1),18);area('Horizon light',(20,22,10),(0,0,1),2700,(1,.84,.65),12);cam=camera((6,-3,1.8),(0,5,.7),36,11)
  def update(t):
-  wn.inputs['W'].default_value=t*.12;u=ease(t/12.31);cam.location=lerp((11,-9,4.4),(6,-4.2,3.1),u);target=Vector((-2,12,2));track(cam,target);cam.data.dof.focus_distance=35
+  wn.inputs['W'].default_value=t*.12;u=ease(t/12.31);cam.location=lerp((6,-3,1.8),(9,-12,6.8),u);target=lerp((0,5,.7),(-5,12,1.3),u);track(cam,target);cam.data.dof.focus_distance=35
  return update
 
 def strata_scene():
