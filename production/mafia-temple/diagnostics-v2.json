@@ -17,6 +17,19 @@
     "OutOfMemoryError",
     "PapermillExecutionError"
   ],
+  "completed_scenes": [],
+  "events": [
+    "v2runA",
+    "v2runB",
+    "v2faceA",
+    "v2faceB"
+  ],
+  "oom_messages": [
+    "CUDA out of memory. Tried to allocate 6.74 GiB. GPU 0 has a total capacity of 14.56 GiB of which 5.97 GiB is free. Process 23 has 154.00 MiB memory in use. Including non-PyTorch memory, this process",
+    "CUDA out of memory. Tried to allocate 6.74 GiB. GPU 0 has a total capacity of 14.56 GiB of which 6.12 GiB is free. Including non-PyTorch memory, this process has 8.44 GiB memory in use. Of the alloc",
+    "CUDA out of memory. Tried to allocate 6.74 GiB. GPU 0 has a total capacity of 14.56 GiB of which 5.97 GiB is free. Process 23 has 154.00 MiB memory in use. Including non-PyTorch memory, this process",
+    "CUDA out of memory. Tried to allocate 6.74 GiB. GPU 0 has a total capacity of 14.56 GiB of which 6.12 GiB is free. Including non-PyTorch memory, this process has 8.44 GiB memory in use. Of the alloc"
+  ],
   "output_files": [
     ".txt",
     ".log",
