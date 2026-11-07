@@ -85,9 +85,9 @@ def cut_clip(asset, raw, scene):
     n = int(round(scene['duration'] * SPEC['fps']))
     cmd = ['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', raw,
            '-ss', f"{scene['source_start']:.3f}", '-t', f"{scene['duration']:.3f}",
-           '-map', '0:v:0', '-map', '0:a:0?', '-vf', f"fps={SPEC['fps']}",
+           '-map', '0:v:0', '-an', '-vf', f"fps={SPEC['fps']}",
            '-frames:v', str(n), '-c:v', 'libx264', '-crf', '18', '-preset', 'fast',
-           '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', out]
+           '-movflags', '+faststart', out]
     run(cmd, check=True)
     q = run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=nb_frames,width,height,r_frame_rate', '-of', 'json', out], capture_output=True, check=True)
     info = json.loads(q.stdout)['streams'][0]

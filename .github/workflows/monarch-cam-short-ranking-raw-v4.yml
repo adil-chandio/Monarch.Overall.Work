@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/monarch-cam-short-ranking-raw-v4.yml'
       - 'production/monarch-cam/short_ranking_raw_v4/source_recon_ranking.py'
+      - 'production/monarch-cam/short_ranking_raw_v4/source_audio_audit.py'
       - 'production/monarch-cam/short_ranking_raw_v4/render_ranking_visual_raw_v4.py'
       - 'production/monarch-cam/short_ranking_raw_v4/build_ranking_audio_raw_v4.py'
       - 'production/monarch-cam/short_ranking_raw_v4/technical_qc_raw_v4.py'
@@ -72,6 +73,7 @@ jobs:
         run: |
           python -m py_compile \
             production/monarch-cam/short_ranking_raw_v4/source_recon_ranking.py \
+            production/monarch-cam/short_ranking_raw_v4/source_audio_audit.py \
             production/monarch-cam/short_ranking_raw_v4/render_ranking_visual_raw_v4.py \
             production/monarch-cam/short_ranking_raw_v4/build_ranking_audio_raw_v4.py \
             production/monarch-cam/short_ranking_raw_v4/technical_qc_raw_v4.py \
@@ -87,6 +89,14 @@ jobs:
           set -o pipefail
           python production/monarch-cam/short_ranking_raw_v4/source_recon_ranking.py \
             2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/source_recon.log
+
+      - name: Audit native source audio across candidate windows
+        id: audio_audit
+        timeout-minutes: 10
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v4/source_audio_audit.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v4/review/source_audio_audit.log
 
       - name: Save V4 source media cache
         if: always() && steps.v4-source-cache.outputs.cache-hit != 'true' && steps.recon.outcome == 'success'

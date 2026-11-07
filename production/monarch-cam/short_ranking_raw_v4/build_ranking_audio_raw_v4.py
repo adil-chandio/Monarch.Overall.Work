@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Assemble only the native source audio from each selected V4 window, then mux.
 from __future__ import annotations
-import hashlib, json, subprocess
+import hashlib, json, os, subprocess
 from pathlib import Path
 import numpy as np
 import soundfile as sf
@@ -12,6 +12,9 @@ BASE = ROOT / 'production/monarch-cam/short_ranking_raw_v4'
 WORK = ROOT / 'production/monarch-cam/work/short_ranking_raw_v4'
 REVIEW = BASE / 'review'
 CLIPS = WORK / 'clips'
+MEDIA = WORK / 'media'
+MANIFEST = json.loads((BASE / 'source_manifest_ranking.json').read_text())
+ASSETS = {a['id']: a for a in MANIFEST['assets']}
 SILENT_VIDEO = WORK / 'ranking_silent_raw_v4.mp4'
 OUT = ROOT / 'deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4'
 SPEC = json.loads((BASE / 'ranking_short_spec.json').read_text())
@@ -32,16 +35,21 @@ def save_json(path, data):
 
 
 def decode_window(scene):
-    src = CLIPS / ('clip_' + scene['source_id'] + '.mp4')
+    raw = MEDIA / ASSETS[scene['source_id']]['local_filename']
+    if not raw.exists():
+        raw = Path(os.environ.get('V4_SOURCE_MEDIA', str(ROOT / 'production/monarch-cam/work/short_ranking_v3/media'))) / ASSETS[scene['source_id']]['local_filename']
     wav = WORK / ('native_' + scene['source_id'] + '.wav')
-    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', src,
-         '-vn', '-ac', '2', '-ar', str(SR), '-c:a', 'pcm_f32le', wav], check=True)
+    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', raw,
+         '-ss', f"{scene['source_start']:.3f}", '-t', f"{scene['duration']:.3f}",
+         '-map', '0:a:0', '-vn', '-ac', '2', '-ar', str(SR), '-c:a', 'pcm_f32le', wav], check=True)
     x, sr = sf.read(wav, dtype='float32', always_2d=True)
     if sr != SR:
         raise RuntimeError('Unexpected sample rate')
     if x.shape[1] == 1:
         x = np.repeat(x, 2, axis=1)
-    return x[:, :2]
+    x = x[:, :2]
+    x = x - np.mean(x, axis=0, keepdims=True)
+    return x
 
 
 def main():
@@ -96,7 +104,7 @@ def main():
     sf.write(premaster, mix, SR, subtype='FLOAT')
     mastered = WORK / 'native_timeline_mastered.wav'
     run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', premaster,
-         '-af', f"loudnorm=I={A['target_integrated_lufs']}:TP={A['true_peak_target_dbtp']}:LRA=7:linear=true:print_format=summary",
+         '-af', f"highpass=f=20,loudnorm=I={A['target_integrated_lufs']}:TP={A['true_peak_target_dbtp']}:LRA=7:linear=true:print_format=summary",
          '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', mastered], check=True)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', SILENT_VIDEO, '-i', mastered,
