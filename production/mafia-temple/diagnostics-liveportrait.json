@@ -29,6 +29,16 @@
     ",{\"stream_name\":\"stderr\",\"time\":217.571332284,\"data\":\"--\\u003e 578             raise CalledProcessError(retcode, process.args,\\n\"}",
     ",{\"stream_name\":\"stderr\",\"time\":217.571388204,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'ml_dtypes\\u003e=0.5.1'"
   ],
+  "pip_errors": [
+    ",{\"stream_name\":\"stderr\",\"time\":216.618006731,\"data\":\"ERROR: Cannot install ml-dtypes==0.5.1, ml-dtypes==0.5.3, ml-dtypes==0.5.4, ml-dtypes==0.6.0, numpy\\u003c2, onnx==1.16.1, onnxruntime==1.20.1 and pykalman==0.9.7 because these package ve",
+    ",{\"stream_name\":\"stderr\",\"time\":216.618268785,\"data\":\"ERROR: ResolutionImpossible: for help visit https:<path>",
+    ",{\"stream_name\":\"stderr\",\"time\":216.826512997,\"data\":\"ERROR: Cannot install ml-dtypes==0.5.1, ml-dtypes==0.5.3, ml-dtypes==0.5.4, ml-dtypes==0.6.0, numpy\\u003c2, onnx==1.16.1, onnxruntime==1.20.1 and pykalman==0.9.7 because these package ve",
+    ",{\"stream_name\":\"stderr\",\"time\":216.826590068,\"data\":\"ERROR: ResolutionImpossible: for help visit https:<path>",
+    ",{\"stream_name\":\"stderr\",\"time\":216.826606789,\"data\":\"ERROR: Cannot install ml-dtypes==0.5.1, ml-dtypes==0.5.3, ml-dtypes==0.5.4, ml-dtypes==0.6.0, numpy\\u003c2, onnx==1.16.1, onnxruntime==1.20.1 and pykalman==0.9.7 because these package ve",
+    ",{\"stream_name\":\"stderr\",\"time\":216.826612368,\"data\":\"ERROR: ResolutionImpossible: for help visit https:<path>",
+    ",{\"stream_name\":\"stderr\",\"time\":217.571205008,\"data\":\"papermill.exceptions.PapermillExecutionError: \\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":217.571388204,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'ml_dtypes\\u003e=0.5.1', 'tyro==0.8.5', 'pykalman==0.9.7', 'ric"
+  ],
   "runtime_error_messages": [],
   "frame_sources": [
     [
