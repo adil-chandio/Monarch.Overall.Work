@@ -73,6 +73,8 @@ class MotionEngine:
         has_emb = bool(emb_file and emb_file.exists())
         self.ensure_loaded(has_emb)
 
+        self.width = int(scene.get("width", self.job.get("width", 768)))
+        self.height = int(scene.get("height", self.job.get("height", 448)))
         self.frames = int(scene.get("frames", self.job.get("frames", 49)))
         if self.frames < 9 or (self.frames - 1) % 8:
             raise ValueError("LTX frame count must be 8n+1")
