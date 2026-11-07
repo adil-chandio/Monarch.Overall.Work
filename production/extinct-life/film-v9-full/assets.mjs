@@ -15,6 +15,8 @@ export function animal(kind){
     if(dims){for(const side of [-1,1])for(let j=0;j<2;j++){const phase=(side>0?.5:0)+(j?.25:0),f=footState(t,phase),w=(1-smooth((Math.abs(x-side*dims.x)-dims.r*.95)/(dims.r*.5)))*(1-smooth((Math.abs(z-dims.z[j])-dims.r*1.4)/(dims.r*.4)))*clamp((dims.hip-y)/(dims.hip*.75));zz-=f.z*w*walk*(kind==='mastodon'?1:.5);yy+=f.lift*w*walk*(kind==='mastodon'?1:.5);}
      yy+=.012*Math.sin(t*1.7)*clamp((y-dims.hip*.7)/dims.hip);}
     if(kind==='mastodon'){
+     if(/ear/i.test(name)){const side=x<0?-1:1,angle=side*.045*Math.sin(t*.9),dx=xx-side*.56,dz=zz-1.59;xx=side*.56+dx*Math.cos(angle)+dz*Math.sin(angle);zz=1.59+dz*Math.cos(angle)-dx*Math.sin(angle);}
+     if(/tail/i.test(name))xx+=.045*Math.sin(t*.8)*clamp((-z-1.8)/.3);
      if(trunk){const w=clamp((z-2.32)/.3)*clamp((2.65-y)/1.6);xx+=.12*Math.sin(t*.65)*w;zz+=.06*Math.sin(t*.8)*w;yy+=browse*.24*w;}
      const h=clamp((z-1.3)/.8)*clamp((y-1.5)/.65),angle=(.035*Math.sin(t*.45)+.06*browse)*h,dx=xx,dz=zz-1.4;xx=dx*Math.cos(angle)+dz*Math.sin(angle);zz=1.4+dz*Math.cos(angle)-dx*Math.sin(angle);
     }
@@ -25,6 +27,7 @@ export function animal(kind){
   }
   if(kind==='hare'){root.position.y=.12*Math.max(0,Math.sin(t*2.5))*walk;}
   root.userData.pose={clock:t,walk,browse,flight};
+  if(dims)root.userData.feet=[-1,1].flatMap(side=>[0,1].map(j=>{const f=footState(t,(side>0?.5:0)+(j?.25:0));return {side,pair:j,stance:f.stance||walk===0,x:root.position.x-side*dims.x,y:root.position.y+f.lift*walk,z:root.position.z-dims.z[j]+f.z*walk};}));
  };
  return root;
 }

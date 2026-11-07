@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'film-v6-motion'))
 from sound import material,texture,control_envelope,smooth,audit,SR
-REVISION='full-master-soft-material-1'
+REVISION='v9-action-locked-soft-material-2'
 
 def design(voice,schedule,cues):
     n=len(voice);t=np.arange(n,dtype=np.float32)/SR;duration=n/SR;rng=np.random.default_rng(71325)
@@ -20,14 +20,28 @@ def design(voice,schedule,cues):
         weight={'river':1.,'encounter':.65,'community':.5,'coast':.35,'closing':.35}.get(k,0)
         if weight:water+=weight*smooth((t-start+.6)/1.2)*smooth((end+.6-t)/1.2)
         if k in ['opening','shedding','community','encounter']:
+            # Contact occurs at swing->stance in the same analytic gait as the picture.
+            # Stop/browse/resume uses the integral of the velocity ramp, not footsteps
+            # continuing underneath a stationary animal.
+            def clock_at(t):
+                if k not in ['community','encounter']:return t,1.
+                if t<5:return t,1.
+                if t<8:
+                    u=(t-5)/3;return 5+3*(u-u**6+3*u**5-2.5*u**4),1-float(smooth(u))
+                if t<13:return 6.5,0.
+                if t<16:
+                    u=(t-13)/3;return 6.5+3*(u**6-3*u**5+2.5*u**4),float(smooth(u))
+                return t-8,1.
             for phase in [0,.25,.5,.75]:
-                for cycle in range(1,int(length/3.7)+3):
-                    at=(cycle-phase)*3.7
-                    if at<length:event('foot',start+at,(.037 if k=='community' else .052)*rng.uniform(.82,1.04),rng.uniform(.32,.42),.1 if phase>.4 else -.1,sid)
+                old=(clock_at(0)[0]/3.7+phase)%1
+                for at in np.arange(.01,length,.01):
+                    c,w=clock_at(float(at));qphase=(c/3.7+phase)%1
+                    if qphase<old and w>.05:event('foot',start+at,(.037 if k=='community' else .047)*rng.uniform(.82,1.04)*w,rng.uniform(.32,.42),.1 if phase>.4 else -.1,sid)
+                    old=qphase
         if k=='river':event('water',start+cues['river_leaf_land'],.035,.64,-.08,sid)
         if k=='section' and q['design']=='accumulation-and-deposit-age':
             for batch in cues['deposition_cohort_starts']:event('grain',start+batch+.9,.028,.64,.06,sid)
-        if k=='encounter':
+        if k in ['encounter','community']:
             for dt,peak in [(0,.05),(.23,.032),(.45,.02)]:event('water',start+cues['goose_takeoff']+dt,peak,.62,-.1,sid)
             for i in range(2):
                 event('leaf',start+cues['branch_leaf_release']+i*.12,.02,1.35,-.1,sid);event('leaf',start+cues['branch_leaf_land']+i*.12,.006,.32,-.1,sid)
