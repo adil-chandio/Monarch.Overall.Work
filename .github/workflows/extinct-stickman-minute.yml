@@ -1,0 +1,121 @@
+name: Stickman 3D — approved one-minute English experiment
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-stickman-minute.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - name: Build original-timing approved narration, attributed score and restrained action-specific foley
+        run: .venv/bin/python production/extinct-life/film-v10-stickman/finish.py
+      - name: Verify native frames, articulated limb lengths, deterministic seeking and motion with a locked camera
+        run: node production/extinct-life/film-v10-stickman/render.mjs --stills --frames=0,100,125,285,560,810,1020,1200,1400,1750,1829
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stickman-audio-and-preflight
+          path: |
+            .cache/extinct-v10/proof.wav
+            .cache/extinct-v10/stills
+            .cache/extinct-v10/seek-QC.json
+            production/extinct-life/film-v10-stickman/AUDIO-QC.json
+          include-hidden-files: true
+          retention-days: 3
+  pictures:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0, 1, 2, 3, 4, 5]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1
+      - name: Render every native frame of the approved experiment
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          FROM=$((PART * 305))
+          TO=$(((PART + 1) * 305))
+          node production/extinct-life/film-v10-stickman/render.mjs --from=$FROM --to=$TO
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stickman-native-${{ matrix.part }}
+          path: |
+            .cache/extinct-v10/part-*.mp4
+            .cache/extinct-v10/render-*.json
+          include-hidden-files: true
+          retention-days: 3
+  assemble:
+    needs: [preflight, pictures]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: stickman-native-*
+          path: .cache/extinct-v10
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: stickman-audio-and-preflight
+          path: .cache/stickman-preflight
+      - name: Restore preflight data, assemble and decode the actual delivery
+        run: |
+          cp .cache/stickman-preflight/.cache/extinct-v10/proof.wav .cache/extinct-v10/
+          cp .cache/stickman-preflight/production/extinct-life/film-v10-stickman/AUDIO-QC.json production/extinct-life/film-v10-stickman/
+          cp -r .cache/stickman-preflight/.cache/extinct-v10/stills production/extinct-life/film-v10-stickman/inspection
+          cp .cache/stickman-preflight/.cache/extinct-v10/seek-QC.json production/extinct-life/film-v10-stickman/
+          .venv/bin/python production/extinct-life/film-v10-stickman/finish.py --assemble
+      - name: Publish the actual rendered video, not stills or reference footage
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-stickman-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'Extinct Life — Stickman 3D English experiment (1:01)' --notes "Owner-approved new one-minute experiment; V9 retained unchanged. Original articulated 3D investigator, sediment/DNA/leaf handling and conceptual elephant-like reconstruction. 61 seconds to finish the existing narration sentence rather than cut the last word; approved voice-02 and source chapter timing/speed preserved. 1920x1080, 30fps, 1830 freshly rendered frames; not generated images or a slideshow. Simplified conceptual science illustration, not a recovered portrait, exact specimen/biochemical geometry, photoreal field footage or physically validated simulation. No reference characters/choreography/footage/music copied. Music: 'Hiraeth' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Excerpt, fades, gentle ducking; no endorsement implied. Soft synthesized foley, not field recordings or an ASMR certification. Technical/sample inspection is not a claim of uninterrupted human audiovisual review or reference-quality parity. No YouTube upload." .cache/extinct-v10/Extinct_Life_Stickman_3D_Experiment_English_1080p.mp4 production/extinct-life/film-v10-stickman/English.srt production/extinct-life/film-v10-stickman/CREDITS.md production/extinct-life/film-v10-stickman/QC.json production/extinct-life/film-v10-stickman/AUDIO-QC.json
+      - name: Preserve delivery metadata without committing the large movie
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v10-stickman');q=json.load(open(b/'QC.json'));tag='extinct-life-stickman-'+os.environ['GITHUB_RUN_ID'];url='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          (b/'DELIVERY.json').write_text(json.dumps({'status':'Rendered one-minute experiment; owner creative review pending','video':url+'download/'+tag+'/Extinct_Life_Stickman_3D_Experiment_English_1080p.mp4','release':url+'tag/'+tag,'seconds':61,'frames':1830,'sha256':q['sha256'],'v9_unchanged':True},indent=2)+'\n')
+          PY
+          git config user.name 'Monarch stickman animation production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v10-stickman
+          git commit -m 'Deliver approved 61-second rendered stickman English experiment and technical QC [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
