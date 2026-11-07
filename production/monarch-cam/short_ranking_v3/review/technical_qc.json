@@ -1,7 +1,7 @@
 {
   "file": "deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4",
-  "sha256": "2d30acb7d786434342a9c3a66bbe7030e4829aee6573ae633e40411b68910f66",
-  "bytes": 31936005,
+  "sha256": "587ca7f43e59aa0c72252c96e0876642566228bf0aca0d5dbb2359448311b019",
+  "bytes": 31930639,
   "probe": {
     "programs": [],
     "stream_groups": [],
@@ -29,26 +29,26 @@
     ],
     "format": {
       "duration": "35.000000",
-      "size": "31936005"
+      "size": "31930639"
     }
   },
   "decoded_audio_samples": 1680000,
   "decoded_sample_rate": 48000,
   "loudness": {
-    "input_i": "-14.50",
-    "input_tp": "-3.30",
-    "input_lra": "1.50",
-    "input_thresh": "-25.08",
-    "output_i": "-13.97",
-    "output_tp": "-2.48",
-    "output_lra": "1.50",
-    "output_thresh": "-24.46",
+    "input_i": "-14.46",
+    "input_tp": "-3.00",
+    "input_lra": "1.70",
+    "input_thresh": "-24.96",
+    "output_i": "-14.17",
+    "output_tp": "-2.57",
+    "output_lra": "1.90",
+    "output_thresh": "-24.71",
     "normalization_type": "dynamic",
-    "target_offset": "-0.03"
+    "target_offset": "0.17"
   },
   "click_runs": [],
   "clipping_runs": 0,
-  "decoded_sample_peak_dbfs": -3.2996,
+  "decoded_sample_peak_dbfs": -3.0039,
   "checks": {
     "duration_24s": true,
     "frames_720": true,

@@ -2,91 +2,91 @@
   "target_integrated_lufs": -14.2,
   "target_true_peak_dbtp": -2.2,
   "first_pass_loudnorm": {
-    "input_i": "-17.77",
-    "input_tp": "-2.69",
-    "input_lra": "2.20",
-    "input_thresh": "-29.20",
-    "output_i": "-16.22",
+    "input_i": "-17.93",
+    "input_tp": "-2.62",
+    "input_lra": "2.30",
+    "input_thresh": "-29.17",
+    "output_i": "-16.42",
     "output_tp": "-3.50",
-    "output_lra": "1.90",
-    "output_thresh": "-27.29",
+    "output_lra": "1.80",
+    "output_thresh": "-27.30",
     "normalization_type": "dynamic",
-    "target_offset": "2.42"
+    "target_offset": "2.62"
   },
   "calibration": [
     {
       "pass": 1,
       "before": {
-        "input_i": "-15.74",
-        "input_tp": "-3.32",
-        "input_lra": "1.60",
-        "input_thresh": "-26.59",
-        "output_i": "-13.93",
+        "input_i": "-15.87",
+        "input_tp": "-3.36",
+        "input_lra": "1.70",
+        "input_thresh": "-26.49",
+        "output_i": "-14.15",
         "output_tp": "-1.50",
-        "output_lra": "1.60",
-        "output_thresh": "-24.73",
+        "output_lra": "2.10",
+        "output_thresh": "-24.80",
         "normalization_type": "dynamic",
-        "target_offset": "-0.07"
+        "target_offset": "0.15"
       },
-      "requested_gain_db": 1.54
+      "requested_gain_db": 1.67
     },
     {
       "pass": 2,
       "before": {
-        "input_i": "-14.96",
-        "input_tp": "-3.21",
-        "input_lra": "1.50",
-        "input_thresh": "-25.68",
-        "output_i": "-13.98",
-        "output_tp": "-2.07",
-        "output_lra": "1.50",
-        "output_thresh": "-24.60",
+        "input_i": "-14.94",
+        "input_tp": "-3.20",
+        "input_lra": "1.70",
+        "input_thresh": "-25.50",
+        "output_i": "-14.16",
+        "output_tp": "-2.25",
+        "output_lra": "2.10",
+        "output_thresh": "-24.77",
         "normalization_type": "dynamic",
-        "target_offset": "-0.02"
+        "target_offset": "0.16"
       },
-      "requested_gain_db": 0.76
+      "requested_gain_db": 0.74
     },
     {
       "pass": 3,
       "before": {
-        "input_i": "-14.65",
-        "input_tp": "-3.14",
-        "input_lra": "1.50",
-        "input_thresh": "-25.29",
-        "output_i": "-14.00",
-        "output_tp": "-2.29",
-        "output_lra": "1.60",
-        "output_thresh": "-24.56",
+        "input_i": "-14.55",
+        "input_tp": "-3.25",
+        "input_lra": "1.70",
+        "input_thresh": "-25.11",
+        "output_i": "-14.17",
+        "output_tp": "-2.69",
+        "output_lra": "2.00",
+        "output_thresh": "-24.76",
         "normalization_type": "dynamic",
-        "target_offset": "-0.00"
+        "target_offset": "0.17"
       },
-      "requested_gain_db": 0.45
+      "requested_gain_db": 0.35
     }
   ],
   "peak_guard": [],
   "before_click_repair": {
-    "input_i": "-14.49",
-    "input_tp": "-3.30",
-    "input_lra": "1.50",
-    "input_thresh": "-25.07",
-    "output_i": "-13.98",
-    "output_tp": "-2.49",
-    "output_lra": "1.50",
-    "output_thresh": "-24.47",
+    "input_i": "-14.44",
+    "input_tp": "-3.00",
+    "input_lra": "1.70",
+    "input_thresh": "-24.95",
+    "output_i": "-14.18",
+    "output_tp": "-2.57",
+    "output_lra": "2.00",
+    "output_thresh": "-24.72",
     "normalization_type": "dynamic",
-    "target_offset": "-0.02"
+    "target_offset": "0.18"
   },
   "final_aac": {
-    "input_i": "-14.50",
-    "input_tp": "-3.30",
-    "input_lra": "1.50",
-    "input_thresh": "-25.08",
-    "output_i": "-13.97",
-    "output_tp": "-2.48",
-    "output_lra": "1.50",
-    "output_thresh": "-24.46",
+    "input_i": "-14.46",
+    "input_tp": "-3.00",
+    "input_lra": "1.70",
+    "input_thresh": "-24.96",
+    "output_i": "-14.17",
+    "output_tp": "-2.57",
+    "output_lra": "1.90",
+    "output_thresh": "-24.71",
     "normalization_type": "dynamic",
-    "target_offset": "-0.03"
+    "target_offset": "0.17"
   },
   "method": "Premium V3-style two-pass loudnorm, conservative 192 kHz limiting and measured AAC-domain calibration; no gate bypass."
 }
