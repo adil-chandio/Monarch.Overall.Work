@@ -12,7 +12,7 @@ for ((i=0;i<250;i++)); do
   case "$status" in
     *COMPLETE*|*complete*)
       mkdir -p "$dir/out" production/mafia-temple/clips
-      kaggle kernels output "$ref" -p "$dir/out"
+      kaggle kernels output "$ref" -p "$dir/out" --file-pattern "(^|/)(wan-face-pilot\.mp4|receipts_wan-face-pilot\.json)$"
       find "$dir/out" -name 'wan-face-pilot.mp4' -type f -size +20k -exec cp '{}' production/mafia-temple/clips/ \;
       find "$dir/out" -name 'receipts_wan-face-pilot.json' -type f -exec cp '{}' production/mafia-temple/clips/ \;
       [ -s production/mafia-temple/clips/wan-face-pilot.mp4 ]

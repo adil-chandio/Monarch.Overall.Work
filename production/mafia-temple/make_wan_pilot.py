@@ -13,20 +13,24 @@ Image.open(root/'production/mafia-temple/keyframes/v2-close-start.png').convert(
 img=base64.b64encode(buf.getvalue()).decode()
 code='''import base64, os, pathlib, subprocess, sys, time, json
 os.environ["TOKENIZERS_PARALLELISM"]="false"
+os.environ["HF_HOME"]="/tmp/monarch-hf-cache"
 os.environ["PYTORCH_CUDA_ALLOC_CONF"]="expandable_segments:True"
 image_file=pathlib.Path("/kaggle/working/start.png")
 image_file.write_bytes(base64.b64decode(IMAGE_PAYLOAD))
-r=subprocess.run([sys.executable,"-m","pip","install","-q","diffusers>=0.35.2","transformers>=4.49,<5","accelerate","sentencepiece","ftfy","imageio-ffmpeg","safetensors"],capture_output=True,text=True)
+r=subprocess.run([sys.executable,"-m","pip","install","-q","diffusers>=0.35.2","transformers>=4.49,<5","accelerate","sentencepiece","ftfy","imageio-ffmpeg","safetensors","bitsandbytes>=0.45.0"],capture_output=True,text=True)
 if r.returncode: raise RuntimeError("pip install failed: "+r.stderr[-500:])
 import torch
 from PIL import Image,ImageOps
-from diffusers import AutoencoderKLWan, WanImageToVideoPipeline
+from diffusers import AutoencoderKLWan, WanImageToVideoPipeline, BitsAndBytesConfig as DiffusersBitsAndBytesConfig
+from diffusers.quantizers import PipelineQuantizationConfig
+from transformers import BitsAndBytesConfig as TransformersBitsAndBytesConfig
 from diffusers.utils import export_to_video
 if not torch.cuda.is_available(): raise RuntimeError("NO_GPU_ALLOCATED")
 print("GPU",torch.cuda.get_device_name(0),flush=True)
 model_id="Wan-AI/Wan2.2-TI2V-5B-Diffusers"
 vae=AutoencoderKLWan.from_pretrained(model_id,subfolder="vae",torch_dtype=torch.float32)
-pipe=WanImageToVideoPipeline.from_pretrained(model_id,vae=vae,torch_dtype=torch.float16,expand_timesteps=True)
+quant=PipelineQuantizationConfig(quant_mapping={"transformer": DiffusersBitsAndBytesConfig(load_in_8bit=True), "text_encoder": TransformersBitsAndBytesConfig(load_in_8bit=True)})
+pipe=WanImageToVideoPipeline.from_pretrained(model_id,vae=vae,torch_dtype=torch.float16,expand_timesteps=True,quantization_config=quant)
 pipe.enable_model_cpu_offload()
 pipe.vae.enable_tiling()
 pipe.set_progress_bar_config(disable=True)
