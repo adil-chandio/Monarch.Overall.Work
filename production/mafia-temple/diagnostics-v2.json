@@ -1,11 +1,11 @@
 {
   "log_received": true,
   "exception_classes": [
-    "OutOfMemoryError",
-    "PapermillExecutionError"
+    "PapermillExecutionError",
+    "RuntimeError"
   ],
   "flags": {
-    "out_of_memory": true,
+    "out_of_memory": false,
     "disk_full": false,
     "missing_module": false,
     "dtype": true,
@@ -18,11 +18,15 @@
   },
   "last_diagnostic_lines": [
     "PapermillExecutionError",
-    "OutOfMemoryError",
-    "CUDA out of memory",
-    "Tried to allocate 44.00 MiB"
+    "RuntimeError"
   ],
-  "log_chars": 21508,
+  "log_chars": 31542,
+  "completed_stages": [
+    "STAGE 1 text embeddings only",
+    "STAGE 2 transformer and VAE",
+    "STAGE 3 video generation"
+  ],
+  "nonfinite_embeddings": false,
   "frame_sources": [
     [
       "validator.py",
@@ -43,7 +47,7 @@
   ],
   "known_stages": {
     "vae_decode": false,
-    "vae_encode": true,
+    "vae_encode": false,
     "attention": true,
     "text_encoder": false,
     "pipeline_loading": false,
