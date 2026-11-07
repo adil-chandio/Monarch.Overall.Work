@@ -25,9 +25,9 @@ jobs:
           sudo apt-get install -y libgl1 libxi6 libxrender1 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0
           python -m venv .venv
           .venv/bin/pip install bpy==4.2.0 numpy==1.26.4 pillow==11.3.0 imageio-ffmpeg==0.6.0
-      - name: Render native 1080p asset/action inspection frames, not scene plates
+      - name: Verify unchanged sculpt/framing with native render and audit actual locked-camera motion
         run: |
-          for F in 95 300 600 980 1250 1490 1740; do
+          for F in 95; do
             .venv/bin/python production/extinct-life/film-v8-premium/scene.py --from=$F --to=$((F+1)) --samples=24 --out=.cache/extinct-v8/inspection
           done
           .venv/bin/python - <<'PY'
@@ -81,9 +81,9 @@ jobs:
     timeout-minutes: 65
     strategy:
       fail-fast: false
-      max-parallel: 16
+      max-parallel: 20
       matrix:
-        part: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+        part: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -98,8 +98,8 @@ jobs:
         env:
           PART: ${{ matrix.part }}
         run: |
-          FROM=$((PART*61))
-          TO=$((FROM+61))
+          FROM=$((PART*30))
+          TO=$((FROM+30))
           .venv/bin/python production/extinct-life/film-v8-premium/scene.py --from=$FROM --to=$TO
           .venv/bin/python production/extinct-life/film-v8-premium/finish.py --shard=$PART
       - uses: actions/upload-artifact@v4

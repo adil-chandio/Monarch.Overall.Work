@@ -59,10 +59,10 @@ def typography(p,frame):
  im=Image.alpha_composite(im,layer).convert('RGB');im.save(p)
 
 def shard(part):
- start=part*61;end=start+61
+ start=part*30;end=start+30
  for n in range(start,end):
   p=C/'frames'/f'{n:05}.png';assert p.exists(),p;typography(p,n)
- run(['-v','warning','-framerate',30,'-start_number',start,'-i',C/'frames/%05d.png','-frames:v',61,'-an','-vf','scale=in_range=pc:out_range=tv:out_color_matrix=bt709','-c:v','libx264','-preset','medium','-crf',16,'-pix_fmt','yuv420p','-colorspace','bt709','-color_primaries','bt709','-color_trc','bt709',C/f'part-{part:02}.mp4'])
+ run(['-v','warning','-framerate',30,'-start_number',start,'-i',C/'frames/%05d.png','-frames:v',30,'-an','-vf','scale=in_range=pc:out_range=tv:out_color_matrix=bt709','-c:v','libx264','-preset','medium','-crf',16,'-pix_fmt','yuv420p','-colorspace','bt709','-color_primaries','bt709','-color_trc','bt709',C/f'part-{part:02}.mp4'])
 
 def levels(p):
  z=run(['-i',p,'-vn','-af','loudnorm=I=-16:TP=-2.5:LRA=9:print_format=json','-f','null','-']).stderr.decode();return json.loads(z[z.rfind('{'):z.rfind('}')+1])
@@ -94,7 +94,7 @@ def stamp(t):
  ms=round(t*1000);return f'{ms//3600000:02}:{ms//60000%60:02}:{ms//1000%60:02},{ms%1000:03}'
 
 def assemble():
- parts=[C/f'part-{n:02}.mp4' for n in range(30)];assert all(p.exists() for p in parts);(C/'concat.txt').write_text(''.join(f"file '{p.name}'\n" for p in parts));run(['-v','warning','-f','concat','-safe',0,'-i',C/'concat.txt','-c','copy',C/'picture.mp4']);aq=json.loads((C/'audio-QC.json').read_text()) if (C/'audio-QC.json').exists() else audio();assert sha(C/'mix.wav')==aq['mix_sha256'];out=C/'Extinct_Life_V8_Premium_Opening_English_1080p.mp4'
+ parts=[C/f'part-{n:02}.mp4' for n in range(61)];assert all(p.exists() for p in parts);(C/'concat.txt').write_text(''.join(f"file '{p.name}'\n" for p in parts));run(['-v','warning','-f','concat','-safe',0,'-i',C/'concat.txt','-c','copy',C/'picture.mp4']);aq=json.loads((C/'audio-QC.json').read_text()) if (C/'audio-QC.json').exists() else audio();assert sha(C/'mix.wav')==aq['mix_sha256'];out=C/'Extinct_Life_V8_Premium_Opening_English_1080p.mp4'
  run(['-v','warning','-i',C/'picture.mp4','-i',C/'mix.wav','-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','256k','-ar',SR,'-t',61,'-movflags','+faststart','-metadata',"comment=Illustrative reconstruction and conceptual science models. Hiraeth by Scott Buckley, CC-BY 4.0, www.scottbuckley.com.au",out])
  measured=levels(out);assert float(measured['input_tp'])<-2,measured
  check=run(['-v','info','-i',out,'-map','0:v:0','-vf','showinfo','-an','-f','null','-']).stderr.decode();ns=re.findall(r'Parsed_showinfo_\d+.*?n:\s*(\d+).*?s:(\d+x\d+)',check);assert len(ns)==1830,(len(ns),check[-1000:]);assert all(size=='1920x1080' for _,size in ns)
