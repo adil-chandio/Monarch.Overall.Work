@@ -4,7 +4,7 @@ ref="$KAGGLE_USERNAME/monarch-wan-pilot-42378703629"
 dir=/tmp/mafia-v2-diagnostics
 mkdir -p "$dir"
 kaggle kernels status "$ref" > "$dir/status.txt" 2>&1 || true
-kaggle kernels output "$ref" -p "$dir" > "$dir/output-command.txt" 2>&1 || true
+kaggle kernels output "$ref" -p "$dir" --file-pattern "^NO_OUTPUT_FILE_MATCHES_THIS$" > "$dir/output-command.txt" 2>&1 || true
 python - <<'PY'
 import pathlib,json,re
 p=pathlib.Path('/tmp/mafia-v2-diagnostics')
