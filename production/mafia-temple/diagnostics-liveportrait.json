@@ -8,7 +8,7 @@
     "out_of_memory": false,
     "disk_full": false,
     "missing_module": false,
-    "dtype": true,
+    "dtype": false,
     "network": false,
     "invalid_model": false,
     "gpu": false,
@@ -20,24 +20,27 @@
     "PapermillExecutionError",
     "CalledProcessError"
   ],
-  "log_chars": 9234,
+  "log_chars": 11066,
   "completed_stages": [],
   "nonfinite_embeddings": false,
   "safe_failure_messages": [
-    ",{\"stream_name\":\"stderr\",\"time\":217.571224844,\"data\":\"Exception encountered at \\\"In [1]\\\":\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":217.571235877,\"data\":\"CalledProcessError                        Traceback (most recent call last)\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":217.571332284,\"data\":\"--\\u003e 578             raise CalledProcessError(retcode, process.args,\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":217.571388204,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'ml_dtypes\\u003e=0.5.1'"
+    ",{\"stream_name\":\"stderr\",\"time\":235.765494963,\"data\":\"Exception encountered at \\\"In [1]\\\":\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765509047,\"data\":\"CalledProcessError                        Traceback (most recent call last)\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765602192,\"data\":\"--\\u003e 578             raise CalledProcessError(retcode, process.args,\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765616186,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'tyro==0.8.5', 'pykalma"
   ],
   "pip_errors": [
-    ",{\"stream_name\":\"stderr\",\"time\":216.618006731,\"data\":\"ERROR: Cannot install ml-dtypes==0.5.1, ml-dtypes==0.5.3, ml-dtypes==0.5.4, ml-dtypes==0.6.0, numpy\\u003c2, onnx==1.16.1, onnxruntime==1.20.1 and pykalman==0.9.7 because these package ve",
-    ",{\"stream_name\":\"stderr\",\"time\":216.618268785,\"data\":\"ERROR: ResolutionImpossible: for help visit https:<path>",
-    ",{\"stream_name\":\"stderr\",\"time\":216.826512997,\"data\":\"ERROR: Cannot install ml-dtypes==0.5.1, ml-dtypes==0.5.3, ml-dtypes==0.5.4, ml-dtypes==0.6.0, numpy\\u003c2, onnx==1.16.1, onnxruntime==1.20.1 and pykalman==0.9.7 because these package ve",
-    ",{\"stream_name\":\"stderr\",\"time\":216.826590068,\"data\":\"ERROR: ResolutionImpossible: for help visit https:<path>",
-    ",{\"stream_name\":\"stderr\",\"time\":216.826606789,\"data\":\"ERROR: Cannot install ml-dtypes==0.5.1, ml-dtypes==0.5.3, ml-dtypes==0.5.4, ml-dtypes==0.6.0, numpy\\u003c2, onnx==1.16.1, onnxruntime==1.20.1 and pykalman==0.9.7 because these package ve",
-    ",{\"stream_name\":\"stderr\",\"time\":216.826612368,\"data\":\"ERROR: ResolutionImpossible: for help visit https:<path>",
-    ",{\"stream_name\":\"stderr\",\"time\":217.571205008,\"data\":\"papermill.exceptions.PapermillExecutionError: \\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":217.571388204,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'ml_dtypes\\u003e=0.5.1', 'tyro==0.8.5', 'pykalman==0.9.7', 'ric"
+    ",{\"stream_name\":\"stderr\",\"time\":234.33463594,\"data\":\"  error: subprocess-exited-with-error\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.33515042,\"data\":\"  ERROR: Failed building wheel for onnx\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.436610076,\"data\":\"error: failed-wheel-build-for-install\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541386865,\"data\":\"  error: subprocess-exited-with-error\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541450199,\"data\":\"  ERROR: Failed building wheel for onnx\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541466151,\"data\":\"error: failed-wheel-build-for-install\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.54148356,\"data\":\"  error: subprocess-exited-with-error\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541507865,\"data\":\"  ERROR: Failed building wheel for onnx\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.54151088,\"data\":\"error: failed-wheel-build-for-install\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765487317,\"data\":\"papermill.exceptions.PapermillExecutionError: \\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765616186,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'tyro==0.8.5', 'pykalman==0.9.7', 'rich', 'scikit-image', 'imag"
   ],
   "runtime_error_messages": [],
   "frame_sources": [
