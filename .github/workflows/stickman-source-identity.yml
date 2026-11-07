@@ -1,0 +1,40 @@
+name: Stickman research — verify acquired source identities and reach
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/stickman-source-identity.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  canonical-sources:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Resolve existing research API key without exposing it
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+          KEY_ALT_2: ${{ secrets.YTAPI1 }}
+          KEY_ALT_3: ${{ secrets.YT_KEY }}
+          KEY_ALT_4: ${{ secrets.YT_API_KEY }}
+        run: |
+          KEY="${KEY_PRIMARY:-${KEY_ALT:-${KEY_ALT_2:-${KEY_ALT_3:-$KEY_ALT_4}}}}"
+          if [ -n "$KEY" ]; then
+            echo "::add-mask::$KEY"
+            echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          fi
+      - run: python scripts/stickman-source-identity.py
+      - name: Preserve candidate identities separately from actual visual review
+        if: always()
+        run: |
+          git config user.name 'Monarch animation research'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/research/stickman-study/source-identity
+          git diff --cached --quiet || git commit -m 'Record API identity and reach candidates for actual acquired films [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
