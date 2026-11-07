@@ -13,10 +13,10 @@ try:
    try:
     x=json.loads(line.lstrip(',')); msg=x.get('data','')
    except Exception: msg=line
-   if re.search(r'(?i)(error:|error\b|exception|PILOT_DONE|Starting pose|Downloading selected|GPU |No module named|failed|out of memory|no space)',msg) and not re.search(r'(?i)token|secret|password|KGAT|authorization|SOURCE_JPEG|BVH_TEXT',msg):
+   if re.search(r'(?i)(error:|error\b|exception|PILOT_DONE|Starting pose|Downloading selected|GPU |No module named|failed|out of memory|no space|building wheel|subprocess-exited|Could not|rust|cargo|cmake|metadata|requires.python)',msg) and not re.search(r'(?i)token|secret|password|KGAT|authorization|SOURCE_JPEG|BVH_TEXT',msg):
     clean=re.sub(r'(?:/[^ :\s]+)+','<path>',msg).strip()
     events.append(clean[:350])
-  result['events']=events[-30:]
+  result['events']=events[-60:]
 except Exception as ex:
  result['diagnostic_error']=type(ex).__name__
 path=pathlib.Path('production/mafia-temple/run-pilot-output/run-pilot-diagnostics.json')
