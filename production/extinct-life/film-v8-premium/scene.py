@@ -2,12 +2,12 @@
 All coordinates, materials, cameras and animation are authored here. Reconstructions illustrative.
 Run using the pinned bpy wheel, no desktop Blender required.
 """
-import bpy, math, random, argparse, os, json, time
+import bpy, math, random, argparse, os, json, time, hashlib
 import numpy as np
 from pathlib import Path
 from mathutils import Vector
 from mathutils.noise import noise_vector
-P=argparse.ArgumentParser();P.add_argument('--from',dest='start',type=int,default=0);P.add_argument('--to',dest='end',type=int,default=1);P.add_argument('--width',type=int,default=1920);P.add_argument('--samples',type=int,default=24);P.add_argument('--out',default='.cache/extinct-v8/frames');P.add_argument('--step',type=int,default=1);a=P.parse_args()
+P=argparse.ArgumentParser();P.add_argument('--from',dest='start',type=int,default=0);P.add_argument('--to',dest='end',type=int,default=1);P.add_argument('--width',type=int,default=1920);P.add_argument('--samples',type=int,default=24);P.add_argument('--out',default='.cache/extinct-v8/frames');P.add_argument('--step',type=int,default=1);P.add_argument('--lock-camera',action='store_true');a=P.parse_args()
 R=Path.cwd();OUT=R/a.out;OUT.mkdir(parents=True,exist_ok=True)
 random.seed(81042)
 def sat(x):return max(0.,min(1.,x))
@@ -299,7 +299,7 @@ def lab_scene():
 
 # The master remains unchanged; this development film includes the first complete 61 s.
 SHOTS=[(0,183,'forest'),(183,403,'macro'),(403,772,'coast'),(772,1112,'strata'),(1112,1393,'archive'),(1393,1600,'lab'),(1600,1830,'forest-late')]
-last=None;records=[]
+last=None;records=[];locked=None
 for frame in range(a.start,a.end,a.step):
  row=next(r for r in SHOTS if r[0]<=frame<r[1]);start,end,kind=row
  if kind!=last:
@@ -310,11 +310,18 @@ for frame in range(a.start,a.end,a.step):
   elif kind=='lab':fn=lab_scene()
   elif kind=='archive':fn=archive_scene()
   else:fn=macro_scene()
-  last=kind;print('BUILT',kind,'objects',len(bpy.data.objects),flush=True)
+  last=kind;locked=None;print('BUILT',kind,'objects',len(bpy.data.objects),flush=True)
  t=(frame-start)/30
  if kind=='forest-late':fn(t,True)
  else:fn(t)
- bpy.context.view_layer.update();s=bpy.context.scene;s.render.filepath=str(OUT/f'{frame:05}.png');begin=time.time();bpy.ops.render.render(write_still=True);records.append({'frame':frame,'scene':kind,'render_seconds':round(time.time()-begin,2)});print('FRAME',frame,kind,records[-1]['render_seconds'],flush=True)
-(OUT.parent/f'render-{a.start}-{a.end}.json').write_text(json.dumps({'frames':records,'width':a.width,'fps':30,'engine':'Cycles CPU','samples':a.samples,'source_frames_reused':False,'scene_image_plates':False},indent=2))
+ s=bpy.context.scene
+ if a.lock_camera:
+  if locked is None:locked=s.camera.matrix_world.copy()
+  else:s.camera.matrix_world=locked.copy()
+ bpy.context.view_layer.update();s=bpy.context.scene;s.render.filepath=str(OUT/f'{frame:05}.png');begin=time.time();bpy.ops.render.render(write_still=True);animal=next((o for o in bpy.data.objects if o.name.startswith('Unified sculpt')),None);pose=None
+ if animal:
+  coords=np.empty(len(animal.data.vertices)*3,np.float32);animal.data.vertices.foreach_get('co',coords);pose=hashlib.sha256(coords.tobytes()).hexdigest()
+ records.append({'frame':frame,'scene':kind,'render_seconds':round(time.time()-begin,2),'camera_matrix':[list(r) for r in s.camera.matrix_world],'animal_surface_sha256':pose});print('FRAME',frame,kind,records[-1]['render_seconds'],flush=True)
+(OUT.parent/f'render-{a.start}-{a.end}.json').write_text(json.dumps({'frames':records,'width':a.width,'fps':30,'engine':'Cycles CPU','samples':a.samples,'source_frames_reused':False,'scene_image_plates':False,'locked_camera':a.lock_camera},indent=2))
 # bpy wheel shutdown has a known occasional finalizer crash; all files flush before exit.
 os._exit(0)
