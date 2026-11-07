@@ -27,7 +27,7 @@ jobs:
           .venv/bin/pip install bpy==4.2.0 numpy==1.26.4 pillow==11.3.0 imageio-ffmpeg==0.6.0
       - name: Render native 1080p asset/action inspection frames, not scene plates
         run: |
-          for F in 95 300 600 980 1250 1490 1740; do
+          for F in 95 105 300 600 980 1250 1490 1740; do
             .venv/bin/python production/extinct-life/film-v8-premium/scene.py --from=$F --to=$((F+1)) --samples=24 --out=.cache/extinct-v8/inspection
           done
           .venv/bin/python - <<'PY'
@@ -35,6 +35,8 @@ jobs:
           from PIL import Image
           out=Path('production/extinct-life/film-v8-premium/inspection');out.mkdir(exist_ok=True)
           for p in Path('.cache/extinct-v8/inspection').glob('*.png'):Image.open(p).save(out/(p.stem+'.jpg'),quality=92)
+          import shutil
+          for p in Path('.cache/extinct-v8').glob('render-*.json'):shutil.copy2(p,out/p.name)
           PY
       - name: Preserve original production inspection on the session branch
         run: |
