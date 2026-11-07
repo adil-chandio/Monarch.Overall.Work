@@ -10,10 +10,10 @@ for ((i=0;i<160;i++)); do
  case "$status" in
   *COMPLETE*|*complete*)
    mkdir -p "$dir/out" production/mafia-temple/portrait-turn-output
-   kaggle kernels output "$ref" -p "$dir/out" --file-pattern '(^|/)(side-turn-v2--turn-driver\.mp4|liveportrait-turn-v2-receipt\.json)$'
-   test -n "$(find "$dir/out" -name liveportrait-turn-v2-receipt.json -type f -print -quit)"
-   find "$dir/out" -name 'side-turn-v2--turn-driver.mp4' -type f -size +10k -exec cp '{}' production/mafia-temple/portrait-turn-output/ \;
-   find "$dir/out" -name 'liveportrait-turn-v2-receipt.json' -type f -exec cp '{}' production/mafia-temple/portrait-turn-output/ \;
+   kaggle kernels output "$ref" -p "$dir/out" --file-pattern '(^|/)(side-turn-v3--turn-driver\.mp4|liveportrait-turn-v3-receipt\.json)$'
+   test -n "$(find "$dir/out" -name liveportrait-turn-v3-receipt.json -type f -print -quit)"
+   find "$dir/out" -name 'side-turn-v3--turn-driver.mp4' -type f -size +10k -exec cp '{}' production/mafia-temple/portrait-turn-output/ \;
+   find "$dir/out" -name 'liveportrait-turn-v3-receipt.json' -type f -exec cp '{}' production/mafia-temple/portrait-turn-output/ \;
    exit 0;;
   *ERROR*|*error*|*CANCEL*|*cancel*|*FAIL*) echo "Research pilot failed: $ref"; exit 1;;
  esac

@@ -49,7 +49,12 @@ s = s.replace(needle, """            # Hold at start/end, ease through a modest 
             _yaw = torch.tensor([float(os.environ['MONARCH_TURN_DEG']) * _ease], device=device)
             _zero = torch.zeros_like(_yaw)
             R_new = get_rotation_matrix(_zero, _yaw, _zero) @ R_s
-            delta_new = x_s_info['exp'] + .55 * (delta_new - x_s_info['exp'])
+            delta_new = x_s_info['exp'] + .45 * (delta_new - x_s_info['exp'])
+            # The example driver's sideways glances were inappropriate at the
+            # end of the turn. Keep eye-region expression anchored to source;
+            # this can suppress blinks and still needs visual QA.
+            for _idx in [11, 13, 15, 16, 18]:
+                delta_new[:, _idx, :] = x_s_info['exp'][:, _idx, :]
             t_new[..., 2].fill_(0)  # zero tz
 """)
 # os is used by our explicit test parameter, not supplied by the pipeline.
@@ -90,7 +95,7 @@ for frame in range(96):
     writer.write(cv2.addWeighted(source_frames[lo],1-(pos-lo),source_frames[hi],pos-lo,0))
 writer.release()
 results = []
-source = 'side-turn-v2'
+source = 'side-turn-v3'
 (work / (source + '.jpg')).write_bytes((work / 'side.jpg').read_bytes())
 t = time.time()
 command = [sys.executable, 'inference.py', '-s', str(work / (source + '.jpg')),
@@ -105,6 +110,6 @@ try:
 except Exception as e:
     print('TEST FAILED', type(e).__name__, str(e)[:300], flush=True)
     results.append({'status':'failed','error':type(e).__name__})
-(outdir/'liveportrait-turn-v2-receipt.json').write_text(json.dumps(results, indent=2))
+(outdir/'liveportrait-turn-v3-receipt.json').write_text(json.dumps(results, indent=2))
 if not any(r['status']=='ok' for r in results):
     raise RuntimeError('Portrait rotation test failed')
