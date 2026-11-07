@@ -386,6 +386,8 @@ jobs:
             test -s production/mafia-temple/portrait-pilot-output/liveportrait-receipts.json
           elif grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/diagnose_liveportrait.sh
+          elif grep -q 'liveportrait-turn-pilot' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_liveportrait_turn.sh
           elif grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_liveportrait_pilot.sh
           elif grep -q 'wan-batch-v4' production/mafia-temple/trigger.txt; then
@@ -420,6 +422,8 @@ jobs:
           git config user.email "gpu@monarch.studio"
           if grep -q 'stableanim-diagnose' production/mafia-temple/trigger.txt || grep -q 'stableanim-pilot' production/mafia-temple/trigger.txt || grep -q 'stableanim-recover-v7' production/mafia-temple/trigger.txt; then
             git add -f production/mafia-temple/run-pilot-output/
+          elif grep -q 'liveportrait-turn-pilot' production/mafia-temple/trigger.txt; then
+            git add -f production/mafia-temple/portrait-turn-output/
           elif grep -q 'portrait-recover' production/mafia-temple/trigger.txt; then
             git add -f production/mafia-temple/portrait-pilot-output/*.mp4 production/mafia-temple/portrait-pilot-output/*.json
           elif grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
