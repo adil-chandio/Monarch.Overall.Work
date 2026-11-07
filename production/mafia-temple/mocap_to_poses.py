@@ -39,12 +39,18 @@ def joint_matrix(motion, name, frame, cache):
     cache[name] = parent_matrix @ matrix
     return cache[name]
 
-def make_poses(bvh_text, output_dir, face_offsets=None):
+def make_poses(bvh_text, output_dir, face_offsets=None, frame_count=24):
     motion = Bvh(bvh_text)
     if motion.nframes < 141 or abs(motion.frame_time - 1/120) > .0001:
         raise ValueError('Expected the 120 fps CMU 09_01 capture with at least 141 frames')
     output = Path(output_dir); output.mkdir(parents=True, exist_ok=True)
-    for index, frame in enumerate(range(20,140,5)):
+    # 20..107 approximates one full running gait (120 Hz). Repeat the
+    # actual recorded gait for a longer continuous tracking-camera test.
+    if frame_count < 1:
+        raise ValueError('frame_count must be positive')
+    samples = (range(20, 140, 5) if frame_count == 24 else
+               (20 + (index * 5) % 88 for index in range(frame_count)))
+    for index, frame in enumerate(samples):
         cache={}
         pos={name:joint_matrix(motion,name,frame,cache)[:3,3]*.06 for name in JOINTS}
         root=pos['Hips']
@@ -63,4 +69,4 @@ def make_poses(bvh_text, output_dir, face_offsets=None):
                 x,y=round(nx+dx),round(ny+dy)
                 if 0<=x<512 and 0<=y<512: draw.ellipse((x-1,y-1,x+1,y+1),fill=(255,255,255))
         canvas.save(output/f'frame_{index}.png')
-    return 24
+    return frame_count
