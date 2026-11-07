@@ -45,10 +45,11 @@ def discover():
 def probe(report):
  CACHE.mkdir(parents=True,exist_ok=True);rows=[];byid={v['id']:v for v in report['videos']}
  # Public, unrestricted playback only. No cookies, private credentials, DRM or access-wall bypass.
- chosen=report.get('screening_candidates',[])[:4]
+ short=OUT/'provisional-screening.json'
+ chosen=(json.loads(short.read_text())['candidate_ids'] if '--access-only' in sys.argv and short.exists() else report.get('screening_candidates',[]))[:8 if '--access-only' in sys.argv else 4]
  for vid in chosen:
   p=CACHE/vid;p.mkdir(exist_ok=True)
-  cmd=[sys.executable,'-m','yt_dlp','--no-playlist','--no-progress','--socket-timeout','15','--retries','1','--fragment-retries','1','--max-filesize','120M','--match-filters','duration <= 900','-f','best[height<=480][ext=mp4]/best[height<=480]','-o',str(p/'source.%(ext)s'),'https://www.youtube.com/watch?v='+vid]
+  cmd=[sys.executable,'-m','yt_dlp','--no-playlist','--no-progress',*(['--js-runtimes','node','--remote-components','ejs:github'] if '--access-only' in sys.argv else []),'--socket-timeout','15','--retries','1','--fragment-retries','1','--max-filesize','120M','--match-filters','duration <= 900','-f','best[height<=480][ext=mp4]/best[height<=480]','-o',str(p/'source.%(ext)s'),'https://www.youtube.com/watch?v='+vid]
   try:
    r=subprocess.run(cmd,capture_output=True,text=True,timeout=105)
    files=[f for f in p.iterdir()if f.suffix in ['.mp4','.webm','.mkv']and f.stat().st_size>10000]
@@ -56,7 +57,7 @@ def probe(report):
    if files:
     f=files[0];row.update(bytes=f.stat().st_size,sha256=hashlib.sha256(f.read_bytes()).hexdigest())
   except subprocess.TimeoutExpired:row={'id':vid,'media_accessible':False,'detail':'Public acquisition attempt timed out after 105 seconds','human_visual_review_completed':False}
-  rows.append(row);save(OUT/'access-probe.json',{'checked_at':stamp(),'results':rows,'completed_study':False,'no_full_third_party_media_committed':True});print(vid,'accessible:',row['media_accessible'],flush=True)
+  rows.append(row);save(OUT/('access-probe-js-runtime.json' if '--access-only' in sys.argv else 'access-probe.json'),{'checked_at':stamp(),'results':rows,'completed_study':False,'no_full_third_party_media_committed':True});print(vid,'accessible:',row['media_accessible'],flush=True)
 if __name__=='__main__':
- r=discover()
- if '--probe' in sys.argv:probe(r)
+ r=json.loads((OUT/'discovery.json').read_text()) if '--access-only' in sys.argv else discover()
+ if '--probe' in sys.argv or '--access-only' in sys.argv:probe(r)

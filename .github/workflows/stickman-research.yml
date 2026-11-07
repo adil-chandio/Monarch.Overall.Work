@@ -1,4 +1,4 @@
-name: Stickman research — API discovery and honest footage-access probe
+name: Stickman research — API discovery and relevant shortlist and supported-JS public playback check
 on:
   push:
     branches: [arena/ba8d901e-monarch-overall-work]
@@ -28,9 +28,12 @@ jobs:
             echo "::add-mask::$KEY"
             echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
           fi
-      - run: python -m pip install yt-dlp
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install 'yt-dlp[default]'
       - name: Discover a broad cohort and check actual public-video access, not thumbnails
-        run: python scripts/research-stickman.py --probe
+        run: python scripts/research-stickman.py --access-only
       - name: Preserve public metadata, failures and true study status only
         if: always()
         run: |
