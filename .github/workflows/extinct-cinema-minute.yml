@@ -1,0 +1,125 @@
+name: POV cinema enhancement — approved opening experiment
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-cinema-minute.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - name: Build original-timing approved narration, attributed score and restrained action-specific foley
+        run: .venv/bin/python production/extinct-life/film-v12-cinema/finish.py
+      - name: Verify native frames, articulated limb lengths, deterministic seeking and motion with a locked camera
+        run: node production/extinct-life/film-v12-cinema/render.mjs --stills
+      - name: Verify source timing, complete sentence and privately referenced assets
+        run: |
+          .venv/bin/python -m unittest discover -s tests -p 'test_extinct_cinema_minute.py' -v
+          node production/extinct-life/film-v12-cinema/kinematics.test.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cinema-audio-and-preflight
+          path: |
+            .cache/extinct-v12/proof.wav
+            .cache/extinct-v12/stills
+            .cache/extinct-v12/seek-QC.json
+            production/extinct-life/film-v12-cinema/AUDIO-QC.json
+          include-hidden-files: true
+          retention-days: 3
+  pictures:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1
+      - name: Render every native frame of the approved experiment
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          FROM=$((1830 * PART / 12))
+          TO=$((1830 * (PART + 1) / 12))
+          node production/extinct-life/film-v12-cinema/render.mjs --from=$FROM --to=$TO
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cinema-native-${{ matrix.part }}
+          path: |
+            .cache/extinct-v12/part-*.mp4
+            .cache/extinct-v12/render-*.json
+          include-hidden-files: true
+          retention-days: 3
+  assemble:
+    needs: [preflight, pictures]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: cinema-native-*
+          path: .cache/extinct-v12
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: cinema-audio-and-preflight
+          path: .cache/cinema-preflight
+      - name: Restore preflight data, assemble and decode the actual delivery
+        run: |
+          cp .cache/cinema-preflight/.cache/extinct-v12/proof.wav .cache/extinct-v12/
+          cp .cache/cinema-preflight/production/extinct-life/film-v12-cinema/AUDIO-QC.json production/extinct-life/film-v12-cinema/
+          cp -r .cache/cinema-preflight/.cache/extinct-v12/stills production/extinct-life/film-v12-cinema/inspection
+          cp .cache/cinema-preflight/.cache/extinct-v12/seek-QC.json production/extinct-life/film-v12-cinema/
+          .venv/bin/python production/extinct-life/film-v12-cinema/finish.py --assemble
+      - name: Publish the actual rendered video, not stills or reference footage
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-cinema-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'Extinct Life — First-person 3D English experiment (1:01)' --notes "Owner-authorized enhancement of the enjoyed V11 POV opening, preserved unchanged alongside V9/V10. 61 seconds, original approved English voice-02 source timing/speed, 1920x1080 at 30fps, 1830 newly rendered frames. Adds atmospheric sky, environment lighting, contact AO/antialiasing, rounded hand cuffs/detail, gravity/bounce/rest grain transfer, eroded-bank batching, hinged flexible report page, handheld lens, instanced foliage wind, a carved stream/gravel/ripples and conceptual wildlife community/bird flyby. Stylized explanatory 3D, not photoreal field footage, exact likeness, anatomical validation, rigid-body simulation or proof of observed co-occurrence. Original earlier production meshes/material textures reused as 3D assets; no old movie frames or scene image plates. Owner portrait reference not redistributed. Music: 'Hiraeth' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Excerpt, fades, ducking and normalization; no endorsement implied. Original synthesized soft foley/air, not field recordings. Technical/sample checks are not uninterrupted human audiovisual review, creative acceptance, reference parity, guaranteed engagement, virality or algorithm ownership. No YouTube upload." .cache/extinct-v12/Extinct_Life_POV_Cinema_Experiment_English_1080p.mp4 production/extinct-life/film-v12-cinema/English.srt production/extinct-life/film-v12-cinema/CREDITS.md production/extinct-life/film-v12-cinema/QC.json production/extinct-life/film-v12-cinema/AUDIO-QC.json
+      - name: Preserve delivery metadata without committing the large movie
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v12-cinema');q=json.load(open(b/'QC.json'));tag='extinct-life-cinema-'+os.environ['GITHUB_RUN_ID'];url='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          (b/'DELIVERY.json').write_text(json.dumps({'status':'Rendered one-minute experiment; owner creative review pending','video':url+'download/'+tag+'/Extinct_Life_POV_Cinema_Experiment_English_1080p.mp4','release':url+'tag/'+tag,'seconds':61,'frames':1830,'sha256':q['sha256'],'v9_unchanged':True,'v10_unchanged':True,'v11_unchanged':True},indent=2)+'\n')
+          PY
+          git config user.name 'Monarch pov animation production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v12-cinema
+          git commit -m 'Deliver approved 61-second rendered pov English experiment and technical QC [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
