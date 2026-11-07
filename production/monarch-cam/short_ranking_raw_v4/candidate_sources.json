@@ -1,0 +1,171 @@
+{
+  "project": "MONARCH CAM - V4 replacement-source audio and visual probe",
+  "checked_on": "2026-11-07",
+  "policy": {
+    "allowed": ["CC0-1.0"],
+    "rejected": ["unverified", "third-party short-form reposts", "public-domain-only claims without a CC0 dedication"],
+    "note": "Commons API extmetadata confirms CC0 1.0 for every candidate. Only raw video files with their own native audio streams are considered; no separate audio assets are downloaded."
+  },
+  "assets": [
+    {
+      "id": "strandschnecke",
+      "role": "candidate",
+      "title": "Strandschnecke (grasend mit Spinne).webm",
+      "creator": "Rhetos, Sabine Heim",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Strandschnecke_(grasend_mit_Spinne).webm",
+      "description": "A periwinkle grazing on a groyne with a small spider nearby; original beachgoer background sounds.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/c/c1/Strandschnecke_%28grasend_mit_Spinne%29.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Strandschnecke_%28grasend_mit_Spinne%29.webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "strandschnecke.webm",
+      "duration_seconds": 61.046,
+      "width": 1080,
+      "height": 1920,
+      "mime": "video/webm",
+      "expected_audio_codec": "vorbis"
+    },
+    {
+      "id": "berlin_gorilla",
+      "role": "candidate",
+      "title": "Berlin zoologisk hage 2026-04-07 mov05.webm",
+      "creator": "LarsMueller",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov05.webm",
+      "description": "Pregnant western lowland gorilla eating at the Berlin Zoological Garden.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/c/c9/Berlin_zoologisk_hage_2026-04-07_mov05.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Berlin_zoologisk_hage_2026-04-07_mov05.webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "berlin_gorilla.webm",
+      "duration_seconds": 15.448,
+      "width": 1080,
+      "height": 1920,
+      "mime": "video/webm",
+      "expected_audio_codec": "vorbis"
+    },
+    {
+      "id": "tidepool_worm",
+      "role": "candidate",
+      "title": "Gezeitentümpelwurm (unbestimmt).webm",
+      "creator": "Rhetos",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Gezeitent%C3%BCmpelwurm_(unbestimmt).webm",
+      "description": "An unidentified worm moves actively in a Wangerooge tide pool among living barnacles.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "tidepool_worm.webm",
+      "duration_seconds": 22.64,
+      "width": 1920,
+      "height": 1080,
+      "mime": "video/webm",
+      "expected_audio_codec": "vorbis"
+    },
+    {
+      "id": "malaga_animals",
+      "role": "candidate",
+      "title": "Some animals in Malaga.webm",
+      "creator": "Nicolas Vigier",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Some_animals_in_Malaga.webm",
+      "description": "Short CC0 animal observation filmed in Malaga.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b3/Some_animals_in_Malaga.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Some_animals_in_Malaga.webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "malaga_animals.webm",
+      "duration_seconds": 25.074,
+      "width": 960,
+      "height": 540,
+      "mime": "video/webm",
+      "expected_audio_codec": "opus"
+    },
+    {
+      "id": "oriental_dove",
+      "role": "candidate",
+      "title": "Streptopelia orientalis fighting 2024-04-26.webm",
+      "creator": "Asanagi",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Streptopelia_orientalis_fighting_2024-04-26.webm",
+      "description": "Two Oriental turtle doves fighting in Tochigi Prefecture, Japan.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Streptopelia_orientalis_fighting_2024-04-26.webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "oriental_dove.webm",
+      "duration_seconds": 35.021,
+      "width": 1920,
+      "height": 1080,
+      "mime": "video/webm",
+      "expected_audio_codec": "opus"
+    },
+    {
+      "id": "sasana_squirrel",
+      "role": "control_audible",
+      "title": "Sasana.2015.myanmar.squirrel.1.webmhd.webm",
+      "creator": "Moine Sāsana",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Sasana.2015.myanmar.squirrel.1.webmhd.webm",
+      "description": "Current V4 rank-5 squirrel; known audible native vorbis audio.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/9/93/Sasana.2015.myanmar.squirrel.1.webmhd.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sasana.2015.myanmar.squirrel.1.webmhd.webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "sasana_squirrel.webm",
+      "duration_seconds": 13.994,
+      "width": 1280,
+      "height": 720,
+      "mime": "video/webm",
+      "expected_audio_codec": "vorbis"
+    },
+    {
+      "id": "hermit_crab",
+      "role": "control_audible",
+      "title": "Einsiedlerkrebs (Wangerooge).webm",
+      "creator": "Rhetos, Sabine Heim",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Einsiedlerkrebs_(Wangerooge).webm",
+      "description": "Current V4 rank-4 hermit crab; known audible native vorbis audio.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Einsiedlerkrebs_(Wangerooge).webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "hermit_crab.webm",
+      "duration_seconds": 8.197,
+      "width": 1920,
+      "height": 1080,
+      "mime": "video/webm",
+      "expected_audio_codec": "vorbis"
+    },
+    {
+      "id": "starfish",
+      "role": "control_silent",
+      "title": "Seestern (sich aufrichtend).webm",
+      "creator": "Rhetos, Sabine Heim",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Seestern_(sich_aufrichtend).webm",
+      "description": "Current V4 rank-3 starfish; audio stream is present but completely silent.",
+      "download_urls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm",
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Seestern_(sich_aufrichtend).webm"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_filename": "starfish.webm",
+      "duration_seconds": 53.12,
+      "width": 1080,
+      "height": 1920,
+      "mime": "video/webm",
+      "expected_audio_codec": "vorbis"
+    }
+  ]
+}
