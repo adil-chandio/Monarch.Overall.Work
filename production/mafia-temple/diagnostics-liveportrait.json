@@ -1,10 +1,8 @@
 {
   "log_received": true,
   "exception_classes": [
-    "AttributeError",
     "CalledProcessError",
-    "PapermillExecutionError",
-    "RuntimeError"
+    "PapermillExecutionError"
   ],
   "flags": {
     "out_of_memory": false,
@@ -19,33 +17,19 @@
     "killed": false
   },
   "last_diagnostic_lines": [
-    "AttributeError",
-    "CalledProcessError",
     "PapermillExecutionError",
-    "RuntimeError"
+    "CalledProcessError"
   ],
-  "log_chars": 49458,
+  "log_chars": 9234,
   "completed_stages": [],
   "nonfinite_embeddings": false,
   "safe_failure_messages": [
-    ",{\"stream_name\":\"stderr\",\"time\":261.62421099,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":261.826406432,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":261.826546109,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
-    ",{\"stream_name\":\"stdout\",\"time\":264.341329525,\"data\":\"TEST FAILED side CalledProcessError Command '['<path> 'inference.py', '-s', '<path> '-d', 'assets<path> '-o', '<path> returned non-zero exit statu",
-    ",{\"stream_name\":\"stderr\",\"time\":266.444819476,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":266.646319515,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":266.646434192,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
-    ",{\"stream_name\":\"stdout\",\"time\":266.855301646,\"data\":\"TEST FAILED front CalledProcessError Command '['<path> 'inference.py', '-s', '<path> '-d', 'assets<path> '-o', '<path> returned non-zero exit stat",
-    ",{\"stream_name\":\"stderr\",\"time\":267.695930624,\"data\":\"Exception encountered at \\\"In [1]\\\":\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":267.695937442,\"data\":\"RuntimeError                              Traceback (most recent call last)\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":267.695956247,\"data\":\"---\\u003e 62     raise RuntimeError('All portrait tests failed')\\n\"}",
-    ",{\"stream_name\":\"stderr\",\"time\":267.695961067,\"data\":\"RuntimeError: All portrait tests failed\\n\"}"
+    ",{\"stream_name\":\"stderr\",\"time\":217.571224844,\"data\":\"Exception encountered at \\\"In [1]\\\":\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":217.571235877,\"data\":\"CalledProcessError                        Traceback (most recent call last)\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":217.571332284,\"data\":\"--\\u003e 578             raise CalledProcessError(retcode, process.args,\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":217.571388204,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'ml_dtypes\\u003e=0.5.1'"
   ],
-  "runtime_error_messages": [
-    "RuntimeError                              Traceback (most recent call last)\\n\"}",
-    "RuntimeError('All portrait tests failed')\\n\"}",
-    "RuntimeError: All portrait tests failed\\n\"}"
-  ],
+  "runtime_error_messages": [],
   "frame_sources": [
     [
       "validator.py",
