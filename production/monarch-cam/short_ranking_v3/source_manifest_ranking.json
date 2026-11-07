@@ -1,5 +1,5 @@
 {
-  "project": "MONARCH CAM \u2014 5 Unexpected Animal Skills, Ranked (Clean Premium V3)",
+  "project": "MONARCH CAM — 5 Unexpected Animal Skills, Ranked (Clean Premium V3)",
   "checked_on": "2026-11-07",
   "policy": {
     "allowed": [
@@ -21,7 +21,7 @@
       "id": "squirrel",
       "role": "video",
       "title": "Sasana.2015.myanmar.squirrel.1.webmhd.webm",
-      "creator": "Moine S\u0101sana",
+      "creator": "Moine Sāsana",
       "description": "Typical squirrel in Myanmar visiting a monastery.",
       "source_page": "https://commons.wikimedia.org/wiki/File:Sasana.2015.myanmar.squirrel.1.webmhd.webm",
       "file_page": "https://commons.wikimedia.org/wiki/File:Sasana.2015.myanmar.squirrel.1.webmhd.webm",
@@ -195,22 +195,40 @@
       "openverse_record": "https://api.openverse.org/v1/audio/10342426-5513-47bd-9c73-635b2e2db687/"
     },
     {
-      "id": "native_audio",
-      "role": "ambience",
-      "title": "Laysan Albatross Mating Dance 2016 \u2014 original clip audio",
-      "creator": "Ann Bell / U.S. Fish & Wildlife Service",
-      "source_page": "https://commons.wikimedia.org/wiki/File:Laysan_Albatross_Mating_Dance_2016.webm",
-      "download_urls": [],
-      "local": true,
-      "license": "Public domain (USFWS / U.S. federal government work)",
+      "id": "cartoon_boing",
+      "role": "comedy_accent_sfx",
+      "title": "Cartoon Boing.wav",
+      "creator": "reelworldstudio",
+      "source_page": "https://freesound.org/people/reelworldstudio/sounds/161122/",
+      "download_urls": [
+        "https://cdn.freesound.org/previews/161/161122_2750714-hq.mp3"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page_verified": true,
-      "local_filename": "usfws_clip_audio.wav"
+      "local_filename": "cartoon_boing.mp3",
+      "openverse_record": "https://api.openverse.org/v1/audio/b856b5cb-9109-4f75-81bf-35dfbc216d95/"
+    },
+    {
+      "id": "comedy_tick",
+      "role": "comedy_tick_sfx",
+      "title": "Comedy_Music_Samples_033.wav",
+      "creator": "jalastram",
+      "source_page": "https://freesound.org/people/jalastram/sounds/457985/",
+      "download_urls": [
+        "https://cdn.freesound.org/previews/457/457985_3905081-hq.mp3"
+      ],
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source_page_verified": true,
+      "local_filename": "comedy_tick.mp3",
+      "openverse_record": "https://api.openverse.org/v1/audio/faab9757-a14c-4525-8cf6-1a7b059a92e9/"
     },
     {
       "id": "native_audio",
       "role": "ambience",
       "title": "CC0 source-clip native ambience",
-      "creator": "Wikimedia Commons CC0 uploaders",
+      "creator": "Rhetos, Sabine Heim / Wikimedia Commons CC0",
       "source_page": "https://commons.wikimedia.org/wiki/File:Einsiedlerkrebs_(Wangerooge).webm",
       "download_urls": [],
       "license": "CC0-1.0",

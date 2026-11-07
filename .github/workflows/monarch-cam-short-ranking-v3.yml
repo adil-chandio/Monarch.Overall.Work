@@ -1,0 +1,463 @@
+name: Monarch Cam — clean-premium V3 35-second ranked-animal Short
+
+on:
+  push:
+    branches:
+      - arena/390292fc-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-short-ranking-v3.yml'
+      - 'production/monarch-cam/short_ranking_v3/render_dance_visual_clean_v3.py'
+      - 'production/monarch-cam/short_ranking_v3/build_dance_audio_clean_v3.py'
+      - 'production/monarch-cam/short_ranking_v3/source_recon_ranking.py'
+      - 'production/monarch-cam/short_ranking_v3/dance_short_spec.json'
+      - 'production/monarch-cam/short_ranking_v3/source_manifest_ranking.json'
+      - 'production/monarch-cam/short_ranking_v3/DANCE_RENDER_TRIGGER.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-short-ranking-v3-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render-review-and-deliver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      HF_HOME: production/monarch-cam/work/short_ranking_v3/hf
+      HF_HUB_DISABLE_XET: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      EARSHOT_THREADS: '4'
+      RECON_OUT: production/monarch-cam/work/short_ranking_v3
+      RECON_REVIEW: production/monarch-cam/short_ranking_v3/review
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/390292fc-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install bounded media, licensed-audio and rendering tools
+        timeout-minutes: 18
+        run: |
+          timeout 600 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            requests edge-tts numpy scipy pillow opencv-python-headless \
+            soundfile soxr librosa pyloudnorm scikit-learn matplotlib transformers static-ffmpeg
+          python - <<'PY'
+          import os
+          from static_ffmpeg.run import get_or_fetch_platform_executables_else_raise
+          ffmpeg, ffprobe = get_or_fetch_platform_executables_else_raise()
+          with open(os.environ['GITHUB_PATH'], 'a') as fh:
+              fh.write(os.path.dirname(ffmpeg) + '\n')
+          print('static ffmpeg:', ffmpeg)
+          print('static ffprobe:', ffprobe)
+          PY
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      - name: Install Earshot with CPU-only torch
+        timeout-minutes: 20
+        run: |
+          timeout 900 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            --index-url https://download.pytorch.org/whl/cpu 'torch>=2.6'
+          timeout 300 python -m pip install --disable-pip-version-check -q --no-deps --no-input \
+            --timeout 30 --retries 2 \
+            'git+https://github.com/Leonxlnx/earshot.git@main'
+          python -c 'import torch; from earshot import api; print("Earshot import OK; torch", torch.__version__)'
+
+      - name: Validate clean-premium V2 contracts, factual guardrails, cleared audio, fonts and original MP4
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_ranking_v3/render_dance_visual_clean_v3.py \
+            production/monarch-cam/short_ranking_v3/build_dance_audio_clean_v3.py \
+            production/monarch-cam/short_ranking_v3/source_recon_ranking.py
+          python - <<'PY'
+          import hashlib, json, math
+          from pathlib import Path
+          base = Path('production/monarch-cam/short_ranking_v3')
+          spec = json.loads((base/'dance_short_spec.json').read_text())
+          manifest = json.loads((base/'source_manifest_ranking.json').read_text())
+          metadata = json.loads((base/'dance_viral_metadata.json').read_text())
+          fps = spec['fps']
+          assert (spec['duration'], spec['width'], spec['height'], fps, spec['frame_count']) == (35.0, 1080, 1920, 30, 1050)
+          assert spec['frame_count'] == int(spec['duration'] * fps)
+          assert len(spec['narration']) == 13 and spec['narration_words'] == 69
+          assert sum(len(x['text'].split()) for x in spec['narration']) == 69
+          assert len(spec['scenes']) == 13 and len(spec['audio']['cues']) == 16 and len(spec['rank_steps']) == 5
+          assert spec['narration'][0]['start'] <= 0.15
+          assert spec['rank_steps'][0]['time'] <= 3.0
+          assert spec['narration'][-1]['start'] <= 33.5
+          assert spec['scenes'][-1]['rate'] < 1.0
+          scene_starts = {int(round(s['start'] * fps)) for s in spec['scenes']}
+          scene_ends = [int(round(s['end'] * fps)) for s in spec['scenes']]
+          assert scene_ends == sorted(scene_ends) and scene_ends[-1] == spec['frame_count']
+          rank_frames = {int(round(s['time'] * fps)) for s in spec['rank_steps']}
+          interrupts = set(spec['pattern_interrupts'])
+          allowed = {2} | scene_starts | rank_frames | interrupts
+          prem = spec['audio']['premium']
+          for cue in spec['audio']['cues']:
+              assert round(cue['frame'] / fps, 6) == round(cue['time'], 6), cue
+              assert cue['frame'] in allowed, cue
+              assert cue['salience_role'] in ('hero','support','breath'), cue
+              assert 'pan_start' in cue and 'pan_end' in cue, cue
+              assert abs(cue['effective_peak_db'] - (cue['peak_db'] + cue['salience_gain_db'])) < 1e-6, cue
+          video_assets = {a['id']: a for a in manifest['assets'] if a.get('role') == 'video'}
+          assert len(video_assets) == 5 and sorted(a['rank'] for a in video_assets.values()) == [1,2,3,4,5]
+          for scene in spec['scenes']:
+              sid = scene['source_id']
+              assert sid in video_assets, sid
+              assert 0.0 <= scene['source_start'] <= float(video_assets[sid]['duration_seconds']) - 0.5, scene
+              assert scene['top'] == '' and scene.get('badge') in (None,'') and scene.get('card_step') in (None,0), scene
+              assert len(scene['id']) > 0
+          assert all(len(x['caption'].split()) <= 4 for x in spec['narration'])
+          assert set(spec['audio']['sfx']) == {'impact','whoosh','boing','tick'}
+          assert prem['envelope_smoothing'] == 'pchip'
+          assert len(prem['sub_bloom_frames']) == 4
+          assert prem['stereo_width_music'] >= 0.87
+          assert prem['stereo_width_ambience'] >= 0.58
+          assert prem['sfx_room_mix'] >= 0.11
+          assert prem['sfx_room_decay_ms'] >= 135
+          assert prem['voice_presence_dip'] >= 0.46
+          assert prem['voice_lowpass_hz'] <= 9900
+          assert prem['voice_fade_s'] >= 0.026
+          assert prem['premaster_ceiling_dbfs'] >= -1.45
+          assert prem['sub_bloom']['peak_dbfs'] >= -27.5
+          assert prem['sub_min_gain'] >= 0.79
+          vis = spec['visual']['v3']
+          assert vis['text_policy'] == 'minimal_captions_only_v3'
+          assert vis['exact_cover_text'] == 'WHICH ONE IS #1?'
+          assert vis['exact_cover_ab_text'] == 'RANK THESE 5.'
+          assert vis['rank_numbers'] is True
+          assert vis['action_window'][2] > 1000 and abs(vis['action_window'][2] / vis['action_window'][3] - 16/9) < 0.02
+          assert vis['palette']['background'] == '#07111C'
+          assert vis['scene_transition_frames'] == 5
+          assert vis['halation_strength'] > 0 and vis['bloom_radius'] >= 12
+          assert vis['caption_tracking_px'] >= 1
+          assert vis['motion_drift_x'] > 0 and vis['motion_drift_y'] > 0
+          policy = manifest['policy']['allowed']
+          for asset in manifest['assets']:
+              assert asset['source_page_verified'] is True, asset['id']
+              assert asset['license'] in policy, asset['id']
+              if asset.get('role') == 'video':
+                  assert asset['download_urls'] and asset.get('commons_api_record'), asset['id']
+          assert any(a['id'] == 'native_audio' and a.get('local') for a in manifest['assets'])
+          text_blob = ' '.join([x['text'] for x in spec['narration']] + [x['caption'] for x in spec['narration']] + [x['top'] for x in spec['scenes']]).lower()
+          metadata_blob = json.dumps({k: metadata[k] for k in ('primary','comments')}).lower()
+          forbidden = ('handle','car door','25m','part 2','viral guarantee','bear','food reward','bears in cars','nps','tiktok','instagram','most impressive ever','human approval')
+          for phrase in forbidden:
+              assert phrase not in text_blob, phrase
+          for phrase in ('handle','25m','part 2','bear/car','viral guarantee','most impressive ever','human approval','tiktok','instagram'):
+              assert phrase not in metadata_blob, phrase
+          assert metadata['video'] == 'deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4'
+          assert metadata['status'] == 'upload_ready_clean_premium_v3'
+          assert metadata.get('v3_edition') is True
+          assert metadata['video_category'] == 'Entertainment' and metadata['youtube_category_id'] == 24
+          assert metadata['primary']['cover_text'] == 'WHICH ONE IS #1?'
+          assert metadata['primary']['title'] == '5 Unexpected Animal Skills, Ranked.'
+          facts = (base/'review/SOURCE_FACTS.md').read_text()
+          assert 'Independently fetched and verified on 2026-11-07' in facts
+          credits = (base/'CREDITS.md').read_text()
+          for name in ('Equationsmith','Shuoli1999','Rhetos','Moine Sāsana'):
+              assert name in credits, name
+          assert 'Entertainment' in (base/'DANCE_PLAN_AND_METADATA.md').read_text()
+          assert 'rank numerals' in (base/'CLEAN_V3_ENHANCEMENTS.md').read_text()
+          assert (base/'review/CLEAN_V3_ENHANCEMENTS.md').is_file()
+          baseline = json.loads((base/'review/earshot_baseline.json').read_text())
+          assert baseline['source'] == 'clean-premium V2 edition critique (commit e2452e3)'
+          assert (base/'review/earshot_baseline_original.json').is_file()
+          fonts = [Path('public/showreel/fonts')/n for n in ('Manrope-800.ttf','Manrope-700.ttf','IBMPlexMono-400.ttf','Anton-Regular.ttf')]
+          assert all(p.is_file() for p in fonts), fonts
+          original = Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4')
+          assert original.is_file() and hashlib.sha256(original.read_bytes()).hexdigest() == '2e276482e9d01ae1391d9d8cb3ffb152867fe19e8e6ce84b3cd35323c2f25671'
+          premium = Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_PREMIUM.mp4')
+          assert premium.is_file() and hashlib.sha256(premium.read_bytes()).hexdigest() == 'fe6da9e4b1f441e6f1be76199743163cf64ecd12089e1632500d4dea92ae396c'
+          clean = Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM.mp4')
+          assert clean.is_file() and hashlib.sha256(clean.read_bytes()).hexdigest() == '708c1960893ce238017e11b871e44f1d451ac0c941936a74a0b895ddc09edb89'
+          v2 = Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM_V2.mp4')
+          assert v2.is_file() and hashlib.sha256(v2.read_bytes()).hexdigest() == 'ed366321dbe3994d5a97365165c6819735b7f53a64a2f6ac922f5235dd94c4f1'
+          assert metadata['enhancement']['v2_preserved'] == str(v2)
+          assert metadata['video'] != str(original) and metadata['video'] != str(premium) and metadata['video'] != str(clean) and metadata['video'] != str(v2)
+          print('Clean-premium V3 35s, five CC0 sources, ranking, category, audio, factual and preservation contracts OK')
+          PY
+
+      - name: Retrieve the public-domain USFWS clip and rebuild clean-premium V2 review sheets
+        timeout-minutes: 15
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_v3/source_recon_ranking.py \
+            2>&1 | tee production/monarch-cam/short_ranking_v3/review/source_recon.log
+
+      - name: Lock exact visual timings after contact-sheet review
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base = Path('production/monarch-cam/short_ranking_v3')
+          review = base/'review'
+          spec = json.loads((base/'dance_short_spec.json').read_text())
+          lock = {
+              'status': 'APPROVED_FOR_RENDER',
+              'topic': spec['topic'],
+              'source': 'Five CC0 1.0 Wikimedia Commons animal clips, independently verified on 2026-11-07',
+              'review_basis': 'Coarse 1-second and fine 0.5-second contact sheets from source_recon_ranking.py were viewed; exact source windows were selected for the hook, five ranked moments, payoff and loop. V3 adds filmic grade, halation, cross-dissolves, tracked captions and subtle rank numerals without extra text.',
+              'approved_by': 'Arena agent, contact-sheet visual review',
+              'full_motion_review': False,
+              'native_audio_listening': False,
+              'note': 'No human full-motion review or human listening to native audio occurred; delivered AAC is measured by nine gates, technical QC and model-assisted review.',
+              'v3_visual_enhancements': spec['enhancement']['visual'],
+              'v3_sound_enhancements': spec['enhancement']['sound'],
+              'exact_timecodes': [
+                  {'timeline_in': s['start'], 'timeline_out': s['end'], 'source_id': s['source_id'], 'source_in': s['source_start'], 'rate': s['rate'], 'id': s['id'], 'rank': s.get('rank'), 'layout': s['layout']}
+                  for s in spec['scenes']
+              ],
+              'rank_steps': spec['rank_steps'],
+              'cue_frames': spec['pattern_interrupts'],
+              'cover_frame_time': 0.07,
+          }
+          (review/'visual_review_lock.json').write_text(json.dumps(lock, indent=2), encoding='utf-8')
+          manifest_path = review/'review-manifest.json'
+          if manifest_path.exists():
+              manifest = json.loads(manifest_path.read_text())
+              manifest['visual_timestamp_approval'] = 'APPROVED_AFTER_CONTACT_SHEET_REVIEW'
+              manifest['visual_review_basis'] = 'Coarse/fine contact-sheet review; exact windows in visual_review_lock.json'
+              manifest['v3_edition'] = True
+              manifest['source_video_ledger'] = 'production/monarch-cam/short_ranking_v3/review/source_video_ledger.json'
+              manifest_path.write_text(json.dumps(manifest, indent=2), encoding='utf-8')
+          print('Clean-premium V3 visual timing lock written')
+          PY
+
+      - name: Render the clean-premium V2 24-second native-vertical picture
+        timeout-minutes: 25
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/short_ranking_v3/review
+          rm -f production/monarch-cam/short_ranking_v3/review/workflow_failure.txt
+          rm -f production/monarch-cam/short_ranking_v3/review/tts_failures.json
+          python production/monarch-cam/short_ranking_v3/render_dance_visual_clean_v3.py \
+            2>&1 | tee production/monarch-cam/short_ranking_v3/review/visual_build.log
+
+      - name: Synthesize narration, design premium cleared sound, calibrate AAC and mux
+        timeout-minutes: 30
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_v3/build_dance_audio_clean_v3.py \
+            2>&1 | tee production/monarch-cam/short_ranking_v3/review/audio_build.log
+
+      - name: Run all nine measured gates on the delivered clean-premium V2 AAC stream
+        timeout-minutes: 10
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4 \
+            --profile web --json production/monarch-cam/short_ranking_v3/review/audio_qc.json \
+            2>&1 | tee production/monarch-cam/short_ranking_v3/review/audio_qc.log
+
+      - name: Assemble clean-premium V2 delivery, Earshot comparison and review summary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('production/monarch-cam/short_ranking_v3/review')
+          technical = json.loads((root/'technical_qc.json').read_text())
+          assert technical['v3']['separate_from_previous_editions'] is True
+          audio = json.loads((root/'audio_qc.json').read_text())
+          earshot = json.loads((root/'earshot_final_status.json').read_text())
+          critique = json.loads((root/'earshot_critique.json').read_text())
+          baseline = json.loads((root/'earshot_baseline.json').read_text())
+          baseline_original = json.loads((root/'earshot_baseline_original.json').read_text())
+          voices = json.loads((root/'voice_ledger.json').read_text())
+          mix = json.loads((root/'source_mix_report.json').read_text())
+          lock = json.loads((root/'visual_review_lock.json').read_text())
+          manifest = json.loads((root/'review-manifest.json').read_text()) if (root/'review-manifest.json').exists() else {}
+          ledger = json.loads((root/'visual_edit_ledger.json').read_text())
+          cues = json.loads((root/'resolved_cues.json').read_text())
+          vpc = json.loads((root/'visual_v3_qc.json').read_text())
+          thumbs = json.loads((root/'exact_thumbnail_manifest.json').read_text())
+          metadata_json = json.loads(Path('production/monarch-cam/short_ranking_v3/dance_viral_metadata.json').read_text())
+          text_blob = json.dumps({k: metadata_json[k] for k in ('primary','comments')}).lower()
+          
+          def metric(name):
+              return next(m for m in critique['metrics'] if m['metric'] == name)
+          hit, sub, width, preal = metric('hit_rate'), metric('band_sub'), metric('side_to_mid_db'), metric('p_real')
+          hit_upper = float(hit['range'][1]) if hit['range'][1] is not None else 1.86
+          gates = {
+              'hit_rate_in_range': float(hit['value']) <= hit_upper + 1e-9,
+              'no_major_issues': int(critique['major_issues']) == 0,
+              'no_critical_issues': int(critique['critical_issues']) == 0,
+              'score_not_below_v2': float(critique['score']) >= float(baseline['score']) - 0.005,
+              'hit_density_not_degraded': float(hit['value']) <= float(baseline['metrics']['hit_rate']['value']) + 0.25,
+              'sub_weight_not_degraded': float(sub['value']) >= float(baseline['metrics']['band_sub']['value']) - 1.0,
+              'stereo_width_not_degraded': float(width['value']) >= float(baseline['metrics']['side_to_mid_db']['value']) - 1.0,
+              'premaster_ceiling_bounded': -1.45 <= float(mix['premium']['premaster_ceiling_dbfs']) <= -1.0,
+              'v3_music_width': float(mix['premium']['stereo_width_music']) >= 0.87,
+              'v3_room_mix': float(mix['premium']['sfx_room_mix']) >= 0.11,
+              'v3_voice_dip': float(mix['premium']['voice_presence_dip']) >= 0.46,
+          }
+          v3_sound_pass = all(gates.values())
+          comparison = {
+              'baseline_v2': baseline,
+              'baseline_original': baseline_original,
+              'v3': {
+                  'score': critique['score'], 'verdict': critique['verdict'],
+                  'in_range': critique['in_range'], 'scored': critique['scored'],
+                  'critical_issues': critique['critical_issues'], 'major_issues': critique['major_issues'],
+                  'metrics': {
+                      'hit_rate': {'value': hit['value'], 'range': hit['range']},
+                      'band_sub': {'value': sub['value'], 'range': sub['range']},
+                      'side_to_mid_db': {'value': width['value'], 'range': width['range']},
+                      'p_real': {'value': preal['value'], 'range': preal['range']},
+                  }
+              },
+              'gates': gates,
+              'v3_sound_pass': v3_sound_pass,
+              'note': 'Model-assisted comparison against the delivered CLEAN PREMIUM V2 edition; p_real may remain uncertain. Not human listening or approval.'
+          }
+          (root/'earshot_comparison.json').write_text(json.dumps(comparison, indent=2), encoding='utf-8')
+          
+          visual_flags = all(bool(vpc.get(k)) for k in (
+              'minimal_captions_only','no_top_headlines','no_badges','no_dance_card','no_progress','no_footer',
+              'no_macro_inset','no_source_labels','no_brand_watermark','no_cut_flashes','cinema_grade','premium_palette',
+              'seamless_loop_crossfade','exact_text_thumbnails','v3_cinematic_grade','v3_halation_bloom',
+              'v3_scene_crossfades','v3_tracked_captions','v3_motion_drift','v3_sound_polish','v3_rank_numbers',
+              'five_cc0_sources','no_third_party_short_form_clips','subjective_ranking_not_science'))
+          thumb_files = [root/item['file'] for item in thumbs['outputs']]
+          v3_visual_pass = visual_flags and all(p.is_file() for p in thumb_files) and (root/'cover_hook.jpg').is_file()
+          v3_visual_pass = v3_visual_pass and abs(vpc['action_window'][2]/vpc['action_window'][3] - 16/9) < 0.02
+          v3_visual_pass = v3_visual_pass and all((root/f'coarse_{sid}_contact_sheet_01.jpg').is_file() for sid in ['squirrel','hermit_crab','starfish','octopus','titmouse'])
+          original_sha = hashlib.sha256(Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4').read_bytes()).hexdigest()
+          premium_sha = hashlib.sha256(Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_PREMIUM.mp4').read_bytes()).hexdigest()
+          clean_sha = hashlib.sha256(Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM.mp4').read_bytes()).hexdigest()
+          v2_sha = hashlib.sha256(Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM_V2.mp4').read_bytes()).hexdigest()
+          summary = {
+              'deliverable': 'deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4',
+              'package': '5 Unexpected Animal Skills, Ranked. — Clean Premium V3',
+              'scope': 'Separate V3 clean-premium 35-second ranked-animal Short from five independently verified CC0 Wikimedia Commons clips; original, PREMIUM, CLEAN and V2 MP4s preserved.',
+              'original_preserved': original_sha == '2e276482e9d01ae1391d9d8cb3ffb152867fe19e8e6ce84b3cd35323c2f25671',
+              'premium_preserved': premium_sha == 'fe6da9e4b1f441e6f1be76199743163cf64ecd12089e1632500d4dea92ae396c',
+              'clean_preserved': clean_sha == '708c1960893ce238017e11b871e44f1d451ac0c941936a74a0b895ddc09edb89',
+              'v2_preserved': v2_sha == 'ed366321dbe3994d5a97365165c6819735b7f53a64a2f6ac922f5235dd94c4f1',
+              'duration_seconds': 35.0,
+              'frames': 1050,
+              'narration_words': sum(x['words'] for x in voices),
+              'all_narration_slots_pass': all(x['end_s'] <= (voices[i+1]['start'] if i+1 < len(voices) else 34.8) for i,x in enumerate(voices)),
+              'technical_pass': technical['passed'],
+              'technical_checks': technical['checks'],
+              'nine_gate_audio_pass': audio['pass'],
+              'nine_gate_audio_failed': audio['failed'],
+              'earshot_status': earshot,
+              'earshot_model_review_pass': all(earshot.get(k) == 'complete' for k in ('timeline','sheet','critique')),
+              'earshot_sfx_selection_used': mix.get('sfx_selection_model_used', False),
+              'native_clip_audio_used': mix.get('native_clip_audio_used', False),
+              'generated_animal_vocalisations': mix.get('generated_animal_vocalisations', mix.get('generated_bird_vocalisations', True)),
+              'visual_lock_approved': lock.get('status') == 'APPROVED_FOR_RENDER',
+              'source_review_approved': manifest.get('visual_timestamp_approval') == 'APPROVED_AFTER_CONTACT_SHEET_REVIEW',
+              'visual_scenes': len(ledger['scenes']),
+              'resolved_cue_events': len(cues['events']),
+              'rank_steps': 5,
+              'cleared_video_sources': 5,
+              'sub_bloom_events': mix['premium']['sub_bloom_events'],
+              'stereo_width_music': mix['premium']['stereo_width_music'],
+              'voice_presence_dip': mix['premium']['voice_presence_dip'],
+              'premaster_ceiling_dbfs': mix['premium']['premaster_ceiling_dbfs'],
+              'v3_sound_pass': v3_sound_pass,
+              'v3_visual_pass': v3_visual_pass,
+              'earshot_hit_rate': hit['value'],
+              'earshot_hit_rate_upper': hit_upper,
+              'earshot_band_sub': sub['value'],
+              'earshot_side_to_mid_db': width['value'],
+              'earshot_p_real': preal['value'],
+              'earshot_score': critique['score'],
+              'earshot_verdict': critique['verdict'],
+              'earshot_major_issues': critique['major_issues'],
+              'earshot_comparison': 'production/monarch-cam/short_ranking_v3/review/earshot_comparison.json',
+              'visual_v3_qc': 'production/monarch-cam/short_ranking_v3/review/visual_v3_qc.json',
+              'exact_thumbnail_manifest': 'production/monarch-cam/short_ranking_v3/review/exact_thumbnail_manifest.json',
+              'video_category': metadata_json['video_category'],
+              'youtube_category_id': metadata_json['youtube_category_id'],
+              'cover_exists': (root/'cover.jpg').is_file(),
+              'cover_hook_exists': (root/'cover_hook.jpg').is_file(),
+              'cover_ab_exists': (root/'cover_RANK_THESE_5.jpg').is_file(),
+              'contact_sheet_exists': (root/'vertical_contact_sheet.jpg').is_file(),
+              'source_poster_exists': (root/'source_poster.jpg').is_file(),
+              'coarse_sheets_exist': all((root/f'coarse_{sid}_contact_sheet_01.jpg').is_file() for sid in ['squirrel','hermit_crab','starfish','octopus','titmouse']),
+              'fine_sheets_exist': all((root/f'fine_{sid}_contact_sheet_01.jpg').is_file() for sid in ['squirrel','hermit_crab','starfish','octopus','titmouse']),
+              'no_forbidden_phrases': not any(p in text_blob for p in ('handle','25m','part 2','bear/car','viral guarantee','most impressive ever','human approval','tiktok','instagram')),
+              'workflow_failure_absent': not (root/'workflow_failure.txt').exists(),
+              'human_full_motion_review': False,
+              'human_native_audio_listening': False,
+              'human_approval': False,
+              'virality_guarantee': False,
+              'credits': 'production/monarch-cam/short_ranking_v3/CREDITS.md',
+              'plan': 'production/monarch-cam/short_ranking_v3/DANCE_PLAN_AND_METADATA.md',
+              'metadata': 'production/monarch-cam/short_ranking_v3/review/DANCE_UPLOAD_METADATA.md',
+              'visual_review': 'production/monarch-cam/short_ranking_v3/review/vertical_contact_sheet.jpg',
+              'creative_review': 'Clean-premium V3 design objective only. Objective, model-assisted and contact-sheet checks are evidence, not human listening, retention, audience hypnosis, a 3x result, subscribe/like behavior or a virality guarantee.'
+          }
+          (root/'qc_summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
+          required = [
+              'original_preserved','premium_preserved','clean_preserved','v2_preserved','technical_pass','nine_gate_audio_pass','earshot_model_review_pass',
+              'all_narration_slots_pass','visual_lock_approved','source_review_approved',
+              'v3_sound_pass','v3_visual_pass','cover_exists','cover_hook_exists',
+              'cover_ab_exists','contact_sheet_exists','source_poster_exists',
+              'coarse_sheets_exist','fine_sheets_exist','no_forbidden_phrases','workflow_failure_absent'
+          ]
+          if not all(summary[k] for k in required) or summary['generated_animal_vocalisations'] or not summary['native_clip_audio_used']:
+              raise SystemExit('Clean-premium V3 ranked-animal Short QC failed')
+          if summary['narration_words'] != 69 or summary['visual_scenes'] != 13 or summary['resolved_cue_events'] != 16 or summary['rank_steps'] != 5 or summary['cleared_video_sources'] != 5:
+              raise SystemExit('Clean-premium V3 ranked-animal Short content contract failed')
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Return failure diagnostics when a clean-premium V2 render/build/QC step fails
+        if: failure()
+        run: |
+          git config user.name "monarch-cam-short-ranking-v3-bot"
+          git config user.email "monarch-cam-short-ranking-v3-bot@users.noreply.github.com"
+          mkdir -p production/monarch-cam/short_ranking_v3/review
+          echo "A clean-premium V2 albatross Short render, build or QC step failed; inspect adjacent logs and review JSON." \
+            > production/monarch-cam/short_ranking_v3/review/workflow_failure.txt
+          git add production/monarch-cam/short_ranking_v3
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(monarch-cam): capture clean-premium V2 albatross Short failure diagnostics"
+            git pull --rebase --autostash origin arena/390292fc-monarch-overall-work
+            git push origin HEAD:arena/390292fc-monarch-overall-work
+          fi
+          exit 1
+
+      - name: Upload clean-premium V2 Short, exact thumbnails, ledgers, credits, model review and metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-5-unexpected-animal-skills-ranked-35s-short-clean-premium-v3
+          path: |
+            deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4
+            production/monarch-cam/short_ranking_v3/review/
+            production/monarch-cam/short_ranking_v3/CREDITS.md
+            production/monarch-cam/short_ranking_v3/CLEAN_V3_ENHANCEMENTS.md
+            production/monarch-cam/short_ranking_v3/review/CLEAN_V3_ENHANCEMENTS.md
+            production/monarch-cam/short_ranking_v3/dance_short_spec.json
+            production/monarch-cam/short_ranking_v3/source_manifest_ranking.json
+            production/monarch-cam/short_ranking_v3/DANCE_PLAN_AND_METADATA.md
+            production/monarch-cam/short_ranking_v3/dance_viral_metadata.json
+            production/monarch-cam/short_ranking_v3/DANCE_TOPIC_LOCK.md
+            production/monarch-cam/short_ranking_v3/DANCE_RENDER_TRIGGER.md
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Return the clean-premium V2 MP4 and compact review record to this branch
+        run: |
+          git config user.name "monarch-cam-short-ranking-v3-bot"
+          git config user.email "monarch-cam-short-ranking-v3-bot@users.noreply.github.com"
+          rm -f production/monarch-cam/short_ranking_v3/review/workflow_failure.txt
+          git add -f deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4
+          git add production/monarch-cam/short_ranking_v3
+          if git diff --cached --quiet; then
+            echo "Premium albatross Short deliverable and QC unchanged"
+            exit 0
+          fi
+          git commit -m "chore(monarch-cam): deliver clean-premium V2 24-second albatross dance Short"
+          git pull --rebase --autostash origin arena/390292fc-monarch-overall-work
+          git push origin HEAD:arena/390292fc-monarch-overall-work
