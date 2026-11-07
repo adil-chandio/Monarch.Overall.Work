@@ -15,7 +15,7 @@ scenes=[
 ]
 images={}
 for scene in scenes:
- b=BytesIO();Image.open(root/'production/mafia-temple/keyframes'/scene['image']).convert('RGB').resize((1024,576),Image.Resampling.LANCZOS).save(b,format='JPEG',quality=94);images[scene['id']]=base64.b64encode(b.getvalue()).decode()
+ b=BytesIO();Image.open(root/'production/mafia-temple/keyframes'/scene['image']).convert('RGB').resize((512,288),Image.Resampling.LANCZOS).save(b,format='JPEG',quality=85);images[scene['id']]=base64.b64encode(b.getvalue()).decode()
 code='''import os, pathlib, subprocess, sys, time, json, gc, base64
 os.environ["TOKENIZERS_PARALLELISM"]="false"
 os.environ["PYTORCH_CUDA_ALLOC_CONF"]="expandable_segments:True"
