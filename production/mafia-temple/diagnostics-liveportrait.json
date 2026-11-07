@@ -1,0 +1,76 @@
+{
+  "log_received": true,
+  "exception_classes": [
+    "AttributeError",
+    "CalledProcessError",
+    "PapermillExecutionError",
+    "RuntimeError"
+  ],
+  "flags": {
+    "out_of_memory": false,
+    "disk_full": false,
+    "missing_module": false,
+    "dtype": true,
+    "network": false,
+    "invalid_model": false,
+    "gpu": false,
+    "model_loaded": false,
+    "inference_started": false,
+    "killed": false
+  },
+  "last_diagnostic_lines": [
+    "AttributeError",
+    "CalledProcessError",
+    "PapermillExecutionError",
+    "RuntimeError"
+  ],
+  "log_chars": 49458,
+  "completed_stages": [],
+  "nonfinite_embeddings": false,
+  "safe_failure_messages": [
+    ",{\"stream_name\":\"stderr\",\"time\":261.62421099,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":261.826406432,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":261.826546109,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
+    ",{\"stream_name\":\"stdout\",\"time\":264.341329525,\"data\":\"TEST FAILED side CalledProcessError Command '['<path> 'inference.py', '-s', '<path> '-d', 'assets<path> '-o', '<path> returned non-zero exit statu",
+    ",{\"stream_name\":\"stderr\",\"time\":266.444819476,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":266.646319515,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":266.646434192,\"data\":\"AttributeError: module 'ml_dtypes' has no attribute 'float4_e2m1fn'. Did you mean: 'float8_e4m3fn'?\\n\"}",
+    ",{\"stream_name\":\"stdout\",\"time\":266.855301646,\"data\":\"TEST FAILED front CalledProcessError Command '['<path> 'inference.py', '-s', '<path> '-d', 'assets<path> '-o', '<path> returned non-zero exit stat",
+    ",{\"stream_name\":\"stderr\",\"time\":267.695930624,\"data\":\"Exception encountered at \\\"In [1]\\\":\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":267.695937442,\"data\":\"RuntimeError                              Traceback (most recent call last)\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":267.695956247,\"data\":\"---\\u003e 62     raise RuntimeError('All portrait tests failed')\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":267.695961067,\"data\":\"RuntimeError: All portrait tests failed\\n\"}"
+  ],
+  "runtime_error_messages": [
+    "RuntimeError                              Traceback (most recent call last)\\n\"}",
+    "RuntimeError('All portrait tests failed')\\n\"}",
+    "RuntimeError: All portrait tests failed\\n\"}"
+  ],
+  "frame_sources": [
+    [
+      "validator.py",
+      "434"
+    ],
+    [
+      "mistune.py",
+      "435"
+    ],
+    [
+      "filter_links.py",
+      "36"
+    ]
+  ],
+  "traceback_functions": [
+    "execute_notebook",
+    "raise_for_execution_errors"
+  ],
+  "known_stages": {
+    "vae_decode": false,
+    "vae_encode": false,
+    "attention": false,
+    "text_encoder": false,
+    "pipeline_loading": false,
+    "denoise": false,
+    "tiling": false
+  }
+}
