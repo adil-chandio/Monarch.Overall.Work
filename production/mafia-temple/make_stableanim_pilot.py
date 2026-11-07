@@ -11,7 +11,7 @@ data=json.loads(subprocess.check_output(['gh','api','repos/konyshevgmbh/cmu-moca
 bvh=base64.b64decode(data['content']).decode('utf-8')
 image=Image.open(root/'production/mafia-temple/keyframes/shot-04.jpg').convert('RGB').crop((345,30,1057,742)).resize((512,512),Image.Resampling.LANCZOS)
 buf=BytesIO();image.save(buf,format='JPEG',quality=92)
-code=(root/'production/mafia-temple/stableanim_kernel.py').read_text().replace('__SOURCE_JPEG__',repr(base64.b64encode(buf.getvalue()).decode())).replace('__BVH_TEXT__',repr(bvh)).replace('__POSE_GENERATOR__',repr((root/'production/mafia-temple/mocap_to_poses.py').read_text()))
+code=(root/'production/mafia-temple/stableanim_kernel.py').read_text().replace('__SOURCE_JPEG__',repr(base64.b64encode(buf.getvalue()).decode())).replace('__BVH_TEXT__',repr(bvh)).replace('__POSE_GENERATOR__',repr((root/'production/mafia-temple/mocap_to_poses.py').read_text())).replace('__FACE_OFFSETS__',repr(json.loads((root/'production/mafia-temple/generated-keyframe-face68.json').read_text())))
 nb={'cells':[{'cell_type':'code','execution_count':None,'metadata':{},'outputs':[],'source':code.splitlines(True)}], 'metadata':{'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'},'language_info':{'name':'python'}},'nbformat':4,'nbformat_minor':5}
 (out/'main.ipynb').write_text(json.dumps(nb)); (out/'kernel-metadata.json').write_text(json.dumps({'id':f'{a.user}/{slug}','title':slug,'code_file':'main.ipynb','language':'python','kernel_type':'notebook','is_private':True,'enable_gpu':True,'enable_internet':True,'dataset_sources':[],'competition_sources':[],'kernel_sources':[],'model_sources':[],'machine_shape':'NvidiaTeslaT4'},indent=2))
 print('Prepared controlled-motion research test, without original reference')

@@ -7,6 +7,7 @@ from io import BytesIO
 SOURCE_JPEG = __SOURCE_JPEG__
 BVH_TEXT = __BVH_TEXT__
 POSE_GENERATOR = __POSE_GENERATOR__
+FACE_OFFSETS = __FACE_OFFSETS__
 work=pathlib.Path('/kaggle/working'); os.chdir(work)
 os.environ['HF_HOME']='/tmp/monarch-stableanim-hf'
 os.environ['HF_HUB_ENABLE_HF_TRANSFER']='0'
@@ -83,7 +84,7 @@ pathlib.Path('models').mkdir(exist_ok=True)
 os.symlink((pathlib.Path.cwd()/'checkpoints/models/antelopev2'), 'models/antelopev2')
 pathlib.Path('motion_pose_helper.py').write_text(POSE_GENERATOR)
 from motion_pose_helper import make_poses
-make_poses(BVH_TEXT,'input/poses')
+make_poses(BVH_TEXT,'input/poses', FACE_OFFSETS)
 pathlib.Path('input/reference.jpg').write_bytes(base64.b64decode(SOURCE_JPEG))
 out=work/'run-pilot-output';out.mkdir(exist_ok=True)
 print('Starting pose conditioned run',flush=True)
@@ -98,6 +99,6 @@ command=[sys.executable,'inference_basic.py','--pretrained_model_name_or_path',s
 run(command)
 frames=out/'animated_images'
 if len(list(frames.glob('frame_*.png'))) != 24: raise RuntimeError('Expected exactly 24 output frames')
-run(['ffmpeg','-y','-loglevel','error','-framerate','24','-i',str(frames/'frame_%d.png'),'-c:v','libx264','-crf','16','-pix_fmt','yuv420p',str(out/'run-motion-pilot.mp4')])
-(out/'run-pilot-receipt.json').write_text(json.dumps({'frames':24,'fps':24,'width':512,'height':512,'seconds_elapsed':round(time.time()-t,1),'status':'technical_test_only','license':'research-only until third-party weight licenses cleared'},indent=2))
+run(['ffmpeg','-y','-loglevel','error','-framerate','24','-i',str(frames/'frame_%d.png'),'-c:v','libx264','-crf','16','-pix_fmt','yuv420p',str(out/'run-motion-pilot-v2.mp4')])
+(out/'run-pilot-v2-receipt.json').write_text(json.dumps({'frames':24,'fps':24,'width':512,'height':512,'seconds_elapsed':round(time.time()-t,1),'status':'technical_test_only','license':'research-only until third-party weight licenses cleared'},indent=2))
 print('PILOT_DONE',flush=True)

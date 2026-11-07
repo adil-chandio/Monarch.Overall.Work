@@ -10,7 +10,14 @@ from bvh import Bvh
 from PIL import Image, ImageDraw
 
 JOINTS = ['Hips','LeftUpLeg','LeftLeg','LeftFoot','LeftToeBase','RightUpLeg','RightLeg','RightFoot','RightToeBase','Neck1','Head','LeftArm','LeftForeArm','LeftHand','RightArm','RightForeArm','RightHand']
-LIMBS=[('Neck1','LeftArm',(153,51,0)),('LeftArm','LeftForeArm',(153,102,0)),('LeftForeArm','LeftHand',(153,153,0)),('Neck1','RightArm',(102,153,0)),('RightArm','RightForeArm',(51,153,0)),('RightForeArm','RightHand',(0,153,0)),('Neck1','Hips',(0,153,51)),('Hips','LeftUpLeg',(0,153,102)),('LeftUpLeg','LeftLeg',(0,153,153)),('LeftLeg','LeftFoot',(0,102,153)),('LeftFoot','LeftToeBase',(0,51,153)),('Hips','RightUpLeg',(0,0,153)),('RightUpLeg','RightLeg',(51,0,153)),('RightLeg','RightFoot',(102,0,153)),('RightFoot','RightToeBase',(153,0,153)),('Neck1','Head',(153,0,51))]
+# COCO/OpenPose ordering and colors expected by StableAnimator's DWPose renderer.
+LIMBS=[('Neck1','RightArm',(153,0,0)),('Neck1','LeftArm',(153,51,0)),
+       ('RightArm','RightForeArm',(153,102,0)),('RightForeArm','RightHand',(153,153,0)),
+       ('LeftArm','LeftForeArm',(102,153,0)),('LeftForeArm','LeftHand',(51,153,0)),
+       ('Neck1','RightUpLeg',(0,153,0)),('RightUpLeg','RightLeg',(0,153,51)),
+       ('RightLeg','RightFoot',(0,153,102)),('Neck1','LeftUpLeg',(0,153,153)),
+       ('LeftUpLeg','LeftLeg',(0,102,153)),('LeftLeg','LeftFoot',(0,51,153)),
+       ('Neck1','Nose',(0,0,153))]
 
 def joint_matrix(motion, name, frame, cache):
     if name in cache:
@@ -32,7 +39,7 @@ def joint_matrix(motion, name, frame, cache):
     cache[name] = parent_matrix @ matrix
     return cache[name]
 
-def make_poses(bvh_text, output_dir):
+def make_poses(bvh_text, output_dir, face_offsets=None):
     motion = Bvh(bvh_text)
     if motion.nframes < 141 or abs(motion.frame_time - 1/120) > .0001:
         raise ValueError('Expected the 120 fps CMU 09_01 capture with at least 141 frames')
@@ -42,9 +49,18 @@ def make_poses(bvh_text, output_dir):
         pos={name:joint_matrix(motion,name,frame,cache)[:3,3]*.06 for name in JOINTS}
         root=pos['Hips']
         points={name:(round(240+240*(p[2]-root[2])),round(485-255*p[1])) for name,p in pos.items()}
+        # Position the face marker on the forward side of the head rather than
+        # leaving its orientation unspecified. Offsets were extracted from the
+        # generated character keyframe, not the user's original photo.
+        hx,hy=points['Head']; points['Nose']=(hx+38,hy-16)
         canvas=Image.new('RGB',(512,512)); draw=ImageDraw.Draw(canvas)
         for a,b,color in LIMBS: draw.line([points[a],points[b]],fill=color,width=8)
         for _,b,color in LIMBS:
             x,y=points[b]; draw.ellipse((x-4,y-4,x+4,y+4),fill=tuple(min(255,round(c/.6)) for c in color))
+        if face_offsets:
+            nx,ny=points['Nose']
+            for dx,dy in face_offsets:
+                x,y=round(nx+dx),round(ny+dy)
+                if 0<=x<512 and 0<=y<512: draw.ellipse((x-1,y-1,x+1,y+1),fill=(255,255,255))
         canvas.save(output/f'frame_{index}.png')
     return 24
