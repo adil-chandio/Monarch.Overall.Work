@@ -640,8 +640,8 @@
     "normalization_type": "dynamic",
     "target_offset": "0.01"
   },
-  "sha256": "b03325263be1dbcd60c357c81c5eac4e1042f1cf8449ed6b12bdbdcb18f4466b",
-  "bytes": 318527945,
+  "sha256": "29639cfd09dc15c7aa76568865618002fad69ff3ffda5307b2d01d6dc90719d0",
+  "bytes": 318625210,
   "full_decode": true,
   "full_film_complete": true,
   "v9_unchanged": true,
@@ -675,5 +675,23 @@
     11000,
     12000,
     13000
-  ]
+  ],
+  "native_render_provenance": {
+    "source_native_run": 42401349523,
+    "source_commit": "e712073dafd4d568a2351322c2b7f823565f6baa",
+    "corrected_native_run": "42402505284",
+    "corrected_commit": "f374521bb5e392689469068e6bd7f9b0bfb58a08",
+    "corrected_parts": [
+      41,
+      42,
+      44,
+      45,
+      46,
+      47
+    ],
+    "all_48_parts_fresh_for_v13": true,
+    "previous_v9_v10_v11_v12_movies_used": false,
+    "correction": "Restrict large-cover suppression to radius >0.9m, retaining investigator palms and held props; cover and next-stage transitions fully included.",
+    "soundtrack_unchanged_from_source_native_run": true
+  }
 }
