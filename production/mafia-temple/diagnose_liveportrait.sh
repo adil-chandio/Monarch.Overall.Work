@@ -20,6 +20,7 @@ try:
   allowed=r'(?:CUDA out of memory|Tried to allocate [0-9.]+ [GM]iB|No space left on device|ModuleNotFoundError|ImportError|OutOfMemoryError|[A-Za-z]+Error|SIGKILL|Killed|HTTP [0-9]+)'
   out['last_diagnostic_lines']=list(dict.fromkeys(re.findall(allowed,text,re.I)))[-25:]
   out['safe_failure_messages'] = [re.sub(r'(?:/[^ :]+)+', '<path>', x)[:200] for x in text.splitlines() if re.search(r'(?:ImportError|ModuleNotFoundError|RuntimeError|ValueError|AttributeError|CalledProcessError|Exception|HTTPError|PermissionError|OSError)', x) and not re.search(r'(?i)token|secret|password|KGAT|authorization', x)][-12:]
+  out['pip_errors'] = [re.sub(r'(?:/[^ :]+)+', '<path>', x)[:240] for x in text.splitlines() if re.search(r'ERROR:|Could not|ResolutionImpossible|No matching|No space|Requires-Python|Conflicting|Failed building', x, re.I) and not re.search(r'(?i)token|secret|password|KGAT|authorization', x)][-20:]
   text=re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', text)
   out['runtime_error_messages']=[re.sub(r'(?:/[^ :]+)+', '<path>', x)[:240] for x in re.findall(r'RuntimeError[^\n]{0,240}', text)[-4:] if not re.search(r'(?i)token|secret|password|KGAT', x)]
   out['frame_sources']=re.findall(r'([A-Za-z_0-9]+\.py):([0-9]+)',text)[-30:]
