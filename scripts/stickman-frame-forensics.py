@@ -33,7 +33,7 @@ def inspect(source,key,out,cache):
   for k,(p,index)in enumerate(zip(images,ids)):
    im=Image.open(p);im.thumbnail((320,180));x=k%5*320;y=k//5*210;board.paste(im,(x,y));d.text((x+5,y+183),f'f{index} / {pts[index]:.4f}s',fill='white')
   board.save(out/(key+'-adjacent-quotes.jpg'),quality=84)
-  # Two native-size detail quotations, not an entire republished scene/movie.
+  # Two rescaled 960px-wide detail quotations, not native-resolution evidence.
   for k in [2,7]:
    if k<len(images):Image.open(images[k]).save(out/(key+f'-detail-{k}.jpg'),quality=82)
  report={'all_video_frames_indexed':True,'decoded_frames':len(a),'first_pts':pts[0],'last_pts':pts[-1],'low_change_frames_mae_below_0_5':int(sum(diff[1:]<.5)),'mechanical_change_windows':[{'frame':i,'pts':pts[i],'difference':float(diff[i])}for i in peaks],'adjacent_quoted_frames':[{'frame':i,'pts':pts[i]}for i in ids],'frame_index':str(csvpath),'actual_visual_review_completed':False,'every_frame_human_inspected':False,'audio_listening_claimed':False,'change_scores_are_not_rig_or_editing_method_proof':True}
