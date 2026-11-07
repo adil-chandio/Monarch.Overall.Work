@@ -1,6 +1,6 @@
 # 3D character feasibility — initial rig probe
 
-**Status: technical probe only, not the approved likeness/motion pilot and not a usable character.** No part of the supplied reference is loaded or transmitted by this probe. The 20-second production remains on hold pending a likeness and movement pilot and user approval.
+**Status: technical probe only, not the approved likeness/motion pilot and not a usable character.** No part of the supplied reference is loaded or transmitted by this probe. The user has requested the full 20-second production; a usable reference-matched character and motion quality are still unproven, so this probe cannot be used as the finished film.
 
 ## What was actually tested
 
@@ -19,6 +19,6 @@ The local container also required X11/OpenGL runtime shared libraries before the
 
 1. Obtain or build an animatable, rights-cleared head with a demonstrable match to the reference from front, three-quarter and profile views, plus usable eyes, hair and beard. A generic MPFB base does not solve this.
 2. Create properly fitted suit and shoes, a facial rig, and licensed movement or recorded mocap; test walk, run, foot contact, head turn and expression on the **same** character.
-3. Run a real moving pilot and get user approval before any full-shot production. Only then benchmark final-scene quality and per-frame costs and design the distributed Actions render.
+3. Run and inspect a real moving pilot before final-shot production; do not present a failed pilot as a finished film. Only then benchmark final-scene quality and per-frame costs and design the distributed Actions render.
 
 If an appropriately licensed reference-matched rig is supplied, it could unblock the likeness step; otherwise face reconstruction, sculpting and material development still require feasibility work and potentially specialist tools or an artist. Research code licenses and model/asset licenses must be checked separately.
