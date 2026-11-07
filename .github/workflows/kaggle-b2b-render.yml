@@ -379,7 +379,7 @@ jobs:
           if grep -q 'stableanim-recover-v7' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/recover_stableanim_pilot.sh
           elif grep -q 'stableanim-diagnose' production/mafia-temple/trigger.txt; then
-            PILOT_KERNEL_SLUG=monarch-run-research-42415219775 python production/mafia-temple/stableanim_diagnose.py
+            PILOT_KERNEL_SLUG=monarch-turn-research-42421015145 python production/mafia-temple/stableanim_diagnose.py
           elif grep -q 'stableanim-pilot' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_stableanim_pilot.sh
           elif grep -q 'portrait-recover' production/mafia-temple/trigger.txt; then
