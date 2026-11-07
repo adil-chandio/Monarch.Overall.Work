@@ -283,13 +283,18 @@ def archive_scene():
 
 def lab_scene():
  ceramic=material('Off-white laboratory ceramic',(.57,.63,.60),.36,scale=25,bump=.06);steel=material('Satin machined steel',(.34,.40,.43),.25,.85,scale=65,bump=.1);black=material('Anodized fixture',(.025,.045,.052),.37,.6,scale=40,bump=.08);soil=material('Sediment in sample well',(.18,.12,.065),.9,scale=35,bump=.55)
+ box('Laboratory back wall',(0,3.4,1.65),(10,.18,3.8),ceramic,.03)
+ for level in [.65,1.8]:box('Background shelf',(0,2.85,level),(6,.7,.065),steel,.025)
+ glass=material('Frosted sample containers',(.22,.36,.37),.23,scale=40,bump=.035)
+ for k in range(7):
+  x=-2.3+k*.65;ell('Closed background specimen container',(x,2.8,2.04),(.1,.1,.22),glass,20,12);box('Closed cap',(x,2.8,2.26),(.18,.18,.06),ceramic,.02)
  box('Work surface',(0,0,-.25),(8,6,.35),ceramic,.1);box('Instrument base',(0,.3,.04),(2.8,2,.22),black,.1);box('Supported vertical column',(1.1,.8,1.2),(.22,.24,2.4),steel);box('Supported cantilever',(.35,.8,2.32),(1.65,.25,.18),steel);box('Optical head',(-.3,.55,1.9),(.55,.6,.65),ceramic,.12)
  tray=box('Sliding sample receiver',(-1.3,-.25,.32),(1.2,1,.14),steel,.06);sample=ell('Sediment specimen',(-1.3,-.25,.45),(.38,.29,.1),soil)
  for side in [-1,1]:box('Linear slide rail',(0,side*.42-.25,.19),(2.8,.055,.07),steel,.02)
  for k in range(8):box('Background specimen tray',(k*.6-2,2,.02),(.45,.6,.05),ceramic,.03)
- area('Large laboratory key',(-3,-4,6),(0,0,1),1400,(.75,.88,1),4);area('Warm separating edge',(3,3,5),(0,0,1),1600,(1,.78,.49),3);area('Instrument lamp',(-.3,.5,1.57),(0,-.3,.3),35,(.78,.92,1),.4);cam=camera((3.3,-4.6,2.8),(0,0,.9),53,5)
+ area('Large laboratory key',(-3,-4,6),(0,0,1),1400,(.75,.88,1),4);area('Warm separating edge',(3,3,5),(0,0,1),1600,(1,.78,.49),3);area('Instrument lamp',(-.3,.5,1.57),(0,-.3,.3),35,(.78,.92,1),.4);cam=camera((3.8,-5.3,3.1),(0,.15,1.1),45,4)
  def update(t):
-  u=ease(t/6.893);cam.location=lerp((3.3,-4.6,2.8),(2.1,-3.5,2.0),u);target=Vector((-.1,.15,.8));track(cam,target);cam.data.dof.focus_distance=(cam.location-target).length;pos=-1.3+1.0*ease((t-.5)/3.8);tray.location.x=pos;sample.location.x=pos
+  u=ease(t/6.893);cam.location=lerp((3.8,-5.3,3.1),(2.8,-4.5,2.8),u);target=Vector((0,.15,1.1));track(cam,target);cam.data.dof.focus_distance=(cam.location-target).length;pos=-1.3+1.0*ease((t-.5)/3.8);tray.location.x=pos;sample.location.x=pos
  return update
 
 # The master remains unchanged; this development film includes the first complete 61 s.
