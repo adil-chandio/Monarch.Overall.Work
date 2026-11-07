@@ -22,6 +22,9 @@ def run(args, **kw):
 run([sys.executable,'-m','pip','install','-q','numpy<2','onnxruntime==1.20.1','onnx==1.18.0',
      'diffusers==0.29.2','transformers==4.49.0','accelerate==0.30.1','huggingface_hub==0.27.1',
      'einops','scikit-image','imageio-ffmpeg','bvh','safetensors'])
+# The preinstalled PEFT version is incompatible with the older diffusion pipeline;
+# this inference path uses custom attention processors, not PEFT adapters.
+run([sys.executable, '-m', 'pip', 'uninstall', '-y', 'peft'])
 import torch
 if not torch.cuda.is_available(): raise RuntimeError('No GPU allocated')
 print('GPU',torch.cuda.get_device_name(0),'TORCH',torch.__version__,flush=True)

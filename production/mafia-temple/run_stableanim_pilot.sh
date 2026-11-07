@@ -14,7 +14,8 @@ for ((i=0;i<250;i++)); do
    kaggle kernels output "$ref" -p "$dir/out" --file-pattern '(^|/)(run-motion-pilot\.mp4|run-pilot-receipt\.json)$'
    find "$dir/out" -name 'run-motion-pilot.mp4' -type f -size +10k -exec cp '{}' production/mafia-temple/run-pilot-output/ \;
    find "$dir/out" -name 'run-pilot-receipt.json' -type f -exec cp '{}' production/mafia-temple/run-pilot-output/ \;
-   test -s production/mafia-temple/run-pilot-output/run-motion-pilot.mp4; exit 0;;
+   test -s production/mafia-temple/run-pilot-output/run-motion-pilot.mp4
+   rm -f production/mafia-temple/run-pilot-output/run-pilot-diagnostics.json; exit 0;;
   *ERROR*|*error*|*CANCEL*|*cancel*|*FAIL*)
    export PILOT_KERNEL_SLUG="$slug"
    python production/mafia-temple/stableanim_diagnose.py
