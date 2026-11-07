@@ -23,6 +23,40 @@
       ],
       "gait_clock": 2,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999996
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.1799018104974147,
+          "z": 3.6453974573565335
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.0240799999999997
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.4460799999999994
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
@@ -31,7 +65,8 @@
         -3.557711767228795
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 131,
@@ -56,6 +91,40 @@
       ],
       "gait_clock": 4.366666666666666,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 0.5800799999999999
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 3.0020799999999994
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 7.1968293607721e-7,
+          "z": 1.0240791557224453
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.09216572132011394,
+          "z": 2.666454010557749
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
@@ -64,7 +133,8 @@
         -4.4091900814518485
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 243,
@@ -81,7 +151,8 @@
         4.2906875
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 341,
@@ -98,7 +169,8 @@
         3.930772631944444
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 463,
@@ -114,7 +186,8 @@
         7.833333333333334
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 668,
@@ -130,7 +203,8 @@
         10.680555555555557
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 832,
@@ -146,7 +220,8 @@
         6.671875
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 1219,
@@ -162,7 +237,8 @@
         5.457550439453125
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 1453,
@@ -180,7 +256,8 @@
         5.54074074074074
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9926350245499181
     },
     {
       "frame": 1542,
@@ -198,7 +275,8 @@
         5.060592455418381
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9885433715220949
     },
     {
       "frame": 1660,
@@ -217,12 +295,46 @@
         0
       ],
       "leaf_position": [
-        2.8,
+        2.895,
         0.9299999999999999,
         -1.45
       ],
       "gait_clock": 2,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999996
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.1799018104974147,
+          "z": 3.6453974573565335
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.0240799999999997
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.4460799999999994
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
@@ -231,7 +343,8 @@
         -3.557711767228795
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 1834,
@@ -256,6 +369,40 @@
       ],
       "gait_clock": 7.8,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": -0.3079200000000003
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 2.1140799999999995
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 0.1360799999999997
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.22280726990440508,
+          "z": 2.0390268194308123
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
@@ -264,7 +411,8 @@
         -5.57529734523888
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 1985,
@@ -284,7 +432,8 @@
         -7.4
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 2470,
@@ -304,7 +453,8 @@
         -2.290666666666666
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 2742,
@@ -320,7 +470,8 @@
         6.671875
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 2958,
@@ -336,7 +487,8 @@
         5.716496875
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 3112,
@@ -353,7 +505,8 @@
         4.344096576388888
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 3166,
@@ -370,7 +523,8 @@
         4.134201388888889
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 3265,
@@ -387,7 +541,8 @@
         4.2906875
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 3496,
@@ -404,7 +559,8 @@
         3.8207079999999993
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 3670,
@@ -421,7 +577,8 @@
         4.2906875
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9942716857610474
     },
     {
       "frame": 4021,
@@ -438,7 +595,8 @@
         3.959793658457155
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9934533551554828
     },
     {
       "frame": 4241,
@@ -456,7 +614,8 @@
         5.54074074074074
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9926350245499181
     },
     {
       "frame": 4456,
@@ -474,7 +633,8 @@
         5.043940757887517
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9869067103109657
     },
     {
       "frame": 4624,
@@ -491,7 +651,8 @@
         5.478285714285715
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9926350245499181
     },
     {
       "frame": 5109,
@@ -508,7 +669,8 @@
         5.461822980173245
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9950900163666121
     },
     {
       "frame": 5381,
@@ -516,16 +678,21 @@
       "world": "controls",
       "time": 2,
       "stage": "controls",
-      "partial_alignment": 0.05792000000000001,
-      "missing_reference": true,
-      "complete_genome": false,
+      "blank_is_not_a_positive_sample": true,
+      "damage_is_one_check": true,
+      "arm_position": [
+        -0.85,
+        2.24,
+        0.1
+      ],
       "camera": [
-        3.904914285714286,
-        3.0395428571428575,
-        5.478285714285715
+        4.279012883180622,
+        2.9557618095822367,
+        5.962757515188696
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9877250409165302
     },
     {
       "frame": 5891,
@@ -533,16 +700,21 @@
       "world": "controls",
       "time": 19,
       "stage": "controls",
-      "partial_alignment": 1,
-      "missing_reference": true,
-      "complete_genome": false,
+      "blank_is_not_a_positive_sample": true,
+      "damage_is_one_check": true,
+      "arm_position": [
+        0.85,
+        2.5,
+        0.1
+      ],
       "camera": [
-        3.8410714285714285,
-        3.3982142857142863,
-        5.515178571428571
+        3.130017391304348,
+        2.469182608695652,
+        4.725843478260869
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9729950900163666
     },
     {
       "frame": 6173,
@@ -559,7 +731,8 @@
         5.478285714285715
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9909983633387889
     },
     {
       "frame": 6434,
@@ -576,7 +749,8 @@
         5.114512560013717
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9934533551554828
     },
     {
       "frame": 6620,
@@ -601,15 +775,50 @@
       ],
       "gait_clock": 2,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999996
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.1799018104974147,
+          "z": 3.6453974573565335
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.0240799999999997
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.4460799999999994
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
-        -3.7016976416780234,
-        2.75,
-        -4.178216971139809
+        -7.5,
+        3.7,
+        -8
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9934533551554828
     },
     {
       "frame": 7225,
@@ -634,15 +843,50 @@
       ],
       "gait_clock": 14.166666666666668,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.2272446099084046,
+          "z": -1.5934955595122153
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 0.3380799999999997
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": -1.6399200000000003
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 0.7820799999999997
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
-        -2.9378734853311195,
+        -3.95633297688627,
         2.75,
-        -7.809840330474828
+        -9.0438339544702
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 7544,
@@ -653,12 +897,13 @@
       "evidence_complement": true,
       "known_appearance": false,
       "camera": [
-        3.418287037037037,
-        2.600462962962963,
-        4.600462962962963
+        2.9447610294117648,
+        2.452665441176471,
+        4.310845588235295
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 8129,
@@ -669,12 +914,13 @@
       "evidence_complement": true,
       "known_appearance": false,
       "camera": [
-        3.7901656539351847,
-        2.8884476273148145,
-        4.8884476273148145
+        3.506556919642857,
+        2.205887276785714,
+        4.016294642857143
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9967266775777414
     },
     {
       "frame": 8441,
@@ -699,15 +945,50 @@
       ],
       "gait_clock": 2,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999996
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.1799018104974147,
+          "z": 3.6453974573565335
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.0240799999999997
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.4460799999999994
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
-        -3.7016976416780234,
+        -4.86063054129697,
         2.75,
-        -4.178216971139809
+        -5.281337333648281
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 9228,
@@ -732,15 +1013,50 @@
       ],
       "gait_clock": 20.233333333333334,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": -2.971920000000001
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.031274516711018475,
+          "z": -0.5853331486717923
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.021345224575654017,
+          "z": -3.391753426860137
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": -0.9939200000000005
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
-        -2.9378734853311195,
+        -3.95633297688627,
         2.75,
-        -9.265840330474827
+        -10.4998339544702
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 9618,
@@ -748,15 +1064,16 @@
       "world": "boundary",
       "time": 2,
       "stage": "boundary",
-      "evidence_complement": true,
-      "known_appearance": false,
+      "reconstruction_is_not_recovery": true,
+      "portrait_opacity": 1,
       "camera": [
-        3.418287037037037,
-        2.600462962962963,
-        4.600462962962963
+        4.215829903978053,
+        2.642688614540466,
+        6.2123731138545955
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 9959,
@@ -764,15 +1081,16 @@
       "world": "boundary",
       "time": 13.366666666666667,
       "stage": "boundary",
-      "evidence_complement": true,
-      "known_appearance": false,
+      "reconstruction_is_not_recovery": true,
+      "portrait_opacity": 0.36082720755358055,
       "camera": [
-        3.1443739143947185,
-        2.239902677040466,
-        4.239902677040466
+        3.9100303421265,
+        2.6501255005982696,
+        5.97643221790912
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9967266775777414
     },
     {
       "frame": 10176,
@@ -788,7 +1106,8 @@
         4.600462962962963
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.997545008183306
     },
     {
       "frame": 10607,
@@ -804,7 +1123,8 @@
         4.424429876114541
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 10858,
@@ -812,15 +1132,16 @@
       "world": "integration",
       "time": 2,
       "stage": "integration",
-      "evidence_complement": true,
-      "known_appearance": false,
+      "complementary_records": true,
+      "inventory_complete": false,
       "camera": [
-        3.418287037037037,
-        2.600462962962963,
-        4.600462962962963
+        4.196875,
+        3.7427083333333333,
+        5.571354166666667
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 11157,
@@ -828,15 +1149,16 @@
       "world": "integration",
       "time": 11.966666666666667,
       "stage": "integration",
-      "evidence_complement": true,
-      "known_appearance": false,
+      "complementary_records": true,
+      "inventory_complete": false,
       "camera": [
-        3.099315572487997,
-        2.199455231910151,
-        4.199455231910151
+        3.8520234493827155,
+        4.613872499588477,
+        5.609085770781892
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9991816693944353
     },
     {
       "frame": 11357,
@@ -852,7 +1174,8 @@
         7.833333333333334
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 11635,
@@ -868,7 +1191,8 @@
         11.694444444444446
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 11827,
@@ -885,7 +1209,8 @@
         4.2906875
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9983633387888707
     },
     {
       "frame": 11900,
@@ -902,7 +1227,8 @@
         4.01186102170139
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9942716857610474
     },
     {
       "frame": 12013,
@@ -927,6 +1253,40 @@
       ],
       "gait_clock": 2,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": 1.4680799999999996
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.1799018104974147,
+          "z": 3.6453974573565335
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.0240799999999997
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 3.4460799999999994
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
@@ -935,7 +1295,8 @@
         -8.533333333333333
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9615384615384616
     },
     {
       "frame": 12226,
@@ -960,6 +1321,40 @@
       ],
       "gait_clock": 9.1,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": -0.30792000000000014
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.01870829090702493,
+          "z": 2.0928877801856967
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.034550343986401374,
+          "z": -0.7127736825465665
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": 1.6700799999999998
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
@@ -968,7 +1363,8 @@
         -10.426666666666666
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9934533551554828
     },
     {
       "frame": 12393,
@@ -984,7 +1380,8 @@
         3.5765625
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 0.9942716857610474
     },
     {
       "frame": 12930,
@@ -1000,7 +1397,8 @@
         8.411612687174479
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     },
     {
       "frame": 9557,
@@ -1025,15 +1423,50 @@
       ],
       "gait_clock": 31.200000000000003,
       "walk_weight": 1,
+      "feet": [
+        {
+          "side": -1,
+          "pair": 0,
+          "stance": true,
+          "x": 3.2800000000000002,
+          "y": 0,
+          "z": -5.6359200000000005
+        },
+        {
+          "side": -1,
+          "pair": 1,
+          "stance": false,
+          "x": 3.2800000000000002,
+          "y": 0.00013113742110155735,
+          "z": -3.214073147327543
+        },
+        {
+          "side": 1,
+          "pair": 0,
+          "stance": false,
+          "x": 1.92,
+          "y": 0.08720530045988972,
+          "z": -5.977867792069945
+        },
+        {
+          "side": 1,
+          "pair": 1,
+          "stance": true,
+          "x": 1.92,
+          "y": 0,
+          "z": -3.65792
+        }
+      ],
       "root_speed": 0.24,
       "independent_actions": true,
       "camera": [
-        -2.9378734853311195,
+        -3.95633297688627,
         2.75,
-        -11.897840330474828
+        -13.1318339544702
       ],
       "caption_panels": 0,
-      "organic_native_assets": true
+      "organic_native_assets": true,
+      "nonblack_fraction": 1
     }
   ],
   "deterministic_seek": true,
