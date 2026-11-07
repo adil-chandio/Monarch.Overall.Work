@@ -35,7 +35,7 @@ class MotionEngine:
         self.pipe = None
         self.width = 768
         self.height = 448
-        self.frames = 49
+        self.frames = int(job.get("frames", 49))
         self.steps = 28
         log(f"CUDA device: {torch.cuda.get_device_name(0)} | dtype={self.dtype}")
 
@@ -73,6 +73,9 @@ class MotionEngine:
         has_emb = bool(emb_file and emb_file.exists())
         self.ensure_loaded(has_emb)
 
+        self.frames = int(scene.get("frames", self.job.get("frames", 49)))
+        if self.frames < 9 or (self.frames - 1) % 8:
+            raise ValueError("LTX frame count must be 8n+1")
         img = ImageOps.fit(load_image(str(img_path)), (self.width, self.height), method=Image.Resampling.LANCZOS)
         gen = torch.Generator("cpu").manual_seed(int(scene.get("seed", 42)))
         t0 = time.time()

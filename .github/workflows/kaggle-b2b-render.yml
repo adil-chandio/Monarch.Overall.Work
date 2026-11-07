@@ -365,7 +365,9 @@ jobs:
 
       - name: Generate AI motion clips
         run: |
-          if grep -q 'walking-retry' production/mafia-temple/trigger.txt; then
+          if grep -q 'native-motion-v2' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_v2.sh
+          elif grep -q 'walking-retry' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_retry.sh
           else
             bash production/mafia-temple/run_gpu.sh
