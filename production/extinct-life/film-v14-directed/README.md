@@ -1,6 +1,6 @@
 # V14 — forensic-directed full English rebuild
 
-Status: source implemented; final-revision native preflight and fresh full render required. This directory is not a delivered-film certificate. Existing V13 and prior releases are unchanged.
+Status: corrected local native preflight passed (70 samples / 27 stages, six tests). Cloud full-master assembly and encoded creative review are still pending; see `LOCAL-VALIDATION.json`. This directory is not a delivered-film certificate. Existing V13 and prior releases are unchanged.
 
 ## Locked continuity
 
@@ -21,7 +21,7 @@ Status: source implemented; final-revision native preflight and fresh full rende
 
 `render.mjs --stills` covers all 27 stages plus exact species, takeoff and closing frames. At these sampled frames, actor-only ray checks require a majority unobstructed subject and minimum projected subject size. This deliberately does NOT claim complete environmental/grass/text occlusion validation, every-frame subject visibility or expert anatomy.
 
-Source fingerprint binds native QC, all picture shards and final QC to the same exact local modules and schedule. Stale inspection or mixed-revision parts fail assembly. The renderer still checks blank output, fixed-length reachable arms, visible palms, shader/page errors and absolute-seek determinism. Unit tests separately lock full script/voice coverage and shot contracts.
+Visual-source fingerprint binds native QC and final QC to the inspected modules and schedule. Stale inspection or unknown mixed-revision parts fail assembly. The framing correction explicitly permits only hash-sealed base-run shards entirely outside changed stages and outgoing transition dependencies; all eleven overlapping shards must be fresh. See `PATCH-PROVENANCE.json`. The renderer still checks blank output, fixed-length reachable arms, visible palms, shader/page errors and absolute-seek determinism. Unit tests separately lock full script/voice coverage and shot contracts.
 
 The workflow renders all pictures afresh in 48 non-overlapping shards, checks complete decoded frame count and encoded loudness/peaks, then extracts 439 whole-second samples, full-resolution samples and finer motion strips from the actual encoded candidate. It creates a **draft** release pending encoded creative review. Technical pass flags are not “zero flaws,” scientific approval, uninterrupted listening or owner acceptance.
 
