@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - arena/9960286a-monarch-overall-work
+      - arena/6101616c-monarch-overall-work
     paths:
       - "gpu-engine/trigger.txt"
+      - "production/mafia-temple/trigger.txt"
   workflow_dispatch:
     inputs:
       render_mafia:
@@ -22,7 +24,7 @@ concurrency:
 
 jobs:
   kaggle-dual-t4:
-    if: ${{ github.event_name != 'workflow_dispatch' || inputs.render_mafia != true }}
+    if: ${{ github.ref_name == 'arena/9960286a-monarch-overall-work' && (github.event_name != 'workflow_dispatch' || inputs.render_mafia != true) }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -203,7 +205,7 @@ jobs:
           done
 
   mafia-temple-render:
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.render_mafia == true && github.ref_name == 'arena/6101616c-monarch-overall-work' }}
+    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && (github.event_name == 'push' || inputs.render_mafia == true) }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
