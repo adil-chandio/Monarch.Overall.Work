@@ -1,0 +1,123 @@
+name: First-person 3D — approved one-minute English experiment
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-pov-minute.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - name: Build original-timing approved narration, attributed score and restrained action-specific foley
+        run: .venv/bin/python production/extinct-life/film-v11-pov/finish.py
+      - name: Verify native frames, articulated limb lengths, deterministic seeking and motion with a locked camera
+        run: node production/extinct-life/film-v11-pov/render.mjs --stills
+      - name: Verify source timing, complete sentence and privately referenced assets
+        run: .venv/bin/python -m unittest discover -s tests -p 'test_extinct_pov_minute.py' -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pov-audio-and-preflight
+          path: |
+            .cache/extinct-v11/proof.wav
+            .cache/extinct-v11/stills
+            .cache/extinct-v11/seek-QC.json
+            production/extinct-life/film-v11-pov/AUDIO-QC.json
+          include-hidden-files: true
+          retention-days: 3
+  pictures:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0, 1, 2, 3, 4, 5]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1
+      - name: Render every native frame of the approved experiment
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          FROM=$((PART * 305))
+          TO=$(((PART + 1) * 305))
+          node production/extinct-life/film-v11-pov/render.mjs --from=$FROM --to=$TO
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pov-native-${{ matrix.part }}
+          path: |
+            .cache/extinct-v11/part-*.mp4
+            .cache/extinct-v11/render-*.json
+          include-hidden-files: true
+          retention-days: 3
+  assemble:
+    needs: [preflight, pictures]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pov-native-*
+          path: .cache/extinct-v11
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: pov-audio-and-preflight
+          path: .cache/pov-preflight
+      - name: Restore preflight data, assemble and decode the actual delivery
+        run: |
+          cp .cache/pov-preflight/.cache/extinct-v11/proof.wav .cache/extinct-v11/
+          cp .cache/pov-preflight/production/extinct-life/film-v11-pov/AUDIO-QC.json production/extinct-life/film-v11-pov/
+          cp -r .cache/pov-preflight/.cache/extinct-v11/stills production/extinct-life/film-v11-pov/inspection
+          cp .cache/pov-preflight/.cache/extinct-v11/seek-QC.json production/extinct-life/film-v11-pov/
+          .venv/bin/python production/extinct-life/film-v11-pov/finish.py --assemble
+      - name: Publish the actual rendered video, not stills or reference footage
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-pov-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'Extinct Life — First-person 3D English experiment (1:01)' --notes "Owner-authorized enhanced first-person experiment after the approved structure. V9 and V10 retained unchanged. Owner-sheet-inspired black-suit stylized investigator; moving observer, sediment-bank sampling, enlarged explanatory DNA, life-scale polar coast, conceptual past vegetation, research room/tool handling, evidence interpretation and woodland observation. 61 seconds finishes the existing approved English voice-02 sentence without speed changes. 1920x1080, 30fps, 1830 native rendered frames; not image plates, panned images or a slideshow. Prior original mastodon geometry and two pre-existing material texture maps reused as 3D assets, not previous video frames. Stylized illustration, not photoreal field footage, an exact portrait, anatomical validation or a physically validated simulation. Owner image used privately as design reference and not redistributed as a release asset. No reference animation characters/choreography/footage/music copied. Music: 'Hiraeth' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Excerpt, fades and ducking; no endorsement implied. Soft synthesized foley/ambience, not field recordings or ASMR certification. Technical/sample inspection is not uninterrupted human audiovisual review or a claim of reference parity. No YouTube upload." .cache/extinct-v11/Extinct_Life_POV_World_Experiment_English_1080p.mp4 production/extinct-life/film-v11-pov/English.srt production/extinct-life/film-v11-pov/CREDITS.md production/extinct-life/film-v11-pov/QC.json production/extinct-life/film-v11-pov/AUDIO-QC.json
+      - name: Preserve delivery metadata without committing the large movie
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v11-pov');q=json.load(open(b/'QC.json'));tag='extinct-life-pov-'+os.environ['GITHUB_RUN_ID'];url='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          (b/'DELIVERY.json').write_text(json.dumps({'status':'Rendered one-minute experiment; owner creative review pending','video':url+'download/'+tag+'/Extinct_Life_POV_World_Experiment_English_1080p.mp4','release':url+'tag/'+tag,'seconds':61,'frames':1830,'sha256':q['sha256'],'v9_unchanged':True,'v10_unchanged':True},indent=2)+'\n')
+          PY
+          git config user.name 'Monarch pov animation production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v11-pov
+          git commit -m 'Deliver approved 61-second rendered pov English experiment and technical QC [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work

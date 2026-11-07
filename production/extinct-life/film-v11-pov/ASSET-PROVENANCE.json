@@ -1,0 +1,30 @@
+{
+  "owner_reference": {
+    "filename": "mafia-full-body-ai-v2_1.png",
+    "sha256": "03e51cfba7ea55bb3d29770977d7496e7e2a88ef9b43347370316773c19b75d3",
+    "use": "Private character-design reference, not a release/source asset",
+    "redistributed": false,
+    "exact_likeness_claimed": false
+  },
+  "reused_assets": [
+    {
+      "path": "production/extinct-life/film-v9-full/native-meshes/mastodon.glb",
+      "sha256": "0eeb55941e563400f37754be838a5cb4a8adfd0935eabc7a2ff388daa4313b7d",
+      "role": "Original procedural production sculpt"
+    },
+    {
+      "path": "production/extinct-life/flow-proof/materials/clay-albedo.jpg",
+      "sha256": "5a49a85b71154ab7588ffeb0b55662978e986e82a8f2dcd805582aa169f18d99",
+      "role": "Pre-existing production material map, not a scene plate; albedo originally AI-generated"
+    },
+    {
+      "path": "production/extinct-life/flow-proof/materials/clay-height.jpg",
+      "sha256": "6d5aebfff74d29342cb83351781f26129300a17c8597ce1f38c620096ec4598a",
+      "role": "Pre-existing production material map, not a scene plate; albedo originally AI-generated"
+    }
+  ],
+  "previous_movie_frames_used": false,
+  "image_plate_animation": false,
+  "new_generated_images": 0,
+  "scientific_anatomical_expert_validation": false
+}
