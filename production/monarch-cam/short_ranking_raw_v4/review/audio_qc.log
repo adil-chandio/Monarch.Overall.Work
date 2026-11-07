@@ -1,14 +1,14 @@
 deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4  [web]
-  I     -14.62 LUFS   target -14.0 ±0.7
-  LRA   106.39 LU          target (1.0, 10.0)
-  peak  -2.19 dBFS     ceiling -1.0
-  move  226.0 dB peak-to-peak across the body
-  mono  0.0 dB low-band loss
-  harsh -13.82 dB over high-mid
+  I     -15.25 LUFS   target -14.0 ±0.7
+  LRA   8.17 LU          target (1.0, 10.0)
+  peak  -1.78 dBFS     ceiling -1.0
+  move  12.61 dB peak-to-peak across the body
+  mono  -0.63 dB low-band loss
+  harsh -13.44 dB over high-mid
 
-  PASS  loudness_in_range
+  FAIL  loudness_in_range
   PASS  true_peak_ok
-  FAIL  lra_in_range
+  PASS  lra_in_range
   PASS  no_clipping
   PASS  no_clicks
   PASS  mono_compatible
@@ -16,5 +16,5 @@ deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCR
   PASS  not_harsh
   PASS  has_dynamics
 
-  RESULT: FAIL — lra_in_range
+  RESULT: FAIL — loudness_in_range
   wrote production/monarch-cam/short_ranking_raw_v4/review/audio_qc.json

@@ -1,59 +1,60 @@
 Candidate failed squirrel https://upload.wikimedia.org/wikipedia/commons/9/93/Sasana.2015.myanmar.squirrel.1.webmhd.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/9/93/Sasana.2015.myanmar.squirrel.1.webmhd.webm')
 Retrieved squirrel 3543930
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm -ss 1.000 -t 8.000 -map 0:v:0 -an -vf fps=30 -frames:v 240 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm -ss 1.000 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/squirrel_%04d.jpg
 Candidate failed hermit_crab https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm')
 Retrieved hermit_crab 2540137
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm -ss 0.100 -t 8.000 -map 0:v:0 -an -vf fps=30 -frames:v 240 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm -ss 0.500 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/hermit_crab_%04d.jpg
-Candidate failed starfish https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm')
-Retrieved starfish 13746304
-+ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/starfish.webm
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/starfish.webm -ss 36.000 -t 8.000 -map 0:v:0 -an -vf fps=30 -frames:v 240 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_starfish.mp4
-+ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_starfish.mp4
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_starfish.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/starfish_%04d.jpg
-Candidate failed octopus https://upload.wikimedia.org/wikipedia/commons/c/cc/OctopusFeedingCSS.mpg HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/c/cc/OctopusFeedingCSS.mpg')
-Retrieved octopus 18509824
-+ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/octopus.mpg
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/octopus.mpg -ss 22.500 -t 8.000 -map 0:v:0 -an -vf fps=30 -frames:v 240 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_octopus.mp4
-+ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_octopus.mp4
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_octopus.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/octopus_%04d.jpg
-Candidate failed titmouse https://upload.wikimedia.org/wikipedia/commons/9/9a/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/9/9a/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm')
-Retrieved titmouse 4315773
-+ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/titmouse.webm
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/titmouse.webm -ss 15.500 -t 3.000 -map 0:v:0 -an -vf fps=30 -frames:v 90 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_titmouse.mp4
-+ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_titmouse.mp4
-+ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_titmouse.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/titmouse_%04d.jpg
+Candidate failed strandschnecke https://upload.wikimedia.org/wikipedia/commons/c/c1/Strandschnecke_%28grasend_mit_Spinne%29.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/c/c1/Strandschnecke_%28grasend_mit_Spinne%29.webm')
+Retrieved strandschnecke 17024060
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/strandschnecke.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/strandschnecke.webm -ss 21.500 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_strandschnecke.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_strandschnecke.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_strandschnecke.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/strandschnecke_%04d.jpg
+Candidate failed berlin_gorilla https://upload.wikimedia.org/wikipedia/commons/c/c9/Berlin_zoologisk_hage_2026-04-07_mov05.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/c/c9/Berlin_zoologisk_hage_2026-04-07_mov05.webm')
+Retrieved berlin_gorilla 8447653
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/berlin_gorilla.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/berlin_gorilla.webm -ss 1.000 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_berlin_gorilla.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_berlin_gorilla.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_berlin_gorilla.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/berlin_gorilla_%04d.jpg
+Candidate failed oriental_dove https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm/Streptopelia_orientalis_fighting_2024-04-26.webm.1080p.vp9.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm/Streptopelia_orientalis_fighting_2024-04-26.webm.1080p.vp9.webm')
+Candidate failed oriental_dove https://upload.wikimedia.org/wikipedia/commons/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm')
+Retrieved oriental_dove 72961667
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/oriental_dove.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/oriental_dove.webm -ss 8.000 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_oriental_dove.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_oriental_dove.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_oriental_dove.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/oriental_dove_%04d.jpg
 {
   "topic": "5 Unexpected Animal Skills, Ranked",
   "edition": "raw_fullscreen_v4",
   "source_pages": {
     "squirrel": "https://commons.wikimedia.org/wiki/File:Sasana.2015.myanmar.squirrel.1.webmhd.webm",
     "hermit_crab": "https://commons.wikimedia.org/wiki/File:Einsiedlerkrebs_(Wangerooge).webm",
-    "starfish": "https://commons.wikimedia.org/wiki/File:Seestern_(sich_aufrichtend).webm",
-    "octopus": "https://commons.wikimedia.org/wiki/File:OctopusFeedingCSS.mpg",
-    "titmouse": "https://commons.wikimedia.org/wiki/File:Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm"
+    "strandschnecke": "https://commons.wikimedia.org/wiki/File:Strandschnecke_(grasend_mit_Spinne).webm",
+    "berlin_gorilla": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov05.webm",
+    "oriental_dove": "https://commons.wikimedia.org/wiki/File:Streptopelia_orientalis_fighting_2024-04-26.webm"
   },
   "rights_declaration": "All five picture sources are CC0 1.0 via Wikimedia Commons; attribution is given voluntarily.",
   "credits": {
     "squirrel": "Moine S\u0101sana",
     "hermit_crab": "Rhetos, Sabine Heim",
-    "starfish": "Rhetos, Sabine Heim",
-    "octopus": "Shuoli1999",
-    "titmouse": "Equationsmith"
+    "strandschnecke": "Rhetos, Sabine Heim",
+    "berlin_gorilla": "LarsMueller",
+    "oriental_dove": "Asanagi"
   },
   "source_video_ledger": "production/monarch-cam/short_ranking_raw_v4/review/source_video_ledger.json",
   "source_windows": "production/monarch-cam/short_ranking_raw_v4/review/source_windows.json",
   "v4_selected_window_sheets": [
     "production/monarch-cam/short_ranking_raw_v4/review/v4_squirrel_contact_sheet_01.jpg",
     "production/monarch-cam/short_ranking_raw_v4/review/v4_hermit_crab_contact_sheet_01.jpg",
-    "production/monarch-cam/short_ranking_raw_v4/review/v4_starfish_contact_sheet_01.jpg",
-    "production/monarch-cam/short_ranking_raw_v4/review/v4_octopus_contact_sheet_01.jpg",
-    "production/monarch-cam/short_ranking_raw_v4/review/v4_titmouse_contact_sheet_01.jpg"
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_strandschnecke_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_berlin_gorilla_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_oriental_dove_contact_sheet_01.jpg"
   ],
   "source_contact_sheets": [
     "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_hermit_crab_contact_sheet_01.jpg",
@@ -83,11 +84,50 @@ Retrieved titmouse 4315773
     "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_01.jpg",
     "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_02.jpg",
     "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_03.jpg",
-    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_04.jpg"
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_berlin_gorilla_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_berlin_gorilla_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_hermit_crab_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_07.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_sasana_squirrel_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_sasana_squirrel_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_07.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_07.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_08.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_tidepool_worm_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_tidepool_worm_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_tidepool_worm_sheet_03.jpg"
   ],
   "source_poster": "production/monarch-cam/short_ranking_raw_v4/review/source_poster.jpg",
   "visual_timestamp_approval": "LOCKED_AFTER_CONTACT_SHEET_REVIEW",
   "full_motion_review": false,
   "native_audio_listening": false,
-  "retrieved_unix": 1794073062
+  "retrieved_unix": 1794075079
 }

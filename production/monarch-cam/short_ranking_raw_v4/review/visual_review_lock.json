@@ -13,53 +13,53 @@
   "exact_timecodes": [
     {
       "timeline_in": 0.0,
-      "timeline_out": 8.0,
+      "timeline_out": 7.0,
       "source_id": "squirrel",
       "source_in": 1.0,
-      "source_out": 9.0,
+      "source_out": 8.0,
       "rank": 5,
       "title": "THE DROP-IN",
       "audio_present": true
     },
     {
-      "timeline_in": 8.0,
-      "timeline_out": 16.0,
+      "timeline_in": 7.0,
+      "timeline_out": 14.0,
       "source_id": "hermit_crab",
-      "source_in": 0.1,
-      "source_out": 8.1,
+      "source_in": 0.5,
+      "source_out": 7.5,
       "rank": 4,
       "title": "THE TINY COMMUTE",
       "audio_present": true
     },
     {
-      "timeline_in": 16.0,
-      "timeline_out": 24.0,
-      "source_id": "starfish",
-      "source_in": 36.0,
-      "source_out": 44.0,
+      "timeline_in": 14.0,
+      "timeline_out": 21.0,
+      "source_id": "strandschnecke",
+      "source_in": 21.5,
+      "source_out": 28.5,
       "rank": 3,
-      "title": "THE SLOW FLIP",
+      "title": "THE SHELL GLIDE",
       "audio_present": true
     },
     {
-      "timeline_in": 24.0,
-      "timeline_out": 32.0,
-      "source_id": "octopus",
-      "source_in": 22.5,
-      "source_out": 30.5,
+      "timeline_in": 21.0,
+      "timeline_out": 28.0,
+      "source_id": "berlin_gorilla",
+      "source_in": 1.0,
+      "source_out": 8.0,
       "rank": 2,
-      "title": "THE BOTTLE OPENER",
+      "title": "THE GENTLE GRAB",
       "audio_present": true
     },
     {
-      "timeline_in": 32.0,
+      "timeline_in": 28.0,
       "timeline_out": 35.0,
-      "source_id": "titmouse",
-      "source_in": 15.5,
-      "source_out": 18.5,
+      "source_id": "oriental_dove",
+      "source_in": 8.0,
+      "source_out": 15.0,
       "rank": 1,
-      "title": "THE HAND LANDING",
-      "audio_present": false
+      "title": "THE WING DUEL",
+      "audio_present": true
     }
   ],
   "rank_steps": [
@@ -67,30 +67,30 @@
       "rank": 5,
       "title": "THE DROP-IN",
       "timeline_in": 0.0,
-      "timeline_out": 8.0
+      "timeline_out": 7.0
     },
     {
       "rank": 4,
       "title": "THE TINY COMMUTE",
-      "timeline_in": 8.0,
-      "timeline_out": 16.0
+      "timeline_in": 7.0,
+      "timeline_out": 14.0
     },
     {
       "rank": 3,
-      "title": "THE SLOW FLIP",
-      "timeline_in": 16.0,
-      "timeline_out": 24.0
+      "title": "THE SHELL GLIDE",
+      "timeline_in": 14.0,
+      "timeline_out": 21.0
     },
     {
       "rank": 2,
-      "title": "THE BOTTLE OPENER",
-      "timeline_in": 24.0,
-      "timeline_out": 32.0
+      "title": "THE GENTLE GRAB",
+      "timeline_in": 21.0,
+      "timeline_out": 28.0
     },
     {
       "rank": 1,
-      "title": "THE HAND LANDING",
-      "timeline_in": 32.0,
+      "title": "THE WING DUEL",
+      "timeline_in": 28.0,
       "timeline_out": 35.0
     }
   ],
