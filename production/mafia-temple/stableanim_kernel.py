@@ -11,6 +11,8 @@ work=pathlib.Path('/kaggle/working'); os.chdir(work)
 os.environ['HF_HOME']='/tmp/monarch-stableanim-hf'
 os.environ['HF_HUB_ENABLE_HF_TRANSFER']='0'
 os.environ['TOKENIZERS_PARALLELISM']='false'
+os.environ['USE_TF']='0'
+os.environ['USE_FLAX']='0'
 os.environ['PYTORCH_CUDA_ALLOC_CONF']='expandable_segments:True'
 
 def run(args, **kw):
@@ -35,6 +37,11 @@ for f in ['animation/modules/attention_processor.py','animation/modules/attentio
     s=s.replace('if is_xformers_available():\n    import xformers\nelse:\n    print(1 / 0)', 'def is_xformers_available():\n    return False')
     s=s.replace('attention_probs = attn.get_attention_scores(query, key, attention_mask)\n            hidden_states = torch.bmm(attention_probs, value)', 'hidden_states = F.scaled_dot_product_attention(query, key, value, attn_mask=attention_mask)')
     s=s.replace('ip_attention_probs = attn.get_attention_scores(query, ip_key, None)\n            ip_hidden_states = torch.bmm(ip_attention_probs, ip_value)', 'ip_hidden_states = F.scaled_dot_product_attention(query, ip_key, ip_value)')
+    # SDPA's optimized CUDA kernels require four dimensions; the upstream
+    # custom processor merges batch and heads into its leading dimension.
+    s=s.replace('F.scaled_dot_product_attention(query, key, value,', '_pilot_sdpa(query, key, value,')
+    s=s.replace('F.scaled_dot_product_attention(query, ip_key, ip_value,', '_pilot_sdpa(query, ip_key, ip_value,')
+    s += '\ndef _pilot_sdpa(q, k, v, attn_mask=None, **kwargs):\n    if attn_mask is not None and attn_mask.ndim == 3: attn_mask = attn_mask.unsqueeze(0)\n    return F.scaled_dot_product_attention(q.unsqueeze(0), k.unsqueeze(0), v.unsqueeze(0), attn_mask=attn_mask, **kwargs).squeeze(0)\n'
     p.write_text(s)
 p=pathlib.Path('inference_basic.py'); s=p.read_text()
 s=s.replace('from diffusers.models.attention_processor import XFormersAttnProcessor', 'from diffusers.models.attention_processor import AttnProcessor2_0 as XFormersAttnProcessor')
