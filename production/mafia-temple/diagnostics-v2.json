@@ -1,31 +1,26 @@
 {
-  "log_files": 0,
-  "status_returned": true,
+  "log_received": true,
+  "exception_classes": [
+    "OutOfMemoryError",
+    "PapermillExecutionError"
+  ],
   "flags": {
-    "cuda_out_of_memory": false,
-    "worker_failed": false,
+    "out_of_memory": true,
+    "disk_full": false,
     "missing_module": false,
-    "quota": false,
-    "kaggle_error": false,
-    "time_limit": false,
-    "permission": false,
-    "kernel_no_gpu": false,
-    "model_download": false
+    "dtype": true,
+    "network": false,
+    "invalid_model": false,
+    "gpu": false,
+    "model_loaded": false,
+    "inference_started": true,
+    "killed": false
   },
-  "exception_classes": [],
-  "completed_scenes": [],
-  "events": [],
-  "oom_messages": [],
-  "status_flags": {
-    "not_found": true,
-    "forbidden": false,
-    "quota": false,
-    "bad_request": false,
-    "error": true,
-    "complete": false
-  },
-  "output_files": [
-    ".txt",
-    ".txt"
-  ]
+  "last_diagnostic_lines": [
+    "PapermillExecutionError",
+    "OutOfMemoryError",
+    "CUDA out of memory",
+    "Tried to allocate 108.00 MiB"
+  ],
+  "log_chars": 21516
 }
