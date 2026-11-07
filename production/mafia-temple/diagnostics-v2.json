@@ -1,0 +1,27 @@
+{
+  "log_files": 1,
+  "status_returned": true,
+  "flags": {
+    "cuda_out_of_memory": true,
+    "worker_failed": true,
+    "missing_module": false,
+    "quota": false,
+    "kaggle_error": true,
+    "time_limit": true,
+    "permission": false,
+    "kernel_no_gpu": false,
+    "model_download": false
+  },
+  "exception_classes": [
+    "CUDA",
+    "OutOfMemoryError",
+    "PapermillExecutionError"
+  ],
+  "output_files": [
+    ".txt",
+    ".log",
+    ".txt",
+    ".txt",
+    ".txt"
+  ]
+}
