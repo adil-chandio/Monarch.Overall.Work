@@ -112,6 +112,7 @@ def vegetation():
  return leaves
 
 def mastodon():
+ before=set(bpy.data.objects)
  skin=material('Warm umber skin, two-scale folds',(.175,.105,.062),.85,scale=24,bump=.4,subsurface=.045)
  # Distorted directional folds are subordinate to the authored continuous silhouette.
  n=skin.node_tree.nodes;l=skin.node_tree.links;s=next(x for x in n if x.type=='BSDF_PRINCIPLED');tex=n.new('ShaderNodeTexNoise');tex.inputs['Scale'].default_value=3;tex.inputs['Detail'].default_value=2;wave=n.new('ShaderNodeTexWave');wave.wave_type='BANDS';wave.bands_direction='Z';wave.inputs['Scale'].default_value=36;wave.inputs['Distortion'].default_value=8;l.new(tex.outputs['Color'],wave.inputs['Vector']);bn=n.new('ShaderNodeBump');bn.inputs['Strength'].default_value=.23;bn.inputs['Distance'].default_value=.025;l.new(wave.outputs['Color'],bn.inputs['Height']);old=s.inputs['Normal'].links[0].from_socket;l.new(old,bn.inputs['Normal']);l.new(bn.outputs[0],s.inputs['Normal'])
@@ -155,20 +156,28 @@ def mastodon():
   body.data.vertices.foreach_set('co',out.ravel());body.data.update()
   for i,e in enumerate(ears):e.rotation_euler.z=(i*2-1)*.035*math.sin(t*.9)
   tail.rotation_euler.y=.045*math.sin(t*.8)
- return body,update
+ root=bpy.data.objects.new('Reconstruction root',None);bpy.context.collection.objects.link(root)
+ for o in set(bpy.data.objects)-before-{root}:
+  if o.parent is None:o.parent=root
+ return root,update
 
-def forest_scene():
+def forest_scene(late=False):
+ if late:random.seed(81295)
  soil=material('Wet organic earth',(.095,.076,.042),.87,scale=45,bump=.65);stone=material('Slate inclusions',(.23,.24,.20),.78,scale=15,bump=.6);ground(soil);rocks(stone,100);vegetation();body,animalupdate=mastodon();area('Low amber sun',(-7,-6,10),(0,0,1),2300,(1,.69,.4),6);area('Large cool sky',(6,-1,9),(0,0,1),1600,(.57,.73,1),8);area('Coat rim',(-1,7,8),(0,0,2),2600,(1,.85,.59),5)
  water=material('Reflective quiet channel',(.09,.15,.13),.16,metal=.3,scale=16,bump=.12);box('Watercourse',(4,1,-.025),(4,35,.035),water,.01)
  cam=camera((7,-9,3.4),(0,-.7,1.8),48,4)
+ if late:
+  body.rotation_euler.z=.5
+  curve('Willow at water edge',[(1.35,-2.35,0),(1.37,-2.36,.45),(1.42,-2.37,.8)],.014,soil)
  # A specific leaf transfer, not a shower of arbitrary glowing DNA beads.
- lm=material('Detached organic leaf',(.29,.23,.075),.8,scale=30,bump=.3);leaf=leafmesh('Leaf to water',(2.8,1.7,1.2),.32,lm,1.5)
+ lm=material('Detached organic leaf',(.29,.23,.075),.8,scale=30,bump=.3);leaf=leafmesh('Leaf to water',(1.42,-2.37,.8),.32,lm,1.5)
+ waternode=next(n for n in water.node_tree.nodes if n.type=='TEX_NOISE');waternode.noise_dimensions='4D'
  def update(t,late=False):
-  animalupdate(t if not late else t+4)
+  animalupdate(t if not late else t+4);waternode.inputs['W'].default_value=t*.15
   if not late:
    u=ease(t/6.1);cam.location=lerp((7,-9,3.4),(4.7,-6.1,2.5),u);target=lerp((0,-.7,1.8),(-.15,-1.25,1.35),u)
   else:
-   u=ease(t/7.667);cam.location=lerp((7,-6,3),(5,-3.2,1.7),u);target=lerp((0,-.5,1.8),(1.2,-.8,1.2),u);d=ease((t-2)/3.5);leaf.location=(2.8+.5*d,1.7-1.3*d,1.2*(1-d)+.015);leaf.rotation_euler.y=.5*d;leaf.rotation_euler.z=1.5+2*d
+   u=ease(t/7.667);cam.location=lerp((7,-6,3),(5,-3.2,1.7),u);target=lerp((0,-.5,1.8),(1.2,-.8,1.2),u);d=ease((t-2)/3.5);leaf.location=(1.42+1.7*d,-2.37+.25*d,.8*(1-d)+.015);leaf.rotation_euler.y=.5*d;leaf.rotation_euler.z=1.5+2*d
   track(cam,target);cam.data.dof.focus_distance=(cam.location-target).length
  return update
 
@@ -199,12 +208,12 @@ def coast_scene():
   for j in range(50):x=-80+j*3.3;y=30+k*8;h=3+k*1.3+2*math.sin(j*.29+k)+.7*math.sin(j*1.7);pts.extend([(x,y,-1),(x,y,h)])
   for j in range(49):q=j*2;f.append((q,q+1,q+3,q+2))
   mesh('Far eroded ridge',pts,f,rock)
- water=material('Cold fjord',(.12,.23,.29),.19,metal=.25,scale=55,bump=.17);box('Fjord surface',(0,-18,-.3),(160,30,.08),water,.01)
+ water=material('Cold fjord',(.12,.23,.29),.19,metal=.25,scale=55,bump=.17);wn=next(n for n in water.node_tree.nodes if n.type=='TEX_NOISE');wn.noise_dimensions='4D';box('Fjord surface',(0,-18,-.3),(160,30,.08),water,.01)
  for j in range(45):
   x=random.uniform(-30,30);y=random.uniform(-.5,24);r=random.uniform(.18,1.2);ell('Snow retained in hollows',(x,y,.02),(r,r*.55,.045),snow,16,8)
  area('Arctic overcast',(-10,-8,22),(0,0,0),5800,(.73,.86,1),18);area('Horizon light',(20,22,10),(0,0,1),2700,(1,.84,.65),12);cam=camera((11,-9,4.4),(0,8,1.8),36,11)
  def update(t):
-  u=ease(t/12.31);cam.location=lerp((11,-9,4.4),(6,-4.2,3.1),u);target=Vector((-2,12,2));track(cam,target);cam.data.dof.focus_distance=35
+  wn.inputs['W'].default_value=t*.12;u=ease(t/12.31);cam.location=lerp((11,-9,4.4),(6,-4.2,3.1),u);target=Vector((-2,12,2));track(cam,target);cam.data.dof.focus_distance=35
  return update
 
 def strata_scene():
@@ -241,7 +250,7 @@ def lab_scene():
  ceramic=material('Off-white laboratory ceramic',(.57,.63,.60),.36,scale=25,bump=.06);steel=material('Satin machined steel',(.34,.40,.43),.25,.85,scale=65,bump=.1);black=material('Anodized fixture',(.025,.045,.052),.37,.6,scale=40,bump=.08);soil=material('Sediment in sample well',(.18,.12,.065),.9,scale=35,bump=.55)
  box('Work surface',(0,0,-.25),(8,6,.35),ceramic,.1);box('Instrument base',(0,.3,.04),(2.8,2,.22),black,.1);box('Supported vertical column',(1.1,.8,1.2),(.22,.24,2.4),steel);box('Supported cantilever',(.35,.8,2.32),(1.65,.25,.18),steel);box('Optical head',(-.3,.55,1.9),(.55,.6,.65),ceramic,.12)
  tray=box('Sliding sample receiver',(-1.3,-.25,.32),(1.2,1,.14),steel,.06);sample=ell('Sediment specimen',(-1.3,-.25,.45),(.38,.29,.1),soil)
- for side in [-1,1]:box('Linear slide rail',(side*.65,-.2,.19),(.055,2.2,.07),steel,.02)
+ for side in [-1,1]:box('Linear slide rail',(0,side*.42-.25,.19),(2.8,.055,.07),steel,.02)
  for k in range(8):box('Background specimen tray',(k*.6-2,2,.02),(.45,.6,.05),ceramic,.03)
  area('Large laboratory key',(-3,-4,6),(0,0,1),1400,(.75,.88,1),4);area('Warm separating edge',(3,3,5),(0,0,1),1600,(1,.78,.49),3);area('Instrument lamp',(-.3,.5,1.57),(0,-.3,.3),35,(.78,.92,1),.4);cam=camera((3.3,-4.6,2.8),(0,0,.9),53,5)
  def update(t):
@@ -255,7 +264,7 @@ for frame in range(a.start,a.end,a.step):
  row=next(r for r in SHOTS if r[0]<=frame<r[1]);start,end,kind=row
  if kind!=last:
   random.seed(81042);setup(kind)
-  if kind.startswith('forest'):fn=forest_scene()
+  if kind.startswith('forest'):fn=forest_scene(kind=='forest-late')
   elif kind=='coast':fn=coast_scene()
   elif kind=='strata':fn=strata_scene()
   elif kind=='lab':fn=lab_scene()
