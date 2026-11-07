@@ -365,7 +365,9 @@ jobs:
 
       - name: Generate AI motion clips
         run: |
-          if grep -q 'wan-batch-v3' production/mafia-temple/trigger.txt; then
+          if grep -q 'wan-batch-v4' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_wan_alternates.sh
+          elif grep -q 'wan-batch-v3' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_wan_batch.sh
           elif grep -q 'wan-pilot' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_wan_pilot.sh
