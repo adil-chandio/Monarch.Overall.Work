@@ -7,13 +7,15 @@ out={'log_received':False,'exception_classes':[],'flags':{},'last_diagnostic_lin
 try:
  api=KaggleApi();api.authenticate()
  with api.build_kaggle_client() as k:
-  req=ApiListKernelSessionOutputRequest();req.user_name=os.environ['KAGGLE_USERNAME'];req.kernel_slug='monarch-wan-pilot-42383005594';req.page_size=1
+  req=ApiListKernelSessionOutputRequest();req.user_name=os.environ['KAGGLE_USERNAME'];req.kernel_slug='monarch-wan-pilot-42385740004';req.page_size=1
   result=k.kernels.kernels_api_client.list_kernel_session_output(req)
   text=result.log or ''
   out['log_received']=bool(text);out['log_chars']=len(text)
   out['exception_classes']=sorted(set(re.findall(r'\b[A-Za-z]+(?:Error|Exception)\b',text)))[:40]
   checks={'out_of_memory':r'out of memory|OutOfMemoryError','disk_full':r'no space left|disk quota','missing_module':r'ImportError|ModuleNotFoundError','dtype':r'BFloat16|Half precision|float16|dtype','network':r'ConnectionError|timed out|connection reset','invalid_model':r'not found|does not appear to have a file named|is not a valid model','gpu':r'NO_GPU_ALLOCATED','model_loaded':r'Loading pipeline components|Loading checkpoint shards','inference_started':r'PILOT COMPLETE|num_inference_steps','killed':r'SIGKILL|Killed|exit code 137'}
   out['flags']={k:bool(re.search(v,text,re.I)) for k,v in checks.items()}
+  out['completed_stages']=[x for x in ['STAGE 1 text embeddings only','STAGE 2 transformer and VAE','STAGE 3 video generation','PILOT COMPLETE'] if x in text]
+  out['nonfinite_embeddings']='Non-finite prompt embeddings' in text
   # Restrict disclosure to known, non-sensitive diagnostic expressions.
   allowed=r'(?:CUDA out of memory|Tried to allocate [0-9.]+ [GM]iB|No space left on device|ModuleNotFoundError|ImportError|OutOfMemoryError|[A-Za-z]+Error|SIGKILL|Killed|HTTP [0-9]+)'
   out['last_diagnostic_lines']=list(dict.fromkeys(re.findall(allowed,text,re.I)))[-25:]
