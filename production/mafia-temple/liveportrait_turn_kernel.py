@@ -10,6 +10,10 @@ IMAGES = __IMAGE_DATA__
 work = pathlib.Path('/kaggle/working')
 os.chdir(work)
 os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+os.environ['HF_HUB_DISABLE_XET'] = '1'
+os.environ['HF_HUB_ENABLE_HF_TRANSFER'] = '0'
+os.environ['USE_TF'] = '0'
+os.environ['USE_FLAX'] = '0'
 os.environ['HF_HOME'] = '/tmp/monarch-liveportrait-hf'
 
 def run(args, **kwargs):
@@ -56,7 +60,7 @@ snapshot_download('KlingTeam/LivePortrait', local_dir='pretrained_weights',
                   allow_patterns=['liveportrait/*', 'liveportrait/base_models/*',
                                   'liveportrait/retargeting_models/*',
                                   'insightface/models/buffalo_l/2d106det.onnx',
-                                  'insightface/models/buffalo_l/det_10g.onnx'])
+                                  'insightface/models/buffalo_l/det_10g.onnx'], max_workers=1)
 for name, encoded in IMAGES.items():
     (work / (name + '.jpg')).write_bytes(base64.b64decode(encoded))
 outdir = work / 'portrait-results'; outdir.mkdir(exist_ok=True)
