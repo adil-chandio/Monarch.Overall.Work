@@ -77,10 +77,24 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "mime": "video/webm",
       "expected_duration_seconds": 22.64,
-      "expected_width": 1920,
-      "expected_height": 1080,
-      "expected_audio_codec": "vorbis",
-      "error": "RuntimeError(\"Could not retrieve tidepool_worm: HTTPError('429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original')\")"
+      "expected_width": 854,
+      "expected_height": 480,
+      "expected_audio_codec": "opus",
+      "local_filename": "production/monarch-cam/work/short_ranking_raw_v4/candidates/media/tidepool_worm.webm",
+      "bytes": 7641880,
+      "sha256": "3a14521f28d46ab457be9710966d00a9b3c99681f1f8c9ba3df66ef668eeb6e3",
+      "duration_seconds": 22.64,
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "vp8",
+      "audio_codec": "vorbis",
+      "audio_stream_present": true,
+      "review_frames": 23,
+      "contact_sheets": [
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_tidepool_worm_sheet_01.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_tidepool_worm_sheet_02.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_tidepool_worm_sheet_03.jpg"
+      ]
     },
     {
       "id": "malaga_animals",
@@ -93,10 +107,25 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "mime": "video/webm",
       "expected_duration_seconds": 25.074,
-      "expected_width": 960,
-      "expected_height": 540,
+      "expected_width": 854,
+      "expected_height": 480,
       "expected_audio_codec": "opus",
-      "error": "RuntimeError(\"Could not retrieve malaga_animals: HTTPError('429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/b/b3/Some_animals_in_Malaga.webm?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original')\")"
+      "local_filename": "production/monarch-cam/work/short_ranking_raw_v4/candidates/media/malaga_animals.webm",
+      "bytes": 3356455,
+      "sha256": "d571fabaed18da6d3c589715e048da8d20ec8ccd56569e3d9e472bd6e2c744f0",
+      "duration_seconds": 25.081,
+      "width": 854,
+      "height": 480,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "audio_stream_present": true,
+      "review_frames": 25,
+      "contact_sheets": [
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_malaga_animals_sheet_01.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_malaga_animals_sheet_02.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_malaga_animals_sheet_03.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_malaga_animals_sheet_04.jpg"
+      ]
     },
     {
       "id": "oriental_dove",
@@ -112,7 +141,57 @@
       "expected_width": 1920,
       "expected_height": 1080,
       "expected_audio_codec": "opus",
-      "error": "RuntimeError(\"Could not retrieve oriental_dove: HTTPError('429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/a/a8/Streptopelia_orientalis_fighting_2024-04-26.webm?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original')\")"
+      "local_filename": "production/monarch-cam/work/short_ranking_raw_v4/candidates/media/oriental_dove.webm",
+      "bytes": 17709900,
+      "sha256": "29eae3ce8104c3aadefb8676190abc83356d19d71bdd89ee988b4a7d47248995",
+      "duration_seconds": 35.04,
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "audio_stream_present": true,
+      "review_frames": 35,
+      "contact_sheets": [
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_oriental_dove_sheet_01.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_oriental_dove_sheet_02.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_oriental_dove_sheet_03.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_oriental_dove_sheet_04.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_oriental_dove_sheet_05.jpg"
+      ]
+    },
+    {
+      "id": "kissing_gourami",
+      "role": "candidate",
+      "title": "Helostoma temminkii kissing.ogv",
+      "creator": "5snake5",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Helostoma_temminkii_kissing.ogv",
+      "description": "Kissing gouramis in an aquarium.",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mime": "video/webm",
+      "expected_duration_seconds": 49.036,
+      "expected_width": 480,
+      "expected_height": 480,
+      "expected_audio_codec": "opus",
+      "local_filename": "production/monarch-cam/work/short_ranking_raw_v4/candidates/media/kissing_gourami.webm",
+      "bytes": 4197778,
+      "sha256": "048b59d6713176f3ffa0af84b8bc9b2f44e9cd02d8edd0a2d2afc5d7246352aa",
+      "duration_seconds": 49.044,
+      "width": 480,
+      "height": 480,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "audio_stream_present": true,
+      "review_frames": 49,
+      "contact_sheets": [
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_kissing_gourami_sheet_01.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_kissing_gourami_sheet_02.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_kissing_gourami_sheet_03.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_kissing_gourami_sheet_04.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_kissing_gourami_sheet_05.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_kissing_gourami_sheet_06.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_kissing_gourami_sheet_07.jpg"
+      ]
     },
     {
       "id": "sasana_squirrel",
@@ -125,10 +204,23 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "mime": "video/webm",
       "expected_duration_seconds": 13.994,
-      "expected_width": 1280,
-      "expected_height": 720,
-      "expected_audio_codec": "vorbis",
-      "error": "RuntimeError(\"Could not retrieve sasana_squirrel: HTTPError('429 Client Error: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1) for url: https://upload.wikimedia.org/wikipedia/commons/9/93/Sasana.2015.myanmar.squirrel.1.webmhd.webm?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original')\")"
+      "expected_width": 854,
+      "expected_height": 480,
+      "expected_audio_codec": "opus",
+      "local_filename": "production/monarch-cam/work/short_ranking_raw_v4/candidates/media/sasana_squirrel.webm",
+      "bytes": 2228578,
+      "sha256": "d7b4d385a33871108eb7e327d4fab13a02bc19d47af94264bf64623a38307f67",
+      "duration_seconds": 13.02,
+      "width": 854,
+      "height": 480,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "audio_stream_present": true,
+      "review_frames": 13,
+      "contact_sheets": [
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_sasana_squirrel_sheet_01.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_sasana_squirrel_sheet_02.jpg"
+      ]
     },
     {
       "id": "hermit_crab",
@@ -141,10 +233,22 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "mime": "video/webm",
       "expected_duration_seconds": 8.197,
-      "expected_width": 1920,
-      "expected_height": 1080,
-      "expected_audio_codec": "vorbis",
-      "error": "RuntimeError(\"Could not retrieve hermit_crab: HTTPError('429 Client Error: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1) for url: https://upload.wikimedia.org/wikipedia/commons/0/07/Einsiedlerkrebs_%28Wangerooge%29.webm?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original')\")"
+      "expected_width": 854,
+      "expected_height": 480,
+      "expected_audio_codec": "opus",
+      "local_filename": "production/monarch-cam/work/short_ranking_raw_v4/candidates/media/hermit_crab.webm",
+      "bytes": 1328975,
+      "sha256": "851d89bdba29b10e8f1d7d2eea7d3cdf5dfe0312b1c411e7d1a2dff998be2597",
+      "duration_seconds": 8.197,
+      "width": 854,
+      "height": 480,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "audio_stream_present": true,
+      "review_frames": 8,
+      "contact_sheets": [
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_hermit_crab_sheet_01.jpg"
+      ]
     },
     {
       "id": "starfish",
@@ -157,10 +261,28 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "mime": "video/webm",
       "expected_duration_seconds": 53.12,
-      "expected_width": 1080,
-      "expected_height": 1920,
-      "expected_audio_codec": "vorbis",
-      "error": "RuntimeError(\"Could not retrieve starfish: HTTPError('429 Client Error: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1) for url: https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original')\")"
+      "expected_width": 270,
+      "expected_height": 480,
+      "expected_audio_codec": "opus",
+      "local_filename": "production/monarch-cam/work/short_ranking_raw_v4/candidates/media/starfish.webm",
+      "bytes": 2942822,
+      "sha256": "35525264a84b92d924cdf01500a8a805d17df788ecd8cb7884de3e0d1ee80d30",
+      "duration_seconds": 53.12,
+      "width": 270,
+      "height": 480,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "audio_stream_present": true,
+      "review_frames": 53,
+      "contact_sheets": [
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_starfish_sheet_01.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_starfish_sheet_02.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_starfish_sheet_03.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_starfish_sheet_04.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_starfish_sheet_05.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_starfish_sheet_06.jpg",
+        "production/monarch-cam/short_ranking_raw_v4/review/candidates/candidate_starfish_sheet_07.jpg"
+      ]
     }
   ]
 }
