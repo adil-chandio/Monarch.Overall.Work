@@ -44,12 +44,12 @@ needle = "            t_new[..., 2].fill_(0)  # zero tz\n"
 if s.count(needle) != 1:
     raise RuntimeError('Unexpected LivePortrait pipeline version')
 s = s.replace(needle, """            # Hold at start/end, ease through a modest 35-degree turn.
-            _t = max(0., min(1., (i / max(1, n_frames - 1) - .12) / .72))
+            _t = max(0., min(1., (i / max(1, n_frames - 1) - .10) / .62))
             _ease = _t * _t * (3. - 2. * _t)
             _yaw = torch.tensor([float(os.environ['MONARCH_TURN_DEG']) * _ease], device=device)
             _zero = torch.zeros_like(_yaw)
             R_new = get_rotation_matrix(_zero, _yaw, _zero) @ R_s
-            delta_new = x_s_info['exp'] + .30 * (delta_new - x_s_info['exp'])
+            delta_new = x_s_info['exp'] + .55 * (delta_new - x_s_info['exp'])
             t_new[..., 2].fill_(0)  # zero tz
 """)
 # os is used by our explicit test parameter, not supplied by the pipeline.
@@ -64,24 +64,47 @@ snapshot_download('KlingTeam/LivePortrait', local_dir='pretrained_weights',
 for name, encoded in IMAGES.items():
     (work / (name + '.jpg')).write_bytes(base64.b64decode(encoded))
 outdir = work / 'portrait-results'; outdir.mkdir(exist_ok=True)
-# d0 supplies subtle expressions only. Yaw is procedural; no driver image is included.
+# Retime the approved research driver: the first half is restrained, then
+# transition gently toward a mild smile. Only its motion is used, never footage.
+import cv2
+capture = cv2.VideoCapture('assets/examples/driving/d0.mp4')
+source_frames = []
+while True:
+    ok, image = capture.read()
+    if not ok: break
+    source_frames.append(image)
+capture.release()
+if len(source_frames) < 25: raise RuntimeError('Expected driver frames missing')
+h, w = source_frames[0].shape[:2]
+driver_path = str(work / 'turn-driver.mp4')
+writer = cv2.VideoWriter(driver_path, cv2.VideoWriter_fourcc(*'mp4v'), 24, (w,h))
+if not writer.isOpened(): raise RuntimeError('Unable to create test driver')
+for frame in range(96):
+    if frame < 48:
+        pos = frame / 48 * 7
+    else:
+        t = (frame - 48) / 47
+        pos = 7 + (24 - 7) * (t*t*(3-2*t))
+    # Blend neighboring frames to avoid a stepped, slow retime.
+    lo = int(pos); hi = min(lo + 1, len(source_frames)-1)
+    writer.write(cv2.addWeighted(source_frames[lo],1-(pos-lo),source_frames[hi],pos-lo,0))
+writer.release()
 results = []
-for label, degrees in [('positive', 35), ('negative', -35)]:
-    source = 'side-' + label
-    (work / (source + '.jpg')).write_bytes((work / 'side.jpg').read_bytes())
-    t = time.time()
-    command = [sys.executable, 'inference.py', '-s', str(work / (source + '.jpg')),
-               '-d', 'assets/examples/driving/d0.mp4', '-o', str(outdir)]
-    try:
-        env = dict(os.environ, MONARCH_TURN_DEG=str(degrees))
-        run(command, env=env)
-        output = outdir / f'{source}--d0.mp4'
-        if not output.exists() or output.stat().st_size < 10000:
-            raise RuntimeError('Expected rendered video missing')
-        results.append({'yaw_degrees':degrees,'status':'ok','seconds':round(time.time()-t,1),'file':output.name})
-    except Exception as e:
-        print('TEST FAILED', label, type(e).__name__, str(e)[:300], flush=True)
-        results.append({'yaw_degrees':degrees,'status':'failed','error':type(e).__name__})
-(outdir/'liveportrait-turn-receipts.json').write_text(json.dumps(results, indent=2))
+source = 'side-turn-v2'
+(work / (source + '.jpg')).write_bytes((work / 'side.jpg').read_bytes())
+t = time.time()
+command = [sys.executable, 'inference.py', '-s', str(work / (source + '.jpg')),
+           '-d', driver_path, '-o', str(outdir)]
+try:
+    run(command, env=dict(os.environ, MONARCH_TURN_DEG='-40'))
+    output = outdir / f'{source}--turn-driver.mp4'
+    if not output.exists() or output.stat().st_size < 10000:
+        raise RuntimeError('Expected rendered video missing')
+    results.append({'yaw_degrees':-40,'status':'ok','seconds':round(time.time()-t,1),'file':output.name,
+                    'frames':96,'fps':24,'status_note':'research-only'})
+except Exception as e:
+    print('TEST FAILED', type(e).__name__, str(e)[:300], flush=True)
+    results.append({'status':'failed','error':type(e).__name__})
+(outdir/'liveportrait-turn-v2-receipt.json').write_text(json.dumps(results, indent=2))
 if not any(r['status']=='ok' for r in results):
-    raise RuntimeError('Both portrait rotation tests failed')
+    raise RuntimeError('Portrait rotation test failed')
