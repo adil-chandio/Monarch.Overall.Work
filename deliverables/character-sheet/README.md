@@ -6,3 +6,9 @@
 - `body-back.png` is the AI-generated back view; `side-revised.png` and `back-revised.png` are the hair-reference edits used for the sheet.
 
 The suit, shoes and full-body proportions are design interpretations, not measurements from the reference. Compositing involves resizing and blending, so the resulting pixels are not identical to the originals and some transitions may remain visible.
+
+## AI full-body revision
+
+- `mafia-full-body-ai-v2.png` pairs the supplied face references with newly AI-generated full-body views; it replaces the earlier composite for review.
+- `ai-full-front-v2.png`, `ai-full-three-quarter-v2.png`, `ai-full-profile-v2.png`, and `ai-full-back-v2.png` are the individual AI-generated views.
+- These views are generated from the references, not exact pixel-preserving face composites. Facial likeness and body proportions can vary; the source images do not establish actual full-body measurements.
