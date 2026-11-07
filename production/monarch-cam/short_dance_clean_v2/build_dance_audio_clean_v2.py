@@ -681,7 +681,7 @@ def write_delivery_docs():
 
 - **Laysan Albatross Mating Dance 2016**, Midway Atoll, Ann Bell / U.S. Fish & Wildlife Service. Public domain.
 - Rights page: https://commons.wikimedia.org/wiki/File:Laysan_Albatross_Mating_Dance_2016.webm
-- Original 24-second retention-first vertical edit, narration, dance-card animation, mirror-split freeze and sound design: Monarch Cam production.
+- Original 24-second retention-first vertical edit, narration, mirror-split freeze and sound design: Monarch Cam production.
 - V2 picture: minimal lower-third captions only, filmic grade with restrained halation/bloom, very subtle grain/vignette, double-smoothstep zoom, motion drift, five-frame scene cross-dissolves, elegant tracked captions, an undistorted rounded 16:9 action window, deep-navy/ivory/teal palette, loop crossfade and exact-text thumbnails. No badges, cards, progress bars, footers, macro inset or persistent labels.
 - Exact timeline/source ranges: `review/visual_edit_ledger.json`.
 
@@ -763,7 +763,7 @@ This is a separate V2 clean-premium edition of the 24-second Laysan albatross Sh
 
 Picture: V2 clean deep-navy/ivory/muted-teal palette, only minimal tracked lower-third captions, no top headlines, badges, dance cards, progress bars, footers, macro inset or persistent labels. A filmic grade with restrained halation/bloom, very subtle grain/vignette, an undistorted rounded 16:9 action window, double-smoothstep zoom, horizontal/vertical motion drift, five-frame scene cross-dissolves, a 0.3 s loop crossfade and exact-text thumbnails remain.
 
-Sound: 16 CC0 cues are now salience-layered — four hero reveals keep their level, eleven support hits are 4.5 dB softer and the closing tick is 7 dB softer. Hits are motion-panned, passed through a short original room and gently de-harsh-ed. Music and ambience are mid/side widened, enveloped with a monotone PCHIP curve, and ducked under the voice. A voice-aware presence dip keeps SFX out of the 1–4 kHz lane while narration speaks. Four low-level original sub-blooms add weight under the hook, step reveal, sync freeze and replay. The premaster has a bounded −1.5 dBFS ceiling.
+Sound: 16 CC0 cues are now salience-layered — four hero reveals keep their level, eleven support hits are 4.5 dB softer and the closing tick is 7 dB softer. Hits are motion-panned, passed through a short original room and gently de-harsh-ed. Music and ambience are mid/side widened, enveloped with a monotone PCHIP curve, and ducked under the voice. A voice-aware presence dip keeps SFX out of the 1–4 kHz lane while narration speaks. Four low-level original sub-blooms add weight under the hook, step reveal, sync freeze and replay. The premaster has a bounded −1.4 dBFS ceiling.
 
 Measured evidence: nine audio gates, technical QC, Earshot timeline/sheet/critique, cue/voice/source ledgers and contact sheets. This is objective and model-assisted evidence plus contact-sheet review — not human full-motion review, native-audio listening, human approval, audience hypnosis, a 3x multiplier, subscribe/like behavior, retention or a virality guarantee. "Viral"/"next level" is a design objective only.
 """

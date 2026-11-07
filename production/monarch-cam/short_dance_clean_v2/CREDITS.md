@@ -4,7 +4,7 @@
 
 - **Laysan Albatross Mating Dance 2016**, Midway Atoll, Ann Bell / U.S. Fish & Wildlife Service. Public domain.
 - Rights page: https://commons.wikimedia.org/wiki/File:Laysan_Albatross_Mating_Dance_2016.webm
-- Original 24-second retention-first vertical edit, narration, dance-card animation, mirror-split freeze and sound design: Monarch Cam production.
+- Original 24-second retention-first vertical edit, narration, mirror-split freeze and sound design: Monarch Cam production.
 - V2 picture: minimal lower-third captions only, filmic grade with restrained halation/bloom, very subtle grain/vignette, double-smoothstep zoom, motion drift, five-frame scene cross-dissolves, elegant tracked captions, an undistorted rounded 16:9 action window, deep-navy/ivory/teal palette, loop crossfade and exact-text thumbnails. No badges, cards, progress bars, footers, macro inset or persistent labels.
 - Exact timeline/source ranges: `review/visual_edit_ledger.json`.
 
