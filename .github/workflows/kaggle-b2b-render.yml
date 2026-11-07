@@ -363,9 +363,20 @@ jobs:
           print(f"::notice::Selected slot={slot_used} | Kaggle user={u} (token_mode={bool(tok)})", flush=True)
           PY
 
+      - name: Recover existing portrait test for local inspection
+        if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if grep -q 'portrait-recover' production/mafia-temple/trigger.txt; then
+            mkdir -p production/mafia-temple/portrait-pilot-output
+            gh run download 42405635576 -n portrait-pilot-research -D production/mafia-temple/portrait-pilot-output
+          fi
       - name: Generate AI motion clips
         run: |
-          if grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
+          if grep -q 'portrait-recover' production/mafia-temple/trigger.txt; then
+            test -s production/mafia-temple/portrait-pilot-output/liveportrait-receipts.json
+          elif grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/diagnose_liveportrait.sh
           elif grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_liveportrait_pilot.sh
@@ -399,7 +410,9 @@ jobs:
           fi
           git config user.name "MONARCH GPU Runner"
           git config user.email "gpu@monarch.studio"
-          if grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
+          if grep -q 'portrait-recover' production/mafia-temple/trigger.txt; then
+            git add -f production/mafia-temple/portrait-pilot-output/*.mp4 production/mafia-temple/portrait-pilot-output/*.json
+          elif grep -q 'portrait-diagnose' production/mafia-temple/trigger.txt; then
             git add -f production/mafia-temple/diagnostics-liveportrait.json
           elif grep -q 'diagnose-v2' production/mafia-temple/trigger.txt; then
             git add -f production/mafia-temple/diagnostics-v2.json
