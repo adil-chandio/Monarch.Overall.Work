@@ -1,0 +1,66 @@
+{
+  "all_video_frames_indexed": true,
+  "decoded_frames": 12985,
+  "first_pts": 0.0,
+  "last_pts": 541.541,
+  "low_change_frames_mae_below_0_5": 5763,
+  "mechanical_change_windows": [
+    {
+      "frame": 2006,
+      "pts": 83.666917,
+      "difference": 130.72872924804688
+    },
+    {
+      "frame": 11561,
+      "pts": 482.190042,
+      "difference": 126.34244537353516
+    }
+  ],
+  "adjacent_quoted_frames": [
+    {
+      "frame": 2003,
+      "pts": 83.541792
+    },
+    {
+      "frame": 2005,
+      "pts": 83.625208
+    },
+    {
+      "frame": 2006,
+      "pts": 83.666917
+    },
+    {
+      "frame": 2007,
+      "pts": 83.708625
+    },
+    {
+      "frame": 2009,
+      "pts": 83.792042
+    },
+    {
+      "frame": 11558,
+      "pts": 482.064917
+    },
+    {
+      "frame": 11560,
+      "pts": 482.148333
+    },
+    {
+      "frame": 11561,
+      "pts": 482.190042
+    },
+    {
+      "frame": 11562,
+      "pts": 482.23175
+    },
+    {
+      "frame": 11564,
+      "pts": 482.315167
+    }
+  ],
+  "frame_index": "docs/research/stickman-study/archive-footage/b9e8a291ae3c-frame-index.csv.gz",
+  "actual_visual_review_completed": false,
+  "every_frame_human_inspected": false,
+  "audio_listening_claimed": false,
+  "change_scores_are_not_rig_or_editing_method_proof": true
+}
