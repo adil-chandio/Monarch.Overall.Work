@@ -1,0 +1,171 @@
+{
+  "threshold": 0.35,
+  "max_repair_samples_per_run": 48,
+  "passes": [
+    {
+      "pass": 1,
+      "before_runs": [
+        {
+          "first_jump_sample": 160213,
+          "last_jump_sample": 160217,
+          "jump_count": 3,
+          "time_seconds": 3.337771,
+          "max_mono_jump": 0.4032
+        },
+        {
+          "first_jump_sample": 283158,
+          "last_jump_sample": 283159,
+          "jump_count": 2,
+          "time_seconds": 5.899125,
+          "max_mono_jump": 0.42695
+        },
+        {
+          "first_jump_sample": 283204,
+          "last_jump_sample": 283205,
+          "jump_count": 2,
+          "time_seconds": 5.900083,
+          "max_mono_jump": 0.3797
+        },
+        {
+          "first_jump_sample": 306525,
+          "last_jump_sample": 306526,
+          "jump_count": 2,
+          "time_seconds": 6.385937,
+          "max_mono_jump": 0.42691
+        },
+        {
+          "first_jump_sample": 306551,
+          "last_jump_sample": 306552,
+          "jump_count": 2,
+          "time_seconds": 6.386479,
+          "max_mono_jump": 0.38894
+        },
+        {
+          "first_jump_sample": 307099,
+          "last_jump_sample": 307100,
+          "jump_count": 2,
+          "time_seconds": 6.397896,
+          "max_mono_jump": 0.37348
+        },
+        {
+          "first_jump_sample": 307109,
+          "last_jump_sample": 307110,
+          "jump_count": 2,
+          "time_seconds": 6.398104,
+          "max_mono_jump": 0.37468
+        },
+        {
+          "first_jump_sample": 307769,
+          "last_jump_sample": 307770,
+          "jump_count": 2,
+          "time_seconds": 6.411854,
+          "max_mono_jump": 0.43972
+        },
+        {
+          "first_jump_sample": 733686,
+          "last_jump_sample": 733687,
+          "jump_count": 2,
+          "time_seconds": 15.285125,
+          "max_mono_jump": 0.37734
+        },
+        {
+          "first_jump_sample": 734344,
+          "last_jump_sample": 734345,
+          "jump_count": 2,
+          "time_seconds": 15.298833,
+          "max_mono_jump": 0.40988
+        },
+        {
+          "first_jump_sample": 1045884,
+          "last_jump_sample": 1045888,
+          "jump_count": 3,
+          "time_seconds": 21.78925,
+          "max_mono_jump": 0.39196
+        }
+      ],
+      "operations": [
+        {
+          "start_sample": 160211,
+          "end_sample": 160221,
+          "interpolated_samples": 11,
+          "time_seconds": 3.337729
+        },
+        {
+          "start_sample": 283156,
+          "end_sample": 283163,
+          "interpolated_samples": 8,
+          "time_seconds": 5.899083
+        },
+        {
+          "start_sample": 283202,
+          "end_sample": 283209,
+          "interpolated_samples": 8,
+          "time_seconds": 5.900042
+        },
+        {
+          "start_sample": 306523,
+          "end_sample": 306530,
+          "interpolated_samples": 8,
+          "time_seconds": 6.385896
+        },
+        {
+          "start_sample": 306549,
+          "end_sample": 306556,
+          "interpolated_samples": 8,
+          "time_seconds": 6.386438
+        },
+        {
+          "start_sample": 307097,
+          "end_sample": 307104,
+          "interpolated_samples": 8,
+          "time_seconds": 6.397854
+        },
+        {
+          "start_sample": 307107,
+          "end_sample": 307114,
+          "interpolated_samples": 8,
+          "time_seconds": 6.398062
+        },
+        {
+          "start_sample": 307767,
+          "end_sample": 307774,
+          "interpolated_samples": 8,
+          "time_seconds": 6.411812
+        },
+        {
+          "start_sample": 733684,
+          "end_sample": 733691,
+          "interpolated_samples": 8,
+          "time_seconds": 15.285083
+        },
+        {
+          "start_sample": 734342,
+          "end_sample": 734349,
+          "interpolated_samples": 8,
+          "time_seconds": 15.298792
+        },
+        {
+          "start_sample": 1045882,
+          "end_sample": 1045892,
+          "interpolated_samples": 11,
+          "time_seconds": 21.789208
+        }
+      ],
+      "after_runs": []
+    }
+  ],
+  "final_runs": [],
+  "final_aac_measurement": {
+    "input_i": "-14.44",
+    "input_tp": "-3.15",
+    "input_lra": "1.60",
+    "input_thresh": "-24.74",
+    "output_i": "-13.87",
+    "output_tp": "-2.28",
+    "output_lra": "1.50",
+    "output_thresh": "-24.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.13"
+  },
+  "repaired_samples": 94
+}

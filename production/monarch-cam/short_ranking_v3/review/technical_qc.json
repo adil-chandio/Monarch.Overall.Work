@@ -1,0 +1,103 @@
+{
+  "file": "deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4",
+  "sha256": "d0f7ddad6426254fd243b5a5d7476d355e26eaaf1d66ca39ed56121a417f616d",
+  "bytes": 31946679,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "30/1",
+        "nb_frames": "1050",
+        "nb_read_frames": "1050"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "1642",
+        "nb_read_frames": "1641"
+      }
+    ],
+    "format": {
+      "duration": "35.000000",
+      "size": "31946679"
+    }
+  },
+  "decoded_audio_samples": 1680000,
+  "decoded_sample_rate": 48000,
+  "loudness": {
+    "input_i": "-14.44",
+    "input_tp": "-3.15",
+    "input_lra": "1.60",
+    "input_thresh": "-24.74",
+    "output_i": "-13.87",
+    "output_tp": "-2.28",
+    "output_lra": "1.50",
+    "output_thresh": "-24.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.13"
+  },
+  "click_runs": [],
+  "clipping_runs": 0,
+  "decoded_sample_peak_dbfs": -3.1539,
+  "checks": {
+    "duration_24s": true,
+    "frames_720": true,
+    "vertical_1080x1920": true,
+    "fps_30": true,
+    "audio_48k_stereo": true,
+    "integrated_loudness": true,
+    "true_peak": true,
+    "no_sample_clipping_runs": true,
+    "no_click_runs": true
+  },
+  "passed": true,
+  "v3": {
+    "edition": "clean_premium_v3",
+    "separate_from_previous_editions": true,
+    "sound_enhancements": [
+      "v3_stereo_width_polish",
+      "v3_room_polish",
+      "v3_sub_weight",
+      "v3_voice_dip_polish",
+      "v3_premaster_ceiling_polish",
+      "salience_layering",
+      "panned_sfx",
+      "short_room",
+      "sub_bloom",
+      "pchip_envelopes",
+      "gentle_voice_deharsh"
+    ],
+    "visual_enhancements": [
+      "minimal_captions_only",
+      "no_top_headlines",
+      "no_badges",
+      "no_dance_card",
+      "no_progress",
+      "no_footer",
+      "no_macro_inset",
+      "no_source_labels",
+      "no_brand_watermark",
+      "no_cut_flashes",
+      "v3_cinematic_grade",
+      "v3_halation_bloom",
+      "v3_scene_crossfades",
+      "v3_tracked_captions",
+      "v3_motion_drift",
+      "v3_rank_numbers",
+      "deep_navy_ivory_teal_palette",
+      "seamless_loop_crossfade",
+      "exact_text_thumbnails",
+      "five_cc0_sources"
+    ]
+  }
+}

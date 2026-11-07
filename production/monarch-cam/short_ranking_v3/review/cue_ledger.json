@@ -1,0 +1,338 @@
+[
+  {
+    "frame": 2,
+    "time": 0.066667,
+    "kind": "impact",
+    "peak_db": -23.0,
+    "label": "Hook hit",
+    "salience_role": "hero",
+    "salience_gain_db": 0.0,
+    "pan_start": -0.15,
+    "pan_end": 0.15,
+    "effective_peak_db": -23.0,
+    "time_s": 0.06666666666666667,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 0.066667,
+      "timeline_start": 0.0,
+      "source_peak_seconds": 0.09925,
+      "target_peak_dbfs": -23.0,
+      "timeline_end": 0.237125
+    }
+  },
+  {
+    "frame": 60,
+    "time": 2.0,
+    "kind": "whoosh",
+    "peak_db": -28.0,
+    "label": "Rank 5 reveal",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": -0.55,
+    "pan_end": 0.55,
+    "effective_peak_db": -32.5,
+    "time_s": 2.0,
+    "source_file": "selected_whoosh.wav",
+    "placement": {
+      "timeline_peak": 2.0,
+      "timeline_start": 1.887312,
+      "source_peak_seconds": 0.112687,
+      "target_peak_dbfs": -32.5,
+      "timeline_end": 2.387313
+    }
+  },
+  {
+    "frame": 90,
+    "time": 3.0,
+    "kind": "boing",
+    "peak_db": -26.0,
+    "label": "Rank 5 accent",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": 0.2,
+    "pan_end": -0.2,
+    "effective_peak_db": -30.5,
+    "time_s": 3.0,
+    "source_file": "selected_boing.wav",
+    "placement": {
+      "timeline_peak": 3.0,
+      "timeline_start": 2.980875,
+      "source_peak_seconds": 0.019125,
+      "target_peak_dbfs": -30.5,
+      "timeline_end": 3.549937
+    }
+  },
+  {
+    "frame": 150,
+    "time": 5.0,
+    "kind": "tick",
+    "peak_db": -31.0,
+    "label": "Rank 5 detail",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": -0.35,
+    "pan_end": 0.0,
+    "effective_peak_db": -35.5,
+    "time_s": 5.0,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 5.0,
+      "timeline_start": 4.974333,
+      "source_peak_seconds": 0.025667,
+      "target_peak_dbfs": -35.5,
+      "timeline_end": 5.233167
+    }
+  },
+  {
+    "frame": 240,
+    "time": 8.0,
+    "kind": "impact",
+    "peak_db": -24.5,
+    "label": "Rank 4 reveal",
+    "salience_role": "hero",
+    "salience_gain_db": 0.0,
+    "pan_start": -0.1,
+    "pan_end": 0.1,
+    "effective_peak_db": -24.5,
+    "time_s": 8.0,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 8.0,
+      "timeline_start": 7.90075,
+      "source_peak_seconds": 0.09925,
+      "target_peak_dbfs": -24.5,
+      "timeline_end": 8.170458
+    }
+  },
+  {
+    "frame": 270,
+    "time": 9.0,
+    "kind": "whoosh",
+    "peak_db": -28.0,
+    "label": "Rank 4 accent",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": 0.55,
+    "pan_end": -0.45,
+    "effective_peak_db": -32.5,
+    "time_s": 9.0,
+    "source_file": "selected_whoosh.wav",
+    "placement": {
+      "timeline_peak": 9.0,
+      "timeline_start": 8.887313,
+      "source_peak_seconds": 0.112687,
+      "target_peak_dbfs": -32.5,
+      "timeline_end": 9.387313
+    }
+  },
+  {
+    "frame": 330,
+    "time": 11.0,
+    "kind": "boing",
+    "peak_db": -26.0,
+    "label": "Rank 4 detail",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": -0.25,
+    "pan_end": 0.25,
+    "effective_peak_db": -30.5,
+    "time_s": 11.0,
+    "source_file": "selected_boing.wav",
+    "placement": {
+      "timeline_peak": 11.0,
+      "timeline_start": 10.980875,
+      "source_peak_seconds": 0.019125,
+      "target_peak_dbfs": -30.5,
+      "timeline_end": 11.549938
+    }
+  },
+  {
+    "frame": 420,
+    "time": 14.0,
+    "kind": "tick",
+    "peak_db": -31.0,
+    "label": "Rank 3 reveal",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": 0.3,
+    "pan_end": -0.3,
+    "effective_peak_db": -35.5,
+    "time_s": 14.0,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 14.0,
+      "timeline_start": 13.974333,
+      "source_peak_seconds": 0.025667,
+      "target_peak_dbfs": -35.5,
+      "timeline_end": 14.233167
+    }
+  },
+  {
+    "frame": 450,
+    "time": 15.0,
+    "kind": "impact",
+    "peak_db": -24.5,
+    "label": "Rank 3 accent",
+    "salience_role": "hero",
+    "salience_gain_db": 0.0,
+    "pan_start": 0.0,
+    "pan_end": 0.0,
+    "effective_peak_db": -24.5,
+    "time_s": 15.0,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 15.0,
+      "timeline_start": 14.90075,
+      "source_peak_seconds": 0.09925,
+      "target_peak_dbfs": -24.5,
+      "timeline_end": 15.170458
+    }
+  },
+  {
+    "frame": 510,
+    "time": 17.0,
+    "kind": "whoosh",
+    "peak_db": -28.0,
+    "label": "Rank 3 flip",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": -0.5,
+    "pan_end": 0.5,
+    "effective_peak_db": -32.5,
+    "time_s": 17.0,
+    "source_file": "selected_whoosh.wav",
+    "placement": {
+      "timeline_peak": 17.0,
+      "timeline_start": 16.887313,
+      "source_peak_seconds": 0.112687,
+      "target_peak_dbfs": -32.5,
+      "timeline_end": 17.387313
+    }
+  },
+  {
+    "frame": 600,
+    "time": 20.0,
+    "kind": "boing",
+    "peak_db": -26.0,
+    "label": "Rank 2 reveal",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": 0.15,
+    "pan_end": -0.15,
+    "effective_peak_db": -30.5,
+    "time_s": 20.0,
+    "source_file": "selected_boing.wav",
+    "placement": {
+      "timeline_peak": 20.0,
+      "timeline_start": 19.980875,
+      "source_peak_seconds": 0.019125,
+      "target_peak_dbfs": -30.5,
+      "timeline_end": 20.549937
+    }
+  },
+  {
+    "frame": 630,
+    "time": 21.0,
+    "kind": "tick",
+    "peak_db": -31.0,
+    "label": "Rank 2 accent",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": -0.25,
+    "pan_end": 0.25,
+    "effective_peak_db": -35.5,
+    "time_s": 21.0,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 21.0,
+      "timeline_start": 20.974333,
+      "source_peak_seconds": 0.025667,
+      "target_peak_dbfs": -35.5,
+      "timeline_end": 21.233167
+    }
+  },
+  {
+    "frame": 690,
+    "time": 23.0,
+    "kind": "impact",
+    "peak_db": -24.5,
+    "label": "Rank 2 open",
+    "salience_role": "hero",
+    "salience_gain_db": 0.0,
+    "pan_start": 0.0,
+    "pan_end": 0.0,
+    "effective_peak_db": -24.5,
+    "time_s": 23.0,
+    "source_file": "selected_impact.wav",
+    "placement": {
+      "timeline_peak": 23.0,
+      "timeline_start": 22.90075,
+      "source_peak_seconds": 0.09925,
+      "target_peak_dbfs": -24.5,
+      "timeline_end": 23.170458
+    }
+  },
+  {
+    "frame": 780,
+    "time": 26.0,
+    "kind": "whoosh",
+    "peak_db": -28.0,
+    "label": "Rank 1 reveal",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": 0.45,
+    "pan_end": -0.45,
+    "effective_peak_db": -32.5,
+    "time_s": 26.0,
+    "source_file": "selected_whoosh.wav",
+    "placement": {
+      "timeline_peak": 26.0,
+      "timeline_start": 25.887313,
+      "source_peak_seconds": 0.112687,
+      "target_peak_dbfs": -32.5,
+      "timeline_end": 26.387313
+    }
+  },
+  {
+    "frame": 810,
+    "time": 27.0,
+    "kind": "boing",
+    "peak_db": -26.0,
+    "label": "Rank 1 accent",
+    "salience_role": "support",
+    "salience_gain_db": -4.5,
+    "pan_start": -0.15,
+    "pan_end": 0.15,
+    "effective_peak_db": -30.5,
+    "time_s": 27.0,
+    "source_file": "selected_boing.wav",
+    "placement": {
+      "timeline_peak": 27.0,
+      "timeline_start": 26.980875,
+      "source_peak_seconds": 0.019125,
+      "target_peak_dbfs": -30.5,
+      "timeline_end": 27.549937
+    }
+  },
+  {
+    "frame": 960,
+    "time": 32.0,
+    "kind": "tick",
+    "peak_db": -31.0,
+    "label": "Payoff question",
+    "salience_role": "breath",
+    "salience_gain_db": -7.0,
+    "pan_start": 0.2,
+    "pan_end": -0.2,
+    "effective_peak_db": -38.0,
+    "time_s": 32.0,
+    "source_file": "selected_tick.wav",
+    "placement": {
+      "timeline_peak": 32.0,
+      "timeline_start": 31.974333,
+      "source_peak_seconds": 0.025667,
+      "target_peak_dbfs": -38.0,
+      "timeline_end": 32.233167
+    }
+  }
+]

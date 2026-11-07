@@ -10,11 +10,11 @@
     "titmouse": "https://commons.wikimedia.org/wiki/File:Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm"
   },
   "retrieval_routes": {
-    "squirrel": "https://upload.wikimedia.org/wikipedia/commons/9/93/Sasana.2015.myanmar.squirrel.1.webmhd.webm",
+    "squirrel": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sasana.2015.myanmar.squirrel.1.webmhd.webm",
     "hermit_crab": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Einsiedlerkrebs_(Wangerooge).webm",
-    "starfish": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Seestern_%28sich_aufrichtend%29.webm",
+    "starfish": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Seestern_(sich_aufrichtend).webm",
     "octopus": "https://commons.wikimedia.org/wiki/Special:Redirect/file/OctopusFeedingCSS.mpg",
-    "titmouse": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm"
+    "titmouse": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm"
   },
   "rights_declaration": "All five picture sources are CC0 1.0 via Wikimedia Commons; attribution is given voluntarily.",
   "credits": {
@@ -69,8 +69,10 @@
     "titmouse": "production/monarch-cam/short_ranking_v3/review/source_poster_titmouse.jpg"
   },
   "poster": "production/monarch-cam/short_ranking_v3/review/source_poster.jpg",
-  "visual_timestamp_approval": "PENDING \u2014 no scene lock before contact-sheet review",
+  "visual_timestamp_approval": "APPROVED_AFTER_CONTACT_SHEET_REVIEW",
   "full_motion_review": false,
   "native_audio_listening": false,
-  "retrieved_unix": 1794029876
+  "retrieved_unix": 1794057399,
+  "visual_review_basis": "Coarse/fine contact-sheet review; exact windows in visual_review_lock.json",
+  "v3_edition": true
 }

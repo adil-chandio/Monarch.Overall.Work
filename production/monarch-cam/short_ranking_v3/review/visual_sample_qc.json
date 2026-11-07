@@ -1,0 +1,97 @@
+{
+  "expected_frames": 1050,
+  "sampled_luma": [
+    {
+      "frame": 0,
+      "time": 0.0,
+      "mean_luma": 57.622
+    },
+    {
+      "frame": 60,
+      "time": 2.0,
+      "mean_luma": 58.03
+    },
+    {
+      "frame": 120,
+      "time": 4.0,
+      "mean_luma": 61.28
+    },
+    {
+      "frame": 180,
+      "time": 6.0,
+      "mean_luma": 52.399
+    },
+    {
+      "frame": 240,
+      "time": 8.0,
+      "mean_luma": 52.695
+    },
+    {
+      "frame": 300,
+      "time": 10.0,
+      "mean_luma": 62.655
+    },
+    {
+      "frame": 360,
+      "time": 12.0,
+      "mean_luma": 65.876
+    },
+    {
+      "frame": 420,
+      "time": 14.0,
+      "mean_luma": 66.779
+    },
+    {
+      "frame": 480,
+      "time": 16.0,
+      "mean_luma": 71.363
+    },
+    {
+      "frame": 540,
+      "time": 18.0,
+      "mean_luma": 67.083
+    },
+    {
+      "frame": 600,
+      "time": 20.0,
+      "mean_luma": 68.095
+    },
+    {
+      "frame": 660,
+      "time": 22.0,
+      "mean_luma": 70.991
+    },
+    {
+      "frame": 720,
+      "time": 24.0,
+      "mean_luma": 74.863
+    },
+    {
+      "frame": 780,
+      "time": 26.0,
+      "mean_luma": 73.046
+    },
+    {
+      "frame": 840,
+      "time": 28.0,
+      "mean_luma": 58.038
+    },
+    {
+      "frame": 900,
+      "time": 30.0,
+      "mean_luma": 55.642
+    },
+    {
+      "frame": 960,
+      "time": 32.0,
+      "mean_luma": 55.182
+    },
+    {
+      "frame": 1020,
+      "time": 34.0,
+      "mean_luma": 55.478
+    }
+  ],
+  "minimum_sampled_luma": 52.399,
+  "note": "Samples guard against an unintended black render; final stream/frame validation is in technical_qc.json."
+}

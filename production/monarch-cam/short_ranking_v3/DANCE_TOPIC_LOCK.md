@@ -4,6 +4,5 @@
 
 - New subject: a subjective entertainment ranking of five cleared animal moments.
 - Sources: squirrel, hermit crab, starfish, octopus and Tufted Titmouse — all CC0 1.0 via Wikimedia Commons.
-- New creative angle: a ranking/countdown mechanic with original voiceover, custom script, filmic grade, sound design and subtle 5→1 numerals. No third-party TikTok/Instagram/Reels clips.
-- Rule: "viral" / "next level" is an optimization objective, not a promise. Objective QC and model review are evidence, not audience guarantees.
-- Category: Entertainment (YouTube videoCategoryId 24), because the ranking is subjective entertainment rather than a species documentary.
+- Category: Entertainment (YouTube videoCategoryId 24).
+- Rule: "viral" / "next level" is an optimization objective, not a promise.

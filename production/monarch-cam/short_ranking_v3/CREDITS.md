@@ -16,11 +16,13 @@
 - **Comedy_Music_Samples_033.wav** — jalastram, CC0 1.0. https://freesound.org/people/jalastram/sounds/457985/
 - **Whoosh_Simple_ER_SFX_1.wav** — Alex_hears_things, CC0 1.0. https://freesound.org/people/Alex_hears_things/sounds/521044/
 - **Soft Cinematic Impact** — Rizzard, CC0 1.0. https://freesound.org/people/Rizzard/sounds/560156/
-- Low-level native CC0 clip audio is retained as ambience; no generated animal vocalisation was added.
+- Low-level native CC0 source-clip audio is retained as ambience; no generated animal vocalisation was added.
 - Narration: AI-generated with Microsoft Edge TTS `en-US-AndrewNeural`.
+- Premium sound design: salience-layered softer CC0 hits, motion panning, a short original room, voice-aware presence dip, wider music/ambience, PCHIP envelopes, four low-level original sub-blooms and gentle voice de-harsh. The sub-bloom and room are original production effects, not wildlife recordings.
 
 ## Guardrails
 
 - Original 24s, PREMIUM, CLEAN, CLEAN PREMIUM V2, historical Sound V2, 35s Master and rejected 20s files remain unchanged.
 - No human full-motion review, native-audio listening, human approval, perfection or virality guarantee is claimed.
 - This is a subjective entertainment ranking, not a scientific claim or a claim about any individual animal's life.
+- No third-party TikTok, Instagram or Reels clip was used.
