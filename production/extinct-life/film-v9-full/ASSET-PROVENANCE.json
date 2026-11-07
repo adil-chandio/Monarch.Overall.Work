@@ -1,0 +1,52 @@
+{
+  "native_actors": {
+    "licensing": "Original procedural sculpts authored for this production; no reference assets copied",
+    "assets": [
+      {
+        "kind": "mastodon",
+        "file": "mastodon.glb",
+        "bytes": 4624516,
+        "sha256": "0eeb55941e563400f37754be838a5cb4a8adfd0935eabc7a2ff388daa4313b7d",
+        "original_authored": true
+      },
+      {
+        "kind": "reindeer",
+        "file": "reindeer.glb",
+        "bytes": 1406296,
+        "sha256": "4b578e7a51e7512bf3813334d56bf9c9d6cb57528e9f255eecb2b887a314f708",
+        "original_authored": true
+      },
+      {
+        "kind": "goose",
+        "file": "goose.glb",
+        "bytes": 1056792,
+        "sha256": "0488d52791cf6af395351f11bac87538f5f1e442895b21d9baac12847b737d10",
+        "original_authored": true
+      },
+      {
+        "kind": "hare",
+        "file": "hare.glb",
+        "bytes": 1136284,
+        "sha256": "db1111043100a950c70216dd3b857d22310849247a15ead15709b6b0dc1c894b",
+        "original_authored": true
+      }
+    ],
+    "anatomical_expert_validation": false
+  },
+  "materials": [
+    {
+      "path": "production/extinct-life/flow-proof/materials/clay-albedo.jpg",
+      "sha256": "5a49a85b71154ab7588ffeb0b55662978e986e82a8f2dcd805582aa169f18d99",
+      "origin": "Previously authored AI-generated clay/silt material texture, not field photography or a scene/image plate"
+    },
+    {
+      "path": "production/extinct-life/flow-proof/materials/clay-height.jpg",
+      "sha256": "6d5aebfff74d29342cb83351781f26129300a17c8597ce1f38c620096ec4598a",
+      "origin": "Grayscale/autocontrast derivative of the albedo, not measured displacement"
+    }
+  ],
+  "private_reference_assets_copied": false,
+  "previous_movie_frames_used": false,
+  "image_plate_animation": false,
+  "scientific_anatomical_expert_validation": false
+}

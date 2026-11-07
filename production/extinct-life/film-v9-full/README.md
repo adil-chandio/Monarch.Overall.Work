@@ -28,3 +28,7 @@ The workflow renders all 36 disjoint ranges, checks continuity and the exact fra
 ## Internal look development
 
 Initial native inspection was rejected internally: sparse environment, harsh shadows and slab-like strata. Subsequent look development added textured ground, more vegetation, contact occlusion, irregular contiguous sediment and supported actuator shafts. A broken ambient-occlusion-only composition producing black frames was caught visually and fixed; capture now explicitly rejects mostly-black frames. The inspection and QC files from the actual final render, not this development history, govern delivery.
+
+Material provenance is recorded in `ASSET-PROVENANCE.json`. The reused clay/silt texture is AI-generated albedo mapped onto actual moving 3D geometry; its grayscale bump derivative is not measured soil microstructure. It is not field photography, a generated scene plate or a copied private-reference asset.
+
+The earliest inspection files from source `469f571` are historical look development, not final-render evidence. Its initial motion check moved subjects but did not truly lock the tracking camera. Source `cdaede4` corrects this, comparing actual camera positions as well as subject progression. The full-render inspection and QC supersede that early check; creative acceptance remains independent.
