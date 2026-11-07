@@ -1,5 +1,5 @@
 {
-  "status": "Corrected V14 draft candidate rendered; encoded creative review pending",
+  "status": "Published V14 full-film review prerelease; sampled encoded review complete, creative acceptance withheld with documented remaining weaknesses",
   "release": "https://github.com/adil-chandio/Monarch.Overall.Work/releases/tag/extinct-life-v14-corrected-42411599346",
   "video": "https://github.com/adil-chandio/Monarch.Overall.Work/releases/download/extinct-life-v14-corrected-42411599346/Extinct_Life_V14_Directed_English_1080p.mp4",
   "sha256": "9ff2ebf9a007ab6118f4cf0417dedacb09e67bec2ba95e1d1c3d6995e4238f26",
@@ -8,6 +8,11 @@
   "frames": 13163,
   "full_film_complete": true,
   "v13_unchanged": true,
-  "draft": true,
-  "full_film_creative_acceptance": false
+  "draft": false,
+  "full_film_creative_acceptance": false,
+  "prerelease": true,
+  "encoded_sampled_visual_review_complete": true,
+  "continuous_human_watch_listen_claimed": false,
+  "review": "../review-v14/V14-ENCODED-REVIEW.md",
+  "release_asset_digest": "sha256:9ff2ebf9a007ab6118f4cf0417dedacb09e67bec2ba95e1d1c3d6995e4238f26"
 }

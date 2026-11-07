@@ -1,6 +1,6 @@
 # V14 — forensic-directed full English rebuild
 
-Status: corrected local native preflight passed (70 samples / 27 stages, six tests). Cloud full-master assembly and encoded creative review are still pending; see `LOCAL-VALIDATION.json`. This directory is not a delivered-film certificate. Existing V13 and prior releases are unchanged.
+Status: **published full-film V14 review prerelease**. Corrected cloud render/assembly succeeded; sampled encoded review is complete (439 whole-second samples, 300 motion-strip samples, four individual HD samples). All six tests pass. [Download the full film](https://github.com/adil-chandio/Monarch.Overall.Work/releases/download/extinct-life-v14-corrected-42411599346/Extinct_Life_V14_Directed_English_1080p.mp4). See [encoded review and remaining weaknesses](../review-v14/V14-ENCODED-REVIEW.md), `QC.json` and `DELIVERY.json`. Full-film creative acceptance remains **false**: long science holds, a tight/cropped encounter approach and stylised performance remain. No continuous watch/listen or flawless-film certificate is claimed. Existing V13 is unchanged.
 
 ## Locked continuity
 
@@ -23,7 +23,7 @@ Status: corrected local native preflight passed (70 samples / 27 stages, six tes
 
 Visual-source fingerprint binds native QC and final QC to the inspected modules and schedule. Stale inspection or unknown mixed-revision parts fail assembly. The framing correction explicitly permits only hash-sealed base-run shards entirely outside changed stages and outgoing transition dependencies; all eleven overlapping shards must be fresh. See `PATCH-PROVENANCE.json`. The renderer still checks blank output, fixed-length reachable arms, visible palms, shader/page errors and absolute-seek determinism. Unit tests separately lock full script/voice coverage and shot contracts.
 
-The workflow renders all pictures afresh in 48 non-overlapping shards, checks complete decoded frame count and encoded loudness/peaks, then extracts 439 whole-second samples, full-resolution samples and finer motion strips from the actual encoded candidate. It creates a **draft** release pending encoded creative review. Technical pass flags are not “zero flaws,” scientific approval, uninterrupted listening or owner acceptance.
+The workflow renders all pictures afresh in 48 non-overlapping shards, checks complete decoded frame count and encoded loudness/peaks, then extracts 439 whole-second samples, full-resolution samples and finer motion strips from the actual encoded candidate. It initially creates a **draft** release pending encoded creative review. The corrected candidate has now been published as a review prerelease after the scoped review linked above; this is not full creative sign-off. Technical pass flags are not “zero flaws,” scientific approval, uninterrupted listening or owner acceptance.
 
 ## V13 finding disposition
 
