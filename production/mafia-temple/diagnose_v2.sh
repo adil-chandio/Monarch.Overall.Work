@@ -17,6 +17,8 @@ try:
   # Restrict disclosure to known, non-sensitive diagnostic expressions.
   allowed=r'(?:CUDA out of memory|Tried to allocate [0-9.]+ [GM]iB|No space left on device|ModuleNotFoundError|ImportError|OutOfMemoryError|[A-Za-z]+Error|SIGKILL|Killed|HTTP [0-9]+)'
   out['last_diagnostic_lines']=list(dict.fromkeys(re.findall(allowed,text,re.I)))[-25:]
+  out['traceback_functions']=re.findall(r'File [^\n]{0,300}, line [0-9]+, in ([A-Za-z0-9_<>.]+)',text)[-30:]
+  out['known_stages']={k:bool(re.search(v,text,re.I)) for k,v in {'vae_decode':'vae.decode|decode\(', 'vae_encode':'vae.encode|encode\(', 'attention':'scaled_dot_product_attention|attention', 'text_encoder':'text_encoder|UMT5', 'pipeline_loading':'from_pretrained|load_checkpoint', 'denoise':'transformer\(|denois|scheduler.step', 'tiling':'tiled_decode|tiled_encode'}.items()}
 except Exception as e:
  out['api_failure_class']=type(e).__name__
  out['api_failure_flags']={x:bool(re.search(y,str(e),re.I)) for x,y in {'404':r'404|not found','403':r'403|forbidden','timeout':r'timeout|timed out','quota':r'quota'}.items()}
