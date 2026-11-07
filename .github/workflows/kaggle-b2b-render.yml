@@ -363,8 +363,13 @@ jobs:
           print(f"::notice::Selected slot={slot_used} | Kaggle user={u} (token_mode={bool(tok)})", flush=True)
           PY
 
-      - name: Generate six distinct motion clips
-        run: bash production/mafia-temple/run_gpu.sh
+      - name: Generate AI motion clips
+        run: |
+          if grep -q 'walking-retry' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_retry.sh
+          else
+            bash production/mafia-temple/run_gpu.sh
+          fi
       - name: Save motion clips to the session branch
         run: |
           git config user.name "MONARCH GPU Runner"
