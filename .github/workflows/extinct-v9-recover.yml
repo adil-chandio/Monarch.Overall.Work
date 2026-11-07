@@ -1,0 +1,91 @@
+name: V9 recover full-master assembly — reuse all 36 native shards
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/extinct-v9-recover.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  assemble:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 42341443674
+          pattern: v9-native-*
+          path: .cache/extinct-v9
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 42341443674
+          name: v9-master-audio
+          path: .cache/extinct-v9
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 42341443674
+          name: v9-audio-qc
+          path: production/extinct-life/film-v9-full
+      - name: Assemble full master with durable diagnostics
+        id: finish
+        continue-on-error: true
+        run: |
+          .venv/bin/python - <<'PY2'
+          import subprocess,sys,json
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v9-full');c=Path('.cache/extinct-v9')
+          r=subprocess.run(['.venv/bin/python',str(b/'finish.py'),'--assemble-only'],capture_output=True,text=True)
+          (b/'ASSEMBLY-LOG.txt').write_text(r.stdout+'\n'+r.stderr)
+          (b/'ASSEMBLY-STATE.json').write_text(json.dumps({'exit_code':r.returncode,'files':[{'name':p.name,'bytes':p.stat().st_size}for p in c.iterdir() if p.is_file()]},indent=2))
+          print(r.stdout[-2000:]);print(r.stderr[-8000:]);sys.exit(r.returncode)
+          PY2
+      - name: Preserve assembly diagnostics even if media verification fails
+        if: always()
+        run: |
+          git config user.name 'Monarch full native 3D production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v9-full/ASSEMBLY-LOG.txt production/extinct-life/film-v9-full/ASSEMBLY-STATE.json
+          git diff --cached --quiet || git commit -m 'Record full-master assembly diagnostics [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+      - name: Publish the complete English master, with honest scope and music attribution
+        if: steps.finish.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="extinct-life-v9-full-${GITHUB_RUN_ID}"
+          gh release create "$TAG" --target "$GITHUB_SHA" --prerelease --title 'Extinct Life — full enhanced English 3D master (7:19)' --notes "Full approved 438.766667-second English master, 1920x1080/30fps; not another 61-second excerpt. All native frames freshly rendered. Moving-3D direction retained; distinct fragment, field-exposure, extraction, reference, clean-hood control, branch-support, reconstruction-boundary, process-gap and incomplete-archive setups. 25 continuous stages, not forced cuts for each of the 58 planning beats. Unchanged approved script/voice speed. Original continuous Blender-authored GLB animals animated as native 3D, fresh environments and concise object-linked labels, without the large upper caption cards. Stylized conceptual 3D, not photoreal field footage, actual reads/specimen counts or expert-validated anatomy. Technical checks are not a reference-quality certification. Soft material-specific synthesized foley, not field recordings or certified binaural ASMR. Music: 'Hiraeth' and 'Undertow' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au . https://creativecommons.org/licenses/by/4.0/ . Two non-repeating excerpts, crossfade, gentle EQ, fades and narration-priority mixing; no endorsement or claim-free guarantee. Both full credits are in CREDITS.md and movie metadata. Native/sample/signal checks do not imply uninterrupted human watch/listen, ear comfort or owner creative acceptance. No YouTube upload." .cache/extinct-v9/Extinct_Life_V9_Full_English_1080p.mp4 production/extinct-life/film-v9-full/QC.json production/extinct-life/film-v9-full/SOUND-QC.json production/extinct-life/film-v9-full/CREDITS.md production/extinct-life/film-v9-full/English-v9.srt
+      - name: Preserve the real full-master delivery and QC on this session branch
+        if: steps.finish.outcome == 'success'
+        run: |
+          rm -rf production/extinct-life/film-v9-full/inspection
+          cp -r .cache/extinct-v9/stills production/extinct-life/film-v9-full/inspection
+          cp .cache/extinct-v9/seek-QC.json production/extinct-life/film-v9-full/seek-QC.json
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          b=Path('production/extinct-life/film-v9-full');q=json.load(open(b/'QC.json'));tag='extinct-life-v9-full-'+os.environ['GITHUB_RUN_ID'];base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/'
+          d={'status':'Full English master rendered; owner creative review pending','release':base+'tag/'+tag,'video':base+'download/'+tag+'/Extinct_Life_V9_Full_English_1080p.mp4','sha256':q['sha256'],'bytes':q['bytes'],'seconds':q['duration_seconds'],'frames':q['native_frames'],'full_film_complete':True,'full_film_creative_acceptance':False}
+          (b/'DELIVERY.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name 'Monarch full native 3D production'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add production/extinct-life/film-v9-full
+          git commit -m 'Record full English 7:19 master delivery and verified QC [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+      - name: Fail honestly if full verification failed
+        if: steps.finish.outcome != 'success'
+        run: exit 1
