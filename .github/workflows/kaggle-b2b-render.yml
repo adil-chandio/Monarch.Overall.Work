@@ -384,6 +384,8 @@ jobs:
             PILOT_KERNEL_SLUG=monarch-turn-research-42428526187 python production/mafia-temple/stableanim_diagnose.py
           elif grep -q 'stableanim-walk' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_stableanim_walk.sh
+          elif grep -q 'stableanim-tall-v7' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_stableanim_tall_v7.sh
           elif grep -q 'stableanim-tall-v6' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_stableanim_tall_v6.sh
           elif grep -q 'stableanim-tall-v5' production/mafia-temple/trigger.txt; then

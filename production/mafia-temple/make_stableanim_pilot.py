@@ -4,19 +4,21 @@ import argparse, base64, json, pathlib, re, subprocess
 from io import BytesIO
 from PIL import Image
 root=pathlib.Path(__file__).resolve().parents[2]
-p=argparse.ArgumentParser();p.add_argument('--user',required=True);p.add_argument('--slug',required=True);p.add_argument('--out',required=True);p.add_argument('--hands',action='store_true');p.add_argument('--tall',action='store_true');p.add_argument('--tall-v2',action='store_true');p.add_argument('--tall-v3',action='store_true');p.add_argument('--tall-v4',action='store_true');p.add_argument('--tall-v5',action='store_true');p.add_argument('--tall-v6',action='store_true');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--user',required=True);p.add_argument('--slug',required=True);p.add_argument('--out',required=True);p.add_argument('--hands',action='store_true');p.add_argument('--tall',action='store_true');p.add_argument('--tall-v2',action='store_true');p.add_argument('--tall-v3',action='store_true');p.add_argument('--tall-v4',action='store_true');p.add_argument('--tall-v5',action='store_true');p.add_argument('--tall-v6',action='store_true');p.add_argument('--tall-v7',action='store_true');a=p.parse_args()
 out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True);slug=re.sub('[^a-z0-9]+','-',a.slug.lower()).strip('-')[:48]
 # CMU mocap 09_01 is downloaded at runtime, not committed or redistributed as a source asset.
 data=json.loads(subprocess.check_output(['gh','api','repos/konyshevgmbh/cmu-mocap/contents/data/009/09_01.bvh'],text=True))
 bvh=base64.b64decode(data['content']).decode('utf-8')
 image=Image.open(root/'production/mafia-temple/keyframes/shot-04.jpg').convert('RGB')
 image=(Image.open(root/'production/mafia-temple/keyframes/shot-04-tall-v4-reference.jpg').convert('RGB') if (a.tall_v4 or a.tall_v5 or a.tall_v6) else Image.open(root/'production/mafia-temple/keyframes/shot-04-tall-v2-reference.jpg').convert('RGB') if (a.tall_v2 or a.tall_v3 or a.tall_v4) else image.crop((472,0,904,768)).resize((576,1024),Image.Resampling.LANCZOS) if a.tall else image.crop((345,30,1057,742)).resize((512,512),Image.Resampling.LANCZOS))
+if a.tall_v7:
+ image=Image.open(root/'production/mafia-temple/keyframes/shot-04-identity-study-b.jpg').convert('RGB').resize((576,1024),Image.Resampling.LANCZOS)
 buf=BytesIO();image.save(buf,format='JPEG',quality=92)
 base=root/'production/mafia-temple'
-kernel='stableanim_tall_v6_kernel.py' if a.tall_v6 else ('stableanim_tall_v5_kernel.py' if a.tall_v5 else ('stableanim_tall_v4_kernel.py' if a.tall_v4 else ('stableanim_tall_v3_kernel.py' if a.tall_v3 else ('stableanim_tall_v2_kernel.py' if a.tall_v2 else ('stableanim_tall_kernel.py' if a.tall else ('stableanim_hands_kernel.py' if a.hands else 'stableanim_kernel.py'))))))
-pose='run_tall_v5_mocap_to_poses.py' if (a.tall_v5 or a.tall_v6) else ('run_tall_v2_mocap_to_poses.py' if (a.tall_v2 or a.tall_v3 or a.tall_v4) else ('run_tall_mocap_to_poses.py' if a.tall else ('run_hand_mocap_to_poses.py' if a.hands else 'mocap_to_poses.py')))
+kernel='stableanim_tall_v7_kernel.py' if a.tall_v7 else ('stableanim_tall_v6_kernel.py' if a.tall_v6 else ('stableanim_tall_v5_kernel.py' if a.tall_v5 else ('stableanim_tall_v4_kernel.py' if a.tall_v4 else ('stableanim_tall_v3_kernel.py' if a.tall_v3 else ('stableanim_tall_v2_kernel.py' if a.tall_v2 else ('stableanim_tall_kernel.py' if a.tall else ('stableanim_hands_kernel.py' if a.hands else 'stableanim_kernel.py')))))))
+pose='run_tall_v5_mocap_to_poses.py' if (a.tall_v5 or a.tall_v6 or a.tall_v7) else ('run_tall_v2_mocap_to_poses.py' if (a.tall_v2 or a.tall_v3 or a.tall_v4) else ('run_tall_mocap_to_poses.py' if a.tall else ('run_hand_mocap_to_poses.py' if a.hands else 'mocap_to_poses.py')))
 code=(base/kernel).read_text().replace('__SOURCE_JPEG__',repr(base64.b64encode(buf.getvalue()).decode())).replace('__BVH_TEXT__',repr(bvh)).replace('__POSE_GENERATOR__',repr((base/pose).read_text())).replace('__FACE_OFFSETS__',repr(json.loads((base/'generated-keyframe-face68.json').read_text())))
-if a.hands or a.tall or a.tall_v2 or a.tall_v3 or a.tall_v4 or a.tall_v5 or a.tall_v6:
+if a.hands or a.tall or a.tall_v2 or a.tall_v3 or a.tall_v4 or a.tall_v5 or a.tall_v6 or a.tall_v7:
  code=code.replace('__HAND_OFFSETS__',repr(json.loads((base/'generated-keyframe-hand21.json').read_text())))
 nb={'cells':[{'cell_type':'code','execution_count':None,'metadata':{},'outputs':[],'source':code.splitlines(True)}], 'metadata':{'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'},'language_info':{'name':'python'}},'nbformat':4,'nbformat_minor':5}
 (out/'main.ipynb').write_text(json.dumps(nb)); (out/'kernel-metadata.json').write_text(json.dumps({'id':f'{a.user}/{slug}','title':slug,'code_file':'main.ipynb','language':'python','kernel_type':'notebook','is_private':True,'enable_gpu':True,'enable_internet':True,'dataset_sources':[],'competition_sources':[],'kernel_sources':[],'model_sources':[],'machine_shape':'NvidiaTeslaT4'},indent=2))
