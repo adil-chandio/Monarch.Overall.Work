@@ -104,6 +104,6 @@ command=[sys.executable,'inference_basic.py','--pretrained_model_name_or_path',s
 run(command)
 frames=out/'animated_images'
 if len(list(frames.glob('frame_*.png'))) != 96: raise RuntimeError('Expected exactly 96 output frames')
-run(['ffmpeg','-y','-loglevel','error','-framerate','24','-i',str(frames/'frame_%d.png'),'-c:v','libx264','-crf','16','-pix_fmt','yuv420p',str(out/'walk-motion-pilot-v1.mp4')])
-(out/'walk-pilot-v1-receipt.json').write_text(json.dumps({'frames':96,'fps':24,'width':512,'height':512,'seconds_elapsed':round(time.time()-t,1),'status':'technical_test_only','license':'research-only until third-party weight licenses cleared'},indent=2))
+run(['ffmpeg','-y','-loglevel','error','-framerate','24','-i',str(frames/'frame_%d.png'),'-c:v','libx264','-crf','16','-pix_fmt','yuv420p',str(out/'walk-motion-pilot-v2.mp4')])
+(out/'walk-pilot-v2-receipt.json').write_text(json.dumps({'frames':96,'fps':24,'width':512,'height':512,'seconds_elapsed':round(time.time()-t,1),'status':'technical_test_only','license':'research-only until third-party weight licenses cleared'},indent=2))
 print('PILOT_DONE',flush=True)

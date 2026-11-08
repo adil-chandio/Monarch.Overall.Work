@@ -10,9 +10,9 @@ for ((i=0;i<250;i++)); do
  case "$status" in
   *COMPLETE*|*complete*)
    mkdir -p "$dir/out" production/mafia-temple/walk-pilot-output
-   kaggle kernels output "$ref" -p "$dir/out" --file-pattern '(^|/)(walk-motion-pilot-v1\.mp4|walk-pilot-v1-receipt\.json)$'
-   video=$(find "$dir/out" -name walk-motion-pilot-v1.mp4 -type f -size +10k -print -quit)
-   receipt=$(find "$dir/out" -name walk-pilot-v1-receipt.json -type f -print -quit)
+   kaggle kernels output "$ref" -p "$dir/out" --file-pattern '(^|/)(walk-motion-pilot-v2\.mp4|walk-pilot-v2-receipt\.json)$'
+   video=$(find "$dir/out" -name walk-motion-pilot-v2.mp4 -type f -size +10k -print -quit)
+   receipt=$(find "$dir/out" -name walk-pilot-v2-receipt.json -type f -print -quit)
    test -n "$video" && test -n "$receipt"
    cp "$video" "$receipt" production/mafia-temple/walk-pilot-output/
    exit 0;;

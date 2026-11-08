@@ -22,7 +22,7 @@ def make_poses(bvh_text, output_dir, *_):
     for i, frame in enumerate(range(20,500,5)):
         cache={}; pos={name:joint_matrix(motion,name,frame,cache)[:3,3] for name in JOINTS}
         root=pos['Hips']
-        points={name:(round(256+18*(p[0]-root[0])),round(474-18*(p[1]-1))) for name,p in pos.items()}
+        points={name:(round(256+16.3*(p[0]-root[0])),round(455-16.3*(p[1]-1))) for name,p in pos.items()}
         points['Nose']=points['Head']  # no visible face landmarks in rear view
         canvas=Image.new('RGB',(512,512));draw=ImageDraw.Draw(canvas)
         for a,b,color in LIMBS: draw.line([points[a],points[b]],fill=color,width=8)

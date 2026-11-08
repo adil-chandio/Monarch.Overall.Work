@@ -9,7 +9,7 @@ out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True);slug=re.sub('[^a-z
 data=json.loads(subprocess.check_output(['gh','api','repos/konyshevgmbh/cmu-mocap/contents/data/007/07_05.bvh'],text=True));bvh=base64.b64decode(data['content']).decode('utf-8')
 def jpeg(im):
     buf=BytesIO();im.save(buf,format='JPEG',quality=92);return base64.b64encode(buf.getvalue()).decode()
-source=Image.open(root/'keyframes/shot-01.jpg').convert('RGB').crop((145,30,857,742)).resize((512,512),Image.Resampling.LANCZOS)
+source=Image.open(root/'keyframes/shot-01.jpg').convert('RGB').crop((116,0,884,768)).resize((512,512),Image.Resampling.LANCZOS)
 identity=Image.open(root/'keyframes/shot-05a.jpg').convert('RGB').resize((768,429),Image.Resampling.LANCZOS)
 code=(root/'stableanim_walk_kernel.py').read_text()
 for name,value in {'SOURCE_JPEG':jpeg(source),'IDENTITY_JPEG':jpeg(identity),'BVH_TEXT':bvh,'POSE_GENERATOR':(root/'walk_mocap_to_poses.py').read_text(),'BASE_POSE_HELPER':(root/'mocap_to_poses.py').read_text(),'FACE_OFFSETS':None}.items():
