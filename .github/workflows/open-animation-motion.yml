@@ -17,6 +17,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -q yt-dlp
+      - name: Install video decoding tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - name: Extract research contact sheets
         run: python scripts/inspect_open_animations.py
       - name: Save public research evidence

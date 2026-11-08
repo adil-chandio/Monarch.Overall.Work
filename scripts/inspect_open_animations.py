@@ -1,13 +1,8 @@
 """Extract traceable contact sheets from public animation examples; no access circumvention."""
 import json,pathlib,subprocess,tempfile,urllib.request
 items=[
- ('alan-original','https://vimeo.com/17016768','vimeo','Alan Becker, Animator vs. Animation'),
- ('alan-second','https://vimeo.com/17016941','vimeo','Alan Becker, Animator vs. Animation II'),
- ('alan-minecraft','https://vimeo.com/149072131','vimeo','Alan Becker, Animation vs. Minecraft (first 90 seconds)'),
  ('snowball','https://upload.wikimedia.org/wikipedia/commons/4/4e/Snowball_Fight.webm','direct','turkey3, Snowball Fight, CC BY-SA 2.0'),
- ('coconut','https://upload.wikimedia.org/wikipedia/commons/7/7b/Coconut_Mayhem.webm','direct','turkey3, Coconut Mayhem, CC BY-SA 2.0'),
- ('fight','https://upload.wikimedia.org/wikipedia/commons/5/59/FightAnim3.gif','direct','Evar678, FightAnim3, CC BY 4.0'),
- ('walk','https://upload.wikimedia.org/wikipedia/commons/3/32/Stick_figure_walking.gif','direct','Ebaychatter0, Stick figure walking, CC0')]
+ ('coconut','https://upload.wikimedia.org/wikipedia/commons/7/7b/Coconut_Mayhem.webm','direct','turkey3, Coconut Mayhem, CC BY-SA 2.0')]
 out=pathlib.Path('docs/repo-intel/open-animation-motion');out.mkdir(parents=True,exist_ok=True);rows=[]
 def run(cmd,timeout=200):return subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=timeout)
 with tempfile.TemporaryDirectory() as td:
