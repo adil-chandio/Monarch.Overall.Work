@@ -1,0 +1,80 @@
+{
+  "status": "technical export checks complete; owner creative acceptance pending",
+  "decoded_frames": 1305,
+  "expected_frames": 1305,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 43.5,
+  "native_3d_resolution": [
+    1080,
+    1920
+  ],
+  "interpolated_frames": false,
+  "upscaled_3d": false,
+  "all_frames_nonblack": true,
+  "minimum_mean_pixel_value": 34.06606738683128,
+  "scene_roi_adjacent_frame_differences": {
+    "mean": 1.3541504802995774,
+    "min": 0.00023960536054801196,
+    "max": 87.16261291503906,
+    "exact_repeated_roi_pairs": 0,
+    "limit": "A signal check, not proof of useful motion, correct contacts or aesthetic quality."
+  },
+  "extracted_native_review_frames_NOT_yet_a_watch_attestation": [
+    30,
+    180,
+    270,
+    480,
+    600,
+    720,
+    810,
+    930,
+    1110,
+    1260
+  ],
+  "overview_sample_positions": 45,
+  "assembly": {
+    "method": "88-frame native framing correction spliced into base edit; final H264 re-encode, unchanged AAC copied",
+    "base_build_sha256": "60f64830dd935b0e9780717206357550af99e8a4f39cfeaaed8a796a489c0f4b",
+    "base_video_sha256": "1961eaf27c1953a039eaf1bccdecc4fe710dea89084101338bca87e8b8bb3751",
+    "patched_range_inclusive_exclusive": [
+      439,
+      527
+    ],
+    "patch_build_sha256": "691a490113cab2ae16fcac9eca89a1a217811e4c2e3d51bbfa5874e2181d50a2",
+    "unchanged_outside_patch_condition": true
+  },
+  "source_build_sha256": "691a490113cab2ae16fcac9eca89a1a217811e4c2e3d51bbfa5874e2181d50a2",
+  "source_sha256": {
+    "production/extinct-life/shorts-v15-continuity/film/base-render-scene.mjs": "dea7a3d4497693473724acd833e6898bac8b8c62f95a1639a4ad0fd3deed3021",
+    "production/extinct-life/shorts-v15-continuity/film/finish.py": "b6f7b5f6d90575412988f0d37a33e8905c8191365600c7c55f765b015d0b7ec1",
+    "production/extinct-life/shorts-v15-continuity/film/render.mjs": "f1bddccfa67f6eaedd45aed328dd067ed63ec9d8a5b190dec1eae846461ed227",
+    "production/extinct-life/shorts-v15-continuity/film/scene.mjs": "72936eb83e92fdc879144602235d0e92a8d7b9598cdcd5057a4713f2f63c8994",
+    "production/extinct-life/shorts-v15-continuity/film/sound.py": "4471c9c426717e8a60f9ead7debee6694292aa9a4c7f3c0ce51cf70ed763a89f",
+    "production/extinct-life/shorts-v15-continuity/film/stage.html": "f58bd006f636c5288fe179c5b4031b962dba2b3c896838e2d8610465be0815a5",
+    "production/extinct-life/shorts-v15-continuity/film/test_timeline.py": "c7f2a5db32fe5b584c8d09cdc149b999c068394127988ce0fd7000ca7d558a06",
+    "production/extinct-life/shorts-v15-continuity/film/timeline.json": "cd28ff6cb63813a685a657180eeed35c1d6bd426fa3a3c7e9820c8b6940e5476"
+  },
+  "file_sha256": "20307333d5e9306b568f9ec7dc6d54ba9153d17eff059136dc9aca81e15707de",
+  "encoded_audio": {
+    "input_i": "-16.24",
+    "input_tp": "-1.40",
+    "input_lra": "2.50",
+    "input_thresh": "-26.87",
+    "output_i": "-16.03",
+    "output_tp": "-1.50",
+    "output_lra": "2.40",
+    "output_thresh": "-26.62",
+    "normalization_type": "dynamic",
+    "target_offset": "0.03"
+  },
+  "voice_pitch_preserving_tempo": 1.1494252873563218,
+  "voice_changed_only_in_new_short": true,
+  "protected_baselines_match": true,
+  "competitor_exhaustive_study_complete": false,
+  "independent_anatomical_validation": false,
+  "full_perceptual_listening_certified": false,
+  "owner_creative_acceptance": false,
+  "youtube_published": false
+}

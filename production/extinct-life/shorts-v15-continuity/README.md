@@ -4,7 +4,7 @@
 
 The user explicitly authorized rebuilding **our extinct-life Short** after the earlier production stop: “Woh poori video banao ab new level ke sath Jo hamne dekha seekha usko next level lejake”. This authorizes this new Short, not modifications to the V13/V14 full films, the already selected thumbnail, or YouTube publication.
 
-**New complete edit specification:** 43.5 seconds, native 1080×1920, 30fps / 1,305 actual rendered frames. The old 50-second rejected Short remains separate and unchanged. The new video is `deliverables/Extinct-Life-V15-Continuity-Rebuild-1080x1920.mp4` when export completes. Check `DELIVERY.json` and `QC.json`, rather than treating this specification as an export-completion claim.
+**New complete edit specification:** 43.5 seconds, native 1080×1920, 30fps / 1,305 actual rendered frames. The old 50-second rejected Short remains separate and unchanged. **The complete encoded video is ready:** `deliverables/Extinct-Life-V15-Continuity-Rebuild-1080x1920.mp4` (18,528,183 bytes). Final SHA-256: `20307333d5e9306b568f9ec7dc6d54ba9153d17eff059136dc9aca81e15707de`. Actual encoded delivery details are in `DELIVERY.json` and `QC.json`; owner creative acceptance remains pending.
 
 The live preview runs from `node production/extinct-life/shorts-v15-continuity/film/render.mjs --serve --port=4193`; press **Play with sound**. It is the complete animated edit, not an MP4 export receipt.
 
@@ -27,6 +27,8 @@ No guaranteed million views, studio-quality/anatomical perfection, exact creator
 
 ## Reproduction
 
+Exact installed JS versions are recorded in `DEPENDENCIES.json`; on a fresh environment install them at repository root with `npm install --no-save --package-lock=false three@0.187.0 playwright@1.64.1 @sparticuz/chromium@153.0.0`. Existing selected voice recordings are local/ignored under the same convention as the prior production; they are needed to reconstruct the voice, and are not newly published here.
+
 Dependencies already used by the existing film pipeline: Node, `three`, `playwright`, `@sparticuz/chromium`, Python NumPy/SciPy/Pillow/imageio-ffmpeg. Model/font assets are the repository's original assets and existing licensed fonts.
 
 ```bash
@@ -42,4 +44,4 @@ node production/extinct-life/shorts-v15-continuity/film/render.mjs --from=650 --
 .venv/bin/python production/extinct-life/shorts-v15-continuity/film/finish.py
 ```
 
-`finish.py` refuses mismatched/incomplete source receipts, concatenates the first-generation H.264 halves without upscaling/interpolation, muxes AAC audio, decodes all 1,305 output frames, measures the encoded audio, extracts review images and checks protected old-source hashes. Numerical checks do not replace watching or creative acceptance. The binary delivery is ignored by Git under the repository's existing convention; no new public upload is authorized.
+`finish.py` refuses mismatched/incomplete source receipts. Matching current-build halves can be stream-copied. This delivered version instead contains a documented **88-native-frame correction (f439–526)** for the previously clipped trace beat, followed by a final H.264 re-encode with unchanged AAC copied. The archived base scene, base receipts and patch receipt are independently checked; only the cell-visible beat is permitted to differ. No spatial upscale or temporal interpolation is used. The finisher decodes all 1,305 output frames, measures the encoded audio, extracts review images and checks protected old-source hashes. `QC.json` records the actual assembly method, not an incorrect all-first-generation claim. Numerical checks do not replace watching or creative acceptance. The binary delivery is ignored by Git under the repository's existing convention; no new public upload is authorized.
