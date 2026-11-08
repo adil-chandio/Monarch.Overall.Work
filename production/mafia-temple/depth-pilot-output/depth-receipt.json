@@ -1,0 +1,34 @@
+{
+  "model": "depth-anything/Depth-Anything-V2-Small-hf",
+  "kind": "relative monocular estimate; not metric",
+  "status": "research_only",
+  "results": [
+    {
+      "name": "aerial",
+      "size": [
+        1024,
+        572
+      ],
+      "percentile_1": 0.35878411024808887,
+      "percentile_99": 6.083507499694824
+    },
+    {
+      "name": "courtyard",
+      "size": [
+        1024,
+        572
+      ],
+      "percentile_1": 0.18208116173744202,
+      "percentile_99": 10.015963659286498
+    },
+    {
+      "name": "street",
+      "size": [
+        1024,
+        572
+      ],
+      "percentile_1": 0.0,
+      "percentile_99": 8.841214208602905
+    }
+  ]
+}
