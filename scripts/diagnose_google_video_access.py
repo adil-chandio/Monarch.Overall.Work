@@ -54,3 +54,5 @@ else:
 Path('audit-output').mkdir(exist_ok=True)
 Path('audit-output/google-video-access-diagnosis.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({k:v for k,v in out.items() if k!='model_description_unverified'},indent=2))
+
+# Re-run after Gemini credential configuration.
