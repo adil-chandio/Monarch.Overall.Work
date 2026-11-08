@@ -1,0 +1,590 @@
+{
+  "checked_at": "2026-11-08T02:22:09.837791+00:00",
+  "production_hold": true,
+  "purpose": "Actual audiovisual acquisition for private source study; NOT completed manual forensic review",
+  "public_key_sha256": "05528ee8f15c3a948e6fd9a21d49a49e09dacb3730d967ab4047e83a60197762",
+  "edition_limit": "X and Facebook publisher editions, NOT assumed byte-identical to YouTube cuts or the earlier ten-ID cohort",
+  "x_account_attribution": "@zackdfilms1 is corroborated by Wikitubia, its self-described verified profile and matching five latest official YouTube/X titles; not a primary Linktree cross-link",
+  "x_identity_sources": [
+    "https://youtube.fandom.com/wiki/Zack_D._Films",
+    "https://x.com/zackdfilms1",
+    "https://www.youtube.com/@zackdfilms/about"
+  ],
+  "facebook_identity_source": "https://linktr.ee/zackdfilmsofficial",
+  "privacy": "Only AES-256-GCM ciphertext and RSA-OAEP-wrapped per-file keys transferred; no plaintext competitor clips or private decryption key committed",
+  "cases": [
+    {
+      "key": "01-hearts",
+      "source_url": "https://x.com/zackdfilms1/status/1823736339659153776",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "1821561042192801793",
+        "title": "Zack D. Films - How Artificial Hearts Work \ud83e\udd14",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 28.096,
+        "webpage_url": "https://x.com/zackdfilms1/status/1823736339659153776",
+        "format_id": "hls-531+hls-audio-64000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 406,
+          "height": 720,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "843",
+          "duration": "28.128100",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1319",
+          "duration": "28.138667",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 1649504,
+      "plaintext_sha256": "b802e0457e79e112452da6925f5341e39814260c2cfa984655de47166ef5d6d7",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "01-hearts.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "iuD9Eb7XVgnj4wtn",
+        "wrapped_key_b64": "IuEWDtYJEGJrNdNzhLC2QDtgF8m4RTFG/QledA4hrubPIEreHrF6zRKjvgSqrDSNKd3fU0PvzR+nywlNGtMXsLdvqSOSmoaFWAZGh7aoOkEqbr/xbSaHPOKfUN5wDZ/u230jHxyYg6utI0K8uWeJ1F8nim2TsFirQ7zk35gUDtvx1kzuC3LPed+ycE7yXVdME9Jk0mnScJZjCVhu0xFZdIJMaRlX7xbc497C3HWiKGz2IOiYPYcYUWKXHbcC7xKPqkaDNkAqi4w47PndHaqdmpdMiiXouYI0K8xIDfz9PBakaIZJaBTICBEaUtntXh3rPFkZ4+CL/UPNk6HSqmI2JLLv9ZU/TwJtkWU3QJmnWNLiaedr6nF58u9j9mTIoEw/NxB85Uw79TylgRp5psvTVXR0s/tWTru8KSOWAutzWtTa4LpcY9Or9nx4gJZy0HiQGMvRYEAPMipyQDIJ7+dOEuY6hSw7PX3LcITtnEdAXbiRNxsrVN3UqjarKFw9voup",
+        "aad": "01-hearts",
+        "ciphertext_sha256": "0eaf716eb2a5a1d900530e8cc6648e13d1b57807c3651a51589a2c4b882d8f8f",
+        "decrypted_filename": "01-hearts.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "02-stomach",
+      "source_url": "https://x.com/zackdfilms1/status/1857136424488976883",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "1854669028876599299",
+        "title": "Zack D. Films - Living Without A Stomach \ud83d\ude2e",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 26.693,
+        "webpage_url": "https://x.com/zackdfilms1/status/1857136424488976883",
+        "format_id": "hls-1084+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "800",
+          "duration": "26.693333",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1254",
+          "duration": "26.752000",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 3647840,
+      "plaintext_sha256": "5d307925c2077bbc3968752c56ccc3605c36f2d28fd54d11e2d5c392acb096b3",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "02-stomach.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "ube/kRAMxe9SV3gj",
+        "wrapped_key_b64": "OxldeYE234PvfXWiLrarEjlY0hoZ48CyHha9JpDFEdFpn2K6UrkIqGV9JvH1dEBYZ05Mql+Oe6YV5Dj+YVqoUZiHRVoAuCn+4IjO4WWx8Bc9M6QhHxfFCSRIqMporZcZAkeAT32gIKpgb5JCrZll45BhBDeLvoMPVqh2JoQ6RdF1OXV29ONCuOB5idcvoD2OWUzy2pS4CVJpPCF9ejoNVfYSudTJb7PtBQ7dDBZZ4bHcMhuiwp691WFGw1xJ529y5nZcOwaMj2hunRq6+JOCbW+bqbUEc2oJc07ZUfziDoL4i54E/z8/TesQLUWrusCjhKVvRHEGHojA0F3RsxOzOJMmY/9bjDi51WWW/pzJq9QZGXdlgRBST6SELqm1fIDBaeG2SD0ANUWQeJQf+o2JWq07jvHw9kiFsrRILqOgyP3spXquCihZIxjnKKhhV7STSwt4/au1RK4gHO9BsryBiwRBZo61CR0Zq1Zkb6+BH8SpnCxVnr5amcAU86L2WgSy",
+        "aad": "02-stomach",
+        "ciphertext_sha256": "5fc6aa67b29c21f0d754bf4415cfd85ed533cab5f9f5bf6b5abe90deedaf6578",
+        "decrypted_filename": "02-stomach.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "03-splinter",
+      "source_url": "https://x.com/zackdfilms1/status/1886445157882401091",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "1886445106594521088",
+        "title": "Zack D. Films - Can You Die From A Splinter? \ud83d\ude28",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 24.357,
+        "webpage_url": "https://x.com/zackdfilms1/status/1886445157882401091",
+        "format_id": "hls-1356+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "730",
+          "duration": "24.357667",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1051",
+          "duration": "24.404172",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 4147746,
+      "plaintext_sha256": "71c43d5407199a2166d2a4f403b6e2744731d4f292c47f0e951d54099dd9c909",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "03-splinter.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "oI0jRi5DDUq4wmF/",
+        "wrapped_key_b64": "LWBqapOx92KvS2691x9zyPHmVzvOH9YHEplQsMnedNqQ0Gldt6mPf++tCKQoWu7gVaI6bZBEA+q1weuqn3Ru6keYXtQJ/rOUxQd9MPQqutlhgzUZXFMMNjaa89Nu2VFz49+KRjmg1FjSHYQQBzki/K3tqZtFxhuF3MR6mdfaW+mFZzs9aJ4ciL14eeeIp7El1CMRev16Jzb87zDMWD9GRZ8Bv0V6fNxXbY3EZEQUg08GqAALqv0o4zMQ5poxA4AHxf2k7t+Ngf78vOHrdf496iN7o3cjyTqVo0zXVXpwcWcrhi29l6fMQhic4WtvMWG96dNm97lnH21dlEZ6S7ushkihOLfxIzObz/KgotjYSnkJChtbl7wDVHZ39prodIYOFbZFsyDYd/eJpoplkyhfrN9dpd2xckG6s/y40cQC5ldW/WSNB6lO3TjoHe0jrP1BzuXETbUUk2BEQjRX03aTksPKIDBG4fQBhmr6e957oOavArxCj3mAP3vXEVPG1b/k",
+        "aad": "03-splinter",
+        "ciphertext_sha256": "c2398320cc27ccd0c88bf4e346dff314623d83d35486b547064fce366ea37013",
+        "decrypted_filename": "03-splinter.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "04-balloon",
+      "source_url": "https://x.com/zackdfilms1/status/1867208307653353881",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "1867208235935059968",
+        "title": "Zack D. Films - How To Escape A Hot Air Balloon \ud83d\ude2e",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 34.701,
+        "webpage_url": "https://x.com/zackdfilms1/status/1867208307653353881",
+        "format_id": "hls-2021+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "1040",
+          "duration": "34.701333",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1497",
+          "duration": "34.760272",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 8766834,
+      "plaintext_sha256": "836dbb8df37f57c9139af96d8c68c97ec252a05c304ad5becbfe24689f3a271d",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "04-balloon.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "95Yw5cike0FqDasb",
+        "wrapped_key_b64": "kuSRJM4uEDuO+jE/O0LH37jg5k9sWI1KmWMlZeq3VGgZ6KBlXPsZJW7dXR/UbPu5b3VdYuhVRZKaCa/MAHyMBPiM7Wghb7sns/8yuQO2CRWGvJ++UxYghOSJo5WA2rY/gqVUbW9iZQbGKcGGYLv5CimlLJWIW2qQ3HKVm6lHzjfULBWDVg3PPR1j1ZISbz7WbMYnRoSLgpnOOkSek6Hma5BDByMe04p6WATdSbQUmE6GxdiP4TJH90KVOY9apWowFlgFo5Ab0dJvz3y+kA3vVI+Dck1goorUZjcky2mWR6H9cEpo382vlk4ErG3PxBG1lrS3Zom6vXhpojPgcMLfhqd99dz4i6KSYWfuqPPVYLpJ2xUkJkeb3mfPHU3p5t4/s88b/zWoD4xNLgkWu5o9awx+yPFo22GDKf7VwydEW8Tr8xf/7sw3JbA7rJbzERyVkCNT1L5Cv0b3GGY9IZFeBXMgvlzmufP1zoEjq2APOvk0WB7dqaqJFEaYWJhweZdp",
+        "aad": "04-balloon",
+        "ciphertext_sha256": "5823840cb94faad5ed72aaf62898f66145d2a94939142499f65f842a5d00d162",
+        "decrypted_filename": "04-balloon.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "05-surfer",
+      "source_url": "https://x.com/zackdfilms1/status/1885327753261597019",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "1885327681643823104",
+        "title": "Zack D. Films - A Surfer\u2019s Unbelievable Survival \ud83d\ude32",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 31.498,
+        "webpage_url": "https://x.com/zackdfilms1/status/1885327753261597019",
+        "format_id": "hls-1627+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "944",
+          "duration": "31.498133",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1359",
+          "duration": "31.555918",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 6582160,
+      "plaintext_sha256": "67b147f74606050f8e128e1f3a8b9b61082dbe49648f490c36e1605385761a4e",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "05-surfer.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "4/d3LBNLJHvohzUS",
+        "wrapped_key_b64": "ABLMx1S4OJ9T5NF/pNGobLXSXtbETWAxiPieYWzpbJulbbxLOdMt1OqwTtSfOad3pwpfhToRfW9W7C4nebQ/IMZrPGAhAJRl55AU8q8+VjsaHQmUZCwADX3ZAP+cpTKjcCmB0/ePr0nMboJlS92Dxc+G6qMVSU0XLstQxz6TYBezkipfFwER8LpmPYBwiUGFVmhTXForDxnbvfAn7mrZ09vPVuzzVw99ANAA2UkBbh8/BGkSRcK8cw8UcktrzHv1eEt2lok9CQBxziLpN5smWSBcM1fx9vgZGR0EVf7FcD3dONMpqhrPmBW5twoJUeXoJeR3r6Q+D9pjPpa7J5Wz4kO66OXRM0Tmftaq4nNYsYDklrAardDRY+G8cOfG7pCGR4a+vlV4vLeUWPMh325gMG8bKpCtW3SlRrFXtlsFJDrOKru0HHEpDIOTBHpjZ5KTUjqAqWiPU6tGvDho5/vdLu8ur2+ix+PXSG0UsGhw+yY5jqZd2cA55UJmIkfjxvDh",
+        "aad": "05-surfer",
+        "ciphertext_sha256": "f788f4b8560a0809dba575a972d48423fe3dd6f2716d9d61bc64f1124dff8094",
+        "decrypted_filename": "05-surfer.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "06-concert",
+      "source_url": "https://x.com/zackdfilms1/status/1898041569250263526",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "1898041491047559169",
+        "title": "Zack D. Films - Fan Paralyzed At Concert \ud83d\ude31",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 27.227,
+        "webpage_url": "https://x.com/zackdfilms1/status/1898041569250263526",
+        "format_id": "hls-1920+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "816",
+          "duration": "27.227200",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1175",
+          "duration": "27.283447",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 6550291,
+      "plaintext_sha256": "b5e6489f0cc64cf8923b9b907fd1abb115c269bed920d5ec74b1b20957c911cf",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "06-concert.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "3N8mu18afu6Btuu9",
+        "wrapped_key_b64": "MmO5OFhtGqDmsBDebsKakfbhOwt4mbLXkkmuYUgPg3vr0Rfa2cKc97WynedwfKkrrLLgBypq8vtbVyc5n7rk7wRSsvg7YMqK5/ocRq0KiKcAQpIgvb5qumyY49JOkZVFGcXGdTmcUVSTmJMmaKI401ZUYK9cS06w3KSiqozgBkzCWGv/zYeDtCZs+v6t0obTmRIE1tortWLXoajERK+kqNIstx+7/EBBNN0vL7YI549s2j0S+JUYAfOfZQWnIzlm3H5kfkJaH2kSMAHCYMfu7TAbuEafODc56g2fUcV5lovT7NwynUOE1xA3SEl1mv6byghhNVZCTPqFl0liMTcfR/Yl1UQQ7/xVc0Y/rarw8QGaeWBQOZ7iGfu3dC2CT97MY/SoIsllJaaYm0aHw5/Vx9vBZv9rI5O3zF1V/WVLJdSlfGgQ6NbL1nP0Wnz32LZ3GtIGjUgzf/TdFbTf9DAjPKejZeXTdq/P+R6R2TQOFEkvfAtluN/YROJu4qmGeXdK",
+        "aad": "06-concert",
+        "ciphertext_sha256": "e5785bb31f96b042d246e22ab219f75b2534fb13e6778c4d07c0882fdda869d2",
+        "decrypted_filename": "06-concert.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "07-balcony",
+      "source_url": "https://x.com/zackdfilms1/status/2048825183453020551",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "2048825124015521793",
+        "title": "Zack D. Films - The Toddler Who Got Stuck On A Balcony \ud83d\ude31",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 32.17,
+        "webpage_url": "https://x.com/zackdfilms1/status/2048825183453020551",
+        "format_id": "hls-1683+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "965",
+          "duration": "32.198833",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1510",
+          "duration": "32.213333",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 6888260,
+      "plaintext_sha256": "746921deb65809a846daf99ac7d405940aa4ecdd33c964cb5536722f9d7710fd",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "07-balcony.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "ZaFKacT9ZqP1MH0u",
+        "wrapped_key_b64": "dWmwVz4xBxx/9jfXIUE+D523u9qHUXXj2PqsCcYtKrjvekSXBkS0vzwwrTzKkFPWsFWkaDQB6bXDokUtV830wlY5X0tq4Prs4hfMMxgCaw4+0372VeFQZLQnlRUYn8OvLAE+Wscnr1AclnVTveRoEi9ffGr/s+axMXDV1SW0UnaUK3mG3CgVbYN6h1puqkXWXgyd237YFcORXQk8D1TIsgbOvbhb4YOertaYBV4BUeSbFEBP/I0weMxDBiERkQLSb12Fwr1YcWTyqSSxqbqeWa01w5Hhgqre2dlCGBF+/cQh+PFa9dn61klLWBRiUaEdhYVVu/cKflXqZU3/eOdA7loTAZ++8PolGfwUa18Sul0GAj51fFxkvpTs+jzXUPG2Twxpn5tp9mQKH1K/iktL3X+Cl9RFhNOePSL2xKVfaRiGQoABJBjxcnBbROCegxhkYzyn4PBuHfW/o6FpUWCcW/ks6fwP/PyJWAN9BueGrTtWMOvfZ3Rn9DoBkJkDnlFI",
+        "aad": "07-balcony",
+        "ciphertext_sha256": "160540742f3285a1b58093e80c4ab9afceb20ce0e8f25418f7246866e4beba8a",
+        "decrypted_filename": "07-balcony.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "08-ai",
+      "source_url": "https://x.com/zackdfilms1/status/2073754464993841303",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "2073754272919846912",
+        "title": "Zack D. Films - I Tested AI's Morality \ud83e\udd2f",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 54.587,
+        "webpage_url": "https://x.com/zackdfilms1/status/2073754464993841303",
+        "format_id": "hls-1600+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "1636",
+          "duration": "54.587867",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "2326",
+          "duration": "54.009615",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 10894477,
+      "plaintext_sha256": "b503a03ce51186dceb1343f7460d86974434f37c33a8ae41f1f1e8a4696a763b",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "08-ai.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "ofG9bfDPom/jY/h7",
+        "wrapped_key_b64": "qAvn0IpGycLxtfFY9tOEf31aK5jfl5VLe+SwQDG8w3SJBUKTS83khRDsqLvesHNFTkBvS4NkGz8TWgHb99vVVBEmegBUNvntBRV8FWi4JrjJFn8+9rzxY6+TaTaGjYnzewI/rtB2L4AH6jIrgF0dgdvplKZbN5Xvyw1ValdItONVTvzCigznDJTv1Im6na6HkYX6N/X8Y2Za7jDEFMeObYzg4ZNopT52BSySpvw5gitPcTgGmZOZXQJpBHAP11tfTk9T7O7gLodnD6YiDsJq4qbZRIvvcTWoG10Bxrc/1Ib4tUzhl+KkslrALMox1oF3GdmrtgLwxQPRNE0RMN5m/j0/+Pxme12c7G5mt5fmu0Fpzzt+ALPwuqgtfGA/YwKTLjjzDkA/MRqndDD/VXTQL5Ba1XIs/I3Ha/CZnb6mwntA8rsVW5N5MDyTYreSM3zkWdaIvoGLBDtICuq27CcNT06RFhyqX+wFOh7CLrrpqUIYe77WjXcj3jpaFfLW7dUC",
+        "aad": "08-ai",
+        "ciphertext_sha256": "69505f2e889d5092df4f5925ad4301325632a21689b78ff23d0c1f1078642c5c",
+        "decrypted_filename": "08-ai.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "09-fight",
+      "source_url": "https://x.com/zackdfilms1/status/1897724425086120113",
+      "platform": "x",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "1897724359193550848",
+        "title": "Zack D. Films - How Many 10 Year Olds Can You Fight? \ud83e\udd14",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel_id": "1795475238806851584",
+        "duration": 28.128,
+        "webpage_url": "https://x.com/zackdfilms1/status/1897724425086120113",
+        "format_id": "hls-2005+hls-audio-128000-Audio"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "843",
+          "duration": "28.128100",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1214",
+          "duration": "28.189025",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 7087408,
+      "plaintext_sha256": "b6a84f931441b5c7c1741ec5f6c89c50b3a502c75b5107cee62f0150a13cab91",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "09-fight.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "YFOabtoC3AMNC3vk",
+        "wrapped_key_b64": "NNvX/6pSGcSxcJrim79g9Dhn1nRRyURwnsYbnT+nAgwfcg+co1mmeiGjb8PlVMttbdPVRhHGpSr+esPmJrfPnPiIiGV24kb5yfOXAg2flN5yu48YENf0pL5AhDmb2DD9WaAx3plyvn2ObsoTg7VSRVXH8U8zRFo/Mk+bwudX50LjHfVLAyS6hacmer4uSTgqwwk5EDkH1gqLxrlWCKZo1f2vt0QL4l+Zkd8T6k9srKETP7gLH9Vwcvp2hzfGHSBf5wQYz11m4/vPeHyqgjwD+aGANxUD5qjytH878h96TYXzkBjGgs7TuHHGDLsyBJV56tvdHE4FX84KvNZS0EiYwJi131H0iZ3NbCQ5VwEYOI1898RYM3hyUujYRUfsmiKO22ZMR0mLBzKvru03KOUTjbepDxIhTHPtIgW40Svok744wvFECR8dxyZ3VQvGa4r5gM04grJU9Eo0KxE7T+VUO9zbZeF7MXDjVT+hppdXks49/Z1ZKNjmHuqw1P8SSfjf",
+        "aad": "09-fight",
+        "ciphertext_sha256": "f2947549e8ca6e7faffe9391b1f436e9eb339b148f2e895ecd0dda81f1f9f358",
+        "decrypted_filename": "09-fight.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    },
+    {
+      "key": "10-jerboa",
+      "source_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+      "platform": "facebook",
+      "full_frame_manual_review": false,
+      "continuous_audio_review": false,
+      "publisher_metadata": {
+        "id": "2330611454420496",
+        "title": "5.5M views \u00b7 59K reactions | What Is A Jerboa? \ud83e\udd14 | Zack D. Films",
+        "uploader": "Zack D. Films",
+        "uploader_id": "100089194705401",
+        "channel_id": null,
+        "duration": 38.549,
+        "webpage_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+        "format_id": "1790154505507594v+1790151322174579a"
+      },
+      "uploader_matches_expected_account": true,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "av1",
+          "width": 1080,
+          "height": 1920,
+          "avg_frame_rate": "2997/100",
+          "nb_read_frames": "1155",
+          "duration": "38.538539",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "904",
+          "duration": "38.550000",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "status": "av_acquired_and_decoded",
+      "plaintext_bytes": 18244025,
+      "plaintext_sha256": "638433fe7ffbe5c5940f77129afd84240e5799870b527b1372c56cfd239110ea",
+      "decode_exit": 0,
+      "envelope": {
+        "file": "10-jerboa.mp4.enc",
+        "cipher": "AES-256-GCM",
+        "key_wrap": "RSA-OAEP-SHA256",
+        "nonce_b64": "aSrg+4De09AUbutE",
+        "wrapped_key_b64": "AY0Fuzpy5+b2jaH/lPp3WMkqQkXjjLNwKIk5e/4x4Z8MfXi9AnflENVmX+bf10owk/TMgH+jxwAc3Tx+f9vrG5WyK2etZBz/IlMV3NeA9c+EGFTYBstjMThO4D/d12PfzIeD1ifQsE9/UHjopsGATpW9P/yBjnqOQwqve9t+5BElKEONbzqcgZcxVuBTq2cVKDcxKpH9yFBOSqZkNYzZNmGr7dVXL6u/LLv3vymW4fB5uLfbUvd3/dhep6/ChZWC1U/E4Uywb/PXkrSlKrIx73uLRgNlrqm1azs7UjtkXyebr2a4pnQ3oOeHatmQI0ubuqw1tDPZQ4qcYocA/s46TyhUlQyaXRG6CIHc6/eGXpaulS1qTPooufe6diTmfurpiRGPlDjomBF2fASzVwHHFvEaG5aMRZkSS8Y5Um0AA5DshYWEEjmsbQX6dUT0jCyUQB/3rpyx52jIMO22QYOcFt4s+H7+5trdNhML28Q/40L/yW89TSSeQEw9YXWnm5cd",
+        "aad": "10-jerboa",
+        "ciphertext_sha256": "212fe13c1943012b87b012a70fd14f598956aff7035bf8d534a71c56c9284ac1",
+        "decrypted_filename": "10-jerboa.mp4"
+      },
+      "transfer_status": "encrypted_for_local_private_research"
+    }
+  ],
+  "av_acquired_and_decoded_count": 10,
+  "encrypted_transfer_count": 10,
+  "plaintext_total_transferred_bytes": 74458545
+}
