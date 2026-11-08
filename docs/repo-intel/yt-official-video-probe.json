@@ -4,8 +4,15 @@
   "source": "public YouTube URL",
   "sampling": "default static sampling; typically 1 fps",
   "raw_frames_received": false,
-  "result": "api_error",
-  "http_status": 403,
-  "error_status": "PERMISSION_DENIED",
-  "error_category": "key or project not authorized for this API"
+  "keys_checked": [
+    {
+      "slot": "YOUTUBE_API_KEY",
+      "http_status": 403,
+      "error_status": "PERMISSION_DENIED",
+      "reasons": [
+        "SERVICE_DISABLED"
+      ]
+    }
+  ],
+  "result": "no_usable_configured_key"
 }
