@@ -1,0 +1,82 @@
+{
+  "method": "Official Gemini generateContent YouTube input with requested clip offsets and fps; samples are not raw frames, and the service may reject or ignore settings. Check model output and VIDEO token usage; neither proves precise sampling.",
+  "video_id": "aWHX5Awe_TI",
+  "model": "gemini-3.1-flash-lite-preview",
+  "cases": [
+    {
+      "name": "first_1fps",
+      "requested_start_seconds": 0,
+      "requested_end_seconds": 5,
+      "requested_fps": 1,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "description": "The video begins with a wide shot of a soccer field with a stadium in the background, showing a man in a light blue jersey standing near a soccer ball as a player wearing a white jersey approaches him from behind. At 0:01, the perspective changes to a first-person view, showing the player's legs and the ball at his feet as he dribbles past the same man, who reaches out with his hand. The scene transitions at 0:03 to a cutaway shot of a soccer player wearing a yellow and blue uniform attempting a bicycle kick, set against a blurred background of a crowd and stadium seating. Throughout the video, there is a text overlay at the top that reads \"POV: YOU ARE NEYMAR\" and a watermark in the bottom center that says \"DusanFC.\"",
+      "usage": {
+        "promptTokenCount": 492,
+        "candidatesTokenCount": 166,
+        "totalTokenCount": 658,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 441
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 51
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "name": "first_5fps",
+      "requested_start_seconds": 0,
+      "requested_end_seconds": 5,
+      "requested_fps": 5,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "description": "The video begins with a 3rd person perspective of a soccer player wearing a light blue and white jersey with \"10\" on the back, dribbling a ball toward a very large person wearing a matching light blue jersey. The screen reads \"POV: YOU ARE NEYMAR\" in the top center and \"DusanFC\" in the bottom center.\n\nAt 00:01.400, the soccer player performs a dribbling maneuver to get past the larger person. The perspective shifts at 00:02.000 to a first-person POV shot. The player is now facing the large individual, who is standing on a grass field with a large, stadium-like background with lights and crowd imagery.\n\nAt 00:04.200, the video cuts to a clip of a soccer player wearing a yellow and blue uniform kicking a soccer ball toward a goal in a stadium filled with spectators. The text remains on the screen. The video concludes at 00:05.000.",
+      "usage": {
+        "promptTokenCount": 1752,
+        "candidatesTokenCount": 218,
+        "totalTokenCount": 1970,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1701
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 51
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "name": "later_5fps",
+      "requested_start_seconds": 10,
+      "requested_end_seconds": 15,
+      "requested_fps": 5,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "description": "The video begins with a first-person perspective on a soccer field, showing a player's feet maneuvering a soccer ball towards a goal while other players, including a goalie in a yellow jersey, are positioned on the field under stadium lights. As the perspective transitions, it moves into a locker room setting where a player wearing a light blue jersey is celebrating with arms raised and shouting alongside several other men. The view then shifts to an exterior hallway where a group of people, including the same player from the locker room, are gathered behind a metal barrier, cheering with their hands raised. Throughout the video, text overlay reading \"POV: YOU ARE NEYMAR\" is visible, along with a \"DusanFC\" watermark. Additional interface elements, including follower and like counts, also appear.",
+      "usage": {
+        "promptTokenCount": 1751,
+        "candidatesTokenCount": 158,
+        "totalTokenCount": 1909,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1700
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 51
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    }
+  ]
+}
