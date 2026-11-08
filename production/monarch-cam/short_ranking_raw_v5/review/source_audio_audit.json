@@ -1,0 +1,1137 @@
+{
+  "edition": "raw_fullscreen_v5",
+  "sample_rate": 48000,
+  "window_seconds": 0.5,
+  "selectable_segment_rms_dbfs_min": -55.0,
+  "assets": {
+    "bois_crow_follow": {
+      "id": "bois_crow_follow",
+      "rank": 7,
+      "file": "production/monarch-cam/work/short_ranking_raw_v5/media/bois_crow_follow.webm",
+      "source_in": 8.0,
+      "source_out": 16.566667,
+      "timeline_in": 0.0,
+      "timeline_out": 8.566667,
+      "duration_seconds": 8.567,
+      "native_samples": 411216,
+      "audio_stream_present": true,
+      "audio_codec": "vorbis",
+      "segment_rms_dbfs": -42.47,
+      "segment_peak_dbfs": -23.19,
+      "windows": [
+        {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -49.22,
+          "peak_dbfs": -35.69,
+          "samples": 24000
+        },
+        {
+          "start": 0.5,
+          "end": 1.0,
+          "rms_dbfs": -47.63,
+          "peak_dbfs": -35.12,
+          "samples": 24000
+        },
+        {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -45.86,
+          "peak_dbfs": -30.75,
+          "samples": 24000
+        },
+        {
+          "start": 1.5,
+          "end": 2.0,
+          "rms_dbfs": -40.38,
+          "peak_dbfs": -25.08,
+          "samples": 24000
+        },
+        {
+          "start": 2.0,
+          "end": 2.5,
+          "rms_dbfs": -42.22,
+          "peak_dbfs": -25.91,
+          "samples": 24000
+        },
+        {
+          "start": 2.5,
+          "end": 3.0,
+          "rms_dbfs": -42.93,
+          "peak_dbfs": -27.97,
+          "samples": 24000
+        },
+        {
+          "start": 3.0,
+          "end": 3.5,
+          "rms_dbfs": -45.27,
+          "peak_dbfs": -35.18,
+          "samples": 24000
+        },
+        {
+          "start": 3.5,
+          "end": 4.0,
+          "rms_dbfs": -40.16,
+          "peak_dbfs": -23.41,
+          "samples": 24000
+        },
+        {
+          "start": 4.0,
+          "end": 4.5,
+          "rms_dbfs": -44.72,
+          "peak_dbfs": -27.19,
+          "samples": 24000
+        },
+        {
+          "start": 4.5,
+          "end": 5.0,
+          "rms_dbfs": -43.48,
+          "peak_dbfs": -27.41,
+          "samples": 24000
+        },
+        {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -39.65,
+          "peak_dbfs": -23.19,
+          "samples": 24000
+        },
+        {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -44.1,
+          "peak_dbfs": -24.79,
+          "samples": 24000
+        },
+        {
+          "start": 6.0,
+          "end": 6.5,
+          "rms_dbfs": -40.71,
+          "peak_dbfs": -24.64,
+          "samples": 24000
+        },
+        {
+          "start": 6.5,
+          "end": 7.0,
+          "rms_dbfs": -40.12,
+          "peak_dbfs": -25.47,
+          "samples": 24000
+        },
+        {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -43.45,
+          "peak_dbfs": -28.51,
+          "samples": 24000
+        },
+        {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -41.33,
+          "peak_dbfs": -26.06,
+          "samples": 24000
+        },
+        {
+          "start": 8.0,
+          "end": 8.5,
+          "rms_dbfs": -43.51,
+          "peak_dbfs": -27.65,
+          "samples": 24000
+        },
+        {
+          "start": 8.5,
+          "end": 8.567,
+          "rms_dbfs": -39.65,
+          "peak_dbfs": -27.14,
+          "samples": 3216
+        }
+      ],
+      "audible_window_count": 18,
+      "peak_window": {
+        "start": 5.0,
+        "end": 5.5,
+        "rms_dbfs": -39.65,
+        "peak_dbfs": -23.19,
+        "samples": 24000
+      },
+      "native_audio_audible": true,
+      "added_layers": 0,
+      "runner_audio_rms_dbfs": -42.45,
+      "runner_motion_score": 49.0516
+    },
+    "tidepool_worm": {
+      "id": "tidepool_worm",
+      "rank": 6,
+      "file": "production/monarch-cam/work/short_ranking_raw_v5/media/tidepool_worm.webm",
+      "source_in": 2.5,
+      "source_out": 11.066667,
+      "timeline_in": 8.566667,
+      "timeline_out": 17.133333,
+      "duration_seconds": 8.567,
+      "native_samples": 411216,
+      "audio_stream_present": true,
+      "audio_codec": "vorbis",
+      "segment_rms_dbfs": -39.86,
+      "segment_peak_dbfs": -0.09,
+      "windows": [
+        {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -42.77,
+          "peak_dbfs": -21.33,
+          "samples": 24000
+        },
+        {
+          "start": 0.5,
+          "end": 1.0,
+          "rms_dbfs": -51.49,
+          "peak_dbfs": -29.06,
+          "samples": 24000
+        },
+        {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -42.65,
+          "peak_dbfs": -24.14,
+          "samples": 24000
+        },
+        {
+          "start": 1.5,
+          "end": 2.0,
+          "rms_dbfs": -38.11,
+          "peak_dbfs": -12.95,
+          "samples": 24000
+        },
+        {
+          "start": 2.0,
+          "end": 2.5,
+          "rms_dbfs": -49.71,
+          "peak_dbfs": -33.9,
+          "samples": 24000
+        },
+        {
+          "start": 2.5,
+          "end": 3.0,
+          "rms_dbfs": -48.76,
+          "peak_dbfs": -32.61,
+          "samples": 24000
+        },
+        {
+          "start": 3.0,
+          "end": 3.5,
+          "rms_dbfs": -35.71,
+          "peak_dbfs": -12.77,
+          "samples": 24000
+        },
+        {
+          "start": 3.5,
+          "end": 4.0,
+          "rms_dbfs": -51.08,
+          "peak_dbfs": -32.45,
+          "samples": 24000
+        },
+        {
+          "start": 4.0,
+          "end": 4.5,
+          "rms_dbfs": -50.59,
+          "peak_dbfs": -34.39,
+          "samples": 24000
+        },
+        {
+          "start": 4.5,
+          "end": 5.0,
+          "rms_dbfs": -50.87,
+          "peak_dbfs": -35.22,
+          "samples": 24000
+        },
+        {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -46.45,
+          "peak_dbfs": -15.91,
+          "samples": 24000
+        },
+        {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -49.99,
+          "peak_dbfs": -33.15,
+          "samples": 24000
+        },
+        {
+          "start": 6.0,
+          "end": 6.5,
+          "rms_dbfs": -35.47,
+          "peak_dbfs": -0.55,
+          "samples": 24000
+        },
+        {
+          "start": 6.5,
+          "end": 7.0,
+          "rms_dbfs": -36.09,
+          "peak_dbfs": -7.84,
+          "samples": 24000
+        },
+        {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -34.73,
+          "peak_dbfs": -12.93,
+          "samples": 24000
+        },
+        {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -36.16,
+          "peak_dbfs": -0.09,
+          "samples": 24000
+        },
+        {
+          "start": 8.0,
+          "end": 8.5,
+          "rms_dbfs": -45.07,
+          "peak_dbfs": -22.58,
+          "samples": 24000
+        },
+        {
+          "start": 8.5,
+          "end": 8.567,
+          "rms_dbfs": -40.7,
+          "peak_dbfs": -28.97,
+          "samples": 3216
+        }
+      ],
+      "audible_window_count": 18,
+      "peak_window": {
+        "start": 7.0,
+        "end": 7.5,
+        "rms_dbfs": -34.73,
+        "peak_dbfs": -12.93,
+        "samples": 24000
+      },
+      "native_audio_audible": true,
+      "added_layers": 0,
+      "runner_audio_rms_dbfs": -39.87,
+      "runner_motion_score": 19.9471
+    },
+    "berlin_squirrel_monkey": {
+      "id": "berlin_squirrel_monkey",
+      "rank": 5,
+      "file": "production/monarch-cam/work/short_ranking_raw_v5/media/berlin_squirrel_monkey.webm",
+      "source_in": 1.5,
+      "source_out": 10.066667,
+      "timeline_in": 17.133333,
+      "timeline_out": 25.7,
+      "duration_seconds": 8.567,
+      "native_samples": 411222,
+      "audio_stream_present": true,
+      "audio_codec": "vorbis",
+      "segment_rms_dbfs": -36.46,
+      "segment_peak_dbfs": -19.14,
+      "windows": [
+        {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -37.77,
+          "peak_dbfs": -25.56,
+          "samples": 24000
+        },
+        {
+          "start": 0.5,
+          "end": 1.0,
+          "rms_dbfs": -40.68,
+          "peak_dbfs": -27.7,
+          "samples": 24000
+        },
+        {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -36.32,
+          "peak_dbfs": -24.8,
+          "samples": 24000
+        },
+        {
+          "start": 1.5,
+          "end": 2.0,
+          "rms_dbfs": -37.78,
+          "peak_dbfs": -24.25,
+          "samples": 24000
+        },
+        {
+          "start": 2.0,
+          "end": 2.5,
+          "rms_dbfs": -37.84,
+          "peak_dbfs": -25.43,
+          "samples": 24000
+        },
+        {
+          "start": 2.5,
+          "end": 3.0,
+          "rms_dbfs": -42.67,
+          "peak_dbfs": -28.69,
+          "samples": 24000
+        },
+        {
+          "start": 3.0,
+          "end": 3.5,
+          "rms_dbfs": -39.62,
+          "peak_dbfs": -26.22,
+          "samples": 24000
+        },
+        {
+          "start": 3.5,
+          "end": 4.0,
+          "rms_dbfs": -37.13,
+          "peak_dbfs": -23.98,
+          "samples": 24000
+        },
+        {
+          "start": 4.0,
+          "end": 4.5,
+          "rms_dbfs": -37.15,
+          "peak_dbfs": -20.85,
+          "samples": 24000
+        },
+        {
+          "start": 4.5,
+          "end": 5.0,
+          "rms_dbfs": -39.08,
+          "peak_dbfs": -25.89,
+          "samples": 24000
+        },
+        {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -32.26,
+          "peak_dbfs": -19.55,
+          "samples": 24000
+        },
+        {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -35.5,
+          "peak_dbfs": -22.62,
+          "samples": 24000
+        },
+        {
+          "start": 6.0,
+          "end": 6.5,
+          "rms_dbfs": -36.76,
+          "peak_dbfs": -22.69,
+          "samples": 24000
+        },
+        {
+          "start": 6.5,
+          "end": 7.0,
+          "rms_dbfs": -35.26,
+          "peak_dbfs": -23.8,
+          "samples": 24000
+        },
+        {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -37.58,
+          "peak_dbfs": -25.72,
+          "samples": 24000
+        },
+        {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -35.83,
+          "peak_dbfs": -19.44,
+          "samples": 24000
+        },
+        {
+          "start": 8.0,
+          "end": 8.5,
+          "rms_dbfs": -32.69,
+          "peak_dbfs": -19.13,
+          "samples": 24000
+        },
+        {
+          "start": 8.5,
+          "end": 8.567,
+          "rms_dbfs": -37.41,
+          "peak_dbfs": -28.19,
+          "samples": 3222
+        }
+      ],
+      "audible_window_count": 18,
+      "peak_window": {
+        "start": 5.0,
+        "end": 5.5,
+        "rms_dbfs": -32.26,
+        "peak_dbfs": -19.55,
+        "samples": 24000
+      },
+      "native_audio_audible": true,
+      "added_layers": 0,
+      "runner_audio_rms_dbfs": -36.44,
+      "runner_motion_score": 22.3247
+    },
+    "cape_squirrel": {
+      "id": "cape_squirrel",
+      "rank": 4,
+      "file": "production/monarch-cam/work/short_ranking_raw_v5/media/cape_squirrel.webm",
+      "source_in": 3.5,
+      "source_out": 12.066667,
+      "timeline_in": 25.7,
+      "timeline_out": 34.266667,
+      "duration_seconds": 8.556,
+      "native_samples": 410688,
+      "audio_stream_present": true,
+      "audio_codec": "vorbis",
+      "segment_rms_dbfs": -35.58,
+      "segment_peak_dbfs": -6.49,
+      "windows": [
+        {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -43.06,
+          "peak_dbfs": -26.42,
+          "samples": 24000
+        },
+        {
+          "start": 0.5,
+          "end": 1.0,
+          "rms_dbfs": -46.2,
+          "peak_dbfs": -28.49,
+          "samples": 24000
+        },
+        {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -40.53,
+          "peak_dbfs": -22.93,
+          "samples": 24000
+        },
+        {
+          "start": 1.5,
+          "end": 2.0,
+          "rms_dbfs": -42.0,
+          "peak_dbfs": -21.11,
+          "samples": 24000
+        },
+        {
+          "start": 2.0,
+          "end": 2.5,
+          "rms_dbfs": -42.75,
+          "peak_dbfs": -25.04,
+          "samples": 24000
+        },
+        {
+          "start": 2.5,
+          "end": 3.0,
+          "rms_dbfs": -42.23,
+          "peak_dbfs": -22.24,
+          "samples": 24000
+        },
+        {
+          "start": 3.0,
+          "end": 3.5,
+          "rms_dbfs": -37.6,
+          "peak_dbfs": -22.59,
+          "samples": 24000
+        },
+        {
+          "start": 3.5,
+          "end": 4.0,
+          "rms_dbfs": -33.67,
+          "peak_dbfs": -17.81,
+          "samples": 24000
+        },
+        {
+          "start": 4.0,
+          "end": 4.5,
+          "rms_dbfs": -32.67,
+          "peak_dbfs": -15.23,
+          "samples": 24000
+        },
+        {
+          "start": 4.5,
+          "end": 5.0,
+          "rms_dbfs": -35.87,
+          "peak_dbfs": -19.23,
+          "samples": 24000
+        },
+        {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -29.36,
+          "peak_dbfs": -6.49,
+          "samples": 24000
+        },
+        {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -28.61,
+          "peak_dbfs": -12.3,
+          "samples": 24000
+        },
+        {
+          "start": 6.0,
+          "end": 6.5,
+          "rms_dbfs": -39.85,
+          "peak_dbfs": -24.56,
+          "samples": 24000
+        },
+        {
+          "start": 6.5,
+          "end": 7.0,
+          "rms_dbfs": -40.4,
+          "peak_dbfs": -24.98,
+          "samples": 24000
+        },
+        {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -41.92,
+          "peak_dbfs": -27.5,
+          "samples": 24000
+        },
+        {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -44.44,
+          "peak_dbfs": -29.23,
+          "samples": 24000
+        },
+        {
+          "start": 8.0,
+          "end": 8.5,
+          "rms_dbfs": -37.99,
+          "peak_dbfs": -19.44,
+          "samples": 24000
+        },
+        {
+          "start": 8.5,
+          "end": 8.556,
+          "rms_dbfs": -43.97,
+          "peak_dbfs": -36.87,
+          "samples": 2688
+        }
+      ],
+      "audible_window_count": 18,
+      "peak_window": {
+        "start": 5.5,
+        "end": 6.0,
+        "rms_dbfs": -28.61,
+        "peak_dbfs": -12.3,
+        "samples": 24000
+      },
+      "native_audio_audible": true,
+      "added_layers": 0,
+      "runner_audio_rms_dbfs": -35.6,
+      "runner_motion_score": 24.7338
+    },
+    "uluwatu_bag": {
+      "id": "uluwatu_bag",
+      "rank": 3,
+      "file": "production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_bag.webm",
+      "source_in": 10.0,
+      "source_out": 18.566667,
+      "timeline_in": 34.266667,
+      "timeline_out": 42.833333,
+      "duration_seconds": 8.567,
+      "native_samples": 411216,
+      "audio_stream_present": true,
+      "audio_codec": "vorbis",
+      "segment_rms_dbfs": -34.63,
+      "segment_peak_dbfs": -14.55,
+      "windows": [
+        {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -27.22,
+          "peak_dbfs": -14.55,
+          "samples": 24000
+        },
+        {
+          "start": 0.5,
+          "end": 1.0,
+          "rms_dbfs": -40.75,
+          "peak_dbfs": -27.49,
+          "samples": 24000
+        },
+        {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -32.46,
+          "peak_dbfs": -19.35,
+          "samples": 24000
+        },
+        {
+          "start": 1.5,
+          "end": 2.0,
+          "rms_dbfs": -33.87,
+          "peak_dbfs": -20.9,
+          "samples": 24000
+        },
+        {
+          "start": 2.0,
+          "end": 2.5,
+          "rms_dbfs": -33.96,
+          "peak_dbfs": -21.42,
+          "samples": 24000
+        },
+        {
+          "start": 2.5,
+          "end": 3.0,
+          "rms_dbfs": -40.09,
+          "peak_dbfs": -26.32,
+          "samples": 24000
+        },
+        {
+          "start": 3.0,
+          "end": 3.5,
+          "rms_dbfs": -36.81,
+          "peak_dbfs": -18.86,
+          "samples": 24000
+        },
+        {
+          "start": 3.5,
+          "end": 4.0,
+          "rms_dbfs": -40.71,
+          "peak_dbfs": -24.86,
+          "samples": 24000
+        },
+        {
+          "start": 4.0,
+          "end": 4.5,
+          "rms_dbfs": -45.21,
+          "peak_dbfs": -32.24,
+          "samples": 24000
+        },
+        {
+          "start": 4.5,
+          "end": 5.0,
+          "rms_dbfs": -30.83,
+          "peak_dbfs": -19.85,
+          "samples": 24000
+        },
+        {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -38.44,
+          "peak_dbfs": -25.08,
+          "samples": 24000
+        },
+        {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -38.65,
+          "peak_dbfs": -25.91,
+          "samples": 24000
+        },
+        {
+          "start": 6.0,
+          "end": 6.5,
+          "rms_dbfs": -42.07,
+          "peak_dbfs": -27.75,
+          "samples": 24000
+        },
+        {
+          "start": 6.5,
+          "end": 7.0,
+          "rms_dbfs": -38.02,
+          "peak_dbfs": -26.33,
+          "samples": 24000
+        },
+        {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -38.97,
+          "peak_dbfs": -25.95,
+          "samples": 24000
+        },
+        {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -39.04,
+          "peak_dbfs": -27.54,
+          "samples": 24000
+        },
+        {
+          "start": 8.0,
+          "end": 8.5,
+          "rms_dbfs": -32.85,
+          "peak_dbfs": -18.71,
+          "samples": 24000
+        },
+        {
+          "start": 8.5,
+          "end": 8.567,
+          "rms_dbfs": -38.04,
+          "peak_dbfs": -27.42,
+          "samples": 3216
+        }
+      ],
+      "audible_window_count": 18,
+      "peak_window": {
+        "start": 0.0,
+        "end": 0.5,
+        "rms_dbfs": -27.22,
+        "peak_dbfs": -14.55,
+        "samples": 24000
+      },
+      "native_audio_audible": true,
+      "added_layers": 0,
+      "runner_audio_rms_dbfs": -34.65,
+      "runner_motion_score": 19.702
+    },
+    "malaga_animals": {
+      "id": "malaga_animals",
+      "rank": 2,
+      "file": "production/monarch-cam/work/short_ranking_raw_v5/media/malaga_animals.webm",
+      "source_in": 0.0,
+      "source_out": 8.566667,
+      "timeline_in": 42.833333,
+      "timeline_out": 51.4,
+      "duration_seconds": 8.56,
+      "native_samples": 410880,
+      "audio_stream_present": true,
+      "audio_codec": "opus",
+      "segment_rms_dbfs": -35.0,
+      "segment_peak_dbfs": -21.45,
+      "windows": [
+        {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -34.63,
+          "peak_dbfs": -21.95,
+          "samples": 24000
+        },
+        {
+          "start": 0.5,
+          "end": 1.0,
+          "rms_dbfs": -34.8,
+          "peak_dbfs": -23.44,
+          "samples": 24000
+        },
+        {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -34.25,
+          "peak_dbfs": -23.56,
+          "samples": 24000
+        },
+        {
+          "start": 1.5,
+          "end": 2.0,
+          "rms_dbfs": -34.35,
+          "peak_dbfs": -23.76,
+          "samples": 24000
+        },
+        {
+          "start": 2.0,
+          "end": 2.5,
+          "rms_dbfs": -34.6,
+          "peak_dbfs": -23.52,
+          "samples": 24000
+        },
+        {
+          "start": 2.5,
+          "end": 3.0,
+          "rms_dbfs": -34.77,
+          "peak_dbfs": -21.46,
+          "samples": 24000
+        },
+        {
+          "start": 3.0,
+          "end": 3.5,
+          "rms_dbfs": -34.7,
+          "peak_dbfs": -23.0,
+          "samples": 24000
+        },
+        {
+          "start": 3.5,
+          "end": 4.0,
+          "rms_dbfs": -35.13,
+          "peak_dbfs": -23.59,
+          "samples": 24000
+        },
+        {
+          "start": 4.0,
+          "end": 4.5,
+          "rms_dbfs": -35.09,
+          "peak_dbfs": -22.7,
+          "samples": 24000
+        },
+        {
+          "start": 4.5,
+          "end": 5.0,
+          "rms_dbfs": -34.91,
+          "peak_dbfs": -23.23,
+          "samples": 24000
+        },
+        {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -35.45,
+          "peak_dbfs": -23.07,
+          "samples": 24000
+        },
+        {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -34.83,
+          "peak_dbfs": -22.52,
+          "samples": 24000
+        },
+        {
+          "start": 6.0,
+          "end": 6.5,
+          "rms_dbfs": -35.74,
+          "peak_dbfs": -23.32,
+          "samples": 24000
+        },
+        {
+          "start": 6.5,
+          "end": 7.0,
+          "rms_dbfs": -34.95,
+          "peak_dbfs": -23.34,
+          "samples": 24000
+        },
+        {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -35.99,
+          "peak_dbfs": -24.69,
+          "samples": 24000
+        },
+        {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -35.24,
+          "peak_dbfs": -24.07,
+          "samples": 24000
+        },
+        {
+          "start": 8.0,
+          "end": 8.5,
+          "rms_dbfs": -36.15,
+          "peak_dbfs": -23.86,
+          "samples": 24000
+        },
+        {
+          "start": 8.5,
+          "end": 8.56,
+          "rms_dbfs": -35.06,
+          "peak_dbfs": -24.28,
+          "samples": 2880
+        }
+      ],
+      "audible_window_count": 18,
+      "peak_window": {
+        "start": 1.0,
+        "end": 1.5,
+        "rms_dbfs": -34.25,
+        "peak_dbfs": -23.56,
+        "samples": 24000
+      },
+      "native_audio_audible": true,
+      "added_layers": 0,
+      "runner_audio_rms_dbfs": -35.01,
+      "runner_motion_score": 24.3736
+    },
+    "uluwatu_heist": {
+      "id": "uluwatu_heist",
+      "rank": 1,
+      "file": "production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_heist.webm",
+      "source_in": 0.0,
+      "source_out": 8.6,
+      "timeline_in": 51.4,
+      "timeline_out": 60.0,
+      "duration_seconds": 8.597,
+      "native_samples": 412656,
+      "audio_stream_present": true,
+      "audio_codec": "vorbis",
+      "segment_rms_dbfs": -22.62,
+      "segment_peak_dbfs": -2.52,
+      "windows": [
+        {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -35.85,
+          "peak_dbfs": -18.06,
+          "samples": 24000
+        },
+        {
+          "start": 0.5,
+          "end": 1.0,
+          "rms_dbfs": -30.14,
+          "peak_dbfs": -10.66,
+          "samples": 24000
+        },
+        {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -21.85,
+          "peak_dbfs": -3.72,
+          "samples": 24000
+        },
+        {
+          "start": 1.5,
+          "end": 2.0,
+          "rms_dbfs": -22.88,
+          "peak_dbfs": -6.64,
+          "samples": 24000
+        },
+        {
+          "start": 2.0,
+          "end": 2.5,
+          "rms_dbfs": -21.56,
+          "peak_dbfs": -5.57,
+          "samples": 24000
+        },
+        {
+          "start": 2.5,
+          "end": 3.0,
+          "rms_dbfs": -23.02,
+          "peak_dbfs": -6.6,
+          "samples": 24000
+        },
+        {
+          "start": 3.0,
+          "end": 3.5,
+          "rms_dbfs": -27.25,
+          "peak_dbfs": -8.93,
+          "samples": 24000
+        },
+        {
+          "start": 3.5,
+          "end": 4.0,
+          "rms_dbfs": -33.26,
+          "peak_dbfs": -8.76,
+          "samples": 24000
+        },
+        {
+          "start": 4.0,
+          "end": 4.5,
+          "rms_dbfs": -35.25,
+          "peak_dbfs": -18.2,
+          "samples": 24000
+        },
+        {
+          "start": 4.5,
+          "end": 5.0,
+          "rms_dbfs": -30.25,
+          "peak_dbfs": -12.3,
+          "samples": 24000
+        },
+        {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -27.51,
+          "peak_dbfs": -10.3,
+          "samples": 24000
+        },
+        {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -22.96,
+          "peak_dbfs": -5.97,
+          "samples": 24000
+        },
+        {
+          "start": 6.0,
+          "end": 6.5,
+          "rms_dbfs": -24.65,
+          "peak_dbfs": -6.99,
+          "samples": 24000
+        },
+        {
+          "start": 6.5,
+          "end": 7.0,
+          "rms_dbfs": -20.63,
+          "peak_dbfs": -3.86,
+          "samples": 24000
+        },
+        {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -19.7,
+          "peak_dbfs": -4.15,
+          "samples": 24000
+        },
+        {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -15.44,
+          "peak_dbfs": -2.5,
+          "samples": 24000
+        },
+        {
+          "start": 8.0,
+          "end": 8.5,
+          "rms_dbfs": -21.91,
+          "peak_dbfs": -2.89,
+          "samples": 24000
+        },
+        {
+          "start": 8.5,
+          "end": 8.597,
+          "rms_dbfs": -23.57,
+          "peak_dbfs": -8.13,
+          "samples": 4656
+        }
+      ],
+      "audible_window_count": 18,
+      "peak_window": {
+        "start": 7.5,
+        "end": 8.0,
+        "rms_dbfs": -15.44,
+        "peak_dbfs": -2.5,
+        "samples": 24000
+      },
+      "native_audio_audible": true,
+      "added_layers": 0,
+      "runner_audio_rms_dbfs": -22.62,
+      "runner_motion_score": 30.2472
+    }
+  },
+  "flags": {
+    "runner_probe_passed": true,
+    "runner_audio_visual_probe_passed": true,
+    "runner_visual_motion_probe": true,
+    "contact_sheets_written": true,
+    "source_review_recorded": true,
+    "visual_lock_written": true,
+    "all_seven_selected_windows_audible": true,
+    "raw_per_window_native_audio_only": true,
+    "native_source_audio_only": true,
+    "no_added_audio_layers": true,
+    "no_spoken_voice_over": true,
+    "no_score": true,
+    "no_effects": true,
+    "no_bed": true,
+    "no_fabricated_animal_calls": true,
+    "audio_substitution": false,
+    "generated_calls": false,
+    "v3_audio_packages": false,
+    "sound_design_layers": false,
+    "sub_bloom_layers": false,
+    "native_ambience_layers": false,
+    "ambience_layers": false,
+    "cue_layers": false,
+    "full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false,
+    "audience_result_promise": false,
+    "virality_guarantee": false,
+    "perfection_claim": false,
+    "retention_claim": false,
+    "hypnosis_claim": false,
+    "three_x_claim": false,
+    "subscribe_claim": false,
+    "like_claim": false,
+    "same_path_replacement": false,
+    "factual_superlative_claim": false,
+    "third_party_repost": false,
+    "ai_audio": false,
+    "earshot_claim": false,
+    "model_claim": false
+  },
+  "all_seven_selected_windows_audible": true
+}
