@@ -1,0 +1,120 @@
+{
+  "checked_at": "2026-11-08T02:18:28.179635+00:00",
+  "production_hold": true,
+  "publisher_link_evidence": {
+    "url": "https://linktr.ee/zackdfilmsofficial",
+    "observed_links": [
+      "https://www.facebook.com/zackdfilms",
+      "https://www.tiktok.com/@thezackdfilms",
+      "https://www.instagram.com/zackdfilms",
+      "https://www.youtube.com/@zackdfilms"
+    ]
+  },
+  "limits": "Publisher-linked account, alternate-platform cut; not automatically a byte-identical YouTube edition or completed AV review. Display-name-only mirrors excluded.",
+  "cases": [
+    {
+      "platform": "x",
+      "source_url": "https://x.com/zackdfilms1/status/1823736339659153776",
+      "account_linked_by_publisher_landing_page": false,
+      "identity_note": "X account attribution corroborated by Wikitubia and matching current YouTube/X titles; not a Linktree cross-link",
+      "full_video_manually_reviewed": false,
+      "continuous_audio_reviewed": false,
+      "available_format_descriptors": [
+        {
+          "format_id": "hls-audio-32000-Audio",
+          "width": null,
+          "height": null,
+          "vcodec": "none",
+          "acodec": null,
+          "protocol": "m3u8_native",
+          "has_drm": false
+        },
+        {
+          "format_id": "hls-audio-64000-Audio",
+          "width": null,
+          "height": null,
+          "vcodec": "none",
+          "acodec": null,
+          "protocol": "m3u8_native",
+          "has_drm": false
+        },
+        {
+          "format_id": "http-632",
+          "width": 320,
+          "height": 568,
+          "vcodec": null,
+          "acodec": null,
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "hls-402",
+          "width": 320,
+          "height": 568,
+          "vcodec": "avc1.4D401E",
+          "acodec": "none",
+          "protocol": "m3u8_native",
+          "has_drm": false
+        },
+        {
+          "format_id": "http-950",
+          "width": 406,
+          "height": 720,
+          "vcodec": null,
+          "acodec": null,
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "hls-531",
+          "width": 406,
+          "height": 720,
+          "vcodec": "avc1.4D401E",
+          "acodec": "none",
+          "protocol": "m3u8_native",
+          "has_drm": false
+        }
+      ],
+      "metadata": {
+        "id": "1821561042192801793",
+        "title": "Zack D. Films - How Artificial Hearts Work \ud83e\udd14",
+        "uploader": "Zack D. Films",
+        "uploader_id": "zackdfilms1",
+        "channel": null,
+        "channel_id": "1795475238806851584",
+        "duration": 28.096,
+        "webpage_url": "https://x.com/zackdfilms1/status/1823736339659153776"
+      },
+      "pilot_media_url": "https://x.com/zackdfilms1/status/1823736339659153776",
+      "probe_exit": 0,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 406,
+          "height": 720,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "843",
+          "duration": "28.128100",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "1319",
+          "duration": "28.138667",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "status": "actual_av_downloaded_and_decoded",
+      "decode_exit": 0,
+      "diagnostic": "",
+      "bytes": 1649504
+    }
+  ]
+}
