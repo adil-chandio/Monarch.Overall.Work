@@ -14,19 +14,19 @@ import imageio_ffmpeg
 import numpy as np
 
 
-def depth_reproject(image, depth, phase, forward=.085, down=.022, crop=.90, iterations=4):
+def depth_reproject(image, depth, phase, forward=.085, down=.022, crop=.90, iterations=4, side=0):
  """Inverse-project a plane of normalized near=1 relative depth, no z-buffer."""
  if image.ndim!=3 or image.shape[:2]!=depth.shape: raise ValueError('Image and depth size mismatch')
  if not 0<=phase<=1 or not 0<crop<=1 or iterations<1: raise ValueError('Invalid camera parameters')
  h,w=depth.shape; yy,xx=np.indices((h,w),dtype=np.float32)
  cx=(w-1)/2;cy=(h-1)*.55;focal=w*1.10
  target_x=cx+(xx-cx)*crop;target_y=cy+(yy-cy)*crop
- z_shift=forward*phase; y_shift=down*phase
+ z_shift=forward*phase; y_shift=down*phase; x_shift=side*phase
  u=target_x.copy();v=target_y.copy()
  for _ in range(iterations):
   d=cv2.remap(depth,u,v,cv2.INTER_LINEAR,borderMode=cv2.BORDER_REPLICATE)
   inv_z=.60+.90*np.clip(d,0,1)
-  u=cx+(target_x-cx)*(1-z_shift*inv_z)
+  u=cx+(target_x-cx)*(1-z_shift*inv_z)+focal*x_shift*inv_z
   v=cy+(target_y-cy)*(1-z_shift*inv_z)+focal*y_shift*inv_z
  return cv2.remap(image,u,v,cv2.INTER_LINEAR,borderMode=cv2.BORDER_REFLECT_101)
 

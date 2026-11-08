@@ -53,7 +53,7 @@ def main():
     enc.stdin.write(bg.tobytes())
   enc.stdin.close()
   if enc.wait()!=0: raise RuntimeError('Encoding failed')
-  print(f'{total} frames; 2D plate, unverified masks and contact; RESEARCH ONLY')
+  print(f'{total} frames; approximate plate camera, unverified masks and contact; RESEARCH ONLY')
  finally:
   cap.release()
   if enc.poll() is None:

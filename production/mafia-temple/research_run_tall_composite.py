@@ -2,8 +2,8 @@
 """Experimental 2D running composite; NOT a finished or realistic 3D shot.
 
 Uses a generated empty-courtyard plate and subject segmentation from the
-research-only 576x1024 run pilot. The plate pans behind the body as a crude
-tracking-camera test. This cannot repair anatomy, face identity, shadows, foot
+research-only 576x1024 run pilot. The plate pans or uses an optional inferred-depth reprojection behind the body
+as a crude tracking-camera test. This cannot repair anatomy, face identity, shadows, foot
 contact, occlusions, lighting, parallax or temporal artifacts. The optional
 tracked-face patch freezes expression; do not present output as a final film.
 Requires OpenCV, MediaPipe, NumPy and imageio-ffmpeg.
@@ -15,6 +15,7 @@ import cv2
 import imageio_ffmpeg
 import mediapipe as mp
 import numpy as np
+from research_depth_camera import depth_reproject
 
 ROOT=Path(__file__).resolve().parent
 
@@ -24,6 +25,7 @@ def main():
     p.add_argument('input',type=Path,help='576x1024 running research clip')
     p.add_argument('output',type=Path)
     p.add_argument('--shadow',action='store_true',help='test approximate pose-tracked ground shadows')
+    p.add_argument('--depth',type=Path,help='optional approximate 2.5D camera track')
     args=p.parse_args()
     cap=cv2.VideoCapture(str(args.input))
     if not cap.isOpened() or (int(cap.get(3)),int(cap.get(4)))!=(576,1024):
@@ -32,7 +34,14 @@ def main():
     if not 0<fps<120 or total<2: raise ValueError('Invalid video length or frame rate')
     plate=cv2.imread(str(ROOT/'keyframes/courtyard-clean-vfx.jpg'))
     if plate is None: raise ValueError('Missing generated background plate')
-    plate=cv2.resize(plate,(1376,768))
+    plate=cv2.resize(plate,(1376,768));depth=None
+    if args.depth:
+        depth=cv2.imread(str(args.depth),cv2.IMREAD_UNCHANGED)
+        if depth is None or depth.ndim!=2:raise ValueError('Invalid depth map')
+        divisor=65535 if depth.dtype==np.uint16 else 255
+        depth=cv2.resize(depth.astype('float32')/divisor,(1280,720),interpolation=cv2.INTER_LINEAR)
+        depth=cv2.bilateralFilter(depth,7,.06,4)
+        depth_plate=cv2.resize(plate,(1280,720))
     args.output.parent.mkdir(parents=True,exist_ok=True)
     cmd=[imageio_ffmpeg.get_ffmpeg_exe(),'-v','error','-y','-f','rawvideo',
          '-pix_fmt','bgr24','-s','1280x720','-r',str(fps),'-i','pipe:0',
@@ -54,8 +63,13 @@ def main():
                 binary=cv2.morphologyEx(binary,cv2.MORPH_CLOSE,np.ones((5,5),np.uint8))
                 alpha=cv2.GaussianBlur(binary.astype('float32'),(0,0),1.5)
                 # This is a flat-image pan, not genuine 3D parallax.
-                x0=30+round(80*i/(total-1))
-                bg=cv2.resize(plate[45:720,x0:x0+1200],(1280,720),interpolation=cv2.INTER_LANCZOS4)
+                t=i/(total-1)
+                if depth is not None:
+                    smooth=t*t*(3-2*t)
+                    bg=depth_reproject(depth_plate,depth,smooth,forward=0,down=0,crop=.91,side=.05)
+                else:
+                    x0=30+round(80*t)
+                    bg=cv2.resize(plate[45:720,x0:x0+1200],(1280,720),interpolation=cv2.INTER_LANCZOS4)
                 if args.shadow:
                     # Fictitious fixed floor plane, not solved 3D geometry. Foot
                     # points are approximate; depth and contact need manual QA.
@@ -78,7 +92,7 @@ def main():
                 enc.stdin.write(bg.tobytes())
         enc.stdin.close()
         if enc.wait()!=0: raise RuntimeError('Encoding failed')
-        print(f'{total} frames; flat plate, unverified masks and contact; RESEARCH ONLY')
+        print(f'{total} frames; approximate plate camera, unverified masks and contact; RESEARCH ONLY')
     finally:
         cap.release()
         if enc.poll() is None:
