@@ -33,7 +33,10 @@ try:
     src=''.join(cells[8]['source']); assert src.startswith('%%writefile ')
     src=src.split('\n',1)[1].split('# ==== 9. AIQUEST BRANDED GRADIO INTERFACE ====')[0]
     # Keep generated output out of the public UI and gather only the final video.
-    namespace={};exec(compile(src,'reviewed-upstream-inference','exec'),namespace)
+    # Classes created by the inference code need a real module name: an empty
+    # exec namespace breaks its dynamic multi-GPU Gemma device subclass.
+    namespace={'__name__':'monarch_ltx23_inference'}
+    exec(compile(src,'reviewed-upstream-inference','exec'),namespace)
     class QuietProgress:
         def __call__(self,*a,**kw): pass
     prompt=('A cinematic live-action full body side tracking shot of the same man in the reference image running naturally across the stone temple courtyard. '

@@ -17,6 +17,13 @@ for ((i=0;i<100;i++)); do
       exit 0;;
     *ERROR*|*error*|*CANCEL*|*cancel*|*FAIL*)
       PILOT_KERNEL_SLUG="$slug" python production/mafia-temple/onetoall_diagnose.py || true
+      python - <<'PY'
+from pathlib import Path
+p=Path('production/mafia-temple/onetoall-diagnostics.txt')
+if p.exists():
+    text='\n'.join(p.read_text(errors='replace').splitlines()[-25:])[-3500:]
+    print('::notice title=LTX23 failure tail::'+text.replace('%','%25').replace('\n','%0A'))
+PY
       exit 1;;
   esac
   sleep 45
