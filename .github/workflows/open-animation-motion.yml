@@ -1,0 +1,29 @@
+name: Inspect public stick animation footage
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/inspect_open_animations.py, .github/workflows/open-animation-motion.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -q yt-dlp
+      - name: Extract research contact sheets
+        run: python scripts/inspect_open_animations.py
+      - name: Save public research evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/open-animation-motion
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record public animation footage samples [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
