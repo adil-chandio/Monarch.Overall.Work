@@ -376,7 +376,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'onetoall-recover-diagnostics-v2' production/mafia-temple/trigger.txt; then
+          if grep -q 'onetoall-recover-result' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/recover_onetoall_pilot.sh
+          elif grep -q 'onetoall-recover-diagnostics-v2' production/mafia-temple/trigger.txt; then
             export PILOT_KERNEL_SLUG=monarch-onetoall-run-42511685428
             echo "::notice title=One-to-All current Kaggle status::$(kaggle kernels status "$KAGGLE_USERNAME/$PILOT_KERNEL_SLUG" 2>&1)"
             python production/mafia-temple/onetoall_diagnose.py
@@ -491,6 +493,17 @@ jobs:
           retention-days: 7
       - name: Save motion clips to the session branch
         run: |
+          if grep -q 'onetoall-recover-result' production/mafia-temple/trigger.txt; then
+            git config user.name 'MONARCH GPU Runner'
+            git config user.email 'gpu@monarch.studio'
+            git add -f production/mafia-temple/onetoall-pilot-output/
+            if ! git diff --cached --quiet; then
+              git commit -m 'Recover generated One-to-All research pilot [skip ci]'
+              git pull --rebase origin arena/6101616c-monarch-overall-work
+              git push origin HEAD:arena/6101616c-monarch-overall-work
+            fi
+            exit 0
+          fi
           if grep -q 'onetoall-running-research\|onetoall-recover-diagnostics' production/mafia-temple/trigger.txt; then
             echo 'One-to-All research remains a short-lived Actions artifact; not committing it.'
             exit 0
