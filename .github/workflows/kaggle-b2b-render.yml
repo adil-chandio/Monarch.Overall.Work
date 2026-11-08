@@ -376,7 +376,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'stableanim-recover-v7' production/mafia-temple/trigger.txt; then
+          if grep -q 'onetoall-running-research' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_onetoall_pilot.sh
+          elif grep -q 'stableanim-recover-v7' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/recover_stableanim_pilot.sh
           elif grep -q 'stableanim-depth-diagnose' production/mafia-temple/trigger.txt; then
             PILOT_KERNEL_SLUG=monarch-depth-research-42450261601 python production/mafia-temple/stableanim_diagnose.py
@@ -440,8 +442,20 @@ jobs:
           path: production/mafia-temple/portrait-pilot-output/
           if-no-files-found: ignore
           retention-days: 7
+      - name: Upload One-to-All research output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: onetoall-running-research
+          path: production/mafia-temple/onetoall-pilot-output/
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Save motion clips to the session branch
         run: |
+          if grep -q 'onetoall-running-research' production/mafia-temple/trigger.txt; then
+            echo 'One-to-All research remains a short-lived Actions artifact; not committing it.'
+            exit 0
+          fi
           if grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
             echo 'Research pilot is an Actions artifact; not committing it.'
             exit 0
