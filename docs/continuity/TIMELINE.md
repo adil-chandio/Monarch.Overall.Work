@@ -402,3 +402,21 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `docs/continuity/STATE.json`
 - Ref: `docs/continuity/EVIDENCE_MANIFEST.json`
 - Ref: `docs/continuity/00_START_HERE.md`
+
+## `2026-11-08T17:51:15Z` · evt-054-monarch-cam-channel-os · result
+
+- Title: Monarch Cam channel OS and stale-checkout recovery
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Recovered stale checkout ac3a529 to 4b3574c1 and wired Monarch Cam as the active channel workstream: channel index/state/playbook/workflow/next-action/capsule/rejections/evidence, root shortcut, recovery file, resume/channel/recover commands, AGENTS/README/START_HERE/NEW_CHAT_PROMPT/UPDATE_PROTOCOL/CI wiring, append-only decision and prompt-result records, explicit three-channel config reconciliation gap. V4/V5 remain rejected; V5 untouched; no V6 package or acceptance claim.
+- Ref: `docs/continuity/channels/CHANNEL_INDEX.json`
+- Ref: `docs/continuity/channels/monarch-cam/00_START_HERE.md`
+- Ref: `docs/continuity/channels/monarch-cam/EASY_RESUME.md`
+- Ref: `AGENTS.md`
+- Ref: `README.md`
+- Ref: `RECOVER.md`
+- Ref: `MONARCH_CAM.md`
+- Ref: `tools/continuity.py`
+- Ref: `.github/workflows/continuity-validate.yml`
+- Ref: `config/continuity.json`
+- Ref: `config/channels.json`

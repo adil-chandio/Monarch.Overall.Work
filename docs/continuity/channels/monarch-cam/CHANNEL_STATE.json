@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "channel_id": "monarch-cam",
+  "name": "Monarch Cam",
+  "handle": "@Monarch-Cam",
+  "youtube_url": "https://www.youtube.com/@Monarch-Cam",
+  "owner_statement": "one of our 3 channels",
+  "space": "yt-automation",
+  "branch": "arena/390292fc-monarch-overall-work",
+  "status": "channel_workflow_ready",
+  "evidence_level": "repo_evidence",
+  "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
+  "primary_series": "Too Close: Wildlife in Human Space",
+  "secondary_series": "Nature's Hidden Tricks",
+  "active_task": {
+    "id": "monarch-cam-easy-continuation",
+    "title": "Monarch Cam channel workflow — continue without re-explanation",
+    "status": "ready",
+    "next_action": "Open docs/continuity/channels/monarch-cam/00_START_HERE.md, inherit the exact channel state, and continue the single active Monarch Cam lane without asking the user to explain how to do it. If the lane is the rejected ranking Short, build a separate V6 package only after per-title rights verification; V5 stays untouched."
+  },
+  "parallel_unresolved": {
+    "id": "monarch-cam-v6-intent",
+    "title": "Next-level full-motion raw funny-animal ranking Short",
+    "status": "unresolved_not_started",
+    "no_v6_files": true,
+    "v5_untouched": true
+  },
+  "strategy": {
+    "november_output": "4 long videos, 8 connected Shorts, one primary cluster, two playlists, 100% clip-rights/factual-source records, old-winner bridge, Studio RPM baseline",
+    "viral_quality_chain": "high-demand concept → instantly readable real thumbnail → accurate standalone title → proof in first 3 seconds → payoff by 0:25 → fresh evidence/explanation → satisfying final answer → highly related next video",
+    "short_rules": "one moment, animal/action readable on first frame, no five-clip countdown, no unsupported 3 AM/location/species detail, no rights-unverified footage, no random pet/karma upload between series Shorts"
+  },
+  "brand": {
+    "about_direction": "Wildlife gets close. Monarch Cam explains what you're really seeing.",
+    "remove": ["KARMA CAM", "instant-karma/dark-humour positioning", "daily-upload promise", "unmonitored email placeholder"],
+    "home_sections": ["Start Here: Wildlife Caught Too Close", "Too Close: Bear Encounters", "Latest Wildlife Stories", "Nature's Hidden Tricks when populated", "Wildlife Shorts", "Archive: Caught-on-Camera Classics"]
+  },
+  "rights": {
+    "owner_preference": "No direct permission-request outreach workflow.",
+    "default_pool": "verified public-domain / suitably licensed Creative Commons or stock material + original Monarch Cam graphics, narration and production",
+    "first_bear_episode": "Use verified NPS public-domain source pack in docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md",
+    "cpw_note": "CPW clip is research only; CC BY-NC-ND 4.0 restricts commercial use and modification.",
+    "clip_ledger_required": true,
+    "credit_alone_is_not_clearance": true
+  },
+  "rejections": [
+    "V4 ranking Short — “sirf text likh diya”",
+    "V5 ranking Short — “NAHI abhi bhi theek se nhi”",
+    "V5 hook/list geometry",
+    "silent/graphic/unverified source dead ends",
+    "shadowban / About-text-caused-25-views claims without Studio evidence"
+  ],
+  "v5_deliverable": {
+    "file": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4",
+    "bytes": 28043097,
+    "sha256": "8948f67f4ab0fb419fd1d53a10f1db68a0c6848347aa80961a1a607f9806306a",
+    "duration_seconds": 60.0,
+    "resolution": "1080x1920",
+    "fps": 30,
+    "frames": 1800
+  },
+  "claims": {
+    "v4_creative_acceptance": false,
+    "v5_creative_acceptance": false,
+    "v6_started": false,
+    "v6_accepted": false,
+    "human_full_motion_native_audio_listening": false,
+    "human_signoff": false,
+    "perfection_guaranteed": false,
+    "retention_guaranteed": false,
+    "virality_guaranteed": false,
+    "audience_results_guaranteed": false
+  },
+  "gaps": [
+    "config/channels.json legacy 3 slot names are not yet reconciled with owner statement that Monarch Cam is one of the 3 channels.",
+    "No V6 rights-verified social-platform clips, package, workflow, renderer, QC, MP4 or run.",
+    "No complete Arena chat export/JSON.",
+    "No live bidirectional connected-app sync or proven hourly automation.",
+    "Studio screenshots for latest long and three recent Shorts are still needed for bottleneck analysis."
+  ]
+}

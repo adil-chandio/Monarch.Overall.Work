@@ -33,5 +33,19 @@
     "archive_metadata",
     "gap"
   ],
-  "claims_policy": "Claims about approval, acceptance, perfection, human listening, retention, virality or audience results remain false until a verbatim acceptance/result record is imported."
+  "claims_policy": "Claims about approval, acceptance, perfection, human listening, retention, virality or audience results remain false until a verbatim acceptance/result record is imported.",
+  "active_channel": "monarch-cam",
+  "channel_index": "docs/continuity/channels/CHANNEL_INDEX.json",
+  "channel_entrypoint": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
+  "channel_capsule": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
+  "channel_state": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
+  "channel_playbook": "docs/continuity/channels/monarch-cam/PLAYBOOK.md",
+  "channel_workflow": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
+  "channel_next_action": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
+  "channel_command": "python3 tools/continuity.py channel",
+  "recover_command": "python3 tools/continuity.py recover",
+  "recovery_file": "RECOVER.md",
+  "root_channel_shortcut": "MONARCH_CAM.md",
+  "owner_channel_statement": "Monarch Cam is one of our 3 channels.",
+  "channel_reconciliation_status": "explicit_gap"
 }

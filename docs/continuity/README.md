@@ -89,3 +89,7 @@ Real chat exports are the only way to upgrade a session from `session_memory`/`s
 - V4 and V5 `monarch-cam` ranking Shorts are rejected. Technical QC is not creative acceptance.
 - Do not re-ask answered questions or reuse rejected geometry, unverified media, or dead-end fixes.
 - Work only on `arena/390292fc-monarch-overall-work`; never switch, rename, or push another branch.
+
+## Active channel — Monarch Cam
+
+Monarch Cam is the active channel workstream and one of the three channels. Start at [channels/monarch-cam/00_START_HERE.md](./channels/monarch-cam/00_START_HERE.md) or run `python3 tools/continuity.py channel`. `resume`/`bootstrap` embed [EASY_RESUME.md](./channels/monarch-cam/EASY_RESUME.md) automatically. The legacy `config/channels.json` three-slot mismatch is an explicit gap, not a renamed identity.

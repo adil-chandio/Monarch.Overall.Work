@@ -46,3 +46,7 @@ The words “perfectly correctly accurately”, “next level”, “tabahi leve
 6. Work on the active Arena branch only.
 7. Preserve raw evidence and hashes before deriving summaries.
 8. Do not re-present rejected V4/V5 work as final.
+
+## Current direct-execution instruction
+
+The user said, in part: “Tum khud karo … mujhe mat bolo koi way nikalo … new chat me … Batana na parhe … usko sab pata hona chaiye … yeh hamare 3 channels Mese 1 ha monarch Cam … easy Karke asan Karke … koi mushkil bhi na aye”. Do the work directly in the repo, do not lecture a method, and make a new chat inherit the Monarch Cam channel workflow without re-explanation.

@@ -14,6 +14,8 @@ Commands:
   import-chat FILE ...   Preserve a raw chat/export and normalize it.
   checkpoint ...         Append a state/event checkpoint and rerender.
   bootstrap              Print the pasteable new-chat prompt with HEAD pinned.
+  channel [ID]           Print the active channel easy-resume capsule.
+  recover                Fetch and fast-forward a stale checkout.
 """
 from __future__ import annotations
 
@@ -42,6 +44,8 @@ INBOX = EXPORTS / "inbox"
 SOURCES = EXPORTS / "sources"
 SESSIONS_DIR = C / "sessions"
 EVIDENCE = C / "evidence"
+CHANNELS_DIR = C / "channels"
+CHANNELS_INDEX = CHANNELS_DIR / "CHANNEL_INDEX.json"
 
 REQUIRED_FILES = [
     "AGENTS.md",
@@ -70,11 +74,24 @@ REQUIRED_FILES = [
     "docs/continuity/external/README.md",
     "docs/continuity/external/APP_SNAPSHOT.json",
     "docs/continuity/external/DRIVE_INDEX.md",
+    "RECOVER.md",
+    "MONARCH_CAM.md",
+    "docs/continuity/channels/README.md",
+    "docs/continuity/channels/CHANNEL_INDEX.json",
+    "docs/continuity/channels/monarch-cam/00_START_HERE.md",
+    "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
+    "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
+    "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
+    "docs/continuity/channels/monarch-cam/PLAYBOOK.md",
+    "docs/continuity/channels/monarch-cam/WORKFLOW.md",
+    "docs/continuity/channels/monarch-cam/REJECTIONS.md",
+    "docs/continuity/channels/monarch-cam/EVIDENCE.md",
 ]
 
 GENERATED_NAMES = {
     "STATE.md", "COVERAGE.md", "SESSION_INDEX.md", "TIMELINE.md",
     "DECISION_LOG.md", "PROMPT_RESULT_LOG.md", "EVIDENCE_MANIFEST.md",
+    "CHANNEL_INDEX.md",
 }
 
 EVIDENCE_LEVELS = {
@@ -100,8 +117,18 @@ SCAN_GLOBS = [
     "docs/continuity/chat_exports/README.md",
     "docs/continuity/chat_exports/inbox/README.md",
     "docs/continuity/external/*",
+    "docs/continuity/channels/*",
+    "docs/continuity/channels/**/*",
     "docs/continuity/sessions/*",
     "docs/continuity/*",
+    "docs/MONARCH_CAM_*.md",
+    "production/monarch-cam/short_ranking_raw_v5/*.json",
+    "production/monarch-cam/short_ranking_raw_v5/*.md",
+    "production/monarch-cam/short_ranking_raw_v5/*.py",
+    "production/monarch-cam/short_ranking_raw_v5/review/*.json",
+    "production/monarch-cam/short_ranking_raw_v5/review/*.txt",
+    "RECOVER.md",
+    "MONARCH_CAM.md",
     "config/continuity.json",
     "config/spaces.json",
     "config/channels.json",
@@ -177,6 +204,14 @@ def commit_tree_url(sha: str) -> str:
 
 def evidence_level_for(path: str) -> str:
     p = path.lower()
+    if "docs/continuity/channels/" in p:
+        return "operating_contract"
+    if p.startswith(("docs/monarch_cam_", "production/monarch-cam/")):
+        return "repo_evidence"
+    if p in {"recover.md", "monarch_cam.md"}:
+        return "operating_contract"
+    if p == "config/channels.json":
+        return "repo_evidence"
     if "evidence/screenshots/" in p and p.endswith((".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp")):
         return "screenshot_only"
     if "chat_exports/sources/" in p:
@@ -253,6 +288,8 @@ def refresh_coverage(manifest=None):
         "decisions": len(read_jsonl(DECISIONS)),
         "prompt_results": len(read_jsonl(PROMPTS)),
         "screenshots": sum(1 for f in manifest.get("files", []) if f.get("evidence_level") == "screenshot_only" and f.get("path", "").lower().endswith((".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"))),
+        "channels_indexed": len(load_json(CHANNELS_INDEX).get("channels", [])),
+        "channel_files": sum(1 for f in manifest.get("files", []) if "docs/continuity/channels/" in f.get("path", "")),
     }
     dump_json(COVERAGE, coverage)
     return coverage
@@ -282,6 +319,7 @@ def render_outputs():
     events = read_jsonl(EVENTS)
     decisions = read_jsonl(DECISIONS)
     prompts = read_jsonl(PROMPTS)
+    channels = load_json(CHANNELS_INDEX)
 
     state_md = [
         "# Current state",
@@ -293,7 +331,9 @@ def render_outputs():
         f"- Updated: `{state.get('updated_at')}`",
         f"- Last event: `{state.get('last_event_id')}`",
         "",
+        "## Active channel", md_json({"active_channel": state.get("active_channel"), "channel_context": state.get("channel_context", {})}),
         "## Active task", md_json(state.get("active_task", {})),
+        "## Infrastructure task", md_json(state.get("infrastructure_task", {})),
         "## Parallel video task", md_json(state.get("parallel_task", {})),
         "## Continuation requirements", md_json(state.get("continuation_requirements", [])),
         "## Latest mindset", md_json(state.get("latest_mindset", {})),
@@ -368,6 +408,23 @@ def render_outputs():
             "",
         ]
 
+    channel_lines = ["# Channel index", "", f"Active channel: `{channels.get('active_channel')}`", "", channels.get("repo_config_note", ""), ""]
+    for ch in channels.get("channels", []):
+        channel_lines += [
+            f"## {ch.get('id')} — {ch.get('name')}",
+            "",
+            f"- Role: `{ch.get('role')}`",
+            f"- Status: `{ch.get('status')}`",
+            f"- Space: `{ch.get('space')}`",
+            f"- Entrypoint: `{ch.get('entrypoint', '')}`",
+            f"- Capsule: `{ch.get('capsule', '')}`",
+            f"- Next action: `{ch.get('next_action', '')}`",
+            "",
+        ]
+    for doc in channels.get("channels", [{}])[0].get("source_docs", []):
+        channel_lines.append(f"- Source: `{doc}`")
+    channel_lines.append("")
+
     by_level = {}
     for f in manifest.get("files", []):
         by_level[f.get("evidence_level", "unknown")] = by_level.get(f.get("evidence_level", "unknown"), 0) + 1
@@ -390,6 +447,7 @@ def render_outputs():
         C / "DECISION_LOG.md": "\n".join(decision_lines) + "\n",
         C / "PROMPT_RESULT_LOG.md": "\n".join(prompt_lines) + "\n",
         C / "EVIDENCE_MANIFEST.md": "\n".join(manifest_md) + "\n",
+        C / "CHANNEL_INDEX.md": "\n".join(channel_lines) + "\n",
     }
 
 
@@ -697,11 +755,13 @@ def validate():
         events = read_jsonl(EVENTS)
         decisions = read_jsonl(DECISIONS)
         prompts = read_jsonl(PROMPTS)
+        channels = load_json(CHANNELS_INDEX)
+        cfg = load_json(ROOT / "config/continuity.json")
     except Exception as exc:
         print("VALIDATION FAILED: cannot parse archive:", exc)
         return 1
 
-    for key in ("schema_version", "repo", "branch", "head_at_capture", "active_task", "claims", "gaps"):
+    for key in ("schema_version", "repo", "branch", "head_at_capture", "active_task", "active_channel", "channel_context", "claims", "gaps"):
         if key not in state:
             errors.append(f"STATE.json missing {key}")
     claims = state.get("claims", {})
@@ -714,6 +774,26 @@ def validate():
         errors.append("COVERAGE.json gaps must not be empty while full Arena exports are missing")
     if coverage.get("verbatim_transcripts", {}).get("full_arena_export_available") is not False:
         errors.append("COVERAGE must not claim the full Arena export is available")
+
+    active = state.get("active_channel")
+    if not active:
+        errors.append("STATE.json missing active_channel")
+    if channels.get("active_channel") != active:
+        errors.append("CHANNEL_INDEX.json active_channel does not match STATE.json")
+    if cfg.get("active_channel") != active:
+        errors.append("config/continuity.json active_channel does not match STATE.json")
+    channel_map = {c.get("id"): c for c in channels.get("channels", [])}
+    if active and active not in channel_map:
+        errors.append(f"active channel {active} missing from CHANNEL_INDEX.json channels")
+    else:
+        entry = channel_map.get(active, {})
+        for key in ("entrypoint", "capsule", "state", "playbook", "workflow", "next_action", "easy_resume", "rejections", "evidence"):
+            rp = entry.get(key)
+            if rp and not (ROOT / rp).is_file():
+                errors.append(f"active channel {active} missing {key}: {rp}")
+        for doc in entry.get("source_docs", []):
+            if not (ROOT / doc).is_file():
+                errors.append(f"active channel source doc missing: {doc}")
 
     known_refs = {f["path"] for f in manifest.get("files", [])}
     external_refs = set()
@@ -768,39 +848,105 @@ def validate():
     print(f"- repo={state.get('repo')} branch={state.get('branch')} head={head}")
     print(f"- manifest_files={len(manifest.get('files', []))} sessions={len(sessions.get('sessions', []))} events={len(events)} decisions={len(decisions)} prompt_results={len(prompts)}")
     print(f"- verbatim_transcript_sessions={coverage.get('verbatim_transcripts', {}).get('imported_sessions')} (full Arena export=false)")
+    print(f"- active_channel={active} channels={len(channels.get('channels', []))} channel_files={coverage.get('counts', {}).get('channel_files')}")
     for w in warnings:
         print(" - warning:", w)
     return 0
 
 
-def bootstrap_text():
+def prompt_context(channel_id=None):
     head = repo_head()
     branch = git("branch", "--show-current")
+    state = load_json(STATE)
+    channels = load_json(CHANNELS_INDEX)
+    active = channels.get("active_channel") or state.get("active_channel") or "monarch-cam"
+    requested = channel_id or active
+    entry = next((c for c in channels.get("channels", []) if c.get("id") == requested), None)
+    if entry is None:
+        requested = active
+        entry = next((c for c in channels.get("channels", []) if c.get("id") == active), {})
+    capsule_path = ROOT / entry.get("capsule", "docs/continuity/channels/monarch-cam/EASY_RESUME.md")
+    capsule = capsule_path.read_text(encoding="utf-8")
+    ctx = {
+        "{{BRANCH}}": branch,
+        "{{HEAD}}": head,
+        "{{TREE_URL}}": commit_tree_url(head),
+        "{{ACTIVE_CHANNEL}}": requested,
+        "{{CHANNEL_NAME}}": entry.get("name", requested),
+        "{{CHANNEL_START}}": entry.get("entrypoint", ""),
+        "{{CHANNEL_ENTRYPOINT}}": entry.get("entrypoint", ""),
+        "{{CHANNEL_STATE}}": entry.get("state", ""),
+        "{{CHANNEL_CAPSULE}}": capsule,
+        "{{RECOVERY_COMMAND}}": "python3 tools/continuity.py recover",
+    }
+    return ctx
+
+
+def fill_prompt(text, ctx, include_capsule=True):
+    if include_capsule:
+        text = text.replace("{{CHANNEL_CAPSULE}}", ctx["{{CHANNEL_CAPSULE}}"])
+    for key, value in ctx.items():
+        if key == "{{CHANNEL_CAPSULE}}":
+            continue
+        text = text.replace(key, value)
+    return text
+
+
+def bootstrap_text(channel_id=None):
     text = (C / "NEW_CHAT_PROMPT.md").read_text(encoding="utf-8")
-    return (text.replace("{{BRANCH}}", branch)
-                .replace("{{HEAD}}", head)
-                .replace("{{TREE_URL}}", commit_tree_url(head)))
+    return fill_prompt(text, prompt_context(channel_id))
 
 
-def resume():
+def channel_text(channel_id=None):
+    ctx = prompt_context(channel_id)
+    capsule = ctx["{{CHANNEL_CAPSULE}}"]
+    for key, value in ctx.items():
+        if key != "{{CHANNEL_CAPSULE}}":
+            capsule = capsule.replace(key, value)
+    return capsule
+
+
+def resume(channel_id=None):
     rc = validate()
     print("\n" + "=" * 72 + "\n")
     print("COPY-PASTE THIS INTO THE NEW CHAT:\n")
-    print(bootstrap_text())
+    print(bootstrap_text(channel_id))
     print("=" * 72)
     return rc
+
+
+def recover():
+    state = load_json(STATE)
+    expected = state.get("branch")
+    branch = git("branch", "--show-current")
+    if expected and branch != expected:
+        raise SystemExit(f"Refusing to recover: current branch {branch} is not {expected}")
+    refspec = f"+refs/heads/{branch}:refs/remotes/origin/{branch}"
+    try:
+        git("fetch", "origin", refspec)
+        git("merge", "--ff-only", "--quiet", f"origin/{branch}")
+    except RuntimeError as exc:
+        print("Recovery merge failed. Back up stale untracked drafts to /tmp, restore .gitignore, run `git clean -fd -e deliverables`, then retry.")
+        raise SystemExit(str(exc))
+    print(f"Recovered {branch} to {repo_head()}. Run `python3 tools/continuity.py resume`.")
+    return 0
 
 
 def main():
     ap = argparse.ArgumentParser(description="Monarch continuity OS")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    sub.add_parser("resume", help="validate and print the exact new-chat bootstrap")
+    p = sub.add_parser("resume", help="validate and print the exact new-chat bootstrap")
+    p.add_argument("--channel", default="", help="channel id to embed; defaults to active channel")
     sub.add_parser("validate", help="validate archive integrity and honesty flags")
     sub.add_parser("refresh", help="rebuild evidence manifest and coverage counts")
     p = sub.add_parser("render", help="regenerate human-readable ledgers")
     p.add_argument("--check", action="store_true", help="fail if generated ledgers are stale")
-    sub.add_parser("bootstrap", help="print the pasteable new-chat prompt with HEAD pinned")
+    p = sub.add_parser("bootstrap", help="print the pasteable new-chat prompt with HEAD pinned")
+    p.add_argument("--channel", default="", help="channel id to embed; defaults to active channel")
+    p = sub.add_parser("channel", help="print the active channel easy-resume capsule")
+    p.add_argument("channel_id", nargs="?", default="", help="optional channel id")
+    sub.add_parser("recover", help="fetch and fast-forward a stale checkout")
 
     p = sub.add_parser("import-chat", help="preserve a raw chat/export and normalize it")
     p.add_argument("file")
@@ -831,7 +977,7 @@ def main():
 
     args = ap.parse_args()
     if args.cmd == "resume":
-        return resume()
+        return resume(args.channel or None)
     if args.cmd == "validate":
         return validate()
     if args.cmd == "refresh":
@@ -840,8 +986,13 @@ def main():
     if args.cmd == "render":
         return render(check=args.check)
     if args.cmd == "bootstrap":
-        print(bootstrap_text())
+        print(bootstrap_text(args.channel or None))
         return 0
+    if args.cmd == "channel":
+        print(channel_text(args.channel_id or None))
+        return 0
+    if args.cmd == "recover":
+        return recover()
     if args.cmd == "import-chat":
         import_chat(args)
         return 0

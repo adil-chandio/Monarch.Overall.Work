@@ -48,8 +48,10 @@ The user's specific pain: a chat stops mid-work; after refresh/“continue” it
 8. **Commit and push only on the active Arena branch**:
 
    ```bash
-   git add AGENTS.md README.md .gitignore config/continuity.json tools/continuity.py \
-     .github/workflows/continuity-validate.yml docs/continuity
+   git add AGENTS.md README.md RECOVER.md MONARCH_CAM.md .gitignore .gitattributes \
+     config/continuity.json config/channels.json tools/continuity.py \
+     .github/workflows/continuity-validate.yml docs/continuity docs/MONARCH_CAM_*.md \
+     production/monarch-cam/short_ranking_raw_v5
    git commit -m "docs(continuity): checkpoint exact latest state"
    git push origin arena/390292fc-monarch-overall-work
    ```
@@ -71,8 +73,14 @@ It does **not** magically export Arena chats. A real export must be supplied/imp
 
 ## Do not
 
-- Do not hand-edit generated `STATE.md`, `COVERAGE.md`, `SESSION_INDEX.md`, `TIMELINE.md`, `DECISION_LOG.md`, `PROMPT_RESULT_LOG.md`, `EVIDENCE_MANIFEST.md`; edit the JSON/JSONL source and run `render`.
+- Do not hand-edit generated `STATE.md`, `COVERAGE.md`, `SESSION_INDEX.md`, `TIMELINE.md`, `DECISION_LOG.md`, `PROMPT_RESULT_LOG.md`, `EVIDENCE_MANIFEST.md`, `CHANNEL_INDEX.md`; edit the JSON/JSONL source and run `render`.
 - Do not leave unimported files in `chat_exports/inbox/`; `validate` fails on them.
 - Do not set a claim to `true` without a verbatim acceptance/result record.
 - Do not switch, rename, or push another branch.
 - Do not remove old sessions, rejected options, failed runs or dead-end notes to make the archive look tidy.
+
+## Active channel lane
+
+Monarch Cam is the active channel workstream. `python3 tools/continuity.py channel` prints its copy-paste capsule; `resume` embeds it automatically. Root `MONARCH_CAM.md` is the shortcut. If continuity files are missing, use `RECOVER.md` / `python3 tools/continuity.py recover` before any production work.
+
+When Monarch Cam work advances, also update `docs/continuity/channels/monarch-cam/CHANNEL_STATE.json` and `NEXT_ACTION.md`, then run `checkpoint`, `refresh`, `render`, `validate`, `render --check`, commit and push. Keep V4/V5 rejected, V5 untouched, and the `config/channels.json` three-slot mismatch as an explicit gap. Do not ask the user to explain the channel or workflow again.

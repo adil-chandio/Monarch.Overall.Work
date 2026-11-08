@@ -2,23 +2,26 @@
   "schema_version": "1.0.0",
   "repo": "adil-chandio/Monarch.Overall.Work",
   "branch": "arena/390292fc-monarch-overall-work",
-  "head_at_capture": "393edd658e8336780e1cd4aea4cf5b5261c2d1e3",
+  "head_at_capture": "4b3574c1c936e47cf2a68d719bae0e9fe6a2380a",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-08T16:22:31Z",
-  "last_event_id": "evt-053-continuity-pack-delivered",
+  "updated_at": "2026-11-08T17:51:15Z",
+  "last_event_id": "evt-054-monarch-cam-channel-os",
   "active_task": {
-    "id": "repo-continuity-archive-v1",
-    "title": "Build and deliver the repo-first continuation archive in Monarch.Overall.Work",
-    "status": "delivered",
-    "space": "ops",
+    "id": "monarch-cam-easy-continuation",
+    "title": "Monarch Cam channel workflow — continue without re-explanation",
+    "status": "channel_workflow_ready",
+    "space": "yt-automation",
+    "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
-    "current_step": "Continuity archive committed, pushed, validated and delivered. CI passed. Canonical evidence and append-only ledgers are current; exact all-chat preservation still requires real Arena exports.",
-    "next_action": "If real full Arena chat exports are supplied, import them via import-chat and update COVERAGE/STATE/GAPS; keep unresolved V6 separate; do not restart from the beginning.",
+    "current_step": "Monarch Cam is wired as the active channel workstream with a one-file channel start, machine state, playbook, production workflow, exact next action, copy-paste capsule, rejection/dead-end record, evidence ledger, root shortcut, stale-checkout recovery and one-command resume/channel commands. Legacy config/channels.json slots remain unchanged; the name mismatch is an explicit gap.",
+    "next_action": "Open docs/continuity/channels/monarch-cam/00_START_HERE.md, inherit CHANNEL_STATE.json, and continue the single active Monarch Cam lane without asking the user to explain how to do it. If the lane is the rejected ranking Short, build a separate V6 package only after per-title rights verification; V5 stays untouched.",
     "blocking_gaps": [
+      "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
       "No complete Arena chat export/JSON",
       "No full sidebar chat list",
       "No assistant turns for EMS-20261011-001",
-      "No live bidirectional connected-app sync"
+      "No live bidirectional connected-app sync",
+      "No V6 rights-verified package or human creative acceptance"
     ],
     "branch_guardrail": "Always work on arena/390292fc-monarch-overall-work; never switch, rename, or push another branch."
   },
@@ -45,14 +48,18 @@
     "Bootstrap prompt, validator and CI.",
     "Commit/push and commit-pinned delivery.",
     "Gaps explicitly marked rather than claiming everything from screenshots/session memory/connected-app summaries.",
-    "Continue from the latest running work; never restart from the beginning or silently replace it with an older task."
+    "Continue from the latest running work; never restart from the beginning or silently replace it with an older task.",
+    "Active channel is self-describing in the repo; Monarch Cam work needs no re-explanation in a new chat.",
+    "Stale checkout recovery is documented at root and available as recover command.",
+    "Legacy config/channels.json slots are preserved; the Monarch Cam name mismatch stays an explicit gap."
   ],
   "latest_mindset": {
     "communication": "Roman Urdu/Hinglish; direct execution; no repeated questions; no mid-build stop; no missing details.",
     "quality": "“perfectly correctly accurately next level”, “bagair kuch chore miss kiye”, “tabahi level”; but never invent approval or completeness.",
     "evidence_discipline": "verbatim_export > repo_evidence > connected_app_record > screenshot_only > session_memory > gap.",
     "preservation": "Older work stays visible; rejected options, failures and dead ends are not deleted.",
-    "honesty": "Do not claim human approval, full-motion/native-audio listening, sign-off, perfection, retention, virality, audience results, or exact all-chat preservation without a real record."
+    "honesty": "Do not claim human approval, full-motion/native-audio listening, sign-off, perfection, retention, virality, audience results, or exact all-chat preservation without a real record.",
+    "direct_execution": "Tum khud karo; mujhe mat bolo koi way nikalo; do not make the user explain the workflow again."
   },
   "claims": {
     "full_arena_export_available": false,
@@ -69,7 +76,8 @@
     "perfection_guaranteed": false,
     "retention_guaranteed": false,
     "virality_guaranteed": false,
-    "audience_results_guaranteed": false
+    "audience_results_guaranteed": false,
+    "channel_config_reconciled": false
   },
   "gaps": [
     "Complete Arena chat exports for current and sidebar chats.",
@@ -79,7 +87,9 @@
     "Dropbox B2B MD body (email_not_verified).",
     "Large Drive ZIP/PDF/MP4 source packages.",
     "V6 rights-verified social-platform clips and separate delivery.",
-    "Human full-motion/native-audio listening and creative sign-off."
+    "Human full-motion/native-audio listening and creative sign-off.",
+    "Owner says Monarch Cam is one of the 3 channels; config/channels.json legacy 3 slot names are not yet reconciled.",
+    "A workspace can be restored to an old commit with continuity files missing; RECOVER.md / recover mitigate but do not prove automatic sync."
   ],
   "coverage": {
     "github_heads_at_capture": 11,
@@ -98,7 +108,11 @@
     "partial_verbatim_transcript_sessions": "2 imported (EMS transcript + journal), both partial",
     "continuity_pack_commit": "a8596fa869df50593270ed53b39a11f2bc8ca0e0",
     "continuity_ci_run": 42499227414,
-    "continuity_ci_conclusion": "success"
+    "continuity_ci_conclusion": "success",
+    "active_channel": "monarch-cam",
+    "channels_indexed": 4,
+    "channel_reconciliation_status": "explicit_gap",
+    "channel_os_files": "see docs/continuity/channels/CHANNEL_INDEX.json"
   },
   "entrypoints": {
     "resume": "python3 tools/continuity.py resume",
@@ -106,7 +120,12 @@
     "validate": "python3 tools/continuity.py validate",
     "render_check": "python3 tools/continuity.py render --check",
     "config": "config/continuity.json",
-    "new_chat_prompt": "docs/continuity/NEW_CHAT_PROMPT.md"
+    "new_chat_prompt": "docs/continuity/NEW_CHAT_PROMPT.md",
+    "channel": "python3 tools/continuity.py channel",
+    "recover": "python3 tools/continuity.py recover",
+    "channel_index": "docs/continuity/channels/CHANNEL_INDEX.json",
+    "channel_start": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
+    "recovery_file": "RECOVER.md"
   },
   "delivery_evidence": {
     "pack_commit": "a8596fa869df50593270ed53b39a11f2bc8ca0e0",
@@ -119,6 +138,41 @@
       "render --check",
       "git diff --check"
     ],
-    "note": "Final state commit follows this checkpoint; commit-pinned links are in the final chat handoff."
+    "note": "Final state commit 4b3574c1c936e47cf2a68d719bae0e9fe6a2380a follows the pack checkpoint; the Monarch Cam channel OS commit and its CI run are in the final chat handoff."
+  },
+  "active_channel": "monarch-cam",
+  "infrastructure_task": {
+    "id": "repo-continuity-archive-v1",
+    "title": "Repo-first continuation archive",
+    "status": "delivered",
+    "space": "ops",
+    "evidence_level": "repo_evidence",
+    "current_step": "Pack commit a8596fa869df50593270ed53b39a11f2bc8ca0e0 and exact-state commit 4b3574c1c936e47cf2a68d719bae0e9fe6a2380a pushed; CI 42499227414 and 42499591071 succeeded.",
+    "next_action": "If real full Arena chat exports are supplied, import them via import-chat and update COVERAGE/STATE/GAPS; keep unresolved V6 separate."
+  },
+  "channel_context": {
+    "owner_statement": "Monarch Cam is one of our 3 channels.",
+    "channel": "Monarch Cam",
+    "handle": "@Monarch-Cam",
+    "youtube_url": "https://www.youtube.com/@Monarch-Cam",
+    "space": "yt-automation",
+    "production_root": "production/monarch-cam/",
+    "entrypoint": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
+    "capsule": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
+    "reconciliation_status": "explicit_gap",
+    "repo_config_note": "config/channels.json still lists Monarch Lab, Mindful Momentum, Curious Miles; preserve legacy slots until owner explicitly renames one."
+  },
+  "channel_workflow": {
+    "resume": "python3 tools/continuity.py resume",
+    "channel": "python3 tools/continuity.py channel",
+    "recover": "python3 tools/continuity.py recover",
+    "root_shortcut": "MONARCH_CAM.md",
+    "recovery_file": "RECOVER.md",
+    "index": "docs/continuity/channels/CHANNEL_INDEX.json",
+    "state": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
+    "playbook": "docs/continuity/channels/monarch-cam/PLAYBOOK.md",
+    "workflow": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
+    "next_action": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
+    "note": "A new chat must not need the user to explain the channel, workflow, style, decisions or next action."
   }
 }

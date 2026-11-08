@@ -51,3 +51,9 @@ These gaps are explicit so no new chat is misled into claiming “everything”.
 5. For the video task, build a separate V6 package from verified rights, visible hook/list geometry and native audio; do not modify V5.
 
 Until then, describe the archive as **“the most complete repo-backed continuation possible from available evidence, with exact gaps marked”**, not “all chats preserved”.
+
+## Channel-config reconciliation gap
+
+- Owner statement: **Monarch Cam is one of the three channels**. `config/channels.json` still lists three legacy publishing slots: Monarch Lab, Mindful Momentum, Curious Miles. Monarch Cam has its own `@Monarch-Cam` YouTube channel and `production/monarch-cam/` tree.
+- Continuity now treats Monarch Cam as the active channel workstream and preserves the legacy config unchanged. Do **not** claim the config is reconciled, do not delete/rename legacy slots, and do not invent a fourth config slot. Exact mapping requires an explicit owner instruction.
+- A workspace can also be restored to an old commit without continuity files. `RECOVER.md` / `recover` mitigate this; they do not prove automatic live sync or replace real Arena chat exports.

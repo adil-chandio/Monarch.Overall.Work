@@ -1,6 +1,6 @@
 # Session index
 
-Sessions indexed: 28
+Sessions indexed: 29
 
 ## arena-390292fc-current — Current chat — repo-first continuity pack
 
@@ -341,3 +341,25 @@ Sessions indexed: 28
 - Evidence: `file` — `docs/continuity/chat_exports/sources/EMS-20261011-001-archive/raw/EMS-20261011-001-history-archive.tar.gz` — raw bytes
 - Evidence: `file` — `docs/continuity/chat_exports/sources/EMS-20261011-001-archive/normalized.jsonl` — derived normalized messages
 - Evidence: `file` — `docs/continuity/chat_exports/sources/EMS-20261011-001-archive/metadata.json` — import metadata
+
+## monarch-cam-channel-os — Monarch Cam channel workflow — easy continuation
+
+- Status: `active`
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Branch / source: `arena/390292fc-monarch-overall-work`
+- Session file: `docs/continuity/channels/monarch-cam/00_START_HERE.md`
+- Notes: Self-describing active channel workstream; no user re-explanation required. Legacy 3-slot config mismatch is explicit.
+
+- Evidence: `file` — `docs/continuity/channels/CHANNEL_INDEX.json` — channel index
+- Evidence: `file` — `docs/continuity/channels/monarch-cam/CHANNEL_STATE.json` — machine state
+- Evidence: `file` — `docs/continuity/channels/monarch-cam/EASY_RESUME.md` — copy-paste capsule
+- Evidence: `file` — `docs/continuity/channels/monarch-cam/PLAYBOOK.md` — channel playbook
+- Evidence: `file` — `docs/continuity/channels/monarch-cam/WORKFLOW.md` — production workflow
+- Evidence: `file` — `docs/continuity/channels/monarch-cam/NEXT_ACTION.md` — exact next action
+- Evidence: `file` — `docs/continuity/channels/monarch-cam/REJECTIONS.md` — rejections/dead ends
+- Evidence: `file` — `docs/continuity/channels/monarch-cam/EVIDENCE.md` — commits/runs/hashes
+- Evidence: `file` — `docs/MONARCH_CAM_LIVE_FORENSIC_AUDIT_2026-11-05.md` — live audit
+- Evidence: `file` — `docs/MONARCH_CAM_30_DAY_GROWTH_REVENUE_PLAN_2026-11.md` — 30-day plan
+- Evidence: `file` — `docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md` — rights plan
+- Evidence: `file` — `config/channels.json` — legacy config slots

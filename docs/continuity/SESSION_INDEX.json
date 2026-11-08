@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T15:57:06Z",
+  "generated_at": "2026-11-08T17:50:20Z",
   "note": "Sessions include partial screenshot/session-memory reconstructions and imported raw sources. Evidence level is never promoted to verbatim unless a real export exists.",
   "sessions": [
     {
@@ -636,6 +636,78 @@
           "kind": "file",
           "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/metadata.json",
           "note": "import metadata"
+        }
+      ]
+    },
+    {
+      "id": "monarch-cam-channel-os",
+      "title": "Monarch Cam channel workflow — easy continuation",
+      "status": "active",
+      "space": "yt-automation",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
+      "notes": "Self-describing active channel workstream; no user re-explanation required. Legacy 3-slot config mismatch is explicit.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/CHANNEL_INDEX.json",
+          "note": "channel index"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
+          "note": "machine state"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
+          "note": "copy-paste capsule"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/monarch-cam/PLAYBOOK.md",
+          "note": "channel playbook"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
+          "note": "production workflow"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
+          "note": "exact next action"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/monarch-cam/REJECTIONS.md",
+          "note": "rejections/dead ends"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/channels/monarch-cam/EVIDENCE.md",
+          "note": "commits/runs/hashes"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/MONARCH_CAM_LIVE_FORENSIC_AUDIT_2026-11-05.md",
+          "note": "live audit"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/MONARCH_CAM_30_DAY_GROWTH_REVENUE_PLAN_2026-11.md",
+          "note": "30-day plan"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md",
+          "note": "rights plan"
+        },
+        {
+          "kind": "file",
+          "ref": "config/channels.json",
+          "note": "legacy config slots"
         }
       ]
     }

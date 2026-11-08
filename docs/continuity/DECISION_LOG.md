@@ -145,3 +145,11 @@ Append-only. Each decision carries its evidence level; rejected options stay vis
 - Rejected: Edit STATE.json, COVERAGE.json, SESSION_INDEX.json and append-only ledgers; run render
 - Evidence level: `repo_evidence`
 - Refs: `docs/continuity/UPDATE_PROTOCOL.md`
+
+## `2026-11-08T17:50:20Z` · dec-019-monarch-cam-active-channel
+
+- Decision: Treat Monarch Cam as the active channel workstream, expose a one-command channel resume/capsule/playbook/workflow, and preserve the three legacy config/channels.json slots as an explicit reconciliation gap.
+- Why: Owner said Monarch Cam is one of the 3 channels and a new chat must already know the workflow without re-explanation; config still lists Monarch Lab, Mindful Momentum, Curious Miles.
+- Rejected: Asking the user to explain, renaming/deleting legacy config slots, inventing a fourth config slot, re-presenting rejected V4/V5 as final.
+- Evidence level: `repo_evidence`
+- Refs: `docs/continuity/channels/CHANNEL_INDEX.json`, `docs/continuity/channels/monarch-cam/00_START_HERE.md`, `config/channels.json`, `AGENTS.md`, `docs/continuity/NEW_CHAT_PROMPT.md`

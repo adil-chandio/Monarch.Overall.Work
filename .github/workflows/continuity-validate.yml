@@ -5,17 +5,27 @@ on:
     paths:
       - 'AGENTS.md'
       - 'README.md'
+      - 'RECOVER.md'
+      - 'MONARCH_CAM.md'
       - 'config/continuity.json'
+      - 'config/channels.json'
       - 'tools/continuity.py'
       - 'docs/continuity/**'
+      - 'docs/MONARCH_CAM_*.md'
+      - 'production/monarch-cam/short_ranking_raw_v5/**'
       - '.github/workflows/continuity-validate.yml'
   pull_request:
     paths:
       - 'AGENTS.md'
       - 'README.md'
+      - 'RECOVER.md'
+      - 'MONARCH_CAM.md'
       - 'config/continuity.json'
+      - 'config/channels.json'
       - 'tools/continuity.py'
       - 'docs/continuity/**'
+      - 'docs/MONARCH_CAM_*.md'
+      - 'production/monarch-cam/short_ranking_raw_v5/**'
       - '.github/workflows/continuity-validate.yml'
   workflow_dispatch:
 
@@ -39,6 +49,9 @@ jobs:
 
       - name: Validate continuity archive
         run: python3 tools/continuity.py validate
+
+      - name: Verify active channel capsule renders
+        run: python3 tools/continuity.py channel
 
       - name: Check generated ledgers are current
         run: python3 tools/continuity.py render --check

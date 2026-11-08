@@ -81,3 +81,7 @@ This file is the human-readable map of every known work level. Exact source file
 - Tooling: `tools/continuity.py` (`resume`, `validate`, `refresh`, `render`, `import-chat`, `checkpoint`, `bootstrap`) and `.github/workflows/continuity-validate.yml`.
 - Root `AGENTS.md` and README continuity section make the archive discoverable to new agents.
 - **Honest limit:** no complete Arena chat export/JSON is available in the workspace or connected apps. One partial older transcript is imported; everything else is `repo_evidence`, `connected_app_record`, `screenshot_only`, `session_memory`, or an explicit `gap`. Exact all-chat preservation becomes true only after real exports are imported.
+
+## Channel continuity OS level
+
+Monarch Cam now has a dedicated channel OS: `channels/CHANNEL_INDEX.json`, `channels/monarch-cam/00_START_HERE.md`, `CHANNEL_STATE.json`, `PLAYBOOK.md`, `WORKFLOW.md`, `NEXT_ACTION.md`, `EASY_RESUME.md`, `REJECTIONS.md`, `EVIDENCE.md`, root `MONARCH_CAM.md` and `RECOVER.md`, plus `resume`, `channel` and `recover` commands. This is workflow infrastructure, not a V6 video package and not creative acceptance.

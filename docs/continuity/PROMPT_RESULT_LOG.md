@@ -109,3 +109,12 @@ Exact wording is preserved where an export or screenshot shows it; reconstructed
 - Assistant result: GAPS.md, COVERAGE.json honesty flags and validator enforce explicit gaps.
 - Consequence: This is the archive's own policy, not a user prompt; it prevents false completion claims.
 - Refs: `docs/continuity/GAPS.md`
+
+## `2026-11-08T17:50:20Z` · pr-013-channel-easy-resume · constraint
+
+- Evidence level: `session_memory`
+- Exact-text confidence: `partial_user_phrase_from_session_memory`
+- User prompt: Aby Tum khud karo Jo bhi Jese bu Karke ha mujhe mat bolo koi way nikalo ache se rakho ... new chat me ... Batana na parhe ke yeh aise Karna ha ... usko sab pata hona chaiye ... yeh hamare 3 channels Mese 1 ha monarch Cam. Channel to ache se easy Karke asan Karke sh kuch karo jese easily hojaye or koi mushkil bhi na aye
+- Assistant result: Recovered a stale checkout to 4b3574c1, then built the Monarch Cam channel OS: active channel state, one-file start, playbook, production workflow, exact next action, copy-paste capsule, rejection/dead-end record, evidence ledger, root shortcut, stale-checkout recovery, resume/channel/recover commands, AGENTS/README/START_HERE/NEW_CHAT_PROMPT/CI wiring and an explicit config reconciliation gap.
+- Consequence: A new chat inherits the Monarch Cam workflow from the repo without the user explaining a method. V4/V5 remain rejected; no V6 or acceptance claim is invented.
+- Refs: `docs/continuity/channels/monarch-cam/00_START_HERE.md`, `docs/continuity/channels/monarch-cam/EASY_RESUME.md`, `docs/continuity/STATE.json`, `RECOVER.md`, `MONARCH_CAM.md`

@@ -73,3 +73,11 @@ This is the regression memory. Failed approaches stay visible so a new chat does
 - Supabase `public.saved_conversations` has 0 rows; Dropbox/Gmail/Vercel/Google Docs searches found no chat export.
 - `EMS-20261011-001-history-archive.tar.gz` contains a real `CHAT_TRANSCRIPT.jsonl`, but it has only 3 user messages and no assistant messages; `JOURNAL.jsonl` is a hash-chained event log, not a transcript. Mark both `partial`.
 - Do not fabricate “everything” or claim exact all-chat archive until real exports are imported. `COVERAGE.json`, `GAPS.md` and `STATE.json.claims` exist to enforce this.
+
+## Stale checkout / missing continuity files
+
+- **Problem:** the workspace was restored to old commit `ac3a5295903b1a625acd4923882d68064204128a` with a modified `.gitignore` and untracked V3/dance-clean drafts, while `AGENTS.md`, `tools/continuity.py` and `docs/continuity/` were missing. This is the exact "restarts from the beginning" failure the user complained about.
+- **Cause:** local snapshot stale relative to remote branch `arena/390292fc-monarch-overall-work`; remote head was `4b3574c1c936e47cf2a68d719bae0e9fe6a2380a`.
+- **Fix:** backed up 7 untracked paths plus `.gitignore` diff to `/tmp/arena_stale_backup_1794159448`, restored `.gitignore`, ran `git clean -fd -e deliverables`, used explicit-refspec `git fetch`, then `git merge --ff-only` to `4b3574c1`. `python3 tools/continuity.py validate` passed.
+- **Permanent mitigation:** root `RECOVER.md`, `python3 tools/continuity.py recover`, root `MONARCH_CAM.md`, and active-channel capsule embedded in `resume`/`bootstrap`. CI also runs `python3 tools/continuity.py channel`.
+- **Standing rule:** never restart work from a stale checkout; recover the branch head first. Do not delete `deliverables/` or `.git`.

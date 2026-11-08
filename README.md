@@ -18,7 +18,11 @@ If a chat is stuck, refreshed, or replaced, **do not ask the user to re-explain 
 python3 tools/continuity.py resume
 ```
 
-Then follow the commit-pinned bootstrap prompt it prints. The continuity archive is in **[docs/continuity/](./docs/continuity/00_START_HERE.md)**: state ledger, session index, exact prompts/results, decisions, problems/fixes, evidence levels, screenshots, GitHub history, connected-app records, raw chat imports, validator, and CI.
+Then follow the commit-pinned bootstrap prompt it prints. It **automatically embeds the active Monarch Cam channel capsule**, so a new chat does not need the channel or workflow explained again. The continuity archive is in **[docs/continuity/](./docs/continuity/00_START_HERE.md)**: state ledger, session index, exact prompts/results, decisions, problems/fixes, evidence levels, screenshots, GitHub history, connected-app records, raw chat imports, validator, and CI.
+
+- **Monarch Cam one-command start:** `python3 tools/continuity.py channel` · [channel 00_START_HERE](./docs/continuity/channels/monarch-cam/00_START_HERE.md) · [root shortcut](./MONARCH_CAM.md)
+- **Stale checkout:** if continuity files are missing, use [RECOVER.md](./RECOVER.md) or `python3 tools/continuity.py recover`.
+- Three-channel config mismatch is recorded honestly: owner says Monarch Cam is one of the three channels; `config/channels.json` still carries three legacy slots. Do not rename/delete them without explicit instruction.
 
 - Copy-paste prompt: [docs/continuity/NEW_CHAT_PROMPT.md](./docs/continuity/NEW_CHAT_PROMPT.md)
 - Machine state: [docs/continuity/STATE.json](./docs/continuity/STATE.json)

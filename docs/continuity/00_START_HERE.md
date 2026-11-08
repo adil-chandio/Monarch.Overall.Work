@@ -8,7 +8,7 @@
 python3 tools/continuity.py resume
 ```
 
-This validates the archive and prints the exact copy-paste bootstrap prompt with the current HEAD pinned. If validation fails, fix the archive before doing new production work.
+This validates the archive and prints the exact copy-paste bootstrap prompt with the current HEAD pinned **and the active Monarch Cam channel capsule embedded**. If validation fails, fix the archive before doing new production work. If continuity files are missing, use root `RECOVER.md` / `python3 tools/continuity.py recover` first.
 
 ## Current snapshot
 
@@ -16,22 +16,24 @@ This validates the archive and prints the exact copy-paste bootstrap prompt with
 - Active branch: `arena/390292fc-monarch-overall-work`
 - Head at capture: `393edd658e8336780e1cd4aea4cf5b5261c2d1e3`
 - Five spaces: `yt-automation`, `monarch-studio`, `personal-brand`, `portfolio`, `ops` (`config/spaces.json`).
-- Three channels: Monarch Lab, Mindful Momentum, Curious Miles (`config/channels.json`).
-- Active continuity task: repo-backed continuation archive implemented, validated and delivered; **real Arena chat exports still need to be dropped into `chat_exports/inbox/` and imported** to close the exactness gap. Pack commit `a8596fa869df50593270ed53b39a11f2bc8ca0e0`, CI run `42499227414` succeeded.
+- Legacy three config slots: Monarch Lab, Mindful Momentum, Curious Miles (`config/channels.json`). Owner says **Monarch Cam is one of the three channels**; Monarch Cam is the active channel workstream with its own `@Monarch-Cam` channel and `production/monarch-cam/` tree. The mismatch is an explicit gap; legacy slots are preserved.
+- **Active channel:** Monarch Cam — [channel 00_START_HERE](./channels/monarch-cam/00_START_HERE.md), `python3 tools/continuity.py channel`, [root shortcut](../../MONARCH_CAM.md).
+- Active running task: Monarch Cam channel workflow is ready for easy continuation; a new chat inherits state/playbook/workflow/next action without user explanation. Infrastructure continuity archive delivered at `4b3574c1c936e47cf2a68d719bae0e9fe6a2380a`; **real Arena chat exports still need to be dropped into `chat_exports/inbox/` and imported** to close the exactness gap. Pack commit `a8596fa869df50593270ed53b39a11f2bc8ca0e0`, CI runs `42499227414` and `42499591071` succeeded.
 - Parallel video task: V4 and V5 ranking Shorts are **creatively rejected**. No V6 package, workflow, rights-cleared funny social-platform clip set, renderer, QC contract or MP4 exists. Do not re-present V4/V5 as final.
 
 ## Exact reading order
 
-1. Root `AGENTS.md`.
-2. This file, then `NEW_CHAT_PROMPT.md`.
-3. `STATE.json` / `STATE.md`.
-4. `MINDSET.md`, `WORK_LEVELS.md`.
-5. `DECISION_LOG.jsonl`, `PROMPT_RESULT_LOG.jsonl`, `PROBLEMS_FIXES.md`.
-6. `COVERAGE.json`, `GAPS.md`.
-7. `SESSION_INDEX.json` and the active `sessions/*.md` file.
-8. `EVENTS.jsonl` tail / `TIMELINE.md`.
-9. `EVIDENCE_MANIFEST.json` and the linked evidence files.
-10. `config/spaces.json`, `config/channels.json`, `config/repos.json`, `docs/architecture/`.
+1. `channels/monarch-cam/00_START_HERE.md`, `CHANNEL_STATE.json`, `NEXT_ACTION.md`, `PLAYBOOK.md`, `WORKFLOW.md`, `EASY_RESUME.md`.
+2. Root `AGENTS.md`, `RECOVER.md`, `MONARCH_CAM.md`.
+3. This file, then `NEW_CHAT_PROMPT.md`.
+4. `STATE.json` / `STATE.md`, `CHANNEL_INDEX.md`.
+5. `MINDSET.md`, `WORK_LEVELS.md`.
+6. `DECISION_LOG.jsonl`, `PROMPT_RESULT_LOG.jsonl`, `PROBLEMS_FIXES.md`.
+7. `COVERAGE.json`, `GAPS.md`.
+8. `SESSION_INDEX.json` and the active session file.
+9. `EVENTS.jsonl` tail / `TIMELINE.md`.
+10. `EVIDENCE_MANIFEST.json` and the linked evidence files.
+11. `config/spaces.json`, `config/channels.json`, `config/repos.json`, `docs/architecture/`.
 
 ## What must not happen
 
