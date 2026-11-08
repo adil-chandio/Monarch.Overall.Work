@@ -48,7 +48,9 @@ try:
     receipt['gpu']=torch.cuda.get_device_name(0);receipt['torch']=torch.__version__
     receipt['native_bf16']=bool(torch.cuda.is_bf16_supported());save()
     print('GPU:',receipt['gpu'],'torch:',receipt['torch'],'native bf16:',receipt['native_bf16'],flush=True)
-    comfy=work/'ComfyUI'; custom=comfy/'custom_nodes'
+    # Keep the full framework and downloaded models out of Kaggle's output
+    # directory so that artifact listing stays small and recoverable.
+    comfy=pathlib.Path('/tmp/monarch-onetoall-ComfyUI'); custom=comfy/'custom_nodes'
     receipt['revisions']['ComfyUI']=clone('https://github.com/Comfy-Org/ComfyUI.git',comfy,'6dd3c67427d65751d42f2dbc0c3db3d829c697de')
     receipt['revisions']['wrapper']=clone('https://github.com/kijai/ComfyUI-WanVideoWrapper.git',custom/'ComfyUI-WanVideoWrapper','088128b224242e110d3906c6750e9a3a348a659b')
     receipt['revisions']['preprocessor']=clone('https://github.com/kijai/ComfyUI-WanAnimatePreprocess.git',custom/'ComfyUI-WanAnimatePreprocess','0e0b6a2a555625acf4d4aefb780e27d06937132f')

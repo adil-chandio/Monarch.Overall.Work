@@ -12,15 +12,19 @@ from kaggle.api.kaggle_api_extended import KaggleApi, ApiListKernelSessionOutput
 owner=os.environ['KAGGLE_USERNAME']; slug='monarch-onetoall-run-42511685428'
 out=pathlib.Path('production/mafia-temple/onetoall-pilot-output');out.mkdir(exist_ok=True)
 names={'onetoall-running-pilot.mp4','onetoall-receipt.json','pose-audit.json','pose-audit.jpg','warped-ref-audit.jpg','output-metadata.json'}
-found=set();token=None; page=0; retries=0
+found=set();token=None; page=0; retries=0; page_size=100
 api=KaggleApi();api.authenticate()
 while True:
     try:
         with api.build_kaggle_client() as client:
-            req=ApiListKernelSessionOutputRequest();req.user_name=owner;req.kernel_slug=slug;req.page_size=1000
+            req=ApiListKernelSessionOutputRequest();req.user_name=owner;req.kernel_slug=slug;req.page_size=page_size
             if token: req.page_token=token
             response=client.kernels.kernels_api_client.list_kernel_session_output(req)
     except requests.HTTPError as exc:
+        if exc.response is not None and exc.response.status_code==400 and page==0 and page_size>20:
+            page_size=20
+            print('Server rejected page size; retrying with the standard 20',flush=True)
+            continue
         if exc.response is None or exc.response.status_code!=429 or retries>=8: raise
         delay=min(600,30*(2**retries));retries+=1
         print(f'Output-list rate limit; retrying the same page in {delay}s',flush=True);time.sleep(delay);continue
