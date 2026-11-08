@@ -7,4 +7,4 @@ This is a proposed **research mix**, not an approved film soundtrack. Its cue ti
 - Rain by **Kresiek The Furry**, https://opengameart.org/content/amb-rain-loop-1 — source page lists CC0 1.0. Copy `assets/audio/amb/rain.wav` in the same pinned `blocky-stories` repo, shortened and filtered there.
 - Wind by **Thimras**, https://opengameart.org/content/park-ambiences — source page lists CC0 1.0. Copy `assets/audio/amb/wind.wav` in the same pinned `blocky-stories` repo, shortened and filtered there.
 
-All source pages and repo manifests were reviewed on 2026-11-08. CC0 is separate from the research-only visual model and driver restrictions.
+All listed source pages and the repository manifests were reviewed during this research. CC0 is separate from the research-only visual model and driver restrictions.
