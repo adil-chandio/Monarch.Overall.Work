@@ -1,3 +1,26 @@
+# Current status — ten actual editions acquired; full perceptual study still incomplete
+
+**Production remains STOPPED. The old “0 newly downloaded sources” blocker below is historical, not the current corpus status.**
+
+A successful alternate-platform acquisition route has now supplied **10 actual MP4s**: nine corroborated creator-account X editions and one directly publisher-linked Facebook edition. This is a different cohort from the ten canonical YouTube IDs below, not proof of those YouTube bytes or project files.
+
+- Acquisition run: https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42438157062
+- Ten authenticated local restorations; **74,458,545 plaintext bytes**. Both AV tracks decoded, source/cipher hashes verified. Public transfer is encrypted; private key and plaintext source footage remain local/ignored.
+- **9,772 decoded frames** indexed numerically; **342 image positions on 21 sheets** opened, plus **12 native stills**.
+- **332 second bins** now carry explicitly sampled visual notes, exact sample PTS/frame number, frame coverage and mixed-track RMS.
+- **0/10 complete manual frame/continuous-audio reviews**. Do not equate full decode, 1Hz sampling or loudness measurements with that requested standard.
+- Main dossier: [actual-editions-evidence/FIRST-PASS.md](actual-editions-evidence/FIRST-PASS.md).
+- Persistent measured ledgers and per-case provenance: [actual-editions-evidence/](actual-editions-evidence/).
+- X identity is corroborated, not a primary Linktree cross-link; Facebook Jerboa has the primary publisher link. Exact source-platform resolutions vary from 406×720 to 1080×1920.
+- New-cohort view-count qualification and exact YouTube cut equivalence are not established. Earlier cohort API view counts must not be reused for this batch.
+- No new production, narration, music, film revision or YouTube publication performed.
+
+## Historical probes and earlier fixed YouTube cohort — preserved for provenance
+
+Everything below records earlier tests and blockers for that older cohort. Its old present-tense status/next-action text is superseded by the current section above.
+
+---
+
 # Zack D. Films — actual-footage access status
 
 ## Seedha result

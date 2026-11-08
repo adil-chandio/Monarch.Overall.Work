@@ -15,7 +15,7 @@ def main():
   source=a.sources/row['file'];folder=a.out/row['key'];folder.mkdir(parents=True,exist_ok=True)
   if hashlib.file_digest(source.open('rb'),'sha256').hexdigest()!=row['sha256']:raise ValueError('Source hash changed')
   # showinfo precedes scaling: timestamps/indices describe actual decoded source frames.
-  p=run([FF,'-hide_banner','-i',str(source),'-map','0:v:0','-vf','showinfo,scale=90:160,format=rgb24','-fps_mode','passthrough','-an','-f','rawvideo','-'])
+  p=run([FF,'-y','-hide_banner','-i',str(source),'-map','0:v:0','-vf','showinfo,scale=90:160,format=rgb24','-fps_mode','passthrough','-an','-f','rawvideo','-'])
   log=p.stderr.decode('utf-8','replace');(folder/'full-decode-timestamps.log').write_text(log)
   pts=[float(x) for x in re.findall(r' n:\s*\d+\s+pts:\s*[-\d]+\s+pts_time:([-.\d]+)',log)]
   rgb=np.frombuffer(p.stdout,dtype=np.uint8).reshape(-1,160,90,3)
@@ -29,7 +29,7 @@ def main():
   # Exact frame-number extraction. One-second samples are not a claim of all-frame visual review.
   sample_ids=sorted(set([min(len(pts)-1,int(np.searchsorted(pts,start+t))) for t in range(math.ceil(duration))]+[len(pts)-1]))
   select='+'.join('eq(n,'+str(i)+')' for i in sample_ids)
-  run([FF,'-v','error','-i',str(source),'-vf',"select='"+select+"'",'-fps_mode','passthrough','-q:v','2',str(folder/'native-sample-%03d.jpg')])
+  run([FF,'-y','-v','error','-i',str(source),'-vf',"select='"+select+"'",'-fps_mode','passthrough','-q:v','2',str(folder/'native-sample-%03d.jpg')])
   gridpaths=[]
   for block in range(0,len(sample_ids),20):
    ids=sample_ids[block:block+20];board=Image.new('RGB',(1000,4*382),'#15222c');draw=ImageDraw.Draw(board)
@@ -37,7 +37,7 @@ def main():
     im=Image.open(folder/f'native-sample-{block+j+1:03d}.jpg').convert('RGB');im.thumbnail((200,356))
     x=(j%5)*200;y=(j//5)*382;board.paste(im,(x,y));draw.text((x+3,y+358),f'{pts[idx]-start:.3f}s f{idx}',fill='white')
    filename=f'timeline-{block//20+1:02d}.jpg';board.save(folder/filename,quality=90);gridpaths.append(filename)
-  audio=run([FF,'-v','error','-i',str(source),'-vn','-ac','2','-ar','48000','-f','f32le','-']).stdout
+  audio=run([FF,'-y','-v','error','-i',str(source),'-vn','-ac','2','-ar','48000','-f','f32le','-']).stdout
   (folder/'mixed-audio.f32').write_bytes(audio);pcm=np.frombuffer(audio,dtype='<f4').reshape(-1,2)
   with (folder/'second-by-second.csv').open('w',newline='') as f:
    w=csv.writer(f);w.writerow(['start_relative_seconds','end_relative_seconds','first_frame','last_frame','frame_count','mixed_audio_rms_dbfs','visual_review_status','audio_listening_status'])
@@ -46,10 +46,10 @@ def main():
     stop=min(sec+1,duration);ids=np.where((rel>=sec)&(rel<stop))[0];segment=pcm[round(sec*48000):round(stop*48000)].astype(np.float64)
     rms=20*math.log10(max(float(np.sqrt(np.mean(segment*segment))),1e-12)) if len(segment) else None
     w.writerow([sec,stop,int(ids[0]) if len(ids) else '',int(ids[-1]) if len(ids) else '',len(ids),rms,'not_yet_manually_annotated','not_perceptually_listened'])
-  p=subprocess.run([FF,'-hide_banner','-i',str(source),'-vn','-af','loudnorm=I=-16:TP=-2:LRA=9:print_format=json','-f','null','-'],capture_output=True,text=True,timeout=160,check=True)
+  p=subprocess.run([FF,'-y','-hide_banner','-i',str(source),'-vn','-af','loudnorm=I=-16:TP=-2:LRA=9:print_format=json','-f','null','-'],capture_output=True,text=True,timeout=160,check=True)
   levels=json.loads(p.stderr[p.stderr.rfind('{'):p.stderr.rfind('}')+1])
   threshold=max(12,float(np.median(delta)+4*np.median(np.abs(delta-np.median(delta)))))
-  candidates=[{'frame':i,'time_seconds':pts[i]-start,'mean_change':float(delta[i])} for i in np.argsort(delta)[::-1][:24] if delta[i]>threshold]
+  candidates=[{'frame':int(i),'time_seconds':pts[i]-start,'mean_change':float(delta[i])} for i in np.argsort(delta)[::-1][:24] if delta[i]>threshold]
   candidates.sort(key=lambda x:x['frame'])
   summary={**row,'decoded_frame_count':len(pts),'source_video_seconds_from_pts':duration,'source_first_video_pts':start,'source_last_video_pts':pts[-1],
    'decoded_audio_seconds':len(pcm)/48000,'native_frame_size_from_decode_log':re.search(r' s:(\d+x\d+)',log).group(1),
