@@ -87,5 +87,5 @@ This is the regression memory. Failed approaches stay visible so a new chat does
 - Failed run: `42516794773`, job `128841464088`, step `Nine web audio gates`, exit code `2`.
 - Cause: the V6 workflow invoked `python -m showreel.audio_qc.gates` with no positional audio path. `showreel/audio_qc/gates.py main()` returns `2` when no args are supplied. The step also relied on env vars that the module does not read.
 - Fix: install `scipy` in the V6 Python-tools step and invoke the gates with the delivered V6 MP4 path, `--profile web`, `--json .../audio_qc.json`, and `tee .../audio_qc.log`, matching the V5 workflow. Add `audio_qc.log` to the V6 artifact list.
-- V5/V4/V3 packages remain untouched. No human creative acceptance is claimed.
+- V5/V4/V3 packages remain untouched. Re-run `42517651544` succeeded after the fix; V6 MP4, 49/49 technical checks, 9/9 audio gates, safe-area and social-origin checks were committed by workflow commit `5559b52`. No human creative acceptance is claimed.
 

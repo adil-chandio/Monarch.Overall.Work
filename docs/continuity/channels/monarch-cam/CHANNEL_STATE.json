@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v6_ci_gate_step_fix_pending",
+  "status": "v6_technical_build_complete",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -16,12 +16,12 @@
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
     "status": "ready",
-    "next_action": "Push the V6 audio-gate CLI fix and scipy dependency, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance or approval. V5 stays untouched."
+    "next_action": "Open the V6 MP4 and qc_summary.json; perform a human full-motion/native-audio review. Do not claim creative acceptance or approval. V5 stays untouched."
   },
   "parallel_unresolved": {
     "id": "monarch-cam-v6-intent",
     "title": "Next-level full-motion raw funny-animal ranking Short",
-    "status": "v6_ci_gate_step_fix_pending",
+    "status": "v6_technical_build_complete",
     "no_v6_files": false,
     "v5_untouched": true
   },
@@ -88,6 +88,26 @@
     "No complete Arena chat export/JSON.",
     "No live bidirectional connected-app sync or proven hourly automation.",
     "Studio screenshots for latest long and three recent Shorts are still needed for bottleneck analysis.",
-    "V6 technical package configured with seven per-title CC0 Commons originals; no rights-verified real social-platform reposts; MP4/run pending CI."
-  ]
+    "V6 technical build complete with seven per-title CC0 Commons originals; no rights-verified real social-platform reposts; human full-motion/native-audio review and creative acceptance are not recorded."
+  ],
+  "v6_deliverable": {
+    "file": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4",
+    "bytes": 23724424,
+    "sha256": "96427061b1f53d493133f5455a05680ab2d49a5731ea47222dfc1409b3914e17",
+    "duration_seconds": 60.0,
+    "resolution": "1080x1920",
+    "fps": 30,
+    "frames": 1800,
+    "ci_run": 42517651544,
+    "workflow_commit": "5559b52",
+    "technical_checks": "49/49 passed",
+    "audio_gates": "9/9 passed",
+    "safe_area_check": true,
+    "social_origin_check": true,
+    "full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false,
+    "note": "Technical build for human review; V5 untouched; no creative acceptance or audience outcome."
+  }
 }

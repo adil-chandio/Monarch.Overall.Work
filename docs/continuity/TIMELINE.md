@@ -455,3 +455,13 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Details: Run 42516794773 failed at Nine web audio gates with exit code 2 because the workflow invoked showreel.audio_qc.gates with no CLI args. Added scipy to Python tools, changed the step to pass the delivered V6 MP4 with --profile web --json review/audio_qc.json and tee audio_qc.log, and added the log to artifacts. V6 successful run/MP4 still pending.
 - Ref: `.github/workflows/monarch-cam-short-ranking-raw-v6.yml`
 - Ref: `docs/continuity/PROBLEMS_FIXES.md`
+
+## `2026-11-08T20:07:37Z` · evt-059-monarch-cam-v6-technical-build-complete · result
+
+- Title: V6 60s Short built and technical QC passed
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: CI run 42517651544 succeeded on arena/2b012328-monarch-overall-work; workflow committed 5559b52 with the V6 MP4, contact sheets, rights/source/audio ledgers, layout manifest, social-origin ledger, technical_qc.json and qc_summary.json. MP4 23,724,424 bytes, SHA-256 96427061b1f53d493133f5455a05680ab2d49a5731ea47222dfc1409b3914e17, 60s/1080x1920/30fps/1800 frames. 49/49 technical checks, 9/9 audio gates, safe-area and social-origin checks passed. V5 untouched; no human full-motion/native-audio listening, creative acceptance, sign-off or audience result.
+- Ref: `deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4`
+- Ref: `production/monarch-cam/short_ranking_raw_v6/review/qc_summary.json`
+- Ref: `production/monarch-cam/short_ranking_raw_v6/review/technical_qc.json`

@@ -37,8 +37,8 @@ This archive is honest about evidence strength. A screenshot is never promoted t
     "channel_files": 10,
     "channels_indexed": 4,
     "decisions": 19,
-    "events": 54,
-    "manifest_files": 342,
+    "events": 55,
+    "manifest_files": 358,
     "prompt_results": 13,
     "screenshots": 29,
     "sessions_indexed": 29
@@ -61,7 +61,7 @@ This archive is honest about evidence strength. A screenshot is never promoted t
     "Current chat/sidebar exact turns not programmatically exportable.",
     "EMS transcript is partial and has no assistant turns.",
     "Connected apps are timestamped snapshots, not live mirrors.",
-    "V6 technical package configured with seven per-title CC0 Commons originals; real social-platform reposts remain unverified; MP4/run pending CI.",
+    "V6 technical build complete with seven per-title CC0 Commons originals; real social-platform reposts remain unverified; human full-motion/native-audio review and creative acceptance are not recorded.",
     "Human listening/approval/sign-off not recorded.",
     "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
     "Stale checkout can restore an old commit without continuity files; RECOVER.md / recover are mitigations, not live sync."

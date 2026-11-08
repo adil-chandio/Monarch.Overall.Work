@@ -34,9 +34,9 @@
 
 ## V6 is a technical build, not acceptance
 
-- A separate V6 package is configured with seven per-title CC0 Commons originals, corrected centered hook / left `1.–7.` plates, right UI, bottom bar, safe-area and social-origin QC, renderer and workflow.
+- A separate V6 package is built with seven per-title CC0 Commons originals, corrected centered hook / left `1.–7.` plates, right UI, bottom bar, safe-area and social-origin QC, renderer and workflow. CI run `42517651544` succeeded.
 - V6 does **not** use unverified real social-platform reposts; the earlier `NEXT_ACTION.md` requirement for social-platform clips is not claimed resolved.
-- V6 MP4 and CI run are pending. Do not claim V6 is built, accepted, approved, watched in full motion, listened to by a human, or proven with audience results until a real record exists.
+- V6 MP4 and CI run exist. Do not claim V6 is accepted, approved, watched in full motion, listened to by a human, or proven with audience results until a real record exists.
 - V5 is untouched and V4/V5 remain rejected.
 
 ## Channel-strategy dead ends

@@ -2,7 +2,7 @@
 
 ## Status
 
-V6 is a **separate technical package**. V4 and V5 were rejected; V5 is untouched. This document describes a corrected V6 build and its objective checks. It does **not** claim creative acceptance, full-motion human review, native-audio listening by a person, sign-off, perfection, retention, virality, or audience results.
+V6 is a **separate technical package** and is now built: CI run `42517651544` succeeded, workflow commit `5559b52`, MP4 SHA-256 `96427061b1f53d493133f5455a05680ab2d49a5731ea47222dfc1409b3914e17`, 49/49 technical checks and 9/9 audio gates. V4 and V5 were rejected; V5 is untouched. This document describes the corrected V6 build and its objective checks. It does **not** claim creative acceptance, full-motion human review, native-audio listening by a person, sign-off, perfection, retention, virality, or audience results.
 
 `NEXT_ACTION.md` required per-title rights verification for real social-platform clips before a separate V6 package. V6 does **not** use unverified real social-platform reposts. It uses seven CC0 1.0 Wikimedia Commons original files, each rechecked through the Commons API extmetadata, recorded in `review/social_origin_ledger.json`. No claim is made that this clears third-party TikTok/Reels/Shorts reposts. Third-party social-platform clips remain unselected and unverified.
 
