@@ -376,7 +376,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'ltx23-running-benchmark' production/mafia-temple/trigger.txt; then
+          if grep -q 'ltx23-diagnostic' production/mafia-temple/trigger.txt; then
+            PILOT_KERNEL_SLUG=monarch-ltx23-42534408811 python production/mafia-temple/onetoall_diagnose.py
+            python - <<'PY'
+          import pathlib
+          p=pathlib.Path('production/mafia-temple/onetoall-diagnostics.txt')
+          text=p.read_text(errors='replace')[-15000:]
+          print('::notice title=LTX23 sanitized diagnostic::'+text.replace('%','%25').replace('\n','%0A'))
+          PY
+          elif grep -q 'ltx23-running-benchmark' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_ltx23_pilot.sh
           elif grep -q 'onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
             export PILOT_KERNEL_SLUG=monarch-real-preflight-42518708280
@@ -529,7 +537,7 @@ jobs:
             fi
             exit 0
           fi
-          if grep -q 'ltx23-running-benchmark\|onetoall-running-research\|onetoall-recover-diagnostics\|onetoall-real-preflight\|onetoall-real-render\|onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
+          if grep -q 'ltx23-running-benchmark\|ltx23-diagnostic\|onetoall-running-research\|onetoall-recover-diagnostics\|onetoall-real-preflight\|onetoall-real-render\|onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
             echo 'Research output is not automatically committed.'
             exit 0
           fi
