@@ -11,7 +11,7 @@ python3 tools/continuity.py recover
 python3 tools/continuity.py resume
 ```
 
-Never switch, rename, or push another branch. Work only on `arena/390292fc-monarch-overall-work`.
+Never switch, rename, or push another branch. Work only on `arena/2b012328-monarch-overall-work`.
 
 ## 1. Resume with channel context
 
@@ -69,10 +69,13 @@ python3 -m py_compile tools/continuity.py
 git diff --check
 git add AGENTS.md README.md RECOVER.md MONARCH_CAM.md .gitattributes .gitignore \
   config/continuity.json config/channels.json tools/continuity.py \
-  .github/workflows/continuity-validate.yml docs/continuity \
-  docs/MONARCH_CAM_*.md production/monarch-cam/short_ranking_raw_v5
+  .github/workflows/continuity-validate.yml \
+  .github/workflows/monarch-cam-short-ranking-raw-v6.yml docs/continuity \
+  docs/MONARCH_CAM_*.md production/monarch-cam/short_ranking_raw_v5 \
+  production/monarch-cam/short_ranking_raw_v6 \
+  deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4
 git commit -m "chore(monarch-cam): advance active channel lane"
-git push origin arena/390292fc-monarch-overall-work
+git push origin arena/2b012328-monarch-overall-work
 ```
 
 CI runs `py_compile`, `validate`, `render --check` and the channel capsule command.

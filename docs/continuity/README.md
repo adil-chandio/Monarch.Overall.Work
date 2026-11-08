@@ -88,7 +88,7 @@ Real chat exports are the only way to upgrade a session from `session_memory`/`s
 - Do not claim human approval, creative acceptance, sign-off, perfection, human full-motion/native-audio listening, retention, virality, or audience results.
 - V4 and V5 `monarch-cam` ranking Shorts are rejected. Technical QC is not creative acceptance.
 - Do not re-ask answered questions or reuse rejected geometry, unverified media, or dead-end fixes.
-- Work only on `arena/390292fc-monarch-overall-work`; never switch, rename, or push another branch.
+- Work only on `arena/2b012328-monarch-overall-work`; never switch, rename, or push another branch.
 
 ## Active channel — Monarch Cam
 

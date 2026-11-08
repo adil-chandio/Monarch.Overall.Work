@@ -1,15 +1,15 @@
 # Evidence manifest summary
 
-- Generated at: `2026-11-08T19:03:03Z`
-- Head: `0a7bf14a026921e234b87b15ed602bc3d471ed33`
-- Files: 322
+- Generated at: `2026-11-08T19:47:03Z`
+- Head: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
+- Files: 342
 
 ```json
 {
-  "archive_metadata": 9,
+  "archive_metadata": 10,
   "connected_app_record": 48,
   "operating_contract": 55,
-  "repo_evidence": 166,
+  "repo_evidence": 185,
   "screenshot_only": 29,
   "state_ledger": 6,
   "verbatim_source": 9

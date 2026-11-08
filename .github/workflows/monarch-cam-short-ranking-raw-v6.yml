@@ -1,0 +1,217 @@
+name: Monarch Cam - Raw Full-Screen V6
+
+on:
+  push:
+    branches: [arena/2b012328-monarch-overall-work]
+    paths:
+      - '.github/workflows/monarch-cam-short-ranking-raw-v6.yml'
+      - 'production/monarch-cam/short_ranking_raw_v6/**'
+      - '.gitignore'
+      - 'public/showreel/audio_qc/**'
+      - 'public/showreel/fonts/**'
+      - 'deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4'
+  workflow_dispatch:
+
+concurrency:
+  group: monarch-cam-raw-fullscreen-v6-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  V6_WORK: production/monarch-cam/work/short_ranking_raw_v6
+  V6_REVIEW: production/monarch-cam/short_ranking_raw_v6/review
+  V6_MP4: deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4
+  V6_AUDIO: production/monarch-cam/work/short_ranking_raw_v6/ranking_native_web.wav
+  V6_SILENT: production/monarch-cam/work/short_ranking_raw_v6/ranking_silent_raw_v6.mp4
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout active branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system tools
+        run: |
+          timeout 900 sudo apt-get update -qq
+          timeout 900 sudo apt-get install -y -qq ffmpeg
+          ffmpeg -hide_banner -version | head -3
+          ffprobe -hide_banner -version | head -3
+
+      - name: Install Python tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pillow opencv-python-headless soundfile pyloudnorm requests imageio-ffmpeg
+
+      - name: Compile V6 scripts and validate contracts
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_ranking_raw_v6/validate_raw_v6.py \
+            production/monarch-cam/short_ranking_raw_v6/verify_sources.py \
+            production/monarch-cam/short_ranking_raw_v6/source_recon_ranking.py \
+            production/monarch-cam/short_ranking_raw_v6/source_audio_audit.py \
+            production/monarch-cam/short_ranking_raw_v6/render_ranking_visual_raw_v6.py \
+            production/monarch-cam/short_ranking_raw_v6/build_ranking_audio_raw_v6.py \
+            production/monarch-cam/short_ranking_raw_v6/technical_qc_raw_v6.py
+          python production/monarch-cam/short_ranking_raw_v6/validate_raw_v6.py
+
+      - name: Per-title Commons API rights verification
+        run: python production/monarch-cam/short_ranking_raw_v6/verify_sources.py
+
+      - name: Source recon, SHA-1 checks and V6 window clips
+        run: python production/monarch-cam/short_ranking_raw_v6/source_recon_ranking.py
+
+      - name: Native source audio audit
+        run: python production/monarch-cam/short_ranking_raw_v6/source_audio_audit.py
+
+      - name: Render corrected V6 picture
+        run: python production/monarch-cam/short_ranking_raw_v6/render_ranking_visual_raw_v6.py
+
+      - name: Build raw per-window native audio track
+        run: python production/monarch-cam/short_ranking_raw_v6/build_ranking_audio_raw_v6.py
+
+      - name: Nine web audio gates
+        env:
+          QC_AUDIO_PATH: ${{ env.V6_AUDIO }}
+          QC_REPORT: ${{ env.V6_REVIEW }}/audio_qc.json
+        run: python -m showreel.audio_qc.gates
+
+      - name: Technical QC with safe-area and social-origin checks
+        run: python production/monarch-cam/short_ranking_raw_v6/technical_qc_raw_v6.py
+
+      - name: Write V6 delivery summary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('.').resolve()
+          review = root / 'production/monarch-cam/short_ranking_raw_v6/review'
+          out = root / 'deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4'
+          obj = lambda n: json.loads((review / n).read_text(encoding='utf-8'))
+          t = obj('technical_qc.json')
+          a = obj('audio_qc.json')
+          native = obj('native_audio_ledger.json')
+          social = obj('social_origin_ledger.json')
+          layout = obj('layout_manifest.json')
+          visual = obj('visual_v6_qc.json')
+          meta = json.loads((root / 'production/monarch-cam/short_ranking_raw_v6/ranking_v6_metadata.json').read_text(encoding='utf-8'))
+          src_manifest = obj('verified_sources.json')
+          src_ledger = obj('source_video_ledger.json')
+          src_audio = obj('source_audio_audit.json')
+          audio_ledger = obj('native_audio_ledger.json')
+          selected = obj('selected_windows.json')
+          if not t.get('passed') or not a.get('pass') or not native.get('final_web_gate_pass'):
+              raise SystemExit('QC gate did not pass')
+          summary = {
+              'topic': '7 Unexpected Animal Moments, Ranked.',
+              'package': 'Raw Full-Screen V6 - separate from rejected V5',
+              'deliverable': str(out.relative_to(root)),
+              'bytes': out.stat().st_size,
+              'sha256': hashlib.sha256(out.read_bytes()).hexdigest(),
+              'title': meta['primary'],
+              'category': meta['video_category'],
+              'duration_seconds': 60.0,
+              'frame_count': 1800,
+              'fps': 30,
+              'resolution': '1080x1920',
+              'audio': 'Raw per-window native Commons audio only; no narration, music, effects, bed, generated calls or added layers.',
+              'technical': {'passed': t['passed'], 'checks': t['checks'], 'sha256': t['sha256'], 'bytes': t['bytes'], 'probe': t['probe']},
+              'audio_checks': {'passed': a.get('pass'), 'gates': a.get('gates', {})},
+              'native_audio': native,
+              'social_origin': {'policy': social['policy'], 'all_api_license_verified': social['all_api_license_verified'], 'all_original_commons_pages': social['all_original_commons_pages'], 'all_original_sha1_verified': social['all_original_sha1_verified'], 'no_third_party_reposts': social['no_third_party_reposts'], 'assets': social['assets']},
+              'layout': {'safe_area': layout['safe_area'], 'hook': layout['hook'], 'list': layout['list'], 'right_ui': layout['right_ui'], 'reaction': layout['reaction'], 'bottom_bar': layout['bottom_bar'], 'flags': layout['flags']},
+              'visual': visual,
+              'source_manifest': src_manifest,
+              'source_clip_ledger': src_ledger,
+              'source_audio_audit': src_audio,
+              'audio_ledger': audio_ledger,
+              'selected_windows': {'edition': selected['edition'], 'probe_basis': selected['probe_basis'], 'frame_count': selected['frame_count'], 'scenes': selected['scenes']},
+              'runner_probe_passed': bool(t['checks']['runner_probe_passed']),
+              'runner_audio_visual_probe_passed': bool(t['checks']['runner_audio_visual_probe_passed']),
+              'runner_visual_motion_probe': bool(t['checks']['runner_visual_motion_probe']),
+              'contact_sheets_written': bool(t['checks']['contact_sheets_written']),
+              'source_review_recorded': bool(t['checks']['source_review_recorded']),
+              'visual_lock_written': bool(t['checks']['visual_lock_written']),
+              'safe_area_check': bool(t['checks']['safe_area_check_recorded']),
+              'social_origin_check': bool(t['checks']['social_origin_check_recorded'] and t['checks']['social_origin_per_title_verified']),
+              'full_motion_review': False,
+              'native_audio_listening': False,
+              'human_approval': False,
+              'sign_off': False,
+              'audience_result_promise': False,
+              'virality_guarantee': False,
+              'social_platform_reposts_selected': False,
+              'note': 'Technical build and objective checks only. V5 was rejected; V6 is not claimed accepted, approved, watched in full motion, listened to by a human, or proven with audience results.',
+          }
+          (review / 'qc_summary.json').write_text(json.dumps(summary, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          print('V6 delivery', summary['sha256'], summary['bytes'], 'bytes', flush=True)
+          PY
+
+      - name: Upload V6 MP4, contact sheets and QC evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-raw-fullscreen-v6-${{ github.sha }}
+          path: |
+            ${{ env.V6_MP4 }}
+            ${{ env.V6_REVIEW }}/cover*.jpg
+            ${{ env.V6_REVIEW }}/frame_*.jpg
+            ${{ env.V6_REVIEW }}/payoff_frame_*.jpg
+            ${{ env.V6_REVIEW }}/v6_*_contact_sheet_*.jpg
+            ${{ env.V6_REVIEW }}/candidates/candidate_review_manifest.json
+            ${{ env.V6_REVIEW }}/emoji_*.png
+            ${{ env.V6_REVIEW }}/source_poster.jpg
+            ${{ env.V6_REVIEW }}/UPLOAD_METADATA_RANKING_V6.txt
+            ${{ env.V6_REVIEW }}/selected_windows.json
+            ${{ env.V6_REVIEW }}/verified_sources.json
+            ${{ env.V6_REVIEW }}/social_origin_ledger.json
+            ${{ env.V6_REVIEW }}/source_video_ledger.json
+            ${{ env.V6_REVIEW }}/source_windows.json
+            ${{ env.V6_REVIEW }}/source_audio_audit.json
+            ${{ env.V6_REVIEW }}/native_audio_ledger.json
+            ${{ env.V6_REVIEW }}/audio_qc.json
+            ${{ env.V6_REVIEW }}/technical_qc.json
+            ${{ env.V6_REVIEW }}/layout_manifest.json
+            ${{ env.V6_REVIEW }}/visual_v6_qc.json
+            ${{ env.V6_REVIEW }}/visual_edit_ledger.json
+            ${{ env.V6_REVIEW }}/visual_review_lock.json
+            ${{ env.V6_REVIEW }}/review-manifest.json
+            ${{ env.V6_REVIEW }}/qc_summary.json
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Failure diagnostics
+        if: failure()
+        run: |
+          echo '--- V6 work tree ---'
+          find production/monarch-cam/work/short_ranking_raw_v6 -maxdepth 2 -type f -printf '%p %s bytes\n' | sort | head -100 || true
+          echo '--- V6 review ---'
+          find production/monarch-cam/short_ranking_raw_v6/review -maxdepth 2 -type f -printf '%p %s bytes\n' | sort | head -100 || true
+          echo '--- MP4 ---'
+          ls -lah deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4 || true
+          ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,codec_type,width,height,r_frame_rate -of json deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4 || true
+
+      - name: Commit V6 MP4 and generated review evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f "${{ env.V6_MP4 }}"
+          git add production/monarch-cam/short_ranking_raw_v6/review
+          git add .github/workflows/monarch-cam-short-ranking-raw-v6.yml
+          git add .gitignore
+          if git diff --cached --quiet; then
+            echo 'No V6 changes to commit'
+          else
+            git commit -m "build(monarch-cam): raw full-screen V6 60s Short [skip ci]"
+            git push origin HEAD:arena/2b012328-monarch-overall-work
+          fi

@@ -32,6 +32,13 @@
 - `oriental_dove` upstream HTTP 429/robot policy resolved by cache/backoff/original CC0 URLs.
 - Failed runs `42396617606`, `42397191709`, `42399953907`, `42401006868`, `42401490506`, `42402744112`, `42403697302` and their fixes are in `PROBLEMS_FIXES.md`.
 
+## V6 is a technical build, not acceptance
+
+- A separate V6 package is configured with seven per-title CC0 Commons originals, corrected centered hook / left `1.–7.` plates, right UI, bottom bar, safe-area and social-origin QC, renderer and workflow.
+- V6 does **not** use unverified real social-platform reposts; the earlier `NEXT_ACTION.md` requirement for social-platform clips is not claimed resolved.
+- V6 MP4 and CI run are pending. Do not claim V6 is built, accepted, approved, watched in full motion, listened to by a human, or proven with audience results until a real record exists.
+- V5 is untouched and V4/V5 remain rejected.
+
 ## Channel-strategy dead ends
 
 - Do not delete Monarch Cam, mass-delete old videos, re-upload the 25-view ranking repeatedly, buy engagement, run random daily uploads, copy animal collision/harm, use `Part 2/3/4` as main package, treat credit/Section 107 as clearance, blame the AI label without evidence, or change five variables and call it an algorithm mystery.

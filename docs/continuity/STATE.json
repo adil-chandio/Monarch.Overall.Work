@@ -1,42 +1,42 @@
 {
   "schema_version": "1.0.0",
   "repo": "adil-chandio/Monarch.Overall.Work",
-  "branch": "arena/390292fc-monarch-overall-work",
-  "head_at_capture": "4b3574c1c936e47cf2a68d719bae0e9fe6a2380a",
+  "branch": "arena/2b012328-monarch-overall-work",
+  "head_at_capture": "8cb1e6abf64074db6ff7bfe3dcd496594f329780",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-08T17:51:15Z",
-  "last_event_id": "evt-054-monarch-cam-channel-os",
+  "updated_at": "2026-11-08T19:47:03Z",
+  "last_event_id": "evt-057-monarch-cam-v6-continuity-globs",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "channel_workflow_ready",
+    "status": "v6_technical_build_configured",
     "space": "yt-automation",
     "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
-    "current_step": "Monarch Cam is wired as the active channel workstream with a one-file channel start, machine state, playbook, production workflow, exact next action, copy-paste capsule, rejection/dead-end record, evidence ledger, root shortcut, stale-checkout recovery and one-command resume/channel commands. Legacy config/channels.json slots remain unchanged; the name mismatch is an explicit gap.",
-    "next_action": "Open docs/continuity/channels/monarch-cam/00_START_HERE.md, inherit CHANNEL_STATE.json, and continue the single active Monarch Cam lane without asking the user to explain how to do it. If the lane is the rejected ranking Short, build a separate V6 package only after per-title rights verification; V5 stays untouched.",
+    "current_step": "A separate V6 technical package is configured for the rejected ranking Short: seven per-title CC0 Commons originals, source/clip/social-origin ledgers, corrected centered hook and left 1.-7. plates, safe-area/layout manifest, raw per-window native audio contract, renderer, QC and workflow. V5 is untouched. V6 MP4 and CI run are pending; no human creative acceptance is claimed.",
+    "next_action": "Push the V6 workflow, watch CI, inspect the MP4 and qc_summary.json; do not claim V6 acceptance or approval.",
     "blocking_gaps": [
       "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
       "No complete Arena chat export/JSON",
       "No full sidebar chat list",
       "No assistant turns for EMS-20261011-001",
       "No live bidirectional connected-app sync",
-      "No V6 rights-verified package or human creative acceptance"
+      "V6 uses seven per-title CC0 Commons originals; no rights-verified real social-platform reposts; MP4/run pending CI; no human creative acceptance."
     ],
-    "branch_guardrail": "Always work on arena/390292fc-monarch-overall-work; never switch, rename, or push another branch."
+    "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch."
   },
   "parallel_task": {
     "id": "monarch-cam-v6-intent",
     "title": "Next-level full-motion raw funny-animal ranking Short",
-    "status": "unresolved_not_started",
+    "status": "v6_technical_build_configured",
     "space": "yt-automation",
     "evidence_level": "gap",
     "rejected": [
       "V4 “sirf text likh diya”",
       "V5 “NAHI abhi bhi theek se nhi”"
     ],
-    "next_action": "Build a separate V6 package only after per-title rights verification, visible hook/list geometry, extracted scenes, renderer, QC contract, workflow, MP4 and run. V5 stays untouched.",
-    "claims": "No V6 files, workflow, clips, MP4, run or acceptance exist."
+    "next_action": "Push the V6 workflow, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance, approval, or audience results.",
+    "claims": "Technical package configured; V6 MP4/run pending CI; no real social-platform reposts; no acceptance, approval, full-motion/native-audio listening, or outcome claim."
   },
   "continuation_requirements": [
     "Repo-backed source of truth in Monarch.Overall.Work.",
@@ -86,10 +86,10 @@
     "Live bidirectional sync to Drive/Notion/Linear/Docs and verified hourly automation.",
     "Dropbox B2B MD body (email_not_verified).",
     "Large Drive ZIP/PDF/MP4 source packages.",
-    "V6 rights-verified social-platform clips and separate delivery.",
     "Human full-motion/native-audio listening and creative sign-off.",
     "Owner says Monarch Cam is one of the 3 channels; config/channels.json legacy 3 slot names are not yet reconciled.",
-    "A workspace can be restored to an old commit with continuity files missing; RECOVER.md / recover mitigate but do not prove automatic sync."
+    "A workspace can be restored to an old commit with continuity files missing; RECOVER.md / recover mitigate but do not prove automatic sync.",
+    "No rights-verified real social-platform clips; V6 uses seven per-title CC0 Commons originals. V6 MP4/run pending CI."
   ],
   "coverage": {
     "github_heads_at_capture": 11,

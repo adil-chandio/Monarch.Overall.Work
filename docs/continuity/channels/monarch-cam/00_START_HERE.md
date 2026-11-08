@@ -5,7 +5,7 @@
 - Channel: **Monarch Cam** / `@Monarch-Cam` — https://www.youtube.com/@Monarch-Cam
 - Space: `yt-automation`
 - Production root: `production/monarch-cam/`
-- Active branch: `arena/390292fc-monarch-overall-work`
+- Active branch: `arena/2b012328-monarch-overall-work`
 - One command: `python3 tools/continuity.py resume` (it embeds this channel capsule automatically)
 - Channel-only command: `python3 tools/continuity.py channel`
 - Stale checkout: `RECOVER.md` / `python3 tools/continuity.py recover`
@@ -27,14 +27,14 @@
 
 - Continuity archive is delivered, validated and commit-pinned. Full Arena chat exports are still missing; `full_arena_export_available=false`.
 - V4 and V5 ranking Shorts are **creatively rejected**: V4 “sirf text likh diya”; V5 “NAHI abhi bhi theek se nhi” plus four screenshots. Technical QC is not acceptance.
-- V5 stays untouched. No V6 package, workflow, rights-verified social-platform clips, extracted scenes, renderer, QC contract, MP4, run or final delivery exists.
-- V5 geometry dead end: hook/question occluded by right `1.–7. LIST`; reference needs centered colorful top hook and fully visible left `1.–7.` black label plates with progressive labels, payoff cuts/zoom, reaction bubbles and emojis.
-- Only native per-window source audio is allowed for that lane; no generated sound/audio substitution, no silent segments, no unverified platform reposts, no strict CC0-only assumption without revising rights gates.
+- A separate V6 technical package is configured; V5 stays untouched. It uses seven per-title CC0 Commons originals, a source/clip/social-origin ledger, corrected geometry, raw per-window native audio, renderer, QC contract and a workflow. V6 MP4 and CI run are pending.
+- V5 geometry dead end: hook/question occluded by right `1.–7. LIST`; V6 uses a centered colorful top hook and fully visible left `1.–7.` black label plates with progressive labels, right platform UI, bottom comment/Subscribe, payoff cuts/zoom, reaction bubbles and emojis.
+- V6 uses only per-title verified CC0 Commons originals, not unverified real social-platform reposts. Only native per-window source audio is allowed; no generated sound/audio substitution, no silent segments, no third-party reposts, no strict CC0-only assumption applied to social clips.
 - No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience-result claim.
 
 ## Exact next action
 
-Open this file, inherit `CHANNEL_STATE.json`, then continue the single active Monarch Cam lane without asking the user to explain how to do it. If the lane is the rejected ranking Short, build a **separate V6 package** only after per-title rights verification, visible hook/list geometry, extracted scenes, renderer, QC contract, workflow, MP4 and run. V5 stays untouched. For the broader channel rebuild, follow `PLAYBOOK.md` and `WORKFLOW.md` from the latest recorded state, not from scratch.
+Open this file, inherit `CHANNEL_STATE.json`, then continue the single active Monarch Cam lane without asking the user to explain how to do it. The separate V6 technical package is configured; push it, watch CI, inspect the MP4 and QC evidence, and do not claim creative acceptance. V5 stays untouched. For the broader channel rebuild, follow `PLAYBOOK.md` and `WORKFLOW.md` from the latest recorded state, not from scratch.
 
 ## How to work (already decided)
 
@@ -52,8 +52,10 @@ Open this file, inherit `CHANNEL_STATE.json`, then continue the single active Mo
 - `WORKFLOW.md` — exact production workflow and commands.
 - `NEXT_ACTION.md` — single next-action capsule.
 - `EASY_RESUME.md` — copy-paste prompt with no user explanation.
-- `REJECTIONS.md` — V4/V5 and dead ends.
-- `EVIDENCE.md` — exact commits, runs, hashes, deliverables.
+- `REJECTIONS.md` — V4/V5 and dead ends; V6 is not acceptance.
+- `EVIDENCE.md` — exact commits, runs, hashes, deliverables, V6 package.
+- `production/monarch-cam/short_ranking_raw_v6/RANKING_V6_PLAN_AND_METADATA.md` — V6 rights, geometry, audio and QC contract.
+- `.github/workflows/monarch-cam-short-ranking-raw-v6.yml` — V6 build/QC workflow.
 - `docs/MONARCH_CAM_LIVE_FORENSIC_AUDIT_2026-11-05.md`
 - `docs/MONARCH_CAM_30_DAY_GROWTH_REVENUE_PLAN_2026-11.md`
 - `docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md`

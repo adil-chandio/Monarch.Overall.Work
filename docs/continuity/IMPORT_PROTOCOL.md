@@ -35,7 +35,7 @@ python3 tools/continuity.py import-chat \
   --source "Arena UI export" \
   --source-url "https://arena.ai/..." \
   --space ops \
-  --branch arena/390292fc-monarch-overall-work \
+  --branch arena/2b012328-monarch-overall-work \
   --kind transcript \
   --evidence-level verbatim_transcript \
   --coverage complete \

@@ -420,3 +420,29 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `.github/workflows/continuity-validate.yml`
 - Ref: `config/continuity.json`
 - Ref: `config/channels.json`
+
+## `2026-11-08T19:41:24Z` · evt-055-monarch-cam-v6-technical-package · result
+
+- Title: Separate V6 ranking Short technical package configured
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Configured short_ranking_raw_v6 with seven per-title CC0 Commons originals, social-origin/clip ledgers, corrected centered hook and left 1.-7. plates, layout manifest, raw per-window native audio, renderer, QC with safe-area/social-origin checks, V6 workflow and .gitignore MP4 exception. V5 untouched; V6 MP4/run pending CI; no creative acceptance.
+- Ref: `production/monarch-cam/short_ranking_raw_v6/RANKING_V6_PLAN_AND_METADATA.md`
+- Ref: `.github/workflows/monarch-cam-short-ranking-raw-v6.yml`
+
+## `2026-11-08T19:46:13Z` · evt-056-monarch-cam-v6-stale-review-cleaned · fix
+
+- Title: Removed V5-derived review evidence from V6 package
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Deleted 95 copied V5 review/QC/contact-sheet files from short_ranking_raw_v6/review; kept selected_windows.json, candidate_review_manifest.json and upload metadata. Candidate manifest now records V5-inherited windows and V6-generated sheets/ledgers. Workflow artifact list and QC were updated to use V6 selected-window contact sheets instead of stale candidate sheets. V6 MP4/run still pending CI.
+- Ref: `production/monarch-cam/short_ranking_raw_v6/review/candidates/candidate_review_manifest.json`
+- Ref: `.github/workflows/monarch-cam-short-ranking-raw-v6.yml`
+
+## `2026-11-08T19:47:03Z` · evt-057-monarch-cam-v6-continuity-globs · fix
+
+- Title: Added V6 package and workflow to continuity evidence manifest
+- Space: `ops`
+- Evidence level: `repo_evidence`
+- Details: Added short_ranking_raw_v6 package paths, V6 workflow and V6 MP4 deliverable to tools/continuity.py SCAN_GLOBS so refresh/validate hash the new technical package. V6 MP4/run remain pending CI.
+- Ref: `tools/continuity.py`

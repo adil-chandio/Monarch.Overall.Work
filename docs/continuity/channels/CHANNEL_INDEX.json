@@ -7,7 +7,7 @@
   "reconciliation_status": "explicit_gap",
   "active_channel": "monarch-cam",
   "space": "yt-automation",
-  "branch": "arena/390292fc-monarch-overall-work",
+  "branch": "arena/2b012328-monarch-overall-work",
   "channels": [
     {
       "id": "monarch-cam",
@@ -33,7 +33,13 @@
         "docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md",
         "config/channels.json",
         "production/monarch-cam/short_ranking_raw_v5/ranking_short_spec.json",
-        "production/monarch-cam/short_ranking_raw_v5/review/qc_summary.json"
+        "production/monarch-cam/short_ranking_raw_v5/review/qc_summary.json",
+        "production/monarch-cam/short_ranking_raw_v6/ranking_short_spec.json",
+        "production/monarch-cam/short_ranking_raw_v6/RANKING_V6_PLAN_AND_METADATA.md",
+        "production/monarch-cam/short_ranking_raw_v6/render_ranking_visual_raw_v6.py",
+        "production/monarch-cam/short_ranking_raw_v6/technical_qc_raw_v6.py",
+        "production/monarch-cam/short_ranking_raw_v6/validate_raw_v6.py",
+        ".github/workflows/monarch-cam-short-ranking-raw-v6.yml"
       ]
     },
     {
@@ -63,7 +69,7 @@
   "recovery": {
     "file": "RECOVER.md",
     "command": "python3 tools/continuity.py recover",
-    "raw_git_command": "git fetch origin '+refs/heads/arena/390292fc-monarch-overall-work:refs/remotes/origin/arena/390292fc-monarch-overall-work' && git merge --ff-only origin/arena/390292fc-monarch-overall-work",
+    "raw_git_command": "git fetch origin '+refs/heads/arena/2b012328-monarch-overall-work:refs/remotes/origin/arena/2b012328-monarch-overall-work' && git merge --ff-only origin/arena/2b012328-monarch-overall-work",
     "note": "Use raw git command if tools/continuity.py itself is missing from a stale checkout."
   }
 }

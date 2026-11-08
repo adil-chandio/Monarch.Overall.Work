@@ -50,10 +50,14 @@ The user's specific pain: a chat stops mid-work; after refresh/“continue” it
    ```bash
    git add AGENTS.md README.md RECOVER.md MONARCH_CAM.md .gitignore .gitattributes \
      config/continuity.json config/channels.json tools/continuity.py \
-     .github/workflows/continuity-validate.yml docs/continuity docs/MONARCH_CAM_*.md \
-     production/monarch-cam/short_ranking_raw_v5
+     .github/workflows/continuity-validate.yml \
+     .github/workflows/monarch-cam-short-ranking-raw-v6.yml \
+     docs/continuity docs/MONARCH_CAM_*.md \
+     production/monarch-cam/short_ranking_raw_v5 \
+     production/monarch-cam/short_ranking_raw_v6 \
+     deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4
    git commit -m "docs(continuity): checkpoint exact latest state"
-   git push origin arena/390292fc-monarch-overall-work
+   git push origin arena/2b012328-monarch-overall-work
    ```
 
 CI runs `validate` and `render --check` on every push that touches the archive.

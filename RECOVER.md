@@ -2,10 +2,10 @@
 
 If `AGENTS.md`, `tools/continuity.py`, or `docs/continuity/` are missing, or `git rev-parse HEAD` is an old commit, the workspace is a stale checkout. Do **not** restart work from there.
 
-Run this on `arena/390292fc-monarch-overall-work`:
+Run this on `arena/2b012328-monarch-overall-work`:
 
 ```bash
-git fetch origin '+refs/heads/arena/390292fc-monarch-overall-work:refs/remotes/origin/arena/390292fc-monarch-overall-work' && git merge --ff-only origin/arena/390292fc-monarch-overall-work && python3 tools/continuity.py resume
+git fetch origin '+refs/heads/arena/2b012328-monarch-overall-work:refs/remotes/origin/arena/2b012328-monarch-overall-work' && git merge --ff-only origin/arena/2b012328-monarch-overall-work && python3 tools/continuity.py resume
 ```
 
 If stale untracked drafts block the merge, back them up to `/tmp` first, then:

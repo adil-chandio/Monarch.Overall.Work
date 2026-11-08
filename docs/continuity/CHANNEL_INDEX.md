@@ -46,3 +46,9 @@ config/channels.json currently lists 3 legacy publishing slots: Monarch Lab, Min
 - Source: `config/channels.json`
 - Source: `production/monarch-cam/short_ranking_raw_v5/ranking_short_spec.json`
 - Source: `production/monarch-cam/short_ranking_raw_v5/review/qc_summary.json`
+- Source: `production/monarch-cam/short_ranking_raw_v6/ranking_short_spec.json`
+- Source: `production/monarch-cam/short_ranking_raw_v6/RANKING_V6_PLAN_AND_METADATA.md`
+- Source: `production/monarch-cam/short_ranking_raw_v6/render_ranking_visual_raw_v6.py`
+- Source: `production/monarch-cam/short_ranking_raw_v6/technical_qc_raw_v6.py`
+- Source: `production/monarch-cam/short_ranking_raw_v6/validate_raw_v6.py`
+- Source: `.github/workflows/monarch-cam-short-ranking-raw-v6.yml`
