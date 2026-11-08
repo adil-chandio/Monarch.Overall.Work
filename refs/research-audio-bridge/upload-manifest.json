@@ -1,0 +1,38 @@
+{
+  "production_hold": true,
+  "receiver_run_id": "42452846962",
+  "receiver_public_key_sha256": "6aefa15effb3df3f91a65d8943a1bcda923dbeda1035a7e9c4376515056d9aa0",
+  "local_private_key_used": false,
+  "cases": [
+    {
+      "key": "02-stomach",
+      "source_mp4_sha256": "5d307925c2077bbc3968752c56ccc3605c36f2d28fd54d11e2d5c392acb096b3",
+      "source_encoded_audio_hash": "SHA256=13fc0a346f585e47e6e168b9ebe269c2f5113c1d48358097be38e50808e494b5",
+      "pcm_sha256": "6cf2d609a4f86df844273d4da39dd72200da455021e1a51bcc9346897d320702",
+      "pcm_bytes": 856064,
+      "pcm_format": "16kHz mono signed little-endian int16; relative to decoded source audio start",
+      "envelope": {
+        "file": "02-stomach.pcm.enc",
+        "ciphertext_sha256": "f06beb6aabe0b6632fc7f127c0dfaa5196f60a49551a169d83f8ec86dbba2057",
+        "aad": "42452846962:02-stomach:6cf2d609a4f86df844273d4da39dd72200da455021e1a51bcc9346897d320702",
+        "nonce_b64": "Q8m4N9d5ev2i2Io7",
+        "wrapped_key_b64": "N+4mSAG/bMgi88wuXZ30V0LsvmMskQJyQ4pwcmByx2xrz6rRKD/jlTEU7TjVFIapgI1Rv6u4/RIvCcGWDYgTbHUHK1IvH3plpWL2Bs6jidLDHK1MNjGhTUpwEZjSsaMDkju3D8X6NgcE3y1C507w4zYGdDuarnsRAiezv2db7qn4dkcY/y2BCp0lfmLZxFTbCg46WnNRSXMxo9EtBqYQzTn7oAnAOuJzXtx6KgvQW5qsE2nFnLz2DkHA+OC7OIhw8W8tNoh7D8SuDysfQBfPBZ8Qblt4/6n7TiFJUlbIm/+sugvzMrU2KOaIRcd6KuwNAcXcUtmVp2LnulruRsF86tC09fR2Xj7gXrhvIUujgHKp8IaS6tvJtS+ExelpwngzZ6gWdMrDc+lExW0eVfV0pk04X4O5tcXtAHI+xeyj5RSXt2cw9ZH8nsO5/xbokGanLru230T6NdsX+1AIKIHFk9Ohe+ciH8byqf2nVlACZuS7DugytCX5AlJ3vF2eJ/al"
+      }
+    },
+    {
+      "key": "08-ai",
+      "source_mp4_sha256": "b503a03ce51186dceb1343f7460d86974434f37c33a8ae41f1f1e8a4696a763b",
+      "source_encoded_audio_hash": "SHA256=82f8e9068e974310844a067c4a6346e2cfbafce0cb7e6b2b08b54803bb6ba361",
+      "pcm_sha256": "0d9fe7b99bef5d27730cf864282d3e8c62d54b228bbcf9ad0c0977e8badcc16b",
+      "pcm_bytes": 1728308,
+      "pcm_format": "16kHz mono signed little-endian int16; relative to decoded source audio start",
+      "envelope": {
+        "file": "08-ai.pcm.enc",
+        "ciphertext_sha256": "f738f54745be9434664e8c5c58981b23a3904715add7578cba3d2f3ef10b8247",
+        "aad": "42452846962:08-ai:0d9fe7b99bef5d27730cf864282d3e8c62d54b228bbcf9ad0c0977e8badcc16b",
+        "nonce_b64": "1hAHNgXdQ01G9yhU",
+        "wrapped_key_b64": "Id12GcZoNbYd6xDKS8psTQUG+NjlPMm5yg2YtdEuZ78DNum3bWNmyz4PAZ7vFFwQlv51+eSaILHqlHsYlEmvS1mQ6WjzJtvI6PzOd0Jd184rIpB9kOdOlYKZ0/1ZBWFuWGCuVptEheQ+SwDYznm/tilEBVSRtMCIQhNMxvqOhNB+diEpPz8CIc7UCyojVDYOvRTDom53gvd35fe5hVydjCQAFowUxAgl0NuLSOTq5ePZNTGs7ZO0D91XZ5B7thrCRIBY9j0wY+PJPlpdwpGX1A3Sob2f2tUS27lM8XW7D4oQ9n1kHzt7HrJXX9yl0OBQwMzQYBnKmBcMB2avpXIHxdYo7nwYlVA9CJI83GgRRDtSNxJgOSU9TCzoMLCCYz6clNZI96NxYh1jDyWzDVrLy4u3QZMPnfIn9MzKohaY2v+9Ju3NIncojG65UBBM7tMwcWRNcPumO8tDmyqtmJj4wXFNYv66+bLm+RIYAl9Gqd/17DDuL1TtFF9EbhmfDvPZ"
+      }
+    }
+  ]
+}
