@@ -1,0 +1,31 @@
+name: Probe detailed Gemini video sampling
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/gemini_sampling_probe.py, .github/workflows/gemini-sampling-probe.yml]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare clips and sampling rates
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/gemini_sampling_probe.py
+      - name: Save probe results
+        run: |
+          cp audit-output/gemini-sampling-probe.json docs/repo-intel/gemini-sampling-probe.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/gemini-sampling-probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record video sampling probe [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
