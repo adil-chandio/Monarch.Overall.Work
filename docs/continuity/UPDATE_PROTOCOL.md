@@ -34,6 +34,8 @@ The user's specific pain: a chat stops mid-work; after refresh/“continue” it
    python3 tools/continuity.py render
    ```
 
+   `checkpoint` now does this automatically after appending an event; run the two commands explicitly after any manual JSON/JSONL edit.
+
 7. **Validate before push**:
 
    ```bash

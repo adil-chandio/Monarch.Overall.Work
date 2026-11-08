@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T16:18:04Z",
-  "head": "393edd658e8336780e1cd4aea4cf5b5261c2d1e3",
+  "generated_at": "2026-11-08T16:22:31Z",
+  "head": "a8596fa869df50593270ed53b39a11f2bc8ca0e0",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -60,14 +60,14 @@
     },
     {
       "path": "docs/continuity/00_START_HERE.md",
-      "bytes": 3183,
-      "sha256": "7f1882097ce1e07c7a958a5f151e0cfebcc3a98b34883a170e64219f6889e96c",
+      "bytes": 3423,
+      "sha256": "61f8c49169c4f59a94b2fa6eea57d3219f663d33f9afd8527017ed10727d7b60",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 3236,
-      "sha256": "b187f7e789e9025f4d75df43ec766e2c3a9a9f267f48cb52231f045590148bb8",
+      "sha256": "cbb1e1a1a747da42f4db3ed4da25cfd8f78ae4eabdaa5431eb664fdcd47c81c2",
       "evidence_level": "state_ledger"
     },
     {
@@ -78,8 +78,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 19491,
-      "sha256": "2caf83ebc9fced9c864e48ec6ee6f3bda77741f1c3d1729d902f4212e7b31aae",
+      "bytes": 20235,
+      "sha256": "d68b12fd1bbd8fc258da0fc72cfa98a562203de79c4f3783434fb29b104a253c",
       "evidence_level": "state_ledger"
     },
     {
@@ -108,8 +108,8 @@
     },
     {
       "path": "docs/continuity/PROBLEMS_FIXES.md",
-      "bytes": 9943,
-      "sha256": "e2ee49bfe8d9ad6641040aa7d5c461c1d1c85bff9277536a748d5fd8d23dcff1",
+      "bytes": 10992,
+      "sha256": "94882ac2a2fee0371dc7fc055c39c89c4c4f234837ceb5059f15f65485943a2e",
       "evidence_level": "operating_contract"
     },
     {
@@ -132,14 +132,14 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 5501,
-      "sha256": "20d661401715616780486192a5ee07cf45fc4c0178f00e74db960513b47e06c7",
+      "bytes": 6086,
+      "sha256": "afb905ff3acb0458c816e00b4a82dc7a1ee603e560560cc338db5c068487d6f7",
       "evidence_level": "state_ledger"
     },
     {
       "path": "docs/continuity/UPDATE_PROTOCOL.md",
-      "bytes": 3269,
-      "sha256": "f994ef2b076f92499a9913253800edaa25164d8cabd762ed5df5a4afbf579ae7",
+      "bytes": 3406,
+      "sha256": "ecc551b7d5c60a14bef311bc6ad11128ef1d575bf98d01487b6e4f5270170450",
       "evidence_level": "operating_contract"
     },
     {

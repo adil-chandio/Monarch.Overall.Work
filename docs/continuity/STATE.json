@@ -4,16 +4,16 @@
   "branch": "arena/390292fc-monarch-overall-work",
   "head_at_capture": "393edd658e8336780e1cd4aea4cf5b5261c2d1e3",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-08T16:13:55Z",
-  "last_event_id": "evt-import-EMS-20261011-001-archive-20261108T161355Z",
+  "updated_at": "2026-11-08T16:22:31Z",
+  "last_event_id": "evt-053-continuity-pack-delivered",
   "active_task": {
     "id": "repo-continuity-archive-v1",
     "title": "Build and deliver the repo-first continuation archive in Monarch.Overall.Work",
-    "status": "in_progress",
+    "status": "delivered",
     "space": "ops",
     "evidence_level": "repo_evidence",
-    "current_step": "Canonical evidence, ledgers, session files, contracts, importer, validator and CI are written; imports/refresh/render/validate/commit/push remain.",
-    "next_action": "Import the three EMS archive sources, refresh/render/validate, commit/push on the active branch, then deliver commit-pinned links and an honest gap statement. If real full Arena exports are supplied, import them before claiming exact all-chat preservation.",
+    "current_step": "Continuity archive committed, pushed, validated and delivered. CI passed. Canonical evidence and append-only ledgers are current; exact all-chat preservation still requires real Arena exports.",
+    "next_action": "If real full Arena chat exports are supplied, import them via import-chat and update COVERAGE/STATE/GAPS; keep unresolved V6 separate; do not restart from the beginning.",
     "blocking_gaps": [
       "No complete Arena chat export/JSON",
       "No full sidebar chat list",
@@ -95,7 +95,10 @@
     "drive_resume_states_indexed": 13,
     "drive_text_files_imported": "see evidence/external/drive_import_manifest.json",
     "supabase_saved_conversations": 0,
-    "partial_verbatim_transcript_sessions": "to be imported: EMS-20261011-001"
+    "partial_verbatim_transcript_sessions": "2 imported (EMS transcript + journal), both partial",
+    "continuity_pack_commit": "a8596fa869df50593270ed53b39a11f2bc8ca0e0",
+    "continuity_ci_run": 42499227414,
+    "continuity_ci_conclusion": "success"
   },
   "entrypoints": {
     "resume": "python3 tools/continuity.py resume",
@@ -104,5 +107,18 @@
     "render_check": "python3 tools/continuity.py render --check",
     "config": "config/continuity.json",
     "new_chat_prompt": "docs/continuity/NEW_CHAT_PROMPT.md"
+  },
+  "delivery_evidence": {
+    "pack_commit": "a8596fa869df50593270ed53b39a11f2bc8ca0e0",
+    "ci_run_id": 42499227414,
+    "ci_run_url": "https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42499227414",
+    "ci_conclusion": "success",
+    "checks": [
+      "py_compile",
+      "validate",
+      "render --check",
+      "git diff --check"
+    ],
+    "note": "Final state commit follows this checkpoint; commit-pinned links are in the final chat handoff."
   }
 }

@@ -59,6 +59,13 @@ This is the regression memory. Failed approaches stay visible so a new chat does
 - `google_drive__download_file` does not accept a custom `file_path`; extra properties are rejected. Rename after download instead.
 - `google_drive__export_file` with `text/plain` writes native Docs text into `google_drive/`; canonical copies are copied into `evidence/external/drive_text/`.
 
+## Staged whitespace / raw-evidence fix
+
+- **Problem:** `git diff --cached --check` failed on the first commit attempt because raw Google Docs / satellite-repo evidence contains original CRLF and trailing spaces, and generated `*.md` ledgers had an extra blank line at EOF.
+- **Cause:** `render_outputs()` ended several generated lists with an empty string, and `git` treats preserved CRLF/trailing spaces in imported text as whitespace errors.
+- **Fix:** `render()` now normalizes generated Markdown to a single trailing newline. Root `.gitattributes` sets `docs/continuity/** -text -whitespace` so raw bytes are preserved byte-for-byte without EOL conversion or staged whitespace warnings. `refresh()` builds the manifest twice so `COVERAGE.json` hash covers its final bytes. `checkpoint()` now calls `refresh()` before `render()`.
+- **Standing rule:** do not “clean” raw Drive/Docs/satellite evidence to silence whitespace warnings; the hashes in `EVIDENCE_MANIFEST.json` are authoritative. Staged whitespace check passed after these fixes.
+
 ## Evidence-honesty dead ends
 
 - No full chat transcript/JSON is in the workspace. Screenshots/session memory/Drive session logs/Linear project descriptions/Notion pages are not proof of complete Arena chat preservation.

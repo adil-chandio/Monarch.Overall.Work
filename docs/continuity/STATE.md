@@ -4,8 +4,8 @@
 - Branch: `arena/390292fc-monarch-overall-work`
 - Head at capture: `393edd658e8336780e1cd4aea4cf5b5261c2d1e3`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-08T16:13:55Z`
-- Last event: `evt-import-EMS-20261011-001-archive-20261108T161355Z`
+- Updated: `2026-11-08T16:22:31Z`
+- Last event: `evt-053-continuity-pack-delivered`
 
 ## Active task
 ```json
@@ -17,12 +17,12 @@
     "No live bidirectional connected-app sync"
   ],
   "branch_guardrail": "Always work on arena/390292fc-monarch-overall-work; never switch, rename, or push another branch.",
-  "current_step": "Canonical evidence, ledgers, session files, contracts, importer, validator and CI are written; imports/refresh/render/validate/commit/push remain.",
+  "current_step": "Continuity archive committed, pushed, validated and delivered. CI passed. Canonical evidence and append-only ledgers are current; exact all-chat preservation still requires real Arena exports.",
   "evidence_level": "repo_evidence",
   "id": "repo-continuity-archive-v1",
-  "next_action": "Import the three EMS archive sources, refresh/render/validate, commit/push on the active branch, then deliver commit-pinned links and an honest gap statement. If real full Arena exports are supplied, import them before claiming exact all-chat preservation.",
+  "next_action": "If real full Arena chat exports are supplied, import them via import-chat and update COVERAGE/STATE/GAPS; keep unresolved V6 separate; do not restart from the beginning.",
   "space": "ops",
-  "status": "in_progress",
+  "status": "delivered",
   "title": "Build and deliver the repo-first continuation archive in Monarch.Overall.Work"
 }
 ```
@@ -109,6 +109,9 @@
 ## Coverage snapshot
 ```json
 {
+  "continuity_ci_conclusion": "success",
+  "continuity_ci_run": 42499227414,
+  "continuity_pack_commit": "a8596fa869df50593270ed53b39a11f2bc8ca0e0",
   "drive_resume_states_indexed": 13,
   "drive_session_logs_indexed": 11,
   "drive_text_files_imported": "see evidence/external/drive_import_manifest.json",
@@ -117,7 +120,7 @@
   "github_tags": 16,
   "github_workflow_runs": 452,
   "local_workflows": 18,
-  "partial_verbatim_transcript_sessions": "to be imported: EMS-20261011-001",
+  "partial_verbatim_transcript_sessions": "2 imported (EMS transcript + journal), both partial",
   "reachable_commits": 998,
   "repos_inspected": 22,
   "satellite_continuity_files": 120,

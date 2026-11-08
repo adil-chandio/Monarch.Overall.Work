@@ -21,7 +21,7 @@ This archive is honest about evidence strength. A screenshot is never promoted t
   },
   "counts": {
     "decisions": 18,
-    "events": 48,
+    "events": 49,
     "manifest_files": 276,
     "prompt_results": 12,
     "screenshots": 29,

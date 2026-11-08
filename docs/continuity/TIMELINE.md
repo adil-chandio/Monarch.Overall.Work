@@ -391,3 +391,14 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `docs/continuity/chat_exports/sources/EMS-20261011-001-journal/raw/JOURNAL.jsonl`
 - Ref: `docs/continuity/chat_exports/sources/EMS-20261011-001-journal/normalized.jsonl`
 - Ref: `docs/continuity/chat_exports/sources/EMS-20261011-001-journal/metadata.json`
+
+## `2026-11-08T16:22:31Z` · evt-053-continuity-pack-delivered · result
+
+- Title: Continuity pack delivered, CI passed, exact state checkpointed
+- Space: `ops`
+- Evidence level: `repo_evidence`
+- Details: First delivery commit a8596fa869df50593270ed53b39a11f2bc8ca0e0 pushed to arena/390292fc-monarch-overall-work; CI run 42499227414 succeeded with py_compile, validate and render --check; 276 hashed evidence files, 28 indexed sessions, 2 partial verbatim imports. Full Arena chat exports remain missing; final state checkpoint follows.
+- Ref: `.github/workflows/continuity-validate.yml`
+- Ref: `docs/continuity/STATE.json`
+- Ref: `docs/continuity/EVIDENCE_MANIFEST.json`
+- Ref: `docs/continuity/00_START_HERE.md`

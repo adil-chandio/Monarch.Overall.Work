@@ -17,7 +17,7 @@ This validates the archive and prints the exact copy-paste bootstrap prompt with
 - Head at capture: `393edd658e8336780e1cd4aea4cf5b5261c2d1e3`
 - Five spaces: `yt-automation`, `monarch-studio`, `personal-brand`, `portfolio`, `ops` (`config/spaces.json`).
 - Three channels: Monarch Lab, Mindful Momentum, Curious Miles (`config/channels.json`).
-- Active continuity task: repo-backed continuation archive implemented; **real Arena chat exports still need to be dropped into `chat_exports/inbox/` and imported** to close the exactness gap.
+- Active continuity task: repo-backed continuation archive implemented, validated and delivered; **real Arena chat exports still need to be dropped into `chat_exports/inbox/` and imported** to close the exactness gap. Pack commit `a8596fa869df50593270ed53b39a11f2bc8ca0e0`, CI run `42499227414` succeeded.
 - Parallel video task: V4 and V5 ranking Shorts are **creatively rejected**. No V6 package, workflow, rights-cleared funny social-platform clip set, renderer, QC contract or MP4 exists. Do not re-present V4/V5 as final.
 
 ## Exact reading order
@@ -59,7 +59,8 @@ Use `--coverage partial` unless the file is genuinely the complete chat. Then `r
 
 ```bash
 python3 tools/continuity.py checkpoint --title "..." --details "..." \
-  --evidence-level repo_evidence --ref path/to/evidence
+  --evidence-level repo_evidence --ref path/to/evidence \
+  --status "..." --next-action "..."
 ```
 
-Then update `STATE.json`, `render`, `validate`, `render --check`, commit and push. Full protocol: `UPDATE_PROTOCOL.md`.
+`checkpoint` appends the event, updates `STATE.json`, refreshes hashes/coverage and renders ledgers automatically. Then run `validate`, `render --check`, commit and push. Full protocol: `UPDATE_PROTOCOL.md`.
