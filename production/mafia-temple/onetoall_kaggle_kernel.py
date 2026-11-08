@@ -46,7 +46,13 @@ try:
     import torch
     if not torch.cuda.is_available(): raise RuntimeError('No CUDA GPU allocated')
     receipt['gpu']=torch.cuda.get_device_name(0);receipt['torch']=torch.__version__
-    receipt['native_bf16']=bool(torch.cuda.is_bf16_supported());save()
+    receipt['compute_capability']=list(torch.cuda.get_device_capability(0))
+    receipt['bf16_including_emulation']=bool(torch.cuda.is_bf16_supported())
+    try:
+        receipt['native_bf16']=bool(torch.cuda.is_bf16_supported(including_emulation=False))
+    except TypeError:
+        receipt['native_bf16']=receipt['compute_capability'][0] >= 8
+    save()
     print('GPU:',receipt['gpu'],'torch:',receipt['torch'],'native bf16:',receipt['native_bf16'],flush=True)
     # Keep the full framework and downloaded models out of Kaggle's output
     # directory so that artifact listing stays small and recoverable.
