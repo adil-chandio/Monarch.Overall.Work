@@ -4,17 +4,17 @@
   "branch": "arena/2b012328-monarch-overall-work",
   "head_at_capture": "8cb1e6abf64074db6ff7bfe3dcd496594f329780",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-08T19:47:03Z",
-  "last_event_id": "evt-057-monarch-cam-v6-continuity-globs",
+  "updated_at": "2026-11-08T19:56:29Z",
+  "last_event_id": "evt-058-monarch-cam-v6-audio-gate-cli-fix",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "v6_technical_build_configured",
+    "status": "v6_ci_gate_step_fix_pending",
     "space": "yt-automation",
     "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
     "current_step": "A separate V6 technical package is configured for the rejected ranking Short: seven per-title CC0 Commons originals, source/clip/social-origin ledgers, corrected centered hook and left 1.-7. plates, safe-area/layout manifest, raw per-window native audio contract, renderer, QC and workflow. V5 is untouched. V6 MP4 and CI run are pending; no human creative acceptance is claimed.",
-    "next_action": "Push the V6 workflow, watch CI, inspect the MP4 and qc_summary.json; do not claim V6 acceptance or approval.",
+    "next_action": "Push the V6 audio-gate CLI fix and scipy dependency, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance or approval.",
     "blocking_gaps": [
       "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
       "No complete Arena chat export/JSON",
@@ -28,15 +28,15 @@
   "parallel_task": {
     "id": "monarch-cam-v6-intent",
     "title": "Next-level full-motion raw funny-animal ranking Short",
-    "status": "v6_technical_build_configured",
+    "status": "v6_ci_gate_step_fix_pending",
     "space": "yt-automation",
     "evidence_level": "gap",
     "rejected": [
       "V4 “sirf text likh diya”",
       "V5 “NAHI abhi bhi theek se nhi”"
     ],
-    "next_action": "Push the V6 workflow, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance, approval, or audience results.",
-    "claims": "Technical package configured; V6 MP4/run pending CI; no real social-platform reposts; no acceptance, approval, full-motion/native-audio listening, or outcome claim."
+    "next_action": "Push the V6 audio-gate CLI fix and scipy dependency, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance or approval.",
+    "claims": "Run 42516794773 failed at Nine web audio gates because the module was invoked with no CLI args; fix is configured but V6 MP4/run are still pending. No acceptance, approval, full-motion/native-audio listening, or outcome claim."
   },
   "continuation_requirements": [
     "Repo-backed source of truth in Monarch.Overall.Work.",

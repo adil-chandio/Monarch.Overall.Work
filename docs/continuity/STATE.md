@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-08T19:47:03Z`
-- Last event: `evt-057-monarch-cam-v6-continuity-globs`
+- Updated: `2026-11-08T19:56:29Z`
+- Last event: `evt-058-monarch-cam-v6-audio-gate-cli-fix`
 
 ## Active channel
 ```json
@@ -42,9 +42,9 @@
   "current_step": "A separate V6 technical package is configured for the rejected ranking Short: seven per-title CC0 Commons originals, source/clip/social-origin ledgers, corrected centered hook and left 1.-7. plates, safe-area/layout manifest, raw per-window native audio contract, renderer, QC and workflow. V5 is untouched. V6 MP4 and CI run are pending; no human creative acceptance is claimed.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
-  "next_action": "Push the V6 workflow, watch CI, inspect the MP4 and qc_summary.json; do not claim V6 acceptance or approval.",
+  "next_action": "Push the V6 audio-gate CLI fix and scipy dependency, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance or approval.",
   "space": "yt-automation",
-  "status": "v6_technical_build_configured",
+  "status": "v6_ci_gate_step_fix_pending",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```
@@ -65,16 +65,16 @@
 ## Parallel video task
 ```json
 {
-  "claims": "Technical package configured; V6 MP4/run pending CI; no real social-platform reposts; no acceptance, approval, full-motion/native-audio listening, or outcome claim.",
+  "claims": "Run 42516794773 failed at Nine web audio gates because the module was invoked with no CLI args; fix is configured but V6 MP4/run are still pending. No acceptance, approval, full-motion/native-audio listening, or outcome claim.",
   "evidence_level": "gap",
   "id": "monarch-cam-v6-intent",
-  "next_action": "Push the V6 workflow, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance, approval, or audience results.",
+  "next_action": "Push the V6 audio-gate CLI fix and scipy dependency, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance or approval.",
   "rejected": [
     "V4 “sirf text likh diya”",
     "V5 “NAHI abhi bhi theek se nhi”"
   ],
   "space": "yt-automation",
-  "status": "v6_technical_build_configured",
+  "status": "v6_ci_gate_step_fix_pending",
   "title": "Next-level full-motion raw funny-animal ranking Short"
 }
 ```

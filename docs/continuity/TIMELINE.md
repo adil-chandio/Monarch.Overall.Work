@@ -446,3 +446,12 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Evidence level: `repo_evidence`
 - Details: Added short_ranking_raw_v6 package paths, V6 workflow and V6 MP4 deliverable to tools/continuity.py SCAN_GLOBS so refresh/validate hash the new technical package. V6 MP4/run remain pending CI.
 - Ref: `tools/continuity.py`
+
+## `2026-11-08T19:56:29Z` · evt-058-monarch-cam-v6-audio-gate-cli-fix · fix
+
+- Title: Fixed V6 nine web audio gate invocation
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Run 42516794773 failed at Nine web audio gates with exit code 2 because the workflow invoked showreel.audio_qc.gates with no CLI args. Added scipy to Python tools, changed the step to pass the delivered V6 MP4 with --profile web --json review/audio_qc.json and tee audio_qc.log, and added the log to artifacts. V6 successful run/MP4 still pending.
+- Ref: `.github/workflows/monarch-cam-short-ranking-raw-v6.yml`
+- Ref: `docs/continuity/PROBLEMS_FIXES.md`

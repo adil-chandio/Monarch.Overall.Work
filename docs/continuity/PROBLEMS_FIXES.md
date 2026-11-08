@@ -81,3 +81,11 @@ This is the regression memory. Failed approaches stay visible so a new chat does
 - **Fix:** backed up 7 untracked paths plus `.gitignore` diff to `/tmp/arena_stale_backup_1794159448`, restored `.gitignore`, ran `git clean -fd -e deliverables`, used explicit-refspec `git fetch`, then `git merge --ff-only` to `4b3574c1`. `python3 tools/continuity.py validate` passed.
 - **Permanent mitigation:** root `RECOVER.md`, `python3 tools/continuity.py recover`, root `MONARCH_CAM.md`, and active-channel capsule embedded in `resume`/`bootstrap`. CI also runs `python3 tools/continuity.py channel`.
 - **Standing rule:** never restart work from a stale checkout; recover the branch head first. Do not delete `deliverables/` or `.git`.
+
+## V6 audio-gate invocation — 2026-11-08
+
+- Failed run: `42516794773`, job `128841464088`, step `Nine web audio gates`, exit code `2`.
+- Cause: the V6 workflow invoked `python -m showreel.audio_qc.gates` with no positional audio path. `showreel/audio_qc/gates.py main()` returns `2` when no args are supplied. The step also relied on env vars that the module does not read.
+- Fix: install `scipy` in the V6 Python-tools step and invoke the gates with the delivered V6 MP4 path, `--profile web`, `--json .../audio_qc.json`, and `tee .../audio_qc.log`, matching the V5 workflow. Add `audio_qc.log` to the V6 artifact list.
+- V5/V4/V3 packages remain untouched. No human creative acceptance is claimed.
+

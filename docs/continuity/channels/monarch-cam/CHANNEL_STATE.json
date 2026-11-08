@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v6_technical_build_configured",
+  "status": "v6_ci_gate_step_fix_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -16,12 +16,12 @@
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
     "status": "ready",
-    "next_action": "Push the V6 workflow, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance or approval. V5 stays untouched."
+    "next_action": "Push the V6 audio-gate CLI fix and scipy dependency, watch CI, then inspect the MP4 and qc_summary.json; do not claim creative acceptance or approval. V5 stays untouched."
   },
   "parallel_unresolved": {
     "id": "monarch-cam-v6-intent",
     "title": "Next-level full-motion raw funny-animal ranking Short",
-    "status": "v6_technical_build_configured",
+    "status": "v6_ci_gate_step_fix_pending",
     "no_v6_files": false,
     "v5_untouched": true
   },

@@ -15,7 +15,7 @@
 - V4: `331eafbf64af770eb451e6967a3eaab3a9bbbb39`; final run `42404195062` / `128498253881`; artifact `13587220215`.
 - V5: `[skip ci] 8fc1dcd203a7662a0f662cbb56f816276ec1a0fa`; success `42430602404`; artifact `13597706464`; `37,855,740` bytes; `expired=false`. Static fixes `393edd6`.
 - V5 diagnostics/fixes: `ff52bd9`, `f5c1c6f`, `f0a92fb`, `14ef4a2`, `27b0a44`, `ff8aa55`, `99f4548349ee6213315d01d97587673c204f9c20`.
-- No run after `393edd6` for V5. V6 workflow is configured; V6 run is pending.
+- No run after `393edd6` for V5. V6 workflow configured; run `42516794773` failed at `Nine web audio gates` (exit 2, module invoked with no CLI args). Fix configured; V6 successful run and MP4 are pending.
 
 ## Deliverables
 

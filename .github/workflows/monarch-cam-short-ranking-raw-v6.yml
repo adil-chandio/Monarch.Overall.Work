@@ -52,7 +52,7 @@ jobs:
       - name: Install Python tools
         run: |
           python -m pip install --upgrade pip
-          python -m pip install numpy pillow opencv-python-headless soundfile pyloudnorm requests imageio-ffmpeg
+          python -m pip install numpy scipy pillow opencv-python-headless soundfile pyloudnorm requests imageio-ffmpeg
 
       - name: Compile V6 scripts and validate contracts
         run: |
@@ -82,10 +82,13 @@ jobs:
         run: python production/monarch-cam/short_ranking_raw_v6/build_ranking_audio_raw_v6.py
 
       - name: Nine web audio gates
-        env:
-          QC_AUDIO_PATH: ${{ env.V6_AUDIO }}
-          QC_REPORT: ${{ env.V6_REVIEW }}/audio_qc.json
-        run: python -m showreel.audio_qc.gates
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            "${{ env.V6_MP4 }}" \
+            --profile web \
+            --json "${{ env.V6_REVIEW }}/audio_qc.json" \
+            2>&1 | tee "${{ env.V6_REVIEW }}/audio_qc.log"
 
       - name: Technical QC with safe-area and social-origin checks
         run: python production/monarch-cam/short_ranking_raw_v6/technical_qc_raw_v6.py
@@ -180,6 +183,7 @@ jobs:
             ${{ env.V6_REVIEW }}/source_audio_audit.json
             ${{ env.V6_REVIEW }}/native_audio_ledger.json
             ${{ env.V6_REVIEW }}/audio_qc.json
+            ${{ env.V6_REVIEW }}/audio_qc.log
             ${{ env.V6_REVIEW }}/technical_qc.json
             ${{ env.V6_REVIEW }}/layout_manifest.json
             ${{ env.V6_REVIEW }}/visual_v6_qc.json
