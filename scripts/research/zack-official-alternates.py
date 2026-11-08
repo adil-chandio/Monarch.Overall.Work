@@ -2,7 +2,7 @@
 No authentication workarounds. Originals/edition equivalence require separate checks.
 No production; downloaded third-party media is temporary and never committed.
 """
-import datetime,json,re,subprocess,sys,tempfile
+import datetime,json,os,re,subprocess,sys,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'docs/research/zack-original-access';OUT.mkdir(parents=True,exist_ok=True)
 CASES=[
@@ -14,6 +14,7 @@ report={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'p
  'publisher_link_evidence':{'url':'https://linktr.ee/zackdfilmsofficial','observed_links':['https://www.facebook.com/zackdfilms','https://www.tiktok.com/@thezackdfilms','https://www.instagram.com/zackdfilms','https://www.youtube.com/@zackdfilms']},
  'limits':'Publisher-linked account, alternate-platform cut; not automatically a byte-identical YouTube edition or completed AV review. Display-name-only mirrors excluded.', 'cases':[]}
 for platform,url,profile in CASES:
+ if os.environ.get('ALTERNATE_PLATFORM') and platform!=os.environ['ALTERNATE_PLATFORM']:continue
  row={'platform':platform,'source_url':url,'account_linked_by_publisher_landing_page':True,
       'full_video_manually_reviewed':False,'continuous_audio_reviewed':False}
  try:
@@ -31,10 +32,11 @@ for platform,url,profile in CASES:
      entry=next((x for x in entries if x.get('url') or x.get('webpage_url')),None)
      target=(entry.get('webpage_url') or entry.get('url')) if entry else None
     else:
+     row['available_format_descriptors']=[{k:f.get(k) for k in ['format_id','width','height','vcodec','acodec','protocol','has_drm']} for f in info.get('formats',[])]
      row['metadata']={k:info.get(k) for k in ['id','title','uploader','uploader_id','channel','channel_id','duration','webpage_url']};target=url
     if target:
      row['pilot_media_url']=target
-     p=subprocess.run([sys.executable,'-m','yt_dlp','--no-playlist','--no-progress','--socket-timeout','15','--retries','0','--extractor-retries','0','--js-runtimes','node','--max-filesize','100M','-f','bestvideo[height<=1080]+bestaudio/best[height<=1080]','--merge-output-format','mp4','-o',tmp+'/source.%(ext)s',target],capture_output=True,text=True,timeout=120)
+     p=subprocess.run([sys.executable,'-m','yt_dlp','--no-playlist','--no-progress','--socket-timeout','15','--retries','0','--extractor-retries','0','--js-runtimes','node','--max-filesize','100M','-f','bestvideo[height<=?1080]+bestaudio/best[height<=?1080]','--merge-output-format','mp4','-o',tmp+'/source.%(ext)s',target],capture_output=True,text=True,timeout=120)
      if p.returncode:row.update(status='public_media_access_failed',diagnostic=clean(p.stderr))
      else:
       sources=[x for x in Path(tmp).glob('source.*') if x.suffix in ['.mp4','.webm','.mkv']]
@@ -56,4 +58,4 @@ for platform,url,profile in CASES:
     elif profile:row['status']='no_public_profile_video_entries'
  except Exception as e:row.update(status='test_error',diagnostic=clean(type(e).__name__+': '+str(e)))
  report['cases'].append(row);print(platform,row['status'],flush=True)
- (OUT/'official-alternate-probe.json').write_text(json.dumps(report,indent=2)+'\n')
+ (OUT/os.environ.get('ALTERNATE_REPORT','official-alternate-probe.json')).write_text(json.dumps(report,indent=2)+'\n')
