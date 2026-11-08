@@ -5,7 +5,13 @@ on:
     branches: [arena/2b012328-monarch-overall-work]
     paths:
       - '.github/workflows/monarch-cam-short-ranking-raw-v6.yml'
-      - 'production/monarch-cam/short_ranking_raw_v6/**'
+      - 'production/monarch-cam/short_ranking_raw_v6/*.py'
+      - 'production/monarch-cam/short_ranking_raw_v6/*.json'
+      - 'production/monarch-cam/short_ranking_raw_v6/review/selected_windows.json'
+      - 'production/monarch-cam/short_ranking_raw_v6/review/candidates/candidate_review_manifest.json'
+      - '!production/monarch-cam/short_ranking_raw_v6/**/*.md'
+      - '!production/monarch-cam/short_ranking_raw_v6/review/**'
+      - '!docs/continuity/**'
       - '.gitignore'
       - 'public/showreel/audio_qc/**'
       - 'public/showreel/fonts/**'
@@ -217,5 +223,7 @@ jobs:
             echo 'No V6 changes to commit'
           else
             git commit -m "build(monarch-cam): raw full-screen V6 60s Short [skip ci]"
+            git fetch origin arena/2b012328-monarch-overall-work
+            git merge --no-edit -X ours origin/arena/2b012328-monarch-overall-work || true
             git push origin HEAD:arena/2b012328-monarch-overall-work
           fi

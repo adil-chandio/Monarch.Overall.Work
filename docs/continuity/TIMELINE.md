@@ -465,3 +465,11 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4`
 - Ref: `production/monarch-cam/short_ranking_raw_v6/review/qc_summary.json`
 - Ref: `production/monarch-cam/short_ranking_raw_v6/review/technical_qc.json`
+
+## `2026-11-08T23:14:25Z` · evt-060-monarch-cam-v6-workflow-trigger-hardening · fix
+
+- Title: Prevent redundant V6 rebuilds from continuity commits
+- Space: `ops`
+- Evidence level: `repo_evidence`
+- Details: Run 42518519079 rebuilt V6 after a continuity-only commit and failed only at the commit-back push because the remote branch had advanced. Narrowed V6 push paths to scripts/config/selected windows (excluding docs, generated review evidence and continuity files) and made the commit-back step fetch/merge the remote branch before pushing. The successful V6 MP4 at 5559b52/75bee4c/fde4ca0 is unchanged.
+- Ref: `.github/workflows/monarch-cam-short-ranking-raw-v6.yml`

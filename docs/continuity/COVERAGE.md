@@ -37,7 +37,7 @@ This archive is honest about evidence strength. A screenshot is never promoted t
     "channel_files": 10,
     "channels_indexed": 4,
     "decisions": 19,
-    "events": 55,
+    "events": 56,
     "manifest_files": 358,
     "prompt_results": 13,
     "screenshots": 29,

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T20:07:37Z",
-  "head": "5559b52e0ef8eaa5d420180b17a2f1c410d58c51",
+  "generated_at": "2026-11-08T23:14:27Z",
+  "head": "fde4ca05f9550c29125096fac5493494dcf0ba46",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -18,8 +18,8 @@
     },
     {
       "path": ".github/workflows/monarch-cam-short-ranking-raw-v6.yml",
-      "bytes": 11543,
-      "sha256": "ccd7fd3586cbd6ca8d8f2c883881cd4849f10a1f56bc8fac6b79c1cb91ff89a6",
+      "bytes": 12106,
+      "sha256": "cfa76d1f2cf37338ad0a8c88b748b2eb0be0fbd9e9372e7de4ae7874df1141fd",
       "evidence_level": "archive_metadata"
     },
     {
@@ -109,7 +109,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4455,
-      "sha256": "c16996f44824217aad5dea07483955ef256867775eb148d822bdc8b2c388605a",
+      "sha256": "afbd5336230cc63158566d4701953ace4d7841833d033ca6462ee5c026079794",
       "evidence_level": "state_ledger"
     },
     {
@@ -120,8 +120,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 25099,
-      "sha256": "da17f1143ec9e7f3ca84b498599b9a31f4848d6e3665792cdbb89174fefcd4ba",
+      "bytes": 25819,
+      "sha256": "3b29e67a140359c6d363312a722012d68d09c655b987dec87de30efa1618c0b2",
       "evidence_level": "state_ledger"
     },
     {
@@ -174,8 +174,8 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 10398,
-      "sha256": "6e4a99d102b74e7f0f3501e8164245c50ec7ee7e9c3d78d5917fc2b46de23f80",
+      "bytes": 10400,
+      "sha256": "4c3f05267dddcd3eefb89ccc1641dae6c13812f7b0700c3916f25e4ae114cda5",
       "evidence_level": "state_ledger"
     },
     {

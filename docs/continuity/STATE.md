@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-08T20:07:37Z`
-- Last event: `evt-059-monarch-cam-v6-technical-build-complete`
+- Updated: `2026-11-08T23:14:25Z`
+- Last event: `evt-060-monarch-cam-v6-workflow-trigger-hardening`
 
 ## Active channel
 ```json
