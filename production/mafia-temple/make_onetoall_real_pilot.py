@@ -15,9 +15,10 @@ out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True)
 reference=(here/'keyframes/shot-04-identity-study-b.jpg').read_bytes()
 assets={'reference':{'url':'https://raw.githubusercontent.com/adil-chandio/Monarch.Overall.Work/4204ebe/production/mafia-temple/keyframes/shot-04-identity-study-b.jpg','sha256':hashlib.sha256(reference).hexdigest()},'driver':{'mount':f'/kaggle/input/{dataset_slug}/driver.mp4','owner':a.dataset.split('/')[0],'sha256':'fef029f40687ee924f0eaef6e3da932485441db4b9a3c992780121b12507e28d'}}
 ns={};exec((here/'onetoall_graph.py').read_text(),ns);graph=ns['make_graph']()
-# This preserves the complete generated reference; motion is transformed to it.
+# Ref-mode limb retargeting severely distorted the profile pose in preflight.
+# Keep the reference intact and detect on the uniformly framed source instead.
 # Output pose still requires visual validation, including limbs near boundaries.
-graph['3']['inputs']['align_to']='ref'
+graph['3']['inputs']['align_to']='none'
 # Do not use the stock performer's facial landmarks as a guide.
 graph['3']['inputs']['draw_face_points']='none'
 if a.stage=='preflight':

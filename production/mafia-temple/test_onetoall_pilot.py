@@ -51,6 +51,7 @@ class OneToAllPilotTests(unittest.TestCase):
                 self.assertNotIn('mafia-full-body-ai-v2_1.png',code)
                 compile(code,'test-real-notebook','exec')
                 if stage=='preflight': self.assertIn('PrivateAuditSink',code)
-                self.assertIn("'align_to': 'ref'",code)
+                self.assertIn("'align_to': 'none'",code)
+                self.assertIn('zoom=1.45',code)
 
 if __name__=='__main__': unittest.main()

@@ -15,8 +15,11 @@ receipt=json.loads((out/'onetoall-receipt.json').read_text())
 status='complete_pose_preflight' if stage=='preflight' else 'complete_research_only'
 if receipt.get('status')!=status or receipt.get('original_photo_used') is not False: raise ValueError('Receipt failed safety check')
 headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'}
+refs=[]
 for name in files:
     data=(out/name).read_bytes()
     if not data or len(data)>20_000_000: raise ValueError('Unexpected output size '+name)
     r=requests.post(f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/git/blobs",json={'content':base64.b64encode(data).decode(),'encoding':'base64'},headers=headers,timeout=120);r.raise_for_status()
-    print(f'::notice title=Real pilot {stage}::{name} {r.json()["sha"]}',flush=True)
+    refs.append(f'{name}={r.json()["sha"]}')
+# GitHub caps annotations per step; publish all blob IDs in one notice.
+print(f'::notice title=Real pilot {stage}::'+','.join(refs),flush=True)

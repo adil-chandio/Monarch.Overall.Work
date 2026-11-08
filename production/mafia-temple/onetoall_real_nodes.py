@@ -32,7 +32,12 @@ class PrivatePilotInput:
             ok, bgr = cap.read()
             if not ok: raise ValueError(f'Could not decode driver frame {index}')
             bgr = cv2.flip(bgr, 1)
-            rgb.append(cv2.resize(cv2.cvtColor(bgr,cv2.COLOR_BGR2RGB), (width,height), interpolation=cv2.INTER_AREA))
+            rgb_frame=cv2.resize(cv2.cvtColor(bgr,cv2.COLOR_BGR2RGB), (width,height), interpolation=cv2.INTER_AREA)
+            # Uniformly enlarge and position the real driver to approximate the
+            # reference footprint. No limb-wise retargeting, and no photo warp.
+            zoom=1.45
+            M=np.float32([[zoom,0,(.57-zoom*.62)*width],[0,zoom,(.52-zoom*.42)*height]])
+            rgb.append(cv2.warpAffine(rgb_frame,M,(width,height),flags=cv2.INTER_LINEAR,borderMode=cv2.BORDER_REPLICATE))
         cap.release()
         a = np.stack(rgb).astype(np.float32)/255
         b = np.asarray(ref).astype(np.float32)[None]/255
@@ -66,7 +71,7 @@ class PrivatePoseAudit:
             canvas.save(ROOT/f'pose-frames-{start:03d}.jpg',quality=90)
         r=(reference[0].detach().cpu().numpy().clip(0,1)*255).astype('uint8')
         Image.fromarray(r).save(ROOT/'warped-ref-audit.jpg', quality=90)
-        (ROOT/'pose-audit.json').write_text(json.dumps({'frames':len(a),'nonblack_pixels_min':int(counts.min()),'nonblack_pixels_max':int(counts.max()),'driver_warning':'Actual running motion; mirrored, portrait-resized and resampled to 16 fps. Pose detection and retargeting still require visual inspection.'},indent=2))
+        (ROOT/'pose-audit.json').write_text(json.dumps({'frames':len(a),'nonblack_pixels_min':int(counts.min()),'nonblack_pixels_max':int(counts.max()),'driver_warning':'Actual running motion; mirrored, uniformly reframed and resampled to 16 fps. Pose detection still requires visual inspection.'},indent=2))
         return (images,)
 
 class PrivatePilotOutput:
