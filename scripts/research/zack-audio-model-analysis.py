@@ -19,6 +19,10 @@ def clean(e):
  if isinstance(e,subprocess.CalledProcessError):text=(e.stderr or b'').decode(errors='replace')
  else:text=type(e).__name__+': '+str(e)
  return re.sub(r'https?://\S+','[URL]',text)[-1400:]
+def json_native(value):
+ if isinstance(value,np.generic):return value.item()
+ raise TypeError('Unsupported result type: '+type(value).__name__)
+
 def envelope(raw):
  key='ten-audio-model-results';symmetric=AESGCM.generate_key(bit_length=256);nonce=os.urandom(12)
  data=AESGCM(symmetric).encrypt(nonce,raw,key.encode());public=serialization.load_pem_public_key(PUB)
@@ -30,7 +34,7 @@ def main():
  report={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'production_hold':True,'perceptual_audio_listening':False,'purpose':'Model-derived transcription and broad audio-event candidates from exact source soundtracks; NOT verified listening or a complete forensic review','asr_model':'Systran/faster-whisper-base.en','asr_parameters':{'device':'cpu','compute_type':'int8','beam_size':5,'language':'en','word_timestamps':True,'vad_filter':False},'event_model':'MIT/ast-finetuned-audioset-10-10-0.4593','event_parameters':{'window_seconds':10,'stride_seconds':5,'top_labels':5,'activation':'sigmoid','limits':'Multi-label model scores are not calibrated confidence, source stems or exact event timings; coarse overlapping windows, possible false positives/negatives.'},'alignment_limit':'ASR word/window times relative to decoded mono 16kHz WAV, not human-corrected or guaranteed frame-accurate. Container start times recorded for review.','packages':{n:version(n) for n in ['faster-whisper','transformers','torch','yt-dlp']},'cases':[]}
  public={'production_hold':True,'perceptual_audio_listening':False,'model_setup_status':'not_attempted','cases':[]}
  def save():
-  raw=json.dumps(report,indent=2).encode();row=envelope(raw)
+  raw=json.dumps(report,indent=2,default=json_native).encode();row=envelope(raw)
   public['analyzed_case_count']=sum(r.get('status')=='model_analysis_complete' for r in report['cases'])
   public['same_encoded_audio_case_count']=sum(r.get('encoded_audio_matches_local') is True for r in report['cases'])
   public['public_key_sha256']=hashlib.sha256(PUB).hexdigest();public['cases']=[row]
@@ -77,7 +81,7 @@ def main():
      segments,meta=asr.transcribe(audio,language='en',beam_size=5,word_timestamps=True,vad_filter=False,condition_on_previous_text=False)
      r['asr_segments']=[]
      for s in segments:
-      r['asr_segments'].append({'start':s.start,'end':s.end,'text':s.text,'avg_logprob':s.avg_logprob,'no_speech_prob':s.no_speech_prob,'compression_ratio':s.compression_ratio,'words':[{'start':w.start,'end':w.end,'text':w.word,'probability':w.probability,'low_score_review_candidate':w.probability<.8} for w in (s.words or [])]})
+      r['asr_segments'].append({'start':s.start,'end':s.end,'text':s.text,'avg_logprob':s.avg_logprob,'no_speech_prob':s.no_speech_prob,'compression_ratio':s.compression_ratio,'words':[{'start':w.start,'end':w.end,'text':w.word,'probability':float(w.probability),'low_score_review_candidate':bool(w.probability<.8)} for w in (s.words or [])]})
      r['event_windows']=[]
      for start in range(0,len(audio),5*16000):
       clip=audio[start:start+10*16000]
