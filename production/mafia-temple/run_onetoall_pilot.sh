@@ -26,6 +26,13 @@ for ((i=0;i<270;i++)); do
       export PILOT_KERNEL_SLUG="$slug"
       python production/mafia-temple/stableanim_diagnose.py
       cp production/mafia-temple/run-pilot-output/run-pilot-diagnostics.json "$out/failure-diagnostics.json"
+      python - <<'PY'
+import json
+p='production/mafia-temple/onetoall-pilot-output/failure-diagnostics.json'
+d=json.load(open(p))
+for line in d.get('events', [])[-30:]: print('REMOTE_DIAGNOSTIC:',line[:300])
+for line in d.get('tail', [])[-10:]: print('REMOTE_TAIL:',line[:300])
+PY
       exit 1;;
   esac
   sleep 25

@@ -62,7 +62,7 @@ try:
     if part.count(old)!=1: raise RuntimeError('Text encoder precision patch no longer matches')
     p.write_text(s[:start]+part.replace(old,new,1)+s[end:]);receipt['t5_precision_patch']='enum includes existing fp16 dtype implementation'
     # Keep existing Kaggle torch/CUDA; install only compatible runtime packages.
-    run([sys.executable,'-m','pip','install','-q','-r',str(comfy/'requirements.txt'),'-r',str(custom/'ComfyUI-WanVideoWrapper'/'requirements.txt'),'numpy==1.26.4','opencv-python-headless==4.10.0.84','onnxruntime-gpu==1.20.1','imageio-ffmpeg','huggingface_hub<1'])
+    run([sys.executable,'-m','pip','install','-q','-r',str(comfy/'requirements.txt'),'-r',str(custom/'ComfyUI-WanVideoWrapper'/'requirements.txt'),'numpy==1.26.4','opencv-python-headless==4.10.0.84','onnxruntime-gpu==1.20.2','imageio-ffmpeg','huggingface_hub<1'])
     from huggingface_hub import hf_hub_download
     items=[
       ('Kijai/WanVideo_comfy','8260d429d19fd7a72304cad059160b95d843913f','OneToAllAnimation/Wan21-OneToAllAnimation_1_3B_v2_fp16.safetensors','diffusion_models/Wan21-OneToAllAnimation_1_3B_v2_fp16.safetensors'),
