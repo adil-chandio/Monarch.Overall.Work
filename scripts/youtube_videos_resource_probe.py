@@ -21,6 +21,7 @@ def normalize(item):
         'definition':content.get('definition'), 'region_restriction':content.get('regionRestriction'),
         'privacy_status':status.get('privacyStatus'), 'embeddable':status.get('embeddable'),
         'youtube_license_field':status.get('license'),
+        'player_embed_html_present':bool(item.get('player',{}).get('embedHtml')),
         'view_count':stats.get('viewCount'), 'like_count':stats.get('likeCount'),
         'thumbnail_urls':{k:v.get('url') for k,v in snippet.get('thumbnails',{}).items()},
     }
@@ -31,7 +32,7 @@ def run():
     if not key:
         result['result']='no_configured_key'
         return result
-    query=urllib.parse.urlencode({'part':'snippet,contentDetails,status,statistics','id':','.join(IDS),'maxResults':len(IDS)})
+    query=urllib.parse.urlencode({'part':'snippet,contentDetails,status,statistics,player','id':','.join(IDS),'maxResults':len(IDS)})
     req=urllib.request.Request(ENDPOINT+'?'+query,headers={'x-goog-api-key':key,'Accept':'application/json'})
     try:
         with urllib.request.urlopen(req,timeout=30) as resp:data=json.load(resp)

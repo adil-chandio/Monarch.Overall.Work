@@ -12,6 +12,7 @@ class VideosResourceTests(unittest.TestCase):
         self.assertIs(result['embeddable'],False)
         self.assertIsNone(result['caption_flag'])
         self.assertEqual(result['thumbnail_urls'],{})
+        self.assertFalse(result['player_embed_html_present'])
     def test_normalize_values(self):
         result=normalize({'id':'x','snippet':{'title':'Title','thumbnails':{'default':{'url':'https://example.test'}}},'contentDetails':{'caption':'false'},'status':{'license':'youtube'}})
         self.assertEqual(result['title'],'Title')
