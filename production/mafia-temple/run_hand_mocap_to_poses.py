@@ -83,7 +83,10 @@ def make_poses(bvh_text, output_dir, face_offsets=None, hand_offsets=None, frame
                 # Source template is oriented approximately upwards.
                 angle=atan2(delta[1],delta[0])+np.pi/2
                 c,s=cos(angle),sin(angle)
-                rotated=[(round(wrist[0]+dx*c-dy*s),round(wrist[1]+dx*s+dy*c)) for dx,dy in hand_offsets]
+                # Smaller projected fingers: v1's full-size guide led to visibly
+                # oversized, splayed hands. This remains only approximate.
+                rotated=[(round(wrist[0]+.55*(dx*c-dy*s)),
+                          round(wrist[1]+.55*(dx*s+dy*c))) for dx,dy in hand_offsets]
                 for j,(a,b) in enumerate(edges):
                     rgb=tuple(round(255*v) for v in hsv_to_rgb(j/len(edges),1,1))
                     draw.line([rotated[a],rotated[b]],fill=rgb,width=2)

@@ -100,6 +100,6 @@ command=[sys.executable,'inference_basic.py','--pretrained_model_name_or_path',s
 run(command)
 frames=out/'animated_images'
 if len(list(frames.glob('frame_*.png'))) != 72: raise RuntimeError('Expected exactly 72 output frames')
-run(['ffmpeg','-y','-loglevel','error','-framerate','24','-i',str(frames/'frame_%d.png'),'-c:v','libx264','-crf','16','-pix_fmt','yuv420p',str(out/'run-motion-pilot-v4-hands.mp4')])
-(out/'run-pilot-v4-hands-receipt.json').write_text(json.dumps({'frames':72,'fps':24,'width':512,'height':512,'seconds_elapsed':round(time.time()-t,1),'status':'technical_test_only','license':'research-only until third-party weight licenses cleared'},indent=2))
+run(['ffmpeg','-y','-loglevel','error','-framerate','24','-i',str(frames/'frame_%d.png'),'-c:v','libx264','-crf','16','-pix_fmt','yuv420p',str(out/'run-motion-pilot-v5-hands.mp4')])
+(out/'run-pilot-v5-hands-receipt.json').write_text(json.dumps({'frames':72,'fps':24,'width':512,'height':512,'seconds_elapsed':round(time.time()-t,1),'status':'technical_test_only','license':'research-only until third-party weight licenses cleared'},indent=2))
 print('PILOT_DONE',flush=True)
