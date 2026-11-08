@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-11-08T02:10:13.206147+00:00",
+  "production_hold": true,
+  "publisher_link_evidence": {
+    "url": "https://linktr.ee/zackdfilmsofficial",
+    "observed_links": [
+      "https://www.facebook.com/zackdfilms",
+      "https://www.tiktok.com/@thezackdfilms",
+      "https://www.instagram.com/zackdfilms",
+      "https://www.youtube.com/@zackdfilms"
+    ]
+  },
+  "limits": "Publisher-linked account, alternate-platform cut; not automatically a byte-identical YouTube edition or completed AV review. Display-name-only mirrors excluded.",
+  "cases": [
+    {
+      "platform": "facebook",
+      "source_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+      "account_linked_by_publisher_landing_page": true,
+      "full_video_manually_reviewed": false,
+      "continuous_audio_reviewed": false,
+      "metadata": {
+        "id": "2330611454420496",
+        "title": "5.5M views \u00b7 59K reactions | What Is A Jerboa? \ud83e\udd14 | Zack D. Films",
+        "uploader": "Zack D. Films",
+        "uploader_id": "100089194705401",
+        "channel": null,
+        "channel_id": null,
+        "duration": 38.549,
+        "webpage_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/"
+      },
+      "pilot_media_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+      "status": "public_media_access_failed",
+      "diagnostic": "ERROR: [facebook] 2330611454420496: Requested format is not available. Use --list-formats for a list of available formats\n"
+    },
+    {
+      "platform": "tiktok",
+      "source_url": "https://www.tiktok.com/@thezackdfilms",
+      "account_linked_by_publisher_landing_page": true,
+      "full_video_manually_reviewed": false,
+      "continuous_audio_reviewed": false,
+      "status": "public_metadata_access_failed",
+      "diagnostic": "WARNING: [tiktok:user] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  [URL]  for information on installing the required dependencies\nERROR: [tiktok:user] thezackdfilms: Unable to extract secondary user ID. If you are able to get the channel_id from a video posted by this user, try using \"tiktokuser:channel_id\" as the input URL (replacing `channel_id` with its actual value)\n"
+    },
+    {
+      "platform": "instagram",
+      "source_url": "https://www.instagram.com/zackdfilms/",
+      "account_linked_by_publisher_landing_page": true,
+      "full_video_manually_reviewed": false,
+      "continuous_audio_reviewed": false,
+      "status": "public_metadata_access_failed",
+      "diagnostic": "WARNING: The program functionality for this site has been marked as broken, and will probably not work.\nERROR: [instagram:user] zackdfilms: Unable to download webpage: HTTP Error 429: Too Many Requests (caused by <HTTPError 429: Too Many Requests>)\n"
+    }
+  ]
+}
