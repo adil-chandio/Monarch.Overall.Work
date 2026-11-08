@@ -6,7 +6,7 @@ and may invent geometry; it must not be represented as survey-grade or final.
 import base64, io, json, os, pathlib, subprocess, sys
 IMAGES=__IMAGE_DATA__
 os.environ['USE_TF']='0';os.environ['USE_FLAX']='0';os.environ['HF_HUB_DISABLE_XET']='1';os.environ['TOKENIZERS_PARALLELISM']='false'
-subprocess.run([sys.executable,'-m','pip','install','-q','numpy<2','transformers==4.49.0','huggingface_hub==0.27.1','safetensors'],check=True)
+subprocess.run([sys.executable,'-m','pip','install','-q','transformers==4.49.0','huggingface_hub==0.27.1','safetensors'],check=True)
 import numpy as np
 import torch
 from PIL import Image
