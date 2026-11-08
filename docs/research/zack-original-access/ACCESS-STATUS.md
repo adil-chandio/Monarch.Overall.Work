@@ -2,6 +2,8 @@
 
 **Production remains STOPPED. The old “0 newly downloaded sources” blocker below is historical, not the current corpus status.**
 
+**Second pass:** [Native contact / sub-second findings and exact remaining coverage](actual-editions-evidence/second-pass/SECOND-PASS.md). Ten bounded dense windows, including f686–724 splinter grasp/withdrawal, now inspected at explicitly recorded full-frame or ROI scope. Continuous audio listening remains an unsolved capability/access blocker; no exhaustive ten-source completion claimed.
+
 A successful alternate-platform acquisition route has now supplied **10 actual MP4s**: nine corroborated creator-account X editions and one directly publisher-linked Facebook edition. This is a different cohort from the ten canonical YouTube IDs below, not proof of those YouTube bytes or project files.
 
 - Acquisition run: https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42438157062

@@ -1,0 +1,198 @@
+{
+  "production_hold": true,
+  "windows": [
+    {
+      "key": "01-hearts",
+      "start_frame": 356,
+      "end_frame_inclusive": 364,
+      "first_pts_seconds": 11.878533,
+      "last_pts_seconds": 12.145467,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        55,
+        180,
+        355,
+        530
+      ],
+      "observations": "Within the open chamber, red disc-like particles progress upward/out of the visible crop while the gray diaphragm/housing remains recognizable. This is a bounded mechanism view rather than particles floating beside an unrelated icon. Camera/object motion and diaphragm deformation are not quantitatively separated. This nine-frame crop does not establish a complete pump cycle.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "02-stomach",
+      "start_frame": 296,
+      "end_frame_inclusive": 304,
+      "first_pts_seconds": 9.876533,
+      "last_pts_seconds": 10.143467,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        160,
+        400,
+        460,
+        750
+      ],
+      "observations": "Gloved fingers support the removed organ below; its surface lesions, pale tissue and blue branching structures retain their relationship across this held pose. The visible interval is a hold AFTER removal, not direct evidence of the precise separation cut. No tool/organ detachment frame has been certified by this window.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "03-splinter",
+      "start_frame": 686,
+      "end_frame_inclusive": 724,
+      "first_pts_seconds": 22.889533,
+      "last_pts_seconds": 24.157467,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        240,
+        400,
+        540,
+        750
+      ],
+      "observations": "A complete local approach/grasp/withdrawal sequence is visible within the reviewed region. f686\u2013692: separated jaws approach the exposed fragment. By f694: jaws visibly converge around the fragment. f695\u2013706: closed grip persists near the fingertip. f707\u2013709: withdrawal begins; the narrow fragment is reddish/motion-softened and the tip/skin separation is not confidently resolved. f710 (23.690333s): an unambiguous blue-background gap separates fragment tip from fingertip. f711: tool/fragment continue leaving upward. f712\u2013724: clean fingertip region remains while background framing shifts. f710 is the first CLEAR separation in this inspected sequence, not a claim of sub-frame physical contact timing. No extraction sound was heard or labeled.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "04-balloon",
+      "start_frame": 206,
+      "end_frame_inclusive": 214,
+      "first_pts_seconds": 6.873533,
+      "last_pts_seconds": 7.140467,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        120,
+        700,
+        420,
+        1050
+      ],
+      "observations": "Corrected crop shows fingers around a red burner control/handle beneath the metal housing. Hand-to-control relationship persists while the view reframes and the caption changes between f210 and f211. The first burner-only crop did NOT contain this hand contact and was insufficient for the intended test. No valve travel angle or hot-air-release physics is established. First-pass note calling this a pulled control line is corrected to a raised hand at the burner control.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "05-surfer",
+      "start_frame": 866,
+      "end_frame_inclusive": 874,
+      "first_pts_seconds": 28.895533,
+      "last_pts_seconds": 29.162467,
+      "scope": "full_native_stills_individually_opened",
+      "roi_source_pixels": null,
+      "observations": "All nine full native stills were opened individually. f866: the remaining hand appears planted on the board while the torso is low and both legs are bent. By f874: the hand is visibly above the board and the torso is higher, with bent legs still supporting the rise. The board, forward foot, foam and wave retain scene identity through the interval; there is no observed hard cut in this window. The broad 29\u201331s rise is not being certified frame-by-frame beyond this exact window. World-space foot sliding and collision accuracy are not established from these images.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "06-concert",
+      "start_frame": 86,
+      "end_frame_inclusive": 94,
+      "first_pts_seconds": 2.869533,
+      "last_pts_seconds": 3.136467,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        250,
+        550,
+        550,
+        900
+      ],
+      "observations": "Corrected crop includes the fan head/neck and the overlying performer-body/blue-trouser edge. Head and hair orientation change. At f92 the neck is not yet prominently red in this crop; by f93 (3.103100s), red emphasis appears at the neck alongside increased transparency; f94 strengthens the anatomical emphasis. This local image effect is not a measured force, cord deformation or proof of physical trauma simulation. Original hair-only crop was insufficient for neck assessment.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "07-balcony",
+      "start_frame": 536,
+      "end_frame_inclusive": 544,
+      "first_pts_seconds": 17.884533,
+      "last_pts_seconds": 18.151467,
+      "scope": "full_native_stills_individually_opened",
+      "roi_source_pixels": null,
+      "observations": "All nine full native stills were opened individually. Both helper hands stay bracketing the legs near the knees; the child keeps hands near the bars. Small body/framing changes and pulsing yellow arrows coexist with a maintained supporting pose. Support is communicated by the hand/leg relationship, not by arrows alone. This is a meaningful held state: explanatory animation does not require a new cut or extreme motion every few frames. Actual force, neck pressure reduction and absence of mesh penetration are not certified.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "08-ai",
+      "start_frame": 56,
+      "end_frame_inclusive": 64,
+      "first_pts_seconds": 1.868533,
+      "last_pts_seconds": 2.135467,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        200,
+        400,
+        500,
+        750
+      ],
+      "observations": "Large fingers initially hold the reflective gauntlet; the logo-faced smaller figure comes into view behind it. Around f60\u201361 the large finger lifts away, and by f63\u201364 the smaller figure hands are visible holding the prop lower in the crop. This supports an apparent handoff, not a world-space constraint/parent-switch recovery. Some grip geometry is outside the crop and fast motion is softened. It is fictional visualization, not a verified AI experiment.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "09-fight",
+      "start_frame": 776,
+      "end_frame_inclusive": 784,
+      "first_pts_seconds": 25.892533,
+      "last_pts_seconds": 26.159467,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        150,
+        450,
+        450,
+        800
+      ],
+      "observations": "The adult torso lowers/rotates toward the grid floor while a red-shirted child stays across the body; shoe soles, arms and knees change orientation rapidly. Motion softness is visible. This confirms changing contact/pose states rather than a static pile revealed solely by camera motion. It does not certify injury forces, every colliding mesh, or absence of foot/limb intersections.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "10-jerboa",
+      "start_frame": 656,
+      "end_frame_inclusive": 664,
+      "first_pts_seconds": 21.888555,
+      "last_pts_seconds": 22.155489,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "roi_source_pixels": [
+        380,
+        650,
+        680,
+        1000
+      ],
+      "observations": "Tail direction changes from a rightward diagonal to nearer vertical over the body/root region. The ROI contains only part of the creature and cuts off most degree labels; it cannot establish whole-body counter-rotation or validate the numerical angles. A wider native view is still needed for that relationship. Do not turn this tail-only observation into a complete biomechanical finding.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    }
+  ],
+  "additional_full_native_stills_opened": {
+    "03-splinter": [
+      690
+    ],
+    "04-balloon": [
+      210
+    ],
+    "06-concert": [
+      90
+    ]
+  },
+  "audio_route_probe": {
+    "route": "Official sherpa-onnx Whisper tiny.en release asset, public GitHub retrieval",
+    "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-tiny.en.tar.bz2",
+    "asset_id": 179374011,
+    "asset_size_bytes": 118071777,
+    "result": "download_failed",
+    "failure": "curl exit 35: TLS connection to release-assets.githubusercontent.com failed",
+    "model_obtained": false,
+    "transcription_attempted": false,
+    "limits": "ASR, if obtained, would be a model-derived transcription aid, not continuous perceptual listening or an SFX/music audit. No credential workaround or alternative access-control bypass attempted."
+  },
+  "fully_manually_reviewed_sources": 0
+}

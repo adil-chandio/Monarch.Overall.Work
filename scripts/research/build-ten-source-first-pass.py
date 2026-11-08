@@ -54,6 +54,8 @@ def main():
 
 **Production remains STOPPED. This is a research dossier, not authorization to make a video.**
 
+This document records the FIRST-PASS baseline. Later bounded native/ROI progress and the unresolved audio capability blocker are documented separately in `second-pass/SECOND-PASS.md`; do not add overlapping image counts or interpret this baseline as the latest cumulative coverage.
+
 ## What has genuinely happened
 
 - Ten actual MP4s acquired by ordinary public platform retrieval, both audiovisual tracks decoded remotely, then authenticated/checksummed after encrypted local transfer. Workflow: https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42438157062

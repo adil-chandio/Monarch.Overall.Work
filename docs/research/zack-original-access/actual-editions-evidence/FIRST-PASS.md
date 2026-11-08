@@ -2,6 +2,8 @@
 
 **Production remains STOPPED. This is a research dossier, not authorization to make a video.**
 
+This document records the FIRST-PASS baseline. Later bounded native/ROI progress and the unresolved audio capability blocker are documented separately in `second-pass/SECOND-PASS.md`; do not add overlapping image counts or interpret this baseline as the latest cumulative coverage.
+
 ## What has genuinely happened
 
 - Ten actual MP4s acquired by ordinary public platform retrieval, both audiovisual tracks decoded remotely, then authenticated/checksummed after encrypted local transfer. Workflow: https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42438157062
@@ -225,7 +227,7 @@ SHA-256: `836dbb8df37f57c9139af96d8c68c97ec252a05c304ad5becbfe24689f3a271d`
 | 4–5.000 | f120 / 4.004000 | Envelope and landscape stay readable |
 | 5–6.000 | f150 / 5.005000 | View approaches burner under envelope |
 | 6–7.000 | f180 / 6.006000 | Burner controls above pilot's head |
-| 7–8.000 | f210 / 7.007000 | Hand pulls control line |
+| 7–8.000 | f210 / 7.007000 | Raised hand grasps burner control beneath housing |
 | 8–9.000 | f240 / 8.008000 | Airflow-like white marks emerge near envelope |
 | 9–10.000 | f270 / 9.009000 | Wider balloon with airflow marks |
 | 10–11.000 | f300 / 10.010000 | Envelope and basket in wider view |
