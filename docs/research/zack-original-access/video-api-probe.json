@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-11-08T02:04:38.204086+00:00",
+  "route": "Official Gemini API public YouTube fileData video input",
+  "documentation": "https://ai.google.dev/gemini-api/docs/generate-content/video-understanding",
+  "production_hold": true,
+  "credential_probes": [
+    {
+      "configured_secret_name": "YOUTUBE_API_KEY",
+      "http_status": 403,
+      "result": {
+        "error_status": "PERMISSION_DENIED",
+        "error_reasons": [
+          "ACCESS_DENIED"
+        ]
+      }
+    }
+  ],
+  "video_analysis_status": "not_attempted",
+  "claims_limit": "API-mediated sampled audiovisual interpretation; not local source acquisition, not proof of every-frame review or accurate source settings"
+}
