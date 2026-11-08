@@ -54,8 +54,10 @@ def main():
  p=argparse.ArgumentParser(description=__doc__)
  p.add_argument('--walk',type=Path,required=True);p.add_argument('--run',type=Path,required=True)
  p.add_argument('--close',type=Path,required=True);p.add_argument('--audio',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
+ p.add_argument('--gate',type=Path,default=ROOT/'clips/wan4-gate.mp4');p.add_argument('--aerial',type=Path,default=ROOT/'clips/wan4-aerial.mp4')
+ p.add_argument('--aerial-style',choices=('digital','raw'),default='digital',help='raw if the supplied aerial already has camera movement')
  a=p.parse_args()
- shots=[('walk',a.walk,96),('gate',ROOT/'clips/wan4-gate.mp4',120),('aerial',ROOT/'clips/wan4-aerial.mp4',96),('run',a.run,72),('close',a.close,96)]
+ shots=[('walk',a.walk,96),('gate',a.gate,120),('aerial',a.aerial,96),('run',a.run,72),('close',a.close,96)]
  for _,path,_ in shots:
   if not path.is_file():raise FileNotFoundError(path)
  if not a.audio.is_file():raise FileNotFoundError(a.audio)
@@ -67,7 +69,7 @@ def main():
  try:
   for name,path,count in shots:
    for i,frame in enumerate(frames(path,count)):
-    if name=='aerial':frame=aerial_transform(frame,i)
+    if name=='aerial' and a.aerial_style=='digital':frame=aerial_transform(frame,i)
     if frame.shape[:2]!=(HEIGHT,WIDTH):frame=fit_cover(frame)
     enc.stdin.write(frame.tobytes());total+=1
    print(name,count,flush=True)
