@@ -24,10 +24,9 @@ def run(args, **kwargs):
 run([sys.executable, '-m', 'pip', 'install', '-q', 'numpy<2', 'onnxruntime==1.20.1',
      'onnx==1.18.0', 'tyro==0.8.5', 'pykalman==0.9.7', 'rich', 'scikit-image',
      'imageio-ffmpeg', 'ffmpeg-python', 'huggingface_hub', 'pyyaml'])
-import torch
-if not torch.cuda.is_available():
-    raise RuntimeError('No GPU allocated')
-print('GPU', torch.cuda.get_device_name(0), flush=True)
+# Avoid loading a second PyTorch/CUDA runtime in the notebook parent while
+# the actual inference child starts. A GPU check needs no torch import here.
+run(['nvidia-smi', '--query-gpu=name,memory.total', '--format=csv,noheader'])
 run(['git', 'clone', 'https://github.com/KwaiVGI/LivePortrait.git', 'LivePortrait'])
 os.chdir(work / 'LivePortrait')
 run(['git', 'checkout', '9b294b3d0536135442ea73cb01e6cb3ca7029dd3'])
