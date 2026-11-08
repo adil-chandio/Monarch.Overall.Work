@@ -9,7 +9,7 @@ const {chromium}=require('playwright');const fs=require('fs');
  ['LV Animation watch','https://www.youtube.com/watch?v=8wtQAI_ZZlQ'],
  ['Stickman Snooze watch','https://www.youtube.com/watch?v=GHT3RyE9wGI'],
  ['DusanFC Neymar embedded player','https://www.youtube.com/embed/aWHX5Awe_TI']]){
-  const page=await ctx.newPage();const row={name,url};
+  const page=await ctx.newPage();page.setDefaultTimeout(10000);const row={name,url};
   try{
    const resp=await page.goto(url,{waitUntil:'domcontentloaded',timeout:45000});row.http=resp?.status()??null;
    // Basic optional public consent interface, if present; no authentication.
@@ -21,7 +21,7 @@ const {chromium}=require('playwright');const fs=require('fs');
    row.visibleText=body.slice(0,500);
    if(row.videoElements){
     row.initial=await page.locator('video').first().evaluate(v=>({time:v.currentTime,readyState:v.readyState,paused:v.paused,width:v.videoWidth,height:v.videoHeight,error:v.error?.code||null}));
-    row.playResult=await page.locator('video').first().evaluate(async v=>{v.muted=true;try{await v.play();return 'resolved'}catch(e){return e.name}});
+    row.playResult=await page.locator('video').first().evaluate(v=>{v.muted=true;v.play().catch(()=>{});return 'requested'});
     await page.waitForTimeout(3500);
     row.after=await page.locator('video').first().evaluate(v=>({time:v.currentTime,readyState:v.readyState,paused:v.paused,width:v.videoWidth,height:v.videoHeight,error:v.error?.code||null}));
     row.playbackVerified=row.after.time>row.initial.time+.3 && row.after.width>0 && row.after.height>0;
