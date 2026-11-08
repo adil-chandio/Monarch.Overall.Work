@@ -1,0 +1,139 @@
+{
+  "status": "technical export checks complete; owner creative acceptance pending",
+  "decoded_frames": 1305,
+  "expected_frames": 1305,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 43.5,
+  "native_3d_resolution": [
+    1080,
+    1920
+  ],
+  "interpolated_frames": false,
+  "upscaled_3d": false,
+  "all_frames_nonblack": true,
+  "minimum_mean_pixel_value": 39.24605195473251,
+  "scene_roi_adjacent_frame_differences": {
+    "mean": 1.4772899464738223,
+    "min": 0.00014799153723288327,
+    "max": 105.74177551269531,
+    "exact_repeated_roi_pairs": 0,
+    "limit": "A signal check, not proof of useful motion, correct contacts or aesthetic quality."
+  },
+  "extracted_native_review_frames_NOT_yet_a_watch_attestation": [
+    30,
+    180,
+    270,
+    390,
+    480,
+    600,
+    720,
+    810,
+    930,
+    990,
+    1110,
+    1260
+  ],
+  "overview_sample_positions": 45,
+  "assembly": {
+    "method": "Approved opening + sampling retained ONCE, then new lab/cell/binding/comparison/basin/limits/checks/canyon progression",
+    "retained_v15_frames": [
+      0,
+      323
+    ],
+    "new_native_render_frames": [
+      323,
+      1305
+    ],
+    "new_native_frame_count": 982,
+    "base_sha256": "20307333d5e9306b568f9ec7dc6d54ba9153d17eff059136dc9aca81e15707de",
+    "looped_or_repeated_edit_segments": false,
+    "meaningful_scene_run_count": 10,
+    "same_set_return_count": 0,
+    "actual_scene_runs": [
+      {
+        "scene": "opening",
+        "from": 0,
+        "to": 130
+      },
+      {
+        "scene": "sampling",
+        "from": 130,
+        "to": 323
+      },
+      {
+        "scene": "lab-reveal",
+        "from": 323,
+        "to": 439
+      },
+      {
+        "scene": "shedding",
+        "from": 439,
+        "to": 527
+      },
+      {
+        "scene": "binding",
+        "from": 527,
+        "to": 638
+      },
+      {
+        "scene": "alignment",
+        "from": 638,
+        "to": 756
+      },
+      {
+        "scene": "ecosystem",
+        "from": 756,
+        "to": 897
+      },
+      {
+        "scene": "limits",
+        "from": 897,
+        "to": 1016
+      },
+      {
+        "scene": "verification",
+        "from": 1016,
+        "to": 1199
+      },
+      {
+        "scene": "investigation",
+        "from": 1199,
+        "to": 1305
+      }
+    ],
+    "quality_multiplier_verified": false
+  },
+  "source_build_sha256": "64d9d90881231738a0da6cefbc5a8a9665631c7889bb9a7dbf6b686a33c257f6",
+  "source_sha256": {
+    "production/extinct-life/shorts-v16-evolving/film/finish.py": "1dc03d9c3aa8f1157badb017232c3c3e825f752c4e918f0eb27b4a45a876ce34",
+    "production/extinct-life/shorts-v16-evolving/film/prepare_sound.py": "3dd91dd3b9d8de2aee948e7a493f204121f01798c1980a275e0f71866aa46479",
+    "production/extinct-life/shorts-v16-evolving/film/render.mjs": "632430b26b34ef28c751bd9746d4448080ece3e85f7dbcff9952fd089a36b5d0",
+    "production/extinct-life/shorts-v16-evolving/film/scene.mjs": "4498e66f4801b5ff55679f3fc1155f9f6f934beaf03650bf15b9132c01b89885",
+    "production/extinct-life/shorts-v16-evolving/film/stage.html": "4358dc2d4eeb76b39ebeffbaa59e7d5f071e89a0526029bc015e8e30fb2fa261",
+    "production/extinct-life/shorts-v16-evolving/film/test_timeline.py": "3ed63b56f944c7924607eb89b6a63a60287ff99dc77ab0bd9e4cd7ea82162c99",
+    "production/extinct-life/shorts-v16-evolving/film/timeline.json": "88a62a7bec30205e65aba8e3671d77af086fcd2ff4530d934074c7306996aced"
+  },
+  "file_sha256": "f53a3266f92d234c7616cb149ce50307ba030b287835fcce9516a4e401c7a584",
+  "encoded_audio": {
+    "input_i": "-16.02",
+    "input_tp": "-1.48",
+    "input_lra": "2.40",
+    "input_thresh": "-26.65",
+    "output_i": "-15.93",
+    "output_tp": "-1.50",
+    "output_lra": "2.40",
+    "output_thresh": "-26.52",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.07"
+  },
+  "voice_pitch_preserving_tempo": 1.1494252873563218,
+  "voice_source_and_tempo_unchanged_from_v15": true,
+  "protected_baselines_match": true,
+  "competitor_exhaustive_study_complete": false,
+  "independent_anatomical_validation": false,
+  "full_perceptual_listening_certified": false,
+  "owner_creative_acceptance": false,
+  "youtube_published": false
+}

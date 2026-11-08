@@ -1,0 +1,30 @@
+{
+  "base": "Approved V15 mix; unchanged narration text, selected voice and 43.5-second tempo",
+  "new_tempo_change_from_v15": false,
+  "copied_competitor_audio": false,
+  "additional_original_synthetic_events": [
+    {
+      "output_time": 12.441,
+      "duration": 0.22,
+      "type": "liquid detail",
+      "synthetic_illustration_not_field_recording": true,
+      "linear_mix_level": 0.05
+    },
+    {
+      "output_time": 25.1778,
+      "duration": 4.7067,
+      "type": "river texture",
+      "synthetic_illustration_not_field_recording": true,
+      "linear_mix_level": 0.06
+    },
+    {
+      "output_time": 39.9591,
+      "duration": 3.5409000000000006,
+      "type": "canyon air",
+      "synthetic_illustration_not_field_recording": true,
+      "linear_mix_level": 0.045
+    }
+  ],
+  "limits": "Scheduled cues, not independently measured perceptual onsets; no independent listening approval",
+  "final_encoded_measurement_required": true
+}

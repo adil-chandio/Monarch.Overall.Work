@@ -1,0 +1,45 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/Monarch.Overall.Work/.cache/shorts-v16/candidate-reviewed.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.102
+  Duration: 00:00:43.50, start: 0.000000, bitrate: 2832 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/unknown/unknown, progressive), 1080x1920 [SAR 1:1 DAR 9:16], 2564 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      encoder         : Lavc63.1.102 libx264
+    Side data:
+      ICC Profile: (456 bytes)
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 259 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))
+  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.102
+  Stream #0:0(und): Video: wrapped_avframe, yuvj420p(pc, bt709/unknown/unknown, progressive), 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 200 kb/s, 30 fps, 30 tbn (default)
+    Metadata:
+      encoder         : Lavc63.1.102 wrapped_avframe
+      handler_name    : VideoHandler
+    Side data:
+      ICC Profile: (456 bytes)
+  Stream #0:1(und): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)
+    Metadata:
+      encoder         : Lavc63.1.102 pcm_s16le
+      handler_name    : SoundHandler
+frame=  125 fps=0.0 q=-0.0 size=N/A time=00:00:04.54 bitrate=N/A speed=9.09x elapsed=0:00:00.50
+frame=  248 fps=248 q=-0.0 size=N/A time=00:00:08.64 bitrate=N/A speed=8.64x elapsed=0:00:01.00
+frame=  445 fps=297 q=-0.0 size=N/A time=00:00:15.21 bitrate=N/A speed=10.1x elapsed=0:00:01.50
+frame=  657 fps=328 q=-0.0 size=N/A time=00:00:22.27 bitrate=N/A speed=11.1x elapsed=0:00:02.00
+frame=  798 fps=319 q=-0.0 size=N/A time=00:00:26.98 bitrate=N/A speed=10.8x elapsed=0:00:02.50
+frame=  997 fps=332 q=-0.0 size=N/A time=00:00:33.60 bitrate=N/A speed=11.2x elapsed=0:00:03.00
+frame= 1297 fps=370 q=-0.0 size=N/A time=00:00:43.23 bitrate=N/A speed=12.3x elapsed=0:00:03.50
+[out#0/null @ 0x55a32c1ff7c0] video:540KiB audio:8156KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame= 1305 fps=372 q=-0.0 Lsize=N/A time=00:00:43.50 bitrate=N/A speed=12.4x elapsed=0:00:03.50
