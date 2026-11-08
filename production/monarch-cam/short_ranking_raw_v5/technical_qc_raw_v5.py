@@ -78,6 +78,8 @@ def main():
         'dc_offset_ok': abs(dc) < 0.002,
         'mono_compatible': fold > -0.5,
         'nine_gate_audio_pass': bool(AUDIO_QC.get('pass', False)),
+        'final_web_gate_pass': bool(NATIVE.get('final_web_gate_pass', False)),
+        'final_technical_click_runs_zero': int(NATIVE.get('final_technical_click_runs', -1)) == 0,
         'no_added_audio_layers': bool(NATIVE['no_added_layers']),
         'raw_source_audio_only': bool(NATIVE['native_source_audio_only']),
         'raw_per_window_native_audio_only': bool(NATIVE['raw_per_window_native_audio_only']),

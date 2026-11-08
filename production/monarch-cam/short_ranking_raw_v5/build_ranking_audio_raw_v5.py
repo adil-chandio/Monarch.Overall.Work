@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# Assemble only the seven selected native audio windows, calibrate the delivered
+# Assemble only the seven selected native audio windows, choose a measured
+# mastering chain that passes the unchanged V4 web gates, calibrate the delivered
 # AAC stream and mux. No VO, music, SFX, bed, generated calls or added layers.
 from __future__ import annotations
 import hashlib, json, os, shutil, subprocess, sys
@@ -19,6 +20,7 @@ MEDIA = WORK / 'media'
 MANIFEST = json.loads((BASE / 'candidate_sources.json').read_text(encoding='utf-8'))
 ASSETS = {a['id']: a for a in MANIFEST['assets']}
 SILENT_VIDEO = WORK / 'ranking_silent_raw_v5.mp4'
+SILENT_H264 = WORK / 'ranking_silent_h264_raw_v5.mp4'
 OUT = ROOT / 'deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4'
 SPEC = json.loads((BASE / 'ranking_short_spec.json').read_text(encoding='utf-8'))
 SELECTED = json.loads((REVIEW / 'selected_windows.json').read_text(encoding='utf-8'))
@@ -27,6 +29,24 @@ A = SPEC['audio_policy']
 SR = int(A['sample_rate'])
 N = int(round(SPEC['duration'] * SR))
 mix = np.zeros((N, 2), dtype=np.float32)
+MASTER_CHAINS = [
+    {
+        'id': 'dynamic_loudnorm_lra7',
+        'filter': 'highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+    },
+    {
+        'id': 'rms_compressor_4to1_dynamic_loudnorm_lra7',
+        'filter': 'highpass=f=20,acompressor=threshold=0.08:ratio=4:attack=20:release=300:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+    },
+    {
+        'id': 'rms_compressor_6to1_dynamic_loudnorm_lra7',
+        'filter': 'highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+    },
+    {
+        'id': 'dynaudnorm_dynamic_loudnorm_lra7',
+        'filter': 'highpass=f=20,dynaudnorm=f=250:g=5:p=0.95:m=6,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+    },
+]
 
 
 def run(cmd, **kw):
@@ -63,12 +83,21 @@ def decode_window(scene):
     return x
 
 
-def mux_deliverable(mastered):
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', SILENT_VIDEO, '-i', mastered,
-         '-map', '0:v:0', '-map', '1:a:0', '-c:v', 'libx264', '-crf', '23', '-preset', 'medium',
+def prepare_h264_video():
+    if SILENT_H264.exists() and SILENT_H264.stat().st_size > 100000:
+        return
+    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', SILENT_VIDEO,
+         '-map', '0:v:0', '-an', '-c:v', 'libx264', '-crf', '23', '-preset', 'medium',
          '-maxrate', '3500k', '-bufsize', '7000k', '-pix_fmt', 'yuv420p',
-         '-c:a', 'aac', '-b:a', '192k', '-ar', str(SR), '-ac', '2',
+         '-frames:v', str(int(SPEC['frame_count'])), '-movflags', '+faststart', SILENT_H264], check=True)
+
+
+def mux_deliverable(audio_input):
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    prepare_h264_video()
+    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', SILENT_H264, '-i', audio_input,
+         '-map', '0:v:0', '-map', '1:a:0', '-c:v', 'copy',
+         '-c:a', 'aac', '-b:a', '256k', '-ar', str(SR), '-ac', '2',
          '-t', f"{SPEC['duration']:.3f}", '-movflags', '+faststart', OUT], check=True)
 
 
@@ -105,6 +134,28 @@ def declick_wav(path):
     return len(groups)
 
 
+def repair_delivered_clicks():
+    report = []
+    for i in range(int(A['final_calibration_iterations'])):
+        clicks = delivered_technical_click_count()
+        report.append({'iteration': i, 'technical_click_runs': clicks})
+        if clicks == 0:
+            break
+        wav = WORK / 'delivered_declick.wav'
+        run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', OUT,
+             '-map', '0:a:0', '-vn', '-ac', '2', '-ar', str(SR), '-c:a', 'pcm_f32le', wav], check=True)
+        regions = declick_wav(wav)
+        report[-1]['declick_regions'] = regions
+        mux_deliverable(wav)
+    return report
+
+
+def master_variant(premaster, mastered, chain):
+    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', premaster,
+         '-af', chain, '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', mastered], check=True)
+    declick_wav(mastered)
+
+
 def calibrate_final_gain(mastered):
     """Measure the delivered AAC stream and apply bounded level, peak and click corrections only."""
     target = float(PROFILES['web']['lufs'])
@@ -118,15 +169,18 @@ def calibrate_final_gain(mastered):
         technical_clicks = delivered_technical_click_count()
         entry = {
             'iteration': i, 'integrated_lufs': measured['integrated_lufs'],
-            'sample_peak_dbfs': measured['sample_peak_dbfs'],
+            'lra_lu': measured['lra_lu'], 'sample_peak_dbfs': measured['sample_peak_dbfs'],
             'loudness_in_range': bool(checks['loudness_in_range']),
+            'lra_in_range': bool(checks['lra_in_range']),
             'true_peak_ok': bool(checks['true_peak_ok']),
+            'web_gate_pass': bool(result['pass']),
             'technical_click_runs': technical_clicks,
             'measured_on': 'delivered_aac_stream',
         }
-        if checks['loudness_in_range'] and checks['true_peak_ok'] and technical_clicks == 0:
+        if result['pass'] and technical_clicks == 0:
             entry['applied_gain_db'] = 0.0
             entry['declick_regions'] = 0
+            entry['delivered_click_repair'] = []
             report.append(entry)
             break
         delta = target - measured['integrated_lufs']
@@ -138,9 +192,11 @@ def calibrate_final_gain(mastered):
             shutil.move(str(tmp), str(mastered))
         regions = declick_wav(mastered)
         mux_deliverable(mastered)
+        repair = repair_delivered_clicks()
         entry['applied_gain_db'] = round(delta, 3) if abs(delta) > 0.05 else 0.0
         entry['declick_regions'] = regions
         entry['peak_limit_linear'] = limit if abs(delta) > 0.05 else None
+        entry['delivered_click_repair'] = repair
         report.append(entry)
     return report
 
@@ -228,12 +284,36 @@ def main():
     premaster = WORK / 'native_timeline.wav'
     sf.write(premaster, mix, SR, subtype='FLOAT')
     mastered = WORK / 'native_timeline_mastered.wav'
-    run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'warning', '-i', premaster,
-         '-af', f"highpass=f=20,loudnorm=I={A['target_integrated_lufs']}:TP={A['true_peak_target_dbtp']}:LRA=7:linear=true:print_format=summary",
-         '-ar', str(SR), '-ac', '2', '-c:a', 'pcm_f32le', mastered], check=True)
-    declick_wav(mastered)
-    mux_deliverable(mastered)
-    calibration = calibrate_final_gain(mastered) if A['final_gain_calibration'] else []
+    prepare_h264_video()
+    chosen = None
+    attempts = []
+    for variant in MASTER_CHAINS:
+        try:
+            master_variant(premaster, mastered, variant['filter'])
+            mux_deliverable(mastered)
+            calibration = calibrate_final_gain(mastered)
+            final = gate_run(str(OUT), 'web')
+            clicks = delivered_technical_click_count()
+            attempt = {
+                'id': variant['id'], 'filter': variant['filter'],
+                'web_gate_pass': bool(final['pass']),
+                'failed': final['failed'],
+                'integrated_lufs': final['measured']['integrated_lufs'],
+                'lra_lu': final['measured']['lra_lu'],
+                'sample_peak_dbfs': final['measured']['sample_peak_dbfs'],
+                'technical_click_runs': clicks,
+            }
+            attempts.append(attempt)
+            print('Mastering variant', variant['id'], 'gate pass', final['pass'], 'LRA', final['measured']['lra_lu'], 'clicks', clicks, flush=True)
+            if final['pass'] and clicks == 0:
+                chosen = {'variant': variant, 'calibration': calibration, 'final_gate': final, 'technical_click_runs': clicks}
+                break
+        except Exception as e:
+            attempts.append({'id': variant['id'], 'filter': variant['filter'], 'error': repr(e)})
+            print('Mastering variant failed', variant['id'], repr(e), flush=True)
+            continue
+    if chosen is None:
+        raise RuntimeError('No measured mastering chain passed the unchanged web gates: ' + json.dumps(attempts, indent=2))
     report = {
         'edition': 'raw_fullscreen_v5', 'policy': A, 'segments': ledger, 'placements': placements,
         'no_spoken_voice_over': True, 'no_score': True, 'no_effects': True, 'no_bed': True,
@@ -245,7 +325,12 @@ def main():
         'runner_probe_passed': True, 'runner_audio_visual_probe_passed': True,
         'runner_visual_motion_probe': True, 'contact_sheets_written': True,
         'source_review_recorded': True, 'visual_lock_written': True,
-        'final_gain_calibration': calibration,
+        'mastering_variant': chosen['variant']['id'],
+        'mastering_filter': chosen['variant']['filter'],
+        'mastering_attempts': attempts,
+        'final_gain_calibration': chosen['calibration'],
+        'final_web_gate_pass': bool(chosen['final_gate']['pass']),
+        'final_technical_click_runs': chosen['technical_click_runs'],
         'premaster': str(premaster.relative_to(ROOT)), 'mastered': str(mastered.relative_to(ROOT)),
         'deliverable_sha256': hashlib.sha256(OUT.read_bytes()).hexdigest(),
         'deliverable_bytes': OUT.stat().st_size,

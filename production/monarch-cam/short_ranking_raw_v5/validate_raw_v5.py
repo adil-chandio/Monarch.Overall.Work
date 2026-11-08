@@ -28,10 +28,10 @@ assert spec['audio_policy']['sample_rate'] == 48000 and spec['audio_policy']['ch
 assert spec['audio_policy']['edge_fade_ms'] == 30
 assert spec['audio_policy']['final_gain_calibration'] is True
 assert spec['audio_policy']['final_peak_limit_linear'] == 0.75
-assert spec['audio_policy']['final_calibration_iterations'] == 5
+assert spec['audio_policy']['final_calibration_iterations'] == 6
 assert spec['audio_policy']['final_technical_click_threshold'] == 0.45
-assert spec['audio_policy']['final_declick_threshold'] == 0.35
-assert spec['audio_policy']['final_declick_width_samples'] == 24
+assert spec['audio_policy']['final_declick_threshold'] == 0.28
+assert spec['audio_policy']['final_declick_width_samples'] == 32
 assert spec['audio_policy']['native_audible_segment_rms_dbfs_min'] == -55.0
 assert spec['audio_policy']['web_lufs_target'] == -14.0 and spec['audio_policy']['web_lufs_tolerance'] == 0.7
 assert spec['audio_policy']['web_true_peak_ceiling_dbtp'] == -1.0

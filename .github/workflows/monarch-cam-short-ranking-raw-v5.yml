@@ -8,7 +8,7 @@ on:
       - '.github/workflows/monarch-cam-short-ranking-raw-v5.yml'
       - 'production/monarch-cam/short_ranking_raw_v5/candidate_sources.json'
       - 'production/monarch-cam/short_ranking_raw_v5/ranking_short_spec.json'
-      - 'production/monarch-cam/short_ranking_raw_v5/ranking_v5_metadata.json'
+      - 'production/monarch-cam/short_ranking_raw_v5/build_ranking_audio_raw_v5.py'
       - 'production/monarch-cam/short_ranking_raw_v5/verify_sources.py'
       - 'production/monarch-cam/short_ranking_raw_v5/candidate_audio_probe.py'
       - 'production/monarch-cam/short_ranking_raw_v5/select_moments.py'
@@ -211,6 +211,8 @@ jobs:
               'v4_preserved': Path('deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4').is_file(),
               'technical_pass': technical['passed'],
               'nine_gate_audio_pass': bool(audio.get('pass', False)),
+              'final_web_gate_pass': bool(native.get('final_web_gate_pass', False)),
+              'final_technical_click_runs_zero': int(native.get('final_technical_click_runs', -1)) == 0,
               'raw_audio_policy_pass': all([spec['audio_policy']['raw_only'], spec['audio_policy']['no_spoken_voice_over'], spec['audio_policy']['no_score'], spec['audio_policy']['no_effects'], spec['audio_policy']['no_bed'], spec['audio_policy']['no_added_layers'], spec['audio_policy']['no_fabricated_animal_calls']]),
               'native_source_audio_only': bool(native['native_source_audio_only']),
               'raw_per_window_native_audio_only': bool(native['raw_per_window_native_audio_only']),
