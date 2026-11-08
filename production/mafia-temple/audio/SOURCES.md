@@ -8,3 +8,5 @@ This is a proposed **research mix**, not an approved film soundtrack. Its cue ti
 - Wind by **Thimras**, https://opengameart.org/content/park-ambiences — source page lists CC0 1.0. Copy `assets/audio/amb/wind.wav` in the same pinned `blocky-stories` repo, shortened and filtered there.
 
 All listed source pages and the repository manifests were reviewed during this research. CC0 is separate from the research-only visual model and driver restrictions.
+
+A two-pass automated loudness test of the provisional mix measured approximately -19.9 LUFS integrated and -3.9 dBTP after normalization to a -20 LUFS target. This is an engineering check only: the mix still requires listening, artistic review, and retiming to final visible contacts. Reproduce with `normalize_research.py` using a locally built research WAV.
