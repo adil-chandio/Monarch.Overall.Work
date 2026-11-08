@@ -32,6 +32,16 @@ def frames(path,count):
  finally:cap.release()
 
 
+def fit_cover(frame,width=WIDTH,height=HEIGHT):
+ # Center-crop to target aspect before resizing; never stretch faces.
+ h,w=frame.shape[:2]
+ if w*height>h*width:
+  crop_w=max(1,round(h*width/height));x=(w-crop_w)//2;frame=frame[:,x:x+crop_w]
+ elif w*height<h*width:
+  crop_h=max(1,round(w*height/width));y=(h-crop_h)//2;frame=frame[y:y+crop_h,:]
+ return cv2.resize(frame,(width,height),interpolation=cv2.INTER_LANCZOS4)
+
+
 def aerial_transform(frame,i):
  # Smooth digital push over a moving generated clip. It is NOT a physical
  # descending 3D camera; the distinction must remain visible in QA notes.
@@ -58,7 +68,7 @@ def main():
   for name,path,count in shots:
    for i,frame in enumerate(frames(path,count)):
     if name=='aerial':frame=aerial_transform(frame,i)
-    if frame.shape[:2]!=(HEIGHT,WIDTH):frame=cv2.resize(frame,(WIDTH,HEIGHT),interpolation=cv2.INTER_LANCZOS4)
+    if frame.shape[:2]!=(HEIGHT,WIDTH):frame=fit_cover(frame)
     enc.stdin.write(frame.tobytes());total+=1
    print(name,count,flush=True)
   if total!=480:raise ValueError('Wrong total frame count')
