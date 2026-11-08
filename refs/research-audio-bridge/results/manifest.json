@@ -1,0 +1,23 @@
+{
+  "production_hold": true,
+  "public_key_sha256": "05528ee8f15c3a948e6fd9a21d49a49e09dacb3730d967ab4047e83a60197762",
+  "receiver_run_id": "42452846962",
+  "model_analyzed_case_count": 2,
+  "perceptual_audio_listening": false,
+  "cases": [
+    {
+      "key": "ten-audio-model-results",
+      "source_url": "https://github.com/adil-chandio/Monarch.Overall.Work/actions",
+      "publisher_metadata": {},
+      "plaintext_sha256": "5f090bde507756eb3f29a255d27af16269c2f14e892a1fce9ef772555f42d40e",
+      "envelope": {
+        "file": "ten-audio-model-results.json.enc",
+        "decrypted_filename": "ten-audio-model-results.json",
+        "aad": "ten-audio-model-results",
+        "ciphertext_sha256": "c8bc211aed1a00329498b6a0848f7877a0acc256701c101f1a65c26cca1b176f",
+        "nonce_b64": "JjtB7IZNOzXhSrG1",
+        "wrapped_key_b64": "EhhGnr7DAYVwP+JqXBdSFvxno+P93hUZDHSM+jsQteIDRlhW04dd1+4uE0kxcjcgHH8FfBh4Nk6Xr93ubXBq4iGoj2tvswNQ1A99f5CfaM6U6h47oczMEjDoLy1dZKjWCqCmj9XW+kvnD4zFPPe0Bqpo2nDzxRso1mxTNv7cCxdw1zsWzo02+uk1gmauLcfC6lBLHcaITdFcXTZ3988vFxkG8cY31ZArG3SPvKopzTm49LY2wJwVwTrYf3WrbL+qKDCy6FW3/YhfDZhL4LlxLMPnGTjj3jdpLaXDfDkRazUy/yYmHix82taDObNdZobRRlBpDYTWOGOhGYpRUjgV6EYFGh0gNunbsk+fVAsCdYJof+siw00K7HZZ8yvHmFFHZE7xuDjyxTN0EZKvvAynZxtUMU75sgcXDPRfKGJSpRF/nk+13vlH8ry2JbPd4ER95VS/gRKa+FbyZ9e0eK+r176TN5UvmMPECtbUW6ZkpKJ8VFVdXcEJLMYBQcmRywBA"
+      }
+    }
+  ]
+}
