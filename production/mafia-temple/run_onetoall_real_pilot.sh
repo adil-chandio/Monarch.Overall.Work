@@ -6,7 +6,23 @@ case "$stage" in preflight|render);; *) exit 2;; esac
 slug="monarch-real-$stage-${GITHUB_RUN_ID:-manual}"
 dir="/tmp/mafia-kernel/$slug"; ref="$KAGGLE_USERNAME/$slug"
 out="/tmp/onetoall-real-$stage-output"; mkdir -p "$out"
-python production/mafia-temple/make_onetoall_real_pilot.py --user "$KAGGLE_USERNAME" --slug "$slug" --out "$dir" --stage "$stage"
+if [ "$stage" = preflight ]; then
+  dataset_slug="monarch-motion-driver-${GITHUB_RUN_ID:-manual}"
+  python production/mafia-temple/prepare_private_stock_dataset.py "$dataset_slug"
+else
+  : "${REAL_DRIVER_DATASET:?Use the verified dataset from preflight}"
+  dataset_slug="$REAL_DRIVER_DATASET"
+fi
+dataset="$KAGGLE_USERNAME/$dataset_slug"
+for ((i=0;i<30;i++)); do
+  ds_status=$(kaggle datasets status "$dataset" 2>&1 || true)
+  echo "Private dataset processing: $ds_status"
+  case "$ds_status" in *ready*|*READY*|*complete*|*COMPLETE*) break;; *error*|*ERROR*|*failed*|*FAILED*) exit 1;; esac
+  if [ "$i" = 29 ]; then echo 'Dataset did not become ready'; exit 1; fi
+  sleep 10
+done
+python production/mafia-temple/verify_private_dataset.py "$dataset"
+python production/mafia-temple/make_onetoall_real_pilot.py --user "$KAGGLE_USERNAME" --slug "$slug" --out "$dir" --stage "$stage" --dataset "$dataset"
 kaggle kernels push -p "$dir"
 for ((i=0;i<180;i++)); do
   if ! status=$(kaggle kernels status "$ref" 2>&1); then

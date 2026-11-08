@@ -13,12 +13,16 @@ work = pathlib.Path('/kaggle/working')
 os.chdir(work)
 # Generated reference and a public stock video, downloaded to a private runtime.
 # Never save the stock source or user original to the Kaggle output directory.
-for name, target in [('reference',work/'reference.jpg'), ('driver',pathlib.Path('/tmp/monarch-real-driver.mp4'))]:
-    with urllib.request.urlopen(ASSETS[name]['url'], timeout=120) as response:
-        data=response.read()
-    if hashlib.sha256(data).hexdigest()!=ASSETS[name]['sha256']:
-        raise ValueError(f'Pinned {name} asset checksum mismatch')
-    target.write_bytes(data)
+with urllib.request.urlopen(ASSETS['reference']['url'], timeout=120) as response:
+    data=response.read()
+if hashlib.sha256(data).hexdigest()!=ASSETS['reference']['sha256']:
+    raise ValueError('Pinned generated reference checksum mismatch')
+(work/'reference.jpg').write_bytes(data)
+data=pathlib.Path(ASSETS['driver']['mount']).read_bytes()
+if hashlib.sha256(data).hexdigest()!=ASSETS['driver']['sha256']:
+    raise ValueError('Private driver dataset checksum mismatch')
+pathlib.Path('/tmp/monarch-real-driver.mp4').write_bytes(data)
+del data
 os.environ.update({'HF_HUB_DISABLE_XET':'1','HF_HUB_ENABLE_HF_TRANSFER':'0','TOKENIZERS_PARALLELISM':'false','USE_TF':'0','USE_FLAX':'0','PYTORCH_CUDA_ALLOC_CONF':'expandable_segments:True'})
 
 def run(cmd, **kw):
