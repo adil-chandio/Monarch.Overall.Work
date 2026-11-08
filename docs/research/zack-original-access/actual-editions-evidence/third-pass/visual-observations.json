@@ -1,0 +1,48 @@
+{
+  "windows": [
+    {
+      "key": "02-stomach",
+      "start_frame": 240,
+      "end_frame_inclusive": 300,
+      "roi_source_pixels": [
+        100,
+        250,
+        600,
+        900
+      ],
+      "first_pts_seconds": 8.008,
+      "last_pts_seconds": 10.01,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "observations": "f240\u2013266: translucent stomach and blue branch-like explanatory structures stay in anatomical context. f267\u2013273: a vertically blurred view transition moves toward the surgical-hands scene. f274\u2013284: both gloved hands contact/support the organ as it visibly rises relative to the incision rim. f285\u2013300: the supported organ is presented above the opening. Full native f274 and f284 were additionally opened, confirming context outside the crop. This resolves part of the previous uncertainty: removal includes an actual supported lift, not only a cut straight to an already-held prop. Exact attachment severing and surgical correctness remain unverified. The blurred transition is observed; a recovered camera velocity/transition plugin is not claimed.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    },
+    {
+      "key": "05-surfer",
+      "start_frame": 875,
+      "end_frame_inclusive": 943,
+      "roi_source_pixels": [
+        100,
+        250,
+        700,
+        1050
+      ],
+      "first_pts_seconds": 29.195833,
+      "last_pts_seconds": 31.464767,
+      "scope": "native_pixel_ROI_sheet_opened",
+      "observations": "Every ROI frame f875\u2013943 was opened across eight labeled sheets. f875\u2013882: torso rises further from the previously inspected low crouch while the remaining hand lifts/extends for balance. f883\u2013906: the body holds a bent-knee surfing stance; hands/fingers and arm presentation change subtly rather than freezing into a rigid figurine pose. f907\u2013943: stance continues with small body adjustments while foam and wave patterns evolve around the board. The previously opened f866\u2013874 therefore connects without a frame gap to the final source frame at f943, but full-still scope applies only to f866\u2013874; the remainder is ROI scope. No observed new hard cut within this final action. Board/foot relationship is visually persistent; world-space foot sliding, hydrodynamics and collision accuracy remain unmeasured. Caption changes are visible at f883 and f907 in the opened sequence; they are not treated as verified speech timing.",
+      "all_frames_in_this_window_opened": true,
+      "every_frame_of_source_reviewed": false,
+      "continuous_audio_listened": false
+    }
+  ],
+  "production_hold": true,
+  "additional_full_native_stills_opened": {
+    "02-stomach": [
+      274,
+      284
+    ]
+  },
+  "fully_manually_reviewed_sources": 0
+}

@@ -2,6 +2,14 @@
 
 **Production remains STOPPED. The old “0 newly downloaded sources” blocker below is historical, not the current corpus status.**
 
+**Latest third pass:** [Actual ten-source audio-model evidence + extended native motion review](actual-editions-evidence/third-pass/THIRD-PASS.md).
+
+- **10/10 actual soundtracks analyzed by running speech/audio-event models**, not captions passed off as audio. Eight exact encoded-audio matches on re-fetch; two original-local inputs delivered via an ephemeral-key authenticated encrypted PCM bridge after a timeout/hash mismatch prevented safe re-fetch association.
+- **867 model-derived ASR word entries**, **69 overlapping broad audio-event windows**, **44 word scores below 0.8** flagged. No high-score correctness guarantee, precise SFX/stem/music-identity recovery or continuous perceptual-listening claim.
+- Current visual scope: **33 full native stills**, **227 native ROI positions**, **572 unique source positions in any opened visual scope**. Numerical coverage remains 9,772 frames; 9,200 positions have not been opened in any visual scope. Scopes overlap and must not be added blindly.
+- **0/10 exhaustive manual frame + continuous perceptual-audio studies complete.** The model-access blocker is solved, but those remaining perceptual/detail requirements are not.
+- Successful runs: https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42452351652 and https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42452846962 . Long-term local private key was never uploaded. No plaintext competitor audio/transcripts or newly produced film published.
+
 **Second pass:** [Native contact / sub-second findings and exact remaining coverage](actual-editions-evidence/second-pass/SECOND-PASS.md). Ten bounded dense windows, including f686–724 splinter grasp/withdrawal, now inspected at explicitly recorded full-frame or ROI scope. Continuous audio listening remains an unsolved capability/access blocker; no exhaustive ten-source completion claimed.
 
 A successful alternate-platform acquisition route has now supplied **10 actual MP4s**: nine corroborated creator-account X editions and one directly publisher-linked Facebook edition. This is a different cohort from the ten canonical YouTube IDs below, not proof of those YouTube bytes or project files.

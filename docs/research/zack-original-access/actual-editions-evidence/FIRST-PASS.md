@@ -142,7 +142,7 @@ SHA-256: `5d307925c2077bbc3968752c56ccc3605c36f2d28fd54d11e2d5c392acb096b3`
 | 5–6.000 | f150 / 5.005000 | Tool remains beside organ |
 | 6–7.000 | f180 / 6.006000 | Attachment region receives instrument |
 | 7–8.000 | f210 / 7.007000 | Tool at stomach boundary |
-| 8–9.000 | f240 / 8.008000 | Neighboring structures highlighted cyan |
+| 8–9.000 | f240 / 8.008000 | Blue branching overlay across transparent stomach |
 | 9–10.000 | f270 / 9.009000 | Transitional motion blur between views |
 | 10–11.000 | f300 / 10.010000 | Removed stomach held in gloved hands |
 | 11–12.000 | f330 / 11.011000 | Organ remains supported in hands |

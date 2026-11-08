@@ -1,0 +1,933 @@
+{
+  "production_hold": true,
+  "asr_model": "Systran/faster-whisper-base.en",
+  "event_model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "input_association": "Eight directly re-fetched exact encoded-audio hash matches; remaining originals may use authenticated encrypted local PCM, tied to original MP4 and encoded-audio hashes plus exact PCM integrity. Inspect per-case method; not a title/transcript substitute",
+  "model_analyzed_sources": 10,
+  "total_asr_words_MODEL_DERIVED": 867,
+  "total_event_windows_MODEL_DERIVED": 69,
+  "continuous_perceptual_listened_sources": 0,
+  "fully_manual_audiovisual_reviews_complete": 0,
+  "limits": [
+    "ASR word/window times relative to decoded mono 16kHz WAV, not human-corrected or guaranteed frame-accurate. Container start times recorded for review.",
+    "Multi-label model scores are not calibrated confidence, source stems or exact event timings; coarse overlapping windows, possible false positives/negatives.",
+    "ASR may mistranscribe names, terms, punctuation and boundaries; model score is not calibrated correctness probability",
+    "Event windows overlap. Count is not a count of discrete sound effects; labels are not verified stems or music identities",
+    "No full verbatim source transcripts published; raw model outputs and word ledgers remain private/ignored"
+  ],
+  "cases": [
+    {
+      "key": "01-hearts",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 28.1386875,
+      "asr_word_count": 66,
+      "asr_segment_count": 6,
+      "words_per_full_clip_minute_MODEL_DERIVED": 140.7315106648098,
+      "words_with_model_score_below_0_8": 0,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 27.52,
+      "event_window_count": 6,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.8486208915710449,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 28.1386875
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.8235476613044739,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 28.1386875
+        },
+        {
+          "label": "Heart sounds, heartbeat",
+          "peak_model_score": 0.6773173809051514,
+          "number_of_top5_windows": 3,
+          "first_window_start": 15.0,
+          "last_window_end": 28.1386875
+        },
+        {
+          "label": "Throbbing",
+          "peak_model_score": 0.2734214663505554,
+          "number_of_top5_windows": 3,
+          "first_window_start": 15.0,
+          "last_window_end": 28.1386875
+        },
+        {
+          "label": "Hum",
+          "peak_model_score": 0.24028120934963226,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 28.1386875
+        },
+        {
+          "label": "Heart murmur",
+          "peak_model_score": 0.13248363137245178,
+          "number_of_top5_windows": 2,
+          "first_window_start": 15.0,
+          "last_window_end": 28.1386875
+        },
+        {
+          "label": "Whoosh, swoosh, swish",
+          "peak_model_score": 0.11182764917612076,
+          "number_of_top5_windows": 1,
+          "first_window_start": 0.0,
+          "last_window_end": 10.0
+        },
+        {
+          "label": "Speech synthesizer",
+          "peak_model_score": 0.10853144526481628,
+          "number_of_top5_windows": 3,
+          "first_window_start": 0.0,
+          "last_window_end": 20.0
+        },
+        {
+          "label": "Smash, crash",
+          "peak_model_score": 0.04506424069404602,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Bird",
+          "peak_model_score": 0.040219105780124664,
+          "number_of_top5_windows": 1,
+          "first_window_start": 10.0,
+          "last_window_end": 20.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "02-stomach",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": null,
+      "source_audio_verified": true,
+      "input_association_method": "authenticated_local_PCM_transfer",
+      "pcm_sha256_matches_local": true,
+      "decoded_audio_seconds": 26.752,
+      "asr_word_count": 69,
+      "asr_segment_count": 7,
+      "words_per_full_clip_minute_MODEL_DERIVED": 154.75478468899522,
+      "words_with_model_score_below_0_8": 3,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 26.02,
+      "event_window_count": 6,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Music",
+          "peak_model_score": 0.7882963418960571,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 26.752
+        },
+        {
+          "label": "Speech",
+          "peak_model_score": 0.7660568952560425,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 26.752
+        },
+        {
+          "label": "Crumpling, crinkling",
+          "peak_model_score": 0.38630858063697815,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 26.752
+        },
+        {
+          "label": "Crack",
+          "peak_model_score": 0.2105250507593155,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 26.752
+        },
+        {
+          "label": "Crunch",
+          "peak_model_score": 0.08972170948982239,
+          "number_of_top5_windows": 4,
+          "first_window_start": 5.0,
+          "last_window_end": 26.752
+        },
+        {
+          "label": "Spray",
+          "peak_model_score": 0.0750216469168663,
+          "number_of_top5_windows": 1,
+          "first_window_start": 0.0,
+          "last_window_end": 10.0
+        },
+        {
+          "label": "Squish",
+          "peak_model_score": 0.06963583081960678,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Tearing",
+          "peak_model_score": 0.05946772173047066,
+          "number_of_top5_windows": 3,
+          "first_window_start": 10.0,
+          "last_window_end": 26.752
+        },
+        {
+          "label": "Inside, small room",
+          "peak_model_score": 0.04224196448922157,
+          "number_of_top5_windows": 1,
+          "first_window_start": 25.0,
+          "last_window_end": 26.752
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "03-splinter",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 24.4041875,
+      "asr_word_count": 69,
+      "asr_segment_count": 5,
+      "words_per_full_clip_minute_MODEL_DERIVED": 169.64301720760014,
+      "words_with_model_score_below_0_8": 0,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 23.76,
+      "event_window_count": 5,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.9389996528625488,
+          "number_of_top5_windows": 5,
+          "first_window_start": 0.0,
+          "last_window_end": 24.4041875
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.743892252445221,
+          "number_of_top5_windows": 5,
+          "first_window_start": 0.0,
+          "last_window_end": 24.4041875
+        },
+        {
+          "label": "Single-lens reflex camera",
+          "peak_model_score": 0.35273414850234985,
+          "number_of_top5_windows": 3,
+          "first_window_start": 0.0,
+          "last_window_end": 24.4041875
+        },
+        {
+          "label": "Spray",
+          "peak_model_score": 0.23565833270549774,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Speech synthesizer",
+          "peak_model_score": 0.13449442386627197,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 24.4041875
+        },
+        {
+          "label": "Crack",
+          "peak_model_score": 0.10065888613462448,
+          "number_of_top5_windows": 1,
+          "first_window_start": 0.0,
+          "last_window_end": 10.0
+        },
+        {
+          "label": "Snake",
+          "peak_model_score": 0.08921477198600769,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Hiss",
+          "peak_model_score": 0.07550173997879028,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Squish",
+          "peak_model_score": 0.07034247368574142,
+          "number_of_top5_windows": 1,
+          "first_window_start": 15.0,
+          "last_window_end": 24.4041875
+        },
+        {
+          "label": "Narration, monologue",
+          "peak_model_score": 0.03777284920215607,
+          "number_of_top5_windows": 1,
+          "first_window_start": 10.0,
+          "last_window_end": 20.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "04-balloon",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 34.7603125,
+      "asr_word_count": 97,
+      "asr_segment_count": 7,
+      "words_per_full_clip_minute_MODEL_DERIVED": 167.4323267375689,
+      "words_with_model_score_below_0_8": 4,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 33.94,
+      "event_window_count": 7,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.810543954372406,
+          "number_of_top5_windows": 7,
+          "first_window_start": 0.0,
+          "last_window_end": 34.7603125
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.7647086381912231,
+          "number_of_top5_windows": 7,
+          "first_window_start": 0.0,
+          "last_window_end": 34.7603125
+        },
+        {
+          "label": "Explosion",
+          "peak_model_score": 0.3045293986797333,
+          "number_of_top5_windows": 2,
+          "first_window_start": 25.0,
+          "last_window_end": 34.7603125
+        },
+        {
+          "label": "Spray",
+          "peak_model_score": 0.23708409070968628,
+          "number_of_top5_windows": 4,
+          "first_window_start": 10.0,
+          "last_window_end": 34.7603125
+        },
+        {
+          "label": "Burst, pop",
+          "peak_model_score": 0.15609531104564667,
+          "number_of_top5_windows": 2,
+          "first_window_start": 25.0,
+          "last_window_end": 34.7603125
+        },
+        {
+          "label": "Hiss",
+          "peak_model_score": 0.12549464404582977,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 30.0
+        },
+        {
+          "label": "Snake",
+          "peak_model_score": 0.08751636743545532,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 30.0
+        },
+        {
+          "label": "Outside, rural or natural",
+          "peak_model_score": 0.08005788922309875,
+          "number_of_top5_windows": 1,
+          "first_window_start": 0.0,
+          "last_window_end": 10.0
+        },
+        {
+          "label": "Vehicle",
+          "peak_model_score": 0.062410734593868256,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Rain",
+          "peak_model_score": 0.05601458624005318,
+          "number_of_top5_windows": 1,
+          "first_window_start": 10.0,
+          "last_window_end": 20.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "05-surfer",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 31.5559375,
+      "asr_word_count": 82,
+      "asr_segment_count": 6,
+      "words_per_full_clip_minute_MODEL_DERIVED": 155.9136057992256,
+      "words_with_model_score_below_0_8": 7,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 30.84,
+      "event_window_count": 7,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.7772699594497681,
+          "number_of_top5_windows": 7,
+          "first_window_start": 0.0,
+          "last_window_end": 31.5559375
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.676531970500946,
+          "number_of_top5_windows": 7,
+          "first_window_start": 0.0,
+          "last_window_end": 31.5559375
+        },
+        {
+          "label": "Police car (siren)",
+          "peak_model_score": 0.6710597276687622,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Emergency vehicle",
+          "peak_model_score": 0.3592927157878876,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Pink noise",
+          "peak_model_score": 0.35532429814338684,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 30.0
+        },
+        {
+          "label": "Siren",
+          "peak_model_score": 0.286747008562088,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Waves, surf",
+          "peak_model_score": 0.21107082068920135,
+          "number_of_top5_windows": 2,
+          "first_window_start": 20.0,
+          "last_window_end": 31.5559375
+        },
+        {
+          "label": "Ocean",
+          "peak_model_score": 0.19829189777374268,
+          "number_of_top5_windows": 2,
+          "first_window_start": 20.0,
+          "last_window_end": 31.5559375
+        },
+        {
+          "label": "Slosh",
+          "peak_model_score": 0.18471914529800415,
+          "number_of_top5_windows": 1,
+          "first_window_start": 25.0,
+          "last_window_end": 31.5559375
+        },
+        {
+          "label": "Rain on surface",
+          "peak_model_score": 0.14487500488758087,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 15.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "06-concert",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 27.2834375,
+      "asr_word_count": 80,
+      "asr_segment_count": 5,
+      "words_per_full_clip_minute_MODEL_DERIVED": 175.93091046536932,
+      "words_with_model_score_below_0_8": 3,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 26.7,
+      "event_window_count": 6,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.9549643397331238,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 27.2834375
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.9087947607040405,
+          "number_of_top5_windows": 5,
+          "first_window_start": 0.0,
+          "last_window_end": 27.2834375
+        },
+        {
+          "label": "Police car (siren)",
+          "peak_model_score": 0.36725181341171265,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Emergency vehicle",
+          "peak_model_score": 0.35745543241500854,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Siren",
+          "peak_model_score": 0.29162323474884033,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Ambulance (siren)",
+          "peak_model_score": 0.28459668159484863,
+          "number_of_top5_windows": 1,
+          "first_window_start": 15.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Crack",
+          "peak_model_score": 0.1215563416481018,
+          "number_of_top5_windows": 1,
+          "first_window_start": 0.0,
+          "last_window_end": 10.0
+        },
+        {
+          "label": "Bleat",
+          "peak_model_score": 0.09827081859111786,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Sheep",
+          "peak_model_score": 0.09066411107778549,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Animal",
+          "peak_model_score": 0.08323653042316437,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "07-balcony",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 32.2133125,
+      "asr_word_count": 85,
+      "asr_segment_count": 7,
+      "words_per_full_clip_minute_MODEL_DERIVED": 158.31963881392204,
+      "words_with_model_score_below_0_8": 5,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 31.74,
+      "event_window_count": 7,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.891531765460968,
+          "number_of_top5_windows": 7,
+          "first_window_start": 0.0,
+          "last_window_end": 32.2133125
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.8518660664558411,
+          "number_of_top5_windows": 7,
+          "first_window_start": 0.0,
+          "last_window_end": 32.2133125
+        },
+        {
+          "label": "Neigh, whinny",
+          "peak_model_score": 0.7136808633804321,
+          "number_of_top5_windows": 2,
+          "first_window_start": 20.0,
+          "last_window_end": 32.2133125
+        },
+        {
+          "label": "Horse",
+          "peak_model_score": 0.7059832811355591,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 30.0
+        },
+        {
+          "label": "Animal",
+          "peak_model_score": 0.5438956022262573,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 30.0
+        },
+        {
+          "label": "Single-lens reflex camera",
+          "peak_model_score": 0.1836070865392685,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Sheep",
+          "peak_model_score": 0.1811302751302719,
+          "number_of_top5_windows": 1,
+          "first_window_start": 25.0,
+          "last_window_end": 32.2133125
+        },
+        {
+          "label": "Bleat",
+          "peak_model_score": 0.12845399975776672,
+          "number_of_top5_windows": 1,
+          "first_window_start": 25.0,
+          "last_window_end": 32.2133125
+        },
+        {
+          "label": "Speech synthesizer",
+          "peak_model_score": 0.12760299444198608,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Grunt",
+          "peak_model_score": 0.09018286317586899,
+          "number_of_top5_windows": 1,
+          "first_window_start": 30.0,
+          "last_window_end": 32.2133125
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "08-ai",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": null,
+      "source_audio_verified": true,
+      "input_association_method": "authenticated_local_PCM_transfer",
+      "pcm_sha256_matches_local": true,
+      "decoded_audio_seconds": 54.009625,
+      "asr_word_count": 128,
+      "asr_segment_count": 15,
+      "words_per_full_clip_minute_MODEL_DERIVED": 142.19687694554443,
+      "words_with_model_score_below_0_8": 10,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 51.24,
+      "event_window_count": 11,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.752156674861908,
+          "number_of_top5_windows": 11,
+          "first_window_start": 0.0,
+          "last_window_end": 54.009625
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.6646260619163513,
+          "number_of_top5_windows": 11,
+          "first_window_start": 0.0,
+          "last_window_end": 54.009625
+        },
+        {
+          "label": "Shatter",
+          "peak_model_score": 0.2630466818809509,
+          "number_of_top5_windows": 1,
+          "first_window_start": 0.0,
+          "last_window_end": 10.0
+        },
+        {
+          "label": "Speech synthesizer",
+          "peak_model_score": 0.1942892074584961,
+          "number_of_top5_windows": 4,
+          "first_window_start": 5.0,
+          "last_window_end": 45.0
+        },
+        {
+          "label": "Keys jangling",
+          "peak_model_score": 0.12138830870389938,
+          "number_of_top5_windows": 1,
+          "first_window_start": 0.0,
+          "last_window_end": 10.0
+        },
+        {
+          "label": "Chink, clink",
+          "peak_model_score": 0.08967453986406326,
+          "number_of_top5_windows": 5,
+          "first_window_start": 10.0,
+          "last_window_end": 54.009625
+        },
+        {
+          "label": "Chime",
+          "peak_model_score": 0.0734851062297821,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Mechanisms",
+          "peak_model_score": 0.07326047122478485,
+          "number_of_top5_windows": 2,
+          "first_window_start": 15.0,
+          "last_window_end": 54.009625
+        },
+        {
+          "label": "Computer keyboard",
+          "peak_model_score": 0.06708382815122604,
+          "number_of_top5_windows": 1,
+          "first_window_start": 30.0,
+          "last_window_end": 40.0
+        },
+        {
+          "label": "Crack",
+          "peak_model_score": 0.06286440044641495,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 30.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "09-fight",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 28.1890625,
+      "asr_word_count": 85,
+      "asr_segment_count": 6,
+      "words_per_full_clip_minute_MODEL_DERIVED": 180.9212349648024,
+      "words_with_model_score_below_0_8": 3,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 27.32,
+      "event_window_count": 6,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.9581698179244995,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 28.1890625
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.9051371216773987,
+          "number_of_top5_windows": 6,
+          "first_window_start": 0.0,
+          "last_window_end": 28.1890625
+        },
+        {
+          "label": "Chop",
+          "peak_model_score": 0.12171709537506104,
+          "number_of_top5_windows": 3,
+          "first_window_start": 0.0,
+          "last_window_end": 25.0
+        },
+        {
+          "label": "Smash, crash",
+          "peak_model_score": 0.0977838858962059,
+          "number_of_top5_windows": 4,
+          "first_window_start": 5.0,
+          "last_window_end": 28.1890625
+        },
+        {
+          "label": "Artillery fire",
+          "peak_model_score": 0.06473417580127716,
+          "number_of_top5_windows": 1,
+          "first_window_start": 10.0,
+          "last_window_end": 20.0
+        },
+        {
+          "label": "Gunshot, gunfire",
+          "peak_model_score": 0.05347706750035286,
+          "number_of_top5_windows": 1,
+          "first_window_start": 10.0,
+          "last_window_end": 20.0
+        },
+        {
+          "label": "Bang",
+          "peak_model_score": 0.05205317214131355,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 28.1890625
+        },
+        {
+          "label": "Chopping (food)",
+          "peak_model_score": 0.051181212067604065,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Meow",
+          "peak_model_score": 0.0411519780755043,
+          "number_of_top5_windows": 1,
+          "first_window_start": 20.0,
+          "last_window_end": 28.1890625
+        },
+        {
+          "label": "Run",
+          "peak_model_score": 0.03627549484372139,
+          "number_of_top5_windows": 1,
+          "first_window_start": 15.0,
+          "last_window_end": 25.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    },
+    {
+      "key": "10-jerboa",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "source_audio_verified": true,
+      "input_association_method": "exact_encoded_audio_packet_hash",
+      "pcm_sha256_matches_local": null,
+      "decoded_audio_seconds": 38.550625,
+      "asr_word_count": 106,
+      "asr_segment_count": 11,
+      "words_per_full_clip_minute_MODEL_DERIVED": 164.97787000859262,
+      "words_with_model_score_below_0_8": 9,
+      "timestamp_review_word_indices": [],
+      "first_model_word_start": 0.0,
+      "last_model_word_end": 37.76,
+      "event_window_count": 8,
+      "top_candidate_labels_NOT_confirmed": [
+        {
+          "label": "Speech",
+          "peak_model_score": 0.8548576831817627,
+          "number_of_top5_windows": 8,
+          "first_window_start": 0.0,
+          "last_window_end": 38.550625
+        },
+        {
+          "label": "Music",
+          "peak_model_score": 0.6967686414718628,
+          "number_of_top5_windows": 8,
+          "first_window_start": 0.0,
+          "last_window_end": 38.550625
+        },
+        {
+          "label": "Speech synthesizer",
+          "peak_model_score": 0.24490180611610413,
+          "number_of_top5_windows": 4,
+          "first_window_start": 0.0,
+          "last_window_end": 30.0
+        },
+        {
+          "label": "Mouse",
+          "peak_model_score": 0.1912115067243576,
+          "number_of_top5_windows": 3,
+          "first_window_start": 25.0,
+          "last_window_end": 38.550625
+        },
+        {
+          "label": "Zipper (clothing)",
+          "peak_model_score": 0.1740162968635559,
+          "number_of_top5_windows": 2,
+          "first_window_start": 0.0,
+          "last_window_end": 15.0
+        },
+        {
+          "label": "Animal",
+          "peak_model_score": 0.1713634431362152,
+          "number_of_top5_windows": 6,
+          "first_window_start": 10.0,
+          "last_window_end": 38.550625
+        },
+        {
+          "label": "Fowl",
+          "peak_model_score": 0.10436581820249557,
+          "number_of_top5_windows": 2,
+          "first_window_start": 25.0,
+          "last_window_end": 38.550625
+        },
+        {
+          "label": "Oink",
+          "peak_model_score": 0.100667804479599,
+          "number_of_top5_windows": 1,
+          "first_window_start": 35.0,
+          "last_window_end": 38.550625
+        },
+        {
+          "label": "Single-lens reflex camera",
+          "peak_model_score": 0.07461300492286682,
+          "number_of_top5_windows": 2,
+          "first_window_start": 10.0,
+          "last_window_end": 30.0
+        },
+        {
+          "label": "Car",
+          "peak_model_score": 0.062070995569229126,
+          "number_of_top5_windows": 1,
+          "first_window_start": 5.0,
+          "last_window_end": 15.0
+        }
+      ],
+      "continuous_perceptual_listening": false,
+      "word_alignment_manually_verified": false,
+      "sound_effects_music_verified": false
+    }
+  ]
+}
