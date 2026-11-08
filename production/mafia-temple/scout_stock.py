@@ -10,9 +10,10 @@ import cv2, requests
 from PIL import Image,ImageDraw
 
 urls={
- '8533913':'https://videos.pexels.com/video-files/8533913/8533913-uhd_2560_1440_25fps.mp4',
- '8533445':'https://videos.pexels.com/video-files/8533445/8533445-uhd_2560_1440_25fps.mp4',
- '4468823':'https://videos.pexels.com/video-files/4468823/4468823-uhd_2560_1440_24fps.mp4',
+ '8533457':'https://videos.pexels.com/video-files/8533457/8533457-uhd_2560_1440_25fps.mp4',
+ '4921657':'https://videos.pexels.com/video-files/4921657/4921657-hd_1066_1920_25fps.mp4',
+ '6455341':'https://videos.pexels.com/video-files/6455341/6455341-uhd_1440_2560_24fps.mp4',
+ '32740423':'https://videos.pexels.com/video-files/32740423/13958018_1440_2560_30fps.mp4',
 }
 repo=os.environ['GH_REPO'];s=requests.Session();s.headers.update({'User-Agent':'Monarch-Motion-Research/1.0'})
 token=os.environ['GH_TOKEN']; index={}
