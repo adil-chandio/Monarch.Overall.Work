@@ -2,53 +2,63 @@
   "method": "Public creator Vimeo videos, Wikimedia open-license animation. 1fps temporal overview and 5fps first 8 seconds; not every source frame. First Minecraft 90 sec only. No virality or celebrity POV implied.",
   "items": [
     {
-      "id": "alan-original",
-      "url": "https://vimeo.com/17016768",
-      "credit": "Alan Becker, Animator vs. Animation",
-      "status": "unavailable",
-      "error": "ERROR: [vimeo] 17016768: The web client only works when logged-in. Use --cookies, --cookies-from-browser, --username and --password, --netrc-cmd, or --netrc (vimeo) to provide account credentials. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies "
-    },
-    {
-      "id": "alan-second",
-      "url": "https://vimeo.com/17016941",
-      "credit": "Alan Becker, Animator vs. Animation II",
-      "status": "unavailable",
-      "error": "ERROR: [vimeo] 17016941: The web client only works when logged-in. Use --cookies, --cookies-from-browser, --username and --password, --netrc-cmd, or --netrc (vimeo) to provide account credentials. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies "
-    },
-    {
-      "id": "alan-minecraft",
-      "url": "https://vimeo.com/149072131",
-      "credit": "Alan Becker, Animation vs. Minecraft (first 90 seconds)",
-      "status": "unavailable",
-      "error": "ERROR: [vimeo] 149072131: The web client only works when logged-in. Use --cookies, --cookies-from-browser, --username and --password, --netrc-cmd, or --netrc (vimeo) to provide account credentials. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies "
-    },
-    {
       "id": "snowball",
       "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Snowball_Fight.webm",
       "credit": "turkey3, Snowball Fight, CC BY-SA 2.0",
-      "status": "error",
-      "error": "[Errno 2] No such file or directory: 'ffprobe'"
+      "status": "downloaded",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 594,
+            "height": 446,
+            "r_frame_rate": "30/1"
+          }
+        ],
+        "format": {
+          "duration": "38.023000"
+        }
+      },
+      "seconds": [
+        "docs/repo-intel/open-animation-motion/snowball/seconds-01.jpg",
+        "docs/repo-intel/open-animation-motion/snowball/seconds-02.jpg"
+      ],
+      "seconds_error": null,
+      "detail": [
+        "docs/repo-intel/open-animation-motion/snowball/detail-01.jpg",
+        "docs/repo-intel/open-animation-motion/snowball/detail-02.jpg"
+      ],
+      "detail_error": null
     },
     {
       "id": "coconut",
       "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Coconut_Mayhem.webm",
       "credit": "turkey3, Coconut Mayhem, CC BY-SA 2.0",
-      "status": "error",
-      "error": "[Errno 2] No such file or directory: 'ffprobe'"
-    },
-    {
-      "id": "fight",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/FightAnim3.gif",
-      "credit": "Evar678, FightAnim3, CC BY 4.0",
-      "status": "error",
-      "error": "HTTP Error 429: Too many requests (f061ab2)"
-    },
-    {
-      "id": "walk",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Stick_figure_walking.gif",
-      "credit": "Ebaychatter0, Stick figure walking, CC0",
-      "status": "error",
-      "error": "HTTP Error 429: Too many requests (f061ab2)"
+      "status": "downloaded",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 594,
+            "height": 446,
+            "r_frame_rate": "30/1"
+          }
+        ],
+        "format": {
+          "duration": "12.073000"
+        }
+      },
+      "seconds": [
+        "docs/repo-intel/open-animation-motion/coconut/seconds-01.jpg"
+      ],
+      "seconds_error": null,
+      "detail": [
+        "docs/repo-intel/open-animation-motion/coconut/detail-01.jpg",
+        "docs/repo-intel/open-animation-motion/coconut/detail-02.jpg"
+      ],
+      "detail_error": null
     }
   ]
 }
