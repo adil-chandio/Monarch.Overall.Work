@@ -11,3 +11,7 @@ The 96-frame, 24 fps `side-turn-v2--turn-driver.mp4` uses a synthetic, eased -40
 ## Front-anchored test (v1)
 
 Actions 42433693275 produced 96 frames at 24 fps from a generated neutral front portrait. The initial attempt accidentally began facing camera and turned *away* instead of toward camera. The upstream CLI defaulted to expression-friendly motion, which normalizes the initial pose; changing only the intended yaw did not change the starting direction as assumed. The shot is rejected. The next experiment explicitly selects pose-friendly mode to preserve the intended initial pose. Results and identity remain unverified, and the model is research-only.
+
+## Front-anchored test (v2)
+
+Actions 42434301418 rendered 96 frames at 24 fps with pose-friendly mode. The inspected frames show a leftward three-quarter view turning toward the lens, with a small late smile and much steadier direct gaze. It is a meaningful improvement over v1, but the generated portrait is still only an approximate likeness, the expression has subtle mouth/teeth distortion, the body and background are static, and no red-eye effect is included. Intermediate-frame identity and warp artifacts need further inspection; this is research-only, not a final shot or a commercial-clearance claim.
