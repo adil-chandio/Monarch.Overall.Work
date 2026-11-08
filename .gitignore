@@ -10,6 +10,7 @@ __pycache__/
 deliverables/*.mp4
 !deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4
 !deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4
+!deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4
 
 
 # transient clone workspace for skill vendoring
@@ -61,3 +62,8 @@ production/monarch-cam/short_ranking_raw_v4/review/*.wav
 
 # V4 replacement-source raw candidate media stays out of Git
 production/monarch-cam/work/short_ranking_raw_v4/candidates/
+
+# V5 source work, candidate media and decoded WAVs stay out of Git
+production/monarch-cam/work/short_ranking_raw_v5/
+production/monarch-cam/short_ranking_raw_v5/review/stems/
+production/monarch-cam/short_ranking_raw_v5/review/*.wav
