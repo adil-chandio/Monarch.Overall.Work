@@ -377,7 +377,22 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if grep -q 'onetoall-running-research' production/mafia-temple/trigger.txt; then
-            bash production/mafia-temple/run_onetoall_pilot.sh
+            set +e
+            set -o pipefail
+            bash production/mafia-temple/run_onetoall_pilot.sh 2>&1 | tee "$RUNNER_TEMP/onetoall-client.log"
+            status=${PIPESTATUS[0]}
+            if [ "$status" -ne 0 ]; then
+              python - <<'PY'
+          import os, pathlib, re
+          p=pathlib.Path(os.environ['RUNNER_TEMP'])/'onetoall-client.log'
+          lines=[]
+          for line in p.read_text(errors='replace').splitlines():
+              if len(line)>350 or re.search(r'(?i)secret|password|kgat|authorization|token|base64|reference\s*=|driver\s*=',line): continue
+              lines.append(line.replace('%','%25').replace('\r','%0D'))
+          for line in lines[-15:]: print('::error title=One-to-All client diagnostic::'+line)
+          PY
+              exit "$status"
+            fi
           elif grep -q 'stableanim-recover-v7' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/recover_stableanim_pilot.sh
           elif grep -q 'stableanim-depth-diagnose' production/mafia-temple/trigger.txt; then
