@@ -29,6 +29,15 @@ for msg in messages:
                                 v=payload[key]; lines.extend(str(x) for x in v) if isinstance(v,list) else lines.append(f'{key}: {v}')
             except ValueError: pass
         if len(line)<=400: lines.append(line)
+# Save sanitized short lines for local forensic analysis, never notebook source.
+import pathlib
+safe=[]
+for line in lines:
+    clean=re.sub(r'(?:/[^ :\s]+)+','<path>',line).replace('\r','').strip()
+    if clean and len(clean)<=400: safe.append(clean)
+out=pathlib.Path('production/mafia-temple/onetoall-diagnostics.txt')
+out.write_text('\n'.join(safe[-400:])+'\n')
+print(f'::notice::Sanitized diagnostic lines: {len(safe)}')
 # Output only concise tail and likely diagnostic lines, never notebook source.
 interesting=[l for l in lines if re.search(r'(?i)exception|error|traceback|failed|out of memory|no module|executing|typeerror|valueerror|attributeerror|cudnn|execution_',l)]
 selected=(interesting[-40:]+lines[-35:])[-70:]
