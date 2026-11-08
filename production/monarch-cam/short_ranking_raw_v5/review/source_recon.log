@@ -3,63 +3,63 @@ Using SHA-1 verified cached original bois_crow_follow 6543748
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/bois_crow_follow.webm -ss 8.000 -t 8.567 -map 0:v:0 -an -vf fps=30 -frames:v 257 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_bois_crow_follow.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_bois_crow_follow.mp4
 + ffmpeg -y -hide_banner -loglevel warning -ss 8.000 -t 8.567 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/bois_crow_follow.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/frames/bois_crow_follow_%04d.jpg
-[swscaler @ 0x5629e8a5e680] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x5629e8b2f300] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x560b2c729680] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x560b2c7fa300] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 Using SHA-1 verified cached original tidepool_worm 7641880
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/tidepool_worm.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/tidepool_worm.webm -ss 2.500 -t 8.567 -map 0:v:0 -an -vf fps=30 -frames:v 257 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_tidepool_worm.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_tidepool_worm.mp4
 + ffmpeg -y -hide_banner -loglevel warning -ss 2.500 -t 8.567 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/tidepool_worm.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/frames/tidepool_worm_%04d.jpg
-[swscaler @ 0x55d4bf27a340] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55d4bf29e340] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55d50873c340] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55d508760340] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 Using SHA-1 verified cached original berlin_squirrel_monkey 8491540
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/berlin_squirrel_monkey.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/berlin_squirrel_monkey.webm -ss 1.500 -t 8.567 -map 0:v:0 -an -vf fps=30 -frames:v 257 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_berlin_squirrel_monkey.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_berlin_squirrel_monkey.mp4
 + ffmpeg -y -hide_banner -loglevel warning -ss 1.500 -t 8.567 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/berlin_squirrel_monkey.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/frames/berlin_squirrel_monkey_%04d.jpg
-[swscaler @ 0x55bfd652d340] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55bfd6582540] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55bfd659f800] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55a20e619340] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55a20e66e540] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55a20e68b800] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 1 times
 Using SHA-1 verified cached original cape_squirrel 135219598
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/cape_squirrel.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/cape_squirrel.webm -ss 3.500 -t 8.567 -map 0:v:0 -an -vf fps=30 -frames:v 257 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_cape_squirrel.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_cape_squirrel.mp4
 + ffmpeg -y -hide_banner -loglevel warning -ss 3.500 -t 8.567 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/cape_squirrel.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/frames/cape_squirrel_%04d.jpg
-[swscaler @ 0x55dcadae85c0] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55dcadb465c0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5577307285c0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5577307865c0] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 Using SHA-1 verified cached original uluwatu_bag 7272801
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_bag.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_bag.webm -ss 10.000 -t 8.567 -map 0:v:0 -an -vf fps=30 -frames:v 257 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_uluwatu_bag.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_uluwatu_bag.mp4
 + ffmpeg -y -hide_banner -loglevel warning -ss 10.000 -t 8.567 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_bag.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/frames/uluwatu_bag_%04d.jpg
-[swscaler @ 0x5560ae3fdf40] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x5560ae480f40] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5594a2376f40] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5594a23f9f40] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 Using SHA-1 verified cached original malaga_animals 6268736
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/malaga_animals.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/malaga_animals.webm -ss 0.000 -t 8.567 -map 0:v:0 -an -vf fps=30 -frames:v 257 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_malaga_animals.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_malaga_animals.mp4
 + ffmpeg -y -hide_banner -loglevel warning -ss 0.000 -t 8.567 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/malaga_animals.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/frames/malaga_animals_%04d.jpg
-[swscaler @ 0x56400a5874c0] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x56400a5d5bc0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55a8240e04c0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55a82412ebc0] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 Using SHA-1 verified cached original uluwatu_heist 9113892
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_heist.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_heist.webm -ss 0.000 -t 8.600 -map 0:v:0 -an -vf fps=30 -frames:v 258 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_uluwatu_heist.mp4
 + ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_uluwatu_heist.mp4
 + ffmpeg -y -hide_banner -loglevel warning -ss 0.000 -t 8.600 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/media/uluwatu_heist.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/frames/uluwatu_heist_%04d.jpg
-[swscaler @ 0x555585b6dd80] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x555c75dc0d80] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 3 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/clips/clip_bois_crow_follow.mp4 -frames:v 1 -vf scale=540:-2 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v5/review/source_poster.jpg
-[swscaler @ 0x5579892c5580] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55798982fa80] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5597e9d93580] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5597ea2fda80] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
-[image2 @ 0x557989220e40] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v5/review/source_poster.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x557989220e40] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[image2 @ 0x5597e9ceee40] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v5/review/source_poster.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x5597e9ceee40] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
 {
   "topic": "7 Unexpected Animal Moments, Ranked",
   "edition": "raw_fullscreen_v5",
@@ -182,5 +182,5 @@ Using SHA-1 verified cached original uluwatu_heist 9113892
   "sign_off": false,
   "audience_result_promise": false,
   "virality_guarantee": false,
-  "retrieved_unix": 1794097875
+  "retrieved_unix": 1794098371
 }

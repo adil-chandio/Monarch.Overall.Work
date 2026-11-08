@@ -1,7 +1,7 @@
 {
   "file": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4",
-  "sha256": "0f8ab407d4a1050edd0424993cc6e6732313819346e24975766ace932e19f81d",
-  "bytes": 28152435,
+  "sha256": "8948f67f4ab0fb419fd1d53a10f1db68a0c6848347aa80961a1a607f9806306a",
+  "bytes": 28043097,
   "probe": {
     "streams": [
       {
@@ -36,7 +36,7 @@
         "start_time": "0.000000",
         "duration_ts": 921600,
         "duration": "60.000000",
-        "bit_rate": "3483990",
+        "bit_rate": "3483792",
         "bits_per_raw_sample": "8",
         "nb_frames": "1800",
         "nb_read_frames": "1800",
@@ -90,7 +90,7 @@
         "start_time": "0.000000",
         "duration_ts": 2880000,
         "duration": "60.000000",
-        "bit_rate": "261459",
+        "bit_rate": "247084",
         "nb_frames": "2814",
         "nb_read_frames": "2813",
         "extradata_size": 5,
@@ -129,8 +129,8 @@
       "format_long_name": "QuickTime / MOV",
       "start_time": "0.000000",
       "duration": "60.000000",
-      "size": "28152435",
-      "bit_rate": "3753658",
+      "size": "28043097",
+      "bit_rate": "3739079",
       "probe_score": 100,
       "tags": {
         "major_brand": "isom",
@@ -142,18 +142,18 @@
   },
   "decoded_audio_samples": 2880512,
   "decoded_sample_rate": 48000,
-  "decoded_sample_peak_dbfs": -2.2595,
+  "decoded_sample_peak_dbfs": -2.2005,
   "clipping_runs": 0,
   "click_runs": 0,
   "click_positions_s": [],
-  "dc_offset": -0.000531,
-  "channel_correlation": 0.5822,
-  "mono_fold_loss_db": -1.0261,
+  "dc_offset": -0.000269,
+  "channel_correlation": 0.9999,
+  "mono_fold_loss_db": -0.0001,
   "loudnorm_input": {
-    "input_i": "-13.98",
-    "input_tp": "-2.26",
-    "input_lra": "6.40",
-    "input_thresh": "-24.05"
+    "input_i": "-14.57",
+    "input_tp": "-2.20",
+    "input_lra": "6.10",
+    "input_thresh": "-24.63"
   },
   "checks": {
     "duration_60s": true,
@@ -164,7 +164,7 @@
     "no_sample_clipping_runs": true,
     "no_click_runs": true,
     "dc_offset_ok": true,
-    "mono_compatible": false,
+    "mono_compatible": true,
     "nine_gate_audio_pass": true,
     "final_web_gate_pass": true,
     "final_technical_click_runs_zero": true,
@@ -231,5 +231,5 @@
     "ambience_layers": false,
     "cue_layers": false
   },
-  "passed": false
+  "passed": true
 }

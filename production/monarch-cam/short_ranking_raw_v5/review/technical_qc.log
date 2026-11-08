@@ -1,7 +1,1 @@
-Traceback (most recent call last):
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v5/technical_qc_raw_v5.py", line 143, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_raw_v5/technical_qc_raw_v5.py", line 137, in main
-    raise RuntimeError('V5 technical QC failed: ' + json.dumps({k: v for k, v in checks.items() if not v}))
-RuntimeError: V5 technical QC failed: {"mono_compatible": false}
+V5 technical QC OK 8948f67f4ab0fb419fd1d53a10f1db68a0c6848347aa80961a1a607f9806306a

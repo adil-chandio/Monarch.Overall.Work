@@ -232,6 +232,7 @@
   "no_fabricated_animal_calls": true,
   "native_source_audio_only": true,
   "raw_per_window_native_audio_only": true,
+  "native_stereo_fold_to_dual_mono": true,
   "source_audio_present_segments": 7,
   "silent_segments": 0,
   "all_seven_native_audio_audible": true,
@@ -244,99 +245,73 @@
   "chosen_combo": "rmsm24_strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
   "per_window_target_rms_dbfs": -24.0,
   "mastering_variant": "strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
-  "mastering_filter": "highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+  "mastering_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
   "mastering_attempts": [
     {
       "id": "rmsm24_linear_loudnorm_lra7",
       "target_rms_dbfs": -24.0,
       "mastering_variant": "linear_loudnorm_lra7",
-      "filter": "highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=true:print_format=summary",
+      "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=true:print_format=summary",
       "web_gate_pass": false,
       "failed": [
         "lra_in_range"
       ],
-      "integrated_lufs": -14.03,
-      "lra_lu": 16.31,
-      "sample_peak_dbfs": -2.26,
-      "movement_db": 32.37,
+      "integrated_lufs": -14.02,
+      "lra_lu": 16.93,
+      "sample_peak_dbfs": -2.33,
+      "movement_db": 33.24,
       "technical_click_runs": 0
     },
     {
       "id": "rmsm24_dynamic_loudnorm_lra7",
       "target_rms_dbfs": -24.0,
       "mastering_variant": "dynamic_loudnorm_lra7",
-      "filter": "highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+      "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
       "web_gate_pass": false,
       "failed": [
         "lra_in_range"
       ],
-      "integrated_lufs": -14.03,
-      "lra_lu": 16.31,
-      "sample_peak_dbfs": -2.26,
-      "movement_db": 32.37,
+      "integrated_lufs": -14.02,
+      "lra_lu": 16.93,
+      "sample_peak_dbfs": -2.33,
+      "movement_db": 33.24,
       "technical_click_runs": 0
     },
     {
       "id": "rmsm24_rms_compressor_6to1_dynamic_loudnorm_lra7",
       "target_rms_dbfs": -24.0,
       "mastering_variant": "rms_compressor_6to1_dynamic_loudnorm_lra7",
-      "filter": "highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+      "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
       "web_gate_pass": false,
       "failed": [
         "lra_in_range"
       ],
-      "integrated_lufs": -14.02,
-      "lra_lu": 12.6,
-      "sample_peak_dbfs": -2.38,
-      "movement_db": 24.78,
+      "integrated_lufs": -14.0,
+      "lra_lu": 12.48,
+      "sample_peak_dbfs": -2.47,
+      "movement_db": 25.11,
       "technical_click_runs": 0
     },
     {
       "id": "rmsm24_strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
       "target_rms_dbfs": -24.0,
       "mastering_variant": "strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
-      "filter": "highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+      "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
       "web_gate_pass": true,
       "failed": [],
-      "integrated_lufs": -14.12,
-      "lra_lu": 7.68,
-      "sample_peak_dbfs": -2.26,
-      "movement_db": 17.09,
+      "integrated_lufs": -14.65,
+      "lra_lu": 7.17,
+      "sample_peak_dbfs": -2.2,
+      "movement_db": 17.59,
       "technical_click_runs": 0
     }
   ],
   "final_gain_calibration": [
     {
       "iteration": 0,
-      "integrated_lufs": -14.61,
-      "lra_lu": 7.61,
-      "sample_peak_dbfs": -2.1,
-      "loudness_in_range": true,
-      "lra_in_range": true,
-      "true_peak_ok": true,
-      "web_gate_pass": true,
-      "technical_click_runs": 1,
-      "measured_on": "delivered_aac_stream",
-      "applied_gain_db": 0.61,
-      "declick_regions": 146,
-      "peak_limit_linear": 0.75,
-      "delivered_click_repair": [
-        {
-          "iteration": 0,
-          "technical_click_runs": 3,
-          "declick_regions": 22
-        },
-        {
-          "iteration": 1,
-          "technical_click_runs": 0
-        }
-      ]
-    },
-    {
-      "iteration": 1,
-      "integrated_lufs": -14.12,
-      "lra_lu": 7.68,
-      "sample_peak_dbfs": -2.26,
+      "integrated_lufs": -14.65,
+      "lra_lu": 7.17,
+      "sample_peak_dbfs": -2.2,
       "loudness_in_range": true,
       "lra_in_range": true,
       "true_peak_ok": true,
@@ -352,8 +327,8 @@
   "final_technical_click_runs": 0,
   "premaster": "production/monarch-cam/work/short_ranking_raw_v5/native_timeline_rmsm24.wav",
   "mastered": "production/monarch-cam/work/short_ranking_raw_v5/native_timeline_mastered_rmsm24.wav",
-  "deliverable_sha256": "0f8ab407d4a1050edd0424993cc6e6732313819346e24975766ace932e19f81d",
-  "deliverable_bytes": 28152435,
+  "deliverable_sha256": "8948f67f4ab0fb419fd1d53a10f1db68a0c6848347aa80961a1a607f9806306a",
+  "deliverable_bytes": 28043097,
   "full_motion_review": false,
   "native_audio_listening": false,
   "human_approval": false,

@@ -1,79 +1,79 @@
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/uluwatu_heist.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/uluwatu_heist.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/uluwatu_heist/uluwatu_heist_%04d.jpg
-[swscaler @ 0x5569d57e2c00] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x5569d58a9700] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55f495140c00] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55f495207700] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/uluwatu_heist.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/uluwatu_heist_audio.wav
 Probe OK uluwatu_heist audio True motion 31.0472 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/uluwatu_bag.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/uluwatu_bag.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/uluwatu_bag/uluwatu_bag_%04d.jpg
-[swscaler @ 0x55f73be06f00] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55f73bf37680] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55d9ea75cf00] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55d9ea88d680] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/uluwatu_bag.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/uluwatu_bag_audio.wav
 Probe OK uluwatu_bag audio True motion 18.1376 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_crow_bath.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_crow_bath.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/berlin_crow_bath/berlin_crow_bath_%04d.jpg
-[swscaler @ 0x55e4a705f300] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55e4a7148f00] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x564a6f94e300] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x564a6fa37f00] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_crow_bath.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/berlin_crow_bath_audio.wav
 Probe OK berlin_crow_bath audio True motion 11.5255 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_squirrel_monkey.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_squirrel_monkey.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/berlin_squirrel_monkey/berlin_squirrel_monkey_%04d.jpg
-[swscaler @ 0x55dafc77f340] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55dafc868d40] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55acbb0a3340] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55acbb18cd40] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_squirrel_monkey.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/berlin_squirrel_monkey_audio.wav
 Probe OK berlin_squirrel_monkey audio True motion 22.9576 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/bois_crow_follow.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/bois_crow_follow.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/bois_crow_follow/bois_crow_follow_%04d.jpg
-[swscaler @ 0x564ed8b24600] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x564ed8b7bf40] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55d17bba3600] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55d17bbfaf40] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/bois_crow_follow.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/bois_crow_follow_audio.wav
 Probe OK bois_crow_follow audio True motion 47.3355 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/cape_squirrel.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/cape_squirrel.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/cape_squirrel/cape_squirrel_%04d.jpg
-[swscaler @ 0x562947068540] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x5629470a11c0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55dcb4617540] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55dcb46501c0] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 1 times
-[swscaler @ 0x562947121c80] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55dcb46d0c80] deprecated pixel format used, make sure you did set range correctly
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/cape_squirrel.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/cape_squirrel_audio.wav
 Probe OK cape_squirrel audio True motion 31.2852 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/oriental_dove.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/oriental_dove.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/oriental_dove/oriental_dove_%04d.jpg
-[swscaler @ 0x563967984380] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x563967a84380] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55bf28659380] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x55bf28759380] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/oriental_dove.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/oriental_dove_audio.wav
 Probe OK oriental_dove audio True motion 16.5451 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/malaga_animals.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/malaga_animals.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/malaga_animals/malaga_animals_%04d.jpg
-[swscaler @ 0x55f2514b8440] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x55f251429840] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x56134a34e440] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x56134a2bf840] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/malaga_animals.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/malaga_animals_audio.wav
 Probe OK malaga_animals audio True motion 26.3075 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/tidepool_worm.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/tidepool_worm.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/tidepool_worm/tidepool_worm_%04d.jpg
-[swscaler @ 0x563c1c9b52c0] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x563c1c9743c0] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x563c1c9f3e00] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x563c1ca63e40] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5605218662c0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5605218253c0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5605218a4e00] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x560521914e40] deprecated pixel format used, make sure you did set range correctly
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/tidepool_worm.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/tidepool_worm_audio.wav
 Probe OK tidepool_worm audio True motion 21.1272 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/sasana_squirrel.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/sasana_squirrel.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/sasana_squirrel/sasana_squirrel_%04d.jpg
-[swscaler @ 0x56018f6bf700] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x56018f712040] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x56232ac21700] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x56232ac74040] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/sasana_squirrel.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/sasana_squirrel_audio.wav
 Probe OK sasana_squirrel audio True motion 49.9571 selectable True
 + ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_gorilla.webm
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_gorilla.webm -vf fps=1,scale=160:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/frames/berlin_gorilla/berlin_gorilla_%04d.jpg
-[swscaler @ 0x556358e51300] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 0x556358f81880] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x56260d662300] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x56260d792880] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 2 times
 + ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/media/berlin_gorilla.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v5/candidates/berlin_gorilla_audio.wav
 Probe OK berlin_gorilla audio True motion 14.3681 selectable True
