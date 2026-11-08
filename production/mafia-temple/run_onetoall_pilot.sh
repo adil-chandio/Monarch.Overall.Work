@@ -26,6 +26,9 @@ for ((i=0;i<270;i++)); do
       export PILOT_KERNEL_SLUG="$slug"
       python production/mafia-temple/stableanim_diagnose.py
       cp production/mafia-temple/run-pilot-output/run-pilot-diagnostics.json "$out/failure-diagnostics.json"
+      rm -f production/mafia-temple/onetoall-diagnostics.txt
+      python production/mafia-temple/onetoall_diagnose.py || true
+      if [ -f production/mafia-temple/onetoall-diagnostics.txt ]; then cp production/mafia-temple/onetoall-diagnostics.txt "$out/full-diagnostics.txt"; fi
       python - <<'PY'
 import json
 p='production/mafia-temple/onetoall-pilot-output/failure-diagnostics.json'
