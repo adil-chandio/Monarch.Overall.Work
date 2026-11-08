@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "EMS-20261011-001-archive",
+  "title": "EMS-20261011-001 raw history archive",
+  "kind": "archive",
+  "source": "Google Drive EMS-20261011-001-history-archive.tar.gz",
+  "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+  "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+  "space": "ops",
+  "branch": "arena/390292fc-monarch-overall-work",
+  "evidence_level": "connected_app_record",
+  "coverage": "partial",
+  "notes": "Raw tar.gz preserved byte-for-byte; extracted text also in evidence/external/drive_text/EMS-20261011-001_history_archive/.",
+  "imported_at": "2026-11-08T16:13:55Z",
+  "parser": "binary_preserved_unparsed",
+  "message_count": 0,
+  "role_counts": {},
+  "warnings": [
+    "Binary/archive source preserved byte-for-byte; no transcript normalization attempted."
+  ],
+  "raw_path": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/raw/EMS-20261011-001-history-archive.tar.gz",
+  "raw_sha256": "1dc1004a849b83ef51b177b20233fb1e9e57e8e29a6953816905336dd9f4eb00",
+  "raw_bytes": 16733,
+  "normalized_path": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/normalized.jsonl",
+  "normalized_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "normalized_bytes": 0
+}

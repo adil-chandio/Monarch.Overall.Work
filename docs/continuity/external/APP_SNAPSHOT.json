@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0.0",
+  "captured_at": "2026-11-08T15:26:18Z..2026-11-08T15:32:32Z",
+  "clock_source": "sandbox date -u and GitHub evidence generator",
+  "purpose": "Timestamped cross-app discovery snapshot for continuity; not a live mirror and not proof of Arena chat transfer.",
+  "evidence_level": "connected_app_record",
+  "redaction": "No OAuth tokens, passwords, API keys, service-role keys, or env values copied. Account emails redacted unless they are a public project lead record.",
+  "github": {
+    "repo": "adil-chandio/Monarch.Overall.Work",
+    "active_branch": "arena/390292fc-monarch-overall-work",
+    "head_at_capture": "393edd658e8336780e1cd4aea4cf5b5261c2d1e3",
+    "remote_heads": 11,
+    "tags": 16,
+    "pull_requests": 4,
+    "workflow_runs_indexed": 452,
+    "reachable_commits_indexed": 998,
+    "local_workflows": 18,
+    "repos_inspected": 22,
+    "satellite_continuity_files_imported": 120,
+    "evidence_dir": "docs/continuity/evidence/github"
+  },
+  "google_drive": {
+    "broad_continuity_name_query": "100 files, truncated; not exhaustive",
+    "fulltext_arena_chat_query": "100 files, truncated; no complete Arena chat export identified",
+    "session_logs_indexed": 11,
+    "resume_states_indexed": 13,
+    "codex_playbook_failures_targeted_matches": 9,
+    "start_here_session_history_matches": 18,
+    "history_archives_found": 1,
+    "history_archive_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+    "history_archive_contains": [
+      "operations/history/EMS-20261011-001/CHAT_TRANSCRIPT.jsonl",
+      "operations/history/EMS-20261011-001/JOURNAL.jsonl",
+      "operations/history/EMS-20261011-001/RESUME.md",
+      "operations/history/EMS-20261011-001/ACTIVE_TASK.json",
+      "operations/history/EMS-20261011-001/payload/USER_REQUEST.txt",
+      "operations/continuity/checkpoints/.../HANDOFF.md",
+      "operations/continuity/outbox/.../SYNC.json"
+    ],
+    "large_files_not_downloaded": [
+      {"id": "1RjU2c8PNdJVzs98UuvIkSVNh3-2A5pBj", "name": "WF02_STYLE_MEMORY_V2_V8_20261016.zip", "bytes": 43712098},
+      {"id": "1ue4xkG697LP4yH66GCJYPtMr0D17pPkd", "name": "WF-05 FULL LIBRARY shortcut target ZIP", "bytes": null},
+      {"id": "1nW1_8awetPKTY7QoJPyvz75ZnYKmg4JN", "name": "WF05_Premium_Motion_Editing_Codex.pdf", "bytes": 165423}
+    ],
+    "evidence_dir": "docs/continuity/evidence/external/drive_text"
+  },
+  "google_docs": {
+    "native_docs_found_by_targeted_query": 12,
+    "key_docs": [
+      {"id": "1tRxHnODAm_rSuOM58nXJYVqUqZhfPpE7cqpASzcG_dY", "title": "START HERE — WF-07 Monarch AI Agent (free vs paid + 480p answer)"},
+      {"id": "1grIjpqnWTXrYm1fjXL0pR4Q0fQ8eW8T7_9xK6cqMGtg", "title": "02 — Prompting grammar + Monarch templates"},
+      {"id": "1frC4llt-7Lj9ouaIlKjlTTURL_xXgsebU9VvYsi9e-Q", "title": "00 — H3 model facts"},
+      {"id": "11bg4a_ZbK_ZDk6dGB7I4WJP4S-_LERBJ_D6woz3qhjM", "title": "05 — Free vs paid routes (is H3 free?)"},
+      {"id": "1Nn0isfBfplCIXLGz2GsdKvhB3pqPVSaiz6vOdo2_SIg", "title": "01 — Colab runbook"},
+      {"id": "1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q", "title": "MONARCH STUDIO — Workflow Registry"},
+      {"id": "16gLeZBQV_wWVo5OnzQvpXirXTyNUz8hjwt6x0qMOzZU", "title": "Editing Monarch Studio · Continuity + Style Library v1 · Recovery Hub"},
+      {"id": "1g2WLpd-S9LmBur4nbz9mHc4AkOCCl54ZUpHNAzHuW5g", "title": "WF-01 · Monarch Stickman Animation — HUB"},
+      {"id": "1sGGzPHXXars1-pJvB3ugnbnLuSuQ5EpE-obVidTj6rM", "title": "WF-03 · Monarch Noir Film — HUB"},
+      {"id": "1Vx2t3z5Kx_gUMd2nkPjdqa3kc-BGDe8sj2Cua4pvxEY", "title": "WF-04 · Monarch Face 🔥👑 — HUB"},
+      {"id": "1AsFnHq43aYYWORu1MAdrjsnDyPf-ftOg5HrY0Uj40BI", "title": "MONARCH CHARACTERS — HUB"},
+      {"id": "1yg7VK9S0luG4bPHQxWGtPIKxUcKcOSI6n7JnrCxPnLU", "title": "WF-05 · Premium Motion Editing — HUB & Complete Codex"}
+    ],
+    "no_complete_arena_chat_transcript": true
+  },
+  "notion": {
+    "integration_search": "pages/workflow hubs/registries/postmortems; broad result truncated",
+    "key_pages": [
+      {"id": "40c807e1-e916-8168-9afd-d661acd13046", "title": "MONARCH® B2B Studio, Client Portal & Safe Payment SOP (2026)"},
+      {"id": "3f9807e1-e916-81bd-8408-cb4537dacb31", "title": "WF-05 · Premium Motion Editing (registry row)"},
+      {"id": "3f9807e1-e916-819b-9c53-e21326dd0f26", "title": "WF-05 · Premium Motion Editing (project page)"},
+      {"id": "3f9807e1-e916-81af-8fd5-dde25caf448c", "title": "00 · WF-05 — Current policy, resume order and verified links"},
+      {"id": "3f5807e1-e916-819f-91a9-d0786304b6da", "title": "Editing Monarch Studio · Continuity + Style Library v1"},
+      {"id": "3f9807e1-e916-81c3-9a11-d382e6b01a5e", "title": "THE GRAVITY OF THE PHONE · WTF-30 #1 · v4"},
+      {"id": "3f3807e1-e916-812c-8db0-d476c68c6c58", "title": "01 · Prompt → Response → Result log (turn by turn)"},
+      {"id": "3f3807e1-e916-81a3-a952-e70446a228a0", "title": "Prompt → Response → Result Log (turn by turn)"},
+      {"id": "3f3807e1-e916-8167-bbb4-f2fbd714b4b8", "title": "Monarch Stickman Animation — COMPLETE Session Workflow"},
+      {"id": "3f4807e1-e916-81a6-b24c-f09db93d02d6", "title": "WF-02 · Powerful Personality Explainer (LEGACY — old chat)"}
+    ],
+    "legacy_wf02_note": "Old chat sandbox files were not uploaded to Drive; Gofile/Litterbox links may have expired. Resume key TABAHI ACTIVATE.",
+    "no_raw_arena_transcript": true
+  },
+  "linear": {
+    "projects": 13,
+    "issues_observed": "MON-1..MON-72",
+    "project_updates_returned": "11+ (result truncated)",
+    "documents_returned": 0,
+    "key_projects": [
+      {"id": "b0736831-55bc-4584-9ddc-9b3b6ec815af", "name": "MONARCH® B2B Agency & Client Portal OS"},
+      {"id": "104ec829-e3db-4796-b12c-4fd062287ff3", "name": "WF-05 · Premium Motion Editing"},
+      {"id": "91320e77-d1f7-4f74-a5f0-0131252fd192", "name": "WF-04 · Monarch Face 🔥👑"},
+      {"id": "70db3731-c59d-4188-8f9b-8755d15261d9", "name": "Editing Monarch Studio · Continuity & Style Library"},
+      {"id": "0a01b89d-3c9d-4193-8416-76b32d76cfca", "name": "MONARCH STUDIO · Workflow Registry"},
+      {"id": "4d053022-acab-4836-8f13-5ccb7e043c17", "name": "WF-01 · Monarch Stickman Animation"},
+      {"id": "a813926c-b2ef-4956-91dd-09e91f08b7d9", "name": "WF-02 · Monarch Stickman Animation — LEGACY"},
+      {"id": "be68fa7d-39ea-4d5b-b9c0-f17615d3d04e", "name": "Monarch Stickman Animation (archived complete session archive)"},
+      {"id": "e173192b-b932-4801-ac4d-dcd7445237b8", "name": "WF-03 · Monarch Noir Film"},
+      {"id": "d3cfbddd-1856-4688-b70a-c441be1cb7b2", "name": "Monarch YT Automation — Arena Team OS"}
+    ],
+    "key_issues": ["MON-55", "MON-67", "MON-68", "MON-69", "MON-70", "MON-71", "MON-72"],
+    "no_raw_arena_transcript": true
+  },
+  "supabase": {
+    "project_ref": "oeqeqlgatdlqbuywktnu",
+    "project_name": "monarch-workspace",
+    "status": "ACTIVE_HEALTHY",
+    "public_tables": 22,
+    "public_columns": 232,
+    "saved_conversations_exact": 0,
+    "knowledge_notes_exact": 0,
+    "workspace_state_exact": 1,
+    "workspace_state_max_revision": 1,
+    "saved_conversations_columns": ["id", "workspace_id", "project_id", "title", "source", "source_url", "summary", "tags", "saved_by", "created_at"],
+    "no_imported_conversations": true
+  },
+  "vercel": {
+    "projects": 2,
+    "project_names": ["monarch-concierge-api", "whatsapp-ai-saathi"],
+    "monarch_concierge_production_deployment": "dpl_HJgeUMGy8JYTUkny7fkyEUZ5u3wi",
+    "portfolio_pr_14": "wire live brain (window.MQ_API_URL → Vercel /api/chat)",
+    "env_keys_seen": ["GEMINI_API_KEY", "GROQ_API_KEY"],
+    "env_values": "empty/redacted; no secrets copied",
+    "no_chat_transcripts": true
+  },
+  "gmail": {
+    "drafts": 4,
+    "b2b_outreach_draft_subjects": [
+      "Cinematic Website + Launch Reel for [Brand Name] — MONARCH® Studio",
+      "48h high-retention reels & AI commercial system for [Brand Name]",
+      "5-day interactive launch upgrade for [Company Name] — MONARCH® Studio"
+    ],
+    "no_chat_transcript_or_attachment": true
+  },
+  "dropbox": {
+    "root_tree": "/MONARCH_B2B_DELIVERY plus four subfolders",
+    "files": 1,
+    "file_path": "/MONARCH_B2B_DELIVERY/02_FINAL_HD_DELIVERABLES/MON-DEMO26_Final_Delivery_Pack.md",
+    "bytes": 783,
+    "content_hash": "0aa88fcfd4e2cac65446a52fe85317995adc7cc2c0162af9059eb83b66e02ddc",
+    "content_read_error": "email_not_verified",
+    "no_chat_transcript": true
+  },
+  "errors_and_dead_ends": [
+    "Three stale Drive IDs from session memory returned 404; exact-name searches supplied corrected IDs.",
+    "Legacy Notion Google Doc HUB 1MVReMbe56MeehNO8Il70qMhuAHNxI01PPE0Vupj0FTc returned 404.",
+    "Dropbox get_file_content blocked by email_not_verified.",
+    "Broad Drive and Notion/Linear result payloads were truncated; targeted smaller queries were used.",
+    "multi_tool_use.parallel connector calls can be unavailable unless list_connector_tools was loaded in that reply.",
+    "Direct curl from bash to www.googleapis.com fails; use connector tools.",
+    "No complete Arena chat export/JSON was found in any connected app."
+  ],
+  "gaps": [
+    "Complete Arena chat exports for current and sidebar chats.",
+    "Assistant turns for EMS-20261011-001 CHAT_TRANSCRIPT.jsonl.",
+    "Full untruncated sidebar chat titles and unseen turns.",
+    "Live bidirectional sync to connected apps.",
+    "Dropbox B2B MD body.",
+    "Large Drive ZIP/PDF/MP4 source packages.",
+    "V6 rights-verified social-platform clips and delivery."
+  ]
+}

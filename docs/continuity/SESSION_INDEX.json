@@ -1,0 +1,731 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-08T15:57:06Z",
+  "note": "Sessions include partial screenshot/session-memory reconstructions and imported raw sources. Evidence level is never promoted to verbatim unless a real export exists.",
+  "sessions": [
+    {
+      "id": "arena-390292fc-current",
+      "title": "Current chat — repo-first continuity pack",
+      "status": "active",
+      "space": "ops",
+      "evidence_level": "session_memory",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/arena-390292fc-current.md",
+      "notes": "Condensed session-memory reconstruction; not a verbatim transcript.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/STATE.json",
+          "note": "canonical state"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/MINDSET.md",
+          "note": "style/mindset"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/WORK_LEVELS.md",
+          "note": "work levels"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/GAPS.md",
+          "note": "explicit gaps"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/screenshots/screenshot_index.json",
+          "note": "screenshot index"
+        }
+      ]
+    },
+    {
+      "id": "screenshot-sidebar-20261108",
+      "title": "Visible Arena sidebar / four chat screenshots",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "screenshot_only",
+      "branch_or_source": "user-attached PNGs",
+      "session_file": "docs/continuity/sessions/screenshot-sidebar-20261108.md",
+      "notes": "Partial visual evidence only; full chat list unknown.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/screenshots/screenshot_index.json",
+          "note": "29 PNG index"
+        }
+      ]
+    },
+    {
+      "id": "arena-6101616c-portrait-research",
+      "title": "Portrait research chat",
+      "status": "indexed",
+      "space": "monarch-studio",
+      "evidence_level": "screenshot_only",
+      "branch_or_source": "arena/6101616c-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/arena-6101616c-portrait-research.md",
+      "notes": "Screenshot-only; exact turns unknown.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/screenshots/Screenshot_20261108-194530.png",
+          "note": "attached screenshot"
+        }
+      ]
+    },
+    {
+      "id": "arena-ba8d901e-extinct-life-wall",
+      "title": "Extinct-life wall Short chat",
+      "status": "indexed",
+      "space": "yt-automation",
+      "evidence_level": "screenshot_only",
+      "branch_or_source": "arena/ba8d901e-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/arena-ba8d901e-extinct-life-wall.md",
+      "notes": "Exact visible phrases preserved; full turns unknown.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/screenshots/Screenshot_20261108-194856.png",
+          "note": "attached screenshot"
+        }
+      ]
+    },
+    {
+      "id": "arena-1f352b8e-animated-pov",
+      "title": "Animated POV frame-by-frame correction",
+      "status": "indexed",
+      "space": "monarch-studio",
+      "evidence_level": "screenshot_only",
+      "branch_or_source": "arena/1f352b8e-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/arena-1f352b8e-animated-pov.md",
+      "notes": "Standing correction about frame-by-frame rendering.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/screenshots/Screenshot_20261108-194953.png",
+          "note": "attached screenshot"
+        }
+      ]
+    },
+    {
+      "id": "arena-d9c9e65-portfolio",
+      "title": "Portfolio / Vercel live-brain checklist",
+      "status": "indexed",
+      "space": "portfolio",
+      "evidence_level": "screenshot_only",
+      "branch_or_source": "arena/d9c9e65-portfolio",
+      "session_file": "docs/continuity/sessions/arena-d9c9e65-portfolio.md",
+      "notes": "Visible checklist and live URL; full turns unknown.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/screenshots/Screenshot_20261108-194831.png",
+          "note": "attached screenshot"
+        },
+        {
+          "kind": "external",
+          "ref": "dpl_HJgeUMGy8JYTUkny7fkyEUZ5u3wi",
+          "note": "Vercel deployment"
+        }
+      ]
+    },
+    {
+      "id": "older-workflows",
+      "title": "WF‑01…WF‑07 / continuity style library",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "connected_app_record",
+      "branch_or_source": "Drive / Docs / Notion / Linear",
+      "session_file": "docs/continuity/sessions/older-workflows.md",
+      "notes": "Workflow hubs and style library records, not Arena transcripts.",
+      "evidence": [
+        {
+          "kind": "external",
+          "ref": "1Qn0n9nDh4fIBsjUzOid39A5vwyOeGa-H",
+          "note": "WF02 start-here"
+        },
+        {
+          "kind": "external",
+          "ref": "148w4Qtq2oPbWzv20fVgkmQydNTOQsao4",
+          "note": "WF05 fresh-chat"
+        },
+        {
+          "kind": "external",
+          "ref": "1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q",
+          "note": "workflow registry"
+        },
+        {
+          "kind": "external",
+          "ref": "16gLeZBQV_wWVo5OnzQvpXirXTyNUz8hjwt6x0qMOzZU",
+          "note": "recovery hub"
+        }
+      ]
+    },
+    {
+      "id": "monarch-cam-v3",
+      "title": "Monarch Cam V3 ranking Short",
+      "status": "preserved",
+      "space": "yt-automation",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/monarch-cam-v3.md",
+      "notes": "Technical delivery preserved; superseded creatively.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "commit index"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/PROBLEMS_FIXES.md",
+          "note": "regressions"
+        }
+      ]
+    },
+    {
+      "id": "monarch-cam-v4",
+      "title": "Monarch Cam V4 ranking Short (rejected)",
+      "status": "rejected",
+      "space": "yt-automation",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/monarch-cam-v4.md",
+      "notes": "“sirf text likh diya”; not final.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/workflow_runs.json",
+          "note": "run index"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/PROBLEMS_FIXES.md",
+          "note": "dead ends"
+        }
+      ]
+    },
+    {
+      "id": "monarch-cam-v5",
+      "title": "Monarch Cam V5 ranking Short (rejected)",
+      "status": "rejected",
+      "space": "yt-automation",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/monarch-cam-v5.md",
+      "notes": "“NAHI abhi bhi theek se nhi”; do not re-present.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "393edd6 index"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/WORK_LEVELS.md",
+          "note": "V5 level"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/PROBLEMS_FIXES.md",
+          "note": "geometry/source dead ends"
+        }
+      ]
+    },
+    {
+      "id": "monarch-cam-v6-intent",
+      "title": "Monarch Cam V6 intent (not built)",
+      "status": "unresolved",
+      "space": "yt-automation",
+      "evidence_level": "gap",
+      "branch_or_source": "future separate package",
+      "session_file": "docs/continuity/sessions/monarch-cam-v6-intent.md",
+      "notes": "No V6 package/workflow/clips/MP4/run exists.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/GAPS.md",
+          "note": "explicit gap"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/screenshots/screenshot_index.json",
+          "note": "reference screenshots"
+        }
+      ]
+    },
+    {
+      "id": "external-app-snapshot",
+      "title": "Cross-app continuity discovery snapshot",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "connected_app_record",
+      "branch_or_source": "connected apps",
+      "session_file": "docs/continuity/sessions/external-app-snapshot.md",
+      "notes": "Timestamped discovery; not live sync.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/external/APP_SNAPSHOT.json",
+          "note": "machine-readable snapshot"
+        },
+        {
+          "kind": "external",
+          "ref": "oeqeqlgatdlqbuywktnu",
+          "note": "Supabase project"
+        }
+      ]
+    },
+    {
+      "id": "ems-archive-context",
+      "title": "EMS-20261011-001 older archive context",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "connected_app_record",
+      "branch_or_source": "Google Drive history archive",
+      "session_file": "docs/continuity/sessions/ems-archive-context.md",
+      "notes": "Partial transcript + event log + payload context.",
+      "evidence": [
+        {
+          "kind": "external",
+          "ref": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+          "note": "Drive archive ID"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/external/drive_import_manifest.json",
+          "note": "extracted hashes"
+        }
+      ]
+    },
+    {
+      "id": "branches",
+      "title": "Remote branch heads at evidence capture",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "git ls-remote --heads origin",
+      "session_file": "docs/continuity/sessions/branches.md",
+      "notes": "Timestamped 11-head snapshot.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact heads"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_1f352b8e-monarch-overall-work",
+      "title": "arena/1f352b8e-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/1f352b8e-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_1f352b8e-monarch-overall-work.md",
+      "notes": "Animated POV storyboard and one-minute test video. User correction: do not insert a character into images; render scenes/character/props/lighting/movement frame by frame. Screenshot-only evidence.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_390292fc-monarch-overall-work",
+      "title": "arena/390292fc-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_390292fc-monarch-overall-work.md",
+      "notes": "Current active branch. Repo-first continuity archive and rejected V4/V5 video task. This branch is the source of truth for the current pack.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_6101616c-monarch-overall-work",
+      "title": "arena/6101616c-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/6101616c-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_6101616c-monarch-overall-work.md",
+      "notes": "Cinematic portrait research, generated portrait, local running-shot/close-up work and model-weight/license search. Screenshot shows tool-call limit / Continue. Screenshot-only evidence.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_673ff833-monarch-overall-work",
+      "title": "arena/673ff833-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/673ff833-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_673ff833-monarch-overall-work.md",
+      "notes": "Remote branch captured by git ls-remote. Exact full conversation not imported; branch head is repo evidence only.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_861e9627-monarch-overall-work",
+      "title": "arena/861e9627-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/861e9627-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_861e9627-monarch-overall-work.md",
+      "notes": "Remote branch captured by git ls-remote. Exact full conversation not imported; branch head is repo evidence only.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_8bfd4d0e-monarch-overall-work",
+      "title": "arena/8bfd4d0e-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/8bfd4d0e-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_8bfd4d0e-monarch-overall-work.md",
+      "notes": "Earlier measured demo / adaptive cut / audio calibration work (PR #2 merged). Exact full conversation not imported.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_8f432cac-monarch-overall-work",
+      "title": "arena/8f432cac-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/8f432cac-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_8f432cac-monarch-overall-work.md",
+      "notes": "Remote branch captured by git ls-remote. Exact full conversation not imported; branch head is repo evidence only.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_9960286a-monarch-overall-work",
+      "title": "arena/9960286a-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/9960286a-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_9960286a-monarch-overall-work.md",
+      "notes": "181-commit workspace merge / live API lane / four “caught lying” fixes (PR #1 merged). Exact full conversation not imported.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_ba8d901e-monarch-overall-work",
+      "title": "arena/ba8d901e-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/ba8d901e-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_ba8d901e-monarch-overall-work.md",
+      "notes": "Extinct-life wall Short. User: “Ok ab poori videos”, “Short video hamari”, “Woh poori video banao ab new level ke sath…”. Screenshot-only evidence.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-arena_c678cc81-monarch-overall-work",
+      "title": "arena/c678cc81-monarch-overall-work",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "arena/c678cc81-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/branch-arena_c678cc81-monarch-overall-work.md",
+      "notes": "Earlier premium/CLEAN/V2 branch (PR #4 merged). Exact full conversation not imported.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "branch-main",
+      "title": "main",
+      "status": "indexed",
+      "space": "ops",
+      "evidence_level": "repo_evidence",
+      "branch_or_source": "main",
+      "session_file": "docs/continuity/sessions/branch-main.md",
+      "notes": "Main branch. Repo architecture and registry; head captured at GitHub evidence time. Exact full conversation not imported.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/branch_heads.json",
+          "note": "exact remote head"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/evidence/github/commits.jsonl",
+          "note": "reachable commit index"
+        }
+      ]
+    },
+    {
+      "id": "EMS-20261011-001",
+      "title": "EMS-20261011-001 partial verbatim chat transcript",
+      "status": "imported",
+      "space": "ops",
+      "evidence_level": "verbatim_transcript",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/EMS-20261011-001.md",
+      "notes": "3 verbatim user messages, 0 assistant messages; exact transcript fragment, not a complete chat.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001/raw/CHAT_TRANSCRIPT.jsonl",
+          "note": "raw bytes"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001/normalized.jsonl",
+          "note": "derived normalized messages"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001/metadata.json",
+          "note": "import metadata"
+        }
+      ]
+    },
+    {
+      "id": "EMS-20261011-001-journal",
+      "title": "EMS-20261011-001 hash-chained event journal",
+      "status": "imported",
+      "space": "ops",
+      "evidence_level": "verbatim_event_log",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/EMS-20261011-001-journal.md",
+      "notes": "52 hash-chained events (sync 20, action 11, checkpoint 6, error 5, result 4, user 3, decision 2, tool 1); exact event log, not a chat transcript.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/raw/JOURNAL.jsonl",
+          "note": "raw bytes"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/normalized.jsonl",
+          "note": "derived normalized messages"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/metadata.json",
+          "note": "import metadata"
+        }
+      ]
+    },
+    {
+      "id": "EMS-20261011-001-archive",
+      "title": "EMS-20261011-001 raw history archive",
+      "status": "imported",
+      "space": "ops",
+      "evidence_level": "connected_app_record",
+      "branch_or_source": "arena/390292fc-monarch-overall-work",
+      "session_file": "docs/continuity/sessions/EMS-20261011-001-archive.md",
+      "notes": "Raw tar.gz preserved byte-for-byte; extracted text also in evidence/external/drive_text/EMS-20261011-001_history_archive/.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/raw/EMS-20261011-001-history-archive.tar.gz",
+          "note": "raw bytes"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/normalized.jsonl",
+          "note": "derived normalized messages"
+        },
+        {
+          "kind": "file",
+          "ref": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/metadata.json",
+          "note": "import metadata"
+        }
+      ]
+    }
+  ],
+  "external_refs": [
+    "1-EqGCp-grhyA_zqms9LE3v6mi43UGCGb",
+    "1Pw5ZsKS_SVP8hI8OLik5ucL09dsXJ3Mz",
+    "11-FI1blB_KYQNI8UtPMsyyyGcHj0NnRE",
+    "1qz47uPP9RjO79iwWdS1KXPaYIhpABTFR",
+    "1pstBLsRF__bKDOD4QbjCCGoWsp48HLgH",
+    "1BWLCZ_FtFCQSIZr4o2oF35dwmGpKl5NT",
+    "1fFgNIRGUwE50MV7HsF9z1oi9SmSZfKI1",
+    "1WSS3bZu9eR9ivWPNsPSwWQ3nc-oFsecH",
+    "1TJdyElMWt5aPV8KGbXuQ1cyKwpITCWVs",
+    "1le21NHN7NI6Y9NqsqZ5JMmB50SdAmPp9",
+    "1xZG7dSfpaEZLjGkAUiyurnnWc9EDu-GY",
+    "1V_C3PSoUKbSnVQIXThJIknlbEQkKH1j3",
+    "109z7qydvLVNlHZmuO7neDwdRhhAETGEq",
+    "1FuW8g3UIlnlxGfBigUqLnYFtodckIE19",
+    "1Mh-S3sYuXczUpY9BX7-Als9kGxY6Uq_3",
+    "1VwjEJtgOU_FcdD5nYJU0RbMSNm1xEfl3",
+    "1An-3SUDhoHK-1tl5LOi4HIVZ9Ac9XpKY",
+    "1IMyO_6m4f_xlyPOAl3VVexDdwDrSV9g2",
+    "1wUVVqtovI8i98eatPpz4AxMdkz3QxO4j",
+    "1hRcqOrJm6VrL8iTxFQrYNZEx9qXjTsN7",
+    "100SEK0A95ymcVHTfJ4kVqghtYPBhDcHw",
+    "1lSoqAyfIhb2Y7viLw0VQr4GcnXPdXlPc",
+    "1poh0usjxECQ62ExP5i7pVy9RO7aVK8vG",
+    "13koWDtxJBWt8CYhSfz090f0nWIkaG16a",
+    "1Qn0n9nDh4fIBsjUzOid39A5vwyOeGa-H",
+    "1RpxD392bvTqH7Lq79CH7-5_bm6NlklH6Ans0ZPugL4M",
+    "148w4Qtq2oPbWzv20fVgkmQydNTOQsao4",
+    "1mfhozgtftvesISCEDP622nlDy3DPQSUv",
+    "17JlBrKBwBTw3Hv5jYQECSEglYGQFNUg1",
+    "1o7bKfshK1rfoFuVcneqgMuuiSQAYTOkq",
+    "15v6TBBUNup32YJdkqvtIXk8GeRFAg5TT",
+    "1UNqbKR_a1eeBJIlSgdR03zqao04yN1AJ",
+    "10UHREJ6pdKNKQvQDbpuwKKKzStFtO9Uw",
+    "17uQ6ZlyFuBrB8_O-r_5lwI-Mr5AejnV5",
+    "1r_nwFzE_y8-z_SAcOMmNiCrOdtOPTVUo",
+    "1XSlpaEmOdysqM8FpRmWUfNElz9IAxmXV",
+    "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+    "1XY7vzLq-0aCGXHAGNTYbxLPBzX7zFInl",
+    "1xqBx2wiyOTmoZe_OvVXePmlgZ8vu2MOj",
+    "1L9uUfrhAPiw9f5JMKB3kx4fTifvwlTWF",
+    "1IP1ykbtg6Hvk3SqiZGkF_uRsj8v9vRje",
+    "1RjU2c8PNdJVzs98UuvIkSVNh3-2A5pBj",
+    "1ue4xkG697LP4yH66GCJYPtMr0D17pPkd",
+    "1nW1_8awetPKTY7QoJPyvz75ZnYKmg4JN",
+    "1NrsQHlWHMRYPXWhKZqceN-uqdJOSTmv-",
+    "1yg7VK9S0luG4bPHQxWGtPIKxUcKcOSI6n7JnrCxPnLU",
+    "1nqDXQU_FtCGSSdJm97aJ1dJN3WvoKTIEPKuhnGJl-uw",
+    "16gLeZBQV_wWVo5OnzQvpXirXTyNUz8hjwt6x0qMOzZU",
+    "1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q",
+    "1grIjpqnWTXrYm1fjXL0pR4Q0fQ8eW8T7_9xK6cqMGtg",
+    "1g2WLpd-S9LmBur4nbz9mHc4AkOCCl54ZUpHNAzHuW5g",
+    "1Vx2t3z5Kx_gUMd2nkPjdqa3kc-BGDe8sj2Cua4pvxEY",
+    "1sGGzPHXXars1-pJvB3ugnbnLuSuQ5EpE-obVidTj6rM",
+    "1AsFnHq43aYYWORu1MAdrjsnDyPf-ftOg5HrY0Uj40BI",
+    "1frC4llt-7Lj9ouaIlKjlTTURL_xXgsebU9VvYsi9e-Q",
+    "11bg4a_ZbK_ZDk6dGB7I4WJP4S-_LERBJ_D6woz3qhjM",
+    "1Nn0isfBfplCIXLGz2GsdKvhB3pqPVSaiz6vOdo2_SIg",
+    "1tRxHnODAm_rSuOM58nXJYVqUqZhfPpE7cqpASzcG_dY",
+    "1T4bMYZtGr4MLSl5G4x3s3CL2QXgLflY4",
+    "1rnVmd4wTIwkTjy1FgYeBWVra3_NUKQ1k",
+    "1frVyXY3O1KAZXm8YrT9R4T4k6xoQNiaO",
+    "40c807e1-e916-8168-9afd-d661acd13046",
+    "3f9807e1-e916-81bd-8408-cb4537dacb31",
+    "3f9807e1-e916-819b-9c53-e21326dd0f26",
+    "3f9807e1-e916-81af-8fd5-dde25caf448c",
+    "3f5807e1-e916-819f-91a9-d0786304b6da",
+    "3f9807e1-e916-81c3-9a11-d382e6b01a5e",
+    "3f3807e1-e916-812c-8db0-d476c68c6c58",
+    "3f3807e1-e916-81a3-a952-e70446a228a0",
+    "3f3807e1-e916-8167-bbb4-f2fbd714b4b8",
+    "3f4807e1-e916-81a6-b24c-f09db93d02d6",
+    "b0736831-55bc-4584-9ddc-9b3b6ec815af",
+    "104ec829-e3db-4796-b12c-4fd062287ff3",
+    "91320e77-d1f7-4f74-a5f0-0131252fd192",
+    "70db3731-c59d-4188-8f9b-8755d15261d9",
+    "0a01b89d-3c9d-4193-8416-76b32d76cfca",
+    "4d053022-acab-4836-8f13-5ccb7e043c17",
+    "a813926c-b2ef-4956-91dd-09e91f08b7d9",
+    "be68fa7d-39ea-4d5b-b9c0-f17615d3d04e",
+    "e173192b-b932-4801-ac4d-dcd7445237b8",
+    "d3cfbddd-1856-4688-b70a-c441be1cb7b2",
+    "oeqeqlgatdlqbuywktnu",
+    "prj_z2lbSZhwMkfdSXDmWc1aywmFHpie",
+    "prj_FykQHex4jpB8lVZdQzQ4JnKlfKzh",
+    "dpl_HJgeUMGy8JYTUkny7fkyEUZ5u3wi",
+    "1MVReMbe56MeehNO8Il70qMhuAHNxI01PPE0Vupj0FTc"
+  ]
+}

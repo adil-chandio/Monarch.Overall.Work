@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-08T16:00:26Z",
+  "captured_at": "2026-11-08T15:32:32Z",
+  "note": "Evidence coverage is honest: a screenshot is never promoted to a transcript, and a connected-app summary is not a complete Arena export.",
+  "evidence_levels": {
+    "verbatim_transcript": "Exact exported chat turns; raw bytes authoritative.",
+    "verbatim_event_log": "Exact hash-chained event/journal file; not a chat transcript.",
+    "verbatim_source": "Raw imported transcript/export bytes before normalization.",
+    "repo_evidence": "Git object, commit, branch, PR, workflow run, or checked-in file.",
+    "connected_app_record": "Drive/Docs/Notion/Linear/Supabase/Vercel/Gmail/Dropbox record or imported text.",
+    "screenshot_only": "Partial visible screenshot image evidence; never a full transcript.",
+    "session_memory": "Condensed session-memory reconstruction; lower confidence.",
+    "state_ledger": "Machine-readable state, coverage, session index or append-only JSONL ledger.",
+    "operating_contract": "Human-readable continuity contract, protocol, index or session note.",
+    "archive_metadata": "Generated archive metadata, hash index or integrity manifest.",
+    "gap": "Known missing source; explicitly not claimed as preserved."
+  },
+  "verbatim_transcripts": {
+    "available": true,
+    "imported_sessions": 2,
+    "complete_sessions": 0,
+    "partial_sessions": 2,
+    "full_arena_export_available": false,
+    "known_partial_source": "EMS-20261011-001 CHAT_TRANSCRIPT.jsonl: 3 user messages, 0 assistant messages"
+  },
+  "repo_evidence": {
+    "heads": 11,
+    "tags": 16,
+    "pull_requests": 4,
+    "runs": 452,
+    "commits": 998,
+    "workflows": 18,
+    "repos_inspected": 22,
+    "satellite_files": 120,
+    "manifest": "docs/continuity/evidence/github/README.md"
+  },
+  "connected_app_records": {
+    "google_drive_session_logs": 11,
+    "google_drive_resume_states": 13,
+    "google_docs": 12,
+    "notion_pages": "multiple, truncated",
+    "linear_projects": 13,
+    "supabase_tables": 22,
+    "supabase_columns": 232,
+    "supabase_saved_conversations": 0,
+    "vercel_projects": 2,
+    "gmail_drafts": 4,
+    "dropbox_files": 1,
+    "snapshot": "docs/continuity/external/APP_SNAPSHOT.json"
+  },
+  "screenshots": {
+    "total": 29,
+    "new_chat_evidence": 4,
+    "ranking_reference": 8,
+    "audio_tool_context": 3,
+    "youtube_analytics_history": 14,
+    "index": "docs/continuity/evidence/screenshots/screenshot_index.json"
+  },
+  "counts": {
+    "manifest_files": 276,
+    "sessions_indexed": 28,
+    "events": 48,
+    "decisions": 18,
+    "prompt_results": 12,
+    "screenshots": 29
+  },
+  "gaps": [
+    "No complete Arena chat export/JSON in workspace or connected apps.",
+    "Current chat/sidebar exact turns not programmatically exportable.",
+    "EMS transcript is partial and has no assistant turns.",
+    "Connected apps are timestamped snapshots, not live mirrors.",
+    "V6 video package not started.",
+    "Human listening/approval/sign-off not recorded."
+  ],
+  "policy": "COVERAGE.verbatim_transcripts.full_arena_export_available must remain false until every known chat has a complete raw export and STATE/COVERAGE/GAPS are deliberately updated."
+}

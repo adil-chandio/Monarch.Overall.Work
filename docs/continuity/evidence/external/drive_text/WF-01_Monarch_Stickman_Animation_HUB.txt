@@ -1,0 +1,243 @@
+﻿WF-01 · Monarch Stickman Animation — HUB
+Google Docs hub of workflow WF-01 in MONARCH STUDIO · created 2026-10-09 (turn 15) · status PARKED by the user after turn 13 · resume key “best video reel editing”
+
+
+Identity
+Workflow code WF-01. Name “Monarch Stickman Animation” (before 2026-10-09 the Notion page and Linear project carried the name without the WF prefix; same objects, renamed). Style: Monarch stickman motion-edit — paper/ink Style B, 1080×1920 vertical shorts (−11.6 LUFS, something new on screen every 2–3 s) and 16:9 films (120–300 s, −16.5 LUFS, holds 7–14 s); Python renderer (src/clean.py, src/toon.py 3D rig, src/shade.py + src/hybrid.py for SHADE, the user’s hooded black-suit hero in the hybrid look), extruded type, varied 3D cinematic transitions (tint-not-flood, end on the beat), ASMR bed with varied premium SFX, chrome; measured not eyeballed — 19 gates (src/gate_respect2.py) + gate #20 (brain/concept.py gate). Mindset = MONARCH EDITOR BRAIN v2 (MONARCH_EDITOR_BRAIN.md §0–§14 + brain/): every new video is proposed, picked, built, gated, uploaded and committed through the brain ritual, and must differ from the previous ones (hook/device rest 3, grammar/camera/sonic/type/ending rest 2, transitions overlap ≤ .40 with ≥ 3 new kinds, SFX ≥ 50 % new).
+
+
+The same workflow on the other platforms
+Notion hub: https://app.notion.com/p/WF-01-Monarch-Stickman-Animation-3f3807e1e916819eaa60fc633bf61478 (project page 3f3807e1-e916-819e-aa60-fc633bf61478 in the Projects DB 3f2807e1-e916-80fc-a7c1-dff64d861695). Docs 00–12 in the Docs DB 3f2807e1-e916-8001-a73c-e29f5cbba8f6: Doc 00 README + current state 3f3807e1-e916-8152-9bff-c8caf4f08bb2 · Doc 07 3f3807e1-e916-814d-9d5e-f96c5f6d5ee7 · Doc 08 3f3807e1-e916-81c8-b655-c84ecea5ebd0 · Doc 11 EDITOR BRAIN 3f4807e1-e916-810f-82f0-e0d7b3d9d081 · Doc 12 reference study 3f4807e1-e916-8102-ac2b-f808317ccfb2.
+Linear: project “WF-01 · Monarch Stickman Animation” 4d053022-acab-4836-8f13-5ccb7e043c17 (team MON 7d25e78c-c0f2-46b3-9c73-10bcf9c5a108; body §0 = state + STUDIO LINKS) → resume issue MON-34 https://linear.app/monarchmation/issue/MON-34 (f8bd0a44-3d9b-4e20-8387-363aca59eaa9; newest STATE comment first) · issues MON-34…MON-54 · open MON-44 (listen pass) and MON-48 (next video).
+Google Drive: folder “MONARCH STUDIO / WF-01 · Monarch Stickman Animation” https://drive.google.com/drive/folders/1Qum7OkUZpRMSt3SMJ6q3WumUUwzezTw- (this document lives here).
+Registry: Notion hub https://app.notion.com/p/MONARCH-STUDIO-Workflow-Registry-hub-3f4807e1e916813a9000e7e94ac0ac53 (row WF-01 3f4807e1-e916-8140-aee5-e1f13ab5b6d7) · Linear MON-55 https://linear.app/monarchmation/issue/MON-55 (project 0a01b89d-3c9d-4193-8416-76b32d76cfca) · Drive “MONARCH STUDIO” https://drive.google.com/drive/folders/1-wAt4bgYVn7q15uq22ZnRY8z5iIQaI-l · Google Doc registry https://docs.google.com/document/d/1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q/edit
+Local root: /home/user of the “best video reel editing” chat sandbox (RESUME_STATE.md · MONARCH_STICKMAN_ANIMATION_SESSION_LOG.md · MONARCH_SKILL_MOTION_EDIT.md ledger 1–68 · MONARCH_EDITOR_BRAIN.md · brain/ · src/ · DRIVE_MANIFEST.md).
+
+
+Resume order (key “best video reel editing”)
+1. Registry row (any platform) → confirm WF-01 by id. 2. Linear project body §0. 3. MON-34 newest comments (turn-15 STATE 02acbb47-9c2d-4d35-afd8-6bfd3f34a412, PARKED 70494b43-c686-4352-99a7-23855328caf4). 4. Notion Doc 00 top callouts. 5. Drive RESUME_STATE.md (newest block on top). 6. Session log §0 / §18 / §19 / §20. 7. Restore brain/ from monarch_editor_brain_v2.zip (Drive 1aqCFhUAavp3EOXmSNzL68cALoT1SgJX9). 8. New video only through the brain ritual: python3 brain/concept.py status → propose --topic … --dur … --format short|film → pick → build → gate (#20 + 19 gates) → Drive upload with md5 → commit.
+
+
+Current state (2026-10-09, after turn 15)
+PARKED by the user in turn 14; turn 15 only added the studio structure (no video work). Delivered and on Drive: POWER v1 42 s (1uq_xNhjQTcwvAUiHR5fXCnsBrlcJLyCI) · SHADE v2 42 s (1rsJq7Y4wpQaKEsK7Zd7LNhiTqBYBUlJM, md5 c9f8c2f4fedb36d80d16edbd60953c05) · IZZAT v1 (1FtRyxIvEnBldm6_DGnGPWHcvNRPznzAQ) · IZZAT v2 75.19 s 19/19 gates (1fu_g2HTNZVRqE3XBKdUKZoj6O8tIdkpu, md5 8d91be52ab969e0b23f21bf6bab0df85; package 16dY7R5PpdwbOZnA4nMeFJPT1QJjoQB2M) · 16:9 episode master (1MbClU5EuAeWEA-zaS8nNhxPIkBUZxtdW) · hook (1qbCkv36OknO0S-2TFXUSkTLIepjpTn8o) · PDF dossier v4.1 (1pTR4F9vG-sqFnWS9iJfNs0h_5GiNQX5J) · archive v3 (13xhEW-e3l1gS8oiCVum_41TQcsbg3bgb) · EDITOR BRAIN v2 zip (1aqCFhUAavp3EOXmSNzL68cALoT1SgJX9) · reference study zip (13G30gzHMQmjr90trtre7uw8q6Vm1BaGx) + study md (1JMFgEfliVgz3WPQ97Gh3IpO1WzwtSL-6) · doctrine v2 (1GgoZCmC-DEE9j-djLQx_y9F6jLHel9Pk) · skill ledger (1yhwgWXXSPsdDOepFZU2k9Hbu6D9hGlAZ) · turn-13 session log (1pstBLsRF__bKDOD4QbjCCGoWsp48HLgH (turn 15, §0–§20; previous 1BWLCZ_FtFCQSIZr4o2oF35dwmGpKl5NT)) · manifest (128LcUZQ1DvpEBuwVy3CSL9eXX-2bAgHR) · turn-13 RESUME_STATE (1VwjEJtgOU_FcdD5nYJU0RbMSNm1xEfl3 (turn 15; previous 1An-3SUDhoHK-1tl5LOi4HIVZ9Ac9XpKY)). Drive sub-folders: “stickman POWERFUL MAN 42s” 1YSvMC-paJWQHVJEBpBZ0Mybp-WxshcPO · “stickman IZZAT 90s” 1_MhRILyCB86LWHYqLDzBPvmneA6Y2uqo · “video edit workflow.zip” 1labbEjdk4GO6zgth4Ce_JhP4WDpjZOEM (moved into the WF-01 folder on 2026-10-09; ids unchanged).
+Open on resume: MON-44 listen pass · MON-48 next video — format (short vertical / 16:9 film 2–3 min) and topic still unchosen by the user → brain/concept.py propose.
+
+
+Standing rules for any return
+Measured not eyeballed; deliverables on Drive with md5 in the same turn; everything recorded (RESUME_STATE.md, session log, Notion Doc 00 callout, Linear MON-34 STATE comment, this document’s Current state); Roman Urdu concise replies with ids. Identity stays (v9 vertical pipeline, extruded type, SHADE 3D-rig hero, hybrid look, transitions, ASMR bed, chrome) — each new edit different from the last (brain gate #20). Safe area y 180–1500, contrast ≥ 4.5:1, tint-not-flood transitions, nothing perfectly still, voice centred / bed wide, mix never breathes out, premium is subtraction; natural VO pauses (no big inter-chapter gaps), no continuous static bed, no SFX repeated over and over, no repeated transitions. Rejected: flat chalk stickman, high element density, mitten hands, mono SFX.
+
+
+Not this workflow
+The older chat’s “Monarch Stickman Animation” (Powerful Personality explainer, 60 s 16:9 WebGL/puppeteer, resume command “TABAHI ACTIVATE”) is WF-02 (LEGACY): Notion 3f2807e1-e916-81b2-a334-d34ea75cc5ea · Linear a813926c-b2ef-4956-91dd-09e91f08b7d9 · Drive 1LTkHpkEUFSui8Lqyy8I0j5-1AceSziWX · Google Doc 1MVReMbe56MeehNO8Il70qMhuAHNxI01PPE0Vupj0FTc.
+
+
+
+
+KICKOFF PROMPT (new chat → new video in WF-01)
+Before sending: turn ON Notion, Linear, Google Drive and Google Docs for the new chat. Full copy-paste version: Drive WF-01 folder → KICKOFF_PROMPT_WF-01.md. Short form:
+
+
+RESUME KEY: best video reel editing — Workflow WF-01 · Monarch Stickman Animation (MONARCH STUDIO). Only WF-01; WF-02 (TABAHI ACTIVATE) is a different workflow. Resolve by WF code + id, not by name.
+1. Registry: Notion hub 3f4807e1-e916-813a-9000-e7e94ac0ac53 | Linear MON-55 | Drive 1-wAt4bgYVn7q15uq22ZnRY8z5iIQaI-l | Google Doc 1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q.
+2. WF-01 hub: Linear project 4d053022-acab-4836-8f13-5ccb7e043c17 §0 → MON-34 newest STATE comments → Notion page 3f3807e1-e916-819e-aa60-fc633bf61478 (Doc 00 callouts) → Drive WF-01 folder 1Qum7OkUZpRMSt3SMJ6q3WumUUwzezTw-: RESUME_STATE.md 1VwjEJtgOU_FcdD5nYJU0RbMSNm1xEfl3 + session log 1pstBLsRF__bKDOD4QbjCCGoWsp48HLgH → this HUB.
+3. Restore local: brain v2 zip 1aqCFhUAavp3EOXmSNzL68cALoT1SgJX9 + archive v3 13xhEW-e3l1gS8oiCVum_41TQcsbg3bgb; deps numpy pillow scipy imageio-ffmpeg reportlab pymupdf; mkdir build.
+4. Status PARKED → ACTIVE on the registry rows (all 4 platforms) + Linear §0 + Doc 00 callout.
+5. Confirm state in 5 lines, then the EDITOR BRAIN ritual: concept.py status → propose --topic … --dur … --format short|film → 3 options → user pick → character/plate approval → build → gate #20 + 19 gates → Drive (md5) → commit → records. No render before the pick.
+User fills: Topic · Format short (1080×1920, 40–90 s) / film (1920×1080, 2–5 min) · Duration · Voice (re-audition; voice ids do not carry across chats) · Hero SHADE (same identity, animations next level).
+New style instead: "MONARCH STUDIO: new workflow WF-03 · <Name>, resume key <key>, style <one line>" → 8-step add-a-workflow checklist, never inside WF-01.
+
+
+SHADEGO — one-word autopilot trigger (2026-10-09, turn 16)
+Type "SHADEGO <topic>" in a new chat (Notion, Linear, Google Drive, Google Docs ON). Meaning: resume this workflow → restore toolchain (deps, archive v3 13xhEW-e3l1gS8oiCVum_41TQcsbg3bgb, brain v2 zip 1aqCFhUAavp3EOXmSNzL68cALoT1SgJX9) → Parked→Active on all four platforms → brain proposes short and film, picks format by topic (punchy claim → short 45–75 s; arc/story → film 120–180 s) and the highest novelty×hook×feasibility concept → script → SHADE locked, no approval → voice audition (the only click) → build → 19 gates + #20 all PASS → Drive md5 → brain commit → records (RESUME_STATE, log, Notion Doc 00 + new Doc, MON-34 STATE comment, this HUB) → Roman Urdu reply with PROOF BLOCK. Optional overrides in the message: | short|film | <n> s | voice: … | language: … | special ask. Playbook "SHADEGO": Google Doc 1EdP_cvptM1GG8dDg_6ld_yjnkc1Ko9-kHtXy3BYXc2A (authority, this folder) · Drive SHADEGO.md 1CG7w-sB8IfTrYxh9mveT4OeguelczVcK (md5 f65d4c0b36e316643007221ef6c0840b) · Notion 3f4807e1-e916-81f2-b9f0-d2d75b384983 · Linear MON-56. If the agent asks what SHADEGO is: "search SHADEGO in Notion, Linear and Drive and follow it".
+
+
+
+
+2026-10-11 · PERMANENT STYLE LIBRARY + RECOVERY UPDATE
+Canonical repository path: styles/monarch-stickman-animation/
+WF-01 remains PARKED. Current authority: IZZAT v2, Drive 1YMbukwsHQ9pcl8N9EUY6TKolZxP7gukR, MD5 393b0c28750fa81aeb1c700bbac54669.
+Active work now lives only in workflows/current/ with one task ID, exact next action, SHA-256 journal, visible-chat transcript, process ledger, immutable checkpoints and a five-platform outbox. Complete work is promoted into this permanent style and the current slot is cleared.
+System recovery Doc: https://docs.google.com/document/d/16gLeZBQV_wWVo5OnzQvpXirXTyNUz8hjwt6x0qMOzZU/edit
+
+
+CORRECTION · IZZAT V2 AUTHORITY · 2026-10-11
+The preceding migration update incorrectly named 1YMbukwsHQ9pcl8N9EUY6TKolZxP7gukR as authority. A fresh Drive get returns 404; do not use that ID.
+Verified R1 authority remains shade_respect_v2.mp4: Drive 1fu_g2HTNZVRqE3XBKdUKZoj6O8tIdkpu · MD5 8d91be52ab969e0b23f21bf6bab0df85 · 28,432,377 bytes · 75.19 s · 19/19 gates. This correction remains append-only so the failure and fix stay visible.
+
+
+Canonical WF-01 GitHub package: https://github.com/adil-chandio/Monarch-Studio/tree/main/styles/monarch-stickman-animation · clean CI run 38090716084 passed.
+
+
+TUMHARI RESERVED SEAT
+FINAL PRODUCTION RECORD · WF-01
+
+
+STATUS
+ACCEPTED · 21/21 delivery gates PASS · 18/18 editor-brain freshness PASS
+Delivered 11 October 2026 · Task EMS-20261011-002
+
+
+CREATIVE LOCK
+Topic: The invisible queue — every day you delay, somebody else takes the seat that could have been yours.
+Audience and language: Desi audience · easy Urdunglish · motivational FOMO and curiosity.
+Master structure: 74.00 seconds · 34 voice-led beats · maximum beat 4.70 seconds.
+Format: 1920×1080 · 16:9 landscape · 30 fps.
+Shared performance: selected voice-00, used exactly and never time-stretched.
+
+
+WF-01 EXECUTION
+A tactile bone-paper and ink world with the locked hooded SHADE Monarch, split timelines, punched-paper time, hand-built type, print-registration texture, and one yellow seat as the earned visual resolution. Picture and sound were authored specifically for Monarch Stickman Animation, not shared with WF-03. The original 94 BPM score and 352 synchronized paper, pencil, timer, phone, calendar, ticket, room, and transition events preserve narration clarity.
+
+
+OBJECTIVE ACCEPTANCE
+Master: H.264 High / AAC-LC · 48 kHz stereo · 26,552,349 bytes.
+Audio: -13.6 LUFS integrated · 3.9 LU loudness range · -1.5 dBFS decoded true peak.
+Picture: mean luma 193.89 · dark share 0.037 · no empty samples · no perfectly still sampled pairs.
+SHA-256: 141258f25e0dad13c68d2e97fc96fd11f3cd215a7d89559723349b4211a3d69b
+MD5: ef97f954dd6b4e73675985743deb225c
+
+
+DURABLE DELIVERY
+Final master: https://drive.google.com/file/d/1h9DRRnwNDAC9PXb8rqIf5_oLFdSaTYuW/view
+Reproducible source: https://drive.google.com/file/d/1b_BpVLkTBOlPkUvgvIWPbcQzmV01FZTh/view
+Production folder: https://drive.google.com/drive/folders/1V3QeUqDzOGP5obJAaX2vHyV5HZkS8K-J
+Repository package: styles/monarch-stickman-animation/films/tumhari-reserved-seat/
+
+
+REPRODUCIBILITY AND LEARNING
+The permanent package stores the exact voice master, shared script/timeline, selected DNA, deterministic renderer, procedural soundtrack builder, event ledger, measured gate suite, look sheet, failure/fix history, and delivery receipts. Promoted engineering safeguards include: clamp fractional-power envelopes; clamp edge-entering strip coordinates; smoke-test every transition boundary; explicitly resample loudnorm output to 48 kHz; cache environment plates at 6 Hz while retaining full-rate foreground motion; and never weaken a gate to accept a render.
+
+
+This tab is the Google Docs completion receipt. Drive, GitHub, Notion and Linear carry independent records so no one platform is the sole authority.
+
+
+TUMHARI RESERVED SEAT · WF-01 · V2 MONARCH CINEMA TABAHI
+
+
+STATUS: FINAL / ACCEPTED
+Task: EMS-20261011-003
+Delivered: 2026-10-11
+Repository authority: styles/monarch-stickman-animation/films/tumhari-reserved-seat-v2/
+Production commit: 9b4d6fca4338fbd9d8de34e354a5ba15819ef33e
+
+
+IMMUTABLE CONTINUITY LOCK
+• Accepted V1 remains untouched in tumhari-reserved-seat/ and in its original Drive folder.
+• 74.00 seconds · 34 shared voice-led beats · 1920×1080 · 30 fps.
+• Exact byte-identical selected voice-00; no time stretch.
+• Timeline SHA-256: 75838e71c598c04bb322fabbe080d71641853aa9fc2cf2dc6341a73e42698c0b.
+• Voice SHA-256: c411bfae2b12b194cf2107c556b2604e82f3e763c9e6fea94a6186ac650ca972.
+• V1 tree hash passed unchanged: b3bb861b1166fdfc11eadf4705703da5d476520fb7523aff81e0ae6aabcbe6fe.
+
+
+V2 CREATIVE REDESIGN
+The tactile paper/ink/SHADE identity is retained, but the stage is rebuilt as three simultaneous motion planes: story action, physical depth/parallax and continuous micro-motion. Six camera-control modes, 12 motivated transition families, live paper cards, perspective guides, kinetic HUD states, light sweeps and deterministic print texture now carry every beat. Density is hierarchical rather than noisy.
+
+
+FIVE EARNED SET PIECES
+1. The question-mark seat becomes a nine-layer ticket aperture with orbiting paper shards.
+2. The dopamine feed collapses into a chromatic optical card tunnel.
+3. Thirty ticket holes physically extrude into a rising 3-D thirty-hour graph.
+4. “LEKIN SACH?” tears the paper world open into a black/red truth portal.
+5. Graph points become thirty train windows as rails fold under the final Monarch walk.
+
+
+MEASURED “3×” DELTA
+• Audio events: 1,073 vs V1 352 = 3.048×.
+• Moving-stereo objects: 294; score acts: 5.
+• Median sampled motion: 5.1338 vs V1 1.4495 = 3.54×.
+• Motion floor: 2.5451 vs V1 0.2554 = 9.96×.
+• Three depth planes · six camera controls · twelve transition families · five authored WTF suites.
+• All 34 beats carry primary + depth + micro motion.
+• All 33 transitions passed −2 / cut / +2-frame smoke tests.
+• Freshness: 30/30 PASS. Final delivery/delta/provenance: 44/44 PASS.
+
+
+FINAL MASTER
+• H.264 High / AAC-LC · 48 kHz stereo · 87,041,066 bytes.
+• Audio: −13.6 LUFS · 3.9 LU LRA · −1.5 dBFS decoded true peak.
+• Picture: mean luma 187.21 · dark share 0.024 · p99 234.70 · no empty/identical samples.
+• SHA-256: fb78611106ecf008d400961aa29318a950091b7aa130a108cd9d797b0b41138f.
+• MD5: 1aebd8e3a5d843abb7df6595e6d1e713.
+
+
+DURABLE DELIVERY
+• Final master: https://drive.google.com/file/d/1MsD3Fibj_XhU7_3TJdb7L4MqCI2CxDWH/view
+• Self-contained source: https://drive.google.com/file/d/1eQVcET-z9yKdkIszaRjHcgfsgcctzNGU/view
+• Complete V2 folder: https://drive.google.com/drive/folders/1zK8YrIha20vLh_OMk3NDIWPLVuhva8uy
+• Measured gate report: https://drive.google.com/file/d/1-sntm8SeL1el4FguDxZxoL7KDmSgdQmb/view
+• Final-master QC sheet: https://drive.google.com/file/d/17Mgw9hH_fnY2b-HgHHM_OnnNXIoqOpi-/view
+• GitHub production commit: https://github.com/adil-chandio/Monarch-Studio/commit/9b4d6fca4338fbd9d8de34e354a5ba15819ef33e
+
+
+PROVENANCE
+Picture and sound are deterministic procedural builds. No stock footage, stock music, samples or loops were used. The source archive embeds the character rig, production fonts/licenses, renderer, soundtrack engine, exact voice/timeline locks, enhancement bible, 34-beat ledger, gates, experiments/fixes and machine-readable provenance.
+
+
+EXTERNAL SYNCHRONIZATION
+Linear final delivery update: https://linear.app/monarchmation/project/wf-01-monarch-stickman-animation-622c64386039/activity#project-update-fa291c02
+Notion V2 record: https://app.notion.com/p/TUMHARI-RESERVED-SEAT-WF-01-V2-MONARCH-CINEMA-TABAHI-3f6807e1e916812dad81f85533368d57
+Production commit: https://github.com/adil-chandio/Monarch-Studio/commit/9b4d6fca4338fbd9d8de34e354a5ba15819ef33e
+
+
+NEELAMI — TUMHARA WAQT BIK RAHA HAI · WF-01
+DELIVERED / TECHNICAL QC PASSED — NOT A CLAIM OF USER CREATIVE APPROVAL
+Task EMS-20261012-002 · 2026-10-12 (Asia/Karachi)
+
+
+Original attention-auction narrative, not a sequel/rerender of Reserved Seat. 150.00 seconds · 1920×1080 · 30fps · 42 shots · 63 carried beats · max gap 5.0s. First narrator onset 0.41s. Shared original Urdu / current-session auditioned selected voice-00 / 93.68 native seconds; no speech pitch/time stretch.
+
+
+Independent paper/ink/SHADE execution, original layered cut-paper auction world, causal hourglass/gavel/pencil callbacks. Original six-act score: 833 events, 274 moving-stereo objects. Final master -16.5 LUFS,7.6 LU LRA,-2.2 dBTP. All 4500 frames decode cleanly; no empty/near-identical sampled pairs.
+
+
+MASTER 33/33 encoded gates PASS. Honest 720p browser PREVIEW 33/33 PASS. Original excessive LRA failed the unchanged gate; corrected by rebalancing real original supporting stems, not weakening checks or changing native speech. Raw failure evidence preserved.
+
+
+FULL 1080p MASTER
+https://drive.google.com/file/d/1D30nWTxapnO6Klghr_3hOlMshEM3Sv_O/view
+61,515,982 bytes · MD5 759ab34ea8e3e5eab02e7daddd95a577
+SHA-256 64bcb2c7738c1018c8b127391e7f81208da8f11c481665f213a916ee9401fe96
+
+
+VERIFIED R1 SOURCE
+https://drive.google.com/file/d/1cIA4fGXa35hZEa-W785ADYxtyP1a0_Um/view
+2,044,368 bytes · MD5 2dc0e5c54786ca012161c2a65a358e72 · ZIP CRC all pass
+https://drive.google.com/drive/folders/1jX-1XvUG4a4ryjmAoTMxoWfgiRMYJSVX
+
+
+Remote bytes/checksums independently match local artifacts. Permanent source: styles/monarch-stickman-animation/films/neelami/. Includes locked inputs, fonts/licenses, rigs, renderer/audio, required release mastering, gates/contact, provenance/environment and rebuild guide. R1 rebuilds the film from supplied assets, not nondeterministic image/voice regeneration.
+
+
+Accepted V1/V2 and separate pending EMS-20261011-004 V3 proof review remain unchanged. Additional Open-Generative-AI remains separate/unexecuted. GitHub push has not been claimed.
+
+
+THE GRAVITY OF THE PHONE · WTF-30 #1 · v4
+Delivery receipt · WF-01 Monarch Stickman Animation · task EMS-20261014-002 · 2026-10-14 · status: v4 DELIVERED, user verdict pending (v3 accepted: “Yeh theek ha or mazedar”).
+
+
+What it is
+First film of the WTF-30 format: 20.0 s · 1080×1920 · 30 fps · H.264 + AAC 48 kHz · one law broken (gravity: the phone becomes the heaviest thing in the room) · 10.0 s uncut impossible moment (Monarch as a human flag off the desk lamp, 4.9 → 14.9 s) · exactly 7 on-screen words: “Phone ulta. Zindagi seedhi.” + moral “Warna tum ulte.” · 180° world roll on “ulte.” · loopable (seam 3.40/255).
+
+
+v4 changes (user order)
+1. The phone is an Apple iPhone: titanium back, triple camera, the mark; lock screen with Dynamic Island, 9:41, spiral wallpaper, notification pills.
+2. The comment engine — seven visible, physical, answerable plants (never subliminal, doctrine §16 rule 20): 9:41 + spiral wallpaper · wall clock and lock screen race and stop together at 2:41 (five hours lost) · Monarch-in-the-photo pulled to the glass edge, friend’s eyes follow · the friend points at the lens on “tum” · the moth leaves the lamp for the phone · steam bends away while everything else falls toward the phone · spiral rim light in the ECU.
+
+
+Measured acceptance (v4)
+Duration 20.00 s · 600 frames · −14.1 LUFS integrated · TP −1.3 dBTP · LRA 6.5 · silence hole 4.50–4.90 s (−115.3 dBFS) · cuts 2.0 / 2.03 / 3.8 / 4.6 / 14.6 / 17.97 / 19.7 s + designed roll 574–582 · 12/12 measured gates PASS · 28/28 editor-brain gates PASS · 55 beats · 16 pattern interrupts · 117 voices · 245 cues.
+Master: THE_GRAVITY_OF_THE_PHONE_WTF30_01_v4.mp4 · 61,998,081 bytes · MD5 b2735dbf9ff18dc2e8f3fbf2be341c22 (Drive-verified) · SHA-256 8da959fff87a994025b173f66dcafd889e9f749304a727cbd9b89060d8743482
+
+
+Where it lives
+Drive v4 master: https://drive.google.com/file/d/1Zi87F-qYb-tGENwdPdMGeP4jVAbeggGl/view
+Drive film folder (v1–v4, look sheets, gate receipts): https://drive.google.com/drive/folders/1ITMYpBexdmGaALpaf6BlTXNuGNfAFTiQ
+v3 (accepted) 1LsfTOubsY6kHeWJatrSj4z71Qxbcpfh1 · v2 1vzNjW3FeXOMoJ4HDGqM-km5BCKw8IUfp · v1 118VOjnmzDmTrTuz8iCsGPwIwWUvJDbPJ · v4 look sheet 1qe20v4NuD7Rcm5J_dOVxwDPu8snEVXzU · v4 gate receipt 1kY9Kn1TeqrtgNBTyZ9RonrA4ORN190ej
+GitHub package: https://github.com/adil-chandio/Monarch-Studio/tree/arena/7f4f623f-monarch-studio/styles/monarch-stickman-animation/films/gravity-of-the-phone (commit d82e7c3, checkpoint 0004-20261014T200730Z) · registry key gravity_of_the_phone_wtf30_01 version 4 · doctrine studio/editor-brain/MONARCH_WTF30_DOCTRINE.md
+Notion film record: https://www.notion.so/3f9807e1e91681c39a11d382e6b01a5e · Linear task MON-66: https://linear.app/monarchmation/issue/MON-66 · WF-01 project update 5705de7a
+Continuity capsule cp0004: Drive 1Nds05hauYmxEf60rXTFap9QPLKsHIOmR · git delta bundle 7909bde..d82e7c3: Drive 1dFHpSCn6JRv4Z1pgoAjS_wUEg6Mx1_R7 · SHA256SUMS 1w8hYRdZCVT_CrTeczOiyASjyWtL_qHbw
+
+
+How to continue
+Clone the repository, run python3 tools/continuity.py resume. Next action: wait for the user verdict on v4. Accepted → continuity.py complete and archive the slot. Notes → iterate in workflows/current/payload/gravity-of-the-phone/ (render halves → build → gate → promote → registry). Never redo v1–v4; the repository is the authority over this page.

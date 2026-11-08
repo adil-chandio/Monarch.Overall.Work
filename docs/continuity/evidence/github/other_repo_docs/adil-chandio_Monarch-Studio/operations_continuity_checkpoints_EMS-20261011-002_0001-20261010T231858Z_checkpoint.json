@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "checkpoint_id": "0001-20261010T231858Z",
+  "created_at": "2026-10-10T23:18:58Z",
+  "summary": "Task initialized and exact request preserved; user clarified 16:9 landscape; original TUMHARI RESERVED SEAT concept, 192-word Urdunglish script, selected voice-00 and 73.42-second voice-over locked; two separate permanent WF-01/WF-03 production packages, 34-beat timeline, fresh DNA, renderers, procedural audio engines, look sheets and gate programs created. Both editor-brain freshness gates pass 18/18 after one documented WF-03 ledger correction.",
+  "next_action": "Render WF-01 picture sequentially, mux its mastered procedural soundtrack and selected VO, then run measured delivery gates before starting the WF-03 render.",
+  "active_state": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-002",
+    "status": "rendering",
+    "title": "Dual-style viral motivational short · one topic, one voice, two films",
+    "style_id": "monarch-stickman-animation + monarch-noir-film",
+    "goal": "Choose one high-FOMO motivational idea for a Desi audience, create one emotionally human 60–90 second easy-Urdunglish master script and voice-over, then produce two premium portrait videos from that same narrative using the permanent WF-01 and WF-03 style workflows.",
+    "acceptance_criteria": [
+      "One original motivational topic and one shared retention-engineered 60–90 second easy-Urdunglish script with curiosity, FOMO, emotional storytelling, relatability, and a human tone.",
+      "One user-approved professional voice artist and mastered voice-over used consistently across both edits.",
+      "Two complete portrait videos: one in styles/monarch-stickman-animation and one in styles/monarch-noir-film, at the user-confirmed aspect ratio.",
+      "Every beat receives intentional premium visuals, animation, typography, colour, SFX/ASMR and music design while preserving intelligibility and avoiding omissions.",
+      "Outputs are objectively validated, documented with provenance, and promoted into both permanent style packages before active-task archival."
+    ],
+    "started_at": "2026-10-10T22:53:36Z",
+    "updated_at": "2026-10-10T23:18:58Z",
+    "checkpoint_sequence": 1,
+    "event_sequence": 8,
+    "journal_head": "5b0bf47d6a2dd7bad31924073c596d2230638f3d7e55331035c2aa7784b76f70",
+    "last_checkpoint": "2026-10-10T23:18:58Z",
+    "last_checkpoint_path": null,
+    "next_action": "Render WF-01 picture sequentially, mux its mastered procedural soundtrack and selected VO, then run measured delivery gates before starting the WF-03 render.",
+    "running_processes": [],
+    "remote_sync": {
+      "github": "pending",
+      "google_docs": "pending",
+      "google_drive": "pending",
+      "linear": "pending",
+      "notion": "pending"
+    }
+  },
+  "journal_event": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-002",
+    "seq": 8,
+    "timestamp": "2026-10-10T23:18:58Z",
+    "kind": "checkpoint",
+    "actor": "continuity",
+    "content": "Task initialized and exact request preserved; user clarified 16:9 landscape; original TUMHARI RESERVED SEAT concept, 192-word Urdunglish script, selected voice-00 and 73.42-second voice-over locked; two separate permanent WF-01/WF-03 production packages, 34-beat timeline, fresh DNA, renderers, procedural audio engines, look sheets and gate programs created. Both editor-brain freshness gates pass 18/18 after one documented WF-03 ledger correction.",
+    "content_sha256": "1df723795d9b898803c805296596d29affaaaa4877334eb02dd59408e51331be",
+    "metadata": {
+      "sequence": 1,
+      "next_action": "Render WF-01 picture sequentially, mux its mastered procedural soundtrack and selected VO, then run measured delivery gates before starting the WF-03 render.",
+      "status": "rendering"
+    },
+    "prev_event_sha256": "4309824566012205ce804ca6f9eeac26d0f46e9f3cfc6fbbdae79b9e0c5e1b2a",
+    "event_sha256": "5b0bf47d6a2dd7bad31924073c596d2230638f3d7e55331035c2aa7784b76f70"
+  },
+  "journal_head": "5b0bf47d6a2dd7bad31924073c596d2230638f3d7e55331035c2aa7784b76f70",
+  "git": {
+    "initialized": true,
+    "head": "164d9d497c0c2023508ba73bed6c0bb4a5510b13",
+    "branch": "main",
+    "status": [
+      "M START_HERE.md",
+      "M workflows/current/ACTIVE_TASK.json",
+      "M workflows/current/CHAT_TRANSCRIPT.jsonl",
+      "M workflows/current/JOURNAL.jsonl",
+      "M workflows/current/RESUME.md",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/DNA.json",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/MASTER_TIMELINE.json",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/README.md",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/SCRIPT_AND_TOPIC.md",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/artifacts/AUDIO_BUILD_METRICS.json",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/artifacts/AUDIO_EVENT_LEDGER.csv",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/artifacts/BRAIN_GATE.txt",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/artifacts/LOOK_SHEET_WF03.jpg",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/audio/voice00_master.mp3",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/records/EXPERIMENTS_FAILURES_FIXES.md",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/src/audio.py",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/src/gate.py",
+      "?? styles/monarch-noir-film/films/tumhari-reserved-seat/src/render.py",
+      "?? styles/monarch-stickman-animation/brain/briefs/tumhari_reserved_seat___20_minutes_a_day_2026-10-10_option1.md",
+      "?? styles/monarch-stickman-animation/brain/briefs/tumhari_reserved_seat___20_minutes_a_day_2026-10-10_option2.md",
+      "?? styles/monarch-stickman-animation/brain/briefs/tumhari_reserved_seat___20_minutes_a_day_2026-10-10_option3.md",
+      "?? styles/monarch-stickman-animation/brain/dna/tumhari_reserved_seat___20_minutes_a_day_2026-10-10_option1.json",
+      "?? styles/monarch-stickman-animation/brain/dna/tumhari_reserved_seat___20_minutes_a_day_2026-10-10_option2.json",
+      "?? styles/monarch-stickman-animation/brain/dna/tumhari_reserved_seat___20_minutes_a_day_2026-10-10_option3.json",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/DNA.json",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/MASTER_TIMELINE.json",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/README.md",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/SCRIPT_AND_TOPIC.md",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/artifacts/AUDIO_BUILD_METRICS.json",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/artifacts/AUDIO_EVENT_LEDGER.csv",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/artifacts/BRAIN_GATE.txt",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/artifacts/LOOK_SHEET_WF01.jpg",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/audio/voice00_master.mp3",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/src/audio.py",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/src/gate.py",
+      "?? styles/monarch-stickman-animation/films/tumhari-reserved-seat/src/render.py",
+      "?? workflows/current/payload/USER_REQUEST.txt",
+      "?? workflows/current/payload/audio/tumhari_reserved_seat_voice00.mp3",
+      "?? workflows/current/payload/creative/MASTER_TIMELINE.json",
+      "?? workflows/current/payload/creative/TOPIC_AND_SCRIPT.md",
+      "?? workflows/current/payload/creative/VOICE_SCRIPT_UR.txt"
+    ],
+    "remotes": [
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (fetch)",
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (push)"
+    ],
+    "submodules": [
+      "-756290289742535eb0ac3817548f152e9759cc70 vendor/awesome-opus5-5-videos",
+      "-f8b2552d1c4fd1ae5051dae3786719dc5bdb3ff8 vendor/effectcraft"
+    ]
+  },
+  "payload_inventory": [
+    {
+      "path": "workflows/current/payload/USER_REQUEST.txt",
+      "size": 1975,
+      "sha256": "e6325532680d39987d5c8b33b663eb44c82097a99311f1e89f908298e3a53e28"
+    },
+    {
+      "path": "workflows/current/payload/audio/tumhari_reserved_seat_voice00.mp3",
+      "size": 293901,
+      "sha256": "c411bfae2b12b194cf2107c556b2604e82f3e763c9e6fea94a6186ac650ca972"
+    },
+    {
+      "path": "workflows/current/payload/creative/MASTER_TIMELINE.json",
+      "size": 3823,
+      "sha256": "75838e71c598c04bb322fabbe080d71641853aa9fc2cf2dc6341a73e42698c0b"
+    },
+    {
+      "path": "workflows/current/payload/creative/TOPIC_AND_SCRIPT.md",
+      "size": 4804,
+      "sha256": "11ba5bea0352bf8576b3bbc8a7f91a1c253465d8522cb646e8a8f61e9f227a0b"
+    },
+    {
+      "path": "workflows/current/payload/creative/VOICE_SCRIPT_UR.txt",
+      "size": 1512,
+      "sha256": "c94f4cb85efd21608a61dfd296d49534f7aa177f259791018bb7b71c29a36679"
+    }
+  ]
+}

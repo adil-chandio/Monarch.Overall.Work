@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "checkpoint_id": "0001-20261014T161335Z",
+  "created_at": "2026-10-14T16:13:35Z",
+  "summary": "Recovered actual reference/V2/V4; confirmed visible failures in V4; no source re-generation",
+  "next_action": "Inspect dense reference frames and narration waveforms; build reference-derived clean motion edit with shot-level Urdu-English synchronization.",
+  "active_state": {
+    "schema_version": 1,
+    "task_id": "EMS-20261014-FLOW-REPAIR",
+    "status": "active",
+    "title": "Recover and correct Einstein flow-state edit",
+    "style_id": null,
+    "goal": "Review actual reference and previous deliveries; preserve existing work; correct motion, caption timing, clean branding and accurate Urdu-English delivery without another slideshow.",
+    "acceptance_criteria": [
+      "Actual reference visually reviewed; existing V2/V4 and audio recovered first",
+      "No static-slide substitution; detailed scene motion and synchronized captions",
+      "No Monarch/Instagram on-screen tags; standard H264 yuv420p AAC export",
+      "Verified downloadable Drive delivery plus durable source recovery"
+    ],
+    "started_at": "2026-10-14T16:12:19Z",
+    "updated_at": "2026-10-14T16:13:35Z",
+    "checkpoint_sequence": 1,
+    "event_sequence": 7,
+    "journal_head": "a065f9e488a054ed4dd3ff415d1f4917e0a07c43bc6441ad0b36a0c26befc74d",
+    "last_checkpoint": "2026-10-14T16:13:35Z",
+    "last_checkpoint_path": null,
+    "next_action": "Inspect dense reference frames and narration waveforms; build reference-derived clean motion edit with shot-level Urdu-English synchronization.",
+    "running_processes": [],
+    "remote_sync": {
+      "github": "pending",
+      "google_docs": "pending",
+      "google_drive": "pending",
+      "linear": "pending",
+      "notion": "pending"
+    }
+  },
+  "journal_event": {
+    "schema_version": 1,
+    "task_id": "EMS-20261014-FLOW-REPAIR",
+    "seq": 7,
+    "timestamp": "2026-10-14T16:13:35Z",
+    "kind": "checkpoint",
+    "actor": "continuity",
+    "content": "Recovered actual reference/V2/V4; confirmed visible failures in V4; no source re-generation",
+    "content_sha256": "73b7f875c3d98040086bceaaaeda15a1d76c3488fccb4257123ce48672ea6e16",
+    "metadata": {
+      "sequence": 1,
+      "next_action": "Inspect dense reference frames and narration waveforms; build reference-derived clean motion edit with shot-level Urdu-English synchronization.",
+      "status": "active"
+    },
+    "prev_event_sha256": "5eeda1c0601218ef3c22ca6bc6fda853b79dcae0bae2ca04afef643b9c9a44d1",
+    "event_sha256": "a065f9e488a054ed4dd3ff415d1f4917e0a07c43bc6441ad0b36a0c26befc74d"
+  },
+  "journal_head": "a065f9e488a054ed4dd3ff415d1f4917e0a07c43bc6441ad0b36a0c26befc74d",
+  "git": {
+    "initialized": true,
+    "head": "7909bde7b7b9c030f4f09ee247655ad4c3ab126b",
+    "branch": "arena/fb829993-monarch-studio",
+    "status": [
+      "M START_HERE.md",
+      "M workflows/current/ACTIVE_TASK.json",
+      "M workflows/current/CHAT_TRANSCRIPT.jsonl",
+      "M workflows/current/JOURNAL.jsonl",
+      "M workflows/current/RESUME.md"
+    ],
+    "remotes": [
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (fetch)",
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (push)"
+    ],
+    "submodules": [
+      "-756290289742535eb0ac3817548f152e9759cc70 vendor/awesome-opus5-5-videos",
+      "-f8b2552d1c4fd1ae5051dae3786719dc5bdb3ff8 vendor/effectcraft"
+    ]
+  },
+  "payload_inventory": []
+}

@@ -1,0 +1,722 @@
+# WF-02 · Zack d 3d animation — Permanent Style Library
+
+Preservation snapshot16October2026. Canonical source is the named style in Monarch Studio. V8 is latest delivered technical baseline, not a guarantee of perfect art or full missing-chat recovery.
+
+Drive library: https://drive.google.com/drive/folders/1frVyXY3O1KAZXm8YrT9R4T4k6xoQNiaO
+
+GitHub branch: https://github.com/adil-chandio/Monarch-Studio/tree/arena/eba29c7c-monarch-studio/styles/monarch-zackd-3d
+
+[TOC]
+
+
+
+---
+
+Source section: `START_HERE.md`
+
+# WF-02 · Zack d 3d animation — permanent startup
+
+This is the separate **Monarch 3D Explainers** style inside Monarch Studio, not a new conflicting repository and not the legacy Powerful Personality/TABAHI ACTIVATE snapshot. User-facing name: **WF-02 · Zack d 3d animation**. Trigger: **`WF2 <topic or reference>`**.
+
+## Every new chat / resumed agent
+
+1. At repository root run `python3 tools/continuity.py resume`. A newer active task/process always wins over chat summaries; query a recorded render, never duplicate it.
+2. Read root `AGENTS.md`, this file, `AGENTS.md` here, `STYLE_DNA.json`, `QUALITY_CONTRACT.json` and `knowledge/PLAYBOOK.md`.
+3. Run `python3 tools/wf02.py audit` and `python3 tools/wf02.py brief "<topic>"`. The brief is a planning contract, NOT a generated video or a promise of perfect results.
+4. Read latest source `projects/EMS-20261016-002/splinter-v8/README.md`, its actual QA/proofs and `knowledge/FAILURES_AND_FIXES.md`. Baseline quality is the delivered **V8** implementation, NOT V3's rejected clutter. Final user artistic approval is not assumed.
+5. For a new topic use `templates/NEW_VIDEO_BRIEF.md` and `knowledge/PRODUCTION_SOP.md`. New content needs topic research, script, geometry/action staging, narration approval, shot plan and current proofs. Do not relabel the splinter film as a new video.
+6. Work only in `workflows/current/payload/`; preserve older source/masters. Deliver actual tested artifacts with actual remote IDs. Append lessons here after each task.
+
+## Fast links
+
+- [Current film/source](projects/EMS-20261016-002/splinter-v8/README.md) · [Latest video](https://drive.google.com/file/d/1pUuxlt423ZZKsiHW1kHZ0I1fPzA8K9P9/view)
+- [Style DNA](STYLE_DNA.json) · [Quality contract](QUALITY_CONTRACT.json) · [Master playbook](knowledge/PLAYBOOK.md)
+- [Creative grammar](knowledge/CREATIVE_DNA.md) · [Production steps](knowledge/PRODUCTION_SOP.md) · [Engineering/rebuild](knowledge/TECHNICAL_REFERENCE.md)
+- [Mistakes/causes/fixes](knowledge/FAILURES_AND_FIXES.md) · [Version evolution](knowledge/EVOLUTION_V2_V8.md)
+- [Available raw history + coverage limits](knowledge/history/COVERAGE.json) · [All source hashes](knowledge/history/PROJECT_SOURCE_INVENTORY.json)
+- [New-chat copy/paste](NEW_CHAT_PROMPT.md) · [Release/delivery protocol](knowledge/DELIVERY_AND_RECOVERY.md)
+
+## Honest continuity boundary
+
+A new chat must have access to this repository or the Drive recovery pack and be told to read this entry point. Chat memory does not magically transfer. The available recorded chat is preserved without claiming missing messages exist; see COVERAGE.json. This contract targets consistent production standards, not guaranteed identical artistic taste, retention, medical accuracy or perfection on every topic.
+
+Drive parent verified against the screenshot's folder: `1LTkHpkEUFSui8Lqyy8I0j5-1AceSziWX`. GitHub canonical repository: `adil-chandio/Monarch-Studio`. Session work is on `arena/eba29c7c-monarch-studio`; not merged into main unless separately authorized.
+
+
+
+---
+
+Source section: `NEW_CHAT_PROMPT.md`
+
+# Copy/paste into a new chat
+
+```text
+WF2 <mera topic ya reference>
+Monarch Studio repo mein styles/monarch-zackd-3d/START_HERE.md aur uske linked STYLE_DNA.json, QUALITY_CONTRACT.json, PLAYBOOK.md, FAILURES_AND_FIXES.md aur latest release source/QA parho. Pehle python3 tools/continuity.py resume karo; agar live task/render ho to usi se resume karo, duplicate start na karo.
+
+Mujhe V8-level clean premium 3D explainer standards chahiye: purposeful macro/action shots, controlled smooth camera/keyframes, readable tactile materials, contact-first action, restrained sound/music aur clear narration. HUD/cards/counters/pills/arrows/page-turn/UI beeps se cheap clutter mat banao. New topic ka script, scientific caveats, geometry, shots aur voice approval independently plan karo; splinter film ko sirf rename na karo. Existing-film revision mein same voice/script rakho jab tak main scope change na karun.
+
+Actual preview aur native render, current tests, encoded video/audio checks, source/credits aur verified Drive receipts deliver karo. Purani versions preserve karo. Jo cheez available/verified nahi use invent ya completed claim na karo. Har nayi lesson/error/fix style knowledge mein add karo.
+```
+
+Attach the repository/Drive recovery pack or provide its accessible link. Merely pasting these words without giving the agent access to the files cannot reproduce the implementation or transfer an old session's voice identity.
+
+Published branch entry (do not assume main has been merged): https://github.com/adil-chandio/Monarch-Studio/tree/arena/eba29c7c-monarch-studio/styles/monarch-zackd-3d/START_HERE.md
+
+
+
+---
+
+Source section: `knowledge/PLAYBOOK.md`
+
+# WF-02 master playbook — V8-level production memory
+
+## Status and purpose
+
+This is the durable operating memory requested after KAANTA V2–V8. It combines readable rules with the actual preserved executable implementations and raw available records. The goal is consistent, clean, premium, causally readable3D education in future work—not a claim that a prompt alone guarantees a perfect film. Latest delivered baseline is `projects/EMS-20261016-002/splinter-v8`. All earlier releases remain available; user final artistic approval is not inferred from continuing requests.
+
+## What must carry forward
+
+1. User style: energetic, attention-grabbing, tactile, smooth, premium/professional—but explicitly not cheap/cringe decorative clutter.
+2. Creative grammar: physical question, causal action, surface/depth reveal, meaningful focus/scale transition, qualified outcome, safe resolution. Adapt the grammar to new facts/topics.
+3. Engineering: actual geometry, absolute-time controls, measured contact/grip, bounded C2 movement, explicit cuts, depth-derived restrained focus, short real-scene shutter and sharp captions afterward.
+4. Audio: fixed voice/script for same-film revisions; appropriate current-session voice selection for new speech; shared tactile anchors, original credited arrangement, narrative dynamic breathing room and measured voice priority.
+5. Proof: current source locks/tests, feature-specific A/B, full motion review, native frame receipts, actual encoded gate/review, checked source bundle and verified cloud IDs/checksums.
+6. Preservation: separate styles, append-only versions, source/license/history coverage, no secrets, no duplicate renders, exact continuity state and verifiable GitHub/Drive publication.
+
+## Detailed chapters — do not skip the implementation
+
+- [Creative DNA / concepts / metaphors](CREATIVE_DNA.md): narrative structure, visual contrasts, premium restraint, new-topic creativity boundaries.
+- [End-to-end production SOP](PRODUCTION_SOP.md): recovery through research, script, voice, geometry, motion, sound, preview, native QA, delivery and knowledge append.
+- [Technical reference](TECHNICAL_REFERENCE.md): exact files/modules, pinned dependencies, native/shutter/focus/material/audio controls and scope-specific measured values.
+- [Failures and fixes](FAILURES_AND_FIXES.md): observed symptoms, recorded causes versus inference, corrections and regression tests.
+- [V2–V8 evolution](EVOLUTION_V2_V8.md): each pass's real contribution, rejected choices, output facts and source/QA links.
+- [Delivery / recovery / cross-platform](DELIVERY_AND_RECOVERY.md): folder/branch authority, verification, append protocol and restoration.
+- [New-topic brief](../templates/NEW_VIDEO_BRIEF.md): avoid blindly repainting the splinter film.
+- [Machine-readable DNA](../STYLE_DNA.json) and [quality contract](../QUALITY_CONTRACT.json): future-agent defaults and mandatory gates.
+- [Readable available conversation](history/AVAILABLE_CONVERSATION.md) · [material action timeline](history/ACTION_TIMELINE.md) (both explicitly partial original-chat coverage).
+- [Release catalog](history/RELEASE_CATALOG.json), [project file hashes](history/PROJECT_SOURCE_INVENTORY.json), [raw history coverage](history/COVERAGE.json): exhaustive available evidence, not invented chat.
+
+## Practical interpretation of “same level”
+
+Read and inspect the latest film's real camera/material/motion/sound code and encoded QA before making a new video. Preserve the hard production standards, avoid the recorded failures, and author the new mechanism/story/geometry with the same care. Do not hardcode30.5s,9shots,22cells,3heroes or34gates into unrelated topics. Those are KAANTA measurements, not universal style laws. Reuse tested modules/grammar where appropriate; choose fresh geometry, timing and camera targets based on the new story. User taste and medical/factual uncertainty still require honest review.
+
+## Truthfulness and completeness boundaries
+
+All available permanent project files are indexed/hash-checked and all available completed-task archive files are copied byte-for-byte. Some continuity transcripts contain only user messages and some assistant messages were never logged; they are not a full chat UI export. Journals preserve material actions/results, not every original tool response. The source files themselves retain details too large to repeat prose-by-prose. Unknown/unrecorded steps, voice pronunciation judgments and clinical/artistic certifications are not invented. Read COVERAGE.json before calling any history complete.
+
+Do not preserve hidden system/developer instructions or credentials. The original phone screenshot is used only to identify the target folder; unrelated personal UI details are not needed for the production library. Technical source/proofs, user decisions and publicly shareable asset licenses are the preservation scope.
+
+
+
+---
+
+Source section: `knowledge/CREATIVE_DNA.md`
+
+# Creative DNA, concepts and visual metaphors
+
+## What the user actually values
+
+The repeated Roman Urdu “tabahi/next level/hooked/mazedar” requests ask for a stronger watching experience, not a literal instruction to stack effects. The explicit correction that gratuitous elements looked cheap/cringe is a stronger actionable constraint: premium professional restraint is binding. Keep energetic, brotherly communication but let delivered files and measured deltas—not hype—carry the promise.
+
+## Causal narrative grammar
+
+The KAANTA story uses a concrete question (“what does the body do?”), a visible physical case (tip outside), a hidden-case reveal (buried fragment), the body's response, a qualified possible outcome and a safe resolution. For a new topic, preserve **causal readability**, not the same objects or sentences. One shot should answer one visual question. Give the viewer a subject, a directional action and an understandable change.
+
+Useful conceptual contrasts: outside/inside, surface/depth, stillness/decisive motion, hard wood/soft tissue/metal tool, close contact/wide explanation, possible outcome/no-guarantee reversal, tension/release. These are analysis of the existing design, not claims that every metaphor was explicitly discussed in the original chat. Do not invent retrospective brainstorming conversations.
+
+## Attention and composition
+
+Open on the relevant physical problem, not a generic brand card. Use a macro crop when contact/detail earns it; widen to explain relationships or uncertainty. Follow a moving cell/fragment with the camera/focus rather than an arrow. Foreground texture and depth separation should support the subject. Leave negative space for two restrained3D word beats and one readable caption layer. Repeated pushes, shakes or arbitrary orbits can weaken premium restraint.
+
+## Motion as physical storytelling
+
+Prepare -> approach -> grip/contact -> tension -> travel/release -> settle. The audience should see why something moves. Measured gaps and a closed grip before pulling read better than floating rods. Smooth does not mean slow everywhere: V5 used short decisive actions plus settles; a uniform global speed-up would damage narration. Camera continuity is evaluated inside declared shots, not as a fictitious one-take rule across semantic cuts.
+
+## Look and materials
+
+Petrol/slate backgrounds separate warm tissue and ivory cells/type. Localized ridges/pores, irregular grain, brushed steel and fine fibrous detail beat uniformly glossy materials. V8 increased roughness/reduced clearcoat, toned lighting and added subtle dermal bundles. These are stylized educational visuals, not clinical microscopy. Geometry is allowed to simplify scale/time, but the explanation must not imply a guaranteed biological outcome.
+
+## Sound as tactile punctuation
+
+Voice first. Shape soft friction/contact and a release transient to the actual grip/pull anchor. Music builds where curiosity grows and leaves breathing room for warnings. “ASMR/kanon ko maza” is an aesthetic aim, not a certified measurable property. No copied reference song; the arrangement uses credited CC-BY instrument notes. Do not disguise credited samples as newly recorded instruments.
+
+## Creativity at a new topic
+
+Translate the mechanism into a physical staging plan: identify the hidden process, the cause/effect object interaction, a detail worth photographing and the caveat that prevents misleading certainty. Choose only the transitions that explain a change of scale/location/time. Research before metaphor: a dramatic image must not create a false mechanism. Compare proposals with the no-clutter exclusions before authoring geometry. Fresh creativity is required; the tools and quality contract are reusable, the splinter-specific content is not.
+
+
+
+---
+
+Source section: `knowledge/PRODUCTION_SOP.md`
+
+# End-to-end production SOP
+
+## 0 · Recover, classify scope, preserve
+
+Run root continuity resume and inspect active task/process ledger. If a render is live, query it—never launch a duplicate. Log the actual user message verbatim, initialize a task only if idle, checkpoint before long operations. Decide whether this is a new topic, focused polish, whole-film enhancement or a voice/script rewrite. Preserve old masters/source; fork latest source into workflows/current/payload, never overwrite a delivered version. Where a user repeatedly declines scope options, choose a conservative clearly stated scope (same narration/clean look); do not silently call a tiny pass a whole-film redesign.
+
+## 1 · Research and script
+
+Read provided reference as evidence/inspiration, not a plate/audio source to copy. Verify the mechanism and warnings with appropriate sources; record URLs, dates and uncertainty. Clinical claims require care; an illustrative visualization is not a simulation or medical advice. Write a hook, causal explanation, conditional outcome and safe resolution appropriate to the topic. Retain KAANTA's four qualifiers when revising that film. For another topic formulate its own guardrails instead of pasting the splinter warnings.
+
+## 2 · Voice and timing lock
+
+For same-film revisions preserve fixed voice WAV hashes, script, clip starts/durations and caption reading copy unless explicit scope changes. For new speech audition/register a voice using the available current-session speech tooling before generation; historical voice IDs are not transferable guarantees. Lock script/placement and build a phrase-timed timeline. Do not claim word-level forced alignment unless performed. No unexplained time stretching. Record language/pronunciation limitations; technical audio measurements are not an independent ear review.
+
+## 3 · Visual mechanism and geometry
+
+Inventory inherited versus newly authored assets. The GLB is an inherited animated cutaway; extra skin, tool, cells, type, lighting/edit live in source. Do not call it a complete Blender/Cycles project. Plan contact axes and jaw gap against the actual fragment geometry. Keep local Z-up asset coordinates separate from Y-up world/camera coordinates. A front-offset explanatory cross-section is not physically buried under an intact skin surface: V6 uses a separate radial-slit surface insert for that view. Add detail where the camera can read it, not universally expensive decoration.
+
+## 4 · Storyboard / shot plan
+
+Declare every semantic cut and the job of each shot. For KAANTA V8 these are entry macro, shallow contact/extraction, intact surface insert, hero-cell tracking, swelling view, possible emergence, no-guarantee wide reversal, warning-detail view and professional-care extraction. A different topic chooses its own coverage. Name focus subjects, restrained blur cap, camera keys and action anchors. Whole-film requests require comparison across every shot/scene group; focused passes state exactly which subjects changed.
+
+## 5 · Author absolute-time motion
+
+Use pure evaluators of time; quintic Hermite C2 rails with bounded velocities and zero acceleration at joins; authored move/settle windows. Close before pulling, split tension/travel, keep pulls monotonic. Derive deformation from immutable rest geometry for every shutter sample—never accumulate transforms. Approach arcs must return to the measured axis before grip. Keep cell paths, rotations, scales, tool poses, visibility and material heat finite and deterministic at arbitrary timestamps. Do not maximize uniqueness through fake jitter.
+
+## 6 · Materials / lighting / composition
+
+Use restrained environment/key/fill/rim hierarchy and localized procedural maps. Re-evaluate exposure/roughness/clearcoat on actual rendered skin/wood/metal, not only code. Preserve warm/cool separation and white caption contrast. Render real geometry; merge/instance repetitive elements to avoid excessive draw calls. Keep type sparse and actual extruded geometry when a3D type beat is chosen. No decorative panels/counters/rails/pills/alerts/page-turns.
+
+## 7 · Focus / shutter / captions
+
+Render geometry depth for restrained selective focus; use the corrected separable Gaussian, not the rejected sparse kernel that made duplicate contours. Focus tracks the actual photographed subject. Short center-weighted three-scene-evaluation shutter is limited to action windows; disable it around every declared cut. No optical-flow frames. Draw captions once at center time after focus/shutter; A/B must show scene changes with raw caption canvas unchanged.
+
+## 8 · Sound / music
+
+Drive tactile events from shared visual anchors. A release friction cue can start before contact/release so the measured transient peak lands at the anchor; compare peak error with one frame, not only clip start. Rebalance credited score by narrative section, not generic constant volume. Keep voice more than12dB RMS above the bed in the current gate and measure mono/stereo behavior. Normalize and measure the actual encoded AAC, not only premaster WAV. Preserve publishing/sample/font licenses.
+
+## 9 · Current-source proof before costly native render
+
+Run production unit tests, director/finiteness/continuity checks, fixed-voice/script locks and scope-appropriate actual-baseline comparisons. Render representative stills and full-frame out-of-order timestamp returns. Run focus/caption isolation and new feature-specific A/B checks. Inspect images for crop, missing geometry, winding, shadow acne, ghosting and confusing anatomy. A whole-film pass gets a complete low-resolution motion preview: decode all frames, verify timestamps/duration/tissue visibility and inspect encoded scenes/actions. Clearly label that preview review-only—not1080px final.
+
+## 10 · Freeze and native render
+
+Checkpoint the exact source signature and process ID. Pin dependencies; keep disposable runtimes outside tracked source. Render independently evaluated native frames, not an upscale or24-to30 optical interpolation. Resume only chunks whose signature/frame range/size match. Never alter hashed picture inputs mid-job or restart a live process. Missing restored caches are not evidence an old completed task is unfinished. Log material errors/results and checkpoint within55minutes while active.
+
+## 11 · Actual-master gate and review
+
+All frames decode, expected count and monotonic timestamps; codec/portrait/native resolution/fps/duration/pixel format; AAC stereo48kHz; final loudness/true peak; moov before mdat; complete native frame/source-signature receipts; visible geometry across frames; action motion and contact timing; same voice/captions/safety locks; no decorative clutter; licenses/attribution; applicable current feature proofs. Read the encoded contact/action sheets. Mark sampled visual review honestly and distinguish technical pass, user art approval, clinician review and ear review.
+
+## 12 · Deliver / register / remember
+
+Create a new version folder under verified WF-02 parent. Upload final MP4, editable source ZIP, script notes, SRT, publishing credit and a separate receipt (no circular ZIP self-hash). Compare local SHA256/size and returned remote size/MD5; re-read metadata/re-list folder; record actual IDs in SYNC.json. Only then clean disposable chunks/mix/Node caches. Promote clean source into the style, append release history/lessons, update registries, refresh manifest, validate and test. Push only the permitted session branch when requested; be explicit if not merged into main. Preserve raw available history with coverage limits.
+
+Current executable reference: `projects/EMS-20261016-002/splinter-v8/src/run-v8.sh`, plus its proof/gate scripts. Read before running; this is a reproducible case study, not an automatic new-topic generator.
+
+
+
+---
+
+Source section: `knowledge/TECHNICAL_REFERENCE.md`
+
+# Technical architecture and exact reference points
+
+The current executable reference lives at `projects/EMS-20261016-002/splinter-v8`. Preserve earlier versions; the implementation is readable source rather than a vague prompt pack.
+
+| Layer | Current authority | Responsibility / caveat |
+|---|---|---|
+|Scene/meshes/materials|`src/film.js`|Three.js geometry, inherited GLB, new skin/tools/type/cells/fibres, lighting, visibility and compositor; no Blender/Cycles claim|
+|Actor motion|`src/motion.mjs`, `data/motion.json`|absolute-time C2 controls, contact/pull/tension, cell/debris paths; simplified illustration|
+|Photography|`src/director.mjs`, `data/shot_plan.json`|shot-local camera/focus, tracking and semantic cuts; Y-up camera vs local Z-up actors|
+|Depth focus|`src/focus-pass.js`|geometry-depth separable Gaussian before output transform; approximate optics, restrained radius|
+|Native capture|`src/render.cjs`|allowlisted virtual local origin, pinned Chromium/Playwright/Three, native lossless composite capture, resumable chunk signatures|
+|Sound|`src/sound_design.py`, `data/mix_direction.json`|eight restrained cues, credited piano/cello/string-note arrangement, shared anchors, narrative gain automation|
+|Assembly|`src/assemble.py`, `data/timeline.json`|fixed voice placement, phrase SRT, two-pass normalization, AAC mux/faststart and identity hashes|
+|Current proofs|`check_motion.mjs`, `check_upgrade.mjs`, `check_determinism.cjs`, `check_focus.cjs`, `check_organic.cjs`, `check_preview.py`|director/voice lock, actual V7 comparison, full-frame returns, focus and feature A/B, complete low-res decode|
+|Native gate|`src/gate.py`|34 case-specific actual-master checks; not artistic/clinical certification|
+|Rebuild|`src/run-v8.sh`, `src/preview-v8.sh`|source proofs -> full review -> native picture/audio/gates; significant software-GPU runtime|
+
+## Pinned toolchain and restore
+
+Read the case-study package/lock and requirements, do not rely on an ephemeral environment surviving. Node20+; Three0.170.0, playwright-core1.51.1, @sparticuz/chromium133.0.0; Python3.11+ with pinned NumPy2.4.6, Pillow12.3.0, imageio-ffmpeg0.6.0, PyAV16.0.1 and fonttools4.60.1; `tar`. Chromium bundled runtime libraries are recreated by the renderer. No credentials are bundled. Arena's browser is not localhost; if exposing a preview server use0.0.0.0 and a compatible host/proxy. The offline renderer itself uses intercepted allowlisted URLs, not a public dev server.
+
+```bash
+python3 tools/continuity.py resume
+python3 tools/wf02.py audit
+python3 tools/studio.py hydrate wf02
+# Or fork a current task; never edit preserved delivered source in place.
+cd <working-copy-of-splinter-v8>
+python3 -m venv <disposable-venv>
+<disposable-venv>/bin/pip install -r requirements.txt
+npm ci
+MONARCH_PYTHON=<absolute-venv>/bin/python bash src/run-v8.sh
+```
+
+Repository tests should use a dependency-equipped interpreter. A system-Python `numpy` import failure in WF03's unrelated --help test was an environment issue; rerunning with the restored venv passed10/10. Do not rewrite working WF02 rendering to mask an unrelated missing package.
+
+## Case-specific measured controls
+
+- Native V8:1080×1920,30fps,30.5s,915frames.1101 colour-scene evaluations;93 shutter frames;775 depth-focus frames. These are not mandatory counts/duration for every new topic.
+- Selected shutter:3 center-weighted scene evaluations, short exposure, no cross-cut blending; output caption canvas evaluated once at center time.
+- Surface insert:21809vertices (inherited V6). Three hero cells with segmented inner forms; V7 independent membranes1617vertices each, bounded travelling folds. V8 dermal micro-bundles:36merged curves/8100vertices.
+- V5 faster actions:surface approach1.02→0.38s,close0.41→0.17s,pull1.17→0.42s; deep approach0.63→0.34s,close0.35→0.16s,pull1.97→0.72s. Camera windows0.40–0.58s. Later revisions retain measured contact anchors rather than global speed-up.
+- Source/native signatures include actual source/data/assets, render width and capture mode. A different preview width has a different signature and is not a native-final receipt.
+- V8 encoded AAC:-16.03LUFS,-2.56dBTP; voice priority and dynamic breathing space measured. Not an independent ear/ASMR certificate.
+
+## Licensing and provenance
+
+Keep GLB/reference origins in SOURCES.json; original model is inherited. Montserrat retains SIL OFL1.1. FluidR3 instrument notes via MIDI.js Soundfonts retain CC BY3.0 US and source/provenance notices. Preserve upstream licenses and `assets/music/ATTRIBUTION.md` in every source kit and publishing companion. No reference audio/image plates are used.
+
+
+
+---
+
+Source section: `knowledge/FAILURES_AND_FIXES.md`
+
+# Failure / cause / correction / prevention ledger
+
+This ledger synthesizes available notes, code and journals. It does not invent original dialogue, exact unseen experiments or an unrecorded root cause. Evidence lives in the linked version source and archived task records; use the release catalog to resolve task paths.
+
+|Observed issue / risk|Recorded cause or scope of inference|What changed|Regression / prevention|
+|---|---|---|---|
+|Earlier decoration felt cheap/cringe to the user|Explicit user feedback; extra interface elements competed with anatomy/voice|V4 removed HUD, chapter cards, counters/rails, panels, pills, arrows, page-turn and UI chirps; kept sparse real3D words|No-clutter source gate; compare creative proposal with reject list, not effect count|
+|Slow/indecisive contact and extraction|Earlier authored action windows were long; not a narration problem|V5 shortened approach/close/pull windows, tension/travel and camera move/settles; retained voice|Monotonic pulls, grip-before-pull, actual encoded fast-action strip, shared SFX anchors|
+|Two-sample shutter showed double contours|Temporal samples separated too far for the intended fast action|Shorter exposure and3center-weighted actual-scene evaluations|Action-window sampling only; exclude every semantic cut; captions after scene blend|
+|Sparse depth-focus blur produced duplicate/ghosted contours|Sparse gather kernel, not desired lens bokeh|V6 geometry-depth-guided separable Gaussian|Focus on/off image comparison and identical raw caption canvas; restrained blur cap|
+|Surface insert looked like missing rectangular grid / wrong winding|Prototype topology/winding mismatch|Radial annular slit, corrected winding and backing|Actual proof images at surface timestamps; geometry vertex count alone is insufficient|
+|Cross-section actors could falsely appear physically buried beneath intact skin|Recovered reveal meshes are deliberately offset in front of cut plane|Separate intact-surface insert rather than fake overlaying physical layers|Document coordinate/presentation boundary; do not call it validated clinical anatomy|
+|Forceps looked like floating rods / inaccurate grip risk|A tool silhouette/gap must be linked to the actual wood axis and width|Joined beveled forceps, gap derived from fragment, close before pull; V8 arcs return before contact|Measured geometry handles, contact locks, monotonic action and encoded strip|
+|Flat/synthetic material impression|Uniform treatment insufficient at macro scale; aesthetic diagnosis, not physical measurement|Localized pad detail, cellular skin/fibrous dermis, longitudinal/irregular grain, brushed steel; V8 roughness/clearcoat/exposure refinement and micro-bundles|Inspect actual skin/wood/metal stills; keep new detail subordinate; no photorealism guarantee|
+|Incremental transforms or membrane deformation can drift|Accumulating changes depends on frame order/shutter sampling|Pure absolute-time evaluators; immutable rest vertices for each membrane pose|Out-of-order full-frame hashes and exact geometry revisits, finite/bounded motion|
+|First/return image differed in small overlay region|Recorded cold canvas/raster initialization behavior, not actor trajectory|Explicit CPU canvas contexts and diagnostic revisits|Strict complete-frame determinism; preserve initial diagnostics instead of hiding failures|
+|False floating shadows / coplanar cut-face acne|Presentation-plane shadowing and overlap|Restrained cut-face shadow flags/polygon offsets|Actual scene sample inspection; avoid strong black blobs around explanatory cells|
+|VSM/clearcoat-free trial did not help performance|Measured earlier trial was not a useful optimization|Trial not adopted; batching/instancing retained where useful|Do not reintroduce rejected optimization merely from intuition; benchmark before adopting|
+|A focused pass can undershoot a request for the whole animation|V7 honestly changed only hero membranes/material; user later explicitly asked for the whole film|V8 assessed all9views/3groups, full-film look/contact/mix and added actual V7 comparisons|Classify scope; measure against real prior controls; do not relabel inherited shots as new|
+|Historical QA may be mistaken for new results after copying a project|Forking source also copies old report filenames|Isolate V6/V7 reports as baseline; run current proofs/native gate and bind hashes|New pass needs its own source signatures/QA; never certify from filenames or gate counts|
+|Missing .runtime/chunks after restoration mistaken for unfinished work|Disposable snapshot/cache boundary|Restore pinned dependencies only when needed; inspect authoritative task/history first|Resume continuity; never restart a completed operation because caches vanished|
+|Duplicate render wastes work / produces conflicting receipts|Starting without checking the process ledger|One recorded job; query existing process; match chunks by signature/range/size|Before every long operation inspect task/process; checkpoint ID and exact next action|
+|Source edit raised FileNotFoundError in V8|Repo-relative path was used while cwd was already the project|Corrected cwd-relative path under set-e and rerendered current proofs|Check cwd; do not mask an earlier failure with a later successful shell command|
+|Logging failed with no active task|Attempted continuity log before initialization while slot idle|Initialize scoped task then log the user message/error|Resume first; initialize only when idle; do not force-overwrite active tasks|
+|Studio validation reported manifest drift|New task/checkpoint/files changed after previous hash manifest|Refresh manifest after durable changes, then validate|Validate before milestone commit; source preservation hashes separate from changing task state|
+|Repo unittest failed because system Python lacked numpy|Restored system interpreter lacked dependencies; unrelated WF03 helper import|Use restored dependency-equipped venv;10/10 suite passed|Distinguish environment failure from source regression; never bypass failing assertions|
+|Cloud delivery falsely “done” without IDs is possible|Plans/local files are not remote evidence|Upload, re-read/re-list, compare size/MD5, record real receipt IDs|SYNC.json only completed after real results; pending/error states remain explicit|
+|“Full chat” could be falsely claimed from a partial journal|Continuity transcripts do not capture every prior UI/assistant/tool message|Preserve available originals and publish coverage/role counts and gaps|No fabricated verbatim turns; separate synthesis from raw records|
+
+## Binding lesson
+
+The correction hierarchy is: factual/safety clarity and user no-clutter preference > generalized hype for more effects. Future high quality comes from authored mechanism, geometry, contact staging, camera/focus, material/lighting and tasteful voice-first sound—not a new overlay stack. Technical passes do not prove universal artistic perfection.
+
+
+
+---
+
+Source section: `knowledge/EVOLUTION_V2_V8.md`
+
+# Evolution V2 → V8
+
+These are measured deliveries, not assumed final artistic approvals. V1 is not separately certified in this repository snapshot. Read raw records/proofs for details; no baseline receipt is relabeled current.
+
+|Version / task|What changed / why|Actual output / technical gates|Evidence|
+|---|---|---|---|
+|V2 ·EMS-20261014-001|Baseline original Urdu-English film, recovered GLB provenance, fixed voice assets, native24fps delivery and source/QA.|24fps,732frames,30.5s;12/12|[KAANTA · Urdu-English v2](../projects/EMS-20261014-001/splinter-v2/README.md) · [master](https://drive.google.com/file/d/10YyHXoz1avbHTrSzOW7xWZwiZUvTEMOT/view) · [QA](../projects/EMS-20261014-001/splinter-v2/data/QUALITY_REPORT.json)|
+|V3 ·EMS-20261015-002|C2 camera/actor controls, joined forceps and richer sound/turn-over transition; later clutter correction means this is historical, not current taste authority.|30fps,915frames,30.5s;18/18|[KAANTA · Motion Edition v3](../projects/EMS-20261015-002/splinter-v3/README.md) · [master](https://drive.google.com/file/d/1Wl8S1M6jT3SNU6vEHJt9Kw3sePz0TH-i/view) · [QA](../projects/EMS-20261015-002/splinter-v3/data/QUALITY_REPORT.json)|
+|V4 ·EMS-20261015-003|User restraint correction: remove decorative HUD/panels/counters/pills/page-turn/UI pings; clean slate/warm look, sparse real3D type, eight tactile cues and credited arranged score.|30fps,915frames,30.5s;23/23|[KAANTA · Cinema Cut v4](../projects/EMS-20261015-003/splinter-v4/README.md) · [master](https://drive.google.com/file/d/1Aw7InbA91uoiL2XHBTqPB_7J3vHQvolq/view) · [QA](../projects/EMS-20261015-003/splinter-v4/data/QUALITY_REPORT.json)|
+|V5 ·EMS-20261015-004|Decisive faster actions/camera settles, refined materials and corrected short3-sample scene shutter; no global narration speed-up.|30fps,915frames,30.5s;27/27|[KAANTA · Precision Cut v5](../projects/EMS-20261015-004/splinter-v5/README.md) · [master](https://drive.google.com/file/d/18kKI_5vkVOJKFUmTAEr7Tp4ZaVK6wb2M/view) · [QA](../projects/EMS-20261015-004/splinter-v5/data/QUALITY_REPORT.json)|
+|V6 ·EMS-20261015-005|Explicit user scope: new cinematic shots with same voice/script. Nine semantic views, separate radial intact-surface insert, hero-cell tracking/detail, corrected geometry-depth Gaussian focus.|30fps,915frames,30.5s;31/31|[KAANTA · Macro Director Cut v6](../projects/EMS-20261015-005/splinter-v6/README.md) · [master](https://drive.google.com/file/d/1c-o5LKg11MAZOLNOLQHIXqwBn3ozUGEx/view) · [QA](../projects/EMS-20261015-005/splinter-v6/data/QUALITY_REPORT.json)|
+|V7 ·EMS-20261016-001|Focused organic hero-membrane pass: independent1617-vertex membranes, bounded absolute-time folds/leading lobes and softer layered material; same edit/voice, not a whole-film rebuild.|30fps,915frames,30.5s;32/32|[KAANTA · Organic Motion v7](../projects/EMS-20261016-001/splinter-v7/README.md) · [master](https://drive.google.com/file/d/1zRKxqy7yS_k1USCyTuGCBSOCOCNbPVjz/view) · [QA](../projects/EMS-20261016-001/splinter-v7/data/QUALITY_REPORT.json)|
+|V8 ·EMS-20261016-002|Whole-film pass: all9camera views/3groups, tighter opening/bounded drifts, background/material/lighting/grain/tissue refinement,36merged dermal bundles, compression/spread, returned approach arcs, restrained sound dynamics; same narrative/cuts/voice.|30fps,915frames,30.5s;34/34|[KAANTA · Full Film Craft v8](../projects/EMS-20261016-002/splinter-v8/README.md) · [master](https://drive.google.com/file/d/1pUuxlt423ZZKsiHW1kHZ0I1fPzA8K9P9/view) · [QA](../projects/EMS-20261016-002/splinter-v8/data/QUALITY_REPORT.json)|
+
+## Read the progression correctly
+
+V3 added motion but its clutter was later rejected; “latest” does not mean accumulate every prior effect. V4 subtraction remains binding through V8. V5 timing changes precede V6 photography; V7 is a smaller cell-specific iteration; V8 explicitly broadens across the film. Do not inflate inherited surface/cell/tool geometry into new modeling in each version. New topics inherit the production grammar and gates, not the exact splinter duration, objects, script or guaranteed aesthetics.
+
+
+
+---
+
+Source section: `knowledge/DELIVERY_AND_RECOVERY.md`
+
+# Delivery, GitHub/Drive structure and recovery
+
+## Authorities, not duplicated styles
+
+Repository: `adil-chandio/Monarch-Studio`. Separate style: `styles/monarch-zackd-3d/`. Trigger: WF2. Live Drive parent (screenshot target): `1LTkHpkEUFSui8Lqyy8I0j5-1AceSziWX`. Do not create a conflicting second WF02 implementation or mix in the preserved legacy Powerful Personality/TABAHI ACTIVATE workflow. Other studio styles remain separate.
+
+Inside the style: START_HERE/AGENTS and machine-readable DNA/quality contracts; knowledge/playbook/lessons/history; templates; versioned projects; existing workflow/style registries. Shared repository continuity/tooling lives at root. Each project retains source, assets, licenses, fixed narration, config, proofs, QA and remote receipt. Raw available history is copied byte-for-byte under knowledge/history/raw with coverage/hashes. The release catalog points to every known master and receipt/source link.
+
+## Cloud folders
+
+Keep prior version folders unchanged. Store the consolidated handbook/new-chat guide/recovery ZIP in a clearly named knowledge-library subfolder under the existing WF-02 parent. Do not move or replace masters to “organize” them without authorization. The master stays in its version folder; the handbook links it. A recovery ZIP includes permanent style sources and available WF02 histories/checkpoints/outboxes/receipts plus shared tools/tests/registries/root startup rules, not unrelated style binaries, secrets or disposable caches. Large final masters stay at their verified Drive links rather than bloating Git.
+
+## Sync protocol
+
+Write local SHA256, MD5 and size for each artifact. Upload a new artifact, record the actual returned ID/size/MD5, re-read metadata or re-list the destination. Only then mark that artifact complete in a durable SYNC.json. Store a noncircular companion receipt; it cannot include its own final hash inside the very payload being hashed. Uncertain results require reading/searching destination before retrying to avoid duplicates. Never treat a folder's existence or local ZIP as full remote sync.
+
+GitHub: validate/test before a milestone commit; stage intended source/history/tool changes, inspect for secrets and oversize/generated files, commit, push only the session branch and verify remote SHA. This session is fixed to `arena/eba29c7c-monarch-studio`; do not switch/create/push another branch. Published on that branch is not merged into main. A future chat should use that branch or a separately reviewed merge; do not imply main has the library until verified. No automatic PR merge without user request.
+
+## Restore in a new environment
+
+Clone/download the correct GitHub branch, or extract the recovery ZIP preserving its repo-relative paths. Read START_HERE, resume the active slot first, then style startup. Run tools/wf02.py audit to check immutable source/history and current registration, then produce a topic brief. Restore pinned runtime dependencies only when building. Actual masters/source ZIPs have durable Drive links in RELEASE_CATALOG/receipts; ephemeral .runtime copies can disappear without invalidating completed tasks.
+
+If a render was interrupted, query its recorded process; resume only matching signature chunks after confirming no live job. If task completed, do not reopen it because raw chunks are absent. If a sync failed, preserve pending/error with details and actual known IDs, then resume the exact next action. New-topic output still needs new research/script/voice/geometry and current tests; recovery is not automatic topic generation.
+
+## Append after each new release
+
+Add source/QA/receipt and a history/catalog entry; update the current style/workflow/shared registries consistently; record user feedback and whether it is scope approval or final artistic approval; append failures/fixes; deliberately refresh immutable source inventory for genuinely new projects without changing earlier hashes. Retain all publishing credits. Use the bundle tool again to publish a new versioned recovery snapshot; do not overwrite previously verified packs.
+
+
+
+---
+
+Source section: `templates/NEW_VIDEO_BRIEF.md`
+
+# WF2 new-video brief (fill before production)
+
+- Topic / concrete viewer question:
+- Requested language, duration/aspect/platform:
+- Scope: new topic / same-film focused pass / whole-film enhancement / authorized script-voice rewrite:
+- Current style baseline and exact user changes:
+- Sources, confidence, mechanism, uncertainty and safety qualifiers:
+- Hook -> causal process -> consequence -> conditional reversal -> safe resolution:
+- Original visual metaphor/concept and why it clarifies rather than misleads:
+- Inherited assets with licenses vs geometry that must be newly authored:
+- Voice approval / current-session registration / fixed-WAV reuse conditions:
+- Script/caption/placement lock and pronunciation-review status:
+- Shot table: purpose, camera/focus keys, subject/action, declared cut, proof timestamps:
+- Contact axis/gap/lock, tension/travel/settle controls (if applicable):
+- Material/light/palette details serving the camera:
+- Necessary3D type beats (or none); one readable caption layer:
+- Tactile anchors, measured transient timing, voice/bed/music dynamics and credits:
+- Rejected clutter list checked:
+- Current tests/A-B proofs/full-motion review and native render budget:
+- Process ID, frozen source signature and resume instruction:
+- Encoded metadata/frame/audio/visual gates and actual review limits:
+- Final/source/SRT/notes/credit/receipt IDs and local/remote checksums:
+- User artistic approval status / next requested correction:
+- New lessons appended to permanent knowledge and exact recovery entry:
+
+
+
+---
+
+Source section: `knowledge/history/AVAILABLE_CONVERSATION.md`
+
+# Available recorded WF-02 conversation
+
+**Not a complete original chat UI export.** This is a readable rendering of exactly the available transcript records. Missing turns are not reconstructed. Raw byte-preserved originals and hashes are in COVERAGE.json.
+
+## EMS-20261014-001
+
+### 2026-10-14T20:10:13Z · user ·record 2
+
+Ok ab is jesi video banao hamare wf2 Zack d 3d animation me is folder me or same exact aisi video banao kese bhi banao bas perfectly correctly accurately next level kis topic par isis script ko easyurdnglish me likh ke perfectly correctly accurately next level lejake banao ache se : [https://drive.google.com/file/d/1zXgd_QnDbCcODXHyIwp4uzqRrQf0X03V/view?usp=drivesdk](https://drive.google.com/file/d/1zXgd_QnDbCcODXHyIwp4uzqRrQf0X03V/view?usp=drivesdk)
+
+
+### 2026-10-14T20:10:13Z · assistant ·record 3
+
+Main pehle reference video aur project ka WF2 setup dekh leta hoon, taake uska topic, pacing aur 3D shots samajh kar easy Urdu-English script ke saath video bana sakoon. Agar linked video ka access na mila to aapse file yahin upload karne ko kahunga.
+
+### 2026-10-14T20:34:09Z · assistant ·record 10
+
+Awaaz select ho gayi aur narration tayyar hai. Ab 3D shots par kaam kar raha hoon: finger aur tweezers ka close-up, skin ke andar ka cutaway, defence cells ki movement, phir clear safety ending. Sirf still images par zoom nahi hoga—objects aur camera dono animate honge.
+
+### 2026-10-14T20:34:41Z · assistant ·record 14
+
+Look aur shot sequence tayyar hain. Ab 30.5-second, vertical 1080×1920 video ka full render chala raha hoon. Iske baad audio mix, captions aur playback check karke final MP4 isi WF‑02 Drive folder mein rakhunga; purani files unchanged rahengi.
+
+### 2026-10-14T20:56:15Z · assistant ·record 20
+
+Render ka qareeban aadha hissa ho gaya hai. Exported close-up check kar liya hai; audio mix aur subtitle timing ke checks bhi pass hain. Script Drive folder mein save ho chuki hai—ab baqi 3D frames aur final MP4 ka playback check reh gaya hai.
+
+### 2026-10-14T21:20:33Z · assistant ·record 28
+
+Video render complete hai. 732 frames aur poori audio decode ho gayi hain; final MP4 ke 12 technical checks pass hain. Ab video aur editable source package WF‑02 folder mein upload kar raha hoon.
+
+## EMS-20261015-002
+
+### 2026-10-14T21:31:29Z · user ·record 2
+
+Bhai maza aaya Lekin isko or tabhai next level Leke Enhance improve Karke best perfectly smooth motion controls keyframing sound effects mazedar smooth jese reference video me hen or enhance improve Karke next level lejao
+
+
+### 2026-10-14T21:31:29Z · assistant ·record 3
+
+Bhai, ab isi video ko aur polish karte hain—camera moves aur keyframes zyada smooth, tweezers ka grip aur pull zyada natural, aur sound effects action ke saath tighter sync mein. Pehle current version aur reference ka motion compare karunga; jo version aapko pasand aaya hai usay unchanged rakh kar naya enhanced version banaunga.
+
+### 2026-10-14T22:00:33Z · assistant ·record 6
+
+Is baar focus sirf zyada effects par nahi hoga: camera ke achanak jumps hataunga, grip → halka resistance → smooth pull ki keyframes banaunga, aur defence cells ko voiceover ke waqt hi frame mein launga. Metal clicks, soft whooshes aur release sounds bhi inhi actions se sync honge. Aapki pasand wali voice aur script same rahengi.
+
+### 2026-10-14T22:00:33Z · assistant ·record 8
+
+Nayi motion pass tayyar hai: andar wale shots ke 6 camera jumps continuous curves se replace ho gaye hain, tweezers ki jaws ab kaantay par close hoti hain, aur cells narration ke saath time par pahunch rahe hain. Is version ko native 30 fps par render kar raha hoon—purane 24 fps video par sirf extra frames add nahi kar raha.
+
+### 2026-10-14T22:26:54Z · assistant ·record 17
+
+Reference jaisa short 3D turn-over transition bhi add ho gaya hai. Grip aur release ke sounds unhi action cues se sync hain, aur original narration bilkul same hai. Render qareeban aadha complete hai; final export mein motion, captions aur sound balance dobara check karunga.
+
+### 2026-10-14T22:51:09Z · assistant ·record 22
+
+Ab ending ke frames render ho rahe hain. Naya motion pass aur turn-over transition check ho chuke hain; final MP4 ki audio/video verification aur upload baqi hai. Purana v2 aur uski source files bhi unchanged verify kar li hain.
+
+### 2026-10-14T22:59:16Z · assistant ·record 27
+
+Bhai, V3 Motion Edition tayyar hai. Final MP4 ke18 checks pass hain—native30fps, smooth camera curves, naya grip/pull motion, turn-over transition aur23 sound cues. Video abhi khol raha hoon; Drive upload aur editable source package bhi finish kar raha hoon.
+
+## EMS-20261015-003
+
+### 2026-10-14T23:17:46Z · user ·record 2
+
+Yeh acha ha Lekin yeh bilawaja ki cheezen aake isse cheap or kharab cringe kar Rahi heb bharwe rahi hen woh nhi Karna or premium professional elite vibe them colouring rakho best amsr smooth mind-blowing hypnotized smooth kanon ko Maza dene wale hooked engaging sound effects best buildup Karke video me audience ko rok kar Engaging hooked rakhne Wala bg music perfectly correctly accurately next level best 3d text ka use Karke smooth mind-blowing eye-opening animations ke sath next level or keyframing motion controls transitions effects wagera jn sab ko or Enhance improve Karke or next level lejao har cheez ko reference video ko Dekho uske cheezen kese mazedar hen everything us hsiab se perfectly correctly accurately next level lejake tabhai level par har 1 seconds frame scene ko banao absolutely cinema attractive attention grabbing eye-catching mazedar mind-blowing eye-opening hiladene Wala sochne par majboor kardene Wala wtf moment interesting next level lejake bagair kisi kami ke galati ke flaws ke bagair kuch chore miss kiye negx kevel 💪🏻🤝🤯🤯😈😎😎🔥🔥😱☠️☠️😼👍🏻😧🧠👿👿🙆🏻‍♂️🙆🏻‍♂️😲😲😌😌😌🙉😼🤑🙈🙊🙊❤️‍🔥🫂🫂😻😮😮🥵💥🫵👑👑🙀🙀💯💯🫡🫡
+
+
+### 2026-10-14T23:17:47Z · assistant ·record 3
+
+Samajh gaya bhai—ab aur cheezen bharni nahi hain. Jo extra boxes, labels, alerts aur effects main action se dhyan hata rahe hain, unhein hata kar clean, premium cinematic version banaunga. Reference ko dobara dekh kar restrained colouring, smooth camera/keyframes, sirf zaroori jagah tasteful3D text, aur soft tactile/ASMR-style sounds rakhunga. Background music dheere build karega, lekin voice aur action ko dabayega nahi. Pehle wale versions safe rahenge.
+
+### 2026-10-14T23:52:33Z · assistant ·record 9
+
+Ab frame se saare badges, headers, counters, coloured caption boxes aur page-flip hata diye hain. Anatomy ko zyada space diya hai, shading clean ki hai, aur3D text sirf do meaningful moments par hai. Sound bhi zyada cues=better wala nahi hoga: soft contact/release textures, quiet cinematic music build, aur important line par breathing space. Isi clean direction ka full render aur mix kar raha hoon.
+
+### 2026-10-15T00:18:44Z · assistant ·record 17
+
+Clean version ka render aadhe se aage aa gaya hai. Music aur mix bhi tayyar hain: soft piano/cello/strings ka build, sirf8 action-based tactile cues, aur har baar nahi par music peeche hota hai taake line ka asar rahe. Ab beeps, alert sounds, page-flip ya baar-baar aane wale panels nahi hain. Final export mein text framing, motion, voice clarity aur levels check karunga.
+
+### 2026-10-15T00:31:43Z · assistant ·record 23
+
+V4 Cinema Cut tayyar hai. Is baar frame clean hai,3D text limited hai,motion zyada restrained hai,aur music/soft tactile sounds action ko support karte hain—compete nahi karte. Final MP4 ke technical,framing,audio aur source checks pass hain. Video khol raha hoon;Drive par final/source package aur publishing credit bhi save kar raha hoon.
+
+## EMS-20261015-004
+
+### 2026-10-15T14:12:46Z · user ·record 2
+
+Isko or next level Leke jao jese Zack d reference video ko dekhen to uski keyframing motion controls inko fast rakho or detailing colouring theme ko or enhance improve Karke next level lejao or sfx ko bhi next level premium ache se everything cheap crynge low quality nhi tabhai negx kevel high quality dikhna chaiye 🫡💯🙀🙀👑👑🫵🫵💥💥🥵😮😻🫂❤️‍🔥🙊🙊🙈🙈🤑😼😼🙉😌🙆🏻‍♂️👿🧠👍🏻👍🏻☠️☠️😱😱🔥🔥🔥😎😈🤯🤝💪🏻💪🏻😧😲
+
+
+### 2026-10-15T14:12:46Z · assistant ·record 3
+
+Bhai, is pass mein motion ko faster aur zyada decisive karunga—sirf poori video speed-up nahi. Tweezers ka approach, grip aur pull tighter hoga; camera ki slow drifts ki jagah short, purposeful moves aur clear pauses rakhunga. V4 ka clean frame preserve rahega. Detail, colour aur lighting refine karunga, aur premium contact/release SFX ko action se tightly sync rakhunga—extra badges, flashy transitions ya beeps wapas nahi aayenge.
+
+### 2026-10-15T14:29:06Z · user ·record 6
+
+Continue
+
+### 2026-10-15T14:29:06Z · assistant ·record 7
+
+Ji, isi V5 pass ko continue kar raha hoon. Fast-action keyframes aur detail/shading changes lag chuke hain; ab motion checks aur final render karunga. V4 ka clean look aur pehle wale versions safe rahenge.
+
+### 2026-10-15T14:36:32Z · assistant ·record 9
+
+Reference ki timing dobara compare kar li hai. V5 mein shallow pull1.17s se0.42s,aur deep pull1.97s se0.72s ho gaya hai. Camera moves bhi ab lagbhag0.4–0.6s ke bursts hain,phir clear settle. Wood grain,skin micro-detail aur blue/warm lighting bhi refine ki hai. Fast moves par short scene-only motion sampling rakhi hai;captions sharp rahenge aur narration ki speed same hogi.
+
+### 2026-10-15T14:54:39Z · assistant ·record 17
+
+Faster approach/grip/pull section ka render ho chuka hai. Contact aur release SFX naye motion cues par align hain;mix mein measured peaks cue se lagbhag2–6ms ke andar hain. Ab cutaway ke baqi shots render ho rahe hain. Is pass mein motion timing,materials aur sound teeno badle hain—sirf speed ya filename nahi.
+
+### 2026-10-15T15:23:33Z · assistant ·record 22
+
+V5 Precision Cut tayyar hai. Faster grip/pull aur camera moves ab actual export mein hain;detail,lighting aur SFX sync bhi update hain. Final MP4 ke27 checks pass hue,aur rapid-action frames bhi inspect kar liye hain. Video khol raha hoon. Voice aur clean layout wahi hain;naya master aur editable source WF-02 folder mein save kar raha hoon.
+
+## EMS-20261015-005
+
+### 2026-10-15T17:22:37Z · user ·record 2
+
+Lekin Bhai or tabahi next level or Enhance improve karo animations editing effects transitions motions controls sfx smooth mind-blowing eye-opening attractive hooked engaging attention grabbing eye-catching mazedar best next level lejake perfectly correctly accurately next level
+
+
+### 2026-10-15T17:22:37Z · assistant ·record 3
+
+Bhai, ab sirf aur effects add karne ke bajaye V6 ka shot design rethink karna behtar hoga—naye macro angles,clearer action staging,selective focus aur sound buildup. Clean frame rahega;flashy clutter wapas nahi aayega. Meri recommendation:naye cinematic shots,lekin wahi voice/script. Bas yeh scope confirm kar do,taake ek aur minor revision ke bajaye meaningful upgrade bane.
+
+### 2026-10-15T17:31:00Z · assistant ·record 7
+
+Done—naye cinematic shots,wahi voice aur script. V6 mein fingertip/metal-contact macro,defence-cell tracking close-up aur focus-led tissue reveal banaunga. Is baar upgrade shot design mein hoga,sirf aur effects add karne mein nahi.
+
+### 2026-10-15T18:00:15Z · assistant ·record 12
+
+Naya shot design ab V5 se clearly alag hai:metal-contact ka tight macro,skin ke andar phanse tip ka surface insert,aur ek defence cell ko follow karta close-up. Focus actual3D depth se shift hota hai;captions sharp rehte hain. Ab in shots ki framing aur cut-continuity checks kar raha hoon,phir full render. Voice aur script mein koi change nahi kiya.
+
+### 2026-10-15T18:20:21Z · assistant ·record 21
+
+Opening macro,surface insert aur hero-cell tracking sequence ka render ho gaya hai. Same voice/script lock bhi verify ho chuka hai,aur focus test mein scene badalta hai lekin caption layer sharp aur unchanged rehti hai. Ab baqi shots aur ending render ho rahi hain. Final MP4 ko poora decode aur review karke hi upload karunga.
+
+### 2026-10-15T18:46:39Z · assistant ·record 23
+
+V6 ka render lagbhag70% complete hai. Naye macro,surface aur cell-tracking shots render ho chuke hain;ab warning-detail aur final removal sequence baqi hai. Aapke selection ke mutabiq voice/script bilkul same hain. Final version mein farq naye angles,close-ups,focus shifts aur shot staging se aayega—not extra clutter.
+
+### 2026-10-15T18:55:53Z · assistant ·record 28
+
+V6 Macro Director Cut complete hai. Aapke selected scope ke mutabiq naye shots,surface insert,cell-tracking close-up aur depth-based focus shifts hain—voice aur script bilkul same. Final MP4 ke31 technical/source checks pass hain,aur encoded macro/action frames bhi review kar liye hain. Video khol raha hoon;final file aur editable source Drive par save kar raha hoon.
+
+## EMS-20261016-001
+
+### 2026-10-15T20:21:08Z · user ·record 2
+
+Or bhi mazedar next level or tabahi level improve enhance Karke
+
+### 2026-10-15T20:21:40Z · user ·record 5
+
+Or bhi mazedar next level or tabahi level improve enhance Karke
+
+### 2026-10-15T20:25:31Z · user ·record 11
+
+Aage BAHDO.
+
+## EMS-20261016-002
+
+### 2026-10-15T23:32:22Z · user ·record 2
+
+Poori 3d animation ko or tabahi next level lejao or enhance improve Karke perfectly correctly accurately next level lejake tabhai level attractive attention grabbing eye-catching mazedar smooth mind-blowing eye-opening attractive hooked engaging hiladene wale 😲😧😧💪🏻🤝🤯🤯😈😈😎🔥🔥😱😱☠️👍🏻🧠🧠👿👿🙆🏻‍♂️🙆🏻‍♂️😌😌🙉😼🤑🙈🙊🙊❤️‍🔥🫂🫂🫂😻😻😮😮🥵💥🫵👑👑🙀💯🫡🫡🎙️
+
+
+
+# Machine-readable contracts
+
+## Style DNA
+
+```json
+{
+  "schema_version": 1,
+  "style_id": "monarch-zackd-3d",
+  "workflow_code": "WF-02",
+  "user_name": "Zack d 3d animation",
+  "trigger": "WF2 <topic or reference>",
+  "intent": "Reference-informed original, clean premium educational 3D explainers; not creator/voice impersonation or frame duplication",
+  "baseline_release_path": "projects/EMS-20261016-002/splinter-v8",
+  "priority_order": [
+    "factual/medical scope and safe qualifiers",
+    "readable causal story and action",
+    "geometry/contact staging",
+    "camera and controlled motion",
+    "materials/light/composition",
+    "voice clarity",
+    "tasteful sound/music",
+    "subordinate captions/type",
+    "technical delivery and reproducibility"
+  ],
+  "creative_grammar": [
+    "concrete mechanism, not decorative abstraction",
+    "macro contact -> internal cause -> consequence -> conditional reversal -> safe resolution",
+    "tension -> contact/lock -> release -> settle",
+    "surface/depth contrast and scale reveal",
+    "eye follows actual subject; focus transfer follows narrative",
+    "negative space and deliberate settles; no fake jitter"
+  ],
+  "look": {
+    "palette": "restrained petrol/slate background, warm tissue, ivory cells/type, controlled steel; adapt to topic, not mandatory skin on everything",
+    "materials": "localized pores/ridges, grain/fibres, brushed metal; bounded subtle relief, not uniformly glossy plastic",
+    "camera": "purposeful macro angles, bounded C2 rails, explicit cuts, restrained selective focus",
+    "typography": "one plain readable caption layer; sparse real extruded3D narrative words if earned"
+  },
+  "sound": {
+    "voice_first": true,
+    "reference_audio_copy": false,
+    "taste": "soft tactile contact/release/friction textures, no game/UI chirps",
+    "music": "credited original arrangement with measured build and warning-line negative space",
+    "same_film_voice_policy": "Fixed WAVs/script/placements retained unless authorized; no automatic cross-session voice-ID reuse"
+  },
+  "reject": [
+    "gratuitous HUD",
+    "chapter cards",
+    "counters/progress rails",
+    "caption pills",
+    "warning panels",
+    "generic arrows",
+    "page-turn transitions",
+    "UI pings/beeps/chimes",
+    "excessive ghost trails",
+    "random per-frame jitter",
+    "unearned camera motion",
+    "unverified quality percentages",
+    "claims that technical gates certify clinical/artistic perfection"
+  ],
+  "scope_policy": {
+    "focused_pass": "name the exact changed subject(s)",
+    "whole_film_pass": "cover every shot/scene group and compare with actual prior controls/images",
+    "new_topic": "new factual mechanism, script/voice/geometry/action and shot plan; baseline is grammar/tooling, not canned content"
+  },
+  "references": [
+    "knowledge/CREATIVE_DNA.md",
+    "knowledge/FAILURES_AND_FIXES.md",
+    "knowledge/PRODUCTION_SOP.md"
+  ]
+}
+
+```
+
+## Quality contract
+
+```json
+{
+  "schema_version": 1,
+  "style_id": "monarch-zackd-3d",
+  "baseline_release_path": "projects/EMS-20261016-002/splinter-v8",
+  "format_defaults": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "audio_sample_rate": 48000,
+    "audio_channels": 2,
+    "integrated_lufs_target": -16,
+    "true_peak_ceiling_dbtp": -1.0
+  },
+  "not_universal": {
+    "duration": "30.5s/915frames are KAANTA specifics, not a forced length for every future topic",
+    "shot_count": "9shots are KAANTA specific; future narratives choose purposeful coverage",
+    "cells": "22active/3hero cells are case-study controls, not universal biology",
+    "gate_count": "34passed V8 checks, not an immutable magic gate count for future topics"
+  },
+  "mandatory": [
+    "available topic sources and safety qualifiers",
+    "explicit script/voice/scope lock",
+    "measured contact before extraction when applicable",
+    "finite stateless absolute-time scene evaluation",
+    "declared cuts and cut-aware shutter",
+    "current-source determinism and relevant visual A/B",
+    "full low-res motion preview before expensive whole-film native render",
+    "native frame coverage/source signature receipts",
+    "all expected frames decode with monotonic timestamps",
+    "actual encoded metadata/audio/loudness/true-peak measurement",
+    "encoded scene/action samples reviewed with honest limits",
+    "licenses/publishing credit retained",
+    "master/source SHA256 and size; remote size/MD5 verified",
+    "real sync IDs/results, older versions preserved"
+  ],
+  "kaanta_safety_phrases": [
+    "har baar nahi",
+    "intezaar mat karo",
+    "doctor se madad lo",
+    "skin ko mat khodo"
+  ],
+  "acceptance_statuses": [
+    "technical_pass",
+    "sampled_visual_review",
+    "user_artistic_review_pending",
+    "clinician_review_not_claimed",
+    "independent_ear_review_not_claimed"
+  ],
+  "latest_observed": {
+    "actual_master_gates": "34/34",
+    "source_tests": "7/7",
+    "director_checks": "13/13",
+    "v7_comparison_checks": "4/4",
+    "native_frames": 915,
+    "colour_evaluations": 1101,
+    "shutter_frames": 93,
+    "depth_focus_frames": 775,
+    "encoded_audio_lufs": -16.03,
+    "encoded_true_peak_dbtp": -2.56
+  },
+  "startup_reading_order": [
+    "START_HERE.md",
+    "AGENTS.md",
+    "STYLE_DNA.json",
+    "QUALITY_CONTRACT.json",
+    "knowledge/PLAYBOOK.md",
+    "knowledge/FAILURES_AND_FIXES.md",
+    "projects/EMS-20261016-002/splinter-v8/README.md",
+    "projects/EMS-20261016-002/splinter-v8/data/QUALITY_REPORT.json"
+  ]
+}
+
+```
+
+# Complete available evidence files
+
+The recovery ZIP contains all537 permanent project files,39 raw task archive files,36 recorded conversation messages,221 recorded journal events, source assets/licenses and shared tooling. These counts describe available evidence, not full missing original chat. The readable action timeline and raw JSONL remain in the recovery ZIP/repository. Older masters stay at their release catalog Drive links.
+
+WF02_PRESERVATION_HANDBOOK_END_20261016

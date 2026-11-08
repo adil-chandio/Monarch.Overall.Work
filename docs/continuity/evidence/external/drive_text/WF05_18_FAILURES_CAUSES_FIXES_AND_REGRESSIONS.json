@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "lessons": [
+    {
+      "id": "L01",
+      "failure": "Wrong artifact type",
+      "symptom": "A slideshow was substituted for a motion reference.",
+      "root_cause": "Reference dynamics were not used as an acceptance constraint.",
+      "fix": "Inspect dense reference frames and actual changing source; separate subject motion from camera-only zoom.",
+      "evidence": "Reported prior V3 rejection + current reference/V2/V4 inspection",
+      "regression": "No-slideshow plan and source-motion review"
+    },
+    {
+      "id": "L02",
+      "failure": "Codec/browser failure",
+      "symptom": "An earlier V3 master reportedly used yuv444p and did not play.",
+      "root_cause": "Encoder pixel format was not explicitly constrained.",
+      "fix": "H264 High/yuv420p + AAC + faststart; full decode; download fallback while Drive transcodes.",
+      "evidence": "Prior transcript report; actual V5/V6 codec checks",
+      "regression": "Codec/faststart/full-decode gates"
+    },
+    {
+      "id": "L03",
+      "failure": "Tiny translated overlays",
+      "symptom": "V4 left English, Instagram tags/end-card and tiny Urdu text.",
+      "root_cause": "Audio replacement plus tiny overlay was treated as localization.",
+      "fix": "Clean source typography/tags; rebuild readable integrated titles; replace closing card.",
+      "evidence": "Direct V4 frame review",
+      "regression": "Readable-type and tag/outro review"
+    },
+    {
+      "id": "L04",
+      "failure": "Unnatural pace / scene mismatch",
+      "symptom": "Global speed-up forced the dub into the English video timing.",
+      "root_cause": "Picture duration was treated as fixed instead of honoring spoken phrasing.",
+      "fix": "Restore selected nine clips; trim quiet only; recut each semantic shot to natural 1.0x speech.",
+      "evidence": "Recovered audio and V5/V6 code",
+      "regression": "Original voice hash and pace gates"
+    },
+    {
+      "id": "L05",
+      "failure": "Cloudy cleanup",
+      "symptom": "Large Telea patches made cloudy paper areas.",
+      "root_cause": "Large opaque masks and restoration method interacted badly with grain/gradient.",
+      "fix": "Use shot-aware glyph masks and Navier–Stokes inpainting; inspect texture, not just text absence.",
+      "evidence": "Observed rejected repair experiment",
+      "regression": "Texture inspection; no claim of perfect restoration"
+    },
+    {
+      "id": "L06",
+      "failure": "Missing pale objects",
+      "symptom": "Color-key/background replacement damaged hair, bulbs and thin supports.",
+      "root_cause": "Pale foreground resembled the lavender background.",
+      "fix": "Reject destructive keyed matte; retain full changing footage and use non-destructive near/far maps.",
+      "evidence": "Rejected matte.py + preview findings",
+      "regression": "Silhouette, hair, strings, shoes and highlight review"
+    },
+    {
+      "id": "L07",
+      "failure": "Wrong tag corner",
+      "symptom": "Masking both possible Instagram positions cut the talent stone.",
+      "root_cause": "Tag placement was assumed instead of detected.",
+      "fix": "Template-match the actually active icon corner; erase its handle only.",
+      "evidence": "Observed V5 repair; match scores approximately 0.85–0.997 vs empty 0.10–0.21",
+      "regression": "Conditional-corner test/review"
+    },
+    {
+      "id": "L08",
+      "failure": "Moving heading residue",
+      "symptom": "Animated headings moved outside static text masks; early 1915 strokes survived.",
+      "root_cause": "A single settled-frame rectangle was used across entry animation.",
+      "fix": "Use time-dependent regions and inspect entry/exit frames, not just shot midpoint.",
+      "evidence": "Observed encoded V5 correction",
+      "regression": "Dense boundary samples"
+    },
+    {
+      "id": "L09",
+      "failure": "Runner feet cut / SPRINT residue",
+      "symptom": "Broad early lower masks cut shoes; a later ramp missed top letter strokes.",
+      "root_cause": "Mask timing ignored the runner’s abrupt rise before the lower title entered.",
+      "fix": "Protect early low shoes; clean the full lower title after source t>=25.70s in this case.",
+      "evidence": "Observed V5/V6 fixes; four V6 runner samples 32.10/32.23/32.35/32.46s",
+      "regression": "Case-specific threshold, not a universal rule"
+    },
+    {
+      "id": "L10",
+      "failure": "Watch/flow and flow/car leaks",
+      "symptom": "Approximate source boundaries showed the next subject under the wrong sentence.",
+      "root_cause": "Sparse sampling was mistaken for exact cuts.",
+      "fix": "Densely inspect cuts; measured source watch end 14.97s and flow end 21.03s.",
+      "evidence": "Observed repair",
+      "regression": "Semantic EDL boundary review"
+    },
+    {
+      "id": "L11",
+      "failure": "Dark bag erased",
+      "symptom": "Purple sandbag was classified as title ink.",
+      "root_cause": "Color alone cannot distinguish a prop from typography.",
+      "fix": "Protect the large connected subject component; apply masks only in intended zones.",
+      "evidence": "Observed repair",
+      "regression": "Bag/face/limb review"
+    },
+    {
+      "id": "L12",
+      "failure": "Lost export after refresh",
+      "symptom": "Completed ignored MP4/runtime/dependency cache disappeared before upload.",
+      "root_cause": "Receipts persisted but ignored media bytes did not.",
+      "fix": "Protect a bounded pending-upload spool; verify cloud copies before returning media to ignored storage.",
+      "evidence": "Actual workspace reset; V5 recovered byte-identically",
+      "regression": "Artifact-existence + size/hash delivery gates"
+    },
+    {
+      "id": "L13",
+      "failure": "Premature presentation claim",
+      "symptom": "A parallel log said presented although present_file failed.",
+      "root_cause": "Intent was logged before tool success.",
+      "fix": "Record presentation only after success; correct the journal on failed presentation.",
+      "evidence": "Actual corrected journal",
+      "regression": "Tool-result-first receipts"
+    },
+    {
+      "id": "L14",
+      "failure": "Timeout mistaken for failure",
+      "symptom": "V6 process-log stream disconnected after stages had completed.",
+      "root_cause": "Transport status can differ from process/artifact status.",
+      "fix": "Inspect process, PIPELINE_STATE, file and QA before any restart.",
+      "evidence": "Actual V6 stream error; filesystem proved exit 0",
+      "regression": "No-duplicate execution rule"
+    },
+    {
+      "id": "L15",
+      "failure": "Completion archival trap",
+      "symptom": "Marking checkpoint status completed before CLI complete blocked archive.",
+      "root_cause": "complete requires an active task in the legacy controller.",
+      "fix": "Archive via complete while active; add regression protection for completed checkpoints.",
+      "evidence": "Actual V5 archive workaround; V6 normal completion",
+      "regression": "Continuity lifecycle regression"
+    },
+    {
+      "id": "L16",
+      "failure": "Technical pass is not style approval",
+      "symptom": "V6 passed technical checks but user rejected its lower caption pills.",
+      "root_cause": "Readability metrics did not encode the preferred editorial hierarchy.",
+      "fix": "Latest feedback overrides experiments: integrated clean type default, no pill/word strip; keep originals as history.",
+      "evidence": "Explicit user feedback 2026-10-15",
+      "regression": "Caption-policy regression tests"
+    },
+    {
+      "id": "L17",
+      "failure": "Repository validation noise",
+      "symptom": "Ignored virtualenv binaries and a CA certificate were scanned as repository files.",
+      "root_cause": "Filesystem enumeration did not honor ignored dependency caches.",
+      "fix": "Validate commit-eligible files and tracked exceptions; preserve sparse-checkout behavior.",
+      "evidence": "Observed studio.py validation failure",
+      "regression": "Manifest/cache regression test"
+    },
+    {
+      "id": "L18",
+      "failure": "False completeness risk",
+      "symptom": "Early scratch states/full pre-init conversation or V1–V3 editable sources were not all recoverable.",
+      "root_cause": "Compacted chat and delivered filenames are not complete source archives.",
+      "fix": "Separate observed/reported/proposed facts; preserve available raw source and explicitly inventory gaps.",
+      "evidence": "Evidence boundary",
+      "regression": "Coverage and provenance audit"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+﻿02 · Prompting — H3 ke liye Monarch prompt grammar
+H3 ka output "prompt + soundscape + music" ke structured teen-field format par depend karta hai (H3-Context-IR isi shape me deta hai). Neeche wahi structure hai, Monarch ke locks ke saath. Optional: official skill install karo to reference guides mil jate hain — npx skills add https://github.com/MiniMax-AI/MiniMax-H3 --skill h3-prompt-writing (base-en.txt = text/keyframe modes, ref-en.txt = full-reference mode).
+1. Teen modes, teen shapes
+A. T2VA (sirf text → 768p/2K video + audio)
+integrated_multimodal_description: [Shot 1] <style> <composition> <subject> <action> <camera>
+
+
+[Shot 2] At 00:04.500, the camera cuts to ...
+
+
+overall_soundscape: <ambience + physical action sounds + breathing/efforts>
+
+
+non_diegetic_music: <score only the audience hears>
+
+
+Rules jo output quality banate hain:
+
+
+* Pehla shot: koi timestamp nahi. Baqi shots: [Shot 2] At 00:SS.mmm, the camera cuts to ... — strictly increasing.
+* Style pehli line me: Cinematic, live-action, 2D-animated, 3D CG, anime, claymation, vintage film.
+* Camera = type + amplitude + speed natural sentence me: The camera pushes in with small amplitude at slow speed toward the folded letter in her hands. (types: Zoom In/Out, Push In/Pull Out, Pan, Truck, Tilt, Pedestal, Arc Shot, Tracking Shot, Static Shot, Shake Slightly/Strongly, POV, Roll Clockwise/Counterclockwise)
+* Duration description = requested duration. 5 s manga rahe ho to 3 shots na likho.
+* "cinematic / beautiful / epic" jaise khaali words kam karo — concrete detail likho (lens, light, fabric, reflection).
+B. I2VA / FL2VA (keyframe se shuru / first+last frame)
+Pehli line fixed instruction hoti hai, phir blank line, phir wahi teen fields:
+
+
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+
+How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 3) aligns with the 5.00-second mark of the target video.
+
+
+FL2VA me single shot best hota hai (model do frames ke beech interpolate karta hai), aur final [Shot N] ko exactly last frame par pohanchna hota hai.
+C. Ref2VA (full-reference = Monarch face + wardrobe + voice)
+Chhe sections, isi order me, labels har section me same:
+
+
+Section
+	Kaam
+	subject_definitions
+	har reference ka label + role + features
+	summary
+	task type + target video + reference relationships
+	retention_analysis
+	kaunsa item fully_preserved / partially_copy / reference / transferred
+	detailed_description
+	playback order me visuals, actions, camera, sound, dialogue
+	overall_soundscape
+	ambience + physical sounds
+	non_diegetic_music
+	audience-only score
+	
+
+Labels: <Subject N> (reusable visible content), <Picture N> (frame/shot anchor), <Video N> (editing source ya temporal structure), <Audio N> (voice/music reference).
+
+
+Dialogue tag: <d>[Language] exact words</d> — sirf language tag + user ke asli alfaz andar; speaker ki identity, ID (S1) aur delivery tag ke bahar. Voiceover ke liye exact phrase says in an off-screen voiceover
+
+
+* "his lips remain completely closed".
+2. Monarch locks (har H3 shot me)
+Lock
+	Value
+	REAL hero identity
+	characters/monarch REAL face v5 + REAL body v2 (Drive IDs 1YTschdKJjpmsl4jIgC15y8yjek0zf1-M, 177bFsA2oy--XSZOqbRycGieIbYJuX8S-)
+	STICK hero identity
+	stick face v4 + stick body v4 — realistic human face kabhi stickman par nahi
+	Wardrobe
+	fitted black shirt (top button open) + charcoal blazer, no tie
+	Light
+	soft key upper-left, teal + amber rims, charcoal backdrop
+	Look
+	attractive · boss · masculine · fun · hooked gaze
+	Aspect
+	films/reels: 16:9 ya 9:16/3:4 — H3 ke supported ratios me se chuno, adaptive sirf ref/i2v me
+	FPS
+	H3 native 24 fps → deliverable 24 fps (WF-05 ka 30 fps project ho to conform karo, re-time nahi)
+	Audio
+	native 32 kHz stereo; music/soundscape H3 se, ya mute karke WF-05 me apna design
+	3. Language — honest limitation
+H3 ke stable 11 languages: Arabic, Chinese, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish. Urdu aur Hindi is list me nahi hain (partial support). Is liye:
+
+
+* Dialogue critical ho to pehle ek 4–5 s test clip me wohi line generate karo, accent/pronunciation sun lo.
+* Urdu dialogue script me likho <d>[Urdu] ...</d> — model try karega, magar accent drift ka risk hai.
+* Safe default: English dialogue, Roman-Urdu sirf on-screen text ke tor par (ya WF-05 me caption layer se).
+4. Ready templates
+4.1 Monarch face — talking-head hero shot (Ref2VA, 5 s, 9:16)
+subject_definitions:
+
+
+<Subject 1> is the man in <Picture 1>, <Picture 2> and <Picture 3>: late-20s South Asian man, thick swept-back
+
+
+black hair with volume at the crown, long side locks in front of the ears, light beard along the jaw, straight
+
+
+nose, wearing a fitted black shirt with the top button open and a charcoal blazer.
+
+
+<Picture 1> is the front hero shot of <Subject 1>; <Picture 2> is his three-quarter view; <Picture 3> is his
+
+
+right profile. <Audio 1> is the voice-timbre reference for <Subject 1>.
+
+
+summary:
+
+
+[single character, direct address] A 5-second vertical close-up of <Subject 1> in a charcoal studio, lit by a
+
+
+soft key from upper-left with teal and amber rim lights, delivering one short line to camera with a confident
+
+
+half-smile.
+
+
+retention_analysis:
+
+
+<Subject 1>: fully_preserved - same face, hair volume, side locks, beard line, wardrobe and grooming as the three
+
+
+reference pictures; only expression and head angle change.
+
+
+<Audio 1>: reference - the target speech follows the timbre and calm pacing of <Audio 1>.
+
+
+detailed_description:
+
+
+The target video is in realistic photographic style, vertical 9:16 framing.
+
+
+[Shot 1] A medium close-up frames <Subject 1> from the chest up, centred against a charcoal backdrop with a
+
+
+faint teal rim on his left shoulder and a warm amber edge on his right. Soft key light from upper-left models
+
+
+the cheekbone and the jaw beard. He holds eye contact with the lens, inhales once, and speaks with a low,
+
+
+assured voice (S1), <d>[Urdu] Main hoon Monarch. Kaam bolta hai.</d> As he finishes, the corner of his mouth
+
+
+lifts into a slow confident smirk and his chin lowers slightly. The camera pushes in with small amplitude at
+
+
+slow speed throughout the shot. A single loose strand of hair falls forward across his temple near the end.
+
+
+overall_soundscape:
+
+
+A quiet studio room tone with a very low air-conditioning hum; the faint rustle of the blazer collar as his
+
+
+shoulders settle after the line.
+
+
+non_diegetic_music:
+
+
+A sparse, modern trap-orchestral bed at slow tempo: a single detuned 808 sub under a muted cello note, no drums,
+
+
+fading to silence on the smirk.
+4.2 Monarch noir shot (T2VA, 8 s, 16:9)
+integrated_multimodal_description: [Shot 1] Cinematic, live-action noir, a low-angle wide shot frames a rain-wet
+
+
+street at 3 a.m. ... (subject, wardrobe, action, camera: "The camera trucks right with small amplitude at slow
+
+
+speed past a flickering neon sign.") [Shot 2] At 00:04.500, the camera cuts to a tight profile close-up ...
+
+
+overall_soundscape: steady rain on metal awnings, distant tram, footsteps in shallow water, a coat zipper.
+
+
+non_diegetic_music: solo muted trumpet over a sustained low string drone, slow tempo, ending on an unresolved
+
+
+minor second.
+4.3 Product / style reel (T2VA, 5 s, 9:16) — WF-05 ke saath match
+integrated_multimodal_description: [Shot 1] 3D CG render, macro product shot, a matte black object rotating on
+
+
+a reflective obsidian plinth, single hard key light sweeping across its edge, dust motes in the beam. The camera
+
+
+arcs around the object with small amplitude at slow speed. At 00:03.000 the camera cuts to a full vertical frame
+
+
+with the object centred as a soft teal gradient blooms behind it.
+
+
+overall_soundscape: a deep sub-bass swell, a metallic click as the object locks into place, subtle room air.
+
+
+non_diegetic_music: minimal electronic pulse, 90 BPM, one filtered saw chord that opens up at the cut.
+5. Monarch shot-list rules
+1. 4–15 s per shot. 10 s se lamba shot likhna aasan hai magar ek shot me ek hi dramatic beat rakho.
+2. Har shot ek beat. Cut ke andar naya information (subject/space/state/time) hona chahiye, sirf zoom nahi.
+3. Same reference set har shot me (3–4 images). Naya angle chahiye to naya image add karo, prompt badal ke ummeed na rakho.
+4. Audio decide karo pehle: H3 ka native audio chahiye, ya silent plate chahiye jo WF-05 me score hoga? Silent plate ke liye non_diegetic_music: none + ambience halka likho.
+5. Seed/retry policy: ek shot ke 3 attempts max; phir prompt ya reference badlo (same prompt ko 5 dafa chalane se paisa zaya hota hai).
+6. Continuity: shot N ka last frame shot N+1 ka first frame ban sakta hai (FL2VA) — is se cuts seamless ho jate hain aur character drift kam hota hai.

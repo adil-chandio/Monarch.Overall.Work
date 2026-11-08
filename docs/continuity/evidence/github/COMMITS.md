@@ -1,0 +1,1004 @@
+# Reachable commit ledger
+
+Commits: 998
+
+Most recent first from `git log --all`; full exact SHAs are in `commits.jsonl`.
+
+- `2026-11-08T15:28:30+00:00` `5703f2d2839e` Add mafia temple render results [skip ci]
+- `2026-11-08T15:24:35+00:00` `f0b743ef0e1a` Deliver audited 43.5-second Short export with bounded native framing correction and honest review scope [skip ci]
+- `2026-11-08T15:09:55+00:00` `58dfa166a6ea` Record browser playback feasibility [skip ci]
+- `2026-11-08T15:08:30+00:00` `ffae18a86168` Test embedded player with genuine page referrer
+- `2026-11-08T15:07:55+00:00` `80eda889a7d5` Build separately authorized extinct-life Short continuity rebuild with new action and tighter edit [skip ci]
+- `2026-11-08T15:07:26+00:00` `4adc85e9c4e9` Record browser playback feasibility [skip ci]
+- `2026-11-08T15:06:06+00:00` `5c8421754e6a` Bound YouTube player playback checks
+- `2026-11-08T15:02:36+00:00` `bcee78e92d2c` Test official YouTube player browser access
+- `2026-11-08T14:44:08+00:00` `45f8713cfaee` Fix portrait research result persistence
+- `2026-11-08T14:36:56+00:00` `de47532a16d5` Test more identity-faithful portrait turn
+- `2026-11-08T14:35:19+00:00` `544a6f2233a6` Test local likeness blending on running study
+- `2026-11-08T14:33:03+00:00` `37f6a237c3a3` Review full-length occlusion-aware running study
+- `2026-11-08T14:31:04+00:00` `d24b9c24d840` Render celebrity POV without image plates
+- `2026-11-08T14:30:10+00:00` `a581fbf3ff8b` Record limitations of local likeness check
+- `2026-11-08T07:07:42+00:00` `1bad3063bcc1` Add mafia temple render results [skip ci]
+- `2026-11-08T06:32:36+00:00` `ee8cb5c1d843` Normalize research audio with measurable headroom
+- `2026-11-08T06:31:07+00:00` `c20cf65ec664` Extend occlusion-aware running research take
+- `2026-11-08T06:30:13+00:00` `68de15877cf3` Add mafia temple render results [skip ci]
+- `2026-11-08T06:22:46+00:00` `9c1082a78a1b` Test relative-depth tracking for running study
+- `2026-11-08T06:14:33+00:00` `b7ac1e137bbe` Test research camera and aspect handling
+- `2026-11-08T06:14:20+00:00` `beda97384e56` Test gate camera and restrained synthetic mist
+- `2026-11-08T06:12:37+00:00` `c73c38606d79` Launch occlusion-aware motion study
+- `2026-11-08T06:12:22+00:00` `81739d352892` Add mafia temple render results [skip ci]
+- `2026-11-08T06:11:37+00:00` `820846c082b4` Prepare occlusion-aware running motion test
+- `2026-11-08T06:10:20+00:00` `b4ae77c8d076` Review likeness-guided run and test gate depth
+- `2026-11-08T06:10:07+00:00` `7a4001f7188c` Document verified ten-source audio-model pass and precise third-pass evidence scopes [skip ci]
+- `2026-11-08T06:09:34+00:00` `677e57c9dd0e` Add mafia temple render results [skip ci]
+- `2026-11-08T06:06:15+00:00` `f0aad6ab96ae` Create animated celebrity POV test pilot
+- `2026-11-08T06:01:26+00:00` `0f1f46a99e6f` Transfer encrypted remaining-source audio evidence [skip ci]
+- `2026-11-08T06:00:41+00:00` `830680e7e377` Send authenticated original PCM to the ephemeral audio-analysis receiver [skip ci]
+- `2026-11-08T06:00:05+00:00` `c14eace0c66e` Publish ephemeral audio-analysis recipient public key [skip ci]
+- `2026-11-08T05:58:49+00:00` `d38614521ccb` Bridge two original local soundtracks with an ephemeral runner-only decryption key
+- `2026-11-08T05:56:52+00:00` `83fe76feb7e8` Make research assembly accept alternate shots
+- `2026-11-08T05:56:17+00:00` `5158cc7e024b` Transfer encrypted source-audio model evidence; not human listening [skip ci]
+- `2026-11-08T05:52:42+00:00` `86b9c40311b2` Allow restrained depth-guided camera moves
+- `2026-11-08T05:51:58+00:00` `4eb213c5ade5` Include temple gate in depth camera study
+- `2026-11-08T05:51:20+00:00` `c0784bdbb8f3` Test likeness-guided running reference
+- `2026-11-08T05:50:47+00:00` `b60ac2a52a49` Fix NumPy audio-result serialization with encryption and scalar regression tests
+- `2026-11-08T05:49:42+00:00` `dd2b2266ebea` Test depth-guided scene motion and preserve shot aspect ratios
+- `2026-11-08T05:48:49+00:00` `22f949f6c9fc` Transfer encrypted source-audio model evidence; not human listening [skip ci]
+- `2026-11-08T05:48:28+00:00` `43f5ac64ef50` Document frame-level analysis of open animations
+- `2026-11-08T05:47:32+00:00` `21909cdaa4ed` Record every decoded reference animation frame [skip ci]
+- `2026-11-08T05:47:16+00:00` `fecda31060c0` Add mafia temple render results [skip ci]
+- `2026-11-08T05:47:02+00:00` `4523239236b0` Extract every frame for close motion study
+- `2026-11-08T05:46:30+00:00` `1360d83d97f6` Record public animation footage samples [skip ci]
+- `2026-11-08T05:46:23+00:00` `ab3b9b35b2fa` Capture bounded audio-runner diagnostics when model research exits early
+- `2026-11-08T05:46:18+00:00` `5d118152286a` Improve rear-walk research matte
+- `2026-11-08T05:45:41+00:00` `e6d3133b603a` Enable frame extraction for open animation footage
+- `2026-11-08T05:45:19+00:00` `245c9c4efebe` Record public animation footage samples [skip ci]
+- `2026-11-08T05:45:01+00:00` `c2f4ac5a012e` Avoid changing notebook NumPy ABI during depth test
+- `2026-11-08T05:45:01+00:00` `48179ef36a8d` Inspect accessible creator and open-license animation
+- `2026-11-08T05:44:40+00:00` `f6ccb5f331a5` Add mafia temple render results [skip ci]
+- `2026-11-08T05:44:25+00:00` `f1f46cba2646` Prepare relative-depth camera movement research
+- `2026-11-08T05:44:07+00:00` `deb828ddcc3d` Record public animation contact sheets [skip ci]
+- `2026-11-08T05:43:40+00:00` `8d0e71ee8b24` Diagnose failed scene depth research run
+- `2026-11-08T05:43:40+00:00` `ba6c31d0f569` Study publicly published stickman animation frames
+- `2026-11-08T05:41:28+00:00` `a8727c2f9740` Test remote actual-audio models behind exact soundtrack hash gates
+- `2026-11-08T05:18:34+00:00` `1000efcab1c9` Review alternate head turn and test scene depth
+- `2026-11-08T05:17:35+00:00` `92bffabd1a2e` Add mafia temple render results [skip ci]
+- `2026-11-08T05:15:17+00:00` `0623744f28f2` Reduce depth research notebook input payload
+- `2026-11-08T05:15:05+00:00` `69dece497c2b` Prepare scene depth research for camera parallax
+- `2026-11-08T05:10:57+00:00` `40b9585eebdd` Reject alternate run seed and test likeness-anchored turn
+- `2026-11-08T05:10:29+00:00` `9486d3bb75cc` Add mafia temple render results [skip ci]
+- `2026-11-08T05:08:17+00:00` `7c1460b052a6` Prepare alternate likeness-anchored portrait motion study
+- `2026-11-08T05:01:01+00:00` `4c397e942504` Analyze emerging channels and recommend POV strategy
+- `2026-11-08T05:00:29+00:00` `23e2ccfde80c` Advance native contact review with exact scoped coverage and audio blocker evidence
+- `2026-11-08T05:00:23+00:00` `572b8a9730da` Retain full running silhouette in research composite
+- `2026-11-08T04:59:47+00:00` `7aa8363a26dc` Record focused POV competitor snapshot [skip ci]
+- `2026-11-08T04:59:30+00:00` `e868b70a6348` Examine relevant competitor channel histories
+- `2026-11-08T04:58:44+00:00` `c95df58487b9` Record MONARCH POV competitor metadata [skip ci]
+- `2026-11-08T04:58:00+00:00` `3dfe84152b66` Research emerging POV and animation landscape
+- `2026-11-08T04:54:10+00:00` `d97ecf84baad` Test alternate running seed and document full-duration QA
+- `2026-11-08T02:59:31+00:00` `23a59ba91570` Add mafia temple render results [skip ci]
+- `2026-11-08T02:35:11+00:00` `07f154ff481f` Document ten actual source editions with measured and sampled visual evidence
+- `2026-11-08T02:24:29+00:00` `45b9271b5df9` Test full-duration running with safer portrait framing
+- `2026-11-08T02:24:04+00:00` `00deb7479d98` Document stickman POV research and pilot proposal
+- `2026-11-08T02:23:19+00:00` `3818941b6b23` Transfer encrypted creator-reference study inputs; no plaintext media [skip ci]
+- `2026-11-08T02:23:04+00:00` `5abfff3b24f4` Restore encrypted research sources locally and index actual frames and audio with explicit review limits
+- `2026-11-08T02:22:58+00:00` `4d6f011a26cb` Record stickman public media probe [skip ci]
+- `2026-11-08T02:22:24+00:00` `72a90404a1ea` Probe public stickman videos and audience comments
+- `2026-11-08T02:21:41+00:00` `ce9c45594042` Record stickman POV public research [skip ci]
+- `2026-11-08T02:21:24+00:00` `3cc914059e36` Research stickman POV audience and competitors
+- `2026-11-08T02:20:58+00:00` `0fed360a3582` Acquire ten actual creator-edition references with encrypted private transfer
+- `2026-11-08T02:18:37+00:00` `c0a91f28c255` Record publisher-linked alternate footage access results [skip ci]
+- `2026-11-08T02:17:18+00:00` `2af7676c33cc` Test corroborated creator X upload through normal public media extraction
+- `2026-11-08T02:16:33+00:00` `f31250238ac9` Record higher-resolution motion test quality limitations
+- `2026-11-08T02:16:32+00:00` `8c993d764385` Record public creator-page source discovery [skip ci]
+- `2026-11-08T02:16:01+00:00` `d7ba06b4dbb1` Add mafia temple render results [skip ci]
+- `2026-11-08T02:15:42+00:00` `028ba6468272` Check public creator root and canonical page for additional original video links
+- `2026-11-08T02:14:42+00:00` `c3d6b992d803` Record public creator-page source discovery [skip ci]
+- `2026-11-08T02:14:00+00:00` `07b8dde5245d` Discover official public video candidates and add source-frame audio measurement ledger
+- `2026-11-08T02:12:33+00:00` `ab311458d120` Record publisher-linked alternate footage access results [skip ci]
+- `2026-11-08T02:11:15+00:00` `0ff0afe935f4` Correct public Facebook format selection for streams with unknown height
+- `2026-11-08T02:10:19+00:00` `acc006d3b5c9` Record publisher-linked alternate footage access results [skip ci]
+- `2026-11-08T02:08:55+00:00` `ca5533a004fe` Test publisher-linked Facebook TikTok and Instagram actual-media routes
+- `2026-11-08T02:06:10+00:00` `246f98423799` Document real footage-access blockers, verified cohort and video-API activation gate
+- `2026-11-08T02:04:38+00:00` `4570ecc935eb` Record direct public-video API feasibility [skip ci]
+- `2026-11-08T02:03:57+00:00` `c29d8c32ec6d` Probe documented direct audiovisual API instead of metadata-only substitutes
+- `2026-11-08T02:02:45+00:00` `c8b85125d8c7` Record original-source footage access evidence [skip ci]
+- `2026-11-08T02:01:33+00:00` `799ed37a97b3` Test original Zack footage access without creating a video
+- `2026-11-08T01:59:06+00:00` `82413c7e03f0` Document internal assembly defects and review blockers
+- `2026-11-08T01:58:03+00:00` `602c151075c0` Assess wider walk and trigger portrait-resolution run test
+- `2026-11-08T01:56:45+00:00` `5569cecb3047` Add mafia temple render results [skip ci]
+- `2026-11-08T01:50:38+00:00` `393edd658e83` docs(monarch-cam): correct V5 static readiness wording [skip ci]
+- `2026-11-08T01:46:00+00:00` `04d962ac8667` Prepare higher-resolution running-motion test
+- `2026-11-08T01:38:52+00:00` `e98f8a503038` Prepare internal frame-accurate research assembly
+- `2026-11-08T01:35:22+00:00` `31c08d524f06` Test tracked red-eye reveal on portrait motion
+- `2026-11-08T01:33:53+00:00` `3ae081ad1c42` Inspect corrected head turn and launch walk framing
+- `2026-11-08T01:33:12+00:00` `5e5662b3a0d5` Add mafia temple render results [skip ci]
+- `2026-11-08T01:26:58+00:00` `9cb33030706c` Correct the direction of front-anchored head turn
+- `2026-11-08T01:26:13+00:00` `1e4292873a57` Add mafia temple render results [skip ci]
+- `2026-11-08T01:22:15+00:00` `e12d9ecdba3a` Clarify sound research provenance
+- `2026-11-08T01:22:06+00:00` `a4bf38989865` Prepare smaller hand controls for running test
+- `2026-11-08T01:21:15+00:00` `3ddc34f1284c` Preserve selected narration sources for Short reproduction
+- `2026-11-08T01:21:04+00:00` `c7e72a6fc83e` Add rendered mastodon Short review export and production sources
+- `2026-11-08T01:18:37+00:00` `50c4935d5ac3` Inspect hand-guided run and launch front turn test
+- `2026-11-08T00:44:26+00:00` `8fc1dcd203a7` chore(monarch-cam): deliver raw full-screen V5 60-second ranked-animal Short [skip ci]
+- `2026-11-08T00:37:52+00:00` `338d00098647` Add mafia temple render results [skip ci]
+- `2026-11-08T00:37:32+00:00` `99f4548349ee` fix(monarch-cam): fold native stereo before V5 technical mono check
+- `2026-11-08T00:36:23+00:00` `14ef4a214254` chore(monarch-cam): return raw full-screen V5 failure diagnostics [skip ci]
+- `2026-11-08T00:29:32+00:00` `bcb83ce4ea10` Prepare rear-view tracking composite experiment
+- `2026-11-08T00:29:17+00:00` `ff8aa559a283` fix(monarch-cam): equalize V5 native windows by measured RMS before web gates
+- `2026-11-08T00:26:59+00:00` `f0a92fb312b1` chore(monarch-cam): return raw full-screen V5 failure diagnostics [skip ci]
+- `2026-11-08T00:22:17+00:00` `339188fa0495` Prepare front-anchored turn and gaze experiment
+- `2026-11-08T00:19:51+00:00` `27b0a443ee04` fix(monarch-cam): measure V5 mastering chains against unchanged web gates
+- `2026-11-08T00:17:59+00:00` `0a37db394c7f` Explore tracked courtyard composite without claiming final
+- `2026-11-08T00:17:27+00:00` `e1f9ef68bcd0` Reduce parent memory for portrait inference
+- `2026-11-08T00:17:14+00:00` `15cfb9cbf013` Launch hand-guided running test
+- `2026-11-08T00:16:53+00:00` `612cb6f4b123` Add mafia temple render results [skip ci]
+- `2026-11-08T00:16:09+00:00` `9ad2409fbbd6` Diagnose camera-gaze test failure
+- `2026-11-08T00:15:23+00:00` `f5c1c6f8e109` chore(monarch-cam): return raw full-screen V5 failure diagnostics [skip ci]
+- `2026-11-08T00:10:35+00:00` `fd79ab9b6323` Prepare safer framing for walk test
+- `2026-11-08T00:10:13+00:00` `2e9cd47026f9` Record walk test and launch controlled gaze test
+- `2026-11-08T00:09:35+00:00` `4824f9698ff7` Add mafia temple render results [skip ci]
+- `2026-11-08T00:03:13+00:00` `ff52bd9ba36b` build(monarch-cam): separate V5 full reference-mechanic 60-second ranked-animal Short
+- `2026-11-08T00:00:20+00:00` `fae735b2ebb9` Prepare licensed Foley and score research mix
+- `2026-11-07T23:49:15+00:00` `3ee38d398656` Prepare hand-guided running motion experiment
+- `2026-11-07T23:47:47+00:00` `14951a43a467` Prepare camera-gaze head-turn experiment
+- `2026-11-07T23:46:59+00:00` `bd5baa13d834` Generate rear-view walking motion research test
+- `2026-11-07T22:57:54+00:00` `1b3cc16369da` Build researched V14 YouTube launch kit with selected thumbnail and 20-video evidence ledger
+- `2026-11-07T22:54:19+00:00` `70514e1587f9` Document timed portrait motion test QA
+- `2026-11-07T22:53:31+00:00` `05bfbfd93aba` Add mafia temple render results [skip ci]
+- `2026-11-07T22:47:03+00:00` `43747d9c5b7d` Test timed head turn and restrained smile
+- `2026-11-07T22:46:03+00:00` `0aefcb932a47` Add mafia temple render results [skip ci]
+- `2026-11-07T22:38:45+00:00` `76a5c4dab12c` Reduce memory pressure on head-turn pilot
+- `2026-11-07T22:38:26+00:00` `c04caa92d963` Add mafia temple render results [skip ci]
+- `2026-11-07T22:37:37+00:00` `236c6585018d` Diagnose head turn test failure
+- `2026-11-07T22:31:28+00:00` `556028e5fb4f` Record running test QA and launch head turn pilot
+- `2026-11-07T22:30:55+00:00` `d779abd50e25` Add mafia temple render results [skip ci]
+- `2026-11-07T22:30:02+00:00` `974f1d9c4575` Recover long-gait pilot results
+- `2026-11-07T22:18:48+00:00` `bc6641219ac6` Prepare controlled head turn research test
+- `2026-11-07T22:15:16+00:00` `9113dca51ba3` Add safe recovery for long running pilot
+- `2026-11-07T22:10:44+00:00` `be5f4df1665f` Add research-only tracked face composite test
+- `2026-11-07T22:10:02+00:00` `27dabcbc7946` Test longer controlled running gait
+- `2026-11-07T22:07:49+00:00` `f6e4debed4ae` Add mafia temple render results [skip ci]
+- `2026-11-07T21:54:00+00:00` `565e288b84e3` Guide running pilot with generated-face landmarks
+- `2026-11-07T21:50:34+00:00` `6dfbeb1f0790` Add mafia temple render results [skip ci]
+- `2026-11-07T21:26:06+00:00` `1d53071677d3` Document actual encoded V14 review and publish scoped full-film prerelease
+- `2026-11-07T21:25:35+00:00` `cbf2e3d3718e` Reduce motion model download concurrency
+- `2026-11-07T21:25:15+00:00` `b19dc057071b` Add mafia temple render results [skip ci]
+- `2026-11-07T21:24:32+00:00` `a971f082bfdb` Check motion test download failure
+- `2026-11-07T21:24:10+00:00` `29e553b150bf` Add mafia temple render results [skip ci]
+- `2026-11-07T21:18:20+00:00` `ddb7d99cc08c` Isolate PEFT dependency from motion test
+- `2026-11-07T21:17:48+00:00` `0e7c74b442eb` Add mafia temple render results [skip ci]
+- `2026-11-07T21:08:12+00:00` `645886331da6` Isolate TensorFlow and optimize motion test attention
+- `2026-11-07T21:07:43+00:00` `61027f90b553` Add mafia temple render results [skip ci]
+- `2026-11-07T21:06:21+00:00` `a71001cd267e` Identify NumPy traceback in running research
+- `2026-11-07T21:05:58+00:00` `22390bc10b6e` Add mafia temple render results [skip ci]
+- `2026-11-07T21:01:47+00:00` `1a6db744db17` Preserve corrected V14 full-master identity and exact encoded evidence [skip ci]
+- `2026-11-07T21:00:13+00:00` `4db686cb9325` Add downloadable 3D character draft
+- `2026-11-07T20:44:17+00:00` `fd7c686abe0d` Use prebuilt tokenizer for running test
+- `2026-11-07T20:44:01+00:00` `2b1f846b72be` Add mafia temple render results [skip ci]
+- `2026-11-07T20:43:00+00:00` `392a5e3c3876` Identify failed package without credential disclosure
+- `2026-11-07T20:42:41+00:00` `2243fd0619f7` Add mafia temple render results [skip ci]
+- `2026-11-07T20:40:48+00:00` `8b7a8903a722` Capture failed wheel name
+- `2026-11-07T20:38:20+00:00` `3c99b2f54054` Record corrected V14 70-sample native validation and pending encoded review
+- `2026-11-07T20:38:13+00:00` `0de3eb1074da` Inspect running test dependencies
+- `2026-11-07T20:37:46+00:00` `792ea5d95ae9` Add mafia temple render results [skip ci]
+- `2026-11-07T20:33:03+00:00` `4ba54bfee455` Refine V14 full-body framing and cutaway/canopy continuity with dependency-safe correction
+- `2026-11-07T20:31:55+00:00` `821b45c3c044` Add motion-capture controlled running feasibility test
+- `2026-11-07T20:18:12+00:00` `77539b81f6c0` Enable branch-scoped V14 render workflow registration and launch
+- `2026-11-07T20:17:58+00:00` `3e311a8367ba` Build V14 directed scientific explanations, species shots and evidence-bound render gates
+- `2026-11-07T19:36:35+00:00` `60b2d8617235` Extract exact released V13 frame, timing and signal evidence for independent creative audit [skip ci]
+- `2026-11-07T19:34:39+00:00` `f94992b7f887` Audit released V13 with complete second-by-second evidence and every-frame measurements
+- `2026-11-07T19:31:37+00:00` `7aef6f188138` Document portrait motion pilot limitations
+- `2026-11-07T19:30:31+00:00` `2542a2902213` Add mafia temple render results [skip ci]
+- `2026-11-07T19:26:47+00:00` `aa41ddc3c449` Recover face research test for inspection
+- `2026-11-07T19:19:21+00:00` `9040d019c751` Use compatible ONNX wheel for face research
+- `2026-11-07T19:18:34+00:00` `93cc3597a1ae` Add mafia temple render results [skip ci]
+- `2026-11-07T19:17:45+00:00` `74bcde25d7e9` Diagnose pinned portrait test
+- `2026-11-07T19:12:21+00:00` `a2c0778cb4fc` Pin compatible ONNX for portrait test
+- `2026-11-07T19:10:59+00:00` `d73808723e12` Report portrait resolver dependency constraints
+- `2026-11-07T19:10:27+00:00` `0d971b49ad72` Add mafia temple render results [skip ci]
+- `2026-11-07T19:10:00+00:00` `4755866e6ad2` Record corrected full English 7:19 POV master delivery and verified QC [skip ci]
+- `2026-11-07T19:09:41+00:00` `5e269b79eab9` Inspect portrait dependency resolver errors
+- `2026-11-07T19:09:24+00:00` `993fdd05e8d6` Add mafia temple render results [skip ci]
+- `2026-11-07T19:08:41+00:00` `1179098826ce` Diagnose portrait retry
+- `2026-11-07T19:08:12+00:00` `e72e0e56487c` Record full English 7:19 master delivery and verified QC [skip ci]
+- `2026-11-07T19:05:05+00:00` `331eafbf64af` chore(monarch-cam): deliver raw full-screen V4 35-second ranked-animal Short
+- `2026-11-07T19:03:31+00:00` `25ce6938a8cc` Fix ONNX dependencies for portrait test
+- `2026-11-07T19:03:13+00:00` `f8e0057a4333` Add mafia temple render results [skip ci]
+- `2026-11-07T19:01:54+00:00` `2aeba8dc1852` Diagnose portrait feasibility test
+- `2026-11-07T19:01:52+00:00` `1abc62deb36e` fix(monarch-cam): allow the finished V4 MP4 to be returned to Git
+- `2026-11-07T18:55:41+00:00` `72995575e07d` fix(monarch-cam): restore V4 source cache and back off on Wikimedia 429
+- `2026-11-07T18:55:01+00:00` `f2552a4e56ea` Add private portrait motion feasibility test
+- `2026-11-07T18:45:22+00:00` `ca0b3cdbcb9e` chore(monarch-cam): return raw full-screen V4 failure diagnostics
+- `2026-11-07T18:44:05+00:00` `216635e5a9c7` fix(monarch-cam): repair isolated delivered-V4 clicks without changing QC gates
+- `2026-11-07T18:41:08+00:00` `f374521bb5e3` Preserve coast and closing palms; replace affected native ranges with full decode safeguards
+- `2026-11-07T18:33:26+00:00` `0e3305e2b2cc` chore(monarch-cam): return raw full-screen V4 failure diagnostics
+- `2026-11-07T18:28:48+00:00` `46c3118958b5` fix(monarch-cam): serialize V4 technical QC results as plain JSON
+- `2026-11-07T18:27:00+00:00` `e712073dafd4` Build complete enhanced POV English film with locked full narration and native delivery workflow
+- `2026-11-07T18:26:53+00:00` `01cd645b3a30` chore(monarch-cam): return raw full-screen V4 failure diagnostics
+- `2026-11-07T18:22:53+00:00` `9984d7eee605` fix(monarch-cam): calibrate delivered V4 AAC level without changing gates
+- `2026-11-07T18:14:12+00:00` `edf791a3c4c4` chore(monarch-cam): return raw full-screen V4 failure diagnostics
+- `2026-11-07T18:10:37+00:00` `50669b851cb3` fix(monarch-cam): replace three silent V4 moments with audible CC0 sources
+- `2026-11-07T18:04:56+00:00` `7598856ec38c` Add native-motion 20-second review cut
+- `2026-11-07T18:02:30+00:00` `c83f57378fb1` chore(monarch-cam): return V4 replacement-source probe diagnostics [skip ci]
+- `2026-11-07T18:00:10+00:00` `e9f4fd7c11a3` Add mafia temple render results [skip ci]
+- `2026-11-07T17:58:49+00:00` `b6fdc7fc6047` fix(monarch-cam): retry CC0 candidate probe via transcodes and V3 cache
+- `2026-11-07T17:54:28+00:00` `1e8f66537692` chore(monarch-cam): return V4 replacement-source probe diagnostics [skip ci]
+- `2026-11-07T17:53:35+00:00` `170ad45e8b73` feat(monarch-cam): probe CC0 replacement sources for V4 native audio
+- `2026-11-07T17:48:45+00:00` `b1bc24d1921e` Deliver approved 61-second rendered pov English experiment and technical QC [skip ci]
+- `2026-11-07T17:39:46+00:00` `08190d4494d4` chore(monarch-cam): return raw full-screen V4 failure diagnostics
+- `2026-11-07T17:36:58+00:00` `ae6c862d4a5c` fix(monarch-cam): audit native V4 audio and correct DC/LRA handling
+- `2026-11-07T17:36:24+00:00` `306db40f3df8` Keep falling-leaf catch within fixed-length arm reach at the exact contact frame
+- `2026-11-07T17:33:21+00:00` `772aaae06987` chore(monarch-cam): return raw full-screen V4 failure diagnostics
+- `2026-11-07T17:33:00+00:00` `37cbe8ad7104` Enhance enjoyed POV opening with cinematic contact lighting, analytic sample motion, page/lens actions and living community
+- `2026-11-07T17:30:10+00:00` `12a005f44df6` feat(monarch-cam): build raw full-screen V4 ranked-animal Short
+- `2026-11-07T17:13:20+00:00` `a4472dba5fda` Generate alternative takes for quality control
+- `2026-11-07T17:10:48+00:00` `3d26fdddfded` Deliver approved 61-second rendered pov English experiment and technical QC [skip ci]
+- `2026-11-07T16:50:48+00:00` `ad22c3a248b2` Build owner-approved enhanced first-person 3D world experiment with moving viewpoint, suited investigator and distinct environments
+- `2026-11-07T16:50:09+00:00` `1aae76515108` Add mafia temple render results [skip ci]
+- `2026-11-07T16:19:20+00:00` `6c83f1791a8f` Reduce batch notebook payload for GPU submission
+- `2026-11-07T16:17:56+00:00` `723d758424fa` Generate five native-motion scene candidates with WAN
+- `2026-11-07T16:16:31+00:00` `61bb454e548c` Add mafia temple render results [skip ci]
+- `2026-11-07T16:05:50+00:00` `17dc5fef4dc5` Place precomputed prompt embeddings on inference device
+- `2026-11-07T16:05:19+00:00` `73bcf7df237f` Add mafia temple render results [skip ci]
+- `2026-11-07T16:04:06+00:00` `b9fdf2542f1c` Check compatible render failure
+- `2026-11-07T15:56:32+00:00` `f51961afcf61` Use staged full-precision components for compatibility
+- `2026-11-07T15:56:02+00:00` `65f64ad74230` Add mafia temple render results [skip ci]
+- `2026-11-07T15:55:11+00:00` `11052503f29e` Identify precise staged inference error
+- `2026-11-07T15:54:41+00:00` `305815119ef5` Add mafia temple render results [skip ci]
+- `2026-11-07T15:53:28+00:00` `91a358b85ce4` Inspect staged video model failure
+- `2026-11-07T15:34:28+00:00` `d1424e80b49e` Deliver approved 61-second rendered stickman English experiment and technical QC [skip ci]
+- `2026-11-07T15:32:52+00:00` `374885657d37` Document stickman experiment and verify original voice timing and sentence-complete subtitles
+- `2026-11-07T15:28:23+00:00` `8a8c7b7d4526` Build approved original 61-second rendered stickman experiment with articulated props and native-frame QC
+- `2026-11-07T15:18:31+00:00` `cd311bc6bafd` Stage text embeddings separately to reduce GPU memory
+- `2026-11-07T15:17:26+00:00` `6bd32858ff70` Add mafia temple render results [skip ci]
+- `2026-11-07T15:16:40+00:00` `ff81399155d5` Trace GPU memory failure location
+- `2026-11-07T15:16:09+00:00` `4a9f6091ed84` Add mafia temple render results [skip ci]
+- `2026-11-07T15:15:13+00:00` `624e399e6d18` Inspect memory-efficient render test
+- `2026-11-07T15:05:39+00:00` `5b3b1476c3f1` Preserve curated reference-frame bursts, shard 0 [skip ci]
+- `2026-11-07T15:04:01+00:00` `2174f0396754` Preserve curated reference-frame bursts, shard 2 [skip ci]
+- `2026-11-07T15:01:57+00:00` `45f1abf212ec` Preserve curated reference-frame bursts, shard 1 [skip ci]
+- `2026-11-07T15:00:05+00:00` `9ec2b409620a` Update study status to verified acquired footage, 22 screened works and active curated frame review
+- `2026-11-07T14:59:37+00:00` `b4b0605db089` Match 18 acquired million-view works and begin complete source-verified one-second acting bursts, not a creative render
+- `2026-11-07T14:59:22+00:00` `2ec267126ef6` chore(monarch-cam): deliver clean-premium V3 35-second ranked-animal Short
+- `2026-11-07T14:56:35+00:00` `f2db7229887a` Record actual visual screening of 27 recovered videos, reject false positives, and document source-specific craft evidence
+- `2026-11-07T14:53:50+00:00` `aa9f977c67eb` Record API identity and reach candidates for actual acquired films [skip ci]
+- `2026-11-07T14:53:04+00:00` `b51366313e89` Verify public canonical source candidates against actual acquired movie cohort
+- `2026-11-07T14:51:31+00:00` `221b897cb2e1` fix(monarch-cam): sparse V3 hit density and restore a clear reveal crest
+- `2026-11-07T14:47:46+00:00` `3deb555eb693` Preserve actual film-frame research, shard 1 [skip ci]
+- `2026-11-07T14:47:16+00:00` `f0aaea0103e3` Preserve actual film-frame research, shard 0 [skip ci]
+- `2026-11-07T14:46:45+00:00` `c8d131cdfdb5` chore(monarch-cam): capture clean-premium V3 ranked-animal Short failure diagnostics
+- `2026-11-07T14:46:34+00:00` `9684f95e9d1c` Preserve actual film-frame research, shard 2 [skip ci]
+- `2026-11-07T14:46:21+00:00` `1514e2815b23` Preserve actual film-frame research, shard 3 [skip ci]
+- `2026-11-07T14:44:27+00:00` `9539ae449bbc` Test memory-efficient video generation
+- `2026-11-07T14:43:37+00:00` `69d873c5446f` Add mafia temple render results [skip ci]
+- `2026-11-07T14:42:52+00:00` `fbca44f71e99` Identify alternative video pipeline memory stage
+- `2026-11-07T14:42:18+00:00` `82748ca88ef8` Add mafia temple render results [skip ci]
+- `2026-11-07T14:42:16+00:00` `4b1d0625c98c` Process remaining real references in disjoint bounded shards with failure-safe evidence preservation
+- `2026-11-07T14:41:40+00:00` `54768af32837` Retrieve render diagnostics without downloading model artifacts
+- `2026-11-07T14:41:26+00:00` `9bb7abb0b528` Bound download wall time, avoid head-of-line result loss, and resume actual footage studies by shard
+- `2026-11-07T14:40:32+00:00` `17662e0ff4ca` Record broadened 3D public-source discovery [skip ci]
+- `2026-11-07T14:40:29+00:00` `39daf781dcfb` Replace stale upload-request blocker with honest alternate-route and actual-footage study status
+- `2026-11-07T14:40:21+00:00` `53b726173678` fix(monarch-cam): cache verified V3 source media and bound source-recon network waits
+- `2026-11-07T14:39:24+00:00` `a48303903afc` Bound real-video retrieval time and verify native frame indexing with CFR and sparse-PTS tests
+- `2026-11-07T14:38:12+00:00` `3c7472a740ee` Record broadened 3D public-source discovery [skip ci]
+- `2026-11-07T14:37:17+00:00` `226ac9d2ea86` Broaden 3D-specific public discovery while actual footage decoding runs
+- `2026-11-07T14:27:38+00:00` `9be937de41d3` Limit diagnostics download to notebook log
+- `2026-11-07T14:20:10+00:00` `1ddbfadeca42` Decode actual public archived films and generate every-frame PTS indices and adjacent research quotes
+- `2026-11-07T14:18:33+00:00` `262140d0e204` Record alternate public footage access and actual decoded research quotations [skip ci]
+- `2026-11-07T14:18:05+00:00` `b0e026239d96` Record actual public browser playback results and timestamped research quotes [skip ci]
+- `2026-11-07T14:18:00+00:00` `f3fbdb72d5b6` Diagnose alternative model resource failure
+- `2026-11-07T14:17:47+00:00` `72734439493d` Expand creator diversity and prepare actual archival video decoding with timestamped research quotes
+- `2026-11-07T14:16:51+00:00` `42048f44e4c6` Record alternate public footage access and actual decoded research quotations [skip ci]
+- `2026-11-07T14:16:14+00:00` `adc350c80443` Investigate public archival footage with explicit source identity and access checks
+- `2026-11-07T14:15:56+00:00` `e13d87aa8d75` Record alternate public footage access and actual decoded research quotations [skip ci]
+- `2026-11-07T14:15:09+00:00` `698b2981d6ac` Follow original Stickpage movie download links and inspect actual media containers
+- `2026-11-07T14:12:30+00:00` `c8e7a2a0ff9f` Test ordinary verified public browser playback for twelve relevant 3D leads
+- `2026-11-07T14:11:44+00:00` `13808f061efa` Record alternate public footage access and actual decoded research quotations [skip ci]
+- `2026-11-07T14:10:53+00:00` `5f8065dcecb4` Investigate creator-hosted public movie routes and decode actual footage for research
+- `2026-11-07T13:49:19+00:00` `84d766f0258c` Compress model pilot notebook input
+- `2026-11-07T13:48:55+00:00` `aec6389ac16e` Add mafia temple render results [skip ci]
+- `2026-11-07T13:47:53+00:00` `0c1c8bd7ae48` Inspect alternative model pilot failure
+- `2026-11-07T13:46:24+00:00` `233eae04d690` Add alternative WAN motion model pilot
+- `2026-11-07T13:44:37+00:00` `5936fa0850c7` Add mafia temple render results [skip ci]
+- `2026-11-07T13:39:17+00:00` `8a4e3023fe71` fix(monarch-cam): soften V3 support accents and music transients
+- `2026-11-07T13:28:21+00:00` `f7dc320d7565` Retry continuous motion with GPU-memory-safe dimensions
+- `2026-11-07T13:27:27+00:00` `73d191d382ea` Add mafia temple render results [skip ci]
+- `2026-11-07T13:26:46+00:00` `51b945e839c1` Identify failed native-frame scenes
+- `2026-11-07T13:26:24+00:00` `e642adf5483a` Add mafia temple render results [skip ci]
+- `2026-11-07T13:26:11+00:00` `e7d07325577c` chore(monarch-cam): capture clean-premium V3 ranked-animal Short failure diagnostics
+- `2026-11-07T13:25:50+00:00` `34b432b04695` Record actual research access blocker, source shortlist and unfulfilled visual-review gate
+- `2026-11-07T13:25:36+00:00` `be9a5fa56888` Diagnose native motion render failure without exposing logs
+- `2026-11-07T13:24:58+00:00` `53f673c1fdd7` Record stickman API discovery and media-access feasibility, not completed forensics [skip ci]
+- `2026-11-07T13:24:15+00:00` `c60c1129965a` Exclude unrelated search hits and test actual relevant footage with a supported JS playback runtime
+- `2026-11-07T13:23:09+00:00` `441e7357578a` Record stickman API discovery and media-access feasibility, not completed forensics [skip ci]
+- `2026-11-07T13:22:13+00:00` `91e1eaa85f49` Begin research-only stickman cohort discovery; preserve V9 and require owner approval before experiment
+- `2026-11-07T13:15:09+00:00` `8c0bc4e08da3` chore(monarch-cam): trigger clean-premium V3 ranked-animal render
+- `2026-11-07T13:14:34+00:00` `9bccf5f289a4` fix(monarch-cam): bound V3 narration slots, preserve 9:16 source aspect and avoid dual workflow triggers [skip ci]
+- `2026-11-07T13:10:33+00:00` `42788a11ac4e` Generate native-length alternatives for motion and face stability
+- `2026-11-07T13:00:12+00:00` `88111ceb3334` Add 20-second mafia temple cinematic video
+- `2026-11-07T05:42:02+00:00` `cf9253ce76de` Record full English 7:19 master delivery and verified QC [skip ci]
+- `2026-11-07T05:41:45+00:00` `c6171e8f5fe2` Record full-master assembly diagnostics [skip ci]
+- `2026-11-07T05:40:43+00:00` `4ac2be2d1634` chore(monarch-cam): add V3 ranked-animal source-recon review sheets [skip ci]
+- `2026-11-07T05:39:21+00:00` `f7aabed9ae3a` Use supported fps_mode passthrough for decoded inspections; preserve all rendered frames
+- `2026-11-07T05:38:48+00:00` `7ec2759c4b08` Record full-master assembly diagnostics [skip ci]
+- `2026-11-07T05:37:26+00:00` `0e9d274e40cb` Recover V9 assembly from all 36 successful shards with durable failure diagnostics
+- `2026-11-07T05:37:22+00:00` `28e6e9fcc1a4` feat(monarch-cam): add clean-premium V3 35-second ranked-animal Short build
+- `2026-11-07T05:25:59+00:00` `ec159d766998` Document material provenance and superseded early inspection honestly
+- `2026-11-07T05:19:25+00:00` `a2855f58a9fd` Add generated mafia temple motion clips [skip ci]
+- `2026-11-07T05:17:03+00:00` `c2006f00f0ed` chore(monarch-cam): add V3 ranked-animal source-recon review sheets [skip ci]
+- `2026-11-07T05:13:18+00:00` `dbecdf187e20` feat(monarch-cam): add V3 ranked-animal source-recon package
+- `2026-11-07T05:08:25+00:00` `cdaede4ebe60` Refine native look and supported props; launch full 13163-frame V9 delivery pipeline
+- `2026-11-07T05:07:11+00:00` `eeb9cf7e3e3a` Retry walk motion with two distinct seeds
+- `2026-11-07T05:05:22+00:00` `52a688ace75f` Add generated mafia temple motion clips [skip ci]
+- `2026-11-07T04:55:31+00:00` `54d6fc4f8ea6` Refine contact-timed sound, true fixed-camera QC and distinct control, archive and reconstruction actions
+- `2026-11-07T04:54:00+00:00` `7aee884273b7` Preserve V9 original actor assets and full-timeline native inspection [skip ci]
+- `2026-11-07T04:51:49+00:00` `469f571d0da2` Build full V9 authored-actor renderer with scene-linked concise text and native inspection gate
+- `2026-11-07T04:46:35+00:00` `23c980720f9c` Trigger mafia GPU render on session branch
+- `2026-11-07T04:46:19+00:00` `3ac71267dc81` Prepare mafia temple AI motion render
+- `2026-11-07T04:19:32+00:00` `7b0632207748` Record V8 one-minute development delivery and measured QC [skip ci]
+- `2026-11-07T03:54:22+00:00` `40c2511f89de` Recover only timed-out V8 second in three bounded jobs and assemble sixty saved native segments
+- `2026-11-07T03:22:03+00:00` `0679c354fae1` Add naturally proportioned AI full-body revision
+- `2026-11-07T03:15:42+00:00` `de2ed3108f68` Add full-body mafia character reference sheet
+- `2026-11-07T01:21:23+00:00` `591b4cbb4955` Preserve V8 native Cycles look-development frames [skip ci]
+- `2026-11-07T01:18:53+00:00` `d9b8fe9368f1` Verify all 61 native shards cover every opening frame exactly once
+- `2026-11-07T01:17:07+00:00` `2194026b2c43` Bound native CPU rendering to one-second shards and remove wasteful invisible noise octaves
+- `2026-11-07T01:07:22+00:00` `aadc245acb24` Preserve V8 native Cycles look-development frames [skip ci]
+- `2026-11-07T00:55:18+00:00` `4abc4a7dffad` Preflight attributed narration-priority audio in parallel and verify mix integrity before assembly
+- `2026-11-07T00:54:44+00:00` `cd0d368b1eda` Use float-tolerant locked-camera QC and remove stale intermediate inspection pair
+- `2026-11-07T00:49:35+00:00` `a6a7f9d803d7` Gate full one-minute native Cycles render after corrected lighting, beds, ground contact and action audit
+- `2026-11-07T00:48:02+00:00` `4c802968ddbd` Preserve decoded final-export inspection and correct locked-camera audit update order
+- `2026-11-07T00:47:48+00:00` `66ec5486bd59` Preserve V8 native Cycles look-development frames [skip ci]
+- `2026-11-07T00:44:05+00:00` `8811d047c956` Record real camera and soft-surface state for locked-camera action verification
+- `2026-11-07T00:39:28+00:00` `d58bb0903611` Give laboratory contact stage dimensional context and keep support apparatus in frame
+- `2026-11-07T00:38:19+00:00` `1802e72f66d7` Keep ear hinges and trunk details attached through soft deformation; remove unmotivated cue
+- `2026-11-07T00:37:28+00:00` `fc53d0f1d4ba` Cache static ray-tracing data and stage a shore-to-fjord crane reveal
+- `2026-11-07T00:36:40+00:00` `e3cd60e5ac93` Correct native look-development failures: floating stones, stretched noise, flat horizons and macro geometry
+- `2026-11-07T00:34:18+00:00` `97d19f05160a` Stage a distinct wetland return and align receiver motion with physical rails
+- `2026-11-07T00:33:11+00:00` `2eb88cec564e` Preserve V8 native Cycles look-development frames [skip ci]
+- `2026-11-07T00:26:12+00:00` `b2a110de8d03` Add unchanged-voice premium opening assembly, soft event mix and contract tests
+- `2026-11-07T00:24:13+00:00` `f2a853cfd16f` Build fresh Cycles continuous-sculpt one-minute opening and native look-development gate
+- `2026-11-07T00:12:31+00:00` `e2452e3317d8` docs(monarch-cam): correct V2 credits and premaster ceiling wording [skip ci]
+- `2026-11-07T00:06:59+00:00` `4bda15989b1c` chore(monarch-cam): deliver clean-premium V2 24-second albatross dance Short
+- `2026-11-07T00:01:13+00:00` `70bd00bb56ef` feat(monarch-cam): add clean-premium V2 24-second albatross Short build
+- `2026-11-06T23:16:31+00:00` `826103e57a40` Record full English 7:19 master delivery and verified QC [skip ci]
+- `2026-11-06T23:11:14+00:00` `7131c490756b` chore(monarch-cam): deliver clean-premium 24-second albatross dance Short
+- `2026-11-06T23:04:40+00:00` `0725072481af` feat(monarch-cam): add clean-premium 24-second albatross Short build
+- `2026-11-06T23:00:03+00:00` `6b2af43a46ee` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-06T22:58:29+00:00` `5b876cab3b1e` Merge remote-tracking branch 'origin/main' into arena/8bfd4d0e-monarch-overall-work
+- `2026-11-06T22:49:43+00:00` `e80a12c932c8` Preserve floating music peaks and guard source/crossfade headroom before full mix
+- `2026-11-06T22:48:34+00:00` `c64155c08c0d` Implement full 7:19 English 3D master with distinct science sets and full sound coverage
+- `2026-11-07T02:28:08+05:00` `ac3a5295903b` Merge pull request #4 from adil-chandio/arena/c678cc81-monarch-overall-work
+- `2026-11-06T21:01:54+00:00` `26e0afe45fe1` chore(monarch-cam): deliver premium 24-second albatross dance Short
+- `2026-11-06T20:54:52+00:00` `3ecc7cb6d039` fix(monarch-cam): broadcast premium grain across three channels
+- `2026-11-06T20:54:21+00:00` `8c5e2f479972` chore(monarch-cam): capture premium albatross Short failure diagnostics
+- `2026-11-06T20:52:07+00:00` `18863cb94738` fix(monarch-cam): make premium cinematic grade shape-aware
+- `2026-11-06T20:50:46+00:00` `7081df78d366` chore(monarch-cam): capture premium albatross Short failure diagnostics
+- `2026-11-06T20:48:33+00:00` `91f366d5968c` Record released moving-3D excerpt QC and attribution [skip ci]
+- `2026-11-06T20:48:18+00:00` `ae8ceec8a832` feat(monarch-cam): build premium 24s albatross dance Short package
+- `2026-11-06T20:36:11+00:00` `5ee90309a3e0` Rebuild foley for soft material texture, smooth dialogue priority and restrained surface detail
+- `2026-11-06T19:29:50+00:00` `ba605cf270de` Record released moving-3D excerpt QC and attribution [skip ci]
+- `2026-11-06T19:17:48+00:00` `23eb99ec9a0a` Deepen accepted moving 3D with visible transport, growing strata and continuous contact actions
+- `2026-11-06T18:26:51+00:00` `124f2d97c545` Record published actual-motion excerpt delivery [skip ci]
+- `2026-11-06T18:26:44+00:00` `b2eb2519ed0f` Record actual 3D assembly measurements or explicit failure diagnostics [skip ci]
+- `2026-11-06T18:25:33+00:00` `ab2e3aafe7e4` Run saved-native assembly recovery after credit metadata fix
+- `2026-11-06T18:25:22+00:00` `8e25caf063d7` Fix FFmpeg credit metadata key=value argument; reuse attributed downloaded music artifact
+- `2026-11-06T18:24:44+00:00` `dcef1b643479` Record actual 3D assembly measurements or explicit failure diagnostics [skip ci]
+- `2026-11-06T18:23:46+00:00` `e243ccebceb6` Recover 3D assembly from native artifacts and retain explicit failure measurements
+- `2026-11-06T18:20:29+00:00` `27510085dc71` Disable rejected V5 slideshow render workflow; retain historical audit source
+- `2026-11-06T18:16:03+00:00` `9148f615ecb9` Guard master identity, native excerpt coverage and honest 3D/music scope
+- `2026-11-06T18:11:43+00:00` `da17da21c4f7` Mark rejected V5 presentation approval as superseded by moving-3D correction
+- `2026-11-06T18:09:43+00:00` `29033e2b4bb1` Return to V4 moving 3D: planted-foot motion, articulated takeoff and new spatial evidence action
+- `2026-11-06T17:53:49+00:00` `12c8b2221f28` chore(monarch-cam): deliver new-topic 24-second albatross dance Short
+- `2026-11-06T17:47:22+00:00` `95f96f46471c` fix(monarch-cam): keep dance narration within natural tempo slots
+- `2026-11-06T17:46:30+00:00` `9dfa14de5cce` Record released V5 development checkpoint provenance [skip ci]
+- `2026-11-06T17:45:12+00:00` `d2333a5a45e4` chore(monarch-cam): capture new-topic albatross Short failure diagnostics
+- `2026-11-06T17:44:58+00:00` `98cb8ffe4ae8` Deliver V5 development checkpoint through Actions after sandbox upload EOF
+- `2026-11-06T17:43:41+00:00` `c4cf359c3d44` Begin approved V5: six original style frames and continuous 60s graphics development proof
+- `2026-11-06T17:42:16+00:00` `6603066e814a` fix(monarch-cam): add bounded atempo fitting margin for dance narration
+- `2026-11-06T17:41:14+00:00` `675e93c2e682` chore(monarch-cam): capture new-topic albatross Short failure diagnostics
+- `2026-11-06T17:38:19+00:00` `b8462e036fef` fix(monarch-cam): shorten dance voice slots to fit natural tempo
+- `2026-11-06T17:36:31+00:00` `8d50819c94d0` chore(monarch-cam): capture new-topic albatross Short failure diagnostics
+- `2026-11-06T17:32:54+00:00` `2aaaf29ea6a3` fix(monarch-cam): fit dance voice slots and stage all diagnostics
+- `2026-11-06T17:26:10+00:00` `30affa34a5d6` Plan complete V5 visual storytelling with sampled production research; require owner approval
+- `2026-11-06T17:24:37+00:00` `c85fdf7219ec` fix(monarch-cam): align dance rights policy and metadata guardrails
+- `2026-11-06T17:21:46+00:00` `d9949dac1a92` chore(monarch-cam): capture new-topic albatross Short failure diagnostics
+- `2026-11-06T17:20:17+00:00` `3e6396170d93` feat(monarch-cam): build new-topic 24-second albatross dance Short
+- `2026-11-06T17:15:02+00:00` `f3271791eb00` Record public production-craft retrieval evidence [skip ci]
+- `2026-11-06T17:07:34+00:00` `654650e44e52` Research public production craft via publisher media, not script-only inference
+- `2026-11-06T16:54:26+00:00` `27348a3b3bbf` chore(monarch-cam): add public-domain albatross dance source review
+- `2026-11-06T16:52:59+00:00` `c3cd4de5d79c` fix(monarch-cam): use static ffmpeg for source review instead of apt
+- `2026-11-06T16:34:29+00:00` `606cbbb3be2c` fix(monarch-cam): widen source-review install budget
+- `2026-11-06T16:27:26+00:00` `d0365025a827` chore(monarch-cam): trigger albatross dance source review
+- `2026-11-06T16:25:26+00:00` `4f3c77e25318` feat(monarch-cam): lock new albatross-dance topic and public-domain source review
+- `2026-11-06T16:18:21+00:00` `7296243dddca` Record successful full v4 export, peak fix and durable download
+- `2026-11-06T16:14:20+00:00` `9a47c906ccb8` Fix final AAC true-peak overshoot with oversampled limiter; retain strict QC
+- `2026-11-06T16:09:34+00:00` `4d64cbfdc3db` Recover v4 assembly from sixteen saved renders with actionable error diagnostics
+- `2026-11-06T14:52:21+00:00` `c5c87e870503` Record active corrected v4 render and cancelled superseded run
+- `2026-11-06T14:49:49+00:00` `f24f5ec7d006` Remove lab phase-wrap replay and supersede earlier v4 render automatically
+- `2026-11-06T14:48:16+00:00` `a6681e3a49ae` Replace forced cuts with continuous v4 direction, distinct sets and revised sound mix
+- `2026-11-06T14:39:20+00:00` `779cf83a4417` chore(monarch-cam): deliver analytics-driven 20-second Short
+- `2026-11-06T14:31:01+00:00` `055ca52f393a` fix(monarch-cam): bound setup installs against runner hangs
+- `2026-11-06T14:15:49+00:00` `ed79967faa31` Synchronize portfolio rebuild reveals with cursors
+- `2026-11-06T13:59:24+00:00` `234cebae2958` Add reference-inspired portfolio rebuild tour
+- `2026-11-06T13:58:22+00:00` `46859919d2a2` fix(monarch-cam): fit 20-second narration slots without rushing
+- `2026-11-06T13:55:49+00:00` `7295bf204551` chore(monarch-cam): capture 20-second follow-up Short failure diagnostics
+- `2026-11-06T13:50:56+00:00` `5600fef7bb09` feat(monarch-cam): build analytics-driven 20-second retention Short
+- `2026-11-06T13:19:21+00:00` `bc485a6684cb` Record eight-chapter native checks and running full render honestly
+- `2026-11-06T13:16:36+00:00` `aa33ec7dadd7` Enable branch-scoped first full-film render trigger
+- `2026-11-06T13:16:12+00:00` `02e441ae1468` Build fresh v3 full-English 3D film candidate and parallel render pipeline
+- `2026-11-06T13:06:29+00:00` `4259e312e721` Prepare portfolio website with new MONARCH showcase
+- `2026-11-06T12:08:46+00:00` `1efbf823c51a` Write original hooked Greenland script v3 with faithful Urdu review
+- `2026-11-06T04:53:04+00:00` `43aab4442f68` Decode nineteen additional niche scripts and apply narrative findings
+- `2026-11-06T04:42:11+00:00` `15f698c0594e` Record expanded public script corpus evidence [skip ci]
+- `2026-11-06T04:40:16+00:00` `14af0fcf64e8` Expand public script corpus and API comparison frame
+- `2026-11-06T04:27:56+00:00` `579d78c7c71c` Add transcript-led script forensics and paired master v2 [skip ci]
+- `2026-11-06T04:15:36+00:00` `eedb07365db3` Record public caption access and script-study timing evidence [skip ci]
+- `2026-11-06T04:14:42+00:00` `a9733c878822` Hold obsolete-script rendering and launch public transcript forensic research
+- `2026-11-06T03:59:39+00:00` `4709e61a9d9b` Record launched 3D production run and remaining feature work
+- `2026-11-06T03:58:30+00:00` `d51ad23698d2` Start approved-style 3D flagship production with authored preservation sequence
+- `2026-11-06T03:23:29+00:00` `5892846826cf` Add 24-second continuous 3D sediment flow proof for owner review
+- `2026-11-06T01:41:05+00:00` `a37b29981351` Rebuild full film as Urdu-English review cut with 231 phrase-driven shots under 3 seconds
+- `2026-11-06T01:34:57+00:00` `2572f95f4b16` Ship portfolio v37 with Renando-style cinematic open.
+- `2026-11-06T00:42:11+00:00` `38802101749d` Deliver complete 7m31 Amber Atlas film with new narration, animated scenes and full encode QA
+- `2026-11-06T00:07:47+00:00` `fa073bcc6a7f` Create no-stock 2.5D ocean documentary cut
+- `2026-11-05T23:42:48+00:00` `3ac609e00d22` Smooth character motion in MONARCH portfolio
+- `2026-11-05T23:35:19+00:00` `a54251e73a1c` Showcase seven enhanced videos in main portfolio
+- `2026-11-05T23:19:55+00:00` `764cf5c679a1` Enhance all seven MONARCH reference adaptations
+- `2026-11-05T22:42:57+00:00` `53778fe3fe8f` Clean opening revision README formatting
+- `2026-11-05T22:42:47+00:00` `2515614ada0f` Polish Amber Atlas opening with keyed camera, cleaner anatomy and cinematic transitions
+- `2026-11-05T22:28:50+00:00` `2af84f9897fe` Create layered 2.5D duck documentary rough cut
+- `2026-11-05T22:26:11+00:00` `0a4dc0d9ff74` Add seventh MONARCH reference adaptation
+- `2026-11-05T22:12:06+00:00` `7ce3e91841bb` Add main-frame crop of sixth adaptation
+- `2026-11-05T22:06:35+00:00` `bd4e837892e5` Add sixth MONARCH reference adaptation
+- `2026-11-05T22:05:40+00:00` `03b5735de8d0` Add Amber Atlas 2.5D opening comparison and downloadable video
+- `2026-11-05T21:46:55+00:00` `37498b628eda` Add fifth MONARCH reference adaptation
+- `2026-11-05T21:40:04+00:00` `3a1b2a344dd2` Build new moving-footage documentary rough cut
+- `2026-11-05T21:36:32+00:00` `4923d34bdaf0` Add attributed documentary B-roll excerpts [skip ci]
+- `2026-11-05T21:35:26+00:00` `5d7322a2ac59` Add fourth MONARCH reference adaptation
+- `2026-11-05T21:35:02+00:00` `1da178be25ce` Prepare licensed moving footage for documentary edit
+- `2026-11-05T21:34:55+00:00` `7fdf6510be5c` Add Extinct Life 45-second opening v2 video download
+- `2026-11-05T21:23:45+00:00` `f28ad906b6c0` Add third MONARCH reference recreation
+- `2026-11-05T21:20:29+00:00` `814e82f18206` Re-edit duck cut with attributed moving ocean footage
+- `2026-11-05T21:18:55+00:00` `4a96951ee610` Add attributed CC BY illustrative waves [skip ci]
+- `2026-11-05T21:18:22+00:00` `1e7c5a810075` Fetch CC BY wave footage for revised edit
+- `2026-11-05T21:17:48+00:00` `b39b95e4f8dc` Add NOAA illustrative ocean footage [skip ci]
+- `2026-11-05T21:17:36+00:00` `38d3d2e0ec29` Avoid ffprobe dependency in footage fetch
+- `2026-11-05T21:17:09+00:00` `7ba2aa630c1d` Fetch NOAA ocean footage for revised edit
+- `2026-11-05T21:14:45+00:00` `3120a4314d6f` Add second MONARCH reference recreation
+- `2026-11-05T21:07:54+00:00` `9cf024598411` Add first MONARCH reference recreation
+- `2026-11-05T20:22:39+00:00` `df6c289d0655` Create original editing studies and upgrade portfolio showcase
+- `2026-11-05T20:04:58+00:00` `b5f1283f34bc` Add procedural 3D ocean motion study
+- `2026-11-05T19:54:24+00:00` `f38915a3bda4` Add animated ocean-toy video
+- `2026-11-05T19:52:22+00:00` `c75a983f381d` Reset Extinct Life production direction and add real procedural 3D motion lab
+- `2026-11-05T19:50:36+00:00` `9d4aa6dbd657` Add animated ocean-toy film prototype
+- `2026-11-05T19:47:57+00:00` `66d55fa06bcc` Enhance MONARCH portfolio motion and showcase
+- `2026-11-05T19:36:48+00:00` `c5a34b6a666f` docs(yt): record actual opening-media access evidence [skip ci]
+- `2026-11-05T19:36:15+00:00` `7d60732f6f90` Add bounded competitor opening-media review on session branch
+- `2026-11-05T19:27:27+00:00` `da1b28112c53` Build MONARCH masked portfolio video
+- `2026-11-05T19:26:49+00:00` `41a68ef8d007` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T19:24:38+00:00` `c16b12fb6a16` Add Extinct Life episode 001 first-cut video for download
+- `2026-11-05T19:09:38+00:00` `7786146a8c91` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T19:05:04+00:00` `d94ad8ab2543` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T19:04:13+00:00` `689a6d9a6ee9` Build v7 reference-inspired edit and original score
+- `2026-11-05T19:01:31+00:00` `2219a2b03be9` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T18:54:43+00:00` `1d87c5dd0c5b` Stage A: per-shot camera layer (push + crash-zoom punches + jitter + white flash)
+- `2026-11-05T18:47:13+00:00` `d2ec6f45a552` Record MONARCHs Edit public channel inventory [skip ci]
+- `2026-11-05T18:46:50+00:00` `9afb398faeba` Sample broad English YouTube content niches
+- `2026-11-05T18:27:21+00:00` `25426b181354` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T18:23:49+00:00` `be300c22c1b8` docs(yt-strategy): assess English-market evidence and define original content pilots
+- `2026-11-05T18:19:27+00:00` `bc8b0ee4250e` docs(yt): record current English market research sample
+- `2026-11-05T18:19:00+00:00` `912f36bbce3b` forensic pass on REF: measured shot map, camera numbers, text keyframes, sound bands
+- `2026-11-05T18:18:11+00:00` `dc6b6b9be61f` feat(yt-research): inspect relevant competitor catalogues and public thumbnail packaging
+- `2026-11-05T18:17:54+00:00` `0a7a96e72c5a` Record MONARCHs Edit public channel inventory [skip ci]
+- `2026-11-05T18:17:34+00:00` `05f358b2f02a` Research English language US and UK content markets
+- `2026-11-05T18:17:14+00:00` `f67860b88f2f` docs(yt): record current English market research sample
+- `2026-11-05T18:15:59+00:00` `6c14947b9061` feat(yt-research): sample recent English prehistoric and adjacent markets
+- `2026-11-05T18:11:59+00:00` `5c2f4977bcc6` Record MONARCHs Edit public channel inventory [skip ci]
+- `2026-11-05T18:11:38+00:00` `1e62f4faf791` Merge remote-tracking branch 'origin/arena/1f352b8e-monarch-overall-work' into arena/1f352b8e-monarch-overall-work Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+- `2026-11-05T18:11:27+00:00` `ef5f57afd605` Research recent comparable YouTube videos
+- `2026-11-05T17:34:02+00:00` `eea74432b70b` docs(monarch-cam): add viral-oriented Short metadata pack
+- `2026-11-05T17:32:01+00:00` `d8fb64ae5eea` Record MONARCHs Edit public channel inventory [skip ci]
+- `2026-11-05T17:31:29+00:00` `78a984c5253a` Collect public comment samples for channel audit
+- `2026-11-05T17:31:04+00:00` `abba9f69854c` Record MONARCHs Edit public channel inventory [skip ci]
+- `2026-11-05T17:30:36+00:00` `b58f224bedb1` docs(yt): analyze recovered Extinct Life public inventory and retrieval limits
+- `2026-11-05T17:30:30+00:00` `3a5ca15fd7e9` Attempt frame-level audit of public channel videos
+- `2026-11-05T17:30:00+00:00` `9a31044ba310` Record MONARCHs Edit public channel inventory [skip ci]
+- `2026-11-05T17:29:47+00:00` `c863c9119d96` Save public channel inventory from audit run
+- `2026-11-05T17:29:28+00:00` `76a89f05d2ae` docs(yt): record Extinct Life public API evidence
+- `2026-11-05T17:29:15+00:00` `541515593e24` Trigger channel audit on session branch
+- `2026-11-05T17:29:02+00:00` `3765e7c5243e` fix(yt-audit): publish public evidence on session branch for restricted artifact networks
+- `2026-11-05T17:29:02+00:00` `f367a27a9983` Add read-only YouTube channel audit workflow
+- `2026-11-05T17:28:02+00:00` `477186f88b1c` fix(yt-intel): use API for complete channel inventory and add channel audit runner
+- `2026-11-05T17:10:51+00:00` `2a6101351927` docs(monarch-cam): record final 35-second Short review
+- `2026-11-05T17:04:49+00:00` `afe65adee402` chore(monarch-cam): deliver 35-second vertical bear Short
+- `2026-11-05T16:58:29+00:00` `e3a0f6ba8580` fix(monarch-cam): polish vertical Short and restore model review
+- `2026-11-05T16:55:38+00:00` `70480ae506e0` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T16:53:41+00:00` `e62b421b86cb` chore(monarch-cam): deliver 35-second vertical bear Short
+- `2026-11-05T16:47:51+00:00` `649993501364` fix(monarch-cam): harden 35-second Short render and audio integration
+- `2026-11-05T16:39:55+00:00` `d57e172cc8f8` chore(monarch-cam): capture 35-second Short failure diagnostics
+- `2026-11-05T16:38:10+00:00` `40a5ac3d6dd4` feat(monarch-cam): produce research-led 35-second vertical Short
+- `2026-11-05T16:35:07+00:00` `357710bb9a0d` v6-11: fix what the frame-by-frame review found
+- `2026-11-05T16:26:57+00:00` `2ce9c4446785` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T16:10:56+00:00` `5eccfe1ce692` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T16:05:39+00:00` `af73bef02f96` v6: the whole edit, 0.000-23.267 s, picture and sound
+- `2026-11-05T15:56:14+00:00` `552bb7b67287` chore(monarch-cam): deliver licensed soundtrack V2
+- `2026-11-05T15:47:54+00:00` `8141bcc854ce` fix(monarch-cam): remove AAC clicks and tighten cut sync
+- `2026-11-05T15:41:42+00:00` `da9dc16c8969` chore(monarch-cam): capture soundtrack V2 failure diagnostics
+- `2026-11-05T15:33:16+00:00` `894174d52610` fix(monarch-cam): calibrate loudness on AAC delivery
+- `2026-11-05T15:30:50+00:00` `dfe7dbc73548` chore(monarch-cam): capture soundtrack V2 failure diagnostics
+- `2026-11-05T15:23:03+00:00` `40fe983380f9` fix(monarch-cam): preserve AAC true-peak headroom
+- `2026-11-05T15:20:06+00:00` `ece97ff900a1` chore(monarch-cam): capture soundtrack V2 failure diagnostics
+- `2026-11-05T15:12:40+00:00` `50388529d717` feat(monarch-cam): build licensed frame-synced soundtrack V2
+- `2026-11-05T15:12:37+00:00` `5493dd5e4634` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T14:58:07+00:00` `d459b16fa149` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T14:52:06+00:00` `c3964fd48bb9` v5-35: sound — earshot bank effects on the measured cuts, bed graded to the reference spectrum
+- `2026-11-05T14:41:41+00:00` `8f523171f30e` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T14:35:31+00:00` `848271c7e603` v5: build the room from the plate's own back/front pair
+- `2026-11-05T14:33:26+00:00` `31494b9dec4f` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T14:27:23+00:00` `274b8ee34664` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T14:27:01+00:00` `3bbafacc96ac` v5: real perspective on every plane, contact shadow, and a parallax proof clip
+- `2026-11-05T14:24:32+00:00` `4214c71ced69` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T14:18:15+00:00` `99d2342f589f` v5: real 3D camera, layers at depth, cutouts feathered into the room
+- `2026-11-05T14:11:29+00:00` `09d48c3a32c2` chore(monarch-cam): render reviewed 30 second opening
+- `2026-11-05T14:08:52+00:00` `17ae28469066` fix(monarch-cam): retry transient narration failures
+- `2026-11-05T14:07:39+00:00` `aa70615701fa` chore(monarch-cam): capture preview failure diagnostics
+- `2026-11-05T14:06:33+00:00` `559fa8c83c41` fix(monarch-cam): remove unsupported empty-car claim
+- `2026-11-05T14:04:59+00:00` `34e132f102a6` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T13:58:26+00:00` `da2a4c2fdafb` v5: the reference's edit built from our own objects, first 7 s
+- `2026-11-05T13:58:25+00:00` `5e689261455b` rebuild 0.00-0.80s from measurements only: plate surface + Archivo Black + motion table
+- `2026-11-05T13:58:25+00:00` `b4715b3c9cdf` measure the gap: previous 'exact' 7s was a re-encode of REF frames, not a build
+- `2026-11-05T04:03:27+00:00` `a696cb61ad11` chore(monarch-cam): render reviewed 30 second opening
+- `2026-11-05T03:59:23+00:00` `e18fd87191e0` fix(monarch-cam): preserve accent colors in video overlays
+- `2026-11-05T03:57:16+00:00` `a66b0b0e671b` chore(monarch-cam): render reviewed 30 second opening
+- `2026-11-05T03:53:31+00:00` `0a1426928ad6` fix(monarch-cam): gate audio before preview rendering
+- `2026-11-05T03:49:03+00:00` `968e6e8a9443` chore(monarch-cam): capture preview failure diagnostics
+- `2026-11-05T03:45:33+00:00` `184a511ab6c0` feat(monarch-cam): add reviewed 30-second preview pipeline
+- `2026-11-05T03:23:18+00:00` `7abdfc2810c3` chore(monarch-cam): add NPS visual source review
+- `2026-11-05T03:21:40+00:00` `bafa14ea14a2` fix(monarch-cam): resolve fine-review workspace path
+- `2026-11-05T03:18:48+00:00` `3d5602d4c764` chore(monarch-cam): add fine footage review
+- `2026-11-05T03:14:41+00:00` `0eca540e698b` chore(monarch-cam): add NPS visual source review
+- `2026-11-05T03:12:56+00:00` `aea5aa2db6f3` chore(monarch-cam): return visual recon to branch
+- `2026-11-05T03:09:10+00:00` `60db2bee2335` feat(monarch-cam): add public-domain source recon
+- `2026-11-05T02:33:14+00:00` `023308719fd9` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T02:18:39+00:00` `382e7609cc40` docs(v4): the first 3 s, reference above and build below, at the same timestamps
+- `2026-11-05T02:17:43+00:00` `bcc873f5d82d` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T02:13:38+00:00` `4135d01c1439` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T02:12:15+00:00` `ac3a3821c2cf` fix(v4): the drain started before the plate it drains was on screen
+- `2026-11-05T02:11:26+00:00` `73157d3da9f6` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T02:05:49+00:00` `74315b4188b5` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T02:05:00+00:00` `ab67edd303da` fix(v4): the entry crossfade was long enough to show the bag twice
+- `2026-11-05T02:04:09+00:00` `4c96fb2f9e93` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T02:00:28+00:00` `e7893dc16bd0` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T01:59:44+00:00` `af010b13c038` fix(v4): the shot darkens as it settles, measured at 0.83 of its own brightness
+- `2026-11-05T01:58:30+00:00` `0c25edff644f` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T01:53:52+00:00` `b1ab87f162a6` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T01:53:02+00:00` `ee59b82b5e93` fix(v4): s5 does not zoom — it drifts 13 px, and a drift costs no detail
+- `2026-11-05T01:51:44+00:00` `a2748a75383c` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T01:46:01+00:00` `e36c0a3e44a7` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T01:45:38+00:00` `cd80f739112d` fix(v4): the push was a transform, and a transform resamples the finished raster
+- `2026-11-05T01:44:24+00:00` `ef75683e9015` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T01:39:26+00:00` `e54363e9be59` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T01:38:18+00:00` `0f4a0e721e6f` probe(ci): calibrate the pipeline with a checkerboard instead of arguing about plates
+- `2026-11-05T01:37:36+00:00` `49448ccb202d` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T01:30:21+00:00` `2208f43e7b7c` fix(render): resolve the ffmpeg paths before the frame loop uses them
+- `2026-11-05T01:27:48+00:00` `6f44416d1c1a` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T01:27:19+00:00` `f20ef76c5561` fix(render): --ss 2 was a no-op, which is why the detail never came back
+- `2026-11-05T01:26:16+00:00` `70aa78e885a2` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T01:19:58+00:00` `70485c651089` docs(v4): s5 measured against the reference, and the one thing still open
+- `2026-11-05T01:10:29+00:00` `8559b628f4b1` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T01:03:44+00:00` `741b2f6afa8b` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T01:00:39+00:00` `ef76970ce083` fix(ci): the full render will never again hold the queue the checkpoint needs
+- `2026-11-05T00:42:46+00:00` `a88b0eccba7d` probe(ci): measure the browser's half of the sharpness loss instead of guessing at it
+- `2026-11-05T00:41:24+00:00` `42c66bf4a840` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T00:35:09+00:00` `a00714e60544` fix(render): the browser was throwing away half the plate's detail, and the file was untagged
+- `2026-11-05T00:33:48+00:00` `f73de86a9660` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-05T00:31:03+00:00` `644ddcfbccf5` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-05T00:24:12+00:00` `11e218e75e68` guard(v4): refuse a soft plate in the one shot that racks focus
+- `2026-11-05T00:08:04+00:00` `b8e9cc545cd4` chore(v4): re-trigger the checkpoint after the cancelled queued run
+- `2026-11-05T00:03:54+00:00` `78bb14d49576` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T23:56:04+00:00` `d87ac5a28ac8` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T23:51:39+00:00` `4b81da25f44b` chore(ci): say why the render yields to the checkpoint in the apt queue
+- `2026-11-04T23:50:33+00:00` `94a01b030bec` fix(ci): ffmpeg really is needed — install just it, and skip apt-get update
+- `2026-11-04T23:50:06+00:00` `4ab79c536285` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T23:48:00+00:00` `357b5438d4a6` fix(render): ask ffbin where ffmpeg is, and say why the encode failed
+- `2026-11-04T23:44:42+00:00` `6debebc013f5` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T23:42:28+00:00` `70d709b92579` chore(ci): carry the render's failure tail into an annotation
+- `2026-11-04T23:41:50+00:00` `832ba54fd554` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T23:39:29+00:00` `0cc608c5e430` chore(ci): print the encode's own error when the checkpoint render fails
+- `2026-11-04T23:39:05+00:00` `11a48df2fa6c` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T23:36:33+00:00` `e505c438e1e7` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T23:28:06+00:00` `7fb2db064e36` fix(ci): the checkpoint check needs nothing installed, so it no longer installs anything
+- `2026-11-04T23:11:20+00:00` `5824845e4588` fix(v4): the shot racks focus, and 1.85 s was its softest frame
+- `2026-11-04T23:09:58+00:00` `c3408174f359` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T23:06:03+00:00` `c74706e316e8` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T22:54:51+00:00` `37a8dc0badc3` fix(v4): the plate blur was for hand-built plates and is now working against us
+- `2026-11-04T22:53:27+00:00` `ceb00f2f23f3` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T22:50:10+00:00` `5b07e176a74a` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T22:42:13+00:00` `015ff25dff11` fix(v4): the plate had BILLION baked into it, and the drain corrupted its hues
+- `2026-11-04T22:34:24+00:00` `ac7fa5da49ce` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T22:31:07+00:00` `cf3d6b981fb6` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T22:23:12+00:00` `e079b02a0d45` fix(ci): stop pinning a downloaded python that cannot see the apt packages
+- `2026-11-04T22:21:00+00:00` `551db798375b` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T22:19:12+00:00` `784b573fa0c2` fix(v4): the cut was a frame early, and the last 0.7 s of colour needed the frame itself
+- `2026-11-04T22:08:54+00:00` `9aa7d7e3f3d5` fix(ci): numpy from apt, not pip — the install was stalling for eight minutes
+- `2026-11-04T21:58:02+00:00` `020f500ff8de` fix(ci): remove the duplicate concurrency key I had just added
+- `2026-11-04T21:55:41+00:00` `b1d203852a46` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T21:50:08+00:00` `40272f8cb7a4` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T21:47:12+00:00` `b7004748a97a` fix(ci): the checkpoint and the render were racing for the apt lock
+- `2026-11-04T21:29:15+00:00` `f36590dfb6a7` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T21:21:07+00:00` `e4b16e3256bf` fix(v4): the two type layers were split inside NO, and the green was held flat
+- `2026-11-04T21:18:20+00:00` `737d1c1b7b28` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T21:16:59+00:00` `28e6b8406090` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T21:15:31+00:00` `437c19fae277` fix(v4): type arrives, it does not fly in — and the cut-out is opaque
+- `2026-11-04T21:12:28+00:00` `acfea7800fe9` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T21:09:31+00:00` `3c40a146e97b` fix(v4): s5's push was five times the reference's, and the green comes UP before it goes
+- `2026-11-04T21:05:41+00:00` `34cb0cd46282` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:53:44+00:00` `1d16ad78e992` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T20:53:01+00:00` `73d72d0ba7de` fix(v4): s5's plate is the frame with no type in it, and the colour is animated
+- `2026-11-04T20:47:51+00:00` `ec5c1b643151` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:44:59+00:00` `ff9dad7e4a91` fix(ci): the checkpoint job never installed numpy, so its own check exited 1
+- `2026-11-04T20:44:20+00:00` `fca994a3616f` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:42:10+00:00` `d710ca12bf88` fix(ci): the checkpoint check as a tool, not a heredoc inside YAML
+- `2026-11-04T20:41:35+00:00` `e5fad0a081e5` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:40:35+00:00` `2204e7977ba8` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T20:39:22+00:00` `910339aa5095` fix(v4): s5's plate was an earlier moment, and two CI wiring faults
+- `2026-11-04T20:36:29+00:00` `1d7e4df57db1` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:33:54+00:00` `6507f37e2bbd` fix(checkpoint): compare 210 frames to 210, and check the part render on its own terms
+- `2026-11-04T20:33:43+00:00` `3743094af377` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T20:27:44+00:00` `3890f7475091` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:26:02+00:00` `43ad4c75d4b9` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T20:25:27+00:00` `d9b3e0981ee1` fix(tools): find ffmpeg wherever it is, instead of hard-coding one path
+- `2026-11-04T20:24:42+00:00` `93183186d720` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:23:10+00:00` `a514131115df` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T20:22:28+00:00` `c8456af092af` feat(v4): NO is its own layer — cut by unmixing two reference frames
+- `2026-11-04T20:20:40+00:00` `6a1f2ebf2f20` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:17:48+00:00` `51e9529eb64d` fix(ci): the encode check compared a checkpoint against the whole film
+- `2026-11-04T20:13:13+00:00` `a641d27b7895` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T20:08:15+00:00` `2cdd78651c51` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T20:05:42+00:00` `f67ef90e6fee` feat(v4): take the plates from the reference itself — 1:1, no cut, no seam
+- `2026-11-04T20:01:03+00:00` `aeea93cf5b6e` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T19:57:02+00:00` `4176d727a0cc` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T19:55:14+00:00` `e0848935c922` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T19:54:17+00:00` `b11dd9d51504` docs(v4): the checkpoint's own numbers, and the four things still wrong with it
+- `2026-11-04T19:52:46+00:00` `f352dc011d81` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T19:51:09+00:00` `61e960d1bc3e` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T19:49:47+00:00` `59ebceb52998` fix(ci): make the checkpoint render say why it failed, in the repo
+- `2026-11-04T19:49:21+00:00` `c634fb4eea78` checkpoint(v4): first 30 % for approval [skip ci]
+- `2026-11-04T19:46:57+00:00` `a5e379ddc022` fix(ci): one install for every node dep — a second --no-save pruned puppeteer
+- `2026-11-04T19:44:32+00:00` `e4877c98cf9c` feat(v4): real depth in s6 — three planes on one camera, and a 30 % checkpoint
+- `2026-11-04T18:30:46+00:00` `6cb19f6a3778` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T18:17:22+00:00` `2e3b870ff11f` feat(demo): a page that plays the v4 master next to the reference it matches
+- `2026-11-04T18:15:06+00:00` `a85e00b55090` docs(v4): Kya Kiya / Kya Nahi, with every failing row and its measured gap
+- `2026-11-04T18:12:25+00:00` `cbdaf1ed1011` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T17:58:44+00:00` `1401f52b4cf5` fix(v4): put the CTA's yellow pill where the reference actually puts it
+- `2026-11-04T17:57:28+00:00` `69d862464582` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T17:49:46+00:00` `47e210370502` revert(v4): grading shot 7 up to the reference's colour costs the 9.133s cut
+- `2026-11-04T17:39:13+00:00` `041df9be8d36` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T17:30:28+00:00` `3cef0fabc86f` fix(v4): grade shot 7 to the reference's own measured colour, and soften the plates
+- `2026-11-04T17:22:55+00:00` `34d4c6b0c9c3` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T17:11:33+00:00` `f3fdec0dbc79` ci(v4): watch every tool the render depends on, not just the diff
+- `2026-11-04T17:05:44+00:00` `777a5d40d666` fix(v4): the composition gate was asserting my old flash height, not the reference's
+- `2026-11-04T17:02:11+00:00` `ab47ae2a552d` fix(v4): the scene that never left, and a first frame that was never painted
+- `2026-11-04T16:39:34+00:00` `1cd1d96a6d15` fix(v4): frame 0 must be authored, and a dark frame is not a black one
+- `2026-11-04T16:38:56+00:00` `f4b82369c778` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T16:30:58+00:00` `72f947f6dac1` fix(v4): the film opened on six black frames, and the checks could not see it
+- `2026-11-04T16:28:17+00:00` `e852c386faf9` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T16:20:00+00:00` `29ac19c699ec` fix(v4): the opening plate now actually moves
+- `2026-11-04T15:55:17+00:00` `01c3b3031c37` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T15:46:56+00:00` `f8b45f5d68a0` fix(v4): move the hook with light, not with scale
+- `2026-11-04T15:46:08+00:00` `c24e3ddf92b8` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T15:38:19+00:00` `e2b15843ac1b` fix(v4): the hook has to move, and the greens belong to the reference's palette
+- `2026-11-04T15:37:28+00:00` `5622fbf3e795` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T15:26:49+00:00` `2f7f86e89ba0` fix(v4): the flash frames have no single owner
+- `2026-11-04T15:26:25+00:00` `bb3835ad634d` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T15:18:36+00:00` `025097b9b6f5` fix(v4): check the file this job produced, and make the score exactly 701 frames
+- `2026-11-04T15:12:09+00:00` `5a689853c9cf` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T14:54:26+00:00` `6fefbeafcd2a` fix(v4): the film is 701 frames, not 700 — and frame 0 must not be black
+- `2026-11-04T14:53:23+00:00` `a9eab5f1e46e` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T14:45:34+00:00` `ba009c2cc06e` ci(v4): capture the renderer's own output as an artifact
+- `2026-11-04T14:44:36+00:00` `2b01c6aa11c5` fix(v4): the frame-0 probe was counted as a frame
+- `2026-11-04T14:39:13+00:00` `f75b423ef672` docs(v4): record what this build is, and the five things that were wrong first
+- `2026-11-04T14:36:44+00:00` `579a8d2cd65e` ci(v4): re-run the render with the frame-0 and CFR fixes in place
+- `2026-11-04T14:35:20+00:00` `5972e7756e0d` fix(v4): black frame 0, and an encode that was 2 frames short
+- `2026-11-04T14:34:29+00:00` `f57a3f47f454` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T14:26:57+00:00` `6c6c4987b378` fix(v4): the frame dir was stale, so the mux was one frame of another build
+- `2026-11-04T14:24:33+00:00` `dcf63de11d77` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T14:15:53+00:00` `6462d35c17b1` fix(v4): a scene left out of the table was still painting over the CTA
+- `2026-11-04T14:14:36+00:00` `ffe413f16c1c` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T14:08:33+00:00` `a3cf4ec946ec` ci(v4): pin jsdom for the gate and print what it resolved
+- `2026-11-04T14:07:53+00:00` `18f5e0b1d523` fix(gate): the overlap check never moved the timeline
+- `2026-11-04T14:05:06+00:00` `f1690e913d66` fix(v4): the CTA's yellow pill was never styled
+- `2026-11-04T14:03:38+00:00` `e0f4b7265daf` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T13:56:26+00:00` `e4e7b36c4700` fix(v4): grade the plate not the pill, restore the CTA's red reveal, snap cuts to frames
+- `2026-11-04T13:54:47+00:00` `328c1f4458c2` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T13:47:24+00:00` `8fd732ce5002` fix(v4): visual QA — clipping, a blown plate, a lost CTA hold
+- `2026-11-04T05:23:24+00:00` `8a8b06e68585` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T05:14:54+00:00` `5e626d3a6737` fix(v4): the loop cuts hard
+- `2026-11-04T05:14:30+00:00` `6f5acd1a0e01` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T05:08:49+00:00` `1618b3b9680c` fix(v4): the loop's third shot is the stool, not a second bag
+- `2026-11-04T05:08:13+00:00` `e1b875b9685c` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T05:01:03+00:00` `449929df2706` fix(v4): four loop shots, not three — the reference cuts at 12.667
+- `2026-11-04T05:00:15+00:00` `83bc6984999a` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T04:51:42+00:00` `af8def93bb26` fix(v4): plates arrive with their cut, not across it
+- `2026-11-04T04:50:56+00:00` `4f56890bfeba` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T04:45:09+00:00` `0182d47793b0` fix(v4): remove the spurious cut at 3.5 s and strengthen 9.133
+- `2026-11-04T04:44:35+00:00` `c47fa3ac7be5` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T04:36:11+00:00` `65e7f299f37b` fix(v4): land cuts on their own frame, and match the reference's texture band
+- `2026-11-04T04:35:36+00:00` `338f59b1b405` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T04:29:39+00:00` `8a2591e3b7e1` fix(v4): jolt-then-settle dissolves, measured against the score curve
+- `2026-11-04T04:27:53+00:00` `b16056295306` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T04:19:17+00:00` `38b7f7a7011e` fix(v4): separate the two green shots in the hook
+- `2026-11-04T04:18:40+00:00` `17139b7c01f0` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T04:10:00+00:00` `7b6ea31a6168` fix(v4): let the cut be the biggest change in its own window
+- `2026-11-04T04:09:18+00:00` `00f03ffd4087` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T04:02:54+00:00` `9c89b53d8905` fix(v4): dissolves finish ON the cut, and match the per-shot luma table
+- `2026-11-04T04:01:58+00:00` `a30760b9299c` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T03:53:30+00:00` `b34bc102206d` fix(v4): make every measured cut actually a cut
+- `2026-11-04T03:52:43+00:00` `19cca185fa63` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T03:44:27+00:00` `1730b9864f6a` fix(v4): one visibility table, dissolves that finish on their own cut
+- `2026-11-04T03:41:50+00:00` `7ae20f8245e7` chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]
+- `2026-11-04T03:35:38+00:00` `cc4132b469f9` fix(v4): install jsdom before the composition gate
+- `2026-11-04T03:33:45+00:00` `0617683e8361` feat(v4): rebuild REF-01 shot for shot at 720x1280
+- `2026-11-04T03:21:01+00:00` `518453e3b79e` chore(analysis): forensic dossier for the reference video
+- `2026-11-04T03:19:28+00:00` `88863055eb41` docs(reference): REF-01 forensic dossier — measured, not described
+- `2026-11-04T03:13:54+00:00` `e3274a505a6d` chore(analysis): forensic dossier for the reference video
+- `2026-11-04T03:12:35+00:00` `6d8801f8779a` feat(analysis): per-shot contact cards so the rebuild can be written off the image
+- `2026-11-04T03:11:38+00:00` `65e7e5574de8` chore(analysis): forensic dossier for the reference video
+- `2026-11-04T03:10:01+00:00` `2ecc9eec79ca` feat(analysis): fetch and dissect a reference video on the runner
+- `2026-11-04T03:08:09+00:00` `9b5b0c4be63d` feat(analysis): a forensic rig for reference videos, with the numbers to prove it
+- `2026-11-04T02:53:14+00:00` `0d63671e09a8` feat(v3): a player page for the master + a poster frame
+- `2026-11-04T02:47:46+00:00` `bbeb7f8e3904` docs(v3): the shipped master, its measured numbers, and the two gates that pass
+- `2026-11-04T02:45:08+00:00` `968f105a4e8a` chore(v3): HyperFrames render of the YouTube-automation short [skip ci]
+- `2026-11-04T02:40:58+00:00` `9b4e1ad6a0e6` docs(v3): the GPU receipt, and the eight failures it took to get one
+- `2026-11-04T02:40:21+00:00` `456c2f26135e` feat(gpu): real Kaggle T4x2 word timings, and a sync gate that uses them
+- `2026-11-04T02:38:59+00:00` `4bf8def982cc` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T02:36:48+00:00` `c0af3481d5c5` fix(gpu): find the results anywhere in the output tree
+- `2026-11-04T02:35:43+00:00` `35d7bd1b6801` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T02:33:08+00:00` `09efcb5bb1c5` fix(gpu): keep the 3 GB model cache out of /kaggle/working
+- `2026-11-04T02:30:17+00:00` `8e9e538326e5` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T02:21:00+00:00` `0f836647eac8` fix(gpu): preload the CUDA libs after the receipt exists
+- `2026-11-04T02:17:34+00:00` `06e5eccaf19c` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T02:15:43+00:00` `581059f9ed28` fix(gpu): preload CUDA 12 libs, and fall back to CPU int8 instead of dying
+- `2026-11-04T02:12:38+00:00` `54baf3687b48` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T02:09:31+00:00` `1442a9f4fa5d` fix(gpu): feed Whisper a numpy array so PyAV is never involved
+- `2026-11-04T02:06:31+00:00` `be1784e1b6b8` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T02:03:15+00:00` `8f7aee1448b1` fix(gpu): the payload is a literal dict, not JSON text
+- `2026-11-04T01:59:49+00:00` `f12a6ef90564` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T01:58:37+00:00` `a99a90a8496c` refactor(gpu): the kernel is now a real .py file, not an f-string
+- `2026-11-04T01:55:11+00:00` `777aff45e024` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T01:52:01+00:00` `d8c7e8acc011` test(gpu): assert the packaged kernel's imports at packaging time
+- `2026-11-04T01:52:01+00:00` `2d6d7a01c849` fix(gpu): the kernel used sys without importing it
+- `2026-11-04T01:48:22+00:00` `4a6bd49497c6` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T01:47:10+00:00` `b0871d285330` fix(gpu): let pip fail loudly, and add a second Whisper backend
+- `2026-11-04T01:44:18+00:00` `11f9c05b0a8b` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T01:44:16+00:00` `b600359ddc3d` chore: keep the regenerable prompt tag cache out of git
+- `2026-11-04T01:44:11+00:00` `e8edcee99f99` docs(v3): read all 703 prompts and count what the corpus actually converges on
+- `2026-11-04T01:43:06+00:00` `3eaaf370af36` fix(gpu): the packaged kernel baked in the packager's python path
+- `2026-11-04T01:42:44+00:00` `3fcbd65d291e` chore(gpu): T4x2 alignment transcript + receipt
+- `2026-11-04T01:41:25+00:00` `c21942d4bad5` fix(ci): a workflow-file edit must trigger the workflow too
+- `2026-11-04T01:36:40+00:00` `cd1b031c1928` fix(gpu): the GPU step commits its own transcript before failing
+- `2026-11-04T01:34:01+00:00` `2fd15c9f0654` chore(gpu): credential slots report [skip ci]
+- `2026-11-04T01:33:23+00:00` `ea2dd7911670` fix(gpu): install the Kaggle SDK's own deps (six) before probing auth
+- `2026-11-04T01:31:11+00:00` `5a7385d4ec88` chore(gpu): credential slots report [skip ci]
+- `2026-11-04T01:30:46+00:00` `c4953b4fab43` fix(gpu): the credential summary line was a broken f-string; build it in a loop
+- `2026-11-04T01:28:26+00:00` `9f5c1a07c48c` fix(gpu): judge each Kaggle credential with the SDK, not by scraping list output
+- `2026-11-04T01:25:27+00:00` `d9321200a7a4` fix(gpu): try every Kaggle credential shape and commit the real verdict
+- `2026-11-04T01:21:38+00:00` `4951fc7c4cf7` chore(gpu): credential slots report [skip ci]
+- `2026-11-04T01:21:02+00:00` `ef3ceeaffbc3` chore(gpu): trigger the T4x2 alignment job
+- `2026-11-04T01:19:21+00:00` `af5abfb06219` docs(v3): build notes [skip ci]
+- `2026-11-04T01:17:47+00:00` `4eabd94f9c25` chore(gpu): trigger attempt 3 [skip ci]
+- `2026-11-04T01:15:09+00:00` `0f099a0d8745` fix(ci): trigger the GPU job on any tools/kaggle change [skip ci]
+- `2026-11-04T01:11:45+00:00` `d7ff0a0133dc` chore(gpu): retrigger credential diagnosis [skip ci]
+- `2026-11-04T01:11:45+00:00` `ed6d46706a46` chore(gpu): make the credential resolver report its own diagnosis [skip ci]
+- `2026-11-04T01:08:33+00:00` `ef5e9115c5ee` feat(gpu): real Kaggle T4x2 job for v3 — Whisper large-v3 word-level alignment of the voice
+- `2026-11-04T01:00:47+00:00` `bf8feeb648b7` chore(v3): HyperFrames render of the YouTube-automation short [skip ci]
+- `2026-11-04T00:56:41+00:00` `b67851e0c9cd` fix(v3): the comments beat's numeral was clipped by the plate too
+- `2026-11-04T00:55:36+00:00` `6d3885e5a61e` chore(v3): HyperFrames render of the YouTube-automation short [skip ci]
+- `2026-11-04T00:49:36+00:00` `e0db7b7adf48` fix(v3): plate-relative coordinates — the end headline and the verdict were clipped
+- `2026-11-04T00:48:12+00:00` `b16545221625` chore(v3): HyperFrames render of the YouTube-automation short [skip ci]
+- `2026-11-04T00:44:54+00:00` `650cba6e6349` fix(v3): measured layout — kill the three collisions the first render shipped with
+- `2026-11-04T00:28:32+00:00` `013afc85b9a2` chore(v3): HyperFrames render of the YouTube-automation short [skip ci]
+- `2026-11-04T00:25:23+00:00` `367ebf610ca8` fix(v3): the mixer must find ffmpeg on a runner, not only in .venv
+- `2026-11-04T00:18:24+00:00` `7dd13598017d` fix(v3): satisfy the HyperFrames linter — seeded PRNG and transform-only motion
+- `2026-11-04T00:12:35+00:00` `a3fd4abe21d6` feat(v3): HyperFrames composition — real Chromium + real GSAP, rendered in CI
+- `2026-11-03T23:53:17+00:00` `859360266596` feat(short): v2 rebuild — Skia renderer, cut-the-curve seams, synthesised score and frame-locked SFX
+- `2026-11-03T22:42:27+00:00` `2eebc527a074` feat(short): a 42 s vertical short with Urdu-English narration, cut to the voice
+- `2026-11-03T22:18:18+00:00` `0a7acbb344a7` docs(demo): download link and the reasoning behind the 30-second short
+- `2026-11-03T22:14:55+00:00` `d073eca15185` feat(demo): a 30-second short whose every number is measured
+- `2026-11-03T21:57:06+00:00` `604fe6b6e114` docs(forensics): age handling and what a young sample is allowed to say
+- `2026-11-03T21:56:53+00:00` `9e6a9a97f966` fix(decide): stop narrating a placeholder as a fact about the market
+- `2026-11-03T21:56:39+00:00` `9222abdd6909` chore(yt-intel): refresh a report so saturation carries the sample age
+- `2026-11-03T21:55:09+00:00` `51043ee2dca6` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T21:53:29+00:00` `aa551c37c68a` fix(decide): youngness is measured in hours, not in view counts
+- `2026-11-03T21:50:17+00:00` `e32f61912e7a` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T21:48:59+00:00` `bcdf233371e6` fix(forensic): ages were truncated to whole days, which blanked every views/hour
+- `2026-11-03T21:47:59+00:00` `027030a973f7` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T21:45:13+00:00` `4ac56988a275` ci: let the research job fire from any arena branch
+- `2026-11-03T21:44:52+00:00` `0f8f31917737` fix(style): the "calibrated" cut threshold was still wrong, and now we can prove it
+- `2026-11-03T21:05:40+00:00` `890e4958c57e` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T21:02:32+00:00` `147a1ecce103` chore(yt-intel): post-merge check that main can drive the desk
+- `2026-11-04T02:02:20+05:00` `adaf2a54d55a` Merge pull request #1 from adil-chandio/arena/9960286a-monarch-overall-work
+- `2026-11-03T20:58:18+00:00` `6fd7e466ca42` ci: let the research job run on main too
+- `2026-11-03T20:56:32+00:00` `56de3a2e1f24` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T20:54:50+00:00` `35201c4db48c` fix(comments): refuse loudly, and stop buying answers we already have
+- `2026-11-03T20:52:35+00:00` `b8538745f716` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T20:51:25+00:00` `309176aa173d` feat(comments): one video per topic, and a viewCount sweep in the same run
+- `2026-11-03T20:21:26+00:00` `125623911783` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T20:20:02+00:00` `6f52d9ef09fd` ci(film): every run now proves the film rig works on the runner
+- `2026-11-03T20:18:09+00:00` `e852af1bd6f2` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T20:16:24+00:00` `cca9150cd703` fix(forensic): a young sample is not a crowded market
+- `2026-11-03T20:10:54+00:00` `d2dcf0680266` docs(forensics): thumbnail forensics is live, and it found two bugs in itself
+- `2026-11-03T20:10:10+00:00` `088bd8862cb3` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T20:08:39+00:00` `6d2bd4edc365` feat(desk): show the thumbnail reading, where the desk can see it
+- `2026-11-03T20:07:19+00:00` `47137823f568` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T20:04:44+00:00` `14ff1fced97d` fix(thumbprint): hue families are buckets, so they partition the sample
+- `2026-11-03T20:02:53+00:00` `6fb0c544a808` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T20:01:24+00:00` `93981a555ce2` fix(thumbprint): an accent is a hue, not the darkest corner of the frame
+- `2026-11-03T19:57:53+00:00` `8774a345c8ae` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T19:56:01+00:00` `ec87f24fb39f` feat(thumbprint): run thumbnail forensics where a thumbnail can actually be fetched
+- `2026-11-03T19:48:37+00:00` `a3b349d3065b` docs(architecture): 06-YT-INTEL, the research desk as it actually runs
+- `2026-11-03T19:48:00+00:00` `3a03893ecbcf` feat(style): calibrate the cut detector against films with a known shot list
+- `2026-11-03T19:46:04+00:00` `eca108d38487` fix(ci): the queue ledger is appended, not rewritten
+- `2026-11-03T19:24:37+00:00` `8d1cc5378787` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T19:22:01+00:00` `bec141a04abf` ci(yt-intel): verify the run-log split end to end
+- `2026-11-03T19:19:23+00:00` `72fb024dac07` fix(ci): stop the bot and the agent fighting over the same two files
+- `2026-11-03T19:13:32+00:00` `de54319d75f6` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T19:11:31+00:00` `9f3478c07d7d` ci(yt-intel): retry the last web-lane topic
+- `2026-11-03T19:11:05+00:00` `e1b3a9662f9f` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T19:10:04+00:00` `f0d673a22ed8` docs: the API lane is no longer 'unproven' — it is the default path
+- `2026-11-03T19:09:48+00:00` `384e1b5d4fd1` ci(yt-intel): last web-lane topic through the API lane
+- `2026-11-03T18:49:58+00:00` `029e7a7ad1ee` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:48:00+00:00` `c6edd68e318d` fix(yt-intel): the API lane rejected `thisMonth`, which made a good topic look unmeasurable
+- `2026-11-03T18:43:18+00:00` `ff5e6e3b8915` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:41:51+00:00` `b21dd313d1d2` ci(yt-intel): sweep the remaining web-lane topics through the API lane
+- `2026-11-03T18:41:02+00:00` `4129a04f271e` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:37:51+00:00` `e04e47b480a6` ci(yt-intel): blank the trigger
+- `2026-11-03T18:37:47+00:00` `1b7a50079208` feat(research-desk): comment mining on the desk, not just in a JSON file
+- `2026-11-03T18:35:51+00:00` `225eeaccd930` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:34:49+00:00` `cbb476aee43b` fix(yt-intel): one comment in a hundred is an anecdote, not the audience's mind
+- `2026-11-03T18:33:14+00:00` `7ca467e78b9d` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:30:08+00:00` `da579ee224ba` fix(ci): comment mining was a nested heredoc that silently produced nothing
+- `2026-11-03T18:28:32+00:00` `b191829ea064` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:26:48+00:00` `fd977958e8d5` feat(yt-intel): comment mining runs in CI on the best video of the freshest API report
+- `2026-11-03T18:26:30+00:00` `a39eb1f85c4f` fix(ci): a queue run now leaves a trace in history
+- `2026-11-03T18:25:15+00:00` `73238426f253` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:22:30+00:00` `27e9f4a11e3d` ci(yt-intel): run the whole queue through the API lane
+- `2026-11-03T18:21:26+00:00` `096b015eda54` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:18:34+00:00` `d8eabce98faf` feat(doctor): --json-only, so CI writes one JSON document and nothing else
+- `2026-11-03T18:17:40+00:00` `18889380bcf7` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:15:53+00:00` `85a2b50f8858` ci(yt-intel): doctor.json must be the JSON object, not the human lines above it
+- `2026-11-03T18:15:36+00:00` `97f7e53cf519` fix(yt-intel): doctor's search check referenced a module that does not exist
+- `2026-11-03T18:13:52+00:00` `f48d7e2bbd04` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T18:12:12+00:00` `1c96a449884e` fix(yt-index): side files are not research reports, and one bad byte cannot fail the step
+- `2026-11-03T18:09:53+00:00` `01051dce274c` ci(yt-intel): 15s probe to see why the index step fails after the lane recorder
+- `2026-11-03T18:07:38+00:00` `a3032c0310c7` ci(yt-intel): heredoc redirect fix, doctor.json holds stdout only, doctor outcome recorded
+- `2026-11-03T18:07:36+00:00` `4e3c38a618b7` ci(yt-intel): the heredoc was eating the redirect — index step was reading Python source as JSON
+- `2026-11-03T18:04:12+00:00` `894e0e0230e8` ci(yt-intel): write the doctor report into the repo, and do not let it block the research
+- `2026-11-03T18:01:01+00:00` `81568f8e9497` ci(yt-intel): first run with YOUTUBE_API_KEY in place
+- `2026-11-03T15:32:01+00:00` `47e4bdb268c2` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:30:36+00:00` `f79e7bc5c63f` ci(yt-intel): blank the trigger
+- `2026-11-03T15:30:28+00:00` `a05d35082fae` feat(research-desk): show which lane produced the numbers, because a keyless run must not look keyed
+- `2026-11-03T15:29:06+00:00` `269a0f3846b4` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:28:06+00:00` `949ef4d0d265` ci(yt-intel): write secret presence into the committed lane file, not just the log
+- `2026-11-03T15:26:16+00:00` `576f9fe9fa92` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:25:39+00:00` `ffd041d91f2b` ci(yt-intel): name-by-name secret diagnostics, printed on the run page
+- `2026-11-03T15:24:45+00:00` `49381ceb8ebd` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:23:50+00:00` `69402fa028f7` fix(yt-intel): an empty API result is a warning, not a verdict — and stage the marker file
+- `2026-11-03T15:22:48+00:00` `088ad00b726a` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:22:01+00:00` `59e2e8c7ef4c` ci(yt-intel): force a run after the lane recorder landed
+- `2026-11-03T15:17:49+00:00` `0a0d4d57cdb5` ci(yt-intel): make the lane visible in the repo, not only in a log I cannot read
+- `2026-11-03T15:16:35+00:00` `d2d9a041be44` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:15:48+00:00` `e2ba75e194c4` ci(yt-intel): re-measure a topic that already has a keyless baseline
+- `2026-11-03T15:12:32+00:00` `cd96eedf65dc` ci(yt-intel): the security net's own typo — read YTAP1, not YTAPI1
+- `2026-11-03T15:10:18+00:00` `2f1abd175270` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:09:34+00:00` `0bb802e11dab` ci(yt-intel): accept the key under either secret name, and fix a step that never ran
+- `2026-11-03T15:02:09+00:00` `d3100ca6950a` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T15:00:50+00:00` `07a377f80964` ci(yt-intel): blank the trigger again
+- `2026-11-03T15:00:04+00:00` `6c9468017cec` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:59:28+00:00` `df456f90c851` ci(yt-intel): re-measure the topic whose verdict changed meaning
+- `2026-11-03T14:59:24+00:00` `3a5f33bbc998` fix(yt-intel): GO may not claim a mechanism the data says is missing
+- `2026-11-03T14:58:48+00:00` `de4d70fa410c` fix(yt-intel): stop the API key leaking into committed report files
+- `2026-11-03T14:58:12+00:00` `c249450457fd` docs(setup): make the doctor's expected output match what doctor actually prints
+- `2026-11-03T14:58:02+00:00` `cf4d48266d71` docs(setup): the first keyed run, as eight commands
+- `2026-11-03T14:57:49+00:00` `43873cb83e85` fix(yt-intel): one index writer, one retry rule, and a bridge that keeps real results
+- `2026-11-03T14:54:56+00:00` `efdb32e83dfe` docs(waves): say exactly what the research desk proves, and what it does not
+- `2026-11-03T14:54:30+00:00` `f510f3cd3ae1` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:53:06+00:00` `b08574a48878` ci(yt-intel): blank the trigger — ordinary commits stay cheap
+- `2026-11-03T14:52:30+00:00` `1c827b94dfa0` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:51:49+00:00` `fc63f48ce365` ci(yt-intel): re-run shorts with the young-sample correction in place
+- `2026-11-03T14:51:47+00:00` `caa5a78ff1b0` fix(yt-intel): a brand-new sample is young, not crowded
+- `2026-11-03T14:50:48+00:00` `7ccc55bb6a09` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:50:00+00:00` `f049c949a3fe` ci(yt-intel): ask the shorts topic for this month only
+- `2026-11-03T14:49:20+00:00` `ed42b0dfdd09` feat(yt-intel): comment mining, the gap that mattered most
+- `2026-11-03T14:46:47+00:00` `e6b196253ee5` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:46:03+00:00` `dbc8211b700a` ci(yt-intel): prove the marker file's second line (filter) end to end
+- `2026-11-03T14:44:04+00:00` `d2927f301d87` feat(yt-intel): a filtered run you can trigger by editing one file
+- `2026-11-03T14:43:04+00:00` `b900e4333545` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:41:46+00:00` `de7cf7aba3f5` ci(yt-intel): trigger a queue run so the filtered topics get measured
+- `2026-11-03T14:38:38+00:00` `4389f4b9f4d2` feat(yt-intel): the keyless lane honours real search filters
+- `2026-11-03T14:36:46+00:00` `2df3c7166597` fix(yt-intel): reports keep their real fetch time, and the index stops inventing one
+- `2026-11-03T14:31:13+00:00` `c453a82f6ff8` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:30:30+00:00` `7f24bc6200d6` fix(yt-intel): rotate the queue instead of truncating it
+- `2026-11-03T14:28:56+00:00` `4325ecbc6691` feat(yt-intel): a retry can no longer erase a real measurement
+- `2026-11-03T14:23:49+00:00` `6a7fd7bd5970` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:23:07+00:00` `0f7d763b056b` fix(yt-intel): the web lane's abbreviated ages were silently dropped
+- `2026-11-03T14:22:15+00:00` `207543a69ace` chore(yt-intel): refresh topic research [skip ci]
+- `2026-11-03T14:21:00+00:00` `3a1c1bfe1f57` ci(yt-intel): blank the trigger so ordinary commits stay cheap
+- `2026-11-03T14:19:48+00:00` `2ce51e6a2353` fix(yt-intel): confidence divided by the full weight scheme, not the present weights
+- `2026-11-03T14:18:51+00:00` `5e9540a849c4` ci(yt-intel): register the workflow with a push trigger (the dispatch one never appeared)
+- `2026-11-03T14:18:05+00:00` `9833764da67d` ci: nudge workflow registration for yt-intel.yml [skip ci]
+- `2026-11-03T14:16:50+00:00` `1a1a1736827e` feat(yt-intel): queue runner + CI that survives a missing secret
+- `2026-11-03T14:13:27+00:00` `19d6a259bd93` feat(yt-intel): key doctor + the actual 5-minute key setup guide
+- `2026-11-03T14:09:12+00:00` `36453d2bde7a` docs(waves): W3 research desk marked partially done
+- `2026-11-03T14:07:14+00:00` `9a94cea41118` feat(yt-intel): production-style forensics + landscape doc
+- `2026-11-03T14:06:06+00:00` `dc26a0922973` feat(yt-intel): research desk in yt-automation, CI research run, RETRY verdict
+- `2026-11-03T14:03:11+00:00` `5ca883492578` feat(skills): vendor 2 research packs + yt-intel skill (957 skills, 28 packs)
+- `2026-11-03T14:02:21+00:00` `4ac1022eee61` feat(yt-intel): keyless-first YouTube intelligence — demand, forensic, reverse, decide
+- `2026-11-03T13:26:30+00:00` `1b178c0c51cf` docs(architecture): as-built spaces model + wave status
+- `2026-11-03T13:26:17+00:00` `09a73cbc3056` feat(portfolio): proof surface reads its own measurement files
+- `2026-11-03T13:25:23+00:00` `9ec3b55e6ca2` feat(spaces+ctr): five spaces as a real OS, plus a measured CTR system
+- `2026-11-03T07:51:58+00:00` `55dedb07694f` docs(deliverables): v4 showreel delivery pack with measured before/after
+- `2026-11-03T07:50:21+00:00` `f331f4190710` feat(deliverables): v4 master — measured dynamics, real true peak [skip ci]
+- `2026-11-03T07:49:24+00:00` `beab005ce3fa` chore(showreel): render v4 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T07:34:46+00:00` `7f4591eb27e2` ci(showreel): make the render commit step idempotent (no-op when unchanged, rebase-retry push)
+- `2026-11-03T07:21:14+00:00` `546ae914dc14` feat(showreel): v4 mix render trigger + real true-peak copy ([skip ci])
+- `2026-11-03T07:21:01+00:00` `26746743b667` feat(audio): measurement tools + v4 mix (real dynamics, air band, peak discipline)
+- `2026-11-03T06:54:03+00:00` `2cc872eb0955` feat(video): 5 house skills for score/sfx/mix/motion + 6 packs from the repos you named
+- `2026-11-03T06:26:31+00:00` `3500834589bb` feat(skills): harvest 1,235 candidates, vendor 16 license-clean packs (786 skills), build index
+- `2026-11-03T06:07:34+00:00` `8c02cfcb2f6c` feat(os): W1 foundation — 5 spaces, config as source of truth, repo registry + audit
+- `2026-11-03T05:06:25+00:00` `844ea329bb07` feat(deliverables): v3.6 final master (loudness copy corrected) [skip ci]
+- `2026-11-03T05:05:44+00:00` `a5d7bde4142f` chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T04:55:25+00:00` `d3e3d09507dd` ci(showreel): final accuracy render pass
+- `2026-11-03T04:55:25+00:00` `cb32253ae9b9` fix(showreel): console loudness line matches mastered -14.0 LUFS [skip ci]
+- `2026-11-03T04:52:58+00:00` `8f6f768ca9c8` feat(deliverables): final v3.5 Absolute Cinema 1080p60 master (QC-clean, 36.00s) [skip ci]
+- `2026-11-03T04:52:22+00:00` `f139d1979b78` chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T04:40:04+00:00` `a51382ae120e` ci(showreel): final v3.5 render pass
+- `2026-11-03T04:40:04+00:00` `0cd7e977964b` fix(showreel): v3.5 — accurate master/preview labels, -14.0 LUFS console line, timecode clamp [skip ci]
+- `2026-11-03T04:38:29+00:00` `ca23f377a3ee` copy(studio): showreel kicker reflects v3 Absolute Cinema cut (36.00s, -14.0 LUFS) [skip ci]
+- `2026-11-03T04:36:20+00:00` `e7ff65a7f05b` feat(deliverables): ship v3 Absolute Cinema 1080p60 master (36.00s, -14.0 LUFS) to repo for direct download [skip ci]
+- `2026-11-03T04:35:37+00:00` `ae5a5be19306` chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T04:20:44+00:00` `6f9354391165` ci(showreel): final v3.4 render pass
+- `2026-11-03T04:20:44+00:00` `692cf2dd069d` fix(showreel): v3.4 — spec panel fully clears on unlock, clean verified status glyphs [skip ci]
+- `2026-11-03T04:19:53+00:00` `9d2920213954` chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T04:04:47+00:00` `fef745f6ca40` ci(showreel): final v3.3 render pass
+- `2026-11-03T04:04:47+00:00` `79e416b62c55` fix(showreel): v3.3 — unlock reveal unobstructed, EQ clearance, proof-lock tag position [skip ci]
+- `2026-11-03T04:03:43+00:00` `e38332a3877c` chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T03:50:29+00:00` `27c461570ab6` ci(showreel): re-render v3.2 QC pass
+- `2026-11-03T03:50:29+00:00` `5c560e170ac9` fix(showreel): v3.2 — corner watermark, EQ clear of CTA, 17-gate matrix, HUD/file-row clearance [skip ci]
+- `2026-11-03T03:49:32+00:00` `6157d6ee1c43` chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T03:39:05+00:00` `faad85c9b925` ci(showreel): re-render v3.1 visual QC pass
+- `2026-11-03T03:38:46+00:00` `e97d9651097f` fix(showreel): v3.1 QC pass — calm god-rays, in-frame crash-zoom, vault master-spec panel, beat-04 ecosystem rail, crisp ® [skip ci]
+- `2026-11-03T03:37:26+00:00` `c395fe25d668` chore(showreel): render v3 Absolute Cinema 1080p60 master & preview [skip ci]
+- `2026-11-03T03:23:36+00:00` `fea0b0d76e28` ci(showreel): kick v3 Absolute Cinema 2160-frame 1080p60 render
+- `2026-11-03T03:22:55+00:00` `02d57679b9df` feat(showreel): v3 ABSOLUTE CINEMA — Python DSP eargasm soundtrack (125BPM Dm9->Dmaj9 Picardy, exciter air, velvet hall IR) + 60fps FFT-reactive canvas cinema engine + 2160-frame render pipeline
+- `2026-11-03T03:01:17+00:00` `b334d61f1d31` feat(deliverables): upload clean 1080p60 Proof Over Promises master MP4 to GitHub [skip ci]
+- `2026-11-02T18:19:22+00:00` `7db7933d520b` chore(release): remove temporary encrypted CI transport & finalize v2 1080p60 deployment [skip ci]
+- `2026-11-02T18:16:55+00:00` `edcc1c16ca62` chore(showreel): render Proof Over Promises 1080p60 master & preview [skip ci]
+- `2026-11-02T18:12:17+00:00` `8aeec03a410d` polish(showreel): opaque obsidian iris ground, crash-zoom header clear & docked emerald unlock badge
+- `2026-11-02T18:10:23+00:00` `a64bf77c1c84` chore(showreel): render Proof Over Promises 1080p60 master & preview [skip ci]
+- `2026-11-02T18:05:51+00:00` `8f1a295b17b0` fix(showreel): set explicit block/flex display in applySeam & refine ® lockup
+- `2026-11-02T18:03:25+00:00` `f3d4151c2c13` chore(showreel): render Proof Over Promises 1080p60 master & preview [skip ci]
+- `2026-11-02T18:00:57+00:00` `d59c0b1d3c60` fix(ci): pin ubuntu-24.04 with preinstalled Chrome & FFmpeg for instant 60fps capture
+- `2026-11-02T17:59:38+00:00` `e5448f7f6422` ci(showreel): trigger 1080p60 render on arena branch push
+- `2026-11-02T17:59:17+00:00` `96fcce21fc1f` feat(arsenal+showreel): integrate 12 S-tier skills, 35-repo forensic audit & 60fps HyperFrames×Shotcraft engine
+- `2026-11-02T16:39:34+00:00` `7bd69d07c8e7` Deploy 8-scene Dual-T4 GPU AI Flagship Commercial (1080p, -14.31 LUFS, WF-05 + Vane-Motion)
+- `2026-11-02T16:06:10+00:00` `5d68e7405d9c` chore(gpu): add 8 Kaggle T4x2 AI motion clips [skip ci]
+- `2026-11-02T15:44:51+00:00` `fdc36a025a63` perf(gpu): pre-encode T5-XXL once & run 4.8GB LTX-Video directly on Dual-T4 CUDA (zero OOM)
+- `2026-11-02T14:42:25+00:00` `f9f2de175dda` fix(gpu): move HF cache off /tmp tmpfs RAM + harvest v4-2 + 3x Dual-T4 parallel dispatch
+- `2026-11-02T14:13:26+00:00` `8c1509ea82b0` feat(gpu): prioritize verified Kaggle account + battle-proven Dual-T4 metadata
+- `2026-11-02T13:33:07+00:00` `ecb9277a7319` feat(gpu): embed 1024x576 keyframes directly in self-contained Dual-T4 kernel (zero git clone)
+- `2026-11-02T13:28:27+00:00` `993966a36dc0` chore(gpu): extract full JSON/IPYNB kernel error traceback into annotations
+- `2026-11-02T13:25:29+00:00` `861988935fef` fix(gpu): use /tmp/hf_cache + safe diffusers>=0.32.2 pin + full error-tail annotations
+- `2026-11-02T13:20:40+00:00` `25f7bd89b4e4` feat(gpu): wire ALIELITEE Kaggle secret + fast 49f LTX/Wan2.2 Dual-T4 parallel engine
+- `2026-11-02T13:11:01+00:00` `54bb462ea84c` feat(b2b-film): add studio VO, -14 LUFS procedural foley mix, and 7-layer Vane-Motion/WF-05 compositor
+- `2026-11-02T13:02:14+00:00` `127750a8018b` chore(gpu): check explicit Kaggle secret/var name slots cleanly
+- `2026-11-02T13:00:32+00:00` `4fbc15956f0d` chore(gpu): auto-detect arbitrary Actions secret/var names safely
+- `2026-11-02T12:58:19+00:00` `c0693d92ece5` chore(gpu): support MONARCH/KAGGLE_API_TOKEN/KAGGLE_KEY secret variants
+- `2026-11-02T12:56:32+00:00` `3f45e5d2218f` feat(gpu): launch Kaggle Dual-T4 parallel Wan2.2/LTX I2V render for 8 B2B commercial scenes
+- `2026-11-02T12:17:30+00:00` `22242b3a9eac` feat(studio): embed live 60fps commercial showreel in storefront/portal and add Kaggle T4x2 GPU runner
+- `2026-11-02T11:17:00+00:00` `4d4be78b84d0` feat: add MONARCH B2B Studio storefront, locked-preview client portal, 3 safe payment rails, and mobile Founder Revenue OS
+- `2026-10-29T20:42:38+00:00` `780708f26bc6` Upgrade Vite tooling to secure versions
+- `2026-10-29T20:41:50+00:00` `2b2e1ae54247` Document live Monarch deployment
+- `2026-10-29T20:40:25+00:00` `20507270f77f` Build Monarch workspace and cloud sync foundation
+- `2026-10-29T18:44:12+00:00` `91fcf8559cb5` Initial commit

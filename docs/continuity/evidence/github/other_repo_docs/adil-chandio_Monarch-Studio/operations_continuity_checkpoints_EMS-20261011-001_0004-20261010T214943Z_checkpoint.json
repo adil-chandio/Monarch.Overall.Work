@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "checkpoint_id": "0004-20261010T214943Z",
+  "created_at": "2026-10-10T21:49:43Z",
+  "summary": "User reported creating a GitHub repository named Monarch-Studio. Exact visible message was captured; a newly created empty public candidate at adil-chandio/Monarch-Studio was discovered but is not assumed to belong to the user until explicitly confirmed.",
+  "next_action": "User confirms whether https://github.com/adil-chandio/Monarch-Studio is the repository and confirms push authorization; then set origin, push main + continuity-v1, verify remote HEAD, synchronize receipts, and complete/archive the task.",
+  "active_state": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-001",
+    "status": "waiting_external",
+    "title": "Style Library + Crash-Proof Continuity System v1",
+    "style_id": null,
+    "goal": "Create separately named permanent editing-style libraries, keep only one running task in workflows/current, preserve exact visible chat/actions and resume state, checkpoint at least hourly, and synchronize evidence to GitHub, Drive, Notion, Linear and Google Docs without silent omissions.",
+    "acceptance_criteria": [
+      "Every permanent editing style has its own complete named folder and knowledge index.",
+      "workflows/current contains only the single running task and an exact next action.",
+      "Refresh/restart recovery continues from a verified hash-chained checkpoint rather than restarting.",
+      "Hourly/event-driven checkpoint packages and five-platform sync ledgers exist.",
+      "Repository, tests, authorities and remote records validate without unrecorded drift."
+    ],
+    "started_at": "2026-10-10T21:27:20Z",
+    "updated_at": "2026-10-10T21:49:43Z",
+    "checkpoint_sequence": 4,
+    "event_sequence": 31,
+    "journal_head": "3f440945e2c800981626c064de9fc2446e0ab715f56d412b354a5af20421a830",
+    "last_checkpoint": "2026-10-10T21:49:43Z",
+    "last_checkpoint_path": "operations/continuity/checkpoints/EMS-20261011-001/0003-20261010T214201Z",
+    "next_action": "User confirms whether https://github.com/adil-chandio/Monarch-Studio is the repository and confirms push authorization; then set origin, push main + continuity-v1, verify remote HEAD, synchronize receipts, and complete/archive the task.",
+    "running_processes": [],
+    "remote_sync": {
+      "github": "pending",
+      "google_docs": "pending",
+      "google_drive": "pending",
+      "linear": "pending",
+      "notion": "pending"
+    }
+  },
+  "journal_event": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-001",
+    "seq": 31,
+    "timestamp": "2026-10-10T21:49:43Z",
+    "kind": "checkpoint",
+    "actor": "continuity",
+    "content": "User reported creating a GitHub repository named Monarch-Studio. Exact visible message was captured; a newly created empty public candidate at adil-chandio/Monarch-Studio was discovered but is not assumed to belong to the user until explicitly confirmed.",
+    "content_sha256": "8922c650bbbf50a5853723cf855aab83e57b73e92a9b529a0620ade6f945b916",
+    "metadata": {
+      "sequence": 4,
+      "next_action": "User confirms whether https://github.com/adil-chandio/Monarch-Studio is the repository and confirms push authorization; then set origin, push main + continuity-v1, verify remote HEAD, synchronize receipts, and complete/archive the task.",
+      "status": "waiting_external"
+    },
+    "prev_event_sha256": "07cbe0b15954444b17b7215887d5815d45f94178f2297f7239d704b3efbad54d",
+    "event_sha256": "3f440945e2c800981626c064de9fc2446e0ab715f56d412b354a5af20421a830"
+  },
+  "journal_head": "3f440945e2c800981626c064de9fc2446e0ab715f56d412b354a5af20421a830",
+  "git": {
+    "initialized": true,
+    "head": "0badceba68d4066b205a15842834bae4c89a78d5",
+    "branch": "main",
+    "status": [
+      "M START_HERE.md",
+      "M operations/continuity/remote-targets.json",
+      "M workflows/current/ACTIVE_TASK.json",
+      "M workflows/current/CHAT_TRANSCRIPT.jsonl",
+      "M workflows/current/JOURNAL.jsonl",
+      "M workflows/current/RESUME.md",
+      "?? workflows/current/payload/USER_MESSAGE_GITHUB_REPO.txt"
+    ],
+    "remotes": [],
+    "submodules": [
+      "-756290289742535eb0ac3817548f152e9759cc70 vendor/awesome-opus5-5-videos",
+      "-f8b2552d1c4fd1ae5051dae3786719dc5bdb3ff8 vendor/effectcraft"
+    ]
+  },
+  "payload_inventory": [
+    {
+      "path": "workflows/current/payload/USER_MESSAGE_GITHUB_REPO.txt",
+      "size": 2985,
+      "sha256": "5f1a422d857c1530c315570ae9613276649da170b7b0dda42163f57c65ec167d"
+    },
+    {
+      "path": "workflows/current/payload/USER_REQUEST.txt",
+      "size": 2925,
+      "sha256": "c09afb13fcee5328be0a558f2a1a479fce639042b3cec2ea92255591389ee3e4"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+# Resume capsule — EMS-20261011-001
+
+**Status:** `syncing`  
+**Title:** Style Library + Crash-Proof Continuity System v1  
+**Style:** `studio-operation`  
+**Checkpoint sequence:** 2  
+**Last checkpoint:** 2026-10-10T21:36:06Z
+
+## Goal
+
+Create separately named permanent editing-style libraries, keep only one running task in workflows/current, preserve exact visible chat/actions and resume state, checkpoint at least hourly, and synchronize evidence to GitHub, Drive, Notion, Linear and Google Docs without silent omissions.
+
+## Acceptance criteria
+
+- [ ] Every permanent editing style has its own complete named folder and knowledge index.
+- [ ] workflows/current contains only the single running task and an exact next action.
+- [ ] Refresh/restart recovery continues from a verified hash-chained checkpoint rather than restarting.
+- [ ] Hourly/event-driven checkpoint packages and five-platform sync ledgers exist.
+- [ ] Repository, tests, authorities and remote records validate without unrecorded drift.
+
+## Exact next action
+
+Create a portable Git bundle and repository snapshot, upload both to the dedicated Drive continuity folder, mark checkpoint deliveries, then wait only for the user GitHub repository URL/authorization.
+
+## Running processes
+
+- None recorded.
+
+## Recovery command
+
+```bash
+python3 tools/continuity.py resume
+```
+
+## Durable evidence
+
+- Active state: `workflows/current/ACTIVE_TASK.json`
+- Hash-chained action journal: `workflows/current/JOURNAL.jsonl`
+- Visible user/assistant transcript: `workflows/current/CHAT_TRANSCRIPT.jsonl`
+- Active payload only: `workflows/current/payload/`
+- Latest checkpoint package: `operations/continuity/checkpoints/EMS-20261011-001/0002-20261010T213606Z`
+
+Never restart this task from the beginning when these records exist. Verify the journal, inspect the latest checkpoint, then execute **Exact next action**.

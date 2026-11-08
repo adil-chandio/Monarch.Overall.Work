@@ -1,0 +1,440 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-08T15:52:19Z",
+  "source": "Google Drive connector downloads/exports + extracted history archive",
+  "count": 43,
+  "evidence_level": "connected_app_record",
+  "note": "Raw text exports and extracted archive files. Duplicate-named session logs/resume states are stored under drive/session_logs/.",
+  "files": [
+    {
+      "source_id": "1XY7vzLq-0aCGXHAGNTYbxLPBzX7zFInl",
+      "original_name": "00 · DRIVE RECOVERY ORDER.txt",
+      "source_url": "https://drive.google.com/file/d/1XY7vzLq-0aCGXHAGNTYbxLPBzX7zFInl/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/00_DRIVE_RECOVERY_ORDER.txt",
+      "bytes": 2871,
+      "sha256": "84c1004c72dc88df69e2609f316ff38a3bf02576b2ca40d4bacc64368d8c5e6e",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1frC4llt-7Lj9ouaIlKjlTTURL_xXgsebU9VvYsi9e-Q",
+      "original_name": "00 — H3 model facts (specs, VRAM, API, pricing, licence)",
+      "source_url": "https://drive.google.com/file/d/1frC4llt-7Lj9ouaIlKjlTTURL_xXgsebU9VvYsi9e-Q/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/00_H3_model_facts_specs_VRAM_API_pricing_licence.txt",
+      "bytes": 7226,
+      "sha256": "6ee2031210b8d7700c4b631418b901c35b8040cb8ca0012212ef68db93cc1ad8",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1Qn0n9nDh4fIBsjUzOid39A5vwyOeGa-H",
+      "original_name": "00_READ_FIRST_NEW_CHAT_WF02.txt",
+      "source_url": "https://drive.google.com/file/d/1Qn0n9nDh4fIBsjUzOid39A5vwyOeGa-H/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/00_READ_FIRST_NEW_CHAT_WF02.txt",
+      "bytes": 4653,
+      "sha256": "36bec01e42eb63146bd086682e9c9f5c2803ec78ae51611ae18d4546246dcb52",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1Nn0isfBfplCIXLGz2GsdKvhB3pqPVSaiz6vOdo2_SIg",
+      "original_name": "01 — Colab runbook (how to run it)",
+      "source_url": "https://drive.google.com/file/d/1Nn0isfBfplCIXLGz2GsdKvhB3pqPVSaiz6vOdo2_SIg/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/01_Colab_runbook_how_to_run_it.txt",
+      "bytes": 5636,
+      "sha256": "adb2e99e3492b1ca4ec940a7e7cdedb8b095d96be4e1da4ce961e8fc92393777",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1grIjpqnWTXrYm1fjXL0pR4Q0fQ8eW8T7_9xK6cqMGtg",
+      "original_name": "02 — Prompting grammar + Monarch templates",
+      "source_url": "https://drive.google.com/file/d/1grIjpqnWTXrYm1fjXL0pR4Q0fQ8eW8T7_9xK6cqMGtg/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/02_Prompting_grammar_Monarch_templates.txt",
+      "bytes": 9097,
+      "sha256": "8f6f91274b72f6d6058c5c3622c2418f2eb3229c1098d629260330b7c82eecc2",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "11bg4a_ZbK_ZDk6dGB7I4WJP4S-_LERBJ_D6woz3qhjM",
+      "original_name": "05 — Free vs paid routes (is H3 free?)",
+      "source_url": "https://drive.google.com/file/d/11bg4a_ZbK_ZDk6dGB7I4WJP4S-_LERBJ_D6woz3qhjM/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/05_Free_vs_paid_routes_is_H3_free.txt",
+      "bytes": 4739,
+      "sha256": "fad6a42b0cdd004086f82e846edb106af4e62c04d4b265a079213c0540a7fd48",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "EMS-20261011-001-history-archive.tar.gz",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001-history-archive.tar.gz",
+      "bytes": 16733,
+      "sha256": "1dc1004a849b83ef51b177b20233fb1e9e57e8e29a6953816905336dd9f4eb00",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "16gLeZBQV_wWVo5OnzQvpXirXTyNUz8hjwt6x0qMOzZU",
+      "original_name": "Editing Monarch Studio · Continuity + Style Library v1 · Recovery Hub",
+      "source_url": "https://drive.google.com/file/d/16gLeZBQV_wWVo5OnzQvpXirXTyNUz8hjwt6x0qMOzZU/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/Editing_Monarch_Studio_Continuity_Style_Library_v1_Recovery_Hub.txt",
+      "bytes": 24327,
+      "sha256": "72ba4bbe3013f5b8bf4972d48bce62685fc6dae68b1b59fabd770a2b60263bcc",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1RpxD392bvTqH7Lq79CH7-5_bm6NlklH6Ans0ZPugL4M",
+      "original_name": "FREE-ONLY PLAYBOOK — $0 me poora system (compute + quotas + weekly rhythm)",
+      "source_url": "https://drive.google.com/file/d/1RpxD392bvTqH7Lq79CH7-5_bm6NlklH6Ans0ZPugL4M/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/FREE-ONLY_PLAYBOOK_0_me_poora_system_compute_quotas_weekly_rhythm.txt",
+      "bytes": 8760,
+      "sha256": "502f09356f3a7b8e6a64855a7dd70f28790571d4f87fb415a03ec61c04ced5bc",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1XSlpaEmOdysqM8FpRmWUfNElz9IAxmXV",
+      "original_name": "MON-DEMO26_Final_Delivery_Pack.md",
+      "source_url": "https://drive.google.com/file/d/1XSlpaEmOdysqM8FpRmWUfNElz9IAxmXV/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/MON-DEMO26_Final_Delivery_Pack.md",
+      "bytes": 783,
+      "sha256": "5aa435db9ee747900addd85e19b31e3db55a6d97ad8b72817235891de8f100c8",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1AsFnHq43aYYWORu1MAdrjsnDyPf-ftOg5HrY0Uj40BI",
+      "original_name": "MONARCH CHARACTERS — HUB",
+      "source_url": "https://drive.google.com/file/d/1AsFnHq43aYYWORu1MAdrjsnDyPf-ftOg5HrY0Uj40BI/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/MONARCH_CHARACTERS_HUB.txt",
+      "bytes": 13602,
+      "sha256": "6350b41081ddca7975b67bd0286941bea24fc2357d0c5424678083d2cbe2d3de",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q",
+      "original_name": "MONARCH STUDIO — Workflow Registry",
+      "source_url": "https://drive.google.com/file/d/1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/MONARCH_STUDIO_Workflow_Registry.txt",
+      "bytes": 21408,
+      "sha256": "051adc0afdfbbc3b93fcb1be7ace66083dde801ff470610a2295fe159eac96b0",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1L9uUfrhAPiw9f5JMKB3kx4fTifvwlTWF",
+      "original_name": "NIGHT-SHIFT-EP01-ALL-IN-ONE.txt",
+      "source_url": "https://drive.google.com/file/d/1L9uUfrhAPiw9f5JMKB3kx4fTifvwlTWF/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/NIGHT-SHIFT-EP01-ALL-IN-ONE.txt",
+      "bytes": 7760,
+      "sha256": "b63e40eb065f2698320a1625945b903ceacd4e4e13ac8d6d748de5142a690d85",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1tRxHnODAm_rSuOM58nXJYVqUqZhfPpE7cqpASzcG_dY",
+      "original_name": "START HERE — WF-07 Monarch AI Agent (free vs paid + 480p answer)",
+      "source_url": "https://drive.google.com/file/d/1tRxHnODAm_rSuOM58nXJYVqUqZhfPpE7cqpASzcG_dY/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/START_HERE_WF-07_Monarch_AI_Agent_free_vs_paid_480p_answer.txt",
+      "bytes": 2864,
+      "sha256": "b1cd6a88e52ee64ff469fa8f0aa30fc21f017feb06b2bf1d30c1e00542440b0b",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1r_nwFzE_y8-z_SAcOMmNiCrOdtOPTVUo",
+      "original_name": "WE-20261017-001-R2-delivery-receipt.json",
+      "source_url": "https://drive.google.com/file/d/1r_nwFzE_y8-z_SAcOMmNiCrOdtOPTVUo/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WE-20261017-001-R2-delivery-receipt.json",
+      "bytes": 1955,
+      "sha256": "b06ff4135b18a688d62d65cff7c0bf892643925ee08e291e31ff55e0cf02931c",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "17uQ6ZlyFuBrB8_O-r_5lwI-Mr5AejnV5",
+      "original_name": "WE-20261017-001-R3-girl-voice-delivery-receipt.json",
+      "source_url": "https://drive.google.com/file/d/17uQ6ZlyFuBrB8_O-r_5lwI-Mr5AejnV5/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WE-20261017-001-R3-girl-voice-delivery-receipt.json",
+      "bytes": 2312,
+      "sha256": "069be18010345aeae563f31f3ff7f93411aec994aebec29177ad08888bd4090e",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1UNqbKR_a1eeBJIlSgdR03zqao04yN1AJ",
+      "original_name": "WE-20261017-001-delivery-receipt.json",
+      "source_url": "https://drive.google.com/file/d/1UNqbKR_a1eeBJIlSgdR03zqao04yN1AJ/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WE-20261017-001-delivery-receipt.json",
+      "bytes": 5193,
+      "sha256": "4dd74d902b2dbbe0cbac2e3b81c7fcb4b21eff1700c56bdcfa2cfdddc3beaf1c",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "10UHREJ6pdKNKQvQDbpuwKKKzStFtO9Uw",
+      "original_name": "WE-20261019-002-delivery-receipt.json",
+      "source_url": "https://drive.google.com/file/d/10UHREJ6pdKNKQvQDbpuwKKKzStFtO9Uw/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WE-20261019-002-delivery-receipt.json",
+      "bytes": 2530,
+      "sha256": "5a44864c12a96e2572b0d0fbd61718769799b6ce4243f5aef3fb3bcbeb707ddd",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1g2WLpd-S9LmBur4nbz9mHc4AkOCCl54ZUpHNAzHuW5g",
+      "original_name": "WF-01 · Monarch Stickman Animation — HUB",
+      "source_url": "https://drive.google.com/file/d/1g2WLpd-S9LmBur4nbz9mHc4AkOCCl54ZUpHNAzHuW5g/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF-01_Monarch_Stickman_Animation_HUB.txt",
+      "bytes": 23511,
+      "sha256": "38da7a8d8115201df1d8aa71afbf9805c1472ce8a3556fea1000fea56eab9d99",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1nqDXQU_FtCGSSdJm97aJ1dJN3WvoKTIEPKuhnGJl-uw",
+      "original_name": "WF-02 · MASTER HANDBOOK · V2–V8 Style DNA & Workflow",
+      "source_url": "https://drive.google.com/file/d/1nqDXQU_FtCGSSdJm97aJ1dJN3WvoKTIEPKuhnGJl-uw/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF-02_MASTER_HANDBOOK_V2_V8_Style_DNA_Workflow.txt",
+      "bytes": 65037,
+      "sha256": "cb128a146258bb4e5e1cc5f2715470dfe7a8c045c5e90bac97c3c3219e95b9f1",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1sGGzPHXXars1-pJvB3ugnbnLuSuQ5EpE-obVidTj6rM",
+      "original_name": "WF-03 · Monarch Noir Film — HUB",
+      "source_url": "https://drive.google.com/file/d/1sGGzPHXXars1-pJvB3ugnbnLuSuQ5EpE-obVidTj6rM/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF-03_Monarch_Noir_Film_HUB.txt",
+      "bytes": 23328,
+      "sha256": "75f4f02fb065c66bf724f19a80b26d17e016d05fe7921f2a73cff956301c03f2",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1Vx2t3z5Kx_gUMd2nkPjdqa3kc-BGDe8sj2Cua4pvxEY",
+      "original_name": "WF-04 · Monarch Face 🔥👑 — HUB",
+      "source_url": "https://drive.google.com/file/d/1Vx2t3z5Kx_gUMd2nkPjdqa3kc-BGDe8sj2Cua4pvxEY/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF-04_Monarch_Face_HUB.txt",
+      "bytes": 3808,
+      "sha256": "616ac5b8f47161252afd30a5cfa778c151b661fe9306bc57d640970dbfc5fab3",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1xqBx2wiyOTmoZe_OvVXePmlgZ8vu2MOj",
+      "original_name": "WF-04_RESUME_STATE.md",
+      "source_url": "https://drive.google.com/file/d/1xqBx2wiyOTmoZe_OvVXePmlgZ8vu2MOj/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF-04_RESUME_STATE.md",
+      "bytes": 3123,
+      "sha256": "0352cc2c524f1c65a4802a2f5ff60c4982334b20978d179a73fcb4b700f8941c",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1yg7VK9S0luG4bPHQxWGtPIKxUcKcOSI6n7JnrCxPnLU",
+      "original_name": "WF-05 · Premium Motion Editing — HUB & Complete Codex",
+      "source_url": "https://drive.google.com/file/d/1yg7VK9S0luG4bPHQxWGtPIKxUcKcOSI6n7JnrCxPnLU/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF-05_Premium_Motion_Editing_HUB_Complete_Codex.txt",
+      "bytes": 71956,
+      "sha256": "33aeedae27a81b7dea51847eae1a83bad93ca736114aa51e0f6cb391820cd2cb",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1o7bKfshK1rfoFuVcneqgMuuiSQAYTOkq",
+      "original_name": "WF02_MASTER_HANDBOOK_20261016.md",
+      "source_url": "https://drive.google.com/file/d/1o7bKfshK1rfoFuVcneqgMuuiSQAYTOkq/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF02_MASTER_HANDBOOK_20261016.md",
+      "bytes": 63454,
+      "sha256": "4af25d14f15013bd3510abef3f790d0294ff856670373c091ba7a53f2840f01b",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "17JlBrKBwBTw3Hv5jYQECSEglYGQFNUg1",
+      "original_name": "WF02_PUBLISH_RECEIPT_20261016.json",
+      "source_url": "https://drive.google.com/file/d/17JlBrKBwBTw3Hv5jYQECSEglYGQFNUg1/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF02_PUBLISH_RECEIPT_20261016.json",
+      "bytes": 3414,
+      "sha256": "853b67cf0d3b101dd3a4f77bb73372b33abb4bb9d656e35308ea94879f4021d6",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1mfhozgtftvesISCEDP622nlDy3DPQSUv",
+      "original_name": "WF05_18_FAILURES_CAUSES_FIXES_AND_REGRESSIONS.json",
+      "source_url": "https://drive.google.com/file/d/1mfhozgtftvesISCEDP622nlDy3DPQSUv/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF05_18_FAILURES_CAUSES_FIXES_AND_REGRESSIONS.json",
+      "bytes": 8572,
+      "sha256": "d1f1de0ed6223bac2b9e0b5432bed57ed1ddc7f50e4873521f4bb0d1f1b69569",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "148w4Qtq2oPbWzv20fVgkmQydNTOQsao4",
+      "original_name": "WF05_FRESH_CHAT_START_HERE.md",
+      "source_url": "https://drive.google.com/file/d/148w4Qtq2oPbWzv20fVgkmQydNTOQsao4/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF05_FRESH_CHAT_START_HERE.md",
+      "bytes": 2757,
+      "sha256": "1bf6b6b9448fbfb6e367eaebc2bbb7d4b076297c3654cf58b398cf04676b1ab9",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1IP1ykbtg6Hvk3SqiZGkF_uRsj8v9vRje",
+      "original_name": "WF05_LIVE_RELEASE_RECEIPT.json",
+      "source_url": "https://drive.google.com/file/d/1IP1ykbtg6Hvk3SqiZGkF_uRsj8v9vRje/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF05_LIVE_RELEASE_RECEIPT.json",
+      "bytes": 2763,
+      "sha256": "8a6be4dbc1848a529bbc4a09125af1196fcecaf30961bc619a3de283a7950226",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "15v6TBBUNup32YJdkqvtIXk8GeRFAg5TT",
+      "original_name": "WF05_MASTER_CODEX_CANONICAL.md",
+      "source_url": "https://drive.google.com/file/d/15v6TBBUNup32YJdkqvtIXk8GeRFAg5TT/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/WF05_MASTER_CODEX_CANONICAL.md",
+      "bytes": 68168,
+      "sha256": "651c535039d46165c30a6c7888f8ccad54a447b33f36a8d1d7b0f65720fb42ed",
+      "evidence_level": "connected_app_record",
+      "note": "Google Drive text/export imported byte-for-byte via connector."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/continuity/checkpoints/EMS-20261011-001/0006-20261010T221708Z/HANDOFF.md",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/checkpoints/EMS-20261011-001/0006-20261010T221708Z/HANDOFF.md",
+      "bytes": 1720,
+      "sha256": "b985fe0868c415227586e9fa2ae3aa6f6ef0eec629e99cc29a7c129291468a44",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/continuity/checkpoints/EMS-20261011-001/0006-20261010T221708Z/checkpoint.json",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/checkpoints/EMS-20261011-001/0006-20261010T221708Z/checkpoint.json",
+      "bytes": 4425,
+      "sha256": "f3ecb1d8fcdff09ccead5f2fe8dfce860ed8ca8518703739bbd24cb1b7b2152e",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/STATUS.md",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/STATUS.md",
+      "bytes": 946,
+      "sha256": "992353cba9818d202b6f092d18a8043bd394daee411acde21d21577c9c5a388d",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/SYNC.json",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/SYNC.json",
+      "bytes": 3581,
+      "sha256": "120906ad45226f4a69e19c7959980ff3e9d243e59c9872b20f62818a388dcfbe",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/checkpoint.json",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/checkpoint.json",
+      "bytes": 4425,
+      "sha256": "913daa3ff10064b521c86c26c1eb2c6dd8a6dd8d3ce8e78b37c0b8ae1b5ffb14",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/ACTIVE_TASK.json",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/ACTIVE_TASK.json",
+      "bytes": 1578,
+      "sha256": "5bd60b84849fb8c45a2b6fc6abe649bec2e337f697ba4599864d48e29a4a9a0a",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/CHAT_TRANSCRIPT.jsonl",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/CHAT_TRANSCRIPT.jsonl",
+      "bytes": 6948,
+      "sha256": "f35090effb464fa09ca3fa45f417ccfce2a13e3da9e411d96d04b42b1b7dcd95",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/JOURNAL.jsonl",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/JOURNAL.jsonl",
+      "bytes": 42336,
+      "sha256": "5759a194f72cc291d8794fbf9824c606169f827e841d2e0cec67b5dadeace718",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/POST_COMPLETION_VERIFICATION.md",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/POST_COMPLETION_VERIFICATION.md",
+      "bytes": 1728,
+      "sha256": "7c90b710f2d58aadd485b5c32a6d006e24039a465a4ba8cf9fca545d0c612c93",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/RESUME.md",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/RESUME.md",
+      "bytes": 1720,
+      "sha256": "b985fe0868c415227586e9fa2ae3aa6f6ef0eec629e99cc29a7c129291468a44",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/payload/USER_CONFIRM_GITHUB.txt",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/payload/USER_CONFIRM_GITHUB.txt",
+      "bytes": 104,
+      "sha256": "6f678cf553c6de62a2e32a8a1c9f00eab54bf4cd9732e0ac6448c0aa574d4682",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/payload/USER_MESSAGE_GITHUB_REPO.txt",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/payload/USER_MESSAGE_GITHUB_REPO.txt",
+      "bytes": 2985,
+      "sha256": "5f1a422d857c1530c315570ae9613276649da170b7b0dda42163f57c65ec167d",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    },
+    {
+      "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+      "original_name": "operations/history/EMS-20261011-001/payload/USER_REQUEST.txt",
+      "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+      "local_path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/payload/USER_REQUEST.txt",
+      "bytes": 2925,
+      "sha256": "c09afb13fcee5328be0a558f2a1a479fce639042b3cec2ea92255591389ee3e4",
+      "evidence_level": "connected_app_record",
+      "note": "Extracted from EMS-20261011-001-history-archive.tar.gz. CHAT_TRANSCRIPT.jsonl is partial verbatim; JOURNAL.jsonl is an event log."
+    }
+  ]
+}

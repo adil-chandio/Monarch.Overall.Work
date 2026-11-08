@@ -1,0 +1,54 @@
+EDITING MONARCH STUDIO — FINAL DRIVE RECOVERY ORDER
+Updated: 2026-10-11 Asia/Karachi
+Canonical GitHub: https://github.com/adil-chandio/Monarch-Studio
+Final main/tag commit: 164d9d497c0c2023508ba73bed6c0bb4a5510b13
+Final release: v0.2.1 (annotated tag object a5b4d8b5ab23e688f30546742732a7c092c45861)
+Clean CI: https://github.com/adil-chandio/Monarch-Studio/actions/runs/38091013208
+Task EMS-20261011-001: completed and permanently archived; active workflow is idle.
+
+PREFERRED SELF-CONTAINED RESTORE
+1. Download Monarch-Studio-v0.2.1-complete.bundle
+   Drive ID: 1totKWmv1f5XTtOKLy0vutGg-YsFLaZFc
+   Size: 63,271,720 bytes
+   MD5: a8c3ed9ff50ad5d91aaf975dc6a31367
+   SHA-256: cf288113cb04186d6df6c5a1c5616e02baba4ed0b0da86b229d44525032e22c5
+2. Restore:
+   git clone Monarch-Studio-v0.2.1-complete.bundle editing-monarch-studio
+   cd editing-monarch-studio
+   git checkout main
+3. Verify:
+   git bundle verify /path/to/Monarch-Studio-v0.2.1-complete.bundle
+   python3 tools/continuity.py resume
+   python3 tools/studio.py validate
+   python3 -m unittest discover -s tests -v
+4. Before complete render/package rebuilds:
+   python3 tools/materialize.py full
+
+DELTA RESTORE FROM continuity-v1 BASELINE
+- EMS-20261011-001-cp0006-git-delta.bundle
+- Drive ID: 1mh_QUEherPXyO3Rkx3SqkCq5qO0m6ska
+- Size: 59,494 bytes
+- MD5: 4bc6b6a9ca1dbfb39785a103939b8d74
+- SHA-256: be1c0545781f5ac38f621770854941d43bc52d17bd1a01b96bf270b97865bda4
+- Required baseline commit: c5226d972c4c27982edf17777aba5aead62f4820
+- Apply with: git fetch /path/to/EMS-20261011-001-cp0006-git-delta.bundle v0.2.1 && git checkout -B main FETCH_HEAD
+
+FINAL HUMAN/CONTINUITY ARCHIVES
+- Completion capsule: 1m_vT0f2W8RMEXs4QHNCHwiaTE_gLHKEL
+  Name: EMS-20261011-001-v0.2.1-completion-capsule.tar.gz
+  MD5: f7c3174850684d7cc12945cb7ac162aa
+  SHA-256: 6292827565d8b351194a5f8b69ef2f58e95c9eb4bff21bc736ed37649678fbee
+- Permanent task history: 1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH
+  Name: EMS-20261011-001-history-archive.tar.gz
+  MD5: e3a75985e044e9c6dc6f1b71f49f8508
+  SHA-256: 1dc1004a849b83ef51b177b20233fb1e9e57e8e29a6953816905336dd9f4eb00
+- Machine-readable artifact manifest: 1dNeAj7BzaZYgdIXrWYTgFKXcUwcCYxe7
+  SHA-256 of uploaded JSON: fc8afc90405ce1bd592b2216c67e35b2a10b649970803ce6e3edbd55962fab58
+- SHA-256 list: 1nkGw8-aIyiIF7X0_fRcDYv2Ue4GPHL2_
+  SHA-256 of uploaded list: 76050d5617efd0d96b5287e1df115f3632dacbdeadb3fcd773b91c8726e1ee97
+
+OLDER RECOVERY ASSETS
+Prior full bundles, checkpoint capsules, and ordered deltas remain intentionally retained in this folder as historical recovery layers. Do not delete them. For a new restore, prefer the v0.2.1 complete bundle above.
+
+RELEASE NOTE
+v0.2.0 is an immutable historical completion snapshot. v0.2.1 is the corrected clean-CI release; it fixes sparse-manifest handling for files moved during task archival. There are no unresolved external blockers.

@@ -1,0 +1,356 @@
+﻿EDITING MONARCH STUDIO
+Continuity + Style Library v1 · canonical human recovery hub
+Status: active task EMS-20261011-001 · checkpoint 0001-20261010T212917Z
+
+
+1. Recovery entry point
+Always run: python3 tools/continuity.py resume
+Canonical local files: START_HERE.md, workflows/current/ACTIVE_TASK.json, workflows/current/RESUME.md, JOURNAL.jsonl and CHAT_TRANSCRIPT.jsonl.
+Never restart from the beginning while the active state identifies an unfinished task.
+
+
+2. Permanent style library
+WF-01 · Monarch Stickman Animation · trigger SHADEGO <topic> · PARKED
+Permanent repository path: styles/monarch-stickman-animation/
+Current authority: IZZAT v2 · Drive 1YMbukwsHQ9pcl8N9EUY6TKolZxP7gukR · MD5 393b0c28750fa81aeb1c700bbac54669.
+Knowledge index maps renderer/timeline/audio tools, SHADE animation grammar, gates, experiments, decisions, measured results, failures/fixes, assets and provenance.
+
+
+WF-03 · Monarch Noir Film · trigger NOIRGO <topic> · style active
+Permanent repository path: styles/monarch-noir-film/
+THE SHADOW and THE WINDOW are R1 reproducible. 4:00 AM v2 is R2/source absent: Drive 1gLy2m9GTgwKzDaAV59nrLALojhGkKaWI, MD5 ed233b75aa67f4255aa5c792e213467f. AB KARO ABHI v1 is R3/delivery only: Drive 1y7Z7OtOMQXeoTcIoHiqr7ClmHndefH1r, MD5 bdea55c453834fa4a4b0cacec89ed53c. Film-#3 numbering conflict is explicit and unresolved.
+Knowledge index and 35-item source inventory map animation/camera/audio methods, code, gates, decisions, failures/fixes and provenance.
+
+
+3. Single active workflow contract
+workflows/current contains exactly one running task and only its current payload.
+Every action, decision, result, error and visible user/assistant message is appended with a monotonic sequence and SHA-256 links.
+On completion, accepted artifacts and knowledge are promoted into the permanent style; task state/transcript are archived under operations/history; the active slot returns to idle.
+Archived knowledge remains searchable and is never dependent on chat memory alone.
+
+
+4. Checkpoint integrity and cadence
+State writes are atomic and exclusive-lock protected.
+Each immutable checkpoint records exact next action, active state, journal head, Git state, changed paths, process PIDs/commands/output/resume instructions and payload hashes.
+Material events trigger checkpoints. A 55-minute watcher targets the user's one-hour requirement. CI rejects active checkpoints older than 70 minutes.
+Recovery validates the hash chain before continuation so stale state cannot silently replace newer state.
+
+
+5. Five-platform sync transaction
+Every checkpoint creates an outbox ledger for GitHub, Google Drive, Notion, Linear and Google Docs.
+Each platform has independent pending, synced or failed status plus remote ID and proof timestamp.
+GitHub is canonical version history. Drive is large-asset and disaster recovery. Notion is browsable knowledge. Linear is task/blocker state. This document is portable human status.
+Connector-only systems update while Arena Agent Mode is active; otherwise their outbox entries remain explicitly pending.
+
+
+6. Current exact state
+Completed: permanent WF-01/WF-03/Monarch recovery; named style migration; continuity CLI; schemas; documentation; CI; unit lifecycle and tamper tests (7/7 passing before remote bootstrap); Notion hub; Linear project and MON-63 issue.
+Next action: reconstruct and validate Git with pinned vendor gitlinks, upload a Drive repository/recovery bundle, record all remote IDs and create the next checkpoint.
+External blocker: a GitHub remote URL and authorization must be provided by the user; the system must not invent one.
+
+
+7. Accuracy boundaries
+Hidden or already compacted historic Arena transcript is not available verbatim. Exact visible chat capture begins at EMS-20261011-001.
+Historical source files retain legacy /home/user paths; generated hydration rewrites disposable runtime copies only.
+4:00 AM source is absent and AB KARO ABHI has delivery-only evidence, so neither is represented as fully source-reproducible.
+
+
+8. Connected records
+Notion: https://app.notion.com/p/Editing-Monarch-Studio-Continuity-Style-Library-v1-3f5807e1e916819f91a9d0786304b6da
+Linear project: 70db3731-c59d-4188-8f9b-8755d15261d9
+Linear task: MON-63 · https://linear.app/monarchmation/issue/MON-63/ems-20261011-001-bootstrap-crash-proof-continuity-permanent-style
+WF-01 Drive folder: 1Qum7OkUZpRMSt3SMJ6q3WumUUwzezTw-
+WF-03 Drive folder: 11c194r1f_IMIo5yOmT-j80Iu-sZWP3KP
+
+
+Updated 2026-10-11 (Asia/Karachi). Local active task and its newest verified checkpoint take precedence over this readable mirror.
+
+
+
+
+CHECKPOINT 0002 · GIT + DRIVE RECOVERY SECURED
+Full validation: 19 passed, 1 documented legacy-path warning, 0 errors. Unit tests: 7/7 passed. Git HEAD: 945c2998de1b054cddcd03fd83272adf30346300.
+Complete Git bundle: Drive 1DBVVqRsJs2Mbg6rWDbEYpR65C0ABsXXj · 63,225,490 B · MD5 5954cf8ad494dfb68929ea1a44fb6e7f · SHA-256 ff4b4b082b7b3a75b9b6fcd8fa1c64116e287edd25893576050e4a6129537dfe.
+Tracked snapshot: Drive 1y2sL-8U1PdzTlqzyryVvHjknCGZRNO9d · 63,493,099 B · MD5 133f30de7f5cb9e49a081741e165852e.
+Active continuity capsule: Drive 1aCYm1CmdFO3ta9pNYcFC5AbV0leX8Wbw · MD5 33f3350a120db6874b7ee02d02579a8b.
+Only external blocker: a real GitHub remote URL and authorization are still required and will not be invented.
+
+
+
+
+AUTHORITY CORRECTION · WF-01
+Disregard 1YMbukwsHQ9pcl8N9EUY6TKolZxP7gukR in earlier migration text; fresh Drive lookup returned 404. Verified IZZAT v2 R1 authority is shade_respect_v2.mp4 · Drive 1fu_g2HTNZVRqE3XBKdUKZoj6O8tIdkpu · MD5 8d91be52ab969e0b23f21bf6bab0df85 · 28,432,377 bytes · 75.19 s · 19/19 gates.
+
+
+
+
+CHECKPOINT 0003 · WAITING ONLY FOR GITHUB
+Git HEAD b0eac0b5575069a4dda34ac1bdc3362aa5b83121 · waiting_external · 22-event hash-chained journal VALID.
+CP0003 Git delta (apply after CP0002 bundle): Drive 1-LjaejSFOCyaKyO4dkjwzrctGUw0cU43 · MD5 26395d40f31bf60940d41d4c246d91b7.
+CP0003 active recovery capsule: Drive 1vrGTt7W9DV-qiE2opP7t7k7NuA7WyDE9 · MD5 3a6022897a8c30094e260ade5bb4f5fe.
+WF-01 correction incorporated: verified authority is 1fu_g2HTNZVRqE3XBKdUKZoj6O8tIdkpu / 8d91be52ab969e0b23f21bf6bab0df85; reject 1YMbuk… (404).
+Exact next action: the user supplies a GitHub repository URL and confirms write access; then origin/main/tag are pushed and EMS-20261011-001 is completed/archived.
+
+
+FINAL LOCAL RECEIPT HEAD
+Clean local main: c48f697823276145fc530fff6053ca8170ad44bf.
+Final receipt delta: Drive 1xokObNUppmmUlo0DCCZM7l8pfhVy269_ · MD5 ce9c9f727a9db782567ab6aea355d868. Apply after the CP0003 delta; it contains the validation manifest and connected-platform delivery receipts.
+Drive recovery order: CP0002 complete Git bundle → CP0003 delta → CP0003 receipt delta. GitHub remains the only unsatisfied external target.
+
+
+STORAGE-SAFE FINAL HEAD
+0badceba68d4066b205a15842834bae4c89a78d5 · compact Arena worktree 98 MB · 8/8 tests · 19 validation passes / 2 expected sparse+legacy warnings / 0 errors.
+Additional Drive deltas after the prior receipt delta: storage guard 1SDogezk1cxAsho4KzBXZ2FuNQgVfb18U (MD5 d405a77cc3eb60a31bfbbded6caa2e7c), then manifest fix 1PRknO0nNEMlFfbKI19wtkAkuKTCnkNN2 (MD5 f2a89ab0d088f40881fe092f38698b0f).
+Compact mode omits 80 heavy tracked paths locally but deletes nothing from Git/Drive. Run python3 tools/materialize.py full before a complete render rebuild.
+
+
+Drive read-first recovery order: 00 · DRIVE RECOVERY ORDER.txt · ID 1XY7vzLq-0aCGXHAGNTYbxLPBzX7zFInl · MD5 96984e286dcb1893d69e0868ed76a4ce.
+
+
+
+
+GITHUB LIVE + CLEAN CI
+Canonical repository: https://github.com/adil-chandio/Monarch-Studio
+Verified main HEAD: 4103666f8b325144948d917e5947e3bcb694dd27.
+CI proof: https://github.com/adil-chandio/Monarch-Studio/actions/runs/38090716084 — dependencies, validation, continuity integrity/freshness and 8/8 tests passed.
+Failure/fix chain retained: auth absence → secure device auth; missing workflow scope → refresh; lock-file manifest defect → exclusion; missing CI renderer dependencies → pinned install. No token/password is stored in repo or chat.
+
+
+
+
+FINAL RELEASE — v0.2.1 — 11 OCTOBER 2026
+
+
+STATUS
+EMS-20261011-001 is complete and permanently archived. workflows/current is in the canonical idle state. GitHub, Google Drive, Notion, Linear, and this Google Docs hub carry independent final receipts.
+
+
+VERIFIED RELEASE
+• Canonical commit: 164d9d497c0c2023508ba73bed6c0bb4a5510b13
+• Annotated release tag: v0.2.1 (tag object a5b4d8b5ab23e688f30546742732a7c092c45861)
+• GitHub: https://github.com/adil-chandio/Monarch-Studio
+• Clean CI: https://github.com/adil-chandio/Monarch-Studio/actions/runs/38091013208
+• Validation: 19 pass, 2 expected provenance/sparse warnings, 0 errors
+• Tests: 9/9 pass
+
+
+POST-COMPLETION CORRECTION
+A clean checkout exposed one sparse-manifest archival edge case in v0.2.0. The system now preserves absent manifest records only when Git explicitly marks the path skip-worktree; moved materialized paths are removed. Validation uses the same rule and a regression test enforces it. v0.2.0 remains an immutable historical completion snapshot; v0.2.1 is the corrected canonical release. Full evidence is preserved at operations/history/EMS-20261011-001/POST_COMPLETION_VERIFICATION.md.
+
+
+FINAL DRIVE RECOVERY SET
+• Complete Git bundle: 1totKWmv1f5XTtOKLy0vutGg-YsFLaZFc — SHA-256 cf288113cb04186d6df6c5a1c5616e02baba4ed0b0da86b229d44525032e22c5
+• Checkpoint-0006 delta: 1mh_QUEherPXyO3Rkx3SqkCq5qO0m6ska — SHA-256 be1c0545781f5ac38f621770854941d43bc52d17bd1a01b96bf270b97865bda4
+• Completion capsule: 1m_vT0f2W8RMEXs4QHNCHwiaTE_gLHKEL — SHA-256 6292827565d8b351194a5f8b69ef2f58e95c9eb4bff21bc736ed37649678fbee
+• Permanent task history: 1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH — SHA-256 1dc1004a849b83ef51b177b20233fb1e9e57e8e29a6953816905336dd9f4eb00
+• Artifact manifest: 1dNeAj7BzaZYgdIXrWYTgFKXcUwcCYxe7
+• SHA-256 list: 1nkGw8-aIyiIF7X0_fRcDYv2Ue4GPHL2_
+• Starred read-first recovery order: 1XY7vzLq-0aCGXHAGNTYbxLPBzX7zFInl
+
+
+There are no unresolved external blockers. Start future work with: python3 tools/continuity.py init ...
+
+
+VERIFICATION-MODE CLARIFICATION
+The full clean GitHub checkout passed 19 checks with 1 expected preserved-historical-path warning and 0 errors. The compact sparse local checkout passed the same 19 checks with 2 expected warnings: the same historical-path warning plus deferred hashing of 79 explicit skip-worktree files. Unit tests are 9/9 in both modes.
+
+
+
+
+## EMS-20261011-004 — Checkpoint 0004 (2026-10-11)
+
+
+**Durable cursor:** `continuity-user-review` (`waiting_external`)
+
+
+**Completed at this checkpoint**
+- Exact-resume continuity repair remains verified; no completed audit, firewall, or shot-bible stage was replayed.
+- Implemented `tools/v3_preproduction.py` as a restart-safe entrypoint for the two independent 12-keyframe look proofs and the cross-style visual firewall.
+- WF-01 is locked to articulated SHADE + graphic paper theatre; WF-03 is locked to illustrated lived-in locations + the true-3D human rig.
+- The renderer publishes the exact artifact paths already declared by the durable run plan.
+- Studio validation: 19 passed, 1 historical-path warning, 0 errors. Dependency/API smoke: PASS.
+- Local Git checkpoint: `315d17bc916966a3f5466efcd7f8ca20479d663e`.
+
+
+**Intentionally not rendered:** No look proof, motion proof, or full V3 master. Proof-first approval gates remain active.
+
+
+**Exact next action after user approval / “continue”**
+Approve only `continuity-user-review`, then run the persisted plan with `python3 tools/continuity.py continue --execute`. It must begin at `wf01-look-proof`, then continue through `wf03-look-proof` and `look-firewall`, stopping only at `look-proof-approval`.
+
+
+**Checkpoint ID:** `0004-20261011T150044Z`
+
+
+
+
+## EMS-20261011-004 — Checkpoint 0005: atomic “continue” repair
+
+
+The user correctly reproduced a remaining continuity failure before creative rendering. The earlier runner preserved an exact cursor, but a natural-language “continue” at a user gate still depended on an agent performing two separate commands. Arena could also preserve workspace files while rewinding local Git metadata.
+
+
+**Enforced replacement**
+- Canonical command: `python3 tools/continuity.py continue --execute --user-continue '<VERBATIM USER MESSAGE>' --source arena-chat`
+- It approves only the user gate that is current when the command begins.
+- It immediately executes the exact persisted cursor and skips every hash-verified completed stage.
+- The token is consumed before work starts, so it cannot approve a later look/motion-proof gate.
+- If the starting cursor is executable, it runs that cursor but cannot approve a later gate.
+- Every committed checkpoint now writes a verified incremental Git bundle outside `.git`; restore uses a non-destructive mixed reset and never discards working files or partial outputs.
+
+
+**Proof**
+- Reconciliation invalidated only `continuity-hardening`; the runner reran only that stage and its changed regression report. Preproduction audit and shot bibles were not replayed.
+- 7/7 continuity tests passed.
+- 14/14 repository tests passed.
+- Studio validation: 19 passed, 1 historical-path warning, 0 errors.
+- Persistent regression invariants: atomic verbal continue, exact cursor execution, no replay, one-shot non-leakage, and Git-metadata rehydration all true.
+
+
+**Durable state**
+- Checkpoint: `0005-20261011T153339Z`
+- Local head: `59a7377cd8fc21c8205f0ac64c51293bfe042bc2`
+- Cursor remains: `continuity-user-review` (`waiting_external`)
+- Next executable stage after explicit approval: `wf01-look-proof`
+- Drive bundle: `11qaL1apZQuezl0dtolBYU0zyZx2yQb-M`
+- Drive recovery ZIP: `1QriyGq2jNKqXonEqoN-25lv1UPHZEGKN`
+
+
+No look proof, motion proof, or full V3 master has been rendered.
+
+
+
+
+## EMS-20261011-004 — Checkpoint 0006: V3 look proofs ready
+
+
+The user’s atomic “continue” was consumed exactly once at `continuity-user-review`. Verified completed stages were skipped.
+
+
+**Delivered for visual approval**
+- WF-01: 12-keyframe SHADE / graphic paper-theatre look proof — Drive `1qUTnBBu2qx_UABpBWO-QbKwncSJIbVDc`
+- WF-03: 12-keyframe lived-in noir / true-3D human look proof — Drive `1KxnxZLO0msbgMe9n9ZGftaBqg4HVpiG5`
+- Paired review wall — Drive `1w-IEECAdx3u9U97ZotItqY5d8JgVdnkp`
+- Firewall report — Drive `1zD-cQd_K6MBsknlAoBb1NZIuDh9GeOus`
+- Durable CP0006 Git bundle — Drive `1IPOGy4hUKNk3SCoMpkFtQVBDoQr2ruaY`
+
+
+**Firewall:** PASS. Average edge-layout correlation `0.02965`; maximum paired correlation `0.07964`. The styles are structurally independent rather than cosmetically reskinned.
+
+
+**Current cursor:** `look-proof-approval` (`waiting_external`).
+
+
+No motion proof or full V3 master was rendered. The earlier continuity approval does not approve these new visual proofs. Explicit approval of both styles is required before motion-proof rendering.
+
+
+
+
+## EMS-20261011-004 — Checkpoint 0007: V3 motion proofs ready
+
+
+The user explicitly approved both independent look directions. The atomic runner reached and completed the two motion-proof stages and proof QC, then stopped at `motion-proof-approval` as required.
+
+
+**WF-01 — SHADE / graphic paper theatre**
+- Proof: 00.00–18.43 s; 18.433 s output; 1920×1080; 30 fps; 553 frames.
+- 12 authored shots with articulated SHADE, crowd depth, seat aperture, extruded type, pressure tags, radial +20 transformation and true outgoing/incoming paper transitions.
+- Exact locked voice excerpt plus original 92 BPM prepared-paper chamber pulse and paper Foley.
+- Drive: https://drive.google.com/file/d/1gPYvJtUWLUKa_Zv6o6ZY6DeUiDtzjDEq/view
+- SHA-256: `e1df63bd33072a4e31b73d49c5d3228730dc47f09eecafbf4c6b995274e38fe5`
+
+
+**WF-03 — lived-in noir / true-3D human**
+- Proof: 20.98–39.03 s; 18.042 s output; 1920×1080; 24 fps; 433 frames.
+- 10 location-driven shots with phone handling, face performance, dry phone-down match cut, motivated lamp event, physical task contact, Day 1/10/30/90 continuity and an exterior-to-interior window push.
+- Exact locked voice excerpt plus original 72 BPM felt-piano/bowed-glass noir bed, rain/room tone and physical Foley.
+- Drive: https://drive.google.com/file/d/1vprIt4GQ0YqqcNsd75vs-g3PvvAEMZwL/view
+- SHA-256: `fe864a7be227a92aa52d5cb93222a09cbd8f0009405907b5d9b51bd57bed3497`
+
+
+**QC:** PASS — every gate passed. Cross-style average edge-layout correlation `0.01825`; maximum paired correlation `0.08185`. Audio is present in both files, no black-frame samples were detected, and full-master absence was verified.
+
+
+**Durability:** checkpoint `0007-20261011T164359Z`; Git `0952313280def1c440a2b6f7190dcbe7d6141fd0`; recovery bundle Drive `1qcY9ypd7OPbklb9NI7EybIRPmj63Ajdd`; bundle SHA-256 `53fd2bc6ea09a07f8f9d2ec2a414c07e5572d5926a10d99e1adb7d89e0ba84b8`.
+
+
+**Current cursor:** `motion-proof-approval` (`waiting_external`). No full V3 master exists or is permitted until the user explicitly approves both motion proofs.
+
+
+
+
+## EMS-20261011-004 — CP0008 refresh-replay and snapshot-rollback fix
+
+
+The user supplied four screenshots proving that a browser refresh resurfaced an old user prompt after a correct long-running response. Local verification also found a rollback from CP0007 / `motion-proof-approval` to an older CP0006 snapshot.
+
+
+**Recovery:** CP0007 was restored from the verified Drive bundle. Both motion proof hashes remained exact, and no full master was started.
+
+
+**Confirmed root causes:**
+- previously seen user text had no global replay quarantine and could be reused at a later approval gate;
+- snapshot-eligible repository data plus the retained 89.4 MB local Git bundle exceeded Arena’s approximate 128 MB snapshot cap.
+
+
+**Enforced fix:** user text is now normalized and fingerprinted. `log --kind user`, `continue --user-continue`, and `approve --note` quarantine any already-seen message before execution or approval. A live replay of historical event 40 returned exit 4, executed 0 stages, approved no gate and had authorization effect `none`. Only a fresh gate-specific decision may approve a later gate.
+
+
+A 96 MiB snapshot audit and verified `bundle-release` workflow were added. Regenerable completed look-proof intermediates were removed while published proofs, manifests, source and build states were retained. Snapshot-eligible size fell from 135,445,932 to 79,518,020 bytes.
+
+
+**Verification:** 17/17 full unit tests pass; all 14 continuity invariants pass; repository validation is 19 pass / 1 historical warning / 0 errors.
+
+
+**CP0008:** Git `4c5bf1b6464391ac02c9c47e87a4f5c97c322d9c`; recovery bundle https://drive.google.com/file/d/18naz3GSQkT3PUFUTQEWU9hOf95KdQpuV/view ; SHA-256 `0377bc7cca88689cf840f14ed798e4eebb5cb2e81de576f12a0032e2a7551849`. The verified local bundle was released after upload, leaving the small remote pointer and a 79.6 MB snapshot footprint.
+
+
+**Current cursor:** `motion-proof-approval` (`waiting_external`). The old prompt is not approval. No full V3 master exists or is permitted until a fresh explicit decision is provided separately for both motion proofs.
+
+
+
+
+### CP0010 final zero-effect replay guard
+
+
+The replay check now occurs before plan reconciliation itself. Final live test replayed historical event 40 while the durable cursor was `motion-proof-approval` and continuity outputs had intentionally changed. Result: `executed=0`, `approved_gate=null`, `authorization_effect=none`, `plan_reconciled=false`, `cursor_mutated=false`; current stage remained `motion-proof-approval`. Only a later token-free continuation performed legitimate integrity reconciliation and skipped all creative stages.
+
+
+Verification: 17/17 unit tests; 15/15 continuity invariants; repository 19 pass / 1 historical warning / 0 errors. CP0010 Git `d12625dd00394f581f4bbf4da08b7198946eef2f`; bundle https://drive.google.com/file/d/1PWnlpJNnolIXu165BuTIA6VeaMUq9wg9/view ; SHA-256 `cd88b218024ddf58260016e9f50c15127b4f85c776294ee513cd223c137bacf2`. Snapshot footprint after verified local bundle release: about 79.8 MB. The old refreshed prompt has zero control-plane effect and is not proof approval.
+
+
+
+
+### CP0011 · completed-report stop fence corrected
+
+
+The user’s 20:40 screenshot sequence proved that the earlier report had finished and the agent should have stopped. Arena then resurfaced an older long prompt; that prose was incorrectly accepted as the `continuity-user-review` authorization and began later stages without a fresh user command.
+
+
+That historical approval is now explicitly reclassified as invalid stale-UI authorization. Existing proof/QC artifacts remain preserved, but the invalid trigger grants no current or future creative authority.
+
+
+Enforced correction:
+- a `fresh_continue` gate issues a cryptographically random one-time `continue CODE`; only that exact current command can cross the stop fence;
+- an `explicit_approval` gate rejects plain continue and requires exact stage ID, current code, and every declared structured decision;
+- unseen historical prose, wrong/old codes, unrelated text, and partial decisions are rejected before plan reconciliation, cursor mutation, approval, or execution;
+- `motion-proof-approval` requires separate WF-01 and WF-03 decisions; one cannot approve the other.
+
+
+Live production tests confirmed that an unseen old-style paragraph, plain continue, a wrong code, and WF-01-only approval each executed zero work and left `motion-proof-approval` unchanged. Verification: repository tests 17/17; continuity invariants 18/18; validation 19 pass / 1 historical warning / 0 errors. No creative stage was replayed and no full-master stage exists.
+
+
+CP0011 Git: `14fa77d7d6a29b0715ceb60b6340c24633d1fde3`
+Bundle: https://drive.google.com/file/d/193FcyvnPC_zkq2wSGM1CoJTh2RqxgCor/view
+SHA-256: `a3d87166cd511845d6dfe57735e4584eb447faefc1d1b64c8b364021e7db6c61`
+
+
+EMS-20261014-002 · CP0004 · THE GRAVITY OF THE PHONE · WTF-30 #1 · v4 delivered (2026-10-14 20:07 UTC)
+Status: waiting_external — v4 delivered, user verdict pending (v3 accepted). Checkpoint 0004-20261014T200730Z · commit d82e7c37ae3d5899ddec4c447488d60fda3838d0 on arena/7f4f623f-monarch-studio · validate 19 pass / 2 expected warnings / 0 errors · continuity events 1–18 · Linear MON-66.
+• Task: first WTF-30 film in WF-01 — 20.0 s · 1080×1920 · 30 fps · law broken: gravity · 10.0 s uncut impossible moment · 7 on-screen words. Four same-day versions (v1 941be2e · v2 8efb227 · v3 22102b8 · v4 d82e7c3).
+• v4 = Apple iPhone + comment engine (9:41 spiral lock screen · clock race to 2:41 · Monarch-in-the-photo · friend points at lens · moth · steam bends away · spiral rim light). Measured −14.1 LUFS / TP −1.3 / LRA 6.5 / seam 3.40 · gates 12/12 + 28/28.
+• Drive: v4 master 1Zi87F-qYb-tGENwdPdMGeP4jVAbeggGl (MD5 b2735dbf9ff18dc2e8f3fbf2be341c22) · film folder 1ITMYpBexdmGaALpaf6BlTXNuGNfAFTiQ · v3 1LsfTOubsY6kHeWJatrSj4z71Qxbcpfh1 · v2 1vzNjW3FeXOMoJ4HDGqM-km5BCKw8IUfp · v1 118VOjnmzDmTrTuz8iCsGPwIwWUvJDbPJ.
+• Continuity capsule cp0004: Drive 1Nds05hauYmxEf60rXTFap9QPLKsHIOmR (SHA-256 491e5dd8682ab6f20497f5489946dbe96107757b1f8fbef5436725d622d88cfb) · git delta bundle 7909bde..d82e7c3 Drive 1dFHpSCn6JRv4Z1pgoAjS_wUEg6Mx1_R7 (SHA-256 fce25a217ca692e5e6a5bf207a6a2f8420ed5466403f89f625fca28083fa409f) · SHA256SUMS 1w8hYRdZCVT_CrTeczOiyASjyWtL_qHbw.
+• Receipts: Notion film record 3f9807e1-e916-81c3-9a11-d382e6b01a5e (under WF-01) · Linear MON-66 + WF-01 project update 5705de7a + MON-34 comment 3673e8c7 · WF-01 HUB doc tab t.tanq32rojenq.
+• Permanent knowledge: styles/monarch-stickman-animation/films/gravity-of-the-phone/ · registry gravity_of_the_phone_wtf30_01 version 4 · doctrine studio/editor-brain/MONARCH_WTF30_DOCTRINE.md §13 + §16 rules 20–21.
+• Resume: python3 tools/continuity.py resume → wait for the v4 verdict; accepted → continuity.py complete; notes → iterate in workflows/current/payload/gravity-of-the-phone/. Do not redo v1–v4.

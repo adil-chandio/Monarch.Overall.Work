@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "checkpoint_id": "0004-20261011T002321Z",
+  "created_at": "2026-10-11T00:23:21Z",
+  "summary": "TUMHARI RESERVED SEAT completed in both permanent workflows: one selected exact voice and 34-beat/74-second lock; separate WF-01 and WF-03 1920x1080 films each passed 21/21 delivery and 18/18 freshness; masters and deterministic sources verified on Drive; learning promoted; GitHub, Drive, Notion, Linear and Google Docs independently synchronized.",
+  "next_action": "Task complete; consult permanent archive.",
+  "active_state": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-002",
+    "status": "completed",
+    "title": "Dual-style viral motivational short · one topic, one voice, two films",
+    "style_id": "monarch-stickman-animation + monarch-noir-film",
+    "goal": "Choose one high-FOMO motivational idea for a Desi audience, create one emotionally human 60–90 second easy-Urdunglish master script and voice-over, then produce two premium 16:9 landscape videos from that same narrative using the permanent WF-01 and WF-03 style workflows.",
+    "acceptance_criteria": [
+      "One original motivational topic and one shared retention-engineered 60–90 second easy-Urdunglish script with curiosity, FOMO, emotional storytelling, relatability, and a human tone.",
+      "One user-approved professional voice artist and mastered voice-over used consistently across both edits.",
+      "Two complete 16:9 landscape videos at 1920×1080: one in styles/monarch-stickman-animation and one in styles/monarch-noir-film.",
+      "Every beat receives intentional premium visuals, animation, typography, colour, SFX/ASMR and music design while preserving intelligibility and avoiding omissions.",
+      "Outputs are objectively validated, documented with provenance, and promoted into both permanent style packages before active-task archival."
+    ],
+    "started_at": "2026-10-10T22:53:36Z",
+    "updated_at": "2026-10-11T00:23:21Z",
+    "checkpoint_sequence": 4,
+    "event_sequence": 35,
+    "journal_head": "83de8ae318e25b9d6bb379b83d769e31b13f4277970252f4050b4c9ad0b6d97b",
+    "last_checkpoint": "2026-10-11T00:23:21Z",
+    "last_checkpoint_path": "operations/continuity/checkpoints/EMS-20261011-002/0003-20261011T000301Z",
+    "next_action": "Task complete; consult permanent archive.",
+    "running_processes": [],
+    "remote_sync": {
+      "github": "completed",
+      "google_docs": "completed",
+      "google_drive": "completed",
+      "linear": "completed",
+      "notion": "completed"
+    }
+  },
+  "journal_event": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-002",
+    "seq": 35,
+    "timestamp": "2026-10-11T00:23:21Z",
+    "kind": "checkpoint",
+    "actor": "continuity",
+    "content": "TUMHARI RESERVED SEAT completed in both permanent workflows: one selected exact voice and 34-beat/74-second lock; separate WF-01 and WF-03 1920x1080 films each passed 21/21 delivery and 18/18 freshness; masters and deterministic sources verified on Drive; learning promoted; GitHub, Drive, Notion, Linear and Google Docs independently synchronized.",
+    "content_sha256": "668edcdde848a09c520937223029c0ab3d37754e017b61d7eed9e3e868a0ffc8",
+    "metadata": {
+      "sequence": 4,
+      "next_action": "Task complete; consult permanent archive.",
+      "status": "completed"
+    },
+    "prev_event_sha256": "c6a1c229960091fda20921bc729f9bc76c05a9d81840b19d45b6e71046c61ec0",
+    "event_sha256": "83de8ae318e25b9d6bb379b83d769e31b13f4277970252f4050b4c9ad0b6d97b"
+  },
+  "journal_head": "83de8ae318e25b9d6bb379b83d769e31b13f4277970252f4050b4c9ad0b6d97b",
+  "git": {
+    "initialized": true,
+    "head": "e1633a94a2438b9c4d50d91e04efe25bd6a2880b",
+    "branch": "main",
+    "status": [
+      "M docs/productions/EMS-20261011-002/DELIVERY.json",
+      "M docs/productions/EMS-20261011-002/DELIVERY.md",
+      "M operations/continuity/outbox/EMS-20261011-002/0003-20261011T000301Z/SYNC.json",
+      "M studio/new_workflow_legacy.py",
+      "M styles/monarch-noir-film/src/encode_shadow.sh",
+      "M styles/monarch-noir-film/src/encode_window.sh",
+      "M styles/monarch-noir-film/src/finish_shadow.sh",
+      "M styles/monarch-stickman-animation/build_all.sh",
+      "M styles/monarch-stickman-animation/build_power.sh",
+      "M styles/monarch-stickman-animation/build_respect.sh",
+      "M styles/monarch-stickman-animation/build_respect2.sh",
+      "M styles/monarch-stickman-animation/build_respect2_b.sh",
+      "M styles/monarch-stickman-animation/build_respect_resume.sh",
+      "M styles/monarch-stickman-animation/build_shade.sh",
+      "M styles/monarch-stickman-animation/finish_respect2.sh",
+      "M styles/monarch-stickman-animation/src/mux_full.sh",
+      "M styles/monarch-stickman-animation/src/mux_hook.sh",
+      "M styles/monarch-stickman-animation/src/mux_power.sh",
+      "M styles/monarch-stickman-animation/src/mux_respect.sh",
+      "M styles/monarch-stickman-animation/src/mux_respect2.sh",
+      "M tools/materialize.py",
+      "D vendor/awesome-opus5-5-videos",
+      "D vendor/effectcraft",
+      "M workflows/current/ACTIVE_TASK.json",
+      "M workflows/current/JOURNAL.jsonl"
+    ],
+    "remotes": [
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (fetch)",
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (push)"
+    ],
+    "submodules": [
+      "-756290289742535eb0ac3817548f152e9759cc70 vendor/awesome-opus5-5-videos",
+      "-f8b2552d1c4fd1ae5051dae3786719dc5bdb3ff8 vendor/effectcraft"
+    ]
+  },
+  "payload_inventory": [
+    {
+      "path": "workflows/current/payload/USER_REQUEST.txt",
+      "size": 1975,
+      "sha256": "e6325532680d39987d5c8b33b663eb44c82097a99311f1e89f908298e3a53e28"
+    },
+    {
+      "path": "workflows/current/payload/audio/tumhari_reserved_seat_voice00.mp3",
+      "size": 293901,
+      "sha256": "c411bfae2b12b194cf2107c556b2604e82f3e763c9e6fea94a6186ac650ca972"
+    },
+    {
+      "path": "workflows/current/payload/creative/MASTER_TIMELINE.json",
+      "size": 3823,
+      "sha256": "75838e71c598c04bb322fabbe080d71641853aa9fc2cf2dc6341a73e42698c0b"
+    },
+    {
+      "path": "workflows/current/payload/creative/TOPIC_AND_SCRIPT.md",
+      "size": 4804,
+      "sha256": "11ba5bea0352bf8576b3bbc8a7f91a1c253465d8522cb646e8a8f61e9f227a0b"
+    },
+    {
+      "path": "workflows/current/payload/creative/VOICE_SCRIPT_UR.txt",
+      "size": 1512,
+      "sha256": "c94f4cb85efd21608a61dfd296d49534f7aa177f259791018bb7b71c29a36679"
+    }
+  ]
+}
