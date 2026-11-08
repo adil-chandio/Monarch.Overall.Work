@@ -1,36 +1,49 @@
-"""Feasibility probe for Google's documented public YouTube URL input.
-Never prints credentials or downloads audiovisual media. A model response is
-second-hand sampled analysis, not proof of original-frame-by-frame inspection.
-"""
-import json, os, urllib.request, urllib.error
+"""Probe configured Google API access without logging secrets or downloading media."""
+import hashlib, json, os, urllib.error, urllib.request
 from pathlib import Path
 
-out = {'provider':'Google Gemini API', 'video':'https://www.youtube.com/watch?v=aWHX5Awe_TI', 'source':'public YouTube URL', 'sampling':'default static sampling; typically 1 fps', 'raw_frames_received':False, 'result':'not_attempted'}
-key = os.environ.get('VIDEO_API_KEY', '')
-if not key:
-    out['result'] = 'no_configured_api_key'
-else:
-    url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent'
-    body = {'contents':[{'parts':[{'file_data':{'file_uri':out['video']}},{'text':'Describe the visible actions and scene changes in this video in chronological order. Include approximate timestamps. Distinguish what you can see from uncertainty. Do not infer facts from the title.'}]}], 'generationConfig':{'maxOutputTokens':768}}
-    req = urllib.request.Request(url, data=json.dumps(body).encode(), headers={'Content-Type':'application/json','x-goog-api-key':key}, method='POST')
+BASE='https://generativelanguage.googleapis.com/v1beta'
+VIDEO='https://www.youtube.com/watch?v=aWHX5Awe_TI'
+NAMES=('GEMINI_API_KEY','GOOGLE_API_KEY','YOUTUBE_API_KEY','YTAP1','YTAPI1','YT_KEY','YT_API_KEY')
+out={'provider':'Google Gemini API','video':VIDEO,'source':'public YouTube URL','sampling':'default static sampling; typically 1 fps','raw_frames_received':False,'keys_checked':[],'result':'not_attempted'}
+
+def request(url,key,data=None):
+    req=urllib.request.Request(url,data=None if data is None else json.dumps(data).encode(),headers={'Content-Type':'application/json','x-goog-api-key':key},method='GET' if data is None else 'POST')
     try:
-        with urllib.request.urlopen(req, timeout=100) as response:
-            data=json.load(response)
-        candidates=data.get('candidates',[])
-        parts=candidates[0].get('content',{}).get('parts',[]) if candidates else []
-        text='\n'.join(p.get('text','') for p in parts if p.get('text'))
-        out['result']='model_response' if text else 'no_text_response'
-        out['model_response']=text[:5000]
-        out['model']='gemini-2.5-flash'
-        out['note']='Model-generated description: not independently verified and not a frame export.'
+        with urllib.request.urlopen(req,timeout=100) as response:return response.status,json.load(response)
     except urllib.error.HTTPError as e:
-        try: err=json.loads(e.read()).get('error',{})
-        except Exception: err={}
-        out['result']='api_error'; out['http_status']=e.code; out['error_status']=err.get('status','UNKNOWN')
-        # Log only fixed classifications, never service error messages or the key.
-        out['error_category']={'PERMISSION_DENIED':'key or project not authorized for this API', 'UNAUTHENTICATED':'authentication failed', 'RESOURCE_EXHAUSTED':'quota or billing limit', 'INVALID_ARGUMENT':'request or video input rejected', 'NOT_FOUND':'model or endpoint not available'}.get(out['error_status'],'see HTTP/status classification')
-    except Exception as e:
-        out['result']='request_failed';out['error_type']=type(e).__name__
+        try:return e.code,json.loads(e.read())
+        except Exception:return e.code,{}
+
+seen=set(); chosen=None
+for name in NAMES:
+    key=os.getenv(name,'')
+    if not key:continue
+    digest=hashlib.sha256(key.encode()).digest()
+    if digest in seen:continue
+    seen.add(digest)
+    try:
+        status,data=request(BASE+'/models?pageSize=1',key)
+        err=data.get('error',{})
+        # Error reason enums, never raw messages, metadata, URLs or credentials.
+        reasons=[d.get('reason') for d in err.get('details',[]) if isinstance(d,dict) and d.get('reason')]
+        out['keys_checked'].append({'slot':name,'http_status':status,'error_status':err.get('status'),'reasons':reasons})
+        if status==200:chosen=key;break
+    except Exception as e:out['keys_checked'].append({'slot':name,'error_type':type(e).__name__})
+if chosen:
+    body={'contents':[{'parts':[{'file_data':{'file_uri':VIDEO}},{'text':'Describe the visible actions and scene changes in this video in chronological order. Include approximate timestamps. Distinguish what you can see from uncertainty. Do not infer facts from the title.'}]}], 'generationConfig':{'maxOutputTokens':768}}
+    try:
+        status,data=request(BASE+'/models/gemini-2.5-flash:generateContent',chosen,body)
+        if status==200:
+            candidates=data.get('candidates',[]);parts=candidates[0].get('content',{}).get('parts',[]) if candidates else []
+            text='\n'.join(p.get('text','') for p in parts if p.get('text'))
+            out['result']='model_response' if text else 'no_text_response';out['model_response']=text[:5000];out['model']='gemini-2.5-flash'
+            out['note']='Model-generated description: not independently verified and not a frame export.'
+        else:
+            err=data.get('error',{});out.update(result='video_request_error',http_status=status,error_status=err.get('status'))
+            out['reasons']=[d.get('reason') for d in err.get('details',[]) if isinstance(d,dict) and d.get('reason')]
+    except Exception as e:out.update(result='request_failed',error_type=type(e).__name__)
+else:out['result']='no_usable_configured_key' if seen else 'no_configured_api_key'
 Path('audit-output').mkdir(exist_ok=True)
 Path('audit-output/yt-official-video-probe.json').write_text(json.dumps(out,indent=2)+'\n')
-print(json.dumps({k:v for k,v in out.items() if k not in ('model_response',)},indent=2))
+print(json.dumps({k:v for k,v in out.items() if k!='model_response'},indent=2))
