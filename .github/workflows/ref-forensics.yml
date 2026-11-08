@@ -1,0 +1,145 @@
+name: Reference forensics
+
+# Why this exists: the authoring sandbox cannot reach drive.google.com (its egress
+# is limited to a handful of hosts), so the reference video is fetched and measured
+# on a runner that can. The dossier comes back as a committed artifact, so every
+# number below is reproducible by anyone with the link.
+
+on:
+  push:
+    branches:
+      - arena/**
+    paths:
+      - "refs/inbox.txt"
+      - "refs/*.url"
+      - ".github/workflows/ref-forensics.yml"
+      - "tools/analyse_ref.py"
+      - "tools/ref_shots.py"
+  workflow_dispatch:
+    inputs:
+      ref_url:
+        description: "Google Drive file link or id"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ref-forensics
+  cancel-in-progress: true
+
+jobs:
+  analyse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg and the analysis deps
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check -q numpy scipy pillow
+
+      - name: Resolve the reference (url file, inbox list, or dispatch input)
+        run: |
+          mkdir -p refs
+          URL="${URL_INPUT:-}"
+          if [ -z "$URL" ] && [ -f refs/inbox.txt ]; then URL=$(head -n 1 refs/inbox.txt); fi
+          if [ -z "$URL" ]; then URL=$(cat refs/*.url 2>/dev/null | head -n 1); fi
+          if [ -z "$URL" ]; then echo "::error::no reference url"; exit 1; fi
+          echo "REF_URL=$URL" >> "$GITHUB_ENV"
+          echo "::notice::reference: $URL"
+        env:
+          URL_INPUT: ${{ github.event.inputs.ref_url }}
+
+      - name: Download from Google Drive (handles the virus-scan interstitial)
+        run: |
+          python3 - <<'PY'
+          import os, re, sys, urllib.parse, urllib.request, http.cookiejar
+
+          url = os.environ["REF_URL"]
+          fid = re.search(r"/d/([A-Za-z0-9_-]{10,})", url) or re.search(r"id=([A-Za-z0-9_-]{10,})", url)
+          fid = fid.group(1) if fid else url.strip()
+          print("file id:", fid, flush=True)
+
+          cj = http.cookiejar.CookieJar()
+          opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+          opener.addheaders = [("User-Agent", "Mozilla/5.0 (reference forensics)")]
+
+          def fetch(u):
+              with opener.open(u, timeout=120) as r:
+                  return r.read(), dict(r.headers)
+
+          base = "https://drive.google.com/uc?export=download&id=" + fid
+          body, headers = fetch(base)
+
+          # large files: Google answers with an HTML confirm page carrying a token
+          if b"<html" in body[:400].lower() or (headers.get("Content-Type", "").startswith("text/html")):
+              text = body.decode("utf-8", "ignore")
+              m = (re.search(r'name="confirm" value="([^"]+)"', text)
+                   or re.search(r"confirm=([0-9A-Za-z_-]+)", text)
+                   or re.search(r'id="download-form"[^>]*action="([^"]+)"', text))
+              if m and m.group(1).startswith("http"):
+                  body, headers = fetch(m.group(1))
+              elif m:
+                  body, headers = fetch(base + "&confirm=" + m.group(1))
+              else:
+                  uuid = re.search(r"uuid=([0-9a-f-]{20,})", text)
+                  if uuid:
+                      body, headers = fetch(
+                          "https://drive.usercontent.google.com/download?id=" + fid
+                          + "&export=download&confirm=t&uuid=" + uuid.group(1))
+                  else:
+                      print(text[:600], flush=True)
+                      sys.exit("could not get past the Drive interstitial")
+
+          if len(body) < 20000:
+              sys.exit(f"suspiciously small download ({len(body)} bytes)")
+
+          name = urllib.parse.unquote(
+              headers.get("Content-Disposition", "").split("filename*=UTF-8''")[-1] or "reference.mp4"
+          ).strip('"; ')
+          if not name or "." not in name:
+              name = "reference.mp4"
+          name = re.sub(r"[^A-Za-z0-9._-]+", "-", name)[:80]
+          if not name.lower().endswith((".mp4", ".mov", ".webm", ".mkv")):
+              name += ".mp4"
+          with open("refs/" + name, "wb") as fh:
+              fh.write(body)
+          print("saved refs/", name, len(body), "bytes", flush=True)
+          fast = __import__("hashlib").md5(body).hexdigest()
+          print("md5:", fast, flush=True)
+          with open(os.environ["GITHUB_ENV"], "a") as fh:
+              fh.write("REF_FILE=refs/" + name + "\n")
+          PY
+
+      - name: Forensic analysis (the whole rig)
+        run: |
+          set -euo pipefail
+          NAME=$(basename "${REF_FILE%.*}")
+          NAME=$(echo "$NAME" | tr -cd 'A-Za-z0-9._-' | cut -c1-40)
+          echo "ANALYSIS_DIR=analysis/$NAME" >> "$GITHUB_ENV"
+          python3 tools/analyse_ref.py "${REF_FILE}" --out "analysis/$NAME"
+          cp "${REF_FILE}" "analysis/$NAME/reference.mp4"
+          python3 tools/ref_shots.py "${REF_FILE}" --analysis "analysis/$NAME"
+          ls -la "analysis/$NAME"
+
+      - name: Commit the dossier and the images
+        if: always()
+        run: |
+          git config user.name "MONARCH Forensics"
+          git config user.email "forensics@monarch.studio"
+          git add -f analysis/ || true
+          git commit -m "chore(analysis): forensic dossier for the reference video" || exit 0
+          for attempt in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && \
+            git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 5
+          done

@@ -1,0 +1,53 @@
+::notice::packaging kernel compali/monarch-v3-voice-023713 for compali
+packaged compali/monarch-v3-voice-023713 (machine_shape NvidiaTeslaT4, 443,883 chars)
+::notice::pushing compali/monarch-v3-voice-023713
+Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/compali/monarch-v3-voice-023713
+[02:37:15] compali/monarch-v3-voice-023713 -> compali/monarch-v3-voice-023713 has status "KernelWorkerStatus.QUEUED"
+[02:37:36] compali/monarch-v3-voice-023713 -> compali/monarch-v3-voice-023713 has status "KernelWorkerStatus.RUNNING"
+[02:37:56] compali/monarch-v3-voice-023713 -> compali/monarch-v3-voice-023713 has status "KernelWorkerStatus.RUNNING"
+[02:38:17] compali/monarch-v3-voice-023713 -> compali/monarch-v3-voice-023713 has status "KernelWorkerStatus.RUNNING"
+[02:38:37] compali/monarch-v3-voice-023713 -> compali/monarch-v3-voice-023713 has status "KernelWorkerStatus.RUNNING"
+[02:38:58] compali/monarch-v3-voice-023713 -> compali/monarch-v3-voice-023713 has status "KernelWorkerStatus.COMPLETE"
+Downloading receipts_gpu.json to /tmp/vkwork/monarch-v3-voice-023713/out/monarch_out
+  0%|          | 0.00/1.71k [00:00<?, ?B/s]100%|██████████| 1.71k/1.71k [00:00<00:00, 12.8MB/s]
+
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-023713/out/monarch_out/receipts_gpu.json
+Downloading words.json to /tmp/vkwork/monarch-v3-voice-023713/out/monarch_out
+  0%|          | 0.00/15.0k [00:00<?, ?B/s]100%|██████████| 15.0k/15.0k [00:00<00:00, 6.62MB/s]
+
+Output file downloaded to /tmp/vkwork/monarch-v3-voice-023713/out/monarch_out/words.json
+Kernel log downloaded to /tmp/vkwork/monarch-v3-voice-023713/out/monarch-v3-voice-023713.log 
+/tmp/vkwork/monarch-v3-voice-023713/out:
+total 16
+-rw-r--r-- 1 runner runner 10967 Nov  4 02:38 monarch-v3-voice-023713.log
+drwxr-xr-x 2 runner runner  4096 Nov  4 02:38 monarch_out
+
+/tmp/vkwork/monarch-v3-voice-023713/out/monarch_out:
+total 20
+-rw-r--r-- 1 runner runner  1754 Nov  4 02:38 receipts_gpu.json
+-rw-r--r-- 1 runner runner 15371 Nov  4 02:38 words.json
+::notice::GPU receipt
+{
+ "gpu_count": 2,
+ "devices": [
+  {
+   "index": 0,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  },
+  {
+   "index": 1,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  }
+ ],
+ "nvidia_smi": "GPU 0: Tesla T4 (UUID: GPU-f5eabf04-00a0-8f6c-5407-a96c46e2c55f)\nGPU 1: Tesla T4 (UUID: GPU-75387a4d-3bdc-4118-f5f6-b572eeac116e)",
+ "model": "faster-whisper large-v3 float16 cuda",
+ "words": 93,
+ "mean_word_prob": 0.964,
+ "wall_s": 0.88,
+ "audio_total_s": 39.76
+}
+beats: [('01-hook.mp3', 4.36, 13), ('02-rest.mp3', 6.08, 15), ('03-gap.mp3', 6.96, 13), ('04-lie.mp3', 6.32, 18), ('05-shift.mp3', 6.36, 13), ('06-audience.mp3', 5.28, 14), ('07-end.mp3', 4.4, 7)]

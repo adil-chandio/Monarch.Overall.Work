@@ -1,0 +1,178 @@
+name: v4 render (reference-matched)
+
+# Why this exists: REF-01 was decoded into a measured shot list
+# (docs/reference/REF-01-nvidia-reel.md) and v4 rebuilds it shot for shot.
+# The sandbox that authors the composition has no working Chromium (libnss3 is
+# missing and there is no root), so the picture is rendered on a runner with a
+# real Chrome shell, the score is synthesised in Python, and then the SAME rig
+# that measured the reference is run on the rebuild so "same" is a number, not
+# an opinion.
+
+on:
+  push:
+    branches:
+      - "arena/**"
+    paths:
+      - "showreel/v4/**"
+      # every tool the render depends on, not just the diff: a fix to
+      # verify_v4.mjs, check_render.py or render_v4.mjs changes what this job
+      # produces, and a filter that ignores it silently skips the run. That is how
+      # a fix could be committed and never actually built.
+      - "tools/**"
+      - ".github/workflows/v4-render.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# The full render shares the apt lock with the checkpoint, but it must never hold it
+# ahead of one: the checkpoint is what gets approved, so if a checkpoint is waiting the
+# render steps aside. Cancelling a render costs nothing — it is rebuilt from the same
+# commit — whereas cancelling a checkpoint costs the approval cycle.
+concurrency:
+  group: v4-render-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # No actions/setup-python: it downloads a python, puts it first on PATH, and
+      # then the apt packages for the *system* python are invisible to it — which
+      # made 'import numpy' fail on a runner where numpy had just been installed.
+      # The runner's own python3 is newer than the 3.11 that was being pinned.
+
+      - name: Install ffmpeg, fonts and Python DSP
+        timeout-minutes: 12
+        run: |
+          # apt-get update is the slow, stall-prone half of this, so it is only run
+          # when the cached lists cannot already resolve the packages.
+          sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core python3-numpy python3-scipy python3-pil \
+            || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core python3-numpy python3-scipy python3-pil; }
+          ffmpeg -hide_banner -version | head -n 1
+          python3 -c "import numpy, scipy, PIL; print('numpy', numpy.__version__, '| scipy', scipy.__version__)"
+
+      - name: Provision chrome-headless-shell
+        run: |
+          npx --yes @puppeteer/browsers install chrome-headless-shell@stable --path "$PWD/.browsers"
+          echo "CHROME=$(find "$PWD/.browsers" -name 'chrome-headless-shell' -type f | head -n 1)" >> "$GITHUB_ENV"
+          "$(find "$PWD/.browsers" -name 'chrome-headless-shell' -type f | head -n 1)" --version
+
+      - name: Score the film (no VO, pre-cut SFX, measured leads)
+        run: python3 showreel/v4/audio.py --out public/demo/v4-mix.wav
+
+      - name: Install the renderer and the gate
+        run: npm install --no-save --silent jsdom@30 puppeteer-core@23 gsap@3
+
+      - name: Timeline gate — no scene may outlive its own window
+        run: |
+          # GSAP is deterministic, so the composition's real timeline can be sampled
+          # here in about two seconds. This is the check that would have caught s4
+          # standing at full opacity from 1.33 s to the end of the film: its entrance
+          # tween ran to 1.3225 s while its hide was a set at 1.300 s, so the tween
+          # wrote opacity 1 back over the hide and a green money-bag plate sat under
+          # the whole film, including the 8.5 s CTA. No frame metric could attribute
+          # that to a scene; this can, by name and by second.
+          node tools/timeline_probe.mjs showreel/v4/index.html
+
+      - name: Composition gate — every element exists, no scene is left visible
+        run: |
+          # pin the gate's DOM to the version it was written against, and never let a
+          # missing module masquerade as a composition failure
+          node -e "require.resolve('jsdom'); console.log('jsdom', require('jsdom/package.json').version)"
+          node --version
+          node tools/verify_v4.mjs
+
+      - name: Render 720x1280 @ 30 fps (real Chromium, timeline seeked per frame)
+        run: |
+          mkdir -p public/demo/v4-frames analysis/v4-build
+          # the runner's step log is not readable from the sandbox that authors this,
+          # so the renderer's own output is captured into an artifact that gets
+          # committed even when the step fails
+          set -o pipefail
+          node tools/render_v4.mjs --out public/demo/v4-silent.mp4 2>&1 | tee analysis/v4-build/render.log
+
+      # the check runs on the file this job just produced. Reading the published
+      # master instead measured the PREVIOUS build whenever an earlier step failed,
+      # which is exactly how a 698-frame master survived three green-looking runs.
+      - name: Frame-level render check (pixels against the scene table)
+        run: |
+          python3 tools/check_render.py public/demo/v4-silent.mp4 \
+            --out analysis/v4-build/check.json
+
+      - name: Probe the picture
+        run: |
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=width,height,r_frame_rate,nb_frames,duration \
+            -of default=noprint_wrappers=1 public/demo/v4-silent.mp4
+
+      - name: Mux and land the master at the reference's own loudness
+        run: |
+          set -euo pipefail
+          ffmpeg -y -i public/demo/v4-silent.mp4 -i public/demo/v4-mix.wav \
+            -c:v copy -c:a aac -b:a 192k -ar 44100 public/demo/v4-mux.mp4
+          # -shortest used to cut the picture to the bed's length; the bed is now exact
+          ffmpeg -y -i public/demo/v4-mux.mp4 \
+            -af "loudnorm=I=-14.02:TP=-0.31:LRA=11" -ar 44100 -c:v copy -c:a aac -b:a 192k \
+            -movflags +faststart public/demo/v4.mp4
+          ffmpeg -y -i public/demo/v4-mux.mp4 \
+            -af "loudnorm=I=-14.02:TP=-0.31:LRA=11:print_format=json" -f null - 2>&1 \
+            | grep -E '"input_i"|"input_tp"|"input_lra"' | tee public/demo/v4-loudness.txt
+          ffprobe -v error -show_entries format=duration,size \
+            -show_entries stream=codec_name,width,height,r_frame_rate,sample_rate,channels \
+            -of default=noprint_wrappers=1 public/demo/v4.mp4
+
+      - name: Frame-level check of the delivered master
+        run: python3 tools/check_render.py public/demo/v4.mp4 --out analysis/v4-build/check-master.json
+
+      - name: Measure the rebuild with the same rig that measured the reference
+        run: |
+          set -euo pipefail
+          python3 tools/analyse_ref.py public/demo/v4.mp4 --out analysis/v4-build
+          python3 tools/ref_shots.py public/demo/v4.mp4 --analysis analysis/v4-build
+          python3 tools/ref_deep.py public/demo/v4.mp4 --report analysis/v4-build/report.json \
+            --out analysis/v4-build --motion --audio || true
+
+      - name: Numeric diff against the reference
+        run: |
+          set -euo pipefail
+          python3 tools/ref_diff.py \
+            analysis/attachment-filename-How-to-Edit-VIRAL-RE/report.json \
+            analysis/v4-build/report.json \
+            --markdown docs/reference/REF-01-DIFF.md | tee public/demo/v4-diff.txt
+          # the step failing is information, not a crash: keep the artifacts anyway
+          exit 0
+
+      - name: Publish the render, the measurements and the diff
+        if: always()
+        run: |
+          rm -f public/demo/v4-silent.mp4 public/demo/v4-mux.mp4 public/demo/v4-mix.wav
+          git config user.name "monarch-forensics-bot"
+          git config user.email "forensics@monarch.studio"
+          git add -f public/demo/v4.mp4 public/demo/v4-loudness.txt \
+                     analysis/v4-build/*.png analysis/v4-build/*.json \
+                     analysis/v4-build/render.log \
+                     public/demo/v4-frames/f_00000.png public/demo/v4-frames/f_00350.png \
+                     docs/reference/REF-01-DIFF.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "nothing to publish"
+            exit 0
+          fi
+          git commit -m "chore(v4): render, measurements and the numeric diff vs REF-01 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            sleep 5
+          done
+          echo "::error::could not publish the render"
+          exit 1

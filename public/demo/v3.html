@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v3 — EK VIDEO / HAR VIEW KA 25%</title>
+<meta name="description" content="42-second vertical-cut short on YouTube automation concentration. Real Chromium render, GPU-measured voice sync.">
+<meta property="og:type" content="video.other">
+<meta property="og:title" content="EK VIDEO / HAR VIEW KA 25%">
+<meta property="og:description" content="Saturated is the wrong word. Concentrated is the right one.">
+<meta property="og:image" content="v3-poster.jpg">
+<meta property="og:video" content="viral-short-v3.mp4">
+<style>
+  :root { --ink:#0b0d12; --card:#111725; --line:#232c3f; --red:#ff2e46; --gold:#ffb020; --dim:#8c98b3; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:radial-gradient(120% 90% at 50% -10%, #17203a 0%, var(--ink) 55%, #06080c 100%);
+         color:#eef2f8; font:16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 20px; }
+  main { width:min(1080px,100%); }
+  .eyebrow { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--red); font-weight:700; margin:0 0 10px; }
+  h1 { margin:0 0 6px; font-size:clamp(22px,3.2vw,34px); letter-spacing:-.02em; }
+  h1 em { color:var(--red); font-style:normal; }
+  p.sub { margin:0 0 22px; color:var(--dim); max-width:60ch; }
+  .player { position:relative; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--card);
+            box-shadow:0 30px 80px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.03) inset; }
+  video { display:block; width:100%; height:auto; background:#000; }
+  .meta { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0; padding:0; list-style:none; }
+  .meta li { font-size:12.5px; color:#c3cddf; background:#141b2b; border:1px solid var(--line);
+             border-radius:999px; padding:6px 12px; }
+  .meta b { color:#fff; font-weight:600; }
+  .links { margin:18px 0 0; font-size:14px; color:var(--dim); }
+  a { color:#8fb7ff; text-decoration:none; border-bottom:1px solid rgba(143,183,255,.35); }
+  a:hover { color:#fff; border-color:#fff; }
+  .note { margin:14px 0 0; font-size:13px; color:#6f7c95; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">MONARCH · v3 · 42.3 s</p>
+  <h1>EK VIDEO / HAR VIEW KA <em>25%</em></h1>
+  <p class="sub">Saturated is the wrong word. Concentrated is the right one. — one video takes a quarter of
+     every view on the topic; 29 others split the remaining 75%. Rendered by Chromium from code, scored in
+     Python, voice aligned on a GPU.</p>
+
+  <div class="player">
+    <video id="film" controls playsinline preload="metadata" poster="v3-poster.jpg">
+      <source src="viral-short-v3.mp4" type="video/mp4">
+      Your browser cannot play this file — <a href="viral-short-v3.mp4">download it instead</a>.
+    </video>
+  </div>
+
+  <ul class="meta">
+    <li><b>1920×1080</b> · 30 fps</li>
+    <li>h264 High · yuv420p · bt709</li>
+    <li>AAC 48 kHz stereo</li>
+    <li><b>−13.85 LUFS</b> · TP −0.80 dB</li>
+    <li>22.5 MB</li>
+  </ul>
+
+  <p class="links">
+    Direct file:
+    <a href="viral-short-v3.mp4" download>viral-short-v3.mp4</a>
+  </p>
+  <p class="note">Every frame was checked on the shipped file, not on intent. The voice timings were measured by
+     Whisper large-v3 on 2× Tesla T4; no line ends after its own beat (min slack 0.60 s).</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,29 @@
+/* MONARCH visual rebuild — an independent, temporary presentation layer. */
+body.monarch-build-active .build-wait { visibility:hidden !important; }
+body.monarch-build-active main * { animation-play-state:paused!important }
+body.monarch-build-active [data-rv],body.monarch-build-active [data-rv] .ch,body.monarch-build-active [data-rv] .wd { opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important }
+/* The cursor drives this mask directly; native reveal transitions cannot race it. */
+body.monarch-build-active .build-drawing { visibility:visible!important;clip-path:inset(0 calc(100% - var(--build-reveal, 0%)) 0 0)!important;transition:none!important }
+body.monarch-build-active #cursor,body.monarch-build-active #cursorRing { opacity:0!important }
+.build-overlay { position:fixed;inset:0;z-index:110;overflow:hidden;pointer-events:none;isolation:isolate; }
+.build-cursor { position:absolute;top:0;left:0;will-change:transform;pointer-events:none;filter:drop-shadow(0 2px 3px #0008) }
+.build-cursor svg { display:block;width:17px;height:21px;overflow:visible }
+.build-cursor span { position:absolute;top:15px;left:12px;color:#fff;background:var(--agent);border-radius:3px 3px 3px 0;padding:3px 5px;font:600 9px/1.1 'IBM Plex Mono',monospace;white-space:nowrap;opacity:0;transition:opacity .2s }
+.build-cursor.is-busy span {opacity:.94}
+.build-box { position:absolute;top:0;left:0;border:1px solid var(--agent);background:color-mix(in srgb,var(--agent) 12%,transparent);box-shadow:0 0 0 1px #0002;pointer-events:none;will-change:transform,width,height; }
+.build-box::before,.build-box::after {content:'';position:absolute;width:5px;height:5px;background:#fff;border:1px solid var(--agent)}
+.build-box::before {left:-4px;top:-4px}.build-box::after {right:-4px;bottom:-4px}
+.build-box i {position:absolute;left:0;bottom:-18px;display:block;background:var(--agent);color:#fff;padding:2px 5px;font:9px/1.2 'IBM Plex Mono',monospace;font-style:normal;white-space:nowrap}
+.build-guide {position:absolute;top:0;bottom:0;left:0;width:1px;background:#ed4b5a;opacity:.5;will-change:transform}
+.build-hud {position:fixed;z-index:111;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:9px;padding:7px 8px 7px 11px;background:rgba(16,17,24,.94);color:#e8e9ef;border:1px solid #41414f;border-radius:12px;box-shadow:0 8px 35px #0006;font:10px/1.2 'IBM Plex Mono',monospace;white-space:nowrap;backdrop-filter:blur(12px)}
+.build-hud .build-dots {display:flex;padding-left:3px}
+.build-hud .build-dots i {width:10px;height:10px;border-radius:50%;border:1px solid #222;margin-left:-3px;background:var(--dot)}
+.build-hud .build-progress {width:65px;height:3px;background:#424557;border-radius:4px;overflow:hidden}
+.build-hud .build-progress i {display:block;height:100%;width:100%;transform-origin:left;background:#75c7fc;transform:scaleX(0)}
+.build-hud button {font:inherit;color:#eceef6;border:1px solid #454653;background:#292b36;border-radius:7px;padding:7px 9px;cursor:pointer;min-height:30px}
+.build-hud button:hover,.build-hud button:focus-visible {background:#494b5d;outline:2px solid #8ad1ff;outline-offset:2px}
+.build-hud .build-skip {background:#d21f2b;border-color:#e3424b;color:#fff}
+.build-hud .build-skip:hover {background:#ee3541}
+.build-hud .build-label {color:#b6b8c6}
+@media(max-width:600px){.build-hud{gap:6px;max-width:calc(100vw - 12px);font-size:9px;padding:6px}.build-hud .build-dots{display:none}.build-hud .build-progress{width:25px}.build-hud button{padding:7px}.rebuild-trigger span{display:none}.rebuild-trigger{padding-inline:9px}.build-cursor span{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.build-overlay{display:none}}

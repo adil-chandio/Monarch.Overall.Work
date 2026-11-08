@@ -1,0 +1,171 @@
+name: HyperFrames v3 render
+
+# Why this exists: the sandbox that authors this film has no working Chromium (missing
+# libnspr4/nss3, no root, no apt) so a real browser-composited render cannot run there.
+# GitHub's runner has apt, ffmpeg and a downloadable chrome-headless-shell, so the film is
+# rendered where it can actually be rendered — not faked with a CPU painter.
+#
+# Triggers on any push that touches the v3 composition, so `git push` is the render button.
+
+on:
+  push:
+    branches:
+      - "arena/**"
+    paths:
+      - "showreel/v3/**"
+      - "public/demo/gpu/words.json"
+      - "showreel/v2/audio.py"
+      - ".github/workflows/hyperframes-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hyperframes-v3-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg, fonts and Python DSP
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          ffmpeg -version | head -n 1
+          python -m pip install --disable-pip-version-check -q numpy scipy imageio-ffmpeg
+
+      - name: Install HyperFrames
+        run: |
+          npm install --no-save --silent hyperframes@0.9.9
+          npx hyperframes --version
+
+      - name: Provision chrome-headless-shell (the real renderer)
+        run: |
+          npx hyperframes browser ensure
+          npx hyperframes browser path
+
+      - name: Doctor gate — the render must be able to happen
+        run: |
+          npx hyperframes doctor || true
+          test -x "$(npx hyperframes browser path)" && echo "browser ok"
+
+      - name: Install the verifier deps
+        run: npm install --no-save --silent jsdom gsap
+
+      - name: Composition gate — timeline, seams, exit velocity, beat activity
+        run: node tools/verify_v3.mjs
+        # catches the failures a browser render would only reveal as a black frame:
+        # NaN transforms, all scenes composited at once, a seam that blinks black,
+        # a beat where nothing moves
+
+      - name: Sync gate — every line of voice lands inside its own beat
+        run: node tools/verify_sync.mjs
+        # the timings are Whisper large-v3 on Kaggle T4 x2 (public/demo/gpu/):
+        # a line that outlives its beat is cut off mid-word, and this is how we know
+
+      - name: Lint gate — refuse to render a broken composition
+        run: npx hyperframes lint showreel/v3
+
+      - name: Runtime validate (JS errors, missing assets, contrast)
+        run: npx hyperframes validate showreel/v3
+
+      # ---------------------------------------------------------------- picture
+      - name: Render with HyperFrames (real Chromium, GSAP timeline seeked per frame)
+        run: |
+          mkdir -p public/demo
+          npx hyperframes render showreel/v3 \
+            --output public/demo/v3-silent.mp4 \
+            --fps 30 --quality delivery --workers 2
+
+      - name: Probe the picture
+        run: |
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=width,height,r_frame_rate,nb_frames,duration \
+            -of default=noprint_wrappers=1 public/demo/v3-silent.mp4
+
+      - name: Snapshot key frames for visual review
+        run: npx hyperframes snapshot showreel/v3 --at 0.3,4.4,14.6,28.9,41.9 --out public/demo/v3-frames || true
+
+      # ---------------------------------------------------------------- sound
+      - name: Build the score and the frame-locked SFX
+        run: |
+          # audio.py resolves its ffmpeg from .venv (the sandbox path). On the runner
+          # ffmpeg is on PATH, so point it there explicitly and fail loudly if the VO
+          # or a dependency is missing instead of dying inside the mixer.
+          set -euo pipefail
+          test -f public/demo/vo/timing.json || { echo "::error::VO timing.json missing"; exit 1; }
+          ls public/demo/vo/*.mp3 | head -10
+          python -c "import numpy, scipy; print('numpy', numpy.__version__, 'scipy', scipy.__version__)"
+          python showreel/v2/audio.py \
+            --seams showreel/v3/seams.json \
+            --out public/demo/v3-mix.wav
+
+      - name: Measure the mix (BS.1770 + band + stereo gates)
+        run: |
+          ffmpeg -i public/demo/v3-silent.mp4 -i public/demo/v3-mix.wav \
+            -c:v copy -c:a aac -b:a 256k -shortest public/demo/v3-mux.mp4
+          ffmpeg -i public/demo/v3-mux.mp4 \
+            -af "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json" -f null - 2>&1 \
+            | grep -E '"input_i"|"input_tp"' | tee public/demo/v3-loudness.txt
+
+      - name: Delivery master — exactly -14 LUFS, -1.5 dBTP, 48 kHz stereo
+        run: |
+          ffmpeg -y -i public/demo/v3-mux.mp4 -c:v copy \
+            -af "loudnorm=I=-14:TP=-1.5:LRA=11" -ar 48000 -c:a aac -b:a 256k \
+            -movflags +faststart public/demo/viral-short-v3.mp4
+          ffprobe -v error -show_entries format=duration,size,bit_rate \
+            -show_entries stream=codec_name,width,height,r_frame_rate,sample_rate,channels \
+            -of default=noprint_wrappers=1 public/demo/viral-short-v3.mp4
+
+      - name: Repo style detector on the finished film
+        run: |
+          python -m yt_intel style public/demo/viral-short-v3.mp4 | tee public/demo/v3-style.txt || true
+
+      - name: Publish the render back to the branch
+        run: |
+          rm -f public/demo/v3-silent.mp4 public/demo/v3-mux.mp4
+          git config user.name "monarch-hyperframes-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add -f public/demo/viral-short-v3.mp4 public/demo/v3-frames/*.png \
+                     public/demo/v3-loudness.txt public/demo/v3-style.txt 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "no render changes to publish"
+            exit 0
+          fi
+          git commit -m "chore(v3): HyperFrames render of the YouTube-automation short [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "${{ github.ref_name }}" || true
+            if git push origin "HEAD:${{ github.ref_name }}"; then exit 0; fi
+            sleep 5
+          done
+          echo "::error::could not publish the render"; exit 1
+
+      - name: Job summary
+        if: always()
+        run: |
+          {
+            echo "### HyperFrames v3"
+            echo ""
+            [ -f public/demo/v3-loudness.txt ] && cat public/demo/v3-loudness.txt
+            echo ""
+            [ -f public/demo/v3-style.txt ] && head -20 public/demo/v3-style.txt
+            echo ""
+            ls -lh public/demo/viral-short-v3.mp4 2>/dev/null || echo "no master produced"
+          } >> "$GITHUB_STEP_SUMMARY"

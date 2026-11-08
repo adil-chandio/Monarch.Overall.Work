@@ -1,0 +1,36 @@
+{
+ "network": {
+  "reachable": true,
+  "detail": "HTTP 200"
+ },
+ "slots_present": [
+  "COMPALI"
+ ],
+ "slots_absent": [],
+ "attempts": [
+  {
+   "slot": "COMPALI",
+   "present": true,
+   "chars": 37,
+   "shape": "access-token",
+   "verdict": "authenticated",
+   "tried": [
+    {
+     "shape": "access-token",
+     "authenticated": true,
+     "handle": "compali",
+     "auth_method": "ACCESS_TOKEN",
+     "error": "",
+     "kernels_list_rc": 0,
+     "kernels_list_head": "ref,title,author,lastRunTime,totalVotes"
+    }
+   ]
+  }
+ ],
+ "chosen": {
+  "slot": "COMPALI",
+  "shape": "access-token",
+  "handle": "compali",
+  "auth_method": "ACCESS_TOKEN"
+ }
+}

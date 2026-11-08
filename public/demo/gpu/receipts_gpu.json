@@ -1,0 +1,52 @@
+{
+ "stage": "gpu",
+ "python": "3.13.16",
+ "install": [
+  "faster-whisper>=1.0.3: rc=0",
+  "ctranslate2>=4.4.0: present",
+  "nvidia-cublas-cu12: present",
+  "nvidia-cudnn-cu12: present"
+ ],
+ "nvidia_lib_dirs": [
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cu13/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cublas/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cuda_cupti/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cuda_nvrtc/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cuda_runtime/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cudnn/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cufft/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/curand/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cusolver/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cusparse/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/cusparselt/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/nccl/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/nvjitlink/lib",
+  "/usr/local/lib/python3.13/dist-packages/nvidia/nvshmem/lib"
+ ],
+ "torch": "2.11.0+cu130",
+ "cuda_available": true,
+ "gpu_count": 2,
+ "devices": [
+  {
+   "index": 0,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  },
+  {
+   "index": 1,
+   "name": "Tesla T4",
+   "vram_gb": 14.56,
+   "cc": "7.5"
+  }
+ ],
+ "nvidia_smi": "GPU 0: Tesla T4 (UUID: GPU-f5eabf04-00a0-8f6c-5407-a96c46e2c55f)\nGPU 1: Tesla T4 (UUID: GPU-75387a4d-3bdc-4118-f5f6-b572eeac116e)",
+ "model_load_s": 24.37,
+ "model": "faster-whisper large-v3 float16 cuda",
+ "backend_fallbacks": [],
+ "model_final": "faster-whisper large-v3 float16 cuda",
+ "audio_total_s": 39.76,
+ "wall_s": 0.88,
+ "words": 93,
+ "mean_word_prob": 0.964
+}

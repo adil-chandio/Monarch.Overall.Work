@@ -1,0 +1,90 @@
+name: Kaggle GPU — v3 voice alignment + measure
+
+on:
+  push:
+    branches:
+      - arena/8bfd4d0e-monarch-overall-work
+    paths:
+      - "tools/kaggle/**"
+      - ".github/workflows/kaggle-v3-voice.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kaggle-v3-voice
+  cancel-in-progress: true
+
+jobs:
+  align-on-gpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Kaggle CLI
+        run: python -m pip install --disable-pip-version-check -q -U kaggle six requests
+
+      - name: Resolve a working Kaggle credential (secret COMPALI)
+        id: creds
+        continue-on-error: true
+        env:
+          COMPALI: ${{ secrets.COMPALI }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+          KAGGLE_API_KEY: ${{ secrets.KAGGLE_API_KEY }}
+          MONARCH: ${{ secrets.MONARCH }}
+          KAGGLE_JSON: ${{ secrets.KAGGLE_JSON }}
+          KAGGLE: ${{ secrets.KAGGLE }}
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+        run: python tools/kaggle/resolve_creds.py
+
+      - name: Commit the credential report (names only, never values)
+        if: always()
+        run: |
+          git config user.name "MONARCH GPU Runner"
+          git config user.email "gpu@monarch.studio"
+          git add -f public/demo/gpu/cred-report.json
+          git commit -m "chore(gpu): credential slots report [skip ci]" || exit 0
+          for attempt in 1 2 3; do
+            git pull --rebase origin arena/8bfd4d0e-monarch-overall-work && \
+            git push origin HEAD:arena/8bfd4d0e-monarch-overall-work && break
+            sleep 5
+          done
+
+      - name: Fail if no credential authenticated
+        if: steps.creds.outcome == 'failure'
+        run: exit 1
+
+      - name: Push + wait on Kaggle GPU T4 x2
+        id: gpu
+        continue-on-error: true
+        run: |
+          chmod +x tools/kaggle/push_voice.sh
+          bash tools/kaggle/push_voice.sh 2>&1 | tee public/demo/gpu/gpu-transcript.log
+          exit ${PIPESTATUS[0]}
+
+      - name: Commit whatever the GPU step produced (transcript or receipt)
+        if: always()
+        run: |
+          git config user.name "MONARCH GPU Runner"
+          git config user.email "gpu@monarch.studio"
+          git add -f public/demo/gpu/ || true
+          git commit -m "chore(gpu): T4x2 alignment transcript + receipt" || exit 0
+          for attempt in 1 2 3; do
+            git pull --rebase origin arena/8bfd4d0e-monarch-overall-work && \
+            git push origin HEAD:arena/8bfd4d0e-monarch-overall-work && break
+            sleep 5
+          done
+
+      - name: Fail if the GPU step failed
+        if: steps.gpu.outcome == 'failure'
+        run: exit 1
+
