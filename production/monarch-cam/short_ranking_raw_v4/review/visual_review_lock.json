@@ -1,0 +1,98 @@
+{
+  "status": "LOCKED_FOR_V4_RENDER",
+  "edition": "raw_fullscreen_v4",
+  "source": "Five CC0 1.0 Wikimedia Commons animal clips, independently verified on 2026-11-07",
+  "review_basis": "V3 coarse/fine contact sheets and V4 selected-window contact sheets were reviewed; exact windows locked for five best moments only.",
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "full_screen_cover": true,
+  "no_letterbox": true,
+  "no_blurred_background": true,
+  "rank_title_overlay_only": true,
+  "five_moments_only": true,
+  "exact_timecodes": [
+    {
+      "timeline_in": 0.0,
+      "timeline_out": 7.0,
+      "source_id": "squirrel",
+      "source_in": 1.0,
+      "source_out": 8.0,
+      "rank": 5,
+      "title": "THE DROP-IN",
+      "audio_present": true
+    },
+    {
+      "timeline_in": 7.0,
+      "timeline_out": 14.0,
+      "source_id": "hermit_crab",
+      "source_in": 0.5,
+      "source_out": 7.5,
+      "rank": 4,
+      "title": "THE TINY COMMUTE",
+      "audio_present": true
+    },
+    {
+      "timeline_in": 14.0,
+      "timeline_out": 21.0,
+      "source_id": "strandschnecke",
+      "source_in": 21.5,
+      "source_out": 28.5,
+      "rank": 3,
+      "title": "THE SHELL GLIDE",
+      "audio_present": true
+    },
+    {
+      "timeline_in": 21.0,
+      "timeline_out": 28.0,
+      "source_id": "berlin_gorilla",
+      "source_in": 1.0,
+      "source_out": 8.0,
+      "rank": 2,
+      "title": "THE GENTLE GRAB",
+      "audio_present": true
+    },
+    {
+      "timeline_in": 28.0,
+      "timeline_out": 35.0,
+      "source_id": "oriental_dove",
+      "source_in": 8.0,
+      "source_out": 15.0,
+      "rank": 1,
+      "title": "THE WING DUEL",
+      "audio_present": true
+    }
+  ],
+  "rank_steps": [
+    {
+      "rank": 5,
+      "title": "THE DROP-IN",
+      "timeline_in": 0.0,
+      "timeline_out": 7.0
+    },
+    {
+      "rank": 4,
+      "title": "THE TINY COMMUTE",
+      "timeline_in": 7.0,
+      "timeline_out": 14.0
+    },
+    {
+      "rank": 3,
+      "title": "THE SHELL GLIDE",
+      "timeline_in": 14.0,
+      "timeline_out": 21.0
+    },
+    {
+      "rank": 2,
+      "title": "THE GENTLE GRAB",
+      "timeline_in": 21.0,
+      "timeline_out": 28.0
+    },
+    {
+      "rank": 1,
+      "title": "THE WING DUEL",
+      "timeline_in": 28.0,
+      "timeline_out": 35.0
+    }
+  ],
+  "cover_frame_time": 0.07
+}

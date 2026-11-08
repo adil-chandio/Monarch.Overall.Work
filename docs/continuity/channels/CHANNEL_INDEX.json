@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-08T17:50:20Z",
+  "source": "config/channels.json + owner statement + production/monarch-cam tree + continuity archive",
+  "owner_statement": "Monarch Cam is one of our 3 channels.",
+  "repo_config_note": "config/channels.json currently lists 3 legacy publishing slots: Monarch Lab, Mindful Momentum, Curious Miles. Monarch Cam has its own live YouTube channel @Monarch-Cam and production/monarch-cam tree. Until the owner explicitly renames a slot, continuity treats Monarch Cam as the active channel workstream and preserves the legacy config unchanged. Do not delete, rename, or invent a fourth config slot.",
+  "reconciliation_status": "explicit_gap",
+  "active_channel": "monarch-cam",
+  "space": "yt-automation",
+  "branch": "arena/390292fc-monarch-overall-work",
+  "channels": [
+    {
+      "id": "monarch-cam",
+      "name": "Monarch Cam",
+      "handle": "@Monarch-Cam",
+      "youtube_url": "https://www.youtube.com/@Monarch-Cam",
+      "role": "active_channel_workstream",
+      "status": "active",
+      "space": "yt-automation",
+      "production_root": "production/monarch-cam/",
+      "entrypoint": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
+      "capsule": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
+      "state": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
+      "playbook": "docs/continuity/channels/monarch-cam/PLAYBOOK.md",
+      "workflow": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
+      "next_action": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
+      "easy_resume": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
+      "rejections": "docs/continuity/channels/monarch-cam/REJECTIONS.md",
+      "evidence": "docs/continuity/channels/monarch-cam/EVIDENCE.md",
+      "source_docs": [
+        "docs/MONARCH_CAM_LIVE_FORENSIC_AUDIT_2026-11-05.md",
+        "docs/MONARCH_CAM_30_DAY_GROWTH_REVENUE_PLAN_2026-11.md",
+        "docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md",
+        "config/channels.json",
+        "production/monarch-cam/short_ranking_raw_v5/ranking_short_spec.json",
+        "production/monarch-cam/short_ranking_raw_v5/review/qc_summary.json"
+      ]
+    },
+    {
+      "id": "ch-01",
+      "name": "Monarch Lab",
+      "handle": "@monarchlab",
+      "role": "legacy_config_slot",
+      "status": "setup",
+      "space": "yt-automation"
+    },
+    {
+      "id": "ch-02",
+      "name": "Mindful Momentum",
+      "role": "legacy_config_slot",
+      "status": "setup",
+      "space": "yt-automation",
+      "conflict_flag": "Overlaps with personal-brand motivational account"
+    },
+    {
+      "id": "ch-03",
+      "name": "Curious Miles",
+      "role": "legacy_config_slot",
+      "status": "setup",
+      "space": "yt-automation"
+    }
+  ],
+  "recovery": {
+    "file": "RECOVER.md",
+    "command": "python3 tools/continuity.py recover",
+    "raw_git_command": "git fetch origin '+refs/heads/arena/390292fc-monarch-overall-work:refs/remotes/origin/arena/390292fc-monarch-overall-work' && git merge --ff-only origin/arena/390292fc-monarch-overall-work",
+    "note": "Use raw git command if tools/continuity.py itself is missing from a stale checkout."
+  }
+}

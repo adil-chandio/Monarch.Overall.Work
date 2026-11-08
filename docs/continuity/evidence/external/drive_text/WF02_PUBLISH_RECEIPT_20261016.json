@@ -1,0 +1,60 @@
+{
+  "task_id": "EMS-20261016-003",
+  "status": "completed_and_remotely_verified",
+  "github": {
+    "repository": "adil-chandio/Monarch-Studio",
+    "branch": "arena/eba29c7c-monarch-studio",
+    "content_commit": "fc1776f716eb3ee324de1a762d0826ec3fae799a",
+    "final_receipt_archive_commit": "17fd4e6319a3efffba4db6458853c515f29a78e7",
+    "verification": "Both explicit branch pushes succeeded; final git ls-remote matches local HEAD. GitHub API re-read the startup file after content publication. Worktree clean after final push.",
+    "merged_into_main": false,
+    "startup_url": "https://github.com/adil-chandio/Monarch-Studio/blob/arena/eba29c7c-monarch-studio/styles/monarch-zackd-3d/START_HERE.md",
+    "detailed_repo_receipt": "https://github.com/adil-chandio/Monarch-Studio/blob/17fd4e6319a3efffba4db6458853c515f29a78e7/operations/continuity/receipts/EMS-20261016-003/SYNC.json"
+  },
+  "google_drive": {
+    "parent_id": "1LTkHpkEUFSui8Lqyy8I0j5-1AceSziWX",
+    "library_folder_id": "1frVyXY3O1KAZXm8YrT9R4T4k6xoQNiaO",
+    "recovery_pack": {
+      "id": "1RjU2c8PNdJVzs98UuvIkSVNh3-2A5pBj",
+      "name": "WF02_STYLE_MEMORY_V2_V8_20261016.zip",
+      "size": 43712098,
+      "md5": "d7274b547ac161911239d02f67f43db9",
+      "sha256": "3548164eb7244bb59bda2d0a7206414e8f94070f9713ac66cd4ec119f1eb6c13",
+      "members": 997,
+      "verification": "Upload and later get_file/folder listing size/MD5/parent match; all ZIP member CRC/hash checks pass. Independent extraction passes audit/brief and resumes idle."
+    },
+    "handbook_markdown": {
+      "id": "1o7bKfshK1rfoFuVcneqgMuuiSQAYTOkq",
+      "size": 63454,
+      "md5": "e9273e5e5e9934186119fb3eaceb4af4"
+    },
+    "startup_guide": {
+      "id": "1Qn0n9nDh4fIBsjUzOid39A5vwyOeGa-H",
+      "size": 4653,
+      "md5": "d026561afbdffee33ecc7d967175dfe7"
+    },
+    "editable_handbook_doc": {
+      "id": "1nqDXQU_FtCGSSdJm97aJ1dJN3WvoKTIEPKuhnGJl-uw",
+      "url": "https://docs.google.com/document/d/1nqDXQU_FtCGSSdJm97aJ1dJN3WvoKTIEPKuhnGJl-uw/edit",
+      "verification": "Native Doc exists in library; expected failure-ledger heading and final marker re-read; end index62974. No byte-identical conversion claim."
+    },
+    "publication_receipt_id": "17JlBrKBwBTw3Hv5jYQECSEglYGQFNUg1"
+  },
+  "coverage": {
+    "releases": "V2 through V8",
+    "immutable_project_files": 537,
+    "raw_completed_production_archive_files": 39,
+    "available_recorded_conversation_messages": 36,
+    "available_recorded_journal_events": 221,
+    "full_original_ui_chat_available": false,
+    "prior_delivery_folders_and_masters_preserved": true,
+    "snapshot_limit": "Recovery ZIP is a dated pre-final-publication-receipt snapshot. This separate live receipt and GitHub contain later actual publication/archive results; no circular ZIP/commit self-hash is invented. Earlier unrelated Drive experiments are not falsely labeled reviewed V1 evidence."
+  },
+  "validation": {
+    "unit_tests": "16/16 passed after post-completion manifest regeneration",
+    "studio": "21 passed,0 errors,1 preserved historical absolute-path warning",
+    "preservation": "537 project hashes,39 raw archive hashes,7 release records,all archived journal chains and startup/registry alignment pass",
+    "continuity": "Task archived; active slot idle; no completed video render restarted",
+    "other_apps": "No new Notion/Linear records or notifications requested or claimed"
+  }
+}

@@ -10,7 +10,27 @@
 | **Portfolio** | `/space/portfolio` | the public proof surface — real numbers only | [03](./docs/architecture/03-SPACE-OPERATING-MODEL.md#space-4--portfolio) |
 | **Ops** | `/space/ops` | money, calendar, agents, repo health | [03](./docs/architecture/03-SPACE-OPERATING-MODEL.md#space-5--ops) |
 
-Start here → **[docs/architecture/](./docs/architecture/README.md)**
+## New chat / crash recovery — read this first
+
+If a chat is stuck, refreshed, or replaced, **do not ask the user to re-explain old work**. Run:
+
+```bash
+python3 tools/continuity.py resume
+```
+
+Then follow the commit-pinned bootstrap prompt it prints. It **automatically embeds the active Monarch Cam channel capsule**, so a new chat does not need the channel or workflow explained again. The continuity archive is in **[docs/continuity/](./docs/continuity/00_START_HERE.md)**: state ledger, session index, exact prompts/results, decisions, problems/fixes, evidence levels, screenshots, GitHub history, connected-app records, raw chat imports, validator, and CI.
+
+- **Monarch Cam one-command start:** `python3 tools/continuity.py channel` · [channel 00_START_HERE](./docs/continuity/channels/monarch-cam/00_START_HERE.md) · [root shortcut](./MONARCH_CAM.md)
+- **Stale checkout:** if continuity files are missing, use [RECOVER.md](./RECOVER.md) or `python3 tools/continuity.py recover`.
+- Three-channel config mismatch is recorded honestly: owner says Monarch Cam is one of the three channels; `config/channels.json` still carries three legacy slots. Do not rename/delete them without explicit instruction.
+
+- Copy-paste prompt: [docs/continuity/NEW_CHAT_PROMPT.md](./docs/continuity/NEW_CHAT_PROMPT.md)
+- Machine state: [docs/continuity/STATE.json](./docs/continuity/STATE.json)
+- Evidence coverage and gaps: [docs/continuity/COVERAGE.json](./docs/continuity/COVERAGE.json) · [docs/continuity/GAPS.md](./docs/continuity/GAPS.md)
+- Import real chat exports: [docs/continuity/IMPORT_PROTOCOL.md](./docs/continuity/IMPORT_PROTOCOL.md)
+- Validate before push: `python3 tools/continuity.py validate && python3 tools/continuity.py render --check`
+
+Architecture start here → **[docs/architecture/](./docs/architecture/README.md)**
 
 - **[01 — Repository structure](./docs/architecture/01-REPO-STRUCTURE.md)**: layout, five spaces, data model, hard rules
 - **[02 — Repo registry](./docs/architecture/02-REPO-REGISTRY.md)**: all 22 repos classified core / satellite / asset-store / archive

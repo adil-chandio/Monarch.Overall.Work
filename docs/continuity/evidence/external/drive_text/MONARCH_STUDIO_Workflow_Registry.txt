@@ -1,0 +1,139 @@
+﻿MONARCH STUDIO — Workflow Registry
+Google Docs copy · created 2026-10-09 · identical in meaning to the Notion hub, the Linear project + MON-55, and the local MONARCH_STUDIO_REGISTRY.md. If the four copies ever disagree, the Notion Workflows database row is the authority and the others are corrected to it.
+
+
+What this is
+One registry for every Monarch editing / animation workflow (style). One workflow = one WF code (WF-01, WF-02, …), one unique name, one unique resume key, one section on each of the four platforms, and every section links to the same workflow’s sections on the other three platforms. When a workflow name or resume key is given on any platform, open the registry there, find the row, follow its hub link, and continue inside that workflow only.
+
+
+Registry on the four platforms
+Notion — page “MONARCH STUDIO · Workflow Registry (hub)” https://app.notion.com/p/MONARCH-STUDIO-Workflow-Registry-hub-3f4807e1e916813a9000e7e94ac0ac53 (page id 3f4807e1-e916-813a-9000-e7e94ac0ac53) with the inline database “Workflows” (database 8e8f1c1c-30c9-4b15-badd-cff77d64a80b, data source 46fbf9a3-c149-4965-81a5-fe2a48bd3999) and the child page “How to add a workflow — checklist” (3f4807e1-e916-81c2-b5b5-ef1cb8412710).
+Linear — project “MONARCH STUDIO · Workflow Registry” (id 0a01b89d-3c9d-4193-8416-76b32d76cfca, team MON) and its index issue MON-55 https://linear.app/monarchmation/issue/MON-55 (attachments: Notion hub, Drive folder, this document). All projects: https://linear.app/monarchmation/team/MON/projects
+Google Drive — folder “MONARCH STUDIO” https://drive.google.com/drive/folders/1-wAt4bgYVn7q15uq22ZnRY8z5iIQaI-l (id 1-wAt4bgYVn7q15uq22ZnRY8z5iIQaI-l) in My Drive root; one sub-folder per workflow; this document lives in it.
+Google Docs — this document (id 1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q); each workflow also has its own “WF-nn · Name — HUB” document inside its Drive folder.
+Local — in the WF-01 sandbox: MONARCH_STUDIO_REGISTRY.md (root), studio/WORKFLOW_TEMPLATE.md, studio/new_workflow.py (scaffolds workflows/<slug>/ and appends the registry row). A copy of the registry .md is kept in the Drive folder.
+
+
+Resume protocol
+1. A workflow name or resume key is mentioned (for example “best video reel editing”).
+2. Open the registry on whatever platform is at hand and find the row by WF code, name or key. Never resolve by the bare phrase “Monarch Stickman Animation” — before 2026-10-09 it belonged to two different workflows (see the name-collision note).
+3. Follow that row’s hub link on the same platform: Linear project body §0 → resume issue newest comments · Notion hub top callouts → Doc 00 · Drive folder → RESUME_STATE.md · Google Doc HUB → “Current state”.
+4. Follow the hub’s own resume order and continue inside that workflow only. Record every change back into that workflow’s sections. A registry row changes only when status, links or open items change.
+
+
+Workflows
+WF-01 · Monarch Stickman Animation — status PARKED (by the user, 2026-10-09, after turn 13; nothing half-done) — resume key “best video reel editing”
+  Style / engine: Monarch stickman motion-edit — paper/ink Style B, 1080×1920 vertical shorts + 16:9 films; Python renderer (clean.py / toon.py 3D rig, SHADE hero = the user’s hooded black-suit character, hybrid look), extruded type, cinematic transitions, ASMR bed, 19 measured gates + gate #20 (MONARCH EDITOR BRAIN v2: brain/concept.py status → propose --format short|film → pick → build → gate → Drive → commit).
+  Notion hub: https://app.notion.com/p/WF-01-Monarch-Stickman-Animation-3f3807e1e916819eaa60fc633bf61478 (project page 3f3807e1-e916-819e-aa60-fc633bf61478; Docs 00–12 in the Docs DB; Doc 00 = current state 3f3807e1-e916-8152-9bff-c8caf4f08bb2) · registry row 3f4807e1-e916-8140-aee5-e1f13ab5b6d7
+  Linear: project “WF-01 · Monarch Stickman Animation” 4d053022-acab-4836-8f13-5ccb7e043c17 (body §0 = state + links) → resume issue MON-34 https://linear.app/monarchmation/issue/MON-34 (newest STATE comment first) · issues MON-34…MON-54 · open: MON-44 listen pass, MON-48 next video
+  Google Drive: “MONARCH STUDIO / WF-01 · Monarch Stickman Animation” https://drive.google.com/drive/folders/1Qum7OkUZpRMSt3SMJ6q3WumUUwzezTw- — contains “stickman POWERFUL MAN 42s” (1YSvMC-paJWQHVJEBpBZ0Mybp-WxshcPO), “stickman IZZAT 90s” (1_MhRILyCB86LWHYqLDzBPvmneA6Y2uqo), “video edit workflow.zip” (1labbEjdk4GO6zgth4Ce_JhP4WDpjZOEM), the HUB document, RESUME_STATE.md + session log copies
+  Google Doc HUB: https://docs.google.com/document/d/1g2WLpd-S9LmBur4nbz9mHc4AkOCCl54ZUpHNAzHuW5g/edit
+  Local root: /home/user of the “best video reel editing” chat sandbox (RESUME_STATE.md, MONARCH_STICKMAN_ANIMATION_SESSION_LOG.md, brain/, src/)
+
+
+WF-02 · Powerful Personality Explainer — status LEGACY (older chat, 2026-10-07) — resume command “TABAHI ACTIVATE”
+  Style / engine: 60 s 16:9 crayon/WebGL explainer rendered from crayon/pp-v4.html via puppeteer (7-habit script, 16 locked VO clips); a different renderer from WF-01. Its files were never uploaded to Drive — they exist only in that chat’s sandbox (/home/user/START-HERE.md, crayon/pp-v4.html, audio_vo/).
+  Notion hub: https://app.notion.com/p/Powerful-Personality-Stickman-Explainer-v2-Full-Production-Record-3f2807e1e91681b2a334d34ea75cc5ea (3f2807e1-e916-81b2-a334-d34ea75cc5ea; children: v4 record 3f3807e1-e916-8134-80ba-e56afc634afb, Task 7 forensic 3f3807e1-e916-818b-bf45-c82d9ea1432f) · registry row 3f4807e1-e916-81a6-b24c-f09db93d02d6
+  Linear: project “WF-02 · Monarch Stickman Animation — LEGACY (Powerful Personality explainer)” a813926c-b2ef-4956-91dd-09e91f08b7d9 (issues MON-20…MON-33; open items MON-32 https://linear.app/monarchmation/issue/MON-32, errors MON-33, MON-31, MON-20) + empty shell project 5f4f1906-2367-4951-bf4a-84ad817446a8
+  Google Drive: “MONARCH STUDIO / WF-02 · Powerful Personality Explainer (LEGACY — old chat)” https://drive.google.com/drive/folders/1LTkHpkEUFSui8Lqyy8I0j5-1AceSziWX (HUB document only)
+  Google Doc HUB: https://docs.google.com/document/d/1MVReMbe56MeehNO8Il70qMhuAHNxI01PPE0Vupj0FTc/edit
+  Local root: /home/user of the old chat’s sandbox (not available from the WF-01 chat)
+
+
+WF-03 · Monarch Noir Film — status ACTIVE (film #1 THE SHADOW v1 delivered 2026-10-10) — trigger NOIRGO <topic> — full section at the end of this document.
+WF-04 · Monarch Face 🔥👑 — ACTIVE, Chaos Video 1 v2 delivered 2026-10-13. See the WF-04 section appended at the end of this document. Next unassigned workflow code: WF-05.
+
+
+Name-collision note
+Both workflows above were called “Monarch Stickman Animation” before 2026-10-09 (WF-02 in the old chat, WF-01 in this one). On 2026-10-09 the Linear projects and the Notion project page were prefixed with their WF codes so that the names are unique. Always resolve a workflow by WF code + id, never by that phrase alone. WF-01 ids: Linear 4d053022…, Notion 3f3807e1-e916-819e…. WF-02 ids: Linear a813926c…, Notion 3f2807e1-e916-81b2….
+
+
+How to add a workflow (WF-03, …)
+1. Define: WF code, unique name, unique resume key, style/engine one-liner, local root workflows/<slug>/ (never mixed with another workflow’s sources).
+2. Google Drive: create folder “WF-nn · Name” inside MONARCH STUDIO. Every deliverable goes there with its md5 recorded.
+3. Google Docs: create “WF-nn · Name — HUB”, move it into that folder; sections = identity, resume key, the 4 platform links + registry, resume order, current state, open items, rules.
+4. Notion: Projects-DB page “WF-nn · Name” with a top LINKS callout; its Docs in the Docs DB (Doc 00 = current state); then add the row in the Workflows database on the registry hub with all four URLs, key, status, open items, and relate it to the project page.
+5. Linear: project “WF-nn · Name” (team MON) — body §0 = current state + LINKS block; issue “00 · RESUME KEY …” with attachments (Notion hub, Drive folder, Google Doc HUB); a STATE comment on that issue after every working turn.
+6. Registry rows: Linear registry project body + MON-55 table · this document’s Workflows section · local MONARCH_STUDIO_REGISTRY.md (python3 studio/new_workflow.py scaffolds the local folder and appends the row).
+7. Local scaffold: workflows/<slug>/RESUME_STATE.md, HUB.md, CHECKLIST.md from studio/WORKFLOW_TEMPLATE.md; upload RESUME_STATE.md to the Drive folder at the end of every working turn.
+8. Round-trip test: from each of the four platforms the workflow’s section must link to the other three, and the registry row must reach the hub. Report all ids/URLs in the reply.
+
+
+Conventions
+Naming “WF-nn · Name” identical on every platform. WF codes are never reused. Status values: Active · Parked · Legacy · Planned. Per turn inside a workflow: deliverables → that workflow’s Drive folder (md5 verified, same turn); state → local RESUME_STATE.md (newest block on top) + Linear resume-issue STATE comment + Notion Doc 00 top callout + Google Doc HUB “Current state”; status change → registry row on all four platforms. Never write one workflow’s facts into another workflow’s sections; when a name is ambiguous, stop and resolve by WF code + id first.
+
+
+SHADEGO — WF-01 one-word autopilot trigger (added 2026-10-09, turn 16)
+WF-01 · Monarch Stickman Animation resume key is now "SHADEGO <topic>" (legacy key "best video reel editing" stays valid). The message "SHADEGO <topic>" in a new chat = resume WF-01 → restore toolchain → Parked→Active → EDITOR BRAIN decides format/duration/concept from the topic → SHADE hero locked → voice audition (only click) → build → 19 gates + #20 PASS → Drive md5 → records on all four platforms → Roman Urdu reply with proof block. Playbook titled "SHADEGO" everywhere: Google Doc 1EdP_cvptM1GG8dDg_6ld_yjnkc1Ko9-kHtXy3BYXc2A (authority, inside the WF-01 Drive folder) · Drive SHADEGO.md 1CG7w-sB8IfTrYxh9mveT4OeguelczVcK (md5 f65d4c0b36e316643007221ef6c0840b) · Notion page 3f4807e1-e916-81f2-b9f0-d2d75b384983 · Linear MON-56 https://linear.app/monarchmation/issue/MON-56. Rule: every workflow gets its own unique trigger word (WF-02 keeps "TABAHI ACTIVATE"); a new style never starts with SHADEGO.
+WF-03 · Monarch Noir Film — registered 2026-10-09 (turn 17)
+Resume key / trigger: NOIRGO <topic> (unique; SHADEGO = WF-01, TABAHI ACTIVATE = WF-02). Status: ACTIVE — film #1 THE SHADOW v1 delivered 2026-10-10 (THE_SHADOW_v1.mp4 Drive 16qsEno9sN_p4fggfcTN05W9LUzYsz0u4, 92.97 MB, md5 f8b7e71b9238febd3c60f82463116393, 156.9 s, 33 shots / 93 beats, 3 voice lines, −16.5 LUFS, film gates 27/27 — GATES_THE_SHADOW_v1.md 1K_rRjxJ1JPkjJBdGJj_kmxCoPU8wdEGW, brain key the_shadow_v1); next NOIRGO <topic> = film #2 with a fresh world + device. Style / engine: dark-world cinematic 2D film, 1920×1080, 120–180 s — black room, one amber lantern, bone-white two-tone line hero on the toon 3-D skeleton, cast-shadow physics as the spine (SHADOW readout in metres), red typewriter villain text, serif on-screen narration + 2–3 English voice lines, dip-to-black grammar, measured film gates. Film #1 (brain pick): THE SHADOW, topic FEAR, ~150 s.
+Notion: page WF-03 · Monarch Noir Film https://app.notion.com/p/WF-03-Monarch-Noir-Film-3f4807e1e9168135b919ee36b0e39165 (3f4807e1-e916-8135-b919-ee36b0e39165, child of the STUDIO hub) · Workflows DB row 3f4807e1-e916-810e-a035-fce9f7cc8f3f (authority).
+Linear: project WF-03 · Monarch Noir Film e173192b-b932-4801-ac4d-dcd7445237b8 (team MON) → resume issue MON-57 https://linear.app/monarchmation/issue/MON-57 (bbb25ad6-7fcf-4901-bcee-9c3972d8a311; attachments = Drive folder, Google Doc HUB, Notion page). Registry comment on MON-55.
+Google Drive: folder WF-03 · Monarch Noir Film https://drive.google.com/drive/folders/11c194r1f_IMIo5yOmT-j80Iu-sZWP3KP (11c194r1f_IMIo5yOmT-j80Iu-sZWP3KP, inside MONARCH STUDIO) — NOIRGO_LOOK_SHEET_v0.jpg 13cLIxtxXHoTq-igivMuigcNq8saf3LSu (md5 23fb1cb0d655b003cb0461d2d4c36694) · RESUME_STATE.md 1V_C3PSoUKbSnVQIXThJIknlbEQkKH1j3 · HUB.md 1tPPQf27LfwHsB2Qd_OQghgHjdxtQJpNX · noir.py 1bCRFxrCIFV2XhHWMK-TVFEz2gJCINNxs · look_v0.py 1jACqPPTQI3yQG1fTF0KyEqBR5jadgBAd · metrics 1C5-iedExVkfMVEyFb7UqKUDNa8LBu12S.
+Google Docs: WF-03 · Monarch Noir Film — HUB https://docs.google.com/document/d/1sGGzPHXXars1-pJvB3ugnbnLuSuQ5EpE-obVidTj6rM/edit (1sGGzPHXXars1-pJvB3ugnbnLuSuQ5EpE-obVidTj6rM, inside that folder). Local root: workflows/wf03_monarch_noir_film/ (WF-01 sandbox). Registry copy on Drive: MONARCH_STUDIO_REGISTRY.md 1IpCtz_kzC6E9N6a0buhaS9wyZrVSzmny (replaces 1yrQwyMR…). Next free code: WF-05 (WF-04 registered 2026-10-13).
+
+
+
+
+WF-03 update (2026-10-10, turn 21): ACTIVE, 2 films delivered. Film #2 THE WINDOW v1 (NOIRGO MAX: real-life illustrated plates + crop camera, 3-D stick-human hero, full English VO) — Drive id 1WaMfEroWgzuYHeSCpyU9CPY7gJ0a0iGy, md5 cfe189f9c09e47e6728d2f2aba017f8d, 155 s, 27/27 gates (1K6k-6yS1hXOGy4D8v7mhI71w0xIDikCh), brain the_window_v1. Film #1 THE SHADOW v1 16qsEno9sN_p4fggfcTN05W9LUzYsz0u4. Open items: none; next NOIRGO <topic> = film #3. Style/engine cell now reads: dark cinematic animated short film, 1920x1080 24 fps, 120-180 s, own DNA per film, 27 measured gates + brain gate #20; film #2 engine = world.py + film_window.py + stick3d.py + audio_window.py + gate_window.py. Local registry copy on Drive updated in place: 1cGIALJxKtsn7iYVVQe33xLCIvyaIdzj8.
+
+
+
+
+SHARED ASSETS — CHARACTERS (added 2026-10-10, turn 33)
+Every studio character (stickman + realistic) lives in ONE place — the user's Drive folder "Monarch Face" (1EpH_0IcH34cJmf-s9DbaOQNBy3DXqPHw) / "MONARCH CHARACTERS" (1iPXavru1AXiSG5wRHuLKc5VNXhaVcXZK) — mirrored with the same structure on the four platforms:
+• Drive folders: Realistic 1NpOJTSOY3zjkBR8LoktHDUFUSB8oW5jN · Stickman 11uHSeU6wc81n9W_lRVvRU9arLQZTp3r8 · Shared & Reference 1dkk9Z3Js_wfSg2aIsTpmxlB9uNyD2OiJ · Archive · old versions 1D-hvAls1B5QgoRs1fo54OpxdIR2JGwKt · shortcut inside MONARCH STUDIO root 1CXqpDM3Amj7q0dGhpFXCmvgcYrXHt6aX — https://drive.google.com/drive/folders/1iPXavru1AXiSG5wRHuLKc5VNXhaVcXZK
+• Google Doc: MONARCH CHARACTERS — HUB (full file index, authority per line, change log) — https://docs.google.com/document/d/1AsFnHq43aYYWORu1MAdrjsnDyPf-ftOg5HrY0Uj40BI/edit
+• Notion: page MONARCH CHARACTERS (3f5807e1-e916-816c-9624-f7bdc5dba4b2) under the studio hub — https://app.notion.com/p/MONARCH-CHARACTERS-3f5807e1e916816c9624f7bdc5dba4b2
+• Linear: project MONARCH CHARACTERS (eb308dbc-c28d-46e5-ad5e-71ddb601a3b7, team MON) — MON-58 Stickman · MON-59 Realistic · MON-60 stick-face rebuild v4 · MON-61 archive + cross-links
+• Asset authority: CUSTOM_HERO_STATE.md 17fGVpLddAUe3XRYsmgAmxzfsBHAbtsfc (Shared & Reference, updated in place)
+Characters: CUSTOM HERO (the user himself — REAL face v5 ACCEPTED, REAL body v2, STICK face/body v3, stick-face v1 preview pending) · SHADE v2 (WF-01) · NOIRGO MAX HERO v2 (WF-03, procedural stick3d.py) · WF-01 3-D rig sheets. Rule: workflows link here, never duplicate character files; nothing is deleted — superseded versions go to Archive.
+
+
+LOCK (2026-10-10, turn 36): CUSTOM HERO set locked by the announced default after the 12th identical message ("change: ___" reopens it) — REAL face v5 1YTschdKJjpmsl4jIgC15y8yjek0zf1-M · REAL body v2 177bFsA2oy--XSZOqbRycGieIbYJuX8S- · STICK face v4 1b2Wj1lUGtZpOI-26UuxneCi6fm7G3zKc · STICK body v4 1zoHaynrUsosrjwU45I7WZHfFUj2lt7uc · CHARACTER BIBLE v2 1j-zZhDepXYw28nhsYzpgOs6nmAKPJORf · MASTER BOARD v2 1HkAE5dtx8mJqlpY6mPPIXjDAepYANrkQ. Films: NOIRGO <topic> may cast him (WF-03 custom-hero option, stick3d.py custom_hero preset before shot 1).
+
+
+# WF-04 · Monarch Face 🔥👑 — registered 2026-10-13 (EMS-20261013-002)
+Resume key / trigger: CHAOSGO <topic> (unique; SHADEGO = WF-01, TABAHI ACTIVATE = WF-02, NOIRGO = WF-03). Status: ACTIVE — Chaos Video 1 v2 (MONARCH_CHAOS_VIDEO_1_MASTER_v2.mp4) delivered 2026-10-13 (Drive 10nBp4Nsr3FlqxTOCKoU2cu5N44PYz-7M, root copy 1sBFi9jFjCp8a7OpRpbA8gb7EZm0CTA_I, 23,291,460 B, md5 f5d09353fab1ae7d52fb0a906f4f5598, 21.20 s / 636 frames @ 30fps, 1080×1920 9:16 Full HD, 48 kHz stereo -13.97 LUFS / -1.50 dBFS TP, 21/21 objective gates PASS — DELIVERY_GATES_v2.md 16BZjoWexLNJOpOCqm2jZBcL-IkkvV8pO, Compare v2 1uwQ14-kOpA6Lm6tYisPEztUseLZM48uz, Look Sheet v2 13H0WquPh_SOzlYNkrYTjlS4DjeRUINtu, Contact Sheet v2 1KCa_LV-R1kmkv7k2fBx0RkIUeUIYU5H2, Source ZIP v2 1Devm-wKU3QZ5DTXgL5pHV2Udqxl6S59f).
+Style / engine: Photorealistic Cyber-Monarch Awakening vertical reel engine (1080×1920, 30fps, 48kHz stereo) strictly locked to CUSTOM_HERO_REAL_SHEET_v5 (1YTschdKJjpmsl4jIgC15y8yjek0zf1-M) and CUSTOM_HERO_REAL_BODY_SHEET_v2 (177bFsA2oy--XSZOqbRycGieIbYJuX8S-): charcoal-grey tailored blazer + matte-black open-collar shirt, 7.5-head slim build, Front/3-4/v9 Side Profile/Pointing 🫵/Sovereign Crown plates, 2.5D skeletal body/head/hand articulation (cv2.remap), behind-subject graphic projections, and 24K Gold Crown 👑 above MONARCH STUDIO royal finale.
+Notion: page WF-04 · Monarch Face 🔥👑 https://app.notion.com/p/WF-04-Monarch-Face-3f8807e1e91681efb335eafb037ca211 (3f8807e1-e916-81ef-b335-eafb037ca211, child of the STUDIO hub).
+Linear: project WF-04 · Monarch Face 🔥👑 91320e77-d1f7-4f74-a5f0-0131252fd192 (team MON) → resume issue MON-65 https://linear.app/monarchmation/issue/MON-65/00-resume-key-chaosgo-wf-04-monarch-face-state-and-links (ed011a6c-c0c3-4316-a5c9-47b03c8750d7).
+Google Drive: folder Wf-04 • Monarch Face 🔥👑 https://drive.google.com/drive/folders/1EM8Q5IfeCCqQyBB-E12jJbAblM9n0oNg (subfolder Chaos video 1: 139hCS5jBGtly-JmCC-Nz0ZA0JWbscDHy).
+Google Docs: WF-04 · Monarch Face 🔥👑 — HUB https://docs.google.com/document/d/1Vx2t3z5Kx_gUMd2nkPjdqa3kc-BGDe8sj2Cua4pvxEY/edit (1Vx2t3z5Kx_gUMd2nkPjdqa3kc-BGDe8sj2Cua4pvxEY, inside Wf-04 folder).
+Local root: styles/monarch-face-chaos/ (adil-chandio/Monarch-Studio, branch arena/d53677cc-monarch-studio).
+
+
+WF-04 · Notion authority row: https://app.notion.com/p/WF-04-Monarch-Face-3f8807e1e91681368ceee607f8aaf092 . The final v2 `MONARCH_CHAOS_VIDEO_1_MASTER_v2.mp4` is Drive 10nBp4Nsr3FlqxTOCKoU2cu5N44PYz-7M (MD5 f5d09353fab1ae7d52fb0a906f4f5598), with F559–F562 gold shutter clean cut. The previously shared v2 masters 1D5O7_GL2oX4XDS5PouWIQ8Q1Fp-dBVJ6 (pre_motion_boost) and 1J__saUpfwEAKh7zyGnSPMeqx25zxIerf (pre_flash_fix) remain accessible; no old URL was invalidated. Next free workflow code: WF-05.
+
+
+
+
+WF-05 · Premium Motion Editing — registered 2026-10-15
+
+
+CURRENT CORRECTION: WF-05 is now assigned. Earlier “next free code: WF-05” notes are historical; check the live registry before allocating another code. Other workflows and their source histories remain unchanged.
+
+
+Trigger / resume key: MOTIONGO <topic or reference> · aliases WF-05 / WF5 / Premium Motion Editing.
+Permanent repository path: styles/premium-motion-editing/ in adil-chandio/Monarch-Studio. GitHub publication is tracked in the WF-05 receipts; an unmerged branch is not silently called main publication.
+
+
+Latest user policy: retain V5's clean editorial direction and accepted V6 depth/motion/transition/sound improvements. V6 bottom caption pills and active-word lower strip are REJECTED as the production default. Integrated scene typography remains primary; separate subtitles are off by default, with plain V5-like overlays only on explicit request. A bottom-positioned integrated headline is allowed.
+
+
+Style / engine: actual temporal subject/prop motion, meaningful visual metaphors, lavender/periwinkle paper world, grayscale/violet cut-outs, clean condensed editorial type, natural easy Urdu-English narration and restrained 2.5D depth/transitions/sound. Not a still-image slideshow and not a claim of newly modeled 3D geometry.
+
+
+Google Drive: https://drive.google.com/drive/folders/1C7vAECkURqySJDgpJ_YunUtyOWh8Zuri
+Google Docs HUB / full 17-chapter codex: https://docs.google.com/document/d/1yg7VK9S0luG4bPHQxWGtPIKxUcKcOSI6n7JnrCxPnLU/edit
+Notion project hub: https://app.notion.com/p/WF-05-Premium-Motion-Editing-3f9807e1e916819b9c53e21326dd0f26
+Notion Workflows authority row: https://app.notion.com/p/WF-05-Premium-Motion-Editing-3f9807e1e91681bd8408cb4537dacb31
+Linear project: 104ec829-e3db-4796-b12c-4fd062287ff3 (team MON).
+Linear resume pointer MON-67: https://linear.app/monarchmation/issue/MON-67/00-resume-key-motiongo-wf-05-premium-motion-editing-state-and-links
+Finite foundation task: MON-68. Permanent MON-67 stays open as a pointer, not a pending video render.
+
+
+Preserved: all available V5/V6 source, selected speech/fonts/licenses, measured timelines/QA, master/source identities and visible task history; fourteen shot/metaphor mappings; eighteen failure/cause/fix lessons; source/coverage audits; approved profile, reusable compositor, templates and fresh-chat prompts. The 38-page codex/readback is verified. No new full-length hybrid master is claimed; unavailable older source/scratch/compacted history is explicitly documented.
+
+
+WF05_REGISTRY_ENTRY_20261015_END

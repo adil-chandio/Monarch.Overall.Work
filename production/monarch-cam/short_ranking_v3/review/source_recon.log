@@ -1,0 +1,146 @@
+Using cached squirrel 3543930 bytes
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/squirrel.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/squirrel.webm -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 160k -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/squirrel.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/squirrel.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/squirrel_coarse_%04d.jpg
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/squirrel.mp4 -vf fps=2,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/squirrel_fine_%04d.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_squirrel_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_squirrel_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_squirrel_contact_sheet_02.jpg
++ ffmpeg -y -hide_banner -loglevel warning -ss 2.799 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/squirrel.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_squirrel.jpg
+[image2 @ 0x55cbea8d24c0] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_squirrel.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x55cbea8d24c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+Using cached hermit_crab 2540137 bytes
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.webm -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 160k -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.mp4
++ ffmpeg -y -hide_banner -loglevel warning -stream_loop -1 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.mp4 -t 35 -vn -ac 2 -ar 48000 -c:a pcm_f32le -af volume=0.35 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/native_ambience.wav
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/hermit_crab_coarse_%04d.jpg
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.mp4 -vf fps=2,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/hermit_crab_fine_%04d.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_hermit_crab_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_hermit_crab_contact_sheet_01.jpg
++ ffmpeg -y -hide_banner -loglevel warning -ss 1.639 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/hermit_crab.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_hermit_crab.jpg
+[image2 @ 0x55e3b87ab740] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_hermit_crab.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x55e3b87ab740] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+Using cached starfish 13746304 bytes
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.webm -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 160k -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/starfish_coarse_%04d.jpg
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.mp4 -vf fps=2,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/starfish_fine_%04d.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_starfish_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_starfish_contact_sheet_02.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_starfish_contact_sheet_03.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_02.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_03.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_04.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_05.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_06.jpg
++ ffmpeg -y -hide_banner -loglevel warning -ss 10.624 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/starfish.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_starfish.jpg
+[image2 @ 0x557ed8c16000] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_starfish.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x557ed8c16000] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+Using cached octopus 18509824 bytes
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mpg
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mpg -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 160k -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/octopus_coarse_%04d.jpg
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mp4 -vf fps=2,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/octopus_fine_%04d.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_octopus_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_octopus_contact_sheet_02.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_octopus_contact_sheet_03.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_02.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_03.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_04.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_05.jpg
++ ffmpeg -y -hide_banner -loglevel warning -ss 9.263 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/octopus.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_octopus.jpg
+[image2 @ 0x55b8d0d133c0] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_octopus.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x55b8d0d133c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+Using cached titmouse 4315773 bytes
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.webm -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 160k -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4
+[out#0/mp4 @ 0x559b0c39ebc0] Codec AVOption b:a (set bitrate (in bits/s)) has not been used for any stream. The most likely reason is either wrong type (e.g. a video option with no video streams) or that it is a private option of some decoder which was not actually used for any stream.
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/titmouse_coarse_%04d.jpg
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4 -vf fps=2,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/frames/titmouse_fine_%04d.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_titmouse_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/coarse_titmouse_contact_sheet_02.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_01.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_02.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_03.jpg
+Wrote /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_04.jpg
++ ffmpeg -y -hide_banner -loglevel warning -ss 7.427 -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/media/titmouse.mp4 -frames:v 1 -q:v 2 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_titmouse.jpg
+[image2 @ 0x555a54dc3840] The specified filename '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/short_ranking_v3/review/source_poster_titmouse.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x555a54dc3840] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+{
+  "topic": "5 Unexpected Animal Skills, Ranked",
+  "new_topic_separate_from_prior_bear_car_and_albatross_shorts": true,
+  "edition": "clean_premium_v3",
+  "source_pages": {
+    "squirrel": "https://commons.wikimedia.org/wiki/File:Sasana.2015.myanmar.squirrel.1.webmhd.webm",
+    "hermit_crab": "https://commons.wikimedia.org/wiki/File:Einsiedlerkrebs_(Wangerooge).webm",
+    "starfish": "https://commons.wikimedia.org/wiki/File:Seestern_(sich_aufrichtend).webm",
+    "octopus": "https://commons.wikimedia.org/wiki/File:OctopusFeedingCSS.mpg",
+    "titmouse": "https://commons.wikimedia.org/wiki/File:Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm"
+  },
+  "retrieval_routes": {
+    "squirrel": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sasana.2015.myanmar.squirrel.1.webmhd.webm",
+    "hermit_crab": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Einsiedlerkrebs_(Wangerooge).webm",
+    "starfish": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Seestern_(sich_aufrichtend).webm",
+    "octopus": "https://commons.wikimedia.org/wiki/Special:Redirect/file/OctopusFeedingCSS.mpg",
+    "titmouse": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Slow_Motion_Hand-Feeding_a_Tufted_Titmouse.webm"
+  },
+  "rights_declaration": "All five picture sources are CC0 1.0 via Wikimedia Commons; attribution is given voluntarily.",
+  "credits": {
+    "squirrel": "Moine S\u0101sana",
+    "hermit_crab": "Rhetos, Sabine Heim",
+    "starfish": "Rhetos, Sabine Heim",
+    "octopus": "Shuoli1999",
+    "titmouse": "Equationsmith"
+  },
+  "source_video_ledger": "production/monarch-cam/short_ranking_v3/review/source_video_ledger.json",
+  "source_windows": "production/monarch-cam/short_ranking_v3/review/source_windows.json",
+  "native_audio": "production/monarch-cam/work/short_ranking_v3/native_ambience.wav",
+  "coarse_review_frames": 157,
+  "fine_review_frames": 315,
+  "coarse_contact_sheets": [
+    "production/monarch-cam/short_ranking_v3/review/coarse_squirrel_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_hermit_crab_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_starfish_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_starfish_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_starfish_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_octopus_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_octopus_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_octopus_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_titmouse_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/coarse_titmouse_contact_sheet_02.jpg"
+  ],
+  "fine_contact_sheets": [
+    "production/monarch-cam/short_ranking_v3/review/fine_squirrel_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_squirrel_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_hermit_crab_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_starfish_contact_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_octopus_contact_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_v3/review/fine_titmouse_contact_sheet_04.jpg"
+  ],
+  "posters": {
+    "squirrel": "production/monarch-cam/short_ranking_v3/review/source_poster_squirrel.jpg",
+    "hermit_crab": "production/monarch-cam/short_ranking_v3/review/source_poster_hermit_crab.jpg",
+    "starfish": "production/monarch-cam/short_ranking_v3/review/source_poster_starfish.jpg",
+    "octopus": "production/monarch-cam/short_ranking_v3/review/source_poster_octopus.jpg",
+    "titmouse": "production/monarch-cam/short_ranking_v3/review/source_poster_titmouse.jpg"
+  },
+  "poster": "production/monarch-cam/short_ranking_v3/review/source_poster.jpg",
+  "visual_timestamp_approval": "PENDING \u2014 no scene lock before contact-sheet review",
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "retrieved_unix": 1794063174
+}

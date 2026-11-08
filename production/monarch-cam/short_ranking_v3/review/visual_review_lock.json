@@ -1,0 +1,233 @@
+{
+  "status": "APPROVED_FOR_RENDER",
+  "topic": "Five CC0 Wikimedia Commons animal moments in a subjective entertainment ranking",
+  "source": "Five CC0 1.0 Wikimedia Commons animal clips, independently verified on 2026-11-07",
+  "review_basis": "Coarse 1-second and fine 0.5-second contact sheets from source_recon_ranking.py were viewed; exact source windows were selected for the hook, five ranked moments, payoff and loop. V3 adds filmic grade, halation, cross-dissolves, tracked captions and subtle rank numerals without extra text.",
+  "approved_by": "Arena agent, contact-sheet visual review",
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "note": "No human full-motion review or human listening to native audio occurred; delivered AAC is measured by nine gates, technical QC and model-assisted review.",
+  "v3_visual_enhancements": [
+    "minimal_captions_only",
+    "no_top_headlines",
+    "no_badges",
+    "no_dance_card",
+    "no_progress",
+    "no_footer",
+    "no_macro_inset",
+    "no_source_labels",
+    "no_brand_watermark",
+    "no_cut_flashes",
+    "v3_cinematic_grade",
+    "v3_halation_bloom",
+    "v3_scene_crossfades",
+    "v3_tracked_captions",
+    "v3_motion_drift",
+    "v3_rank_numbers",
+    "deep_navy_ivory_teal_palette",
+    "seamless_loop_crossfade",
+    "exact_text_thumbnails",
+    "five_cc0_sources"
+  ],
+  "v3_sound_enhancements": [
+    "v3_stereo_width_polish",
+    "v3_room_polish",
+    "v3_sub_weight",
+    "v3_voice_dip_polish",
+    "v3_premaster_ceiling_polish",
+    "salience_layering",
+    "panned_sfx",
+    "short_room",
+    "sub_bloom",
+    "pchip_envelopes",
+    "gentle_voice_deharsh"
+  ],
+  "exact_timecodes": [
+    {
+      "timeline_in": 0.0,
+      "timeline_out": 2.0,
+      "source_id": "titmouse",
+      "source_in": 1.5,
+      "rate": 1.0,
+      "id": "hook_landing",
+      "rank": null,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 2.0,
+      "timeline_out": 5.0,
+      "source_id": "squirrel",
+      "source_in": 0.5,
+      "rate": 1.0,
+      "id": "rank5_squirrel_wide",
+      "rank": 5,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 5.0,
+      "timeline_out": 8.0,
+      "source_id": "squirrel",
+      "source_in": 6.0,
+      "rate": 1.0,
+      "id": "rank5_squirrel_detail",
+      "rank": 5,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 8.0,
+      "timeline_out": 11.0,
+      "source_id": "hermit_crab",
+      "source_in": 0.5,
+      "rate": 1.0,
+      "id": "rank4_crab_wide",
+      "rank": 4,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 11.0,
+      "timeline_out": 14.0,
+      "source_id": "hermit_crab",
+      "source_in": 3.5,
+      "rate": 1.0,
+      "id": "rank4_crab_detail",
+      "rank": 4,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 14.0,
+      "timeline_out": 17.0,
+      "source_id": "starfish",
+      "source_in": 6.0,
+      "rate": 1.0,
+      "id": "rank3_starfish_wide",
+      "rank": 3,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 17.0,
+      "timeline_out": 20.0,
+      "source_id": "starfish",
+      "source_in": 36.0,
+      "rate": 1.0,
+      "id": "rank3_starfish_flip",
+      "rank": 3,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 20.0,
+      "timeline_out": 23.0,
+      "source_id": "octopus",
+      "source_in": 0.5,
+      "rate": 1.0,
+      "id": "rank2_octopus_wide",
+      "rank": 2,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 23.0,
+      "timeline_out": 26.0,
+      "source_id": "octopus",
+      "source_in": 24.0,
+      "rate": 1.0,
+      "id": "rank2_octopus_open",
+      "rank": 2,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 26.0,
+      "timeline_out": 29.0,
+      "source_id": "titmouse",
+      "source_in": 0.0,
+      "rate": 1.0,
+      "id": "rank1_titmouse_wide",
+      "rank": 1,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 29.0,
+      "timeline_out": 32.0,
+      "source_id": "titmouse",
+      "source_in": 4.0,
+      "rate": 1.0,
+      "id": "rank1_titmouse_landing",
+      "rank": 1,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 32.0,
+      "timeline_out": 34.0,
+      "source_id": "titmouse",
+      "source_in": 19.0,
+      "rate": 1.0,
+      "id": "payoff_question",
+      "rank": null,
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 34.0,
+      "timeline_out": 35.0,
+      "source_id": "titmouse",
+      "source_in": 1.5,
+      "rate": 0.75,
+      "id": "loop_landing",
+      "rank": null,
+      "layout": "footage"
+    }
+  ],
+  "rank_steps": [
+    {
+      "number": "05",
+      "rank": 5,
+      "title": "THE DROP-IN",
+      "subtitle": "Squirrel",
+      "time": 2.0
+    },
+    {
+      "number": "04",
+      "rank": 4,
+      "title": "THE TINY COMMUTE",
+      "subtitle": "Hermit crab",
+      "time": 8.0
+    },
+    {
+      "number": "03",
+      "rank": 3,
+      "title": "THE SLOW FLIP",
+      "subtitle": "Starfish",
+      "time": 14.0
+    },
+    {
+      "number": "02",
+      "rank": 2,
+      "title": "THE BOTTLE OPENER",
+      "subtitle": "Octopus",
+      "time": 20.0
+    },
+    {
+      "number": "01",
+      "rank": 1,
+      "title": "THE HAND LANDING",
+      "subtitle": "Tufted Titmouse",
+      "time": 26.0
+    }
+  ],
+  "cue_frames": [
+    2,
+    60,
+    90,
+    150,
+    240,
+    270,
+    330,
+    420,
+    450,
+    510,
+    600,
+    630,
+    690,
+    780,
+    810,
+    960
+  ],
+  "cover_frame_time": 0.07
+}

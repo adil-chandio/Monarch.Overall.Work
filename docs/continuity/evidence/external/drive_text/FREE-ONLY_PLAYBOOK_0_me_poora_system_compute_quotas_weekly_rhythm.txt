@@ -1,0 +1,323 @@
+﻿FREE-ONLY PLAYBOOK · $0 me poora Monarch system
+Trigger: AGENTGO free · WF-07 · VIPER-1 viper-1.3 · 2026-10-27 Rule: koi card nahi, koi credit nahi, koi paid API nahi. Jo free me nahi hota, wo rukta hai — bill nahi banta.
+
+
+________________
+
+
+0. Ek line ka jawab
+Free me poora system chalta hai: script → 480p clips → 960×1664 upscale → voice → foley → music → lip-sync → mixed master → Drive archive. Ceiling 960×1664 + mixed audio hai. 1080p/2K native, aur "ek prompt me synced dialogue" (Veo-3 style) free me nahi milega — uske liye 24 GB card ya paisa chahiye, aur wo hum nahi karenge.
+
+
+________________
+
+
+1. Compute ka poora structure (sab card-free)
+#
+	Provider
+	Kya milta hai
+	Quota
+	Kaam
+	1
+	Google Colab free
+	1× T4 16 GB
+	dynamic (koi fixed number nahi, session kabhi bhi khatam)
+	daily render box
+	2
+	Kaggle Notebooks
+	2× T4 (alag-alag 16 GB) ya P100
+	~30 GPU h/week, counter account me dikhta hai, 12 h session
+	weekly workhorse
+	3
+	Lightning AI free
+	T4/L4
+	15 credits/month, Studio har 4 h restart
+	emergency reserve
+	4
+	HF ZeroGPU
+	shared Blackwell
+	5 min/day
+	sirf demo
+	5
+	Aapka laptop (CPU)
+	—
+	unlimited
+	voice, mix, lanczos, verify, assemble
+	
+
+Excluded (jaan-boojh kar): Modal ($30 credit magar card on file chahiye), Replicate (free taste ke baad billing), Colab Pro, MiniMax-H3 API. Yeh list studio/free_compute.json me machine-readable hai.
+Hardware ki asli haqeeqat
+* T4 = 16 GB, Turing (sm_75) → fp16 haan, bf16/fp8 nahi. Isliye "fp8 model" wale tutorials T4 par chalte hi nahi; LatentSync ko capability[0] >= 7 patch chahiye (warna fp32 → OOM).
+* Kaggle ke 2× T4 memory pool nahi karte — 2 card = 2×16 GB alag, 24 GB model nahi chalta.
+* Kaggle par P100 sunset ho gaya (Sep 2026) → zyada tar T4×2 milega.
+
+
+________________
+
+
+2. Kaun kya karega (kaam ka batwara)
+Stage
+	Kahan
+	Time (andaazan)
+	Output
+	plan / new / verify / assemble
+	laptop CPU
+	seconds
+	project.json, plan.json, receipts
+	Clip render (Wan 1.3B, 480×832)
+	Colab T4 ya Kaggle T4
+	8–25 min / 5 s clip
+	shots/<id>.mp4
+	Voice (Kokoro)
+	laptop CPU ya Colab
+	seconds–minute
+	audio/vo/<id>.wav
+	Voice clone (Chatterbox, optional)
+	Colab/Kaggle GPU
+	~1 min / line
+	audio/vo/<id>.wav
+	Foley (MMAudio small_44k)
+	Colab/Kaggle GPU
+	~10–30 s / clip
+	audio/foley/<id>.wav
+	Music bed (MusicGen-small)
+	Colab/Kaggle GPU
+	~1 min / 30 s
+	audio/bed.wav
+	Upscale (Real-ESRGAN ×2)
+	Colab/Kaggle GPU
+	2–4× clip length
+	shots/<id>-2x.mp4
+	Upscale (backup) (Lanczos ×2)
+	laptop CPU
+	fast
+	same naming
+	Lip-sync (LatentSync 1.5)
+	Colab/Kaggle GPU
+	2–5 min / 5 s
+	shots/<id>-talk.mp4
+	Mix (mix)
+	laptop CPU (ffmpeg)
+	seconds
+	shots/<id>-2x-mix.mp4
+	Master + archive
+	laptop + Drive
+	seconds
+	delivery/<id>_MASTER.mp4 → Drive
+	
+
+Golden rule: GPU sirf render/upscale/foley ke liye jalo. Mix, verify, assemble, voice (Kokoro) — laptop. Yahi 30 h/week ko 2–3 reels ke liye kaafi banata hai.
+
+
+________________
+
+
+3. Ek reel ka poora free flow (copy-paste)
+# ---------- laptop (0 GPU minutes) ----------
+
+
+python3 tools/videogen.py doctor                      # free-only mode ON dikhna chahiye
+
+
+python3 tools/videogen.py new --id reel-01 --title "Monarch reel 01" --aspect 9:16
+
+
+# project.json me prompts + vo_text + foley_prompt bharo
+
+
+python3 tools/videogen.py plan  workflows/current/payload/reel-01/project.json   # $0.00
+
+
+python3 tools/videogen.py render workflows/current/payload/reel-01/project.json  # queue file banayega
+
+
+# ---------- Colab ya Kaggle (GPU: clip render) ----------
+
+
+# MONARCH_T4_FREE_BRIDGE.ipynb -> Runtime T4 -> queue file load karo -> Run all
+
+
+# mp4s Drive me: 05 · Projects/reel-01/shots/
+
+
+# ---------- Colab/Kaggle (GPU: audio + upscale) ----------
+
+
+python3 tools/videogen.py audio   <project>.json      # notebook: vo + foley + bed
+
+
+python3 tools/videogen.py upscale <project>.json      # notebook: 480 -> 960x1664
+
+
+# dono notebooks Run all -> Drive me audio/ aur shots/*-2x.mp4
+
+
+# ---------- laptop (0 GPU minutes) ----------
+
+
+python3 tools/videogen.py mix     <project>.json --loudnorm
+
+
+python3 tools/videogen.py verify  <project>.json      # height + audio + md5, warna exit 3
+
+
+python3 tools/videogen.py assemble <project>.json
+
+
+python3 tools/videogen.py quota --use kaggle 2.0 --note "reel-01 clips+audio"
+
+
+# master Drive me: 06 · Masters & Receipts/
+
+
+Har GPU session ke baad quota --use <provider> <hours> likho — isse pata rehta hai kitna bacha hai. Counter: python3 tools/videogen.py quota.
+
+
+________________
+
+
+4. Free-only mode kaise kaam karta hai (guard, advice nahi)
+* Default: free_only() == True. Project me route: paid likho, API key ho, tab bhi plan har paid step ko free chain me rewrite kar deta hai — estimate hamesha $0.00.
+* plan header: FREE-ONLY ($0 guaranteed); warning: "free-only mode: every paid step is rewritten…".
+* render --yes free mode me: FREE-ONLY MODE: no paid step will be submitted — render_h3() call hi nahi hoti.
+* Unlock sirf jaan-boojh kar: MONARCH_ALLOW_PAID=1 (env). Ye ek deliberate, visible act hai — galti se nahi hota.
+* 10 tests isi guard ko pin karte hain (paid project → $0, H3 kabhi call nahi, quota ledger rollover).
+
+
+________________
+
+
+5. Quota khatam? Ye order follow karo
+1. Colab session mar gaya → wahi notebook Kaggle me import karo (T4×2) → 30 h/week counter.
+2. Kaggle quota khatam → Lightning AI free Studio (15 credits) — sirf hero shots ke liye bachao.
+3. Sab khatam → laptop par jo ho sake: Kokoro voice, Lanczos ×2 upscale, mix, assemble (960p tak master ban jayega) — koi render nahi, koi paisa nahi.
+4. Naya week (Kaggle Sunday 00:00 UTC reset) → render queue wapas chalu.
+5. Kabhi mat karo: naya account banana quota bypass ke liye (TOS violation → account ban, aur ye "free" nahi "fraud" hai).
+
+
+________________
+
+
+6. Quality ka free ceiling (imaandari se)
+Cheez
+	Free me
+	Kaise
+	480×832 native
+	✅
+	Wan 2.1 1.3B, T4, 8–25 min/clip
+	960×1664
+	✅
+	Real-ESRGAN ×2 (T4) — sharper, naya detail nahi
+	720p native
+	⚠️ slow
+	Wan 2.2 TI2V-5B fp8+offload on Kaggle T4 (~30–60 min/clip)
+	1080p native
+	❌
+	16 GB card par realistic nahi
+	2K
+	❌
+	paid/24 GB+ only
+	Synced dialogue in one pass
+	❌
+	Ovi 11B = 24 GB; Kandinsky 6 Lite ≈ 22 GiB
+	Voice + lipsync + foley + music
+	✅
+	stems + LatentSync (yeh pro workflow hi hai)
+	
+
+Client ko kya bolna hai: "delivery 960×1664, phone-first reels ke liye optimised". 1080p/2K ka wada free me nahi — agar client 1080p maange, wo job paid tier me jayegi, warna decline.
+
+
+________________
+
+
+7. Weekly rhythm (30 h Kaggle + Colab + laptop)
+Din
+	Kaam
+	GPU
+	Somwar
+	2 scripts + plan (laptop)
+	0
+	Mangal
+	clips: 6–8 shots (Kaggle 2 h)
+	2 h
+	Budh
+	voice + foley + bed (Kaggle 1 h)
+	1 h
+	Jumerat
+	upscale ×2 (Kaggle 1.5 h)
+	1.5 h
+	Juma
+	lipsync hero (Colab 1 h)
+	1 h
+	Hafta
+	mix + verify + assemble + Drive (laptop)
+	0
+	Total
+	~2 reels/week
+	~5.5 h / 30 h
+	
+
+Bacha hua quota: eksperiment (naya prompt style, naya model) — magar hamesha quota se pehle dekho.
+
+
+________________
+
+
+8. Files & folders (free structure)
+repo (Git = truth)                     Drive Wf-07 • Monarch Ai Agent (delivery)
+
+
+workflows/current/payload/<id>/        05 · Projects/<id>/
+
+
+  project.json  plan.json               project.json, plan.json, receipts.json
+
+
+  queue/  shots/  audio/{vo,foley}/     shots/, audio/, upscale_receipt.json
+
+
+  upscale/  lipsync/  delivery/        06 · Masters & Receipts/<id>_MASTER.mp4
+
+
+studio/free_compute.json               (menu + quotas)
+
+
+studio/free_quota.json                 (weekly ledger — quota command likhta hai)
+
+
+________________
+
+
+9. Checklist (har reel se pehle)
+* doctor → free-only mode ON, Kaggle hours bache hue
+* plan → $0.00, koi WARN licence wali line padh li
+* GPU sessions short (1–2 h), background tabs band
+* quota --use likha har session ke baad
+* verify exit 3 nahi (height + audio + md5)
+* master Drive me + receipts me md5
+* kisi ko 1080p/2K ka wada nahi
+
+
+________________
+
+
+10. Kab free kaafi nahi (aur tab kya)
+Situation
+	Free option
+	Sach
+	Client 1080p maange
+	960p upscale de kar "reel master" bolo
+	1080p native free nahi
+	TV/bade screen ke liye
+	❌
+	free me nahi
+	Synced dialogue hero shot
+	LatentSync + apni VO
+	ek pass me nahi, magar result solid
+	Deadline 24 h me 5 reels
+	nahi
+	quota/time ki deewar
+	
+
+Agar kabhi paid tier chahiye ho, pehle MONARCH_ALLOW_PAID=1 likhna padega — aur wo aapka faisla hoga, mera nahi. Default hamesha $0.

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "EMS-20261011-001-journal",
+  "title": "EMS-20261011-001 hash-chained event journal",
+  "kind": "event_log",
+  "source": "Google Drive EMS-20261011-001-history-archive.tar.gz",
+  "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+  "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+  "space": "ops",
+  "branch": "arena/390292fc-monarch-overall-work",
+  "evidence_level": "verbatim_event_log",
+  "coverage": "partial",
+  "notes": "52 hash-chained events (sync 20, action 11, checkpoint 6, error 5, result 4, user 3, decision 2, tool 1); exact event log, not a chat transcript.",
+  "imported_at": "2026-11-08T16:13:55Z",
+  "parser": "jsonl",
+  "message_count": 52,
+  "role_counts": {
+    "assistant": 11,
+    "continuity": 32,
+    "git": 2,
+    "github": 1,
+    "github_actions": 3,
+    "user": 3
+  },
+  "warnings": [
+    "JSON parse failed (Extra data: line 2 column 1 (char 470)); trying JSONL/text."
+  ],
+  "raw_path": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/raw/JOURNAL.jsonl",
+  "raw_sha256": "5759a194f72cc291d8794fbf9824c606169f827e841d2e0cec67b5dadeace718",
+  "raw_bytes": 42336,
+  "normalized_path": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/normalized.jsonl",
+  "normalized_sha256": "2b18c631c4a6d83f21cc6368dd283719fa362f34ccb2f21fc0e40f685478eb71",
+  "normalized_bytes": 16828
+}

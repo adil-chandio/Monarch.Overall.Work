@@ -1,0 +1,66 @@
+{
+  "query": "restrained cartoon boing clean",
+  "earshot_find": {
+    "summary": "Best moments for 'restrained cartoon boing clean' in selected_boing.wav (kind=event; searched all 2.0 s: 3 windows of ~1.0 s (edges snapped to the sound) to locate events, none returned + 1 onset-based candidates (one stage)): 0:00.12-0:00.83 (0.71 s stroke, z +5.3 strong). start/end are sample trims in seconds (strokes / events start 5 ms before the attack; windows are snapped to the sound; a 'head cut' / 'tail cut' trim cuts into a sound).",
+    "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/selected_boing.wav",
+    "query": "restrained cartoon boing clean",
+    "query_kind": "event",
+    "query_kind_score": 0.21,
+    "duration": 2.0,
+    "n_candidates": 1,
+    "n_windows": 0,
+    "n_events": 1,
+    "segments": [
+      {
+        "start": 0.123,
+        "end": 0.83,
+        "duration": 0.707,
+        "score": 5.39,
+        "z": 5.39,
+        "cosine": 0.442,
+        "verdict": "strong",
+        "kind": "stroke",
+        "peak_dbfs": -25.0,
+        "head_db": -44.8,
+        "tail_db": -32.0,
+        "cut": ""
+      }
+    ]
+  },
+  "selected_source_range": {
+    "start": 0.123,
+    "end": 0.83,
+    "earshot": {
+      "start": 0.123,
+      "end": 0.83,
+      "duration": 0.707,
+      "score": 5.39,
+      "z": 5.39,
+      "cosine": 0.442,
+      "verdict": "strong",
+      "kind": "stroke",
+      "peak_dbfs": -25.0,
+      "head_db": -44.8,
+      "tail_db": -32.0,
+      "cut": ""
+    }
+  },
+  "processed_excerpt": {
+    "source_start": 0.123,
+    "source_end": 0.6921,
+    "duration": 0.5691,
+    "local_peak_seconds": 0.0191,
+    "edge_fades": true,
+    "generated_audio": false
+  },
+  "premium": {
+    "highpass_hz": 70,
+    "lowpass_hz": 4200,
+    "short_room_mix": 0.12,
+    "short_room_decay_ms": 140,
+    "edge_fade_in_s": 0.014,
+    "processed_duration_s": 0.5691,
+    "generated_audio": false,
+    "room_is_original_effect": true
+  }
+}

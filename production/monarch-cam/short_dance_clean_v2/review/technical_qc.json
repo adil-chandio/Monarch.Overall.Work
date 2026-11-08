@@ -1,0 +1,103 @@
+{
+  "file": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM_V2.mp4",
+  "sha256": "ed366321dbe3994d5a97365165c6819735b7f53a64a2f6ac922f5235dd94c4f1",
+  "bytes": 17469101,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "30/1",
+        "nb_frames": "720",
+        "nb_read_frames": "720"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "1126",
+        "nb_read_frames": "1125"
+      }
+    ],
+    "format": {
+      "duration": "24.000000",
+      "size": "17469101"
+    }
+  },
+  "decoded_audio_samples": 1152000,
+  "decoded_sample_rate": 48000,
+  "loudness": {
+    "input_i": "-14.31",
+    "input_tp": "-3.30",
+    "input_lra": "3.10",
+    "input_thresh": "-24.99",
+    "output_i": "-13.75",
+    "output_tp": "-2.13",
+    "output_lra": "2.80",
+    "output_thresh": "-24.42",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.25"
+  },
+  "click_runs": [],
+  "clipping_runs": 0,
+  "decoded_sample_peak_dbfs": -3.3021,
+  "checks": {
+    "duration_24s": true,
+    "frames_720": true,
+    "vertical_1080x1920": true,
+    "fps_30": true,
+    "audio_48k_stereo": true,
+    "integrated_loudness": true,
+    "true_peak": true,
+    "no_sample_clipping_runs": true,
+    "no_click_runs": true
+  },
+  "passed": true,
+  "v2": {
+    "separate_from_previous_editions": true,
+    "sound_enhancements": [
+      "salience_layering",
+      "softer_support_hits",
+      "panned_sfx",
+      "short_room",
+      "voice_aware_presence_dip",
+      "stereo_widening",
+      "sub_bloom",
+      "pchip_envelopes",
+      "gentle_voice_deharsh",
+      "v2_stereo_width_polish",
+      "v2_room_polish",
+      "v2_sub_weight",
+      "v2_voice_dip_polish",
+      "v2_premaster_ceiling_polish"
+    ],
+    "visual_enhancements": [
+      "minimal_captions_only",
+      "no_top_headlines",
+      "no_badges",
+      "no_dance_card",
+      "no_progress",
+      "no_footer",
+      "no_macro_inset",
+      "no_source_labels",
+      "no_brand_watermark",
+      "no_cut_flashes",
+      "v2_cinematic_grade",
+      "v2_halation_bloom",
+      "v2_scene_crossfades",
+      "v2_tracked_captions",
+      "v2_motion_drift",
+      "deep_navy_ivory_teal_palette",
+      "seamless_loop_crossfade",
+      "exact_text_thumbnails"
+    ]
+  }
+}

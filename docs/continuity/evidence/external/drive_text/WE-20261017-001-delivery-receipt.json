@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "project_id": "WE-20261017-001",
+  "status": "complete",
+  "master": {
+    "name": "women-empowerment-40s-9x16.mp4",
+    "local_path": "delivery/women-empowerment-40s-9x16.mp4",
+    "drive_file_id": "1BNet_1VDzbyh43euk_wP1AHgF9y820ML",
+    "drive_url": "https://drive.google.com/file/d/1BNet_1VDzbyh43euk_wP1AHgF9y820ML/view?usp=drivesdk",
+    "size_bytes": 21633517,
+    "sha256": "0c29e2359575ff065ad13f887d2182e64b55884e2eff7fd29b053a28beb95f57",
+    "drive_md5": "6f714c440f156adf8bf5d57cf71a4e83",
+    "remote_checksum_verified": true
+  },
+  "recovery": {
+    "name": "WE-20261017-001-source-recovery.zip",
+    "local_path": "delivery/WE-20261017-001-source-recovery.zip",
+    "drive_file_id": "1lPeNZS94w1Y7rrAeXrWYNVN13ifrcjKT",
+    "drive_url": "https://drive.google.com/file/d/1lPeNZS94w1Y7rrAeXrWYNVN13ifrcjKT/view?usp=drivesdk",
+    "size_bytes": 8161233,
+    "sha256": "d86a151f5de40169bff700aa0101f66ecf83e7ef0dec3005239c7400d60a4da4",
+    "drive_md5": "18fcb92958a8b201738135299c848c08",
+    "remote_checksum_verified": true
+  },
+  "presentation_tool_succeeded": true,
+  "remote_checksum_verified": true,
+  "style_policy_verified": true,
+  "platform_receipts": {
+    "google_drive": {
+      "status": "verified_master_source_and_receipt",
+      "project_folder_id": "1sBCu6SmXPBGeQS7hxrAOjMr68cJ05ek7",
+      "project_folder_url": "https://drive.google.com/drive/folders/1sBCu6SmXPBGeQS7hxrAOjMr68cJ05ek7",
+      "master_id": "1BNet_1VDzbyh43euk_wP1AHgF9y820ML",
+      "recovery_id": "1lPeNZS94w1Y7rrAeXrWYNVN13ifrcjKT",
+      "note": "Both files were independently re-read via Drive metadata; byte sizes and MD5 checksums match local files.",
+      "delivery_receipt": {
+        "file_id": "1UNqbKR_a1eeBJIlSgdR03zqao04yN1AJ",
+        "url": "https://drive.google.com/file/d/1UNqbKR_a1eeBJIlSgdR03zqao04yN1AJ/view?usp=drivesdk",
+        "note": "Structured completion receipt; its Drive ID and link are recorded here. Its file checksum is intentionally not self-referenced."
+      }
+    },
+    "google_docs": {
+      "status": "updated_and_readback_verified",
+      "document_id": "1yg7VK9S0luG4bPHQxWGtPIKxUcKcOSI6n7JnrCxPnLU",
+      "url": "https://docs.google.com/document/d/1yg7VK9S0luG4bPHQxWGtPIKxUcKcOSI6n7JnrCxPnLU/edit",
+      "verification_anchor": "WF05_PROJECT_DELIVERY_WE_20261017_END",
+      "final_verification_anchor": "WF05_PROJECT_FINAL_ARCHIVE_WE_20261017_END"
+    },
+    "notion": {
+      "status": "created_updated_date_corrected_and_readback_verified",
+      "page_id": "3fbbf8d6-7422-8175-bbc7-e7bbda2d2248",
+      "url": "https://app.notion.com/p/WF-05-WE-20261017-001-Women-Empowerment-Delivery-3fbbf8d674228175bbc7e7bbda2d2248",
+      "note": "The previously recorded WF-05 page was not visible in the connected Notion workspace; this task record was created under the current Welcome to Notion page.",
+      "completion_append_verified": true,
+      "date_correction_block_id": "3fbbf8d6-7422-811b-9932-cda098a97460",
+      "date_correction_verified": true,
+      "incorrect_callout_archived": true
+    },
+    "linear": {
+      "status": "done_with_final_comment_readback_verified",
+      "issue_id": "391b292d-d331-490f-a926-567eeacd8885",
+      "identifier": "ZAR-5",
+      "url": "https://linear.app/zareen/issue/ZAR-5/we-20261017-001-deliver-40s-women-empowerment-video",
+      "workflow_state": "Done",
+      "final_comment_id": "7cd7f49d-9a6e-4551-bf84-69eca03a2a55",
+      "final_comment_url": "https://linear.app/zareen/issue/ZAR-5/we-20261017-001-deliver-40s-women-empowerment-video#comment-7cd7f49d"
+    },
+    "github": {
+      "status": "pushed_and_verified",
+      "repository": "https://github.com/zareen-ai/Zareen-studio-",
+      "branch": "arena/638e57e5-zareen-studio",
+      "commit": "36825055835a46e6577682d321792d68de39de0f",
+      "commit_url": "https://github.com/zareen-ai/Zareen-studio-/commit/36825055835a46e6577682d321792d68de39de0f",
+      "branch_url": "https://github.com/zareen-ai/Zareen-studio-/tree/arena/638e57e5-zareen-studio",
+      "note": "The permanent project archive and checkpoint were pushed to the session-pinned branch; git ls-remote independently matched the commit."
+    }
+  },
+  "qa": {
+    "technical_pass": true,
+    "visual_review_approved": true,
+    "caption_policy_pass": true,
+    "duration_seconds": 40.0,
+    "resolution": "1080x1920",
+    "fps": 30,
+    "video": "H.264 High, yuv420p",
+    "audio": "AAC stereo, 48 kHz",
+    "visual_samples_reviewed": 18,
+    "source_motion_beats_reviewed": 6,
+    "human_listening_performed": false,
+    "word_level_asr_performed": false,
+    "notes": "Broad clause timing was checked against script and speech pauses; no human listening or word-level ASR is claimed."
+  },
+  "complete": true,
+  "project_archive_path": "styles/premium-motion-editing/projects/women-empowerment/versions/EMS-20261017-WE-001/wf05_women_empowerment_20261017",
+  "continuity": {
+    "task_id": "EMS-20261017-WE-001",
+    "completion_checkpoint": "0001-20261016T205017Z",
+    "archived_at": "operations/history/EMS-20261017-WE-001"
+  },
+  "github_commit": "36825055835a46e6577682d321792d68de39de0f",
+  "github_branch": "arena/638e57e5-zareen-studio"
+}

@@ -1,0 +1,21 @@
+{
+  "hook_frame_reference": "cover_hook.jpg",
+  "hook_frame_text": null,
+  "primary": "WHICH ONE IS #1?",
+  "ab": "RANK THESE 5.",
+  "outputs": [
+    {
+      "file": "cover.jpg",
+      "text": "WHICH ONE IS #1?",
+      "sha256": "4e1e6829ea3c339899ed824bbb11fb4a23f79cbca6d949c4d54d2d35f65bfa77",
+      "bytes": 256084
+    },
+    {
+      "file": "cover_RANK_THESE_5.jpg",
+      "text": "RANK THESE 5.",
+      "sha256": "dba9df11cfef485e151ba971c4c3673396fabd09b78ac79d8e244df30d8ed9d1",
+      "bytes": 251284
+    }
+  ],
+  "note": "Exact-text V4 thumbnails generated from the clean full-screen first frame; in-video rank overlays are separate. No separate thumbnail review occurred."
+}

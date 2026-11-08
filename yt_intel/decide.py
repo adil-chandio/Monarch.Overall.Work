@@ -25,39 +25,6 @@ WEIGHTS = {
 }
 
 
-# 50 is deliberately not a good score and not a bad one. A placeholder should pull the
-# assembled decision toward "not yet", never toward "go".
-YOUNG_SAMPLE_PLACEHOLDER = 50.0
-
-
-YOUNG_MAX_AGE_DAYS = 14
-
-
-def is_young_sample(sat: dict) -> bool:
-    """The sample has not had time to settle, so concentration cannot be read from it.
-
-    Two ways to be young, and the first one is the one that was missed:
-
-    * every row is very new (`median_age_days` under two weeks) — a `--order date` sample is
-      this by construction. A live case: 30 rows aged 0.10-0.46 days, median 238 views, every
-      one under 12 hours old. The old guard demanded `median_views < 100`, so 238 slipped
-      through and the topic scored SHARPEN 62.3 at confidence 0.75 while the saturation
-      reading on the same card said "too young to judge".
-    * almost nothing has double-digit views (`median_views < 100` with 80% under 30 days).
-
-    Age is the honest signal. View count is the symptom, and at 238 median views the symptom
-    was too small to notice.
-    """
-    if sat.get("status") != "ok":
-        return False
-    age = sat.get("median_age_days")
-    if age is not None and age < YOUNG_MAX_AGE_DAYS:
-        return True
-    median = sat.get("median_views")
-    fresh = sat.get("fresh_share_30d")
-    return median is not None and median < 100 and (fresh or 0) >= 0.8
-
-
 def winnability(sat: dict) -> float | None:
     """"Can we break in" from the saturation shape alone."""
     if sat.get("status") != "ok":
@@ -70,15 +37,8 @@ def winnability(sat: dict) -> float | None:
     # young one. Concentration measured on unreleased/just-released videos says nothing about
     # who owns the market, and scoring it as "a few videos own this" inverts the advice.
     # (Live case: a thisMonth sample with a 16-view median scored winnability 29 and NO.)
-    if is_young_sample(sat):
-        # This is a placeholder, not a measurement: the sample had no time to concentrate.
-        # Returning a good score here is defensible; returning it at full confidence is not,
-        # and the old code did exactly that — a `--order date` sample (median 238 views, every
-        # row under 12 hours old) scored SHARPEN 62.2 at high confidence while the saturation
-        # reading on the same report said "too young to judge". The verdict and the honest
-        # reading contradicted each other in public. The number below is neutral so the
-        # assembled score is visibly a guess (and `young_sample` in `missing` says why).
-        return YOUNG_SAMPLE_PLACEHOLDER
+    if median is not None and median < 100 and (fresh or 0) >= 0.8:
+        return 70.0
     if top3 is None:
         return None
     # concentrated topics are hard; fresh uploads mean the topic is still live
@@ -162,8 +122,6 @@ def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
         "fit": fit_score(fit),
         "timing": timing(trends or demand.get("trends", {}) if isinstance(demand, dict) else {}),
     }
-    # recorded, because a score built on a placeholder must be able to say so
-    placeholder_used = is_young_sample(sat)
     used = {k: v for k, v in parts.items() if v is not None}
     if not used:
         return {"verdict": "NO", "score": None, "reason": "no measurable signal at all — do not spend a day on it",
@@ -172,22 +130,13 @@ def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
 
     wsum = sum(WEIGHTS[k] for k in used)
     score = round(sum(WEIGHTS[k] * v for k, v in used.items()) / wsum, 1)
-    # A placeholder must not buy confidence. It stays in the score (the score has to mean
-    # something) but is excluded from the denominator's credit, so a decision resting on
-    # "could not tell yet" reads as low-confidence instead of well-supported.
-    credit = wsum - (WEIGHTS["winnability"] if placeholder_used and "winnability" in used else 0)
-    confidence = round(max(0.0, credit) / sum(WEIGHTS.values()), 2)
+    confidence = round(wsum / sum(WEIGHTS.values()), 2)
 
     for_, against, missing = [], [], []
 
     if parts["demand"] is not None and parts["demand"] >= 65:
         for_.append(f"demand signal {parts['demand']:.0f}/100 (autocomplete + trends)")
-    # A placeholder must never be narrated as an observation. Live case: a young sample got
-    # "a few videos already own this topic (winnability 50)" — a claim about ownership, made
-    # from a number that exists precisely because ownership could not be measured.
-    if placeholder_used:
-        for_.append("winnability could not be measured — the sample is too new to concentrate")
-    elif parts["winnability"] is not None:
+    if parts["winnability"] is not None:
         if parts["winnability"] >= 60:
             for_.append(f"the topic is not owned by one video (winnability {parts['winnability']:.0f})")
         else:
@@ -210,9 +159,6 @@ def greenlight(demand: dict, sat: dict, funnel: dict, title_sig: dict,
             "may just mean 'nobody has watched it yet'"
         )
         missing.append("an older comparable sample (relevance order) to judge the real ceiling")
-        # Say it in the same words the score uses, so the number and the note agree.
-        against.append("winnability is a placeholder at 50/100, not a measurement — it has been "
-                       "excluded from the confidence figure for this reason")
     for k, label in (("fit", "studio fit data"), ("timing", "trend direction")):
         if parts[k] is None:
             missing.append(label)

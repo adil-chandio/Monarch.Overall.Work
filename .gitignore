@@ -9,6 +9,8 @@ coverage/
 __pycache__/
 deliverables/*.mp4
 !deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4
+!deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4
+!deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4
 
 
 # transient clone workspace for skill vendoring
@@ -16,8 +18,61 @@ deliverables/*.mp4
 
 # yt-intel local cache and harvested clones
 .cache/yt-intel/
-.harvest/
 public/yt-intel/runs.jsonl
+
+# Monarch Cam transient source media, frames and local audio work
+production/monarch-cam/work/
+production/monarch-cam/local/
+# Sound V2 review artifacts are delivered in Actions artifacts, not duplicated as large WAVs in Git
+production/monarch-cam/sound_v2/review/stems_premaster/
+production/monarch-cam/sound_v2/review/*.wav
+# Short 35 reference stems stay in the Actions artifact, not Git
+production/monarch-cam/short_35/review/stems/
+production/monarch-cam/short_35/review/*.wav
+# Short-next reference stems stay in the Actions artifact, not Git
+production/monarch-cam/short_next/review/stems/
+production/monarch-cam/short_next/review/*.wav
+# Albatross-dance reference stems stay in the Actions artifact, not Git
+production/monarch-cam/short_dance/review/stems/
+production/monarch-cam/short_dance/review/*.wav
+
+# Premium albatross-dance reference stems stay in the Actions artifact, not Git
+production/monarch-cam/work/short_dance_premium/
+production/monarch-cam/short_dance_premium/review/stems/
+production/monarch-cam/short_dance_premium/review/*.wav
+
+# Clean-premium albatross-dance reference stems stay in the Actions artifact, not Git
+production/monarch-cam/work/short_dance_clean/
+production/monarch-cam/short_dance_clean/review/stems/
+production/monarch-cam/short_dance_clean/review/*.wav
+
+# Clean-premium V2 albatross-dance reference stems stay in the Actions artifact, not Git
+production/monarch-cam/work/short_dance_clean_v2/
+production/monarch-cam/short_dance_clean_v2/review/stems/
+production/monarch-cam/short_dance_clean_v2/review/*.wav
+production/monarch-cam/work/short_ranking_v3/
+production/monarch-cam/short_ranking_v3/review/stems/
+production/monarch-cam/short_ranking_v3/review/*.wav
+image-search/
+
+production/monarch-cam/work/short_ranking_raw_v4/
+production/monarch-cam/short_ranking_raw_v4/review/stems/
+production/monarch-cam/short_ranking_raw_v4/review/*.wav
+
+# V4 replacement-source raw candidate media stays out of Git
+production/monarch-cam/work/short_ranking_raw_v4/candidates/
+
+# V5 source work, candidate media and decoded WAVs stay out of Git
+production/monarch-cam/work/short_ranking_raw_v5/
+production/monarch-cam/short_ranking_raw_v5/review/stems/
+production/monarch-cam/short_ranking_raw_v5/review/*.wav
+google_drive/
+tmp_chat_evidence/
+tmp_reference_screens/
+# Continuity scratch staging (canonical copies live under docs/continuity/)
+
+
+
 
 # local python env for the film-analysis rig (never commit a virtualenv)
 .venv/
@@ -51,26 +106,3 @@ audio/bed-*.wav
 audio/mix-*.wav
 audio/takes/
 audio/ref-full.wav
-audio/takes/
-audio/bed-*.wav
-audio/mix-*.wav
-# Monarch Cam transient source media, frames and local audio work
-production/monarch-cam/work/
-production/monarch-cam/local/
-# Sound V2 review artifacts are delivered in Actions artifacts, not duplicated as large WAVs in Git
-production/monarch-cam/sound_v2/review/stems_premaster/
-production/monarch-cam/sound_v2/review/*.wav
-# Short 35 reference stems stay in the Actions artifact, not Git
-production/monarch-cam/short_35/review/stems/
-production/monarch-cam/short_35/review/*.wav
-# Short-next reference stems stay in the Actions artifact, not Git
-production/monarch-cam/short_next/review/stems/
-production/monarch-cam/short_next/review/*.wav
-# Albatross-dance reference stems stay in the Actions artifact, not Git
-production/monarch-cam/short_dance/review/stems/
-production/monarch-cam/short_dance/review/*.wav
-
-# Premium albatross-dance reference stems stay in the Actions artifact, not Git
-production/monarch-cam/work/short_dance_premium/
-production/monarch-cam/short_dance_premium/review/stems/
-production/monarch-cam/short_dance_premium/review/*.wav

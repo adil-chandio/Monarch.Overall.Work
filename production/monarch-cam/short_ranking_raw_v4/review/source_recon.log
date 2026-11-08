@@ -1,0 +1,127 @@
+Using verified cached squirrel 3543930
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/squirrel.webm -ss 1.000 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_squirrel.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/squirrel_%04d.jpg
+Using verified cached hermit_crab 2540137
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/hermit_crab.webm -ss 0.500 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_hermit_crab.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/hermit_crab_%04d.jpg
+Using verified cached strandschnecke 17024060
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/strandschnecke.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/strandschnecke.webm -ss 21.500 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_strandschnecke.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_strandschnecke.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_strandschnecke.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/strandschnecke_%04d.jpg
+Using verified cached berlin_gorilla 8447653
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/berlin_gorilla.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/berlin_gorilla.webm -ss 1.000 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_berlin_gorilla.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_berlin_gorilla.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_berlin_gorilla.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/berlin_gorilla_%04d.jpg
+Using verified cached oriental_dove 72961667
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/oriental_dove.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/media/oriental_dove.webm -ss 8.000 -t 7.000 -map 0:v:0 -an -vf fps=30 -frames:v 210 -c:v libx264 -crf 18 -preset fast -movflags +faststart /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_oriental_dove.mp4
++ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames,width,height,r_frame_rate -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_oriental_dove.mp4
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/clips/clip_oriental_dove.mp4 -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/frames/oriental_dove_%04d.jpg
+{
+  "topic": "5 Unexpected Animal Skills, Ranked",
+  "edition": "raw_fullscreen_v4",
+  "source_pages": {
+    "squirrel": "https://commons.wikimedia.org/wiki/File:Sasana.2015.myanmar.squirrel.1.webmhd.webm",
+    "hermit_crab": "https://commons.wikimedia.org/wiki/File:Einsiedlerkrebs_(Wangerooge).webm",
+    "strandschnecke": "https://commons.wikimedia.org/wiki/File:Strandschnecke_(grasend_mit_Spinne).webm",
+    "berlin_gorilla": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov05.webm",
+    "oriental_dove": "https://commons.wikimedia.org/wiki/File:Streptopelia_orientalis_fighting_2024-04-26.webm"
+  },
+  "rights_declaration": "All five picture sources are CC0 1.0 via Wikimedia Commons; attribution is given voluntarily.",
+  "credits": {
+    "squirrel": "Moine S\u0101sana",
+    "hermit_crab": "Rhetos, Sabine Heim",
+    "strandschnecke": "Rhetos, Sabine Heim",
+    "berlin_gorilla": "LarsMueller",
+    "oriental_dove": "Asanagi"
+  },
+  "source_video_ledger": "production/monarch-cam/short_ranking_raw_v4/review/source_video_ledger.json",
+  "source_windows": "production/monarch-cam/short_ranking_raw_v4/review/source_windows.json",
+  "v4_selected_window_sheets": [
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_squirrel_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_hermit_crab_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_strandschnecke_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_berlin_gorilla_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/v4_oriental_dove_contact_sheet_01.jpg"
+  ],
+  "source_contact_sheets": [
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_hermit_crab_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_octopus_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_octopus_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_octopus_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_squirrel_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_starfish_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_starfish_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_starfish_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_titmouse_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_coarse_titmouse_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_hermit_crab_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_octopus_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_octopus_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_octopus_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_octopus_contact_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_octopus_contact_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_squirrel_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_squirrel_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_starfish_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_starfish_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_starfish_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_starfish_contact_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_starfish_contact_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_starfish_contact_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/source_fine_titmouse_contact_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_berlin_gorilla_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_berlin_gorilla_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_hermit_crab_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_kissing_gourami_sheet_07.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_malaga_animals_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_oriental_dove_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_sasana_squirrel_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_sasana_squirrel_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_starfish_sheet_07.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_03.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_04.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_05.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_06.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_07.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_strandschnecke_sheet_08.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_tidepool_worm_sheet_01.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_tidepool_worm_sheet_02.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/candidate_tidepool_worm_sheet_03.jpg"
+  ],
+  "source_poster": "production/monarch-cam/short_ranking_raw_v4/review/source_poster.jpg",
+  "visual_timestamp_approval": "LOCKED_AFTER_CONTACT_SHEET_REVIEW",
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "retrieved_unix": 1794078158
+}

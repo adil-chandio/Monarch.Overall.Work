@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "project_id": "WE-20261019-002",
+  "revision": 4,
+  "status": "delivered_and_drive_verified",
+  "revision_scope": "Original 40-second vertical explainer on mutual compromise and shared responsibility. Fictional protagonist only; no user likeness or source image.",
+  "creative_direction": {
+    "topic": "Har baar larki hi adjust kyun kare?",
+    "language": "Easy Urdu-English",
+    "voice_id": "voice-01",
+    "voice_description": "User-selected feminine Pakistani Urdu voice",
+    "second_by_second_plan": "second-by-second.csv",
+    "shot_count": 6,
+    "shot_timings_seconds": [
+      6.0,
+      6.5,
+      6.5,
+      6.5,
+      7.0,
+      7.5
+    ]
+  },
+  "delivered_file": {
+    "name": "WE-20261019-002-Har-baar-larki-hi-adjust-40s-9x16.mp4",
+    "local_path": "delivery/women-adjustment-mutual-respect-40s-9x16.mp4",
+    "mime_type": "video/mp4",
+    "size_bytes": 19834662,
+    "md5": "d671ccac53b4e3b5101482156a1323d2",
+    "sha256": "7f72c1352b08aa28cd0af5e0f4a0cf2cd88be126f42bd2b76c3ea5e51a9c51dc",
+    "drive_file_id": "1buoS6TMp7eB1A0-gdPBZnblza_KeQX6W",
+    "web_view_link": "https://drive.google.com/file/d/1buoS6TMp7eB1A0-gdPBZnblza_KeQX6W/view?usp=drivesdk",
+    "independent_get_verified": true,
+    "remote_size_bytes": 19834662,
+    "remote_md5": "d671ccac53b4e3b5101482156a1323d2"
+  },
+  "technical": {
+    "duration_seconds": 40.0,
+    "resolution": "1080x1920",
+    "fps": 30,
+    "frames": 1200,
+    "video": "H.264 High, yuv420p",
+    "audio": "AAC stereo, 48 kHz",
+    "full_decode": true,
+    "faststart": true,
+    "audio_peak_dbfs": -0.73,
+    "audio_rms_dbfs": -17.21,
+    "voice_duration_seconds": 36.48,
+    "voice_start_seconds": 0.2,
+    "voice_end_seconds": 36.68,
+    "caption_policy": "No caption pills, active-word strip, logo, social handle or generic end card."
+  },
+  "review": {
+    "visual_review_approved": true,
+    "technical_pass": true,
+    "caption_policy_pass": true,
+    "human_listening_performed": false,
+    "word_level_asr_performed": false,
+    "note": "All six source-motion clips, title previews and final encoded samples reviewed. Technical decode, format, frame count and audio levels pass. Human listening and word-level ASR were not performed."
+  },
+  "destination": {
+    "folder_id": "1sBCu6SmXPBGeQS7hxrAOjMr68cJ05ek7",
+    "description": "Existing accessible WF-05 project folder, confirmed from the parent of the R3 master.",
+    "upload_folder_link": "https://drive.google.com/drive/folders/1sBCu6SmXPBGeQS7hxrAOjMr68cJ05ek7"
+  }
+}

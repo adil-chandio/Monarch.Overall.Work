@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-11-08T15:32:32Z",
+  "source": "gh api pulls?state=all&per_page=100",
+  "pull_requests": [
+    {
+      "base": "main",
+      "body": null,
+      "created_at": "2026-11-06T21:27:27Z",
+      "head": "arena/c678cc81-monarch-overall-work",
+      "head_sha": "26e0afe45fe19cd2835a6e794b13593eacee72a3",
+      "html_url": "https://github.com/adil-chandio/Monarch.Overall.Work/pull/4",
+      "merged_at": "2026-11-06T21:28:08Z",
+      "number": 4,
+      "state": "closed",
+      "title": "Arena/c678cc81 monarch overall work",
+      "updated_at": "2026-11-06T21:28:09Z"
+    },
+    {
+      "base": "main",
+      "body": "## Summary\n- Add an original code-drawn animated motion proof and 43.6-second first-cut renderer, with procedurally synthesized score and transitions.\n- Document narration inputs, sourcing, production limitations, and measured audio levels.\n- Keep generated video and narration files out of the repository.\n\n## Verification\n- Rendered all scene-boundary frames and the full 720x1280, 30 fps video.\n- Python compilation passed.\n- Measured full-cut audio: -19.3 LUFS integrated and -0.9 dBTP. This is a rough cut and does not yet meet the repository mastering target.\n\nCurrent diagrams are conceptual and should not be presented as actual ocean tracks. Narration is supplied separately.",
+      "created_at": "2026-11-05T19:50:39Z",
+      "head": "arena/1f352b8e-monarch-overall-work",
+      "head_sha": "58dfa166a6ead4e81d9d36d6b0d861ba62904a62",
+      "html_url": "https://github.com/adil-chandio/Monarch.Overall.Work/pull/3",
+      "merged_at": null,
+      "number": 3,
+      "state": "open",
+      "title": "Add animated ocean-toy film prototype",
+      "updated_at": "2026-11-08T15:10:20Z"
+    },
+    {
+      "base": "main",
+      "body": "## What\n\nA 30-second demo short on `youtube automation`, plus the three fixes building it exposed.\n\n**Download:** https://raw.githubusercontent.com/adil-chandio/Monarch.Overall.Work/arena/8bfd4d0e-monarch-overall-work/public/demo/demo-short-30s.mp4\n(1,193,804 bytes, blob `547c254`, verified byte-for-byte after upload)\n\n## The video\n\nEvery number on screen is read from `public/yt-intel/*.json` at render time — nothing is typed\nby hand, so the video cannot drift from the research.\n\n| fact | value |\n|---|---|\n| verdict | **SHARPEN 59.4** @ 0.85 — not a GO |\n| demand | 80/100 |\n| sample | 30 videos, median 51,654 views, top-3 share 0.50 |\n| comments | 100 read — **11% want to buy teaching**, 1% asked for a sequel |\n| packaging | 100% of thumbnails carry a face; 8/12 use red |\n| audio / video | −16.6 LUFS · 1920×1080 · 30 fps · 30.0 s · 1.2 MB |\n\n## The three fixes\n\n1. **The hook was a lie.** It said \"5 of the top 5 say how to start\". Counted properly: 3. The\n   number is now computed from the rows instead of written by hand.\n2. **The packaging scene used another topic's data.** `100% face / 8/12 red` was measured on\n   *ai video editing*, while the video claims to be about *youtube automation*. The scene now\n   names its own source.\n3. **Audio was −25.4 LUFS.** The bed was 55/82/110 Hz only, and LUFS K-weighting rolls off below\n   100 Hz — almost all of its energy sat where the meter does not look. With A3/E4/A4 added it\n   is −16.6 LUFS at the same peak.\n\n## And a bug in the analyser, found by pointing it at our own output\n\n`style.py` scored this video **0 cuts / \"slow — only survives on authority\"** while it has six\nhard scene changes. Every scene shares the same dark background and the changing text is a few\npercent of the frame, so a whole-frame mean delta never fires. Pacing now falls back to the\nadaptive detector when the primary sees nothing, and prints why. This affects most of our proof\nfilms, which are static frames with animated type.\n\n## Verification\n\n- `python -m yt_intel.test_offline` — **109 assertions** (5 new)\n- `npm run build` — clean, 325.88 kB / 98.55 kB gzip\n- `node src/lib/normalise.test.mjs` — 6 tests\n- Re-render: `python showreel/demo_short.py`",
+      "created_at": "2026-11-03T22:18:24Z",
+      "head": "arena/8bfd4d0e-monarch-overall-work",
+      "head_sha": "5b876cab3b1ebf1dfc17fe9d078715081c8888d7",
+      "html_url": "https://github.com/adil-chandio/Monarch.Overall.Work/pull/2",
+      "merged_at": "2026-11-06T22:58:39Z",
+      "number": 2,
+      "state": "closed",
+      "title": "Demo short: 30 s, measured numbers only — plus three fixes it exposed",
+      "updated_at": "2026-11-06T22:59:14Z"
+    },
+    {
+      "base": "main",
+      "body": "## What this is\n\n`main` is still at \"Initial commit\" — the entire Monarch workspace (181 commits) has never been merged. This PR is that merge, plus the research-desk work from this session.\n\n## The research pipeline, end to end\n\n| piece | state |\n|---|---|\n| YouTube Data API v3 key | **verified** — doctor 4/4 PASS (channels.list 1 channel, search.list items=1) |\n| API lane | **live** — 6 topics measured with exact counts; quota 309/10000 used |\n| comment mining | **live** — 10 comment analyses, one per measured topic, ~1 unit each |\n| thumbnail forensics | **live** — 12 real thumbnails via CI; the sandbox cannot reach `i.ytimg.com` |\n| film analysis (`style.py`) | **calibrated** on films with known shot lists, and self-tested on every run |\n| index → UI | **verified in jsdom** — 6 report cards, 10 comment cards, thumbnail strip, no console errors |\n\n## The honest parts\n\nFour things were caught lying, each fixed with the number that exposed it:\n\n1. **Cut detector under-counted by a third** on fast footage (15 of 19 cuts). `0.22` → `0.14`, exact on 0/3/7/19-cut fixtures. The error flattered slow edits — the worst direction for a pacing judge.\n2. **\"Dominant colour\" was near-black in 10 of 12 thumbnails** (`#0c1213`, `#080c0c`). A biggest-RGB-cube vote that near-black wins in every thumbnail ever made. Now hue-clustered.\n3. **Hue families summed to 22 over a 12-thumbnail sample** — one family listed under two keys. Now bucketed, then named; totals must partition the sample.\n4. **A 10-view sample was called \"concentrated\"** — \"a new entrant must out-execute them\" about a market that had not started. A `thisMonth` sample is 100% fresh by construction; its views are a stopwatch, not a verdict. Freshness now gates the claim.\n\nAlso: `queue-runs.jsonl` was rewritten whole on every run, which is why pushes landing during a run were rejected four times in a row. It is appended now.\n\n## Not done\n\n- **Graded footage** — the cut threshold is calibrated on synthetic concat, the easiest possible case. Real colour-corrected footage with pans and dissolves still needs its own reference pass.\n- **Multi-country trending** — not implemented.\n- **Live site check** — `monarch-workspace-beryl.vercel.app` does not resolve from the agent sandbox. Needs a human eye after deploy.\n\n## Verification\n\n- `python -m yt_intel.test_offline` — 87 assertions, no network\n- `node src/lib/normalise.test.mjs` — 6 config-shape tests\n- `npm run build` — clean, 325.74 kB / 98.56 kB gzip\n- CI run `41716924375` and every run before it — success\n\n## Note on merge size\n\n4,940 files, mostly `skills/` (4,751). Nothing generated has been committed outside the repo's existing conventions; build output (`dist/`) and caches stay ignored.",
+      "created_at": "2026-11-03T21:00:01Z",
+      "head": "arena/9960286a-monarch-overall-work",
+      "head_sha": "6fd7e466ca42e67ed19f0d56f19887047928f866",
+      "html_url": "https://github.com/adil-chandio/Monarch.Overall.Work/pull/1",
+      "merged_at": "2026-11-03T21:02:21Z",
+      "number": 1,
+      "state": "closed",
+      "title": "Merge the Monarch workspace: research desk live on the API lane",
+      "updated_at": "2026-11-03T21:02:21Z"
+    }
+  ]
+}

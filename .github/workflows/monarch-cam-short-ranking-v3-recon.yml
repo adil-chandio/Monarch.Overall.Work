@@ -1,0 +1,107 @@
+name: Monarch Cam — V3 ranked-animal source reconstruction
+
+on:
+  push:
+    branches:
+      - arena/390292fc-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-short-ranking-v3-recon.yml'
+      # Source reconstruction is explicit workflow_dispatch / SOURCE_RECON_TRIGGER.md only;
+      # do not list paths shared with the V3 render workflow here.
+      - 'production/monarch-cam/short_ranking_v3/SOURCE_RECON_TRIGGER.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-short-ranking-v3-recon-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  source-recon:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      RECON_OUT: production/monarch-cam/work/short_ranking_v3
+      RECON_REVIEW: production/monarch-cam/short_ranking_v3/review
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/390292fc-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install bounded CC0 source-reconstruction tools
+        timeout-minutes: 18
+        run: |
+          timeout 600 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            requests pillow static-ffmpeg
+          python - <<'PY'
+          import os
+          from static_ffmpeg.run import get_or_fetch_platform_executables_else_raise
+          ffmpeg, ffprobe = get_or_fetch_platform_executables_else_raise()
+          with open(os.environ['GITHUB_PATH'], 'a') as fh:
+              fh.write(os.path.dirname(ffmpeg) + '\n')
+          print('static ffmpeg:', ffmpeg)
+          print('static ffprobe:', ffprobe)
+          PY
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      - name: Validate V3 source contracts and compile recon script
+        run: |
+          python -m py_compile production/monarch-cam/short_ranking_v3/source_recon_ranking.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base = Path('production/monarch-cam/short_ranking_v3')
+          m = json.loads((base/'source_manifest_ranking.json').read_text())
+          vids = [a for a in m['assets'] if a.get('role') == 'video']
+          assert len(vids) == 5
+          assert sorted(a['rank'] for a in vids) == [1,2,3,4,5]
+          assert all(a['license'] == 'CC0-1.0' for a in vids)
+          assert all(a['source_page_verified'] is True for a in vids)
+          assert all(a['download_urls'] for a in vids)
+          assert any(a['id'] == 'native_audio' and a.get('local') for a in m['assets'])
+          assert 'Entertainment' in (base/'DANCE_TOPIC_LOCK.md').read_text()
+          print('V3 source contracts OK')
+          PY
+
+      - name: Retrieve five CC0 Wikimedia Commons clips and build review sheets
+        timeout-minutes: 25
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_v3/source_recon_ranking.py \
+            2>&1 | tee production/monarch-cam/short_ranking_v3/review/source_recon.log
+
+      - name: Upload V3 source-recon review sheets
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-ranked-animal-v3-source-recon
+          path: |
+            production/monarch-cam/short_ranking_v3/review/review-manifest.json
+            production/monarch-cam/short_ranking_v3/review/source_video_ledger.json
+            production/monarch-cam/short_ranking_v3/review/source_windows.json
+            production/monarch-cam/short_ranking_v3/review/source_recon.log
+            production/monarch-cam/short_ranking_v3/review/source_poster*.jpg
+            production/monarch-cam/short_ranking_v3/review/coarse_*_contact_sheet_*.jpg
+            production/monarch-cam/short_ranking_v3/review/fine_*_contact_sheet_*.jpg
+          if-no-files-found: error
+
+      - name: Commit V3 source-recon review sheets to this branch
+        run: |
+          git config user.name "monarch-cam-short-ranking-v3-recon-bot"
+          git config user.email "monarch-cam-short-ranking-v3-recon-bot@users.noreply.github.com"
+          git add -f production/monarch-cam/short_ranking_v3/DANCE_TOPIC_LOCK.md
+          git add -f production/monarch-cam/short_ranking_v3/review/review-manifest.json
+          git add -f production/monarch-cam/short_ranking_v3/review/source_video_ledger.json
+          git add -f production/monarch-cam/short_ranking_v3/review/source_windows.json
+          git add -f production/monarch-cam/short_ranking_v3/review/source_recon.log
+          git add -f production/monarch-cam/short_ranking_v3/review/source_poster*.jpg
+          git add -f production/monarch-cam/short_ranking_v3/review/coarse_*_contact_sheet_*.jpg
+          git add -f production/monarch-cam/short_ranking_v3/review/fine_*_contact_sheet_*.jpg
+          git diff --cached --quiet && echo "No source-recon changes to commit" || git commit -m "chore(monarch-cam): add V3 ranked-animal source-recon review sheets [skip ci]"
+          git pull --rebase --autostash origin arena/390292fc-monarch-overall-work
+          git push origin HEAD:arena/390292fc-monarch-overall-work

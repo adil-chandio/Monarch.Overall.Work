@@ -1,0 +1,68 @@
+{
+  "edition": "raw_fullscreen_v4",
+  "scenes": [
+    {
+      "id": "rank5_squirrel",
+      "rank": 5,
+      "title": "THE DROP-IN",
+      "timeline_in": 0.0,
+      "timeline_out": 7.0,
+      "source_in": 1.0,
+      "source_out": 8.0,
+      "frames": 210,
+      "full_screen": true
+    },
+    {
+      "id": "rank4_hermit_crab",
+      "rank": 4,
+      "title": "THE TINY COMMUTE",
+      "timeline_in": 7.0,
+      "timeline_out": 14.0,
+      "source_in": 0.5,
+      "source_out": 7.5,
+      "frames": 210,
+      "full_screen": true
+    },
+    {
+      "id": "rank3_strandschnecke",
+      "rank": 3,
+      "title": "THE SHELL GLIDE",
+      "timeline_in": 14.0,
+      "timeline_out": 21.0,
+      "source_in": 21.5,
+      "source_out": 28.5,
+      "frames": 210,
+      "full_screen": true
+    },
+    {
+      "id": "rank2_berlin_gorilla",
+      "rank": 2,
+      "title": "THE GENTLE GRAB",
+      "timeline_in": 21.0,
+      "timeline_out": 28.0,
+      "source_in": 1.0,
+      "source_out": 8.0,
+      "frames": 210,
+      "full_screen": true
+    },
+    {
+      "id": "rank1_oriental_dove",
+      "rank": 1,
+      "title": "THE WING DUEL",
+      "timeline_in": 28.0,
+      "timeline_out": 35.0,
+      "source_in": 8.0,
+      "source_out": 15.0,
+      "frames": 210,
+      "full_screen": true
+    }
+  ],
+  "frames": [
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_05_00.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_04_07.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_03_14.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_02_21.00s.jpg",
+    "production/monarch-cam/short_ranking_raw_v4/review/frame_01_28.00s.jpg"
+  ],
+  "full_screen": true
+}

@@ -1,0 +1,9 @@
+# Continuity evidence is preserved byte-for-byte.
+# Do not rewrite CRLF/trailing whitespace in raw Drive, satellite-repo or chat-export files,
+# and do not let `git diff --check` treat those preserved bytes as errors.
+docs/continuity/** -text -whitespace
+
+# The continuity tool, contracts and generated ledgers remain normal text.
+tools/continuity.py text
+AGENTS.md text
+README.md text

@@ -1,0 +1,52 @@
+Skip already-verified strandschnecke
+Skip already-verified berlin_gorilla
+Candidate download failed tidepool_worm https://upload.wikimedia.org/wikipedia/commons/transcoded/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm.480p.vp9.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/transcoded/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm.480p.vp9.webm')
+Candidate download failed tidepool_worm https://upload.wikimedia.org/wikipedia/commons/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm HTTPError('429 Client Error: Too Many Requests (015d12c) for url: https://upload.wikimedia.org/wikipedia/commons/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm')
+Retrieved tidepool_worm 7641880
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/tidepool_worm.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/tidepool_worm.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/tidepool_worm_audio.wav
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/tidepool_worm.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/frames/tidepool_worm/tidepool_worm_%04d.jpg
+Probe OK tidepool_worm audible_windows 44 frames 23
+Retrieved malaga_animals 3356455
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/malaga_animals.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/malaga_animals.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/malaga_animals_audio.wav
+[opus @ 0x5614a121bf80] Error parsing Opus packet header.
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/malaga_animals.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/frames/malaga_animals/malaga_animals_%04d.jpg
+[opus @ 0x5572d6b8efc0] Error parsing Opus packet header.
+Probe OK malaga_animals audible_windows 50 frames 25
+Retrieved oriental_dove 17709900
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/oriental_dove.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/oriental_dove.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/oriental_dove_audio.wav
+[opus @ 0x55b74df4f340] Error parsing Opus packet header.
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/oriental_dove.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/frames/oriental_dove/oriental_dove_%04d.jpg
+[opus @ 0x55586188d480] Error parsing Opus packet header.
+Probe OK oriental_dove audible_windows 70 frames 35
+Retrieved kissing_gourami 4197778
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/kissing_gourami.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/kissing_gourami.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/kissing_gourami_audio.wav
+[opus @ 0x556280f60940] Error parsing Opus packet header.
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/kissing_gourami.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/frames/kissing_gourami/kissing_gourami_%04d.jpg
+[opus @ 0x559b870e7a00] Error parsing Opus packet header.
+Probe OK kissing_gourami audible_windows 0 frames 49
+Retrieved sasana_squirrel 2228578
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/sasana_squirrel.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/sasana_squirrel.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/sasana_squirrel_audio.wav
+[opus @ 0x55f5029dcf80] Error parsing Opus packet header.
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/sasana_squirrel.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/frames/sasana_squirrel/sasana_squirrel_%04d.jpg
+[opus @ 0x55ee40a9ffc0] Error parsing Opus packet header.
+Probe OK sasana_squirrel audible_windows 26 frames 13
+Retrieved hermit_crab 1328975
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/hermit_crab.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/hermit_crab.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/hermit_crab_audio.wav
+[opus @ 0x557155d59840] Error parsing Opus packet header.
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/hermit_crab.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/frames/hermit_crab/hermit_crab_%04d.jpg
+[opus @ 0x55a9ee4e4900] Error parsing Opus packet header.
+Probe OK hermit_crab audible_windows 16 frames 8
+Retrieved starfish 2942822
++ ffprobe -v error -show_format -show_streams -of json /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/starfish.webm
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/starfish.webm -map 0:a:0 -vn -ac 2 -ar 48000 -c:a pcm_f32le /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/starfish_audio.wav
+[opus @ 0x564514498840] Error parsing Opus packet header.
++ ffmpeg -y -hide_banner -loglevel warning -i /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/media/starfish.webm -vf fps=1,scale=320:-2 -q:v 3 -start_number 0 /home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_raw_v4/candidates/frames/starfish/starfish_%04d.jpg
+[opus @ 0x55ba94738900] Error parsing Opus packet header.
+Probe OK starfish audible_windows 0 frames 53
+Candidate probe complete 9 assets 39 sheets

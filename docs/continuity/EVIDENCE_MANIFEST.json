@@ -1,0 +1,1940 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-08T19:03:03Z",
+  "head": "0a7bf14a026921e234b87b15ed602bc3d471ed33",
+  "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 386,
+      "sha256": "1a7c16428e3eb1c2bb98f6a3e097b1125c881fcff6478ff599b564a0d997bcc5",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": ".github/workflows/continuity-validate.yml",
+      "bytes": 1548,
+      "sha256": "c979ba2057aa9a6fc5fac262eb93b328e7a7dcce4937e5859629db3c2a23c364",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 3705,
+      "sha256": "ed5abd1d4a83eb2a3f46ee0875ef9c159732c466ca6a18f1b25390fe852dd677",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 3190,
+      "sha256": "c0a1de19a9de40c5cd30a24c91aab59a1268c4423d0a46cf431bab855b32c9e5",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "MONARCH_CAM.md",
+      "bytes": 491,
+      "sha256": "e48b2559c1f4e1a451b2f1c851bb16700b199280be28c642e80930ed09f8d356",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8390,
+      "sha256": "1b2b28b77e8f0e36940b09b4cba52a8004cc887d4643d70dd0617223622c6505",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "RECOVER.md",
+      "bytes": 961,
+      "sha256": "97ead65b47362a535f31970478257e6368621892feb4c51d82083b8c14820f40",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "config/channels.json",
+      "bytes": 2788,
+      "sha256": "11cd8dd8d0744450c286c7c03a4a26fb77c32d98454922107a23e517d971816d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "config/continuity.json",
+      "bytes": 2485,
+      "sha256": "741384bf973acd4831895f6d2ffba75ae5faa4e11641b20f16c1ad830bc429ed",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": "config/repos.json",
+      "bytes": 3911,
+      "sha256": "323fc3a67aeed66c93b32b33d74692b663b6626a4a344cc5bb4d4fee8c1a68ed",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": "config/spaces.json",
+      "bytes": 2105,
+      "sha256": "aabc4742d49b13720225ceb8f90cedbf6f40a8273daa6646a9dd210607d73c44",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": "docs/MONARCH_CAM_30_DAY_GROWTH_REVENUE_PLAN_2026-11.md",
+      "bytes": 22890,
+      "sha256": "78a50ee32f2b72ea0237f38b516ca53f59c0ffe697e5125c8a975ee03f7bb939",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/MONARCH_CAM_LIVE_FORENSIC_AUDIT_2026-11-05.md",
+      "bytes": 35761,
+      "sha256": "ed03cbc5aff0af4939ff67ec4bade3b586f67eae56e00384845c61c1e816022c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md",
+      "bytes": 9938,
+      "sha256": "68679f15e7efdd2f34e1fcc4ad236efcdd1d57f572f88e106d95b0a4a229822d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/00_START_HERE.md",
+      "bytes": 4365,
+      "sha256": "6b796a29bd95a387afaefeaea3b23f1f67a59892fdc28aba2f9c05b14c2b823f",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/COVERAGE.json",
+      "bytes": 4285,
+      "sha256": "fcbec9cc545c4acac734c7ac5dd77e4333cbdf8cbdc0b33da3c7eefb289639de",
+      "evidence_level": "state_ledger"
+    },
+    {
+      "path": "docs/continuity/DECISION_LOG.jsonl",
+      "bytes": 8235,
+      "sha256": "675203d4b0ac5da8349f58f9a40754327ca14cf30a9fb3868bee18b5613d8ae7",
+      "evidence_level": "state_ledger"
+    },
+    {
+      "path": "docs/continuity/EVENTS.jsonl",
+      "bytes": 21304,
+      "sha256": "7fbaeeae762ed2587106c35ba8facba5b5bd1860795e80e026774ba5cc46aad8",
+      "evidence_level": "state_ledger"
+    },
+    {
+      "path": "docs/continuity/GAPS.md",
+      "bytes": 5534,
+      "sha256": "8b59c4f5314f4fd3bae7ffab1782cac63b4c762dd6bcb1cc4c836fe26f7b68bb",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/IMPORT_PROTOCOL.md",
+      "bytes": 3887,
+      "sha256": "eef82b587bcffb52fc7ec6b0c1795c9a12bc8e66043421cda7b5cfca8e621608",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/MINDSET.md",
+      "bytes": 5388,
+      "sha256": "317bb35dd28e089d8c0f363cafaa0c15d6eb37ef2c6d5dbd67c382caff396c26",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/NEW_CHAT_PROMPT.md",
+      "bytes": 5443,
+      "sha256": "6dc7f2ae08ce0aa3d60a9c6508b5bf1b2ac2c45da5fba6e04cbe23721c9c106b",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/PROBLEMS_FIXES.md",
+      "bytes": 12168,
+      "sha256": "f82a3028153a733c8591c62a203bac43f76ae14a5dd316261694b9b0da54872d",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/PROMPT_RESULT_LOG.jsonl",
+      "bytes": 11678,
+      "sha256": "d68c71f30626d48a2db4b93b5f92ea521e301150a4d4f300d65c03fa0f30d9a4",
+      "evidence_level": "state_ledger"
+    },
+    {
+      "path": "docs/continuity/README.md",
+      "bytes": 5688,
+      "sha256": "9ec98ae416a22539f083ffa90b71109f5c603a99a6cae38877eb4cea4b8ab5da",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/SESSION_INDEX.json",
+      "bytes": 29318,
+      "sha256": "cf9c0372af76bae7169ec938d4e9bccce4c873bd227a9f45807f9c8507c04315",
+      "evidence_level": "state_ledger"
+    },
+    {
+      "path": "docs/continuity/STATE.json",
+      "bytes": 9886,
+      "sha256": "2fcb9dcdbc2a0c31920474dac5bb2fef35f22eadb2b91c13bd82c65ce088cf09",
+      "evidence_level": "state_ledger"
+    },
+    {
+      "path": "docs/continuity/UPDATE_PROTOCOL.md",
+      "bytes": 4283,
+      "sha256": "b4142ed814106d3f0171f085d76a2272b2320ff77bceee081debfb69a6a7fdcb",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/WORK_LEVELS.md",
+      "bytes": 17070,
+      "sha256": "19836f1668e686270eea5c044afbf1e2b201a2aa8f33ec19895572f4216b8e28",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/CHANNEL_INDEX.json",
+      "bytes": 3235,
+      "sha256": "a588be92d838b6d2a4b028735fb4aea529c9e6782aacabb8c099cae7b0d02b74",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/README.md",
+      "bytes": 1719,
+      "sha256": "efbabde59487bb3615b93b1e2599958eb89b75933184d5e72f4cfa24c51e17d2",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
+      "bytes": 4611,
+      "sha256": "baa299eecf3e11d6f274afc47bfb33dd0fa7a1d3183d0c6499852f7697e80619",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
+      "bytes": 4494,
+      "sha256": "5a582427deabbaf563eaad19dbc30ce5e952cd7ee6d53278f51359a91a68ab17",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
+      "bytes": 4613,
+      "sha256": "c40c556c8589f5888caa96027ee11fa7fad6b3542a3326399ab202bb8eb7ff80",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/EVIDENCE.md",
+      "bytes": 4660,
+      "sha256": "ff4f31f06a6f2b2c20f786b215409c130a49be911a7bc10733db80b75df0a0e5",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
+      "bytes": 1307,
+      "sha256": "aef46a440e1adfb286a73fbd173b93e3e1049c32d0904b82576cbd8b8e793189",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/PLAYBOOK.md",
+      "bytes": 9760,
+      "sha256": "2a295fa7364616003459a95b686e7a57c2a5fea3c9e9f4cfc5ecf175c9a2fa00",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/REJECTIONS.md",
+      "bytes": 4041,
+      "sha256": "774cf902cb9bf719289762468d8a9e248eb1dd6fbfb3b2e453ec9b5fa6908128",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
+      "bytes": 4659,
+      "sha256": "83b9148dd8118f24f5d5dcbfd9528b4dc6f626e2dde8c3a0debd82612382f42b",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/chat_exports/README.md",
+      "bytes": 1351,
+      "sha256": "20e8714bd2cbac8e1a518278b68dc86f590d0b9b205352618bb51c4c7b3c918c",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/chat_exports/inbox/README.md",
+      "bytes": 727,
+      "sha256": "83ac2c4084c4e4d2b84dac322bffe68ffa3aff94704439cdfa34a48202821ebc",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/metadata.json",
+      "bytes": 1332,
+      "sha256": "20693eb1ec06e3fd35d11ccb05716cc70d2d6a6dbb4cdc0ce3cfb08b339fe12a",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/normalized.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001-archive/raw/EMS-20261011-001-history-archive.tar.gz",
+      "bytes": 16733,
+      "sha256": "1dc1004a849b83ef51b177b20233fb1e9e57e8e29a6953816905336dd9f4eb00",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/metadata.json",
+      "bytes": 1430,
+      "sha256": "829fcf7b0842c11f4f6be81d4c871fa1a728070449100c88f12b18b3693e45d5",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/normalized.jsonl",
+      "bytes": 16828,
+      "sha256": "2b18c631c4a6d83f21cc6368dd283719fa362f34ccb2f21fc0e40f685478eb71",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001-journal/raw/JOURNAL.jsonl",
+      "bytes": 42336,
+      "sha256": "5759a194f72cc291d8794fbf9824c606169f827e841d2e0cec67b5dadeace718",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001/metadata.json",
+      "bytes": 1271,
+      "sha256": "3a48fa00aa08c576271e7bb6980544f56744645b5697ed57c8820e7fe887995b",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001/normalized.jsonl",
+      "bytes": 6256,
+      "sha256": "6699ba497f41bbf206d53f87de1e0ea45dac260a04f240a61f6a838c75f1892e",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/chat_exports/sources/EMS-20261011-001/raw/CHAT_TRANSCRIPT.jsonl",
+      "bytes": 6948,
+      "sha256": "f35090effb464fa09ca3fa45f417ccfce2a13e3da9e411d96d04b42b1b7dcd95",
+      "evidence_level": "verbatim_source"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive/session_logs/RESUME_STATE__109z7qydvLVNlHZmuO7neDwdRhhAETGEq__20261010T195539Z.md",
+      "bytes": 41850,
+      "sha256": "01e47911ff680a0623a197d07666f8205e27e93272987376be5585b9bc8e41c7",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive/session_logs/RESUME_STATE__1V_C3PSoUKbSnVQIXThJIknlbEQkKH1j3__20261010T200452Z.md",
+      "bytes": 17885,
+      "sha256": "c3593d0fb84bb9752fdf636835357d4838416eedf98d23011b0d1431c671a401",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive/session_logs/SESSION_LOG__1-EqGCp-grhyA_zqms9LE3v6mi43UGCGb__20261010T194525Z.md",
+      "bytes": 97975,
+      "sha256": "8ea2d3c246bf8790e5d03d1c9d249475d837a42396e459389133ff9756c8e4a2",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive/session_logs/SESSION_LOG__1Pw5ZsKS_SVP8hI8OLik5ucL09dsXJ3Mz__20261010T140218Z.md",
+      "bytes": 90091,
+      "sha256": "7d72d259174df41526060b440b75a3d488488d3e9ed15cad1088b9a1bdf6f58c",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_import_manifest.json",
+      "bytes": 27826,
+      "sha256": "8b985807279e45795f05313550ff157e34c3b650ed2cd771077d669edf1fd876",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/00_DRIVE_RECOVERY_ORDER.txt",
+      "bytes": 2871,
+      "sha256": "84c1004c72dc88df69e2609f316ff38a3bf02576b2ca40d4bacc64368d8c5e6e",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/00_H3_model_facts_specs_VRAM_API_pricing_licence.txt",
+      "bytes": 7226,
+      "sha256": "6ee2031210b8d7700c4b631418b901c35b8040cb8ca0012212ef68db93cc1ad8",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/00_READ_FIRST_NEW_CHAT_WF02.txt",
+      "bytes": 4653,
+      "sha256": "36bec01e42eb63146bd086682e9c9f5c2803ec78ae51611ae18d4546246dcb52",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/01_Colab_runbook_how_to_run_it.txt",
+      "bytes": 5636,
+      "sha256": "adb2e99e3492b1ca4ec940a7e7cdedb8b095d96be4e1da4ce961e8fc92393777",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/02_Prompting_grammar_Monarch_templates.txt",
+      "bytes": 9097,
+      "sha256": "8f6f91274b72f6d6058c5c3622c2418f2eb3229c1098d629260330b7c82eecc2",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/05_Free_vs_paid_routes_is_H3_free.txt",
+      "bytes": 4739,
+      "sha256": "fad6a42b0cdd004086f82e846edb106af4e62c04d4b265a079213c0540a7fd48",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001-history-archive.tar.gz",
+      "bytes": 16733,
+      "sha256": "1dc1004a849b83ef51b177b20233fb1e9e57e8e29a6953816905336dd9f4eb00",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/checkpoints/EMS-20261011-001/0006-20261010T221708Z/HANDOFF.md",
+      "bytes": 1720,
+      "sha256": "b985fe0868c415227586e9fa2ae3aa6f6ef0eec629e99cc29a7c129291468a44",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/checkpoints/EMS-20261011-001/0006-20261010T221708Z/checkpoint.json",
+      "bytes": 4425,
+      "sha256": "f3ecb1d8fcdff09ccead5f2fe8dfce860ed8ca8518703739bbd24cb1b7b2152e",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/STATUS.md",
+      "bytes": 946,
+      "sha256": "992353cba9818d202b6f092d18a8043bd394daee411acde21d21577c9c5a388d",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/SYNC.json",
+      "bytes": 3581,
+      "sha256": "120906ad45226f4a69e19c7959980ff3e9d243e59c9872b20f62818a388dcfbe",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/continuity/outbox/EMS-20261011-001/0006-20261010T221708Z/checkpoint.json",
+      "bytes": 4425,
+      "sha256": "913daa3ff10064b521c86c26c1eb2c6dd8a6dd8d3ce8e78b37c0b8ae1b5ffb14",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/ACTIVE_TASK.json",
+      "bytes": 1578,
+      "sha256": "5bd60b84849fb8c45a2b6fc6abe649bec2e337f697ba4599864d48e29a4a9a0a",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/CHAT_TRANSCRIPT.jsonl",
+      "bytes": 6948,
+      "sha256": "f35090effb464fa09ca3fa45f417ccfce2a13e3da9e411d96d04b42b1b7dcd95",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/JOURNAL.jsonl",
+      "bytes": 42336,
+      "sha256": "5759a194f72cc291d8794fbf9824c606169f827e841d2e0cec67b5dadeace718",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/POST_COMPLETION_VERIFICATION.md",
+      "bytes": 1728,
+      "sha256": "7c90b710f2d58aadd485b5c32a6d006e24039a465a4ba8cf9fca545d0c612c93",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/RESUME.md",
+      "bytes": 1720,
+      "sha256": "b985fe0868c415227586e9fa2ae3aa6f6ef0eec629e99cc29a7c129291468a44",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/payload/USER_CONFIRM_GITHUB.txt",
+      "bytes": 104,
+      "sha256": "6f678cf553c6de62a2e32a8a1c9f00eab54bf4cd9732e0ac6448c0aa574d4682",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/payload/USER_MESSAGE_GITHUB_REPO.txt",
+      "bytes": 2985,
+      "sha256": "5f1a422d857c1530c315570ae9613276649da170b7b0dda42163f57c65ec167d",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/EMS-20261011-001_history_archive/operations/history/EMS-20261011-001/payload/USER_REQUEST.txt",
+      "bytes": 2925,
+      "sha256": "c09afb13fcee5328be0a558f2a1a479fce639042b3cec2ea92255591389ee3e4",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/Editing_Monarch_Studio_Continuity_Style_Library_v1_Recovery_Hub.txt",
+      "bytes": 24327,
+      "sha256": "72ba4bbe3013f5b8bf4972d48bce62685fc6dae68b1b59fabd770a2b60263bcc",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/FREE-ONLY_PLAYBOOK_0_me_poora_system_compute_quotas_weekly_rhythm.txt",
+      "bytes": 8760,
+      "sha256": "502f09356f3a7b8e6a64855a7dd70f28790571d4f87fb415a03ec61c04ced5bc",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/MON-DEMO26_Final_Delivery_Pack.md",
+      "bytes": 783,
+      "sha256": "5aa435db9ee747900addd85e19b31e3db55a6d97ad8b72817235891de8f100c8",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/MONARCH_CHARACTERS_HUB.txt",
+      "bytes": 13602,
+      "sha256": "6350b41081ddca7975b67bd0286941bea24fc2357d0c5424678083d2cbe2d3de",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/MONARCH_STUDIO_Workflow_Registry.txt",
+      "bytes": 21408,
+      "sha256": "051adc0afdfbbc3b93fcb1be7ace66083dde801ff470610a2295fe159eac96b0",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/NIGHT-SHIFT-EP01-ALL-IN-ONE.txt",
+      "bytes": 7760,
+      "sha256": "b63e40eb065f2698320a1625945b903ceacd4e4e13ac8d6d748de5142a690d85",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/START_HERE_WF-07_Monarch_AI_Agent_free_vs_paid_480p_answer.txt",
+      "bytes": 2864,
+      "sha256": "b1cd6a88e52ee64ff469fa8f0aa30fc21f017feb06b2bf1d30c1e00542440b0b",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WE-20261017-001-R2-delivery-receipt.json",
+      "bytes": 1955,
+      "sha256": "b06ff4135b18a688d62d65cff7c0bf892643925ee08e291e31ff55e0cf02931c",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WE-20261017-001-R3-girl-voice-delivery-receipt.json",
+      "bytes": 2312,
+      "sha256": "069be18010345aeae563f31f3ff7f93411aec994aebec29177ad08888bd4090e",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WE-20261017-001-delivery-receipt.json",
+      "bytes": 5193,
+      "sha256": "4dd74d902b2dbbe0cbac2e3b81c7fcb4b21eff1700c56bdcfa2cfdddc3beaf1c",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WE-20261019-002-delivery-receipt.json",
+      "bytes": 2530,
+      "sha256": "5a44864c12a96e2572b0d0fbd61718769799b6ce4243f5aef3fb3bcbeb707ddd",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF-01_Monarch_Stickman_Animation_HUB.txt",
+      "bytes": 23511,
+      "sha256": "38da7a8d8115201df1d8aa71afbf9805c1472ce8a3556fea1000fea56eab9d99",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF-02_MASTER_HANDBOOK_V2_V8_Style_DNA_Workflow.txt",
+      "bytes": 65037,
+      "sha256": "cb128a146258bb4e5e1cc5f2715470dfe7a8c045c5e90bac97c3c3219e95b9f1",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF-03_Monarch_Noir_Film_HUB.txt",
+      "bytes": 23328,
+      "sha256": "75f4f02fb065c66bf724f19a80b26d17e016d05fe7921f2a73cff956301c03f2",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF-04_Monarch_Face_HUB.txt",
+      "bytes": 3808,
+      "sha256": "616ac5b8f47161252afd30a5cfa778c151b661fe9306bc57d640970dbfc5fab3",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF-04_RESUME_STATE.md",
+      "bytes": 3123,
+      "sha256": "0352cc2c524f1c65a4802a2f5ff60c4982334b20978d179a73fcb4b700f8941c",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF-05_Premium_Motion_Editing_HUB_Complete_Codex.txt",
+      "bytes": 71956,
+      "sha256": "33aeedae27a81b7dea51847eae1a83bad93ca736114aa51e0f6cb391820cd2cb",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF02_MASTER_HANDBOOK_20261016.md",
+      "bytes": 63454,
+      "sha256": "4af25d14f15013bd3510abef3f790d0294ff856670373c091ba7a53f2840f01b",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF02_PUBLISH_RECEIPT_20261016.json",
+      "bytes": 3414,
+      "sha256": "853b67cf0d3b101dd3a4f77bb73372b33abb4bb9d656e35308ea94879f4021d6",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF05_18_FAILURES_CAUSES_FIXES_AND_REGRESSIONS.json",
+      "bytes": 8572,
+      "sha256": "d1f1de0ed6223bac2b9e0b5432bed57ed1ddc7f50e4873521f4bb0d1f1b69569",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF05_FRESH_CHAT_START_HERE.md",
+      "bytes": 2757,
+      "sha256": "1bf6b6b9448fbfb6e367eaebc2bbb7d4b076297c3654cf58b398cf04676b1ab9",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF05_LIVE_RELEASE_RECEIPT.json",
+      "bytes": 2763,
+      "sha256": "8a6be4dbc1848a529bbc4a09125af1196fcecaf30961bc619a3de283a7950226",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/external/drive_text/WF05_MASTER_CODEX_CANONICAL.md",
+      "bytes": 68168,
+      "sha256": "651c535039d46165c30a6c7888f8ccad54a447b33f36a8d1d7b0f65720fb42ed",
+      "evidence_level": "connected_app_record"
+    },
+    {
+      "path": "docs/continuity/evidence/github/COMMITS.md",
+      "bytes": 109026,
+      "sha256": "d62a9c90695235982d265fae112e82a25d64cfac5f70135c697addd370af6e9f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/README.md",
+      "bytes": 435,
+      "sha256": "3e29a68729cb640743bd99a49627558fdd5554bb7e6ab45aae0faac190720a98",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/branch_heads.json",
+      "bytes": 2104,
+      "sha256": "5be32ba40708d3ecc994d9e62c0027527d209a1de6441e2f09521728edabc315",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/commits.jsonl",
+      "bytes": 217094,
+      "sha256": "ae406fa3e2bd0123af66a7f44c434d2896aa8baae1f23fd9cc3c972146a9ce39",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/commits_index.json",
+      "bytes": 116,
+      "sha256": "20882d3b9c16ab448210e091194ae003e0b04f0674e53354f8c2d4827cd31c8c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/.github_workflows_continuity-audit.yml",
+      "bytes": 867,
+      "sha256": "6b7bdaacf91681eda3c99b980dadd65aa617072f0236dc17b7883f44bb408f7e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/AGENTS.md",
+      "bytes": 3483,
+      "sha256": "dd9d22655c6a7d251c43feb72a2c0dd93402c26935ec83cc25f6a41bde8de7f5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/START_HERE.md",
+      "bytes": 527,
+      "sha256": "b945020e7b1e47155a92224373a64863815f3d94b1bf24fb1f1b2229599bf295",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/docs_CONTINUITY_AND_RECOVERY.md",
+      "bytes": 2670,
+      "sha256": "8f08dd66d408f3ca82840d4efa2ac9df9f77139147e8bffcd1593ace6838a2fb",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_README.md",
+      "bytes": 1606,
+      "sha256": "7d424fc8e052baabf83bbbc50abffdd22918c929bea671dbd91e1e9bfa1d5442",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0001-20261010T212917Z_HANDOFF.md",
+      "bytes": 1839,
+      "sha256": "99ecb45c414cf84515280c91ed304c6d339404a737817df939aac5afeca14f2e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0001-20261010T212917Z_checkpoint.json",
+      "bytes": 3678,
+      "sha256": "aa9e725f8b69912f7d0357a07f345dd43d644df0ca881dc6470e173a28591a6f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0002-20261010T213606Z_HANDOFF.md",
+      "bytes": 1877,
+      "sha256": "9571b443521da57bfa601c131160d1fff78d43930a668de3efc8d3df16f20829",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0002-20261010T213606Z_checkpoint.json",
+      "bytes": 4121,
+      "sha256": "32007c47c0f4c5fe217811774f7121a34e4e60918b0458c9d15946e7013c4a70",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0003-20261010T214201Z_HANDOFF.md",
+      "bytes": 1884,
+      "sha256": "4b811eff9fb7cd87aa70183be66d82cc824633208f1372ea20370de8c8c3ff77",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0003-20261010T214201Z_checkpoint.json",
+      "bytes": 4543,
+      "sha256": "15a3040c8f484bf21e2e69110d3671790c4ab3b01005a9c3662dbb2c61de7810",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0004-20261010T214943Z_HANDOFF.md",
+      "bytes": 1922,
+      "sha256": "f4a518fac50be5a0705216e46c22ce381887b47eff5745cdbbd117796ed56bdc",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0004-20261010T214943Z_checkpoint.json",
+      "bytes": 4716,
+      "sha256": "cf29e1bc6d611621451e9053a78ade0d91ecf312ff1f076283e867ebb2074aac",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0005-20261010T215808Z_HANDOFF.md",
+      "bytes": 1832,
+      "sha256": "8146860a51809cffd8126428bf60477f32a32a6c6ca20867a22058907c9669f4",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0005-20261010T215808Z_checkpoint.json",
+      "bytes": 4739,
+      "sha256": "65ebc262fcf23f602600e913d95be7cc39c4b3c73b441eaad92d97fdea13df29",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0006-20261010T221708Z_HANDOFF.md",
+      "bytes": 1720,
+      "sha256": "b985fe0868c415227586e9fa2ae3aa6f6ef0eec629e99cc29a7c129291468a44",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-001_0006-20261010T221708Z_checkpoint.json",
+      "bytes": 4423,
+      "sha256": "7cce5428c9853283af0057fa828734edad393ef7ce778138834dfeb81ed4f104",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0001-20261010T231858Z_HANDOFF.md",
+      "bytes": 2174,
+      "sha256": "10bfa22a7bafd7ff260e4ae86a6260e7d19c028c5c9c9b83af893d9c3bab5198",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0001-20261010T231858Z_checkpoint.json",
+      "bytes": 9079,
+      "sha256": "b310d02d16b01cc668a8dbdcbab3030ab8bc8e8a6c1f020671b31bd410cb1944",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0002-20261010T233606Z_HANDOFF.md",
+      "bytes": 2195,
+      "sha256": "20e9b6e20e3bf4c3a7a847803d4501fe58b2b724b0f43a23d682fa15a67dcc4e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0002-20261010T233606Z_checkpoint.json",
+      "bytes": 9637,
+      "sha256": "a6847c0bff31406cc32667249dabcea6166710796601757c321572c172eef342",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0003-20261011T000301Z_HANDOFF.md",
+      "bytes": 2170,
+      "sha256": "d017db9f95dacfa457d107f2902e747624c2fbe2fc0bc4f0665ee1ab1a1f80fd",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0003-20261011T000301Z_checkpoint.json",
+      "bytes": 11915,
+      "sha256": "2e56462bb5c2b7e18446e2c77f53a1963c5296374965686b5453d361ff60a6e0",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0004-20261011T002321Z_HANDOFF.md",
+      "bytes": 2048,
+      "sha256": "5f5bf5bd17a33f8a9852e5f6ec1a6fcedb5153fff35c56283a63d17e8f2ffd91",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-002_0004-20261011T002321Z_checkpoint.json",
+      "bytes": 6489,
+      "sha256": "3620bf0d695b8cbdcea0cf134ee1e0e031458955aaee582ce11908cee4c7273f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0001-20261011T004521Z_HANDOFF.md",
+      "bytes": 2771,
+      "sha256": "4090c34f9a7c695c07a44cff5e65920a0c404763b0be3bf9c1902a9a7dd386fc",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0001-20261011T004521Z_checkpoint.json",
+      "bytes": 11103,
+      "sha256": "ed69e0057e497433293886c6dde5f0cc7a471ac78ac4765451cf218fad37f354",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0002-20261011T015125Z_HANDOFF.md",
+      "bytes": 2805,
+      "sha256": "1025534c507317b98036b1287bd70dd5c8306532390cce8b31af314c0c677338",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0002-20261011T015125Z_checkpoint.json",
+      "bytes": 11060,
+      "sha256": "0280d362fcabd1be57d78f31cddc47841f20f97fbd8e75ac9d3479596cca85d0",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0003-20261011T015845Z_HANDOFF.md",
+      "bytes": 2704,
+      "sha256": "0e95a37404a83eb843a6aa3b6a521bd5cff3bc41f70f8d87d02318f28b8e6e89",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0003-20261011T015845Z_checkpoint.json",
+      "bytes": 7417,
+      "sha256": "5cbd05e37912af6eda113c5d7e75213a40dbb70d9b34184ffd0e886207b2f8b3",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0004-20261011T020000Z_HANDOFF.md",
+      "bytes": 2520,
+      "sha256": "ddd29cc4f5a87763711f5f082f174df7a1c0a1148b6abf2a556a896e69ae3d93",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261011-003_0004-20261011T020000Z_checkpoint.json",
+      "bytes": 5386,
+      "sha256": "7f08e2fd96713b2bc69a15567a34be1db72f74ada74608df7ef9ab6ccd95b467",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0001-20261014T161335Z_HANDOFF.md",
+      "bytes": 1579,
+      "sha256": "c5ddffa1405df412323eb4a9a19fc3f2fad72d5b64d3e4ee9ac08028de38690b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0001-20261014T161335Z_checkpoint.json",
+      "bytes": 3470,
+      "sha256": "f706ba2166028172d385d995f83b65c58e8f97d349bd86d96a862b46ea0ef1da",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0002-20261014T162725Z_HANDOFF.md",
+      "bytes": 1624,
+      "sha256": "f93aa8847ea5191336f2296e65f10ad989d75214e8571fb78ae72e658871a8fe",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0002-20261014T162725Z_checkpoint.json",
+      "bytes": 8673,
+      "sha256": "e7ebc97bf0837487e6a516c442514c16ef31d384769f903e52d091b7e23cdf9d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0003-20261014T163426Z_HANDOFF.md",
+      "bytes": 1728,
+      "sha256": "578a5c4022e4fd6356fe540ebe0df936bcef2abb4bd11e02258686f0b697521a",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0003-20261014T163426Z_checkpoint.json",
+      "bytes": 9916,
+      "sha256": "025907c7f17308f66f96bf9695f6517de3bf3bb3efa8562bfe9ecbe0ef2aa226",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0004-20261014T165239Z_HANDOFF.md",
+      "bytes": 1787,
+      "sha256": "187a450abd88276e499225899746e7e9ce6105d2292b2b1e4da401ded7f7ecbb",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0004-20261014T165239Z_checkpoint.json",
+      "bytes": 12748,
+      "sha256": "ef5ebe8ad14bf43f5a5e558f500a4f88d185752f5f1f921176601ea9691111fc",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0005-20261014T170022Z_HANDOFF.md",
+      "bytes": 1805,
+      "sha256": "7493b5d2eef752cd866bab3cf810380a01d737ba054f971ddc79aa8e2478dee1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0005-20261014T170022Z_checkpoint.json",
+      "bytes": 15034,
+      "sha256": "9548bd212629966518c28ed665dc65363e8bd8c645ee008748252c8490445130",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0006-20261014T171051Z_HANDOFF.md",
+      "bytes": 1673,
+      "sha256": "9d31f1de8fa5463a30f4f689dc1de7a84d2e10674f59404df5cd4ec0d6b1bdab",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0006-20261014T171051Z_checkpoint.json",
+      "bytes": 15012,
+      "sha256": "8f7d5abd1baa4d24b229bb07bbd650b536895f76763c755949c3fa213b507b05",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0007-20261014T171705Z_HANDOFF.md",
+      "bytes": 1594,
+      "sha256": "88b175c789647759ef2611f2e4dad5c15e1d30150e1054f4bb12c445ca0de26e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0007-20261014T171705Z_checkpoint.json",
+      "bytes": 16564,
+      "sha256": "0a8eee7df6f1147c03708c2ada0e67208bc946a89efb20e2406786edbdfe0adc",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0008-20261014T173006Z_HANDOFF.md",
+      "bytes": 1664,
+      "sha256": "c9cad7eb15e382f907c1b6fe8fa56545b979103cb446e322925b30affdfcbcee",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch-Studio/operations_continuity_checkpoints_EMS-20261014-FLOW-REPAIR_0008-20261014T173006Z_checkpoint.json",
+      "bytes": 17738,
+      "sha256": "fc732f3fcd2bf667c2db870b7bb866b02e5ef833ed18c6479e8d05f095a9a8e8",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/docs_zero-budget-launch-playbook.md",
+      "bytes": 6543,
+      "sha256": "7cadc17568403cd5e64bb63c0aea30b816dd8ba98978dd46c1270888902a3ccd",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-post-to-wechat_SKILL.md",
+      "bytes": 12941,
+      "sha256": "2b6e86e52c87910c92b3088d25ac3b5891b06a9382d4f5d68cd85a52698f4e27",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-post-to-wechat_references_api-setup.md",
+      "bytes": 898,
+      "sha256": "fb2b01a6ef9768030abf191ddb9651d7018f9b569d4f19fcf13ebfc6bb045284",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-post-to-wechat_references_article-posting.md",
+      "bytes": 1447,
+      "sha256": "ebc06769d42aa9689eac5122ce5adaa5455fd367a2548eb8921981403b1ea2a0",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-post-to-wechat_references_config_first-time-setup.md",
+      "bytes": 5474,
+      "sha256": "e2f61d4155a96815ffdfed5aebc61785203b5a46922ed730b46803d080277366",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-post-to-wechat_references_image-text-posting.md",
+      "bytes": 1779,
+      "sha256": "f2e0ea923df9487fb13d21f39360adb6475f216980cf662032f7f8d27ac04d13",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-post-to-wechat_references_multi-account.md",
+      "bytes": 5041,
+      "sha256": "d12d5020085bb6a35f9dc726503da99745b1b926051eeed70eccb5451154a960",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-post-to-wechat_scripts_package.json",
+      "bytes": 244,
+      "sha256": "7f418d7db7d49d4a57247887d8734a1ba8153698ea2bf3eed11b765ceab071c5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-wechat-summary_SKILL.md",
+      "bytes": 29533,
+      "sha256": "825cd1c52a6ea3eab0577b618d6ed9726c7371131046d7a66c065a30ab4a0333",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-wechat-summary_references_bot-requests.md",
+      "bytes": 1424,
+      "sha256": "f2c5e816b1d7bf77ea52298d717f97c48e931d7a7371161af47d167b224cd58f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-wechat-summary_references_group-memory.md",
+      "bytes": 4556,
+      "sha256": "52fabf40920d0a882165583f83b33de56f33fdb1a0a5cba1ac6f96c31b303ba6",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-wechat-summary_references_output-formats.md",
+      "bytes": 14509,
+      "sha256": "06da2ebc073d8b6ade1e70690c09a08161efe78f4357b8be38a9d7e91ec1a7a9",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-wechat-summary_references_preferences.md",
+      "bytes": 3038,
+      "sha256": "abce2e2e524d6db6138b975d1ae43e948781829a59091eb82bdc9b66a5ab7808",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-wechat-summary_references_profiles.md",
+      "bytes": 16825,
+      "sha256": "6274621de4e6b0071f08f95abeb79bde1e52913684257efcfea62f0019b13ffb",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-wechat-summary_references_setup.md",
+      "bytes": 4765,
+      "sha256": "2953006e93f080bab4aab93e966a0396874da1c5d41c830b7c7ff1bf883ad192",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-youtube-transcript_SKILL.md",
+      "bytes": 6650,
+      "sha256": "ae084307b70b71a3493904cb0d0c21c13ea7aee2259d1ca04ff3b0d2ae18982d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_baoyu-skills_skills_baoyu-youtube-transcript_prompts_speaker-transcript.md",
+      "bytes": 4695,
+      "sha256": "80358550e9d9b8d700cd54fe1e95572646459ab7780539bd0bc2af5a58760123",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_book-to-skill_AGENTS.md",
+      "bytes": 5198,
+      "sha256": "6be2195c4ff0b5e228b0754ae94167310facc6b7f244c5b82974b0a2529bb1b5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_claude-code-video-toolkit_AGENTS.md",
+      "bytes": 1195,
+      "sha256": "55f6f927a7e18a49d6b481b400238ea55b819fecf0670591c11c69a95a1d1d8c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_claude-skills_c-level-advisor_skills_ma-playbook_SKILL.md",
+      "bytes": 5994,
+      "sha256": "dab5cfaf28f4e96f240df0658cb3771209063bdbaa2094caf5941358980e48b0",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_claude-skills_engineering_skills_runbook-generator_SKILL.md",
+      "bytes": 1971,
+      "sha256": "7f2300591ca9ef80fb380c9453c2a7ae0500e08ff2a97aa1430eac8322b36ac6",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_deep-research_references_multi-agents.md",
+      "bytes": 1791,
+      "sha256": "8bfd07fb38f898102d903e6a471b8f8b1a3c76e14272f910ff33ae536d23f9fd",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_elephant-goldfish_AGENTS.md",
+      "bytes": 1665,
+      "sha256": "6ed15be649e5eea91ac469ff636e338e7b69ab186d17719c733c621d0d39d199",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_ffmpeg-skill_AGENTS.md",
+      "bytes": 949,
+      "sha256": "605f07f1ffb7cb521cd74e44ec28815d8656f40e7db82c37bc4090e0aae3f727",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_filmcraft_AGENTS.md",
+      "bytes": 13349,
+      "sha256": "12e509acaec0d928a9b2d952577ec9beb2d6ab7328945d08d610db60d828c712",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_filmcraft_docs_agents.md",
+      "bytes": 30874,
+      "sha256": "3ce2af777b8edc8ce829621592874e18fcf41d1b1e5fe6c2bf9a5103178d387b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_filmcraft_docs_transcripts.md",
+      "bytes": 7165,
+      "sha256": "f6920981163431f708a7bc20879cf3e542269dc6b27fb71aa69026ca24ce8175",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_html-anything_AGENTS.md",
+      "bytes": 1420,
+      "sha256": "b8a1f7290c661d39038283c3da2a635e3871129833b9a0c05460e51c44917cd6",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_humanizer_AGENTS.md",
+      "bytes": 3439,
+      "sha256": "de84a449da400454df1225ddb1ced728c35bf0be7811b239e3370c7dbe1f4e69",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_last30days_references_research-runbook.md",
+      "bytes": 73538,
+      "sha256": "4d226a678e96b435880a7a58f70384777af9d695de944f39bbd480f3f98eb6ec",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_AGENTS.md",
+      "bytes": 11859,
+      "sha256": "0078ee81da998f0d5a429a45d09e7b80060fd02f58ca7938a09f032b7676b614",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_ads_references_abm-playbook.md",
+      "bytes": 8100,
+      "sha256": "acb5c89ced4497674d012d015504a5c8e17c619bd2fc1f0191d833a9957eb44a",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_ads_references_b2b-paid-playbook.md",
+      "bytes": 7951,
+      "sha256": "21dc1125905f8d985763996afb24a2bf54539330535b7b2b45c052901c5b2006",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_ads_references_google-search-playbook.md",
+      "bytes": 10873,
+      "sha256": "8055f63b09e4869f3a936debd403ebae6459d8089c9a48a6380a6f750900f07e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_ads_references_linkedin-b2b-playbook.md",
+      "bytes": 9222,
+      "sha256": "8f38aadbf24c1a554fbaa47bf2f24bac0c4773fa16f65d34c1c600e5e3d8a6ee",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_ads_references_meta-andromeda-playbook.md",
+      "bytes": 8201,
+      "sha256": "803653f4096a3ff0b28b40d776bed777036f2cb7126575233b7574f9d3c35717",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_churn-prevention_references_dunning-playbook.md",
+      "bytes": 14061,
+      "sha256": "24b96a01cfba174c9f3adde66d417e7282c0cf31789c2719e6bd37b8ad2ecf8c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_conversion-tracking_references_audit-playbook.md",
+      "bytes": 12862,
+      "sha256": "d55c2b781e84973bccb1e6f75860de0df8cd5ef1db6ab69a036ddb99d698c0cb",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_programmatic-seo_references_playbooks.md",
+      "bytes": 8305,
+      "sha256": "2b2acd3a0c0e5d60b1fb5b71a173aee7ca28de659a7e8ede3effe8525564eb0e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_prospecting_references_enrichment-playbook.md",
+      "bytes": 5290,
+      "sha256": "dcdb131d83e0a010fdbb572c828b621e9db10f96b6fafd891499683ed9a4a63c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_reverse-engineer-marketing_references_playbook-template.md",
+      "bytes": 4478,
+      "sha256": "089810b7b59559d9c8eb01987f458eb5c631beed879811e08e60da1d93e0d7ca",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_marketingskills_skills_revops_references_automation-playbooks.md",
+      "bytes": 11165,
+      "sha256": "57ab12a9d111cc557fda52fde1f861ccb44667b3449c71cff9059a391a447adf",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.agents_skills_flux-best-practices_AGENTS.md",
+      "bytes": 54232,
+      "sha256": "b2989797b7c2c86d79fd0c4fc8c81b0366d030a9c8c5b9290c0d1d00453836a1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.agents_skills_hyperframes-media_references_captions_transcript-handling.md",
+      "bytes": 5439,
+      "sha256": "84c4d5181749022c00b6de62ffe95fe257598fb5f9111d9e8541d25a13836287",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.agents_skills_speech-to-text_references_transcription-options.md",
+      "bytes": 7011,
+      "sha256": "2ac067a3401ba4926747e989611e8273f68b9cd6efc8ca80acd2619f092e28ee",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.agents_skills_vercel-composition-patterns_AGENTS.md",
+      "bytes": 22627,
+      "sha256": "89e3ddd58fcf99a53a50e25dfd21b8cde1be5f10b7df6bacd3dfa6796932f516",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.agents_skills_vercel-react-best-practices_AGENTS.md",
+      "bytes": 98263,
+      "sha256": "2982283d7d6d2617a69c82e447d5be60619fae3bcf92324eb8c63e8847c74d4e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.claude_skills_flux-best-practices_AGENTS.md",
+      "bytes": 54232,
+      "sha256": "b2989797b7c2c86d79fd0c4fc8c81b0366d030a9c8c5b9290c0d1d00453836a1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.claude_skills_speech-to-text_references_transcription-options.md",
+      "bytes": 7011,
+      "sha256": "2ac067a3401ba4926747e989611e8273f68b9cd6efc8ca80acd2619f092e28ee",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.claude_skills_vercel-composition-patterns_AGENTS.md",
+      "bytes": 22627,
+      "sha256": "89e3ddd58fcf99a53a50e25dfd21b8cde1be5f10b7df6bacd3dfa6796932f516",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_.claude_skills_vercel-react-best-practices_AGENTS.md",
+      "bytes": 98263,
+      "sha256": "2982283d7d6d2617a69c82e447d5be60619fae3bcf92324eb8c63e8847c74d4e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_openmontage_AGENTS.md",
+      "bytes": 384,
+      "sha256": "075a2a6c4120101e0e3daf0a6c028e4a7902fb541614cd815b1def981628d397",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_opus55-video-vault_prompts_chatgptastra-807540.md",
+      "bytes": 523,
+      "sha256": "cb6ed4e4a65f88a59f92f3a5c911c289338789c79fe17aa09ed475b83d83f58b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_planning-with-files_AGENTS.md",
+      "bytes": 4410,
+      "sha256": "651067324f176f4e4b58b52144399c9a2bf7618ed87a577da1b80b3ee34255ca",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_ponytail_AGENTS.md",
+      "bytes": 2721,
+      "sha256": "b98b15e1d683ee205e124b52b8d330128593f4a87b545cf8185e2712cd1bb25f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_self-media-workflow_AGENTS.md",
+      "bytes": 1084,
+      "sha256": "1737e5db217b925ba7e5ab148c5dca612d3838934cccbb2a96ccece06270cfa6",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_self-media-workflow_skills_self-media-platform-copywriting_references_wechat.md",
+      "bytes": 1118,
+      "sha256": "d17c0bdc19943a4f8a5d72c04264e631f5a6764b3b55adfe7ded3847a018d904",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_self-media-workflow_skills_self-media-wechat-publisher_SKILL.md",
+      "bytes": 3648,
+      "sha256": "61a45f5974c7774252988614893e9daaeafc483929f3fab4a890f1a4e6bfcb17",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_self-media-workflow_skills_self-media-wechat-publisher_agents_openai.yaml",
+      "bytes": 262,
+      "sha256": "fc55188a1e653ec1716a91dfec18c035a9d98045cb6695ee9ea9d4b10655d84e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_self-media-workflow_skills_self-media-wechat-publisher_assets_wechat-article-template.md",
+      "bytes": 687,
+      "sha256": "6cc234ee16750f9070953d507edcc2dce0ae9087aeb8756f67787b9d15fe6edb",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_self-media-workflow_skills_self-media-wechat-publisher_references_wenyan-setup.md",
+      "bytes": 2518,
+      "sha256": "b881692d30393b308cd41f9e2a74ef0cf2892e0a4a99b0670dd2550c4f98954a",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_skill-seekers_AGENTS.md",
+      "bytes": 15251,
+      "sha256": "e542c425f66b8ec0e1830d4cf8eceafe311200cd84b87a42a4b73b2e19bcc94b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_skill-seekers_tests_golden_phase2_chat_SKILL.md",
+      "bytes": 3531,
+      "sha256": "3a914bd0860431ab16499f897f62847e6f03279c2d206059234da3222787527b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_skill-seekers_tests_golden_phase2_chat_empty_SKILL.md",
+      "bytes": 1125,
+      "sha256": "f4637b417e87654f42e41f63f2c5f53ca4a50bdd9906cbb49c86ccd5ccd675f6",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_skill-seekers_tests_golden_phase2_chat_single_SKILL.md",
+      "bytes": 1216,
+      "sha256": "2f2eef626e277187140f0317059f52a08821e253a1ed9d71720de1aca3259bd1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_skill-seekers_tests_golden_phase2_chat_topics_SKILL.md",
+      "bytes": 1526,
+      "sha256": "1035974c2c005ac00dce5eac81098b358fe7f51f0a161fd4599365d22c16004c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_social-research-skills_AGENTS.md",
+      "bytes": 924,
+      "sha256": "94491907ee3b16e0bdc81aebefa32ec6ba469a137f8993158bd6e7fd3ec5c8ec",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_social-research-skills_skills_transcript-intelligence_SKILL.md",
+      "bytes": 3771,
+      "sha256": "599e19d53de3496785329626f76486ce751b491ac8cd762ee98afa8c25f0594c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_website-cloner_AGENTS.md",
+      "bytes": 3164,
+      "sha256": "62b406e750bdae24b31e2048149bc215e0f4c0cda7183272f5678c4661d3996e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_wshobson-agents_AGENTS.md",
+      "bytes": 7035,
+      "sha256": "6244bdf41c860c51bf8c93d7ea5aeb00a9ece4584ef85fc689d4f96d38fd168d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_docs/adil-chandio_Monarch.Overall.Work/skills_wshobson-agents_plugins_incident-response_skills_incident-runbook-templates_SKILL.md",
+      "bytes": 5463,
+      "sha256": "fd9ca9b9bc958da514039d59e453b05182208c7410696273d2c62350ff3ad1aa",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/other_repo_files.json",
+      "bytes": 88068,
+      "sha256": "66756fa69485a8e123d7c42163af96eca373646b346bf0819e5d03c198025bcc",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/pull_requests.json",
+      "bytes": 7867,
+      "sha256": "f090481fda4da9c53ae1634ccf7439e23b6c94c71c30337e63fc079239add495",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/repos.json",
+      "bytes": 84888,
+      "sha256": "a24796aecb73e0bbc0dc38cb09cdedf2a4e5b68901bb2201bd2cd183071cb4b4",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/tags.json",
+      "bytes": 2946,
+      "sha256": "3192df314aacfb969056a5620fe56f6dd4fe95bf541a225f216c5b759f3e5ca7",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/workflow_runs.json",
+      "bytes": 210658,
+      "sha256": "d8d8cafbaf5e0b97198f0d5fbf894be82e645bb92fb6ef31d43acad2372781c5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/github/workflows.json",
+      "bytes": 3374,
+      "sha256": "4dbd2c7948dc945615f873bbe9447a1819450c60613780ad558cdf7a779180ed",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261105-193939.png",
+      "bytes": 1170868,
+      "sha256": "7e52d33a9f7b1d38f7d62422fd42c60dc631e782b4fd56e3b2e9d03656656e17",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261105-193949.png",
+      "bytes": 571512,
+      "sha256": "5df774a2eb73cff4a30ae5993b40776091b7e76b54a9952f8db6fc452d6a9e31",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261105-194000.png",
+      "bytes": 685942,
+      "sha256": "d9bcea610528c5f09358040fa956d1f9d01ee5df0af9eedc4789458229d8aad4",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181201.png",
+      "bytes": 162828,
+      "sha256": "c6e101003bc2b599b7a539538f96932050e0898c92ae9b197dad5b5dc134cda2",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181205.png",
+      "bytes": 98575,
+      "sha256": "a6b151b4c05642017b03830c824a51cfd3f5ca9d0fcf370121d2d7a1595a5908",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181210.png",
+      "bytes": 111320,
+      "sha256": "5e2bf746cc84dfe689c53925ac31dda6d643fad95311f9b6dd292970c3c6d080",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181212.png",
+      "bytes": 106421,
+      "sha256": "13d686848378070c06089cd9ae799acdea779577589a15add991b598c62cae9e",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181219.png",
+      "bytes": 103978,
+      "sha256": "4ae5f6ed2151491852bf43f9cd942921c8808b85757e8cc10a65fb126044f60c",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181221.png",
+      "bytes": 112637,
+      "sha256": "0e2ad3fedf4d0fd8abb702aed35d0ce5c32852eec9ff247ea62743841d8557a7",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181226.png",
+      "bytes": 87553,
+      "sha256": "fa295658f1a19d8213ebfaba1233d23ab4e69460122ca7dd5ae995aac5784c02",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181227.png",
+      "bytes": 111121,
+      "sha256": "b71b1af3b69d4efbcae19fbb9439692ad07d44a359264f987bb9df3cb65ed96f",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181232.png",
+      "bytes": 82086,
+      "sha256": "48d3ad5e985596c20722c89db869517da22f94c07180e8d48265feb94b032713",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181237.png",
+      "bytes": 89631,
+      "sha256": "8503b3a70886e68928398f5253e28e991efa747476cb590d93ba40d52919c69e",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181239.png",
+      "bytes": 103120,
+      "sha256": "728925e6cabd5f12ad67c90df2e9361c5868e01dff79a909b962572c305ebedd",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181247.png",
+      "bytes": 110650,
+      "sha256": "18e84815057697a899f9e034183b2fcad8cc9b34c3685598b685db2c7180a78b",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181248.png",
+      "bytes": 102333,
+      "sha256": "eec61fbe89d8342ffd6b1fd9fa097ba2c937fce196913775596049a774f4dd0b",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261106-181250.png",
+      "bytes": 102277,
+      "sha256": "4d6d789e7f4db647f0665bcd23ac122ee97bb374460aa43207b3654dd5a3b216",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-001727.png",
+      "bytes": 512296,
+      "sha256": "99379534ae8b284db52a111826262f76746a187e4d35fc2c5cf4f79442d530a7",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-001944.png",
+      "bytes": 805130,
+      "sha256": "d91f43ce2af5f12126df4b2870ef47c25c4b1ec9991a3d3d9c883e9163237886",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-001949.png",
+      "bytes": 742102,
+      "sha256": "c7a8d6b2d352ac65c4a73a46d704467b0869da9fd1910b9a91ba602b3da27818",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-001954.png",
+      "bytes": 1142764,
+      "sha256": "a64fa22945014246f95698384383c774796f07e37292809cf106be07dfd7d129",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-002000.png",
+      "bytes": 1135924,
+      "sha256": "80785f8f4a00b902b836ca7ca8334d0bb1eb568144c5649c6b1666fd1a9bbc6d",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-002001.png",
+      "bytes": 695030,
+      "sha256": "c0037590deccd302bfac8c0e8bef40b836fce3098d56299ff937da55bf54292d",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-002008.png",
+      "bytes": 1005775,
+      "sha256": "005516ca6c9051f60b666f945334bc0424d7fadfb1639a5ee55c9cb90940fcc3",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-002015.png",
+      "bytes": 694184,
+      "sha256": "172260cbbd20e767ba52ec62d9ccb379c975128c2f2f0619e190f125eeafbc46",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-194530.png",
+      "bytes": 360342,
+      "sha256": "9e5872ab32e14c0c6a9873ec8df6cb63e9183cd3e87ca0dbd2a2bba5f43cee63",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-194831.png",
+      "bytes": 278693,
+      "sha256": "303c3cc48b2aa9bed96cf3fe2192b6a362e175d6bca29b86adb6a33c479f8984",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-194856.png",
+      "bytes": 241398,
+      "sha256": "410fb5958c60d39db0d7b418f74e259fb92a9791376f2725d3ad0b042ea458d9",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-194953.png",
+      "bytes": 318122,
+      "sha256": "a80e95df4324917253cb0b8489f06cfe986a853a2ba9ac3fa8e019a9650f31fa",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/screenshot_index.json",
+      "bytes": 19603,
+      "sha256": "7796f0bd2bf0ebc95f8ef55a7bc7a1388f03aaa97cb13cb3b4087523f7e0f28a",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": "docs/continuity/external/APP_SNAPSHOT.json",
+      "bytes": 9560,
+      "sha256": "ff19634cbe3bf37ca62c37b6cfb9eb319784a201d67fd0286b8f704013884b2a",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": "docs/continuity/external/DRIVE_INDEX.md",
+      "bytes": 7750,
+      "sha256": "98df2857d194274da6261bfc908db8362b3a337aeb9b45af4aa73ef6c59530ff",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/external/README.md",
+      "bytes": 2260,
+      "sha256": "30386a1c11089a35f58ece53399a09fbf49e54cfa8867f3cc79640ea6a525468",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/EMS-20261011-001-archive.md",
+      "bytes": 1052,
+      "sha256": "31ada6b7c71ea719739b4128e57fc2aaa41cbdf01f68e9496bcb34c922fc93f0",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/EMS-20261011-001-journal.md",
+      "bytes": 1028,
+      "sha256": "f240c46c21f177a03650f0bb999489f3c818450bfa0fdbb709794b6dc5cadf54",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/EMS-20261011-001.md",
+      "bytes": 968,
+      "sha256": "c2c5862d151ac5fefefd0f21d9db7b195293e9a2292d867ca620d998bac359bd",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/arena-1f352b8e-animated-pov.md",
+      "bytes": 764,
+      "sha256": "ab3f424671403999a62c7291649af32d0b8d543dc695212d14fc60bdc51ba0b8",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/arena-390292fc-current.md",
+      "bytes": 6933,
+      "sha256": "59cde646c15c181602a71180f554406d5020370ff42d488f1482a023d6bc0ffa",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/arena-6101616c-portrait-research.md",
+      "bytes": 503,
+      "sha256": "1ab9e02d0a09a0d911da046f2463b5cdc9ce05fa9c85888337b80c7b8bcdc695",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/arena-ba8d901e-extinct-life-wall.md",
+      "bytes": 584,
+      "sha256": "947178f1428a6fea943f5490e1537857a9ea5d9389d082714eb5395682d1b157",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/arena-d9c9e65-portfolio.md",
+      "bytes": 594,
+      "sha256": "6cf42f8e8f8f13b680ef48f2a1567bf7388e316e38ebdf4be2745e9105b101ca",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_1f352b8e-monarch-overall-work.md",
+      "bytes": 623,
+      "sha256": "2ee661ce2ec196a13a3fa354546c3229a7e3d852d84c41e4fce7506ba3de8eda",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_390292fc-monarch-overall-work.md",
+      "bytes": 567,
+      "sha256": "1fe6a6e2f5281208771887cc98a2f34e4119f50ba780f5f93b9a7d1687c9a375",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_6101616c-monarch-overall-work.md",
+      "bytes": 612,
+      "sha256": "eb03bb573d695979442dbbb275c4021080db78c7c3ec07ae660f5d2c42835875",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_673ff833-monarch-overall-work.md",
+      "bytes": 540,
+      "sha256": "9b62d8655cd4486b2bf299d311798147a571dab808919ef7b9e74e3def711269",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_861e9627-monarch-overall-work.md",
+      "bytes": 540,
+      "sha256": "a2fae5c7573701fc53d969819f1012ba22b9f3c602bf4c5aee9a55bba5087214",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_8bfd4d0e-monarch-overall-work.md",
+      "bytes": 542,
+      "sha256": "ff07e9b4961225a09f6619156bfa02be0859271267a959091d53317c0c5e6dce",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_8f432cac-monarch-overall-work.md",
+      "bytes": 540,
+      "sha256": "af40c4bad6863b33c7dd88ade72e56169cc5b57fa7cecc9d3989c0fac2002b7e",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_9960286a-monarch-overall-work.md",
+      "bytes": 555,
+      "sha256": "66ecb273a8309a1a40c798c598dd52a1b81921c08b02f8d63077ed22426ba2c1",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_ba8d901e-monarch-overall-work.md",
+      "bytes": 588,
+      "sha256": "861b492d72acf63e6d3a4e6d7ff7e229b50a6e01c668d192d5ce6132d78d07dc",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-arena_c678cc81-monarch-overall-work.md",
+      "bytes": 512,
+      "sha256": "93eeda80110d2ea2342538e30321e7e04390d6e666d8de77e104ef7591a50b92",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branch-main.md",
+      "bytes": 517,
+      "sha256": "3173c5d236128ee7fc5a8ea53bdf0f317c8e85eb2c6401ea45bc84e70e6d2ee1",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/branches.md",
+      "bytes": 1205,
+      "sha256": "dd98c390440d996e85cedf8fa8a7dd87c89e0b7873d3d9741aa32bdf8513cd78",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/ems-archive-context.md",
+      "bytes": 1270,
+      "sha256": "bdcb7582988bcc1146aeac95d20a792df295c45dc1eaecd605d9473e4114b3fb",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/external-app-snapshot.md",
+      "bytes": 593,
+      "sha256": "810f8b8be05df5c2f1c871cc7ec28b044f6fdc060acc2ba7b137589de477d514",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/monarch-cam-v3.md",
+      "bytes": 500,
+      "sha256": "837576f3b4199c1d4008ade7a70341a47b89a36880d2d4f3fc927dee8180a22a",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/monarch-cam-v4.md",
+      "bytes": 650,
+      "sha256": "c4c809647f230f7f7e389e2d0c10645eec6f00fa8d64cceeaff9769e926c906d",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/monarch-cam-v5.md",
+      "bytes": 955,
+      "sha256": "90a70cea961117e2b6be3d8fb3099e59d2c1c8c70a4c7a191be5bb0b7af40402",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/monarch-cam-v6-intent.md",
+      "bytes": 1075,
+      "sha256": "980b21ac51523a1322827bb3d8de5cf51c109f3d0d12b3125119d74c1ec1f9fa",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/older-workflows.md",
+      "bytes": 1437,
+      "sha256": "ca3c848f9a0cbdff8c648bd7aca05b821eb9539eb7f16ad0b4769aed74917462",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/sessions/screenshot-sidebar-20261108.md",
+      "bytes": 664,
+      "sha256": "1f31495f464ea7d38fa226f8b1d420468a1437bb9db4927d5e00e81032888f1e",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/CREDITS.md",
+      "bytes": 2210,
+      "sha256": "980bdc05d7f5ae0cd00737e89705bb7db50db1b07daea5a79be79bd07a3aea2e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/RANKING_V5_PLAN_AND_METADATA.md",
+      "bytes": 1756,
+      "sha256": "475602d7cda2add42501d3b551969a22e6d3007f41de74e773a42d77b7652d6f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/RANKING_V5_UPLOAD_METADATA.md",
+      "bytes": 760,
+      "sha256": "96ab53ec4d2a3228b9f613f45eb2b7e1f958148b7a4a6a46ac82cccdcb058942",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/RENDER_TRIGGER_V5.md",
+      "bytes": 123,
+      "sha256": "2be6525189d20b7563db2aeecc9284587efd85fc37a760f99f98fd1a7dfb2481",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/build_ranking_audio_raw_v5.py",
+      "bytes": 17389,
+      "sha256": "5862391dd76c63c1242ff27efe51074bd311de88604c4b669d897d629ff1f2ae",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/candidate_audio_probe.py",
+      "bytes": 18344,
+      "sha256": "7871cc601b5a8dbb67eabb65ecd1a841529cdf83a7753fd05275abea70758c22",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/candidate_sources.json",
+      "bytes": 16864,
+      "sha256": "737a7caa06f30390f4d72db0923b6a14be8a48c5b52992a17efad2192d677cd7",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/ranking_short_spec.json",
+      "bytes": 3828,
+      "sha256": "352e470a984bd5ce3f1a67bef42dce25432d896f25a3136e151b074fc91545bc",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/ranking_v5_metadata.json",
+      "bytes": 3794,
+      "sha256": "5ce1a12e287078883ed763228fe1d240f146b1f22de40d83694db5b39d460f61",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/render_ranking_visual_raw_v5.py",
+      "bytes": 18802,
+      "sha256": "d8bf5c2e7a424024f174b95c105c75ec69f69baecd99353f1a963f94440e5230",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/UPLOAD_METADATA_RANKING_V5.txt",
+      "bytes": 958,
+      "sha256": "521af4d3da99af5d2c59ad167263e7c0f593f3e1de76225876b2a445487663e4",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/audio_qc.json",
+      "bytes": 5666,
+      "sha256": "c15bc6433ae9624adb7f34b809aecb78b7f5682cc9f397f8371cbb609f05aef7",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/exact_thumbnail_manifest.json",
+      "bytes": 2705,
+      "sha256": "45c0b7f2b7dca68b0f8894f681ececea825c9c96913d2560a53681b569d18bce",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/native_audio_ledger.json",
+      "bytes": 11350,
+      "sha256": "c8d616a57a2ebf7535775bc4775b849f91b1a4e42897db50195a58f94108e699",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/qc_summary.json",
+      "bytes": 5267,
+      "sha256": "34c967c992a97b74a8a73cd106e0e872bd5010575d9a1a813d5765b83debf733",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/review-manifest.json",
+      "bytes": 8017,
+      "sha256": "cd1686d9a151f179494448779df3f0772fc927dc9e5b702ebb6dee26a85d9a12",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/selected_windows.json",
+      "bytes": 10791,
+      "sha256": "3d3372067de465f7f52ba9940830bc02cbf5edaeee95e8c8328e9be5fa38d2d1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/source_audio_audit.json",
+      "bytes": 26916,
+      "sha256": "f7a6466d3ebe400f6c37b451d16630893ee67de49ffd14e8db0b1001abf88587",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/source_video_ledger.json",
+      "bytes": 9028,
+      "sha256": "f3f4db20d4f6ed1a16e85e6eaac6ce379dea0f6cb36f677596824526552e9c8f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/source_windows.json",
+      "bytes": 773,
+      "sha256": "318d6d8234f1a996ecfa76dcca009b68b97679d279d80f4a582949e4587a91a5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/technical_qc.json",
+      "bytes": 7019,
+      "sha256": "7d1ae4eafe7e2f71be4d48554c09aea78c2d55a8c85fcb228803ba0939f3b444",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/verified_sources.json",
+      "bytes": 81592,
+      "sha256": "4eeedb0fe30b736956c01019d3dde5aecbaa78701cb3f23b2a324e5f7b9a5429",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/visual_edit_ledger.json",
+      "bytes": 6986,
+      "sha256": "593cb6df7104007f0aff01eec90083fce96eecee554546123dd287ac0548fafa",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/visual_review_lock.json",
+      "bytes": 4991,
+      "sha256": "52d5e94b06b78c02362c05dc6e2a51dbe8de9d9baf5123582fba81f77aa9a9d1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/review/visual_v5_qc.json",
+      "bytes": 1869,
+      "sha256": "387d58743636be70dbd3908246aad32857f1caa34b720d3364b40a46f4147e5d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/select_moments.py",
+      "bytes": 8783,
+      "sha256": "a87fd3451e14199edb4809009ee2046f8a9654ec5be53a4312bac89d5df3dc62",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/source_audio_audit.py",
+      "bytes": 6332,
+      "sha256": "20ceb76d0d1edf396aaa36f652cdf8e5c1316948a6f0e57d2f7fc00a31028a6e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/source_recon_ranking.py",
+      "bytes": 13543,
+      "sha256": "febd47355736c70aa92635586e127d9afe95fbdc1de6ea3bf70c41c2b9ec3dab",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/technical_qc_raw_v5.py",
+      "bytes": 9304,
+      "sha256": "7fd431c73eca876a924cfba4144016f2703e6d55d87aa8240fd030a7038d2c27",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/validate_raw_v5.py",
+      "bytes": 7434,
+      "sha256": "8d08249bb81e428a92e72eabe96f810dd3b07cc24e18cd5183b80cdd93a9950c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v5/verify_sources.py",
+      "bytes": 7082,
+      "sha256": "4057420b44810ef552b8d8c6177a33e5da405833110cb5aaf534bab309ed7b3c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "tools/continuity.py",
+      "bytes": 42023,
+      "sha256": "43005c2d665251745d2128b6f9b31ee07e8387983b6ac2f411849ef1e542c104",
+      "evidence_level": "archive_metadata"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "video": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM.mp4",
+  "platform": "youtube_shorts",
+  "language": "en",
+  "status": "upload_ready_clean_premium",
+  "virality_note": "Design objective only; no view, retention, revenue, subscribe, like or hypnosis result is guaranteed.",
+  "design_basis": "New topic, new public-domain USFWS clip, clean premium minimal-caption picture and the measured premium sound design; original and PREMIUM editions preserved.",
+  "primary": {
+    "title": "They Don't Flirt. They Choreograph.",
+    "description": "This isn't a fight. It's a dance audition for a lifelong partner.\n\nLaysan albatrosses bow, clack bills and point at the sky. Young birds practice these dozens of ritualized moves for years before forming a pair bond that lasts for life. Yes, USFWS literally calls them dance parties.\n\nPublic-domain footage by Ann Bell / U.S. Fish & Wildlife Service, filmed on Midway Atoll. This is a general species explanation, not a claim about these two birds' history.\n\nFootage: Laysan Albatross Mating Dance 2016, USFWS (public domain).\nMusic: Little, happy tune - 22.10.2015 — cabled_mess (CC0).\nSFX: reelworldstudio, jalastram, Alex_hears_things and Rizzard (CC0).\nNarration: AI-generated English voice.\n\n#Shorts #Birds #Wildlife",
+    "visible_hashtags": [
+      "#Shorts",
+      "#Birds",
+      "#Wildlife"
+    ],
+    "tags": [
+      "Laysan albatross",
+      "albatross dance",
+      "courtship dance",
+      "funny birds",
+      "bird dance",
+      "Midway Atoll",
+      "USFWS",
+      "public domain footage",
+      "wildlife short",
+      "bird behavior",
+      "nature comedy",
+      "albatross",
+      "Monarch Cam",
+      "dance party"
+    ],
+    "cover_reference": "review/cover.jpg",
+    "cover_text": "THIS IS A JOB INTERVIEW.",
+    "related_video_link": "none",
+    "hashtags_in_title": false,
+    "cover_ab_reference": "review/cover_WOULD_YOU_PASS.jpg",
+    "cover_ab_text": "WOULD YOU PASS?",
+    "cover_hook_reference": "review/cover_hook.jpg"
+  },
+  "comments": {
+    "pinned": "Which move is your favorite: the bow, the bill clack, or the sky point?",
+    "clarifying": "This is general Laysan albatross courtship behavior. The clip doesn't tell us these two birds' individual history or whether they are already a pair."
+  },
+  "rejected": [
+    "Bear/car/handle/door claims",
+    "25M views / previously fed bear",
+    "Comment BIRD for part 2",
+    "Any pre-upload viral claim",
+    "Any claim about these two birds' relationship history"
+  ],
+  "measurement": [
+    "stayed_to_watch",
+    "engaged_views",
+    "average_percentage_viewed",
+    "average_view_duration",
+    "loops",
+    "likes",
+    "comments",
+    "shares",
+    "saves",
+    "subscribers_gained",
+    "traffic_source"
+  ],
+  "guardrails": [
+    "No bear/car/handle/door/food-reward claim",
+    "No claim about these individuals' history",
+    "No generated bird vocalisation or attack",
+    "No unrelated viral clip",
+    "No nonexistent related-video link",
+    "No virality guarantee",
+    "No human full-motion review, native-audio listening or human approval claim",
+    "No 3x, subscribe, like, hypnosis or virality guarantee",
+    "No cluttered on-screen text; minimal lower-third captions only",
+    "No cheap neon overlays, progress bars, badges or persistent labels"
+  ],
+  "full_plan": "DANCE_PLAN_AND_METADATA.md",
+  "enhancement": {
+    "original_preserved": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4",
+    "premium_preserved": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_PREMIUM.mp4",
+    "objective": "Clean premium professional look: minimal captions, no clutter, deep-navy/ivory/teal palette; measured premium sound preserved.",
+    "measured_not_human": "Objective, model-assisted and contact-sheet checks are evidence, not human listening, retention or a virality guarantee.",
+    "sound_targets": [
+      "fix_salient_hit_density",
+      "widen_stereo_image",
+      "add_sub_weight",
+      "deharsh_sfx",
+      "smooth_envelopes"
+    ],
+    "visual_targets": [
+      "minimal_captions_only",
+      "no_top_headlines",
+      "no_badges",
+      "no_progress",
+      "clean_palette",
+      "cinematic_grade",
+      "exact_text_thumbnails"
+    ]
+  }
+}

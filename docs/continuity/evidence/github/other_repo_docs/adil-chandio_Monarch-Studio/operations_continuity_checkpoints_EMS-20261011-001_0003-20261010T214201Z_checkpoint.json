@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "checkpoint_id": "0003-20261010T214201Z",
+  "created_at": "2026-10-10T21:42:01Z",
+  "summary": "Local Git and Drive disaster recovery are secured; Notion, Linear and Google Docs are synchronized; the WF-01 authority misidentification was caught by a fresh Drive lookup and corrected append-only everywhere. The only remaining external dependency is a user-supplied GitHub repository URL/authorization.",
+  "next_action": "User supplies the GitHub repository URL (and confirms write access); then set origin, push main and tag continuity-v1, mark GitHub synced in the latest outbox, and complete/archive EMS-20261011-001.",
+  "active_state": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-001",
+    "status": "waiting_external",
+    "title": "Style Library + Crash-Proof Continuity System v1",
+    "style_id": null,
+    "goal": "Create separately named permanent editing-style libraries, keep only one running task in workflows/current, preserve exact visible chat/actions and resume state, checkpoint at least hourly, and synchronize evidence to GitHub, Drive, Notion, Linear and Google Docs without silent omissions.",
+    "acceptance_criteria": [
+      "Every permanent editing style has its own complete named folder and knowledge index.",
+      "workflows/current contains only the single running task and an exact next action.",
+      "Refresh/restart recovery continues from a verified hash-chained checkpoint rather than restarting.",
+      "Hourly/event-driven checkpoint packages and five-platform sync ledgers exist.",
+      "Repository, tests, authorities and remote records validate without unrecorded drift."
+    ],
+    "started_at": "2026-10-10T21:27:20Z",
+    "updated_at": "2026-10-10T21:42:01Z",
+    "checkpoint_sequence": 3,
+    "event_sequence": 22,
+    "journal_head": "d1ee9b3cb2158b877d6e49feee19fd60e0c11a905236d25c9949bc48f8115a54",
+    "last_checkpoint": "2026-10-10T21:42:01Z",
+    "last_checkpoint_path": "operations/continuity/checkpoints/EMS-20261011-001/0002-20261010T213606Z",
+    "next_action": "User supplies the GitHub repository URL (and confirms write access); then set origin, push main and tag continuity-v1, mark GitHub synced in the latest outbox, and complete/archive EMS-20261011-001.",
+    "running_processes": [],
+    "remote_sync": {
+      "github": "pending",
+      "google_docs": "pending",
+      "google_drive": "pending",
+      "linear": "pending",
+      "notion": "pending"
+    }
+  },
+  "journal_event": {
+    "schema_version": 1,
+    "task_id": "EMS-20261011-001",
+    "seq": 22,
+    "timestamp": "2026-10-10T21:42:01Z",
+    "kind": "checkpoint",
+    "actor": "continuity",
+    "content": "Local Git and Drive disaster recovery are secured; Notion, Linear and Google Docs are synchronized; the WF-01 authority misidentification was caught by a fresh Drive lookup and corrected append-only everywhere. The only remaining external dependency is a user-supplied GitHub repository URL/authorization.",
+    "content_sha256": "08e4dd1c989fc1b0b4820d1300818bbc1b4a7a98991bbaa523f8fc254f43fcff",
+    "metadata": {
+      "sequence": 3,
+      "next_action": "User supplies the GitHub repository URL (and confirms write access); then set origin, push main and tag continuity-v1, mark GitHub synced in the latest outbox, and complete/archive EMS-20261011-001.",
+      "status": "waiting_external"
+    },
+    "prev_event_sha256": "cc327538d0c7a999019db156d121e63c58d437ce74ccabd53d51160e70303947",
+    "event_sha256": "d1ee9b3cb2158b877d6e49feee19fd60e0c11a905236d25c9949bc48f8115a54"
+  },
+  "journal_head": "d1ee9b3cb2158b877d6e49feee19fd60e0c11a905236d25c9949bc48f8115a54",
+  "git": {
+    "initialized": true,
+    "head": "945c2998de1b054cddcd03fd83272adf30346300",
+    "branch": "main",
+    "status": [
+      "M START_HERE.md",
+      "M operations/continuity/outbox/EMS-20261011-001/0002-20261010T213606Z/SYNC.json",
+      "M operations/continuity/remote-targets.json",
+      "M workflows/current/ACTIVE_TASK.json",
+      "M workflows/current/JOURNAL.jsonl",
+      "M workflows/current/RESUME.md",
+      "?? operations/continuity/recovery-bundles.json"
+    ],
+    "remotes": [],
+    "submodules": [
+      "-756290289742535eb0ac3817548f152e9759cc70 vendor/awesome-opus5-5-videos",
+      "-f8b2552d1c4fd1ae5051dae3786719dc5bdb3ff8 vendor/effectcraft"
+    ]
+  },
+  "payload_inventory": [
+    {
+      "path": "workflows/current/payload/USER_REQUEST.txt",
+      "size": 2925,
+      "sha256": "c09afb13fcee5328be0a558f2a1a479fce639042b3cec2ea92255591389ee3e4"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "query": "quick soft whoosh clean",
+  "earshot_find": {
+    "summary": "Best moments for 'quick soft whoosh clean' in selected_whoosh.wav (kind=event; searched all 0.5 s: 1 windows of ~0.5 s (edges snapped to the sound) to locate events, none returned + 3 onset-based candidates (one stage)): 0:00.11-0:00.15 (0.04 s stroke, z +1.6 no match, head cut, tail cut); 0:00.01-0:00.10 (0.09 s stroke, z +0.8 no match, head cut, tail cut). start/end are sample trims in seconds (strokes / events start 5 ms before the attack; windows are snapped to the sound; a 'head cut' / 'tail cut' trim cuts into a sound). Even the best segment is not a match: the recording may not contain this sound.",
+    "path": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/short_ranking_v3/selected_whoosh.wav",
+    "query": "quick soft whoosh clean",
+    "query_kind": "event",
+    "query_kind_score": 0.298,
+    "duration": 0.5,
+    "n_candidates": 3,
+    "n_windows": 0,
+    "n_events": 3,
+    "segments": [
+      {
+        "start": 0.111,
+        "end": 0.155,
+        "duration": 0.044,
+        "score": 1.15,
+        "z": 1.65,
+        "cosine": 0.172,
+        "verdict": "no match",
+        "kind": "stroke",
+        "peak_dbfs": -26.6,
+        "head_db": -1.6,
+        "tail_db": -0.1,
+        "cut": "head cut, tail cut"
+      },
+      {
+        "start": 0.011,
+        "end": 0.102,
+        "duration": 0.091,
+        "score": 0.36,
+        "z": 0.86,
+        "cosine": 0.113,
+        "verdict": "no match",
+        "kind": "stroke",
+        "peak_dbfs": -30.0,
+        "head_db": -5.4,
+        "tail_db": -3.1,
+        "cut": "head cut, tail cut"
+      }
+    ]
+  },
+  "selected_source_range": {
+    "start": 0.0,
+    "end": 0.5,
+    "method": "measured global peak fallback"
+  },
+  "processed_excerpt": {
+    "source_start": 0.0,
+    "source_end": 0.5,
+    "duration": 0.5,
+    "local_peak_seconds": 0.2674,
+    "edge_fades": true,
+    "generated_audio": false
+  },
+  "premium": {
+    "highpass_hz": 90,
+    "lowpass_hz": 5200,
+    "short_room_mix": 0.12,
+    "short_room_decay_ms": 140,
+    "edge_fade_in_s": 0.014,
+    "processed_duration_s": 0.5,
+    "generated_audio": false,
+    "room_is_original_effect": true
+  }
+}

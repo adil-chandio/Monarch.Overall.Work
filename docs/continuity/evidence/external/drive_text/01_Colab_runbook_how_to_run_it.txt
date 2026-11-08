@@ -1,0 +1,104 @@
+﻿01 · Colab runbook — H3 chalane ka practical tareeqa
+Self-contained. Har step Colab me copy-paste ya styles/minimax-h3-video/colab/MONARCH_H3_COLAB.ipynb open karke chalta hai.
+Pehle sach: Colab par kya chalega, kya nahi
+Route
+	Kya chalta hai
+	Colab me possible?
+	Clip ka waqt
+	Kharcha
+	A. API control-room (recommended)
+	Poora H3 (768P + 2K + native audio + Ref2VA)
+	✅ Free T4/CPU par bhi
+	30 s – 4 min per clip (server par)
+	$0.08–0.13 / second
+	B. Local weights, ComfyUI pruned INT8
+	768P only, audio included
+	⚠️ sirf Pro A100 80GB / G4 par, ~42 GB download
+	~15–40 min per 5 s clip, disconnect risk
+	Colab compute units
+	C. Local weights, official BF16 / SGLang
+	768P only
+	❌ nahi — ~100–128 GB resident, 4×H100 class
+	—
+	—
+	
+
+Kyun: H3-Omni-Transformer 33B + Qwen3-VL-32B encoder + VAEs = ~100–128 GB BF16 resident. Free Colab = 16 GB VRAM, Pro = 40 GB (A100). Is liye Colab ko "GPU" ke tor par model chalane ke bajaaye "control room" banao: asli generation hosted API par hoti hai, Colab prompt banata hai, jobs queue karta hai, result Drive me rakhta hai, ffmpeg se assemble karta hai.
+
+
+Yeh koi compromise nahi — 2K output sirf isi route se milta hai (Regenerate-2K closed-source hai).
+Step 0 — account + key (ek dafa)
+1. MiniMax platform (global): https://platform.minimax.io → sign up → Account → API Keys → key banao. CN account: https://platform.minimaxi.com. Balance minimum $5–10 top-up (video prepaid hai).
+2. Colab kholo: https://colab.research.google.com → File → Upload notebook → styles/minimax-h3-video/colab/MONARCH_H3_COLAB.ipynb (repo clone ke andar se).
+3. Colab ke left sidebar me 🔑 Secrets → "Add new secret":
+   * Name: MINIMAX_API_KEY
+   * Value: aapki key
+   * Notebook access: ON (warna userdata.get fail hoga)
+4. Runtime: Runtime → Change runtime type → CPU (Route A ke liye GPU ki zaroorat nahi; GPU lagane se sirf units zaya hongi). ffmpeg assemble karna hai to CPU runtime kaafi hai.
+Step 1 — notebook cells (order me)
+Cell
+	Kya karta hai
+	1–2
+	environment check: Python, GPU presence, aur batata hai ke local route available hai ya nahi
+	3
+	install (requests, pillow) + key load + OUT_DIR setup + Drive mount (optional)
+	4–5
+	Monarch prompt templates + build_prompt() (t2va / i2va / ref2va)
+	6
+	API helpers: create_task, poll, download, run_shot, estimate_cost
+	7
+	shot list (JSON) edit karo — 3 ready examples hain
+	8
+	cost gate: DRY_RUN=True rehne do, estimate dekho, phir CONFIRM_SPEND=True
+	9
+	jobs submit → receipts JSON + mp4 Drive me
+	10
+	retry-failed + status table
+	11
+	ffmpeg concat → ek master mp4
+	12
+	local-weights route ka honest note + links
+	Step 2 — Drive (optional lekin recommended)
+Cell 3 me Drive mount ho jata hai. Output path:
+
+
+MyDrive/MONARCH STUDIO/WF-06 · MiniMax H3/shots/<run-id>/shot-01.mp4
+
+
+MyDrive/MONARCH STUDIO/WF-06 · MiniMax H3/shots/<run-id>/receipts.json
+
+
+Colab disconnect ho jaye to mp4 pehle se Drive me hoga, dobara paisa nahi lagega. Note: Colab ka local disk 12 ghante me khatam ho jata hai, MP4 wahin chhodna matlab nuqsan.
+Step 3 — reference images (Monarch face) ke liye
+Ref2VA ko images chahiye, aur API image_url me public URL chahta hai (body ≤ 64 MB, base64 allowed magar discourage kiya gaya hai). Teen options:
+
+
+1. Base64 data URL (notebook helper data_url() karta hai) — 1–3 MB ke crop ke liye theek, sabse aasan.
+2. Drive file → "Anyone with the link" — direct download link https://drive.google.com/uc?export=download&id=<ID> (kuch cases me MiniMax ka server ise fetch nahi kar pata; try karke dekho).
+3. Public host (best): HF Spaces/Datasets, Cloudflare R2, S3 presigned URL. Bade video/audio refs ke liye yahi karo.
+
+
+Face reference set (WF-04 authority se): front hero shot + 3/4 + profile + one expression. H3 ko ≤9 images dene hain, pehli 5 free. Har shot me same 3–4 images do, taake identity consistent rahe.
+Step 4 — "local weights Colab me" (Route B) ka sach
+Agar phir bhi local chalana hai:
+
+
+1. Colab Pro / Pro+, runtime A100 80GB (ya G4). Free T4 par 42 GB download + offload ka koi matlab nahi.
+2. Disk ~100 GB milti hai: pruned INT8 set (~42 GB) + encoder + VAE fit ho jate hain, magar RAM offload ke liye --lowvram/layer-wise offload lazmi hai (2× RTX 5090 ke 26 GB/GPU profile ka analogue).
+3. ComfyUI + official R2V/T2V template, ya diffusers ModularPipeline + enable_model_cpu_offload().
+4. Expect: pehla run ~35–60 min (download + load), phir 5 s clip 15–40 min, Colab idle-disconnect 90 min.
+5. 2K nahi milega. Audio 768p me native milta hai.
+6. Colab TOS: heavy/long-lived compute aur background abuse allowed nahi — session band, work lost. Is liye Route B ko production default kabhi na banao; sirf eksperiment.
+
+
+Verified alternative jo Colab se behtar hai: apna RTX 5090/4090 box + pruned ComfyUI workflow, ya RunPod/Vast par 1× A100 80GB hourly rent (self-host BF16 ke liye 4×H100 lazmi, ~$8–12/hr).
+Step 5 — delivery gates (repo convention)
+Har H3 batch ke baad:
+
+
+1. receipts.json me har shot ka: task_id, model, resolution, duration, ratio, usage.output_seconds, content.url, local md5.
+2. Cost receipt: estimate vs actual (usage.output_seconds × rate).
+3. Identity check: master board ke saath side-by-side (WF-04 ka locked face vs output frame).
+4. Audio check: 32 kHz stereo, dialogue language sahi, music/soundscape mix sane.
+5. Format check: ffprobe — fps 24, resolution, stereo, duration.
+6. Drive upload + md5 + records/ me entry; phir workflows/current promote karo continuity.py complete se.

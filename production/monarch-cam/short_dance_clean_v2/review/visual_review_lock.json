@@ -1,0 +1,191 @@
+{
+  "status": "APPROVED_FOR_RENDER",
+  "topic": "Laysan albatross courtship dance",
+  "source": "Laysan Albatross Mating Dance 2016 \u2014 Ann Bell / U.S. Fish & Wildlife Service (public domain)",
+  "review_basis": "Coarse 1-second and fine 0.5-second contact sheets from source_recon_dance.py were viewed; exact source windows were selected for the hook, bow, bill-clack, sky-point, synchronized freeze, dance-party wide, replay and loop. V2 adds filmic grade, halation, cross-dissolves and tracked captions without extra text.",
+  "approved_by": "Arena agent, contact-sheet visual review",
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "note": "No human full-motion review or human listening to native audio occurred; delivered AAC is measured by nine gates, technical QC and model-assisted review.",
+  "v2_visual_enhancements": [
+    "minimal_captions_only",
+    "no_top_headlines",
+    "no_badges",
+    "no_dance_card",
+    "no_progress",
+    "no_footer",
+    "no_macro_inset",
+    "no_source_labels",
+    "no_brand_watermark",
+    "no_cut_flashes",
+    "v2_cinematic_grade",
+    "v2_halation_bloom",
+    "v2_scene_crossfades",
+    "v2_tracked_captions",
+    "v2_motion_drift",
+    "deep_navy_ivory_teal_palette",
+    "seamless_loop_crossfade",
+    "exact_text_thumbnails"
+  ],
+  "v2_sound_enhancements": [
+    "salience_layering",
+    "softer_support_hits",
+    "panned_sfx",
+    "short_room",
+    "voice_aware_presence_dip",
+    "stereo_widening",
+    "sub_bloom",
+    "pchip_envelopes",
+    "gentle_voice_deharsh",
+    "v2_stereo_width_polish",
+    "v2_room_polish",
+    "v2_sub_weight",
+    "v2_voice_dip_polish",
+    "v2_premaster_ceiling_polish"
+  ],
+  "exact_timecodes": [
+    {
+      "timeline_in": 0.0,
+      "timeline_out": 1.4,
+      "source_in": 0.0,
+      "rate": 1.0,
+      "id": "hook_pair",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 1.4,
+      "timeline_out": 2.9,
+      "source_in": 2.0,
+      "rate": 1.0,
+      "id": "bow_intro",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 2.9,
+      "timeline_out": 4.4,
+      "source_in": 6.0,
+      "rate": 1.0,
+      "id": "sky_intro",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 4.4,
+      "timeline_out": 5.9,
+      "source_in": 33.5,
+      "rate": 1.0,
+      "id": "midway_pair",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 5.9,
+      "timeline_out": 7.3,
+      "source_in": 45.0,
+      "rate": 1.0,
+      "id": "step_bow",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 7.3,
+      "timeline_out": 8.8,
+      "source_in": 11.8,
+      "rate": 1.0,
+      "id": "step_clack",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 8.8,
+      "timeline_out": 10.4,
+      "source_in": 38.0,
+      "rate": 1.0,
+      "id": "step_sky",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 10.4,
+      "timeline_out": 12.0,
+      "source_in": 13.5,
+      "rate": 0.0,
+      "id": "sync_freeze",
+      "layout": "mirror_split"
+    },
+    {
+      "timeline_in": 12.0,
+      "timeline_out": 13.5,
+      "source_in": 24.5,
+      "rate": 1.0,
+      "id": "dance_party",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 13.5,
+      "timeline_out": 15.1,
+      "source_in": 34.0,
+      "rate": 1.0,
+      "id": "pair_bond",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 15.1,
+      "timeline_out": 16.8,
+      "source_in": 48.5,
+      "rate": 1.0,
+      "id": "punchline",
+      "layout": "footage"
+    },
+    {
+      "timeline_in": 16.8,
+      "timeline_out": 18.3,
+      "source_in": 50.0,
+      "rate": 0.5,
+      "id": "slow_replay",
+      "layout": "replay"
+    },
+    {
+      "timeline_in": 18.3,
+      "timeline_out": 24.0,
+      "source_in": 0.0,
+      "rate": 0.75,
+      "id": "loop_question",
+      "layout": "loop"
+    }
+  ],
+  "dance_steps": [
+    {
+      "number": "01",
+      "title": "BOW",
+      "subtitle": "Dip the head",
+      "time": 5.9
+    },
+    {
+      "number": "02",
+      "title": "BILL CLACK",
+      "subtitle": "Tap and chatter",
+      "time": 7.3
+    },
+    {
+      "number": "03",
+      "title": "SKY POINT",
+      "subtitle": "Look up together",
+      "time": 8.8
+    }
+  ],
+  "cue_frames": [
+    2,
+    42,
+    87,
+    132,
+    177,
+    219,
+    264,
+    312,
+    360,
+    405,
+    453,
+    504,
+    549,
+    570,
+    600,
+    660
+  ],
+  "cover_frame_time": 0.07
+}

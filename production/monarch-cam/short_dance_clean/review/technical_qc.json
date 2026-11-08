@@ -1,0 +1,94 @@
+{
+  "file": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM.mp4",
+  "sha256": "708c1960893ce238017e11b871e44f1d451ac0c941936a74a0b895ddc09edb89",
+  "bytes": 15788498,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "30/1",
+        "nb_frames": "720",
+        "nb_read_frames": "720"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "1126",
+        "nb_read_frames": "1125"
+      }
+    ],
+    "format": {
+      "duration": "24.000000",
+      "size": "15788498"
+    }
+  },
+  "decoded_audio_samples": 1152000,
+  "decoded_sample_rate": 48000,
+  "loudness": {
+    "input_i": "-14.33",
+    "input_tp": "-3.05",
+    "input_lra": "3.10",
+    "input_thresh": "-24.99",
+    "output_i": "-13.76",
+    "output_tp": "-2.24",
+    "output_lra": "2.90",
+    "output_thresh": "-24.43",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.24"
+  },
+  "click_runs": [],
+  "clipping_runs": 0,
+  "decoded_sample_peak_dbfs": -3.0746,
+  "checks": {
+    "duration_24s": true,
+    "frames_720": true,
+    "vertical_1080x1920": true,
+    "fps_30": true,
+    "audio_48k_stereo": true,
+    "integrated_loudness": true,
+    "true_peak": true,
+    "no_sample_clipping_runs": true,
+    "no_click_runs": true
+  },
+  "passed": true,
+  "clean": {
+    "separate_from_original_and_premium": true,
+    "sound_enhancements": [
+      "salience_layering",
+      "softer_support_hits",
+      "panned_sfx",
+      "short_room",
+      "voice_aware_presence_dip",
+      "stereo_widening",
+      "sub_bloom",
+      "pchip_envelopes",
+      "gentle_voice_deharsh"
+    ],
+    "visual_enhancements": [
+      "minimal_captions_only",
+      "no_top_headlines",
+      "no_badges",
+      "no_dance_card",
+      "no_progress",
+      "no_footer",
+      "no_macro_inset",
+      "no_source_labels",
+      "no_brand_watermark",
+      "no_cut_flashes",
+      "cinematic_grade",
+      "deep_navy_ivory_teal_palette",
+      "seamless_loop_crossfade",
+      "exact_text_thumbnails"
+    ]
+  }
+}

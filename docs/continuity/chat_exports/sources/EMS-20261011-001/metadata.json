@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "EMS-20261011-001",
+  "title": "EMS-20261011-001 partial verbatim chat transcript",
+  "kind": "transcript",
+  "source": "Google Drive EMS-20261011-001-history-archive.tar.gz",
+  "source_id": "1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH",
+  "source_url": "https://drive.google.com/file/d/1xXrGmdFpYZwRrDEZObqUynvwcWY8anmH/view?usp=drivesdk",
+  "space": "ops",
+  "branch": "arena/390292fc-monarch-overall-work",
+  "evidence_level": "verbatim_transcript",
+  "coverage": "partial",
+  "notes": "3 verbatim user messages, 0 assistant messages; exact transcript fragment, not a complete chat.",
+  "imported_at": "2026-11-08T16:13:54Z",
+  "parser": "jsonl",
+  "message_count": 3,
+  "role_counts": {
+    "user": 3
+  },
+  "warnings": [
+    "JSON parse failed (Extra data: line 2 column 1 (char 3074)); trying JSONL/text."
+  ],
+  "raw_path": "docs/continuity/chat_exports/sources/EMS-20261011-001/raw/CHAT_TRANSCRIPT.jsonl",
+  "raw_sha256": "f35090effb464fa09ca3fa45f417ccfce2a13e3da9e411d96d04b42b1b7dcd95",
+  "raw_bytes": 6948,
+  "normalized_path": "docs/continuity/chat_exports/sources/EMS-20261011-001/normalized.jsonl",
+  "normalized_sha256": "6699ba497f41bbf206d53f87de1e0ea45dac260a04f240a61f6a838c75f1892e",
+  "normalized_bytes": 6256
+}

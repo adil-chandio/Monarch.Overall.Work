@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "project_id": "WE-20261017-001-R3",
+  "revision": 3,
+  "status": "delivered_and_drive_verified",
+  "revision_scope": "Voice-only replacement; R2 visuals unchanged.",
+  "original_master_unchanged": true,
+  "voice": {
+    "voice_id": "voice-01",
+    "description": "User-auditioned and selected feminine Urdu-Pakistani narration voice",
+    "script": "Same approved Easy Urdu-English script as R2",
+    "duration_seconds": 36.44,
+    "start_seconds": 0.2,
+    "end_seconds": 36.64,
+    "time_stretch": false
+  },
+  "delivered_file": {
+    "name": "WE-20261017-001-R3-user-host-girl-voice-40s-9x16.mp4",
+    "drive_file_id": "1CgPSrY95qAq51XNIq89zX_wOGorxO3_E",
+    "web_view_link": "https://drive.google.com/file/d/1CgPSrY95qAq51XNIq89zX_wOGorxO3_E/view?usp=drivesdk",
+    "mime_type": "video/mp4",
+    "size_bytes": 19968328,
+    "md5": "3a81d7d0087623d327237929993d2d23",
+    "sha256": "0ae23e0ed1b5fb63a8bde44196ec93420c81a6a4e3cf1cb63adb272bb4b6d78f",
+    "local_path": "delivery/women-empowerment-user-host-v3-girl-voice-40s-9x16.mp4"
+  },
+  "technical": {
+    "duration_seconds": 40,
+    "resolution": "1080x1920",
+    "fps": 30,
+    "frames": 1200,
+    "video": "H.264 High, yuv420p",
+    "audio": "AAC stereo, 48 kHz",
+    "full_decode": true,
+    "faststart": true,
+    "audio_peak_dbfs": -0.75,
+    "audio_rms_dbfs": -18.43,
+    "caption_policy": "No caption pills, no active-word strip, no social handle/logo, no generic end card."
+  },
+  "visual_comparison": {
+    "reference": "WE-20261017-001-R2",
+    "frames_compared": 1200,
+    "differing_frames": 0,
+    "pixel_identical": true
+  },
+  "review": {
+    "visual_review_approved": true,
+    "technical_pass": true,
+    "human_listening_performed": false,
+    "word_level_asr_performed": false,
+    "note": "No human listening or ASR was performed; technical audio decode and levels were checked."
+  },
+  "privacy": {
+    "original_selfie_separately_uploaded": false,
+    "standalone_eye_crop_uploaded": false,
+    "note": "Only the rendered video contains the exact-source eye crop in its closing shot."
+  },
+  "destination": {
+    "folder_id": "1sBCu6SmXPBGeQS7hxrAOjMr68cJ05ek7",
+    "description": "Existing accessible WF-05 project folder; newly mentioned Shared Drive was not visible to this connected account."
+  }
+}

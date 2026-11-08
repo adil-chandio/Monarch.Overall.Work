@@ -1,0 +1,210 @@
+﻿00 · MiniMax-H3 — verified model facts
+Source-audited 2026-10-27. Re-verify prices/limits before spending money: they change.
+What H3 actually is
+A general-purpose omni-modal generative system: text / image / video / audio in → video with native stereo audio out, up to 2K, 4–15 s, 24 fps, 32 kHz stereo.
+
+
+Three modules exist; only one of them is downloadable:
+
+
+Module
+	What it does
+	Open weights?
+	H3-Context-IR
+	Hosted prompt understanding / rewrite into a structured "context IR". MiniMax calls it critical to output quality.
+	❌ API only
+	H3-Base
+	The actual generator (FL2VA + Ref2VA checkpoints).
+	✅ open weights
+	H3-Regenerate-2K
+	Re-generates a 768p result into 2K using the original context (not a normal upscaler).
+	❌ API only
+	
+
+So: local deployment = 768p only. 2K needs the hosted regeneration API (or the hosted 2K generation endpoint).
+Two open checkpoints
+Checkpoint
+	Supported tasks
+	Inputs
+	MiniMax-H3 Base FL2VA
+	t2va text-to-audio-video · fl2va first/last-frame-to-audio-video
+	text + 0/1/2 keyframes
+	MiniMax-H3 Base Ref2VA
+	ref2va reference-to-audio-video
+	text + ≤9 images, ≤3 videos (2–15 s each, ≤15 s total), ≤3 audio clips (2–15 s each) — max 12 files
+	Architecture (why it is heavy)
+Component
+	Role
+	BF16 weight size
+	H3-Omni-Transformer
+	33B dense single-stream DiT; jointly denoises video + audio latents. ~13B live in AdaLN branches that can be precomputed/cached for inference
+	≈ 66 GB (≈ 40 GB after AdaLN caching / pruning)
+	H3-Encoder
+	full Qwen3-VL-32B, hidden states from layer 50
+	≈ 51–62 GB
+	H3-VisualVAE
+	f16t4d24 (16× spatial, 4× temporal, 24 latent ch)
+	≈ 10 GB
+	H3-AudioVAE
+	32 kHz stereo, 40 Hz latent rate, channel-independent
+	≈ 0.6 GB
+	Resident total
+	
+
+	≈ 100–128 GB
+	
+
+Full BF16 checkpoint release ≈ 124–144 GB on disk. That single number decides every deployment question: this model does not fit on one free Colab GPU, and does not fit in Colab at all in BF16.
+Measured hardware (community + official benchmarks)
+Hardware
+	Setup
+	Peak VRAM / GPU
+	5 s clip @ 1344×768
+	4× H100 80GB
+	SGLang BF16, TP2+Ulysses2
+	66 GB
+	~13 s pipeline latency
+	4× H100 80GB
+	SGLang, TP4+Ulysses1
+	50 GB
+	~14 s
+	4× H200
+	SGLang BF16
+	63–94 GB
+	~74 s end-to-end
+	8× B300
+	BF16 / FP8
+	84 / 52 GB
+	~19 / 18 s
+	2× RTX 5090 32GB
+	TP2 + layer-wise offload, ~384 GB host RAM
+	26 GB
+	~560 s (~9 min)
+	1× RTX 5090 / RTX PRO 6000
+	community "FastH3" NVFP4/FP8 repack
+	32–96 GB
+	36–39 s
+	1× RTX 4090 24GB
+	FastH3 FP8
+	24 GB
+	~155 s
+	1× 16GB (4090 capped)
+	FastH3 FP8 + offload
+	16 GB
+	~154 s
+	1× 12GB
+	pruned Q3 GGUF + encoder on CPU
+	12 GB
+	works, slow
+	1× DGX Spark (128 GB unified)
+	diffusers INT8 + group offload
+	fits
+	works
+	
+
+Practical minimum for the official diffusers / SGLang path: a single 80 GB card with a pruned INT8 build (~42 GB working set), or multi-GPU for BF16.
+Inference frameworks (official list)
+* SGLang — sglang serve --model-path MiniMaxAI/MiniMax-H3 --num-gpus 4 --ulysses-degree 4 --performance-mode speed --model-variant fl2va (port 30010) / ref2va (30011).
+* vLLM — recipes at recipes.vllm.ai/MiniMaxAI/MiniMax-H3.
+* diffusers — ModularPipeline.from_pretrained("MiniMaxAI/MiniMax-H3") (needs the minimax-h3 diffusers branch until it lands on PyPI; diffusers>=0.32.2 is the floor in requirements.txt).
+* ComfyUI — official tutorial + video_minimax_h3_t2v.json / video_minimax_h3_r2v.json templates; Comfy-Org publishes a pruned INT8 workflow set (~42.5 GB).
+Hosted API (the route that actually works from Colab)
+Base URL: https://api.minimax.io (global) or https://api.minimaxi.com (CN). Auth: Authorization: Bearer <API key>.
+
+
+Call
+	Method + path
+	Create video
+	POST /v2/video_generation
+	Query task
+	GET /v2/query/video_generation/{task_id}
+	Context-IR rewrite
+	/video-generation-v2-h3-context-ir (see README of the H3 repo + platform docs)
+	768P → 2K regeneration
+	/video-generation-v2-regeneration
+	
+
+Model variants on the create endpoint:
+
+
+Model
+	Resolutions
+	Duration
+	Notes
+	MiniMax-H3
+	768P, 2K
+	4–15 s
+	t2v, i2v (first/last frame), reference-to-video
+	MiniMax-H3-Highspeed
+	768P
+	4–15 s
+	quality/speed balance, ref image/video/audio
+	MiniMax-H3-Lite
+	480P, 768P
+	4–15 s
+	cheapest, no adaptive ratio
+	MiniMax-H3-Max
+	480P, 768P
+	5–15 s
+	fastest, extra.prompt_expansion_mode only
+	
+
+Request shape (t2va):
+
+
+{
+
+
+  "model": "MiniMax-H3",
+
+
+  "content": [{ "type": "text", "text": "<prompt>" }],
+
+
+  "resolution": "2K",
+
+
+  "duration": 5,
+
+
+  "ratio": "16:9"
+
+
+}
+
+
+content[] items: text, image_url (role: first_frame / last_frame / reference_image), video_url (role: reference_video), audio_url (role: reference_audio). image-to-video and reference-to-video are mutually exclusive — you cannot mix first_frame with reference_image.
+
+
+Limits: total body ≤ 64 MB (use public URLs, not base64, for large files); image ≤ 30 MB, side 256–5760 px, ratio 0.4–2.5, first/last frame ≤ 1 each, reference images ≤ 9; video ≤ 50 MB each, ≤ 3 clips, 2–15 s each and ≤ 15 s total, H.264/H.265 + AAC/MP3; audio WAV/MP3, ≤ 15 MB each, ≤ 3 clips, 2–15 s each and ≤ 15 s total. For t2va, ratio is required and may not be adaptive. For i2va, ratio is forced to adaptive.
+Pricing (official pay-as-you-go, list)
+Item
+	Price
+	MiniMax-H3 output @ 768P
+	$0.08 / s
+	MiniMax-H3 output @ 2K
+	$0.13 / s
+	MiniMax-H3-Highspeed @ 768P
+	$0.06 / s
+	MiniMax-H3-Lite @ 768P
+	$0.04 / s
+	MiniMax-H3-Max @ 480P / 768P
+	$0.05 / $0.08 / s
+	768P → 2K regeneration
+	$0.05 / s
+	Reference audio input
+	free
+	Reference images
+	first 5 free, then $0.04 each
+	Reference video input
+	billed per input second at the output rate
+	
+
+Worked examples: 10 s @768P = $0.80; 10 s @2K = $1.30; 15 s @2K = $1.95; a 60 s finished film built from 6 × 10 s 2K shots = $7.80 plus retries.
+Licence — read before publishing
+The MiniMax H3 Community License (effective 2026-08-02) is not OSI open source. Its "Applicable Territory" excludes the United States, EU, United Kingdom and South Korea for local deployment without separate authorisation from MiniMax (application form in the repo). Hosted-API use is governed by the platform terms. This repository's default work (Pakistan) is outside the excluded territories, but any client delivery into those regions needs a rights note in the project record.
+Honest risks
+1. Guardrails: user text/images/videos and the enhanced prompt are moderated; error 1026 = "video description contains sensitive content" (HTTP 422). A blocked prompt still costs nothing but wastes a turn.
+2. H3-Context-IR is hosted and closed. Writing prompts in its structure yourself (see 02_PROMPTING.md) is the only portable substitute, and it changes output quality materially.
+3. 2K from local weights is impossible; do not promise 2K to a client from a local/ComfyUI run.
+4. Identity drift: reference-to-video keeps a face recognisable but not pixel-identical across shots. Cast-level consistency needs one locked reference set and the same seed-free prompt skeleton per shot.

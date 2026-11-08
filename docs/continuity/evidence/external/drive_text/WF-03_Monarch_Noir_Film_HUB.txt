@@ -1,0 +1,203 @@
+﻿WF-03 · Monarch Noir Film — HUB
+Resume key: NOIRGO <topic> · Status: ACTIVE (film #1 THE SHADOW v1 delivered 2026-10-10 — Drive 16qsEno9sN_p4fggfcTN05W9LUzYsz0u4, md5 f8b7e71b9238febd3c60f82463116393, gates 27/27) · Created 2026-10-09
+Identity
+Dark-world cinematic animated short film, 1920×1080, 120–180 s, in the class of Day One Films “DISCIPLINE” (measured: luma 18/255, 89 % dark frames, sat 0.08, hard cuts + dip-to-black, holds 8–14 s, −16.6 LUFS, 94 BPM, 8 spoken lines) with its own DNA: black room with one motivated amber lantern light, bone-white two-tone line hero on the WF-01 toon 3-D skeleton, his cast shadow as the story spine (SHADOW readout in metres), red typewriter villain text, Computer-Modern serif narration, 2–3 English voice lines, measured film gates. Engine: workflows/wf03_monarch_noir_film/src/noir.py (+ look_v0.py).
+The same workflow on the other platforms
+Notion page: https://app.notion.com/p/WF-03-Monarch-Noir-Film-3f4807e1e9168135b919ee36b0e39165 (id 3f4807e1-e916-8135-b919-ee36b0e39165, child of MONARCH STUDIO hub 3f4807e1-e916-813a-9000-e7e94ac0ac53) · Workflows DB row 3f4807e1-e916-810e-a035-fce9f7cc8f3f (authority)
+Linear project: WF-03 · Monarch Noir Film e173192b-b932-4801-ac4d-dcd7445237b8 (team MON) → resume issue MON-57 https://linear.app/monarchmation/issue/MON-57 (bbb25ad6-7fcf-4901-bcee-9c3972d8a311)
+Google Drive folder: https://drive.google.com/drive/folders/11c194r1f_IMIo5yOmT-j80Iu-sZWP3KP (id 11c194r1f_IMIo5yOmT-j80Iu-sZWP3KP, inside MONARCH STUDIO 1-wAt4bgYVn7q15uq22ZnRY8z5iIQaI-l) — look sheet 13cLIxtxXHoTq-igivMuigcNq8saf3LSu · RESUME_STATE.md 1V_C3PSoUKbSnVQIXThJIknlbEQkKH1j3 · HUB.md 1tPPQf27LfwHsB2Qd_OQghgHjdxtQJpNX · noir.py 1bCRFxrCIFV2XhHWMK-TVFEz2gJCINNxs · look_v0.py 1jACqPPTQI3yQG1fTF0KyEqBR5jadgBAd · metrics 1C5-iedExVkfMVEyFb7UqKUDNa8LBu12S
+Registry: Notion hub 3f4807e1-e916-813a-9000-e7e94ac0ac53 · Linear MON-55 · Google Doc 1ONXXVp-yYG2P9ldUPBOSAhr8oWkS79qgzdu6eGHTm8Q · local MONARCH_STUDIO_REGISTRY.md · Local root workflows/wf03_monarch_noir_film/
+Resume order (key NOIRGO <topic>)
+1. Registry row (any platform) → confirm WF-03 by id.  2. Linear project body §0 → MON-57 newest STATE comment.  3. Notion page top callout.  4. Drive RESUME_STATE.md (newest block on top).  5. Rebuild deps (numpy pillow scipy imageio-ffmpeg), run python3 workflows/wf03_monarch_noir_film/src/look_v0.py to confirm the engine, continue from Open items.
+Film #1 — THE SHADOW (brain pick: topic FEAR, ~150 s)
+Why FEAR: universal, not on Day One’s list nor ours, native to a dark world, with a physical spine device. Hero for this film: the bone-white figure (the villain is his own shadow). Shadow = homothety about the lamp, k = (1 − z_lamp)/(z_hero − z_lamp), feet anchored on the wall/floor junction; readout = 1.8 m · k. Walking toward the wall shrinks it; at the wall k = 1 → exactly his size.
+Beats: 01 Every night, it was there (8.0 m) · 02 The corner + red lines stay. / not yet. / what if. · 03 Lights out · 04 One step (back view) · 05 The walk, shaft + dust (2.6 m) · 06 The wall — “When he touched the wall, the shadow was exactly his size.” (1.9 m) · 07 End card WALK TOWARD IT. Quotable: “Fear is a shadow. Walk toward it — and it is exactly your size.” Palette: BLACK 7·7·9 · WALL 14·14·15 · BONE 236·232·222 · SLATE 96·102·112 · AMBER 255·214·170 · RED 214·38·32.
+Current state
+2026-10-09 (turn 17): registered on all four platforms; look-dev v0 rendered and measured — setup frames luma 28.5–31.7, chroma 7.6–9.0, dark share 0.64–0.73, hero p99 ≈ 190; lights-out frame luma 10.8; end card 1.9. Targets for the film: luma 14–30 per setup frame, chroma ≤ 10, dark ≥ 0.6, −16.5 ± 1 LUFS, ≥3 callbacks, 2 quotable lines, title pun.
+Open items
+Film #1 done 2026-10-10 (section below). Next NOIRGO <topic> = film #2: brain proposes a fresh world + device (lantern_corner / shadow_homothety blocked) → look sheet → approval + voice click → same pipeline. Engine done in film #1: camera drift/zoom per shot, dip-to-black + flash-cut timeline, lamp flicker + dust, typewriter text in/out, readout counting, carried lamp → floor shadow, segment encode + frame-exact splice, 27 film gates. Engine ideas not yet used: rain/wet variant, speed-line climax, less grain (or light denoise) so CRF 21 keeps it, renderer exporting text reveal times into events.json.
+Film #2 in pre-production — THE WINDOW (COMPARISON), NOIRGO MAX (2026-10-10, turn 19)
+Status: pre-production done (plates, script, VO voice-03); hero rebuilt as HERO v2 (3-D human stick figure, turn 20) and awaiting the user's approval; look sheet v2 with the 3-D hero follows the approval. Brief: real-life world (buildings, home interiors, street, people), human-like hero (face, five-finger hands, emotions, physics), full English voiceover (voice-03) with a hooked script; every scene improved.
+Device: WINDOWS — the opposite facade (31 lit windows measured, plates/facade_windows.json at lum>55) is the villain's body; his own window goes blue → dark → amber. Colour arc phone-blue → own-lamp amber → dawn. Payoff: "You only ever see the lit room." / "Every window you have ever envied has someone standing in it, looking at yours." End card LIGHT YOUR OWN WINDOW.
+Drive (WF-03 folder): look sheet NOIRGO_LOOK_SHEET_v1_WINDOW.jpg 1OX-sXPLX8mE35ElFiRm_yUjmOkzgykCJ · hero sheet CHARSHEET_HERO_v1.jpg 1VnMkDRY3zgcQjaz6ZWUngtVYBZAKu0Jf · SCRIPT_THE_WINDOW.md 1nHI13fdLk79ZHUbkSNO3j-nezu3u2eSF · plates zip 1TDuXbFMADWv3L_NBwkmjfDSObaITJb2_ · VO zip 11DTehQ6PZdJSt485q-jqyDo944DXN8DR · sources zip (human.py, world.py, look_v1.py, charsheet.py) 10JA7cciQu8PNwVZ7Z_M5-Hvc_vRDRYzN. Records: Notion page callout 3f4807e1-e916-816c-ba88-eb3015e15135, MON-57 STATE comment 54d6cbb2-43d4-4179-ae24-36755ea2c48f, Drive RESUME_STATE 1V_C3PSoUKbSnVQIXThJIknlbEQkKH1j3 (turn-19 block).
+Next after approval: src/film_window.py timeline → background render → src/audio_window.py (real-life SFX + score + VO −16.5 LUFS) → src/gate_window.py → Drive md5 → brain commit the_window_v1 → records.
+HERO v2 (2026-10-10, turn 20): the 2-D toon hero rig (CHARSHEET_HERO_v1) was rejected — the hero stays a stickman but every part is human (face, eyes, mouth, hair, five-finger hands, feet, arms, legs) in true 3-D; AI photoreal human identities were offered and declined. New procedural renderer src/stick3d.py (ray-cast primitives, z-buffer, key/fill/rim + point lights, SSAO, Fresnel, ink edge; 10 expressions, 9 hand presets + phone, walk/run, IK reach, person() drop-in for world.py). Deliverables on Drive (WF-03 folder, md5 = local): CHARSHEET_HERO_v2.jpg 14jZEeiw0-nQGejJMFsBrHkN-n6gR3a0A (md5 3851e12bad53f67c8efe59e8602eeab5) · HERO_v2_motion_test.mp4 8 s 1IHM788_tWoLlOl_LwnbQexvuWRtTFz-R (md5 f98594211292181e464b49b283fa5a16) · THE_WINDOW_src_v2_hero3d.zip 1yCxno8rqDz5ovzOnLPKrnK_aPIED5e-R (md5 fb5011baab61c71ce406abcd8a973a54). Awaiting approval; then film_window.py on stick3d.person() → look sheet v2 → render → audio → 27 gates → delivery → brain commit the_window_v1. Records: Notion callout 3f4807e1-e916-8130-ab7c-c845526d9c69 · MON-57 comment d5f6286e-dbc9-41c9-a3e2-25df74b310cb · Drive RESUME_STATE 1V_C3PSoUKbSnVQIXThJIknlbEQkKH1j3 (turn-20 block on top) + HUB 1tPPQf27LfwHsB2Qd_OQghgHjdxtQJpNX updated in place · root RESUME 109z7qydvLVNlHZmuO7neDwdRhhAETGEq · log §25 11eiGInBkl6YwJRQggmw0qYhVCrXwjUjJ · manifest 1rBqRePGfPhW3C7ETu2fE7iG08ZIDPFMZ.
+Film #1 delivered — THE SHADOW v1 (2026-10-10, turn 18)
+Deliverable: THE_SHADOW_v1.mp4 → Drive 16qsEno9sN_p4fggfcTN05W9LUzYsz0u4 · 92.97 MB · md5 f8b7e71b9238febd3c60f82463116393 (local = Drive, verified) · 156.92 s · 1920×1080 · 24 fps · h264 CRF 21 + aac 192k.
+Measured (GATES_THE_SHADOW_v1.md → Drive 1K_rRjxJ1JPkjJBdGJj_kmxCoPU8wdEGW): film gates 27/27 PASS — luma 22.9/255 · dark frames 78.0 % · chroma 4.0 · setup shots ≤ 30 · 0 render errors · 29/29 planned hard cuts measured, 0 unplanned transitions, 0 stray black frames · 33 shots, 12 holds 8–12.4 s, 93 beats (max gap 6.4 s) · montage 8 shots 1.7→0.9 s, climax 6 × 0.4 s · 3 English voice lines (voice-02) at 51.3 / 94.8 / 144.2 s · 4 callbacks, 2 quotables + title pun · text contrast bone 15.8:1 / red 4.0:1 · −16.5 LUFS, TP −1.4 dBTP, LRA 12.2 LU · tail after the last line −29.7 dB RMS · arc setup −22.2 / climax −10.0 / end −24.2 LUFS-S · limiter 2.2 % · brain gate #20 18/18, committed the_shadow_v1.
+Sources on Drive: film_shadow.py 1s1nQbAJL1tdFdxRPjsayJWuwQgqbMMnX · audio_shadow.py 1bTfNOWHHbUORmxPECJvfu5EKnJt408Ea · gate_shadow.py 1CsnMdHrtfDzS-Dsxf7A2Zy-IJwnsxaIz · encode_shadow.sh 1ZqruszfGCKg9oe0BDtWx-gIyKbdUPI-1 · SCRIPT_THE_SHADOW.md 1x2SmCCfW8ZQLsyS3c-Wu9_XFwFulxeBB · DNA_THE_SHADOW.json 1iv14Zdl7pgIuV0t7BP-cvNYfRFEMElak · THE_SHADOW_data.zip 1oJTxxznBAxfmoxn2UNswHHK2jU6IWunG.
+Story as built: hero alone with a lantern in a bare corner; the villain is his own lamp-cast shadow (k = D/(D−d)). Every night it is there · red whispers stay. / not yet. / what if. · lights out · relight · one step · montage · climax turn back. · the walk (“Every step, it shrank.”) · the wall (“When he touched the wall, the shadow was exactly his size.”) · it grew back · he picks the light up and carries it to the wall — the shadow lies on the floor behind him · end cards “Fear is a shadow.” / “Carry the light.”
+Honest v1 notes: 33 shots vs Day One’s 44 (longer holds); quiet-ending rule measured after the last line (line 3 ends at 150.0 in a 156.9 s film; literal last 10 s = −20.8 dB); CRF 21 softens the grain; S03 + S16 graded gamma 0.95 / 0.93; M1 and S16 re-rendered (same-size jump cuts, then a one-frame pose pop and a too-fast pick-up exposed by the S16 medium — fixed, 0 unplanned spikes); the two static end cards are accepted as title cards; 7 gate rules corrected for dark films (listed in the GATES file); first full encode OOM-killed the 2 GB box → per-segment encode + frame-exact splice.
+Pipeline (repeat for film #2): brain propose → DNA gate 18/18 → look sheet → approval + voice click → film_shadow.py --render in background (≈34 min) → generate_speech × lines → audio_shadow.py (−16.5 LUFS) → encode_shadow.sh → gate_shadow.py → Drive upload → gate rerun with --drive-md5 → brain commit → records on all four platforms.
+Next: NOIRGO <topic> = film #2 with a fresh world + device (lantern_corner and shadow_homothety are blocked by the brain). Voice must be re-auditioned in a new chat. WF-01 remains PARKED.
+Rules carried from MONARCH STUDIO
+Measured not eyeballed · deliverables on Drive with md5 in the same turn · everything recorded (RESUME_STATE.md, Notion, Linear, this HUB) · concise Roman Urdu replies with ids · never mix another workflow’s files or facts into this one · each new edit different from the last.
+
+
+
+
+FILM #2 DELIVERED — THE WINDOW v1 (2026-10-10, turn 21, NOIRGO MAX)
+THE_WINDOW_v1.mp4 — 155.00 s, 1920×1080 24 fps, 68.55 MB, md5 cfe189f9c09e47e6728d2f2aba017f8d, Drive id 1WaMfEroWgzuYHeSCpyU9CPY7gJ0a0iGy (md5 verified after upload). Gates 27/27 PASS — GATES_THE_WINDOW_v1.md Drive id 1K6k-6yS1hXOGy4D8v7mhI71w0xIDikCh. Brain gate #20 18/18 → committed as the_window_v1 (registry 8 videos; brain zip v2.2 Drive id 1I34MVdkT4gOFC3Lt4pReO2bez5TsVwWt).
+Measured: luma 26.9/255 · dark 68.1 % · chroma 12.2 · 45 shots = 38 hard cuts + 5 dips + 1 continuous take · 14 holds 4–7 s · 162 beats (max gap 4.7 s) · VO voice-03 10 clips = 123.6 s (80 %) · −16.5 LUFS · TP −3.5 dBTP · LRA 6.2 · bed arc hook −42 → climax −22 → tail −43 LUFS-S.
+What is new versus film #1: real-life illustrated plates (facade, bedroom night/amber, three neighbour windows, kitchenette, street dawn) with a crop camera and smooth cam_lerp moves; 3-D stick-human hero v2 (face, five-finger hands, blinks, gaze, IK); full English voiceover on a 31-window comparison device (opposite facade = the villain; his window blue → dark → amber; phone dies → his reflection over the 31 windows; four red lines answered in white; DAY 1 → 40; dawn Picardy; two end cards).
+Fixed before delivery (measured, not eyeballed): camera clamp kick (cam_lerp interpolates clamped crop rects), S26 reflection re-designed as a glass ghost and spliced frame-exactly, gate detector refinements documented in the gate names.
+Supporting files (WF-03 Drive folder): src v3 zip 16nQBnsv-fU5BmYcq7rKB8mjXIEyTPZyf · data zip (events timeline, beats, VO timing, DNA, facade map, script, gates, mix stats) 1CCVbCmafbtsfZ-pZ7WKbz5WW571sIC7N · kitchenette plate 11wzRhUh0Nb5l-FmDacxaxBOl5B11wLex · look sheet v2 1DzH0K2Bq1Q4402AKffsfMwIMoLB4mVw2.
+Status: ACTIVE, 2 films delivered. Next NOIRGO <topic> = film #3. Authority for the next step: workflows/wf03_monarch_noir_film/RESUME_STATE.md (Drive 1V_C3PSoUKbSnVQIXThJIknlbEQkKH1j3).
+
+
+
+
+2026-10-11 · PERMANENT STYLE LIBRARY + RECOVERY UPDATE
+Canonical repository path: styles/monarch-noir-film/
+The permanent knowledge package now includes a detailed knowledge index and audited 35-item Drive inventory. THE SHADOW/THE WINDOW remain R1. 4:00 AM v2 is R2/source absent (Drive 1gLy2m9GTgwKzDaAV59nrLALojhGkKaWI, MD5 ed233b75aa67f4255aa5c792e213467f). AB KARO ABHI v1 is R3/delivery-only (Drive 1y7Z7OtOMQXeoTcIoHiqr7ClmHndefH1r, MD5 bdea55c453834fa4a4b0cacec89ed53c). Film-#3 conflict remains explicit.
+Active work now lives only in workflows/current/ with hash-chained recovery checkpoints.
+System recovery Doc: https://docs.google.com/document/d/16gLeZBQV_wWVo5OnzQvpXirXTyNUz8hjwt6x0qMOzZU/edit
+
+
+Canonical WF-03 GitHub package: https://github.com/adil-chandio/Monarch-Studio/tree/main/styles/monarch-noir-film · clean CI run 38090716084 passed.
+
+
+TUMHARI RESERVED SEAT
+FINAL PRODUCTION RECORD · WF-03
+
+
+STATUS
+ACCEPTED · 21/21 delivery gates PASS · 18/18 editor-brain freshness PASS
+Delivered 11 October 2026 · Task EMS-20261011-002
+Film number intentionally unassigned; the historical Film-#3 conflict remains unresolved.
+
+
+CREATIVE LOCK
+Topic: The invisible queue — every day you delay, somebody else takes the seat that could have been yours.
+Audience and language: Desi audience · easy Urdunglish · motivational FOMO and curiosity.
+Master structure: 74.00 seconds · 34 voice-led beats · maximum beat 4.70 seconds.
+Format: 1920×1080 · 16:9 landscape · 24 fps.
+Shared performance: selected voice-00, used exactly and never time-stretched.
+
+
+WF-03 EXECUTION
+A new rain-soaked midnight railway platform with the humanised Monarch, controlled cyan fluorescent pools, red warning accents, practical reflections, breath and rain, a self-punching ticket, departure-board time, train occlusion, and the reserved yellow seat as the satisfying reveal. It deliberately avoids THE SHADOW’s lantern/shadow device and THE WINDOW’s apartment/window device. The original 72 BPM station score and 121 synchronized rail, rain, electrical, ticket, flap, carriage, room, and transition events remain narration-first.
+
+
+OBJECTIVE ACCEPTANCE
+Master: H.264 High / AAC-LC · 48 kHz stereo · 12,508,030 bytes.
+Audio: -17.1 LUFS integrated · 3.9 LU loudness range · -4.8 dBFS decoded true peak.
+Picture: mean luma 26.22 · dark share 0.823 · p99 highlight 203.83 · motion floor 0.0745 · no empty samples · no perfectly still sampled pairs.
+SHA-256: 738a6aaa177595384f2070f1e16a38b5412ff10514732ba5a60f420b7395dc2f
+MD5: 4ba29154079a936d74a2599af51f433f
+
+
+DURABLE DELIVERY
+Final master: https://drive.google.com/file/d/1LNsQOl2dvRNje720ylGfS0ITKL6GtI_N/view
+Reproducible source: https://drive.google.com/file/d/1jDgmzsIt2CWXxWR7zotPRd1Lmi6WP2AO/view
+Production folder: https://drive.google.com/drive/folders/1A39EybqgjoG8-Tj5uix5Cf4WW39CzmgP
+Repository package: styles/monarch-noir-film/films/tumhari-reserved-seat/
+
+
+REPRODUCIBILITY AND LEARNING
+The permanent package stores the exact voice master, shared script/timeline, selected DNA, deterministic renderer, procedural soundtrack builder, event ledger, measured gate suite, look sheet, failure/fix history, and delivery receipts. Promoted safeguards include: keep implemented transitions explicit in DNA; clamp fractional-power envelopes; clamp strip coordinates; smoke-test every boundary; explicitly resample loudnorm output to 48 kHz; cache environments at 6 Hz while retaining full-rate cinema motion; preserve separate workflow implementations despite shared narrative; and never infer a film number.
+
+
+This tab is the Google Docs completion receipt. Drive, GitHub, Notion and Linear carry independent records so no one platform is the sole authority.
+
+
+TUMHARI RESERVED SEAT · WF-03 · V2 NOIR IMAX TABAHI
+
+
+STATUS: FINAL / ACCEPTED
+Task: EMS-20261011-003
+Delivered: 2026-10-11
+Numbering: intentionally unassigned; the historical Film-#3 conflict remains unresolved.
+Repository authority: styles/monarch-noir-film/films/tumhari-reserved-seat-v2/
+Production commit: 9b4d6fca4338fbd9d8de34e354a5ba15819ef33e
+
+
+IMMUTABLE CONTINUITY LOCK
+• Accepted V1 remains untouched in tumhari-reserved-seat/ and in its original Drive folder.
+• 74.00 seconds · 34 shared voice-led beats · 1920×1080 · 24 fps.
+• Exact byte-identical selected voice-00; no time stretch.
+• Timeline SHA-256: 75838e71c598c04bb322fabbe080d71641853aa9fc2cf2dc6341a73e42698c0b.
+• Voice SHA-256: c411bfae2b12b194cf2107c556b2604e82f3e763c9e6fea94a6186ac650ca972.
+• V1 tree hash passed unchanged: 789e386e018d9d797bd3824f1e55c6052f5bcee776b47a3fa5f966ef040f03b2.
+
+
+V2 CREATIVE REDESIGN
+The rain-soaked platform and humanised Monarch remain unmistakably WF-03, but the station is rebuilt in foreground/midground/background depth. Measured platform dolly, lens breath, wet-floor reflection, foreground-column occlusion, volumetric practicals, fog parallax, three rain depths, precision shutter echoes and 12 railway-specific transitions carry the holds. Cold cyan/red tension shifts to amber only after action.
+
+
+FIVE EARNED SET PIECES
+1. A macro ticket printer opens into an eleven-layer mechanical Z tunnel under a red scanner.
+2. Passing carriage windows become the colour-coded dopamine tunnel.
+3. Thirty punched holes lift from the ticket into an amber volumetric constellation.
+4. Rain freezes around “LEKIN SACH?” while the virtual camera orbits the truth card.
+5. Platform lines, hole constellation and carriage windows converge through one amber door.
+
+
+MEASURED “3×” DELTA
+• Audio events: 587 vs V1 121 = 4.851×.
+• Moving-stereo objects: 102; score acts: 5.
+• Median sampled motion: 4.1834 vs V1 0.3950 = 10.59×.
+• Motion floor: 1.5182 vs V1 0.0745 = 20.37×.
+• Three depth planes · six camera controls · twelve transition families · five authored WTF suites.
+• All 34 beats carry primary + depth + micro motion.
+• All 33 transitions passed −2 / cut / +2-frame smoke tests.
+• Freshness: 30/30 PASS. Final delivery/delta/provenance: 44/44 PASS.
+
+
+FINAL MASTER
+• H.264 High / AAC-LC · 48 kHz stereo · 46,549,431 bytes.
+• Audio: −16.6 LUFS · 3.9 LU LRA · −2.6 dBFS decoded true peak.
+• Picture: mean luma 30.43 · dark share 0.755 · p99 210.55 · no empty/identical samples.
+• SHA-256: bc52e242a21c4001d6dd2e0612457c74de7865f726598c5ae75c6f6c70533ed3.
+• MD5: cbf4d9c5f3c77a9137d8f96755613956.
+
+
+DURABLE DELIVERY
+• Final master: https://drive.google.com/file/d/1r-gXHPGr0LRQuuDsOLlbyagoC3kJnj6r/view
+• Self-contained source: https://drive.google.com/file/d/11tdG-ZzGaWajUufWC5TwfRTtUzVMSIrF/view
+• Complete V2 folder: https://drive.google.com/drive/folders/1yxDMcmpEjNOR0agG5iZdO656CtuGFzMe
+• Measured gate report: https://drive.google.com/file/d/1UrUZuklMh8GtUGv1d-_LLiogwPS7aZyM/view
+• Final-master QC sheet: https://drive.google.com/file/d/1yrlycTk0CjqEAxqZi1WNcCuJ7VtZPCcy/view
+• GitHub production commit: https://github.com/adil-chandio/Monarch-Studio/commit/9b4d6fca4338fbd9d8de34e354a5ba15819ef33e
+
+
+PROVENANCE
+Picture and sound are deterministic procedural builds. No stock footage, stock music, samples or loops were used. The source archive embeds the humanised Monarch and toon rigs, production fonts/licenses, renderer, soundtrack engine, exact voice/timeline locks, enhancement bible, 34-beat ledger, gates, experiments/fixes and machine-readable provenance.
+
+
+EXTERNAL SYNCHRONIZATION
+Linear final delivery update: https://linear.app/monarchmation/project/wf-03-monarch-noir-film-2c1df007bccf/activity#project-update-c8bf9b1b
+Notion V2 record: https://app.notion.com/p/TUMHARI-RESERVED-SEAT-WF-03-V2-NOIR-IMAX-TABAHI-3f6807e1e916812fac3efe8973d74e13
+Production commit: https://github.com/adil-chandio/Monarch-Studio/commit/9b4d6fca4338fbd9d8de34e354a5ba15819ef33e
+
+
+NEELAMI — TUMHARA WAQT BIK RAHA HAI · WF-03
+DELIVERED / TECHNICAL QC PASSED — NOT A CLAIM OF USER CREATIVE APPROVAL
+Task EMS-20261012-002 · 2026-10-12 (Asia/Karachi)
+Film intentionally unnumbered: historical Film-#3 conflict remains unresolved.
+
+
+Original attention-auction story, independent noir execution. 150.00 seconds · 1920×1080 · 24fps · 42 shots · 63 carried beats / max gap5.0s. Shared original Urdu / currently auditioned selected voice-00 / 93.68 native seconds with no speech pitch/time stretch.
+
+
+Original empty auction/vault/owned-desk world plates and layered camera/light/dust. Articulated 3-D body/gloves plus literal approved STICK v4 facial texture; the adjacent human identity photo was never used as a movie texture. Projected desk occlusion, a flat notebook and numeric 3-D reach put the pen in the actual five-finger grip. Independent six-act noir score: 436 events / 185 moving-stereo objects.
+
+
+MASTER 33/33 encoded gates PASS. Honest 720p browser PREVIEW 33/33 PASS. All 3600 master frames decode without errors. Final -16.5 LUFS,6.6 LU LRA,-2.6 dBTP. Mean luma24.806 / dark share0.728 / p99 175.16; no empty/near-identical sampled pairs. Actual active voice margin12.43dB after final corrected stem balance.
+
+
+FULL 1080p MASTER
+https://drive.google.com/file/d/1N6dli3ATwq8cY6kdHXC0U-8zJXl-6KdI/view
+38,157,652 bytes · MD5 ce31f35e8684c0133283f862517d0360
+
+
+VERIFIED R1 SOURCE
+https://drive.google.com/file/d/1Yg4NXo7z8OCm2LhJaEGhIGyN0uxZ3ig4/view
+3,789,070 bytes · MD5 afe35f6f7270d64eea8f0470c3010aaa · ZIP CRC all pass
+https://drive.google.com/drive/folders/1LieTq7l8lT-v4pW2Ilw5A6h0jzKCEu0u
+
+
+Remote bytes/checksums independently match. Permanent source: styles/monarch-noir-film/films/neelami/. Frozen inputs, approved expression atlas, original plates/native speech/fonts/licenses, render/audio/mastering sources, gates/contact, event ledgers and environment pins are preserved. R1 is reproduction from provided locked assets, not identical regeneration from model prompts.
+
+
+The failed approximate sculpture likeness, alpha-drop artifacts and initial over-wide audio dynamics were corrected before acceptance; gate thresholds were never relaxed. Previous completed productions and pending V3 proofs are untouched. No film number or GitHub push is claimed.

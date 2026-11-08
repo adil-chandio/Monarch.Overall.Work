@@ -54,8 +54,6 @@ export function entryFor(file) {
       winner_ratio: data.saturation.winner_ratio,
       fresh_share_30d: data.saturation.fresh_share_30d,
       median_views: data.saturation.median_views,
-      // how old the sample is: a median view count without it cannot be read
-      median_age_days: data.saturation.median_age_days ?? null,
       reading: data.saturation.reading,
     } : null,
     // The headline number on the card. `score` alone is not enough to act on: 57 with

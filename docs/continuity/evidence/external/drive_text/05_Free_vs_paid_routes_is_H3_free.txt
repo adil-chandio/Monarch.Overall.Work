@@ -1,0 +1,102 @@
+﻿05 · Free vs paid — "H3 free nahi hai?" ka poora jawab
+27 Oct 2026. Prices/promos badalte hain — quote se pehle re-check karo.
+1. Seedha jawab
+MiniMax-H3 free nahi hai. H3 ke do hi raste hain:
+
+
+Route
+	Free?
+	Kya milta hai
+	H3 API (platform.minimax.io)
+	❌ paid per second
+	768P $0.08/s · 2K $0.13/s · native 32 kHz stereo audio
+	H3 open weights (local)
+	✅ weights free (licence ke tehat)
+	lekin GPU chahiye: 4×H100 class, ya pruned INT8 + 1×80 GB / 16–24 GB slow. 768P only
+	Hailuo web app (hailuoai.video)
+	⚠️ trial only
+	ek-baar welcome credits (~150–200), 3 din me expire, watermark, 768p, commercial use nahi. Promo: MiniMax Design app install par 3 free H3 trials + 3,000 credits
+	fal.ai H3-Max
+	⚠️ promo
+	signed-in users ke liye roz 5 free generations (768p, 15 s tak) — promo, guarantee nahi
+	Fully free forever
+	✅
+	H3 nahi — Wan 2.1 / Wan 2.2 / LTX-Video (Apache-2.0 / community licence) apne ya Colab GPU par
+	
+
+API ka "free tier" jo docs me dikhta hai woh rate limit hai (2 concurrent tasks), clip allowance nahi.
+2. Toh free me kya chal sakta hai (Colab T4 = 16 GB)
+Model
+	T4 (16 GB, fp16)
+	Output
+	Audio
+	Ek 5 s clip ka waqt
+	Wan 2.1 T2V 1.3B (diffusers, Apache-2.0)
+	✅ comfortable (offload + VAE tiling)
+	832×480, 81 frames @16 fps
+	❌ silent
+	~8–25 min
+	Wan 2.1 T2V 14B
+	⚠️ GGUF/offload, slow
+	480p
+	❌
+	40 min+
+	Wan 2.2 TI2V-5B
+	❌ fp16 ~22 GB peak; fp8 T4 par nahi
+	720p
+	❌
+	—
+	LTX-Video 2B distilled
+	✅ ~6 GB
+	512–704p, short
+	❌ (LTX-2.3 me audio, magar 16 GB+ NVFP4)
+	~3–8 min
+	LTX-2.3 22B (audio)
+	❌ 24 GB+ NVFP4/Blackwell class
+	up to 4K
+	✅
+	—
+	MiniMax-H3-Base
+	❌ ~100–128 GB resident
+	768p
+	✅
+	—
+	
+
+T4 ki technical wajah: Turing (sm_75) — bfloat16 nahi, FP8/NVFP4 nahi, ~16 GB VRAM. Is liye naye models jo bf16/Blackwell maangte hain woh T4 par nahi chalte. float16 + CPU offload + VAE tiling = 16 GB ka rasta.
+
+
+Yeh notebook ready hai: ../colab/MONARCH_T4_FREE_BRIDGE.ipynb (model load → jobs → render → mp4 Drive me → receipts + optional Drive job queue).
+3. "Ping / URL" pattern ka sach
+Pichle agent ne colab_gpu_bridge_v2.ipynb diya tha: Colab par ek URL banta tha, aur woh bolta tha "URL mujhe khud mil jayega — aap so jao". Us pattern ke teen masle hain:
+
+
+1. Colab ToS: free tier interactive use ke liye hai. Remote-control/SSH/server banana allowed nahi — session/account band ho sakta hai. Paid Colab bhi server hosting ke liye nahi hai.
+2. Security: quick tunnel (trycloudflare) URL public hota hai; token na ho to koi bhi aap ke GPU par job chala sakta hai, ya aap ke Drive paths padh sakta hai.
+3. Is sandbox se main us URL tak nahi pohanchta — yahan sirf github/npm/pypi allow hain. Is liye main tunnel par job bhej nahi sakta; aap khud browser/curl se bhejenge.
+
+
+Safe alternative jo wahi kaam karta hai: Drive-based job queue (notebook cell 8). Aap phone se jobs.json edit karo → Colab utha leta hai → status.json + mp4 + receipts.json Drive me. No public URL, no ToS problem, aur laptop band hone se kuch nahi bigadta (Colab chalta rehta hai jab tak session zinda hai; woh bhi 90 min idle/12 ghante par khatam hota hai — yeh free ki asli limit hai).
+
+
+Agar 24/7 worker chahiye: RunPod / Vast.ai par 1× RTX 4090 ya A100 rent karo ($0.3–1.5/hr), wahan tunnel wala pattern bhi legally theek hai. Colab free us kaam ke liye galat tool hai.
+4. Cost-minimising production mix (recommended)
+DRAFT / PLATES  → free (T4 notebook): Wan/LTX silent clips, composition + camera lock
+
+
+HERO SHOTS      → paid (H3 API): 5 s 768P $0.40 · 5 s 2K $0.65, native dialogue + stereo audio
+
+
+FINISH          → WF-05: voice/music mix, typography, transitions, 24→30 fps conform
+
+
+* Ek 60 s film: 6 hero shots 2K = $7.80 (+retries ~$12) + 6 free plates = $0.
+* Pehle free me composition lock karo — phir paid shot me sirf wohi angle banao jo final hai. Yahi asli bachat hai.
+* Wan clips silent hote hain, is liye H3 ke bina dialogue/lipsync ka kaam nahi hota — us hisse ke liye H3 hi.
+5. Free route ke rules (notebook me lagaye gaye)
+1. MAX_JOBS cap (default 8) — ek session me zyada jobs = disconnect par sab zaya.
+2. Har clip Drive me + receipts.json (prompt, seed, steps, render seconds, md5).
+3. frames must be 4k+1 (81 = 5 s @16 fps); notebook khud fix karta hai.
+4. OOM par height/width/frames kam karo, steps na badhao.
+5. Tunnel cell default OFF; chalu karo to strong token + AUTO_STOP_MIN lazmi.
+6. Free clips ko commercial deliverable ki tarah mat becho — Wan Apache-2.0 hai (theek), magar Colab ke free tier par production rendering bhi ToS ka grey area hai. Client delivery ke liye rented GPU behtar.

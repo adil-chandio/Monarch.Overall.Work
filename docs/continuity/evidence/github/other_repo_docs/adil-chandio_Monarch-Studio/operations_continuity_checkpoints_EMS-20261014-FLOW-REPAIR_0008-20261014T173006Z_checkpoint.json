@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "checkpoint_id": "0008-20261014T173006Z",
+  "created_at": "2026-10-14T17:30:06Z",
+  "summary": "COMPLETE: V5 master and source backup uploaded, independently checksum-verified; video presented; workspace-loss persistence gap fixed",
+  "next_action": "Task delivered. Read DELIVERY.json for master 1UMSvHItighGlOuSsO_EaDkrfb_eKuBZC and recovery 1Ks7BMwClAUqRnnbGJvgYOAcnMz1Tmywq. Return these links on repeated continue; do not rerender unless a specific revision is requested.",
+  "active_state": {
+    "schema_version": 1,
+    "task_id": "EMS-20261014-FLOW-REPAIR",
+    "status": "completed",
+    "title": "Recover and correct Einstein flow-state edit",
+    "style_id": null,
+    "goal": "Review actual reference and previous deliveries; preserve existing work; correct motion, caption timing, clean branding and accurate Urdu-English delivery without another slideshow.",
+    "acceptance_criteria": [
+      "Actual reference visually reviewed; existing V2/V4 and audio recovered first",
+      "No static-slide substitution; detailed scene motion and synchronized captions",
+      "No Monarch/Instagram on-screen tags; standard H264 yuv420p AAC export",
+      "Verified downloadable Drive delivery plus durable source recovery"
+    ],
+    "started_at": "2026-10-14T16:12:19Z",
+    "updated_at": "2026-10-14T17:30:06Z",
+    "checkpoint_sequence": 8,
+    "event_sequence": 43,
+    "journal_head": "34518fca2a7530b31d2cd0c13e37a03e84650b87de873e196948985740d90b50",
+    "last_checkpoint": "2026-10-14T17:30:06Z",
+    "last_checkpoint_path": "operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0007-20261014T171705Z",
+    "next_action": "Task delivered. Read DELIVERY.json for master 1UMSvHItighGlOuSsO_EaDkrfb_eKuBZC and recovery 1Ks7BMwClAUqRnnbGJvgYOAcnMz1Tmywq. Return these links on repeated continue; do not rerender unless a specific revision is requested.",
+    "running_processes": [],
+    "remote_sync": {
+      "github": "pending",
+      "google_docs": "pending",
+      "google_drive": "pending",
+      "linear": "pending",
+      "notion": "pending"
+    }
+  },
+  "journal_event": {
+    "schema_version": 1,
+    "task_id": "EMS-20261014-FLOW-REPAIR",
+    "seq": 43,
+    "timestamp": "2026-10-14T17:30:06Z",
+    "kind": "checkpoint",
+    "actor": "continuity",
+    "content": "COMPLETE: V5 master and source backup uploaded, independently checksum-verified; video presented; workspace-loss persistence gap fixed",
+    "content_sha256": "ea511d3ecad9dd114f8943cd74dc0a6615fca717394485225a41f85f4820aee1",
+    "metadata": {
+      "sequence": 8,
+      "next_action": "Task delivered. Read DELIVERY.json for master 1UMSvHItighGlOuSsO_EaDkrfb_eKuBZC and recovery 1Ks7BMwClAUqRnnbGJvgYOAcnMz1Tmywq. Return these links on repeated continue; do not rerender unless a specific revision is requested.",
+      "status": "completed"
+    },
+    "prev_event_sha256": "706593765a368de32b5009b76960097d5672cc9370c97bf9c846291791e00250",
+    "event_sha256": "34518fca2a7530b31d2cd0c13e37a03e84650b87de873e196948985740d90b50"
+  },
+  "journal_head": "34518fca2a7530b31d2cd0c13e37a03e84650b87de873e196948985740d90b50",
+  "git": {
+    "initialized": true,
+    "head": "7909bde7b7b9c030f4f09ee247655ad4c3ab126b",
+    "branch": "arena/fb829993-monarch-studio",
+    "status": [
+      "M START_HERE.md",
+      "M workflows/current/ACTIVE_TASK.json",
+      "M workflows/current/CHAT_TRANSCRIPT.jsonl",
+      "M workflows/current/JOURNAL.jsonl",
+      "M workflows/current/RESUME.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0001-20261014T161335Z/HANDOFF.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0001-20261014T161335Z/checkpoint.json",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0002-20261014T162725Z/HANDOFF.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0002-20261014T162725Z/checkpoint.json",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0003-20261014T163426Z/HANDOFF.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0003-20261014T163426Z/checkpoint.json",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0004-20261014T165239Z/HANDOFF.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0004-20261014T165239Z/checkpoint.json",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0005-20261014T170022Z/HANDOFF.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0005-20261014T170022Z/checkpoint.json",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0006-20261014T171051Z/HANDOFF.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0006-20261014T171051Z/checkpoint.json",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0007-20261014T171705Z/HANDOFF.md",
+      "?? operations/continuity/checkpoints/EMS-20261014-FLOW-REPAIR/0007-20261014T171705Z/checkpoint.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0001-20261014T161335Z/STATUS.md",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0001-20261014T161335Z/SYNC.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0001-20261014T161335Z/checkpoint.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0002-20261014T162725Z/STATUS.md",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0002-20261014T162725Z/SYNC.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0002-20261014T162725Z/checkpoint.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0003-20261014T163426Z/STATUS.md",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0003-20261014T163426Z/SYNC.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0003-20261014T163426Z/checkpoint.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0004-20261014T165239Z/STATUS.md",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0004-20261014T165239Z/SYNC.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0004-20261014T165239Z/checkpoint.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0005-20261014T170022Z/STATUS.md",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0005-20261014T170022Z/SYNC.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0005-20261014T170022Z/checkpoint.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0006-20261014T171051Z/STATUS.md",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0006-20261014T171051Z/SYNC.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0006-20261014T171051Z/checkpoint.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0007-20261014T171705Z/STATUS.md",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0007-20261014T171705Z/SYNC.json",
+      "?? operations/continuity/outbox/EMS-20261014-FLOW-REPAIR/0007-20261014T171705Z/checkpoint.json",
+      "?? workflows/current/payload/flow-repair/.gitignore",
+      "?? workflows/current/payload/flow-repair/DELIVERY.json",
+      "?? workflows/current/payload/flow-repair/DELIVERY_GATE.json",
+      "?? workflows/current/payload/flow-repair/FINAL_REPAIR_STATE.json",
+      "?? workflows/current/payload/flow-repair/Flow_State_Roman_Urdu.srt",
+      "?? workflows/current/payload/flow-repair/PERSISTENCE_FIX.md",
+      "?? workflows/current/payload/flow-repair/PIPELINE_STATE.json",
+      "?? workflows/current/payload/flow-repair/PRE_RESET_QA.json",
+      "?? workflows/current/payload/flow-repair/PRE_RESET_RENDER_RECEIPT.json",
+      "?? workflows/current/payload/flow-repair/PROVENANCE.json",
+      "?? workflows/current/payload/flow-repair/QA.json",
+      "?? workflows/current/payload/flow-repair/README.md",
+      "?? workflows/current/payload/flow-repair/RECOVERY_PACKAGE.json",
+      "?? workflows/current/payload/flow-repair/RENDER_RECEIPT.json",
+      "?? workflows/current/payload/flow-repair/audio/line01.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line02.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line03.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line04.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line05.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line06.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line07.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line08.mp3",
+      "?? workflows/current/payload/flow-repair/audio/line09.mp3",
+      "?? workflows/current/payload/flow-repair/clean.py",
+      "?? workflows/current/payload/flow-repair/fonts/Anton-Regular.ttf",
+      "?? workflows/current/payload/flow-repair/fonts/BarlowCondensed-Medium.ttf",
+      "?? workflows/current/payload/flow-repair/fonts/BarlowCondensed-MediumItalic.ttf",
+      "?? workflows/current/payload/flow-repair/fonts/anton-OFL.txt",
+      "?? workflows/current/payload/flow-repair/fonts/barlowcondensed-OFL.txt",
+      "?? workflows/current/payload/flow-repair/icon-template.png",
+      "?? workflows/current/payload/flow-repair/matte.py",
+      "?? workflows/current/payload/flow-repair/prepare_audio.py",
+      "?? workflows/current/payload/flow-repair/prepare_visuals.py",
+      "?? workflows/current/payload/flow-repair/render.py",
+      "?? workflows/current/payload/flow-repair/repair_finish.py",
+      "?? workflows/current/payload/flow-repair/requirements.txt",
+      "?? workflows/current/payload/flow-repair/run_pipeline.py",
+      "?? workflows/current/payload/flow-repair/timeline.json",
+      "?? workflows/current/payload/flow-repair/verify.py"
+    ],
+    "remotes": [
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (fetch)",
+      "origin\thttps://github.com/adil-chandio/Monarch-Studio.git (push)"
+    ],
+    "submodules": [
+      "-756290289742535eb0ac3817548f152e9759cc70 vendor/awesome-opus5-5-videos",
+      "-f8b2552d1c4fd1ae5051dae3786719dc5bdb3ff8 vendor/effectcraft"
+    ]
+  },
+  "payload_inventory": [
+    {
+      "path": "workflows/current/payload/flow-repair/.gitignore",
+      "size": 94,
+      "sha256": "4a36098ee830d62d256428c507dbabd57053e7a9a6ab724ecdf29b29b9d7bf29"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/DELIVERY.json",
+      "size": 1178,
+      "sha256": "76722479fe408edf68f1d747b46f4c048a1dbd3e0635d228216d7269a9e3b512"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/DELIVERY_GATE.json",
+      "size": 476,
+      "sha256": "7b9fc353349d21635617108016fb76f218a7acdda2a009d332f32d0b29f1651e"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/FINAL_REPAIR_STATE.json",
+      "size": 578,
+      "sha256": "e73093c214b8f79f318574e57a324086dacafb651ca34883985eb1a68060f280"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/Flow_State_Roman_Urdu.srt",
+      "size": 2205,
+      "sha256": "3be26e6480f581a6a6e03cb82d0ba60342c107c728551de3341db19d193cfe7a"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/PERSISTENCE_FIX.md",
+      "size": 1176,
+      "sha256": "3a1a1bda957f5482c3ea8bc665263cff8e0c5fa1c2bc08059be3772c151af2a5"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/PIPELINE_STATE.json",
+      "size": 1181,
+      "sha256": "998246396df90bedb8737b27dcd00929bab7626970e6c70781c1a77bd92531db"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/PRE_RESET_QA.json",
+      "size": 2223,
+      "sha256": "f08ea7b9738bbfecf9eccb63cb7b75f324d6184995cdb98e2c93e3a25528c315"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/PRE_RESET_RENDER_RECEIPT.json",
+      "size": 355,
+      "sha256": "8a0994c54335ebdb122a8cdec76c90263496e9844aa7cd6078dd99493e35a8dd"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/PROVENANCE.json",
+      "size": 2415,
+      "sha256": "bfa7849c70b3ef016ef192626fd27e4db4ef7f17ce042856f669539aa4ef112e"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/QA.json",
+      "size": 2392,
+      "sha256": "c3dd6efb85bc484b5dd3cf4e49fff885c7df5fffba94a8e963aafe3bc3826662"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/README.md",
+      "size": 5715,
+      "sha256": "bb29a0d040041e6e5d3c06f337930daa1747f64d5d06ba337f2c388a0304b3ea"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/RECOVERY_PACKAGE.json",
+      "size": 393,
+      "sha256": "671e60a9078465314d05f58e0eac6b049b43e66fa4d86274373e1d14fbf74792"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/RENDER_RECEIPT.json",
+      "size": 409,
+      "sha256": "a4093ab3c2456dbad90065f1950786c03a0b7f9198c2e08f6b6c1f376c6ef337"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/__pycache__/clean.cpython-311.pyc",
+      "size": 12308,
+      "sha256": "029bf7e051e87e5aefb83da3555a4bef8fb96aec4494cf5076cbbc8c2ea1d459"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line01.mp3",
+      "size": 30861,
+      "sha256": "33e1f405a700bffc593b216ec676626fe3ff816812c3943aa864878e424ea334"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line02.mp3",
+      "size": 42189,
+      "sha256": "78c9f52f0930a64bc099c62da3447687f7ec5b3c836b8f13f37cfcf94d88a07f"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line03.mp3",
+      "size": 34509,
+      "sha256": "f3a65d62cef5083bcc1182b5d43ef0e4cbc66dc7e67d53ad38b473983bb1cdd2"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line04.mp3",
+      "size": 34893,
+      "sha256": "b21281cf8f4b2a473c2e9935c1013a786ef2a440bf89e54985ab55f7971088d5"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line05.mp3",
+      "size": 27021,
+      "sha256": "6765bfbb7cfd0327d85a279440bdc68d607ca0b689d72b426a375c821096675b"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line06.mp3",
+      "size": 22701,
+      "sha256": "ba9daa290ac329c03eda2e2d1891bf51a450fdd65518bda54ce4885ff4f67f86"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line07.mp3",
+      "size": 16941,
+      "sha256": "7986d21c0867562091a00db08812acd51e467c26260af909e8767d463e374b2e"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line08.mp3",
+      "size": 31341,
+      "sha256": "0fff77c4b33b8faae3c1e8550c57e2aa2b614d6c878da64d7e08fe4deeb39862"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/audio/line09.mp3",
+      "size": 25101,
+      "sha256": "623e81927bd1c66b8de25fed9c412b686ae5601ef4712c670656f8375da3ca17"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/clean.py",
+      "size": 6851,
+      "sha256": "acb34d9b89a0d02bcff0d41c1ab1a27d75f485c4be8e41f60d70b0d85adf2808"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/fonts/Anton-Regular.ttf",
+      "size": 170812,
+      "sha256": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/fonts/BarlowCondensed-Medium.ttf",
+      "size": 103360,
+      "sha256": "262bd143292ce479ee0cd09a42b47ab173fca8e9c6eb5ed0b5c8a845bc371d17"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/fonts/BarlowCondensed-MediumItalic.ttf",
+      "size": 110340,
+      "sha256": "e036488bfe3ea1e9f39f006b1237c2931e7cfea7d9ecdccdf17507a5986f73d9"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/fonts/anton-OFL.txt",
+      "size": 4391,
+      "sha256": "eee1d24ff8f553eb732237c7dd9b945a78313ed49ad6de02872a47277741b44a"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/fonts/barlowcondensed-OFL.txt",
+      "size": 4377,
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/icon-template.png",
+      "size": 1156,
+      "sha256": "1a70109c7bfd4e1ce618c26ee4e3cd9bcdf55512c8de6b08a501cbcbc7a8dead"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/matte.py",
+      "size": 6480,
+      "sha256": "e7c81e00ca316b93708d5d2ba0cac6440d0e3f24ab5daf1bc7a59ab967f20545"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/prepare_audio.py",
+      "size": 9764,
+      "sha256": "efb7e60b6600b8bda0cf025ad563b16b7aee941da30c040c3200df68e8b75d31"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/prepare_visuals.py",
+      "size": 2421,
+      "sha256": "26c57a421d60ebe6157bf9a182f70f1aa7c298fb661ae1a66a81c55a5c6423a7"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/render.py",
+      "size": 11790,
+      "sha256": "807cb44ea2ffa4a4543871adddb612993c299eacfae9fe1341165fb4423c0831"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/repair_finish.py",
+      "size": 2579,
+      "sha256": "34e8f1e8b3d9b0dfb14107f3ab3ccb04967afb0609e9969e30bd4c0f2b31962b"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/requirements.txt",
+      "size": 97,
+      "sha256": "f46f1b2e831a6d9df16b39d2a91ebc5b3bb02bb9f644a4e902e81cd1d631826b"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/run_pipeline.py",
+      "size": 3033,
+      "sha256": "9c32a5efdea8b0d384df3c766bec0b9e1a0198ad62bcb5926d8a7cb0e6241d06"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/timeline.json",
+      "size": 15626,
+      "sha256": "b430ae138e6707ce886fe3551bc304239b4fb92709c6b936e234c74423babecb"
+    },
+    {
+      "path": "workflows/current/payload/flow-repair/verify.py",
+      "size": 5611,
+      "sha256": "92b5b5ba9510f4789d1ed55668286adf9247148337af10446d4446ef15df357f"
+    }
+  ]
+}

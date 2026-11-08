@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "EMS-20261011-001",
+  "status": "completed",
+  "title": "Style Library + Crash-Proof Continuity System v1",
+  "style_id": null,
+  "goal": "Create separately named permanent editing-style libraries, keep only one running task in workflows/current, preserve exact visible chat/actions and resume state, checkpoint at least hourly, and synchronize evidence to GitHub, Drive, Notion, Linear and Google Docs without silent omissions.",
+  "acceptance_criteria": [
+    "Every permanent editing style has its own complete named folder and knowledge index.",
+    "workflows/current contains only the single running task and an exact next action.",
+    "Refresh/restart recovery continues from a verified hash-chained checkpoint rather than restarting.",
+    "Hourly/event-driven checkpoint packages and five-platform sync ledgers exist.",
+    "Repository, tests, authorities and remote records validate without unrecorded drift."
+  ],
+  "started_at": "2026-10-10T21:27:20Z",
+  "updated_at": "2026-10-10T22:17:08Z",
+  "checkpoint_sequence": 6,
+  "event_sequence": 52,
+  "journal_head": "a78fb59e13c6757b3555965abf95920433eb2bdb8fc67bba2330f930a9eaa25f",
+  "last_checkpoint": "2026-10-10T22:17:08Z",
+  "last_checkpoint_path": "operations/continuity/checkpoints/EMS-20261011-001/0006-20261010T221708Z",
+  "next_action": "Task complete; consult permanent archive.",
+  "running_processes": [],
+  "remote_sync": {
+    "github": "pending",
+    "google_docs": "pending",
+    "google_drive": "pending",
+    "linear": "pending",
+    "notion": "pending"
+  }
+}

@@ -401,11 +401,6 @@ function ResearchPanel({ onNavigate }) {
                     // the ask itself, first: a median without its search order is unreadable
                     r.order ? `asked as ${r.order}` : null,
                     r.saturation?.median_views != null ? `median ${fmtCount(r.saturation.median_views)} views` : null,
-                    r.saturation?.median_age_days != null
-                      ? `sample median age ${r.saturation.median_age_days < 1
-                          ? `${Math.round(r.saturation.median_age_days * 24)}h`
-                          : `${Math.round(r.saturation.median_age_days)}d`}`
-                      : null,
                     r.vph_median != null ? `${fmtCount(r.vph_median)} views/hour` : null,
                     r.saturation?.reading || null,
                   ].filter(Boolean);

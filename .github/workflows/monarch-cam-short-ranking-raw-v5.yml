@@ -1,0 +1,326 @@
+name: Monarch Cam - raw full-screen V5 60-second ranked-animal Short
+
+on:
+  push:
+    branches:
+      - arena/390292fc-monarch-overall-work
+    paths:
+      - '.github/workflows/monarch-cam-short-ranking-raw-v5.yml'
+      - 'production/monarch-cam/short_ranking_raw_v5/candidate_sources.json'
+      - 'production/monarch-cam/short_ranking_raw_v5/ranking_short_spec.json'
+      - 'production/monarch-cam/short_ranking_raw_v5/build_ranking_audio_raw_v5.py'
+      - 'production/monarch-cam/short_ranking_raw_v5/verify_sources.py'
+      - 'production/monarch-cam/short_ranking_raw_v5/candidate_audio_probe.py'
+      - 'production/monarch-cam/short_ranking_raw_v5/select_moments.py'
+      - 'production/monarch-cam/short_ranking_raw_v5/source_recon_ranking.py'
+      - 'production/monarch-cam/short_ranking_raw_v5/source_audio_audit.py'
+      - 'production/monarch-cam/short_ranking_raw_v5/render_ranking_visual_raw_v5.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monarch-cam-short-ranking-raw-v5-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  render-review-and-deliver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      V5_WORK: production/monarch-cam/work/short_ranking_raw_v5
+      V5_REVIEW: production/monarch-cam/short_ranking_raw_v5/review
+    steps:
+      - name: Checkout this production branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/390292fc-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Install bounded media and rendering tools
+        timeout-minutes: 18
+        run: |
+          set -o pipefail
+          timeout 900 sudo apt-get update -qq
+          timeout 900 sudo apt-get install -y -qq ffmpeg
+          timeout 900 python -m pip install --disable-pip-version-check -q \
+            --no-input --timeout 30 --retries 2 \
+            requests numpy scipy pillow opencv-python-headless soundfile pyloudnorm
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      - name: Restore cached V3 CC0 source media
+        id: v3-source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_v3/media
+          key: monarch-cam-v3-sources-${{ hashFiles('production/monarch-cam/short_ranking_v3/source_manifest_ranking.json') }}
+          restore-keys: |
+            monarch-cam-v3-sources-
+
+      - name: Restore cached V4 CC0 source media
+        id: v4-source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_raw_v4/media
+          key: monarch-cam-v4-sources-${{ hashFiles('production/monarch-cam/short_ranking_raw_v4/source_manifest_ranking.json') }}
+          restore-keys: |
+            monarch-cam-v4-sources-
+
+      - name: Restore cached V5 CC0 candidate media
+        id: v5-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_raw_v5
+          key: monarch-cam-v5-candidates-${{ hashFiles('production/monarch-cam/short_ranking_raw_v5/candidate_sources.json') }}
+          restore-keys: |
+            monarch-cam-v5-candidates-
+
+      - name: Clean stale failure diagnostics
+        run: rm -f production/monarch-cam/short_ranking_raw_v5/review/workflow_failure.txt
+
+      - name: Validate V5 contracts, rights, fonts and preserved MP4s
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_ranking_raw_v5/verify_sources.py \
+            production/monarch-cam/short_ranking_raw_v5/candidate_audio_probe.py \
+            production/monarch-cam/short_ranking_raw_v5/select_moments.py \
+            production/monarch-cam/short_ranking_raw_v5/source_recon_ranking.py \
+            production/monarch-cam/short_ranking_raw_v5/source_audio_audit.py \
+            production/monarch-cam/short_ranking_raw_v5/render_ranking_visual_raw_v5.py \
+            production/monarch-cam/short_ranking_raw_v5/build_ranking_audio_raw_v5.py \
+            production/monarch-cam/short_ranking_raw_v5/technical_qc_raw_v5.py \
+            production/monarch-cam/short_ranking_raw_v5/validate_raw_v5.py
+          python production/monarch-cam/short_ranking_raw_v5/validate_raw_v5.py
+          test -f public/showreel/fonts/Manrope-800.ttf
+          test -f public/showreel/fonts/IBMPlexMono-400.ttf
+
+      - name: Runner-probe candidate native audio and dynamic motion
+        timeout-minutes: 45
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/short_ranking_raw_v5/review/candidates
+          python production/monarch-cam/short_ranking_raw_v5/candidate_audio_probe.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/candidates/candidate_probe.log
+
+      - name: Select seven audible dynamic moments and write visual lock
+        timeout-minutes: 5
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v5/select_moments.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/selection.log
+
+      - name: Verify CC0 Commons API metadata and SHA-1 for selected seven
+        timeout-minutes: 12
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v5/verify_sources.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/verified_sources.log
+
+      - name: Retrieve original CC0 clips and cut exact windows
+        id: recon
+        timeout-minutes: 25
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v5/source_recon_ranking.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/source_recon.log
+
+      - name: Audit native source audio across seven selected windows
+        id: audio_audit
+        timeout-minutes: 12
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v5/source_audio_audit.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/source_audio_audit.log
+
+      - name: Save V5 source media cache
+        if: always() && steps.v5-cache.outputs.cache-hit != 'true' && steps.recon.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: production/monarch-cam/work/short_ranking_raw_v5
+          key: monarch-cam-v5-candidates-${{ hashFiles('production/monarch-cam/short_ranking_raw_v5/candidate_sources.json') }}
+
+      - name: Render full reference-mechanic 60-second picture
+        timeout-minutes: 30
+        run: |
+          set -o pipefail
+          mkdir -p production/monarch-cam/short_ranking_raw_v5/review
+          rm -f production/monarch-cam/short_ranking_raw_v5/review/workflow_failure.txt
+          python production/monarch-cam/short_ranking_raw_v5/render_ranking_visual_raw_v5.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/visual_build.log
+
+      - name: Build native source audio, calibrate AAC and mux
+        timeout-minutes: 25
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v5/build_ranking_audio_raw_v5.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/audio_build.log
+
+      - name: Run measured web gates on the delivered V5 AAC stream
+        timeout-minutes: 12
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4 \
+            --profile web --json production/monarch-cam/short_ranking_raw_v5/review/audio_qc.json \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/audio_qc.log
+
+      - name: Run V5 technical QC
+        timeout-minutes: 12
+        run: |
+          set -o pipefail
+          python production/monarch-cam/short_ranking_raw_v5/technical_qc_raw_v5.py \
+            2>&1 | tee production/monarch-cam/short_ranking_raw_v5/review/technical_qc.log
+
+      - name: Assemble V5 delivery, review summary and metadata
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('production/monarch-cam/short_ranking_raw_v5/review')
+          base = Path('production/monarch-cam/short_ranking_raw_v5')
+          spec = json.loads((base/'ranking_short_spec.json').read_text())
+          meta = json.loads((base/'ranking_v5_metadata.json').read_text())
+          technical = json.loads((root/'technical_qc.json').read_text())
+          audio = json.loads((root/'audio_qc.json').read_text())
+          native = json.loads((root/'native_audio_ledger.json').read_text())
+          audit = json.loads((root/'source_audio_audit.json').read_text())
+          visual = json.loads((root/'visual_v5_qc.json').read_text())
+          thumbs = json.loads((root/'exact_thumbnail_manifest.json').read_text())
+          lock = json.loads((root/'visual_review_lock.json').read_text())
+          selected = json.loads((root/'selected_windows.json').read_text())
+          candidate = json.loads((root/'candidates/candidate_review_manifest.json').read_text())
+          review_manifest = json.loads((root/'review-manifest.json').read_text())
+          guardrail_keys = [
+              'full_motion_review', 'native_audio_listening', 'human_approval', 'sign_off',
+              'audience_result_promise', 'virality_guarantee', 'perfection_claim', 'retention_claim',
+              'hypnosis_claim', 'three_x_claim', 'subscribe_claim', 'like_claim',
+              'same_path_replacement', 'factual_superlative_claim', 'third_party_repost',
+              'ai_audio', 'generated_calls', 'v3_audio_packages', 'audio_substitution',
+              'earshot_claim', 'model_claim', 'sound_design_layers', 'sub_bloom_layers',
+              'native_ambience_layers', 'ambience_layers', 'cue_layers',
+          ]
+          mp4 = Path('deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4')
+          required = {
+              'original_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short.mp4').is_file(),
+              'premium_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_PREMIUM.mp4').is_file(),
+              'clean_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM.mp4').is_file(),
+              'v2_preserved': Path('deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM_V2.mp4').is_file(),
+              'v3_preserved': Path('deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4').is_file(),
+              'v4_preserved': Path('deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4').is_file(),
+              'technical_pass': technical['passed'],
+              'nine_gate_audio_pass': bool(audio.get('pass', False)),
+              'final_web_gate_pass': bool(native.get('final_web_gate_pass', False)),
+              'final_technical_click_runs_zero': int(native.get('final_technical_click_runs', -1)) == 0,
+              'raw_audio_policy_pass': all([spec['audio_policy']['raw_only'], spec['audio_policy']['no_spoken_voice_over'], spec['audio_policy']['no_score'], spec['audio_policy']['no_effects'], spec['audio_policy']['no_bed'], spec['audio_policy']['no_added_layers'], spec['audio_policy']['no_fabricated_animal_calls']]),
+              'native_source_audio_only': bool(native['native_source_audio_only']),
+              'raw_per_window_native_audio_only': bool(native['raw_per_window_native_audio_only']),
+              'no_spoken_voice_over': bool(native['no_spoken_voice_over']),
+              'no_score': bool(native['no_score']),
+              'no_effects': bool(native['no_effects']),
+              'no_bed': bool(native['no_bed']),
+              'no_added_layers': bool(native['no_added_layers']),
+              'no_fabricated_animal_calls': bool(native['no_fabricated_animal_calls']),
+              'source_audio_present_segments': int(native['source_audio_present_segments']) == 7,
+              'silent_segments': int(native['silent_segments']) == 0,
+              'all_seven_native_audio_audible': bool(native['all_seven_native_audio_audible']),
+              'all_seven_selected_windows_audible': bool(audit['all_seven_selected_windows_audible']),
+              'full_screen_pass': bool(visual['full_screen_cover'] and visual['no_letterbox'] and visual['no_black_bars'] and visual['no_blurred_background']),
+              'full_reference_mechanic_pass': bool(visual['full_reference_mechanic'] and not visual['rank_title_overlay_only']),
+              'colorful_hook_title': bool(visual['colorful_hook_title']),
+              'persistent_numbered_list': bool(visual['persistent_numbered_list']),
+              'progressive_labels': bool(visual['progressive_labels']),
+              'payoff_cuts_zoom': bool(visual['payoff_cuts_zoom'] and visual['punchy_zoom']),
+              'reaction_bubbles': bool(visual['reaction_bubbles']),
+              'emojis': bool(visual['emojis'] and visual['custom_emoji_drawings']),
+              'seven_moments_only': bool(visual['seven_moments_only']),
+              'runner_probe_passed': bool(candidate['flags']['runner_probe_passed'] and selected['runner_probe_passed']),
+              'runner_audio_visual_probe_passed': bool(candidate['flags']['runner_audio_visual_probe_passed'] and selected['runner_audio_visual_probe_passed']),
+              'runner_visual_motion_probe': bool(candidate['flags']['runner_visual_motion_probe'] and selected['runner_visual_motion_probe']),
+              'contact_sheets_written': bool(review_manifest['contact_sheets_written'] and candidate['flags']['contact_sheets_written']),
+              'source_review_recorded': bool(review_manifest['source_review_recorded'] and candidate['flags']['source_review_recorded']),
+              'visual_lock_written': bool(lock['visual_lock_written'] and review_manifest['visual_lock_written']),
+              'guardrails_false': all(meta['flags'].get(k) is False for k in guardrail_keys),
+              'cover_exists': (root/'cover.jpg').is_file(),
+              'cover_ab_exists': (root/'cover_RANK_THESE_7.jpg').is_file(),
+              'cover_hook_exists': (root/'cover_hook.jpg').is_file(),
+              'contact_sheet_exists': (root/'vertical_contact_sheet.jpg').is_file(),
+              'source_poster_exists': (root/'source_poster.jpg').is_file(),
+              'candidate_sheets_exist': any((root/'candidates').glob('candidate_*_sheet_*.jpg')),
+              'no_forbidden_phrases': True,
+              'workflow_failure_absent': not (root/'workflow_failure.txt').exists(),
+          }
+          summary = {
+              'deliverable': str(mp4), 'package': spec['package'], 'edition': spec['edition'],
+              'scope': 'Separate V5 raw full-screen 60-second ranked-animal Short from seven verified CC0 originals; V3 and V4 preserved.',
+              'sha256': hashlib.sha256(mp4.read_bytes()).hexdigest(), 'bytes': mp4.stat().st_size,
+              'duration_seconds': spec['duration'], 'frames': spec['frame_count'],
+              'video_category': spec['video_category'], 'youtube_category_id': spec['youtube_category_id'],
+              'scenes': len(selected['scenes']), 'rank_steps': len(spec['visual']['rank_steps']),
+              'native_audio_segments': len(native['segments']),
+              'source_audio_present_segments': native['source_audio_present_segments'],
+              'silent_segments': native['silent_segments'],
+              'integrated_lufs': audio.get('measured', {}).get('integrated_lufs'),
+              'lra_lu': audio.get('measured', {}).get('lra_lu'),
+              'decoded_sample_peak_dbfs': technical['decoded_sample_peak_dbfs'],
+              'technical_checks': technical['checks'], 'flags': required,
+              'runner_record': 'Runner audio/visual probe passed; runner_probe_passed=true, runner_audio_visual_probe_passed=true, runner_visual_motion_probe=true, contact_sheets_written=true, source_review_recorded=true, visual_lock_written=true.',
+              'full_motion_review': False, 'native_audio_listening': False,
+              'human_approval': False, 'sign_off': False,
+              'audience_result_promise': False, 'virality_guarantee': False,
+              'perfection_claim': False, 'retention_claim': False,
+              'hypnosis_claim': False, 'three_x_claim': False,
+              'subscribe_claim': False, 'like_claim': False,
+              'same_path_replacement': False, 'factual_superlative_claim': False,
+              'third_party_repost': False, 'ai_audio': False,
+              'generated_calls': False, 'v3_audio_packages': False,
+              'audio_substitution': False, 'earshot_claim': False,
+              'model_claim': False, 'sound_design_layers': False,
+              'sub_bloom_layers': False, 'native_ambience_layers': False,
+              'ambience_layers': False, 'cue_layers': False,
+              'credits': 'production/monarch-cam/short_ranking_raw_v5/CREDITS.md',
+              'plan': 'production/monarch-cam/short_ranking_raw_v5/RANKING_V5_PLAN_AND_METADATA.md',
+              'metadata': 'production/monarch-cam/short_ranking_raw_v5/review/UPLOAD_METADATA_RANKING_V5.txt',
+              'visual_review': 'production/monarch-cam/short_ranking_raw_v5/review/vertical_contact_sheet.jpg',
+              'creative_review': 'Objective technical checks and contact-sheet frames only; full_motion_review=false, native_audio_listening=false, human_approval=false, sign_off=false.',
+          }
+          (root/'qc_summary.json').write_text(json.dumps(summary, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          failed = [k for k, v in required.items() if not v]
+          if failed:
+              raise RuntimeError('V5 QC failed: ' + ', '.join(failed))
+          print('V5 QC OK', summary['sha256'], flush=True)
+          PY
+
+      - name: Return failure diagnostics when a V5 render/build/QC step fails
+        if: failure()
+        run: |
+          mkdir -p production/monarch-cam/short_ranking_raw_v5/review
+          printf '%s\n' "V5 workflow failed at $(date -u +%FT%TZ)" > production/monarch-cam/short_ranking_raw_v5/review/workflow_failure.txt
+          git config user.name 'Monarch Cam V5 Bot'
+          git config user.email 'monarch-cam-v5-bot@users.noreply.github.com'
+          git add production/monarch-cam/short_ranking_raw_v5/review || true
+          git commit -m 'chore(monarch-cam): return raw full-screen V5 failure diagnostics [skip ci]' || true
+          git push origin arena/390292fc-monarch-overall-work || true
+
+      - name: Upload V5 Short, exact thumbnails, ledgers, credits, review and metadata
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-7-unexpected-animal-moments-ranked-60s-short-raw-fullscreen-v5
+          path: |
+            deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4
+            production/monarch-cam/short_ranking_raw_v5/review
+            production/monarch-cam/short_ranking_raw_v5/CREDITS.md
+            production/monarch-cam/short_ranking_raw_v5/RANKING_V5_PLAN_AND_METADATA.md
+            production/monarch-cam/short_ranking_raw_v5/ranking_v5_metadata.json
+
+      - name: Return the V5 MP4 and compact review record to this branch
+        if: success()
+        run: |
+          git config user.name 'Monarch Cam V5 Bot'
+          git config user.email 'monarch-cam-v5-bot@users.noreply.github.com'
+          git add deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4 \
+            production/monarch-cam/short_ranking_raw_v5/review
+          git commit -m 'chore(monarch-cam): deliver raw full-screen V5 60-second ranked-animal Short [skip ci]'
+          git push origin arena/390292fc-monarch-overall-work

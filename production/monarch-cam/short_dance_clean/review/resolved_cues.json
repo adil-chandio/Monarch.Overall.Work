@@ -1,0 +1,516 @@
+{
+  "fps": 30,
+  "duration_seconds": 24.0,
+  "picture_reference": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM.mp4",
+  "picture_policy": "Premium 24-second retention-first native-vertical edit of public-domain USFWS Laysan albatross courtship dance; cues align only to visible cuts, dance-card steps, sync freeze, replay and loop accents.",
+  "premium": {
+    "salience_roles": {
+      "hero": 0.0,
+      "support": -4.5,
+      "breath": -7.0
+    },
+    "sub_bloom_events": [
+      {
+        "frame": 2,
+        "t": 0.066667,
+        "peak_dbfs": -28.0,
+        "picture": "Hero visual reveal / sync / replay",
+        "placement": {
+          "timeline_peak": 0.066667,
+          "timeline_start": 0.0,
+          "source_peak_seconds": 0.071458,
+          "target_peak_dbfs": -28.0,
+          "timeline_end": 0.715208
+        },
+        "generated_audio": true,
+        "generated_bird_vocalisation": false,
+        "note": "Original low-frequency cinematic bloom; not a wildlife event."
+      },
+      {
+        "frame": 177,
+        "t": 5.9,
+        "peak_dbfs": -28.0,
+        "picture": "Hero visual reveal / sync / replay",
+        "placement": {
+          "timeline_peak": 5.9,
+          "timeline_start": 5.828542,
+          "source_peak_seconds": 0.071458,
+          "target_peak_dbfs": -28.0,
+          "timeline_end": 6.548542
+        },
+        "generated_audio": true,
+        "generated_bird_vocalisation": false,
+        "note": "Original low-frequency cinematic bloom; not a wildlife event."
+      },
+      {
+        "frame": 360,
+        "t": 12.0,
+        "peak_dbfs": -28.0,
+        "picture": "Hero visual reveal / sync / replay",
+        "placement": {
+          "timeline_peak": 12.0,
+          "timeline_start": 11.928542,
+          "source_peak_seconds": 0.071458,
+          "target_peak_dbfs": -28.0,
+          "timeline_end": 12.648542
+        },
+        "generated_audio": true,
+        "generated_bird_vocalisation": false,
+        "note": "Original low-frequency cinematic bloom; not a wildlife event."
+      },
+      {
+        "frame": 549,
+        "t": 18.3,
+        "peak_dbfs": -28.0,
+        "picture": "Hero visual reveal / sync / replay",
+        "placement": {
+          "timeline_peak": 18.3,
+          "timeline_start": 18.228542,
+          "source_peak_seconds": 0.071458,
+          "target_peak_dbfs": -28.0,
+          "timeline_end": 18.948542
+        },
+        "generated_audio": true,
+        "generated_bird_vocalisation": false,
+        "note": "Original low-frequency cinematic bloom; not a wildlife event."
+      }
+    ],
+    "sfx_panning": "constant-power motion pan",
+    "voice_aware_presence_dip": 0.45,
+    "stereo_width_music": 0.85,
+    "stereo_width_ambience": 0.55,
+    "envelope_smoothing": "pchip"
+  },
+  "events": [
+    {
+      "id": "dance:impact:2",
+      "frame": 2,
+      "t": 0.06666666666666667,
+      "kind": "impact",
+      "peak_dbfs": -23.0,
+      "effective_peak_dbfs": -23.0,
+      "salience_role": "hero",
+      "pan": [
+        -0.15,
+        0.15
+      ],
+      "picture": "Immediate hook",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 0.066667,
+        "timeline_start": 0.0,
+        "source_peak_seconds": 0.099229,
+        "target_peak_dbfs": -23.0,
+        "timeline_end": 0.237146
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:whoosh:42",
+      "frame": 42,
+      "t": 1.4,
+      "kind": "whoosh",
+      "peak_dbfs": -28.0,
+      "effective_peak_dbfs": -32.5,
+      "salience_role": "support",
+      "pan": [
+        -0.55,
+        0.55
+      ],
+      "picture": "First cut",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 1.4,
+        "timeline_start": 1.287313,
+        "source_peak_seconds": 0.112687,
+        "target_peak_dbfs": -32.5,
+        "timeline_end": 1.787313
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:boing:87",
+      "frame": 87,
+      "t": 2.9,
+      "kind": "boing",
+      "peak_dbfs": -26.0,
+      "effective_peak_dbfs": -30.5,
+      "salience_role": "support",
+      "pan": [
+        0.2,
+        -0.2
+      ],
+      "picture": "Bow reveal",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "cartoon_boing",
+      "source_file": "selected_boing.wav",
+      "placement": {
+        "timeline_peak": 2.9,
+        "timeline_start": 2.880896,
+        "source_peak_seconds": 0.019104,
+        "target_peak_dbfs": -30.5,
+        "timeline_end": 3.449958
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:tick:132",
+      "frame": 132,
+      "t": 4.4,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "effective_peak_dbfs": -35.5,
+      "salience_role": "support",
+      "pan": [
+        -0.35,
+        0.0
+      ],
+      "picture": "Sky-point reveal",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "comedy_tick",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 4.4,
+        "timeline_start": 4.374333,
+        "source_peak_seconds": 0.025667,
+        "target_peak_dbfs": -35.5,
+        "timeline_end": 4.633167
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:impact:177",
+      "frame": 177,
+      "t": 5.9,
+      "kind": "impact",
+      "peak_dbfs": -24.5,
+      "effective_peak_dbfs": -24.5,
+      "salience_role": "hero",
+      "pan": [
+        -0.1,
+        0.1
+      ],
+      "picture": "Midway pair",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 5.9,
+        "timeline_start": 5.800771,
+        "source_peak_seconds": 0.099229,
+        "target_peak_dbfs": -24.5,
+        "timeline_end": 6.070479
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:whoosh:219",
+      "frame": 219,
+      "t": 7.3,
+      "kind": "whoosh",
+      "peak_dbfs": -28.0,
+      "effective_peak_dbfs": -32.5,
+      "salience_role": "support",
+      "pan": [
+        0.55,
+        -0.45
+      ],
+      "picture": "Step 01 bow",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 7.3,
+        "timeline_start": 7.187312,
+        "source_peak_seconds": 0.112687,
+        "target_peak_dbfs": -32.5,
+        "timeline_end": 7.687312
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:boing:264",
+      "frame": 264,
+      "t": 8.8,
+      "kind": "boing",
+      "peak_dbfs": -26.0,
+      "effective_peak_dbfs": -30.5,
+      "salience_role": "support",
+      "pan": [
+        -0.25,
+        0.25
+      ],
+      "picture": "Step 02 clack",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "cartoon_boing",
+      "source_file": "selected_boing.wav",
+      "placement": {
+        "timeline_peak": 8.8,
+        "timeline_start": 8.780896,
+        "source_peak_seconds": 0.019104,
+        "target_peak_dbfs": -30.5,
+        "timeline_end": 9.349958
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:tick:312",
+      "frame": 312,
+      "t": 10.4,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "effective_peak_dbfs": -35.5,
+      "salience_role": "support",
+      "pan": [
+        0.3,
+        -0.3
+      ],
+      "picture": "Step 03 sky point",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "comedy_tick",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 10.4,
+        "timeline_start": 10.374333,
+        "source_peak_seconds": 0.025667,
+        "target_peak_dbfs": -35.5,
+        "timeline_end": 10.633167
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:impact:360",
+      "frame": 360,
+      "t": 12.0,
+      "kind": "impact",
+      "peak_dbfs": -24.5,
+      "effective_peak_dbfs": -24.5,
+      "salience_role": "hero",
+      "pan": [
+        0.0,
+        0.0
+      ],
+      "picture": "Sync badge",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 12.0,
+        "timeline_start": 11.900771,
+        "source_peak_seconds": 0.099229,
+        "target_peak_dbfs": -24.5,
+        "timeline_end": 12.170479
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:whoosh:405",
+      "frame": 405,
+      "t": 13.5,
+      "kind": "whoosh",
+      "peak_dbfs": -28.0,
+      "effective_peak_dbfs": -32.5,
+      "salience_role": "support",
+      "pan": [
+        -0.5,
+        0.5
+      ],
+      "picture": "Dance-party wide",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 13.5,
+        "timeline_start": 13.387313,
+        "source_peak_seconds": 0.112687,
+        "target_peak_dbfs": -32.5,
+        "timeline_end": 13.887313
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:boing:453",
+      "frame": 453,
+      "t": 15.1,
+      "kind": "boing",
+      "peak_dbfs": -26.0,
+      "effective_peak_dbfs": -30.5,
+      "salience_role": "support",
+      "pan": [
+        0.15,
+        -0.15
+      ],
+      "picture": "Pair bond",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "cartoon_boing",
+      "source_file": "selected_boing.wav",
+      "placement": {
+        "timeline_peak": 15.1,
+        "timeline_start": 15.080896,
+        "source_peak_seconds": 0.019104,
+        "target_peak_dbfs": -30.5,
+        "timeline_end": 15.649958
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:tick:504",
+      "frame": 504,
+      "t": 16.8,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "effective_peak_dbfs": -35.5,
+      "salience_role": "support",
+      "pan": [
+        -0.25,
+        0.25
+      ],
+      "picture": "Punchline",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "comedy_tick",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 16.8,
+        "timeline_start": 16.774333,
+        "source_peak_seconds": 0.025667,
+        "target_peak_dbfs": -35.5,
+        "timeline_end": 17.033167
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:impact:549",
+      "frame": 549,
+      "t": 18.3,
+      "kind": "impact",
+      "peak_dbfs": -24.5,
+      "effective_peak_dbfs": -24.5,
+      "salience_role": "hero",
+      "pan": [
+        0.0,
+        0.0
+      ],
+      "picture": "Replay",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_impact",
+      "source_file": "selected_impact.wav",
+      "placement": {
+        "timeline_peak": 18.3,
+        "timeline_start": 18.200771,
+        "source_peak_seconds": 0.099229,
+        "target_peak_dbfs": -24.5,
+        "timeline_end": 18.470479
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:whoosh:570",
+      "frame": 570,
+      "t": 19.0,
+      "kind": "whoosh",
+      "peak_dbfs": -28.0,
+      "effective_peak_dbfs": -32.5,
+      "salience_role": "support",
+      "pan": [
+        0.45,
+        -0.45
+      ],
+      "picture": "Loop start",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "soft_whoosh",
+      "source_file": "selected_whoosh.wav",
+      "placement": {
+        "timeline_peak": 19.0,
+        "timeline_start": 18.887313,
+        "source_peak_seconds": 0.112687,
+        "target_peak_dbfs": -32.5,
+        "timeline_end": 19.387313
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:boing:600",
+      "frame": 600,
+      "t": 20.0,
+      "kind": "boing",
+      "peak_dbfs": -26.0,
+      "effective_peak_dbfs": -30.5,
+      "salience_role": "support",
+      "pan": [
+        -0.15,
+        0.15
+      ],
+      "picture": "Loop accent",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "cartoon_boing",
+      "source_file": "selected_boing.wav",
+      "placement": {
+        "timeline_peak": 20.0,
+        "timeline_start": 19.980896,
+        "source_peak_seconds": 0.019104,
+        "target_peak_dbfs": -30.5,
+        "timeline_end": 20.549958
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    },
+    {
+      "id": "dance:tick:660",
+      "frame": 660,
+      "t": 22.0,
+      "kind": "tick",
+      "peak_dbfs": -31.0,
+      "effective_peak_dbfs": -38.0,
+      "salience_role": "breath",
+      "pan": [
+        0.2,
+        -0.2
+      ],
+      "picture": "Closing tick",
+      "sound_need": "One salience-layered cleared graphic accent aligned to the visible cut or dance-card step; no unsupported wildlife event.",
+      "source_asset": "comedy_tick",
+      "source_file": "selected_tick.wav",
+      "placement": {
+        "timeline_peak": 22.0,
+        "timeline_start": 21.974333,
+        "source_peak_seconds": 0.025667,
+        "target_peak_dbfs": -38.0,
+        "timeline_end": 22.233167
+      },
+      "supported_by_picture": true,
+      "generated_audio": false
+    }
+  ],
+  "intentionally_silent": [
+    {
+      "frame": 360,
+      "t": 12.0,
+      "picture": "Wider colony context; no specific bird call is depicted.",
+      "reason": "No generated bird vocalisation; only a low-level original sub-bloom supports the visual reveal."
+    },
+    {
+      "frame": 549,
+      "t": 18.3,
+      "picture": "Loop returns to the opening pair.",
+      "reason": "No bear, car, handle, door, attack or generated bird sound is added; only the original sub-bloom."
+    }
+  ]
+}
