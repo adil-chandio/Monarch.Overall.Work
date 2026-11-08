@@ -1,0 +1,30 @@
+{
+  "method": "Compare YouTube metadata, Gemini models and a text-only call using one existing configured credential; attempt a 16-second public video URL only if text works. Error text/credentials are not stored.",
+  "video_id": "aWHX5Awe_TI",
+  "outcome": "completed",
+  "youtube_metadata": {
+    "http_status": 200,
+    "status": null,
+    "reasons": []
+  },
+  "gemini_models": {
+    "http_status": 403,
+    "status": "PERMISSION_DENIED",
+    "reasons": [
+      "SERVICE_DISABLED"
+    ],
+    "services": [
+      "generativelanguage.googleapis.com"
+    ]
+  },
+  "gemini_text": {
+    "http_status": 403,
+    "status": "PERMISSION_DENIED",
+    "reasons": [
+      "API_KEY_SERVICE_BLOCKED"
+    ],
+    "services": [
+      "generativelanguage.googleapis.com"
+    ]
+  }
+}
