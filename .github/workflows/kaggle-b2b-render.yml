@@ -376,7 +376,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'onetoall-recover-diagnostics' production/mafia-temple/trigger.txt; then
+          if grep -q 'onetoall-recover-diagnostics-v2' production/mafia-temple/trigger.txt; then
+            PILOT_KERNEL_SLUG=monarch-onetoall-run-42509202109 python production/mafia-temple/onetoall_diagnose.py
+          elif grep -q 'onetoall-recover-diagnostics' production/mafia-temple/trigger.txt; then
             mkdir -p /tmp/onetoall-recover
             gh run download 42508582972 -n onetoall-running-research -D /tmp/onetoall-recover
             python - <<'PY'
