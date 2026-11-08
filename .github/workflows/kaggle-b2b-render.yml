@@ -377,7 +377,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if grep -q 'onetoall-recover-result' production/mafia-temple/trigger.txt; then
-            bash production/mafia-temple/recover_onetoall_pilot.sh
+            set +e
+            set -o pipefail
+            bash production/mafia-temple/recover_onetoall_pilot.sh 2>&1 | tee "$RUNNER_TEMP/onetoall-recover.log"
+            status=${PIPESTATUS[0]}
+            if [ "$status" -ne 0 ]; then
+              python - <<'PY'
+          import os, pathlib, re
+          p=pathlib.Path(os.environ['RUNNER_TEMP'])/'onetoall-recover.log'
+          lines=[x for x in p.read_text(errors='replace').splitlines() if len(x)<350 and not re.search(r'(?i)secret|password|kgat|authorization|token',x)]
+          for line in lines[-8:]: print('::error title=Recovery diagnostic::'+line.replace('%','%25'))
+          PY
+              exit "$status"
+            fi
           elif grep -q 'onetoall-recover-diagnostics-v2' production/mafia-temple/trigger.txt; then
             export PILOT_KERNEL_SLUG=monarch-onetoall-run-42511685428
             echo "::notice title=One-to-All current Kaggle status::$(kaggle kernels status "$KAGGLE_USERNAME/$PILOT_KERNEL_SLUG" 2>&1)"
