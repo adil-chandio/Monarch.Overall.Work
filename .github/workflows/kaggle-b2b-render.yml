@@ -376,7 +376,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'onetoall-running-research' production/mafia-temple/trigger.txt; then
+          if grep -q 'onetoall-recover-diagnostics' production/mafia-temple/trigger.txt; then
+            mkdir -p /tmp/onetoall-recover
+            gh run download 42508582972 -n onetoall-running-research -D /tmp/onetoall-recover
+            python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('/tmp/onetoall-recover/failure-diagnostics.json')
+          d=json.loads(p.read_text())
+          for line in d.get('events', [])[-40:]:
+              print('::warning title=One-to-All remote diagnostic::'+line.replace('%','%25').replace('\n','%0A'))
+          for line in d.get('tail', [])[-10:]:
+              print('::warning title=One-to-All remote tail::'+line.replace('%','%25').replace('\n','%0A'))
+          PY
+          elif grep -q 'onetoall-running-research' production/mafia-temple/trigger.txt; then
             set +e
             set -o pipefail
             bash production/mafia-temple/run_onetoall_pilot.sh 2>&1 | tee "$RUNNER_TEMP/onetoall-client.log"
@@ -467,7 +479,7 @@ jobs:
           retention-days: 7
       - name: Save motion clips to the session branch
         run: |
-          if grep -q 'onetoall-running-research' production/mafia-temple/trigger.txt; then
+          if grep -q 'onetoall-running-research\|onetoall-recover-diagnostics' production/mafia-temple/trigger.txt; then
             echo 'One-to-All research remains a short-lived Actions artifact; not committing it.'
             exit 0
           fi
