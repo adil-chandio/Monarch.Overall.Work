@@ -1,0 +1,164 @@
+{
+  "checked_at": "2026-11-08T02:12:18.896750+00:00",
+  "production_hold": true,
+  "publisher_link_evidence": {
+    "url": "https://linktr.ee/zackdfilmsofficial",
+    "observed_links": [
+      "https://www.facebook.com/zackdfilms",
+      "https://www.tiktok.com/@thezackdfilms",
+      "https://www.instagram.com/zackdfilms",
+      "https://www.youtube.com/@zackdfilms"
+    ]
+  },
+  "limits": "Publisher-linked account, alternate-platform cut; not automatically a byte-identical YouTube edition or completed AV review. Display-name-only mirrors excluded.",
+  "cases": [
+    {
+      "platform": "facebook",
+      "source_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+      "account_linked_by_publisher_landing_page": true,
+      "full_video_manually_reviewed": false,
+      "continuous_audio_reviewed": false,
+      "available_format_descriptors": [
+        {
+          "format_id": "1790151322174579a",
+          "width": null,
+          "height": null,
+          "vcodec": "none",
+          "acodec": "mp4a.40.5",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "sd",
+          "width": null,
+          "height": null,
+          "vcodec": null,
+          "acodec": null,
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "hd",
+          "width": null,
+          "height": null,
+          "vcodec": null,
+          "acodec": null,
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154498840928v",
+          "width": 720,
+          "height": 1280,
+          "vcodec": "av01.0.05M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154492174262v",
+          "width": 720,
+          "height": 1280,
+          "vcodec": "av01.0.05M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154495507595v",
+          "width": 720,
+          "height": 1280,
+          "vcodec": "av01.0.05M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154488840929v",
+          "width": 720,
+          "height": 1280,
+          "vcodec": "av01.0.05M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154508840927v",
+          "width": 720,
+          "height": 1280,
+          "vcodec": "av01.0.05M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154485507596v",
+          "width": 720,
+          "height": 1280,
+          "vcodec": "av01.0.05M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154505507594v",
+          "width": 1080,
+          "height": 1920,
+          "vcodec": "av01.0.08M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        },
+        {
+          "format_id": "1790154502174261v",
+          "width": 1440,
+          "height": 2560,
+          "vcodec": "av01.0.12M.08.0.111.01.01.01.0",
+          "acodec": "none",
+          "protocol": "https",
+          "has_drm": null
+        }
+      ],
+      "metadata": {
+        "id": "2330611454420496",
+        "title": "5.5M views \u00b7 59K reactions | What Is A Jerboa? \ud83e\udd14 | Zack D. Films",
+        "uploader": "Zack D. Films",
+        "uploader_id": "100089194705401",
+        "channel": null,
+        "channel_id": null,
+        "duration": 38.549,
+        "webpage_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/"
+      },
+      "pilot_media_url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+      "probe_exit": 0,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1920,
+          "avg_frame_rate": "2997/100",
+          "nb_read_frames": "1155",
+          "duration": "38.538539",
+          "sample_rate": null,
+          "channels": null
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "avg_frame_rate": "0/0",
+          "nb_read_frames": "904",
+          "duration": "38.654708",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "status": "actual_av_downloaded_and_decoded",
+      "decode_exit": 0,
+      "diagnostic": "",
+      "bytes": 17083924
+    }
+  ]
+}
