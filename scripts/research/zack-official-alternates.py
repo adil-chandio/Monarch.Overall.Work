@@ -9,13 +9,15 @@ CASES=[
  ('facebook','https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/',False),
  ('tiktok','https://www.tiktok.com/@thezackdfilms',True),
  ('instagram','https://www.instagram.com/zackdfilms/',True)]
+if os.environ.get('ALTERNATE_X_URL'):CASES.append(('x',os.environ['ALTERNATE_X_URL'],False))
 def clean(s):return re.sub(r'https?://\S+','[URL]',str(s))[-2200:]
 report={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'production_hold':True,
  'publisher_link_evidence':{'url':'https://linktr.ee/zackdfilmsofficial','observed_links':['https://www.facebook.com/zackdfilms','https://www.tiktok.com/@thezackdfilms','https://www.instagram.com/zackdfilms','https://www.youtube.com/@zackdfilms']},
  'limits':'Publisher-linked account, alternate-platform cut; not automatically a byte-identical YouTube edition or completed AV review. Display-name-only mirrors excluded.', 'cases':[]}
 for platform,url,profile in CASES:
  if os.environ.get('ALTERNATE_PLATFORM') and platform!=os.environ['ALTERNATE_PLATFORM']:continue
- row={'platform':platform,'source_url':url,'account_linked_by_publisher_landing_page':True,
+ row={'platform':platform,'source_url':url,'account_linked_by_publisher_landing_page':platform!='x',
+      'identity_note':'X account attribution corroborated by Wikitubia and matching current YouTube/X titles; not a Linktree cross-link' if platform=='x' else 'Publisher landing-page link',
       'full_video_manually_reviewed':False,'continuous_audio_reviewed':False}
  try:
   with tempfile.TemporaryDirectory() as tmp:
@@ -36,7 +38,7 @@ for platform,url,profile in CASES:
      row['metadata']={k:info.get(k) for k in ['id','title','uploader','uploader_id','channel','channel_id','duration','webpage_url']};target=url
     if target:
      row['pilot_media_url']=target
-     p=subprocess.run([sys.executable,'-m','yt_dlp','--no-playlist','--no-progress','--socket-timeout','15','--retries','0','--extractor-retries','0','--js-runtimes','node','--max-filesize','100M','-f','bestvideo[height<=?1080]+bestaudio/best[height<=?1080]','--merge-output-format','mp4','-o',tmp+'/source.%(ext)s',target],capture_output=True,text=True,timeout=120)
+     p=subprocess.run([sys.executable,'-m','yt_dlp','--no-playlist','--no-progress','--socket-timeout','15','--retries','0','--extractor-retries','0','--js-runtimes','node','--max-filesize','100M','-f','bestvideo[width<=?1080]+bestaudio/best[width<=?1080]','--merge-output-format','mp4','-o',tmp+'/source.%(ext)s',target],capture_output=True,text=True,timeout=120)
      if p.returncode:row.update(status='public_media_access_failed',diagnostic=clean(p.stderr))
      else:
       sources=[x for x in Path(tmp).glob('source.*') if x.suffix in ['.mp4','.webm','.mkv']]

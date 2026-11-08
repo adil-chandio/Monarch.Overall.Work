@@ -25,8 +25,9 @@ jobs:
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - name: Test normal public publisher-linked routes; stop at access denials
         env:
-          ALTERNATE_PLATFORM: facebook
-          ALTERNATE_REPORT: facebook-format-followup.json
+          ALTERNATE_PLATFORM: x
+          ALTERNATE_X_URL: https://x.com/zackdfilms1/status/1823736339659153776
+          ALTERNATE_REPORT: x-public-pilot.json
         run: python scripts/research/zack-official-alternates.py
       - uses: actions/upload-artifact@v4
         if: always()
@@ -41,7 +42,7 @@ jobs:
         run: |
           git config user.name 'Monarch reference research'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add docs/research/zack-original-access/facebook-format-followup.json
+          git add docs/research/zack-original-access/x-public-pilot.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Record publisher-linked alternate footage access results [skip ci]'
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
