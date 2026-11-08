@@ -1,0 +1,181 @@
+{
+  "edition": "raw_fullscreen_v6",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "frame_count": 1800,
+  "safe_area": {
+    "top": 140,
+    "bottom": 260,
+    "left": 50,
+    "right": 150
+  },
+  "hook": {
+    "line_bboxes": [
+      [
+        389,
+        175,
+        691,
+        259
+      ],
+      [
+        288,
+        285,
+        792,
+        369
+      ],
+      [
+        212,
+        395,
+        867,
+        479
+      ]
+    ],
+    "question_bbox": [
+      249,
+      525,
+      831,
+      574
+    ],
+    "label_bbox": [
+      221,
+      620,
+      859,
+      646
+    ],
+    "visible": true,
+    "centered": true,
+    "colorful": true
+  },
+  "list": {
+    "bbox": [
+      60,
+      720,
+      500,
+      1556
+    ],
+    "row_bboxes": [
+      [
+        70,
+        776,
+        490,
+        874
+      ],
+      [
+        70,
+        888,
+        490,
+        986
+      ],
+      [
+        70,
+        1000,
+        490,
+        1098
+      ],
+      [
+        70,
+        1112,
+        490,
+        1210
+      ],
+      [
+        70,
+        1224,
+        490,
+        1322
+      ],
+      [
+        70,
+        1336,
+        490,
+        1434
+      ],
+      [
+        70,
+        1448,
+        490,
+        1546
+      ]
+    ],
+    "left_side": true,
+    "black_label_plates": true,
+    "fully_visible": true,
+    "rank_order": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "right_ui": {
+    "x": 985,
+    "icon_centers_y": [
+      1100,
+      1290,
+      1480
+    ],
+    "icon_bboxes": [
+      [
+        951,
+        1056,
+        1019,
+        1144
+      ],
+      [
+        951,
+        1246,
+        1019,
+        1334
+      ],
+      [
+        951,
+        1436,
+        1019,
+        1524
+      ]
+    ],
+    "platform_ui": true
+  },
+  "reaction": {
+    "bbox": [
+      520,
+      1450,
+      870,
+      1590
+    ],
+    "emoji_bbox": [
+      800,
+      1400,
+      910,
+      1510
+    ]
+  },
+  "bottom_bar": {
+    "bbox": [
+      60,
+      1740,
+      1020,
+      1850
+    ],
+    "comment": "COMMENT YOUR RANK",
+    "subscribe": "SUBSCRIBE"
+  },
+  "flags": {
+    "no_v5_right_panel": true,
+    "no_v5_bottom_rank_burst": true,
+    "centered_hook_visible": true,
+    "left_list_fully_visible": true,
+    "right_platform_ui": true,
+    "bottom_comment_subscribe": true,
+    "safe_area_check": true,
+    "social_origin_check": true,
+    "full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false
+  }
+}

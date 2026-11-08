@@ -1,0 +1,5734 @@
+{
+  "topic": "7 Unexpected Animal Moments, Ranked.",
+  "package": "Raw Full-Screen V6 - separate from rejected V5",
+  "deliverable": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4",
+  "bytes": 23724424,
+  "sha256": "96427061b1f53d493133f5455a05680ab2d49a5731ea47222dfc1409b3914e17",
+  "title": "7 Unexpected Animal Moments, Ranked. | Native Commons Audio",
+  "category": "Entertainment",
+  "duration_seconds": 60.0,
+  "frame_count": 1800,
+  "fps": 30,
+  "resolution": "1080x1920",
+  "audio": "Raw per-window native Commons audio only; no narration, music, effects, bed, generated calls or added layers.",
+  "technical": {
+    "passed": true,
+    "checks": {
+      "duration_60s": true,
+      "frames_1800": true,
+      "vertical_1080x1920": true,
+      "fps_30": true,
+      "audio_48k_stereo": true,
+      "no_sample_clipping_runs": true,
+      "no_click_runs": true,
+      "dc_offset_ok": true,
+      "mono_compatible": true,
+      "nine_gate_audio_pass": true,
+      "final_web_gate_pass": true,
+      "final_technical_click_runs_zero": true,
+      "no_added_audio_layers": true,
+      "raw_source_audio_only": true,
+      "raw_per_window_native_audio_only": true,
+      "seven_native_audio_segments": true,
+      "zero_silent_segments": true,
+      "all_seven_native_audio_audible": true,
+      "all_seven_selected_windows_audible": true,
+      "seven_selected_scenes": true,
+      "seven_cc0_originals": true,
+      "api_license_verified": true,
+      "full_screen_cover": true,
+      "full_reference_mechanic": true,
+      "colorful_hook_title": true,
+      "persistent_numbered_list": true,
+      "progressive_labels": true,
+      "payoff_cuts_zoom": true,
+      "reaction_bubbles": true,
+      "emojis": true,
+      "seven_moments_only": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "selected_window_contact_sheets": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "guardrails_false": true,
+      "no_forbidden_phrases": true,
+      "hook_visible_and_centered": true,
+      "left_list_fully_visible": true,
+      "no_v5_right_panel_or_bottom_burst": true,
+      "right_platform_ui_present": true,
+      "bottom_comment_subscribe_present": true,
+      "safe_area_check_recorded": true,
+      "social_origin_check_recorded": true,
+      "social_origin_per_title_verified": true,
+      "workflow_failure_absent": true
+    },
+    "sha256": "96427061b1f53d493133f5455a05680ab2d49a5731ea47222dfc1409b3914e17",
+    "bytes": 23724424,
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "width": 1080,
+          "height": 1920,
+          "coded_width": 1088,
+          "coded_height": 1920,
+          "has_b_frames": 2,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "9:16",
+          "pix_fmt": "yuv420p",
+          "level": 40,
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "refs": 4,
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 921600,
+          "duration": "60.000000",
+          "bit_rate": "2907831",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "1800",
+          "nb_read_frames": "1800",
+          "extradata_size": 48,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]",
+            "encoder": "Lavc62.11.100 libx264"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "profile": "LC",
+          "codec_type": "audio",
+          "codec_tag_string": "mp4a",
+          "codec_tag": "0x6134706d",
+          "sample_fmt": "fltp",
+          "sample_rate": "48000",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 0,
+          "id": "0x2",
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/48000",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 2880000,
+          "duration": "60.000000",
+          "bit_rate": "247084",
+          "nb_frames": "2814",
+          "nb_read_frames": "2813",
+          "extradata_size": 5,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "SoundHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "60.000000",
+        "size": "23724424",
+        "bit_rate": "3163256",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2avc1mp41",
+          "encoder": "Lavf62.3.100"
+        }
+      }
+    }
+  },
+  "audio_checks": {
+    "passed": true,
+    "gates": {}
+  },
+  "native_audio": {
+    "edition": "raw_fullscreen_v6",
+    "policy": {
+      "raw_only": true,
+      "no_spoken_voice_over": true,
+      "no_score": true,
+      "no_effects": true,
+      "no_bed": true,
+      "no_added_layers": true,
+      "no_fabricated_animal_calls": true,
+      "native_source_audio_only": true,
+      "raw_per_window_native_audio_only": true,
+      "source_audio_present_segments": 7,
+      "silent_segments": 0,
+      "all_seven_native_audio_audible": true,
+      "target_integrated_lufs": -14.2,
+      "true_peak_target_dbtp": -2.2,
+      "sample_rate": 48000,
+      "channels": 2,
+      "edge_fade_ms": 30,
+      "final_gain_calibration": true,
+      "final_peak_limit_linear": 0.75,
+      "final_calibration_iterations": 6,
+      "final_technical_click_threshold": 0.45,
+      "final_declick_threshold": 0.28,
+      "final_declick_width_samples": 32,
+      "web_lufs_target": -14.0,
+      "web_lufs_tolerance": 0.7,
+      "web_true_peak_ceiling_dbtp": -1.0,
+      "web_lra_min_lu": 1.0,
+      "web_lra_max_lu": 10.0,
+      "web_movement_min_db": 3.0,
+      "native_audible_segment_rms_dbfs_min": -55.0,
+      "per_window_target_rms_dbfs_candidates": [
+        -24.0,
+        -22.0,
+        -20.0,
+        -18.0
+      ]
+    },
+    "segments": [
+      {
+        "id": "rank7_bois_crow_follow",
+        "rank": 7,
+        "source_id": "bois_crow_follow",
+        "timeline_in": 0.0,
+        "timeline_out": 8.566667,
+        "source_in": 8.0,
+        "source_out": 16.566667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -38.506,
+        "measured_rms_dbfs_before_gain": -42.472,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 18.472,
+        "peak_before_guard_dbfs": -4.717,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank6_tidepool_worm",
+        "rank": 6,
+        "source_id": "tidepool_worm",
+        "timeline_in": 8.566667,
+        "timeline_out": 17.133333,
+        "source_in": 2.5,
+        "source_out": 11.066667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -33.633,
+        "measured_rms_dbfs_before_gain": -39.86,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 15.86,
+        "peak_before_guard_dbfs": 15.769,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank5_berlin_squirrel_monkey",
+        "rank": 5,
+        "source_id": "berlin_squirrel_monkey",
+        "timeline_in": 17.133333,
+        "timeline_out": 25.7,
+        "source_in": 1.5,
+        "source_out": 10.066667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -33.786,
+        "measured_rms_dbfs_before_gain": -36.458,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 12.458,
+        "peak_before_guard_dbfs": -6.685,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank4_cape_squirrel",
+        "rank": 4,
+        "source_id": "cape_squirrel",
+        "timeline_in": 25.7,
+        "timeline_out": 34.266667,
+        "source_in": 3.5,
+        "source_out": 12.066667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -34.148,
+        "measured_rms_dbfs_before_gain": -35.579,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 11.579,
+        "peak_before_guard_dbfs": 5.091,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank3_uluwatu_bag",
+        "rank": 3,
+        "source_id": "uluwatu_bag",
+        "timeline_in": 34.266667,
+        "timeline_out": 42.833333,
+        "source_in": 10.0,
+        "source_out": 18.566667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -32.485,
+        "measured_rms_dbfs_before_gain": -34.631,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 10.631,
+        "peak_before_guard_dbfs": -3.923,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank2_malaga_animals",
+        "rank": 2,
+        "source_id": "malaga_animals",
+        "timeline_in": 42.833333,
+        "timeline_out": 51.4,
+        "source_in": 0.0,
+        "source_out": 8.566667,
+        "audio_stream_present": true,
+        "audio_codec": "opus",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -32.936,
+        "measured_rms_dbfs_before_gain": -35.004,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 11.004,
+        "peak_before_guard_dbfs": -10.449,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank1_uluwatu_heist",
+        "rank": 1,
+        "source_id": "uluwatu_heist",
+        "timeline_in": 51.4,
+        "timeline_out": 60.0,
+        "source_in": 0.0,
+        "source_out": 8.6,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 412800,
+        "measured_lufs_before_gain": -20.011,
+        "measured_rms_dbfs_before_gain": -22.623,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": -1.377,
+        "peak_before_guard_dbfs": -3.896,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      }
+    ],
+    "placements": [
+      {
+        "rank": 7,
+        "start_sample": 0,
+        "end_sample": 411200
+      },
+      {
+        "rank": 6,
+        "start_sample": 411200,
+        "end_sample": 822400
+      },
+      {
+        "rank": 5,
+        "start_sample": 822400,
+        "end_sample": 1233600
+      },
+      {
+        "rank": 4,
+        "start_sample": 1233600,
+        "end_sample": 1644800
+      },
+      {
+        "rank": 3,
+        "start_sample": 1644800,
+        "end_sample": 2056000
+      },
+      {
+        "rank": 2,
+        "start_sample": 2056000,
+        "end_sample": 2467200
+      },
+      {
+        "rank": 1,
+        "start_sample": 2467200,
+        "end_sample": 2880000
+      }
+    ],
+    "no_spoken_voice_over": true,
+    "no_score": true,
+    "no_effects": true,
+    "no_bed": true,
+    "no_added_layers": true,
+    "no_fabricated_animal_calls": true,
+    "native_source_audio_only": true,
+    "raw_per_window_native_audio_only": true,
+    "native_stereo_fold_to_dual_mono": true,
+    "source_audio_present_segments": 7,
+    "silent_segments": 0,
+    "all_seven_native_audio_audible": true,
+    "runner_probe_passed": true,
+    "runner_audio_visual_probe_passed": true,
+    "runner_visual_motion_probe": true,
+    "contact_sheets_written": true,
+    "source_review_recorded": true,
+    "visual_lock_written": true,
+    "chosen_combo": "rmsm24_strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+    "per_window_target_rms_dbfs": -24.0,
+    "mastering_variant": "strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+    "mastering_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+    "mastering_attempts": [
+      {
+        "id": "rmsm24_linear_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "linear_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=true:print_format=summary",
+        "web_gate_pass": false,
+        "failed": [
+          "lra_in_range"
+        ],
+        "integrated_lufs": -14.02,
+        "lra_lu": 16.93,
+        "sample_peak_dbfs": -2.33,
+        "movement_db": 33.24,
+        "technical_click_runs": 0
+      },
+      {
+        "id": "rmsm24_dynamic_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "dynamic_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+        "web_gate_pass": false,
+        "failed": [
+          "lra_in_range"
+        ],
+        "integrated_lufs": -14.02,
+        "lra_lu": 16.93,
+        "sample_peak_dbfs": -2.33,
+        "movement_db": 33.24,
+        "technical_click_runs": 0
+      },
+      {
+        "id": "rmsm24_rms_compressor_6to1_dynamic_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "rms_compressor_6to1_dynamic_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+        "web_gate_pass": false,
+        "failed": [
+          "lra_in_range"
+        ],
+        "integrated_lufs": -14.0,
+        "lra_lu": 12.48,
+        "sample_peak_dbfs": -2.47,
+        "movement_db": 25.11,
+        "technical_click_runs": 0
+      },
+      {
+        "id": "rmsm24_strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+        "web_gate_pass": true,
+        "failed": [],
+        "integrated_lufs": -14.65,
+        "lra_lu": 7.17,
+        "sample_peak_dbfs": -2.2,
+        "movement_db": 17.59,
+        "technical_click_runs": 0
+      }
+    ],
+    "final_gain_calibration": [
+      {
+        "iteration": 0,
+        "integrated_lufs": -14.65,
+        "lra_lu": 7.17,
+        "sample_peak_dbfs": -2.2,
+        "loudness_in_range": true,
+        "lra_in_range": true,
+        "true_peak_ok": true,
+        "web_gate_pass": true,
+        "technical_click_runs": 0,
+        "measured_on": "delivered_aac_stream",
+        "applied_gain_db": 0.0,
+        "declick_regions": 0,
+        "delivered_click_repair": []
+      }
+    ],
+    "final_web_gate_pass": true,
+    "final_technical_click_runs": 0,
+    "premaster": "production/monarch-cam/work/short_ranking_raw_v6/native_timeline_rmsm24.wav",
+    "mastered": "production/monarch-cam/work/short_ranking_raw_v6/native_timeline_mastered_rmsm24.wav",
+    "deliverable_sha256": "96427061b1f53d493133f5455a05680ab2d49a5731ea47222dfc1409b3914e17",
+    "deliverable_bytes": 23724424,
+    "full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false,
+    "audience_result_promise": false,
+    "virality_guarantee": false,
+    "perfection_claim": false,
+    "retention_claim": false,
+    "hypnosis_claim": false,
+    "three_x_claim": false,
+    "subscribe_claim": false,
+    "like_claim": false,
+    "same_path_replacement": false,
+    "factual_superlative_claim": false,
+    "third_party_repost": false,
+    "ai_audio": false,
+    "generated_calls": false,
+    "v3_audio_packages": false,
+    "audio_substitution": false,
+    "earshot_claim": false,
+    "model_claim": false,
+    "sound_design_layers": false,
+    "sub_bloom_layers": false,
+    "native_ambience_layers": false,
+    "ambience_layers": false,
+    "cue_layers": false
+  },
+  "social_origin": {
+    "policy": "Per-title Commons API extmetadata CC0 1.0 verification; original Commons file pages only; no third-party short-form reposts.",
+    "all_api_license_verified": true,
+    "all_original_commons_pages": true,
+    "all_original_sha1_verified": true,
+    "no_third_party_reposts": true,
+    "assets": {
+      "bois_crow_follow": {
+        "source_page": "https://commons.wikimedia.org/wiki/File:Bois_de_Vincennes%2C_Crow_begging_for_food.webm",
+        "commons_title": "File:Bois_de_Vincennes,_Crow_begging_for_food.webm",
+        "license_short_name": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "expected_sha1": "2888129c653ac1e11ca4b5542082aaff3dc591ad",
+        "expected_bytes": 6543748,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Bois_de_Vincennes%2C_Crow_begging_for_food.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "api_license_verified": true,
+        "original_commons_page": true,
+        "original_sha1_verified": true,
+        "no_third_party_repost": true
+      },
+      "tidepool_worm": {
+        "source_page": "https://commons.wikimedia.org/wiki/File:Gezeitent%C3%BCmpelwurm_(unbestimmt).webm",
+        "commons_title": "File:Gezeitentümpelwurm_(unbestimmt).webm",
+        "license_short_name": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "expected_sha1": "db2cf05e80de4e7f8eb2caa5d81b4854a118da02",
+        "expected_bytes": 7641880,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "api_license_verified": true,
+        "original_commons_page": true,
+        "original_sha1_verified": true,
+        "no_third_party_repost": true
+      },
+      "berlin_squirrel_monkey": {
+        "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov01.webm",
+        "commons_title": "File:Berlin_zoologisk_hage_2026-04-07_mov01.webm",
+        "license_short_name": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "expected_sha1": "60e88d2f6ff8afd298b4d21c81a1de299fff8311",
+        "expected_bytes": 8491540,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/02/Berlin_zoologisk_hage_2026-04-07_mov01.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "api_license_verified": true,
+        "original_commons_page": true,
+        "original_sha1_verified": true,
+        "no_third_party_repost": true
+      },
+      "cape_squirrel": {
+        "source_page": "https://commons.wikimedia.org/wiki/File:Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm",
+        "commons_title": "File:Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm",
+        "license_short_name": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "expected_sha1": "5954a78ff9407852cbf185d54788eaba1c5661f7",
+        "expected_bytes": 135219598,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "api_license_verified": true,
+        "original_commons_page": true,
+        "original_sha1_verified": true,
+        "no_third_party_repost": true
+      },
+      "uluwatu_bag": {
+        "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_3_-_eating.webm",
+        "commons_title": "File:Uluwatu_monkey_3_-_eating.webm",
+        "license_short_name": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "expected_sha1": "32a7813bacf45b26b7887ad1a17f6bd0cc99994e",
+        "expected_bytes": 7272801,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Uluwatu_monkey_3_-_eating.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "api_license_verified": true,
+        "original_commons_page": true,
+        "original_sha1_verified": true,
+        "no_third_party_repost": true
+      },
+      "malaga_animals": {
+        "source_page": "https://commons.wikimedia.org/wiki/File:Some_animals_in_Malaga.webm",
+        "commons_title": "File:Some_animals_in_Malaga.webm",
+        "license_short_name": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "expected_sha1": "c704ee56b5dfec9e6d93360334a06ef0fbcbd7b0",
+        "expected_bytes": 6268736,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Some_animals_in_Malaga.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "api_license_verified": true,
+        "original_commons_page": true,
+        "original_sha1_verified": true,
+        "no_third_party_repost": true
+      },
+      "uluwatu_heist": {
+        "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_4_-_stealing_pom-poms.webm",
+        "commons_title": "File:Uluwatu_monkey_4_-_stealing_pom-poms.webm",
+        "license_short_name": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "expected_sha1": "22ee2d1cde89096a0f0f0e05d312838c1fe81446",
+        "expected_bytes": 9113892,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Uluwatu_monkey_4_-_stealing_pom-poms.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "api_license_verified": true,
+        "original_commons_page": true,
+        "original_sha1_verified": true,
+        "no_third_party_repost": true
+      }
+    }
+  },
+  "layout": {
+    "safe_area": {
+      "top": 140,
+      "bottom": 260,
+      "left": 50,
+      "right": 150
+    },
+    "hook": {
+      "line_bboxes": [
+        [
+          389,
+          175,
+          691,
+          259
+        ],
+        [
+          288,
+          285,
+          792,
+          369
+        ],
+        [
+          212,
+          395,
+          867,
+          479
+        ]
+      ],
+      "question_bbox": [
+        249,
+        525,
+        831,
+        574
+      ],
+      "label_bbox": [
+        221,
+        620,
+        859,
+        646
+      ],
+      "visible": true,
+      "centered": true,
+      "colorful": true
+    },
+    "list": {
+      "bbox": [
+        60,
+        720,
+        500,
+        1556
+      ],
+      "row_bboxes": [
+        [
+          70,
+          776,
+          490,
+          874
+        ],
+        [
+          70,
+          888,
+          490,
+          986
+        ],
+        [
+          70,
+          1000,
+          490,
+          1098
+        ],
+        [
+          70,
+          1112,
+          490,
+          1210
+        ],
+        [
+          70,
+          1224,
+          490,
+          1322
+        ],
+        [
+          70,
+          1336,
+          490,
+          1434
+        ],
+        [
+          70,
+          1448,
+          490,
+          1546
+        ]
+      ],
+      "left_side": true,
+      "black_label_plates": true,
+      "fully_visible": true,
+      "rank_order": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "right_ui": {
+      "x": 985,
+      "icon_centers_y": [
+        1100,
+        1290,
+        1480
+      ],
+      "icon_bboxes": [
+        [
+          951,
+          1056,
+          1019,
+          1144
+        ],
+        [
+          951,
+          1246,
+          1019,
+          1334
+        ],
+        [
+          951,
+          1436,
+          1019,
+          1524
+        ]
+      ],
+      "platform_ui": true
+    },
+    "reaction": {
+      "bbox": [
+        520,
+        1450,
+        870,
+        1590
+      ],
+      "emoji_bbox": [
+        800,
+        1400,
+        910,
+        1510
+      ]
+    },
+    "bottom_bar": {
+      "bbox": [
+        60,
+        1740,
+        1020,
+        1850
+      ],
+      "comment": "COMMENT YOUR RANK",
+      "subscribe": "SUBSCRIBE"
+    },
+    "flags": {
+      "no_v5_right_panel": true,
+      "no_v5_bottom_rank_burst": true,
+      "centered_hook_visible": true,
+      "left_list_fully_visible": true,
+      "right_platform_ui": true,
+      "bottom_comment_subscribe": true,
+      "safe_area_check": true,
+      "social_origin_check": true,
+      "full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false
+    }
+  },
+  "visual": {
+    "full_screen_cover": true,
+    "dynamic_source_crop": true,
+    "no_letterbox": true,
+    "no_black_bars": true,
+    "no_blurred_background": true,
+    "no_action_window": true,
+    "full_reference_mechanic": true,
+    "colorful_hook_title": true,
+    "persistent_numbered_list": true,
+    "progressive_labels": true,
+    "payoff_cuts_zoom": true,
+    "punchy_zoom": true,
+    "reaction_bubbles": true,
+    "emojis": true,
+    "custom_emoji_drawings": true,
+    "seven_moments_only": true,
+    "rank_numbers": true,
+    "rank_title_overlay_only": false,
+    "hard_cuts_only": true,
+    "no_cut_flashes": true,
+    "no_badges": true,
+    "no_progress": true,
+    "no_footer": true,
+    "no_source_labels": true,
+    "no_brand_watermark": true,
+    "source_aspect_preserved": true,
+    "seven_cc0_sources": true,
+    "subjective_ranking_not_science": true,
+    "centered_hook_visible": true,
+    "left_list_fully_visible": true,
+    "no_v5_right_panel": true,
+    "no_v5_bottom_rank_burst": true,
+    "right_platform_ui": true,
+    "bottom_comment_subscribe": true,
+    "safe_area_check": true,
+    "social_origin_check": true,
+    "layout_manifest_written": true,
+    "runner_probe_passed": true,
+    "runner_audio_visual_probe_passed": true,
+    "runner_visual_motion_probe": true,
+    "contact_sheets_written": true,
+    "source_review_recorded": true,
+    "visual_lock_written": true,
+    "full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false,
+    "audience_result_promise": false,
+    "virality_guarantee": false,
+    "perfection_claim": false,
+    "retention_claim": false,
+    "third_party_repost": false,
+    "ai_audio": false,
+    "generated_calls": false,
+    "v3_audio_packages": false,
+    "audio_substitution": false,
+    "earshot_claim": false,
+    "model_claim": false,
+    "sound_design_layers": false,
+    "sub_bloom_layers": false,
+    "native_ambience_layers": false,
+    "ambience_layers": false,
+    "cue_layers": false
+  },
+  "source_manifest": {
+    "edition": "raw_fullscreen_v6",
+    "checked_on": "2026-11-08",
+    "policy": {
+      "allowed": [
+        "CC0-1.0"
+      ],
+      "rejected": [
+        "unverified",
+        "third-party short-form reposts",
+        "public-domain-only claims without a CC0 dedication"
+      ],
+      "note": "Commons API extmetadata is rechecked for every selected original file. Runner audio and motion probing chooses seven moments from these CC0 candidates. Only original CC0 files with their own native audio streams are used; no transcodes, no separate audio assets, no audio substitution, and no added layers.",
+      "selection": "Seven moments are chosen by objective runner measurements; one-frame-per-second contact sheets are written for runner review records.",
+      "full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "audience_result_promise": false,
+      "virality_guarantee": false
+    },
+    "selected_ids": [
+      "bois_crow_follow",
+      "tidepool_worm",
+      "berlin_squirrel_monkey",
+      "cape_squirrel",
+      "uluwatu_bag",
+      "malaga_animals",
+      "uluwatu_heist"
+    ],
+    "assets": {
+      "bois_crow_follow": {
+        "id": "bois_crow_follow",
+        "commons_title": "File:Bois_de_Vincennes,_Crow_begging_for_food.webm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Bois_de_Vincennes%2C_Crow_begging_for_food.webm",
+        "pageid": 136823682,
+        "creator": "Havang(nl)",
+        "api_artist": "Elfix",
+        "api_description": "An adult carrion crow picks up some food on the ground and is soon followed by one of its offsprings.",
+        "license_short_name": "CC0",
+        "usage_terms": "Creative Commons Zero, Public Domain Dedication",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution_required": "false",
+        "expected_bytes": 6543748,
+        "expected_sha1": "2888129c653ac1e11ca4b5542082aaff3dc591ad",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Bois_de_Vincennes%2C_Crow_begging_for_food.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "mime": "video/webm",
+        "api_metadata": [
+          {
+            "name": "GETID3_VERSION",
+            "value": "1.9.22-202207161647"
+          },
+          {
+            "name": "filesize",
+            "value": 6543748
+          },
+          {
+            "name": "avdataoffset",
+            "value": 0
+          },
+          {
+            "name": "avdataend",
+            "value": 6543748
+          },
+          {
+            "name": "fileformat",
+            "value": "webm"
+          },
+          {
+            "name": "audio",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vorbis"
+              },
+              {
+                "name": "sample_rate",
+                "value": 44100
+              },
+              {
+                "name": "channels",
+                "value": 2
+              },
+              {
+                "name": "language",
+                "value": "und"
+              },
+              {
+                "name": "bits_per_sample",
+                "value": 32
+              },
+              {
+                "name": "lossless",
+                "value": false
+              },
+              {
+                "name": "bitrate_mode",
+                "value": "vbr"
+              },
+              {
+                "name": "bitrate",
+                "value": 192000
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "0db6da21d4135339",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vorbis"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "sample_rate",
+                        "value": 44100
+                      },
+                      {
+                        "name": "channels",
+                        "value": 2
+                      },
+                      {
+                        "name": "language",
+                        "value": "und"
+                      },
+                      {
+                        "name": "bits_per_sample",
+                        "value": 32
+                      },
+                      {
+                        "name": "lossless",
+                        "value": false
+                      },
+                      {
+                        "name": "bitrate_mode",
+                        "value": "vbr"
+                      },
+                      {
+                        "name": "bitrate",
+                        "value": 192000
+                      },
+                      {
+                        "name": "compression_ratio",
+                        "value": 0.06802721088435375
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "channelmode",
+                "value": "stereo"
+              },
+              {
+                "name": "compression_ratio",
+                "value": 0.06802721088435375
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vp8"
+              },
+              {
+                "name": "resolution_x",
+                "value": 1080
+              },
+              {
+                "name": "resolution_y",
+                "value": 1196
+              },
+              {
+                "name": "display_unit",
+                "value": "pixels"
+              },
+              {
+                "name": "display_x",
+                "value": 1080
+              },
+              {
+                "name": "display_y",
+                "value": 1196
+              },
+              {
+                "name": "frame_rate",
+                "value": 30
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "f7a64e05ad84c56f",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vp8"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "resolution_x",
+                        "value": 1080
+                      },
+                      {
+                        "name": "resolution_y",
+                        "value": 1196
+                      },
+                      {
+                        "name": "display_unit",
+                        "value": "pixels"
+                      },
+                      {
+                        "name": "display_x",
+                        "value": 1080
+                      },
+                      {
+                        "name": "display_y",
+                        "value": 1196
+                      },
+                      {
+                        "name": "frame_rate",
+                        "value": 30
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "bitrate",
+                "value": 2893036
+              }
+            ]
+          },
+          {
+            "name": "warning",
+            "value": [
+              {
+                "name": 0,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [1 bytes]) at 63"
+              },
+              {
+                "name": 1,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [1 bytes]) at 77"
+              },
+              {
+                "name": 2,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [2 bytes]) at 91"
+              },
+              {
+                "name": 3,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [3 bytes]) at 106"
+              },
+              {
+                "name": 4,
+                "value": "Unhandled track.video element [module.audio-video.matroska.php:712] (5552::15b0 [24 bytes]) at 341"
+              }
+            ]
+          },
+          {
+            "name": "encoding",
+            "value": "UTF-8"
+          },
+          {
+            "name": "mime_type",
+            "value": "video/webm"
+          },
+          {
+            "name": "matroska",
+            "value": [
+              {
+                "name": "comments",
+                "value": [
+                  {
+                    "name": "muxingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.76.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "writingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.76.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "major_brand",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "qt  "
+                      }
+                    ]
+                  },
+                  {
+                    "name": "compatible_brands",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "qt  "
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.apple.photos.originating.signature",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "AU2xtjAv9fNC6aY+aRTUO5WLwMhZ"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.apple.quicktime.make",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Apple"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.apple.quicktime.model",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "iPhone 11 Pro"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.apple.quicktime.software",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "16.6"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.apple.quicktime.creationdate",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "2023-08-12T12:41:09+0200"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "encoder",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.76.100"
+                      },
+                      {
+                        "name": 1,
+                        "value": "Lavc58.134.100 libvpx"
+                      },
+                      {
+                        "name": 2,
+                        "value": "Lavc58.134.100 libvorbis"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler_name",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Core Media Video"
+                      },
+                      {
+                        "name": 1,
+                        "value": "Core Media Audio"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "vendor_id",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "[0][0][0][0]"
+                      },
+                      {
+                        "name": 1,
+                        "value": "[0][0][0][0]"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "duration",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "00:00:16.969000000��"
+                      },
+                      {
+                        "name": 1,
+                        "value": "00:00:16.941000000��"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "playtime_seconds",
+            "value": 16.969
+          },
+          {
+            "name": "bitrate",
+            "value": 3085036
+          },
+          {
+            "name": "playtime_string",
+            "value": "0:17"
+          },
+          {
+            "name": "version",
+            "value": 2
+          }
+        ],
+        "api_extmetadata": {
+          "ImageDescription": {
+            "value": "An adult carrion crow picks up some food on the ground and is soon followed by one of its offsprings.",
+            "source": "commons-desc-page"
+          },
+          "Artist": {
+            "value": "<a href=\"//commons.wikimedia.org/wiki/User:Elfix\" title=\"User:Elfix\">Elfix</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Zero, Public Domain Dedication",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "false",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "source": "commons-desc-page"
+          }
+        },
+        "api_license_verified": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true
+      },
+      "tidepool_worm": {
+        "id": "tidepool_worm",
+        "commons_title": "File:Gezeitentümpelwurm_(unbestimmt).webm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Gezeitent%C3%BCmpelwurm_(unbestimmt).webm",
+        "pageid": 134837319,
+        "creator": "H. Krisp",
+        "api_artist": "Rhetos",
+        "api_description": "Vor allem am Anfang des kurzen Filmchens bewegt sich in der Mitte des Bildes ein Wurm sehr aktiv. Er scheint Borsten oder Beinchen zu haben. Um den Wurm herum waren überall lebende Seepocken ( anderes Video von derselben Stelle ). Die Aufnahme entstand im Watt der Nordseeinsel Wangerooge, dort zwischen dem Westhafen und dem Süderheller, an der Einstiegsstelle der Kite-Surfer. Kennt jemand die Art?",
+        "license_short_name": "CC0",
+        "usage_terms": "Creative Commons Zero, Public Domain Dedication",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution_required": "false",
+        "expected_bytes": 7641880,
+        "expected_sha1": "db2cf05e80de4e7f8eb2caa5d81b4854a118da02",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Gezeitent%C3%BCmpelwurm_%28unbestimmt%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "mime": "video/webm",
+        "api_metadata": [
+          {
+            "name": "GETID3_VERSION",
+            "value": "1.9.22-202207161647"
+          },
+          {
+            "name": "filesize",
+            "value": 7641880
+          },
+          {
+            "name": "avdataoffset",
+            "value": 0
+          },
+          {
+            "name": "avdataend",
+            "value": 7641880
+          },
+          {
+            "name": "fileformat",
+            "value": "webm"
+          },
+          {
+            "name": "audio",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vorbis"
+              },
+              {
+                "name": "sample_rate",
+                "value": 48000
+              },
+              {
+                "name": "channels",
+                "value": 2
+              },
+              {
+                "name": "language",
+                "value": "und"
+              },
+              {
+                "name": "bits_per_sample",
+                "value": 32
+              },
+              {
+                "name": "lossless",
+                "value": false
+              },
+              {
+                "name": "bitrate_mode",
+                "value": "vbr"
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "02",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vorbis"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "sample_rate",
+                        "value": 48000
+                      },
+                      {
+                        "name": "channels",
+                        "value": 2
+                      },
+                      {
+                        "name": "language",
+                        "value": "und"
+                      },
+                      {
+                        "name": "bits_per_sample",
+                        "value": 32
+                      },
+                      {
+                        "name": "lossless",
+                        "value": false
+                      },
+                      {
+                        "name": "bitrate_mode",
+                        "value": "vbr"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "channelmode",
+                "value": "stereo"
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vp8"
+              },
+              {
+                "name": "resolution_x",
+                "value": 1920
+              },
+              {
+                "name": "resolution_y",
+                "value": 1080
+              },
+              {
+                "name": "display_unit",
+                "value": "pixels"
+              },
+              {
+                "name": "display_x",
+                "value": 1920
+              },
+              {
+                "name": "display_y",
+                "value": 1080
+              },
+              {
+                "name": "frame_rate",
+                "value": 25
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "01",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vp8"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "resolution_x",
+                        "value": 1920
+                      },
+                      {
+                        "name": "resolution_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "display_unit",
+                        "value": "pixels"
+                      },
+                      {
+                        "name": "display_x",
+                        "value": 1920
+                      },
+                      {
+                        "name": "display_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "frame_rate",
+                        "value": 25
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "warning",
+            "value": [
+              {
+                "name": 0,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [1 bytes]) at 63"
+              },
+              {
+                "name": 1,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [2 bytes]) at 77"
+              },
+              {
+                "name": 2,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [2 bytes]) at 92"
+              },
+              {
+                "name": 3,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [3 bytes]) at 107"
+              },
+              {
+                "name": 4,
+                "value": "Unhandled track.video element [module.audio-video.matroska.php:712] (5552::15b0 [8 bytes]) at 399"
+              }
+            ]
+          },
+          {
+            "name": "encoding",
+            "value": "UTF-8"
+          },
+          {
+            "name": "mime_type",
+            "value": "video/webm"
+          },
+          {
+            "name": "matroska",
+            "value": [
+              {
+                "name": "comments",
+                "value": [
+                  {
+                    "name": "muxingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.29.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "writingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.29.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "encoder",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.29.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "duration",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "00:00:22.640000000��"
+                      },
+                      {
+                        "name": 1,
+                        "value": "00:00:22.634000000��"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "playtime_seconds",
+            "value": 22.64
+          },
+          {
+            "name": "bitrate",
+            "value": 2700310.954063604
+          },
+          {
+            "name": "playtime_string",
+            "value": "0:23"
+          },
+          {
+            "name": "version",
+            "value": 2
+          }
+        ],
+        "api_extmetadata": {
+          "ImageDescription": {
+            "value": "Vor allem am Anfang des kurzen Filmchens bewegt sich in der Mitte des Bildes ein Wurm sehr aktiv. Er scheint Borsten oder Beinchen zu haben. Um den Wurm herum waren überall lebende Seepocken (<a href=\"//commons.wikimedia.org/wiki/File:Rankenfusskrebse_(Gezeitent%C3%BCmpel).webm\" title=\"File:Rankenfusskrebse (Gezeitentümpel).webm\">anderes Video von derselben Stelle</a>).<br><br>\nDie Aufnahme entstand im Watt der Nordseeinsel Wangerooge, dort zwischen dem Westhafen und dem Süderheller, an der Einstiegsstelle der Kite-Surfer.<br><br>Kennt jemand die Art?",
+            "source": "commons-desc-page"
+          },
+          "Artist": {
+            "value": "<a href=\"//commons.wikimedia.org/wiki/User:Rhetos\" title=\"User:Rhetos\">Rhetos</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Zero, Public Domain Dedication",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "false",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "source": "commons-desc-page"
+          }
+        },
+        "api_license_verified": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true
+      },
+      "berlin_squirrel_monkey": {
+        "id": "berlin_squirrel_monkey",
+        "commons_title": "File:Berlin_zoologisk_hage_2026-04-07_mov01.webm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov01.webm",
+        "pageid": 189709022,
+        "creator": "Wolfmann",
+        "api_artist": "LarsMueller",
+        "api_description": "Squirrel monkey in the Berlin Zoological Garden, Germany",
+        "license_short_name": "CC0",
+        "usage_terms": "Creative Commons Zero, Public Domain Dedication",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution_required": "false",
+        "expected_bytes": 8491540,
+        "expected_sha1": "60e88d2f6ff8afd298b4d21c81a1de299fff8311",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/02/Berlin_zoologisk_hage_2026-04-07_mov01.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "mime": "video/webm",
+        "api_metadata": [
+          {
+            "name": "GETID3_VERSION",
+            "value": "1.9.25-202603080933"
+          },
+          {
+            "name": "filesize",
+            "value": 8491540
+          },
+          {
+            "name": "avdataoffset",
+            "value": 0
+          },
+          {
+            "name": "avdataend",
+            "value": 8491540
+          },
+          {
+            "name": "fileformat",
+            "value": "webm"
+          },
+          {
+            "name": "audio",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vorbis"
+              },
+              {
+                "name": "sample_rate",
+                "value": 44100
+              },
+              {
+                "name": "channels",
+                "value": 2
+              },
+              {
+                "name": "language",
+                "value": "eng"
+              },
+              {
+                "name": "bits_per_sample",
+                "value": 32
+              },
+              {
+                "name": "lossless",
+                "value": false
+              },
+              {
+                "name": "bitrate_mode",
+                "value": "abr"
+              },
+              {
+                "name": "bitrate",
+                "value": 128000
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "58e41eea3fa911f1",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vorbis"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "sample_rate",
+                        "value": 44100
+                      },
+                      {
+                        "name": "channels",
+                        "value": 2
+                      },
+                      {
+                        "name": "language",
+                        "value": "eng"
+                      },
+                      {
+                        "name": "bits_per_sample",
+                        "value": 32
+                      },
+                      {
+                        "name": "lossless",
+                        "value": false
+                      },
+                      {
+                        "name": "bitrate_mode",
+                        "value": "abr"
+                      },
+                      {
+                        "name": "bitrate",
+                        "value": 128000
+                      },
+                      {
+                        "name": "compression_ratio",
+                        "value": 0.045351473922902494
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "channelmode",
+                "value": "stereo"
+              },
+              {
+                "name": "compression_ratio",
+                "value": 0.045351473922902494
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vp8"
+              },
+              {
+                "name": "resolution_x",
+                "value": 1920
+              },
+              {
+                "name": "resolution_y",
+                "value": 1080
+              },
+              {
+                "name": "display_unit",
+                "value": "pixels"
+              },
+              {
+                "name": "display_x",
+                "value": 1920
+              },
+              {
+                "name": "display_y",
+                "value": 1080
+              },
+              {
+                "name": "frame_rate",
+                "value": 25
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "15f564936c448c76",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vp8"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "resolution_x",
+                        "value": 1920
+                      },
+                      {
+                        "name": "resolution_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "display_unit",
+                        "value": "pixels"
+                      },
+                      {
+                        "name": "display_x",
+                        "value": 1920
+                      },
+                      {
+                        "name": "display_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "frame_rate",
+                        "value": 25
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "bitrate",
+                "value": 6504073
+              }
+            ]
+          },
+          {
+            "name": "warning",
+            "value": [
+              {
+                "name": 0,
+                "value": "skipping check for id3v2 tags since option_tag_id3v2=FALSE"
+              },
+              {
+                "name": 1,
+                "value": "skipping check for id3v1 tags since option_tag_id3v1=FALSE"
+              },
+              {
+                "name": 2,
+                "value": "skipping check for apetag tags since option_tag_apetag=FALSE"
+              },
+              {
+                "name": 3,
+                "value": "skipping check for lyrics3 tags since option_tag_lyrics3=FALSE"
+              },
+              {
+                "name": 4,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [1 bytes]) at 63"
+              },
+              {
+                "name": 5,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [1 bytes]) at 77"
+              },
+              {
+                "name": 6,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [2 bytes]) at 91"
+              },
+              {
+                "name": 7,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [3 bytes]) at 106"
+              },
+              {
+                "name": 8,
+                "value": "Unhandled track.video element [module.audio-video.matroska.php:745] (5552::15b0 [16 bytes]) at 332"
+              }
+            ]
+          },
+          {
+            "name": "encoding",
+            "value": "UTF-8"
+          },
+          {
+            "name": "mime_type",
+            "value": "video/webm"
+          },
+          {
+            "name": "matroska",
+            "value": [
+              {
+                "name": "comments",
+                "value": [
+                  {
+                    "name": "muxingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf62.3.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "writingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf62.3.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "major_brand",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "mp42"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "compatible_brands",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "isommp42"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.samsung.android.utc_offset",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "+0200"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "location",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "+52.5089+013.3406/"
+                      },
+                      {
+                        "name": 1,
+                        "value": "+52.5089+013.3406/"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.android.version",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "16"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "com.android.capture.fps",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "30.000000"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "encoder",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf62.3.100"
+                      },
+                      {
+                        "name": 1,
+                        "value": "Lavc62.11.100 libvpx"
+                      },
+                      {
+                        "name": 2,
+                        "value": "Lavc62.11.100 libvorbis"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler_name",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "VideoHandle"
+                      },
+                      {
+                        "name": 1,
+                        "value": "SoundHandle"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "vendor_id",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "[0][0][0][0]"
+                      },
+                      {
+                        "name": 1,
+                        "value": "[0][0][0][0]"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "duration",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "00:00:10.123000000�"
+                      },
+                      {
+                        "name": 1,
+                        "value": "00:00:10.243000000�"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "playtime_seconds",
+            "value": 10.243
+          },
+          {
+            "name": "bitrate",
+            "value": 6632073
+          },
+          {
+            "name": "playtime_string",
+            "value": "0:10"
+          },
+          {
+            "name": "version",
+            "value": 2
+          }
+        ],
+        "api_extmetadata": {
+          "ImageDescription": {
+            "value": "Squirrel monkey in the Berlin Zoological Garden, Germany",
+            "source": "commons-desc-page"
+          },
+          "Artist": {
+            "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:LarsMueller&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:LarsMueller (page does not exist)\">LarsMueller</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Zero, Public Domain Dedication",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "false",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "source": "commons-desc-page"
+          }
+        },
+        "api_license_verified": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true
+      },
+      "cape_squirrel": {
+        "id": "cape_squirrel",
+        "commons_title": "File:Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm",
+        "pageid": 130127494,
+        "creator": "Exploringlife",
+        "api_artist": "Andy Li",
+        "api_description": "Cape Collinson Road Sitting-out Area",
+        "license_short_name": "CC0",
+        "usage_terms": "Creative Commons Zero, Public Domain Dedication",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution_required": "false",
+        "expected_bytes": 135219598,
+        "expected_sha1": "5954a78ff9407852cbf185d54788eaba1c5661f7",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "mime": "video/webm",
+        "api_metadata": [
+          {
+            "name": "GETID3_VERSION",
+            "value": "1.9.22-202207161647"
+          },
+          {
+            "name": "filesize",
+            "value": 135219598
+          },
+          {
+            "name": "avdataoffset",
+            "value": 0
+          },
+          {
+            "name": "avdataend",
+            "value": 135219598
+          },
+          {
+            "name": "fileformat",
+            "value": "webm"
+          },
+          {
+            "name": "audio",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vorbis"
+              },
+              {
+                "name": "sample_rate",
+                "value": 48000
+              },
+              {
+                "name": "channels",
+                "value": 2
+              },
+              {
+                "name": "language",
+                "value": "eng"
+              },
+              {
+                "name": "lossless",
+                "value": false
+              },
+              {
+                "name": "bitrate_mode",
+                "value": "abr"
+              },
+              {
+                "name": "bitrate",
+                "value": 160000
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "59c2ce7e7bcca694",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vorbis"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "name",
+                        "value": "Stereo"
+                      },
+                      {
+                        "name": "sample_rate",
+                        "value": 48000
+                      },
+                      {
+                        "name": "channels",
+                        "value": 2
+                      },
+                      {
+                        "name": "language",
+                        "value": "eng"
+                      },
+                      {
+                        "name": "lossless",
+                        "value": false
+                      },
+                      {
+                        "name": "bitrate_mode",
+                        "value": "abr"
+                      },
+                      {
+                        "name": "bitrate",
+                        "value": 160000
+                      },
+                      {
+                        "name": "compression_ratio",
+                        "value": 0.10416666666666667
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "channelmode",
+                "value": "stereo"
+              },
+              {
+                "name": "compression_ratio",
+                "value": 0.10416666666666667
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "V_AV1"
+              },
+              {
+                "name": "resolution_x",
+                "value": 1080
+              },
+              {
+                "name": "resolution_y",
+                "value": 1080
+              },
+              {
+                "name": "display_unit",
+                "value": "pixels"
+              },
+              {
+                "name": "display_x",
+                "value": 608
+              },
+              {
+                "name": "display_y",
+                "value": 1080
+              },
+              {
+                "name": "frame_rate",
+                "value": 30
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": "e6ceb9b54246817a",
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "V_AV1"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "resolution_x",
+                        "value": 1080
+                      },
+                      {
+                        "name": "resolution_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "display_unit",
+                        "value": "pixels"
+                      },
+                      {
+                        "name": "display_x",
+                        "value": 608
+                      },
+                      {
+                        "name": "display_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "frame_rate",
+                        "value": 30
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "bitrate",
+                "value": 45872204
+              }
+            ]
+          },
+          {
+            "name": "warning",
+            "value": [
+              {
+                "name": 0,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [1 bytes]) at 63"
+              },
+              {
+                "name": 1,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [1 bytes]) at 77"
+              },
+              {
+                "name": 2,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [2 bytes]) at 91"
+              },
+              {
+                "name": 3,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:627] (5036::SeekPosition [4 bytes]) at 106"
+              },
+              {
+                "name": 4,
+                "value": "Unhandled track.video element [module.audio-video.matroska.php:712] (5552::15b0 [24 bytes]) at 365"
+              }
+            ]
+          },
+          {
+            "name": "encoding",
+            "value": "UTF-8"
+          },
+          {
+            "name": "mime_type",
+            "value": "video/webm"
+          },
+          {
+            "name": "matroska",
+            "value": [
+              {
+                "name": "comments",
+                "value": [
+                  {
+                    "name": "muxingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf59.27.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "writingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "HandBrake 1.6.1 2023012200"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "encoder",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf59.27.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "duration",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "00:00:23.500000000��"
+                      },
+                      {
+                        "name": 1,
+                        "value": "00:00:23.366000000��"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "playtime_seconds",
+            "value": 23.5
+          },
+          {
+            "name": "bitrate",
+            "value": 46032204
+          },
+          {
+            "name": "playtime_string",
+            "value": "0:24"
+          },
+          {
+            "name": "version",
+            "value": 2
+          }
+        ],
+        "api_extmetadata": {
+          "ImageDescription": {
+            "value": "Cape Collinson Road Sitting-out Area",
+            "source": "commons-desc-page"
+          },
+          "Artist": {
+            "value": "<a href=\"//commons.wikimedia.org/wiki/User:Onthewings\" title=\"User:Onthewings\">Andy Li</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Zero, Public Domain Dedication",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "false",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "source": "commons-desc-page"
+          }
+        },
+        "api_license_verified": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true
+      },
+      "uluwatu_bag": {
+        "id": "uluwatu_bag",
+        "commons_title": "File:Uluwatu_monkey_3_-_eating.webm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_3_-_eating.webm",
+        "pageid": 82945953,
+        "creator": "Jastrow",
+        "api_artist": "Mx. Granger",
+        "api_description": "A monkey eating something (an egg?) in a plastic bag at Uluwatu Temple in Bali.",
+        "license_short_name": "CC0",
+        "usage_terms": "Creative Commons Zero, Public Domain Dedication",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution_required": "false",
+        "expected_bytes": 7272801,
+        "expected_sha1": "32a7813bacf45b26b7887ad1a17f6bd0cc99994e",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Uluwatu_monkey_3_-_eating.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "mime": "video/webm",
+        "api_metadata": [
+          {
+            "name": "GETID3_VERSION",
+            "value": "1.9.17-201902071234"
+          },
+          {
+            "name": "filesize",
+            "value": 7272801
+          },
+          {
+            "name": "avdataoffset",
+            "value": 0
+          },
+          {
+            "name": "avdataend",
+            "value": 7272801
+          },
+          {
+            "name": "fileformat",
+            "value": "webm"
+          },
+          {
+            "name": "audio",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vorbis"
+              },
+              {
+                "name": "sample_rate",
+                "value": 44100
+              },
+              {
+                "name": "channels",
+                "value": 2
+              },
+              {
+                "name": "language",
+                "value": "eng"
+              },
+              {
+                "name": "bits_per_sample",
+                "value": 32
+              },
+              {
+                "name": "lossless",
+                "value": false
+              },
+              {
+                "name": "bitrate_mode",
+                "value": "vbr"
+              },
+              {
+                "name": "bitrate",
+                "value": 128000
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": 0,
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vorbis"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "sample_rate",
+                        "value": 44100
+                      },
+                      {
+                        "name": "channels",
+                        "value": 2
+                      },
+                      {
+                        "name": "language",
+                        "value": "eng"
+                      },
+                      {
+                        "name": "bits_per_sample",
+                        "value": 32
+                      },
+                      {
+                        "name": "lossless",
+                        "value": false
+                      },
+                      {
+                        "name": "bitrate_mode",
+                        "value": "vbr"
+                      },
+                      {
+                        "name": "bitrate",
+                        "value": 128000
+                      },
+                      {
+                        "name": "compression_ratio",
+                        "value": 0.045351473922902494
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "channelmode",
+                "value": "stereo"
+              },
+              {
+                "name": "compression_ratio",
+                "value": 0.045351473922902494
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vp8"
+              },
+              {
+                "name": "resolution_x",
+                "value": 1080
+              },
+              {
+                "name": "resolution_y",
+                "value": 1920
+              },
+              {
+                "name": "display_unit",
+                "value": "pixels"
+              },
+              {
+                "name": "display_x",
+                "value": 1080
+              },
+              {
+                "name": "display_y",
+                "value": 1920
+              },
+              {
+                "name": "frame_rate",
+                "value": 30
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": 0,
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vp8"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "resolution_x",
+                        "value": 1080
+                      },
+                      {
+                        "name": "resolution_y",
+                        "value": 1920
+                      },
+                      {
+                        "name": "display_unit",
+                        "value": "pixels"
+                      },
+                      {
+                        "name": "display_x",
+                        "value": 1080
+                      },
+                      {
+                        "name": "display_y",
+                        "value": 1920
+                      },
+                      {
+                        "name": "frame_rate",
+                        "value": 30
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "bitrate",
+                "value": 2850977
+              }
+            ]
+          },
+          {
+            "name": "warning",
+            "value": [
+              {
+                "name": 0,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [1 bytes]) at 63"
+              },
+              {
+                "name": 1,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 77"
+              },
+              {
+                "name": 2,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 92"
+              },
+              {
+                "name": 3,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [3 bytes]) at 107"
+              },
+              {
+                "name": 4,
+                "value": "Unhandled track.video element [module.audio-video.matroska.php:683] (5552::15b0 [8 bytes]) at 402"
+              }
+            ]
+          },
+          {
+            "name": "encoding",
+            "value": "UTF-8"
+          },
+          {
+            "name": "mime_type",
+            "value": "video/webm"
+          },
+          {
+            "name": "matroska",
+            "value": [
+              {
+                "name": "comments",
+                "value": [
+                  {
+                    "name": "muxingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.32.104"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "writingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.32.104"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "major_brand",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "mp42"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "compatible_brands",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "isommp42"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "location",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "-08.8292+115.0848/"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "encoder",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.32.104"
+                      },
+                      {
+                        "name": 1,
+                        "value": "Lavc58.57.100 libvpx"
+                      },
+                      {
+                        "name": 2,
+                        "value": "Lavc58.57.100 libvorbis"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler_name",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "ISO Media file produced by Google Inc. Created on: 10/03/2019."
+                      },
+                      {
+                        "name": 1,
+                        "value": "ISO Media file produced by Google Inc. Created on: 10/03/2019."
+                      }
+                    ]
+                  },
+                  {
+                    "name": "duration",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "00:00:19.469000000��"
+                      },
+                      {
+                        "name": 1,
+                        "value": "00:00:19.531000000��"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "playtime_seconds",
+            "value": 19.531
+          },
+          {
+            "name": "bitrate",
+            "value": 2978977
+          },
+          {
+            "name": "playtime_string",
+            "value": "0:20"
+          },
+          {
+            "name": "version",
+            "value": 2
+          }
+        ],
+        "api_extmetadata": {
+          "ImageDescription": {
+            "value": "A monkey eating something (an egg?) in a plastic bag at Uluwatu Temple in Bali.",
+            "source": "commons-desc-page"
+          },
+          "Artist": {
+            "value": "<a href=\"//commons.wikimedia.org/wiki/User:Mx._Granger\" title=\"User:Mx. Granger\">Mx. Granger</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Zero, Public Domain Dedication",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "false",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "source": "commons-desc-page"
+          }
+        },
+        "api_license_verified": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true
+      },
+      "malaga_animals": {
+        "id": "malaga_animals",
+        "commons_title": "File:Some_animals_in_Malaga.webm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Some_animals_in_Malaga.webm",
+        "pageid": 90493420,
+        "creator": "Jan van der Crabben",
+        "api_artist": "Nicolas Vigier",
+        "api_description": "Some animals in Malaga",
+        "license_short_name": "CC0",
+        "usage_terms": "Creative Commons Zero, Public Domain Dedication",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution_required": "false",
+        "expected_bytes": 6268736,
+        "expected_sha1": "c704ee56b5dfec9e6d93360334a06ef0fbcbd7b0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Some_animals_in_Malaga.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "mime": "video/webm",
+        "api_metadata": [
+          {
+            "name": "GETID3_VERSION",
+            "value": "1.9.19-201912131005"
+          },
+          {
+            "name": "filesize",
+            "value": 6268736
+          },
+          {
+            "name": "avdataoffset",
+            "value": 0
+          },
+          {
+            "name": "avdataend",
+            "value": 6268736
+          },
+          {
+            "name": "fileformat",
+            "value": "webm"
+          },
+          {
+            "name": "audio",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "A_OPUS"
+              },
+              {
+                "name": "sample_rate",
+                "value": 48000
+              },
+              {
+                "name": "channels",
+                "value": 2
+              },
+              {
+                "name": "language",
+                "value": "und"
+              },
+              {
+                "name": "bits_per_sample",
+                "value": 32
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": 0,
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "A_OPUS"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "sample_rate",
+                        "value": 48000
+                      },
+                      {
+                        "name": "channels",
+                        "value": 2
+                      },
+                      {
+                        "name": "language",
+                        "value": "und"
+                      },
+                      {
+                        "name": "bits_per_sample",
+                        "value": 32
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "channelmode",
+                "value": "stereo"
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "V_VP9"
+              },
+              {
+                "name": "resolution_x",
+                "value": 960
+              },
+              {
+                "name": "resolution_y",
+                "value": 540
+              },
+              {
+                "name": "display_unit",
+                "value": "pixels"
+              },
+              {
+                "name": "display_x",
+                "value": 960
+              },
+              {
+                "name": "display_y",
+                "value": 540
+              },
+              {
+                "name": "frame_rate",
+                "value": 29.97
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": 0,
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "V_VP9"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "resolution_x",
+                        "value": 960
+                      },
+                      {
+                        "name": "resolution_y",
+                        "value": 540
+                      },
+                      {
+                        "name": "display_unit",
+                        "value": "pixels"
+                      },
+                      {
+                        "name": "display_x",
+                        "value": 960
+                      },
+                      {
+                        "name": "display_y",
+                        "value": 540
+                      },
+                      {
+                        "name": "frame_rate",
+                        "value": 29.97
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "warning",
+            "value": [
+              {
+                "name": 0,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [1 bytes]) at 63"
+              },
+              {
+                "name": 1,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 77"
+              },
+              {
+                "name": 2,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 92"
+              },
+              {
+                "name": 3,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [3 bytes]) at 107"
+              },
+              {
+                "name": 4,
+                "value": "Unhandled track.video element [module.audio-video.matroska.php:683] (5552::15b0 [8 bytes]) at 399"
+              },
+              {
+                "name": 5,
+                "value": "Unhandled track element [module.audio-video.matroska.php:790] (5802::16aa [3 bytes]) at 444"
+              },
+              {
+                "name": 6,
+                "value": "Unhandled track element [module.audio-video.matroska.php:790] (5819::16bb [4 bytes]) at 450"
+              },
+              {
+                "name": 7,
+                "value": "Unhandled audio type \"A_OPUS\""
+              }
+            ]
+          },
+          {
+            "name": "encoding",
+            "value": "UTF-8"
+          },
+          {
+            "name": "mime_type",
+            "value": "video/webm"
+          },
+          {
+            "name": "matroska",
+            "value": [
+              {
+                "name": "comments",
+                "value": [
+                  {
+                    "name": "muxingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.29.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "writingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.29.100"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "major_brand",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "isom"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "minor_version",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "512"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "compatible_brands",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "isomiso2avc1mp41"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "encoder",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.29.100"
+                      },
+                      {
+                        "name": 1,
+                        "value": "Lavc58.54.100 libvpx-vp9"
+                      },
+                      {
+                        "name": 2,
+                        "value": "Lavc58.54.100 libopus"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler_name",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "VideoHandler"
+                      },
+                      {
+                        "name": 1,
+                        "value": "SoundHandler"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "duration",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "00:00:25.032000000��"
+                      },
+                      {
+                        "name": 1,
+                        "value": "00:00:25.074000000��"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "playtime_seconds",
+            "value": 25.074
+          },
+          {
+            "name": "bitrate",
+            "value": 2000075.2971205232
+          },
+          {
+            "name": "playtime_string",
+            "value": "0:25"
+          },
+          {
+            "name": "version",
+            "value": 2
+          }
+        ],
+        "api_extmetadata": {
+          "ImageDescription": {
+            "value": "Some animals in Malaga",
+            "source": "commons-desc-page"
+          },
+          "Artist": {
+            "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://vimeo.com/user50573967\">Nicolas Vigier</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Zero, Public Domain Dedication",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "false",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "source": "commons-desc-page"
+          }
+        },
+        "api_license_verified": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true
+      },
+      "uluwatu_heist": {
+        "id": "uluwatu_heist",
+        "commons_title": "File:Uluwatu_monkey_4_-_stealing_pom-poms.webm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_4_-_stealing_pom-poms.webm",
+        "pageid": 82945954,
+        "creator": "Jastrow",
+        "api_artist": "Mx. Granger",
+        "api_description": "A monkey stealing a tourist's pom-poms at Uluwatu Temple in Bali.",
+        "license_short_name": "CC0",
+        "usage_terms": "Creative Commons Zero, Public Domain Dedication",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution_required": "false",
+        "expected_bytes": 9113892,
+        "expected_sha1": "22ee2d1cde89096a0f0f0e05d312838c1fe81446",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Uluwatu_monkey_4_-_stealing_pom-poms.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "mime": "video/webm",
+        "api_metadata": [
+          {
+            "name": "GETID3_VERSION",
+            "value": "1.9.17-201902071234"
+          },
+          {
+            "name": "filesize",
+            "value": 9113892
+          },
+          {
+            "name": "avdataoffset",
+            "value": 0
+          },
+          {
+            "name": "avdataend",
+            "value": 9113892
+          },
+          {
+            "name": "fileformat",
+            "value": "webm"
+          },
+          {
+            "name": "audio",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vorbis"
+              },
+              {
+                "name": "sample_rate",
+                "value": 44100
+              },
+              {
+                "name": "channels",
+                "value": 2
+              },
+              {
+                "name": "language",
+                "value": "eng"
+              },
+              {
+                "name": "bits_per_sample",
+                "value": 32
+              },
+              {
+                "name": "lossless",
+                "value": false
+              },
+              {
+                "name": "bitrate_mode",
+                "value": "vbr"
+              },
+              {
+                "name": "bitrate",
+                "value": 128000
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": 0,
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vorbis"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "sample_rate",
+                        "value": 44100
+                      },
+                      {
+                        "name": "channels",
+                        "value": 2
+                      },
+                      {
+                        "name": "language",
+                        "value": "eng"
+                      },
+                      {
+                        "name": "bits_per_sample",
+                        "value": 32
+                      },
+                      {
+                        "name": "lossless",
+                        "value": false
+                      },
+                      {
+                        "name": "bitrate_mode",
+                        "value": "vbr"
+                      },
+                      {
+                        "name": "bitrate",
+                        "value": 128000
+                      },
+                      {
+                        "name": "compression_ratio",
+                        "value": 0.045351473922902494
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "channelmode",
+                "value": "stereo"
+              },
+              {
+                "name": "compression_ratio",
+                "value": 0.045351473922902494
+              }
+            ]
+          },
+          {
+            "name": "video",
+            "value": [
+              {
+                "name": "dataformat",
+                "value": "vp8"
+              },
+              {
+                "name": "resolution_x",
+                "value": 1920
+              },
+              {
+                "name": "resolution_y",
+                "value": 1080
+              },
+              {
+                "name": "display_unit",
+                "value": "pixels"
+              },
+              {
+                "name": "display_x",
+                "value": 1920
+              },
+              {
+                "name": "display_y",
+                "value": 1080
+              },
+              {
+                "name": "frame_rate",
+                "value": 29.936
+              },
+              {
+                "name": "streams",
+                "value": [
+                  {
+                    "name": 0,
+                    "value": [
+                      {
+                        "name": "dataformat",
+                        "value": "vp8"
+                      },
+                      {
+                        "name": "default",
+                        "value": true
+                      },
+                      {
+                        "name": "resolution_x",
+                        "value": 1920
+                      },
+                      {
+                        "name": "resolution_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "display_unit",
+                        "value": "pixels"
+                      },
+                      {
+                        "name": "display_x",
+                        "value": 1920
+                      },
+                      {
+                        "name": "display_y",
+                        "value": 1080
+                      },
+                      {
+                        "name": "frame_rate",
+                        "value": 29.936
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "bitrate",
+                "value": 2564634
+              }
+            ]
+          },
+          {
+            "name": "warning",
+            "value": [
+              {
+                "name": 0,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [1 bytes]) at 63"
+              },
+              {
+                "name": 1,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 77"
+              },
+              {
+                "name": 2,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 92"
+              },
+              {
+                "name": 3,
+                "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [3 bytes]) at 107"
+              },
+              {
+                "name": 4,
+                "value": "Unhandled track.video element [module.audio-video.matroska.php:683] (5552::15b0 [8 bytes]) at 402"
+              }
+            ]
+          },
+          {
+            "name": "encoding",
+            "value": "UTF-8"
+          },
+          {
+            "name": "mime_type",
+            "value": "video/webm"
+          },
+          {
+            "name": "matroska",
+            "value": [
+              {
+                "name": "comments",
+                "value": [
+                  {
+                    "name": "muxingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.32.104"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "writingapp",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.32.104"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "major_brand",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "mp42"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "compatible_brands",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "isommp42"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "location",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "-08.8296+115.0848/"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "encoder",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "Lavf58.32.104"
+                      },
+                      {
+                        "name": 1,
+                        "value": "Lavc58.57.100 libvpx"
+                      },
+                      {
+                        "name": 2,
+                        "value": "Lavc58.57.100 libvorbis"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler_name",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "ISO Media file produced by Google Inc. Created on: 10/03/2019."
+                      },
+                      {
+                        "name": 1,
+                        "value": "ISO Media file produced by Google Inc. Created on: 10/03/2019."
+                      }
+                    ]
+                  },
+                  {
+                    "name": "duration",
+                    "value": [
+                      {
+                        "name": 0,
+                        "value": "00:00:27.027000000��"
+                      },
+                      {
+                        "name": 1,
+                        "value": "00:00:27.078000000��"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "playtime_seconds",
+            "value": 27.078
+          },
+          {
+            "name": "bitrate",
+            "value": 2692634
+          },
+          {
+            "name": "playtime_string",
+            "value": "0:27"
+          },
+          {
+            "name": "version",
+            "value": 2
+          }
+        ],
+        "api_extmetadata": {
+          "ImageDescription": {
+            "value": "A monkey stealing a tourist's pom-poms at Uluwatu Temple in Bali.",
+            "source": "commons-desc-page"
+          },
+          "Artist": {
+            "value": "<a href=\"//commons.wikimedia.org/wiki/User:Mx._Granger\" title=\"User:Mx. Granger\">Mx. Granger</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Zero, Public Domain Dedication",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "false",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "source": "commons-desc-page"
+          }
+        },
+        "api_license_verified": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true
+      }
+    },
+    "flags": {
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "audience_result_promise": false,
+      "virality_guarantee": false,
+      "perfection_claim": false,
+      "retention_claim": false,
+      "hypnosis_claim": false,
+      "three_x_claim": false,
+      "subscribe_claim": false,
+      "like_claim": false,
+      "same_path_replacement": false,
+      "factual_superlative_claim": false,
+      "third_party_repost": false,
+      "ai_audio": false,
+      "generated_calls": false,
+      "v3_audio_packages": false,
+      "audio_substitution": false,
+      "earshot_claim": false,
+      "model_claim": false,
+      "sound_design_layers": false,
+      "sub_bloom_layers": false,
+      "native_ambience_layers": false,
+      "ambience_layers": false,
+      "cue_layers": false
+    },
+    "note": "Commons API extmetadata confirms CC0 1.0 and the original SHA-1 for each selected source. Runner audio and motion probe records are carried through; no full-motion viewing, listening session, sign-off, or outcome claim."
+  },
+  "source_clip_ledger": [
+    {
+      "id": "bois_crow_follow",
+      "raw_file": "production/monarch-cam/work/short_ranking_raw_v6/media/bois_crow_follow.webm",
+      "clip_file": "production/monarch-cam/work/short_ranking_raw_v6/clips/clip_bois_crow_follow.mp4",
+      "bytes": 6543748,
+      "sha1": "2888129c653ac1e11ca4b5542082aaff3dc591ad",
+      "sha256": "2aa248d0a326b166e023a5266684ab63a1e92a7db7c66e19b7d38c70fa96dad9",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Bois_de_Vincennes%2C_Crow_begging_for_food.webm",
+      "license": "CC0-1.0",
+      "creator": "Havang(nl)",
+      "duration_seconds": 16.969,
+      "width": 1080,
+      "height": 1196,
+      "video_codec": "vp8",
+      "audio_codec": "vorbis",
+      "audio_stream_present": true,
+      "clip_frames": 257,
+      "rank": 7,
+      "title": "FOLLOW THE CROW",
+      "reaction_text": "OKAY THAT'S CLEAN",
+      "emoji": "stars",
+      "timeline_in": 0.0,
+      "timeline_out": 8.566667,
+      "source_in": 8.0,
+      "source_out": 16.566667,
+      "review_frames": 9,
+      "api_license_verified": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "original_cc0_file_only": true,
+      "no_transcodes": true
+    },
+    {
+      "id": "tidepool_worm",
+      "raw_file": "production/monarch-cam/work/short_ranking_raw_v6/media/tidepool_worm.webm",
+      "clip_file": "production/monarch-cam/work/short_ranking_raw_v6/clips/clip_tidepool_worm.mp4",
+      "bytes": 7641880,
+      "sha1": "db2cf05e80de4e7f8eb2caa5d81b4854a118da02",
+      "sha256": "3a14521f28d46ab457be9710966d00a9b3c99681f1f8c9ba3df66ef668eeb6e3",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Gezeitent%C3%BCmpelwurm_(unbestimmt).webm",
+      "license": "CC0-1.0",
+      "creator": "H. Krisp",
+      "duration_seconds": 22.64,
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "vp8",
+      "audio_codec": "vorbis",
+      "audio_stream_present": true,
+      "clip_frames": 257,
+      "rank": 6,
+      "title": "TIDEPOOL WIGGLE",
+      "reaction_text": "SMALL BUT WILD",
+      "emoji": "water",
+      "timeline_in": 8.566667,
+      "timeline_out": 17.133333,
+      "source_in": 2.5,
+      "source_out": 11.066667,
+      "review_frames": 9,
+      "api_license_verified": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "original_cc0_file_only": true,
+      "no_transcodes": true
+    },
+    {
+      "id": "berlin_squirrel_monkey",
+      "raw_file": "production/monarch-cam/work/short_ranking_raw_v6/media/berlin_squirrel_monkey.webm",
+      "clip_file": "production/monarch-cam/work/short_ranking_raw_v6/clips/clip_berlin_squirrel_monkey.mp4",
+      "bytes": 8491540,
+      "sha1": "60e88d2f6ff8afd298b4d21c81a1de299fff8311",
+      "sha256": "2f3f7e5defa7108e8f533f98c87492bf8c046a3354c14351864c70663c629f54",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov01.webm",
+      "license": "CC0-1.0",
+      "creator": "Wolfmann",
+      "duration_seconds": 10.243,
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "vp8",
+      "audio_codec": "vorbis",
+      "audio_stream_present": true,
+      "clip_frames": 257,
+      "rank": 5,
+      "title": "ZOOMIES",
+      "reaction_text": "BRO CHARGED IT",
+      "emoji": "bolt",
+      "timeline_in": 17.133333,
+      "timeline_out": 25.7,
+      "source_in": 1.5,
+      "source_out": 10.066667,
+      "review_frames": 9,
+      "api_license_verified": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "original_cc0_file_only": true,
+      "no_transcodes": true
+    },
+    {
+      "id": "cape_squirrel",
+      "raw_file": "production/monarch-cam/work/short_ranking_raw_v6/media/cape_squirrel.webm",
+      "clip_file": "production/monarch-cam/work/short_ranking_raw_v6/clips/clip_cape_squirrel.mp4",
+      "bytes": 135219598,
+      "sha1": "5954a78ff9407852cbf185d54788eaba1c5661f7",
+      "sha256": "9131ba8d273fc3f20bc31153b8858c502e22118f5fa7da2ebfda4442e939dcfe",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm",
+      "license": "CC0-1.0",
+      "creator": "Exploringlife",
+      "duration_seconds": 23.5,
+      "width": 1080,
+      "height": 1080,
+      "video_codec": "av1",
+      "audio_codec": "vorbis",
+      "audio_stream_present": true,
+      "clip_frames": 257,
+      "rank": 4,
+      "title": "SQUIRREL PARKOUR",
+      "reaction_text": "THAT WAS QUICK",
+      "emoji": "bolt",
+      "timeline_in": 25.7,
+      "timeline_out": 34.266667,
+      "source_in": 3.5,
+      "source_out": 12.066667,
+      "review_frames": 9,
+      "api_license_verified": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "original_cc0_file_only": true,
+      "no_transcodes": true
+    },
+    {
+      "id": "uluwatu_bag",
+      "raw_file": "production/monarch-cam/work/short_ranking_raw_v6/media/uluwatu_bag.webm",
+      "clip_file": "production/monarch-cam/work/short_ranking_raw_v6/clips/clip_uluwatu_bag.mp4",
+      "bytes": 7272801,
+      "sha1": "32a7813bacf45b26b7887ad1a17f6bd0cc99994e",
+      "sha256": "2bfb4fb82e5740d93d26f4e0af06722ae182fae785d1ba87a35347e41bc26b4e",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_3_-_eating.webm",
+      "license": "CC0-1.0",
+      "creator": "Jastrow",
+      "duration_seconds": 19.531,
+      "width": 1080,
+      "height": 1920,
+      "video_codec": "vp8",
+      "audio_codec": "vorbis",
+      "audio_stream_present": true,
+      "clip_frames": 257,
+      "rank": 3,
+      "title": "BAG MYSTERY",
+      "reaction_text": "WAIT... WHAT!!",
+      "emoji": "mindblown",
+      "timeline_in": 34.266667,
+      "timeline_out": 42.833333,
+      "source_in": 10.0,
+      "source_out": 18.566667,
+      "review_frames": 9,
+      "api_license_verified": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "original_cc0_file_only": true,
+      "no_transcodes": true
+    },
+    {
+      "id": "malaga_animals",
+      "raw_file": "production/monarch-cam/work/short_ranking_raw_v6/media/malaga_animals.webm",
+      "clip_file": "production/monarch-cam/work/short_ranking_raw_v6/clips/clip_malaga_animals.mp4",
+      "bytes": 6268736,
+      "sha1": "c704ee56b5dfec9e6d93360334a06ef0fbcbd7b0",
+      "sha256": "3a5d258239028dea271a0bf7a153728c0e0a613d035f90de44930e71d07d1fd6",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Some_animals_in_Malaga.webm",
+      "license": "CC0-1.0",
+      "creator": "Jan van der Crabben",
+      "duration_seconds": 25.074,
+      "width": 960,
+      "height": 540,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "audio_stream_present": true,
+      "clip_frames": 257,
+      "rank": 2,
+      "title": "BIRD PIT STOP",
+      "reaction_text": "WAIT FOR IT",
+      "emoji": "stars",
+      "timeline_in": 42.833333,
+      "timeline_out": 51.4,
+      "source_in": 0.0,
+      "source_out": 8.566667,
+      "review_frames": 9,
+      "api_license_verified": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "original_cc0_file_only": true,
+      "no_transcodes": true
+    },
+    {
+      "id": "uluwatu_heist",
+      "raw_file": "production/monarch-cam/work/short_ranking_raw_v6/media/uluwatu_heist.webm",
+      "clip_file": "production/monarch-cam/work/short_ranking_raw_v6/clips/clip_uluwatu_heist.mp4",
+      "bytes": 9113892,
+      "sha1": "22ee2d1cde89096a0f0f0e05d312838c1fe81446",
+      "sha256": "636d531aaefc0dbc31c9f122b85ed5de44819e1d2ced7e3e319f93628b02c2f4",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_4_-_stealing_pom-poms.webm",
+      "license": "CC0-1.0",
+      "creator": "Jastrow",
+      "duration_seconds": 27.078,
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "vp8",
+      "audio_codec": "vorbis",
+      "audio_stream_present": true,
+      "clip_frames": 258,
+      "rank": 1,
+      "title": "THE SNACK HEIST",
+      "reaction_text": "NO WAY",
+      "emoji": "tears",
+      "timeline_in": 51.4,
+      "timeline_out": 60.0,
+      "source_in": 0.0,
+      "source_out": 8.6,
+      "review_frames": 9,
+      "api_license_verified": true,
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "original_cc0_file_only": true,
+      "no_transcodes": true
+    }
+  ],
+  "source_audio_audit": {
+    "edition": "raw_fullscreen_v6",
+    "sample_rate": 48000,
+    "window_seconds": 0.5,
+    "selectable_segment_rms_dbfs_min": -55.0,
+    "assets": {
+      "bois_crow_follow": {
+        "id": "bois_crow_follow",
+        "rank": 7,
+        "file": "production/monarch-cam/work/short_ranking_raw_v6/media/bois_crow_follow.webm",
+        "source_in": 8.0,
+        "source_out": 16.566667,
+        "timeline_in": 0.0,
+        "timeline_out": 8.566667,
+        "duration_seconds": 8.567,
+        "native_samples": 411216,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "segment_rms_dbfs": -42.47,
+        "segment_peak_dbfs": -23.19,
+        "windows": [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "rms_dbfs": -49.22,
+            "peak_dbfs": -35.69,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "end": 1.0,
+            "rms_dbfs": -47.63,
+            "peak_dbfs": -35.12,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "end": 1.5,
+            "rms_dbfs": -45.86,
+            "peak_dbfs": -30.75,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "end": 2.0,
+            "rms_dbfs": -40.38,
+            "peak_dbfs": -25.08,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "end": 2.5,
+            "rms_dbfs": -42.22,
+            "peak_dbfs": -25.91,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "end": 3.0,
+            "rms_dbfs": -42.93,
+            "peak_dbfs": -27.97,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "rms_dbfs": -45.27,
+            "peak_dbfs": -35.18,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "end": 4.0,
+            "rms_dbfs": -40.16,
+            "peak_dbfs": -23.41,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "end": 4.5,
+            "rms_dbfs": -44.72,
+            "peak_dbfs": -27.19,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "end": 5.0,
+            "rms_dbfs": -43.48,
+            "peak_dbfs": -27.41,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "end": 5.5,
+            "rms_dbfs": -39.65,
+            "peak_dbfs": -23.19,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "end": 6.0,
+            "rms_dbfs": -44.1,
+            "peak_dbfs": -24.79,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "end": 6.5,
+            "rms_dbfs": -40.71,
+            "peak_dbfs": -24.64,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "end": 7.0,
+            "rms_dbfs": -40.12,
+            "peak_dbfs": -25.47,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "end": 7.5,
+            "rms_dbfs": -43.45,
+            "peak_dbfs": -28.51,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "end": 8.0,
+            "rms_dbfs": -41.33,
+            "peak_dbfs": -26.06,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "end": 8.5,
+            "rms_dbfs": -43.51,
+            "peak_dbfs": -27.65,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "end": 8.567,
+            "rms_dbfs": -39.65,
+            "peak_dbfs": -27.14,
+            "samples": 3216
+          }
+        ],
+        "audible_window_count": 18,
+        "peak_window": {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -39.65,
+          "peak_dbfs": -23.19,
+          "samples": 24000
+        },
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "runner_audio_rms_dbfs": -42.45,
+        "runner_motion_score": 49.0516
+      },
+      "tidepool_worm": {
+        "id": "tidepool_worm",
+        "rank": 6,
+        "file": "production/monarch-cam/work/short_ranking_raw_v6/media/tidepool_worm.webm",
+        "source_in": 2.5,
+        "source_out": 11.066667,
+        "timeline_in": 8.566667,
+        "timeline_out": 17.133333,
+        "duration_seconds": 8.567,
+        "native_samples": 411216,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "segment_rms_dbfs": -39.86,
+        "segment_peak_dbfs": -0.09,
+        "windows": [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "rms_dbfs": -42.77,
+            "peak_dbfs": -21.33,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "end": 1.0,
+            "rms_dbfs": -51.49,
+            "peak_dbfs": -29.06,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "end": 1.5,
+            "rms_dbfs": -42.65,
+            "peak_dbfs": -24.14,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "end": 2.0,
+            "rms_dbfs": -38.11,
+            "peak_dbfs": -12.95,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "end": 2.5,
+            "rms_dbfs": -49.71,
+            "peak_dbfs": -33.9,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "end": 3.0,
+            "rms_dbfs": -48.76,
+            "peak_dbfs": -32.61,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "rms_dbfs": -35.71,
+            "peak_dbfs": -12.77,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "end": 4.0,
+            "rms_dbfs": -51.08,
+            "peak_dbfs": -32.45,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "end": 4.5,
+            "rms_dbfs": -50.59,
+            "peak_dbfs": -34.39,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "end": 5.0,
+            "rms_dbfs": -50.87,
+            "peak_dbfs": -35.22,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "end": 5.5,
+            "rms_dbfs": -46.45,
+            "peak_dbfs": -15.91,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "end": 6.0,
+            "rms_dbfs": -49.99,
+            "peak_dbfs": -33.15,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "end": 6.5,
+            "rms_dbfs": -35.47,
+            "peak_dbfs": -0.55,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "end": 7.0,
+            "rms_dbfs": -36.09,
+            "peak_dbfs": -7.84,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "end": 7.5,
+            "rms_dbfs": -34.73,
+            "peak_dbfs": -12.93,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "end": 8.0,
+            "rms_dbfs": -36.16,
+            "peak_dbfs": -0.09,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "end": 8.5,
+            "rms_dbfs": -45.07,
+            "peak_dbfs": -22.58,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "end": 8.567,
+            "rms_dbfs": -40.7,
+            "peak_dbfs": -28.97,
+            "samples": 3216
+          }
+        ],
+        "audible_window_count": 18,
+        "peak_window": {
+          "start": 7.0,
+          "end": 7.5,
+          "rms_dbfs": -34.73,
+          "peak_dbfs": -12.93,
+          "samples": 24000
+        },
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "runner_audio_rms_dbfs": -39.87,
+        "runner_motion_score": 19.9471
+      },
+      "berlin_squirrel_monkey": {
+        "id": "berlin_squirrel_monkey",
+        "rank": 5,
+        "file": "production/monarch-cam/work/short_ranking_raw_v6/media/berlin_squirrel_monkey.webm",
+        "source_in": 1.5,
+        "source_out": 10.066667,
+        "timeline_in": 17.133333,
+        "timeline_out": 25.7,
+        "duration_seconds": 8.567,
+        "native_samples": 411222,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "segment_rms_dbfs": -36.46,
+        "segment_peak_dbfs": -19.14,
+        "windows": [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "rms_dbfs": -37.77,
+            "peak_dbfs": -25.56,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "end": 1.0,
+            "rms_dbfs": -40.68,
+            "peak_dbfs": -27.7,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "end": 1.5,
+            "rms_dbfs": -36.32,
+            "peak_dbfs": -24.8,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "end": 2.0,
+            "rms_dbfs": -37.78,
+            "peak_dbfs": -24.25,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "end": 2.5,
+            "rms_dbfs": -37.84,
+            "peak_dbfs": -25.43,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "end": 3.0,
+            "rms_dbfs": -42.67,
+            "peak_dbfs": -28.69,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "rms_dbfs": -39.62,
+            "peak_dbfs": -26.22,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "end": 4.0,
+            "rms_dbfs": -37.13,
+            "peak_dbfs": -23.98,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "end": 4.5,
+            "rms_dbfs": -37.15,
+            "peak_dbfs": -20.85,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "end": 5.0,
+            "rms_dbfs": -39.08,
+            "peak_dbfs": -25.89,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "end": 5.5,
+            "rms_dbfs": -32.26,
+            "peak_dbfs": -19.55,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "end": 6.0,
+            "rms_dbfs": -35.5,
+            "peak_dbfs": -22.62,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "end": 6.5,
+            "rms_dbfs": -36.76,
+            "peak_dbfs": -22.69,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "end": 7.0,
+            "rms_dbfs": -35.26,
+            "peak_dbfs": -23.8,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "end": 7.5,
+            "rms_dbfs": -37.58,
+            "peak_dbfs": -25.72,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "end": 8.0,
+            "rms_dbfs": -35.83,
+            "peak_dbfs": -19.44,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "end": 8.5,
+            "rms_dbfs": -32.69,
+            "peak_dbfs": -19.13,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "end": 8.567,
+            "rms_dbfs": -37.41,
+            "peak_dbfs": -28.19,
+            "samples": 3222
+          }
+        ],
+        "audible_window_count": 18,
+        "peak_window": {
+          "start": 5.0,
+          "end": 5.5,
+          "rms_dbfs": -32.26,
+          "peak_dbfs": -19.55,
+          "samples": 24000
+        },
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "runner_audio_rms_dbfs": -36.44,
+        "runner_motion_score": 22.3247
+      },
+      "cape_squirrel": {
+        "id": "cape_squirrel",
+        "rank": 4,
+        "file": "production/monarch-cam/work/short_ranking_raw_v6/media/cape_squirrel.webm",
+        "source_in": 3.5,
+        "source_out": 12.066667,
+        "timeline_in": 25.7,
+        "timeline_out": 34.266667,
+        "duration_seconds": 8.556,
+        "native_samples": 410688,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "segment_rms_dbfs": -35.58,
+        "segment_peak_dbfs": -6.49,
+        "windows": [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "rms_dbfs": -43.06,
+            "peak_dbfs": -26.42,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "end": 1.0,
+            "rms_dbfs": -46.2,
+            "peak_dbfs": -28.49,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "end": 1.5,
+            "rms_dbfs": -40.53,
+            "peak_dbfs": -22.93,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "end": 2.0,
+            "rms_dbfs": -42.0,
+            "peak_dbfs": -21.11,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "end": 2.5,
+            "rms_dbfs": -42.75,
+            "peak_dbfs": -25.04,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "end": 3.0,
+            "rms_dbfs": -42.23,
+            "peak_dbfs": -22.24,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "rms_dbfs": -37.6,
+            "peak_dbfs": -22.59,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "end": 4.0,
+            "rms_dbfs": -33.67,
+            "peak_dbfs": -17.81,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "end": 4.5,
+            "rms_dbfs": -32.67,
+            "peak_dbfs": -15.23,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "end": 5.0,
+            "rms_dbfs": -35.87,
+            "peak_dbfs": -19.23,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "end": 5.5,
+            "rms_dbfs": -29.36,
+            "peak_dbfs": -6.49,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "end": 6.0,
+            "rms_dbfs": -28.61,
+            "peak_dbfs": -12.3,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "end": 6.5,
+            "rms_dbfs": -39.85,
+            "peak_dbfs": -24.56,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "end": 7.0,
+            "rms_dbfs": -40.4,
+            "peak_dbfs": -24.98,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "end": 7.5,
+            "rms_dbfs": -41.92,
+            "peak_dbfs": -27.5,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "end": 8.0,
+            "rms_dbfs": -44.44,
+            "peak_dbfs": -29.23,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "end": 8.5,
+            "rms_dbfs": -37.99,
+            "peak_dbfs": -19.44,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "end": 8.556,
+            "rms_dbfs": -43.97,
+            "peak_dbfs": -36.87,
+            "samples": 2688
+          }
+        ],
+        "audible_window_count": 18,
+        "peak_window": {
+          "start": 5.5,
+          "end": 6.0,
+          "rms_dbfs": -28.61,
+          "peak_dbfs": -12.3,
+          "samples": 24000
+        },
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "runner_audio_rms_dbfs": -35.6,
+        "runner_motion_score": 24.7338
+      },
+      "uluwatu_bag": {
+        "id": "uluwatu_bag",
+        "rank": 3,
+        "file": "production/monarch-cam/work/short_ranking_raw_v6/media/uluwatu_bag.webm",
+        "source_in": 10.0,
+        "source_out": 18.566667,
+        "timeline_in": 34.266667,
+        "timeline_out": 42.833333,
+        "duration_seconds": 8.567,
+        "native_samples": 411216,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "segment_rms_dbfs": -34.63,
+        "segment_peak_dbfs": -14.55,
+        "windows": [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "rms_dbfs": -27.22,
+            "peak_dbfs": -14.55,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "end": 1.0,
+            "rms_dbfs": -40.75,
+            "peak_dbfs": -27.49,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "end": 1.5,
+            "rms_dbfs": -32.46,
+            "peak_dbfs": -19.35,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "end": 2.0,
+            "rms_dbfs": -33.87,
+            "peak_dbfs": -20.9,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "end": 2.5,
+            "rms_dbfs": -33.96,
+            "peak_dbfs": -21.42,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "end": 3.0,
+            "rms_dbfs": -40.09,
+            "peak_dbfs": -26.32,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "rms_dbfs": -36.81,
+            "peak_dbfs": -18.86,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "end": 4.0,
+            "rms_dbfs": -40.71,
+            "peak_dbfs": -24.86,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "end": 4.5,
+            "rms_dbfs": -45.21,
+            "peak_dbfs": -32.24,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "end": 5.0,
+            "rms_dbfs": -30.83,
+            "peak_dbfs": -19.85,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "end": 5.5,
+            "rms_dbfs": -38.44,
+            "peak_dbfs": -25.08,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "end": 6.0,
+            "rms_dbfs": -38.65,
+            "peak_dbfs": -25.91,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "end": 6.5,
+            "rms_dbfs": -42.07,
+            "peak_dbfs": -27.75,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "end": 7.0,
+            "rms_dbfs": -38.02,
+            "peak_dbfs": -26.33,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "end": 7.5,
+            "rms_dbfs": -38.97,
+            "peak_dbfs": -25.95,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "end": 8.0,
+            "rms_dbfs": -39.04,
+            "peak_dbfs": -27.54,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "end": 8.5,
+            "rms_dbfs": -32.85,
+            "peak_dbfs": -18.71,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "end": 8.567,
+            "rms_dbfs": -38.04,
+            "peak_dbfs": -27.42,
+            "samples": 3216
+          }
+        ],
+        "audible_window_count": 18,
+        "peak_window": {
+          "start": 0.0,
+          "end": 0.5,
+          "rms_dbfs": -27.22,
+          "peak_dbfs": -14.55,
+          "samples": 24000
+        },
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "runner_audio_rms_dbfs": -34.65,
+        "runner_motion_score": 19.702
+      },
+      "malaga_animals": {
+        "id": "malaga_animals",
+        "rank": 2,
+        "file": "production/monarch-cam/work/short_ranking_raw_v6/media/malaga_animals.webm",
+        "source_in": 0.0,
+        "source_out": 8.566667,
+        "timeline_in": 42.833333,
+        "timeline_out": 51.4,
+        "duration_seconds": 8.56,
+        "native_samples": 410880,
+        "audio_stream_present": true,
+        "audio_codec": "opus",
+        "segment_rms_dbfs": -35.0,
+        "segment_peak_dbfs": -21.45,
+        "windows": [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "rms_dbfs": -34.63,
+            "peak_dbfs": -21.95,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "end": 1.0,
+            "rms_dbfs": -34.8,
+            "peak_dbfs": -23.44,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "end": 1.5,
+            "rms_dbfs": -34.25,
+            "peak_dbfs": -23.56,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "end": 2.0,
+            "rms_dbfs": -34.35,
+            "peak_dbfs": -23.76,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "end": 2.5,
+            "rms_dbfs": -34.6,
+            "peak_dbfs": -23.52,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "end": 3.0,
+            "rms_dbfs": -34.77,
+            "peak_dbfs": -21.46,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "rms_dbfs": -34.7,
+            "peak_dbfs": -23.0,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "end": 4.0,
+            "rms_dbfs": -35.13,
+            "peak_dbfs": -23.59,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "end": 4.5,
+            "rms_dbfs": -35.09,
+            "peak_dbfs": -22.7,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "end": 5.0,
+            "rms_dbfs": -34.91,
+            "peak_dbfs": -23.23,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "end": 5.5,
+            "rms_dbfs": -35.45,
+            "peak_dbfs": -23.07,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "end": 6.0,
+            "rms_dbfs": -34.83,
+            "peak_dbfs": -22.52,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "end": 6.5,
+            "rms_dbfs": -35.74,
+            "peak_dbfs": -23.32,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "end": 7.0,
+            "rms_dbfs": -34.95,
+            "peak_dbfs": -23.34,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "end": 7.5,
+            "rms_dbfs": -35.99,
+            "peak_dbfs": -24.69,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "end": 8.0,
+            "rms_dbfs": -35.24,
+            "peak_dbfs": -24.07,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "end": 8.5,
+            "rms_dbfs": -36.15,
+            "peak_dbfs": -23.86,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "end": 8.56,
+            "rms_dbfs": -35.06,
+            "peak_dbfs": -24.28,
+            "samples": 2880
+          }
+        ],
+        "audible_window_count": 18,
+        "peak_window": {
+          "start": 1.0,
+          "end": 1.5,
+          "rms_dbfs": -34.25,
+          "peak_dbfs": -23.56,
+          "samples": 24000
+        },
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "runner_audio_rms_dbfs": -35.01,
+        "runner_motion_score": 24.3736
+      },
+      "uluwatu_heist": {
+        "id": "uluwatu_heist",
+        "rank": 1,
+        "file": "production/monarch-cam/work/short_ranking_raw_v6/media/uluwatu_heist.webm",
+        "source_in": 0.0,
+        "source_out": 8.6,
+        "timeline_in": 51.4,
+        "timeline_out": 60.0,
+        "duration_seconds": 8.597,
+        "native_samples": 412656,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "segment_rms_dbfs": -22.62,
+        "segment_peak_dbfs": -2.52,
+        "windows": [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "rms_dbfs": -35.85,
+            "peak_dbfs": -18.06,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "end": 1.0,
+            "rms_dbfs": -30.14,
+            "peak_dbfs": -10.66,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "end": 1.5,
+            "rms_dbfs": -21.85,
+            "peak_dbfs": -3.72,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "end": 2.0,
+            "rms_dbfs": -22.88,
+            "peak_dbfs": -6.64,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "end": 2.5,
+            "rms_dbfs": -21.56,
+            "peak_dbfs": -5.57,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "end": 3.0,
+            "rms_dbfs": -23.02,
+            "peak_dbfs": -6.6,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "rms_dbfs": -27.25,
+            "peak_dbfs": -8.93,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "end": 4.0,
+            "rms_dbfs": -33.26,
+            "peak_dbfs": -8.76,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "end": 4.5,
+            "rms_dbfs": -35.25,
+            "peak_dbfs": -18.2,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "end": 5.0,
+            "rms_dbfs": -30.25,
+            "peak_dbfs": -12.3,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "end": 5.5,
+            "rms_dbfs": -27.51,
+            "peak_dbfs": -10.3,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "end": 6.0,
+            "rms_dbfs": -22.96,
+            "peak_dbfs": -5.97,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "end": 6.5,
+            "rms_dbfs": -24.65,
+            "peak_dbfs": -6.99,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "end": 7.0,
+            "rms_dbfs": -20.63,
+            "peak_dbfs": -3.86,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "end": 7.5,
+            "rms_dbfs": -19.7,
+            "peak_dbfs": -4.15,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "end": 8.0,
+            "rms_dbfs": -15.44,
+            "peak_dbfs": -2.5,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "end": 8.5,
+            "rms_dbfs": -21.91,
+            "peak_dbfs": -2.89,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "end": 8.597,
+            "rms_dbfs": -23.57,
+            "peak_dbfs": -8.13,
+            "samples": 4656
+          }
+        ],
+        "audible_window_count": 18,
+        "peak_window": {
+          "start": 7.5,
+          "end": 8.0,
+          "rms_dbfs": -15.44,
+          "peak_dbfs": -2.5,
+          "samples": 24000
+        },
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "runner_audio_rms_dbfs": -22.62,
+        "runner_motion_score": 30.2472
+      }
+    },
+    "flags": {
+      "runner_probe_passed": true,
+      "runner_audio_visual_probe_passed": true,
+      "runner_visual_motion_probe": true,
+      "contact_sheets_written": true,
+      "source_review_recorded": true,
+      "visual_lock_written": true,
+      "all_seven_selected_windows_audible": true,
+      "raw_per_window_native_audio_only": true,
+      "native_source_audio_only": true,
+      "no_added_audio_layers": true,
+      "no_spoken_voice_over": true,
+      "no_score": true,
+      "no_effects": true,
+      "no_bed": true,
+      "no_fabricated_animal_calls": true,
+      "audio_substitution": false,
+      "generated_calls": false,
+      "v3_audio_packages": false,
+      "sound_design_layers": false,
+      "sub_bloom_layers": false,
+      "native_ambience_layers": false,
+      "ambience_layers": false,
+      "cue_layers": false,
+      "full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "audience_result_promise": false,
+      "virality_guarantee": false,
+      "perfection_claim": false,
+      "retention_claim": false,
+      "hypnosis_claim": false,
+      "three_x_claim": false,
+      "subscribe_claim": false,
+      "like_claim": false,
+      "same_path_replacement": false,
+      "factual_superlative_claim": false,
+      "third_party_repost": false,
+      "ai_audio": false,
+      "earshot_claim": false,
+      "model_claim": false
+    },
+    "all_seven_selected_windows_audible": true
+  },
+  "audio_ledger": {
+    "edition": "raw_fullscreen_v6",
+    "policy": {
+      "raw_only": true,
+      "no_spoken_voice_over": true,
+      "no_score": true,
+      "no_effects": true,
+      "no_bed": true,
+      "no_added_layers": true,
+      "no_fabricated_animal_calls": true,
+      "native_source_audio_only": true,
+      "raw_per_window_native_audio_only": true,
+      "source_audio_present_segments": 7,
+      "silent_segments": 0,
+      "all_seven_native_audio_audible": true,
+      "target_integrated_lufs": -14.2,
+      "true_peak_target_dbtp": -2.2,
+      "sample_rate": 48000,
+      "channels": 2,
+      "edge_fade_ms": 30,
+      "final_gain_calibration": true,
+      "final_peak_limit_linear": 0.75,
+      "final_calibration_iterations": 6,
+      "final_technical_click_threshold": 0.45,
+      "final_declick_threshold": 0.28,
+      "final_declick_width_samples": 32,
+      "web_lufs_target": -14.0,
+      "web_lufs_tolerance": 0.7,
+      "web_true_peak_ceiling_dbtp": -1.0,
+      "web_lra_min_lu": 1.0,
+      "web_lra_max_lu": 10.0,
+      "web_movement_min_db": 3.0,
+      "native_audible_segment_rms_dbfs_min": -55.0,
+      "per_window_target_rms_dbfs_candidates": [
+        -24.0,
+        -22.0,
+        -20.0,
+        -18.0
+      ]
+    },
+    "segments": [
+      {
+        "id": "rank7_bois_crow_follow",
+        "rank": 7,
+        "source_id": "bois_crow_follow",
+        "timeline_in": 0.0,
+        "timeline_out": 8.566667,
+        "source_in": 8.0,
+        "source_out": 16.566667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -38.506,
+        "measured_rms_dbfs_before_gain": -42.472,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 18.472,
+        "peak_before_guard_dbfs": -4.717,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank6_tidepool_worm",
+        "rank": 6,
+        "source_id": "tidepool_worm",
+        "timeline_in": 8.566667,
+        "timeline_out": 17.133333,
+        "source_in": 2.5,
+        "source_out": 11.066667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -33.633,
+        "measured_rms_dbfs_before_gain": -39.86,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 15.86,
+        "peak_before_guard_dbfs": 15.769,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank5_berlin_squirrel_monkey",
+        "rank": 5,
+        "source_id": "berlin_squirrel_monkey",
+        "timeline_in": 17.133333,
+        "timeline_out": 25.7,
+        "source_in": 1.5,
+        "source_out": 10.066667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -33.786,
+        "measured_rms_dbfs_before_gain": -36.458,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 12.458,
+        "peak_before_guard_dbfs": -6.685,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank4_cape_squirrel",
+        "rank": 4,
+        "source_id": "cape_squirrel",
+        "timeline_in": 25.7,
+        "timeline_out": 34.266667,
+        "source_in": 3.5,
+        "source_out": 12.066667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -34.148,
+        "measured_rms_dbfs_before_gain": -35.579,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 11.579,
+        "peak_before_guard_dbfs": 5.091,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank3_uluwatu_bag",
+        "rank": 3,
+        "source_id": "uluwatu_bag",
+        "timeline_in": 34.266667,
+        "timeline_out": 42.833333,
+        "source_in": 10.0,
+        "source_out": 18.566667,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -32.485,
+        "measured_rms_dbfs_before_gain": -34.631,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 10.631,
+        "peak_before_guard_dbfs": -3.923,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank2_malaga_animals",
+        "rank": 2,
+        "source_id": "malaga_animals",
+        "timeline_in": 42.833333,
+        "timeline_out": 51.4,
+        "source_in": 0.0,
+        "source_out": 8.566667,
+        "audio_stream_present": true,
+        "audio_codec": "opus",
+        "native_samples": 411200,
+        "measured_lufs_before_gain": -32.936,
+        "measured_rms_dbfs_before_gain": -35.004,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": 11.004,
+        "peak_before_guard_dbfs": -10.449,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      },
+      {
+        "id": "rank1_uluwatu_heist",
+        "rank": 1,
+        "source_id": "uluwatu_heist",
+        "timeline_in": 51.4,
+        "timeline_out": 60.0,
+        "source_in": 0.0,
+        "source_out": 8.6,
+        "audio_stream_present": true,
+        "audio_codec": "vorbis",
+        "native_samples": 412800,
+        "measured_lufs_before_gain": -20.011,
+        "measured_rms_dbfs_before_gain": -22.623,
+        "per_window_target_rms_dbfs": -24.0,
+        "applied_gain_db": -1.377,
+        "peak_before_guard_dbfs": -3.896,
+        "silent": false,
+        "native_audio_audible": true,
+        "added_layers": 0,
+        "raw_per_window_native_audio_only": true
+      }
+    ],
+    "placements": [
+      {
+        "rank": 7,
+        "start_sample": 0,
+        "end_sample": 411200
+      },
+      {
+        "rank": 6,
+        "start_sample": 411200,
+        "end_sample": 822400
+      },
+      {
+        "rank": 5,
+        "start_sample": 822400,
+        "end_sample": 1233600
+      },
+      {
+        "rank": 4,
+        "start_sample": 1233600,
+        "end_sample": 1644800
+      },
+      {
+        "rank": 3,
+        "start_sample": 1644800,
+        "end_sample": 2056000
+      },
+      {
+        "rank": 2,
+        "start_sample": 2056000,
+        "end_sample": 2467200
+      },
+      {
+        "rank": 1,
+        "start_sample": 2467200,
+        "end_sample": 2880000
+      }
+    ],
+    "no_spoken_voice_over": true,
+    "no_score": true,
+    "no_effects": true,
+    "no_bed": true,
+    "no_added_layers": true,
+    "no_fabricated_animal_calls": true,
+    "native_source_audio_only": true,
+    "raw_per_window_native_audio_only": true,
+    "native_stereo_fold_to_dual_mono": true,
+    "source_audio_present_segments": 7,
+    "silent_segments": 0,
+    "all_seven_native_audio_audible": true,
+    "runner_probe_passed": true,
+    "runner_audio_visual_probe_passed": true,
+    "runner_visual_motion_probe": true,
+    "contact_sheets_written": true,
+    "source_review_recorded": true,
+    "visual_lock_written": true,
+    "chosen_combo": "rmsm24_strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+    "per_window_target_rms_dbfs": -24.0,
+    "mastering_variant": "strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+    "mastering_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+    "mastering_attempts": [
+      {
+        "id": "rmsm24_linear_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "linear_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=true:print_format=summary",
+        "web_gate_pass": false,
+        "failed": [
+          "lra_in_range"
+        ],
+        "integrated_lufs": -14.02,
+        "lra_lu": 16.93,
+        "sample_peak_dbfs": -2.33,
+        "movement_db": 33.24,
+        "technical_click_runs": 0
+      },
+      {
+        "id": "rmsm24_dynamic_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "dynamic_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+        "web_gate_pass": false,
+        "failed": [
+          "lra_in_range"
+        ],
+        "integrated_lufs": -14.02,
+        "lra_lu": 16.93,
+        "sample_peak_dbfs": -2.33,
+        "movement_db": 33.24,
+        "technical_click_runs": 0
+      },
+      {
+        "id": "rmsm24_rms_compressor_6to1_dynamic_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "rms_compressor_6to1_dynamic_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+        "web_gate_pass": false,
+        "failed": [
+          "lra_in_range"
+        ],
+        "integrated_lufs": -14.0,
+        "lra_lu": 12.48,
+        "sample_peak_dbfs": -2.47,
+        "movement_db": 25.11,
+        "technical_click_runs": 0
+      },
+      {
+        "id": "rmsm24_strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+        "target_rms_dbfs": -24.0,
+        "mastering_variant": "strong_rms_compressor_12to1_dynamic_loudnorm_lra7",
+        "filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary",
+        "web_gate_pass": true,
+        "failed": [],
+        "integrated_lufs": -14.65,
+        "lra_lu": 7.17,
+        "sample_peak_dbfs": -2.2,
+        "movement_db": 17.59,
+        "technical_click_runs": 0
+      }
+    ],
+    "final_gain_calibration": [
+      {
+        "iteration": 0,
+        "integrated_lufs": -14.65,
+        "lra_lu": 7.17,
+        "sample_peak_dbfs": -2.2,
+        "loudness_in_range": true,
+        "lra_in_range": true,
+        "true_peak_ok": true,
+        "web_gate_pass": true,
+        "technical_click_runs": 0,
+        "measured_on": "delivered_aac_stream",
+        "applied_gain_db": 0.0,
+        "declick_regions": 0,
+        "delivered_click_repair": []
+      }
+    ],
+    "final_web_gate_pass": true,
+    "final_technical_click_runs": 0,
+    "premaster": "production/monarch-cam/work/short_ranking_raw_v6/native_timeline_rmsm24.wav",
+    "mastered": "production/monarch-cam/work/short_ranking_raw_v6/native_timeline_mastered_rmsm24.wav",
+    "deliverable_sha256": "96427061b1f53d493133f5455a05680ab2d49a5731ea47222dfc1409b3914e17",
+    "deliverable_bytes": 23724424,
+    "full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false,
+    "audience_result_promise": false,
+    "virality_guarantee": false,
+    "perfection_claim": false,
+    "retention_claim": false,
+    "hypnosis_claim": false,
+    "three_x_claim": false,
+    "subscribe_claim": false,
+    "like_claim": false,
+    "same_path_replacement": false,
+    "factual_superlative_claim": false,
+    "third_party_repost": false,
+    "ai_audio": false,
+    "generated_calls": false,
+    "v3_audio_packages": false,
+    "audio_substitution": false,
+    "earshot_claim": false,
+    "model_claim": false,
+    "sound_design_layers": false,
+    "sub_bloom_layers": false,
+    "native_ambience_layers": false,
+    "ambience_layers": false,
+    "cue_layers": false
+  },
+  "selected_windows": {
+    "edition": "raw_fullscreen_v6",
+    "probe_basis": "V5 runner-selected windows inherited for V6; no new human review or creative acceptance.",
+    "frame_count": 1800,
+    "scenes": [
+      {
+        "id": "rank7_bois_crow_follow",
+        "rank": 7,
+        "title": "FOLLOW THE CROW",
+        "reaction_text": "OKAY THAT'S CLEAN",
+        "emoji": "stars",
+        "source_id": "bois_crow_follow",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Bois_de_Vincennes%2C_Crow_begging_for_food.webm",
+        "license": "CC0-1.0",
+        "creator": "Havang(nl)",
+        "local_filename": "bois_crow_follow.webm",
+        "start_frame": 0,
+        "end_frame": 257,
+        "frames": 257,
+        "start": 0.0,
+        "end": 8.566667,
+        "duration": 8.566667,
+        "source_start": 8.0,
+        "source_out": 16.566667,
+        "focus_x": 0.5,
+        "focus_y": 0.55,
+        "zoom_start": 1.02,
+        "zoom_end": 1.1,
+        "payoff_at": 0.7,
+        "reaction_at": 0.72,
+        "label_reveal_at": 0.12,
+        "payoff_zoom": 1.22,
+        "audio_present": true,
+        "audio_codec": "vorbis",
+        "runner_audio_rms_dbfs": -42.45,
+        "runner_motion_score": 49.0516,
+        "runner_window_score": 17.1,
+        "runner_audio_visual_probe_passed": true,
+        "runner_visual_motion_probe": true,
+        "selected_from_runner_probe": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true,
+        "api_verification_required": true,
+        "added_audio_layers": 0
+      },
+      {
+        "id": "rank6_tidepool_worm",
+        "rank": 6,
+        "title": "TIDEPOOL WIGGLE",
+        "reaction_text": "SMALL BUT WILD",
+        "emoji": "water",
+        "source_id": "tidepool_worm",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Gezeitent%C3%BCmpelwurm_(unbestimmt).webm",
+        "license": "CC0-1.0",
+        "creator": "H. Krisp",
+        "local_filename": "tidepool_worm.webm",
+        "start_frame": 257,
+        "end_frame": 514,
+        "frames": 257,
+        "start": 8.566667,
+        "end": 17.133333,
+        "duration": 8.566667,
+        "source_start": 2.5,
+        "source_out": 11.066667,
+        "focus_x": 0.5,
+        "focus_y": 0.5,
+        "zoom_start": 1.02,
+        "zoom_end": 1.1,
+        "payoff_at": 0.7,
+        "reaction_at": 0.72,
+        "label_reveal_at": 0.12,
+        "payoff_zoom": 1.22,
+        "audio_present": true,
+        "audio_codec": "vorbis",
+        "runner_audio_rms_dbfs": -39.87,
+        "runner_motion_score": 19.9471,
+        "runner_window_score": 18.0503,
+        "runner_audio_visual_probe_passed": true,
+        "runner_visual_motion_probe": true,
+        "selected_from_runner_probe": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true,
+        "api_verification_required": true,
+        "added_audio_layers": 0
+      },
+      {
+        "id": "rank5_berlin_squirrel_monkey",
+        "rank": 5,
+        "title": "ZOOMIES",
+        "reaction_text": "BRO CHARGED IT",
+        "emoji": "bolt",
+        "source_id": "berlin_squirrel_monkey",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_zoologisk_hage_2026-04-07_mov01.webm",
+        "license": "CC0-1.0",
+        "creator": "Wolfmann",
+        "local_filename": "berlin_squirrel_monkey.webm",
+        "start_frame": 514,
+        "end_frame": 771,
+        "frames": 257,
+        "start": 17.133333,
+        "end": 25.7,
+        "duration": 8.566667,
+        "source_start": 1.5,
+        "source_out": 10.066667,
+        "focus_x": 0.5,
+        "focus_y": 0.5,
+        "zoom_start": 1.02,
+        "zoom_end": 1.1,
+        "payoff_at": 0.7,
+        "reaction_at": 0.72,
+        "label_reveal_at": 0.12,
+        "payoff_zoom": 1.22,
+        "audio_present": true,
+        "audio_codec": "vorbis",
+        "runner_audio_rms_dbfs": -36.44,
+        "runner_motion_score": 22.3247,
+        "runner_window_score": 19.504,
+        "runner_audio_visual_probe_passed": true,
+        "runner_visual_motion_probe": true,
+        "selected_from_runner_probe": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true,
+        "api_verification_required": true,
+        "added_audio_layers": 0
+      },
+      {
+        "id": "rank4_cape_squirrel",
+        "rank": 4,
+        "title": "SQUIRREL PARKOUR",
+        "reaction_text": "THAT WAS QUICK",
+        "emoji": "bolt",
+        "source_id": "cape_squirrel",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Squirrel_in_Cape_Collinson_Road_Sitting-out_Area.webm",
+        "license": "CC0-1.0",
+        "creator": "Exploringlife",
+        "local_filename": "cape_squirrel.webm",
+        "start_frame": 771,
+        "end_frame": 1028,
+        "frames": 257,
+        "start": 25.7,
+        "end": 34.266667,
+        "duration": 8.566667,
+        "source_start": 3.5,
+        "source_out": 12.066667,
+        "focus_x": 0.5,
+        "focus_y": 0.5,
+        "zoom_start": 1.02,
+        "zoom_end": 1.1,
+        "payoff_at": 0.7,
+        "reaction_at": 0.72,
+        "label_reveal_at": 0.12,
+        "payoff_zoom": 1.22,
+        "audio_present": true,
+        "audio_codec": "vorbis",
+        "runner_audio_rms_dbfs": -35.6,
+        "runner_motion_score": 24.7338,
+        "runner_window_score": 19.82,
+        "runner_audio_visual_probe_passed": true,
+        "runner_visual_motion_probe": true,
+        "selected_from_runner_probe": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true,
+        "api_verification_required": true,
+        "added_audio_layers": 0
+      },
+      {
+        "id": "rank3_uluwatu_bag",
+        "rank": 3,
+        "title": "BAG MYSTERY",
+        "reaction_text": "WAIT... WHAT!!",
+        "emoji": "mindblown",
+        "source_id": "uluwatu_bag",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_3_-_eating.webm",
+        "license": "CC0-1.0",
+        "creator": "Jastrow",
+        "local_filename": "uluwatu_bag.webm",
+        "start_frame": 1028,
+        "end_frame": 1285,
+        "frames": 257,
+        "start": 34.266667,
+        "end": 42.833333,
+        "duration": 8.566667,
+        "source_start": 10.0,
+        "source_out": 18.566667,
+        "focus_x": 0.5,
+        "focus_y": 0.5,
+        "zoom_start": 1.02,
+        "zoom_end": 1.1,
+        "payoff_at": 0.7,
+        "reaction_at": 0.72,
+        "label_reveal_at": 0.12,
+        "payoff_zoom": 1.22,
+        "audio_present": true,
+        "audio_codec": "vorbis",
+        "runner_audio_rms_dbfs": -34.65,
+        "runner_motion_score": 19.702,
+        "runner_window_score": 19.9212,
+        "runner_audio_visual_probe_passed": true,
+        "runner_visual_motion_probe": true,
+        "selected_from_runner_probe": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true,
+        "api_verification_required": true,
+        "added_audio_layers": 0
+      },
+      {
+        "id": "rank2_malaga_animals",
+        "rank": 2,
+        "title": "BIRD PIT STOP",
+        "reaction_text": "WAIT FOR IT",
+        "emoji": "stars",
+        "source_id": "malaga_animals",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Some_animals_in_Malaga.webm",
+        "license": "CC0-1.0",
+        "creator": "Jan van der Crabben",
+        "local_filename": "malaga_animals.webm",
+        "start_frame": 1285,
+        "end_frame": 1542,
+        "frames": 257,
+        "start": 42.833333,
+        "end": 51.4,
+        "duration": 8.566667,
+        "source_start": 0.0,
+        "source_out": 8.566667,
+        "focus_x": 0.5,
+        "focus_y": 0.5,
+        "zoom_start": 1.02,
+        "zoom_end": 1.1,
+        "payoff_at": 0.7,
+        "reaction_at": 0.72,
+        "label_reveal_at": 0.12,
+        "payoff_zoom": 1.22,
+        "audio_present": true,
+        "audio_codec": "opus",
+        "runner_audio_rms_dbfs": -35.01,
+        "runner_motion_score": 24.3736,
+        "runner_window_score": 20.036,
+        "runner_audio_visual_probe_passed": true,
+        "runner_visual_motion_probe": true,
+        "selected_from_runner_probe": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true,
+        "api_verification_required": true,
+        "added_audio_layers": 0
+      },
+      {
+        "id": "rank1_uluwatu_heist",
+        "rank": 1,
+        "title": "THE SNACK HEIST",
+        "reaction_text": "NO WAY",
+        "emoji": "tears",
+        "source_id": "uluwatu_heist",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_4_-_stealing_pom-poms.webm",
+        "license": "CC0-1.0",
+        "creator": "Jastrow",
+        "local_filename": "uluwatu_heist.webm",
+        "start_frame": 1542,
+        "end_frame": 1800,
+        "frames": 258,
+        "start": 51.4,
+        "end": 60.0,
+        "duration": 8.6,
+        "source_start": 0.0,
+        "source_out": 8.6,
+        "focus_x": 0.55,
+        "focus_y": 0.52,
+        "zoom_start": 1.02,
+        "zoom_end": 1.1,
+        "payoff_at": 0.7,
+        "reaction_at": 0.72,
+        "label_reveal_at": 0.12,
+        "payoff_zoom": 1.22,
+        "audio_present": true,
+        "audio_codec": "vorbis",
+        "runner_audio_rms_dbfs": -22.62,
+        "runner_motion_score": 30.2472,
+        "runner_window_score": 20.12,
+        "runner_audio_visual_probe_passed": true,
+        "runner_visual_motion_probe": true,
+        "selected_from_runner_probe": true,
+        "original_cc0_file_only": true,
+        "no_transcodes": true,
+        "api_verification_required": true,
+        "added_audio_layers": 0
+      }
+    ]
+  },
+  "runner_probe_passed": true,
+  "runner_audio_visual_probe_passed": true,
+  "runner_visual_motion_probe": true,
+  "contact_sheets_written": true,
+  "source_review_recorded": true,
+  "visual_lock_written": true,
+  "safe_area_check": true,
+  "social_origin_check": true,
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "human_approval": false,
+  "sign_off": false,
+  "audience_result_promise": false,
+  "virality_guarantee": false,
+  "social_platform_reposts_selected": false,
+  "note": "Technical build and objective checks only. V5 was rejected; V6 is not claimed accepted, approved, watched in full motion, listened to by a human, or proven with audience results."
+}
