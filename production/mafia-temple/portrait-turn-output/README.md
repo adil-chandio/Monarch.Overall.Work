@@ -15,3 +15,5 @@ Actions 42433693275 produced 96 frames at 24 fps from a generated neutral front 
 ## Front-anchored test (v2)
 
 Actions 42434301418 rendered 96 frames at 24 fps with pose-friendly mode. The inspected frames show a leftward three-quarter view turning toward the lens, with a small late smile and much steadier direct gaze. It is a meaningful improvement over v1, but the generated portrait is still only an approximate likeness, the expression has subtle mouth/teeth distortion, the body and background are static, and no red-eye effect is included. Intermediate-frame identity and warp artifacts need further inspection; this is research-only, not a final shot or a commercial-clearance claim.
+
+A local tracked-iris red-eye test was applied to front-turn v2 with `research_eye_vfx.py`. Iris detection succeeded through the 96 frames, and all 36 frames around the effect ramp were examined as cropped eye images. The red tint followed the eyes in those crops, but it reads more like red contacts than convincing emitted light; no full shot, blink, audio or final color-grade review has been performed. It remains a research test.
