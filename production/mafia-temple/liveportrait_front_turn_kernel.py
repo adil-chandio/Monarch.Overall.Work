@@ -94,11 +94,11 @@ for frame in range(96):
     writer.write(cv2.addWeighted(source_frames[lo],1-(pos-lo),source_frames[hi],pos-lo,0))
 writer.release()
 results = []
-source = 'front-turn-v1'
+source = 'front-turn-v2'
 (work / (source + '.jpg')).write_bytes((work / 'front-neutral.jpg').read_bytes())
 t = time.time()
 command = [sys.executable, 'inference.py', '-s', str(work / (source + '.jpg')),
-           '-d', driver_path, '-o', str(outdir)]
+           '-d', driver_path, '-o', str(outdir), '--driving-option', 'pose-friendly']
 try:
     run(command, env=dict(os.environ, MONARCH_TURN_DEG='40'))
     output = outdir / f'{source}--turn-driver.mp4'
@@ -109,6 +109,6 @@ try:
 except Exception as e:
     print('TEST FAILED', type(e).__name__, str(e)[:300], flush=True)
     results.append({'status':'failed','error':type(e).__name__})
-(outdir/'liveportrait-front-turn-v1-receipt.json').write_text(json.dumps(results, indent=2))
+(outdir/'liveportrait-front-turn-v2-receipt.json').write_text(json.dumps(results, indent=2))
 if not any(r['status']=='ok' for r in results):
     raise RuntimeError('Portrait rotation test failed')
