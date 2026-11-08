@@ -377,7 +377,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if grep -q 'onetoall-recover-diagnostics-v2' production/mafia-temple/trigger.txt; then
-            PILOT_KERNEL_SLUG=monarch-onetoall-run-42509202109 python production/mafia-temple/onetoall_diagnose.py
+            export PILOT_KERNEL_SLUG=monarch-onetoall-run-42511685428
+            echo "::notice title=One-to-All current Kaggle status::$(kaggle kernels status "$KAGGLE_USERNAME/$PILOT_KERNEL_SLUG" 2>&1)"
+            python production/mafia-temple/onetoall_diagnose.py
             git config user.name 'MONARCH GPU Runner'
             git config user.email 'gpu@monarch.studio'
             git add production/mafia-temple/onetoall-diagnostics.txt
