@@ -25,9 +25,13 @@ jobs:
           retention-days: 1
       - name: Provide small public thumbnail candidates for inspection
         run: |
-          for f in audit-output/youtube-thumbnails/*-[123].jpg; do
-            echo "::notice title=$(basename "$f")::$(base64 -w0 "$f")"
-          done
+          python - <<'PYCODE'
+          import base64, pathlib
+          for file in sorted(pathlib.Path('audit-output/youtube-thumbnails').glob('*-[123].jpg')):
+              encoded=base64.b64encode(file.read_bytes()).decode('ascii')
+              for i in range(0,len(encoded),3000):
+                  print(f'::notice title={file.name}.part{i//3000:02}::{encoded[i:i+3000]}')
+          PYCODE
       - name: Save metadata only
         run: |
           cp audit-output/yt-public-thumbnail-probe.json docs/repo-intel/yt-public-thumbnail-probe.json
