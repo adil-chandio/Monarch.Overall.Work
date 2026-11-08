@@ -32,6 +32,9 @@ try:
     reference=scratch/'generated-reference.jpg'; reference.write_bytes(image)
     src=''.join(cells[8]['source']); assert src.startswith('%%writefile ')
     src=src.split('\n',1)[1].split('# ==== 9. AIQUEST BRANDED GRADIO INTERFACE ====')[0]
+    # Do not truncate the video to the shorter generated audio track.
+    if src.count('"-shortest", final_path') != 1: raise RuntimeError('Unexpected audio mux code')
+    src=src.replace('"-shortest", final_path','final_path')
     # Keep generated output out of the public UI and gather only the final video.
     # Classes created by the inference code need a real module name: an empty
     # exec namespace breaks its dynamic multi-GPU Gemma device subclass.
@@ -39,15 +42,16 @@ try:
     exec(compile(src,'reviewed-upstream-inference','exec'),namespace)
     class QuietProgress:
         def __call__(self,*a,**kw): pass
-    prompt=('A cinematic live-action full body side tracking shot of the same man in the reference image running naturally across the stone temple courtyard. '
-       'He moves continuously to the right with alternating strides, arms pumping, shoes planting firmly on the wet ground with believable weight and contact. '
-       'Keep his face, hairstyle, clothing and body consistent with the reference. The camera tracks smoothly alongside him at running speed. '
-       'Realistic anatomy, coherent legs and hands, crisp natural textures, moody evening light, rain reflections, cinematic 35mm photography, no cuts.')
-    receipt.update(status='running',prompt=prompt,frames_requested=73,fps=24);save(); t=time.monotonic()
-    path,message=namespace['Video_Generation'](prompt,str(reference),None,829113,'3 Seconds (73 frames)','480p','Auto (match input image)',progress=QuietProgress())
-    if not path or not pathlib.Path(path).is_file(): raise RuntimeError('Generation returned no video: '+str(message))
-    target=work/'ltx23-running-pilot.mp4';shutil.copyfile(path,target)
-    receipt.update(status='complete_research_only',seconds=round(time.monotonic()-t,2),output_sha256=hashlib.sha256(target.read_bytes()).hexdigest(),message=message)
+    prompts=[
+      ('ltx23-running-a.mp4',20261102, 'A live action side view of the man in the black suit running across the wet stone temple courtyard, moving right. His left foot lands and pushes off, then his right foot lands and pushes off, alternating legs and pumping opposite arms naturally, with short grounded strides and realistic weight shifts. The camera pans smoothly to follow him as the temple pillars and lanterns visibly pass behind him. Full body and both shoes stay in frame. Same face, hairstyle and black suit as the reference. Cinematic natural lighting, realistic anatomy, no cuts.'),
+      ('ltx23-running-b.mp4',391467, 'Cinematic live action side-on dolly shot: the same man in the black suit runs at a moderate pace to the right through a rain-wet temple courtyard. Both legs alternate clearly in a natural jogging cycle, each shoe makes contact with the stone before lifting. His arms swing in opposition to his legs. The tracking camera follows alongside and background lanterns and pillars move across frame. Full body, visible feet, realistic proportions, same face and hair as reference, evening blue mist and warm lantern reflections, no scene cuts.')]
+    receipt.update(status='running',variants=[],frames_requested=73,fps=24);save(); t=time.monotonic()
+    for name,seed,prompt in prompts:
+        path,message=namespace['Video_Generation'](prompt,str(reference),None,seed,'3 Seconds (73 frames)','540p','Auto (match input image)',progress=QuietProgress())
+        if not path or not pathlib.Path(path).is_file(): raise RuntimeError('Generation returned no video: '+str(message))
+        target=work/name;shutil.copyfile(path,target)
+        receipt['variants'].append({'name':name,'seed':seed,'prompt':prompt,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'message':message});save()
+    receipt.update(status='complete_research_only',seconds=round(time.monotonic()-t,2))
     save();print('LTX23_PRIVATE_PILOT_COMPLETE',flush=True)
 except Exception as exc:
     receipt.update(status='failed',error=repr(exc),traceback=traceback.format_exc());save();raise

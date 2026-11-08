@@ -11,7 +11,7 @@ for ((i=0;i<100;i++)); do
   case "$status" in
     *COMPLETE*|*complete*)
       mkdir -p "$out"
-      kaggle kernels output "$ref" -p "$out" --file-pattern '(^|/)(ltx23-running-pilot\.mp4|ltx23-receipt\.json)$'
+      kaggle kernels output "$ref" -p "$out" --file-pattern '(^|/)(ltx23-running-[ab]\.mp4|ltx23-receipt\.json)$'
       export LTX_OUTPUT="$out"
       python production/mafia-temple/relay_ltx23_output.py
       exit 0;;
