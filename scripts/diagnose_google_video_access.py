@@ -42,13 +42,22 @@ else:
         status,data=req(YOUTUBE,key);out['youtube_metadata']=summary(status,data)
         status,data=req(GEMINI+'models?pageSize=100',key);out['gemini_models']=summary(status,data)
         available=[m.get('name','') for m in data.get('models',[]) if 'generateContent' in m.get('supportedGenerationMethods',[]) and 'flash' in m.get('name','').lower()]
-        preferred=['models/gemini-2.5-flash','models/gemini-3-flash-preview','models/gemini-flash-latest']
-        model=next((m for m in preferred if m in available), available[0] if available else None)
+        preferred=['models/gemini-3.1-flash-lite-preview','models/gemini-3-flash-preview','models/gemini-flash-latest','models/gemini-2.5-flash']
+        candidates=[m for m in preferred if m in available]+[m for m in available if m not in preferred]
+        out['available_flash_models']=available
+        out['text_attempts']=[]
+        text['generationConfig'].pop('thinkingConfig',None)
+        model=None
+        for candidate in candidates[:8]:
+            status,data=req(GEMINI+candidate+':generateContent',key,text)
+            out['text_attempts'].append({'model':candidate,**summary(status,data)})
+            if status==200:
+                model=candidate
+                break
+            if status not in (404,400):
+                break
         out['selected_model']=model
         if model:
-            # Thinking options differ between models; use defaults for compatibility.
-            text['generationConfig'].pop('thinkingConfig',None)
-            status,data=req(GEMINI+model+':generateContent',key,text);out['gemini_text']=summary(status,data)
             if status==200:
                 video={'contents':[{'parts':[{'file_data':{'file_uri':'https://www.youtube.com/watch?v=aWHX5Awe_TI'}},{'text':'Describe visually observable actions in sequence, with approximate times. Mark uncertainty; do not guess from the title.'}]}],'generationConfig':{'maxOutputTokens':1024}}
                 status,data=req(GEMINI+model+':generateContent',key,video)
@@ -57,7 +66,7 @@ else:
                     candidates=data.get('candidates',[]);parts=candidates[0].get('content',{}).get('parts',[]) if candidates else []
                     description='\n'.join(x.get('text','') for x in parts if x.get('text'))
                     if description:out['model_description_unverified']=description[:4000]
-        else:out['model_selection']='no_flash_generate_content_model_found'
+        else:out['model_selection']='no_working_flash_model'
         out['outcome']='completed'
     except Exception as e:out.update(outcome='request_failed',error_type=type(e).__name__)
 Path('audit-output').mkdir(exist_ok=True)
