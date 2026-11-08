@@ -4,7 +4,7 @@ GraphQL session extraction, cookies, proxying, authentication or anti-bot bypass
 import datetime,html,json,re,urllib.request,urllib.error
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'docs/research/zack-original-access';OUT.mkdir(parents=True,exist_ok=True)
-URLS=['https://www.facebook.com/zackdfilms/videos/','https://www.facebook.com/zackdfilms/reels/','https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/']
+URLS=['https://www.facebook.com/zackdfilms/','https://www.facebook.com/p/Zack-D-Films-100089194705401/','https://www.facebook.com/profile.php?id=100089194705401&sk=videos']
 report={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'production_hold':True,'route':'Ordinary unauthenticated public creator HTML only','pages':[],'candidates':[]}
 seen=set()
 def candidate(vid,origin,url=None,title=None,kind='public_html_link'):
@@ -41,5 +41,5 @@ for url in URLS:
  except Exception as e:row['error_type']=type(e).__name__
  report['pages'].append(row)
 report['candidate_count']=len(report['candidates'])
-(OUT/'facebook-public-discovery.json').write_text(json.dumps(report,indent=2)+'\n')
+(OUT/'facebook-public-root-discovery.json').write_text(json.dumps(report,indent=2)+'\n')
 print('Public video candidates:',len(report['candidates']))
