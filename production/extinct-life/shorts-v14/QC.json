@@ -1,0 +1,86 @@
+{
+  "decoded_frames": 1500,
+  "expected_frames": 1500,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 50,
+  "native_3d_resolution": [
+    1080,
+    1920
+  ],
+  "interpolated_frames": false,
+  "upscaled_3d": false,
+  "nonblack_all_frames": true,
+  "min_mean_pixel_value": 40.85349794238683,
+  "scene_roi_adjacent_frame_difference": {
+    "mean": 1.1097660047981401,
+    "min": 0.007619047619047619,
+    "max": 72.79185443283004,
+    "exact_repeated_roi_pairs": 0,
+    "note": "Signal diagnostic, not proof of character realism, aesthetic quality or retention."
+  },
+  "encoded_full_resolution_inspection_frames": [
+    60,
+    270,
+    450,
+    660,
+    780,
+    930,
+    1080,
+    1260,
+    1440
+  ],
+  "one_per_second_overview_frames": 51,
+  "final_encoded_audio": {
+    "input_i": "-16.27",
+    "input_tp": "-1.37",
+    "input_lra": "2.80",
+    "input_thresh": "-26.96",
+    "output_i": "-16.01",
+    "output_tp": "-1.50",
+    "output_lra": "2.70",
+    "output_thresh": "-26.65",
+    "normalization_type": "dynamic",
+    "target_offset": "0.01"
+  },
+  "unit_tests": {
+    "command": ".venv/bin/python production/extinct-life/shorts-v14/film/test_timeline.py",
+    "passed": 8
+  },
+  "source_sha256": {
+    "production/extinct-life/shorts-v14/film/finish.py": "abb81058ebeef23fb97ccf7d109e95c21a4bf0bf13ba70899503b8eb3aa744e9",
+    "production/extinct-life/shorts-v14/film/prepare_audio.py": "4fb1e710b060f96a05e25c9620b325e6d150a30717cfa61bf31bc1a4acbe5054",
+    "production/extinct-life/shorts-v14/film/render.mjs": "d1ead5043e8a07a1bc09c00a7e294533f92e7589b7fd68a449f825fb1b8ecf27",
+    "production/extinct-life/shorts-v14/film/scene.mjs": "ede9145fa058a5e1fd2c1ce0e852fe6d92b1e008026f1c1fd753947b61c10254",
+    "production/extinct-life/shorts-v14/film/sound.py": "ea92840946817871b02bfd697274c316e7cee594460244ed20d75808722b3a44",
+    "production/extinct-life/shorts-v14/film/stage.html": "972ce5ca5ff5dab8f9cf90401e1b4058b1b36e8c16b4cb49c9f533b7a649532b",
+    "production/extinct-life/shorts-v14/film/test_timeline.py": "f57252a43f02dd4836062d770e2549b9c9610437b3747076fbd921f8fa866460",
+    "production/extinct-life/shorts-v14/film/timeline.json": "12c9952c12c6426063ed7e40674e6c8673a048806951a8441fd5ace6c7ec93d8"
+  },
+  "file_sha256": "a0fcd8196b76b195e2f2d2178df9d9c2ec4e8011fc68e8aac3904315e3a42836",
+  "competitor_frame_by_frame_watch_completed": false,
+  "independent_anatomical_validation": false,
+  "full_perceptual_audio_listening_approval": false,
+  "owner_creative_acceptance": false,
+  "public_upload_performed": false,
+  "full_resolution_frames_actually_opened": [
+    60,
+    270,
+    450,
+    660,
+    780,
+    930,
+    1080,
+    1260,
+    1440
+  ],
+  "encoded_overview_actually_opened": true,
+  "author_visual_review_notes": [
+    "Animal head/tusks are inside the corrected portrait frame.",
+    "Procedural/stylized animal, ear anatomy/material realism remain below a verified studio-quality benchmark.",
+    "Large DNA hero overlaps the upper heading region during the initial molecular beat; this remains a creative/layout issue in this review candidate.",
+    "Sediment-age label is readable but cream-on-tan contrast is weaker than the main captions.",
+    "No complete audiovisual competitor review or full perceptual mix listening completed."
+  ]
+}

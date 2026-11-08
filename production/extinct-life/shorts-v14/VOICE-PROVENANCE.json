@@ -1,0 +1,26 @@
+{
+  "voice_id": "voice-03",
+  "language": "en",
+  "creator_voice_clone": false,
+  "speed_adjusted": false,
+  "chunks": [
+    {
+      "file": "audio/voice-01.flac",
+      "source": "generate_speech / voice-03, user selected audition",
+      "sha256": "7e01affe089b17e46978a361e4a8169a560c3a8d7ea0a890cf2f3a37c10765e2",
+      "original_wav_sha256": "78c4e3b177b43a726fef88d61690c78d9411878b6d91b3ae64f4b0e8d951bf88"
+    },
+    {
+      "file": "audio/voice-02.flac",
+      "source": "generate_speech / voice-03, user selected audition",
+      "sha256": "1dce1aad3c14d9be15f4ac31e43ed69404a872d777dbaf7050d30c211d6930dd",
+      "original_wav_sha256": "aa9b7728c3054274a4732bff6d046ef9b11811b7b69b672e5996b132ea736b3c"
+    },
+    {
+      "file": "audio/voice-03.flac",
+      "source": "generate_speech / voice-03, user selected audition",
+      "sha256": "1359bab24ddd03118e34f3e771858da9a5fb02a31a69b984224808bef9648274",
+      "original_wav_sha256": "0ed87418f486267e2d0679b1e8301ca5e5feec1b68218603d636290f8823661f"
+    }
+  ]
+}
