@@ -376,7 +376,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
+          if grep -q 'ltx23-running-benchmark' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_ltx23_pilot.sh
+          elif grep -q 'onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
             export PILOT_KERNEL_SLUG=monarch-real-preflight-42518708280
             python production/mafia-temple/diagnose_real_pilot.py
           elif grep -q 'onetoall-real-preflight' production/mafia-temple/trigger.txt; then
@@ -527,8 +529,8 @@ jobs:
             fi
             exit 0
           fi
-          if grep -q 'onetoall-running-research\|onetoall-recover-diagnostics\|onetoall-real-preflight\|onetoall-real-render\|onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
-            echo 'One-to-All research is not automatically committed.'
+          if grep -q 'ltx23-running-benchmark\|onetoall-running-research\|onetoall-recover-diagnostics\|onetoall-real-preflight\|onetoall-real-render\|onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
+            echo 'Research output is not automatically committed.'
             exit 0
           fi
           if grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
