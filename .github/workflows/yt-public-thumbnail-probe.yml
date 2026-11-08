@@ -23,11 +23,29 @@ jobs:
           path: audit-output/youtube-thumbnails/*.jpg
           if-no-files-found: warn
           retention-days: 1
-      - name: Provide small public thumbnail candidates for inspection
+      - name: Inspect public thumbnails for aWHX5Awe_TI
         run: |
           python - <<'PYCODE'
           import base64, pathlib
-          for file in sorted(pathlib.Path('audit-output/youtube-thumbnails').glob('*-[123].jpg')):
+          for file in sorted(pathlib.Path('audit-output/youtube-thumbnails').glob('aWHX5Awe_TI-[123].jpg')):
+              encoded=base64.b64encode(file.read_bytes()).decode('ascii')
+              for i in range(0,len(encoded),3000):
+                  print(f'::notice title={file.name}.part{i//3000:02}::{encoded[i:i+3000]}')
+          PYCODE
+      - name: Inspect public thumbnails for 8wtQAI_ZZlQ
+        run: |
+          python - <<'PYCODE'
+          import base64, pathlib
+          for file in sorted(pathlib.Path('audit-output/youtube-thumbnails').glob('8wtQAI_ZZlQ-[123].jpg')):
+              encoded=base64.b64encode(file.read_bytes()).decode('ascii')
+              for i in range(0,len(encoded),3000):
+                  print(f'::notice title={file.name}.part{i//3000:02}::{encoded[i:i+3000]}')
+          PYCODE
+      - name: Inspect public thumbnails for GHT3RyE9wGI
+        run: |
+          python - <<'PYCODE'
+          import base64, pathlib
+          for file in sorted(pathlib.Path('audit-output/youtube-thumbnails').glob('GHT3RyE9wGI-[123].jpg')):
               encoded=base64.b64encode(file.read_bytes()).decode('ascii')
               for i in range(0,len(encoded),3000):
                   print(f'::notice title={file.name}.part{i//3000:02}::{encoded[i:i+3000]}')
