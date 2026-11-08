@@ -39,16 +39,25 @@ if not key:out['outcome']='no_configured_key'
 else:
     text={'contents':[{'parts':[{'text':'Reply only OK.'}]}], 'generationConfig':{'maxOutputTokens':128,'thinkingConfig':{'thinkingBudget':0}}}
     try:
-        for name,url,body in [('youtube_metadata',YOUTUBE,None),('gemini_models',GEMINI+'models?pageSize=1',None),('gemini_text',GEMINI+'models/gemini-2.5-flash:generateContent',text)]:
-            status,data=req(url,key,body);out[name]=summary(status,data)
-        if out['gemini_text']['http_status']==200:
-            video={'contents':[{'parts':[{'file_data':{'file_uri':'https://www.youtube.com/watch?v=aWHX5Awe_TI'}},{'text':'Describe visually observable actions in sequence, with approximate times. Mark uncertainty; do not guess from the title.'}]}],'generationConfig':{'maxOutputTokens':512,'thinkingConfig':{'thinkingBudget':0}}}
-            status,data=req(GEMINI+'models/gemini-2.5-flash:generateContent',key,video)
-            out['gemini_video']=summary(status,data)
+        status,data=req(YOUTUBE,key);out['youtube_metadata']=summary(status,data)
+        status,data=req(GEMINI+'models?pageSize=100',key);out['gemini_models']=summary(status,data)
+        available=[m.get('name','') for m in data.get('models',[]) if 'generateContent' in m.get('supportedGenerationMethods',[]) and 'flash' in m.get('name','').lower()]
+        preferred=['models/gemini-2.5-flash','models/gemini-3-flash-preview','models/gemini-flash-latest']
+        model=next((m for m in preferred if m in available), available[0] if available else None)
+        out['selected_model']=model
+        if model:
+            # Thinking options differ between models; use defaults for compatibility.
+            text['generationConfig'].pop('thinkingConfig',None)
+            status,data=req(GEMINI+model+':generateContent',key,text);out['gemini_text']=summary(status,data)
             if status==200:
-                candidates=data.get('candidates',[]);parts=candidates[0].get('content',{}).get('parts',[]) if candidates else []
-                text='\n'.join(x.get('text','') for x in parts if x.get('text'))
-                if text:out['model_description_unverified']=text[:4000]
+                video={'contents':[{'parts':[{'file_data':{'file_uri':'https://www.youtube.com/watch?v=aWHX5Awe_TI'}},{'text':'Describe visually observable actions in sequence, with approximate times. Mark uncertainty; do not guess from the title.'}]}],'generationConfig':{'maxOutputTokens':1024}}
+                status,data=req(GEMINI+model+':generateContent',key,video)
+                out['gemini_video']=summary(status,data)
+                if status==200:
+                    candidates=data.get('candidates',[]);parts=candidates[0].get('content',{}).get('parts',[]) if candidates else []
+                    description='\n'.join(x.get('text','') for x in parts if x.get('text'))
+                    if description:out['model_description_unverified']=description[:4000]
+        else:out['model_selection']='no_flash_generate_content_model_found'
         out['outcome']='completed'
     except Exception as e:out.update(outcome='request_failed',error_type=type(e).__name__)
 Path('audit-output').mkdir(exist_ok=True)
