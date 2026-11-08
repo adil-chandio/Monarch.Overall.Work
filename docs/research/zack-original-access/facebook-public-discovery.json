@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-11-08T02:14:40.803227+00:00",
+  "production_hold": true,
+  "route": "Ordinary unauthenticated public creator HTML only",
+  "pages": [
+    {
+      "url": "https://www.facebook.com/zackdfilms/videos/",
+      "http_status": 200,
+      "html_bytes": 523754,
+      "json_scripts_parsed": 32,
+      "new_candidate_count": 0
+    },
+    {
+      "url": "https://www.facebook.com/zackdfilms/reels/",
+      "http_status": 200,
+      "html_bytes": 479424,
+      "json_scripts_parsed": 32,
+      "new_candidate_count": 0
+    },
+    {
+      "url": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+      "http_status": 200,
+      "html_bytes": 435706,
+      "json_scripts_parsed": 32,
+      "new_candidate_count": 1
+    }
+  ],
+  "candidates": [
+    {
+      "id": "2330611454420496",
+      "url": "https://www.facebook.com/reel/2330611454420496/",
+      "discovered_on": "https://www.facebook.com/zackdfilms/videos/what-is-a-jerboa-/2330611454420496/",
+      "title_hint": null,
+      "kind": "public_html_link",
+      "publisher_identity_verified": false
+    }
+  ],
+  "candidate_count": 1
+}
