@@ -1,0 +1,45 @@
+name: Zack publisher-linked alternate media — no production
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/zack-official-alternates.yml, scripts/research/zack-official-alternates.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  public-publisher-media:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ba8d901e-monarch-overall-work
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install 'yt-dlp[default]'
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Test normal public publisher-linked routes; stop at access denials
+        run: python scripts/research/zack-official-alternates.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: publisher-alternate-derivative-review
+          path: .cache/zack-alternate-evidence/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Preserve only diagnostics in repository
+        if: always()
+        run: |
+          git config user.name 'Monarch reference research'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/research/zack-original-access/official-alternate-probe.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record publisher-linked alternate footage access results [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
