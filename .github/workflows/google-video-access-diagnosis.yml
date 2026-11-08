@@ -1,0 +1,37 @@
+name: Diagnose official video access permissions
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/diagnose_google_video_access.py, .github/workflows/google-video-access-diagnosis.yml]
+permissions:
+  contents: write
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare official API access
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YTAP1: ${{ secrets.YTAP1 }}
+          YTAPI1: ${{ secrets.YTAPI1 }}
+          YT_KEY: ${{ secrets.YT_KEY }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python scripts/diagnose_google_video_access.py
+      - name: Save redacted diagnosis
+        run: |
+          cp audit-output/google-video-access-diagnosis.json docs/repo-intel/google-video-access-diagnosis.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/google-video-access-diagnosis.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record official access diagnosis [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
