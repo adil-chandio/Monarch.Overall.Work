@@ -1,0 +1,75 @@
+{
+  "method": "Gemini YouTube URL, default static video sampling (normally 1 FPS); descriptions are model-generated and unverified, not raw frames or full-frame evidence. Seconds and identities can be inaccurate.",
+  "model": "models/gemini-3.1-flash-lite-preview",
+  "videos": [
+    {
+      "video_id": "aWHX5Awe_TI",
+      "metadata_duration_seconds": 16,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "model_observation": "This visual analysis outlines the events of the video, organized by second:\n\n* **00:00** - A person wearing a light blue soccer jersey and shorts is standing on a grass soccer field. They are facing a smaller person in a white soccer jersey. A third-person perspective shows the person in light blue holding the soccer ball between their feet. Text at the top reads \"POV: YOU ARE NEYMAR\". Text at the bottom reads \"DusanFC\".\n* **00:01** - The camera angle shifts to a first-person perspective, viewing the scene from the eyes of the person in the white jersey. They dribble the ball, and the person in the light blue jersey moves slightly.\n* **00:02** - The first-person view continues as the person in the white jersey maneuvers the ball around the larger opponent.\n* **00:03** - A camera cut shifts to a wide shot of a crowded stadium. A soccer player in a yellow and blue uniform performs a bicycle kick.\n* **00:04** - The same player is shown on the ground after the kick, looking up.\n* **00:05** - A camera cut switches back to a first-person perspective, capturing an aerial view of a soccer player jumping to head the ball toward a goal, with a goalkeeper in black trying to block it.\n* **00:06** - The first-person perspective continues, showing the player's legs and pink soccer cleats as they kick the ball mid-air.\n* **00:07** - The camera cuts to a wide shot of a soccer match in a stadium. A player in a white uniform dribbles the ball toward the goal while opponents in red attempt to defend.\n* **00:08** - The player in the white jersey kicks the ball into the goal.\n* **00:09** - The scene shifts back to the first-person perspective, where the player is now on the ground, having scored the goal in the previous sequence.\n* **00:10** - The camera cuts to the interior of a locker room. A soccer player in a black and white uniform is surrounded by cheering people.\n* **00:11** - A camera cut shows a crowd of people standing behind a metal barricade.\n* **00:12** - The perspective shifts back to the first-person point of view, looking at the same crowd, and the player reaches out to touch hands with people behind the barricade.\n* **00:13** - The camera cuts to a final shot, showing the same crowd again. A speech bubble icon appears with the text \"Check the comments\".\n\n**Audible Sound:**\nThe video features a rhythmic song with female vocals, accompanied by the sounds of the stadium crowd in some segments.\n\n**Limitations:**\nThe video utilizes editing to combine various clips, some of which appear to be from professional soccer matches and others which appear to be filmed from a first-person perspective, likely using a body-mounted camera. The transition between these clips is rapid and stylistic, which can make tracking the exact sequence of events difficult. The identification of specific individuals and the authenticity of the \"POV\" shots cannot be verified.",
+      "usage": {
+        "promptTokenCount": 1504,
+        "candidatesTokenCount": 691,
+        "totalTokenCount": 2195,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1411
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 93
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "video_id": "8wtQAI_ZZlQ",
+      "metadata_duration_seconds": 13,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "model_observation": "Here is a visual analysis of the video:\n\n- **00:00** Three male figures in soccer uniforms are sitting on chairs in front of a goalpost on a grassy field. A soccer ball sits on the grass in front of the center figure. Text at the bottom reads \"LV Animation\".\n- **00:01** The ball moves toward the center figure and hits him, causing him to lean forward.\n- **00:02** The ball hits the center figure again, causing him to recoil.\n- **00:03** The ball hits the center figure a third time.\n- **00:04** The ball transforms into a spiked, purple, spherical object and flies toward the figure on the right.\n- **00:05** The figure on the right is lifted off his chair by the object and moves upward.\n- **00:06** The figure on the right continues to move upward while the chair remains on the ground.\n- **00:07** The figure on the right drops back onto the chair.\n- **00:08** The object transforms into a blue sphere and approaches the center figure again.\n- **00:09** The center figure is lifted off his chair by the blue sphere.\n- **00:10** The center figure is hit by the sphere, which then bounces away as the figure remains on the chair.\n- **00:11** The center figure recoils from the impact of the sphere, then returns to his original posture.\n\n**Audible Sound:** The audio contains synthetic sound effects, including a \"boing\" sound for impacts, a squishing sound for the transformation into the spiked object, and a high-pitched, comical vocal sound effect when the figures are lifted.\n\n**Limitations:** The identities of the figures are not verified; they are identified only by their uniforms and physical characteristics. The \"LV Animation\" text persists throughout the video. The camera remains static throughout the clip.",
+      "usage": {
+        "promptTokenCount": 1195,
+        "candidatesTokenCount": 427,
+        "totalTokenCount": 1622,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 93
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1102
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "video_id": "GHT3RyE9wGI",
+      "metadata_duration_seconds": 22,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "model_observation": "```json\n[\n  {\"time\": \"00:00\", \"description\": \"A cartoon bedroom at night with a bed, a bedside table with an alarm clock, and a window with a crescent moon.\"},\n  {\"time\": \"00:01\", \"description\": \"A black stick figure lies in bed with eyes closed and 'Z' symbols floating above, indicating sleep.\"},\n  {\"time\": \"00:02\", \"description\": \"The black figure stretches its arm to turn off the alarm clock.\"},\n  {\"time\": \"00:03\", \"description\": \"The alarm clock shows 12:00. The black figure pulls its arm back under the blanket.\"},\n  {\"time\": \"00:04\", \"description\": \"A rooster appears on the bedside table and makes a crowing sound, represented by sound waves.\"},\n  {\"time\": \"00:05\", \"description\": \"The black figure pushes the rooster away.\"},\n  {\"time\": \"00:06\", \"description\": \"The rooster returns and crows again.\"},\n  {\"time\": \"00:07\", \"description\": \"A blue stick figure appears on the floor with a red and gold drum.\"},\n  {\"time\": \"00:08\", \"description\": \"The blue figure starts playing the drum, indicated by radiating lines.\"},\n  {\"time\": \"00:09\", \"description\": \"The blue figure continues to play the drum, causing the bed blanket to ripple.\"},\n  {\"time\": \"00:10\", \"description\": \"The blue figure moves closer to the bed while playing the drum.\"},\n  {\"time\": \"00:11\", \"description\": \"The black figure sits up in bed, looking annoyed.\"},\n  {\"time\": \"00:12\", \"description\": \"The black figure is now fully sitting up while the rooster and blue figure continue their noise.\"},\n  {\"time\": \"00:13\", \"description\": \"The black figure holds its arms up in frustration.\"},\n  {\"time\": \"00:14\", \"description\": \"The black figure puts on sunglasses and leans back.\"},\n  {\"time\": \"00:15\", \"description\": \"Close-up of the bedside table with the rooster and the alarm clock, showing the time is 3:00.\"},\n  {\"time\": \"00:16\", \"description\": \"The view zooms into the bedroom, showing the black figure wearing sunglasses in bed and the blue figure standing with the drum.\"},\n  {\"time\": \"00:17\", \"description\": \"The black figure is back in bed, apparently asleep, while the blue figure is still drumming.\"},\n  {\"time\": \"00:18\", \"description\": \"The blue figure stops drumming and stands still.\"},\n  {\"time\": \"00:19\", \"description\": \"The blue figure and drum disappear; the black figure is alone in bed.\"},\n  {\"time\": \"00:20\", \"description\": \"The room returns to the initial state with the bed, bedside table, alarm clock, and moonlit window.\"}\n]\n```\n\n**Audible sound:**\nThe video features sound effects including a standard mechanical alarm clock buzzing, a rooster crowing, a drum beating, and a rhythmic, upbeat music track playing throughout.\n\n**Limitations:**\nThe analysis is based on a visual perspective of the provided animation. The identities of the figures are assumed to be abstract representations (stick figures) and their motivations are inferred from their behavior within the context of the animation. The \"Z\" symbols are symbolic of sleep. The time shown on the clock is observational.",
+      "usage": {
+        "promptTokenCount": 2091,
+        "candidatesTokenCount": 786,
+        "totalTokenCount": 2877,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 93
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1998
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    }
+  ]
+}
