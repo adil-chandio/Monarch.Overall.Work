@@ -5,14 +5,18 @@ clip is used only as an imperfect diagnostic driver, not as ground truth.
 import base64, hashlib, json, os, pathlib, subprocess, sys, time, traceback
 import urllib.request
 
-REFERENCE = __REFERENCE__
-DRIVER = __DRIVER__
+ASSETS = __ASSETS__
 NODES = __NODES__
 GRAPH = __GRAPH__
 work = pathlib.Path('/kaggle/working')
 os.chdir(work)
-(work/'reference.jpg').write_bytes(base64.b64decode(REFERENCE))
-(work/'driver.mp4').write_bytes(base64.b64decode(DRIVER))
+# Only previously published generated assets, fetched from a pinned commit.
+for name, target in [('reference','reference.jpg'), ('driver','driver.mp4')]:
+    with urllib.request.urlopen(ASSETS[name]['url'], timeout=60) as response:
+        data=response.read()
+    if hashlib.sha256(data).hexdigest()!=ASSETS[name]['sha256']:
+        raise ValueError(f'Pinned {name} asset checksum mismatch')
+    (work/target).write_bytes(data)
 os.environ.update({'HF_HUB_DISABLE_XET':'1','HF_HUB_ENABLE_HF_TRANSFER':'0','TOKENIZERS_PARALLELISM':'false','USE_TF':'0','USE_FLAX':'0','PYTORCH_CUDA_ALLOC_CONF':'expandable_segments:True'})
 
 def run(cmd, **kw):
