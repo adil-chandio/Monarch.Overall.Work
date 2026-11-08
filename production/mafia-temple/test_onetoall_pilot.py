@@ -40,4 +40,17 @@ class OneToAllPilotTests(unittest.TestCase):
             self.assertLess(len(code),100_000)
             compile(code,'test-notebook','exec')
 
+    def test_real_motion_preflight_and_render_are_separate_and_private(self):
+        for stage in ('preflight','render'):
+            with tempfile.TemporaryDirectory() as tmp:
+                subprocess.run([sys.executable,str(HERE/'make_onetoall_real_pilot.py'),'--stage',stage,'--user','test-user','--slug','test-real','--out',tmp],check=True,capture_output=True)
+                meta=json.loads((pathlib.Path(tmp)/'kernel-metadata.json').read_text())
+                code=''.join(json.loads((pathlib.Path(tmp)/'main.ipynb').read_text())['cells'][0]['source'])
+                self.assertTrue(meta['is_private'])
+                self.assertIn("'/tmp/monarch-real-driver.mp4'",code)
+                self.assertNotIn('mafia-full-body-ai-v2_1.png',code)
+                compile(code,'test-real-notebook','exec')
+                if stage=='preflight': self.assertIn('PrivateAuditSink',code)
+                self.assertIn("'align_to': 'ref'",code)
+
 if __name__=='__main__': unittest.main()

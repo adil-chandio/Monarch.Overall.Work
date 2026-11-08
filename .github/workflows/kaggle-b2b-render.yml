@@ -376,7 +376,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'onetoall-recover-result' production/mafia-temple/trigger.txt; then
+          if grep -q 'onetoall-real-preflight' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_onetoall_real_pilot.sh preflight
+          elif grep -q 'onetoall-real-render' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_onetoall_real_pilot.sh render
+          elif grep -q 'onetoall-recover-result' production/mafia-temple/trigger.txt; then
             set +e
             set -o pipefail
             bash production/mafia-temple/recover_onetoall_pilot.sh 2>&1 | tee "$RUNNER_TEMP/onetoall-recover.log"
@@ -516,8 +520,8 @@ jobs:
             fi
             exit 0
           fi
-          if grep -q 'onetoall-running-research\|onetoall-recover-diagnostics' production/mafia-temple/trigger.txt; then
-            echo 'One-to-All research remains a short-lived Actions artifact; not committing it.'
+          if grep -q 'onetoall-running-research\|onetoall-recover-diagnostics\|onetoall-real-preflight\|onetoall-real-render' production/mafia-temple/trigger.txt; then
+            echo 'One-to-All research is not automatically committed.'
             exit 0
           fi
           if grep -q 'liveportrait-pilot' production/mafia-temple/trigger.txt; then
