@@ -32,7 +32,8 @@ def depth_reproject(image, depth, phase, forward=.085, down=.022, crop=.90, iter
 
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',type=Path,required=True);p.add_argument('--depth',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',type=Path,required=True);p.add_argument('--depth',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--frames',type=int,default=96);p.add_argument('--forward',type=float,default=.085);p.add_argument('--down',type=float,default=.022);p.add_argument('--crop',type=float,default=.90);a=p.parse_args()
+ if a.frames<2 or not 0<=a.forward<=.25 or not 0<=a.down<=.1 or not 0<a.crop<=1:raise ValueError('Camera parameters out of bounds')
  image=cv2.imread(str(a.image),cv2.IMREAD_COLOR);depth=cv2.imread(str(a.depth),cv2.IMREAD_UNCHANGED)
  if image is None or depth is None or depth.ndim!=2:raise ValueError('Missing/invalid image or depth')
  image=cv2.resize(image,(1280,720),interpolation=cv2.INTER_AREA)
@@ -42,15 +43,15 @@ def main():
  a.output.parent.mkdir(parents=True,exist_ok=True)
  proc=subprocess.Popen([imageio_ffmpeg.get_ffmpeg_exe(),'-v','error','-y','-f','rawvideo','-pix_fmt','bgr24','-s','1280x720','-r','24','-i','pipe:0','-c:v','libx264','-crf','18','-pix_fmt','yuv420p',str(a.output)],stdin=subprocess.PIPE)
  try:
-  for i in range(96):
-   t=i/95;t=t*t*(3-2*t)
-   proc.stdin.write(depth_reproject(image,depth,t).tobytes())
+  for i in range(a.frames):
+   t=i/(a.frames-1);t=t*t*(3-2*t)
+   proc.stdin.write(depth_reproject(image,depth,t,forward=a.forward,down=a.down,crop=a.crop).tobytes())
   proc.stdin.close()
   if proc.wait()!=0:raise RuntimeError('Encoding failed')
  finally:
   if proc.poll() is None:
    if proc.stdin and not proc.stdin.closed:proc.stdin.close()
    proc.wait()
- print('96 frames; approximate 2.5D reprojection of one image, not genuine 3D; research only')
+ print(f'{a.frames} frames; approximate 2.5D reprojection of one image, not genuine 3D; research only')
 
 if __name__=='__main__':main()
