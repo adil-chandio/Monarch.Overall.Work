@@ -1,0 +1,38 @@
+name: Zack video API — direct audiovisual input feasibility (no production)
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/zack-video-api-probe.yml, scripts/research/zack-video-api-probe.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  official-video-api:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ba8d901e-monarch-overall-work
+          fetch-depth: 0
+      - name: Test documented public-video input, not metadata summarization
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_GENERATIVE_AI_API_KEY: ${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YTAP1: ${{ secrets.YTAP1 }}
+          YTAPI1: ${{ secrets.YTAPI1 }}
+          YT_KEY: ${{ secrets.YT_KEY }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python scripts/research/zack-video-api-probe.py
+      - name: Preserve bounded API diagnostics and interpretation, never credentials
+        if: always()
+        run: |
+          git config user.name 'Monarch reference research'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/research/zack-original-access/video-api-probe.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record direct public-video API feasibility [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
