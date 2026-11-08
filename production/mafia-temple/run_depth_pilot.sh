@@ -10,8 +10,8 @@ for ((i=0;i<100;i++)); do
  case "$status" in
   *COMPLETE*|*complete*)
    mkdir -p "$dir/out" production/mafia-temple/depth-pilot-output
-   kaggle kernels output "$ref" -p "$dir/out" --file-pattern '(^|/)(aerial-relative-depth\.png|courtyard-relative-depth\.png|street-relative-depth\.png|depth-receipt\.json)$'
-   for f in aerial-relative-depth.png courtyard-relative-depth.png street-relative-depth.png depth-receipt.json; do
+   kaggle kernels output "$ref" -p "$dir/out" --file-pattern '(^|/)(aerial-relative-depth\.png|courtyard-relative-depth\.png|street-relative-depth\.png|gate-relative-depth\.png|depth-receipt\.json)$'
+   for f in aerial-relative-depth.png courtyard-relative-depth.png street-relative-depth.png gate-relative-depth.png depth-receipt.json; do
     path=$(find "$dir/out" -name "$f" -type f -size +100c -print -quit);test -n "$path";cp "$path" production/mafia-temple/depth-pilot-output/
    done
    exit 0;;
