@@ -1,0 +1,25 @@
+name: Retrieve temporary driver contact sheets
+on:
+  push:
+    branches: [arena/6101616c-monarch-overall-work]
+    paths: [production/mafia-temple/driver-scout-recover-trigger.txt]
+permissions:
+  contents: write
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/6101616c-monarch-overall-work
+      - name: Fetch already-generated scout artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/scout
+          gh run download 42516961380 -n driver-scout-sheets -D /tmp/scout
+      - name: Relay only low-resolution dataset sheets and index as unreferenced Git blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python production/mafia-temple/relay_scout_sheets.py
