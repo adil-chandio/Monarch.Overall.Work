@@ -381,7 +381,7 @@ jobs:
             python - <<'PY'
           import pathlib
           p=pathlib.Path('production/mafia-temple/onetoall-diagnostics.txt')
-          text=p.read_text(errors='replace')[-15000:]
+          text='\n'.join(p.read_text(errors='replace').splitlines()[-25:])[-3500:]
           print('::notice title=LTX23 sanitized diagnostic::'+text.replace('%','%25').replace('\n','%0A'))
           PY
           elif grep -q 'ltx23-running-benchmark' production/mafia-temple/trigger.txt; then
