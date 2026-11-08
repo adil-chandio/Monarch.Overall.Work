@@ -1,0 +1,116 @@
+{
+  "production_hold": true,
+  "perceptual_audio_listening": false,
+  "model_setup_status": "both_models_loaded",
+  "cases": [
+    {
+      "key": "ten-audio-model-results",
+      "source_url": "https://github.com/adil-chandio/Monarch.Overall.Work/actions",
+      "publisher_metadata": {},
+      "plaintext_sha256": "e105951a160e708b2dbae76954fddc7f2bce86a4ede6e907ea8e0fc9d8abc563",
+      "envelope": {
+        "file": "ten-audio-model-results.json.enc",
+        "decrypted_filename": "ten-audio-model-results.json",
+        "aad": "ten-audio-model-results",
+        "ciphertext_sha256": "b2df4f6d5f42ac25da33b57223d37197706673e476629f9caa67a9648ddfc7f2",
+        "nonce_b64": "MDE1iiDvAxOqJMy2",
+        "wrapped_key_b64": "WgXpHHe2X/hUeublp2QsK/0N2vWaYe339ETkeVCipvGk+E1tmnAU0JYh9q0wirsU/P15GPmXvuVn+4gdvO540eFEbFeNt9CWb6FF2L4QRra28+nj8SidjzR3Xb/3zWYi4tf+5o9s3REbqynOtYaT/dVnmSE1Iwv7crNLEXwBeImkeJS6Sexl8Y74tRBkmYacpAUuVxQbA/Y62iSrDsfF59hz9CjWo2xcKFC1s6qfO1AIzKToSwH0bbHOkmYD0a7okcyskTt0SRorrjwiN0hGlOfy/12D/NgfMIbK/malVW4pmfltp4isUqABt7+zAdx5CHYGTK485R7uduF4cJDlrBtuHLGLDyL005/X8JZG5yBUJr6p1Ph7F7MYmY8ca9yFKW6rBejIEbuOqPnhB6pyx7b5H475E6HCCaNtNBbrFXor3HXHcyZIEzMkShceNXigTIXuJzbNeK5KL9ZiFkt9yMjNRdDn2c/oN49uRYFT130C7V/pX5AvVdV0yfN8P/m5"
+      }
+    }
+  ],
+  "analyzed_case_count": 8,
+  "same_encoded_audio_case_count": 8,
+  "public_key_sha256": "05528ee8f15c3a948e6fd9a21d49a49e09dacb3730d967ab4047e83a60197762",
+  "case_statuses": [
+    {
+      "key": "01-hearts",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 6,
+      "asr_word_count": 66,
+      "event_window_count": 6,
+      "diagnostic": null
+    },
+    {
+      "key": "02-stomach",
+      "status": "analysis_failed",
+      "encoded_audio_matches_local": null,
+      "asr_segment_count": null,
+      "asr_word_count": null,
+      "event_window_count": null,
+      "diagnostic": "ERROR: \r[download] Got error: HTTPSConnectionPool(host='video.twimg.com', port=443): Read timed out.\n"
+    },
+    {
+      "key": "03-splinter",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 5,
+      "asr_word_count": 69,
+      "event_window_count": 5,
+      "diagnostic": null
+    },
+    {
+      "key": "04-balloon",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 7,
+      "asr_word_count": 97,
+      "event_window_count": 7,
+      "diagnostic": null
+    },
+    {
+      "key": "05-surfer",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 6,
+      "asr_word_count": 82,
+      "event_window_count": 7,
+      "diagnostic": null
+    },
+    {
+      "key": "06-concert",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 5,
+      "asr_word_count": 80,
+      "event_window_count": 6,
+      "diagnostic": null
+    },
+    {
+      "key": "07-balcony",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 7,
+      "asr_word_count": 85,
+      "event_window_count": 7,
+      "diagnostic": null
+    },
+    {
+      "key": "08-ai",
+      "status": "analysis_failed",
+      "encoded_audio_matches_local": false,
+      "asr_segment_count": null,
+      "asr_word_count": null,
+      "event_window_count": null,
+      "diagnostic": "ValueError: Exact encoded-audio hash mismatch: analysis withheld rather than assigned to old source"
+    },
+    {
+      "key": "09-fight",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 6,
+      "asr_word_count": 85,
+      "event_window_count": 6,
+      "diagnostic": null
+    },
+    {
+      "key": "10-jerboa",
+      "status": "model_analysis_complete",
+      "encoded_audio_matches_local": true,
+      "asr_segment_count": 11,
+      "asr_word_count": 106,
+      "event_window_count": 8,
+      "diagnostic": null
+    }
+  ]
+}
