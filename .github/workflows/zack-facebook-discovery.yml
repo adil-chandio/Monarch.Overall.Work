@@ -1,0 +1,28 @@
+name: Zack public publisher video discovery — no production
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/zack-facebook-discovery.yml, scripts/research/zack-facebook-discovery.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ba8d901e-monarch-overall-work
+          fetch-depth: 0
+      - run: python scripts/research/zack-facebook-discovery.py
+      - name: Record public candidate URLs, not authenticated sessions or raw media
+        if: always()
+        run: |
+          git config user.name 'Monarch reference research'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/research/zack-original-access/facebook-public-discovery.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record public creator-page source discovery [skip ci]'
+          git pull --rebase origin arena/ba8d901e-monarch-overall-work
+          git push origin HEAD:arena/ba8d901e-monarch-overall-work
