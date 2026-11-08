@@ -11,4 +11,4 @@ Measurement: Compare 24h / 3d / 7d stayed-to-watch, engaged views, average perce
 
 Creative review: Objective technical checks and contact-sheet frames only; full_motion_review=false, native_audio_listening=false, human_approval=false, sign_off=false.
 
-Runner record: separate runner audio and motion probe; runner_probe_passed, runner_audio_visual_probe_passed, runner_visual_motion_probe, contact_sheets_written, source_review_recorded and visual_lock_written are written during the build.
+Runner record: separate runner audio and motion probe; objective measurements are recorded in generated review files. Static runner flags in ranking_v5_metadata.json are pre-build contract fields.
