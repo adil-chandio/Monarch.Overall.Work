@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # Assemble only the seven selected native audio windows, choose a measured
-# mastering chain that passes the unchanged V4 web gates, calibrate the delivered
-# AAC stream and mux. No VO, music, SFX, bed, generated calls or added layers.
+# per-window gain and mastering chain that passes the unchanged V4 web gates,
+# calibrate the delivered AAC stream and mux. No VO, music, SFX, bed, generated
+# calls or added layers.
 from __future__ import annotations
 import hashlib, json, os, shutil, subprocess, sys
 from pathlib import Path
@@ -28,23 +29,23 @@ SCENES = SELECTED['scenes']
 A = SPEC['audio_policy']
 SR = int(A['sample_rate'])
 N = int(round(SPEC['duration'] * SR))
-mix = np.zeros((N, 2), dtype=np.float32)
+TARGET_RMS_VALUES = [float(x) for x in A['per_window_target_rms_dbfs_candidates']]
 MASTER_CHAINS = [
+    {
+        'id': 'linear_loudnorm_lra7',
+        'filter': 'highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=true:print_format=summary',
+    },
     {
         'id': 'dynamic_loudnorm_lra7',
         'filter': 'highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
-    },
-    {
-        'id': 'rms_compressor_4to1_dynamic_loudnorm_lra7',
-        'filter': 'highpass=f=20,acompressor=threshold=0.08:ratio=4:attack=20:release=300:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
     },
     {
         'id': 'rms_compressor_6to1_dynamic_loudnorm_lra7',
         'filter': 'highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
     },
     {
-        'id': 'dynaudnorm_dynamic_loudnorm_lra7',
-        'filter': 'highpass=f=20,dynaudnorm=f=250:g=5:p=0.95:m=6,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+        'id': 'strong_rms_compressor_12to1_dynamic_loudnorm_lra7',
+        'filter': 'highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
     },
 ]
 
@@ -65,7 +66,11 @@ def save_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False, default=json_safe) + '\n', encoding='utf-8')
 
 
-def decode_window(scene):
+def dbfs(value):
+    return float(20 * np.log10(max(float(value), 1e-12)))
+
+
+def decode_window(scene, meter):
     raw = MEDIA / ASSETS[scene['source_id']]['local_filename']
     if not raw.exists():
         raise RuntimeError('Missing verified original for audio: ' + str(raw))
@@ -80,7 +85,64 @@ def decode_window(scene):
         x = np.repeat(x, 2, axis=1)
     x = x[:, :2]
     x = x - np.mean(x, axis=0, keepdims=True)
-    return x
+    measured_lufs = float(meter.integrated_loudness(x.astype(np.float64)))
+    if not np.isfinite(measured_lufs):
+        measured_lufs = -120.0
+    return {
+        'scene': scene, 'x': x,
+        'measured_lufs': measured_lufs,
+        'rms_dbfs': round(dbfs(float(np.sqrt(np.mean(x ** 2)))), 3),
+        'native_audible': bool(measured_lufs > -70.0),
+    }
+
+
+def build_premaster(windows, target_rms_dbfs, tag):
+    target_rms = 10 ** (target_rms_dbfs / 20.0)
+    guard = 10 ** (-2.0 / 20.0)
+    mix = np.zeros((N, 2), dtype=np.float32)
+    ledger, placements = [], []
+    for item in windows:
+        s = item['scene']
+        start = int(round(s['start'] * SR))
+        end = int(round(s['end'] * SR))
+        want = end - start
+        x = item['x'].copy()
+        rms = float(np.sqrt(np.mean(x ** 2))) if x.size else 0.0
+        gain_db = dbfs(target_rms) - dbfs(rms) if rms > 0 else 0.0
+        x = x * (10 ** (gain_db / 20.0))
+        if len(x) > want:
+            x = x[:want]
+        elif len(x) < want:
+            x = np.pad(x, ((0, want - len(x)), (0, 0)), mode='constant')
+        fade = int(SR * A['edge_fade_ms'] / 1000)
+        if fade > 1:
+            env = np.ones(want, dtype=np.float32)
+            env[:fade] = np.linspace(0, 1, fade, dtype=np.float32)
+            env[-fade:] = np.linspace(1, 0, fade, dtype=np.float32)
+            x *= env[:, None]
+        peak = float(np.max(np.abs(x))) if x.size else 0.0
+        if peak > guard:
+            x *= guard / peak
+        mix[start:end] = x
+        ledger.append({
+            'id': s['id'], 'rank': s['rank'], 'source_id': s['source_id'],
+            'timeline_in': s['start'], 'timeline_out': s['end'],
+            'source_in': s['source_start'], 'source_out': s['source_out'],
+            'audio_stream_present': bool(s['audio_present']), 'audio_codec': s['audio_codec'],
+            'native_samples': int(want), 'measured_lufs_before_gain': round(item['measured_lufs'], 3),
+            'measured_rms_dbfs_before_gain': item['rms_dbfs'],
+            'per_window_target_rms_dbfs': target_rms_dbfs,
+            'applied_gain_db': round(gain_db, 3),
+            'peak_before_guard_dbfs': round(dbfs(peak), 3),
+            'silent': not bool(s['audio_present']), 'native_audio_audible': bool(item['native_audible']),
+            'added_layers': 0, 'raw_per_window_native_audio_only': True,
+        })
+        placements.append({'rank': s['rank'], 'start_sample': start, 'end_sample': end})
+    if len(mix) != N:
+        raise RuntimeError('Audio timeline length mismatch')
+    premaster = WORK / ('native_timeline_' + tag + '.wav')
+    sf.write(premaster, mix, SR, subtype='FLOAT')
+    return premaster, mix, ledger, placements
 
 
 def prepare_h264_video():
@@ -234,104 +296,76 @@ def false_guardrails():
 
 def main():
     meter = pyln.Meter(SR)
-    ledger, placements = [], []
-    for s in SCENES:
-        start = int(round(s['start'] * SR))
-        end = int(round(s['end'] * SR))
-        want = end - start
-        native_audible = False
-        if s['audio_present']:
-            x = decode_window(s)
-            measured = float(meter.integrated_loudness(x.astype(np.float64)))
-            if np.isfinite(measured) and measured > -70.0:
-                native_audible = True
-                gain_db = float(A['target_integrated_lufs']) - measured
-                x = x * (10 ** (gain_db / 20.0))
-            else:
-                gain_db = 0.0
-        else:
-            x = np.zeros((want, 2), dtype=np.float32)
-            measured = -120.0
-            gain_db = 0.0
-        if len(x) > want:
-            x = x[:want]
-        elif len(x) < want:
-            x = np.pad(x, ((0, want - len(x)), (0, 0)), mode='constant')
-        fade = int(SR * A['edge_fade_ms'] / 1000)
-        if fade > 1:
-            env = np.ones(want, dtype=np.float32)
-            env[:fade] = np.linspace(0, 1, fade, dtype=np.float32)
-            env[-fade:] = np.linspace(1, 0, fade, dtype=np.float32)
-            x *= env[:, None]
-        peak = float(np.max(np.abs(x))) if x.size else 0.0
-        guard = 10 ** (-2.0 / 20.0)
-        if peak > guard:
-            x *= guard / peak
-        mix[start:end] = x
-        ledger.append({
-            'id': s['id'], 'rank': s['rank'], 'source_id': s['source_id'],
-            'timeline_in': s['start'], 'timeline_out': s['end'],
-            'source_in': s['source_start'], 'source_out': s['source_out'],
-            'audio_stream_present': bool(s['audio_present']), 'audio_codec': s['audio_codec'],
-            'native_samples': int(want), 'measured_lufs_before_gain': round(measured, 3),
-            'applied_gain_db': round(gain_db, 3), 'peak_before_guard_dbfs': round(20 * np.log10(max(peak, 1e-12)), 3),
-            'silent': not bool(s['audio_present']), 'native_audio_audible': bool(native_audible),
-            'added_layers': 0, 'raw_per_window_native_audio_only': True,
-        })
-        placements.append({'rank': s['rank'], 'start_sample': start, 'end_sample': end})
-    if len(mix) != N:
-        raise RuntimeError('Audio timeline length mismatch')
-    premaster = WORK / 'native_timeline.wav'
-    sf.write(premaster, mix, SR, subtype='FLOAT')
-    mastered = WORK / 'native_timeline_mastered.wav'
+    windows = [decode_window(s, meter) for s in SCENES]
     prepare_h264_video()
     chosen = None
     attempts = []
-    for variant in MASTER_CHAINS:
-        try:
-            master_variant(premaster, mastered, variant['filter'])
-            mux_deliverable(mastered)
-            calibration = calibrate_final_gain(mastered)
-            final = gate_run(str(OUT), 'web')
-            clicks = delivered_technical_click_count()
-            attempt = {
-                'id': variant['id'], 'filter': variant['filter'],
-                'web_gate_pass': bool(final['pass']),
-                'failed': final['failed'],
-                'integrated_lufs': final['measured']['integrated_lufs'],
-                'lra_lu': final['measured']['lra_lu'],
-                'sample_peak_dbfs': final['measured']['sample_peak_dbfs'],
-                'technical_click_runs': clicks,
-            }
-            attempts.append(attempt)
-            print('Mastering variant', variant['id'], 'gate pass', final['pass'], 'LRA', final['measured']['lra_lu'], 'clicks', clicks, flush=True)
-            if final['pass'] and clicks == 0:
-                chosen = {'variant': variant, 'calibration': calibration, 'final_gate': final, 'technical_click_runs': clicks}
-                break
-        except Exception as e:
-            attempts.append({'id': variant['id'], 'filter': variant['filter'], 'error': repr(e)})
-            print('Mastering variant failed', variant['id'], repr(e), flush=True)
-            continue
+    for target_rms in TARGET_RMS_VALUES:
+        tag = 'rms' + str(int(target_rms)).replace('-', 'm')
+        premaster, mix, ledger, placements = build_premaster(windows, target_rms, tag)
+        for variant in MASTER_CHAINS:
+            mastered = WORK / ('native_timeline_mastered_' + tag + '.wav')
+            combo_id = tag + '_' + variant['id']
+            try:
+                master_variant(premaster, mastered, variant['filter'])
+                mux_deliverable(mastered)
+                calibration = calibrate_final_gain(mastered)
+                final = gate_run(str(OUT), 'web')
+                clicks = delivered_technical_click_count()
+                attempt = {
+                    'id': combo_id, 'target_rms_dbfs': target_rms,
+                    'mastering_variant': variant['id'], 'filter': variant['filter'],
+                    'web_gate_pass': bool(final['pass']), 'failed': final['failed'],
+                    'integrated_lufs': final['measured']['integrated_lufs'],
+                    'lra_lu': final['measured']['lra_lu'],
+                    'sample_peak_dbfs': final['measured']['sample_peak_dbfs'],
+                    'movement_db': final['measured']['movement_db'],
+                    'technical_click_runs': clicks,
+                }
+                attempts.append(attempt)
+                print('Mastering combo', combo_id, 'gate pass', final['pass'],
+                      'LRA', final['measured']['lra_lu'], 'movement', final['measured']['movement_db'],
+                      'clicks', clicks, flush=True)
+                if final['pass'] and clicks == 0:
+                    chosen = {
+                        'target_rms_dbfs': target_rms, 'variant': variant,
+                        'calibration': calibration, 'final_gate': final,
+                        'technical_click_runs': clicks, 'ledger': ledger,
+                        'placements': placements, 'premaster': premaster,
+                        'mastered': mastered, 'combo_id': combo_id,
+                    }
+                    break
+            except Exception as e:
+                attempts.append({'id': combo_id, 'target_rms_dbfs': target_rms,
+                                 'mastering_variant': variant['id'], 'error': repr(e)})
+                print('Mastering combo failed', combo_id, repr(e), flush=True)
+                continue
+        if chosen is not None:
+            break
     if chosen is None:
-        raise RuntimeError('No measured mastering chain passed the unchanged web gates: ' + json.dumps(attempts, indent=2))
+        raise RuntimeError('No measured per-window gain / mastering chain passed the unchanged web gates: ' + json.dumps(attempts, indent=2))
     report = {
-        'edition': 'raw_fullscreen_v5', 'policy': A, 'segments': ledger, 'placements': placements,
+        'edition': 'raw_fullscreen_v5', 'policy': A,
+        'segments': chosen['ledger'], 'placements': chosen['placements'],
         'no_spoken_voice_over': True, 'no_score': True, 'no_effects': True, 'no_bed': True,
         'no_added_layers': True, 'no_fabricated_animal_calls': True,
         'native_source_audio_only': True, 'raw_per_window_native_audio_only': True,
-        'source_audio_present_segments': sum(1 for item in ledger if item['audio_stream_present']),
-        'silent_segments': sum(1 for item in ledger if item['silent']),
-        'all_seven_native_audio_audible': all(item['native_audio_audible'] for item in ledger),
+        'source_audio_present_segments': sum(1 for item in chosen['ledger'] if item['audio_stream_present']),
+        'silent_segments': sum(1 for item in chosen['ledger'] if item['silent']),
+        'all_seven_native_audio_audible': all(item['native_audio_audible'] for item in chosen['ledger']),
         'runner_probe_passed': True, 'runner_audio_visual_probe_passed': True,
         'runner_visual_motion_probe': True, 'contact_sheets_written': True,
         'source_review_recorded': True, 'visual_lock_written': True,
+        'chosen_combo': chosen['combo_id'],
+        'per_window_target_rms_dbfs': chosen['target_rms_dbfs'],
         'mastering_variant': chosen['variant']['id'],
         'mastering_filter': chosen['variant']['filter'],
         'mastering_attempts': attempts,
         'final_gain_calibration': chosen['calibration'],
         'final_web_gate_pass': bool(chosen['final_gate']['pass']),
         'final_technical_click_runs': chosen['technical_click_runs'],
-        'premaster': str(premaster.relative_to(ROOT)), 'mastered': str(mastered.relative_to(ROOT)),
+        'premaster': str(chosen['premaster'].relative_to(ROOT)),
+        'mastered': str(chosen['mastered'].relative_to(ROOT)),
         'deliverable_sha256': hashlib.sha256(OUT.read_bytes()).hexdigest(),
         'deliverable_bytes': OUT.stat().st_size,
         **false_guardrails(),

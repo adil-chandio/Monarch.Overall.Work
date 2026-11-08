@@ -45,7 +45,13 @@
     "web_lra_min_lu": 1.0,
     "web_lra_max_lu": 10.0,
     "web_movement_min_db": 3.0,
-    "native_audible_segment_rms_dbfs_min": -55.0
+    "native_audible_segment_rms_dbfs_min": -55.0,
+    "per_window_target_rms_dbfs_candidates": [
+      -24.0,
+      -22.0,
+      -20.0,
+      -18.0
+    ]
   },
   "visual": {
     "full_screen": true,

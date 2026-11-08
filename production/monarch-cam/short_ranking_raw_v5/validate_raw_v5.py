@@ -32,6 +32,7 @@ assert spec['audio_policy']['final_calibration_iterations'] == 6
 assert spec['audio_policy']['final_technical_click_threshold'] == 0.45
 assert spec['audio_policy']['final_declick_threshold'] == 0.28
 assert spec['audio_policy']['final_declick_width_samples'] == 32
+assert spec['audio_policy']['per_window_target_rms_dbfs_candidates'] == [-24.0, -22.0, -20.0, -18.0]
 assert spec['audio_policy']['native_audible_segment_rms_dbfs_min'] == -55.0
 assert spec['audio_policy']['web_lufs_target'] == -14.0 and spec['audio_policy']['web_lufs_tolerance'] == 0.7
 assert spec['audio_policy']['web_true_peak_ceiling_dbtp'] == -1.0
