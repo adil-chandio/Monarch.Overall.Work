@@ -33,19 +33,19 @@ TARGET_RMS_VALUES = [float(x) for x in A['per_window_target_rms_dbfs_candidates'
 MASTER_CHAINS = [
     {
         'id': 'linear_loudnorm_lra7',
-        'filter': 'highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=true:print_format=summary',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=true:print_format=summary',
     },
     {
         'id': 'dynamic_loudnorm_lra7',
-        'filter': 'highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
     },
     {
         'id': 'rms_compressor_6to1_dynamic_loudnorm_lra7',
-        'filter': 'highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
     },
     {
         'id': 'strong_rms_compressor_12to1_dynamic_loudnorm_lra7',
-        'filter': 'highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
     },
 ]
 
@@ -350,6 +350,7 @@ def main():
         'no_spoken_voice_over': True, 'no_score': True, 'no_effects': True, 'no_bed': True,
         'no_added_layers': True, 'no_fabricated_animal_calls': True,
         'native_source_audio_only': True, 'raw_per_window_native_audio_only': True,
+        'native_stereo_fold_to_dual_mono': True,
         'source_audio_present_segments': sum(1 for item in chosen['ledger'] if item['audio_stream_present']),
         'silent_segments': sum(1 for item in chosen['ledger'] if item['silent']),
         'all_seven_native_audio_audible': all(item['native_audio_audible'] for item in chosen['ledger']),
