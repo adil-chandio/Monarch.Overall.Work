@@ -377,9 +377,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if grep -q 'onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
-            export PILOT_KERNEL_SLUG=monarch-real-preflight-42517966143
+            export PILOT_KERNEL_SLUG=monarch-real-preflight-42518708280
             python production/mafia-temple/diagnose_real_pilot.py
           elif grep -q 'onetoall-real-preflight' production/mafia-temple/trigger.txt; then
+            if grep -q 'reuse-dataset' production/mafia-temple/trigger.txt; then
+              export REAL_DRIVER_DATASET=monarch-motion-driver-42518708280
+            fi
             bash production/mafia-temple/run_onetoall_real_pilot.sh preflight
           elif grep -q 'onetoall-real-render' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_onetoall_real_pilot.sh render

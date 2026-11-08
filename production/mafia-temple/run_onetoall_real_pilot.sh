@@ -7,8 +7,12 @@ slug="monarch-real-$stage-${GITHUB_RUN_ID:-manual}"
 dir="/tmp/mafia-kernel/$slug"; ref="$KAGGLE_USERNAME/$slug"
 out="/tmp/onetoall-real-$stage-output"; mkdir -p "$out"
 if [ "$stage" = preflight ]; then
-  dataset_slug="monarch-motion-driver-${GITHUB_RUN_ID:-manual}"
-  python production/mafia-temple/prepare_private_stock_dataset.py "$dataset_slug"
+  if [ -n "${REAL_DRIVER_DATASET:-}" ]; then
+    dataset_slug="$REAL_DRIVER_DATASET"
+  else
+    dataset_slug="monarch-motion-driver-${GITHUB_RUN_ID:-manual}"
+    python production/mafia-temple/prepare_private_stock_dataset.py "$dataset_slug"
+  fi
 else
   : "${REAL_DRIVER_DATASET:?Use the verified dataset from preflight}"
   dataset_slug="$REAL_DRIVER_DATASET"

@@ -18,7 +18,13 @@ with urllib.request.urlopen(ASSETS['reference']['url'], timeout=120) as response
 if hashlib.sha256(data).hexdigest()!=ASSETS['reference']['sha256']:
     raise ValueError('Pinned generated reference checksum mismatch')
 (work/'reference.jpg').write_bytes(data)
-data=pathlib.Path(ASSETS['driver']['mount']).read_bytes()
+expected_mount=pathlib.Path(ASSETS['driver']['mount'])
+# Kaggle has used both legacy /input/<slug> and newer /input/datasets/<owner>/<slug> layouts.
+choices=[expected_mount, pathlib.Path('/kaggle/input/datasets')/ASSETS['driver']['owner']/expected_mount.parent.name/'driver.mp4']
+existing=[p for p in choices if p.is_file()]
+if not existing:
+    raise FileNotFoundError('Private driver mount missing. Input entries: '+repr([str(p) for p in pathlib.Path('/kaggle/input').glob('*/*/*')][:40]))
+data=existing[0].read_bytes()
 if hashlib.sha256(data).hexdigest()!=ASSETS['driver']['sha256']:
     raise ValueError('Private driver dataset checksum mismatch')
 pathlib.Path('/tmp/monarch-real-driver.mp4').write_bytes(data)

@@ -10,7 +10,7 @@ try:
  data=json.loads(raw); messages=[str(x.get('data','')) for x in data if isinstance(x,dict)]
 except (ValueError,TypeError):messages=[raw]
 text='\n'.join(messages)
-for pattern in [r'HTTP Error\s+\d{3}:[^\n\r]*',r'URLError:[^\n\r]*',r'HTTPError:[^\n\r]*',r'(?:ValueError|RuntimeError|ImportError|ModuleNotFoundError|TimeoutError):[^\n\r]*']:
+for pattern in [r'HTTP Error\s+\d{3}:[^\n\r]*',r'URLError:[^\n\r]*',r'HTTPError:[^\n\r]*',r'(?:FileNotFoundError|ValueError|RuntimeError|ImportError|ModuleNotFoundError|TimeoutError):[^\n\r]*']:
  for m in list(re.finditer(pattern,text,flags=re.I))[-2:]:
   line=re.sub(r'https?://\S+','<url>',m.group(0))[:250].replace('%','%25').replace('\n','%0A')
   if re.search(r'(?i)secret|password|kgat|token|authorization',line):continue
