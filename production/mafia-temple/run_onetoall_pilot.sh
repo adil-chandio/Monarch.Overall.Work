@@ -9,7 +9,11 @@ mkdir -p "$out"
 python production/mafia-temple/make_onetoall_pilot.py --user "$KAGGLE_USERNAME" --slug "$slug" --out "$dir"
 kaggle kernels push -p "$dir"
 for ((i=0;i<270;i++)); do
-  status=$(kaggle kernels status "$ref" 2>&1) || { echo 'Kaggle status query failed'; exit 1; }
+  if ! status=$(kaggle kernels status "$ref" 2>&1); then
+    echo 'Kaggle status query failed; waiting before checking the existing job again.'
+    sleep 60
+    continue
+  fi
   echo "$ref: $status"
   case "$status" in
     *COMPLETE*|*complete*)
@@ -38,6 +42,6 @@ for line in d.get('tail', [])[-10:]: print('REMOTE_TAIL:',line[:300])
 PY
       exit 1;;
   esac
-  sleep 25
+  sleep 60
 done
 echo 'Research pilot status timed out';exit 1
