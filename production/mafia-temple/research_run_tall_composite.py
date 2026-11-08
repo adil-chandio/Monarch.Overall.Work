@@ -39,11 +39,13 @@ def main():
          '-c:v','libx264','-crf','18','-pix_fmt','yuv420p',str(args.output)]
     enc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
     try:
-        with mp.solutions.selfie_segmentation.SelfieSegmentation(model_selection=1) as seg, mp.solutions.pose.Pose(model_complexity=1, min_detection_confidence=.5, min_tracking_confidence=.5) as pose:
+        with mp.solutions.pose.Pose(model_complexity=1, enable_segmentation=True, min_detection_confidence=.5, min_tracking_confidence=.5) as pose:
             for i in range(total):
                 ok,frame=cap.read()
                 if not ok: raise ValueError(f'Video ended early at frame {i}')
-                mask=seg.process(cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)).segmentation_mask
+                pred=pose.process(cv2.cvtColor(frame,cv2.COLOR_BGR2RGB))
+                if pred.segmentation_mask is None: raise ValueError(f'No pose segmentation at frame {i}')
+                mask=pred.segmentation_mask
                 binary=(mask>.35).astype('uint8')
                 count,labels,stats,_=cv2.connectedComponentsWithStats(binary,8)
                 if count<2: raise ValueError(f'No foreground found at frame {i}')
@@ -57,7 +59,6 @@ def main():
                 if args.shadow:
                     # Fictitious fixed floor plane, not solved 3D geometry. Foot
                     # points are approximate; depth and contact need manual QA.
-                    pred=pose.process(cv2.cvtColor(frame,cv2.COLOR_BGR2RGB))
                     if not pred.pose_landmarks:
                         raise ValueError(f'Pose lost at frame {i}; cannot place shadows')
                     lm=pred.pose_landmarks.landmark
