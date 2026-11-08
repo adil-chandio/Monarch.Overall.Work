@@ -1,6 +1,6 @@
 # Current status — ten actual editions acquired; full perceptual study still incomplete
 
-**Production remains STOPPED. The old “0 newly downloaded sources” blocker below is historical, not the current corpus status.**
+**The user has now explicitly re-authorized rebuilding only our extinct-life Short.** See [V15 continuity rebuild](../../../production/extinct-life/shorts-v15-continuity/README.md). Existing V13/V14 full films, selected thumbnail and YouTube publication remain outside this authorization. Earlier research-pass STOPPED notes describe the state before this renewed permission; they are not an exhaustive-research completion claim. The old “0 newly downloaded sources” blocker below is historical, not the current corpus status.
 
 **Latest third pass:** [Actual ten-source audio-model evidence + extended native motion review](actual-editions-evidence/third-pass/THIRD-PASS.md).
 

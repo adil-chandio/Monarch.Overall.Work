@@ -1,0 +1,82 @@
+{
+  "original_music": true,
+  "original_synthetic_sfx": true,
+  "copied_competitor_audio": false,
+  "voice_retiming": "Pitch-preserving 50/43.5 tempo, new Short only; full film unchanged",
+  "music": "Original restrained mallet/pad/bass instrumental, 4-second harmonic phrases",
+  "events": [
+    {
+      "time": 10.5966,
+      "type": "filtered transition air",
+      "duration": 0.41759999999999997,
+      "story_time_seconds": 12.18,
+      "story_duration_seconds": 0.48
+    },
+    {
+      "time": 25.038600000000002,
+      "type": "filtered transition air",
+      "duration": 0.41759999999999997,
+      "story_time_seconds": 28.78,
+      "story_duration_seconds": 0.48
+    },
+    {
+      "time": 5.133,
+      "type": "synthetic sediment grit",
+      "duration": 0.609,
+      "story_time_seconds": 5.9,
+      "story_duration_seconds": 0.7
+    },
+    {
+      "time": 5.9159999999999995,
+      "type": "synthetic sediment grit",
+      "duration": 0.5655,
+      "story_time_seconds": 6.8,
+      "story_duration_seconds": 0.65
+    },
+    {
+      "time": 7.1775,
+      "type": "synthetic sediment grit",
+      "duration": 0.6525,
+      "story_time_seconds": 8.25,
+      "story_duration_seconds": 0.75
+    },
+    {
+      "time": 8.0475,
+      "type": "synthetic sediment grit",
+      "duration": 0.34800000000000003,
+      "story_time_seconds": 9.25,
+      "story_duration_seconds": 0.4
+    },
+    {
+      "time": 19.836000000000002,
+      "type": "reference alignment contact",
+      "duration": 0.17400000000000002,
+      "story_time_seconds": 22.8,
+      "story_duration_seconds": 0.2
+    },
+    {
+      "time": 22.9071,
+      "type": "reference alignment contact",
+      "duration": 0.17400000000000002,
+      "story_time_seconds": 26.33,
+      "story_duration_seconds": 0.2
+    },
+    {
+      "time": 23.3421,
+      "type": "reference alignment contact",
+      "duration": 0.17400000000000002,
+      "story_time_seconds": 26.83,
+      "story_duration_seconds": 0.2
+    },
+    {
+      "time": 23.777099999999997,
+      "type": "reference alignment contact",
+      "duration": 0.17400000000000002,
+      "story_time_seconds": 27.33,
+      "story_duration_seconds": 0.2
+    }
+  ],
+  "mix": "Narration-led; smooth underscore ducking; loudnorm target -16 LUFS / -1.5 dBTP; final encoded measurement required",
+  "listening_review": "No independent perceptual listening QC performed; measured QC is not a listening approval.",
+  "event_clock": "Output seconds; scheduled illustrative cues, not independently measured perceptual onsets; ambience and score notes not exhaustively listed"
+}
