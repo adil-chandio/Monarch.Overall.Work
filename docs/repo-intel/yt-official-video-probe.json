@@ -1,0 +1,11 @@
+{
+  "provider": "Google Gemini API",
+  "video": "https://www.youtube.com/watch?v=aWHX5Awe_TI",
+  "source": "public YouTube URL",
+  "sampling": "default static sampling; typically 1 fps",
+  "raw_frames_received": false,
+  "result": "api_error",
+  "http_status": 403,
+  "error_status": "PERMISSION_DENIED",
+  "error_category": "key or project not authorized for this API"
+}
