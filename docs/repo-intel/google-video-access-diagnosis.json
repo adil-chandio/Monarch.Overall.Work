@@ -3,28 +3,23 @@
   "video_id": "aWHX5Awe_TI",
   "outcome": "completed",
   "youtube_metadata": {
+    "http_status": 401,
+    "status": "UNAUTHENTICATED",
+    "reasons": [
+      "CREDENTIALS_MISSING"
+    ],
+    "services": [
+      "youtube.googleapis.com"
+    ]
+  },
+  "gemini_models": {
     "http_status": 200,
     "status": null,
     "reasons": []
   },
-  "gemini_models": {
-    "http_status": 403,
-    "status": "PERMISSION_DENIED",
-    "reasons": [
-      "SERVICE_DISABLED"
-    ],
-    "services": [
-      "generativelanguage.googleapis.com"
-    ]
-  },
   "gemini_text": {
-    "http_status": 403,
-    "status": "PERMISSION_DENIED",
-    "reasons": [
-      "API_KEY_SERVICE_BLOCKED"
-    ],
-    "services": [
-      "generativelanguage.googleapis.com"
-    ]
+    "http_status": 404,
+    "status": "NOT_FOUND",
+    "reasons": []
   }
 }
