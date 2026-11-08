@@ -1,0 +1,5 @@
+# Internal assembly check — not a deliverable
+
+A local 20-second study was assembled solely to expose remaining problems. It has 480 frames at 24 fps and 1280×720; scene boundaries at frames 96, 216, 312, and 384 were sampled. The audio stream is present; automated volume analysis found -14.3 dBFS sample peak and -30.2 dBFS mean, but no listening/creative review was possible and sound sync is unverified.
+
+**Fails final review:** walk is a 2D segmented figure over a flat, digitally scaled plate with unverified foot contact; gate and aerial footage are low-resolution upscales, and aerial motion is a digital push rather than a physical descending camera; the running figure has distorted fingers, an intermittent shoe artifact and floating contact, and the face patch is frozen; the close-up likeness remains approximate, the mouth deforms and the tracked red tint resembles contacts rather than convincing emitted light. The five scenes also need continuity, animation, sound, and licensing review. Keep this study local and do not present it as the requested finished film.
