@@ -1,0 +1,283 @@
+{
+  "api_status": "measured",
+  "api_validation_passed": true,
+  "search_run": "https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42711549133",
+  "source_commit": "54ae6d42e427d062604377b0a240ad18ba100989",
+  "search_snapshot_sha256": "519008fb04787af6590557a8b818c8e619dbbb50f3f8acd9384dcb79d6ea5fcb",
+  "videos": 251,
+  "channels": 225,
+  "searches": 12,
+  "search_quota_units": 1213,
+  "baseline_run": "https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42711971955",
+  "baseline_quota_units": 8,
+  "total_estimated_quota_units": 1221,
+  "session_date": "2026-11-05",
+  "runner_completed_at_utc": "2026-11-09T22:24:52.576034+00:00",
+  "date_integrity_note": "Runner reports 2026-11-09, later than trusted session date 2026-11-05. Keep raw provenance; these are retrieval-session public count snapshots, NOT certified historical counts as of November 5. Do not calculate growth/velocity from this discrepancy. Exclude future-published rows from date-based recommendations.",
+  "per_query": [
+    {
+      "query": "last mammoths",
+      "unique_ids": 70,
+      "duration_at_least_4min": 28,
+      "published_after_session_cutoff": 25,
+      "warning": "Query results are noisy; duration is not a scientific-topic or platform-format label"
+    },
+    {
+      "query": "Wrangel Island mammoths",
+      "unique_ids": 61,
+      "duration_at_least_4min": 21,
+      "published_after_session_cutoff": 25,
+      "warning": "Query results are noisy; duration is not a scientific-topic or platform-format label"
+    },
+    {
+      "query": "megalodon extinction",
+      "unique_ids": 69,
+      "duration_at_least_4min": 37,
+      "published_after_session_cutoff": 25,
+      "warning": "Query results are noisy; duration is not a scientific-topic or platform-format label"
+    },
+    {
+      "query": "Vasuki Titanoboa",
+      "unique_ids": 69,
+      "duration_at_least_4min": 26,
+      "published_after_session_cutoff": 22,
+      "warning": "Query results are noisy; duration is not a scientific-topic or platform-format label"
+    }
+  ],
+  "selected": [
+    {
+      "id": "vCad77_c-LU",
+      "title": "The Island of the Last Surviving Mammoths",
+      "channel_id": "UCzR-rom72PHN9Zg7RML9EbA",
+      "channel_title": "PBS Eons",
+      "published_at": "2021-07-29T21:18:40Z",
+      "duration": "PT8M46S",
+      "statistics": {
+        "viewCount": "2414712",
+        "likeCount": "55486",
+        "favoriteCount": "0",
+        "commentCount": "2169"
+      },
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/vCad77_c-LU/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/vCad77_c-LU/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/vCad77_c-LU/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/vCad77_c-LU/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        },
+        "maxres": {
+          "url": "https://i.ytimg.com/vi/vCad77_c-LU/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "observed_at_utc": "2026-11-09T22:24:41.348983+00:00",
+      "manual_scope": "direct mammoth/Wrangel science long; 2021 interpretation predates 2024 study",
+      "full_av_review": false
+    },
+    {
+      "id": "mf1HWjUJPZM",
+      "title": "The Strange DNA of the last mammoths",
+      "channel_id": "UCZ9jWH_8tJ-Nmaj8dSQdEYA",
+      "channel_title": "Stefan Milo",
+      "published_at": "2024-08-31T15:00:49Z",
+      "duration": "PT24M45S",
+      "statistics": {
+        "viewCount": "1010887",
+        "likeCount": "30309",
+        "favoriteCount": "0",
+        "commentCount": "2693"
+      },
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/mf1HWjUJPZM/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/mf1HWjUJPZM/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/mf1HWjUJPZM/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/mf1HWjUJPZM/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        },
+        "maxres": {
+          "url": "https://i.ytimg.com/vi/mf1HWjUJPZM/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "observed_at_utc": "2026-11-09T22:24:41.348983+00:00",
+      "manual_scope": "direct mammoth/Wrangel science long; 2024 study already covered, so update angle is not new",
+      "full_av_review": false
+    },
+    {
+      "id": "BTPcq2HczVY",
+      "title": "Why Megalodon (Definitely) Went Extinct",
+      "channel_id": "UCzR-rom72PHN9Zg7RML9EbA",
+      "channel_title": "PBS Eons",
+      "published_at": "2018-12-19T22:07:51Z",
+      "duration": "PT11M13S",
+      "statistics": {
+        "viewCount": "28111511",
+        "likeCount": "359595",
+        "favoriteCount": "0",
+        "commentCount": "20842"
+      },
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/BTPcq2HczVY/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/BTPcq2HczVY/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/BTPcq2HczVY/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/BTPcq2HczVY/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        },
+        "maxres": {
+          "url": "https://i.ytimg.com/vi/BTPcq2HczVY/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "observed_at_utc": "2026-11-09T22:24:41.847839+00:00",
+      "manual_scope": "adjacent extinction investigation long; older scientific specifics require revalidation",
+      "full_av_review": false
+    },
+    {
+      "id": "l2UxolNpTok",
+      "title": "Titanoboa Wasn't The Largest Snake Ever... This Was",
+      "channel_id": "UC0ggS8bt4v7NiZpDfGqNpZQ",
+      "channel_title": "ExtinctZoo ",
+      "published_at": "2025-10-25T13:01:37Z",
+      "duration": "PT14M33S",
+      "statistics": {
+        "viewCount": "1685431",
+        "likeCount": "44399",
+        "favoriteCount": "0",
+        "commentCount": "1675"
+      },
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/l2UxolNpTok/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/l2UxolNpTok/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/l2UxolNpTok/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/l2UxolNpTok/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        },
+        "maxres": {
+          "url": "https://i.ytimg.com/vi/l2UxolNpTok/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "observed_at_utc": "2026-11-09T22:24:42.100609+00:00",
+      "manual_scope": "adjacent scale/record-challenger long; ranking certainty exceeds our preferred cautious framing",
+      "full_av_review": false
+    },
+    {
+      "id": "ccPYvXx6NMw",
+      "title": "The Second-to-Last Mammoths Ever",
+      "channel_id": "UCzR-rom72PHN9Zg7RML9EbA",
+      "channel_title": "PBS Eons",
+      "published_at": "2026-05-26T14:00:53Z",
+      "duration": "PT9M43S",
+      "statistics": {
+        "viewCount": "449671",
+        "likeCount": "15349",
+        "favoriteCount": "0",
+        "commentCount": "596"
+      },
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/ccPYvXx6NMw/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/ccPYvXx6NMw/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/ccPYvXx6NMw/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/ccPYvXx6NMw/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        },
+        "maxres": {
+          "url": "https://i.ytimg.com/vi/ccPYvXx6NMw/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        },
+        "fhd": {
+          "url": "https://i.ytimg.com/vi/ccPYvXx6NMw/fhddefault.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "observed_at_utc": "2026-11-09T22:24:41.348983+00:00",
+      "manual_scope": "recent adjacent St Paul mammoth long; metadata only in this audit",
+      "full_av_review": false
+    }
+  ],
+  "full_youtube_census": false,
+  "private_ctr_retention_access": false,
+  "all_video_pixels_reviewed": false,
+  "scientific_fulltext_limit": "Cell fetch returned shell; accessible author-institution abstract, publisher release, and indexed primary excerpts checked",
+  "thumbnail_scope": "One PBS-branded third-party mirrored preview inspected, not verified as the exact current canonical YouTube thumbnail. Stefan canonical thumbnail search failed; no pixel claims about it.",
+  "session_cutoff_eligible_video_records": 164,
+  "excluded_future_published_records": 87,
+  "inspected_preview_source": "https://the-happy-now.com/video/the-island-of-the-last-surviving-mammoths",
+  "competitor_preview_pixels_not_republished": true
+}
