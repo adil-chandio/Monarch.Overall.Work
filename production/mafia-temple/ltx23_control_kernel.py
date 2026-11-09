@@ -42,7 +42,7 @@ try:
     src=src.replace('"480p": 480','"480p": 512')  # 512x896 is divisible by 64 for ref0.5
     old='        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)'
     if src.count(old)!=1: raise RuntimeError('Unexpected generation call')
-    src=src.replace(old,'        gen_kwargs.update(input_frames=POSE_GUIDE, video_prompt_type="VG", denoising_strength=0.8, input_video_strength=0.85, loras_selected=[LORA_PATH])\n        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)')
+    src=src.replace(old,'        gen_kwargs.update(input_frames=POSE_GUIDE, video_prompt_type="VG", denoising_strength=0.8, masking_strength=0.0, input_video_strength=0.85, loras_selected=[LORA_PATH])\n        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)')
     # Keep generated output out of the public UI and gather only the final video.
     # Classes created by the inference code need a real module name: an empty
     # exec namespace breaks its dynamic multi-GPU Gemma device subclass.
