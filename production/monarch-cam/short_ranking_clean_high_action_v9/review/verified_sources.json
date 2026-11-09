@@ -1,0 +1,2777 @@
+{
+  "edition": "high_action_v9",
+  "checked_on": "2026-11-09",
+  "policy": {
+    "allowed_license_short_names": [
+      "CC0",
+      "Public domain",
+      "CC BY 3.0"
+    ],
+    "allowed_license_ids": [
+      "CC0",
+      "PD",
+      "CC-BY-3.0"
+    ],
+    "commercial_reuse_required": true,
+    "rejected": [
+      "unverified trending reposts",
+      "copyrighted social clips without licence",
+      "CC BY-SA",
+      "CC BY-NC",
+      "fair-use-only claims",
+      "section 107 substitutes",
+      "license review needed (video)",
+      "videos containing non-free audio"
+    ],
+    "note": "Separate high-action V9 after clean V8 clip quality was rejected for weak/static action. Ten distinct rights-cleared social-origin Commons originals are retained; seven are locked from runner 0.5 s curated payoff-window contact sheets with visible action and direct continuous native-audio checks. Commons-generated VP9/Opus transcodes may be downloaded for large originals; the original API SHA-1, licence, creator, Credit and source page remain the rights record. CC BY attribution is included in CREDITS.md and upload metadata. No currently trending named-platform clips, exact reference match, full legal compliance, human full-motion/native-audio listening, creative approval or audience outcome is claimed.",
+    "excluded_candidate_titles": [
+      "File:Table Cloth Trick - SloMo, Real Plates.webm",
+      "File:Flatland BMX \"TOYOSU JAM\" Session (2016) (Only 1st Round).webm",
+      "File:DJI Avata FPV drone crash.webm",
+      "File:Wingsuiters Vs Rope Walkers at Chamonix.webm",
+      "File:UCF Surf Team at Typhoon Lagoon.webm"
+    ]
+  },
+  "selected_ids": [
+    "skate_paris",
+    "pacman_stunt",
+    "funny_hang5",
+    "teen_cliff_jump",
+    "instant_freeze",
+    "freestyle_bmx",
+    "rope_jump"
+  ],
+  "assets": {
+    "skate_paris": {
+      "id": "skate_paris",
+      "commons_title": "File:Skate montage from Paris - Vimeo.webm",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Skate_montage_from_Paris_-_Vimeo.webm",
+      "pageid": 90445349,
+      "creator": "Dragos Hanciu",
+      "api_artist": "Dragos Hanciu",
+      "api_description": "2013 Holiday in Paris. This is a video filmed mostly by myself. Mon souvenir.",
+      "api_credit": "Vimeo : Skate montage from Paris ( view archived source )",
+      "api_categories": "Videos of 2013|Uploaded with video2commons|Videos from Vimeo|License reviewed by YouTubeReviewBot|Videos of skateboarding|Skateboarding in Paris|Videos of Paris from Vimeo",
+      "platform": "Vimeo",
+      "platform_tokens": [
+        "YouTube",
+        "youtube",
+        "Vimeo",
+        "vimeo",
+        "Media from YouTube",
+        "Videos from YouTube",
+        "Videos from Vimeo"
+      ],
+      "license": "CC-BY-3.0",
+      "license_short_name": "CC BY 3.0",
+      "usage_terms": "Creative Commons Attribution 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution_required": true,
+      "attribution_text": "Skate montage from Paris - Vimeo.webm — Dragos Hanciu — CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 — https://commons.wikimedia.org/wiki/File:Skate_montage_from_Paris_-_Vimeo.webm",
+      "restrictions": "",
+      "restrictions_status": "none_reported_in_extmetadata",
+      "expected_bytes": 29449485,
+      "expected_sha1": "b9ae49a4ef7c32befab82b0b24ad3dbab7ef196f",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Skate_montage_from_Paris_-_Vimeo.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e8/Skate_montage_from_Paris_-_Vimeo.webm/Skate_montage_from_Paris_-_Vimeo.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "mime": "video/webm",
+      "api_metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.19-201912131005"
+        },
+        {
+          "name": "filesize",
+          "value": 29449485
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 29449485
+        },
+        {
+          "name": "fileformat",
+          "value": "webm"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "A_OPUS"
+            },
+            {
+              "name": "sample_rate",
+              "value": 48000
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "und"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "A_OPUS"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 48000
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "V_VP9"
+            },
+            {
+              "name": "resolution_x",
+              "value": 1280
+            },
+            {
+              "name": "resolution_y",
+              "value": 720
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 1280
+            },
+            {
+              "name": "display_y",
+              "value": 720
+            },
+            {
+              "name": "frame_rate",
+              "value": 25
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "V_VP9"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 720
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 720
+                    },
+                    {
+                      "name": "frame_rate",
+                      "value": 25
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "warning",
+          "value": [
+            {
+              "name": 0,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [1 bytes]) at 63"
+            },
+            {
+              "name": 1,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 77"
+            },
+            {
+              "name": 2,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 92"
+            },
+            {
+              "name": 3,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [4 bytes]) at 107"
+            },
+            {
+              "name": 4,
+              "value": "Unhandled track.video element [module.audio-video.matroska.php:683] (5552::15b0 [8 bytes]) at 399"
+            },
+            {
+              "name": 5,
+              "value": "Unhandled track element [module.audio-video.matroska.php:790] (5802::16aa [3 bytes]) at 444"
+            },
+            {
+              "name": 6,
+              "value": "Unhandled track element [module.audio-video.matroska.php:790] (5819::16bb [4 bytes]) at 450"
+            },
+            {
+              "name": 7,
+              "value": "Unhandled audio type \"A_OPUS\""
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "matroska",
+          "value": [
+            {
+              "name": "comments",
+              "value": [
+                {
+                  "name": "muxingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf58.29.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "writingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf58.29.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "major_brand",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "isom"
+                    }
+                  ]
+                },
+                {
+                  "name": "minor_version",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "512"
+                    }
+                  ]
+                },
+                {
+                  "name": "compatible_brands",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "isomiso2avc1mp41"
+                    }
+                  ]
+                },
+                {
+                  "name": "encoder",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf58.29.100"
+                    },
+                    {
+                      "name": 1,
+                      "value": "Lavc58.54.100 libvpx-vp9"
+                    },
+                    {
+                      "name": 2,
+                      "value": "Lavc58.54.100 libopus"
+                    }
+                  ]
+                },
+                {
+                  "name": "handler_name",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "VideoHandler"
+                    },
+                    {
+                      "name": 1,
+                      "value": "SoundHandler"
+                    }
+                  ]
+                },
+                {
+                  "name": "duration",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "00:02:55.407000000��"
+                    },
+                    {
+                      "name": 1,
+                      "value": "00:02:55.434000000��"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 175.434
+        },
+        {
+          "name": "bitrate",
+          "value": 1342931.7008105612
+        },
+        {
+          "name": "playtime_string",
+          "value": "2:55"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "api_extmetadata": {
+        "Categories": {
+          "value": "Videos of 2013|Uploaded with video2commons|Videos from Vimeo|License reviewed by YouTubeReviewBot|Videos of skateboarding|Skateboarding in Paris|Videos of Paris from Vimeo",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "2013 Holiday in Paris. This is a video filmed mostly by myself. Mon souvenir.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2013-07-24",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/Category:Vimeo\" title=\"Category:Vimeo\">Vimeo</a>: <a rel=\"nofollow\" class=\"external text\" data-mw-original-href=\"//vimeo.com/70982047\" href=\"https://vimeo.com/70982047\">Skate montage from Paris</a> (<a rel=\"nofollow\" class=\"external text\" href=\"//web.archive.org/web/*/https://vimeo.com/70982047\"><span style=\"color:#9602fc\">view archived source</span></a>)",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://vimeo.com/dragoshanciu\">Dragos Hanciu</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        }
+      },
+      "api_license_verified": true,
+      "social_origin_verified": true,
+      "api_restrictions_recorded": true,
+      "rights_not_legal_opinion": true,
+      "original_commons_page": true,
+      "original_sha1_verified": true,
+      "no_unverified_repost": true
+    },
+    "pacman_stunt": {
+      "id": "pacman_stunt",
+      "commons_title": "File:PAC-MAN and the Ghostly Adventures - Pac-Man Sega Stunt Making of OF.webm",
+      "source_page": "https://commons.wikimedia.org/wiki/File:PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm",
+      "pageid": 48476006,
+      "creator": "BANDAI NAMCO Europe",
+      "api_artist": "BANDAI NAMCO Europe",
+      "api_description": "Making of video of Bandai Namco UK's crazy antics with SEGA EU building and the 'Friends Reunited story' This is all for fun, and showing a few segments of the planning phase and reveal of PAC-MAN and Sonic. Pac-Man and the Ghostly Adventures is now available in Spain, UK, Australia, New-Zealand, Portugal and Ireland. and will be available in other European countries soon. For more information, please visit the official website Pacisback.eu or your local Namco Bandai Games website, http://www.namcobandaigames.eu Talk about this game, share tips &amp; win goodies at http://www.namcobandaigames.eu/community",
+      "api_credit": "YouTube : PAC-MAN and the Ghostly Adventures - PS3/X360/PC/3DS/Wii U - Pac-Man Sega Stunt Making of OF – View/save archived versions on archive.org",
+      "api_categories": "WebM videos|Files from external sources with reviewed licenses|Videos from YouTube|Ambush marketing|Video game files uploaded by czar|Uploaded with video2commons|Video display resolution 1280 x 720|Projections onto buildings|Videos of Pac-Man|Videos by Bandai Namco Entertainment Europe",
+      "platform": "YouTube",
+      "platform_tokens": [
+        "YouTube",
+        "youtube",
+        "Vimeo",
+        "vimeo",
+        "Media from YouTube",
+        "Videos from YouTube",
+        "Videos from Vimeo"
+      ],
+      "license": "CC-BY-3.0",
+      "license_short_name": "CC BY 3.0",
+      "usage_terms": "Creative Commons Attribution 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution_required": true,
+      "attribution_text": "PAC-MAN and the Ghostly Adventures - Pac-Man Sega Stunt Making of OF.webm — BANDAI NAMCO Europe — CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 — https://commons.wikimedia.org/wiki/File:PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm",
+      "restrictions": "",
+      "restrictions_status": "none_reported_in_extmetadata",
+      "expected_bytes": 21734298,
+      "expected_sha1": "32cb4ddd81b30c2580738a6f864f3e2db87b827e",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d8/PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm/PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "mime": "video/webm",
+      "api_metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.6-20130603"
+        },
+        {
+          "name": "filesize",
+          "value": 21734298
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 21734298
+        },
+        {
+          "name": "fileformat",
+          "value": "matroska"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vorbis"
+            },
+            {
+              "name": "sample_rate",
+              "value": 44100
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "und"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "lossless",
+              "value": false
+            },
+            {
+              "name": "bitrate_mode",
+              "value": "vbr"
+            },
+            {
+              "name": "bitrate",
+              "value": 192000
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vorbis"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 44100
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    },
+                    {
+                      "name": "lossless",
+                      "value": false
+                    },
+                    {
+                      "name": "bitrate_mode",
+                      "value": "vbr"
+                    },
+                    {
+                      "name": "bitrate",
+                      "value": 192000
+                    },
+                    {
+                      "name": "compression_ratio",
+                      "value": 0.06802721088435375
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            },
+            {
+              "name": "compression_ratio",
+              "value": 0.06802721088435375
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vp8"
+            },
+            {
+              "name": "resolution_x",
+              "value": 1280
+            },
+            {
+              "name": "resolution_y",
+              "value": 720
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 1280
+            },
+            {
+              "name": "display_y",
+              "value": 720
+            },
+            {
+              "name": "frame_rate",
+              "value": 25
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vp8"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 720
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 720
+                    },
+                    {
+                      "name": "frame_rate",
+                      "value": 25
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "bitrate",
+              "value": 1403895
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 108.95100000000001
+        },
+        {
+          "name": "bitrate",
+          "value": 1595895
+        },
+        {
+          "name": "playtime_string",
+          "value": "1:49"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "api_extmetadata": {
+        "Categories": {
+          "value": "WebM videos|Files from external sources with reviewed licenses|Videos from YouTube|Ambush marketing|Video game files uploaded by czar|Uploaded with video2commons|Video display resolution 1280 x 720|Projections onto buildings|Videos of Pac-Man|Videos by Bandai Namco Entertainment Europe",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Making of video of Bandai Namco UK's crazy antics with SEGA EU building and the 'Friends Reunited story'\n<p>This is all for fun, and showing a few segments of the planning phase and reveal of PAC-MAN and Sonic.\n</p><p>Pac-Man and the Ghostly Adventures is now available in Spain, UK, Australia, New-Zealand, Portugal and Ireland. and will be available in other European countries soon.\nFor more information, please visit the official website Pacisback.eu or your local Namco Bandai Games website, <a rel=\"nofollow\" class=\"external free\" href=\"http://www.namcobandaigames.eu\">http://www.namcobandaigames.eu</a>\n</p>\nTalk about this game, share tips &amp; win goodies at <a rel=\"nofollow\" class=\"external free\" href=\"http://www.namcobandaigames.eu/community\">http://www.namcobandaigames.eu/community</a>",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2014-03-11",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<bdi lang=\"en\" dir=\"ltr\"><a href=\"//commons.wikimedia.org/wiki/Commons:YouTube_files\" title=\"Commons:YouTube files\">YouTube</a>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=HEay_iQsVIY\"><bdi lang=\"\">PAC-MAN and the Ghostly Adventures - PS3/X360/PC/3DS/Wii U - Pac-Man Sega Stunt Making of OF</bdi></a> – View/save archived versions on <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/*/https://www.youtube.com/watch?v=HEay_iQsVIY\">archive.org</a></bdi>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/@BandaiNamcoEntertainmentEurope\">BANDAI NAMCO Europe</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        }
+      },
+      "api_license_verified": true,
+      "social_origin_verified": true,
+      "api_restrictions_recorded": true,
+      "rights_not_legal_opinion": true,
+      "original_commons_page": true,
+      "original_sha1_verified": true,
+      "no_unverified_repost": true
+    },
+    "funny_hang5": {
+      "id": "funny_hang5",
+      "commons_title": "File:Funny hang-5 - J.Vidarte & JC Pieri.webm",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm",
+      "pageid": 85788776,
+      "creator": "JC Pieri",
+      "api_artist": "JC Pieri",
+      "api_description": "We wanted to make something different of all the traditionnal bangers, therefore we thought to do something funny :) we had so much fun to do this hang-5 together for the Premium nose wheelie video contest Riders: Johan Vidarte &amp; JC pieri Featuring: Steven Slim Camera: Edouard Bozon",
+      "api_credit": "Vimeo : funny hang-5 - J.Vidarte &amp; JC Pieri ( view archived source )",
+      "api_categories": "Videos of 2012|Uploaded with video2commons|Videos from Vimeo|Video display resolution 1280 x 720|License reviewed by YouTubeReviewBot",
+      "platform": "Vimeo",
+      "platform_tokens": [
+        "YouTube",
+        "youtube",
+        "Vimeo",
+        "vimeo",
+        "Media from YouTube",
+        "Videos from YouTube",
+        "Videos from Vimeo"
+      ],
+      "license": "CC-BY-3.0",
+      "license_short_name": "CC BY 3.0",
+      "usage_terms": "Creative Commons Attribution 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution_required": true,
+      "attribution_text": "Funny hang-5 - J.Vidarte & JC Pieri.webm — JC Pieri — CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 — https://commons.wikimedia.org/wiki/File:Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm",
+      "restrictions": "",
+      "restrictions_status": "none_reported_in_extmetadata",
+      "expected_bytes": 9778567,
+      "expected_sha1": "e281fca3a81876bfc84fa4dcde51dae10792965d",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8d/Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm/Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "mime": "video/webm",
+      "api_metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.19-201912131005"
+        },
+        {
+          "name": "filesize",
+          "value": 9778567
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 9778567
+        },
+        {
+          "name": "fileformat",
+          "value": "webm"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "A_OPUS"
+            },
+            {
+              "name": "sample_rate",
+              "value": 48000
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "und"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "A_OPUS"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 48000
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "V_VP9"
+            },
+            {
+              "name": "resolution_x",
+              "value": 1280
+            },
+            {
+              "name": "resolution_y",
+              "value": 720
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 1280
+            },
+            {
+              "name": "display_y",
+              "value": 720
+            },
+            {
+              "name": "frame_rate",
+              "value": 25
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "V_VP9"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 720
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 720
+                    },
+                    {
+                      "name": "frame_rate",
+                      "value": 25
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "warning",
+          "value": [
+            {
+              "name": 0,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [1 bytes]) at 63"
+            },
+            {
+              "name": 1,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 77"
+            },
+            {
+              "name": 2,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [2 bytes]) at 92"
+            },
+            {
+              "name": 3,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:600] (5036::SeekPosition [3 bytes]) at 107"
+            },
+            {
+              "name": 4,
+              "value": "Unhandled track.video element [module.audio-video.matroska.php:683] (5552::15b0 [8 bytes]) at 399"
+            },
+            {
+              "name": 5,
+              "value": "Unhandled track element [module.audio-video.matroska.php:790] (5802::16aa [3 bytes]) at 444"
+            },
+            {
+              "name": 6,
+              "value": "Unhandled track element [module.audio-video.matroska.php:790] (5819::16bb [4 bytes]) at 450"
+            },
+            {
+              "name": 7,
+              "value": "Unhandled audio type \"A_OPUS\""
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "matroska",
+          "value": [
+            {
+              "name": "comments",
+              "value": [
+                {
+                  "name": "muxingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf58.29.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "writingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf58.29.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "major_brand",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "isom"
+                    }
+                  ]
+                },
+                {
+                  "name": "minor_version",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "512"
+                    }
+                  ]
+                },
+                {
+                  "name": "compatible_brands",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "isomiso2avc1mp41"
+                    }
+                  ]
+                },
+                {
+                  "name": "encoder",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf58.29.100"
+                    },
+                    {
+                      "name": 1,
+                      "value": "Lavc58.54.100 libvpx-vp9"
+                    },
+                    {
+                      "name": 2,
+                      "value": "Lavc58.54.100 libopus"
+                    }
+                  ]
+                },
+                {
+                  "name": "handler_name",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "VideoHandler"
+                    },
+                    {
+                      "name": 1,
+                      "value": "SoundHandler"
+                    }
+                  ]
+                },
+                {
+                  "name": "duration",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "00:00:25.480000000��"
+                    },
+                    {
+                      "name": 1,
+                      "value": "00:00:25.542000000��"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 25.542
+        },
+        {
+          "name": "bitrate",
+          "value": 3062741.2105551637
+        },
+        {
+          "name": "playtime_string",
+          "value": "0:26"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "api_extmetadata": {
+        "Categories": {
+          "value": "Videos of 2012|Uploaded with video2commons|Videos from Vimeo|Video display resolution 1280 x 720|License reviewed by YouTubeReviewBot",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "We wanted to make something different of all the traditionnal bangers, therefore we thought to do something funny :)\n<p>we had so much fun to do this hang-5 together for the Premium nose wheelie video contest\nRiders: Johan Vidarte &amp; JC pieri\nFeaturing: Steven Slim\n</p>\nCamera: Edouard Bozon",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2012-04-07",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/Category:Vimeo\" title=\"Category:Vimeo\">Vimeo</a>: <a rel=\"nofollow\" class=\"external text\" data-mw-original-href=\"//vimeo.com/39944981\" href=\"https://vimeo.com/39944981\">funny hang-5 - J.Vidarte &amp; JC Pieri</a> (<a rel=\"nofollow\" class=\"external text\" href=\"//web.archive.org/web/*/https://vimeo.com/39944981\"><span style=\"color:#9602fc\">view archived source</span></a>)",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://vimeo.com/jcpieri\">JC Pieri</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        }
+      },
+      "api_license_verified": true,
+      "social_origin_verified": true,
+      "api_restrictions_recorded": true,
+      "rights_not_legal_opinion": true,
+      "original_commons_page": true,
+      "original_sha1_verified": true,
+      "no_unverified_repost": true
+    },
+    "teen_cliff_jump": {
+      "id": "teen_cliff_jump",
+      "commons_title": "File:Teen dives on Summersville Lake Cliff Jump.-d8Jo xqxEn0.webm",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm",
+      "pageid": 191624694,
+      "creator": "Josh Connelly",
+      "api_artist": "Josh Connelly",
+      "api_description": "This was us cliff jumping over the summer in West Virginia at Summersville Lake",
+      "api_credit": "https://www.youtube.com/watch?v=d8Jo_xqxEn0",
+      "api_categories": "Diving in the United States|2006 in West Virginia|Media from YouTube|Summersville Lake|Cliff jumping|Videos taken on 2006-11-27|People diving",
+      "platform": "YouTube",
+      "platform_tokens": [
+        "YouTube",
+        "youtube",
+        "Vimeo",
+        "vimeo",
+        "Media from YouTube",
+        "Videos from YouTube",
+        "Videos from Vimeo"
+      ],
+      "license": "CC-BY-3.0",
+      "license_short_name": "CC BY 3.0",
+      "usage_terms": "Creative Commons Attribution 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution_required": true,
+      "attribution_text": "Teen dives on Summersville Lake Cliff Jump.-d8Jo xqxEn0.webm — Josh Connelly — CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 — https://commons.wikimedia.org/wiki/File:Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm",
+      "restrictions": "",
+      "restrictions_status": "none_reported_in_extmetadata",
+      "expected_bytes": 2759001,
+      "expected_sha1": "9e55a81835ec1c6dffb19264b0254fa659a7542c",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7b/Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm/Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm.240p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "mime": "video/webm",
+      "api_metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.25-202603080933"
+        },
+        {
+          "name": "filesize",
+          "value": 2759001
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 2759001
+        },
+        {
+          "name": "fileformat",
+          "value": "webm"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "A_OPUS"
+            },
+            {
+              "name": "sample_rate",
+              "value": 48000
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "eng"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": "4300fc06e17713aa",
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "A_OPUS"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 48000
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "eng"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "V_VP9"
+            },
+            {
+              "name": "resolution_x",
+              "value": 320
+            },
+            {
+              "name": "resolution_y",
+              "value": 240
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 320
+            },
+            {
+              "name": "display_y",
+              "value": 240
+            },
+            {
+              "name": "frame_rate",
+              "value": 15
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": "af5d99c1231ac78d",
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "V_VP9"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 320
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 240
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 320
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 240
+                    },
+                    {
+                      "name": "frame_rate",
+                      "value": 15
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "warning",
+          "value": [
+            {
+              "name": 0,
+              "value": "skipping check for id3v2 tags since option_tag_id3v2=FALSE"
+            },
+            {
+              "name": 1,
+              "value": "skipping check for id3v1 tags since option_tag_id3v1=FALSE"
+            },
+            {
+              "name": 2,
+              "value": "skipping check for apetag tags since option_tag_apetag=FALSE"
+            },
+            {
+              "name": 3,
+              "value": "skipping check for lyrics3 tags since option_tag_lyrics3=FALSE"
+            },
+            {
+              "name": 4,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [1 bytes]) at 63"
+            },
+            {
+              "name": 5,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [2 bytes]) at 77"
+            },
+            {
+              "name": 6,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [2 bytes]) at 92"
+            },
+            {
+              "name": 7,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [3 bytes]) at 107"
+            },
+            {
+              "name": 8,
+              "value": "Unhandled track.video element [module.audio-video.matroska.php:745] (5552::15b0 [24 bytes]) at 376"
+            },
+            {
+              "name": 9,
+              "value": "Unhandled track element [module.audio-video.matroska.php:852] (5802::16aa [3 bytes]) at 444"
+            },
+            {
+              "name": 10,
+              "value": "Unhandled track element [module.audio-video.matroska.php:852] (5819::16bb [4 bytes]) at 450"
+            },
+            {
+              "name": 11,
+              "value": "Unhandled audio type \"A_OPUS\""
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "matroska",
+          "value": [
+            {
+              "name": "comments",
+              "value": [
+                {
+                  "name": "title",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Teen dies on Summersville Lake Cliff Jump."
+                    }
+                  ]
+                },
+                {
+                  "name": "muxingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf60.3.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "writingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf60.3.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "compatible_brands",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "isomiso2avc1mp41"
+                    }
+                  ]
+                },
+                {
+                  "name": "major_brand",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "isom"
+                    }
+                  ]
+                },
+                {
+                  "name": "minor_version",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "512"
+                    }
+                  ]
+                },
+                {
+                  "name": "channel_url",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "https://www.youtube.com/channel/UCx1eJmweToPb8gfihgK0vyw"
+                    }
+                  ]
+                },
+                {
+                  "name": "date",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "20061127"
+                    }
+                  ]
+                },
+                {
+                  "name": "description",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "This was us cliff jumping over the summer in West Virginia at Summersville Lake."
+                    }
+                  ]
+                },
+                {
+                  "name": "synopsis",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "This was us cliff jumping over the summer in West Virginia at Summersville Lake."
+                    }
+                  ]
+                },
+                {
+                  "name": "purl",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "https://www.youtube.com/watch?v=d8Jo_xqxEn0"
+                    }
+                  ]
+                },
+                {
+                  "name": "comment",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "https://www.youtube.com/watch?v=d8Jo_xqxEn0"
+                    }
+                  ]
+                },
+                {
+                  "name": "artist",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Josh Connelly"
+                    }
+                  ]
+                },
+                {
+                  "name": "genre",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "People & Blogs"
+                    }
+                  ]
+                },
+                {
+                  "name": "license",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "CC-BY-4.0"
+                    }
+                  ]
+                },
+                {
+                  "name": "keywords",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Cliff, Jumping, Air, Above, Water, West, Vriginia, Summersville, Lake, advice, community, dating, personals, random, video, blog, wisdom, jump, row, boat, jumps, roof, sky, nature, agility, backflip, saints, blue, 1wmv, front, sunset, off-road biking, jet, wake, trampoline, dirt-biking, outdoors, ski, saints row, clouds, rope, crash, bike"
+                    }
+                  ]
+                },
+                {
+                  "name": "subject",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "People & Blogs"
+                    }
+                  ]
+                },
+                {
+                  "name": "artist_url",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "https://www.youtube.com/@nothinbutnet2009"
+                    }
+                  ]
+                },
+                {
+                  "name": "encoder",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf60.3.100"
+                    },
+                    {
+                      "name": 1,
+                      "value": "Lavc60.3.100 libvpx-vp9"
+                    },
+                    {
+                      "name": 2,
+                      "value": "Lavc60.3.100 libopus"
+                    }
+                  ]
+                },
+                {
+                  "name": "handler_name",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "ISO Media file produced by Google Inc."
+                    },
+                    {
+                      "name": 1,
+                      "value": "ISO Media file produced by Google Inc."
+                    }
+                  ]
+                },
+                {
+                  "name": "vendor_id",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "[0][0][0][0]"
+                    },
+                    {
+                      "name": 1,
+                      "value": "[0][0][0][0]"
+                    }
+                  ]
+                },
+                {
+                  "name": "duration",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "00:00:45.006000000��"
+                    },
+                    {
+                      "name": 1,
+                      "value": "00:00:45.068000000��"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 45.068
+        },
+        {
+          "name": "bitrate",
+          "value": 489749.0015088311
+        },
+        {
+          "name": "playtime_string",
+          "value": "0:45"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "api_extmetadata": {
+        "Categories": {
+          "value": "Diving in the United States|2006 in West Virginia|Media from YouTube|Summersville Lake|Cliff jumping|Videos taken on 2006-11-27|People diving",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "This was us cliff jumping over the summer in West Virginia at Summersville Lake",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2006-11-27",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.youtube.com/watch?v=d8Jo_xqxEn0\">https://www.youtube.com/watch?v=d8Jo_xqxEn0</a>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Josh Connelly",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        }
+      },
+      "api_license_verified": true,
+      "social_origin_verified": true,
+      "api_restrictions_recorded": true,
+      "rights_not_legal_opinion": true,
+      "original_commons_page": true,
+      "original_sha1_verified": true,
+      "no_unverified_repost": true
+    },
+    "instant_freeze": {
+      "id": "instant_freeze",
+      "commons_title": "File:How to (nearly) instantly freeze a bottle of sparkling water.ogv",
+      "source_page": "https://commons.wikimedia.org/wiki/File:How_to_(nearly)_instantly_freeze_a_bottle_of_sparkling_water.ogv",
+      "pageid": 57835282,
+      "creator": "geodee",
+      "api_artist": "geodee",
+      "api_description": "Here is what happens when you open a bottle of sparkling water that's below zero. It works with beer too.",
+      "api_credit": "YouTube : https://www.youtube.com/watch?v=r2w01kNjsKY – View/save archived versions on archive.org",
+      "api_categories": "Media from YouTube|Files from external sources with reviewed licenses|Video display resolution 1920 x 1080|Videos of supercooling",
+      "platform": "YouTube",
+      "platform_tokens": [
+        "YouTube",
+        "youtube",
+        "Vimeo",
+        "vimeo",
+        "Media from YouTube",
+        "Videos from YouTube",
+        "Videos from Vimeo"
+      ],
+      "license": "CC-BY-3.0",
+      "license_short_name": "CC BY 3.0",
+      "usage_terms": "Creative Commons Attribution 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution_required": true,
+      "attribution_text": "How to (nearly) instantly freeze a bottle of sparkling water.ogv — geodee — CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 — https://commons.wikimedia.org/wiki/File:How_to_(nearly)_instantly_freeze_a_bottle_of_sparkling_water.ogv",
+      "restrictions": "",
+      "restrictions_status": "none_reported_in_extmetadata",
+      "expected_bytes": 144546318,
+      "expected_sha1": "8b7e73152809940ec8fce9d850972a430ddd7903",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "mime": "application/ogg",
+      "api_metadata": [
+        {
+          "name": "version",
+          "value": 2
+        },
+        {
+          "name": "streams",
+          "value": [
+            {
+              "name": 845605325,
+              "value": [
+                {
+                  "name": "serial",
+                  "value": 845605325
+                },
+                {
+                  "name": "group",
+                  "value": 0
+                },
+                {
+                  "name": "type",
+                  "value": "Theora"
+                },
+                {
+                  "name": "vendor",
+                  "value": "Lavf57.48.101"
+                },
+                {
+                  "name": "length",
+                  "value": 244.4442
+                },
+                {
+                  "name": "size",
+                  "value": 138966395
+                },
+                {
+                  "name": "header",
+                  "value": [
+                    {
+                      "name": "VMAJ",
+                      "value": 3
+                    },
+                    {
+                      "name": "VMIN",
+                      "value": 2
+                    },
+                    {
+                      "name": "VREV",
+                      "value": 1
+                    },
+                    {
+                      "name": "FMBW",
+                      "value": 120
+                    },
+                    {
+                      "name": "FMBH",
+                      "value": 68
+                    },
+                    {
+                      "name": "PICW",
+                      "value": 1920
+                    },
+                    {
+                      "name": "PICH",
+                      "value": 1080
+                    },
+                    {
+                      "name": "PICX",
+                      "value": 0
+                    },
+                    {
+                      "name": "PICY",
+                      "value": 8
+                    },
+                    {
+                      "name": "FRN",
+                      "value": 30000
+                    },
+                    {
+                      "name": "FRD",
+                      "value": 1001
+                    },
+                    {
+                      "name": "PARN",
+                      "value": 1
+                    },
+                    {
+                      "name": "PARD",
+                      "value": 1
+                    },
+                    {
+                      "name": "CS",
+                      "value": 0
+                    },
+                    {
+                      "name": "NOMBR",
+                      "value": 0
+                    },
+                    {
+                      "name": "QUAL",
+                      "value": 63
+                    },
+                    {
+                      "name": "KFGSHIFT",
+                      "value": 6
+                    },
+                    {
+                      "name": "PF",
+                      "value": 0
+                    },
+                    {
+                      "name": "NSBS",
+                      "value": 3060
+                    },
+                    {
+                      "name": "NBS",
+                      "value": 48960
+                    },
+                    {
+                      "name": "NMBS",
+                      "value": 8160
+                    }
+                  ]
+                },
+                {
+                  "name": "comments",
+                  "value": [
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "handler_name",
+                      "value": "VideoHandler"
+                    },
+                    {
+                      "name": "encoder",
+                      "value": "Lavc57.54.101 libtheora"
+                    },
+                    {
+                      "name": "major_brand",
+                      "value": "isom"
+                    },
+                    {
+                      "name": "minor_version",
+                      "value": "512"
+                    },
+                    {
+                      "name": "compatible_brands",
+                      "value": "isomiso2avc1mp41"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": 2778008500,
+              "value": [
+                {
+                  "name": "serial",
+                  "value": 2778008500
+                },
+                {
+                  "name": "group",
+                  "value": 0
+                },
+                {
+                  "name": "type",
+                  "value": "Vorbis"
+                },
+                {
+                  "name": "vendor",
+                  "value": "Lavf57.48.101"
+                },
+                {
+                  "name": "length",
+                  "value": 244.5061224489796
+                },
+                {
+                  "name": "size",
+                  "value": 5579923
+                },
+                {
+                  "name": "header",
+                  "value": [
+                    {
+                      "name": "vorbis_version",
+                      "value": 0
+                    },
+                    {
+                      "name": "audio_channels",
+                      "value": 1
+                    },
+                    {
+                      "name": "audio_sample_rate",
+                      "value": 44100
+                    },
+                    {
+                      "name": "bitrate_maximum",
+                      "value": 0
+                    },
+                    {
+                      "name": "bitrate_nominal",
+                      "value": 239920
+                    },
+                    {
+                      "name": "bitrate_minimum",
+                      "value": 0
+                    },
+                    {
+                      "name": "blocksize_0",
+                      "value": 8
+                    },
+                    {
+                      "name": "blocksize_1",
+                      "value": 11
+                    },
+                    {
+                      "name": "framing_flag",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "name": "comments",
+                  "value": [
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "handler_name",
+                      "value": "SoundHandler"
+                    },
+                    {
+                      "name": "encoder",
+                      "value": "Lavc57.54.101 libvorbis"
+                    },
+                    {
+                      "name": "major_brand",
+                      "value": "isom"
+                    },
+                    {
+                      "name": "minor_version",
+                      "value": "512"
+                    },
+                    {
+                      "name": "compatible_brands",
+                      "value": "isomiso2avc1mp41"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "length",
+          "value": 244.5061224489796
+        },
+        {
+          "name": "offset",
+          "value": 0
+        }
+      ],
+      "api_extmetadata": {
+        "Categories": {
+          "value": "Media from YouTube|Files from external sources with reviewed licenses|Video display resolution 1920 x 1080|Videos of supercooling",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Here is what happens when you open a bottle of sparkling water that's below zero. It works with beer too.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2012-02-11",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<bdi lang=\"en\" dir=\"ltr\"><a href=\"//commons.wikimedia.org/wiki/Commons:YouTube_files\" title=\"Commons:YouTube files\">YouTube</a>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=r2w01kNjsKY\"><bdi lang=\"\">https://www.youtube.com/watch?v=r2w01kNjsKY</bdi></a> – View/save archived versions on <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/*/https://www.youtube.com/watch?v=r2w01kNjsKY\">archive.org</a></bdi>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/user/gdedopoulos\">geodee</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        }
+      },
+      "api_license_verified": true,
+      "social_origin_verified": true,
+      "api_restrictions_recorded": true,
+      "rights_not_legal_opinion": true,
+      "original_commons_page": true,
+      "original_sha1_verified": true,
+      "no_unverified_repost": true
+    },
+    "freestyle_bmx": {
+      "id": "freestyle_bmx",
+      "commons_title": "File:Freestyle BMX.webm",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Freestyle_BMX.webm",
+      "pageid": 40783727,
+      "creator": "VideoVidio",
+      "api_artist": "VideoVidio",
+      "api_description": "Freestyle BMX",
+      "api_credit": "youtube",
+      "api_categories": "WebM videos|Files from external sources with reviewed licenses|Freestyle BMX|Videos from YouTube|Video display resolution 1280 x 720",
+      "platform": "YouTube",
+      "platform_tokens": [
+        "YouTube",
+        "youtube",
+        "Vimeo",
+        "vimeo",
+        "Media from YouTube",
+        "Videos from YouTube",
+        "Videos from Vimeo"
+      ],
+      "license": "CC-BY-3.0",
+      "license_short_name": "CC BY 3.0",
+      "usage_terms": "Creative Commons Attribution 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution_required": true,
+      "attribution_text": "Freestyle BMX.webm — VideoVidio — CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 — https://commons.wikimedia.org/wiki/File:Freestyle_BMX.webm",
+      "restrictions": "",
+      "restrictions_status": "none_reported_in_extmetadata",
+      "expected_bytes": 141724122,
+      "expected_sha1": "b7dc6fee150f2f0d29625ae654c0fd062945ea11",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Freestyle_BMX.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/31/Freestyle_BMX.webm/Freestyle_BMX.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "mime": "video/webm",
+      "api_metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.6-20130603"
+        },
+        {
+          "name": "filesize",
+          "value": 141724122
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 141724122
+        },
+        {
+          "name": "fileformat",
+          "value": "matroska"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vorbis"
+            },
+            {
+              "name": "sample_rate",
+              "value": 44100
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "und"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "lossless",
+              "value": false
+            },
+            {
+              "name": "bitrate_mode",
+              "value": "vbr"
+            },
+            {
+              "name": "bitrate",
+              "value": 112000
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vorbis"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 44100
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    },
+                    {
+                      "name": "lossless",
+                      "value": false
+                    },
+                    {
+                      "name": "bitrate_mode",
+                      "value": "vbr"
+                    },
+                    {
+                      "name": "bitrate",
+                      "value": 112000
+                    },
+                    {
+                      "name": "compression_ratio",
+                      "value": 0.03968253968253968
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            },
+            {
+              "name": "compression_ratio",
+              "value": 0.03968253968253968
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vp8"
+            },
+            {
+              "name": "resolution_x",
+              "value": 1280
+            },
+            {
+              "name": "resolution_y",
+              "value": 720
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 1280
+            },
+            {
+              "name": "display_y",
+              "value": 720
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vp8"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 720
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 1280
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 720
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "bitrate",
+              "value": 2981704
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 366.484
+        },
+        {
+          "name": "bitrate",
+          "value": 3093704
+        },
+        {
+          "name": "playtime_string",
+          "value": "6:06"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "api_extmetadata": {
+        "Categories": {
+          "value": "WebM videos|Files from external sources with reviewed licenses|Freestyle BMX|Videos from YouTube|Video display resolution 1280 x 720",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Freestyle BMX",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2013-07-08",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=Z8pN4vnbhjM\">youtube</a>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "VideoVidio",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        }
+      },
+      "api_license_verified": true,
+      "social_origin_verified": true,
+      "api_restrictions_recorded": true,
+      "rights_not_legal_opinion": true,
+      "original_commons_page": true,
+      "original_sha1_verified": true,
+      "no_unverified_repost": true
+    },
+    "rope_jump": {
+      "id": "rope_jump",
+      "commons_title": "File:Rope Jump from the Siduhe bridge (496m).webm",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rope_Jump_from_the_Siduhe_bridge_(496m).webm",
+      "pageid": 57936658,
+      "creator": "DROPROPE",
+      "api_artist": "DROPROPE",
+      "api_description": "Rope jump from the Siduhe bridge in China (496 metres high). The height of free fall during the jump is 465 metres, the time is about 12 seconds.",
+      "api_credit": "YouTube : Jump Siduhe bridge 496m. Ropejumping project – View/save archived versions on archive.org",
+      "api_categories": "Media from YouTube|Siduhe Bridge|Bungee jumping in China|Uploaded with video2commons|License reviewed by YouTubeReviewBot|Videos of bungee jumping",
+      "platform": "YouTube",
+      "platform_tokens": [
+        "YouTube",
+        "youtube",
+        "Vimeo",
+        "vimeo",
+        "Media from YouTube",
+        "Videos from YouTube",
+        "Videos from Vimeo"
+      ],
+      "license": "CC-BY-3.0",
+      "license_short_name": "CC BY 3.0",
+      "usage_terms": "Creative Commons Attribution 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution_required": true,
+      "attribution_text": "Rope Jump from the Siduhe bridge (496m).webm — DROPROPE — CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 — https://commons.wikimedia.org/wiki/File:Rope_Jump_from_the_Siduhe_bridge_(496m).webm",
+      "restrictions": "",
+      "restrictions_status": "none_reported_in_extmetadata",
+      "expected_bytes": 51979244,
+      "expected_sha1": "4d91d8213a7d076278b1676c1ed1affa1a6af54e",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0a/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "mime": "video/webm",
+      "api_metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.13-201612051806"
+        },
+        {
+          "name": "filesize",
+          "value": 51979244
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 51979244
+        },
+        {
+          "name": "fileformat",
+          "value": "webm"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vorbis"
+            },
+            {
+              "name": "sample_rate",
+              "value": 44100
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "und"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "lossless",
+              "value": false
+            },
+            {
+              "name": "bitrate_mode",
+              "value": "vbr"
+            },
+            {
+              "name": "bitrate",
+              "value": 192000
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vorbis"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 44100
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    },
+                    {
+                      "name": "lossless",
+                      "value": false
+                    },
+                    {
+                      "name": "bitrate_mode",
+                      "value": "vbr"
+                    },
+                    {
+                      "name": "bitrate",
+                      "value": 192000
+                    },
+                    {
+                      "name": "compression_ratio",
+                      "value": 0.06802721088435375
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            },
+            {
+              "name": "compression_ratio",
+              "value": 0.06802721088435375
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vp8"
+            },
+            {
+              "name": "resolution_x",
+              "value": 1920
+            },
+            {
+              "name": "resolution_y",
+              "value": 1080
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 1920
+            },
+            {
+              "name": "display_y",
+              "value": 1080
+            },
+            {
+              "name": "frame_rate",
+              "value": 25
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vp8"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 1920
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 1080
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 1920
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 1080
+                    },
+                    {
+                      "name": "frame_rate",
+                      "value": 25
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "bitrate",
+              "value": 7820369
+            }
+          ]
+        },
+        {
+          "name": "warning",
+          "value": [
+            {
+              "name": 0,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:579] (5036::SeekPosition [1 bytes]) at 71"
+            },
+            {
+              "name": 1,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:579] (5036::SeekPosition [2 bytes]) at 85"
+            },
+            {
+              "name": 2,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:579] (5036::SeekPosition [4 bytes]) at 100"
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 51.899
+        },
+        {
+          "name": "bitrate",
+          "value": 8012369
+        },
+        {
+          "name": "playtime_string",
+          "value": "0:52"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "api_extmetadata": {
+        "Categories": {
+          "value": "Media from YouTube|Siduhe Bridge|Bungee jumping in China|Uploaded with video2commons|License reviewed by YouTubeReviewBot|Videos of bungee jumping",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Rope jump from the <a href=\"https://en.wikipedia.org/wiki/Siduhe_bridge\" class=\"extiw\" title=\"w:Siduhe bridge\">Siduhe bridge</a> in China (496 metres high). The height of free fall during the jump is 465 metres, the time is about 12 seconds.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2016-10-28",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<bdi lang=\"en\" dir=\"ltr\"><a href=\"//commons.wikimedia.org/wiki/Commons:YouTube_files\" title=\"Commons:YouTube files\">YouTube</a>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=iWrjsWhHYyo\"><bdi lang=\"\">Jump Siduhe bridge 496m. Ropejumping project</bdi></a> – View/save archived versions on <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/*/https://www.youtube.com/watch?v=iWrjsWhHYyo\">archive.org</a></bdi>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/user/khvdroperope\">DROPROPE</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        }
+      },
+      "api_license_verified": true,
+      "social_origin_verified": true,
+      "api_restrictions_recorded": true,
+      "rights_not_legal_opinion": true,
+      "original_commons_page": true,
+      "original_sha1_verified": true,
+      "no_unverified_repost": true
+    }
+  },
+  "flags": {
+    "runner_probe_passed": true,
+    "runner_audio_visual_probe_passed": true,
+    "runner_visual_motion_probe": true,
+    "continuous_native_audio_windows": true,
+    "zero_quiet_full_blocks": true,
+    "contact_sheets_written": true,
+    "source_review_recorded": true,
+    "visual_lock_written": true,
+    "curated_visual_review_locked": true,
+    "curated_runner_windows_eligible": true,
+    "curated_high_action_motion_locked": true,
+    "full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false,
+    "audience_result_promise": false,
+    "virality_guarantee": false,
+    "perfection_claim": false,
+    "retention_claim": false,
+    "hypnosis_claim": false,
+    "three_x_claim": false,
+    "subscribe_claim": false,
+    "like_claim": false,
+    "same_path_replacement": false,
+    "factual_superlative_claim": false,
+    "third_party_repost": false,
+    "ai_audio": false,
+    "generated_calls": false,
+    "v3_audio_packages": false,
+    "audio_substitution": false,
+    "earshot_claim": false,
+    "model_claim": false,
+    "sound_design_layers": false,
+    "sub_bloom_layers": false,
+    "native_ambience_layers": false,
+    "ambience_layers": false,
+    "cue_layers": false,
+    "current_trending_claim": false,
+    "unverified_social_repost": false,
+    "exact_reference_match_claim": false
+  },
+  "note": "Commons API extmetadata confirms an allowed PD/CC0/CC BY 3.0 licence, social-origin Credit/Categories and the original SHA-1 for each selected source. Commons VP9/Opus transcodes may be downloaded for large originals; the original API SHA-1 remains the rights record. No full-motion viewing, listening session, sign-off or outcome claim."
+}
