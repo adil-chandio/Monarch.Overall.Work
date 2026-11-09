@@ -155,6 +155,16 @@ def main():
         'seven_native_audio_segments': int(NATIVE['source_audio_present_segments']) == 7,
         'zero_silent_segments': int(NATIVE['silent_segments']) == 0,
         'all_seven_native_audio_audible': bool(NATIVE['all_seven_native_audio_audible']),
+        'all_seven_native_audio_continuous': (
+            bool(NATIVE.get('all_seven_native_audio_continuous', False))
+            and int(NATIVE.get('quiet_full_block_count', -1)) == 0
+        ),
+        'continuous_native_audio_windows': all(
+            bool(a.get('continuous_native_audio', False))
+            and int(a.get('quiet_full_block_count', -1)) == 0
+            and float(a.get('min_full_block_rms_dbfs', -120.0)) > float(SPEC['audio_policy']['native_audible_segment_rms_dbfs_min'])
+            for a in AUDIT['assets'].values()
+        ),
         'all_seven_selected_windows_audible': bool(AUDIT['all_seven_selected_windows_audible']),
         'seven_selected_scenes': len(SELECTED['scenes']) == 7 and int(SELECTED['frame_count']) == 1800,
         'seven_rights_cleared_social_origin_files': (
@@ -223,6 +233,8 @@ def main():
             'runner_probe_passed': checks['runner_probe_passed'],
             'runner_audio_visual_probe_passed': checks['runner_audio_visual_probe_passed'],
             'runner_visual_motion_probe': checks['runner_visual_motion_probe'],
+            'continuous_native_audio_windows': checks['continuous_native_audio_windows'],
+            'all_seven_native_audio_continuous': checks['all_seven_native_audio_continuous'],
             'contact_sheets_written': checks['contact_sheets_written'],
             'source_review_recorded': checks['source_review_recorded'],
             'visual_lock_written': checks['visual_lock_written'],

@@ -32,9 +32,13 @@ for a in assets:
 for key in ['full_frame_preserved','no_crop','no_cut_off','blurred_background_fill','no_black_bars','no_letterbox','no_black_empty_top','no_hook_black_fill','reference_style_hook','persistent_numbered_list','left_list_fully_visible','progressive_labels','right_platform_ui','bottom_caption_subscribe','app_chrome','no_third_party_handle','no_fake_engagement_counts','no_v6_boxed_list','no_v5_right_panel','no_v5_bottom_rank_burst','seven_moments_only','safe_area_check','social_origin_check','rights_verified_per_title']:
     if not bool(V.get(key)):
         errors.append('visual contract false: ' + key)
-for key in ['raw_only','native_source_audio_only','raw_per_window_native_audio_only','no_added_layers','no_spoken_voice_over','no_score','no_effects','no_bed','all_seven_native_audio_audible']:
+for key in ['raw_only','native_source_audio_only','raw_per_window_native_audio_only','no_added_layers','no_spoken_voice_over','no_score','no_effects','no_bed','all_seven_native_audio_audible','require_continuous_native_audio','zero_quiet_half_second_blocks']:
     if not bool(A.get(key)):
         errors.append('audio contract false: ' + key)
+if float(A['continuous_native_audio_half_second_min_rms_dbfs']) != float(A['native_audible_segment_rms_dbfs_min']):
+    errors.append('continuous native-audio threshold must match the unchanged audible-segment threshold')
+if [float(A['web_lufs_tolerance']), float(A['web_true_peak_ceiling_dbtp']), float(A['web_lra_min_lu']), float(A['web_lra_max_lu'])] != [0.7, -1.0, 1.0, 10.0]:
+    errors.append('unchanged web-gate policy mismatch')
 if any(META['flags'].values()):
     errors.append('metadata guardrail flags must all be false')
 if not SPEC['rights_policy']['no_unverified_trending_reposts'] or not SPEC['rights_policy']['no_current_trending_claim']:

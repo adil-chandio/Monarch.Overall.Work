@@ -75,7 +75,10 @@ def main():
             r, p, n = chunk_stats(x, st, WINDOW_S)
             windows.append({'start': st, 'end': round(min(duration, st + WINDOW_S), 3),
                             'rms_dbfs': r, 'peak_dbfs': p, 'samples': n})
-        audible = bool(rms > SELECTABLE_DBFS)
+        full_windows = [w for w in windows if int(w['samples']) >= int(WINDOW_S * SR)]
+        quiet_full_blocks = [w for w in full_windows if w['rms_dbfs'] <= SELECTABLE_DBFS]
+        continuous_native_audio = bool(full_windows and not quiet_full_blocks)
+        audible = bool(rms > SELECTABLE_DBFS and continuous_native_audio)
         all_audible = all_audible and audible
         report['assets'][aid] = {
             'id': aid, 'rank': scene['rank'], 'file': str(raw.relative_to(ROOT)),
@@ -85,16 +88,22 @@ def main():
             'audio_stream_present': True, 'audio_codec': scene['audio_codec'],
             'segment_rms_dbfs': rms, 'segment_peak_dbfs': peak,
             'windows': windows,
+            'full_half_second_blocks': len(full_windows),
+            'quiet_full_block_count': len(quiet_full_blocks),
+            'min_full_block_rms_dbfs': min((w['rms_dbfs'] for w in full_windows), default=-120.0),
+            'continuous_native_audio': continuous_native_audio,
             'audible_window_count': sum(1 for w in windows if w['rms_dbfs'] > SELECTABLE_DBFS),
             'peak_window': max(windows, key=lambda w: w['rms_dbfs']) if windows else None,
             'native_audio_audible': audible,
             'added_layers': 0,
             'runner_audio_rms_dbfs': scene['runner_audio_rms_dbfs'],
             'runner_motion_score': scene['runner_motion_score'],
+            'runner_continuous_native_audio': scene.get('runner_continuous_native_audio'),
         }
-        print('Selected-window audio', aid, 'RMS', rms, 'audible', audible, flush=True)
+        print('Selected-window audio', aid, 'RMS', rms, 'audible', audible,
+              'continuous', continuous_native_audio, 'quiet full blocks', len(quiet_full_blocks), flush=True)
     if not all_audible:
-        raise RuntimeError('At least one selected Commons window failed the ' + str(SELECTABLE_DBFS) + ' dBFS native-audio gate')
+        raise RuntimeError('At least one selected Commons window failed the ' + str(SELECTABLE_DBFS) + ' dBFS continuous native-audio gate')
     flags = {
         'runner_probe_passed': True,
         'runner_audio_visual_probe_passed': True,
@@ -103,6 +112,8 @@ def main():
         'source_review_recorded': True,
         'visual_lock_written': True,
         'all_seven_selected_windows_audible': True,
+        'continuous_native_audio_all_windows': True,
+        'zero_quiet_full_blocks': True,
         'raw_per_window_native_audio_only': True,
         'native_source_audio_only': True,
         'no_added_audio_layers': True,
@@ -142,8 +153,10 @@ def main():
     }
     report['flags'] = flags
     report['all_seven_selected_windows_audible'] = True
+    report['continuous_native_audio_all_windows'] = True
+    report['zero_quiet_full_blocks'] = True
     (REVIEW / 'source_audio_audit.json').write_text(json.dumps(report, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-    print('Selected-window native audio audit OK', flush=True)
+    print('Selected-window continuous native audio audit OK', flush=True)
     return 0
 
 

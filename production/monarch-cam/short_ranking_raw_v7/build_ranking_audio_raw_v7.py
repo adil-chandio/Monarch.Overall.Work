@@ -70,6 +70,24 @@ def dbfs(value):
     return float(20 * np.log10(max(float(value), 1e-12)))
 
 
+def continuous_audio_metrics(x):
+    """Measure complete half-second blocks of the selected native source audio."""
+    block = int(round(0.5 * SR))
+    threshold = float(A['native_audible_segment_rms_dbfs_min'])
+    values = []
+    for start in range(0, len(x) - block + 1, block):
+        seg = x[start:start + block]
+        ac = seg - np.mean(seg, axis=0, keepdims=True)
+        values.append(round(max(-120.0, dbfs(float(np.sqrt(np.mean(ac ** 2))))), 3))
+    quiet = sum(1 for value in values if value <= threshold)
+    return {
+        'full_half_second_blocks': len(values),
+        'quiet_full_block_count': quiet,
+        'min_full_block_rms_dbfs': min(values) if values else -120.0,
+        'continuous_native_audio': bool(values and quiet == 0),
+    }
+
+
 def decode_window(scene, meter):
     raw = MEDIA / ASSETS[scene['source_id']]['local_filename']
     if not raw.exists():
@@ -88,11 +106,14 @@ def decode_window(scene, meter):
     measured_lufs = float(meter.integrated_loudness(x.astype(np.float64)))
     if not np.isfinite(measured_lufs):
         measured_lufs = -120.0
+    continuity = continuous_audio_metrics(x)
+    segment_rms_dbfs = dbfs(float(np.sqrt(np.mean(x ** 2))))
     return {
         'scene': scene, 'x': x,
         'measured_lufs': measured_lufs,
-        'rms_dbfs': round(dbfs(float(np.sqrt(np.mean(x ** 2)))), 3),
-        'native_audible': bool(dbfs(float(np.sqrt(np.mean(x ** 2)))) > float(A['native_audible_segment_rms_dbfs_min'])),
+        'rms_dbfs': round(segment_rms_dbfs, 3),
+        **continuity,
+        'native_audible': bool(segment_rms_dbfs > float(A['native_audible_segment_rms_dbfs_min']) and continuity['continuous_native_audio']),
     }
 
 
@@ -134,6 +155,10 @@ def build_premaster(windows, target_rms_dbfs, tag):
             'per_window_target_rms_dbfs': target_rms_dbfs,
             'applied_gain_db': round(gain_db, 3),
             'peak_before_guard_dbfs': round(dbfs(peak), 3),
+            'full_half_second_blocks': int(item['full_half_second_blocks']),
+            'quiet_full_block_count': int(item['quiet_full_block_count']),
+            'min_full_block_rms_dbfs': float(item['min_full_block_rms_dbfs']),
+            'continuous_native_audio': bool(item['continuous_native_audio']),
             'silent': not bool(s['audio_present']), 'native_audio_audible': bool(item['native_audible']),
             'added_layers': 0, 'raw_per_window_native_audio_only': True,
         })
@@ -356,6 +381,8 @@ def main():
         'source_audio_present_segments': sum(1 for item in chosen['ledger'] if item['audio_stream_present']),
         'silent_segments': sum(1 for item in chosen['ledger'] if item['silent']),
         'all_seven_native_audio_audible': all(item['native_audio_audible'] for item in chosen['ledger']),
+        'all_seven_native_audio_continuous': all(item['continuous_native_audio'] for item in chosen['ledger']),
+        'quiet_full_block_count': sum(int(item['quiet_full_block_count']) for item in chosen['ledger']),
         'runner_probe_passed': True, 'runner_audio_visual_probe_passed': True,
         'runner_visual_motion_probe': True, 'contact_sheets_written': True,
         'source_review_recorded': True, 'visual_lock_written': True,

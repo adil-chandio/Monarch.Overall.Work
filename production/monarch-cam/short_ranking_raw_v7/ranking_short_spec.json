@@ -51,7 +51,10 @@
       -22.0,
       -20.0,
       -18.0
-    ]
+    ],
+    "require_continuous_native_audio": true,
+    "continuous_native_audio_half_second_min_rms_dbfs": -65.0,
+    "zero_quiet_half_second_blocks": true
   },
   "visual": {
     "full_frame_preserved": true,

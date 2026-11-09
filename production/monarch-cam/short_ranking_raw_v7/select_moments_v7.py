@@ -68,6 +68,12 @@ def main():
             continue
         if best['rms_dbfs'] <= SPEC['audio_policy']['native_audible_segment_rms_dbfs_min']:
             continue
+        if not best.get('continuous_native_audio') or not best.get('selectable', True):
+            continue
+        if float(best.get('min_full_block_rms_dbfs', -120.0)) <= SPEC['audio_policy']['native_audible_segment_rms_dbfs_min']:
+            continue
+        if int(best.get('quiet_full_block_count', -1)) != 0:
+            continue
         if e.get('duration_seconds', 0.0) < best['start'] + 8.6:
             continue
         eligible.append({
@@ -128,6 +134,10 @@ def main():
             'runner_audio_rms_dbfs': best['rms_dbfs'],
             'runner_motion_score': best['motion_score'],
             'runner_window_score': best['score'],
+            'runner_min_full_block_rms_dbfs': float(best.get('min_full_block_rms_dbfs', -120.0)),
+            'runner_quiet_full_block_count': int(best.get('quiet_full_block_count', -1)),
+            'runner_continuous_native_audio': bool(best.get('continuous_native_audio', False)),
+            'runner_window_selectable': bool(best.get('selectable', False)),
             'runner_audio_visual_probe_passed': True,
             'runner_visual_motion_probe': True,
             'selected_from_runner_probe': True,
@@ -144,6 +154,8 @@ def main():
         'runner_probe_passed': True,
         'runner_audio_visual_probe_passed': True,
         'runner_visual_motion_probe': True,
+        'continuous_native_audio_windows': True,
+        'zero_quiet_full_blocks': True,
         'contact_sheets_written': True,
         'source_review_recorded': True,
         'visual_lock_written': True,
@@ -158,7 +170,9 @@ def main():
         'rank_steps': [7, 6, 5, 4, 3, 2, 1],
         'scenes': scenes,
         'flags': flags,
-        'probe_basis': 'Objective runner native-audio RMS and one-frame-per-second motion scores; exact windows locked for seven distinct rights-cleared social-origin Commons originals; no crop or zoom.',
+        'probe_basis': 'Objective runner native-audio RMS, continuous half-second audibility and one-frame-per-second motion scores; exact windows locked for seven distinct rights-cleared social-origin Commons originals; no crop or zoom.',
+        'continuous_native_audio_windows': True,
+        'zero_quiet_full_blocks': True,
         'source_order': [s['source_id'] for s in scenes],
         'runner_audio_visual_probe_passed': True,
         'runner_probe_passed': True,
@@ -178,7 +192,7 @@ def main():
         'status': 'LOCKED_FOR_V7_RENDER',
         'edition': 'social_origin_v7',
         'source': 'Seven rights-cleared PD/CC BY Wikimedia Commons social-origin originals chosen by the runner audio/motion probe; no crop, no unverified reposts.',
-        'review_basis': 'Objective runner audio/motion measurements and one-frame-per-second contact sheets; exact windows locked for seven selected moments only.',
+        'review_basis': 'Objective runner audio/motion measurements, continuous half-second native-audio audibility and one-frame-per-second contact sheets; exact windows locked for seven selected moments only.',
         'flags': flags,
         'exact_timecodes': [{
             'rank': s['rank'], 'timeline_in': s['start'], 'timeline_out': s['end'],
@@ -187,6 +201,9 @@ def main():
             'reaction_text': s['reaction_text'],
             'emoji': s['emoji'], 'runner_audio_rms_dbfs': s['runner_audio_rms_dbfs'],
             'runner_motion_score': s['runner_motion_score'],
+            'runner_min_full_block_rms_dbfs': s['runner_min_full_block_rms_dbfs'],
+            'runner_quiet_full_block_count': s['runner_quiet_full_block_count'],
+            'runner_continuous_native_audio': s['runner_continuous_native_audio'],
         } for s in scenes],
         'runner_probe_passed': True,
         'runner_audio_visual_probe_passed': True,

@@ -48,37 +48,52 @@ jobs:
         run: python production/monarch-cam/short_ranking_raw_v7/candidate_probe_v7.py
 
       - name: Lock seven objective windows
+        continue-on-error: true
         run: python production/monarch-cam/short_ranking_raw_v7/select_moments_v7.py
 
       - name: Verify per-title Commons rights
+        continue-on-error: true
         run: python production/monarch-cam/short_ranking_raw_v7/verify_sources_v7.py
 
       - name: Recon source windows and clips
+        continue-on-error: true
         run: python production/monarch-cam/short_ranking_raw_v7/source_recon_ranking_v7.py
 
       - name: Audit selected native audio windows
+        continue-on-error: true
         run: python production/monarch-cam/short_ranking_raw_v7/source_audio_audit_v7.py
 
-      - name: Print compact audio-window measurements
+      - name: Print compact continuous-audio diagnostic
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
           review = Path('production/monarch-cam/short_ranking_raw_v7/review')
-          probe = json.loads((review / 'candidates/candidate_audio_probe.json').read_text())
-          audit = json.loads((review / 'source_audio_audit.json').read_text())
-          selected = json.loads((review / 'selected_windows.json').read_text())
+
+          def load(name):
+              path = review / name
+              return json.loads(path.read_text()) if path.exists() else {}
+
+          probe = load('candidates/candidate_audio_probe.json')
+          audit = load('source_audio_audit.json')
+          selected = load('selected_windows.json')
           out = {'candidates': {}, 'selected_windows': [], 'selected_audio_audit': {}}
           for aid, e in probe.get('assets', {}).items():
+              top = (e.get('top_windows') or [None])[0]
               out['candidates'][aid] = {
                   'duration_seconds': e.get('duration_seconds'),
                   'integrated_lufs': e.get('integrated_lufs'),
-                  'best_window': (e.get('top_windows') or [None])[0],
-                  'top_windows': [
-                      {k: w.get(k) for k in ('start', 'rms_dbfs', 'peak_dbfs', 'motion_score', 'score', 'selectable')}
-                      for w in (e.get('top_windows') or [])[:16]
-                  ],
-                  'window_rms_dbfs': [w.get('rms_dbfs') for w in (e.get('windows') or [])],
+                  'audio_visual_probe_passed': e.get('runner_audio_visual_probe_passed'),
+                  'motion_probe_passed': e.get('runner_visual_motion_probe'),
+                  'candidate_window_count': e.get('candidate_window_count'),
+                  'continuous_window_count': e.get('continuous_window_count'),
+                  'best_continuous_window': None if not top else {
+                      k: top.get(k) for k in (
+                          'start', 'rms_dbfs', 'motion_score', 'score', 'selectable',
+                          'min_full_block_rms_dbfs', 'quiet_full_block_count',
+                          'continuous_native_audio'
+                      )
+                  },
               }
           for s in selected.get('scenes', []):
               out['selected_windows'].append({
@@ -86,9 +101,19 @@ jobs:
                   'source_start': s.get('source_start'), 'duration': s.get('duration'),
                   'runner_audio_rms_dbfs': s.get('runner_audio_rms_dbfs'),
                   'runner_motion_score': s.get('runner_motion_score'),
+                  'runner_min_full_block_rms_dbfs': s.get('runner_min_full_block_rms_dbfs'),
+                  'runner_quiet_full_block_count': s.get('runner_quiet_full_block_count'),
+                  'runner_continuous_native_audio': s.get('runner_continuous_native_audio'),
               })
           for aid, e in audit.get('assets', {}).items():
-              out['selected_audio_audit'][aid] = [w.get('rms_dbfs') for w in (e.get('windows') or [])]
+              out['selected_audio_audit'][aid] = {
+                  'segment_rms_dbfs': e.get('segment_rms_dbfs'),
+                  'full_half_second_blocks': e.get('full_half_second_blocks'),
+                  'quiet_full_block_count': e.get('quiet_full_block_count'),
+                  'min_full_block_rms_dbfs': e.get('min_full_block_rms_dbfs'),
+                  'continuous_native_audio': e.get('continuous_native_audio'),
+                  'native_audio_audible': e.get('native_audio_audible'),
+              }
           print('V7_AUDIO_DIAGNOSTIC_JSON_BEGIN')
           print(json.dumps(out, indent=1, sort_keys=True))
           print('V7_AUDIO_DIAGNOSTIC_JSON_END')
@@ -109,4 +134,4 @@ jobs:
             ${{ env.V7_REVIEW }}/source_windows.json
             ${{ env.V7_REVIEW }}/source_audio_audit.json
           retention-days: 7
-          if-no-files-found: error
+          if-no-files-found: warn

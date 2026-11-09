@@ -507,3 +507,11 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `.github/workflows/monarch-cam-short-ranking-viral-v7.yml`
 - Ref: `docs/continuity/PROBLEMS_FIXES.md`
 - Ref: `docs/continuity/channels/monarch-cam/NEXT_ACTION.md`
+
+## `2026-11-09T04:02:19Z` · evt-064-monarch-cam-v7-continuous-audio-fix · checkpoint
+
+- Title: V7 optimized CI exposed silent native-audio windows; continuous-audio source gate added
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Optimized V7 run 42547437901 / job 128935444230 rendered the full-frame picture in 2m22s but failed at the native-audio/mux step: all 16 measured gain/mastering attempts failed the unchanged web gate lra_in_range with LRA about 87-89 LU and movement about 225-229 dB. A short audio-window diagnostic showed long -120 dBFS blocks inside selected caption_fail and nose_wheelie windows. Candidate probe, window selection, source audit, audio builder ledger and technical QC now require every complete 0.5s block of each 8.6s native window to exceed the unchanged -65 dBFS threshold. The nine web gates are unchanged; no audio is added, substituted or faked. Full CI verification is pending.
+- Ref: `42547437901,42549478669,f3eb77f`

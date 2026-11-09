@@ -245,6 +245,8 @@ def audio_windows(x, motion_scores, global_motion, humor_bonus):
             'peak_dbfs': dbfs(float(np.max(np.abs(ac)))), 'samples': int(len(seg)),
         })
     audible = [w for w in windows if w['rms_dbfs'] > AUDIBLE_DBFS]
+    block_rms = {round(float(w['start']), 3): float(w['rms_dbfs']) for w in windows}
+    n_full_blocks = int(round(SEGMENT_S / WINDOW_S))  # 17 complete 0.5 s blocks in 8.6 s
     candidates = []
     for st in np.arange(0.0, max(0.0, duration - SEGMENT_S + 0.001), WINDOW_S):
         st = float(round(st, 3))
@@ -256,13 +258,24 @@ def audio_windows(x, motion_scores, global_motion, humor_bonus):
         motion_norm = min(20.0, max(0.0, motion))
         audio_norm = min(20.0, max(0.0, rms + 55.0))
         score = round(0.6 * motion_norm + 0.4 * audio_norm + float(humor_bonus), 4)
+        block_values = [
+            block_rms.get(round(st + i * WINDOW_S, 3), -120.0)
+            for i in range(n_full_blocks)
+        ]
+        min_full_block_rms_dbfs = round(min(block_values), 2) if block_values else -120.0
+        quiet_full_block_count = sum(1 for value in block_values if value <= SELECTABLE_DBFS)
+        continuous_native_audio = bool(block_values and quiet_full_block_count == 0)
         candidates.append({
             'start': st, 'end': round(min(duration, st + SEGMENT_S), 3),
             'duration': SEGMENT_S, 'rms_dbfs': rms, 'peak_dbfs': peak,
-            'samples': samples, 'motion_score': motion,
-            'score': score, 'selectable': bool(rms > SELECTABLE_DBFS and motion >= MIN_MOTION),
+            'samples': samples, 'motion_score': motion, 'score': score,
+            'min_full_block_rms_dbfs': min_full_block_rms_dbfs,
+            'quiet_full_block_count': quiet_full_block_count,
+            'continuous_native_audio': continuous_native_audio,
+            'selectable': bool(rms > SELECTABLE_DBFS and motion >= MIN_MOTION and continuous_native_audio),
         })
-    candidates.sort(key=lambda z: z['score'], reverse=True)
+    selectable_candidates = [c for c in candidates if c['selectable']]
+    selectable_candidates.sort(key=lambda z: z['score'], reverse=True)
     meter = pyln.Meter(SR)
     try:
         integrated = float(meter.integrated_loudness(x.astype(np.float64)))
@@ -275,7 +288,10 @@ def audio_windows(x, motion_scores, global_motion, humor_bonus):
         'audible_threshold_dbfs': AUDIBLE_DBFS,
         'selectable_segment_rms_dbfs_min': SELECTABLE_DBFS,
         'minimum_motion_score': MIN_MOTION,
-        'windows': windows, 'top_windows': candidates[:16],
+        'continuous_native_audio_required': True,
+        'candidate_window_count': len(candidates),
+        'continuous_window_count': len(selectable_candidates),
+        'windows': windows, 'top_windows': selectable_candidates[:16],
         'audible_window_count': len(audible),
         'peak_window': max(audible, key=lambda w: w['rms_dbfs']) if audible else None,
         'integrated_lufs': round(integrated, 3),
@@ -326,7 +342,8 @@ def main():
                 audio_entry['audio_codec'] = (audio or {}).get('codec_name')
                 best = a['top_windows'][0] if a['top_windows'] else None
                 audio_entry['runner_audio_visual_probe_passed'] = bool(
-                    best and best['rms_dbfs'] > SELECTABLE_DBFS and best['motion_score'] >= MIN_MOTION
+                    best and best['selectable'] and best['continuous_native_audio']
+                    and best['rms_dbfs'] > SELECTABLE_DBFS and best['motion_score'] >= MIN_MOTION
                 )
                 audio_entry['runner_visual_motion_probe'] = bool(global_motion >= MIN_MOTION)
             audio_entry['download_url'] = used_url

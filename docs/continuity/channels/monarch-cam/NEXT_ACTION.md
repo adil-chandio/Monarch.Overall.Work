@@ -41,6 +41,8 @@ After the V7 CI run succeeds: inspect the new MP4, `review/qc_summary.json`, `re
 
 ## Current CI status — 2026-11-09
 
-- First V7 CI run `42541601536` failed at the per-title Commons rights ledger because the API key `Restrictions` was checked as lowercase `restrictions`. That contract is fixed.
-- Second V7 CI run `42542753775` passed source verification but its renderer was too slow (about `5.6 s/frame` locally), so an optimized cached-UI renderer (~`0.13 s/frame`) is being pushed with workflow `cancel-in-progress: true` to supersede the slow run.
-- No V7 MP4, QC, download link, human full-motion/native-audio review or creative acceptance exists yet. Do not give a V4/V5/V6 link.
+- First V7 CI run `42541601536` failed at the per-title Commons rights ledger because the API key `Restrictions` was checked as lowercase `restrictions`. Fixed and CI-verified in the retry.
+- Slow run `42542753775` used the unoptimized renderer and was cancelled at `2026-11-09T01:48:07Z` after `cancel-in-progress: true` and the cached-UI renderer were pushed.
+- Optimized run `42547437901` completed `failure` in 12m12s: the visual render succeeded in 2m22s, but the native-audio/mux step failed because all 16 measured gain/mastering combinations failed the unchanged `lra_in_range` web gate. Long digital-silence blocks inside selected source windows produced LRA about `87-89 LU` and movement about `225-229 dB`. No artifact, committed MP4, QC, hash or download link exists.
+- A temporary audio-window diagnostic exposed the silent blocks. The probe, selection, audit, audio builder and technical QC now require every complete 0.5-second block of each selected native window to exceed the unchanged `-65 dBFS` threshold; the nine web gates are unchanged and no audio is added or substituted.
+- Next: run the short diagnostic, confirm at least seven continuously audible windows, trigger the full V7 CI, inspect the committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link. No human full-motion/native-audio review or creative acceptance exists yet. Do not give a V4/V5/V6 link.

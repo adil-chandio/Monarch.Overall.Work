@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v7_render_optimized_retry_pending",
+  "status": "v7_continuous_audio_retry_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -124,7 +124,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_render_optimized_retry_pending",
+    "status": "v7_continuous_audio_retry_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -150,6 +150,24 @@
       "fix": "Cached static UI per scene/state, cheap dark offset shadow, downsampled full-frame blur; ~0.13 s/frame locally",
       "slow_run_id": "42542753775",
       "workflow_cancel_in_progress": true
+    },
+    "optimized_ci_run": {
+      "run_id": "42547437901",
+      "job_id": "128935444230",
+      "conclusion": "failure",
+      "failed_step": "Build raw per-window native audio track and mux MP4",
+      "visual_render": "completed in 2m22s with cached static UI",
+      "cause": "All 16 measured per-window gain / mastering combinations failed the unchanged web gate lra_in_range; LRA was about 87-89 LU and movement about 225-229 dB because selected native-audio windows contained long digital-silence blocks.",
+      "fix": "Strengthen source selection and auditing: every complete 0.5s block of each 8.6s native window must exceed the unchanged -65 dBFS audible threshold; no added audio, no substituted audio and no weakened web gates.",
+      "no_artifact": true,
+      "no_committed_mp4": true
+    },
+    "continuous_audio_fix": {
+      "problem": "Selected native-audio windows had long -120 dBFS silence gaps despite passing the aggregate 8.6s RMS gate.",
+      "fix": "Probe, selection, source audit, audio builder ledger and technical QC now require every complete 0.5s block to exceed -65 dBFS.",
+      "unchanged_web_gates": true,
+      "native_source_audio_only": true,
+      "pending_ci_verification": true
     }
   }
 }

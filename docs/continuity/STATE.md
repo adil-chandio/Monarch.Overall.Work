@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-09T01:20:00Z`
-- Last event: `evt-063-monarch-cam-v7-render-optimized`
+- Updated: `2026-11-09T04:02:19Z`
+- Last event: `evt-064-monarch-cam-v7-continuous-audio-fix`
 
 ## Active channel
 ```json
@@ -39,12 +39,12 @@
   ],
   "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "V7 renderer optimized for CI throughput; the optimized retry is pending and will supersede the slow in-progress render. No V7 MP4, QC, download link, human review or creative acceptance exists yet.",
+  "current_step": "Optimized V7 CI run 42547437901 rendered the full-frame picture in 2m22s but failed at the native-audio/mux step: long silent blocks inside selected source windows made the unchanged web LRA gate fail. Continuous half-second native-audio selection/audit has been added without changing the nine web gates. A short diagnostic then a full V7 CI retry are pending.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
-  "next_action": "Watch the optimized V7 CI run, inspect the real MP4 and QC evidence, then give only the V7 GitHub download link; do not re-present V4/V5/V6 or claim creative acceptance.",
+  "next_action": "Run the short V7 audio-window diagnostic, confirm seven continuously audible windows, trigger full V7 CI, inspect the committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
   "space": "yt-automation",
-  "status": "v7_render_optimized_retry_pending",
+  "status": "v7_continuous_audio_retry_pending",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```
