@@ -1,51 +1,78 @@
-name: Assemble celebrity story 3D v2
+name: Render rigged celebrity POV pilot
 on:
-  push:
-    branches: [arena/1f352b8e-monarch-overall-work]
-    paths: [.github/workflows/celebrity-3d-rigged-pilot.yml]
+  workflow_dispatch:
 permissions:
   contents: write
-  actions: read
 jobs:
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        index: ['00','01','02','03','04','05','06','07','08','09','10','11']
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxrender1 libxi6 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0 libgl1
+          pip install -q 'bpy==4.2.23' numpy Pillow imageio-ffmpeg
+      - name: Render five seconds of 3D animation
+        env:
+          IDX: ${{ matrix.index }}
+        run: |
+          start=$((10#$IDX * 5)); end=$((start + 5))
+          python showreel/celebrity_3d/render_rigged.py --samples 1 --width 360 --start "$start" --end "$end" --silent --output "$RUNNER_TEMP/$IDX.mp4" > "$RUNNER_TEMP/render.log" 2>&1 || { tail -60 "$RUNNER_TEMP/render.log"; exit 1; }
+          ls -lh "$RUNNER_TEMP/$IDX.mp4"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: clip-${{ matrix.index }}
+          path: ${{ runner.temp }}/${{ matrix.index }}.mp4
+          retention-days: 1
   assemble:
+    needs: render
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: arena/1f352b8e-monarch-overall-work
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install -q numpy imageio-ffmpeg
       - uses: actions/download-artifact@v4
         with:
-          run-id: 42687200453
-          github-token: ${{ github.token }}
-          path: ${{ runner.temp }}/clips
           pattern: clip-*
-      - name: Assemble, decode, and save as a Git blob
+          path: ${{ runner.temp }}/clips
+          merge-multiple: true
+      - name: Assemble and check video
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python showreel/celebrity_story_3d_v2/assemble.py "$RUNNER_TEMP/clips" "$RUNNER_TEMP/final.mp4"
-          FF=$(python -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')
-          "$FF" -v error -i "$RUNNER_TEMP/final.mp4" -f null -
+          pip install -q numpy imageio-ffmpeg
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          python showreel/celebrity_3d/mux.py "$RUNNER_TEMP/clips" "$RUNNER_TEMP/final.mp4"
+          ffprobe -v error -show_entries format=duration:stream=codec_type,width,height,r_frame_rate -of json "$RUNNER_TEMP/final.mp4" > "$RUNNER_TEMP/probe.json"
+          ffmpeg -v error -i "$RUNNER_TEMP/final.mp4" -f null -
           python - <<'PY'
-          import base64,hashlib,json,os,urllib.request
+          import json,os,hashlib,base64,urllib.request
           data=open(os.environ['RUNNER_TEMP']+'/final.mp4','rb').read()
           req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',data=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
           with urllib.request.urlopen(req,timeout=120) as r:x=json.load(r)
-          print('FINAL_BLOB_SHA',x['sha'])
-          print('FINAL_SHA256',hashlib.sha256(data).hexdigest())
-          print('FINAL_BYTES',len(data))
-          os.makedirs('docs/repo-intel',exist_ok=True)
-          open('docs/repo-intel/celebrity-story-v2-render.json','w').write(json.dumps({'git_blob':x['sha'],'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data),'source_run':42687200453},indent=2)+'\n')
+          probe=json.load(open(os.environ['RUNNER_TEMP']+'/probe.json'))
+          result={'sha':x['sha'],'size':len(data),'sha256':hashlib.sha256(data).hexdigest(),'probe':probe,'note':'Rough fictional stylized 3D pilot, not Ronaldo likeness; inspect before any claim of quality.'}
+          open('docs/repo-intel/celebrity-3d-rigged-render.json','w').write(json.dumps(result,indent=2)+'\n')
           PY
-      - name: Record render blob metadata
+      - name: Save render metadata
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/repo-intel/celebrity-story-v2-render.json
-          git commit -m 'Record verified 3D render blob [skip ci]'
+          git add docs/repo-intel/celebrity-3d-rigged-render.json
+          git commit -m 'Record rigged POV pilot render [skip ci]'
           git push origin HEAD:arena/1f352b8e-monarch-overall-work
