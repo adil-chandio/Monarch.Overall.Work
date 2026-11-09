@@ -62,7 +62,11 @@ def main():
     result, _ = request({'jsonrpc':'2.0','id':2,'method':'tools/call',
         'params':{'name':'get_accelerator_quota','arguments':{}}}, session)
     if 'error' in result or result.get('result',{}).get('isError'):
-        raise RuntimeError('Quota request rejected')
+        # Classify only predefined diagnostics; never relay the server response.
+        text = json.dumps(result).lower()
+        reason = next((word for word in ('unauthenticated', 'unauthorized', 'invalid arguments', 'not found', 'not initialized', 'session') if word in text), 'unknown')
+        print('::notice title=private-gpu-quota::Request rejected: ' + reason, flush=True)
+        return
     numbers = list(extract_numbers(result.get('result',{})))[:40]
     # Avoid printing raw free-text returned from the remote server.
     if numbers:
