@@ -1,0 +1,211 @@
+{
+  "edition": "social_origin_v7",
+  "reference_basis": "Six user-supplied screenshots of a vertical social ranking video: blurred full-frame background, sharp uncut source frame, centered two-line color-split hook, left 1.-7. rank plates, right platform UI, bottom caption/Subscribe and app chrome. No screenshot pixels are reused in the deliverable.",
+  "resolution": [
+    1080,
+    1920
+  ],
+  "safe_area": {
+    "top": 140,
+    "bottom": 120,
+    "left": 40,
+    "right": 100
+  },
+  "primary_elements": {
+    "hook": [
+      60,
+      185,
+      980,
+      460
+    ],
+    "left_list": [
+      52,
+      545,
+      580,
+      1342
+    ],
+    "right_ui": [
+      880,
+      800,
+      980,
+      1620
+    ],
+    "caption_bubble": [
+      60,
+      1510,
+      820,
+      1650
+    ],
+    "subscribe": [
+      404,
+      1649,
+      626,
+      1741
+    ],
+    "bottom_caption": [
+      60,
+      1765,
+      900,
+      1800
+    ]
+  },
+  "all_primary_elements_inside_safe_area": true,
+  "app_chrome_outside_safe_area": [
+    "top status bar",
+    "bottom navigation"
+  ],
+  "hook": {
+    "visible": true,
+    "centered": true,
+    "colorful": true,
+    "two_lines": true,
+    "line_1_parts": [
+      [
+        "Ranking ",
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      [
+        "Most ",
+        [
+          255,
+          221,
+          51
+        ]
+      ],
+      [
+        "Impressive",
+        [
+          255,
+          59,
+          48
+        ]
+      ]
+    ],
+    "line_2": "Moments Ever",
+    "bbox": [
+      60,
+      185,
+      980,
+      460
+    ]
+  },
+  "list": {
+    "left_side": true,
+    "fully_visible": true,
+    "persistent": true,
+    "progressive": true,
+    "row_bboxes": [
+      [
+        150,
+        553,
+        580,
+        634
+      ],
+      [
+        150,
+        671,
+        580,
+        752
+      ],
+      [
+        150,
+        789,
+        580,
+        870
+      ],
+      [
+        150,
+        907,
+        580,
+        988
+      ],
+      [
+        150,
+        1025,
+        580,
+        1106
+      ],
+      [
+        150,
+        1143,
+        580,
+        1224
+      ],
+      [
+        150,
+        1261,
+        580,
+        1342
+      ]
+    ],
+    "bbox": [
+      52,
+      545,
+      580,
+      1342
+    ]
+  },
+  "right_ui": {
+    "platform_ui": true,
+    "bbox": [
+      880,
+      800,
+      980,
+      1620
+    ],
+    "fake_counts": false
+  },
+  "reaction": {
+    "visible": true,
+    "at": 0.74
+  },
+  "bottom_bar": {
+    "comment_bubble": true,
+    "subscribe": true,
+    "caption": true,
+    "app_nav": true
+  },
+  "flags": {
+    "full_frame_preserved": true,
+    "no_crop": true,
+    "no_cut_off": true,
+    "blurred_background_fill": true,
+    "no_black_bars": true,
+    "no_letterbox": true,
+    "no_black_empty_top": true,
+    "no_hook_black_fill": true,
+    "reference_style_hook": true,
+    "colorful_hook_title": true,
+    "persistent_numbered_list": true,
+    "left_list_fully_visible": true,
+    "all_labels_visible_from_start": true,
+    "progressive_labels": true,
+    "right_platform_ui": true,
+    "bottom_comment_subscribe": true,
+    "app_chrome": true,
+    "no_third_party_handle": true,
+    "no_fake_engagement_counts": true,
+    "no_v6_boxed_list": true,
+    "no_v5_right_panel": true,
+    "no_v5_bottom_rank_burst": true,
+    "no_v5_hook_occlusion": true,
+    "safe_area_check": true,
+    "social_origin_check": true,
+    "rights_verified_per_title": true,
+    "no_cover_crop": true,
+    "no_punchy_zoom": true,
+    "seven_moments_only": true
+  },
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "human_approval": false,
+  "sign_off": false,
+  "audience_result_promise": false,
+  "virality_guarantee": false,
+  "current_trending_claim": false,
+  "unverified_social_repost": false
+}
