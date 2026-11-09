@@ -209,6 +209,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
+      # Historical render scripts use public Git blobs to relay recognizable
+      # character images/videos. Block all execution until the entire transport
+      # and its data retention have been independently verified as private.
+      - name: Block unsafe public research transport
+        run: |
+          echo '::error::Render disabled: existing input/output relay can expose recognizable material publicly.'
+          exit 1
       - uses: actions/checkout@v4
         with:
           ref: arena/6101616c-monarch-overall-work
