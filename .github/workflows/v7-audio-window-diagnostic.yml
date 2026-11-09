@@ -59,6 +59,41 @@ jobs:
       - name: Audit selected native audio windows
         run: python production/monarch-cam/short_ranking_raw_v7/source_audio_audit_v7.py
 
+      - name: Print compact audio-window measurements
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          review = Path('production/monarch-cam/short_ranking_raw_v7/review')
+          probe = json.loads((review / 'candidates/candidate_audio_probe.json').read_text())
+          audit = json.loads((review / 'source_audio_audit.json').read_text())
+          selected = json.loads((review / 'selected_windows.json').read_text())
+          out = {'candidates': {}, 'selected_windows': [], 'selected_audio_audit': {}}
+          for aid, e in probe.get('assets', {}).items():
+              out['candidates'][aid] = {
+                  'duration_seconds': e.get('duration_seconds'),
+                  'integrated_lufs': e.get('integrated_lufs'),
+                  'best_window': (e.get('top_windows') or [None])[0],
+                  'top_windows': [
+                      {k: w.get(k) for k in ('start', 'rms_dbfs', 'peak_dbfs', 'motion_score', 'score', 'selectable')}
+                      for w in (e.get('top_windows') or [])[:16]
+                  ],
+                  'window_rms_dbfs': [w.get('rms_dbfs') for w in (e.get('windows') or [])],
+              }
+          for s in selected.get('scenes', []):
+              out['selected_windows'].append({
+                  'rank': s.get('rank'), 'source_id': s.get('source_id'),
+                  'source_start': s.get('source_start'), 'duration': s.get('duration'),
+                  'runner_audio_rms_dbfs': s.get('runner_audio_rms_dbfs'),
+                  'runner_motion_score': s.get('runner_motion_score'),
+              })
+          for aid, e in audit.get('assets', {}).items():
+              out['selected_audio_audit'][aid] = [w.get('rms_dbfs') for w in (e.get('windows') or [])]
+          print('V7_AUDIO_DIAGNOSTIC_JSON_BEGIN')
+          print(json.dumps(out, indent=1, sort_keys=True))
+          print('V7_AUDIO_DIAGNOSTIC_JSON_END')
+          PY
+
       - name: Upload audio-window measurements
         uses: actions/upload-artifact@v4
         with:
