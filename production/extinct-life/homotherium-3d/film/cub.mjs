@@ -1,0 +1,24 @@
+import * as T from 'three';
+import {MarchingCubes} from 'three/addons/objects/MarchingCubes.js';
+// Original stylized dimensional illustration. Not a scan or measured reconstruction.
+export function makeCub(){
+ const root=new T.Group(),skin=new T.MeshStandardMaterial({color:'#5c3925',roughness:.96}),dark=new T.MeshStandardMaterial({color:'#241b18',roughness:.8}),inner=new T.MeshStandardMaterial({color:'#705044',roughness:1}),parts=[];
+ let seed=213;const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};
+ function blob(name,pos,scale,mat=skin,fur=true){const m=new T.Mesh(new T.SphereGeometry(1,48,32),mat);m.name=name;m.position.set(...pos);m.scale.set(...scale);m.castShadow=m.receiveShadow=true;root.add(m);if(fur)parts.push({p:pos,s:scale});return m}
+ // Partial anterior body: no speculative hindquarters, tail, open eyes or adult fangs.
+ blob('anterior torso',[.45,.34,0],[.57,.33,.34]);blob('robust neck',[-.04,.43,0],[.37,.33,.33]);blob('rounded neonatal cranium',[-.43,.49,0],[.41,.32,.29]);blob('broad short muzzle',[-.73,.36,0],[.235,.145,.22]);
+ for(const side of [-1,1]){blob('small rounded ear',[-.24,.76,side*.247],[.095,.09,.055]);blob('ear inner',[-.265,.78,side*.286],[.06,.045,.012],inner,false);blob('front forelimb',[.13,.16,side*.265],[.34,.16,.14]);blob('broad front paw',[-.12,.095,side*.29],[.24,.105,.18]);for(let j=0;j<4;j++)blob('digit',[-.30,.079,side*.29+(j-1.5)*.073],[.072,.07,.044]);}
+ blob('nose',[-.936,.385,0],[.04,.058,.074],dark,false);
+ function curve(points,material=dark,r=.007){const c=new T.CatmullRomCurve3(points.map(p=>new T.Vector3(...p)));const m=new T.Mesh(new T.TubeGeometry(c,32,r,6,false),material);root.add(m);return m}
+ for(const side of [-1,1]){curve([[-.69,.54,side*.247],[-.60,.521,side*.292],[-.51,.54,side*.308]],dark,.012);curve([[-.93,.323,side*.03],[-.83,.294,side*.13],[-.71,.293,side*.195]],dark,.005);for(let k=0;k<3;k++)curve([[-.79,.35,side*.18],[-.85,.35+k*.012,side*.22],[-.88,.36+k*.014,side*.26]],new T.MeshStandardMaterial({color:'#a39176',roughness:1}),.0012)}
+ // Smooth implicit union removes primitive seams from the sculpted surface.
+ const surface=new MarchingCubes(88,skin,false,false,150000);surface.isolation=0;surface.scale.setScalar(1.5);surface.position.y=.5;
+ const smoothMin=(a,b,k)=>{const h=Math.max(k-Math.abs(a-b),0)/k;return Math.min(a,b)-h*h*k*.25};
+ for(let z=0;z<88;z++)for(let y=0;y<88;y++)for(let x=0;x<88;x++){const X=(x/88-.5)*3,Y=(y/88-.5)*3+.5,Z=(z/88-.5)*3;let d=9;for(const {p,s} of parts){const q=Math.sqrt(((X-p[0])/s[0])**2+((Y-p[1])/s[1])**2+((Z-p[2])/s[2])**2);d=smoothMin(d,(q-1)*Math.min(...s),.045)}surface.field[z*88*88+y*88+x]=-d;}surface.update();surface.castShadow=surface.receiveShadow=true;root.children.forEach(m=>{if(m.material===skin)m.visible=false});root.add(surface);
+ const texCanvas=Object.assign(document.createElement('canvas'),{width:512,height:512}),tc=texCanvas.getContext('2d'),data=tc.createImageData(512,512);for(let i=0;i<data.data.length;i+=4){const n=rand();data.data[i]=72+n*42;data.data[i+1]=47+n*25;data.data[i+2]=30+n*18;data.data[i+3]=255}tc.putImageData(data,0,0);const tex=new T.CanvasTexture(texCanvas);tex.wrapS=tex.wrapT=T.RepeatWrapping;tex.repeat.set(4,4);skin.map=tex;skin.color.set('#a79780');skin.bumpMap=tex;skin.bumpScale=.008;skin.needsUpdate=true;
+ // Deterministic curved fibers follow each volume's surface normal; actual geometry, not image cards.
+ const positions=[],colors=[];const palette=[new T.Color('#533320'),new T.Color('#805231'),new T.Color('#a37a4c'),new T.Color('#382b22')];
+ for(const {p,s} of parts){const area=(s[0]*s[1]+s[0]*s[2]+s[1]*s[2]);const n=Math.round(area*65000);for(let j=0;j<n;j++){const yy=rand()*2-1,ang=rand()*Math.PI*2,q=Math.sqrt(1-yy*yy),v=new T.Vector3(q*Math.cos(ang),yy,q*Math.sin(ang)),base=new T.Vector3(v.x*s[0],v.y*s[1],v.z*s[2]).add(new T.Vector3(...p));const norm=new T.Vector3(v.x/s[0],v.y/s[1],v.z/s[2]).normalize();const len=.008+rand()*.017,tip=base.clone().addScaledVector(norm,len).add(new T.Vector3(.013,-.003,0));const mid=base.clone().lerp(tip,.55).add(new T.Vector3(.002,0,.002));const color=palette[Math.floor(rand()*palette.length)];for(const point of [base,mid,mid,tip]){positions.push(point.x,point.y,point.z);colors.push(color.r,color.g,color.b)}}}
+ const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setAttribute('color',new T.Float32BufferAttribute(colors,3));const hairs=new T.LineSegments(g,new T.LineBasicMaterial({vertexColors:true,transparent:true,opacity:.79}));hairs.name='dimensional fur fibers';root.add(hairs);
+ root.userData={illustrative:true,source:'Morphology-informed original procedural model; not a photogrammetric scan',fiber_segments:positions.length/6,no_living_animation:true,partial_body:true};return root;
+}

@@ -1,0 +1,117 @@
+{
+  "file": "deliverables/Homotherium-Cub-3D-Rebuild-1080x1920.mp4",
+  "sha256": "38fa5c8d206052dff0caeade148fa8b1acc370537d12fcc033feebfc3612c66c",
+  "bytes": 48325770,
+  "decoded_frames": 1530,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 51,
+  "complete_decode_errors": "",
+  "loudness": {
+    "input_i": "-16.17",
+    "input_tp": "-1.44",
+    "input_lra": "3.10",
+    "input_thresh": "-26.74",
+    "output_i": "-16.10",
+    "output_tp": "-1.50",
+    "output_lra": "3.00",
+    "output_thresh": "-26.67",
+    "normalization_type": "dynamic",
+    "target_offset": "0.10"
+  },
+  "every_two_second_samples": [
+    0,
+    60,
+    120,
+    180,
+    240,
+    300,
+    360,
+    420,
+    480,
+    540,
+    600,
+    660,
+    720,
+    780,
+    840,
+    900,
+    960,
+    1020,
+    1080,
+    1140,
+    1200,
+    1260,
+    1320,
+    1380,
+    1440,
+    1500
+  ],
+  "minimum_sampled_rgb_mean": 27.01781121399177,
+  "minimum_two_second_image_difference": 1.7829861111111112,
+  "render": {
+    "from": 0,
+    "to": 1530,
+    "frames": 1530,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "source_sha256": "1e36400157a1ce7953039fdd2ac581b63c9afd3ed088e35b565320b67255b573",
+    "scene_runs": [
+      {
+        "scene": "fur",
+        "from": 0,
+        "to": 203
+      },
+      {
+        "scene": "siberia",
+        "from": 203,
+        "to": 388
+      },
+      {
+        "scene": "scan",
+        "from": 388,
+        "to": 532
+      },
+      {
+        "scene": "identity",
+        "from": 532,
+        "to": 696
+      },
+      {
+        "scene": "age",
+        "from": 696,
+        "to": 822
+      },
+      {
+        "scene": "ears",
+        "from": 822,
+        "to": 985
+      },
+      {
+        "scene": "paws",
+        "from": 985,
+        "to": 1042
+      },
+      {
+        "scene": "soft-tissue",
+        "from": 1042,
+        "to": 1172
+      },
+      {
+        "scene": "limits",
+        "from": 1172,
+        "to": 1322
+      },
+      {
+        "scene": "conclusion",
+        "from": 1322,
+        "to": 1530
+      }
+    ],
+    "page_errors": []
+  },
+  "review_scope": "Complete automated video decode and audio loudness analysis; native still and two-second contact sampling. Not claimed as continuous human-like audiovisual watching/listening.",
+  "youtube_published": false
+}
