@@ -31,7 +31,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: kaggle-b2b-render
+  # A read-only status check must not cancel a private render or recovery.
+  group: ${{ contains(github.event.head_commit.message, 'private-wide-status') && 'kaggle-private-status' || 'kaggle-b2b-render' }}
   cancel-in-progress: true
 
 jobs:
