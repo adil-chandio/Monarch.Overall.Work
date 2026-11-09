@@ -1,0 +1,23 @@
+{
+  "version": "v10",
+  "status": "template_not_rendered",
+  "target": {"format": "YouTube Short", "aspect": "9:16", "resolution": "1080x1920", "fps": 30, "duration_seconds": "45-50"},
+  "beats": [
+    {"time": "0.0-1.5", "picture": "payoff flash / no logo", "vo_caption": "4-7 word burned caption", "audio": "native hit or punchy VO line", "purpose": "stop scroll"},
+    {"time": "1.5-3.0", "picture": "rewind to setup", "vo_caption": "hook line", "audio": "duck native under VO", "purpose": "open curiosity gap"},
+    {"time": "3.0-7.0", "picture": "clean source, punch-in", "vo_caption": "context, one short sentence", "audio": "native bed + light SFX", "purpose": "mute-readable"},
+    {"time": "7.0-15.0", "picture": "escalation, small zoom", "vo_caption": "rehook 'but watch…'", "audio": "riser / cut whoosh", "purpose": "delay payoff"},
+    {"time": "15.0-25.0", "picture": "full payoff, unobstructed", "vo_caption": "minimal caption", "audio": "native impact forward", "purpose": "deliver promise"},
+    {"time": "25.0-35.0", "picture": "freeze + circle/arrow + replay", "vo_caption": "the detail everyone misses", "audio": "reversed hit + replay", "purpose": "rewatch value"},
+    {"time": "35.0-44.0", "picture": "alternate angle / slow-mo", "vo_caption": "commentary opinion, not narration", "audio": "VO forward", "purpose": "satisfy originality rule"},
+    {"time": "44.0-50.0", "picture": "loop-back frame / question", "vo_caption": "soft CTA", "audio": "tail matches opening", "purpose": "loop + comments"}
+  ],
+  "rules": [
+    "no baked source text, watermark, black bars or title card",
+    "sharp source on blurred background where crop is required",
+    "word-by-word captions in safe zone, away from faces and player UI",
+    "no logo or animated intro",
+    "no generated / substituted native audio claims",
+    "separate technical_pass from human_creative_approval"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "version": "v10",
+  "created_at_utc": "2026-11-09",
+  "status": "not_started",
+  "reason": "Research/strategy gate requested by user before any new clip production.",
+  "target_candidate_count": "20-30",
+  "candidates": [],
+  "source_policy": {
+    "allowed": [
+      "Commons CC0 / Public Domain / CC-BY with attribution recorded",
+      "creator's own written permission / submission release",
+      "paid or written licence from rights holder"
+    ],
+    "avoid_without_clearance": [
+      "ViralHog or Jukin/Newsflare exclusive library clips",
+      "social reposts with 'credited where possible' only",
+      "fake CCTV / AI animal / staged skit clips",
+      "clips with baked watermarks, profanity, black bars, title cards"
+    ]
+  },
+  "required_record_fields": [
+    "candidate_id", "source_page", "creator", "license", "license_url",
+    "license_evidence_sha256", "occurred_on", "location", "duration_seconds",
+    "native_audio", "contact_sheet_paths", "rubric_scores", "kill_switch_hits",
+    "shortlist_rank", "locked", "notes"
+  ]
+}

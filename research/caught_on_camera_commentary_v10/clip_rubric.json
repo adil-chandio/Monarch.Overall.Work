@@ -1,0 +1,39 @@
+{
+  "version": "v10",
+  "created_at_utc": "2026-11-09",
+  "purpose": "Rights-first, human-visual-review-first scoring rubric for ONE caught-on-camera clip. Replaces motion-score-only selection rejected in V9.",
+  "axes": [
+    {"id": "first_frame_stop", "max": 10, "question": "Does frame 1 show motion, contradiction, expressive face, or impact without setup?"},
+    {"id": "mute_readability", "max": 10, "question": "Can a viewer understand the event in 3 seconds with sound off?"},
+    {"id": "payoff_clarity", "max": 10, "question": "Is there one unmistakable 'what happened' beat?"},
+    {"id": "novelty_shock", "max": 10, "question": "Would a viewer ask 'did that just happen?'"},
+    {"id": "emotional_spike", "max": 10, "question": "Is there one dominant emotion: laugh, gasp, relief, awe, outrage?"},
+    {"id": "rehook_detail", "max": 10, "question": "Is there a missed corner-of-frame detail suitable for freeze/zoom/replay?"},
+    {"id": "native_audio_value", "max": 10, "question": "Does original audio carry impact, or is a strong VO/score required?"},
+    {"id": "loop_potential", "max": 10, "question": "Can the final visual/line point back to the first beat?"},
+    {"id": "rights_chain", "max": 10, "question": "Are licence, creator, source, date/location, attribution, restrictions and file identity recorded?"},
+    {"id": "editability", "max": 10, "question": "Is there at least 6-12 seconds of clean action for cuts, replay, captions and commentary without baked text or black frames?"}
+  ],
+  "minimum_total": 78,
+  "kill_switches": [
+    "staged_or_ai_or_unverified_cctv",
+    "baked_profanity_or_subtitles",
+    "watermark_or_handle_or_platform_ui",
+    "black_bars_or_title_cards_or_fade_in",
+    "static_setup_over_3s",
+    "tragedy_or_gore_or_weapons_or_minors_in_danger",
+    "harassment_or_doxxing_or_unverified_allegations",
+    "unclear_licence_or_exclusive_clip_without_written_permission",
+    "non_free_audio_without_written_license",
+    "no_visible_payoff_before_5s",
+    "usable_source_under_4s",
+    "motion_score_only_shortlist"
+  ],
+  "review_flags": {
+    "visual_contact_sheets_generated": false,
+    "human_full_motion_review": false,
+    "native_audio_listened": false,
+    "human_creative_approval": false,
+    "technical_qc_pass": false
+  }
+}
