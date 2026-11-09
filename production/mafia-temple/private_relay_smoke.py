@@ -47,6 +47,7 @@ for attempt in range(24):
         if code!=200 or body!=b'ok':raise ValueError('Unexpected health response')
         break
     except urllib.error.HTTPError as e:
+        print('::notice title=relay-stage::Health HTTP '+str(e.code),flush=True)
         if e.code!=401 or attempt==23:raise RuntimeError('OIDC verification failed') from None
         time.sleep(5)
 else:raise RuntimeError('Relay unavailable')
