@@ -36,5 +36,5 @@ class AuditTests(unittest.TestCase):
     raise a.ApiFailure(403,'quotaExceeded')
   r=a.collect(Fake(),{'queries':['x'],'orders':['date']});self.assertEqual(r['status'],'partial');self.assertEqual(len(r['searches']),1)
  def test_workflow_scoped_no_bot_push(self):
-  s=(Path(__file__).resolve().parents[1]/'.github/workflows/yt-validation-audit.yml').read_text();self.assertIn('arena/ba8d901e-monarch-overall-work',s);self.assertIn('contents: read',s);self.assertNotIn('git push',s);self.assertNotIn('github.event.inputs',s)
+  s=(Path(__file__).resolve().parents[1]/'.github/workflows/yt-validation-audit.yml').read_text();self.assertIn('arena/ba8d901e-monarch-overall-work',s);self.assertIn('contents: write',s);self.assertIn('/contents/production/extinct-life/research/api-results/latest.json',s);self.assertIn("github.ref == 'refs/heads/arena/ba8d901e-monarch-overall-work'",s);self.assertNotIn('git push',s);self.assertNotIn('github.event.inputs',s)
 if __name__=='__main__':unittest.main()

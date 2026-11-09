@@ -9,7 +9,7 @@ on:
       - '.github/workflows/yt-validation-audit.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: yt-validation-${{ github.ref }}
   cancel-in-progress: false
@@ -32,7 +32,30 @@ jobs:
           YT_KEY: ${{ secrets.YT_KEY }}
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
         run: python scripts/yt-validation-audit.py --request production/extinct-life/research/api-requests/next-topic.json --out .cache/yt-validation-audit
-      - name: Preserve measured or blocked report (never auto-commit)
+      - name: Publish only public audit JSON through GitHub Contents API
+        if: always() && github.ref == 'refs/heads/arena/ba8d901e-monarch-overall-work'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PYCODE'
+          import base64,json,os,subprocess
+          from pathlib import Path
+          source=Path('.cache/yt-validation-audit/report.json')
+          if not source.exists():
+              raise SystemExit('No audit report was produced; refusing to publish an empty result')
+          data=json.loads(source.read_text())
+          endpoint='repos/'+os.environ['GITHUB_REPOSITORY']+'/contents/production/extinct-life/research/api-results/latest.json'
+          branch='arena/ba8d901e-monarch-overall-work'
+          assert os.environ['GITHUB_REF']=='refs/heads/'+branch
+          old=subprocess.run(['gh','api',endpoint+'?ref='+branch],capture_output=True,text=True)
+          payload={'message':'Record bounded YouTube API audit [skip ci]','branch':branch,'content':base64.b64encode(source.read_bytes()).decode()}
+          if old.returncode==0:payload['sha']=json.loads(old.stdout)['sha']
+          elif '404' not in old.stderr:raise SystemExit('GitHub report lookup failed; no secret/error URL printed')
+          result=subprocess.run(['gh','api','--method','PUT',endpoint,'--input','-','--jq','.commit.sha'],input=json.dumps(payload),capture_output=True,text=True)
+          if result.returncode:raise SystemExit('GitHub report publication failed; inspect repository permissions')
+          print('Public audit report committed:',result.stdout.strip())
+          PYCODE
+      - name: Preserve downloadable report as a secondary copy
         if: always()
         uses: actions/upload-artifact@v4
         with:
