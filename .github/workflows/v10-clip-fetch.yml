@@ -34,6 +34,12 @@ on:
         required: false
         default: '0'
         type: string
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - .github/workflows/v10-clip-fetch.yml
+      - production/monarch-cam/caught_on_camera_commentary_v10/scout_request.json
 
 permissions:
   contents: write
@@ -63,6 +69,32 @@ jobs:
           ref: arena/2b012328-monarch-overall-work
           fetch-depth: 0
 
+      - name: Resolve request
+        id: req
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+            echo "clip_id=${{ inputs.clip_id }}" >> "$GITHUB_OUTPUT"
+            echo "start=${{ inputs.start }}" >> "$GITHUB_OUTPUT"
+            echo "duration=${{ inputs.duration }}" >> "$GITHUB_OUTPUT"
+            echo "crop_offset=${{ inputs.crop_offset }}" >> "$GITHUB_OUTPUT"
+          else
+            python3 - <<'PY'
+          import json, os
+          with open('production/monarch-cam/caught_on_camera_commentary_v10/scout_request.json', encoding='utf-8') as f:
+              data = json.load(f)
+          required = ('mode', 'clip_id', 'start', 'duration', 'crop_offset')
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
+              for key in required:
+                  value = str(data.get(key, ''))
+                  if not value or '\n' in value or '\r' in value:
+                      raise SystemExit(f'Invalid request value for {key}: {value!r}')
+                  out.write(f'{key}={value}\n')
+          PY
+          fi
+
       - name: Install FFmpeg
         run: |
           sudo apt-get update -qq
@@ -72,7 +104,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for value in "${{ inputs.start }}" "${{ inputs.duration }}" "${{ inputs.crop_offset }}"; do
+          for value in "${{ steps.req.outputs.start }}" "${{ steps.req.outputs.duration }}" "${{ steps.req.outputs.crop_offset }}"; do
             if ! [[ "$value" =~ ^-?[0-9]+([.][0-9]+)?$ ]]; then
               echo "Invalid numeric input: $value" >&2
               exit 1
@@ -80,7 +112,7 @@ jobs:
           done
 
       - name: Download official source evidence and generate visual preview
-        if: ${{ inputs.mode == 'preview' }}
+        if: ${{ steps.req.outputs.mode == 'preview' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -137,16 +169,16 @@ jobs:
           echo "Prepared preview sheets for two official NASA 4K candidates."
 
       - name: Extract and commit a clean vertical source master
-        if: ${{ inputs.mode == 'extract' }}
+        if: ${{ steps.req.outputs.mode == 'extract' }}
         shell: bash
         run: |
           set -euo pipefail
           WORK="$RUNNER_TEMP/v10_extract"
           mkdir -p "$WORK" "$SOURCE_DIR" "$REVIEW_DIR/extract"
-          CLIP_ID="${{ inputs.clip_id }}"
-          START="${{ inputs.start }}"
-          DURATION="${{ inputs.duration }}"
-          CROP_OFFSET="${{ inputs.crop_offset }}"
+          CLIP_ID="${{ steps.req.outputs.clip_id }}"
+          START="${{ steps.req.outputs.start }}"
+          DURATION="${{ steps.req.outputs.duration }}"
+          CROP_OFFSET="${{ steps.req.outputs.crop_offset }}"
           case "$CLIP_ID" in
             artemis)
               SRC_URL="$ARTEMIS_URL"
