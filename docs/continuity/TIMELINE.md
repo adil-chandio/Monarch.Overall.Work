@@ -515,3 +515,11 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Evidence level: `repo_evidence`
 - Details: Optimized V7 run 42547437901 / job 128935444230 rendered the full-frame picture in 2m22s but failed at the native-audio/mux step: all 16 measured gain/mastering attempts failed the unchanged web gate lra_in_range with LRA about 87-89 LU and movement about 225-229 dB. A short audio-window diagnostic showed long -120 dBFS blocks inside selected caption_fail and nose_wheelie windows. Candidate probe, window selection, source audit, audio builder ledger and technical QC now require every complete 0.5s block of each 8.6s native window to exceed the unchanged -65 dBFS threshold. The nine web gates are unchanged; no audio is added, substituted or faked. Full CI verification is pending.
 - Ref: `42547437901,42549478669,f3eb77f`
+
+## `2026-11-09T04:08:15Z` · evt-065-monarch-cam-v7-continuous-audio-diagnostic-passed · checkpoint
+
+- Title: V7 continuous native-audio window diagnostic passed
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Diagnostic run 42559696919 / job 128973180485 completed success with artifact 13648638723. Eight candidates passed the audio/visual probe; all seven selected windows have 17 complete 0.5s blocks, zero quiet blocks and every block above -65 dBFS. caption_fail moved to source_start 75.5 and nose_wheelie to 1.0. This is runner-only objective evidence, not a V7 MP4, human listening or acceptance. Full V7 CI with unchanged nine web gates is pending.
+- Ref: `42559696919,42547437901,e276fb3`

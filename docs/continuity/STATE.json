@@ -4,17 +4,17 @@
   "branch": "arena/2b012328-monarch-overall-work",
   "head_at_capture": "8cb1e6abf64074db6ff7bfe3dcd496594f329780",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-09T04:02:19Z",
-  "last_event_id": "evt-064-monarch-cam-v7-continuous-audio-fix",
+  "updated_at": "2026-11-09T04:08:15Z",
+  "last_event_id": "evt-065-monarch-cam-v7-continuous-audio-diagnostic-passed",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "v7_continuous_audio_retry_pending",
+    "status": "v7_full_ci_retry_pending",
     "space": "yt-automation",
     "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
-    "current_step": "Optimized V7 CI run 42547437901 rendered the full-frame picture in 2m22s but failed at the native-audio/mux step: long silent blocks inside selected source windows made the unchanged web LRA gate fail. Continuous half-second native-audio selection/audit has been added without changing the nine web gates. A short diagnostic then a full V7 CI retry are pending.",
-    "next_action": "Run the short V7 audio-window diagnostic, confirm seven continuously audible windows, trigger full V7 CI, inspect the committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
+    "current_step": "V7 audio-window diagnostic 42559696919 passed all steps. Seven selected windows now have continuous native audio: 17 complete 0.5s blocks each, zero quiet blocks, and all blocks above -65 dBFS. Full V7 CI retry with unchanged nine web gates is pending.",
+    "next_action": "Trigger full V7 CI, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
     "blocking_gaps": [
       "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
       "No complete Arena chat export/JSON",
@@ -195,7 +195,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_continuous_audio_retry_pending",
+    "status": "v7_full_ci_retry_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -227,6 +227,22 @@
       "web_gates_changed": false,
       "added_audio_layers": false,
       "audio_substitution": false
+    },
+    "audio_window_diagnostic": {
+      "run_id": "42559696919",
+      "job_id": "128973180485",
+      "conclusion": "success",
+      "artifact_id": "13648638723",
+      "artifact_bytes": 66149,
+      "artifact_zip_sha256": "a6821c30d37e6c1c425f0099931077dfe9e26920db01621afd4bfa8b997aabce",
+      "candidate_audio_visual_pass_count": 8,
+      "selected_continuous_windows": 7,
+      "quiet_full_block_count": 0,
+      "full_half_second_blocks_per_window": 17,
+      "minimum_selected_block_rms_dbfs": -57.93,
+      "caption_fail_source_start": 75.5,
+      "nose_wheelie_source_start": 1.0,
+      "note": "Runner-only diagnostic; not a V7 deliverable or creative acceptance."
     }
   }
 }

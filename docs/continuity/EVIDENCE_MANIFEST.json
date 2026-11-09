@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T04:03:29Z",
-  "head": "0d3b3a650de427be574818d8936462418b986a0c",
+  "generated_at": "2026-11-09T04:08:44Z",
+  "head": "e276fb37c4ebe35d1d3129552009eb1163b62954",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -121,7 +121,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4658,
-      "sha256": "8df6d7d14f935ed47ea1d1448feeff325eb7daedc90f1b1471429300dd5454f6",
+      "sha256": "132ff2190f39dd3b1a78b20c94a095dfa753148f1b11d08890862a1bd62c5a41",
       "evidence_level": "state_ledger"
     },
     {
@@ -132,8 +132,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 31208,
-      "sha256": "53f9f51919fc6193ea95915cb8172c8d9c10557eba739840cb9f53441b78de03",
+      "bytes": 31977,
+      "sha256": "07e9cdb50da090a4efaea933b555b818c0626f5e609fc3e6d771837f812e19b5",
       "evidence_level": "state_ledger"
     },
     {
@@ -162,8 +162,8 @@
     },
     {
       "path": "docs/continuity/PROBLEMS_FIXES.md",
-      "bytes": 18902,
-      "sha256": "16233b72be9f8468fa1490792b9d45f08add551fc5fd2c67ee0bd293c52c91a3",
+      "bytes": 19833,
+      "sha256": "a9b82eba66c40007033996bfaaf8c301da560192e216ba76e0199b7d058ad456",
       "evidence_level": "operating_contract"
     },
     {
@@ -192,8 +192,8 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 13801,
-      "sha256": "87ae54bdbf4d387342007988c70c2ba835d3a705edac5fb5d58d82590c68f7da",
+      "bytes": 14301,
+      "sha256": "5b6fe8fd7bf51af9c96778677f40d6bd2f65a5e872d72fa1a2119f1dfe70669d",
       "evidence_level": "state_ledger"
     },
     {
@@ -228,8 +228,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
-      "bytes": 9490,
-      "sha256": "c36844ae73501bcb8a160f97eb1b9f9abdd69890b381ae8ad4a5ef69a8d8743c",
+      "bytes": 10154,
+      "sha256": "c6c90df3007d275568099f2083c4460c9364fee9340ed6e6f326a581e9b62058",
       "evidence_level": "operating_contract"
     },
     {
@@ -246,8 +246,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
-      "bytes": 6040,
-      "sha256": "50af11c26d6b0c4e9e34ff11ca6333feedd5f7e08047753b203f3398a2111318",
+      "bytes": 6038,
+      "sha256": "12c9383803c3650cf22d09e0d2147ae3d6f2e9514cea959898c60f489bcea2da",
       "evidence_level": "operating_contract"
     },
     {
@@ -2172,8 +2172,8 @@
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/DIAGNOSTIC_TRIGGER.md",
-      "bytes": 489,
-      "sha256": "282ea00868771b4e8b1f9461d509287999a6a0614d00f4ca89488af5c7eae414",
+      "bytes": 614,
+      "sha256": "ed162c3035fb5d32f1847551b7efe818c9c01457dffad3f23e51c0fac1dd10ba",
       "evidence_level": "repo_evidence"
     },
     {
@@ -2190,8 +2190,8 @@
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/RENDER_TRIGGER_V7.md",
-      "bytes": 518,
-      "sha256": "6cc3dc9d45198a4fd90e2ff7671ca60e441335e1fb3653f190b51c9d6ec6498d",
+      "bytes": 655,
+      "sha256": "112229492d9a768ae7443551d927e773623911a7d0e9e587a8c8de96d55a25f0",
       "evidence_level": "repo_evidence"
     },
     {

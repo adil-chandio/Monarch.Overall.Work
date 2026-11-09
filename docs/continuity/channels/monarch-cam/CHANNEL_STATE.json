@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v7_continuous_audio_retry_pending",
+  "status": "v7_full_ci_retry_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -124,7 +124,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_continuous_audio_retry_pending",
+    "status": "v7_full_ci_retry_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -168,6 +168,22 @@
       "unchanged_web_gates": true,
       "native_source_audio_only": true,
       "pending_ci_verification": true
+    },
+    "audio_window_diagnostic": {
+      "run_id": "42559696919",
+      "job_id": "128973180485",
+      "conclusion": "success",
+      "artifact_id": "13648638723",
+      "artifact_bytes": 66149,
+      "artifact_zip_sha256": "a6821c30d37e6c1c425f0099931077dfe9e26920db01621afd4bfa8b997aabce",
+      "candidate_audio_visual_pass_count": 8,
+      "selected_continuous_windows": 7,
+      "quiet_full_block_count": 0,
+      "full_half_second_blocks_per_window": 17,
+      "minimum_selected_block_rms_dbfs": -57.93,
+      "caption_fail_source_start": 75.5,
+      "nose_wheelie_source_start": 1.0,
+      "note": "Runner-only diagnostic; not a V7 deliverable or creative acceptance."
     }
   }
 }
