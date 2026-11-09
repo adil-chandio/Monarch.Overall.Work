@@ -1,4 +1,4 @@
-name: Monarch Cam - High Action V9 Scout
+name: Monarch Cam - High Action V9 Scout and Curated Windows
 
 on:
   push:
@@ -7,6 +7,8 @@ on:
       - '.github/workflows/monarch-cam-high-action-v9-scout.yml'
       - 'production/monarch-cam/short_ranking_high_action_v9/candidate_scout_v9.json'
       - 'production/monarch-cam/short_ranking_high_action_v9/scout_candidates_v9.py'
+      - 'production/monarch-cam/short_ranking_high_action_v9/curated_windows_v9.json'
+      - 'production/monarch-cam/short_ranking_high_action_v9/curated_windows_v9.py'
       - 'production/monarch-cam/short_ranking_high_action_v9/RANKING_V9_SCOUT_PLAN.md'
   workflow_dispatch:
 
@@ -18,8 +20,11 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  V9_REVIEW: production/monarch-cam/short_ranking_high_action_v9/review
   V9_SCOUT_REVIEW: production/monarch-cam/short_ranking_high_action_v9/review/scout
   V9_SCOUT_WORK: production/monarch-cam/work/high_action_v9_scout
+  V9_CURATED_REVIEW: production/monarch-cam/short_ranking_high_action_v9/review/curated_windows
+  V9_CURATED_WORK: production/monarch-cam/work/high_action_v9_curated
 
 jobs:
   scout:
@@ -48,33 +53,47 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install numpy Pillow requests
 
-      - name: Compile V9 scout and validate candidate manifest
+      - name: Compile V9 scouts and validate candidate manifests
         run: |
           python -m py_compile production/monarch-cam/short_ranking_high_action_v9/scout_candidates_v9.py
+          python -m py_compile production/monarch-cam/short_ranking_high_action_v9/curated_windows_v9.py
           python -m json.tool production/monarch-cam/short_ranking_high_action_v9/candidate_scout_v9.json >/dev/null
+          python -m json.tool production/monarch-cam/short_ranking_high_action_v9/curated_windows_v9.json >/dev/null
           python - <<'PY'
           import json
           from pathlib import Path
-          d = json.loads(Path('production/monarch-cam/short_ranking_high_action_v9/candidate_scout_v9.json').read_text())
+          base = Path('production/monarch-cam/short_ranking_high_action_v9')
+          d = json.loads((base / 'candidate_scout_v9.json').read_text())
+          c = json.loads((base / 'curated_windows_v9.json').read_text())
           assert len(d['assets']) == 20
           assert len({a['id'] for a in d['assets']}) == 20
           assert d['reference_exact_match'] is False
           assert d['policy']['no_current_trending_claim'] is True
-          print('V9 candidate scout contracts passed')
+          assert len(c['windows']) == 28
+          assert len({w['id'] for w in c['windows']}) == 14
+          assert c['final_v9_selection_locked'] is False
+          assert c['visual_review_required'] is True
+          print('V9 candidate and curated-window contracts passed')
           PY
 
       - name: Runner Commons API rights, native-audio and high-motion candidate scout
         run: python production/monarch-cam/short_ranking_high_action_v9/scout_candidates_v9.py
 
+      - name: Runner second-pass curated high-action payoff windows
+        run: python production/monarch-cam/short_ranking_high_action_v9/curated_windows_v9.py
+
       - name: Failure diagnostics
         if: failure()
         run: |
-          echo 'V9 scout failure diagnostics'
+          echo 'V9 scout and curated-window failure diagnostics'
           cat "${{ env.V9_SCOUT_REVIEW }}/scout_summary.json" || true
+          cat "${{ env.V9_CURATED_REVIEW }}/curated_window_summary.json" || true
           find "${{ env.V9_SCOUT_REVIEW }}" -maxdepth 1 -type f -printf '%f %s bytes\n' 2>/dev/null | head -80 || true
+          find "${{ env.V9_CURATED_REVIEW }}" -maxdepth 1 -type f -printf '%f %s bytes\n' 2>/dev/null | head -80 || true
           find "${{ env.V9_SCOUT_WORK }}" -maxdepth 3 -type f -printf '%p %s bytes\n' 2>/dev/null | head -80 || true
+          find "${{ env.V9_CURATED_WORK }}" -maxdepth 3 -type f -printf '%p %s bytes\n' 2>/dev/null | head -80 || true
 
-      - name: Upload V9 scout contact sheets and runner evidence
+      - name: Upload V9 scout and curated contact sheets with runner evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -84,20 +103,24 @@ jobs:
             ${{ env.V9_SCOUT_REVIEW }}/candidate_*_best_window.jpg
             ${{ env.V9_SCOUT_REVIEW }}/scout_report.json
             ${{ env.V9_SCOUT_REVIEW }}/scout_summary.json
+            ${{ env.V9_CURATED_REVIEW }}/curated_*_window.jpg
+            ${{ env.V9_CURATED_REVIEW }}/v9_curated_windows_all.jpg
+            ${{ env.V9_CURATED_REVIEW }}/curated_window_report.json
+            ${{ env.V9_CURATED_REVIEW }}/curated_window_summary.json
           if-no-files-found: warn
           retention-days: 14
 
-      - name: Commit V9 scout contact sheets and runner evidence
+      - name: Commit V9 scout and curated contact sheets with runner evidence
         if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f "${{ env.V9_SCOUT_REVIEW }}"
+          git add -f "${{ env.V9_REVIEW }}"
           git add .github/workflows/monarch-cam-high-action-v9-scout.yml
           if git diff --cached --quiet; then
-            echo 'No V9 scout changes to commit'
+            echo 'No V9 scout/curated changes to commit'
           else
-            git commit -m "build(monarch-cam): high-action V9 candidate scout evidence [skip ci]"
+            git commit -m "build(monarch-cam): high-action V9 scout and curated-window evidence [skip ci]"
             git fetch origin arena/2b012328-monarch-overall-work
             git merge --no-edit -X ours origin/arena/2b012328-monarch-overall-work || true
             git push origin HEAD:arena/2b012328-monarch-overall-work

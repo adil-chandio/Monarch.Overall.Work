@@ -17,7 +17,9 @@ The V8 clean visual system remains the target for the later final build: full-sc
 5. Scores all possible 8.6 s windows for continuous native audio, audible level and visible motion, with an additional high-action motion threshold.
 6. Writes two real runner contact sheets per candidate: a separated top-motion overview and 0.5 s frames from the best 8.6 s window. Those sheets are committed for visual inspection before any final V9 source/window lock.
 
-This scout does **not** render the final Short and does not lock the final seven. The committed `scout_report.json` and `scout_summary.json` are runner measurements, not creative approval.
+`curated_windows_v9.json` and `curated_windows_v9.py` add a second pass after the scout sheets were inspected. They re-download each unique source, extract 28 explicit 8.6 s payoff windows at 0.5 s frame spacing, and directly check each window's own native audio RMS, seventeen half-second continuity blocks and frame-difference motion. One contact sheet per window plus `v9_curated_windows_all.jpg` and `curated_window_report.json` are committed for close visual inspection.
+
+This scout does **not** render the final Short and does not lock the final seven. The committed `scout_report.json`, `scout_summary.json`, `curated_window_report.json` and `curated_window_summary.json` are runner measurements, not creative approval.
 
 ## Rights and source boundary
 
@@ -25,7 +27,7 @@ The pool uses rights-cleared social-origin Commons originals/derivatives with ex
 
 ## What still has to happen
 
-- Inspect the committed candidate contact sheets and the final MP4's own contact sheets/frames after a successful V9 CI run.
+- Inspect the committed candidate contact sheets, curated 0.5 s payoff-window sheets and the final MP4's own contact sheets/frames after a successful V9 CI run.
 - Curate seven distinct high-action windows with visible payoff and continuous native audio, plus reserves.
 - Build the separate `..._HIGH_ACTION_V9.mp4` through a V9 workflow preserving the clean V8 layout, native per-window audio and unchanged web gates.
 - Inspect the real committed MP4, technical/audio QC, source/rights/social-origin/native-audio ledgers, then give only that corrected V9 MP4's own GitHub link.
