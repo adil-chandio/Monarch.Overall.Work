@@ -64,8 +64,13 @@ def main():
     if 'error' in result or result.get('result',{}).get('isError'):
         # Classify only predefined diagnostics; never relay the server response.
         text = json.dumps(result).lower()
-        reason = next((word for word in ('unauthenticated', 'unauthorized', 'invalid arguments', 'not found', 'not initialized', 'session') if word in text), 'unknown')
+        reason = next((word for word in ('unauthenticated', 'unauthorized', 'invalid arguments', 'invalid', 'required', 'not found', 'not initialized', 'session', 'permission', 'denied') if word in text), 'unknown')
         print('::notice title=private-gpu-quota::Request rejected: ' + reason, flush=True)
+        listing, _ = request({'jsonrpc':'2.0','id':3,'method':'tools/list','params':{}}, session)
+        for tool in listing.get('result', {}).get('tools', []):
+            if tool.get('name') == 'get_accelerator_quota':
+                schema = tool.get('inputSchema', {})
+                print('::notice title=private-quota-schema::' + json.dumps(schema, separators=(',',':')), flush=True)
         return
     numbers = list(extract_numbers(result.get('result',{})))[:40]
     # Avoid printing raw free-text returned from the remote server.
