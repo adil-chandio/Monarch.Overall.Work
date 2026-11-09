@@ -6,13 +6,17 @@ The nine English narration passages in `script.json` are original paraphrases, n
 
 Voice references: https://huggingface.co/rhasspy/piper-voices/blob/v1.0.0/en/en_US/amy/medium/MODEL_CARD and https://huggingface.co/qualcomm/PiperTTS-EN-Amy
 
+## Version 2 changes
+
+Version 2 adds a kinematic planted-foot gait for constant-speed chase segments, two-link knee placement, arm swing and forward lean; the fall is now a staged articulated pose with impact dust and a settling pose rather than rotating the entire body rigidly. Grass sways subtly. These are hand-directed approximations, not a dynamics or collision simulation. Other shots and the original paraphrased narration and synthesized score remain broadly unchanged. The current renderer reproduces version 2, not the earlier video.
+
 ## Rebuild
 
 Python 3 with Pillow, NumPy and imageio-ffmpeg is required, plus DejaVu Sans Bold at `/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf`. Existing generated voice clips are included; model weights are not needed for rendering.
 
 ```sh
 python -m unittest discover -s showreel/farm_reference/tests -v
-python showreel/farm_reference/render.py --output deliverables/monarch-farm-reference-recreation.mp4
+python showreel/farm_reference/render.py --output deliverables/monarch-farm-reference-recreation-v2.mp4
 ```
 
-Tests check deterministic frames, scene action changes, and narration cue durations; they do not establish fidelity or perceptual quality.
+Tests check deterministic frames, scene action changes, narration cue durations, planted-foot behavior and knee link lengths; they do not establish fidelity or perceptual quality.

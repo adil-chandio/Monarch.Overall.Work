@@ -46,14 +46,14 @@ def sky(im,sun=335,suny=180):
  rectangle(d,(0,198,640,229),(50,43,49,255))
  return im
 
-def field(im,ground=202):
+def field(im,ground=202,t=0):
  d=ImageDraw.Draw(im);rectangle(d,(0,ground,640,340),(62,76,52,255))
  for j in range(20):
   y=ground+j*7;line(d,[(0,y),(640,y)],(68,81,55,255),.5)
  # Fine irregular grass creates depth without introducing a still-image plate.
  for j in range(350):
   xx=(j*137)%640; yy=ground+((j*53)%max(1,340-ground));h=1+(j%3)
-  line(d,[(xx,yy),(xx+(.5 if j%2 else -.5),yy-h)],(84,98,62,255),.4)
+  line(d,[(xx,yy),(xx+(.5 if j%2 else -.5)+.8*math.sin(t*1.2+xx*.03+yy*.02),yy-h)],(84,98,62,255),.4)
  for x in range(0,640,29):line(d,[(x,ground-8),(x,ground+18)],(42,43,38,255),1)
  for y in (ground-5,ground+2):line(d,[(0,y),(640,y)],(35,37,34,255),1)
  return im
@@ -92,7 +92,7 @@ def silo(d,x,y):
  rectangle(d,(x+5,y+25,x+11,y+168),(67,57,55,255))
 
 def farm(im,t,view='full'):
- sky(im,270 if view=='full' else 325);field(im,208);d=ImageDraw.Draw(im)
+ sky(im,270 if view=='full' else 325);field(im,208,t);d=ImageDraw.Draw(im)
  rectangle(d,(0,291,640,340),(83,69,68,255));ellipse(d,(-120,295,740,360),(88,75,73,255))
  if view=='full':house(d,84,169);barn(d,426,172);silo(d,596,126)
  else:barn(d,432,170);silo(d,597,124)
@@ -141,34 +141,85 @@ def cow(im,x,y,s=1):
  for k in (-24,-12,23,33):line(d,[(x+k*s,y+9*s),(x+k*s,y+32*s)],(18,17,20,255),3*s);line(d,[(x+k*s+2*s,y+9*s),(x+k*s+2*s,y+32*s)],(216,194,166,255),1*s)
  line(d,[(x+35*s,y-10*s),(x+44*s,y+16*s)],(231,203,168,255),1*s);ellipse(d,(x-47*s,y-17*s,x-44*s,y-14*s),CREAM)
 
-def person(im,x,ground,s=1,t=0,kind='farmer',action='idle'):
- d=ImageDraw.Draw(im);green=kind=='zombie';headr=7*s;bob=0
- if action in ('walk','run'):bob=-abs(math.sin(t*(8 if action=='run' else 5)))*1.4*s
- hip=(x,ground-22*s+bob);neck=(x,ground-42*s+bob);head=(x,ground-49*s+bob)
- if action in ('walk','run'):
-  q=math.sin(t*(8 if action=='run' else 5));stride=(10 if action=='run' else 6)*s
-  feet=[(x-3*s+stride*q,ground-4*s*max(q,0)),(x+3*s-stride*q,ground-4*s*max(-q,0))]
+def stride_foot(x, ground, scale, t, offset, speed, period):
+ """Stance foot stays in world space for a constant-speed leftward root.
+ Swing advances the foot with a smooth lift. This is kinematic, not a simulation.
+ """
+ phase=(t / period + offset) % 1.0
+ stance=.58
+ stride=speed*period*stance
+ if phase < stance:
+  dx=-stride/2 + speed*period*phase
+  lift=0
+ else:
+  u=(phase-stance)/(1-stance)
+  dx=lerp(stride/2,-stride/2,ease(u))
+  lift=math.sin(math.pi*u)*5.5*scale
+ return (x+dx,ground-lift)
+
+def knee_for(hip,foot,length,side):
+ # Two-link inverse kinematics keeps the drawn legs approximately constant length.
+ dx=foot[0]-hip[0];dy=foot[1]-hip[1];dist=max(.001, math.hypot(dx,dy));half=min(dist/2,length)
+ h=math.sqrt(max(0,length*length-half*half));return ((hip[0]+foot[0])/2+side*(-dy/dist)*h,(hip[1]+foot[1])/2+side*(dx/dist)*h)
+
+def person(im,x,ground,s=1,t=0,kind='farmer',action='idle',root_speed=None):
+ d=ImageDraw.Draw(im);green=kind=='zombie';moving=action in ('walk','run')
+ period=.78 if action=='run' else 1.05
+ speed=root_speed if root_speed is not None else (27.6 if action=='run' else 16.0)
+ phase=t/period; bounce=abs(math.sin(phase*2*math.pi))*1.4*s if moving else 0
+ lean=(-4.0 if action=='run' else -1.1)*s if moving else 0
+ hip=(x,ground-22*s-bounce);neck=(x+lean,ground-42*s-bounce);head=(neck[0]-1*s,ground-49*s-bounce)
+ if moving:
+  feet=[stride_foot(x,ground,s,t,offset,speed,period) for offset in (0,.5)]
  else:feet=[(x-4*s,ground),(x+4*s,ground)]
- ellipse(d,(x-13*s,ground-2*s,x+13*s,ground+4*s),(18,20,18,100))
- for ft in feet:
-  kn=((hip[0]+ft[0])/2+(2*s if green else 0),ground-10*s);line(d,[hip,kn,ft],(12,13,17,255),3.4*s);line(d,[hip,kn,ft],(183,192,166,255) if green else (206,214,211,255),1.3*s)
+ ellipse(d,(x-14*s,ground-2*s,x+14*s,ground+3*s),(20,22,19,135))
+ for i,ft in enumerate(feet):
+  kn=knee_for(hip,ft,12*s,-1 if i==0 else 1)
+  line(d,[hip,kn,ft],(12,13,17,255),3.7*s)
+  line(d,[hip,kn,ft],(170,188,156,255) if green else (206,214,211,255),1.5*s)
+  line(d,[ft,(ft[0]-3*s,ft[1])],(16,17,18,255),2*s)
  torso=(100,122,84,255) if green else ((150,164,119,255) if kind=='villager' else (164,188,192,255))
- poly(d,[(x-5*s,neck[1]),(x+5*s,neck[1]),(x+7*s,hip[1]),(x-6*s,hip[1])],torso,INK,1*s)
+ poly(d,[(neck[0]-5*s,neck[1]),(neck[0]+5*s,neck[1]),(hip[0]+7*s,hip[1]),(hip[0]-6*s,hip[1])],torso,INK,1*s)
  if green:
-  line(d,[(x,neck[1]+4*s),(x-10*s,neck[1]+7*s),(x-15*s,neck[1]+7*s)],(172,190,147,255),2*s)
+  swing=math.sin(phase*2*math.pi)*2*s if moving else 0
+  line(d,[(neck[0]-2*s,neck[1]+4*s),(neck[0]-11*s,neck[1]+8*s+swing),(neck[0]-16*s,neck[1]+6*s+swing)],(172,190,147,255),2*s)
  else:
-  q=math.sin(t*5) if action=='walk' else 0;line(d,[(x-4*s,neck[1]+4*s),(x-8*s,ground-(30+q*3)*s)],(210,217,209,255),2*s);line(d,[(x+4*s,neck[1]+4*s),(x+9*s,ground-(30-q*3)*s)],(210,217,209,255),2*s)
- ellipse(d,(head[0]-headr-1*s,head[1]-headr-1*s,head[0]+headr+1*s,head[1]+headr+1*s),(196,157,112,255) if not green else (112,143,91,255))
- ellipse(d,(head[0]-headr,head[1]-headr,head[0]+headr,head[1]+headr),(14,15,20,255) if not green else (38,56,37,255))
- if green:
-  for dx in (-2,2):ellipse(d,(x+(dx-1)*s,head[1]-1*s,x+(dx+1)*s,head[1]+1*s),(217,244,158,255))
- else:
-  if kind=='farmer':
-   ellipse(d,(x-8*s,head[1]-9*s,x+8*s,head[1]-2*s),(174,15,35,255));ellipse(d,(x-3*s,head[1]-9*s,x+3*s,head[1]-3*s),(241,237,223,255));line(d,[(x-9*s,head[1]-2*s),(x+9*s,head[1]-2*s)],(112,11,23,255),2*s)
-  for dx in (-2,2):ellipse(d,(x+(dx-.8)*s,head[1],x+(dx+.8)*s,head[1]+1.4*s),CREAM)
-  if action=='bucket':
-   rectangle(d,(x+7*s,ground-20*s,x+17*s,ground-8*s),(210,219,213,255),INK,.8*s)
-   d.arc(box((x+6*s,ground-24*s,x+18*s,ground-14*s)),180,360,fill=INK,width=max(1,v(.8*s)))
+  q=math.sin(phase*2*math.pi) if moving else 0
+  for side in (-1,1):
+   shoulder=(neck[0]+side*4*s,neck[1]+4*s);elbow=(shoulder[0]+side*4*s+q*side*5*s,shoulder[1]+9*s)
+   hand=(elbow[0]+q*side*4*s,elbow[1]+6*s)
+   line(d,[shoulder,elbow,hand],(210,217,209,255),2*s)
+ hr=7*s;ellipse(d,(head[0]-hr-s,head[1]-hr-s,head[0]+hr+s,head[1]+hr+s),(112,143,91,255) if green else (196,157,112,255))
+ ellipse(d,(head[0]-hr,head[1]-hr,head[0]+hr,head[1]+hr),(38,56,37,255) if green else (14,15,20,255))
+ if kind=='farmer':
+  ellipse(d,(head[0]-8*s,head[1]-9*s,head[0]+8*s,head[1]-2*s),(174,15,35,255));ellipse(d,(head[0]-3*s,head[1]-9*s,head[0]+3*s,head[1]-3*s),(241,237,223,255));line(d,[(head[0]-9*s,head[1]-2*s),(head[0]+9*s,head[1]-2*s)],(112,11,23,255),2*s)
+ for dx in (-2,2):ellipse(d,(head[0]+(dx-1)*s,head[1]-s,head[0]+(dx+1)*s,head[1]+s),(217,244,158,255) if green else CREAM)
+ if action=='bucket':
+  rectangle(d,(x+7*s,ground-20*s,x+17*s,ground-8*s),(210,219,213,255),INK,.8*s)
+  d.arc(box((x+6*s,ground-24*s,x+18*s,ground-14*s)),180,360,fill=INK,width=max(1,v(.8*s)))
+
+def falling_villager(im,t):
+ """Art-directed fall: lower centre of mass, extend hands, then settle on ground."""
+ d=ImageDraw.Draw(im);u=ease((t-26.48)/.55)
+ # The character carries leftward momentum through the impact.
+ x=lerp(320,298,u);hip=(x,lerp(253,270,u));neck=(lerp(x-4,x-22,u),lerp(236,271,u));head=(lerp(x-5,x-30,u),lerp(230,270,u))
+ feet=[(lerp(317,326,u),275),(lerp(329,342,u),275)]
+ ellipse(d,(x-45,273,x+50,279),(20,22,19,130))
+ for i,ft in enumerate(feet):
+  kn=knee_for(hip,ft,10.5,-1 if i==0 else 1);line(d,[hip,kn,ft],INK,4);line(d,[hip,kn,ft],(203,213,207,255),1.5)
+ line(d,[hip,neck],INK,11);line(d,[hip,neck],(150,164,119,255),8)
+ for off in (-1,1):
+  shoulder=(neck[0],neck[1]+off*2);hand=(lerp(neck[0]-6,head[0]-7,u),lerp(neck[1]+12,275,u));elbow=((shoulder[0]+hand[0])/2,(shoulder[1]+hand[1])/2-2)
+  line(d,[shoulder,elbow,hand],(211,216,205,255),2)
+ ellipse(d,(head[0]-7,head[1]-7,head[0]+7,head[1]+7),(196,157,112,255));ellipse(d,(head[0]-6,head[1]-6,head[0]+6,head[1]+6),INK)
+ ellipse(d,(head[0]-3,head[1]-1,head[0]-1,head[1]+1),CREAM)
+ # Impact dust expands and fades, rather than remaining fixed to the character.
+ if 26.9<t<27.65:
+  age=t-26.9;alpha=int(85*(1-age/.75));layer=Image.new('RGBA',(W,H));ld=ImageDraw.Draw(layer)
+  for j in range(7):
+   px=292+(j-3)*(4+age*8);py=274-age*(3+j%3*3);r=2+age*(3+j%2)
+   ellipse(ld,(px-r,py-r,px+r,py+r),(183,168,127,alpha))
+  im.alpha_composite(layer.filter(ImageFilter.GaussianBlur(v(2))))
 
 def close_face(im,expression='surprised',t=0):
  d=ImageDraw.Draw(im);x,y,r=320,213,102
@@ -237,28 +288,22 @@ def compose(t):
   farm(im,t,'barn');person(im,anim(t,[(15.033,400),(18.767,270)]),243,.38,t,'zombie','run')
   layer=Image.new('RGBA',(W,H));back_shoulder(layer);im.alpha_composite(layer.filter(ImageFilter.GaussianBlur(v(3))))
  elif t<22.5:
-  sky(im,470);field(im,201);person(im,anim(t,[(18.767,353),(22.5,250)]),260,.83,t,'villager','run');person(im,anim(t,[(18.767,540),(22.5,425)]),260,.83,t,'zombie','run')
+  sky(im,470);field(im,201,t);person(im,353-27.6*(t-18.767),260,.83,t,'villager','run',27.6);person(im,540-30.8*(t-18.767),260,.83,t,'zombie','run',30.8)
  elif t<26:
-  sky(im,475);field(im,201);person(im,320,289,2.2,t,'zombie','run');d=ImageDraw.Draw(im);text(d,(469,107),'TOO STIFF',11,(247,222,202,255));line(d,[(438,115),(345,180)],(223,110,108,255),1)
+  sky(im,475);field(im,201,t);person(im,320,289,2.2,t,'zombie','run');d=ImageDraw.Draw(im);text(d,(469,107),'TOO STIFF',11,(247,222,202,255));line(d,[(438,115),(345,180)],(223,110,108,255),1)
   if t>24.4:text(d,(70,280),'TOO FAST',9,(244,221,199,255));line(d,[(123,279),(315,258)],(222,112,106,255),1)
  elif t<27.8:
-  sky(im,470);field(im,201);person(im,428,275,.85,t,'zombie','run')
-  if t<26.33:person(im,334,275,.85,t,'villager','run')
-  else:
-   # Rotate the complete drawn body about its planted foot; do not replace it
-   # abruptly with an unrelated line at the impact frame.
-   layer=Image.new('RGBA',(W,H));person(layer,334,275,.85,t,'villager','idle')
-   angle=anim(t,[(26.33,0),(26.78,90),(27.8,90)])
-   layer=layer.rotate(angle,resample=Image.Resampling.BICUBIC,center=(v(334),v(275)))
-   im.alpha_composite(layer)
+  sky(im,470);field(im,201,t);person(im,428-27*(t-26),275,.85,t,'zombie','run',27)
+  if t<26.48:person(im,334-29*(t-26),275,.85,t,'villager','run',29)
+  else:falling_villager(im,t)
  elif t<32.8:
-  sky(im,468);field(im,200)
+  sky(im,468);field(im,200,t)
   for j,x in enumerate((150,280,410)):
    u=clamp((t-(27.8+j*.35))/.8);person(im,x,340-72*ease(u),.8,t+j*.3,'zombie','idle')
   d=ImageDraw.Draw(im)
   for x in range(0,640,13):line(d,[(x,340),(x+(x%5)-2,307+(x*3%15))],(39,53,39,255),.7)
  elif t<35.833:
-  sky(im,470);field(im,201);d=ImageDraw.Draw(im)
+  sky(im,470);field(im,201,t);d=ImageDraw.Draw(im)
   for x in (307,356,405,454,503,552,600):line(d,[(x,242),(x,295)],(23,24,23,255),3)
   for y in (253,276):line(d,[(306,y),(620,y)],(25,25,24,255),3)
   for j in range(6):cow(im,335+j*31,286+(j%2)*7,.42)
