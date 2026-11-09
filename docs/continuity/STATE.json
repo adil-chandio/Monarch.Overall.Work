@@ -4,17 +4,17 @@
   "branch": "arena/2b012328-monarch-overall-work",
   "head_at_capture": "8cb1e6abf64074db6ff7bfe3dcd496594f329780",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-09T04:30:19Z",
-  "last_event_id": "evt-067-monarch-cam-v7-ambient-background-fix",
+  "updated_at": "2026-11-09T13:56:51Z",
+  "last_event_id": "evt-068-monarch-cam-v7-ci-success",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "v7_ambient_background_fix_ci_pending",
+    "status": "v7_delivery_ready_link_pending",
     "space": "yt-automation",
     "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
-    "current_step": "V7 full CI retry 42561159698 again passed the unchanged nine web audio gates and built a runner-only MP4. Technical QC then correctly failed three sampled-frame black-area checks because dark source windows made the blurred full-frame background near-black in frames 630/810/990. The renderer now lifts only the blurred background above near-black while keeping the sharp source frame uncut; local black-frame simulation passes all sampled-frame thresholds. Clean full CI verification is pending; no committed V7 MP4 or QC evidence exists.",
-    "next_action": "Trigger the clean full V7 CI retry, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
+    "current_step": "Main V7 CI run 42562287554 succeeded in 7m57s. The MP4, sampled frames, contact sheets, 65/65 technical QC, 9/9 unchanged web audio gates, continuous native-audio ledgers and per-title rights/source ledgers are committed at 47012a5. The temporary diagnostic workflow/trigger were removed. The V7 GitHub download link is ready to give; human full-motion/native-audio review is still pending.",
+    "next_action": "Give only the V7 GitHub download link; human full-motion/native-audio review remains pending.",
     "blocking_gaps": [
       "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
       "No complete Arena chat export/JSON",
@@ -195,7 +195,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_ambient_background_fix_ci_pending",
+    "status": "v7_delivery_ready_link_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -299,6 +299,41 @@
       "web_gates_changed": false,
       "audio_changed": false,
       "local_black_frame_simulation": "top_black_fraction 0.0186, bottom 0.0757, hook 0.0459; all sampled-frame thresholds pass"
+    },
+    "successful_ci_run": {
+      "run_id": "42562287554",
+      "job_id": "128981122857",
+      "conclusion": "success",
+      "duration": "7m57s",
+      "all_steps": "success",
+      "artifact_id": "13650013062",
+      "artifact_url": "https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42562287554/artifacts/13650013062",
+      "commit": "47012a5dcfc7f2fa07107878a3bcf61f5349daf5",
+      "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
+      "bytes": 21986563,
+      "sha256": "4f76a4e102d6c20a655157c955e076bc6a54d34ba86914b334897c8ce249b8f4",
+      "duration_seconds": 60.0,
+      "frame_count": 1800,
+      "fps": 30,
+      "resolution": "1080x1920",
+      "technical_checks": "65/65 pass",
+      "web_audio_gates": "9/9 pass, unchanged",
+      "continuous_native_audio": "7/7 windows, 17 complete 0.5s blocks each, zero quiet blocks",
+      "rights_ledger_flags": "eight objective flags true",
+      "download_link": "https://github.com/adil-chandio/Monarch.Overall.Work/raw/arena/2b012328-monarch-overall-work/deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
+      "human_full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "creative_acceptance": false,
+      "note": "Committed MP4, sampled frames, contact sheets, QC/audio-gate results and rights/source ledgers are user-visible evidence. This is a technical build for human review, not creative approval. Exact rights-cleared currently trending TikTok/Instagram/YouTube/Reddit/Dailymotion clips remain unmet; V7 uses older rights-cleared Commons social-origin mirrors with attribution/restrictions. No full legal compliance, current-trending claim, perfection, retention, virality, 3x, likes/subscribes, same-path replacement or audience result is claimed."
+    },
+    "diagnostic_cleanup": {
+      "removed": [
+        ".github/workflows/v7-audio-window-diagnostic.yml",
+        "production/monarch-cam/short_ranking_raw_v7/DIAGNOSTIC_TRIGGER.md"
+      ],
+      "continuity_scan_globs_updated": true
     }
   }
 }

@@ -144,7 +144,6 @@ SCAN_GLOBS = [
     "production/monarch-cam/short_ranking_raw_v7/review/*.txt",
     "production/monarch-cam/short_ranking_raw_v7/review/candidates/*.json",
     ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
-    ".github/workflows/v7-audio-window-diagnostic.yml",
     "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
     "RECOVER.md",
     "MONARCH_CAM.md",

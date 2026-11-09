@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v7_ambient_background_fix_ci_pending",
+  "status": "v7_delivery_ready_link_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -124,7 +124,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_ambient_background_fix_ci_pending",
+    "status": "v7_delivery_ready_link_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -235,6 +235,41 @@
       "problem": "Dark night/title source windows produced near-black blurred backgrounds and triggered the objective no-black-empty-top/no-black-bars/no-hook-black-fill QC checks.",
       "fix": "Compute a soft ambient luminance floor over the blurred full-frame fill; no crop, zoom, letterbox or QC threshold change. Sharp uncut source frame is untouched.",
       "pending_ci_verification": true
+    },
+    "successful_ci_run": {
+      "run_id": "42562287554",
+      "job_id": "128981122857",
+      "conclusion": "success",
+      "duration": "7m57s",
+      "all_steps": "success",
+      "artifact_id": "13650013062",
+      "artifact_url": "https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42562287554/artifacts/13650013062",
+      "commit": "47012a5dcfc7f2fa07107878a3bcf61f5349daf5",
+      "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
+      "bytes": 21986563,
+      "sha256": "4f76a4e102d6c20a655157c955e076bc6a54d34ba86914b334897c8ce249b8f4",
+      "duration_seconds": 60.0,
+      "frame_count": 1800,
+      "fps": 30,
+      "resolution": "1080x1920",
+      "technical_checks": "65/65 pass",
+      "web_audio_gates": "9/9 pass, unchanged",
+      "continuous_native_audio": "7/7 windows, 17 complete 0.5s blocks each, zero quiet blocks",
+      "rights_ledger_flags": "eight objective flags true",
+      "download_link": "https://github.com/adil-chandio/Monarch.Overall.Work/raw/arena/2b012328-monarch-overall-work/deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
+      "human_full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "creative_acceptance": false,
+      "note": "Committed MP4, sampled frames, contact sheets, QC/audio-gate results and rights/source ledgers are user-visible evidence. This is a technical build for human review, not creative approval. Exact rights-cleared currently trending TikTok/Instagram/YouTube/Reddit/Dailymotion clips remain unmet; V7 uses older rights-cleared Commons social-origin mirrors with attribution/restrictions. No full legal compliance, current-trending claim, perfection, retention, virality, 3x, likes/subscribes, same-path replacement or audience result is claimed."
+    },
+    "diagnostic_cleanup": {
+      "removed": [
+        ".github/workflows/v7-audio-window-diagnostic.yml",
+        "production/monarch-cam/short_ranking_raw_v7/DIAGNOSTIC_TRIGGER.md"
+      ],
+      "continuity_scan_globs_updated": true
     }
   }
 }

@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-09T04:30:19Z`
-- Last event: `evt-067-monarch-cam-v7-ambient-background-fix`
+- Updated: `2026-11-09T13:56:51Z`
+- Last event: `evt-068-monarch-cam-v7-ci-success`
 
 ## Active channel
 ```json
@@ -39,12 +39,12 @@
   ],
   "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "V7 full CI retry 42561159698 again passed the unchanged nine web audio gates and built a runner-only MP4. Technical QC then correctly failed three sampled-frame black-area checks because dark source windows made the blurred full-frame background near-black in frames 630/810/990. The renderer now lifts only the blurred background above near-black while keeping the sharp source frame uncut; local black-frame simulation passes all sampled-frame thresholds. Clean full CI verification is pending; no committed V7 MP4 or QC evidence exists.",
+  "current_step": "Main V7 CI run 42562287554 succeeded in 7m57s. The MP4, sampled frames, contact sheets, 65/65 technical QC, 9/9 unchanged web audio gates, continuous native-audio ledgers and per-title rights/source ledgers are committed at 47012a5. The temporary diagnostic workflow/trigger were removed. The V7 GitHub download link is ready to give; human full-motion/native-audio review is still pending.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
-  "next_action": "Trigger the clean full V7 CI retry, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
+  "next_action": "Give only the V7 GitHub download link; human full-motion/native-audio review remains pending.",
   "space": "yt-automation",
-  "status": "v7_ambient_background_fix_ci_pending",
+  "status": "v7_delivery_ready_link_pending",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```
