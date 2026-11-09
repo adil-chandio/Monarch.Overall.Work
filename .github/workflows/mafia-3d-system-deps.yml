@@ -1,0 +1,24 @@
+name: 3D runtime dependency bundle
+on:
+  push:
+    branches: [arena/6101616c-monarch-overall-work]
+    paths: [.github/workflows/mafia-3d-system-deps.yml]
+permissions:
+  contents: read
+jobs:
+  system-libraries:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - name: Download public Ubuntu runtime packages only
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/3d-deps"
+          cd "$RUNNER_TEMP/3d-deps"
+          apt-get download libxrender1 libxxf86vm1 libxfixes3 libxi6 libxkbcommon0 libsm6 libice6 libgl1 libglx0 libglvnd0 libglx-mesa0 libdrm2 libxshmfence1 libxcb-glx0 libxcb-dri2-0 libxcb-dri3-0 libxcb-present0 libxcb-sync1 libxcb-randr0 libxcb-xfixes0 libwayland-client0 libwayland-server0 || exit 1
+          sha256sum *.deb > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-3d-system-dependencies
+          path: ${{ runner.temp }}/3d-deps/
+          retention-days: 1
