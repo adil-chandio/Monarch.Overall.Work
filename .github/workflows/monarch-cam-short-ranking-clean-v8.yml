@@ -1,0 +1,279 @@
+name: Monarch Cam - Clean V8
+
+on:
+  push:
+    branches: [arena/2b012328-monarch-overall-work]
+    paths:
+      - '.github/workflows/monarch-cam-short-ranking-clean-v8.yml'
+      - 'production/monarch-cam/short_ranking_clean_v8/*.py'
+      - 'production/monarch-cam/short_ranking_clean_v8/*.json'
+      - 'production/monarch-cam/short_ranking_clean_v8/*.md'
+      - 'production/monarch-cam/short_ranking_clean_v8/RENDER_TRIGGER_V8.md'
+      - 'production/monarch-cam/short_ranking_clean_v8/review/selected_windows.json'
+      - 'production/monarch-cam/short_ranking_clean_v8/review/candidates/candidate_review_manifest.json'
+      - '.gitignore'
+  workflow_dispatch:
+
+concurrency:
+  group: monarch-cam-clean-v8-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+env:
+  V8_WORK: production/monarch-cam/work/short_ranking_clean_v8
+  V8_REVIEW: production/monarch-cam/short_ranking_clean_v8/review
+  V8_MP4: deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout active branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system tools
+        run: |
+          timeout 900 sudo apt-get update -qq
+          timeout 900 sudo apt-get install -y -qq ffmpeg
+          ffmpeg -hide_banner -version | head -3
+          ffprobe -hide_banner -version | head -3
+
+      - name: Install Python tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy scipy pillow opencv-python-headless soundfile pyloudnorm requests imageio-ffmpeg
+
+      - name: Compile V8 scripts and validate clean contracts
+        run: |
+          python -m py_compile \
+            production/monarch-cam/short_ranking_clean_v8/validate_raw_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/candidate_probe_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/select_moments_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/verify_sources_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/source_recon_ranking_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/source_audio_audit_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/render_ranking_visual_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/build_ranking_audio_raw_v8.py \
+            production/monarch-cam/short_ranking_clean_v8/technical_qc_v8.py
+          python production/monarch-cam/short_ranking_clean_v8/validate_raw_v8.py
+          python production/monarch-cam/short_ranking_clean_v8/render_ranking_visual_v8.py --check
+
+      - name: Runner probe of rights-cleared social-origin candidates
+        run: python production/monarch-cam/short_ranking_clean_v8/candidate_probe_v8.py
+
+      - name: Lock seven objective audio/motion windows
+        run: python production/monarch-cam/short_ranking_clean_v8/select_moments_v8.py
+
+      - name: Per-title Commons API rights and social-origin verification
+        run: python production/monarch-cam/short_ranking_clean_v8/verify_sources_v8.py
+
+      - name: Source recon, SHA-1 checks and V8 window clips
+        run: python production/monarch-cam/short_ranking_clean_v8/source_recon_ranking_v8.py
+
+      - name: Native source audio audit
+        run: python production/monarch-cam/short_ranking_clean_v8/source_audio_audit_v8.py
+
+      - name: Render V8 clean content-first picture
+        run: python production/monarch-cam/short_ranking_clean_v8/render_ranking_visual_v8.py
+
+      - name: Build raw per-window native audio track and mux MP4
+        run: python production/monarch-cam/short_ranking_clean_v8/build_ranking_audio_raw_v8.py
+
+      - name: Nine web audio gates
+        run: |
+          set -o pipefail
+          python -m showreel.audio_qc.gates \
+            "${{ env.V8_MP4 }}" \
+            --profile web \
+            --json "${{ env.V8_REVIEW }}/audio_qc.json" \
+            2>&1 | tee "${{ env.V8_REVIEW }}/audio_qc.log"
+
+      - name: Clean-layout technical QC with sampled-frame and rights checks
+        run: python production/monarch-cam/short_ranking_clean_v8/technical_qc_v8.py
+
+      - name: Write V8 delivery summary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('.').resolve()
+          review = root / 'production/monarch-cam/short_ranking_clean_v8/review'
+          out = root / 'deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4'
+          obj = lambda n: json.loads((review / n).read_text(encoding='utf-8'))
+          t = obj('technical_qc.json')
+          a = obj('audio_qc.json')
+          native = obj('native_audio_ledger.json')
+          social = obj('social_origin_ledger.json')
+          layout = obj('layout_manifest.json')
+          visual = obj('visual_v8_qc.json')
+          meta = json.loads((root / 'production/monarch-cam/short_ranking_clean_v8/ranking_v8_metadata.json').read_text(encoding='utf-8'))
+          if not t.get('passed') or not a.get('pass') or not native.get('final_web_gate_pass'):
+              raise SystemExit('QC gate did not pass')
+          summary = {
+              'topic': '7 Most Unexpected Internet Moments, Ranked.',
+              'package': 'Clean V8 - separate content-first rebuild after rejected V7',
+              'deliverable': str(out.relative_to(root)),
+              'bytes': out.stat().st_size,
+              'sha256': hashlib.sha256(out.read_bytes()).hexdigest(),
+              'title': meta['primary'],
+              'category': meta['video_category'],
+              'duration_seconds': 60.0, 'frame_count': 1800, 'fps': 30,
+              'resolution': '1080x1920',
+              'audio': 'Raw per-window native Commons audio only; no narration, music, effects, bed, generated calls or added layers.',
+              'visual_policy': ('Clean content-first layout: blurred full-frame background plus sharp uncut source frame. '
+                                'V7 hook, seven-row list, right UI, handle, comment bubble, Subscribe, bottom caption and app '
+                                'chrome removed. Only a minimal top rank strip, a small moment badge and a thin progress line '
+                                'remain, all outside the central main-content region.'),
+              'technical': {'passed': t['passed'], 'checks': t['checks'], 'sha256': t['sha256'],
+                            'bytes': t['bytes'], 'probe': t['probe'], 'sampled_frames': t['sampled_frames']},
+              'audio_checks': {'passed': a.get('pass'), 'gates': a.get('gates', {})},
+              'native_audio': native,
+              'social_origin': {
+                  'policy': social['policy'],
+                  'all_api_license_verified': social['all_api_license_verified'],
+                  'all_social_origin_verified': social['all_social_origin_verified'],
+                  'all_original_commons_pages': social['all_original_commons_pages'],
+                  'all_original_sha1_verified': social['all_original_sha1_verified'],
+                  'no_unverified_reposts': social['no_unverified_reposts'],
+                  'api_restrictions_recorded': social['api_restrictions_recorded'],
+                  'rights_not_legal_opinion': social['rights_not_legal_opinion'],
+                  'cc_by_attribution_recorded': social['cc_by_attribution_recorded'],
+                  'assets': social['assets'],
+              },
+              'layout': {
+                  'safe_area': layout['safe_area'],
+                  'primary_elements': layout['primary_elements'],
+                  'overlay_area_fraction': layout['overlay_area_fraction'],
+                  'main_content_region_unobstructed': layout['main_content_region_unobstructed'],
+                  'removed_from_v7': layout['removed_from_v7'],
+                  'flags': layout['flags'],
+              },
+              'visual': visual,
+              'source_manifest': obj('verified_sources.json'),
+              'source_clip_ledger': obj('source_video_ledger.json'),
+              'source_audio_audit': obj('source_audio_audit.json'),
+              'selected_windows': obj('selected_windows.json'),
+              'v6_rejected': True,
+              'v7_rejected': True,
+              'v8_human_review_pending': True,
+              'full_motion_review': False,
+              'native_audio_listening': False,
+              'human_approval': False,
+              'sign_off': False,
+              'audience_result_promise': False,
+              'virality_guarantee': False,
+              'current_trending_claim': False,
+              'unverified_social_repost': False,
+              'social_platform_reposts_selected': False,
+              'exact_reference_match_claim': False,
+              'note': ('Technical build and objective checks only. V4/V5/V6/V7 were rejected. V8 is a clean '
+                       'content-first rebuild from the user rejection; the reference Short frames were not '
+                       'playable/extractable in this environment, so no exact visual reproduction is claimed. '
+                       'V8 uses rights-cleared social-origin Commons mirrors, not unverified currently trending '
+                       'platform reposts. Commons extmetadata is a rights record, not a legal opinion. No human '
+                       'full-motion/native-audio listening, creative approval, sign-off, perfection, retention, '
+                       'virality or audience result is claimed.'),
+          }
+          (review / 'qc_summary.json').write_text(json.dumps(summary, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          print('V8 clean delivery', summary['sha256'], summary['bytes'], 'bytes', flush=True)
+          PY
+
+      - name: Upload V8 MP4, contact sheets and QC evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-clean-v8-${{ github.sha }}
+          path: |
+            ${{ env.V8_MP4 }}
+            ${{ env.V8_REVIEW }}/cover*.jpg
+            ${{ env.V8_REVIEW }}/frame_*.jpg
+            ${{ env.V8_REVIEW }}/payoff_frame_*.jpg
+            ${{ env.V8_REVIEW }}/v8_*_contact_sheet_*.jpg
+            ${{ env.V8_REVIEW }}/v8_clean_contact_sheet.jpg
+            ${{ env.V8_REVIEW }}/candidates/candidate_*_sheet_*.jpg
+            ${{ env.V8_REVIEW }}/candidates/candidate_audio_probe.json
+            ${{ env.V8_REVIEW }}/candidates/candidate_video_ledger.json
+            ${{ env.V8_REVIEW }}/candidates/candidate_review_manifest.json
+            ${{ env.V8_REVIEW }}/source_poster.jpg
+            ${{ env.V8_REVIEW }}/UPLOAD_METADATA_RANKING_V8.txt
+            ${{ env.V8_REVIEW }}/selected_windows.json
+            ${{ env.V8_REVIEW }}/verified_sources.json
+            ${{ env.V8_REVIEW }}/social_origin_ledger.json
+            ${{ env.V8_REVIEW }}/source_video_ledger.json
+            ${{ env.V8_REVIEW }}/source_windows.json
+            ${{ env.V8_REVIEW }}/source_audio_audit.json
+            ${{ env.V8_REVIEW }}/native_audio_ledger.json
+            ${{ env.V8_REVIEW }}/audio_qc.json
+            ${{ env.V8_REVIEW }}/audio_qc.log
+            ${{ env.V8_REVIEW }}/technical_qc.json
+            ${{ env.V8_REVIEW }}/layout_manifest.json
+            ${{ env.V8_REVIEW }}/visual_v8_qc.json
+            ${{ env.V8_REVIEW }}/visual_edit_ledger.json
+            ${{ env.V8_REVIEW }}/visual_review_lock.json
+            ${{ env.V8_REVIEW }}/review-manifest.json
+            ${{ env.V8_REVIEW }}/qc_summary.json
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Failure diagnostics
+        if: failure()
+        run: |
+          echo '--- V8 work tree ---'
+          find production/monarch-cam/work/short_ranking_clean_v8 -maxdepth 2 -type f -printf '%p %s bytes\n' | sort | head -120 || true
+          echo '--- V8 review ---'
+          find production/monarch-cam/short_ranking_clean_v8/review -maxdepth 2 -type f -printf '%p %s bytes\n' | sort | head -120 || true
+          echo '--- MP4 ---'
+          ls -lah deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4 || true
+          ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,codec_type,width,height,r_frame_rate -of json deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4 || true
+
+      - name: Upload V8 failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-clean-v8-failure-${{ github.sha }}
+          path: |
+            ${{ env.V8_MP4 }}
+            ${{ env.V8_REVIEW }}/cover*.jpg
+            ${{ env.V8_REVIEW }}/frame_*.jpg
+            ${{ env.V8_REVIEW }}/payoff_frame_*.jpg
+            ${{ env.V8_REVIEW }}/v8_clean_contact_sheet.jpg
+            ${{ env.V8_REVIEW }}/audio_qc.json
+            ${{ env.V8_REVIEW }}/audio_qc.log
+            ${{ env.V8_REVIEW }}/native_audio_ledger.json
+            ${{ env.V8_REVIEW }}/source_audio_audit.json
+            ${{ env.V8_REVIEW }}/selected_windows.json
+            ${{ env.V8_REVIEW }}/verified_sources.json
+            ${{ env.V8_REVIEW }}/social_origin_ledger.json
+            ${{ env.V8_REVIEW }}/source_video_ledger.json
+            ${{ env.V8_REVIEW }}/layout_manifest.json
+            ${{ env.V8_REVIEW }}/visual_v8_qc.json
+            ${{ env.V8_REVIEW }}/visual_edit_ledger.json
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Commit V8 MP4 and generated review evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f "${{ env.V8_MP4 }}"
+          git add production/monarch-cam/short_ranking_clean_v8/review
+          git add .github/workflows/monarch-cam-short-ranking-clean-v8.yml
+          git add .gitignore
+          if git diff --cached --quiet; then
+            echo 'No V8 changes to commit'
+          else
+            git commit -m "build(monarch-cam): clean V8 60s Short [skip ci]"
+            git fetch origin arena/2b012328-monarch-overall-work
+            git merge --no-edit -X ours origin/arena/2b012328-monarch-overall-work || true
+            git push origin HEAD:arena/2b012328-monarch-overall-work
+          fi
