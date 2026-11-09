@@ -376,7 +376,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -q 'ltx23-diagnostic' production/mafia-temple/trigger.txt; then
+          if grep -q 'ltx23-pose-control' production/mafia-temple/trigger.txt; then
+            bash production/mafia-temple/run_ltx23_control.sh
+          elif grep -q 'ltx23-diagnostic' production/mafia-temple/trigger.txt; then
             PILOT_KERNEL_SLUG=monarch-ltx23-42534408811 python production/mafia-temple/onetoall_diagnose.py
             python - <<'PY'
           import pathlib
@@ -537,7 +539,7 @@ jobs:
             fi
             exit 0
           fi
-          if grep -q 'ltx23-running-benchmark\|ltx23-diagnostic\|onetoall-running-research\|onetoall-recover-diagnostics\|onetoall-real-preflight\|onetoall-real-render\|onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
+          if grep -q 'ltx23-pose-control\|ltx23-running-benchmark\|ltx23-diagnostic\|onetoall-running-research\|onetoall-recover-diagnostics\|onetoall-real-preflight\|onetoall-real-render\|onetoall-real-diagnose' production/mafia-temple/trigger.txt; then
             echo 'Research output is not automatically committed.'
             exit 0
           fi
