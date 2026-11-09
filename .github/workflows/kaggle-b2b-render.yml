@@ -35,6 +35,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  private-wide-research:
+    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && github.event_name == 'push' && contains(github.event.head_commit.message, 'private-wide-research') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Install private research client
+        run: python -m pip install --disable-pip-version-check -q -U kaggle 'cryptography==44.0.3'
+      - name: Render privately and deliver only to Drive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          S_COMPALI: ${{ secrets.COMPALI }}
+        run: python production/mafia-temple/private_wide_driver.py
+
   private-running-research:
     if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && github.event_name == 'push' && contains(github.event.head_commit.message, 'private-running-research') }}
     runs-on: ubuntu-latest
@@ -283,7 +302,7 @@ jobs:
           done
 
   mafia-temple-render:
-    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && (github.event_name == 'push' || inputs.render_mafia == true) && inputs.private_relay_test != true && !contains(github.event.head_commit.message, 'private-relay-smoke') && !contains(github.event.head_commit.message, 'private-cloud-smoke') && !contains(github.event.head_commit.message, 'private-running-research') }}
+    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && (github.event_name == 'push' || inputs.render_mafia == true) && inputs.private_relay_test != true && !contains(github.event.head_commit.message, 'private-relay-smoke') && !contains(github.event.head_commit.message, 'private-cloud-smoke') && !contains(github.event.head_commit.message, 'private-running-research') && !contains(github.event.head_commit.message, 'private-wide-research') }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
