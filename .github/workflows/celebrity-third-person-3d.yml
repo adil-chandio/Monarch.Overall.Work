@@ -1,0 +1,36 @@
+name: Render third-person 3D study
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        index: ['00','01','02','03','04','05','06','07','08','09','10','11']
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Blender Python and libraries
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxrender1 libxi6 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0 libgl1
+          pip install -q 'bpy==4.2.23' Pillow imageio-ffmpeg
+      - name: Render chunk
+        env:
+          IDX: ${{ matrix.index }}
+        run: |
+          start=$((10#$IDX * 5)); end=$((start + 5))
+          python showreel/celebrity_third_person/render.py --samples 2 --width 480 --start "$start" --end "$end" --output "$RUNNER_TEMP/$IDX.mp4" > "$RUNNER_TEMP/render.log" 2>&1 || { tail -100 "$RUNNER_TEMP/render.log"; exit 1; }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: clip-${{ matrix.index }}
+          path: ${{ runner.temp }}/${{ matrix.index }}.mp4
+          retention-days: 1
