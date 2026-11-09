@@ -43,6 +43,24 @@ All three elements are inside the platform safe area and **outside** the central
 `[0, 400, 1080, 1520]`. Combined overlay bounding-box area is under 6% of the frame. The sharp
 source band is completely unobstructed.
 
+## Visual window correction after the first clean render
+
+The first clean V8 render was technically clean, but the committed contact sheet showed two cuts
+landing on non-moments: rank 6 opened on a black fade-in and rank 5 opened on a static
+`Guion Original` title card. The runner's audio/motion score had picked those windows because they
+were loud and continuous, not because they were funny.
+
+The committed one-frame-per-second candidate contact sheets were reviewed, and two windows were
+moved to the actual gag while keeping every audio gate unchanged:
+
+- `quaker_scarecrow`: `0.0s` -> `3.0s` (scarecrow sits up / jumps into the breakfast scene).
+- `caption_fail`: `75.5s` -> `80.0s` (presenters and the caption-chaos green-hat payoff).
+
+`select_moments_v8.py` re-measures each override against the runner's own half-second RMS probe and
+refuses it unless all 17 half-second blocks are above `-65 dBFS` with zero quiet blocks. The
+`source_audio_audit_v8.py` step and the nine unchanged web gates then re-verify the actual muxed
+audio, so the override cannot silently weaken the audio policy.
+
 ## Technical contract
 
 - 60.0s / 1800 frames / 30fps / 1080x1920 vertical.

@@ -13,12 +13,55 @@ MANIFEST = json.loads((BASE / 'candidate_sources.json').read_text(encoding='utf-
 SPEC = json.loads((BASE / 'ranking_short_spec.json').read_text(encoding='utf-8'))
 PROBE = json.loads((REVIEW / 'candidates/candidate_video_ledger.json').read_text(encoding='utf-8'))
 PROBE_MANIFEST = json.loads((REVIEW / 'candidates/candidate_review_manifest.json').read_text(encoding='utf-8'))
+AUDIO_PROBE_PATH = REVIEW / 'candidates/candidate_audio_probe.json'
+AUDIO_PROBE = json.loads(AUDIO_PROBE_PATH.read_text(encoding='utf-8')) if AUDIO_PROBE_PATH.exists() else {'assets': {}}
 ASSETS = {a['id']: a for a in MANIFEST['assets']}
 LEDGER = {e['id']: e for e in PROBE['assets']}
 FPS = int(SPEC['fps'])
 FRAME_DURATIONS = [257, 257, 257, 257, 257, 257, 258]
 assert sum(FRAME_DURATIONS) == int(SPEC['frame_count']) == 1800
 assert FPS == 30 and abs(SPEC['duration'] - 60.0) < 1e-9
+
+# Runner audio/motion scoring alone can land on a source fade-in or a title
+# card. User-supplied one-frame-per-second contact sheets were reviewed for the
+# clean V8 layout; these two windows move the cut to the actual funny moment.
+# Every override is re-checked below against the runner's own half-second RMS
+# probe so continuous native audio and zero quiet blocks still hold.
+VISUAL_WINDOW_OVERRIDES = {
+    'quaker_scarecrow': {
+        'start': 3.0,
+        'reason': 'Source 0.0s is a black fade-in; 3.0s opens on the scarecrow sitting up / jumping into the breakfast scene.',
+    },
+    'caption_fail': {
+        'start': 80.0,
+        'reason': 'Source 75.5s opens on a static "Guion Original" title card; 80.0s opens on the presenters and the caption-chaos green-hat payoff.',
+    },
+}
+
+
+def override_window_stats(aid, start):
+    """Measure a proposed 8.6s window from the runner's 0.5s RMS probe."""
+    asset = AUDIO_PROBE['assets'].get(aid)
+    if not asset or not asset.get('windows'):
+        raise RuntimeError('No runner half-second RMS probe for visual override: ' + aid)
+    blocks = {round(float(w['start']), 1): float(w['rms_dbfs']) for w in asset['windows']}
+    values = [blocks.get(round(start + i * 0.5, 1)) for i in range(17)]
+    if any(v is None for v in values):
+        raise RuntimeError('Visual override window is outside the probed source: ' + aid)
+    threshold = float(SPEC['audio_policy']['native_audible_segment_rms_dbfs_min'])
+    quiet = sum(1 for v in values if v <= threshold)
+    duration = float(asset.get('duration_seconds') or 0.0)
+    if start + 8.6 > duration:
+        raise RuntimeError('Visual override window exceeds source duration: ' + aid)
+    if quiet != 0:
+        raise RuntimeError('Visual override window has quiet half-second blocks: ' + aid)
+    return {
+        'min_full_block_rms_dbfs': round(min(values), 2),
+        'quiet_full_block_count': quiet,
+        'continuous_native_audio': True,
+        'mean_block_rms_dbfs': round(sum(values) / len(values), 2),
+        'duration_seconds': duration,
+    }
 
 
 def false_guardrails():
@@ -98,9 +141,15 @@ def main():
         end_frame = start_frame + frames
         duration = frames / FPS
         source_duration = float(e.get('duration_seconds') or asset['duration_seconds'])
-        source_start = float(best['start'])
+        override = VISUAL_WINDOW_OVERRIDES.get(aid)
+        ostats = override_window_stats(aid, float(override['start'])) if override else None
+        source_start = float(override['start']) if override else float(best['start'])
         source_start = min(source_start, max(0.0, source_duration - 8.6 - 0.05))
         source_start = round(source_start, 3)
+        runner_rms = ostats['mean_block_rms_dbfs'] if ostats else best['rms_dbfs']
+        runner_min_rms = ostats['min_full_block_rms_dbfs'] if ostats else float(best.get('min_full_block_rms_dbfs', -120.0))
+        runner_quiet = ostats['quiet_full_block_count'] if ostats else int(best.get('quiet_full_block_count', -1))
+        runner_cont = ostats['continuous_native_audio'] if ostats else bool(best.get('continuous_native_audio', False))
         scenes.append({
             'id': f"rank{7 - i}_{aid}",
             'rank': 7 - i,
@@ -131,13 +180,17 @@ def main():
             'payoff_zoom': SPEC['visual']['payoff_zoom'],
             'audio_present': bool(e.get('audio_stream_present')),
             'audio_codec': e.get('audio_codec'),
-            'runner_audio_rms_dbfs': best['rms_dbfs'],
+            'runner_audio_rms_dbfs': runner_rms,
             'runner_motion_score': best['motion_score'],
+            'runner_motion_score_is_from_different_window': bool(override),
             'runner_window_score': best['score'],
-            'runner_min_full_block_rms_dbfs': float(best.get('min_full_block_rms_dbfs', -120.0)),
-            'runner_quiet_full_block_count': int(best.get('quiet_full_block_count', -1)),
-            'runner_continuous_native_audio': bool(best.get('continuous_native_audio', False)),
+            'runner_min_full_block_rms_dbfs': runner_min_rms,
+            'runner_quiet_full_block_count': runner_quiet,
+            'runner_continuous_native_audio': runner_cont,
             'runner_window_selectable': bool(best.get('selectable', False)),
+            'visual_window_override': bool(override),
+            'visual_window_override_reason': override['reason'] if override else None,
+            'visual_window_override_continuous_native_audio_verified': bool(ostats),
             'runner_audio_visual_probe_passed': True,
             'runner_visual_motion_probe': True,
             'selected_from_runner_probe': True,
