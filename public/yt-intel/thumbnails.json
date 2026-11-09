@@ -1,21 +1,21 @@
 {
   "status": "ok",
   "n": 12,
-  "face_rate": 0.75,
-  "avg_contrast": 0.244,
-  "avg_busy": 1.69,
-  "text_band_energy": 1.45,
+  "face_rate": 0.67,
+  "avg_contrast": 0.252,
+  "avg_busy": 1.77,
+  "text_band_energy": 1.49,
   "hue_families": [
     [
       "red",
-      8
-    ],
-    [
-      "green",
-      2
+      7
     ],
     [
       "teal",
+      3
+    ],
+    [
+      "green",
       2
     ]
   ],
@@ -33,11 +33,11 @@
       1
     ],
     [
-      "#a5685d",
+      "#956752",
       1
     ],
     [
-      "#956752",
+      "#303d46",
       1
     ]
   ],
@@ -118,30 +118,6 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.188,
-      "face_present": true,
-      "face_upper_half": 0.308,
-      "contrast": 0.214,
-      "brightness": 0.204,
-      "accent_share": 0.459,
-      "dominant": {
-        "hex": "#a5685d",
-        "share": 0.459,
-        "hue_deg": 7
-      },
-      "text_edge_energy": {
-        "upper": 1.78,
-        "lower": 1.79,
-        "centre": 1.43
-      },
-      "text_row_span": 95,
-      "busy": 1.51,
-      "id": "d6AhB4teFk8"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
       "face_share": 0.166,
       "face_present": true,
       "face_upper_half": 0.106,
@@ -185,9 +161,33 @@
       "text_row_span": 27,
       "busy": 0.52,
       "id": "dru9WO90e6g"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.104,
+      "face_present": true,
+      "face_upper_half": 0.077,
+      "contrast": 0.286,
+      "brightness": 0.374,
+      "accent_share": 0.666,
+      "dominant": {
+        "hex": "#836250",
+        "share": 0.666,
+        "hue_deg": 22
+      },
+      "text_edge_energy": {
+        "upper": 2.47,
+        "lower": 0.95,
+        "centre": 1.31
+      },
+      "text_row_span": 102,
+      "busy": 1.41,
+      "id": "d5cxElwUeao"
     }
   ],
-  "reading": "face-led: people are the product; house colour is red (8/12 thumbnails)",
+  "reading": "face-led: people are the product; house colour is red (7/12 thumbnails)",
   "topic": "shorts retention hook",
   "taken_from": "newest measured report"
 }

@@ -1,38 +1,38 @@
 {
-  "updated": "2026-11-08T19:07:47.994Z",
+  "updated": "2026-11-09T12:36:49.603Z",
   "reports": [
     {
       "topic": "shorts retention hook",
-      "at": "2026-11-08T19:07:33.000Z",
+      "at": "2026-11-09T12:36:33.000Z",
       "file": "shorts-retention-hook.json",
       "lane": "api",
       "order": "relevance",
       "status": "ok",
       "count": 30,
-      "verdict": "NO",
-      "score": 46.1,
-      "reason": "the numbers do not support a day of production",
+      "verdict": "SHARPEN",
+      "score": 56.5,
+      "reason": "the topic is live but the angle is not yet differentiated",
       "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
       "parts": {
-        "demand": 57.4,
-        "winnability": 26.02857142857144,
-        "mechanism": 50,
+        "demand": 56.6,
+        "winnability": 42.10000000000001,
+        "mechanism": 75,
         "fit": null,
         "timing": 55
       },
       "strongest_against": [
-        "a few videos already own this topic (winnability 26)"
+        "a few videos already own this topic (winnability 42)"
       ],
       "saturation": {
         "videos": 30,
-        "top3_share": 0.814,
-        "winner_ratio": 4142.6,
-        "fresh_share_30d": 0.17,
-        "median_views": 1211,
-        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them"
+        "top3_share": 0.699,
+        "winner_ratio": 3391.3,
+        "fresh_share_30d": 0.21,
+        "median_views": 486,
+        "reading": "distributed — no single video owns it, entry is feasible"
       },
       "confidence": 0.85,
-      "mechanism": 50,
+      "mechanism": 75,
       "vph_median": 1
     },
     {
@@ -210,45 +210,288 @@
   ],
   "comments": [
     {
-      "video": "C4cYO8viGO0",
-      "file": "comments-C4cYO8viGO0.json",
-      "n": 40,
-      "reading": "the audience is asking for more: asked for a sibling topic (2%); the loudest objection is objected to cost (5%) — fix that in the remake; wants the asset (2%) is the conversion surface",
-      "at": "2026-11-08T19:07:34.774Z",
+      "video": "NbxaQUbOys0",
+      "file": "comments-NbxaQUbOys0.json",
+      "n": 25,
+      "reading": "the audience is asking for more: asked for a sibling topic (4%); the loudest objection is said it did not work (4%) — fix that in the remake; wants to buy time/teaching (8%) is the conversion surface",
+      "at": "2026-11-09T12:36:35.366Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
           "n": 1,
-          "share": 0.025
+          "share": 0.04
+        }
+      ],
+      "objections": [
+        {
+          "label": "said it did not work",
+          "n": 1,
+          "share": 0.04
+        },
+        {
+          "label": "objected to pacing/clarity",
+          "n": 1,
+          "share": 0.04
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 2,
+          "share": 0.08
+        },
+        {
+          "label": "wants the asset",
+          "n": 1,
+          "share": 0.04
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 6,
+          "text": "Hi there! I have watched countless videos on yt automation and researched about it for quite a long time. But i simply cant decide the right"
+        },
+        {
+          "likes": 4,
+          "text": "Nice edits, but when the editing is this good it’s usually some bullshit course"
+        }
+      ]
+    },
+    {
+      "video": "eh4k_oGqUKw",
+      "file": "comments-eh4k_oGqUKw.json",
+      "n": 100,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-09T12:36:35.055Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 1,
+          "share": 0.01
+        },
+        {
+          "label": "asked for a sibling topic",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [
+        {
+          "label": "said it did not work",
+          "n": 1,
+          "share": 0.01
+        },
+        {
+          "label": "objected to cost",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 150,
+          "text": "🚀 Join our AI Video Income MasterClass: https://aigrowthcampus.com/workshop"
+        },
+        {
+          "likes": 46,
+          "text": "Nice respected youtube video god bless you 🙏"
+        }
+      ]
+    },
+    {
+      "video": "Nl0O9kIUpcI",
+      "file": "comments-Nl0O9kIUpcI.json",
+      "n": 92,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-09T12:36:34.627Z",
+      "asks": [],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants the asset",
+          "n": 1,
+          "share": 0.011
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 56,
+          "text": "Hhaaannn ji mitro😂"
+        },
+        {
+          "likes": 35,
+          "text": "The growth of your channel is a testament to the incredible value you bring through your content. You consistently deliver something unique "
+        }
+      ]
+    },
+    {
+      "video": "mfvdXlE46ts",
+      "file": "comments-mfvdXlE46ts.json",
+      "n": 30,
+      "reading": "the audience is asking for more: asked for a sibling topic (3%)",
+      "at": "2026-11-09T12:36:00.661Z",
+      "asks": [
+        {
+          "label": "asked for a sibling topic",
+          "n": 1,
+          "share": 0.033
+        }
+      ],
+      "objections": [],
+      "wants": [],
+      "top_liked": [
+        {
+          "likes": 172,
+          "text": "Bro taught us good hool but he himself didn't used it. Respect bro."
+        },
+        {
+          "likes": 28,
+          "text": "Another hook is \"Do you know...\""
+        }
+      ]
+    },
+    {
+      "video": "pdLEHfkwgV8",
+      "file": "comments-pdLEHfkwgV8.json",
+      "n": 99,
+      "reading": "the loudest objection is objected to cost (3%) — fix that in the remake",
+      "at": "2026-11-09T12:36:00.661Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 2,
+          "share": 0.02
+        },
+        {
+          "label": "asked for a sibling topic",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "objections": [
+        {
+          "label": "objected to cost",
+          "n": 3,
+          "share": 0.03
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants the asset",
+          "n": 2,
+          "share": 0.02
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 2249,
+          "text": "Never thought in my life would be learning video editing from messi"
+        },
+        {
+          "likes": 1161,
+          "text": "\"You're still here, aren't you?\"- DAMN. Got me"
+        }
+      ]
+    },
+    {
+      "video": "xJhbirj2tnw",
+      "file": "comments-xJhbirj2tnw.json",
+      "n": 100,
+      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
+      "at": "2026-11-09T12:36:00.661Z",
+      "asks": [],
+      "objections": [
+        {
+          "label": "objected to pacing/clarity",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "wants": [],
+      "top_liked": [
+        {
+          "likes": 7666,
+          "text": "Dosto, 1 LIKE👍aur 1 Subscriibe🔔karke aap Apne Questions Pucho!!!👇\nNiche Comment Karo✍ I'll check it, Correct it and Tell you How to go Vi"
+        },
+        {
+          "likes": 5979,
+          "text": "आज पहली बार पता चला कि comment पर 2 बार क्लिक करने से Like होता है...😂"
+        }
+      ]
+    },
+    {
+      "video": "xwNRyKItpOk",
+      "file": "comments-xwNRyKItpOk.json",
+      "n": 100,
+      "reading": "wants to buy time/teaching (5%) is the conversion surface",
+      "at": "2026-11-09T12:36:00.661Z",
+      "asks": [
+        {
+          "label": "asked for a sequel",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 5,
+          "share": 0.05
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 3103,
+          "text": "Awesome content and I wish I have watched this before starting my channel. But at the end of the day the most important thing is how popular"
+        },
+        {
+          "likes": 2321,
+          "text": "To the person reading this, I pray you become a successful youtuber"
+        }
+      ]
+    },
+    {
+      "video": "zxFZE_-w54Y",
+      "file": "comments-zxFZE_-w54Y.json",
+      "n": 100,
+      "reading": "the audience is asking for more: asked for a sibling topic (3%)",
+      "at": "2026-11-09T12:36:00.661Z",
+      "asks": [
+        {
+          "label": "asked for a sibling topic",
+          "n": 3,
+          "share": 0.03
         }
       ],
       "objections": [
         {
           "label": "objected to cost",
           "n": 2,
-          "share": 0.05
+          "share": 0.02
         },
         {
           "label": "said it did not work",
           "n": 1,
-          "share": 0.025
+          "share": 0.01
         }
       ],
-      "wants": [
-        {
-          "label": "wants the asset",
-          "n": 1,
-          "share": 0.025
-        }
-      ],
+      "wants": [],
       "top_liked": [
         {
-          "likes": 5,
-          "text": "Thanks for watching\n\nCheck out my Step by Step Youtube Automation Guide: https://bit.ly/AIFacelessBlueprint"
+          "likes": 66,
+          "text": "I just started posting videos a few weeks ago, and when someone liked, subscribed, and left a comment, I nearly cried. It wasn't perfect, bu"
         },
         {
-          "likes": 5,
-          "text": "Thousands in free value in here bro thanks im will make this happen"
+          "likes": 54,
+          "text": "You can see in this guy's eyes he knows what he's talking about"
         }
       ]
     },
@@ -257,7 +500,7 @@
       "file": "comments-0d5GoN0P5zM.json",
       "n": 100,
       "reading": "wants the asset (5%) is the conversion surface",
-      "at": "2026-11-08T19:07:34.500Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [
         {
@@ -285,43 +528,11 @@
       ]
     },
     {
-      "video": "As7abwNhG7Y",
-      "file": "comments-As7abwNhG7Y.json",
-      "n": 100,
-      "reading": "wants to buy time/teaching (8%) is the conversion surface",
-      "at": "2026-11-08T19:07:33.979Z",
-      "asks": [
-        {
-          "label": "asked for a sibling topic",
-          "n": 1,
-          "share": 0.01
-        }
-      ],
-      "objections": [],
-      "wants": [
-        {
-          "label": "wants to buy time/teaching",
-          "n": 8,
-          "share": 0.08
-        }
-      ],
-      "top_liked": [
-        {
-          "likes": 6100,
-          "text": "Can’t believe someone who is 18 years old has mastered content creation like this. It’s incredibly impressive."
-        },
-        {
-          "likes": 4122,
-          "text": "She is a scientist by mind... she studied her subjects, tested hypotheses, reviewed and drew conclusions before starting another hypothesis."
-        }
-      ]
-    },
-    {
       "video": "4q9kjy_DWzk",
       "file": "comments-4q9kjy_DWzk.json",
       "n": 100,
       "reading": "wants to buy time/teaching (4%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -364,7 +575,7 @@
       "file": "comments-5tOADMwGeBI.json",
       "n": 100,
       "reading": "wants to buy time/teaching (11%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -402,7 +613,7 @@
       "file": "comments-954L0eVIdaE.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -441,11 +652,43 @@
       ]
     },
     {
+      "video": "As7abwNhG7Y",
+      "file": "comments-As7abwNhG7Y.json",
+      "n": 100,
+      "reading": "wants to buy time/teaching (8%) is the conversion surface",
+      "at": "2026-11-09T12:36:00.660Z",
+      "asks": [
+        {
+          "label": "asked for a sibling topic",
+          "n": 1,
+          "share": 0.01
+        }
+      ],
+      "objections": [],
+      "wants": [
+        {
+          "label": "wants to buy time/teaching",
+          "n": 8,
+          "share": 0.08
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 6100,
+          "text": "Can’t believe someone who is 18 years old has mastered content creation like this. It’s incredibly impressive."
+        },
+        {
+          "likes": 4122,
+          "text": "She is a scientist by mind... she studied her subjects, tested hypotheses, reviewed and drew conclusions before starting another hypothesis."
+        }
+      ]
+    },
+    {
       "video": "Bbjv9-00tv0",
       "file": "comments-Bbjv9-00tv0.json",
       "n": 100,
       "reading": "the loudest objection is objected to cost (3%) — fix that in the remake; wants to buy time/teaching (10%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [
         {
@@ -483,11 +726,54 @@
       ]
     },
     {
+      "video": "C4cYO8viGO0",
+      "file": "comments-C4cYO8viGO0.json",
+      "n": 40,
+      "reading": "the audience is asking for more: asked for a sibling topic (2%); the loudest objection is objected to cost (5%) — fix that in the remake; wants the asset (2%) is the conversion surface",
+      "at": "2026-11-09T12:36:00.660Z",
+      "asks": [
+        {
+          "label": "asked for a sibling topic",
+          "n": 1,
+          "share": 0.025
+        }
+      ],
+      "objections": [
+        {
+          "label": "objected to cost",
+          "n": 2,
+          "share": 0.05
+        },
+        {
+          "label": "said it did not work",
+          "n": 1,
+          "share": 0.025
+        }
+      ],
+      "wants": [
+        {
+          "label": "wants the asset",
+          "n": 1,
+          "share": 0.025
+        }
+      ],
+      "top_liked": [
+        {
+          "likes": 5,
+          "text": "Thanks for watching\n\nCheck out my Step by Step Youtube Automation Guide: https://bit.ly/AIFacelessBlueprint"
+        },
+        {
+          "likes": 5,
+          "text": "Thousands in free value in here bro thanks im will make this happen"
+        }
+      ]
+    },
+    {
       "video": "CV-k6rPJvJY",
       "file": "comments-CV-k6rPJvJY.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -519,7 +805,7 @@
       "file": "comments-DHjR3HpA0PI.json",
       "n": 32,
       "reading": "the loudest objection is said it did not work (6%) — fix that in the remake; wants to buy time/teaching (6%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [
         {
@@ -551,7 +837,7 @@
       "file": "comments-FWE3fu_0Sfc.json",
       "n": 80,
       "reading": "wants to buy time/teaching (2%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -599,7 +885,7 @@
       "file": "comments-IPW-MF8Kp0I.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [],
       "wants": [
@@ -625,7 +911,7 @@
       "file": "comments-J-suhuECjBw.json",
       "n": 100,
       "reading": "wants to buy time/teaching (4%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [],
       "wants": [
@@ -656,7 +942,7 @@
       "file": "comments-NAF-v1HEF2g.json",
       "n": 49,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [],
       "wants": [
@@ -682,7 +968,7 @@
       "file": "comments-O0qkkexHqZw.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -720,7 +1006,7 @@
       "file": "comments-OTLxMmrMyYo.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [
         {
@@ -752,7 +1038,7 @@
       "file": "comments-VjpY2cETzy4.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -789,7 +1075,7 @@
       "file": "comments-WlRt8Ov4kBk.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [],
       "wants": [],
@@ -809,7 +1095,7 @@
       "file": "comments-Yhl3J1L1yFE.json",
       "n": 100,
       "reading": "wants the asset (6%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [
         {
@@ -841,7 +1127,7 @@
       "file": "comments-bXpF_NHalO4.json",
       "n": 99,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [],
       "objections": [],
       "wants": [],
@@ -861,7 +1147,7 @@
       "file": "comments-d_csri5M9xw.json",
       "n": 100,
       "reading": "the audience is asking for more: asked for a sibling topic (3%)",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sibling topic",
@@ -904,7 +1190,7 @@
       "file": "comments-m8J7t1JXCLA.json",
       "n": 100,
       "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
+      "at": "2026-11-09T12:36:00.660Z",
       "asks": [
         {
           "label": "asked for a sequel",
@@ -930,190 +1216,26 @@
           "text": "Really helpful"
         }
       ]
-    },
-    {
-      "video": "mfvdXlE46ts",
-      "file": "comments-mfvdXlE46ts.json",
-      "n": 30,
-      "reading": "the audience is asking for more: asked for a sibling topic (3%)",
-      "at": "2026-11-08T19:07:05.072Z",
-      "asks": [
-        {
-          "label": "asked for a sibling topic",
-          "n": 1,
-          "share": 0.033
-        }
-      ],
-      "objections": [],
-      "wants": [],
-      "top_liked": [
-        {
-          "likes": 172,
-          "text": "Bro taught us good hool but he himself didn't used it. Respect bro."
-        },
-        {
-          "likes": 28,
-          "text": "Another hook is \"Do you know...\""
-        }
-      ]
-    },
-    {
-      "video": "pdLEHfkwgV8",
-      "file": "comments-pdLEHfkwgV8.json",
-      "n": 99,
-      "reading": "the loudest objection is objected to cost (3%) — fix that in the remake",
-      "at": "2026-11-08T19:07:05.072Z",
-      "asks": [
-        {
-          "label": "asked for a sequel",
-          "n": 2,
-          "share": 0.02
-        },
-        {
-          "label": "asked for a sibling topic",
-          "n": 2,
-          "share": 0.02
-        }
-      ],
-      "objections": [
-        {
-          "label": "objected to cost",
-          "n": 3,
-          "share": 0.03
-        }
-      ],
-      "wants": [
-        {
-          "label": "wants the asset",
-          "n": 2,
-          "share": 0.02
-        }
-      ],
-      "top_liked": [
-        {
-          "likes": 2249,
-          "text": "Never thought in my life would be learning video editing from messi"
-        },
-        {
-          "likes": 1161,
-          "text": "\"You're still here, aren't you?\"- DAMN. Got me"
-        }
-      ]
-    },
-    {
-      "video": "xJhbirj2tnw",
-      "file": "comments-xJhbirj2tnw.json",
-      "n": 100,
-      "reading": "nothing cleared the 2.5% floor — this comment field cannot brief a video. That is a real finding: choose a video whose audience is asking, not one that merely has the most comments",
-      "at": "2026-11-08T19:07:05.072Z",
-      "asks": [],
-      "objections": [
-        {
-          "label": "objected to pacing/clarity",
-          "n": 1,
-          "share": 0.01
-        }
-      ],
-      "wants": [],
-      "top_liked": [
-        {
-          "likes": 7666,
-          "text": "Dosto, 1 LIKE👍aur 1 Subscriibe🔔karke aap Apne Questions Pucho!!!👇\nNiche Comment Karo✍ I'll check it, Correct it and Tell you How to go Vi"
-        },
-        {
-          "likes": 5979,
-          "text": "आज पहली बार पता चला कि comment पर 2 बार क्लिक करने से Like होता है...😂"
-        }
-      ]
-    },
-    {
-      "video": "xwNRyKItpOk",
-      "file": "comments-xwNRyKItpOk.json",
-      "n": 100,
-      "reading": "wants to buy time/teaching (5%) is the conversion surface",
-      "at": "2026-11-08T19:07:05.072Z",
-      "asks": [
-        {
-          "label": "asked for a sequel",
-          "n": 1,
-          "share": 0.01
-        }
-      ],
-      "objections": [],
-      "wants": [
-        {
-          "label": "wants to buy time/teaching",
-          "n": 5,
-          "share": 0.05
-        }
-      ],
-      "top_liked": [
-        {
-          "likes": 3103,
-          "text": "Awesome content and I wish I have watched this before starting my channel. But at the end of the day the most important thing is how popular"
-        },
-        {
-          "likes": 2321,
-          "text": "To the person reading this, I pray you become a successful youtuber"
-        }
-      ]
-    },
-    {
-      "video": "zxFZE_-w54Y",
-      "file": "comments-zxFZE_-w54Y.json",
-      "n": 100,
-      "reading": "the audience is asking for more: asked for a sibling topic (3%)",
-      "at": "2026-11-08T19:07:05.072Z",
-      "asks": [
-        {
-          "label": "asked for a sibling topic",
-          "n": 3,
-          "share": 0.03
-        }
-      ],
-      "objections": [
-        {
-          "label": "objected to cost",
-          "n": 2,
-          "share": 0.02
-        },
-        {
-          "label": "said it did not work",
-          "n": 1,
-          "share": 0.01
-        }
-      ],
-      "wants": [],
-      "top_liked": [
-        {
-          "likes": 66,
-          "text": "I just started posting videos a few weeks ago, and when someone liked, subscribed, and left a comment, I nearly cried. It wasn't perfect, bu"
-        },
-        {
-          "likes": 54,
-          "text": "You can see in this guy's eyes he knows what he's talking about"
-        }
-      ]
     }
   ],
   "thumbnails": {
     "topic": "shorts retention hook",
     "n": 12,
-    "face_rate": 0.75,
-    "avg_contrast": 0.244,
-    "avg_busy": 1.69,
-    "reading": "face-led: people are the product; house colour is red (8/12 thumbnails)",
+    "face_rate": 0.67,
+    "avg_contrast": 0.252,
+    "avg_busy": 1.77,
+    "reading": "face-led: people are the product; house colour is red (7/12 thumbnails)",
     "hue_families": [
       [
         "red",
-        8
-      ],
-      [
-        "green",
-        2
+        7
       ],
       [
         "teal",
+        3
+      ],
+      [
+        "green",
         2
       ]
     ],
