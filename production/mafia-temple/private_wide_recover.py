@@ -57,13 +57,36 @@ def kaggle_env():
     else:env['KAGGLE_KEY']=raw;env.pop('KAGGLE_API_TOKEN',None)
     return env,username
 
+def restart_if_stalled(env, ref, slug, root):
+    # This one-time opt-in is only for our own research kernel. Never delete a
+    # running/completed kernel or one whose state cannot be determined.
+    for _ in range(2):
+        result=subprocess.run(['kaggle','kernels','status',ref],env=env,capture_output=True,text=True,timeout=45)
+        text=(result.stdout+' '+result.stderr).upper()
+        if result.returncode or not re.search(r'\bQUEUED\b',text) or any(x in text for x in ('RUNNING','COMPLETE','ERROR','FAIL','CANCEL')):
+            print('::notice title=private-research::Not restarting: kernel is no longer confirmed queued',flush=True)
+            return
+        time.sleep(3)
+    code=pathlib.Path('production/mafia-temple/private_wide_kernel.py').read_text();compile(code,'private_notebook','exec')
+    nb={'cells':[{'cell_type':'code','execution_count':None,'metadata':{},'outputs':[],'source':code.splitlines(True)}],'metadata':{'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'},'language_info':{'name':'python'}},'nbformat':4,'nbformat_minor':5}
+    (root/'main.ipynb').write_text(json.dumps(nb))
+    metadata={'id':ref,'title':slug,'code_file':'main.ipynb','language':'python','kernel_type':'notebook','is_private':True,'enable_gpu':True,'enable_internet':True,'dataset_sources':[],'competition_sources':[],'kernel_sources':[],'model_sources':[],'machine_shape':'NvidiaTeslaT4'}
+    (root/'kernel-metadata.json').write_text(json.dumps(metadata))
+    subprocess.run(['kaggle','kernels','delete',ref,'-y'],env=env,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,check=True,timeout=90)
+    print('::notice title=private-research::Removed only the confirmed queued research kernel',flush=True)
+    subprocess.run(['kaggle','kernels','push','-p',str(root)],env=env,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,check=True,timeout=90)
+    print('::notice title=private-research::Submitted replacement private GPU research',flush=True)
+
+
 def main():
     session=capability();print('::notice title=private-research::Private transfer configured',flush=True)
     env,user=kaggle_env();slug='monarch-private-wide-42648167419';ref=user+'/'+slug
     with tempfile.TemporaryDirectory(prefix='private-research-') as tmp:
         root=pathlib.Path(tmp);out=root/'out';out.mkdir()
-        # Recover the already-submitted private kernel; never push or expose media.
-        print('::notice title=private-research::Waiting on existing private GPU research',flush=True)
+        if os.environ.get('RESTART_STALLED')=='true':
+            restart_if_stalled(env,ref,slug,root)
+        # Recover the private kernel; never expose media publicly.
+        print('::notice title=private-research::Waiting on private GPU research',flush=True)
         # Allow approximately 5.5 hours of queueing, leaving time within the
         # six-hour job limit for private setup, result verification and upload.
         for _ in range(440):

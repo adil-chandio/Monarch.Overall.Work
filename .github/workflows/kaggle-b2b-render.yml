@@ -54,6 +54,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           S_COMPALI: ${{ secrets.COMPALI }}
+          RESTART_STALLED: ${{ contains(github.event.head_commit.message, 'restart-stalled') }}
         run: python production/mafia-temple/private_wide_recover.py
 
   private-gpu-availability-probe:
