@@ -28,7 +28,10 @@ opener=urllib.request.build_opener(NoRedirect)
 def token():
     issuer=os.environ['ACTIONS_ID_TOKEN_REQUEST_URL']
     req=urllib.request.Request(issuer+'&audience='+urllib.parse.quote(audience,safe=''),headers={'Authorization':'Bearer '+os.environ['ACTIONS_ID_TOKEN_REQUEST_TOKEN']})
-    with opener.open(req,timeout=20) as r:return json.load(r)['value']
+    with opener.open(req,timeout=20) as r:
+        result=json.load(r)['value']
+    print('::notice title=relay-stage::OIDC token obtained',flush=True)
+    return result
 
 def request(path,data=None):
     headers={'Authorization':'Bearer '+token()}

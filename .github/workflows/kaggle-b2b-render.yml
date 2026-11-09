@@ -51,7 +51,18 @@ jobs:
         env:
           RELAY_URL: ${{ inputs.relay_url }}
           RELAY_AUDIENCE: ${{ inputs.relay_audience }}
-        run: python production/mafia-temple/private_relay_smoke.py
+        run: |
+          python - <<'PY'
+          import runpy, sys, urllib.error
+          try:
+              runpy.run_path('production/mafia-temple/private_relay_smoke.py', run_name='__main__')
+          except Exception as exc:
+              detail = type(exc).__name__
+              if isinstance(exc, urllib.error.HTTPError): detail += ' HTTP ' + str(exc.code)
+              elif isinstance(exc, urllib.error.URLError): detail += ' ' + type(exc.reason).__name__
+              print('::error title=Relay smoke failure::' + detail, flush=True)
+              sys.exit(1)
+          PY
 
   kaggle-dual-t4:
     if: ${{ github.ref_name == 'arena/9960286a-monarch-overall-work' && (github.event_name != 'workflow_dispatch' || inputs.render_mafia != true) }}
@@ -235,7 +246,7 @@ jobs:
           done
 
   mafia-temple-render:
-    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && (github.event_name == 'push' || inputs.render_mafia == true) && inputs.private_relay_test != true }}
+    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && (github.event_name == 'push' || inputs.render_mafia == true) && inputs.private_relay_test != true && !contains(github.event.head_commit.message, 'private-relay-smoke') }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
