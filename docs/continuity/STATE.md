@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-09T04:08:15Z`
-- Last event: `evt-065-monarch-cam-v7-continuous-audio-diagnostic-passed`
+- Updated: `2026-11-09T04:18:11Z`
+- Last event: `evt-066-monarch-cam-v7-qc-ledger-fix`
 
 ## Active channel
 ```json
@@ -39,12 +39,12 @@
   ],
   "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "V7 audio-window diagnostic 42559696919 passed all steps. Seven selected windows now have continuous native audio: 17 complete 0.5s blocks each, zero quiet blocks, and all blocks above -65 dBFS. Full V7 CI retry with unchanged nine web gates is pending.",
+  "current_step": "Full V7 CI run 42560161988 rendered and muxed a runner-only MP4; all nine unchanged web audio gates passed. Technical QC then stopped on a ledger key mismatch (visual_v7_qc.json lacked blurred_background_fill). The renderer now writes the same flag as the layout manifest, sampled-frame metrics are logged, and failure evidence can be uploaded. A clean full V7 CI retry is pending; no committed V7 MP4 or QC evidence exists.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
-  "next_action": "Trigger full V7 CI, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
+  "next_action": "Trigger the clean full V7 CI retry, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
   "space": "yt-automation",
-  "status": "v7_full_ci_retry_pending",
+  "status": "v7_qc_contract_fix_ci_pending",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```

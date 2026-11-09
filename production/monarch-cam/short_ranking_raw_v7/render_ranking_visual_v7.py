@@ -344,6 +344,7 @@ def write_visual_qc(ledger, payoff_frames, layout):
         'edition': 'social_origin_v7',
         'full_frame_preserved': True, 'sharp_source_frame_uncut': True,
         'source_aspect_preserved': True, 'full_screen_blur_background': True,
+        'blurred_background_fill': True,
         'no_crop': True, 'no_cut_off': True, 'no_black_bars': True,
         'no_letterbox': True, 'no_black_empty_top': True,
         'no_hook_black_fill': True, 'no_black_panels': True,

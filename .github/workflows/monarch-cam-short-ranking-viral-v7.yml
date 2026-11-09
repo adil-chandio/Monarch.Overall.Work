@@ -242,6 +242,34 @@ jobs:
               print(json.dumps({k: d.get(k) for k in keys}, indent=2))
           PY
 
+      - name: Upload V7 failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-viral-style-v7-failure-${{ github.sha }}
+          path: |
+            ${{ env.V7_MP4 }}
+            ${{ env.V7_REVIEW }}/cover*.jpg
+            ${{ env.V7_REVIEW }}/frame_*.jpg
+            ${{ env.V7_REVIEW }}/payoff_frame_*.jpg
+            ${{ env.V7_REVIEW }}/candidates/candidate_*_sheet_*.jpg
+            ${{ env.V7_REVIEW }}/source_poster.jpg
+            ${{ env.V7_REVIEW }}/audio_qc.json
+            ${{ env.V7_REVIEW }}/audio_qc.log
+            ${{ env.V7_REVIEW }}/native_audio_ledger.json
+            ${{ env.V7_REVIEW }}/source_audio_audit.json
+            ${{ env.V7_REVIEW }}/selected_windows.json
+            ${{ env.V7_REVIEW }}/verified_sources.json
+            ${{ env.V7_REVIEW }}/social_origin_ledger.json
+            ${{ env.V7_REVIEW }}/source_video_ledger.json
+            ${{ env.V7_REVIEW }}/layout_manifest.json
+            ${{ env.V7_REVIEW }}/visual_v7_qc.json
+            ${{ env.V7_REVIEW }}/visual_edit_ledger.json
+            ${{ env.V7_REVIEW }}/visual_review_lock.json
+            ${{ env.V7_REVIEW }}/review-manifest.json
+          retention-days: 7
+          if-no-files-found: warn
+
       - name: Commit V7 MP4 and generated review evidence
         run: |
           git config user.name "github-actions[bot]"

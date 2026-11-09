@@ -4,17 +4,17 @@
   "branch": "arena/2b012328-monarch-overall-work",
   "head_at_capture": "8cb1e6abf64074db6ff7bfe3dcd496594f329780",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-09T04:08:15Z",
-  "last_event_id": "evt-065-monarch-cam-v7-continuous-audio-diagnostic-passed",
+  "updated_at": "2026-11-09T04:18:11Z",
+  "last_event_id": "evt-066-monarch-cam-v7-qc-ledger-fix",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "v7_full_ci_retry_pending",
+    "status": "v7_qc_contract_fix_ci_pending",
     "space": "yt-automation",
     "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
-    "current_step": "V7 audio-window diagnostic 42559696919 passed all steps. Seven selected windows now have continuous native audio: 17 complete 0.5s blocks each, zero quiet blocks, and all blocks above -65 dBFS. Full V7 CI retry with unchanged nine web gates is pending.",
-    "next_action": "Trigger full V7 CI, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
+    "current_step": "Full V7 CI run 42560161988 rendered and muxed a runner-only MP4; all nine unchanged web audio gates passed. Technical QC then stopped on a ledger key mismatch (visual_v7_qc.json lacked blurred_background_fill). The renderer now writes the same flag as the layout manifest, sampled-frame metrics are logged, and failure evidence can be uploaded. A clean full V7 CI retry is pending; no committed V7 MP4 or QC evidence exists.",
+    "next_action": "Trigger the clean full V7 CI retry, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
     "blocking_gaps": [
       "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
       "No complete Arena chat export/JSON",
@@ -195,7 +195,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_full_ci_retry_pending",
+    "status": "v7_qc_contract_fix_ci_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -243,6 +243,35 @@
       "caption_fail_source_start": 75.5,
       "nose_wheelie_source_start": 1.0,
       "note": "Runner-only diagnostic; not a V7 deliverable or creative acceptance."
+    },
+    "full_ci_run_1": {
+      "run_id": "42560161988",
+      "job_id": "128974608119",
+      "conclusion": "failure",
+      "duration": "6m17s",
+      "steps_1_through_14": "success",
+      "failed_step": "Technical QC with sampled-frame and rights checks",
+      "cause": "technical_qc_v7.py expected visual_v7_qc.json['blurred_background_fill'], but the renderer's visual QC ledger recorded only full_screen_blur_background. The layout manifest already recorded the correct flag.",
+      "nine_web_audio_gates": "all PASS on the delivered AAC stream (I -14.39 LUFS, LRA 9.14 LU, peak -2.19 dBFS, movement 26.46 dB, no clicks)",
+      "runner_only_mp4": {
+        "bytes": 21916389,
+        "duration_seconds": 60.0,
+        "resolution": "1080x1920",
+        "fps": 30,
+        "codecs": "h264/aac",
+        "committed": false
+      },
+      "rights_flags": "eight objective rights-ledger flags true",
+      "no_artifact": true,
+      "no_committed_review_evidence": true,
+      "note": "Runner-only MP4 and sampled frames were not user-visible or committed; no human review or acceptance."
+    },
+    "qc_contract_fix": {
+      "status": "implemented_pending_ci",
+      "renderer_visual_ledger_flag_added": "blurred_background_fill",
+      "web_gates_changed": false,
+      "audio_added_or_substituted": false,
+      "failure_evidence_upload": true
     }
   }
 }

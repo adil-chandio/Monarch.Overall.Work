@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v7_full_ci_retry_pending",
+  "status": "v7_qc_contract_fix_ci_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -124,7 +124,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_full_ci_retry_pending",
+    "status": "v7_qc_contract_fix_ci_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -184,6 +184,33 @@
       "caption_fail_source_start": 75.5,
       "nose_wheelie_source_start": 1.0,
       "note": "Runner-only diagnostic; not a V7 deliverable or creative acceptance."
+    },
+    "full_ci_run_1": {
+      "run_id": "42560161988",
+      "job_id": "128974608119",
+      "conclusion": "failure",
+      "duration": "6m17s",
+      "steps_1_through_14": "success",
+      "failed_step": "Technical QC with sampled-frame and rights checks",
+      "cause": "technical_qc_v7.py expected visual_v7_qc.json['blurred_background_fill'], but the renderer's visual QC ledger recorded only full_screen_blur_background. The layout manifest already recorded the correct flag.",
+      "nine_web_audio_gates": "all PASS on the delivered AAC stream (I -14.39 LUFS, LRA 9.14 LU, peak -2.19 dBFS, movement 26.46 dB, no clicks)",
+      "runner_only_mp4": {
+        "bytes": 21916389,
+        "duration_seconds": 60.0,
+        "resolution": "1080x1920",
+        "fps": 30,
+        "codecs": "h264/aac",
+        "committed": false
+      },
+      "rights_flags": "eight objective rights-ledger flags true",
+      "no_artifact": true,
+      "no_committed_review_evidence": true,
+      "note": "Runner-only MP4 and sampled frames were not user-visible or committed; no human review or acceptance."
+    },
+    "qc_contract_fix": {
+      "problem": "visual_v7_qc.json omitted blurred_background_fill even though layout_manifest.json and the edit ledger recorded it; technical_qc_v7.py raised KeyError.",
+      "fix": "Renderer visual QC ledger now records blurred_background_fill=True. No QC threshold, web gate or audio policy was weakened. Failure evidence upload and sampled-frame metric logging were added for diagnosis.",
+      "pending_ci_verification": true
     }
   }
 }

@@ -523,3 +523,11 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Evidence level: `repo_evidence`
 - Details: Diagnostic run 42559696919 / job 128973180485 completed success with artifact 13648638723. Eight candidates passed the audio/visual probe; all seven selected windows have 17 complete 0.5s blocks, zero quiet blocks and every block above -65 dBFS. caption_fail moved to source_start 75.5 and nose_wheelie to 1.0. This is runner-only objective evidence, not a V7 MP4, human listening or acceptance. Full V7 CI with unchanged nine web gates is pending.
 - Ref: `42559696919,42547437901,e276fb3`
+
+## `2026-11-09T04:18:11Z` · evt-066-monarch-cam-v7-qc-ledger-fix · checkpoint
+
+- Title: V7 full CI passed nine web audio gates but stopped on a visual-QC ledger key
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Full V7 run 42560161988 / job 128974608119 completed failure in 6m17s after steps 1-14 succeeded. The runner-only 21916389-byte 60s MP4 passed all nine unchanged web audio gates (I -14.39 LUFS, LRA 9.14 LU, peak -2.19 dBFS, movement 26.46 dB, no clicks). Technical QC raised KeyError blurred_background_fill because the renderer visual QC ledger omitted a key already present in the layout and edit ledgers. The renderer now writes blurred_background_fill=True; technical QC logs sampled-frame metrics and a failure-only artifact can upload runner evidence. No gate, threshold, audio policy or rights check was weakened. Clean full CI verification is pending; no committed MP4 or user-visible V7 evidence exists.
+- Ref: `42560161988,42559696919,c19b422`

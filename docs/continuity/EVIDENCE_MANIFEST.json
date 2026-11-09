@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T04:08:44Z",
-  "head": "e276fb37c4ebe35d1d3129552009eb1163b62954",
+  "generated_at": "2026-11-09T04:19:04Z",
+  "head": "c19b4222ba7424fe7f93232203986c4303a9eb00",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
-      "bytes": 14506,
-      "sha256": "f116b4b4fb3374df745eca8ff1d3a4ba079779e96ee2c2214f9562c90d2f23bb",
+      "bytes": 15772,
+      "sha256": "1c13f7ff7107c4ab43a72f92a2a1ee9ed50df6bac5aea03642f5673a63fb135d",
       "evidence_level": "archive_metadata"
     },
     {
@@ -121,7 +121,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4658,
-      "sha256": "132ff2190f39dd3b1a78b20c94a095dfa753148f1b11d08890862a1bd62c5a41",
+      "sha256": "999ad57b3a997e5c459ea9097ad0aaa3be7f40e4e07b043e995eebd5b34c7506",
       "evidence_level": "state_ledger"
     },
     {
@@ -132,8 +132,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 31977,
-      "sha256": "07e9cdb50da090a4efaea933b555b818c0626f5e609fc3e6d771837f812e19b5",
+      "bytes": 33014,
+      "sha256": "16723ecb8262866608dcaece0f53e5de2fdc263779ace3e7f9af9d0ad013429a",
       "evidence_level": "state_ledger"
     },
     {
@@ -162,8 +162,8 @@
     },
     {
       "path": "docs/continuity/PROBLEMS_FIXES.md",
-      "bytes": 19833,
-      "sha256": "a9b82eba66c40007033996bfaaf8c301da560192e216ba76e0199b7d058ad456",
+      "bytes": 21543,
+      "sha256": "fde7d188f547b5226fc96930c8843f536f9a09e00a65480ccb605bdbdb5354b6",
       "evidence_level": "operating_contract"
     },
     {
@@ -192,8 +192,8 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 14301,
-      "sha256": "5b6fe8fd7bf51af9c96778677f40d6bd2f65a5e872d72fa1a2119f1dfe70669d",
+      "bytes": 15836,
+      "sha256": "de0e7a92e7c8b1676541ac8692c398ea3b79449a32b1828c476a8eb4692935e1",
       "evidence_level": "state_ledger"
     },
     {
@@ -228,8 +228,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
-      "bytes": 10154,
-      "sha256": "c6c90df3007d275568099f2083c4460c9364fee9340ed6e6f326a581e9b62058",
+      "bytes": 11728,
+      "sha256": "1b345a17795db8ed4c1f22b4e6645edd886d073d4e2441136aca0d3aa94021a9",
       "evidence_level": "operating_contract"
     },
     {
@@ -246,8 +246,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
-      "bytes": 6038,
-      "sha256": "12c9383803c3650cf22d09e0d2147ae3d6f2e9514cea959898c60f489bcea2da",
+      "bytes": 6409,
+      "sha256": "8af5ace9101a808529e9c7afbd0720386da380363305988ac9e3d140e83f7ca1",
       "evidence_level": "operating_contract"
     },
     {
@@ -2190,8 +2190,8 @@
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/RENDER_TRIGGER_V7.md",
-      "bytes": 655,
-      "sha256": "112229492d9a768ae7443551d927e773623911a7d0e9e587a8c8de96d55a25f0",
+      "bytes": 825,
+      "sha256": "9cf14a9a72545f7c3baeada67c2384e6c6eae5ebc8e2129d45615c052fe3ad52",
       "evidence_level": "repo_evidence"
     },
     {
@@ -2226,8 +2226,8 @@
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/render_ranking_visual_v7.py",
-      "bytes": 24697,
-      "sha256": "f6161140357d082206a2ef9d6745e2e87effdf3f21b877114e99f247593a57d3",
+      "bytes": 24738,
+      "sha256": "9004b3e00aeead7290df30b0fa82c10b8d1f2724737ec0db583f14ad20e9a855",
       "evidence_level": "repo_evidence"
     },
     {
@@ -2256,8 +2256,8 @@
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/technical_qc_v7.py",
-      "bytes": 15974,
-      "sha256": "0e38674d30d270ef69270eda46c127c6a051e61035007a9bd9be9d1b7a83d750",
+      "bytes": 16044,
+      "sha256": "5c02b6bba40cb4b0e829910d70d2efcc47a9cb9823b84587a905c944df04023e",
       "evidence_level": "repo_evidence"
     },
     {

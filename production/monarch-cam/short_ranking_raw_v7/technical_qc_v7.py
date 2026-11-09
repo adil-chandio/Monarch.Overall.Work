@@ -125,6 +125,7 @@ def main():
     key = txt.rfind('{')
     lj = json.loads(txt[key:txt.rfind('}') + 1]) if key >= 0 else {}
     frames = sample_frames()
+    print('V7 sampled frame metrics', json.dumps(frames), flush=True)
     guardrail_keys = [
         'full_motion_review', 'native_audio_listening', 'human_approval', 'sign_off',
         'audience_result_promise', 'virality_guarantee', 'perfection_claim', 'retention_claim',

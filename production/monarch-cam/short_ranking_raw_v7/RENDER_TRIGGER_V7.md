@@ -5,3 +5,5 @@ Pushing a change to this file intentionally starts the V7 workflow. The first pu
 The `2026-11-09` retry uses continuous half-second native-audio windows so the unchanged web gates are measured on real native source audio rather than long silent gaps. Generated review evidence is still committed back with `[skip ci]`.
 
 Full V7 CI retry with continuously audible native-audio windows requested at 2026-11-09T04:08:15Z. The nine web gates remain unchanged.
+
+Clean V7 CI retry after the visual-QC ledger key fix requested at 2026-11-09T04:18:11Z. The nine web gates and continuous native-audio source contract remain unchanged.
