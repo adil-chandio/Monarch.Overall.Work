@@ -1,0 +1,36 @@
+name: Transfer encrypted shared video for forensic review
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/forensic/encrypted_transfer.py, scripts/forensic/transfer-public.pem, .github/workflows/forensic-encrypted-transfer.yml]
+permissions:
+  contents: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Retrieve shared source
+        run: |
+          python -m pip install -q 'gdown==5.2.0'
+          gdown --id 1KOpLeqa8LjHkf3oGs-7F5dZ0JFreI-X8 -O "$RUNNER_TEMP/source.mp4"
+      - name: Encrypt and transfer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/forensic/encrypted_transfer.py
+      - name: Record ciphertext identifiers
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/encrypted-video-transfer.json
+          git commit -m 'Record encrypted transfer manifest [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
+      - name: Remove runner files
+        if: always()
+        run: rm -f "$RUNNER_TEMP/source.mp4" "$RUNNER_TEMP/source.enc" "$RUNNER_TEMP/pass" "$RUNNER_TEMP/pass.enc"
