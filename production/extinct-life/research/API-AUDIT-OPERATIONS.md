@@ -60,3 +60,5 @@ Run [42677248759](https://github.com/adil-chandio/Monarch.Overall.Work/actions/r
 The runner initially emitted Node-action/rolling-Ubuntu migration warnings. The workflow now pins the reviewed official action release commits (Node 24 compatible) and uses `ubuntu-24.04`, with a regression test to prevent accidentally restoring floating action tags or the rolling image.
 
 This is public-metadata research only, not completed frame-by-frame/continuous-listening study. Follow-up comparative screening is still required. In particular, Vasuki searches also returned mythology and the broader frozen-animal searches returned unrelated material: raw million-view search hits are not automatically relevant or scientifically reliable references.
+
+Final pinned-action/Ubuntu verification also passed end-to-end: [run 42677601484](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42677601484), with API receipt `git_commit: 65bbc1356b28131d5312b66cac2396a85913c236`, status `measured`, 123 videos and 107 channels. All eight regression tests passed in the runner; the previous Node/rolling-image warnings were not reported in the final watch output.
