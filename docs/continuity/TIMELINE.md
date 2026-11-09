@@ -531,3 +531,11 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Evidence level: `repo_evidence`
 - Details: Full V7 run 42560161988 / job 128974608119 completed failure in 6m17s after steps 1-14 succeeded. The runner-only 21916389-byte 60s MP4 passed all nine unchanged web audio gates (I -14.39 LUFS, LRA 9.14 LU, peak -2.19 dBFS, movement 26.46 dB, no clicks). Technical QC raised KeyError blurred_background_fill because the renderer visual QC ledger omitted a key already present in the layout and edit ledgers. The renderer now writes blurred_background_fill=True; technical QC logs sampled-frame metrics and a failure-only artifact can upload runner evidence. No gate, threshold, audio policy or rights check was weakened. Clean full CI verification is pending; no committed MP4 or user-visible V7 evidence exists.
 - Ref: `42560161988,42559696919,c19b422`
+
+## `2026-11-09T04:30:19Z` · evt-067-monarch-cam-v7-ambient-background-fix · checkpoint
+
+- Title: V7 sampled-frame QC found dark blurred backgrounds; ambient lift added
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Full V7 run 42561159698 / job 128977659206 completed failure in 7m5s. Steps 1-14 succeeded with all nine unchanged web audio gates PASS; technical QC correctly failed no_black_empty_top, no_black_bars and no_hook_black_fill. Frames 630/810/990 had top_black_fraction 0.445/0.437/0.666, bottom up to 0.477 and hook up to 0.493 because dark source windows made the blurred full-frame background near-black. The renderer now lifts only the blurred background to a soft ambient floor with 1.12x brightness; the sharp uncut source frame, UI, web gates and QC thresholds are unchanged. Local fully black source-frame simulation passes all sampled-frame thresholds. Failure artifact 13649543217 was uploaded but its signed zip was not downloadable. Clean full CI verification is pending; no committed MP4 or user-visible V7 evidence exists.
+- Ref: `42561159698,42560161988,5b01cd5`

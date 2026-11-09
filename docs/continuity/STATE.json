@@ -4,16 +4,16 @@
   "branch": "arena/2b012328-monarch-overall-work",
   "head_at_capture": "8cb1e6abf64074db6ff7bfe3dcd496594f329780",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-09T04:18:11Z",
-  "last_event_id": "evt-066-monarch-cam-v7-qc-ledger-fix",
+  "updated_at": "2026-11-09T04:30:19Z",
+  "last_event_id": "evt-067-monarch-cam-v7-ambient-background-fix",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "v7_qc_contract_fix_ci_pending",
+    "status": "v7_ambient_background_fix_ci_pending",
     "space": "yt-automation",
     "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
-    "current_step": "Full V7 CI run 42560161988 rendered and muxed a runner-only MP4; all nine unchanged web audio gates passed. Technical QC then stopped on a ledger key mismatch (visual_v7_qc.json lacked blurred_background_fill). The renderer now writes the same flag as the layout manifest, sampled-frame metrics are logged, and failure evidence can be uploaded. A clean full V7 CI retry is pending; no committed V7 MP4 or QC evidence exists.",
+    "current_step": "V7 full CI retry 42561159698 again passed the unchanged nine web audio gates and built a runner-only MP4. Technical QC then correctly failed three sampled-frame black-area checks because dark source windows made the blurred full-frame background near-black in frames 630/810/990. The renderer now lifts only the blurred background above near-black while keeping the sharp source frame uncut; local black-frame simulation passes all sampled-frame thresholds. Clean full CI verification is pending; no committed V7 MP4 or QC evidence exists.",
     "next_action": "Trigger the clean full V7 CI retry, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
     "blocking_gaps": [
       "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
@@ -195,7 +195,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_qc_contract_fix_ci_pending",
+    "status": "v7_ambient_background_fix_ci_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -272,6 +272,33 @@
       "web_gates_changed": false,
       "audio_added_or_substituted": false,
       "failure_evidence_upload": true
+    },
+    "full_ci_run_2": {
+      "run_id": "42561159698",
+      "job_id": "128977659206",
+      "conclusion": "failure",
+      "duration": "7m5s",
+      "steps_1_through_14": "success",
+      "failed_step": "Technical QC with sampled-frame and rights checks",
+      "failed_checks": [
+        "no_black_empty_top",
+        "no_black_bars",
+        "no_hook_black_fill"
+      ],
+      "sampled_frame_evidence": "Frames 630, 810 and 990 had top_black_fraction 0.445/0.437/0.666, bottom_black_fraction up to 0.477 and hook_black_fraction up to 0.493 from dark source-derived blurred backgrounds.",
+      "nine_web_audio_gates": "all PASS (I -14.39 LUFS, LRA 9.14 LU, peak -2.19 dBFS, movement 26.46 dB, no clicks)",
+      "runner_only_mp4_bytes": 21881981,
+      "failure_artifact_id": "13649543217",
+      "no_committed_mp4": true,
+      "note": "Failure evidence artifact was uploaded; its signed zip was not downloadable in this environment, but compact sampled-frame metrics were exposed in the completed job log."
+    },
+    "ambient_background_fix": {
+      "status": "implemented_pending_ci",
+      "change": "Lift only the blurred full-frame background to a dark ambient blue floor and 1.12x brightness; sharp uncut source frame unchanged.",
+      "qc_thresholds_changed": false,
+      "web_gates_changed": false,
+      "audio_changed": false,
+      "local_black_frame_simulation": "top_black_fraction 0.0186, bottom 0.0757, hook 0.0459; all sampled-frame thresholds pass"
     }
   }
 }

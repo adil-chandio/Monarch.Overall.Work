@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-09T04:18:11Z`
-- Last event: `evt-066-monarch-cam-v7-qc-ledger-fix`
+- Updated: `2026-11-09T04:30:19Z`
+- Last event: `evt-067-monarch-cam-v7-ambient-background-fix`
 
 ## Active channel
 ```json
@@ -39,12 +39,12 @@
   ],
   "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "Full V7 CI run 42560161988 rendered and muxed a runner-only MP4; all nine unchanged web audio gates passed. Technical QC then stopped on a ledger key mismatch (visual_v7_qc.json lacked blurred_background_fill). The renderer now writes the same flag as the layout manifest, sampled-frame metrics are logged, and failure evidence can be uploaded. A clean full V7 CI retry is pending; no committed V7 MP4 or QC evidence exists.",
+  "current_step": "V7 full CI retry 42561159698 again passed the unchanged nine web audio gates and built a runner-only MP4. Technical QC then correctly failed three sampled-frame black-area checks because dark source windows made the blurred full-frame background near-black in frames 630/810/990. The renderer now lifts only the blurred background above near-black while keeping the sharp source frame uncut; local black-frame simulation passes all sampled-frame thresholds. Clean full CI verification is pending; no committed V7 MP4 or QC evidence exists.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
   "next_action": "Trigger the clean full V7 CI retry, watch to completion, inspect committed MP4/contact sheets/QC/rights ledgers, then give only the V7 GitHub download link.",
   "space": "yt-automation",
-  "status": "v7_qc_contract_fix_ci_pending",
+  "status": "v7_ambient_background_fix_ci_pending",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```

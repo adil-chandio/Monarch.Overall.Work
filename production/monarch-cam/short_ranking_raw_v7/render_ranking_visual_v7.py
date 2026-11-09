@@ -266,6 +266,15 @@ def compose_frame(src_pil, frame_no, scene_index, scenes):
     small = src.resize((270, 480), Image.Resampling.BILINEAR).filter(ImageFilter.GaussianBlur(9))
     bg = small.resize((W, H), Image.Resampling.BILINEAR)
     bg = Image.blend(bg, Image.new('RGB', (W, H), (0, 0, 0)), 0.20)
+    # Some social-origin sources contain night/black-title frames. Lift only the
+    # blurred full-frame fill above near-black, preserving its motion/color, so
+    # the visible top/hook/bottom regions are never an empty black area.
+    arr = np.asarray(bg).astype(np.float32) * 1.12
+    ramp = np.linspace(1.0, 0.0, H, dtype=np.float32)[:, None, None]
+    ambient_top = np.array([30.0, 36.0, 64.0], dtype=np.float32)[None, None, :]
+    ambient_bottom = np.array([20.0, 24.0, 44.0], dtype=np.float32)[None, None, :]
+    floor = ambient_bottom + ramp * (ambient_top - ambient_bottom)
+    bg = Image.fromarray(np.clip(np.maximum(arr, floor), 0, 255).astype(np.uint8), 'RGB')
 
     # Sharp uncut source frame, aspect-preserving, centered on the blurred fill.
     scale = min(W / sw, H / sh)
@@ -344,7 +353,7 @@ def write_visual_qc(ledger, payoff_frames, layout):
         'edition': 'social_origin_v7',
         'full_frame_preserved': True, 'sharp_source_frame_uncut': True,
         'source_aspect_preserved': True, 'full_screen_blur_background': True,
-        'blurred_background_fill': True,
+        'blurred_background_fill': True, 'ambient_background_lift': True,
         'no_crop': True, 'no_cut_off': True, 'no_black_bars': True,
         'no_letterbox': True, 'no_black_empty_top': True,
         'no_hook_black_fill': True, 'no_black_panels': True,

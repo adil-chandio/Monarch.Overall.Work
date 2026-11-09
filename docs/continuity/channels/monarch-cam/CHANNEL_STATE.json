@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v7_qc_contract_fix_ci_pending",
+  "status": "v7_ambient_background_fix_ci_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -124,7 +124,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_qc_contract_fix_ci_pending",
+    "status": "v7_ambient_background_fix_ci_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -210,6 +210,30 @@
     "qc_contract_fix": {
       "problem": "visual_v7_qc.json omitted blurred_background_fill even though layout_manifest.json and the edit ledger recorded it; technical_qc_v7.py raised KeyError.",
       "fix": "Renderer visual QC ledger now records blurred_background_fill=True. No QC threshold, web gate or audio policy was weakened. Failure evidence upload and sampled-frame metric logging were added for diagnosis.",
+      "pending_ci_verification": true
+    },
+    "full_ci_run_2": {
+      "run_id": "42561159698",
+      "job_id": "128977659206",
+      "conclusion": "failure",
+      "duration": "7m5s",
+      "steps_1_through_14": "success",
+      "failed_step": "Technical QC with sampled-frame and rights checks",
+      "failed_checks": [
+        "no_black_empty_top",
+        "no_black_bars",
+        "no_hook_black_fill"
+      ],
+      "sampled_frame_evidence": "Frames 630, 810 and 990 had top_black_fraction 0.445/0.437/0.666, bottom_black_fraction up to 0.477 and hook_black_fraction up to 0.493 from dark source-derived blurred backgrounds.",
+      "nine_web_audio_gates": "all PASS (I -14.39 LUFS, LRA 9.14 LU, peak -2.19 dBFS, movement 26.46 dB, no clicks)",
+      "runner_only_mp4_bytes": 21881981,
+      "failure_artifact_id": "13649543217",
+      "no_committed_mp4": true,
+      "note": "Failure evidence artifact was uploaded; its signed zip was not downloadable in this environment, but compact sampled-frame metrics were exposed in the completed job log."
+    },
+    "ambient_background_fix": {
+      "problem": "Dark night/title source windows produced near-black blurred backgrounds and triggered the objective no-black-empty-top/no-black-bars/no-hook-black-fill QC checks.",
+      "fix": "Compute a soft ambient luminance floor over the blurred full-frame fill; no crop, zoom, letterbox or QC threshold change. Sharp uncut source frame is untouched.",
       "pending_ci_verification": true
     }
   }

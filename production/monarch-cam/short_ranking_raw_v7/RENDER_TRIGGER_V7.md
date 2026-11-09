@@ -7,3 +7,5 @@ The `2026-11-09` retry uses continuous half-second native-audio windows so the u
 Full V7 CI retry with continuously audible native-audio windows requested at 2026-11-09T04:08:15Z. The nine web gates remain unchanged.
 
 Clean V7 CI retry after the visual-QC ledger key fix requested at 2026-11-09T04:18:11Z. The nine web gates and continuous native-audio source contract remain unchanged.
+
+Clean V7 CI retry after the ambient-background visual fix requested at 2026-11-09T04:30:19Z. Nine web gates, continuous native-audio contract and all sampled-frame QC thresholds remain unchanged.
