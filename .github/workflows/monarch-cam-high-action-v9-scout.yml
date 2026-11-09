@@ -1,0 +1,105 @@
+name: Monarch Cam - High Action V9 Scout
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/monarch-cam-high-action-v9-scout.yml'
+      - 'production/monarch-cam/short_ranking_high_action_v9/candidate_scout_v9.json'
+      - 'production/monarch-cam/short_ranking_high_action_v9/scout_candidates_v9.py'
+      - 'production/monarch-cam/short_ranking_high_action_v9/RANKING_V9_SCOUT_PLAN.md'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: monarch-cam-high-action-v9-scout-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  V9_SCOUT_REVIEW: production/monarch-cam/short_ranking_high_action_v9/review/scout
+  V9_SCOUT_WORK: production/monarch-cam/work/high_action_v9_scout
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout active branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg
+          ffmpeg -version | head -1
+
+      - name: Install Python tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy Pillow requests
+
+      - name: Compile V9 scout and validate candidate manifest
+        run: |
+          python -m py_compile production/monarch-cam/short_ranking_high_action_v9/scout_candidates_v9.py
+          python -m json.tool production/monarch-cam/short_ranking_high_action_v9/candidate_scout_v9.json >/dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d = json.loads(Path('production/monarch-cam/short_ranking_high_action_v9/candidate_scout_v9.json').read_text())
+          assert len(d['assets']) == 20
+          assert len({a['id'] for a in d['assets']}) == 20
+          assert d['reference_exact_match'] is False
+          assert d['policy']['no_current_trending_claim'] is True
+          print('V9 candidate scout contracts passed')
+          PY
+
+      - name: Runner Commons API rights, native-audio and high-motion candidate scout
+        run: python production/monarch-cam/short_ranking_high_action_v9/scout_candidates_v9.py
+
+      - name: Failure diagnostics
+        if: failure()
+        run: |
+          echo 'V9 scout failure diagnostics'
+          cat "${{ env.V9_SCOUT_REVIEW }}/scout_summary.json" || true
+          find "${{ env.V9_SCOUT_REVIEW }}" -maxdepth 1 -type f -printf '%f %s bytes\n' 2>/dev/null | head -80 || true
+          find "${{ env.V9_SCOUT_WORK }}" -maxdepth 3 -type f -printf '%p %s bytes\n' 2>/dev/null | head -80 || true
+
+      - name: Upload V9 scout contact sheets and runner evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-high-action-v9-scout-${{ github.sha }}
+          path: |
+            ${{ env.V9_SCOUT_REVIEW }}/candidate_*_motion_overview.jpg
+            ${{ env.V9_SCOUT_REVIEW }}/candidate_*_best_window.jpg
+            ${{ env.V9_SCOUT_REVIEW }}/scout_report.json
+            ${{ env.V9_SCOUT_REVIEW }}/scout_summary.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Commit V9 scout contact sheets and runner evidence
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f "${{ env.V9_SCOUT_REVIEW }}"
+          git add .github/workflows/monarch-cam-high-action-v9-scout.yml
+          if git diff --cached --quiet; then
+            echo 'No V9 scout changes to commit'
+          else
+            git commit -m "build(monarch-cam): high-action V9 candidate scout evidence [skip ci]"
+            git fetch origin arena/2b012328-monarch-overall-work
+            git merge --no-edit -X ours origin/arena/2b012328-monarch-overall-work || true
+            git push origin HEAD:arena/2b012328-monarch-overall-work
+          fi
