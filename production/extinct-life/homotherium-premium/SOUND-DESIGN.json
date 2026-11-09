@@ -1,0 +1,69 @@
+{
+  "original_composition": true,
+  "third_party_music_samples": false,
+  "tempo_bpm": 116,
+  "harmony": "D minor / B-flat / F / C; soft pad, low bass, restrained plucked motif and rhythmic transients",
+  "voice_id": "voice-04",
+  "speech_rate_change": false,
+  "voice_filter": "Second-order 65Hz highpass only before mix",
+  "ducking": "Approx 40ms lookahead, fast attenuation, smooth release; max music gain reduction 73 percent",
+  "sfx_events": [
+    {
+      "at": 2.533333333333333,
+      "type": "quiet tactile detail accent"
+    },
+    {
+      "at": 5.933333333333334,
+      "type": "soft stereo transition sweep + rounded low impact"
+    },
+    {
+      "at": 11.3,
+      "type": "soft stereo transition sweep + rounded low impact"
+    },
+    {
+      "at": 22.066666666666666,
+      "type": "soft stereo transition sweep + rounded low impact"
+    },
+    {
+      "at": 24.7,
+      "type": "soft stereo transition sweep + rounded low impact"
+    },
+    {
+      "at": 27.9,
+      "type": "quiet tactile detail accent"
+    },
+    {
+      "at": 29.7,
+      "type": "quiet tactile detail accent"
+    },
+    {
+      "at": 30.533333333333335,
+      "type": "quiet tactile detail accent"
+    },
+    {
+      "at": 35.36666666666667,
+      "type": "soft stereo transition sweep + rounded low impact"
+    },
+    {
+      "at": 38.46666666666667,
+      "type": "soft stereo transition sweep + rounded low impact"
+    },
+    {
+      "at": 41.266666666666666,
+      "type": "soft stereo transition sweep + rounded low impact"
+    }
+  ],
+  "sfx_count": 11,
+  "source": "Original procedural synthesis, seed 8401; no actual recovery-site sounds",
+  "duration_seconds": 46,
+  "master_target_lufs": -16,
+  "master_target_true_peak": -1.5,
+  "continuous_human_style_listening_claimed": false,
+  "music_rms_dbfs": -44.97,
+  "music_sample_peak_dbfs": -26.46,
+  "sfx_rms_dbfs": -59.44,
+  "sfx_sample_peak_dbfs": -27.64,
+  "premix_rms_dbfs": -20.49,
+  "premix_sample_peak_dbfs": -0.54,
+  "music_to_complete_premix_rms_difference_db": -24.48
+}

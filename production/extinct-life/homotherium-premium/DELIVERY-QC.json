@@ -1,0 +1,574 @@
+{
+  "file": "deliverables/Homotherium-Cub-Premium-Fast-Cut-1080x1920.mp4",
+  "sha256": "be1a2c936fb00518c9a900b2bb2ee53ab9ee9b334d8a37728df1d34ec0be5ef2",
+  "bytes": 12665119,
+  "decoded_frames": 1380,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 46,
+  "complete_decode_errors": "",
+  "loudness": {
+    "input_i": "-16.20",
+    "input_tp": "-1.46",
+    "input_lra": "2.50",
+    "input_thresh": "-26.47",
+    "output_i": "-16.13",
+    "output_tp": "-1.50",
+    "output_lra": "2.40",
+    "output_thresh": "-26.32",
+    "normalization_type": "dynamic",
+    "target_offset": "0.13"
+  },
+  "every_two_second_samples": [
+    0,
+    60,
+    120,
+    180,
+    240,
+    300,
+    360,
+    420,
+    480,
+    540,
+    600,
+    660,
+    720,
+    780,
+    840,
+    900,
+    960,
+    1020,
+    1080,
+    1140,
+    1200,
+    1260,
+    1320
+  ],
+  "minimum_sampled_rgb_mean": 30.869855967078188,
+  "minimum_two_second_image_difference": 1.4301697530864197,
+  "render": {
+    "from": 0,
+    "to": 1380,
+    "frames": 1380,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "source_sha256": "f2cdafa268daa5df2d4dc8cfe51d5c18d59fb6cbf2aeecd7a2f3d61c3106a930",
+    "scene_runs": [
+      {
+        "scene": "01-fur",
+        "from": 0,
+        "to": 38
+      },
+      {
+        "scene": "02-head",
+        "from": 38,
+        "to": 76
+      },
+      {
+        "scene": "03-age-old",
+        "from": 76,
+        "to": 114
+      },
+      {
+        "scene": "04-fur",
+        "from": 114,
+        "to": 146
+      },
+      {
+        "scene": "05-head-tight",
+        "from": 146,
+        "to": 178
+      },
+      {
+        "scene": "06-map-wide",
+        "from": 178,
+        "to": 209
+      },
+      {
+        "scene": "07-map-pin",
+        "from": 209,
+        "to": 240
+      },
+      {
+        "scene": "08-head",
+        "from": 240,
+        "to": 296
+      },
+      {
+        "scene": "09-not-alive",
+        "from": 296,
+        "to": 339
+      },
+      {
+        "scene": "10-skull",
+        "from": 339,
+        "to": 382
+      },
+      {
+        "scene": "11-teeth",
+        "from": 382,
+        "to": 425
+      },
+      {
+        "scene": "12-skull-top",
+        "from": 425,
+        "to": 473
+      },
+      {
+        "scene": "13-head",
+        "from": 473,
+        "to": 512
+      },
+      {
+        "scene": "14-identity",
+        "from": 512,
+        "to": 550
+      },
+      {
+        "scene": "15-skull",
+        "from": 550,
+        "to": 623
+      },
+      {
+        "scene": "16-teeth",
+        "from": 623,
+        "to": 662
+      },
+      {
+        "scene": "17-age-young",
+        "from": 662,
+        "to": 702
+      },
+      {
+        "scene": "18-head",
+        "from": 702,
+        "to": 741
+      },
+      {
+        "scene": "19-compare",
+        "from": 741,
+        "to": 815
+      },
+      {
+        "scene": "20-ear",
+        "from": 815,
+        "to": 837
+      },
+      {
+        "scene": "21-compare-ear",
+        "from": 837,
+        "to": 859
+      },
+      {
+        "scene": "22-neck",
+        "from": 859,
+        "to": 891
+      },
+      {
+        "scene": "23-paw",
+        "from": 891,
+        "to": 916
+      },
+      {
+        "scene": "24-paw-pair",
+        "from": 916,
+        "to": 940
+      },
+      {
+        "scene": "25-fur",
+        "from": 940,
+        "to": 970
+      },
+      {
+        "scene": "26-ear",
+        "from": 970,
+        "to": 1000
+      },
+      {
+        "scene": "27-paw",
+        "from": 1000,
+        "to": 1031
+      },
+      {
+        "scene": "28-skull",
+        "from": 1031,
+        "to": 1061
+      },
+      {
+        "scene": "29-partial",
+        "from": 1061,
+        "to": 1112
+      },
+      {
+        "scene": "30-skull",
+        "from": 1112,
+        "to": 1154
+      },
+      {
+        "scene": "31-uncertain",
+        "from": 1154,
+        "to": 1195
+      },
+      {
+        "scene": "32-not-alive",
+        "from": 1195,
+        "to": 1238
+      },
+      {
+        "scene": "33-head-tight",
+        "from": 1238,
+        "to": 1302
+      },
+      {
+        "scene": "34-fur",
+        "from": 1302,
+        "to": 1341
+      },
+      {
+        "scene": "35-head",
+        "from": 1341,
+        "to": 1380
+      }
+    ],
+    "page_errors": []
+  },
+  "review_scope": "Complete automated video decode and audio loudness analysis; native still and two-second contact sampling. Not claimed as continuous human-like audiovisual watching/listening.",
+  "youtube_published": false,
+  "structural_tests_passed": 10,
+  "transition_seam_check": {
+    "frames": [
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      339,
+      340,
+      341,
+      342,
+      662,
+      663,
+      741,
+      742,
+      1061,
+      1062,
+      1154,
+      1155,
+      1238,
+      1239
+    ],
+    "states": [
+      {
+        "frame": 177,
+        "time": 5.9,
+        "scene": "05-head-tight",
+        "kind": "head-tight",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.30000000447034836,
+          "jpeg": 1282.5
+        },
+        "transition": false,
+        "transition_frames": 0
+      },
+      {
+        "frame": 178,
+        "time": 5.933333333333334,
+        "scene": "06-map-wide",
+        "kind": "map-wide",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 5.200000002980232,
+          "jpeg": 1261.1000000014901
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 179,
+        "time": 5.966666666666667,
+        "scene": "06-map-wide",
+        "kind": "map-wide",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 6.200000002980232,
+          "jpeg": 773.3999999985099
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 180,
+        "time": 6,
+        "scene": "06-map-wide",
+        "kind": "map-wide",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 1.3999999985098839,
+          "jpeg": 565.1000000014901
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 181,
+        "time": 6.033333333333333,
+        "scene": "06-map-wide",
+        "kind": "map-wide",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.9000000059604645,
+          "jpeg": 488.79999999701977
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 182,
+        "time": 6.066666666666666,
+        "scene": "06-map-wide",
+        "kind": "map-wide",
+        "no_3d": true,
+        "caption_bounds": {
+          "left": 96.6224365234375,
+          "right": 983.3775634765625,
+          "size": 61
+        },
+        "timings": {
+          "composite": 1.9000000059604645,
+          "jpeg": 498.69999999552965
+        },
+        "transition": false,
+        "transition_frames": 0
+      },
+      {
+        "frame": 339,
+        "time": 11.3,
+        "scene": "10-skull",
+        "kind": "skull",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 1.2000000029802322,
+          "jpeg": 610.2999999970198
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 340,
+        "time": 11.333333333333334,
+        "scene": "10-skull",
+        "kind": "skull",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.4000000059604645,
+          "jpeg": 410.79999999701977
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 341,
+        "time": 11.366666666666667,
+        "scene": "10-skull",
+        "kind": "skull",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.19999999552965164,
+          "jpeg": 343
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 342,
+        "time": 11.4,
+        "scene": "10-skull",
+        "kind": "skull",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.10000000149011612,
+          "jpeg": 333.30000000447035
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 662,
+        "time": 22.066666666666666,
+        "scene": "17-age-young",
+        "kind": "age-young",
+        "no_3d": true,
+        "caption_bounds": {
+          "left": 92.34918212890625,
+          "right": 987.6508178710938,
+          "size": 57
+        },
+        "timings": {
+          "composite": 3.2000000029802322,
+          "jpeg": 1057.7999999970198
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 663,
+        "time": 22.1,
+        "scene": "17-age-young",
+        "kind": "age-young",
+        "no_3d": true,
+        "caption_bounds": {
+          "left": 92.34918212890625,
+          "right": 987.6508178710938,
+          "size": 57
+        },
+        "timings": {
+          "composite": 0.19999999552965164,
+          "jpeg": 613.3999999985099
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 741,
+        "time": 24.7,
+        "scene": "19-compare",
+        "kind": "compare",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 1,
+          "jpeg": 697.8000000044703
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 742,
+        "time": 24.733333333333334,
+        "scene": "19-compare",
+        "kind": "compare",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.30000000447034836,
+          "jpeg": 362.8999999985099
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 1061,
+        "time": 35.36666666666667,
+        "scene": "29-partial",
+        "kind": "partial",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 1.2000000029802322,
+          "jpeg": 891.6000000014901
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 1062,
+        "time": 35.4,
+        "scene": "29-partial",
+        "kind": "partial",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.30000000447034836,
+          "jpeg": 641.6000000014901
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 1154,
+        "time": 38.46666666666667,
+        "scene": "31-uncertain",
+        "kind": "uncertain",
+        "no_3d": true,
+        "caption_bounds": {
+          "left": 134.55230712890625,
+          "right": 945.4476928710938,
+          "size": 62
+        },
+        "timings": {
+          "composite": 3.899999998509884,
+          "jpeg": 715.6000000014901
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 1155,
+        "time": 38.5,
+        "scene": "31-uncertain",
+        "kind": "uncertain",
+        "no_3d": true,
+        "caption_bounds": {
+          "left": 134.55230712890625,
+          "right": 945.4476928710938,
+          "size": 62
+        },
+        "timings": {
+          "composite": 0.3999999985098839,
+          "jpeg": 482
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 1238,
+        "time": 41.266666666666666,
+        "scene": "33-head-tight",
+        "kind": "head-tight",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.6000000014901161,
+          "jpeg": 703.3999999985099
+        },
+        "transition": true,
+        "transition_frames": 4
+      },
+      {
+        "frame": 1239,
+        "time": 41.3,
+        "scene": "33-head-tight",
+        "kind": "head-tight",
+        "no_3d": true,
+        "caption_bounds": null,
+        "timings": {
+          "composite": 0.09999999403953552,
+          "jpeg": 383.70000000298023
+        },
+        "transition": true,
+        "transition_frames": 4
+      }
+    ],
+    "deterministic_seek": true,
+    "page_errors": []
+  },
+  "no_3d": true,
+  "music_and_sfx": "New original structured score; 11 selective SFX events; no stacked prior soundtrack",
+  "audio_sample_rate_hz": 48000,
+  "audio_encoding": "AAC 256 kb/s stereo",
+  "base_fastcut_commit": "684d611",
+  "checks_do_not_certify_subjective_quality": true
+}
