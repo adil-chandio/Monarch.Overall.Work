@@ -1,0 +1,146 @@
+[
+  {
+    "name": "cub",
+    "figure": 2,
+    "crop": [
+      0,
+      0,
+      1048,
+      830
+    ],
+    "blank_label_regions_removed": [
+      [
+        0,
+        0,
+        230,
+        200
+      ],
+      [
+        0,
+        210,
+        85,
+        320
+      ]
+    ],
+    "background": "Connected near-white background removed; image not anatomically retouched",
+    "sha256": "209340826d389e9eab8f9c6337c24ed0a1d7556c545c843e136bf48db46fa332"
+  },
+  {
+    "name": "lion",
+    "figure": 2,
+    "crop": [
+      0,
+      840,
+      1048,
+      1553
+    ],
+    "blank_label_regions_removed": [
+      [
+        0,
+        0,
+        100,
+        170
+      ],
+      [
+        820,
+        0,
+        1048,
+        210
+      ]
+    ],
+    "background": "Connected near-white background removed; image not anatomically retouched",
+    "sha256": "df22f1f6be160b60fef8330cf01014422c6b2ed1000aad39a313c37407f6109f"
+  },
+  {
+    "name": "skull",
+    "figure": 4,
+    "crop": [
+      0,
+      0,
+      930,
+      620
+    ],
+    "blank_label_regions_removed": [
+      [
+        0,
+        510,
+        80,
+        620
+      ]
+    ],
+    "background": "Connected near-white background removed; image not anatomically retouched",
+    "sha256": "459d1037edfd5b77b3b87b6bb883635ed28312764d037204f13a70c459a0c1ec"
+  },
+  {
+    "name": "dorsal",
+    "figure": 4,
+    "crop": [
+      965,
+      0,
+      1858,
+      620
+    ],
+    "blank_label_regions_removed": [
+      [
+        0,
+        470,
+        160,
+        620
+      ]
+    ],
+    "background": "Connected near-white background removed; image not anatomically retouched",
+    "sha256": "5f2789a952eaa3f5e2e049a00b17e2bcb20ccd135aa1c0d6695337db4e746d04"
+  },
+  {
+    "name": "paw",
+    "figure": 7,
+    "crop": [
+      1000,
+      0,
+      1806,
+      660
+    ],
+    "blank_label_regions_removed": [
+      [
+        0,
+        0,
+        280,
+        140
+      ],
+      [
+        0,
+        480,
+        120,
+        660
+      ],
+      [
+        0,
+        560,
+        280,
+        660
+      ]
+    ],
+    "background": "Connected near-white background removed; image not anatomically retouched",
+    "sha256": "5b866a59d0229717e39ccf82bc07c59738754c8cf64fd41d5ee37ba931fc8898"
+  },
+  {
+    "name": "lion-paw",
+    "figure": 7,
+    "crop": [
+      1000,
+      730,
+      1806,
+      1269
+    ],
+    "blank_label_regions_removed": [
+      [
+        0,
+        400,
+        70,
+        539
+      ]
+    ],
+    "background": "Connected near-white background removed; image not anatomically retouched",
+    "sha256": "c064c9f7fd538ec1088f6337574fdb4abfeb290c1a669b9f4b67d786d4f6918a"
+  }
+]
