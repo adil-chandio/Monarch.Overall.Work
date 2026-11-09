@@ -14,6 +14,18 @@ on:
         description: Render the 20-second mafia temple project
         type: boolean
         default: false
+      private_relay_test:
+        description: Run only the authenticated private-transfer smoke test
+        type: boolean
+        default: false
+      relay_url:
+        description: Temporary HTTPS relay URL for smoke test only
+        type: string
+        default: ''
+      relay_audience:
+        description: Unique OIDC audience for smoke test only
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -23,6 +35,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  private-relay-smoke:
+    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && github.event_name == 'workflow_dispatch' && inputs.private_relay_test == true }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Test authenticated relay without private media
+        env:
+          RELAY_URL: ${{ inputs.relay_url }}
+          RELAY_AUDIENCE: ${{ inputs.relay_audience }}
+        run: python production/mafia-temple/private_relay_smoke.py
+
   kaggle-dual-t4:
     if: ${{ github.ref_name == 'arena/9960286a-monarch-overall-work' && (github.event_name != 'workflow_dispatch' || inputs.render_mafia != true) }}
     runs-on: ubuntu-latest
@@ -205,7 +235,7 @@ jobs:
           done
 
   mafia-temple-render:
-    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && (github.event_name == 'push' || inputs.render_mafia == true) }}
+    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && (github.event_name == 'push' || inputs.render_mafia == true) && inputs.private_relay_test != true }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
