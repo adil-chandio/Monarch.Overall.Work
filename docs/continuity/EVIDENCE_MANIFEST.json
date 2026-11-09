@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T01:47:35Z",
-  "head": "9eee0dd7e26b53260e96a2d505d461a968404b1b",
+  "generated_at": "2026-11-09T02:05:53Z",
+  "head": "f3eb77fc7b20632784d283ff785891b7fb1c2c94",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -115,7 +115,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4658,
-      "sha256": "da66a82f31fe452da20419997aafcef4f58c9247ac609908bd9cf287d0491488",
+      "sha256": "3e592fe6d3894b3cf43f8936ac602176f377517c467b235339db5eefde9d1de5",
       "evidence_level": "state_ledger"
     },
     {
@@ -2162,6 +2162,12 @@
       "path": "production/monarch-cam/short_ranking_raw_v7/CREDITS.md",
       "bytes": 4519,
       "sha256": "da95ef2a363c8a75d3f076f6848f7457f867f85b39b2af8b02b12e90dd5c4f35",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/DIAGNOSTIC_TRIGGER.md",
+      "bytes": 402,
+      "sha256": "8e600aaf4a73b0be2f30365d74c65eb53b8101b8b18e0dd4cb461bff8eef4f65",
       "evidence_level": "repo_evidence"
     },
     {

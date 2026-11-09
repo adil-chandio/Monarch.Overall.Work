@@ -1,0 +1,77 @@
+name: V7 audio-window diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/v7-audio-window-diagnostic.yml'
+      - 'production/monarch-cam/short_ranking_raw_v7/DIAGNOSTIC_TRIGGER.md'
+
+concurrency:
+  group: monarch-cam-v7-audio-diagnostic-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  V7_WORK: production/monarch-cam/work/short_ranking_raw_v7
+  V7_REVIEW: production/monarch-cam/short_ranking_raw_v7/review
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout active branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system tools
+        run: |
+          timeout 900 sudo apt-get update -qq
+          timeout 900 sudo apt-get install -y -qq ffmpeg
+
+      - name: Install Python tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy scipy pillow opencv-python-headless soundfile pyloudnorm requests imageio-ffmpeg
+
+      - name: Probe candidate audio and motion windows
+        run: python production/monarch-cam/short_ranking_raw_v7/candidate_probe_v7.py
+
+      - name: Lock seven objective windows
+        run: python production/monarch-cam/short_ranking_raw_v7/select_moments_v7.py
+
+      - name: Verify per-title Commons rights
+        run: python production/monarch-cam/short_ranking_raw_v7/verify_sources_v7.py
+
+      - name: Recon source windows and clips
+        run: python production/monarch-cam/short_ranking_raw_v7/source_recon_ranking_v7.py
+
+      - name: Audit selected native audio windows
+        run: python production/monarch-cam/short_ranking_raw_v7/source_audio_audit_v7.py
+
+      - name: Upload audio-window measurements
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarch-cam-v7-audio-window-measurements-${{ github.sha }}
+          path: |
+            ${{ env.V7_REVIEW }}/candidates/candidate_audio_probe.json
+            ${{ env.V7_REVIEW }}/candidates/candidate_video_ledger.json
+            ${{ env.V7_REVIEW }}/candidates/candidate_review_manifest.json
+            ${{ env.V7_REVIEW }}/selected_windows.json
+            ${{ env.V7_REVIEW }}/verified_sources.json
+            ${{ env.V7_REVIEW }}/social_origin_ledger.json
+            ${{ env.V7_REVIEW }}/source_video_ledger.json
+            ${{ env.V7_REVIEW }}/source_windows.json
+            ${{ env.V7_REVIEW }}/source_audio_audit.json
+          retention-days: 7
+          if-no-files-found: error
