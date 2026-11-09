@@ -81,7 +81,7 @@ Generated V6 evidence: `review/social_origin_ledger.json`, `review/layout_manife
 - Brand contradiction: channel `Monarch Cam`, About `KARMA CAM`, January 2026 bear video `Daily Dose of Smiles`.
 - Studio screenshots for latest long and three recent Shorts still needed to determine impressions / CTR / first-30-second retention / Shorts swipe bottleneck.
 
-## V6 rejection / V7 active task — 2026-11-05
+## V6 rejection / V7 active task — 2026-11-09
 
 - V6 was rejected after its GitHub upload/download-link answer: `Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...` plus six reference screenshots. Technical QC, 49/49 checks, 9/9 audio gates, CI success and V6 links are **not** creative acceptance.
 - The user wants `📈 trending viral videos` / social-platform clips, `viral ke sath sath purani bhi chalenge`, `bas clips mazedar next level honi chaiye`, the best hooked/engaging scenes extracted, and a full 60s ranking built on them. The reference screenshots show `ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha`: full-screen uncut clip, visible hook, all 1.-7. list items, right UI, caption bubble, Subscribe and bottom chrome.

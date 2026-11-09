@@ -230,6 +230,16 @@ jobs:
           echo '--- MP4 ---'
           ls -lah deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4 || true
           ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,codec_type,width,height,r_frame_rate -of json deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4 || true
+          echo '--- V7 rights ledger flags ---'
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('${{ env.V7_REVIEW }}/social_origin_ledger.json')
+          if p.exists():
+              d = json.loads(p.read_text(encoding='utf-8'))
+              keys = ('all_api_license_verified', 'all_social_origin_verified', 'all_original_commons_pages', 'all_original_sha1_verified', 'no_unverified_reposts', 'api_restrictions_recorded', 'rights_not_legal_opinion', 'cc_by_attribution_recorded')
+              print(json.dumps({k: d.get(k) for k in keys}, indent=2))
+          PY
 
       - name: Commit V7 MP4 and generated review evidence
         run: |

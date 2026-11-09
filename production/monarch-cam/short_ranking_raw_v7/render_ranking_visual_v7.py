@@ -194,7 +194,7 @@ def compose_frame(src_pil, frame_no, scene_index, scenes):
         num_color = (255, 59, 48, 255) if r == 1 else (255, 255, 255, 254) if r == 2 else (255, 130, 20, 255) if r == 3 else (255, 255, 255, 254)
         shadow_text(ui, (V['list_x'], y), str(r) + '.', f_rank, num_color, off=(0, 4), blur=7, stroke=2)
         # All seven labels are visible from the first frame; only the active-rank highlight progresses.
-        text = sc['moment_label']
+        text = str(sc.get('moment_label') or sc.get('title') or sc.get('id') or '')
         bbox = [V['list_label_x'], y + 8, V['list_label_x'] + V['list_label_max_width'], y + 89]
         shadow_rect(ui, bbox, 17, (8, 8, 10, 178),
                     outline=(255, 255, 255, 110) if r == rank else (255, 255, 255, 30),

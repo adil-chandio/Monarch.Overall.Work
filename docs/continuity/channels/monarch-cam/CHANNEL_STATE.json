@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v6_rejected_v7_task_active",
+  "status": "v7_ci_retry_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -124,7 +124,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "configured_not_built",
+    "status": "v7_ci_retry_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -137,6 +137,13 @@
       "sign_off": false,
       "audience_result_promise": false,
       "virality_guarantee": false
+    },
+    "first_ci_run": {
+      "run_id": "42541601536",
+      "conclusion": "failure",
+      "failed_step": "Per-title Commons API rights and social-origin verification",
+      "cause": "verify_sources_v7.py checked lowercase 'restrictions' instead of API key 'Restrictions'",
+      "fixes_ready": true
     }
   }
 }

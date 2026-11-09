@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Select seven distinct CC0 moments from the runner audio/motion probe and lock
+# Select seven distinct rights-cleared social-origin moments from the runner audio/motion probe and lock
 # exact 60-second timeline windows. No human sign-off is claimed.
 from __future__ import annotations
 import json
@@ -99,6 +99,7 @@ def main():
             'id': f"rank{7 - i}_{aid}",
             'rank': 7 - i,
             'title': asset['moment_label'],
+            'moment_label': asset['moment_label'],
             'reaction_text': asset['reaction_text'],
             'emoji': asset['emoji'],
             'source_id': aid,
@@ -182,7 +183,8 @@ def main():
         'exact_timecodes': [{
             'rank': s['rank'], 'timeline_in': s['start'], 'timeline_out': s['end'],
             'source_id': s['source_id'], 'source_in': s['source_start'], 'source_out': s['source_out'],
-            'frames': s['frames'], 'title': s['title'], 'reaction_text': s['reaction_text'],
+            'frames': s['frames'], 'title': s['title'], 'moment_label': s['moment_label'],
+            'reaction_text': s['reaction_text'],
             'emoji': s['emoji'], 'runner_audio_rms_dbfs': s['runner_audio_rms_dbfs'],
             'runner_motion_score': s['runner_motion_score'],
         } for s in scenes],

@@ -93,6 +93,8 @@ def verify(asset):
     categories = ext_value(ext, 'Categories')
     artist = ext_value(ext, 'Artist')
     restrictions = ext_value(ext, 'Restrictions')
+    restrictions_present = 'Restrictions' in ext
+    restrictions_status = 'reported' if restrictions else 'none_reported_in_extmetadata'
     allowed = {'cc0', 'public domain', 'cc by 3.0'}
     if short.lower() not in allowed and usage.lower() not in allowed:
         raise RuntimeError('Allowed licence not confirmed for ' + asset['id'] + ': ' + repr({'short': short, 'usage': usage}))
@@ -133,12 +135,13 @@ def verify(asset):
         'usage_terms': usage, 'license_url': license_url,
         'attribution_required': want_attr, 'attribution_text': attribution_text,
         'restrictions': restrictions,
+        'restrictions_status': restrictions_status,
         'expected_bytes': int(info['size']), 'expected_sha1': str(info['sha1']).lower(),
         'original_url': original_url, 'download_url': download_url,
         'download_kind': download_kind, 'mime': info.get('mime'),
         'api_metadata': info.get('metadata', []), 'api_extmetadata': ext,
         'api_license_verified': True, 'social_origin_verified': True,
-        'api_restrictions_recorded': 'restrictions' in ext,
+        'api_restrictions_recorded': restrictions_present,
         'rights_not_legal_opinion': True,
         'original_commons_page': True, 'original_sha1_verified': True,
         'no_unverified_repost': True,

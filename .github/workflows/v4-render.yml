@@ -12,6 +12,8 @@ on:
   push:
     branches:
       - "arena/**"
+      # Keep the legacy v4 render off the active V7 branch.
+      - "!arena/2b012328-monarch-overall-work"
     paths:
       - "showreel/v4/**"
       # every tool the render depends on, not just the diff: a fix to

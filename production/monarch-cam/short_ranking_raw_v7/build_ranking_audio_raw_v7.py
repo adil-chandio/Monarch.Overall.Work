@@ -22,8 +22,8 @@ MANIFEST = json.loads((BASE / 'candidate_sources.json').read_text(encoding='utf-
 ASSETS = {a['id']: a for a in MANIFEST['assets']}
 SILENT_VIDEO = WORK / 'ranking_silent_raw_v7.mp4'
 SILENT_H264 = WORK / 'ranking_silent_h264_raw_v7.mp4'
-OUT = ROOT / SPEC['deliverable']
 SPEC = json.loads((BASE / 'ranking_short_spec.json').read_text(encoding='utf-8'))
+OUT = ROOT / SPEC['deliverable']
 SELECTED = json.loads((REVIEW / 'selected_windows.json').read_text(encoding='utf-8'))
 SCENES = SELECTED['scenes']
 A = SPEC['audio_policy']

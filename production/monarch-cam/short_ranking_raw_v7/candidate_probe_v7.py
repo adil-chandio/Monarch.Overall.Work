@@ -363,7 +363,7 @@ def main():
     completed = sum(1 for e in video_ledger if e.get('probe_completed'))
     av_pass = sum(1 for e in video_ledger if e.get('runner_audio_visual_probe_passed'))
     motion_pass = sum(1 for e in video_ledger if e.get('runner_visual_motion_probe'))
-    # V7 has 12 candidates; require at least seven measurable audio/motion sources.
+    # V7 has 10 candidates; require at least seven measurable audio/motion sources.
     flags = {
         'runner_probe_passed': bool(completed >= 7),
         'runner_audio_visual_probe_passed': bool(av_pass >= 7),

@@ -50,7 +50,7 @@
 - A stale checkout can show old commit `ac3a529...`, modified `.gitignore`, and untracked V3/dance-clean drafts while missing continuity files. Back up untracked drafts to `/tmp`, restore `.gitignore`, `git clean -fd -e deliverables`, explicit-refspec fetch, then `git merge --ff-only`. See `RECOVER.md` and `python3 tools/continuity.py recover`.
 - `/tmp`, `google_drive/`, `tmp_chat_evidence/` and connector staging are not canonical repo truth.
 
-## V6 rejection / V7 active task — 2026-11-05
+## V6 rejection / V7 active task — 2026-11-09
 
 - V6 was rejected after its GitHub upload/download-link answer: `Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...` plus six reference screenshots. Technical QC, 49/49 checks, 9/9 audio gates, CI success and V6 links are **not** creative acceptance.
 - The user wants `📈 trending viral videos` / social-platform clips, `viral ke sath sath purani bhi chalenge`, `bas clips mazedar next level honi chaiye`, the best hooked/engaging scenes extracted, and a full 60s ranking built on them. The reference screenshots show `ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha`: full-screen uncut clip, visible hook, all 1.-7. list items, right UI, caption bubble, Subscribe and bottom chrome.

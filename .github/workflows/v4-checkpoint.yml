@@ -8,7 +8,7 @@ name: v4 checkpoint (first 30 %)
 
 on:
   push:
-    branches: ["arena/**"]
+    branches: ["arena/**", "!arena/2b012328-monarch-overall-work"]
     paths: ["showreel/v4/**", "tools/**", ".github/workflows/v4-checkpoint.yml"]
   workflow_dispatch:
 
