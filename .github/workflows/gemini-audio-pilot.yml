@@ -1,0 +1,40 @@
+name: Inspect audio-only reference samples
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/forensic/gemini_audio_pilot.py, .github/workflows/gemini-audio-pilot.yml]
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install decoder and retrieve shared file
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          python -m pip install -q 'gdown==5.2.0'
+          gdown --id 1KOpLeqa8LjHkf3oGs-7F5dZ0JFreI-X8 -O "$RUNNER_TEMP/source.mp4"
+      - name: Inspect three audio-only samples
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SOURCE_VIDEO: ${{ runner.temp }}/source.mp4
+        run: python scripts/forensic/gemini_audio_pilot.py
+      - name: Save audio model output
+        run: |
+          cp audit-output/gemini-audio-pilot.json docs/repo-intel/gemini-audio-pilot.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/gemini-audio-pilot.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record audio-only reference pilot [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
+      - name: Remove source
+        if: always()
+        run: rm -f "$RUNNER_TEMP/source.mp4"
