@@ -17,7 +17,20 @@ def main():
     public=key.public_key().public_bytes(serialization.Encoding.DER,serialization.PublicFormat.SubjectPublicKeyInfo)
     run=os.environ['GITHUB_RUN_ID']
     fingerprint=hashlib.sha256(public).hexdigest()
-    print('::notice title=cloud-smoke-public-key::'+b64(public),flush=True)
+    # Publish only the ephemeral public key. The private key stays on this runner.
+    endpoint='https://api.github.com/repos/adil-chandio/Monarch.Overall.Work/contents/production/mafia-temple/cloud-smoke-key.json'
+    headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'}
+    try:
+        with urllib.request.urlopen(urllib.request.Request(endpoint+'?ref=arena/6101616c-monarch-overall-work',headers=headers),timeout=20) as r: old=json.load(r).get('sha')
+    except urllib.error.HTTPError as e:
+        if e.code!=404:raise
+        old=None
+    publication={'run_id':run,'head_sha':os.environ['GITHUB_SHA'],'public_key':b64(public)}
+    obj={'message':'Publish ephemeral cloud smoke public key','branch':'arena/6101616c-monarch-overall-work','content':b64(json.dumps(publication).encode())}
+    if old:obj['sha']=old
+    req=urllib.request.Request(endpoint,data=json.dumps(obj).encode(),headers={**headers,'Content-Type':'application/json'},method='PUT')
+    with urllib.request.urlopen(req,timeout=30) as r:
+        if r.status not in (200,201):raise RuntimeError('Public-key publication failed')
     print('::notice title=cloud-smoke-status::Waiting for run-bound encrypted capability',flush=True)
     path='https://api.github.com/repos/adil-chandio/Monarch.Overall.Work/contents/production/mafia-temple/cloud-smoke-envelope.json?ref=arena/6101616c-monarch-overall-work'
     request=urllib.request.Request(path,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Cache-Control':'no-cache'})
