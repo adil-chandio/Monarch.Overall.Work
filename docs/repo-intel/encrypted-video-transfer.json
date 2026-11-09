@@ -1,0 +1,29 @@
+{
+  "description": "Encrypted unreferenced Git blobs for temporary transport. Original video and decryption key are not committed.",
+  "source_sha256": "86222809c190003f6562ab96ef89b28b831a07bfa364496931458cccd14b21d6",
+  "encrypted_sha256": "4195dcddf144db8045ea64882c4b09418a890335880d6221c27373e26c103457",
+  "source_bytes": 161325156,
+  "wrapped_password_base64": "W+jMD8HFZM3XW0N/BdKA2Fx7Frfk0MEQC780UPwv93ubn+/Qtb9PQG+3HdrrMuERNoTlyC4hbNlV7DYaGyBKTcLAwH5RN5XDolnqHk4eidBv1J5crcRxbfmAvkGnxFxwLiJn+1i+NX9H36NduhrJwvrneH4mb4bnGzJWruIy/wcwwT+kxTeTf1dgW1tMYQBegNZthxwF3lbQv6veIARuqjUDs6CTkemqiQfaANueF3yNBLPlVS6hYfbHsJDLm0VZpxvrH4z2aBqVBIaPsMUVaci5WldXfas3vnX77UBdRspEunM+Dmil8TNHrpZD9fYYMRoFW33y8yrRkj62updCdQ==",
+  "chunks": [
+    {
+      "sha": "ef0a20eef348e3b0415a0ca1899ff5486e7191b3",
+      "size": 41943040,
+      "sha256": "981e63c1d974ee994041de6f6acacbc833750d509a4d29141fccfeaca97a7612"
+    },
+    {
+      "sha": "0e6e1e824bbb98e3b42d430fe60f94d4d09a84a8",
+      "size": 41943040,
+      "sha256": "5b4f8a987fc93b4af2a01926c2a3ff48fff3dfd2c3475314e3b90c3a661be853"
+    },
+    {
+      "sha": "21753b9cce1ec67a721728212b68e6eab2cb49c1",
+      "size": 41943040,
+      "sha256": "45f4771af47837c66d4b9aec4723388598ac63c73d114e95d8319f6dfe89f05f"
+    },
+    {
+      "sha": "cd145c2828642f8360f4a4614200530b80eb464a",
+      "size": 35496064,
+      "sha256": "7ae1c3fdd97ae6afbef91ef3ce3a0c2af9f99f6320091dec557ea5af37340a5d"
+    }
+  ]
+}
