@@ -13,3 +13,10 @@ Fetch pinned assets with `../celebrity_lookdev/fetch_assets.py`; install bpy 4.2
 ## Known limitations
 
 This is a stylized real-time-game-like render, not a photoreal motion picture. It reuses Rocketbox action clips and maintains authored approximations for finger grips, cup/phone contact and facial movement. No full mesh, foot-lock or fluid simulation has been performed. There is no documented human listening pass, so the synthetic voice/music/effects should be evaluated by ear on multiple devices before publication; loudness metering and decoding are not substitutes. Crowds and studio are still sparse, and the script remains a fictional observational story, not a real person's routine.
+
+## Final render checks
+
+- The 60-second final MP4 decoded 1,440 frames and stereo audio without decoder errors. Visual review covered all 60 one-second samples and nine 6-fps one-second windows starting at 2, 10, 14, 27, 36, 40, 44, 48 and 52 seconds. This is sampled review, not frame-by-frame certification.
+- Audio meter on the final AAC: −16.2 LUFS integrated, 5.8 LU loudness range, −1.4 dBTP true peak. A listening pass remains outstanding.
+- The table/foot landmark audit reports 1.2085 m minimum separation, no proxy violations. It is not a full collision test. Four motion/cue tests and one asset test pass.
+- Remaining visible limitations: characters and studio still use generic actions; the fan reaction is a wave rather than nuanced performance; device grips are not finger-solved; there are abrupt location/wardrobe transitions. The synthetic effects and music are a designed approximation, not a professionally recorded Foley or orchestra mix.
