@@ -15,3 +15,7 @@ This review concerns the previous 60-second video and the four screenshots the u
 | 52.2–60: quiet ending | Table penetrated the legs; sunset did not clearly transition. | Clearer path and cooler sky; approximate facial animation and an eased shot remain. |
 
 The spatial audit uses sampled foot/toe landmarks and table bounding boxes; it cannot prove the absence of every mesh collision. Props follow authored positions and do not have deformable grips, collision response or liquid simulation. The city, furniture and crowd remain simplified; the revised work cannot be guaranteed flaw-free or equivalent to a full high-end film production.
+
+## Final render QC
+
+The final 960×540, 24 fps file decoded all 1,440 video frames and 60 seconds of audio without decoder errors. All 60 one-second samples and 6 fps samples over one-second windows starting at 3, 10, 14, 27, 36, 44 and 52 seconds were visually inspected. The table crossings visible in the previous screenshots are no longer visible in those sampled shots. The phone reads upright near the ear and the cup reads near the mouth, although finger grip and precise contact remain approximate. The studio subjects face one another and the fan is beyond the rail. Walks and waves still reuse clips, and backgrounds remain sparse and stylized. Audio peak measured −1.3 dBFS; no human listening verification was performed. The landmark table audit reported a minimum separation of 1.2085 m at 0.25-second intervals, without full mesh collision verification.
