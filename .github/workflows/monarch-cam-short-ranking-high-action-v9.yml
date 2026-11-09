@@ -301,3 +301,4 @@ jobs:
             git fetch origin arena/2b012328-monarch-overall-work
             git merge --no-edit -X ours origin/arena/2b012328-monarch-overall-work || true
             git push origin HEAD:arena/2b012328-monarch-overall-work
+          fi
