@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v7_delivery_ready_link_pending",
+  "status": "v8_reference_frames_needed",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -15,8 +15,11 @@
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "ready",
-    "next_action": "Build a separate V7 60s ranking Short from rights-cleared social-origin Commons mirrors, using objective best-window selection, a blurred full-frame background plus sharp uncut source frames, the visible reference-style hook/1.-7. list/UI, then upload the new V7 MP4 to GitHub and give its own download link. Do not re-present V4/V5/V6 and do not claim creative acceptance."
+    "status": "v8_reference_frames_needed",
+    "next_action": "Build a separate V7 60s ranking Short from rights-cleared social-origin Commons mirrors, using objective best-window selection, a blurred full-frame background plus sharp uncut source frames, the visible reference-style hook/1.-7. list/UI, then upload the new V7 MP4 to GitHub and give its own download link. Do not re-present V4/V5/V6 and do not claim creative acceptance.",
+    "single_next_action": "Obtain 2-3 screenshots or a short clip from the referenced YouTube Short, then build a separate clean V8 lane matching those frames exactly.",
+    "reference_url": "https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK",
+    "note": "V7 was rejected after its GitHub link: too many overlays; main content not visible."
   },
   "parallel_unresolved": {
     "id": "monarch-cam-v6-intent",
@@ -124,7 +127,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_delivery_ready_link_pending",
+    "status": "rejected_after_link",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -270,6 +273,42 @@
         "production/monarch-cam/short_ranking_raw_v7/DIAGNOSTIC_TRIGGER.md"
       ],
       "continuity_scan_globs_updated": true
+    },
+    "rejection": {
+      "timestamp": "2026-11-09T14:52:18Z",
+      "screenshot": "docs/continuity/evidence/screenshots/V7_rejection_20261109-191249.png",
+      "reason": "Too many overlays; main content not visible; user wants a clean build matching the referenced Short exactly."
+    }
+  },
+  "v8_task": {
+    "id": "monarch-cam-v8-clean-reference-style-ranking",
+    "status": "v8_reference_frames_needed",
+    "reference": {
+      "youtube_url": "https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK",
+      "youtube_id": "08-ocSDpt7o",
+      "title": "Ranking Most Impressive Moments Ever #shorts",
+      "author": "onlymeamro",
+      "channel_url": "https://www.youtube.com/@onlymeamro",
+      "duration_seconds": 60,
+      "uploaded_at": "2026-01-05",
+      "views_observed": 89969296,
+      "likes_observed": 2880945,
+      "youtube_thumbnail_url": "https://i.ytimg.com/vi/08-ocSDpt7o/maxresdefault.jpg",
+      "tiktok_original_url": "https://www.tiktok.com/@thatoneamro/video/7592066346708454686",
+      "tiktok_author": "thatoneamro",
+      "oembed_thumbnail_url": "https://i.ytimg.com/vi/08-ocSDpt7o/hq2.jpg",
+      "frames_accessible_in_agent": false,
+      "note": "Agent can read oEmbed/watch metadata but cannot play or extract video frames from YouTube/TikTok in this environment. User-supplied screenshots or a short clip are required to replicate the exact clean layout."
+    },
+    "visual_boundary": "Clean full-screen main content with minimal overlay; exact layout pending user-supplied reference frames.",
+    "rights_boundary": "Exact reference clips are not rights-cleared. Keep verified rights-cleared sources or require a user-supplied rights-cleared clip pack/permissions.",
+    "flags": {
+      "full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "audience_result_promise": false,
+      "virality_guarantee": false
     }
   }
 }

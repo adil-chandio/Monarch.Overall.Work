@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T13:59:45Z",
-  "head": "47012a5dcfc7f2fa07107878a3bcf61f5349daf5",
+  "generated_at": "2026-11-09T14:55:31Z",
+  "head": "1bdea93deca2979fa276c7fa9d22617c988985e3",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -121,7 +121,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4658,
-      "sha256": "18db63a54241fc4819169de535a357d191851dfac155076f67e0788819b76d5e",
+      "sha256": "5692b7ac6913d1d3587afe4c6c3b5225ae3d829a9f20a0b774abcb0cba0dfb17",
       "evidence_level": "state_ledger"
     },
     {
@@ -132,8 +132,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 35712,
-      "sha256": "ea451de475f16162be8eca1bace75ce2c7cd945288cd7c66e0bab3940b3bb9e2",
+      "bytes": 36660,
+      "sha256": "a0f9f029af8d22c2b447ef08ae888801d89db44047a5041be018ba1fc2293d14",
       "evidence_level": "state_ledger"
     },
     {
@@ -162,8 +162,8 @@
     },
     {
       "path": "docs/continuity/PROBLEMS_FIXES.md",
-      "bytes": 25739,
-      "sha256": "0604e504bdfbc829e3fa267fe19d1e71a29e3082d3d1d0c2a18f98dc84c5e5d2",
+      "bytes": 27411,
+      "sha256": "5e6425ef19cbe7268a1c8b643728c5696bac74fda8c0489571b98e4c06531da5",
       "evidence_level": "operating_contract"
     },
     {
@@ -180,8 +180,8 @@
     },
     {
       "path": "docs/continuity/REJECTIONS.md",
-      "bytes": 2024,
-      "sha256": "6d1bc4150762ef4692d24e919c7078849982469a0b8234d208d557522ada721e",
+      "bytes": 2426,
+      "sha256": "a3fa5b759b4a34f7e07cdfb4120baff15ea003f6cc6525650bac99657b1b1eb5",
       "evidence_level": "operating_contract"
     },
     {
@@ -192,8 +192,8 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 19392,
-      "sha256": "fab5ad4f7f2572aaf6ce6536410e4f8faa8989a403494b9dc1ee9ccb57083f24",
+      "bytes": 21609,
+      "sha256": "5bed917129c8d11fda7a3d6acfdaf9391ef48c91a84267f0648ee50ef01def2b",
       "evidence_level": "state_ledger"
     },
     {
@@ -228,8 +228,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
-      "bytes": 15359,
-      "sha256": "81dd90fb12e084c10bacb18d3801697b8b2ced66e580b758c87b37a068e72e81",
+      "bytes": 17652,
+      "sha256": "9f2b1dd0364836ac28406a5026a8ea492fcd9f7d8466c5f4b8d5b71a03f64da7",
       "evidence_level": "operating_contract"
     },
     {
@@ -246,8 +246,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
-      "bytes": 7263,
-      "sha256": "5710b3305bd3cfa11e64da4e12bf880496a5e860d135fc600ec061fd299aec59",
+      "bytes": 5396,
+      "sha256": "dc6a4c77c32ba91596d86ef0ec1c4c71a96f6125d46a3b2e12e0cd5c451cfd49",
       "evidence_level": "operating_contract"
     },
     {
@@ -258,8 +258,14 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/REJECTIONS.md",
-      "bytes": 6519,
-      "sha256": "600ce77faac1ba2c61fc78291c3ecdb67d061897a77ecaba5d4046e56f2dd964",
+      "bytes": 7365,
+      "sha256": "9a5eedc57ffd0a5e02af41169077f4180b41f2b85d7e4b2a59b587270be296ab",
+      "evidence_level": "operating_contract"
+    },
+    {
+      "path": "docs/continuity/channels/monarch-cam/V8_REFERENCE.md",
+      "bytes": 2004,
+      "sha256": "c37d8d37340e2e270e577608795f639effd3c8765f358b630a36e3d47afd62b3",
       "evidence_level": "operating_contract"
     },
     {
@@ -1580,6 +1586,12 @@
       "path": "docs/continuity/evidence/screenshots/Screenshot_20261108-194953.png",
       "bytes": 318122,
       "sha256": "a80e95df4324917253cb0b8489f06cfe986a853a2ba9ac3fa8e019a9650f31fa",
+      "evidence_level": "screenshot_only"
+    },
+    {
+      "path": "docs/continuity/evidence/screenshots/V7_rejection_20261109-191249.png",
+      "bytes": 547982,
+      "sha256": "f37fdb68e5a93bd6bcf8205afd5f6c02f34aeef37ecdc8a0f92fa8f50e7b6200",
       "evidence_level": "screenshot_only"
     },
     {

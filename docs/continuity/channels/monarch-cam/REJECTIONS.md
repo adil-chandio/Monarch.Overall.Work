@@ -58,3 +58,11 @@
 - Rights boundary: ten rights-cleared social-origin Commons mirrors; per-title Commons API extmetadata, original SHA-1, Credit/Categories social origin and CC BY attribution; no unverified currently trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts, no current-trending claim, no legal opinion.
 - Visual boundary: blurred full-frame background plus sharp uncut source frame; no V6 crop routine, no zoom, no black empty top, no letterbox; all seven labels visible from the first frame.
 - No V7 MP4, QC, download link, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality or audience result is claimed yet. V4/V5/V6 stay rejected; V5 untouched.
+
+## V7 — 2026-11-09
+
+- **Status:** rejected after the GitHub download link was given.
+- **Evidence:** `docs/continuity/evidence/screenshots/V7_rejection_20261109-191249.png`.
+- **Reason:** `Aby yeh clean Karna itna kuch q bhar rakha ha main content to Nazar hi nhi arha ha yeh sab hatana ...` — too many overlays; main content not visible; user wants a clean build matching the referenced Short exactly.
+- **Reference:** `https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK` (`onlymeamro`, `Ranking Most Impressive Moments Ever #shorts`, 60s).
+- **Rule:** V7 technical QC, 65/65 checks, 9/9 audio gates, CI success, committed MP4 and GitHub link are not creative approval. V4/V5/V6/V7 remain rejected. Build V8 as a separate clean lane from user-supplied reference frames; do not reuse exact reference clips without rights/permission.

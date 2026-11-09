@@ -4,17 +4,17 @@
   "branch": "arena/2b012328-monarch-overall-work",
   "head_at_capture": "8cb1e6abf64074db6ff7bfe3dcd496594f329780",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-09T13:56:51Z",
-  "last_event_id": "evt-068-monarch-cam-v7-ci-success",
+  "updated_at": "2026-11-09T14:52:18Z",
+  "last_event_id": "evt-069-monarch-cam-v7-rejected-reference-frames-needed",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "v7_delivery_ready_link_pending",
+    "status": "v8_reference_frames_needed",
     "space": "yt-automation",
     "channel": "monarch-cam",
     "evidence_level": "repo_evidence",
-    "current_step": "Main V7 CI run 42562287554 succeeded in 7m57s. The MP4, sampled frames, contact sheets, 65/65 technical QC, 9/9 unchanged web audio gates, continuous native-audio ledgers and per-title rights/source ledgers are committed at 47012a5. The temporary diagnostic workflow/trigger were removed. The V7 GitHub download link is ready to give; human full-motion/native-audio review is still pending.",
-    "next_action": "Give only the V7 GitHub download link; human full-motion/native-audio review remains pending.",
+    "current_step": "V7 was rejected after its GitHub link. The user says the clean version still has too much overlay and the main content is not visible; they want every element removed/rebuilt to match the referenced YouTube Short exactly. The agent retrieved the reference metadata (onlymeamro / thatoneamro, 60s, 89M views) but cannot play or extract its frames here. Reference screenshots/clip are needed before building V8.",
+    "next_action": "Ask for 2-3 screenshots or a short clip from the reference, then build a separate clean V8 lane from those exact frames; do not re-present V4/V5/V6/V7.",
     "blocking_gaps": [
       "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
       "No complete Arena chat export/JSON",
@@ -195,7 +195,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_delivery_ready_link_pending",
+    "status": "rejected_after_link",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -334,6 +334,43 @@
         "production/monarch-cam/short_ranking_raw_v7/DIAGNOSTIC_TRIGGER.md"
       ],
       "continuity_scan_globs_updated": true
+    },
+    "rejection": {
+      "timestamp": "2026-11-09T14:52:18Z",
+      "screenshot": "docs/continuity/evidence/screenshots/V7_rejection_20261109-191249.png",
+      "reason": "Too many overlays; main content not visible; user wants a clean build matching the referenced Short exactly.",
+      "acceptance": false
+    }
+  },
+  "v8_task": {
+    "id": "monarch-cam-v8-clean-reference-style-ranking",
+    "status": "v8_reference_frames_needed",
+    "reference": {
+      "youtube_url": "https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK",
+      "youtube_id": "08-ocSDpt7o",
+      "title": "Ranking Most Impressive Moments Ever #shorts",
+      "author": "onlymeamro",
+      "channel_url": "https://www.youtube.com/@onlymeamro",
+      "duration_seconds": 60,
+      "uploaded_at": "2026-01-05",
+      "views_observed": 89969296,
+      "likes_observed": 2880945,
+      "youtube_thumbnail_url": "https://i.ytimg.com/vi/08-ocSDpt7o/maxresdefault.jpg",
+      "tiktok_original_url": "https://www.tiktok.com/@thatoneamro/video/7592066346708454686",
+      "tiktok_author": "thatoneamro",
+      "oembed_thumbnail_url": "https://i.ytimg.com/vi/08-ocSDpt7o/hq2.jpg",
+      "frames_accessible_in_agent": false,
+      "note": "Agent can read oEmbed/watch metadata but cannot play or extract video frames from YouTube/TikTok in this environment. User-supplied screenshots or a short clip are required to replicate the exact clean layout."
+    },
+    "visual_boundary": "Clean full-screen main content with minimal overlay; exact layout pending user-supplied reference frames. Remove V7 hook, seven-row list, right UI, comment bubble, Subscribe and bottom chrome unless the reference shows them.",
+    "rights_boundary": "Exact reference clips are not rights-cleared. Keep verified rights-cleared sources or require a user-supplied rights-cleared clip pack/permissions. No current-trending claim or full legal compliance.",
+    "flags": {
+      "full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "audience_result_promise": false,
+      "virality_guarantee": false
     }
   }
 }

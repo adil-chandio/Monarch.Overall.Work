@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-09T13:56:51Z`
-- Last event: `evt-068-monarch-cam-v7-ci-success`
+- Updated: `2026-11-09T14:52:18Z`
+- Last event: `evt-069-monarch-cam-v7-rejected-reference-frames-needed`
 
 ## Active channel
 ```json
@@ -39,12 +39,12 @@
   ],
   "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "Main V7 CI run 42562287554 succeeded in 7m57s. The MP4, sampled frames, contact sheets, 65/65 technical QC, 9/9 unchanged web audio gates, continuous native-audio ledgers and per-title rights/source ledgers are committed at 47012a5. The temporary diagnostic workflow/trigger were removed. The V7 GitHub download link is ready to give; human full-motion/native-audio review is still pending.",
+  "current_step": "V7 was rejected after its GitHub link. The user says the clean version still has too much overlay and the main content is not visible; they want every element removed/rebuilt to match the referenced YouTube Short exactly. The agent retrieved the reference metadata (onlymeamro / thatoneamro, 60s, 89M views) but cannot play or extract its frames here. Reference screenshots/clip are needed before building V8.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
-  "next_action": "Give only the V7 GitHub download link; human full-motion/native-audio review remains pending.",
+  "next_action": "Ask for 2-3 screenshots or a short clip from the reference, then build a separate clean V8 lane from those exact frames; do not re-present V4/V5/V6/V7.",
   "space": "yt-automation",
-  "status": "v7_delivery_ready_link_pending",
+  "status": "v8_reference_frames_needed",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```

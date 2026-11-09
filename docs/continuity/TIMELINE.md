@@ -547,3 +547,12 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Evidence level: `repo_evidence`
 - Details: Main V7 run 42562287554 / job 128981122857 completed success in 7m57s; artifact 13650013062; commit-back 47012a5. Committed MP4 deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4 is 21986563 bytes with SHA-256 4f76a4e102d6c20a655157c955e076bc6a54d34ba86914b334897c8ce249b8f4, 60.0s/1080x1920/30fps/1800 frames. technical_qc.json has 65/65 checks pass; audio_qc.json has 9/9 unchanged web gates pass; native/source ledgers record seven continuous native-audio windows, zero quiet 0.5s blocks and eight rights flags true. Committed sampled frames/contact sheets/QC/rights ledgers are user-visible evidence. Temporary diagnostic workflow/trigger and continuity scan entry were removed. Exact rights-cleared currently trending TikTok/Instagram/YouTube/Reddit/Dailymotion clips remain unmet; V7 uses older rights-cleared Commons social-origin mirrors with attribution/restrictions. No human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality, 3x, likes/subscribes, same-path replacement, audience result, full legal compliance or current-trending claim exists. V4/V5/V6 remain rejected.
 - Ref: `42562287554,13650013062,47012a5,4f76a4e102d6c20a655157c955e076bc6a54d34ba86914b334897c8ce249b8f4`
+
+## `2026-11-09T14:52:18Z` · evt-069-monarch-cam-v7-rejected-reference-frames-needed · user_rejection_and_reference
+
+- Title: V7 rejected; V8 reference frames needed
+- Space: `ops`
+- Evidence level: `session_memory`
+- Details: After the V7 GitHub link, the user attached a phone screenshot and said too many overlays cover the main content. They supplied YouTube Short 08-ocSDpt7o (onlymeamro / thatoneamro, 60s, Ranking Most Impressive Moments Ever) and asked to rebuild every element to match it. Metadata was retrieved, but video frames are not playable/extractable in this environment. V8 needs user-supplied screenshots/clip. V7 CI success, 65/65 checks, 9/9 audio gates and link are not creative acceptance. Exact reference clips are not rights-cleared.
+- Ref: `docs/continuity/evidence/screenshots/V7_rejection_20261109-191249.png`
+- Ref: `https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK`

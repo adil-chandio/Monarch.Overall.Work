@@ -19,3 +19,7 @@ V6 used CC0 animal-only Commons originals, a large black empty upper half, a box
 The active replacement is a separate V7 package. It uses rights-cleared social-origin Commons mirrors of older viral/social clips, not unverified currently trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts. Per-title Commons API extmetadata, original SHA-1, Credit/Categories social origin and CC BY attribution are required before edit. No exact reference clip, current-trending claim, full legal opinion, human full-motion/native-audio listening, sign-off, perfection, retention, virality or audience result is claimed.
 
 If a later build is rejected, record the exact reason and build another separate lane; do not overwrite V5, delete `.git`, restart from stale `ac3a529…`, or re-present V4/V5/V6 as final.
+
+## V7 — 2026-11-09
+
+V7 was rejected after its GitHub link: too many overlays covered the main content. The user wants a clean rebuild matching YouTube Short `08-ocSDpt7o` (`onlymeamro`, `Ranking Most Impressive Moments Ever #shorts`) exactly. V7 CI success, QC and download link are not creative acceptance. V4/V5/V6/V7 remain rejected; build a separate V8 lane after reference frames are supplied.
