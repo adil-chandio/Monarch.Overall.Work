@@ -1,8 +1,8 @@
 # Celebrity POV 3D renderer — unfinished experiment
 
-This is a **work in progress, not a delivered video**. `render.py` constructs geometry, lights, camera and simple procedural character motion in Blender's Python API and can render sample stills or attempt a 60-second sequence. It does not use background image plates or stock video. It reuses the earlier user-selected voice clips and a procedural score.
+This is a **work in progress, not a finished video**. `render.py` constructs geometry, lights, camera and simple procedural character motion in Blender's Python API and can render sample stills or attempt a 60-second sequence. It does not use background image plates or stock video. It reuses the earlier user-selected voice clips and a procedural score.
 
-A seven-frame render was technically successful, but visual review showed a rudimentary toy-like character, limited performance and sparse scenes, below the requested premium animation quality. The training scene does **not** yet have a credible foot-to-ball kick; fan interaction and luxury detail are inadequate. The full video has **not** been rendered or reviewed. Still previews are scratch outputs and deliberately not included.
+A seven-frame render was technically successful, but visual review showed a rudimentary toy-like character, limited performance and sparse scenes, below the requested premium animation quality. The training scene does **not** yet have a credible foot-to-ball kick; fan interaction and luxury detail are inadequate. The original `render.py` version was not rendered as a full video. The separate rigged technical draft described below was rendered and sampled, but it remains below the requested quality. Still previews are scratch outputs and deliberately not included.
 
 Requirements: Python 3.11, `bpy==4.2.23`, numpy, Pillow, imageio-ffmpeg, Blender's system graphics libraries, and the existing voice clips in `showreel/celebrity_pov/audio`. For debugging only:
 
@@ -27,3 +27,9 @@ For chunked rendering, `--start` / `--end` select integer-second boundaries and 
 ## Experimental action sequencing
 
 `--experimental-sequences` enables seekable Blender NLA action clips and crossfades; `action_timeline.py` is an opt-in experiment based on timing and blending principles reviewed in `docs/repo-intel/ANIMATION-REPOSITORIES-REVIEW.md`. Test with Blender's bpy Python: `python showreel/celebrity_3d/tests/test_action_timeline.py`. This does not add football-specific actions or make the existing pilot finished. The parallel draft workflow is manually triggered to avoid automatically rendering the old pilot on unrelated changes.
+
+## Experimental kick blocking (not a finished shot)
+
+`render_rigged.py --experimental-kick` enables an additive right-thigh pose sequence and deterministic ball collision bake. The ball starts moving only when the sampled toe proxy closes on it; a low, ball-following camera is cut in for the strike. The simulation uses a spherical ball/foot proxy, fixed substeps, gravity, a simple ground bounce, rolling friction and a simplified impulse. It is **not a physically complete simulation**: no aerodynamic drag, spin dynamics, real foot collision shape, deformable body, full limb IK, ground reaction or calibrated athletic motion. Impact is approximated between substeps and may miss very fast/tunneling collisions. Ball roll is only approximate.
+
+Tests: `python -m unittest discover -s showreel/celebrity_3d/tests -p 'test_football_physics.py' -v`; then run `tests/test_action_timeline.py` and `tests/test_kick_experiment.py` under the bpy environment. The integration test found one proxy impact at approximately 18.943 s, confirms pose changes under Blender's evaluated NLA, no pre-contact ball movement, ground bounds and reproducible bakes. A two-second 180×320 one-sample animation rendered; eight frames at 4 fps were inspected. These checks are not continuous-motion or audio QC and do not establish realism. The visual test still shows a faceless mannequin, abrupt camera follow, weak upper-body/leg performance and very sparse surroundings; it is not a premium football shot and has not been published as the final video.
