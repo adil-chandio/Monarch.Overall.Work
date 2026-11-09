@@ -105,3 +105,10 @@ This is the regression memory. Failed approaches stay visible so a new chat does
 - **Cause:** strict CC0-only gates and geometric/technical QC measured file integrity, not the requested viral social-origin clips, hooked scene selection or reference-style full-frame composition. V6 `cover_crop()` cropped the main clip and created black/empty areas.
 - **Fix:** separate V7 package with rights-cleared social-origin Commons mirrors, per-title API licence/Credit/Categories/original-SHA-1 verification, CC BY attribution, runner audio/motion best-window selection, blurred full-frame background plus sharp uncut source frame, no crop/zoom, all seven labels visible, sampled-frame QC for black empty areas, and a narrow V7 workflow with `[skip ci]` commit-back.
 - **Standing rule:** technical QC, audio gates, CI success and GitHub links are not creative approval. Do not claim human listening, sign-off, current trending status, full legal compliance or audience results.
+
+## V7 render throughput — 2026-11-09
+
+- **Problem:** the first V7 render step ran full-canvas Gaussian-blurred text shadows on every one of 1800 frames; a local benchmark measured about `5.6 s/frame`, projecting more than the 120-minute CI timeout.
+- **Cause:** `compose_frame()` rebuilt the static reference-style UI and full-frame blur for each frame.
+- **Fix:** cache the static gradient/UI/reaction overlay once per scene and payoff state, use a cheap dark offset shadow for cached text, downsample the full-frame blur, and composite only the cached overlay plus a short transition flash per frame. Local benchmark dropped to about `0.13 s/frame` (~4 minutes for 1800 frames). The visible hook, all seven rank labels, right UI, handle, comment bubble, Subscribe and bottom chrome remain present; no crop, zoom or black empty top was introduced.
+- **CI:** workflow concurrency now uses `cancel-in-progress: true` so the optimized retry supersedes the slow in-progress render instead of running both.

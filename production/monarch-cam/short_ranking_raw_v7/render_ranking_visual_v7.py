@@ -62,7 +62,12 @@ def shadow_text(base, xy, text, f, fill, anchor=None, off=(0, 5), blur=8, stroke
     kw = {'font': f, 'fill': fill, 'anchor': anchor}
     if stroke:
         kw.update({'stroke_width': stroke, 'stroke_fill': stroke_fill})
-    td.text((x + off[0], y + off[1]), text, **kw)
+    shadow_kw = dict(kw)
+    if blur <= 0:
+        # A cheap opaque dark offset instead of a full-canvas Gaussian blur.
+        shadow_kw['fill'] = (0, 0, 0, 150)
+        shadow_kw['stroke_fill'] = (0, 0, 0, 150)
+    td.text((x + off[0], y + off[1]), text, **shadow_kw)
     shadow = tmp.filter(ImageFilter.GaussianBlur(blur)) if blur > 0 else tmp
     composite_layer(base, shadow)
     fg = Image.new('RGBA', (W, H), (0, 0, 0, 0))
@@ -126,25 +131,16 @@ def draw_icon(d, name, cx, cy, active=False):
         d.polygon([(cx + 10, cy - 23), (cx + 30, cy - 15), (cx + 16, cy - 3)], fill=c)
 
 
-def compose_frame(src_pil, frame_no, scene_index, scenes):
-    scene = scenes[scene_index]
+_STATIC_CACHE = {}
+
+
+def build_overlay(scene, state, scenes):
+    """Pre-render the static reference-style UI once per scene/state.
+
+    state 0 = before payoff, 1 = heart active, 2 = heart + reaction visible.
+    Caching avoids running full-canvas shadows/blurs for all 1800 frames.
+    """
     rank = int(scene['rank'])
-    local = clamp((frame_no - int(scene['start_frame'])) / max(1, int(scene['frames']) - 1))
-    t_global = frame_no / FPS
-    src = src_pil.convert('RGB')
-    sw, sh = src.size
-
-    # Full-frame blurred fill: no black, no empty top, no cover crop.
-    bg = src.resize((W, H), Image.Resampling.LANCZOS).filter(ImageFilter.GaussianBlur(38))
-    bg = Image.blend(bg, Image.new('RGB', (W, H), (0, 0, 0)), 0.20)
-
-    # Sharp uncut source frame, aspect-preserving, centered on the blurred fill.
-    scale = min(W / sw, H / sh)
-    nw, nh = max(1, int(sw * scale)), max(1, int(sh * scale))
-    sharp = src.resize((nw, nh), Image.Resampling.LANCZOS).convert('RGBA')
-    canvas = bg.convert('RGBA')
-    canvas.paste(sharp.convert('RGB'), ((W - nw) // 2, (H - nh) // 2))
-
     overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     grad = Image.new('RGBA', (1, H), (0, 0, 0, 0))
     gp = grad.load()
@@ -153,16 +149,16 @@ def compose_frame(src_pil, frame_no, scene_index, scenes):
         bottom = 190 if y > 1550 else 0
         alpha = max(top * (1 - y / 650), bottom * ((y - 1450) / 470), 18)
         gp[0, y] = (0, 0, 0, int(clamp(alpha, 0, 190)))
-    grad = grad.resize((W, H))
-    composite_layer(overlay, grad)
+    composite_layer(overlay, grad.resize((W, H), Image.Resampling.BILINEAR))
+
     ui = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(ui, 'RGBA')
 
     # Top app chrome. No third-party handle or fake engagement numbers.
     f_top = font(27, 'manrope')
-    shadow_text(ui, (58, 62), '12:20', f_top, (255, 255, 255, 235), blur=4)
+    shadow_text(ui, (58, 62), '12:20', f_top, (255, 255, 255, 235), blur=0)
     for name, x, active in [('For You', 430, False), ('Following', 685, True)]:
-        shadow_text(ui, (x, 62), name, f_top, (255, 255, 255, 220 if active else 150), anchor='ma', blur=4)
+        shadow_text(ui, (x, 62), name, f_top, (255, 255, 255, 220 if active else 150), anchor='ma', blur=0)
     d.line((660, 108, 750, 108), fill=(255, 255, 255, 240), width=5)
     d.ellipse((972, 58, 1010, 96), outline=(255, 255, 255, 230), width=4)
     d.line((990, 76, 1030, 76), fill=(255, 255, 255, 230), width=4)
@@ -177,14 +173,15 @@ def compose_frame(src_pil, frame_no, scene_index, scenes):
     y1, y2 = V['hook_line_y']
     x = x0
     for text, color in parts:
-        shadow_text(ui, (x, y1), text, f_hook, tuple(color) + (255,), off=(0, 7), blur=10, stroke=2)
+        shadow_text(ui, (x, y1), text, f_hook, tuple(color) + (255,), off=(0, 7), blur=0, stroke=2)
         x += d.textlength(text, font=f_hook)
-    shadow_text(ui, (W / 2, y2), V['hook_line_2'], f_hook, (255, 255, 255, 255), anchor='ma', off=(0, 7), blur=10, stroke=2)
+    shadow_text(ui, (W / 2, y2), V['hook_line_2'], f_hook, (255, 255, 255, 255),
+                anchor='ma', off=(0, 7), blur=0, stroke=2)
     f_q = font(V['question_font_size'], 'manrope')
-    q_alpha = int(195 + 60 * math.sin(t_global * 2.2))
-    shadow_text(ui, (W / 2, V['question_y']), V['hook_question'], f_q, (255, 235, 60, q_alpha), anchor='ma', blur=5)
+    shadow_text(ui, (W / 2, V['question_y']), V['hook_question'], f_q,
+                (255, 235, 60, 235), anchor='ma', blur=0)
 
-    # Persistent, fully visible 1.-7. list with progressive black label plates.
+    # Persistent, fully visible 1.-7. list with the active-rank highlight.
     f_rank = font(V['rank_font_size'])
     f_label = font(V['moment_font_size'], 'manrope')
     ordered = sorted(scenes, key=lambda s: int(s['rank']))
@@ -192,30 +189,33 @@ def compose_frame(src_pil, frame_no, scene_index, scenes):
         r = int(sc['rank'])
         y = V['list_y'] + pos * V['list_row_height']
         num_color = (255, 59, 48, 255) if r == 1 else (255, 255, 255, 254) if r == 2 else (255, 130, 20, 255) if r == 3 else (255, 255, 255, 254)
-        shadow_text(ui, (V['list_x'], y), str(r) + '.', f_rank, num_color, off=(0, 4), blur=7, stroke=2)
-        # All seven labels are visible from the first frame; only the active-rank highlight progresses.
+        shadow_text(ui, (V['list_x'], y), str(r) + '.', f_rank, num_color,
+                    off=(0, 4), blur=0, stroke=2)
         text = str(sc.get('moment_label') or sc.get('title') or sc.get('id') or '')
         bbox = [V['list_label_x'], y + 8, V['list_label_x'] + V['list_label_max_width'], y + 89]
         shadow_rect(ui, bbox, 17, (8, 8, 10, 178),
                     outline=(255, 255, 255, 110) if r == rank else (255, 255, 255, 30),
                     width=3 if r == rank else 1, shadow=False)
         txt = fit_text(d, text, f_label, V['list_label_max_width'] - 30)
-        shadow_text(ui, (bbox[0] + 14, bbox[1] + 9), txt, f_label, (255, 255, 255, 255), off=(0, 2), blur=5)
+        shadow_text(ui, (bbox[0] + 14, bbox[1] + 9), txt, f_label, (255, 255, 255, 255),
+                    off=(0, 2), blur=0)
         if r == rank:
             d.rounded_rectangle((bbox[0] - 9, y, bbox[0] - 2, y + 96), 4, fill=(255, 221, 51, 255))
 
     # Right vertical social UI; original vector icons, no fake counts.
     for name, y in zip(['heart', 'comment', 'save', 'share', 'remix'], V['right_ui_centers']):
-        draw_icon(d, name, V['right_ui_x'], y, active=(name == 'heart' and local > V['payoff_at']))
+        draw_icon(d, name, V['right_ui_x'], y, active=(name == 'heart' and state >= 1))
     d.rounded_rectangle((V['right_ui_x'] - 28, 1550, V['right_ui_x'] + 28, 1606), 28,
                         fill=(25, 25, 28, 230), outline=(255, 255, 255, 170), width=2)
-    d.arc((V['right_ui_x'] - 20, 1558, V['right_ui_x'] + 20, 1598), 20, 330, fill=(255, 255, 255, 230), width=4)
+    d.arc((V['right_ui_x'] - 20, 1558, V['right_ui_x'] + 20, 1598), 20, 330,
+          fill=(255, 255, 255, 230), width=4)
 
     # Handle, comment bubble, Subscribe button, caption and bottom nav.
     f_handle = font(35, 'manrope')
-    shadow_text(ui, (58, V['handle_y']), V['handle'], f_handle, (255, 255, 255, 255), blur=6)
+    shadow_text(ui, (58, V['handle_y']), V['handle'], f_handle, (255, 255, 255, 255), blur=0)
     f_sub = font(24, 'manrope')
-    shadow_text(ui, (58, V['handle_y'] + 45), 'Ranking Most Impressive Moments Ever', f_sub, (255, 255, 255, 225), blur=4)
+    shadow_text(ui, (58, V['handle_y'] + 45), 'Ranking Most Impressive Moments Ever',
+                f_sub, (255, 255, 255, 225), blur=0)
     cb = V['caption_bbox']
     shadow_rect(ui, cb, 24, (245, 245, 245, 235), shadow=False)
     f_bubble = font(29, 'manrope')
@@ -224,33 +224,60 @@ def compose_frame(src_pil, frame_no, scene_index, scenes):
     sb = V['subscribe_bbox']
     shadow_rect(ui, sb, 46, (255, 255, 255, 255), shadow=False)
     f_button = font(30, 'manrope')
-    d.text(((sb[0] + sb[2]) / 2, (sb[1] + sb[3]) / 2), V['bottom_subscribe_text'], font=f_button, fill=(12, 12, 12, 255), anchor='mm')
+    d.text(((sb[0] + sb[2]) / 2, (sb[1] + sb[3]) / 2), V['bottom_subscribe_text'],
+           font=f_button, fill=(12, 12, 12, 255), anchor='mm')
     f_small = font(25, 'manrope')
-    shadow_text(ui, (60, V['bottom_caption_y']), V['bottom_caption_text'], f_small, (255, 255, 255, 245), blur=4)
+    shadow_text(ui, (60, V['bottom_caption_y']), V['bottom_caption_text'],
+                f_small, (255, 255, 255, 245), blur=0)
     f_nav = font(22, 'manrope')
     for text, x in [('HOME', 150), ('DISCOVER', 420), ('+', 540), ('INBOX', 690), ('PROFILE', 930)]:
-        shadow_text(ui, (x, V['bottom_nav_y']), text, f_nav, (255, 255, 255, 220), anchor='ma', blur=3)
-    d.rounded_rectangle((int(W / 2 - 34), H - 12, int(W / 2 + 34), H - 7), 4, fill=(255, 255, 255, 220))
+        shadow_text(ui, (x, V['bottom_nav_y']), text, f_nav, (255, 255, 255, 220), anchor='ma', blur=0)
+    d.rounded_rectangle((int(W / 2 - 34), H - 12, int(W / 2 + 34), H - 7), 4,
+                        fill=(255, 255, 255, 220))
 
-    # Brief payoff reaction, inside the safe area. No zoom/crop of the clip.
-    if local > V['reaction_at']:
-        alpha = int(255 * clamp((local - V['reaction_at']) / 0.12))
+    # Payoff reaction, inside the safe area. No zoom/crop of the clip.
+    if state >= 2:
         f_react = font(47, 'manrope')
         shadow_text(ui, (W / 2, 1370), str(scene['reaction_text']).upper(), f_react,
-                    (255, 255, 255, alpha), anchor='ma', off=(0, 4), blur=8, stroke=2)
-        if local > V['payoff_at']:
-            d.rounded_rectangle((V['right_ui_x'] - 44, 790, V['right_ui_x'] + 44, 878), 44,
-                                fill=(255, 221, 51, 220))
-            f_e = font(50)
-            d.text((V['right_ui_x'], 835), str(scene['emoji']).upper()[:2], font=f_e, fill=(20, 20, 20, 255), anchor='mm')
+                    (255, 255, 255, 255), anchor='ma', off=(0, 4), blur=0, stroke=2)
+        d.rounded_rectangle((V['right_ui_x'] - 44, 790, V['right_ui_x'] + 44, 878), 44,
+                            fill=(255, 221, 51, 220))
+        f_e = font(50)
+        d.text((V['right_ui_x'], 835), str(scene['emoji']).upper()[:2], font=f_e,
+               fill=(20, 20, 20, 255), anchor='mm')
 
     composite_layer(overlay, ui)
+    return overlay
+
+
+def compose_frame(src_pil, frame_no, scene_index, scenes):
+    scene = scenes[scene_index]
+    local = clamp((frame_no - int(scene['start_frame'])) / max(1, int(scene['frames']) - 1))
+    state = 2 if local > V['reaction_at'] else 1 if local > V['payoff_at'] else 0
+    key = (scene_index, state, tuple(s['id'] for s in scenes))
+    overlay = _STATIC_CACHE.get(key)
+    if overlay is None:
+        overlay = build_overlay(scene, state, scenes)
+        _STATIC_CACHE[key] = overlay
+
+    src = src_pil.convert('RGB')
+    sw, sh = src.size
+    # Fast full-frame blurred fill: downsample, blur, upsample. No black empty area.
+    small = src.resize((270, 480), Image.Resampling.BILINEAR).filter(ImageFilter.GaussianBlur(9))
+    bg = small.resize((W, H), Image.Resampling.BILINEAR)
+    bg = Image.blend(bg, Image.new('RGB', (W, H), (0, 0, 0)), 0.20)
+
+    # Sharp uncut source frame, aspect-preserving, centered on the blurred fill.
+    scale = min(W / sw, H / sh)
+    nw, nh = max(1, int(sw * scale)), max(1, int(sh * scale))
+    sharp = src.resize((nw, nh), Image.Resampling.LANCZOS).convert('RGB')
+    canvas = bg.convert('RGBA')
+    canvas.paste(sharp, ((W - nw) // 2, (H - nh) // 2))
+
     # Very short scene transition flash, composited after the UI so it does not wipe it.
     if local < 0.07:
-        flash = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-        ImageDraw.Draw(flash, 'RGBA').rectangle((0, 0, W, H), fill=(255, 255, 255, int(75 * (1 - local / 0.07))))
-        composite_layer(overlay, flash)
-
+        flash = Image.new('RGBA', (W, H), (255, 255, 255, int(75 * (1 - local / 0.07))))
+        overlay = Image.alpha_composite(overlay, flash)
     return Image.alpha_composite(canvas, overlay).convert('RGB')
 
 

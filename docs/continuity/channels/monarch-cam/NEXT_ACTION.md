@@ -38,3 +38,9 @@ Two CC BY 3.0 YouTube comedy candidates whose Commons descriptions contained thi
 This is a technical build for human review. No human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality, 3x, subscribe/like, same-path replacement or audience result is claimed.
 
 After the V7 CI run succeeds: inspect the new MP4, `review/qc_summary.json`, `review/technical_qc.json`, sampled frames and rights/source ledgers; record the result with `checkpoint`; update `CHANNEL_STATE.json` / `STATE.json`; run `refresh`, `render`, `validate`, `render --check`; commit/push on `arena/2b012328-monarch-overall-work`; then give the V7 download link. If the user again rejects the result, record the exact reason and build a separate V8 lane; do not modify V5 or re-present V4/V5/V6 as final.
+
+## Current CI status — 2026-11-09
+
+- First V7 CI run `42541601536` failed at the per-title Commons rights ledger because the API key `Restrictions` was checked as lowercase `restrictions`. That contract is fixed.
+- Second V7 CI run `42542753775` passed source verification but its renderer was too slow (about `5.6 s/frame` locally), so an optimized cached-UI renderer (~`0.13 s/frame`) is being pushed with workflow `cancel-in-progress: true` to supersede the slow run.
+- No V7 MP4, QC, download link, human full-motion/native-audio review or creative acceptance exists yet. Do not give a V4/V5/V6 link.

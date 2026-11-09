@@ -24,14 +24,14 @@ V7 is a separate package. It uses **ten rights-cleared social-origin Commons ori
 2. downloads the original or a Commons-generated VP9/Opus transcode;
 3. measures native audio RMS and one-frame-per-second motion, writes candidate contact sheets, and selects the seven strongest audible/moving 8.6-second windows;
 4. locks exact 60.0s / 1800-frame / 30fps / 1080x1920 timeline scenes ranked `7 → 1`;
-5. renders a **blurred full-frame background** plus a sharp uncut source frame, then overlays the screenshot-style hook, left rank plates, right platform UI, @Monarch-Cam handle, caption bubble, Subscribe button and bottom chrome;
+5. renders a **blurred full-frame background** plus a sharp uncut source frame, then overlays the screenshot-style hook, left rank plates, right platform UI, @Monarch-Cam handle, caption bubble, Subscribe button and bottom chrome. The static overlay is cached once per scene/state and the full-frame blur is downsampled so the 1800-frame render completes inside CI without changing the visible layout;
 6. builds only raw per-window native source audio and runs the unchanged nine web audio gates plus V7 technical QC.
 
 The deliverable is `deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4`.
 
 ## Rights boundary
 
-The user asked for trending social-platform clips. V7 does **not** download unverified trending TikTok, Instagram, Reddit, Dailymotion or YouTube reposts, because no rights clearance exists for those files. It uses per-title rights-cleared social-origin originals mirrored on Wikimedia Commons, with PD/CC0/CC BY 3.0 API verification, CC BY attribution and a social-origin ledger. It does **not** claim the clips are currently trending, that the exact reference clips were used, or that every named platform is represented. If the user supplies specific clips plus permission/rights records, a later V8 can swap them in through the same pipeline.
+The user asked for trending social-platform clips. V7 does **not** download unverified trending TikTok, Instagram, Reddit, Dailymotion or YouTube reposts, because no rights clearance exists for those files. It uses per-title rights-cleared social-origin originals mirrored on Wikimedia Commons, with PD/CC BY 3.0 API verification, CC BY attribution and a social-origin ledger. It does **not** claim the clips are currently trending, that the exact reference clips were used, or that every named platform is represented. If the user supplies specific clips plus permission/rights records, a later V8 can swap them in through the same pipeline.
 
 ## No acceptance claim
 

@@ -23,7 +23,7 @@ Two CC BY 3.0 YouTube comedy candidates (`Street Quiz -- Who is Barack Obama...`
 
 ## Reuse conditions
 
-- Public-domain and CC0 sources: no attribution requirement; credit is recorded voluntarily.
+- Public-domain sources: no attribution requirement; credit is recorded voluntarily.
 - CC BY 3.0 sources: title, creator, licence, licence URL and source link are recorded here and in the upload metadata; the description must retain this credit.
 - No CC BY-SA, CC BY-NC, fair-use-only, Section 107 substitute, `license review needed (video)`, or unverified social-platform repost is used.
 - No currently trending claim, audience result, virality guarantee, human full-motion listening, sign-off or creative approval is claimed.

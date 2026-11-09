@@ -14,7 +14,8 @@ on:
 
 concurrency:
   group: monarch-cam-viral-style-v7-${{ github.ref }}
-  cancel-in-progress: false
+  # A newer V7 retry supersedes an older slow render.
+  cancel-in-progress: true
 
 permissions:
   contents: write

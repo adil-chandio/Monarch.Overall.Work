@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v7_ci_retry_pending",
+  "status": "v7_render_optimized_retry_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -124,7 +124,7 @@
   },
   "v7_task": {
     "id": "monarch-cam-v7-viral-style-ranking",
-    "status": "v7_ci_retry_pending",
+    "status": "v7_render_optimized_retry_pending",
     "package": "production/monarch-cam/short_ranking_raw_v7/",
     "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
     "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
@@ -144,6 +144,12 @@
       "failed_step": "Per-title Commons API rights and social-origin verification",
       "cause": "verify_sources_v7.py checked lowercase 'restrictions' instead of API key 'Restrictions'",
       "fixes_ready": true
+    },
+    "render_optimization": {
+      "issue": "Full-canvas blurred UI rebuilt per frame; ~5.6 s/frame locally",
+      "fix": "Cached static UI per scene/state, cheap dark offset shadow, downsampled full-frame blur; ~0.13 s/frame locally",
+      "slow_run_id": "42542753775",
+      "workflow_cancel_in_progress": true
     }
   }
 }

@@ -496,3 +496,14 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `production/monarch-cam/short_ranking_raw_v7/build_ranking_audio_raw_v7.py`
 - Ref: `production/monarch-cam/short_ranking_raw_v7/render_ranking_visual_v7.py`
 - Ref: `docs/continuity/channels/monarch-cam/NEXT_ACTION.md`
+
+## `2026-11-09T01:20:00Z` · evt-063-monarch-cam-v7-render-optimized · result
+
+- Title: V7 renderer optimized; slow CI render superseded
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: Second V7 CI run 42542753775 passed source/rights verification but its renderer rebuilt full-canvas Gaussian-blurred UI on every frame; a local benchmark measured about 5.6 s/frame, projecting more than the 120-minute CI timeout. Rewrote render_ranking_visual_v7.py to cache the static gradient/UI/reaction overlay once per scene and payoff state, use a cheap dark offset shadow, downsample the full-frame blur, and composite only the cached overlay plus a short transition flash per frame. Local benchmark dropped to about 0.13 s/frame (~4 minutes for 1800 frames). Renderer --check, two single-frame renders with the real selected_windows field shape, V7 contract validation and visual inspection passed. Set V7 workflow cancel-in-progress=true so the optimized retry supersedes the slow run. No V7 MP4, QC, download link, human review or creative acceptance exists yet.
+- Ref: `production/monarch-cam/short_ranking_raw_v7/render_ranking_visual_v7.py`
+- Ref: `.github/workflows/monarch-cam-short-ranking-viral-v7.yml`
+- Ref: `docs/continuity/PROBLEMS_FIXES.md`
+- Ref: `docs/continuity/channels/monarch-cam/NEXT_ACTION.md`

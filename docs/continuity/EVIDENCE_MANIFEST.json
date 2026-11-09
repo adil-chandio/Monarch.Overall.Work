@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T00:54:47Z",
-  "head": "9c40792f95f323308acdf5d9ec508f7a69fcc786",
+  "generated_at": "2026-11-09T01:47:35Z",
+  "head": "9eee0dd7e26b53260e96a2d505d461a968404b1b",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
-      "bytes": 14453,
-      "sha256": "246c8c62d1a2eee3a8192990b49558318bc5b4f76b007f5f233b2b88115368e4",
+      "bytes": 14506,
+      "sha256": "f116b4b4fb3374df745eca8ff1d3a4ba079779e96ee2c2214f9562c90d2f23bb",
       "evidence_level": "archive_metadata"
     },
     {
@@ -115,7 +115,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4658,
-      "sha256": "5bae42294946252be25842f03269cb85c33de84ae6cae0884ea37b85ef111283",
+      "sha256": "da66a82f31fe452da20419997aafcef4f58c9247ac609908bd9cf287d0491488",
       "evidence_level": "state_ledger"
     },
     {
@@ -126,8 +126,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 28818,
-      "sha256": "5f8b9aca012bb0dcbe9b6d82053719dd1b1874539900396e1551f36cd826b525",
+      "bytes": 30178,
+      "sha256": "8a821c417a36f3bb9b3153268d9d30a3f3e0a6d972b72a986ed28e6de6a4b15a",
       "evidence_level": "state_ledger"
     },
     {
@@ -156,8 +156,8 @@
     },
     {
       "path": "docs/continuity/PROBLEMS_FIXES.md",
-      "bytes": 16101,
-      "sha256": "c809f5eca3a1f306e1da0ef80b0b6deb6b3e3724a94523a168c375acb4ce86cd",
+      "bytes": 17107,
+      "sha256": "5e585cfc5facbc1a9c2bc8638c7d48a994318abf180cff4bcff277f3b6baccac",
       "evidence_level": "operating_contract"
     },
     {
@@ -186,8 +186,8 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 12550,
-      "sha256": "d51dae4ad9c32f3f93aefab95ef9024a545fc2ddd551572918bfa9440eaa8233",
+      "bytes": 12533,
+      "sha256": "e06dbc14821c0089313b5e91e2ebc122e3833452a7d2143be73b65007ec22391",
       "evidence_level": "state_ledger"
     },
     {
@@ -222,8 +222,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
-      "bytes": 7913,
-      "sha256": "771cd5e1e449212b69c279dd8cc63816a11f49b310e671632628b7d3e6bd5eea",
+      "bytes": 8263,
+      "sha256": "8330591cad0da67ac158f021431bf63701d3056faa37a3e59f62a5e00829e2f2",
       "evidence_level": "operating_contract"
     },
     {
@@ -240,8 +240,8 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
-      "bytes": 4585,
-      "sha256": "ed4967bbb4e7545e0e597f885e3a9821a8a7db0e65e99338819dc820cd0633c5",
+      "bytes": 5193,
+      "sha256": "dedc91964221ef36181adc26167d27942d314523a4c876363aa532bf37b343d7",
       "evidence_level": "operating_contract"
     },
     {
@@ -2160,14 +2160,14 @@
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/CREDITS.md",
-      "bytes": 4527,
-      "sha256": "2eb7db984cf7c1a4eb99b86ec93e592bbfbe9927308730f682cdef8aeaaacd97",
+      "bytes": 4519,
+      "sha256": "da95ef2a363c8a75d3f076f6848f7457f867f85b39b2af8b02b12e90dd5c4f35",
       "evidence_level": "repo_evidence"
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/RANKING_V7_PLAN_AND_METADATA.md",
-      "bytes": 3432,
-      "sha256": "a857a9aa646bd460302831a5cd7068de5c3106e6e5b49ca2b75ccc75819300cb",
+      "bytes": 3599,
+      "sha256": "6590be66411613cb3ff7ee5bbd3a8afa9d8b714c72830809d3dde39de75b2d07",
       "evidence_level": "repo_evidence"
     },
     {
@@ -2214,8 +2214,8 @@
     },
     {
       "path": "production/monarch-cam/short_ranking_raw_v7/render_ranking_visual_v7.py",
-      "bytes": 24047,
-      "sha256": "9be540eab90e0bcc89dcb264fc5c7efd4f3bbfa3bd0f545317f2d55ccb1effa2",
+      "bytes": 24697,
+      "sha256": "f6161140357d082206a2ef9d6745e2e87effdf3f21b877114e99f247593a57d3",
       "evidence_level": "repo_evidence"
     },
     {
