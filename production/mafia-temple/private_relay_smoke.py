@@ -50,10 +50,14 @@ for attempt in range(24):
         if e.code!=401 or attempt==23:raise RuntimeError('OIDC verification failed') from None
         time.sleep(5)
 else:raise RuntimeError('Relay unavailable')
+print('::notice title=relay-stage::Authenticated health passed',flush=True)
 try:
-    opener.open(url+'/health',timeout=20)
+    with opener.open(url+'/health',timeout=20) as r:
+        body=r.read(256)
+        print('::notice title=relay-stage::Unauthenticated response code='+str(r.status)+' bytes='+str(len(body))+' equals_health='+str(body==b'ok'),flush=True)
     raise RuntimeError('Unauthenticated request was accepted')
 except urllib.error.HTTPError as e:
+    print('::notice title=relay-stage::Unauthenticated HTTP '+str(e.code),flush=True)
     if e.code!=401:raise RuntimeError('Unexpected unauthenticated response') from None
 payload=b'private relay transport smoke test; no user media\n'
 code,_=request('/smoke',payload)
