@@ -1,0 +1,42 @@
+name: YouTube validation audit — push lane
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths:
+      - 'production/extinct-life/research/api-requests/next-topic.json'
+      - 'scripts/yt-validation-audit.py'
+      - 'tests/test_yt_validation_audit.py'
+      - '.github/workflows/yt-validation-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: yt-validation-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  public-api-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline regression tests
+        run: python -m unittest discover -s tests -p test_yt_validation_audit.py -v
+      - name: Bounded public API research (secrets stay on runner)
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YTAP1: ${{ secrets.YTAP1 }}
+          YTAPI1: ${{ secrets.YTAPI1 }}
+          YT_KEY: ${{ secrets.YT_KEY }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python scripts/yt-validation-audit.py --request production/extinct-life/research/api-requests/next-topic.json --out .cache/yt-validation-audit
+      - name: Preserve measured or blocked report (never auto-commit)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yt-validation-${{ github.run_id }}
+          path: .cache/yt-validation-audit/
+          if-no-files-found: error
+          retention-days: 14
