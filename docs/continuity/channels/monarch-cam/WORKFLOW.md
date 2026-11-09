@@ -96,9 +96,18 @@ Then update `docs/continuity/channels/monarch-cam/CHANNEL_STATE.json` and `docs/
 ## 7. Non-negotiable
 
 - Do not ask answered questions or request the old explanation again.
-- Do not re-present V4/V5 as final.
+- Do not re-present V4/V5/V6 as final.
 - Do not reuse V5 occluding geometry or dead-end sources.
 - Do not claim human approval, native-audio listening, sign-off, perfection, retention, virality, revenue or audience results.
 - Do not claim all Arena chats are preserved while `COVERAGE.json` says `full_arena_export_available=false`.
 - Do not leave unimported files in `chat_exports/inbox/`.
 - Do not restart from the beginning.
+
+## V6 rejection / V7 active task — 2026-11-05
+
+- V6 was rejected after its GitHub upload/download-link answer: `Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...` plus six reference screenshots. Technical QC, 49/49 checks, 9/9 audio gates, CI success and V6 links are **not** creative acceptance.
+- The user wants `📈 trending viral videos` / social-platform clips, `viral ke sath sath purani bhi chalenge`, `bas clips mazedar next level honi chaiye`, the best hooked/engaging scenes extracted, and a full 60s ranking built on them. The reference screenshots show `ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha`: full-screen uncut clip, visible hook, all 1.-7. list items, right UI, caption bubble, Subscribe and bottom chrome.
+- V7 is a separate package at `production/monarch-cam/short_ranking_raw_v7/` with workflow `.github/workflows/monarch-cam-short-ranking-viral-v7.yml` and deliverable `deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4`.
+- Rights boundary: ten rights-cleared social-origin Commons mirrors; per-title Commons API extmetadata, original SHA-1, Credit/Categories social origin and CC BY attribution; no unverified currently trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts, no current-trending claim, no legal opinion.
+- Visual boundary: blurred full-frame background plus sharp uncut source frame; no V6 crop routine, no zoom, no black empty top, no letterbox; all seven labels visible from the first frame.
+- No V7 MP4, QC, download link, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality or audience result is claimed yet. V4/V5/V6 stay rejected; V5 untouched.

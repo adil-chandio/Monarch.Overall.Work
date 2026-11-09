@@ -34,6 +34,17 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Details: build_v3 / new_cleared_animal / subtle_rank / 35s_ent.
 - Ref: `docs/continuity/DECISION_LOG.jsonl`
 
+## `2026-11-05T00:30:00Z` · evt-061-monarch-cam-v6-rejected-v7-task · result
+
+- Title: V6 rejected; separate V7 viral-style ranking task configured
+- Space: `yt-automation`
+- Evidence level: `repo_evidence`
+- Details: User rejected V6 after its GitHub upload/download-link answer: 'Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...' plus six reference screenshots. User wants trending/older funny social-platform clips, best hooked scenes, a full 60s ranking, exact reference-style visible hook/1.-7. list/UI, full-screen uncut clips with no crop/cut/black empty area, then a new GitHub download link. Technical QC, 49/49 checks, 9/9 audio gates, CI success and V6 links are not creative approval. Separate V7 package/workflow configured with ten rights-cleared social-origin Commons mirrors, per-title API licence/Credit/Categories/original-SHA-1 verification, CC BY attribution, objective audio/motion window selection, blurred full-frame background plus sharp uncut source frame, all seven labels visible, no crop/zoom, sampled-frame QC and narrow workflow. No V7 MP4, QC, download link, human full-motion/native-audio listening, sign-off, creative approval, current-trending claim, legal opinion, perfection, retention, virality or audience result is claimed.
+- Ref: `docs/continuity/channels/monarch-cam/NEXT_ACTION.md`
+- Ref: `docs/continuity/REJECTIONS.md`
+- Ref: `production/monarch-cam/short_ranking_raw_v7/RANKING_V7_PLAN_AND_METADATA.md`
+- Ref: `.github/workflows/monarch-cam-short-ranking-viral-v7.yml`
+
 ## `2026-11-07T14:59:22+00:00` · evt-011-v3-build · result
 
 - Title: V3 MP4 delivered

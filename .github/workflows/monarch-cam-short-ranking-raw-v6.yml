@@ -1,21 +1,8 @@
 name: Monarch Cam - Raw Full-Screen V6
 
 on:
-  push:
-    branches: [arena/2b012328-monarch-overall-work]
-    paths:
-      - '.github/workflows/monarch-cam-short-ranking-raw-v6.yml'
-      - 'production/monarch-cam/short_ranking_raw_v6/*.py'
-      - 'production/monarch-cam/short_ranking_raw_v6/*.json'
-      - 'production/monarch-cam/short_ranking_raw_v6/review/selected_windows.json'
-      - 'production/monarch-cam/short_ranking_raw_v6/review/candidates/candidate_review_manifest.json'
-      - '!production/monarch-cam/short_ranking_raw_v6/**/*.md'
-      - '!production/monarch-cam/short_ranking_raw_v6/review/**'
-      - '!docs/continuity/**'
-      - '.gitignore'
-      - 'public/showreel/audio_qc/**'
-      - 'public/showreel/fonts/**'
-      - 'deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4'
+  # V6 is rejected and must not rebuild on V7/continuity pushes.
+  # Manual dispatch remains available for historical debugging only.
   workflow_dispatch:
 
 concurrency:

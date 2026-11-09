@@ -27,7 +27,7 @@
 
 - Continuity archive is delivered, validated and commit-pinned. Full Arena chat exports are still missing; `full_arena_export_available=false`.
 - V4 and V5 ranking Shorts are **creatively rejected**: V4 “sirf text likh diya”; V5 “NAHI abhi bhi theek se nhi” plus four screenshots. Technical QC is not acceptance.
-- A separate V6 technical package is built; V5 stays untouched. It uses seven per-title CC0 Commons originals, a source/clip/social-origin ledger, corrected geometry, raw per-window native audio, renderer, QC contract and a workflow. CI run `42517651544` succeeded and the V6 MP4 exists. Human review/acceptance is pending.
+- V6 was rejected after its upload/link; V5 stays untouched. A separate V7 package is configured with rights-cleared social-origin Commons mirrors, a blurred full-frame background, sharp uncut source frames and the visible reference-style ranking UI. No V7 MP4 or creative acceptance exists yet.
 - V5 geometry dead end: hook/question occluded by right `1.–7. LIST`; V6 uses a centered colorful top hook and fully visible left `1.–7.` black label plates with progressive labels, right platform UI, bottom comment/Subscribe, payoff cuts/zoom, reaction bubbles and emojis.
 - V6 uses only per-title verified CC0 Commons originals, not unverified real social-platform reposts. Only native per-window source audio is allowed; no generated sound/audio substitution, no silent segments, no third-party reposts, no strict CC0-only assumption applied to social clips.
 - No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience-result claim.
@@ -52,7 +52,7 @@ Open this file, inherit `CHANNEL_STATE.json`, then continue the single active Mo
 - `WORKFLOW.md` — exact production workflow and commands.
 - `NEXT_ACTION.md` — single next-action capsule.
 - `EASY_RESUME.md` — copy-paste prompt with no user explanation.
-- `REJECTIONS.md` — V4/V5 and dead ends; V6 is not acceptance.
+- `REJECTIONS.md` — V4/V5/V6 rejections and dead ends; V6 is not acceptance.
 - `EVIDENCE.md` — exact commits, runs, hashes, deliverables, V6 package.
 - `production/monarch-cam/short_ranking_raw_v6/RANKING_V6_PLAN_AND_METADATA.md` — V6 rights, geometry, audio and QC contract.
 - `.github/workflows/monarch-cam-short-ranking-raw-v6.yml` — V6 build/QC workflow.
@@ -60,3 +60,12 @@ Open this file, inherit `CHANNEL_STATE.json`, then continue the single active Mo
 - `docs/MONARCH_CAM_30_DAY_GROWTH_REVENUE_PLAN_2026-11.md`
 - `docs/MONARCH_CAM_PERMISSION_FREE_BEAR_FOOTAGE_PLAN_2026-11.md`
 - `docs/continuity/PROBLEMS_FIXES.md`, `WORK_LEVELS.md`, `GAPS.md`.
+
+## V6 rejection / V7 active task — 2026-11-05
+
+- V6 was rejected after its GitHub upload/download-link answer: `Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...` plus six reference screenshots. Technical QC, 49/49 checks, 9/9 audio gates, CI success and V6 links are **not** creative acceptance.
+- The user wants `📈 trending viral videos` / social-platform clips, `viral ke sath sath purani bhi chalenge`, `bas clips mazedar next level honi chaiye`, the best hooked/engaging scenes extracted, and a full 60s ranking built on them. The reference screenshots show `ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha`: full-screen uncut clip, visible hook, all 1.-7. list items, right UI, caption bubble, Subscribe and bottom chrome.
+- V7 is a separate package at `production/monarch-cam/short_ranking_raw_v7/` with workflow `.github/workflows/monarch-cam-short-ranking-viral-v7.yml` and deliverable `deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4`.
+- Rights boundary: ten rights-cleared social-origin Commons mirrors; per-title Commons API extmetadata, original SHA-1, Credit/Categories social origin and CC BY attribution; no unverified currently trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts, no current-trending claim, no legal opinion.
+- Visual boundary: blurred full-frame background plus sharp uncut source frame; no V6 crop routine, no zoom, no black empty top, no letterbox; all seven labels visible from the first frame.
+- No V7 MP4, QC, download link, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality or audience result is claimed yet. V4/V5/V6 stay rejected; V5 untouched.

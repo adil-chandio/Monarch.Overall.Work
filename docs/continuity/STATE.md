@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-08T23:14:25Z`
-- Last event: `evt-060-monarch-cam-v6-workflow-trigger-hardening`
+- Updated: `2026-11-05T00:30:00Z`
+- Last event: `evt-061-monarch-cam-v6-rejected-v7-task`
 
 ## Active channel
 ```json
@@ -35,16 +35,16 @@
     "No full sidebar chat list",
     "No assistant turns for EMS-20261011-001",
     "No live bidirectional connected-app sync",
-    "V6 technical build complete; human full-motion/native-audio review and creative acceptance are not recorded. No rights-verified real social-platform reposts."
+    "V6 was rejected by the user after its GitHub upload/link; technical QC, 49/49 checks, 9/9 audio gates and the download link are not creative approval. V7 must use per-title rights-cleared social-origin source/credit/origin records, not unverified currently trending reposts. No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience result is claimed."
   ],
   "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "Separate V6 technical build is complete: CI run 42517651544 succeeded, workflow committed 5559b52, and the V6 MP4, rights/source ledgers, corrected geometry, native per-window audio, renderer, QC with safe-area/social-origin checks and qc_summary.json are in the repo. V5 untouched. Human full-motion/native-audio review and creative acceptance are still pending.",
+  "current_step": "V6 was explicitly rejected with six reference screenshots after its GitHub upload and download-link answer. A separate V7 package and workflow are configured at production/monarch-cam/short_ranking_raw_v7/; no V7 MP4, QC, download link, human review or creative acceptance exists yet.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
-  "next_action": "Open the V6 MP4 and qc_summary.json; perform a human full-motion/native-audio review. Do not claim creative acceptance or approval.",
+  "next_action": "Build and upload the separate V7 60s ranking Short, then give only its own GitHub download link; do not re-present V4/V5/V6 or claim creative acceptance.",
   "space": "yt-automation",
-  "status": "v6_technical_build_complete",
+  "status": "v6_rejected_v7_task_active",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```
@@ -55,7 +55,7 @@
   "current_step": "Pack commit a8596fa869df50593270ed53b39a11f2bc8ca0e0 and exact-state commit 4b3574c1c936e47cf2a68d719bae0e9fe6a2380a pushed; CI 42499227414 and 42499591071 succeeded.",
   "evidence_level": "repo_evidence",
   "id": "repo-continuity-archive-v1",
-  "next_action": "If real full Arena chat exports are supplied, import them via import-chat and update COVERAGE/STATE/GAPS; keep unresolved V6 separate.",
+  "next_action": "If real full Arena chat exports are supplied, import them via import-chat and update COVERAGE/STATE/GAPS; keep the rejected V6 and active V7 package separate.",
   "space": "ops",
   "status": "delivered",
   "title": "Repo-first continuation archive"
@@ -65,17 +65,22 @@
 ## Parallel video task
 ```json
 {
-  "claims": "V6 technical build complete at run 42517651544 / commit 5559b52: 49/49 technical checks, 9/9 audio gates, safe-area/social-origin checks passed, V5 untouched. No human full-motion/native-audio listening, creative acceptance, sign-off, perfection, retention, virality, or audience results.",
+  "claims": "V4, V5 and V6 are rejected. V6 technical QC and the GitHub download link are not creative acceptance. V7 is a separate configured task; no V7 MP4, human review, sign-off, perfection, retention, virality or audience result is claimed.",
   "evidence_level": "gap",
   "id": "monarch-cam-v6-intent",
-  "next_action": "Open the V6 MP4 and qc_summary.json; perform a human full-motion/native-audio review. Do not claim creative acceptance or approval.",
+  "next_action": "Build a separate V7 60s ranking Short from rights-cleared social-origin Commons mirrors, using objective best-window selection, a blurred full-frame background plus sharp uncut source frames, the visible reference-style hook/1.-7. list/UI, then upload the new V7 MP4 to GitHub and give its own download link. Do not re-present V4/V5/V6 and do not claim creative acceptance.",
   "rejected": [
     "V4 “sirf text likh diya”",
-    "V5 “NAHI abhi bhi theek se nhi”"
+    "V5 “NAHI abhi bhi theek se nhi”",
+    "V6 “Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ... trending viral videos…”"
   ],
   "space": "yt-automation",
-  "status": "v6_technical_build_complete",
-  "title": "Next-level full-motion raw funny-animal ranking Short"
+  "status": "v6_rejected_v7_task_active",
+  "title": "Viral-style 60s ranking Short after V6 rejection",
+  "v6_rejected": true,
+  "v7_accepted": false,
+  "v7_package_configured": true,
+  "v7_technical_build_complete": false
 }
 ```
 
@@ -127,7 +132,13 @@
   "v4_creative_acceptance": false,
   "v5_creative_acceptance": false,
   "v6_accepted": false,
+  "v6_creative_acceptance": false,
   "v6_started": false,
+  "v7_creative_acceptance": false,
+  "v7_current_trending_claim": false,
+  "v7_human_full_motion_native_audio_listening": false,
+  "v7_technical_build_complete": false,
+  "v7_unverified_social_reposts": false,
   "virality_guaranteed": false
 }
 ```
@@ -144,7 +155,7 @@
   "Human full-motion/native-audio listening and creative sign-off.",
   "Owner says Monarch Cam is one of the 3 channels; config/channels.json legacy 3 slot names are not yet reconciled.",
   "A workspace can be restored to an old commit with continuity files missing; RECOVER.md / recover mitigate but do not prove automatic sync.",
-  "V6 technical build is complete; human full-motion/native-audio review and creative acceptance are not recorded. No rights-verified real social-platform reposts."
+  "V6 was rejected by the user after its GitHub upload/link; technical QC, 49/49 checks, 9/9 audio gates and the download link are not creative approval. V7 must use per-title rights-cleared social-origin source/credit/origin records, not unverified currently trending reposts. No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience result is claimed."
 ]
 ```
 

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T23:14:27Z",
-  "head": "fde4ca05f9550c29125096fac5493494dcf0ba46",
+  "generated_at": "2026-11-09T00:41:53Z",
+  "head": "38accbe53b05be3de921834fd552eafd14380fdf",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -18,14 +18,20 @@
     },
     {
       "path": ".github/workflows/monarch-cam-short-ranking-raw-v6.yml",
-      "bytes": 12106,
-      "sha256": "cfa76d1f2cf37338ad0a8c88b748b2eb0be0fbd9e9372e7de4ae7874df1141fd",
+      "bytes": 11444,
+      "sha256": "06b12ebd6a5b59e801039e0a0cd901815660b91ee58315d13a2d51002089b2ec",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
+      "bytes": 13832,
+      "sha256": "513bf73ef55499fe8a088df28be22f7d16d04dc1d88fccec93dc6a4b91cdd5ec",
       "evidence_level": "archive_metadata"
     },
     {
       "path": ".gitignore",
-      "bytes": 3798,
-      "sha256": "35d793615324bb02c4535d64c7289576653a41cdecc62aa36415dbe46bb4df7e",
+      "bytes": 3894,
+      "sha256": "0664f6535d8f832d01acf869b7f70ed983a6d9f08b35ae707670268bdd2d9439",
       "evidence_level": "archive_metadata"
     },
     {
@@ -102,14 +108,14 @@
     },
     {
       "path": "docs/continuity/00_START_HERE.md",
-      "bytes": 4727,
-      "sha256": "56e41fdc57815d0d739ea41e8d5b10c0728f6366e935ec475ab35403ff64b359",
+      "bytes": 6320,
+      "sha256": "0e6cdb43718d0d831fd011e02983816e59668fc1b076f3a8099d00b7da033624",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/COVERAGE.json",
-      "bytes": 4455,
-      "sha256": "afbd5336230cc63158566d4701953ace4d7841833d033ca6462ee5c026079794",
+      "bytes": 4658,
+      "sha256": "1fcff818e28f1c0a65390e1cbe31c7a721e94f850484da0ca0eec8783f472df4",
       "evidence_level": "state_ledger"
     },
     {
@@ -120,8 +126,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 25819,
-      "sha256": "3b29e67a140359c6d363312a722012d68d09c655b987dec87de30efa1618c0b2",
+      "bytes": 27373,
+      "sha256": "696a573e9aefe2c8d1aacc73e085c2d44cf1348427f35a05c132e5bfbd05c27c",
       "evidence_level": "state_ledger"
     },
     {
@@ -150,8 +156,8 @@
     },
     {
       "path": "docs/continuity/PROBLEMS_FIXES.md",
-      "bytes": 13047,
-      "sha256": "928fca5cd779bf56cfcf0407f95e7eb00e8d97996ecf02f2730dfb267691f5d1",
+      "bytes": 16101,
+      "sha256": "cec845171141aaf8d1f38ce58b63ba83729e1d88cd1fb9c9b78fb929fc9d7adf",
       "evidence_level": "operating_contract"
     },
     {
@@ -167,6 +173,12 @@
       "evidence_level": "operating_contract"
     },
     {
+      "path": "docs/continuity/REJECTIONS.md",
+      "bytes": 2024,
+      "sha256": "6d1bc4150762ef4692d24e919c7078849982469a0b8234d208d557522ada721e",
+      "evidence_level": "operating_contract"
+    },
+    {
       "path": "docs/continuity/SESSION_INDEX.json",
       "bytes": 29318,
       "sha256": "cf9c0372af76bae7169ec938d4e9bccce4c873bd227a9f45807f9c8507c04315",
@@ -174,14 +186,14 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 10400,
-      "sha256": "4c3f05267dddcd3eefb89ccc1641dae6c13812f7b0700c3916f25e4ae114cda5",
+      "bytes": 12597,
+      "sha256": "a61454c595100876f6b7975cd4306d49316cfb4f3709c7a631b20b789dd9d54f",
       "evidence_level": "state_ledger"
     },
     {
       "path": "docs/continuity/UPDATE_PROTOCOL.md",
-      "bytes": 4502,
-      "sha256": "66884617e9f248669bf016325f6e677240786465163e567aa2fc2606c4f0df68",
+      "bytes": 6249,
+      "sha256": "688a75b4bd382773830942b77752021aa1e4d4e570adf4b85845345b5e07f62a",
       "evidence_level": "operating_contract"
     },
     {
@@ -204,32 +216,32 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
-      "bytes": 5081,
-      "sha256": "8670a41708491feb3c20b86676fbbee1451280dcc8f804729d41c733dbdb5bf2",
+      "bytes": 6811,
+      "sha256": "7b8413ae66d66ee1ae06a52a680c73eed1582e0c91182876293cf9f5f1c33d35",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
-      "bytes": 5276,
-      "sha256": "515c203edad5f0d2e7b0e812a64699a7bdf00a5a7d9ac3894e7a68f7f4f648a0",
+      "bytes": 7614,
+      "sha256": "666380b829589a92ad5ef34dff70191e647cbc47d15d6a4e1738bd2cc4da63d8",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
-      "bytes": 4943,
-      "sha256": "52a288f6e5bed0f87238b6c9ca2dd98b1a080bfa9f86b68d0dfa407dc886903b",
+      "bytes": 6676,
+      "sha256": "e07c9c267086a2734889ef12231cb8210d6f7ed0c8aeb62e691ca388edfb7ced",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/EVIDENCE.md",
-      "bytes": 6456,
-      "sha256": "5f4b91c5e93c779a06086edfa093b8a122a4242418a0a61fb847f1c927fe4677",
+      "bytes": 8299,
+      "sha256": "b74d178d23a4f1cad95d2ccef635d859aa14a213b18bfc0e37e201134ccce0ae",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
-      "bytes": 2112,
-      "sha256": "6f76de6be295eff8f75ef858518d775b489b1fcfc4b17abeaa1b44dd3dc73d3c",
+      "bytes": 4585,
+      "sha256": "ed4967bbb4e7545e0e597f885e3a9821a8a7db0e65e99338819dc820cd0633c5",
       "evidence_level": "operating_contract"
     },
     {
@@ -240,14 +252,14 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/REJECTIONS.md",
-      "bytes": 4695,
-      "sha256": "97ed7a6eeb716ac8aad1de1ad57a32c9973e354e9efb137ac57b34cebc3ce1b8",
+      "bytes": 6519,
+      "sha256": "1180885706736dbd841ea26f3f6febed7503b5eca238ab6f16e7be1bd566afcc",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
-      "bytes": 4862,
-      "sha256": "3fefeb637fc421fb4422b2492f4bc7e52ec4e9f69b1effe8c60127d1c2a2a375",
+      "bytes": 6609,
+      "sha256": "6f8d5c48b482ec77e162780ac9efb52579ef7a5ec21a8f07ae1c4dab5f2173d5",
       "evidence_level": "operating_contract"
     },
     {
@@ -2147,9 +2159,111 @@
       "evidence_level": "repo_evidence"
     },
     {
+      "path": "production/monarch-cam/short_ranking_raw_v7/CREDITS.md",
+      "bytes": 4527,
+      "sha256": "2eb7db984cf7c1a4eb99b86ec93e592bbfbe9927308730f682cdef8aeaaacd97",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/RANKING_V7_PLAN_AND_METADATA.md",
+      "bytes": 3432,
+      "sha256": "a857a9aa646bd460302831a5cd7068de5c3106e6e5b49ca2b75ccc75819300cb",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/RANKING_V7_UPLOAD_METADATA.md",
+      "bytes": 994,
+      "sha256": "264f0dd3ccd244b527ae4a712bcff602c4b01ff7a6197ff925b0f03b137aeaef",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/RENDER_TRIGGER_V7.md",
+      "bytes": 279,
+      "sha256": "a297dc3657521cd00d5f16f07b960069c467b65d0c9831ebb63b9f88b110c231",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/build_ranking_audio_raw_v7.py",
+      "bytes": 17562,
+      "sha256": "0a192a6235748052b741ec63aa6d54da65fd74c57df686dcbe455c3a06fdc0b0",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/candidate_probe_v7.py",
+      "bytes": 20487,
+      "sha256": "c1531ed66613885158a3724263dd2b3a026c1125cc92890029b14acfa1695e1b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/candidate_sources.json",
+      "bytes": 19868,
+      "sha256": "14395b211007f467276829aac7d778b1987b8ebf4369464ef3eccfb983c89dc1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/ranking_short_spec.json",
+      "bytes": 5610,
+      "sha256": "d90402a18fe3fe0294d7bc36cecbd7a64da72e42b7d77d95993f882a25647a8d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/ranking_v7_metadata.json",
+      "bytes": 2062,
+      "sha256": "794309837cbe7d0c00796d8c33a124da12f03b539118edb442e90e421e11b6f9",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/render_ranking_visual_v7.py",
+      "bytes": 23997,
+      "sha256": "1177ac71fddc64832ce7de22e18bab59db8f23f14e10c3ad3fa9b9a7343dc8fe",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/review/UPLOAD_METADATA_RANKING_V7.txt",
+      "bytes": 689,
+      "sha256": "817a85fdc2153963a54e68f82ae60d0c3423dab7282b4e70ab30b10e6fd4b686",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/select_moments_v7.py",
+      "bytes": 8999,
+      "sha256": "50fae423f4160814fdef45ed246766858505380dda784e648a52dfc325747ffc",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/source_audio_audit_v7.py",
+      "bytes": 6440,
+      "sha256": "1627bf1e3c3a0b0d4fd2dff16f664858e1956dfd946dadcad8c6eec11315cc14",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/source_recon_ranking_v7.py",
+      "bytes": 14875,
+      "sha256": "652b6e3b141dd6753dd6eae231aff56b5c803cf232caaeda561f1dc746fa65b5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/technical_qc_v7.py",
+      "bytes": 15234,
+      "sha256": "f3d2cb9c6457714a7eb674d10099eb39f249bc3dbd4f5d8519717df4b0c460af",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/validate_raw_v7.py",
+      "bytes": 3295,
+      "sha256": "a0549c20f23aa73fd8d0b19d128c8544e9dac2ebeeb02fd95a15c7c70b53a37c",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_raw_v7/verify_sources_v7.py",
+      "bytes": 12107,
+      "sha256": "757f8d3c2628c1baeb2a0241a54e84111a5a0acc088c4ec9af4ceb54c1214b7f",
+      "evidence_level": "repo_evidence"
+    },
+    {
       "path": "tools/continuity.py",
-      "bytes": 42616,
-      "sha256": "11691eab7600427b336e85ab797e6d42107cbbb0e79933426bd4a1be3da51c8b",
+      "bytes": 43214,
+      "sha256": "5f29dee02b4c1163361e29cbe58857d36e6b3b3f5c3ac951b48a05ffb4c3f621",
       "evidence_level": "archive_metadata"
     }
   ]

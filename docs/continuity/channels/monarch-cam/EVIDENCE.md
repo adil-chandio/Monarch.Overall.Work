@@ -22,7 +22,7 @@
 - V5 MP4: `deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4`, `28,043,097` bytes, SHA-256 `8948f67f4ab0fb419fd1d53a10f1db68a0c6848347aa80961a1a607f9806306a`; `60.0s`, `1080x1920`, `30fps`, `1800` frames; seven moments; durations `[9,9,9,9,9,4,11]`s; ranks `[7,6,5,4,3,2,1]`.
 - V4 MP4: `deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4`, `57,405,096` bytes, SHA-256 `2bc12b0bc0422c93b401b0af67499dba3a034584abbe15e3712f51f7f994af28`.
 - V3 MP4 preserved: `deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_CLEAN_PREMIUM_V3.mp4`, `31,930,639` bytes.
-- V6 technical package built: `production/monarch-cam/short_ranking_raw_v6/`, `.github/workflows/monarch-cam-short-ranking-raw-v6.yml`, a `.gitignore` V6 MP4 exception, CI run `42517651544` and workflow commit `5559b52`. It uses seven per-title CC0 Commons originals, not unverified social-platform reposts. Human review/acceptance is pending.
+- V6 technical package built at `production/monarch-cam/short_ranking_raw_v6/`, CI run `42517651544` / workflow commit `5559b52`; subsequently rejected by the user after its GitHub upload/link. Its QC and download links are not creative acceptance. A separate V7 package is configured at `production/monarch-cam/short_ranking_raw_v7/` with `.github/workflows/monarch-cam-short-ranking-viral-v7.yml`; no V7 MP4, QC or download link exists yet.
 
 ## V5 QC (technical, not acceptance)
 
@@ -80,3 +80,12 @@ Generated V6 evidence: `review/social_origin_ledger.json`, `review/layout_manife
 - Long-form gaps before latest upload: approximately `250 days` and `357 days`.
 - Brand contradiction: channel `Monarch Cam`, About `KARMA CAM`, January 2026 bear video `Daily Dose of Smiles`.
 - Studio screenshots for latest long and three recent Shorts still needed to determine impressions / CTR / first-30-second retention / Shorts swipe bottleneck.
+
+## V6 rejection / V7 active task — 2026-11-05
+
+- V6 was rejected after its GitHub upload/download-link answer: `Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...` plus six reference screenshots. Technical QC, 49/49 checks, 9/9 audio gates, CI success and V6 links are **not** creative acceptance.
+- The user wants `📈 trending viral videos` / social-platform clips, `viral ke sath sath purani bhi chalenge`, `bas clips mazedar next level honi chaiye`, the best hooked/engaging scenes extracted, and a full 60s ranking built on them. The reference screenshots show `ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha`: full-screen uncut clip, visible hook, all 1.-7. list items, right UI, caption bubble, Subscribe and bottom chrome.
+- V7 is a separate package at `production/monarch-cam/short_ranking_raw_v7/` with workflow `.github/workflows/monarch-cam-short-ranking-viral-v7.yml` and deliverable `deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4`.
+- Rights boundary: ten rights-cleared social-origin Commons mirrors; per-title Commons API extmetadata, original SHA-1, Credit/Categories social origin and CC BY attribution; no unverified currently trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts, no current-trending claim, no legal opinion.
+- Visual boundary: blurred full-frame background plus sharp uncut source frame; no V6 crop routine, no zoom, no black empty top, no letterbox; all seven labels visible from the first frame.
+- No V7 MP4, QC, download link, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality or audience result is claimed yet. V4/V5/V6 stay rejected; V5 untouched.

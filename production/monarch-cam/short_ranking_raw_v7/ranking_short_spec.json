@@ -1,0 +1,193 @@
+{
+  "title": "7 Most Unexpected Internet Moments, Ranked.",
+  "package": "7 Most Unexpected Internet Moments, Ranked. - Viral-Style V7",
+  "topic": "7 Most Unexpected Internet Moments, Ranked",
+  "edition": "social_origin_v7",
+  "status": "v7_technical_build_configured",
+  "status_note": "Separate V7 technical package after V6 was rejected. No human full-motion/native-audio listening, sign-off, approval, perfection, retention, virality or audience outcome claim.",
+  "duration": 60.0,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "frame_count": 1800,
+  "video_category": "Entertainment",
+  "youtube_category_id": 24,
+  "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
+  "preserve_previous": true,
+  "scenes_source": "production/monarch-cam/short_ranking_raw_v7/review/selected_windows.json",
+  "reference_basis": "Six user-supplied screenshots of a vertical social ranking video: blurred full-frame background, sharp uncut source frame, centered two-line color-split hook, left 1.-7. rank plates, right platform UI, bottom caption/Subscribe and app chrome. No screenshot pixels are reused in the deliverable.",
+  "audio_policy": {
+    "raw_only": true,
+    "no_spoken_voice_over": true,
+    "no_score": true,
+    "no_effects": true,
+    "no_bed": true,
+    "no_added_layers": true,
+    "native_source_audio_only": true,
+    "raw_per_window_native_audio_only": true,
+    "source_audio_present_segments": 7,
+    "silent_segments": 0,
+    "all_seven_native_audio_audible": true,
+    "target_integrated_lufs": -14.2,
+    "true_peak_target_dbtp": -2.2,
+    "sample_rate": 48000,
+    "channels": 2,
+    "edge_fade_ms": 30,
+    "final_gain_calibration": true,
+    "final_peak_limit_linear": 0.75,
+    "final_calibration_iterations": 6,
+    "final_technical_click_threshold": 0.45,
+    "final_declick_threshold": 0.28,
+    "final_declick_width_samples": 32,
+    "web_lufs_target": -14.0,
+    "web_lufs_tolerance": 0.7,
+    "web_true_peak_ceiling_dbtp": -1.0,
+    "web_lra_min_lu": 1.0,
+    "web_lra_max_lu": 10.0,
+    "web_movement_min_db": 3.0,
+    "native_audible_segment_rms_dbfs_min": -65.0,
+    "per_window_target_rms_dbfs_candidates": [
+      -24.0,
+      -22.0,
+      -20.0,
+      -18.0
+    ]
+  },
+  "visual": {
+    "full_frame_preserved": true,
+    "no_crop": true,
+    "no_cut_off": true,
+    "blurred_background_fill": true,
+    "no_black_bars": true,
+    "no_letterbox": true,
+    "no_black_empty_top": true,
+    "no_hook_black_fill": true,
+    "reference_style_hook": true,
+    "persistent_numbered_list": true,
+    "left_list_fully_visible": true,
+    "progressive_labels": true,
+    "right_platform_ui": true,
+    "bottom_caption_subscribe": true,
+    "app_chrome": true,
+    "handle": "@Monarch-Cam",
+    "no_third_party_handle": true,
+    "no_fake_engagement_counts": true,
+    "no_v6_boxed_list": true,
+    "no_v5_right_panel": true,
+    "no_v5_bottom_rank_burst": true,
+    "no_v5_hook_occlusion": true,
+    "seven_moments_only": true,
+    "rank_steps": [
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
+    "hook_line_1_parts": [
+      [
+        "Ranking ",
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      [
+        "Most ",
+        [
+          255,
+          221,
+          51
+        ]
+      ],
+      [
+        "Impressive",
+        [
+          255,
+          59,
+          48
+        ]
+      ]
+    ],
+    "hook_line_2": "Moments Ever",
+    "hook_question": "WAIT FOR #1",
+    "hook_font_size": 78,
+    "hook_line_y": [
+      205,
+      300
+    ],
+    "question_y": 395,
+    "question_font_size": 30,
+    "label_reveal_at": 0.12,
+    "payoff_at": 0.72,
+    "reaction_at": 0.74,
+    "payoff_zoom": 1.0,
+    "list_x": 52,
+    "list_y": 545,
+    "list_number_width": 96,
+    "list_label_x": 150,
+    "list_label_max_width": 430,
+    "list_row_height": 118,
+    "rank_font_size": 68,
+    "moment_font_size": 38,
+    "right_ui_x": 930,
+    "right_ui_centers": [
+      850,
+      1005,
+      1160,
+      1315,
+      1470
+    ],
+    "handle_y": 1435,
+    "caption_bbox": [
+      60,
+      1510,
+      820,
+      1650
+    ],
+    "subscribe_bbox": [
+      404,
+      1649,
+      626,
+      1741
+    ],
+    "bottom_caption_y": 1765,
+    "bottom_nav_y": 1835,
+    "bottom_comment_text": "Wait for #1 - which one is your rank?",
+    "bottom_subscribe_text": "Subscribe",
+    "bottom_caption_text": "Ranking Most Impressive Moments Ever ...",
+    "cover_text_primary": "WAIT FOR #1",
+    "cover_text_ab": "RANK THESE 7.",
+    "safe_area": {
+      "top": 140,
+      "bottom": 120,
+      "left": 40,
+      "right": 100
+    },
+    "safe_area_check": true,
+    "social_origin_check": true,
+    "rights_verified_per_title": true,
+    "subjective_ranking_not_science": true,
+    "runner_probe_required": true,
+    "all_labels_visible_from_start": true
+  },
+  "rights_policy": {
+    "allowed_license_short_names": [
+      "CC0",
+      "Public domain",
+      "CC BY 3.0"
+    ],
+    "no_unverified_trending_reposts": true,
+    "no_current_trending_claim": true,
+    "commons_api_extmetadata_verified": true,
+    "cc_by_attribution_recorded": true,
+    "social_origin_recorded": true,
+    "note": "Only rights-cleared social-origin originals mirrored on Wikimedia Commons are used. Unverified TikTok/Instagram/Reddit/Dailymotion/YouTube reposts are not downloaded."
+  },
+  "new_v7_file": true,
+  "layout_source": "production/monarch-cam/short_ranking_raw_v7/review/layout_manifest.json",
+  "social_origin_source": "production/monarch-cam/short_ranking_raw_v7/review/social_origin_ledger.json"
+}

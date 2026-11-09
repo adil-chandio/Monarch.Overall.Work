@@ -89,3 +89,19 @@ This is the regression memory. Failed approaches stay visible so a new chat does
 - Fix: install `scipy` in the V6 Python-tools step and invoke the gates with the delivered V6 MP4 path, `--profile web`, `--json .../audio_qc.json`, and `tee .../audio_qc.log`, matching the V5 workflow. Add `audio_qc.log` to the V6 artifact list.
 - V5/V4/V3 packages remain untouched. Re-run `42517651544` succeeded after the fix; V6 MP4, 49/49 technical checks, 9/9 audio gates, safe-area and social-origin checks were committed by workflow commit `5559b52`. No human creative acceptance is claimed.
 
+## V6 rejection / V7 active task — 2026-11-05
+
+- V6 was rejected after its GitHub upload/download-link answer: `Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...` plus six reference screenshots. Technical QC, 49/49 checks, 9/9 audio gates, CI success and V6 links are **not** creative acceptance.
+- The user wants `📈 trending viral videos` / social-platform clips, `viral ke sath sath purani bhi chalenge`, `bas clips mazedar next level honi chaiye`, the best hooked/engaging scenes extracted, and a full 60s ranking built on them. The reference screenshots show `ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha`: full-screen uncut clip, visible hook, all 1.-7. list items, right UI, caption bubble, Subscribe and bottom chrome.
+- V7 is a separate package at `production/monarch-cam/short_ranking_raw_v7/` with workflow `.github/workflows/monarch-cam-short-ranking-viral-v7.yml` and deliverable `deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4`.
+- Rights boundary: ten rights-cleared social-origin Commons mirrors; per-title Commons API extmetadata, original SHA-1, Credit/Categories social origin and CC BY attribution; no unverified currently trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts, no current-trending claim, no legal opinion.
+- Visual boundary: blurred full-frame background plus sharp uncut source frame; no V6 crop routine, no zoom, no black empty top, no letterbox; all seven labels visible from the first frame.
+- No V7 MP4, QC, download link, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality or audience result is claimed yet. V4/V5/V6 stay rejected; V5 untouched.
+
+
+## V6 creative mismatch — 2026-11-05
+
+- **Problem:** V6 passed technical/audio gates and was uploaded to GitHub with a download link, but the user rejected it with six reference screenshots and `Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ...`. Screenshots showed full-screen human viral clips and a visible ranking UI; V6 showed a large black empty upper half, a boxed tiny list and CC0 animal-only clips.
+- **Cause:** strict CC0-only gates and geometric/technical QC measured file integrity, not the requested viral social-origin clips, hooked scene selection or reference-style full-frame composition. V6 `cover_crop()` cropped the main clip and created black/empty areas.
+- **Fix:** separate V7 package with rights-cleared social-origin Commons mirrors, per-title API licence/Credit/Categories/original-SHA-1 verification, CC BY attribution, runner audio/motion best-window selection, blurred full-frame background plus sharp uncut source frame, no crop/zoom, all seven labels visible, sampled-frame QC for black empty areas, and a narrow V7 workflow with `[skip ci]` commit-back.
+- **Standing rule:** technical QC, audio gates, CI success and GitHub links are not creative approval. Do not claim human listening, sign-off, current trending status, full legal compliance or audience results.

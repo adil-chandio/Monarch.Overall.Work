@@ -37,8 +37,8 @@ This archive is honest about evidence strength. A screenshot is never promoted t
     "channel_files": 10,
     "channels_indexed": 4,
     "decisions": 19,
-    "events": 56,
-    "manifest_files": 358,
+    "events": 57,
+    "manifest_files": 377,
     "prompt_results": 13,
     "screenshots": 29,
     "sessions_indexed": 29
@@ -61,10 +61,10 @@ This archive is honest about evidence strength. A screenshot is never promoted t
     "Current chat/sidebar exact turns not programmatically exportable.",
     "EMS transcript is partial and has no assistant turns.",
     "Connected apps are timestamped snapshots, not live mirrors.",
-    "V6 technical build complete with seven per-title CC0 Commons originals; real social-platform reposts remain unverified; human full-motion/native-audio review and creative acceptance are not recorded.",
     "Human listening/approval/sign-off not recorded.",
     "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
-    "Stale checkout can restore an old commit without continuity files; RECOVER.md / recover are mitigations, not live sync."
+    "Stale checkout can restore an old commit without continuity files; RECOVER.md / recover are mitigations, not live sync.",
+    "V6 was rejected by the user after its GitHub upload/link; technical QC, 49/49 checks, 9/9 audio gates and the download link are not creative approval. V7 must use per-title rights-cleared social-origin source/credit/origin records, not unverified currently trending reposts. No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience result is claimed."
   ],
   "generated_at": "2026-11-08T17:50:20Z",
   "note": "Evidence coverage is honest: a screenshot is never promoted to a transcript, and a connected-app summary is not a complete Arena export.",

@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v6_technical_build_complete",
+  "status": "v6_rejected_v7_task_active",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -16,14 +16,16 @@
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
     "status": "ready",
-    "next_action": "Open the V6 MP4 and qc_summary.json; perform a human full-motion/native-audio review. Do not claim creative acceptance or approval. V5 stays untouched."
+    "next_action": "Build a separate V7 60s ranking Short from rights-cleared social-origin Commons mirrors, using objective best-window selection, a blurred full-frame background plus sharp uncut source frames, the visible reference-style hook/1.-7. list/UI, then upload the new V7 MP4 to GitHub and give its own download link. Do not re-present V4/V5/V6 and do not claim creative acceptance."
   },
   "parallel_unresolved": {
     "id": "monarch-cam-v6-intent",
     "title": "Next-level full-motion raw funny-animal ranking Short",
-    "status": "v6_technical_build_complete",
+    "status": "v6_rejected_v7_task_active",
     "no_v6_files": false,
-    "v5_untouched": true
+    "v5_untouched": true,
+    "v6_rejected": true,
+    "v7_task_configured": true
   },
   "strategy": {
     "november_output": "4 long videos, 8 connected Shorts, one primary cluster, two playlists, 100% clip-rights/factual-source records, old-winner bridge, Studio RPM baseline",
@@ -60,7 +62,8 @@
     "V5 ranking Short — “NAHI abhi bhi theek se nhi”",
     "V5 hook/list geometry",
     "silent/graphic/unverified source dead ends",
-    "shadowban / About-text-caused-25-views claims without Studio evidence"
+    "shadowban / About-text-caused-25-views claims without Studio evidence",
+    "V6 ranking Short — rejected after GitHub upload/link: Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ... trending viral videos ko Uthao clips social media par TikTok Instagram yt or Reddit Dailymotion ... bas clips mazedar next level honi chaiye ... best perfect mazedar hooked engaging scene nikalenge ... ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha to aise hi to ab banao ache se poora"
   ],
   "v5_deliverable": {
     "file": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4",
@@ -81,14 +84,20 @@
     "perfection_guaranteed": false,
     "retention_guaranteed": false,
     "virality_guaranteed": false,
-    "audience_results_guaranteed": false
+    "audience_results_guaranteed": false,
+    "v6_creative_acceptance": false,
+    "v7_technical_build_complete": false,
+    "v7_creative_acceptance": false,
+    "v7_human_full_motion_native_audio_listening": false,
+    "v7_current_trending_claim": false,
+    "v7_unverified_social_reposts": false
   },
   "gaps": [
     "config/channels.json legacy 3 slot names are not yet reconciled with owner statement that Monarch Cam is one of the 3 channels.",
     "No complete Arena chat export/JSON.",
     "No live bidirectional connected-app sync or proven hourly automation.",
     "Studio screenshots for latest long and three recent Shorts are still needed for bottleneck analysis.",
-    "V6 technical build complete with seven per-title CC0 Commons originals; no rights-verified real social-platform reposts; human full-motion/native-audio review and creative acceptance are not recorded."
+    "V6 was rejected by the user after its GitHub upload/link; technical QC, 49/49 checks, 9/9 audio gates and the download link are not creative approval. V7 must use per-title rights-cleared social-origin source/credit/origin records, not unverified currently trending reposts. No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience result is claimed."
   ],
   "v6_deliverable": {
     "file": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4",
@@ -108,6 +117,26 @@
     "native_audio_listening": false,
     "human_approval": false,
     "sign_off": false,
-    "note": "Technical build for human review; V5 untouched; no creative acceptance or audience outcome."
+    "note": "Technical build for human review; V5 untouched; no creative acceptance or audience outcome.",
+    "rejected": true,
+    "creative_acceptance": false,
+    "github_upload_link_task_completed_but_rejected": true
+  },
+  "v7_task": {
+    "id": "monarch-cam-v7-viral-style-ranking",
+    "status": "configured_not_built",
+    "package": "production/monarch-cam/short_ranking_raw_v7/",
+    "workflow": ".github/workflows/monarch-cam-short-ranking-viral-v7.yml",
+    "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
+    "reference_basis": "Six user-supplied screenshots: full-screen uncut human viral clips, centered two-line color-split hook, visible 1.-7. list, right UI, caption bubble, Subscribe and bottom app chrome.",
+    "rights_boundary": "Per-title Commons API PD/CC BY 3.0 verification, original SHA-1, social-origin Credit/Categories, CC BY attribution; no unverified trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts and no current-trending claim.",
+    "flags": {
+      "full_motion_review": false,
+      "native_audio_listening": false,
+      "human_approval": false,
+      "sign_off": false,
+      "audience_result_promise": false,
+      "virality_guarantee": false
+    }
   }
 }
