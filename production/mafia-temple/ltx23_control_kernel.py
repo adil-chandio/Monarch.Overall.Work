@@ -39,7 +39,8 @@ try:
     old='    quantizeTransformer=False,\n    convertWeightsFloatTo=torch.float16,'
     if src.count(old)!=1: raise RuntimeError('Unexpected mmgp profile')
     src=src.replace(old,'    quantizeTransformer=False,\n    loras="transformer",\n    convertWeightsFloatTo=torch.float16,')
-    src=src.replace('"480p": 480','"480p": 512')  # 512x896 is divisible by 64 for ref0.5
+    src=src.replace('"480p": 480','"480p": 448')
+    src=src.replace('return (width // 32) * 32, (height // 32) * 32','return (width // 64) * 64, (height // 64) * 64')  # 448x768 is divisible by 64 for ref0.5
     old='        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)'
     if src.count(old)!=1: raise RuntimeError('Unexpected generation call')
     src=src.replace(old,'        gen_kwargs.update(input_frames=POSE_GUIDE, video_prompt_type="VG", denoising_strength=0.8, masking_strength=0.0, input_video_strength=0.85, loras_selected=[LORA_PATH])\n        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)')
@@ -60,9 +61,9 @@ try:
         sheet=Image.open(BytesIO(urllib.request.urlopen(u,timeout=90).read())).convert('RGB')
         for j in range(7):
             # exclude the label row and retain the exact pose-only picture area
-            sheets.append(sheet.crop((j*160,0,(j+1)*160,277)).resize((512,896),Image.Resampling.BILINEAR))
+            sheets.append(sheet.crop((j*160,0,(j+1)*160,277)).resize((448,768),Image.Resampling.BILINEAR))
     if len(sheets)!=49: raise ValueError('Incomplete guide')
-    idx=[round(i*16/24) for i in range(73)]
+    idx=[round(i*16/24) for i in range(49)]
     pose=torch.from_numpy(np.stack([np.array(sheets[i]) for i in idx])).permute(3,0,1,2).contiguous()
     from huggingface_hub import hf_hub_download
     lora_name='ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors'
@@ -79,8 +80,8 @@ try:
     if getattr(trans,'_loras_errors',[]): raise RuntimeError('LoRA load errors: '+str(trans._loras_errors))
     prompt=('Cinematic live action side-view shot of the same man in a black suit in a wet stone temple courtyard. '
       'Keep his face, hairstyle and clothing consistent with the first image. Evening lanterns, blue mist, realistic photography, no scene cuts.')
-    receipt.update(status='running',guide='49 pose-only frames from previous approved private preflight; repeated to 24fps',lora_sha256=h.hexdigest(),frames_requested=73,fps=24);save(); t=time.monotonic()
-    path,message=namespace['Video_Generation'](prompt,str(reference),None,20261102,'3 Seconds (73 frames)','480p','Auto (match input image)',progress=QuietProgress())
+    receipt.update(status='running',guide='49 pose-only frames from previous approved private preflight; repeated to 24fps',lora_sha256=h.hexdigest(),frames_requested=49,fps=24);save(); t=time.monotonic()
+    path,message=namespace['Video_Generation'](prompt,str(reference),None,20261102,'2 Seconds (49 frames)','480p','9:16 Portrait',progress=QuietProgress())
     if not path or not pathlib.Path(path).is_file(): raise RuntimeError('Generation returned no video: '+str(message))
     target=work/'ltx23-pose-control.mp4';shutil.copyfile(path,target)
     receipt.update(status='complete_research_only',seconds=round(time.monotonic()-t,2),output_sha256=hashlib.sha256(target.read_bytes()).hexdigest(),message=message)
