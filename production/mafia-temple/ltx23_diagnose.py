@@ -45,3 +45,16 @@ for line in selected:
     clean=re.sub(r'(?:/[^ :\s]+)+','<path>',line).replace('%','%25').replace('\r','%0D').strip()
     if clean: print('::warning title=One-to-All detailed diagnostic::'+clean[:350])
 print('Recovered sanitized remote diagnostics from',os.environ['PILOT_KERNEL_SLUG'])
+
+# Surface file/function locations and generation milestones without printing source or private media.
+locations=[]
+for line in lines:
+    line=re.sub(r"\x1b\[[0-9;]*m", "", line)
+    m=re.search(r'(?:File ["\']([^"\']+)["\'], line (\d+), in ([^\s]+)|([^\s:]+\.py):(\d+), in ([^\s]+))', line)
+    if m:
+        path,num,func=(m.group(1),m.group(2),m.group(3)) if m.group(1) else (m.group(4),m.group(5),m.group(6))
+        locations.append(f'{path.rsplit("/",1)[-1]}:{num} {func}')
+    elif re.search(r'(?i)Stage [12]|Diffusion|VRAM Free|Generating \[|CUDA out of memory',line):
+        locations.append(line[:250])
+for line in locations[-60:]:
+    print('::notice title=Control memory trace::'+line.replace('%','%25'))
