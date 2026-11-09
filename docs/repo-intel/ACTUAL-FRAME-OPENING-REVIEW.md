@@ -6,7 +6,7 @@ Source: user-provided `videoplayback.mp4`; source SHA-256 `86222809c190003f6562a
 
 - **0:00–0:05:** visually examined all 150 decoded frames on six sequential contact sheets (5×5, scaled to 240×135). Start-of-file FFmpeg timestamps advance 1/30 second; displayed times below are approximate decoded-frame PTS.
 - **0:00–1:00:** additionally inspected 60 frames selected as frames 0, 30, 60, … 1770, on four sheets scaled to 320×180. Each row below describes the exact integer-second sample only; events between samples may be missed. The 5-second all-frame pass above takes precedence where applicable.
-- **Remainder 1:00–67:17:** not independently frame-inspected in this pass. Earlier Gemini-generated descriptions span the duration but are **not source-frame verification**. No audio was listened to; narration, dialogue, music, SFX and timing remain unverified.
+- **Remainder 1:00–67:17:** not independently frame-inspected in this pass. Earlier Gemini-generated descriptions span the duration but are **not source-frame verification**. No audio was listened to. A separate local speech recognizer was run on the first minute (see below); exact dialogue, music, SFX and timing remain unverified.
 
 ## Shot and motion: all 150 frames of the opening
 
@@ -95,6 +95,19 @@ A 30 fps video container does **not** establish that character drawings or poses
 - **Writing hypothesis:** the visual sequence moves from ordinary farm setting to reaction, distance, pursuit and warning. Exact spoken language, script structure and cause/effect require audio transcription and listening, not guesswork from pictures.
 - **Sound measurement:** FFmpeg `volumedetect` on the first 60 s reports `mean_volume -18.1 dB` and `max_volume -0.0 dB` on its decoded 16-bit measurement. This is not LUFS, a true-peak reading, stem separation or identification of narration/music/SFX. No sound names or music cues are verified here.
 
+## Independent machine speech check: opening minute
+
+The original AAC track was decoded into 16 kHz mono PCM. PocketSphinx (local English acoustic/language model) was run once on the full opening minute and once on six non-overlapping 10-second snippets. This is a separate method from Gemini and uses the **actual audio track**. It is automatic speech recognition, not listening; it made clear errors (“barn” became “borg”, “barking” became “working”), and cut-off words at segment boundaries make exact wording uncertain. No narration quotations below should be treated as a verbatim transcript.
+
+- **00–10 s:** recognizer suggests a time, barn, a sound across the field and a neighbouring place.
+- **10–20 s:** a half-mile reference, stepping outside with a pail and someone running near a fence are suggested; several words are unclear.
+- **20–30 s:** recognizer suggests “too stiff” / “too fast”, a ditch and figures; exact relationships and words are unclear.
+- **30–40 s:** recognizer suggests cattle in a pasture and a phone/emergency message.
+- **40–50 s:** recognizer suggests stay indoors, avoid physical contact and extreme aggression/confusion; ending is unclear.
+- **50–60 s:** recognizer suggests returning to the house without running because movement is visible; several words uncertain.
+
+This lends independent **approximate** support to a second-person, threat-to-decision narrative, and is consistent with several visible opening elements. It does not verify whether non-speech cues in the Gemini output are real. Neither the PocketSphinx text nor amplitude measurements identify specific SFX, musical layers, mix automation, track sources or musical timing. Do not infer the narrator’s identity or whether the voice is synthetic from this ASR result.
+
 ## What remains
 
-Full 67-minute every-frame review, second-by-second visual verification outside the first minute, independent audio listening and transcription, shot-length analysis, and multi-video/channel research are all incomplete. The 90-second screen recording in the shared folder has not been reviewed during this pass. Script tool `scripts/forensic/opening_contact_sheets.py` can recreate the opening contact sheets with a local copy and FFmpeg; outputs should stay private rather than being committed.
+Full 67-minute every-frame review, second-by-second visual verification outside the first minute, independent audio listening and a verified verbatim transcription, shot-length analysis, and multi-video/channel research are all incomplete. The 90-second screen recording in the shared folder has not been reviewed during this pass. Script tool `scripts/forensic/opening_contact_sheets.py` can recreate the opening contact sheets with a local copy and FFmpeg; outputs should stay private rather than being committed.
