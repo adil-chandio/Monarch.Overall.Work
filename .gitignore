@@ -74,3 +74,6 @@ production/monarch-cam/short_dance/review/*.wav
 production/monarch-cam/work/short_dance_premium/
 production/monarch-cam/short_dance_premium/review/stems/
 production/monarch-cam/short_dance_premium/review/*.wav
+
+# Private connector downloads and research media must not be staged.
+/google_drive/

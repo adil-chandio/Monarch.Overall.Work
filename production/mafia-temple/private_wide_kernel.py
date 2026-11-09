@@ -29,7 +29,24 @@ try:
     image=urllib.request.urlopen(reference_url,timeout=90).read()
     receipt['generated_reference_sha256']=hashlib.sha256(image).hexdigest()
     if receipt['generated_reference_sha256'] != 'c8542c870fdeda09fc3e23e11028fe39b5a0eefd24496c8c4a1a7db6309f4c28': raise ValueError('Reference checksum mismatch')
-    reference=scratch/'generated-reference.jpg'; reference.write_bytes(image)
+    # Privately create a research-only footwear repair. The source still was
+    # already public; the resulting recognizable image is never uploaded to
+    # GitHub, an artifact, or any other public endpoint.
+    import cv2
+    import numpy as np
+    base='https://raw.githubusercontent.com/adil-chandio/Monarch.Overall.Work/arena/6101616c-monarch-overall-work/production/mafia-temple/'
+    helper=urllib.request.urlopen(base+'repair_reference_shoes_research.py',timeout=90).read()
+    asset=urllib.request.urlopen(base+'assets/generic-dress-shoe-rgba.png',timeout=90).read()
+    if hashlib.sha256(helper).hexdigest()!='f1632b80198b2f31a1150d5c0402011fb57836eae541ec990820f12030dc435d': raise ValueError('Unexpected shoe helper')
+    if hashlib.sha256(asset).hexdigest()!='7bce3170c1c22debb42fd624a217c21ba8ebe77a791d6893d049c6a34a018d78': raise ValueError('Unexpected generic shoe asset')
+    repair={}; exec(compile(helper,'research_shoe_repair','exec'),repair)
+    original=cv2.imdecode(np.frombuffer(image,dtype=np.uint8),cv2.IMREAD_COLOR)
+    shoe=cv2.imdecode(np.frombuffer(asset,dtype=np.uint8),cv2.IMREAD_UNCHANGED)
+    repaired=repair['replace_shoes'](original,shoe)
+    reference=scratch/'generated-reference.png'
+    if not cv2.imwrite(str(reference),repaired): raise RuntimeError('Could not write private reference')
+    receipt['footwear_reference']='Local approximate template composite, unapproved; no contact solver'
+    receipt['shoe_asset_sha256']=hashlib.sha256(asset).hexdigest()
     src=''.join(cells[8]['source']); assert src.startswith('%%writefile ')
     src=src.split('\n',1)[1].split('# ==== 9. AIQUEST BRANDED GRADIO INTERFACE ====')[0]
     # Do not truncate the video to the shorter generated audio track.
