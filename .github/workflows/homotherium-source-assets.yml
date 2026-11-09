@@ -1,0 +1,38 @@
+name: Homotherium — licensed scientific figure acquisition
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths: [.github/workflows/homotherium-source-assets.yml]
+permissions:
+  contents: write
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Acquire fixed CC-BY article figures and publish only source assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64,hashlib,json,os,subprocess,urllib.request
+          records=[]
+          branch='arena/ba8d901e-monarch-overall-work'
+          assert os.environ['GITHUB_REF']=='refs/heads/'+branch
+          def publish(path,raw):
+              endpoint='repos/'+os.environ['GITHUB_REPOSITORY']+'/contents/'+path
+              old=subprocess.run(['gh','api',endpoint+'?ref='+branch],capture_output=True,text=True)
+              payload={'message':'Acquire licensed Homotherium source evidence [skip ci]','branch':branch,'content':base64.b64encode(raw).decode()}
+              if old.returncode==0:payload['sha']=json.loads(old.stdout)['sha']
+              elif '404' not in old.stderr:raise RuntimeError('GitHub source lookup failed')
+              subprocess.run(['gh','api','--method','PUT',endpoint,'--input','-','--silent'],input=json.dumps(payload),text=True,check=True)
+          for n in [2,4,7]:
+              url=f'https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-024-79546-1/MediaObjects/41598_2024_79546_Fig{n}_HTML.png'
+              with urllib.request.urlopen(url,timeout=45) as response:raw=response.read()
+              assert raw.startswith(b'\x89PNG\r\n\x1a\n') and len(raw)<10000000
+              path=f'production/extinct-life/homotherium-short/source/figure-{n}.png'
+              publish(path,raw);records.append({'figure':n,'source_url':url,'file':path,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)})
+          manifest={'article':'https://www.nature.com/articles/s41598-024-79546-1','authors':'Lopatin et al.','publication':'Scientific Reports 14, 28016 (2024)','license':'CC BY 4.0','license_url':'https://creativecommons.org/licenses/by/4.0/','rights_basis':'Article Rights and permissions and reviewed figure captions; no separate exclusion found for these figures','files':records,'modifications_planned':'Panel crops, placement, grading, highlights and animated framing; not alterations to observed anatomy'}
+          publish('production/extinct-life/homotherium-short/SOURCE-LICENSE.json',(json.dumps(manifest,indent=2)+'\n').encode())
+          PY
