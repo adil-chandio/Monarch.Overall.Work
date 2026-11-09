@@ -43,7 +43,7 @@ try:
     src=src.replace('return (width // 32) * 32, (height // 32) * 32','return (width // 64) * 64, (height // 64) * 64')  # 448x768 is divisible by 64 for ref0.5
     old='        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)'
     if src.count(old)!=1: raise RuntimeError('Unexpected generation call')
-    src=src.replace(old,'        gen_kwargs.update(input_frames=POSE_GUIDE, video_prompt_type="VG", denoising_strength=0.8, masking_strength=0.0, input_video_strength=0.85, loras_selected=[LORA_PATH])\n        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)')
+    src=src.replace(old,'        gen_kwargs.update(input_frames=POSE_GUIDE, video_prompt_type="VG", denoising_strength=0.8, masking_strength=0.0, input_video_strength=0.85, loras_selected=[LORA_PATH], VAE_tile_size=(4,128))\n        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)')
     # Keep generated output out of the public UI and gather only the final video.
     # Classes created by the inference code need a real module name: an empty
     # exec namespace breaks its dynamic multi-GPU Gemma device subclass.
@@ -80,7 +80,7 @@ try:
     if getattr(trans,'_loras_errors',[]): raise RuntimeError('LoRA load errors: '+str(trans._loras_errors))
     prompt=('Cinematic live action side-view shot of the same man in a black suit in a wet stone temple courtyard. '
       'Keep his face, hairstyle and clothing consistent with the first image. Evening lanterns, blue mist, realistic photography, no scene cuts.')
-    receipt.update(status='running',guide='49 pose-only frames from previous approved private preflight; repeated to 24fps',lora_sha256=h.hexdigest(),frames_requested=49,fps=24);save(); t=time.monotonic()
+    receipt.update(status='running',guide='low-resolution pose-only research guide from earlier preflight, not cleared for final use',vae_tile_size=[4,128],lora_sha256=h.hexdigest(),frames_requested=49,fps=24);save(); t=time.monotonic()
     path,message=namespace['Video_Generation'](prompt,str(reference),None,20261102,'2 Seconds (49 frames)','480p','9:16 Portrait',progress=QuietProgress())
     if not path or not pathlib.Path(path).is_file(): raise RuntimeError('Generation returned no video: '+str(message))
     target=work/'ltx23-pose-control.mp4';shutil.copyfile(path,target)
