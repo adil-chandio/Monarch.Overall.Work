@@ -1,0 +1,4174 @@
+{
+  "edition": "high_action_v9_curated_window_scout",
+  "generated_at_utc": "2026-11-09T19:21:11.253168+00:00",
+  "purpose": "Second-pass visual inspection of explicit high-action payoff windows after the 20-candidate runner scout. These are not final V9 selections yet.",
+  "source_report": "production/monarch-cam/short_ranking_high_action_v9/review/scout/scout_report.json",
+  "workflow_scope": "curated_window_scout_only",
+  "flags": {
+    "current_trending_claim": false,
+    "exact_reference_clip_claim": false,
+    "full_legal_compliance_claim": false,
+    "human_full_motion_review": false,
+    "human_native_audio_listening": false,
+    "human_approval": false,
+    "creative_sign_off": false,
+    "perfection_claim": false,
+    "retention_claim": false,
+    "virality_claim": false,
+    "audience_results_claim": false,
+    "same_path_replacement": false,
+    "no_added_audio": true,
+    "native_source_audio_only": true
+  },
+  "status_note": "These runner 0.5 s contact sheets and native-audio checks are a second-pass visual curation aid after the rejected V8 clip quality. They are not human full-motion/native-audio listening, creative approval, an exact reference match, currently trending named-platform clips, full legal compliance or audience results.",
+  "composite_contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/v9_curated_windows_all.jpg",
+  "windows": [
+    {
+      "id": "rope_jump",
+      "start": 21.0,
+      "end": 29.6,
+      "reason": "bridge free fall, rope catch and canyon rush",
+      "title": "Rope Jump from the Siduhe bridge (496m).webm",
+      "creator": "DROPROPE",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rope_Jump_from_the_Siduhe_bridge_(496m).webm",
+      "platform": "YouTube",
+      "action_hint": "465 m free-fall rope jump from a 496 m bridge",
+      "moment_label": "465M DROP",
+      "reaction_text": "HE ACTUALLY JUMPED",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "4d91d8213a7d076278b1676c1ed1affa1a6af54e",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0a/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "1baf24025bc7fb02eba3593c944ac229ee7a33a6",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_rope_jump_21p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -10.23,
+        "peak_dbfs": 2.87,
+        "dc_offset": 0.00022081,
+        "half_second_blocks": [
+          {
+            "start": 21.0,
+            "rms_dbfs": -8.26,
+            "peak_dbfs": 2.88,
+            "samples": 24000
+          },
+          {
+            "start": 21.5,
+            "rms_dbfs": -7.74,
+            "peak_dbfs": 2.77,
+            "samples": 24000
+          },
+          {
+            "start": 22.0,
+            "rms_dbfs": -7.92,
+            "peak_dbfs": 2.67,
+            "samples": 24000
+          },
+          {
+            "start": 22.5,
+            "rms_dbfs": -10.64,
+            "peak_dbfs": 2.82,
+            "samples": 24000
+          },
+          {
+            "start": 23.0,
+            "rms_dbfs": -9.59,
+            "peak_dbfs": 1.58,
+            "samples": 24000
+          },
+          {
+            "start": 23.5,
+            "rms_dbfs": -25.77,
+            "peak_dbfs": -11.73,
+            "samples": 24000
+          },
+          {
+            "start": 24.0,
+            "rms_dbfs": -19.99,
+            "peak_dbfs": -8.11,
+            "samples": 24000
+          },
+          {
+            "start": 24.5,
+            "rms_dbfs": -11.04,
+            "peak_dbfs": 2.44,
+            "samples": 24000
+          },
+          {
+            "start": 25.0,
+            "rms_dbfs": -9.15,
+            "peak_dbfs": 1.96,
+            "samples": 24000
+          },
+          {
+            "start": 25.5,
+            "rms_dbfs": -7.8,
+            "peak_dbfs": 2.04,
+            "samples": 24000
+          },
+          {
+            "start": 26.0,
+            "rms_dbfs": -9.93,
+            "peak_dbfs": 1.77,
+            "samples": 24000
+          },
+          {
+            "start": 26.5,
+            "rms_dbfs": -10.04,
+            "peak_dbfs": 1.53,
+            "samples": 24000
+          },
+          {
+            "start": 27.0,
+            "rms_dbfs": -13.52,
+            "peak_dbfs": -0.92,
+            "samples": 24000
+          },
+          {
+            "start": 27.5,
+            "rms_dbfs": -12.64,
+            "peak_dbfs": -1.73,
+            "samples": 24000
+          },
+          {
+            "start": 28.0,
+            "rms_dbfs": -10.86,
+            "peak_dbfs": 0.97,
+            "samples": 24000
+          },
+          {
+            "start": 28.5,
+            "rms_dbfs": -12.87,
+            "peak_dbfs": -2.14,
+            "samples": 24000
+          },
+          {
+            "start": 29.0,
+            "rms_dbfs": -9.16,
+            "peak_dbfs": 2.62,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 53.996,
+        "max_frame_motion_score": 109.7493,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "rope_jump",
+      "start": 30.0,
+      "end": 38.6,
+      "reason": "later free-fall view over the river",
+      "title": "Rope Jump from the Siduhe bridge (496m).webm",
+      "creator": "DROPROPE",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rope_Jump_from_the_Siduhe_bridge_(496m).webm",
+      "platform": "YouTube",
+      "action_hint": "465 m free-fall rope jump from a 496 m bridge",
+      "moment_label": "465M DROP",
+      "reaction_text": "HE ACTUALLY JUMPED",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "4d91d8213a7d076278b1676c1ed1affa1a6af54e",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0a/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm/Rope_Jump_from_the_Siduhe_bridge_%28496m%29.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "1baf24025bc7fb02eba3593c944ac229ee7a33a6",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_rope_jump_30p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -12.55,
+        "peak_dbfs": 2.69,
+        "dc_offset": 0.00016025,
+        "half_second_blocks": [
+          {
+            "start": 30.0,
+            "rms_dbfs": -9.66,
+            "peak_dbfs": 2.73,
+            "samples": 24000
+          },
+          {
+            "start": 30.5,
+            "rms_dbfs": -10.7,
+            "peak_dbfs": -0.06,
+            "samples": 24000
+          },
+          {
+            "start": 31.0,
+            "rms_dbfs": -9.9,
+            "peak_dbfs": 0.77,
+            "samples": 24000
+          },
+          {
+            "start": 31.5,
+            "rms_dbfs": -13.47,
+            "peak_dbfs": -3.42,
+            "samples": 24000
+          },
+          {
+            "start": 32.0,
+            "rms_dbfs": -10.13,
+            "peak_dbfs": 0.84,
+            "samples": 24000
+          },
+          {
+            "start": 32.5,
+            "rms_dbfs": -33.23,
+            "peak_dbfs": -20.93,
+            "samples": 24000
+          },
+          {
+            "start": 33.0,
+            "rms_dbfs": -13.6,
+            "peak_dbfs": 0.29,
+            "samples": 24000
+          },
+          {
+            "start": 33.5,
+            "rms_dbfs": -8.0,
+            "peak_dbfs": 0.36,
+            "samples": 24000
+          },
+          {
+            "start": 34.0,
+            "rms_dbfs": -11.91,
+            "peak_dbfs": -2.37,
+            "samples": 24000
+          },
+          {
+            "start": 34.5,
+            "rms_dbfs": -20.5,
+            "peak_dbfs": -3.7,
+            "samples": 24000
+          },
+          {
+            "start": 35.0,
+            "rms_dbfs": -13.81,
+            "peak_dbfs": -1.02,
+            "samples": 24000
+          },
+          {
+            "start": 35.5,
+            "rms_dbfs": -21.27,
+            "peak_dbfs": -3.86,
+            "samples": 24000
+          },
+          {
+            "start": 36.0,
+            "rms_dbfs": -12.6,
+            "peak_dbfs": 1.67,
+            "samples": 24000
+          },
+          {
+            "start": 36.5,
+            "rms_dbfs": -27.27,
+            "peak_dbfs": -14.47,
+            "samples": 24000
+          },
+          {
+            "start": 37.0,
+            "rms_dbfs": -23.43,
+            "peak_dbfs": -9.72,
+            "samples": 24000
+          },
+          {
+            "start": 37.5,
+            "rms_dbfs": -11.83,
+            "peak_dbfs": 1.24,
+            "samples": 24000
+          },
+          {
+            "start": 38.0,
+            "rms_dbfs": -12.57,
+            "peak_dbfs": -1.08,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 48.3346,
+        "max_frame_motion_score": 73.2387,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "freestyle_bmx",
+      "start": 30.5,
+      "end": 39.1,
+      "reason": "BMX backflip around 33-34 s",
+      "title": "Freestyle BMX.webm",
+      "creator": "VideoVidio",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Freestyle_BMX.webm",
+      "platform": "YouTube",
+      "action_hint": "freestyle BMX riding and trick sequences",
+      "moment_label": "BMX DEFIES GRAVITY",
+      "reaction_text": "NO WAY",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "b7dc6fee150f2f0d29625ae654c0fd062945ea11",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Freestyle_BMX.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/31/Freestyle_BMX.webm/Freestyle_BMX.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "be491f577f125bcdb2b6dec6b012017a9598b972",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_freestyle_bmx_30p5_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -12.31,
+        "peak_dbfs": 3.13,
+        "dc_offset": -2.763e-05,
+        "half_second_blocks": [
+          {
+            "start": 30.5,
+            "rms_dbfs": -12.44,
+            "peak_dbfs": 0.2,
+            "samples": 24000
+          },
+          {
+            "start": 31.0,
+            "rms_dbfs": -12.06,
+            "peak_dbfs": 1.23,
+            "samples": 24000
+          },
+          {
+            "start": 31.5,
+            "rms_dbfs": -14.71,
+            "peak_dbfs": -0.74,
+            "samples": 24000
+          },
+          {
+            "start": 32.0,
+            "rms_dbfs": -15.84,
+            "peak_dbfs": 1.9,
+            "samples": 24000
+          },
+          {
+            "start": 32.5,
+            "rms_dbfs": -9.42,
+            "peak_dbfs": 1.52,
+            "samples": 24000
+          },
+          {
+            "start": 33.0,
+            "rms_dbfs": -9.31,
+            "peak_dbfs": 3.13,
+            "samples": 24000
+          },
+          {
+            "start": 33.5,
+            "rms_dbfs": -16.02,
+            "peak_dbfs": -1.4,
+            "samples": 24000
+          },
+          {
+            "start": 34.0,
+            "rms_dbfs": -19.84,
+            "peak_dbfs": -5.97,
+            "samples": 24000
+          },
+          {
+            "start": 34.5,
+            "rms_dbfs": -8.98,
+            "peak_dbfs": 2.99,
+            "samples": 24000
+          },
+          {
+            "start": 35.0,
+            "rms_dbfs": -11.05,
+            "peak_dbfs": 1.04,
+            "samples": 24000
+          },
+          {
+            "start": 35.5,
+            "rms_dbfs": -11.64,
+            "peak_dbfs": -1.28,
+            "samples": 24000
+          },
+          {
+            "start": 36.0,
+            "rms_dbfs": -18.57,
+            "peak_dbfs": -3.96,
+            "samples": 24000
+          },
+          {
+            "start": 36.5,
+            "rms_dbfs": -12.87,
+            "peak_dbfs": 0.87,
+            "samples": 24000
+          },
+          {
+            "start": 37.0,
+            "rms_dbfs": -11.0,
+            "peak_dbfs": 1.94,
+            "samples": 24000
+          },
+          {
+            "start": 37.5,
+            "rms_dbfs": -12.09,
+            "peak_dbfs": 1.42,
+            "samples": 24000
+          },
+          {
+            "start": 38.0,
+            "rms_dbfs": -11.55,
+            "peak_dbfs": 0.81,
+            "samples": 24000
+          },
+          {
+            "start": 38.5,
+            "rms_dbfs": -18.98,
+            "peak_dbfs": -5.76,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 45.2666,
+        "max_frame_motion_score": 78.4244,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "freestyle_bmx",
+      "start": 40.5,
+      "end": 49.1,
+      "reason": "high-air BMX flip around 41-47 s",
+      "title": "Freestyle BMX.webm",
+      "creator": "VideoVidio",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Freestyle_BMX.webm",
+      "platform": "YouTube",
+      "action_hint": "freestyle BMX riding and trick sequences",
+      "moment_label": "BMX DEFIES GRAVITY",
+      "reaction_text": "NO WAY",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "b7dc6fee150f2f0d29625ae654c0fd062945ea11",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Freestyle_BMX.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/31/Freestyle_BMX.webm/Freestyle_BMX.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "be491f577f125bcdb2b6dec6b012017a9598b972",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_freestyle_bmx_40p5_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -10.88,
+        "peak_dbfs": 2.94,
+        "dc_offset": 1.838e-05,
+        "half_second_blocks": [
+          {
+            "start": 40.5,
+            "rms_dbfs": -12.03,
+            "peak_dbfs": 1.37,
+            "samples": 24000
+          },
+          {
+            "start": 41.0,
+            "rms_dbfs": -11.46,
+            "peak_dbfs": 0.25,
+            "samples": 24000
+          },
+          {
+            "start": 41.5,
+            "rms_dbfs": -12.37,
+            "peak_dbfs": 0.61,
+            "samples": 24000
+          },
+          {
+            "start": 42.0,
+            "rms_dbfs": -10.82,
+            "peak_dbfs": -0.58,
+            "samples": 24000
+          },
+          {
+            "start": 42.5,
+            "rms_dbfs": -10.67,
+            "peak_dbfs": 1.56,
+            "samples": 24000
+          },
+          {
+            "start": 43.0,
+            "rms_dbfs": -11.82,
+            "peak_dbfs": 0.76,
+            "samples": 24000
+          },
+          {
+            "start": 43.5,
+            "rms_dbfs": -10.76,
+            "peak_dbfs": 0.32,
+            "samples": 24000
+          },
+          {
+            "start": 44.0,
+            "rms_dbfs": -9.46,
+            "peak_dbfs": 0.68,
+            "samples": 24000
+          },
+          {
+            "start": 44.5,
+            "rms_dbfs": -12.71,
+            "peak_dbfs": 0.14,
+            "samples": 24000
+          },
+          {
+            "start": 45.0,
+            "rms_dbfs": -10.57,
+            "peak_dbfs": 2.77,
+            "samples": 24000
+          },
+          {
+            "start": 45.5,
+            "rms_dbfs": -10.33,
+            "peak_dbfs": 1.34,
+            "samples": 24000
+          },
+          {
+            "start": 46.0,
+            "rms_dbfs": -10.62,
+            "peak_dbfs": 1.14,
+            "samples": 24000
+          },
+          {
+            "start": 46.5,
+            "rms_dbfs": -18.75,
+            "peak_dbfs": -1.06,
+            "samples": 24000
+          },
+          {
+            "start": 47.0,
+            "rms_dbfs": -10.22,
+            "peak_dbfs": 2.94,
+            "samples": 24000
+          },
+          {
+            "start": 47.5,
+            "rms_dbfs": -10.0,
+            "peak_dbfs": 2.44,
+            "samples": 24000
+          },
+          {
+            "start": 48.0,
+            "rms_dbfs": -11.0,
+            "peak_dbfs": 1.01,
+            "samples": 24000
+          },
+          {
+            "start": 48.5,
+            "rms_dbfs": -8.46,
+            "peak_dbfs": 2.47,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 51.9574,
+        "max_frame_motion_score": 82.7728,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "funny_hang5",
+      "start": 13.5,
+      "end": 22.1,
+      "reason": "two-rider mini-bike trick and visible fall",
+      "title": "Funny hang-5 - J.Vidarte & JC Pieri.webm",
+      "creator": "JC Pieri",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm",
+      "platform": "Vimeo",
+      "action_hint": "two surfers performing a hang-5 nose-riding trick together",
+      "moment_label": "DOUBLE HANG-5",
+      "reaction_text": "TWO AT ONCE?!",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "e281fca3a81876bfc84fa4dcde51dae10792965d",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Funny_hang-5_-_J.Vidarte_%26_JC_Pieri.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_kind": "commons_original",
+      "downloaded_sha1": "e281fca3a81876bfc84fa4dcde51dae10792965d",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_funny_hang5_13p5_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -17.95,
+        "peak_dbfs": 5.54,
+        "dc_offset": -8.582e-05,
+        "half_second_blocks": [
+          {
+            "start": 13.5,
+            "rms_dbfs": -19.4,
+            "peak_dbfs": -2.82,
+            "samples": 24000
+          },
+          {
+            "start": 14.0,
+            "rms_dbfs": -17.88,
+            "peak_dbfs": -2.73,
+            "samples": 24000
+          },
+          {
+            "start": 14.5,
+            "rms_dbfs": -14.98,
+            "peak_dbfs": -0.31,
+            "samples": 24000
+          },
+          {
+            "start": 15.0,
+            "rms_dbfs": -16.21,
+            "peak_dbfs": -0.66,
+            "samples": 24000
+          },
+          {
+            "start": 15.5,
+            "rms_dbfs": -20.39,
+            "peak_dbfs": -0.27,
+            "samples": 24000
+          },
+          {
+            "start": 16.0,
+            "rms_dbfs": -28.53,
+            "peak_dbfs": -15.27,
+            "samples": 24000
+          },
+          {
+            "start": 16.5,
+            "rms_dbfs": -16.7,
+            "peak_dbfs": -0.49,
+            "samples": 24000
+          },
+          {
+            "start": 17.0,
+            "rms_dbfs": -12.96,
+            "peak_dbfs": 4.45,
+            "samples": 24000
+          },
+          {
+            "start": 17.5,
+            "rms_dbfs": -19.8,
+            "peak_dbfs": -2.3,
+            "samples": 24000
+          },
+          {
+            "start": 18.0,
+            "rms_dbfs": -24.32,
+            "peak_dbfs": -5.38,
+            "samples": 24000
+          },
+          {
+            "start": 18.5,
+            "rms_dbfs": -21.69,
+            "peak_dbfs": -1.48,
+            "samples": 24000
+          },
+          {
+            "start": 19.0,
+            "rms_dbfs": -12.93,
+            "peak_dbfs": 2.71,
+            "samples": 24000
+          },
+          {
+            "start": 19.5,
+            "rms_dbfs": -16.05,
+            "peak_dbfs": 5.54,
+            "samples": 24000
+          },
+          {
+            "start": 20.0,
+            "rms_dbfs": -23.99,
+            "peak_dbfs": 3.45,
+            "samples": 24000
+          },
+          {
+            "start": 20.5,
+            "rms_dbfs": -24.61,
+            "peak_dbfs": 2.1,
+            "samples": 24000
+          },
+          {
+            "start": 21.0,
+            "rms_dbfs": -22.76,
+            "peak_dbfs": 3.36,
+            "samples": 24000
+          },
+          {
+            "start": 21.5,
+            "rms_dbfs": -34.42,
+            "peak_dbfs": -12.16,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 32.9666,
+        "max_frame_motion_score": 50.9338,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "skate_paris",
+      "start": 28.5,
+      "end": 37.1,
+      "reason": "street skateboard flip around 30-39 s",
+      "title": "Skate montage from Paris - Vimeo.webm",
+      "creator": "Dragos Hanciu",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Skate_montage_from_Paris_-_Vimeo.webm",
+      "platform": "Vimeo",
+      "action_hint": "street skateboarding montage in Paris",
+      "moment_label": "PARIS STREET LINE",
+      "reaction_text": "CLEAN LANDING",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "b9ae49a4ef7c32befab82b0b24ad3dbab7ef196f",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Skate_montage_from_Paris_-_Vimeo.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e8/Skate_montage_from_Paris_-_Vimeo.webm/Skate_montage_from_Paris_-_Vimeo.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "00382de917cb8087e55ce3f517a3d7daac664dd9",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_skate_paris_28p5_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -22.18,
+        "peak_dbfs": -4.84,
+        "dc_offset": -7.829e-05,
+        "half_second_blocks": [
+          {
+            "start": 28.5,
+            "rms_dbfs": -22.11,
+            "peak_dbfs": -5.51,
+            "samples": 24000
+          },
+          {
+            "start": 29.0,
+            "rms_dbfs": -23.2,
+            "peak_dbfs": -6.13,
+            "samples": 24000
+          },
+          {
+            "start": 29.5,
+            "rms_dbfs": -22.65,
+            "peak_dbfs": -7.07,
+            "samples": 24000
+          },
+          {
+            "start": 30.0,
+            "rms_dbfs": -22.11,
+            "peak_dbfs": -6.3,
+            "samples": 24000
+          },
+          {
+            "start": 30.5,
+            "rms_dbfs": -23.35,
+            "peak_dbfs": -4.84,
+            "samples": 24000
+          },
+          {
+            "start": 31.0,
+            "rms_dbfs": -22.77,
+            "peak_dbfs": -7.47,
+            "samples": 24000
+          },
+          {
+            "start": 31.5,
+            "rms_dbfs": -22.11,
+            "peak_dbfs": -7.02,
+            "samples": 24000
+          },
+          {
+            "start": 32.0,
+            "rms_dbfs": -22.0,
+            "peak_dbfs": -6.5,
+            "samples": 24000
+          },
+          {
+            "start": 32.5,
+            "rms_dbfs": -21.87,
+            "peak_dbfs": -5.48,
+            "samples": 24000
+          },
+          {
+            "start": 33.0,
+            "rms_dbfs": -23.13,
+            "peak_dbfs": -5.24,
+            "samples": 24000
+          },
+          {
+            "start": 33.5,
+            "rms_dbfs": -22.13,
+            "peak_dbfs": -7.87,
+            "samples": 24000
+          },
+          {
+            "start": 34.0,
+            "rms_dbfs": -22.89,
+            "peak_dbfs": -7.73,
+            "samples": 24000
+          },
+          {
+            "start": 34.5,
+            "rms_dbfs": -22.89,
+            "peak_dbfs": -5.53,
+            "samples": 24000
+          },
+          {
+            "start": 35.0,
+            "rms_dbfs": -24.06,
+            "peak_dbfs": -6.11,
+            "samples": 24000
+          },
+          {
+            "start": 35.5,
+            "rms_dbfs": -23.85,
+            "peak_dbfs": -9.24,
+            "samples": 24000
+          },
+          {
+            "start": 36.0,
+            "rms_dbfs": -19.35,
+            "peak_dbfs": -6.43,
+            "samples": 24000
+          },
+          {
+            "start": 36.5,
+            "rms_dbfs": -19.83,
+            "peak_dbfs": -8.26,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 28.9439,
+        "max_frame_motion_score": 62.1657,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "instant_freeze",
+      "start": 47.0,
+      "end": 55.6,
+      "reason": "full bottle, hand opening and instant freeze setup",
+      "title": "How to (nearly) instantly freeze a bottle of sparkling water.ogv",
+      "creator": "geodee",
+      "source_page": "https://commons.wikimedia.org/wiki/File:How_to_(nearly)_instantly_freeze_a_bottle_of_sparkling_water.ogv",
+      "platform": "YouTube",
+      "action_hint": "supercooled bottle freezes instantly when opened",
+      "moment_label": "INSTANT FREEZE",
+      "reaction_text": "WATCH IT TURN",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "8b7e73152809940ec8fce9d850972a430ddd7903",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "a48bdbbd49f685989c4776cb5b9892a4f3c56d30",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_instant_freeze_47p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -30.28,
+        "peak_dbfs": -1.09,
+        "dc_offset": 5.04e-06,
+        "half_second_blocks": [
+          {
+            "start": 47.0,
+            "rms_dbfs": -18.14,
+            "peak_dbfs": -1.09,
+            "samples": 24000
+          },
+          {
+            "start": 47.5,
+            "rms_dbfs": -31.54,
+            "peak_dbfs": -11.92,
+            "samples": 24000
+          },
+          {
+            "start": 48.0,
+            "rms_dbfs": -56.38,
+            "peak_dbfs": -43.86,
+            "samples": 24000
+          },
+          {
+            "start": 48.5,
+            "rms_dbfs": -55.84,
+            "peak_dbfs": -44.78,
+            "samples": 24000
+          },
+          {
+            "start": 49.0,
+            "rms_dbfs": -54.23,
+            "peak_dbfs": -41.32,
+            "samples": 24000
+          },
+          {
+            "start": 49.5,
+            "rms_dbfs": -54.08,
+            "peak_dbfs": -42.84,
+            "samples": 24000
+          },
+          {
+            "start": 50.0,
+            "rms_dbfs": -43.41,
+            "peak_dbfs": -25.64,
+            "samples": 24000
+          },
+          {
+            "start": 50.5,
+            "rms_dbfs": -53.64,
+            "peak_dbfs": -40.55,
+            "samples": 24000
+          },
+          {
+            "start": 51.0,
+            "rms_dbfs": -54.54,
+            "peak_dbfs": -35.24,
+            "samples": 24000
+          },
+          {
+            "start": 51.5,
+            "rms_dbfs": -55.22,
+            "peak_dbfs": -43.81,
+            "samples": 24000
+          },
+          {
+            "start": 52.0,
+            "rms_dbfs": -55.35,
+            "peak_dbfs": -32.69,
+            "samples": 24000
+          },
+          {
+            "start": 52.5,
+            "rms_dbfs": -55.49,
+            "peak_dbfs": -42.83,
+            "samples": 24000
+          },
+          {
+            "start": 53.0,
+            "rms_dbfs": -55.23,
+            "peak_dbfs": -44.52,
+            "samples": 24000
+          },
+          {
+            "start": 53.5,
+            "rms_dbfs": -55.02,
+            "peak_dbfs": -44.2,
+            "samples": 24000
+          },
+          {
+            "start": 54.0,
+            "rms_dbfs": -55.2,
+            "peak_dbfs": -43.67,
+            "samples": 24000
+          },
+          {
+            "start": 54.5,
+            "rms_dbfs": -55.73,
+            "peak_dbfs": -44.23,
+            "samples": 24000
+          },
+          {
+            "start": 55.0,
+            "rms_dbfs": -55.27,
+            "peak_dbfs": -43.6,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 8.0943,
+        "max_frame_motion_score": 30.3017,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "instant_freeze",
+      "start": 50.0,
+      "end": 58.6,
+      "reason": "bottle freeze wave from the full-shot angle",
+      "title": "How to (nearly) instantly freeze a bottle of sparkling water.ogv",
+      "creator": "geodee",
+      "source_page": "https://commons.wikimedia.org/wiki/File:How_to_(nearly)_instantly_freeze_a_bottle_of_sparkling_water.ogv",
+      "platform": "YouTube",
+      "action_hint": "supercooled bottle freezes instantly when opened",
+      "moment_label": "INSTANT FREEZE",
+      "reaction_text": "WATCH IT TURN",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "8b7e73152809940ec8fce9d850972a430ddd7903",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "a48bdbbd49f685989c4776cb5b9892a4f3c56d30",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_instant_freeze_50p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -52.58,
+        "peak_dbfs": -25.64,
+        "dc_offset": 4.4e-07,
+        "half_second_blocks": [
+          {
+            "start": 50.0,
+            "rms_dbfs": -43.41,
+            "peak_dbfs": -25.64,
+            "samples": 24000
+          },
+          {
+            "start": 50.5,
+            "rms_dbfs": -53.64,
+            "peak_dbfs": -40.55,
+            "samples": 24000
+          },
+          {
+            "start": 51.0,
+            "rms_dbfs": -54.54,
+            "peak_dbfs": -35.24,
+            "samples": 24000
+          },
+          {
+            "start": 51.5,
+            "rms_dbfs": -55.22,
+            "peak_dbfs": -43.81,
+            "samples": 24000
+          },
+          {
+            "start": 52.0,
+            "rms_dbfs": -55.35,
+            "peak_dbfs": -32.69,
+            "samples": 24000
+          },
+          {
+            "start": 52.5,
+            "rms_dbfs": -55.49,
+            "peak_dbfs": -42.83,
+            "samples": 24000
+          },
+          {
+            "start": 53.0,
+            "rms_dbfs": -55.23,
+            "peak_dbfs": -44.52,
+            "samples": 24000
+          },
+          {
+            "start": 53.5,
+            "rms_dbfs": -55.02,
+            "peak_dbfs": -44.2,
+            "samples": 24000
+          },
+          {
+            "start": 54.0,
+            "rms_dbfs": -55.2,
+            "peak_dbfs": -43.67,
+            "samples": 24000
+          },
+          {
+            "start": 54.5,
+            "rms_dbfs": -55.73,
+            "peak_dbfs": -44.23,
+            "samples": 24000
+          },
+          {
+            "start": 55.0,
+            "rms_dbfs": -55.27,
+            "peak_dbfs": -43.6,
+            "samples": 24000
+          },
+          {
+            "start": 55.5,
+            "rms_dbfs": -55.26,
+            "peak_dbfs": -43.64,
+            "samples": 24000
+          },
+          {
+            "start": 56.0,
+            "rms_dbfs": -55.8,
+            "peak_dbfs": -43.5,
+            "samples": 24000
+          },
+          {
+            "start": 56.5,
+            "rms_dbfs": -55.06,
+            "peak_dbfs": -44.39,
+            "samples": 24000
+          },
+          {
+            "start": 57.0,
+            "rms_dbfs": -54.9,
+            "peak_dbfs": -44.55,
+            "samples": 24000
+          },
+          {
+            "start": 57.5,
+            "rms_dbfs": -55.24,
+            "peak_dbfs": -43.53,
+            "samples": 24000
+          },
+          {
+            "start": 58.0,
+            "rms_dbfs": -55.78,
+            "peak_dbfs": -43.29,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 2.6441,
+        "max_frame_motion_score": 19.7358,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": false,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "instant_freeze",
+      "start": 205.0,
+      "end": 213.6,
+      "reason": "close-up freeze wave",
+      "title": "How to (nearly) instantly freeze a bottle of sparkling water.ogv",
+      "creator": "geodee",
+      "source_page": "https://commons.wikimedia.org/wiki/File:How_to_(nearly)_instantly_freeze_a_bottle_of_sparkling_water.ogv",
+      "platform": "YouTube",
+      "action_hint": "supercooled bottle freezes instantly when opened",
+      "moment_label": "INSTANT FREEZE",
+      "reaction_text": "WATCH IT TURN",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "8b7e73152809940ec8fce9d850972a430ddd7903",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a2/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv/How_to_%28nearly%29_instantly_freeze_a_bottle_of_sparkling_water.ogv.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "a48bdbbd49f685989c4776cb5b9892a4f3c56d30",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_instant_freeze_205p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -34.95,
+        "peak_dbfs": 0.21,
+        "dc_offset": -1.05e-06,
+        "half_second_blocks": [
+          {
+            "start": 205.0,
+            "rms_dbfs": -53.87,
+            "peak_dbfs": -42.42,
+            "samples": 24000
+          },
+          {
+            "start": 205.5,
+            "rms_dbfs": -47.2,
+            "peak_dbfs": -32.03,
+            "samples": 24000
+          },
+          {
+            "start": 206.0,
+            "rms_dbfs": -46.16,
+            "peak_dbfs": -31.7,
+            "samples": 24000
+          },
+          {
+            "start": 206.5,
+            "rms_dbfs": -46.82,
+            "peak_dbfs": -31.11,
+            "samples": 24000
+          },
+          {
+            "start": 207.0,
+            "rms_dbfs": -22.75,
+            "peak_dbfs": 0.21,
+            "samples": 24000
+          },
+          {
+            "start": 207.5,
+            "rms_dbfs": -46.37,
+            "peak_dbfs": -28.78,
+            "samples": 24000
+          },
+          {
+            "start": 208.0,
+            "rms_dbfs": -46.97,
+            "peak_dbfs": -24.48,
+            "samples": 24000
+          },
+          {
+            "start": 208.5,
+            "rms_dbfs": -51.63,
+            "peak_dbfs": -31.88,
+            "samples": 24000
+          },
+          {
+            "start": 209.0,
+            "rms_dbfs": -48.58,
+            "peak_dbfs": -33.44,
+            "samples": 24000
+          },
+          {
+            "start": 209.5,
+            "rms_dbfs": -51.83,
+            "peak_dbfs": -39.89,
+            "samples": 24000
+          },
+          {
+            "start": 210.0,
+            "rms_dbfs": -52.14,
+            "peak_dbfs": -39.77,
+            "samples": 24000
+          },
+          {
+            "start": 210.5,
+            "rms_dbfs": -53.56,
+            "peak_dbfs": -41.06,
+            "samples": 24000
+          },
+          {
+            "start": 211.0,
+            "rms_dbfs": -47.18,
+            "peak_dbfs": -27.77,
+            "samples": 24000
+          },
+          {
+            "start": 211.5,
+            "rms_dbfs": -51.03,
+            "peak_dbfs": -25.46,
+            "samples": 24000
+          },
+          {
+            "start": 212.0,
+            "rms_dbfs": -53.72,
+            "peak_dbfs": -39.97,
+            "samples": 24000
+          },
+          {
+            "start": 212.5,
+            "rms_dbfs": -54.31,
+            "peak_dbfs": -42.7,
+            "samples": 24000
+          },
+          {
+            "start": 213.0,
+            "rms_dbfs": -53.51,
+            "peak_dbfs": -42.28,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 23.4003,
+        "max_frame_motion_score": 36.9996,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "teen_cliff_jump",
+      "start": 0.0,
+      "end": 8.6,
+      "reason": "immediate cliff jump and splash",
+      "title": "Teen dives on Summersville Lake Cliff Jump.-d8Jo xqxEn0.webm",
+      "creator": "Josh Connelly",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm",
+      "platform": "YouTube",
+      "action_hint": "teen cliff dive into a lake",
+      "moment_label": "CLIFF SEND",
+      "reaction_text": "SPLASH",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "9e55a81835ec1c6dffb19264b0254fa659a7542c",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_kind": "commons_original",
+      "downloaded_sha1": "9e55a81835ec1c6dffb19264b0254fa659a7542c",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_teen_cliff_jump_0p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 411528,
+        "decoded_duration_seconds": 8.573,
+        "rms_dbfs": -20.07,
+        "peak_dbfs": 1.47,
+        "dc_offset": -4.317e-05,
+        "half_second_blocks": [
+          {
+            "start": 0.0,
+            "rms_dbfs": -10.73,
+            "peak_dbfs": 1.39,
+            "samples": 24000
+          },
+          {
+            "start": 0.5,
+            "rms_dbfs": -33.67,
+            "peak_dbfs": -18.94,
+            "samples": 24000
+          },
+          {
+            "start": 1.0,
+            "rms_dbfs": -30.01,
+            "peak_dbfs": -12.67,
+            "samples": 24000
+          },
+          {
+            "start": 1.5,
+            "rms_dbfs": -25.6,
+            "peak_dbfs": -5.81,
+            "samples": 24000
+          },
+          {
+            "start": 2.0,
+            "rms_dbfs": -34.39,
+            "peak_dbfs": -19.61,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "rms_dbfs": -33.97,
+            "peak_dbfs": -13.0,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "rms_dbfs": -16.12,
+            "peak_dbfs": 0.2,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "rms_dbfs": -17.89,
+            "peak_dbfs": -4.05,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "rms_dbfs": -18.54,
+            "peak_dbfs": -5.63,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "rms_dbfs": -19.32,
+            "peak_dbfs": -5.19,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "rms_dbfs": -29.52,
+            "peak_dbfs": -15.07,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "rms_dbfs": -33.18,
+            "peak_dbfs": -19.83,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "rms_dbfs": -35.08,
+            "peak_dbfs": -22.39,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "rms_dbfs": -35.32,
+            "peak_dbfs": -18.25,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "rms_dbfs": -36.36,
+            "peak_dbfs": -21.45,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "rms_dbfs": -23.34,
+            "peak_dbfs": -10.64,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "rms_dbfs": -22.69,
+            "peak_dbfs": -9.76,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 29.3679,
+        "max_frame_motion_score": 63.9668,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "teen_cliff_jump",
+      "start": 22.0,
+      "end": 30.6,
+      "reason": "second cliff jump and splash",
+      "title": "Teen dives on Summersville Lake Cliff Jump.-d8Jo xqxEn0.webm",
+      "creator": "Josh Connelly",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm",
+      "platform": "YouTube",
+      "action_hint": "teen cliff dive into a lake",
+      "moment_label": "CLIFF SEND",
+      "reaction_text": "SPLASH",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "9e55a81835ec1c6dffb19264b0254fa659a7542c",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Teen_dives_on_Summersville_Lake_Cliff_Jump.-d8Jo_xqxEn0.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_kind": "commons_original",
+      "downloaded_sha1": "9e55a81835ec1c6dffb19264b0254fa659a7542c",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_teen_cliff_jump_22p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -20.51,
+        "peak_dbfs": 0.14,
+        "dc_offset": -4.281e-05,
+        "half_second_blocks": [
+          {
+            "start": 22.0,
+            "rms_dbfs": -17.54,
+            "peak_dbfs": -6.34,
+            "samples": 24000
+          },
+          {
+            "start": 22.5,
+            "rms_dbfs": -24.79,
+            "peak_dbfs": -11.48,
+            "samples": 24000
+          },
+          {
+            "start": 23.0,
+            "rms_dbfs": -30.62,
+            "peak_dbfs": -19.76,
+            "samples": 24000
+          },
+          {
+            "start": 23.5,
+            "rms_dbfs": -29.49,
+            "peak_dbfs": -11.79,
+            "samples": 24000
+          },
+          {
+            "start": 24.0,
+            "rms_dbfs": -18.56,
+            "peak_dbfs": -5.11,
+            "samples": 24000
+          },
+          {
+            "start": 24.5,
+            "rms_dbfs": -22.17,
+            "peak_dbfs": -5.73,
+            "samples": 24000
+          },
+          {
+            "start": 25.0,
+            "rms_dbfs": -27.44,
+            "peak_dbfs": -12.3,
+            "samples": 24000
+          },
+          {
+            "start": 25.5,
+            "rms_dbfs": -17.46,
+            "peak_dbfs": -5.15,
+            "samples": 24000
+          },
+          {
+            "start": 26.0,
+            "rms_dbfs": -29.4,
+            "peak_dbfs": -18.45,
+            "samples": 24000
+          },
+          {
+            "start": 26.5,
+            "rms_dbfs": -27.89,
+            "peak_dbfs": -10.93,
+            "samples": 24000
+          },
+          {
+            "start": 27.0,
+            "rms_dbfs": -26.56,
+            "peak_dbfs": -8.67,
+            "samples": 24000
+          },
+          {
+            "start": 27.5,
+            "rms_dbfs": -24.87,
+            "peak_dbfs": -7.32,
+            "samples": 24000
+          },
+          {
+            "start": 28.0,
+            "rms_dbfs": -25.54,
+            "peak_dbfs": -7.24,
+            "samples": 24000
+          },
+          {
+            "start": 28.5,
+            "rms_dbfs": -14.11,
+            "peak_dbfs": -5.9,
+            "samples": 24000
+          },
+          {
+            "start": 29.0,
+            "rms_dbfs": -17.59,
+            "peak_dbfs": 0.15,
+            "samples": 24000
+          },
+          {
+            "start": 29.5,
+            "rms_dbfs": -19.82,
+            "peak_dbfs": -6.92,
+            "samples": 24000
+          },
+          {
+            "start": 30.0,
+            "rms_dbfs": -19.67,
+            "peak_dbfs": -7.86,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 44.6571,
+        "max_frame_motion_score": 54.7405,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "daredevils_ice",
+      "start": 118.0,
+      "end": 126.6,
+      "reason": "vintage ski-jump crash before title cards",
+      "title": "Daredevils On Ice (1945) - 16mm - Silent with Sound - HD.webm",
+      "creator": "The Scan Man Gallery",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Daredevils_On_Ice_(1945)_-_16mm_-_Silent_with_Sound_-_HD.webm",
+      "platform": "YouTube",
+      "action_hint": "vintage ice and snow daredevil stunts and crashes",
+      "moment_label": "1945 ICE CHAOS",
+      "reaction_text": "THEY SENT IT",
+      "license_short_name": "Public domain",
+      "license_id": "PD",
+      "api_license_verified": true,
+      "original_sha1": "ca8079b53fa03e1d761a5e564f9d802b0a5bbdf7",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Daredevils_On_Ice_%281945%29_-_16mm_-_Silent_with_Sound_-_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/ee/Daredevils_On_Ice_%281945%29_-_16mm_-_Silent_with_Sound_-_HD.webm/Daredevils_On_Ice_%281945%29_-_16mm_-_Silent_with_Sound_-_HD.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "2baa03d9cf25d96231c0f4212249d11ffbfea011",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_daredevils_ice_118p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -22.9,
+        "peak_dbfs": -6.94,
+        "dc_offset": -4.49e-06,
+        "half_second_blocks": [
+          {
+            "start": 118.0,
+            "rms_dbfs": -21.99,
+            "peak_dbfs": -8.02,
+            "samples": 24000
+          },
+          {
+            "start": 118.5,
+            "rms_dbfs": -27.59,
+            "peak_dbfs": -10.88,
+            "samples": 24000
+          },
+          {
+            "start": 119.0,
+            "rms_dbfs": -17.9,
+            "peak_dbfs": -7.48,
+            "samples": 24000
+          },
+          {
+            "start": 119.5,
+            "rms_dbfs": -23.96,
+            "peak_dbfs": -8.45,
+            "samples": 24000
+          },
+          {
+            "start": 120.0,
+            "rms_dbfs": -21.81,
+            "peak_dbfs": -9.32,
+            "samples": 24000
+          },
+          {
+            "start": 120.5,
+            "rms_dbfs": -28.61,
+            "peak_dbfs": -12.29,
+            "samples": 24000
+          },
+          {
+            "start": 121.0,
+            "rms_dbfs": -40.24,
+            "peak_dbfs": -24.97,
+            "samples": 24000
+          },
+          {
+            "start": 121.5,
+            "rms_dbfs": -34.42,
+            "peak_dbfs": -19.51,
+            "samples": 24000
+          },
+          {
+            "start": 122.0,
+            "rms_dbfs": -27.76,
+            "peak_dbfs": -14.7,
+            "samples": 24000
+          },
+          {
+            "start": 122.5,
+            "rms_dbfs": -25.45,
+            "peak_dbfs": -11.93,
+            "samples": 24000
+          },
+          {
+            "start": 123.0,
+            "rms_dbfs": -26.19,
+            "peak_dbfs": -13.86,
+            "samples": 24000
+          },
+          {
+            "start": 123.5,
+            "rms_dbfs": -25.16,
+            "peak_dbfs": -9.5,
+            "samples": 24000
+          },
+          {
+            "start": 124.0,
+            "rms_dbfs": -20.09,
+            "peak_dbfs": -7.76,
+            "samples": 24000
+          },
+          {
+            "start": 124.5,
+            "rms_dbfs": -19.73,
+            "peak_dbfs": -6.94,
+            "samples": 24000
+          },
+          {
+            "start": 125.0,
+            "rms_dbfs": -21.44,
+            "peak_dbfs": -7.57,
+            "samples": 24000
+          },
+          {
+            "start": 125.5,
+            "rms_dbfs": -23.88,
+            "peak_dbfs": -7.29,
+            "samples": 24000
+          },
+          {
+            "start": 126.0,
+            "rms_dbfs": -20.25,
+            "peak_dbfs": -7.08,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 27.5335,
+        "max_frame_motion_score": 72.6725,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "daredevils_ice",
+      "start": 457.0,
+      "end": 465.6,
+      "reason": "ski-joring action",
+      "title": "Daredevils On Ice (1945) - 16mm - Silent with Sound - HD.webm",
+      "creator": "The Scan Man Gallery",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Daredevils_On_Ice_(1945)_-_16mm_-_Silent_with_Sound_-_HD.webm",
+      "platform": "YouTube",
+      "action_hint": "vintage ice and snow daredevil stunts and crashes",
+      "moment_label": "1945 ICE CHAOS",
+      "reaction_text": "THEY SENT IT",
+      "license_short_name": "Public domain",
+      "license_id": "PD",
+      "api_license_verified": true,
+      "original_sha1": "ca8079b53fa03e1d761a5e564f9d802b0a5bbdf7",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Daredevils_On_Ice_%281945%29_-_16mm_-_Silent_with_Sound_-_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/ee/Daredevils_On_Ice_%281945%29_-_16mm_-_Silent_with_Sound_-_HD.webm/Daredevils_On_Ice_%281945%29_-_16mm_-_Silent_with_Sound_-_HD.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "2baa03d9cf25d96231c0f4212249d11ffbfea011",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_daredevils_ice_457p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -24.38,
+        "peak_dbfs": -6.07,
+        "dc_offset": -8.71e-06,
+        "half_second_blocks": [
+          {
+            "start": 457.0,
+            "rms_dbfs": -21.7,
+            "peak_dbfs": -6.61,
+            "samples": 24000
+          },
+          {
+            "start": 457.5,
+            "rms_dbfs": -28.55,
+            "peak_dbfs": -13.14,
+            "samples": 24000
+          },
+          {
+            "start": 458.0,
+            "rms_dbfs": -25.4,
+            "peak_dbfs": -10.85,
+            "samples": 24000
+          },
+          {
+            "start": 458.5,
+            "rms_dbfs": -25.69,
+            "peak_dbfs": -9.72,
+            "samples": 24000
+          },
+          {
+            "start": 459.0,
+            "rms_dbfs": -26.24,
+            "peak_dbfs": -9.97,
+            "samples": 24000
+          },
+          {
+            "start": 459.5,
+            "rms_dbfs": -23.58,
+            "peak_dbfs": -8.49,
+            "samples": 24000
+          },
+          {
+            "start": 460.0,
+            "rms_dbfs": -22.52,
+            "peak_dbfs": -9.53,
+            "samples": 24000
+          },
+          {
+            "start": 460.5,
+            "rms_dbfs": -21.88,
+            "peak_dbfs": -6.06,
+            "samples": 24000
+          },
+          {
+            "start": 461.0,
+            "rms_dbfs": -26.55,
+            "peak_dbfs": -11.29,
+            "samples": 24000
+          },
+          {
+            "start": 461.5,
+            "rms_dbfs": -24.83,
+            "peak_dbfs": -7.57,
+            "samples": 24000
+          },
+          {
+            "start": 462.0,
+            "rms_dbfs": -26.3,
+            "peak_dbfs": -12.25,
+            "samples": 24000
+          },
+          {
+            "start": 462.5,
+            "rms_dbfs": -25.11,
+            "peak_dbfs": -11.98,
+            "samples": 24000
+          },
+          {
+            "start": 463.0,
+            "rms_dbfs": -24.85,
+            "peak_dbfs": -12.22,
+            "samples": 24000
+          },
+          {
+            "start": 463.5,
+            "rms_dbfs": -23.44,
+            "peak_dbfs": -11.15,
+            "samples": 24000
+          },
+          {
+            "start": 464.0,
+            "rms_dbfs": -23.49,
+            "peak_dbfs": -11.58,
+            "samples": 24000
+          },
+          {
+            "start": 464.5,
+            "rms_dbfs": -24.81,
+            "peak_dbfs": -12.84,
+            "samples": 24000
+          },
+          {
+            "start": 465.0,
+            "rms_dbfs": -25.02,
+            "peak_dbfs": -11.95,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 24.1664,
+        "max_frame_motion_score": 62.7606,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "treetop_daredevils",
+      "start": 21.0,
+      "end": 29.6,
+      "reason": "vintage flying ski-jump daredevil",
+      "title": "Treetop Daredevils (1953) - 16mm - Sound - HD.webm",
+      "creator": "The Scan Man Gallery",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Treetop_Daredevils_(1953)_-_16mm_-_Sound_-_HD.webm",
+      "platform": "YouTube",
+      "action_hint": "vintage lumberjack and treetop daredevil stunts",
+      "moment_label": "TREETOP SEND",
+      "reaction_text": "1953 HAD NO FEAR",
+      "license_short_name": "Public domain",
+      "license_id": "PD",
+      "api_license_verified": true,
+      "original_sha1": "924fd898899a25e6f7a922361d43b2ba8e35540a",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f6/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "a821582c31ea5653df02d4f6869e9bafb7438efc",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_treetop_daredevils_21p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -23.88,
+        "peak_dbfs": -8.26,
+        "dc_offset": 9.85e-06,
+        "half_second_blocks": [
+          {
+            "start": 21.0,
+            "rms_dbfs": -40.11,
+            "peak_dbfs": -27.07,
+            "samples": 24000
+          },
+          {
+            "start": 21.5,
+            "rms_dbfs": -25.16,
+            "peak_dbfs": -10.1,
+            "samples": 24000
+          },
+          {
+            "start": 22.0,
+            "rms_dbfs": -21.38,
+            "peak_dbfs": -9.34,
+            "samples": 24000
+          },
+          {
+            "start": 22.5,
+            "rms_dbfs": -24.14,
+            "peak_dbfs": -10.83,
+            "samples": 24000
+          },
+          {
+            "start": 23.0,
+            "rms_dbfs": -22.83,
+            "peak_dbfs": -8.83,
+            "samples": 24000
+          },
+          {
+            "start": 23.5,
+            "rms_dbfs": -27.82,
+            "peak_dbfs": -9.14,
+            "samples": 24000
+          },
+          {
+            "start": 24.0,
+            "rms_dbfs": -22.35,
+            "peak_dbfs": -9.53,
+            "samples": 24000
+          },
+          {
+            "start": 24.5,
+            "rms_dbfs": -25.16,
+            "peak_dbfs": -9.18,
+            "samples": 24000
+          },
+          {
+            "start": 25.0,
+            "rms_dbfs": -25.86,
+            "peak_dbfs": -10.42,
+            "samples": 24000
+          },
+          {
+            "start": 25.5,
+            "rms_dbfs": -24.1,
+            "peak_dbfs": -9.26,
+            "samples": 24000
+          },
+          {
+            "start": 26.0,
+            "rms_dbfs": -24.04,
+            "peak_dbfs": -9.5,
+            "samples": 24000
+          },
+          {
+            "start": 26.5,
+            "rms_dbfs": -21.02,
+            "peak_dbfs": -8.26,
+            "samples": 24000
+          },
+          {
+            "start": 27.0,
+            "rms_dbfs": -25.85,
+            "peak_dbfs": -9.69,
+            "samples": 24000
+          },
+          {
+            "start": 27.5,
+            "rms_dbfs": -26.21,
+            "peak_dbfs": -9.21,
+            "samples": 24000
+          },
+          {
+            "start": 28.0,
+            "rms_dbfs": -24.08,
+            "peak_dbfs": -9.73,
+            "samples": 24000
+          },
+          {
+            "start": 28.5,
+            "rms_dbfs": -21.14,
+            "peak_dbfs": -9.57,
+            "samples": 24000
+          },
+          {
+            "start": 29.0,
+            "rms_dbfs": -22.98,
+            "peak_dbfs": -10.12,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 15.8069,
+        "max_frame_motion_score": 51.3859,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "treetop_daredevils",
+      "start": 189.0,
+      "end": 197.6,
+      "reason": "waterfall and rapids action",
+      "title": "Treetop Daredevils (1953) - 16mm - Sound - HD.webm",
+      "creator": "The Scan Man Gallery",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Treetop_Daredevils_(1953)_-_16mm_-_Sound_-_HD.webm",
+      "platform": "YouTube",
+      "action_hint": "vintage lumberjack and treetop daredevil stunts",
+      "moment_label": "TREETOP SEND",
+      "reaction_text": "1953 HAD NO FEAR",
+      "license_short_name": "Public domain",
+      "license_id": "PD",
+      "api_license_verified": true,
+      "original_sha1": "924fd898899a25e6f7a922361d43b2ba8e35540a",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f6/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "a821582c31ea5653df02d4f6869e9bafb7438efc",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_treetop_daredevils_189p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -23.86,
+        "peak_dbfs": -8.24,
+        "dc_offset": -8.33e-06,
+        "half_second_blocks": [
+          {
+            "start": 189.0,
+            "rms_dbfs": -21.35,
+            "peak_dbfs": -8.24,
+            "samples": 24000
+          },
+          {
+            "start": 189.5,
+            "rms_dbfs": -25.51,
+            "peak_dbfs": -11.3,
+            "samples": 24000
+          },
+          {
+            "start": 190.0,
+            "rms_dbfs": -22.85,
+            "peak_dbfs": -9.66,
+            "samples": 24000
+          },
+          {
+            "start": 190.5,
+            "rms_dbfs": -23.65,
+            "peak_dbfs": -9.63,
+            "samples": 24000
+          },
+          {
+            "start": 191.0,
+            "rms_dbfs": -24.98,
+            "peak_dbfs": -10.15,
+            "samples": 24000
+          },
+          {
+            "start": 191.5,
+            "rms_dbfs": -25.69,
+            "peak_dbfs": -9.4,
+            "samples": 24000
+          },
+          {
+            "start": 192.0,
+            "rms_dbfs": -24.82,
+            "peak_dbfs": -11.34,
+            "samples": 24000
+          },
+          {
+            "start": 192.5,
+            "rms_dbfs": -25.81,
+            "peak_dbfs": -11.49,
+            "samples": 24000
+          },
+          {
+            "start": 193.0,
+            "rms_dbfs": -22.49,
+            "peak_dbfs": -9.68,
+            "samples": 24000
+          },
+          {
+            "start": 193.5,
+            "rms_dbfs": -26.2,
+            "peak_dbfs": -10.51,
+            "samples": 24000
+          },
+          {
+            "start": 194.0,
+            "rms_dbfs": -24.53,
+            "peak_dbfs": -10.52,
+            "samples": 24000
+          },
+          {
+            "start": 194.5,
+            "rms_dbfs": -22.94,
+            "peak_dbfs": -9.59,
+            "samples": 24000
+          },
+          {
+            "start": 195.0,
+            "rms_dbfs": -23.69,
+            "peak_dbfs": -11.23,
+            "samples": 24000
+          },
+          {
+            "start": 195.5,
+            "rms_dbfs": -23.32,
+            "peak_dbfs": -10.37,
+            "samples": 24000
+          },
+          {
+            "start": 196.0,
+            "rms_dbfs": -28.84,
+            "peak_dbfs": -12.33,
+            "samples": 24000
+          },
+          {
+            "start": 196.5,
+            "rms_dbfs": -22.45,
+            "peak_dbfs": -9.67,
+            "samples": 24000
+          },
+          {
+            "start": 197.0,
+            "rms_dbfs": -22.05,
+            "peak_dbfs": -10.38,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 46.2624,
+        "max_frame_motion_score": 76.1588,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "treetop_daredevils",
+      "start": 257.0,
+      "end": 265.6,
+      "reason": "log-drive/person-in-rapids action",
+      "title": "Treetop Daredevils (1953) - 16mm - Sound - HD.webm",
+      "creator": "The Scan Man Gallery",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Treetop_Daredevils_(1953)_-_16mm_-_Sound_-_HD.webm",
+      "platform": "YouTube",
+      "action_hint": "vintage lumberjack and treetop daredevil stunts",
+      "moment_label": "TREETOP SEND",
+      "reaction_text": "1953 HAD NO FEAR",
+      "license_short_name": "Public domain",
+      "license_id": "PD",
+      "api_license_verified": true,
+      "original_sha1": "924fd898899a25e6f7a922361d43b2ba8e35540a",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f6/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm/Treetop_Daredevils_%281953%29_-_16mm_-_Sound_-_HD.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "a821582c31ea5653df02d4f6869e9bafb7438efc",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_treetop_daredevils_257p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -22.76,
+        "peak_dbfs": -8.61,
+        "dc_offset": -1.765e-05,
+        "half_second_blocks": [
+          {
+            "start": 257.0,
+            "rms_dbfs": -21.34,
+            "peak_dbfs": -10.8,
+            "samples": 24000
+          },
+          {
+            "start": 257.5,
+            "rms_dbfs": -21.55,
+            "peak_dbfs": -10.97,
+            "samples": 24000
+          },
+          {
+            "start": 258.0,
+            "rms_dbfs": -22.51,
+            "peak_dbfs": -12.02,
+            "samples": 24000
+          },
+          {
+            "start": 258.5,
+            "rms_dbfs": -22.93,
+            "peak_dbfs": -12.99,
+            "samples": 24000
+          },
+          {
+            "start": 259.0,
+            "rms_dbfs": -22.5,
+            "peak_dbfs": -11.98,
+            "samples": 24000
+          },
+          {
+            "start": 259.5,
+            "rms_dbfs": -22.53,
+            "peak_dbfs": -11.3,
+            "samples": 24000
+          },
+          {
+            "start": 260.0,
+            "rms_dbfs": -21.02,
+            "peak_dbfs": -10.84,
+            "samples": 24000
+          },
+          {
+            "start": 260.5,
+            "rms_dbfs": -22.83,
+            "peak_dbfs": -10.48,
+            "samples": 24000
+          },
+          {
+            "start": 261.0,
+            "rms_dbfs": -24.54,
+            "peak_dbfs": -9.15,
+            "samples": 24000
+          },
+          {
+            "start": 261.5,
+            "rms_dbfs": -23.42,
+            "peak_dbfs": -10.21,
+            "samples": 24000
+          },
+          {
+            "start": 262.0,
+            "rms_dbfs": -22.4,
+            "peak_dbfs": -10.58,
+            "samples": 24000
+          },
+          {
+            "start": 262.5,
+            "rms_dbfs": -23.02,
+            "peak_dbfs": -9.79,
+            "samples": 24000
+          },
+          {
+            "start": 263.0,
+            "rms_dbfs": -21.67,
+            "peak_dbfs": -9.18,
+            "samples": 24000
+          },
+          {
+            "start": 263.5,
+            "rms_dbfs": -26.06,
+            "peak_dbfs": -10.98,
+            "samples": 24000
+          },
+          {
+            "start": 264.0,
+            "rms_dbfs": -27.04,
+            "peak_dbfs": -8.61,
+            "samples": 24000
+          },
+          {
+            "start": 264.5,
+            "rms_dbfs": -22.71,
+            "peak_dbfs": -9.07,
+            "samples": 24000
+          },
+          {
+            "start": 265.0,
+            "rms_dbfs": -23.22,
+            "peak_dbfs": -9.05,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 44.7851,
+        "max_frame_motion_score": 79.6942,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "regatta_crash",
+      "start": 14.0,
+      "end": 22.6,
+      "reason": "crew scramble / collision approach",
+      "title": "Regatta ship crash uncut.....webm",
+      "creator": "Giannis Vasvatekis",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Regatta_ship_crash_uncut.....webm",
+      "platform": "Vimeo",
+      "action_hint": "two sailing ships colliding at the race start",
+      "moment_label": "SAILBOAT COLLISION",
+      "reaction_text": "THE MASTS!",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "07d003c0794c1190aae4ef63d3bac2251adb1eca",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Regatta_ship_crash_uncut.....webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/ce/Regatta_ship_crash_uncut.....webm/Regatta_ship_crash_uncut.....webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "49d4210f50ee78f540b3c2037076b5b12c154619",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_regatta_crash_14p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -11.55,
+        "peak_dbfs": 3.32,
+        "dc_offset": -0.00016097,
+        "half_second_blocks": [
+          {
+            "start": 14.0,
+            "rms_dbfs": -11.43,
+            "peak_dbfs": 2.25,
+            "samples": 24000
+          },
+          {
+            "start": 14.5,
+            "rms_dbfs": -12.28,
+            "peak_dbfs": 0.96,
+            "samples": 24000
+          },
+          {
+            "start": 15.0,
+            "rms_dbfs": -13.05,
+            "peak_dbfs": 0.57,
+            "samples": 24000
+          },
+          {
+            "start": 15.5,
+            "rms_dbfs": -10.07,
+            "peak_dbfs": 3.32,
+            "samples": 24000
+          },
+          {
+            "start": 16.0,
+            "rms_dbfs": -10.2,
+            "peak_dbfs": 2.33,
+            "samples": 24000
+          },
+          {
+            "start": 16.5,
+            "rms_dbfs": -14.34,
+            "peak_dbfs": -1.63,
+            "samples": 24000
+          },
+          {
+            "start": 17.0,
+            "rms_dbfs": -12.11,
+            "peak_dbfs": 1.11,
+            "samples": 24000
+          },
+          {
+            "start": 17.5,
+            "rms_dbfs": -12.08,
+            "peak_dbfs": 2.17,
+            "samples": 24000
+          },
+          {
+            "start": 18.0,
+            "rms_dbfs": -11.37,
+            "peak_dbfs": 2.12,
+            "samples": 24000
+          },
+          {
+            "start": 18.5,
+            "rms_dbfs": -11.87,
+            "peak_dbfs": 1.51,
+            "samples": 24000
+          },
+          {
+            "start": 19.0,
+            "rms_dbfs": -13.39,
+            "peak_dbfs": 0.28,
+            "samples": 24000
+          },
+          {
+            "start": 19.5,
+            "rms_dbfs": -13.35,
+            "peak_dbfs": 0.57,
+            "samples": 24000
+          },
+          {
+            "start": 20.0,
+            "rms_dbfs": -10.39,
+            "peak_dbfs": 1.37,
+            "samples": 24000
+          },
+          {
+            "start": 20.5,
+            "rms_dbfs": -11.94,
+            "peak_dbfs": 2.4,
+            "samples": 24000
+          },
+          {
+            "start": 21.0,
+            "rms_dbfs": -10.67,
+            "peak_dbfs": 1.41,
+            "samples": 24000
+          },
+          {
+            "start": 21.5,
+            "rms_dbfs": -10.83,
+            "peak_dbfs": 1.21,
+            "samples": 24000
+          },
+          {
+            "start": 22.0,
+            "rms_dbfs": -10.12,
+            "peak_dbfs": 2.28,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 44.5965,
+        "max_frame_motion_score": 78.322,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "regatta_crash",
+      "start": 74.0,
+      "end": 82.6,
+      "reason": "Boom!! collision moment",
+      "title": "Regatta ship crash uncut.....webm",
+      "creator": "Giannis Vasvatekis",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Regatta_ship_crash_uncut.....webm",
+      "platform": "Vimeo",
+      "action_hint": "two sailing ships colliding at the race start",
+      "moment_label": "SAILBOAT COLLISION",
+      "reaction_text": "THE MASTS!",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "07d003c0794c1190aae4ef63d3bac2251adb1eca",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Regatta_ship_crash_uncut.....webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/ce/Regatta_ship_crash_uncut.....webm/Regatta_ship_crash_uncut.....webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "49d4210f50ee78f540b3c2037076b5b12c154619",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_regatta_crash_74p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -14.32,
+        "peak_dbfs": 1.99,
+        "dc_offset": -8.913e-05,
+        "half_second_blocks": [
+          {
+            "start": 74.0,
+            "rms_dbfs": -13.47,
+            "peak_dbfs": 0.18,
+            "samples": 24000
+          },
+          {
+            "start": 74.5,
+            "rms_dbfs": -16.14,
+            "peak_dbfs": -3.57,
+            "samples": 24000
+          },
+          {
+            "start": 75.0,
+            "rms_dbfs": -14.86,
+            "peak_dbfs": 0.96,
+            "samples": 24000
+          },
+          {
+            "start": 75.5,
+            "rms_dbfs": -16.29,
+            "peak_dbfs": -0.94,
+            "samples": 24000
+          },
+          {
+            "start": 76.0,
+            "rms_dbfs": -18.41,
+            "peak_dbfs": -2.73,
+            "samples": 24000
+          },
+          {
+            "start": 76.5,
+            "rms_dbfs": -17.57,
+            "peak_dbfs": -5.68,
+            "samples": 24000
+          },
+          {
+            "start": 77.0,
+            "rms_dbfs": -17.63,
+            "peak_dbfs": -4.51,
+            "samples": 24000
+          },
+          {
+            "start": 77.5,
+            "rms_dbfs": -11.49,
+            "peak_dbfs": 1.99,
+            "samples": 24000
+          },
+          {
+            "start": 78.0,
+            "rms_dbfs": -16.2,
+            "peak_dbfs": -3.43,
+            "samples": 24000
+          },
+          {
+            "start": 78.5,
+            "rms_dbfs": -15.43,
+            "peak_dbfs": 0.26,
+            "samples": 24000
+          },
+          {
+            "start": 79.0,
+            "rms_dbfs": -14.11,
+            "peak_dbfs": 0.84,
+            "samples": 24000
+          },
+          {
+            "start": 79.5,
+            "rms_dbfs": -14.0,
+            "peak_dbfs": -1.4,
+            "samples": 24000
+          },
+          {
+            "start": 80.0,
+            "rms_dbfs": -13.69,
+            "peak_dbfs": 0.9,
+            "samples": 24000
+          },
+          {
+            "start": 80.5,
+            "rms_dbfs": -16.49,
+            "peak_dbfs": -0.9,
+            "samples": 24000
+          },
+          {
+            "start": 81.0,
+            "rms_dbfs": -12.35,
+            "peak_dbfs": 1.61,
+            "samples": 24000
+          },
+          {
+            "start": 81.5,
+            "rms_dbfs": -11.86,
+            "peak_dbfs": 1.02,
+            "samples": 24000
+          },
+          {
+            "start": 82.0,
+            "rms_dbfs": -11.77,
+            "peak_dbfs": 1.98,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 33.2325,
+        "max_frame_motion_score": 58.7938,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "fedex_hit",
+      "start": 2.0,
+      "end": 10.6,
+      "reason": "bike wipeout",
+      "title": "FedEx truck gets hit.ogv",
+      "creator": "Kevin Cureton",
+      "source_page": "https://commons.wikimedia.org/wiki/File:FedEx_truck_gets_hit.ogv",
+      "platform": "YouTube",
+      "action_hint": "two trucks collide beside a stopped bicyclist",
+      "moment_label": "TRUCKS TANGLE",
+      "reaction_text": "WATCH CLOSELY",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "50bb7a6badea3a4fbffd56db62b9a8dbc13a0276",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/FedEx_truck_gets_hit.ogv?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/63/FedEx_truck_gets_hit.ogv/FedEx_truck_gets_hit.ogv.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "dbbc3001c77c69573e4a6c40a895ea9047eb4293",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_fedex_hit_2p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -45.95,
+        "peak_dbfs": -23.95,
+        "dc_offset": 1.01e-06,
+        "half_second_blocks": [
+          {
+            "start": 2.0,
+            "rms_dbfs": -45.78,
+            "peak_dbfs": -34.27,
+            "samples": 24000
+          },
+          {
+            "start": 2.5,
+            "rms_dbfs": -46.69,
+            "peak_dbfs": -33.8,
+            "samples": 24000
+          },
+          {
+            "start": 3.0,
+            "rms_dbfs": -50.04,
+            "peak_dbfs": -37.73,
+            "samples": 24000
+          },
+          {
+            "start": 3.5,
+            "rms_dbfs": -49.89,
+            "peak_dbfs": -36.47,
+            "samples": 24000
+          },
+          {
+            "start": 4.0,
+            "rms_dbfs": -50.5,
+            "peak_dbfs": -38.83,
+            "samples": 24000
+          },
+          {
+            "start": 4.5,
+            "rms_dbfs": -43.74,
+            "peak_dbfs": -26.8,
+            "samples": 24000
+          },
+          {
+            "start": 5.0,
+            "rms_dbfs": -41.15,
+            "peak_dbfs": -23.95,
+            "samples": 24000
+          },
+          {
+            "start": 5.5,
+            "rms_dbfs": -45.05,
+            "peak_dbfs": -28.29,
+            "samples": 24000
+          },
+          {
+            "start": 6.0,
+            "rms_dbfs": -46.97,
+            "peak_dbfs": -33.25,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "rms_dbfs": -46.24,
+            "peak_dbfs": -33.93,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "rms_dbfs": -45.9,
+            "peak_dbfs": -33.39,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "rms_dbfs": -46.04,
+            "peak_dbfs": -32.78,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "rms_dbfs": -46.47,
+            "peak_dbfs": -31.45,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "rms_dbfs": -47.77,
+            "peak_dbfs": -36.57,
+            "samples": 24000
+          },
+          {
+            "start": 9.0,
+            "rms_dbfs": -46.89,
+            "peak_dbfs": -33.54,
+            "samples": 24000
+          },
+          {
+            "start": 9.5,
+            "rms_dbfs": -46.18,
+            "peak_dbfs": -32.64,
+            "samples": 24000
+          },
+          {
+            "start": 10.0,
+            "rms_dbfs": -45.58,
+            "peak_dbfs": -30.36,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 25.9132,
+        "max_frame_motion_score": 53.5284,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "fedex_hit",
+      "start": 40.0,
+      "end": 48.6,
+      "reason": "later high-motion truck-collision window",
+      "title": "FedEx truck gets hit.ogv",
+      "creator": "Kevin Cureton",
+      "source_page": "https://commons.wikimedia.org/wiki/File:FedEx_truck_gets_hit.ogv",
+      "platform": "YouTube",
+      "action_hint": "two trucks collide beside a stopped bicyclist",
+      "moment_label": "TRUCKS TANGLE",
+      "reaction_text": "WATCH CLOSELY",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "50bb7a6badea3a4fbffd56db62b9a8dbc13a0276",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/FedEx_truck_gets_hit.ogv?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/63/FedEx_truck_gets_hit.ogv/FedEx_truck_gets_hit.ogv.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "dbbc3001c77c69573e4a6c40a895ea9047eb4293",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_fedex_hit_40p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -28.8,
+        "peak_dbfs": 3.0,
+        "dc_offset": 1.555e-05,
+        "half_second_blocks": [
+          {
+            "start": 40.0,
+            "rms_dbfs": -31.65,
+            "peak_dbfs": -9.63,
+            "samples": 24000
+          },
+          {
+            "start": 40.5,
+            "rms_dbfs": -44.56,
+            "peak_dbfs": -31.99,
+            "samples": 24000
+          },
+          {
+            "start": 41.0,
+            "rms_dbfs": -29.29,
+            "peak_dbfs": -7.29,
+            "samples": 24000
+          },
+          {
+            "start": 41.5,
+            "rms_dbfs": -25.93,
+            "peak_dbfs": -4.38,
+            "samples": 24000
+          },
+          {
+            "start": 42.0,
+            "rms_dbfs": -37.23,
+            "peak_dbfs": -20.03,
+            "samples": 24000
+          },
+          {
+            "start": 42.5,
+            "rms_dbfs": -38.93,
+            "peak_dbfs": -21.64,
+            "samples": 24000
+          },
+          {
+            "start": 43.0,
+            "rms_dbfs": -23.59,
+            "peak_dbfs": -7.32,
+            "samples": 24000
+          },
+          {
+            "start": 43.5,
+            "rms_dbfs": -19.66,
+            "peak_dbfs": 3.0,
+            "samples": 24000
+          },
+          {
+            "start": 44.0,
+            "rms_dbfs": -42.15,
+            "peak_dbfs": -28.27,
+            "samples": 24000
+          },
+          {
+            "start": 44.5,
+            "rms_dbfs": -44.75,
+            "peak_dbfs": -32.35,
+            "samples": 24000
+          },
+          {
+            "start": 45.0,
+            "rms_dbfs": -38.0,
+            "peak_dbfs": -17.85,
+            "samples": 24000
+          },
+          {
+            "start": 45.5,
+            "rms_dbfs": -35.77,
+            "peak_dbfs": -15.24,
+            "samples": 24000
+          },
+          {
+            "start": 46.0,
+            "rms_dbfs": -26.77,
+            "peak_dbfs": -2.15,
+            "samples": 24000
+          },
+          {
+            "start": 46.5,
+            "rms_dbfs": -42.62,
+            "peak_dbfs": -25.61,
+            "samples": 24000
+          },
+          {
+            "start": 47.0,
+            "rms_dbfs": -50.89,
+            "peak_dbfs": -38.05,
+            "samples": 24000
+          },
+          {
+            "start": 47.5,
+            "rms_dbfs": -50.89,
+            "peak_dbfs": -38.5,
+            "samples": 24000
+          },
+          {
+            "start": 48.0,
+            "rms_dbfs": -50.93,
+            "peak_dbfs": -37.38,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 45.68,
+        "max_frame_motion_score": 102.4019,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "pacman_stunt",
+      "start": 77.0,
+      "end": 85.6,
+      "reason": "building projection reveal",
+      "title": "PAC-MAN and the Ghostly Adventures - Pac-Man Sega Stunt Making of OF.webm",
+      "creator": "BANDAI NAMCO Europe",
+      "source_page": "https://commons.wikimedia.org/wiki/File:PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm",
+      "platform": "YouTube",
+      "action_hint": "Pac-Man and Sonic projection stunt reveal on the SEGA building",
+      "moment_label": "PAC-MAN TAKEOVER",
+      "reaction_text": "SEGA DID NOT EXPECT",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "32cb4ddd81b30c2580738a6f864f3e2db87b827e",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_kind": "commons_original",
+      "downloaded_sha1": "32cb4ddd81b30c2580738a6f864f3e2db87b827e",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_pacman_stunt_77p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -16.78,
+        "peak_dbfs": -0.69,
+        "dc_offset": -6.905e-05,
+        "half_second_blocks": [
+          {
+            "start": 77.0,
+            "rms_dbfs": -16.33,
+            "peak_dbfs": -0.68,
+            "samples": 24000
+          },
+          {
+            "start": 77.5,
+            "rms_dbfs": -17.59,
+            "peak_dbfs": -4.33,
+            "samples": 24000
+          },
+          {
+            "start": 78.0,
+            "rms_dbfs": -18.07,
+            "peak_dbfs": -3.81,
+            "samples": 24000
+          },
+          {
+            "start": 78.5,
+            "rms_dbfs": -17.65,
+            "peak_dbfs": -3.67,
+            "samples": 24000
+          },
+          {
+            "start": 79.0,
+            "rms_dbfs": -17.11,
+            "peak_dbfs": -3.09,
+            "samples": 24000
+          },
+          {
+            "start": 79.5,
+            "rms_dbfs": -16.64,
+            "peak_dbfs": -3.8,
+            "samples": 24000
+          },
+          {
+            "start": 80.0,
+            "rms_dbfs": -18.14,
+            "peak_dbfs": -3.78,
+            "samples": 24000
+          },
+          {
+            "start": 80.5,
+            "rms_dbfs": -17.48,
+            "peak_dbfs": -3.99,
+            "samples": 24000
+          },
+          {
+            "start": 81.0,
+            "rms_dbfs": -17.65,
+            "peak_dbfs": -3.75,
+            "samples": 24000
+          },
+          {
+            "start": 81.5,
+            "rms_dbfs": -17.94,
+            "peak_dbfs": -3.59,
+            "samples": 24000
+          },
+          {
+            "start": 82.0,
+            "rms_dbfs": -17.1,
+            "peak_dbfs": -3.96,
+            "samples": 24000
+          },
+          {
+            "start": 82.5,
+            "rms_dbfs": -15.83,
+            "peak_dbfs": -3.55,
+            "samples": 24000
+          },
+          {
+            "start": 83.0,
+            "rms_dbfs": -15.62,
+            "peak_dbfs": -3.95,
+            "samples": 24000
+          },
+          {
+            "start": 83.5,
+            "rms_dbfs": -16.55,
+            "peak_dbfs": -3.29,
+            "samples": 24000
+          },
+          {
+            "start": 84.0,
+            "rms_dbfs": -16.14,
+            "peak_dbfs": -3.56,
+            "samples": 24000
+          },
+          {
+            "start": 84.5,
+            "rms_dbfs": -15.76,
+            "peak_dbfs": -3.67,
+            "samples": 24000
+          },
+          {
+            "start": 85.0,
+            "rms_dbfs": -15.23,
+            "peak_dbfs": -3.87,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 15.1424,
+        "max_frame_motion_score": 51.0472,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "pacman_stunt",
+      "start": 96.0,
+      "end": 104.6,
+      "reason": "Pac-Man and Sonic projection",
+      "title": "PAC-MAN and the Ghostly Adventures - Pac-Man Sega Stunt Making of OF.webm",
+      "creator": "BANDAI NAMCO Europe",
+      "source_page": "https://commons.wikimedia.org/wiki/File:PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm",
+      "platform": "YouTube",
+      "action_hint": "Pac-Man and Sonic projection stunt reveal on the SEGA building",
+      "moment_label": "PAC-MAN TAKEOVER",
+      "reaction_text": "SEGA DID NOT EXPECT",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "32cb4ddd81b30c2580738a6f864f3e2db87b827e",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/PAC-MAN_and_the_Ghostly_Adventures_-_Pac-Man_Sega_Stunt_Making_of_OF.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_kind": "commons_original",
+      "downloaded_sha1": "32cb4ddd81b30c2580738a6f864f3e2db87b827e",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_pacman_stunt_96p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412796,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -15.54,
+        "peak_dbfs": -3.18,
+        "dc_offset": -4.069e-05,
+        "half_second_blocks": [
+          {
+            "start": 96.0,
+            "rms_dbfs": -14.85,
+            "peak_dbfs": -3.23,
+            "samples": 24000
+          },
+          {
+            "start": 96.5,
+            "rms_dbfs": -16.03,
+            "peak_dbfs": -3.39,
+            "samples": 24000
+          },
+          {
+            "start": 97.0,
+            "rms_dbfs": -14.95,
+            "peak_dbfs": -3.67,
+            "samples": 24000
+          },
+          {
+            "start": 97.5,
+            "rms_dbfs": -15.57,
+            "peak_dbfs": -3.81,
+            "samples": 24000
+          },
+          {
+            "start": 98.0,
+            "rms_dbfs": -14.84,
+            "peak_dbfs": -3.51,
+            "samples": 24000
+          },
+          {
+            "start": 98.5,
+            "rms_dbfs": -15.5,
+            "peak_dbfs": -3.71,
+            "samples": 24000
+          },
+          {
+            "start": 99.0,
+            "rms_dbfs": -15.99,
+            "peak_dbfs": -3.25,
+            "samples": 24000
+          },
+          {
+            "start": 99.5,
+            "rms_dbfs": -15.86,
+            "peak_dbfs": -3.69,
+            "samples": 24000
+          },
+          {
+            "start": 100.0,
+            "rms_dbfs": -15.93,
+            "peak_dbfs": -3.66,
+            "samples": 24000
+          },
+          {
+            "start": 100.5,
+            "rms_dbfs": -15.69,
+            "peak_dbfs": -3.69,
+            "samples": 24000
+          },
+          {
+            "start": 101.0,
+            "rms_dbfs": -15.48,
+            "peak_dbfs": -3.62,
+            "samples": 24000
+          },
+          {
+            "start": 101.5,
+            "rms_dbfs": -15.83,
+            "peak_dbfs": -4.17,
+            "samples": 24000
+          },
+          {
+            "start": 102.0,
+            "rms_dbfs": -16.06,
+            "peak_dbfs": -3.72,
+            "samples": 24000
+          },
+          {
+            "start": 102.5,
+            "rms_dbfs": -15.31,
+            "peak_dbfs": -3.81,
+            "samples": 24000
+          },
+          {
+            "start": 103.0,
+            "rms_dbfs": -16.1,
+            "peak_dbfs": -3.59,
+            "samples": 24000
+          },
+          {
+            "start": 103.5,
+            "rms_dbfs": -14.99,
+            "peak_dbfs": -3.17,
+            "samples": 24000
+          },
+          {
+            "start": 104.0,
+            "rms_dbfs": -15.62,
+            "peak_dbfs": -3.18,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 22.2862,
+        "max_frame_motion_score": 43.8308,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "spinning_chair",
+      "start": 6.0,
+      "end": 14.6,
+      "reason": "spinning chair with weights",
+      "title": "PH ME RM TUTE 70017A V0739 Spinning Chair Conservation of Angular Momentum.webm",
+      "creator": "UniServeScienceVIDEO",
+      "source_page": "https://commons.wikimedia.org/wiki/File:PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm",
+      "platform": "YouTube",
+      "action_hint": "presenter spun in a chair while trying to explain physics",
+      "moment_label": "PHYSICS WENT WRONG",
+      "reaction_text": "HE IS DONE",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "81bceee5ef9e5bec47c112f721459ee558cdf28b",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d7/PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm/PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "059a841b05a41b2bd2bf96cf2b842744389f4df5",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_spinning_chair_6p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -20.2,
+        "peak_dbfs": 1.66,
+        "dc_offset": 1.987e-05,
+        "half_second_blocks": [
+          {
+            "start": 6.0,
+            "rms_dbfs": -120.0,
+            "peak_dbfs": -120.0,
+            "samples": 24000
+          },
+          {
+            "start": 6.5,
+            "rms_dbfs": -120.0,
+            "peak_dbfs": -120.0,
+            "samples": 24000
+          },
+          {
+            "start": 7.0,
+            "rms_dbfs": -120.0,
+            "peak_dbfs": -120.0,
+            "samples": 24000
+          },
+          {
+            "start": 7.5,
+            "rms_dbfs": -120.0,
+            "peak_dbfs": -120.0,
+            "samples": 24000
+          },
+          {
+            "start": 8.0,
+            "rms_dbfs": -120.0,
+            "peak_dbfs": -120.0,
+            "samples": 24000
+          },
+          {
+            "start": 8.5,
+            "rms_dbfs": -38.11,
+            "peak_dbfs": -23.95,
+            "samples": 24000
+          },
+          {
+            "start": 9.0,
+            "rms_dbfs": -36.33,
+            "peak_dbfs": -25.73,
+            "samples": 24000
+          },
+          {
+            "start": 9.5,
+            "rms_dbfs": -35.96,
+            "peak_dbfs": -24.8,
+            "samples": 24000
+          },
+          {
+            "start": 10.0,
+            "rms_dbfs": -35.66,
+            "peak_dbfs": -23.74,
+            "samples": 24000
+          },
+          {
+            "start": 10.5,
+            "rms_dbfs": -35.27,
+            "peak_dbfs": -21.36,
+            "samples": 24000
+          },
+          {
+            "start": 11.0,
+            "rms_dbfs": -35.42,
+            "peak_dbfs": -23.72,
+            "samples": 24000
+          },
+          {
+            "start": 11.5,
+            "rms_dbfs": -34.25,
+            "peak_dbfs": -20.23,
+            "samples": 24000
+          },
+          {
+            "start": 12.0,
+            "rms_dbfs": -14.71,
+            "peak_dbfs": 1.65,
+            "samples": 24000
+          },
+          {
+            "start": 12.5,
+            "rms_dbfs": -10.53,
+            "peak_dbfs": 1.66,
+            "samples": 24000
+          },
+          {
+            "start": 13.0,
+            "rms_dbfs": -14.15,
+            "peak_dbfs": -1.04,
+            "samples": 24000
+          },
+          {
+            "start": 13.5,
+            "rms_dbfs": -29.7,
+            "peak_dbfs": -15.85,
+            "samples": 24000
+          },
+          {
+            "start": 14.0,
+            "rms_dbfs": -36.77,
+            "peak_dbfs": -25.11,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 5,
+        "continuous_native_audio": false,
+        "native_audio_confirmed": false,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 10.3342,
+        "max_frame_motion_score": 41.1138,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": false,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "spinning_chair",
+      "start": 73.0,
+      "end": 81.6,
+      "reason": "high-motion spinning-chair take",
+      "title": "PH ME RM TUTE 70017A V0739 Spinning Chair Conservation of Angular Momentum.webm",
+      "creator": "UniServeScienceVIDEO",
+      "source_page": "https://commons.wikimedia.org/wiki/File:PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm",
+      "platform": "YouTube",
+      "action_hint": "presenter spun in a chair while trying to explain physics",
+      "moment_label": "PHYSICS WENT WRONG",
+      "reaction_text": "HE IS DONE",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "81bceee5ef9e5bec47c112f721459ee558cdf28b",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d7/PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm/PH_ME_RM_TUTE_70017A_V0739_Spinning_Chair_Conservation_of_Angular_Momentum.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "059a841b05a41b2bd2bf96cf2b842744389f4df5",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_spinning_chair_73p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -14.32,
+        "peak_dbfs": 1.88,
+        "dc_offset": -0.00012701,
+        "half_second_blocks": [
+          {
+            "start": 73.0,
+            "rms_dbfs": -18.84,
+            "peak_dbfs": -2.49,
+            "samples": 24000
+          },
+          {
+            "start": 73.5,
+            "rms_dbfs": -11.2,
+            "peak_dbfs": 1.88,
+            "samples": 24000
+          },
+          {
+            "start": 74.0,
+            "rms_dbfs": -21.74,
+            "peak_dbfs": -3.89,
+            "samples": 24000
+          },
+          {
+            "start": 74.5,
+            "rms_dbfs": -35.6,
+            "peak_dbfs": -24.31,
+            "samples": 24000
+          },
+          {
+            "start": 75.0,
+            "rms_dbfs": -33.27,
+            "peak_dbfs": -22.24,
+            "samples": 24000
+          },
+          {
+            "start": 75.5,
+            "rms_dbfs": -12.99,
+            "peak_dbfs": 1.61,
+            "samples": 24000
+          },
+          {
+            "start": 76.0,
+            "rms_dbfs": -11.12,
+            "peak_dbfs": 1.43,
+            "samples": 24000
+          },
+          {
+            "start": 76.5,
+            "rms_dbfs": -36.34,
+            "peak_dbfs": -24.39,
+            "samples": 24000
+          },
+          {
+            "start": 77.0,
+            "rms_dbfs": -14.25,
+            "peak_dbfs": 1.52,
+            "samples": 24000
+          },
+          {
+            "start": 77.5,
+            "rms_dbfs": -15.16,
+            "peak_dbfs": 1.88,
+            "samples": 24000
+          },
+          {
+            "start": 78.0,
+            "rms_dbfs": -14.81,
+            "peak_dbfs": -1.75,
+            "samples": 24000
+          },
+          {
+            "start": 78.5,
+            "rms_dbfs": -11.46,
+            "peak_dbfs": 1.57,
+            "samples": 24000
+          },
+          {
+            "start": 79.0,
+            "rms_dbfs": -10.34,
+            "peak_dbfs": 1.75,
+            "samples": 24000
+          },
+          {
+            "start": 79.5,
+            "rms_dbfs": -11.34,
+            "peak_dbfs": 1.17,
+            "samples": 24000
+          },
+          {
+            "start": 80.0,
+            "rms_dbfs": -11.43,
+            "peak_dbfs": -0.51,
+            "samples": 24000
+          },
+          {
+            "start": 80.5,
+            "rms_dbfs": -32.49,
+            "peak_dbfs": -17.55,
+            "samples": 24000
+          },
+          {
+            "start": 81.0,
+            "rms_dbfs": -31.52,
+            "peak_dbfs": -16.39,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 19.5576,
+        "max_frame_motion_score": 54.7718,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "electric_skate",
+      "start": 310.0,
+      "end": 318.6,
+      "reason": "electric skateboard street-pass action",
+      "title": "Paris en skateboard électrique - Vimeo.webm",
+      "creator": "Evolve Skateboards France",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm",
+      "platform": "Vimeo",
+      "action_hint": "electric skateboard weaving through Paris traffic",
+      "moment_label": "ELECTRIC WEAVE",
+      "reaction_text": "THROUGH PARIS",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "8e3184ea40759087808254b8777351803e1fc294",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm/Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "8f8dfcb3e99d27ffd9041ee4753813cb6f0dfd55",
+      "scout_native_audio_eligible": true,
+      "probe_completed": false,
+      "visual_review_required": true,
+      "status": "curated_window_probe_failed",
+      "error": "CalledProcessError(234, ['ffmpeg', '-nostdin', '-y', '-hide_banner', '-loglevel', 'warning', '-ss', '310.000', '-i', '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/high_action_v9_curated/media/electric_skate.webm', '-t', '8.600', '-vf', 'fps=2,scale=320:-2', '-q:v', '3', '-start_number', '0', '-frames:v', '20', '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/high_action_v9_curated/frames/electric_skate_310p0/%05d.jpg'])"
+    },
+    {
+      "id": "electric_skate",
+      "start": 316.0,
+      "end": 324.6,
+      "reason": "crouched electric-skateboard ride",
+      "title": "Paris en skateboard électrique - Vimeo.webm",
+      "creator": "Evolve Skateboards France",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm",
+      "platform": "Vimeo",
+      "action_hint": "electric skateboard weaving through Paris traffic",
+      "moment_label": "ELECTRIC WEAVE",
+      "reaction_text": "THROUGH PARIS",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "8e3184ea40759087808254b8777351803e1fc294",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm/Paris_en_skateboard_%C3%A9lectrique_-_Vimeo.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "8f8dfcb3e99d27ffd9041ee4753813cb6f0dfd55",
+      "scout_native_audio_eligible": true,
+      "probe_completed": false,
+      "visual_review_required": true,
+      "status": "curated_window_probe_failed",
+      "error": "CalledProcessError(234, ['ffmpeg', '-nostdin', '-y', '-hide_banner', '-loglevel', 'warning', '-ss', '316.000', '-i', '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/high_action_v9_curated/media/electric_skate.webm', '-t', '8.600', '-vf', 'fps=2,scale=320:-2', '-q:v', '3', '-start_number', '0', '-frames:v', '20', '/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/production/monarch-cam/work/high_action_v9_curated/frames/electric_skate_316p0/%05d.jpg'])"
+    },
+    {
+      "id": "starship_flip",
+      "start": 68.0,
+      "end": 76.6,
+      "reason": "Starship belly-flop/descent action",
+      "title": "Starship belly flop and landing.webm",
+      "creator": "janos",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Starship_belly_flop_and_landing.webm",
+      "platform": "YouTube",
+      "action_hint": "Starship belly-flop maneuver and landing attempt",
+      "moment_label": "ROCKET BELLY FLOP",
+      "reaction_text": "DID IT STICK?",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "4dae8c8681c6b27295dfcc96c4ca1544ba56c540",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Starship_belly_flop_and_landing.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3f/Starship_belly_flop_and_landing.webm/Starship_belly_flop_and_landing.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "ff213182c15aded07c5689bcf1bbde107da07f16",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_starship_flip_68p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -26.84,
+        "peak_dbfs": -10.2,
+        "dc_offset": 8.31e-06,
+        "half_second_blocks": [
+          {
+            "start": 68.0,
+            "rms_dbfs": -30.37,
+            "peak_dbfs": -17.01,
+            "samples": 24000
+          },
+          {
+            "start": 68.5,
+            "rms_dbfs": -32.64,
+            "peak_dbfs": -19.81,
+            "samples": 24000
+          },
+          {
+            "start": 69.0,
+            "rms_dbfs": -29.63,
+            "peak_dbfs": -16.41,
+            "samples": 24000
+          },
+          {
+            "start": 69.5,
+            "rms_dbfs": -28.98,
+            "peak_dbfs": -17.46,
+            "samples": 24000
+          },
+          {
+            "start": 70.0,
+            "rms_dbfs": -27.54,
+            "peak_dbfs": -16.62,
+            "samples": 24000
+          },
+          {
+            "start": 70.5,
+            "rms_dbfs": -27.83,
+            "peak_dbfs": -16.62,
+            "samples": 24000
+          },
+          {
+            "start": 71.0,
+            "rms_dbfs": -30.53,
+            "peak_dbfs": -18.99,
+            "samples": 24000
+          },
+          {
+            "start": 71.5,
+            "rms_dbfs": -29.27,
+            "peak_dbfs": -18.54,
+            "samples": 24000
+          },
+          {
+            "start": 72.0,
+            "rms_dbfs": -29.14,
+            "peak_dbfs": -17.23,
+            "samples": 24000
+          },
+          {
+            "start": 72.5,
+            "rms_dbfs": -28.69,
+            "peak_dbfs": -17.13,
+            "samples": 24000
+          },
+          {
+            "start": 73.0,
+            "rms_dbfs": -24.89,
+            "peak_dbfs": -13.29,
+            "samples": 24000
+          },
+          {
+            "start": 73.5,
+            "rms_dbfs": -21.69,
+            "peak_dbfs": -10.94,
+            "samples": 24000
+          },
+          {
+            "start": 74.0,
+            "rms_dbfs": -22.13,
+            "peak_dbfs": -10.21,
+            "samples": 24000
+          },
+          {
+            "start": 74.5,
+            "rms_dbfs": -25.18,
+            "peak_dbfs": -14.73,
+            "samples": 24000
+          },
+          {
+            "start": 75.0,
+            "rms_dbfs": -25.76,
+            "peak_dbfs": -15.55,
+            "samples": 24000
+          },
+          {
+            "start": 75.5,
+            "rms_dbfs": -27.6,
+            "peak_dbfs": -15.74,
+            "samples": 24000
+          },
+          {
+            "start": 76.0,
+            "rms_dbfs": -39.58,
+            "peak_dbfs": -29.99,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 6.5408,
+        "max_frame_motion_score": 12.0128,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": true,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    },
+    {
+      "id": "starship_flip",
+      "start": 76.0,
+      "end": 84.6,
+      "reason": "landing dust and payoff",
+      "title": "Starship belly flop and landing.webm",
+      "creator": "janos",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Starship_belly_flop_and_landing.webm",
+      "platform": "YouTube",
+      "action_hint": "Starship belly-flop maneuver and landing attempt",
+      "moment_label": "ROCKET BELLY FLOP",
+      "reaction_text": "DID IT STICK?",
+      "license_short_name": "CC BY 3.0",
+      "license_id": "CC-BY-3.0",
+      "api_license_verified": true,
+      "original_sha1": "4dae8c8681c6b27295dfcc96c4ca1544ba56c540",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Starship_belly_flop_and_landing.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3f/Starship_belly_flop_and_landing.webm/Starship_belly_flop_and_landing.webm.480p.vp9.webm",
+      "download_kind": "commons_vp9_opus_transcode",
+      "downloaded_sha1": "ff213182c15aded07c5689bcf1bbde107da07f16",
+      "scout_native_audio_eligible": true,
+      "probe_completed": true,
+      "visual_review_required": true,
+      "status": "runner_curated_window_contact_sheet_written_visual_review_pending",
+      "contact_sheet": "production/monarch-cam/short_ranking_high_action_v9/review/curated_windows/curated_starship_flip_76p0_window.jpg",
+      "audio": {
+        "audio_stream_decoded": true,
+        "samples": 412800,
+        "decoded_duration_seconds": 8.6,
+        "rms_dbfs": -36.41,
+        "peak_dbfs": -23.2,
+        "dc_offset": 1.062e-05,
+        "half_second_blocks": [
+          {
+            "start": 76.0,
+            "rms_dbfs": -39.58,
+            "peak_dbfs": -29.99,
+            "samples": 24000
+          },
+          {
+            "start": 76.5,
+            "rms_dbfs": -35.72,
+            "peak_dbfs": -24.65,
+            "samples": 24000
+          },
+          {
+            "start": 77.0,
+            "rms_dbfs": -38.54,
+            "peak_dbfs": -28.14,
+            "samples": 24000
+          },
+          {
+            "start": 77.5,
+            "rms_dbfs": -37.47,
+            "peak_dbfs": -28.66,
+            "samples": 24000
+          },
+          {
+            "start": 78.0,
+            "rms_dbfs": -34.67,
+            "peak_dbfs": -24.9,
+            "samples": 24000
+          },
+          {
+            "start": 78.5,
+            "rms_dbfs": -35.28,
+            "peak_dbfs": -24.51,
+            "samples": 24000
+          },
+          {
+            "start": 79.0,
+            "rms_dbfs": -38.68,
+            "peak_dbfs": -28.63,
+            "samples": 24000
+          },
+          {
+            "start": 79.5,
+            "rms_dbfs": -35.68,
+            "peak_dbfs": -23.59,
+            "samples": 24000
+          },
+          {
+            "start": 80.0,
+            "rms_dbfs": -34.35,
+            "peak_dbfs": -24.14,
+            "samples": 24000
+          },
+          {
+            "start": 80.5,
+            "rms_dbfs": -35.52,
+            "peak_dbfs": -23.55,
+            "samples": 24000
+          },
+          {
+            "start": 81.0,
+            "rms_dbfs": -36.78,
+            "peak_dbfs": -24.31,
+            "samples": 24000
+          },
+          {
+            "start": 81.5,
+            "rms_dbfs": -35.62,
+            "peak_dbfs": -24.42,
+            "samples": 24000
+          },
+          {
+            "start": 82.0,
+            "rms_dbfs": -38.72,
+            "peak_dbfs": -28.7,
+            "samples": 24000
+          },
+          {
+            "start": 82.5,
+            "rms_dbfs": -37.56,
+            "peak_dbfs": -25.9,
+            "samples": 24000
+          },
+          {
+            "start": 83.0,
+            "rms_dbfs": -37.67,
+            "peak_dbfs": -24.64,
+            "samples": 24000
+          },
+          {
+            "start": 83.5,
+            "rms_dbfs": -35.94,
+            "peak_dbfs": -23.15,
+            "samples": 24000
+          },
+          {
+            "start": 84.0,
+            "rms_dbfs": -35.98,
+            "peak_dbfs": -26.5,
+            "samples": 24000
+          }
+        ],
+        "quiet_half_second_block_count": 0,
+        "continuous_native_audio": true,
+        "native_audio_confirmed": true,
+        "no_added_audio_layers": true,
+        "raw_per_window_native_audio_only": true
+      },
+      "motion": {
+        "review_frames": 17,
+        "curated_motion_score": 1.4896,
+        "max_frame_motion_score": 4.6499,
+        "motion_threshold": 4.0
+      },
+      "window_eligible": false,
+      "window_eligibility_note": "Direct 8.6 s native audio RMS/17-block continuity plus 0.5 s frame-difference motion; visual payoff still requires inspection.",
+      "current_trending_claim": false,
+      "exact_reference_clip_claim": false,
+      "full_legal_compliance_claim": false,
+      "human_full_motion_review": false,
+      "human_native_audio_listening": false,
+      "creative_approval": false
+    }
+  ],
+  "summary": {
+    "edition": "high_action_v9_curated_window_scout",
+    "window_count": 28,
+    "completed": 26,
+    "failed": 2,
+    "native_audio_confirmed_windows": 25,
+    "runner_eligible_windows": 23,
+    "contact_sheets_written": 27,
+    "elapsed_seconds": 28.75,
+    "visual_review_required": true,
+    "final_v9_selection_locked": false,
+    "final_v9_mp4_rendered": false
+  }
+}
