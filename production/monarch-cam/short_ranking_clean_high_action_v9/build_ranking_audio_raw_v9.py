@@ -33,19 +33,19 @@ TARGET_RMS_VALUES = [float(x) for x in A['per_window_target_rms_dbfs_candidates'
 MASTER_CHAINS = [
     {
         'id': 'very_strong_rms_compressor_20to1_dynamic_loudnorm_lra5',
-        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.01:ratio=20:attack=3:release=80:makeup=1:knee=0.5:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=5:linear=false:print_format=summary',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.01:ratio=20:attack=3:release=80:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=5:linear=false:print_format=summary',
     },
     {
         'id': 'dual_compressor_20to1_dynamic_loudnorm_lra5',
-        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,acompressor=threshold=0.01:ratio=20:attack=3:release=80:makeup=1:knee=0.5:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=5:linear=false:print_format=summary',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,acompressor=threshold=0.01:ratio=20:attack=3:release=80:makeup=1:knee=1:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=5:linear=false:print_format=summary',
     },
     {
-        'id': 'very_strong_rms_compressor_30to1_dynamic_loudnorm_lra3',
-        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.005:ratio=30:attack=2:release=60:makeup=1:knee=0.5:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=3:linear=false:print_format=summary',
+        'id': 'strong_rms_compressor_12to1_limiter_dynamic_loudnorm_lra7',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.02:ratio=12:attack=5:release=120:makeup=1:knee=1:detection=rms:mix=1,alimiter=limit=0.125:level=disabled,loudnorm=I=-14.2:TP=-2.2:LRA=7:linear=false:print_format=summary',
     },
     {
-        'id': 'dual_compressor_30to1_dynamic_loudnorm_lra3',
-        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.05:ratio=6:attack=10:release=250:makeup=1:knee=2.828:detection=rms:mix=1,acompressor=threshold=0.005:ratio=30:attack=2:release=60:makeup=1:knee=0.5:detection=rms:mix=1,loudnorm=I=-14.2:TP=-2.2:LRA=3:linear=false:print_format=summary',
+        'id': 'very_strong_rms_compressor_20to1_limiter_dynamic_loudnorm_lra5',
+        'filter': 'pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=20,acompressor=threshold=0.01:ratio=20:attack=3:release=80:makeup=1:knee=1:detection=rms:mix=1,alimiter=limit=0.125:level=disabled,loudnorm=I=-14.2:TP=-2.2:LRA=5:linear=false:print_format=summary',
     },
     {
         'id': 'linear_loudnorm_lra7',
