@@ -1,21 +1,21 @@
 name: Monarch Cam - High Action V9 Scout
 
 on:
-  workflow_dispatch:
   push:
+    branches: [arena/2b012328-monarch-overall-work]
     paths:
       - '.github/workflows/monarch-cam-high-action-v9-scout.yml'
       - 'production/monarch-cam/short_ranking_high_action_v9/candidate_scout_v9.json'
       - 'production/monarch-cam/short_ranking_high_action_v9/scout_candidates_v9.py'
       - 'production/monarch-cam/short_ranking_high_action_v9/RANKING_V9_SCOUT_PLAN.md'
+  workflow_dispatch:
 
 permissions:
   contents: write
-  actions: read
 
 concurrency:
   group: monarch-cam-high-action-v9-scout-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   V9_SCOUT_REVIEW: production/monarch-cam/short_ranking_high_action_v9/review/scout
@@ -29,9 +29,8 @@ jobs:
       - name: Checkout active branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: arena/2b012328-monarch-overall-work
+          fetch-depth: 1
 
       - name: Setup Python
         uses: actions/setup-python@v5
