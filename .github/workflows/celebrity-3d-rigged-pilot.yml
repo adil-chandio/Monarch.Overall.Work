@@ -1,8 +1,6 @@
 name: Render rigged celebrity POV pilot
 on:
-  push:
-    branches: [arena/1f352b8e-monarch-overall-work]
-    paths: [showreel/celebrity_3d/render_rigged.py, showreel/celebrity_3d/mux.py, .github/workflows/celebrity-3d-rigged-pilot.yml]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:

@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parent; VOICE=ROOT.parent/'celebrity_pov'/'audio'
 FPS=24;DURATION=60;W,H=360,640
 CUTS=[0,8,16,24,42,51,60]
 WORDS=[(0.35,3.6,'YOU WAKE UP AS','CRISTIANO RONALDO.'),(3.6,7.8,'THE VIEW IS INCREDIBLE.','BUT THERE IS MORE.'),(8,11.2,'BREAKFAST FUELS','THE DAY AHEAD.'),(11.2,15.7,'TRAINING LIKE A CHAMPION','IS ANOTHER STORY.'),(16.2,19.8,'ON THE TRAINING PITCH,','EVERY TOUCH MATTERS.'),(19.8,23.9,'STRENGTH. MOVEMENT.','SKILL.'),(24.15,27.6,'NOW YOU STEP OUTSIDE.','FANS RECOGNIZE YOU.'),(27.6,33.2,'A QUICK TRIP BECOMES','CAMERAS AND CROWDS.'),(33.6,37.4,'THE SPOTLIGHT OPENS','DOORS...'),(37.4,41.6,'BUT PRIVATE MOMENTS','GET HARDER TO FIND.'),(41.85,45.7,'AFTER THE NOISE,','TIME TO RECOVER.'),(45.7,50.6,'AND BE CLOSE TO','THE PEOPLE YOU LOVE.'),(51,54.4,'LUXURY. DISCIPLINE.','ATTENTION.'),(54.4,59.8,'WOULD YOU TAKE','THIS LIFE FOR A DAY?')]
-P=argparse.ArgumentParser();P.add_argument('--output',default='deliverables/monarch-celebrity-pov-3d.mp4');P.add_argument('--stills',action='store_true');P.add_argument('--samples',type=int,default=2);P.add_argument('--width',type=int,default=W);P.add_argument('--start',type=int,default=0);P.add_argument('--end',type=int,default=60);P.add_argument('--silent',action='store_true');args=P.parse_args()
+P=argparse.ArgumentParser();P.add_argument('--output',default='deliverables/monarch-celebrity-pov-3d.mp4');P.add_argument('--stills',action='store_true');P.add_argument('--samples',type=int,default=2);P.add_argument('--width',type=int,default=W);P.add_argument('--start',type=int,default=0);P.add_argument('--end',type=int,default=60);P.add_argument('--silent',action='store_true');P.add_argument('--experimental-sequences',action='store_true');args=P.parse_args()
 W=args.width;H=round(W*16/9); H+=H%2
 bpy.ops.wm.read_factory_settings(use_empty=True);scene=bpy.context.scene
 scene.render.engine='CYCLES';scene.cycles.samples=args.samples;scene.cycles.use_denoising=True;scene.render.use_persistent_data=True;scene.render.threads_mode='FIXED';scene.render.threads=4
@@ -125,6 +125,16 @@ world_base(88,'blue','wood');city_window(88)
 box('sofa',(88,.9,.55),(3,1.05,.5),'cream',.09);box('sofa back',(88,1.35,1.0),(3,.25,.9),'cream',.08)
 box('coffee table',(88,-.4,.45),(1.8,.8,.12),'wood',.04);ball('vase',(88,-.35,.67),(.18,.18,.28),'gold')
 hero4=person(87.35,1.0,shirt='white',shorts='blue',scale=.9);family=person(88.75,1.0,shirt='pink',shorts='blue',scale=.75)
+# Optional experiment: action clips replace one repeating animation per character.
+# These motions are generic; they are not a finished performance or football kick.
+if args.experimental_sequences:
+ from action_timeline import Clip, apply
+ apply(hero0['rig'], [Clip('Idle_Loop_Rig',0,4.25,.2,True), Clip('Interact_Rig',4,8,.2)])
+ apply(hero1['rig'], [Clip('Idle_Loop_Rig',8,10.25,.2,True), Clip('PickUp_Table_Rig',10,12,.2), Clip('Idle_Loop_Rig',11.75,16,.2,True)])
+ apply(hero2['rig'], [Clip('Jog_Fwd_Loop_Rig',16,19.25,.2,True), Clip('Interact_Rig',19,21,.2), Clip('Jog_Fwd_Loop_Rig',20.75,24,.2,True)])
+ apply(hero3['rig'], [Clip('Walk_Loop_Rig',24,31.25,.2,True), Clip('Interact_Rig',31,33,.2), Clip('Walk_Formal_Loop_Rig',32.75,42,.2,True)])
+ apply(hero4['rig'], [Clip('Idle_Loop_Rig',42,47.25,.2,True), Clip('Interact_Rig',47,49,.2), Clip('Idle_Loop_Rig',48.75,60,.2,True)])
+
 # Rendering camera.
 bpy.ops.object.camera_add();camera=bpy.context.object;scene.camera=camera;camera.data.lens=42;camera.data.sensor_width=36
 
