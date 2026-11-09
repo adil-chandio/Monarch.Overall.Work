@@ -1,18 +1,15 @@
-name: Render celebrity story 3D v4
+name: Assemble celebrity story 3D v4
 on:
   push:
     branches: [arena/1f352b8e-monarch-overall-work]
     paths: [.github/workflows/celebrity-3d-rigged-pilot.yml]
 permissions:
-  contents: read
+  contents: write
+  actions: read
 jobs:
-  render:
-    strategy:
-      fail-fast: false
-      matrix:
-        index: ['00','01','02','03','04','05','06','07','08','09','10','11']
+  assemble:
     runs-on: ubuntu-22.04
-    timeout-minutes: 40
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,23 +17,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install rendering dependencies
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq libxrender1 libxi6 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0 libgl1
-          pip install -q 'bpy==4.2.23' numpy Pillow imageio-ffmpeg
-      - name: Fetch pinned character and furniture assets
+      - run: pip install -q numpy imageio-ffmpeg
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 42704279974
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/clips
+          pattern: clip-*
+      - name: Assemble, decode, and save as a Git blob
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python showreel/celebrity_lookdev/fetch_assets.py "$RUNNER_TEMP/assets"
-      - name: Render five seconds
-        env:
-          IDX: ${{ matrix.index }}
         run: |
-          start=$((10#$IDX * 5)); end=$((start + 5))
-          python showreel/celebrity_story_3d_v4/render.py --assets "$RUNNER_TEMP/assets" --samples 3 --fps 24 --width 960 --start "$start" --end "$end" --output "$RUNNER_TEMP/$IDX.mp4" > "$RUNNER_TEMP/render.log" 2>&1 || { tail -100 "$RUNNER_TEMP/render.log"; exit 1; }
-      - uses: actions/upload-artifact@v4
-        with:
-          name: clip-${{ matrix.index }}
-          path: ${{ runner.temp }}/${{ matrix.index }}.mp4
-          retention-days: 1
+          python showreel/celebrity_story_3d_v4/assemble.py "$RUNNER_TEMP/clips" "$RUNNER_TEMP/final.mp4"
+          FF=$(python -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')
+          "$FF" -v error -i "$RUNNER_TEMP/final.mp4" -f null -
+          python - <<'PY'
+          import base64,hashlib,json,os,urllib.request
+          data=open(os.environ['RUNNER_TEMP']+'/final.mp4','rb').read()
+          req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',data=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          with urllib.request.urlopen(req,timeout=120) as r:x=json.load(r)
+          print('FINAL_BLOB_SHA',x['sha'])
+          print('FINAL_SHA256',hashlib.sha256(data).hexdigest())
+          print('FINAL_BYTES',len(data))
+          os.makedirs('docs/repo-intel',exist_ok=True)
+          open('docs/repo-intel/celebrity-story-v4-render.json','w').write(json.dumps({'git_blob':x['sha'],'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data),'source_run':42704279974},indent=2)+'\n')
+          PY
+      - name: Record render blob metadata
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/celebrity-story-v4-render.json
+          git commit -m 'Record verified 3D render blob [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work

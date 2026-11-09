@@ -14,5 +14,6 @@ class Checks(unittest.TestCase):
   c=json.loads((p/'script.json').read_text())
   for i,e in enumerate(c):
    with wave.open(str(p/'audio'/f'{i+1:02}.wav')) as w:d=w.getnframes()/w.getframerate()
-   self.assertLessEqual(e['start']+d,c[i+1]['start'] if i+1<len(c) else 60)
+   self.assertGreater(e['tempo'],0)
+   self.assertLessEqual(e['start']+d/e['tempo'],c[i+1]['start'] if i+1<len(c) else 60)
 if __name__=='__main__':unittest.main()
