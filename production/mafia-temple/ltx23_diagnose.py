@@ -54,7 +54,7 @@ for line in lines:
     if m:
         path,num,func=(m.group(1),m.group(2),m.group(3)) if m.group(1) else (m.group(4),m.group(5),m.group(6))
         locations.append(f'{path.rsplit("/",1)[-1]}:{num} {func}')
-    elif re.search(r'(?i)Stage [12]|Diffusion|VRAM Free|Generating \[|CUDA out of memory',line):
+    elif re.search(r'(?i)Stage [12]|Diffusion|VRAM Free|Generating \[|CUDA out of memory|lora|condition|tile',line):
         locations.append(line[:250])
 for line in locations[-60:]:
     print('::notice title=Control memory trace::'+line.replace('%','%25'))

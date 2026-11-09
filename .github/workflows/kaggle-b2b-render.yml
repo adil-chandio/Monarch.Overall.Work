@@ -379,7 +379,7 @@ jobs:
           if grep -q 'ltx23-pose-control' production/mafia-temple/trigger.txt; then
             bash production/mafia-temple/run_ltx23_control.sh
           elif grep -q 'ltx23-diagnostic' production/mafia-temple/trigger.txt; then
-            PILOT_KERNEL_SLUG=monarch-ltx23-control-42544343216 python production/mafia-temple/ltx23_diagnose.py
+            PILOT_KERNEL_SLUG=monarch-ltx23-control-42547620845 python production/mafia-temple/ltx23_diagnose.py
             python - <<'PY'
           import pathlib
           p=pathlib.Path('production/mafia-temple/onetoall-diagnostics.txt')
