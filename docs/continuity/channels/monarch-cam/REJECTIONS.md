@@ -65,4 +65,13 @@
 - **Evidence:** `docs/continuity/evidence/screenshots/V7_rejection_20261109-191249.png`.
 - **Reason:** `Aby yeh clean Karna itna kuch q bhar rakha ha main content to Nazar hi nhi arha ha yeh sab hatana ...` — too many overlays; main content not visible; user wants a clean build matching the referenced Short exactly.
 - **Reference:** `https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK` (`onlymeamro`, `Ranking Most Impressive Moments Ever #shorts`, 60s).
-- **Rule:** V7 technical QC, 65/65 checks, 9/9 audio gates, CI success, committed MP4 and GitHub link are not creative approval. V4/V5/V6/V7 remain rejected. Build V8 as a separate clean lane from user-supplied reference frames; do not reuse exact reference clips without rights/permission.
+- **Rule:** V7 technical QC, 65/65 checks, 9/9 audio gates, CI success, committed MP4 and GitHub link are not creative approval. V4/V5/V6/V7 remain rejected. V8 is a separate clean lane; do not reuse exact reference clips without rights/permission. The user refused further requests for reference frames, so V8 was built clean/content-first with no exact-reference-match claim.
+
+## Clean V8 — built, not approved — 2026-11-09
+
+- **Status:** `v8_clean_build_committed_human_review_pending`.
+- **CI:** `42653605976` / job `129286160076` succeeded; commit-back `9b18446`.
+- **Deliverable:** `deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4`, `22,459,082` bytes, SHA-256 `1c44fb345f3f8582ee22b6c333c39050968669b8f6fc0012d9a5b56b3d03e1e7`.
+- **Visual correction:** V7 clutter removed; minimal `7→1` strip, moment badge and progress line only. Two windows moved off a black fade-in and a static title card after contact-sheet review.
+- **Not claimed:** exact reference frames/full motion, exact match, exact rights-cleared currently trending named-platform clips, full legal compliance, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality, 3x, likes/subscribes, same-path replacement or audience result.
+- **Rule:** V8 technical QC `68/68`, `9/9` audio gates, CI success, committed contact sheets and GitHub link are objective records, **not** creative acceptance.

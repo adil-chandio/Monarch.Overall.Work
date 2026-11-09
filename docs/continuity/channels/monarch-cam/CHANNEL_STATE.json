@@ -7,7 +7,7 @@
   "owner_statement": "one of our 3 channels",
   "space": "yt-automation",
   "branch": "arena/2b012328-monarch-overall-work",
-  "status": "v8_reference_frames_needed",
+  "status": "v8_clean_build_committed_human_review_pending",
   "evidence_level": "repo_evidence",
   "identity": "Real wildlife moments, explained through original behaviour-led storytelling.",
   "primary_series": "Too Close: Wildlife in Human Space",
@@ -15,20 +15,30 @@
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
-    "status": "v8_reference_frames_needed",
-    "next_action": "Build a separate V7 60s ranking Short from rights-cleared social-origin Commons mirrors, using objective best-window selection, a blurred full-frame background plus sharp uncut source frames, the visible reference-style hook/1.-7. list/UI, then upload the new V7 MP4 to GitHub and give its own download link. Do not re-present V4/V5/V6 and do not claim creative acceptance.",
-    "single_next_action": "Obtain 2-3 screenshots or a short clip from the referenced YouTube Short, then build a separate clean V8 lane matching those frames exactly.",
+    "status": "v8_clean_build_committed_human_review_pending",
+    "next_action": "Await human full-motion/native-audio review of the committed clean V8 MP4. Do not ask again for reference frames, do not re-present V4/V5/V6/V7, and do not claim exact reference match, current-trending clearance, legal compliance, approval, perfection, retention, virality or audience results.",
+    "single_next_action": "Await human full-motion/native-audio review of the committed clean V8 MP4. Do not ask again for reference frames and do not re-present V4/V5/V6/V7.",
     "reference_url": "https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK",
-    "note": "V7 was rejected after its GitHub link: too many overlays; main content not visible."
+    "note": "V7 was rejected for overlay clutter; clean V8 is built and CI-verified at 9b18446, still pending human creative review.",
+    "current_step": "Clean V8 60s ranking Short is built, CI-verified and committed at 9b18446. Committed contact sheets and sampled full-motion frames confirm the V7 overlay clutter is removed and two cuts were moved away from a black fade-in and a static title card. The corrected MP4 link has been delivered; human creative review remains pending.",
+    "last_event_id": "evt-070-monarch-cam-clean-v8-ci-success",
+    "blocking_gaps": [
+      "Exact frames/full motion/audio from the referenced YouTube Short were not obtainable; no exact-reference-match claim is made.",
+      "Exact rights-cleared currently trending TikTok/Instagram/YouTube/Reddit/Dailymotion clips remain unmet; V8 uses older verified Commons social-origin mirrors.",
+      "No human full-motion/native-audio listening, creative approval or sign-off exists for V8."
+    ]
   },
   "parallel_unresolved": {
     "id": "monarch-cam-v6-intent",
     "title": "Next-level full-motion raw funny-animal ranking Short",
-    "status": "v6_rejected_v7_task_active",
+    "status": "v6_v7_rejected_v8_built_human_review_pending",
     "no_v6_files": false,
     "v5_untouched": true,
     "v6_rejected": true,
-    "v7_task_configured": true
+    "v7_task_configured": true,
+    "v8_task_configured": true,
+    "v8_built": true,
+    "v8_accepted": false
   },
   "strategy": {
     "november_output": "4 long videos, 8 connected Shorts, one primary cluster, two playlists, 100% clip-rights/factual-source records, old-winner bridge, Studio RPM baseline",
@@ -66,7 +76,8 @@
     "V5 hook/list geometry",
     "silent/graphic/unverified source dead ends",
     "shadowban / About-text-caused-25-views claims without Studio evidence",
-    "V6 ranking Short — rejected after GitHub upload/link: Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ... trending viral videos ko Uthao clips social media par TikTok Instagram yt or Reddit Dailymotion ... bas clips mazedar next level honi chaiye ... best perfect mazedar hooked engaging scene nikalenge ... ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha to aise hi to ab banao ache se poora"
+    "V6 ranking Short — rejected after GitHub upload/link: Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ... trending viral videos ko Uthao clips social media par TikTok Instagram yt or Reddit Dailymotion ... bas clips mazedar next level honi chaiye ... best perfect mazedar hooked engaging scene nikalenge ... ranking list kese lagi ha sab kuch visible horha ha main hamra kuch kat nhi rha to aise hi to ab banao ache se poora",
+    "V7 ranking Short — rejected after its GitHub link: Aby yeh clean Karna itna kuch q bhar rakha ha main content to Nazar hi nhi arha ha yeh sab hatana ..."
   ],
   "v5_deliverable": {
     "file": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4",
@@ -282,7 +293,7 @@
   },
   "v8_task": {
     "id": "monarch-cam-v8-clean-reference-style-ranking",
-    "status": "v8_reference_frames_needed",
+    "status": "v8_clean_build_committed_human_review_pending",
     "reference": {
       "youtube_url": "https://youtube.com/shorts/08-ocSDpt7o?si=5F7y2w9H6Sso5bQK",
       "youtube_id": "08-ocSDpt7o",
@@ -298,7 +309,10 @@
       "tiktok_author": "thatoneamro",
       "oembed_thumbnail_url": "https://i.ytimg.com/vi/08-ocSDpt7o/hq2.jpg",
       "frames_accessible_in_agent": false,
-      "note": "Agent can read oEmbed/watch metadata but cannot play or extract video frames from YouTube/TikTok in this environment. User-supplied screenshots or a short clip are required to replicate the exact clean layout."
+      "note": "Agent can read oEmbed/watch metadata but cannot play or extract video frames from YouTube/TikTok in this environment. User-supplied screenshots or a short clip are required to replicate the exact clean layout.",
+      "exact_frames_available": false,
+      "exact_full_motion_available": false,
+      "exact_match_claim": false
     },
     "visual_boundary": "Clean full-screen main content with minimal overlay; exact layout pending user-supplied reference frames.",
     "rights_boundary": "Exact reference clips are not rights-cleared. Keep verified rights-cleared sources or require a user-supplied rights-cleared clip pack/permissions.",
@@ -309,6 +323,36 @@
       "sign_off": false,
       "audience_result_promise": false,
       "virality_guarantee": false
-    }
-  }
+    },
+    "head": "9b18446b5f9293e12a0db2bb727f03a078802dc4",
+    "ci_run": "42653605976",
+    "ci_job": "129286160076",
+    "ci_conclusion": "success",
+    "commit_back": "9b18446",
+    "deliverable": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4",
+    "bytes": 22459082,
+    "sha256": "1c44fb345f3f8582ee22b6c333c39050968669b8f6fc0012d9a5b56b3d03e1e7",
+    "download_url": "https://github.com/adil-chandio/Monarch.Overall.Work/raw/arena/2b012328-monarch-overall-work/deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4",
+    "technical_checks": "68/68",
+    "audio_gates": "9/9",
+    "layout": "Clean content-first: minimal 7-to-1 top rank strip, small moment badge, thin progress line; V7 hook/list/right UI/handle/comment/subscribe/caption/chrome removed. Sharp uncut source on ambient-lifted blurred full-frame background.",
+    "window_corrections": "Rank 6 moved 0.0s->3.0s and rank 5 moved 75.5s->80.0s after committed contact sheets revealed a black fade-in and a static title card; native half-second RMS and nine audio gates re-verified.",
+    "exact_reference_frames_available": false,
+    "exact_reference_match_claim": false,
+    "user_supplied_reference_frames_requested_again": false,
+    "currently_trending_named_platform_clips_cleared": false,
+    "human_full_motion_review": false,
+    "native_audio_listening": false,
+    "human_approval": false,
+    "sign_off": false,
+    "creative_acceptance": false,
+    "perfection_claim": false,
+    "retention_claim": false,
+    "virality_claim": false,
+    "audience_result_claim": false,
+    "same_path_replacement": false,
+    "rights_note": "Older per-title verified Commons social-origin mirrors with attribution/restrictions; no exact reference clips, current-trending claim, unverified reposts or full legal compliance claim."
+  },
+  "updated_at": "2026-11-09T17:31:08Z",
+  "last_verified_head": "9b18446b5f9293e12a0db2bb727f03a078802dc4"
 }

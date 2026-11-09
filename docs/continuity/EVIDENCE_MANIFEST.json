@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T14:55:31Z",
-  "head": "1bdea93deca2979fa276c7fa9d22617c988985e3",
+  "generated_at": "2026-11-09T17:36:28Z",
+  "head": "9b18446b5f9293e12a0db2bb727f03a078802dc4",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -14,6 +14,12 @@
       "path": ".github/workflows/continuity-validate.yml",
       "bytes": 1548,
       "sha256": "c979ba2057aa9a6fc5fac262eb93b328e7a7dcce4937e5859629db3c2a23c364",
+      "evidence_level": "archive_metadata"
+    },
+    {
+      "path": ".github/workflows/monarch-cam-short-ranking-clean-v8.yml",
+      "bytes": 14648,
+      "sha256": "884f0dc5f154f5af05ba71eccaeac5f8930209381c2c6aa54ed9b2a88949d20e",
       "evidence_level": "archive_metadata"
     },
     {
@@ -30,8 +36,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 3894,
-      "sha256": "0664f6535d8f832d01acf869b7f70ed983a6d9f08b35ae707670268bdd2d9439",
+      "bytes": 3985,
+      "sha256": "39da9f02f9d6440482fa8b115a21e20816cc229145c07414d0d9e5281410c53e",
       "evidence_level": "archive_metadata"
     },
     {
@@ -83,6 +89,12 @@
       "evidence_level": "archive_metadata"
     },
     {
+      "path": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4",
+      "bytes": 22459082,
+      "sha256": "1c44fb345f3f8582ee22b6c333c39050968669b8f6fc0012d9a5b56b3d03e1e7",
+      "evidence_level": "archive_metadata"
+    },
+    {
       "path": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
       "bytes": 21986563,
       "sha256": "4f76a4e102d6c20a655157c955e076bc6a54d34ba86914b334897c8ce249b8f4",
@@ -114,14 +126,14 @@
     },
     {
       "path": "docs/continuity/00_START_HERE.md",
-      "bytes": 6320,
-      "sha256": "ca7cbff30b810c0760e443e8614b527b4e6156680a0d66bbd5341445a812b302",
+      "bytes": 8079,
+      "sha256": "ce2acc290e7f98a01e60689dec3e238f531b7b5723ebfed2e7410e82eb9d06ca",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4658,
-      "sha256": "5692b7ac6913d1d3587afe4c6c3b5225ae3d829a9f20a0b774abcb0cba0dfb17",
+      "sha256": "87fe22a4b925db1a8cf7f03f1b8022d6869ac76e735c6dc0cf8921410420700f",
       "evidence_level": "state_ledger"
     },
     {
@@ -132,8 +144,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 36660,
-      "sha256": "a0f9f029af8d22c2b447ef08ae888801d89db44047a5041be018ba1fc2293d14",
+      "bytes": 38965,
+      "sha256": "c987e3e5b934db453e8da2efd2e853b29eb8e3e7ae4471b5003fc9e61ead1254",
       "evidence_level": "state_ledger"
     },
     {
@@ -162,8 +174,8 @@
     },
     {
       "path": "docs/continuity/PROBLEMS_FIXES.md",
-      "bytes": 27411,
-      "sha256": "5e6425ef19cbe7268a1c8b643728c5696bac74fda8c0489571b98e4c06531da5",
+      "bytes": 29170,
+      "sha256": "d8d03926fc251471e49b74b30eb3716479a12a9bb1458d1d1afc0f8e11f23644",
       "evidence_level": "operating_contract"
     },
     {
@@ -192,14 +204,14 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 21609,
-      "sha256": "5bed917129c8d11fda7a3d6acfdaf9391ef48c91a84267f0648ee50ef01def2b",
+      "bytes": 23994,
+      "sha256": "0f185087ef2a4634f1dcdb3f6e41bdcb19c4c2bad018f9c9b5c07ac94c73530c",
       "evidence_level": "state_ledger"
     },
     {
       "path": "docs/continuity/UPDATE_PROTOCOL.md",
-      "bytes": 6249,
-      "sha256": "ae9f7d3e09c1047b9d57903cbba2231b405138b8a11f675ce549fddd242b2e0c",
+      "bytes": 8008,
+      "sha256": "8a5ebd60aaa8640e559c42b8e1baeedcdfab8e9145861e4324ac0f0692649814",
       "evidence_level": "operating_contract"
     },
     {
@@ -222,32 +234,32 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/00_START_HERE.md",
-      "bytes": 6811,
-      "sha256": "7beb4b17e0e0fad61065ebd9e4f61f744ec54cb173056a7df8d04179e9ba80c9",
+      "bytes": 8570,
+      "sha256": "a75078528e2b0ae730662155290ffa311d5292d0c2928eb3eab12b2386f2cef0",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/CHANNEL_STATE.json",
-      "bytes": 17652,
-      "sha256": "9f2b1dd0364836ac28406a5026a8ea492fcd9f7d8466c5f4b8d5b71a03f64da7",
+      "bytes": 20877,
+      "sha256": "ee3d0c45d136c22c831d61ad2b37ad788482105005fec85747225a2a793ba55e",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/EASY_RESUME.md",
-      "bytes": 6676,
-      "sha256": "fb3c1e6b9650c971145036084e8f91dfdd5f535b62b789e85e5164f0336bf5dd",
+      "bytes": 8806,
+      "sha256": "7f9ff3d26aebcfaa9b36395957bf02fcceca3381c17979faf0a165056dc43246",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/EVIDENCE.md",
-      "bytes": 8299,
-      "sha256": "017a82724731d8e54b9b0202367338be755770653c988418af4a69f1e55a5d24",
+      "bytes": 10058,
+      "sha256": "c954a240a78659dae96e51bd5d9e8679025c540e371a47ffc8f0f710af2b687c",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
-      "bytes": 5396,
-      "sha256": "dc6a4c77c32ba91596d86ef0ec1c4c71a96f6125d46a3b2e12e0cd5c451cfd49",
+      "bytes": 4066,
+      "sha256": "ec84a54e350e53f15353fa0038799f3259143d3c2e7d18f60cd2ab6f38fa8eb3",
       "evidence_level": "operating_contract"
     },
     {
@@ -258,20 +270,20 @@
     },
     {
       "path": "docs/continuity/channels/monarch-cam/REJECTIONS.md",
-      "bytes": 7365,
-      "sha256": "9a5eedc57ffd0a5e02af41169077f4180b41f2b85d7e4b2a59b587270be296ab",
+      "bytes": 8532,
+      "sha256": "e426bd02b319904ab4709abfa61563f27fd9bbe0a31603e34350106daa2fef73",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/V8_REFERENCE.md",
-      "bytes": 2004,
-      "sha256": "c37d8d37340e2e270e577608795f639effd3c8765f358b630a36e3d47afd62b3",
+      "bytes": 3078,
+      "sha256": "ac22ec61cefa8a0de62c7dc9370f0cc952035d126bc532121367cf519b1c193e",
       "evidence_level": "operating_contract"
     },
     {
       "path": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
-      "bytes": 6609,
-      "sha256": "5105b03c33456b4923be8185714159be1d9a8e9473d3ae270860de22b62b7d00",
+      "bytes": 8368,
+      "sha256": "ae7d90e36e198325ded75ad33ee81e706b358c61cc266a367a8f0cc86fee5671",
       "evidence_level": "operating_contract"
     },
     {
@@ -1787,6 +1799,216 @@
       "evidence_level": "operating_contract"
     },
     {
+      "path": "production/monarch-cam/short_ranking_clean_v8/CREDITS.md",
+      "bytes": 2567,
+      "sha256": "32c47a183fafcadc3cdccb52867e5456d4094dadcd8246759eee63db1f946de5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/RANKING_V8_PLAN_AND_METADATA.md",
+      "bytes": 4323,
+      "sha256": "5bc0c861fcf3ae8fd3ddfd210faf668af7c5d29e523211c86ead5c02d3173d05",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/RANKING_V8_UPLOAD_METADATA.md",
+      "bytes": 1196,
+      "sha256": "f6bf8652630eef0d49363726d89e7636c1e48567b948d4faaf17f4e11859699a",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/RENDER_TRIGGER_V8.md",
+      "bytes": 465,
+      "sha256": "eb7b490e68f6ec807b9bf92f50763a0c088a4f29eb3ee63533cbb9448032110d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/build_ranking_audio_raw_v8.py",
+      "bytes": 18985,
+      "sha256": "3e88eed93ff8e8c7830615c530ecdfce7cd5ac337776320438d744b5eb16fc65",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/candidate_probe_v8.py",
+      "bytes": 21629,
+      "sha256": "afc38da0cbc6cd8ab39ce5420dad83ac8226b90f49ee8c2d1b5b87924dedddd0",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/candidate_sources.json",
+      "bytes": 19862,
+      "sha256": "0e184a0eaeedccb84fdf1336f0d530ea973902ba254675bcf8ef9c9d19848d03",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/ranking_short_spec.json",
+      "bytes": 5292,
+      "sha256": "0df4abc3cbd7bfc31b73d1994e097476f5715279afd174751a4ef616804af229",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/ranking_v8_metadata.json",
+      "bytes": 2165,
+      "sha256": "26ed1b26305eb744f4b8bdb5f74c9086de3c7c9f04d454cd8c0113918a06d88b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/render_ranking_visual_v8.py",
+      "bytes": 19587,
+      "sha256": "24c8f25e92d23207bd48d962b068f98ed310a9838dec83e137be99a7b3182a8a",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/UPLOAD_METADATA_RANKING_V8.txt",
+      "bytes": 573,
+      "sha256": "96103b27c6f92fd6a068f034e0267f2e306db76749e3682dc7f0bf543d8bd57f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/audio_qc.json",
+      "bytes": 5664,
+      "sha256": "f247581136cdb7dd15246258a5ebf1b1fa04b307c2d035eae3a89442ad22c1c5",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/candidates/candidate_audio_probe.json",
+      "bytes": 457398,
+      "sha256": "9399789c8d2fb0e919308a2418987c90fdeb8b8d10470484c5adde4ed9ec2c9e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/candidates/candidate_review_manifest.json",
+      "bytes": 13728,
+      "sha256": "b3bacaa2c0436a936909fa8bfed2b97650b9759514623c8310bdf125f142ac0e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/candidates/candidate_video_ledger.json",
+      "bytes": 31669,
+      "sha256": "594c34e35c1d4ddb68f8c0e2ed5eaad95a4523d2ca85fd72d450f3e6d33477e3",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/layout_manifest.json",
+      "bytes": 3864,
+      "sha256": "16b2321f1b6eea4361922c9cf2a2d23b15eaeb706e1db729d8ebae50c9f973bf",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/native_audio_ledger.json",
+      "bytes": 11965,
+      "sha256": "1b1917384e1a1bb3bb7afb6f24de99bcbdaa40b02ff2d840fa4f98d6f9ccb67d",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/qc_summary.json",
+      "bytes": 199675,
+      "sha256": "5d8d2ed142165d674a385ee13346682a51b97fa420dd526d67127c0df5588457",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/review-manifest.json",
+      "bytes": 14794,
+      "sha256": "6b70b5f09150b2027b6df9b84459136b2ce1693427015559a97c89c2808b5814",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/selected_windows.json",
+      "bytes": 14509,
+      "sha256": "125c7dbcf828c0fd97de9185b76b6fc90fec53060978aae5558932ae74b15d91",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/social_origin_ledger.json",
+      "bytes": 9375,
+      "sha256": "2ef8998257cf055d2659b028aa57c39e620e4c23d550e26ea43a86e326a4e3c7",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/source_audio_audit.json",
+      "bytes": 28474,
+      "sha256": "ee43c347f89e525b8d9940d56571120a4ae7442e23e4ad2df54e0e9ed7dff76b",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/source_video_ledger.json",
+      "bytes": 12178,
+      "sha256": "2a00b80b640501ca46dd850d3aacc7f54e469d7880e6058c544062c275634cc8",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/source_windows.json",
+      "bytes": 760,
+      "sha256": "ffb6a909bf78b3b6b7626a607dd4d3fdef1a6890ab9514a0b353d9e721aceb9e",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/technical_qc.json",
+      "bytes": 14363,
+      "sha256": "4b0880a67778857f251ef41e79a0588c350b3e831c0a05215113276d6b77c96f",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/verified_sources.json",
+      "bytes": 93086,
+      "sha256": "ff4db01cfaad1d1bb75e3723928074c6254b144d1ff6e3fb0d96a94e2cf1a986",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/visual_edit_ledger.json",
+      "bytes": 6556,
+      "sha256": "01e8783acdec76ff7e87d7bbf3efe883db65b475065070b442b4ac993ca6def4",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/visual_review_lock.json",
+      "bytes": 6557,
+      "sha256": "5eca400339e93f57d64e88b5080d8928af526adddfaf8d2bc9a36e811bfd4951",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/review/visual_v8_qc.json",
+      "bytes": 2762,
+      "sha256": "06fa18d78434437b98e2ed931423c44393b7442ca58c1d65f5557ae0975415a1",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/select_moments_v8.py",
+      "bytes": 13410,
+      "sha256": "b0bf34d3ef37b7ff7b46bfb3129948a609049609503164bb900d11172e8eb344",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/source_audio_audit_v8.py",
+      "bytes": 7416,
+      "sha256": "2ee5c9ecce9dcdc5b63565fd31049e6f996a6224a61254bda96d94895219f888",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/source_recon_ranking_v8.py",
+      "bytes": 14881,
+      "sha256": "a6e3d76a239217afa3407b702151bdc3bae76556a4a93344569b58ec76d22207",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/technical_qc_v8.py",
+      "bytes": 18504,
+      "sha256": "50be0067f987c118049e1e11bce21f161a88c71f7a78c615a7479469f6d2b537",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/validate_raw_v8.py",
+      "bytes": 5391,
+      "sha256": "74c415abe737ec3ed0cc5187cf5d5d2375f6f63e2b2f0728b87ecad7b82e1786",
+      "evidence_level": "repo_evidence"
+    },
+    {
+      "path": "production/monarch-cam/short_ranking_clean_v8/verify_sources_v8.py",
+      "bytes": 12298,
+      "sha256": "c0cfb6b12aa0e733ebea216b7c1fa34cc3b61a91e568e87d9be8bbfbc4be5293",
+      "evidence_level": "repo_evidence"
+    },
+    {
       "path": "production/monarch-cam/short_ranking_raw_v5/CREDITS.md",
       "bytes": 2210,
       "sha256": "980bdc05d7f5ae0cd00737e89705bb7db50db1b07daea5a79be79bd07a3aea2e",
@@ -2388,8 +2610,8 @@
     },
     {
       "path": "tools/continuity.py",
-      "bytes": 43214,
-      "sha256": "5f29dee02b4c1163361e29cbe58857d36e6b3b3f5c3ac951b48a05ffb4c3f621",
+      "bytes": 43762,
+      "sha256": "5865f50b94a64a6a1c4022d87e8f0fcd3ef6d5e110b2068c2741759bd0d9bf58",
       "evidence_level": "archive_metadata"
     }
   ]

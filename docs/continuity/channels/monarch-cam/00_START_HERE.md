@@ -69,3 +69,14 @@ Open this file, inherit `CHANNEL_STATE.json`, then continue the single active Mo
 - Rights boundary: ten rights-cleared social-origin Commons mirrors; per-title Commons API extmetadata, original SHA-1, Credit/Categories social origin and CC BY attribution; no unverified currently trending TikTok/Instagram/Reddit/Dailymotion/YouTube reposts, no current-trending claim, no legal opinion.
 - Visual boundary: blurred full-frame background plus sharp uncut source frame; no V6 crop routine, no zoom, no black empty top, no letterbox; all seven labels visible from the first frame.
 - No V7 MP4, QC, download link, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality or audience result is claimed yet. V4/V5/V6 stay rejected; V5 untouched.
+
+## Clean V8 — built, not approved — 2026-11-09
+
+- **Status:** `v8_clean_build_committed_human_review_pending`.
+- **CI:** `42653605976` / job `129286160076` succeeded; commit-back `9b18446`.
+- **Deliverable:** `deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4` (`22,459,082` bytes, SHA-256 `1c44fb345f3f8582ee22b6c333c39050968669b8f6fc0012d9a5b56b3d03e1e7`).
+- **Direct link:** `https://github.com/adil-chandio/Monarch.Overall.Work/raw/arena/2b012328-monarch-overall-work/deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4`
+- **Visual:** V7 overlay clutter removed; only a slim `7→1` rank strip, small moment badge and thin progress line remain outside the central unobstructed content region. Sharp uncut source on ambient-lifted blurred full-frame background. Two cuts were moved off a black fade-in and a static title card after committed contact-sheet review.
+- **Objective records:** `68/68` technical checks, `9/9` unchanged web audio gates, seven continuous raw native-audio windows, zero quiet half-second blocks, per-title Commons API rights/social-origin/SHA-1 ledgers.
+- **Limits:** exact reference frames/full motion/audio were not obtainable; the user refused further frame requests; no exact-reference-match claim. Exact rights-cleared currently trending named-platform clips remain unmet; older verified Commons social-origin mirrors used. No full legal compliance, human full-motion/native-audio listening, creative approval, sign-off, perfection, retention, virality, 3x, likes/subscribes, same-path replacement or audience result is claimed.
+- **Rule:** V4/V5/V6/V7 are rejected. V8 CI success, QC and link are objective records, not creative acceptance.

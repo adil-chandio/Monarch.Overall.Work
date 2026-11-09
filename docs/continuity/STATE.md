@@ -4,8 +4,8 @@
 - Branch: `arena/2b012328-monarch-overall-work`
 - Head at capture: `8cb1e6abf64074db6ff7bfe3dcd496594f329780`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-09T14:52:18Z`
-- Last event: `evt-069-monarch-cam-v7-rejected-reference-frames-needed`
+- Updated: `2026-11-09T17:31:08Z`
+- Last event: `evt-070-monarch-cam-clean-v8-ci-success`
 
 ## Active channel
 ```json
@@ -35,16 +35,20 @@
     "No full sidebar chat list",
     "No assistant turns for EMS-20261011-001",
     "No live bidirectional connected-app sync",
-    "V6 was rejected by the user after its GitHub upload/link; technical QC, 49/49 checks, 9/9 audio gates and the download link are not creative approval. V7 must use per-title rights-cleared social-origin source/credit/origin records, not unverified currently trending reposts. No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience result is claimed."
+    "V6 was rejected by the user after its GitHub upload/link; technical QC, 49/49 checks, 9/9 audio gates and the download link are not creative approval. V7 must use per-title rights-cleared social-origin source/credit/origin records, not unverified currently trending reposts. No human full-motion/native-audio listening, approval, sign-off, perfection, retention, virality or audience result is claimed.",
+    "Exact frames/full motion/audio from the referenced YouTube Short were not obtainable; no exact-reference-match claim is made.",
+    "Exact rights-cleared currently trending TikTok/Instagram/YouTube/Reddit/Dailymotion clips remain unmet; V8 uses older verified Commons social-origin mirrors.",
+    "No human full-motion/native-audio listening, creative approval or sign-off exists for V8."
   ],
   "branch_guardrail": "Always work on arena/2b012328-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "V7 was rejected after its GitHub link. The user says the clean version still has too much overlay and the main content is not visible; they want every element removed/rebuilt to match the referenced YouTube Short exactly. The agent retrieved the reference metadata (onlymeamro / thatoneamro, 60s, 89M views) but cannot play or extract its frames here. Reference screenshots/clip are needed before building V8.",
+  "current_step": "Clean V8 60s ranking Short is built, CI-verified and committed at 9b18446. Committed contact sheets and sampled full-motion frames confirm the V7 overlay clutter is removed and two cuts were moved away from a black fade-in and a static title card. The corrected MP4 link has been delivered; human creative review remains pending.",
   "evidence_level": "repo_evidence",
   "id": "monarch-cam-easy-continuation",
-  "next_action": "Ask for 2-3 screenshots or a short clip from the reference, then build a separate clean V8 lane from those exact frames; do not re-present V4/V5/V6/V7.",
+  "last_event_id": "evt-070-monarch-cam-clean-v8-ci-success",
+  "next_action": "Await human full-motion/native-audio review of the committed clean V8 MP4. Do not ask again for reference frames, do not re-present V4/V5/V6/V7, and do not claim exact reference match, current-trending clearance, legal compliance, approval, perfection, retention, virality or audience results.",
   "space": "yt-automation",
-  "status": "v8_reference_frames_needed",
+  "status": "v8_clean_build_committed_human_review_pending",
   "title": "Monarch Cam channel workflow — continue without re-explanation"
 }
 ```
@@ -65,22 +69,24 @@
 ## Parallel video task
 ```json
 {
-  "claims": "V4, V5 and V6 are rejected. V6 technical QC and the GitHub download link are not creative acceptance. V7 is a separate configured task; no V7 MP4, human review, sign-off, perfection, retention, virality or audience result is claimed.",
+  "claims": "V4, V5, V6 and V7 are rejected. V8 is a separate clean content-first technical build, not creative approval. Exact reference frames/current-trending platform clips/human review remain unmet; no unsupported result claim.",
   "evidence_level": "gap",
   "id": "monarch-cam-v6-intent",
-  "next_action": "Build a separate V7 60s ranking Short from rights-cleared social-origin Commons mirrors, using objective best-window selection, a blurred full-frame background plus sharp uncut source frames, the visible reference-style hook/1.-7. list/UI, then upload the new V7 MP4 to GitHub and give its own download link. Do not re-present V4/V5/V6 and do not claim creative acceptance.",
+  "next_action": "Review the committed clean V8 MP4 link; do not re-present V4/V5/V6/V7 or claim creative acceptance.",
   "rejected": [
     "V4 “sirf text likh diya”",
     "V5 “NAHI abhi bhi theek se nhi”",
     "V6 “Yeh Kya chutiyapa banaya ha NAHI abhi bhi theek se nhi ... trending viral videos…”"
   ],
   "space": "yt-automation",
-  "status": "v6_rejected_v7_task_active",
+  "status": "v6_v7_rejected_v8_built_human_review_pending",
   "title": "Viral-style 60s ranking Short after V6 rejection",
   "v6_rejected": true,
   "v7_accepted": false,
   "v7_package_configured": true,
-  "v7_technical_build_complete": false
+  "v7_technical_build_complete": false,
+  "v8_accepted": false,
+  "v8_built": true
 }
 ```
 
