@@ -1,0 +1,158 @@
+{
+  "edition": "social_origin_clean_v8",
+  "reference_basis": "User rejection of the V7 preview: the delivered frame was crowded with a two-line hook, WAIT FOR #1, seven rank rows, right platform UI, a handle, a comment bubble, Subscribe, a bottom caption and app chrome, so the main footage was not visible. V8 removes those baked-in overlays. Outer phone/gallery player chrome in the screenshot is not part of the MP4. The linked YouTube Short metadata was retrieved but its frames were not playable/extractable in this environment, so no exact frame-match claim is made.",
+  "resolution": [
+    1080,
+    1920
+  ],
+  "safe_area": {
+    "top": 140,
+    "bottom": 120,
+    "left": 40,
+    "right": 100
+  },
+  "primary_elements": {
+    "rank_strip": [
+      140,
+      150,
+      940,
+      230
+    ],
+    "moment_badge": [
+      40,
+      1650,
+      600,
+      1738
+    ],
+    "progress_line": [
+      40,
+      1760,
+      980,
+      1765
+    ]
+  },
+  "all_primary_elements_inside_safe_area": true,
+  "overlay_area_fraction": 0.056896,
+  "max_overlay_area_fraction": 0.06,
+  "overlay_area_within_limit": true,
+  "content_region": [
+    0,
+    400,
+    1080,
+    1520
+  ],
+  "main_content_region_unobstructed": true,
+  "sharp_source_geometry": {
+    "width": 1080,
+    "height": 607,
+    "top": 656,
+    "aspect_preserved": true,
+    "uncut": true,
+    "centered": true
+  },
+  "rank_strip": {
+    "ranks": [
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
+    "active_highlight": true,
+    "bbox": [
+      140,
+      150,
+      940,
+      230
+    ]
+  },
+  "moment_badge": {
+    "rank_number": true,
+    "moment_label": true,
+    "bbox": [
+      40,
+      1650,
+      600,
+      1738
+    ]
+  },
+  "progress_line": {
+    "bbox": [
+      40,
+      1760,
+      980,
+      1765
+    ]
+  },
+  "removed_from_v7": [
+    "two_line_color_split_hook",
+    "WAIT_FOR_NUMBER_1",
+    "seven_dark_rank_rows",
+    "right_platform_icons",
+    "handle_text",
+    "comment_bubble",
+    "subscribe_button",
+    "bottom_caption",
+    "bottom_app_navigation",
+    "reaction_bubble",
+    "emoji_badge",
+    "top_app_chrome",
+    "transition_white_flash",
+    "full_frame_dark_gradient"
+  ],
+  "flags": {
+    "clean_content_first_layout": true,
+    "v7_clutter_removed": true,
+    "no_two_line_hook": true,
+    "no_wait_for_number_one": true,
+    "no_seven_row_list": true,
+    "no_right_platform_ui": true,
+    "no_handle": true,
+    "no_comment_bubble": true,
+    "no_subscribe_button": true,
+    "no_bottom_caption": true,
+    "no_app_chrome": true,
+    "no_reaction_bubble": true,
+    "no_player_chrome_baked_in": true,
+    "no_dark_overlay_panels": true,
+    "minimal_top_rank_strip": true,
+    "minimal_moment_badge": true,
+    "thin_progress_line": true,
+    "main_content_visible": true,
+    "full_frame_preserved": true,
+    "sharp_source_frame_uncut": true,
+    "source_aspect_preserved": true,
+    "no_crop": true,
+    "no_zoom": true,
+    "no_cut_off": true,
+    "no_black_bars": true,
+    "no_letterbox": true,
+    "no_black_empty_top": true,
+    "no_hook_black_fill": true,
+    "no_v6_cover_crop": true,
+    "no_v5_right_panel": true,
+    "no_v5_bottom_rank_burst": true,
+    "no_v5_hook_occlusion": true,
+    "blurred_background_fill": true,
+    "ambient_background_lift": true,
+    "seven_moments_only": true,
+    "rank_numbers_7_to_1": true,
+    "active_rank_progress": true,
+    "no_third_party_handle": true,
+    "no_fake_engagement_counts": true,
+    "rights_verified_per_title": true,
+    "social_origin_check": true,
+    "safe_area_check": true
+  },
+  "full_motion_review": false,
+  "native_audio_listening": false,
+  "human_approval": false,
+  "sign_off": false,
+  "audience_result_promise": false,
+  "virality_guarantee": false,
+  "current_trending_claim": false,
+  "unverified_social_repost": false,
+  "exact_reference_match_claim": false
+}
