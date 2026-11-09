@@ -36,7 +36,7 @@ concurrency:
 
 jobs:
   private-relay-smoke:
-    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && github.event_name == 'workflow_dispatch' && inputs.private_relay_test == true }}
+    if: ${{ github.ref_name == 'arena/6101616c-monarch-overall-work' && ((github.event_name == 'workflow_dispatch' && inputs.private_relay_test == true) || (github.event_name == 'push' && contains(github.event.head_commit.message, 'private-relay-smoke'))) }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

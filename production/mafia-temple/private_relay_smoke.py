@@ -8,8 +8,14 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-url=os.environ['RELAY_URL'].rstrip('/')
-audience=os.environ['RELAY_AUDIENCE']
+if os.environ.get('GITHUB_EVENT_NAME') == 'push':
+    from pathlib import Path
+    config=json.loads(Path('production/mafia-temple/relay-smoke.json').read_text())
+    url=config['url'].rstrip('/')
+    audience=config['audience']
+else:
+    url=os.environ['RELAY_URL'].rstrip('/')
+    audience=os.environ['RELAY_AUDIENCE']
 if not re.fullmatch(r'https://8765-[a-z0-9]+\.e2b\.app',url):
     raise ValueError('Unexpected relay host')
 if not re.fullmatch(r'monarch-[A-Za-z0-9_-]{35,100}',audience):
