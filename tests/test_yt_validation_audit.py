@@ -37,4 +37,8 @@ class AuditTests(unittest.TestCase):
   r=a.collect(Fake(),{'queries':['x'],'orders':['date']});self.assertEqual(r['status'],'partial');self.assertEqual(len(r['searches']),1)
  def test_workflow_scoped_no_bot_push(self):
   s=(Path(__file__).resolve().parents[1]/'.github/workflows/yt-validation-audit.yml').read_text();self.assertIn('arena/ba8d901e-monarch-overall-work',s);self.assertIn('contents: write',s);self.assertIn('/contents/production/extinct-life/research/api-results/latest.json',s);self.assertIn("github.ref == 'refs/heads/arena/ba8d901e-monarch-overall-work'",s);self.assertNotIn('git push',s);self.assertNotIn('github.event.inputs',s)
+ def test_actions_pinned_and_runner_stable(self):
+  import re
+  s=(Path(__file__).resolve().parents[1]/'.github/workflows/yt-validation-audit.yml').read_text()
+  self.assertIn('runs-on: ubuntu-24.04',s);self.assertEqual(len(re.findall(r'uses: actions/[a-z-]+@[0-9a-f]{40}',s)),3)
 if __name__=='__main__':unittest.main()
