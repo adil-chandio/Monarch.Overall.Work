@@ -4,7 +4,7 @@ on:
     branches: [arena/6101616c-monarch-overall-work]
     paths: [.github/workflows/mafia-3d-system-deps.yml]
 permissions:
-  contents: read
+  contents: write
 jobs:
   system-libraries:
     runs-on: ubuntu-22.04
@@ -17,6 +17,27 @@ jobs:
           cd "$RUNNER_TEMP/3d-deps"
           apt-get download libxrender1 libxxf86vm1 libxfixes3 libxi6 libxkbcommon0 libsm6 libice6 libgl1 libglx0 libglvnd0 libglx-mesa0 libdrm2 libxshmfence1 libxcb-glx0 libxcb-dri2-0 libxcb-dri3-0 libxcb-present0 libxcb-sync1 libxcb-randr0 libxcb-xfixes0 libwayland-client0 libwayland-server0 || exit 1
           sha256sum *.deb > SHA256SUMS
+      - name: Transfer public system packages as an unreferenced Git blob
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -eu
+          cd "$RUNNER_TEMP/3d-deps"
+          tar -czf "$RUNNER_TEMP/runtime-debs.tar.gz" .
+          python - <<'PY'
+          import base64, hashlib, json, os, pathlib
+          path=pathlib.Path(os.environ['RUNNER_TEMP'])/'runtime-debs.tar.gz'
+          data=path.read_bytes()
+          (path.parent/'blob-request.json').write_text(json.dumps({'encoding':'base64','content':base64.b64encode(data).decode()}))
+          print('::notice title=Public dependency SHA256::'+hashlib.sha256(data).hexdigest())
+          PY
+          gh api -X POST "repos/$REPO/git/blobs" --input "$RUNNER_TEMP/blob-request.json" > "$RUNNER_TEMP/blob-result.json"
+          python - <<'PY'
+          import json, os, pathlib
+          data=json.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/'blob-result.json').read_text())
+          print('::notice title=Public dependency blob::'+data['sha'])
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: public-3d-system-dependencies
