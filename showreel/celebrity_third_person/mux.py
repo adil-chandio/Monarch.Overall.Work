@@ -6,8 +6,10 @@ import numpy as np
 P=Path(__file__).resolve().parent
 clips=Path(sys.argv[1]);output=Path(sys.argv[2]);ff=imageio_ffmpeg.get_ffmpeg_exe();entries=json.loads((P/'script.json').read_text())
 with tempfile.TemporaryDirectory() as td:
- tmp=Path(td);listing=tmp/'clips.txt';listing.write_text(''.join("file '%s'\n"% (clips/f'{i:02}.mp4').resolve() for i in range(12)));video=tmp/'video.mp4'
- subprocess.run([ff,'-y','-v','error','-f','concat','-safe','0','-i',str(listing),'-c','copy',str(video)],check=True)
+ tmp=Path(td);video=clips
+ if clips.is_dir():
+  listing=tmp/'clips.txt';listing.write_text(''.join("file '%s'\n"% (clips/f'{i:02}.mp4').resolve() for i in range(12)));video=tmp/'video.mp4'
+  subprocess.run([ff,'-y','-v','error','-f','concat','-safe','0','-i',str(listing),'-c','copy',str(video)],check=True)
  sr=48000;t=np.arange(sr*60,dtype=np.float32)/sr;a=np.zeros_like(t);rng=np.random.default_rng(1804)
  for freq in (55,82.41,110,138.59):a+=.003*np.sin(2*np.pi*freq*t)*(.7+.3*np.sin(2*np.pi*.045*t))
  for beat in np.arange(0,60,.75):

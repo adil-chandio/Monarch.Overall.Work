@@ -8,6 +8,10 @@ This remains a **rough, stylized test**, not a polished or reference-quality pro
 - Amy model card: https://huggingface.co/rhasspy/piper-voices/blob/v1.0.0/en/en_US/amy/medium/MODEL_CARD
 - Amy third-party description: https://huggingface.co/qualcomm/PiperTTS-EN-Amy
 
-Render with Python 3.11, `bpy==4.2.23`, Pillow, NumPy, imageio-ffmpeg and system graphics libraries. `render.py` outputs a silent selected time range. The manual GitHub Actions workflow renders 12 chunks; after downloading them into one directory, `python showreel/celebrity_third_person/mux.py <clips-dir> <output.mp4>` assembles the original script's included voice clips and synthesized score. The generated WAVs are included; model weights are not.
+Render with Python 3.11, `bpy==4.2.23`, Pillow, NumPy, imageio-ffmpeg and system graphics libraries. `render.py` outputs a silent selected time range. For a local render, run `python showreel/celebrity_third_person/render.py --output silent.mp4`, followed by `python showreel/celebrity_third_person/mux.py silent.mp4 <output.mp4>` to add the included voice clips and synthesized score. The animation is sampled at 18 fps by default; the CC0 motion clips are evaluated on a 24 fps Blender timeline. The generated WAVs are included; model weights are not.
 
 Tests verify narration cue durations only; rendering and visual review do not verify artistic quality.
+
+## Render QC
+
+`deliverables/celebrity-third-person-3d.mp4` is 60 seconds, 480×270, 18 fps, H.264/AAC. FFmpeg decoded all 1,080 frames and audio; mean/max sample levels were -16.4/-1.4 dBFS. Thirty samples at 2-second intervals were visually reviewed. These checks are not continuous motion review, a true-peak/loudness certification, or a listening test. SHA-256: `563f15b9a39f55b5f8d44630455cd899b40dc2d7c5eb61baf18db3a718bd0f68`.

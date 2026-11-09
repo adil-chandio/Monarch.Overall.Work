@@ -8,7 +8,7 @@ import imageio_ffmpeg
 P=Path(__file__).resolve().parent
 sys.path.insert(0,str(P.parent/'celebrity_3d'))
 from action_timeline import Clip,apply
-parser=argparse.ArgumentParser();parser.add_argument('--start',type=int,default=0);parser.add_argument('--end',type=int,default=60);parser.add_argument('--samples',type=int,default=2);parser.add_argument('--width',type=int,default=480);parser.add_argument('--stills',action='store_true');parser.add_argument('--output',default='deliverables/celebrity-third-person-3d.mp4');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--start',type=int,default=0);parser.add_argument('--end',type=int,default=60);parser.add_argument('--fps',type=int,default=18);parser.add_argument('--samples',type=int,default=1);parser.add_argument('--width',type=int,default=480);parser.add_argument('--stills',action='store_true');parser.add_argument('--output',default='deliverables/celebrity-third-person-3d.mp4');args=parser.parse_args()
 FPS=24;W=args.width;H=round(W*9/16);H+=H%2
 bpy.ops.wm.read_factory_settings(use_empty=True);sc=bpy.context.scene;sc.render.engine='CYCLES';sc.cycles.samples=args.samples;sc.cycles.use_denoising=True;sc.render.use_persistent_data=True;sc.render.threads_mode='FIXED';sc.render.threads=2;sc.render.resolution_x=W;sc.render.resolution_y=H;sc.render.resolution_percentage=100;sc.render.image_settings.file_format='PNG';sc.view_settings.view_transform='AgX';sc.world=bpy.data.worlds.new('Atmosphere');sc.world.color=(.18,.15,.19)
 
@@ -116,7 +116,7 @@ def update(t):
  home.location.x= -.4+.12*(t-19) if 19<=t<25.5 else .15
  red.location.y= 1.0-.17*(t-25.5) if 25.5<=t<31 else (1.0-.18*(t-46.7) if 46.7<=t<53.4 else .5)
 def render(t,path):
- sc.frame_set(round(t*FPS));update(t);bpy.context.view_layer.update()
+ frame=t*FPS;sc.frame_set(math.floor(frame),subframe=frame%1);update(t);bpy.context.view_layer.update()
  for obj,rig,relative in ATTACHMENTS:obj.matrix_world=rig.matrix_world @ rig.pose.bones['DEF-head'].matrix @ relative
  sc.render.filepath=str(path);bpy.ops.render.render(write_still=True)
 def overlay(p,t):
@@ -130,9 +130,9 @@ if args.stills:
 else:
  out=Path(args.output);out.parent.mkdir(parents=True,exist_ok=True);ff=imageio_ffmpeg.get_ffmpeg_exe()
  with tempfile.TemporaryDirectory() as td:
-  tmp=Path(td);frame=tmp/'frame.png';proc=subprocess.Popen([ff,'-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-','-an','-c:v','libx264','-preset','veryfast','-crf','19','-pix_fmt','yuv420p',str(out)],stdin=subprocess.PIPE)
-  for n in range(FPS*args.start,FPS*args.end):
-   t=n/FPS;render(t,frame);proc.stdin.write(overlay(frame,t).tobytes())
+  tmp=Path(td);frame=tmp/'frame.png';proc=subprocess.Popen([ff,'-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(args.fps),'-i','-','-an','-c:v','libx264','-preset','veryfast','-crf','19','-pix_fmt','yuv420p',str(out)],stdin=subprocess.PIPE)
+  for n in range(args.fps*args.start,args.fps*args.end):
+   t=n/args.fps;render(t,frame);proc.stdin.write(overlay(frame,t).tobytes())
    if n%48==0:print('RENDER_PROGRESS',n,flush=True)
   proc.stdin.close()
   if proc.wait():raise RuntimeError('encode failed')
