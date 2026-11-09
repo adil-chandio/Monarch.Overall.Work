@@ -1,0 +1,19 @@
+{
+  "run_url": "https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42714131903",
+  "status": "measured",
+  "api_validation_passed": true,
+  "searches": 4,
+  "unique_videos": 83,
+  "channels": 76,
+  "quota_units": 405,
+  "raw_runner_timestamp": "2026-11-09T22:42:02.720363+00:00",
+  "decision_cutoff": "2026-11-05",
+  "eligible_by_publication_date": 77,
+  "excluded_future_publication": 6,
+  "snapshot_sha256": "96dd9062a6506c605b26fc5a2571c133b363ed8d9a388bcaf98d9a6f7dc98375",
+  "limits": [
+    "Runner clock is later than session date; raw timestamp preserved, no historical view-count reconstruction.",
+    "Bounded overlapping sample, not new unique market totals or novelty proof.",
+    "No audiovisual review or thumbnail pixels."
+  ]
+}
