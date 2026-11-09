@@ -78,7 +78,17 @@ def main():
         summary = '; '.join(f'{key}={value}' for key,value in numbers)
         print('::notice title=private-gpu-quota::' + summary, flush=True)
     else:
-        print('::notice title=private-gpu-quota::No numeric quota fields returned', flush=True)
+        # Some MCP servers return prose, rather than JSON. Only emit recognized
+        # quota labels and nearby numeric values, never free text or identifiers.
+        text = ' '.join(item.get('text', '') for item in result.get('result', {}).get('content', []) if isinstance(item, dict))
+        lines = []
+        for line in text.splitlines():
+            lower = line.lower()
+            labels = [word for word in ('gpu', 'tpu', 'used', 'remaining', 'available', 'limit', 'quota', 'seconds', 'hours') if re.search(r'\b'+word+r'\b', lower)]
+            values = re.findall(r'(?<![a-zA-Z0-9_])[0-9]+(?:\.[0-9]+)?(?![a-zA-Z0-9_])', line)
+            if labels and values:
+                lines.append('/'.join(labels) + '=' + ','.join(values[:4]))
+        print('::notice title=private-gpu-quota::' + ('; '.join(lines[:12]) if lines else 'No numeric quota fields returned'), flush=True)
 
 
 if __name__ == '__main__':
