@@ -64,7 +64,9 @@ def main():
         root=pathlib.Path(tmp);out=root/'out';out.mkdir()
         # Recover the already-submitted private kernel; never push or expose media.
         print('::notice title=private-research::Waiting on existing private GPU research',flush=True)
-        for _ in range(150):
+        # Allow approximately 5.5 hours of queueing, leaving time within the
+        # six-hour job limit for private setup, result verification and upload.
+        for _ in range(440):
             r=subprocess.run(['kaggle','kernels','status',ref],env=env,capture_output=True,text=True,timeout=45)
             status=(r.stdout+' '+r.stderr).upper()
             if r.returncode==0 and 'COMPLETE' in status:break
