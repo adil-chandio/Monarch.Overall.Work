@@ -23,6 +23,9 @@ def extract_numbers(value, path=()):
         if path and any(x in '.'.join(path).lower() for x in ('gpu', 'quota', 'used', 'usage', 'limit', 'remaining', 'hours', 'total', 'available')):
             yield '.'.join(path), value
     elif isinstance(value, str) and len(value) < 10000:
+        if re.fullmatch(r'-?\d+(?:\.\d+)?(?:s)?', value) and path and any(x in '.'.join(path).lower() for x in ('gpu', 'quota', 'used', 'usage', 'limit', 'remaining', 'hours', 'total', 'available')):
+            yield '.'.join(path), value
+            return
         try:
             parsed = json.loads(value)
         except (ValueError, TypeError):
@@ -88,7 +91,13 @@ def main():
             values = re.findall(r'(?<![a-zA-Z0-9_])[0-9]+(?:\.[0-9]+)?(?![a-zA-Z0-9_])', line)
             if labels and values:
                 lines.append('/'.join(labels) + '=' + ','.join(values[:4]))
-        print('::notice title=private-gpu-quota::' + ('; '.join(lines[:12]) if lines else 'No numeric quota fields returned'), flush=True)
+        if not lines:
+            response = result.get('result', {})
+            flags = [word for word in ('unauthenticated', 'unauthorized', 'permission', 'denied', 'error', 'invalid') if word in text.lower()]
+            details = 'result=' + type(response).__name__ + ', content_items=' + str(len(response.get('content', []))) + ', text_chars=' + str(len(text)) + ', flags=' + (','.join(flags) or 'none')
+            print('::notice title=private-gpu-quota::No numeric quota fields; ' + details, flush=True)
+        else:
+            print('::notice title=private-gpu-quota::' + '; '.join(lines[:12]), flush=True)
 
 
 if __name__ == '__main__':
