@@ -1,8 +1,10 @@
 # MONARCH — night temple (20-second motion study)
 
-Five requested scenes, with two keyframes for the final turn/close-up. Keyframes
-are AI-generated from the user-supplied character image, and were uploaded to this
-public branch with the user's permission. No original user photo is committed.
+Five requested scenes, with two keyframes for the final turn/close-up. Some
+recognizable AI-generated character references were mistakenly uploaded to this
+public branch, contrary to the user's privacy instruction. Removing a file from
+the current tree does not erase public Git history or copies. No original user
+photo is known to have been committed.
 
 The first phase uses private Kaggle notebooks to make six short LTX image-to-video
 clips, if the existing configured GPU access is still available. Generation is
