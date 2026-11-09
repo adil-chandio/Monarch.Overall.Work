@@ -60,7 +60,7 @@ def main():
         'protocolVersion':'2025-03-26', 'capabilities':{},
         'clientInfo':{'name':'private-quota-diagnostic','version':'1.0'}}})
     result, _ = request({'jsonrpc':'2.0','id':2,'method':'tools/call',
-        'params':{'name':'get_accelerator_quota','arguments':{}}}, session)
+        'params':{'name':'get_accelerator_quota','arguments':{'request':{}}}}, session)
     if 'error' in result or result.get('result',{}).get('isError'):
         # Classify only predefined diagnostics; never relay the server response.
         text = json.dumps(result).lower()
