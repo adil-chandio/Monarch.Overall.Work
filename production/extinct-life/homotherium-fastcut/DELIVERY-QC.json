@@ -1,0 +1,389 @@
+{
+  "file": "deliverables/Homotherium-Cub-Clean-Fast-Cut-1080x1920.mp4",
+  "sha256": "d626152ff81bde872d831ca33afa075031bbc5df8ed78a7ba7e57662a4a560ba",
+  "bytes": 11478670,
+  "decoded_frames": 1380,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 46,
+  "complete_decode_errors": "",
+  "loudness": {
+    "input_i": "-16.15",
+    "input_tp": "-1.45",
+    "input_lra": "2.40",
+    "input_thresh": "-26.38",
+    "output_i": "-16.09",
+    "output_tp": "-1.50",
+    "output_lra": "2.30",
+    "output_thresh": "-26.27",
+    "normalization_type": "dynamic",
+    "target_offset": "0.09"
+  },
+  "every_two_second_samples": [
+    0,
+    60,
+    120,
+    180,
+    240,
+    300,
+    360,
+    420,
+    480,
+    540,
+    600,
+    660,
+    720,
+    780,
+    840,
+    900,
+    960,
+    1020,
+    1080,
+    1140,
+    1200,
+    1260,
+    1320
+  ],
+  "minimum_sampled_rgb_mean": 30.869855967078188,
+  "minimum_two_second_image_difference": 1.432034465020576,
+  "render": {
+    "from": 0,
+    "to": 1380,
+    "frames": 1380,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "source_sha256": "75a05f2b1357df5d0c6b81d46c0b886b1c19d921ecc8080d70b726c4baef4e09",
+    "scene_runs": [
+      {
+        "scene": "01-fur",
+        "from": 0,
+        "to": 38
+      },
+      {
+        "scene": "02-head",
+        "from": 38,
+        "to": 76
+      },
+      {
+        "scene": "03-age-old",
+        "from": 76,
+        "to": 114
+      },
+      {
+        "scene": "04-fur",
+        "from": 114,
+        "to": 146
+      },
+      {
+        "scene": "05-head-tight",
+        "from": 146,
+        "to": 178
+      },
+      {
+        "scene": "06-map-wide",
+        "from": 178,
+        "to": 209
+      },
+      {
+        "scene": "07-map-pin",
+        "from": 209,
+        "to": 240
+      },
+      {
+        "scene": "08-head",
+        "from": 240,
+        "to": 296
+      },
+      {
+        "scene": "09-not-alive",
+        "from": 296,
+        "to": 339
+      },
+      {
+        "scene": "10-skull",
+        "from": 339,
+        "to": 382
+      },
+      {
+        "scene": "11-teeth",
+        "from": 382,
+        "to": 425
+      },
+      {
+        "scene": "12-skull-top",
+        "from": 425,
+        "to": 473
+      },
+      {
+        "scene": "13-head",
+        "from": 473,
+        "to": 512
+      },
+      {
+        "scene": "14-identity",
+        "from": 512,
+        "to": 550
+      },
+      {
+        "scene": "15-skull",
+        "from": 550,
+        "to": 623
+      },
+      {
+        "scene": "16-teeth",
+        "from": 623,
+        "to": 662
+      },
+      {
+        "scene": "17-age-young",
+        "from": 662,
+        "to": 702
+      },
+      {
+        "scene": "18-head",
+        "from": 702,
+        "to": 741
+      },
+      {
+        "scene": "19-compare",
+        "from": 741,
+        "to": 815
+      },
+      {
+        "scene": "20-ear",
+        "from": 815,
+        "to": 837
+      },
+      {
+        "scene": "21-compare-ear",
+        "from": 837,
+        "to": 859
+      },
+      {
+        "scene": "22-neck",
+        "from": 859,
+        "to": 891
+      },
+      {
+        "scene": "23-paw",
+        "from": 891,
+        "to": 916
+      },
+      {
+        "scene": "24-paw-pair",
+        "from": 916,
+        "to": 940
+      },
+      {
+        "scene": "25-fur",
+        "from": 940,
+        "to": 970
+      },
+      {
+        "scene": "26-ear",
+        "from": 970,
+        "to": 1000
+      },
+      {
+        "scene": "27-paw",
+        "from": 1000,
+        "to": 1031
+      },
+      {
+        "scene": "28-skull",
+        "from": 1031,
+        "to": 1061
+      },
+      {
+        "scene": "29-partial",
+        "from": 1061,
+        "to": 1112
+      },
+      {
+        "scene": "30-skull",
+        "from": 1112,
+        "to": 1154
+      },
+      {
+        "scene": "31-uncertain",
+        "from": 1154,
+        "to": 1195
+      },
+      {
+        "scene": "32-not-alive",
+        "from": 1195,
+        "to": 1238
+      },
+      {
+        "scene": "33-head-tight",
+        "from": 1238,
+        "to": 1302
+      },
+      {
+        "scene": "34-fur",
+        "from": 1302,
+        "to": 1341
+      },
+      {
+        "scene": "35-head",
+        "from": 1341,
+        "to": 1380
+      }
+    ],
+    "page_errors": []
+  },
+  "review_scope": "Complete automated video decode and audio loudness analysis; native still and two-second contact sampling. Not claimed as continuous human-like audiovisual watching/listening.",
+  "youtube_published": false,
+  "encoded_every_shot_sampling": [
+    {
+      "frame": 17,
+      "shot": "01-fur"
+    },
+    {
+      "frame": 55,
+      "shot": "02-head"
+    },
+    {
+      "frame": 93,
+      "shot": "03-age-old"
+    },
+    {
+      "frame": 128,
+      "shot": "04-fur"
+    },
+    {
+      "frame": 160,
+      "shot": "05-head-tight"
+    },
+    {
+      "frame": 192,
+      "shot": "06-map-wide"
+    },
+    {
+      "frame": 223,
+      "shot": "07-map-pin"
+    },
+    {
+      "frame": 265,
+      "shot": "08-head"
+    },
+    {
+      "frame": 315,
+      "shot": "09-not-alive"
+    },
+    {
+      "frame": 358,
+      "shot": "10-skull"
+    },
+    {
+      "frame": 401,
+      "shot": "11-teeth"
+    },
+    {
+      "frame": 447,
+      "shot": "12-skull-top"
+    },
+    {
+      "frame": 491,
+      "shot": "13-head"
+    },
+    {
+      "frame": 529,
+      "shot": "14-identity"
+    },
+    {
+      "frame": 583,
+      "shot": "15-skull"
+    },
+    {
+      "frame": 641,
+      "shot": "16-teeth"
+    },
+    {
+      "frame": 680,
+      "shot": "17-age-young"
+    },
+    {
+      "frame": 720,
+      "shot": "18-head"
+    },
+    {
+      "frame": 774,
+      "shot": "19-compare"
+    },
+    {
+      "frame": 825,
+      "shot": "20-ear"
+    },
+    {
+      "frame": 847,
+      "shot": "21-compare-ear"
+    },
+    {
+      "frame": 873,
+      "shot": "22-neck"
+    },
+    {
+      "frame": 902,
+      "shot": "23-paw"
+    },
+    {
+      "frame": 927,
+      "shot": "24-paw-pair"
+    },
+    {
+      "frame": 954,
+      "shot": "25-fur"
+    },
+    {
+      "frame": 984,
+      "shot": "26-ear"
+    },
+    {
+      "frame": 1014,
+      "shot": "27-paw"
+    },
+    {
+      "frame": 1044,
+      "shot": "28-skull"
+    },
+    {
+      "frame": 1084,
+      "shot": "29-partial"
+    },
+    {
+      "frame": 1131,
+      "shot": "30-skull"
+    },
+    {
+      "frame": 1172,
+      "shot": "31-uncertain"
+    },
+    {
+      "frame": 1214,
+      "shot": "32-not-alive"
+    },
+    {
+      "frame": 1267,
+      "shot": "33-head-tight"
+    },
+    {
+      "frame": 1320,
+      "shot": "34-fur"
+    },
+    {
+      "frame": 1350,
+      "shot": "end-credit"
+    },
+    {
+      "frame": 1359,
+      "shot": "35-head"
+    }
+  ],
+  "structural_tests_passed": 8,
+  "no_3d": true,
+  "preserved_base_commit": "d61ed05",
+  "caption_polish": "No orphan single-word chunks; max five words per on-screen caption"
+}
