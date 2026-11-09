@@ -117,7 +117,7 @@ jobs:
         run: |
           set -euo pipefail
           WORK="$RUNNER_TEMP/v10_scout"
-          mkdir -p "$WORK" "$REVIEW_DIR/artemis" "$REVIEW_DIR/svs31383"
+          mkdir -p "$WORK" "$REVIEW_DIR/artemis" "$REVIEW_DIR/svs31383" "$SOURCE_DIR"
           curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$WORK/artemis_4k.mp4" "$ARTEMIS_URL"
           curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$WORK/svs31383_4k.mp4" "$SVS_URL"
           curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$REVIEW_DIR/nasa_images_api_search.json" 'https://images-api.nasa.gov/search?q=ball%20of%20water&media_type=video&year_start=2026&year_end=2026'
@@ -134,7 +134,7 @@ jobs:
             ffmpeg -hide_banner -loglevel error -y -i "$src" -vf "fps=1,crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=360:640,tile=4x5:padding=4:margin=4:color=black" -frames:v 4 -q:v 4 "$out/vertical_%02d.jpg"
             ffmpeg -hide_banner -loglevel error -y -i "$src" -vf "trim=duration=5,fps=5,scale=480:270,tile=5x5:padding=4:margin=4:color=black" -frames:v 1 -q:v 4 "$out/first5_full.jpg"
             ffmpeg -hide_banner -loglevel error -y -i "$src" -vf "trim=duration=5,fps=5,crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=360:640,tile=5x5:padding=4:margin=4:color=black" -frames:v 1 -q:v 4 "$out/first5_vertical.jpg"
-            ffmpeg -hide_banner -loglevel error -y -i "$src" -filter_complex "showwavespic=s=1200x240:colors=0x66e0ff" -frames:v 1 "$out/audio_waveform.png" || true
+            ffmpeg -hide_banner -loglevel error -y -i "$src" -filter_complex "[0:a]showwavespic=s=1200x240:colors=0x66e0ff" -frames:v 1 "$out/audio_waveform.png" || true
             python3 - "$src" "$out" "$page" "$id" <<'PY'
           import hashlib, json, os, pathlib, sys
           src, out, page, cid = sys.argv[1:5]
@@ -204,7 +204,7 @@ jobs:
             -movflags +faststart "$OUT"
           ffprobe -v error -show_streams -show_format -of json "$OUT" > "$REVIEW_DIR/extract/probe.json"
           ffmpeg -hide_banner -loglevel error -y -i "$OUT" -vf "fps=4,scale=270:480,tile=4x4:padding=4:margin=4:color=black" -frames:v 20 -q:v 4 "$REVIEW_DIR/extract/sheet_%02d.jpg"
-          ffmpeg -hide_banner -loglevel error -y -i "$OUT" -filter_complex "showwavespic=s=1200x240:colors=0x66e0ff" -frames:v 1 "$REVIEW_DIR/extract/audio_waveform.png" || true
+          ffmpeg -hide_banner -loglevel error -y -i "$OUT" -filter_complex "[0:a]showwavespic=s=1200x240:colors=0x66e0ff" -frames:v 1 "$REVIEW_DIR/extract/audio_waveform.png" || true
           python3 - "$WORK/source_4k.mp4" "$OUT" "$SRC_URL" "$SRC_PAGE" "$CLIP_ID" "$START" "$DURATION" "$CROP_OFFSET" <<'PY'
           import hashlib, json, os, pathlib, sys
           src, out, url, page, cid, start, duration, offset = sys.argv[1:9]
@@ -243,7 +243,10 @@ jobs:
           set -euo pipefail
           git config user.name "arena-v10-scout[bot]"
           git config user.email "arena-v10-scout[bot]@users.noreply.github.com"
-          git add "$REVIEW_DIR" "$SOURCE_DIR"
+          git add -A -- "$REVIEW_DIR"
+          if compgen -G "$SOURCE_DIR/*" > /dev/null; then
+            git add -A -- "$SOURCE_DIR"
+          fi
           if git diff --cached --quiet; then
             echo "No new artifacts to commit."
           else
