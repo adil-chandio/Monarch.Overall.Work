@@ -1,6 +1,6 @@
 # Caught-on-camera single-clip commentary — forensic study and next-level production blueprint
 
-**Date:** 2026-11-05 (UTC)
+**Date:** 2026-11-09 (UTC)
 **Branch:** `arena/2b012328-monarch-overall-work`
 **Scope change from user:** V9 ranking lane is dropped as the creative direction. New direction = **caught-on-camera niche**, **one clip**, **best next-level viral commentary**, **script**, **voiceover**, **best artist selection**, **next-level full edit**, **complete video**.
 **Purpose of this document:** research first, then tell exactly what we do next. No video is rendered here, no voice is generated here, no creative approval is claimed here.
@@ -28,7 +28,7 @@ The user asked for a "forensic", "microscope", "10x" study "without leaving anyt
 - No **word-for-word third-party scripts** or **frame-by-frame edit decision lists** from inside full videos. Public descriptions, chapter lists, titles and case-study summaries are used instead, and are labelled as such.
 - No **legal opinion**, no "full compliance" certificate, no currently-trending named-platform clearance, no exact reference reproduction, no human creative sign-off, no guarantee of virality, retention, 3x, likes, subscribers or audience results.
 
-**Date note:** Public RSS responses returned some upload/update timestamps later than 2026-11-05. Those are source-feed metadata only; they are not used here as proof of the current date or as a claim that the report was prepared later.
+**Date note:** The current UTC date for this workspace is 2026-11-09. Public RSS responses returned some upload/update timestamps later than the report's earlier draft date; those are source-feed metadata only, not proof of the current date and not a claim that the report was prepared later.
 
 ### Evidence ladder used below
 

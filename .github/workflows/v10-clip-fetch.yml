@@ -1,0 +1,220 @@
+name: V10 rights-safe social clip fetch
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'preview or extract'
+        required: true
+        default: 'preview'
+        type: choice
+        options:
+          - preview
+          - extract
+      clip_id:
+        description: 'artemis or svs31383 (extract mode)'
+        required: false
+        default: 'artemis'
+        type: choice
+        options:
+          - artemis
+          - svs31383
+      start:
+        description: 'Extract source start in seconds'
+        required: false
+        default: '0'
+        type: string
+      duration:
+        description: 'Extract source duration in seconds'
+        required: false
+        default: '43'
+        type: string
+      crop_offset:
+        description: 'Horizontal crop offset in source pixels from centre'
+        required: false
+        default: '0'
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v10-clip-fetch-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: arena/2b012328-monarch-overall-work
+  REVIEW_DIR: production/monarch-cam/caught_on_camera_commentary_v10/review/social_scout
+  SOURCE_DIR: production/monarch-cam/caught_on_camera_commentary_v10/source
+  ARTEMIS_URL: https://images-assets.nasa.gov/video/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman~orig.mp4
+  ARTEMIS_PAGE: https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman
+  ARTEMIS_ASSET_PREFIX: https://images-assets.nasa.gov/video/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman
+  SVS_URL: https://svs.gsfc.nasa.gov/vis/a030000/a031300/a031383/pettit-electrostatic-displays-4ka.mp4
+  SVS_PAGE: https://svs.gsfc.nasa.gov/31383/
+  NASA_MEDIA_GUIDELINES: https://www.nasa.gov/nasa-brand-center/images-and-media/
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+          fetch-depth: 0
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Validate numeric dispatch inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          for value in "${{ inputs.start }}" "${{ inputs.duration }}" "${{ inputs.crop_offset }}"; do
+            if ! [[ "$value" =~ ^-?[0-9]+([.][0-9]+)?$ ]]; then
+              echo "Invalid numeric input: $value" >&2
+              exit 1
+            fi
+          done
+
+      - name: Download official source evidence and generate visual preview
+        if: ${{ inputs.mode == 'preview' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK="$RUNNER_TEMP/v10_scout"
+          mkdir -p "$WORK" "$REVIEW_DIR/artemis" "$REVIEW_DIR/svs31383"
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$WORK/artemis_4k.mp4" "$ARTEMIS_URL"
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$WORK/svs31383_4k.mp4" "$SVS_URL"
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$REVIEW_DIR/nasa_images_api_search.json" 'https://images-api.nasa.gov/search?q=ball%20of%20water&media_type=video&year_start=2026&year_end=2026'
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$REVIEW_DIR/artemis_asset_collection.json" "$ARTEMIS_ASSET_PREFIX/collection.json"
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$REVIEW_DIR/artemis_metadata.json" "$ARTEMIS_ASSET_PREFIX/metadata.json"
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$REVIEW_DIR/artemis_captions.srt" "$ARTEMIS_ASSET_PREFIX/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman.srt"
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$REVIEW_DIR/svs31383_api.json" 'https://svs.gsfc.nasa.gov/api/31383'
+
+          process_clip() {
+            id="$1"; src="$2"; page="$3"; out="$REVIEW_DIR/$id"
+            mkdir -p "$out"
+            ffprobe -v error -show_streams -show_format -of json "$src" > "$out/probe.json"
+            ffmpeg -hide_banner -loglevel error -y -i "$src" -vf "fps=1,scale=480:270,tile=4x5:padding=4:margin=4:color=black" -frames:v 4 -q:v 4 "$out/full_%02d.jpg"
+            ffmpeg -hide_banner -loglevel error -y -i "$src" -vf "fps=1,crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=360:640,tile=4x5:padding=4:margin=4:color=black" -frames:v 4 -q:v 4 "$out/vertical_%02d.jpg"
+            ffmpeg -hide_banner -loglevel error -y -i "$src" -vf "trim=duration=5,fps=5,scale=480:270,tile=5x5:padding=4:margin=4:color=black" -frames:v 1 -q:v 4 "$out/first5_full.jpg"
+            ffmpeg -hide_banner -loglevel error -y -i "$src" -vf "trim=duration=5,fps=5,crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=360:640,tile=5x5:padding=4:margin=4:color=black" -frames:v 1 -q:v 4 "$out/first5_vertical.jpg"
+            ffmpeg -hide_banner -loglevel error -y -i "$src" -filter_complex "showwavespic=s=1200x240:colors=0x66e0ff" -frames:v 1 "$out/audio_waveform.png" || true
+            python3 - "$src" "$out" "$page" "$id" <<'PY'
+          import hashlib, json, os, pathlib, sys
+          src, out, page, cid = sys.argv[1:5]
+          p = pathlib.Path(src)
+          h = hashlib.sha256()
+          with p.open('rb') as f:
+              for chunk in iter(lambda: f.read(1024 * 1024), b''):
+                  h.update(chunk)
+          probe = json.loads((pathlib.Path(out) / 'probe.json').read_text())
+          urls = {
+              'artemis': os.environ['ARTEMIS_URL'],
+              'svs31383': os.environ['SVS_URL'],
+          }
+          data = {
+              'clip_id': cid,
+              'source_page': page,
+              'direct_source_url': urls[cid],
+              'nasa_media_guidelines': os.environ['NASA_MEDIA_GUIDELINES'],
+              'github_run_id': os.environ.get('GITHUB_RUN_ID'),
+              'github_run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'source_filename': p.name,
+              'source_bytes': p.stat().st_size,
+              'source_sha256': h.hexdigest(),
+              'probe': probe,
+          }
+          (pathlib.Path(out) / 'manifest.json').write_text(json.dumps(data, indent=2) + '\n')
+          PY
+          }
+
+          process_clip artemis "$WORK/artemis_4k.mp4" "$ARTEMIS_PAGE"
+          process_clip svs31383 "$WORK/svs31383_4k.mp4" "$SVS_PAGE"
+          echo "Prepared preview sheets for two official NASA 4K candidates."
+
+      - name: Extract and commit a clean vertical source master
+        if: ${{ inputs.mode == 'extract' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK="$RUNNER_TEMP/v10_extract"
+          mkdir -p "$WORK" "$SOURCE_DIR" "$REVIEW_DIR/extract"
+          CLIP_ID="${{ inputs.clip_id }}"
+          START="${{ inputs.start }}"
+          DURATION="${{ inputs.duration }}"
+          CROP_OFFSET="${{ inputs.crop_offset }}"
+          case "$CLIP_ID" in
+            artemis)
+              SRC_URL="$ARTEMIS_URL"
+              SRC_PAGE="$ARTEMIS_PAGE"
+              OUTNAME="nasa_artemis_ii_water_bubble_4k_to_vertical_master.mp4"
+              ;;
+            svs31383)
+              SRC_URL="$SVS_URL"
+              SRC_PAGE="$SVS_PAGE"
+              OUTNAME="nasa_svs_31383_water_orbits_4k_to_vertical_master.mp4"
+              ;;
+            *)
+              echo "Unsupported clip id: $CLIP_ID" >&2
+              exit 1
+              ;;
+          esac
+          curl -fL --retry 4 --retry-delay 2 --retry-all-errors -o "$WORK/source_4k.mp4" "$SRC_URL"
+          OUT="$SOURCE_DIR/$OUTNAME"
+          ffmpeg -hide_banner -loglevel error -y -ss "$START" -t "$DURATION" -i "$WORK/source_4k.mp4" \
+            -vf "crop=ih*9/16:ih:(iw-ih*9/16)/2+${CROP_OFFSET}:0,scale=1080:1920,fps=30,format=yuv420p" \
+            -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -r 30 \
+            -c:a aac -b:a 192k -ar 48000 -ac 2 \
+            -movflags +faststart "$OUT"
+          ffprobe -v error -show_streams -show_format -of json "$OUT" > "$REVIEW_DIR/extract/probe.json"
+          ffmpeg -hide_banner -loglevel error -y -i "$OUT" -vf "fps=4,scale=270:480,tile=4x4:padding=4:margin=4:color=black" -frames:v 20 -q:v 4 "$REVIEW_DIR/extract/sheet_%02d.jpg"
+          ffmpeg -hide_banner -loglevel error -y -i "$OUT" -filter_complex "showwavespic=s=1200x240:colors=0x66e0ff" -frames:v 1 "$REVIEW_DIR/extract/audio_waveform.png" || true
+          python3 - "$WORK/source_4k.mp4" "$OUT" "$SRC_URL" "$SRC_PAGE" "$CLIP_ID" "$START" "$DURATION" "$CROP_OFFSET" <<'PY'
+          import hashlib, json, os, pathlib, sys
+          src, out, url, page, cid, start, duration, offset = sys.argv[1:9]
+          def digest(p):
+              h = hashlib.sha256()
+              with open(p, 'rb') as f:
+                  for chunk in iter(lambda: f.read(1024 * 1024), b''):
+                      h.update(chunk)
+              return h.hexdigest()
+          probe = json.loads(pathlib.Path('production/monarch-cam/caught_on_camera_commentary_v10/review/social_scout/extract/probe.json').read_text())
+          data = {
+              'clip_id': cid,
+              'source_page': page,
+              'direct_source_url': url,
+              'nasa_media_guidelines': os.environ['NASA_MEDIA_GUIDELINES'],
+              'github_run_id': os.environ.get('GITHUB_RUN_ID'),
+              'github_run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'source_filename': pathlib.Path(src).name,
+              'source_bytes': pathlib.Path(src).stat().st_size,
+              'source_sha256': digest(src),
+              'extract_start_seconds': float(start),
+              'extract_duration_seconds': float(duration),
+              'crop_offset_source_pixels': float(offset),
+              'output_path': out,
+              'output_bytes': pathlib.Path(out).stat().st_size,
+              'output_sha256': digest(out),
+              'output_probe': probe,
+              'notes': 'Clean 1080x1920/30fps H.264/AAC source master derived from an official NASA 4K MP4; no baked captions, watermark, titles or overlays added by this workflow.'
+          }
+          pathlib.Path('production/monarch-cam/caught_on_camera_commentary_v10/review/social_scout/extract/manifest.json').write_text(json.dumps(data, indent=2) + '\n')
+          PY
+
+      - name: Commit review or source artifacts back to the target branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "arena-v10-scout[bot]"
+          git config user.email "arena-v10-scout[bot]@users.noreply.github.com"
+          git add "$REVIEW_DIR" "$SOURCE_DIR"
+          if git diff --cached --quiet; then
+            echo "No new artifacts to commit."
+          else
+            git commit -m "chore(v10): add rights-safe social clip review artifacts [skip ci]"
+            git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+          fi
