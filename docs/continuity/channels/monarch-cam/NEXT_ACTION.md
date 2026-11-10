@@ -1,3 +1,10 @@
+## 2026-11-05 addendum - V11 Phase C voice preview (NO render)
+
+- `production/monarch-cam/replay_lab_ep01_v11/PHASE_C_VOICE_V11.md` + `phase_c_voice_v11.json`: user selected `voice-02` (en) in audition battle 02; 4 isolated narration preview MP3s (3 hooks + Chapter 5 liquid-lens excerpt) written under `audio/`. Generator idempotent, `RESULT: ALL PASS`.
+- These are PREVIEWS, not the final mix. No real-person clone, no time-stretch, no music/SFX/bed, NASA native crew audio NOT replaced. Final 12-chapter VO + caption timings still pending.
+- Same 3 open items as Phase A/B: 16:9 source (local master vertical), render/QC toolchain absent, NASA promotional rights gate + user-reported Short monetization ON. NO video, render, captions burned, upload, publish, monetization change, human approval, legal clearance or guaranteed result.
+- Awaiting user: hook H1/H2/H3 choice, voice-02 confirmation, 16:9 source strategy.
+
 ## 2026-11-05 addendum - V11 Phase A/B kickoff (work started, NO render)
 
 - `production/monarch-cam/replay_lab_ep01_v11/`: Phase A source audit + Phase B script draft v0 (12 chapters, 3 hooks, 714 VO words, 15 sources). Generator is idempotent; `RESULT: ALL PASS`.

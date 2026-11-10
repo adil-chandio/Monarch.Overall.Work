@@ -289,9 +289,9 @@ PHASES = [
     {"phase": "B - Script", "status": "DONE (draft v0, 12 chapters, 3 hooks)",
      "main": "Timed 11:00 script, har factual line source-mapped, word-caption plan ready.",
      "aap": "Script pasand hai? Hook H1 / H2 / H3 me se ek chunna."},
-    {"phase": "C - Voice", "status": "NEXT (aapke decide par)",
-     "main": "Generic synthetic VO, aapki pasand ki voice; no real-person clone, no time-stretch.",
-     "aap": "Voice audition me 2 options sun kar ek chunna (tool khud sample dega)."},
+    {"phase": "C - Voice", "status": "PREVIEW DONE (voice-02, 4 clips)",
+     "main": "Aapne audition me voice-02 chuni; 3 hooks + Chapter 5 ke preview MP3 bane (PHASE_C_VOICE_V11.md). Final 12-chapter VO abhi baaki.",
+     "aap": "4 preview sunein, hook H1/H2/H3 aur voice finalize karein."},
     {"phase": "D - Edit", "status": "BLOCKED (2 blockers)",
      "main": "16:9 master, replays 0.25x/0.5x/1x, original diagrams, on-screen credit, safe areas.",
      "aap": "Original 4K source re-fetch ka tarika decide karna; ya crop/pillarbox plan approve karna."},
@@ -465,8 +465,9 @@ def build_plan_md() -> str:
     a("")
     a("## Agla ek jumla")
     a("")
-    a("**Aap bas itna bataiye: script theek hai? Hook kaunsa? Aur voice agle turn me sunenge.** "
-      "Uske baad main Phase C (voice) + D ka pre-flight shuru karunga — lekin render tabhi jab upar wale 3 clear hon.")
+    a("**Voice audition ho chuki hai (voice-02) aur 4 preview MP3 ban chuke hain — `PHASE_C_VOICE_V11.md` dekhein.** "
+      "Aap bas hook H1/H2/H3 aur voice finalize karein; uske baad poori 12-chapter VO + caption timings. "
+      "Render tabhi jab upar wale 3 clear hon.")
     a("")
     a("> Ye legal opinion, clearance, human approval, perfection ya guaranteed views ka dawa nahi hai.")
     a("")

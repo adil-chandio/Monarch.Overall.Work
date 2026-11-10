@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "edition": "v11_replay_lab_ep01_phase_c_preview_2026-11-05",
+  "head_at_writing": "5f8fcdaf5c4220f472eddbb01137b2478988af58",
+  "status": "phase_c_previews_done_final_vo_pending",
+  "voice": {
+    "voice_id": "voice-02",
+    "language": "en",
+    "selected_by": "user_voice_audition_battle_02",
+    "audition_text": "That is not a lens. Watch the face inside that floating water sphere flip upside down - then stay, because every replay hides a different layer. Forty-two seconds of NASA footage. About eleven minutes of asking how that happened. A curved boundary between air and water bends light.",
+    "real_person_clone": false,
+    "time_stretch": false,
+    "generic_synthetic_narration": true
+  },
+  "clips": [
+    {
+      "id": "H1",
+      "file": "audio/vo_preview_h1_v11.mp3",
+      "kind": "hook_variant",
+      "text": "That is not a lens. Watch the face inside that floating water sphere flip upside down - then stay, because every replay hides a different layer.",
+      "note": "Default / selected in the idea study. Pattern interrupt; 'not a lens' resolves honestly in Chapter 4.",
+      "exists": true,
+      "bytes": 99492,
+      "sha256": "8ac2a169d7f1174d88e977bfba9dd1ca2db86ec7184ea8c2807a713227887fc1",
+      "id3_header": true,
+      "words": 26
+    },
+    {
+      "id": "H2",
+      "file": "audio/vo_preview_h2_v11.mp3",
+      "kind": "hook_variant",
+      "text": "A sphere of water, a face, and one impossible-looking flip. In the next ten minutes we will watch the same 42 seconds eight times, and each time something new will make sense.",
+      "note": "Replay promise up front. No reach or shock claim.",
+      "exists": true,
+      "bytes": 100746,
+      "sha256": "4b3cf51eae402490ef395cb36ae733210610bee71b109fe54c2caf9cb4c967d0",
+      "id3_header": true,
+      "words": 32
+    },
+    {
+      "id": "H3",
+      "file": "audio/vo_preview_h3_v11.mp3",
+      "kind": "hook_variant",
+      "text": "Why is that face upside down? The answer is inside the water - not the camera. Let's replay it slowly, then slower, then with the sound still on.",
+      "note": "Question-first; native audio mentioned in the hook itself.",
+      "exists": true,
+      "bytes": 76295,
+      "sha256": "34115b32bbcdbe1bad446728287df59df7a70a77008a0531d3d4742d9d8cde1c",
+      "id3_header": true,
+      "words": 28
+    },
+    {
+      "id": "CH05",
+      "file": "audio/vo_preview_ch05_liquid_lens_v11.mp3",
+      "kind": "chapter_excerpt",
+      "text": "Now the flip. A curved boundary between air and water bends light. Light crossing that boundary is refracted, and the curved surface sends the rays into a reversed arrangement, so the picture arrives upside down. The same bending makes rainbows in raindrops. So the sphere is behaving like a small optical element - a liquid lens. That is why the opening line said it is not a lens: there is no glass, no manufactured optic. The water is doing the job. Freeze here, at twenty-three seconds, and watch it at half speed.",
+      "note": "Longest excerpt - pacing / pronunciation check for the core physics chapter (3:30-5:00).",
+      "exists": true,
+      "bytes": 266049,
+      "sha256": "37f188b5a90c9e75c5e77a561e581192118c7a61d03d82e87e15911506910cc5",
+      "id3_header": true,
+      "words": 92
+    }
+  ],
+  "guardrails": [
+    "Generic synthetic narration only. No real-person voice clone, no astronaut voice imitation.",
+    "No time-stretch / speed change of the generated speech.",
+    "NASA native crew audio stays in the master; these previews are isolated narration files, NOT a replacement or a final mix [2](workspace://production/monarch-cam/replay_lab_ep01_v11/PHASE_A_SOURCE_AUDIT_V11.md) [5](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json).",
+    "No music, SFX, procedural bed or audio substitution.",
+    "VO text never says 'according to NASA' and never implies NASA reviewed or approved the analysis [3](https://www.nasa.gov/nasa-brand-center/images-and-media/).",
+    "No 'official NASA', no insignia, no endorsement, no invented date/outcome/view claim.",
+    "AI-use toggle remains a human decision at upload time [4](https://support.google.com/youtube/answer/14328491?hl=en).",
+    "Human listening, full-motion review, creative approval and legal review are all still pending [5](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+  ],
+  "blockers": [
+    "16:9 source: local master is 1080x1920 vertical; original 4K not present locally.",
+    "Render/QC toolchain (ffmpeg, ffprobe, numpy, bundled v10_deps) absent in this snapshot.",
+    "NASA promotional / identifiable current-astronaut rights gate OPEN; user-reported Short monetization ON; human_legal_review=false; commercial_monetization_clearance=false [6](workspace://research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md)."
+  ],
+  "non_claims": {
+    "final_voiceover_complete": false,
+    "voiceover_mixed_with_nasa_native_audio": false,
+    "captions_burned": false,
+    "video_rendered": false,
+    "sixteen_by_nine_master_created": false,
+    "technical_qc_run_on_previews": false,
+    "human_creative_approval": false,
+    "human_native_audio_listening": false,
+    "human_full_motion_review": false,
+    "human_legal_review": false,
+    "legal_opinion": false,
+    "commercial_monetization_clearance": false,
+    "written_astronaut_or_csa_permission": false,
+    "nasa_endorsement": false,
+    "official_nasa_status": false,
+    "guaranteed_virality": false,
+    "guaranteed_retention": false,
+    "perfection_or_zero_omission": false,
+    "rights_gate_closed": false,
+    "upload_or_publish_performed": false,
+    "monetization_changed_by_agent": false,
+    "youtube_data_api_called": false
+  },
+  "sources": [
+    {
+      "n": 1,
+      "id": "SCRIPT_DRAFT",
+      "title": "Phase B script draft v0",
+      "url": "workspace://production/monarch-cam/replay_lab_ep01_v11/SCRIPT_DRAFT_V11.md",
+      "used_for": "Exact preview text: 3 hook variants and Chapter 5 VO."
+    },
+    {
+      "n": 2,
+      "id": "PHASE_A_AUDIT",
+      "title": "Phase A source audit",
+      "url": "workspace://production/monarch-cam/replay_lab_ep01_v11/PHASE_A_SOURCE_AUDIT_V11.md",
+      "used_for": "Voice guardrails, NASA native-audio rule, 3 open blockers/gates."
+    },
+    {
+      "n": 3,
+      "id": "NASA_IMAGES",
+      "title": "NASA Images and Media Usage Guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "used_for": "Factual source disclosure allowed; no implied NASA review/permission; no 'according to NASA' style attribution in SI-assisted products; insignia restrictions."
+    },
+    {
+      "n": 4,
+      "id": "YT_AI_USE",
+      "title": "YouTube Help - Disclosing use of GenAI content",
+      "url": "https://support.google.com/youtube/answer/14328491?hl=en",
+      "used_for": "AI-use toggle is a human decision; disclosure alone doesn't limit audience or monetization eligibility."
+    },
+    {
+      "n": 5,
+      "id": "V10_AUDIO",
+      "title": "V10 QC / audio ledger",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json",
+      "used_for": "9 objective audio gates, 33/33 technical checks; technical_pass separate from human listening."
+    },
+    {
+      "n": 6,
+      "id": "MONETIZATION_CARD",
+      "title": "V11 monetization-ON action card",
+      "url": "workspace://research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md",
+      "used_for": "Rights gate and user-reported Short monetization ON remain open."
+    }
+  ],
+  "scope": "isolated_narration_previews_only_no_mix_no_render_no_upload",
+  "related_files": [
+    "SCRIPT_DRAFT_V11.md",
+    "PHASE_A_SOURCE_AUDIT_V11.md",
+    "WORK_PLAN_V11.md"
+  ]
+}
