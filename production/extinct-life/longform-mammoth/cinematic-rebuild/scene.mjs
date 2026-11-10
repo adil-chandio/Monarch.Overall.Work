@@ -7,6 +7,15 @@ await document.fonts.load('800 48px Manrope');
 await document.fonts.load('80px Anton');
 const S = await (await fetch('/timeline.json')).json();
 const W = S.width, H = S.height, FPS = S.fps;
+// AI-generated images are used only as UV material maps on 3D geometry,
+// never as still-image backgrounds or slide plates.
+const loader = new T.TextureLoader();
+const [furMap, tundraMap] = await Promise.all([
+  loader.loadAsync('/assets/fur.jpg'), loader.loadAsync('/assets/tundra.jpg')
+]);
+for (const t of [furMap,tundraMap]) { t.colorSpace=T.SRGBColorSpace; t.wrapS=t.wrapT=T.RepeatWrapping; t.anisotropy=4; }
+furMap.repeat.set(2,1); tundraMap.repeat.set(32,32);
+
 
 // Render-cost profile. Defaults are the production values; the query string
 // only exists so the cost of each option can be measured in the real scene
@@ -17,10 +26,10 @@ const PROF = {
   aa: QS.get('aa') !== '0',
   furMat: QS.get('furmat') || 'standard',
   lights: qn('lights', 6),
-  coat: qn('coat', 1),
+  coat: qn('coat', 0.42),
   under: qn('under', 0),
-  shag: qn('shag', 1),
-  clump: qn('clump', 1),
+  shag: qn('shag', 0.65),
+  clump: qn('clump', 0.5),
   clumpGeom: QS.get('clumpgeom') || 'ico',
   hideTex: QS.get('hidetex') !== '0',
   dropShag: QS.get('shag') === '0',
@@ -409,8 +418,8 @@ function buildMammoth() {
       ? new T.MeshBasicMaterial({ color: 0xffffff, map: WOOL.color })
       : PROF.hideTex
         ? new T.MeshStandardMaterial({
-          color: 0xffffff, map: WOOL.color, normalMap: WOOL.normal,
-          normalScale: new T.Vector2(1.5, 1.5), roughness: 0.96, metalness: 0.0
+          color: 0xffffff, map: furMap, normalMap: WOOL.normal,
+          normalScale: new T.Vector2(0.18, 0.18), roughness: 0.96, metalness: 0.0
         })
         : new T.MeshStandardMaterial({ color: 0x6f5138, roughness: 0.96, metalness: 0.0 });
   // Wool is matte. Under a software rasteriser the PBR branch (roughness,
@@ -487,16 +496,20 @@ function buildMammoth() {
     g.add(tusk);
   }
 
-  const legGeos = [];
+  // Each limb has its own hip pivot. Hide and fur use the same local transform.
+  // This simple swing rig is exploratory, not a biomechanically complete walk cycle.
+  const legGeos = [], legs = [];
   for (const [x, z, h] of [[-0.60, 1.20, 1.92], [0.60, 1.20, 1.92], [-0.62, -1.25, 1.96], [0.62, -1.25, 1.96]]) {
+    const pivot = new T.Group(); pivot.position.set(x, h, z); g.add(pivot);
+    const index = legs.length; legs.push(pivot);
     const legGeo = new T.CylinderGeometry(0.27, 0.35, h, 20, 1);
     legGeo.translate(x, h / 2 + 0.08, z);
-    g.add(new T.Mesh(legGeo, hideMat));
-    legGeos.push({ geo: legGeo, x, z, h });
+    const legMesh = new T.Mesh(legGeo, hideMat); legMesh.position.set(-x, -h, -z); pivot.add(legMesh);
+    legGeos.push({ geo: legGeo, x, z, h, limb: index });
     const footGeo = new T.CylinderGeometry(0.34, 0.38, 0.26, 20);
     footGeo.translate(x, 0.13, z + 0.05);
-    g.add(new T.Mesh(footGeo, hideMat));
-    legGeos.push({ geo: footGeo, x, z, h: 0.26, foot: true });
+    const footMesh = new T.Mesh(footGeo, hideMat); footMesh.position.set(-x, -h, -z); pivot.add(footMesh);
+    legGeos.push({ geo: footGeo, x, z, h: 0.26, foot: true, limb: index });
   }
   const tail = new T.Mesh(taperedTube(
     [[0, 2.20, -2.18], [0.04, 1.76, -2.52], [0.04, 1.44, -2.68]], (t) => 0.09 - 0.05 * t, 20, 8), hideMat);
@@ -520,7 +533,7 @@ function buildMammoth() {
   for (const lg of legGeos) {
     const y0 = lg.foot ? 0.0 : 0.05, y1 = lg.foot ? 0.26 : lg.h + 0.08;
     const r = lg.foot ? 0.40 : 0.37;
-    hideParts.push({ geo: lg.geo, test: capsuleTest([lg.x, y0, lg.z + (lg.foot ? 0.05 : 0)], [lg.x, y1, lg.z + (lg.foot ? 0.05 : 0)], r) });
+    hideParts.push({ geo: lg.geo, limb: lg.limb, test: capsuleTest([lg.x, y0, lg.z + (lg.foot ? 0.05 : 0)], [lg.x, y1, lg.z + (lg.foot ? 0.05 : 0)], r) });
   }
   const surface = sampleVisible(hideParts, Math.round(26000 * PROF.coat));
   // Keep the eye sockets clear of the coat.
@@ -547,15 +560,16 @@ function buildMammoth() {
     cone: () => new T.ConeGeometry(0.62, 1.5, 5, 1, true),
   };
   const clumpGeo = (CLUMP[PROF.clumpGeom] || CLUMP.ico)();
-  const coat = new T.InstancedMesh(clumpGeo, furMat, surface.length);
-  let coatN = 0;
+  const coatGroups = [g, ...legs];
+  const coats = coatGroups.map(parent => { const m = new T.InstancedMesh(clumpGeo, furMat, surface.length); parent.add(m); return m; });
+  const coatCounts = [0, 0, 0, 0, 0];
   surface.forEach((s) => {
     if (eyePatch(s.p)) return;
-    const i = coatN++;
-    // Tufts lie along the surface normal with only a slight tilt, so the coat
-    // reads as a fleece rather than a pile of loose spheres.
+    const group = s.part.limb === undefined ? 0 : s.part.limb + 1;
+    const i = coatCounts[group]++;
     const n = s.n.clone().add(new T.Vector3(R() - 0.5, R() - 0.5, R() - 0.5).multiplyScalar(0.16)).normalize();
     dummy.position.copy(s.p).addScaledVector(n, 0.006);
+    if(group) dummy.position.sub(legs[group - 1].position);
     dummy.quaternion.setFromUnitVectors(up, n);
     dummy.rotateY(R() * Math.PI * 2);
     dummy.rotateX((R() - 0.5) * 0.34);
@@ -563,20 +577,17 @@ function buildMammoth() {
     const sc = (0.021 + R() * 0.012) * PROF.clump;
     dummy.scale.set(sc, sc * (1.5 + R() * 1.3), sc);
     dummy.updateMatrix();
-    coat.setMatrixAt(i, dummy.matrix);
+    coats[group].setMatrixAt(i, dummy.matrix);
     col.setHSL(0.072 + R() * 0.026, 0.24 + R() * 0.16, 0.26 + R() * 0.20);
-    coat.setColorAt(i, col);
+    coats[group].setColorAt(i, col);
   });
-  coat.count = coatN;
-  g.add(coat);
+  coats.forEach((m, i) => { m.count = coatCounts[i]; });
 
   // Layer A2: fine underfur. Off by default — the wool-textured hide now
   // covers the gaps this layer existed to cover, and it cost 40,000 clumps
   // (800,000 triangles, over half the frame).
   const underGeo = (CLUMP[PROF.clumpGeom] || CLUMP.ico)();
-  const underSurface = PROF.under === 0
-    ? []
-    : sampleVisible(hideParts, Math.round(40000 * PROF.under));
+  const underSurface = []; // not yet rigged
   if (underSurface.length) {
     const under = new T.InstancedMesh(underGeo, furMat, underSurface.length);
     underSurface.forEach((s, i) => {
@@ -601,26 +612,28 @@ function buildMammoth() {
   const shagGeo = new T.ConeGeometry(0.012, 0.058, 4, 1, true);
   shagGeo.translate(0, 0.028, 0);
   const shagSurface = PROF.dropShag ? [] : sampleVisible(hideParts, Math.round(11000 * PROF.shag));
-  const shag = new T.InstancedMesh(shagGeo, shagMat, shagSurface.length);
-  shagSurface.forEach((s, i) => {
+  const shags = coatGroups.map(parent => { const m = new T.InstancedMesh(shagGeo, shagMat, shagSurface.length); parent.add(m); return m; });
+  const shagCounts = [0, 0, 0, 0, 0];
+  shagSurface.forEach((s) => {
+    const group = s.part.limb === undefined ? 0 : s.part.limb + 1;
+    const i = shagCounts[group]++;
     const n = s.n.clone().add(new T.Vector3(R() - 0.5, R() - 0.5, R() - 0.5).multiplyScalar(0.42)).normalize();
     const dir = n.clone().lerp(new T.Vector3(0, -1, 0), 0.72).normalize();
     dummy.position.copy(s.p).addScaledVector(dir, 0.012);
+    if(group) dummy.position.sub(legs[group - 1].position);
     dummy.quaternion.setFromUnitVectors(up, dir);
-    dummy.rotateY(R() * Math.PI * 2);
-    dummy.rotateX((R() - 0.5) * 0.3);
+    dummy.rotateY(R() * Math.PI * 2); dummy.rotateX((R() - 0.5) * 0.3);
     dummy.scale.set(1, (0.5 + R() * 0.55) * (1 - 0.35 * Math.max(0, n.y)), 1);
-    dummy.updateMatrix();
-    shag.setMatrixAt(i, dummy.matrix);
+    dummy.updateMatrix(); shags[group].setMatrixAt(i, dummy.matrix);
     col.setHSL(0.068 + R() * 0.026, 0.24 + R() * 0.14, 0.22 + R() * 0.15);
-    shag.setColorAt(i, col);
+    shags[group].setColorAt(i, col);
   });
-  shag.count = shagSurface.length;
-  g.add(shag);
+  shags.forEach((m, i) => { m.count = shagCounts[i]; });
 
   g.userData.trunkTip = new T.Vector3(0.03, 0.78, 2.62);
-  g.userData.shag = shag;
-  g.userData.coat = coat;
+  g.userData.shag = shags[0];
+  g.userData.coat = coats[0];
+  g.userData.legs = legs;
   return g;
 }
 
@@ -735,13 +748,52 @@ function buildBreath(count = 70) {
   return pts;
 }
 
+// Procedural coastal terrain, a visual reconstruction rather than a geographic map.
+function buildTundra() {
+  const root = new T.Group();
+  const N = 150, SIZE = 180, geo = new T.PlaneGeometry(SIZE, SIZE, N, N);
+  geo.rotateX(-Math.PI / 2);
+  const pos = geo.attributes.position, colors = [];
+  const c = new T.Color();
+  function height(x,z) {
+    const r = Math.hypot(x * 0.80, z * 1.05);
+    const slope = -Math.max(0, r - 34) * 0.21;
+    const mountain = 8.0 * Math.exp(-((x+17)**2/380 + (z+28)**2/155)) + 5.6 * Math.exp(-((x-23)**2/190 + (z+35)**2/170));
+    const details = (vnoise(x*.13,z*.13)-.5)*.7 + (vnoise(x*.33+19,z*.33)-.5)*.17;
+    const fade = Math.min(1, Math.max(0, (r-6)/9));
+    return slope + mountain + details*fade;
+  }
+  for(let i=0;i<pos.count;i++) {
+    const x=pos.getX(i), z=pos.getZ(i), y=height(x,z); pos.setY(i,y);
+    const frost = Math.min(1,Math.max(0, .40 + y*.09 + (vnoise(x*.08+12,z*.08)-.5)*.45));
+    c.setRGB(.18+frost*.45,.20+frost*.46,.20+frost*.48); colors.push(c.r,c.g,c.b);
+  }
+  geo.setAttribute('color', new T.Float32BufferAttribute(colors,3)); geo.computeVertexNormals();
+  root.add(new T.Mesh(geo,new T.MeshStandardMaterial({map:tundraMap, roughness:1})));
+  // Scattered rocks and low vegetation are real meshes; deterministic seed keeps
+  // offline frame rendering stable. Avoid the animal's immediate footprint.
+  const rockGeo=lumpy(new T.IcosahedronGeometry(1,1), .2, 1), rockMat=new T.MeshStandardMaterial({color:0x626a65,roughness:1});
+  const rocks=new T.InstancedMesh(rockGeo,rockMat,420), dummy=new T.Object3D(); let k=0;
+  for(let i=0;i<420;i++){const x=(R()-.5)*100,z=(R()-.5)*100,y=height(x,z); if(y < -.8 || Math.hypot(x,z)<6)continue;
+    dummy.position.set(x,y+.07,z); dummy.rotation.set(R(),R()*6,R()); const q=.12+R()*.55;dummy.scale.set(q*1.5,q*.5,q);dummy.updateMatrix();rocks.setMatrixAt(k++,dummy.matrix);}
+  rocks.count=k;root.add(rocks);
+  const bladeGeo = new T.BufferGeometry();
+  const bp=[];for(let i=0;i<5;i++){const a=i*Math.PI/5, dx=Math.cos(a)*.09,dz=Math.sin(a)*.09;bp.push(-dx,0,-dz, dx,0,dz, dx*.35,.52,dz*.35);}
+  bladeGeo.setAttribute('position',new T.Float32BufferAttribute(bp,3));bladeGeo.computeVertexNormals();
+  const blades=new T.InstancedMesh(bladeGeo,new T.MeshStandardMaterial({color:0x857857,roughness:1,side:T.DoubleSide}),1800);k=0;
+  for(let i=0;i<1800;i++){const x=(R()-.5)*68,z=(R()-.5)*68,y=height(x,z);if(y < -.4 || Math.hypot(x,z)<4)continue;
+    dummy.position.set(x,y+.18,z);dummy.rotation.set((R()-.5)*.28,R()*6,(R()-.5)*.28);const q=.45+R()*.8;dummy.scale.set(q,q,q);dummy.updateMatrix();blades.setMatrixAt(k++,dummy.matrix);}
+  blades.count=k;root.add(blades);
+  return root;
+}
+
 const world = new T.Group();
 // QC helper: ?hide=mist,snow isolates a suspected artefact without a rebuild.
 {
   const hide = new URLSearchParams(location.search).get('hide');
   if (hide) window.__hide = new Set(hide.split(',').map((s) => s.trim()));
 }
-const floe = buildFloe(); world.add(floe);
+const floe = buildTundra(); world.add(floe);
 const sea = buildSea(); world.add(sea);
 
 const mammoth = buildMammoth(); mammoth.position.set(0, 0, 0); mammoth.rotation.y = -0.62; world.add(mammoth);
@@ -1159,6 +1211,9 @@ function updateWorld(t, u, kind) {
   // Keep the illustrative coat stable while the DNA graphic appears.
   mammoth.userData.shag.material.opacity = 1;
   mammoth.userData.shag.position.y = 0;
+  // Exploratory joint motion; paws are not yet inverse-kinematics constrained.
+  const phase = t * 1.25;
+  mammoth.userData.legs.forEach((leg, i) => { leg.rotation.x = Math.sin(phase + [0, Math.PI, Math.PI, 0][i]) * 0.10; });
   // slow body sway so the animal feels alive
   mammoth.rotation.y = -0.62 + Math.sin(t * 0.32) * 0.04;
   mammoth.position.y = Math.sin(t * 0.9) * 0.035;

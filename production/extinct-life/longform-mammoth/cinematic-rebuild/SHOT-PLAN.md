@@ -1,6 +1,6 @@
 # Continuous-animation rebuild — shot design
 
-Status: **work in progress**. The previously delivered illustrated/slideshow film is not the requested final. The proposed 22-second technical test uses the opening's procedural mammoth; it was stopped after roughly four seconds because the visuals did not meet the target and is not a finished chapter. Narration and approximate timings are from `../full-film/timeline.json`; adjacent beats may be subdivided for editorial pacing. All animal behaviour and landscapes are reconstructions, not footage of the events. No literal recreation of an unobserved extinction, disease, phenotype, human contact, or fatal winter should be represented as established fact.
+Status: **work in progress**. The previously delivered illustrated/slideshow film is not the requested final. A 22-second technical test now exists using an improved procedural mammoth, rudimentary hip pivots and approximate 3D tundra. It is not a finished chapter and does not meet the requested visual standard. Narration and approximate timings are from `../full-film/timeline.json`; adjacent beats may be subdivided for editorial pacing. All animal behaviour and landscapes are reconstructions, not footage of the events. No literal recreation of an unobserved extinction, disease, phenotype, human contact, or fatal winter should be represented as established fact.
 
 ## Non-negotiable build requirements
 
@@ -66,4 +66,4 @@ Status: **work in progress**. The previously delivered illustrated/slideshow fil
 
 ## Current gaps
 
-The prototype still uses a static-limbed procedural animal, a floe rather than a complete Wrangel landscape, recycled opening geometry and only four experimental shots. It does not meet the requested quality or cover the full story. Models, environments, skeletal animation, per-shot lighting, rendering, full sound review and final editorial/QC are still required. Automated decoding or sampled frames cannot establish cinematic quality, scientific correctness or good sound.
+The prototype still uses a simple hip-swing animal with no foot IK or head/trunk rig, approximate terrain rather than a complete Wrangel landscape, recycled opening geometry and only four experimental shots. It does not meet the requested quality or cover the full story. Models, environments, skeletal animation, per-shot lighting, rendering, full sound review and final editorial/QC are still required. Automated decoding or sampled frames cannot establish cinematic quality, scientific correctness or good sound.

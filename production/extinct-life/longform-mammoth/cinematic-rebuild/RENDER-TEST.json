@@ -1,0 +1,35 @@
+{
+  "from": 0,
+  "to": 660,
+  "frames": 660,
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "source_sha256": "8311712b3b40e2c639d6e98e91f7bef41ea97d4fe10d277b4a55aa67df3c3ae5",
+  "query": "",
+  "video_sha256": "a86dbed2d1eab20a014c4c7fdb642a4d9fcb01e94dadfa8e2f37941dbc70a90f",
+  "scene_runs": [
+    {
+      "shot": "island",
+      "from": 0,
+      "to": 180
+    },
+    {
+      "shot": "shore",
+      "from": 180,
+      "to": 330
+    },
+    {
+      "shot": "coast",
+      "from": 330,
+      "to": 480
+    },
+    {
+      "shot": "animal",
+      "from": 480,
+      "to": 660
+    }
+  ],
+  "page_errors": [],
+  "render_seconds": 991.501
+}
