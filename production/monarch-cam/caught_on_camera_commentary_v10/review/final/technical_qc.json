@@ -1,0 +1,710 @@
+{
+  "edition": "v10_one_clip_artemis_ii",
+  "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
+  "bytes": 34500691,
+  "sha256": "1cfd521f6fea600b8775440cbc114b1d86c9b4c0ad3fc91499f69b9eb333134b",
+  "probe": {
+    "duration_seconds": 49.4,
+    "frame_count": 1482,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30.0,
+    "audio_sample_rate": 48000,
+    "audio_channels_stereo": true,
+    "pix_fmt_yuv420p": true,
+    "raw_ffmpeg_probe_stderr": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/Monarch.Overall.Work/deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf63.1.102\n  Duration: 00:00:49.40, start: 0.000000, bitrate: 5587 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920 [SAR 1:1 DAR 9:16], 5320 kb/s, 30 fps, 30 tbr, 15360 tbn (default)\n    Metadata:\n      handler_name    : VideoHandler\n      encoder         : Lavc63.1.102 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 257 kb/s (default)\n    Metadata:\n      handler_name    : SoundHandler\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf63.1.102\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 200 kb/s, 30 fps, 30 tbn (default)\n    Metadata:\n      encoder         : Lavc63.1.102 wrapped_avframe\n      handler_name    : VideoHandler\n[out#0/null @ 0x55a625807f40] video:614KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe= 1482 fps=288 q=-0.0 Lsize=N/A time=00:00:49.40 bitrate=N/A speed=9.59x elapsed=0:00:05.15    \n"
+  },
+  "audio_qc": {
+    "file": "/home/user/Monarch.Overall.Work/deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
+    "profile": "web",
+    "measured": {
+      "integrated_lufs": -14.36,
+      "lra_lu": 3.5,
+      "sample_peak_dbfs": -2.41,
+      "clipped_samples": 0,
+      "dc_offset": 0.000352,
+      "duration_s": 49.4,
+      "movement_db": 19.21,
+      "mono_fold_loss_db": -0.0,
+      "clicks": {
+        "click_runs": 0,
+        "first_click_s": null
+      },
+      "band_db_rel_total": {
+        "sub": -21.27,
+        "bass": -7.64,
+        "low_mid": -4.32,
+        "mid": -7.03,
+        "high_mid": -12.03,
+        "presence": -8.58,
+        "harsh": -14.81,
+        "air": -17.58
+      },
+      "harsh_over_high_mid_db": -2.78,
+      "air_over_high_mid_db": -5.55
+    },
+    "targets": {
+      "lufs": -14.0,
+      "tol": 0.7,
+      "tp": -1.0,
+      "lra": [
+        1.0,
+        10.0
+      ]
+    },
+    "checks": {
+      "loudness_in_range": true,
+      "true_peak_ok": true,
+      "lra_in_range": true,
+      "no_clipping": true,
+      "no_clicks": true,
+      "mono_compatible": true,
+      "dc_offset_ok": true,
+      "not_harsh": true,
+      "has_dynamics": true
+    },
+    "pass": true,
+    "failed": [],
+    "loudness_curve": [
+      [
+        0.0,
+        -20.43
+      ],
+      [
+        0.5,
+        -16.17
+      ],
+      [
+        1.0,
+        -15.47
+      ],
+      [
+        1.5,
+        -27.96
+      ],
+      [
+        2.0,
+        -16.05
+      ],
+      [
+        2.5,
+        -18.42
+      ],
+      [
+        3.0,
+        -14.53
+      ],
+      [
+        3.5,
+        -19.48
+      ],
+      [
+        4.0,
+        -16.38
+      ],
+      [
+        4.5,
+        -25.91
+      ],
+      [
+        5.0,
+        -20.16
+      ],
+      [
+        5.5,
+        -19.66
+      ],
+      [
+        6.0,
+        -25.56
+      ],
+      [
+        6.5,
+        -15.66
+      ],
+      [
+        7.0,
+        -17.7
+      ],
+      [
+        7.5,
+        -15.96
+      ],
+      [
+        8.0,
+        -14.54
+      ],
+      [
+        8.5,
+        -14.26
+      ],
+      [
+        9.0,
+        -15.25
+      ],
+      [
+        9.5,
+        -23.19
+      ],
+      [
+        10.0,
+        -14.81
+      ],
+      [
+        10.5,
+        -15.15
+      ],
+      [
+        11.0,
+        -19.39
+      ],
+      [
+        11.5,
+        -18.86
+      ],
+      [
+        12.0,
+        -28.89
+      ],
+      [
+        12.5,
+        -16.21
+      ],
+      [
+        13.0,
+        -17.65
+      ],
+      [
+        13.5,
+        -16.92
+      ],
+      [
+        14.0,
+        -17.59
+      ],
+      [
+        14.5,
+        -14.18
+      ],
+      [
+        15.0,
+        -16.96
+      ],
+      [
+        15.5,
+        -17.01
+      ],
+      [
+        16.0,
+        -16.85
+      ],
+      [
+        16.5,
+        -18.16
+      ],
+      [
+        17.0,
+        -21.9
+      ],
+      [
+        17.5,
+        -14.99
+      ],
+      [
+        18.0,
+        -24.32
+      ],
+      [
+        18.5,
+        -17.07
+      ],
+      [
+        19.0,
+        -15.41
+      ],
+      [
+        19.5,
+        -20.56
+      ],
+      [
+        20.0,
+        -23.95
+      ],
+      [
+        20.5,
+        -12.84
+      ],
+      [
+        21.0,
+        -13.43
+      ],
+      [
+        21.5,
+        -18.97
+      ],
+      [
+        22.0,
+        -26.09
+      ],
+      [
+        22.5,
+        -16.79
+      ],
+      [
+        23.0,
+        -30.23
+      ],
+      [
+        23.5,
+        -15.37
+      ],
+      [
+        24.0,
+        -16.14
+      ],
+      [
+        24.5,
+        -16.14
+      ],
+      [
+        25.0,
+        -15.18
+      ],
+      [
+        25.5,
+        -15.69
+      ],
+      [
+        26.0,
+        -12.87
+      ],
+      [
+        26.5,
+        -19.74
+      ],
+      [
+        27.0,
+        -21.91
+      ],
+      [
+        27.5,
+        -15.52
+      ],
+      [
+        28.0,
+        -14.43
+      ],
+      [
+        28.5,
+        -17.29
+      ],
+      [
+        29.0,
+        -16.94
+      ],
+      [
+        29.5,
+        -17.56
+      ],
+      [
+        30.0,
+        -25.47
+      ],
+      [
+        30.5,
+        -17.8
+      ],
+      [
+        31.0,
+        -17.03
+      ],
+      [
+        31.5,
+        -32.05
+      ],
+      [
+        32.0,
+        -16.81
+      ],
+      [
+        32.5,
+        -14.8
+      ],
+      [
+        33.0,
+        -16.89
+      ],
+      [
+        33.5,
+        -17.1
+      ],
+      [
+        34.0,
+        -22.21
+      ],
+      [
+        34.5,
+        -14.42
+      ],
+      [
+        35.0,
+        -18.93
+      ],
+      [
+        35.5,
+        -17.64
+      ],
+      [
+        36.0,
+        -20.26
+      ],
+      [
+        36.5,
+        -15.13
+      ],
+      [
+        37.0,
+        -15.01
+      ],
+      [
+        37.5,
+        -18.57
+      ],
+      [
+        38.0,
+        -16.16
+      ],
+      [
+        38.5,
+        -17.11
+      ],
+      [
+        39.0,
+        -20.01
+      ],
+      [
+        39.5,
+        -31.44
+      ],
+      [
+        40.0,
+        -19.81
+      ],
+      [
+        40.5,
+        -15.52
+      ],
+      [
+        41.0,
+        -19.47
+      ],
+      [
+        41.5,
+        -14.23
+      ],
+      [
+        42.0,
+        -15.38
+      ],
+      [
+        42.5,
+        -18.91
+      ],
+      [
+        43.0,
+        -17.25
+      ],
+      [
+        43.5,
+        -21.71
+      ],
+      [
+        44.0,
+        -25.23
+      ],
+      [
+        44.5,
+        -19.07
+      ],
+      [
+        45.0,
+        -21.18
+      ],
+      [
+        45.5,
+        -17.74
+      ],
+      [
+        46.0,
+        -17.43
+      ],
+      [
+        46.5,
+        -16.4
+      ],
+      [
+        47.0,
+        -17.74
+      ],
+      [
+        47.5,
+        -18.74
+      ],
+      [
+        48.0,
+        -26.57
+      ],
+      [
+        48.5,
+        -15.61
+      ]
+    ]
+  },
+  "sampled_frames": [
+    {
+      "time_s": 0,
+      "top_mean": 92.77,
+      "top_std": 27.64,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 45.45,
+      "bottom_std": 28.74,
+      "bottom_black_fraction": 0.08704,
+      "center_mean": 88.17,
+      "center_std": 47.89,
+      "center_black_fraction": 0.00986
+    },
+    {
+      "time_s": 0.5,
+      "top_mean": 91.1,
+      "top_std": 32.31,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 47.64,
+      "bottom_std": 31.72,
+      "bottom_black_fraction": 0.08787,
+      "center_mean": 84.61,
+      "center_std": 46.37,
+      "center_black_fraction": 0.03443
+    },
+    {
+      "time_s": 1.0,
+      "top_mean": 96.35,
+      "top_std": 30.09,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 54.79,
+      "bottom_std": 35.14,
+      "bottom_black_fraction": 0.09406,
+      "center_mean": 89.51,
+      "center_std": 42.21,
+      "center_black_fraction": 0.00484
+    },
+    {
+      "time_s": 1.5,
+      "top_mean": 176.81,
+      "top_std": 49.83,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 32.01,
+      "bottom_std": 6.39,
+      "bottom_black_fraction": 0.0,
+      "center_mean": 84.86,
+      "center_std": 65.58,
+      "center_black_fraction": 0.00283
+    },
+    {
+      "time_s": 2.0,
+      "top_mean": 103.02,
+      "top_std": 38.08,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 49.54,
+      "bottom_std": 30.51,
+      "bottom_black_fraction": 0.0,
+      "center_mean": 164.32,
+      "center_std": 62.31,
+      "center_black_fraction": 0.0
+    },
+    {
+      "time_s": 3.0,
+      "top_mean": 81.42,
+      "top_std": 38.17,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 28.09,
+      "bottom_std": 15.77,
+      "bottom_black_fraction": 0.04979,
+      "center_mean": 124.18,
+      "center_std": 67.17,
+      "center_black_fraction": 0.00259
+    },
+    {
+      "time_s": 6.0,
+      "top_mean": 76.35,
+      "top_std": 19.02,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 36.49,
+      "bottom_std": 29.83,
+      "bottom_black_fraction": 0.09257,
+      "center_mean": 91.41,
+      "center_std": 41.98,
+      "center_black_fraction": 0.01804
+    },
+    {
+      "time_s": 12.0,
+      "top_mean": 81.48,
+      "top_std": 26.02,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 58.69,
+      "bottom_std": 45.56,
+      "bottom_black_fraction": 0.18203,
+      "center_mean": 87.71,
+      "center_std": 44.02,
+      "center_black_fraction": 0.01086
+    },
+    {
+      "time_s": 18.0,
+      "top_mean": 69.92,
+      "top_std": 25.28,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 67.99,
+      "bottom_std": 62.71,
+      "bottom_black_fraction": 0.23696,
+      "center_mean": 82.11,
+      "center_std": 58.79,
+      "center_black_fraction": 0.11077
+    },
+    {
+      "time_s": 24.0,
+      "top_mean": 89.53,
+      "top_std": 15.23,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 69.86,
+      "bottom_std": 65.39,
+      "bottom_black_fraction": 0.10861,
+      "center_mean": 94.47,
+      "center_std": 48.33,
+      "center_black_fraction": 0.02359
+    },
+    {
+      "time_s": 30.0,
+      "top_mean": 89.49,
+      "top_std": 14.11,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 71.99,
+      "bottom_std": 63.84,
+      "bottom_black_fraction": 0.05267,
+      "center_mean": 91.6,
+      "center_std": 47.43,
+      "center_black_fraction": 0.02406
+    },
+    {
+      "time_s": 36.0,
+      "top_mean": 75.38,
+      "top_std": 32.42,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 33.2,
+      "bottom_std": 22.48,
+      "bottom_black_fraction": 0.03863,
+      "center_mean": 98.29,
+      "center_std": 46.2,
+      "center_black_fraction": 0.00733
+    },
+    {
+      "time_s": 42.0,
+      "top_mean": 131.94,
+      "top_std": 42.29,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 21.58,
+      "bottom_std": 6.21,
+      "bottom_black_fraction": 0.00494,
+      "center_mean": 91.19,
+      "center_std": 69.84,
+      "center_black_fraction": 0.01056
+    },
+    {
+      "time_s": 46.0,
+      "top_mean": 104.76,
+      "top_std": 27.5,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 72.44,
+      "bottom_std": 45.67,
+      "bottom_black_fraction": 0.00277,
+      "center_mean": 96.53,
+      "center_std": 46.01,
+      "center_black_fraction": 0.01095
+    },
+    {
+      "time_s": 49.3,
+      "top_mean": 59.25,
+      "top_std": 26.15,
+      "top_black_fraction": 0.0,
+      "bottom_mean": 56.09,
+      "bottom_std": 48.25,
+      "bottom_black_fraction": 0.24564,
+      "center_mean": 88.83,
+      "center_std": 49.06,
+      "center_black_fraction": 0.02714
+    }
+  ],
+  "caption_safe_zone": {
+    "safe_zone": {
+      "top": 250,
+      "bottom": 1560,
+      "left": 80,
+      "right": 1000
+    },
+    "longest_word": "MICROGRAVITY.",
+    "estimated_widths_px": {
+      "word": 777,
+      "label": 328,
+      "credit": 429
+    },
+    "checks": {
+      "word_margins_l_r": true,
+      "word_horizontal": true,
+      "word_vertical": true,
+      "label_horizontal": true,
+      "label_vertical": true,
+      "credit_horizontal": true,
+      "credit_vertical": true,
+      "one_word_at_a_time": true
+    },
+    "pass": true
+  },
+  "checks": {
+    "duration_45_to_50s": true,
+    "duration_exact": true,
+    "frame_count": true,
+    "fps_30": true,
+    "resolution_1080x1920": true,
+    "video_h264": true,
+    "pix_fmt_yuv420p": true,
+    "audio_aac_48k_stereo": true,
+    "nine_audio_gates_pass": true,
+    "no_sample_clipping": true,
+    "no_click_runs": true,
+    "dc_offset_ok": true,
+    "mono_compatible": true,
+    "not_harsh": true,
+    "has_dynamics": true,
+    "word_by_word_captions": true,
+    "caption_safe_zone": true,
+    "no_watermark_or_handle": true,
+    "no_title_card": true,
+    "no_black_bars": true,
+    "no_fade_in": true,
+    "first_3s_mute_readable": true,
+    "one_clip_only": true,
+    "eight_beats": true,
+    "native_audio_retained": true,
+    "commentary_analysis_not_raw_reupload": true,
+    "loop_back": true,
+    "contact_sheets_written": true,
+    "source_sha_recorded": true,
+    "human_creative_approval_false": true,
+    "legal_review_false": true,
+    "audience_result_claim_false": true,
+    "virality_guarantee_false": true
+  },
+  "technical_pass": true,
+  "human_creative_approval": false,
+  "note": "Objective technical, layout, audio, provenance and rights-ledger checks only. No human full-motion review, native-audio listening, legal review, creative approval, perfection, retention, virality or audience result is claimed. NASA media guidelines are not a legal opinion; identifiable astronauts/possible CSA personnel may require additional clearance for commercial or promotional use."
+}

@@ -1,27 +1,130 @@
 {
   "version": "v10",
-  "created_at_utc": "2026-11-05",
-  "status": "not_started",
-  "reason": "Research/strategy gate requested by user before any new clip production.",
-  "target_candidate_count": "20-30",
-  "candidates": [],
-  "source_policy": {
-    "allowed": [
-      "Commons CC0 / Public Domain / CC-BY with attribution recorded",
-      "creator's own written permission / submission release",
-      "paid or written licence from rights holder"
-    ],
-    "avoid_without_clearance": [
-      "ViralHog or Jukin/Newsflare exclusive library clips",
-      "social reposts with 'credited where possible' only",
-      "fake CCTV / AI animal / staged skit clips",
-      "clips with baked watermarks, profanity, black bars, title cards"
-    ]
+  "created_at_utc": "2026-11-09",
+  "status": "complete",
+  "purpose": "Rights-first, cross-platform social clip scout for ONE fresh high-quality caught-on-camera Short. Replaces the rejected bear/NPS/Monarch edited-video lane.",
+  "method": {
+    "platforms_named_by_user": ["Reddit", "Dailymotion", "YouTube", "Instagram"],
+    "search_method": "public web search plus public RSS/oEmbed/NASA API reads; no official YouTube Data API key, no private analytics, no login, no full-video downloads from private platforms",
+    "visual_review": "two official NASA 4K candidate masters were fetched by a GitHub Actions runner, probed, and rendered into full-frame and 9:16 contact sheets; sheets are in production/monarch-cam/caught_on_camera_commentary_v10/review/social_scout/",
+    "decision_rule": "clip_rubric.json minimum_total=78; one rights-safe clip with visible payoff before 5s and at least 6s of clean action; kill switches override virality signals"
   },
-  "required_record_fields": [
-    "candidate_id", "source_page", "creator", "license", "license_url",
-    "license_evidence_sha256", "occurred_on", "location", "duration_seconds",
-    "native_audio", "contact_sheet_paths", "rubric_scores", "kill_switch_hits",
-    "shortlist_rank", "locked", "notes"
-  ]
+  "search_limitations": [
+    "No official trending API, view-time series or retention graph was available.",
+    "Secondary news/search snippets are not proof of current ranking or exact view counts.",
+    "No full-motion human stream viewing, no native-audio listening, no reverse-image check, no legal sign-off and no human creative approval are claimed.",
+    "Technical review used contact sheets, FFmpeg probes, NASA metadata and captions."
+  ],
+  "candidates": [
+    {"id": "R01", "platform": "Reddit", "title": "Kid has insanely good bird call mimicry", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/1tkiiy8/kid_has_insanely_good_bird_call_mimicry/", "observed_signal": "2026 r/nextfuckinglevel thread; comments call it mind-blowing", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission", "minors"], "reason": "No source licence; identifiable minor; not a rights-safe master."},
+    {"id": "R02", "platform": "Reddit", "title": "Unbelievable Shot", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/1p3fb8o/unbelievable_shot/", "observed_signal": "2025 trick-shot discussion", "decision": "rejected", "kill_switches": ["staged_or_ai_or_unverified_cctv", "unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Commenters dispute the edit/authenticity; no licence."},
+    {"id": "R03", "platform": "Reddit", "title": "Once in a lifetime trick — eclipse skateboard shot", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/1vmsqhu/once_in_a_lifetime_trick/", "observed_signal": "2026 viral eclipse/skateboard thread", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Danny Leon/Instagram-owned viral clip; no written licence or publicity clearance."},
+    {"id": "R04", "platform": "Reddit", "title": "Pitchers with Elite Reflexes: No-Look Catch Compilation", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/1t8s6m2/pitchers_with_elite_reflexes_the_nolook_catch/", "observed_signal": "2026 sports compilation", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Multi-clip sports broadcast compilation; not one rights-cleared clip."},
+    {"id": "R05", "platform": "Reddit", "title": "Improv musician runs into a crazy guitarist on the street", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/1sb063d/improv_musician_runs_into_a_crazy_guitarist_on/", "observed_signal": "2026 street-performance thread", "decision": "rejected", "kill_switches": ["staged_or_ai_or_unverified_cctv", "unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Staging debate, music rights and no source licence."},
+    {"id": "R06", "platform": "Reddit", "title": "Insane card throwing trick shots by Michael Wlotzka", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/1s966kn/insane_card_throwing_trick_shots_by_michael/", "observed_signal": "2026 skill thread", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Creator clip without licence; multiple attempts/compilation."},
+    {"id": "R07", "platform": "Reddit", "title": "Insane tongue twisters in a continuous take", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/1qmv7iv/insane_tounge_twisters_in_a_continuous_take/", "observed_signal": "2026 performance thread", "decision": "rejected", "kill_switches": ["staged_or_ai_or_unverified_cctv", "unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Commenters dispute continuous take; no licence."},
+    {"id": "R08", "platform": "Reddit", "title": "Footage of the East Japan tsunami", "url": "https://www.reddit.com/r/nextfuckinglevel/comments/18gc9bn/footage_of_the_east_japan_tsunami/", "observed_signal": "high-engagement disaster thread", "decision": "rejected", "kill_switches": ["tragedy_or_gore_or_weapons_or_minors_in_danger"], "reason": "Tragedy; outside permitted tone."},
+    {"id": "R09", "platform": "Reddit", "title": "Astronaut drops fizzy tablet into floating water bubble on ISS", "url": "https://www.reddit.com/r/interestingasfuck/comments/1sl22gg/astronaut_drops_fizzy_tablet_into_floating_water/", "observed_signal": "2026 r/interestingasfuck and r/BeAmazed circulation", "decision": "shortlisted_then_rejected", "kill_switches": [], "reason": "Strong NASA-adjacent topic, but no direct official 4K master identified in this scout; selected a better-authenticated NASA asset instead."},
+    {"id": "R10", "platform": "Reddit", "title": "Watch water droplets defy gravity and orbit a charged needle like tiny planets", "url": "https://www.reddit.com/r/interestingasfuck/comments/1qlp2co/watch_water_droplets_defy_gravity_and_orbit_a/", "observed_signal": "2026 r/interestingasfuck circulation", "decision": "shortlisted_then_rejected", "kill_switches": [], "reason": "Official NASA SVS 31383 master available, but contact sheets showed an abstract black-and-white overlap visualization with weak 3-second payoff."},
+    {"id": "D01", "platform": "Dailymotion", "title": "Insane CCTV & Dashcam Fails That Escalated FAST", "url": "https://www.dailymotion.com/video/x9zd2km", "observed_signal": "2026 caught-on-camera compilation", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Multi-clip compilation, no rights chain."},
+    {"id": "D02", "platform": "Dailymotion", "title": "Try Not To Laugh Challenge IMPOSSIBLE", "url": "https://www.dailymotion.com/video/xa0k82a", "observed_signal": "2026 fail compilation", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Compilation/repost; no licence."},
+    {"id": "D03", "platform": "Dailymotion", "title": "Unbelievable Jump Scare Pranks Compilation 2026", "url": "https://www.dailymotion.com/video/xa4e0ey", "observed_signal": "2026 prank compilation", "decision": "rejected", "kill_switches": ["staged_or_ai_or_unverified_cctv", "unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Prank authenticity and rights unclear."},
+    {"id": "D04", "platform": "Dailymotion", "title": "Funniest Fails of 2026 — Ultimate Try Not To Laugh Challenge", "url": "https://www.dailymotion.com/video/xa5qglu", "observed_signal": "2026 fail compilation", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Compilation/repost; not one clip."},
+    {"id": "D05", "platform": "Dailymotion", "title": "Epic Fails Compilation 2026", "url": "https://www.dailymotion.com/video/xa36a72", "observed_signal": "2026 fail compilation", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Compilation/repost; not one clip."},
+    {"id": "D06", "platform": "Dailymotion", "title": "Dangerous Firecracker Explosion on Road", "url": "https://www.dailymotion.com/video/x9s6spo", "observed_signal": "shocking incident upload", "decision": "rejected", "kill_switches": ["tragedy_or_gore_or_weapons_or_minors_in_danger", "unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Dangerous injury/explosion content."},
+    {"id": "D07", "platform": "Dailymotion", "title": "Shocking Zoo Incident: Visitor Startles Monkey During Feeding", "url": "https://www.dailymotion.com/video/xbkfouq", "observed_signal": "2026 short animal incident", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "No licence/provenance; conflict framing."},
+    {"id": "D08", "platform": "Dailymotion", "title": "Caught on Camera: SUV Slammed by Train Moments After Driver Jumps Out", "url": "https://www.dailymotion.com/video/x9pln8w", "observed_signal": "multi-angle crash upload", "decision": "rejected", "kill_switches": ["tragedy_or_gore_or_weapons_or_minors_in_danger", "unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Crash/danger and news-rights uncertainty."},
+    {"id": "Y01", "platform": "YouTube", "title": "Danny Leon's INSANE Skateboard Trick During The August 12, 2026 Solar Eclipse", "url": "https://www.youtube.com/watch?v=Hio00JFAZuA", "observed_signal": "9,705 views / 234 likes on one public repost; wider news coverage of the original Instagram clip", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Repost of a creator-owned viral clip; no licence."},
+    {"id": "Y02", "platform": "YouTube", "title": "If This Was Not Recorded, No One Would Believe It! #1 | BEST OF MONTH 2026", "url": "https://www.youtube.com/watch?v=0k6DsfqmOxY", "observed_signal": "2026 compilation upload", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Compilation; not one rights-cleared clip."},
+    {"id": "Y03", "platform": "YouTube", "title": "Incredible Moments Caught On Camera | Best of 2026 #39", "url": "https://www.youtube.com/watch?v=6RZsB1461Js", "observed_signal": "2026 compilation upload", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Compilation; not one clip."},
+    {"id": "Y04", "platform": "YouTube/NASA", "title": "Science off the Sphere: Knitting Needle Experiment", "url": "https://www.youtube.com/watch?v=qHrBhgwq__Q", "observed_signal": "NASA Johnson official upload, 762,931 views / 5,093 likes at page read", "decision": "reference_only", "kill_switches": [], "reason": "Authenticates the recurring viral water-orbit topic, but the 2012 5:23 explainer is not the selected 2026 4K clip."},
+    {"id": "Y05", "platform": "YouTube/NASA", "title": "Astronaut Moments: Don Pettit, Science of Opportunity", "url": "https://www.youtube.com/watch?v=pQPosDg1OUU", "observed_signal": "NASA Johnson official upload", "decision": "rejected", "kill_switches": ["static_setup_over_3s"], "reason": "Mostly talking-head context; weak first-3-second action."},
+    {"id": "I01", "platform": "Instagram", "title": "Danny Leon 'El truco de mi vida: Eclipse mode'", "url": "https://www.instagram.com/reel/Db89wBgRB3B/", "observed_signal": "2026 eclipse skateboard clip reported as widely viral", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Creator-owned clip, no written licence."},
+    {"id": "I02", "platform": "Instagram/NASA", "title": "Artemis II astronauts have fun with bubbles", "url": "https://www.instagram.com/reel/DXhiN4GiToV/", "observed_signal": "NASA/Artemis II water-ball reel reported by Popular Science and Yahoo; widely shared online", "decision": "selected_topic_crosscheck", "kill_switches": [], "reason": "Confirms the social-media circulation of the exact water-sphere phenomenon; the production master is taken from NASA's official 4K library, not from an Instagram repost."},
+    {"id": "I03", "platform": "Instagram/ISS", "title": "Water spheres bouncing in microgravity", "url": "https://www.instagram.com/iss/", "observed_signal": "2022 ISS post reported with 293,316 likes", "decision": "rejected", "kill_switches": ["unclear_licence_or_exclusive_clip_without_written_permission"], "reason": "Older ISS repost; no direct official 4K master located in this scout."},
+    {"id": "N01", "platform": "NASA official / cross-platform topic", "title": "Fun with Water Bubbles", "url": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman", "observed_signal": "Official NASA 4K in-flight video, 2026-04-04; exact water-sphere phenomenon circulated through Instagram, YouTube/news and Reddit water-in-space threads", "decision": "LOCKED", "kill_switches": [], "reason": "Clean 3840x2160/29.97fps 42.709s official master with AAC audio, captions, metadata, direct asset URL, visible first-3-second sphere, inverted-face payoff, native reaction lines and strong replay/loop value."},
+    {"id": "N02", "platform": "NASA SVS", "title": "Water Droplet Science with Astronaut Don Pettit on the ISS", "url": "https://svs.gsfc.nasa.gov/31383/", "observed_signal": "Official 2026 4K release of a documented viral Reddit/YouTube electrostatic-orbit experiment", "decision": "rejected_after_visual_review", "kill_switches": ["payoff_clarity_weak_on_contact_sheet"], "reason": "Rights-safe and 4K, but contact sheets show a dense abstract black-and-white frame-overlap visualization that is not instantly readable on mute."}
+  ],
+  "selected_clip": {
+    "clip_id": "N01",
+    "nasa_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "title": "Fun with Water Bubbles",
+    "date_created": "2026-04-04",
+    "source_page": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "direct_4k_url": "https://images-assets.nasa.gov/video/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman~orig.mp4",
+    "source_bytes": 63680143,
+    "source_sha256": "7fd9cd0cfc22451910ac8fa8848b5252c51320a82c193e3a98cf7c0aa725c0dc",
+    "vertical_master": "production/monarch-cam/caught_on_camera_commentary_v10/source/nasa_artemis_ii_water_bubble_4k_to_vertical_master.mp4",
+    "vertical_master_bytes": 29314216,
+    "vertical_master_sha256": "11395618c0db74164e35de8186b079f974316f13fd5c25efb789574b22d5960c",
+    "one_clip_only": true,
+    "rejected_bear_nps_lane_used": false
+  },
+  "clip_lock": {
+    "locked": true,
+    "locked_at_utc": "2026-11-09",
+    "locked_for": "v10_one_clip_commentary_short",
+    "supersedes": ["rejected_bear_nps_lane", "v9_ranking_short", "danny_leon_repost", "unverified_compilations", "github_archive_mp4s"]
+  },
+  "rubric_score": {
+    "first_frame_stop": 9,
+    "mute_readability": 9,
+    "payoff_clarity": 9,
+    "novelty_shock": 10,
+    "emotional_spike": 9,
+    "rehook_detail": 10,
+    "native_audio_value": 8,
+    "loop_potential": 9,
+    "rights_chain": 9,
+    "editability": 10,
+    "total": 91,
+    "minimum_total": 78,
+    "passed": true,
+    "kill_switches_triggered": [],
+    "kill_switch_checks": {
+      "staged_or_ai_or_unverified_cctv": false,
+      "baked_profanity_or_subtitles": false,
+      "watermark_or_handle_or_platform_ui": false,
+      "black_bars_or_title_cards_or_fade_in": false,
+      "static_setup_over_3s": false,
+      "tragedy_or_gore_or_weapons_or_minors_in_danger": false,
+      "harassment_or_doxxing_or_unverified_allegations": false,
+      "unclear_licence_or_exclusive_clip_without_written_permission": false,
+      "non_free_audio_without_written_license": false,
+      "no_visible_payoff_before_5s": false,
+      "usable_source_under_4s": false,
+      "motion_score_only_shortlist": false
+    }
+  },
+  "authenticity_checks": {
+    "official_nasa_detail_page": true,
+    "nasa_images_api_record": true,
+    "official_asset_collection_json": true,
+    "official_metadata_4k_3840x2160_29_97fps_42_709s": true,
+    "official_captions_srt": true,
+    "source_sha256_recorded": true,
+    "visual_contact_sheets_reviewed": true,
+    "human_full_motion_review": false,
+    "native_audio_listened": false,
+    "reverse_image_check": false,
+    "ai_or_staged_indicator_found": false,
+    "no_nasa_logo_used": true,
+    "no_endorsement_implied": true
+  },
+  "rights_flags": {
+    "nasa_content_generally_not_copyrighted_us": true,
+    "nasa_credited": true,
+    "identifiable_persons_present": true,
+    "publicity_or_privacy_permission_obtained": false,
+    "commercial_monetization_clearance": false,
+    "human_legal_review": false,
+    "not_a_legal_opinion": true
+  },
+  "review_flags": {
+    "visual_contact_sheets_generated": true,
+    "human_creative_approval": false,
+    "technical_qc_pass": false,
+    "audience_result_claim": false,
+    "virality_guarantee": false
+  }
 }

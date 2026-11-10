@@ -1,0 +1,186 @@
+{
+  "edition": "v10_one_clip_artemis_ii",
+  "status": "rendered",
+  "timeline": {
+    "duration_seconds": 49.4,
+    "fps": 30,
+    "frame_count": 1482,
+    "resolution": "1080x1920"
+  },
+  "visual_segments": [
+    {
+      "id": "payoff_flash",
+      "timeline_in": 0.0,
+      "timeline_out": 1.5,
+      "source_in": 6.0,
+      "source_out": 7.5,
+      "zoom": 1.08,
+      "purpose": "first-3-second mute-readable inverted face"
+    },
+    {
+      "id": "main_source",
+      "timeline_in": 1.5,
+      "timeline_out": 44.2,
+      "source_in": 0.0,
+      "source_out": 42.7,
+      "zoom": 1.0,
+      "purpose": "clean official source with commentary"
+    },
+    {
+      "id": "loop_back",
+      "timeline_in": 44.2,
+      "timeline_out": 49.4,
+      "source_in": 6.0,
+      "source_out": 11.199999999999996,
+      "zoom": 1.08,
+      "purpose": "return to the payoff frame for replay/loop"
+    }
+  ],
+  "beats": [
+    {
+      "beat": 1,
+      "timeline_in": 0.0,
+      "timeline_out": 5.074,
+      "source_in": 6.0,
+      "source_out": 3.574,
+      "vo_text": "That is not a lens. Watch the face inside that floating water ball.",
+      "word_count": 13,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b1_v10.wav",
+      "purpose": "payoff flash / hook"
+    },
+    {
+      "beat": 2,
+      "timeline_in": 5.174,
+      "timeline_out": 12.337,
+      "source_in": 3.674,
+      "source_out": 10.837,
+      "vo_text": "Artemis Two astronauts were playing with one sphere of water near the Moon. Almost no gravity pulling it down.",
+      "word_count": 19,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b2_v10.wav",
+      "purpose": "context / rewind"
+    },
+    {
+      "beat": 3,
+      "timeline_in": 12.437,
+      "timeline_out": 17.209,
+      "source_in": 10.937,
+      "source_out": 15.709,
+      "vo_text": "They guide it with a straw, and the clear orb becomes a tiny crystal ball.",
+      "word_count": 15,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b3_v10.wav",
+      "purpose": "setup"
+    },
+    {
+      "beat": 4,
+      "timeline_in": 17.309,
+      "timeline_out": 23.323,
+      "source_in": 15.809,
+      "source_out": 21.823,
+      "vo_text": "One touch, and the sphere collapses. The crew literally laughs: Crazy.",
+      "word_count": 11,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b4_v10.wav",
+      "purpose": "collapse / native laugh"
+    },
+    {
+      "beat": 5,
+      "timeline_in": 23.423,
+      "timeline_out": 30.203,
+      "source_in": 21.923,
+      "source_out": 28.703,
+      "vo_text": "But here is the part people replay. Look through it again: the astronaut behind it is upside down.",
+      "word_count": 18,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b5_v10.wav",
+      "purpose": "rehook / inverted face"
+    },
+    {
+      "beat": 6,
+      "timeline_in": 30.303,
+      "timeline_out": 36.572,
+      "source_in": 28.803,
+      "source_out": 35.072,
+      "vo_text": "That is refraction. Light bends through curved water, so the image flips before your eyes.",
+      "word_count": 15,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b6_v10.wav",
+      "purpose": "science explanation"
+    },
+    {
+      "beat": 7,
+      "timeline_in": 36.672,
+      "timeline_out": 44.137,
+      "source_in": 35.172,
+      "source_out": 42.637,
+      "vo_text": "No CGI. No staged skit. Just surface tension holding a liquid lens in microgravity.",
+      "word_count": 14,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b7_v10.wav",
+      "purpose": "authenticity / analysis"
+    },
+    {
+      "beat": 8,
+      "timeline_in": 44.237,
+      "timeline_out": 49.392,
+      "source_in": 6.037,
+      "source_out": 11.192,
+      "vo_text": "Back to the start. That upside-down face is still there. Watch it again.",
+      "word_count": 13,
+      "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b8_v10.wav",
+      "purpose": "loop-back / soft CTA"
+    }
+  ],
+  "script": {
+    "variant": "A",
+    "hook": 1,
+    "word_count": 118,
+    "path": "production/monarch-cam/caught_on_camera_commentary_v10/script_variants_v10.md"
+  },
+  "captions": {
+    "style": "one word at a time, burned with ASS",
+    "word_count": 118,
+    "ass_path": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/captions_v10.ass",
+    "timings_path": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/caption_timings.json",
+    "safe_zone_check": {
+      "safe_zone": {
+        "top": 250,
+        "bottom": 1560,
+        "left": 80,
+        "right": 1000
+      },
+      "longest_word": "MICROGRAVITY.",
+      "estimated_widths_px": {
+        "word": 777,
+        "label": 328,
+        "credit": 429
+      },
+      "checks": {
+        "word_margins_l_r": true,
+        "word_horizontal": true,
+        "word_vertical": true,
+        "label_horizontal": true,
+        "label_vertical": true,
+        "credit_horizontal": true,
+        "credit_vertical": true,
+        "one_word_at_a_time": true
+      },
+      "pass": true
+    }
+  },
+  "flags": {
+    "one_clip_only": true,
+    "eight_beats": true,
+    "commentary_analysis_not_raw_reupload": true,
+    "payoff_flash_before_3s": true,
+    "loop_back": true,
+    "no_black_bars": true,
+    "no_title_card": true,
+    "no_fade_in": true,
+    "no_baked_watermark": true,
+    "no_platform_ui": true,
+    "no_nasa_insignia": true,
+    "no_third_party_handle": true,
+    "no_fake_engagement_counts": true,
+    "human_full_motion_review": false,
+    "human_native_audio_listening": false,
+    "human_creative_approval": false,
+    "audience_result_claim": false,
+    "virality_guarantee": false
+  }
+}

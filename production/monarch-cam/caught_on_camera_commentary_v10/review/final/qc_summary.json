@@ -1,0 +1,53 @@
+{
+  "edition": "v10_one_clip_artemis_ii",
+  "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
+  "bytes": 34500691,
+  "sha256": "1cfd521f6fea600b8775440cbc114b1d86c9b4c0ad3fc91499f69b9eb333134b",
+  "duration_seconds": 49.4,
+  "frame_count": 1482,
+  "fps": 30.0,
+  "resolution": "1080x1920",
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "technical_pass": true,
+  "nine_audio_gates_pass": true,
+  "audio_gate_checks": {
+    "loudness_in_range": true,
+    "true_peak_ok": true,
+    "lra_in_range": true,
+    "no_clipping": true,
+    "no_clicks": true,
+    "mono_compatible": true,
+    "dc_offset_ok": true,
+    "not_harsh": true,
+    "has_dynamics": true
+  },
+  "technical_check_count": 33,
+  "technical_checks_pass": 33,
+  "human_creative_approval": false,
+  "human_full_motion_review": false,
+  "human_native_audio_listening": false,
+  "human_legal_review": false,
+  "commercial_monetization_clearance": false,
+  "no_written_astronaut_or_csa_permission": true,
+  "not_a_legal_opinion": true,
+  "audience_result_claim": false,
+  "virality_guarantee": false,
+  "source": {
+    "nasa_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "source_page": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "sha256": "7fd9cd0cfc22451910ac8fa8848b5252c51320a82c193e3a98cf7c0aa725c0dc"
+  },
+  "evidence": [
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/audio_qc.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/technical_qc.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/edit_ledger_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/native_audio_ledger_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/caption_timings.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/contact_sheets_manifest.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/captions_v10.ass"
+  ],
+  "note": "technical_pass is deliberately separate from human_creative_approval=false. The Short is an original commentary/analysis edit of one official NASA master, not a raw reupload. No guaranteed virality or audience result is claimed."
+}
