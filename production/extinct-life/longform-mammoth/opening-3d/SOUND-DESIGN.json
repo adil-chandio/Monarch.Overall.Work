@@ -1,0 +1,44 @@
+{
+  "original_composition": true,
+  "third_party_music_samples": false,
+  "field_recordings_used": false,
+  "competitor_audio_used": false,
+  "narration_voice_id": "voice-04",
+  "speech_rate_change": false,
+  "narration_start_seconds": 0.55,
+  "narration_source_seconds": 49.644,
+  "duration_seconds": 60.0,
+  "master_target_lufs": -16,
+  "master_target_true_peak": -1.5,
+  "ducking": "Approx 50ms lookahead, fast attenuation, smooth release; maximum music gain reduction 78 percent",
+  "score": "Original procedural synthesis: D-minor sub drone, filtered shimmer pad, 60 BPM low pulse, sparse bell motif, slow string swell, F-major-colour resolve.",
+  "sfx_events": [
+    {
+      "at": 0.0,
+      "type": "low arctic wind bed (filtered noise, no recording)"
+    },
+    {
+      "at": 16.55,
+      "type": "descending low impact"
+    },
+    {
+      "at": 26.85,
+      "type": "soft card placement thunk"
+    },
+    {
+      "at": 33.95,
+      "type": "glass shimmer (synthetic, short decay)"
+    },
+    {
+      "at": 40.45,
+      "type": "glass shimmer (synthetic, short decay)"
+    },
+    {
+      "at": 51.35,
+      "type": "descending low impact"
+    }
+  ],
+  "sfx_count": 6,
+  "music_pulse_events": 60,
+  "full_listening_certified": false
+}

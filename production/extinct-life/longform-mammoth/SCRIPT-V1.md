@@ -2,7 +2,7 @@
 
 **Format:** English long-form documentary, master cut ≈14:00 / tight cut ≈12:30, 16:9, single English narrator (unchanged speed, no Short-style hypercutting).
 **Structural device:** cold-case file — four expert "witnesses" (2017 genome, 2019 environment, human arrival, 2024 genome) each present a verdict, plus one missing witness (the final ~300 years).
-**Status:** research-stage script draft for owner review. Nothing rendered, narrated, or published. No production-lock claim.
+**Status:** research-stage draft for review; not production locked. **Science correction needed:** the original cold open below overstates a predicted coat effect as observed loss of insulation and incorrectly attributes later population recovery to the same individual genome. Use the corrected `opening-3d/` narration for the opening and review the entire draft before production. No YouTube publication has been authorised.
 
 **Source anchors used in the script (all verified this session):**
 - Rogers & Slatkin 2017, *PLoS Genetics* 13(3):e1006601, DOI 10.1371/journal.pgen.1006601 — two genomes; Oimyakon 45 ka; Wrangel 4,300 yr; Ne >43-fold lower; excess deletions / gene-affecting deletions / premature stop codons; olfactory-receptor and urinary-protein loss; **FOXQ1 two independent loss-of-function mutations → predicted satin coat**.
