@@ -124,6 +124,15 @@ cam_data.sensor_width = 36
 cam_data.clip_start = .05
 cam_data.clip_end = 600
 
+_dome = bpy.data.objects.get('sky dome')
+SKY_BS = None
+if _dome is not None and _dome.data.materials:
+    for n in _dome.data.materials[0].node_tree.nodes:
+        if n.type == 'BSDF_PRINCIPLED':
+            SKY_BS = n
+            break
+SKY_DAY = SKY_BS.inputs['Emission Strength'].default_value if SKY_BS else 1.0
+
 # ------------------------------------------------------------------- actors
 hero = Actor('hero', 'ryan.glb', loc=(APT_X - 2.4, 2.0, 0), rot=math.pi, outfit='formal')
 girl = Actor('girl', 'mia_smart.glb', loc=(0, 0, 0), rot=0, outfit='smart')
@@ -288,8 +297,10 @@ def place_crowd(t, spots, look_at_pt):
 
 
 # --------------------------------------------------------------------- acts
-def exposure(v):
+def exposure(v, night=False):
     scn.view_settings.exposure = v
+    if SKY_BS is not None and not night:
+        SKY_BS.inputs['Emission Strength'].default_value = SKY_DAY
 
 
 def act_bedroom(t):
@@ -457,17 +468,31 @@ def act_car(t):
 
 
 def act_final(t):
-    exposure(.10)
+    exposure(.30, night=True)
     S.show_set('apt')
-    # photograph the room at night: everything dim, only the sky outside bright
+    # night: kill the daylight, keep one warm practical and the city outside
+    if SKY_BS is not None:
+        SKY_BS.inputs['Emission Strength'].default_value = SKY_DAY * .10
+        SKY_BS.inputs['Emission Color'].default_value = (.10, .16, .34, 1)
     for name, level in (('apt warm key', .10), ('apt warm fill', .06),
-                        ('apt sky fill', .20), ('apt bounce', .10),
-                        ('bed pool', 0.0), ('cove bounce', .12)):
+                        ('apt sky fill', .04), ('apt bounce', .06),
+                        ('bed pool', 0.0), ('cove bounce', .10)):
         l = bpy.data.objects.get(name)
         if l and l.type == 'LIGHT':
             if '_base_energy' not in l:
                 l['_base_energy'] = l.data.energy
             l.data.energy = l['_base_energy'] * level
+    lamp = bpy.data.objects.get('floor lamp light')
+    if lamp is not None:
+        if '_base_energy' not in lamp:
+            lamp['_base_energy'] = lamp.data.energy
+        lamp.data.energy = lamp['_base_energy'] * 2.2
+    for sx in (-1, 1):
+        g = bpy.data.objects.get(f'bedside glow {sx}')
+        if g is not None:
+            if '_base_energy' not in g:
+                g['_base_energy'] = g.data.energy
+            g.data.energy = g['_base_energy'] * 3.0
     hero.show(True); hero.outfit('shirt')
     hide_phones()
     hero.action('Idle_Rig', 40 + (t - CAR_END) * 8)
