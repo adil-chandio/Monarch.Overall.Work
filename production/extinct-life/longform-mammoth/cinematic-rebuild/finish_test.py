@@ -12,6 +12,10 @@ manifest=json.loads((C/'render-0-660.json').read_text())
 assert manifest['from']==0 and manifest['to']==660 and manifest['frames']==660
 assert manifest['fps']==30 and manifest['width']==1280 and manifest['height']==720
 assert manifest['page_errors']==[]
+build=hashlib.sha256()
+for filename in ['scene.mjs','timeline.json','gait.mjs','stage.html','assets/fur.jpg','assets/tundra.jpg']:
+    build.update((B/filename).read_bytes())
+assert manifest['source_sha256']==build.hexdigest(), 'Scene sources changed since this render; render again before finishing.'
 assert A.exists(), 'Build the replacement mix with full-film/sound.py first.'
 
 def stamp(s):

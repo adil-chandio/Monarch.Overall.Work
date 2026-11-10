@@ -22,7 +22,11 @@ const arg = (k, d) => {
 };
 const S = JSON.parse(fs.readFileSync(path.join(BASE, 'timeline.json')));
 const BUILD = createHash('sha256').update(fs.readFileSync(path.join(BASE, 'scene.mjs')))
-  .update(fs.readFileSync(path.join(BASE, 'timeline.json'))).digest('hex');
+  .update(fs.readFileSync(path.join(BASE, 'timeline.json')))
+  .update(fs.readFileSync(path.join(BASE, 'gait.mjs')))
+  .update(fs.readFileSync(path.join(BASE, 'stage.html')))
+  .update(fs.readFileSync(path.join(BASE, 'assets/fur.jpg')))
+  .update(fs.readFileSync(path.join(BASE, 'assets/tundra.jpg'))).digest('hex');
 
 const server = http.createServer((req, res) => {
   const u = new URL(req.url, 'http://local');

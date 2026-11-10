@@ -2,6 +2,7 @@
 // Every form here is procedurally built for this film: no imported models, no photographs,
 // no competitor footage. Reconstruction is illustrative, not photographic.
 import * as T from 'three';
+import {footAt, distanceAt} from './gait.mjs';
 
 await document.fonts.load('800 48px Manrope');
 await document.fonts.load('80px Anton');
@@ -498,17 +499,18 @@ function buildMammoth() {
 
   // Each limb has its own hip pivot. Hide and fur use the same local transform.
   // This simple swing rig is exploratory, not a biomechanically complete walk cycle.
-  const legGeos = [], legs = [];
+  const legGeos = [], legs = [], feet = [];
   for (const [x, z, h] of [[-0.60, 1.20, 1.92], [0.60, 1.20, 1.92], [-0.62, -1.25, 1.96], [0.62, -1.25, 1.96]]) {
     const pivot = new T.Group(); pivot.position.set(x, h, z); g.add(pivot);
-    const index = legs.length; legs.push(pivot);
+    const index = legs.length; legs.push(pivot); pivot.userData.hip = {x,z,h};
     const legGeo = new T.CylinderGeometry(0.27, 0.35, h, 20, 1);
     legGeo.translate(x, h / 2 + 0.08, z);
     const legMesh = new T.Mesh(legGeo, hideMat); legMesh.position.set(-x, -h, -z); pivot.add(legMesh);
     legGeos.push({ geo: legGeo, x, z, h, limb: index });
     const footGeo = new T.CylinderGeometry(0.34, 0.38, 0.26, 20);
     footGeo.translate(x, 0.13, z + 0.05);
-    const footMesh = new T.Mesh(footGeo, hideMat); footMesh.position.set(-x, -h, -z); pivot.add(footMesh);
+    const footPivot = new T.Group(); footPivot.position.set(x,0,z); g.add(footPivot); feet.push(footPivot);
+    const footMesh = new T.Mesh(footGeo, hideMat); footMesh.position.set(-x, 0, -z); footPivot.add(footMesh);
     legGeos.push({ geo: footGeo, x, z, h: 0.26, foot: true, limb: index });
   }
   const tail = new T.Mesh(taperedTube(
@@ -533,7 +535,7 @@ function buildMammoth() {
   for (const lg of legGeos) {
     const y0 = lg.foot ? 0.0 : 0.05, y1 = lg.foot ? 0.26 : lg.h + 0.08;
     const r = lg.foot ? 0.40 : 0.37;
-    hideParts.push({ geo: lg.geo, limb: lg.limb, test: capsuleTest([lg.x, y0, lg.z + (lg.foot ? 0.05 : 0)], [lg.x, y1, lg.z + (lg.foot ? 0.05 : 0)], r) });
+    hideParts.push({ geo: lg.geo, limb: lg.limb, foot: lg.foot, test: capsuleTest([lg.x, y0, lg.z + (lg.foot ? 0.05 : 0)], [lg.x, y1, lg.z + (lg.foot ? 0.05 : 0)], r) });
   }
   const surface = sampleVisible(hideParts, Math.round(26000 * PROF.coat));
   // Keep the eye sockets clear of the coat.
@@ -560,16 +562,16 @@ function buildMammoth() {
     cone: () => new T.ConeGeometry(0.62, 1.5, 5, 1, true),
   };
   const clumpGeo = (CLUMP[PROF.clumpGeom] || CLUMP.ico)();
-  const coatGroups = [g, ...legs];
+  const coatGroups = [g, ...legs, ...feet];
   const coats = coatGroups.map(parent => { const m = new T.InstancedMesh(clumpGeo, furMat, surface.length); parent.add(m); return m; });
-  const coatCounts = [0, 0, 0, 0, 0];
+  const coatCounts = new Array(coatGroups.length).fill(0);
   surface.forEach((s) => {
     if (eyePatch(s.p)) return;
-    const group = s.part.limb === undefined ? 0 : s.part.limb + 1;
+    const group = s.part.limb === undefined ? 0 : s.part.limb + (s.part.foot ? 5 : 1);
     const i = coatCounts[group]++;
     const n = s.n.clone().add(new T.Vector3(R() - 0.5, R() - 0.5, R() - 0.5).multiplyScalar(0.16)).normalize();
     dummy.position.copy(s.p).addScaledVector(n, 0.006);
-    if(group) dummy.position.sub(legs[group - 1].position);
+    if(group) dummy.position.sub(coatGroups[group].position);
     dummy.quaternion.setFromUnitVectors(up, n);
     dummy.rotateY(R() * Math.PI * 2);
     dummy.rotateX((R() - 0.5) * 0.34);
@@ -613,14 +615,14 @@ function buildMammoth() {
   shagGeo.translate(0, 0.028, 0);
   const shagSurface = PROF.dropShag ? [] : sampleVisible(hideParts, Math.round(11000 * PROF.shag));
   const shags = coatGroups.map(parent => { const m = new T.InstancedMesh(shagGeo, shagMat, shagSurface.length); parent.add(m); return m; });
-  const shagCounts = [0, 0, 0, 0, 0];
+  const shagCounts = new Array(coatGroups.length).fill(0);
   shagSurface.forEach((s) => {
-    const group = s.part.limb === undefined ? 0 : s.part.limb + 1;
+    const group = s.part.limb === undefined ? 0 : s.part.limb + (s.part.foot ? 5 : 1);
     const i = shagCounts[group]++;
     const n = s.n.clone().add(new T.Vector3(R() - 0.5, R() - 0.5, R() - 0.5).multiplyScalar(0.42)).normalize();
     const dir = n.clone().lerp(new T.Vector3(0, -1, 0), 0.72).normalize();
     dummy.position.copy(s.p).addScaledVector(dir, 0.012);
-    if(group) dummy.position.sub(legs[group - 1].position);
+    if(group) dummy.position.sub(coatGroups[group].position);
     dummy.quaternion.setFromUnitVectors(up, dir);
     dummy.rotateY(R() * Math.PI * 2); dummy.rotateX((R() - 0.5) * 0.3);
     dummy.scale.set(1, (0.5 + R() * 0.55) * (1 - 0.35 * Math.max(0, n.y)), 1);
@@ -634,6 +636,7 @@ function buildMammoth() {
   g.userData.shag = shags[0];
   g.userData.coat = coats[0];
   g.userData.legs = legs;
+  g.userData.feet = feet;
   return g;
 }
 
@@ -784,6 +787,17 @@ function buildTundra() {
   for(let i=0;i<1800;i++){const x=(R()-.5)*68,z=(R()-.5)*68,y=height(x,z);if(y < -.4 || Math.hypot(x,z)<4)continue;
     dummy.position.set(x,y+.18,z);dummy.rotation.set((R()-.5)*.28,R()*6,(R()-.5)*.28);const q=.45+R()*.8;dummy.scale.set(q,q,q);dummy.updateMatrix();blades.setMatrixAt(k++,dummy.matrix);}
   blades.count=k;root.add(blades);
+  // Interpolate the actual terrain triangle under a point, not merely the
+  // continuous pre-tessellation height function. Ground-contact targets must
+  // agree with the rendered mesh at the same horizontal coordinates.
+  root.userData.height = (x,z) => {
+    const gx=Math.max(0,Math.min(N-1e-8,(x+SIZE/2)*N/SIZE));
+    const gz=Math.max(0,Math.min(N-1e-8,(z+SIZE/2)*N/SIZE));
+    const ix=Math.floor(gx),iz=Math.floor(gz),u=gx-ix,v=gz-iz;
+    const a=pos.getY(ix+(N+1)*iz), b=pos.getY(ix+(N+1)*(iz+1));
+    const c=pos.getY(ix+1+(N+1)*(iz+1)),d=pos.getY(ix+1+(N+1)*iz);
+    return u+v<=1 ? a*(1-u-v)+d*u+b*v : c*(u+v-1)+d*(1-v)+b*(1-u);
+  };
   return root;
 }
 
@@ -1171,6 +1185,25 @@ const CAM = {
 const ease3 = (u) => u * u * (3 - 2 * u);
 function setWorldVisible(v) { world.visible = v; sky.visible = v; }
 function updateWorld(t, u, kind) {
+  // Approximate slow walk, referenced to living elephants, not a measured mammoth gait.
+  const yaw=-0.62, sy=Math.sin(yaw), cy=Math.cos(yaw), travel=distanceAt(t);
+  mammoth.rotation.set(0,yaw,0);
+  mammoth.position.set(sy*travel, floe.userData.height(sy*travel,cy*travel) + .015*Math.sin(t*2.73), cy*travel);
+  const feetState=[];
+  mammoth.userData.legs.forEach((leg,i)=>{
+    const foot=mammoth.userData.feet[i], hip=leg.userData.hip, motion=footAt(t,i);
+    const z=hip.z+motion.offset;
+    const wx=mammoth.position.x+cy*hip.x+sy*z, wz=mammoth.position.z-sy*hip.x+cy*z;
+    const ground=floe.userData.height(wx,wz);
+    const y=ground+motion.lift-mammoth.position.y;
+    foot.position.set(hip.x,y,z);
+    const vertical=hip.h-(y+.20), delta=z-hip.z, length=Math.hypot(vertical,delta);
+    leg.rotation.x=-Math.atan2(delta,vertical);
+    leg.scale.y=length/(hip.h-.08);
+    feetState.push({stance:motion.stance,phase:motion.phase,x:wx,y:ground+motion.lift,z:wz,ground});
+  });
+  mammoth.userData.feetState=feetState;
+  shadow.position.set(mammoth.position.x,floe.userData.height(mammoth.position.x,mammoth.position.z)+.08,mammoth.position.z);
   // snow drift
   const sp = snow.geometry.attributes.position, base = snow.userData.base, seed = snow.userData.seed;
   for (let i = 0; i < seed.length; i++) {
@@ -1211,12 +1244,6 @@ function updateWorld(t, u, kind) {
   // Keep the illustrative coat stable while the DNA graphic appears.
   mammoth.userData.shag.material.opacity = 1;
   mammoth.userData.shag.position.y = 0;
-  // Exploratory joint motion; paws are not yet inverse-kinematics constrained.
-  const phase = t * 1.25;
-  mammoth.userData.legs.forEach((leg, i) => { leg.rotation.x = Math.sin(phase + [0, Math.PI, Math.PI, 0][i]) * 0.10; });
-  // slow body sway so the animal feels alive
-  mammoth.rotation.y = -0.62 + Math.sin(t * 0.32) * 0.04;
-  mammoth.position.y = Math.sin(t * 0.9) * 0.035;
   warm.intensity = 5 + Math.sin(t * 1.3) * 0.7;
   key.intensity = 2.6 + Math.sin(t * 0.4) * 0.12;
   // The wool rig leans in as the camera closes on the animal.
@@ -1330,8 +1357,8 @@ function applyCamera(shot, u) {
   const cam = CAM[shot.id];
   if (!cam) return;
   const e = ease3(u);
-  camera.position.copy(mixV(cam.from[0], cam.from[1], e));
-  camera.lookAt(mixV(cam.look[0], cam.look[1], e));
+  camera.position.copy(mixV(cam.from[0], cam.from[1], e)).add(mammoth.position);
+  camera.lookAt(mixV(cam.look[0], cam.look[1], e).add(mammoth.position));
   const fov = shot.id === 'shoulder-wool' ? 35 : shot.id === 'resolve' ? 42 : 38;
   if (Math.abs(camera.fov - fov) > 0.01) { camera.fov = fov; camera.updateProjectionMatrix(); }
 }

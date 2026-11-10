@@ -1,0 +1,30 @@
+{
+  "from": 180,
+  "to": 270,
+  "frames": 90,
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "source_sha256": "45e3d106bee51cae11aa31ca4053a7dce3c079046d5f2165fc5cf3e224a53c96",
+  "query": "",
+  "video_sha256": "fc9d2270040f81b6c6f61fb31b17c94d5f9f2c95f1769c73ac0b2839d6d32eaf",
+  "scene_runs": [
+    {
+      "shot": "shore",
+      "from": 180,
+      "to": 270
+    }
+  ],
+  "page_errors": [],
+  "render_seconds": 115.351,
+  "note": "Three seconds of source frames only, not a finished scene or full film. Source hash covers scene.mjs, timeline.json, gait.mjs; older renderer hash excludes assets and stage.",
+  "material_sha256": {
+    "fur.jpg": "e128c52e0449249d7b04973141c416e9f476174141a4fc44e56f4648d43890d8",
+    "tundra.jpg": "330a73e60aa9219b6df618ae27dcc11d8bb707036ce4a74b5c6d126cea91f043"
+  },
+  "silent_preview": {
+    "file": "deliverables/Last-Mammoths-Gait-Test-3s.mp4",
+    "sha256": "a7603a2592cb8fa71bf26b82b2096f0970d5a37ce0e91ef8897b62c3e66d3d3b",
+    "bytes": 626489
+  }
+}
