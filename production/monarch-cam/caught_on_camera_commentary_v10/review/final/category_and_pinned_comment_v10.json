@@ -1,0 +1,232 @@
+{
+  "schema_version": "1.0",
+  "edition": "v10_category_and_pinned_comment_pack",
+  "status": "draft_not_published",
+  "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
+  "deliverable_sha256": "608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7",
+  "deliverable_bytes": 34495086,
+  "video_facts_used": {
+    "duration_seconds": 49.4,
+    "format": "1080x1920 vertical Short, 30 fps",
+    "refraction_label_timeline": "23.42-29.90 s",
+    "loop_back_and_credit_timeline": "44.24-49.40 s",
+    "on_screen_credit": "Source: NASA / Artemis II",
+    "nasa_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "nasa_page": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "beats": 8,
+    "vo_words": 118,
+    "caption_events": 118
+  },
+  "category": {
+    "primary": {
+      "studio_label": "Science & Technology",
+      "commonly_documented_api_id": 28,
+      "api_id_caveat": "28 is a widely documented third-party mapping, not re-verified here via videoCategories.list (no API key). Studio shows the label, not the ID — you do not need the ID to set it. [8](https://developers.google.com/youtube/v3/docs/videoCategories/list)",
+      "prior_study_suggestion": "Education / science experiment (viral_metadata_v10.json, before this pack)"
+    },
+    "alternate": {
+      "studio_label": "Education",
+      "commonly_documented_api_id": 27,
+      "api_id_caveat": "27 is a widely documented third-party mapping; see the same caveat [8](https://developers.google.com/youtube/v3/docs/videoCategories/list).",
+      "education_type": "science experiment",
+      "education_type_other_option": "real life application",
+      "extra_fields_studio_may_ask": [
+        "Type",
+        "Problems",
+        "Academic system",
+        "Level",
+        "Exam, course, or standard"
+      ],
+      "extra_fields_note": "Education khud 'science experiment' aur 'real life application' Type deta hai [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en) — dono is clip par fit baithte hain. Academic system / Level / Exam fields bhi dikhte hain, lekin inhe khali chhod sakte hain; ye 49.4 s general-audience Short kisi exam ya grade se bound nahi hai."
+    },
+    "where_to_set": [
+      "YouTube Studio (desktop) -> Content -> click the video -> Details -> SHOW MORE -> Category [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en)",
+      "Upload ke time bhi: Studio -> CREATE -> Upload videos -> Edit -> SHOW MORE -> Category [2](https://support.google.com/youtube/answer/57407?hl=en)",
+      "Baad me badalna ho to: Studio -> Content -> video -> settings -> Save [1](https://support.google.com/youtube/answer/57404?hl=en)"
+    ],
+    "why_primary": [
+      "Video ek science / physics explainer hai: curved water sphere refraction se image flip karta hai; NASA Artemis II ka official clip + replay analysis. Isliye topical bucket Science & Technology hai.",
+      "Ye 49.4 s vertical Short hai — 8 beats, word-by-word captions aur loop-back ke saath commentary — koi structured lesson, how-to ya exam-aligned lecture nahi. Isliye main isse broad science bucket me rakhta hoon.",
+      "Pichhli forensic study ne `Education / science experiment` suggest kiya tha aur wo **bhi bilkul sahih hai**: YouTube khud Education ke liye `science experiment` Type deta hai [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en). Ye pack us purane suggestion ko 'galat' qarar nahi deta; sirf do valid options me se aik final pick lock karta hai. Dono se reach / retention ka koi guaranteed farq claim nahi kiya ja sakta."
+    ],
+    "decision_note": "Mera final pick Science & Technology hai; Education + Type `science experiment` equally valid alternate hai. Ye aik categorization judgment hai, koi official ranking, discovery ya engagement rule nahi. Aapko Studio me khud confirm karna hai.",
+    "why_not_education_as_primary": "Agar aap channel ko explicitly educational series ke taur par classify karna chahte hain, ya aapke Studio / region me `Science & Technology` na dikhe, to Education chunlein — Type = `science experiment` (ya `real life application`) aur academic fields khali. Ye koi galat jawab nahi hai.",
+    "region_note": "Category list region-specific hoti hai (regionCode) [8](https://developers.google.com/youtube/v3/docs/videoCategories/list). Agar aapke Studio mein 'Science & Technology' na dikhe, to 'Education' chunlein — dono hi galat nahi hain.",
+    "no_ranking_claim": "Official wording sirf ye hai: 'Select a category so viewers can find your video more easily' [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en); tags bhi 'minimal role' play karte hain [1](https://support.google.com/youtube/answer/57404?hl=en) [7](https://support.google.com/youtube/answer/146402?hl=en). Category se Shorts feed reach, retention, views ya comments badhne ka koi guaranteed asar claim nahi kiya ja sakta.",
+    "operational_advice": "Channel ki baqi science/refraction clips par bhi yahi category rakhein taake classification consistent rahe — ye meri operational salah hai, koi official ranking rule nahi.",
+    "human_must_confirm": true
+  },
+  "pinned_comment": {
+    "primary": {
+      "id": "A",
+      "label": "Replay question (recommended)",
+      "text": "Which moment made you replay — the face flipping upside down, or the loop back at the end?\n\nCurved water bends light (refraction), so the sphere acts like a tiny liquid lens.\n\nSource: NASA / Artemis II, \"Fun with Water Bubbles\". NASA is credited; no endorsement implied.",
+      "characters": 270,
+      "lines": 5
+    },
+    "alternatives": [
+      {
+        "id": "B",
+        "label": "Science-first / value",
+        "text": "Curved water acts like a liquid lens: light bends through the sphere and the face behind it flips.\n\nWhat caught your eye first — the upside-down face around 23s, or the crew's reaction?\n\nSource: NASA / Artemis II (\"Fun with Water Bubbles\"). NASA credited; no endorsement implied.",
+        "characters": 279,
+        "use_case": "Agar aap comment ko chhota 'science note' banana chahte hain, discussion ke saath.",
+        "why": "Pehli line mein video ka asli explanation; sawal doosri line mein; credit aakhir mein."
+      },
+      {
+        "id": "C",
+        "label": "Source-first / rights-heavy",
+        "text": "Source: NASA, \"Fun with Water Bubbles\" (Artemis II) — https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman\n\nIndependent commentary and replay analysis; NASA's native crew audio is retained. NASA is credited, no endorsement implied.\n\nWhat do you think bends the light here?",
+        "characters": 305,
+        "use_case": "Jab source attribution sabse upar chahiye (promotional / monetized context mein sabse cautious).",
+        "why": "Official source link pehle; URLs comments mein hyperlink ban jate hain [3](https://support.google.com/youtube/answer/6000964?hl=en). NASA endorsement ka koi claim nahi [9](https://www.nasa.gov/nasa-brand-center/images-and-media/)."
+      },
+      {
+        "id": "D",
+        "label": "One-line / Shorts mobile",
+        "text": "Refraction: curved water flips the face. Which frame made you replay? Source: NASA / Artemis II — NASA credited, no endorsement implied.",
+        "characters": 136,
+        "use_case": "Mobile par jahan comment preview chhota dikhta hai; ek line mein hook + credit.",
+        "why": "Pinned comment preview ki jagah guaranteed nahi hai, isliye pehli line hi sab kuch keh de [3](https://support.google.com/youtube/answer/6000964?hl=en)."
+      }
+    ],
+    "why_primary": [
+      "Pehli line ek specific, asani se jawab dene wala sawal hai jo video ke do sachche moments se juda hai: ~23.42 s par REFRACTION / ulta chehra aur ~44.24 s par loop-back + on-screen credit.",
+      "Genuine sawal poochna allowed hai; lekin incentive, coercion, 'sub-for-sub', repetitive engagement bait ya fake engagement mana hai [5](https://support.google.com/youtube/answer/2801973?hl=en). Is comment me koi reward / 'like karo' / 'subscribe karo' nahi hai.",
+      "Doosri line comment ko khud me value deti hai (refraction) aur video ki asli explanation se match karti hai — malicious clickbait nahi [5](https://support.google.com/youtube/answer/2801973?hl=en).",
+      "Teesri line on-screen credit 'Source: NASA / Artemis II' aur description ke attribution ko mirror karti hai; 'NASA credited; no endorsement implied' likha hai [9](https://www.nasa.gov/nasa-brand-center/images-and-media/).",
+      "Comment me koi hashtag nahi: hashtag rules title/description par hain, up to 3 title ke paas, >60 ignore, aur unrelated/descriptive stuffing prohibited [6](https://support.google.com/youtube/answer/6390658?hl=en).",
+      "Koi unverified claim nahi: na 'No CGI', na astronaut ke naam, na 'official NASA', na invented date, view count ya audience result."
+    ],
+    "mechanics": [
+      "Comments on rakhein: Settings -> Comments and ratings [1](https://support.google.com/youtube/answer/57404?hl=en); comments off/limited hone par pin kaam nahi karega [3](https://support.google.com/youtube/answer/6000964?hl=en).",
+      "Channel par 'Advanced features' enable karein — pin karne ke liye zaroori hai, aur poore channel par dikhne me 24 ghante tak lag sakte hain [3](https://support.google.com/youtube/answer/6000964?hl=en).",
+      "Apna comment post karein, phir uske three-dot menu -> Pin -> PIN [3](https://support.google.com/youtube/answer/6000964?hl=en); ya Studio -> Community -> Published -> More -> Pin [4](https://support.google.com/youtube/answer/9482367?hl=en).",
+      "Shorts ke comments bhi Studio ke 'Content type' filter mein hain, to pin wahan se bhi kiya ja sakta hai [4](https://support.google.com/youtube/answer/9482367?hl=en).",
+      "Mobile par viewer ko comment section expand karna padta hai; pinned comment 'view all' kholne par sabse pehle dikhta hai. Comment preview mein dikhna guaranteed nahi hai [3](https://support.google.com/youtube/answer/6000964?hl=en).",
+      "Isliye pehli line chhoti aur sabse important rakhi hai — sawal — taake truncated preview me bhi kaam kare.",
+      "Ek hi templated comment ko kai videos par repeat na karein; naya comment pin karne par purana apne aap unpin ho jata hai [3](https://support.google.com/youtube/answer/6000964?hl=en) [4](https://support.google.com/youtube/answer/9482367?hl=en)."
+    ],
+    "avoid": [
+      "Like/comment/subscribe ke badle inaam, giveaway, coercion, 'sub-for-sub' ya forced engagement [5](https://support.google.com/youtube/answer/2801973?hl=en).",
+      "'Comment YES', 'tag a friend', 'click the heart' jaisa low-effort repetitive engagement bait [5](https://support.google.com/youtube/answer/2801973?hl=en).",
+      "Aisa hook jo video deliver na kare (malicious clickbait), ya comments me traffic lane ke liye repetitive/deceptive messages [5](https://support.google.com/youtube/answer/2801973?hl=en).",
+      "'Official NASA', 'NASA approved', NASA endorsement, insignia/logo, ya current astronauts ke naam/likeness ka promotional istemal [9](https://www.nasa.gov/nasa-brand-center/images-and-media/) [10](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+      "Hashtag stuffing, unrelated tags, ALL CAPS, emoji-spam ya description wale descriptive tags ko comment me chipkana [6](https://support.google.com/youtube/answer/6390658?hl=en).",
+      "'No CGI' / '100% real' jaise unverified authenticity claims — workspace me human_full_motion_review=false hai.",
+      "Guaranteed viral / retention / views / RPM ya audience-result ka koi claim."
+    ]
+  },
+  "caveats": [
+    "Ye drafting recommendations hain; koi upload, publish, category set ya comment pin actually kiya nahi gaya (status draft_not_published).",
+    "human_creative_approval=false, human_legal_review=false, commercial_monetization_clearance=false, publicity_or_privacy_permission_obtained=false — sab workspace evidence me waise hi hain.",
+    "High-severity unresolved gate: NASA ke exact wording ke mutabiq 'Short-form social media content generally is considered promotional content' aur 'Imagery with ... current astronauts ... may not be used in promotional content'. Is Short me identifiable current astronauts / possible CSA personnel hain; isliye commercial/monetized ya kisi bhi promotional publication se pehle written clearance aur human legal review zaroori hai. Ye pinned comment us gate ko theek nahi karta [10](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+    "Official platform/NASA documentation legal opinion nahi hai.",
+    "Category ya pinned comment se reach, retention, comments, CTR, RPM ya virality ka koi guaranteed natija claim nahi kiya jata."
+  ],
+  "claims": {
+    "human_creative_approval": false,
+    "human_native_audio_listening": false,
+    "human_legal_review": false,
+    "commercial_monetization_clearance": false,
+    "legal_opinion": false,
+    "upload_or_publish_performed": false,
+    "reach_or_engagement_guaranteed": false,
+    "virality_guaranteed": false,
+    "perfection_claim": false,
+    "technical_qc_pass": true,
+    "technical_qc_reference": "review/final/qc_summary.json"
+  },
+  "sources": [
+    {
+      "ref": 1,
+      "id": "YT_EDIT_SETTINGS",
+      "title": "Edit video settings - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/57404?hl=en",
+      "authority": "official_help",
+      "used_for": "Category under SHOW MORE; Education sub-fields; tags' minimal discovery role; comments and ratings setting"
+    },
+    {
+      "ref": 2,
+      "id": "YT_UPLOAD",
+      "title": "Upload YouTube videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/57407?hl=en",
+      "authority": "official_help",
+      "used_for": "Category field, advanced settings, vertical/Shorts upload details"
+    },
+    {
+      "ref": 3,
+      "id": "YT_COMMENTS",
+      "title": "Post & interact with comments - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6000964?hl=en",
+      "authority": "official_help",
+      "used_for": "Pin mechanics, advanced-features requirement, mobile expansion, comment preview not guaranteed, links become hyperlinks"
+    },
+    {
+      "ref": 4,
+      "id": "YT_STUDIO_COMMENTS",
+      "title": "Review & reply to comments - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/9482367?hl=en",
+      "authority": "official_help",
+      "used_for": "Studio > Community > Pin; Shorts content-type filter; unpin"
+    },
+    {
+      "ref": 5,
+      "id": "YT_SPAM",
+      "title": "Spam Policy - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/2801973?hl=en",
+      "authority": "official_policy",
+      "used_for": "Asking for comments is allowed; coercion, rewards, fake engagement, comment spam and malicious clickbait are not"
+    },
+    {
+      "ref": 6,
+      "id": "YT_HASHTAGS",
+      "title": "Find playlists & videos using hashtags - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6390658?hl=en",
+      "authority": "official_help",
+      "used_for": "Up to 3 hashtags above title; >60 ignored; unrelated/descriptive-tag stuffing prohibited"
+    },
+    {
+      "ref": 7,
+      "id": "YT_TAGS",
+      "title": "Add tags to your videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/146402?hl=en",
+      "authority": "official_help",
+      "used_for": "Tags mainly correct common misspellings and otherwise play a minimal role in discovery"
+    },
+    {
+      "ref": 8,
+      "id": "YT_CATEGORIES_API",
+      "title": "VideoCategories: list — YouTube Data API",
+      "url": "https://developers.google.com/youtube/v3/docs/videoCategories/list",
+      "authority": "official_developer_docs",
+      "used_for": "Category list is region-specific (regionCode); category IDs come from the API"
+    },
+    {
+      "ref": 9,
+      "id": "NASA_IMAGES",
+      "title": "NASA Brand Center - Images and Media",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Acknowledge NASA; no implied endorsement; insignia and identifiable-person restrictions"
+    },
+    {
+      "ref": 10,
+      "id": "NASA_STRATEGIC",
+      "title": "NASA Strategic Partnerships (brand guidance)",
+      "url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Exact wording: 'Short-form social media content generally is considered promotional content' and 'Imagery with ... current astronauts ... may not be used in promotional content'; no endorsement/co-branding. The sources ledger's /nasa-brand-center/strategic-partnerships/ URL redirects here."
+    }
+  ],
+  "workspace_evidence": [
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_study_v10.md",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/edit_ledger_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json"
+  ],
+  "generated_by": "build_category_pinned_comment_v10.py",
+  "note": "Last-mile pack: run AFTER build_viral_metadata_v10.py if the forensic study is regenerated, so the category / pinned-comment patches are re-applied."
+}

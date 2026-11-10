@@ -97,6 +97,42 @@
     "generic synthetic voiceover",
     "word by word captions"
   ],
-  "pinned_comment": "Which frame made you replay it — the flip around 23s or the loop back at 44s? Source: NASA / Artemis II.",
-  "community_post": "A 49-second replay breakdown of NASA's Artemis II water bubble: the floating sphere acts like a liquid lens and flips the face behind it. Native crew audio kept, refraction explained, word-by-word captions burned in. Source: NASA / Artemis II. No endorsement implied."
+  "pinned_comment": "Which moment made you replay — the face flipping upside down, or the loop back at the end?\n\nCurved water bends light (refraction), so the sphere acts like a tiny liquid lens.\n\nSource: NASA / Artemis II, \"Fun with Water Bubbles\". NASA is credited; no endorsement implied.",
+  "community_post": "A 49-second replay breakdown of NASA's Artemis II water bubble: the floating sphere acts like a liquid lens and flips the face behind it. Native crew audio kept, refraction explained, word-by-word captions burned in. Source: NASA / Artemis II. No endorsement implied.",
+  "category": {
+    "primary": "Science & Technology",
+    "alternate": "Education",
+    "alternate_education_type": "science experiment",
+    "where_to_set": [
+      "YouTube Studio (desktop) -> Content -> click the video -> Details -> SHOW MORE -> Category [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en)",
+      "Upload ke time bhi: Studio -> CREATE -> Upload videos -> Edit -> SHOW MORE -> Category [2](https://support.google.com/youtube/answer/57407?hl=en)",
+      "Baad me badalna ho to: Studio -> Content -> video -> settings -> Save [1](https://support.google.com/youtube/answer/57404?hl=en)"
+    ],
+    "region_note": "Category list region-specific hoti hai (regionCode) [8](https://developers.google.com/youtube/v3/docs/videoCategories/list). Agar aapke Studio mein 'Science & Technology' na dikhe, to 'Education' chunlein — dono hi galat nahi hain.",
+    "no_ranking_claim": "Official wording sirf ye hai: 'Select a category so viewers can find your video more easily' [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en); tags bhi 'minimal role' play karte hain [1](https://support.google.com/youtube/answer/57404?hl=en) [7](https://support.google.com/youtube/answer/146402?hl=en). Category se Shorts feed reach, retention, views ya comments badhne ka koi guaranteed asar claim nahi kiya ja sakta.",
+    "human_must_confirm": true,
+    "evidence": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.json"
+  },
+  "pinned_comment_alternatives": [
+    {
+      "id": "B",
+      "label": "Science-first / value",
+      "text": "Curved water acts like a liquid lens: light bends through the sphere and the face behind it flips.\n\nWhat caught your eye first — the upside-down face around 23s, or the crew's reaction?\n\nSource: NASA / Artemis II (\"Fun with Water Bubbles\"). NASA credited; no endorsement implied.",
+      "characters": 279
+    },
+    {
+      "id": "C",
+      "label": "Source-first / rights-heavy",
+      "text": "Source: NASA, \"Fun with Water Bubbles\" (Artemis II) — https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman\n\nIndependent commentary and replay analysis; NASA's native crew audio is retained. NASA is credited, no endorsement implied.\n\nWhat do you think bends the light here?",
+      "characters": 305
+    },
+    {
+      "id": "D",
+      "label": "One-line / Shorts mobile",
+      "text": "Refraction: curved water flips the face. Which frame made you replay? Source: NASA / Artemis II — NASA credited, no endorsement implied.",
+      "characters": 136
+    }
+  ],
+  "category_and_pinned_comment_pack": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.json",
+  "category_and_pinned_comment_study": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.md"
 }

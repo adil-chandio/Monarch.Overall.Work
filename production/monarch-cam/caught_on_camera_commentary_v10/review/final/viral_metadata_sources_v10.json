@@ -323,5 +323,109 @@
         "insignia/logotype/seal not public domain"
       ]
     }
+  ],
+  "category_and_pinned_comment_pack": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.json",
+  "category_and_pinned_comment_study": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.md",
+  "category_and_pinned_comment_sources": [
+    {
+      "ref": 1,
+      "id": "YT_EDIT_SETTINGS",
+      "title": "Edit video settings - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/57404?hl=en",
+      "authority": "official_help",
+      "used_for": "Category under SHOW MORE; Education sub-fields; tags' minimal discovery role; comments and ratings setting",
+      "fetched": true,
+      "citation": "[1](https://support.google.com/youtube/answer/57404?hl=en)"
+    },
+    {
+      "ref": 2,
+      "id": "YT_UPLOAD",
+      "title": "Upload YouTube videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/57407?hl=en",
+      "authority": "official_help",
+      "used_for": "Category field, advanced settings, vertical/Shorts upload details",
+      "fetched": true,
+      "citation": "[2](https://support.google.com/youtube/answer/57407?hl=en)"
+    },
+    {
+      "ref": 3,
+      "id": "YT_COMMENTS",
+      "title": "Post & interact with comments - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6000964?hl=en",
+      "authority": "official_help",
+      "used_for": "Pin mechanics, advanced-features requirement, mobile expansion, comment preview not guaranteed, links become hyperlinks",
+      "fetched": true,
+      "citation": "[3](https://support.google.com/youtube/answer/6000964?hl=en)"
+    },
+    {
+      "ref": 4,
+      "id": "YT_STUDIO_COMMENTS",
+      "title": "Review & reply to comments - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/9482367?hl=en",
+      "authority": "official_help",
+      "used_for": "Studio > Community > Pin; Shorts content-type filter; unpin",
+      "fetched": true,
+      "citation": "[4](https://support.google.com/youtube/answer/9482367?hl=en)"
+    },
+    {
+      "ref": 5,
+      "id": "YT_SPAM",
+      "title": "Spam Policy - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/2801973?hl=en",
+      "authority": "official_policy",
+      "used_for": "Asking for comments is allowed; coercion, rewards, fake engagement, comment spam and malicious clickbait are not",
+      "fetched": true,
+      "citation": "[5](https://support.google.com/youtube/answer/2801973?hl=en)"
+    },
+    {
+      "ref": 6,
+      "id": "YT_HASHTAGS",
+      "title": "Find playlists & videos using hashtags - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6390658?hl=en",
+      "authority": "official_help",
+      "used_for": "Up to 3 hashtags above title; >60 ignored; unrelated/descriptive-tag stuffing prohibited",
+      "fetched": true,
+      "citation": "[6](https://support.google.com/youtube/answer/6390658?hl=en)"
+    },
+    {
+      "ref": 7,
+      "id": "YT_TAGS",
+      "title": "Add tags to your videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/146402?hl=en",
+      "authority": "official_help",
+      "used_for": "Tags mainly correct common misspellings and otherwise play a minimal role in discovery",
+      "fetched": true,
+      "citation": "[7](https://support.google.com/youtube/answer/146402?hl=en)"
+    },
+    {
+      "ref": 8,
+      "id": "YT_CATEGORIES_API",
+      "title": "VideoCategories: list — YouTube Data API",
+      "url": "https://developers.google.com/youtube/v3/docs/videoCategories/list",
+      "authority": "official_developer_docs",
+      "used_for": "Category list is region-specific (regionCode); category IDs come from the API",
+      "fetched": true,
+      "citation": "[8](https://developers.google.com/youtube/v3/docs/videoCategories/list)"
+    },
+    {
+      "ref": 9,
+      "id": "NASA_IMAGES",
+      "title": "NASA Brand Center - Images and Media",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Acknowledge NASA; no implied endorsement; insignia and identifiable-person restrictions",
+      "fetched": true,
+      "citation": "[9](https://www.nasa.gov/nasa-brand-center/images-and-media/)"
+    },
+    {
+      "ref": 10,
+      "id": "NASA_STRATEGIC",
+      "title": "NASA Strategic Partnerships (brand guidance)",
+      "url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Exact wording: 'Short-form social media content generally is considered promotional content' and 'Imagery with ... current astronauts ... may not be used in promotional content'; no endorsement/co-branding. The sources ledger's /nasa-brand-center/strategic-partnerships/ URL redirects here.",
+      "fetched": true,
+      "citation": "[10](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/)"
+    }
   ]
 }

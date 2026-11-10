@@ -725,13 +725,17 @@
     ],
     "keywords_note": "Research/search-intent terms only; no search-volume or ranking claim.",
     "category": {
-      "suggestion": "Education",
-      "education_type_options": [
-        "science experiment",
-        "real life application",
-        "concept overview"
+      "primary": "Science & Technology",
+      "previously_suggested": "Education",
+      "superseded_by": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.json",
+      "alternate": "Education",
+      "alternate_education_type": "science experiment",
+      "why_primary": [
+        "Video ek science / physics explainer hai: curved water sphere refraction se image flip karta hai; NASA Artemis II ka official clip + replay analysis. Isliye topical bucket Science & Technology hai.",
+        "Ye 49.4 s vertical Short hai — 8 beats, word-by-word captions aur loop-back ke saath commentary — koi structured lesson, how-to ya exam-aligned lecture nahi. Isliye main isse broad science bucket me rakhta hoon.",
+        "Pichhli forensic study ne `Education / science experiment` suggest kiya tha aur wo **bhi bilkul sahih hai**: YouTube khud Education ke liye `science experiment` Type deta hai [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en). Ye pack us purane suggestion ko 'galat' qarar nahi deta; sirf do valid options me se aik final pick lock karta hai. Dono se reach / retention ka koi guaranteed farq claim nahi kiya ja sakta."
       ],
-      "alternative": "Science & Technology if available in Studio",
+      "no_ranking_claim": "Official wording sirf ye hai: 'Select a category so viewers can find your video more easily' [1](https://support.google.com/youtube/answer/57404?hl=en) [2](https://support.google.com/youtube/answer/57407?hl=en); tags bhi 'minimal role' play karte hain [1](https://support.google.com/youtube/answer/57404?hl=en) [7](https://support.google.com/youtube/answer/146402?hl=en). Category se Shorts feed reach, retention, views ya comments badhne ka koi guaranteed asar claim nahi kiya ja sakta.",
       "human_must_confirm": true
     },
     "language": "English",
@@ -789,7 +793,7 @@
       },
       {
         "setting": "Category",
-        "value": "Education / science experiment (suggested)",
+        "value": "Science & Technology (primary); Education only if needed (see category_and_pinned_comment_v10.json)",
         "human_confirm": true
       },
       {
@@ -853,9 +857,29 @@
         "human_confirm": true
       }
     ],
-    "pinned_comment": "Which frame made you replay it — the flip around 23s or the loop back at 44s? Source: NASA / Artemis II.",
+    "pinned_comment": "Which moment made you replay — the face flipping upside down, or the loop back at the end?\n\nCurved water bends light (refraction), so the sphere acts like a tiny liquid lens.\n\nSource: NASA / Artemis II, \"Fun with Water Bubbles\". NASA is credited; no endorsement implied.",
     "pinned_comment_note": "A genuine question is allowed; do not offer rewards for likes/comments/subs.",
-    "community_post": "A 49-second replay breakdown of NASA's Artemis II water bubble: the floating sphere acts like a liquid lens and flips the face behind it. Native crew audio kept, refraction explained, word-by-word captions burned in. Source: NASA / Artemis II. No endorsement implied."
+    "community_post": "A 49-second replay breakdown of NASA's Artemis II water bubble: the floating sphere acts like a liquid lens and flips the face behind it. Native crew audio kept, refraction explained, word-by-word captions burned in. Source: NASA / Artemis II. No endorsement implied.",
+    "pinned_comment_alternatives": [
+      {
+        "id": "B",
+        "label": "Science-first / value",
+        "text": "Curved water acts like a liquid lens: light bends through the sphere and the face behind it flips.\n\nWhat caught your eye first — the upside-down face around 23s, or the crew's reaction?\n\nSource: NASA / Artemis II (\"Fun with Water Bubbles\"). NASA credited; no endorsement implied.",
+        "characters": 279
+      },
+      {
+        "id": "C",
+        "label": "Source-first / rights-heavy",
+        "text": "Source: NASA, \"Fun with Water Bubbles\" (Artemis II) — https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman\n\nIndependent commentary and replay analysis; NASA's native crew audio is retained. NASA is credited, no endorsement implied.\n\nWhat do you think bends the light here?",
+        "characters": 305
+      },
+      {
+        "id": "D",
+        "label": "One-line / Shorts mobile",
+        "text": "Refraction: curved water flips the face. Which frame made you replay? Source: NASA / Artemis II — NASA credited, no endorsement implied.",
+        "characters": 136
+      }
+    ]
   },
   "cross_platform_adaptations": [
     {
@@ -1973,5 +1997,7 @@
   ],
   "source_quality_note": "Official YouTube Help and NASA pages are used for policy claims. Community posts surfaced in search (e.g. a 60-second Shorts definition or tag-stuffing anecdotes) are not used as authoritative policy here.",
   "citation_policy": "External claims use Arena web_search result IDs/URLs in [id](url) form. Workspace claims cite committed file paths.",
-  "generated_by": "production/monarch-cam/caught_on_camera_commentary_v10/build_viral_metadata_v10.py"
+  "generated_by": "production/monarch-cam/caught_on_camera_commentary_v10/build_viral_metadata_v10.py",
+  "category_and_pinned_comment_pack": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.json",
+  "category_and_pinned_comment_study": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.md"
 }

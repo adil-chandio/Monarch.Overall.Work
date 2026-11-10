@@ -53,7 +53,9 @@
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_study_v10.md",
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_v10.json",
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_sources_v10.json",
-    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_waveform_comparison.png"
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_waveform_comparison.png",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.md"
   ],
   "note": "technical_pass is deliberately separate from human_creative_approval=false. The VO glitch correction removed every piecewise-linear declick ramp and uses one continuous slope conditioner with zero sample replacement; the eight source voice-01 WAVs are unchanged. The forensic metadata study and sources ledger are drafting/research evidence only. The Short remains an original commentary/analysis edit of one official NASA master, not a raw reupload. No guaranteed virality, perfection, legal clearance or audience result is claimed.",
   "metadata_study": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_study_v10.md",

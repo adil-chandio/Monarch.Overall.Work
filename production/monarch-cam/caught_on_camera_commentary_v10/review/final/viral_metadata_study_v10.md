@@ -9,6 +9,8 @@
 **Machine-readable pack:** `production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_v10.json`  
 **Sources ledger:** `production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_sources_v10.json`
 
+> **Updated recommendation:** category aur pinned comment ka final, evidence-linked pack `production/monarch-cam/caught_on_camera_commentary_v10/review/final/category_and_pinned_comment_v10.md` me hai. Neeche wali category/pinned values usi se sync ki gayi hain.
+
 > **Post-cut-off audio revision (VO glitch fix).** Is study ke baad user ne report kiya ke voice over me *“buffering glitches jesa sound”* tha. Isliye audio chain badla gaya: 7-sample narrow declick aur uski linear ramps hata kar ek continuous soft-knee slope conditioner lagaya gaya; kisi sample ko interpolation se replace nahi kiya gaya, aur VO ka 200–1000 Hz fundamental lagbhag untouched rakha gaya. Neeche diye gaye audio-forensics numbers (SHA-256 `efce2ea…`, 34,500,681 bytes, −14.66 LUFS, air −0.28 dB, narrow-repair events) **evidence cut-off `8965beb` ka historical snapshot** hain, current deliverable nahi. Current values ke liye `qc_summary.json`, `audio_qc.json` aur `vo_quality_fix_v10.json` dekhen: SHA-256 `608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7`, 34,495,086 bytes, chain `dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick`, −14.60 LUFS, 9/9 audio gates, 33/33 technical checks. Metadata recommendations, title/description/hashtags, policy matrix aur rights/legal caveats **unchanged** hain. Ye ek objective engineering correction hai — human listening sign-off, creative approval, legal clearance, perfection ya guaranteed result ka claim nahi.
 
 ---
@@ -72,7 +74,9 @@ Tags mainly correct misspellings and otherwise play a minimal role [2](https://s
 **Pinned comment**
 
 ```text
-Which frame made you replay it — the flip around 23s or the loop back at 44s? Source: NASA / Artemis II.
+Which moment made you replay — the face flipping upside down, or the loop back at the end?
+Curved water bends light (refraction), so the sphere acts like a tiny liquid lens.
+Source: NASA / Artemis II, "Fun with Water Bubbles". NASA is credited; no endorsement implied.
 ```
 
 A genuine question is allowed; incentives/coercion/fake engagement are not [1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365).
@@ -232,7 +236,7 @@ This is transformative commentary/analysis with original VO, captions and replay
 | Description | primary description above | YES |
 | Hashtags | in description, 6 tags | YES |
 | Tags | tag field only | YES |
-| Category | Education / science experiment (suggested) | YES |
+| Category | Science & Technology (primary); Education only if needed | YES |
 | Language | English | YES |
 | Audience / made for kids | human decision required | YES |
 | License | Standard YouTube License suggested; not Creative Commons over NASA footage/persons | YES |
@@ -264,7 +268,7 @@ Title/description limits, category/education type, language, captions, license, 
 | Title | `NASA Water Bubble Flips an Astronaut's Face` / `NASA Water Bubble Flips an Astronaut's Face` / `Why Is That Astronaut Upside Down?` |
 | First description line | `payoff-first` / `science-first` / `rights-first` |
 | Cover frame | `0.0 s flash` / `23.42 s REFRACTION label frame` |
-| Pinned comment | `Which frame made you replay it — the flip around 23s or the loop back at 44s? Source: NASA / Artemis II.` / `No pinned comment` |
+| Pinned comment | `A — replay question (recommended)` / `D — one-line Shorts` / `No pinned comment` |
 | Hashtag order | `#Shorts #NASA #ArtemisII first` / `#NASA #ArtemisII #Shorts first` |
 
 - Observe impressions, viewed-vs-ignored, average view duration, average % viewed, likes, post-watch survey and 'not interested' [4](https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts) [2](https://support.google.com/youtube/answer/141805?hl=en).
