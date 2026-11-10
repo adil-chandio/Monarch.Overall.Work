@@ -1,0 +1,327 @@
+{
+  "edition": "v10_one_clip_artemis_ii_forensic_metadata_study",
+  "evidence_cutoff_commit": "8965bebca9634139e1f42854fb84380eff189def",
+  "source_quality_note": "Official YouTube Help and NASA pages are used for policy claims. Community posts surfaced in search (e.g. a 60-second Shorts definition or tag-stuffing anecdotes) are not used as authoritative policy here.",
+  "citation_policy": "External claims use Arena web_search result IDs/URLs in [id](url) form. Workspace claims cite committed file paths.",
+  "sources": [
+    {
+      "ref": "YT_TITLE_TIPS",
+      "batch": "A",
+      "result_id": 9,
+      "citation": "[9](https://support.google.com/youtube/answer/12340300?hl=en-GB)",
+      "title": "Thumbnail & title tips - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/12340300?hl=en-GB",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "accurate succinct titles",
+        "important words first",
+        "limit ALL CAPS/emoji",
+        "custom thumbnail guidance",
+        "searchable vs intriguing titles"
+      ]
+    },
+    {
+      "ref": "YT_DESCRIPTIONS",
+      "batch": "D",
+      "result_id": 3,
+      "citation": "[3](https://support.google.com/youtube/answer/12948449?hl=en)",
+      "title": "Tips for video descriptions - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/12948449?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "first lines visible before Show more",
+        "unique description",
+        "1-2 main words",
+        "5000-char limit",
+        "chapters for longer videos"
+      ]
+    },
+    {
+      "ref": "YT_EDIT_SETTINGS",
+      "batch": "D",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop)",
+      "title": "Edit video settings - Computer - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "100-char title limit",
+        "5000-char description limit",
+        "tags field",
+        "category/education type",
+        "language and captions",
+        "license",
+        "Shorts remixing",
+        "audience/COPPA",
+        "altered content setting",
+        "related video",
+        "recording date/location"
+      ]
+    },
+    {
+      "ref": "YT_HASHTAGS",
+      "batch": "D",
+      "result_id": 1,
+      "citation": "[1](https://support.google.com/youtube/answer/6390658?hl=en)",
+      "title": "Find playlists & videos using hashtags - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6390658?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "up to 3 hashtags shown near title",
+        ">60 hashtags ignored",
+        "no misleading/unrelated hashtags",
+        "no ordinary descriptive tags in description",
+        "no spaces in hashtags"
+      ]
+    },
+    {
+      "ref": "YT_TAGS",
+      "batch": "A",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/146402?hl=en)",
+      "title": "Add tags to your YouTube videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/146402?hl=en",
+      "authority": "official_help",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "tags play a minimal role",
+        "title/thumbnail/description matter more",
+        "excessive tags in description prohibited"
+      ]
+    },
+    {
+      "ref": "YT_SHORTS_DISCOVERY",
+      "batch": "A",
+      "result_id": 4,
+      "citation": "[4](https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts)",
+      "title": "Search & discovery tips - Shorts - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "Shorts ranked by performance and personalization",
+        "avg view duration / avg % viewed / likes / post-watch surveys",
+        "metadata matches viewer search",
+        "no minimum posting cadence"
+      ]
+    },
+    {
+      "ref": "YT_PERF_FAQ",
+      "batch": "E",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/141805?hl=en)",
+      "title": "YouTube performance FAQ & Troubleshooting - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/141805?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "search ranks by title/description/content match and engagement",
+        "tags not important",
+        "avoid clickbait/ALL CAPS/!!!!!",
+        "publish time not known to impact long-term performance",
+        "no required upload cadence",
+        "monetization status not a discovery signal"
+      ]
+    },
+    {
+      "ref": "YT_SPAM",
+      "batch": "E",
+      "result_id": 1,
+      "citation": "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)",
+      "title": "Spam policy - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "scraped content needs transformative editing/commentary/educational value",
+        "malicious clickbait prohibited",
+        "detection evasion prohibited",
+        "asking for likes/comments is allowed",
+        "no incentives/coercion"
+      ]
+    },
+    {
+      "ref": "YT_GENAI",
+      "batch": "B",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/14328491?hl=en)",
+      "title": "Disclosing use of GenAI content - Computer - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/14328491?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "disclose realistic AI-altered content",
+        "caption creation / voice or audio repair / cloning own voice are minor examples",
+        "AI use toggle in Studio",
+        "disclosure alone does not limit reach or monetization"
+      ]
+    },
+    {
+      "ref": "YT_REUSED_FAQ",
+      "batch": "B",
+      "result_id": 7,
+      "citation": "[7](https://support.google.com/youtube/community-guide/271248162/%F0%9F%94%8E-faq-reused-content-youtube%E2%80%99s-partner-program?hl=en)",
+      "title": "FAQ: Reused Content & YouTube's Partner Program - YouTube Community",
+      "url": "https://support.google.com/youtube/community-guide/271248162/%F0%9F%94%8E-faq-reused-content-youtube%E2%80%99s-partner-program?hl=en",
+      "authority": "official_community_faq",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "transformative commentary/educational value",
+        "AI channels can be eligible if original"
+      ]
+    },
+    {
+      "ref": "YT_IMPERSONATION",
+      "batch": "B",
+      "result_id": 8,
+      "citation": "[8](https://support.google.com/youtube/answer/2801947?sjid=14893021524564886382-NA)",
+      "title": "Impersonation policy - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/2801947?sjid=14893021524564886382-NA",
+      "authority": "official_help",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no AI voice clone of a real person",
+        "no false authorization/endorsement"
+      ]
+    },
+    {
+      "ref": "YT_ADS",
+      "batch": "A",
+      "result_id": 6,
+      "citation": "[6](https://support.google.com/youtube/answer/6162278?hl=en)",
+      "title": "Advertiser-friendly content guidelines - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6162278?hl=en",
+      "authority": "official_help",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no profanity/stronger language in title/thumbnail",
+        "science content is generally suitable"
+      ]
+    },
+    {
+      "ref": "NASA_IMAGES",
+      "batch": "C",
+      "result_id": 1,
+      "citation": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+      "title": "NASA Images and Media Usage Guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa",
+      "fetched": true,
+      "chunks": [
+        0,
+        2,
+        3
+      ],
+      "used_for": [
+        "NASA content generally not US-copyrighted",
+        "educational/informational use",
+        "NASA should be acknowledged",
+        "no implied endorsement",
+        "identifiable persons / commercial use may need permission",
+        "current astronauts' names/likenesses restricted in promotional material",
+        "clearances may be needed for cover art / promotional content"
+      ]
+    },
+    {
+      "ref": "NASA_ADVERTISING",
+      "batch": "C",
+      "result_id": 2,
+      "citation": "[2](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/)",
+      "title": "Advertising Guidelines - NASA",
+      "url": "https://www.nasa.gov/nasa-brand-center/advertising-guidelines/",
+      "authority": "official_nasa",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no NASA endorsement",
+        "no insignia in ads",
+        "current astronauts/employees not in ads or marketing"
+      ]
+    },
+    {
+      "ref": "NASA_STRATEGIC",
+      "batch": "C",
+      "result_id": 8,
+      "citation": "[8](https://www.nasa.gov/nasa-brand-center/strategic-partnerships/)",
+      "title": "NASA Strategic Partnerships / Promotional Content",
+      "url": "https://www.nasa.gov/nasa-brand-center/strategic-partnerships/",
+      "authority": "official_nasa",
+      "fetched": true,
+      "chunks": [
+        0,
+        2,
+        3
+      ],
+      "fetched_redirect_url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "used_for": [
+        "publicly available content usable if guidelines followed",
+        "short-form social media generally considered promotional content",
+        "imagery with NASA identifiers/current astronauts/current employees may not be used in promotional content",
+        "no co-branding / sponsorship / endorsement"
+      ]
+    },
+    {
+      "ref": "NASA_BRAND",
+      "batch": "C",
+      "result_id": 3,
+      "citation": "[3](https://www.nasa.gov/nasa-brand-center/)",
+      "title": "NASA Brand Center",
+      "url": "https://www.nasa.gov/nasa-brand-center/",
+      "authority": "official_nasa",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no endorsement or misleading use",
+        "NASA identifiers protected",
+        "third-party copyrighted material needs its own permission"
+      ]
+    },
+    {
+      "ref": "NASA_MERCH",
+      "batch": "C",
+      "result_id": 4,
+      "citation": "[4](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/)",
+      "title": "NASA Merchandise Approvals",
+      "url": "https://www.nasa.gov/nasa-brand-center/merchandise-approvals/",
+      "authority": "official_nasa",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no 'NASA approved' / 'official NASA' / co-branding wording",
+        "insignia/logotype/seal not public domain"
+      ]
+    }
+  ]
+}

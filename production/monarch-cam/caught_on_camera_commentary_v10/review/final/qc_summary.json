@@ -49,9 +49,12 @@
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json",
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/captions_v10.ass",
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_quality_fix_v10.json",
-    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png"
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_study_v10.md",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_sources_v10.json"
   ],
-  "note": "technical_pass is deliberately separate from human_creative_approval=false. The VO clarity correction removed the damped treble cut and broad declick; the Short remains an original commentary/analysis edit of one official NASA master, not a raw reupload. No guaranteed virality or audience result is claimed.",
+  "note": "technical_pass is deliberately separate from human_creative_approval=false. The VO clarity correction removed the damped treble cut and broad declick; the Short remains an original commentary/analysis edit of one official NASA master, not a raw reupload. No guaranteed virality or audience result is claimed. A forensic metadata study and sources ledger were added; they are drafting/research evidence only, not human creative approval, legal clearance, perfection or an audience-result claim. A forensic metadata study and sources ledger were added; they are drafting/research evidence only, not human creative approval, legal clearance, perfection or an audience-result claim.",
   "voice_quality_fix": {
     "applied": true,
     "evidence": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_quality_fix_v10.json",
@@ -64,5 +67,8 @@
     "air_over_high_mid_after_db": -0.28,
     "human_native_audio_listening": false,
     "human_creative_approval": false
-  }
+  },
+  "metadata_study": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_study_v10.md",
+  "metadata_pack": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_v10.json",
+  "metadata_sources": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_sources_v10.json"
 }

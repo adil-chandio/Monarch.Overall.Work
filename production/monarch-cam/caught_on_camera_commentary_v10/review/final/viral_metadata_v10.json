@@ -1,0 +1,1943 @@
+{
+  "schema_version": "1.0",
+  "edition": "v10_one_clip_artemis_ii_forensic_metadata_study",
+  "depth_label": "10x_forensic_metadata_study",
+  "depth_label_note": "A review-depth label only, not a measurable QC, legal, or audience metric.",
+  "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
+  "deliverable_sha256": "efce2ea3391828d4d638d980db179330bd88f21a12f7864e6b0bcac58d50a91f",
+  "deliverable_bytes": 34500681,
+  "evidence_cutoff": {
+    "commit": "8965bebca9634139e1f42854fb84380eff189def",
+    "commit_time_utc": "2026-11-10T01:06:51+00:00",
+    "commit_subject": "fix(v10): clear choked VO with narrow declick and gentle limiter [skip ci]",
+    "note": "No calendar 'today' is asserted; the cut-off is the committed evidence state."
+  },
+  "scope_and_assumptions": {
+    "primary_platform": "YouTube Shorts",
+    "secondary_platforms": [
+      "Instagram Reels",
+      "TikTok",
+      "Facebook Reels",
+      "X",
+      "LinkedIn"
+    ],
+    "assumption": "User asked for exhaustive 'viral metadata'; interpreted as discovery-oriented metadata grounded in the locked V10 asset, not a virality guarantee.",
+    "no_new_video_render": true,
+    "no_new_reference_frame_request": true,
+    "research_gate": "Prior V10 clip-scout research and all 11 contact sheets are already locked; not redone.",
+    "external_research": "Official YouTube Help and NASA Brand/Media pages fetched via Arena web tools; no YouTube Data API key, channel analytics, trend database, A/B results or audience data used.",
+    "status": "draft_not_published"
+  },
+  "non_claims": {
+    "virality_guarantee": false,
+    "audience_result_claim": false,
+    "retention_guarantee": false,
+    "ctr_or_view_count_claim": false,
+    "revenue_or_rpm_claim": false,
+    "human_creative_approval": false,
+    "human_native_audio_listening": false,
+    "human_full_motion_review": false,
+    "human_legal_review": false,
+    "legal_opinion": false,
+    "written_astronaut_or_csa_permission": false,
+    "commercial_monetization_clearance": false,
+    "nasa_endorsement": false,
+    "nasa_approval": false,
+    "perfection_claim": false,
+    "zero_flaw_claim": false,
+    "zero_omission_claim": false
+  },
+  "asset_forensics": {
+    "duration_seconds": 49.4,
+    "frame_count": 1482,
+    "fps": 30.0,
+    "resolution": "1080x1920",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2,
+    "technical_pass": true,
+    "technical_checks": "33/33",
+    "nine_audio_gates_pass": true,
+    "human_creative_approval": false
+  },
+  "source_provenance": {
+    "nasa_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "title": "Fun with Water Bubbles",
+    "date_created": "2026-04-04",
+    "source_page": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "direct_4k_url": "https://images-assets.nasa.gov/video/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman~orig.mp4",
+    "original_sha256": "7fd9cd0cfc22451910ac8fa8848b5252c51320a82c193e3a98cf7c0aa725c0dc",
+    "vertical_master_sha256": "11395618c0db74164e35de8186b079f974316f13fd5c25efb789574b22d5960c",
+    "vertical_master_bytes": 29314216,
+    "one_clip_only": true,
+    "clip_lock": {
+      "locked": true,
+      "locked_at_utc": "2026-11-09",
+      "locked_for": "v10_one_clip_commentary_short",
+      "supersedes": [
+        "rejected_bear_nps_lane",
+        "v9_ranking_short",
+        "danny_leon_repost",
+        "unverified_compilations",
+        "github_archive_mp4s"
+      ]
+    },
+    "rubric_total": 91,
+    "rubric_minimum": 78,
+    "kill_switches_triggered": []
+  },
+  "edit_forensics": {
+    "visual_segments": [
+      {
+        "id": "payoff_flash",
+        "timeline_in": 0.0,
+        "timeline_out": 1.5,
+        "source_in": 6.0,
+        "source_out": 7.5,
+        "zoom": 1.08,
+        "purpose": "first-3-second mute-readable inverted face"
+      },
+      {
+        "id": "main_source",
+        "timeline_in": 1.5,
+        "timeline_out": 44.2,
+        "source_in": 0.0,
+        "source_out": 42.7,
+        "zoom": 1.0,
+        "purpose": "clean official source with commentary"
+      },
+      {
+        "id": "loop_back",
+        "timeline_in": 44.2,
+        "timeline_out": 49.4,
+        "source_in": 6.0,
+        "source_out": 11.199999999999996,
+        "zoom": 1.08,
+        "purpose": "return to the payoff frame for replay/loop"
+      }
+    ],
+    "beats": [
+      {
+        "beat": 1,
+        "timeline_in": 0.0,
+        "timeline_out": 5.074,
+        "source_in": 6.0,
+        "source_out": 3.574,
+        "vo_text": "That is not a lens. Watch the face inside that floating water ball.",
+        "word_count": 13,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b1_v10.wav",
+        "purpose": "payoff flash / hook"
+      },
+      {
+        "beat": 2,
+        "timeline_in": 5.174,
+        "timeline_out": 12.337,
+        "source_in": 3.674,
+        "source_out": 10.837,
+        "vo_text": "Artemis Two astronauts were playing with one sphere of water near the Moon. Almost no gravity pulling it down.",
+        "word_count": 19,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b2_v10.wav",
+        "purpose": "context / rewind"
+      },
+      {
+        "beat": 3,
+        "timeline_in": 12.437,
+        "timeline_out": 17.209,
+        "source_in": 10.937,
+        "source_out": 15.709,
+        "vo_text": "They guide it with a straw, and the clear orb becomes a tiny crystal ball.",
+        "word_count": 15,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b3_v10.wav",
+        "purpose": "setup"
+      },
+      {
+        "beat": 4,
+        "timeline_in": 17.309,
+        "timeline_out": 23.323,
+        "source_in": 15.809,
+        "source_out": 21.823,
+        "vo_text": "One touch, and the sphere collapses. The crew literally laughs: Crazy.",
+        "word_count": 11,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b4_v10.wav",
+        "purpose": "collapse / native laugh"
+      },
+      {
+        "beat": 5,
+        "timeline_in": 23.423,
+        "timeline_out": 30.203,
+        "source_in": 21.923,
+        "source_out": 28.703,
+        "vo_text": "But here is the part people replay. Look through it again: the astronaut behind it is upside down.",
+        "word_count": 18,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b5_v10.wav",
+        "purpose": "rehook / inverted face"
+      },
+      {
+        "beat": 6,
+        "timeline_in": 30.303,
+        "timeline_out": 36.572,
+        "source_in": 28.803,
+        "source_out": 35.072,
+        "vo_text": "That is refraction. Light bends through curved water, so the image flips before your eyes.",
+        "word_count": 15,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b6_v10.wav",
+        "purpose": "science explanation"
+      },
+      {
+        "beat": 7,
+        "timeline_in": 36.672,
+        "timeline_out": 44.137,
+        "source_in": 35.172,
+        "source_out": 42.637,
+        "vo_text": "No CGI. No staged skit. Just surface tension holding a liquid lens in microgravity.",
+        "word_count": 14,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b7_v10.wav",
+        "purpose": "authenticity / analysis"
+      },
+      {
+        "beat": 8,
+        "timeline_in": 44.237,
+        "timeline_out": 49.392,
+        "source_in": 6.037,
+        "source_out": 11.192,
+        "vo_text": "Back to the start. That upside-down face is still there. Watch it again.",
+        "word_count": 13,
+        "vo_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/vo_b8_v10.wav",
+        "purpose": "loop-back / soft CTA"
+      }
+    ],
+    "script": {
+      "variant": "A",
+      "hook": 1,
+      "word_count": 118,
+      "path": "production/monarch-cam/caught_on_camera_commentary_v10/script_variants_v10.md"
+    },
+    "captions": {
+      "style": "one word at a time, burned with ASS",
+      "word_count": 118,
+      "ass_path": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/captions_v10.ass",
+      "timings_path": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/caption_timings.json",
+      "safe_zone_check": {
+        "safe_zone": {
+          "top": 250,
+          "bottom": 1560,
+          "left": 80,
+          "right": 1000
+        },
+        "longest_word": "MICROGRAVITY.",
+        "estimated_widths_px": {
+          "word": 777,
+          "label": 328,
+          "credit": 429
+        },
+        "checks": {
+          "word_margins_l_r": true,
+          "word_horizontal": true,
+          "word_vertical": true,
+          "label_horizontal": true,
+          "label_vertical": true,
+          "credit_horizontal": true,
+          "credit_vertical": true,
+          "one_word_at_a_time": true
+        },
+        "pass": true
+      }
+    },
+    "safe_zone": {
+      "top": 250,
+      "bottom": 1560,
+      "left": 80,
+      "right": 1000
+    },
+    "on_screen_label": {
+      "text": "REFRACTION",
+      "timeline_in": 23.42,
+      "timeline_out": 29.9,
+      "y_px": 320
+    },
+    "on_screen_credit": {
+      "text": "Source: NASA / Artemis II",
+      "timeline_in": 44.24,
+      "timeline_out": 49.4,
+      "y_px": 1560
+    },
+    "word_captions_y_px": 1480,
+    "contact_sheets": [
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/final_sheet_01.jpg",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/final_sheet_02.jpg",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/final_sheet_03.jpg",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/final_sheet_04.jpg",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/final_sheet_05.jpg",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/final_sheet_06.jpg",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/final_sheet_07.jpg"
+    ],
+    "contact_sheet_count": 7,
+    "human_full_motion_review": false
+  },
+  "audio_forensics": {
+    "native_audio_policy": {
+      "native_source_audio_retained": true,
+      "voiceover": true,
+      "voice_id": "voice-01",
+      "voice_source": "user-selected deep-male voice from add_voice battle 01",
+      "generic_synthetic_voiceover": true,
+      "real_person_voice_clone": false,
+      "no_music": true,
+      "no_sfx": true,
+      "no_procedural_bed": true,
+      "no_audio_substitution": true,
+      "no_generated_native_audio_claim": true
+    },
+    "reaction_windows": [
+      {
+        "source_in": 12.05,
+        "source_out": 14.45,
+        "timeline_in": 13.55,
+        "timeline_out": 15.95,
+        "boost_db": 8.0
+      },
+      {
+        "source_in": 23.2,
+        "source_out": 24.67,
+        "timeline_in": 24.7,
+        "timeline_out": 26.17,
+        "boost_db": 8.0
+      },
+      {
+        "source_in": 38.9,
+        "source_out": 41.67,
+        "timeline_in": 40.4,
+        "timeline_out": 43.17,
+        "boost_db": 8.0
+      }
+    ],
+    "inter_beat_gap_seconds": 0.1,
+    "final_narrated_end_seconds": 49.392,
+    "mastering_chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
+    "deliverable_audio": "AAC LC 256 kb/s, 48 kHz stereo",
+    "nine_gates": {
+      "loudness_in_range": true,
+      "true_peak_ok": true,
+      "lra_in_range": true,
+      "no_clipping": true,
+      "no_clicks": true,
+      "mono_compatible": true,
+      "dc_offset_ok": true,
+      "not_harsh": true,
+      "has_dynamics": true
+    },
+    "measured": {
+      "integrated_lufs": -14.66,
+      "lra_lu": 3.48,
+      "sample_peak_dbfs": -1.88,
+      "clipped_samples": 0,
+      "movement_db": 20.13,
+      "dc_offset": 2.5e-05,
+      "mono_fold_loss_db": -0.0,
+      "harsh_over_high_mid_db": 0.98,
+      "air_over_high_mid_db": -0.28,
+      "clicks": {
+        "click_runs": 0,
+        "first_click_s": null
+      }
+    },
+    "vo_quality_fix": {
+      "before_sha256": "1cfd521f6fea600b8775440cbc114b1d86c9b4c0ad3fc91499f69b9eb333134b",
+      "after_sha256": "efce2ea3391828d4d638d980db179330bd88f21a12f7864e6b0bcac58d50a91f",
+      "air_before_db": -5.55,
+      "air_after_db": -0.28,
+      "harsh_before_db": -2.78,
+      "harsh_after_db": 0.98,
+      "measured_delta": {
+        "air_over_high_mid_db": 5.27,
+        "harsh_over_high_mid_db": 3.76
+      },
+      "legacy_broad_declick": {
+        "groups": 3888,
+        "samples_changed": 100724,
+        "fraction_changed": 0.042478
+      },
+      "narrow_declick_events": [
+        {
+          "stage": "master_narrow_declick",
+          "threshold": 0.35,
+          "half_width_samples": 3,
+          "jumps_repaired": 5214,
+          "interior_samples_changed": 31284,
+          "fraction_changed": 0.013193
+        },
+        {
+          "stage": "calibration_0_narrow_declick",
+          "threshold": 0.35,
+          "half_width_samples": 3,
+          "jumps_repaired": 937,
+          "interior_samples_changed": 5622,
+          "fraction_changed": 0.002371
+        }
+      ]
+    },
+    "human_native_audio_listening": false
+  },
+  "rights_and_publicity": {
+    "workspace_flags": {
+      "rights_basis": {
+        "nasa_content_generally_not_subject_to_us_copyright": true,
+        "educational_informational_factual_use": true,
+        "nasa_acknowledged_on_screen_and_in_metadata": true,
+        "no_nasa_endorsement_implied": true,
+        "no_nasa_insignia_used": true,
+        "third_party_copyrighted_material": "none identified in the official master",
+        "commercial_monetization_clearance": false,
+        "publicity_or_privacy_permission_obtained": false,
+        "human_legal_review": false,
+        "not_a_legal_opinion": true
+      },
+      "restrictions": {
+        "identifiable_current_astronauts_and_possible_csa_personnel": true,
+        "commercial_promotional_or_ads_may_require_additional_clearance": true,
+        "no_written_astronaut_or_csa_permission_in_workspace": true,
+        "avoid_cover_art_packaging_ads_and_endorsement_implications": true
+      },
+      "claims": {
+        "human_creative_approval": false,
+        "technical_pass": true,
+        "audience_result_claim": false,
+        "virality_guarantee": false,
+        "perfection_claim": false,
+        "voice_quality_fix_applied": true
+      }
+    },
+    "external_findings": [
+      {
+        "finding": "NASA content is generally not subject to US copyright and may be used for educational/informational purposes; NASA should be acknowledged.",
+        "citation": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)"
+      },
+      {
+        "finding": "NASA content must not imply endorsement; NASA insignia/logotype/seal are protected.",
+        "citation": "[3](https://www.nasa.gov/nasa-brand-center/)"
+      },
+      {
+        "finding": "If NASA media includes an identifiable person, commercial use may infringe privacy/publicity rights and permission should be obtained.",
+        "citation": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)"
+      },
+      {
+        "finding": "Current astronauts' names/likenesses may not be used on commercial products, advertisements, promotional material or packaging.",
+        "citation": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)"
+      },
+      {
+        "finding": "Short-form social media content is generally considered promotional content; imagery with NASA identifiers, current astronauts or current employees may not be used in promotional content.",
+        "citation": "[8](https://www.nasa.gov/nasa-brand-center/strategic-partnerships/)"
+      },
+      {
+        "finding": "No 'NASA approved', 'official NASA' or co-branding wording.",
+        "citation": "[4](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/)"
+      },
+      {
+        "finding": "Advertising/marketing must not imply NASA endorsement; no insignia in ads.",
+        "citation": "[2](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/)"
+      }
+    ],
+    "high_severity_gate": "Because this is a 49.4 s social Short featuring identifiable Artemis II astronauts, NASA's own guidance treats short-form social content as generally promotional. Commercial/monetized/promotional publication, cover art using astronaut faces, ads, packaging or sponsorship should not proceed without written clearance and human legal review. No such clearance exists in the workspace.",
+    "not_a_legal_opinion": true
+  },
+  "platform_policy_matrix": [
+    {
+      "rule": "Title limit is 100 characters; description limit is 5,000 characters.",
+      "citation": "[2](https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop)"
+    },
+    {
+      "rule": "Titles should be accurate, succinct, with important words first; limit ALL CAPS and emoji.",
+      "citation": "[9](https://support.google.com/youtube/answer/12340300?hl=en-GB)"
+    },
+    {
+      "rule": "First few description lines are what viewers see before 'Show more'; keep each description unique and feature 1-2 main words.",
+      "citation": "[3](https://support.google.com/youtube/answer/12948449?hl=en)"
+    },
+    {
+      "rule": "Search ranks by title/description/content match and engagement; tags are not important.",
+      "citation": "[2](https://support.google.com/youtube/answer/141805?hl=en)"
+    },
+    {
+      "rule": "Shorts ranking uses viewer personalization, view duration, average % viewed, likes and post-watch surveys; no minimum posting cadence.",
+      "citation": "[4](https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts)"
+    },
+    {
+      "rule": "Publish time is not known to affect long-term performance; no required upload frequency.",
+      "citation": "[2](https://support.google.com/youtube/answer/141805?hl=en)"
+    },
+    {
+      "rule": "Up to three hashtags may appear near the title; >60 hashtags are ignored; misleading/unrelated hashtags and ordinary descriptive tags in the description are prohibited.",
+      "citation": "[1](https://support.google.com/youtube/answer/6390658?hl=en)"
+    },
+    {
+      "rule": "Tags play a minimal role and mainly correct common misspellings; excessive tags in the description are prohibited.",
+      "citation": "[2](https://support.google.com/youtube/answer/146402?hl=en)"
+    },
+    {
+      "rule": "Reused/scraped content needs original commentary, educational value or unique editing; malicious clickbait and detection evasion are prohibited.",
+      "citation": "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)"
+    },
+    {
+      "rule": "AI disclosure is required for realistic AI-generated/altered content; caption creation, voice/audio repair and cloning one's own voice are listed as minor examples.",
+      "citation": "[2](https://support.google.com/youtube/answer/14328491?hl=en)"
+    },
+    {
+      "rule": "No AI voice clone of a real person and no false authorization/endorsement.",
+      "citation": "[8](https://support.google.com/youtube/answer/2801947?sjid=14893021524564886382-NA)"
+    },
+    {
+      "rule": "Asking viewers to like/comment is allowed; incentives, coercion and fake engagement are not.",
+      "citation": "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)"
+    },
+    {
+      "rule": "Avoid profanity/strong language in titles/thumbnails for advertiser-friendly eligibility.",
+      "citation": "[6](https://support.google.com/youtube/answer/6162278?hl=en)"
+    }
+  ],
+  "youtube_shorts_primary": {
+    "title": "NASA Water Bubble Flips an Astronaut's Face",
+    "title_chars": 43,
+    "baseline_title": "NASA Water Bubble Flips an Astronaut's Face",
+    "baseline_title_chars": 43,
+    "internal_target_title_chars_max": 50,
+    "platform_title_chars_max": 100,
+    "title_alternatives": [
+      {
+        "title": "NASA Water Bubble Flips an Astronaut's Face",
+        "type": "searchable + intriguing",
+        "rationale": "Adds NASA for source/search clarity while keeping 'water bubble' and the flip payoff near the front.",
+        "chars": 43
+      },
+      {
+        "title": "NASA Water Bubble Flips an Astronaut's Face",
+        "type": "searchable",
+        "rationale": "Existing committed baseline; shortest accurate description of the payoff.",
+        "chars": 43
+      },
+      {
+        "title": "Artemis II Water Bubble Flips a Face",
+        "type": "searchable",
+        "rationale": "Mission keyword first; useful for Artemis II search intent.",
+        "chars": 36
+      },
+      {
+        "title": "Why Is That Astronaut Upside Down?",
+        "type": "intriguing",
+        "rationale": "Curiosity gap matching hook 1; weaker explicit search terms.",
+        "chars": 34
+      },
+      {
+        "title": "This Water Bubble Acts Like a Lens",
+        "type": "searchable",
+        "rationale": "Science-forward; leads with the object rather than the face.",
+        "chars": 34
+      },
+      {
+        "title": "Not a Lens: NASA's Floating Water Ball",
+        "type": "intriguing",
+        "rationale": "Echoes exact first VO line; avoid if it reads as a lens claim.",
+        "chars": 38
+      },
+      {
+        "title": "A Water Bubble Turned Into a Lens in Space",
+        "type": "searchable",
+        "rationale": "Long-tail optics phrasing; still under 50 chars.",
+        "chars": 42
+      },
+      {
+        "title": "NASA Refraction: The Upside-Down Face",
+        "type": "searchable",
+        "rationale": "Puts the science term 'refraction' early.",
+        "chars": 37
+      },
+      {
+        "title": "Watch a Water Bubble Flip a Face in Space",
+        "type": "intriguing",
+        "rationale": "Soft imperative matches the 'watch it again' loop, without clickbait.",
+        "chars": 41
+      },
+      {
+        "title": "Artemis II: Water Sphere Refraction",
+        "type": "archival/searchable",
+        "rationale": "Most literal; least emotional pull.",
+        "chars": 35
+      }
+    ],
+    "description": "A floating water bubble aboard Artemis II acts like a liquid lens and flips an astronaut's face upside down. We break down the refraction, keep NASA's native crew audio, and replay the inverted-face detail.\n\nSource: NASA, \"Fun with Water Bubbles\" (2026-04-04), NASA ID art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman. Official page: https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman\n\nNASA media guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/ — NASA is acknowledged as the source; no NASA endorsement is implied and no NASA insignia is used. On-screen credit: \"Source: NASA / Artemis II\".\n\nOriginal contribution: research, commentary, replay analysis, word-by-word burned captions and a generic synthetic deep-male voiceover. NASA's native crew audio is retained; no music, sound effects, procedural bed or audio substitution was added.\n\nEducational / informational commentary and analysis, not a raw reupload. Identifiable astronauts / possible CSA personnel appear. Commercial, promotional, advertising, packaging or cover-art use may require additional clearance; no written permission, human legal review or legal opinion is claimed.\n\nNo invented date, injury, outcome, view count, AI-status claim or audience-result claim. No guaranteed virality or retention.\n\n#Shorts #NASA #ArtemisII #Science #Refraction #Microgravity",
+    "description_chars": 1388,
+    "description_lines": [
+      "A floating water bubble aboard Artemis II acts like a liquid lens and flips an astronaut's face upside down. We break down the refraction, keep NASA's native crew audio, and replay the inverted-face detail.",
+      "Source: NASA, \"Fun with Water Bubbles\" (2026-04-04), NASA ID art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman. Official page: https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+      "NASA media guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/ — NASA is acknowledged as the source; no NASA endorsement is implied and no NASA insignia is used. On-screen credit: \"Source: NASA / Artemis II\".",
+      "Original contribution: research, commentary, replay analysis, word-by-word burned captions and a generic synthetic deep-male voiceover. NASA's native crew audio is retained; no music, sound effects, procedural bed or audio substitution was added.",
+      "Educational / informational commentary and analysis, not a raw reupload. Identifiable astronauts / possible CSA personnel appear. Commercial, promotional, advertising, packaging or cover-art use may require additional clearance; no written permission, human legal review or legal opinion is claimed.",
+      "No invented date, injury, outcome, view count, AI-status claim or audience-result claim. No guaranteed virality or retention.",
+      "#Shorts #NASA #ArtemisII #Science #Refraction #Microgravity"
+    ],
+    "description_alternatives": [
+      {
+        "id": "short",
+        "text": "A floating water bubble aboard Artemis II acts like a liquid lens and flips an astronaut's face upside down. We break down the refraction, keep NASA's native crew audio, and replay the inverted-face detail.\n\nSource: NASA, \"Fun with Water Bubbles\" (2026-04-04), NASA ID art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman. Official page: https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman\n\nNASA is acknowledged; no endorsement implied. Generic synthetic voiceover; native NASA audio retained. Identifiable persons appear; commercial/promotional use may require clearance.\n\n#Shorts #NASA #ArtemisII #Science #Refraction",
+        "chars": 654
+      },
+      {
+        "id": "science_forward",
+        "text": "Refraction through a curved floating water sphere inverts the image of an astronaut behind it. This Short replays the Artemis II 'Fun with Water Bubbles' footage, explains the liquid-lens effect, and keeps NASA's native crew audio.\n\nSource: NASA, \"Fun with Water Bubbles\" (2026-04-04), NASA ID art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman. Official page: https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman\n\nScience terms: refraction, surface tension, microgravity, liquid lens, image inversion. Original commentary, word-by-word captions and a generic synthetic voiceover; no music or SFX.\n\nEducational / informational commentary and analysis, not a raw reupload. Identifiable astronauts / possible CSA personnel appear. Commercial, promotional, advertising, packaging or cover-art use may require additional clearance; no written permission, human legal review or legal opinion is claimed.\n\n#Shorts #NASA #ArtemisII #Science #Refraction #Microgravity #Physics",
+        "chars": 1004
+      },
+      {
+        "id": "rights_first",
+        "text": "A floating water bubble aboard Artemis II acts like a liquid lens and flips an astronaut's face upside down. We break down the refraction, keep NASA's native crew audio, and replay the inverted-face detail.\n\nSource: NASA, \"Fun with Water Bubbles\" (2026-04-04), NASA ID art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman. Official page: https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman\n\nNASA media guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/ — NASA credited; no endorsement, insignia, co-branding or 'official NASA' wording. Identifiable current astronauts / possible CSA personnel appear; short-form social content is generally treated as promotional by NASA, so commercial or promotional use may require written clearance. No legal opinion or written permission is claimed.\n\nGeneric synthetic deep-male voiceover disclosed. Native NASA audio retained. No music, SFX, procedural bed, audio substitution, invented date, injury, outcome, view count or audience-result claim.\n\n#Shorts #NASA #ArtemisII #Science #Refraction #Microgravity",
+        "chars": 1098
+      }
+    ],
+    "hashtags": [
+      "#Shorts",
+      "#NASA",
+      "#ArtemisII",
+      "#Science",
+      "#Refraction",
+      "#Microgravity"
+    ],
+    "hashtags_count": 6,
+    "hashtags_alternatives": [
+      {
+        "id": "minimal",
+        "tags": [
+          "#Shorts",
+          "#NASA",
+          "#ArtemisII"
+        ]
+      },
+      {
+        "id": "science",
+        "tags": [
+          "#Shorts",
+          "#NASA",
+          "#ArtemisII",
+          "#Science",
+          "#Refraction",
+          "#Physics",
+          "#Microgravity"
+        ]
+      },
+      {
+        "id": "mission",
+        "tags": [
+          "#Shorts",
+          "#NASA",
+          "#ArtemisII",
+          "#Space",
+          "#Science"
+        ]
+      }
+    ],
+    "forbidden_hashtags": [
+      "#Viral",
+      "#ViralShorts",
+      "#Trending",
+      "#FYP",
+      "#ForYou",
+      "#YT Viral",
+      "#YouTubeShorts",
+      "#Subscribe"
+    ],
+    "tags": [
+      "water bubble",
+      "NASA",
+      "Artemis II",
+      "Artemis 2",
+      "artemis ii",
+      "refraction",
+      "microgravity",
+      "astronaut",
+      "water sphere",
+      "liquid lens",
+      "space science",
+      "upside down face",
+      "NASA water bubble",
+      "Fun with Water Bubbles"
+    ],
+    "tags_note": "Enter only in the Studio tags field; do not paste a comma-separated list into the description.",
+    "keywords": [
+      "NASA water bubble",
+      "Artemis II water bubble",
+      "Fun with Water Bubbles NASA",
+      "astronaut upside down water",
+      "water sphere refraction",
+      "liquid lens in space",
+      "microgravity water sphere",
+      "surface tension water ball",
+      "NASA Artemis II refraction",
+      "water bubble flips face",
+      "inverted face water bubble",
+      "NASA crew laughs water bubble",
+      "straw water sphere astronaut",
+      "water orb crystal ball space",
+      "refraction explained",
+      "curved water lens",
+      "image inversion water",
+      "Artemis II science moment",
+      "NASA 4K water bubble",
+      "zero gravity water ball",
+      "space bubble optics",
+      "NASA native crew audio",
+      "not CGI water bubble",
+      "shorts science explanation",
+      "NASA credited commentary",
+      "generic synthetic voiceover",
+      "word by word captions"
+    ],
+    "keywords_note": "Research/search-intent terms only; no search-volume or ranking claim.",
+    "category": {
+      "suggestion": "Education",
+      "education_type_options": [
+        "science experiment",
+        "real life application",
+        "concept overview"
+      ],
+      "alternative": "Science & Technology if available in Studio",
+      "human_must_confirm": true
+    },
+    "language": "English",
+    "captions": {
+      "burned_in_word_by_word": true,
+      "word_count": 118,
+      "separate_caption_track_recommended": true,
+      "caption_certification_human_must_confirm": true
+    },
+    "thumbnail_cover": {
+      "visual_anchor": "0.0-1.5 s payoff flash: inverted face inside the water sphere, word captions already burned in",
+      "suggested_overlay_text": [
+        "NOT A LENS",
+        "UPSIDE DOWN?"
+      ],
+      "do_not_add": [
+        "NASA insignia",
+        "NASA logotype",
+        "NASA seal",
+        "astronaut face as promotional cover art without clearance",
+        "official NASA wording",
+        "co-branding",
+        "fake view counts"
+      ],
+      "custom_thumbnail_for_shorts_human_must_confirm": true
+    },
+    "ai_disclosure": {
+      "description_text_present": true,
+      "generic_synthetic_voiceover": true,
+      "real_person_voice_clone": false,
+      "realistic_altered_footage_claim": false,
+      "studio_ai_use_toggle_recommendation": "Likely 'No' under YouTube's cited minor-edit examples, but a human publisher must confirm the current Studio setting; keep the textual disclosure regardless.",
+      "human_must_confirm": true
+    },
+    "studio_settings": [
+      {
+        "setting": "Title",
+        "value": "NASA Water Bubble Flips an Astronaut's Face",
+        "human_confirm": true
+      },
+      {
+        "setting": "Description",
+        "value": "primary description above",
+        "human_confirm": true
+      },
+      {
+        "setting": "Hashtags",
+        "value": "in description, 6 tags",
+        "human_confirm": true
+      },
+      {
+        "setting": "Tags",
+        "value": "tag field only",
+        "human_confirm": true
+      },
+      {
+        "setting": "Category",
+        "value": "Education / science experiment (suggested)",
+        "human_confirm": true
+      },
+      {
+        "setting": "Language",
+        "value": "English",
+        "human_confirm": true
+      },
+      {
+        "setting": "Audience / made for kids",
+        "value": "human decision required",
+        "human_confirm": true
+      },
+      {
+        "setting": "License",
+        "value": "Standard YouTube License suggested; not Creative Commons over NASA footage/persons",
+        "human_confirm": true
+      },
+      {
+        "setting": "Shorts remixing",
+        "value": "disable unless rights reviewed",
+        "human_confirm": true
+      },
+      {
+        "setting": "Altered / synthetic content",
+        "value": "human confirm; textual disclosure retained",
+        "human_confirm": true
+      },
+      {
+        "setting": "Comments and ratings",
+        "value": "enable",
+        "human_confirm": true
+      },
+      {
+        "setting": "Visibility",
+        "value": "keep draft/unlisted until rights review",
+        "human_confirm": true
+      },
+      {
+        "setting": "Branded content / paid promotion",
+        "value": "none",
+        "human_confirm": true
+      },
+      {
+        "setting": "Recording date",
+        "value": "2026-04-04 from NASA source metadata",
+        "human_confirm": true
+      },
+      {
+        "setting": "Recording location",
+        "value": "Artemis II mission (NASA footage), not asserted as our filming location",
+        "human_confirm": true
+      },
+      {
+        "setting": "Related video",
+        "value": "optional; requires advanced feature access",
+        "human_confirm": true
+      },
+      {
+        "setting": "End screen",
+        "value": "not used for this Short; 49.4 s would qualify only if applicable",
+        "human_confirm": true
+      }
+    ],
+    "pinned_comment": "Which frame made you replay it — the flip around 23s or the loop back at 44s? Source: NASA / Artemis II.",
+    "pinned_comment_note": "A genuine question is allowed; do not offer rewards for likes/comments/subs.",
+    "community_post": "A 49-second replay breakdown of NASA's Artemis II water bubble: the floating sphere acts like a liquid lens and flips the face behind it. Native crew audio kept, refraction explained, word-by-word captions burned in. Source: NASA / Artemis II. No endorsement implied."
+  },
+  "cross_platform_adaptations": [
+    {
+      "platform": "Instagram Reels",
+      "caption": "A floating water bubble aboard Artemis II flips an astronaut's face upside down. Refraction, not a lens. Native NASA audio kept. Source: NASA / Artemis II. Generic synthetic voiceover. #NASA #ArtemisII #Science #Refraction",
+      "note": "Verify current in-app caption/hashtag limits before posting; no platform limit asserted here."
+    },
+    {
+      "platform": "TikTok",
+      "caption": "This NASA water bubble acts like a liquid lens — and the face behind it flips. Refraction in microgravity. Source: NASA / Artemis II. Generic synthetic VO. #NASA #ArtemisII #Science",
+      "note": "Verify current in-app disclosure tools and limits; no audience-result claim."
+    },
+    {
+      "platform": "Facebook Reels",
+      "caption": "NASA's Artemis II crew played with a sphere of water. Look through it: the astronaut behind it is upside down. Refraction explained, native audio retained. Source: NASA / Artemis II. #NASA #Science",
+      "note": "Keep NASA credit and no-endorsement wording intact."
+    },
+    {
+      "platform": "X / LinkedIn",
+      "caption": "Forensic breakdown of one official NASA Artemis II clip: a floating water sphere refracts light like a liquid lens and inverts the face behind it. 49.4s commentary Short with native audio, captions and measured reaction windows. Source: NASA / Artemis II; no endorsement implied.",
+      "note": "Long-form post; link to the YouTube Short or raw file, not a re-upload claim."
+    }
+  ],
+  "hook_and_retention_map": {
+    "first_3_s": "Payoff flash + 'THAT IS NOT A LENS. WATCH THE FACE...' word captions; mute-readable.",
+    "beat_1_hook_s": 0.0,
+    "rehook_s": 23.423,
+    "label_s": 23.42,
+    "science_payoff_s": 30.303,
+    "authenticity_line_s": 36.672,
+    "loop_back_s": 44.2,
+    "credit_s": 44.24,
+    "native_reaction_windows": [
+      {
+        "source_in": 12.05,
+        "source_out": 14.45,
+        "timeline_in": 13.55,
+        "timeline_out": 15.95,
+        "boost_db": 8.0
+      },
+      {
+        "source_in": 23.2,
+        "source_out": 24.67,
+        "timeline_in": 24.7,
+        "timeline_out": 26.17,
+        "boost_db": 8.0
+      },
+      {
+        "source_in": 38.9,
+        "source_out": 41.67,
+        "timeline_in": 40.4,
+        "timeline_out": 43.17,
+        "boost_db": 8.0
+      }
+    ],
+    "loop_design": "Last line returns to the opening frame; no fade-in, no title card."
+  },
+  "ab_test_plan": {
+    "status": "plan_only_no_results",
+    "variables": [
+      {
+        "variable": "Title",
+        "variants": [
+          "NASA Water Bubble Flips an Astronaut's Face",
+          "NASA Water Bubble Flips an Astronaut's Face",
+          "Why Is That Astronaut Upside Down?"
+        ]
+      },
+      {
+        "variable": "First description line",
+        "variants": [
+          "payoff-first",
+          "science-first",
+          "rights-first"
+        ]
+      },
+      {
+        "variable": "Cover frame",
+        "variants": [
+          "0.0 s flash",
+          "23.42 s REFRACTION label frame"
+        ]
+      },
+      {
+        "variable": "Pinned comment",
+        "variants": [
+          "Which frame made you replay it — the flip around 23s or the loop back at 44s? Source: NASA / Artemis II.",
+          "No pinned comment"
+        ]
+      },
+      {
+        "variable": "Hashtag order",
+        "variants": [
+          "#Shorts #NASA #ArtemisII first",
+          "#NASA #ArtemisII #Shorts first"
+        ]
+      }
+    ],
+    "metrics_to_observe": [
+      "impressions",
+      "viewed vs ignored",
+      "average view duration",
+      "average % viewed",
+      "likes",
+      "post-watch survey",
+      "not interested feedback",
+      "search terms in Analytics"
+    ],
+    "constraints": [
+      "Change one variable at a time where possible.",
+      "Prefer Studio title/thumbnail edits over duplicate re-uploads of the same file.",
+      "Never use misleading/clickbait titles, fake engagement, or detection-evasion edits.",
+      "Do not claim a result until human-verified analytics exist."
+    ],
+    "citations": [
+      "[2](https://support.google.com/youtube/answer/141805?hl=en)",
+      "[4](https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts)",
+      "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)"
+    ]
+  },
+  "pre_publish_checklist": [
+    {
+      "check": "Deliverable SHA-256 matches committed evidence",
+      "status": "verified",
+      "evidence": "qc_summary.json"
+    },
+    {
+      "check": "Source NASA ID / page / SHA recorded",
+      "status": "verified",
+      "evidence": "candidate_scout_v10.json / rights_ledger_v10.json"
+    },
+    {
+      "check": "49.4 s / 1482 frames / 1080x1920 / 30 fps / H.264+AAC",
+      "status": "verified",
+      "evidence": "qc_summary.json"
+    },
+    {
+      "check": "Nine audio gates true",
+      "status": "verified",
+      "evidence": "audio_qc.json"
+    },
+    {
+      "check": "33/33 technical checks true",
+      "status": "verified",
+      "evidence": "qc_summary.json"
+    },
+    {
+      "check": "VO clarity correction applied and measured",
+      "status": "verified",
+      "evidence": "vo_quality_fix_v10.json"
+    },
+    {
+      "check": "118 word-by-word caption events",
+      "status": "verified",
+      "evidence": "caption_timings.json"
+    },
+    {
+      "check": "Safe zones / no black bars / no fade-in / no title card",
+      "status": "verified",
+      "evidence": "technical_qc.json"
+    },
+    {
+      "check": "NASA on-screen credit exact: 'Source: NASA / Artemis II'",
+      "status": "verified",
+      "evidence": "captions_v10.ass"
+    },
+    {
+      "check": "NASA credited in description",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "NASA guidelines URL included in description",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "No NASA insignia / logotype / seal",
+      "status": "verified",
+      "evidence": "rights_ledger_v10.json"
+    },
+    {
+      "check": "No 'official NASA' / 'NASA approved' / co-branding wording",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "No endorsement implied",
+      "status": "verified",
+      "evidence": "rights_ledger_v10.json + this pack"
+    },
+    {
+      "check": "Identifiable astronauts / possible CSA personnel disclosed",
+      "status": "verified",
+      "evidence": "rights_ledger_v10.json + this pack"
+    },
+    {
+      "check": "Commercial/promotional clearance obtained",
+      "status": "pending_human",
+      "evidence": "rights_ledger_v10.json"
+    },
+    {
+      "check": "Written astronaut/CSA permission in workspace",
+      "status": "not_claimed",
+      "evidence": "rights_ledger_v10.json"
+    },
+    {
+      "check": "Human legal review completed",
+      "status": "pending_human",
+      "evidence": "rights_ledger_v10.json"
+    },
+    {
+      "check": "Human full-motion review completed",
+      "status": "pending_human",
+      "evidence": "qc_summary.json"
+    },
+    {
+      "check": "Human native-audio listening completed",
+      "status": "pending_human",
+      "evidence": "qc_summary.json"
+    },
+    {
+      "check": "Human creative approval",
+      "status": "pending_human",
+      "evidence": "qc_summary.json"
+    },
+    {
+      "check": "Monetization / ads / sponsorship decision",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "No music / SFX / procedural bed / audio substitution",
+      "status": "verified",
+      "evidence": "native_audio_ledger_v10.json"
+    },
+    {
+      "check": "No 1.08x time-stretch",
+      "status": "verified",
+      "evidence": "script_variants_v10.md / native_audio_ledger_v10.json"
+    },
+    {
+      "check": "No real-person voice clone",
+      "status": "verified",
+      "evidence": "native_audio_ledger_v10.json"
+    },
+    {
+      "check": "Generic synthetic voiceover disclosed in description",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Studio AI-use toggle confirmed by human",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Title <=100 platform chars and <=50 internal chars",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Title accurate, no ALL CAPS / emoji / clickbait",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Description <5000 chars and unique",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "First two lines carry payoff + 1-2 main words",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Hashtags <=60, relevant, no spaces",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "No #Viral / #Trending / #FYP stuffing",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Tags only in tag field; no descriptive tag list in description",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Category / language / caption certification set by human",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Audience / made-for-kids decision by human",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "License set to Standard (not CC) by human",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Shorts remixing decision by human",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Visibility kept draft/unlisted until rights review",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Cross-platform limits verified in-app",
+      "status": "pending_human",
+      "evidence": "this pack"
+    },
+    {
+      "check": "No invented date / injury / outcome / view count",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "No guaranteed virality / retention / revenue claim",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "No perfection / zero-flaw / zero-omission claim",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "A/B plan documented but no results claimed",
+      "status": "verified",
+      "evidence": "this pack"
+    },
+    {
+      "check": "Publish time not claimed to affect long-term performance",
+      "status": "verified",
+      "evidence": "[2](https://support.google.com/youtube/answer/141805?hl=en)"
+    }
+  ],
+  "forensic_audit": [
+    {
+      "claim": "The deliverable is the corrected 8965beb MP4, not de03272.",
+      "evidence": "qc_summary.json sha256=efce2ea...",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Duration is 49.4 s / 1482 frames.",
+      "evidence": "qc_summary.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Resolution is 1080x1920 at 30 fps.",
+      "evidence": "qc_summary.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Video is H.264, audio is AAC 48 kHz stereo.",
+      "evidence": "qc_summary.json / technical_qc.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "All nine web audio gates pass.",
+      "evidence": "audio_qc.json checks",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Integrated loudness is -14.66 LUFS.",
+      "evidence": "audio_qc.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "True peak is -1.88 dBFS with 0 clipped samples.",
+      "evidence": "audio_qc.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "0 click runs remain after the narrow declick fix.",
+      "evidence": "audio_qc.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Air/high-mid improved from -5.55 dB to -0.28 dB.",
+      "evidence": "vo_quality_fix_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Legacy broad declick changed 4.2478% of samples.",
+      "evidence": "vo_quality_fix_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Narrow repair changed ~1.32% then ~0.24% of samples.",
+      "evidence": "vo_quality_fix_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "33/33 technical checks pass.",
+      "evidence": "qc_summary.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "technical_pass is separate from human_creative_approval=false.",
+      "evidence": "qc_summary.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "One official NASA clip only.",
+      "evidence": "edit_ledger_v10.json / candidate_scout_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "NASA ID is art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman.",
+      "evidence": "candidate_scout_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Source title is 'Fun with Water Bubbles', dated 2026-04-04.",
+      "evidence": "candidate_scout_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Original 4K SHA is 7fd9cd0c...c0dc.",
+      "evidence": "candidate_scout_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Vertical master SHA is 11395618...5960c.",
+      "evidence": "candidate_scout_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Clip rubric is 91/100 vs 78 minimum, no kill switches.",
+      "evidence": "candidate_scout_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Variant A / hook 1 is selected.",
+      "evidence": "script_variants_v10.md / edit_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Script has 118 words across 8 beats.",
+      "evidence": "edit_ledger_v10.json / caption_timings.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Eight voice-01 VO WAVs are sequential with 0.1 s gaps.",
+      "evidence": "native_audio_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Native NASA audio bed is retained.",
+      "evidence": "native_audio_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Three reaction windows are boosted +8 dB with measured envelope.",
+      "evidence": "native_audio_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "No music, SFX, procedural bed or audio substitution.",
+      "evidence": "native_audio_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "No 1.08x time-stretch.",
+      "evidence": "script_variants_v10.md",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Word-by-word burned captions use 118 events.",
+      "evidence": "caption_timings.json / captions_v10.ass",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "On-screen label is REFRACTION at 23.42-29.90 s.",
+      "evidence": "captions_v10.ass",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "On-screen credit is 'Source: NASA / Artemis II' at 44.24-49.40 s.",
+      "evidence": "captions_v10.ass",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Safe zone is top 250 / bottom 1560 / left 80 / right 1000.",
+      "evidence": "edit_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "7 contact sheets + first3s/last3s review images exist.",
+      "evidence": "contact_sheets_manifest.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Human full-motion review is false.",
+      "evidence": "contact_sheets_manifest.json / qc_summary.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "NASA is credited on-screen and in metadata.",
+      "evidence": "captions_v10.ass / upload_metadata_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "No NASA insignia used.",
+      "evidence": "rights_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "No NASA endorsement implied.",
+      "evidence": "rights_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Identifiable astronauts / possible CSA personnel appear.",
+      "evidence": "rights_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "No written astronaut/CSA permission in workspace.",
+      "evidence": "rights_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Commercial monetization clearance is false.",
+      "evidence": "rights_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Human legal review is false; not a legal opinion.",
+      "evidence": "rights_ledger_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "Generic synthetic voiceover is disclosed; no real-person clone.",
+      "evidence": "native_audio_ledger_v10.json / upload_metadata_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "No audience-result or virality guarantee claim.",
+      "evidence": "qc_summary.json / upload_metadata_v10.json",
+      "status": "verified_workspace"
+    },
+    {
+      "claim": "YouTube title limit is 100 characters.",
+      "evidence": "[2](https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "YouTube description limit is 5,000 characters.",
+      "evidence": "[2](https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Titles should be accurate/succinct with important words first.",
+      "evidence": "[9](https://support.google.com/youtube/answer/12340300?hl=en-GB)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "First description lines appear before 'Show more'.",
+      "evidence": "[3](https://support.google.com/youtube/answer/12948449?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Descriptions should be unique with 1-2 main words.",
+      "evidence": "[3](https://support.google.com/youtube/answer/12948449?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Up to 3 hashtags may appear near the title.",
+      "evidence": "[1](https://support.google.com/youtube/answer/6390658?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "More than 60 hashtags are ignored.",
+      "evidence": "[1](https://support.google.com/youtube/answer/6390658?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Misleading/unrelated hashtags are prohibited.",
+      "evidence": "[1](https://support.google.com/youtube/answer/6390658?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Tags play a minimal discovery role.",
+      "evidence": "[2](https://support.google.com/youtube/answer/146402?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Search uses title/description/content match and engagement.",
+      "evidence": "[2](https://support.google.com/youtube/answer/141805?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Shorts use view duration, % viewed, likes and surveys.",
+      "evidence": "[4](https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "No minimum posting cadence is required.",
+      "evidence": "[4](https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Publish time is not known to affect long-term performance.",
+      "evidence": "[2](https://support.google.com/youtube/answer/141805?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Scraped content needs transformative editing/commentary/educational value.",
+      "evidence": "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Malicious clickbait and detection evasion are prohibited.",
+      "evidence": "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Asking for likes/comments is allowed without incentives.",
+      "evidence": "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Realistic AI-altered content needs disclosure; minor edits listed as not required.",
+      "evidence": "[2](https://support.google.com/youtube/answer/14328491?hl=en)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "No AI voice clone of a real person / false endorsement.",
+      "evidence": "[8](https://support.google.com/youtube/answer/2801947?sjid=14893021524564886382-NA)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "NASA content generally not US-copyrighted; educational/informational use allowed.",
+      "evidence": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "NASA should be acknowledged as source.",
+      "evidence": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Identifiable persons in NASA media may need permission for commercial use.",
+      "evidence": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Current astronauts' likenesses restricted in promotional material.",
+      "evidence": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "Short-form social media is generally promotional content.",
+      "evidence": "[8](https://www.nasa.gov/nasa-brand-center/strategic-partnerships/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "NASA identifiers/current astronauts may not be used in promotional content.",
+      "evidence": "[8](https://www.nasa.gov/nasa-brand-center/strategic-partnerships/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "No 'NASA approved' / 'official NASA' / co-branding wording.",
+      "evidence": "[4](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "NASA endorsement must not be implied in advertising.",
+      "evidence": "[2](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/)",
+      "status": "verified_external_guidance"
+    },
+    {
+      "claim": "The proposed title will rank or go viral.",
+      "evidence": "no evidence",
+      "status": "prohibited_claim"
+    },
+    {
+      "claim": "The video is legally cleared for commercial monetization.",
+      "evidence": "no evidence",
+      "status": "prohibited_claim"
+    },
+    {
+      "claim": "NASA approved or endorsed this edit.",
+      "evidence": "no evidence",
+      "status": "prohibited_claim"
+    },
+    {
+      "claim": "A human listened to the final mix and approved it.",
+      "evidence": "no evidence",
+      "status": "prohibited_claim"
+    },
+    {
+      "claim": "The metadata pack is perfect / has zero flaws / missed nothing.",
+      "evidence": "no evidence",
+      "status": "prohibited_claim"
+    },
+    {
+      "claim": "Audience results, retention, CTR, RPM or view counts are known.",
+      "evidence": "no evidence",
+      "status": "prohibited_claim"
+    },
+    {
+      "claim": "The AI-use toggle is definitively not required.",
+      "evidence": "cited examples only",
+      "status": "inferred_human_confirm_required"
+    },
+    {
+      "claim": "Custom thumbnail editing is available for this Short.",
+      "evidence": "Studio UI varies",
+      "status": "inferred_human_confirm_required"
+    },
+    {
+      "claim": "Cross-platform character/hashtag limits are current.",
+      "evidence": "not asserted",
+      "status": "unverified"
+    },
+    {
+      "claim": "Best publish time or posting cadence can be predicted.",
+      "evidence": "official help says no long-term effect / no cadence",
+      "status": "unverified"
+    },
+    {
+      "claim": "Competitor/trend/search-volume data was used.",
+      "evidence": "no API/analytics available",
+      "status": "unverified"
+    }
+  ],
+  "inconsistencies_and_stale_flags": [
+    {
+      "item": "candidate_scout_v10.json review_flags.technical_qc_pass=false",
+      "resolution": "Stale pre-render research flag. Current qc_summary.json / technical_qc.json technical_pass=true at commit 8965beb.",
+      "status": "explained"
+    },
+    {
+      "item": "upload_metadata_v10.json target_title_chars_max=50 vs YouTube 100-char limit",
+      "resolution": "50 is an internal mobile-readability target, not the platform maximum.",
+      "status": "explained",
+      "citation": "[2](https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop)"
+    },
+    {
+      "item": "native_audio_ledger source_audio_duration_s=42.688 vs rights_ledger source_duration_seconds=42.709309",
+      "resolution": "Decoded audio stream duration vs official 4K video metadata duration; not a contradiction.",
+      "status": "explained"
+    },
+    {
+      "item": "edit_ledger beat 1 source_in=6.0 but source_out=3.574",
+      "resolution": "Beat 1 crosses the 1.5 s flash into the main source; source_for_time mapping wraps from 6.0 back to 0.0-based main. Not an error.",
+      "status": "explained"
+    },
+    {
+      "item": "candidate_scout clip_lock.locked_at_utc=2026-11-09 vs commit time 2026-11-10",
+      "resolution": "Research lock predates the render/push commit; chronology only.",
+      "status": "explained"
+    },
+    {
+      "item": "technical_pass=true vs human_creative_approval=false",
+      "resolution": "Deliberately separate; objective QC is not creative sign-off.",
+      "status": "explained"
+    },
+    {
+      "item": "vo_quality_fix before SHA 1cfd... vs after SHA efce...",
+      "resolution": "Two distinct committed MP4s; the de03272 audio was replaced by the corrected 8965beb audio.",
+      "status": "explained"
+    },
+    {
+      "item": "upload_metadata status=draft_not_published",
+      "resolution": "Still true; no upload, analytics, or audience result exists.",
+      "status": "verified"
+    }
+  ],
+  "uncertainty_ledger": [
+    "No human listening, full-motion review, or creative approval is documented.",
+    "No legal opinion, human legal review, or written astronaut/CSA permission is documented.",
+    "No commercial monetization, advertising, sponsorship, packaging or cover-art clearance is documented.",
+    "No YouTube Data API key, channel analytics, trend/competitor database, search-volume data, retention graph, CTR, RPM, view count or A/B result was available.",
+    "No virality, reach, retention, revenue, subscriber or audience-result claim is made.",
+    "Platform policies and Studio UI can change; the human publisher must re-check current settings before publishing.",
+    "The AI-use toggle decision is a recommendation based on cited examples, not a compliance determination.",
+    "Cross-platform character/hashtag limits are not asserted; verify in each app.",
+    "NASA's 'short-form social media is generally promotional' guidance creates a high-severity rights gate for commercial use; this study does not resolve it.",
+    "Perfection, zero flaws, zero omissions and 'nothing missed' are explicitly not claimed; unverifiable items are listed here instead."
+  ],
+  "sources": [
+    {
+      "ref": "YT_TITLE_TIPS",
+      "batch": "A",
+      "result_id": 9,
+      "citation": "[9](https://support.google.com/youtube/answer/12340300?hl=en-GB)",
+      "title": "Thumbnail & title tips - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/12340300?hl=en-GB",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "accurate succinct titles",
+        "important words first",
+        "limit ALL CAPS/emoji",
+        "custom thumbnail guidance",
+        "searchable vs intriguing titles"
+      ]
+    },
+    {
+      "ref": "YT_DESCRIPTIONS",
+      "batch": "D",
+      "result_id": 3,
+      "citation": "[3](https://support.google.com/youtube/answer/12948449?hl=en)",
+      "title": "Tips for video descriptions - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/12948449?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "first lines visible before Show more",
+        "unique description",
+        "1-2 main words",
+        "5000-char limit",
+        "chapters for longer videos"
+      ]
+    },
+    {
+      "ref": "YT_EDIT_SETTINGS",
+      "batch": "D",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop)",
+      "title": "Edit video settings - Computer - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/57404?hl=en&co=GENIE.Platform%3DDesktop",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "100-char title limit",
+        "5000-char description limit",
+        "tags field",
+        "category/education type",
+        "language and captions",
+        "license",
+        "Shorts remixing",
+        "audience/COPPA",
+        "altered content setting",
+        "related video",
+        "recording date/location"
+      ]
+    },
+    {
+      "ref": "YT_HASHTAGS",
+      "batch": "D",
+      "result_id": 1,
+      "citation": "[1](https://support.google.com/youtube/answer/6390658?hl=en)",
+      "title": "Find playlists & videos using hashtags - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6390658?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "up to 3 hashtags shown near title",
+        ">60 hashtags ignored",
+        "no misleading/unrelated hashtags",
+        "no ordinary descriptive tags in description",
+        "no spaces in hashtags"
+      ]
+    },
+    {
+      "ref": "YT_TAGS",
+      "batch": "A",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/146402?hl=en)",
+      "title": "Add tags to your YouTube videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/146402?hl=en",
+      "authority": "official_help",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "tags play a minimal role",
+        "title/thumbnail/description matter more",
+        "excessive tags in description prohibited"
+      ]
+    },
+    {
+      "ref": "YT_SHORTS_DISCOVERY",
+      "batch": "A",
+      "result_id": 4,
+      "citation": "[4](https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts)",
+      "title": "Search & discovery tips - Shorts - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/11914225?hl=en&co=YOUTUBE._YTVideoType%3Dshorts",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "Shorts ranked by performance and personalization",
+        "avg view duration / avg % viewed / likes / post-watch surveys",
+        "metadata matches viewer search",
+        "no minimum posting cadence"
+      ]
+    },
+    {
+      "ref": "YT_PERF_FAQ",
+      "batch": "E",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/141805?hl=en)",
+      "title": "YouTube performance FAQ & Troubleshooting - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/141805?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "search ranks by title/description/content match and engagement",
+        "tags not important",
+        "avoid clickbait/ALL CAPS/!!!!!",
+        "publish time not known to impact long-term performance",
+        "no required upload cadence",
+        "monetization status not a discovery signal"
+      ]
+    },
+    {
+      "ref": "YT_SPAM",
+      "batch": "E",
+      "result_id": 1,
+      "citation": "[1](https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365)",
+      "title": "Spam policy - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/2801973?hl=en-GB&amp=&ref_topic=9282365",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "scraped content needs transformative editing/commentary/educational value",
+        "malicious clickbait prohibited",
+        "detection evasion prohibited",
+        "asking for likes/comments is allowed",
+        "no incentives/coercion"
+      ]
+    },
+    {
+      "ref": "YT_GENAI",
+      "batch": "B",
+      "result_id": 2,
+      "citation": "[2](https://support.google.com/youtube/answer/14328491?hl=en)",
+      "title": "Disclosing use of GenAI content - Computer - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/14328491?hl=en",
+      "authority": "official_help",
+      "fetched": true,
+      "chunks": [
+        0
+      ],
+      "used_for": [
+        "disclose realistic AI-altered content",
+        "caption creation / voice or audio repair / cloning own voice are minor examples",
+        "AI use toggle in Studio",
+        "disclosure alone does not limit reach or monetization"
+      ]
+    },
+    {
+      "ref": "YT_REUSED_FAQ",
+      "batch": "B",
+      "result_id": 7,
+      "citation": "[7](https://support.google.com/youtube/community-guide/271248162/%F0%9F%94%8E-faq-reused-content-youtube%E2%80%99s-partner-program?hl=en)",
+      "title": "FAQ: Reused Content & YouTube's Partner Program - YouTube Community",
+      "url": "https://support.google.com/youtube/community-guide/271248162/%F0%9F%94%8E-faq-reused-content-youtube%E2%80%99s-partner-program?hl=en",
+      "authority": "official_community_faq",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "transformative commentary/educational value",
+        "AI channels can be eligible if original"
+      ]
+    },
+    {
+      "ref": "YT_IMPERSONATION",
+      "batch": "B",
+      "result_id": 8,
+      "citation": "[8](https://support.google.com/youtube/answer/2801947?sjid=14893021524564886382-NA)",
+      "title": "Impersonation policy - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/2801947?sjid=14893021524564886382-NA",
+      "authority": "official_help",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no AI voice clone of a real person",
+        "no false authorization/endorsement"
+      ]
+    },
+    {
+      "ref": "YT_ADS",
+      "batch": "A",
+      "result_id": 6,
+      "citation": "[6](https://support.google.com/youtube/answer/6162278?hl=en)",
+      "title": "Advertiser-friendly content guidelines - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6162278?hl=en",
+      "authority": "official_help",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no profanity/stronger language in title/thumbnail",
+        "science content is generally suitable"
+      ]
+    },
+    {
+      "ref": "NASA_IMAGES",
+      "batch": "C",
+      "result_id": 1,
+      "citation": "[1](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+      "title": "NASA Images and Media Usage Guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa",
+      "fetched": true,
+      "chunks": [
+        0,
+        2,
+        3
+      ],
+      "used_for": [
+        "NASA content generally not US-copyrighted",
+        "educational/informational use",
+        "NASA should be acknowledged",
+        "no implied endorsement",
+        "identifiable persons / commercial use may need permission",
+        "current astronauts' names/likenesses restricted in promotional material",
+        "clearances may be needed for cover art / promotional content"
+      ]
+    },
+    {
+      "ref": "NASA_ADVERTISING",
+      "batch": "C",
+      "result_id": 2,
+      "citation": "[2](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/)",
+      "title": "Advertising Guidelines - NASA",
+      "url": "https://www.nasa.gov/nasa-brand-center/advertising-guidelines/",
+      "authority": "official_nasa",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no NASA endorsement",
+        "no insignia in ads",
+        "current astronauts/employees not in ads or marketing"
+      ]
+    },
+    {
+      "ref": "NASA_STRATEGIC",
+      "batch": "C",
+      "result_id": 8,
+      "citation": "[8](https://www.nasa.gov/nasa-brand-center/strategic-partnerships/)",
+      "title": "NASA Strategic Partnerships / Promotional Content",
+      "url": "https://www.nasa.gov/nasa-brand-center/strategic-partnerships/",
+      "authority": "official_nasa",
+      "fetched": true,
+      "chunks": [
+        0,
+        2,
+        3
+      ],
+      "fetched_redirect_url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "used_for": [
+        "publicly available content usable if guidelines followed",
+        "short-form social media generally considered promotional content",
+        "imagery with NASA identifiers/current astronauts/current employees may not be used in promotional content",
+        "no co-branding / sponsorship / endorsement"
+      ]
+    },
+    {
+      "ref": "NASA_BRAND",
+      "batch": "C",
+      "result_id": 3,
+      "citation": "[3](https://www.nasa.gov/nasa-brand-center/)",
+      "title": "NASA Brand Center",
+      "url": "https://www.nasa.gov/nasa-brand-center/",
+      "authority": "official_nasa",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no endorsement or misleading use",
+        "NASA identifiers protected",
+        "third-party copyrighted material needs its own permission"
+      ]
+    },
+    {
+      "ref": "NASA_MERCH",
+      "batch": "C",
+      "result_id": 4,
+      "citation": "[4](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/)",
+      "title": "NASA Merchandise Approvals",
+      "url": "https://www.nasa.gov/nasa-brand-center/merchandise-approvals/",
+      "authority": "official_nasa",
+      "fetched": false,
+      "chunks": [],
+      "used_for": [
+        "no 'NASA approved' / 'official NASA' / co-branding wording",
+        "insignia/logotype/seal not public domain"
+      ]
+    }
+  ],
+  "source_quality_note": "Official YouTube Help and NASA pages are used for policy claims. Community posts surfaced in search (e.g. a 60-second Shorts definition or tag-stuffing anecdotes) are not used as authoritative policy here.",
+  "citation_policy": "External claims use Arena web_search result IDs/URLs in [id](url) form. Workspace claims cite committed file paths.",
+  "generated_by": "production/monarch-cam/caught_on_camera_commentary_v10/build_viral_metadata_v10.py"
+}
