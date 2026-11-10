@@ -1,0 +1,73 @@
+{
+  "status": "INCOMPLETE editorial assembly; not final or approved",
+  "fps": 30,
+  "duration_frames": 2550,
+  "audio": "production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrack-draft/Narration-Score-DRAFT.m4a",
+  "audio_sha256": "434f2c344b428982edf8b00607b8361c4c45bec95da6ac5330c87428a45c3760",
+  "shots": [
+    {
+      "start": 0,
+      "frames": 240,
+      "in": 0,
+      "file": ".cache/mammoth-shoreline-review/shoreline-motion-review-silent.mp4",
+      "sha256": "9675d1af67e456cee37276eb9c011fc72b769923a9ba6ce4b93eafcf9464fe04",
+      "purpose": "living reconstruction"
+    },
+    {
+      "start": 240,
+      "frames": 330,
+      "in": 0,
+      "file": ".cache/mammoth-foraging-review/foraging-motion-review-silent.mp4",
+      "sha256": "064f652e842537e7909613f48fa5b8499310e1e8e40847681c4dfb5027ca0aac",
+      "purpose": "ordinary woolled reconstruction; not a reconstruction of predicted coat"
+    },
+    {
+      "start": 570,
+      "frames": 120,
+      "in": 19,
+      "file": ".cache/mammoth-shoreline-review/shoreline-motion-review-silent.mp4",
+      "sha256": "9675d1af67e456cee37276eb9c011fc72b769923a9ba6ce4b93eafcf9464fe04",
+      "purpose": "invented coastal landscape"
+    },
+    {
+      "start": 690,
+      "frames": 270,
+      "in": 0,
+      "file": ".cache/mammoth-island-map/island-map-motion-review-silent.mp4",
+      "sha256": "31e3749361a54605d0976708f3abd19aa9e003477a02f2e93bf9848118d1ed46",
+      "purpose": "modern outline only, not ancient shoreline"
+    },
+    {
+      "start": 960,
+      "frames": 390,
+      "in": 0,
+      "file": ".cache/mammoth-excavation/excavation-motion-review-silent.mp4",
+      "sha256": "46066f08f68e3ddf3885736f166538d8092d171aa80e5c2a5ae0f48f8ce88900",
+      "purpose": "illustrative excavation, unidentified reference fragment"
+    },
+    {
+      "start": 1350,
+      "frames": 360,
+      "in": 0,
+      "file": ".cache/mammoth-foraging-review/foraging-motion-review-silent.mp4",
+      "sha256": "064f652e842537e7909613f48fa5b8499310e1e8e40847681c4dfb5027ca0aac",
+      "purpose": "living-world cutaway; repeated footage, replace"
+    },
+    {
+      "start": 1710,
+      "frames": 360,
+      "in": 12,
+      "file": ".cache/mammoth-shoreline-review/shoreline-motion-review-silent.mp4",
+      "sha256": "9675d1af67e456cee37276eb9c011fc72b769923a9ba6ce4b93eafcf9464fe04",
+      "purpose": "coastal herd; repeated footage, replace"
+    },
+    {
+      "start": 2070,
+      "frames": 480,
+      "in": 7,
+      "file": ".cache/living-world-edit/motion-review-silent.mp4",
+      "sha256": "6f9f2bbb7ec8c872833ef7410f70fe87fd8340dcc21bd5fa02f1670e10e246a6",
+      "purpose": "living-world cutaway"
+    }
+  ]
+}

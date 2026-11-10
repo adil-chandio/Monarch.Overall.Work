@@ -12,3 +12,5 @@ node production/extinct-life/longform-mammoth/cinematic-rebuild/island-map/inspe
 ```
 
 Inspection images go to ignored `.cache/mammoth-island-map`. Deterministic rendering tests do not confirm the map's science or creative suitability.
+
+A provisional 360-frame silent review clip can be rendered with `node production/extinct-life/longform-mammoth/cinematic-rebuild/island-map/render-preview.mjs 360`. It remains modern-coastline-only and is not an approved film shot.
