@@ -1,0 +1,463 @@
+{
+  "edition": "v12_phase_bc_rights_gate_and_script_draft",
+  "phase": "C - full VO script DRAFT with placeholders",
+  "status": "DRAFT_NOT_FOR_RENDER_NOT_RECORDED",
+  "winner": "MC-01 THE REPLAY CODE: 8 Moments, One Hidden Rule",
+  "runtime_seconds": 600,
+  "chapters": 13,
+  "hooks": [
+    {
+      "id": "V12-H1",
+      "label": "Primary",
+      "text": "Eight different clips. One reason you cannot stop replaying them. I will show you the rule - then prove it on every single one."
+    },
+    {
+      "id": "V12-H2",
+      "label": "Puzzle-first",
+      "text": "These eight moments look unrelated. By the end of this video you will be able to predict which clip will make you hit replay before it even finishes."
+    },
+    {
+      "id": "V12-H3",
+      "label": "Forensic-first",
+      "text": "I slowed eight viral moments down to the frame. Every one of them breaks the same expectation at exactly the same point."
+    }
+  ],
+  "chapter_ledger": [
+    {
+      "n": 1,
+      "t": "0:00-0:20",
+      "name": "Cold open: 3-second montage of 8 different moments",
+      "vo_word_budget": 25,
+      "vo_words_actual": 23,
+      "shot_list": "One fast cut from each of 8 DIFFERENT clips (0.8-1.2s each), no logo, no greeting, native audio only. Then the one-line hook.",
+      "vo_text": "Eight different clips. One reason you cannot stop replaying them. I will show you the rule, then prove it on every single one.",
+      "contains_slot_placeholder": false,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 2,
+      "t": "0:20-0:55",
+      "name": "The promise and the rule",
+      "vo_word_budget": 75,
+      "vo_words_actual": 85,
+      "shot_list": "Presenter on a clean card. One sentence per line, no stock b-roll.",
+      "vo_text": "Here is the rule, stated once, plainly. A moment becomes rewatchable when it breaks an expectation you did not know you had, and the explanation arrives one beat later than your brain wanted it. Not the surprise alone. Not the explanation alone. The gap between them. Over the next ten minutes I will test that rule on eight completely different moments. If the rule is real, it should survive all eight. If it does not, I will say so. No outcome promises. Just the mechanism.",
+      "contains_slot_placeholder": false,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 3,
+      "t": "0:55-1:40",
+      "name": "Why 'rewatched or shared' is a real signal",
+      "vo_word_budget": 110,
+      "vo_words_actual": 132,
+      "shot_list": "Original metric card: Spikes / Intro / Dips, drawn by us. On-screen source note.",
+      "vo_text": "Quick note on where this idea comes from. YouTube's own help pages call those moments Spikes, points that get rewatched or shared. Intro is the share still watching after thirty seconds. Dips are where people skip or leave. Those reports belong to the channel owner. They need at least sixty seconds and a hundred views, and they take a day or two to appear. I do not have them for anyone else's channel, and I am not going to pretend I do. What I can use is public information: view counts, titles, durations, published dates, and the structure a creator chose to put in their own description. So this is a structural argument, not a claim about anyone's retention graph. That distinction matters for the rest of the video.",
+      "contains_slot_placeholder": false,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 4,
+      "t": "1:40-2:55",
+      "name": "CLIP 1 - expectation violation",
+      "vo_word_budget": 130,
+      "vo_words_actual": 125,
+      "shot_list": "[SLOT 1 - SOURCE PENDING RIGHTS GATE] <=10s cold, native audio. FREEZE on the violation frame. ORIGINAL expected-vs-actual diagram.",
+      "vo_text": "[SLOT 1 - SOURCE PENDING RIGHTS GATE. Play the clip cold, native audio, no captions over it yet.] Watch that again. Before I explain anything, notice what you expected: the ordinary version of this event, the one your brain filled in from a thousand earlier examples. Now notice the exact frame where that prediction stopped working. [FREEZE FRAME - ORIGINAL DIAGRAM: expected path versus actual path.] The rewatch impulse does not start at the surprise. It starts in the half-second after, when your brain still has no place to file it. That delay is the first half of the rule. The second half is that someone has to close it. Which is what we are about to do, eight times, with a different mechanism each time.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 5,
+      "t": "2:55-4:05",
+      "name": "CLIP 2 - the physics surprise",
+      "vo_word_budget": 135,
+      "vo_words_actual": 140,
+      "shot_list": "[SLOT 2 - SOURCE PENDING RIGHTS GATE] <=10s, then 0.5x replay. ORIGINAL ray / force diagram. On-screen first-party source note.",
+      "vo_text": "[SLOT 2 - SOURCE PENDING RIGHTS GATE. Play up to ten seconds, then replay at half speed.] Here the gap is physical. [FACT - VERIFY AGAINST A FIRST-PARTY OFFICIAL SOURCE FOR THIS CLIP BEFORE RECORDING.] The frame looks wrong because a property of the medium, light, gravity, surface tension or momentum, is doing something our everyday intuition was not built to predict. [ORIGINAL RAY OR FORCE DIAGRAM.] Notice I am not saying the footage is fake, and I am not saying the creator intended a trick. I am saying the explanation is late. Your eyes register the event immediately, but the reason needs a sentence. That one-sentence lag is exactly the shape of a rewatch. At half speed you can see where the reason should have been available. At full speed it is already gone. That is the whole mechanic.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 6,
+      "t": "4:05-5:10",
+      "name": "CLIP 3 - timing / slow motion",
+      "vo_word_budget": 120,
+      "vo_words_actual": 126,
+      "shot_list": "[SLOT 3 - SOURCE PENDING RIGHTS GATE] Three labelled passes: 1x, 0.5x, 0.25x. ORIGINAL frame-timeline diagram.",
+      "vo_text": "[SLOT 3 - SOURCE PENDING RIGHTS GATE. Three labelled passes: full speed, half speed, quarter speed.] Same footage, three speeds, three different amounts of information. At full speed you get an outcome. At half speed you get a sequence. At quarter speed you get the single frame that actually carries the surprise. [ORIGINAL FRAME-TIMELINE DIAGRAM.] Here is the useful part. Slowing a moment down does not create the rewatch impulse. It reveals where it was hiding. A good edit does not add suspense here. It moves the explanation to just after the point where the viewer has already started asking. I cannot tell you that was intentional. I can only show you the structure is there, and that it is the same structure as clip one.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 7,
+      "t": "5:10-6:15",
+      "name": "CLIP 4 - scale / size illusion",
+      "vo_word_budget": 120,
+      "vo_words_actual": 134,
+      "shot_list": "[SLOT 4 - SOURCE PENDING RIGHTS GATE] <=10s. ORIGINAL scale diagram with a labelled reference object. No stock b-roll as hero.",
+      "vo_text": "[SLOT 4 - SOURCE PENDING RIGHTS GATE. Play up to ten seconds.] This one is a scale error. [ORIGINAL SCALE DIAGRAM WITH A LABELLED REFERENCE OBJECT.] Your visual system needs a known size nearby before it can judge an unknown one. Remove that reference, or put a misleading one in, and the same object becomes two different objects in the same shot. [FACT - VERIFY THE REFERENCE LENGTH AGAINST THE SOURCE BEFORE RECORDING.] Notice the expectation being broken here is not about events. It is about measurement. That matters, because it means the rule is not about surprises in general. It is about a specific kind of violated prediction, plus a delayed repair. Four clips in, four different surfaces, one shape. That is the first real sign this might be a rule rather than a coincidence.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 8,
+      "t": "6:15-7:10",
+      "name": "CLIP 5 - sound and silence",
+      "vo_word_budget": 105,
+      "vo_words_actual": 107,
+      "shot_list": "[SLOT 5 - SOURCE PENDING RIGHTS GATE] Pass one WITH native audio, pass two muted with commentary. ORIGINAL two-row A/B beat diagram, drawn not sampled.",
+      "vo_text": "[SLOT 5 - SOURCE PENDING RIGHTS GATE. Pass one with native audio. Pass two muted, with commentary.] Two passes, same frames. On the first, the sound tells you when the event is coming. On the second, without it, the timing itself has to do that work. [ORIGINAL TWO-ROW A/B BEAT DIAGRAM.] We keep the source's native audio and we do not substitute music or effects, because the comparison only works if the audio is the real one. What changes between the passes is not the information. It is when you are allowed to resolve it. That is the same gap again, wearing a different costume.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 9,
+      "t": "7:10-8:00",
+      "name": "CLIP 6 - the human reaction",
+      "vo_word_budget": 95,
+      "vo_words_actual": 89,
+      "shot_list": "[SLOT 6 - SOURCE PENDING RIGHTS GATE] <=10s. ORIGINAL attention-reset timeline. No face crop reused as thumbnail. No name used promotionally.",
+      "vo_text": "[SLOT 6 - SOURCE PENDING RIGHTS GATE. Play up to ten seconds.] A face is the fastest reset signal we have. [ORIGINAL ATTENTION-RESET TIMELINE.] When someone reacts, we automatically check what they are looking at, and for a moment our own prediction is suspended. I am not naming anyone in this clip, and I am not implying that any person or organisation endorses this video. The analytic point is narrower. A reaction shot hands the explanation to someone else for a beat, which delays closure. Same rule, sixth surface.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 10,
+      "t": "8:00-8:45",
+      "name": "CLIP 7 - the near-miss / coincidence",
+      "vo_word_budget": 85,
+      "vo_words_actual": 80,
+      "shot_list": "[SLOT 7 - SOURCE PENDING RIGHTS GATE] <=10s. ORIGINAL two-track converging timeline. No invented date, injury, outcome or quote.",
+      "vo_text": "[SLOT 7 - SOURCE PENDING RIGHTS GATE. Play up to ten seconds.] Two independent sequences converge, and for one frame they look like they were written together. [ORIGINAL TWO-TRACK CONVERGING TIMELINE.] No invented date, no invented outcome, no quote I cannot source. The rewatch here is a verification loop. You go back to check whether you actually saw the alignment, or built it yourself. That is a different reason to replay, but the shape is identical: expectation, violation, delayed repair.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 11,
+      "t": "8:45-9:25",
+      "name": "CLIP 8 + the prediction test (MC-02 folded in)",
+      "vo_word_budget": 75,
+      "vo_words_actual": 81,
+      "shot_list": "[SLOT 8 - SOURCE PENDING RIGHTS GATE] Play the whole clip with NO explanation. ORIGINAL 8-slot callback grid, one cell per DIFFERENT clip.",
+      "vo_text": "[SLOT 8 - SOURCE PENDING RIGHTS GATE. Play the whole clip with NO explanation.] Before I say anything: where would you put the replay point? Hold that answer. [ORIGINAL EIGHT-SLOT CALLBACK GRID, ONE CELL PER DIFFERENT CLIP.] Every cell in that grid is a different clip. Every one of them broke a prediction, then made you wait for the repair. If you picked the frame I picked, the rule just worked in reverse. It let you predict instead of just recognise.",
+      "contains_slot_placeholder": true,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 12,
+      "t": "9:25-9:50",
+      "name": "The rule, restated + honest limits",
+      "vo_word_budget": 55,
+      "vo_words_actual": 89,
+      "shot_list": "One screen with the six-step rule. Then a plainly worded limits card.",
+      "vo_text": "So here is the rule in six steps: a prediction, a violation, a short delay, a repair, a replay to confirm, and a reason to share the confirmation. And here are the honest limits. I used public view counts and public structure, not anyone's private retention, click-through or revenue data. I could not obtain transcripts for most of the comparison videos. No clip in this episode has been through a human rights review, and no human has approved this edit. Those are open items, not fine print.",
+      "contains_slot_placeholder": false,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    },
+    {
+      "n": 13,
+      "t": "9:50-10:00",
+      "name": "Genuine question + series teaser",
+      "vo_word_budget": 20,
+      "vo_words_actual": 27,
+      "shot_list": "One specific question on screen. One next-episode teaser. No like/subscribe coercion or reward.",
+      "vo_text": "Which of the eight made you replay before the explanation landed? Tell me the number. Next file: the same rule, tested on moments that never went viral.",
+      "contains_slot_placeholder": false,
+      "status": "DRAFT_NOT_RECORDED_NOT_RENDERED"
+    }
+  ],
+  "vo_words_budget": 1150,
+  "vo_words_actual": 1238,
+  "vo_wpm_estimate": 142.8,
+  "vo_reading_grade": 5.6,
+  "reading_grade_formula": "Flesch-Kincaid, same formula as yt_intel/reverse.py (computed locally, no API)",
+  "edit_decisions": [
+    {
+      "rule": "J-cut / L-cut between clip and commentary",
+      "why": "Keeps the explanation arriving one beat late - the thesis itself, not just a style choice."
+    },
+    {
+      "rule": "One original diagram per clip, drawn by us",
+      "why": "Makes the repair visible and keeps the video commentary-dominant, not a compilation."
+    },
+    {
+      "rule": "Native audio retained; no music or SFX substitution",
+      "why": "Slot 5's A/B comparison is only valid with the real audio. Also a rights requirement."
+    },
+    {
+      "rule": "Three labelled replay passes (1x / 0.5x / 0.25x) on slot 3",
+      "why": "Real slow-motion winners show the reveal lives in a single frame."
+    },
+    {
+      "rule": "No clip strung together with little narrative; no mostly non-verbal reaction",
+      "why": "Official reused-content policy line [7](https://support.google.com/youtube/answer/1311392?hl=en)"
+    },
+    {
+      "rule": "Source share <=80s / 600s (<=13.3%), each clip <=10s",
+      "why": "Original commentary must dominate; permission alone is not enough [7](https://support.google.com/youtube/answer/1311392?hl=en)"
+    },
+    {
+      "rule": "No ALL CAPS, no coercion, no reward CTA",
+      "why": "Packaging and spam rules [6](https://support.google.com/youtube/answer/141805?hl=en) [14](https://support.google.com/youtube/answer/2801973?hl=en)"
+    }
+  ],
+  "metadata_draft": {
+    "status": "DRAFT_NOT_UPLOADED_NOT_PUBLISHED",
+    "working_title": "Why These 8 Moments Make You Rewatch: A Forensic Breakdown",
+    "working_title_chars": 58,
+    "alt_titles": [
+      "The Replay Code: 8 Moments, One Hidden Rule",
+      "Eight Clips, One Reason You Hit Replay"
+    ],
+    "description_draft": "Eight different clips. One rule about why a moment makes you hit replay. I break each one down frame by frame, then test the rule on a final unseen clip. Sources and rights credits for every clip are listed below once cleared. This is an original commentary and analysis video; no endorsement implied. [CREDITS BLOCK - PENDING PER-CLIP RIGHTS GATE] [AI-USE DISCLOSURE - PENDING]",
+    "hashtags": [
+      "#science",
+      "#videoessay",
+      "#physics"
+    ],
+    "hashtag_note": "At most three displayed hashtags; more than sixty are ignored; misleading or unrelated hashtags are disallowed [13](https://support.google.com/youtube/answer/6390658?hl=en)",
+    "category": {
+      "primary": "Science & Technology",
+      "alternate": "Education + science experiment",
+      "human_must_confirm": true,
+      "note": "Carried from V10; ID values were caveated and must be confirmed by a human in Studio."
+    },
+    "pinned_comment_draft": "Which clip made you replay before the explanation landed - 1 to 8?\n\nThis video is original commentary and analysis. Sources and credits are listed in the description. No endorsement implied.",
+    "ai_use_disclosure": "REQUIRED if synthetic or altered media is used; content and wording pending human review [15](https://support.google.com/youtube/answer/14328491?hl=en)",
+    "monetization_recommendation": "OFF pending written clearance, identifiable-person permission and human legal review. Ads ON confirms rights to all visual and audio elements [17](https://support.google.com/youtube/answer/94522?hl=en)",
+    "clickbait_guard": "Accurate title/thumbnail, no deceptive clickbait or ALL CAPS; tags are not important [6](https://support.google.com/youtube/answer/141805?hl=en)"
+  },
+  "placeholder_rule": "Every clip reference is [SLOT n - SOURCE PENDING RIGHTS GATE]. No real clip, agency asset or third-party video is named as a source clip anywhere in the VO.",
+  "real_script_benchmark": {
+    "file": "reverse-k5s1cMNTmGs.json",
+    "id": "k5s1cMNTmGs",
+    "title": "How a slinky falls in slow motion #shorts",
+    "channel": "Veritasium",
+    "views": 36618923,
+    "likes": 1554827,
+    "comments": 10777,
+    "duration": "PT42S",
+    "duration_seconds": 42,
+    "published": "2021-07-19T20:48:32Z",
+    "transcript_status": "ok",
+    "transcript_words": 143,
+    "script_words": 140,
+    "wpm": 200.0,
+    "reading_grade": 8.1,
+    "cta_count": 0,
+    "filler_rate": 0.0071,
+    "first_sentence": "If you drop a slinky dangling under its own weight, the bottom won't start falling until the whole slinky has collapsed.",
+    "opens_with_number": false,
+    "opens_with_you": true,
+    "claim_type": "generic statement",
+    "structure": [
+      {
+        "at": "0:00",
+        "title": "cold open",
+        "pct": 0
+      },
+      {
+        "at": "0:03",
+        "title": "hook restated",
+        "pct": 8
+      },
+      {
+        "at": "0:09",
+        "title": "setup / promise",
+        "pct": 22
+      },
+      {
+        "at": "0:18",
+        "title": "first proof",
+        "pct": 45
+      },
+      {
+        "at": "0:26",
+        "title": "escalation",
+        "pct": 62
+      },
+      {
+        "at": "0:33",
+        "title": "payoff",
+        "pct": 80
+      },
+      {
+        "at": "0:39",
+        "title": "outro / CTA",
+        "pct": 93
+      }
+    ],
+    "replication": {
+      "keep": [
+        "address the viewer directly in the first 12 words"
+      ],
+      "change": [],
+      "beat": [
+        "add a concrete number inside the first 3 seconds",
+        "the visual grammar is a year old; rebuild the look, keep the structure"
+      ],
+      "note": "keep the mechanism, change the surface — copying the surface is how clones die"
+    },
+    "psychology": {
+      "drivers": [
+        {
+          "driver": "self-reference",
+          "effect": "the 'you' effect — self-relevant words get attention"
+        }
+      ],
+      "note": "descriptive mapping of the opening, not a causal claim"
+    }
+  },
+  "angle_probes": [
+    {
+      "slug": "angle-why-we-rewatch",
+      "topic": "why we rewatch moments",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 20,
+      "million_plus": 1,
+      "total_views": 2812209,
+      "median_views": 20351,
+      "top3_share": 0.854,
+      "fresh_share_30d": 1.0,
+      "reading": "too young to judge — this sample is almost entirely under 30 days old, so the view counts are a stopwatch, not a verdict; ask again when it has run",
+      "verdict": "NO",
+      "score": 39.3,
+      "parts": {
+        "demand": 46.0,
+        "winnability": 42.6,
+        "mechanism": 25.0,
+        "fit": null,
+        "timing": null
+      },
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "top_rows": [
+        {
+          "id": "eE-wf3jZx3Q",
+          "title": "The NO-GOAL Moment You Need to Watch TWICE! 😳⚽",
+          "channel": "FitVision",
+          "views": 1243993,
+          "duration": "PT15S"
+        },
+        {
+          "id": "5CytU1UThG4",
+          "title": "TOP 100 Most Viewed JYNXZI Clips Of ALL TIME! *JYNXZI REACTS*",
+          "channel": "Jynxzi Live",
+          "views": 760020,
+          "duration": "PT35M1S"
+        },
+        {
+          "id": "5NVCHohnf9I",
+          "title": "Ranking Top 3 Tyler Vitelli Moments 25",
+          "channel": "Tyler Vitelli",
+          "views": 396291,
+          "duration": "PT27S"
+        }
+      ]
+    },
+    {
+      "slug": "angle-frame-by-frame",
+      "topic": "frame by frame breakdown explained",
+      "lane": "api",
+      "order": "relevance",
+      "status": "ok",
+      "count": 20,
+      "million_plus": 5,
+      "total_views": 13891730,
+      "median_views": 163086,
+      "top3_share": 0.595,
+      "fresh_share_30d": 0.0,
+      "reading": "distributed — no single video owns it, entry is feasible",
+      "verdict": "NO",
+      "score": 31.6,
+      "parts": {
+        "demand": 37.5,
+        "winnability": 40.5,
+        "mechanism": 0.0,
+        "fit": null,
+        "timing": 55.0
+      },
+      "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+      "top_rows": [
+        {
+          "id": "jE4RoVwaQMY",
+          "title": "Frame-by-frame analysis of The Emoji Movie Trailer",
+          "channel": "jacksfilms",
+          "views": 4355247,
+          "duration": "PT1H5M35S"
+        },
+        {
+          "id": "-nOC-UgaLLw",
+          "title": "How to Animate Impact Frames #tutorial #onepiece #anime",
+          "channel": "FlipaClip",
+          "views": 2426333,
+          "duration": "PT58S"
+        },
+        {
+          "id": "2HL-gGLu8Jo",
+          "title": "King Crimson - Frame By Frame",
+          "channel": "King Crimson",
+          "views": 1488041,
+          "duration": "PT5M8S"
+        }
+      ]
+    },
+    {
+      "slug": "angle-science-commentary",
+      "topic": "science commentary long form",
+      "lane": "api",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 1,
+      "million_plus": 1,
+      "total_views": 4965860,
+      "median_views": 4965860,
+      "top3_share": 1.0,
+      "fresh_share_30d": 0.0,
+      "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them",
+      "verdict": "NO",
+      "score": 33.7,
+      "parts": {
+        "demand": 54.6,
+        "winnability": 0.0,
+        "mechanism": null,
+        "fit": null,
+        "timing": 55.0
+      },
+      "next_probe": "write the hook and title first; if they score under 80, the topic will not save them",
+      "top_rows": [
+        {
+          "id": "tdIUMkXxtHg",
+          "title": "What the actual science says about \"brain rot\"",
+          "channel": "Howtown",
+          "views": 4965860,
+          "duration": "PT25M31S"
+        }
+      ]
+    }
+  ],
+  "hard_stop": "This draft is NOT cleared for recording. Recording, edit and render begin only after all 8 Phase B dossiers pass human legal review.",
+  "non_claims": {
+    "vo_recorded": false,
+    "final_script_approved": false,
+    "render_done": false,
+    "mp4_created": false,
+    "upload_done": false,
+    "publish_done": false,
+    "category_set": false,
+    "pinned_comment_posted": false,
+    "monetization_changed": false,
+    "human_creative_approval": false,
+    "human_legal_review": false,
+    "legal_clearance": false,
+    "guaranteed_views": false,
+    "guaranteed_retention": false,
+    "guaranteed_virality": false,
+    "perfection": false,
+    "flawlessness": false,
+    "nasa_endorsement": false,
+    "clip_acquired": false
+  }
+}

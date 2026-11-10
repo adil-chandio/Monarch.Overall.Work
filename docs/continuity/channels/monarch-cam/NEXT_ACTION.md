@@ -1,3 +1,11 @@
+## V12 PHASE B/C addendum - executable rights gate + VO script DRAFT (NO clearance, NO render)
+
+- Phase B/C done via GitHub Actions run `42905149277` (3 angle-specific topic probes + 6 real-winner reverse teardowns) using the existing `YOUTUBE_API_KEY` secret, presence only. Bot commit `a6895cf`. Five of six transcripts were blocked (yt-dlp bot check / no captions); ONE succeeded: Veritasium `k5s1cMNTmGs` (36,618,923 views, 140 words, 200 wpm, reading grade 8.1, 0 CTAs, opens with 'you'). Its real structure map is promise -> setup -> first proof -> escalation -> payoff.
+- Deliverables: `research/multi_clip_long_form_v12/PHASE_B_RIGHTS_GATE_V12.md` + `.json` (8 dossiers, 18 field rules, 8 kill conditions, 5 attribution templates, executable gate-enforcement test that REJECTS a fabricated cleared slot) and `PHASE_C_SCRIPT_DRAFT_V12.md` + `.json` (FULL 13-chapter VO script draft with [SLOT n - SOURCE PENDING RIGHTS GATE] placeholders, 3 hook variants, 7 edit decisions, metadata/pinned-comment drafts).
+- HARD STOP UNCHANGED: all 8 x 18 rights fields NULL, clearance_status=pending, human_legal_review=false, reviewer sign-off empty. Winner unchanged: MC-01, 8 DIFFERENT clips, 10:00, <=13.3% source share. V10/Short NASA water-bubble asset still EXCLUDED from all 8 slots.
+- NO clip downloaded/cleared, NO VO recorded, NO final script approved, NO render/MP4, NO upload/publish, NO category set, NO pinned comment posted, NO monetization change, NO human creative approval, NO legal clearance, NO guaranteed views.
+- This addendum does NOT supersede the standing 'await human full-motion/native-audio review' line below.
+
 ## V12 PHASE A addendum - real API clip-moment scouting (live API, NO clip cleared)
 
 - Phase A done via GitHub Actions run `42895703914` using the existing `YOUTUBE_API_KEY` secret (presence only; value never printed/stored). Five targeted real Data API topic reports committed under `research/multi_clip_long_form_v12/api_evidence/phase_a/`; bot commit `6db3924`.

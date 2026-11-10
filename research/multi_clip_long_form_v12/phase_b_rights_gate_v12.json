@@ -1,0 +1,1036 @@
+{
+  "edition": "v12_phase_bc_rights_gate_and_script_draft",
+  "phase": "B - executable per-clip rights gate",
+  "status": "ALL_8_DOSSIERS_PENDING_NO_CLIP_CLEARED",
+  "hard_stop": "NO clip enters the edit until every rights_gate field is filled with a verified value and human_legal_review=true for THAT clip.",
+  "gate_enforcement": {
+    "test": "fabricated cleared slot with NULL fields",
+    "rejected": true,
+    "expected_rejected": true,
+    "rule": "clearance_status='cleared' requires human_legal_review=true AND zero NULL rights fields"
+  },
+  "excluded_existing_short_clip": {
+    "nasa_asset_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "rule": "EXCLUDED from all 8 slots - no hero, callback, montage filler or whole-video subject."
+  },
+  "field_rules": [
+    {
+      "field": "official_source_url",
+      "verify": "The exact first-party page where the asset is published, not a repost or a search result.",
+      "pass": "URL resolves on the rights-holder's own domain and the asset ID matches.",
+      "fail": "Aggregator, mirror, embed, social repost, or an unverifiable link."
+    },
+    {
+      "field": "nasa_or_agency_asset_id",
+      "verify": "The agency's own catalogue / asset identifier for this exact file.",
+      "pass": "A stable agency asset ID is recorded and matches the downloaded file.",
+      "fail": "Only a YouTube video ID, or no catalogue ID at all."
+    },
+    {
+      "field": "licence_basis",
+      "verify": "The written licence or public-domain statement covering THIS file, with its URL and retrieval date.",
+      "pass": "Licence text explicitly permits this use, including commercial use if monetization is intended.",
+      "fail": "Assumed 'public domain', 'educational use', 'fair use' as a licence, or a generic site-wide statement that excludes some media."
+    },
+    {
+      "field": "third_party_copyrighted_material_check",
+      "verify": "Whether the frame or audio contains anyone else's content (music, logo, broadcast graphic, another creator's footage).",
+      "pass": "Written 'none found' after frame + audio inspection, or a documented clearance for each item.",
+      "fail": "Uninspected, or contains uncleared third-party material."
+    },
+    {
+      "field": "identifiable_persons_check",
+      "verify": "Whether any identifiable person appears and what consent/permissions exist.",
+      "pass": "No identifiable person, or documented permission plus the required likeness/AI-likeness review.",
+      "fail": "Identifiable person with no documented permission."
+    },
+    {
+      "field": "current_astronaut_or_employee_check",
+      "verify": "Whether the person is a current agency employee/crew member shown in a way that could read as promotional.",
+      "pass": "Confirmed not current personnel, or written clearance from the agency.",
+      "fail": "Current crew / employee in promotional framing, or status unconfirmed."
+    },
+    {
+      "field": "promotional_or_cover_art_use",
+      "verify": "Whether the asset is used to promote a product, service, or as cover art / thumbnail hero.",
+      "pass": "Editorial/educational context only, no promotional reading, no cover-art use.",
+      "fail": "Promotional or cover-art use of agency imagery or insignia."
+    },
+    {
+      "field": "native_audio_rights",
+      "verify": "Rights covering the ORIGINAL audio track if it is retained.",
+      "pass": "Native audio is licensed together with the picture, or audio is verified silent/own-recorded.",
+      "fail": "Retained audio with no separate rights basis, or substituted music/SFX."
+    },
+    {
+      "field": "attribution_string",
+      "verify": "Complete credit line required by the licence (title, author, source URL, licence, any change note).",
+      "pass": "Full credit string written and included on screen and in the description.",
+      "fail": "Name only, link only, or a generic 'credit to the owner'."
+    },
+    {
+      "field": "no_endorsement_implied_wording",
+      "verify": "On-screen and spoken wording must not imply agency/person endorsement.",
+      "pass": "Explicit 'no endorsement implied' wording present.",
+      "fail": "Title, caption or VO could be read as an endorsement."
+    },
+    {
+      "field": "no_insignia_confirmed",
+      "verify": "Frame-by-frame check for agency insignia, logos, mission patches or branding.",
+      "pass": "Documented 'no insignia in the selected frames'.",
+      "fail": "Insignia visible, or check not performed."
+    },
+    {
+      "field": "sha256_after_download",
+      "verify": "Hash of the exact file that will enter the edit.",
+      "pass": "SHA-256 recorded after download and matching the final media file.",
+      "fail": "No hash, or hash of a different/transcoded file."
+    },
+    {
+      "field": "duration_seconds",
+      "verify": "Exact selected in-point / out-point and duration.",
+      "pass": "Duration <= 10s on screen and the 8 clips together stay <= 80s / 600s (<=13.3%).",
+      "fail": "Longer excerpt, or the aggregate source share exceeds 13.3%."
+    },
+    {
+      "field": "scout_score_out_of_100",
+      "verify": "V10-style 10-axis scout score for this specific clip.",
+      "pass": "Numeric score recorded with its rubric sheet.",
+      "fail": "No score, or a score copied from another clip."
+    },
+    {
+      "field": "scout_min_pass_78",
+      "verify": "The >=78 minimum pass threshold from the rubric.",
+      "pass": "True only when scout_score_out_of_100 >= 78.",
+      "fail": "True with a lower score, or set without a score."
+    },
+    {
+      "field": "clearance_status",
+      "verify": "Final status after every other field passes.",
+      "pass": "'cleared' ONLY when all fields above are verified AND human_legal_review=true.",
+      "fail": "'cleared' with any null/failed field."
+    },
+    {
+      "field": "human_legal_review",
+      "verify": "A human reviewer has actually reviewed this clip's rights chain.",
+      "pass": "true with reviewer name and date in the sign-off block.",
+      "fail": "true without a named reviewer/date, or set by an agent."
+    },
+    {
+      "field": "not_a_legal_opinion",
+      "verify": "This ledger is a checklist, not legal advice.",
+      "pass": "true, always.",
+      "fail": "false - would imply a legal opinion."
+    }
+  ],
+  "kill_conditions": [
+    "Current named crew / employee in promotional framing or an official mission broadcast used as a source clip.",
+    "Agency insignia, mission patch, or logo visible in the selected frames.",
+    "Native audio or music retained without its own documented rights basis.",
+    "Asset obtained from a social repost, mirror, aggregator or embed instead of the rights holder.",
+    "Licence cannot be read for this exact file, or excludes commercial use while monetization is intended.",
+    "The V10/Short NASA water-bubble asset (any hero, callback, montage or whole-video use).",
+    "Any clip that would make the 8-source aggregate exceed 80s / 600s (13.3%).",
+    "Clips strung together with little or no narrative, or a mostly non-verbal reaction."
+  ],
+  "attribution_templates": [
+    {
+      "lane": "NASA / agency",
+      "template": "Source: NASA / [mission or centre], \"[asset title]\", [asset ID]. NASA is credited; no endorsement implied. Licence: [agency media usage statement + URL, retrieved YYYY-MM-DD]."
+    },
+    {
+      "lane": "CC BY",
+      "template": "\"[title]\" by [author], [source URL], licensed CC BY [version]. Changes: cropped to <=10s, slowed to 0.5x/0.25x, no audio substitution. No endorsement implied."
+    },
+    {
+      "lane": "Verified public domain / agency original",
+      "template": "\"[title]\", [agency], public domain per [statement URL, retrieved YYYY-MM-DD]. No endorsement implied."
+    },
+    {
+      "lane": "Own-shot original",
+      "template": "Original footage shot for this episode by [operator], [date]. No third-party material."
+    },
+    {
+      "lane": "Licensed with permission",
+      "template": "\"[title]\" used with written permission from [rights holder], dated [date], reference [ID]. Permission alone does not establish reused-content eligibility."
+    }
+  ],
+  "dossiers": [
+    {
+      "slot": 1,
+      "analytic_job": "expectation violation",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "KT3e_lKrNss",
+          "title": "Ranking Unexpected Baby First Words 👶",
+          "channel": "Ice Ranks",
+          "views": 204729002,
+          "watch_url": "https://www.youtube.com/watch?v=KT3e_lKrNss"
+        },
+        {
+          "id": "JYTg_8Ui1Ho",
+          "title": "THE MOST AMAZING SAVES! #shorts",
+          "channel": "Paul Foisy Facts",
+          "views": 91496434,
+          "watch_url": "https://www.youtube.com/watch?v=JYTg_8Ui1Ho"
+        },
+        {
+          "id": "Sy5b_3ZH-rM",
+          "title": "This Police Officer is Hilarious - Unexpected Encounter With NYPD! 😂 #shorts",
+          "channel": "Cop Humor",
+          "views": 62638996,
+          "watch_url": "https://www.youtube.com/watch?v=Sy5b_3ZH-rM"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    },
+    {
+      "slot": 2,
+      "analytic_job": "physics / optics surprise",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "ro-vkofFP3E",
+          "title": "How lighter works close-up in #macro #slowmo",
+          "channel": "UrDay",
+          "views": 363151838,
+          "watch_url": "https://www.youtube.com/watch?v=ro-vkofFP3E"
+        },
+        {
+          "id": "LgtQ3NL01As",
+          "title": "REALITY vs SLOW MOTION! 🎥",
+          "channel": "Legendary Shots",
+          "views": 155827569,
+          "watch_url": "https://www.youtube.com/watch?v=LgtQ3NL01As"
+        },
+        {
+          "id": "fgLf_dcZy9Q",
+          "title": "Visualizing Magnetic Fields with Slow Mo #shorts #slowmoguys",
+          "channel": "The Slow Mo Guys",
+          "views": 59568824,
+          "watch_url": "https://www.youtube.com/watch?v=fgLf_dcZy9Q"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    },
+    {
+      "slot": 3,
+      "analytic_job": "timing / slow-motion frame",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "ro-vkofFP3E",
+          "title": "How lighter works close-up in #macro #slowmo",
+          "channel": "UrDay",
+          "views": 363151838,
+          "watch_url": "https://www.youtube.com/watch?v=ro-vkofFP3E"
+        },
+        {
+          "id": "LgtQ3NL01As",
+          "title": "REALITY vs SLOW MOTION! 🎥",
+          "channel": "Legendary Shots",
+          "views": 155827569,
+          "watch_url": "https://www.youtube.com/watch?v=LgtQ3NL01As"
+        },
+        {
+          "id": "fgLf_dcZy9Q",
+          "title": "Visualizing Magnetic Fields with Slow Mo #shorts #slowmoguys",
+          "channel": "The Slow Mo Guys",
+          "views": 59568824,
+          "watch_url": "https://www.youtube.com/watch?v=fgLf_dcZy9Q"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    },
+    {
+      "slot": 4,
+      "analytic_job": "scale / size illusion",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "FHJ3CMWnVxY",
+          "title": "Furniture Optical Illusions - Zach King Magic",
+          "channel": "Zach King",
+          "views": 92776824,
+          "watch_url": "https://www.youtube.com/watch?v=FHJ3CMWnVxY"
+        },
+        {
+          "id": "jBEEsLeKoUM",
+          "title": "Dogs funny reaction to entering optical illusion rug! #shorts",
+          "channel": "My Mountain Husky",
+          "views": 21364400,
+          "watch_url": "https://www.youtube.com/watch?v=jBEEsLeKoUM"
+        },
+        {
+          "id": "-IWk5NkxQF8",
+          "title": "10 Mind Blowing Optical Illusions",
+          "channel": "TheRichest",
+          "views": 18835155,
+          "watch_url": "https://www.youtube.com/watch?v=-IWk5NkxQF8"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    },
+    {
+      "slot": 5,
+      "analytic_job": "native sound vs silence",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "cU5uVnWL1Us",
+          "title": "Lil Durk - Viral Moment (Official Music Video)",
+          "channel": "Lil Durk",
+          "views": 98022417,
+          "watch_url": "https://www.youtube.com/watch?v=cU5uVnWL1Us"
+        },
+        {
+          "id": "FfFsz9TvXeI",
+          "title": "Bradford goes viral for being #GrumpyCop! | #TheRookie (SPOILERS!)",
+          "channel": "The Rookie (Fan Page)",
+          "views": 54311920,
+          "watch_url": "https://www.youtube.com/watch?v=FfFsz9TvXeI"
+        },
+        {
+          "id": "3gJbBnLyUBI",
+          "title": "Akanksha Choudhary 😂🔥 Talks About That Viral Dance Everyone’s Talking About  #shorts #splitsvilla",
+          "channel": "PINKVILLA",
+          "views": 3802491,
+          "watch_url": "https://www.youtube.com/watch?v=3gJbBnLyUBI"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    },
+    {
+      "slot": 6,
+      "analytic_job": "human reaction beat",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "cU5uVnWL1Us",
+          "title": "Lil Durk - Viral Moment (Official Music Video)",
+          "channel": "Lil Durk",
+          "views": 98022417,
+          "watch_url": "https://www.youtube.com/watch?v=cU5uVnWL1Us"
+        },
+        {
+          "id": "FfFsz9TvXeI",
+          "title": "Bradford goes viral for being #GrumpyCop! | #TheRookie (SPOILERS!)",
+          "channel": "The Rookie (Fan Page)",
+          "views": 54311920,
+          "watch_url": "https://www.youtube.com/watch?v=FfFsz9TvXeI"
+        },
+        {
+          "id": "3gJbBnLyUBI",
+          "title": "Akanksha Choudhary 😂🔥 Talks About That Viral Dance Everyone’s Talking About  #shorts #splitsvilla",
+          "channel": "PINKVILLA",
+          "views": 3802491,
+          "watch_url": "https://www.youtube.com/watch?v=3gJbBnLyUBI"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    },
+    {
+      "slot": 7,
+      "analytic_job": "near-miss / coincidence",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "KT3e_lKrNss",
+          "title": "Ranking Unexpected Baby First Words 👶",
+          "channel": "Ice Ranks",
+          "views": 204729002,
+          "watch_url": "https://www.youtube.com/watch?v=KT3e_lKrNss"
+        },
+        {
+          "id": "JYTg_8Ui1Ho",
+          "title": "THE MOST AMAZING SAVES! #shorts",
+          "channel": "Paul Foisy Facts",
+          "views": 91496434,
+          "watch_url": "https://www.youtube.com/watch?v=JYTg_8Ui1Ho"
+        },
+        {
+          "id": "Sy5b_3ZH-rM",
+          "title": "This Police Officer is Hilarious - Unexpected Encounter With NYPD! 😂 #shorts",
+          "channel": "Cop Humor",
+          "views": 62638996,
+          "watch_url": "https://www.youtube.com/watch?v=Sy5b_3ZH-rM"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    },
+    {
+      "slot": 8,
+      "analytic_job": "prediction test / callback",
+      "status": "PENDING_HUMAN_REVIEW",
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "real_api_probe_targets": [
+        {
+          "id": "cU5uVnWL1Us",
+          "title": "Lil Durk - Viral Moment (Official Music Video)",
+          "channel": "Lil Durk",
+          "views": 98022417,
+          "watch_url": "https://www.youtube.com/watch?v=cU5uVnWL1Us"
+        },
+        {
+          "id": "FfFsz9TvXeI",
+          "title": "Bradford goes viral for being #GrumpyCop! | #TheRookie (SPOILERS!)",
+          "channel": "The Rookie (Fan Page)",
+          "views": 54311920,
+          "watch_url": "https://www.youtube.com/watch?v=FfFsz9TvXeI"
+        },
+        {
+          "id": "3gJbBnLyUBI",
+          "title": "Akanksha Choudhary 😂🔥 Talks About That Viral Dance Everyone’s Talking About  #shorts #splitsvilla",
+          "channel": "PINKVILLA",
+          "views": 3802491,
+          "watch_url": "https://www.youtube.com/watch?v=3gJbBnLyUBI"
+        }
+      ],
+      "probe_target_boundary": "These are real public YouTube videos found by the Data API. They are STRUCTURAL BENCHMARKS and are NOT cleared source clips. Using any of them requires written permission AND still does not by itself establish reused-content eligibility [7](https://support.google.com/youtube/answer/1311392?hl=en)",
+      "sign_off": {
+        "reviewer_name": null,
+        "review_date": null,
+        "decision": null,
+        "notes": null
+      }
+    }
+  ],
+  "policy_anchors": {
+    "reused_content": "[7](https://support.google.com/youtube/answer/1311392?hl=en)",
+    "fair_use_four_factors": "[8](https://support.google.com/youtube/answer/9783148?hl=en)",
+    "credit_insufficient": "[10](https://support.google.com/youtube/answer/2797454?hl=en)",
+    "cc_by_attribution": "[11](https://support.google.com/youtube/answer/2797468?hl=en)",
+    "content_id": "[9](https://support.google.com/youtube/answer/6013276?hl=en)",
+    "ads_rights_confirmation": "[17](https://support.google.com/youtube/answer/94522?hl=en)",
+    "nasa_media": "[31](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+    "nasa_advertising": "[32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/)",
+    "nasa_partnerships": "[33](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/)"
+  },
+  "phase_bc_real_evidence": {
+    "run_id": "42905149277",
+    "angle_probes": [
+      {
+        "slug": "angle-why-we-rewatch",
+        "topic": "why we rewatch moments",
+        "lane": "api",
+        "order": "relevance",
+        "status": "ok",
+        "count": 20,
+        "million_plus": 1,
+        "total_views": 2812209,
+        "median_views": 20351,
+        "top3_share": 0.854,
+        "fresh_share_30d": 1.0,
+        "reading": "too young to judge — this sample is almost entirely under 30 days old, so the view counts are a stopwatch, not a verdict; ask again when it has run",
+        "verdict": "NO",
+        "score": 39.3,
+        "parts": {
+          "demand": 46.0,
+          "winnability": 42.6,
+          "mechanism": 25.0,
+          "fit": null,
+          "timing": null
+        },
+        "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+        "top_rows": [
+          {
+            "id": "eE-wf3jZx3Q",
+            "title": "The NO-GOAL Moment You Need to Watch TWICE! 😳⚽",
+            "channel": "FitVision",
+            "views": 1243993,
+            "duration": "PT15S"
+          },
+          {
+            "id": "5CytU1UThG4",
+            "title": "TOP 100 Most Viewed JYNXZI Clips Of ALL TIME! *JYNXZI REACTS*",
+            "channel": "Jynxzi Live",
+            "views": 760020,
+            "duration": "PT35M1S"
+          },
+          {
+            "id": "5NVCHohnf9I",
+            "title": "Ranking Top 3 Tyler Vitelli Moments 25",
+            "channel": "Tyler Vitelli",
+            "views": 396291,
+            "duration": "PT27S"
+          }
+        ]
+      },
+      {
+        "slug": "angle-frame-by-frame",
+        "topic": "frame by frame breakdown explained",
+        "lane": "api",
+        "order": "relevance",
+        "status": "ok",
+        "count": 20,
+        "million_plus": 5,
+        "total_views": 13891730,
+        "median_views": 163086,
+        "top3_share": 0.595,
+        "fresh_share_30d": 0.0,
+        "reading": "distributed — no single video owns it, entry is feasible",
+        "verdict": "NO",
+        "score": 31.6,
+        "parts": {
+          "demand": 37.5,
+          "winnability": 40.5,
+          "mechanism": 0.0,
+          "fit": null,
+          "timing": 55.0
+        },
+        "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+        "top_rows": [
+          {
+            "id": "jE4RoVwaQMY",
+            "title": "Frame-by-frame analysis of The Emoji Movie Trailer",
+            "channel": "jacksfilms",
+            "views": 4355247,
+            "duration": "PT1H5M35S"
+          },
+          {
+            "id": "-nOC-UgaLLw",
+            "title": "How to Animate Impact Frames #tutorial #onepiece #anime",
+            "channel": "FlipaClip",
+            "views": 2426333,
+            "duration": "PT58S"
+          },
+          {
+            "id": "2HL-gGLu8Jo",
+            "title": "King Crimson - Frame By Frame",
+            "channel": "King Crimson",
+            "views": 1488041,
+            "duration": "PT5M8S"
+          }
+        ]
+      },
+      {
+        "slug": "angle-science-commentary",
+        "topic": "science commentary long form",
+        "lane": "api",
+        "order": "viewCount",
+        "status": "ok",
+        "count": 1,
+        "million_plus": 1,
+        "total_views": 4965860,
+        "median_views": 4965860,
+        "top3_share": 1.0,
+        "fresh_share_30d": 0.0,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them",
+        "verdict": "NO",
+        "score": 33.7,
+        "parts": {
+          "demand": 54.6,
+          "winnability": 0.0,
+          "mechanism": null,
+          "fit": null,
+          "timing": 55.0
+        },
+        "next_probe": "write the hook and title first; if they score under 80, the topic will not save them",
+        "top_rows": [
+          {
+            "id": "tdIUMkXxtHg",
+            "title": "What the actual science says about \"brain rot\"",
+            "channel": "Howtown",
+            "views": 4965860,
+            "duration": "PT25M31S"
+          }
+        ]
+      }
+    ],
+    "winner_teardowns": [
+      {
+        "file": "reverse-4czjS9h4Fpg.json",
+        "id": "4czjS9h4Fpg",
+        "title": "Perseverance Rover’s Descent and Touchdown on Mars (Official NASA Video)",
+        "channel": "NASA",
+        "views": 17976259,
+        "likes": 388058,
+        "comments": 26072,
+        "duration": "PT3M26S",
+        "duration_seconds": 206,
+        "published": "2021-02-22T19:16:56Z",
+        "transcript_status": "error",
+        "transcript_words": 0,
+        "script_words": null,
+        "wpm": null,
+        "reading_grade": null,
+        "cta_count": null,
+        "filler_rate": null,
+        "first_sentence": null,
+        "opens_with_number": null,
+        "opens_with_you": null,
+        "claim_type": null,
+        "structure": null,
+        "replication": {
+          "keep": [],
+          "change": [],
+          "beat": [
+            "add a concrete number inside the first 3 seconds",
+            "the visual grammar is a year old; rebuild the look, keep the structure"
+          ],
+          "note": "keep the mechanism, change the surface — copying the surface is how clones die"
+        },
+        "psychology": null
+      },
+      {
+        "file": "reverse-Riauw5UTnW8.json",
+        "id": "Riauw5UTnW8",
+        "title": "NASA | Sarychev Volcano Eruption from the International Space Station",
+        "channel": "NASA Goddard",
+        "views": 127067596,
+        "likes": 4278217,
+        "comments": 10500,
+        "duration": "PT9S",
+        "duration_seconds": 9,
+        "published": "2009-07-01T14:51:28Z",
+        "transcript_status": "no_captions",
+        "transcript_words": 0,
+        "script_words": null,
+        "wpm": null,
+        "reading_grade": null,
+        "cta_count": null,
+        "filler_rate": null,
+        "first_sentence": null,
+        "opens_with_number": null,
+        "opens_with_you": null,
+        "claim_type": null,
+        "structure": null,
+        "replication": {
+          "keep": [],
+          "change": [],
+          "beat": [
+            "add a concrete number inside the first 3 seconds",
+            "the visual grammar is a year old; rebuild the look, keep the structure"
+          ],
+          "note": "keep the mechanism, change the surface — copying the surface is how clones die"
+        },
+        "psychology": null
+      },
+      {
+        "file": "reverse-fgLf_dcZy9Q.json",
+        "id": "fgLf_dcZy9Q",
+        "title": "Visualizing Magnetic Fields with Slow Mo #shorts #slowmoguys",
+        "channel": "The Slow Mo Guys",
+        "views": 59568824,
+        "likes": 2011134,
+        "comments": 9130,
+        "duration": "PT54S",
+        "duration_seconds": 54,
+        "published": "2023-07-08T18:21:34Z",
+        "transcript_status": "error",
+        "transcript_words": 0,
+        "script_words": null,
+        "wpm": null,
+        "reading_grade": null,
+        "cta_count": null,
+        "filler_rate": null,
+        "first_sentence": null,
+        "opens_with_number": null,
+        "opens_with_you": null,
+        "claim_type": null,
+        "structure": null,
+        "replication": {
+          "keep": [],
+          "change": [],
+          "beat": [
+            "add a concrete number inside the first 3 seconds",
+            "the visual grammar is a year old; rebuild the look, keep the structure"
+          ],
+          "note": "keep the mechanism, change the surface — copying the surface is how clones die"
+        },
+        "psychology": null
+      },
+      {
+        "file": "reverse-k5s1cMNTmGs.json",
+        "id": "k5s1cMNTmGs",
+        "title": "How a slinky falls in slow motion #shorts",
+        "channel": "Veritasium",
+        "views": 36618923,
+        "likes": 1554827,
+        "comments": 10777,
+        "duration": "PT42S",
+        "duration_seconds": 42,
+        "published": "2021-07-19T20:48:32Z",
+        "transcript_status": "ok",
+        "transcript_words": 143,
+        "script_words": 140,
+        "wpm": 200.0,
+        "reading_grade": 8.1,
+        "cta_count": 0,
+        "filler_rate": 0.0071,
+        "first_sentence": "If you drop a slinky dangling under its own weight, the bottom won't start falling until the whole slinky has collapsed.",
+        "opens_with_number": false,
+        "opens_with_you": true,
+        "claim_type": "generic statement",
+        "structure": [
+          {
+            "at": "0:00",
+            "title": "cold open",
+            "pct": 0
+          },
+          {
+            "at": "0:03",
+            "title": "hook restated",
+            "pct": 8
+          },
+          {
+            "at": "0:09",
+            "title": "setup / promise",
+            "pct": 22
+          },
+          {
+            "at": "0:18",
+            "title": "first proof",
+            "pct": 45
+          },
+          {
+            "at": "0:26",
+            "title": "escalation",
+            "pct": 62
+          },
+          {
+            "at": "0:33",
+            "title": "payoff",
+            "pct": 80
+          },
+          {
+            "at": "0:39",
+            "title": "outro / CTA",
+            "pct": 93
+          }
+        ],
+        "replication": {
+          "keep": [
+            "address the viewer directly in the first 12 words"
+          ],
+          "change": [],
+          "beat": [
+            "add a concrete number inside the first 3 seconds",
+            "the visual grammar is a year old; rebuild the look, keep the structure"
+          ],
+          "note": "keep the mechanism, change the surface — copying the surface is how clones die"
+        },
+        "psychology": {
+          "drivers": [
+            {
+              "driver": "self-reference",
+              "effect": "the 'you' effect — self-relevant words get attention"
+            }
+          ],
+          "note": "descriptive mapping of the opening, not a causal claim"
+        }
+      },
+      {
+        "file": "reverse-ro-vkofFP3E.json",
+        "id": "ro-vkofFP3E",
+        "title": "How lighter works close-up in #macro #slowmo",
+        "channel": "UrDay",
+        "views": 363151947,
+        "likes": 4132055,
+        "comments": 2142,
+        "duration": "PT9S",
+        "duration_seconds": 9,
+        "published": "2023-03-27T12:30:34Z",
+        "transcript_status": "error",
+        "transcript_words": 0,
+        "script_words": null,
+        "wpm": null,
+        "reading_grade": null,
+        "cta_count": null,
+        "filler_rate": null,
+        "first_sentence": null,
+        "opens_with_number": null,
+        "opens_with_you": null,
+        "claim_type": null,
+        "structure": null,
+        "replication": {
+          "keep": [],
+          "change": [],
+          "beat": [
+            "add a concrete number inside the first 3 seconds",
+            "the visual grammar is a year old; rebuild the look, keep the structure"
+          ],
+          "note": "keep the mechanism, change the surface — copying the surface is how clones die"
+        },
+        "psychology": null
+      },
+      {
+        "file": "reverse-xM6zdim0yk4.json",
+        "id": "xM6zdim0yk4",
+        "title": "Cavitation in Bottle at 82,000fps #shorts",
+        "channel": "The Slow Mo Guys",
+        "views": 38177261,
+        "likes": 1889773,
+        "comments": 8451,
+        "duration": "PT38S",
+        "duration_seconds": 38,
+        "published": "2022-10-11T19:50:22Z",
+        "transcript_status": "error",
+        "transcript_words": 0,
+        "script_words": null,
+        "wpm": null,
+        "reading_grade": null,
+        "cta_count": null,
+        "filler_rate": null,
+        "first_sentence": null,
+        "opens_with_number": null,
+        "opens_with_you": null,
+        "claim_type": null,
+        "structure": null,
+        "replication": {
+          "keep": [],
+          "change": [],
+          "beat": [
+            "add a concrete number inside the first 3 seconds",
+            "the visual grammar is a year old; rebuild the look, keep the structure"
+          ],
+          "note": "keep the mechanism, change the surface — copying the surface is how clones die"
+        },
+        "psychology": null
+      }
+    ],
+    "boundary": "Angle probes and teardowns are structural benchmarks, not cleared sources."
+  },
+  "non_claims": {
+    "clip_downloaded": false,
+    "clip_cleared": false,
+    "legal_opinion": false,
+    "human_legal_review": false,
+    "commercial_monetization_clearance": false,
+    "nasa_endorsement": false,
+    "astronaut_permission_obtained": false,
+    "render_done": false,
+    "upload_done": false,
+    "publish_done": false,
+    "monetization_changed": false,
+    "human_creative_approval": false,
+    "guaranteed_views": false,
+    "perfection": false
+  }
+}
