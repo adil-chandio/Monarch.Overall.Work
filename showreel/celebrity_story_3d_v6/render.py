@@ -207,6 +207,8 @@ def show(o, on=True):
 
 
 def hero_hold_phone(hero, body, screen, visible=True):
+    hero.grip('Right', .92)
+    bpy.context.view_layer.update()
     pos, q = hero.grasp('Right', .62)
     mq = q @ Quaternion((0, 0, 1), math.radians(-90))
     motion.attach(body, pos, mq)
@@ -472,7 +474,7 @@ ACTS = [
 
 # per act: list of (fraction_start, fraction_end, subject, az, dist, height, dz, lens)
 BEATS = {
-    'bedroom': [(0.0, .22, 'hero', -62, 4.4, 1.66, -.06, 34),
+    'bedroom': [(0.0, .22, 'hero', 0, 3.0, 1.60, -.05, 32),
                 (.22, .40, 'phone', 34, .58, 1.62, .05, 85),
                 (.40, .52, 'hero', -32, 2.2, 1.54, -.02, 52),
                 (.52, .66, 'hero', 54, 2.0, 1.38, -.02, 46),
@@ -625,9 +627,24 @@ def _projects(pos, lens, focus, dz=0.0):
     return (0.30 < v.x < 0.70) and (0.22 < v.y < 0.74) and v.z > 0
 
 
+OVERRIDES = {
+    # deliberate wides: the solver keeps people centred, but an establishing
+    # frame has to show the room, so these are placed by hand and checked.
+    0: ((APT_X + 3.35, -2.05, 1.62), (APT_X - 2.30, 3.20, 1.22), 26),
+}
+
+
 def place_camera(t, idx, s):
     t0, t1, subj, az, dist, ch, dz, lens = s
     u = motion.ease((t - t0) / max(1e-3, t1 - t0))
+    if idx in OVERRIDES:
+        pos, tgt, ln = OVERRIDES[idx]
+        cam.location = pos
+        target_empty.location = tgt
+        cam.data.lens = ln * (1 + .05 * u)
+        cam.data.dof.focus_distance = (Vector(tgt) - cam.location).length
+        cam.data.dof.aperture_fstop = 5.0
+        return
     focal = focal_point(subj)
     rig = girl.rig if subj == 'girl' else hero.rig
     # the imported rig faces +Y; shot azimuth 0 means *facing him* (camera in
@@ -788,4 +805,6 @@ else:
         proc.stdin.close()
         if proc.wait():
             raise RuntimeError('encode failed')
-    print('OUTPUT', out, flush=True)
+    if not out.is_file() or out.stat().st_size < 10000:
+        raise RuntimeError(f'encoder produced no usable file: {out}')
+    print('OUTPUT', out, out.stat().st_size, flush=True)

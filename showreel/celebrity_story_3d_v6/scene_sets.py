@@ -284,8 +284,8 @@ def build_apartment(x=-80.0):
     ceil = plain('apt ceiling', (.52, .50, .48), rough=.9)
     dark = plain('apt dark', (.06, .055, .05), rough=.5, metal=.3)
     brass = plain('apt brass', (.62, .48, .26), rough=.35, metal=1.0)
-    linen = plain('apt linen', (.80, .78, .74), rough=.95)
-    linen2 = plain('apt linen2', (.52, .48, .46), rough=.95)
+    linen = plain('apt linen', (.72, .70, .66), rough=.95)
+    linen2 = plain('apt duvet', (.42, .45, .50), rough=1.0)
     wood = textured('apt wood', (.30, .19, .12), (1, 1, 1))
 
     # shell: 9 m wide, 10 m deep
@@ -326,11 +326,13 @@ def build_apartment(x=-80.0):
 
     # bed against the right-hand wall side, headboard to +Y wall
     bed_at = (x - 3.40, 3.55)
-    base = plain('bed base', (.26, .23, .21), rough=.7)
+    base = plain('bed base', (.17, .12, .085), rough=.55)
     box('bed base', (x - 3.40, 3.55, .28), (2.10, 2.60, .56), base, bevel=.03, group=g)
-    box('bed plinth', (x - 3.40, 3.62, .07), (1.94, 2.40, .14), plain('bed plinth', (.12, .11, .10), rough=.5), group=g)
+    box('bed plinth', (x - 3.40, 3.62, .07), (1.94, 2.40, .14), plain('bed plinth', (.08, .07, .06), rough=.5), group=g)
     box('mattress', (x - 3.40, 3.50, .58), (2.06, 2.52, .26), linen, bevel=.06, group=g)
-    box('bed head', (x - 3.40, 4.78, .72), (2.22, .16, 1.40), plain('apt head', (.30, .26, .24), rough=.95), bevel=.05, group=g)
+    box('bed head', (x - 3.40, 4.78, .78), (2.26, .18, 1.52), plain('apt head', (.20, .15, .12), rough=.6), bevel=.05, group=g)
+    for i, dx in enumerate((-.62, 0, .62)):
+        box(f'head panel {i}', (x - 3.40 + dx, 4.69, .82), (.52, .03, 1.10), linen, bevel=.02, group=g)
     for i, dx in enumerate((-.58, .58)):
         box(f'pillow {i}', (x - 3.40 + dx, 4.22, .80), (.62, .40, .18), linen, bevel=.07, group=g)
         box(f'pillow top {i}', (x - 3.40 + dx, 4.18, .90), (.56, .34, .12), linen, bevel=.05, group=g)
