@@ -99,8 +99,8 @@ def hit(out, kind, dur=.5):
 
 def main(clips_dir, out):
     clips = sorted(Path(clips_dir).glob('*.mp4'))
-    if len(clips) != 9:
-        raise SystemExit(f'expected 9 clips, found {len(clips)}')
+    if len(clips) < 9:
+        raise SystemExit(f'expected at least 9 clips, found {len(clips)}')
     cues = json.loads((P / 'script.json').read_text())
     with tempfile.TemporaryDirectory() as td:
         td = Path(td)
