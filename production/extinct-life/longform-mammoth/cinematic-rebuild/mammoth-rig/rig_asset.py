@@ -11,7 +11,7 @@ from mathutils import Matrix
 
 B=Path(__file__).resolve().parent
 source=B/'assets/SDPM-Wooly-Mammoth.blend'
-out=B/'assets/SDPM-Mammoth-Experimental-Rig.glb'
+out=Path(os.environ.get('MAMMOTH_RIG_OUTPUT',str(B/'assets/SDPM-Mammoth-Experimental-Rig.glb')))
 bpy.ops.wm.open_mainfile(filepath=str(source),load_ui=False,use_scripts=False)
 mesh=next(o for o in bpy.data.objects if o.type=='MESH')
 if bpy.context.object and bpy.context.object.mode!='OBJECT':bpy.ops.object.mode_set(mode='OBJECT')
@@ -37,35 +37,61 @@ def bone(name,head,tail,parent=None):
     if parent:b.parent=arm.edit_bones[parent]
     return b
 bone('root',(0,-.42,.70),(0,-.42,1.0))
+bone('head',(-.32,-.46,.91),(-.32,-.46,1.11),'root')
 for i,(x,y) in enumerate(feet):
     bone('upper'+str(i),(x,y,.64),(x,y,.30),'root')
     bone('lower'+str(i),(x,y,.30),(x,y,.04),'upper'+str(i))
     bone('foot'+str(i),(x,y,.04),(x,y,-.04),'lower'+str(i))
-bone('trunk_upper',(-.55,-.50,.78),(-.67,-.50,.43),'root')
+bone('trunk_upper',(-.55,-.50,.78),(-.67,-.50,.43),'head')
 bone('trunk_lower',(-.67,-.50,.43),(-.64,-.50,.10),'trunk_upper')
 bpy.ops.object.mode_set(mode='OBJECT')
 
 # Spatial weights are provisional. Each vertex has normalised weights and at
 # most four influences. The mesh's posing needs manual topology/weight review.
-names=['root']+[f'{side}{i}' for i in range(4) for side in ('upper','lower','foot')]+['trunk_upper','trunk_lower']
+names=['root','head']+[f'{side}{i}' for i in range(4) for side in ('upper','lower','foot')]+['trunk_upper','trunk_lower']
 mesh.vertex_groups.clear()
 groups={n:mesh.vertex_groups.new(name=n) for n in names}
 def clamp(x):return max(0,min(1,x))
 def smooth(x):x=clamp(x);return x*x*(3-2*x)
+# The mesh is a union of disconnected anatomical parts, not a single manifold.
+# A coordinate-only trunk mask had also assigned one tusk to the trunk rig;
+# moving the trunk visibly bent the tusk. Classify by actual topology first.
+parent=list(range(len(mesh.data.vertices)))
+def find(i):
+    while parent[i]!=i:
+        parent[i]=parent[parent[i]];i=parent[i]
+    return i
+for edge in mesh.data.edges:
+    i,j=edge.vertices;a,b=find(i),find(j)
+    if a!=b:parent[b]=a
+components={}
+for i in range(len(parent)):components.setdefault(find(i),[]).append(i)
+ordered=sorted(components.values(),key=len,reverse=True)
+assert [len(c) for c in ordered[:5]]==[7660,7562,7238,1771,1771], 'source topology changed; reclassify manually'
+body=set(ordered[0]+ordered[1]);head=set(ordered[2]);tusks=set(ordered[3]+ordered[4]);headParts=head|tusks
+for comp in ordered[5:]:
+    vs=[mesh.data.vertices[i].co for i in comp]
+    if max(v.x for v in vs)<-.25 and max(v.z for v in vs)>.60:headParts.update(comp)
+# Soles are separate components in this specific model.
+for comp in ordered[5:]:
+    z=[mesh.data.vertices[i].co.z for i in comp]
+    if len(comp)>=180 and max(z)<0 and min(z)>-.06:body.update(comp)
 for vert in mesh.data.vertices:
     x,y,z=vert.co
     near=min(range(4),key=lambda i:((x-feet[i][0])/.16)**2+((y-feet[i][1])/.13)**2)
     # Below the body, partition by nearest foot; fade to the root toward the
     # torso. Bounds exclude the trunk and tusks; still needs manual review.
-    leg=smooth((.62-z)/.18)*smooth((x+.43)/.12)*smooth((.76-x)/.12)
+    leg=smooth((.62-z)/.18)*smooth((x+.43)/.12)*smooth((.76-x)/.12) if vert.index in body else 0
     # Trunk tip lies off centre on this source model. Avoid the two tusks.
-    trunk=smooth((-.48-x)/.10)*smooth((.80-z)/.20)*math.exp(-((y+.50)/.12)**4)
+    trunk=smooth((-.48-x)/.10)*smooth((.80-z)/.20)*math.exp(-((y+.50)/.12)**4) if vert.index in head else 0
     trunk=min(trunk,1-leg)
     low=smooth((.42-z)/.20);foot=smooth((.14-z)/.10)
     trunk_low=smooth((.52-z)/.22)
-    w={'root':1-leg-trunk, f'upper{near}':leg*(1-low),f'lower{near}':leg*low*(1-foot),f'foot{near}':leg*low*foot,
+    headWeight=(1-trunk) if vert.index in headParts else 0
+    w={'root':1-leg-trunk-headWeight, 'head':headWeight, f'upper{near}':leg*(1-low),f'lower{near}':leg*low*(1-foot),f'foot{near}':leg*low*foot,
        'trunk_upper':trunk*(1-trunk_low),'trunk_lower':trunk*trunk_low}
     w=dict(sorted(((k,v) for k,v in w.items() if v>1e-6),key=lambda kv:kv[1],reverse=True)[:4]);total=sum(w.values())
+    if vert.index in tusks:assert set(w)=={'head'}, 'tusk must be rigidly attached to head'
     for name,value in w.items():groups[name].add([vert.index],value/total,'REPLACE')
 mesh.parent=rig;mod=mesh.modifiers.new('Experimental skin','ARMATURE');mod.object=rig
 
