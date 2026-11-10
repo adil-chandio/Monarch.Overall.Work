@@ -1,0 +1,117 @@
+name: V12 Phase A - real API clip-moment scouting
+
+# Phase A of the MC-01 multi-clip plan: use the EXISTING YOUTUBE_API_KEY
+# Actions secret to scout real candidate moments for the 8 analytic slots.
+# These are BENCHMARK / SCOUT candidates only - third-party copyrighted videos,
+# NOT cleared source clips. Every own clip still needs its own rights gate.
+# Arena token cannot use workflow_dispatch (403), so a marker-file push triggers it.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "yt-phase-a-trigger.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve the key secret (presence only, value masked)
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then
+            echo "::error::no key secret resolved - Phase A scout cannot be an API-lane run"
+            exit 1
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          case "$KEY" in
+            AIza*) echo "key resolved (${#KEY} chars, shape starts with AIza)" ;;
+            *) echo "::warning::key resolved (${#KEY} chars) but does not start with AIza" ;;
+          esac
+
+      - name: Runtime deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy pillow yt-dlp pytrends imageio-ffmpeg
+
+      - name: Prove the lane (doctor, presence only)
+        run: python -m yt_intel lanes --json || true
+
+      - name: Five targeted real-API topic scouts for the 8 clip slots
+        continue-on-error: true
+        run: |
+          mkdir -p research/multi_clip_long_form_v12/api_evidence/phase_a
+          run_topic () {
+            TOPIC="$1"; ORDER="$2"; SLUG="$3"
+            echo "=== scout: $TOPIC (order=$ORDER) ==="
+            python -m yt_intel topic "$TOPIC" --limit 20 --order "$ORDER" \
+              --json "research/multi_clip_long_form_v12/api_evidence/phase_a/$SLUG.json" \
+              || echo "::warning::topic failed: $SLUG"
+          }
+          run_topic "unexpected moment caught on camera" viewCount slot-01-07-expectation-violation
+          run_topic "slow motion physics explained"       viewCount slot-02-03-physics-timing
+          run_topic "optical illusion scale size"         relevance slot-04-scale-illusion
+          run_topic "viral moment reaction explained"     viewCount slot-05-06-08-sound-reaction-callback
+          run_topic "nasa official science demonstration" viewCount rights-lane-nasa-agency-probe
+          echo "=== produced ==="
+          ls -la research/multi_clip_long_form_v12/api_evidence/phase_a/
+
+      - name: Record run metadata (presence only, never the value)
+        run: |
+          cat > /tmp/phase_a_record.py <<'PY'
+          import json, os, datetime, pathlib
+          base = pathlib.Path("research/multi_clip_long_form_v12/api_evidence/phase_a")
+          produced = sorted(p.name for p in base.glob("*.json") if p.name != "run.json")
+          print(json.dumps({
+              "at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "phase": "A - clip-moment scouting (research only)",
+              "ref": os.environ.get("GITHUB_REF"),
+              "sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "key_present": bool(os.environ.get("YOUTUBE_API_KEY")),
+              "secret_value_printed_or_stored": False,
+              "queries": [
+                  {"topic": "unexpected moment caught on camera", "order": "viewCount", "slots": [1, 7]},
+                  {"topic": "slow motion physics explained", "order": "viewCount", "slots": [2, 3]},
+                  {"topic": "optical illusion scale size", "order": "relevance", "slots": [4]},
+                  {"topic": "viral moment reaction explained", "order": "viewCount", "slots": [5, 6, 8]},
+                  {"topic": "nasa official science demonstration", "order": "viewCount", "slots": "rights-lane probe"},
+              ],
+              "reports_produced": produced,
+              "boundary": "Scout candidates are third-party copyrighted videos used as STRUCTURAL BENCHMARKS only. They are NOT any of the 8 source clips. No clip downloaded, no rights chain, no clearance.",
+              "not_a_legal_opinion": True,
+          }, indent=2))
+          PY
+          python /tmp/phase_a_record.py > research/multi_clip_long_form_v12/api_evidence/phase_a/run.json
+          cat research/multi_clip_long_form_v12/api_evidence/phase_a/run.json
+
+      - name: Upload evidence even if commit fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v12-phase-a-scout
+          path: research/multi_clip_long_form_v12/api_evidence/phase_a/
+          if-no-files-found: warn
+
+      - name: Commit evidence
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add research/multi_clip_long_form_v12/api_evidence/phase_a
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore(v12-phase-a): real API clip-moment scouts [skip ci]"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }} || echo "::warning::push failed; evidence is in the run artifact"
