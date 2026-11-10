@@ -9,6 +9,10 @@ on:
     branches:
       - main
       - arena/9960286a-monarch-overall-work
+      # V12 multi-clip research: allow a marker-file push on the active session branch
+      # to drive one targeted API-lane run (the dispatch endpoint is not available to
+      # the Arena integration token, which returns 403 on actions:write).
+      - arena/2b012328-monarch-overall-work
     paths:
       - "yt-intel-trigger.txt"
   workflow_dispatch:
