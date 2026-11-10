@@ -144,6 +144,20 @@
     "visibility": "unknown",
     "monetization_setting": "unknown",
     "altered_or_synthetic_content_toggle": "unknown_human_confirmation_required",
+    "description_screenshot_audit": {
+      "user_supplied_screenshots": ["Screenshot_20261110-223732.png", "Screenshot_20261110-223734.png"],
+      "screen_shown": "YouTube Studio mobile 'Add description' editor",
+      "text_matches_committed_description": true,
+      "transcribed_phrases_matched": "12/12 (description blocks 1-6)",
+      "visible_blocks": [1, 2, 3, 4, 5, 6],
+      "block_7_hashtags_visible_in_screenshots": false,
+      "block_7_note": "Hashtag line is NOT visible in either screenshot; it may be present below the scrolled area. Not confirmed on the live video.",
+      "forbidden_wording_absent_in_visible_text": ["official NASA", "NASA approved", "NASA collection", "genuine/authentic/original NASA", "trusted by", "NASA insignia used"],
+      "credit_and_no_endorsement_present": true,
+      "synthetic_voiceover_disclosed_in_description": true,
+      "agent_verified_live_video": false,
+      "note": "Screenshots are of an EDIT screen, not a published video page. They do not confirm visibility, publish state, monetization, AI-use toggle, thumbnail, category or pinned comment. See research/long_form_viral_idea_v11/LIVE_SHORT_DESCRIPTION_AUDIT_V11.md."
+    },
     "note": "This is a USER REPORT recorded in chat, not an agent verification. The 'status' field above remains draft_not_published because the agent has no Studio or YouTube Data API access to confirm. No clearance, legal approval, human creative approval, safety certification, takedown immunity, audience result or monetization claim is implied. See research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md for the decision card."
   }
 }
