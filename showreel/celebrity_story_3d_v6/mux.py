@@ -108,7 +108,9 @@ def main(clips_dir, out):
         lst = td / 'list.txt'
         lst.write_text(''.join(f"file '{c.resolve()}'\n" for c in clips))
         silent = td / 'silent.mp4'
-        run(['-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(silent)])
+        run(['-f', 'concat', '-safe', '0', '-i', str(lst),
+             '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18',
+             '-pix_fmt', 'yuv420p', '-r', '24', str(silent)])
 
         build_score(td / 'score.wav')
         build_bed(td, cues)
