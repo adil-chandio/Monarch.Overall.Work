@@ -1,0 +1,72 @@
+{
+  "edition": "v11_long_form_viral_idea_selection_2026-11-05",
+  "question_from_user": "research karo api se best viral growing channels / millions-view videos dekho",
+  "workspace_check_performed": true,
+  "workspace_check_results": {
+    "env_youtube_or_google_api_key_var_present": false,
+    "config_youtube_json_present": false,
+    "config_api_keys_json_present": false,
+    "env_file_present": false,
+    "config_channels_json_present": true,
+    "outbound_bash_allowlist": [
+      "github.com",
+      "codeload.github.com",
+      "api.github.com",
+      "registry.npmjs.org",
+      "pypi.org",
+      "files.pythonhosted.org"
+    ],
+    "note": "Web tools (web_search / fetch_page) reached official docs and public pages, but the Data API endpoint requires an API key and was NOT called. No key value was requested, printed or stored in chat."
+  },
+  "youtube_data_api_calls_made": 0,
+  "official_capability": [
+    {
+      "method": "videos.list",
+      "purpose": "mostPopular videos by region + category, or metadata/statistics for known IDs",
+      "example_request": "GET https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=PK&videoCategoryId=28&maxResults=50&key=REDACTED",
+      "quota": "1 unit per call",
+      "doc": "[6](https://developers.google.com/youtube/v3/docs/videos/list)",
+      "would_return": "title, channelId, categoryId, publishedAt, viewCount, likeCount, commentCount, duration"
+    },
+    {
+      "method": "search.list",
+      "purpose": "keyword discovery of long-form videos ordered by views / date",
+      "example_request": "GET https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=viewCount&videoDuration=long&publishedAfter=2026-01-01T00:00:00Z&maxResults=50&key=REDACTED",
+      "quota": "100 calls per day in the Search Queries bucket (1 unit in that bucket)",
+      "doc": "[7](https://developers.google.com/youtube/v3/docs/search/list)",
+      "would_return": "videoId + snippet only; statistics require a follow-up videos.list"
+    },
+    {
+      "method": "channels.list",
+      "purpose": "public subscriber / total view / video counts for candidate channels",
+      "example_request": "GET https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=REDACTED&key=REDACTED",
+      "quota": "1 unit per call",
+      "doc": "[29](https://developers.google.com/youtube/v3/docs/channels/list)",
+      "would_return": "subscriberCount, viewCount, videoCount, channel title"
+    },
+    {
+      "method": "videoCategories.list",
+      "purpose": "region-specific category IDs (e.g. 27 Education, 28 Science & Technology)",
+      "example_request": "GET https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=PK&key=REDACTED",
+      "quota": "1 unit per call",
+      "doc": "[8](https://developers.google.com/youtube/v3/docs/videoCategories/list)",
+      "would_return": "assignable category IDs and labels"
+    }
+  ],
+  "api_limits_even_with_a_key": [
+    "No breakout / outlier detection vs a channel baseline; must be built manually [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+    "No transcripts for arbitrary videos; captions.download requires OAuth + ownership [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+    "No keyword search-volume or competition data; the API returns videos, not demand [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+    "No semantic look-alike channel search; search.list matches keywords only [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+    "Impressions, CTR, watch time, average view duration, retention and revenue are OWNER-ONLY Studio / Analytics API data, not public Data API fields [4](https://support.google.com/youtube/answer/9313698?hl=en) [5](https://support.google.com/youtube/answer/12220281?hl=en) [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+    "Public view counts are a snapshot, not a forecast and not a guarantee of a future video's reach [10](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos)"
+  ],
+  "what_was_actually_used_instead": [
+    "Official YouTube Blog / Help / Developer documentation (source ledger 1-9)",
+    "Public web reporting about the Artemis II clip and audience reaction (14-19)",
+    "Community-maintained most-viewed list as a reality check on genre expectations (10)",
+    "Clearly-labelled third-party directional signals (20-24), never as authoritative",
+    "Committed workspace evidence: the single locked NASA source and V10 ledgers (26-28)"
+  ],
+  "no_fabrication_statement": "No live channel analytics, no verified competitor view counts, no trend/keyword volume, no retention graph, no RPM/CTR data and no 'best viral growing channels' ranking was invented. Where a number appears, its source and reliability tier are recorded."
+}

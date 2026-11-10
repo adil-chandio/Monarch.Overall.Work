@@ -1,0 +1,372 @@
+{
+  "edition": "v11_long_form_viral_idea_selection_2026-11-05",
+  "rubric": {
+    "axes": [
+      {
+        "id": "hook_stop_power",
+        "label": "Hook / first-30s stop power",
+        "weight": 1.2,
+        "why": "Official 'Intro' metric = % still watching after 30s [3](https://support.google.com/youtube/answer/9314415?hl=en)"
+      },
+      {
+        "id": "replay_rewatch_signal",
+        "label": "Replay / rewatch signal",
+        "weight": 1.2,
+        "why": "Official 'Spikes' = moments rewatched or shared [3](https://support.google.com/youtube/answer/9314415?hl=en)"
+      },
+      {
+        "id": "source_chain_certainty",
+        "label": "Source chain certainty",
+        "weight": 1.3,
+        "why": "Prior V10 rubric's rights-chain axis, escalated for long-form [28](workspace://research/caught_on_camera_commentary_v10/CAUGHT_ON_CAMERA_FORENSIC_STUDY.md)"
+      },
+      {
+        "id": "fun_emotional_spike",
+        "label": "Fun / emotional spike",
+        "weight": 1.0,
+        "why": "User's 'mazedar / next level' requirement; config bans reaction-only and clickbait-with-no-payoff [27](workspace://config/channels.json)"
+      },
+      {
+        "id": "depth_runway_10min",
+        "label": "Depth runway for 8-12 min",
+        "weight": 1.2,
+        "why": "User's 'microscope / 10x think / detailed forensic' requirement; config long-form target 8-12 min [27](workspace://config/channels.json)"
+      },
+      {
+        "id": "long_form_tv_multiformat_fit",
+        "label": "Long-form / TV / multi-format fit",
+        "weight": 0.9,
+        "why": "Official 2026 direction [1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/) [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/) [9](https://blog.youtube/news-and-events/youtube-monetization-qualified-watch-hours-shorts-views/)"
+      },
+      {
+        "id": "production_feasibility_existing_assets",
+        "label": "Feasibility with existing assets",
+        "weight": 0.9,
+        "why": "One locked NASA master + V10 WAVs, PNGs and ledgers already in the repo [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)"
+      },
+      {
+        "id": "series_scalability",
+        "label": "Series / repeatability",
+        "weight": 0.7,
+        "why": "Official Shorts series / episodic push [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/); config 'one concept, one demo' [27](workspace://config/channels.json)"
+      },
+      {
+        "id": "rights_legal_risk_inverse",
+        "label": "Rights / legal risk (10 = low risk)",
+        "weight": 0.8,
+        "why": "NASA promotional-content and current-astronaut imagery gate [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/)"
+      },
+      {
+        "id": "claim_integrity",
+        "label": "Claim integrity",
+        "weight": 0.8,
+        "why": "No guaranteed virality, no legal clearance, no human approval, no perfection [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/) [10](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos)"
+      }
+    ],
+    "weight_sum": 10.0,
+    "max_score": 100.0,
+    "minimum_total": 75.0,
+    "kill_switches": [
+      "multiple_unverified_or_unlicensed_clips",
+      "guaranteed_virality_or_millions_of_views_claim",
+      "nasa_endorsement_or_official_status_claim",
+      "current_astronaut_imagery_in_promotional_content_without_written_clearance",
+      "unrelated_or_misleading_tags_or_metadata",
+      "ai_free_imagery_or_no_cgi_claim_without_verification",
+      "human_approval_or_legal_clearance_or_perfection_claim",
+      "clickbait_hook_with_no_payoff",
+      "fabricated_analytics_or_view_counts",
+      "audio_substitution_of_nasa_native_audio",
+      "exact_reference_match_claim",
+      "staged_or_conspiracy_amplification"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "RL-01",
+      "name": "REPLAY LAB Ep.1 - The Upside-Down Face",
+      "one_liner": "42.7 seconds of NASA footage, explained frame by frame in a 10-12 minute forensic replay documentary built on the ONE locked Artemis II water-bubble master.",
+      "scores": {
+        "hook_stop_power": 10,
+        "replay_rewatch_signal": 10,
+        "source_chain_certainty": 10,
+        "fun_emotional_spike": 9,
+        "depth_runway_10min": 10,
+        "long_form_tv_multiformat_fit": 10,
+        "production_feasibility_existing_assets": 9,
+        "series_scalability": 10,
+        "rights_legal_risk_inverse": 4,
+        "claim_integrity": 10
+      },
+      "evidence": [
+        "V10 already has 8 beats / 118 words / loop-back at 44.24s [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)",
+        "Official spikes = rewatched or shared moments [3](https://support.google.com/youtube/answer/9314415?hl=en)",
+        "Official every-format / TV / long-form watch-hours direction [1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/) [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/) [9](https://blog.youtube/news-and-events/youtube-monetization-qualified-watch-hours-shorts-views/)",
+        "Single official NASA asset with recorded ID and SHA [13](https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman) [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)",
+        "Public reporting supplies the 'uniquely human' playfulness and the safety question [16](https://www.dailymail.com/sciencetech/article-15807427/Incredible-video-shows-water-floating-space.html) [17](https://www.gazetaexpress.com/en/Artemis-II-astronauts-experiment-with-a-drop-of-water-in-space--NASA-footage-amazes-the-web/)"
+      ],
+      "kill_switches_hit": [],
+      "open_gates": [
+        "NASA promotional / current-astronaut imagery clearance gate remains OPEN [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/)",
+        "human legal review and human creative approval remain false"
+      ],
+      "verdict": "WINNER",
+      "weighted_total": 93.3,
+      "passes_minimum": true
+    },
+    {
+      "id": "RL-02",
+      "name": "7 Real Space Moments That Look Fake (ranked compilation)",
+      "one_liner": "A ranked long-form compilation of multiple NASA/space clips, each with replay and explanation.",
+      "scores": {
+        "hook_stop_power": 9,
+        "replay_rewatch_signal": 9,
+        "source_chain_certainty": 3,
+        "fun_emotional_spike": 9,
+        "depth_runway_10min": 7,
+        "long_form_tv_multiformat_fit": 8,
+        "production_feasibility_existing_assets": 3,
+        "series_scalability": 8,
+        "rights_legal_risk_inverse": 2,
+        "claim_integrity": 4
+      },
+      "evidence": [
+        "Only ONE clip is actually sourced and QC'd in this workspace [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)",
+        "NASA promotional gate multiplies with each additional current-astronaut clip [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/)"
+      ],
+      "kill_switches_hit": [
+        "multiple_unverified_or_unlicensed_clips",
+        "current_astronaut_imagery_in_promotional_content_without_written_clearance",
+        "fabricated_analytics_or_view_counts"
+      ],
+      "open_gates": [
+        "would require a full new rights-clearance pass for 6 more clips"
+      ],
+      "verdict": "reject",
+      "weighted_total": 63.2,
+      "passes_minimum": false
+    },
+    {
+      "id": "AF-01",
+      "name": "How We Fixed a 'Buffering Glitch' - audio forensics behind the scenes",
+      "one_liner": "A 10-minute technical documentary on the V10 VO glitch diagnosis, waveform/spectrum evidence and continuous slope conditioner.",
+      "scores": {
+        "hook_stop_power": 6,
+        "replay_rewatch_signal": 5,
+        "source_chain_certainty": 10,
+        "fun_emotional_spike": 6,
+        "depth_runway_10min": 9,
+        "long_form_tv_multiformat_fit": 7,
+        "production_feasibility_existing_assets": 8,
+        "series_scalability": 5,
+        "rights_legal_risk_inverse": 8,
+        "claim_integrity": 9
+      },
+      "evidence": [
+        "All audio WAVs, PNGs and QC JSONs already exist [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)",
+        "Strong 'build in public' fit for the legacy Monarch Lab slot [27](workspace://config/channels.json)"
+      ],
+      "kill_switches_hit": [],
+      "open_gates": [
+        "narrow creator/tools audience; weaker 'mazedar' general appeal",
+        "still lacks human listening sign-off [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)"
+      ],
+      "verdict": "runner_up_narrow",
+      "weighted_total": 73.6,
+      "passes_minimum": false
+    },
+    {
+      "id": "EX-01",
+      "name": "Why Water Becomes a Crystal Ball in Space (straight explainer)",
+      "one_liner": "A conventional 8-minute science explainer on surface tension and refraction in microgravity.",
+      "scores": {
+        "hook_stop_power": 6,
+        "replay_rewatch_signal": 5,
+        "source_chain_certainty": 9,
+        "fun_emotional_spike": 6,
+        "depth_runway_10min": 7,
+        "long_form_tv_multiformat_fit": 8,
+        "production_feasibility_existing_assets": 8,
+        "series_scalability": 6,
+        "rights_legal_risk_inverse": 5,
+        "claim_integrity": 9
+      },
+      "evidence": [
+        "Science-explainer format family is well populated [22](https://falconvid.ai/blog/science-youtube-channels-that-make-money) [23](https://tubestats.io/channels/science)"
+      ],
+      "kill_switches_hit": [],
+      "open_gates": [
+        "generic; weak differentiation; 'voice-over stock documentary' is explicitly banned in the legacy config [27](workspace://config/channels.json)"
+      ],
+      "verdict": "reject_generic",
+      "weighted_total": 69.1,
+      "passes_minimum": false
+    },
+    {
+      "id": "CG-01",
+      "name": "'Is It CGI?' Court - 10 internet claims judged frame by frame",
+      "one_liner": "Myth-busting courtroom format judging viral clips as real or fake.",
+      "scores": {
+        "hook_stop_power": 9,
+        "replay_rewatch_signal": 8,
+        "source_chain_certainty": 2,
+        "fun_emotional_spike": 8,
+        "depth_runway_10min": 7,
+        "long_form_tv_multiformat_fit": 7,
+        "production_feasibility_existing_assets": 2,
+        "series_scalability": 8,
+        "rights_legal_risk_inverse": 1,
+        "claim_integrity": 2
+      },
+      "evidence": [
+        "AFP documents how an Artemis II broadcast glitch was already misused for false 'staged' claims [18](https://factcheck.afp.com/doc.afp.com.A6WV668)"
+      ],
+      "kill_switches_hit": [
+        "multiple_unverified_or_unlicensed_clips",
+        "staged_or_conspiracy_amplification",
+        "ai_free_imagery_or_no_cgi_claim_without_verification",
+        "fabricated_analytics_or_view_counts"
+      ],
+      "open_gates": [
+        "defamation / misinformation risk; rights nightmare"
+      ],
+      "verdict": "reject_high_risk",
+      "weighted_total": 55.5,
+      "passes_minimum": false
+    },
+    {
+      "id": "AN-01",
+      "name": "One Clip, 8 Beats - anatomy of a 49-second Short",
+      "one_liner": "Meta breakdown of V10's own edit ledger: hook, 118 words, captions, payoff flash, loop-back.",
+      "scores": {
+        "hook_stop_power": 7,
+        "replay_rewatch_signal": 8,
+        "source_chain_certainty": 10,
+        "fun_emotional_spike": 6,
+        "depth_runway_10min": 9,
+        "long_form_tv_multiformat_fit": 8,
+        "production_feasibility_existing_assets": 9,
+        "series_scalability": 7,
+        "rights_legal_risk_inverse": 8,
+        "claim_integrity": 10
+      },
+      "evidence": [
+        "Complete edit ledger, caption timings and QC already committed [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)"
+      ],
+      "kill_switches_hit": [],
+      "open_gates": [
+        "meta/creator-facing; less visceral than the actual footage",
+        "best used as a CHAPTER inside RL-01 rather than a standalone flagship"
+      ],
+      "verdict": "strong_second_folded_into_winner",
+      "weighted_total": 82.4,
+      "passes_minimum": true
+    },
+    {
+      "id": "MS-01",
+      "name": "Artemis II: the 10-day mission that got weirdly funny",
+      "one_liner": "Mission narrative with the water bubble as the human-interest centerpiece.",
+      "scores": {
+        "hook_stop_power": 8,
+        "replay_rewatch_signal": 7,
+        "source_chain_certainty": 5,
+        "fun_emotional_spike": 9,
+        "depth_runway_10min": 8,
+        "long_form_tv_multiformat_fit": 9,
+        "production_feasibility_existing_assets": 4,
+        "series_scalability": 7,
+        "rights_legal_risk_inverse": 3,
+        "claim_integrity": 6
+      },
+      "evidence": [
+        "Cross-platform Artemis II exposure documented [19](https://nautil.us/astronauts-as-influencers-1279855)",
+        "Mission context reported alongside the bubble [15](https://www.yahoo.com/news/articles/watch-artemis-ii-astronauts-fun-193852742.html) [16](https://www.dailymail.com/sciencetech/article-15807427/Incredible-video-shows-water-floating-space.html)"
+      ],
+      "kill_switches_hit": [
+        "multiple_unverified_or_unlicensed_clips"
+      ],
+      "open_gates": [
+        "needs additional official clips and mission-fact verification",
+        "broadcast/stream audience figures must not be recast as YouTube views [19](https://nautil.us/astronauts-as-influencers-1279855)"
+      ],
+      "verdict": "reject_source_scope",
+      "weighted_total": 66.9,
+      "passes_minimum": false
+    },
+    {
+      "id": "DY-01",
+      "name": "I Tried to Recreate the NASA Water Bubble on Earth",
+      "one_liner": "DIY challenge attempting the liquid-lens effect with household materials.",
+      "scores": {
+        "hook_stop_power": 8,
+        "replay_rewatch_signal": 7,
+        "source_chain_certainty": 6,
+        "fun_emotional_spike": 9,
+        "depth_runway_10min": 6,
+        "long_form_tv_multiformat_fit": 8,
+        "production_feasibility_existing_assets": 3,
+        "series_scalability": 6,
+        "rights_legal_risk_inverse": 4,
+        "claim_integrity": 5
+      },
+      "evidence": [
+        "DIY experiment format is popular in the science family [23](https://tubestats.io/channels/science)"
+      ],
+      "kill_switches_hit": [
+        "nasa_endorsement_or_official_status_claim"
+      ],
+      "open_gates": [
+        "requires original filming not present in this workspace",
+        "physics of a ground-based sphere is not equivalent to microgravity; high inaccuracy risk"
+      ],
+      "verdict": "reject_scope",
+      "weighted_total": 63.3,
+      "passes_minimum": false
+    }
+  ],
+  "ranking": [
+    {
+      "id": "RL-01",
+      "weighted_total": 93.3,
+      "verdict": "WINNER"
+    },
+    {
+      "id": "AN-01",
+      "weighted_total": 82.4,
+      "verdict": "strong_second_folded_into_winner"
+    },
+    {
+      "id": "AF-01",
+      "weighted_total": 73.6,
+      "verdict": "runner_up_narrow"
+    },
+    {
+      "id": "EX-01",
+      "weighted_total": 69.1,
+      "verdict": "reject_generic"
+    },
+    {
+      "id": "MS-01",
+      "weighted_total": 66.9,
+      "verdict": "reject_source_scope"
+    },
+    {
+      "id": "DY-01",
+      "weighted_total": 63.3,
+      "verdict": "reject_scope"
+    },
+    {
+      "id": "RL-02",
+      "weighted_total": 63.2,
+      "verdict": "reject"
+    },
+    {
+      "id": "CG-01",
+      "weighted_total": 55.5,
+      "verdict": "reject_high_risk"
+    }
+  ],
+  "winner": "RL-01",
+  "runner_up": "AN-01",
+  "note": "Scores are transparent editorial judgments grounded in the cited evidence, not measured audience outcomes."
+}

@@ -1,3 +1,10 @@
+## 2026-11-05 addendum - V11 long-form idea selection (idea only, NOT a build)
+
+- New study: `research/long_form_viral_idea_v11/LONG_FORM_VIRAL_IDEA_FORENSIC_STUDY_V11.md`.
+- One idea selected: `REPLAY LAB Ep.1 - The Upside-Down Face` (weighted 93.3/100).
+- NO video rendered, NO upload/publish, NO YouTube Data API call (no key in workspace), NO rights clearance, NO human approval and NO guaranteed result. The V10 NASA promotional / current-astronaut imagery gate remains OPEN.
+- This addendum does NOT supersede the standing 'await human full-motion/native-audio review' line above; it only records that a NEW long-form idea-selection task happened after it.
+
 # Exact next action — Monarch Cam
 
 **Single next action:** await human full-motion/native-audio review of the committed clean V8 MP4 link. Do **not** ask the user again for reference screenshots/clips, do **not** re-present V4/V5/V6/V7, and do **not** claim creative acceptance.

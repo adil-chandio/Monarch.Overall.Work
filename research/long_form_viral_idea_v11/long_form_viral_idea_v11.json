@@ -1,0 +1,710 @@
+{
+  "schema_version": "1.0",
+  "edition": "v11_long_form_viral_idea_selection_2026-11-05",
+  "status": "idea_selected_video_not_built",
+  "user_request": "1 long-form video, next level, fun; research viral growing channels / million-view videos via API; choose exactly ONE viral idea now; do not build the video yet.",
+  "head_at_selection": "e0f8e1cfb959fc38da5a1b60634d2cd29d0ef6d4",
+  "branch": "arena/2b012328-monarch-overall-work",
+  "deliverable_type": "forensic_idea_selection_study",
+  "api_audit": {
+    "edition": "v11_long_form_viral_idea_selection_2026-11-05",
+    "question_from_user": "research karo api se best viral growing channels / millions-view videos dekho",
+    "workspace_check_performed": true,
+    "workspace_check_results": {
+      "env_youtube_or_google_api_key_var_present": false,
+      "config_youtube_json_present": false,
+      "config_api_keys_json_present": false,
+      "env_file_present": false,
+      "config_channels_json_present": true,
+      "outbound_bash_allowlist": [
+        "github.com",
+        "codeload.github.com",
+        "api.github.com",
+        "registry.npmjs.org",
+        "pypi.org",
+        "files.pythonhosted.org"
+      ],
+      "note": "Web tools (web_search / fetch_page) reached official docs and public pages, but the Data API endpoint requires an API key and was NOT called. No key value was requested, printed or stored in chat."
+    },
+    "youtube_data_api_calls_made": 0,
+    "official_capability": [
+      {
+        "method": "videos.list",
+        "purpose": "mostPopular videos by region + category, or metadata/statistics for known IDs",
+        "example_request": "GET https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=PK&videoCategoryId=28&maxResults=50&key=REDACTED",
+        "quota": "1 unit per call",
+        "doc": "[6](https://developers.google.com/youtube/v3/docs/videos/list)",
+        "would_return": "title, channelId, categoryId, publishedAt, viewCount, likeCount, commentCount, duration"
+      },
+      {
+        "method": "search.list",
+        "purpose": "keyword discovery of long-form videos ordered by views / date",
+        "example_request": "GET https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=viewCount&videoDuration=long&publishedAfter=2026-01-01T00:00:00Z&maxResults=50&key=REDACTED",
+        "quota": "100 calls per day in the Search Queries bucket (1 unit in that bucket)",
+        "doc": "[7](https://developers.google.com/youtube/v3/docs/search/list)",
+        "would_return": "videoId + snippet only; statistics require a follow-up videos.list"
+      },
+      {
+        "method": "channels.list",
+        "purpose": "public subscriber / total view / video counts for candidate channels",
+        "example_request": "GET https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=REDACTED&key=REDACTED",
+        "quota": "1 unit per call",
+        "doc": "[29](https://developers.google.com/youtube/v3/docs/channels/list)",
+        "would_return": "subscriberCount, viewCount, videoCount, channel title"
+      },
+      {
+        "method": "videoCategories.list",
+        "purpose": "region-specific category IDs (e.g. 27 Education, 28 Science & Technology)",
+        "example_request": "GET https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=PK&key=REDACTED",
+        "quota": "1 unit per call",
+        "doc": "[8](https://developers.google.com/youtube/v3/docs/videoCategories/list)",
+        "would_return": "assignable category IDs and labels"
+      }
+    ],
+    "api_limits_even_with_a_key": [
+      "No breakout / outlier detection vs a channel baseline; must be built manually [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+      "No transcripts for arbitrary videos; captions.download requires OAuth + ownership [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+      "No keyword search-volume or competition data; the API returns videos, not demand [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+      "No semantic look-alike channel search; search.list matches keywords only [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+      "Impressions, CTR, watch time, average view duration, retention and revenue are OWNER-ONLY Studio / Analytics API data, not public Data API fields [4](https://support.google.com/youtube/answer/9313698?hl=en) [5](https://support.google.com/youtube/answer/12220281?hl=en) [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/)",
+      "Public view counts are a snapshot, not a forecast and not a guarantee of a future video's reach [10](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos)"
+    ],
+    "what_was_actually_used_instead": [
+      "Official YouTube Blog / Help / Developer documentation (source ledger 1-9)",
+      "Public web reporting about the Artemis II clip and audience reaction (14-19)",
+      "Community-maintained most-viewed list as a reality check on genre expectations (10)",
+      "Clearly-labelled third-party directional signals (20-24), never as authoritative",
+      "Committed workspace evidence: the single locked NASA source and V10 ledgers (26-28)"
+    ],
+    "no_fabrication_statement": "No live channel analytics, no verified competitor view counts, no trend/keyword volume, no retention graph, no RPM/CTR data and no 'best viral growing channels' ranking was invented. Where a number appears, its source and reliability tier are recorded."
+  },
+  "research_log": [
+    {
+      "q": "YouTube 2026 long-form video trends creators watch time official YouTube blog",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        20,
+        21
+      ],
+      "takeaway": "Third-party 2026 trend write-ups claim long-form/TV resurgence and multi-format advantage; all numeric growth multipliers in those posts are unverified and were NOT used as evidence."
+    },
+    {
+      "q": "Wikipedia list of most-viewed YouTube videos 2026 billions views",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        10
+      ],
+      "takeaway": "Fetched Wikipedia directly: top 30 = children's songs, music videos, one ad. Reality check: a science forensic long-form video is NOT in the billion-view genre, so 'millions of views' cannot be promised."
+    },
+    {
+      "q": "fastest growing YouTube channels 2026 science space documentary millions views",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        22,
+        23
+      ],
+      "takeaway": "Aggregator sites list large science channels and million-view science videos; subscriber/view figures are directional only, not verified by us and not used as targets."
+    },
+    {
+      "q": "YouTube viral video replay breakdown format hook retention rewatch wait what science explainer",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        24
+      ],
+      "takeaway": "Self-described manual analysis of 500 videos over 1M views reports curiosity-gap / pattern-interrupt / listicle hook patterns. Unofficial sample; used only as pattern vocabulary."
+    },
+    {
+      "q": "YouTube Data API videos.list search.list requires API key quota official documentation",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        6,
+        25
+      ],
+      "takeaway": "Confirmed official quota model and the API's hard limits; also fetched videos.list and search.list docs directly."
+    },
+    {
+      "q": "NASA Artemis II Fun with Water Bubbles upside down face viral 2026",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        14,
+        15,
+        16
+      ],
+      "takeaway": "Multiple independent reports describe the same playful water sphere, refraction-inverted face, straw catch and 'uniquely human' public reaction. That is public interest evidence, NOT a YouTube view count."
+    },
+    {
+      "q": "site:blog.youtube 2026 long-form TV viewing creators official YouTube",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        1,
+        2,
+        9
+      ],
+      "takeaway": "Official first-party 2026 direction: every format on every screen, TV as top interface for over half of top-100 creators, episodic/series structures, qualified long-form watch hours."
+    },
+    {
+      "q": "YouTube official help watch time average view duration audience retention analytics",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        3,
+        4,
+        5
+      ],
+      "takeaway": "Official metric definitions. Critical: 'spikes' are moments viewers rewatched or shared - a replay-first idea is aligned with a documented retention signal, not a guessed algorithm hack."
+    },
+    {
+      "q": "NASA Artemis II water bubble video millions views social media viral May 2026",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        17,
+        18,
+        19
+      ],
+      "takeaway": "Public reaction, a viewer safety question and a fact-check about a broadcast glitch being misused for 'staged' claims. Supplies myth-vs-fact material and a misinformation guardrail."
+    },
+    {
+      "q": "long-form science documentary YouTube millions views 2026 space physics explainer",
+      "depth": 2,
+      "results": 5,
+      "kept": [
+        22
+      ],
+      "takeaway": "Directional curiosity-gap documentary titles with reported million-view examples; unverified, used only to name the format family."
+    }
+  ],
+  "official_findings": [
+    {
+      "finding": "Every format on every screen; long-form, Shorts, podcasts, livestreams; Shorts 200B daily views; YouTube #1 US streaming watchtime nearly 3 years.",
+      "cite": "[1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/)"
+    },
+    {
+      "finding": "Over half of top-100 creators have TV as most watched interface; episodic Shorts series; 6.5B microdrama views H1 2026.",
+      "cite": "[2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/)"
+    },
+    {
+      "finding": "Intro = % watching after 30s; spikes = rewatched/shared; dips = skips; typical retention compares 10 similar-length videos.",
+      "cite": "[3](https://support.google.com/youtube/answer/9314415?hl=en)"
+    },
+    {
+      "finding": "Qualified YPP watch hours come from public long-form / archived livestreams, not Shorts watch hours.",
+      "cite": "[9](https://blog.youtube/news-and-events/youtube-monetization-qualified-watch-hours-shorts-views/)"
+    },
+    {
+      "finding": "Top-30 most-viewed videos are children's songs, music videos and one ad - not science explainers.",
+      "cite": "[10](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos)"
+    },
+    {
+      "finding": "93% of US 18-27 year olds and 79% of US teachers say YouTube helps learning.",
+      "cite": "[1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/)"
+    }
+  ],
+  "scoring_summary": {
+    "winner": "RL-01",
+    "winner_score": 93.3,
+    "runner_up": "AN-01",
+    "runner_up_score": 82.4,
+    "minimum_total": 75.0
+  },
+  "chosen_idea": {
+    "id": "RL-01",
+    "working_title": "The Upside-Down Face: 42.7 Seconds of NASA Footage, Explained Frame by Frame",
+    "series_name": "REPLAY LAB",
+    "episode": "Ep.1",
+    "format": "long-form landscape 16:9, 10-12 min target (11:00 including teaser), 30fps, H.264 + AAC",
+    "platform_fit": "Long-form depth layer fed by the existing 49.4s V10 Short as the discovery surface [1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/) [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/) [9](https://blog.youtube/news-and-events/youtube-monetization-qualified-watch-hours-shorts-views/)",
+    "alt_titles": [
+      "Replay Lab Ep.1 - Why NASA's Water Bubble Flipped an Astronaut's Face",
+      "That Is Not a Lens: The Forensic Story of Artemis II's Floating Water Ball",
+      "10 Minutes on 42 Seconds: What Really Happened Inside That NASA Water Bubble"
+    ],
+    "hook_line": "That is not a lens. Watch the face inside that floating water sphere flip upside down - then stay, because every replay hides a different layer.",
+    "logline": "One official NASA clip. Eight replay passes. Ten-plus minutes of optics, microgravity, native audio, edit anatomy and myth-vs-fact - without ever claiming CGI, endorsement or a guaranteed result.",
+    "runtime_target_seconds": 660,
+    "chapters": [
+      {
+        "t": "0:00-0:20",
+        "name": "Cold open: three silent replays",
+        "content": "The upside-down face, no text, native crew audio only. Then the line: 'That is not a lens.'"
+      },
+      {
+        "t": "0:20-1:00",
+        "name": "The promise",
+        "content": "42.7 seconds of NASA footage, ten-plus minutes of 'how did that happen?'. State plainly: one source, no re-enactment, no outcome promise."
+      },
+      {
+        "t": "1:00-2:10",
+        "name": "The mission in 60 seconds",
+        "content": "Artemis II lunar flyby, 10-day mission, record distance, NASA credit, 'no endorsement implied'. Use only officially recorded facts [13](https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman) [15](https://www.yahoo.com/news/articles/watch-artemis-ii-astronauts-fun-193852742.html)."
+      },
+      {
+        "t": "2:10-3:30",
+        "name": "Why water becomes a sphere",
+        "content": "Surface tension in microgravity; one simple ORIGINAL diagram, not stock b-roll as hero [27](workspace://config/channels.json)."
+      },
+      {
+        "t": "3:30-5:00",
+        "name": "The liquid lens",
+        "content": "Refraction through a curved interface, image inversion; freeze at 23.42s, REFRACTION label, slow-motion replay [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10) [15](https://www.yahoo.com/news/articles/watch-artemis-ii-astronauts-fun-193852742.html)."
+      },
+      {
+        "t": "5:00-6:20",
+        "name": "Why your brain says 'CGI'",
+        "content": "Expectation violation and pattern interrupt [24](https://fluxnote.io/blog/short-form-hook-library-500-viral-videos); explicitly do NOT amplify the broadcast-glitch 'staged' conspiracy [18](https://factcheck.afp.com/doc.afp.com.A6WV668). No 'No CGI' claim."
+      },
+      {
+        "t": "6:20-7:30",
+        "name": "The crew's reaction",
+        "content": "Native audio retained, laughter, straw catch and release, the 'uniquely human' public framing [16](https://www.dailymail.com/sciencetech/article-15807427/Incredible-video-shows-water-floating-space.html) [17](https://www.gazetaexpress.com/en/Artemis-II-astronauts-experiment-with-a-drop-of-water-in-space--NASA-footage-amazes-the-web/)."
+      },
+      {
+        "t": "7:30-8:40",
+        "name": "Microscope on the audio",
+        "content": "Native crew audio kept; no music, SFX, procedural bed or audio substitution. Reference V10's 9/9 audio gates as OBJECTIVE evidence only, with human listening still pending [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)."
+      },
+      {
+        "t": "8:40-9:40",
+        "name": "Microscope on the edit (AN-01 folded in)",
+        "content": "8 beats, 118 words, word-by-word captions, 1.5s payoff flash, loop-back at 44.24s. This is where the runner-up idea becomes a chapter [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)."
+      },
+      {
+        "t": "9:40-10:20",
+        "name": "Myth vs fact",
+        "content": "Not CGI / not a lens / not official NASA / no invented date / no endorsement / no safety verdict. Include the viewer water-near-electronics question as an open question, not an answer [17](https://www.gazetaexpress.com/en/Artemis-II-astronauts-experiment-with-a-drop-of-water-in-space--NASA-footage-amazes-the-web/)."
+      },
+      {
+        "t": "10:20-10:50",
+        "name": "Final clean replay + loop-back",
+        "content": "One uninterrupted pass, then the loop-back; on-screen credit 'Source: NASA / Artemis II' [11](https://www.nasa.gov/nasa-brand-center/images-and-media/) [13](https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman)."
+      },
+      {
+        "t": "10:50-11:00",
+        "name": "Genuine question + series teaser",
+        "content": "One specific question and 'Replay Lab' next-episode teaser. No like/subscribe incentive, no reward, no coercion."
+      }
+    ],
+    "why_this_wins": [
+      "It is built around REPLAYS, which YouTube's own Help defines as 'spikes' - moments viewers rewatched or shared [3](https://support.google.com/youtube/answer/9314415?hl=en). This is a documented retention signal, not an invented algorithm trick.",
+      "It converts the already-locked V10 Short into a long-form depth layer, matching the official 2026 every-format / TV / qualified-watch-hours direction [1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/) [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/) [9](https://blog.youtube/news-and-events/youtube-monetization-qualified-watch-hours-shorts-views/).",
+      "Source certainty is maximal: ONE official NASA asset with a recorded ID, page and SHA, plus 12 committed V10 evidence files [13](https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman) [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10). Every rejected multi-clip competitor fails here.",
+      "The 'microscope / 10x' demand is literally the structure: optics, audio, edit ledger, myth-vs-fact, frame-level replay - enough honest runway for 10-12 minutes without padding.",
+      "It is a SERIES pilot, not a one-off: 'one concept, one demo' [27](workspace://config/channels.json) plus the official episodic/Shorts-series push [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/). Each future episode would still need its own cleared source.",
+      "Reality check from the most-viewed list: billion-view videos are children's songs and music videos [10](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos). We therefore choose this idea for depth, replay craft and evidence integrity - NOT because it guarantees millions of views."
+    ],
+    "production_blueprint_NOT_EXECUTED": [
+      {
+        "phase": "A - source audit",
+        "detail": "Re-verify the locked NASA asset ID, SHA and vertical master; re-read rights_ledger_v10.json; DO NOT add any second clip without a new clearance pass [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/) [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)."
+      },
+      {
+        "phase": "B - script",
+        "detail": "Write a timed 10-12 min script with 3 hook variants; every factual line mapped to a source ledger entry; word-by-word caption timing generated from the script."
+      },
+      {
+        "phase": "C - voice",
+        "detail": "Generic synthetic VO, user-selected voice-01 from the V10 lane; no real-person clone; no time-stretch; no music/SFX/procedural bed; NASA native audio retained [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)."
+      },
+      {
+        "phase": "D - edit",
+        "detail": "16:9 master, replay passes at 0.25x / 0.5x / 1x, original diagrams, on-screen credit, no baked platform UI, no clickbait overlays, safe areas maintained."
+      },
+      {
+        "phase": "E - QC",
+        "detail": "Run the same nine audio gates + technical QC harness as V10; objective pass recorded separately from human listening / creative approval [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)."
+      },
+      {
+        "phase": "F - metadata",
+        "detail": "Separate long-form title/description/tags/category/pinned-comment pack; no unrelated tags, no NASA official status, no endorsement, no guaranteed reach."
+      }
+    ],
+    "hard_guardrails": [
+      "One official NASA source only; credit 'Source: NASA / Artemis II' and 'no endorsement implied' [11](https://www.nasa.gov/nasa-brand-center/images-and-media/) [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+      "No 'No CGI', no '100% real', no AI-free imagery claim, no invented date or mission detail.",
+      "No NASA insignia, no 'official NASA', no astronaut names used promotionally, no co-branding [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+      "No music, SFX, procedural bed or substitution of NASA native audio [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10).",
+      "No unrelated/misleading tags, no engagement coercion, no guaranteed virality/retention/views/RPM.",
+      "No human approval, legal clearance, perfection or zero-omission claim."
+    ],
+    "rights_gate_OPEN": {
+      "severity": "high",
+      "finding": "NASA states short-form social content is generally promotional and imagery with current astronauts may not be used in promotional content; identifiable current astronauts / possible CSA personnel appear in this footage [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+      "consequence": "A commercial, monetized, sponsored or otherwise promotional long-form publish must NOT proceed without written clearance and human legal review. This idea-selection pack does not resolve that gate.",
+      "workspace_flags": {
+        "human_legal_review": false,
+        "commercial_monetization_clearance": false,
+        "publicity_or_privacy_permission_obtained": false,
+        "not_a_legal_opinion": true
+      }
+    },
+    "working_title_chars": 76
+  },
+  "non_claims": {
+    "video_rendered": false,
+    "upload_or_publish_performed": false,
+    "youtube_data_api_called": false,
+    "api_key_available_in_workspace": false,
+    "live_channel_analytics_accessed": false,
+    "verified_current_trending_ranking": false,
+    "verified_competitor_view_counts": false,
+    "keyword_search_volume_data": false,
+    "retention_or_ctr_or_rpm_data": false,
+    "millions_of_views_guaranteed": false,
+    "virality_guaranteed": false,
+    "audience_result_guaranteed": false,
+    "human_creative_approval": false,
+    "human_native_audio_listening": false,
+    "human_full_motion_review": false,
+    "human_legal_review": false,
+    "commercial_monetization_clearance": false,
+    "written_astronaut_or_csa_permission": false,
+    "legal_opinion": false,
+    "perfection_or_zero_omission": false,
+    "nasa_endorsement": false,
+    "official_nasa_status": false,
+    "exact_reference_match": false,
+    "technical_qc_pass_for_new_video": false
+  },
+  "honest_boundary": [
+    "Aapne 'bagair kisi kami / galati / flaws ke, kuch chhore miss kiye bagair' manga. Main ye claim nahi kar sakta: is workspace me YouTube Data API key nahi hai, live analytics nahi, channel ka private Studio data nahi, human listening / full-motion review nahi, aur na hi kisi future audience result ka pata hai [6](https://developers.google.com/youtube/v3/docs/videos/list) [25](https://outlierkit.com/resources/how-to-get-youtube-api-key/) [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10).",
+    "Jo verify ho saka usse source ledger, reliability tier aur citation ke saath rakha hai; jo verify nahi ho saka usse 'unverified / directional / pending' likha hai. Ye honesty hi asli 'flaw-free' approach hai - chhupaana nahi.",
+    "Official documentation bhi legal opinion nahi hai; NASA promotional gate khula hai [12](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+    "Technical QC (jab bhi banega) objective record hoga; creative approval, legal clearance aur listening sign-off alag human gates rahenge [26](workspace://production/monarch-cam/caught_on_camera_commentary_v10)."
+  ],
+  "sources": [
+    {
+      "n": 1,
+      "id": "YT_CEO_2026",
+      "title": "From the CEO: What's coming to YouTube in 2026 (Neal Mohan)",
+      "url": "https://blog.youtube/inside-youtube/the-future-of-youtube-2026/",
+      "authority": "official_youtube_blog",
+      "kind": "fetched_and_searched",
+      "search_result_id": 1,
+      "used_for": "Every format on every screen; long-form, Shorts, music, livestreams, podcasts; Shorts averages 200B daily views; YouTube #1 in US streaming watchtime nearly 3 years (Nielsen); 93% of US 18-27 year olds and 79% of US teachers say YouTube helps learning (2025 Kantar / Oxford Economics); creators as new studios; $100B paid to creators in 4 years.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 2,
+      "id": "YT_TV_2026",
+      "title": "Connect with creators on the biggest screen (Made On YouTube 2026)",
+      "url": "https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/",
+      "authority": "official_youtube_blog",
+      "kind": "fetched_and_searched",
+      "search_result_id": 2,
+      "used_for": "Over half of YouTube's top 100 creators have TV as their most watched interface; Shorts series / seasons / episodes; microdramas surpassed 6.5B views in H1 2026 with watch time +50% YoY and TV views +90% YoY; 300M users engage with posts daily.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 3,
+      "id": "YT_RETENTION",
+      "title": "Measure key moments for audience retention - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+      "authority": "official_youtube_help",
+      "kind": "fetched_and_searched",
+      "search_result_id": 2,
+      "used_for": "Intro = % still watching after first 30s; spikes = moments rewatched or shared; dips = skipped/abandoned; flat = watched start to finish; typical retention compares 10 latest videos of similar length; retention data takes 1-2 days; key moments need video >=60s and >=100 views.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 4,
+      "id": "YT_ENGAGEMENT",
+      "title": "Understand your YouTube engagement - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/9313698?hl=en",
+      "authority": "official_youtube_help",
+      "kind": "searched",
+      "search_result_id": 1,
+      "used_for": "Engagement tab snapshot: watch time (hours), average view duration, views; audience retention report.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 5,
+      "id": "YT_PERFORMANCE",
+      "title": "Understand your YouTube content performance - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/12220281?hl=en",
+      "authority": "official_youtube_help",
+      "kind": "searched",
+      "search_result_id": 3,
+      "used_for": "Impressions, impressions CTR, views, average view duration, average percentage viewed, engaged views, unique viewers, regular viewers.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 6,
+      "id": "YT_API_VIDEOS",
+      "title": "Videos: list - YouTube Data API v3",
+      "url": "https://developers.google.com/youtube/v3/docs/videos/list",
+      "authority": "official_developer_docs",
+      "kind": "fetched_and_searched",
+      "search_result_id": 2,
+      "used_for": "chart=mostPopular returns most popular videos for a content region and video category; part=snippet,statistics returns categoryId, title, viewCount, likeCount; quota cost 1 unit; up to 50 IDs per call.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 7,
+      "id": "YT_API_SEARCH",
+      "title": "Search: list - YouTube Data API v3",
+      "url": "https://developers.google.com/youtube/v3/docs/search/list",
+      "authority": "official_developer_docs",
+      "kind": "fetched",
+      "search_result_id": null,
+      "used_for": "Keyword search; 100 calls per day in the Search Queries quota bucket (1 unit in that bucket); default 25 results; type=video, order, publishedAfter, videoDuration filters exist.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 8,
+      "id": "YT_API_CATEGORIES",
+      "title": "VideoCategories: list - YouTube Data API v3",
+      "url": "https://developers.google.com/youtube/v3/docs/videoCategories/list",
+      "authority": "official_developer_docs",
+      "kind": "fetched",
+      "search_result_id": null,
+      "used_for": "Returns categories associable with videos; regionCode makes the list region-specific; quota cost 1 unit.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 9,
+      "id": "YT_WATCH_HOURS",
+      "title": "Qualified watch hours and Shorts views (YPP) - YouTube Blog",
+      "url": "https://blog.youtube/news-and-events/youtube-monetization-qualified-watch-hours-shorts-views/",
+      "authority": "official_youtube_blog",
+      "kind": "searched",
+      "search_result_id": 4,
+      "used_for": "Qualified watch hours come from public long-form videos including podcasts and archived livestreams; Shorts watch hours do NOT count as qualified long-form watch hours.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 10,
+      "id": "WIKI_MOST_VIEWED",
+      "title": "List of most-viewed YouTube videos - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos",
+      "authority": "community_maintained",
+      "kind": "fetched_and_searched",
+      "search_result_id": 1,
+      "used_for": "Top 30 most-viewed are children's songs, music videos and one advertisement; Baby Shark Dance 17.28B; since Bad Romance (2010) every #1 most-viewed video has been a music video; page self-describes as a dynamic list that may never satisfy completeness.",
+      "reliability": "public_snapshot_not_authoritative"
+    },
+    {
+      "n": 11,
+      "id": "NASA_IMAGES",
+      "title": "NASA Brand Center - Images and Media",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa_guidance",
+      "kind": "workspace_and_fetched",
+      "search_result_id": null,
+      "used_for": "Acknowledge NASA as source; no implied endorsement; insignia / identifiable-person restrictions.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 12,
+      "id": "NASA_STRATEGIC",
+      "title": "NASA Strategic Partnerships - Promotional Content",
+      "url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "authority": "official_nasa_guidance",
+      "kind": "fetched",
+      "search_result_id": null,
+      "used_for": "Exact wording: 'Short-form social media content generally is considered promotional content' and 'Imagery with ... current astronauts ... may not be used in promotional content'; NASA cannot endorse or appear to endorse; no co-branding/sponsorship.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 13,
+      "id": "NASA_ASSET",
+      "title": "NASA image detail - Fun with Water Bubbles (Artemis II)",
+      "url": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+      "authority": "official_nasa_asset",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Locked source ID, title 'Fun with Water Bubbles', 2026-04-04; the one clip already sourced and QC'd in V10.",
+      "reliability": "official_first_party"
+    },
+    {
+      "n": 14,
+      "id": "ORBITAL_TODAY",
+      "title": "A Tiny Water Droplet Became the Star of Artemis II",
+      "url": "https://orbitaltoday.com/2026/05/12/a-tiny-water-droplet-became-the-star-of-artemis-ii-video/",
+      "authority": "third_party_reporting",
+      "kind": "searched",
+      "search_result_id": 1,
+      "used_for": "Public-interest framing: 'star of Artemis II', Hansen leaning in, face upside down and warped, straw catch, light bending like a glass lens.",
+      "reliability": "reporting_not_analytics"
+    },
+    {
+      "n": 15,
+      "id": "YAHOO_BUBBLES",
+      "title": "Watch the Artemis II astronauts have fun with bubbles",
+      "url": "https://www.yahoo.com/news/articles/watch-artemis-ii-astronauts-fun-193852742.html",
+      "authority": "third_party_reporting",
+      "kind": "searched",
+      "search_result_id": 4,
+      "used_for": "Surface tension forms the sphere; light bends and inverts images; retired astronaut Karen Nyberg's 'what you see depends on how we look' lesson; playful tone.",
+      "reliability": "reporting_not_analytics"
+    },
+    {
+      "n": 16,
+      "id": "DAILYMAIL_BUBBLES",
+      "title": "'Like a crystal clear ball!' NASA water-in-space video",
+      "url": "https://www.dailymail.com/sciencetech/article-15807427/Incredible-video-shows-water-floating-space.html",
+      "authority": "third_party_reporting",
+      "kind": "searched",
+      "search_result_id": 3,
+      "used_for": "Jeremy Hansen upside-down through the orb; straw catch and release; 'uniquely human' audience reaction; NASA statement that crew had fun with water in weightlessness.",
+      "reliability": "reporting_not_analytics"
+    },
+    {
+      "n": 17,
+      "id": "GAZETA_BUBBLES",
+      "title": "Artemis II water drop footage amazes the network",
+      "url": "https://www.gazetaexpress.com/en/Artemis-II-astronauts-experiment-with-a-drop-of-water-in-space--NASA-footage-amazes-the-web/",
+      "authority": "third_party_reporting",
+      "kind": "searched",
+      "search_result_id": 1,
+      "used_for": "Social reactions and a viewer safety question about water near electronics - useful raw material for a myth-vs-fact chapter, NOT a verdict.",
+      "reliability": "reporting_not_analytics"
+    },
+    {
+      "n": 18,
+      "id": "AFP_FACTCHECK",
+      "title": "Artemis II broadcast error used to stoke false 'staged' claims - AFP Fact Check",
+      "url": "https://factcheck.afp.com/doc.afp.com.A6WV668",
+      "authority": "third_party_factcheck",
+      "kind": "searched",
+      "search_result_id": 3,
+      "used_for": "A broadcast text-overlay glitch was misused to claim the mission was staged; the glitch clip drew over 1.5M views. Guardrail for the 'why your brain says CGI' chapter: do not amplify or invent conspiracy claims.",
+      "reliability": "factcheck_reporting"
+    },
+    {
+      "n": 19,
+      "id": "NAUTILUS_ARTEMIS",
+      "title": "Astronauts as Influencers - Nautilus",
+      "url": "https://nautil.us/astronauts-as-influencers-1279855",
+      "authority": "third_party_reporting",
+      "kind": "searched",
+      "search_result_id": 5,
+      "used_for": "Artemis II cross-platform exposure: 27.3M TV news viewers for return, 18.1M for launch, 650k splashdown stream, 22M archived video. These are broadcast/stream figures, NOT YouTube views of our clip and NOT a forecast.",
+      "reliability": "reporting_not_analytics"
+    },
+    {
+      "n": 20,
+      "id": "TVREV_TUBULAR",
+      "title": "Tube Trends: longer videos to compete with TV (Tubular Labs data)",
+      "url": "https://www.tvrev.com/news/tube-trends-how-youtube-creators-are-using-longer-videos-to-compete-with-tv",
+      "authority": "third_party_industry_reporting",
+      "kind": "searched",
+      "search_result_id": 5,
+      "used_for": "Q1 2026 US creators uploaded 6.6M videos of 20+ minutes, 80.3% at least 30 min; MrBeast 628M long-form views in Q1; 44 creators above 100M views on longer content.",
+      "reliability": "directional_unverified_by_us"
+    },
+    {
+      "n": 21,
+      "id": "VIDIQ_TRENDS",
+      "title": "9 YouTube Trends Creators Need to Watch in 2026 - vidIQ",
+      "url": "https://vidiq.com/blog/post/future-youtube-trends/",
+      "authority": "third_party_creator_tool",
+      "kind": "searched",
+      "search_result_id": 2,
+      "used_for": "Long-form viewing on TVs, video podcasts, multi-format channels, stronger title/thumbnail testing, community revenue.",
+      "reliability": "directional_unverified_by_us"
+    },
+    {
+      "n": 22,
+      "id": "FALCONVID_SCIENCE",
+      "title": "Faceless science channels and reusable hooks - FalconVid",
+      "url": "https://falconvid.ai/blog/science-youtube-channels-that-make-money",
+      "authority": "third_party_aggregator",
+      "kind": "searched",
+      "search_result_id": 2,
+      "used_for": "Directional examples of curiosity-gap long-form science titles with reported million-view videos (Nebula Prophecy, GoDocs, OctoLab). Numbers NOT verified by us.",
+      "reliability": "unverified_aggregator"
+    },
+    {
+      "n": 23,
+      "id": "TUBESTATS_SCIENCE",
+      "title": "Best Science YouTube Channels 2026 - TubeStats",
+      "url": "https://tubestats.io/channels/science",
+      "authority": "third_party_aggregator",
+      "kind": "searched",
+      "search_result_id": 3,
+      "used_for": "Directional channel-scale context (Kurzgesagt, Vsauce, Veritasium, NASA). Subscriber/view numbers NOT verified by us.",
+      "reliability": "unverified_aggregator"
+    },
+    {
+      "n": 24,
+      "id": "FLUXNOTE_HOOKS",
+      "title": "Short-Form Hook Library: 500 viral videos (2026 manual analysis)",
+      "url": "https://fluxnote.io/blog/short-form-hook-library-500-viral-videos",
+      "authority": "third_party_analysis",
+      "kind": "searched",
+      "search_result_id": 4,
+      "used_for": "Pattern frequencies in a self-described manual sample: direct claim with specific number 14%, POV 11%, contradictory pattern interrupt 10%, curiosity gap 9%, listicle preamble 7%. NOT an official YouTube statistic.",
+      "reliability": "unverified_sample"
+    },
+    {
+      "n": 25,
+      "id": "OUTLIERKIT_API",
+      "title": "How to Get a YouTube API Key in 2026 - OutlierKit",
+      "url": "https://outlierkit.com/resources/how-to-get-youtube-api-key/",
+      "authority": "third_party_guide",
+      "kind": "searched",
+      "search_result_id": 5,
+      "used_for": "API key is free within a 10,000-unit/day default quota; what the Data API cannot do: breakout/outlier detection vs channel baseline, arbitrary-video transcripts, keyword search volume, semantic look-alike channels, derived audience intelligence.",
+      "reliability": "third_party_guide_cross_checked_with_official_docs"
+    },
+    {
+      "n": 26,
+      "id": "WORKSPACE_V10",
+      "title": "V10 workspace evidence (locked NASA Short + ledgers)",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10",
+      "authority": "workspace_evidence",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Single locked 1080x1920 master (SHA 11395618...), 49.4s V10 deliverable SHA 608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7, 8 beats / 118 words, 9/9 audio gates, 33/33 technical checks, rights_ledger, edit_ledger, native_audio_ledger, qc_summary, category/pinned-comment pack.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 27,
+      "id": "CHANNEL_CONFIG",
+      "title": "config/channels.json",
+      "url": "workspace://config/channels.json",
+      "authority": "workspace_evidence",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Legacy slots: Monarch Lab long-form 8-12 min with 'one concept, one demo' and banned 'stock b-roll as hero' / 'reaction-only' / 'clickbait with no payoff'; Curious Miles long-form 6-10 min with 'how it actually works' / 'myth vs measured'. Monarch Cam is a separate active workstream per the continuity note.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 28,
+      "id": "PRIOR_STUDY_V10",
+      "title": "Caught-on-camera single-clip commentary - V10 forensic study",
+      "url": "workspace://research/caught_on_camera_commentary_v10/CAUGHT_ON_CAMERA_FORENSIC_STUDY.md",
+      "authority": "workspace_evidence",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Prior evidence ladder, 10-axis one-clip rubric (min 78), 12 kill switches, honest evidence boundary, channel ecosystem tiers and long-form anatomy template.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 29,
+      "id": "YT_API_CHANNELS",
+      "title": "Channels: list - YouTube Data API v3",
+      "url": "https://developers.google.com/youtube/v3/docs/channels/list",
+      "authority": "official_developer_docs",
+      "kind": "referenced_official_docs",
+      "search_result_id": null,
+      "used_for": "Endpoint identity for public channel statistics (subscriberCount, viewCount, videoCount, snippet). Referenced for the ready-to-run query; NOT fetched this session and NOT called.",
+      "reliability": "official_first_party_reference_only"
+    }
+  ],
+  "next_step_human_gate": "Human must approve THIS idea first. No render, no VO, no upload, no publish, no API call and no clearance claim until then.",
+  "files": {
+    "study": "research/long_form_viral_idea_v11/LONG_FORM_VIRAL_IDEA_FORENSIC_STUDY_V11.md",
+    "pack": "research/long_form_viral_idea_v11/long_form_viral_idea_v11.json",
+    "scoring": "research/long_form_viral_idea_v11/candidate_scoring_v11.json",
+    "sources": "research/long_form_viral_idea_v11/sources_v11.json",
+    "api_audit": "research/long_form_viral_idea_v11/api_capability_audit_v11.json"
+  }
+}
