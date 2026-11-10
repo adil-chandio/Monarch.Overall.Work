@@ -19,3 +19,7 @@ node production/extinct-life/longform-mammoth/cinematic-rebuild/render.mjs --fro
 ```
 
 The test does not overwrite the earlier full-film master. Do not publish either to YouTube without explicit authorization.
+
+## Expanded full-story narration and shot planning
+
+`full-script/` contains a longer science-corrected adaptation, ten newly generated voice takes and 58 time-anchored **planned** 3D beats. They are not the original script verbatim, not a final mixed soundtrack, and not a rendered film. See that folder's README for scope, editorial issues, source qualifications and reproducibility.
