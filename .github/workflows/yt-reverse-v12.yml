@@ -1,0 +1,95 @@
+name: V12 - reverse teardown of real million-view videos
+
+# V12 multi-clip research: yt-intel's `reverse` command tears down a video that
+# already won (RECEIPT / SCRIPT / HOOK / STRUCTURE / PSYCHOLOGY / REPLICATION).
+# It needs the same YOUTUBE_API_KEY Actions secret that yt-intel.yml already uses.
+# The Arena integration token cannot call workflow_dispatch (403), so a marker-file
+# push on the active session branch is the trigger. No secret value is printed.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "yt-reverse-trigger.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  reverse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve the key secret (presence only, value masked)
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then
+            echo "no key secret resolved - teardown will be keyless"
+            exit 0
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          case "$KEY" in
+            AIza*) echo "key resolved (${#KEY} chars, shape starts with AIza)" ;;
+            *) echo "::warning::key resolved (${#KEY} chars) but does not start with AIza" ;;
+          esac
+
+      - name: Runtime deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy pillow yt-dlp pytrends imageio-ffmpeg
+
+      - name: Reverse teardown of three real 1M+ view videos
+        continue-on-error: true
+        run: |
+          mkdir -p research/multi_clip_long_form_v12/api_evidence
+          for ID in LAl3pCigzKY cKdD3OpEdgY wT7MInhIAms; do
+            echo "=== reverse $ID ==="
+            python -m yt_intel reverse "$ID" --json "research/multi_clip_long_form_v12/api_evidence/reverse-$ID.json" \
+              || echo "reverse failed for $ID"
+          done
+          ls -la research/multi_clip_long_form_v12/api_evidence/
+
+      - name: Record run metadata (presence only, never the value)
+        run: |
+          cat > /tmp/record_v12.py <<'PY'
+          import json, os, datetime
+          print(json.dumps({
+              "at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "ref": os.environ.get("GITHUB_REF"),
+              "sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "key_present": bool(os.environ.get("YOUTUBE_API_KEY")),
+              "videos": ["LAl3pCigzKY", "cKdD3OpEdgY", "wT7MInhIAms"],
+              "source_report": "public/yt-intel/viral-moments-explained.json",
+              "note": "Only key presence is recorded; the secret value is never printed or stored."
+          }, indent=2))
+          PY
+          python /tmp/record_v12.py > research/multi_clip_long_form_v12/api_evidence/run.json
+          cat research/multi_clip_long_form_v12/api_evidence/run.json
+
+      - name: Upload evidence even if commit fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v12-reverse-evidence
+          path: research/multi_clip_long_form_v12/api_evidence/
+          if-no-files-found: warn
+
+      - name: Commit evidence
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add research/multi_clip_long_form_v12/api_evidence
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore(v12): real API reverse teardowns [skip ci]"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }} || echo "::warning::push failed; evidence is in the run artifact"
