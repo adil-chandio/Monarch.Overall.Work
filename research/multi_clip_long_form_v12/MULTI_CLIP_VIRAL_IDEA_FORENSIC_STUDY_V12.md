@@ -271,7 +271,7 @@ Thesis > claim > evidence > visual proof > analysis > thesis link > transition [
 
 ### L4 - Clip selection
 
-8 slots, each with a DIFFERENT analytic job, <=10s on screen. Per-clip gate reuses V10's 10-axis / min-78 / 12-kill-switch rubric [38](workspace://research/caught_on_camera_commentary_v10/clip_rubric.json). 'Best' is a scouting outcome, NOT an invented ranking: no live API, no verified competitor views [24](https://developers.google.com/youtube/v3/docs/videos/list) [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/).
+8 slots, each with a DIFFERENT analytic job, <=10s on screen. Per-clip gate reuses V10's 10-axis / min-78 / 12-kill-switch rubric [38](workspace://research/caught_on_camera_commentary_v10/clip_rubric.json). 'Best' is a scouting outcome, NOT an invented ranking: real public Data API view counts exist [65](workspace://public/yt-intel/viral-moments-explained.json), but owner-only analytics, arbitrary transcripts and a verified growth ranking do not [24](https://developers.google.com/youtube/v3/docs/videos/list) [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/).
 
 ### L5 - Commentary / transformation
 
@@ -343,7 +343,7 @@ Owner-only Analytics; no public CTR/retention/RPM; YouTube's own guidance is to 
 | 7:10-8:00 | CLIP 6 - the human reaction | Clip <=10s, then analysis of why a face/laugh resets attention. No astronaut name used promotionally. [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/) [33](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/) |
 | 8:00-8:45 | CLIP 7 - the near-miss / coincidence | Clip <=10s, then our own timeline graphic. No invented date, injury or outcome. [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md) |
 | 8:45-9:25 | CLIP 8 + the prediction test (MC-02 folded in) | Play the 8th clip WITHOUT explanation, ask the viewer to predict the replay point, then reveal the measurement. Runner-up idea becomes this chapter. [5](https://support.google.com/youtube/answer/9314415?hl=en) |
-| 9:25-9:50 | The rule, restated + honest limits | One screen with the 6-step rule; say plainly what we could not verify (no live API, no competitor analytics, no human review, no clearance). [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/) [41](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md) |
+| 9:25-9:50 | The rule, restated + honest limits | One screen with the 6-step rule; say plainly what we could not verify (no owner-only competitor retention/CTR/RPM, no arbitrary competitor transcripts, no human review, no per-clip clearance). Public Data API view counts ARE available and were used for scouting, but they are not proof of our own result. [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/) [41](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md) [65](workspace://public/yt-intel/viral-moments-explained.json) |
 | 9:50-10:00 | Genuine question + series teaser | One specific question, one next-episode teaser. No like/subscribe coercion or reward. [14](https://support.google.com/youtube/answer/2801973?hl=en) |
 
 ### 6.3 8 clip slots - har clip ka apna kaam

@@ -1,0 +1,1090 @@
+{
+  "edition": "v12_phase_a_clip_scout",
+  "phase": "A - real API clip-moment scouting (RESEARCH ONLY)",
+  "run_id": "42895703914",
+  "head_pinned": false,
+  "status": "SCOUT_CANDIDATES_FOUND_NO_CLIP_ACQUIRED_NO_CLIP_CLEARED",
+  "winner_unchanged": {
+    "id": "MC-01",
+    "name": "THE REPLAY CODE: 8 Moments, One Hidden Rule",
+    "clip_count": 8,
+    "runtime_seconds": 600,
+    "clip_share_max_seconds": 80,
+    "clip_share_max_pct": 13.3
+  },
+  "excluded_existing_short_clip": {
+    "nasa_asset_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "rule": "EXCLUDED from all 8 slots. Do not use as hero, callback, montage filler or whole-video subject.",
+    "reason": "This exact clip was already used for the V10 Short; the user requires MANY DIFFERENT clips/moments."
+  },
+  "api_evidence": {
+    "key_secret_name": "YOUTUBE_API_KEY",
+    "key_present": true,
+    "secret_value_printed_or_stored": false,
+    "secret_value_requested_from_user": false,
+    "chat_sandbox_direct_calls": 0,
+    "reports": [
+      {
+        "slug": "slot-01-07-expectation-violation",
+        "topic": "unexpected moment caught on camera",
+        "lane": "api",
+        "order": "viewCount",
+        "status": "ok",
+        "count": 20,
+        "million_plus": 20,
+        "top_views": 204729002,
+        "total_views": 647165488,
+        "median_views": 14818841,
+        "top3_share": 0.555,
+        "fresh_share_30d": 0.0,
+        "reading": "distributed — no single video owns it, entry is feasible",
+        "verdict": "NO",
+        "score": 32.4,
+        "confidence": 0.85,
+        "reason": "the numbers do not support a day of production",
+        "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+        "parts": {
+          "demand": 29.7,
+          "winnability": 44.49999999999999,
+          "mechanism": 10.0,
+          "fit": null,
+          "timing": 55.0
+        },
+        "title_signal_effect": {
+          "length_+10chars_pct": -9.5,
+          "has_number_pct": -65.4,
+          "question_form_pct": 0.0,
+          "shouted_word_pct": 69.1
+        },
+        "title_signal_fit": {
+          "r2": 0.185,
+          "loo_rmse_log10": 0.517
+        },
+        "funnel_share": {
+          "number_in_title": 0.0,
+          "question": 0.0,
+          "you_form": 0.0,
+          "contrarian": 0.2,
+          "urgency": 0.0,
+          "curiosity_gap": 0.2,
+          "superlative": 0.0,
+          "wtf": 0.0
+        }
+      },
+      {
+        "slug": "slot-02-03-physics-timing",
+        "topic": "slow motion physics explained",
+        "lane": "api",
+        "order": "viewCount",
+        "status": "ok",
+        "count": 20,
+        "million_plus": 20,
+        "top_views": 363151838,
+        "total_views": 832427286,
+        "median_views": 11964655,
+        "top3_share": 0.695,
+        "fresh_share_30d": 0.0,
+        "reading": "distributed — no single video owns it, entry is feasible",
+        "verdict": "NO",
+        "score": 47.2,
+        "confidence": 0.75,
+        "reason": "the numbers do not support a day of production",
+        "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+        "parts": {
+          "demand": 79.2,
+          "winnability": 18.500000000000004,
+          "mechanism": 35.0,
+          "fit": null,
+          "timing": null
+        },
+        "title_signal_effect": {
+          "length_+10chars_pct": -18.4,
+          "has_number_pct": -35.7,
+          "question_form_pct": 0.0,
+          "shouted_word_pct": 48.0
+        },
+        "title_signal_fit": {
+          "r2": 0.266,
+          "loo_rmse_log10": 0.484
+        },
+        "funnel_share": {
+          "number_in_title": 0.2,
+          "question": 0.0,
+          "you_form": 0.0,
+          "contrarian": 0.0,
+          "urgency": 0.0,
+          "curiosity_gap": 0.4,
+          "superlative": 0.0,
+          "wtf": 0.0
+        }
+      },
+      {
+        "slug": "slot-04-scale-illusion",
+        "topic": "optical illusion scale size",
+        "lane": "api",
+        "order": "relevance",
+        "status": "ok",
+        "count": 20,
+        "million_plus": 15,
+        "top_views": 92776824,
+        "total_views": 192388683,
+        "median_views": 3062858,
+        "top3_share": 0.691,
+        "fresh_share_30d": 0.0,
+        "reading": "distributed — no single video owns it, entry is feasible",
+        "verdict": "NO",
+        "score": 35.5,
+        "confidence": 0.75,
+        "reason": "the numbers do not support a day of production",
+        "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+        "parts": {
+          "demand": 56.4,
+          "winnability": 18.900000000000006,
+          "mechanism": 25.0,
+          "fit": null,
+          "timing": null
+        },
+        "title_signal_effect": {
+          "length_+10chars_pct": -5.2,
+          "has_number_pct": 389.0,
+          "question_form_pct": 0.0,
+          "shouted_word_pct": -12.8
+        },
+        "title_signal_fit": {
+          "r2": 0.093,
+          "loo_rmse_log10": 1.248
+        },
+        "funnel_share": {
+          "number_in_title": 0.6,
+          "question": 0.0,
+          "you_form": 0.0,
+          "contrarian": 0.0,
+          "urgency": 0.0,
+          "curiosity_gap": 0.2,
+          "superlative": 0.0,
+          "wtf": 0.0
+        }
+      },
+      {
+        "slug": "slot-05-06-08-sound-reaction-callback",
+        "topic": "viral moment reaction explained",
+        "lane": "api",
+        "order": "viewCount",
+        "status": "ok",
+        "count": 20,
+        "million_plus": 7,
+        "top_views": 98022417,
+        "total_views": 170152920,
+        "median_views": 656494,
+        "top3_share": 0.918,
+        "fresh_share_30d": 0.05,
+        "reading": "concentrated — a few videos own the topic, a new entrant must out-execute them",
+        "verdict": "NO",
+        "score": 20.4,
+        "confidence": 0.75,
+        "reason": "the numbers do not support a day of production",
+        "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding",
+        "parts": {
+          "demand": 49.4,
+          "winnability": 1.914285714285711,
+          "mechanism": 0.0,
+          "fit": null,
+          "timing": null
+        },
+        "title_signal_effect": {
+          "length_+10chars_pct": 9.2,
+          "has_number_pct": 0.0,
+          "question_form_pct": 0.0,
+          "shouted_word_pct": -43.4
+        },
+        "title_signal_fit": {
+          "r2": 0.038,
+          "loo_rmse_log10": 0.909
+        },
+        "funnel_share": {
+          "number_in_title": 0.0,
+          "question": 0.0,
+          "you_form": 0.0,
+          "contrarian": 0.0,
+          "urgency": 0.0,
+          "curiosity_gap": 0.0,
+          "superlative": 0.0,
+          "wtf": 0.0
+        }
+      },
+      {
+        "slug": "rights-lane-nasa-agency-probe",
+        "topic": "nasa official science demonstration",
+        "lane": "api",
+        "order": "viewCount",
+        "status": "ok",
+        "count": 20,
+        "million_plus": 20,
+        "top_views": 127067555,
+        "total_views": 494286865,
+        "median_views": 19234336,
+        "top3_share": 0.398,
+        "fresh_share_30d": 0.0,
+        "reading": "distributed — no single video owns it, entry is feasible",
+        "verdict": "NO",
+        "score": 41.1,
+        "confidence": 0.75,
+        "reason": "the numbers do not support a day of production",
+        "next_probe": "teardown the top 5 by views; if no shared structure emerges, the topic is luck-driven",
+        "parts": {
+          "demand": 46.0,
+          "winnability": 60.199999999999996,
+          "mechanism": 10.0,
+          "fit": null,
+          "timing": null
+        },
+        "title_signal_effect": {
+          "length_+10chars_pct": 18.4,
+          "has_number_pct": -54.4,
+          "question_form_pct": 0.0,
+          "shouted_word_pct": -25.4
+        },
+        "title_signal_fit": {
+          "r2": 0.336,
+          "loo_rmse_log10": 0.238
+        },
+        "funnel_share": {
+          "number_in_title": 0.0,
+          "question": 0.2,
+          "you_form": 0.0,
+          "contrarian": 0.0,
+          "urgency": 0.0,
+          "curiosity_gap": 0.2,
+          "superlative": 0.0,
+          "wtf": 0.0
+        }
+      }
+    ]
+  },
+  "slots": [
+    {
+      "slot": 1,
+      "analytic_job": "expectation violation",
+      "chapter_t": "1:40-2:55",
+      "chapter_name": "CLIP 1 - expectation violation",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 130,
+      "commentary_beat": "Show the clip cold, freeze on the exact frame where the expectation breaks, then an ORIGINAL two-column diagram: what the viewer predicted vs what actually happened. One sentence naming the delay between surprise and explanation.",
+      "original_diagram_spec": "ORIGINAL expected-vs-actual split diagram, our own shapes/text, no source logo",
+      "scout_query": {
+        "topic": "unexpected moment caught on camera",
+        "order": "viewCount",
+        "report": "api_evidence/phase_a/slot-01-07-expectation-violation.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "KT3e_lKrNss",
+          "title": "Ranking Unexpected Baby First Words 👶",
+          "channel": "Ice Ranks",
+          "views": 204729002,
+          "duration": "PT49S",
+          "published": "2025-07-07T16:00:38Z"
+        },
+        {
+          "id": "JYTg_8Ui1Ho",
+          "title": "THE MOST AMAZING SAVES! #shorts",
+          "channel": "Paul Foisy Facts",
+          "views": 91496434,
+          "duration": "PT26S",
+          "published": "2022-04-26T04:14:12Z"
+        },
+        {
+          "id": "Sy5b_3ZH-rM",
+          "title": "This Police Officer is Hilarious - Unexpected Encounter With NYPD! 😂 #shorts",
+          "channel": "Cop Humor",
+          "views": 62638996,
+          "duration": "PT20S",
+          "published": "2023-09-19T17:35:54Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    },
+    {
+      "slot": 2,
+      "analytic_job": "physics / optics surprise",
+      "chapter_t": "2:55-4:05",
+      "chapter_name": "CLIP 2 - the physics surprise",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 135,
+      "commentary_beat": "Play <=10s, replay at 0.5x, then explain the mechanism with an original ray/force diagram. Factual claim anchored to a first-party official source; state the source on screen.",
+      "original_diagram_spec": "ORIGINAL optics / force diagram, no stock b-roll as hero",
+      "scout_query": {
+        "topic": "slow motion physics explained",
+        "order": "viewCount",
+        "report": "api_evidence/phase_a/slot-02-03-physics-timing.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "ro-vkofFP3E",
+          "title": "How lighter works close-up in #macro #slowmo",
+          "channel": "UrDay",
+          "views": 363151838,
+          "duration": "PT9S",
+          "published": "2023-03-27T12:30:34Z"
+        },
+        {
+          "id": "LgtQ3NL01As",
+          "title": "REALITY vs SLOW MOTION! 🎥",
+          "channel": "Legendary Shots",
+          "views": 155827569,
+          "duration": "PT30S",
+          "published": "2023-05-26T17:00:13Z"
+        },
+        {
+          "id": "fgLf_dcZy9Q",
+          "title": "Visualizing Magnetic Fields with Slow Mo #shorts #slowmoguys",
+          "channel": "The Slow Mo Guys",
+          "views": 59568824,
+          "duration": "PT54S",
+          "published": "2023-07-08T18:21:34Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    },
+    {
+      "slot": 3,
+      "analytic_job": "timing / slow-motion frame",
+      "chapter_t": "4:05-5:10",
+      "chapter_name": "CLIP 3 - timing / slow motion",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 120,
+      "commentary_beat": "Show the same moment at 1x, 0.5x, 0.25x in three labelled passes. Identify which single frame carries the surprise; do not claim the creator intended it.",
+      "original_diagram_spec": "ORIGINAL frame-timeline with 3 labelled speed bands",
+      "scout_query": {
+        "topic": "slow motion physics explained",
+        "order": "viewCount",
+        "report": "api_evidence/phase_a/slot-02-03-physics-timing.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "ro-vkofFP3E",
+          "title": "How lighter works close-up in #macro #slowmo",
+          "channel": "UrDay",
+          "views": 363151838,
+          "duration": "PT9S",
+          "published": "2023-03-27T12:30:34Z"
+        },
+        {
+          "id": "LgtQ3NL01As",
+          "title": "REALITY vs SLOW MOTION! 🎥",
+          "channel": "Legendary Shots",
+          "views": 155827569,
+          "duration": "PT30S",
+          "published": "2023-05-26T17:00:13Z"
+        },
+        {
+          "id": "fgLf_dcZy9Q",
+          "title": "Visualizing Magnetic Fields with Slow Mo #shorts #slowmoguys",
+          "channel": "The Slow Mo Guys",
+          "views": 59568824,
+          "duration": "PT54S",
+          "published": "2023-07-08T18:21:34Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    },
+    {
+      "slot": 4,
+      "analytic_job": "scale / size illusion",
+      "chapter_t": "5:10-6:15",
+      "chapter_name": "CLIP 4 - scale / size illusion",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 120,
+      "commentary_beat": "Clip <=10s, then an original scale diagram with a labelled reference object. Explain the missing reference cue, not 'the camera tricks you'.",
+      "original_diagram_spec": "ORIGINAL scale comparison with a stated reference length",
+      "scout_query": {
+        "topic": "optical illusion scale size",
+        "order": "relevance",
+        "report": "api_evidence/phase_a/slot-04-scale-illusion.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "FHJ3CMWnVxY",
+          "title": "Furniture Optical Illusions - Zach King Magic",
+          "channel": "Zach King",
+          "views": 92776824,
+          "duration": "PT3M55S",
+          "published": "2019-10-29T12:08:52Z"
+        },
+        {
+          "id": "jBEEsLeKoUM",
+          "title": "Dogs funny reaction to entering optical illusion rug! #shorts",
+          "channel": "My Mountain Husky",
+          "views": 21364400,
+          "duration": "PT17S",
+          "published": "2023-06-14T01:00:27Z"
+        },
+        {
+          "id": "-IWk5NkxQF8",
+          "title": "10 Mind Blowing Optical Illusions",
+          "channel": "TheRichest",
+          "views": 18835155,
+          "duration": "PT3M59S",
+          "published": "2015-03-05T19:51:01Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    },
+    {
+      "slot": 5,
+      "analytic_job": "native sound vs silence",
+      "chapter_t": "6:15-7:10",
+      "chapter_name": "CLIP 5 - sound and silence",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 105,
+      "commentary_beat": "Two passes: native audio, then muted with our commentary. Retain the source's native audio; no music or SFX substitution. Compare what the sound contributed to the replay impulse.",
+      "original_diagram_spec": "ORIGINAL two-row A/B waveform/beat diagram (drawn, not sampled audio)",
+      "scout_query": {
+        "topic": "viral moment reaction explained",
+        "order": "viewCount",
+        "report": "api_evidence/phase_a/slot-05-06-08-sound-reaction-callback.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "cU5uVnWL1Us",
+          "title": "Lil Durk - Viral Moment (Official Music Video)",
+          "channel": "Lil Durk",
+          "views": 98022417,
+          "duration": "PT3M26S",
+          "published": "2020-04-27T04:00:05Z"
+        },
+        {
+          "id": "FfFsz9TvXeI",
+          "title": "Bradford goes viral for being #GrumpyCop! | #TheRookie (SPOILERS!)",
+          "channel": "The Rookie (Fan Page)",
+          "views": 54311920,
+          "duration": "PT57S",
+          "published": "2025-02-13T01:02:38Z"
+        },
+        {
+          "id": "3gJbBnLyUBI",
+          "title": "Akanksha Choudhary 😂🔥 Talks About That Viral Dance Everyone’s Talking About  #shorts #splitsvilla",
+          "channel": "PINKVILLA",
+          "views": 3802491,
+          "duration": "PT50S",
+          "published": "2026-04-23T16:00:06Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    },
+    {
+      "slot": 6,
+      "analytic_job": "human reaction beat",
+      "chapter_t": "7:10-8:00",
+      "chapter_name": "CLIP 6 - the human reaction",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 95,
+      "commentary_beat": "Clip <=10s, then explain why a face or laugh resets attention. No astronaut/person name used promotionally; no endorsement implied; identifiable-person check is a hard gate.",
+      "original_diagram_spec": "ORIGINAL attention-reset timeline, no face crop reused as thumbnail",
+      "scout_query": {
+        "topic": "viral moment reaction explained",
+        "order": "viewCount",
+        "report": "api_evidence/phase_a/slot-05-06-08-sound-reaction-callback.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "cU5uVnWL1Us",
+          "title": "Lil Durk - Viral Moment (Official Music Video)",
+          "channel": "Lil Durk",
+          "views": 98022417,
+          "duration": "PT3M26S",
+          "published": "2020-04-27T04:00:05Z"
+        },
+        {
+          "id": "FfFsz9TvXeI",
+          "title": "Bradford goes viral for being #GrumpyCop! | #TheRookie (SPOILERS!)",
+          "channel": "The Rookie (Fan Page)",
+          "views": 54311920,
+          "duration": "PT57S",
+          "published": "2025-02-13T01:02:38Z"
+        },
+        {
+          "id": "3gJbBnLyUBI",
+          "title": "Akanksha Choudhary 😂🔥 Talks About That Viral Dance Everyone’s Talking About  #shorts #splitsvilla",
+          "channel": "PINKVILLA",
+          "views": 3802491,
+          "duration": "PT50S",
+          "published": "2026-04-23T16:00:06Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    },
+    {
+      "slot": 7,
+      "analytic_job": "near-miss / coincidence",
+      "chapter_t": "8:00-8:45",
+      "chapter_name": "CLIP 7 - the near-miss / coincidence",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 85,
+      "commentary_beat": "Clip <=10s, then an original timeline graphic of the two converging events. No invented date, injury, outcome or quote.",
+      "original_diagram_spec": "ORIGINAL two-track converging timeline, sourced only from verified facts",
+      "scout_query": {
+        "topic": "unexpected moment caught on camera",
+        "order": "viewCount",
+        "report": "api_evidence/phase_a/slot-01-07-expectation-violation.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "KT3e_lKrNss",
+          "title": "Ranking Unexpected Baby First Words 👶",
+          "channel": "Ice Ranks",
+          "views": 204729002,
+          "duration": "PT49S",
+          "published": "2025-07-07T16:00:38Z"
+        },
+        {
+          "id": "JYTg_8Ui1Ho",
+          "title": "THE MOST AMAZING SAVES! #shorts",
+          "channel": "Paul Foisy Facts",
+          "views": 91496434,
+          "duration": "PT26S",
+          "published": "2022-04-26T04:14:12Z"
+        },
+        {
+          "id": "Sy5b_3ZH-rM",
+          "title": "This Police Officer is Hilarious - Unexpected Encounter With NYPD! 😂 #shorts",
+          "channel": "Cop Humor",
+          "views": 62638996,
+          "duration": "PT20S",
+          "published": "2023-09-19T17:35:54Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    },
+    {
+      "slot": 8,
+      "analytic_job": "prediction test / callback",
+      "chapter_t": "8:45-9:25",
+      "chapter_name": "CLIP 8 + the prediction test (MC-02 folded in)",
+      "max_on_screen_seconds": 10,
+      "vo_word_budget": 75,
+      "commentary_beat": "Play the 8th clip WITHOUT explanation, ask the viewer to predict the replay point, then reveal how the earlier 7 clips set up the rule. Closes the thesis loop; no outcome promise.",
+      "original_diagram_spec": "ORIGINAL 8-slot callback grid, one cell per DIFFERENT clip",
+      "scout_query": {
+        "topic": "viral moment reaction explained",
+        "order": "viewCount",
+        "report": "api_evidence/phase_a/slot-05-06-08-sound-reaction-callback.json"
+      },
+      "real_benchmark_candidates": [
+        {
+          "id": "cU5uVnWL1Us",
+          "title": "Lil Durk - Viral Moment (Official Music Video)",
+          "channel": "Lil Durk",
+          "views": 98022417,
+          "duration": "PT3M26S",
+          "published": "2020-04-27T04:00:05Z"
+        },
+        {
+          "id": "FfFsz9TvXeI",
+          "title": "Bradford goes viral for being #GrumpyCop! | #TheRookie (SPOILERS!)",
+          "channel": "The Rookie (Fan Page)",
+          "views": 54311920,
+          "duration": "PT57S",
+          "published": "2025-02-13T01:02:38Z"
+        },
+        {
+          "id": "3gJbBnLyUBI",
+          "title": "Akanksha Choudhary 😂🔥 Talks About That Viral Dance Everyone’s Talking About  #shorts #splitsvilla",
+          "channel": "PINKVILLA",
+          "views": 3802491,
+          "duration": "PT50S",
+          "published": "2026-04-23T16:00:06Z"
+        }
+      ],
+      "benchmark_boundary": "STRUCTURAL BENCHMARKS ONLY - third-party copyrighted videos, NOT any of the 8 source clips, NOT cleared, NOT downloaded.",
+      "candidate_source_lanes": [
+        "official NASA / agency image and video libraries (DIFFERENT assets only)",
+        "CC BY content with full attribution fields",
+        "verified public domain / agency originals",
+        "own-shot original demo footage",
+        "licensed clips with written permission"
+      ],
+      "rights_gate": {
+        "official_source_url": null,
+        "nasa_or_agency_asset_id": null,
+        "licence_basis": null,
+        "third_party_copyrighted_material_check": null,
+        "identifiable_persons_check": null,
+        "current_astronaut_or_employee_check": null,
+        "promotional_or_cover_art_use": null,
+        "native_audio_rights": null,
+        "attribution_string": null,
+        "no_endorsement_implied_wording": null,
+        "no_insignia_confirmed": null,
+        "sha256_after_download": null,
+        "duration_seconds": null,
+        "scout_score_out_of_100": null,
+        "scout_min_pass_78": null,
+        "clearance_status": null,
+        "human_legal_review": null,
+        "not_a_legal_opinion": null
+      },
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true,
+      "clip_downloaded": false,
+      "clip_cleared": false,
+      "sha256_after_download": null
+    }
+  ],
+  "agency_rights_lane_probe": [
+    {
+      "id": "Riauw5UTnW8",
+      "title": "NASA | Sarychev Volcano Eruption from the International Space Station",
+      "channel": "NASA Goddard",
+      "views": 127067555,
+      "duration": "PT9S",
+      "status": "PROBE_ONLY_NOT_A_SOURCE_CLIP",
+      "reason": "Agency-owned channel found by the API; still needs per-clip licence, insignia, native-audio, endorsement and promotional-use checks."
+    },
+    {
+      "id": "z-j1uxBmis0",
+      "title": "NASA’s Artemis II Crew Flies Around the Moon (Official Broadcast)",
+      "channel": "NASA",
+      "views": 28162374,
+      "duration": "PT10H10M1S",
+      "status": "EXCLUDED_PENDING_HUMAN_LEGAL_REVIEW",
+      "reason": "Current named crew / official mission broadcast: NASA promotional + current-astronaut + identifiable-person gate is OPEN."
+    },
+    {
+      "id": "o8TssbmY-GM",
+      "title": "Wringing out Water on the ISS - for Science!",
+      "channel": "Canadian Space Agency",
+      "views": 21675484,
+      "duration": "PT3M18S",
+      "status": "REJECT_FOR_NOW",
+      "reason": "DIFFERENT asset from the V10/Short (different agency, different video ID), but the SAME water-bubble physics family - not a fresh 'different moment' for this episode."
+    },
+    {
+      "id": "S9HdPi9Ikhk",
+      "title": "Restored Apollo 11 Moonwalk - Original NASA EVA Mission Video - Walking on the Moon",
+      "channel": "NASA",
+      "views": 20440041,
+      "duration": "PT3H2M31S",
+      "status": "PROBE_ONLY_NOT_A_SOURCE_CLIP",
+      "reason": "Agency-owned channel found by the API; still needs per-clip licence, insignia, native-audio, endorsement and promotional-use checks."
+    },
+    {
+      "id": "Tf_UjBMIzNo",
+      "title": "NASA's Artemis II Crew Launches To The Moon (Official Broadcast)",
+      "channel": "NASA",
+      "views": 19297600,
+      "duration": "PT6H22M52S",
+      "status": "EXCLUDED_PENDING_HUMAN_LEGAL_REVIEW",
+      "reason": "Current named crew / official mission broadcast: NASA promotional + current-astronaut + identifiable-person gate is OPEN."
+    },
+    {
+      "id": "pMsvr55cTZ0",
+      "title": "Making History: NASA and SpaceX Launch Astronauts to Space! (#LaunchAmerica Success May 30, 2020)",
+      "channel": "NASA",
+      "views": 19234336,
+      "duration": "PT9H18M54S",
+      "status": "PROBE_ONLY_NOT_A_SOURCE_CLIP",
+      "reason": "Agency-owned channel found by the API; still needs per-clip licence, insignia, native-audio, endorsement and promotional-use checks."
+    },
+    {
+      "id": "4czjS9h4Fpg",
+      "title": "Perseverance Rover’s Descent and Touchdown on Mars (Official NASA Video)",
+      "channel": "NASA",
+      "views": 17976193,
+      "duration": "PT3M26S",
+      "status": "PROBE_ONLY_NOT_A_SOURCE_CLIP",
+      "reason": "Agency-owned channel found by the API; still needs per-clip licence, insignia, native-audio, endorsement and promotional-use checks."
+    },
+    {
+      "id": "2MJY_ptQW1o",
+      "title": "2024 Total Solar Eclipse: Through the Eyes of NASA (Official Broadcast)",
+      "channel": "NASA",
+      "views": 11927486,
+      "duration": "PT3H9M40S",
+      "status": "PROBE_ONLY_NOT_A_SOURCE_CLIP",
+      "reason": "Agency-owned channel found by the API; still needs per-clip licence, insignia, native-audio, endorsement and promotional-use checks."
+    },
+    {
+      "id": "_T8cn2J13-4",
+      "title": "How We Are Going to the Moon - 4K",
+      "channel": "NASA",
+      "views": 11861385,
+      "duration": "PT5M31S",
+      "status": "PROBE_ONLY_NOT_A_SOURCE_CLIP",
+      "reason": "Agency-owned channel found by the API; still needs per-clip licence, insignia, native-audio, endorsement and promotional-use checks."
+    },
+    {
+      "id": "7nT7JGZMbtM",
+      "title": "James Webb Space Telescope Launch — Official NASA Broadcast",
+      "channel": "NASA",
+      "views": 11460738,
+      "duration": "PT2H17M30S",
+      "status": "PROBE_ONLY_NOT_A_SOURCE_CLIP",
+      "reason": "Agency-owned channel found by the API; still needs per-clip licence, insignia, native-audio, endorsement and promotional-use checks."
+    }
+  ],
+  "agency_probe_boundary": "Agency-owned channels found by the API are NOT cleared sources. Current-crew / official-broadcast rows are EXCLUDED pending human legal review; the water-bubble row is REJECT FOR NOW because it repeats the V10/Short physics family.",
+  "chapter_ledger": [
+    {
+      "t": "0:00-0:20",
+      "name": "Cold open: 3-second montage of 8 different moments",
+      "vo_words": 25,
+      "beat": "One fast cut from each of 8 DIFFERENT clips (0.8-1.2s each), no logo, no greeting, native audio only. Then the one-line hook."
+    },
+    {
+      "t": "0:20-0:55",
+      "name": "The promise and the rule",
+      "vo_words": 75,
+      "beat": "Name the thesis plainly: a rewatch happens when an expectation breaks and the explanation arrives one beat late. Promise 8 proofs. No outcome promise."
+    },
+    {
+      "t": "0:55-1:40",
+      "name": "Why 'rewatched or shared' is a real signal",
+      "vo_words": 110,
+      "beat": "YouTube's own Help calls those moments Spikes; Intro is % still watching after 30s; Dips are skips. State the metric source, then say our own Analytics is not available."
+    },
+    {
+      "t": "1:40-2:55",
+      "name": "CLIP 1 - expectation violation",
+      "vo_words": 130,
+      "beat": "See slot 1 card."
+    },
+    {
+      "t": "2:55-4:05",
+      "name": "CLIP 2 - the physics surprise",
+      "vo_words": 135,
+      "beat": "See slot 2 card."
+    },
+    {
+      "t": "4:05-5:10",
+      "name": "CLIP 3 - timing / slow motion",
+      "vo_words": 120,
+      "beat": "See slot 3 card."
+    },
+    {
+      "t": "5:10-6:15",
+      "name": "CLIP 4 - scale / size illusion",
+      "vo_words": 120,
+      "beat": "See slot 4 card."
+    },
+    {
+      "t": "6:15-7:10",
+      "name": "CLIP 5 - sound and silence",
+      "vo_words": 105,
+      "beat": "See slot 5 card."
+    },
+    {
+      "t": "7:10-8:00",
+      "name": "CLIP 6 - the human reaction",
+      "vo_words": 95,
+      "beat": "See slot 6 card."
+    },
+    {
+      "t": "8:00-8:45",
+      "name": "CLIP 7 - the near-miss / coincidence",
+      "vo_words": 85,
+      "beat": "See slot 7 card."
+    },
+    {
+      "t": "8:45-9:25",
+      "name": "CLIP 8 + the prediction test (MC-02 folded in)",
+      "vo_words": 75,
+      "beat": "See slot 8 card."
+    },
+    {
+      "t": "9:25-9:50",
+      "name": "The rule, restated + honest limits",
+      "vo_words": 55,
+      "beat": "One screen with the 6-step rule; say plainly what we could not verify (no owner-only competitor retention/CTR/RPM, no arbitrary competitor transcripts, no human review, no per-clip clearance). Public Data API view counts were used for scouting, not as proof of our own result."
+    },
+    {
+      "t": "9:50-10:00",
+      "name": "Genuine question + series teaser",
+      "vo_words": 20,
+      "beat": "One specific question, one next-episode teaser. No like/subscribe coercion or reward."
+    }
+  ],
+  "vo_total_word_budget": 1150,
+  "edit_spec_NOT_EXECUTED": {
+    "canvas": "16:9 landscape, 30fps, H.264 + AAC",
+    "runtime_seconds": 600,
+    "chapters": 13,
+    "source_footage_max_seconds": 80,
+    "source_share_max_pct": 13.3,
+    "per_clip_max_on_screen_seconds": 10,
+    "replay_passes": [
+      "1x",
+      "0.5x",
+      "0.25x"
+    ],
+    "audio": "retain native audio of each verified source; no music/SFX substitution; original VO only after rights gate",
+    "pattern": "one original diagram + one labelled replay after each clip; no clip strung together with little narrative",
+    "loudness_target": "-14 LUFS (spec copied from V10 QC, NOT a V12 measurement)",
+    "status": "SPEC_ONLY_NOT_RENDERED"
+  },
+  "hard_stop": "NO clip enters the edit until every rights_gate field is filled with a verified value and human_legal_review=true for THAT clip.",
+  "open_gates": [
+    "NASA promotional / current-astronaut imagery",
+    "8 per-clip rights chains",
+    "user-reported Short monetization ON",
+    "render toolchain",
+    "AI-use toggle",
+    "human listening / creative approval / legal review"
+  ],
+  "non_claims": {
+    "clip_downloaded": false,
+    "clip_cleared": false,
+    "legal_opinion": false,
+    "human_legal_review": false,
+    "commercial_monetization_clearance": false,
+    "render_done": false,
+    "vo_generated": false,
+    "final_script_written": false,
+    "upload_done": false,
+    "publish_done": false,
+    "monetization_changed": false,
+    "human_creative_approval": false,
+    "guaranteed_views": false,
+    "guaranteed_retention": false,
+    "guaranteed_virality": false,
+    "perfection": false,
+    "flawlessness": false,
+    "nasa_endorsement": false,
+    "verified_growth_ranking": false,
+    "competitor_transcripts_obtained": false,
+    "owner_only_analytics_obtained": false,
+    "api_secret_value_read": false
+  }
+}

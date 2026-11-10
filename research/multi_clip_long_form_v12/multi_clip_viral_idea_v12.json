@@ -344,7 +344,7 @@
       {
         "t": "9:25-9:50",
         "name": "The rule, restated + honest limits",
-        "content": "One screen with the 6-step rule; say plainly what we could not verify (no live API, no competitor analytics, no human review, no clearance). [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/) [41](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md)"
+        "content": "One screen with the 6-step rule; say plainly what we could not verify (no owner-only competitor retention/CTR/RPM, no arbitrary competitor transcripts, no human review, no per-clip clearance). Public Data API view counts ARE available and were used for scouting, but they are not proof of our own result. [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/) [41](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md) [65](workspace://public/yt-intel/viral-moments-explained.json)"
       },
       {
         "t": "9:50-10:00",
@@ -472,7 +472,7 @@
     },
     {
       "lens": "L4 - Clip selection",
-      "finding": "8 slots, each with a DIFFERENT analytic job, <=10s on screen. Per-clip gate reuses V10's 10-axis / min-78 / 12-kill-switch rubric [38](workspace://research/caught_on_camera_commentary_v10/clip_rubric.json). 'Best' is a scouting outcome, NOT an invented ranking: no live API, no verified competitor views [24](https://developers.google.com/youtube/v3/docs/videos/list) [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/)."
+      "finding": "8 slots, each with a DIFFERENT analytic job, <=10s on screen. Per-clip gate reuses V10's 10-axis / min-78 / 12-kill-switch rubric [38](workspace://research/caught_on_camera_commentary_v10/clip_rubric.json). 'Best' is a scouting outcome, NOT an invented ranking: real public Data API view counts exist [65](workspace://public/yt-intel/viral-moments-explained.json), but owner-only analytics, arbitrary transcripts and a verified growth ranking do not [24](https://developers.google.com/youtube/v3/docs/videos/list) [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/)."
     },
     {
       "lens": "L5 - Commentary / transformation",

@@ -1,3 +1,12 @@
+## V12 PHASE A addendum - real API clip-moment scouting (live API, NO clip cleared)
+
+- Phase A done via GitHub Actions run `42895703914` using the existing `YOUTUBE_API_KEY` secret (presence only; value never printed/stored). Five targeted real Data API topic reports committed under `research/multi_clip_long_form_v12/api_evidence/phase_a/`; bot commit `6db3924`.
+- Deliverable: `research/multi_clip_long_form_v12/PHASE_A_CLIP_SCOUT_V12.md` + `phase_a_clip_scout_v12.json`. 8 slot cards, each with 3 REAL million-view structural benchmark candidates, a 13-chapter beat sheet / 1,150-word VO budget, an edit spec and a NASA agency rights-lane probe with explicit exclusions.
+- Real findings: 5/5 topic verdicts are NO (20.4-47.2); NASA/agency lane is distributed (top3_share 0.398, 20/20 videos 1M+ views); a 9s slow-motion clip has 363,151,838 views. Number-in-title signals CONTRADICT each other across samples - not treated as a law. `fresh_share_30d=0.0` is a viewCount sampling artifact, not a trend claim.
+- Winner unchanged: `MC-01 THE REPLAY CODE: 8 Moments, One Hidden Rule`. V10/Short NASA water-bubble asset still EXCLUDED from all 8 slots; the CSA water-bubble video is REJECT FOR NOW (same physics family); current-crew Artemis II broadcasts are EXCLUDED pending human legal review.
+- HARD STOP unchanged: all 18 per-clip rights fields are NULL, `clearance_status=pending`, `human_legal_review=false` for all 8 slots. NO clip downloaded/cleared, NO VO script/audio, NO render, NO upload/publish, NO monetization change, NO human approval, NO legal clearance, NO guaranteed views.
+- This addendum does NOT supersede the standing 'await human full-motion/native-audio review' line below.
+
 ## V12 addendum - MULTI-CLIP correction (single-clip V11 superseded)
 
 - User correction: the Short was already made on the one NASA water-bubble clip; the LONG video must bring MANY DIFFERENT best viral clips/moments with commentary + editing, 8-10 min. V11's one-clip idea and its Phase A/B/C are marked SUPERSEDED (files preserved, not deleted).
