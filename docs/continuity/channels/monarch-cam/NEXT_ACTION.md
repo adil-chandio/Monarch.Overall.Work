@@ -1,3 +1,12 @@
+## V12 addendum - MULTI-CLIP correction (single-clip V11 superseded)
+
+- User correction: the Short was already made on the one NASA water-bubble clip; the LONG video must bring MANY DIFFERENT best viral clips/moments with commentary + editing, 8-10 min. V11's one-clip idea and its Phase A/B/C are marked SUPERSEDED (files preserved, not deleted).
+- New study: `research/multi_clip_long_form_v12/MULTI_CLIP_VIRAL_IDEA_FORENSIC_STUDY_V12.md`. ONE chosen idea: `MC-01 THE REPLAY CODE: 8 Moments, One Hidden Rule` (8 distinct clip slots, one thesis, 10:00, commentary-dominant <=13.3% source share). The already-used V10/Short NASA water-bubble asset is EXCLUDED from all 8 slots.
+- 10x forensic: 12 lenses, 60-source ledger, 10-axis weighted rubric, 8 candidates, 16 kill switches, 13 chapters, 7 phases, 6 open gates, 29 non-claims. Official reused-content / fair-use / Content ID / retention / packaging / API-quota wording verified; third-party analytics all labelled directional.
+- 0 live YouTube Data API calls (no key), 0 clips acquired/cleared, NO render, NO VO, NO upload/publish, NO monetization change, NO human approval, NO legal clearance, NO guaranteed views.
+- Standing gates remain OPEN: NASA promotional / current-astronaut imagery, 8 per-clip rights chains, user-reported Short monetization ON, render toolchain, AI-use toggle, human listening/creative review.
+- This addendum does NOT supersede the standing 'await human full-motion/native-audio review' line below.
+
 ## 2026-11-05 addendum - V11 Phase C voice preview (NO render)
 
 - `production/monarch-cam/replay_lab_ep01_v11/PHASE_C_VOICE_V11.md` + `phase_c_voice_v11.json`: user selected `voice-02` (en) in audition battle 02; 4 isolated narration preview MP3s (3 hooks + Chapter 5 liquid-lens excerpt) written under `audio/`. Generator idempotent, `RESULT: ALL PASS`.

@@ -1,0 +1,361 @@
+{
+  "schema_version": "1.0",
+  "edition": "v12_multi_clip_long_form_forensic",
+  "head_at_writing": "16326e806f5b49e4f6c78ab4f386629567c0b20e",
+  "status": "multi_clip_idea_selected_video_not_built",
+  "correction": "V11 one-clip premise rejected by user; superseded files preserved",
+  "chosen_idea": {
+    "id": "MC-01",
+    "series": "REPLAY FILES",
+    "episode": "Ep.1",
+    "name": "THE REPLAY CODE: 8 Moments, One Hidden Rule",
+    "working_title": "Why These 8 Moments Make You Rewatch: A Forensic Breakdown",
+    "alt_titles": [
+      "Eight Clips, One Hidden Rule: A Forensic Replay Breakdown",
+      "The Replay Code: What 8 Viral Moments Have in Common",
+      "8 Different Clips, One Reason You Hit Replay"
+    ],
+    "format": "long-form landscape 16:9, 8-10 min (10:00 nominal), 30fps, H.264 + AAC",
+    "runtime_target_seconds": 600,
+    "clip_count_target": 8,
+    "clip_share_max_seconds": 80,
+    "logline": "Eight different sourced clips, one testable thesis, and a commentary layer that explains each one - never a string of moments with no narrative.",
+    "hook_line": "Eight different clips. One reason you cannot stop replaying them. I will show you the rule - then prove it on every single one.",
+    "hooks": [
+      {
+        "id": "V12-H1",
+        "label": "Primary",
+        "text": "Eight different clips. One reason you cannot stop replaying them. I will show you the rule - then prove it on every single one."
+      },
+      {
+        "id": "V12-H2",
+        "label": "Puzzle-first",
+        "text": "These eight moments look unrelated. By the end of this video you will be able to predict which clip will make you hit replay before it even finishes."
+      },
+      {
+        "id": "V12-H3",
+        "label": "Forensic-first",
+        "text": "I slowed eight viral moments down to the frame. Every one of them breaks the same expectation at exactly the same point."
+      }
+    ],
+    "chapters": [
+      {
+        "t": "0:00-0:20",
+        "name": "Cold open: 3-second montage of 8 different moments",
+        "content": "One fast cut from each of 8 DIFFERENT clips (0.8-1.2s each), no logo, no greeting, native audio only. Then the one-line hook. [44](https://influencernotes.com/blog/how-mrbeast-keeps-viewers-watching-retention-analysis) [5](https://support.google.com/youtube/answer/9314415?hl=en)"
+      },
+      {
+        "t": "0:20-0:55",
+        "name": "The promise and the rule",
+        "content": "Name the thesis plainly: a rewatch happens when an expectation breaks and the explanation arrives one beat late. Promise 8 proofs. No outcome promise. [47](https://leadde.ai/blog/video-essay-script) [48](https://www.revid.ai/blog/youtube-video-script-template)"
+      },
+      {
+        "t": "0:55-1:40",
+        "name": "Why 'rewatched or shared' is a real signal",
+        "content": "YouTube's own Help calls those moments Spikes; Intro is % still watching after 30s; Dips are skips. State the metric source, then say our own Analytics is not available. [5](https://support.google.com/youtube/answer/9314415?hl=en) [19](https://blog.youtube/creator-and-artist-stories/master-these-4-metrics/)"
+      },
+      {
+        "t": "1:40-2:55",
+        "name": "CLIP 1 - expectation violation",
+        "content": "Clip <=10s, then 35-45s of our own analysis + one ORIGINAL diagram: what the viewer expected vs what happened. [7](https://support.google.com/youtube/answer/1311392?hl=en) [52](https://www.clipspeed.ai/blog/make-money-clipping-other-peoples-videos.html)"
+      },
+      {
+        "t": "2:55-4:05",
+        "name": "CLIP 2 - the physics surprise",
+        "content": "Clip <=10s, then our explanation with an original diagram and a 0.25x / 0.5x replay. Factual physics anchored to an official first-party source. [35](https://www.nasa.gov/image-article/bubbly-chiao/) [31](https://www.nasa.gov/nasa-brand-center/images-and-media/)"
+      },
+      {
+        "t": "4:05-5:10",
+        "name": "CLIP 3 - timing / slow motion",
+        "content": "Clip <=10s, then show the same moment at 1x, 0.5x, 0.25x and explain which frame carries the surprise. [49](https://pixflow.net/blog/youtube-video-retention-editing/)"
+      },
+      {
+        "t": "5:10-6:15",
+        "name": "CLIP 4 - scale / size illusion",
+        "content": "Clip <=10s, then an original scale diagram. No stock b-roll as hero. [39](workspace://config/channels.json)"
+      },
+      {
+        "t": "6:15-7:10",
+        "name": "CLIP 5 - sound and silence",
+        "content": "Clip <=10s, then compare native audio vs silence with our own commentary. Native audio of each source retained; no music/SFX/substitution. [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json) [15](https://support.google.com/youtube/answer/14328491?hl=en)"
+      },
+      {
+        "t": "7:10-8:00",
+        "name": "CLIP 6 - the human reaction",
+        "content": "Clip <=10s, then analysis of why a face/laugh resets attention. No astronaut name used promotionally. [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/) [33](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/)"
+      },
+      {
+        "t": "8:00-8:45",
+        "name": "CLIP 7 - the near-miss / coincidence",
+        "content": "Clip <=10s, then our own timeline graphic. No invented date, injury or outcome. [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)"
+      },
+      {
+        "t": "8:45-9:25",
+        "name": "CLIP 8 + the prediction test (MC-02 folded in)",
+        "content": "Play the 8th clip WITHOUT explanation, ask the viewer to predict the replay point, then reveal the measurement. Runner-up idea becomes this chapter. [5](https://support.google.com/youtube/answer/9314415?hl=en)"
+      },
+      {
+        "t": "9:25-9:50",
+        "name": "The rule, restated + honest limits",
+        "content": "One screen with the 6-step rule; say plainly what we could not verify (no live API, no competitor analytics, no human review, no clearance). [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/) [41](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md)"
+      },
+      {
+        "t": "9:50-10:00",
+        "name": "Genuine question + series teaser",
+        "content": "One specific question, one next-episode teaser. No like/subscribe coercion or reward. [14](https://support.google.com/youtube/answer/2801973?hl=en)"
+      }
+    ],
+    "clip_slots": [
+      {
+        "slot": 1,
+        "analytic_job": "expectation violation",
+        "max_on_screen_seconds": 10
+      },
+      {
+        "slot": 2,
+        "analytic_job": "physics / optics surprise",
+        "max_on_screen_seconds": 10
+      },
+      {
+        "slot": 3,
+        "analytic_job": "timing / slow-motion frame",
+        "max_on_screen_seconds": 10
+      },
+      {
+        "slot": 4,
+        "analytic_job": "scale / size illusion",
+        "max_on_screen_seconds": 10
+      },
+      {
+        "slot": 5,
+        "analytic_job": "native sound vs silence",
+        "max_on_screen_seconds": 10
+      },
+      {
+        "slot": 6,
+        "analytic_job": "human reaction beat",
+        "max_on_screen_seconds": 10
+      },
+      {
+        "slot": 7,
+        "analytic_job": "near-miss / coincidence",
+        "max_on_screen_seconds": 10
+      },
+      {
+        "slot": 8,
+        "analytic_job": "prediction test / callback",
+        "max_on_screen_seconds": 10
+      }
+    ],
+    "why_this_wins": [
+      "It is genuinely MULTI-CLIP: 8 distinct clip slots, each with a different analytic job - the exact correction the user asked for [7](https://support.google.com/youtube/answer/1311392?hl=en).",
+      "It has ONE throughline, which is the difference between an allowed commentary video and a disallowed 'clips strung together with little or no narrative' [7](https://support.google.com/youtube/answer/1311392?hl=en).",
+      "Each borrowed clip is followed by 35-45s of our own analysis/diagram, so original commentary dominates (<=80s of source footage inside 600s = <=13.3%) [7](https://support.google.com/youtube/answer/1311392?hl=en) [8](https://support.google.com/youtube/answer/9783148?hl=en).",
+      "Replay-first matches YouTube's own documented Spikes = rewatched or shared moments [5](https://support.google.com/youtube/answer/9314415?hl=en).",
+      "Long-form fits the official every-format / TV / qualified-watch-hours direction [1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/) [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/) [4](https://blog.youtube/news-and-events/youtube-monetization-qualified-watch-hours-shorts-views/).",
+      "It folds the runner-up MC-02 (edit anatomy) into Chapter 11 instead of throwing it away.",
+      "It explicitly EXCLUDES the V10/Short NASA water-bubble asset (art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman) from all 8 slots - your correction was that the long video needs DIFFERENT clips/moments [34](https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman).",
+      "It keeps the workspace bans: no stock b-roll as hero, no reaction-only, no clickbait without payoff, no unsourced claims [39](workspace://config/channels.json) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)."
+    ],
+    "production_phases_NOT_EXECUTED": [
+      {
+        "phase": "A - clip scouting (API-assisted when key exists)",
+        "detail": "Run the 4 ready-to-run queries in api_capability_audit_v12.json; shortlist 8 clips against the 10-axis / min-78 clip gate; label each candidate directional until verified [24](https://developers.google.com/youtube/v3/docs/videos/list) [25](https://developers.google.com/youtube/v3/docs/search/list) [38](workspace://research/caught_on_camera_commentary_v10/clip_rubric.json)."
+      },
+      {
+        "phase": "B - PER-CLIP RIGHTS GATE (hard stop)",
+        "detail": "For EACH of 8 clips fill clip_sourcing_gate_v12.json: official source URL, licence basis, third-party content check, identifiable persons, NASA promotional gate, native-audio rights, attribution string, SHA-256. NO clip may enter the edit until human legal review passes [9](https://support.google.com/youtube/answer/6013276?hl=en) [11](https://support.google.com/youtube/answer/2797468?hl=en) [31](https://www.nasa.gov/nasa-brand-center/images-and-media/) [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/)."
+      },
+      {
+        "phase": "C - script",
+        "detail": "Two-column A/V script with Scene ID, duration, narration, visual evidence, on-screen text, source ref, audio; 3 hook variants; word-by-word caption timing; every factual line mapped to a source [47](https://leadde.ai/blog/video-essay-script) [48](https://www.revid.ai/blog/youtube-video-script-template)."
+      },
+      {
+        "phase": "D - voice",
+        "detail": "Generic synthetic VO (user-selected voice); no real-person clone, no time-stretch, no music/SFX/procedural bed; each source clip's native audio retained only where cleared [15](https://support.google.com/youtube/answer/14328491?hl=en) [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+      },
+      {
+        "phase": "E - edit",
+        "detail": "16:9 master; replays at 0.25x / 0.5x / 1x; J/L cuts; freeze frames; original diagrams; word captions; on-screen credit; no baked platform UI, no overloaded overlays, safe areas maintained [49](https://pixflow.net/blog/youtube-video-retention-editing/) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)."
+      },
+      {
+        "phase": "F - QC",
+        "detail": "V10-style 9 audio gates + 33 technical checks; objective pass recorded SEPARATELY from human listening / creative approval [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+      },
+      {
+        "phase": "G - metadata",
+        "detail": "Long-form title/description/tags/category/pinned-comment pack; <=3 shown hashtags, never >60; no unrelated tags, no official-NASA wording, no endorsement, no guaranteed reach [12](https://support.google.com/youtube/answer/57407?hl=en) [13](https://support.google.com/youtube/answer/6390658?hl=en) [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/)."
+      }
+    ],
+    "hard_guardrails": [
+      "One thesis, 8 clips, 8 analytic jobs - never a ranked list or a moment string [7](https://support.google.com/youtube/answer/1311392?hl=en) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md).",
+      "The already-used V10/Short NASA water-bubble asset (art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman) is EXCLUDED from all 8 slots; the long video must use DIFFERENT clips/moments, exactly as you corrected us [34](https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman).",
+      "Per-clip clearance BEFORE any download or edit; no unverified reposts, no social-platform mirrors, no multi-clip compilation without new clearance [9](https://support.google.com/youtube/answer/6013276?hl=en) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md).",
+      "Credit + no-endorsement-implied wording for NASA-sourced clips; no insignia, no 'official NASA' / 'NASA approved', no current-astronaut name used promotionally [31](https://www.nasa.gov/nasa-brand-center/images-and-media/) [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/) [33](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+      "No 'No CGI', '100% real', AI-free claim, invented date/injury/outcome/view count, or staged/conspiracy amplification.",
+      "No 'according to NASA' style attribution in AI-assisted VO; factual source disclosure only [31](https://www.nasa.gov/nasa-brand-center/images-and-media/).",
+      "Native audio of each source retained; no music, SFX, procedural bed or audio substitution; no time-stretch [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json).",
+      "No stock b-roll as hero, no reaction-only, no clickbait without payoff, no unsourced claims [39](workspace://config/channels.json).",
+      "No unrelated/misleading tags, no >60 hashtags, no ALL CAPS, no engagement coercion/rewards, no guaranteed virality/retention/revenue/views [6](https://support.google.com/youtube/answer/141805?hl=en) [13](https://support.google.com/youtube/answer/6390658?hl=en) [14](https://support.google.com/youtube/answer/2801973?hl=en).",
+      "AI-use toggle, visibility, monetization, audience/licence settings remain HUMAN decisions [12](https://support.google.com/youtube/answer/57407?hl=en) [15](https://support.google.com/youtube/answer/14328491?hl=en) [17](https://support.google.com/youtube/answer/94522?hl=en).",
+      "technical_pass stays separate from human_creative_approval / human_legal_review (both false) [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+    ],
+    "working_title_chars": 58
+  },
+  "scoring_summary": {
+    "winner": "MC-01",
+    "winner_score": 93.2,
+    "runner_up": "MC-02",
+    "runner_up_score": 84.1,
+    "min_total": 78.0,
+    "max_score": 100.0
+  },
+  "10x_lenses": [
+    {
+      "lens": "L1 - Format & runtime",
+      "finding": "8-10 min 16:9 with 13 timed chapters, because the user asked 8-10 min and legacy config says Monarch Lab 8-12 min / Curious Miles 6-10 min [39](workspace://config/channels.json). Official 2026 direction is every-format incl. long-form, TV and podcasts [1](https://blog.youtube/inside-youtube/the-future-of-youtube-2026/) [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/)."
+    },
+    {
+      "lens": "L2 - Hook (first 30s)",
+      "finding": "Official Intro metric = % still watching after 30s; high intro comes from thumbnail/title promise matching the first 30s [5](https://support.google.com/youtube/answer/9314415?hl=en) [19](https://blog.youtube/creator-and-artist-stories/master-these-4-metrics/). Directional: hook at second zero, promise stack 3-12s, stakes lock 12-20s, no greeting/slow intro [44](https://influencernotes.com/blog/how-mrbeast-keeps-viewers-watching-retention-analysis). Our H1 does that with 8 different clips in the montage."
+    },
+    {
+      "lens": "L3 - Script grammar",
+      "finding": "Thesis > claim > evidence > visual proof > analysis > thesis link > transition [47](https://leadde.ai/blog/video-essay-script); two-column A/V script with Scene ID, duration, narration, visual, on-screen text, source, audio [47](https://leadde.ai/blog/video-essay-script) [48](https://www.revid.ai/blog/youtube-video-script-template); creator quote says long-form needs a written script and planned order [23](https://blog.youtube/creator-and-artist-stories/6-creators-reach-10-million-subscribers/)."
+    },
+    {
+      "lens": "L4 - Clip selection",
+      "finding": "8 slots, each with a DIFFERENT analytic job, <=10s on screen. Per-clip gate reuses V10's 10-axis / min-78 / 12-kill-switch rubric [38](workspace://research/caught_on_camera_commentary_v10/clip_rubric.json). 'Best' is a scouting outcome, NOT an invented ranking: no live API, no verified competitor views [24](https://developers.google.com/youtube/v3/docs/videos/list) [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/)."
+    },
+    {
+      "lens": "L5 - Commentary / transformation",
+      "finding": "Official allowed examples: clips for critical review, replays with technique explanation, edited footage with storyline + commentary [7](https://support.google.com/youtube/answer/1311392?hl=en). Official NOT allowed: clips with little/no narrative, non-verbal reactions, minimal changes [7](https://support.google.com/youtube/answer/1311392?hl=en). Four fair-use factors, credit alone insufficient, courts decide [8](https://support.google.com/youtube/answer/9783148?hl=en) [10](https://support.google.com/youtube/answer/2797454?hl=en). Our ratio: <=80s source / 600s total, 35-45s original analysis after each clip."
+    },
+    {
+      "lens": "L6 - Editing grammar",
+      "finding": "Replays 0.25x / 0.5x / 1x, freeze frames, J-cuts and L-cuts, word-by-word captions, original diagrams; directional guidance: first interrupt ~25-35s, interrupts every 30-60s, visual change every 10-15s, over-editing backfires for older audiences [49](https://pixflow.net/blog/youtube-video-retention-editing/) [45](https://blog.editorduel.com/blog/mrbeast-three-second-rule-visual-resets). V7-style overloaded overlays are rejected [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)."
+    },
+    {
+      "lens": "L7 - Audio forensics",
+      "finding": "Each source's native audio retained where cleared; no music, SFX, procedural bed, substitution or time-stretch [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json). AI-use disclosure is a human toggle; cloning one's own voice for VO/dubs and caption creation are examples NOT requiring disclosure [15](https://support.google.com/youtube/answer/14328491?hl=en)."
+    },
+    {
+      "lens": "L8 - Pacing / retention",
+      "finding": "Official: flat = watched start-to-finish; gradual decline = losing interest; Spikes = rewatched/shared; Dips = skipped/abandoned; typical retention compares 10 similar-length videos; report is owner-only, 1-2 day delay, needs >=60s and >=100 views [5](https://support.google.com/youtube/answer/9314415?hl=en). Rehooks every 60-90s and tension/relief waves are DIRECTIONAL third-party patterns [44](https://influencernotes.com/blog/how-mrbeast-keeps-viewers-watching-retention-analysis) [46](https://outlierkit.com/resources/mrbeast-growth-strategy/)."
+    },
+    {
+      "lens": "L9 - Packaging / metadata",
+      "finding": "Accurate non-clickbait title/thumbnail, avoid ALL CAPS; search results are NOT a most-viewed list; tags 'not important' [6](https://support.google.com/youtube/answer/141805?hl=en). Title <=100 chars, description <=5,000 [12](https://support.google.com/youtube/answer/57407?hl=en). Up to 3 hashtags shown, >60 ignored, no unrelated hashtags/tag stuffing [13](https://support.google.com/youtube/answer/6390658?hl=en) [14](https://support.google.com/youtube/answer/2801973?hl=en). Test & Compare up to 3 titles + 3 thumbnails; Studio Research finds outlier videos; >40M A/B experiments run [21](https://blog.youtube/news-and-events/youtube-studio-made-on-youtube-2025/) [20](https://blog.youtube/news-and-events/made-on-youtube-new-tools-power-creation-journey/)."
+    },
+    {
+      "lens": "L10 - Rights / monetization",
+      "finding": "Reused-content and inauthentic-content are TWO different policies; enforcement is channel-level; reviewers look at most-viewed videos, newest, biggest watch-time share, metadata and About [7](https://support.google.com/youtube/answer/1311392?hl=en). Content ID can block/monetize/track and is geography-specific; multiple claimants possible per segment [9](https://support.google.com/youtube/answer/6013276?hl=en). Turning ads ON confirms you hold all visual/audio rights [17](https://support.google.com/youtube/answer/94522?hl=en). NASA promotional gate with current astronauts remains OPEN [31](https://www.nasa.gov/nasa-brand-center/images-and-media/) [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/) [33](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/) [41](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md)."
+    },
+    {
+      "lens": "L11 - Measurement honesty",
+      "finding": "Owner-only Analytics; no public CTR/retention/RPM; YouTube's own guidance is to find patterns in 'Videos Growing Your Audience' and make 2-3 more like them [19](https://blog.youtube/creator-and-artist-stories/master-these-4-metrics/). Our study has NO such data, so no 'best growing channels' ranking is invented."
+    },
+    {
+      "lens": "L12 - Failure modes",
+      "finding": "16 kill switches in candidate_scoring_v12.json; V4/V5/V6/V7 ranking Shorts, V9 raw-only and the V11 single-clip premise are all excluded [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md) [37](workspace://research/long_form_viral_idea_v11/LONG_FORM_VIRAL_IDEA_FORENSIC_STUDY_V11.md). Wikipedia's top-30 are children's songs/music/one ad - not a valid template for a science commentary channel, and no millions-of-views promise [36](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos)."
+    }
+  ],
+  "official_findings_used": true,
+  "contradiction_finding": "Forensic check on 'best growing channels': third-party pages give MrBeast 444M [56](https://ciowomenmagazine.com/fastest-growing-youtube-channels/), 330M [58](https://viewsgrowth.com/trending-channels/), and 511M / 510M / 459M on the SAME page [57](https://bloggerspassion.com/most-subscribed-youtube-channels/), while another says 519M [55](https://air.io/en/audience-growth/whos-growing-fastest-on-youtube-and-which-niches-are-hot-in-2025). Because four independent third-party sources contradict each other and no Data API call was possible, this study does NOT invent a verified 'best growing channels' ranking, does NOT quote a verified competitor view count, and does NOT claim any channel's growth rate. Those numbers are exhibits of unreliability, not evidence.",
+  "open_gates": [
+    {
+      "gate": "NASA promotional / identifiable current-astronaut imagery",
+      "severity": "high",
+      "status": "OPEN",
+      "why": "Exact NASA wording: short-form social generally promotional; imagery with current astronauts may not be used in promotional content [33](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/) [31](https://www.nasa.gov/nasa-brand-center/images-and-media/) [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/). Workspace flags human_legal_review=false, commercial_monetization_clearance=false [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+    },
+    {
+      "gate": "8 per-clip rights chains",
+      "severity": "high",
+      "status": "OPEN",
+      "why": "No clip has been downloaded, verified or cleared. Every clip needs its own official source, licence, third-party-content check, identifiable-person check, native-audio rights and SHA-256 [9](https://support.google.com/youtube/answer/6013276?hl=en) [11](https://support.google.com/youtube/answer/2797468?hl=en) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)."
+    },
+    {
+      "gate": "Uploaded V10 Short has monetization ON (user-reported)",
+      "severity": "high",
+      "status": "OPEN",
+      "why": "Recommended OFF until clearance; agent cannot verify Studio state [42](workspace://research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md) [18](https://support.google.com/youtube/answer/6332943?hl=en)."
+    },
+    {
+      "gate": "Render / QC toolchain",
+      "severity": "medium",
+      "status": "OPEN",
+      "why": "Phase A/B workspace snapshot had no ffmpeg/ffprobe/numpy/bundled deps; must be re-provisioned before Phase E [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+    },
+    {
+      "gate": "AI-use toggle / visibility / audience / licence at upload",
+      "severity": "medium",
+      "status": "OPEN",
+      "why": "Human decisions; Checks results aren't final; Likeness detection also runs [12](https://support.google.com/youtube/answer/57407?hl=en) [15](https://support.google.com/youtube/answer/14328491?hl=en)."
+    },
+    {
+      "gate": "Human creative approval + human listening + full-motion review",
+      "severity": "standing",
+      "status": "OPEN",
+      "why": "Never claimed; technical_pass is objective only [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)."
+    }
+  ],
+  "kill_switches": [
+    "single_clip_scope_violation (user explicitly requires MANY different clips)",
+    "unverified_social_repost_as_hero",
+    "multi_clip_compilation_without_new_clearance",
+    "no_throughline_clip_string (official reused-content violation)",
+    "reaction_only_no_added_voice_commentary",
+    "raw_fullscreen_reupload_or_minimal_change",
+    "stock_b_roll_as_hero",
+    "clickbait_without_payoff",
+    "no_cgi_or_100_percent_real_or_ai_free_claim",
+    "official_nasa_or_nasa_endorsement_or_insignia",
+    "invented_view_count_or_best_growing_channel_ranking",
+    "all_caps_title_or_more_than_60_hashtags_or_unrelated_tags",
+    "staged_or_conspiracy_amplification",
+    "music_sfx_procedural_bed_or_native_audio_substitution",
+    "guaranteed_virality_retention_revenue_or_views",
+    "human_creative_approval_or_legal_clearance_or_perfection_claim"
+  ],
+  "non_claims": {
+    "live_youtube_data_api_call_made": false,
+    "best_growing_channels_ranking_verified": false,
+    "competitor_view_counts_verified": false,
+    "keyword_search_volume_obtained": false,
+    "retention_or_ctr_or_rpm_graphs_obtained": false,
+    "arbitrary_video_transcripts_obtained": false,
+    "full_competitor_videos_downloaded": false,
+    "any_clip_downloaded_or_cleared": false,
+    "video_rendered": false,
+    "voiceover_synthesized": false,
+    "captions_burned": false,
+    "upload_or_publish_performed": false,
+    "monetization_setting_changed_by_agent": false,
+    "human_creative_approval": false,
+    "human_full_motion_review": false,
+    "human_native_audio_listening": false,
+    "human_legal_review": false,
+    "legal_opinion": false,
+    "commercial_monetization_clearance": false,
+    "written_astronaut_or_csa_permission": false,
+    "nasa_endorsement": false,
+    "official_nasa_status": false,
+    "guaranteed_virality": false,
+    "guaranteed_million_views": false,
+    "guaranteed_retention": false,
+    "perfection_or_zero_omission": false,
+    "zero_flaw_claim": false,
+    "rights_gate_closed": false,
+    "v10_short_clip_reused_as_hero": false
+  },
+  "sources_count": 60,
+  "related_files": [
+    "candidate_scoring_v12.json",
+    "sources_v12.json",
+    "api_capability_audit_v12.json",
+    "clip_sourcing_gate_v12.json",
+    "research/long_form_viral_idea_v11/SUPERSEDED_BY_V12.md",
+    "production/monarch-cam/replay_lab_ep01_v11/SUPERSEDED_BY_V12.md"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "edition": "v12_multi_clip_long_form_forensic",
+  "youtube_data_api_calls_made": 0,
+  "api_key_in_workspace": false,
+  "workspace_check_results": {
+    "env_youtube_or_google_api_key_var_present": false,
+    "config_youtube_json": "absent",
+    "config_api_keys_json": "absent",
+    "dotenv_file": "absent",
+    "api_key_value_ever_printed_or_stored": false,
+    "config_channels_json_present": true,
+    "bash_outbound_allowlist": [
+      "github.com",
+      "codeload.github.com",
+      "api.github.com",
+      "registry.npmjs.org",
+      "pypi.org",
+      "files.pythonhosted.org"
+    ]
+  },
+  "official_capability": [
+    {
+      "method": "videos.list",
+      "quota": "1 unit per call",
+      "doc": "[24](https://developers.google.com/youtube/v3/docs/videos/list)",
+      "would_return": "title, channelId, categoryId, publishedAt, viewCount, likeCount, commentCount, duration; chart=mostPopular by regionCode + videoCategoryId"
+    },
+    {
+      "method": "search.list",
+      "quota": "100 calls/day in Search Queries bucket, 1 unit each",
+      "doc": "[25](https://developers.google.com/youtube/v3/docs/search/list)",
+      "would_return": "videoId + snippet only; statistics need a follow-up videos.list; filters type=video, order=viewCount, videoDuration=long, publishedAfter"
+    },
+    {
+      "method": "channels.list",
+      "quota": "1 unit per call",
+      "doc": "[26](https://developers.google.com/youtube/v3/docs/channels/list)",
+      "would_return": "subscriberCount, viewCount, videoCount, snippet"
+    },
+    {
+      "method": "videoCategories.list",
+      "quota": "1 unit per call",
+      "doc": "[27](https://developers.google.com/youtube/v3/docs/videoCategories/list)",
+      "would_return": "region-specific assignable category IDs"
+    },
+    {
+      "method": "captions.download",
+      "quota": "OAuth + ownership required",
+      "doc": "[30](https://developers.google.com/youtube/v3/docs/captions/download)",
+      "would_return": "caption track ONLY for a video you own - NOT arbitrary competitor transcripts"
+    }
+  ],
+  "quota_limits": "Default 10,000 units/day for all endpoints except separate 100/day search.list and 100/day videos.insert buckets; daily reset midnight PT [28](https://developers.google.com/youtube/v3/determine_quota_cost?hl=en) [29](https://developers.google.com/youtube/v3/getting-started/).",
+  "ready_to_run_queries_NOT_EXECUTED": [
+    "GET https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=PK&videoCategoryId=28&maxResults=50&key=REDACTED",
+    "GET https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=viewCount&videoDuration=long&publishedAfter=2026-01-01T00:00:00Z&maxResults=50&key=REDACTED",
+    "GET https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=REDACTED&key=REDACTED",
+    "GET https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=PK&key=REDACTED"
+  ],
+  "hard_limits_even_with_key": [
+    "No breakout / outlier detection vs a channel baseline; must be built manually [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/).",
+    "No transcripts for arbitrary videos; captions.download requires OAuth + ownership [30](https://developers.google.com/youtube/v3/docs/captions/download).",
+    "No keyword search-volume or competition data; API returns videos, not demand [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/).",
+    "No semantic look-alike channel search; search.list matches keywords only [25](https://developers.google.com/youtube/v3/docs/search/list).",
+    "Impressions, CTR, watch time, average view duration, retention and revenue are OWNER-ONLY Studio/Analytics data, not public Data API fields [5](https://support.google.com/youtube/answer/9314415?hl=en) [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/).",
+    "Public view counts are a snapshot, not a forecast or guarantee [36](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos).",
+    "Category IDs 27/28 are unverified third-party mappings until videoCategories.list is actually called [27](https://developers.google.com/youtube/v3/docs/videoCategories/list)."
+  ],
+  "research_actually_done": {
+    "youtube_data_api_responses": 0,
+    "official_youtube_nasa_developer_pages_reviewed": true,
+    "workspace_ledgers_reviewed": true,
+    "third_party_sources_labelled_directional": true,
+    "note": "Exact session tool-call counts are NOT asserted (they are chat logs, not data). See sources_v12.json for the full 60-entry ledger and each source's kind=fetched / web_search / referenced / workspace."
+  },
+  "non_claims": {
+    "live_data_claimed": false,
+    "ranking_verified": false,
+    "analytics_claimed": false,
+    "perfection_claimed": false
+  }
+}

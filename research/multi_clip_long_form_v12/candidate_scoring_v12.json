@@ -1,0 +1,318 @@
+{
+  "edition": "v12_multi_clip_long_form_forensic",
+  "winner": "MC-01",
+  "rubric": {
+    "axes": [
+      {
+        "id": "hook_stop_power",
+        "weight": 1.1,
+        "desc": "0-20s layered hook; official intro = % watching after 30s [5](https://support.google.com/youtube/answer/9314415?hl=en)"
+      },
+      {
+        "id": "multi_clip_throughline",
+        "weight": 1.3,
+        "desc": "8 clips bound by ONE thesis, not a string of unrelated moments [7](https://support.google.com/youtube/answer/1311392?hl=en)"
+      },
+      {
+        "id": "commentary_transformative_value",
+        "weight": 1.3,
+        "desc": "Significant original commentary / analysis / educational value on every borrowed clip [7](https://support.google.com/youtube/answer/1311392?hl=en) [8](https://support.google.com/youtube/answer/9783148?hl=en)"
+      },
+      {
+        "id": "source_clearance_feasibility",
+        "weight": 1.2,
+        "desc": "Per-clip provenance, licence, no unverified reposts, no multi-clip compilation without new clearance [9](https://support.google.com/youtube/answer/6013276?hl=en) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)"
+      },
+      {
+        "id": "depth_runway_8_10min",
+        "weight": 1.1,
+        "desc": "Honest 8-10 min runway with chapters, not padding [39](workspace://config/channels.json) [47](https://leadde.ai/blog/video-essay-script)"
+      },
+      {
+        "id": "editing_craft_replay",
+        "weight": 1.0,
+        "desc": "Replays, J/L cuts, freeze, word captions, original diagrams, safe areas, no overload [49](https://pixflow.net/blog/youtube-video-retention-editing/) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)"
+      },
+      {
+        "id": "rights_legal_risk_inverse",
+        "weight": 1.0,
+        "desc": "NASA promotional gate, current-astronaut imagery, Content ID, fair-use 4 factors [31](https://www.nasa.gov/nasa-brand-center/images-and-media/) [32](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/) [8](https://support.google.com/youtube/answer/9783148?hl=en)"
+      },
+      {
+        "id": "claim_integrity",
+        "weight": 0.9,
+        "desc": "No invented ranking / No CGI / official NASA / guaranteed virality / human approval [6](https://support.google.com/youtube/answer/141805?hl=en) [14](https://support.google.com/youtube/answer/2801973?hl=en) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)"
+      },
+      {
+        "id": "production_feasibility",
+        "weight": 0.6,
+        "desc": "Can start with committed workspace evidence + no new shoot [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)"
+      },
+      {
+        "id": "series_scalability",
+        "weight": 0.5,
+        "desc": "Episodic, non-templated, each episode materially different [2](https://blog.youtube/news-and-events/made-on-youtube-creators-shorts-series-tv-features/) [7](https://support.google.com/youtube/answer/1311392?hl=en) [19](https://blog.youtube/creator-and-artist-stories/master-these-4-metrics/)"
+      }
+    ],
+    "weight_sum": 10.0,
+    "max_score": 100.0,
+    "min_total": 78.0,
+    "kill_switches": [
+      "single_clip_scope_violation (user explicitly requires MANY different clips)",
+      "unverified_social_repost_as_hero",
+      "multi_clip_compilation_without_new_clearance",
+      "no_throughline_clip_string (official reused-content violation)",
+      "reaction_only_no_added_voice_commentary",
+      "raw_fullscreen_reupload_or_minimal_change",
+      "stock_b_roll_as_hero",
+      "clickbait_without_payoff",
+      "no_cgi_or_100_percent_real_or_ai_free_claim",
+      "official_nasa_or_nasa_endorsement_or_insignia",
+      "invented_view_count_or_best_growing_channel_ranking",
+      "all_caps_title_or_more_than_60_hashtags_or_unrelated_tags",
+      "staged_or_conspiracy_amplification",
+      "music_sfx_procedural_bed_or_native_audio_substitution",
+      "guaranteed_virality_retention_revenue_or_views",
+      "human_creative_approval_or_legal_clearance_or_perfection_claim"
+    ],
+    "kill_switch_count": 16
+  },
+  "candidates": [
+    {
+      "id": "MC-01",
+      "name": "THE REPLAY CODE: 8 Moments, One Hidden Rule",
+      "scores": [
+        9.4,
+        9.6,
+        9.8,
+        8.8,
+        9.5,
+        9.6,
+        8.6,
+        9.8,
+        8.2,
+        9.3
+      ],
+      "kills": [],
+      "verdict": "WINNER",
+      "weighted_total": 93.2,
+      "kill_switches_hit": []
+    },
+    {
+      "id": "MC-02",
+      "name": "How They Built It - anatomy of 8 widely-shared edits (directional)",
+      "scores": [
+        8.6,
+        8.4,
+        8.8,
+        7.4,
+        9.0,
+        8.8,
+        7.8,
+        9.2,
+        7.2,
+        8.6
+      ],
+      "kills": [],
+      "verdict": "strong_second_folded_into_winner",
+      "weighted_total": 84.1,
+      "kill_switches_hit": []
+    },
+    {
+      "id": "MC-03",
+      "name": "Top 8 Unexpected Internet Moments (ranked list)",
+      "scores": [
+        8.8,
+        5.2,
+        5.0,
+        7.0,
+        7.5,
+        7.8,
+        7.2,
+        8.0,
+        8.6,
+        7.0
+      ],
+      "kills": [
+        "no_throughline_clip_string",
+        "V4/V5/V6/V7 ranking pattern already rejected [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)"
+      ],
+      "verdict": "reject_ranking_template",
+      "weighted_total": 70.5,
+      "kill_switches_hit": [
+        "no_throughline_clip_string",
+        "V4/V5/V6/V7 ranking pattern already rejected [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)"
+      ]
+    },
+    {
+      "id": "MC-04",
+      "name": "8 Viral Clips: Real or Fake? (myth/debunk court)",
+      "scores": [
+        8.6,
+        7.6,
+        8.2,
+        5.6,
+        8.8,
+        8.0,
+        4.8,
+        6.4,
+        6.0,
+        7.2
+      ],
+      "kills": [
+        "staged_or_conspiracy_amplification",
+        "no_cgi_or_100_percent_real_claim"
+      ],
+      "verdict": "reject_misinformation_risk",
+      "weighted_total": 72.2,
+      "kill_switches_hit": [
+        "staged_or_conspiracy_amplification",
+        "no_cgi_or_100_percent_real_claim"
+      ]
+    },
+    {
+      "id": "MC-05",
+      "name": "Pure reaction compilation (watch + laugh)",
+      "scores": [
+        7.0,
+        3.0,
+        2.4,
+        8.0,
+        4.0,
+        5.0,
+        6.0,
+        6.0,
+        9.0,
+        4.0
+      ],
+      "kills": [
+        "reaction_only_no_added_voice_commentary",
+        "no_throughline_clip_string"
+      ],
+      "verdict": "reject_official_policy",
+      "weighted_total": 52.5,
+      "kill_switches_hit": [
+        "reaction_only_no_added_voice_commentary",
+        "no_throughline_clip_string"
+      ]
+    },
+    {
+      "id": "MC-06",
+      "name": "REPLAY LAB Ep.1 - ONE NASA clip, 11 min (V11 idea)",
+      "scores": [
+        9.0,
+        4.0,
+        9.0,
+        9.6,
+        9.0,
+        9.0,
+        8.8,
+        9.6,
+        9.4,
+        6.0
+      ],
+      "kills": [
+        "single_clip_scope_violation"
+      ],
+      "verdict": "reject_SUPERSEDED_by_user_correction",
+      "weighted_total": 83.3,
+      "kill_switches_hit": [
+        "single_clip_scope_violation"
+      ]
+    },
+    {
+      "id": "MC-07",
+      "name": "This Week's Trending Clips (live-API trend roundup)",
+      "scores": [
+        9.2,
+        6.0,
+        6.4,
+        3.0,
+        7.0,
+        7.4,
+        3.2,
+        5.0,
+        4.0,
+        8.8
+      ],
+      "kills": [
+        "unverified_social_repost_as_hero",
+        "invented_view_count_or_best_growing_channel_ranking",
+        "multi_clip_compilation_without_new_clearance"
+      ],
+      "verdict": "reject_no_live_api_no_clearance",
+      "weighted_total": 59.4,
+      "kill_switches_hit": [
+        "unverified_social_repost_as_hero",
+        "invented_view_count_or_best_growing_channel_ranking",
+        "multi_clip_compilation_without_new_clearance"
+      ]
+    },
+    {
+      "id": "MC-08",
+      "name": "8 Science Channels: case studies of claimed high-view videos",
+      "scores": [
+        7.4,
+        8.4,
+        8.6,
+        5.4,
+        9.2,
+        7.6,
+        5.6,
+        8.0,
+        4.6,
+        7.6
+      ],
+      "kills": [
+        "invented_view_count_or_best_growing_channel_ranking"
+      ],
+      "verdict": "reject_needs_owner_analytics_and_transcripts",
+      "weighted_total": 73.8,
+      "kill_switches_hit": [
+        "invented_view_count_or_best_growing_channel_ranking"
+      ]
+    }
+  ],
+  "ranking": [
+    {
+      "id": "MC-01",
+      "weighted_total": 93.2,
+      "verdict": "WINNER"
+    },
+    {
+      "id": "MC-02",
+      "weighted_total": 84.1,
+      "verdict": "strong_second_folded_into_winner"
+    },
+    {
+      "id": "MC-06",
+      "weighted_total": 83.3,
+      "verdict": "reject_SUPERSEDED_by_user_correction"
+    },
+    {
+      "id": "MC-08",
+      "weighted_total": 73.8,
+      "verdict": "reject_needs_owner_analytics_and_transcripts"
+    },
+    {
+      "id": "MC-04",
+      "weighted_total": 72.2,
+      "verdict": "reject_misinformation_risk"
+    },
+    {
+      "id": "MC-03",
+      "weighted_total": 70.5,
+      "verdict": "reject_ranking_template"
+    },
+    {
+      "id": "MC-07",
+      "weighted_total": 59.4,
+      "verdict": "reject_no_live_api_no_clearance"
+    },
+    {
+      "id": "MC-05",
+      "weighted_total": 52.5,
+      "verdict": "reject_official_policy"
+    }
+  ]
+}

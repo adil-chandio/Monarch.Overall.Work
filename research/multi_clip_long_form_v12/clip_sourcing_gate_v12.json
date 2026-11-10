@@ -1,0 +1,154 @@
+{
+  "edition": "v12_multi_clip_long_form_forensic",
+  "status": "NO_CLIP_ACQUIRED_NO_CLIP_CLEARED",
+  "hard_rule": "No clip enters the edit until every field below is filled with a verified value and human_legal_review=true for that clip.",
+  "excluded_existing_short_clip": {
+    "nasa_asset_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "reason": "This exact clip was already used for the V10 Short; the user requires MANY DIFFERENT clips/moments for the 8-10 min long video.",
+    "rule": "EXCLUDED from all 8 slots. Do not use as hero, callback, montage filler or whole-video subject."
+  },
+  "per_clip_required_fields": [
+    "slot",
+    "analytic_job",
+    "official_source_url",
+    "nasa_or_agency_asset_id",
+    "licence_basis",
+    "third_party_copyrighted_material_check",
+    "identifiable_persons_check",
+    "current_astronaut_or_employee_check",
+    "promotional_or_cover_art_use",
+    "native_audio_rights",
+    "attribution_string",
+    "no_endorsement_implied_wording",
+    "no_insignia_confirmed",
+    "sha256_after_download",
+    "duration_seconds",
+    "scout_score_out_of_100",
+    "scout_min_pass_78",
+    "clearance_status",
+    "human_legal_review",
+    "not_a_legal_opinion"
+  ],
+  "slots": [
+    {
+      "slot": 1,
+      "analytic_job": "expectation violation",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    },
+    {
+      "slot": 2,
+      "analytic_job": "physics / optics surprise",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    },
+    {
+      "slot": 3,
+      "analytic_job": "timing / slow-motion frame",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    },
+    {
+      "slot": 4,
+      "analytic_job": "scale / size illusion",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    },
+    {
+      "slot": 5,
+      "analytic_job": "native sound vs silence",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    },
+    {
+      "slot": 6,
+      "analytic_job": "human reaction beat",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    },
+    {
+      "slot": 7,
+      "analytic_job": "near-miss / coincidence",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    },
+    {
+      "slot": 8,
+      "analytic_job": "prediction test / callback",
+      "max_on_screen_seconds": 10,
+      "official_source_url": null,
+      "licence_basis": null,
+      "sha256_after_download": null,
+      "scout_score_out_of_100": null,
+      "clearance_status": "pending",
+      "human_legal_review": false,
+      "not_a_legal_opinion": true
+    }
+  ],
+  "banned_source_types": [
+    "unverified social-platform reposts",
+    "currently trending TikTok/Instagram/Reddit mirrors",
+    "clips whose owner/licence cannot be verified",
+    "clips containing NASA insignia or current astronauts in promotional use",
+    "stock b-roll used as hero",
+    "silent/near-static fillers",
+    "multi-clip compilations without new clearance",
+    "the V10/Short NASA water-bubble asset already used in the Short (art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman)"
+  ],
+  "candidate_lanes": [
+    "official NASA / agency image and video libraries (DIFFERENT assets only) [31](https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+    "CC BY content with full attribution fields [11](https://support.google.com/youtube/answer/2797468?hl=en)",
+    "verified public domain / agency originals",
+    "own-shot original demo footage",
+    "licensed clips with written permission [9](https://support.google.com/youtube/answer/6013276?hl=en)"
+  ],
+  "non_claims": {
+    "clip_downloaded": false,
+    "clip_cleared": false,
+    "legal_opinion": false,
+    "human_legal_review": false,
+    "commercial_monetization_clearance": false
+  }
+}
