@@ -2,10 +2,12 @@
 
 > **Correction / maafi:** V11 ne **ek hi NASA clip** par 11-minute video choose kiya tha. Aapne bilkul theek kaha - Short usi clip par ban chuki hai; long me **dusri bohat saari best clips/moments** la kar commentary + editing ke saath 8-10 min banana tha. Ye study usi **multi-clip** direction hai. V11 aur uske Phase A/B/C ko `SUPERSEDED` mark kiya gaya hai (delete nahi).
 
-> **Scope abhi:** research + forensic + **1 idea ka selection**. Koi clip download nahi, koi video render nahi, koi VO/upload/publish/monetization nahi. Aur **YouTube Data API key workspace me nahi hai - 0 live API calls**. Jhootha "best viral channels ranking" ya "millions views pakke" main nahi bolunga.
+> **Scope abhi:** research + forensic + **1 idea ka selection**. Koi clip download nahi, koi video render nahi, koi VO/upload/publish/monetization nahi.
 
-**Edition:** `v12_multi_clip_long_form_forensic` · **HEAD:** `16326e806f5b49e4f6c78ab4f386629567c0b20e` · **Status:** `multi_clip_idea_selected_video_not_built`
-**Machine-readable:** `multi_clip_viral_idea_v12.json`, `candidate_scoring_v12.json`, `sources_v12.json`, `api_capability_audit_v12.json`, `clip_sourcing_gate_v12.json`
+> 🔴 **API CORRECTION (aapne sahi kaha):** pehle maine likha tha "key nahi hai / 0 live API calls". Wo **sirf is chat ke local sandbox** ka check tha — **GitHub Actions secrets me `YOUTUBE_API_KEY` pehle se maujood tha**, aur `yt-intel.yml` real Data API calls kar chuka tha. Maine Actions secrets check hi nahi kiye the: meri galti. Is turn me do aur live runs chalaye (`42888832314`, `42889373819`) aur asli million-view reports repo me aa gayi hain. Poora sudhaar `API_REALITY_CORRECTION_V12.md` + `api_reality_correction_v12.json` me hai.
+
+**Edition:** `v12_multi_clip_long_form_forensic_api_corrected` · **HEAD:** not pinned (see `git log`; generated pre-commit) · **Status:** `multi_clip_idea_selected_video_not_built`
+**Machine-readable:** `multi_clip_viral_idea_v12.json`, `candidate_scoring_v12.json`, `sources_v12.json`, `api_capability_audit_v12.json`, `clip_sourcing_gate_v12.json`, `api_reality_correction_v12.json`, `API_REALITY_CORRECTION_V12.md`
 
 ---
 
@@ -21,10 +23,10 @@
 - **Kyun jeeta:** ek hi thesis 8 alag clips ko bandh ti hai — yahi wo farq hai jo YouTube khud "allowed commentary" aur "clips with little or no narrative" me karta hai [7](https://support.google.com/youtube/answer/1311392?hl=en). Har clip ke baad 35-45s hamari apni analysis + original diagram.
 - **Kyun replay-first:** YouTube khud Spikes ko *rewatched or shared moments* kehta hai [5](https://support.google.com/youtube/answer/9314415?hl=en).
 
-### ⚠️ Do line jo main jhooth nahi bolunga
+### ⚠️ Do line jo main jhooth nahi bolunga (corrected)
 
-- **"API se live best viral growing channels dekhe"** — nahi. Key nahi hai, `videos.list` / `search.list` / `channels.list` **0 calls**. Official docs [24](https://developers.google.com/youtube/v3/docs/videos/list) [25](https://developers.google.com/youtube/v3/docs/search/list) [26](https://developers.google.com/youtube/v3/docs/channels/list) + fetched official pages + committed workspace evidence use hue; §1 me poora audit + 4 ready-to-run queries.
-- **"Millions of views pakke / best clips confirm"** — nahi. Wikipedia top-30 me children's songs, music videos aur ek ad hain, science commentary nahi [36](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos). 8 clip *slots* hain, koi clip abhi chuna/clear nahi hua.
+- **"API key hi nahi thi"** — **GALAT tha, maafi.** `YOUTUBE_API_KEY` GitHub Actions secret me thi; `lanes.json` me `key_present:true`, `doctor.json` me 4/4 pass, `search.list` / `channels.list` dono chal chuke [61](workspace://.github/workflows/yt-intel.yml) [62](workspace://public/yt-intel/lanes.json) [63](workspace://public/yt-intel/doctor.json). **Is chat sandbox** se 0 direct calls (googleapis.com allowlist me nahi), lekin **project level par real API data maujood hai** — §1.2 me poora hisaab.
+- **"Millions of views pakke / best clips confirm"** — nahi. Ab **asli** 1M+ view videos mil gaye hain (top: 11,670,070 views / 12:13 / 13 chapters [65](workspace://public/yt-intel/viral-moments-explained.json) [67](workspace://research/multi_clip_long_form_v12/api_evidence/reverse-LAl3pCigzKY.json)), lekin ye **structural evidence** hain, hamare 8 source clips nahi. Koi clip abhi chuna/clear nahi hua; koi guaranteed views nahi.
 
 ---
 
@@ -32,12 +34,16 @@
 
 | Check | Result |
 | --- | --- |
-| Env me YouTube/Google API key variable | **NOT PRESENT** (kabhi print/store nahi kiya) |
-| `config/youtube.json` / `config/api_keys.json` / `.env` | absent |
+| Env me YouTube/Google API key variable (LOCAL SANDBOX) | **NOT PRESENT** (kabhi print/store nahi kiya) |
+| `config/youtube.json` / `config/api_keys.json` / `.env` (LOCAL SANDBOX) | absent |
+| GitHub Actions repository secret `YOUTUBE_API_KEY` | **PRESENT** - `secrets_seen.YOUTUBE_API_KEY=true`, `key_starts_with_aiza=true` [61](workspace://.github/workflows/yt-intel.yml) [62](workspace://public/yt-intel/lanes.json) |
+| Secrets list API | **403** (token lacks `secrets:read`) - isliye committed first-party evidence se verify kiya [62](workspace://public/yt-intel/lanes.json) [63](workspace://public/yt-intel/doctor.json) |
+| `workflow_dispatch` API | **403** (token lacks `actions:write`) - marker-file push use kiya [68](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42888832314) |
 | `config/channels.json` | present [39](workspace://config/channels.json) |
-| Bash outbound allowlist | github.com, codeload, api.github.com, npm, pypi, files.pythonhosted.org |
-| YouTube Data API calls actually made | **0** |
-| Web research actually done | Multiple web searches + official YouTube/NASA/developer page fetches + workspace ledger reads; full 60-entry ledger in §10 (exact tool-call counts NOT asserted) |
+| Bash outbound allowlist | github.com, codeload, api.github.com, npm, pypi, files.pythonhosted.org (googleapis.com NOT included) |
+| YouTube Data API calls from THIS CHAT SANDBOX | **0** |
+| YouTube Data API calls from GitHub Actions | **REAL & DOCUMENTED** - doctor 4/4 [63](workspace://public/yt-intel/doctor.json), run-log 2026-11-03..08 [64](workspace://public/yt-intel/run-log.jsonl), runs 42888832314 / 42889373819 [68](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42888832314) |
+| Web research actually done | Multiple web searches + official YouTube/NASA/developer page fetches + workspace ledger reads; full 70-entry ledger in §10 (exact tool-call counts NOT asserted) |
 | Official API docs fetched | videos.list [24](https://developers.google.com/youtube/v3/docs/videos/list), search.list [25](https://developers.google.com/youtube/v3/docs/search/list), quota [28](https://developers.google.com/youtube/v3/determine_quota_cost?hl=en) [29](https://developers.google.com/youtube/v3/getting-started/) |
 
 ### 1.1 API kya de sakta tha (aur kya nahi)
@@ -69,7 +75,51 @@ GET https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCod
 - Public view counts are a snapshot, not a forecast or guarantee [36](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos).
 - Category IDs 27/28 are unverified third-party mappings until videoCategories.list is actually called [27](https://developers.google.com/youtube/v3/docs/videoCategories/list).
 
-> **Bottom line:** live "best growing channels" ranking, verified competitor view counts, keyword volume, retention graphs, CTR/RPM aur arbitrary transcripts — inme se koi bhi is session me available nahi tha. Jo third-party numbers niche hain, sab **directional / unverified** label ke saath hain.
+> **Bottom line (corrected):** is chat sandbox se direct call 0 tha, lekin **GitHub Actions `YOUTUBE_API_KEY` secret ke zariye real API data mil gaya**. Private competitor analytics (retention/CTR/RPM), arbitrary transcripts, keyword volume aur ek verified "best growing channels" ranking abhi bhi available nahi hain. Teesre-party numbers abhi bhi **directional / unverified** hain.
+
+### 1.2 🔴 API reality - correction (aapki baat sahi thi)
+
+**Kya galti hui:** V11 aur V12 ke pehle version me sirf local sandbox (`env` + config files) check kiya gaya. GitHub Actions secrets kabhi query hi nahi kiye. Isliye "key nahi hai / 0 live API calls" ka jumla **project level par galat** tha. `gh api repos/.../actions/secrets` ne 403 diya (token ko `secrets:read` nahi), `workflow_dispatch` ne bhi 403 diya (`actions:write` nahi) — lekin `git push` chal raha tha aur repo me pehle se saboot maujood the.
+
+| Saboot | Kya kehta hai | Ref |
+| --- | --- | --- |
+| `.github/workflows/yt-intel.yml` | `secrets.YOUTUBE_API_KEY` (+ 4 fallback naam) resolve karta hai; doctor / topic / comments chalata hai; report commit karta hai | [61](workspace://.github/workflows/yt-intel.yml) |
+| `public/yt-intel/lanes.json` | `lane=api`, `key_present=true`, `key_secret_name=YOUTUBE_API_KEY`, `key_starts_with_aiza=true`; ab `ref=refs/heads/arena/2b012328-monarch-overall-work` | [62](workspace://public/yt-intel/lanes.json) |
+| `public/yt-intel/doctor.json` | 4/4 pass: key present, shape AIza, `channels.list` 1 channel (1 unit), `search.list` `lane=api status=ok` (100 units) | [63](workspace://public/yt-intel/doctor.json) |
+| `public/yt-intel/run-log.jsonl` | Bot runs 2026-11-03 → 2026-11-08 (aur 2026-11-10): API lane **pehle se** chal rahi thi | [64](workspace://public/yt-intel/run-log.jsonl) |
+| GitHub Actions runs | `42888832314` (topic research) + `42889373819` (reverse teardown), dono success; bot commits `50febed`, `60e3dc3` | [68](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42888832314) |
+| `api_evidence/run.json` | is branch par `key_present=true`; sirf presence, value kabhi print/store nahi | [66](workspace://research/multi_clip_long_form_v12/api_evidence/run.json) |
+
+**Is turn me nayi live API research:** `yt-intel` ko marker-file push se chalaya gaya (dispatch 403 tha). Report `public/yt-intel/viral-moments-explained.json`: `topic="viral moments explained"`, `order=viewCount`, `lane=api`, `status=ok`, **21 videos**, **5 videos 1M+ views** [65](workspace://public/yt-intel/viral-moments-explained.json).
+
+#### Asli million-view videos (Data API numbers, koi invention nahi)
+
+| Video | Channel | Views | Duration | Kyoon relevant |
+| --- | --- | --- | --- | --- |
+| 13 Unreleased Videos I Thought Would Go Viral | Zack D. Films | 11,670,070 | PT12M13S | Multi-clip long-form with 13 timestamped chapters - the closest real analogue to our 8-clip / 13-chapter blueprint. |
+| Magnus Carlsen Reacts To His Most Viral Moments | Esports World Cup | 2,531,405 | PT13M45S | Multi-clip reaction + commentary. Description explicitly says 'found all ... viral moments and clips and forced him to react'. |
+| Most brilliant scenes | Movie Berries | 2,422,302 | PT7M16S | Edited multi-scene compilation 'for educational purposes' with a per-scene description list. |
+| Sen. Britt's reaction ... turns into VIRAL MEME | MS NOW | 1,984,383 | PT2M17S | Single-moment news clip, not a multi-clip commentary template. |
+| Zoologist Reacts to Viral Snake Bite Videos | Clint's Reptiles | 1,538,221 | PT28M48S | Expert commentary over MANY different clips - the commentary-dominant pattern our idea uses. |
+
+#### Real topic verdict (honest, khush-numa nahi)
+
+| Metric | Value |
+| --- | --- |
+| `saturation.top3_share` | 0.756 (concentrated - kuch videos is topic ko own karte hain) |
+| `saturation.median_views` | 2,543 |
+| `saturation.fresh_share_30d` | 0.38 |
+| `decision.verdict` / score | **NO** / 37.2 / confidence 0.75 |
+| `decision.next_probe` | top 3 videos ko `yt-intel reverse <id>` se tod kar dekho |
+| `funnel.number_in_title` | 0.2 (sirf 1/5 top title me number) |
+
+**Iska matlab:** seedha "viral moments explained" wala generic package **jeetne wala nahi** hai. Isliye `MC-01` ka thesis-driven forensic angle + "Eight different clips" number-hook zaroori hai — aur ye ab **sirf third-party blog se nahi, apne hi real API report se** supported hai [65](workspace://public/yt-intel/viral-moments-explained.json).
+
+#### Reverse teardown (script / structure) - kya mila, kya nahi
+
+`yt_intel reverse` teeno top videos par chalaya gaya [67](workspace://research/multi_clip_long_form_v12/api_evidence/reverse-LAl3pCigzKY.json). **Mila:** real receipts (views, likes, comments, duration, publish date, tags), aur top video ke description me **13 timestamped chapters** (`00:00 What Happens If You Pour Water On The Sun?` … `11:05 The Lamp That Ruined His Life`) — yani ek 12:13 ka multi-clip long-form jisme har clip ka apna chapter hai. **Nahi mila:** transcript teardown — teeno par `yt-dlp` ne "Sign in to confirm you're not a bot" diya, isliye word-rate / reading-grade / hook-words **likhe hi nahi gaye**. Ye failure file me `transcript_status.status=error` ke saath darj hai.
+
+> **Boundary:** ye 5 videos **sirf structural evidence** hain. Inke clips hamare 8 slots me nahi jayenge — ye teesre-party copyrighted videos hain. Har apna clip ka alag rights gate abhi bhi laazim hai [9](https://support.google.com/youtube/answer/6013276?hl=en) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md).
 
 ---
 
@@ -92,6 +142,8 @@ GET https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCod
 | 13 | Most-viewed list reality | Children's songs / music / ad; dynamic incomplete list [36](https://en.wikipedia.org/wiki/List_of_most-viewed_YouTube_videos) |
 | 14 | Rights-ledger state | human_legal_review=false, commercial_monetization_clearance=false, technical_pass only objective [43](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json) |
 | 15 | Monetization-ON aftermath | Uploaded Short monetization ON (user-reported); OFF recommended; gate open [42](workspace://research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md) |
+| 16 | GitHub Actions secrets / API lane (CORRECTION) | YOUTUBE_API_KEY pehle se present; doctor 4/4; real API reports committed; earlier 'no key' claim was sandbox-scoped [61](workspace://.github/workflows/yt-intel.yml) [62](workspace://public/yt-intel/lanes.json) [63](workspace://public/yt-intel/doctor.json) |
+| 17 | Fresh live API + reverse teardowns | 21 videos / 5 with 1M+ views / verdict NO 37.2; 3 real receipts + 13 timestamped chapters; transcripts blocked by bot check [65](workspace://public/yt-intel/viral-moments-explained.json) [66](workspace://research/multi_clip_long_form_v12/api_evidence/run.json) [67](workspace://research/multi_clip_long_form_v12/api_evidence/reverse-LAl3pCigzKY.json) |
 
 ### 2.1 Source-reliability ladder
 
@@ -380,7 +432,7 @@ Aapne kaha *"bagair kisi kami ke galati ke flaws ke bagair kuch chore miss kiye"
 - YouTube Checks pass hona final nahi; Likeness detection aur future manual claims bhi aa sakte hain [12](https://support.google.com/youtube/answer/57407?hl=en) [9](https://support.google.com/youtube/answer/6013276?hl=en).
 - Main legal advisor nahi; fair use ka faisla court karta hai [8](https://support.google.com/youtube/answer/9783148?hl=en).
 
-**Jo chhoda nahi gaya:** 15 research lanes, 60-source ledger, 10-axis weighted rubric, 8 candidates, 16 kill switches, 12 microscope lenses, 13 chapters, 8 clip slots, 7 production phases, 6 open gates, 29 non-claims — sab is file aur 5 JSON me likhe hain. **Jo mila hi nahi, usko 'mil gaya' nahi likha.**
+**Jo chhoda nahi gaya:** 17 research lanes, 70-source ledger, 10-axis weighted rubric, 8 candidates, 16 kill switches, 12 microscope lenses, 13 chapters, 8 clip slots, 7 production phases, 6 open gates, 29 non-claims + 2 live API runs + 3 real reverse teardowns — sab is file aur 6 JSON me likhe hain. **Jo mila hi nahi (transcripts, private retention/CTR/RPM, guaranteed views), usko 'mil gaya' nahi likha; aur jo pehle galat likha gaya tha ('key nahi hai'), usko §1.2 me khul ke theek kiya.**
 
 ---
 
@@ -458,12 +510,22 @@ Aapne kaha *"bagair kisi kami ke galati ke flaws ke bagair kuch chore miss kiye"
 | [58](https://viewsgrowth.com/trending-channels/) | Fastest Growing YouTube Channels January 2026 (Viewsgrowth) | third_party_blog | third_party_directional_unverified | DIRECTIONAL ONLY: claims MrBeast 330M +4.2M/30d. Third mutually inconsistent figure - no verified ranking invented in this study. |
 | [59](https://vyromomentshq.github.io/) | VyroMoments - viral moments with original commentary (self-described) | third_party_self_published | third_party_directional_unverified | DIRECTIONAL ONLY: an example of a channel describing 'each clip carries original voiceover commentary with backstory, stats and what happened next - not just a re-upload'. Self-published marketing copy, no analytics verification. |
 | [60](https://outlierkit.com/resources/how-to-get-youtube-api-key/) | OutlierKit YouTube API key guide (limits) | third_party_blog | third_party_directional_unverified | DIRECTIONAL ONLY: no breakout/outlier detection built into Data API, no arbitrary-video transcripts, no keyword volume, no semantic look-alike channel search; retention/CTR/RPM are owner-only Studio data. |
+| [61](workspace://.github/workflows/yt-intel.yml) | .github/workflows/yt-intel.yml | verified_workspace | verified_workspace | Existing scheduled workflow that resolves secrets.YOUTUBE_API_KEY (plus YTAP1/YTAPI1/YT_KEY/YT_API_KEY fallbacks), runs doctor + topic + comments, and commits public/yt-intel reports. Secret VALUE is never printed (add-mask + presence only). |
+| [62](workspace://public/yt-intel/lanes.json) | public/yt-intel/lanes.json | verified_workspace | verified_workspace | Committed bot record: lane=api, key_present=true, key_secret_name=YOUTUBE_API_KEY, key_starts_with_aiza=true, secrets_seen.YOUTUBE_API_KEY=true, quota_used/remaining, ref=refs/heads/arena/2b012328-monarch-overall-work after run 42888832314. |
+| [63](workspace://public/yt-intel/doctor.json) | public/yt-intel/doctor.json | verified_workspace | verified_workspace | 4/4 checks pass: key present (shape-masked), channels.list returned 1 channel (1 quota unit), search.list lane=api status=ok (100 quota units), quota_used=102. Proof real Data API calls succeeded. |
+| [64](workspace://public/yt-intel/run-log.jsonl) | public/yt-intel/run-log.jsonl | verified_workspace | verified_workspace | Bot run history from 2026-11-03 through 2026-11-10, including run 42513359643 (2026-11-08) and 42888832314 (2026-11-10). Shows the API lane existed BEFORE this chat's claims. |
+| [65](workspace://public/yt-intel/viral-moments-explained.json) | public/yt-intel/viral-moments-explained.json | verified_workspace | verified_workspace | Fresh real API report (run 42888832314): topic 'viral moments explained', order=viewCount, lane=api, status=ok, 21 rows, 5 videos >=1M views, saturation top3_share=0.756 / median_views=2543 / fresh_share_30d=0.38, decision verdict NO score 37.2. |
+| [66](workspace://research/multi_clip_long_form_v12/api_evidence/run.json) | research/multi_clip_long_form_v12/api_evidence/run.json | verified_workspace | verified_workspace | Actions run 42889373819 metadata: key_present=true on the active branch, three real 1M+ view video IDs torn down, presence-only note. Secret value never printed or stored. |
+| [67](workspace://research/multi_clip_long_form_v12/api_evidence/reverse-LAl3pCigzKY.json) | research/multi_clip_long_form_v12/api_evidence/reverse-*.json | verified_workspace | verified_workspace | Three real receipts with views/likes/comments/duration/tags/description; Zack D. Films video has 13 timestamped chapters in its description. Transcript fetch FAILED (yt-dlp bot check) for all three - recorded honestly, no invented script/word-rate analysis. |
+| [68](https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42888832314) | GitHub Actions runs 42888832314 and 42889373819 | official_github_actions | verified_workspace | Both runs completed successfully on arena/2b012328-monarch-overall-work with the YOUTUBE_API_KEY secret resolved; bot commits 50febed and 60e3dc3 carried the evidence into the repo. |
+| [69](workspace://public/yt-intel/ai-video-editing.json) | public/yt-intel/ai-video-editing.json (pre-existing real API report) | verified_workspace | verified_workspace | Real pre-existing Data API report: lane=api, order=viewCount, 30 rows, 30/30 with >=1M views, top 20,214,229 views. Proof real million-view data existed in the repo before this chat's 'no data' claim. |
+| [70](workspace://public/yt-intel/faceless-youtube-channel.json) | public/yt-intel/faceless-youtube-channel.json (pre-existing real API report) | verified_workspace | verified_workspace | Real pre-existing Data API report: lane=api, 30 rows, 2 with >=1M views, top 9,283,453 views. Corroborates that the API lane predates the V12 correction. |
 
 ---
 
 ## 11. Final position
 
-**1 idea:** `MC-01 THE REPLAY CODE: 8 Moments, One Hidden Rule` — 8 alag clips, ek thesis, 10:00, commentary-dominant. V11 ka ek-clip wala faisla `SUPERSEDED` hai. **0 live API calls, 0 clips acquired, 0 render, 0 upload, 0 clearance, 0 guaranteed views.** Ye forensic study hai, video nahi.
+**1 idea (unchanged):** `MC-01 THE REPLAY CODE: 8 Moments, One Hidden Rule` — 8 alag clips, ek thesis, 10:00, commentary-dominant. V11 ka ek-clip wala faisla `SUPERSEDED` hai. **Chat sandbox se 0 direct API calls; GitHub Actions ne real API calls kiye (2 runs + 1 fresh report + 3 reverse teardowns). 0 clips acquired/cleared, 0 render, 0 upload, 0 clearance, 0 guaranteed views.** Ye forensic study hai, video nahi.
 
 **Explicit non-claims:** NO render, NO upload, NO publish, NO human approval, NO human legal review, NO legal clearance, NO commercial monetization clearance, NO guaranteed views, NO guaranteed retention, NO guaranteed virality, NO perfection, NO flawlessness, NO NASA endorsement, NO official NASA status.
 

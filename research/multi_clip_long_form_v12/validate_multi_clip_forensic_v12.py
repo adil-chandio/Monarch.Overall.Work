@@ -6,6 +6,7 @@ Run from repo root:
 
 Prints RESULT: ALL PASS only if every check passes. Does NOT call any API,
 does NOT render, upload, publish, download a clip, or change any setting.
+It re-runs the local generator once to prove byte-idempotency.
 """
 from __future__ import annotations
 
@@ -25,11 +26,13 @@ GEN = D / "build_multi_clip_forensic_v12.py"
 
 FILES = [
     D / "MULTI_CLIP_VIRAL_IDEA_FORENSIC_STUDY_V12.md",
+    D / "API_REALITY_CORRECTION_V12.md",
     D / "multi_clip_viral_idea_v12.json",
     D / "candidate_scoring_v12.json",
     D / "sources_v12.json",
     D / "api_capability_audit_v12.json",
     D / "clip_sourcing_gate_v12.json",
+    D / "api_reality_correction_v12.json",
     V11 / "SUPERSEDED_BY_V12.md",
     PHASEABC / "SUPERSEDED_BY_V12.md",
     NEXT_ACTION,
@@ -70,12 +73,15 @@ def main() -> int:
         return 1
 
     md = (D / "MULTI_CLIP_VIRAL_IDEA_FORENSIC_STUDY_V12.md").read_text()
+    corr_md = (D / "API_REALITY_CORRECTION_V12.md").read_text()
     idea = load("multi_clip_viral_idea_v12.json")
     score = load("candidate_scoring_v12.json")
     src = load("sources_v12.json")
     api = load("api_capability_audit_v12.json")
     gate = load("clip_sourcing_gate_v12.json")
+    corr = load("api_reality_correction_v12.json")
     raw_json = {f.name: f.read_text() for f in FILES if f.suffix == ".json"}
+    n_src = src["count"]
 
     # 2. ONE idea, multi-clip, 8-10 min
     ok(idea["status"] == "multi_clip_idea_selected_video_not_built", "status must be idea-selected-not-built")
@@ -116,10 +122,11 @@ def main() -> int:
     ok(na.count("## V12 addendum - MULTI-CLIP correction") == 1, "NEXT_ACTION V12 addendum not exactly once")
     ok("single-clip V11 superseded" in na and "await human full-motion/native-audio review" in na,
        "NEXT_ACTION addendum lost standing review line")
+    ok("API REALITY CORRECTION" in na, "NEXT_ACTION missing API reality correction")
 
     # 4. Source ledger + citation integrity
-    ok(src["count"] == 60 and len(src["sources"]) == 60, "source count not 60")
-    ok([x["n"] for x in src["sources"]] == list(range(1, 61)), "source n not sequential 1..60")
+    ok(n_src == 70 and len(src["sources"]) == 70, f"source count not 70 (got {n_src})")
+    ok([x["n"] for x in src["sources"]] == list(range(1, n_src + 1)), "source n not sequential")
     ok(all(all(k in x for k in ("n", "id", "title", "url", "authority", "kind", "reliability", "used_for"))
            for x in src["sources"]), "a source lacks required fields")
     ok(sum(1 for x in src["sources"] if x["reliability"] == "third_party_directional_unverified") >= 10,
@@ -127,17 +134,28 @@ def main() -> int:
     ok(sum(1 for x in src["sources"] if x["authority"].startswith("official")) >= 25,
        "official first-party sources missing")
     ledger = {x["n"]: x["url"] for x in src["sources"]}
-    for text_name, text in [("MD", md)] + list(raw_json.items()):
+    for text_name, text in [("MD", md), ("CORR_MD", corr_md)] + list(raw_json.items()):
         refs = [int(n) for n in re.findall(r"\[(\d+)\]\(", text)]
-        ok(all(1 <= n <= 60 for n in refs), f"{text_name} has out-of-ledger ref")
+        ok(all(1 <= n <= n_src for n in refs), f"{text_name} has out-of-ledger ref")
         bad = [n for n in set(refs) if f"[{n}]({ledger[n]})" not in text]
         ok(not bad, f"{text_name} citation URL mismatch for refs {bad}")
         ok("cite(" not in text, f"{text_name} leaked a literal cite( token")
-    ok(md.count("[1](") >= 1 and md.count("[60](") >= 1, "first/last source not cited in MD")
+    ok(md.count("[1](") >= 1 and md.count("[70](") >= 1, "first/last source not cited in MD")
 
-    # 5. API honesty
-    ok(api["youtube_data_api_calls_made"] == 0, "API calls not 0")
+    # 5. API honesty - chat sandbox 0, GitHub Actions secret REAL
+    ok(api["youtube_data_api_calls_made"] == 0, "chat-sandbox API calls not 0")
+    ok(api["youtube_data_api_calls_made_scope"].startswith("THIS CHAT SANDBOX ONLY"),
+       "API-call scope not disclosed")
     ok(api["api_key_in_workspace"] is False, "api_key_in_workspace not false")
+    ok(api["api_key_in_workspace_scope"].startswith("Local chat sandbox"), "api_key scope not disclosed")
+    lane = api["github_actions_api_lane"]
+    ok(lane["secret_name"] == "YOUTUBE_API_KEY" and lane["secret_present"] is True,
+       "GitHub Actions secret not recorded as present")
+    ok(lane["secret_value_read_printed_or_stored"] is False, "secret value handling flagged true")
+    ok("403" in lane["secrets_api_status"] and "403" in lane["workflow_dispatch_status"],
+       "403 token limits not recorded")
+    ok("42888832314" in lane["runs_triggered_this_turn"] and "42889373819" in lane["runs_triggered_this_turn"],
+       "new run IDs missing from audit")
     ok(api["workspace_check_results"]["api_key_value_ever_printed_or_stored"] is False, "key handling flagged true")
     ok(len(api["ready_to_run_queries_NOT_EXECUTED"]) == 4, "ready queries not 4")
     ok(all("key=REDACTED" in q and "REDACTED" in q for q in api["ready_to_run_queries_NOT_EXECUTED"]),
@@ -148,6 +166,29 @@ def main() -> int:
     ok(any("OWNER-ONLY" in x for x in api["hard_limits_even_with_key"]), "owner-only analytics limit missing")
     ok(api["research_actually_done"]["youtube_data_api_responses"] == 0, "research_actually_done API responses not 0")
     ok("NOT asserted" in api["research_actually_done"]["note"], "exact tool-call counts wrongly asserted")
+
+    # 5b. Correction pack integrity
+    ar = corr["api_reality"]
+    ok(corr["correction_id"] == "v12_api_reality_correction", "correction id wrong")
+    ok("WRONG" in ar["what_was_wrong"].upper() or "never checked" in ar["what_was_wrong"],
+       "correction does not own the mistake")
+    ok(ar["what_is_true_now"]["github_actions_secret_verified"] is True, "secret verification not stated")
+    ok(ar["what_is_true_now"]["secret_value_ever_read_printed_or_stored"] is False, "secret value flag wrong")
+    ok(ar["what_is_true_now"]["secret_value_ever_requested_from_user"] is False, "user-credential flag wrong")
+    ok(corr["real_report"]["million_plus"] == 5, "real report 1M+ count not 5")
+    ok(corr["real_report"]["top_views"] == 11670070, "real report top views wrong")
+    ok(len(corr["million_plus_videos"]) == 5, "real video ledger not 5")
+    ok("FAILED" in ar["real_data_now_available"]["transcript_teardown_status"],
+       "transcript failure not disclosed")
+    ok(corr["chosen_idea_unchanged"]["id"] == "MC-01", "correction changed the winner")
+    ok("42888832314" in corr_md and "42889373819" in corr_md, "run IDs missing from correction MD")
+    ok("11,670,070" in corr_md, "real top view count missing from correction MD")
+    ok("YOUTUBE_API_KEY" in md and "YOUTUBE_API_KEY" in corr_md, "secret name missing from docs")
+    ok("API REALITY CORRECTION" in md or "API CORRECTION" in md, "correction banner missing from main MD")
+    ok(idea["api_reality_correction"]["what_is_true_now"]["github_actions_secret_verified"] is True,
+       "main idea JSON missing correction")
+    ok(len(idea["real_api_evidence"]["million_plus_videos"]) == 5, "main idea JSON missing real evidence")
+    ok("sandbox" in idea["non_claims_scope"].lower(), "non-claims scope not explained")
 
     # 6. Clip sourcing gate: NOTHING acquired / cleared
     ok(gate["status"] == "NO_CLIP_ACQUIRED_NO_CLIP_CLEARED", "clip gate status wrong")
@@ -163,6 +204,7 @@ def main() -> int:
     ok(any("V10/Short NASA water-bubble asset" in b for b in gate["banned_source_types"]),
        "Short clip not listed as a banned source type")
     ok("DIFFERENT assets only" in gate["candidate_lanes"][0], "NASA lane not restricted to different assets")
+    ok(gate["real_api_evidence_is_not_source_clips"] is True, "real evidence/source-clip boundary missing")
 
     # 7. Non-claims: every flag must be False
     for label, obj in [("idea", idea["non_claims"]), ("api", api["non_claims"]), ("gate", gate["non_claims"])]:
@@ -176,6 +218,7 @@ def main() -> int:
         "NASA endorses this", "NASA approved this video", "official NASA video", "human approved the video",
         "human legal review completed", "perfection achieved", "zero flaws confirmed",
         "retention graph obtained", "we downloaded the competitor videos", "cleared for monetization",
+        "transcript teardown succeeded", "we have verified competitor retention",
     ]
     low = md.lower()
     for s in forbidden_positive:
@@ -183,16 +226,18 @@ def main() -> int:
     required_disclaimers = [
         "0 live api calls", "koi clip download nahi", "0 clips acquired", "no render",
         "no upload", "no human approval", "no legal clearance", "no guaranteed views",
-        "youtube data api key workspace me nahi hai", "best growing channels", "flawless",
-        "excluded from all 8 slots", "29 non-claims",
+        "github actions secrets me", "best growing channels", "flawless",
+        "excluded from all 8 slots", "29 non-claims", "0 direct calls",
     ]
     for s in required_disclaimers:
         ok(s in low, f"missing disclaimer: {s}")
     ok("MC-01" in md and "THE REPLAY CODE" in md, "winner not named in MD")
     ok("SUPERSEDED" in md, "V11 supersession not stated in MD")
-    ok("15 research lanes" in md, "research lane count wrong in MD")
-    ok("16 kill switches" in md and "60-source ledger" in md, "forensic counts wrong in MD")
+    ok("17 research lanes" in md, "research lane count wrong in MD")
+    ok("16 kill switches" in md and "70-source ledger" in md, "forensic counts wrong in MD")
     ok("RESULT: ALL PASS" not in md, "MD must not fake validator output")
+    ok("Sign in to confirm you" in corr_md or "bot check" in corr_md.lower(),
+       "correction MD must disclose transcript failure")
 
     # 9. Idempotency: re-run generator, every byte must be identical
     before = {f: sha(f) for f in FILES}
@@ -208,7 +253,8 @@ def main() -> int:
             print(" -", e)
         return 1
     print(f"RESULT: ALL PASS ({checks} strict checks, idempotency verified)")
-    print(f"Winner: MC-01 {w['weighted_total']}/100 | clips={cc} | runtime={idea['chosen_idea']['runtime_target_seconds']}s | sources={src['count']} | API calls=0")
+    print(f"Winner: MC-01 {w['weighted_total']}/100 | clips={cc} | runtime={idea['chosen_idea']['runtime_target_seconds']}s | "
+          f"sources={n_src} | sandbox calls=0 | Actions secret=YOUTUBE_API_KEY | runs=42888832314,42889373819")
     return 0
 
 

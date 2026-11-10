@@ -1,9 +1,256 @@
 {
   "schema_version": "1.0",
-  "edition": "v12_multi_clip_long_form_forensic",
-  "head_at_writing": "16326e806f5b49e4f6c78ab4f386629567c0b20e",
+  "edition": "v12_multi_clip_long_form_forensic_api_corrected",
+  "head_at_writing": "not_pinned_see_git_log",
   "status": "multi_clip_idea_selected_video_not_built",
   "correction": "V11 one-clip premise rejected by user; superseded files preserved",
+  "api_reality_correction": {
+    "correction_id": "v12_api_reality_correction",
+    "status": "CORRECTED - earlier claim was sandbox-scoped, not project-scoped",
+    "what_was_wrong": "V12 (and V11) said 'no API key in workspace / 0 live API calls'. That checked ONLY the local chat sandbox env. It never checked GitHub Actions secrets, where a valid YOUTUBE_API_KEY already existed and had already driven real Data API calls.",
+    "what_is_true_now": {
+      "chat_sandbox_direct_calls": 0,
+      "chat_sandbox_reason": "No env key, no key files, and outbound allowlist excludes www.googleapis.com; direct curl fails SSL/network.",
+      "github_actions_secret_name": "YOUTUBE_API_KEY",
+      "github_actions_secret_verified": true,
+      "verification_method": "NOT via the secrets API (403: Resource not accessible by integration). Verified via committed first-party evidence: public/yt-intel/lanes.json, doctor.json, run-log.jsonl and two successful Actions runs on this branch.",
+      "secret_value_ever_read_printed_or_stored": false,
+      "secret_value_ever_requested_from_user": false,
+      "api_secret_list_endpoint": "403 - Arena integration token lacks secrets:read",
+      "workflow_dispatch_endpoint": "403 - Arena integration token lacks actions:write; a marker-file push was used instead",
+      "project_api_lane": "active (lane=api, doctor 4/4 checks pass, channels.list + search.list OK)",
+      "pre_existing_runs": "run-log.jsonl 2026-11-03 to 2026-11-08; gh run list shows successful YT Intel runs incl. 42513359643 and scheduled 42618286186",
+      "new_runs_triggered_this_turn": [
+        "42888832314 (topic research)",
+        "42889373819 (reverse teardowns)"
+      ],
+      "new_evidence_commits": [
+        "50febed (public/yt-intel/viral-moments-explained.json + comments)",
+        "60e3dc3 (api_evidence/reverse-*.json + run.json)"
+      ]
+    },
+    "real_data_now_available": {
+      "public_view_counts": true,
+      "million_plus_view_videos": [
+        {
+          "id": "LAl3pCigzKY",
+          "title": "13 Unreleased Videos I Thought Would Go Viral",
+          "channel": "Zack D. Films",
+          "views": 11670070,
+          "likes": 254707,
+          "comments": 18855,
+          "duration": "PT12M13S",
+          "duration_s": 733,
+          "published": "2026-05-09T14:30:17Z",
+          "chapters_in_description": 13,
+          "note": "Multi-clip long-form with 13 timestamped chapters - the closest real analogue to our 8-clip / 13-chapter blueprint."
+        },
+        {
+          "id": "cKdD3OpEdgY",
+          "title": "Magnus Carlsen Reacts To His Most Viral Moments",
+          "channel": "Esports World Cup",
+          "views": 2531405,
+          "likes": 52012,
+          "comments": 676,
+          "duration": "PT13M45S",
+          "duration_s": 825,
+          "published": "2025-08-09T18:00:38Z",
+          "chapters_in_description": 0,
+          "note": "Multi-clip reaction + commentary. Description explicitly says 'found all ... viral moments and clips and forced him to react'."
+        },
+        {
+          "id": "wT7MInhIAms",
+          "title": "Most brilliant scenes",
+          "channel": "Movie Berries",
+          "views": 2422302,
+          "likes": 21700,
+          "comments": 1367,
+          "duration": "PT7M16S",
+          "duration_s": 436,
+          "published": "2024-10-15T06:32:33Z",
+          "chapters_in_description": 0,
+          "note": "Edited multi-scene compilation 'for educational purposes' with a per-scene description list."
+        },
+        {
+          "id": "GyVgDnB74yA",
+          "title": "Sen. Britt's reaction ... turns into VIRAL MEME",
+          "channel": "MS NOW",
+          "views": 1984383,
+          "duration": "PT2M17S",
+          "duration_s": 137,
+          "chapters_in_description": 0,
+          "note": "Single-moment news clip, not a multi-clip commentary template."
+        },
+        {
+          "id": "h-7uhOy15Vk",
+          "title": "Zoologist Reacts to Viral Snake Bite Videos",
+          "channel": "Clint's Reptiles",
+          "views": 1538221,
+          "duration": "PT28M48S",
+          "duration_s": 1728,
+          "chapters_in_description": 0,
+          "note": "Expert commentary over MANY different clips - the commentary-dominant pattern our idea uses."
+        }
+      ],
+      "topic_report": {
+        "path": "workspace://public/yt-intel/viral-moments-explained.json",
+        "run_id": "42888832314",
+        "topic": "viral moments explained",
+        "order": "viewCount",
+        "lane": "api",
+        "status": "ok",
+        "count": 21,
+        "million_plus": 5,
+        "top_views": 11670070,
+        "saturation": {
+          "videos": 21,
+          "total_views": 21994486,
+          "median_views": 2543,
+          "top3_share": 0.756,
+          "winner_ratio": 4589.1,
+          "fresh_share_30d": 0.38,
+          "reading": "concentrated - a few videos own the topic, a new entrant must out-execute them"
+        },
+        "decision": {
+          "verdict": "NO",
+          "score": 37.2,
+          "confidence": 0.75,
+          "reason": "the numbers do not support a day of production",
+          "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding"
+        },
+        "funnel_number_in_title_share": 0.2
+      },
+      "transcript_teardown_status": "FAILED for all 3 (yt-dlp 'Sign in to confirm you're not a bot'); receipt + description + chapter map obtained, script/word-rate/reading-grade NOT obtained and NOT invented.",
+      "still_not_available": [
+        "owner-only retention / CTR / RPM graphs",
+        "arbitrary-video transcripts (blocked)",
+        "keyword search volume",
+        "private competitor analytics",
+        "a verified 'best growing channels' ranking",
+        "guaranteed future views"
+      ]
+    },
+    "how_it_changes_the_idea": [
+      "The chosen idea MC-01 is UNCHANGED (still 8 different clips, one thesis, 10:00). The correction changes the EVIDENCE BASE, not the winner.",
+      "Real corroboration: a 12:13 multi-clip video with 13 timestamped chapters reached 11,670,070 views, and an expert reacting to MANY viral clips reached 1,538,221 views. So the multi-clip commentary format has real million-view precedents [65](workspace://public/yt-intel/viral-moments-explained.json) [67](workspace://research/multi_clip_long_form_v12/api_evidence/reverse-LAl3pCigzKY.json).",
+      "Real warning: the literal topic 'viral moments explained' scores NO / 37.2 with top3_share 0.756 and median_views 2543. Generic 'viral moments' packaging is concentrated and NOT winnable; our thesis-driven forensic angle + number-in-title hook must stay distinct [65](workspace://public/yt-intel/viral-moments-explained.json).",
+      "Real hook evidence: only 1 of the top 5 titles used a number, and the replication note says 'add a concrete number inside the first 3 seconds'. Our H1 opens with 'Eight different clips' and the working title contains '8' [67](workspace://research/multi_clip_long_form_v12/api_evidence/reverse-LAl3pCigzKY.json).",
+      "These third-party videos are STRUCTURAL EVIDENCE ONLY. They are NOT source clips for our edit; every one of our 8 clips still needs its own per-clip rights gate [9](https://support.google.com/youtube/answer/6013276?hl=en) [40](workspace://docs/continuity/channels/monarch-cam/REJECTIONS.md)."
+    ],
+    "open_gates_unchanged": [
+      "NASA promotional / current-astronaut imagery",
+      "8 per-clip rights chains",
+      "user-reported Short monetization ON",
+      "render toolchain",
+      "AI-use toggle",
+      "human listening / creative approval / legal review"
+    ],
+    "non_claims_scope": "The 29 NON_CLAIMS flags describe what THIS CHAT SANDBOX did not do directly, not what the project's GitHub Actions lane did. Project-level positive facts are listed here, not smuggled into the non-claims dict.",
+    "sources": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ]
+  },
+  "non_claims_scope": "The 29 NON_CLAIMS flags describe what THIS CHAT SANDBOX did not do directly, not what the project's GitHub Actions lane did. Project-level positive facts are listed here, not smuggled into the non-claims dict.",
+  "real_api_evidence": {
+    "topic_report": {
+      "path": "workspace://public/yt-intel/viral-moments-explained.json",
+      "run_id": "42888832314",
+      "topic": "viral moments explained",
+      "order": "viewCount",
+      "lane": "api",
+      "status": "ok",
+      "count": 21,
+      "million_plus": 5,
+      "top_views": 11670070,
+      "saturation": {
+        "videos": 21,
+        "total_views": 21994486,
+        "median_views": 2543,
+        "top3_share": 0.756,
+        "winner_ratio": 4589.1,
+        "fresh_share_30d": 0.38,
+        "reading": "concentrated - a few videos own the topic, a new entrant must out-execute them"
+      },
+      "decision": {
+        "verdict": "NO",
+        "score": 37.2,
+        "confidence": 0.75,
+        "reason": "the numbers do not support a day of production",
+        "next_probe": "find the 3 videos that own it and reverse-engineer them (yt-intel reverse <id>) before deciding"
+      },
+      "funnel_number_in_title_share": 0.2
+    },
+    "million_plus_videos": [
+      {
+        "id": "LAl3pCigzKY",
+        "title": "13 Unreleased Videos I Thought Would Go Viral",
+        "channel": "Zack D. Films",
+        "views": 11670070,
+        "likes": 254707,
+        "comments": 18855,
+        "duration": "PT12M13S",
+        "duration_s": 733,
+        "published": "2026-05-09T14:30:17Z",
+        "chapters_in_description": 13,
+        "note": "Multi-clip long-form with 13 timestamped chapters - the closest real analogue to our 8-clip / 13-chapter blueprint."
+      },
+      {
+        "id": "cKdD3OpEdgY",
+        "title": "Magnus Carlsen Reacts To His Most Viral Moments",
+        "channel": "Esports World Cup",
+        "views": 2531405,
+        "likes": 52012,
+        "comments": 676,
+        "duration": "PT13M45S",
+        "duration_s": 825,
+        "published": "2025-08-09T18:00:38Z",
+        "chapters_in_description": 0,
+        "note": "Multi-clip reaction + commentary. Description explicitly says 'found all ... viral moments and clips and forced him to react'."
+      },
+      {
+        "id": "wT7MInhIAms",
+        "title": "Most brilliant scenes",
+        "channel": "Movie Berries",
+        "views": 2422302,
+        "likes": 21700,
+        "comments": 1367,
+        "duration": "PT7M16S",
+        "duration_s": 436,
+        "published": "2024-10-15T06:32:33Z",
+        "chapters_in_description": 0,
+        "note": "Edited multi-scene compilation 'for educational purposes' with a per-scene description list."
+      },
+      {
+        "id": "GyVgDnB74yA",
+        "title": "Sen. Britt's reaction ... turns into VIRAL MEME",
+        "channel": "MS NOW",
+        "views": 1984383,
+        "duration": "PT2M17S",
+        "duration_s": 137,
+        "chapters_in_description": 0,
+        "note": "Single-moment news clip, not a multi-clip commentary template."
+      },
+      {
+        "id": "h-7uhOy15Vk",
+        "title": "Zoologist Reacts to Viral Snake Bite Videos",
+        "channel": "Clint's Reptiles",
+        "views": 1538221,
+        "duration": "PT28M48S",
+        "duration_s": 1728,
+        "chapters_in_description": 0,
+        "note": "Expert commentary over MANY different clips - the commentary-dominant pattern our idea uses."
+      }
+    ]
+  },
   "chosen_idea": {
     "id": "MC-01",
     "series": "REPLAY FILES",
@@ -349,12 +596,15 @@
     "rights_gate_closed": false,
     "v10_short_clip_reused_as_hero": false
   },
-  "sources_count": 60,
+  "sources_count": 70,
   "related_files": [
     "candidate_scoring_v12.json",
     "sources_v12.json",
     "api_capability_audit_v12.json",
     "clip_sourcing_gate_v12.json",
+    "api_reality_correction_v12.json",
+    "API_REALITY_CORRECTION_V12.md",
+    "api_evidence/run.json",
     "research/long_form_viral_idea_v11/SUPERSEDED_BY_V12.md",
     "production/monarch-cam/replay_lab_ep01_v11/SUPERSEDED_BY_V12.md"
   ]

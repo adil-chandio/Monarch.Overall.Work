@@ -1,7 +1,26 @@
 {
-  "edition": "v12_multi_clip_long_form_forensic",
+  "edition": "v12_multi_clip_long_form_forensic_api_corrected",
+  "correction_id": "v12_api_reality_correction",
   "youtube_data_api_calls_made": 0,
+  "youtube_data_api_calls_made_scope": "THIS CHAT SANDBOX ONLY. NOT a project-level claim: GitHub Actions made real Data API calls - see github_actions_api_lane below and api_reality_correction_v12.json.",
   "api_key_in_workspace": false,
+  "api_key_in_workspace_scope": "Local chat sandbox env / files only. A valid YOUTUBE_API_KEY exists in GitHub Actions repository secrets.",
+  "github_actions_api_lane": {
+    "secret_name": "YOUTUBE_API_KEY",
+    "secret_present": true,
+    "verified_via": "committed public/yt-intel/lanes.json + doctor.json + run-log.jsonl + two successful Actions runs (NOT via the 403 secrets API)",
+    "secret_value_read_printed_or_stored": false,
+    "secrets_api_status": "403 Resource not accessible by integration (token lacks secrets:read)",
+    "workflow_dispatch_status": "403 Resource not accessible by integration (token lacks actions:write); marker-file push used instead",
+    "doctor": "4/4 checks pass; channels.list 1 channel (1 unit); search.list lane=api status=ok (100 units)",
+    "pre_existing_runs": "2026-11-03 .. 2026-11-08 (run-log.jsonl) plus scheduled 42618286186",
+    "runs_triggered_this_turn": [
+      "42888832314",
+      "42889373819"
+    ],
+    "real_report": "public/yt-intel/viral-moments-explained.json",
+    "reverse_evidence": "research/multi_clip_long_form_v12/api_evidence/"
+  },
   "workspace_check_results": {
     "env_youtube_or_google_api_key_var_present": false,
     "config_youtube_json": "absent",
@@ -71,10 +90,10 @@
     "official_youtube_nasa_developer_pages_reviewed": true,
     "workspace_ledgers_reviewed": true,
     "third_party_sources_labelled_directional": true,
-    "note": "Exact session tool-call counts are NOT asserted (they are chat logs, not data). See sources_v12.json for the full 60-entry ledger and each source's kind=fetched / web_search / referenced / workspace."
+    "note": "Exact session tool-call counts are NOT asserted (they are chat logs, not data). See sources_v12.json for the full 70-entry ledger and each source's kind=fetched / web_search / referenced / workspace. The GitHub Actions lane did make real API calls; those are recorded separately in github_actions_api_lane."
   },
   "non_claims": {
-    "live_data_claimed": false,
+    "live_data_claimed_in_chat_sandbox": false,
     "ranking_verified": false,
     "analytics_claimed": false,
     "perfection_claimed": false

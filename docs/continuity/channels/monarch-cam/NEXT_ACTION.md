@@ -2,8 +2,9 @@
 
 - User correction: the Short was already made on the one NASA water-bubble clip; the LONG video must bring MANY DIFFERENT best viral clips/moments with commentary + editing, 8-10 min. V11's one-clip idea and its Phase A/B/C are marked SUPERSEDED (files preserved, not deleted).
 - New study: `research/multi_clip_long_form_v12/MULTI_CLIP_VIRAL_IDEA_FORENSIC_STUDY_V12.md`. ONE chosen idea: `MC-01 THE REPLAY CODE: 8 Moments, One Hidden Rule` (8 distinct clip slots, one thesis, 10:00, commentary-dominant <=13.3% source share). The already-used V10/Short NASA water-bubble asset is EXCLUDED from all 8 slots.
-- 10x forensic: 12 lenses, 60-source ledger, 10-axis weighted rubric, 8 candidates, 16 kill switches, 13 chapters, 7 phases, 6 open gates, 29 non-claims. Official reused-content / fair-use / Content ID / retention / packaging / API-quota wording verified; third-party analytics all labelled directional.
-- 0 live YouTube Data API calls (no key), 0 clips acquired/cleared, NO render, NO VO, NO upload/publish, NO monetization change, NO human approval, NO legal clearance, NO guaranteed views.
+- 10x forensic: 12 lenses, 70-source ledger, 10-axis weighted rubric, 8 candidates, 16 kill switches, 13 chapters, 7 phases, 6 open gates, 29 non-claims. Official reused-content / fair-use / Content ID / retention / packaging / API-quota wording verified; third-party analytics all labelled directional.
+- API REALITY CORRECTION: the earlier 'no key / 0 live API calls' line was WRONG at project level. YOUTUBE_API_KEY exists in GitHub Actions secrets; doctor.json 4/4, lanes.json key_present=true, run-log 2026-11-03..08. Two new live runs this turn: 42888832314 (topic: 21 videos, 5 with 1M+ views, verdict NO 37.2) and 42889373819 (3 reverse teardowns; transcripts blocked by yt-dlp bot check). See `research/multi_clip_long_form_v12/API_REALITY_CORRECTION_V12.md`. Chat sandbox direct calls still 0.
+- 0 clips acquired/cleared, NO render, NO VO, NO upload/publish, NO monetization change, NO human approval, NO legal clearance, NO guaranteed views.
 - Standing gates remain OPEN: NASA promotional / current-astronaut imagery, 8 per-clip rights chains, user-reported Short monetization ON, render toolchain, AI-use toggle, human listening/creative review.
 - This addendum does NOT supersede the standing 'await human full-motion/native-audio review' line below.
 

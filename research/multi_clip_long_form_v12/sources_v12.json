@@ -1,6 +1,6 @@
 {
-  "edition": "v12_multi_clip_long_form_forensic",
-  "count": 60,
+  "edition": "v12_multi_clip_long_form_forensic_api_corrected",
+  "count": 70,
   "sources": [
     {
       "n": 1,
@@ -661,6 +661,116 @@
       "search_result_id": null,
       "used_for": "DIRECTIONAL ONLY: no breakout/outlier detection built into Data API, no arbitrary-video transcripts, no keyword volume, no semantic look-alike channel search; retention/CTR/RPM are owner-only Studio data.",
       "reliability": "third_party_directional_unverified"
+    },
+    {
+      "n": 61,
+      "id": "WS_YT_INTEL_WORKFLOW",
+      "title": ".github/workflows/yt-intel.yml",
+      "url": "workspace://.github/workflows/yt-intel.yml",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Existing scheduled workflow that resolves secrets.YOUTUBE_API_KEY (plus YTAP1/YTAPI1/YT_KEY/YT_API_KEY fallbacks), runs doctor + topic + comments, and commits public/yt-intel reports. Secret VALUE is never printed (add-mask + presence only).",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 62,
+      "id": "WS_YT_INTEL_LANES",
+      "title": "public/yt-intel/lanes.json",
+      "url": "workspace://public/yt-intel/lanes.json",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Committed bot record: lane=api, key_present=true, key_secret_name=YOUTUBE_API_KEY, key_starts_with_aiza=true, secrets_seen.YOUTUBE_API_KEY=true, quota_used/remaining, ref=refs/heads/arena/2b012328-monarch-overall-work after run 42888832314.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 63,
+      "id": "WS_YT_INTEL_DOCTOR",
+      "title": "public/yt-intel/doctor.json",
+      "url": "workspace://public/yt-intel/doctor.json",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "4/4 checks pass: key present (shape-masked), channels.list returned 1 channel (1 quota unit), search.list lane=api status=ok (100 quota units), quota_used=102. Proof real Data API calls succeeded.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 64,
+      "id": "WS_YT_INTEL_RUNLOG",
+      "title": "public/yt-intel/run-log.jsonl",
+      "url": "workspace://public/yt-intel/run-log.jsonl",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Bot run history from 2026-11-03 through 2026-11-10, including run 42513359643 (2026-11-08) and 42888832314 (2026-11-10). Shows the API lane existed BEFORE this chat's claims.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 65,
+      "id": "WS_YT_INTEL_REPORT",
+      "title": "public/yt-intel/viral-moments-explained.json",
+      "url": "workspace://public/yt-intel/viral-moments-explained.json",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Fresh real API report (run 42888832314): topic 'viral moments explained', order=viewCount, lane=api, status=ok, 21 rows, 5 videos >=1M views, saturation top3_share=0.756 / median_views=2543 / fresh_share_30d=0.38, decision verdict NO score 37.2.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 66,
+      "id": "WS_V12_REVERSE_RUN",
+      "title": "research/multi_clip_long_form_v12/api_evidence/run.json",
+      "url": "workspace://research/multi_clip_long_form_v12/api_evidence/run.json",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Actions run 42889373819 metadata: key_present=true on the active branch, three real 1M+ view video IDs torn down, presence-only note. Secret value never printed or stored.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 67,
+      "id": "WS_V12_REVERSE_TEARDOWNS",
+      "title": "research/multi_clip_long_form_v12/api_evidence/reverse-*.json",
+      "url": "workspace://research/multi_clip_long_form_v12/api_evidence/reverse-LAl3pCigzKY.json",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Three real receipts with views/likes/comments/duration/tags/description; Zack D. Films video has 13 timestamped chapters in its description. Transcript fetch FAILED (yt-dlp bot check) for all three - recorded honestly, no invented script/word-rate analysis.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 68,
+      "id": "GH_ACTIONS_RUNS",
+      "title": "GitHub Actions runs 42888832314 and 42889373819",
+      "url": "https://github.com/adil-chandio/Monarch.Overall.Work/actions/runs/42888832314",
+      "authority": "official_github_actions",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Both runs completed successfully on arena/2b012328-monarch-overall-work with the YOUTUBE_API_KEY secret resolved; bot commits 50febed and 60e3dc3 carried the evidence into the repo.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 69,
+      "id": "WS_YT_INTEL_AI_EDITING",
+      "title": "public/yt-intel/ai-video-editing.json (pre-existing real API report)",
+      "url": "workspace://public/yt-intel/ai-video-editing.json",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Real pre-existing Data API report: lane=api, order=viewCount, 30 rows, 30/30 with >=1M views, top 20,214,229 views. Proof real million-view data existed in the repo before this chat's 'no data' claim.",
+      "reliability": "verified_workspace"
+    },
+    {
+      "n": 70,
+      "id": "WS_YT_INTEL_FACELESS",
+      "title": "public/yt-intel/faceless-youtube-channel.json (pre-existing real API report)",
+      "url": "workspace://public/yt-intel/faceless-youtube-channel.json",
+      "authority": "verified_workspace",
+      "kind": "workspace",
+      "search_result_id": null,
+      "used_for": "Real pre-existing Data API report: lane=api, 30 rows, 2 with >=1M views, top 9,283,453 views. Corroborates that the API lane predates the V12 correction.",
+      "reliability": "verified_workspace"
     }
   ],
   "reliability_ladder": [

@@ -1,5 +1,5 @@
 {
-  "edition": "v12_multi_clip_long_form_forensic",
+  "edition": "v12_multi_clip_long_form_forensic_api_corrected",
   "status": "NO_CLIP_ACQUIRED_NO_CLIP_CLEARED",
   "hard_rule": "No clip enters the edit until every field below is filled with a verified value and human_legal_review=true for that clip.",
   "excluded_existing_short_clip": {
@@ -144,6 +144,8 @@
     "own-shot original demo footage",
     "licensed clips with written permission [9](https://support.google.com/youtube/answer/6013276?hl=en)"
   ],
+  "real_api_evidence_is_not_source_clips": true,
+  "real_api_evidence_note": "The 5 real 1M+ view videos are STRUCTURAL EVIDENCE ONLY. They are third-party copyrighted videos and are NOT any of the 8 source slots. Every own clip still needs its own rights gate.",
   "non_claims": {
     "clip_downloaded": false,
     "clip_cleared": false,
