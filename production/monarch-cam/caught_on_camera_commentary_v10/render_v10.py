@@ -73,14 +73,20 @@ BEATS = [
     "Back to the start. That upside-down face is still there. Watch it again.",
 ]
 
-MASTER_CHAIN_ID = "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter"
+MASTER_CHAIN_ID = "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick"
 PAN_FILTER = "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1"
 HIGHPASS_FILTER = "highpass=f=35"
 # Retained only to reproduce and measure the rejected "ghut ghut" VO chain; not in delivery.
 LEGACY_TREBLE_FILTER = "treble=f=3000:g=-2:w=0.5"
+# Retained only to reproduce and measure the rejected "buffering glitch" VO chain; not in delivery.
+LEGACY_NARROW_DECLICK_THRESHOLD = 0.35
+LEGACY_NARROW_DECLICK_HALF_WIDTH = 3
 LIMITER_FILTER = "alimiter=limit=0.80:attack=20:release=300:level=disabled"
-NARROW_DECLICK_THRESHOLD = 0.35
-NARROW_DECLICK_HALF_WIDTH = 3
+# One continuous, whole-waveform slope conditioner. It never replaces a sample with a
+# straight line: no piecewise-linear ramps, no micro-edits, no transient flattening.
+VO_SLOPE_CAP = 0.28
+VO_SLOPE_SHAPE = 4.0
+VO_SLEW_CROSSOVER_HZ = 2000
 
 
 def ensure_dirs() -> None:
@@ -459,9 +465,14 @@ def broad_declick_wav(path: Path, threshold: float = 0.28, width: int = 32) -> d
             "fraction_changed": round(float(changed.mean()), 6)}
 
 
-def narrow_declick_wav(path: Path, threshold: float = NARROW_DECLICK_THRESHOLD,
-                       half_width: int = NARROW_DECLICK_HALF_WIDTH) -> dict:
-    """Repair only 7-sample windows around discontinuities, preserving VO presence/air."""
+def narrow_declick_wav(path: Path, threshold: float = LEGACY_NARROW_DECLICK_THRESHOLD,
+                       half_width: int = LEGACY_NARROW_DECLICK_HALF_WIDTH) -> dict:
+    """LEGACY, DIAGNOSTIC ONLY. The 7-sample linear ramp repair from 8965beb.
+
+    It replaced 6,151 natural speech transients with tiny straight-line ramps, which
+    produced the reported buffering-glitch/stutter. It is retained solely so the
+    rejected chain can be reproduced and measured; the delivered chain never calls it.
+    """
     x, sr = sf.read(path, dtype="float32", always_2d=True)
     d = np.max(np.abs(np.diff(x, axis=0)), axis=1)
     idx = np.where(d > threshold)[0]
@@ -480,6 +491,192 @@ def narrow_declick_wav(path: Path, threshold: float = NARROW_DECLICK_THRESHOLD,
             "jumps_repaired": int(len(idx)),
             "interior_samples_changed": int(altered),
             "fraction_changed": round(altered / max(1, len(x)), 6)}
+
+
+def _click_runs(mono: np.ndarray, sr: int, threshold: float = 0.35) -> int:
+    idx = np.where(np.abs(np.diff(mono)) > threshold)[0]
+    runs, cur = 0, []
+    for i in idx:
+        if cur and i - cur[-1] <= 3:
+            cur.append(int(i))
+        else:
+            runs += len(cur) >= 2
+            cur = [int(i)]
+    runs += len(cur) >= 2
+    return int(runs)
+
+
+def _ramp_groups(mono: np.ndarray, min_len: int = 5) -> tuple[int, int]:
+    """Count exactly-straight-line runs in active audio: the stutter fingerprint."""
+    d2 = np.zeros_like(mono)
+    d2[1:-1] = mono[:-2] - 2 * mono[1:-1] + mono[2:]
+    linear = (np.abs(d2) < 2e-5) & (np.abs(mono) > 0.01)
+    groups, samples, cur = 0, 0, 0
+    for v in linear:
+        if v:
+            cur += 1
+        else:
+            if cur >= min_len:
+                groups += 1
+                samples += cur
+            cur = 0
+    if cur >= min_len:
+        groups += 1
+        samples += cur
+    return groups, samples
+
+
+def condition_transients(in_wav: Path, out_wav: Path,
+                         cap: float = VO_SLOPE_CAP) -> dict:
+    """One continuous slope conditioner, applied as the FINAL audio operation.
+
+    The rejected chains repaired thousands of individually detected "clicks" by
+    writing 5- or 64-sample straight lines over speech transients. That dense
+    sample-replacement is what sounds like buffering. Here every sample is derived
+    from the same continuous, differentiable soft-knee function of the waveform's
+    first difference; no sample is replaced by interpolation and no windowed
+    edit is made. Only the part of the correction above VO_SLEW_CROSSOVER_HZ is
+    kept, so the VO's fundamental/low-mid band is left essentially untouched and
+    the integration step cannot introduce low-frequency drift or thumps. The
+    steepest sibilant slopes are softened by a few dB, which also removes the
+    harsh crackle of the synthetic VO.
+    """
+    x, sr = sf.read(in_wav, dtype="float64", always_2d=True)
+    x = x[:, :2]
+    before = x.mean(axis=1)
+    d = np.diff(x, axis=0)
+    scale = 1.0 / (1 + (np.abs(d) / cap) ** VO_SLOPE_SHAPE) ** (1.0 / VO_SLOPE_SHAPE)
+    integrated = np.concatenate([x[:1], x[:1] + np.cumsum(d * scale, axis=0)], axis=0)
+    sos = signal.butter(4, VO_SLEW_CROSSOVER_HZ, btype="highpass", fs=sr, output="sos")
+    y = x + signal.sosfiltfilt(sos, integrated - x, axis=0)
+    sf.write(out_wav, np.clip(y, -1.0, 1.0).astype(np.float32), sr, subtype="PCM_16")
+    after = y.mean(axis=1)
+    f_b, p_b = signal.welch(before, fs=sr, nperseg=8192)
+    f_a, p_a = signal.welch(after, fs=sr, nperseg=8192)
+    hf_b = float(p_b[(f_b >= 5000) & (f_b < 14000)].sum() /
+                 max(p_b[(f_b >= 20) & (f_b < 24000)].sum(), 1e-20))
+    hf_a = float(p_a[(f_a >= 5000) & (f_a < 14000)].sum() /
+                 max(p_a[(f_a >= 20) & (f_a < 24000)].sum(), 1e-20))
+    rg_b, rs_b = _ramp_groups(before)
+    rg_a, rs_a = _ramp_groups(after)
+    lb_sos = signal.butter(4, [200, 1000], btype="band", fs=sr, output="sos")
+    lb_before = signal.sosfiltfilt(lb_sos, before)
+    lb_after = signal.sosfiltfilt(lb_sos, after)
+    lowband_corr = float(np.corrcoef(lb_before, lb_after)[0, 1])
+    lowband_diff_pct = round(
+        100 * float(np.sqrt(np.mean((lb_after - lb_before) ** 2))) /
+        max(float(np.sqrt(np.mean(lb_before ** 2))), 1e-9), 4)
+    return {
+        "method": "continuous_soft_knee_slope_conditioner",
+        "slope_cap": cap, "shape_exponent": VO_SLOPE_SHAPE,
+        "low_band_restore_crossover_hz": VO_SLEW_CROSSOVER_HZ,
+        "samples_replaced_by_interpolation": 0,
+        "piecewise_linear_ramp_windows": 0,
+        "low_band_200_1000_hz": {
+            "correlation_before_after": round(lowband_corr, 6),
+            "difference_percent_of_original": lowband_diff_pct,
+            "note": "VO fundamental/low-mid band left essentially untouched",
+        },
+        "before": {"max_sample_jump": round(float(np.abs(np.diff(before)).max()), 4),
+                   "jumps_over_0_35": int((np.abs(np.diff(before)) > 0.35).sum()),
+                   "click_runs": _click_runs(before, sr),
+                   "linear_ramp_groups": rg_b, "linear_ramp_samples": rs_b,
+                   "hf_5k_14k_energy_ratio": round(hf_b, 5)},
+        "after": {"max_sample_jump": round(float(np.abs(np.diff(after)).max()), 4),
+                  "jumps_over_0_35": int((np.abs(np.diff(after)) > 0.35).sum()),
+                  "click_runs": _click_runs(after, sr),
+                  "linear_ramp_groups": rg_a, "linear_ramp_samples": rs_a,
+                  "hf_5k_14k_energy_ratio": round(hf_a, 5)},
+    }
+
+
+def decode_full_audio(src: Path, out_wav: Path) -> None:
+    run([FFMPEG, "-y", "-hide_banner", "-loglevel", "error", "-i", src,
+         "-map", "0:a:0", "-vn", "-ac", "2", "-ar", str(SR),
+         "-c:a", "pcm_s16le", out_wav])
+
+
+def ramp_diagnostic(wav: Path) -> dict:
+    x, sr = sf.read(wav, dtype="float64", always_2d=True)
+    mono = x.mean(axis=1)
+    groups, samples = _ramp_groups(mono)
+    return {"seconds": round(len(mono) / sr, 3),
+            "linear_ramp_groups_len_ge_5": groups,
+            "linear_ramp_samples": samples,
+            "linear_ramp_fraction": round(samples / max(1, len(mono)), 6),
+            "max_sample_jump": round(float(np.abs(np.diff(mono)).max()), 4),
+            "click_runs": _click_runs(mono, sr)}
+
+
+def frequency_diagnostic(wav: Path) -> dict:
+    """Show that the QC click gate flags ordinary 6-12 kHz sibilance, not real clicks.
+
+    A brickwall low-pass is applied to the undamaged master only for measurement.
+    Reaching zero click runs needs a ~6 kHz cutoff, i.e. telephone-band muffling,
+    which is why sample-by-sample "click repair" was the wrong strategy.
+    """
+    x, sr = sf.read(wav, dtype="float64", always_2d=True)
+    mono = x.mean(axis=1)
+    n = len(mono)
+    spectrum = np.fft.rfft(mono)
+    freqs = np.fft.rfftfreq(n, 1.0 / sr)
+    rows = []
+    for cutoff in [None, 16000, 12000, 10000, 8000, 6000]:
+        if cutoff is None:
+            y = mono
+        else:
+            gain = np.ones_like(freqs)
+            transition = 200.0
+            gain[freqs > cutoff + transition / 2] = 0.0
+            band = (freqs >= cutoff - transition / 2) & (freqs <= cutoff + transition / 2)
+            gain[band] = 0.5 * (1 + np.cos(np.pi *
+                                (freqs[band] - (cutoff - transition / 2)) / transition))
+            y = np.fft.irfft(spectrum * gain, n=n)
+        rows.append({"brickwall_cutoff_hz": cutoff,
+                     "max_sample_jump": round(float(np.abs(np.diff(y)).max()), 4),
+                     "click_runs": _click_runs(y, sr)})
+    return {"method": "measurement_only_fft_brickwall_on_undamaged_master",
+            "rows": rows,
+            "conclusion": ("Zero click runs require a ~6 kHz brickwall; the 0.35 absolute "
+                           "jump threshold therefore flags natural loud sibilance at -14 LUFS. "
+                           "Replacing those transients with linear ramps creates the stutter.")}
+
+
+def make_vo_waveform_comparison(before_wav: Path, after_wav: Path,
+                                out_png: Path, center_s: float = 0.6204,
+                                span_ms: float = 20.0) -> None:
+    """Zoomed sample-level waveform; objective evidence that straight-line ramps are gone."""
+    width, height = 640, 260
+
+    def panel(path: Path) -> Image.Image:
+        x, sr = sf.read(path, dtype="float32", always_2d=True)
+        mono = x.mean(axis=1)
+        half = int(span_ms / 1000 * sr / 2)
+        a, b = max(0, int(center_s * sr) - half), min(len(mono), int(center_s * sr) + half)
+        seg = mono[a:b]
+        img = Image.new("RGB", (width, height), "white")
+        dr = ImageDraw.Draw(img)
+        mid = height // 2
+        sc = (height / 2 - 8) / max(0.05, float(np.abs(seg).max()))
+        dr.line([(0, mid), (width, mid)], fill=(215, 215, 215))
+        pts = [(i / len(seg) * width, mid - seg[i] * sc) for i in range(len(seg))]
+        if len(pts) > 1:
+            dr.line(pts, fill=(20, 60, 170), width=1)
+        return img
+
+    canvas = Image.new("RGB", (2 * width, height + 78), "white")
+    dr = ImageDraw.Draw(canvas)
+    font = ImageFont.truetype(FONT_REGULAR, 18)
+    small = ImageFont.truetype(FONT_REGULAR, 14)
+    dr.text((10, 8), "BEFORE 8965beb: 7-sample linear ramps", fill="black", font=font)
+    dr.text((width + 10, 8), "AFTER: continuous, no ramps", fill="black", font=font)
+    canvas.paste(panel(before_wav), (0, 40))
+    canvas.paste(panel(after_wav), (width, 40))
+    dr.text((10, height + 48),
+            f"{center_s:.4f}s, +/-{span_ms/2:.0f} ms. Objective waveform only; no human listening sign-off.",
+            fill="black", font=small)
+    out_png.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(out_png)
 
 
 def apply_calibration(in_wav: Path, out_wav: Path, delta_db: float) -> None:
@@ -520,26 +717,64 @@ def mux_deliverable(silent: Path, audio_wav: Path) -> None:
 
 
 def calibrate_and_mux(premaster: Path, silent: Path) -> tuple[Path, dict, list[dict]]:
-    """Master with clear linear loudnorm, narrow click repair and a gentle limiter."""
+    """Master, calibrate loudness, then apply ONE continuous slope conditioner.
+
+    Ordering matters: gain is applied BEFORE conditioning. Applying gain after the
+    conditioner pushes sibilant slopes back above the QC threshold, which is what
+    forced the earlier chains into thousands of piecewise-linear "repairs".
+    """
     attempts: list[dict] = []
     chain, measured = build_master_chain(premaster)
     attempts.append({
         "stage": "loudnorm_measurement", "chain_id": MASTER_CHAIN_ID,
         "chain_filter": chain, "loudnorm_measurement": measured,
-        "voice_quality_fix": "removed -2 dB treble cut and 32-sample broad declick",
+        "voice_quality_fix": ("removed -2 dB treble cut, 32-sample broad declick and "
+                              "7-sample narrow declick; no sample is replaced by a linear ramp"),
+        "declared_order": "linear loudnorm -> loudness calibration + gentle limiter -> continuous slope conditioner",
     })
     mastered = WORK / "mastered_v10.wav"
     master_audio(premaster, mastered, chain)
-    repair = narrow_declick_wav(mastered)
-    attempts.append({"stage": "master_narrow_declick", "narrow_declick": repair})
-    current = mastered
-    for iteration in range(8):
+
+    # Phase 1: calibrate loudness on the undamaged master. The gentle limiter is
+    # included in apply_calibration; no transient surgery happens in this phase.
+    base = WORK / "loudness_base.wav"
+    apply_calibration(mastered, base, 0.0)
+    current = base
+    for iteration in range(6):
         mux_deliverable(silent, current)
         result = audio_gate_run(str(DELIVERABLE), "web")
-        attempt = {
-            "chain_id": MASTER_CHAIN_ID, "chain_filter": chain,
+        lufs = float(result["measured"]["integrated_lufs"])
+        attempts.append({
+            "stage": "loudness_calibration_measurement", "chain_id": MASTER_CHAIN_ID,
             "iteration": iteration, "audio_input": str(current.relative_to(ROOT)),
-            "narrow_declick": repair,
+            "integrated_lufs": lufs,
+            "sample_peak_dbfs": result["measured"]["sample_peak_dbfs"],
+            "click_runs_before_conditioning": result["measured"]["clicks"]["click_runs"],
+        })
+        if abs(lufs + 14.0) <= 0.25:
+            break
+        delta = -14.0 - lufs
+        calibrated = WORK / f"loudness_cal_{iteration}.wav"
+        apply_calibration(current, calibrated, delta)
+        attempts.append({"stage": "loudness_calibration_gain",
+                         "iteration": iteration, "delta_db": round(delta, 4)})
+        current = calibrated
+
+    # Phase 2: one continuous conditioner as the FINAL audio operation. If AAC
+    # encoding still exposes a click run, lower the slope cap; never add gain here.
+    cap = VO_SLOPE_CAP
+    for iteration in range(6):
+        conditioned = WORK / f"conditioned_{iteration}.wav"
+        conditioning = condition_transients(current, conditioned, cap)
+        attempts.append({"stage": "continuous_transient_conditioning",
+                         "chain_id": MASTER_CHAIN_ID, "iteration": iteration,
+                         "audio_input": str(current.relative_to(ROOT)),
+                         "conditioning": conditioning})
+        mux_deliverable(silent, conditioned)
+        result = audio_gate_run(str(DELIVERABLE), "web")
+        attempts.append({
+            "stage": "delivered_gate", "chain_id": MASTER_CHAIN_ID,
+            "iteration": iteration, "audio_input": str(conditioned.relative_to(ROOT)),
             "pass": bool(result["pass"]), "failed": result["failed"],
             "integrated_lufs": result["measured"]["integrated_lufs"],
             "lra_lu": result["measured"]["lra_lu"],
@@ -548,41 +783,21 @@ def calibrate_and_mux(premaster: Path, silent: Path) -> tuple[Path, dict, list[d
             "click_runs": result["measured"]["clicks"]["click_runs"],
             "harsh_over_high_mid_db": result["measured"]["harsh_over_high_mid_db"],
             "air_over_high_mid_db": result["measured"]["air_over_high_mid_db"],
-        }
-        attempts.append(attempt)
+        })
         if result["pass"]:
-            return current, result, attempts
-        delta = -14.0 - float(result["measured"]["integrated_lufs"])
-        if abs(delta) >= 0.05:
-            calibrated = WORK / f"calibrated_{iteration}.wav"
-            apply_calibration(current, calibrated, delta)
-            repair = narrow_declick_wav(calibrated)
-            attempts.append({"stage": f"calibration_{iteration}_narrow_declick",
-                             "delta_db": round(delta, 4), "narrow_declick": repair})
-            current = calibrated
-        elif "no_clicks" in result["failed"]:
-            # AAC encoding can expose isolated sample discontinuities; repair the decoded stream.
-            decoded = WORK / f"delivered_repair_{iteration}.wav"
-            run([FFMPEG, "-y", "-hide_banner", "-loglevel", "error", "-i", DELIVERABLE,
-                 "-map", "0:a:0", "-vn", "-ac", "2", "-ar", str(SR),
-                 "-c:a", "pcm_s16le", decoded])
-            repair = narrow_declick_wav(decoded)
-            mux_deliverable(silent, decoded)
-            result = audio_gate_run(str(DELIVERABLE), "web")
-            attempts.append({
-                "stage": "delivered_aac_narrow_declick", "iteration": iteration,
-                "audio_input": str(decoded.relative_to(ROOT)),
-                "narrow_declick": repair, "pass": bool(result["pass"]),
-                "failed": result["failed"],
-                "integrated_lufs": result["measured"]["integrated_lufs"],
-                "click_runs": result["measured"]["clicks"]["click_runs"],
-                "air_over_high_mid_db": result["measured"]["air_over_high_mid_db"],
-            })
-            if result["pass"]:
-                return decoded, result, attempts
-            current = decoded
-        else:
-            break
+            return conditioned, result, attempts
+        if "no_clicks" in result["failed"]:
+            cap = max(0.18, round(cap - 0.02, 4))
+            continue
+        if "loudness_in_range" in result["failed"]:
+            delta = -14.0 - float(result["measured"]["integrated_lufs"])
+            regained = WORK / f"loudness_regain_{iteration}.wav"
+            apply_calibration(current, regained, delta)
+            attempts.append({"stage": "loudness_regain_before_reconditioning",
+                             "iteration": iteration, "delta_db": round(delta, 4)})
+            current = regained
+            continue
+        break
     raise RuntimeError("Audio calibration did not pass the nine web gates: " +
                        json.dumps(attempts, indent=2))
 
@@ -762,8 +977,8 @@ def make_vo_spectrum_comparison(before_wav: Path, after_wav: Path, out_png: Path
     draw = ImageDraw.Draw(canvas)
     font = ImageFont.truetype(FONT_REGULAR, 20)
     small = ImageFont.truetype(FONT_REGULAR, 15)
-    draw.text((10, 8), "BEFORE de03272: damped VO", fill="black", font=font)
-    draw.text((width + 10, 8), "AFTER: corrected VO", fill="black", font=font)
+    draw.text((10, 8), "BEFORE 8965beb: narrow-declip VO", fill="black", font=font)
+    draw.text((width + 10, 8), "AFTER: continuous-slew VO", fill="black", font=font)
     canvas.paste(panel(before_wav), (0, 45))
     canvas.paste(panel(after_wav), (width, 45))
     draw.text((10, height + 48), "First 8 s, 0-12 kHz. Objective spectrogram only; no human listening sign-off.",
@@ -866,7 +1081,11 @@ def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: di
             "voice_quality_fix_applied": True,
             "legacy_broad_declick_removed": True,
             "legacy_treble_cut_removed": True,
-            "narrow_click_repair_only": True,
+            "legacy_narrow_declick_removed": True,
+            "continuous_transient_conditioning_only": True,
+            "no_piecewise_linear_sample_ramps": True,
+            "no_sample_replaced_by_interpolation": True,
+            "source_vo_chunks_unchanged": True,
             "human_full_motion_review": False,
             "human_native_audio_listening": False,
             "human_creative_approval": False,
@@ -974,11 +1193,15 @@ def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: di
         "inter_beat_gap_seconds": GAP,
         "final_narrated_end_seconds": round(vo_starts[-1] + vo_durations[-1], 3),
         "mastering": {
-            "target": "web / -14 LUFS, nine unchanged audio gates, VO clarity correction",
+            "target": "web / -14 LUFS, nine unchanged audio gates, VO glitch correction",
             "chain_id": MASTER_CHAIN_ID,
             "voice_quality_fix": {
-                "removed": ["-2 dB treble cut", "32-sample broad declick"],
-                "replaced_with": "7-sample narrow click repair + gentle limiter",
+                "removed": ["-2 dB treble cut", "32-sample broad declick",
+                            "7-sample narrow declick / piecewise-linear ramps"],
+                "replaced_with": ("loudness calibration + gentle limiter, then one continuous "
+                                  "soft-knee slope conditioner with no sample replacement"),
+                "slope_cap": VO_SLOPE_CAP,
+                "no_piecewise_linear_sample_ramps": True,
                 "no_music_sfx_procedural_bed_or_audio_substitution": True,
             },
             "attempts": attempts,
@@ -989,42 +1212,23 @@ def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: di
     }
     save_json(REVIEW / "native_audio_ledger_v10.json", native_audio_ledger)
 
-    upload_metadata = {
-        "edition": "v10_one_clip_artemis_ii",
-        "status": "draft_not_published",
-        "target_title_chars_max": 50,
-        "title": "Water Bubble Flips an Astronaut's Face",
-        "title_chars": len("Water Bubble Flips an Astronaut's Face"),
-        "description": [
-            "A floating water sphere aboard Artemis II acts like a liquid lens, flipping an astronaut's face upside down. We break down the refraction, keep NASA's native crew audio, and replay the detail.",
-            "Source: NASA, Fun with Water Bubbles (2026-04-04), NASA ID art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman.",
-            "NASA media guidelines: " + NASA_GUIDELINES + ". NASA is acknowledged; no NASA endorsement is implied and no NASA insignia is used.",
-            "Original contribution: research, commentary, replay analysis, word-by-word captions and a generic synthetic deep-male voiceover.",
-            "Identifiable astronauts / possible CSA personnel appear. Commercial, promotional, advertising or packaging use may require additional clearance; no written permission or legal opinion is claimed.",
-            "No invented date, injury, outcome, AI status, view count or audience-result claim.",
-        ],
-        "hashtags": ["#Shorts", "#NASA", "#ArtemisII", "#Science"],
-        "disclosure": {
-            "realistic_synthetic_media": False,
-            "generic_synthetic_voiceover": True,
-            "real_person_voice_clone": False,
-            "synthetic_voice_described_in_description": True,
-        },
-        "rights": {
-            "clip_license_recorded": True,
-            "attribution_recorded": True,
-            "restrictions_recorded": True,
-            "full_legal_review": False,
-        },
-        "claims": {
-            "human_creative_approval": False,
-            "technical_qc_pass": True,
-            "virality_guaranteed": False,
-            "retention_guaranteed": False,
-            "audience_results_claimed": False,
-        },
-    }
-    save_json(REVIEW / "upload_metadata_v10.json", upload_metadata)
+    # Preserve the completed forensic metadata pack (title, description, hashtags,
+    # tags, claims, cross-platform adaptations). Only QC-linked fields are refreshed
+    # here; the metadata study builder is the owner of the editorial content.
+    upload_path = REVIEW / "upload_metadata_v10.json"
+    if upload_path.exists():
+        upload_metadata = json.loads(upload_path.read_text(encoding="utf-8"))
+    else:
+        upload_metadata = {"edition": "v10_one_clip_artemis_ii",
+                           "status": "draft_not_published", "claims": {}}
+    upload_metadata["status"] = "draft_not_published"
+    upload_metadata.setdefault("claims", {}).update({
+        "human_creative_approval": False,
+        "virality_guaranteed": False,
+        "retention_guaranteed": False,
+        "audience_results_claimed": False,
+    })
+    save_json(upload_path, upload_metadata)
 
     ass_text = ASS_PATH.read_text(encoding="utf-8")
     video_graph = LAST_VIDEO_GRAPH
@@ -1110,8 +1314,32 @@ def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: di
     save_json(REVIEW / "technical_qc.json", technical_qc)
     save_json(REVIEW / "audio_qc.json", gate_result)
 
+    summary_path = REVIEW / "qc_summary.json"
+    prior_summary = (json.loads(summary_path.read_text(encoding="utf-8"))
+                     if summary_path.exists() else {})
+    base_evidence = [
+        str((REVIEW / "audio_qc.json").relative_to(ROOT)),
+        str((REVIEW / "technical_qc.json").relative_to(ROOT)),
+        str((REVIEW / "edit_ledger_v10.json").relative_to(ROOT)),
+        str((REVIEW / "native_audio_ledger_v10.json").relative_to(ROOT)),
+        str((REVIEW / "rights_ledger_v10.json").relative_to(ROOT)),
+        str((REVIEW / "caption_timings.json").relative_to(ROOT)),
+        str((REVIEW / "contact_sheets_manifest.json").relative_to(ROOT)),
+        str((REVIEW / "upload_metadata_v10.json").relative_to(ROOT)),
+        str(ASS_PATH.relative_to(ROOT)),
+    ]
+    # Preserve the forensic metadata study, the VO-fix evidence and waveform evidence
+    # already indexed by earlier runs instead of silently dropping them.
+    evidence = list(dict.fromkeys(list(prior_summary.get("evidence", [])) + base_evidence + [
+        str((REVIEW / "vo_quality_fix_v10.json").relative_to(ROOT)),
+        str((REVIEW / "vo_spectrum_comparison.png").relative_to(ROOT)),
+        str((REVIEW / "vo_waveform_comparison.png").relative_to(ROOT)),
+        str((REVIEW / "viral_metadata_study_v10.md").relative_to(ROOT)),
+        str((REVIEW / "viral_metadata_v10.json").relative_to(ROOT)),
+        str((REVIEW / "viral_metadata_sources_v10.json").relative_to(ROOT)),
+    ]))
     qc_summary = {
-        "edition": "v10_one_clip_artemis_ii",
+        "edition": "v10_one_clip_artemis_ii_vo_glitch_fix",
         "deliverable": str(DELIVERABLE.relative_to(ROOT)),
         "bytes": DELIVERABLE.stat().st_size,
         "sha256": sha256(DELIVERABLE),
@@ -1137,22 +1365,19 @@ def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: di
         "virality_guarantee": False,
         "source": {"nasa_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
                    "source_page": NASA_PAGE, "sha256": SOURCE_SHA},
-        "evidence": [
-            str((REVIEW / "audio_qc.json").relative_to(ROOT)),
-            str((REVIEW / "technical_qc.json").relative_to(ROOT)),
-            str((REVIEW / "edit_ledger_v10.json").relative_to(ROOT)),
-            str((REVIEW / "native_audio_ledger_v10.json").relative_to(ROOT)),
-            str((REVIEW / "rights_ledger_v10.json").relative_to(ROOT)),
-            str((REVIEW / "caption_timings.json").relative_to(ROOT)),
-            str((REVIEW / "contact_sheets_manifest.json").relative_to(ROOT)),
-            str((REVIEW / "upload_metadata_v10.json").relative_to(ROOT)),
-            str(ASS_PATH.relative_to(ROOT)),
-        ],
+        "evidence": evidence,
         "note": ("technical_pass is deliberately separate from human_creative_approval=false. "
+                 "The VO glitch correction removed all piecewise-linear declick ramps and uses "
+                 "one continuous slope conditioner; no sample is replaced by interpolation. "
                  "The Short is an original commentary/analysis edit of one official NASA master, "
-                 "not a raw reupload. No guaranteed virality or audience result is claimed."),
+                 "not a raw reupload. The forensic metadata study and sources ledger are "
+                 "drafting/research evidence only. No guaranteed virality, perfection, legal "
+                 "clearance or audience result is claimed."),
     }
-    save_json(REVIEW / "qc_summary.json", qc_summary)
+    for key in ("metadata_study", "metadata_pack", "metadata_sources"):
+        if key in prior_summary:
+            qc_summary[key] = prior_summary[key]
+    save_json(summary_path, qc_summary)
 
 
 VO_WAVS = [AUDIO_DIR / f"vo_b{i}_v10.wav" for i in range(1, 9)]
@@ -1181,13 +1406,21 @@ def main() -> int:
     TOTAL_SAMPLES = int(round(TOTAL_DURATION * SR))
     print(f"VO end {vo_end:.3f}s; target {TOTAL_DURATION:.3f}s / {FRAME_COUNT} frames", flush=True)
 
-    # Capture the rejected de03272 audio before calibrate_and_mux overwrites the MP4.
+    # Capture the rejected 8965beb audio before calibrate_and_mux overwrites the MP4.
     before_sha = sha256(DELIVERABLE)
     before_bytes = DELIVERABLE.stat().st_size
     before_full = spectral_metrics(DELIVERABLE)
     before_wav = WORK / "vo_before_fix.wav"
     decode_audio_window(DELIVERABLE, before_wav)
     before_window = window_spectral_metrics(before_wav)
+    before_full_wav = WORK / "vo_before_full.wav"
+    decode_full_audio(DELIVERABLE, before_full_wav)
+    before_ramps_aac = ramp_diagnostic(before_full_wav)
+    # The committed final_mix WAV is the exact pre-fix audio (AAC decoding perturbs
+    # samples enough to hide straight-line runs), so measure the ramps on the WAV.
+    before_mix_wav = WORK / "vo_before_mix.wav"
+    shutil.copyfile(AUDIO_DIR / "final_mix_v10.wav", before_mix_wav)
+    before_ramps_wav = ramp_diagnostic(before_mix_wav)
 
     timings = build_captions(vo_durations, vo_starts, TOTAL_DURATION)
     print(f"Wrote {timings['word_count']} word-by-word caption events", flush=True)
@@ -1212,45 +1445,101 @@ def main() -> int:
     after_window = window_spectral_metrics(after_wav)
     spectrogram = REVIEW / "vo_spectrum_comparison.png"
     make_vo_spectrum_comparison(before_wav, after_wav, spectrogram)
+    after_full_wav = WORK / "vo_after_full.wav"
+    decode_full_audio(DELIVERABLE, after_full_wav)
+    after_ramps_aac = ramp_diagnostic(after_full_wav)
+    after_ramps_wav = ramp_diagnostic(final_mix)
+    waveform_comparison = REVIEW / "vo_waveform_comparison.png"
+    make_vo_waveform_comparison(before_mix_wav, final_mix, waveform_comparison)
+    frequency_evidence = frequency_diagnostic(WORK / "mastered_v10.wav")
 
     write_ledgers(vo_durations, vo_starts, timings, audio_info, gate_result, attempts,
                   final_mix, probe, frames, safe_zone, contact_sheets)
 
-    repair_events = [
-        {"stage": a["stage"], **a["narrow_declick"]}
-        for a in attempts
-        if str(a.get("stage", "")).endswith("narrow_declick")
+    conditioning_events = [
+        a["conditioning"] for a in attempts
+        if a.get("stage") == "continuous_transient_conditioning"
     ]
     vo_fix_path = REVIEW / "vo_quality_fix_v10.json"
+    prior_fix = (json.loads(vo_fix_path.read_text(encoding="utf-8"))
+                 if vo_fix_path.exists() else {})
+    prior_narrow_events = prior_fix.get("correction", {}).get("narrow_declick_events", [])
+    prior_narrow_jumps = sum(int(e.get("jumps_repaired", 0)) for e in prior_narrow_events)
+    prior_narrow_samples = sum(int(e.get("interior_samples_changed", 0))
+                               for e in prior_narrow_events)
     vo_fix = {
-        "edition": "v10_one_clip_artemis_ii_vo_clarity_fix",
-        "user_report_exact": "Acha ha theek ha Lekin voice over q ghut ghut kr arh ha usse theek Karo",
-        "interpretation": "choked / gurgling / strained / muffled voice-over",
+        "edition": "v10_one_clip_artemis_ii_vo_glitch_fix",
+        "user_report_exact": ("Acha voice over me abhi bhi buffering glitches jesa sound "
+                              "kar rha ha usse theek karo ache ese"),
+        "interpretation": "voice-over still sounds like buffering glitches / stutter / dropouts",
+        "previous_user_report_exact": ("Acha ha theek ha Lekin voice over q ghut ghut kr "
+                                       "arh ha usse theek Karo"),
+        "correction_history": [
+            {"commit": "de03272ee65e36d2fbf17a47a4e5f880d038fada",
+             "chain": "-2 dB treble cut + 32-sample broad linear declick",
+             "perceptual_result": "rejected: choked / gurgling VO"},
+            {"commit": "8965bebca9634139e1f42854fb84380eff189def",
+             "chain": "7-sample narrow linear declick + gentle limiter",
+             "perceptual_result": "rejected: buffering-glitch-like VO"},
+        ],
         "deliverable": str(DELIVERABLE.relative_to(ROOT)),
         "before": {
-            "commit": "de03272ee65e36d2fbf17a47a4e5f880d038fada",
+            "commit": "8965bebca9634139e1f42854fb84380eff189def",
+            "head_at_time_of_report": "e1ffabfcd7fb12063fb4b3e26b2e37259b80ba74",
             "sha256": before_sha, "bytes": before_bytes,
             "full_mix_spectral": before_full,
             "first_8s_vo_spectral": before_window,
+            "final_mix_wav_ramp_diagnostic": before_ramps_wav,
+            "decoded_aac_diagnostic": before_ramps_aac,
         },
         "after": {
             "sha256": sha256(DELIVERABLE), "bytes": DELIVERABLE.stat().st_size,
             "full_mix_spectral": after_full,
             "first_8s_vo_spectral": after_window,
+            "final_mix_wav_ramp_diagnostic": after_ramps_wav,
+            "decoded_aac_diagnostic": after_ramps_aac,
         },
         "measured_delta": {
             "air_over_high_mid_db": round(after_full["air_over_high_mid_db"] -
                                            before_full["air_over_high_mid_db"], 3),
             "harsh_over_high_mid_db": round(after_full["harsh_over_high_mid_db"] -
                                              before_full["harsh_over_high_mid_db"], 3),
+            "linear_ramp_groups_in_final_mix_wav": (
+                after_ramps_wav["linear_ramp_groups_len_ge_5"] -
+                before_ramps_wav["linear_ramp_groups_len_ge_5"]),
         },
-        "root_cause": diagnostic,
+        "root_cause": {
+            "summary": ("The rejected 8965beb chain repaired thousands of individually detected "
+                        "sample-to-sample jumps by writing 5-sample straight lines over natural "
+                        "speech transients. Those dense micro-edits flatten high-frequency "
+                        "sibilance in short bursts across the whole narration, which is audible "
+                        "as buffering/stutter. The jumps were not real digital clicks."),
+            "legacy_broad_declick_diagnostic": diagnostic,
+            "narrow_declick_forensics": {
+                "recorded_events_from_previous_evidence": prior_narrow_events,
+                "total_jumps_repaired": prior_narrow_jumps,
+                "total_interior_samples_replaced_with_linear_ramps": prior_narrow_samples,
+                "note": ("Sum of the master and calibration declick passes recorded in the "
+                         "previous vo_quality_fix_v10.json; the delivered WAV also shows "
+                         "exactly-straight-line runs in active speech."),
+            },
+            "gate_frequency_evidence": frequency_evidence,
+        },
         "correction": {
             "chain_id": MASTER_CHAIN_ID,
-            "removed": ["-2 dB treble cut at 3 kHz", "32-sample broad linear declick"],
-            "replaced_with": "7-sample narrow click repair around discontinuities",
+            "removed": ["-2 dB treble cut at 3 kHz", "32-sample broad linear declick",
+                        "7-sample narrow declick / piecewise-linear sample ramps",
+                        "any per-jump sample replacement"],
+            "replaced_with": ("linear loudnorm, then loudness calibration + gentle limiter, "
+                              "then ONE continuous soft-knee slope conditioner"),
+            "order_rationale": ("Gain is applied before conditioning so AAC encoding and "
+                                "calibration cannot push slopes back over the QC threshold."),
             "limiter": LIMITER_FILTER,
-            "narrow_declick_events": repair_events,
+            "slope_cap": VO_SLOPE_CAP,
+            "shape_exponent": VO_SLOPE_SHAPE,
+            "samples_replaced_by_interpolation": 0,
+            "piecewise_linear_ramp_windows": 0,
+            "conditioning_events": conditioning_events,
             "source_vo_chunks_unchanged": True,
             "voice_id": "voice-01",
             "no_music_sfx_procedural_bed_or_audio_substitution": True,
@@ -1265,8 +1554,11 @@ def main() -> int:
             "human_legal_review": False,
         },
         "spectrogram": str(spectrogram.relative_to(ROOT)),
-        "note": ("Objective engineering correction and measurements only. No human listening, "
-                 "creative approval, legal opinion, perfection, virality or audience result is claimed."),
+        "waveform_comparison": str(waveform_comparison.relative_to(ROOT)),
+        "note": ("Objective engineering correction and measurements only. This is a "
+                 "response to a perceptual rejection, not a human listening sign-off: no "
+                 "human listening, creative approval, legal opinion, perfection, virality "
+                 "or audience result is claimed."),
     }
     summary_path = REVIEW / "qc_summary.json"
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
@@ -1276,32 +1568,43 @@ def main() -> int:
     # Refresh the evidence index and the ledgers that were written before the fix JSON.
     fix_rel = str(vo_fix_path.relative_to(ROOT))
     spec_rel = str(spectrogram.relative_to(ROOT))
-    summary["edition"] = "v10_one_clip_artemis_ii_vo_clarity_fix"
+    wave_rel = str(waveform_comparison.relative_to(ROOT))
+    summary["edition"] = "v10_one_clip_artemis_ii_vo_glitch_fix"
     summary["voice_quality_fix"] = {
         "applied": True,
         "evidence": fix_rel,
         "spectrogram": spec_rel,
-        "removed": ["-2 dB treble cut", "32-sample broad declick"],
+        "waveform_comparison": wave_rel,
+        "chain_id": MASTER_CHAIN_ID,
+        "removed": ["-2 dB treble cut", "32-sample broad declick",
+                    "7-sample narrow declick / linear ramps"],
+        "replaced_with": "one continuous soft-knee slope conditioner, zero sample replacement",
+        "linear_ramp_groups_before": before_ramps_wav["linear_ramp_groups_len_ge_5"],
+        "linear_ramp_groups_after": after_ramps_wav["linear_ramp_groups_len_ge_5"],
         "air_over_high_mid_before_db": before_full["air_over_high_mid_db"],
         "air_over_high_mid_after_db": after_full["air_over_high_mid_db"],
         "human_native_audio_listening": False,
         "human_creative_approval": False,
     }
-    for item in (fix_rel, spec_rel):
+    for item in (fix_rel, spec_rel, wave_rel):
         if item not in summary["evidence"]:
             summary["evidence"].append(item)
     summary["note"] = (
         "technical_pass is deliberately separate from human_creative_approval=false. "
-        "The VO clarity correction removed the damped treble cut and broad declick; "
-        "the Short remains an original commentary/analysis edit of one official NASA master, "
-        "not a raw reupload. No guaranteed virality or audience result is claimed.")
+        "The VO glitch correction removed every piecewise-linear declick ramp and uses one "
+        "continuous slope conditioner with zero sample replacement; the eight source "
+        "voice-01 WAVs are unchanged. The forensic metadata study and sources ledger are "
+        "drafting/research evidence only. The Short remains an original commentary/analysis "
+        "edit of one official NASA master, not a raw reupload. No guaranteed virality, "
+        "perfection, legal clearance or audience result is claimed.")
     save_json(summary_path, summary)
 
     tq_path = REVIEW / "technical_qc.json"
     tq = json.loads(tq_path.read_text(encoding="utf-8"))
-    tq["edition"] = "v10_one_clip_artemis_ii_vo_clarity_fix"
+    tq["edition"] = "v10_one_clip_artemis_ii_vo_glitch_fix"
     tq["voice_quality_fix_evidence"] = fix_rel
     tq["voice_quality_fix_spectrogram"] = spec_rel
+    tq["voice_quality_fix_waveform_comparison"] = wave_rel
     tq["voice_quality_fix"] = summary["voice_quality_fix"]
     save_json(tq_path, tq)
 
@@ -1309,6 +1612,9 @@ def main() -> int:
     aq = json.loads(aq_path.read_text(encoding="utf-8"))
     aq["voice_quality_fix"] = {
         "evidence": fix_rel, "chain_id": MASTER_CHAIN_ID,
+        "samples_replaced_by_interpolation": 0,
+        "linear_ramp_groups_before": before_ramps_wav["linear_ramp_groups_len_ge_5"],
+        "linear_ramp_groups_after": after_ramps_wav["linear_ramp_groups_len_ge_5"],
         "air_over_high_mid_before_db": before_full["air_over_high_mid_db"],
         "air_over_high_mid_after_db": after_full["air_over_high_mid_db"],
         "human_native_audio_listening": False,
@@ -1323,7 +1629,7 @@ def main() -> int:
 
     el_path = REVIEW / "edit_ledger_v10.json"
     el = json.loads(el_path.read_text(encoding="utf-8"))
-    el["status"] = "rendered_vo_clarity_fix"
+    el["status"] = "rendered_vo_glitch_fix"
     save_json(el_path, el)
 
     um_path = REVIEW / "upload_metadata_v10.json"

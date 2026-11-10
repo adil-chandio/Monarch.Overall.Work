@@ -7,6 +7,13 @@ Run from the repository root:
 Outputs live in review/final/. This script deliberately records non-claims and
 uncertainties; it does not assert virality, perfection, legal compliance, human
 creative approval, or audience results.
+
+POINT-IN-TIME SNAPSHOT: the audio_forensics figures embedded here were measured at
+evidence cut-off 8965beb. The delivered audio was subsequently revised to remove a
+reported buffering-glitch VO artefact (see vo_quality_fix_v10.json and the
+post_cutoff_audio_revision key in viral_metadata_v10.json). Re-running this builder
+regenerates the historical figures and would overwrite the post-cut-off note and the
+live QC/metadata patches; refresh the audio inputs first if a current rebuild is needed.
 """
 from __future__ import annotations
 

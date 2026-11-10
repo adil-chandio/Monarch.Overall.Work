@@ -1,47 +1,24 @@
 {
-  "edition": "v10_one_clip_artemis_ii_vo_clarity_fix",
-  "user_report_exact": "Acha ha theek ha Lekin voice over q ghut ghut kr arh ha usse theek Karo",
-  "interpretation": "choked / gurgling / strained / muffled voice-over",
+  "edition": "v10_one_clip_artemis_ii_vo_glitch_fix",
+  "user_report_exact": "Acha voice over me abhi bhi buffering glitches jesa sound kar rha ha usse theek karo ache ese",
+  "interpretation": "voice-over still sounds like buffering glitches / stutter / dropouts",
+  "previous_user_report_exact": "Acha ha theek ha Lekin voice over q ghut ghut kr arh ha usse theek Karo",
+  "correction_history": [
+    {
+      "commit": "de03272ee65e36d2fbf17a47a4e5f880d038fada",
+      "chain": "-2 dB treble cut + 32-sample broad linear declick",
+      "perceptual_result": "rejected: choked / gurgling VO"
+    },
+    {
+      "commit": "8965bebca9634139e1f42854fb84380eff189def",
+      "chain": "7-sample narrow linear declick + gentle limiter",
+      "perceptual_result": "rejected: buffering-glitch-like VO"
+    }
+  ],
   "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
   "before": {
-    "commit": "de03272ee65e36d2fbf17a47a4e5f880d038fada",
-    "sha256": "1cfd521f6fea600b8775440cbc114b1d86c9b4c0ad3fc91499f69b9eb333134b",
-    "bytes": 34500691,
-    "full_mix_spectral": {
-      "harsh_over_high_mid_db": -2.78,
-      "air_over_high_mid_db": -5.55,
-      "presence_over_high_mid_db": 3.45,
-      "band_db_rel_total": {
-        "sub": -21.27,
-        "bass": -7.64,
-        "low_mid": -4.32,
-        "mid": -7.03,
-        "high_mid": -12.03,
-        "presence": -8.58,
-        "harsh": -14.81,
-        "air": -17.58
-      },
-      "harsh_flag": false,
-      "dull_flag": false
-    },
-    "first_8s_vo_spectral": {
-      "window_seconds": 8.0,
-      "harsh_over_high_mid_db": -3.2,
-      "air_over_high_mid_db": -5.28,
-      "presence_over_high_mid_db": 3.48,
-      "band_db_rel_total": {
-        "sub": -19.87,
-        "bass": -6.36,
-        "low_mid": -4.65,
-        "mid": -8.55,
-        "high_mid": -11.61,
-        "presence": -8.13,
-        "harsh": -14.81,
-        "air": -16.89
-      }
-    }
-  },
-  "after": {
+    "commit": "8965bebca9634139e1f42854fb84380eff189def",
+    "head_at_time_of_report": "e1ffabfcd7fb12063fb4b3e26b2e37259b80ba74",
     "sha256": "efce2ea3391828d4d638d980db179330bd88f21a12f7864e6b0bcac58d50a91f",
     "bytes": 34500681,
     "full_mix_spectral": {
@@ -76,97 +53,249 @@
         "harsh": -10.27,
         "air": -11.31
       }
+    },
+    "final_mix_wav_ramp_diagnostic": {
+      "seconds": 49.4,
+      "linear_ramp_groups_len_ge_5": 401,
+      "linear_ramp_samples": 2123,
+      "linear_ramp_fraction": 0.000895,
+      "max_sample_jump": 0.35,
+      "click_runs": 0
+    },
+    "decoded_aac_diagnostic": {
+      "seconds": 49.4,
+      "linear_ramp_groups_len_ge_5": 0,
+      "linear_ramp_samples": 0,
+      "linear_ramp_fraction": 0.0,
+      "max_sample_jump": 0.37,
+      "click_runs": 0
+    }
+  },
+  "after": {
+    "sha256": "608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7",
+    "bytes": 34495086,
+    "full_mix_spectral": {
+      "harsh_over_high_mid_db": 1.06,
+      "air_over_high_mid_db": 0.83,
+      "presence_over_high_mid_db": 3.74,
+      "band_db_rel_total": {
+        "sub": -35.89,
+        "bass": -8.46,
+        "low_mid": -4.98,
+        "mid": -7.51,
+        "high_mid": -12.09,
+        "presence": -8.35,
+        "harsh": -11.03,
+        "air": -11.26
+      },
+      "harsh_flag": false,
+      "dull_flag": false
+    },
+    "first_8s_vo_spectral": {
+      "window_seconds": 8.0,
+      "harsh_over_high_mid_db": 0.85,
+      "air_over_high_mid_db": 0.98,
+      "presence_over_high_mid_db": 3.54,
+      "band_db_rel_total": {
+        "sub": -36.33,
+        "bass": -7.21,
+        "low_mid": -5.63,
+        "mid": -9.68,
+        "high_mid": -11.26,
+        "presence": -7.72,
+        "harsh": -10.41,
+        "air": -10.28
+      }
+    },
+    "final_mix_wav_ramp_diagnostic": {
+      "seconds": 49.4,
+      "linear_ramp_groups_len_ge_5": 0,
+      "linear_ramp_samples": 0,
+      "linear_ramp_fraction": 0.0,
+      "max_sample_jump": 0.3171,
+      "click_runs": 0
+    },
+    "decoded_aac_diagnostic": {
+      "seconds": 49.4,
+      "linear_ramp_groups_len_ge_5": 0,
+      "linear_ramp_samples": 0,
+      "linear_ramp_fraction": 0.0,
+      "max_sample_jump": 0.3524,
+      "click_runs": 0
     }
   },
   "measured_delta": {
-    "air_over_high_mid_db": 5.27,
-    "harsh_over_high_mid_db": 3.76
+    "air_over_high_mid_db": 1.11,
+    "harsh_over_high_mid_db": 0.08,
+    "linear_ramp_groups_in_final_mix_wav": -401
   },
   "root_cause": {
-    "legacy_chain_id": "dualmono_linear_loudnorm_treble_declick",
-    "legacy_chain_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=35,treble=f=3000:g=-2:w=0.5,loudnorm=I=-14:TP=-1.5:LRA=7:measured_I=-21.94:measured_TP=-1.93:measured_LRA=3.80:measured_thresh=-32.47:offset=0.61:linear=true:print_format=summary",
-    "legacy_treble_cut_db": -2.0,
-    "premaster_spectral": {
-      "harsh_over_high_mid_db": 1.34,
-      "air_over_high_mid_db": 1.36,
-      "presence_over_high_mid_db": 3.79,
-      "band_db_rel_total": {
-        "sub": -35.76,
-        "bass": -8.91,
-        "low_mid": -5.43,
-        "mid": -7.92,
-        "high_mid": -11.6,
-        "presence": -7.81,
-        "harsh": -10.26,
-        "air": -10.24
+    "summary": "The rejected 8965beb chain repaired thousands of individually detected sample-to-sample jumps by writing 5-sample straight lines over natural speech transients. Those dense micro-edits flatten high-frequency sibilance in short bursts across the whole narration, which is audible as buffering/stutter. The jumps were not real digital clicks.",
+    "legacy_broad_declick_diagnostic": {
+      "legacy_chain_id": "dualmono_linear_loudnorm_treble_declick",
+      "legacy_chain_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=35,treble=f=3000:g=-2:w=0.5,loudnorm=I=-14:TP=-1.5:LRA=7:measured_I=-21.94:measured_TP=-1.93:measured_LRA=3.80:measured_thresh=-32.47:offset=0.61:linear=true:print_format=summary",
+      "legacy_treble_cut_db": -2.0,
+      "premaster_spectral": {
+        "harsh_over_high_mid_db": 1.34,
+        "air_over_high_mid_db": 1.36,
+        "presence_over_high_mid_db": 3.79,
+        "band_db_rel_total": {
+          "sub": -35.76,
+          "bass": -8.91,
+          "low_mid": -5.43,
+          "mid": -7.92,
+          "high_mid": -11.6,
+          "presence": -7.81,
+          "harsh": -10.26,
+          "air": -10.24
+        },
+        "harsh_flag": false,
+        "dull_flag": false
       },
-      "harsh_flag": false,
-      "dull_flag": false
-    },
-    "legacy_master_spectral": {
-      "harsh_over_high_mid_db": 1.08,
-      "air_over_high_mid_db": 0.65,
-      "presence_over_high_mid_db": 3.65,
-      "band_db_rel_total": {
-        "sub": -35.91,
-        "bass": -8.42,
-        "low_mid": -4.99,
-        "mid": -7.52,
-        "high_mid": -12.02,
-        "presence": -8.37,
-        "harsh": -10.94,
-        "air": -11.37
+      "legacy_master_spectral": {
+        "harsh_over_high_mid_db": 1.08,
+        "air_over_high_mid_db": 0.65,
+        "presence_over_high_mid_db": 3.65,
+        "band_db_rel_total": {
+          "sub": -35.91,
+          "bass": -8.42,
+          "low_mid": -4.99,
+          "mid": -7.52,
+          "high_mid": -12.02,
+          "presence": -8.37,
+          "harsh": -10.94,
+          "air": -11.37
+        },
+        "harsh_flag": false,
+        "dull_flag": false
       },
-      "harsh_flag": false,
-      "dull_flag": false
-    },
-    "legacy_broad_declick": {
-      "groups": 3888,
-      "samples_changed": 100724,
-      "fraction_changed": 0.042478
-    },
-    "legacy_broad_declicked_spectral": {
-      "harsh_over_high_mid_db": -2.32,
-      "air_over_high_mid_db": -4.9,
-      "presence_over_high_mid_db": 3.49,
-      "band_db_rel_total": {
-        "sub": -23.1,
-        "bass": -7.95,
-        "low_mid": -4.57,
-        "mid": -7.06,
-        "high_mid": -11.56,
-        "presence": -8.07,
-        "harsh": -13.88,
-        "air": -16.46
+      "legacy_broad_declick": {
+        "groups": 3888,
+        "samples_changed": 100724,
+        "fraction_changed": 0.042478
       },
-      "harsh_flag": false,
-      "dull_flag": false
+      "legacy_broad_declicked_spectral": {
+        "harsh_over_high_mid_db": -2.32,
+        "air_over_high_mid_db": -4.9,
+        "presence_over_high_mid_db": 3.49,
+        "band_db_rel_total": {
+          "sub": -23.1,
+          "bass": -7.95,
+          "low_mid": -4.57,
+          "mid": -7.06,
+          "high_mid": -11.56,
+          "presence": -8.07,
+          "harsh": -13.88,
+          "air": -16.46
+        },
+        "harsh_flag": false,
+        "dull_flag": false
+      }
+    },
+    "narrow_declick_forensics": {
+      "recorded_events_from_previous_evidence": [
+        {
+          "stage": "master_narrow_declick",
+          "threshold": 0.35,
+          "half_width_samples": 3,
+          "jumps_repaired": 5214,
+          "interior_samples_changed": 31284,
+          "fraction_changed": 0.013193
+        },
+        {
+          "stage": "calibration_0_narrow_declick",
+          "threshold": 0.35,
+          "half_width_samples": 3,
+          "jumps_repaired": 937,
+          "interior_samples_changed": 5622,
+          "fraction_changed": 0.002371
+        }
+      ],
+      "total_jumps_repaired": 6151,
+      "total_interior_samples_replaced_with_linear_ramps": 36906,
+      "note": "Sum of the master and calibration declick passes recorded in the previous vo_quality_fix_v10.json; the delivered WAV also shows exactly-straight-line runs in active speech."
+    },
+    "gate_frequency_evidence": {
+      "method": "measurement_only_fft_brickwall_on_undamaged_master",
+      "rows": [
+        {
+          "brickwall_cutoff_hz": null,
+          "max_sample_jump": 0.9627,
+          "click_runs": 1222
+        },
+        {
+          "brickwall_cutoff_hz": 16000,
+          "max_sample_jump": 0.9692,
+          "click_runs": 1237
+        },
+        {
+          "brickwall_cutoff_hz": 12000,
+          "max_sample_jump": 0.8886,
+          "click_runs": 1033
+        },
+        {
+          "brickwall_cutoff_hz": 10000,
+          "max_sample_jump": 0.7739,
+          "click_runs": 622
+        },
+        {
+          "brickwall_cutoff_hz": 8000,
+          "max_sample_jump": 0.5628,
+          "click_runs": 101
+        },
+        {
+          "brickwall_cutoff_hz": 6000,
+          "max_sample_jump": 0.3713,
+          "click_runs": 0
+        }
+      ],
+      "conclusion": "Zero click runs require a ~6 kHz brickwall; the 0.35 absolute jump threshold therefore flags natural loud sibilance at -14 LUFS. Replacing those transients with linear ramps creates the stutter."
     }
   },
   "correction": {
-    "chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
+    "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
     "removed": [
       "-2 dB treble cut at 3 kHz",
-      "32-sample broad linear declick"
+      "32-sample broad linear declick",
+      "7-sample narrow declick / piecewise-linear sample ramps",
+      "any per-jump sample replacement"
     ],
-    "replaced_with": "7-sample narrow click repair around discontinuities",
+    "replaced_with": "linear loudnorm, then loudness calibration + gentle limiter, then ONE continuous soft-knee slope conditioner",
+    "order_rationale": "Gain is applied before conditioning so AAC encoding and calibration cannot push slopes back over the QC threshold.",
     "limiter": "alimiter=limit=0.80:attack=20:release=300:level=disabled",
-    "narrow_declick_events": [
+    "slope_cap": 0.28,
+    "shape_exponent": 4.0,
+    "samples_replaced_by_interpolation": 0,
+    "piecewise_linear_ramp_windows": 0,
+    "conditioning_events": [
       {
-        "stage": "master_narrow_declick",
-        "threshold": 0.35,
-        "half_width_samples": 3,
-        "jumps_repaired": 5214,
-        "interior_samples_changed": 31284,
-        "fraction_changed": 0.013193
-      },
-      {
-        "stage": "calibration_0_narrow_declick",
-        "threshold": 0.35,
-        "half_width_samples": 3,
-        "jumps_repaired": 937,
-        "interior_samples_changed": 5622,
-        "fraction_changed": 0.002371
+        "method": "continuous_soft_knee_slope_conditioner",
+        "slope_cap": 0.28,
+        "shape_exponent": 4.0,
+        "low_band_restore_crossover_hz": 2000,
+        "samples_replaced_by_interpolation": 0,
+        "piecewise_linear_ramp_windows": 0,
+        "low_band_200_1000_hz": {
+          "correlation_before_after": 1.0,
+          "difference_percent_of_original": 0.0133,
+          "note": "VO fundamental/low-mid band left essentially untouched"
+        },
+        "before": {
+          "max_sample_jump": 0.9171,
+          "jumps_over_0_35": 5577,
+          "click_runs": 1315,
+          "linear_ramp_groups": 0,
+          "linear_ramp_samples": 0,
+          "hf_5k_14k_energy_ratio": 0.1011
+        },
+        "after": {
+          "max_sample_jump": 0.3171,
+          "jumps_over_0_35": 0,
+          "click_runs": 0,
+          "linear_ramp_groups": 0,
+          "linear_ramp_samples": 0,
+          "hf_5k_14k_energy_ratio": 0.0787
+        }
       }
     ],
     "source_vo_chunks_unchanged": true,
@@ -193,5 +322,6 @@
     "human_legal_review": false
   },
   "spectrogram": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png",
-  "note": "Objective engineering correction and measurements only. No human listening, creative approval, legal opinion, perfection, virality or audience result is claimed."
+  "waveform_comparison": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_waveform_comparison.png",
+  "note": "Objective engineering correction and measurements only. This is a response to a perceptual rejection, not a human listening sign-off: no human listening, creative approval, legal opinion, perfection, virality or audience result is claimed."
 }

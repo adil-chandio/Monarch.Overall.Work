@@ -9,6 +9,8 @@
 **Machine-readable pack:** `production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_v10.json`  
 **Sources ledger:** `production/monarch-cam/caught_on_camera_commentary_v10/review/final/viral_metadata_sources_v10.json`
 
+> **Post-cut-off audio revision (VO glitch fix).** Is study ke baad user ne report kiya ke voice over me *“buffering glitches jesa sound”* tha. Isliye audio chain badla gaya: 7-sample narrow declick aur uski linear ramps hata kar ek continuous soft-knee slope conditioner lagaya gaya; kisi sample ko interpolation se replace nahi kiya gaya, aur VO ka 200–1000 Hz fundamental lagbhag untouched rakha gaya. Neeche diye gaye audio-forensics numbers (SHA-256 `efce2ea…`, 34,500,681 bytes, −14.66 LUFS, air −0.28 dB, narrow-repair events) **evidence cut-off `8965beb` ka historical snapshot** hain, current deliverable nahi. Current values ke liye `qc_summary.json`, `audio_qc.json` aur `vo_quality_fix_v10.json` dekhen: SHA-256 `608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7`, 34,495,086 bytes, chain `dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick`, −14.60 LUFS, 9/9 audio gates, 33/33 technical checks. Metadata recommendations, title/description/hashtags, policy matrix aur rights/legal caveats **unchanged** hain. Ye ek objective engineering correction hai — human listening sign-off, creative approval, legal clearance, perfection ya guaranteed result ka claim nahi.
+
 ---
 
 ## 0. Honesty gate — what this study does NOT claim

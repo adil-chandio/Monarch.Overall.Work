@@ -12,6 +12,40 @@
     "commit_subject": "fix(v10): clear choked VO with narrow declick and gentle limiter [skip ci]",
     "note": "No calendar 'today' is asserted; the cut-off is the committed evidence state."
   },
+  "post_cutoff_audio_revision": {
+    "note": "After this metadata study's evidence cut-off, the user reported that the voice-over still sounded like buffering glitches. The 7-sample narrow declick and its piecewise-linear ramps were removed and replaced with one continuous soft-knee slope conditioner; no sample is replaced by interpolation and the VO's 200-1000 Hz fundamental is left essentially untouched. All audio_forensics and vo_quality_fix figures elsewhere in this pack describe the 8965beb evidence cut-off snapshot, not the current deliverable.",
+    "user_report_exact": "Acha voice over me abhi bhi buffering glitches jesa sound kar rha ha usse theek karo ache ese",
+    "deliverable_sha256_current": "608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7",
+    "deliverable_bytes_current": 34495086,
+    "mastering_chain_id_current": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
+    "measured_current": {
+      "integrated_lufs": -14.6,
+      "lra_lu": 3.6,
+      "sample_peak_dbfs": -1.82,
+      "clipped_samples": 0,
+      "movement_db": 19.31,
+      "harsh_over_high_mid_db": 1.06,
+      "air_over_high_mid_db": 0.83,
+      "click_runs": 0,
+      "nine_audio_gates_pass": true,
+      "technical_checks": "33/33"
+    },
+    "current_evidence": [
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_quality_fix_v10.json",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/audio_qc.json",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json",
+      "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_waveform_comparison.png"
+    ],
+    "linear_ramp_groups_before": 401,
+    "linear_ramp_groups_after": 0,
+    "low_band_200_1000_hz_difference_percent": 0.0133,
+    "metadata_recommendations_unchanged": true,
+    "human_creative_approval": false,
+    "human_native_audio_listening": false,
+    "human_legal_review": false,
+    "not_a_listening_sign_off": true,
+    "not_a_perfection_or_virality_claim": true
+  },
   "scope_and_assumptions": {
     "primary_platform": "YouTube Shorts",
     "secondary_platforms": [

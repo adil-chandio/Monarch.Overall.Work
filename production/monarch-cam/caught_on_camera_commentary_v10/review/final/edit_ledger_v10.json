@@ -1,6 +1,6 @@
 {
   "edition": "v10_one_clip_artemis_ii",
-  "status": "rendered_vo_clarity_fix",
+  "status": "rendered_vo_glitch_fix",
   "timeline": {
     "duration_seconds": 49.4,
     "fps": 30,
@@ -180,7 +180,11 @@
     "voice_quality_fix_applied": true,
     "legacy_broad_declick_removed": true,
     "legacy_treble_cut_removed": true,
-    "narrow_click_repair_only": true,
+    "legacy_narrow_declick_removed": true,
+    "continuous_transient_conditioning_only": true,
+    "no_piecewise_linear_sample_ramps": true,
+    "no_sample_replaced_by_interpolation": true,
+    "source_vo_chunks_unchanged": true,
     "human_full_motion_review": false,
     "human_native_audio_listening": false,
     "human_creative_approval": false,

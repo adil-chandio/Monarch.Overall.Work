@@ -113,20 +113,23 @@
   "inter_beat_gap_seconds": 0.1,
   "final_narrated_end_seconds": 49.392,
   "mastering": {
-    "target": "web / -14 LUFS, nine unchanged audio gates, VO clarity correction",
-    "chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
+    "target": "web / -14 LUFS, nine unchanged audio gates, VO glitch correction",
+    "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
     "voice_quality_fix": {
       "removed": [
         "-2 dB treble cut",
-        "32-sample broad declick"
+        "32-sample broad declick",
+        "7-sample narrow declick / piecewise-linear ramps"
       ],
-      "replaced_with": "7-sample narrow click repair + gentle limiter",
+      "replaced_with": "loudness calibration + gentle limiter, then one continuous soft-knee slope conditioner with no sample replacement",
+      "slope_cap": 0.28,
+      "no_piecewise_linear_sample_ramps": true,
       "no_music_sfx_procedural_bed_or_audio_substitution": true
     },
     "attempts": [
       {
         "stage": "loudnorm_measurement",
-        "chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
+        "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
         "chain_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=35,loudnorm=I=-14:TP=-1.5:LRA=7:measured_I=-21.94:measured_TP=-1.93:measured_LRA=3.80:measured_thresh=-32.47:offset=0.61:linear=true:print_format=summary",
         "loudnorm_measurement": {
           "input_i": "-21.94",
@@ -140,74 +143,95 @@
           "normalization_type": "dynamic",
           "target_offset": "0.61"
         },
-        "voice_quality_fix": "removed -2 dB treble cut and 32-sample broad declick"
+        "voice_quality_fix": "removed -2 dB treble cut, 32-sample broad declick and 7-sample narrow declick; no sample is replaced by a linear ramp",
+        "declared_order": "linear loudnorm -> loudness calibration + gentle limiter -> continuous slope conditioner"
       },
       {
-        "stage": "master_narrow_declick",
-        "narrow_declick": {
-          "threshold": 0.35,
-          "half_width_samples": 3,
-          "jumps_repaired": 5214,
-          "interior_samples_changed": 31284,
-          "fraction_changed": 0.013193
-        }
-      },
-      {
-        "chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
-        "chain_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=35,loudnorm=I=-14:TP=-1.5:LRA=7:measured_I=-21.94:measured_TP=-1.93:measured_LRA=3.80:measured_thresh=-32.47:offset=0.61:linear=true:print_format=summary",
+        "stage": "loudness_calibration_measurement",
+        "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
         "iteration": 0,
-        "audio_input": "production/monarch-cam/work/v10_render/mastered_v10.wav",
-        "narrow_declick": {
-          "threshold": 0.35,
-          "half_width_samples": 3,
-          "jumps_repaired": 5214,
-          "interior_samples_changed": 31284,
-          "fraction_changed": 0.013193
-        },
-        "pass": false,
-        "failed": [
-          "loudness_in_range"
-        ],
-        "integrated_lufs": -14.91,
-        "lra_lu": 3.75,
-        "sample_peak_dbfs": -1.42,
-        "movement_db": 19.82,
-        "click_runs": 0,
-        "harsh_over_high_mid_db": 0.91,
-        "air_over_high_mid_db": -0.19
+        "audio_input": "production/monarch-cam/work/v10_render/loudness_base.wav",
+        "integrated_lufs": -14.62,
+        "sample_peak_dbfs": -1.82,
+        "click_runs_before_conditioning": 1090
       },
       {
-        "stage": "calibration_0_narrow_declick",
-        "delta_db": 0.91,
-        "narrow_declick": {
-          "threshold": 0.35,
-          "half_width_samples": 3,
-          "jumps_repaired": 937,
-          "interior_samples_changed": 5622,
-          "fraction_changed": 0.002371
+        "stage": "loudness_calibration_gain",
+        "iteration": 0,
+        "delta_db": 0.62
+      },
+      {
+        "stage": "loudness_calibration_measurement",
+        "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
+        "iteration": 1,
+        "audio_input": "production/monarch-cam/work/v10_render/loudness_cal_0.wav",
+        "integrated_lufs": -14.32,
+        "sample_peak_dbfs": -1.9,
+        "click_runs_before_conditioning": 1228
+      },
+      {
+        "stage": "loudness_calibration_gain",
+        "iteration": 1,
+        "delta_db": 0.32
+      },
+      {
+        "stage": "loudness_calibration_measurement",
+        "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
+        "iteration": 2,
+        "audio_input": "production/monarch-cam/work/v10_render/loudness_cal_1.wav",
+        "integrated_lufs": -14.2,
+        "sample_peak_dbfs": -1.83,
+        "click_runs_before_conditioning": 1284
+      },
+      {
+        "stage": "continuous_transient_conditioning",
+        "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
+        "iteration": 0,
+        "audio_input": "production/monarch-cam/work/v10_render/loudness_cal_1.wav",
+        "conditioning": {
+          "method": "continuous_soft_knee_slope_conditioner",
+          "slope_cap": 0.28,
+          "shape_exponent": 4.0,
+          "low_band_restore_crossover_hz": 2000,
+          "samples_replaced_by_interpolation": 0,
+          "piecewise_linear_ramp_windows": 0,
+          "low_band_200_1000_hz": {
+            "correlation_before_after": 1.0,
+            "difference_percent_of_original": 0.0133,
+            "note": "VO fundamental/low-mid band left essentially untouched"
+          },
+          "before": {
+            "max_sample_jump": 0.9171,
+            "jumps_over_0_35": 5577,
+            "click_runs": 1315,
+            "linear_ramp_groups": 0,
+            "linear_ramp_samples": 0,
+            "hf_5k_14k_energy_ratio": 0.1011
+          },
+          "after": {
+            "max_sample_jump": 0.3171,
+            "jumps_over_0_35": 0,
+            "click_runs": 0,
+            "linear_ramp_groups": 0,
+            "linear_ramp_samples": 0,
+            "hf_5k_14k_energy_ratio": 0.0787
+          }
         }
       },
       {
-        "chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
-        "chain_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=35,loudnorm=I=-14:TP=-1.5:LRA=7:measured_I=-21.94:measured_TP=-1.93:measured_LRA=3.80:measured_thresh=-32.47:offset=0.61:linear=true:print_format=summary",
-        "iteration": 1,
-        "audio_input": "production/monarch-cam/work/v10_render/calibrated_0.wav",
-        "narrow_declick": {
-          "threshold": 0.35,
-          "half_width_samples": 3,
-          "jumps_repaired": 937,
-          "interior_samples_changed": 5622,
-          "fraction_changed": 0.002371
-        },
+        "stage": "delivered_gate",
+        "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
+        "iteration": 0,
+        "audio_input": "production/monarch-cam/work/v10_render/conditioned_0.wav",
         "pass": true,
         "failed": [],
-        "integrated_lufs": -14.66,
-        "lra_lu": 3.48,
-        "sample_peak_dbfs": -1.88,
-        "movement_db": 20.13,
+        "integrated_lufs": -14.6,
+        "lra_lu": 3.6,
+        "sample_peak_dbfs": -1.82,
+        "movement_db": 19.31,
         "click_runs": 0,
-        "harsh_over_high_mid_db": 0.98,
-        "air_over_high_mid_db": -0.28
+        "harsh_over_high_mid_db": 1.06,
+        "air_over_high_mid_db": 0.83
       }
     ],
     "final_wav": "production/monarch-cam/caught_on_camera_commentary_v10/audio/final_mix_v10.wav",
@@ -215,29 +239,49 @@
   },
   "human_native_audio_listening": false,
   "voice_quality_fix": {
-    "chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
+    "chain_id": "dualmono_linear_loudnorm_clear_vo_continuous_slew_no_declick",
     "removed": [
       "-2 dB treble cut at 3 kHz",
-      "32-sample broad linear declick"
+      "32-sample broad linear declick",
+      "7-sample narrow declick / piecewise-linear sample ramps",
+      "any per-jump sample replacement"
     ],
-    "replaced_with": "7-sample narrow click repair around discontinuities",
+    "replaced_with": "linear loudnorm, then loudness calibration + gentle limiter, then ONE continuous soft-knee slope conditioner",
+    "order_rationale": "Gain is applied before conditioning so AAC encoding and calibration cannot push slopes back over the QC threshold.",
     "limiter": "alimiter=limit=0.80:attack=20:release=300:level=disabled",
-    "narrow_declick_events": [
+    "slope_cap": 0.28,
+    "shape_exponent": 4.0,
+    "samples_replaced_by_interpolation": 0,
+    "piecewise_linear_ramp_windows": 0,
+    "conditioning_events": [
       {
-        "stage": "master_narrow_declick",
-        "threshold": 0.35,
-        "half_width_samples": 3,
-        "jumps_repaired": 5214,
-        "interior_samples_changed": 31284,
-        "fraction_changed": 0.013193
-      },
-      {
-        "stage": "calibration_0_narrow_declick",
-        "threshold": 0.35,
-        "half_width_samples": 3,
-        "jumps_repaired": 937,
-        "interior_samples_changed": 5622,
-        "fraction_changed": 0.002371
+        "method": "continuous_soft_knee_slope_conditioner",
+        "slope_cap": 0.28,
+        "shape_exponent": 4.0,
+        "low_band_restore_crossover_hz": 2000,
+        "samples_replaced_by_interpolation": 0,
+        "piecewise_linear_ramp_windows": 0,
+        "low_band_200_1000_hz": {
+          "correlation_before_after": 1.0,
+          "difference_percent_of_original": 0.0133,
+          "note": "VO fundamental/low-mid band left essentially untouched"
+        },
+        "before": {
+          "max_sample_jump": 0.9171,
+          "jumps_over_0_35": 5577,
+          "click_runs": 1315,
+          "linear_ramp_groups": 0,
+          "linear_ramp_samples": 0,
+          "hf_5k_14k_energy_ratio": 0.1011
+        },
+        "after": {
+          "max_sample_jump": 0.3171,
+          "jumps_over_0_35": 0,
+          "click_runs": 0,
+          "linear_ramp_groups": 0,
+          "linear_ramp_samples": 0,
+          "hf_5k_14k_energy_ratio": 0.0787
+        }
       }
     ],
     "source_vo_chunks_unchanged": true,
