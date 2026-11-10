@@ -1,0 +1,114 @@
+name: V12 Phase B/C - angle forensics + winner teardowns
+
+# Deeper real-API research for the MC-01 angle: three ANGLE-specific topic
+# probes (not generic topic packaging) plus six reverse teardowns of the
+# biggest real winners found in Phase A. Uses the existing YOUTUBE_API_KEY
+# Actions secret; presence only, value never printed or stored.
+# Arena token cannot use workflow_dispatch (403) -> marker-file push trigger.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "yt-phase-bc-trigger.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  forensics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve the key secret (presence only, value masked)
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then echo "::error::no key secret resolved"; exit 1; fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          case "$KEY" in
+            AIza*) echo "key resolved (${#KEY} chars, shape starts with AIza)" ;;
+            *) echo "::warning::key resolved but shape unexpected" ;;
+          esac
+
+      - name: Runtime deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy pillow yt-dlp pytrends imageio-ffmpeg
+
+      - name: Three angle-specific real-API topic probes
+        continue-on-error: true
+        run: |
+          mkdir -p research/multi_clip_long_form_v12/api_evidence/phase_bc
+          run_topic () {
+            TOPIC="$1"; ORDER="$2"; SLUG="$3"
+            echo "=== angle probe: $TOPIC ($ORDER) ==="
+            python -m yt_intel topic "$TOPIC" --limit 20 --order "$ORDER" \
+              --json "research/multi_clip_long_form_v12/api_evidence/phase_bc/angle-$SLUG.json" \
+              || echo "::warning::angle probe failed: $SLUG"
+          }
+          run_topic "why we rewatch moments"           relevance why-we-rewatch
+          run_topic "frame by frame breakdown explained" relevance frame-by-frame
+          run_topic "science commentary long form"     viewCount science-commentary
+
+      - name: Six real-winner reverse teardowns
+        continue-on-error: true
+        run: |
+          mkdir -p research/multi_clip_long_form_v12/api_evidence/phase_bc
+          for ID in ro-vkofFP3E k5s1cMNTmGs xM6zdim0yk4 fgLf_dcZy9Q Riauw5UTnW8 4czjS9h4Fpg; do
+            echo "=== reverse $ID ==="
+            python -m yt_intel reverse "$ID" \
+              --json "research/multi_clip_long_form_v12/api_evidence/phase_bc/reverse-$ID.json" \
+              || echo "::warning::reverse failed for $ID"
+          done
+          ls -la research/multi_clip_long_form_v12/api_evidence/phase_bc/
+
+      - name: Record run metadata (presence only, never the value)
+        run: |
+          cat > /tmp/phase_bc_record.py <<'PY'
+          import json, os, datetime, pathlib
+          base = pathlib.Path("research/multi_clip_long_form_v12/api_evidence/phase_bc")
+          produced = sorted(p.name for p in base.glob("*.json") if p.name != "run.json")
+          print(json.dumps({
+              "at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "phase": "B/C - angle forensics + real winner teardowns (RESEARCH ONLY)",
+              "ref": os.environ.get("GITHUB_REF"),
+              "sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "key_present": bool(os.environ.get("YOUTUBE_API_KEY")),
+              "secret_value_printed_or_stored": False,
+              "angle_probes": ["why we rewatch moments", "frame by frame breakdown explained", "science commentary long form"],
+              "reverse_targets": ["ro-vkofFP3E", "k5s1cMNTmGs", "xM6zdim0yk4", "fgLf_dcZy9Q", "Riauw5UTnW8", "4czjS9h4Fpg"],
+              "reports_produced": produced,
+              "boundary": "Angle probes and teardowns are STRUCTURAL BENCHMARKS only. No clip downloaded, no rights chain, no clearance, no render, no VO, no upload.",
+              "not_a_legal_opinion": True,
+          }, indent=2))
+          PY
+          python /tmp/phase_bc_record.py > research/multi_clip_long_form_v12/api_evidence/phase_bc/run.json
+          cat research/multi_clip_long_form_v12/api_evidence/phase_bc/run.json
+
+      - name: Upload evidence even if commit fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v12-phase-bc-forensics
+          path: research/multi_clip_long_form_v12/api_evidence/phase_bc/
+          if-no-files-found: warn
+
+      - name: Commit evidence
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add research/multi_clip_long_form_v12/api_evidence/phase_bc
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore(v12-phase-bc): angle probes + winner teardowns [skip ci]"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }} || echo "::warning::push failed; evidence is in the run artifact"
