@@ -16,6 +16,7 @@ P = Path(__file__).resolve().parent
 sys.path.insert(0, str(P))
 import motion
 import scene_sets as S
+import actors as A
 from actors import Actor
 
 ap = argparse.ArgumentParser()
@@ -32,6 +33,12 @@ ap.add_argument('--stills-dir', default='/home/user/v6-stills')
 ap.add_argument('--probe', action='store_true')
 args = ap.parse_args()
 S.ASSETS = Path(args.assets)
+A.ASSETS = str(S.ASSETS)
+missing = [n for n in ('ryan.glb', 'mia_smart.glb', 'james_formal.glb', 'daniel_formal.glb',
+                       'sophia_formal.glb', 'noah_smart.glb', 'emma.glb', 'priya_casual.glb')
+           if not (S.ASSETS / n).is_file()]
+if missing:
+    raise SystemExit(f'missing character assets in {S.ASSETS}: {missing}')
 FPS = args.fps
 W = args.width
 H = round(W * 16 / 9)
