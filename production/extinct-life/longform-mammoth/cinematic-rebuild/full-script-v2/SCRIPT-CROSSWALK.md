@@ -13,7 +13,7 @@ This is an editorial audit, not expert sign-off. The original `../../SCRIPT-V1.m
 | 2019 isotope study, C/N diet and S/Sr geology/water | `05-environment` | Retains methods and inference, and qualifications on samples, time resolution and water. The original lists specific institutions/regions and ~40,000-year span; these context details are omitted in the current voice draft and require an explicit final editorial choice or correctly sourced on-screen attribution. |
 | Rain on snow, possible ice and interacting pressures | `05-environment`, `10-verdict` | Retained as hypothesis only; the original's island-wide fatal icing as fact, healthy herd as fact and confirmed poor drinking water were not retained. |
 | Humans elsewhere; earliest known Wrangel evidence and uncertainty | `06-humans` | Retains ~3,600 calibrated years BP and the evidence gap; does not claim the earliest known site equals first arrival or that a Wrangel hunt was observed. |
-| 2024 21 genomes: 7 mainland, 14 Wrangel | `07-genomes-a` | Counts, diversity, homozygosity and immune-gene diversity retained. Original narration's approximate ~50,000-year specimen span and institutional names are omitted in this voice draft; source-check and decide whether to add, retaining calibrated dating context. |
+| 2024 21 genomes: 7 mainland, 14 Wrangel | `07-genomes-a` | Counts, diversity, homozygosity and immune-gene diversity retained. Original narration’s approximate ~50,000-year specimen span and institutional names are omitted in this voice draft; the source-checked span is now in the experimental genome-record exhibit, not yet in a final cut. See `ON-SCREEN-CONTEXT-DRAFT.md`. |
 | 2024 recovery: Ne ≤8 to ~200–300 in ~20 generations | `07-genomes-a` | Retained as a genetic model parameter, not a physical census. Original claim of no close-relative breeding and exact stability to the final day are not inferred from these data and are not repeated. |
 | Unequal coverage/window analogy; high- vs moderate-impact trends | `08-genomes-b` | Retains analogy, coverage caution, opposing predicted variant trends and non-diagnostic nature. Original claim that final herd was definitively healthier than plentiful ancestors is not supported. |
 | Missing final ~300 years / ten generations | `09-missing`, `10-verdict` | Retained specifically as a gap in the 2024 genome dataset, not “no data” across all fields. |
@@ -33,3 +33,5 @@ This is an editorial audit, not expert sign-off. The original `../../SCRIPT-V1.m
 - 2019 isotope study summary: https://www.helsinki.fi/en/luomus/news/last-mammoths-died-remote-island
 - 2024 21-genome study: https://www.cell.com/cell/fulltext/S0092-8674(24)00577-4
 - 2025 microbial study: https://www.cell.com/cell/fulltext/S0092-8674(25)00917-1
+
+Additional source-checked candidate context is listed in `ON-SCREEN-CONTEXT-DRAFT.md`. It is not yet integrated into a final picture edit and does not resolve continuous review or every omission.
