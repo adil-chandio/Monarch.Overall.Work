@@ -26,7 +26,10 @@ mesh.data.materials.clear();mesh.data.materials.append(material)
 
 # Bone placements are coarse estimates on this one model; they have not been
 # checked by a vertebrate anatomist or matched to the specimen's original rig.
-feet=[(-.627,-.502),(-.175,-.432),(.524,-.203),(.455,-.439)]
+# Four low-elevation connected components of the source mesh are feet. The
+# fifth low component at (-.63,-.50) is the trunk tip, NOT a fifth leg.
+feet=[(-.206,-.325),(-.203,-.544),(.498,-.213),(.427,-.441)]
+bpy.context.scene.render.fps=30
 arm=bpy.data.armatures.new('ExperimentalMammothRig');rig=bpy.data.objects.new('ExperimentalMammothRig',arm);bpy.context.collection.objects.link(rig)
 bpy.context.view_layer.objects.active=rig;rig.select_set(True);bpy.ops.object.mode_set(mode='EDIT')
 def bone(name,head,tail,parent=None):
@@ -37,13 +40,14 @@ bone('root',(0,-.42,.70),(0,-.42,1.0))
 for i,(x,y) in enumerate(feet):
     bone('upper'+str(i),(x,y,.64),(x,y,.30),'root')
     bone('lower'+str(i),(x,y,.30),(x,y,.04),'upper'+str(i))
-bone('trunk_upper',(-.66,-.42,.83),(-.82,-.42,.51),'root')
-bone('trunk_lower',(-.82,-.42,.51),(-.79,-.42,.26),'trunk_upper')
+    bone('foot'+str(i),(x,y,.04),(x,y,-.04),'lower'+str(i))
+bone('trunk_upper',(-.55,-.50,.78),(-.67,-.50,.43),'root')
+bone('trunk_lower',(-.67,-.50,.43),(-.64,-.50,.10),'trunk_upper')
 bpy.ops.object.mode_set(mode='OBJECT')
 
 # Spatial weights are provisional. Each vertex has normalised weights and at
-# most three influences. The mesh's posing needs manual topology/weight review.
-names=['root']+[f'{side}{i}' for i in range(4) for side in ('upper','lower')]+['trunk_upper','trunk_lower']
+# most four influences. The mesh's posing needs manual topology/weight review.
+names=['root']+[f'{side}{i}' for i in range(4) for side in ('upper','lower','foot')]+['trunk_upper','trunk_lower']
 mesh.vertex_groups.clear()
 groups={n:mesh.vertex_groups.new(name=n) for n in names}
 def clamp(x):return max(0,min(1,x))
@@ -51,14 +55,15 @@ def smooth(x):x=clamp(x);return x*x*(3-2*x)
 for vert in mesh.data.vertices:
     x,y,z=vert.co
     near=min(range(4),key=lambda i:((x-feet[i][0])/.16)**2+((y-feet[i][1])/.13)**2)
-    fx,fy=feet[near];rad=((x-fx)/.19)**2+((y-fy)/.16)**2
-    leg=smooth((.68-z)/.27)*math.exp(-max(0,rad-.18)*.8)
-    # Limit the head/trunk region to the centre line to avoid moving tusks.
-    trunk=smooth((-.66-x)/.14)*smooth((.79-z)/.22)*math.exp(-((y+.42)/.10)**4)
+    # Below the body, partition by nearest foot; fade to the root toward the
+    # torso. Bounds exclude the trunk and tusks; still needs manual review.
+    leg=smooth((.62-z)/.18)*smooth((x+.43)/.12)*smooth((.76-x)/.12)
+    # Trunk tip lies off centre on this source model. Avoid the two tusks.
+    trunk=smooth((-.48-x)/.10)*smooth((.80-z)/.20)*math.exp(-((y+.50)/.12)**4)
     trunk=min(trunk,1-leg)
-    low=smooth((.38-z)/.19)
-    trunk_low=smooth((.53-z)/.20)
-    w={'root':1-leg-trunk, f'upper{near}':leg*(1-low),f'lower{near}':leg*low,
+    low=smooth((.42-z)/.20);foot=smooth((.14-z)/.10)
+    trunk_low=smooth((.52-z)/.22)
+    w={'root':1-leg-trunk, f'upper{near}':leg*(1-low),f'lower{near}':leg*low*(1-foot),f'foot{near}':leg*low*foot,
        'trunk_upper':trunk*(1-trunk_low),'trunk_lower':trunk*trunk_low}
     w=dict(sorted(((k,v) for k,v in w.items() if v>1e-6),key=lambda kv:kv[1],reverse=True)[:4]);total=sum(w.values())
     for name,value in w.items():groups[name].add([vert.index],value/total,'REPLACE')
@@ -81,16 +86,33 @@ for frame in (1,121):
 # Keep the idle action as an NLA strip for glTF export.
 rig.animation_data.action=None;track=rig.animation_data.nla_tracks.new();track.name='Idle_Experimental';track.strips.new('Idle_Experimental',1,a)
 a=action('WalkInPlace_Experimental')
-# Four lateral-sequence phase offsets; small kinematic swings only.
-phases=[.25,.75,0,.5]
-for frame in range(1,74,4):
-    u=(frame-1)/72
+# A kinematic two-link plane solution approximates planted feet on flat ground
+# IF a consumer translates the root in -X at STRIDE/(PERIOD*STANCE) m/s.
+# This is not a physics simulation and cannot solve uneven terrain.
+phases=[.25,.75,0,.5];stride=.14;stance=.75;period=72
+l1=.34;l2=.26;hip_drop=.015
+for frame in range(1,period+2):
+    u=(frame-1)/period
+    root=rig.pose.bones['root'];root.location=(0,-hip_drop,0);root.keyframe_insert(data_path='location',frame=frame,group='root')
     for i,offset in enumerate(phases):
-        phase=2*math.pi*(u+offset)
-        pb=rig.pose.bones['upper'+str(i)];pb.rotation_euler=(0,0,.11*math.sin(phase));pb.keyframe_insert(data_path='rotation_euler',frame=frame,group=pb.name)
-        pb=rig.pose.bones['lower'+str(i)];pb.rotation_euler=(0,0,.07*max(0,math.sin(phase+.6)));pb.keyframe_insert(data_path='rotation_euler',frame=frame,group=pb.name)
+        q=(u+offset)%1
+        if q<stance:
+            dx=-stride/2+stride*q/stance;lift=0
+        else:
+            v=(q-stance)/(1-stance);dx=stride/2-stride*(v*v*(3-2*v));lift=.035*math.sin(math.pi*v)
+        h=l1+l2-hip_drop-lift;r=math.hypot(dx,h)
+        if r>l1+l2:raise ValueError('unreachable leg target')
+        phi=math.atan2(-dx,h)
+        upper=phi+math.acos(max(-1,min(1,(l1*l1+r*r-l2*l2)/(2*l1*r))))
+        lower=phi-math.acos(max(-1,min(1,(l2*l2+r*r-l1*l1)/(2*l2*r))))
+        pb=rig.pose.bones['upper'+str(i)];pb.rotation_euler=(0,0,upper);pb.keyframe_insert(data_path='rotation_euler',frame=frame,group=pb.name)
+        pb=rig.pose.bones['lower'+str(i)];pb.rotation_euler=(0,0,lower-upper);pb.keyframe_insert(data_path='rotation_euler',frame=frame,group=pb.name)
+        pb=rig.pose.bones['foot'+str(i)];pb.rotation_euler=(0,0,-lower);pb.keyframe_insert(data_path='rotation_euler',frame=frame,group=pb.name)
     for n,amp in [('trunk_upper',.03),('trunk_lower',.045)]:
         pb=rig.pose.bones[n];pb.rotation_euler=(0,0,amp*math.sin(2*math.pi*u));pb.keyframe_insert(data_path='rotation_euler',frame=frame,group=n)
+# Linear interpolation preserves the sampled target more faithfully than bezier.
+for curve in a.fcurves:
+    for key in curve.keyframe_points:key.interpolation='LINEAR'
 rig.animation_data.action=None;track=rig.animation_data.nla_tracks.new();track.name='WalkInPlace_Experimental';track.strips.new('WalkInPlace_Experimental',1,a)
 # NLA tracks should not be blended into the bind-pose at export.
 for track in rig.animation_data.nla_tracks:track.mute=True

@@ -1,0 +1,9 @@
+# Licensed score sources — candidate assets
+
+The following are **not original compositions for this documentary**. Scott Buckley's own pages identify these recordings as [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and give the following requested credits. If used in a future YouTube video, the composer asks that credits also appear in the video description. They may be excerpted, faded and level-adjusted; mark those changes where credited. No YouTube upload has been authorised.
+
+- **'Passage Of Time' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au**. Original page: https://www.scottbuckley.com.au/library/passage-of-time/ . `021_passage_of_time.m4a` SHA-256 `6669185b8a2a14cb2d14a89e0b95187216fd4cc4919612c7a534d0e7a646b90a`.
+- **'Beautiful Oblivion' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au**. Original page: https://www.scottbuckley.com.au/library/beautiful-oblivion/ . `017_beautiful_oblivion.m4a` SHA-256 `5497c4838e379ec31c2d91d678c594804779c647dfd408b61ea415a9bbd723f5`.
+- **'A Kind Of Hope' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au**. Original page: https://www.scottbuckley.com.au/library/a-kind-of-hope/ . `005_a_kind_of_hope.m4a` SHA-256 `7ad67c0bd6869036dc2d8604ac408edda2b79a575c79af62010c11764c984151`.
+
+Copies sourced from https://github.com/rhicksrad/shahanshah-music/tree/main/tracks; its playlist identifies these pieces and credits. These AAC-encoded repository copies have not been independently matched to the original composer's downloadable masters; verify their identity/provenance before distributing a completed film. The composer's descriptions suggest orchestral, piano and ambient arrangements, but these copies and transitions have **not** been continuously auditioned here. Do not assume they avoid all sounds the user dislikes without listening.

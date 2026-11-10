@@ -1,0 +1,5 @@
+# Potential snow foley — not yet mixed to film
+
+Eight snow/gravel human footstep excerpts originate from **Corsica_S**, extracted by Iwan Gabovitch (qubodup), [42 Snow and Gravel Footsteps](https://opengameart.org/content/42-snow-and-gravel-footsteps), offered as [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). OpenGameArt reports permission to extract and release under CC0. These copies were obtained from [evanlin23/blocky-stories](https://github.com/evanlin23/blocky-stories/tree/main/assets/audio/steps/snow), whose `assets/LICENSES.md` identifies the original source and says the copies were converted to mono 48 kHz, trimmed and low-pass filtered. Original master equivalence has not been verified.
+
+These are **human**, not actual mammoth, footsteps. Any mammoth Foley is an artistic reconstruction and must be edited, layered and timed to contact only after picture lock; no claim is made that these clips sound like mammoths. They have not been mixed or human-listened in the documentary context. There is no wind/rotor-like bed here.
