@@ -142,8 +142,19 @@
     "reported_in_turn": "2026-11-05 - user said: 'mene to hamari woh video upload krdi ha short par woh waters wali'",
     "agent_verified_on_platform": false,
     "visibility": "unknown",
-    "monetization_setting": "unknown",
+    "monetization_setting": "user_reported_on_not_agent_verified",
     "altered_or_synthetic_content_toggle": "unknown_human_confirmation_required",
+    "monetization_report": {
+      "user_reported": "Monetization on ha",
+      "reported_in_turn": "2026-11-05 - user confirmed monetization is ON for the uploaded water-bubble Short",
+      "agent_verified_studio_state": false,
+      "recommended_immediate_action": "Turn OFF monetization for this specific video in Studio (Content > Monetization > Off > Save); separately human-check the channel-level Shorts Monetization Module in Earn.",
+      "action_performed_by_agent": false,
+      "clearance_or_legal_review": false,
+      "violation_verdict": false,
+      "takedown_or_strike_prediction": false,
+      "reference": "research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md"
+    },
     "description_screenshot_audit": {
       "user_supplied_screenshots": ["Screenshot_20261110-223732.png", "Screenshot_20261110-223734.png"],
       "screen_shown": "YouTube Studio mobile 'Add description' editor",

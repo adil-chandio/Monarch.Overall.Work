@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "edition": "v11_monetization_on_action_2026-11-05",
+  "head_at_writing": "990969474f79bcb8f6a96fe75c6061ee1ca0ef6d",
+  "question": "Monetization on ha",
+  "short_answer": "Turn this Short's monetization OFF now (Studio Content -> Monetization -> Off -> Save). Not a violation verdict; a risk-reduction step. Channel-level Shorts module needs separate human check.",
+  "not_legal_advice": true,
+  "user_reported_monetization": "on",
+  "agent_verified_studio_state": false,
+  "nasa_asset_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+  "findings": [
+    {
+      "id": "F1",
+      "title": "Ads ON ka matlab rights ka izhaar",
+      "text": "YouTube official: *\"By turning on ads for videos on YouTube, you confirm that you have all the necessary rights to the visual and audio elements of those videos.\"* [2](https://support.google.com/youtube/answer/94522?hl=en) Hamare committed ledger me `full_legal_review=false` aur likhit permission `false` hai [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json). Aapki apni description bhi kehti hai *\"no written permission, human legal review or legal opinion is claimed\"* [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json). Ye do baatein aapas me match nahi karti — isliye ye sabse pehle dekhne wali jagah hai."
+    },
+    {
+      "id": "F2",
+      "title": "NASA ka commercial / identifiable-person gate seedha yahan lagta hai",
+      "text": "NASA: *\"If a NASA image, audio, video or media includes an identifiable person, using the media for commercial purposes may infringe that person's right of privacy or publicity, and permission should be obtained from the person.\"* aur *\"Astronauts or employees who are currently employed by NASA cannot have their names, likenesses or other personality traits displayed ... on any commercial products, advertisements, promotional material or commercial product packaging.\"* [5](https://www.nasa.gov/nasa-brand-center/images-and-media/) Is clip me identifiable astronauts / possible CSA personnel hain [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json). NASA short-form social ko generally promotional kehta hai [7](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/)."
+    },
+    {
+      "id": "F3",
+      "title": "Shorts ki monetization do level ki hoti hai",
+      "text": "Shorts Feed ads **channel-level** revenue sharing hai: *\"Only monetizing partners who've accepted the Shorts Monetization Module can earn ad revenue from Shorts\"* [3](https://support.google.com/youtube/answer/12504220?hl=en). Isliye 'channel YPP ON', 'is video ke ads ON' aur 'Shorts module accepted' teen alag baatein hain. Individual video ka monetization OFF kiya ja sakta hai [1](https://support.google.com/youtube/answer/6332943?hl=en), lekin **Shorts Feed pool se is ek video ko alag se kaise hataya jaye, iski guarantee mujhe official docs me nahi mili** — `Earn` section human check karein. Main yahan koi certainty claim nahi karta."
+    },
+    {
+      "id": "F4",
+      "title": "Ads ON ≠ ads chal gaye ≠ paisa mila",
+      "text": "YouTube: *\"Choosing to turn on ads doesn't mean that ads will automatically open on a video. Before any ads show up, the video will go through a standard process including automated or human reviews\"* [2](https://support.google.com/youtube/answer/94522?hl=en). Aur Shorts module accept karne se **pehle** wale views revenue-sharing ke liye eligible nahi [3](https://support.google.com/youtube/answer/12504220?hl=en). Isliye main yahan koi ad-run, revenue, strike ya takedown ka dawa nahi karta — na hi koi violation ka faisla."
+    },
+    {
+      "id": "F5",
+      "title": "Description achhi thi, par wo clearance nahi deti",
+      "text": "Credit + no-endorsement + synthetic VO disclosure + 'no legal opinion claimed' sab theek hain [10](workspace://research/long_form_viral_idea_v11/LIVE_SHORT_DESCRIPTION_AUDIT_V11.md). Lekin wo sab **risk kam** karte hain, **commercial-use ki ijazat** nahi dete. Pehle wala decision-card bhi yahi kehta tha: monetized/promotional = abhi nahi [9](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md)."
+    }
+  ],
+  "immediate_steps_computer": [
+    "YouTube Studio kholein → left menu **Content**.",
+    "Is water-wale Short ke aage **Monetization** column par click karein.",
+    "Dropdown me **Off** chunein.",
+    "**Save** dabayein. [1](https://support.google.com/youtube/answer/6332943?hl=en)"
+  ],
+  "immediate_steps_mobile": [
+    "YouTube Studio app → bottom **Menu → Content**.",
+    "Video select karein → **Edit** → **Monetization**.",
+    "**OFF** chunein → **Back** → **Save**. [2](https://support.google.com/youtube/answer/94522?hl=en)"
+  ],
+  "follow_up_steps": [
+    "**Earn** section me Shorts Monetization Module ka status human check karein (channel-level) [3](https://support.google.com/youtube/answer/12504220?hl=en).",
+    "**AI use** toggle (Attributes) abhi bhi unconfirmed hai — human confirm karein [10](workspace://research/long_form_viral_idea_v11/LIVE_SHORT_DESCRIPTION_AUDIT_V11.md).",
+    "**Visibility** confirm karein; chahein to clearance tak **Unlisted / Private** rakhna ek ihtiyati option hai (aapka faisla, koi guarantee nahi) [4](https://support.google.com/youtube/answer/57407?hl=en).",
+    "**Thumbnail** me astronaut ka chehra na ho [5](https://www.nasa.gov/nasa-brand-center/images-and-media/).",
+    "**Description** waisa hi rakhein — mat badlein, mat hataayein; credit + no-endorsement + disclosure wahin rehne dein [10](workspace://research/long_form_viral_idea_v11/LIVE_SHORT_DESCRIPTION_AUDIT_V11.md).",
+    "Video **delete** karne ka mashwara main nahi de raha; ye aapka faisla hai. Main koi bhi natija (safe / hataya jayega / strike) claim nahi karta."
+  ],
+  "clearance_path_before_re_enabling": [
+    "NASA Office of Communications ko **written request / approval** for the intended commercial use (public contact: `nasa-merchandise-&-brand-team@mail.nasa.gov`, specific-video questions 202-358-0309) [5](https://www.nasa.gov/nasa-brand-center/images-and-media/) [6](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/).",
+    "Identifiable astronauts / possible CSA personnel ki **apni likhit permission** — NASA unki taraf se nahi de sakta [5](https://www.nasa.gov/nasa-brand-center/images-and-media/) [6](https://www.nasa.gov/nasa-brand-center/advertising-guidelines/).",
+    "Ek **insaan ka legal review** jo is clip, script, thumbnail, monetization plan aur region (PK) ko dekhe [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json).",
+    "Tab jaakar monetization dobara ON karne ka faisla **aap** karein; main tab bhi 'guaranteed safe' nahi kahunga."
+  ],
+  "three_distinct_settings": [
+    {
+      "level": "channel_yPP_and_earn_modules",
+      "where": "Studio > Earn",
+      "citation": "[2](https://support.google.com/youtube/answer/94522?hl=en)"
+    },
+    {
+      "level": "per_video_monetization_toggle",
+      "where": "Studio > Content > video > Monetization",
+      "citation": "[1](https://support.google.com/youtube/answer/6332943?hl=en)"
+    },
+    {
+      "level": "ads_actually_served",
+      "where": "after automated or human review",
+      "citation": "[2](https://support.google.com/youtube/answer/94522?hl=en)"
+    }
+  ],
+  "non_claims": {
+    "legal_opinion": false,
+    "legal_clearance": false,
+    "human_legal_review": false,
+    "commercial_monetization_clearance": false,
+    "written_astronaut_or_csa_permission": false,
+    "agent_turned_monetization_off": false,
+    "agent_verified_studio_state": false,
+    "violation_occurred_verdict": false,
+    "takedown_or_strike_predicted": false,
+    "ads_actually_shown": false,
+    "revenue_earned": false,
+    "shorts_pool_exclusion_guaranteed": false,
+    "youtube_checks_pass_proves_safety": false,
+    "human_creative_approval": false,
+    "upload_or_publish_performed_by_agent": false,
+    "safety_certified": false,
+    "guaranteed_no_future_claim": false,
+    "perfection_or_zero_risk": false
+  },
+  "sources": [
+    {
+      "n": 1,
+      "id": "YT_TURN_OFF_ADS",
+      "title": "Turn off ads for individual videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6332943?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "Exact 5-step OFF procedure for an already-uploaded video."
+    },
+    {
+      "n": 2,
+      "id": "YT_MONETIZE",
+      "title": "Choose how you want to monetize - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/94522?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "'By turning on ads for videos on YouTube, you confirm that you have all the necessary rights to the visual and audio elements of those videos.' Also: turning on ads doesn't auto-open ads; automated/human review happens; Shorts Feed ads require the Shorts Monetization Module in Earn."
+    },
+    {
+      "n": 3,
+      "id": "YT_SHORTS_POLICY",
+      "title": "YouTube Shorts monetization policies - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/12504220?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "Shorts Feed ads are channel-level revenue sharing via the Shorts Monetization Module; 'Non-original Shorts ... or compilations with no original content added' are ineligible examples; content must follow advertiser-friendly guidelines; views before module acceptance are not eligible."
+    },
+    {
+      "n": 4,
+      "id": "YT_UPLOAD",
+      "title": "Upload YouTube videos - YouTube Help",
+      "url": "https://support.google.com/youtube/answer/57407?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "Monetization toggle exists inside upload/Details for YPP; Checks results aren't final; Likeness detection."
+    },
+    {
+      "n": 5,
+      "id": "NASA_IMAGES",
+      "title": "NASA Images and Media Usage Guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Commercial-use section: identifiable persons, permission, current astronauts' likenesses, no endorsement, educational/informational general permission."
+    },
+    {
+      "n": 6,
+      "id": "NASA_ADS",
+      "title": "NASA Advertising Guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/advertising-guidelines/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Prohibited 'official NASA' / 'NASA approved' wording, identifiers in promotional material, and written advertising-request approval path."
+    },
+    {
+      "n": 7,
+      "id": "NASA_STRATEGIC",
+      "title": "NASA Strategic Partnerships - Promotional Content",
+      "url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Short-form social generally considered promotional content; imagery with current astronauts may not be used in promotional content."
+    },
+    {
+      "n": 8,
+      "id": "WORKSPACE_V10",
+      "title": "V10 upload metadata + rights flags",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json",
+      "authority": "workspace_evidence",
+      "used_for": "rights.full_legal_review=false; description explicitly says 'no written permission, human legal review or legal opinion is claimed'; claims.human_creative_approval=false; status=draft_not_published."
+    },
+    {
+      "n": 9,
+      "id": "SAFETY_CARD",
+      "title": "V11 upload-safety decision card",
+      "url": "workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "Prior verdict: monetized/promotional scenario = 'NAHI - abhi bilkel nahi' until written clearance + person permission + human legal review."
+    },
+    {
+      "n": 10,
+      "id": "DESC_AUDIT",
+      "title": "V11 live-Short description audit",
+      "url": "workspace://research/long_form_viral_idea_v11/LIVE_SHORT_DESCRIPTION_AUDIT_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "Screenshots matched committed description blocks 1-6; hashtag line unconfirmed; AI-use toggle and visibility unconfirmed."
+    }
+  ],
+  "related_files": [
+    "research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md",
+    "research/long_form_viral_idea_v11/LIVE_SHORT_DESCRIPTION_AUDIT_V11.md",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json"
+  ]
+}
