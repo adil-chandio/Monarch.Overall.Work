@@ -19,29 +19,54 @@ def run(args, **kw):
 
 
 def tone(freq, dur, amp=.2, fade=.02, wave='sine'):
-    return (f"{wave}=f={freq}:d={dur},volume={amp},"
-            f"afade=t=in:st=0:d={fade},afade=t=out:st={max(0, dur - fade):.3f}:d={fade}")
+    return (f"{wave}=f={freq}:d={dur:.3f},volume={amp},"
+            f"afade=t=in:st=0:d={fade:.3f},afade=t=out:st={max(0, dur - fade):.3f}:d={fade:.3f}")
 
 
 def pad_chain(notes, dur, amp=.10, trem=0.0):
-    """A soft sustained chord bed: each note its own oscillator, mixed."""
-    parts = []
+    """A soft sustained chord bed: one oscillator per note, summed.
+
+    Every source needs its own label and `tremolo` emits a second (control)
+    output, so the pad is built as an explicit mix graph rather than a chain.
+    """
+    graph, labels = [], []
     for i, f in enumerate(notes):
-        vib = f",tremolo=f={trem:.2f}:d=0.35" if trem else ''
-        parts.append(f"{tone(f, dur, amp / max(1, len(notes) ** .5), fade=.6)}{vib}")
-    return ';'.join(parts)
+        lvl = amp / max(1, len(notes) ** .5)
+        vib = f',tremolo=f={trem:.2f}:d=0.35' if trem else ''
+        graph.append(f"sine=f={f!r}:d={dur}[s{i}];"
+                     f"[s{i}]volume={lvl:.4f},afade=t=in:st=0:d=0.600,"
+                     f"afade=t=out:st={max(0, dur - .6):.3f}:d=0.600{vib}[n{i}]")
+        labels.append(f'[n{i}]')
+    graph.append(f"{''.join(labels)}amix=inputs={len(notes)}:normalize=0:duration=longest")
+    return ';'.join(graph)
 
 
 def build_score(out):
-    """Warm minor bed that lifts at the carpet and thins out for the last act."""
-    intro = pad_chain([110.0, 164.81, 220.0, 277.18], 24.0, amp=.13, trem=.22)
-    mid = pad_chain([130.81, 196.0, 261.63, 329.63], 24.0, amp=.15, trem=.18)
-    late = pad_chain([98.0, 146.83, 196.0, 233.08], 22.0, amp=.10, trem=.12)
-    filt = 'lowpass=f=2600,aecho=0.7:0.6:320|480:0.25|0.18'
-    run(['-filter_complex',
-         f"{intro}[a0];{mid}[a1];{late}[a2];"
-         f"[a0][a1][a2]concat=n=3:v=0:a=1,{filt},volume=0.9[score]",
-         '-map', '[score]', '-t', str(DUR), '-ar', str(SR), str(out)])
+    """Warm minor bed that lifts at the carpet and thins out for the last act.
+
+    Each section is written to its own file and joined, because a single
+    filtergraph with three sinks would emit three streams into one file.
+    """
+    sections = [
+        ([110.0, 164.81, 220.0, 277.18], 24.0, .13, .22),
+        ([130.81, 196.0, 261.63, 329.63], 24.0, .15, .18),
+        ([98.0, 146.83, 196.0, 233.08], 22.0, .10, .12),
+    ]
+    parts = []
+    for i, (notes, dur, amp, trem) in enumerate(sections):
+        label = f'[a{i}]'
+        graph = pad_chain(notes, dur, amp=amp, trem=trem) + label
+        path = out.with_name(f'score{i}.wav')
+        run(['-filter_complex', graph, '-map', label, '-t', str(dur),
+             '-ar', str(SR), str(path)])
+        parts.append(path)
+    m = out.with_name('score_list.txt')
+    m.write_text(''.join(f"file '{p.name}'\n" for p in parts))
+    tmp = out.with_name('score_raw.wav')
+    run(['-f', 'concat', '-safe', '0', '-i', str(m),
+         '-filter_complex', 'lowpass=f=2600,aecho=0.7:0.6:320|480:0.25|0.18,volume=0.9',
+         '-t', str(DUR), '-ar', str(SR), str(tmp)])
+    tmp.replace(out)
 
 
 def build_bed(out, cues):
@@ -64,37 +89,44 @@ def build_bed(out, cues):
 
 
 def hit(out, kind, dur=.5):
+    """One-shot effects; every graph ends on a single labelled stream."""
     if kind == 'shutter':
-        # a camera shutter: two tight noise clicks with a bright snap
+        # two tight noise clicks a few milliseconds apart, like a mirror slap
         run(['-filter_complex',
-             f"anoisesrc=d=.05:c=white:r={SR}:a=0.5,highpass=f=1800,"
-             f"afade=t=out:st=.02:d=.03[c1];"
-             f"anoisesrc=d=.05:c=white:r={SR}:a=0.3,highpass=f=2600,"
-             f"afade=t=out:st=.01:d=.03[c2];"
-             f"[c1][c2]adelay=0|70,amix=inputs=2:normalize=0,volume=0.7",
-             '-map', '0:a', '-ar', str(SR), str(out)])
+             f"anoisesrc=d=0.050:c=white:r={SR}:a=0.5,highpass=f=1800,"
+             f"afade=t=out:st=0.02:d=0.03[c1];"
+             f"anoisesrc=d=0.050:c=white:r={SR}:a=0.3,highpass=f=2600,"
+             f"afade=t=out:st=0.01:d=0.03[c2];"
+             f"[c1]adelay=0[c1d];[c2]adelay=70[c2d];"
+             f"[c1d][c2d]amix=inputs=2:normalize=0,volume=0.7[click]",
+             '-map', '[click]', '-ar', str(SR), str(out)])
     elif kind == 'cork':
         run(['-filter_complex',
-             f"sine=f=420:d=.06,volume=0.22,afade=t=out:st=.03:d=.03;"
-             f"anoisesrc=d=.08:c=pink:r={SR}:a=0.18,lowpass=f=1400,"
-             f"afade=t=out:st=.02:d=.06",
-             '-map', '0:a', '-ar', str(SR), str(out)])
+             f"sine=f=420:d=0.06,volume=0.22,afade=t=out:st=0.03:d=0.03[k1];"
+             f"anoisesrc=d=0.080:c=pink:r={SR}:a=0.18,lowpass=f=1400,"
+             f"afade=t=out:st=0.02:d=0.06[k2];"
+             f"[k1][k2]amix=inputs=2:normalize=0[corked]",
+             '-map', '[corked]', '-ar', str(SR), str(out)])
     elif kind == 'door':
         run(['-filter_complex',
-             f"sine=f=120:d=.30,volume=0.30,afade=t=out:st=.05:d=.25;"
-             f"anoisesrc=d=.30:c=brown:r={SR}:a=0.16,lowpass=f=800,"
-             f"afade=t=out:st=.05:d=.25",
-             '-map', '0:a', '-ar', str(SR), str(out)])
+             f"sine=f=120:d=0.30,volume=0.30,afade=t=out:st=0.05:d=0.25[d1];"
+             f"anoisesrc=d=0.30:c=brown:r={SR}:a=0.16,lowpass=f=800,"
+             f"afade=t=out:st=0.05:d=0.25[d2];"
+             f"[d1][d2]amix=inputs=2:normalize=0[clunk]",
+             '-map', '[clunk]', '-ar', str(SR), str(out)])
     elif kind == 'step':
         run(['-filter_complex',
-             f"anoisesrc=d=.10:c=brown:r={SR}:a=0.10,lowpass=f=600,highpass=f=70,"
-             f"afade=t=out:st=.02:d=.08",
-             '-map', '0:a', '-ar', str(SR), str(out)])
+             f"anoisesrc=d=0.10:c=brown:r={SR}:a=0.10,lowpass=f=600,highpass=f=70,"
+             f"afade=t=out:st=0.02:d=0.08[step]",
+             '-map', '[step]', '-ar', str(SR), str(out)])
     elif kind == 'swell':
         run(['-filter_complex',
-             f"sine=f=196:d=2.6,volume=0.10,afade=t=in:d=1.6,afade=t=out:st=1.8:d=.8;"
-             f"sine=f=293.66:d=2.6,volume=0.07,afade=t=in:d=1.6,afade=t=out:st=1.8:d=.8",
-             '-map', '0:a', '-ar', str(SR), str(out)])
+             f"sine=f=196:d=2.6,volume=0.10,afade=t=in:st=0:d=1.600,"
+             f"afade=t=out:st=1.8:d=0.8[w1];"
+             f"sine=f=293.66:d=2.6,volume=0.07,afade=t=in:st=0:d=1.600,"
+             f"afade=t=out:st=1.8:d=0.8[w2];"
+             f"[w1][w2]amix=inputs=2:normalize=0[swelled]",
+             '-map', '[swelled]', '-ar', str(SR), str(out)])
 
 
 def main(clips_dir, out):
