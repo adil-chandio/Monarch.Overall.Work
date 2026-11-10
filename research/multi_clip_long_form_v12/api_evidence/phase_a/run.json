@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-10T20:31:20.289384+00:00",
+  "phase": "A - clip-moment scouting (research only)",
+  "ref": "refs/heads/arena/2b012328-monarch-overall-work",
+  "sha": "4de576f653fc3b79db9cf3e285e1f3fa54d166c8",
+  "run_id": "42895703914",
+  "key_present": true,
+  "secret_value_printed_or_stored": false,
+  "queries": [
+    {
+      "topic": "unexpected moment caught on camera",
+      "order": "viewCount",
+      "slots": [
+        1,
+        7
+      ]
+    },
+    {
+      "topic": "slow motion physics explained",
+      "order": "viewCount",
+      "slots": [
+        2,
+        3
+      ]
+    },
+    {
+      "topic": "optical illusion scale size",
+      "order": "relevance",
+      "slots": [
+        4
+      ]
+    },
+    {
+      "topic": "viral moment reaction explained",
+      "order": "viewCount",
+      "slots": [
+        5,
+        6,
+        8
+      ]
+    },
+    {
+      "topic": "nasa official science demonstration",
+      "order": "viewCount",
+      "slots": "rights-lane probe"
+    }
+  ],
+  "reports_produced": [
+    "rights-lane-nasa-agency-probe.json",
+    "slot-01-07-expectation-violation.json",
+    "slot-02-03-physics-timing.json",
+    "slot-04-scale-illusion.json",
+    "slot-05-06-08-sound-reaction-callback.json"
+  ],
+  "boundary": "Scout candidates are third-party copyrighted videos used as STRUCTURAL BENCHMARKS only. They are NOT any of the 8 source clips. No clip downloaded, no rights chain, no clearance.",
+  "not_a_legal_opinion": true
+}
