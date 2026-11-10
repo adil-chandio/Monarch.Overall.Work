@@ -1,0 +1,35 @@
+{
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "duration": 22,
+  "total_frames": 660,
+  "shots": [
+    {
+      "id": "island",
+      "kind": "island",
+      "start": 0,
+      "end": 6
+    },
+    {
+      "id": "shore",
+      "kind": "wide",
+      "start": 6,
+      "end": 11
+    },
+    {
+      "id": "coast",
+      "kind": "resolve",
+      "start": 11,
+      "end": 16
+    },
+    {
+      "id": "animal",
+      "kind": "resolve",
+      "start": 16,
+      "end": 22
+    }
+  ],
+  "captions": [],
+  "overlays": []
+}
