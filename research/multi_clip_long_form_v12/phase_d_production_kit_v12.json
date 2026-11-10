@@ -1,0 +1,690 @@
+{
+  "edition": "v12_phase_d_production_kit",
+  "phase": "D - production kit that needs NO cleared clips",
+  "status": "ASSETS_AND_PLANS_ONLY_NOT_RENDERED",
+  "render_spec": {
+    "canvas": "1920x1080 landscape",
+    "fps": 30,
+    "runtime_seconds": 600,
+    "total_frames": 18000,
+    "video_codec": "H.264",
+    "audio_codec": "AAC 48kHz stereo",
+    "loudness_target": "-14 LUFS (spec target, NOT a V12 measurement)",
+    "source_footage_max_seconds": 80,
+    "source_share_max_pct": 13.3
+  },
+  "original_assets": [
+    {
+      "slug": "diagram_01",
+      "slot": 1,
+      "chapter": "1:40-2:55",
+      "title": "Expected vs Actual",
+      "subtitle": "Slot 1 - the exact frame where a prediction stops working",
+      "body": "<rect x=\"90\" y=\"230\" width=\"840\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"700\" >EXPECTED</text><rect x=\"990\" y=\"230\" width=\"840\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"1018\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#ffc06a\" text-anchor=\"start\" font-weight=\"700\" >ACTUAL</text><line x1=\"160\" y1=\"700\" x2=\"860\" y2=\"700\" stroke=\"#3a4d69\" stroke-width=\"3\"/><line x1=\"160\" y1=\"700\" x2=\"500\" y2=\"420\" stroke=\"#9fb2cc\" stroke-width=\"5\"/><line x1=\"500\" y1=\"420\" x2=\"860\" y2=\"420\" stroke=\"#9fb2cc\" stroke-width=\"5\"/><line x1=\"1060\" y1=\"700\" x2=\"1760\" y2=\"700\" stroke=\"#3a4d69\" stroke-width=\"3\"/><line x1=\"1060\" y1=\"700\" x2=\"1330\" y2=\"420\" stroke=\"#ffc06a\" stroke-width=\"5\"/><line x1=\"1330\" y1=\"420\" x2=\"1330\" y2=\"300\" stroke=\"#ffc06a\" stroke-width=\"5\"/><line x1=\"1330\" y1=\"300\" x2=\"1760\" y2=\"300\" stroke=\"#ffc06a\" stroke-width=\"5\"/><circle cx=\"1330\" cy=\"420\" r=\"14\" fill=\"#ff6b6b\"/><text x=\"1355\" y=\"400\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#ff9c9c\" text-anchor=\"start\" font-weight=\"400\" >violation frame</text><text x=\"160\" y=\"790\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >prediction</text><text x=\"1060\" y=\"790\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#ffc06a\" text-anchor=\"start\" font-weight=\"400\" >measured</text>",
+      "accent": "#5bd6d0",
+      "file": "assets_v12/diagram_01.svg"
+    },
+    {
+      "slug": "diagram_02",
+      "slot": 2,
+      "chapter": "2:55-4:05",
+      "title": "The Late Explanation",
+      "subtitle": "Slot 2 - eyes register the event; the reason needs a sentence",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >MECHANISM (original ray / force schematic)</text><ellipse cx=\"960\" cy=\"540\" rx=\"150\" ry=\"230\" fill=\"none\" stroke=\"#5bd6d0\" stroke-width=\"5\"/><text x=\"960\" y=\"552\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"28\" fill=\"#5bd6d0\" text-anchor=\"middle\" font-weight=\"400\" >medium</text><line x1=\"160\" y1=\"380\" x2=\"810\" y2=\"470\" stroke=\"#9fb2cc\" stroke-width=\"4\"/><line x1=\"810\" y1=\"470\" x2=\"1420\" y2=\"470\" stroke=\"#5bd6d0\" stroke-width=\"4\"/><line x1=\"160\" y1=\"540\" x2=\"810\" y2=\"540\" stroke=\"#9fb2cc\" stroke-width=\"4\"/><line x1=\"1110\" y1=\"540\" x2=\"1760\" y2=\"540\" stroke=\"#5bd6d0\" stroke-width=\"4\"/><line x1=\"160\" y1=\"700\" x2=\"810\" y2=\"610\" stroke=\"#9fb2cc\" stroke-width=\"4\"/><line x1=\"810\" y1=\"610\" x2=\"1420\" y2=\"470\" stroke=\"#5bd6d0\" stroke-width=\"4\"/><circle cx=\"1420\" cy=\"470\" r=\"14\" fill=\"#ffc06a\"/><text x=\"1450\" y=\"445\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#ffc06a\" text-anchor=\"start\" font-weight=\"400\" >where the reason appears</text><text x=\"120\" y=\"800\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#ff9c9c\" text-anchor=\"start\" font-weight=\"400\" >FACT: verify against a FIRST-PARTY official source for this clip before recording</text>",
+      "accent": "#ffc06a",
+      "file": "assets_v12/diagram_02.svg"
+    },
+    {
+      "slug": "diagram_03",
+      "slot": 3,
+      "chapter": "4:05-5:10",
+      "title": "Three Speed Passes",
+      "subtitle": "Slot 3 - 1x / 0.5x / 0.25x, same frames",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >SAME FOOTAGE - THREE LABELLED PASSES</text><text x=\"130\" y=\"320\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"700\" >1x  full speed</text><rect x=\"620\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><rect x=\"770\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><rect x=\"920\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><rect x=\"1070\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><rect x=\"1220\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><rect x=\"1370\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><rect x=\"1520\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><rect x=\"1670\" y=\"282\" width=\"144\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#9fb2cc\" stroke-width=\"1\"/><text x=\"130\" y=\"485\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >0.5x  half speed</text><rect x=\"620\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"695\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"770\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"845\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"920\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"995\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1070\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1145\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1220\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1295\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1370\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1445\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1520\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1595\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1670\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><rect x=\"1745\" y=\"447\" width=\"69\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"1\"/><text x=\"130\" y=\"650\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#ffc06a\" text-anchor=\"start\" font-weight=\"700\" >0.25x  quarter speed</text><rect x=\"620\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"657\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"694\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"731\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"768\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"805\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"842\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"879\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"916\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"953\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"990\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1027\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1064\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1101\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1138\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1175\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1212\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#ff6b6b\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1249\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1286\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1323\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1360\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1397\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1434\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1471\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1508\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1545\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1582\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1619\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1656\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1693\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1730\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><rect x=\"1767\" y=\"612\" width=\"31\" height=\"54\" rx=\"3\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"1\"/><text x=\"1216\" y=\"698\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"22\" fill=\"#ff9c9c\" text-anchor=\"start\" font-weight=\"400\" >the frame that carries the surprise</text><text x=\"130\" y=\"810\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >Slowing down does not create the rewatch impulse - it reveals where it was hiding.</text>",
+      "accent": "#5bd6d0",
+      "file": "assets_v12/diagram_03.svg"
+    },
+    {
+      "slug": "diagram_04",
+      "slot": 4,
+      "chapter": "5:10-6:15",
+      "title": "Scale Error",
+      "subtitle": "Slot 4 - an original scale diagram with a labelled reference",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >SCALE NEEDS A KNOWN REFERENCE</text><rect x=\"220\" y=\"420\" width=\"220\" height=\"300\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"330\" y=\"780\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >unknown</text><rect x=\"560\" y=\"500\" width=\"90\" height=\"220\" rx=\"12\" fill=\"#5bd6d0\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"605\" y=\"780\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#5bd6d0\" text-anchor=\"middle\" font-weight=\"400\" >reference</text><line x1=\"560\" y1=\"760\" x2=\"650\" y2=\"760\" stroke=\"#ffc06a\" stroke-width=\"4\"/><text x=\"605\" y=\"810\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#ffc06a\" text-anchor=\"middle\" font-weight=\"400\" >1 unit</text><rect x=\"1000\" y=\"340\" width=\"420\" height=\"380\" rx=\"12\" fill=\"#17243a\" stroke=\"#ffc06a\" stroke-width=\"2\"/><text x=\"1210\" y=\"560\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#ffc06a\" text-anchor=\"middle\" font-weight=\"400\" >same object</text><text x=\"1210\" y=\"610\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >two readings</text><text x=\"1000\" y=\"790\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >Remove or mislead the reference and the prediction breaks.</text>",
+      "accent": "#ffc06a",
+      "file": "assets_v12/diagram_04.svg"
+    },
+    {
+      "slug": "diagram_05",
+      "slot": 5,
+      "chapter": "6:15-7:10",
+      "title": "Sound vs Silence",
+      "subtitle": "Slot 5 - drawn A/B beat diagram, not sampled audio",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >PASS A  vs  PASS B  (same frames)</text><text x=\"130\" y=\"350\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >A - native audio</text><rect x=\"620\" y=\"401\" width=\"18\" height=\"18\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"649\" y=\"383\" width=\"18\" height=\"55\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"678\" y=\"364\" width=\"18\" height=\"92\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"707\" y=\"393\" width=\"18\" height=\"34\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"736\" y=\"375\" width=\"18\" height=\"71\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"765\" y=\"356\" width=\"18\" height=\"108\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"794\" y=\"385\" width=\"18\" height=\"50\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"823\" y=\"367\" width=\"18\" height=\"87\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"852\" y=\"396\" width=\"18\" height=\"29\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"881\" y=\"377\" width=\"18\" height=\"66\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"910\" y=\"359\" width=\"18\" height=\"103\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"939\" y=\"388\" width=\"18\" height=\"45\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"968\" y=\"369\" width=\"18\" height=\"82\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"997\" y=\"398\" width=\"18\" height=\"24\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1026\" y=\"380\" width=\"18\" height=\"61\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1055\" y=\"361\" width=\"18\" height=\"98\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1084\" y=\"390\" width=\"18\" height=\"40\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1113\" y=\"372\" width=\"18\" height=\"77\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1142\" y=\"401\" width=\"18\" height=\"19\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1171\" y=\"382\" width=\"18\" height=\"56\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1200\" y=\"364\" width=\"18\" height=\"93\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1229\" y=\"393\" width=\"18\" height=\"35\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1258\" y=\"374\" width=\"18\" height=\"72\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1287\" y=\"356\" width=\"18\" height=\"109\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1316\" y=\"385\" width=\"18\" height=\"51\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1345\" y=\"366\" width=\"18\" height=\"88\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1374\" y=\"395\" width=\"18\" height=\"30\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1403\" y=\"377\" width=\"18\" height=\"67\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1432\" y=\"358\" width=\"18\" height=\"104\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1461\" y=\"387\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1490\" y=\"369\" width=\"18\" height=\"83\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1519\" y=\"398\" width=\"18\" height=\"25\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1548\" y=\"379\" width=\"18\" height=\"62\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1577\" y=\"361\" width=\"18\" height=\"99\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1606\" y=\"390\" width=\"18\" height=\"41\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1635\" y=\"371\" width=\"18\" height=\"78\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1664\" y=\"400\" width=\"18\" height=\"20\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1693\" y=\"382\" width=\"18\" height=\"57\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1722\" y=\"363\" width=\"18\" height=\"94\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1751\" y=\"392\" width=\"18\" height=\"36\" rx=\"2\" fill=\"#5bd6d0\" stroke=\"none\" stroke-width=\"0\"/><text x=\"130\" y=\"600\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#ffc06a\" text-anchor=\"start\" font-weight=\"700\" >B - muted + commentary</text><rect x=\"620\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"649\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"678\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"707\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"736\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"765\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"794\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"823\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"852\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"881\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"910\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"939\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"968\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"997\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1026\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1055\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1084\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1113\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1142\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1171\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1200\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1229\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1258\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1287\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1316\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1345\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1374\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1403\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1432\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1461\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1490\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1519\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1548\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1577\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1606\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1635\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1664\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1693\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1722\" y=\"654\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><rect x=\"1751\" y=\"637\" width=\"18\" height=\"46\" rx=\"2\" fill=\"#ffc06a\" stroke=\"none\" stroke-width=\"0\"/><text x=\"130\" y=\"810\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >No music or SFX substitution: the comparison is only valid with the real audio.</text>",
+      "accent": "#5bd6d0",
+      "file": "assets_v12/diagram_05.svg"
+    },
+    {
+      "slug": "diagram_06",
+      "slot": 6,
+      "chapter": "7:10-8:00",
+      "title": "The Reaction Beat",
+      "subtitle": "Slot 6 - a reaction delays closure by one beat",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >ATTENTION RESET TIMELINE</text><line x1=\"160\" y1=\"700\" x2=\"1760\" y2=\"700\" stroke=\"#3a4d69\" stroke-width=\"3\"/><line x1=\"160\" y1=\"700\" x2=\"620\" y2=\"700\" stroke=\"#9fb2cc\" stroke-width=\"5\"/><line x1=\"620\" y1=\"700\" x2=\"620\" y2=\"330\" stroke=\"#ff6b6b\" stroke-width=\"6\"/><line x1=\"620\" y1=\"330\" x2=\"900\" y2=\"470\" stroke=\"#ffc06a\" stroke-width=\"5\"/><line x1=\"900\" y1=\"470\" x2=\"1760\" y2=\"470\" stroke=\"#5bd6d0\" stroke-width=\"5\"/><circle cx=\"620\" cy=\"330\" r=\"14\" fill=\"#ff6b6b\"/><text x=\"650\" y=\"315\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#ff9c9c\" text-anchor=\"start\" font-weight=\"400\" >reaction beat</text><text x=\"160\" y=\"790\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >prediction</text><text x=\"1300\" y=\"440\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"400\" >explanation resumes</text><text x=\"130\" y=\"830\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#7f92ad\" text-anchor=\"start\" font-weight=\"400\" >No person named, no endorsement implied, no face crop reused as thumbnail.</text>",
+      "accent": "#ffc06a",
+      "file": "assets_v12/diagram_06.svg"
+    },
+    {
+      "slug": "diagram_07",
+      "slot": 7,
+      "chapter": "8:00-8:45",
+      "title": "The Near-Miss",
+      "subtitle": "Slot 7 - converging timeline, sourced facts only",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >TWO INDEPENDENT TRACKS, ONE FRAME</text><line x1=\"160\" y1=\"380\" x2=\"1000\" y2=\"380\" stroke=\"#5bd6d0\" stroke-width=\"5\"/><line x1=\"1000\" y1=\"380\" x2=\"1300\" y2=\"540\" stroke=\"#5bd6d0\" stroke-width=\"5\"/><line x1=\"160\" y1=\"700\" x2=\"1000\" y2=\"700\" stroke=\"#ffc06a\" stroke-width=\"5\"/><line x1=\"1000\" y1=\"700\" x2=\"1300\" y2=\"540\" stroke=\"#ffc06a\" stroke-width=\"5\"/><circle cx=\"1300\" cy=\"540\" r=\"18\" fill=\"#ff6b6b\"/><text x=\"1330\" y=\"520\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#ff9c9c\" text-anchor=\"start\" font-weight=\"400\" >verification frame</text><text x=\"160\" y=\"340\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"400\" >track 1</text><text x=\"160\" y=\"680\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#ffc06a\" text-anchor=\"start\" font-weight=\"400\" >track 2</text><text x=\"130\" y=\"810\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >No invented date, injury, outcome or quote. Rewatch = a verification loop.</text>",
+      "accent": "#5bd6d0",
+      "file": "assets_v12/diagram_07.svg"
+    },
+    {
+      "slug": "diagram_08",
+      "slot": 8,
+      "chapter": "8:45-9:25",
+      "title": "The Prediction Test",
+      "subtitle": "Slot 8 - callback grid, one cell per DIFFERENT clip",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >EIGHT DIFFERENT CLIPS - ONE RULE</text><rect x=\"140\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"3\"/><text x=\"330\" y=\"390\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 1</text><text x=\"330\" y=\"440\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >proved</text><rect x=\"570\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"3\"/><text x=\"760\" y=\"390\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 2</text><text x=\"760\" y=\"440\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >proved</text><rect x=\"1000\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"3\"/><text x=\"1190\" y=\"390\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 3</text><text x=\"1190\" y=\"440\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >proved</text><rect x=\"1430\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"3\"/><text x=\"1620\" y=\"390\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 4</text><text x=\"1620\" y=\"440\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >proved</text><rect x=\"140\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"3\"/><text x=\"330\" y=\"640\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 5</text><text x=\"330\" y=\"690\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >proved</text><rect x=\"570\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"3\"/><text x=\"760\" y=\"640\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 6</text><text x=\"760\" y=\"690\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >proved</text><rect x=\"1000\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#2c3f5c\" stroke-width=\"3\"/><text x=\"1190\" y=\"640\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 7</text><text x=\"1190\" y=\"690\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >proved</text><rect x=\"1430\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#2a3d24\" stroke=\"#ffc06a\" stroke-width=\"3\"/><text x=\"1620\" y=\"640\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#ffc06a\" text-anchor=\"middle\" font-weight=\"700\" >SLOT 8</text><text x=\"1620\" y=\"690\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#ffc06a\" text-anchor=\"middle\" font-weight=\"400\" >PREDICT</text><text x=\"130\" y=\"810\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >Play slot 8 with NO explanation. Ask the viewer to predict the replay point.</text>",
+      "accent": "#ffc06a",
+      "file": "assets_v12/diagram_08.svg"
+    },
+    {
+      "slug": "diagram_09",
+      "slot": null,
+      "chapter": "9:25-9:50",
+      "title": "The Six-Step Rule",
+      "subtitle": "Chapter 12 - the rule and its limits on one screen",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >THE RULE, RESTATED</text><rect x=\"140\" y=\"300\" width=\"530\" height=\"180\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"3\"/><text x=\"405\" y=\"408\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >1  PREDICTION</text><rect x=\"720\" y=\"300\" width=\"530\" height=\"180\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"3\"/><text x=\"985\" y=\"408\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >2  VIOLATION</text><rect x=\"1300\" y=\"300\" width=\"530\" height=\"180\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"3\"/><text x=\"1565\" y=\"408\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >3  SHORT DELAY</text><rect x=\"140\" y=\"550\" width=\"530\" height=\"180\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"3\"/><text x=\"405\" y=\"658\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >4  REPAIR</text><rect x=\"720\" y=\"550\" width=\"530\" height=\"180\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"3\"/><text x=\"985\" y=\"658\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >5  REPLAY</text><rect x=\"1300\" y=\"550\" width=\"530\" height=\"180\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"3\"/><text x=\"1565\" y=\"658\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"34\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >6  SHARE</text><text x=\"130\" y=\"810\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#ff9c9c\" text-anchor=\"start\" font-weight=\"400\" >Honest limits: public counts only; no private analytics, no human review, no clearance.</text>",
+      "accent": "#5bd6d0",
+      "file": "assets_v12/diagram_09.svg"
+    },
+    {
+      "slug": "diagram_10",
+      "slot": null,
+      "chapter": "0:00-0:20",
+      "title": "Cold-Open Montage",
+      "subtitle": "Chapter 1 - eight distinct clips, no reused Short asset",
+      "body": "<rect x=\"90\" y=\"230\" width=\"1740\" height=\"620\" rx=\"12\" fill=\"#131c2b\" stroke=\"#2c3f5c\" stroke-width=\"2\"/><text x=\"118\" y=\"282\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"30\" fill=\"#5bd6d0\" text-anchor=\"start\" font-weight=\"700\" >COLD OPEN - 8 DIFFERENT MOMENTS, 0.8-1.2s EACH</text><rect x=\"140\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"330\" y=\"395\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 1</text><text x=\"330\" y=\"445\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >0.80s</text><rect x=\"570\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"760\" y=\"395\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 2</text><text x=\"760\" y=\"445\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >0.85s</text><rect x=\"1000\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"1190\" y=\"395\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 3</text><text x=\"1190\" y=\"445\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >0.90s</text><rect x=\"1430\" y=\"300\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"1620\" y=\"395\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 4</text><text x=\"1620\" y=\"445\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >0.95s</text><rect x=\"140\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"330\" y=\"645\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 5</text><text x=\"330\" y=\"695\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >1.00s</text><rect x=\"570\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"760\" y=\"645\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 6</text><text x=\"760\" y=\"695\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >1.05s</text><rect x=\"1000\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"1190\" y=\"645\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 7</text><text x=\"1190\" y=\"695\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >1.10s</text><rect x=\"1430\" y=\"550\" width=\"380\" height=\"200\" rx=\"12\" fill=\"#17243a\" stroke=\"#5bd6d0\" stroke-width=\"2\"/><text x=\"1620\" y=\"645\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"32\" fill=\"#e8eef7\" text-anchor=\"middle\" font-weight=\"700\" >CLIP 8</text><text x=\"1620\" y=\"695\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"24\" fill=\"#9fb2cc\" text-anchor=\"middle\" font-weight=\"400\" >1.15s</text><text x=\"130\" y=\"810\" font-family=\"DejaVu Sans, Arial, sans-serif\" font-size=\"26\" fill=\"#9fb2cc\" text-anchor=\"start\" font-weight=\"400\" >No logo, no greeting, native audio only - then the one-line hook.</text>",
+      "accent": "#5bd6d0",
+      "file": "assets_v12/diagram_10.svg"
+    }
+  ],
+  "edl": [
+    {
+      "chapter": 1,
+      "timecode": "0:00-0:20",
+      "name": "Cold open: 3-second montage of 8 different moments",
+      "start_frame": 0,
+      "end_frame_exclusive": 600,
+      "duration_frames": 600,
+      "duration_seconds": 20.0,
+      "vo_words": 23,
+      "shot_list": "One fast cut from each of 8 DIFFERENT clips (0.8-1.2s each), no logo, no greeting, native audio only. Then the one-line hook.",
+      "clip_slot": null,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_10.svg",
+      "replay_passes": [],
+      "native_audio": "n/a",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 2,
+      "timecode": "0:20-0:55",
+      "name": "The promise and the rule",
+      "start_frame": 600,
+      "end_frame_exclusive": 1650,
+      "duration_frames": 1050,
+      "duration_seconds": 35.0,
+      "vo_words": 85,
+      "shot_list": "Presenter on a clean card. One sentence per line, no stock b-roll.",
+      "clip_slot": null,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": null,
+      "replay_passes": [],
+      "native_audio": "n/a",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 3,
+      "timecode": "0:55-1:40",
+      "name": "Why 'rewatched or shared' is a real signal",
+      "start_frame": 1650,
+      "end_frame_exclusive": 3000,
+      "duration_frames": 1350,
+      "duration_seconds": 45.0,
+      "vo_words": 132,
+      "shot_list": "Original metric card: Spikes / Intro / Dips, drawn by us. On-screen source note.",
+      "clip_slot": null,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": null,
+      "replay_passes": [],
+      "native_audio": "n/a",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 4,
+      "timecode": "1:40-2:55",
+      "name": "CLIP 1 - expectation violation",
+      "start_frame": 3000,
+      "end_frame_exclusive": 5250,
+      "duration_frames": 2250,
+      "duration_seconds": 75.0,
+      "vo_words": 125,
+      "shot_list": "[SLOT 1 - SOURCE PENDING RIGHTS GATE] <=10s cold, native audio. FREEZE on the violation frame. ORIGINAL expected-vs-actual diagram.",
+      "clip_slot": 1,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_01.svg",
+      "replay_passes": [],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 5,
+      "timecode": "2:55-4:05",
+      "name": "CLIP 2 - the physics surprise",
+      "start_frame": 5250,
+      "end_frame_exclusive": 7350,
+      "duration_frames": 2100,
+      "duration_seconds": 70.0,
+      "vo_words": 140,
+      "shot_list": "[SLOT 2 - SOURCE PENDING RIGHTS GATE] <=10s, then 0.5x replay. ORIGINAL ray / force diagram. On-screen first-party source note.",
+      "clip_slot": 2,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_02.svg",
+      "replay_passes": [
+        "1x",
+        "0.5x"
+      ],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 6,
+      "timecode": "4:05-5:10",
+      "name": "CLIP 3 - timing / slow motion",
+      "start_frame": 7350,
+      "end_frame_exclusive": 9300,
+      "duration_frames": 1950,
+      "duration_seconds": 65.0,
+      "vo_words": 126,
+      "shot_list": "[SLOT 3 - SOURCE PENDING RIGHTS GATE] Three labelled passes: 1x, 0.5x, 0.25x. ORIGINAL frame-timeline diagram.",
+      "clip_slot": 3,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_03.svg",
+      "replay_passes": [
+        "1x",
+        "0.5x",
+        "0.25x"
+      ],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 7,
+      "timecode": "5:10-6:15",
+      "name": "CLIP 4 - scale / size illusion",
+      "start_frame": 9300,
+      "end_frame_exclusive": 11250,
+      "duration_frames": 1950,
+      "duration_seconds": 65.0,
+      "vo_words": 134,
+      "shot_list": "[SLOT 4 - SOURCE PENDING RIGHTS GATE] <=10s. ORIGINAL scale diagram with a labelled reference object. No stock b-roll as hero.",
+      "clip_slot": 4,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_04.svg",
+      "replay_passes": [],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 8,
+      "timecode": "6:15-7:10",
+      "name": "CLIP 5 - sound and silence",
+      "start_frame": 11250,
+      "end_frame_exclusive": 12900,
+      "duration_frames": 1650,
+      "duration_seconds": 55.0,
+      "vo_words": 107,
+      "shot_list": "[SLOT 5 - SOURCE PENDING RIGHTS GATE] Pass one WITH native audio, pass two muted with commentary. ORIGINAL two-row A/B beat diagram, drawn not sampled.",
+      "clip_slot": 5,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_05.svg",
+      "replay_passes": [],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 9,
+      "timecode": "7:10-8:00",
+      "name": "CLIP 6 - the human reaction",
+      "start_frame": 12900,
+      "end_frame_exclusive": 14400,
+      "duration_frames": 1500,
+      "duration_seconds": 50.0,
+      "vo_words": 89,
+      "shot_list": "[SLOT 6 - SOURCE PENDING RIGHTS GATE] <=10s. ORIGINAL attention-reset timeline. No face crop reused as thumbnail. No name used promotionally.",
+      "clip_slot": 6,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_06.svg",
+      "replay_passes": [],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 10,
+      "timecode": "8:00-8:45",
+      "name": "CLIP 7 - the near-miss / coincidence",
+      "start_frame": 14400,
+      "end_frame_exclusive": 15750,
+      "duration_frames": 1350,
+      "duration_seconds": 45.0,
+      "vo_words": 80,
+      "shot_list": "[SLOT 7 - SOURCE PENDING RIGHTS GATE] <=10s. ORIGINAL two-track converging timeline. No invented date, injury, outcome or quote.",
+      "clip_slot": 7,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_07.svg",
+      "replay_passes": [],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 11,
+      "timecode": "8:45-9:25",
+      "name": "CLIP 8 + the prediction test (MC-02 folded in)",
+      "start_frame": 15750,
+      "end_frame_exclusive": 16950,
+      "duration_frames": 1200,
+      "duration_seconds": 40.0,
+      "vo_words": 81,
+      "shot_list": "[SLOT 8 - SOURCE PENDING RIGHTS GATE] Play the whole clip with NO explanation. ORIGINAL 8-slot callback grid, one cell per DIFFERENT clip.",
+      "clip_slot": 8,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_08.svg",
+      "replay_passes": [],
+      "native_audio": "PENDING_RIGHTS_GATE",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 12,
+      "timecode": "9:25-9:50",
+      "name": "The rule, restated + honest limits",
+      "start_frame": 16950,
+      "end_frame_exclusive": 17700,
+      "duration_frames": 750,
+      "duration_seconds": 25.0,
+      "vo_words": 89,
+      "shot_list": "One screen with the six-step rule. Then a plainly worded limits card.",
+      "clip_slot": null,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": "assets_v12/diagram_09.svg",
+      "replay_passes": [],
+      "native_audio": "n/a",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    },
+    {
+      "chapter": 13,
+      "timecode": "9:50-10:00",
+      "name": "Genuine question + series teaser",
+      "start_frame": 17700,
+      "end_frame_exclusive": 18000,
+      "duration_frames": 300,
+      "duration_seconds": 10.0,
+      "vo_words": 27,
+      "shot_list": "One specific question on screen. One next-episode teaser. No like/subscribe coercion or reward.",
+      "clip_slot": null,
+      "clip_in_frame": null,
+      "clip_out_frame": null,
+      "clip_media_path": null,
+      "clip_sha256": null,
+      "original_diagram_asset": null,
+      "replay_passes": [],
+      "native_audio": "n/a",
+      "status": "PLAN_ONLY_NOT_RENDERED"
+    }
+  ],
+  "qc_checklist": [
+    {
+      "check": "duration_600s",
+      "target": "600.000s",
+      "source": "V12 runtime spec",
+      "status": "not_run"
+    },
+    {
+      "check": "frames_18000",
+      "target": "18000 frames @ 30fps",
+      "source": "frame maths",
+      "status": "not_run"
+    },
+    {
+      "check": "landscape_1920x1080",
+      "target": "1920x1080",
+      "source": "V12 format (V10 was vertical 1080x1920)",
+      "status": "not_run"
+    },
+    {
+      "check": "fps_30",
+      "target": "30/1",
+      "source": "V10 technical_checks",
+      "status": "not_run"
+    },
+    {
+      "check": "audio_48k_stereo",
+      "target": "48000 Hz, 2 ch",
+      "source": "V10 technical_checks",
+      "status": "not_run"
+    },
+    {
+      "check": "integrated_loudness",
+      "target": "-14 LUFS (spec target copied from V10 QC: -14.60 LUFS measured there)",
+      "source": "V10 technical_checks",
+      "status": "not_run"
+    },
+    {
+      "check": "true_peak",
+      "target": "within V10 chain limit",
+      "source": "V10 technical_checks",
+      "status": "not_run"
+    },
+    {
+      "check": "no_sample_clipping_runs",
+      "target": "0 runs",
+      "source": "V10 technical_checks",
+      "status": "not_run"
+    },
+    {
+      "check": "no_click_runs",
+      "target": "0 runs",
+      "source": "V10 technical_checks",
+      "status": "not_run"
+    },
+    {
+      "check": "nine_gate_audio",
+      "target": "V10's 9/9 gate list (items not enumerated here)",
+      "source": "V10 short_35 qc_summary.json",
+      "status": "not_run"
+    },
+    {
+      "check": "source_share_max_13_3pct",
+      "target": "<=80s of source / 600s",
+      "source": "V12 hard guardrail",
+      "status": "not_run"
+    },
+    {
+      "check": "each_clip_max_10s",
+      "target": "8 slots, each <=300 frames",
+      "source": "V12 hard guardrail",
+      "status": "not_run"
+    },
+    {
+      "check": "eight_distinct_clips",
+      "target": "8 different asset IDs / hashes",
+      "source": "user correction",
+      "status": "not_run"
+    },
+    {
+      "check": "v10_short_asset_absent",
+      "target": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman not present",
+      "source": "user correction",
+      "status": "not_run"
+    },
+    {
+      "check": "no_insignia_current_crew",
+      "target": "0 frames",
+      "source": "NASA promotional gate",
+      "status": "not_run"
+    },
+    {
+      "check": "native_audio_retained",
+      "target": "no music/SFX substitution",
+      "source": "V12 edit decisions",
+      "status": "not_run"
+    },
+    {
+      "check": "original_diagrams_only",
+      "target": "10 own SVG assets",
+      "source": "this kit",
+      "status": "not_run"
+    },
+    {
+      "check": "ai_use_disclosure",
+      "target": "present if synthetic/altered media used",
+      "source": "official help",
+      "status": "not_run"
+    },
+    {
+      "check": "human_full_motion_native_audio_review",
+      "target": "completed by a human",
+      "source": "standing continuity line",
+      "status": "not_run"
+    },
+    {
+      "check": "human_creative_approval",
+      "target": "completed by a human",
+      "source": "standing continuity line",
+      "status": "not_run"
+    }
+  ],
+  "ab_test_plan": {
+    "status": "NOT_RUN",
+    "studio_feature": "Test & Compare supports up to 3 titles + 3 thumbnails; use it, do not guess",
+    "hook_variants": [
+      "V12-H1: Eight different clips. One reason you cannot stop replaying them. I will show you the rule - then prove it on every single one.",
+      "V12-H2: These eight moments look unrelated. By the end of this video you will be able to predict which clip will make you hit replay before it even finishes.",
+      "V12-H3: I slowed eight viral moments down to the frame. Every one of them breaks the same expectation at exactly the same point."
+    ],
+    "title_variants": [
+      "Why These 8 Moments Make You Rewatch: A Forensic Breakdown",
+      "The Replay Code: 8 Moments, One Hidden Rule",
+      "Eight Clips, One Reason You Hit Replay"
+    ],
+    "thumbnail_concepts": [
+      "eight numbered cells, one highlighted - matches the callback grid",
+      "single freeze frame with a drawn violation marker",
+      "plain text rule card, no face, no logo"
+    ],
+    "honest_caveat": "Number-in-title signals CONTRADICT across the real Phase A samples (-65% to +389%, one with r2=0.093). A/B is a test, not a proven winner.",
+    "no_claim": "No CTR, retention, views or revenue outcome is predicted."
+  },
+  "captions_skeleton": [
+    {
+      "chapter": 1,
+      "timecode": "0:00-0:20",
+      "start_frame": 0,
+      "end_frame_exclusive": 600,
+      "vo_word_count": 23,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 2,
+      "timecode": "0:20-0:55",
+      "start_frame": 600,
+      "end_frame_exclusive": 1650,
+      "vo_word_count": 85,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 3,
+      "timecode": "0:55-1:40",
+      "start_frame": 1650,
+      "end_frame_exclusive": 3000,
+      "vo_word_count": 132,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 4,
+      "timecode": "1:40-2:55",
+      "start_frame": 3000,
+      "end_frame_exclusive": 5250,
+      "vo_word_count": 125,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 5,
+      "timecode": "2:55-4:05",
+      "start_frame": 5250,
+      "end_frame_exclusive": 7350,
+      "vo_word_count": 140,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 6,
+      "timecode": "4:05-5:10",
+      "start_frame": 7350,
+      "end_frame_exclusive": 9300,
+      "vo_word_count": 126,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 7,
+      "timecode": "5:10-6:15",
+      "start_frame": 9300,
+      "end_frame_exclusive": 11250,
+      "vo_word_count": 134,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 8,
+      "timecode": "6:15-7:10",
+      "start_frame": 11250,
+      "end_frame_exclusive": 12900,
+      "vo_word_count": 107,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 9,
+      "timecode": "7:10-8:00",
+      "start_frame": 12900,
+      "end_frame_exclusive": 14400,
+      "vo_word_count": 89,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 10,
+      "timecode": "8:00-8:45",
+      "start_frame": 14400,
+      "end_frame_exclusive": 15750,
+      "vo_word_count": 80,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 11,
+      "timecode": "8:45-9:25",
+      "start_frame": 15750,
+      "end_frame_exclusive": 16950,
+      "vo_word_count": 81,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 12,
+      "timecode": "9:25-9:50",
+      "start_frame": 16950,
+      "end_frame_exclusive": 17700,
+      "vo_word_count": 89,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    },
+    {
+      "chapter": 13,
+      "timecode": "9:50-10:00",
+      "start_frame": 17700,
+      "end_frame_exclusive": 18000,
+      "vo_word_count": 27,
+      "timing_status": "WORD_LEVEL_TIMING_PENDING_AFTER_ACTUAL_VO_RECORDING",
+      "text": null,
+      "status": "SKELETON_ONLY_NOT_AN_SRT"
+    }
+  ],
+  "render_pipeline": {
+    "file": "render_pipeline_v12.py",
+    "mode": "PLANNER_ONLY_NEVER_INVOKES_FFMPEG",
+    "gate_check": "reads phase_b_rights_gate_v12.json; exits 2 while any dossier is pending",
+    "self_test": "forged cleared dossier is rejected"
+  },
+  "excluded_existing_short_clip": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+  "hard_stop": "NO clip enters the edit until every rights field is verified and human_legal_review=true for that clip.",
+  "non_claims": {
+    "clip_downloaded": false,
+    "clip_cleared": false,
+    "vo_recorded": false,
+    "render_done": false,
+    "mp4_created": false,
+    "captions_file_created": false,
+    "thumbnail_created": false,
+    "ab_test_run": false,
+    "qc_run": false,
+    "upload_done": false,
+    "publish_done": false,
+    "monetization_changed": false,
+    "human_legal_review": false,
+    "human_creative_approval": false,
+    "legal_clearance": false,
+    "guaranteed_views": false,
+    "perfection": false,
+    "nasa_endorsement": false
+  }
+}

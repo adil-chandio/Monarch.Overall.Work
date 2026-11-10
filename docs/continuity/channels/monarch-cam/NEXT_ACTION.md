@@ -1,3 +1,10 @@
+## V12 PHASE D addendum - original artwork, EDL, QC kit, render gate (assets + plans, NO render)
+
+- Phase D built from scratch without any cleared clip: 10 ORIGINAL SVG diagrams under `research/multi_clip_long_form_v12/assets_v12/` (own shapes/text only, no images, no external URLs, no logos/insignia), `index.html` visual preview, a frame-accurate 13-chapter EDL (600s x 30fps = 18,000 contiguous frames; all clip in/out, media paths and SHA values NULL), a 20-item QC checklist adapted from V10 technical_checks (all `not_run`), an A/B plan (3 hooks / 3 titles / 3 thumbnail concepts, NOT run), a captions SKELETON (no SRT file), and `render_pipeline_v12.py` which EXITS 2 with BLOCKED while any of the 8 dossiers is pending and rejects a forged cleared dossier in --self-test. It NEVER invokes ffmpeg.
+- `ONE_PAGE_REVIEWER_CHECKLIST_V12.md`: the single human-fillable page (18 fields, 8 slot rows, 8 kill conditions, sign-off). This is the ONLY remaining blocker before VO recording / edit / QC.
+- HARD STOP UNCHANGED: no clip downloaded/cleared, no VO recorded, no MP4/render, no captions file, no thumbnail, no A/B test, no QC run, no upload/publish, no monetization change, no human approval, no legal clearance, no guaranteed views. Winner unchanged: MC-01, 8 DIFFERENT clips, 10:00, <=13.3% source share; V10/Short NASA asset still EXCLUDED.
+- This addendum does NOT supersede the standing 'await human full-motion/native-audio review' line below.
+
 ## V12 PHASE B/C addendum - executable rights gate + VO script DRAFT (NO clearance, NO render)
 
 - Phase B/C done via GitHub Actions run `42905149277` (3 angle-specific topic probes + 6 real-winner reverse teardowns) using the existing `YOUTUBE_API_KEY` secret, presence only. Bot commit `a6895cf`. Five of six transcripts were blocked (yt-dlp bot check / no captions); ONE succeeded: Veritasium `k5s1cMNTmGs` (36,618,923 views, 140 words, 200 wpm, reading grade 8.1, 0 CTAs, opens with 'you'). Its real structure map is promise -> setup -> first proof -> escalation -> payoff.
