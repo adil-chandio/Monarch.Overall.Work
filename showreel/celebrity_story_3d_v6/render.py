@@ -314,10 +314,10 @@ def act_kitchen(t):
     letter.hide_render = True
     hero.action('Drink_Rig', 330 + (t - 11.9) * 60)
     bpy.context.view_layer.update()
-    hero.place(KIT_X - .42, .10, 0, rot=math.pi - .10)
+    hero.place(KIT_X - .42, 1.72, 0, rot=0.32)
     bpy.context.view_layer.update()
     hero.expression(t, smile=.10, brow=.10)
-    hero.look((KIT_X - .6, 1.2, 1.0))
+    hero.look((KIT_X - .6, 1.35, 1.05))
     # the mug sits in his right hand from the moment we cut in
     hero.grip('Right', .90)
     bpy.context.view_layer.update()
@@ -441,11 +441,11 @@ def act_final(t):
     S.show_set('apt')
     hero.show(True); hero.outfit('shirt')
     hide_phones()
-    hero.action('Think_Rig', 30 + (t - CAR_END) * 16)
+    hero.action('Idle_Rig', 40 + (t - CAR_END) * 8)
     bpy.context.view_layer.update()
     hero.place(APT_X + 2.55, 3.25, 0, rot=math.pi - .06)
     bpy.context.view_layer.update()
-    hero.expression(t, smile=.02, brow=.10)
+    hero.expression(t, smile=.02, brow=.06)
     hero.look((APT_X + 2.4, -30.0, 2.6))
     # phone face-down on the coffee table, out of reach
     motion.attach(hero_phone2, (APT_X + 2.10, 2.70, .404), Quaternion((0, 0, 1), .9))
@@ -472,13 +472,13 @@ ACTS = [
 
 # per act: list of (fraction_start, fraction_end, subject, az, dist, height, dz, lens)
 BEATS = {
-    'bedroom': [(0.0, .22, 'hero', 26, 3.4, 1.60, -.05, 40),
+    'bedroom': [(0.0, .22, 'hero', -62, 4.4, 1.66, -.06, 34),
                 (.22, .40, 'phone', 34, .58, 1.62, .05, 85),
                 (.40, .52, 'hero', -32, 2.2, 1.54, -.02, 52),
                 (.52, .66, 'hero', 54, 2.0, 1.38, -.02, 46),
                 (.66, .83, 'hero', 16, 3.2, 1.66, -.08, 36),
-                (.83, 1.0, 'hero', -58, 2.2, 1.44, .03, 46)],
-    'kitchen': [(0.0, .34, 'mug', 54, .42, 1.24, .05, 70),
+                (.83, 1.0, 'hero', -74, 2.4, 1.46, .02, 40)],
+    'kitchen': [(0.0, .34, 'mug', 54, .78, 1.28, .04, 50),
                 (.34, .58, 'hero', -26, 2.6, 1.54, -.02, 48),
                 (.58, .78, 'hero', 34, 1.55, 1.57, .05, 68),
                 (.78, 1.0, 'hero', 68, 2.5, 1.50, -.05, 40)],
@@ -630,9 +630,9 @@ def place_camera(t, idx, s):
     u = motion.ease((t - t0) / max(1e-3, t1 - t0))
     focal = focal_point(subj)
     rig = girl.rig if subj == 'girl' else hero.rig
-    # the imported rig faces +Y in its own space; the shot azimuth is measured
-    # from that facing, positive toward his left
-    fwd = rig.rotation_quaternion @ Vector((0, 1, 0))
+    # the imported rig faces +Y; shot azimuth 0 means *facing him* (camera in
+    # front, looking at his face), positive swings toward his left shoulder
+    fwd = rig.rotation_quaternion @ Vector((0, -1, 0))
     right = rig.rotation_quaternion @ Vector((1, 0, 0))
     if subj == 'pair':
         # side-on to the two of them, always from the road
