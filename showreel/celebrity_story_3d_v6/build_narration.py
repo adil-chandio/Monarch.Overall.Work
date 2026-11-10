@@ -20,7 +20,7 @@ TEXT = [
     "One girl at the barrier is not holding a phone. She is shaking. He stops walking.",
     "He reaches over the barrier, and for a second he is not a headline. He is just someone who listened.",
     "Then the car door closes, and the street goes quiet again.",
-    "Hours later, the apartment is dark. He sits on the floor, back against the sofa. Nobody is watching.",
+    "Hours later, the apartment is dark. He stands at the glass, the phone face down behind him. Nobody is watching.",
 ]
 
 

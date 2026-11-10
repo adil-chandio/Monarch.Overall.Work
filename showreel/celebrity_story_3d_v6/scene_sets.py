@@ -406,11 +406,11 @@ def build_kitchen(x=-96.0):
     g = 'kit'
     floor_mat = textured('kit floor', (.34, .32, .31), (2, 2, 1),
                          variants=('tile_floor.jpg', 'tiles.jpg'))
-    marble = textured('kit marble', (.88, .87, .85), (1, 1, 1),
+    marble = textured('kit marble', (.70, .69, .67), (1, 1, 1),
                       variants=('marble.jpg', 'marble_counter.jpg'), rough=.22)
     cab = textured('kit cab', (.20, .16, .13), (1, 1, 1),
                    variants=('wood_walnut.jpg', 'walnut.jpg', 'wood.jpg'))
-    white = plain('kit wall', (.80, .79, .77), rough=.85)
+    white = plain('kit wall', (.66, .65, .63), rough=.85)
     dark = plain('kit dark', (.05, .05, .06), rough=.4, metal=.4)
     steel = plain('kit steel', (.72, .73, .75), rough=.25, metal=1.0)
 
@@ -467,10 +467,10 @@ def build_kitchen(x=-96.0):
         sphere(f'pendant bulb {i}', (isl[0] + dx, isl[1], 2.10), .045,
                plain('bulb', (1, .84, .62), emit=8), group=g)
 
-    area('kit window light', (x - 1.6, 3.6, 2.1), (x - 1.7, 0, 1.1), 420, 2.4, (1, .95, .86), group=g)
-    spot('kit sun shaft', (x - 2.6, 3.4, 2.5), (x - .6, .2, .8), 260, (1, .92, .78), size=.6,
+    area('kit window light', (x - 1.6, 3.6, 2.1), (x - 1.7, 0, 1.1), 260, 2.4, (1, .95, .88), group=g)
+    spot('kit sun shaft', (x - 2.6, 3.4, 2.5), (x - .6, .2, .8), 180, (1, .93, .80), size=.6,
          angle=38, group=g)
-    area('kit fill', (x - .2, .6, 2.60), (x - 1.0, 3.0, 1.2), 180, 3.5, (.82, .88, 1), group=g)
+    area('kit fill', (x - .2, .6, 2.60), (x - 1.0, 3.0, 1.2), 110, 3.5, (.80, .87, 1), group=g)
     for i, dx in enumerate((-1.0, 0.0, 1.0)):
         spot(f'pendant light {i}', (isl[0] + dx, isl[1], 2.14), (isl[0] + dx, isl[1], .9), 40,
              (1, .82, .58), size=.08, angle=70, group=g)

@@ -157,7 +157,7 @@ hero_screen2 = prop('sill screen', (.064, .0015, .134), screen_mat)
 hero_screen2.parent = hero_phone2
 hero_screen2['dynamic'] = True
 
-ceramic = S.plain('mug ceramic', (.92, .91, .88), rough=.18)
+ceramic = S.plain('mug ceramic', (.075, .080, .085), rough=.32)
 coffee_mat = S.plain('coffee', (.16, .09, .05), rough=.12)
 mug = S.cyl('mug', (0, 0, -50), .043, .09, ceramic, verts=28)
 mug['dynamic'] = True
@@ -288,7 +288,12 @@ def place_crowd(t, spots, look_at_pt):
 
 
 # --------------------------------------------------------------------- acts
+def exposure(v):
+    scn.view_settings.exposure = v
+
+
 def act_bedroom(t):
+    exposure(.42)
     S.show_set('apt')
     hero.show(True); hero.outfit('formal')
     for a in all_others:
@@ -315,6 +320,7 @@ def act_bedroom(t):
 
 
 def act_kitchen(t):
+    exposure(.20)
     S.show_set('kit')
     hero.show(True); hero.outfit('shirt')
     for a in all_others:
@@ -339,6 +345,7 @@ def act_kitchen(t):
 
 
 def act_window(t):
+    exposure(.48)
     S.show_set('apt')
     hero.show(True); hero.outfit('smart')
     for a in all_others:
@@ -355,6 +362,7 @@ def act_window(t):
 
 
 def act_street(t):
+    exposure(.46)
     S.show_set('street')
     for a in (hero, guard) + tuple(crowd):
         a.show(True)
@@ -386,6 +394,7 @@ def act_street(t):
 
 
 def act_barrier(t):
+    exposure(.46)
     S.show_set('street')
     for a in (hero, guard, girl) + tuple(crowd):
         a.show(True)
@@ -424,6 +433,7 @@ def act_barrier(t):
 
 
 def act_car(t):
+    exposure(.46)
     S.show_set('street')
     for a in (hero, guard):
         a.show(True)
@@ -447,17 +457,27 @@ def act_car(t):
 
 
 def act_final(t):
+    exposure(.10)
     S.show_set('apt')
+    # photograph the room at night: everything dim, only the sky outside bright
+    for name, level in (('apt warm key', .10), ('apt warm fill', .06),
+                        ('apt sky fill', .20), ('apt bounce', .10),
+                        ('bed pool', 0.0), ('cove bounce', .12)):
+        l = bpy.data.objects.get(name)
+        if l and l.type == 'LIGHT':
+            if '_base_energy' not in l:
+                l['_base_energy'] = l.data.energy
+            l.data.energy = l['_base_energy'] * level
     hero.show(True); hero.outfit('shirt')
     hide_phones()
     hero.action('Idle_Rig', 40 + (t - CAR_END) * 8)
     bpy.context.view_layer.update()
-    hero.place(APT_X + 2.55, 3.25, 0, rot=math.pi - .06)
+    hero.place(APT_X - .95, -3.90, 0, rot=math.pi + .10)
     bpy.context.view_layer.update()
     hero.expression(t, smile=.02, brow=.06)
-    hero.look((APT_X + 2.4, -30.0, 2.6))
-    # phone face-down on the coffee table, out of reach
-    motion.attach(hero_phone2, (APT_X + 2.10, 2.70, .404), Quaternion((0, 0, 1), .9))
+    hero.look((APT_X + 6.0, -40.0, 4.5))
+    # phone face-down on the sill behind him, out of reach
+    motion.attach(hero_phone2, (APT_X + .55, -4.74, .408), Quaternion((0, 0, 1), .9))
     hero_phone2.rotation_euler = (0, 0, .9)
     hero_phone2.hide_render = hero_screen2.hide_render = False
     mug.hide_render = coffee.hide_render = handle.hide_render = True
@@ -637,7 +657,7 @@ def _projects(pos, lens, focus, dz=0.0):
 OVERRIDES = {
     # deliberate wides: the solver keeps people centred, but an establishing
     # frame has to show the room, so these are placed by hand and checked.
-    0: ((APT_X + 3.35, -2.05, 1.62), (APT_X - 2.30, 3.20, 1.22), 26),
+    0: ((APT_X + 1.55, -2.35, 1.62), (APT_X - 2.10, 3.30, 1.26), 30),
 }
 
 
