@@ -66,10 +66,10 @@ for freq, gain, phase in [(36.708, 0.30, 0.0), (55.0, 0.20, 1.1), (73.416, 0.10,
     add(music, np.sin(2 * np.pi * freq * t + phase) * swell, 0.0, gain)
 
 # High shimmer pad that arrives with the "strange part" beat and keeps building.
-shimmer_in = 16.6
+shimmer_in = 18.95
 shimmer_i = int(shimmer_in * sr)
 sh = noise_band(3200, 7800, DUR - shimmer_in)
-sh_t = t[shimmer_i:]
+sh_t = t[shimmer_i:shimmer_i + len(sh)]
 env = np.clip((sh_t - shimmer_in) / 6.0, 0, 1) * np.clip((DUR - sh_t) / 9.0, 0, 1)
 mod = 0.65 + 0.35 * np.sin(2 * np.pi * 0.23 * sh_t + 1.3)
 add(music, sh * env * mod, shimmer_in, 0.020)
@@ -77,8 +77,8 @@ add(music, sh * env * mod, shimmer_in, 0.020)
 # Pulse: 60 BPM soft sub hits, sparse at first, denser once the case board appears.
 beat = 60.0 / 60.0
 for j, at in enumerate(np.arange(0.4, DUR - 0.4, beat)):
-    strength = 0.35 if at < 16.6 else (0.6 if at < 26.9 else (0.85 if at < 43.7 else 0.5))
-    if j % 2 == 1 and at < 26.9:
+    strength = 0.35 if at < 18.95 else (0.6 if at < 31.1 else (0.85 if at < 44.0 else 0.5))
+    if j % 2 == 1 and at < 31.1:
         strength *= 0.5
     dur = 0.5
     n = int(dur * sr)
@@ -152,11 +152,11 @@ def card_thunk(at, gain=0.10):
     FX.append({'at': round(at, 3), 'type': 'soft card placement thunk'})
 
 
-low_drop(16.55)
-card_thunk(26.85, 0.09)
-glass_shimmer(33.95, 0.045)
-glass_shimmer(40.45, 0.040)
-low_drop(51.35, 1.9, 96.0, 30.0, 0.13)
+low_drop(18.90)
+card_thunk(31.05, 0.09)
+glass_shimmer(35.85, 0.045)
+glass_shimmer(40.65, 0.040)
+low_drop(50.55, 1.9, 96.0, 30.0, 0.13)
 
 # ---------------------------------------------------------------- ducking and mix
 step = 240

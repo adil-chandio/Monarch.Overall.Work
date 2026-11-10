@@ -1,274 +1,144 @@
 {
   "source": "narration.mp3 (platform synthesised voice-04, unsped)",
   "audio_seconds": 49.644,
-  "sample_rate": 48000,
-  "voiced_regions": [
-    [
-      0.16,
-      0.85
-    ],
-    [
-      1.42,
-      3.11
-    ],
-    [
-      4.01,
-      4.49
-    ],
-    [
-      4.66,
-      6.63
-    ],
-    [
-      7.02,
-      7.19
-    ],
-    [
-      7.36,
-      8.07
-    ],
-    [
-      9.68,
-      10.04
-    ],
-    [
-      11.39,
-      12.55
-    ],
-    [
-      13.27,
-      14.9
-    ],
-    [
-      15.34,
-      15.51
-    ],
-    [
-      15.95,
-      16.34
-    ],
-    [
-      16.76,
-      17.78
-    ],
-    [
-      18.49,
-      19.16
-    ],
-    [
-      19.95,
-      21.75
-    ],
-    [
-      22.13,
-      22.45
-    ],
-    [
-      22.65,
-      22.97
-    ],
-    [
-      23.2,
-      24.14
-    ],
-    [
-      24.59,
-      25.99
-    ],
-    [
-      26.5,
-      28.26
-    ],
-    [
-      28.72,
-      30.19
-    ],
-    [
-      30.7,
-      32.67
-    ],
-    [
-      33.19,
-      33.44
-    ],
-    [
-      33.9,
-      34.86
-    ],
-    [
-      35.6,
-      38.24
-    ],
-    [
-      39.15,
-      39.5
-    ],
-    [
-      39.92,
-      40.28
-    ],
-    [
-      40.79,
-      41.19
-    ],
-    [
-      41.57,
-      42.95
-    ],
-    [
-      43.46,
-      44.14
-    ],
-    [
-      44.53,
-      45.88
-    ],
-    [
-      46.36,
-      47.06
-    ],
-    [
-      47.67,
-      49.29
-    ]
-  ],
-  "alignment_method": "length-weighted split (28 detected blocks, 11 sentences)",
-  "alignment_caveat": "Sentence-level speech-activity alignment, not word-level forced alignment.",
+  "sample_rate": 16000,
+  "alignment_method": "PocketSphinx 5.1.1 known-transcript word alignment",
+  "alignment_caveat": "Automatic forced alignment estimates word boundaries; it is not a human listening review.",
   "cue_count": 27,
   "cues": [
     {
-      "start": 0.16,
-      "end": 2.13,
+      "start": 0.12,
+      "end": 2.07,
       "text": "This mammoth may have had"
     },
     {
-      "start": 2.13,
-      "end": 3.313,
+      "start": 2.07,
+      "end": 3.53,
       "text": "an extraordinary coat."
     },
     {
-      "start": 3.313,
-      "end": 4.937,
+      "start": 3.99,
+      "end": 5.98,
       "text": "Scientists found two mutations"
     },
     {
-      "start": 4.937,
-      "end": 6.561,
+      "start": 5.98,
+      "end": 7.32,
       "text": "in a gene linked"
     },
     {
-      "start": 6.561,
-      "end": 7.779,
+      "start": 7.32,
+      "end": 8.49,
       "text": "to hair development."
     },
     {
-      "start": 7.779,
-      "end": 9.66,
+      "start": 8.94,
+      "end": 10.68,
       "text": "They predicted a silky coat,"
     },
     {
-      "start": 9.66,
-      "end": 11.917,
+      "start": 11.12,
+      "end": 12.88,
       "text": "but could not observe it directly."
     },
     {
-      "start": 11.917,
-      "end": 14.071,
+      "start": 13.16,
+      "end": 14.92,
       "text": "The animal lived on Wrangel Island,"
     },
     {
-      "start": 14.071,
-      "end": 15.508,
+      "start": 15.29,
+      "end": 16.37,
       "text": "in the Arctic Ocean,"
     },
     {
-      "start": 15.508,
-      "end": 17.303,
+      "start": 16.74,
+      "end": 18.08,
       "text": "a few thousand years ago."
     },
     {
-      "start": 17.303,
-      "end": 18.682,
+      "start": 18.49,
+      "end": 19.51,
       "text": "Now the strange part."
     },
     {
-      "start": 18.682,
-      "end": 21.244,
+      "start": 19.93,
+      "end": 21.8,
       "text": "A later study of ancient genomes"
     },
     {
-      "start": 21.244,
-      "end": 23.379,
+      "start": 22.06,
+      "end": 23.6,
       "text": "found that the island population"
     },
     {
-      "start": 23.379,
-      "end": 25.513,
+      "start": 23.6,
+      "end": 26.15,
       "text": "recovered after an extreme bottleneck."
     },
     {
-      "start": 25.513,
-      "end": 28.14,
+      "start": 26.49,
+      "end": 28.45,
       "text": "Yet the mammoths eventually disappeared."
     },
     {
-      "start": 28.14,
-      "end": 29.98,
+      "start": 28.71,
+      "end": 30.28,
       "text": "How can both things be true?"
     },
     {
-      "start": 29.98,
-      "end": 32.244,
+      "start": 30.67,
+      "end": 32.84,
       "text": "Scientists have examined genetic damage,"
     },
     {
-      "start": 32.244,
-      "end": 34.055,
+      "start": 33.12,
+      "end": 35.02,
       "text": "climate, and human arrival,"
     },
     {
-      "start": 34.055,
-      "end": 35.867,
+      "start": 35.41,
+      "end": 36.93,
       "text": "but the final generations"
     },
     {
-      "start": 35.867,
-      "end": 38.584,
+      "start": 36.93,
+      "end": 38.76,
       "text": "are missing from the genetic record."
     },
     {
-      "start": 38.584,
-      "end": 40.554,
+      "start": 39.14,
+      "end": 41.33,
       "text": "So which explanation holds up?"
     },
     {
-      "start": 40.554,
-      "end": 42.651,
+      "start": 41.56,
+      "end": 43.03,
       "text": "We will take the evidence apart,"
     },
     {
-      "start": 42.651,
-      "end": 44.049,
+      "start": 43.43,
+      "end": 44.23,
       "text": "and at the end,"
     },
     {
-      "start": 44.049,
-      "end": 45.446,
+      "start": 44.52,
+      "end": 45.92,
       "text": "separate what is proven,"
     },
     {
-      "start": 45.446,
-      "end": 46.495,
+      "start": 46.35,
+      "end": 47.29,
       "text": "what is plausible,"
     },
     {
-      "start": 46.495,
-      "end": 48.242,
+      "start": 47.64,
+      "end": 48.74,
       "text": "and what is still missing"
     },
     {
-      "start": 48.242,
-      "end": 49.29,
+      "start": 48.74,
+      "end": 49.42,
       "text": "from the file."
     }
   ]

@@ -1,16 +1,13 @@
-"""Align narration to caption cues using detected speech activity.
+"""Align the known narration transcript to the unsped voice take.
 
-Method: decode the narration to mono PCM, detect voiced regions by short-term RMS,
-then distribute the known sentence order across the detected voiced regions in
-proportion to character length. This is a measured approximation of speech
-activity, not a claim of word-level forced alignment.
+PocketSphinx estimates word boundaries from the audio and known text. It is
+not a substitute for a listening review; a custom pronunciation is provided
+for Wrangel and genomes. Timeline creation adds the mix start offset.
 """
 import json
 import subprocess
-import wave
 from pathlib import Path
 
-import numpy as np
 import imageio_ffmpeg
 
 B = Path(__file__).resolve().parent
@@ -45,115 +42,61 @@ CHUNKS = [
 ]
 
 
-def decode(path: Path, out: Path) -> tuple[int, np.ndarray]:
-    subprocess.run([ff, '-y', '-v', 'error', '-i', str(path), '-ar', '48000', '-ac', '1',
-                    '-c:a', 'pcm_s16le', str(out)], check=True)
-    with wave.open(str(out)) as w:
-        n = w.getnframes()
-        sr = w.getframerate()
-        data = np.frombuffer(w.readframes(n), dtype=np.int16).astype(np.float32) / 32768.0
-    return sr, data
-
-
-def voiced_regions(x: np.ndarray, sr: int, min_gap: float = 0.16, min_len: float = 0.12):
-    hop = int(0.01 * sr)
-    win = int(0.03 * sr)
-    frames = (len(x) - win) // hop
-    rms = np.array([np.sqrt(np.mean(x[i * hop:i * hop + win] ** 2)) for i in range(frames)])
-    peak = rms.max()
-    thresh = max(0.012, peak * 0.14)
-    active = rms > thresh
-    regions = []
-    i = 0
-    while i < len(active):
-        if active[i]:
-            j = i
-            while j < len(active) and active[j]:
-                j += 1
-            start = i * hop / sr
-            end = j * hop / sr
-            if end - start >= min_len:
-                regions.append([start, end])
-            i = j
-        else:
-            i += 1
-    merged = []
-    for r in regions:
-        if merged and r[0] - merged[-1][1] < min_gap:
-            merged[-1][1] = r[1]
-        else:
-            merged.append(r)
-    return merged
-
-
-def distribute(chunks, start, end):
-    weights = np.array([max(1, len(c.split())) for c in chunks], dtype=float)
-    bounds = np.concatenate([[0.0], np.cumsum(weights) / weights.sum()])
-    out = []
-    for i, c in enumerate(chunks):
-        s = start + (end - start) * bounds[i]
-        e = start + (end - start) * bounds[i + 1]
-        out.append({'start': round(float(s), 3), 'end': round(float(e), 3), 'text': c})
-    return out
-
-
 def main():
-    wav = SRC / 'narration.wav'
-    sr, x = decode(SRC / 'narration.mp3', wav)
-    regions = voiced_regions(x, sr)
-    lengths = [len(s) for s in SENTENCES]
-    total_chars = sum(lengths)
+    # Align the actual take to the exact known transcript, not an invented ASR
+    # transcript. PocketSphinx word boundaries are estimates and still require
+    # editorial listening review, especially for names and soft syllables.
+    import re
+    from pocketsphinx import Decoder
 
-    # Group the fine regions into sentence-like blocks using longer internal pauses.
-    groups = []
-    for r in regions:
-        if groups and r[0] - groups[-1][1] < 0.34:
-            groups[-1][1] = r[1]
-        else:
-            groups.append([r[0], r[1]])
-
-    spoken_start = regions[0][0]
-    spoken_end = regions[-1][1]
-
-    if len(groups) == len(SENTENCES):
-        chosen = groups
-        method = 'one-region-per-sentence'
-    else:
-        # Sentences and pauses do not always agree. Split the spoken span into as many
-        # blocks as sentences exist, weighted by sentence length, then map 1:1.
-        weights = np.array(lengths, dtype=float)
-        bounds = np.concatenate([[0.0], np.cumsum(weights) / weights.sum()])
-        span = spoken_end - spoken_start
-        chosen = [[spoken_start + span * bounds[i], spoken_start + span * bounds[i + 1]]
-                  for i in range(len(SENTENCES))]
-        method = f'length-weighted split ({len(groups)} detected blocks, {len(SENTENCES)} sentences)'
+    raw_path = B / 'source' / 'alignment-16k.raw'
+    subprocess.run([ff, '-y', '-v', 'error', '-i', str(SRC / 'narration.mp3'),
+                    '-ar', '16000', '-ac', '1', '-f', 's16le', str(raw_path)], check=True)
+    raw = raw_path.read_bytes()
+    raw_path.unlink()
+    normalize = lambda s: re.sub(r"[^a-z ]", "", s.lower()).split()
+    expected = normalize(' '.join(SENTENCES))
+    d = Decoder(samprate=16000, loglevel='ERROR')
+    d.add_word('wrangel', 'R AE NG G AH L', False)
+    d.add_word('genomes', 'JH IY N OW M Z', False)
+    unknown = sorted({w for w in expected if not d.lookup_word(w)})
+    if unknown:
+        raise ValueError('Missing alignment dictionary words: ' + ', '.join(unknown))
+    d.set_align_text(' '.join(expected))
+    d.start_utt()
+    d.process_raw(raw, False, True)
+    d.end_utt()
+    segments = [x for x in d.seg() if not x.word.startswith('<')]
+    actual = [re.sub(r'\(\d+\)$', '', x.word).lower() for x in segments]
+    if actual != expected:
+        raise ValueError('Forced alignment did not preserve the known transcript')
 
     cues = []
-    for chunks, (s, e) in zip(CHUNKS, chosen):
-        cues.extend(distribute(chunks, s, e))
-
-    cues = [c for c in cues if c['end'] > c['start']]
-    # Merge very short cues into their neighbour so captions read cleanly.
-    merged_cues = []
-    for c in cues:
-        if merged_cues and (c['end'] - c['start']) < 0.42:
-            merged_cues[-1]['end'] = c['end']
-            merged_cues[-1]['text'] += ' ' + c['text']
-        else:
-            merged_cues.append(c)
-
+    i = 0
+    for group in CHUNKS:
+        for chunk in group:
+            words = normalize(chunk)
+            if expected[i:i + len(words)] != words:
+                raise ValueError('Caption chunk does not match the transcript: ' + chunk)
+            seg = segments[i:i + len(words)]
+            cues.append({'start': round(seg[0].start_frame / 100, 3),
+                         'end': round((seg[-1].end_frame + 1) / 100, 3), 'text': chunk})
+            i += len(words)
+    if i != len(expected):
+        raise ValueError('Caption chunks do not cover transcript')
+    audio_seconds = len(raw) / 2 / 16000
     meta = {
         'source': 'narration.mp3 (platform synthesised voice-04, unsped)',
-        'audio_seconds': round(len(x) / sr, 3),
-        'sample_rate': sr,
-        'voiced_regions': [[round(a, 3), round(b, 3)] for a, b in regions],
-        'alignment_method': method,
-        'alignment_caveat': 'Sentence-level speech-activity alignment, not word-level forced alignment.',
-        'cue_count': len(merged_cues),
+        'audio_seconds': round(audio_seconds, 3),
+        'sample_rate': 16000,
+        'alignment_method': 'PocketSphinx 5.1.1 known-transcript word alignment',
+        'alignment_caveat': 'Automatic forced alignment estimates word boundaries; it is not a human listening review.',
+        'cue_count': len(cues),
+        'cues': cues,
     }
-    (B / 'caption-alignment.json').write_text(json.dumps({**meta, 'cues': merged_cues}, indent=2) + '\n')
-    print(json.dumps({k: v for k, v in meta.items() if k != 'voiced_regions'}, indent=2))
-    for c in merged_cues:
+    (B / 'caption-alignment.json').write_text(json.dumps(meta, indent=2) + '\n')
+    print(json.dumps({k: v for k, v in meta.items() if k != 'cues'}, indent=2))
+    for c in cues:
         print(f"{c['start']:6.2f} - {c['end']:6.2f}  {c['text']}")
 
 

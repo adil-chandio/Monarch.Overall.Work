@@ -1,6 +1,6 @@
 # Sources behind the on-screen claims in Opening 01
 
-Source notes for the work-in-progress opening. The current narration and graphics have not yet been reviewed in a finished render. Predictions are not direct observations.
+Source notes for the opening narration and graphics. Predictions are not direct observations; the graphs and animal are illustrations.
 
 | On-screen element | Claim | Source |
 |---|---|---|

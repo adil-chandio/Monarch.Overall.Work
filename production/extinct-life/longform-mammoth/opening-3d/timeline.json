@@ -9,96 +9,96 @@
   "voice_id": "voice-04",
   "narration": "source/narration.mp3 (unsped)",
   "alignment": {
-    "method": "length-weighted split (28 detected blocks, 11 sentences)",
-    "caveat": "Sentence-level speech-activity alignment, not word-level forced alignment."
+    "method": "PocketSphinx 5.1.1 known-transcript word alignment",
+    "caveat": "Automatic forced alignment estimates word boundaries; it is not a human listening review."
   },
   "shots": [
     {
       "id": "wide-floe",
       "kind": "wide",
       "start": 0.0,
-      "end": 3.4,
+      "end": 4.35,
       "start_frame": 0,
-      "end_frame": 102
+      "end_frame": 130
     },
     {
       "id": "shoulder-wool",
       "kind": "shoulder",
-      "start": 3.4,
-      "end": 10.9,
-      "start_frame": 102,
-      "end_frame": 327
+      "start": 4.35,
+      "end": 13.65,
+      "start_frame": 130,
+      "end_frame": 410
     },
     {
       "id": "island-rise",
       "kind": "island",
-      "start": 10.9,
-      "end": 16.6,
-      "start_frame": 327,
-      "end_frame": 498
+      "start": 13.65,
+      "end": 18.95,
+      "start_frame": 410,
+      "end_frame": 568
     },
     {
       "id": "strange-part",
       "kind": "strange",
-      "start": 16.6,
-      "end": 18.2,
-      "start_frame": 498,
-      "end_frame": 546
+      "start": 18.95,
+      "end": 20.35,
+      "start_frame": 568,
+      "end_frame": 610
     },
     {
       "id": "genome-record",
       "kind": "genome",
-      "start": 18.2,
-      "end": 25.4,
-      "start_frame": 546,
-      "end_frame": 762
+      "start": 20.35,
+      "end": 27.0,
+      "start_frame": 610,
+      "end_frame": 810
     },
     {
       "id": "two-truths",
       "kind": "truths",
-      "start": 25.4,
-      "end": 26.9,
-      "start_frame": 762,
-      "end_frame": 807
+      "start": 27.0,
+      "end": 31.1,
+      "start_frame": 810,
+      "end_frame": 933
     },
     {
       "id": "four-witnesses",
       "kind": "witnesses",
-      "start": 26.9,
-      "end": 34.0,
-      "start_frame": 807,
-      "end_frame": 1020
+      "start": 31.1,
+      "end": 35.9,
+      "start_frame": 933,
+      "end_frame": 1077
     },
     {
       "id": "empty-slot",
       "kind": "empty",
-      "start": 34.0,
-      "end": 40.5,
-      "start_frame": 1020,
-      "end_frame": 1215
+      "start": 35.9,
+      "end": 40.7,
+      "start_frame": 1077,
+      "end_frame": 1221
     },
     {
       "id": "four-arcs",
       "kind": "arcs",
-      "start": 40.5,
-      "end": 43.7,
-      "start_frame": 1215,
-      "end_frame": 1311
+      "start": 40.7,
+      "end": 44.0,
+      "start_frame": 1221,
+      "end_frame": 1320
     },
     {
       "id": "promise",
       "kind": "promise",
-      "start": 43.7,
-      "end": 51.4,
-      "start_frame": 1311,
-      "end_frame": 1542
+      "start": 44.0,
+      "end": 50.6,
+      "start_frame": 1320,
+      "end_frame": 1518
     },
     {
       "id": "resolve",
       "kind": "resolve",
-      "start": 51.4,
+      "start": 50.6,
       "end": 60.0,
-      "start_frame": 1542,
+      "start_frame": 1518,
       "end_frame": 1800
     }
   ],
@@ -106,7 +106,7 @@
     {
       "id": "promise-1",
       "start": 44.4,
-      "end": 50.6,
+      "end": 50.5,
       "text": "PROVEN",
       "sub": "what the evidence supports",
       "fx": 0.22,
@@ -117,7 +117,7 @@
     {
       "id": "promise-2",
       "start": 44.4,
-      "end": 50.6,
+      "end": 50.5,
       "text": "PLAUSIBLE",
       "sub": "what it cannot rule out",
       "fx": 0.5,
@@ -128,7 +128,7 @@
     {
       "id": "promise-3",
       "start": 44.4,
-      "end": 50.6,
+      "end": 50.5,
       "text": "NOT IN THE FILE",
       "sub": "what nobody has evidence for",
       "fx": 0.78,
@@ -151,138 +151,138 @@
   ],
   "captions": [
     {
-      "start": 0.71,
-      "end": 2.68,
+      "start": 0.67,
+      "end": 2.62,
       "text": "This mammoth may have had"
     },
     {
-      "start": 2.68,
-      "end": 3.863,
+      "start": 2.62,
+      "end": 4.08,
       "text": "an extraordinary coat."
     },
     {
-      "start": 3.863,
-      "end": 5.487,
+      "start": 4.54,
+      "end": 6.53,
       "text": "Scientists found two mutations"
     },
     {
-      "start": 5.487,
-      "end": 7.111,
+      "start": 6.53,
+      "end": 7.87,
       "text": "in a gene linked"
     },
     {
-      "start": 7.111,
-      "end": 8.329,
+      "start": 7.87,
+      "end": 9.04,
       "text": "to hair development."
     },
     {
-      "start": 8.329,
-      "end": 10.21,
+      "start": 9.49,
+      "end": 11.23,
       "text": "They predicted a silky coat,"
     },
     {
-      "start": 10.21,
-      "end": 12.467,
+      "start": 11.67,
+      "end": 13.43,
       "text": "but could not observe it directly."
     },
     {
-      "start": 12.467,
-      "end": 14.621,
+      "start": 13.71,
+      "end": 15.47,
       "text": "The animal lived on Wrangel Island,"
     },
     {
-      "start": 14.621,
-      "end": 16.058,
+      "start": 15.84,
+      "end": 16.92,
       "text": "in the Arctic Ocean,"
     },
     {
-      "start": 16.058,
-      "end": 17.853,
+      "start": 17.29,
+      "end": 18.63,
       "text": "a few thousand years ago."
     },
     {
-      "start": 17.853,
-      "end": 19.232,
+      "start": 19.04,
+      "end": 20.06,
       "text": "Now the strange part."
     },
     {
-      "start": 19.232,
-      "end": 21.794,
+      "start": 20.48,
+      "end": 22.35,
       "text": "A later study of ancient genomes"
     },
     {
-      "start": 21.794,
-      "end": 23.929,
+      "start": 22.61,
+      "end": 24.15,
       "text": "found that the island population"
     },
     {
-      "start": 23.929,
-      "end": 26.063,
+      "start": 24.15,
+      "end": 26.7,
       "text": "recovered after an extreme bottleneck."
     },
     {
-      "start": 26.063,
-      "end": 28.69,
+      "start": 27.04,
+      "end": 29.0,
       "text": "Yet the mammoths eventually disappeared."
     },
     {
-      "start": 28.69,
-      "end": 30.53,
+      "start": 29.26,
+      "end": 30.83,
       "text": "How can both things be true?"
     },
     {
-      "start": 30.53,
-      "end": 32.794,
+      "start": 31.22,
+      "end": 33.39,
       "text": "Scientists have examined genetic damage,"
     },
     {
-      "start": 32.794,
-      "end": 34.605,
+      "start": 33.67,
+      "end": 35.57,
       "text": "climate, and human arrival,"
     },
     {
-      "start": 34.605,
-      "end": 36.417,
+      "start": 35.96,
+      "end": 37.48,
       "text": "but the final generations"
     },
     {
-      "start": 36.417,
-      "end": 39.134,
+      "start": 37.48,
+      "end": 39.31,
       "text": "are missing from the genetic record."
     },
     {
-      "start": 39.134,
-      "end": 41.104,
+      "start": 39.69,
+      "end": 41.88,
       "text": "So which explanation holds up?"
     },
     {
-      "start": 41.104,
-      "end": 43.201,
+      "start": 42.11,
+      "end": 43.58,
       "text": "We will take the evidence apart,"
     },
     {
-      "start": 43.201,
-      "end": 44.599,
+      "start": 43.98,
+      "end": 44.78,
       "text": "and at the end,"
     },
     {
-      "start": 44.599,
-      "end": 45.996,
+      "start": 45.07,
+      "end": 46.47,
       "text": "separate what is proven,"
     },
     {
-      "start": 45.996,
-      "end": 47.045,
+      "start": 46.9,
+      "end": 47.84,
       "text": "what is plausible,"
     },
     {
-      "start": 47.045,
-      "end": 48.792,
+      "start": 48.19,
+      "end": 49.29,
       "text": "and what is still missing"
     },
     {
-      "start": 48.792,
-      "end": 49.84,
+      "start": 49.29,
+      "end": 49.97,
       "text": "from the file."
     }
   ],

@@ -372,7 +372,7 @@ function drawPoint(tb) {
     n: new T.Vector3(
       N[i0] * w + N[i1] * u + N[i2] * v,
       N[i0 + 1] * w + N[i1 + 1] * u + N[i2 + 1] * v,
-      N[i0 + 2] * w + N[i2 + 2] * u + N[i2 + 2] * v).normalize()
+      N[i0 + 2] * w + N[i1 + 2] * u + N[i2 + 2] * v).normalize()
   };
 }
 

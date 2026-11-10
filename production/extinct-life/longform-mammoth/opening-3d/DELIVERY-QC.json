@@ -1,0 +1,98 @@
+{
+  "file": "deliverables/Last-Mammoths-Opening-01-3D-1080p.mp4",
+  "sha256": "7102afe463cb1dd2edce5c05958484132528cc9793be88d122d81be24fcc3a32",
+  "bytes": 47543367,
+  "decoded_frames": 1800,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30.0,
+  "duration_seconds": 60.0,
+  "complete_decode_errors": "",
+  "loudness": {
+    "input_i": "-16.92",
+    "input_tp": "-1.23",
+    "input_lra": "3.90",
+    "input_thresh": "-26.99",
+    "output_i": "-16.08",
+    "output_tp": "-1.50",
+    "output_lra": "3.20",
+    "output_thresh": "-26.11",
+    "normalization_type": "dynamic",
+    "target_offset": "0.08"
+  },
+  "sampled_every_second_frames": 60,
+  "minimum_sampled_rgb_mean": 21.743,
+  "minimum_adjacent_frame_difference": 0.9625,
+  "render": {
+    "from": 0,
+    "to": 1800,
+    "frames": 1800,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "source_sha256": "a51e6017650067668b1f21c1ddd03d271edb05d0f56796ca5800eacf94d5ac06",
+    "query": "furmat=lambert&lights=4&hidemat=lambert&coat=2&under=0.8&clump=0.75",
+    "video_sha256": "85018853692ed0cda330c4eb0acd0df446fb346491c05f22b77be0295f2e5fce",
+    "scene_runs": [
+      {
+        "shot": "wide-floe",
+        "from": 0,
+        "to": 131
+      },
+      {
+        "shot": "shoulder-wool",
+        "from": 131,
+        "to": 410
+      },
+      {
+        "shot": "island-rise",
+        "from": 410,
+        "to": 569
+      },
+      {
+        "shot": "strange-part",
+        "from": 569,
+        "to": 611
+      },
+      {
+        "shot": "genome-record",
+        "from": 611,
+        "to": 810
+      },
+      {
+        "shot": "two-truths",
+        "from": 810,
+        "to": 933
+      },
+      {
+        "shot": "four-witnesses",
+        "from": 933,
+        "to": 1077
+      },
+      {
+        "shot": "empty-slot",
+        "from": 1077,
+        "to": 1221
+      },
+      {
+        "shot": "four-arcs",
+        "from": 1221,
+        "to": 1320
+      },
+      {
+        "shot": "promise",
+        "from": 1320,
+        "to": 1518
+      },
+      {
+        "shot": "resolve",
+        "from": 1518,
+        "to": 1800
+      }
+    ],
+    "page_errors": [],
+    "render_seconds": 4625.79
+  },
+  "review_scope": "Automated full decode, loudness analysis and one-second still sampling. Not claimed as continuous human-like audiovisual watching or listening.",
+  "youtube_published": false
+}

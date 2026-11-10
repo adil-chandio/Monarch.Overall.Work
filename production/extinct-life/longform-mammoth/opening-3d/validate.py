@@ -43,7 +43,7 @@ class Opening3DTests(unittest.TestCase):
             self.assertLessEqual(len(c['text'].split()), 8)
         for a, b in zip(cues, cues[1:]):
             self.assertLessEqual(a['end'], b['start'] + 1e-6)
-        self.assertIn('speech-activity', ALIGN['alignment_caveat'])
+        self.assertIn('forced alignment', ALIGN['alignment_caveat'])
 
     def test_corrected_coat_and_population_language(self):
         text = ' '.join(c['text'] for c in S['captions']).lower()
