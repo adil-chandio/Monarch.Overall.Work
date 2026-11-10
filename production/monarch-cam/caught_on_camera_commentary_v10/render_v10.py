@@ -26,8 +26,9 @@ sys.path.insert(0, str(ROOT))
 import imageio_ffmpeg
 import numpy as np
 import soundfile as sf
-from PIL import Image, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 from scipy import signal
+from showreel.audio_qc.core import load_audio, spectral_profile
 from showreel.audio_qc.gates import run as audio_gate_run
 
 FFMPEG = imageio_ffmpeg.get_ffmpeg_exe()
@@ -72,11 +73,14 @@ BEATS = [
     "Back to the start. That upside-down face is still there. Watch it again.",
 ]
 
-MASTER_CHAIN_ID = "dualmono_linear_loudnorm_treble_declick"
+MASTER_CHAIN_ID = "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter"
 PAN_FILTER = "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1"
 HIGHPASS_FILTER = "highpass=f=35"
-TREBLE_FILTER = "treble=f=3000:g=-2:w=0.5"
-LIMITER_FILTER = "alimiter=limit=0.75:level=disabled"
+# Retained only to reproduce and measure the rejected "ghut ghut" VO chain; not in delivery.
+LEGACY_TREBLE_FILTER = "treble=f=3000:g=-2:w=0.5"
+LIMITER_FILTER = "alimiter=limit=0.80:attack=20:release=300:level=disabled"
+NARROW_DECLICK_THRESHOLD = 0.35
+NARROW_DECLICK_HALF_WIDTH = 3
 
 
 def ensure_dirs() -> None:
@@ -423,13 +427,17 @@ def build_master_chain(premaster: Path) -> tuple[str, dict]:
         f"measured_LRA={measured['input_lra']}:measured_thresh={measured['input_thresh']}:"
         f"offset={measured['target_offset']}:linear=true:print_format=summary"
     )
-    chain = f"{PAN_FILTER},{HIGHPASS_FILTER},{TREBLE_FILTER},{linear}"
+    # The -2 dB treble cut and 32-sample broad declick from the rejected delivery were
+    # removed: they damped presence/air and smoothed natural VO transients into a
+    # choked/gurgling sound. The corrected chain uses only narrow click repair.
+    chain = f"{PAN_FILTER},{HIGHPASS_FILTER},{linear}"
     return chain, measured
 
 
-def declick_wav(path: Path, threshold: float = 0.28, width: int = 32) -> int:
-    """Repair isolated sample discontinuities with short linear interpolations."""
+def broad_declick_wav(path: Path, threshold: float = 0.28, width: int = 32) -> dict:
+    """Legacy V10 broad declick. Diagnostic only: it damaged the delivered VO."""
     x, sr = sf.read(path, dtype="float32", always_2d=True)
+    original = x.copy()
     d = np.max(np.abs(np.diff(x, axis=0)), axis=1)
     idx = np.where(d > threshold)[0]
     groups: list[list[int]] = []
@@ -445,8 +453,33 @@ def declick_wav(path: Path, threshold: float = 0.28, width: int = 32) -> int:
             continue
         for c in range(x.shape[1]):
             x[a:b, c] = np.linspace(x[a, c], x[b - 1, c], b - a, dtype=np.float32)
+    changed = np.any(np.abs(x - original) > 1e-7, axis=1)
     sf.write(path, x, sr, subtype="PCM_16")
-    return len(groups)
+    return {"groups": len(groups), "samples_changed": int(changed.sum()),
+            "fraction_changed": round(float(changed.mean()), 6)}
+
+
+def narrow_declick_wav(path: Path, threshold: float = NARROW_DECLICK_THRESHOLD,
+                       half_width: int = NARROW_DECLICK_HALF_WIDTH) -> dict:
+    """Repair only 7-sample windows around discontinuities, preserving VO presence/air."""
+    x, sr = sf.read(path, dtype="float32", always_2d=True)
+    d = np.max(np.abs(np.diff(x, axis=0)), axis=1)
+    idx = np.where(d > threshold)[0]
+    altered = 0
+    for i in idx:
+        a = max(0, int(i) - half_width)
+        b = min(len(x), int(i) + half_width + 2)
+        if b - a < 5:
+            continue
+        for c in range(x.shape[1]):
+            x[a + 1:b - 1, c] = np.linspace(x[a, c], x[b - 1, c], b - a,
+                                             dtype=np.float32)[1:-1]
+        altered += b - a - 2
+    sf.write(path, x, sr, subtype="PCM_16")
+    return {"threshold": threshold, "half_width_samples": half_width,
+            "jumps_repaired": int(len(idx)),
+            "interior_samples_changed": int(altered),
+            "fraction_changed": round(altered / max(1, len(x)), 6)}
 
 
 def apply_calibration(in_wav: Path, out_wav: Path, delta_db: float) -> None:
@@ -487,24 +520,26 @@ def mux_deliverable(silent: Path, audio_wav: Path) -> None:
 
 
 def calibrate_and_mux(premaster: Path, silent: Path) -> tuple[Path, dict, list[dict]]:
-    """Master with linear loudnorm + treble cut, then declick and calibrate delivery."""
+    """Master with clear linear loudnorm, narrow click repair and a gentle limiter."""
     attempts: list[dict] = []
     chain, measured = build_master_chain(premaster)
     attempts.append({
         "stage": "loudnorm_measurement", "chain_id": MASTER_CHAIN_ID,
         "chain_filter": chain, "loudnorm_measurement": measured,
+        "voice_quality_fix": "removed -2 dB treble cut and 32-sample broad declick",
     })
     mastered = WORK / "mastered_v10.wav"
     master_audio(premaster, mastered, chain)
-    declick_groups = declick_wav(mastered)
+    repair = narrow_declick_wav(mastered)
+    attempts.append({"stage": "master_narrow_declick", "narrow_declick": repair})
     current = mastered
-    for iteration in range(6):
+    for iteration in range(8):
         mux_deliverable(silent, current)
         result = audio_gate_run(str(DELIVERABLE), "web")
         attempt = {
             "chain_id": MASTER_CHAIN_ID, "chain_filter": chain,
             "iteration": iteration, "audio_input": str(current.relative_to(ROOT)),
-            "declick_groups_before_mux": declick_groups,
+            "narrow_declick": repair,
             "pass": bool(result["pass"]), "failed": result["failed"],
             "integrated_lufs": result["measured"]["integrated_lufs"],
             "lra_lu": result["measured"]["lra_lu"],
@@ -512,6 +547,7 @@ def calibrate_and_mux(premaster: Path, silent: Path) -> tuple[Path, dict, list[d
             "movement_db": result["measured"]["movement_db"],
             "click_runs": result["measured"]["clicks"]["click_runs"],
             "harsh_over_high_mid_db": result["measured"]["harsh_over_high_mid_db"],
+            "air_over_high_mid_db": result["measured"]["air_over_high_mid_db"],
         }
         attempts.append(attempt)
         if result["pass"]:
@@ -520,7 +556,9 @@ def calibrate_and_mux(premaster: Path, silent: Path) -> tuple[Path, dict, list[d
         if abs(delta) >= 0.05:
             calibrated = WORK / f"calibrated_{iteration}.wav"
             apply_calibration(current, calibrated, delta)
-            declick_groups = declick_wav(calibrated)
+            repair = narrow_declick_wav(calibrated)
+            attempts.append({"stage": f"calibration_{iteration}_narrow_declick",
+                             "delta_db": round(delta, 4), "narrow_declick": repair})
             current = calibrated
         elif "no_clicks" in result["failed"]:
             # AAC encoding can expose isolated sample discontinuities; repair the decoded stream.
@@ -528,16 +566,17 @@ def calibrate_and_mux(premaster: Path, silent: Path) -> tuple[Path, dict, list[d
             run([FFMPEG, "-y", "-hide_banner", "-loglevel", "error", "-i", DELIVERABLE,
                  "-map", "0:a:0", "-vn", "-ac", "2", "-ar", str(SR),
                  "-c:a", "pcm_s16le", decoded])
-            declick_groups = declick_wav(decoded)
+            repair = narrow_declick_wav(decoded)
             mux_deliverable(silent, decoded)
             result = audio_gate_run(str(DELIVERABLE), "web")
             attempts.append({
-                "stage": "delivered_aac_declick", "iteration": iteration,
+                "stage": "delivered_aac_narrow_declick", "iteration": iteration,
                 "audio_input": str(decoded.relative_to(ROOT)),
-                "declick_groups": declick_groups, "pass": bool(result["pass"]),
+                "narrow_declick": repair, "pass": bool(result["pass"]),
                 "failed": result["failed"],
                 "integrated_lufs": result["measured"]["integrated_lufs"],
                 "click_runs": result["measured"]["clicks"]["click_runs"],
+                "air_over_high_mid_db": result["measured"]["air_over_high_mid_db"],
             })
             if result["pass"]:
                 return decoded, result, attempts
@@ -546,7 +585,6 @@ def calibrate_and_mux(premaster: Path, silent: Path) -> tuple[Path, dict, list[d
             break
     raise RuntimeError("Audio calibration did not pass the nine web gates: " +
                        json.dumps(attempts, indent=2))
-
 
 def probe_deliverable() -> dict:
     proc = subprocess.run(
@@ -668,6 +706,98 @@ def caption_safe_zone_check(timings: dict) -> dict:
     }
 
 
+def spectral_metrics(path: Path) -> dict:
+    """Objective long-term band metrics for a WAV or MP4."""
+    x, sr = load_audio(str(path))
+    p = spectral_profile(x, sr)
+    b = p["band_db_rel_total"]
+    return {
+        "harsh_over_high_mid_db": round(float(p["harsh_over_high_mid_db"]), 3),
+        "air_over_high_mid_db": round(float(p["air_over_high_mid_db"]), 3),
+        "presence_over_high_mid_db": round(float(b["presence"] - b["high_mid"]), 3),
+        "band_db_rel_total": {k: round(float(v), 3) for k, v in b.items()},
+        "harsh_flag": bool(p["harsh"]), "dull_flag": bool(p["dull"]),
+    }
+
+
+def window_spectral_metrics(wav: Path) -> dict:
+    """Band metrics for the decoded first 8 seconds, where VO beats 1-2 dominate."""
+    x, sr = sf.read(wav, dtype="float32", always_2d=True)
+    mono = x.mean(axis=1)
+    p = spectral_profile(mono, sr)
+    b = p["band_db_rel_total"]
+    return {
+        "window_seconds": round(len(mono) / sr, 3),
+        "harsh_over_high_mid_db": round(float(p["harsh_over_high_mid_db"]), 3),
+        "air_over_high_mid_db": round(float(p["air_over_high_mid_db"]), 3),
+        "presence_over_high_mid_db": round(float(b["presence"] - b["high_mid"]), 3),
+        "band_db_rel_total": {k: round(float(v), 3) for k, v in b.items()},
+    }
+
+
+def decode_audio_window(src: Path, out_wav: Path, duration: float = 8.0) -> None:
+    run([FFMPEG, "-y", "-hide_banner", "-loglevel", "error", "-i", src,
+         "-map", "0:a:0", "-vn", "-ac", "2", "-ar", str(SR),
+         "-t", f"{duration:.3f}", "-c:a", "pcm_s16le", out_wav])
+
+
+def make_vo_spectrum_comparison(before_wav: Path, after_wav: Path, out_png: Path) -> None:
+    """Objective 0-12 kHz spectrogram of the first 8 s; no listening claim."""
+    width, height = 640, 280
+
+    def panel(path: Path) -> Image.Image:
+        x, sr = sf.read(path, dtype="float32", always_2d=True)
+        mono = x.mean(axis=1)
+        f, t, z = signal.stft(mono, fs=sr, nperseg=2048, noverlap=1536,
+                              window="hann")
+        fsel, tsel = f <= 12000, t <= 8.0
+        mag = 20 * np.log10(np.abs(z[np.ix_(fsel, tsel)]) + 1e-8)
+        lo, hi = np.percentile(mag, [5, 99])
+        arr = np.clip((mag - lo) / max(hi - lo, 1e-9), 0.0, 1.0)
+        arr = np.flipud(arr)
+        return Image.fromarray((arr * 255).astype(np.uint8)).resize(
+            (width, height)).convert("RGB")
+
+    canvas = Image.new("RGB", (2 * width, height + 70), "white")
+    draw = ImageDraw.Draw(canvas)
+    font = ImageFont.truetype(FONT_REGULAR, 20)
+    small = ImageFont.truetype(FONT_REGULAR, 15)
+    draw.text((10, 8), "BEFORE de03272: damped VO", fill="black", font=font)
+    draw.text((width + 10, 8), "AFTER: corrected VO", fill="black", font=font)
+    canvas.paste(panel(before_wav), (0, 45))
+    canvas.paste(panel(after_wav), (width, 45))
+    draw.text((10, height + 48), "First 8 s, 0-12 kHz. Objective spectrogram only; no human listening sign-off.",
+              fill="black", font=small)
+    out_png.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(out_png)
+
+
+def diagnose_legacy_chain(premaster: Path) -> dict:
+    """Reproduce and measure the rejected broad-declipped/treble-cut VO chain."""
+    measured = measure_loudnorm(premaster)
+    linear = (
+        f"loudnorm=I=-14:TP=-1.5:LRA=7:"
+        f"measured_I={measured['input_i']}:measured_TP={measured['input_tp']}:"
+        f"measured_LRA={measured['input_lra']}:measured_thresh={measured['input_thresh']}:"
+        f"offset={measured['target_offset']}:linear=true:print_format=summary"
+    )
+    legacy_chain = f"{PAN_FILTER},{HIGHPASS_FILTER},{LEGACY_TREBLE_FILTER},{linear}"
+    legacy_master = WORK / "diagnostic_legacy_master.wav"
+    legacy_declicked = WORK / "diagnostic_legacy_broad_declick.wav"
+    master_audio(premaster, legacy_master, legacy_chain)
+    shutil.copyfile(legacy_master, legacy_declicked)
+    damage = broad_declick_wav(legacy_declicked)
+    return {
+        "legacy_chain_id": "dualmono_linear_loudnorm_treble_declick",
+        "legacy_chain_filter": legacy_chain,
+        "legacy_treble_cut_db": -2.0,
+        "premaster_spectral": spectral_metrics(premaster),
+        "legacy_master_spectral": spectral_metrics(legacy_master),
+        "legacy_broad_declick": damage,
+        "legacy_broad_declicked_spectral": spectral_metrics(legacy_declicked),
+    }
+
+
 def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: dict,
                   audio_info: dict, gate_result: dict, attempts: list[dict],
                   final_audio: Path, probe: dict, frames: list[dict],
@@ -733,6 +863,10 @@ def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: di
             "no_nasa_insignia": True,
             "no_third_party_handle": True,
             "no_fake_engagement_counts": True,
+            "voice_quality_fix_applied": True,
+            "legacy_broad_declick_removed": True,
+            "legacy_treble_cut_removed": True,
+            "narrow_click_repair_only": True,
             "human_full_motion_review": False,
             "human_native_audio_listening": False,
             "human_creative_approval": False,
@@ -840,7 +974,13 @@ def write_ledgers(vo_durations: list[float], vo_starts: list[float], timings: di
         "inter_beat_gap_seconds": GAP,
         "final_narrated_end_seconds": round(vo_starts[-1] + vo_durations[-1], 3),
         "mastering": {
-            "target": "web / -14 LUFS, nine unchanged audio gates",
+            "target": "web / -14 LUFS, nine unchanged audio gates, VO clarity correction",
+            "chain_id": MASTER_CHAIN_ID,
+            "voice_quality_fix": {
+                "removed": ["-2 dB treble cut", "32-sample broad declick"],
+                "replaced_with": "7-sample narrow click repair + gentle limiter",
+                "no_music_sfx_procedural_bed_or_audio_substitution": True,
+            },
             "attempts": attempts,
             "final_wav": str(final_audio.relative_to(ROOT)),
             "deliverable_audio": "AAC LC 256 kb/s, 48 kHz stereo",
@@ -1041,10 +1181,19 @@ def main() -> int:
     TOTAL_SAMPLES = int(round(TOTAL_DURATION * SR))
     print(f"VO end {vo_end:.3f}s; target {TOTAL_DURATION:.3f}s / {FRAME_COUNT} frames", flush=True)
 
+    # Capture the rejected de03272 audio before calibrate_and_mux overwrites the MP4.
+    before_sha = sha256(DELIVERABLE)
+    before_bytes = DELIVERABLE.stat().st_size
+    before_full = spectral_metrics(DELIVERABLE)
+    before_wav = WORK / "vo_before_fix.wav"
+    decode_audio_window(DELIVERABLE, before_wav)
+    before_window = window_spectral_metrics(before_wav)
+
     timings = build_captions(vo_durations, vo_starts, TOTAL_DURATION)
     print(f"Wrote {timings['word_count']} word-by-word caption events", flush=True)
 
     premaster, audio_info = build_premaster(vo_durations, vo_starts, TOTAL_SAMPLES, TOTAL_DURATION)
+    diagnostic = diagnose_legacy_chain(premaster)
     silent = build_silent_video(FRAME_COUNT)
     final_audio, gate_result, attempts = calibrate_and_mux(premaster, silent)
     final_mix = AUDIO_DIR / "final_mix_v10.wav"
@@ -1057,14 +1206,140 @@ def main() -> int:
     safe_zone = caption_safe_zone_check(timings)
     contact_sheets = make_contact_sheets()
 
+    after_full = spectral_metrics(DELIVERABLE)
+    after_wav = WORK / "vo_after_fix.wav"
+    decode_audio_window(DELIVERABLE, after_wav)
+    after_window = window_spectral_metrics(after_wav)
+    spectrogram = REVIEW / "vo_spectrum_comparison.png"
+    make_vo_spectrum_comparison(before_wav, after_wav, spectrogram)
+
     write_ledgers(vo_durations, vo_starts, timings, audio_info, gate_result, attempts,
                   final_mix, probe, frames, safe_zone, contact_sheets)
-    summary = json.loads((REVIEW / "qc_summary.json").read_text(encoding="utf-8"))
+
+    repair_events = [
+        {"stage": a["stage"], **a["narrow_declick"]}
+        for a in attempts
+        if str(a.get("stage", "")).endswith("narrow_declick")
+    ]
+    vo_fix_path = REVIEW / "vo_quality_fix_v10.json"
+    vo_fix = {
+        "edition": "v10_one_clip_artemis_ii_vo_clarity_fix",
+        "user_report_exact": "Acha ha theek ha Lekin voice over q ghut ghut kr arh ha usse theek Karo",
+        "interpretation": "choked / gurgling / strained / muffled voice-over",
+        "deliverable": str(DELIVERABLE.relative_to(ROOT)),
+        "before": {
+            "commit": "de03272ee65e36d2fbf17a47a4e5f880d038fada",
+            "sha256": before_sha, "bytes": before_bytes,
+            "full_mix_spectral": before_full,
+            "first_8s_vo_spectral": before_window,
+        },
+        "after": {
+            "sha256": sha256(DELIVERABLE), "bytes": DELIVERABLE.stat().st_size,
+            "full_mix_spectral": after_full,
+            "first_8s_vo_spectral": after_window,
+        },
+        "measured_delta": {
+            "air_over_high_mid_db": round(after_full["air_over_high_mid_db"] -
+                                           before_full["air_over_high_mid_db"], 3),
+            "harsh_over_high_mid_db": round(after_full["harsh_over_high_mid_db"] -
+                                             before_full["harsh_over_high_mid_db"], 3),
+        },
+        "root_cause": diagnostic,
+        "correction": {
+            "chain_id": MASTER_CHAIN_ID,
+            "removed": ["-2 dB treble cut at 3 kHz", "32-sample broad linear declick"],
+            "replaced_with": "7-sample narrow click repair around discontinuities",
+            "limiter": LIMITER_FILTER,
+            "narrow_declick_events": repair_events,
+            "source_vo_chunks_unchanged": True,
+            "voice_id": "voice-01",
+            "no_music_sfx_procedural_bed_or_audio_substitution": True,
+            "no_time_stretch": True,
+        },
+        "objective_qc": {
+            "nine_audio_gates": gate_result["checks"],
+            "technical_pass": None,
+            "human_creative_approval": False,
+            "human_native_audio_listening": False,
+            "human_full_motion_review": False,
+            "human_legal_review": False,
+        },
+        "spectrogram": str(spectrogram.relative_to(ROOT)),
+        "note": ("Objective engineering correction and measurements only. No human listening, "
+                 "creative approval, legal opinion, perfection, virality or audience result is claimed."),
+    }
+    summary_path = REVIEW / "qc_summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    vo_fix["objective_qc"]["technical_pass"] = bool(summary["technical_pass"])
+    save_json(vo_fix_path, vo_fix)
+
+    # Refresh the evidence index and the ledgers that were written before the fix JSON.
+    fix_rel = str(vo_fix_path.relative_to(ROOT))
+    spec_rel = str(spectrogram.relative_to(ROOT))
+    summary["edition"] = "v10_one_clip_artemis_ii_vo_clarity_fix"
+    summary["voice_quality_fix"] = {
+        "applied": True,
+        "evidence": fix_rel,
+        "spectrogram": spec_rel,
+        "removed": ["-2 dB treble cut", "32-sample broad declick"],
+        "air_over_high_mid_before_db": before_full["air_over_high_mid_db"],
+        "air_over_high_mid_after_db": after_full["air_over_high_mid_db"],
+        "human_native_audio_listening": False,
+        "human_creative_approval": False,
+    }
+    for item in (fix_rel, spec_rel):
+        if item not in summary["evidence"]:
+            summary["evidence"].append(item)
+    summary["note"] = (
+        "technical_pass is deliberately separate from human_creative_approval=false. "
+        "The VO clarity correction removed the damped treble cut and broad declick; "
+        "the Short remains an original commentary/analysis edit of one official NASA master, "
+        "not a raw reupload. No guaranteed virality or audience result is claimed.")
+    save_json(summary_path, summary)
+
+    tq_path = REVIEW / "technical_qc.json"
+    tq = json.loads(tq_path.read_text(encoding="utf-8"))
+    tq["edition"] = "v10_one_clip_artemis_ii_vo_clarity_fix"
+    tq["voice_quality_fix_evidence"] = fix_rel
+    tq["voice_quality_fix_spectrogram"] = spec_rel
+    tq["voice_quality_fix"] = summary["voice_quality_fix"]
+    save_json(tq_path, tq)
+
+    aq_path = REVIEW / "audio_qc.json"
+    aq = json.loads(aq_path.read_text(encoding="utf-8"))
+    aq["voice_quality_fix"] = {
+        "evidence": fix_rel, "chain_id": MASTER_CHAIN_ID,
+        "air_over_high_mid_before_db": before_full["air_over_high_mid_db"],
+        "air_over_high_mid_after_db": after_full["air_over_high_mid_db"],
+        "human_native_audio_listening": False,
+    }
+    save_json(aq_path, aq)
+
+    nal_path = REVIEW / "native_audio_ledger_v10.json"
+    nal = json.loads(nal_path.read_text(encoding="utf-8"))
+    nal["voice_quality_fix"] = vo_fix["correction"]
+    nal["voice_quality_fix"]["evidence"] = fix_rel
+    save_json(nal_path, nal)
+
+    el_path = REVIEW / "edit_ledger_v10.json"
+    el = json.loads(el_path.read_text(encoding="utf-8"))
+    el["status"] = "rendered_vo_clarity_fix"
+    save_json(el_path, el)
+
+    um_path = REVIEW / "upload_metadata_v10.json"
+    um = json.loads(um_path.read_text(encoding="utf-8"))
+    um["claims"]["voice_quality_fix_applied"] = True
+    save_json(um_path, um)
+
+    rl_path = REVIEW / "rights_ledger_v10.json"
+    rl = json.loads(rl_path.read_text(encoding="utf-8"))
+    rl["claims"]["voice_quality_fix_applied"] = True
+    save_json(rl_path, rl)
+
     print("V10 deliverable", DELIVERABLE, summary["bytes"], "bytes",
           summary["sha256"], "technical_pass", summary["technical_pass"], flush=True)
     if not summary["technical_pass"]:
-        failed = {k: v for k, v in json.loads((REVIEW / "technical_qc.json").read_text())["checks"].items()
-                  if not v}
+        failed = {k: v for k, v in tq["checks"].items() if not v}
         raise RuntimeError("V10 technical QC failed: " + json.dumps(failed))
     return 0
 

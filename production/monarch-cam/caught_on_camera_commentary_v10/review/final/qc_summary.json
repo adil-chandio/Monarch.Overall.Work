@@ -1,8 +1,8 @@
 {
-  "edition": "v10_one_clip_artemis_ii",
+  "edition": "v10_one_clip_artemis_ii_vo_clarity_fix",
   "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
-  "bytes": 34500691,
-  "sha256": "1cfd521f6fea600b8775440cbc114b1d86c9b4c0ad3fc91499f69b9eb333134b",
+  "bytes": 34500681,
+  "sha256": "efce2ea3391828d4d638d980db179330bd88f21a12f7864e6b0bcac58d50a91f",
   "duration_seconds": 49.4,
   "frame_count": 1482,
   "fps": 30.0,
@@ -47,7 +47,22 @@
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/caption_timings.json",
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/contact_sheets_manifest.json",
     "production/monarch-cam/caught_on_camera_commentary_v10/review/final/upload_metadata_v10.json",
-    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/captions_v10.ass"
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/captions_v10.ass",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_quality_fix_v10.json",
+    "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png"
   ],
-  "note": "technical_pass is deliberately separate from human_creative_approval=false. The Short is an original commentary/analysis edit of one official NASA master, not a raw reupload. No guaranteed virality or audience result is claimed."
+  "note": "technical_pass is deliberately separate from human_creative_approval=false. The VO clarity correction removed the damped treble cut and broad declick; the Short remains an original commentary/analysis edit of one official NASA master, not a raw reupload. No guaranteed virality or audience result is claimed.",
+  "voice_quality_fix": {
+    "applied": true,
+    "evidence": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_quality_fix_v10.json",
+    "spectrogram": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png",
+    "removed": [
+      "-2 dB treble cut",
+      "32-sample broad declick"
+    ],
+    "air_over_high_mid_before_db": -5.55,
+    "air_over_high_mid_after_db": -0.28,
+    "human_native_audio_listening": false,
+    "human_creative_approval": false
+  }
 }

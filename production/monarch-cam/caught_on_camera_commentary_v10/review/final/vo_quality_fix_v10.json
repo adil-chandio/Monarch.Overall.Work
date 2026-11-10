@@ -1,0 +1,197 @@
+{
+  "edition": "v10_one_clip_artemis_ii_vo_clarity_fix",
+  "user_report_exact": "Acha ha theek ha Lekin voice over q ghut ghut kr arh ha usse theek Karo",
+  "interpretation": "choked / gurgling / strained / muffled voice-over",
+  "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
+  "before": {
+    "commit": "de03272ee65e36d2fbf17a47a4e5f880d038fada",
+    "sha256": "1cfd521f6fea600b8775440cbc114b1d86c9b4c0ad3fc91499f69b9eb333134b",
+    "bytes": 34500691,
+    "full_mix_spectral": {
+      "harsh_over_high_mid_db": -2.78,
+      "air_over_high_mid_db": -5.55,
+      "presence_over_high_mid_db": 3.45,
+      "band_db_rel_total": {
+        "sub": -21.27,
+        "bass": -7.64,
+        "low_mid": -4.32,
+        "mid": -7.03,
+        "high_mid": -12.03,
+        "presence": -8.58,
+        "harsh": -14.81,
+        "air": -17.58
+      },
+      "harsh_flag": false,
+      "dull_flag": false
+    },
+    "first_8s_vo_spectral": {
+      "window_seconds": 8.0,
+      "harsh_over_high_mid_db": -3.2,
+      "air_over_high_mid_db": -5.28,
+      "presence_over_high_mid_db": 3.48,
+      "band_db_rel_total": {
+        "sub": -19.87,
+        "bass": -6.36,
+        "low_mid": -4.65,
+        "mid": -8.55,
+        "high_mid": -11.61,
+        "presence": -8.13,
+        "harsh": -14.81,
+        "air": -16.89
+      }
+    }
+  },
+  "after": {
+    "sha256": "efce2ea3391828d4d638d980db179330bd88f21a12f7864e6b0bcac58d50a91f",
+    "bytes": 34500681,
+    "full_mix_spectral": {
+      "harsh_over_high_mid_db": 0.98,
+      "air_over_high_mid_db": -0.28,
+      "presence_over_high_mid_db": 3.81,
+      "band_db_rel_total": {
+        "sub": -33.92,
+        "bass": -8.37,
+        "low_mid": -4.93,
+        "mid": -7.52,
+        "high_mid": -11.97,
+        "presence": -8.16,
+        "harsh": -10.99,
+        "air": -12.25
+      },
+      "harsh_flag": false,
+      "dull_flag": false
+    },
+    "first_8s_vo_spectral": {
+      "window_seconds": 8.0,
+      "harsh_over_high_mid_db": 1.18,
+      "air_over_high_mid_db": 0.14,
+      "presence_over_high_mid_db": 3.8,
+      "band_db_rel_total": {
+        "sub": -33.97,
+        "bass": -7.23,
+        "low_mid": -5.51,
+        "mid": -9.29,
+        "high_mid": -11.45,
+        "presence": -7.65,
+        "harsh": -10.27,
+        "air": -11.31
+      }
+    }
+  },
+  "measured_delta": {
+    "air_over_high_mid_db": 5.27,
+    "harsh_over_high_mid_db": 3.76
+  },
+  "root_cause": {
+    "legacy_chain_id": "dualmono_linear_loudnorm_treble_declick",
+    "legacy_chain_filter": "pan=stereo|c0=0.5*c0+0.5*c1|c1=0.5*c0+0.5*c1,highpass=f=35,treble=f=3000:g=-2:w=0.5,loudnorm=I=-14:TP=-1.5:LRA=7:measured_I=-21.94:measured_TP=-1.93:measured_LRA=3.80:measured_thresh=-32.47:offset=0.61:linear=true:print_format=summary",
+    "legacy_treble_cut_db": -2.0,
+    "premaster_spectral": {
+      "harsh_over_high_mid_db": 1.34,
+      "air_over_high_mid_db": 1.36,
+      "presence_over_high_mid_db": 3.79,
+      "band_db_rel_total": {
+        "sub": -35.76,
+        "bass": -8.91,
+        "low_mid": -5.43,
+        "mid": -7.92,
+        "high_mid": -11.6,
+        "presence": -7.81,
+        "harsh": -10.26,
+        "air": -10.24
+      },
+      "harsh_flag": false,
+      "dull_flag": false
+    },
+    "legacy_master_spectral": {
+      "harsh_over_high_mid_db": 1.08,
+      "air_over_high_mid_db": 0.65,
+      "presence_over_high_mid_db": 3.65,
+      "band_db_rel_total": {
+        "sub": -35.91,
+        "bass": -8.42,
+        "low_mid": -4.99,
+        "mid": -7.52,
+        "high_mid": -12.02,
+        "presence": -8.37,
+        "harsh": -10.94,
+        "air": -11.37
+      },
+      "harsh_flag": false,
+      "dull_flag": false
+    },
+    "legacy_broad_declick": {
+      "groups": 3888,
+      "samples_changed": 100724,
+      "fraction_changed": 0.042478
+    },
+    "legacy_broad_declicked_spectral": {
+      "harsh_over_high_mid_db": -2.32,
+      "air_over_high_mid_db": -4.9,
+      "presence_over_high_mid_db": 3.49,
+      "band_db_rel_total": {
+        "sub": -23.1,
+        "bass": -7.95,
+        "low_mid": -4.57,
+        "mid": -7.06,
+        "high_mid": -11.56,
+        "presence": -8.07,
+        "harsh": -13.88,
+        "air": -16.46
+      },
+      "harsh_flag": false,
+      "dull_flag": false
+    }
+  },
+  "correction": {
+    "chain_id": "dualmono_linear_loudnorm_clear_vo_narrow_declick_gentle_limiter",
+    "removed": [
+      "-2 dB treble cut at 3 kHz",
+      "32-sample broad linear declick"
+    ],
+    "replaced_with": "7-sample narrow click repair around discontinuities",
+    "limiter": "alimiter=limit=0.80:attack=20:release=300:level=disabled",
+    "narrow_declick_events": [
+      {
+        "stage": "master_narrow_declick",
+        "threshold": 0.35,
+        "half_width_samples": 3,
+        "jumps_repaired": 5214,
+        "interior_samples_changed": 31284,
+        "fraction_changed": 0.013193
+      },
+      {
+        "stage": "calibration_0_narrow_declick",
+        "threshold": 0.35,
+        "half_width_samples": 3,
+        "jumps_repaired": 937,
+        "interior_samples_changed": 5622,
+        "fraction_changed": 0.002371
+      }
+    ],
+    "source_vo_chunks_unchanged": true,
+    "voice_id": "voice-01",
+    "no_music_sfx_procedural_bed_or_audio_substitution": true,
+    "no_time_stretch": true
+  },
+  "objective_qc": {
+    "nine_audio_gates": {
+      "loudness_in_range": true,
+      "true_peak_ok": true,
+      "lra_in_range": true,
+      "no_clipping": true,
+      "no_clicks": true,
+      "mono_compatible": true,
+      "dc_offset_ok": true,
+      "not_harsh": true,
+      "has_dynamics": true
+    },
+    "technical_pass": true,
+    "human_creative_approval": false,
+    "human_native_audio_listening": false,
+    "human_full_motion_review": false,
+    "human_legal_review": false
+  },
+  "spectrogram": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png",
+  "note": "Objective engineering correction and measurements only. No human listening, creative approval, legal opinion, perfection, virality or audience result is claimed."
+}

@@ -1,8 +1,8 @@
 {
-  "edition": "v10_one_clip_artemis_ii",
+  "edition": "v10_one_clip_artemis_ii_vo_clarity_fix",
   "deliverable": "deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
-  "bytes": 34500691,
-  "sha256": "1cfd521f6fea600b8775440cbc114b1d86c9b4c0ad3fc91499f69b9eb333134b",
+  "bytes": 34500681,
+  "sha256": "efce2ea3391828d4d638d980db179330bd88f21a12f7864e6b0bcac58d50a91f",
   "probe": {
     "duration_seconds": 49.4,
     "frame_count": 1482,
@@ -14,36 +14,36 @@
     "audio_sample_rate": 48000,
     "audio_channels_stereo": true,
     "pix_fmt_yuv420p": true,
-    "raw_ffmpeg_probe_stderr": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/Monarch.Overall.Work/deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf63.1.102\n  Duration: 00:00:49.40, start: 0.000000, bitrate: 5587 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920 [SAR 1:1 DAR 9:16], 5320 kb/s, 30 fps, 30 tbr, 15360 tbn (default)\n    Metadata:\n      handler_name    : VideoHandler\n      encoder         : Lavc63.1.102 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 257 kb/s (default)\n    Metadata:\n      handler_name    : SoundHandler\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf63.1.102\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 200 kb/s, 30 fps, 30 tbn (default)\n    Metadata:\n      encoder         : Lavc63.1.102 wrapped_avframe\n      handler_name    : VideoHandler\n[out#0/null @ 0x55a625807f40] video:614KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe= 1482 fps=288 q=-0.0 Lsize=N/A time=00:00:49.40 bitrate=N/A speed=9.59x elapsed=0:00:05.15    \n"
+    "raw_ffmpeg_probe_stderr": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/Monarch.Overall.Work/deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf63.1.102\n  Duration: 00:00:49.40, start: 0.000000, bitrate: 5587 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920 [SAR 1:1 DAR 9:16], 5320 kb/s, 30 fps, 30 tbr, 15360 tbn (default)\n    Metadata:\n      handler_name    : VideoHandler\n      encoder         : Lavc63.1.102 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 257 kb/s (default)\n    Metadata:\n      handler_name    : SoundHandler\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf63.1.102\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 200 kb/s, 30 fps, 30 tbn (default)\n    Metadata:\n      encoder         : Lavc63.1.102 wrapped_avframe\n      handler_name    : VideoHandler\n[out#0/null @ 0x560e55210f40] video:614KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe= 1482 fps=254 q=-0.0 Lsize=N/A time=00:00:49.40 bitrate=N/A speed=8.47x elapsed=0:00:05.83    \n"
   },
   "audio_qc": {
     "file": "/home/user/Monarch.Overall.Work/deliverables/MONARCH_CAM_Artemis_II_Upside_Down_Face_V10_Short.mp4",
     "profile": "web",
     "measured": {
-      "integrated_lufs": -14.36,
-      "lra_lu": 3.5,
-      "sample_peak_dbfs": -2.41,
+      "integrated_lufs": -14.66,
+      "lra_lu": 3.48,
+      "sample_peak_dbfs": -1.88,
       "clipped_samples": 0,
-      "dc_offset": 0.000352,
+      "dc_offset": 2.5e-05,
       "duration_s": 49.4,
-      "movement_db": 19.21,
+      "movement_db": 20.13,
       "mono_fold_loss_db": -0.0,
       "clicks": {
         "click_runs": 0,
         "first_click_s": null
       },
       "band_db_rel_total": {
-        "sub": -21.27,
-        "bass": -7.64,
-        "low_mid": -4.32,
-        "mid": -7.03,
-        "high_mid": -12.03,
-        "presence": -8.58,
-        "harsh": -14.81,
-        "air": -17.58
+        "sub": -33.92,
+        "bass": -8.37,
+        "low_mid": -4.93,
+        "mid": -7.52,
+        "high_mid": -11.97,
+        "presence": -8.16,
+        "harsh": -10.99,
+        "air": -12.25
       },
-      "harsh_over_high_mid_db": -2.78,
-      "air_over_high_mid_db": -5.55
+      "harsh_over_high_mid_db": 0.98,
+      "air_over_high_mid_db": -0.28
     },
     "targets": {
       "lufs": -14.0,
@@ -70,395 +70,395 @@
     "loudness_curve": [
       [
         0.0,
-        -20.43
+        -21.36
       ],
       [
         0.5,
-        -16.17
+        -17.17
       ],
       [
         1.0,
-        -15.47
+        -16.34
       ],
       [
         1.5,
-        -27.96
+        -27.01
       ],
       [
         2.0,
-        -16.05
+        -16.15
       ],
       [
         2.5,
-        -18.42
+        -18.43
       ],
       [
         3.0,
-        -14.53
+        -15.49
       ],
       [
         3.5,
-        -19.48
+        -21.13
       ],
       [
         4.0,
-        -16.38
+        -18.03
       ],
       [
         4.5,
-        -25.91
+        -27.44
       ],
       [
         5.0,
-        -20.16
+        -20.7
       ],
       [
         5.5,
-        -19.66
+        -19.83
       ],
       [
         6.0,
-        -25.56
+        -26.07
       ],
       [
         6.5,
-        -15.66
+        -16.55
       ],
       [
         7.0,
-        -17.7
+        -18.85
       ],
       [
         7.5,
-        -15.96
-      ],
-      [
-        8.0,
-        -14.54
-      ],
-      [
-        8.5,
-        -14.26
-      ],
-      [
-        9.0,
-        -15.25
-      ],
-      [
-        9.5,
-        -23.19
-      ],
-      [
-        10.0,
-        -14.81
-      ],
-      [
-        10.5,
-        -15.15
-      ],
-      [
-        11.0,
-        -19.39
-      ],
-      [
-        11.5,
-        -18.86
-      ],
-      [
-        12.0,
-        -28.89
-      ],
-      [
-        12.5,
-        -16.21
-      ],
-      [
-        13.0,
-        -17.65
-      ],
-      [
-        13.5,
-        -16.92
-      ],
-      [
-        14.0,
-        -17.59
-      ],
-      [
-        14.5,
-        -14.18
-      ],
-      [
-        15.0,
-        -16.96
-      ],
-      [
-        15.5,
-        -17.01
-      ],
-      [
-        16.0,
-        -16.85
-      ],
-      [
-        16.5,
-        -18.16
-      ],
-      [
-        17.0,
-        -21.9
-      ],
-      [
-        17.5,
-        -14.99
-      ],
-      [
-        18.0,
-        -24.32
-      ],
-      [
-        18.5,
         -17.07
       ],
       [
-        19.0,
-        -15.41
+        8.0,
+        -15.93
       ],
       [
-        19.5,
-        -20.56
+        8.5,
+        -15.09
       ],
       [
-        20.0,
-        -23.95
+        9.0,
+        -17.07
       ],
       [
-        20.5,
-        -12.84
+        9.5,
+        -24.39
       ],
       [
-        21.0,
-        -13.43
+        10.0,
+        -16.24
       ],
       [
-        21.5,
-        -18.97
+        10.5,
+        -16.58
       ],
       [
-        22.0,
-        -26.09
+        11.0,
+        -20.33
       ],
       [
-        22.5,
-        -16.79
+        11.5,
+        -20.34
       ],
       [
-        23.0,
-        -30.23
+        12.0,
+        -30.2
       ],
       [
-        23.5,
-        -15.37
+        12.5,
+        -17.17
       ],
       [
-        24.0,
-        -16.14
+        13.0,
+        -18.05
       ],
       [
-        24.5,
-        -16.14
-      ],
-      [
-        25.0,
-        -15.18
-      ],
-      [
-        25.5,
-        -15.69
-      ],
-      [
-        26.0,
-        -12.87
-      ],
-      [
-        26.5,
-        -19.74
-      ],
-      [
-        27.0,
-        -21.91
-      ],
-      [
-        27.5,
-        -15.52
-      ],
-      [
-        28.0,
-        -14.43
-      ],
-      [
-        28.5,
-        -17.29
-      ],
-      [
-        29.0,
-        -16.94
-      ],
-      [
-        29.5,
-        -17.56
-      ],
-      [
-        30.0,
-        -25.47
-      ],
-      [
-        30.5,
-        -17.8
-      ],
-      [
-        31.0,
-        -17.03
-      ],
-      [
-        31.5,
-        -32.05
-      ],
-      [
-        32.0,
-        -16.81
-      ],
-      [
-        32.5,
-        -14.8
-      ],
-      [
-        33.0,
-        -16.89
-      ],
-      [
-        33.5,
-        -17.1
-      ],
-      [
-        34.0,
-        -22.21
-      ],
-      [
-        34.5,
-        -14.42
-      ],
-      [
-        35.0,
-        -18.93
-      ],
-      [
-        35.5,
-        -17.64
-      ],
-      [
-        36.0,
-        -20.26
-      ],
-      [
-        36.5,
-        -15.13
-      ],
-      [
-        37.0,
-        -15.01
-      ],
-      [
-        37.5,
+        13.5,
         -18.57
       ],
       [
-        38.0,
-        -16.16
+        14.0,
+        -19.31
       ],
       [
-        38.5,
-        -17.11
+        14.5,
+        -15.03
       ],
       [
-        39.0,
+        15.0,
+        -17.47
+      ],
+      [
+        15.5,
+        -18.56
+      ],
+      [
+        16.0,
+        -17.74
+      ],
+      [
+        16.5,
         -20.01
       ],
       [
+        17.0,
+        -25.18
+      ],
+      [
+        17.5,
+        -15.99
+      ],
+      [
+        18.0,
+        -23.8
+      ],
+      [
+        18.5,
+        -17.76
+      ],
+      [
+        19.0,
+        -16.63
+      ],
+      [
+        19.5,
+        -20.32
+      ],
+      [
+        20.0,
+        -25.67
+      ],
+      [
+        20.5,
+        -14.21
+      ],
+      [
+        21.0,
+        -14.93
+      ],
+      [
+        21.5,
+        -18.64
+      ],
+      [
+        22.0,
+        -27.72
+      ],
+      [
+        22.5,
+        -17.18
+      ],
+      [
+        23.0,
+        -31.69
+      ],
+      [
+        23.5,
+        -17.03
+      ],
+      [
+        24.0,
+        -16.69
+      ],
+      [
+        24.5,
+        -17.88
+      ],
+      [
+        25.0,
+        -15.8
+      ],
+      [
+        25.5,
+        -17.04
+      ],
+      [
+        26.0,
+        -13.74
+      ],
+      [
+        26.5,
+        -20.72
+      ],
+      [
+        27.0,
+        -22.64
+      ],
+      [
+        27.5,
+        -16.34
+      ],
+      [
+        28.0,
+        -15.7
+      ],
+      [
+        28.5,
+        -17.78
+      ],
+      [
+        29.0,
+        -17.67
+      ],
+      [
+        29.5,
+        -18.77
+      ],
+      [
+        30.0,
+        -27.16
+      ],
+      [
+        30.5,
+        -18.71
+      ],
+      [
+        31.0,
+        -17.35
+      ],
+      [
+        31.5,
+        -33.87
+      ],
+      [
+        32.0,
+        -17.77
+      ],
+      [
+        32.5,
+        -16.22
+      ],
+      [
+        33.0,
+        -17.93
+      ],
+      [
+        33.5,
+        -18.44
+      ],
+      [
+        34.0,
+        -22.19
+      ],
+      [
+        34.5,
+        -15.08
+      ],
+      [
+        35.0,
+        -19.19
+      ],
+      [
+        35.5,
+        -19.18
+      ],
+      [
+        36.0,
+        -21.36
+      ],
+      [
+        36.5,
+        -15.61
+      ],
+      [
+        37.0,
+        -15.57
+      ],
+      [
+        37.5,
+        -19.57
+      ],
+      [
+        38.0,
+        -17.93
+      ],
+      [
+        38.5,
+        -17.53
+      ],
+      [
+        39.0,
+        -18.94
+      ],
+      [
         39.5,
-        -31.44
+        -32.93
       ],
       [
         40.0,
-        -19.81
+        -19.71
       ],
       [
         40.5,
-        -15.52
+        -16.15
       ],
       [
         41.0,
-        -19.47
+        -20.5
       ],
       [
         41.5,
-        -14.23
+        -15.79
       ],
       [
         42.0,
-        -15.38
+        -16.79
       ],
       [
         42.5,
-        -18.91
+        -20.1
       ],
       [
         43.0,
-        -17.25
+        -18.29
       ],
       [
         43.5,
-        -21.71
+        -23.17
       ],
       [
         44.0,
-        -25.23
+        -26.2
       ],
       [
         44.5,
-        -19.07
+        -19.32
       ],
       [
         45.0,
-        -21.18
+        -23.53
       ],
       [
         45.5,
-        -17.74
+        -17.97
       ],
       [
         46.0,
-        -17.43
+        -17.67
       ],
       [
         46.5,
-        -16.4
+        -17.56
       ],
       [
         47.0,
-        -17.74
+        -17.89
       ],
       [
         47.5,
-        -18.74
+        -20.05
       ],
       [
         48.0,
-        -26.57
+        -29.48
       ],
       [
         48.5,
-        -15.61
+        -16.78
       ]
     ]
   },
@@ -706,5 +706,20 @@
   },
   "technical_pass": true,
   "human_creative_approval": false,
-  "note": "Objective technical, layout, audio, provenance and rights-ledger checks only. No human full-motion review, native-audio listening, legal review, creative approval, perfection, retention, virality or audience result is claimed. NASA media guidelines are not a legal opinion; identifiable astronauts/possible CSA personnel may require additional clearance for commercial or promotional use."
+  "note": "Objective technical, layout, audio, provenance and rights-ledger checks only. No human full-motion review, native-audio listening, legal review, creative approval, perfection, retention, virality or audience result is claimed. NASA media guidelines are not a legal opinion; identifiable astronauts/possible CSA personnel may require additional clearance for commercial or promotional use.",
+  "voice_quality_fix_evidence": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_quality_fix_v10.json",
+  "voice_quality_fix_spectrogram": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png",
+  "voice_quality_fix": {
+    "applied": true,
+    "evidence": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_quality_fix_v10.json",
+    "spectrogram": "production/monarch-cam/caught_on_camera_commentary_v10/review/final/vo_spectrum_comparison.png",
+    "removed": [
+      "-2 dB treble cut",
+      "32-sample broad declick"
+    ],
+    "air_over_high_mid_before_db": -5.55,
+    "air_over_high_mid_after_db": -0.28,
+    "human_native_audio_listening": false,
+    "human_creative_approval": false
+  }
 }
