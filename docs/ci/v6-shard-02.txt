@@ -1,0 +1,46 @@
+shard 02
+14:34:40 | INFO: Data are loaded, start creating Blender stuff
+14:34:40 | INFO: Blender create Mesh node nightstand.024
+14:34:40 | INFO: Blender create Mesh node nightstand.025
+14:34:40 | INFO: glTF import finished in 0.01s
+14:34:40 | INFO: Data are loaded, start creating Blender stuff
+14:34:40 | INFO: Blender create Mesh node nightstand.024
+14:34:40 | INFO: Blender create Mesh node nightstand.025
+14:34:40 | INFO: glTF import finished in 0.00s
+14:34:40 | INFO: Data are loaded, start creating Blender stuff
+14:34:40 | INFO: Blender create Mesh node Plane.001
+14:34:40 | INFO: Blender create Mesh node Mesh.007
+14:34:40 | INFO: glTF import finished in 0.01s
+14:34:40 | INFO: Data are loaded, start creating Blender stuff
+14:34:40 | INFO: Blender create Mesh node Cube.003
+14:34:40 | INFO: glTF import finished in 0.01s
+14:34:40 | INFO: Data are loaded, start creating Blender stuff
+14:34:40 | INFO: Blender create Mesh node Cube.001
+14:34:40 | INFO: glTF import finished in 0.00s
+14:34:40 | INFO: Data are loaded, start creating Blender stuff
+14:34:40 | INFO: Blender create Mesh node Cube.007
+14:34:40 | INFO: glTF import finished in 0.01s
+14:34:40 | INFO: Data are loaded, start creating Blender stuff
+14:34:40 | INFO: Blender create Mesh node lamp furniture
+14:34:40 | INFO: glTF import finished in 0.00s
+14:35:19 | INFO: Data are loaded, start creating Blender stuff
+14:35:19 | INFO: Blender create Mesh node chair furniture
+14:35:20 | INFO: glTF import finished in 0.05s
+14:35:20 | INFO: Data are loaded, start creating Blender stuff
+14:35:20 | INFO: Blender create Mesh node chair furniture
+14:35:20 | INFO: glTF import finished in 0.06s
+14:35:20 | INFO: Data are loaded, start creating Blender stuff
+14:35:20 | INFO: Blender create Mesh node chair furniture
+14:35:20 | INFO: glTF import finished in 0.06s
+Error: Please select a file
+Traceback (most recent call last):
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/showreel/celebrity_story_3d_v6/render.py", line 121, in <module>
+    hero = Actor('hero', 'ryan.glb', loc=(APT_X - 2.4, 2.0, 0), rot=math.pi, outfit='formal')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/showreel/celebrity_story_3d_v6/actors.py", line 26, in __init__
+    bpy.ops.import_scene.gltf(filepath=f'{ASSETS}/{asset}')
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bpy/4.2/scripts/modules/bpy/ops.py", line 109, in __call__
+    ret = _op_call(self.idname_py(), kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Error: Please select a file
+
