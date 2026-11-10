@@ -231,7 +231,7 @@ def sky_dome(group='street'):
     cr.color_ramp.elements.remove(cr.color_ramp.elements[1])
     st = cr.color_ramp.elements[0]
     st.position = 0.0
-    st.color = (1.45, 1.18, .95, 1)
+    st.color = (1.65, 1.42, 1.18, 1)
     for pos, col in ((.10, (1.15, 1.02, .94)), (.28, (.72, .84, .99)),
                      (.55, (.34, .56, .92)), (1.0, (.12, .26, .62))):
         e = cr.color_ramp.elements.new(pos)
@@ -254,7 +254,7 @@ def sky_dome(group='street'):
     return o
 
 
-def city_outside(x_center, y, z_floor=-24.0, width=180, group='apt'):
+def city_outside(x_center, y, z_floor=-46.0, width=180, group='apt'):
     """Distant towers so glazing has depth instead of an empty gradient."""
     dark = plain('tower', (.055, .062, .078), rough=.85)
     lit = plain('tower window', (.55, .62, .72), rough=.2, emit=.9)
@@ -279,10 +279,8 @@ def city_outside(x_center, y, z_floor=-24.0, width=180, group='apt'):
 def build_apartment(x=-80.0):
     """Penthouse bedroom + living bay. Returns the measurements the acts need."""
     g = 'apt'
-    floor_mat = textured('apt floor', (.30, .25, .22), (2, 2, 1),
-                         variants=('wood_floor.jpg', 'floor.jpg', 'wood.jpg'))
-    wall_mat = textured('apt wall', (.66, .62, .57), (1, 1, 1),
-                        variants=('plaster.jpg', 'wall.jpg'))
+    floor_mat = textured('apt floor', (.27, .23, .20), (2, 2, 1), bump=.12)
+    wall_mat = textured('apt wall', (.60, .57, .53), (1, 1, 1), bump=.10, scale=3.0)
     ceil = plain('apt ceiling', (.52, .50, .48), rough=.9)
     dark = plain('apt dark', (.06, .055, .05), rough=.5, metal=.3)
     brass = plain('apt brass', (.62, .48, .26), rough=.35, metal=1.0)
@@ -328,19 +326,23 @@ def build_apartment(x=-80.0):
 
     # bed against the right-hand wall side, headboard to +Y wall
     bed_at = (x - 3.40, 3.55)
-    model('bed.glb', bed_at, rot=0.0, scale=2.05, group=g)
-    box('bed head', (x - 3.40, 4.72, .62), (2.10, .14, 1.24), plain('apt head', (.34, .29, .26), rough=.85), group=g)
-    for i, dx in enumerate((-.62, 0, .62)):
-        box(f'pillow {i}', (x - 3.40 + dx, 4.28, .70), (.54, .34, .16), linen, bevel=.06, group=g)
-        box(f'pillow top {i}', (x - 3.40 + dx, 4.26, .79), (.50, .30, .10), linen, bevel=.05, group=g)
-    box('duvet', (x - 3.40, 2.62, .62), (2.04, 2.55, .22), linen2, bevel=.07, group=g)
-    box('throw', (x - 3.40, 1.48, .70), (2.06, .70, .10), plain('apt throw', (.30, .27, .30), rough=1.0),
-        bevel=.04, group=g)
+    base = plain('bed base', (.26, .23, .21), rough=.7)
+    box('bed base', (x - 3.40, 3.55, .28), (2.10, 2.60, .56), base, bevel=.03, group=g)
+    box('bed plinth', (x - 3.40, 3.62, .07), (1.94, 2.40, .14), plain('bed plinth', (.12, .11, .10), rough=.5), group=g)
+    box('mattress', (x - 3.40, 3.50, .58), (2.06, 2.52, .26), linen, bevel=.06, group=g)
+    box('bed head', (x - 3.40, 4.78, .72), (2.22, .16, 1.40), plain('apt head', (.30, .26, .24), rough=.95), bevel=.05, group=g)
+    for i, dx in enumerate((-.58, .58)):
+        box(f'pillow {i}', (x - 3.40 + dx, 4.22, .80), (.62, .40, .18), linen, bevel=.07, group=g)
+        box(f'pillow top {i}', (x - 3.40 + dx, 4.18, .90), (.56, .34, .12), linen, bevel=.05, group=g)
+    box('duvet', (x - 3.40, 2.58, .70), (2.06, 2.35, .20), linen2, bevel=.07, group=g)
+    box('duvet fold', (x - 3.40, 3.42, .76), (2.04, .50, .14), linen, bevel=.06, group=g)
+    box('throw', (x - 3.40, 1.52, .78), (2.08, .62, .08), plain('apt throw', (.32, .29, .32), rough=1.0),
+        bevel=.03, group=g)
 
     # nightstands + lamps
     for sx in (-1, 1):
         nx = x - 3.40 + sx * 1.42
-        model('nightstand.glb', (nx, 4.32), rot=0.0, scale=1.0, group=g)
+        model('nightstand.glb', (nx, 4.30), rot=0.0, scale=1.05, group=g)
         cyl(f'bedside base {sx}', (nx, 4.32, .80), .07, .10, brass, group=g)
         rod(f'bedside stem {sx}', (nx, 4.32, .85), (nx, 4.32, 1.02), .014, brass, group=g)
         sh = cyl(f'bedside shade {sx}', (nx, 4.32, 1.06), .13, .17,
@@ -372,7 +374,7 @@ def build_apartment(x=-80.0):
     box('art tall', (x + 4.54, 3.0, 2.0), (.05, 1.1, 1.5), art_b, group=g)
 
     # ceiling cove + downlights (the room must read even in the dark final act)
-    cove = plain('apt cove', (.95, .88, .78), rough=.9, emit=2.2)
+    cove = plain('apt cove', (.95, .88, .78), rough=.9, emit=1.2)
     for sx in (-1, 1):
         box(f'cove light {sx}', (x + sx * 4.3, 0, 3.05), (.16, 9.8, .05), cove, group=g)
     for i in range(4):
@@ -381,9 +383,9 @@ def build_apartment(x=-80.0):
                 .09, .02, cove, verts=16, group=g)
 
     # ---- lights
-    area('apt warm key', (x - 1.2, 4.2, 2.80), (x - 2.6, 2.2, 1.0), 260, 3.0, (1, .84, .68), group=g)
-    area('apt warm fill', (x + 3.6, 4.0, 2.60), (x + 1.6, 2.4, 1.0), 120, 3.5, (1, .88, .76), group=g)
-    area('apt sky fill', (x, -4.6, 2.20), (x, 1.5, 1.1), 170, 6.0, (.72, .84, 1), group=g)
+    area('apt warm key', (x - 1.2, 4.2, 2.80), (x - 2.6, 2.2, 1.0), 150, 3.0, (1, .84, .68), group=g)
+    area('apt warm fill', (x + 3.6, 4.0, 2.60), (x + 1.6, 2.4, 1.0), 70, 3.5, (1, .88, .76), group=g)
+    area('apt sky fill', (x, -4.6, 2.20), (x, 1.5, 1.1), 250, 6.0, (.62, .76, 1), group=g)
     area('apt bounce', (x, 2.0, 3.15), (x + .4, 1.8, 0), 90, 4.0, (1, .93, .86), group=g)
     spot('bed pool', (x - 3.4, 3.2, 3.05), (x - 3.4, 3.4, .6), 45, (1, .85, .70), size=.35, group=g)
     point('cove bounce', (x, 2.0, 2.80), 30, (.95, .9, .85), radius=1.2, group=g)
@@ -463,8 +465,8 @@ def build_kitchen(x=-96.0):
         sphere(f'pendant bulb {i}', (isl[0] + dx, isl[1], 2.10), .045,
                plain('bulb', (1, .84, .62), emit=8), group=g)
 
-    area('kit window light', (x - 1.6, 3.6, 2.1), (x - 1.7, 0, 1.1), 900, 2.4, (1, .95, .86), group=g)
-    spot('kit sun shaft', (x - 2.6, 3.4, 2.5), (x - .6, .2, .8), 800, (1, .92, .78), size=.6,
+    area('kit window light', (x - 1.6, 3.6, 2.1), (x - 1.7, 0, 1.1), 420, 2.4, (1, .95, .86), group=g)
+    spot('kit sun shaft', (x - 2.6, 3.4, 2.5), (x - .6, .2, .8), 260, (1, .92, .78), size=.6,
          angle=38, group=g)
     area('kit fill', (x - .2, .6, 2.60), (x - 1.0, 3.0, 1.2), 180, 3.5, (.82, .88, 1), group=g)
     for i, dx in enumerate((-1.0, 0.0, 1.0)):

@@ -43,10 +43,14 @@ scn = bpy.context.scene
 scn.render.engine = 'CYCLES'
 scn.cycles.samples = args.samples
 scn.cycles.use_denoising = True
-scn.cycles.max_bounces = 5
-scn.cycles.diffuse_bounces = 3
-scn.cycles.glossy_bounces = 3
-scn.cycles.transmission_bounces = 4
+scn.cycles.max_bounces = 3
+scn.cycles.diffuse_bounces = 2
+scn.cycles.glossy_bounces = 2
+scn.cycles.transmission_bounces = 2
+scn.cycles.caustics_reflective = False
+scn.cycles.caustics_refractive = False
+scn.cycles.blur_glossy = 1.0
+scn.cycles.sample_clamp_indirect = 6.0
 scn.cycles.use_persistent_data = True
 scn.cycles.device = 'CPU'
 scn.render.threads_mode = 'FIXED'
@@ -58,7 +62,7 @@ scn.render.image_settings.file_format = 'PNG'
 scn.render.film_transparent = False
 scn.view_settings.view_transform = 'AgX'
 scn.view_settings.look = 'AgX - Medium High Contrast'
-scn.view_settings.exposure = .55
+scn.view_settings.exposure = .42
 scn.render.use_freestyle = False
 
 world = bpy.data.worlds.new('world')
@@ -71,6 +75,31 @@ APT_X, KIT_X, ST_X = -80.0, -96.0, 20.0
 apt = S.build_apartment(APT_X)
 kit = S.build_kitchen(KIT_X)
 street = S.build_street(ST_X)
+
+
+def flatten_sets():
+    """Collapse each set into one mesh per group.
+
+    Cycles re-syncs every object before each frame; a street made of a thousand
+    little boxes costs more in sync than in tracing, so static geometry is
+    joined.  Props that move are tagged dynamic and left alone.
+    """
+    for grp in ('apt', 'kit', 'street'):
+        parts = [o for o in bpy.data.objects
+                 if o.type == 'MESH' and o.get('group') == grp and not o.get('dynamic')]
+        if not parts:
+            continue
+        bpy.ops.object.select_all(action='DESELECT')
+        for o in parts:
+            o.select_set(True)
+        bpy.context.view_layer.objects.active = parts[0]
+        bpy.ops.object.join()
+        joined = bpy.context.view_layer.objects.active
+        joined.name = f'{grp} static'
+        joined['group'] = grp
+
+
+flatten_sets()
 
 # camera rig
 target_empty = bpy.data.objects.new('aim', None)
@@ -178,8 +207,6 @@ def show(o, on=True):
 
 
 def hero_hold_phone(hero, body, screen, visible=True):
-    hero.grip('Right', .82)
-    bpy.context.view_layer.update()
     pos, q = hero.grasp('Right', .62)
     mq = q @ Quaternion((0, 0, 1), math.radians(-90))
     motion.attach(body, pos, mq)
@@ -196,6 +223,19 @@ CUES = script
 CUE = [c['start'] for c in CUES] + [60.0]
 BEDROOM_END, KITCHEN_END, WINDOW_END, STREET_END, BARRIER_END, CAR_END = (
     CUE[2], CUE[3], CUE[4], CUE[6], CUE[8], CUE[9])
+
+
+WINDOW_START = CUE[2]
+STREET_START = CUE[3]
+BARRIER_START = CUE[6]
+CAR_START = CUE[8]
+
+
+# Beat timing inside each act (cue table first, then actual walk distances)
+ST_WALK_START = STREET_START + 3.6
+ST_WAVE_START = ST_WALK_START + 6.2
+BARRIER_WALK_START = BARRIER_START - .3
+BARRIER_STOP = BARRIER_START + 3.1
 
 
 def head(a):
@@ -250,7 +290,7 @@ def act_bedroom(t):
     # 05:40, on his feet at the side of the bed, phone already at his ear
     hero.action('Phone_Rig', 96 + t * 20)
     bpy.context.view_layer.update()
-    hero.place(APT_X - 2.60, 1.65, 0, rot=math.pi + .30)
+    hero.place(APT_X - 3.55, 1.95, 0, rot=math.pi - .05)
     bpy.context.view_layer.update()
     if t < 8.4:
         hero_hold_phone(hero, hero_phone, hero_screen, visible=True)
@@ -336,14 +376,11 @@ def act_street(t):
     update_flashes(t)
 
 
-ST_WALK_START = STREET_START + 3.2
-ST_WAVE_START = ST_WALK_START + 4.2
-
-
 def act_barrier(t):
     S.show_set('street')
     for a in (hero, guard, girl) + tuple(crowd):
         a.show(True)
+    fan_a.show(False)
     hero.outfit('formal'); girl.outfit('smart'); guard.outfit('formal')
     guard.place(ST_X + 1.0, 2.75, 0, rot=math.pi - .10)
     guard.action('Idle_Rig', 20 + t * 4)
@@ -377,10 +414,6 @@ def act_barrier(t):
     update_flashes(t)
 
 
-BARRIER_WALK_START = BARRIER_START - .7
-BARRIER_STOP = BARRIER_START + 3.3
-
-
 def act_car(t):
     S.show_set('street')
     for a in (hero, guard):
@@ -410,64 +443,76 @@ def act_final(t):
     hide_phones()
     hero.action('Think_Rig', 30 + (t - CAR_END) * 16)
     bpy.context.view_layer.update()
-    hero.place(APT_X + 1.15, -3.35, 0, rot=math.pi - .35)
+    hero.place(APT_X + 2.55, 3.25, 0, rot=math.pi - .06)
     bpy.context.view_layer.update()
     hero.expression(t, smile=.02, brow=.10)
-    hero.look((APT_X + 6.0, -30.0, 4.0))
-    # phone face-down on the sill, out of reach
-    motion.attach(hero_phone2, (APT_X - 1.60, -4.72, .412), Quaternion((0, 0, 1), .9))
+    hero.look((APT_X + 2.4, -30.0, 2.6))
+    # phone face-down on the coffee table, out of reach
+    motion.attach(hero_phone2, (APT_X + 2.10, 2.70, .404), Quaternion((0, 0, 1), .9))
     hero_phone2.rotation_euler = (0, 0, .9)
     hero_phone2.hide_render = hero_screen2.hide_render = False
     mug.hide_render = coffee.hide_render = handle.hide_render = True
     letter.hide_render = True
 
 
-WINDOW_START = CUE[2]
-STREET_START = CUE[3]
-BARRIER_START = CUE[6]
-CAR_START = CUE[8]
 
 # -------------------------------------------------------------------- shots
 # (start, end, subject, azimuth from facing, distance, cam height, aim dz, lens)
-SHOTS = [
-    (0.0, 2.6, 'hero', 26, 3.6, 1.58, -.04, 42),
-    (2.6, 4.4, 'phone', 40, .62, 1.63, .06, 80),
-    (4.4, 5.6, 'phone', 16, .46, 1.65, .06, 95),
-    (5.6, 7.0, 'hero', -34, 2.4, 1.52, -.02, 52),
-    (7.0, 8.4, 'hero', 52, 2.0, 1.36, -.02, 46),
-    (8.4, 10.0, 'hero', 18, 4.4, 1.74, -.10, 32),
-    (10.0, 11.1, 'hero', -60, 2.2, 1.42, .04, 44),
-    (11.1, 12.6, 'mug', 62, .60, 1.18, .05, 85),
-    (12.6, 14.0, 'hero', -26, 2.8, 1.52, -.02, 46),
-    (14.0, 15.2, 'hero', 34, 1.60, 1.57, .04, 66),
-    (15.2, 16.4, 'hero', 74, 2.6, 1.48, -.06, 38),
-    (16.4, 18.2, 'hero', -152, 3.2, 1.62, -.02, 40),
-    (18.2, 19.4, 'hero', 158, 2.4, 1.63, .02, 62),
-    (19.4, 20.8, 'hero', -98, 2.7, 1.28, -.10, 38),
-    (20.8, 22.2, 'hero', -36, 2.4, 1.53, .04, 46),
-    (22.2, 23.4, 'hero', 150, 7.5, 1.90, -.02, 30),
-    (23.4, 25.8, 'hero', 66, 7.8, 1.78, -.10, 30),
-    (25.8, 27.6, 'hero', 58, 4.4, 1.56, .02, 44),
-    (27.6, 30.0, 'hero', 26, 3.0, 1.54, .04, 46),
-    (30.0, 31.8, 'hero', 104, 3.8, 1.65, 0.0, 36),
-    (31.8, 33.4, 'hero', 38, 1.8, 1.55, .03, 60),
-    (33.4, 35.0, 'hero', 68, 3.0, 1.55, 0.0, 44),
-    (35.0, 37.4, 'hero', 8, 1.25, 1.53, .02, 76),
-    (37.4, 38.8, 'girl', 22, 1.45, 1.47, .03, 55),
-    (38.8, 40.4, 'gift', 34, 1.10, 1.45, -.01, 58),
-    (40.4, 41.8, 'pair', 26, 1.65, 1.43, -.06, 50),
-    (41.8, 43.4, 'hero', 12, 1.05, 1.53, .03, 78),
-    (43.4, 45.6, 'hero', 16, 1.20, 1.53, .02, 76),
-    (45.6, 47.8, 'hero', 74, 3.2, 1.67, -.06, 44),
-    (47.8, 50.0, 'hero', 150, 5.6, 1.40, -.02, 32),
-    (50.0, 51.6, 'hero', 118, 4.6, 1.46, -.02, 34),
-    (51.6, 54.4, 'hero', 24, 1.25, 1.53, .02, 70),
-    (54.4, 56.6, 'hero', 66, 4.2, 1.47, -.06, 34),
-    (56.6, 58.4, 'hero', 40, 1.40, 1.53, .03, 70),
-    (58.4, 60.0, 'hero', -70, 3.6, 1.43, -.02, 40),
+# Shots are generated from the narration cues, so camera and blocking can never
+# drift apart: every beat below is expressed inside one act's window.
+ACTS = [
+    ('bedroom', 0.0, BEDROOM_END),
+    ('kitchen', BEDROOM_END, KITCHEN_END),
+    ('window', KITCHEN_END, WINDOW_END),
+    ('street', WINDOW_END, STREET_END),
+    ('barrier', STREET_END, BARRIER_END),
+    ('car', BARRIER_END, CAR_END),
+    ('final', CAR_END, 60.0),
 ]
-PUSH = [(0.0, .0)] * len(SHOTS)
 
+# per act: list of (fraction_start, fraction_end, subject, az, dist, height, dz, lens)
+BEATS = {
+    'bedroom': [(0.0, .22, 'hero', 26, 3.4, 1.60, -.05, 40),
+                (.22, .40, 'phone', 34, .58, 1.62, .05, 85),
+                (.40, .52, 'hero', -32, 2.2, 1.54, -.02, 52),
+                (.52, .66, 'hero', 54, 2.0, 1.38, -.02, 46),
+                (.66, .83, 'hero', 16, 3.2, 1.66, -.08, 36),
+                (.83, 1.0, 'hero', -58, 2.2, 1.44, .03, 46)],
+    'kitchen': [(0.0, .34, 'mug', 54, .42, 1.24, .05, 70),
+                (.34, .58, 'hero', -26, 2.6, 1.54, -.02, 48),
+                (.58, .78, 'hero', 34, 1.55, 1.57, .05, 68),
+                (.78, 1.0, 'hero', 68, 2.5, 1.50, -.05, 40)],
+    'window': [(0.0, .26, 'hero', -150, 3.0, 1.62, -.02, 40),
+               (.26, .46, 'hero', 156, 2.4, 1.63, .02, 62),
+               (.46, .66, 'hero', -96, 2.7, 1.32, -.10, 38),
+               (.66, .84, 'hero', -34, 2.5, 1.55, .04, 46),
+               (.84, 1.0, 'hero', 148, 4.6, 1.80, -.04, 30)],
+    'street': [(0.0, .18, 'hero', 150, 6.4, 1.86, -.02, 30),
+               (.18, .38, 'hero', 66, 6.8, 1.78, -.10, 30),
+               (.38, .52, 'hero', 58, 4.2, 1.58, .02, 44),
+               (.52, .68, 'hero', 26, 3.0, 1.55, .04, 46),
+               (.68, .84, 'hero', 104, 3.6, 1.66, 0.0, 36),
+               (.84, 1.0, 'hero', 38, 1.7, 1.56, .03, 62)],
+    'barrier': [(0.0, .14, 'hero', 68, 3.0, 1.56, 0.0, 44),
+                (.14, .28, 'girl', -70, 2.6, 1.50, .02, 44),
+                (.28, .46, 'gift', 32, 1.30, 1.44, -.01, 52),
+                (.46, .64, 'pair', 26, 1.95, 1.42, -.06, 44),
+                (.64, .82, 'hero', 10, 1.25, 1.54, .03, 70),
+                (.82, 1.0, 'hero', 74, 3.2, 1.68, -.06, 44)],
+    'car': [(0.0, .45, 'hero', 150, 4.6, 1.44, -.02, 34),
+            (.45, 1.0, 'hero', 116, 4.0, 1.48, -.02, 36)],
+    'final': [(0.0, .30, 'hero', 22, 1.30, 1.54, .02, 68),
+              (.30, .58, 'hero', 66, 4.0, 1.48, -.06, 34),
+              (.58, .80, 'hero', 38, 1.45, 1.54, .03, 66),
+              (.80, 1.0, 'hero', -64, 3.4, 1.46, -.02, 38)],
+}
+
+SHOTS = []
+for name, a, b in ACTS:
+    span = b - a
+    for f0, f1, subj, az, dist, ch, dz, lens in BEATS[name]:
+        SHOTS.append((a + span * f0, a + span * f1, subj, az, dist, ch, dz, lens))
+PUSH = [(0.0, .0)] * len(SHOTS)
 
 def shot_at(t):
     for i, s in enumerate(SHOTS):
@@ -490,7 +535,8 @@ def focal_point(subj):
     if subj == 'gift':
         return head(girl) * .55 + hero.world_bone('RightHand') * .45
     if subj in ('phone', 'mug'):
-        return hero.world_bone('RightHand')
+        p = hero.world_bone('RightHand')
+        return Vector((p.x, p.y, p.z))
     if subj == 'car':
         return Vector((ST_X + 17.0, -2.4, 1.10))
     return head(hero)
@@ -508,8 +554,15 @@ def _clear(origin, focus, skip):
     d = focus - origin
     L = d.length
     d.normalize()
-    hit, loc, nrm, idx, obj, mat = scn.ray_cast(bpy.context.evaluated_depsgraph_get(),
-                                                origin + d * .06, d, distance=max(.1, L - .55))
+    # side rays: a camera buried in furniture fails one of these even when the
+    # straight line to the subject happens to end on the subject itself
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+    for side in (Vector((d.y, -d.x, 0)).normalized(), Vector((-d.y, d.x, 0)).normalized()):
+        hit, loc, nrm, idx, obj, mat = scn.ray_cast(dg, origin, side, distance=.45)
+        if hit and obj.get('group') in S.GROUPS:
+            return False
+    hit, loc, nrm, idx, obj, mat = scn.ray_cast(dg, origin + d * .06, d, distance=max(.1, L - .55))
     if not hit:
         return True
     name = obj.name
@@ -532,55 +585,94 @@ def _tokens(subj):
     return ()
 
 
-OVERRIDES = {
-    0: ((APT_X - 1.55, -2.75, 1.62), (APT_X - 2.60, 2.60, 1.20), 30),
-    7: ((KIT_X + .55, -.55, 1.56), (KIT_X - .55, 2.10, 1.10), 26),
-    8: ((KIT_X + 1.30, .95, 1.60), (KIT_X - .60, 1.60, 1.20), 30),
-}
+OVERRIDES = {}
 
 # light anchor shared by all street shots
 ST_LIGHT = (ST_X + 2.0, -7.0, 7.5)
 
 
+def _clearance(origin):
+    """How far the nearest surface is all around the camera.
+
+    A camera buried in a counter or a wall still renders *something*, so the
+    solver refuses any spot without breathing room in eight directions.
+    """
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+    best = 9.9
+    for k in range(8):
+        a = k * math.pi / 4
+        d = Vector((math.cos(a), math.sin(a), 0))
+        hit, loc, nrm, idx, obj, mat = scn.ray_cast(dg, origin, d, distance=1.2)
+        if hit and obj.get('group') in S.GROUPS:
+            best = min(best, (loc - origin).length)
+    return best
+
+
+def _projects(pos, lens, focus, dz=0.0):
+    """Is the subject actually inside the frame, with margin?"""
+    from bpy_extras.object_utils import world_to_camera_view
+    old_loc = cam.location.copy()
+    old_lens = cam.data.lens
+    cam.location = pos
+    cam.data.lens = lens
+    scn.camera.data.shift_x = 0
+    scn.camera.data.shift_y = 0
+    bpy.context.view_layer.update()
+    v = world_to_camera_view(scn, cam, focus)
+    cam.location = old_loc
+    cam.data.lens = old_lens
+    return (0.30 < v.x < 0.70) and (0.22 < v.y < 0.74) and v.z > 0
+
+
 def place_camera(t, idx, s):
     t0, t1, subj, az, dist, ch, dz, lens = s
     u = motion.ease((t - t0) / max(1e-3, t1 - t0))
-    if idx in OVERRIDES:
-        pos, tgt, ln = OVERRIDES[idx]
-        cam.location = pos
-        target_empty.location = tgt
-        cam.data.lens = ln * (1 + .04 * u)
-        cam.data.dof.focus_distance = (Vector(tgt) - cam.location).length
-        cam.data.dof.aperture_fstop = 2.8
-        return
     focal = focal_point(subj)
     rig = girl.rig if subj == 'girl' else hero.rig
-    fwd = rig.rotation_quaternion @ Vector((0, -1, 0))
-    right = rig.rotation_quaternion @ Vector((-1, 0, 0))
+    # the imported rig faces +Y in its own space; the shot azimuth is measured
+    # from that facing, positive toward his left
+    fwd = rig.rotation_quaternion @ Vector((0, 1, 0))
+    right = rig.rotation_quaternion @ Vector((1, 0, 0))
     if subj == 'pair':
-        dirv0 = Vector((math.sin(math.radians(az)) * .55, -1.0, 0)).normalized()
+        # side-on to the two of them, always from the road
+        axis = head(hero) - head(girl)
+        axis.z = 0
+        axis = axis.normalized() if axis.length > .05 else Vector((1, 0, 0))
+        side = 1 if az >= 0 else -1
+        dirv0 = (Vector((-axis.y, axis.x, 0)) * side * .9 + Vector((0, -1, 0)) * .3).normalized()
     else:
         a = math.radians(az)
         dirv0 = (fwd * math.cos(a) + right * math.sin(a)).normalized()
-    d = dist * (1 - .05 * u)
-    best, score, best_d = dirv0, -9e9, d
-    base = math.atan2(dirv0.y, dirv0.x)
+    d0 = dist * (1 - .05 * u)
     skip = _tokens(subj)
-    for k in (0, 8, -8, 16, -16, 26, -26, 38, -38, 52, -52, 70, -70, 90, -90):
-        ang = base + math.radians(k)
-        dv = Vector((math.cos(ang), math.sin(ang), 0.0))
-        for dm in (1.0, .8, 1.25, .62, 1.5):
-            dd = d * dm
-            o = Vector((focal.x + dv.x * dd, focal.y + dv.y * dd, ch))
-            if not in_bounds(o) or not _clear(o, focal, skip):
+    aim = Vector((focal.x, focal.y, focal.z + dz))
+
+    best = None
+    for dscale in (1.0, .82, 1.22, .66, 1.5, .55):
+        d = d0 * dscale
+        base = math.atan2(dirv0.y, dirv0.x)
+        for k in (0, 10, -10, 20, -20, 32, -32, 46, -46, 62, -62, 80, -80, 100, -100):
+            ang = base + math.radians(k)
+            o = Vector((focal.x + math.cos(ang) * d, focal.y + math.sin(ang) * d, ch))
+            if not in_bounds(o):
                 continue
-            sc = -abs(k) * .06 - (1.2 if dm != 1.0 else 0)
-            if sc > score:
-                best, score, best_d = dv, sc, dd
-    cam.location = (focal.x + best.x * best_d, focal.y + best.y * best_d, ch)
-    target_empty.location = (focal.x, focal.y, focal.z + dz)
+            if min(_clearance(o), _clearance(Vector((o.x, o.y, ch + .30)))) < .34:
+                continue
+            if not _clear(o, focal, skip):
+                continue
+            if not _projects(o, lens, aim):
+                continue
+            best = o
+            break
+        if best:
+            break
+    if best is None:                      # fall back to the authored angle
+        best = Vector((focal.x + dirv0.x * d0, focal.y + dirv0.y * d0, ch))
+    cam.location = best
+    target_empty.location = aim
     cam.data.lens = lens * (1 + .03 * u)
-    cam.data.dof.focus_distance = (Vector(target_empty.location) - cam.location).length
+    cam.data.dof.focus_distance = (aim - best).length
     cam.data.dof.aperture_fstop = 4.0 if lens > 60 else (5.0 if lens > 45 else 6.3)
 
 
