@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.0",
+  "edition": "v11_replay_lab_ep01_phase_a_start_2026-11-05",
+  "status": "draft_v0_not_recorded_not_rendered",
+  "working_title": "The Upside-Down Face: 42.7 Seconds of NASA Footage, Explained Frame by Frame",
+  "runtime_target_seconds": 660,
+  "format": "16:9 landscape, 30fps, H.264 + AAC",
+  "hook_variants": [
+    {
+      "id": "H1",
+      "label": "Primary (selected in idea study)",
+      "text": "That is not a lens. Watch the face inside that floating water sphere flip upside down - then stay, because every replay hides a different layer.",
+      "note": "Pattern interrupt. 'Not a lens' ka matlab koi manufactured glass lens nahi; Chapter 4 me khud reveal hota hai ke paani hi ek liquid lens ban gaya. Isliye ye jhooth nahi, ek puzzle hai."
+    },
+    {
+      "id": "H2",
+      "label": "Physics-first",
+      "text": "A sphere of water, a face, and one impossible-looking flip. In the next ten minutes we will watch the same 42 seconds eight times, and each time something new will make sense.",
+      "note": "Replay promise seedha; koi 'million views', 'you won't believe' ya ALL CAPS nahi."
+    },
+    {
+      "id": "H3",
+      "label": "Question-first",
+      "text": "Why is that face upside down? The answer is inside the water - not the camera. Let's replay it slowly, then slower, then with the sound still on.",
+      "note": "Native audio ka zikr hook me hi; koi 'No CGI' / '100% real' dawa nahi."
+    }
+  ],
+  "selected_hook_by_default": "H1",
+  "chapters": [
+    {
+      "t": "0:00-0:20",
+      "name": "Cold open: three silent replays",
+      "vo": "(No voiceover.) Native crew audio only. Three short replays of the inverted face, no text, no logo.",
+      "on_screen": "none for the first 12s, then: That is not a lens.",
+      "source": [
+        1,
+        10
+      ],
+      "words": 0
+    },
+    {
+      "t": "0:20-1:00",
+      "name": "The promise",
+      "vo": "Forty-two seconds of NASA footage. About eleven minutes of asking how that happened. One source, no re-enactment, no second clip, and no promise about what this video will do. Just one moment, replayed until the physics stops looking strange. We will keep the crew's own audio in place the whole way.",
+      "on_screen": "42.7s of footage / 11:00 of explaining · Source: NASA / Artemis II",
+      "source": [
+        1,
+        8,
+        11
+      ],
+      "words": 46
+    },
+    {
+      "t": "1:00-2:10",
+      "name": "The mission in 60 seconds",
+      "vo": "The clip is catalogued by NASA as Fun with Water Bubbles, from Artemis II, dated the fourth of April, twenty twenty-six. That is the extent of the mission detail we will state, because those are the fields we have on the record. Everything beyond that stays out of the script. NASA is credited as the source; no endorsement is implied.",
+      "on_screen": "Fun with Water Bubbles · 2026-04-04 · Source: NASA / Artemis II · No endorsement implied",
+      "source": [
+        1,
+        4,
+        8
+      ],
+      "words": 58
+    },
+    {
+      "t": "2:10-3:30",
+      "name": "Why water becomes a sphere",
+      "vo": "On Earth, gravity pulls a drop down and flattens it. In microgravity that pull is gone, so the surface of the water pulls on itself instead. NASA describes this as surface tension, the elastic-like force that gives droplets their shape. Left alone, the drop settles into the shape with the least surface: a sphere. So the first strange thing in this clip is not the face. It is that the water is round at all. Our own simple diagram here, drawn for this video, not stock footage.",
+      "on_screen": "ORIGINAL DIAGRAM: surface tension → sphere · label 'Diagram: Replay Lab'",
+      "source": [
+        3,
+        14
+      ],
+      "words": 79
+    },
+    {
+      "t": "3:30-5:00",
+      "name": "The liquid lens",
+      "vo": "Now the flip. A curved boundary between air and water bends light. Light crossing that boundary is refracted, and the curved surface sends the rays into a reversed arrangement, so the picture arrives upside down. The same bending makes rainbows in raindrops. So the sphere is behaving like a small optical element - a liquid lens. That is why the opening line said it is not a lens: there is no glass, no manufactured optic. The water is doing the job. Freeze here, at twenty-three seconds, and watch it at half speed.",
+      "on_screen": "REFRACTION · air → water → image inverts · replay 0.5x at 23.42s · further reading: NASA image article (on screen source line)",
+      "source": [
+        2,
+        3,
+        10
+      ],
+      "words": 92
+    },
+    {
+      "t": "5:00-6:20",
+      "name": "Why your brain says 'that looks fake'",
+      "vo": "Faces are the first thing we learn to read, and we expect them to be upright. When one arrives upside down inside a floating ball, the mismatch arrives before the explanation does. That gap is a pattern interrupt, and it is the reason people replay the moment. We are not going to turn that surprise into a claim about how the footage was made, or into a story about a broadcast error. A separate fact-check has documented how a different clip was misused for staged claims; we will not repeat that pattern here.",
+      "on_screen": "Expectation → mismatch → replay · (no claim about production methods)",
+      "source": [
+        6,
+        11,
+        15
+      ],
+      "words": 79
+    },
+    {
+      "t": "6:20-7:30",
+      "name": "The crew's reaction",
+      "vo": "Keep the sound on for this pass. That laughter, the straw, the catch and the release are all part of the original recording. We have not replaced the crew's audio, added music, or sweetened it. What makes the clip memorable is not only the optics; it is that someone in the room is plainly delighted by a ball of water. That human beat is the reason a physics demo feels like a scene.",
+      "on_screen": "Native audio retained · no music / no SFX / no substitution",
+      "source": [
+        10,
+        11
+      ],
+      "words": 68
+    },
+    {
+      "t": "7:30-8:40",
+      "name": "Microscope on the audio",
+      "vo": "The short version of this clip went through nine objective audio checks and thirty-three technical checks, all recorded as passing. That is a machine result, not a human opinion: nobody has signed off on how it feels to listen to. So treat those numbers as evidence that the file was built carefully, and nothing more. For this long version, the rule stays the same - native audio, no music bed, no time-stretch, no voice clone of a real person.",
+      "on_screen": "9 audio gates · 33/33 objective checks · human listening: pending",
+      "source": [
+        9,
+        11
+      ],
+      "words": 74
+    },
+    {
+      "t": "8:40-9:40",
+      "name": "Microscope on the edit",
+      "vo": "Here is the anatomy of the forty-nine-second short this episode grows out of: eight beats, one hundred and eighteen words, captions timed word by word, a labelled refraction window, and a loop back to the payoff frame at the end. Nothing in that structure is accidental. Each beat sets up one question and the next beat answers it. This is the part where a second idea - a whole video about the edit - becomes a single chapter instead.",
+      "on_screen": "8 beats · 118 words · word captions · REFRACTION 23.42-29.90s · loop-back 44.24s",
+      "source": [
+        10,
+        11
+      ],
+      "words": 71
+    },
+    {
+      "t": "9:40-10:20",
+      "name": "Myth vs fact, honestly",
+      "vo": "So: it is not a manufactured lens, it is water behaving like one. It is not our footage, it is NASA's, and NASA is credited without any suggestion of endorsement. We are not making a claim that the image was untouched, or that it was verified as any particular production method, and we are not adding dates, injuries or outcomes that are not on the record. One viewer asked whether water near electronics is dangerous. Good question. We are leaving it as a question, because we have no sourced answer in this pack.",
+      "on_screen": "Source: NASA / Artemis II · no endorsement implied · no unverified claims",
+      "source": [
+        1,
+        4,
+        11
+      ],
+      "words": 80
+    },
+    {
+      "t": "10:20-10:50",
+      "name": "Final clean replay",
+      "vo": "One last pass, uninterrupted, at normal speed. Watch the face, then the edge of the sphere, then the crew. Three things in the same forty-two seconds. That is the whole trick: the clip did not change, the watching did.",
+      "on_screen": "Source: NASA / Artemis II · Fun with Water Bubbles",
+      "source": [
+        1,
+        6
+      ],
+      "words": 43
+    },
+    {
+      "t": "10:50-11:00",
+      "name": "One question + series teaser",
+      "vo": "Which replay changed your mind - the first one, or the half-speed one? Replay Lab will do this again with another single moment.",
+      "on_screen": "REPLAY LAB · Ep.1",
+      "source": [
+        11
+      ],
+      "words": 24
+    }
+  ],
+  "total_vo_words": 714,
+  "caption_plan": "word-by-word timing derived from this script; NOT generated yet",
+  "guardrails": [
+    "One NASA clip only; credit 'Source: NASA / Artemis II' + 'no endorsement implied' [4](https://www.nasa.gov/nasa-brand-center/images-and-media/).",
+    "No 'No CGI', '100% real', AI-free claim, invented date, injury, outcome or view-count claim.",
+    "No 'official NASA', NASA insignia, co-branding, astronaut names used promotionally [5](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+    "VO must never say 'according to NASA' or imply NASA reviewed/approved this analysis - NASA SI guidance prohibits that form of attribution [4](https://www.nasa.gov/nasa-brand-center/images-and-media/). Factual source disclosure ('Source: NASA / Artemis II') is retained instead.",
+    "NASA native audio retained; no music, SFX, procedural bed, audio substitution or time-stretch [9](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json).",
+    "No stock b-roll as hero, no reaction-only footage, no clickbait without payoff [14](workspace://config/channels.json).",
+    "No unrelated/misleading tags, engagement coercion, guaranteed virality/retention/views/RPM.",
+    "AI-use toggle, visibility, audience and license are human decisions [7](https://support.google.com/youtube/answer/14328491?hl=en).",
+    "technical_pass stays separate from human_creative_approval / human_legal_review (both false) [9](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+  ],
+  "non_claims": {
+    "video_rendered": false,
+    "voiceover_synthesized": false,
+    "captions_burned": false,
+    "original_4k_source_reacquired": false,
+    "sixteen_by_nine_master_created": false,
+    "upload_or_publish_performed": false,
+    "monetization_enabled_or_changed_by_agent": false,
+    "human_creative_approval": false,
+    "human_full_motion_review": false,
+    "human_native_audio_listening": false,
+    "human_legal_review": false,
+    "legal_opinion": false,
+    "commercial_monetization_clearance": false,
+    "written_astronaut_or_csa_permission": false,
+    "nasa_endorsement": false,
+    "official_nasa_status": false,
+    "guaranteed_virality": false,
+    "guaranteed_retention": false,
+    "perfection_or_zero_omission": false,
+    "rights_gate_closed": false,
+    "youtube_data_api_called": false
+  },
+  "sources": [
+    {
+      "n": 1,
+      "id": "NASA_ASSET",
+      "title": "NASA image/video detail - Fun with Water Bubbles (Artemis II)",
+      "url": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+      "authority": "official_nasa_asset",
+      "used_for": "Locked single clip ID, title, date 2026-04-04."
+    },
+    {
+      "n": 2,
+      "id": "NASA_BUBBLY",
+      "title": "NASA - Bubbly Chiao (image article, 2008-03-23)",
+      "url": "https://www.nasa.gov/image-article/bubbly-chiao/",
+      "authority": "official_nasa_editorial",
+      "used_for": "FIRST-PARTY physics confirmation: an image seen through a floating water sphere is upside down because light is refracted (bent) passing from air to water; same effect makes rainbows in raindrops."
+    },
+    {
+      "n": 3,
+      "id": "NASA_FLUTE",
+      "title": "NASA - What is the Fluidic Telescope? (surface tension / liquid lenses)",
+      "url": "https://www.nasa.gov/science-research/astrophysics/what-is-the-fluidic-telescope/",
+      "authority": "official_nasa_editorial",
+      "used_for": "Surface tension gives droplets their shape; curved liquid surfaces can act as optical elements."
+    },
+    {
+      "n": 4,
+      "id": "NASA_IMAGES",
+      "title": "NASA Images and Media Usage Guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Credit NASA, no endorsement implied, no insignia, educational/informational use, commercial and identifiable-person restrictions, SI/AI attribution rules."
+    },
+    {
+      "n": 5,
+      "id": "NASA_STRATEGIC",
+      "title": "NASA Strategic Partnerships - Promotional Content",
+      "url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Short-form social generally promotional; imagery with current astronauts may not be used in promotional content; no endorsement/co-branding."
+    },
+    {
+      "n": 6,
+      "id": "YT_SPIKES",
+      "title": "YouTube Help - Audience retention / key moments",
+      "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "Spikes are moments viewers rewatched or shared; replay-first structure rationale."
+    },
+    {
+      "n": 7,
+      "id": "YT_AI_USE",
+      "title": "YouTube Help - Disclosing use of GenAI content",
+      "url": "https://support.google.com/youtube/answer/14328491?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "AI use toggle is a human decision; disclosure alone doesn't limit audience or monetization eligibility."
+    },
+    {
+      "n": 8,
+      "id": "WS_RIGHTS",
+      "title": "V10 rights ledger",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json",
+      "authority": "workspace_evidence",
+      "used_for": "Source provenance, SHA, duration, flags (human_legal_review=false, commercial_monetization_clearance=false)."
+    },
+    {
+      "n": 9,
+      "id": "WS_QC",
+      "title": "V10 QC summary",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json",
+      "authority": "workspace_evidence",
+      "used_for": "33/33 objective checks, 9 audio gates, technical_pass=true, human_creative_approval=false."
+    },
+    {
+      "n": 10,
+      "id": "WS_EDIT",
+      "title": "V10 edit ledger / caption timings",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/edit_ledger_v10.json",
+      "authority": "workspace_evidence",
+      "used_for": "8 beats, 118 words, word captions, REFRACTION 23.42-29.90s, credit 44.24-49.40s, loop-back."
+    },
+    {
+      "n": 11,
+      "id": "IDEA_STUDY",
+      "title": "V11 forensic idea-selection study",
+      "url": "workspace://research/long_form_viral_idea_v11/LONG_FORM_VIRAL_IDEA_FORENSIC_STUDY_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "Chosen idea RL-01, 93.3/100, 12 chapters, 6 phases A-F, 12 kill switches, guardrails."
+    },
+    {
+      "n": 12,
+      "id": "SAFETY_CARD",
+      "title": "V11 upload-safety decision card",
+      "url": "workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "Rights gate OPEN; monetized/promotional publish not cleared."
+    },
+    {
+      "n": 13,
+      "id": "MONETIZATION_CARD",
+      "title": "V11 monetization-ON action card",
+      "url": "workspace://research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "User reported Short monetization ON; recommended OFF; not agent-verified."
+    },
+    {
+      "n": 14,
+      "id": "CHANNEL_CONFIG",
+      "title": "config/channels.json",
+      "url": "workspace://config/channels.json",
+      "authority": "workspace_evidence",
+      "used_for": "Legacy Monarch Lab 8-12 min 'one concept, one demo'; ban stock b-roll as hero / reaction-only / clickbait without payoff."
+    },
+    {
+      "n": 15,
+      "id": "AFP_FACTCHECK",
+      "title": "AFP Fact Check - broadcast-glitch clip misused for false 'staged' claims",
+      "url": "https://factcheck.afp.com/doc.afp.com.A6WV668",
+      "authority": "third_party_factcheck",
+      "used_for": "Guardrail only: do not amplify a broadcast-glitch/staged conspiracy. Directional, unverified as analytics; never used as a view count or reach claim."
+    }
+  ],
+  "human_decisions_pending": [
+    "hook choice",
+    "script approval",
+    "voice audition (Phase C)",
+    "16:9 source strategy",
+    "toolchain re-provision",
+    "AI-use toggle",
+    "legal clearance",
+    "monetization OFF"
+  ]
+}

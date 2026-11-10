@@ -1,3 +1,11 @@
+## 2026-11-05 addendum - V11 Phase A/B kickoff (work started, NO render)
+
+- `production/monarch-cam/replay_lab_ep01_v11/`: Phase A source audit + Phase B script draft v0 (12 chapters, 3 hooks, 714 VO words, 15 sources). Generator is idempotent; `RESULT: ALL PASS`.
+- New first-party physics source: NASA *Bubbly Chiao* confirms the inverted image is refraction (air to water); NASA FLUTE confirms surface tension. 13/13 evidence JSONs parse; NASA ID / master SHA / V10 Short SHA re-verified unchanged.
+- **3 open items:** (1) 16:9 source - local master is `1080x1920` vertical, original 4K not present locally; (2) render/QC toolchain (ffmpeg/ffprobe/numpy/v10_deps) absent in this snapshot; (3) NASA promotional rights gate + user-reported Short monetization ON, `human_legal_review=false`, `commercial_monetization_clearance=false`.
+- NO video, NO VO synthesis, NO captions burned, NO render, NO upload/publish, NO monetization change, NO human approval, NO legal clearance, NO guaranteed result. Does NOT supersede the standing human full-motion/native-audio review line below.
+- Awaiting user: hook choice (default H1), script approval, voice audition (Phase C), 16:9 source strategy.
+
 ## 2026-11-05 addendum - V11 long-form idea selection (idea only, NOT a build)
 
 - New study: `research/long_form_viral_idea_v11/LONG_FORM_VIRAL_IDEA_FORENSIC_STUDY_V11.md`.

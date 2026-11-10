@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0",
+  "edition": "v11_replay_lab_ep01_phase_a_start_2026-11-05",
+  "head_at_writing": "2e48c3eec2c92ee099d51576d0108987f1cc7f5e",
+  "status": "phase_a_complete_phase_b_draft",
+  "scope": "work_start_only_no_render_no_vo_no_upload_no_publish",
+  "verified": {
+    "master_exists": true,
+    "master_bytes": 29314216,
+    "master_sha256": "11395618c0db74164e35de8186b079f974316f13fd5c25efb789574b22d5960c",
+    "deliverable_exists": true,
+    "deliverable_bytes": 34495086,
+    "deliverable_sha256": "608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7",
+    "nasa_id_from_rights": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "source_duration_seconds": 42.709309,
+    "original_4k_sha_recorded": "7fd9cd0cfc22451910ac8fa8848b5252c51320a82c193e3a98cf7c0aa725c0dc",
+    "original_4k_bytes_recorded": 63680143,
+    "original_4k_present_locally": false,
+    "rights_flags": {
+      "human_legal_review": false,
+      "commercial_monetization_clearance": false,
+      "publicity_or_privacy_permission_obtained": false,
+      "not_a_legal_opinion": true,
+      "human_creative_approval": false,
+      "technical_pass": true
+    },
+    "qc": {
+      "technical_check_count": 33,
+      "technical_checks_pass": 33,
+      "nine_audio_gates_pass": true,
+      "technical_pass": true,
+      "human_creative_approval": false,
+      "human_native_audio_listening": false,
+      "human_legal_review": false
+    },
+    "evidence_json_total": 13,
+    "evidence_json_parsed": 13,
+    "v10_vo_wavs": 8,
+    "tooling": {
+      "system_ffmpeg": false,
+      "system_ffprobe": false,
+      "python_numpy": false,
+      "bundled_v10_deps_dir": false,
+      "note": "Render/QC toolchain is NOT available in this workspace snapshot. Phase D/E cannot run until deps + FFmpeg are re-provisioned; no render performed."
+    },
+    "master_is_vertical": true,
+    "master_resolution": "1080x1920",
+    "target_resolution": "1920x1080 (16:9 long-form)"
+  },
+  "expected": {
+    "master_bytes": 29314216,
+    "master_sha": "11395618c0db74164e35de8186b079f974316f13fd5c25efb789574b22d5960c",
+    "deliverable_bytes": 34495086,
+    "deliverable_sha": "608aa065cd3c53894b96df1ebb6fa74dd3ce1e846366e40a940426b4823586a7",
+    "nasa_id": "art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+    "original_4k_sha": "7fd9cd0cfc22451910ac8fa8848b5252c51320a82c193e3a98cf7c0aa725c0dc",
+    "original_4k_bytes": 63680143,
+    "source_duration_seconds": 42.709309
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "ok": true,
+      "title": "Single locked NASA source re-verified",
+      "text": "NASA ID, vertical master SHA/bytes, V10 deliverable SHA/bytes and 13/13 evidence JSONs re-checked against committed ledgers [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json) [9](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json). No second clip introduced, no repost, no compilation. Source duration 42.709309s [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json)."
+    },
+    {
+      "id": "F2",
+      "ok": true,
+      "title": "NEW first-party physics source found (upgrade over the idea study)",
+      "text": "NASA's own image article states: *\"Chiao's picture is upside down because light is refracted, or bent, as it passes from one medium to another – in this case, air to water.\"* [2](https://www.nasa.gov/image-article/bubbly-chiao/) The idea study leaned on third-party reporting for this mechanism; ab isko official NASA wording se anchor kiya gaya hai. Surface tension / curved-liquid optics bhi NASA se [3](https://www.nasa.gov/science-research/astrophysics/what-is-the-fluidic-telescope/)."
+    },
+    {
+      "id": "F3",
+      "ok": true,
+      "title": "Replay-first structure is evidence-backed",
+      "text": "YouTube Help defines spikes as moments viewers rewatched or shared [6](https://support.google.com/youtube/answer/9314415?hl=en); har chapter ek replay pass hai. Ye koi algorithm trick ka dawa nahi."
+    },
+    {
+      "id": "F4",
+      "ok": false,
+      "title": "BLOCKER: 16:9 ke liye source abhi vertical hai",
+      "text": "Local master `1080x1920` vertical hai [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json), jabke target 16:9 landscape hai [11](workspace://research/long_form_viral_idea_v11/LONG_FORM_VIRAL_IDEA_FORENSIC_STUDY_V11.md). Original 4K `3840x2160` file (SHA 7fd9cd0cfc22…) workspace me **present nahi** hai — sirf ledger me record hai [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json). Isliye Phase D shuru hone se pehle original 4K re-fetch ya human-approved crop/pillarbox plan chahiye. Maine koi upscale/crop invent nahi kiya."
+    },
+    {
+      "id": "F5",
+      "ok": false,
+      "title": "BLOCKER: render/QC toolchain is session me maujood nahi",
+      "text": "System ffmpeg/ffprobe aur numpy available nahi, bundled `v10_deps` bhi is snapshot me nahi. Isliye **abhi koi render, VO synthesis ya QC nahi chalaya** — ye honest tooling gap hai, koi failure chhupaya nahi gaya."
+    },
+    {
+      "id": "F6",
+      "ok": false,
+      "title": "GATE: rights / monetization abhi OPEN",
+      "text": "NASA promotional-content gate khula hai [5](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/) [4](https://www.nasa.gov/nasa-brand-center/images-and-media/), `human_legal_review=false`, `commercial_monetization_clearance=false` [8](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json), aur user ne Short ka monetization ON bataya hai [13](workspace://research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md). Long-form ko **monetized / promotional publish** tab tak nahi jaana chahiye. Script/audit ka kaam is gate ko close nahi karta [12](workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md)."
+    }
+  ],
+  "blockers": [
+    "16:9 source: local master is 1080x1920; original 4K not present locally",
+    "render/QC toolchain absent in this snapshot (ffmpeg/ffprobe/numpy/v10_deps)"
+  ],
+  "open_gates": [
+    "NASA promotional content / identifiable current astronauts",
+    "user-reported Short monetization ON, not agent-verified",
+    "human_legal_review=false",
+    "commercial_monetization_clearance=false"
+  ],
+  "guardrails": [
+    "One NASA clip only; credit 'Source: NASA / Artemis II' + 'no endorsement implied' [4](https://www.nasa.gov/nasa-brand-center/images-and-media/).",
+    "No 'No CGI', '100% real', AI-free claim, invented date, injury, outcome or view-count claim.",
+    "No 'official NASA', NASA insignia, co-branding, astronaut names used promotionally [5](https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/).",
+    "VO must never say 'according to NASA' or imply NASA reviewed/approved this analysis - NASA SI guidance prohibits that form of attribution [4](https://www.nasa.gov/nasa-brand-center/images-and-media/). Factual source disclosure ('Source: NASA / Artemis II') is retained instead.",
+    "NASA native audio retained; no music, SFX, procedural bed, audio substitution or time-stretch [9](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json).",
+    "No stock b-roll as hero, no reaction-only footage, no clickbait without payoff [14](workspace://config/channels.json).",
+    "No unrelated/misleading tags, engagement coercion, guaranteed virality/retention/views/RPM.",
+    "AI-use toggle, visibility, audience and license are human decisions [7](https://support.google.com/youtube/answer/14328491?hl=en).",
+    "technical_pass stays separate from human_creative_approval / human_legal_review (both false) [9](workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json)."
+  ],
+  "non_claims": {
+    "video_rendered": false,
+    "voiceover_synthesized": false,
+    "captions_burned": false,
+    "original_4k_source_reacquired": false,
+    "sixteen_by_nine_master_created": false,
+    "upload_or_publish_performed": false,
+    "monetization_enabled_or_changed_by_agent": false,
+    "human_creative_approval": false,
+    "human_full_motion_review": false,
+    "human_native_audio_listening": false,
+    "human_legal_review": false,
+    "legal_opinion": false,
+    "commercial_monetization_clearance": false,
+    "written_astronaut_or_csa_permission": false,
+    "nasa_endorsement": false,
+    "official_nasa_status": false,
+    "guaranteed_virality": false,
+    "guaranteed_retention": false,
+    "perfection_or_zero_omission": false,
+    "rights_gate_closed": false,
+    "youtube_data_api_called": false
+  },
+  "sources": [
+    {
+      "n": 1,
+      "id": "NASA_ASSET",
+      "title": "NASA image/video detail - Fun with Water Bubbles (Artemis II)",
+      "url": "https://images.nasa.gov/details/art002m1200950026_SHARED_Returned_0025_Z9_019_Wiseman",
+      "authority": "official_nasa_asset",
+      "used_for": "Locked single clip ID, title, date 2026-04-04."
+    },
+    {
+      "n": 2,
+      "id": "NASA_BUBBLY",
+      "title": "NASA - Bubbly Chiao (image article, 2008-03-23)",
+      "url": "https://www.nasa.gov/image-article/bubbly-chiao/",
+      "authority": "official_nasa_editorial",
+      "used_for": "FIRST-PARTY physics confirmation: an image seen through a floating water sphere is upside down because light is refracted (bent) passing from air to water; same effect makes rainbows in raindrops."
+    },
+    {
+      "n": 3,
+      "id": "NASA_FLUTE",
+      "title": "NASA - What is the Fluidic Telescope? (surface tension / liquid lenses)",
+      "url": "https://www.nasa.gov/science-research/astrophysics/what-is-the-fluidic-telescope/",
+      "authority": "official_nasa_editorial",
+      "used_for": "Surface tension gives droplets their shape; curved liquid surfaces can act as optical elements."
+    },
+    {
+      "n": 4,
+      "id": "NASA_IMAGES",
+      "title": "NASA Images and Media Usage Guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Credit NASA, no endorsement implied, no insignia, educational/informational use, commercial and identifiable-person restrictions, SI/AI attribution rules."
+    },
+    {
+      "n": 5,
+      "id": "NASA_STRATEGIC",
+      "title": "NASA Strategic Partnerships - Promotional Content",
+      "url": "https://www.nasa.gov/collaborating-with-nasa/strategic-partnerships/",
+      "authority": "official_nasa_guidance",
+      "used_for": "Short-form social generally promotional; imagery with current astronauts may not be used in promotional content; no endorsement/co-branding."
+    },
+    {
+      "n": 6,
+      "id": "YT_SPIKES",
+      "title": "YouTube Help - Audience retention / key moments",
+      "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "Spikes are moments viewers rewatched or shared; replay-first structure rationale."
+    },
+    {
+      "n": 7,
+      "id": "YT_AI_USE",
+      "title": "YouTube Help - Disclosing use of GenAI content",
+      "url": "https://support.google.com/youtube/answer/14328491?hl=en",
+      "authority": "official_youtube_help",
+      "used_for": "AI use toggle is a human decision; disclosure alone doesn't limit audience or monetization eligibility."
+    },
+    {
+      "n": 8,
+      "id": "WS_RIGHTS",
+      "title": "V10 rights ledger",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/rights_ledger_v10.json",
+      "authority": "workspace_evidence",
+      "used_for": "Source provenance, SHA, duration, flags (human_legal_review=false, commercial_monetization_clearance=false)."
+    },
+    {
+      "n": 9,
+      "id": "WS_QC",
+      "title": "V10 QC summary",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/qc_summary.json",
+      "authority": "workspace_evidence",
+      "used_for": "33/33 objective checks, 9 audio gates, technical_pass=true, human_creative_approval=false."
+    },
+    {
+      "n": 10,
+      "id": "WS_EDIT",
+      "title": "V10 edit ledger / caption timings",
+      "url": "workspace://production/monarch-cam/caught_on_camera_commentary_v10/review/final/edit_ledger_v10.json",
+      "authority": "workspace_evidence",
+      "used_for": "8 beats, 118 words, word captions, REFRACTION 23.42-29.90s, credit 44.24-49.40s, loop-back."
+    },
+    {
+      "n": 11,
+      "id": "IDEA_STUDY",
+      "title": "V11 forensic idea-selection study",
+      "url": "workspace://research/long_form_viral_idea_v11/LONG_FORM_VIRAL_IDEA_FORENSIC_STUDY_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "Chosen idea RL-01, 93.3/100, 12 chapters, 6 phases A-F, 12 kill switches, guardrails."
+    },
+    {
+      "n": 12,
+      "id": "SAFETY_CARD",
+      "title": "V11 upload-safety decision card",
+      "url": "workspace://research/long_form_viral_idea_v11/UPLOAD_SAFETY_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "Rights gate OPEN; monetized/promotional publish not cleared."
+    },
+    {
+      "n": 13,
+      "id": "MONETIZATION_CARD",
+      "title": "V11 monetization-ON action card",
+      "url": "workspace://research/long_form_viral_idea_v11/MONETIZATION_ON_IMMEDIATE_ACTION_V11.md",
+      "authority": "workspace_evidence",
+      "used_for": "User reported Short monetization ON; recommended OFF; not agent-verified."
+    },
+    {
+      "n": 14,
+      "id": "CHANNEL_CONFIG",
+      "title": "config/channels.json",
+      "url": "workspace://config/channels.json",
+      "authority": "workspace_evidence",
+      "used_for": "Legacy Monarch Lab 8-12 min 'one concept, one demo'; ban stock b-roll as hero / reaction-only / clickbait without payoff."
+    },
+    {
+      "n": 15,
+      "id": "AFP_FACTCHECK",
+      "title": "AFP Fact Check - broadcast-glitch clip misused for false 'staged' claims",
+      "url": "https://factcheck.afp.com/doc.afp.com.A6WV668",
+      "authority": "third_party_factcheck",
+      "used_for": "Guardrail only: do not amplify a broadcast-glitch/staged conspiracy. Directional, unverified as analytics; never used as a view count or reach claim."
+    }
+  ],
+  "outputs": [
+    "PHASE_A_SOURCE_AUDIT_V11.md",
+    "SCRIPT_DRAFT_V11.md",
+    "WORK_PLAN_V11.md",
+    "phase_a_source_audit_v11.json",
+    "script_draft_v11.json"
+  ]
+}
