@@ -5,8 +5,10 @@ from painted cels. Same script, same narration takes, same cue timings as the
 3D v6 cut; every image is new.
 
 **Deliverable:** `deliverables/monarch-celebrity-story-2d-60s.mp4`
-(60.00 s, 1080×1920, 24 fps, H.264 High + AAC, 47 MB, −16.3 LUFS, −0.8 dBTP)
-**Preview:** `deliverables/monarch-celebrity-story-2d-60s-preview.mp4` (608×1080, 4.3 MB)
+(60.00 s, 1080×1920, 24 fps, H.264 High + AAC, 46.5 MB, −16.3 LUFS, −0.8 dBTP,
+tracked in Git like the other masters)
+**Preview:** `deliverables/monarch-celebrity-story-2d-60s-preview.mp4` (608×1080, 4.3 MB,
+blob `dca8d84c…` recorded in the matching `.json`)
 
 ## What changed from v1
 
