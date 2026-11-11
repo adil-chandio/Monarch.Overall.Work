@@ -1,0 +1,38 @@
+name: Prepare animation render runtime
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [.github/workflows/render-runtime-dependencies.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - name: Package standard rendering libraries
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxrender1 libxi6 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0 libgl1
+          cd /usr/lib/x86_64-linux-gnu
+          tar -czhf "$RUNNER_TEMP/render-libs.tar.gz" libXrender.so.1 libXi.so.6 libXfixes.so.3 libXxf86vm.so.1 libSM.so.6 libICE.so.6 libxkbcommon.so.0 libGL.so.1 libGLX.so.0 libGLdispatch.so.0 libxcb.so.1
+          python - <<'PY'
+          import base64,json,os,urllib.request,hashlib
+          data=open(os.environ['RUNNER_TEMP']+'/render-libs.tar.gz','rb').read()
+          req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',data=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          with urllib.request.urlopen(req,timeout=120) as r:x=json.load(r)
+          print(json.dumps({'sha':x['sha'],'size':len(data),'sha256':hashlib.sha256(data).hexdigest()}))
+          open(os.environ['GITHUB_WORKSPACE']+'/docs/repo-intel/render-runtime-dependencies.json','w').write(json.dumps({'sha':x['sha'],'size':len(data),'sha256':hashlib.sha256(data).hexdigest()})+'\n')
+          PY
+      - name: Record dependency bundle identifier
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/render-runtime-dependencies.json
+          git commit -m 'Record render runtime dependency bundle [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work

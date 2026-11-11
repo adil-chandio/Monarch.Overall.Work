@@ -1,0 +1,18 @@
+{
+  "provider": "Google Gemini API",
+  "video": "https://www.youtube.com/watch?v=aWHX5Awe_TI",
+  "source": "public YouTube URL",
+  "sampling": "default static sampling; typically 1 fps",
+  "raw_frames_received": false,
+  "keys_checked": [
+    {
+      "slot": "YOUTUBE_API_KEY",
+      "http_status": 403,
+      "error_status": "PERMISSION_DENIED",
+      "reasons": [
+        "ACCESS_DENIED"
+      ]
+    }
+  ],
+  "result": "no_usable_configured_key"
+}

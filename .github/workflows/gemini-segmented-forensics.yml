@@ -1,0 +1,31 @@
+name: Analyze short video segments with Gemini
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/gemini_segmented_forensics.py, .github/workflows/gemini-segmented-forensics.yml]
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Request timestamped visual descriptions
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/gemini_segmented_forensics.py
+      - name: Record observations and errors
+        run: |
+          cp audit-output/gemini-segmented-forensics.json docs/repo-intel/gemini-segmented-forensics.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/gemini-segmented-forensics.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record segmented video analysis [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work

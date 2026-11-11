@@ -1,0 +1,31 @@
+name: Test official videos resource
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/youtube_videos_resource_probe.py, .github/workflows/youtube-videos-resource-probe.yml]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read public video metadata
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+        run: python scripts/youtube_videos_resource_probe.py
+      - name: Save metadata
+        run: |
+          cp audit-output/youtube-videos-resource-probe.json docs/repo-intel/youtube-videos-resource-probe.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/youtube-videos-resource-probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record official videos resource evidence [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work

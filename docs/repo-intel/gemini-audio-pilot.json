@@ -1,0 +1,75 @@
+{
+  "method": "Audio-only Gemini input, 3 short clips. No visuals, so video context cannot be used directly. Interpretations are unverified and model timing can be wrong. Source audio was not stored in the repository.",
+  "model": "gemini-3.1-flash-lite-preview",
+  "segments": [
+    {
+      "start_seconds": 0,
+      "end_seconds": 30,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "model_observation": "00:00 - 00:05: Narration begins. Background sound includes a low-volume ambient environment noise. \n00:05 - 00:10: Narration continues. Background ambient noise continues.\n00:10 - 00:15: Narration continues. Sound of clinking metal is audible.\n00:15 - 00:20: Narration continues. Footsteps and ambient noise are audible.\n00:20 - 00:25: Narration continues. Footsteps and heavy breathing are audible.\n00:25 - 00:30: Narration continues. Ambient noise continues.\n\nMusic is not present in this clip. Discrete sound effects are distinguishable including clinking metal, footsteps, and breathing. The voice delivery is clear and steady with a dramatic tone.",
+      "usage": {
+        "promptTokenCount": 858,
+        "candidatesTokenCount": 188,
+        "totalTokenCount": 1046,
+        "promptTokensDetails": [
+          {
+            "modality": "AUDIO",
+            "tokenCount": 750
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 108
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "start_seconds": 2003,
+      "end_seconds": 2033,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "model_observation": "00:00 - 00:08 The clip features a male narration.\n00:08 - 00:15 The clip features a male narration.\n00:15 - 00:24 The clip features a male narration.\n00:24 - 00:30 The clip features a male narration.\n\nThe narration is in a conversational tone, slightly dramatic, with a steady pace and clear articulation. Throughout the clip, there is background music, which includes some percussive elements, contributing to a slightly intense atmosphere. Discrete sound effects are not clearly distinguishable.",
+      "usage": {
+        "promptTokenCount": 858,
+        "candidatesTokenCount": 131,
+        "totalTokenCount": 989,
+        "promptTokensDetails": [
+          {
+            "modality": "AUDIO",
+            "tokenCount": 750
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 108
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "start_seconds": 4007,
+      "end_seconds": 4037,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "model_observation": "The clip begins with a female voiceover narrating, accompanied by background music. Throughout the clip, there are subtle ambient sounds and subtle discrete sound effects that accompany the narrative flow.\n\nThe structure of the clip in 5-second bins is as follows:\n\n- 00:00 - 00:05: The narrator begins speaking, accompanied by background music and subtle ambient sound.\n- 00:05 - 00:10: The narrator continues, with background music, ambient sound, and soft, subtle sound effects.\n- 00:10 - 00:15: The narrator continues, with background music, ambient sound, and subtle sound effects.\n- 00:15 - 00:20: The narrator continues, with background music, ambient sound, and subtle sound effects.\n- 00:20 - 00:30: The voiceover ends, and the music and subtle sound effects continue until the end of the clip.\n\nBoth music and discrete sound effects are distinguishable. The voice delivery is calm, clear, and steady, with a measured pace, conveying a sense of mystery.",
+      "usage": {
+        "promptTokenCount": 858,
+        "candidatesTokenCount": 248,
+        "totalTokenCount": 1106,
+        "promptTokensDetails": [
+          {
+            "modality": "AUDIO",
+            "tokenCount": 750
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 108
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    }
+  ]
+}

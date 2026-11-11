@@ -1,0 +1,70 @@
+{
+  "scope": "Two retried one-minute video clips sent to Gemini, normally sampled at 1 FPS; outputs are unverified model interpretations, not frame-by-frame inspection or a manual audio audit. Check each clip for actual coverage and errors. No original media is committed.",
+  "duration_seconds": 4037.717914,
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 640,
+      "height": 360,
+      "r_frame_rate": "30/1"
+    },
+    {
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "sample_rate": "44100",
+      "channels": 2,
+      "r_frame_rate": "0/0"
+    }
+  ],
+  "requested_samples": [
+    {
+      "start_seconds": 3000,
+      "end_seconds": 3060,
+      "clip_size_bytes": 2582241,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "observation": "Here is a chronological breakdown of the video’s content:\n\n**0:00 – 0:05**\n*   **Visuals:** A digital clock-style display shows \"DAY 65\" in the top corner. A black rectangular device on screen has four battery slots, which are empty. A radio icon appears, and a digital signal pattern pulses out of it. \n*   **Text:** \"AA OUT - STILL PLAYS\" (top right), \"x 3\" (right of radio), \"THROUGH A CHEAP SPEAKER = 3 SLOW KNOCKS\" (bottom right).\n*   **Audio/Narrator:** Discussion of AA batteries being pulled out of the radio, yet the signal continues.\n*   **Interpretation:** The signal is automated and persistent, even without a power source.\n\n**0:05 – 0:10**\n*   **Visuals:** A radio graphic with a tuning needle is displayed. Static noise appears as a waveform above it.\n*   **Audio/Narrator:** Mentions that the signal sounds like \"three slow knocks\" when played through a cheap speaker.\n*   **Sound Effects:** Three rhythmic, hollow \"knocking\" sounds.\n\n**0:10 – 0:15**\n*   **Visuals:** Text appears against a dark background.\n*   **Text:** \"THE KNOCKS\", \"THE KNOCKS WERE NEVER KNOCKS\"\n*   **Audio/Narrator:** Reveals the sound was misinterpreted.\n\n**0:15 – 0:20**\n*   **Visuals:** The radio graphic returns, with the signal being translated into words.\n*   **Text:** \"END OF MESSAGE.\"\n*   **Audio/Narrator:** States that the \"knocks\" were actually a machine saying \"End of message.\"\n\n**0:20 – 0:25**\n*   **Visuals:** An outdoor scene showing a solar-powered transmission tower behind a chain-link fence at sunset. A \"COUNTY EM\" sign is nearby.\n*   **Audio/Narrator:** Explains that a county backup transmitter is still running on solar power, broadcasting the same alert every morning.\n\n**0:25 – 0:30**\n*   **Visuals:** A timeline graphic shows \"DAY 3\" and \"DAY 57\" at 6:14 AM. A black-and-white silhouette of a town at dawn is shown.\n*   **Audio/Narrator:** Confirms the alert happens daily at 6:14 AM, consistent with the very first day.\n\n**0:30 – 0:35**\n*   **Visuals:** Large text overlay. A character stands in a kitchen looking out a window.\n*   **Text:** \"TWO WORDS\", \"STAY INSIDE.\"\n*   **Audio/Narrator:** The message is revealed: \"Stay inside.\"\n\n**0:35 – 0:40**\n*   **Visuals:** Character is still standing in the kitchen. A tick mark (/) appears next to \"STAY INSIDE\" on a timeline.\n*   **Audio/Narrator:** Discusses the standard procedure of staying inside and waiting for instructions during an emergency.\n\n**0:40 – 0:45**\n*   **Visuals:** A timeline graphic stretches from \"1 HR\" to \"DAY 60.\" A segment labeled \"STAY INSIDE\" is highlighted in green, followed by a longer segment in orange.\n*   **Audio/Narrator:** Notes that the instruction was appropriate for the start of the emergency but not for two months.\n\n**0:45 – 0:50**\n*   **Visuals:** An \"UPDATE?\" box appears above the timeline.\n*   **Audio/Narrator:** Explains that real emergency instructions should be updated as circumstances evolve.\n\n**0:50 – 0:55**\n*   **Visuals:** Text appears over the timeline.\n*   **Text:** \"NEWEST OFFICIAL GUIDANCE WINS\", \"THIS ONE COULDN'T UPDATE\"\n*   **Audio/Narrator:** Highlights that the county transmitter was stuck on the initial message.\n\n**0:55 – 1:00**\n*   **Visuals:** Three battery icons below house icons, all shown empty/depleted. \n*   **Audio/Narrator:** States that people who followed the outdated instructions remained inside until their water ran out.\n*   **Interpretation:** The video suggests the outdated broadcast led to tragic consequences for the town residents.",
+      "usage": {
+        "promptTokenCount": 5557,
+        "candidatesTokenCount": 986,
+        "totalTokenCount": 6543,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 97
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 5460
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "start_seconds": 3060,
+      "end_seconds": 3120,
+      "clip_size_bytes": 2517962,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "observation": "Here is a breakdown of the video clip's narrative, visuals, and audio.\n\n### Narrative Summary\nThe clip is a narrative account of a family—the Millers (a father, mother, and two children)—who survived a mysterious, potentially supernatural event that caused others to vanish. The narrator is a person who has been living near them for over two months, only realizing their true history after a realization about a \"voice\" they've been hearing.\n\n### Timeline Analysis (5-Second Blocks)\n\n*   **0:00–0:05:** **Visuals:** Dark starry background with text. **Narration:** \"The voice wasn't lying. It was just old. That's why Dad wrote it on the door.\" **On-Screen Text:** \"DAY 65,\" \"THE VOICE WASN'T LYING. IT WAS JUST OLD.\"\n*   **0:05–0:10:** **Visuals:** Cut to an animated scene of a girl (Lily) and her father (Tom) standing in front of a silo and metal shed. The girl speaks. **Narration:** \"...says a small voice behind you. Lily, standing next to the quiet man who never leaves her side.\" \n*   **0:10–0:15:** **Visuals:** Close-up of Tom, then a dark, interior scene of a room with a window and a table with four plates. **Narration:** \"Tom, Tom Miller. The family that vanished in the middle of dinner didn't vanish.\"\n*   **0:15–0:20:** **Visuals:** Cut to a 2D animation showing the family carrying items away from a house. **Narration:** \"On day 13, when their generator drew a crowd to the house, Tom pulled the batteries out of the radio...\" **On-Screen Text:** \"DAY 13.\"\n*   **0:20–0:25:** **Visuals:** Close-up of a radio, then a hand writing \"614\" on a door. **Narration:** \"...wrote 614 on the door so nobody would forget when the voice came...\" **On-Screen Text:** \"THE MILLERS' RADIO,\" \"614,\" \"6:14 AM.\"\n*   **0:25–0:30:** **Visuals:** The family walking away into the night. **Narration:** \"...and ran across the fields in the dark with his wife and two kids.\"\n*   **0:30–0:35:** **Visuals:** Stick figure animation of the four family members. **Narration:** \"All four of them made it. They're the proof.\" **On-Screen Text:** \"THE MILLERS,\" \"STOPPED LISTENING - DAY 13,\" \"STILL WHOLE.\"\n*   **0:35–0:40:** **Visuals:** Graphic depicting a house and a stick figure (the narrator) with a \"20 M\" distance marker. **Narration:** \"The one family that stopped listening on day 13 is the one family that's still whole. And they've been sleeping 20 meters away from you for a month.\"\n*   **0:40–0:45:** **Visuals:** Cut back to the narrator (Tom) looking shocked. **Narration:** \"You just never asked their last name.\" Lily shrugs.\n*   **0:45–0:50:** **Visuals:** A chalkboard showing tallies for 65 days. **Narration:** \"I kept counting. 13 at home, then I started the chalkboard at 14.\" **On-Screen Text:** \"DAY 65.\"\n*   **0:50–0:55:** **Visuals:** The narrator looks surprised/confused. A text list appears. **Narration:** \"For a second, you can't speak. But a recording can't know about your cellar.\" **On-Screen Text:** \"A RECORDING CAN'T...\" with three bullet points including \"KNOW ABOUT YOUR CELLAR.\"\n*   **0:55–1:00:** **Visuals:** More text list items appear with red X marks. The narrator looks uneasy. **Narration:** \"A recording can't say 'You forgot something' in the cellar. And a recording definitely can't speak in your voice.\"\n\n### Observations vs. Interpretations\n*   **Observation:** The style is 2D digital animation with a flat, minimalist aesthetic.\n*   **Interpretation:** The \"voice\" mentioned throughout the clip appears to be an entity or force that manipulates people.\n*   **Uncertainty:** It is unclear if the \"voice\" is a genuine entity or a psychological phenomenon experienced by the narrator.\n*   **Note:** All sound effects (e.g., wind, movement) are subtle, underscoring the serious, conspiratorial tone of the narration.",
+      "usage": {
+        "promptTokenCount": 5557,
+        "candidatesTokenCount": 1068,
+        "totalTokenCount": 6625,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 5460
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 97
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "scope": "Three non-contiguous 30-second samples from the user-shared long video. Gemini output is unverified model interpretation, not a frame-by-frame inspection. The full video and original audio have not been manually inspected. No original media is committed.",
+  "duration_seconds": 4037.717914,
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 640,
+      "height": 360,
+      "r_frame_rate": "30/1"
+    },
+    {
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "sample_rate": "44100",
+      "channels": 2,
+      "r_frame_rate": "0/0"
+    }
+  ],
+  "requested_samples": [
+    {
+      "start_seconds": 0,
+      "end_seconds": 30,
+      "clip_size_bytes": 1450131,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "observation": "Here is the analysis of the video clip:\n\n**Visual Style**\nThe visual style is 2D digital flat-vector art with a clean, minimalist aesthetic. The color palette centers around warm oranges and purples to depict dawn, with dark, simplified silhouettes for the background buildings and trees. The UI elements, like the \"Day 1\" and time stamp, use a clean, modern sans-serif font. The character designs are basic stick-figure/geometric shapes with prominent, circular heads, suggesting a dark or indie adventure game aesthetic.\n\n**Character Movement and Animation**\n*   **0:02–0:04:** The character walks smoothly from right to left with a slight bobbing motion.\n*   **0:15–0:28:** The character in the field exhibits exaggerated, fluid, but slightly stiff \"uncanny\" movement. When the pursuer appears, the movement is depicted as jerky and unnatural, reinforced by the visual labels \"TOO STIFF\" and \"TOO FAST.\"\n*   **0:28:** The animation shifts to a subtle \"shimmer\" effect when the characters appear, suggesting an supernatural or glitch-like quality.\n\n**Shot Composition and Editing**\n*   **0:00–0:05:** Long shot of the farm exterior, transitioning to a medium shot inside the barn.\n*   **0:08–0:11:** Wide tracking shot showing the proximity of the two properties, utilizing a dashed line overlay for clarity (an UI element common in games).\n*   **0:15–0:28:** Side-scrolling, lateral camera movement following the subjects across the field. \n*   **0:28:** The shot zooms in slightly or focuses on the sudden appearance of the three new figures, emphasizing the threat.\n\n**Story or Dialogue**\nThe narration sets a tone of mystery and tension. The voice-over acts as a storyteller, providing context: \"6:14 AM... You're already in the barn when the first scream carries across the north field.\" The story establishes a frightening encounter on a rural farm, focusing on the protagonist observing a pursuit and an unnatural event involving a group of figures in the fields.\n\n**Sound Effects**\nThe sound design is atmospheric and sparse.\n*   **0:04:** A faint, echoing, high-pitched scream cuts through the ambient noise.\n*   **0:14:** The sound of a door opening.\n*   **0:15–0:28:** The rhythmic, somewhat heavy footsteps of the figures running.\n*   **0:28:** A distinct, synthesized \"ping\" or \"alert\" sound effect accompanies the appearance of the three figures.\n\n**Music and Pacing**\n*   **0:00–0:15:** The pacing is slow, contemplative, and tense, underscored by a low, humming ambient drone.\n*   **0:15–0:29:** The pace quickens with the introduction of the running characters. The music remains minimal, relying on tension-building textures rather than a melody, which heightens the eerie atmosphere. The overall pacing is deliberate, meant to build mystery rather than rapid-fire action.",
+      "usage": {
+        "promptTokenCount": 2802,
+        "candidatesTokenCount": 680,
+        "totalTokenCount": 3482,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 2730
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 72
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "start_seconds": 2003,
+      "end_seconds": 2033,
+      "clip_size_bytes": 1311649,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "observation": "This video uses a minimalist, 2D vector graphic style to illustrate a health crisis in a controlled environment. Here is a breakdown of the video’s components:\n\n**Visual Style:** The video employs a clean, flat-design aesthetic using a dark background with light lines and simple stick-figure iconography. Key information is displayed in bold, sans-serif typography. Colors are used sparingly for emphasis, such as yellow to indicate sick individuals and orange/red to signal emergencies.\n\n**Character Movement and Animation:** Characters move with simple, linear transitions. When illustrating medical symptoms, the animation is limited to basic shapes and diagrams (e.g., bar charts representing body fluid levels). Characters in the \"camp\" are shown as static icons that occasionally gesture or change positions to reflect their health status.\n\n**Shot Composition and Editing:** The editing is rhythmic and follows a clear, logical progression. It alternates between:\n*   **0:00–0:14:** Narrative segments using icon-based diagrams to represent the spread of illness.\n*   **0:15–0:25:** Data-driven segments using bar graphs to explain the concept of body fluid loss.\n*   **0:26–0:29:** A scene depicting the camp setup, showing figures moving into a new area.\nThe pacing is deliberate, providing just enough time to digest the information before moving to the next point.\n\n**Story or Dialogue:** The narrative acts as an informational guide, explaining the dangers of dehydration during an outbreak. It draws a distinction between \"the ordinary kind of sick\" and a catastrophic threat, framing fluid loss as an emergency situation. A clear, calm voice-over delivers the narration.\n\n**Sound Effects:** Subtle sound design is used throughout, including soft, digital-sounding \"blips\" when new icons appear or data points change. At 0:04, faint, synthetic, rhythmic thumping or mechanical sounds accompany the medical descriptions. \n\n**Music and Pacing:** The background music is a low-tempo, ambient, and slightly tense electronic track. The pacing is structured and educational, maintaining a somber yet urgent tone throughout the 30-second clip.",
+      "usage": {
+        "promptTokenCount": 2802,
+        "candidatesTokenCount": 451,
+        "totalTokenCount": 3253,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 72
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 2730
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    },
+    {
+      "start_seconds": 4007,
+      "end_seconds": 4037,
+      "clip_size_bytes": 942943,
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "observation": "The following analysis is based on the provided clip:\n\n**Visual Style:**\nThe clip features a minimalist, 2D vector art style. Characters are represented as simple stick-like figures with basic geometric shapes for heads. The color palette is muted, consisting primarily of browns, grays, and blacks, which creates a somber, post-apocalyptic atmosphere. The lighting is low-key, with dramatic emphasis on light sources like the doorway at the end. \n\n**Character Movement and Animation:**\nAnimation is sparse and stylized. Figures are generally static, with minimal limb movement. The focus is more on the symbolic placement of items (water bottles, radio, paper) than on fluid character motion. When movement does occur, it is rigid and deliberate, emphasizing the stark, quiet nature of the environment.\n\n**Shot Composition/Editing:**\nThe video utilizes a series of static, centered shots, framing objects and characters in a way that highlights their isolation. The editing is measured and slow-paced, moving from the initial wide shot of the door to close-ups of the objects (0:03–0:13) and back to the characters. The final sequence (0:16–0:30) uses a dramatic reveal with a high-contrast transition as the door opens, signaling the conclusion.\n\n**Story and Dialogue:**\nThe narrative follows a family reaching \"Day 100\" of a survival situation. A voiceover provides context, explaining the objects held by the survivors: empty water bottles (lack of resources), a weather radio, and a note written in the player/narrator's handwriting. The note serves as a bridge between the unseen narrator and the survivors. The climax occurs when the characters finally open the door to the outside world, marking the end of their confinement. \n\n**Sound Effects:**\nThe sound design is highly atmospheric. There is a persistent, low-frequency hum or wind-like noise throughout. Notable effects include the rustling of paper (0:09), the clicks of the radio being handled (0:05), and a distinct, hollow sound of a heavy door creaking or sliding open at the end (0:16).\n\n**Music and Pacing:**\nThe music is a slow, melancholic, and ambient track that builds tension through sustained, resonant chords. The pacing is deliberate and unhurried, reflecting the long, arduous wait of the 100 days. The music swells slightly as the door opens, providing a sense of finality to the experience. \n\n**Uncertainties:**\n*   The exact nature of the outside world is never shown, only implied by the light and the context of the \"Zombie Outbreak\" title. \n*   The relationship between the unseen narrator and the characters is not explicitly explained, leaving their connection to interpretation.",
+      "usage": {
+        "promptTokenCount": 2802,
+        "candidatesTokenCount": 585,
+        "totalTokenCount": 3387,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 2730
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 72
+          }
+        ],
+        "serviceTier": "standard"
+      }
+    }
+  ]
+}

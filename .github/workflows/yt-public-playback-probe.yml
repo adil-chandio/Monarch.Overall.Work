@@ -1,0 +1,34 @@
+name: Test public YouTube browser playback
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [scripts/yt_public_playback_probe.cjs, .github/workflows/yt-public-playback-probe.yml]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install temporary browser tools
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Check public playback without credentials
+        run: node scripts/yt_public_playback_probe.cjs
+      - name: Save public playback result
+        run: |
+          mkdir -p docs/repo-intel
+          cp audit-output/yt-browser-probe.json docs/repo-intel/yt-browser-probe.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/yt-browser-probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record browser playback feasibility [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work

@@ -1,0 +1,36 @@
+name: Render kick blocking preview
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: [.github/workflows/kick-blocking-preview.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxrender1 libxi6 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0 libgl1 ffmpeg
+          pip install -q 'bpy==4.2.23' numpy Pillow imageio-ffmpeg
+      - name: Render two-second silent blocking test
+        run: |
+          python showreel/celebrity_3d/render_rigged.py --experimental-kick --samples 1 --width 180 --start 18 --end 20 --silent --output deliverables/monarch-kick-blocking-test.mp4 > "$RUNNER_TEMP/render.log" 2>&1 || { tail -60 "$RUNNER_TEMP/render.log"; exit 1; }
+          grep -E 'IMPACTS|OUTPUT' "$RUNNER_TEMP/render.log"
+          ffprobe -v error -show_entries format=duration:stream=codec_type,width,height -of json deliverables/monarch-kick-blocking-test.mp4
+          ffmpeg -v error -i deliverables/monarch-kick-blocking-test.mp4 -f null -
+      - name: Publish preview to the same branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f deliverables/monarch-kick-blocking-test.mp4
+          git commit -m 'Add silent kick blocking preview [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work

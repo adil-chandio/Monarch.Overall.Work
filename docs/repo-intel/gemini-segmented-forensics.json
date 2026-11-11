@@ -1,0 +1,301 @@
+{
+  "method": "Official Gemini YouTube input, clip windows requested with startOffset/endOffset, fps=5. Outputs are model-generated, not extracted frames. Clipping and sampling supported by comparative token-usage probe but precise timing and scene descriptions remain unverified. No independent audio validation.",
+  "model": "gemini-3.1-flash-lite-preview",
+  "requested_fps": 5,
+  "videos": [
+    {
+      "video_id": "aWHX5Awe_TI",
+      "metadata_duration_seconds": 16,
+      "segments": [
+        {
+          "requested_start_seconds": 0,
+          "requested_end_seconds": 5,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "The video displays the following actions:\n\n**00:00 - 00:01**: A soccer player in a white jersey (marked with \"10\") performs dribbling moves against a much larger player in a light blue kit. The camera is at a distance. Text at the top reads, \"POV: YOU ARE NEYMAR\". Text at the bottom reads, \"DusanFC\".\n\n**00:01 - 00:02**: The player in the white jersey continues to dribble around the larger player, who attempts to block their movement. The clip then cuts to a first-person perspective.\n\n**00:02 - 00:04**: A first-person view shows a player's feet and the soccer ball near the larger player in the light blue kit. The background shows a stadium with lights, implying a match setting. The perspective looks down at the ball and the opponent.\n\n**00:04 - 00:05**: The video cuts to a clip of a different soccer player in a yellow jersey performing a high kick to strike the ball during a match, with a stadium filled with spectators in the background. The text \"DusanFC\" remains at the bottom.",
+          "usage": {
+            "promptTokenCount": 1784,
+            "candidatesTokenCount": 260,
+            "totalTokenCount": 2044,
+            "promptTokensDetails": [
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1701
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 5,
+          "requested_end_seconds": 10,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "The video clip shows the following actions, described in chronological order:\n\n**0-1 second:** The scene opens in a stadium. A player in a yellow and blue uniform stands on the grass as a goalkeeper jumps towards him, extending his arms. The camera angle is side-on. There is text at the top that reads \"POV: YOU ARE NEYMAR\". \n\n**1-2 seconds:** The player in the yellow uniform quickly moves his head back to avoid the goalkeeper’s reach and then rapidly turns and runs away from the goalkeeper, moving towards the edge of the frame. \n\n**2-3 seconds:** The perspective shifts to a first-person POV shot of a player’s leg and foot extending upwards toward a soccer ball suspended in the air. A goalkeeper is visible in the background, suspended in the air attempting to intercept.\n\n**3-4 seconds:** The first-person POV shot remains static, capturing the player’s leg extended high near the soccer ball with the stadium and spectators visible in the background.\n\n**4-5 seconds:** The scene transitions to a high-angle long shot of a soccer game on a green field. Several players in white and black uniforms are visible.\n\n**5-6 seconds:** A player in white moves the ball toward the goal. A goalkeeper from the opposing team runs out to intercept.\n\n**6-7 seconds:** The player in white keeps control of the ball, dribbling past the goalkeeper as he attempts a sliding save. The player manages to maintain possession and continue moving toward the open goal as the goalkeeper falls to the grass.",
+          "usage": {
+            "promptTokenCount": 1784,
+            "candidatesTokenCount": 326,
+            "totalTokenCount": 2110,
+            "promptTokensDetails": [
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1701
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 10,
+          "requested_end_seconds": 15,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "The video clip displays the following actions:\n\n**0 to 1 seconds:** The clip opens with a POV shot of a soccer player on the field, about to kick the ball while the opposing team's goalie stands in front of the goal. The text \"POV: YOU ARE NEYMAR\" is visible at the top.\n\n**1 to 2 seconds:** The POV continues as the player is still in the same position on the field. The screen displays interface elements such as a follower count and comment/share icons.\n\n**2 to 3 seconds:** The scene transitions to the inside of a building, showing a man wearing a blue jersey celebrating and yelling, surrounded by others.\n\n**3 to 4 seconds:** The man in the blue jersey continues to celebrate, moving his arms in the air while others around him react.\n\n**4 to 5 seconds:** The camera view transitions again to a POV shot from behind a metal barrier, showing a group of people cheering as the man in the blue jersey approaches them.\n\n**5 seconds:** The final frame shows the POV perspective of hands being raised into the air, with the text \"Check the co\" partially visible in the middle of the screen.",
+          "usage": {
+            "promptTokenCount": 1783,
+            "candidatesTokenCount": 246,
+            "totalTokenCount": 2029,
+            "promptTokensDetails": [
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1700
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 15,
+          "requested_end_seconds": 16,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "The provided video clip consists of a single, static perspective shot. Here is the chronological analysis:\n\n*   **0:00 - 0:01:** The camera is positioned from a first-person perspective, showcasing two hands pointing upwards. In front of the camera, separated by a metal barrier, is a crowd of men looking towards the viewer. The text \"POV: YOU ARE NEYMAR\" appears at the top, and \"Check the comments\" with an icon is displayed in the center. The creator's name \"DusanFC\" is at the bottom. The entire video remains static for the duration.",
+          "usage": {
+            "promptTokenCount": 424,
+            "candidatesTokenCount": 128,
+            "totalTokenCount": 552,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              },
+              {
+                "modality": "VIDEO",
+                "tokenCount": 341
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    },
+    {
+      "video_id": "8wtQAI_ZZlQ",
+      "metadata_duration_seconds": 13,
+      "segments": [
+        {
+          "requested_start_seconds": 0,
+          "requested_end_seconds": 5,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "- **0-1s:** The video starts with a static shot of three 3D-animated figures representing soccer players sitting on colorful chairs in the middle of a soccer field with a goal in the background. The text \"LV Animation\" is displayed in the bottom center.\n\n- **1-2s:** A soccer ball enters the frame from the left, rolling past the first figure's feet and stopping in the bottom left corner. The figures remain seated and unchanged.\n\n- **2-3s:** The soccer ball slides along the bottom edge of the frame from left to right, disappearing off the screen on the right side.\n\n- **3-4s:** The soccer ball re-enters the frame from the right side, rolling quickly across the bottom edge toward the left.\n\n- **4-5s:** The soccer ball stops in the bottom left corner once again. The figures remain in their original positions.",
+          "usage": {
+            "promptTokenCount": 1859,
+            "candidatesTokenCount": 189,
+            "totalTokenCount": 2048,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              },
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1776
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 5,
+          "requested_end_seconds": 10,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "Here is the chronological breakdown of the video’s actions:\n\n**0-1 seconds:** Three 3D animated soccer players sit on chairs on a grassy field in front of a goal. A large purple spiked ball sits on the grass in front of the player on the far right.\n\n**1-2 seconds:** The purple ball moves and impacts the chair of the player on the far right, lifting him into the air with his arms raised. \n\n**2-3 seconds:** The player on the far right stays suspended in the air with his arms raised as the ball moves away to the right. \n\n**3-4 seconds:** The player on the far right slowly descends back down to his chair. \n\n**4-5 seconds:** The three players sit in their original positions as the ball moves off-screen to the right. \n\n**5-6 seconds:** A blue, glowing ball rolls across the grass from the left side of the screen toward the middle of the screen.\n\n**6-7 seconds:** The blue ball rolls across the front of the players and then moves off-screen to the right.\n\n**7-8 seconds:** The three players remain in their original positions, looking forward.",
+          "usage": {
+            "promptTokenCount": 1859,
+            "candidatesTokenCount": 249,
+            "totalTokenCount": 2108,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              },
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1776
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 10,
+          "requested_end_seconds": 13,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "The video contains 3D animations of three figures sitting on chairs on a grass field in front of a soccer goal. The style is that of a computer-generated animation.\n\n**0 - 1 second:** The animation shows a central figure (with light hair and a light blue jersey) sitting on a small, dark blue, spherical object. The figure on the left (with a dark beard and a white/blue jersey) and the figure on the right (with a red/green jersey) are sitting on chairs. The central figure then stands up and jumps, causing the blue sphere to move to the right. \n\n**1 - 2 seconds:** The central figure is shown standing in the center. The blue sphere continues to move across the grass and eventually disappears off-screen to the right. The text \"LV Animation\" appears at the bottom of the screen throughout this segment.",
+          "usage": {
+            "promptTokenCount": 869,
+            "candidatesTokenCount": 180,
+            "totalTokenCount": 1049,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              },
+              {
+                "modality": "VIDEO",
+                "tokenCount": 786
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    },
+    {
+      "video_id": "GHT3RyE9wGI",
+      "metadata_duration_seconds": 22,
+      "segments": [
+        {
+          "requested_start_seconds": 0,
+          "requested_end_seconds": 5,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "This video shows an animated scene of a bedroom featuring a stick figure character sleeping in bed. \n\n- **0-1s:** A stick figure extends an arm from bed, grabs a ringing alarm clock, and tosses it out the window.\n- **1-2s:** The stick figure continues to sleep in bed while snoring. A new alarm clock appears out of nowhere, falling into place on the nightstand.\n- **2-3s:** The character wakes up, notices the new alarm clock, and stretches their arm out of bed toward it.\n- **3-4s:** The character hits the alarm clock, causing it to fly up and off the nightstand.\n- **4-5s:** A bird appears on the right side of the screen, chirping at the window.",
+          "usage": {
+            "promptTokenCount": 1859,
+            "candidatesTokenCount": 165,
+            "totalTokenCount": 2024,
+            "promptTokensDetails": [
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1776
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 5,
+          "requested_end_seconds": 10,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "This video clip shows a stick figure in bed, a rooster, and another stick figure in a series of animated scenes. Here is the chronological breakdown:\n\n**0-5 seconds:** A black stick figure sleeps in a bed. On a nightstand next to the bed, a rooster stands and makes a repetitive crowing motion with its beak open. A moon and stars are visible in a window, and a picture hangs on the wall.\n\n**5-6 seconds:** The black stick figure, disturbed by the rooster, stretches a long arm out of the bed and removes the rooster from the nightstand.\n\n**6-7 seconds:** The black stick figure pulls its arm back into bed and resumes sleeping. The nightstand is now empty.\n\n**7-8 seconds:** A blue stick figure appears by the nightstand.\n\n**8-10 seconds:** The blue stick figure places a small, red, circular object (appearing to be a small bell or drum) on the nightstand, and then proceeds to perform a rhythmic, jumping motion that lifts the blue blanket off the sleeping stick figure.",
+          "usage": {
+            "promptTokenCount": 1859,
+            "candidatesTokenCount": 223,
+            "totalTokenCount": 2082,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              },
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1776
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 10,
+          "requested_end_seconds": 15,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "The following is a chronological breakdown of the video clip:\n\n**0-1 seconds:** A blue character sits on a small stool at the end of a bed, playing a small drum. The bed has a blue cover and a pillow. Above the bed is a window with a moon and stars visible outside. To the right of the bed is a nightstand, and on the wall hangs a small framed picture.\n\n**1-2 seconds:** The blue character on the stool continues to play the drum. A blue, rectangular-shaped character with a keyhole design appears on the bed, lying down, and then moves off the bed and onto the floor.\n\n**2-3 seconds:** The scene is now empty, with only the bed, nightstand, and window visible. Suddenly, the bed turns dark, and a black character appears on the bed under the covers. A chicken and an alarm clock appear on the nightstand.\n\n**3-4 seconds:** The black character sits up in bed, raising its arms. The chicken remains on the nightstand, with visible lines indicating sound. The blue character remains on the stool, playing the drum.\n\n**4-5 seconds:** The black character on the bed is still sitting up with arms raised. The blue character on the stool continues to drum. The chicken is still on the nightstand. \n\n**5-6 seconds:** The black character is still sitting up, now with white circles appearing over its eyes. The blue character continues to drum, and the chicken remains on the nightstand.",
+          "usage": {
+            "promptTokenCount": 1858,
+            "candidatesTokenCount": 315,
+            "totalTokenCount": 2173,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              },
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1775
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 15,
+          "requested_end_seconds": 20,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "The video clip begins at 0 seconds, showcasing an animated bedroom scene with a blue character in bed and a chicken on a nightstand with an alarm clock, with the camera zooming in on the chicken and clock. By 1 second, the camera remains focused on the chicken and clock. At 2 seconds, the camera shifts focus upward, centering on the night sky visible through a square window. At 3 seconds, the camera moves left, revealing a black figure in bed wearing glasses next to the blue character. By 4 seconds, the camera stops moving and settles on the two characters in bed with the night sky window directly above them.",
+          "usage": {
+            "promptTokenCount": 1859,
+            "candidatesTokenCount": 130,
+            "totalTokenCount": 1989,
+            "promptTokensDetails": [
+              {
+                "modality": "VIDEO",
+                "tokenCount": 1776
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "requested_start_seconds": 20,
+          "requested_end_seconds": 22,
+          "http_status": 200,
+          "finish_reason": "STOP",
+          "model_observation": "This video clip begins at 00:00 and follows a simple, flat animation style with a purple-walled bedroom setting.\n\n- **00:00:** The scene starts with a close-up of a blue stick figure holding a red drum, with a black stick figure wearing sunglasses behind it.\n- **00:01:** The scene zooms out rapidly, revealing the black figure getting into bed while the blue figure continues holding the drum.\n- **00:02:** The scene continues to zoom out, with the blue figure and the drum disappearing, and a chicken appearing on a nightstand next to the bed where the black figure is resting.\n- **00:03:** The view zooms out further to show the full room, including the bed, a nightstand, and a window displaying a night sky with a crescent moon.\n- **00:04:** The scene remains static, with the black figure lying in bed, showing small \"z\" symbols above it to indicate sleeping.\n- **00:05:** An alarm clock appears on the nightstand.\n- **00:06:** The alarm clock is now fully visible and resting on the nightstand.",
+          "usage": {
+            "promptTokenCount": 723,
+            "candidatesTokenCount": 254,
+            "totalTokenCount": 977,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 83
+              },
+              {
+                "modality": "VIDEO",
+                "tokenCount": 640
+              }
+            ],
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    }
+  ]
+}

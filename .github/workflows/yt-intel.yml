@@ -9,10 +9,17 @@ on:
     branches:
       - main
       - arena/9960286a-monarch-overall-work
+      - arena/1f352b8e-monarch-overall-work
     paths:
       - "yt-intel-trigger.txt"
+      - "yt-channel-audit-trigger.txt"
   workflow_dispatch:
     inputs:
+      channel_audit:
+        description: 'Run the MONARCHs Edit channel inventory instead of topic research'
+        type: boolean
+        required: false
+        default: false
       topic:
         description: 'Topic to research (blank = use config/topic-queue.json)'
         required: false
@@ -38,6 +45,7 @@ permissions:
 
 jobs:
   research:
+    if: ${{ !inputs.channel_audit && !(github.event_name == 'push' && github.ref_name == 'arena/1f352b8e-monarch-overall-work') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -321,3 +329,43 @@ jobs:
           PY
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Committed: ${{ steps.commit.outputs.committed }}" >> "$GITHUB_STEP_SUMMARY" 
+
+  channel-audit:
+    if: ${{ inputs.channel_audit || (github.event_name == 'push' && github.ref_name == 'arena/1f352b8e-monarch-overall-work') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect public channel inventory
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+        run: python scripts/channel_audit.py
+      - name: Research recent public competitor videos
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+        run: python scripts/monarch_broad_research.py
+      - name: Upload audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monarchs-edit-channel-audit
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Save public inventory to the session branch
+        if: ${{ github.ref_name == 'arena/1f352b8e-monarch-overall-work' && success() }}
+        run: |
+          mkdir -p docs/repo-intel
+          cp audit-output/channel.json docs/repo-intel/monarchs-edit-channel.json
+          cp audit-output/broad-english.json docs/repo-intel/monarchs-edit-broad-english-research.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/repo-intel/monarchs-edit-channel.json docs/repo-intel/monarchs-edit-broad-english-research.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record MONARCHs Edit public channel inventory [skip ci]'
+            git push origin HEAD:arena/1f352b8e-monarch-overall-work
+          fi

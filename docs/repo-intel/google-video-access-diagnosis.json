@@ -1,0 +1,60 @@
+{
+  "method": "Compare YouTube metadata, Gemini models and a text-only call using one existing configured credential; attempt a 16-second public video URL only if text works. Error text/credentials are not stored.",
+  "video_id": "aWHX5Awe_TI",
+  "outcome": "completed",
+  "youtube_metadata": {
+    "http_status": 401,
+    "status": "UNAUTHENTICATED",
+    "reasons": [
+      "CREDENTIALS_MISSING"
+    ],
+    "services": [
+      "youtube.googleapis.com"
+    ]
+  },
+  "gemini_models": {
+    "http_status": 200,
+    "status": null,
+    "reasons": []
+  },
+  "available_flash_models": [
+    "models/gemini-2.5-flash",
+    "models/gemini-2.5-flash-preview-tts",
+    "models/gemini-flash-latest",
+    "models/gemini-flash-lite-latest",
+    "models/gemini-2.5-flash-lite",
+    "models/gemini-2.5-flash-image",
+    "models/gemini-3-flash-preview",
+    "models/gemini-3.1-flash-lite-preview",
+    "models/gemini-3.1-flash-lite",
+    "models/gemini-3.1-flash-image-preview",
+    "models/gemini-3.1-flash-image",
+    "models/gemini-3.1-flash-lite-image",
+    "models/gemini-3.5-flash",
+    "models/gemini-3.5-flash-lite",
+    "models/gemini-omni-flash-preview",
+    "models/gemini-omni-1.1-flash",
+    "models/gemini-omni-1.2-flash",
+    "models/gemini-3.6-flash",
+    "models/gemini-3.7-flash",
+    "models/gemini-3.8-flash",
+    "models/gemini-3.1-flash-tts-preview",
+    "models/gemini-3.8-flash-tts",
+    "models/gemini-3.8-flash-lite-tts"
+  ],
+  "text_attempts": [
+    {
+      "model": "models/gemini-3.1-flash-lite-preview",
+      "http_status": 200,
+      "status": null,
+      "reasons": []
+    }
+  ],
+  "selected_model": "models/gemini-3.1-flash-lite-preview",
+  "gemini_video": {
+    "http_status": 200,
+    "status": null,
+    "reasons": []
+  },
+  "model_description_unverified": "The video shows a series of clips where Neymar appears to perform various soccer skills and activities from a first-person perspective, interspersed with real-life clips of the player.\n\n- **0:00 - 0:02**: The video begins with a montage of Neymar (or a representation of him) maneuvering a soccer ball around a large, shirtless man on a soccer field.\n- **0:02 - 0:04**: The camera cuts to a first-person perspective, where a person is skillfully dribbling the ball around the same large man.\n- **0:04 - 0:05**: There is a transition to a real-life clip of Neymar performing a complex mid-air kick, followed by another soccer move.\n- **0:05 - 0:07**: The video shifts to a first-person view of a player kicking a ball toward a goal, with a goalkeeper attempting to block it.\n- **0:07 - 0:09**: Another cut shows a broader, third-person perspective of a professional soccer match where players are attempting to score a goal.\n- **0:09 - 0:11**: The video returns to a first-person perspective, depicting a player scoring a goal in the same match scenario previously seen.\n- **0:11 - 0:13**: The scene cuts to a real-life video of Neymar cheering and celebrating with his team in a locker room.\n- **0:13 - 0:15**: The video ends with a first-person perspective of someone standing in front of a crowd of cheering people, mirroring the celebratory atmosphere of the previous clip."
+}

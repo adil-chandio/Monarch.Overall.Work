@@ -1,0 +1,6 @@
+// Inspect only public watch-page player metadata. No login, bypass, or media download.
+const {chromium}=require('playwright'); const fs=require('fs');
+(async()=>{const browser=await chromium.launch({headless:true,args:['--no-sandbox']});const page=await browser.newPage();const rows=[];
+for(const id of ['aWHX5Awe_TI','8wtQAI_ZZlQ','GHT3RyE9wGI']){
+ const row={videoId:id};try{const resp=await page.goto('https://www.youtube.com/watch?v='+id,{waitUntil:'domcontentloaded',timeout:45000});await page.waitForTimeout(4000);row.http=resp.status();Object.assign(row,await page.evaluate(()=>{const p=window.ytInitialPlayerResponse||{};const raw=p.storyboards?.playerStoryboardSpecRenderer?.spec;return {playabilityStatus:p.playabilityStatus?.status||null,hasStoryboardSpec:!!raw,hasStreamingData:!!p.streamingData,previewLevels:raw?raw.split('|').length-1:0};}));}catch(e){row.error=String(e.message).slice(0,100)} rows.push(row);console.log(JSON.stringify(row));}
+await browser.close();fs.mkdirSync('audit-output',{recursive:true});fs.writeFileSync('audit-output/yt-preview-metadata-probe.json',JSON.stringify({method:'Unauthenticated official watch page; inspect presence of storyboard metadata only. No image, audiovisual media or signed URLs retained.',rows},null,2)+'\n')})().catch(e=>{console.error(e.message);process.exitCode=1});
