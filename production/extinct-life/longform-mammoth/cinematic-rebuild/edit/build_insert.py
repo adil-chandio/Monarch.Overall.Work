@@ -9,11 +9,13 @@ import imageio_ffmpeg
 base=Path(__file__).resolve().parent;root=base.parents[4]
 audio=root/'production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrack-draft/Narration-Score-DRAFT.m4a'
 choices={
+ 'island-approach':('.cache/mammoth-island-approach/island-approach-motion-review-silent.mp4',None,130.,540),
  'genome-comparison':('.cache/mammoth-comparison-lab/comparison-lab-motion-review-silent.mp4',None,5182/30,600),
+ 'stream':('.cache/mammoth-stream-scene/stream-scene-motion-review-silent.mp4',None,354.,480),
  'hypothesis':('.cache/mammoth-icing-hypothesis/icing-motion-review-silent.mp4','e2ed9b28d179b12d7e7d54d5be3bcbb782d61c6638df3f3c7f64cb75229f6040',370.,420),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py genome-comparison|hypothesis|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|genome-comparison|stream|hypothesis|genomic-gap')
 name=sys.argv[1];file,expected,offset,frames=choices[name];video=root/file
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 manifest=json.loads((video.parent/'render-manifest.json').read_text())
@@ -26,10 +28,19 @@ if not video.is_file() or digest(video)!=expected:raise SystemExit('Missing or c
 if digest(audio)!='434f2c344b428982edf8b00607b8361c4c45bec95da6ac5330c87428a45c3760':raise SystemExit('Unexpected soundtrack')
 out=root/f'.cache/mammoth-edit/{name}-incomplete-workprint.mp4';out.parent.mkdir(parents=True,exist_ok=True)
 ff=imageio_ffmpeg.get_ffmpeg_exe();duration=frames/30
-cmd=[ff,'-y','-hide_banner','-loglevel','error','-i',str(video),'-ss',str(offset),'-i',str(audio),'-filter_complex',f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS[a]','-map','0:v:0','-map','[a]','-frames:v',str(frames),'-c:v','libx264','-preset','fast','-crf','20','-threads','2','-c:a','aac','-b:a','160k','-movflags','+faststart',str(out)]
+cmd=[ff,'-y','-hide_banner','-loglevel','error','-i',str(video),'-ss',str(offset),'-i',str(audio)]
+brook=None
+if name=='stream':
+ brook=root/'production/extinct-life/longform-mammoth/cinematic-rebuild/ambience-sources/brook-candidate/ambience-stream-clear.mp3'
+ if not brook.is_file() or digest(brook)!='497209be73f6f05e46e924c6801dbab3921d1c587b531657120af14c546964dc':raise SystemExit('Unexpected brook ambience')
+ cmd+=['-ss','8','-i',str(brook)]
+ filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS[base];[2:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.20,afade=t=in:st=0:d=0.8,afade=t=out:st=14.5:d=1.5[water];[base][water]amix=inputs=2:normalize=0:duration=first,alimiter=limit=0.82:level=0[a]'
+elif name=='island-approach':filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.88[a]'
+else:filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS[a]'
+cmd+=['-filter_complex',filters,'-map','0:v:0','-map','[a]','-frames:v',str(frames),'-c:v','libx264','-preset','fast','-crf','20','-threads','2','-c:a','aac','-b:a','160k','-movflags','+faststart',str(out)]
 subprocess.run(cmd,check=True)
 r=subprocess.run([ff,'-hide_banner','-i',str(out),'-filter_complex','ebur128=peak=true','-f','null','-'],capture_output=True,text=True,check=True)
 f=re.findall(r'frame=\s*(\d+)',r.stderr);peak=re.findall(r'Peak:\s*(-?[\d.]+) dBFS',r.stderr);lu=re.findall(r'I:\s*(-?[\d.]+) LUFS',r.stderr)
 if not f or int(f[-1])!=frames or not peak or float(peak[-1])>-1 or not lu:raise SystemExit('Decode/frame/peak failure')
-report={'status':'incomplete separate editorial insert, not final','narration_offset_seconds':offset,'frames':frames,'fps':30,'lufs':float(lu[-1]),'true_peak_dbtp':float(peak[-1]),'input_sha256':expected,'audio_sha256':digest(audio),'output_sha256':digest(out)}
+report={'status':'incomplete separate editorial insert, not final','narration_offset_seconds':offset,'frames':frames,'fps':30,'lufs':float(lu[-1]),'true_peak_dbtp':float(peak[-1]),'input_sha256':expected,'audio_sha256':digest(audio),'brook_sha256':digest(brook) if brook else None,'note':'island-approach has temporary 0.88 gain to limit AAC true peak; all clips need final continuous mix','output_sha256':digest(out)}
 (out.parent/f'{name}-qc.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

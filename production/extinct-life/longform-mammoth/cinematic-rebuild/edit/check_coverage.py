@@ -5,7 +5,9 @@ root=Path(__file__).resolve().parents[5];base=Path(__file__).resolve().parent
 story=json.loads((base.parent/'storyboard-retime/storyboard-retimed-reblocked.json').read_text())
 # Candidate placements, not listening-approved. Offsets are exact at 30 fps.
 segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json','file':'opening-incomplete-workprint.mp4'},
+ {'name':'island-approach','start_frame':3900,'frames':540,'qc':'island-approach-qc.json','file':'island-approach-incomplete-workprint.mp4'},
  {'name':'genome-comparison','start_frame':5182,'frames':600,'qc':'genome-comparison-qc.json','file':'genome-comparison-incomplete-workprint.mp4'},
+ {'name':'stream','start_frame':10620,'frames':480,'qc':'stream-qc.json','file':'stream-incomplete-workprint.mp4'},
  {'name':'hypothesis','start_frame':11100,'frames':420,'qc':'hypothesis-qc.json','file':'hypothesis-incomplete-workprint.mp4'},
  {'name':'genomic-gap','start_frame':18872,'frames':510,'qc':'genomic-gap-qc.json','file':'genomic-gap-incomplete-workprint.mp4'}]
 end=math.ceil(story['narration_duration_seconds']*30);cursor=0;holes=[]
@@ -16,6 +18,7 @@ for x in segments:
   x['built']=count==x['frames'] and data.get('fps')==30 and digest==expected
   if x['name']!='opening':
    x['built']=x['built'] and abs(data.get('narration_offset_seconds',-1)*30-x['start_frame'])<1e-4 and data.get('audio_sha256')=='434f2c344b428982edf8b00607b8361c4c45bec95da6ac5330c87428a45c3760'
+  if x['name']=='stream':x['built']=x['built'] and data.get('brook_sha256')=='497209be73f6f05e46e924c6801dbab3921d1c587b531657120af14c546964dc'
  if not x['built']:continue
  if x['start_frame']<cursor:raise SystemExit('Overlapping workprint sections')
  if x['start_frame']>cursor:holes.append([cursor,x['start_frame']])
