@@ -115,3 +115,29 @@ which has still not happened. Watching the reel is the next step; the report bes
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_environment.py
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/check_environment_sync.py
 ```
+
+## Running order (after the close rebuild)
+
+`--list` prints this from the coverage table, and it is the only description of the film
+that is regenerated rather than written by hand:
+
+| | |
+|---|---|
+| 0–85 | opening |
+| 85–86 | gap card |
+| 86–170 | isolation, another island, approach, chapter one |
+| 170–172.73 | gap card |
+| 172.73–455 | comparison, gene disruption, chapter two, coat, one genome, chemistry, stream, hypothesis |
+| 384–391 | gap card (inside the above) |
+| 391–471 | people, contact, genome record |
+| 471–473 | gap card |
+| 473–539 | **island hold** (new) |
+| 539–540 | gap card |
+| 540–646.07 | genetic strain (trimmed), coverage, trends, genomic gap |
+| 646.07–652 | gap card |
+| 652–734 | new lead, ledger (trimmed) |
+| 734–783 | **verdict close** (new; absorbs the old verdict section) |
+| 783–796.07 | final crossing |
+
+`reversal-section` and `verdict-section` are no longer placed. Both were superseded by
+native picture doing the same narrative work, and both files are kept for comparison.
