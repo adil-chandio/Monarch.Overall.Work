@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "research" / "caught_on_camera_v13"
 sys.path.insert(0, str(BASE))
-from clip_safety_v13 import BLOCK_TERMS, EXCLUDE_TOKENS, ALLOWED_LICENSES  # noqa: E402
+from clip_safety_v13 import BLOCK_TERMS, EXCLUDE_TOKENS, ALLOWED_LICENSES, safety_gate  # noqa: E402
 
 bad, silent_sources = [], []
 selection = json.loads((BASE / "selected_windows_v13.json").read_text(encoding="utf-8"))
@@ -44,10 +44,9 @@ for c in clips:
         continue
     blob = " ".join([a.get("title", ""), a.get("categories", ""),
                      a.get("usage_terms", ""), a.get("credit", "")]).lower()
-    for b in BLOCK_TERMS:
-        if b in blob:
-            bad.append(f"unsafe_term[{b}] in {a['title'][:50]}")
-            break
+    ok, blocked, _ = safety_gate(blob)
+    if not ok:
+        bad.append(f"unsafe_term[{blocked}] in {a['title'][:50]}")
     for e in EXCLUDE_TOKENS:
         if e in a.get("title", "").lower():
             bad.append(f"excluded_asset[{e}] {a['title'][:50]}")

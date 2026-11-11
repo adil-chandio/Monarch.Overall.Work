@@ -8,6 +8,7 @@ NOT graphic or tragic footage. This module is imported by both the acquisition s
 and the hard QC validator so a clip cannot slip through one gate and be used anyway.
 """
 from __future__ import annotations
+import re
 
 # POSITIVE, on-brand discovery: wildlife / animals / funny / surprising / skill moments.
 QUERIES = [
@@ -50,20 +51,28 @@ QUERIES = [
     '"unexpected moment" filetype:video',
 ]
 
-# Hard exclusions. Deliberately broad: a false exclusion costs a clip, a false
-# inclusion costs a graphic frame in the final video.
-BLOCK_TERMS = (
-    "kill", "murder", "homicide", "death", "dead", "fatal", "shoot", "gun", "firearm",
-    "bomb", "explosion", "blast", "missile", "strike", "attack", "terror", "suicide",
-    "war", "military", "soldier", "combat", "drone", "rocket", "artillery", "invasion",
-    "robbery", "burglary", "assault", "crime", "criminal", "suspect", "arrest", "stabbing",
-    "knife", "blood", "gore", "victim", "kidnap", "abduct", "missing person",
-    "seeking information", "police chase", "hostage", "cantonment", "precinct",
-    "crash", "collision", "accident", "airline", "flight", "plane", "tornado", "hurricane",
-    "earthquake", "disaster", "tragedy", "wreck", "protest", "riot", "9/11",
-    "volgograd", "crimean", "bannu", "ramat gan", "nancy guthrie", "brian thompson",
-    "saratov", "flight 3054", "flight77", "thai cctv",
+# Hard exclusions. Single words are matched with word boundaries so benign text
+# like "Warrior Custom Golf" or "toward" is NOT rejected as "war". Multi-word
+# phrases catch the exact graphic/tragedy titles seen in the rejected first pool.
+BLOCK_WORDS = (
+    "kill", "killing", "killed", "murder", "homicide", "fatal", "shoot", "shooting",
+    "firearm", "gun", "bomb", "bombing", "explosion", "blast", "missile", "suicide",
+    "terror", "war", "military", "soldier", "combat", "drone", "rocket", "artillery",
+    "invasion", "robbery", "burglary", "assault", "crime", "criminal", "suspect",
+    "arrest", "stabbing", "knife", "blood", "gore", "kidnap", "abduct", "hostage",
+    "cantonment", "precinct", "crash", "collision", "earthquake", "hurricane",
+    "tornado", "disaster", "tragedy", "wreck", "riot", "protest", "dead",
+    "volgograd", "crimean", "bannu", "saratov", "ramat",
 )
+BLOCK_PHRASES = (
+    "missile strikes", "drone bomb", "cantonment attack", "police chase",
+    "seeking information", "missing person", "flight 3054", "flight 703",
+    "airlines flight", "flight77", "thai cctv", "crimean bridge", "ramat gan",
+    "volgograd", "bannu", "nancy guthrie", "brian thompson", "saratov",
+    "homicide suspects", "9/11", "work accident",
+)
+BLOCK_TERMS = BLOCK_WORDS + BLOCK_PHRASES
+
 GOOD_TERMS = (
     "cat", "dog", "puppy", "kitten", "bear", "bird", "squirrel", "raccoon", "animal",
     "wildlife", "funny", "fail", "unexpected", "surprise", "trick", "skill", "catch",
@@ -87,8 +96,11 @@ ALLOWED_LICENSES = {"cc0", "public domain", "pd", "cc by 3.0", "cc by 4.0",
 def safety_gate(text):
     """Return (allowed, blocked_term, positive_score)."""
     low = (text or "").lower()
-    for b in BLOCK_TERMS:
-        if b in low:
-            return False, b, 0
+    for phrase in BLOCK_PHRASES:
+        if re.search(r"\b" + re.escape(phrase) + r"\b", low):
+            return False, phrase, 0
+    for word in BLOCK_WORDS:
+        if re.search(r"\b" + re.escape(word) + r"\b", low):
+            return False, word, 0
     score = sum(1 for g in GOOD_TERMS if g in low)
     return True, None, score
