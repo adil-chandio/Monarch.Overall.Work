@@ -7,6 +7,7 @@ story=json.loads((base.parent/'storyboard-retime/storyboard-retimed-reblocked.js
 segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json','file':'opening-incomplete-workprint.mp4'},
  {'name':'contact-section','start_frame':12330,'frames':1320,'qc':'contact-section-qc.json','file':'contact-section-incomplete-workprint.mp4'},
  {'name':'chemistry-section','start_frame':9150,'frames':1470,'qc':'chemistry-section-qc.json','file':'chemistry-section-incomplete-workprint.mp4'},
+ {'name':'one-genome','start_frame':8220,'frames':930,'qc':'one-genome-qc.json','file':'one-genome-incomplete-workprint.mp4'},
  {'name':'isolation-section','start_frame':2580,'frames':840,'qc':'isolation-section-qc.json','file':'isolation-section-incomplete-workprint.mp4'},
  {'name':'island-approach','start_frame':3900,'frames':300,'qc':'island-approach-qc.json','file':'island-approach-incomplete-workprint.mp4'},
  {'name':'island-chapter','start_frame':4200,'frames':900,'qc':'island-chapter-qc.json','file':'island-chapter-incomplete-workprint.mp4'},
