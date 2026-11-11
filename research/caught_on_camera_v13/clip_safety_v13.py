@@ -72,16 +72,13 @@ GOOD_TERMS = (
     "hilarious", "cute", "adorable", "incredible", "amazing", "smart", "clever",
 )
 
-# The exact ten V7 candidates + the excluded NASA V10 / Short asset.
-EXCLUDE_TOKENS = [
-    "how to drop in at your local pro shop", "chicago parallel parking fail",
-    "floridian cop caught on camera running from a rat",
-    "floridian policeman caught on camera running from a rat",
-    "funny hang-5", "funny fight - jc vs mark webb",
-    "bear enters californian home", "eagan police catch man reading novel",
-    "30, caption fail", "amazon delivery driver throws parcel",
-    "quaker corn bran", "artemis", "water bubble", "nasa ",
-]
+# Only the NASA / Artemis V10 / Short assets remain hard-excluded.
+# REVERSED: the ten V7 social-origin Commons candidates were initially excluded by V13
+# to force a fully new search. The positive-only Commons pass produced 20 safe but
+# mostly low-energy clips (landscape repeats, microscopy, interviews), so those ten
+# rights-cleared V7 candidates are now reintroduced as a CURATED recovery pool.
+# They are NOT the rejected V12 eight archived finals and are NOT the NASA Short.
+EXCLUDE_TOKENS = ["artemis", "water bubble", "nasa "]
 
 ALLOWED_LICENSES = {"cc0", "public domain", "pd", "cc by 3.0", "cc by 4.0",
                     "cc-by-3.0", "cc-by-4.0", "public domain mark 1.0", "pd-usgov"}

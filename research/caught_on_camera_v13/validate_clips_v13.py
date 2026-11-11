@@ -1,57 +1,75 @@
 #!/usr/bin/env python3
-"""Hard QC gate for V13 clip acquisition. Fails the build on ANY unsafe or unverified clip."""
+"""Hard QC gate for the final V13 20-clip selection.
+
+Fails the build on ANY unsafe term, excluded NASA asset, unclear licence, missing
+window, SHA-256 mismatch, bad duration, or missing video stream. A silent source is
+NOT a failure: `acquire_curated_v13.py` adds a silent AAC track and the builder keeps
+the native audio ducked under the English VO. No audio stream is recorded as a
+silent source that still requires human watch-through.
+"""
 from __future__ import annotations
 import hashlib
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "research" / "caught_on_camera_v13"
+sys.path.insert(0, str(BASE))
 from clip_safety_v13 import BLOCK_TERMS, EXCLUDE_TOKENS, ALLOWED_LICENSES  # noqa: E402
 
-bad = []
-led = json.loads((BASE / "rights_ledger_v13.json").read_text())
-assets = led["assets"]
-hw = json.loads((BASE / "hook_windows_v13.json").read_text())
+bad, silent_sources = [], []
+selection = json.loads((BASE / "selected_windows_v13.json").read_text(encoding="utf-8"))
+clips = selection["clips"]
+ledgers = {}
+for name in ("rights_ledger_v13.json", "rights_ledger_curated_v13.json"):
+    d = json.loads((BASE / name).read_text(encoding="utf-8"))
+    for a in d["assets"]:
+        ledgers[(name, a["local_window_file"])] = a
 
-if len(assets) < 12:
-    bad.append(f"too_few_safe_clips: {len(assets)} < 12")
-if len({a["commons_page"] for a in assets}) != len(assets):
-    bad.append("duplicate_commons_page")
-if len({a["title"] for a in assets}) != len(assets):
-    bad.append("duplicate_title")
+if len(clips) != 20:
+    bad.append(f"selection_count_{len(clips)}_not_20")
+if len({c["window_file"] for c in clips}) != len(clips):
+    bad.append("duplicate_window_file")
+if len({c["id"] for c in clips}) != len(clips):
+    bad.append("duplicate_clip_id")
 
-for a in assets:
-    t = a["title"]
-    blob = " ".join([t, a.get("categories", ""), a.get("usage_terms", "")]).lower()
+for c in clips:
+    key = (c["ledger"], c["window_file"])
+    a = ledgers.get(key)
+    if not a:
+        bad.append(f"no_ledger_entry {c['id']} {c['window_file']}")
+        continue
+    blob = " ".join([a.get("title", ""), a.get("categories", ""),
+                     a.get("usage_terms", ""), a.get("credit", "")]).lower()
     for b in BLOCK_TERMS:
         if b in blob:
-            bad.append(f"unsafe_term[{b}] in {t[:50]}")
+            bad.append(f"unsafe_term[{b}] in {a['title'][:50]}")
             break
     for e in EXCLUDE_TOKENS:
-        if e in t.lower():
-            bad.append(f"excluded_asset[{e}] {t[:50]}")
+        if e in a.get("title", "").lower():
+            bad.append(f"excluded_asset[{e}] {a['title'][:50]}")
             break
     lic = (a.get("license") or "").lower()
-    if not any(x in lic for x in ("public domain", "cc0", "cc by 3.0", "cc by 4.0", "cc-by-3.0", "cc-by-4.0")):
-        bad.append(f"licence_not_cleared: {t[:40]} = {a.get('license')}")
+    if not any(x in lic for x in ("public domain", "cc0", "cc by 3.0", "cc by 4.0",
+                                 "cc-by-3.0", "cc-by-4.0", "pd")):
+        bad.append(f"licence_not_cleared: {a['title'][:40]} = {a.get('license')}")
     if not a.get("commons_page", "").startswith("https://commons.wikimedia.org/"):
-        bad.append(f"bad_source_page {t[:40]}")
+        bad.append(f"bad_source_page {a['title'][:40]}")
     if not a.get("commons_sha1"):
-        bad.append(f"no_commons_sha1 {t[:40]}")
-    p = BASE / a["local_window_file"]
+        bad.append(f"no_commons_sha1 {a['title'][:40]}")
+    p = BASE / c["window_file"]
     if not p.exists():
-        bad.append(f"missing_window {a['local_window_file']}")
+        bad.append(f"missing_window {c['window_file']}")
         continue
     h = hashlib.sha256()
     with open(p, "rb") as f:
-        for c in iter(lambda: f.read(1 << 20), b""):
-            h.update(c)
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
     if h.hexdigest() != a["local_window_sha256"]:
         bad.append(f"sha256_mismatch {p.name}")
-    # probe the actual window: duration, video + audio stream
     r = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
                         "format=duration:stream=codec_type", "-of", "json", str(p)],
                        capture_output=True, text=True)
@@ -64,23 +82,31 @@ for a in assets:
         if "video" not in kinds:
             bad.append(f"no_video_stream {p.name}")
         if "audio" not in kinds:
-            bad.append(f"no_native_audio_stream {p.name}")
+            silent_sources.append({"id": c["id"], "file": c["window_file"],
+                                   "action": "silent_AAC_track_added_or_required"})
+        else:
+            silent_sources.append({"id": c["id"], "file": c["window_file"],
+                                   "action": "none_native_audio_present"})
     except Exception as e:
         bad.append(f"ffprobe_failed {p.name}: {type(e).__name__}")
 
-if len(hw["windows"]) != len(assets):
-    bad.append("hook_windows_count_mismatch")
-
 out = {
-    "generated_utc": __import__("time").strftime("%Y-%m-%dT%H:%M:%SZ", __import__("time").gmtime()),
-    "clips_checked": len(assets),
+    "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    "selection_version": selection["selection_version"],
+    "clips_checked": len(clips),
+    "ledgers": ["rights_ledger_v13.json", "rights_ledger_curated_v13.json"],
     "blocked_terms": list(BLOCK_TERMS),
+    "excluded_assets": list(EXCLUDE_TOKENS),
+    "silent_or_audio_status": silent_sources,
     "violations": bad,
     "status": "ALL_PASS" if not bad else "FAIL",
     "human_watch_through_required": True,
     "family_safe_guarantee": False,
     "not_a_legal_opinion": True,
+    "technical_qc_is_not_creative_approval": True,
 }
-(BASE / "review" / "validation_v13.json").write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
-print(json.dumps({"status": out["status"], "clips": len(assets), "violations": bad[:20]}, indent=2))
+(BASE / "review" / "validation_v13.json").write_text(
+    json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+print(json.dumps({"status": out["status"], "clips": len(clips),
+                  "violations": bad[:30]}, indent=2))
 sys.exit(0 if not bad else 1)
