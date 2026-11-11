@@ -33,8 +33,12 @@ not a reconstruction and must keep its on-screen illustrative disclosure if used
 ```
 node production/extinct-life/longform-mammoth/cinematic-rebuild/island-years/inspect.mjs
 node production/extinct-life/longform-mammoth/cinematic-rebuild/island-years/render-preview.mjs 900
-.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-years
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-thaw
 ```
+
+Only an excerpt is placed so far: `island-thaw` cuts 4.0–12.0 s of this render into
+140–148 s, where the storyboard asks for compressed seasons. The rest of the 30 s has
+no assigned slot yet and is **not** part of the measured coverage.
 
 `inspect.mjs` checks deterministic seeks, browser errors, three animals with the
 expected triangle count, a monotonic-ish snow/thaw/winter curve, and that sampled

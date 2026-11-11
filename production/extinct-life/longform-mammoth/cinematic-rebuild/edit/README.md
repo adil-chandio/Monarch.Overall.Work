@@ -26,12 +26,11 @@ is the 13-second closing motif, ending on a stylised footprint. Both carry their
 README with what is invented; neither has had continuous viewing.
 
 ```
-.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-years
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-thaw
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py final-crossing
 ```
 
-`island-thaw` is an 8-second excerpt (4.0–12.0 s) of the same 30-second render, placed
+`island-thaw` is an 8-second excerpt (4.0–12.0 s) of the 30-second seasonal render, placed
 at 140.0–148.0 s where the storyboard asks for compressed seasons; `island-approach`
 is trimmed to 10 s (130–140 s) so the two do not overlap. `check_coverage.py` now
 reports overlapping candidate windows instead of aborting, and measures coverage as

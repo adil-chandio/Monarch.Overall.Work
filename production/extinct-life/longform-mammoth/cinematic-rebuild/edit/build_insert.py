@@ -14,7 +14,7 @@ choices={
  'island-approach':('.cache/mammoth-island-approach/island-approach-motion-review-silent.mp4',None,130.,300),
  # The 8-second thaw/summer excerpt of the 30-second season study fits the
  # storyboard's compressed-season beat at 140-148s exactly.
- 'island-thaw':('.cache/mammoth-island-years/island-years-motion-review-silent.mp4',None,140.,240),
+ 'island-thaw':('.cache/mammoth-island-years/island-years-motion-review-silent.mp4',None,140.,240),  # 4.0-12.0 s of the 30 s render
  'genome-comparison':('.cache/mammoth-comparison-lab/comparison-lab-motion-review-silent.mp4',None,5182/30,600),
  'stream':('.cache/mammoth-stream-scene/stream-scene-motion-review-silent.mp4',None,354.,480),
  'hypothesis':('.cache/mammoth-icing-hypothesis/icing-motion-review-silent.mp4','e2ed9b28d179b12d7e7d54d5be3bcbb782d61c6638df3f3c7f64cb75229f6040',370.,420),
