@@ -1,0 +1,43 @@
+{
+  "status": "continuous review reel; NOT the final film, NOT picture lock",
+  "frames": 23882,
+  "seconds": 796.067,
+  "lufs": -16.2,
+  "true_peak_dbtp": -0.8,
+  "covered_seconds": 776.3333333333334,
+  "gap_count": 7,
+  "gaps_seconds": [
+    [
+      85.0,
+      86.0
+    ],
+    [
+      170.0,
+      172.73
+    ],
+    [
+      384.0,
+      391.0
+    ],
+    [
+      471.0,
+      473.0
+    ],
+    [
+      539.0,
+      540.0
+    ],
+    [
+      646.07,
+      652.0
+    ],
+    [
+      796.0,
+      796.07
+    ]
+  ],
+  "audio_source": "production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrack-draft/Narration-Score-DRAFT.m4a",
+  "audio_sha256": "434f2c344b428982edf8b00607b8361c4c45bec95da6ac5330c87428a45c3760",
+  "output_sha256": "479a30ae59ad2772e918f78da8100ac0390cff57695bb1f177b9e32edac27f63",
+  "note": "Gaps are labelled cards, not black. Audio is one continuous score; no section audio was mixed in. Not auditioned by a human."
+}
