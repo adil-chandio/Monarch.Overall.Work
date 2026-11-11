@@ -11,6 +11,7 @@ on:
       - arena/2b012328-monarch-overall-work
     paths:
       - "v13-caught-on-camera-trigger.txt"
+      - "v13-clips-trigger.txt"
 
 permissions:
   contents: write
@@ -69,9 +70,11 @@ jobs:
             research/caught_on_camera_v13/hook_windows_v13.json
             research/caught_on_camera_v13/review/contact_sheet_v13.jpg
             research/caught_on_camera_v13/review/candidate_pool_v13.json
+            research/caught_on_camera_v13/review/validation_v13.json
           if-no-files-found: warn
 
       - name: Commit small hook windows + rights ledger
+        if: always()
         run: |
           git config user.name "monarch-yt-bot"
           git config user.email "workadilchandio@gmail.com"
