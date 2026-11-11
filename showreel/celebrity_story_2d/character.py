@@ -174,55 +174,63 @@ def ink_regions(rgb, body, dark=0.22, grad=0.10, min_px=150):
     return lbl
 
 
-def limb_masks(lbl, skel, tol=-14.0, max_px=20000):
-    """Arm masks from the cel's own regions.
+def fill_holes(mask):
+    """Fill enclosed holes, so ink lines inside a region are not punched out."""
+    from collections import deque
+    m = np.asarray(mask, np.float32) > 0.5
+    h, w = m.shape
+    seen = np.zeros((h, w), bool)
+    q = deque()
+    for x in range(w):
+        for y in (0, h - 1):
+            if not m[y, x] and not seen[y, x]:
+                seen[y, x] = True
+                q.append((y, x))
+    for y in range(h):
+        for x in (0, w - 1):
+            if not m[y, x] and not seen[y, x]:
+                seen[y, x] = True
+                q.append((y, x))
+    while q:
+        y, x = q.popleft()
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            yy, xx = y + dy, x + dx
+            if 0 <= yy < h and 0 <= xx < w and not m[yy, xx] and not seen[yy, xx]:
+                seen[yy, xx] = True
+                q.append((yy, xx))
+    return (~seen).astype(np.float32)
 
-    A region belongs to an arm when it lies wholly on that side of the shoulder
-    and inside the arm's vertical span. That test alone rejects the jacket (it
-    crosses the chest), the trousers (they run below the hand) and the head.
+
+def limb_masks(lbl, skel, r_upper=31.0, r_fore=26.0, r_hand=30.0, soft=2.5):
+    """Arm masks as capsules along the arm bones.
+
+    The painted sleeve is a tapered tube, so a capsule along the bone is the
+    right shape for it: it follows the limb, keeps the hand, and — unlike a
+    region or a bounding box — cannot swallow the jacket's front panel, which
+    sits inboard of the shoulder joint.
     """
     j = skel.index; rest = skel.rest
     h, w = lbl.shape
+    px = _grid(w, h)
     out = {}
-    full = {}
     for s in ('l', 'r'):
-        sh = rest[j['shoulder_' + s]]
-        hand = rest[j['hand_' + s]]
-        y0 = min(sh[1], hand[1]) - 44
-        y1 = max(sh[1], hand[1]) + 58
-        keep = np.zeros((h, w), np.float32)
-        for rid in np.unique(lbl):
-            if rid <= 0:
-                continue
-            m = lbl == rid
-            ys, xs = np.nonzero(m)
-            if xs.size > max_px or xs.size == 0:
-                continue
-            if ys.min() < y0 or ys.max() > y1:
-                continue
-            # a limb's painted pixels stay outboard of the shoulder joint; the
-            # jacket panel always crosses inboard, so this one test separates
-            # them even when both are the same charcoal
-            if s == 'l' and xs.max() > rest[j['shoulder_l']][0] + tol:
-                continue
-            if s == 'r' and xs.min() < rest[j['shoulder_r']][0] + tol:
-                continue
-            keep[m] = 1.0
-        full[s] = keep.copy()
-        # a region can run down the jacket's front panel; only the part of it
-        # that actually lies over the arm belongs to the arm
-        px = _grid(w, h)
         pts = [rest[j['shoulder_' + s]], rest[j['elbow_' + s]],
                rest[j['wrist_' + s]], rest[j['hand_' + s]]]
-        d = np.full((h, w), 1e9, np.float32)
-        for a, b in ((pts[0], pts[1]), (pts[1], pts[2]), (pts[2], pts[3])):
+        cap = np.zeros((h, w), np.float32)
+        # the hand region is the palm plus fingers, which reach past the joint
+        tail = np.asarray(pts[3], np.float32) + \
+            (np.asarray(pts[3], np.float32) - np.asarray(pts[2], np.float32)) * 0.55
+        for (a, b), r in zip(((pts[0], pts[1]), (pts[1], pts[2]),
+                              (pts[2], pts[3]), (pts[3], tail)),
+                             (r_upper, r_fore, r_hand, r_hand * 0.78)):
             a = np.asarray(a, np.float32); b = np.asarray(b, np.float32)
             ab = b - a
             t = np.clip(((px - a) @ ab) / max(float(ab @ ab), 1e-6), 0, 1)
-            d = np.minimum(d, np.linalg.norm(px - (a + t[..., None] * ab), axis=-1))
-        keep *= np.clip((44.0 - d) / 5.0, 0, 1)
-        out[s] = _box_blur(keep, 1)
-    return out, {k: _box_blur(v, 1) for k, v in full.items()}
+            d = np.linalg.norm(px - (a + t[..., None] * ab), axis=-1)
+            cap = np.maximum(cap, np.clip((r - d) / soft, 0, 1))
+        keep = fill_holes(cap > 0.5)
+        out[s] = _box_blur(keep.astype(np.float32), 1)
+    return out
 
 
 # ------------------------------------------------------------------- the rig
@@ -257,7 +265,8 @@ class Character:
 
         lbl = ink_regions(rgb, self.body > 0.5)
         self.labels = lbl
-        mask, cut = limb_masks(lbl, self.skel)
+        mask = limb_masks(lbl, self.skel)
+        cut = {k: v.copy() for k, v in mask.items()}
         # Cut generously: the sleeve, its ink outline and a little margin, so no
         # pale rim of the old sleeve survives in the base.
         bodyf = self.body
@@ -271,7 +280,7 @@ class Character:
 
         # the hole an arm leaves inside the torso, which must be painted under
         torso = self._torso_weights_only()
-        self.hole = {s: np.clip(self.cut[s] * torso, 0, 1) for s in ('l', 'r')}
+        self.hole = {s: np.clip(self.cut[s], 0, 1) for s in ('l', 'r')}
 
         # the fill must never stand in for the sleeve itself: only the part of
         # the arm that lies behind the jacket is invisible at rest
@@ -281,7 +290,7 @@ class Character:
         self.undrawn = undrawn
         # only the part of the arm that lay *over the jacket* needs painting in:
         # the rest of the sleeve hangs outside the body and leaves nothing behind
-        self.hole = {s: np.clip(self.cut[s] * torso, 0, 1) for s in ('l', 'r')}
+        self.hole = {s: np.clip(self.cut[s], 0, 1) for s in ('l', 'r')}
         all_hole = np.clip(self.hole['l'] + self.hole['r'], 0, 1)
         if fill and all_hole.max() > 0.01:
             self.base_rgb = _jacket_fill(rgb, self.body, all_hole, self.skel)
@@ -292,7 +301,10 @@ class Character:
         # was painted in behind them. The sleeve itself lives only in the arm
         # layers, so the arm can never be drawn twice.
         sleeves = np.clip(self.cut['l'] + self.cut['r'], 0, 1)
-        self.base_alpha = np.clip(self.body - sleeves, 0, 1)
+        # The base keeps the full silhouette and the sleeve sits over it as its
+        # own layer. Subtracting the sleeve from the base instead left a hole
+        # wherever the fill did not reach, which is the rectangular notch.
+        self.base_alpha = self.body.copy()
 
 
         # colour pushed past each layer's edge, so a blended warp cannot sample
