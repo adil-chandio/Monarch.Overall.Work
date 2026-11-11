@@ -18,6 +18,29 @@ The scripts require the exact hash-pinned prior rendered clips in the ignored ca
 
 Builds perform full FFmpeg decode, frame count, peak and source-hash checks, but **not** continuous listening, audiovisual sign-off, science accuracy, rights clearance or assessment of storytelling quality. `check_coverage.py` counts a segment only if its QC matches the actual cache file. A complete duration is not equivalent to a finished film, and a partial duration must not be distributed as the completed documentary. See each scene's README and the soundtrack/music/asset READMEs for sources, rights uncertainties and required credits. Nothing authorizes YouTube publication.
 
+## Island seasons (85–115s) and closing crossing (783–796s)
+
+`island-years/` covers the opening of the island chapter: a 30-second continuous
+move through compressed seasons with three animals on invented terrain. `final-crossing/`
+is the 13-second closing motif, ending on a stylised footprint. Both carry their own
+README with what is invented; neither has had continuous viewing.
+
+```
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-years
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-thaw
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py final-crossing
+```
+
+`island-thaw` is an 8-second excerpt (4.0–12.0 s) of the same 30-second render, placed
+at 140.0–148.0 s where the storyboard asks for compressed seasons; `island-approach`
+is trimmed to 10 s (130–140 s) so the two do not overlap. `check_coverage.py` now
+reports overlapping candidate windows instead of aborting, and measures coverage as
+the union of verified windows.
+
+The island-seasons insert adds a low wind bed from the existing candidate recording;
+its provenance and the unverified master identity are recorded in
+`../ambience-sources/README.md`. It has not been auditioned.
+
 ## Continuous environment passage (354–384s)
 
 `build_environment.py` joins the 16-second water inference with the 14-second labelled rain-on-snow hypothesis and places the original narration/score continuously across the cut. A candidate Washington brook derivative fades out across the cut as a candidate Brazil rain derivative leads into the second shot. Neither recording is an Arctic field recording, and both are unreviewed and source-master equivalence remains unresolved. See `../ambience-sources/brook-candidate/README.md`, `../ambience-sources/README.md` and the scene READMEs. The 30-second joined file overlaps the two standalone insert windows and is **not additional coverage**. `check_environment_sync.py` compares three short decoded waveform windows against the source audio, which does not replace human review.
