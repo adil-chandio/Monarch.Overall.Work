@@ -1,0 +1,42 @@
+name: 2D animation research
+
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths:
+      - 'scripts/anim_research.py'
+      - '.github/workflows/anim-research.yml'
+permissions:
+  contents: write
+
+jobs:
+  study:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run the study
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          set -o pipefail
+          python scripts/anim_research.py 2>&1 | tail -40
+      - name: Publish findings
+        run: |
+          ls -lh audit-output/ || true
+          mkdir -p docs/research
+          cp audit-output/anim-research.json docs/research/ 2>/dev/null || true
+          cp audit-output/anim-research.md docs/research/ 2>/dev/null || true
+          cp audit-output/anim-research-summary.json docs/research/ 2>/dev/null || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/research
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record 2D animation research sample [skip ci]'
+          git push origin HEAD:arena/1f352b8e-monarch-overall-work
