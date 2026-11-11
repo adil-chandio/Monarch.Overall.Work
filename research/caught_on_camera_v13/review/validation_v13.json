@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-11T04:28:40Z",
-  "selection_version": "v13-final-20",
+  "generated_utc": "2026-11-11T04:37:12Z",
+  "selection_version": "v13-final-20-curated",
   "clips_checked": 20,
   "ledgers": [
     "rights_ledger_v13.json",
@@ -24,7 +24,6 @@
     "missile",
     "suicide",
     "terror",
-    "war",
     "military",
     "soldier",
     "combat",
@@ -83,8 +82,7 @@
     "brian thompson",
     "saratov",
     "homicide suspects",
-    "9/11",
-    "work accident"
+    "9/11"
   ],
   "excluded_assets": [
     "artemis",
@@ -144,52 +142,52 @@
     },
     {
       "id": "C11",
-      "file": "windows/hook_01.mp4",
+      "file": "windows/curated_11.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C12",
-      "file": "windows/hook_02.mp4",
+      "file": "windows/curated_12.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C13",
-      "file": "windows/hook_06.mp4",
+      "file": "windows/curated_13.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C14",
-      "file": "windows/hook_07.mp4",
+      "file": "windows/curated_14.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C15",
-      "file": "windows/hook_08.mp4",
+      "file": "windows/curated_15.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C16",
-      "file": "windows/hook_09.mp4",
+      "file": "windows/curated_16.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C17",
-      "file": "windows/hook_10.mp4",
+      "file": "windows/curated_17.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C18",
-      "file": "windows/hook_11.mp4",
+      "file": "windows/curated_18.mp4",
       "action": "none_native_audio_present"
     },
     {
       "id": "C19",
-      "file": "windows/hook_12.mp4",
-      "action": "silent_AAC_track_added_or_required"
+      "file": "windows/curated_19.mp4",
+      "action": "none_native_audio_present"
     },
     {
       "id": "C20",
-      "file": "windows/hook_20.mp4",
+      "file": "windows/curated_20.mp4",
       "action": "none_native_audio_present"
     }
   ],
