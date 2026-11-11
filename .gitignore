@@ -113,3 +113,12 @@ audio/ref-full.wav
 # V12 long-form render: transient build log + rebuildable work intermediates
 production/monarch-cam/replay_files_ep01_v12/build.log
 production/monarch-cam/work/replay_files_v12/
+
+# V13 long-form render: rebuildable intermediates and local review scratch
+production/monarch-cam/caught_on_camera_v13/segments/
+production/monarch-cam/caught_on_camera_v13/assets/frame_*.jpg
+production/monarch-cam/caught_on_camera_v13/assets/cur_check_*.jpg
+production/monarch-cam/caught_on_camera_v13/assets/v13_check_*.jpg
+production/monarch-cam/caught_on_camera_v13/assets/*CHECK.png
+production/monarch-cam/caught_on_camera_v13/PILOT_V13.mp4
+production/monarch-cam/caught_on_camera_v13/concat_*.txt

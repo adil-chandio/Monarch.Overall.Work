@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CAUGHT ON CAMERA / 20 Moments — V13</title>
+<style>
+  :root{--bg:#0a101a;--panel:#131c2b;--line:#24344c;--teal:#5bd6d0;--amber:#ffc06a;--white:#f4f8ff;--sub:#9fb2cc;--dim:#7f92ad}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--white);font:16px/1.55 "DejaVu Sans",Arial,sans-serif}
+  header{border-top:6px solid var(--teal);padding:22px 30px;border-bottom:1px solid var(--line)}
+  header b{font-size:22px;letter-spacing:.5px} header span{float:right;color:var(--teal);font-weight:700}
+  .wrap{max-width:1100px;margin:0 auto;padding:26px 22px 60px}
+  video{width:100%;background:#000;border:1px solid var(--line);border-radius:8px;display:block}
+  h1{font-size:30px;margin:26px 0 6px} .kick{color:var(--teal);font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase}
+  .sub{color:var(--sub)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:22px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .card b{display:block;color:var(--amber);font-size:22px} .card small{color:var(--dim)}
+  h2{font-size:19px;margin:34px 0 10px;border-left:4px solid var(--teal);padding-left:12px}
+  .links a{color:var(--teal);text-decoration:none;margin-right:18px} .links a:hover{text-decoration:underline}
+  .chapters{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .chapters button{background:var(--panel);color:var(--sub);border:1px solid var(--line);border-radius:6px;padding:7px 12px;font:13px "DejaVu Sans",Arial,sans-serif;cursor:pointer}
+  .chapters button:hover{border-color:var(--teal);color:var(--white)}
+  .note{background:#1a1220;border:1px solid #5a3340;border-radius:8px;padding:14px 16px;color:#ffd7d7;font-size:14px;margin-top:26px}
+  img{width:100%;border:1px solid var(--line);border-radius:8px;margin-top:10px}
+  footer{color:var(--dim);font-size:13px;margin-top:34px;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<header><b>CAUGHT ON CAMERA / 20 MOMENTS</b><span>MONARCH CAM · V13 · ENGLISH</span></header>
+<div class="wrap">
+  <div class="kick">Actual rendered long-form · local deliverable · V12 rejected and NOT used</div>
+  <h1>20 Moments The Lens Was Not Supposed To Catch</h1>
+  <div class="sub">20 different rights-documented clips · 3 rounds · English commentary · English captions · footage from frame 1</div>
+
+  <video id="v" controls preload="metadata" playsinline poster="thumbnail_v13.png">
+    <source src="CAUGHT_ON_CAMERA_V13_9min_EN.mp4" type="video/mp4"/>
+    Your browser cannot play this MP4. Use the direct file link below.
+  </video>
+  <div class="chapters" id="chapters"></div>
+  <script>
+    const chapters = [[0,"ROUND 1 / THE HOOK"],[180,"ROUND 2 / WHAT HAPPENED"],[360,"ROUND 3 / ONE MORE TIME"]];
+    const box = document.getElementById("chapters");
+    chapters.forEach(([t,label])=>{
+      const b=document.createElement("button"); b.textContent=label;
+      b.onclick=()=>{const v=document.getElementById("v"); v.currentTime=t; v.play();};
+      box.appendChild(b);
+    });
+  </script>
+
+  <div class="grid">
+    <div class="card"><b>9:00.00</b><small>540 s · 16,200 frames</small></div>
+    <div class="card"><b>960×540</b><small>30 fps · H.264 High</small></div>
+    <div class="card"><b>AAC 48k</b><small>stereo · −14.66 LUFS</small></div>
+    <div class="card"><b>16 / 16</b><small>technical QC checks PASS</small></div>
+    <div class="card"><b>20</b><small>distinct Commons clips</small></div>
+    <div class="card"><b>120</b><small>moving beats · 4.5 s max hold</small></div>
+    <div class="card"><b>111</b><small>English caption cues</small></div>
+    <div class="card"><b>10</b><small>English VO chunks</small></div>
+  </div>
+
+  <div class="links">
+    <a href="CAUGHT_ON_CAMERA_V13_9min_EN.mp4">↓ Download MP4 (63.6 MB)</a>
+    <a href="captions_v13.srt">↓ Captions SRT</a>
+    <a href="EDL_V13.json">↓ Actual EDL</a>
+    <a href="CREDITS_V13.md">↓ Credits / rights ledger</a>
+    <a href="QC_REPORT_V13.json">↓ QC JSON</a>
+    <a href="../../../research/caught_on_camera_v13/FORENSIC_REPORT_V13.md">↓ Niche forensic report</a>
+  </div>
+
+  <h2>What was built</h2>
+  <p>Frame 1 is real footage. No intro card, title card, method card, analytics essay, full-screen diagram or static slide. Every 3–5 seconds there is a cut, zoom, speed ramp or replay. Short English VO bursts sit over moving footage; native audio remains underneath. Small lower-thirds show the Wikimedia Commons source, round and clip counter.</p>
+
+  <h2>Contact sheet</h2>
+  <img src="CONTACT_SHEET_V13.png" alt="12 frames sampled from the final 9-minute video"/>
+
+  <div class="note">
+    Technical QC (16/16) is NOT creative approval, legal clearance, human sign-off or a family-safety guarantee. No YouTube upload, publish, monetisation change, legal opinion, guaranteed views, virality, perfection or NASA endorsement is claimed. A human must still watch the full motion/native audio and review each clip's rights page before any real publication. V12 remains rejected and is not presented here.
+  </div>
+
+  <footer>Monarch Cam V13 · English content · real YouTube Data API niche evidence · live Wikimedia Commons rights ledger · local render only.</footer>
+</div>
+</body>
+</html>

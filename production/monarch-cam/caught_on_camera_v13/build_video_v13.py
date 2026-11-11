@@ -32,7 +32,7 @@ FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-lin
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 SUB_STYLE = ("FontName=DejaVu Sans,FontSize=20,PrimaryColour=&H00FFFFFF,"
              "OutlineColour=&H00000000,BackColour=&H80000000,Bold=1,"
-             "Alignment=2,MarginV=48")
+             "Alignment=2,MarginV=110")
 
 FPS = 30
 W, H = 960, 540
@@ -224,7 +224,7 @@ def build_segment(e):
     rnd_file = OVERLAY_DIR / f"round_{e['round']}.txt"
     cnt_file = OVERLAY_DIR / f"counter_{e['beat']:03d}.txt"
     dt = (f"drawtext=fontfile={FONT}:textfile={src_file}:fontcolor=white:fontsize=22:"
-          f"box=1:boxcolor=black@0.45:boxborderw=8:x=40:y=h-92,"
+          f"box=1:boxcolor=black@0.45:boxborderw=8:x=40:y=h-70,"
           f"drawtext=fontfile={FONT}:textfile={rnd_file}:fontcolor=0x5BD6D0:fontsize=20:"
           f"box=1:boxcolor=black@0.45:boxborderw=8:x=40:y=40,"
           f"drawtext=fontfile={FONT}:textfile={cnt_file}:fontcolor=white:fontsize=20:"
@@ -306,10 +306,11 @@ def probe_final(path):
     a = re.search(r"Audio:\s*([^,]+).*?(\d+) Hz,\s*(stereo|mono)", txt, re.S)
     duration = (int(dur.group(1)) * 3600 + int(dur.group(2)) * 60 +
                 float(dur.group(3))) if dur else None
-    # decoded frame count
+    # decoded frame count via explicit progress output
     d = subprocess.run([FF, "-v", "error", "-i", str(path), "-map", "0:v:0",
-                        "-f", "null", "-"], capture_output=True, text=True)
-    fm = re.findall(r"frame=\s*(\d+)", d.stderr)
+                        "-progress", "pipe:1", "-nostats", "-f", "null", "-"],
+                       capture_output=True, text=True)
+    fm = re.findall(r"^frame=(\d+)", d.stdout, re.M)
     frame_count = int(fm[-1]) if fm else None
     # integrated loudness
     l = subprocess.run([FF, "-hide_banner", "-i", str(path), "-af",
