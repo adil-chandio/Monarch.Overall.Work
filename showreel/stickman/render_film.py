@@ -16,8 +16,8 @@ import sys
 
 import numpy as np
 
-from .film import FPS, H, W, Performer, build_shots
-from .render import render_time
+from .film import FPS, GAP, H, W, Performer, build_shots
+from .render import Sequence
 from .stage import World
 
 
@@ -29,13 +29,16 @@ def ffmpeg_exe():
         return "ffmpeg"
 
 
-def frames(shots, perf, world, *, scale=1.0):
-    """Yield every frame of the film as raw RGB bytes."""
-    total = sum(s.duration for s in shots)
+def frames(seq, *, scale=1.0):
+    """Yield every frame of the film as raw RGB bytes.
+
+    The sequence is stateful because dust is: a particle's path depends on the
+    frames before it, so the strip of time has to be walked in order.
+    """
+    total = sum(s.duration for s in seq.shots)
     n = int(round(total * FPS))
     for i in range(n):
-        t = i / FPS
-        frame = render_time(shots, perf, world, t)
+        frame = seq.advance(1.0 / FPS)
         if scale != 1.0:
             from PIL import Image
             h = int(round(H * scale))
@@ -47,8 +50,9 @@ def frames(shots, perf, world, *, scale=1.0):
 
 def render(out_path, *, preview=False, crf=None, preset="medium"):
     perf = Performer()
-    shots = build_shots(perf)
-    world = World("paper", seed=5)
+    shots, _jump = build_shots(perf)
+    world = World("paper", seed=5, gaps=[GAP])
+    seq = Sequence(shots, perf, world, seed=11)
 
     scale = 0.5 if preview else 1.0
     w = int(W * scale)
@@ -73,7 +77,7 @@ def render(out_path, *, preview=False, crf=None, preset="medium"):
     n_total = int(round(total * FPS))
     step = max(1, n_total // 20)
     try:
-        for i, buf in enumerate(frames(shots, perf, world, scale=scale)):
+        for i, buf in enumerate(frames(seq, scale=scale)):
             proc.stdin.write(buf)
             if i % step == 0:
                 print(f"  {i:4d}/{n_total} frames", flush=True)

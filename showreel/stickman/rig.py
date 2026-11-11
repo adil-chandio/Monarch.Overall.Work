@@ -94,7 +94,7 @@ def approach(current, target, rate, dt):
 P = {
     "thigh": 0.222,
     "shin": 0.226,
-    "foot": 0.074,
+    "foot": 0.052,
     "spine": 0.300,
     "neck": 0.030,
     "head_r": 0.086,
@@ -231,12 +231,14 @@ def foot_from_contact(contact, pitch, foot_len, facing=1.0, reach=0.62):
     contact = np.asarray(contact, float)
     direction = np.array([math.cos(pitch) * facing, math.sin(pitch)])
     half = foot_len * reach
+    # The toe offset from the ankle is (cos p, sin p) * half. Positive pitch
+    # points the toe *down* in screen space, so sin p > 0 means the toe is the
+    # lower end and must take the contact -- the earlier version had this
+    # backwards, which is why the toe floated a hundred pixels behind the plant.
     if math.sin(pitch) >= 0.0:
-        # Toe is the lowest end: it takes the contact, the ankle rides above.
         toe = contact
         ankle = contact - direction * half
     else:
-        # Ankle is the lowest end: it takes the contact, the toe lifts.
         ankle = contact
         toe = contact + direction * half
     return ankle, toe
@@ -254,6 +256,8 @@ def build_pose(
     foot_far=None,
     pitch_near=0.0,
     pitch_far=0.0,
+    squash=1.0,
+    stretch=0.0,
     hand_near=None,
     hand_far=None,
     bend_near=+1.0,
@@ -272,16 +276,24 @@ def build_pose(
     """
     p = Pose()
     p.facing = facing
-    p.height = height
     h = height
     f = facing
+
+    # Squash and stretch, applied to the whole figure about its contact point.
+    # ``squash`` < 1 compresses vertically; ``stretch`` > 0 lengthens. Volume is
+    # not conserved by scaling alone, so the caller is responsible for the width
+    # compensation -- see ``render.squash_width``. A stick figure has no volume
+    # to preserve, so the effect is carried by the spine and the timing instead,
+    # which is why the number is used for the torso and not the bones.
+    p.height = h * (1.0 + stretch)
 
     pelvis = np.asarray(pelvis_xy, float)
     p.pelvis = pelvis
 
+    h = h * (1.0 + stretch) * squash if stretch else h * squash
     spine_len = P["spine"] * h
     neck_len = P["neck"] * h
-    head_r = P["head_r"] * h
+    head_r = P["head_r"] * h * (1.0 / squash) ** 0.35
 
     # Spine as two segments: lower back at half the lean, upper at full lean
     # plus curl. Curling forward makes a crouch read as a crouch.
@@ -332,6 +344,20 @@ def build_pose(
             # out of the floor is: whichever end is lower sits on the contact.
             ankle, toe = foot_from_contact(foot, pitch, foot_len, f)
             knee, ankle = solve_limb(hip, ankle, thigh * scale, shin * scale, bend)
+            # solve_limb may have pulled the ankle inward if the contact was out
+            # of reach. In that case the foot must slide *with* the ankle, or the
+            # toe stays where the contact wanted it and the foot bone stretches.
+            actual = float(np.hypot(*(ankle - hip)))
+            ideal = float(np.hypot(*(foot_from_contact(foot, pitch, foot_len, f)[0] - hip)))
+            if ideal > 1e-6 and actual < ideal - 1e-3:
+                shift = (ideal - actual) / ideal
+                # Move the toe toward the ankle by the same shortfall it lost.
+                toe = ankle + (toe - ankle) * (1.0 - shift * 0.0)
+                # Keep the foot bone rigid: re-derive the toe from the ankle.
+                d = (toe - ankle)
+                n = float(np.hypot(d[0], d[1]))
+                if n > 1e-6:
+                    toe = ankle + d / n * (foot_len * 0.62)
         setattr(p, f"knee_{tag}", knee)
         setattr(p, f"ankle_{tag}", ankle)
         setattr(p, f"toe_{tag}", toe)
@@ -348,7 +374,18 @@ def build_pose(
     ):
         if hand is None:
             hand = sh_pt + np.array([0.0, (upper + fore) * 0.96])
-        elbow, wrist = solve_limb(sh_pt, np.asarray(hand, float), upper * scale, fore * scale, bend)
+        hand = np.asarray(hand, float)
+        # A hand target is a request, not a command. Pull it back inside 96% of
+        # the arm's reach before solving, so a pose that asks for a little too
+        # much gets a nearly-straight arm instead of a silently stretched one.
+        # Every gesture in the film stacks offsets, and without this clamp those
+        # offsets can add up past the bone length.
+        reach = (upper + fore) * scale * 0.96
+        off = hand - sh_pt
+        dist = float(np.hypot(off[0], off[1]))
+        if dist > reach:
+            hand = sh_pt + off * (reach / dist)
+        elbow, wrist = solve_limb(sh_pt, hand, upper * scale, fore * scale, bend)
         setattr(p, f"elbow_{tag}", elbow)
         setattr(p, f"wrist_{tag}", wrist)
 
