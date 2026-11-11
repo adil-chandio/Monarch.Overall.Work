@@ -4,6 +4,8 @@ A 60-second portrait film, 1080×1920 at 24 fps, animated **frame by frame**
 from painted cels. Same script, same narration takes, same cue timings as the
 3D v6 cut; every image is new.
 
+**Download:** https://github.com/adil-chandio/Monarch.Overall.Work/releases/download/celebrity-2d-film-60s/monarch-celebrity-story-2d-60s.mp4
+
 **Deliverable:** `deliverables/monarch-celebrity-story-2d-60s.mp4`
 (60.00 s, 1080×1920, 24 fps, H.264 High + AAC, 46.5 MB, −16.3 LUFS, −0.8 dBTP,
 tracked in Git like the other masters)
