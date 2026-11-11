@@ -54,8 +54,9 @@ all — and `genetic-strain` was reduced to the one shot that still has narratio
 own; `reversal-section` was superseded in that window (its file is kept for comparison
 but is no longer placed). Then the close was rebuilt: the ledger stops at 734 s and
 `verdict-close/` carries "a possibility is not a verdict" and "these categories do not
-have to compete" over the island, so the film's last twenty-five seconds are picture
-rather than a table.
+have to compete" over the island, running to the end of the film, so the last forty-nine
+seconds are picture rather than a table. `verdict-section` is no longer placed — its own
+wide shot of the same plain made the cut read as a repeat.
 
 | | before | now |
 |---|---|---|
@@ -83,6 +84,22 @@ to shorten a run.
 Until that footage exists this remains a work-in-progress assembly, and the plate share
 must not be presented as a stylistic choice. No distribution version may be cut from
 this timeline as it stands.
+
+## Two bugs the contact sheet caught
+
+Both were in rendered picture that had passed every structural check, and both were only
+visible by looking at frames:
+
+- **A magenta horizon.** The fog colour was interpolated as a packed 24-bit integer and
+  handed to `setHex()`. Between two greys the blended value lands on magenta, and the
+  horizon flashed purple for most of a second at every look change. Colour must be
+  interpolated per channel (`lerpHexRGB`). `coat-section`, `island-chapter` and
+  `verdict-section` still use the packed form; a pixel probe of the horizon across their
+  whole length shows no hue break, because their look tables interpolate between
+  near-identical greys. They were checked, not assumed.
+- **Half a mammoth.** In `island-hold` the leftmost animal sat on the frame edge, and its
+  body was cropped for most of a shot. `inspect.mjs` now projects every animal's root and
+  asserts it stays inside ±0.95 of the frame, so this cannot silently return.
 
 ## What is still missing
 
