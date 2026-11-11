@@ -5,6 +5,7 @@ on:
     branches: [arena/1f352b8e-monarch-overall-work]
     paths:
       - 'scripts/anim_research.py'
+      - 'scripts/anim_deep.py'
       - '.github/workflows/anim-research.yml'
 permissions:
   contents: write
@@ -26,7 +27,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -o pipefail
+          pip install -q yt-dlp
           python scripts/anim_research.py 2>&1 | tail -40
+          python scripts/anim_deep.py 2>&1 | tail -60
       - name: Publish findings
         run: |
           ls -lh audit-output/ || true
@@ -34,6 +37,8 @@ jobs:
           cp audit-output/anim-research.json docs/research/ 2>/dev/null || true
           cp audit-output/anim-research.md docs/research/ 2>/dev/null || true
           cp audit-output/anim-research-summary.json docs/research/ 2>/dev/null || true
+          cp audit-output/anim-deep.json docs/research/ 2>/dev/null || true
+          cp audit-output/anim-deep-summary.json docs/research/ 2>/dev/null || true
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add docs/research
