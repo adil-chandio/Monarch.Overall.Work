@@ -141,3 +141,20 @@ that is regenerated rather than written by hand:
 
 `reversal-section` and `verdict-section` are no longer placed. Both were superseded by
 native picture doing the same narrative work, and both files are kept for comparison.
+
+## Handing the reel over
+
+`.cache/mammoth-edit/serve.py` exists because `python -m http.server` answers a Range
+request with the whole 95 MB body and a `200`, which breaks seeking — a player has to
+re-download from zero every time you scrub. This server returns `206` with a correct
+`Content-Range`, so the reel can be watched and scrubbed in a browser.
+
+```bash
+.venv/bin/python .cache/mammoth-edit/serve.py 8123
+```
+
+Only `review-reel-continuous.mp4` is served; there is no directory listing. A plain URL
+downloads the file; appending `?inline=1` plays it in place.
+
+**Not for distribution.** The reel is a work-in-progress assembly and the mammoth rig's
+rights are unresolved; this exists to get a review copy to a reader, not to publish.
