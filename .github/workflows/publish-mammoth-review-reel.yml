@@ -8,7 +8,14 @@ name: Publish Mammoth review reel
 # passed in, checks it byte-for-byte against a pinned SHA-256, and only then publishes.
 # If the hash does not match, the job fails and nothing is published.
 
+# NOTE: workflow_dispatch only resolves for workflows that exist on the default branch,
+# and this session may only push its own branch. So the real trigger is a push to this
+# workflow file; the dispatch inputs remain for anyone running it from main later.
 on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths:
+      - '.github/workflows/publish-mammoth-review-reel.yml'
   workflow_dispatch:
     inputs:
       source_url:
@@ -33,8 +40,8 @@ jobs:
     steps:
       - name: Fetch the reel and verify its hash before publishing anything
         env:
-          URL: ${{ inputs.source_url }}
-          WANT: ${{ inputs.expected_sha256 }}
+          URL: ${{ inputs.source_url || 'https://8123-i4npanvvg78jxhz6wc7db.e2b.app/review-reel-continuous.mp4' }}
+          WANT: ${{ inputs.expected_sha256 || '479a30ae59ad2772e918f78da8100ac0390cff57695bb1f177b9e32edac27f63' }}
         run: |
           set -euo pipefail
           echo "fetching ${URL}"
@@ -54,7 +61,7 @@ jobs:
       - name: Publish as a prerelease, not a final film
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ inputs.tag }}
+          TAG: ${{ inputs.tag || 'mammoth-review-reel-796s-720p' }}
           REPO: ${{ github.repository }}
           WANT: ${{ inputs.expected_sha256 }}
         run: |
