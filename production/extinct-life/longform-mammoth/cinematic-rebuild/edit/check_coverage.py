@@ -23,6 +23,7 @@ segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json'
  {'name':'new-lead-section','start_frame':19560,'frames':1110,'qc':'new-lead-section-qc.json','file':'new-lead-section-incomplete-workprint.mp4'},
  {'name':'verdict-section','start_frame':22770,'frames':720,'qc':'verdict-section-qc.json','file':'verdict-section-incomplete-workprint.mp4'},
  {'name':'final-crossing','start_frame':23490,'frames':390,'qc':'final-crossing-qc.json','file':'final-crossing-incomplete-workprint.mp4'},
+ {'name':'trends-section','start_frame':17310,'frames':1562,'qc':'trends-section-qc.json','file':'trends-section-incomplete-workprint.mp4'},
  {'name':'coverage-section','start_frame':16710,'frames':600,'qc':'coverage-section-qc.json','file':'coverage-section-incomplete-workprint.mp4'},
  {'name':'genomic-gap','start_frame':18872,'frames':510,'qc':'genomic-gap-qc.json','file':'genomic-gap-incomplete-workprint.mp4'}]
 end=math.ceil(story['narration_duration_seconds']*30)
