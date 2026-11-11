@@ -1,0 +1,82 @@
+name: V13 Caught-on-Camera - acquire NEW rights-documented clips
+
+# Runner-side live Commons API discovery + download of genuinely NEW viral / CCTV /
+# security-camera / dashcam moments. For each, the most hooky 10-second window INSIDE the
+# clip is selected by objective motion+surprise scoring and normalized with native audio.
+# Only small hook-window MP4s + the rights ledger + a contact sheet are committed; raw
+# originals stay in the ignored work directory and are deleted after processing.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "v13-caught-on-camera-trigger.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v13-clip-acquisition-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: System tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg
+          ffmpeg -version | head -1
+
+      - name: Python deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy Pillow requests
+
+      - name: Live Commons API acquisition + objective hook-window selection
+        env:
+          V13_MAX_CLIPS: "20"
+        run: python research/caught_on_camera_v13/acquire_clips_v13.py
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "=== windows ==="
+          ls -la research/caught_on_camera_v13/windows/ 2>/dev/null | head -30 || true
+          echo "=== review ==="
+          ls -la research/caught_on_camera_v13/review/ 2>/dev/null | head -30 || true
+
+      - name: Upload clip evidence even if the commit fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v13-caught-on-camera-clips
+          path: |
+            research/caught_on_camera_v13/rights_ledger_v13.json
+            research/caught_on_camera_v13/hook_windows_v13.json
+            research/caught_on_camera_v13/review/contact_sheet_v13.jpg
+            research/caught_on_camera_v13/review/candidate_pool_v13.json
+          if-no-files-found: warn
+
+      - name: Commit small hook windows + rights ledger
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add research/caught_on_camera_v13/windows \
+                  research/caught_on_camera_v13/review \
+                  research/caught_on_camera_v13/rights_ledger_v13.json \
+                  research/caught_on_camera_v13/hook_windows_v13.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "feat(v13): new rights-documented caught-on-camera hook windows [skip ci]"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }} || echo "::warning::push failed; evidence is in the run artifact"

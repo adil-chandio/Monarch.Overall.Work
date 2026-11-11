@@ -1,0 +1,94 @@
+name: V13 Caught-on-Camera niche - real API forensic
+
+# Deep, 10x niche forensics using the EXISTING YOUTUBE_API_KEY Actions secret.
+# Arena token cannot use workflow_dispatch (403), so a marker-file push triggers it.
+# Research / benchmark only. Competitor videos are third-party copyrighted works,
+# NOT source clips. No clip is downloaded here, no rights chain, no clearance.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "v13-caught-on-camera-trigger.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  forensic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve key secret (presence only; value masked)
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then
+            echo "::error::no key secret resolved - cannot be a real API-lane run"
+            exit 1
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          echo "key resolved (${#KEY} chars); value never printed or stored"
+
+      - name: Runtime deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy pillow yt-dlp imageio-ffmpeg
+
+      - name: Prove the lane
+        run: python -m yt_intel lanes --json || true
+
+      - name: Eight caught-on-camera niche lanes (real search.list + videos.list)
+        continue-on-error: true
+        run: |
+          mkdir -p research/caught_on_camera_v13/api_evidence/lanes
+          run_lane () {
+            TOPIC="$1"; ORDER="$2"; SLUG="$3"
+            echo "=== lane: $TOPIC (order=$ORDER) ==="
+            python -m yt_intel topic "$TOPIC" --limit 30 --order "$ORDER" \
+              --json "research/caught_on_camera_v13/api_evidence/lanes/$SLUG.json" \
+              || echo "::warning::lane failed: $SLUG"
+          }
+          run_lane "caught on camera"                     viewCount co-core
+          run_lane "caught on camera compilation"         viewCount co-compilation
+          run_lane "unexpected moments caught on camera"  viewCount co-unexpected
+          run_lane "security camera viral moments"        viewCount co-cctv
+          run_lane "dashcam caught on camera"             viewCount co-dashcam
+          run_lane "funniest moments caught on camera"    viewCount co-funny
+          run_lane "wildlife caught on camera"            viewCount co-wildlife
+          run_lane "caught on camera fails compilation"   relevance co-fails
+          echo "=== produced ==="
+          ls -la research/caught_on_camera_v13/api_evidence/lanes/
+
+      - name: Channel statistics, millions-view video details, reverse teardowns
+        continue-on-error: true
+        run: python research/caught_on_camera_v13/build_channel_forensic_v13.py
+
+      - name: Upload API evidence even if the commit fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v13-caught-on-camera-api-evidence
+          path: research/caught_on_camera_v13/api_evidence/
+          if-no-files-found: warn
+
+      - name: Commit evidence
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add research/caught_on_camera_v13/api_evidence
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore(v13): real API caught-on-camera niche forensic [skip ci]"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }} || echo "::warning::push failed; evidence is in the run artifact"
