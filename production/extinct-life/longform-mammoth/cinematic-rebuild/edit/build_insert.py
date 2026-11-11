@@ -50,7 +50,7 @@ choices={
  # record" and the 21-genome count. NOTE: this renderer writes no manifest of its
  # own; a pinned manifest was recorded afterwards and build_insert still performs a
  # full decode and frame check. It is the weakest-verified insert in the folder.
- 'genome-record':('.cache/mammoth-genome-record/genome-record-motion-review.mp4','e074fc743d37e84cfa9df1ae34ada123f57a6b7d4f403751b4a1eab37f801230',455.0,480,480),
+ 'genome-record':('.cache/mammoth-genome-record/genome-record-motion-review.mp4','8aa59b8a9b5c5c199271f34a972f5e9892e342d79ed8292457ffa9ff9d9b43ea',455.0,480,480),
  'reversal-section':('.cache/mammoth-reversal-section/reversal-section-motion-review-silent.mp4',None,473.0,660,660),
  'people-section':('.cache/mammoth-people-section/people-section-motion-review-silent.mp4',None,391.0,600,600),
  'verdict-section':('.cache/mammoth-verdict-section/verdict-section-motion-review-silent.mp4',None,759.0,720,720),
