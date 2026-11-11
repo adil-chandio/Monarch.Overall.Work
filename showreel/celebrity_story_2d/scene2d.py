@@ -118,6 +118,7 @@ def load_library(target_h=1000):
         ('swalk0', 'hero_walk.png', 'green'),
         ('swalk1', 'suit_walk_b.png', 'green'),
         ('stalk0', 'suit_talk.png', 'green'),
+        ('sreach0', 'suit_reach.png', 'green'),
         ('girl0', 'girl.png', 'green'),
         ('extra0', 'extras.png', 'green'),
     ]
@@ -135,7 +136,7 @@ def load_library(target_h=1000):
         _CELS[name] = A.Cel(name, rgb, alpha)
     register_mouths([('idle0', 'talk0'), ('sidle0', 'stalk0'),
                      ('walk0', 'talk0'), ('walk1', 'talk0'),
-                     ('swalk0', 'stalk0')])
+                     ('swalk0', 'stalk0'), ('sreach0', 'stalk0')])
     return _CELS
 
 
@@ -150,14 +151,16 @@ def cels_get(name):
 
 def pose_frame(cel_a, cel_b, k, t, talk=None, mouth=None, seed=0.0):
     """Resolve one frame of a pose pair, plus breathing and lip sync."""
-    kk = min(1.0, k / 0.34)
-    if kk <= 0.001:
+    # Pose changes are cuts, not dissolves. Two separately drawn poses share
+    # no pixel correspondence — arms and legs sit in different places — so
+    # blending them pastes a second figure on screen. Drawn animation flips
+    # the drawing instead, and only the small idle motion is continuous.
+    if k < 0.5:
         rgb, alpha = cel_a.rgb, cel_a.alpha
-    elif kk >= 0.999:
-        rgb, alpha = cel_b.rgb, cel_b.alpha
+        kk = 0.0
     else:
-        rgb, alpha = A.warp_between(cel_a.rgb, cel_a.alpha,
-                                    cel_b.rgb, cel_b.alpha, kk)
+        rgb, alpha = cel_b.rgb, cel_b.alpha
+        kk = 1.0
 
 
     # lip sync: cut between the closed and open lip chart on the voice envelope

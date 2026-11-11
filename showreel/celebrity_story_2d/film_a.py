@@ -187,9 +187,9 @@ def shots(cels):
     add(40.12, 46.31, 'bg_barrier.png', (0.60, 0.54, 1.40),
         [dict(cel='girl0', x=0.34, y=0.978, h=0.49,
               keys=[(40.12, 'girl0'), (46.31, 'girl0')]),
-         dict(cel='sidle0', x=0.72, y=0.970, h=0.64, flip=True,
-              keys=[(40.12, 'sidle0'), (41.9, 'sidle0'), (43.4, 'stalk0'),
-                    (46.31, 'stalk0')], mouth=True)],
+         dict(cel='sreach0', x=0.76, y=0.970, h=0.64,
+              keys=[(40.12, 'sidle0'), (41.4, 'sreach0'), (45.4, 'sreach0'),
+                    (46.31, 'sidle0')], mouth=True)],
         cap='He reaches over the barrier, and for a second he is not a headline. '
             'He is just someone who listened.',
         grade=dict(lift=(.018, .016, .020), contrast=1.06, sat=.94, bloom=.34,
