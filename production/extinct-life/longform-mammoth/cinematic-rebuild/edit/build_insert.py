@@ -51,13 +51,17 @@ choices={
  # own; a pinned manifest was recorded afterwards and build_insert still performs a
  # full decode and frame check. It is the weakest-verified insert in the folder.
  'genome-record':('.cache/mammoth-genome-record/genome-record-motion-review.mp4','8aa59b8a9b5c5c199271f34a972f5e9892e342d79ed8292457ffa9ff9d9b43ea',455.0,480,480),
+ # Coverage and data quality: the room-through-different-windows analogy, drawn
+ # literally. 20 s, placed at 557.0 s on "ancient genomes differ in how much of
+ # their sequence is readable"; it stops before the two opposing trends at 589 s.
+ 'coverage-section':('.cache/mammoth-coverage-section/coverage-section-motion-review-silent.mp4',None,557.0,600,600),
  'reversal-section':('.cache/mammoth-reversal-section/reversal-section-motion-review-silent.mp4',None,473.0,660,660),
  'people-section':('.cache/mammoth-people-section/people-section-motion-review-silent.mp4',None,391.0,600,600),
  'verdict-section':('.cache/mammoth-verdict-section/verdict-section-motion-review-silent.mp4',None,759.0,720,720),
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|genome-record|reversal-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -81,6 +85,10 @@ if name=='stream':
  cmd+=['-ss','8','-i',str(brook)]
  filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS[base];[2:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.20,afade=t=in:st=0:d=0.8,afade=t=out:st=14.5:d=1.5[water];[base][water]amix=inputs=2:normalize=0:duration=first,alimiter=limit=0.82:level=0[a]'
 elif name=='island-approach':filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.88[a]'
+elif name=='coverage-section':
+ # The narration runs hot here (+/-0.4 dBTP before trimming). 0.80 gain keeps the
+ # section under the -1 dBTP guardrail; it is a local fix, not a mastering decision.
+ filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.80[a]'
 elif name=='island-years' or name=='island-thaw':
  # Low wind bed under the score; derivative identity/rights reviewed only by README.
  wind=root/'production/extinct-life/longform-mammoth/cinematic-rebuild/ambience-sources/felix-blume-wind-muges.ogg'
@@ -93,5 +101,5 @@ subprocess.run(cmd,check=True)
 r=subprocess.run([ff,'-hide_banner','-i',str(out),'-filter_complex','ebur128=peak=true','-f','null','-'],capture_output=True,text=True,check=True)
 f=re.findall(r'frame=\s*(\d+)',r.stderr);peak=re.findall(r'Peak:\s*(-?[\d.]+) dBFS',r.stderr);lu=re.findall(r'I:\s*(-?[\d.]+) LUFS',r.stderr)
 if not f or int(f[-1])!=frames or not peak or float(peak[-1])>-1 or not lu:raise SystemExit('Decode/frame/peak failure')
-report={'status':'incomplete separate editorial insert, not final','narration_offset_seconds':offset,'frames':frames,'fps':30,'lufs':float(lu[-1]),'true_peak_dbtp':float(peak[-1]),'input_sha256':expected,'audio_sha256':digest(audio),'brook_sha256':digest(brook) if brook else None,'wind_sha256':digest(root/'production/extinct-life/longform-mammoth/cinematic-rebuild/ambience-sources/felix-blume-wind-muges.ogg') if name in ('island-years','island-thaw') else None,'note':'island-approach has temporary 0.88 gain to limit AAC true peak; all clips need final continuous mix','output_sha256':digest(out)}
+report={'status':'incomplete separate editorial insert, not final','narration_offset_seconds':offset,'frames':frames,'fps':30,'lufs':float(lu[-1]),'true_peak_dbtp':float(peak[-1]),'input_sha256':expected,'audio_sha256':digest(audio),'brook_sha256':digest(brook) if brook else None,'wind_sha256':digest(root/'production/extinct-life/longform-mammoth/cinematic-rebuild/ambience-sources/felix-blume-wind-muges.ogg') if name in ('island-years','island-thaw') else None,'gain_note':('0.80 local gain to meet the true-peak guard' if name=='coverage-section' else ('0.88 local gain to meet the true-peak guard' if name=='island-approach' else None)),'note':'island-approach has temporary 0.88 gain to limit AAC true peak; all clips need final continuous mix','output_sha256':digest(out)}
 (out.parent/f'{name}-qc.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
