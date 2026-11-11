@@ -52,20 +52,33 @@ jobs:
           ffmpeg -i deliverables/monarch-celebrity-story-2d-60s.mp4 -af loudnorm=print_format=summary -f null - 2>&1 | grep -E 'Input Integrated|Input True Peak|Input LRA' || true
           ls -lh deliverables/monarch-celebrity-story-2d-60s.mp4 deliverables/monarch-celebrity-story-2d-60s-preview.mp4
       - name: Publish blob identifiers
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -x
           python showreel/celebrity_story_2d/publish_blob.py \
             deliverables/monarch-celebrity-story-2d-60s.mp4 \
             deliverables/monarch-celebrity-story-2d-60s.json
           python showreel/celebrity_story_2d/publish_blob.py \
             deliverables/monarch-celebrity-story-2d-60s-preview.mp4 \
             deliverables/monarch-celebrity-story-2d-60s-preview.json
+          cat deliverables/monarch-celebrity-story-2d-60s.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add deliverables/monarch-celebrity-story-2d-60s.json deliverables/monarch-celebrity-story-2d-60s-preview.json
           git commit -m 'Record 2D film render blobs [skip ci]'
           git push origin HEAD:arena/1f352b8e-monarch-overall-work
+      - name: Keep the render as a workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 2d-film-${{ github.run_id }}
+          path: |
+            deliverables/monarch-celebrity-story-2d-60s.mp4
+            deliverables/monarch-celebrity-story-2d-60s-preview.mp4
+          retention-days: 14
+          if-no-files-found: warn
       - name: Publish failure detail
         if: failure()
         run: |
