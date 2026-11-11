@@ -53,6 +53,7 @@ class Face:
     """
 
     blink: float = 0.0          # 0 open, 1 shut
+    wink: float = 0.0           # closes the near eye only -- a wink, not a blink
     eye_open: float = 1.0       # aperture multiplier; <1 is a suspicious squint
     pupil_a: float = 0.0        # where the eyes look, +forward  (-1..1)
     pupil_b: float = 0.0        # +down (-1..1)
@@ -220,8 +221,12 @@ def draw_face(ink_mask, paper_mask, pose, face, *, value=255, ss=1):
 
     for i, (ea, ew, eh, tint) in enumerate(eyes):
         cx, cy = _p(c, hr, fwd, dwn, ea, eye_b)
+        # A wink shuts the near eye and leaves the far one open. It goes through
+        # the same shut branch as a blink, so a wink is an eyelid arc and not a
+        # scrunched-up dot: the two eyes then read as one face doing one thing.
+        ap_i = ap * (1.0 - min(1.0, max(0.0, face.wink))) if i == 0 else ap
 
-        if ap < 0.075:
+        if ap_i < 0.075:
             # Shut: an arc, not a bar. A straight line reads as a drawn-on eyelid.
             hw = ew * hr
             inkmod.stroke(d_ink, (cx - hw * 0.92, cy + hr * 0.026),
@@ -231,7 +236,7 @@ def draw_face(ink_mask, paper_mask, pose, face, *, value=255, ss=1):
             continue
 
         rw = ew * hr
-        rh = eh * hr * min(1.0, ap) ** 0.85
+        rh = eh * hr * min(1.0, ap_i) ** 0.85
 
         if face.squint > 0.5:
             # The happy arch: two strokes meeting at a peak above the eye.

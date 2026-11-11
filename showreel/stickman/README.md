@@ -26,11 +26,12 @@ parallax is a consequence of geometry rather than a per-layer effect.
 |---|---|---|
 | `monarch-stickman-1080x1920.mp4` | `render_film` | 11.5 s. One figure crosses a hole. |
 | `monarch-duel-1080x1920.mp4` | `duel_film` | 4.75 s. Two figures, a shove, a fall. |
-| `monarch-pov-stadium-1080x1920.mp4` | `pov_film` | 90 s. A stadium, a face, and a silence. |
+| `monarch-pov-stadium-v2-1080x1920.mp4` | `pov_film` + `pov_audio` | 90 s, ten shots, sound. A stadium, a face, and a silence. |
 
-The third one changes two things the first two could not: the head can hold an
-expression, and the world can be a specific place. See `face.py` and
-`stadium.py`, and `POV_RELEASE_NOTES.md` for what it does not do.
+The third one changes three things the first two could not: the head can hold an
+expression, the world can be a specific place, and the silence can be *heard*
+because there is a mix under the picture. See `face.py`, `stadium.py`,
+`pov_audio.py`, and `POV_V2_RELEASE_NOTES.md` for what it does not do.
 
 ## Verification
 

@@ -100,9 +100,31 @@ def ball_shadow(frame, at, radius, proj, z=1.0):
 BACKDROP_SCALE = 0.5
 
 
+def _nudge(frame, dx, dy):
+    """Translate a frame by whole pixels, extending its edges.
+
+    Camera shake, not camera damage: rolling the array would have wrapped the
+    bright near touchline round into the dark stand, which reads as a glitch.
+    """
+    if dx == 0 and dy == 0:
+        return frame
+    f = frame
+    if dy > 0:
+        f = np.concatenate([np.repeat(f[:1], dy, axis=0), f[:-dy]], axis=0)
+    elif dy < 0:
+        f = np.concatenate([f[-dy:], np.repeat(f[-1:], -dy, axis=0)], axis=0)
+    if dx > 0:
+        f = np.concatenate([np.repeat(f[:, :1], dx, axis=1), f[:, :-dx]], axis=1)
+    elif dx < 0:
+        f = np.concatenate([f[:, -dx:], np.repeat(f[:, -1:], -dx, axis=1)], axis=1)
+    return f
+
+
 def frame_at(pov, t):
     """One complete frame of the film at story time ``t``."""
     s = pov.state(t)
+    if s.get("blank"):
+        return np.zeros((H, W, 3), np.float32)
     c = s["cam"]
     proj = Projector(W, H, cam_x=c["x"], cam_y=c["rise"], eye=c["eye"],
                      zoom=c["zoom"], tilt=c["tilt"])
@@ -120,11 +142,14 @@ def frame_at(pov, t):
     stad = s["stadium"]
     stad.set_palette(s["palette"])
 
-    # The net keeps moving for a second and a half after the ball arrives.
+    # The net keeps moving for a second and a half after the ball arrives, driven
+    # by the same clock the ball is on -- so in the replay, where that clock runs at
+    # a fifth of speed, the net wobbles slowly too, because it is the same event.
     wobble = 0.0
-    if s["shot"] == "turn":
-        wt = s["t"] - 71.0
-        if wt < 1.8:
+    se = s.get("strike_e")
+    if se is not None:
+        wt = se - pov.FLIGHT
+        if 0.0 <= wt < 1.8:
             wobble = 260.0 * math.exp(-2.1 * wt) * math.sin(23.0 * wt)
 
     frame = stadium_paint(stad, proj_low, churn=s["churn"], wobble=wobble)
@@ -164,6 +189,14 @@ def frame_at(pov, t):
 
     frame = rim_light(frame, proj, stad, strength=0.34)
     frame = air_and_grade(frame, stad, zoom=c["zoom"], grain_seed=int(t * FPS))
+
+    # Contact: two frames of white over an almost-black stadium, and a camera that
+    # rings for a third of a second afterwards.
+    flash = float(s.get("flash") or 0.0)
+    if flash > 0.0:
+        frame = frame + (1.0 - frame) * min(1.0, flash) * 0.92
+    dx, dy = s.get("shake") or (0.0, 0.0)
+    frame = _nudge(frame, int(round(dx)), int(round(dy)))
     return np.clip(frame, 0.0, 1.0)
 
 

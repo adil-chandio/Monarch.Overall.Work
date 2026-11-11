@@ -17,6 +17,8 @@ deliverables/*.mp4
 !deliverables/monarch-rig-proof-6s.mp4
 !deliverables/monarch-pov-stadium-1080x1920.mp4
 !deliverables/monarch-pov-stadium-preview.mp4
+!deliverables/monarch-pov-stadium-v2-1080x1920.mp4
+!deliverables/monarch-pov-stadium-v2-preview.mp4
 
 
 # transient clone workspace for skill vendoring
@@ -26,3 +28,4 @@ deliverables/*.mp4
 .cache/yt-intel/
 .harvest/
 public/yt-intel/runs.jsonl
+deliverables/*.wav

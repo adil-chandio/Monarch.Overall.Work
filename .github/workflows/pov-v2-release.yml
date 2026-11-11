@@ -1,0 +1,45 @@
+name: Publish POV stadium v2 (second cut, with sound)
+
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths:
+      - '.github/workflows/pov-v2-release.yml'
+      - 'showreel/stickman/POV_V2_RELEASE_NOTES.md'
+      - 'deliverables/monarch-pov-stadium-v2-1080x1920.mp4'
+      - 'deliverables/monarch-pov-stadium-v2-preview.mp4'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+          lfs: false
+
+      - name: Confirm the masters are present
+        run: |
+          ls -l deliverables/monarch-pov-stadium-v2-1080x1920.mp4
+          ls -l deliverables/monarch-pov-stadium-v2-preview.mp4
+          ls -l deliverables/monarch-pov-stadium-v2-contact-sheet.png
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete stickman-pov-stadium-v2 --yes --cleanup-tag 2>/dev/null || true
+          gh release create stickman-pov-stadium-v2 \
+            deliverables/monarch-pov-stadium-v2-1080x1920.mp4 \
+            deliverables/monarch-pov-stadium-v2-preview.mp4 \
+            deliverables/monarch-pov-stadium-v2-contact-sheet.png \
+            --title "Monarch - POV: the stadium goes quiet, second cut (90 s, sound, 1080x1920)" \
+            --notes-file showreel/stickman/POV_V2_RELEASE_NOTES.md \
+            --target arena/1f352b8e-monarch-overall-work
+          echo '--- assets:'
+          gh release view stickman-pov-stadium-v2 --json assets \
+            -q '.assets[] | .name + "  " + (.size|tostring) + "  " + .state'

@@ -2,10 +2,11 @@
 
 Three layers, and no more than three:
 
-    0.0 -  6.8   the hook      POV: YOU'RE RONALDO / One shot. Everyone's watching.
-   83.6 - 90.0   the question  Whose POV should we animate next?
-    0.0 -  6.8   the honesty   An imagined scenario, not a real match.
-   83.6 - 90.0
+    0.35 - 5.40  the hook      POV: YOU'RE RONALDO / One shot. Everyone's watching.
+   82.60 - 90.0  the question  Whose POV should we animate next?
+    0.0 -  5.40  the honesty   An imagined scenario, not a real match.
+   82.60 - 90.0
+   49.30 - 57.6  the bug       REPLAY / 0.2 SPEED
 
 The hook is the topic as the research desk wrote it down; the question is what the
 film actually asks, and it asks it plainly instead of promising a part two. The
@@ -41,9 +42,10 @@ from .film import H, W
 
 # --- timing ---------------------------------------------------------------
 
-HOOK = (0.0, 6.8)
-CLOSE = (83.6, 90.0)
-RIGHTS = ((0.00, 6.8), (83.6, 90.0))   # exactly the cards' windows
+HOOK = (0.35, 5.40)
+CLOSE = (82.60, 90.0)
+RIGHTS = ((0.00, 5.40), (82.60, 90.0))   # every frame a card is up
+REPLAY = (49.30, 57.60)
 FADE = 0.45
 
 # --- type -----------------------------------------------------------------
@@ -97,6 +99,15 @@ def _tracked(d, y, text, f, tracking, fill, shadow=None):
     return total
 
 
+def _tracked_n(d, y, text, f, tracking, fill, x=None):
+    """Tracking from a given x, left-aligned, for the corner bug."""
+    x = 88.0 if x is None else x
+    for ch in text:
+        d.text((x, y), ch, font=f, fill=fill)
+        x += f.getlength(ch) + tracking
+    return x
+
+
 def _centred(d, y, text, f, fill, shadow=None):
     x = (W - f.getlength(text)) * 0.5
     if shadow is not None:
@@ -135,12 +146,21 @@ def _card(name):
         _rule(d, 540)
 
     elif name == "close":
-        layer = _shade(layer, 1436, 1868, peak=120, ramp=0.26)
-        d = ImageDraw.Draw(layer)
-        _centred(d, 1556, "Whose POV should we", font(50, True),
-                 (247, 244, 236, 255), shadow=(3, (0, 0, 0, 130)))
-        _centred(d, 1622, "animate next?", font(50, True),
-                 (247, 244, 236, 255), shadow=(3, (0, 0, 0, 130)))
+        # The last twelve seconds are black, so this card is centred rather than
+        # parked in a lower third: a lower third over nothing looks like a mistake.
+        _tracked(d, 836, "WHOSE POV", font(64, True), 6.0, (247, 244, 236, 255))
+        _centred(d, 936, "should we animate next?", font(46, False),
+                 (238, 234, 226, 240))
+        _rule(d, 1032, width=180, alpha=90)
+
+    elif name == "replay":
+        # A broadcast bug, not a caption: the frame stays the picture's.
+        d.rounded_rectangle([40, 62, 250, 152], radius=6, fill=(4, 6, 10, 108))
+        d.ellipse([58, 78, 74, 94], outline=(232, 226, 210, 210), width=2)
+        d.ellipse([63, 83, 69, 89], fill=(214, 74, 62, 235))
+        _tracked_n(d, 78, "REPLAY", font(30, True), 3.0, (242, 238, 228, 235))
+        d.text((100, 116), "0.2 SPEED", font=font(20, False),
+               fill=(226, 222, 212, 170))
 
     elif name == "rights":
         # The line has to be readable over floodlit grass and over a close-up
@@ -185,17 +205,15 @@ def _paste(img, layer, alpha):
 
 def overlay(img, t):
     """Composite the film's words onto an RGB frame in place."""
-    hook = _ramp(t, HOOK[0], HOOK[1])
-    _paste(img, _card("hook"), hook)
-
-    close = _ramp(t, CLOSE[0], CLOSE[1])
-    _paste(img, _card("close"), close)
-
-    rights = max(_ramp(t, a, b) for a, b in RIGHTS)
-    _paste(img, _card("rights"), rights)
+    _paste(img, _card("hook"), _ramp(t, HOOK[0], HOOK[1]))
+    _paste(img, _card("close"), _ramp(t, CLOSE[0], CLOSE[1]))
+    _paste(img, _card("replay"), _ramp(t, REPLAY[0], REPLAY[1], fade=0.25) * 0.92)
+    _paste(img, _card("rights"), max(_ramp(t, a, b) for a, b in RIGHTS))
     return img
 
 
 def active(t):
     """True when at least one layer is on screen -- lets callers skip work."""
-    return (_ramp(t, HOOK[0], HOOK[1]) > 0.0 or _ramp(t, CLOSE[0], CLOSE[1]) > 0.0)
+    return (_ramp(t, HOOK[0], HOOK[1]) > 0.0
+            or _ramp(t, CLOSE[0], CLOSE[1]) > 0.0
+            or _ramp(t, REPLAY[0], REPLAY[1], fade=0.25) > 0.0)
