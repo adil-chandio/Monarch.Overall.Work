@@ -33,10 +33,15 @@ choices={
  'genome-comparison':('.cache/mammoth-comparison-lab/comparison-lab-motion-review-silent.mp4',None,5182/30,600),
  'stream':('.cache/mammoth-stream-scene/stream-scene-motion-review-silent.mp4',None,354.,480),
  'hypothesis':('.cache/mammoth-icing-hypothesis/icing-motion-review-silent.mp4','e2ed9b28d179b12d7e7d54d5be3bcbb782d61c6638df3f3c7f64cb75229f6040',370.,420),
+ # The verdict needs one sustained landscape, not another montage of evidence.
+ # 24 s, placed at 759.0 s under "a dramatic clue is not the same thing as a cause"
+ # and the conservation/devastating-final-question lines; the closing crossing then
+ # begins at 783.0 s.
+ 'verdict-section':('.cache/mammoth-verdict-section/verdict-section-motion-review-silent.mp4',None,759.0,720,720),
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()

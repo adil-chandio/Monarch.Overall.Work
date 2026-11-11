@@ -18,6 +18,7 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `coat-section/` | 34 s, five shots (macro wool texture, close flank, low legs, herd into low sun, exit hold). 24 s placed at 250 s. |
 | `island-years/` | 30 s compressed-season study. An 8 s excerpt is available as an alternate; not currently placed. |
 | `island-approach/` | 18 s walk-and-forage scene; 10 s placed at 130 s. |
+| `verdict-section/` | 24 s sustained landscape for the closing argument; placed at 759 s. |
 | `final-crossing/` | 13 s closing motif ending on a stylised footprint; placed at 783 s. |
 | `comparison-lab/` | 20 s sample-comparison workbench; placed at 172.7 s. |
 | `stream-scene/`, `icing-hypothesis/` | 16 s stream and 14 s labelled rain-on-snow hypothesis; placed at 354 s and 370 s. |
