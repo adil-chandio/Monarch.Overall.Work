@@ -144,17 +144,19 @@ native picture doing the same narrative work, and both files are kept for compar
 
 ## Handing the reel over
 
-`.cache/mammoth-edit/serve.py` exists because `python -m http.server` answers a Range
+`edit/serve_review_reel.py` exists because `python -m http.server` answers a Range
 request with the whole 95 MB body and a `200`, which breaks seeking — a player has to
 re-download from zero every time you scrub. This server returns `206` with a correct
 `Content-Range`, so the reel can be watched and scrubbed in a browser.
 
 ```bash
-.venv/bin/python .cache/mammoth-edit/serve.py 8123
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/serve_review_reel.py 8123
 ```
 
-Only `review-reel-continuous.mp4` is served; there is no directory listing. A plain URL
-downloads the file; appending `?inline=1` plays it in place.
+Only `review-reel-continuous.mp4` is served, from an explicit allowlist — there is no
+directory listing and no path traversal. A plain URL downloads the file; appending
+`?inline=1` plays it in place instead. It resolves `.cache/mammoth-edit/` from the repo
+root, so the script is committed but the 95 MB reel never is.
 
 **Not for distribution.** The reel is a work-in-progress assembly and the mammoth rig's
 rights are unresolved; this exists to get a review copy to a reader, not to publish.
