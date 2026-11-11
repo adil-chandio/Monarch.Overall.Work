@@ -42,17 +42,24 @@ REFERENCE_ZOOM = 1.75
 
 # ----------------------------------------------------------------- the figure
 
-def project_pose(pose, proj):
-    """Map every joint of a world-space pose into frame pixels."""
+def project_pose(pose, proj, z=1.0):
+    """Map every joint of a world-space pose into frame pixels.
+
+    ``z`` is the depth ratio the body stands at. A figure at the reference plane
+    is z=1; a figure 40 m away with D0=14 is z=2.86 and comes out correspondingly
+    smaller, which is what keeps him the right size against a goal that is further
+    still.
+    """
     out = Pose()
     out.tone = pose.tone
     out.facing = pose.facing
     out.height = pose.height * proj.zoom
     out.head_r = pose.head_r * proj.zoom
+    out.head_ang = getattr(pose, "head_ang", 0.0)
     out.hand_len = pose.hand_len * proj.zoom
     out.foot_len = pose.foot_len * proj.zoom
     for name, val in pose.joints():
-        setattr(out, name, proj.point(val))
+        setattr(out, name, proj.point(val, z))
     return out
 
 
@@ -72,25 +79,32 @@ _WIDTH = {
 _FAR = 0.50
 
 
-def ink(pose_screen, *, colour=None, size=None, seed=0):
+def ink(pose_screen, *, colour=None, size=None, seed=0, face=None, paper=None):
     """Rasterise a figure. Returns a float RGBA array.
 
     Two treatments, both pure geometry and neither a sprite:
 
-    ``ink``      a line drawing -- tapered strokes, a ring for the head, one dot
-                 for the eye. This is the protagonist.
+    ``ink``      a line drawing -- tapered strokes, a ring for the head, and
+                 either one dot for an eye or, when ``face`` is given, a full
+                 drawn expression. This is the protagonist.
     ``silhouette`` a filled solid with a rim of paper, so a second figure reads
                  as an opposing shape even at a glance and never competes with
                  the line figure for attention.
+
+    ``face`` is a ``face.Face``; ``paper`` is the colour the head is filled with.
+    Passing neither keeps the v1--v3 behaviour exactly, which is what lets the
+    older films keep rendering from the same module.
     """
     if colour is None:
         colour = (0.078, 0.072, 0.086)
     if getattr(pose_screen, "tone", "ink") == "silhouette":
         return _silhouette(pose_screen, colour=colour, size=size)
-    return _ink_lines(pose_screen, colour=colour, size=size)
+    return _ink_lines(pose_screen, colour=colour, size=size,
+                      face=face, paper=paper)
 
 
-def _ink_lines(pose_screen, *, colour=(0.078, 0.072, 0.086), size=None):
+def _ink_lines(pose_screen, *, colour=(0.078, 0.072, 0.086), size=None,
+               face=None, paper=None):
     """The line-drawn treatment."""
     W_, H_ = size if size is not None else (W, H)
     wi, hi = W_ * inkmod.SS, H_ * inkmod.SS
@@ -99,6 +113,15 @@ def _ink_lines(pose_screen, *, colour=(0.078, 0.072, 0.086), size=None):
     near = Image.new("L", (wi, hi), 0)
     d_far = ImageDraw.Draw(far)
     d_near = ImageDraw.Draw(near)
+    # A paper rim under every stroke, drawn only for the faced figure. Against a
+    # stadium the torso is a 17 px line under a 170 px head, and among two thousand
+    # other marks it stops reading as a body. The rim is the same trick a
+    # cut-out animation uses: the character carries its own piece of paper.
+    halo = None
+    d_halo = None
+    if face is not None:
+        halo = Image.new("L", (wi, hi), 0)
+        d_halo = ImageDraw.Draw(halo)
 
     scale = pose_screen.height
 
@@ -109,29 +132,100 @@ def _ink_lines(pose_screen, *, colour=(0.078, 0.072, 0.086), size=None):
         inkmod.stroke(draw, np.asarray(p0) * inkmod.SS, np.asarray(p1) * inkmod.SS,
                       width, 255,
                       taper_start=0.62, taper_end=0.60, bulge=0.13)
+        if d_halo is not None:
+            inkmod.stroke(d_halo, np.asarray(p0) * inkmod.SS,
+                          np.asarray(p1) * inkmod.SS, width * 2.15, 255,
+                          taper_start=0.80, taper_end=0.78, bulge=0.05)
 
     # Head: a proper ring, heavier at the bottom, plus the eye.
     hr = pose_screen.head_r * inkmod.SS
     cx, cy = pose_screen.head * inkmod.SS
     rim = max(1.0, _WIDTH["spine"] * scale * 0.5 * inkmod.SS * 1.10)
+
+    if face is None:
+        inkmod.ring(d_near, (cx, cy), hr, rim, 255)
+        eye_r = max(1.0, hr * 0.072)
+        ex = cx + pose_screen.facing * hr * 0.40
+        ey = cy - hr * 0.10
+        inkmod.disc(d_near, (ex, ey), eye_r, 255)
+
+        a_near = np.asarray(near.resize((W_, H_), Image.LANCZOS), np.float32) / 255.0
+        a_far = np.asarray(far.resize((W_, H_), Image.LANCZOS), np.float32) / 255.0
+        alpha = np.maximum(a_near, a_far * _FAR)
+        rgba = np.zeros((H_, W_, 4), np.float32)
+        rgba[..., 0] = colour[0]
+        rgba[..., 1] = colour[1]
+        rgba[..., 2] = colour[2]
+        rgba[..., 3] = np.clip(alpha, 0.0, 1.0)
+        return rgba
+
+    # ---- the faced head ------------------------------------------------
+    # The head becomes a filled shape living *on* the backdrop rather than a
+    # transparent ring, because a face needs paper behind it. That means three
+    # masks composited in a fixed order, not one alpha channel:
+    #
+    #   fill   the head interior, paper                            (opaque)
+    #   ink    the face's dark features, over the fill
+    #   glint  paper returned *on top of* the ink (eye shine, teeth)
+    #
+    # All three come out of one call so the features and the shape cannot drift
+    # apart, and the head fill is drawn one rim-half inside the ring so the ring
+    # survives with its full weight.
+    fill = Image.new("L", (wi, hi), 0)
+    d_fill = ImageDraw.Draw(fill)
+    feat = Image.new("L", (wi, hi), 0)
+    d_feat = ImageDraw.Draw(feat)
+    glint = Image.new("L", (wi, hi), 0)
+    d_glint = ImageDraw.Draw(glint)
+
+    # The jaw drops the head's lower silhouette a little, which is the whole
+    # visual difference between speaking and not.
+    jaw = float(getattr(face, "jaw", 0.0) or 0.0)
+    # Symmetric on both axes and inset by exactly half the rim, so the fill's
+    # edge lands on the ring's centre line and the ring covers the seam. An
+    # earlier version inset x by rim and y by rim/2, which made the "circle"
+    # an ellipse and left a visible crescent of paper inside the ring.
+    f0 = hr - rim * 0.5
+    d_fill.ellipse([cx - f0, cy - f0, cx + f0, cy + f0 + hr * 0.16 * jaw],
+                   fill=255)
+
+    from .face import draw_face
+    draw_face(d_feat, d_glint, pose_screen, face, value=255, ss=inkmod.SS)
+
     inkmod.ring(d_near, (cx, cy), hr, rim, 255)
 
-    eye_r = max(1.0, hr * 0.072)
-    ex = cx + pose_screen.facing * hr * 0.40
-    ey = cy - hr * 0.10
-    inkmod.disc(d_near, (ex, ey), eye_r, 255)
+    # Bilinear, not Lanczos. These are 2x supersampled masks; the downscale is
+    # the antialiasing, and Lanczos costs four times as much to produce a mask
+    # that is then multiplied by a 2.15x paper rim anyway.
+    a_near = np.asarray(near.resize((W_, H_), Image.BILINEAR), np.float32) / 255.0
+    a_far = np.asarray(far.resize((W_, H_), Image.BILINEAR), np.float32) / 255.0
+    a_fill = np.asarray(fill.resize((W_, H_), Image.BILINEAR), np.float32) / 255.0
+    a_feat = np.asarray(feat.resize((W_, H_), Image.BILINEAR), np.float32) / 255.0
+    a_glint = np.asarray(glint.resize((W_, H_), Image.BILINEAR), np.float32) / 255.0
 
-    a_near = np.asarray(near.resize((W_, H_), Image.LANCZOS), np.float32) / 255.0
-    a_far = np.asarray(far.resize((W_, H_), Image.LANCZOS), np.float32) / 255.0
+    body = np.maximum(a_near, a_far * _FAR)
+    if paper is None:
+        paper = (0.98, 0.965, 0.935)
+    paper = np.asarray(paper, np.float32)
+    ink_rgb = np.asarray(colour, np.float32)
 
-    # Far limbs are drawn at reduced value: it is the only depth cue a pure line
-    # drawing has, and without it a profile collapses into one flat silhouette.
-    alpha = np.maximum(a_near, a_far * _FAR)
+    a_halo = np.asarray(halo.resize((W_, H_), Image.BILINEAR),
+                        np.float32) / 255.0
+
+    # The figure is paper with ink on it: the base colour is the paper, the ink
+    # only where a stroke actually is. That is what makes the rim possible.
+    rgb = np.broadcast_to(paper, (H_, W_, 3)).copy()
+    rgb = rgb * (1.0 - body[..., None]) + ink_rgb * body[..., None]
+    # face features -> ink
+    rgb = rgb * (1.0 - a_feat[..., None]) + ink_rgb * a_feat[..., None]
+    # glints and teeth -> paper again
+    rgb = rgb * (1.0 - a_glint[..., None]) + paper * a_glint[..., None]
+
+    alpha = np.maximum(np.maximum(np.maximum(body, a_halo * 0.94), a_fill),
+                       np.maximum(a_feat, a_glint))
 
     rgba = np.zeros((H_, W_, 4), np.float32)
-    rgba[..., 0] = colour[0]
-    rgba[..., 1] = colour[1]
-    rgba[..., 2] = colour[2]
+    rgba[..., :3] = rgb
     rgba[..., 3] = np.clip(alpha, 0.0, 1.0)
     return rgba
 
@@ -374,28 +468,50 @@ def rim_light(frame, proj, world, *, strength=0.42):
     return frame + (tint - frame) * edge[..., None]
 
 
+_GRADE_CACHE = {}
+
+
+def _grade_terms(h, w):
+    """The two position-dependent grade fields, built once.
+
+    They depend only on the frame size, and rebuilding them was a tenth of a
+    second per frame for two arrays that never change.
+    """
+    key = (h, w)
+    if key in _GRADE_CACHE:
+        return _GRADE_CACHE[key]
+    yy = np.arange(h, dtype=np.float32)[:, None]
+    xx = np.arange(w, dtype=np.float32)[None, :]
+    hz = float(np.clip(h * 0.52, 1, h - 1))
+    haze = np.clip(1.0 - yy / hz, 0.0, 1.0) ** 1.5 * 0.050
+    r = np.sqrt(((xx - w * 0.5) / (w * 0.5)) ** 2 + ((yy - h * 0.5) / (h * 0.5)) ** 2)
+    vig = 1.0 - 0.24 * np.clip((r - 0.64) / 0.95, 0.0, 1.0) ** 1.7
+    _GRADE_CACHE[key] = (haze.astype(np.float32), vig.astype(np.float32))
+    return _GRADE_CACHE[key]
+
+
 def air_and_grade(frame, world, *, zoom=1.0, grain_seed=0):
     """Atmosphere, vignette, a film curve and grain."""
-    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    h, w = frame.shape[:2]
+    haze, vig = _grade_terms(h, w)
 
-    hz = float(np.clip(H * 0.52, 1, H - 1))
-    haze = np.clip(1.0 - yy / hz, 0.0, 1.0) ** 1.5 * 0.050
     haze_col = np.array(world.pal["haze"], np.float32)
-    frame = frame * (1.0 - haze[..., None]) + haze_col * haze[..., None]
+    frame += (haze_col[None, None, :] - frame) * haze[:, :, None] * 1.0
 
-    r = np.sqrt(((xx - W * 0.5) / (W * 0.5)) ** 2 + ((yy - H * 0.5) / (H * 0.5)) ** 2)
-    vig = 1.0 - 0.24 * np.clip((r - 0.64) / 0.95, 0.0, 1.0) ** 1.7
-    frame = frame * vig[..., None]
+    frame *= vig[:, :, None]
 
     lift = np.array([0.013, 0.011, 0.019], np.float32)
     gain = np.array([1.032, 1.000, 0.964], np.float32)
-    frame = np.clip(frame * gain + lift, 0.0, 1.0)
-    frame = frame + (frame * frame * (3.0 - 2.0 * frame) - frame) * 0.20
+    frame *= gain[None, None, :]
+    frame += lift[None, None, :]
+    np.clip(frame, 0.0, 1.0, out=frame)
+    # An S-curve, in place.
+    frame += (frame * frame * (3.0 - 2.0 * frame) - frame) * np.float32(0.20)
 
     rng = np.random.default_rng(1000 + grain_seed)
-    n = rng.standard_normal((H // 2, W // 2)).astype(np.float32)
-    n = np.repeat(np.repeat(n, 2, axis=0), 2, axis=1)[:H, :W]
-    frame = frame + n[..., None] * 0.012
+    n = rng.standard_normal((h // 2, w // 2)).astype(np.float32)
+    n = np.repeat(np.repeat(n, 2, axis=0), 2, axis=1)[:h, :w]
+    frame += n[:, :, None] * np.float32(0.012)
 
     return np.clip(frame, 0.0, 1.0)
 

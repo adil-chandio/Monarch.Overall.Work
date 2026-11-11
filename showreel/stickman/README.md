@@ -20,9 +20,23 @@ authorities and nothing else:
 `stage.py` holds one projection, used by the backdrop and the figure alike, so
 parallax is a consequence of geometry rather than a per-layer effect.
 
+## Three films
+
+| film | module | what it is |
+|---|---|---|
+| `monarch-stickman-1080x1920.mp4` | `render_film` | 11.5 s. One figure crosses a hole. |
+| `monarch-duel-1080x1920.mp4` | `duel_film` | 4.75 s. Two figures, a shove, a fall. |
+| `monarch-pov-stadium-1080x1920.mp4` | `pov_film` | 90 s. A stadium, a face, and a silence. |
+
+The third one changes two things the first two could not: the head can hold an
+expression, and the world can be a specific place. See `face.py` and
+`stadium.py`, and `POV_RELEASE_NOTES.md` for what it does not do.
+
 ## Verification
 
-    python -m showreel.stickman.verify
+    python -m showreel.stickman.verify        # the figure and its physics
+    python -m showreel.stickman.verify_duel   # contact, fall, occlusion
+    python -m showreel.stickman.verify_pov    # the ninety-second film
 
 Checks the properties that make the motion believable rather than merely smooth:
 that a stance foot does not move, that the figure stays on the floor, that the
@@ -37,8 +51,11 @@ Frames stream into ffmpeg; a full cut is never held in memory.
 
 ## Limits, stated plainly
 
-* One figure, one camera, no dialogue, no background action.
-* The figure has no face beyond a single eye dot, so expression is carried by
-  silhouette, timing and gaze direction only.
+* One figure at a time, one camera, no dialogue.
+* The figure's face is drawn from about a dozen parameters, not modelled: it can
+  be frightened or delighted, but it cannot be *specific* -- there is no likeness
+  and no ageing, and it will never look like a particular person, by design.
+* The stadium is a depth model rather than a 3-D scene, so the goal sits behind
+  the action instead of beside it.
 * Thickness is constant along a limb; there is no real cel-shaded volume, only
   near/far separation and a rim light.

@@ -147,7 +147,7 @@ class Pose:
         "elbow_near", "elbow_far", "wrist_near", "wrist_far",
         "knee_near", "knee_far", "ankle_near", "ankle_far",
         "toe_near", "toe_far",
-        "facing", "height", "hand_len", "foot_len", "tone",
+        "facing", "height", "hand_len", "foot_len", "tone", "head_ang",
     )
 
     def __init__(self):
@@ -339,6 +339,10 @@ def build_pose(
         head = neck + d / max(float(np.hypot(d[0], d[1])), 1e-6) * r
 
     p.waist, p.chest, p.neck, p.head, p.head_r = waist, chest, neck, head, head_r
+    # The head's own angle, carried on the pose so the face can rotate with it.
+    # Without this the eyes stay level with the horizon while the head leans, and
+    # the face reads as a sticker sliding around a circle.
+    p.head_ang = head_ang
 
     near_off = NEAR * h
     far_off = FAR * h
@@ -382,13 +386,20 @@ def build_pose(
             ideal = float(np.hypot(*(foot_from_contact(foot, pitch, foot_len, f)[0] - hip)))
             if ideal > 1e-6 and actual < ideal - 1e-3:
                 shift = (ideal - actual) / ideal
-                # Move the toe toward the ankle by the same shortfall it lost.
-                toe = ankle + (toe - ankle) * (1.0 - shift * 0.0)
-                # Keep the foot bone rigid: re-derive the toe from the ankle.
+                # Keep the foot bone rigid: re-derive the toe from the ankle at a
+                # fixed length. The direction is kept from the contact solve.
                 d = (toe - ankle)
                 n = float(np.hypot(d[0], d[1]))
                 if n > 1e-6:
                     toe = ankle + d / n * (foot_len * 0.62)
+        # The rig guarantees a foot does not go through the floor. The contact
+        # solve cannot produce one, but the reach correction above can tilt the
+        # foot bone by a couple of units, so it is clamped here once rather than
+        # trusted at every call site -- the alternative is a millimetre of toe
+        # under the grass on a handful of frames, which is exactly the kind of
+        # thing that is invisible until it is pointed at.
+        ankle = np.array([ankle[0], min(float(ankle[1]), 0.0)])
+        toe = np.array([toe[0], min(float(toe[1]), 0.0)])
         setattr(p, f"knee_{tag}", knee)
         setattr(p, f"ankle_{tag}", ankle)
         setattr(p, f"toe_{tag}", toe)
