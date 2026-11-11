@@ -13,12 +13,13 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `full-script-v2/` | Ten science-qualified narration takes, 796.042 s, auto-aligned captions, source crosswalk. Human script, caption, pronunciation and science review outstanding. |
 | `soundtrack-draft/` | Continuous narration + music draft (796.1 s). No SFX; not continuously auditioned. |
 | `storyboard-retime/` | 83 provisional blocks over the full narration length. Not picture lock. |
-| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 589.0 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. |
+| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 651.0 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. |
 | `island-chapter/` | 60 s, seven-shot Arctic sequence (dawn herd, tracking walk, trunk to grass, calf, stream crossing, squall, dusk). 30 s placed at 140 s. |
 | `coat-section/` | 34 s, five shots (macro wool texture, close flank, low legs, herd into low sun, exit hold). 24 s placed at 250 s. |
 | `island-years/` | 30 s compressed-season study. An 8 s excerpt is available as an alternate; not currently placed. |
 | `isolation-section/` | 28 s schematic cross-section of sea-level isolation plus the three-population panel; placed at 86 s. No coastline traced. |
 | `island-approach/` | 18 s walk-and-forage scene; 10 s placed at 130 s. |
+| `genetic-strain/` | 62 s plate for immune-gene diversity and the effective-size caution; placed at 495 s. Does not redraw the bottleneck curve and shows no animals. |
 | `contact-section/` | 44 s two-register plate for the human-evidence passage; placed at 411 s. No person or encounter depicted; both verdicts struck through equally. |
 | `chemistry-section/` | 49 s isotope-witness plate (four systems, the 2019 broad-stability comparison, the sparse-record caveat); placed at 305 s. No values, axes or weather imagery depicted. |
 | `ledger-section/` | 70 s three-tier confidence ledger (supported / plausible / not established) for the closing argument; placed at 689 s. No cause is pictured at any tier. |
@@ -36,7 +37,7 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 
 ## What is still missing
 
-Roughly 207 s of the narration has no verified picture. The laboratory/genetics
+Roughly 145 s of the narration has no verified picture. The laboratory/genetics
 chapter, the isotope and chemistry passages, the human-evidence chapter, the 2024
 genome work and the verdict need sequences that do not yet exist or are only
 partially built. Audio needs a continuous mix with ambience and music decisions,
