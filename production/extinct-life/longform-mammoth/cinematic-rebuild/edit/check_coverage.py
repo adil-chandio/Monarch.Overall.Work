@@ -13,6 +13,7 @@ segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json'
  {'name':'island-chapter','start_frame':4200,'frames':900,'qc':'island-chapter-qc.json','file':'island-chapter-incomplete-workprint.mp4'},
  {'name':'island-chapter-2','start_frame':6600,'frames':900,'qc':'island-chapter-2-qc.json','file':'island-chapter-2-incomplete-workprint.mp4'},
  {'name':'coat-section','start_frame':7500,'frames':720,'qc':'coat-section-qc.json','file':'coat-section-incomplete-workprint.mp4'},
+ {'name':'gene-disruption','start_frame':5782,'frames':818,'qc':'gene-disruption-qc.json','file':'gene-disruption-incomplete-workprint.mp4'},
  {'name':'genome-comparison','start_frame':5182,'frames':600,'qc':'genome-comparison-qc.json','file':'genome-comparison-incomplete-workprint.mp4'},
  {'name':'stream','start_frame':10620,'frames':480,'qc':'stream-qc.json','file':'stream-incomplete-workprint.mp4'},
  {'name':'hypothesis','start_frame':11100,'frames':420,'qc':'hypothesis-qc.json','file':'hypothesis-incomplete-workprint.mp4'},

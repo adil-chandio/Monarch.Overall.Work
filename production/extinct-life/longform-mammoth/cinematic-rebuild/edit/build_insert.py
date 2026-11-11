@@ -60,6 +60,10 @@ choices={
  # their sequence is readable"; it stops before the two opposing trends at 589 s.
  'coverage-section':('.cache/mammoth-coverage-section/coverage-section-motion-review-silent.mp4',None,557.0,600,600),
  'reversal-section':('.cache/mammoth-reversal-section/reversal-section-motion-review-silent.mp4',None,473.0,660,660),
+ # The 2017 result in detail: three kinds of disruptive change, the 43x estimate kept
+ # beside its caveat, and what a premature stop or a deletion actually does. 27.27 s at
+ # 192.733 s. No tick field, no sequence, no diagnosis.
+ 'gene-disruption':('.cache/mammoth-gene-disruption/gene-disruption-motion-review-silent.mp4',None,5782/30,818,818),
  # One genome against one genome: the 2017 warning and the sample behind it. 31 s at 274.0 s.
  # Deliberately does not redraw the 2024 curve, which reversal-section owns at 473 s.
  'one-genome':('.cache/mammoth-one-genome/one-genome-motion-review-silent.mp4',None,274.0,930,930),
@@ -90,7 +94,7 @@ choices={
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|contact-section|chemistry-section|one-genome|trends-section|genetic-strain|isolation-section|ledger-section|new-lead-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|contact-section|chemistry-section|gene-disruption|one-genome|trends-section|genetic-strain|isolation-section|ledger-section|new-lead-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
