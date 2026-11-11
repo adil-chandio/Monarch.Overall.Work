@@ -44,4 +44,4 @@ jobs:
             --target arena/1f352b8e-monarch-overall-work
           echo '--- assets:'
           gh release view stickman-pov-stadium-1080x1920 --json assets \
-            -q '.assets[] | .name + " " + (.size|tostring) + " " + .state + " x" + .downloadCount|tostring'
+            -q '.assets[] | .name + "  " + (.size|tostring) + "  " + .state'
