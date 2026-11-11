@@ -9,6 +9,7 @@ transcripts and verified "growing channel" rankings are NOT invented.
 """
 from __future__ import annotations
 import json
+import sys
 import time
 from pathlib import Path
 
@@ -18,6 +19,8 @@ LANES = BASE / "api_evidence" / "lanes"
 OUT = BASE / "api_evidence" / "channels"
 OUT.mkdir(parents=True, exist_ok=True)
 
+# Running this file by path puts the script directory (not the repo root) on sys.path.
+sys.path.insert(0, str(ROOT))
 from yt_intel import client, reverse  # noqa: E402
 
 

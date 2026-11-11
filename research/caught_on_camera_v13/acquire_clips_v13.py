@@ -53,20 +53,80 @@ MAX_CLIPS = int(__import__("os").environ.get("V13_MAX_CLIPS", "20"))
 WINDOW_S = 10.0
 SAMPLE_FPS = 4
 
+# POSITIVE, on-brand discovery: wildlife / animals / funny / surprising / skill moments.
+# (The first pass used generic "caught on camera"/CCTV queries and returned murder CCTV,
+# suicide bombings, missile strikes, plane crashes and robberies. That pass is REJECTED.)
 QUERIES = [
+    'animal "caught on camera" filetype:video',
+    'wildlife "caught on camera" filetype:video',
+    'CCTV animal filetype:video',
+    '"security camera" bear filetype:video',
+    'dog "caught on camera" filetype:video',
+    'cat "caught on camera" filetype:video',
+    'funny animal fail filetype:video',
+    '"unexpected moment" animal filetype:video',
+    'animal rescue "caught on camera" filetype:video',
+    'bird "caught on camera" filetype:video',
+    'squirrel feeder camera filetype:video',
+    'raccoon "caught on camera" filetype:video',
+    'trick shot caught on camera filetype:video',
+    'skateboard fail filetype:video',
+    'parkour fail filetype:video',
+    'flash mob filetype:video',
+    'funny fail video filetype:video',
+    'octopus "caught on camera" filetype:video',
+    'whale "caught on camera" filetype:video',
+    'goat "caught on camera" filetype:video',
     '"caught on camera" filetype:video',
     'CCTV filetype:video',
-    '"security camera" filetype:video',
     'dashcam filetype:video',
     '"viral video" filetype:video',
-    '"caught on camera" fail filetype:video',
-    'wildlife "caught on camera" filetype:video',
-    '"shocking moment" filetype:video',
-    'animal "caught on camera" filetype:video',
-    '"porch pirate" filetype:video',
     '"unexpected moment" filetype:video',
-    '"bear" "security camera" filetype:video',
+    'funny animals filetype:video',
+    'cute animals filetype:video',
+    'animal fails filetype:video',
+    'cat fails filetype:video',
+    'dog fails filetype:video',
+    'wildlife camera filetype:video',
+    'bear enters house filetype:video',
+    'animal in shop filetype:video',
+    'unexpected animal filetype:video',
+    'amazing animal moment filetype:video',
+    'sports fail filetype:video',
+    'fail compilation filetype:video',
 ]
+
+# HARD content-safety gate. A family-safe, engaging caught-on-camera compilation must
+# never contain murder / violence / war / terror / disaster / crime-victim footage.
+BLOCK_TERMS = (
+    "kill", "murder", "homicide", "death", "dead", "fatal", "shoot", "gun", "firearm",
+    "bomb", "explosion", "blast", "missile", "strike", "attack", "terror", "suicide",
+    "war", "military", "soldier", "combat", "drone", "rocket", "artillery", "invasion",
+    "robbery", "burglary", "assault", "crime", "criminal", "suspect", "arrest", "stabbing",
+    "knife", "blood", "gore", "victim", "kidnap", "abduct", "missing person",
+    "seeking information", "police chase", "hostage", "cantonment", "precinct",
+    "crash", "collision", "accident", "airline", "flight", "plane", "tornado", "hurricane",
+    "earthquake", "disaster", "tragedy", "wreck", "protest", "riot", "9/11",
+    "volgograd", "crimean", "bannu", "ramat gan", "nancy guthrie", "brian thompson",
+    "saratov", "flight 3054", "flight77", "thai cctv", "homicide",
+)
+GOOD_TERMS = (
+    "cat", "dog", "puppy", "kitten", "bear", "bird", "squirrel", "raccoon", "animal",
+    "wildlife", "funny", "fail", "unexpected", "surprise", "trick", "skill", "catch",
+    "jump", "dance", "skate", "parkour", "rescue", "monkey", "fox", "deer", "owl",
+    "penguin", "whale", "dolphin", "octopus", "goat", "cow", "horse", "rabbit", "parrot",
+    "hilarious", "cute", "adorable", "incredible", "amazing", "smart", "clever",
+)
+
+
+def safety_gate(text):
+    """Return (allowed, blocked_term, positive_score)."""
+    low = (text or "").lower()
+    for b in BLOCK_TERMS:
+        if b in low:
+            return False, b, 0
+    score = sum(1 for g in GOOD_TERMS if g in low)
+    return True, None, score
 
 ALLOWED_LICENSES = {"cc0", "public domain", "pd", "cc by 3.0", "cc by 4.0",
                     "cc-by-3.0", "cc-by-4.0", "public domain mark 1.0", "pd-usgov"}
@@ -151,6 +211,12 @@ def acceptable(page, meta):
     if not low.endswith(VIDEO_EXT):
         return False
     if any(t in low for t in EXCLUDE_TOKENS):
+        return False
+    # Content-safety gate over title + description + categories, not just the filename.
+    blob = " ".join([title, meta.get("description", ""), meta.get("categories", ""),
+                     meta.get("credit", "")])
+    ok, blocked, _ = safety_gate(blob)
+    if not ok:
         return False
     lic = (meta["license_short_name"] or meta["license_id"]).strip().lower()
     if lic and lic not in ALLOWED_LICENSES and not any(x in lic for x in ("public domain", "cc0", "cc by 3.0", "cc by 4.0")):
@@ -279,7 +345,10 @@ def contact_sheet(items):
 
 
 def main():
-    pool, seen = [], set()
+    # Never leak stale windows from a rejected pass into a new deliverable.
+    for p in list(WINDOWS.glob("hook_*.mp4")) + list(REVIEW.glob("hook_*.jpg")):
+        p.unlink(missing_ok=True)
+    pool, seen, rejected_safety = [], set(), 0
     for q in QUERIES:
         pages = search(q)
         log(f"search {q!r}: {len(pages)} hits")
@@ -293,6 +362,7 @@ def main():
                 continue
             meta = clean_meta(ii.get("extmetadata") or {})
             if not acceptable(pg, meta):
+                rejected_safety += 1
                 continue
             mime = ii.get("mime", "")
             if mime and not any(m in mime for m in VIDEO_MIME) and not title.lower().endswith(VIDEO_EXT):
@@ -300,18 +370,20 @@ def main():
             dur = float(ii.get("duration") or 0)
             if dur and not (WINDOW_S + 0.5 <= dur <= 240.0):
                 continue
+            _, _, prio = safety_gate(" ".join([title, meta["description"], meta["categories"]]))
             pool.append({"title": title, "pageid": pg.get("pageid"),
                          "url": ii.get("url", ""), "size": ii.get("size", 0),
                          "mime": mime, "width": ii.get("width"), "height": ii.get("height"),
                          "duration": dur, "commons_sha1": ii.get("sha1", ""),
                          "descriptionurl": ii.get("descriptionurl", ""), "meta": meta,
-                         "query": q})
+                         "priority": prio, "query": q})
         time.sleep(0.4)
-    log(f"acceptable candidate pool: {len(pool)}")
-    save_json(REVIEW / "candidate_pool_v13.json", {"count": len(pool), "candidates": pool})
+    log(f"acceptable candidate pool: {len(pool)} (safety/licence rejected: {rejected_safety})")
+    save_json(REVIEW / "candidate_pool_v13.json", {"count": len(pool), "candidates": pool,
+              "rejected_by_safety_or_licence": rejected_safety})
 
-    # smallest-first keeps the committed artifact sane while preferring real footage
-    pool.sort(key=lambda x: (x["size"] or 1 << 30))
+    # Prefer explicitly on-brand / hooky titles first, then small files.
+    pool.sort(key=lambda x: (-x["priority"], x["size"] or 1 << 30))
     accepted, failures = [], []
     for cand in pool:
         if len(accepted) >= MAX_CLIPS:
@@ -371,6 +443,10 @@ def main():
             "local_window_sha256": sha256(win),
             "local_window_bytes": win.stat().st_size,
             "native_audio_kept": True, "audio_added": False,
+            "content_safety": {"keyword_gate": "passed", "positive_score": cand["priority"],
+                               "blocked_terms": list(BLOCK_TERMS),
+                               "human_watch_through_required": True,
+                               "family_safe_claim": False},
             "human_legal_review": False, "not_a_legal_opinion": True,
         }
         accepted.append(rec)
@@ -384,6 +460,17 @@ def main():
         "method": "Live Commons API namespace-6 search; extmetadata licence gate; objective motion/surprise hook-window scoring; native audio kept; 10 s normalized MP4 windows committed.",
         "queries": QUERIES,
         "candidate_pool_size": len(pool),
+        "rejected_by_safety_or_licence": rejected_safety,
+        "content_safety_gate": {
+            "hard_blocked_terms": list(BLOCK_TERMS),
+            "positive_terms": list(GOOD_TERMS),
+            "reason": ("First pass returned murder CCTV, suicide bombing, missile strikes, "
+                       "plane crashes and robberies. Rejected. This pass gates title + "
+                       "description + categories against violence/crime/war/disaster terms "
+                       "and ranks animal/funny/surprising/skill titles first."),
+            "human_watch_through_required": True,
+            "family_safe_guarantee": False,
+        },
         "accepted_count": len(accepted),
         "failed_count": len(failures),
         "failures": failures,

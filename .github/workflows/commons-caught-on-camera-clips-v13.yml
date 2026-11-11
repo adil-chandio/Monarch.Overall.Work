@@ -48,6 +48,9 @@ jobs:
           V13_MAX_CLIPS: "20"
         run: python research/caught_on_camera_v13/acquire_clips_v13.py
 
+      - name: HARD QC - reject any unsafe / unverified clip
+        run: python research/caught_on_camera_v13/validate_clips_v13.py
+
       - name: Summary
         if: always()
         run: |
