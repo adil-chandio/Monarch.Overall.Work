@@ -1,25 +1,85 @@
 {
   "note": "V14 explicit source start times for all 20 funny clips. Mid-clip windows away from intro/title/SUBSCRIBE end cards. Every window clamped to source duration minus 12 s so motion scorer cannot drift into outro. Two V13 keepers use V13 verified windows (Chicago 103 s, Greased pigs 12 s). New clips use hand-checked mid-clip starts based on viral-formula structure (setup early, payoff mid).",
   "overrides": {
-    "v14_01": {"source_start_s": 60.0, "basis": "Bean diving board attempts, mid-clip, away from intro/outro"},
-    "v14_02": {"source_start_s": 120.0, "basis": "Bean horror movie jump scare, mid-clip"},
-    "v14_03": {"source_start_s": 180.0, "basis": "Bean hospital chaos, mid-clip"},
-    "v14_04": {"source_start_s": 30.0, "basis": "Chiitan mascot fails throughout, mid-clip"},
-    "v14_05": {"source_start_s": 60.0, "basis": "Baby monkey jumping fails throughout, mid-clip"},
-    "v14_06": {"source_start_s": 20.0, "basis": "Ocicat cat wheel run, mid-clip"},
-    "v14_07": {"source_start_s": 30.0, "basis": "Animals workout compilation moment, mid-clip"},
-    "v14_08": {"source_start_s": 20.0, "basis": "Baby elephant playing, mid-clip"},
-    "v14_09": {"source_start_s": 2.0, "basis": "DDR frantic feet, source only 16.5 s"},
-    "v14_10": {"source_start_s": 40.0, "basis": "April Fools AI prank action, mid-clip"},
-    "v14_11": {"source_start_s": 40.0, "basis": "Projector prank reveal, mid-clip"},
-    "v14_12": {"source_start_s": 30.0, "basis": "Scary maze scream reaction, mid-clip"},
-    "v14_13": {"source_start_s": 25.0, "basis": "Scary maze prank reaction, mid-clip"},
-    "v14_14": {"source_start_s": 30.0, "basis": "Sr Pelo comedy laugh, mid-clip"},
-    "v14_15": {"source_start_s": 20.0, "basis": "Cat self-grooming close-up, mid-clip"},
-    "v14_16": {"source_start_s": 60.0, "basis": "Flip Funny Face cartoon gag, mid-clip"},
-    "v14_17": {"source_start_s": 40.0, "basis": "Flip Puddle Pranks gag, mid-clip"},
-    "v14_18": {"source_start_s": 2.0, "basis": "Cat meowing into lens, source only 14.9 s"},
-    "v14_19": {"source_start_s": 103.0, "basis": "V13 verified parallel parking fail window"},
-    "v14_20": {"source_start_s": 12.0, "basis": "V13 verified helicopter greased pigs action"}
+    "v14_01": {
+      "source_start_s": 60.0,
+      "basis": "Bean diving board attempts, mid-clip, away from intro/outro"
+    },
+    "v14_02": {
+      "source_start_s": 120.0,
+      "basis": "Bean horror movie jump scare, mid-clip"
+    },
+    "v14_03": {
+      "source_start_s": 180.0,
+      "basis": "Bean hospital chaos, mid-clip"
+    },
+    "v14_04": {
+      "source_start_s": 30.0,
+      "basis": "Chiitan mascot fails throughout, mid-clip"
+    },
+    "v14_05": {
+      "source_start_s": 60.0,
+      "basis": "Baby monkey jumping fails throughout, mid-clip"
+    },
+    "v14_06": {
+      "source_start_s": 20.0,
+      "basis": "Ocicat cat wheel run, mid-clip"
+    },
+    "v14_07": {
+      "source_start_s": 30.0,
+      "basis": "Animals workout compilation moment, mid-clip"
+    },
+    "v14_08": {
+      "source_start_s": 40.0,
+      "basis": "Baby elephant close-up play, away from distant herd and SUBSCRIBE end card (audit 20-30s showed distant herd + subscribe text at 7.5s)"
+    },
+    "v14_09": {
+      "source_start_s": 2.0,
+      "basis": "DDR frantic feet, source only 16.5 s"
+    },
+    "v14_10": {
+      "source_start_s": 40.0,
+      "basis": "April Fools AI prank action, mid-clip"
+    },
+    "v14_11": {
+      "source_start_s": 40.0,
+      "basis": "Projector prank reveal, mid-clip"
+    },
+    "v14_12": {
+      "source_start_s": 30.0,
+      "basis": "Scary maze scream reaction, mid-clip"
+    },
+    "v14_13": {
+      "source_start_s": 25.0,
+      "basis": "Scary maze prank reaction, mid-clip"
+    },
+    "v14_14": {
+      "source_start_s": 30.0,
+      "basis": "Sr Pelo comedy laugh, mid-clip"
+    },
+    "v14_15": {
+      "source_start_s": 20.0,
+      "basis": "Cat self-grooming close-up, mid-clip"
+    },
+    "v14_16": {
+      "source_start_s": 60.0,
+      "basis": "Flip Funny Face cartoon gag, mid-clip"
+    },
+    "v14_17": {
+      "source_start_s": 40.0,
+      "basis": "Flip Puddle Pranks gag, mid-clip"
+    },
+    "v14_18": {
+      "source_start_s": 2.0,
+      "basis": "Cat meowing into lens, source only 14.9 s"
+    },
+    "v14_19": {
+      "source_start_s": 103.0,
+      "basis": "V13 verified parallel parking fail window"
+    },
+    "v14_20": {
+      "source_start_s": 12.0,
+      "basis": "V13 verified helicopter greased pigs action"
+    }
   }
 }

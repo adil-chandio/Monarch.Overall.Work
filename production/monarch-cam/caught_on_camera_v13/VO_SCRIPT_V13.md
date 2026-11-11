@@ -8,7 +8,7 @@ V14 rewrite: matches 20 funny clips (Bean DIVE/HORROR/AMBULANCE, Chiitan mascot,
 
 ## Chunk 01
 
-Twenty moments. One camera. No intro, no warning. You are already inside clip one. Mr Bean on a diving board. He climbs up, he poses, and he face plants on the concrete. That is the rule here. If the joke lands in three seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin.
+Twenty moments. One camera. No intro, no warning. You are already inside clip one. Mr Bean at the pool. He walks up, he looks at the camera, and the whole scene changes. That is the rule here. If the joke lands in three seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin.
 
 ## Chunk 02
 
@@ -24,7 +24,7 @@ By clip eight, the pattern should feel familiar but not safe. A cat on a wheel, 
 
 ## Chunk 05
 
-Round two. Now we give the moments context, but still over moving footage. This is Bean again. First pass, you saw the dive. This pass, watch the face before the dive. That is the tell. Same with the scary maze game. The mistake starts a full second before the scream. Slow motion is not decoration here. It is evidence. And the English voice over stays short, because the native audio and the picture are already doing most of the work. One line, then the original sound comes back up. Another line, then a replay. The structure is simple, but it is never static.
+Round two. Now we give the moments context, but still over moving footage. This is Bean again. First pass, you saw the pool. This pass, watch the face before the scene changes. That is the tell. Same with the scary maze game. The mistake starts a full second before the scream. Slow motion is not decoration here. It is evidence. And the English voice over stays short, because the native audio and the picture are already doing most of the work. One line, then the original sound comes back up. Another line, then a replay. The structure is simple, but it is never static.
 
 ## Chunk 06
 
