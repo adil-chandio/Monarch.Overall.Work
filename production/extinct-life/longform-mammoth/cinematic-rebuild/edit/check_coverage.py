@@ -5,6 +5,7 @@ root=Path(__file__).resolve().parents[5];base=Path(__file__).resolve().parent
 story=json.loads((base.parent/'storyboard-retime/storyboard-retimed-reblocked.json').read_text())
 # Candidate placements, not listening-approved. Offsets are exact at 30 fps.
 segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json','file':'opening-incomplete-workprint.mp4'},
+ {'name':'isolation-section','start_frame':2580,'frames':840,'qc':'isolation-section-qc.json','file':'isolation-section-incomplete-workprint.mp4'},
  {'name':'island-approach','start_frame':3900,'frames':300,'qc':'island-approach-qc.json','file':'island-approach-incomplete-workprint.mp4'},
  {'name':'island-chapter','start_frame':4200,'frames':900,'qc':'island-chapter-qc.json','file':'island-chapter-incomplete-workprint.mp4'},
  {'name':'island-chapter-2','start_frame':6600,'frames':900,'qc':'island-chapter-2-qc.json','file':'island-chapter-2-incomplete-workprint.mp4'},

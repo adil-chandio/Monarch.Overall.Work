@@ -11,6 +11,10 @@ audio=root/'production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrac
 choices={
  # Trimmed to the 10 s the storyboard allows (130-140 s); the remaining 8 s of
  # this render is superseded by the compressed-season excerpt at 140 s.
+ # Sea-level isolation and the three-populations caveat. 28 s schematic
+ # cross-section, placed at 86.0 s on "around ten thousand years ago, sea levels
+ # rose", carrying through the Wrangel / East European / St Paul dates to 114 s.
+ 'isolation-section':('.cache/mammoth-isolation-section/isolation-section-motion-review-silent.mp4',None,86.0,840,840),
  'island-approach':('.cache/mammoth-island-approach/island-approach-motion-review-silent.mp4',None,130.,300,540),
  # The 8-second thaw/summer excerpt of the 30-second season study fits the
  # storyboard's compressed-season beat at 140-148s exactly.
@@ -61,7 +65,7 @@ choices={
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|isolation-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
