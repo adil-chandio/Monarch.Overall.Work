@@ -1,0 +1,15 @@
+{
+  "note": "Explicit source start times for the ten curated V7 clips. Eight come from V7's own candidate/source video ledgers (objective runner audio+visual probe). Two silent sources use a manually chosen pre-end-card window from the V7 1 fps contact sheets. These replace the generic motion scorer, which had drifted into title cards and SUBSCRIBE end cards.",
+  "overrides": {
+    "v7_01": {"source_start_s": 8.0, "basis": "V7 candidate_video_ledger best_window 8.0-16.6"},
+    "v7_02": {"source_start_s": 103.0, "basis": "V7 source_video_ledger 103.0-111.57"},
+    "v7_03": {"source_start_s": 20.0, "basis": "V7 contact sheets: officer / rat action 20-31 s; source is silent"},
+    "v7_04": {"source_start_s": 1.0, "basis": "V7 source_video_ledger 1.0-9.57"},
+    "v7_05": {"source_start_s": 0.0, "basis": "V7 source_video_ledger 0.0-8.57"},
+    "v7_06": {"source_start_s": 0.0, "basis": "V7 source_video_ledger 0.0-8.6"},
+    "v7_07": {"source_start_s": 42.0, "basis": "V7 source_video_ledger 42.0-50.57"},
+    "v7_08": {"source_start_s": 75.5, "basis": "V7 source_video_ledger 75.5-84.07"},
+    "v7_09": {"source_start_s": 37.0, "basis": "V7 contact sheets: parcel / van action before the 48 s SUBSCRIBE card; source is silent"},
+    "v7_10": {"source_start_s": 0.0, "basis": "V7 source_video_ledger 0.0-8.57"}
+  }
+}

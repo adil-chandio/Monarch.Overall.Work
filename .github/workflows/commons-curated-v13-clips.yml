@@ -79,7 +79,8 @@ jobs:
                   research/caught_on_camera_v13/rights_ledger_curated_v13.json \
                   research/caught_on_camera_v13/hook_windows_curated_v13.json \
                   research/caught_on_camera_v13/selected_windows_v13.json \
-                  research/caught_on_camera_v13/curated_titles_v13.json
+                  research/caught_on_camera_v13/curated_titles_v13.json \
+                  research/caught_on_camera_v13/curated_window_overrides_v13.json
           if git diff --cached --quiet; then echo "no change"; exit 0; fi
           git commit -m "feat(v13): 20 distinct rights-documented caught-on-camera windows [skip ci]"
           git pull --rebase --autostash origin ${{ github.ref_name }} || true

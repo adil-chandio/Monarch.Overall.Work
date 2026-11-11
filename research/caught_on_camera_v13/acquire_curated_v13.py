@@ -28,6 +28,7 @@ import clip_safety_v13 as safe  # noqa: E402
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
 CURATED = BASE / "curated_titles_v13.json"
+OVERRIDES = BASE / "curated_window_overrides_v13.json"
 WORK = ROOT / "production" / "monarch-cam" / "work" / "caught_on_camera_curated_v13"
 WINDOWS = BASE / "windows"
 REVIEW = BASE / "review"
@@ -112,6 +113,7 @@ def contact(items):
 
 def main():
     spec = json.loads(CURATED.read_text(encoding="utf-8"))
+    overrides = json.loads(OVERRIDES.read_text(encoding="utf-8"))["overrides"]
     titles = spec["titles"]
     accepted, failures = [], []
 
@@ -162,7 +164,15 @@ def main():
                              "duration_s": real_dur})
             raw.unlink(missing_ok=True)
             continue
-        start, score = acq.hook_start(raw, real_dur)
+        ov = overrides.get(item["id"])
+        if ov:
+            start = float(ov["source_start_s"])
+            score = {"status": "v7_verified_override", "basis": ov["basis"],
+                     "start_s": start, "end_card_fallback_disabled": True}
+        else:
+            start, score = acq.hook_start(raw, real_dur)
+            # Never let the motion scorer drift into a title card / SUBSCRIBE outro.
+            start = min(start, max(0.0, real_dur - 12.0))
         start = max(0.0, min(start, real_dur - WINDOW_S - 0.2))
         native = has_audio(raw)
         out = WINDOWS / f"curated_{n:02d}.mp4"
