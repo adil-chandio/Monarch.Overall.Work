@@ -1,0 +1,43 @@
+name: Publish 2D film release asset
+
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths:
+      - '.github/workflows/celebrity-2d-release.yml'
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+          lfs: false
+      - name: Confirm the master is present
+        run: ls -lh deliverables/monarch-celebrity-story-2d-60s.mp4
+      - name: Build the preview
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          ffmpeg -y -v error -i deliverables/monarch-celebrity-story-2d-60s.mp4 \
+            -c:v libx264 -preset veryfast -crf 26 -vf scale=608:1080 \
+            -c:a aac -b:a 128k -movflags +faststart -shortest \
+            deliverables/monarch-celebrity-story-2d-60s-preview.mp4
+          ls -lh deliverables/monarch-celebrity-story-2d-60s-preview.mp4
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete celebrity-2d-film-60s --yes --cleanup-tag 2>/dev/null || true
+          gh release create celebrity-2d-film-60s \
+            deliverables/monarch-celebrity-story-2d-60s.mp4 \
+            deliverables/monarch-celebrity-story-2d-60s-preview.mp4 \
+            --title "Celebrity morning — painted 2D cut (60 s, 1080x1920)" \
+            --notes-file showreel/celebrity_story_2d/RELEASE_NOTES.md \
+            --target arena/1f352b8e-monarch-overall-work
+          echo '--- assets:'
+          gh release view celebrity-2d-film-60s --json assets \
+            -q '.assets[] | .name + " " + (.size|tostring) + " " + .browserDownloadUrl'
