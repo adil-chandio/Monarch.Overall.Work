@@ -19,6 +19,7 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `island-years/` | 30 s compressed-season study. An 8 s excerpt is available as an alternate; not currently placed. |
 | `isolation-section/` | 28 s schematic cross-section of sea-level isolation plus the three-population panel; placed at 86 s. No coastline traced. |
 | `island-approach/` | 18 s walk-and-forage scene; 10 s placed at 130 s. |
+| `island-hold/` | 66 s of native picture (four animals, one plain, a drifting overcast) under the genetic argument at 473 s; makes no claim, carries a disclosure burn-in. Built to cut the longest plate run. |
 | `other-islands/` | 16 s plate for St Paul's later loss and the regional-clue caution; placed at 114 s. The St Paul span is open-ended because no start date is spoken. |
 | `gene-disruption/` | 27 s plate for the 2017 disruptive-change detail; placed at 192.7 s. The 43× figure is always shown beside its "not a head count" caveat. |
 | `one-genome/` | 31 s plate for the 2017 single-genome warning and the larger 2024 sample; placed at 274 s. Does not pre-empt the bottleneck curve. |
@@ -42,32 +43,39 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 ## The picture-balance problem (found by assembling, not by section QC)
 
 The first continuous assembly made the film's largest structural problem measurable, and
-it is one no per-section check could have caught: **68.4% of the covered timeline is now
-printed plate rather than rendered picture** (531.3 s of 777.3 s). The longest
-uninterrupted run of plates is **173.1 s**, from 473.0 s to 646.1 s.
+it is one no per-section check could have caught: the covered timeline had become
+**68.4% printed plate** (531.3 s of 777.3 s), with **173.1 s** (473.0–646.1 s) of
+uninterrupted paper through the genetics chapter.
+
+A first fix has been applied: `island-hold/` now carries 473–539 s as native picture —
+the same four animals on the same plain under a drifting overcast, making no claim at
+all — and `genetic-strain` was reduced to the one shot that still has narration of its
+own. `reversal-section` was superseded in that window (its file is kept for comparison
+but is no longer placed).
+
+| | before | now |
+|---|---|---|
+| plate | 531.3 s (68.4%) | **464.3 s (59.8%)** |
+| rendered picture | 246.0 s (31.6%) | **312.0 s (40.2%)** |
+| longest plate run | 173.1 s | **107.0 s** |
+
+`edit/report_picture_balance.py` regenerates these figures from the verified windows.
+
+**This is improved, not solved.** The remaining runs are still long:
 
 | plate run | length |
 |---|---|
 | 274.0 – 354.0 | 80.0 s |
 | 391.0 – 471.0 | 80.0 s |
-| 473.0 – 646.1 | 173.1 s |
+| 557.0 – 646.1 | 89.1 s |
 | 652.0 – 759.0 | 107.0 s |
 
-`edit/report_picture_balance.py` regenerates these figures from the verified windows.
+The same remedy is needed twice more — native picture under the human-evidence and
+microbial passages, and under the 652–759 s close. The plates should sit *against* the
+island, not replace it: they are the honest form of these claims and none should be cut
+to shorten a run.
 
-This is a **documentary problem, not a QC problem**. The plates are each defensible and
-several were built specifically to refuse a misleading image. But a viewer who watches
-391 s to 759 s would see six minutes in which almost nothing living appears: contact
-registers, sample counts, bar charts, and one invented axis after another. The
-narration is carrying the film alone for most of its second half.
-
-The remedy is **native picture under the narration, not shorter plates**: the evidence
-plates should sit *against* the island, not replace it. What is needed is 3D work —
-the herd under a bad winter, water and ice in the season the isotope passage describes,
-the shore the archaeology describes — that can hold the screen while the voice makes
-its careful distinctions, with the plates arriving only for the numbers.
-
-Until that footage exists, this remains a work-in-progress assembly, and the plate share
+Until that footage exists this remains a work-in-progress assembly, and the plate share
 must not be presented as a stylistic choice. No distribution version may be cut from
 this timeline as it stands.
 

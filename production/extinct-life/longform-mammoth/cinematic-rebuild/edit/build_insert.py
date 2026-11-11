@@ -76,7 +76,12 @@ choices={
  # Genetic strain: two measures that are related but not interchangeable, the immune-gene
  # finding held as a finding, and effective size kept as a model parameter. 62 s at 495.0 s.
  # The bottleneck curve is NOT redrawn here — reversal-section owns it.
- 'genetic-strain':('.cache/mammoth-genetic-strain/genetic-strain-motion-review-silent.mp4',None,495.0,1860,1860),
+ # TRIMMED to 41 s (frames 0-1230) and moved to 539.0 s: the island hold now carries
+ # 473-539 s, and shot 3 of this render (the "comparatively stable" beat, which speaks
+ # at 538-546 s) is not used. Trimming keeps every remaining beat in sync, because both
+ # inserts read from the same continuous narration track and nothing is retimed.
+ # The bottleneck curve is still not redrawn here — reversal-section owns it.
+ 'genetic-strain':('.cache/mammoth-genetic-strain/genetic-strain-motion-review-silent.mp4',None,16200/30,510,1860),
  # The human-contact passage: two kept-apart registers of what the dates establish and
  # what stays unresolved. 44 s at 411.0 s. No person, no encounter, no kill site.
  'contact-section':('.cache/mammoth-contact-section/contact-section-motion-review-silent.mp4',None,411.0,1320,1320),
@@ -92,14 +97,22 @@ choices={
  # empty. 37 s, placed at 652.0 s on "a newer lead shows why careful questions
  # matter" through "the diagnosis is still missing".
  'new-lead-section':('.cache/mammoth-new-lead-section/new-lead-section-motion-review-silent.mp4',None,652.0,1110,1110),
+ # Native island picture under the genetic argument, cutting the longest plate run in the
+ # film. 66 s at 473.0 s: it takes over the bottleneck/immune/two-measures passage and
+ # hands back to genetic-strain at 539.0 s, just after "recovery did not mean its genetic
+ # risks disappeared". No claim is made on screen beyond the disclosure line.
+ 'island-hold':('.cache/mammoth-island-hold/island-hold-motion-review-silent.mp4',None,14190/30,1980,1980),
  'people-section':('.cache/mammoth-people-section/people-section-motion-review-silent.mp4',None,391.0,600,600),
  'verdict-section':('.cache/mammoth-verdict-section/verdict-section-motion-review-silent.mp4',None,759.0,720,720),
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|contact-section|chemistry-section|other-islands|gene-disruption|one-genome|trends-section|genetic-strain|isolation-section|ledger-section|new-lead-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|contact-section|chemistry-section|other-islands|gene-disruption|one-genome|trends-section|genetic-strain|isolation-section|ledger-section|new-lead-section|island-hold|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
-seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
+seek={'island-thaw':4.0,'island-chapter-2':30.0,
+      # Only shot 3 of the 62 s render survives: the island hold now carries 473-539 s,
+      # so this excerpt is the "comparatively stable" plate read at 540-557 s.
+      'genetic-strain':45.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 manifest=json.loads((video.parent/'render-manifest.json').read_text())
 if manifest['fps']!=30:raise SystemExit('Wrong render rate')
@@ -121,6 +134,10 @@ if name=='stream':
  cmd+=['-ss','8','-i',str(brook)]
  filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS[base];[2:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.20,afade=t=in:st=0:d=0.8,afade=t=out:st=14.5:d=1.5[water];[base][water]amix=inputs=2:normalize=0:duration=first,alimiter=limit=0.82:level=0[a]'
 elif name=='island-approach':filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.88[a]'
+elif name=='genetic-strain':
+ # This 41 s excerpt of the narration peaks at -0.4 dBTP untouched. 0.78 gain clears the
+ # -1 dBTP guardrail; local fix, not a mastering decision for the finished film.
+ filters=f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.78[a]'
 elif name=='trends-section':
  # This stretch of narration peaks at -0.8 dBTP untouched. 0.88 gain clears the -1 dBTP
  # guardrail; a local fix, not a mastering decision for the finished film.
@@ -141,5 +158,5 @@ subprocess.run(cmd,check=True)
 r=subprocess.run([ff,'-hide_banner','-i',str(out),'-filter_complex','ebur128=peak=true','-f','null','-'],capture_output=True,text=True,check=True)
 f=re.findall(r'frame=\s*(\d+)',r.stderr);peak=re.findall(r'Peak:\s*(-?[\d.]+) dBFS',r.stderr);lu=re.findall(r'I:\s*(-?[\d.]+) LUFS',r.stderr)
 if not f or int(f[-1])!=frames or not peak or float(peak[-1])>-1 or not lu:raise SystemExit('Decode/frame/peak failure')
-report={'status':'incomplete separate editorial insert, not final','narration_offset_seconds':offset,'frames':frames,'fps':30,'lufs':float(lu[-1]),'true_peak_dbtp':float(peak[-1]),'input_sha256':expected,'audio_sha256':digest(audio),'brook_sha256':digest(brook) if brook else None,'wind_sha256':digest(root/'production/extinct-life/longform-mammoth/cinematic-rebuild/ambience-sources/felix-blume-wind-muges.ogg') if name in ('island-years','island-thaw') else None,'gain_note':('0.80 local gain to meet the true-peak guard' if name=='coverage-section' else ('0.88 local gain to meet the true-peak guard' if name in ('island-approach','trends-section') else None)),'note':'island-approach has temporary 0.88 gain to limit AAC true peak; all clips need final continuous mix','output_sha256':digest(out)}
+report={'status':'incomplete separate editorial insert, not final','narration_offset_seconds':offset,'frames':frames,'fps':30,'lufs':float(lu[-1]),'true_peak_dbtp':float(peak[-1]),'input_sha256':expected,'audio_sha256':digest(audio),'brook_sha256':digest(brook) if brook else None,'wind_sha256':digest(root/'production/extinct-life/longform-mammoth/cinematic-rebuild/ambience-sources/felix-blume-wind-muges.ogg') if name in ('island-years','island-thaw') else None,'gain_note':('0.80 local gain to meet the true-peak guard' if name=='coverage-section' else ('0.78 local gain to meet the true-peak guard' if name=='genetic-strain' else ('0.88 local gain to meet the true-peak guard' if name in ('island-approach','trends-section') else None))),'note':'island-approach has temporary 0.88 gain to limit AAC true peak; all clips need final continuous mix','output_sha256':digest(out)}
 (out.parent/f'{name}-qc.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
