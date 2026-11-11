@@ -58,12 +58,12 @@ foraging beat; the island chapter then runs continuously from 140.0 s. `island-t
 remains available as an 8-second alternate excerpt of the seasonal study but is not
 placed. `check_coverage.py` reports overlapping candidate windows instead of aborting
 and measures coverage as the union of verified windows. The current union is
-**426.0 s of 796.0 s**, leaving ~370 s with no picture.
+**496.0 s of 796.0 s**, leaving ~300 s with no picture.
 
 The island-seasons insert adds a low wind bed from the existing candidate recording;
 its provenance and the unverified master identity are recorded in
-`../ambience-sources/README.md`. It has not been auditioned. The `new-lead-section` insert carries
-no original sound design either: it is an evidence ladder for the 2025 microbial
+`../ambience-sources/README.md`. It has not been auditioned. The `ledger-section` insert (689–759 s) and the `new-lead-section` insert
+(652–689 s) carry no original sound design either: it is an evidence ladder for the 2025 microbial
 study, ending on an empty rung rather than a culprit. The coat-section insert
 uses the shared narration draft only, with no original sound design.
 

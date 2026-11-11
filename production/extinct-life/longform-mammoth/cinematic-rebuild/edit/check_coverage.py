@@ -16,6 +16,7 @@ segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json'
  {'name':'people-section','start_frame':11730,'frames':600,'qc':'people-section-qc.json','file':'people-section-incomplete-workprint.mp4'},
  {'name':'genome-record','start_frame':13650,'frames':480,'qc':'genome-record-qc.json','file':'genome-record-incomplete-workprint.mp4'},
  {'name':'reversal-section','start_frame':14190,'frames':660,'qc':'reversal-section-qc.json','file':'reversal-section-incomplete-workprint.mp4'},
+ {'name':'ledger-section','start_frame':20670,'frames':2100,'qc':'ledger-section-qc.json','file':'ledger-section-incomplete-workprint.mp4'},
  {'name':'new-lead-section','start_frame':19560,'frames':1110,'qc':'new-lead-section-qc.json','file':'new-lead-section-incomplete-workprint.mp4'},
  {'name':'verdict-section','start_frame':22770,'frames':720,'qc':'verdict-section-qc.json','file':'verdict-section-incomplete-workprint.mp4'},
  {'name':'final-crossing','start_frame':23490,'frames':390,'qc':'final-crossing-qc.json','file':'final-crossing-incomplete-workprint.mp4'},

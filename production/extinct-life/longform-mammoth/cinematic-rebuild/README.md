@@ -13,12 +13,13 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `full-script-v2/` | Ten science-qualified narration takes, 796.042 s, auto-aligned captions, source crosswalk. Human script, caption, pronunciation and science review outstanding. |
 | `soundtrack-draft/` | Continuous narration + music draft (796.1 s). No SFX; not continuously auditioned. |
 | `storyboard-retime/` | 83 provisional blocks over the full narration length. Not picture lock. |
-| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 426.0 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. |
+| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 496.0 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. |
 | `island-chapter/` | 60 s, seven-shot Arctic sequence (dawn herd, tracking walk, trunk to grass, calf, stream crossing, squall, dusk). 30 s placed at 140 s. |
 | `coat-section/` | 34 s, five shots (macro wool texture, close flank, low legs, herd into low sun, exit hold). 24 s placed at 250 s. |
 | `island-years/` | 30 s compressed-season study. An 8 s excerpt is available as an alternate; not currently placed. |
 | `isolation-section/` | 28 s schematic cross-section of sea-level isolation plus the three-population panel; placed at 86 s. No coastline traced. |
 | `island-approach/` | 18 s walk-and-forage scene; 10 s placed at 130 s. |
+| `ledger-section/` | 70 s three-tier confidence ledger (supported / plausible / not established) for the closing argument; placed at 689 s. No cause is pictured at any tier. |
 | `new-lead-section/` | 37 s evidence ladder for the 2025 microbial study; placed at 652 s. The diagnosis rung is drawn as an empty dashed outline, not a culprit. |
 | `coverage-section/` | 20 s two-window plate for the coverage-bias argument; placed at 557 s. Repeats the narration's own room analogy literally. |
 | `reversal-section/` | 22 s modelled-bottleneck curve for the 2024 result; placed at 473 s. Deliberately no herd and no animal count. |
@@ -33,7 +34,7 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 
 ## What is still missing
 
-Roughly 370 s of the narration has no verified picture. The laboratory/genetics
+Roughly 300 s of the narration has no verified picture. The laboratory/genetics
 chapter, the isotope and chemistry passages, the human-evidence chapter, the 2024
 genome work and the verdict need sequences that do not yet exist or are only
 partially built. Audio needs a continuous mix with ambience and music decisions,
