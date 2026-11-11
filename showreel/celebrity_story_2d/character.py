@@ -34,11 +34,19 @@ def _box_blur(img, k=2):
 
 
 def _hard_edge(mask, feather=1.0):
-    """Threshold a soft mask back to a crisp edge and feather it by ~1 px."""
+    """Threshold a soft mask back to a crisp edge and feather it by ~1 px.
+
+    The feather pass must not reintroduce translucency: scaling a 3x3 mean up
+    by 1.8 still leaves the mask around 0.2 in places, and a limb with 0.2
+    alpha is a ghost. Thresholding the blurred mask instead keeps every pixel
+    fully opaque and only rounds the silhouette by a pixel.
+    """
     m = (np.asarray(mask, np.float32) > 0.5).astype(np.float32)
     if feather <= 0:
         return m
-    return np.clip(_box_blur(m, max(1, int(round(feather)))) * 1.8, 0, 1)
+    k = max(1, int(round(feather)))
+    soft = _box_blur(m, k)
+    return (soft > 0.45).astype(np.float32)
 
 
 def _jacket_fill(rgb, body, hole, skel, tone=(0.18, 0.46)):
@@ -201,6 +209,13 @@ def fill_holes(mask):
     return (~seen).astype(np.float32)
 
 
+def near_body(hand, h, w, reach=58.0):
+    """Mask of everything close enough to the hand to be arm, not garment."""
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    d = np.hypot(xx - hand[0], yy - hand[1])
+    return d < reach
+
+
 def limb_masks(lbl, skel, r_upper=31.0, r_fore=26.0, r_hand=30.0, soft=2.5):
     """Arm masks as capsules along the arm bones.
 
@@ -217,18 +232,31 @@ def limb_masks(lbl, skel, r_upper=31.0, r_fore=26.0, r_hand=30.0, soft=2.5):
         pts = [rest[j['shoulder_' + s]], rest[j['elbow_' + s]],
                rest[j['wrist_' + s]], rest[j['hand_' + s]]]
         cap = np.zeros((h, w), np.float32)
-        # the hand region is the palm plus fingers, which reach past the joint
+        # the hand region is the palm plus fingers, which reach past the joint,
+        # but only by about half a palm — extending further let the capsule take
+        # the jacket's hem on the far side of the wrist
         tail = np.asarray(pts[3], np.float32) + \
-            (np.asarray(pts[3], np.float32) - np.asarray(pts[2], np.float32)) * 0.55
+            (np.asarray(pts[3], np.float32) - np.asarray(pts[2], np.float32)) * 0.32
         for (a, b), r in zip(((pts[0], pts[1]), (pts[1], pts[2]),
                               (pts[2], pts[3]), (pts[3], tail)),
-                             (r_upper, r_fore, r_hand, r_hand * 0.78)):
+                             (r_upper, r_fore, r_hand, r_hand * 0.62)):
             a = np.asarray(a, np.float32); b = np.asarray(b, np.float32)
             ab = b - a
             t = np.clip(((px - a) @ ab) / max(float(ab @ ab), 1e-6), 0, 1)
             d = np.linalg.norm(px - (a + t[..., None] * ab), axis=-1)
             cap = np.maximum(cap, np.clip((r - d) / soft, 0, 1))
-        keep = fill_holes(cap > 0.5)
+        # the cut runs a little past the drawn arm so the sleeve's own outline
+        # and cuff are inside it; otherwise a thin rim of both survives behind
+        # the lifted sleeve, which reads as a notch at the wrist
+        grown = _box_blur((cap > 0.5).astype(np.float32), 4)
+        keep = fill_holes((cap > 0.5) | (grown > 0.30))
+        # the grown cut also takes a sliver of jacket hem; that belongs to the
+        # body, and if it rides with the arm it leaves a step at the hip
+        # hard stop: nothing beyond a hand-sized disc around the wrist belongs
+        # to the arm. Without this the grown cut runs down the jacket hem and
+        # the layer carries a strip of coat with it.
+        disc = np.hypot(px[..., 0] - pts[2][0], px[..., 1] - pts[2][1]) < (r_hand + 40.0)
+        keep = (keep > 0.5) & disc
         out[s] = _box_blur(keep.astype(np.float32), 1)
     return out
 
@@ -270,6 +298,8 @@ class Character:
         # Cut generously: the sleeve, its ink outline and a little margin, so no
         # pale rim of the old sleeve survives in the base.
         bodyf = self.body
+        # the cut may never reach past the painted body: the diffusion that
+        # grew it also flowed over the keyed-out background beside the hip
         self.cut = {s: _hard_edge(cut[s], 1.5) * bodyf for s in ('l', 'r')}
         # The arm layer is the sleeve only, no margin, so it drops back exactly
         # over its own pixels at rest and cannot spill onto the chest.
@@ -304,6 +334,9 @@ class Character:
         # The base keeps the full silhouette and the sleeve sits over it as its
         # own layer. Subtracting the sleeve from the base instead left a hole
         # wherever the fill did not reach, which is the rectangular notch.
+        # The sleeve's own footprint is removed from the base *only* as colour
+        # (filled jacket), never as coverage: coverage has to stay whole or a
+        # lifted arm uncovers a notch. The arm layer redraws those pixels.
         self.base_alpha = self.body.copy()
 
 
@@ -326,6 +359,15 @@ class Character:
         self.w_arm = {s: _restrict(self.skel, w_all, [
             'chest', 'shoulder_' + s, 'elbow_' + s, 'wrist_' + s, 'hand_' + s])
             for s in ('l', 'r')}
+
+        # The base is pinned to the torso: without this, pixels of the jacket's
+        # front panel are nearest to an arm bone and peel away with the sleeve.
+        j = self.skel.index
+        torso_bones = [j[n] for n in ('pelvis', 'spine', 'chest', 'neck',
+                                      'head', 'head_top', 'hip_l', 'hip_r')]
+        pinned = np.isin(self.voronoi, torso_bones)
+        self.base_dom = np.where(pinned, self.voronoi,
+                                 np.argmax(self.w_base, axis=0).astype(np.int32))
 
     # ------------------------------------------------------------------
     def _chain_voronoi(self, names):
