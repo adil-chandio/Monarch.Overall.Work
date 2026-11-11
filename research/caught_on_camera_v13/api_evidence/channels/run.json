@@ -1,0 +1,76 @@
+{
+  "generated_utc": "2026-11-11T03:45:02Z",
+  "lane_reports": [
+    {
+      "file": "co-cctv.json",
+      "topic": "security camera viral moments",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "NO"
+    },
+    {
+      "file": "co-compilation.json",
+      "topic": "caught on camera compilation",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN"
+    },
+    {
+      "file": "co-core.json",
+      "topic": "caught on camera",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN"
+    },
+    {
+      "file": "co-dashcam.json",
+      "topic": "dashcam caught on camera",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN"
+    },
+    {
+      "file": "co-fails.json",
+      "topic": "caught on camera fails compilation",
+      "order": "relevance",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN"
+    },
+    {
+      "file": "co-funny.json",
+      "topic": "funniest moments caught on camera",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN"
+    },
+    {
+      "file": "co-unexpected.json",
+      "topic": "unexpected moments caught on camera",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "NO"
+    },
+    {
+      "file": "co-wildlife.json",
+      "topic": "wildlife caught on camera",
+      "order": "viewCount",
+      "status": "ok",
+      "count": 30,
+      "verdict": "SHARPEN"
+    }
+  ],
+  "lane_rows": 240,
+  "channels_resolved": 146,
+  "video_details_resolved": 60,
+  "reverse_teardowns": 6,
+  "key_present": true,
+  "secret_value_printed_or_stored": false,
+  "boundary": "Public Data API fields only. No private retention, CTR, RPM, no invented transcripts, no verified growing-channel ranking, no legal opinion, no guaranteed views."
+}
