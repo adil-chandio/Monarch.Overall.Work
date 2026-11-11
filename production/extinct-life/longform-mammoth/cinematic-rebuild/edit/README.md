@@ -58,7 +58,7 @@ foraging beat; the island chapter then runs continuously from 140.0 s. `island-t
 remains available as an 8-second alternate excerpt of the seasonal study but is not
 placed. `check_coverage.py` reports overlapping candidate windows instead of aborting
 and measures coverage as the union of verified windows. The current union is
-**303.0 s of 796.0 s**, leaving ~493 s with no picture.
+**325.0 s of 796.0 s**, leaving ~471 s with no picture.
 
 The island-seasons insert adds a low wind bed from the existing candidate recording;
 its provenance and the unverified master identity are recorded in
