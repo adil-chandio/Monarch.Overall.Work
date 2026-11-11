@@ -1,5 +1,11 @@
 # 2024 genome record — visual experiment
 
+**Restyle (current render):** the tiles now sit on the same warm paper ground as
+`../people-section/` and `../reversal-section/`, with ink type instead of glow. The
+earlier dark-bench version is superseded; the before/after is visible in the cached
+stills under `.cache/mammoth-genome-record/`. Nothing about the claim changed — still
+one position per genome, still a schematic, still not specimens.
+
 A 16-second native 3D conceptual evidence display for the first lines of chapter 7. Seven pale positions and fourteen gold positions represent the seven pre-bottleneck Siberian mainland and 14 Wrangel genomes in Dehasque et al. (2024). These stylized cores are **not** photographs, authentic specimens or the lab's actual equipment. The study says the dataset spans about 50,000 years. Source: [Dehasque et al., Cell 2024, DOI 10.1016/j.cell.2024.05.033](https://www.cell.com/cell/fulltext/S0092-8674(24)00577-4), Results: Genomic data generation.
 
 `inspect.mjs` checks group counts, deterministic seeks and browser errors; cached stills are for review. `render-preview.mjs` makes a silent 30-fps local motion review. Run either from the repository root. The timing is only roughly planned against automatic caption estimates (narration begins around 458.3s; mainland around 466.7s; Wrangel around 470.9s) and requires listening and editorial review. The static appearance and camera move do not satisfy the approved storyboard's active scientist/comparison performance; this is a visual development element, not an approved shot or film.

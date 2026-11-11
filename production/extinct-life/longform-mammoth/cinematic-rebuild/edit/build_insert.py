@@ -45,13 +45,19 @@ choices={
  # 22 s, placed at 473.0 s on "the bottleneck was severe" through the
  # heterozygosity/homozygosity and immune-gene lines, ending before the
  # effective-size numbers at 518 s (which the curve's own labels must not pre-empt).
+ # The 2024 genome record: seven mainland and fourteen Wrangel marks, opened out.
+ # 16 s, placed at 455.0 s on "In 2024, researchers published a wider genetic
+ # record" and the 21-genome count. NOTE: this renderer writes no manifest of its
+ # own; a pinned manifest was recorded afterwards and build_insert still performs a
+ # full decode and frame check. It is the weakest-verified insert in the folder.
+ 'genome-record':('.cache/mammoth-genome-record/genome-record-motion-review.mp4','e074fc743d37e84cfa9df1ae34ada123f57a6b7d4f403751b4a1eab37f801230',455.0,480,480),
  'reversal-section':('.cache/mammoth-reversal-section/reversal-section-motion-review-silent.mp4',None,473.0,660,660),
  'people-section':('.cache/mammoth-people-section/people-section-motion-review-silent.mp4',None,391.0,600,600),
  'verdict-section':('.cache/mammoth-verdict-section/verdict-section-motion-review-silent.mp4',None,759.0,720,720),
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|reversal-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|genome-record|reversal-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
