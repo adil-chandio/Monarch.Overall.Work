@@ -9,6 +9,7 @@ segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json'
  {'name':'chemistry-section','start_frame':9150,'frames':1470,'qc':'chemistry-section-qc.json','file':'chemistry-section-incomplete-workprint.mp4'},
  {'name':'one-genome','start_frame':8220,'frames':930,'qc':'one-genome-qc.json','file':'one-genome-incomplete-workprint.mp4'},
  {'name':'isolation-section','start_frame':2580,'frames':840,'qc':'isolation-section-qc.json','file':'isolation-section-incomplete-workprint.mp4'},
+ {'name':'other-islands','start_frame':3420,'frames':480,'qc':'other-islands-qc.json','file':'other-islands-incomplete-workprint.mp4'},
  {'name':'island-approach','start_frame':3900,'frames':300,'qc':'island-approach-qc.json','file':'island-approach-incomplete-workprint.mp4'},
  {'name':'island-chapter','start_frame':4200,'frames':900,'qc':'island-chapter-qc.json','file':'island-chapter-incomplete-workprint.mp4'},
  {'name':'island-chapter-2','start_frame':6600,'frames':900,'qc':'island-chapter-2-qc.json','file':'island-chapter-2-incomplete-workprint.mp4'},
