@@ -214,7 +214,7 @@ _FACE_CACHE = {}
 #   head top 11, eye line 91, mouth line 131, face width 104, head height 142
 HW_RATIO = 142.0 / 104.0        # head height / head width
 FRAC_EYE = (91.0 - 11.0) / 142.0    # 0.563
-FRAC_MOUTH = (131.0 - 11.0) / 142.0  # 0.845
+FRAC_MOUTH = (128.0 - 11.0) / 142.0  # 0.824
 FACE_W_RATIO = 104.0 / 100.0
 
 # Landmarks read off the reference drawing on a printed grid, expressed as
@@ -275,231 +275,156 @@ def calibrate(cels):
     return _FACE_CACHE
 
 
-# ------------------------------------------------------------------ mouths
-# A drawn mouth chart in *face-width* units: (width, height, teeth, round, lift)
-MOUTH_CHART = {
-    'none': (0.000, 0.000, 0.00, 0.0, 0.00),
-    'M':    (0.300, 0.016, 0.00, 0.0, 0.02),   # closed
-    'MBP':  (0.280, 0.010, 0.00, 0.0, 0.00),   # pressed
-    'A':    (0.300, 0.150, 0.30, 0.35, 0.00),  # "ah"
-    'E':    (0.345, 0.095, 0.55, 0.10, 0.08),  # "eh"
-    'I':    (0.300, 0.065, 0.55, 0.00, 0.10),  # "ee"
-    'O':    (0.232, 0.135, 0.06, 0.85, 0.00),  # "oh"
-    'U':    (0.182, 0.082, 0.05, 0.80, 0.00),  # "oo"
-    'F':    (0.272, 0.044, 0.70, 0.00, 0.05),  # "f/v"
-    'L':    (0.254, 0.100, 0.35, 0.20, 0.03),  # "l/th"
-}
+# ---------------------------------------------------------------- lip sync
+_TALK_CACHE = {}
 
 
-class A_CEL_PROXY:
-    def __init__(self, rgb, alpha):
-        self.rgb = rgb
-        self.alpha = alpha
+def _shift(cel, dx, dy):
+    """Translate a cel in its own canvas, growing it so nothing is cropped."""
+    pad_l = max(0, int(round(-dx))) + 2
+    pad_r = max(0, int(round(dx))) + 2
+    pad_t = max(0, int(round(-dy))) + 2
+    pad_b = max(0, int(round(dy))) + 2
+    W = cel.w + pad_l + pad_r
+    H = cel.h + pad_t + pad_b
+    r = np.zeros((H, W, 3), np.float32)
+    a = np.zeros((H, W), np.float32)
+    x0 = pad_l + int(round(dx))
+    y0 = pad_t + int(round(dy))
+    r[y0:y0 + cel.h, x0:x0 + cel.w] = cel.rgb
+    a[y0:y0 + cel.h, x0:x0 + cel.w] = cel.alpha
+    return Cel(cel.name, r, a)
 
 
-def _lip_colour(cel_rgb, cel_alpha, m):
-    """Sample the lip skin just below the mouth so the chart matches the art."""
-    h, w = cel_alpha.shape
-    y = int(min(h - 1, max(0, m['mouth_y'] + m['face_w'] * 0.11)))
-    x0 = int(max(0, m['cx'] - m['face_w'] * 0.20))
-    x1 = int(min(w, m['cx'] + m['face_w'] * 0.20))
-    if x1 <= x0:
-        return np.array([0.55, 0.33, 0.29], np.float32)
-    patch = cel_rgb[max(0, y - 2):y + 3, x0:x1]
-    a = cel_alpha[max(0, y - 2):y + 3, x0:x1]
-    if patch.size == 0 or a.mean() < 0.5:
-        return np.array([0.55, 0.33, 0.29], np.float32)
-    return patch.reshape(-1, 3).mean(0).astype(np.float32)
+def _scaled(cel, sc, tag):
+    """Resize a cel under a distinct name, so face metrics stay truthful."""
+    nw = max(1, int(round(cel.w * sc)))
+    nh = max(1, int(round(cel.h * sc)))
+    rgb, alpha = resize_float(cel.rgb, cel.alpha, (nw, nh))
+    return Cel(f'{cel.name}@{tag}', rgb, alpha)
 
 
-def draw_mouth(cel_rgb, cel_alpha, m, viseme, amount=1.0, lip=None):
-    """Draw one viseme from the mouth chart onto the cel's face, in place."""
-    key = viseme if viseme in MOUTH_CHART else 'A'
-    fw = max(6.0, m['face_w'])
-    bw_u, bh_u, teeth, rnd, _lift = MOUTH_CHART[key]
+def _ncc(a, b):
+    a = a - a.mean()
+    b = b - b.mean()
+    den = np.sqrt((a * a).sum()) * np.sqrt((b * b).sum()) + 1e-6
+    return float((a * b).sum() / den)
+
+
+def _chin_refine(open_cel, base_cel, span=6):
+    """Slide the open drawing onto the base chin; the beard is identical."""
+    bs = face_metrics(base_cel)
+    fw = max(8.0, bs['face_w'])
+    x0 = int(bs['cx'] - fw * 0.28)
+    x1 = int(bs['cx'] + fw * 0.28)
+    y0 = int(bs['mouth_y'] + fw * 0.22)
+    y1 = int(bs['mouth_y'] + fw * 0.46)
+    ref = base_cel.rgb[y0:y1, x0:x1].mean(axis=2)
+    if ref.size < 80:
+        return 0, 0
+    best = (-2.0, 0, 0)
+    for dy in range(-span, span + 1):
+        for dx in range(-span, span + 1):
+            yy0, xx0 = y0 + dy, x0 + dx
+            cand = open_cel.rgb[yy0:yy0 + (y1 - y0), xx0:xx0 + (x1 - x0)].mean(axis=2)
+            if cand.shape != ref.shape:
+                continue
+            v = _ncc(ref, cand)
+            if v > best[0]:
+                best = (v, dy, dx)
+    return best[1], best[2]
+
+
+def register_onto(src, dst):
+    """Open-mouth drawing resampled onto `dst`'s exact canvas, head-matched."""
+    ms, md = face_metrics(src), face_metrics(dst)
+    sc = md['head_w'] / max(1e-3, ms['head_w'])
+    out = src
+    if abs(sc - 1.0) > 0.004:
+        out = _scaled(src, sc, 'reg')
+    om = face_metrics(out)
+    # where the source head lands on the destination canvas
+    dx = int(round(md['cx'] - om['cx']))
+    dy = int(round(md['eye_y'] - om['eye_y']))
+    H, W = dst.h, dst.w
+    r = np.zeros((H, W, 3), np.float32)
+    a = np.zeros((H, W), np.float32)
+    sx0 = max(0, -dx)
+    sy0 = max(0, -dy)
+    dx0 = max(0, dx)
+    dy0 = max(0, dy)
+    cw = min(out.w - sx0, W - dx0)
+    ch = min(out.h - sy0, H - dy0)
+    if cw > 0 and ch > 0:
+        r[dy0:dy0 + ch, dx0:dx0 + cw] = out.rgb[sy0:sy0 + ch, sx0:sx0 + cw]
+        a[dy0:dy0 + ch, dx0:dx0 + cw] = out.alpha[sy0:sy0 + ch, sx0:sx0 + cw]
+    reg = Cel(f'{dst.name}+{src.name}', r, a)
+    _FACE_CACHE[reg.name] = dict(md)
+    return reg
+
+
+def _crop_to(cel, dst):
+    """Crop/pad a cel back to the destination canvas."""
+    r = np.zeros((dst.h, dst.w, 3), np.float32)
+    a = np.zeros((dst.h, dst.w), np.float32)
+    ch = min(dst.h, cel.h)
+    cw = min(dst.w, cel.w)
+    r[:ch, :cw] = cel.rgb[:ch, :cw]
+    a[:ch, :cw] = cel.alpha[:ch, :cw]
+    out = Cel(cel.name + '|c', r, a)
+    _FACE_CACHE[out.name] = _FACE_CACHE.get(cel.name)
+    return out
+
+
+def talking_head(base, open_cel):
+    key = (base.name, open_cel.name)
+    hit = _TALK_CACHE.get(key)
+    if hit is None:
+        hit = register_onto(open_cel, base)
+        _TALK_CACHE[key] = hit
+    return hit
+
+
+def speak_mix(rgb, alpha, base_cel, open_cel, amount):
+    """Lip sync as drawn animation: swap to the open-mouth chart, mouth only."""
     amount = max(0.0, min(1.0, amount))
-    if key == 'none' or bw_u <= 0.0 or amount <= 0.02:
-        return cel_rgb, cel_alpha
+    if amount <= 0.02 or open_cel is None:
+        return rgb, alpha
+    t = talking_head(base_cel, open_cel)
+    m = face_metrics(base_cel)
+    h, w = alpha.shape
+    if (t.h, t.w) != (h, w):
+        return rgb, alpha
 
-    h, w = cel_alpha.shape
-    cx, cy = float(m['cx']), float(m['mouth_y'])
-    bw = max(2.0, bw_u * fw * (0.72 + 0.28 * amount))
-    bh = max(1.2, bh_u * fw * amount)
-    if lip is None:
-        lip = _lip_colour(cel_rgb, cel_alpha, m)
-    lipc = np.clip(np.asarray(lip, np.float32) * 0.86, 0, 1)
+    fw = max(6.0, m['face_w'])
+    cx = float(m['cx'])
+    cy = float(m['mouth_y']) + fw * 0.14
+    rx, ry = fw * 0.50, fw * 0.26
+    # never reach the eyes: the patch starts below the nose
+    top = int(max(m['eye_y'] + fw * 0.44, cy - ry * 2.0))
+    y0, y1 = int(max(0, top)), int(min(h, cy + ry * 1.9))
+    x0, x1 = int(max(0, cx - rx * 1.9)), int(min(w, cx + rx * 1.9))
+    if y1 - y0 < 6 or x1 - x0 < 6:
+        return rgb, alpha
 
-    R = int(bw * 0.75) + 10
-    sx0, sx1 = max(0, int(cx - R)), min(w, int(cx + R))
-    sy0, sy1 = max(0, int(cy - bh * 1.6 - 6)), min(h, int(cy + bh * 1.6 + 6))
-    if sx1 - sx0 < 5 or sy1 - sy0 < 4:
-        return cel_rgb, cel_alpha
-
-    hh, ww = sy1 - sy0, sx1 - sx0
+    hh, ww = y1 - y0, x1 - x0
     yy, xx = np.mgrid[0:hh, 0:ww].astype(np.float32)
-    px = xx + sx0 - cx
-    py = yy + sy0 - cy
-    u = px / (bw * 0.5)
-    v = py / max(bh * 0.5, 0.6)
+    d = np.sqrt(((xx + x0 - cx) / rx) ** 2 + ((yy + y0 - cy) / ry) ** 2)
+    e = np.clip((1.0 - d) / 0.55, 0, 1)
+    mask = (e * e * (3 - 2 * e)) * amount
+    mask = mask * np.clip(alpha[y0:y1, x0:x1] * 1.5, 0, 1) * \
+        np.clip(t.alpha[y0:y1, x0:x1] * 1.5, 0, 1)
 
-    # --- closed / pressed: draw only a soft seam, never a fill -------------
-    if bh < fw * 0.022:
-        seam_w = max(0.9, fw * 0.008)
-        band = np.exp(-(py / seam_w) ** 2)
-        band *= np.clip(1.0 - np.abs(u) / 1.02, 0, 1) ** 0.7
-        band *= amount
-        target = lipc * 0.45
-        region = cel_rgb[sy0:sy1, sx0:sx1]
-        cel_rgb[sy0:sy1, sx0:sx1] = region * (1 - band[..., None] * 0.8) + \
-            target.reshape(1, 1, 3) * (band[..., None] * 0.8)
-        return cel_rgb, cel_alpha
-
-    # --- open: lens (wide vowels) or ellipse (round vowels) ----------------
-    if rnd > 0.45:
-        d = u ** 2 + v ** 2
-    else:
-        # flatter lid on top, deeper floor: the shape of a speaking mouth
-        vv = np.where(v < 0, v * 0.86, v)
-        d = np.abs(u) ** 1.7 + np.abs(vv) ** 1.55
-    shape = np.clip((1.0 - d) / 0.30, 0, 1)
-    shape = shape * shape * (3 - 2 * shape)
-
-    depth = np.clip(1.0 - np.sqrt(np.maximum(0.0, u ** 2 * 0.7 + v ** 2)), 0, 1)
-    interior = np.array([0.105, 0.042, 0.048], np.float32)
-    interior = interior + depth[..., None] * np.array([0.075, 0.018, 0.025], np.float32)
-    tongue = (np.clip((v - 0.18) / 0.72, 0, 1) ** 1.6) * (np.abs(u) < 0.58)
-    interior = interior * (1 - tongue[..., None] * 0.40) + \
-        np.array([0.46, 0.16, 0.16], np.float32) * (tongue[..., None] * 0.40)
-    if teeth > 0.01:
-        band = np.clip((0.10 - v) / 0.34, 0, 1) * np.clip((v + 0.55) / 0.30, 0, 1)
-        band *= (np.abs(u) < 0.84) * teeth
-        interior = interior * (1 - band[..., None] * 0.92) + \
-            np.array([0.90, 0.87, 0.82], np.float32) * (band[..., None] * 0.92)
-
-    # lip rim, feathered outward from the opening
-    r_sq = np.sqrt(np.maximum(0.0, u ** 2 + v ** 2))
-    rim = np.clip(1.0 - np.abs(r_sq - 1.18) / 0.36, 0, 1) * 0.42
-
-    region = cel_rgb[sy0:sy1, sx0:sx1]
-    face = np.clip(cel_alpha[sy0:sy1, sx0:sx1] * 1.6, 0, 1)
-    a_open = shape * face
-    out = region * (1 - a_open[..., None]) + interior * a_open[..., None]
-    rim = rim * (1 - shape) * face
-    out = out * (1 - rim[..., None]) + lipc.reshape(1, 1, 3) * rim[..., None]
-    cel_rgb[sy0:sy1, sx0:sx1] = np.clip(out, 0, 1)
-    return cel_rgb, cel_alpha
+    out_r = rgb.copy()
+    region = out_r[y0:y1, x0:x1]
+    out_r[y0:y1, x0:x1] = region * (1 - mask[..., None]) + \
+        t.rgb[y0:y1, x0:x1] * mask[..., None]
+    return out_r, alpha.copy()
 
 
 class A_CEL_PROXY:
-    """Tiny shim so _lip_colour can read a cel without the Cel class."""
-
     def __init__(self, rgb, alpha):
         self.rgb = rgb
         self.alpha = alpha
 
 
-def warp_block(rgb, alpha, dx, dy, blur=40.0, power=1.0):
-    """Coherent body sway: shift the figure, weight by its own smoothed field."""
-    if abs(dx) < 0.02 and abs(dy) < 0.02:
-        return rgb, alpha
-    h, w = alpha.shape
-    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    f = _field(alpha, blur)
-    wgt = np.clip(f * power, 0, 1)
-    # pivot near the feet so the body leans rather than slides
-    lean = (h - yy) / max(h, 1)
-    sx = np.clip(xx + dx * wgt * lean, 0, w - 1).astype(np.int32)
-    sy = np.clip(yy + dy * wgt, 0, h - 1).astype(np.int32)
-    out_r = rgb[sy, sx]
-    out_a = alpha[sy, sx]
-    return out_r, out_a
-
-
-# ---------------------------------------------------------------- composite
-def place_cel(canvas, rgb, alpha, cx, foot_y, height, flip=False, tint=None,
-              opacity=1.0, shadow=0.0, pivot=None):
-    """Composite a cel so its head sits on cx and its feet on foot_y."""
-    H, W = canvas.shape[:2]
-    sc = height / float(alpha.shape[0])
-    nw, nh = max(1, int(round(alpha.shape[1] * sc))), max(1, int(round(height)))
-    if pivot is None:
-        pivot = alpha.shape[1] / 2.0
-    pivot = pivot * sc
-    r, a = resize_float(rgb, alpha, (nw, nh))
-    if flip:
-        r = r[:, ::-1]
-        a = a[:, ::-1]
-        pivot = nw - pivot
-    if tint is not None:
-        r = r * np.array(tint, np.float32)[None, None, :]
-    a = a * opacity
-    x = int(round(cx - pivot))
-    y = int(round(foot_y - nh))
-    if shadow > 0:
-        ry = max(4.0, nh * 0.022)
-        rx = max(6.0, nw * 0.30)
-        mask = _ellipse_mask(H, W, (cx, foot_y - ry * 0.25), rx, ry)
-        canvas *= (1.0 - mask[..., None] * shadow)
-    x0, y0 = max(0, x), max(0, y)
-    x1, y1 = min(W, x + nw), min(H, y + nh)
-    if x1 <= x0 or y1 <= y0:
-        return canvas
-    sx0, sy0 = x0 - x, y0 - y
-    sub_a = a[sy0:sy0 + (y1 - y0), sx0:sx0 + (x1 - x0)]
-    sub_r = r[sy0:sy0 + (y1 - y0), sx0:sx0 + (x1 - x0)]
-    region = canvas[y0:y1, x0:x1]
-    canvas[y0:y1, x0:x1] = region * (1 - sub_a[..., None]) + sub_r * sub_a[..., None]
-    return canvas
-
-
-def _ellipse_mask(H, W, centre, rx, ry, soft=0.75):
-    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
-    d = np.sqrt(((xx - centre[0]) / max(rx, 1e-3)) ** 2 +
-                ((yy - centre[1]) / max(ry, 1e-3)) ** 2)
-    e = np.clip((1.0 - d) / max(soft, 1e-3), 0, 1)
-    return e * e * (3 - 2 * e)
-
-
-# ------------------------------------------------------------------ mouths
-def mouth_overlay(rgb, alpha, box, shape, amount):
-    """Draw a moving mouth inside a box of the face.
-
-    `box` is (x0, y0, x1, y1) in the cel's own pixel space. `shape` is one of
-    'closed', 'half', 'open', 'wide'. Everything is drawn in float RGB and
-    feathered so it reads as paint, not as a sticker.
-    """
-    if amount <= 0.01 or shape == 'closed':
-        return rgb, alpha
-    h, w = alpha.shape
-    x0, y0, x1, y1 = [int(v) for v in box]
-    x0, y0 = max(0, x0), max(0, y0)
-    x1, y1 = min(w, x1), min(h, y1)
-    if x1 - x0 < 4 or y1 - y0 < 3:
-        return rgb, alpha
-    bw, bh = x1 - x0, y1 - y0
-    yy, xx = np.mgrid[0:bh, 0:bw].astype(np.float32)
-    u = (xx - bw / 2.0) / (bw / 2.0)
-    v = (yy - bh / 2.0) / (bh / 2.0)
-    opening = {'half': 0.45, 'open': 0.85, 'wide': 1.15}.get(shape, 0.5)
-    # lip line bow: an ellipse squashed to the opening width
-    ry = opening * 0.95
-    rx = 0.92
-    d = (u / rx) ** 2 + (v / max(ry, 1e-3)) ** 2
-    inside = np.clip((1.0 - d) / 0.40, 0, 1)
-    inside = inside * inside * (3 - 2 * inside)
-    # the dark interior, warmer toward the lower lip
-    inner = np.zeros((bh, bw, 3), np.float32)
-    inner[...] = np.array([0.22, 0.075, 0.075], np.float32)
-    inner += (np.clip(v, 0, 1)[..., None] * np.array([0.13, 0.03, 0.03], np.float32))
-    # teeth along the top of the opening
-    teeth = np.clip((0.10 - v) / 0.30, 0, 1) * np.clip(inside * 1.2, 0, 1)
-    teeth *= (np.abs(u) < 0.78)
-    inner = inner * (1 - teeth[..., None] * 0.86) + \
-        np.array([0.92, 0.89, 0.84], np.float32) * (teeth[..., None] * 0.86)
-    m = inside * amount
-    # restrict to the face: only touch pixels the cel already covers
-    face = alpha[y0:y1, x0:x1]
-    m = m * np.clip(face * 1.6, 0, 1)
-    region = rgb[y0:y1, x0:x1]
-    region[:] = region * (1 - m[..., None]) + inner * m[..., None]
-    return rgb, alpha

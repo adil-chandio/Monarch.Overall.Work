@@ -160,14 +160,18 @@ def pose_frame(cel_a, cel_b, k, t, talk=None, mouth=None, seed=0.0):
                                     cel_b.rgb, cel_b.alpha, kk)
 
 
-    # lip sync from the drawn mouth chart, on measured face landmarks
+    # lip sync: cut between the closed and open lip chart on the voice envelope
     if mouth is not None:
         viseme, amount = mouth
         ref = cel_b if kk > 0.5 else cel_a
-        m = A.face_metrics(cels_get(ref.name) or ref)
-        # the breathing warp moves pixels, not the frame, so the mouth is drawn
-        # onto the *unwarped* cel and the whole thing is warped together
-        rgb, alpha = A.draw_mouth(rgb, alpha, m, viseme, amount)
+        open_name = MOUTH_PAIRS.get(ref.name)
+        open_cel = _CELS.get(open_name) if open_name else None
+        if open_cel is not None:
+            # drawn animation changes drawings; it does not dissolve them.
+            # the envelope picks the chart, with a one-frame edge so a fast
+            # syllable does not strobe.
+            rgb, alpha = A.speak_mix(rgb, alpha, ref, open_cel,
+                                     1.0 if amount >= 0.34 else 0.0)
 
     # breathing: a small vertical breath, strongest in the chest
     breath = math.sin(t * 1.31 + seed) * 1.7
