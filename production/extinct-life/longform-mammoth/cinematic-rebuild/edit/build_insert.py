@@ -60,12 +60,16 @@ choices={
  # their sequence is readable"; it stops before the two opposing trends at 589 s.
  'coverage-section':('.cache/mammoth-coverage-section/coverage-section-motion-review-silent.mp4',None,557.0,600,600),
  'reversal-section':('.cache/mammoth-reversal-section/reversal-section-motion-review-silent.mp4',None,473.0,660,660),
+ # The 2025 microbial lead: an evidence ladder with the diagnosis rung left visibly
+ # empty. 37 s, placed at 652.0 s on "a newer lead shows why careful questions
+ # matter" through "the diagnosis is still missing".
+ 'new-lead-section':('.cache/mammoth-new-lead-section/new-lead-section-motion-review-silent.mp4',None,652.0,1110,1110),
  'people-section':('.cache/mammoth-people-section/people-section-motion-review-silent.mp4',None,391.0,600,600),
  'verdict-section':('.cache/mammoth-verdict-section/verdict-section-motion-review-silent.mp4',None,759.0,720,720),
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|isolation-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|isolation-section|new-lead-section|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
