@@ -33,6 +33,78 @@ def _box_blur(img, k=2):
     return out
 
 
+def _hard_edge(mask, feather=1.0):
+    """Threshold a soft mask back to a crisp edge and feather it by ~1 px."""
+    m = (np.asarray(mask, np.float32) > 0.5).astype(np.float32)
+    if feather <= 0:
+        return m
+    return np.clip(_box_blur(m, max(1, int(round(feather)))) * 1.8, 0, 1)
+
+
+def _jacket_fill(rgb, body, hole, skel, tone=(0.18, 0.46)):
+    """Paint the gap under a lifted arm with the jacket's own tone.
+
+    The patch to copy from is chosen by *appearance*, not by a box: charcoal
+    jacket, not the white shirt or the navy tie that sit in the same rectangle.
+    Copying a box gave a pale smear down the chest, which is what made the
+    sleeve look ghosted.
+    """
+    j = skel.index; r = skel.rest
+    hole = np.clip(np.asarray(hole, np.float32), 0, 1)
+    body = np.asarray(body, np.float32)
+    if hole.max() < 1e-3:
+        return rgb
+
+    lum = rgb.mean(2)
+    sat = rgb.max(2) - rgb.min(2)
+    x0, x1 = int(r[j['chest']][0]) - 58, int(r[j['chest']][0]) + 40
+    y0, y1 = int(r[j['chest']][1]) + 6, int(r[j['pelvis']][1]) - 20
+    x0, y0 = max(0, x0), max(0, y0)
+    sub = np.zeros(lum.shape, bool)
+    sub[y0:y1, x0:x1] = True
+    pick = sub & (body > 0.5) & (lum > tone[0]) & (lum < tone[1]) & (sat < 0.10)
+    if pick.sum() < 200:
+        pick = (body > 0.5) & (lum > tone[0]) & (lum < tone[1])
+    if pick.sum() < 50:
+        return rgb
+    base = np.median(rgb[pick], axis=0)
+
+    h = body.shape[0]
+    yy = np.arange(h, dtype=np.float32)[:, None]
+    top, bot = float(y0), float(max(y1, y0 + 1))
+    shade = 1.0 - 0.14 * np.clip((yy - top) / max(1e-3, bot - top), 0, 1)
+    fill = base[None, None, :] * shade[..., None]
+    return np.clip(np.where(hole[..., None] > 0.02, fill, rgb), 0, 1)
+
+
+def edge_extend(rgb, mask, reach=14):
+    """Grow a layer's colour outward past its own edge.
+
+    A weight-blended warp samples a few pixels outside the shape it is warping.
+    Inside the jacket that is harmless, but around a sleeve it pulls in the
+    white shirt, and the arm ends up looking transparent. Extending the
+    sleeve's own colour outward first removes that leak at the source.
+    """
+    rgb = np.asarray(rgb, np.float32)
+    known = (np.asarray(mask, np.float32) > 0.5)
+    if not known.any():
+        return rgb
+    out = rgb.copy()
+    for _ in range(reach):
+        kn = known.astype(np.float32)[..., None]
+        acc = np.zeros_like(out)
+        cnt = np.zeros(known.shape, np.float32)
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            acc += np.roll(out * kn, (dy, dx), (0, 1))
+            cnt += np.roll(known.astype(np.float32), (dy, dx), (0, 1))
+        grow = (~known) & (cnt > 0)
+        if not grow.any():
+            break
+        out[grow] = acc[grow] / cnt[grow][:, None]
+        known = known | grow
+    return out
+
+
 def _grid(w, h):
     yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
     return np.stack([xx, yy], -1).astype(np.float32)
@@ -102,7 +174,7 @@ def ink_regions(rgb, body, dark=0.22, grad=0.10, min_px=150):
     return lbl
 
 
-def limb_masks(lbl, skel, tol=20.0, max_px=20000):
+def limb_masks(lbl, skel, tol=-14.0, max_px=20000):
     """Arm masks from the cel's own regions.
 
     A region belongs to an arm when it lies wholly on that side of the shoulder
@@ -128,9 +200,12 @@ def limb_masks(lbl, skel, tol=20.0, max_px=20000):
                 continue
             if ys.min() < y0 or ys.max() > y1:
                 continue
+            # a limb's painted pixels stay outboard of the shoulder joint; the
+            # jacket panel always crosses inboard, so this one test separates
+            # them even when both are the same charcoal
             if s == 'l' and xs.max() > rest[j['shoulder_l']][0] + tol:
                 continue
-            if s == 'r' and xs.min() < rest[j['shoulder_r']][0] - tol:
+            if s == 'r' and xs.min() < rest[j['shoulder_r']][0] + tol:
                 continue
             keep[m] = 1.0
         full[s] = keep.copy()
@@ -154,13 +229,28 @@ def limb_masks(lbl, skel, tol=20.0, max_px=20000):
 class Character:
     """A painted cel cut into layers and bound to the armature."""
 
-    def __init__(self, rgb, alpha, skel=None, fill=True, scale_to=None):
+    def __init__(self, rgb, alpha, skel=None, fill=True, scale_to=None, pad=1.10):
         rgb = np.asarray(rgb, np.float32)
         alpha = np.clip(np.asarray(alpha, np.float32), 0, 1)
+        # A 311-pixel-wide cel cannot hold a lifted arm: the hand would be
+        # clipped off the edge of the drawing and the limb would lose most of
+        # its pixels. The working canvas is padded so any pose fits inside it.
+        h0, w0 = alpha.shape
+        px = int(round(w0 * pad))
+        px = max(px, int(round(h0 * 0.30)))
+        py = int(round(h0 * 0.10))
+        canvas = np.zeros((h0 + 2 * py, w0 + 2 * px, 3), np.float32)
+        canvas[py:py + h0, px:px + w0] = rgb
+        canvas_a = np.zeros((h0 + 2 * py, w0 + 2 * px), np.float32)
+        canvas_a[py:py + h0, px:px + w0] = alpha
+        rgb, alpha = canvas, canvas_a
+        self.pad = (px, py)
+
         self.h, self.w = alpha.shape
         self.skel = skel or K.hero_skeleton()
         if scale_to:
             self.skel = _scale_skel(self.skel, scale_to / 1000.0)
+        self.skel = K.translate_skel(self.skel, px, py)
         self.rest = self.skel.forward()
         self.body = (alpha > 0.45).astype(np.float32)
         self.rgb = rgb
@@ -170,10 +260,13 @@ class Character:
         mask, cut = limb_masks(lbl, self.skel)
         # Cut generously: the sleeve, its ink outline and a little margin, so no
         # pale rim of the old sleeve survives in the base.
-        self.cut = {s: np.clip(_box_blur(cut[s], 4) * 1.6, 0, 1) for s in ('l', 'r')}
+        bodyf = self.body
+        self.cut = {s: _hard_edge(cut[s], 1.5) * bodyf for s in ('l', 'r')}
         # The arm layer is the sleeve only, no margin, so it drops back exactly
         # over its own pixels at rest and cannot spill onto the chest.
-        self.arm_alpha = {s: np.clip(_box_blur(mask[s], 1) * 1.2, 0, 1) for s in ('l', 'r')}
+        # A hard, one-pixel-feathered edge: a wide soft edge lets the page
+        # background show through the sleeve and reads as a white halo.
+        self.arm_alpha = {s: _hard_edge(mask[s], 1) * bodyf for s in ('l', 'r')}
         self.arm_mask = mask
 
         # the hole an arm leaves inside the torso, which must be painted under
@@ -186,10 +279,12 @@ class Character:
         undrawn = np.clip(1.0 - sleeves0, 0, 1)
         self.hole = {s: np.clip(self.hole[s] * undrawn, 0, 1) for s in ('l', 'r')}
         self.undrawn = undrawn
-        all_hole = np.clip(self.cut['l'] + self.cut['r'], 0, 1)
+        # only the part of the arm that lay *over the jacket* needs painting in:
+        # the rest of the sleeve hangs outside the body and leaves nothing behind
+        self.hole = {s: np.clip(self.cut[s] * torso, 0, 1) for s in ('l', 'r')}
+        all_hole = np.clip(self.hole['l'] + self.hole['r'], 0, 1)
         if fill and all_hole.max() > 0.01:
-            self.base_rgb = np.where(all_hole[..., None] > 0.02,
-                                     inpaint(rgb, all_hole), rgb)
+            self.base_rgb = _jacket_fill(rgb, self.body, all_hole, self.skel)
         else:
             self.base_rgb = rgb.copy()
 
@@ -200,10 +295,17 @@ class Character:
         self.base_alpha = np.clip(self.body - sleeves, 0, 1)
 
 
+        # colour pushed past each layer's edge, so a blended warp cannot sample
+        # the shirt or the page through the sleeve
+        self.arm_rgb = {s: edge_extend(rgb, self.arm_alpha[s], 16) for s in ('l', 'r')}
         self.voronoi = K.bone_voronoi(self.skel, self.w, self.h)
         self.v_arm = {s: self._chain_voronoi(('shoulder_' + s, 'elbow_' + s,
                                              'wrist_' + s, 'hand_' + s))
                       for s in ('l', 'r')}
+        self.w_chain = {s: K.chain_weights(self.skel, ('shoulder_' + s, 'elbow_' + s,
+                                                       'wrist_' + s, 'hand_' + s),
+                                          self.w, self.h)
+                        for s in ('l', 'r')}
         w_all = K.skin_weights(self.skel, self.w, self.h)
         self.w_base = _restrict(self.skel, w_all, [
             'pelvis', 'spine', 'chest', 'neck', 'head', 'head_top',
@@ -255,7 +357,14 @@ class Character:
         balpha = np.clip(balpha, 0, 1)
 
         for s in ('r', 'l'):     # far arm, then near arm
-            argb, aalpha = warp(self.rgb, self.arm_alpha[s], self.v_arm[s])
+            # colour bends through a soft weight blend; coverage is taken from
+            # the hard map. Blending the two together averages the alpha down in
+            # the middle of the limb and the background shows through it.
+            argb, _ = K.deform(self.arm_rgb[s], self.arm_alpha[s], self.skel,
+                               self.w_chain[s], self.rest, joints,
+                               self.w, self.h, blend=True)
+            _, aalpha = K.deform(self.arm_rgb[s], self.arm_alpha[s], self.skel,
+                                 self.v_arm[s], self.rest, joints, self.w, self.h)
             argb = np.clip(argb, 0, 1)
             a = np.clip(aalpha, 0, 1)[..., None]
             brgb = argb * a + brgb * (1 - a)

@@ -48,6 +48,16 @@ class Skeleton:
         return out
 
 
+def translate_skel(skel, dx, dy):
+    """The same rig, moved. Used when the working canvas is padded."""
+    names = skel.names
+    joints = {n: tuple(np.asarray(p, np.float32) + np.array([dx, dy], np.float32))
+              for n, p in zip(names, skel.rest)}
+    par = {n: names[int(skel.parents[i])] for i, n in enumerate(names)
+           if int(skel.parents[i]) >= 0}
+    return Skeleton(joints, par)
+
+
 def hero_skeleton():
     """Joints measured off the painted standing cel (311 x 1000).
 
@@ -171,6 +181,52 @@ def bone_voronoi(skel, w, h):
                 break
         dist[i] = d
     return np.argmax(-dist, axis=0).astype(np.int32)
+
+
+def chain_weights(skel, names, w, h, band=9.0):
+    """Weights along a single limb chain, as a smooth function of arc length.
+
+    Nearest-bone cells put a hard horizontal seam across the sleeve, which shows
+    as a stair-step at the elbow. Speed along the chain is a 1-D quantity, so the
+    two bones either side of a joint share a narrow band and cross-fade inside
+    it: the sleeve bends instead of snapping.
+    """
+    idx = [skel.index[n] for n in names]
+    rest = skel.rest
+    pts = [rest[i] for i in idx]
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    px = np.stack([xx, yy], -1)
+
+    # cumulative arc length at each joint
+    cum = [0.0]
+    for a, b in zip(pts[:-1], pts[1:]):
+        cum.append(cum[-1] + float(np.linalg.norm(b - a)))
+
+    # arc-length parameter of the nearest point on the polyline
+    best_d = np.full((h, w), 1e9, np.float32)
+    best_s = np.zeros((h, w), np.float32)
+    for k in range(len(pts) - 1):
+        a, b = pts[k], pts[k + 1]
+        ab = b - a
+        L2 = max(float(ab @ ab), 1e-6)
+        t = np.clip(((px - a) @ ab) / L2, 0, 1)
+        q = a + t[..., None] * ab
+        d = np.linalg.norm(px - q, axis=-1)
+        m = d < best_d
+        best_d = np.where(m, d, best_d)
+        best_s = np.where(m, cum[k] + t * (L2 ** 0.5), best_s)
+
+    wts = np.zeros((skel.n, h, w), np.float32)
+    for k, i in enumerate(idx):
+        lo = cum[k] - (band if k > 0 else 1e9)
+        hi = cum[min(k + 1, len(cum) - 1)] + (band if k < len(idx) - 1 else 1e9)
+        # ramp in at the joint below, ramp out at the joint above
+        a = np.clip((best_s - lo) / (2 * band if k > 0 else 1.0), 0, 1)
+        b = np.clip((hi - best_s) / (2 * band if k < len(idx) - 1 else 1.0), 0, 1)
+        wts[i] = a * b
+    tot = wts.sum(0, keepdims=True)
+    wts = wts / np.maximum(tot, 1e-6)
+    return wts
 
 
 def skin_weights(skel, w, h, softness=28.0):
@@ -312,19 +368,26 @@ def source_map(skel, weights, rest, posed, w, h):
 
 
 def _bilinear(img, sx, sy):
-    """Sample img (H,W,C) at fractional coords, clamp to edge."""
+    """Sample img (H,W,C) at fractional coords.
+
+    Out-of-range samples are dropped to transparent rather than clamped: with
+    clamping, a limb that leaves the canvas is smeared along the edge instead
+    of disappearing honestly, and the smear is what makes a pose look broken.
+    """
     h, w = img.shape[0], img.shape[1]
     x0 = np.floor(sx).astype(np.int32)
     y0 = np.floor(sy).astype(np.int32)
     fx = (sx - x0)[..., None].astype(np.float32)
     fy = (sy - y0)[..., None].astype(np.float32)
+    inside = (sx >= 0) & (sx <= w - 1) & (sy >= 0) & (sy <= h - 1)
     x0c = np.clip(x0, 0, w - 1); x1c = np.clip(x0 + 1, 0, w - 1)
     y0c = np.clip(y0, 0, h - 1); y1c = np.clip(y0 + 1, 0, h - 1)
     p00 = img[y0c, x0c]; p10 = img[y0c, x1c]
     p01 = img[y1c, x0c]; p11 = img[y1c, x1c]
     top = p00 + (p10 - p00) * fx
     bot = p01 + (p11 - p01) * fx
-    return top + (bot - top) * fy
+    out = top + (bot - top) * fy
+    return out * inside[..., None].astype(np.float32)
 
 
 def source_map_rigid(skel, weights, rest, posed, w, h):
