@@ -170,6 +170,16 @@ class World:
         # dust -- has to agree about where the ground stops, or the figure walks
         # across a hole it should have fallen into.
         self.gaps = list(gaps)
+        # A cliff is not a hole. A hole is an opening you look into; a cliff is an
+        # edge you look over. The difference matters for what can be *seen*: inside
+        # a hole a body is occluded by the near lip almost immediately, whereas over
+        # a cliff it falls in front of the rock face and stays visible the whole way.
+        # A shot that has to show somebody falling off something needs the second.
+        self.cliff_x = None
+
+    def over_cliff(self, x):
+        """Is this world x past the edge, i.e. in the air over the drop?"""
+        return self.cliff_x is not None and x > self.cliff_x
 
     # -- ground queries -----------------------------------------------------
 
@@ -290,6 +300,11 @@ def paint(world, proj):
                      * (1.0 - haze) + sky_here * haze)
         frame = np.where(mask[..., None], ridge_col, frame)
 
+    # The cliff goes on before the gap: both are "the world shows through here",
+    # and both have to be painted after everything they occlude.
+    if world.cliff_x is not None:
+        frame = _paint_cliff(frame, world, proj, pal, hz)
+
     # The gap goes on last. A hole is nearer to the camera than anything behind
     # it, so painting it before the ridges leaves the hills showing through the
     # void -- which is exactly what happened the first time.
@@ -300,16 +315,22 @@ def paint(world, proj):
 
 
 def _paint_gaps(frame, world, proj, pal, hz):
-    """Cut the floor open and draw what is inside the cut.
+    """Cut the floor open and show what is inside the cut.
 
-    For each gap: the far wall (seen above the far lip, lit from the sky), the
-    void itself (nearly black, because almost no light reaches it), and the
-    near wall just below the near lip. The lips get a highlight, which is what
-    tells the eye that the floor has an edge rather than a shadow.
+    A hole in a floor is not a black stripe. Standing at its near rim you see the
+    far wall -- the rock across the void, standing at the same elevation you are, so
+    it projects a little below the horizon -- and below that, the depth, going dark.
+    That far wall is *lit*, because it faces the sun, and it is what makes the drop
+    read as a place rather than as a painted band.
+
+    Painting the interior black was the first version, and it failed twice over: the
+    void looked like a strip of card laid on the ground, and a dark figure falling
+    into it vanished, because there is nothing on a nine-by-sixteen frame harder to
+    see than near-black ink on near-black rock.
     """
     Hh, Ww = frame.shape[:2]
     rows = np.arange(Hh, dtype=np.float32)[:, None]
-    floor_row = float(proj.sy(0.0))
+    cols = np.arange(Ww, dtype=np.float32)[None, :]
 
     for x0, x1, depth in world.gaps:
         sx0 = float(proj.sx(x0))
@@ -321,86 +342,174 @@ def _paint_gaps(frame, world, proj, pal, hz):
         if right <= left:
             continue
 
-        # How deep the hole projects.
-        #
-        # The camera looks down into a cut whose floor is below and behind the
-        # near lip, so the visible void is a wedge: its top edge is the far lip
-        # (further away, therefore higher on screen), its bottom edge is the near
-        # lip, and the far wall narrows toward the bottom because the wall's base
-        # is further away than its rim. Filling a plain rectangle here is what
-        # makes a chasm look like a grey box.
         far_y = float(proj.sy(-depth))
         near_y = float(proj.sy(0.0))
-
-        # The far wall's base sits at the same world depth as its rim, but the
-        # floor of the cut is further back, so it foreshortens inward.
-        base = float(proj.sy(-depth * 1.9))
         top = min(far_y, near_y)
         bot = max(far_y, near_y)
         if bot - top < 2:
             continue
 
-        # Inset at the far lip, as a fraction of the gap's width. A deeper point
-        # projects smaller, so the far lip -- which is at depth z, not 1 -- is
-        # narrower on screen than the near lip. Narrow at the top, wide at the
-        # bottom: that trapezoid is the whole read of a hole in a floor.
+        # Perspective of the opening: the far lip is further away, so it projects
+        # narrower than the near one. Narrow at the top, wide at the bottom.
         inset = 0.30
-        cols_idx = np.arange(left, right, dtype=np.float64)
-        u = (cols_idx - left) / max(right - left, 1)
+        ui = (cols - left) / max(right - left, 1)
+        k = np.clip((rows - top) / max(bot - top, 1.0), 0.0, 1.0)
+        a = left + inset * (right - left) * (1.0 - k) * 0.5
+        b = right - inset * (right - left) * (1.0 - k) * 0.5
+        inside = (cols >= a) & (cols <= b) & (rows >= top) & (rows <= bot)
 
-        # The lip is broken, not cut: a small world-space jitter, fixed per x so
-        # it does not crawl, makes the edge read as ground that fell away.
-        jitter = (proj.cam_x * 0.0)  # keeps the world stable under the camera
-        for y in range(max(0, int(round(top))), min(Hh, int(round(bot)))):
-            # How far down the void this row is, 0 at the far lip.
-            k = (y - top) / max(bot - top, 1.0)
-            a = left + inset * (right - left) * (1.0 - k) * 0.5
-            b = right - inset * (right - left) * (1.0 - k) * 0.5
-            a, b = int(round(a)), int(round(b))
-            if b <= a:
-                continue
-            # Lit at the rim, falling to almost nothing at the base of the wall.
-            lit = np.clip(np.array(pal["ridges"][0], np.float32) * 0.66, 0, 1)
-            dark = np.array([0.040, 0.034, 0.040], np.float32)
-            col = np.asarray(lit, np.float32) + (
-                np.asarray(dark, np.float32) - np.asarray(lit, np.float32)) * float(
-                max(0.0, k) ** 0.55)
+        # The far wall, lit. Brightest at its rim and falling into the dark within
+        # a third of the drop: below that, no sky reaches it.
+        sunlit = np.clip(np.array(pal["ridges"][0], np.float32) * 1.05, 0, 1)
+        mid = np.array(pal["ridges"][1], np.float32) * 0.94
+        abyss = np.array([0.055, 0.048, 0.058], np.float32)
+        t1 = np.clip(k / 0.30, 0.0, 1.0)
+        wall = sunlit[None, None, :] + (mid - sunlit)[None, None, :] * t1[..., None]
+        t2 = np.clip((k - 0.30) / 0.55, 0.0, 1.0)
+        wall = wall + (abyss - mid)[None, None, :] * t2[..., None]
 
-            # Striations: the far wall is rock, and flat gradients read as
-            # printed shading. A few vertical ribs, spacing fixed in world units
-            # so they scale with the camera like everything else, are enough to
-            # suggest strata without turning into noise.
-            band = ((np.arange(a, b) + proj.cam_x * 0.35) // 26).astype(np.int64)
-            rib = (np.sin(band * 2.4) * 0.5 + 0.5) * 0.10
-            col = col * (1.0 - rib[:, None])
-            frame[y, a:b] = col
+        # Strata, fixed in world x so they do not crawl under the camera.
+        wx = proj.cam_x + (cols - Ww * 0.5) / max(proj.zoom, 1e-6)
+        band = (np.sin(rows * 0.019 + wx * 0.0028) * 0.55
+                + np.sin(rows * 0.047 + wx * 0.0071 + 2.2) * 0.28)
+        wall = wall * (1.0 + (band * 0.045 * np.clip(1.0 - t2, 0, 1))[..., None])
 
-        # Lip highlights: a thin line along each edge, brighter on the near one
-        # because it faces the light.
-        # Broken lips. The near and far edges are nibbled in world space, with
-        # the notch depth varying along the gap, so the opening reads as ground
-        # that collapsed rather than a rectangle cut with a knife.
-        for lip_y, sign in ((far_y, -1), (near_y, +1)):
-            yy = int(round(lip_y))
-            idx = np.arange(left, right)
-            wx_here = proj.cam_x + (idx - Ww * 0.5) / proj.zoom
-            notch = (np.sin(wx_here * 0.021) * 3.4
-                     + np.sin(wx_here * 0.057 + 1.7) * 1.6).astype(np.int32)
+        # Gullies on the far wall, strongest near its rim.
+        gul = (np.sin(wx * 0.0121) * 0.5 + 0.5) * (np.sin(wx * 0.0039 + 1.1) * 0.5 + 0.5)
+        wall = wall * (1.0 - (gul * 0.10 * np.clip(1.0 - k * 1.6, 0, 1))[..., None])
+
+        frame = np.where(inside[..., None], wall, frame)
+
+        # The far lip: a bright, slightly broken line. Without it the far wall is
+        # just a gradient, and the eye never finds the other side of the void.
+        idx = np.arange(left, right)
+        if len(idx):
+            wx_lip = proj.cam_x + (idx - Ww * 0.5) / max(proj.zoom, 1e-6)
+            notch = (np.sin(wx_lip * 0.017) * 2.6
+                     + np.sin(wx_lip * 0.049 + 1.3) * 1.2)
+            rim = np.clip(np.array(pal["ground_far"], np.float32) * 1.06, 0, 1)
             for j, xcol in enumerate(idx):
-                y0 = yy + sign * int(notch[j])
-                y1 = yy
-                if y0 > y1:
-                    y0, y1 = y1, y0
-                if 0 <= y0 < Hh and y1 < Hh:
-                    frame[y0:max(y1, y0 + 1), xcol] = np.array(
-                        pal["ground_far"], np.float32) * 1.02
+                yy = int(round(far_y + notch[j]))
+                if 0 <= yy < Hh:
+                    frame[yy, xcol] = rim
+                    if yy + 1 < Hh:
+                        frame[yy + 1, xcol] = np.clip(rim * 0.90, 0, 1)
 
-        # Lip highlights: the near lip is the one facing the camera and the
-        # light, so it gets a crisp bright edge; the far lip gets a dimmer one
-        # because it is seen almost edge-on.
-        lip_bright = np.clip(np.array(pal["ground_far"], np.float32) * 1.12, 0, 1)
-        lip_dim = np.clip(np.array(pal["ground_far"], np.float32) * 0.80, 0, 1)
+        # The near lip: the last row of ground we are standing on, bright and
+        # nibbled, because this is the edge the figures are about to go over.
+        lip_hi = np.clip(np.array(pal["ground_far"], np.float32) * 1.14, 0, 1)
+        for j, xcol in enumerate(idx):
+            yy = int(round(near_y - 1))
+            if 0 <= yy < Hh:
+                frame[yy, xcol] = lip_hi
 
+    return frame
+
+
+def _paint_cliff(frame, world, proj, pal, hz):
+    """What is beyond the edge, in the two bands a camera actually resolves.
+
+    Looking over an edge from just above ground level, you see the drop as two
+    distinct regions, and they are lit differently:
+
+        far wall    from the far rim down to the near lip. Across the valley, so
+                    it faces the camera and faces the sun. This is the bright band,
+                    and it is what gives the drop its depth
+        near wall   from the near lip down to the bottom of frame. Directly below
+                    the camera, seen from above and at a grazing angle, so it is
+                    in its own shadow and darker
+
+    Earlier versions painted one continuous gradient across both, which erased the
+    near lip entirely -- and a drop with no near lip reads as a piece of dark card
+    standing on the ground rather than as a place the ground stops.
+
+    A third fact matters for the film rather than for the picture: the far wall is
+    LIT. Painting it black made the drop look like a hole cut in the photograph, and
+    it also made a dark figure falling in front of it invisible.
+    """
+    Hh, Ww = frame.shape[:2]
+    lip = float(proj.sy(0.0))
+    edge = float(proj.sx(world.cliff_x))
+    if edge >= Ww - 1.0:
+        return frame
+
+    cols = np.arange(Ww, dtype=np.float32)[None, :]
+    rows = np.arange(Hh, dtype=np.float32)[:, None]
+    wx = world.cliff_x + (cols - edge) / max(proj.zoom, 1e-6)
+
+    z_far = 7.2
+    far_rim_row = float(proj.sy(0.0, z_far))
+    wave = (np.sin(wx * 0.0017) * 18.0 + np.sin(wx * 0.0044 + 1.9) * 9.0
+            + np.sin(wx * 0.0113 + 0.4) * 3.5)
+    far_rim = far_rim_row + wave
+
+    # ---- far wall: far rim down to the near lip ---------------------------
+    span = max(lip - far_rim_row, 1.0)
+    kf = np.clip((rows - far_rim) / span, 0.0, 1.0)
+    top_face = np.clip(np.array(pal["ground_near"], np.float32) * 1.00, 0, 1)
+    mid_face = np.array(pal["ridges"][1], np.float32) * 0.94
+    far_face = (top_face[None, None, :]
+                + (mid_face - top_face)[None, None, :]
+                * np.clip(kf / 0.55, 0, 1)[..., None])
+
+    # ---- near wall: near lip down to the bottom --------------------------
+    kn = np.clip((rows - lip) / max(Hh - lip, 1.0), 0.0, 1.0)
+    near_top = np.array(pal["ridges"][2], np.float32) * 0.86
+    near_deep = np.array([0.048, 0.042, 0.052], np.float32)
+    near_face = (near_top[None, None, :]
+                 + (near_deep - near_top)[None, None, :]
+                 * np.clip(kn / 0.72, 0, 1)[..., None])
+
+    face = np.where((rows < lip)[..., None], far_face, near_face)
+
+    # Strata and gullies, on both walls. The near wall's are steeper and closer
+    # together because it is nearer.
+    band_far = (np.sin(rows * 0.016 + wx * 0.0024) * 0.55
+                + np.sin(rows * 0.040 + wx * 0.0061 + 2.2) * 0.30)
+    band_near = (np.sin(rows * 0.031 + wx * 0.0031 + 0.7) * 0.60
+                 + np.sin(rows * 0.078 + wx * 0.0083) * 0.28)
+    band = np.where(rows < lip, band_far, band_near)
+    face = face * (1.0 + (band * 0.05)[..., None])
+
+    gul_far = (np.sin(wx * 0.0116) * 0.5 + 0.5) * (np.sin(wx * 0.0037 + 1.1) * 0.5 + 0.5)
+    gul_near = (np.sin(wx * 0.0203) * 0.5 + 0.5) * (np.sin(wx * 0.0059 + 2.4) * 0.5 + 0.5)
+    gul = np.where(rows < lip, gul_far, gul_near)
+    face = face * (1.0 - (gul * 0.10)[..., None])
+
+    # Haze: the base of the far wall is lost in the valley's air, and the bottom of
+    # the near wall is lost in the same haze.
+    haze = np.array(pal["haze"], np.float32) * 0.94
+    haze_k = np.clip((rows - (far_rim_row + span * 0.72)) / max(span * 0.5, 1.0), 0, 1)
+    face = face + (haze - face) * (haze_k * 0.62)[..., None]
+
+    past_edge = cols >= (edge + 0.5)
+    in_drop = rows >= far_rim
+    frame = np.where((past_edge & in_drop)[..., None], face, frame)
+
+    # The far rim: a bright edge. Without it the drop has no far side and the eye
+    # reads the far wall as a shadow lying on the ground.
+    rim_lit = np.clip(np.array(pal["ground_far"], np.float32) * 1.06, 0, 1)
+    for xcol in np.arange(int(max(0.0, edge)), Ww):
+        y0 = int(round(float(far_rim_row + wave[0, xcol])))
+        if 0 <= y0 < Hh:
+            frame[y0, xcol] = rim_lit
+
+    # The near lip: the last row of real ground, brightened and broken, and it runs
+    # across the whole frame -- because the edge runs past the figures in both
+    # directions, not just the one the hole happens to be on.
+    lip_hi = np.clip(np.array(pal["ground_far"], np.float32) * 1.14, 0, 1)
+    all_cols = np.arange(Ww)
+    wx_edge = world.cliff_x + (all_cols - edge) / max(proj.zoom, 1e-6)
+    notch = (np.sin(wx_edge * 0.014) * 1.6 + np.sin(wx_edge * 0.043 + 0.9) * 0.8)
+    for xcol in all_cols:
+        if xcol > edge:
+            break
+        yy = int(round(lip + notch[xcol]))
+        if 0 <= yy < Hh:
+            frame[yy, xcol] = lip_hi
+            if yy + 1 < Hh:
+                frame[yy + 1, xcol] = np.clip(
+                    np.array(pal["ground_near"], np.float32) * 1.02, 0, 1)
     return frame
 
 
@@ -442,3 +551,50 @@ def _floor_marks(frame, world, proj, hz):
         depth *= 1.26
 
     return np.asarray(img, dtype=np.float32) / 255.0
+
+
+# ---------------------------------------------------------------- scene queries
+
+def void_mask(world, proj):
+    """Boolean mask of the chasm's opening, in screen space.
+
+    The hole is painted as a trapezoid: its far lip is further away, so it projects
+    narrower and higher than its near lip. Anything that has fallen into it can
+    only be seen through that opening, because below the near lip the ground in
+    front of the chasm stands between the body and the lens. Masking a falling
+    figure with this is not a trick to hide it -- it is the occlusion the scene
+    already has, applied to the body as well as to the backdrop.
+    """
+    H, W = proj.H, proj.W
+    mask = np.zeros((H, W), bool)
+    rows = np.arange(H)[:, None]
+    cols = np.arange(W)[None, :]
+
+    for x0, x1, depth in getattr(world, "gaps", ()):
+        left = int(round(max(0.0, min(float(proj.sx(x0)), float(W)))))
+        right = int(round(max(0.0, min(float(proj.sx(x1)), float(W)))))
+        if right <= left:
+            continue
+        far_y = float(proj.sy(-depth))
+        near_y = float(proj.sy(0.0))
+        top, bot = min(far_y, near_y), max(far_y, near_y)
+        inset = 0.30
+        k = np.clip((rows - top) / max(bot - top, 1.0), 0.0, 1.0)
+        a = left + inset * (right - left) * (1.0 - k) * 0.5
+        b = right - inset * (right - left) * (1.0 - k) * 0.5
+        mask |= (rows >= top) & (rows <= bot) & (cols >= a) & (cols <= b)
+
+    # Visibility is not only the opening. The near lip is a row, not a wall: above
+    # it the line of sight is clear, so a body in the air over the chasm is fully
+    # visible there. It reads against the far ground, which is *beyond* the chasm
+    # and therefore behind it. Only below the near lip does the near ground come
+    # between the lens and the body, and only inside the opening can the body be
+    # seen there.
+    near_row = float(proj.sy(0.0))
+    mask |= (np.arange(H)[:, None] < near_row)
+    return mask
+
+
+def near_lip_row(proj):
+    """Screen row of the near lip: the bottom edge of the visible void."""
+    return float(proj.sy(0.0))

@@ -113,3 +113,49 @@ def paper_grain(size, *, seed=0, amount=0.5):
     lo, hi = a.min(), a.max()
     a = (a - lo) / max(hi - lo, 1e-6)
     return 1.0 - amount * 0.25 * (a - 0.5)
+
+
+def filled(draw, points, value=255):
+    """Polygon fill, for a silhouette rather than a line drawing."""
+    draw.polygon([tuple(q) for q in points], fill=value)
+
+
+def limb_ribbon(draw, p0, p1, p2, r0, r1, r2, value=255, samples=10):
+    """A tapered ribbon through a three-point limb.
+
+    Used to give a silhouette body some shape without any shading: the limb is
+    thick at its root, thin at its end, and thickens again at the joint. It reads
+    as a body part rather than as a pipe, and it still costs only two polygons.
+    """
+    p0 = np.asarray(p0, float)
+    p1 = np.asarray(p1, float)
+    p2 = np.asarray(p2, float)
+    pts = []
+    radii = []
+    for a, b, ra, rb in ((p0, p1, r0, r1), (p1, p2, r1, r2)):
+        for i in range(samples):
+            t = i / samples
+            pts.append(a + (b - a) * t)
+            radii.append(ra + (rb - ra) * t)
+    pts.append(p2)
+    radii.append(r2)
+    pts = np.asarray(pts)
+    radii = np.asarray(radii)
+
+    left, right = [], []
+    for i in range(len(pts)):
+        if i == 0:
+            d = pts[1] - pts[0]
+        elif i == len(pts) - 1:
+            d = pts[-1] - pts[-2]
+        else:
+            d = (pts[i + 1] - pts[i]) + (pts[i] - pts[i - 1])
+        n = float(np.hypot(d[0], d[1]))
+        if n < 1e-9:
+            d = np.array([0.0, 1.0])
+            n = 1.0
+        d = d / n
+        perp = np.array([-d[1], d[0]])
+        left.append(pts[i] + perp * radii[i])
+        right.append(pts[i] - perp * radii[i])
+    draw.polygon([tuple(q) for q in left + right[::-1]], fill=value)

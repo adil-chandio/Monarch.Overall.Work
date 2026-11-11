@@ -29,7 +29,7 @@ from PIL import Image, ImageDraw, ImageFilter
 from . import ink as inkmod
 from .film import FPS, H, W, build_shots, Performer
 from .rig import Pose
-from .stage import Projector, World, paint
+from .stage import Projector, World, paint, void_mask
 from .spring import Dust
 
 # The figure is 700 world units tall and the frame is 1920, so a lens of 1.0
@@ -45,6 +45,7 @@ REFERENCE_ZOOM = 1.75
 def project_pose(pose, proj):
     """Map every joint of a world-space pose into frame pixels."""
     out = Pose()
+    out.tone = pose.tone
     out.facing = pose.facing
     out.height = pose.height * proj.zoom
     out.head_r = pose.head_r * proj.zoom
@@ -71,8 +72,26 @@ _WIDTH = {
 _FAR = 0.50
 
 
-def ink(pose_screen, *, colour=(0.078, 0.072, 0.086), size=None, seed=0):
-    """Rasterise the figure as tapered ink. Returns a float RGBA array."""
+def ink(pose_screen, *, colour=None, size=None, seed=0):
+    """Rasterise a figure. Returns a float RGBA array.
+
+    Two treatments, both pure geometry and neither a sprite:
+
+    ``ink``      a line drawing -- tapered strokes, a ring for the head, one dot
+                 for the eye. This is the protagonist.
+    ``silhouette`` a filled solid with a rim of paper, so a second figure reads
+                 as an opposing shape even at a glance and never competes with
+                 the line figure for attention.
+    """
+    if colour is None:
+        colour = (0.078, 0.072, 0.086)
+    if getattr(pose_screen, "tone", "ink") == "silhouette":
+        return _silhouette(pose_screen, colour=colour, size=size)
+    return _ink_lines(pose_screen, colour=colour, size=size)
+
+
+def _ink_lines(pose_screen, *, colour=(0.078, 0.072, 0.086), size=None):
+    """The line-drawn treatment."""
     W_, H_ = size if size is not None else (W, H)
     wi, hi = W_ * inkmod.SS, H_ * inkmod.SS
 
@@ -115,6 +134,110 @@ def ink(pose_screen, *, colour=(0.078, 0.072, 0.086), size=None, seed=0):
     rgba[..., 2] = colour[2]
     rgba[..., 3] = np.clip(alpha, 0.0, 1.0)
     return rgba
+
+
+def _silhouette(pose_screen, *, colour=(0.24, 0.10, 0.09), size=None):
+    """A filled body, drawn as tapered ribbons plus a disc.
+
+    Ribbon rather than constant-width capsule: a silhouette has no interior line
+    to carry the form, so the outline has to do all of it, and a constant-width
+    outline reads as a pictogram. Thick at the root, thin at the joint, with the
+    torso a single swollen shape.
+    """
+    W_, H_ = size if size is not None else (W, H)
+    wi, hi = W_ * inkmod.SS, H_ * inkmod.SS
+    img = Image.new("L", (wi, hi), 0)
+    d = ImageDraw.Draw(img)
+
+    k = pose_screen.height * inkmod.SS
+    S = inkmod.SS
+
+    # Torso: one ribbon from pelvis to neck, widest at the ribcage.
+    inkmod.limb_ribbon(d, np.asarray(pose_screen.pelvis) * S,
+                       np.asarray(pose_screen.chest) * S,
+                       np.asarray(pose_screen.neck) * S,
+                       k * 0.052, k * 0.062, k * 0.040, 255)
+
+    # Limbs: tapered, with a joint bulge so the elbow and knee read.
+    for hip, knee, ankle, toe in (
+            (pose_screen.hip_far, pose_screen.knee_far, pose_screen.ankle_far,
+             pose_screen.toe_far),
+            (pose_screen.hip_near, pose_screen.knee_near, pose_screen.ankle_near,
+             pose_screen.toe_near)):
+        inkmod.limb_ribbon(d, np.asarray(hip) * S, np.asarray(knee) * S,
+                           np.asarray(ankle) * S,
+                           k * 0.040, k * 0.032, k * 0.026, 255)
+        inkmod.limb_ribbon(d, np.asarray(ankle) * S, np.asarray(toe) * S,
+                           np.asarray(toe) * S,
+                           k * 0.022, k * 0.018, k * 0.014, 255)
+
+    for sh, el, wr in ((pose_screen.shoulder_far, pose_screen.elbow_far,
+                        pose_screen.wrist_far),
+                       (pose_screen.shoulder_near, pose_screen.elbow_near,
+                        pose_screen.wrist_near)):
+        inkmod.limb_ribbon(d, np.asarray(sh) * S, np.asarray(el) * S,
+                           np.asarray(wr) * S,
+                           k * 0.034, k * 0.028, k * 0.020, 255)
+
+    # Head: a filled disc, slightly ovoid in the direction of the lean.
+    hr = pose_screen.head_r * S
+    cx, cy = np.asarray(pose_screen.head) * S
+    inkmod.disc(d, (cx, cy), hr * 1.02, 255, squash_y=1.0)
+
+    a = np.asarray(img.resize((W_, H_), Image.LANCZOS), np.float32) / 255.0
+    rgba = np.zeros((H_, W_, 4), np.float32)
+    rgba[..., 0] = colour[0]
+    rgba[..., 1] = colour[1]
+    rgba[..., 2] = colour[2]
+    rgba[..., 3] = np.clip(a, 0.0, 1.0)
+    return rgba
+
+
+def clip_to_gap(rgba, world, proj):
+    """Keep only the part of a figure that is inside the hole's opening.
+
+    A body that has fallen past the near lip is behind it, and a camera on the near
+    side cannot see through ground. The hole's painted wedge is the exact region
+    the camera can see into, so masking the figure with the same mask the backdrop
+    was painted with is not an effect -- it is the occlusion the scene already has,
+    applied to the body as well.
+    """
+    m = void_mask(world, proj)
+    out = rgba.copy()
+    out[..., 3] *= m.astype(np.float32)
+    return out
+
+
+def rope_stroke(frame, points, proj, *, colour=(0.30, 0.24, 0.20), width=0.011,
+                slack=0.0):
+    """Draw the rope as one tapered stroke through its projected points.
+
+    A rope is not a line with a fixed width. Under load it is thin because it is
+    straight and stretched; slack it is thicker because the strands have room. The
+    width is therefore driven by the geometry rather than by a constant, and the
+    value darkens where the rope is loaded, so the audience can read tension
+    without being told about it.
+
+    Drawn before the figures: the rope goes behind the hands that hold it, which is
+    what stops the grip from looking like a hand pasted on a line.
+    """
+    if points is None or len(points) < 2:
+        return frame
+    pix = np.array([proj.point(p) for p in points], float)
+    if not np.all(np.isfinite(pix)):
+        return frame
+
+    ss = inkmod.SS
+    Hh, Ww = frame.shape[:2]
+    img = Image.new("L", (Ww * ss, Hh * ss), 0)
+    d = ImageDraw.Draw(img)
+    w = width * Hh * ss * (1.0 + 0.55 * slack)
+    inkmod.stroke(d, pix[0] * ss, pix[-1] * ss, w, 255,
+                  taper_start=0.85, taper_end=0.70, bulge=0.10)
+    a = np.asarray(img.resize((Ww, Hh), Image.LANCZOS), np.float32) / 255.0
+    a = a[..., None]
+    col = np.array(colour, np.float32)[None, None, :] * (1.0 - 0.25 * slack)
+    return frame * (1.0 - a) + col * a
 
 
 # ----------------------------------------------------------------- compositing

@@ -147,7 +147,7 @@ class Pose:
         "elbow_near", "elbow_far", "wrist_near", "wrist_far",
         "knee_near", "knee_far", "ankle_near", "ankle_far",
         "toe_near", "toe_far",
-        "facing", "height", "hand_len", "foot_len",
+        "facing", "height", "hand_len", "foot_len", "tone",
     )
 
     def __init__(self):
@@ -177,6 +177,22 @@ class Pose:
 
         yield self.shoulder_near, self.elbow_near, "arm"
         yield self.elbow_near, self.wrist_near, "arm"
+
+    def children(self):
+        """Attachment points another figure can be hung from.
+
+        Both hands and the head top, because a swing can be held by either hand
+        or by the neck -- and which one it is changes the whole shape of the
+        pendulum, so it is not a detail that can be faked later.
+        """
+        return {
+            "wrist_near": self.wrist_near,
+            "wrist_far": self.wrist_far,
+            "hand_near": self.wrist_near + (self.wrist_near - self.elbow_near) * 0.5,
+            "hand_far": self.wrist_far + (self.wrist_far - self.elbow_far) * 0.5,
+            "head_top": self.head - np.array([0.0, self.head_r]),
+            "head": self.head,
+        }
 
     def joints(self):
         for name in self.__slots__:
@@ -262,6 +278,8 @@ def build_pose(
     hand_far=None,
     bend_near=+1.0,
     bend_far=-1.0,
+    head_reach=None,
+    tone="ink",
 ):
     """Assemble the figure.
 
@@ -276,6 +294,7 @@ def build_pose(
     """
     p = Pose()
     p.facing = facing
+    p.tone = tone
     h = height
     f = facing
 
@@ -306,6 +325,18 @@ def build_pose(
     neck = chest + np.array([math.sin(neck_ang) * f, -math.cos(neck_ang)]) * neck_len
     head_ang = lean + curl * 0.55 + head_tilt
     head = neck + np.array([math.sin(head_ang) * f, -math.cos(head_ang)]) * head_r
+
+    # ``head_reach`` puts the head a given distance past the neck instead of at
+    # its resting length. This is what lets a figure reach the top of a hanging
+    # chain: the hand is at the chain, the pelvis hangs off the elbow, and the
+    # neck has to give a little to bridge the gap. Clamped to a sane multiple of
+    # the neck so a bad target cannot pull the head off the body.
+    if head_reach is not None:
+        lo = neck_len + head_r * 0.72
+        hi = lo + neck_len * 0.85 + head_r * 0.55
+        r = clamp(float(head_reach), lo, hi)
+        d = head - neck
+        head = neck + d / max(float(np.hypot(d[0], d[1])), 1e-6) * r
 
     p.waist, p.chest, p.neck, p.head, p.head_r = waist, chest, neck, head, head_r
 
