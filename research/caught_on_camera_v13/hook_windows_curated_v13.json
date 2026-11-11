@@ -1,0 +1,119 @@
+{
+  "count": 6,
+  "windows": [
+    {
+      "id": 3,
+      "title": "File:Floridian_cop_caught_on_camera_running_from_a_rat.webm",
+      "short": "Cop vs rat",
+      "window": {
+        "start_s": 23.0,
+        "end_s": 33.0,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 168,
+          "window_frames": 40,
+          "motion_mean": 2.646,
+          "window_score": 55.493,
+          "start_s": 23.0
+        }
+      },
+      "file": "windows/curated_03.mp4"
+    },
+    {
+      "id": 4,
+      "title": "File:Funny_hang-5_-_J.Vidarte_&_JC_Pieri.webm",
+      "short": "Hang-5 nose wheelie",
+      "window": {
+        "start_s": 0.25,
+        "end_s": 10.25,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 102,
+          "window_frames": 40,
+          "motion_mean": 23.905,
+          "window_score": 73.743,
+          "start_s": 0.25
+        }
+      },
+      "file": "windows/curated_04.mp4"
+    },
+    {
+      "id": 5,
+      "title": "File:Funny_Fight_-_JC_vs_Mark_Webb.webm",
+      "short": "Staged funny fight",
+      "window": {
+        "start_s": 112.75,
+        "end_s": 122.75,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 498,
+          "window_frames": 40,
+          "motion_mean": 18.078,
+          "window_score": 60.894,
+          "start_s": 112.75
+        }
+      },
+      "file": "windows/curated_05.mp4"
+    },
+    {
+      "id": 6,
+      "title": "File:Bear_enters_Californian_home_and_allegedly_eats_chocolate_cake_(4_September_2022).webm",
+      "short": "Bear in house",
+      "window": {
+        "start_s": 33.5,
+        "end_s": 43.5,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 199,
+          "window_frames": 40,
+          "motion_mean": 27.005,
+          "window_score": 133.047,
+          "start_s": 33.5
+        }
+      },
+      "file": "windows/curated_06.mp4"
+    },
+    {
+      "id": 8,
+      "title": "File:30,_Caption_fail.ogv",
+      "short": "Caption fail",
+      "window": {
+        "start_s": 5.0,
+        "end_s": 15.0,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 2127,
+          "window_frames": 40,
+          "motion_mean": 8.536,
+          "window_score": 55.774,
+          "start_s": 5.0
+        }
+      },
+      "file": "windows/curated_08.mp4"
+    },
+    {
+      "id": 10,
+      "title": "File:Quaker_Corn_Bran_scarecrow_commercial_2_(1981).webm",
+      "short": "Scarecrow commercial",
+      "window": {
+        "start_s": 0.0,
+        "end_s": 10.0,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 121,
+          "window_frames": 40,
+          "motion_mean": 23.146,
+          "window_score": 91.045,
+          "start_s": 0.0
+        }
+      },
+      "file": "windows/curated_10.mp4"
+    }
+  ]
+}
