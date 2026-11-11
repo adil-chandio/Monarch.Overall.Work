@@ -1,16 +1,18 @@
-# V13 English VO Script
+# V14 English VO Script
 
 Language: English only. Voice: `voice-04`. No Urdu, no static cards, no diagrams.
 
 Machine-readable source: `vo_script_v13.json`.
 
+V14 rewrite: matches 20 funny clips (Bean DIVE/HORROR/AMBULANCE, Chiitan mascot, baby monkey, cat wheel, animals workout, baby elephant, DDR, April Fools AI, projector prank, scary maze x2, Sr Pelo COMEDY, cat grooming, Flip Funny Face/Puddle Pranks, cat meowing, parallel parking, greased pigs). Old V13 cat/dog/bird/squirrel false references removed.
+
 ## Chunk 01
 
-Twenty moments. One camera. No intro, no warning, no context. Look at this cat. It walks straight into the lens, then the whole frame changes. Already, clip two. A dog, a door, and a timing mistake nobody rehearsed. Keep your eyes on the left side. Clip three is already gone. That is the rule here. If the moment is over in four seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin.
+Twenty moments. One camera. No intro, no warning. You are already inside clip one. Mr Bean on a diving board. He climbs up, he poses, and he face plants on the concrete. That is the rule here. If the joke lands in three seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin.
 
 ## Chunk 02
 
-Round one is built for one thing only: attention. Every four seconds, something changes. A zoom punch, a speed ramp, a replay, or a completely different animal. Notice how the caption is already on screen. You should be able to watch this with the sound off and still know exactly what just happened. That bird did not wait for a title card. That squirrel did not wait for a diagram. The footage is the hook. The commentary is only here to point at the part your eyes might miss. If a clip needs ten seconds to become interesting, it does not belong in the first round. We take the sharpest slice and move.
+Round one is built for one thing only: attention. Every four seconds, something changes. A zoom punch, a speed ramp, a replay, or a completely different fail. You should be able to watch this with the sound off and still know exactly what just happened. That mascot did not wait for a title card. That baby monkey did not wait for a diagram. The footage is the hook. The commentary is only here to point at the part your eyes might miss. If a clip needs ten seconds to become funny, it does not belong in the first round. We take the sharpest slice and move.
 
 ## Chunk 03
 
@@ -18,11 +20,11 @@ Here is the part most compilations get wrong. They show a clip, then they stop t
 
 ## Chunk 04
 
-By clip eight, the pattern should feel familiar but not safe. A doorbell camera, a kitchen counter, a garden fence, a skateboard, a very confident goose. Different places, same mechanic: ordinary setup, impossible timing. The camera does not comment. It just keeps recording. That is why these moments travel. No script, no studio, no rebuild. Just a lens in the right place at the wrong second. Keep counting. We are not even halfway through the first round, and already the edits have changed speed three times. That is not randomness. That is a decision about where your attention goes next.
+By clip eight, the pattern should feel familiar but not safe. A cat on a wheel, animals working out, a baby elephant, a man on a dance pad, an April Fools prank. Different places, same mechanic: ordinary setup, impossible timing. The camera does not comment. It just keeps recording. That is why these moments travel. No script, no studio, no rebuild. Just a lens in the right place at the wrong second. Keep counting. We are not even halfway through the first round, and already the edits have changed speed three times. That is not randomness. That is a decision about where your attention goes next.
 
 ## Chunk 05
 
-Round two. Now we give the moments context, but still over moving footage. This is the cat again. First pass, you saw the jump. This pass, watch the paws before the jump. That is the tell. Same with the dog. The mistake starts a full second before the slip. Slow motion is not decoration here. It is evidence. And the English voice over stays short, because the native audio and the picture are already doing most of the work. One line, then the original sound comes back up. Another line, then a replay. The structure is simple, but it is never static.
+Round two. Now we give the moments context, but still over moving footage. This is Bean again. First pass, you saw the dive. This pass, watch the face before the dive. That is the tell. Same with the scary maze game. The mistake starts a full second before the scream. Slow motion is not decoration here. It is evidence. And the English voice over stays short, because the native audio and the picture are already doing most of the work. One line, then the original sound comes back up. Another line, then a replay. The structure is simple, but it is never static.
 
 ## Chunk 06
 
@@ -34,7 +36,7 @@ Clip twelve is my favourite kind of caught on camera moment. Nothing dangerous, 
 
 ## Chunk 08
 
-Round three. One more time, but faster. This is the part where a normal compilation would put a subscribe card or a long outro. We are putting the best two seconds of clip fourteen instead. Then clip fifteen. Then a hard cut back to the very first cat for exactly one second. That callback is the storyline. Not a chart, not a lecture, not a diagram. Twenty clips, one loop, and a reason to stay until the last frame. The captions are doing the punchlines, the zooms are doing the emphasis, and the footage is still doing the opening, the middle and the ending.
+Round three. One more time, but faster. This is the part where a normal compilation would put a subscribe card or a long outro. We are putting the best two seconds of clip fourteen instead. Then clip fifteen. Then a hard cut back to the very first Bean dive for exactly one second. That callback is the storyline. Not a chart, not a lecture, not a diagram. Twenty clips, one loop, and a reason to stay until the last frame. The captions are doing the punchlines, the zooms are doing the emphasis, and the footage is still doing the opening, the middle and the ending.
 
 ## Chunk 09
 

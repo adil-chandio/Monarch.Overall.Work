@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the V13 English caught-on-camera long-form compilation.
+"""Build the V14 English caught-on-camera long-form compilation.
 
 Rules enforced by construction:
   * frame 1 is real footage (segment 1 from a clip window) - no intro/title/method card
@@ -200,7 +200,7 @@ def make_edl(sel, ledgers, beats):
                               f"assets/overlay/counter_{b+1:03d}.txt"],
         })
     save_json(PROD / "EDL_V13.json", {
-        "version": "v13-clip-first-20",
+        "version": "v14-clip-first-20-funny",
         "beats": beats, "beat_s": BEAT, "rounds": ROUNDS,
         "total_s": round(beats * BEAT, 3),
         "distinct_clips": sel["count"],
@@ -374,7 +374,7 @@ def contact_sheet(path, total):
 
 
 def make_credits(sel, ledgers):
-    lines = ["# V13 clip credits and rights ledger", "",
+    lines = ["# V14 clip credits and rights ledger", "",
              "All 20 clips are original Wikimedia Commons namespace-6 file pages with PD / CC0 / CC BY 3.0 / CC BY 4.0 commercial-reuse metadata recorded by the live Commons API. These are NOT unverified Instagram / TikTok / Reddit / Twitter / Dailymotion reposts. No legal opinion, no monetisation claim, no human legal review, no upload/publish.", ""]
     for c in sel["clips"]:
         a = ledgers[(c["ledger"], c["window_file"])]
@@ -454,7 +454,7 @@ def make_qc(probe, edl, cues, total, frames, pilot):
         "not_a_legal_opinion": True,
     }
     save_json(PROD / "QC_REPORT_V13.json", out)
-    md = ["# V13 technical QC", "", f"Technical pass: **{out['technical_pass']}**. "
+    md = ["# V14 technical QC", "", f"Technical pass: **{out['technical_pass']}**. "
           "This is NOT creative approval, legal clearance, or human sign-off.", ""]
     for k, v in checks.items():
         md.append(f"- `{k}`: {'PASS' if v else 'FAIL'}")
@@ -494,11 +494,11 @@ def main():
     make_about(probe, cues, pilot)
     qc = make_qc(probe, edl, cues, total, frames, pilot)
     save_json(PROD / "VIDEO_MANIFEST_V13.json", {
-        "version": "v13-clip-first-20",
+        "version": "v14-clip-first-20-funny",
         "pilot": pilot,
         "final_file": final.name,
         "vo_language": "en",
-        "vo_voice_id": "voice-04",
+        "vo_voice_id": "voice-05",
         "vo_chunks": len(VO_FILES),
         "vo_starts_s": VO_STARTS,
         "vo_durations_s": [round(parse_duration(f), 2) for f in VO_FILES],
