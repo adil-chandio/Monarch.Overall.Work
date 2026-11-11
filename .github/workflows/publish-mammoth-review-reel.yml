@@ -1,0 +1,73 @@
+name: Publish Mammoth review reel
+
+# Why this exists: the development sandbox cannot reach uploads.github.com (SSL is
+# blocked at the network edge), so `gh release upload` from there dies with an EOF and
+# not a single byte is sent. A GitHub-hosted runner has no such restriction.
+#
+# The 95 MB reel is never committed. The runner fetches it over HTTPS from the address
+# passed in, checks it byte-for-byte against a pinned SHA-256, and only then publishes.
+# If the hash does not match, the job fails and nothing is published.
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_url:
+        description: 'HTTPS URL the runner should fetch the reel from'
+        required: true
+      expected_sha256:
+        description: 'SHA-256 the downloaded file must have'
+        required: true
+        default: '479a30ae59ad2772e918f78da8100ac0390cff57695bb1f177b9e32edac27f63'
+      tag:
+        description: 'Release tag to create'
+        required: true
+        default: 'mammoth-review-reel-796s-720p'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch the reel and verify its hash before publishing anything
+        env:
+          URL: ${{ inputs.source_url }}
+          WANT: ${{ inputs.expected_sha256 }}
+        run: |
+          set -euo pipefail
+          echo "fetching ${URL}"
+          curl --fail --location --retry 3 --retry-delay 5 \
+               --max-time 900 --output reel.mp4 "${URL}"
+          ls -l reel.mp4
+          GOT=$(sha256sum reel.mp4 | awk '{print $1}')
+          echo "expected ${WANT}"
+          echo "got      ${GOT}"
+          if [ "${GOT}" != "${WANT}" ]; then
+            echo "::error::SHA-256 mismatch — refusing to publish a file that is not the verified build"
+            exit 1
+          fi
+          ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,width,height,r_frame_rate \
+                  -of default=noprint_wrappers=1 reel.mp4 || true
+
+      - name: Publish as a prerelease, not a final film
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          REPO: ${{ github.repository }}
+          WANT: ${{ inputs.expected_sha256 }}
+        run: |
+          set -euo pipefail
+          # Remove a stale release/tag with the same name so re-running is idempotent.
+          gh release delete "${TAG}" --repo "${REPO}" --yes --cleanup-tag || true
+
+          gh release create "${TAG}" \
+            --repo "${REPO}" \
+            --target "${GITHUB_SHA}" \
+            --prerelease \
+            --title 'Mammoth — continuous review reel (13:16, 720p, work in progress)' \
+            --notes "This is a review build, not a finished film. 13 min 16 s, 1280x720, 30 fps, 23,882 frames. Every section is individually verified, but this is a continuous assembly: where the film has no footage yet there are labelled cards, not black. Known open work: the genetics chapter (540-646 s) is still 106 s of unbroken printed plate and needs native picture; nobody has watched this end to end as a film; the mammoth rig's rights are unresolved, so this must not be distributed; final narration recording, mix and grade are outstanding. Audio: draft narration score, -16.2 LUFS, true peak -0.8 dBTP. sha256 ${WANT}." \
+            reel.mp4
+
+          echo "::notice::https://github.com/${REPO}/releases/download/${TAG}/reel.mp4"
