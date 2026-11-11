@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""V13 curated recovery pass: ten rights-cleared V7 social-origin Commons clips.
+"""V13 curated recovery pass: twenty rights-cleared Commons clips.
 
 The positive-only V13 Commons pass produced safe but low-energy footage (landscape
-repeats, microscopy, interviews). This pass uses an explicit, human-readable list of
-original Commons file pages with YouTube / Vimeo / SWNS / police / social-video origin
-that V12 ignored. It applies the SAME hard content-safety and licence gate, downloads
-in the Actions runner, selects an objective 10-second motion/surprise window, normalizes
-to 960x540 / 30 fps / H.264 / AAC, keeps native audio where present, adds a silent AAC
-track where the source is silent, and deletes raw originals. It does NOT use the
-rejected V12 eight archived finals or the NASA V10 / Short.
+repeats, microscopy, interviews, title cards). This pass uses an explicit,
+human-readable list of 20 original Commons file pages: ten rights-cleared social-origin
+clips that V12 ignored, plus ten on-brand funny / prank / animal / silent-comedy clips
+found by live Commons API search. It applies the SAME hard content-safety and licence
+gate, downloads in the Actions runner, uses V7 verified or hand-checked pre-end-card
+10-second hook windows, normalizes to 960x540 / 30 fps / H.264 / AAC, keeps native
+audio where present, adds a silent AAC track where the source is silent, and deletes
+raw originals. It does NOT use the rejected V12 eight archived finals, the NASA V10 /
+Short, or the low-energy V13 safe-pass windows in the final cut.
 """
 from __future__ import annotations
 import hashlib
@@ -116,6 +118,9 @@ def main():
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8"))["overrides"]
     titles = spec["titles"]
     accepted, failures = [], []
+    # Never leak stale windows from an earlier 10-clip pass into the 20-clip build.
+    for p in list(WINDOWS.glob("curated_*.mp4")) + list(REVIEW.glob("curated_*.jpg")):
+        p.unlink(missing_ok=True)
 
     for n, item in enumerate(titles, 1):
         title, short, origin = item["title"], item["short"], item["origin"]
@@ -237,7 +242,7 @@ def main():
     })
     contact([{"id": a["id"], "short": a["short"]} for a in accepted])
     log(f"accepted={len(accepted)} failed={len(failures)}")
-    if len(accepted) < 10:
+    if len(accepted) < 20:
         log("FAILURES", json.dumps(failures, indent=2))
         sys.exit(1)
 

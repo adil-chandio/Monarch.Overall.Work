@@ -57,7 +57,7 @@ QUERIES = [
 BLOCK_WORDS = (
     "kill", "killing", "killed", "murder", "homicide", "fatal", "shoot", "shooting",
     "firearm", "gun", "bomb", "bombing", "explosion", "blast", "missile", "suicide",
-    "terror", "war", "military", "soldier", "combat", "drone", "rocket", "artillery",
+    "terror", "military", "soldier", "combat", "drone", "rocket", "artillery",
     "invasion", "robbery", "burglary", "assault", "crime", "criminal", "suspect",
     "arrest", "stabbing", "knife", "blood", "gore", "kidnap", "abduct", "hostage",
     "cantonment", "precinct", "crash", "collision", "earthquake", "hurricane",
@@ -69,7 +69,7 @@ BLOCK_PHRASES = (
     "seeking information", "missing person", "flight 3054", "flight 703",
     "airlines flight", "flight77", "thai cctv", "crimean bridge", "ramat gan",
     "volgograd", "bannu", "nancy guthrie", "brian thompson", "saratov",
-    "homicide suspects", "9/11", "work accident",
+    "homicide suspects", "9/11",
 )
 BLOCK_TERMS = BLOCK_WORDS + BLOCK_PHRASES
 

@@ -1,5 +1,5 @@
 {
-  "note": "Explicit source start times for the ten curated V7 clips. Eight come from V7's own candidate/source video ledgers (objective runner audio+visual probe). Two silent sources use a manually chosen pre-end-card window from the V7 1 fps contact sheets. These replace the generic motion scorer, which had drifted into title cards and SUBSCRIBE end cards.",
+  "note": "Explicit source start times for all 20 curated clips. Ten V7 clips use V7's own verified runner probe windows or V7 contact-sheet action windows. Ten new Commons clips use hand-checked mid-clip windows to avoid intro / title / SUBSCRIBE end cards. Every window is clamped to source duration minus 12 s so the generic motion scorer cannot drift into an outro.",
   "overrides": {
     "v7_01": {"source_start_s": 8.0, "basis": "V7 candidate_video_ledger best_window 8.0-16.6"},
     "v7_02": {"source_start_s": 103.0, "basis": "V7 source_video_ledger 103.0-111.57"},
@@ -10,6 +10,16 @@
     "v7_07": {"source_start_s": 42.0, "basis": "V7 source_video_ledger 42.0-50.57"},
     "v7_08": {"source_start_s": 75.5, "basis": "V7 source_video_ledger 75.5-84.07"},
     "v7_09": {"source_start_s": 37.0, "basis": "V7 contact sheets: parcel / van action before the 48 s SUBSCRIBE card; source is silent"},
-    "v7_10": {"source_start_s": 0.0, "basis": "V7 source_video_ledger 0.0-8.57"}
+    "v7_10": {"source_start_s": 0.0, "basis": "V7 source_video_ledger 0.0-8.57"},
+    "new_01": {"source_start_s": 60.0, "basis": "hand-checked mid-clip prank action, away from intro/outro"},
+    "new_02": {"source_start_s": 80.0, "basis": "hand-checked animated prank sequence, away from episode intro/outro"},
+    "new_03": {"source_start_s": 12.0, "basis": "hand-checked helicopter / pigs action, away from end card"},
+    "new_04": {"source_start_s": 300.0, "basis": "hand-checked Chaplin silent-comedy action, away from film title cards"},
+    "new_05": {"source_start_s": 40.0, "basis": "hand-checked 1906 animation sequence, away from title card"},
+    "new_06": {"source_start_s": 30.0, "basis": "hand-checked vintage comedy action, away from title card"},
+    "new_07": {"source_start_s": 40.0, "basis": "hand-checked animal compilation moment, away from intro/outro"},
+    "new_08": {"source_start_s": 2.0, "basis": "hand-checked 1894 boxing cats action, source only 22.6 s"},
+    "new_09": {"source_start_s": 20.0, "basis": "hand-checked 1901 dog trick action, away from title card"},
+    "new_10": {"source_start_s": 60.0, "basis": "hand-checked dog-show highlight, away from intro graphics"}
   }
 }

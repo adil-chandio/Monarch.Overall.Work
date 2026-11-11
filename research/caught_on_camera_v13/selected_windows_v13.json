@@ -1,7 +1,7 @@
 {
-  "selection_version": "v13-final-20",
+  "selection_version": "v13-final-20-curated",
   "count": 20,
-  "note": "Final 20 distinct clips for the 9:00 English V13 build. Ten curated V7 social-origin Commons windows + ten best windows from the V13 positive-only safe pass. Scientific microscopy, duplicate landscape takes, violent/tragedy footage, NASA/Artemis, and V12 archived finals are excluded.",
+  "note": "Final 20 distinct clips for the 9:00 English V13 build. All 20 are curated Wikimedia Commons windows with pinned pre-end-card hook starts. The low-energy V13 positive-only safe-pass windows, violent/tragedy footage, scientific microscopy, duplicate landscapes, NASA/Artemis, and V12 archived finals are NOT in the final cut.",
   "clips": [
     {"id": "C01", "window_file": "windows/curated_01.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v7", "short": "Golf ceiling drop-in"},
     {"id": "C02", "window_file": "windows/curated_02.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v7", "short": "Parallel parking fail"},
@@ -13,15 +13,15 @@
     {"id": "C08", "window_file": "windows/curated_08.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v7", "short": "Caption fail"},
     {"id": "C09", "window_file": "windows/curated_09.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v7", "short": "Parcel throw CCTV"},
     {"id": "C10", "window_file": "windows/curated_10.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v7", "short": "Scarecrow commercial"},
-    {"id": "C11", "window_file": "windows/hook_01.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "Elephant film fragment"},
-    {"id": "C12", "window_file": "windows/hook_02.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "Fossil Lake wildlife"},
-    {"id": "C13", "window_file": "windows/hook_06.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "P-42 and kittens"},
-    {"id": "C14", "window_file": "windows/hook_07.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "Unexpected stowaway"},
-    {"id": "C15", "window_file": "windows/hook_08.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "Leave No Trace hikers"},
-    {"id": "C16", "window_file": "windows/hook_09.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "Baby elephant"},
-    {"id": "C17", "window_file": "windows/hook_10.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "DicksonFilm High"},
-    {"id": "C18", "window_file": "windows/hook_11.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "Little Applegate River"},
-    {"id": "C19", "window_file": "windows/hook_12.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "DOTHEPACMAN"},
-    {"id": "C20", "window_file": "windows/hook_20.mp4", "ledger": "rights_ledger_v13.json", "pool": "v13_safe_pass", "short": "Kara Fern interview"}
+    {"id": "C11", "window_file": "windows/curated_11.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "Restroom prank"},
+    {"id": "C12", "window_file": "windows/curated_12.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "Animated prank wars"},
+    {"id": "C13", "window_file": "windows/curated_13.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "Greased pigs prank"},
+    {"id": "C14", "window_file": "windows/curated_14.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "Chaplin cabaret"},
+    {"id": "C15", "window_file": "windows/curated_15.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "1906 animated faces"},
+    {"id": "C16", "window_file": "windows/curated_16.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "Vintage funny shave"},
+    {"id": "C17", "window_file": "windows/curated_17.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "Funny animal compilation"},
+    {"id": "C18", "window_file": "windows/curated_18.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "1894 boxing cats"},
+    {"id": "C19", "window_file": "windows/curated_19.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "1901 boxing dog"},
+    {"id": "C20", "window_file": "windows/curated_20.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_new", "short": "Dog show moments"}
   ]
 }

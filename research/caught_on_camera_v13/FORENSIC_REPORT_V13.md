@@ -4,7 +4,7 @@
 
 **Owner correction applied:** content is **English**. All VO, captions, lower-thirds and on-screen text in the deliverable are English. The rejected V12 `REPLAY FILES Ep.1`, `MC-01`, the NASA V10 Short, the V12 eight archived finals, and the first violent V13 clip pool are excluded.
 
-**Curation correction:** the second, positive-only V13 pass removed graphic footage but returned mostly low-energy landscape repeats, microscopy diagrams and interviews. A self-imposed exclusion of the ten V7 rights-cleared social-origin Commons candidates was therefore reversed. Those ten are reintroduced as an explicit curated recovery pool in `curated_titles_v13.json`; they are NOT the rejected V12 finals and NOT the NASA Short. Combined with the ten best V13 safe windows, `selected_windows_v13.json` defines 20 distinct clips.
+**Curation correction:** the second, positive-only V13 pass removed graphic footage but returned mostly low-energy landscape repeats, microscopy diagrams, interviews and title cards. A self-imposed exclusion of the ten V7 rights-cleared social-origin Commons candidates was therefore reversed, and ten further on-brand Commons funny / prank / animal / silent-comedy clips were added through live Commons API search. `curated_titles_v13.json` now defines 20 distinct clips; `selected_windows_v13.json` uses all 20. The low-energy V13 safe-pass windows remain as research evidence but are NOT in the final cut. None of these are the rejected V12 finals or the NASA Short.
 
 ---
 
@@ -150,7 +150,7 @@ Official YouTube channel monetisation policy (`https://support.google.com/youtub
 
 Clip sources are live Wikimedia Commons namespace-6 file pages with PD / CC0 / CC BY commercial-reuse metadata, recorded per clip in `rights_ledger_v13.json`: Commons page, licence, artist, SHA-1, source URL, local SHA-256, 10 s window start/end and score. Unverified Instagram / TikTok / Reddit / Twitter / Dailymotion reposts are NOT downloaded. Per-clip human legal review and a human watch-through remain required; this is not a legal opinion.
 
-The first V13 pool was rejected because generic CCTV queries returned murder, bombing, missile, crash and robbery footage. `clip_safety_v13.py` now hard-blocks those terms across title + description + categories and ranks animal / funny / unexpected / skill titles first. The second pool was safe but low-energy, so the ten V7 social-origin Commons candidates were reintroduced through `acquire_curated_v13.py` with the same gate. The generic motion scorer initially drifted into title cards and a `SUBSCRIBE` outro, so `curated_window_overrides_v13.json` now pins eight clips to V7's own verified runner probe windows and two silent sources to pre-end-card action windows from the V7 contact sheets. `validate_clips_v13.py` re-checks the final 20-clip selection, licence, SHA-256, duration and video stream before a build is allowed; silent sources are recorded, not treated as native audio.
+The first V13 pool was rejected because generic CCTV queries returned murder, bombing, missile, crash and robbery footage. `clip_safety_v13.py` now hard-blocks those terms across title + description + categories and ranks animal / funny / unexpected / skill titles first. The second pool was safe but low-energy, so twenty curated Commons clips were assembled through `acquire_curated_v13.py` with the same gate: ten V7 social-origin clips plus ten further on-brand Commons clips found by live API search. The generic motion scorer initially drifted into title cards and a `SUBSCRIBE` outro, so `curated_window_overrides_v13.json` now pins all 20 clips to V7 verified runner windows or hand-checked mid-clip action windows, with a hard end-card clamp. `validate_clips_v13.py` re-checks the final 20-clip selection, licence, SHA-256, duration and video stream before a build is allowed; silent sources are recorded, not treated as native audio.
 
 ---
 
@@ -162,7 +162,7 @@ The first V13 pool was rejected because generic CCTV queries returned murder, bo
 | What happened | 160-360 | 20 x 10 s | slow-mo / replay / zoom on the exact surprise | one 4 s line per clip |
 | One more time | 360-540 | 20 x 9 s | callback, escalation, final fastest moment | one 3 s line per 2 clips |
 
-Total `540 s`, `120` visual beats, `20` distinct clips, `60` primary segments. Every segment is moving footage. The 20 clips are defined in `selected_windows_v13.json` and resolved against `rights_ledger_curated_v13.json` and `rights_ledger_v13.json`. Captions SRT is generated from the same English VO text. EDL, captions, credits, QC report and the final MP4 are written under `production/monarch-cam/caught_on_camera_v13/`.
+Total `540 s`, `120` visual beats, `20` distinct clips, `60` primary segments. Every segment is moving footage. The 20 clips are defined in `selected_windows_v13.json` and resolved against `rights_ledger_curated_v13.json`; `rights_ledger_v13.json` remains a low-energy research record only. Captions SRT is generated from the same English VO text. EDL, captions, credits, QC report and the final MP4 are written under `production/monarch-cam/caught_on_camera_v13/`.
 
 ---
 
@@ -175,4 +175,4 @@ Total `540 s`, `120` visual beats, `20` distinct clips, `60` primary segments. E
 - Third-party benchmark videos are studied, not copied into the edit.
 - A human must still watch the full motion, native audio and each clip's rights page before any real publication.
 
-Machine-readable metrics: `FORENSIC_METRICS_V13.json`. Full English VO script: `VO_SCRIPT_V13.md`. Clip ledger: `rights_ledger_v13.json`. Rejection record for the previous attempt: `production/monarch-cam/replay_files_ep01_v12/REJECTION_V12.md`.
+Machine-readable metrics: `FORENSIC_METRICS_V13.json`. Full English VO script: `production/monarch-cam/caught_on_camera_v13/VO_SCRIPT_V13.md`. Final clip ledger: `rights_ledger_curated_v13.json`; low-energy research ledger: `rights_ledger_v13.json`. Final selection: `selected_windows_v13.json`. Rejection record for the previous attempt: `production/monarch-cam/replay_files_ep01_v12/REJECTION_V12.md`.
