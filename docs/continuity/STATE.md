@@ -1,11 +1,11 @@
 # Current state
 
 - Repo: `adil-chandio/Monarch.Overall.Work`
-- Branch: `arena/390292fc-monarch-overall-work`
-- Head at capture: `4b3574c1c936e47cf2a68d719bae0e9fe6a2380a`
+- Branch: `arena/50e3a0ae-monarch-overall-work`
+- Head at capture: `e4f918baa9cb45cc3b7bf3a434cb1e91a8f18165`
 - Captured: `2026-11-08T15:32:32Z`
-- Updated: `2026-11-08T17:51:15Z`
-- Last event: `evt-054-monarch-cam-channel-os`
+- Updated: `2026-11-11T14:12:00Z`
+- Last event: `evt-20261111T141128Z`
 
 ## Active channel
 ```json
@@ -30,22 +30,27 @@
 ```json
 {
   "blocking_gaps": [
-    "Owner says Monarch Cam is one of the 3 channels; config/channels.json still lists 3 legacy slot names.",
-    "No complete Arena chat export/JSON",
-    "No full sidebar chat list",
-    "No assistant turns for EMS-20261011-001",
-    "No live bidirectional connected-app sync",
-    "No V6 rights-verified package or human creative acceptance"
+    "No reference-matched character or verified likeness",
+    "Source clips are 512x288-768x448; no native 1080p",
+    "No human full-motion or audio review",
+    "No rights clearance for the visual model or outputs",
+    "No complete Arena chat export/JSON"
   ],
-  "branch_guardrail": "Always work on arena/390292fc-monarch-overall-work; never switch, rename, or push another branch.",
+  "branch_guardrail": "Always work on arena/50e3a0ae-monarch-overall-work; never switch, rename, or push another branch.",
   "channel": "monarch-cam",
-  "current_step": "Monarch Cam is wired as the active channel workstream with a one-file channel start, machine state, playbook, production workflow, exact next action, copy-paste capsule, rejection/dead-end record, evidence ledger, root shortcut, stale-checkout recovery and one-command resume/channel commands. Legacy config/channels.json slots remain unchanged; the name mismatch is an explicit gap.",
+  "current_step": "A measured V8 cut exists (480 frames / 20.000 s, zero duplicated frames) with a test-backed toolchain in production/mafia-temple/qc/ and CI at .github/workflows/mafia-temple-v8-qc.yml. Every repair is reported with a before/after number; nothing about likeness, anatomy, native 1080p, rights or human review is claimed.",
   "evidence_level": "repo_evidence",
-  "id": "monarch-cam-easy-continuation",
-  "next_action": "Open docs/continuity/channels/monarch-cam/00_START_HERE.md, inherit CHANNEL_STATE.json, and continue the single active Monarch Cam lane without asking the user to explain how to do it. If the lane is the rejected ranking Short, build a separate V6 package only after per-title rights verification; V5 stays untouched.",
-  "space": "yt-automation",
-  "status": "channel_workflow_ready",
-  "title": "Monarch Cam channel workflow — continue without re-explanation"
+  "id": "mafia-temple-v8-measured-cut",
+  "next_action": "Do not add another CPU filter pass. The source is the ceiling. Next step is a GPU render of the final scene at 1080p with a reference-matched character, or the owner accepting V8 as an internal study.",
+  "space": "monarch-studio",
+  "start_here": [
+    "production/mafia-temple/V8-CUT-REPORT.md",
+    "production/mafia-temple/KNOWN-LIMITS.md",
+    "production/mafia-temple/qc/setup_env.sh",
+    "production/mafia-temple/qc/render_film_v8.py"
+  ],
+  "status": "v8_measured_cut_delivered",
+  "title": "Monarch night temple — 20 s film, V8 measured cut"
 }
 ```
 
@@ -65,7 +70,6 @@
 ## Parallel video task
 ```json
 {
-  "claims": "No V6 files, workflow, clips, MP4, run or acceptance exist.",
   "evidence_level": "gap",
   "id": "monarch-cam-v6-intent",
   "next_action": "Build a separate V6 package only after per-title rights verification, visible hook/list geometry, extracted scenes, renderer, QC contract, workflow, MP4 and run. V5 stays untouched.",
@@ -75,7 +79,7 @@
   ],
   "space": "yt-automation",
   "status": "unresolved_not_started",
-  "title": "Next-level full-motion raw funny-animal ranking Short"
+  "title": "Next-level full-motion raw funny-animal ranking Short (unchanged, not started)"
 }
 ```
 
