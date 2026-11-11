@@ -1,0 +1,507 @@
+{
+ "tool": "qc/analyse_shot.py",
+ "note": "Measured engineering deltas of the fix passes. Not creative acceptance.",
+ "shots": [
+  {
+   "file": "s01.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 32.943,
+   "luma_step_max_before": 0.099,
+   "luma_step_max_after": 0.066,
+   "flicker_reduction_pct": 32.7,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 204.8,
+   "sharpness_cubic": 6.3,
+   "sharpness_espcn": 6.7,
+   "espcn_gain_vs_cubic_pct": 6.3
+  },
+  {
+   "file": "s01a.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 32.309,
+   "luma_step_max_before": 0.149,
+   "luma_step_max_after": 0.082,
+   "flicker_reduction_pct": 45.3,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 187.6,
+   "sharpness_cubic": 5.9,
+   "sharpness_espcn": 6.3,
+   "espcn_gain_vs_cubic_pct": 6.8
+  },
+  {
+   "file": "s01b.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 33.429,
+   "luma_step_max_before": 0.297,
+   "luma_step_max_after": 0.267,
+   "flicker_reduction_pct": 10.3,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 140.1,
+   "sharpness_cubic": 4.8,
+   "sharpness_espcn": 4.9,
+   "espcn_gain_vs_cubic_pct": 2.1
+  },
+  {
+   "file": "s02.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 25.068,
+   "luma_step_max_before": 0.239,
+   "luma_step_max_after": 0.077,
+   "flicker_reduction_pct": 67.6,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 311.1,
+   "sharpness_cubic": 31.7,
+   "sharpness_espcn": 38.0,
+   "espcn_gain_vs_cubic_pct": 19.9
+  },
+  {
+   "file": "s03.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 35.054,
+   "luma_step_max_before": 0.469,
+   "luma_step_max_after": 0.299,
+   "flicker_reduction_pct": 36.2,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 564.2,
+   "sharpness_cubic": 17.7,
+   "sharpness_espcn": 19.8,
+   "espcn_gain_vs_cubic_pct": 11.9
+  },
+  {
+   "file": "s04.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 41.129,
+   "luma_step_max_before": 1.236,
+   "luma_step_max_after": 0.569,
+   "flicker_reduction_pct": 54.0,
+   "jitter_rms_px_before": 2.699,
+   "jitter_rms_px_after": 2.309,
+   "stabilise_applied": true,
+   "sharpness_before": 82.5,
+   "sharpness_cubic": 2.7,
+   "sharpness_espcn": 2.8,
+   "espcn_gain_vs_cubic_pct": 3.7
+  },
+  {
+   "file": "s05a.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 24.321,
+   "luma_step_max_before": 0.237,
+   "luma_step_max_after": 0.11,
+   "flicker_reduction_pct": 53.7,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 14.1,
+   "sharpness_cubic": 0.6,
+   "sharpness_espcn": 1.1,
+   "espcn_gain_vs_cubic_pct": 83.3
+  },
+  {
+   "file": "s05b.mp4",
+   "frames": 49,
+   "size": [
+    768,
+    448
+   ],
+   "luma_mean": 24.29,
+   "luma_step_max_before": 0.114,
+   "luma_step_max_after": 0.099,
+   "flicker_reduction_pct": 13.5,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 15.8,
+   "sharpness_cubic": 1.4,
+   "sharpness_espcn": 1.7,
+   "espcn_gain_vs_cubic_pct": 21.4
+  },
+  {
+   "file": "v2faceA.mp4",
+   "frames": 97,
+   "size": [
+    576,
+    320
+   ],
+   "luma_mean": 19.208,
+   "luma_step_max_before": 0.131,
+   "luma_step_max_after": 0.127,
+   "flicker_reduction_pct": 2.9,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 76.3,
+   "sharpness_cubic": 10.7,
+   "sharpness_espcn": 11.7,
+   "espcn_gain_vs_cubic_pct": 9.3
+  },
+  {
+   "file": "v2faceB.mp4",
+   "frames": 97,
+   "size": [
+    576,
+    320
+   ],
+   "luma_mean": 18.53,
+   "luma_step_max_before": 0.53,
+   "luma_step_max_after": 0.14,
+   "flicker_reduction_pct": 73.7,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 60.6,
+   "sharpness_cubic": 8.7,
+   "sharpness_espcn": 9.0,
+   "espcn_gain_vs_cubic_pct": 3.4
+  },
+  {
+   "file": "v2runA.mp4",
+   "frames": 73,
+   "size": [
+    640,
+    384
+   ],
+   "luma_mean": 32.716,
+   "luma_step_max_before": 0.912,
+   "luma_step_max_after": 0.36,
+   "flicker_reduction_pct": 60.5,
+   "jitter_rms_px_before": 1.26,
+   "jitter_rms_px_after": 1.004,
+   "stabilise_applied": true,
+   "sharpness_before": 75.1,
+   "sharpness_cubic": 3.8,
+   "sharpness_espcn": 3.9,
+   "espcn_gain_vs_cubic_pct": 2.6
+  },
+  {
+   "file": "v2runB.mp4",
+   "frames": 73,
+   "size": [
+    640,
+    384
+   ],
+   "luma_mean": 48.676,
+   "luma_step_max_before": 0.185,
+   "luma_step_max_after": 0.134,
+   "flicker_reduction_pct": 27.7,
+   "jitter_rms_px_before": 0.0,
+   "jitter_rms_px_after": 0.0,
+   "stabilise_applied": false,
+   "sharpness_before": 306.8,
+   "sharpness_cubic": 8.8,
+   "sharpness_espcn": 10.0,
+   "espcn_gain_vs_cubic_pct": 13.6
+  },
+  {
+   "file": "wan-face-pilot.mp4",
+   "frames": 65,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 19.288,
+   "luma_step_max_before": 1.19,
+   "luma_step_max_after": 0.714,
+   "flicker_reduction_pct": 40.0,
+   "jitter_rms_px_before": 2.023,
+   "jitter_rms_px_after": 0.564,
+   "stabilise_applied": true,
+   "sharpness_before": 90.9,
+   "sharpness_cubic": 14.0,
+   "sharpness_espcn": 16.8,
+   "espcn_gain_vs_cubic_pct": 20.0
+  },
+  {
+   "file": "wan3-aerial.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 49.181,
+   "luma_step_max_before": 2.759,
+   "luma_step_max_after": 0.819,
+   "flicker_reduction_pct": 70.3,
+   "jitter_rms_px_before": 3.312,
+   "jitter_rms_px_after": 0.969,
+   "stabilise_applied": true,
+   "sharpness_before": 1306.3,
+   "sharpness_cubic": 137.9,
+   "sharpness_espcn": 172.6,
+   "espcn_gain_vs_cubic_pct": 25.2
+  },
+  {
+   "file": "wan3-face.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 28.139,
+   "luma_step_max_before": 2.824,
+   "luma_step_max_after": 0.829,
+   "flicker_reduction_pct": 70.7,
+   "jitter_rms_px_before": 3.092,
+   "jitter_rms_px_after": 0.91,
+   "stabilise_applied": true,
+   "sharpness_before": 67.2,
+   "sharpness_cubic": 6.9,
+   "sharpness_espcn": 7.8,
+   "espcn_gain_vs_cubic_pct": 13.0
+  },
+  {
+   "file": "wan3-gate.mp4",
+   "frames": 121,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 13.267,
+   "luma_step_max_before": 3.731,
+   "luma_step_max_after": 0.947,
+   "flicker_reduction_pct": 74.6,
+   "jitter_rms_px_before": 0.385,
+   "jitter_rms_px_after": 0.089,
+   "stabilise_applied": false,
+   "sharpness_before": 33.0,
+   "sharpness_cubic": 5.2,
+   "sharpness_espcn": 5.3,
+   "espcn_gain_vs_cubic_pct": 1.9
+  },
+  {
+   "file": "wan3-running.mp4",
+   "frames": 73,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 27.758,
+   "luma_step_max_before": 2.552,
+   "luma_step_max_after": 0.847,
+   "flicker_reduction_pct": 66.8,
+   "jitter_rms_px_before": 2.604,
+   "jitter_rms_px_after": 1.424,
+   "stabilise_applied": true,
+   "sharpness_before": 339.3,
+   "sharpness_cubic": 14.0,
+   "sharpness_espcn": 18.6,
+   "espcn_gain_vs_cubic_pct": 32.9
+  },
+  {
+   "file": "wan3-street.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 9.995,
+   "luma_step_max_before": 15.421,
+   "luma_step_max_after": 1.909,
+   "flicker_reduction_pct": 87.6,
+   "jitter_rms_px_before": 2.928,
+   "jitter_rms_px_after": 0.971,
+   "stabilise_applied": true,
+   "sharpness_before": 34.7,
+   "sharpness_cubic": 0.5,
+   "sharpness_espcn": 0.9,
+   "espcn_gain_vs_cubic_pct": 80.0
+  },
+  {
+   "file": "wan4-aerial.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 48.278,
+   "luma_step_max_before": 18.363,
+   "luma_step_max_after": 0.55,
+   "flicker_reduction_pct": 97.0,
+   "jitter_rms_px_before": 0.917,
+   "jitter_rms_px_after": 0.348,
+   "stabilise_applied": true,
+   "sharpness_before": 610.2,
+   "sharpness_cubic": 83.4,
+   "sharpness_espcn": 100.9,
+   "espcn_gain_vs_cubic_pct": 21.0
+  },
+  {
+   "file": "wan4-face-a.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 26.084,
+   "luma_step_max_before": 1.246,
+   "luma_step_max_after": 1.127,
+   "flicker_reduction_pct": 9.5,
+   "jitter_rms_px_before": 2.812,
+   "jitter_rms_px_after": 0.488,
+   "stabilise_applied": true,
+   "sharpness_before": 33.1,
+   "sharpness_cubic": 3.1,
+   "sharpness_espcn": 3.6,
+   "espcn_gain_vs_cubic_pct": 16.1,
+   "face_hits": 94,
+   "eye_hits": 96,
+   "face_hit_pct": 96.9,
+   "eye_track_x_range_px": [
+    257.6,
+    228.2
+   ]
+  },
+  {
+   "file": "wan4-face-b.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 37.127,
+   "luma_step_max_before": 10.466,
+   "luma_step_max_after": 2.405,
+   "flicker_reduction_pct": 77.0,
+   "jitter_rms_px_before": 3.475,
+   "jitter_rms_px_after": 1.221,
+   "stabilise_applied": true,
+   "sharpness_before": 38.6,
+   "sharpness_cubic": 3.4,
+   "sharpness_espcn": 3.2,
+   "espcn_gain_vs_cubic_pct": -5.9
+  },
+  {
+   "file": "wan4-gate.mp4",
+   "frames": 121,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 28.45,
+   "luma_step_max_before": 2.269,
+   "luma_step_max_after": 0.76,
+   "flicker_reduction_pct": 66.5,
+   "jitter_rms_px_before": 1.951,
+   "jitter_rms_px_after": 0.329,
+   "stabilise_applied": true,
+   "sharpness_before": 303.1,
+   "sharpness_cubic": 52.7,
+   "sharpness_espcn": 64.2,
+   "espcn_gain_vs_cubic_pct": 21.8
+  },
+  {
+   "file": "wan4-running-a.mp4",
+   "frames": 73,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 48.989,
+   "luma_step_max_before": 48.181,
+   "luma_step_max_after": 77.121,
+   "flicker_reduction_pct": -60.1,
+   "jitter_rms_px_before": 3.57,
+   "jitter_rms_px_after": 1.193,
+   "stabilise_applied": true,
+   "sharpness_before": 339.8,
+   "sharpness_cubic": 9.6,
+   "sharpness_espcn": 11.4,
+   "espcn_gain_vs_cubic_pct": 18.8
+  },
+  {
+   "file": "wan4-running-b.mp4",
+   "frames": 73,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 36.23,
+   "luma_step_max_before": 7.594,
+   "luma_step_max_after": 2.013,
+   "flicker_reduction_pct": 73.5,
+   "jitter_rms_px_before": 2.687,
+   "jitter_rms_px_after": 1.114,
+   "stabilise_applied": true,
+   "sharpness_before": 566.5,
+   "sharpness_cubic": 100.8,
+   "sharpness_espcn": 145.5,
+   "espcn_gain_vs_cubic_pct": 44.3
+  },
+  {
+   "file": "wan4-street-a.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 31.276,
+   "luma_step_max_before": 4.773,
+   "luma_step_max_after": 3.522,
+   "flicker_reduction_pct": 26.2,
+   "jitter_rms_px_before": 1.731,
+   "jitter_rms_px_after": 0.654,
+   "stabilise_applied": true,
+   "sharpness_before": 391.4,
+   "sharpness_cubic": 30.0,
+   "sharpness_espcn": 42.3,
+   "espcn_gain_vs_cubic_pct": 41.0
+  },
+  {
+   "file": "wan4-street-b.mp4",
+   "frames": 97,
+   "size": [
+    512,
+    288
+   ],
+   "luma_mean": 31.49,
+   "luma_step_max_before": 1.941,
+   "luma_step_max_after": 0.378,
+   "flicker_reduction_pct": 80.5,
+   "jitter_rms_px_before": 1.126,
+   "jitter_rms_px_after": 0.253,
+   "stabilise_applied": true,
+   "sharpness_before": 142.4,
+   "sharpness_cubic": 13.9,
+   "sharpness_espcn": 16.6,
+   "espcn_gain_vs_cubic_pct": 19.4
+  }
+ ]
+}

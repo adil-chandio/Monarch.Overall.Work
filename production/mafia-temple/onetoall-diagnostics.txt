@@ -1,0 +1,211 @@
+<path>:434: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+_validate(nbdict, ref, version, version_minor, relax_add_props)
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+GPU: Tesla T4 torch: 2.11.0+cu130 native bf16: True
++ git clone --quiet https:<path> <path>
++ git -C <path> checkout --quiet 6dd3c67427d65751d42f2dbc0c3db3d829c697de
++ git clone --quiet https:<path> <path>
++ git -C <path> checkout --quiet 088128b224242e110d3906c6750e9a3a348a659b
++ git clone --quiet https:<path> <path>
++ git -C <path> checkout --quiet 0e0b6a2a555625acf4d4aefb780e27d06937132f
++ <path> -m pip install -q -r <path> -r <path> numpy==1.26.4 opencv-python-headless==4.10.0.84 onnxruntime-gpu==1.20.2 imageio-ffmpeg huggingface_hub<1
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+bigframes 2.51.0 requires google-cloud-bigquery-storage<3.0.0,>=2.30.0, which is not installed.
+kaggle-environments 1.33.3 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+bayesian-optimization 3.4.0 requires numpy>=2.1.3; python_full_version == "3.13.*", but you have numpy 1.26.4 which is incompatible.
+mne 1.13.2 requires numpy<3,>=2.1, but you have numpy 1.26.4 which is incompatible.
+cesium 0.12.4 requires numpy<3.0,>=2.0, but you have numpy 1.26.4 which is incompatible.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+ml-dtypes 0.6.0 requires numpy>=2.0.0, but you have numpy 1.26.4 which is incompatible.
+ml-dtypes 0.6.0 requires numpy>=2.1.0; python_version >= "3.13", but you have numpy 1.26.4 which is incompatible.
+shap 0.54.1 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+tobler 0.14.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+geopandas 1.2.0 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+jax 0.11.1 requires numpy>=2.1, but you have numpy 1.26.4 which is incompatible.
+cupy-cuda13x 14.0.1 requires numpy<2.6,>=2.0, but you have numpy 1.26.4 which is incompatible.
+ydf 0.15.0 requires protobuf<7.0.0,>=5.29.1, but you have protobuf 7.36.2 which is incompatible.
+rasterio 1.5.2 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+opencv-contrib-python 4.14.0.94 requires numpy>=2; python_version >= "3.9", but you have numpy 1.26.4 which is incompatible.
+dm-tree 0.1.10 requires numpy>=2.1.0; python_version >= "3.13", but you have numpy 1.26.4 which is incompatible.
+jaxlib 0.11.1 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+xarray-einstats 0.11.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+gradio-client 2.7.2 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires pillow<13.0,>=8.0, but you have pillow 13.0.0 which is incompatible.
+pytensor 2.38.3 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+tifffile 2026.10.15 requires numpy>=2.1, but you have numpy 1.26.4 which is incompatible.
+contourpy 1.4.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+bigframes 2.51.0 requires google-cloud-bigquery-storage<3.0.0,>=2.30.0, which is not installed.
+kaggle-environments 1.33.3 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+bayesian-optimization 3.4.0 requires numpy>=2.1.3; python_full_version == "3.13.*", but you have numpy 1.26.4 which is incompatible.
+mne 1.13.2 requires numpy<3,>=2.1, but you have numpy 1.26.4 which is incompatible.
+cesium 0.12.4 requires numpy<3.0,>=2.0, but you have numpy 1.26.4 which is incompatible.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+ml-dtypes 0.6.0 requires numpy>=2.0.0, but you have numpy 1.26.4 which is incompatible.
+ml-dtypes 0.6.0 requires numpy>=2.1.0; python_version >= "3.13", but you have numpy 1.26.4 which is incompatible.
+shap 0.54.1 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+tobler 0.14.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+geopandas 1.2.0 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+jax 0.11.1 requires numpy>=2.1, but you have numpy 1.26.4 which is incompatible.
+cupy-cuda13x 14.0.1 requires numpy<2.6,>=2.0, but you have numpy 1.26.4 which is incompatible.
+ydf 0.15.0 requires protobuf<7.0.0,>=5.29.1, but you have protobuf 7.36.2 which is incompatible.
+rasterio 1.5.2 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+opencv-contrib-python 4.14.0.94 requires numpy>=2; python_version >= "3.9", but you have numpy 1.26.4 which is incompatible.
+dm-tree 0.1.10 requires numpy>=2.1.0; python_version >= "3.13", but you have numpy 1.26.4 which is incompatible.
+jaxlib 0.11.1 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+xarray-einstats 0.11.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+gradio-client 2.7.2 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires pillow<13.0,>=8.0, but you have pillow 13.0.0 which is incompatible.
+pytensor 2.38.3 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+tifffile 2026.10.15 requires numpy>=2.1, but you have numpy 1.26.4 which is incompatible.
+contourpy 1.4.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+bigframes 2.51.0 requires google-cloud-bigquery-storage<3.0.0,>=2.30.0, which is not installed.
+kaggle-environments 1.33.3 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+bayesian-optimization 3.4.0 requires numpy>=2.1.3; python_full_version == "3.13.*", but you have numpy 1.26.4 which is incompatible.
+mne 1.13.2 requires numpy<3,>=2.1, but you have numpy 1.26.4 which is incompatible.
+cesium 0.12.4 requires numpy<3.0,>=2.0, but you have numpy 1.26.4 which is incompatible.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+ml-dtypes 0.6.0 requires numpy>=2.0.0, but you have numpy 1.26.4 which is incompatible.
+ml-dtypes 0.6.0 requires numpy>=2.1.0; python_version >= "3.13", but you have numpy 1.26.4 which is incompatible.
+shap 0.54.1 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+tobler 0.14.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+geopandas 1.2.0 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+jax 0.11.1 requires numpy>=2.1, but you have numpy 1.26.4 which is incompatible.
+cupy-cuda13x 14.0.1 requires numpy<2.6,>=2.0, but you have numpy 1.26.4 which is incompatible.
+ydf 0.15.0 requires protobuf<7.0.0,>=5.29.1, but you have protobuf 7.36.2 which is incompatible.
+rasterio 1.5.2 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+opencv-contrib-python 4.14.0.94 requires numpy>=2; python_version >= "3.9", but you have numpy 1.26.4 which is incompatible.
+dm-tree 0.1.10 requires numpy>=2.1.0; python_version >= "3.13", but you have numpy 1.26.4 which is incompatible.
+jaxlib 0.11.1 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+xarray-einstats 0.11.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+gradio-client 2.7.2 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires pillow<13.0,>=8.0, but you have pillow 13.0.0 which is incompatible.
+pytensor 2.38.3 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+tifffile 2026.10.15 requires numpy>=2.1, but you have numpy 1.26.4 which is incompatible.
+contourpy 1.4.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+Downloading Kijai<path> OneToAllAnimation<path>
+Downloading Kijai<path> umt5-xxl-enc-bf16.safetensors
+Downloading Kijai<path> Wan2_1_VAE_bf16.safetensors
+Downloading Wan-AI<path> process_checkpoint<path>
+Downloading JunkyByte<path> onnx<path>
+Submitted private local prompt 22a62d05-d3a9-4573-be8c-e42453aa4eee
+ONETOALL_PILOT_COMPLETE
+COMFY LOG TAIL
+Loading transformer parameters to cuda:0:  63%|██████▎   | 840<path> [00:10<00:07, 67.04it<path>
+Loading transformer parameters to cuda:0:  65%|██████▍   | 858<path> [00:10<00:05, 85.95it<path>
+Loading transformer parameters to cuda:0:  65%|██████▌   | 869<path> [00:11<00:05, 80.37it<path>
+Loading transformer parameters to cuda:0:  66%|██████▌   | 879<path> [00:11<00:06, 74.33it<path>
+Loading transformer parameters to cuda:0:  67%|██████▋   | 894<path> [00:11<00:04, 87.48it<path>
+Loading transformer parameters to cuda:0:  68%|██████▊   | 904<path> [00:11<00:06, 66.68it<path>
+Loading transformer parameters to cuda:0:  69%|██████▉   | 922<path> [00:11<00:04, 86.53it<path>
+Loading transformer parameters to cuda:0:  70%|███████   | 933<path> [00:11<00:04, 80.47it<path>
+Loading transformer parameters to cuda:0:  71%|███████   | 943<path> [00:11<00:05, 74.37it<path>
+Loading transformer parameters to cuda:0:  72%|███████▏  | 958<path> [00:12<00:04, 87.74it<path>
+Loading transformer parameters to cuda:0:  73%|███████▎  | 968<path> [00:12<00:05, 66.17it<path>
+Loading transformer parameters to cuda:0:  80%|███████▉  | 1059<path> [00:12<00:01, 189.24it<path>
+Loading transformer parameters to cuda:0:  81%|████████  | 1078<path> [00:12<00:02, 119.10it<path>
+Loading transformer parameters to cuda:0:  82%|████████▏ | 1093<path> [00:13<00:02, 108.22it<path>
+Loading transformer parameters to cuda:0:  83%|████████▎ | 1106<path> [00:13<00:02, 88.15it<path>
+Loading transformer parameters to cuda:0:  84%|████████▍ | 1117<path> [00:13<00:02, 83.38it<path>
+Loading transformer parameters to cuda:0:  85%|████████▍ | 1127<path> [00:13<00:02, 75.74it<path>
+Loading transformer parameters to cuda:0:  85%|████████▌ | 1136<path> [00:14<00:03, 63.22it<path>
+Loading transformer parameters to cuda:0:  86%|████████▌ | 1146<path> [00:14<00:02, 62.54it<path>
+Loading transformer parameters to cuda:0:  87%|████████▋ | 1153<path> [00:14<00:02, 58.94it<path>
+Loading transformer parameters to cuda:0:  87%|████████▋ | 1161<path> [00:14<00:02, 57.89it<path>
+Loading transformer parameters to cuda:0:  88%|████████▊ | 1167<path> [00:14<00:02, 55.14it<path>
+Loading transformer parameters to cuda:0:  88%|████████▊ | 1176<path> [00:14<00:02, 54.95it<path>
+Loading transformer parameters to cuda:0:  89%|████████▉ | 1182<path> [00:14<00:02, 52.73it<path>
+Loading transformer parameters to cuda:0:  90%|████████▉ | 1191<path> [00:15<00:02, 53.27it<path>
+Loading transformer parameters to cuda:0:  90%|█████████ | 1197<path> [00:15<00:02, 51.48it<path>
+Loading transformer parameters to cuda:0:  91%|█████████ | 1206<path> [00:15<00:02, 52.42it<path>
+Loading transformer parameters to cuda:0:  91%|█████████ | 1212<path> [00:15<00:02, 50.77it<path>
+Loading transformer parameters to cuda:0:  92%|█████████▏| 1221<path> [00:15<00:02, 51.90it<path>
+Loading transformer parameters to cuda:0:  92%|█████████▏| 1227<path> [00:15<00:02, 50.56it<path>
+Loading transformer parameters to cuda:0:  93%|█████████▎| 1236<path> [00:15<00:01, 51.70it<path>
+Loading transformer parameters to cuda:0:  93%|█████████▎| 1242<path> [00:16<00:01, 50.09it<path>
+Loading transformer parameters to cuda:0:  94%|█████████▍| 1251<path> [00:16<00:01, 51.54it<path>
+Loading transformer parameters to cuda:0:  95%|█████████▍| 1257<path> [00:16<00:01, 50.23it<path>
+Loading transformer parameters to cuda:0:  95%|█████████▌| 1266<path> [00:16<00:01, 51.60it<path>
+Loading transformer parameters to cuda:0:  96%|█████████▌| 1272<path> [00:16<00:01, 50.18it<path>
+Loading transformer parameters to cuda:0:  96%|█████████▋| 1281<path> [00:16<00:00, 51.63it<path>
+Loading transformer parameters to cuda:0:  97%|█████████▋| 1287<path> [00:16<00:00, 50.11it<path>
+Loading transformer parameters to cuda:0:  98%|█████████▊| 1296<path> [00:17<00:00, 51.80it<path>
+Loading transformer parameters to cuda:0:  98%|█████████▊| 1302<path> [00:17<00:00, 48.67it<path>
+Loading transformer parameters to cuda:0:  99%|█████████▉| 1314<path> [00:17<00:00, 62.42it<path>
+Loading transformer parameters to cuda:0: 100%|█████████▉| 1326<path> [00:17<00:00, 74.09it<path>
+Loading transformer parameters to cuda:0: 100%|██████████| 1329<path> [00:17<00:00, 75.71it<path>
+[32m[INFO][0m -------------------------
+[32m[INFO][0m Transformer weights loaded:
+[32m[INFO][0m Device: cuda:0   | Memory: 2,686,142.32 MB
+[32m[INFO][0m ------- Scheduler info -------
+[32m[INFO][0m Total timesteps: tensor([999, 972, 937, 892, 833, 749, 624, 416], device='cuda:0')
+[32m[INFO][0m Using timesteps: tensor([999, 972, 937, 892, 833, 749, 624, 416], device='cuda:0')
+[32m[INFO][0m Using sigmas: tensor([1.0000, 0.9722, 0.9375, 0.8928, 0.8333, 0.7499, 0.6249, 0.4166, 0.0000])
+[32m[INFO][0m ------------------------------
+[32m[INFO][0m Rope function: comfy
+[32m[INFO][0m Using One-to-All embeddings:
+[32m[INFO][0m   ref_latent_pos: torch.Size([1, 32, 1, 104, 60])
+[32m[INFO][0m   ref_latent_neg: torch.Size([1, 32, 1, 104, 60])
+[32m[INFO][0m   ref_strength: 1.0
+[32m[INFO][0m   ref_start_percent: 0.0
+[32m[INFO][0m   ref_end_percent: 1.0
+[32m[INFO][0m   pose_images: torch.Size([1, 3, 49, 832, 480])
+[32m[INFO][0m   pose_prefix_image: torch.Size([1, 3, 1, 832, 480])
+[32m[INFO][0m   controlnet_strength: 1.0
+[32m[INFO][0m   controlnet_start_percent: 0.0
+[32m[INFO][0m   controlnet_end_percent: 1.0
+[32m[INFO][0m   pose_cfg_scale: 1.0
+[32m[INFO][0m ---------- Sampling start ----------
+[32m[INFO][0m 49 frames at 480x832 (Input sequence length: 20280) with 8 steps
+0%|          | 0<path> [00:00<?, ?it<path>
+0%|          | 0<path> [00:00<?, ?it<path>
+12%|█▎        | 1<path> [00:40<04:43, 40.55s<path>
+25%|██▌       | 2<path> [01:15<03:44, 37.48s<path>
+38%|███▊      | 3<path> [01:51<03:03, 36.77s<path>
+50%|█████     | 4<path> [02:27<02:25, 36.30s<path>
+62%|██████▎   | 5<path> [03:02<01:47, 35.76s<path>
+75%|███████▌  | 6<path> [03:39<01:12, 36.22s<path>
+88%|████████▊ | 7<path> [04:16<00:36, 36.50s<path>
+100%|██████████| 8<path> [04:51<00:00, 36.19s<path>
+100%|██████████| 8<path> [04:51<00:00, 36.49s<path>
+[32m[INFO][0m ---------- Sampling end ------------
+[32m[INFO][0m [Sampling] Max allocated memory: max_memory=4.458 GB
+[32m[INFO][0m [Sampling] Max reserved memory: max_reserved=5.312 GB
+Generated new RoPE frequencies
+WanVAE decoding frames:   0%|          | 0<path> [00:00<?, ?it<path>
+WanVAE decoding frames:   8%|▊         | 1<path> [00:00<00:04,  2.46it<path>
+WanVAE decoding frames:  15%|█▌        | 2<path> [00:01<00:06,  1.62it<path>
+WanVAE decoding frames:  31%|███       | 4<path> [00:01<00:04,  2.15it<path>
+WanVAE decoding frames:  38%|███▊      | 5<path> [00:03<00:06,  1.27it<path>
+WanVAE decoding frames:  46%|████▌     | 6<path> [00:04<00:07,  1.01s<path>
+WanVAE decoding frames:  54%|█████▍    | 7<path> [00:06<00:07,  1.17s<path>
+WanVAE decoding frames:  62%|██████▏   | 8<path> [00:08<00:06,  1.28s<path>
+WanVAE decoding frames:  69%|██████▉   | 9<path> [00:09<00:05,  1.35s<path>
+WanVAE decoding frames:  77%|███████▋  | 10<path> [00:11<00:04,  1.41s<path>
+WanVAE decoding frames:  85%|████████▍ | 11<path> [00:12<00:02,  1.45s<path>
+WanVAE decoding frames:  92%|█████████▏| 12<path> [00:14<00:01,  1.48s<path>
+WanVAE decoding frames: 100%|██████████| 13<path> [00:15<00:00,  1.50s<path>
+WanVAE decoding frames: 100%|██████████| 13<path> [00:15<00:00,  1.21s<path>
+[32m[INFO][0m [32mPrompt executed in 448.10 seconds[0m
+<path>:435: SyntaxWarning: invalid escape sequence '\|'
+cells[i][c] = re.sub('\\\\\|', '|', cell)
+<path>:36: SyntaxWarning: invalid escape sequence '\_'
+text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 91278 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 407753 bytes to __results__.html

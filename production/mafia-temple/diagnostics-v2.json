@@ -1,0 +1,61 @@
+{
+  "log_received": true,
+  "exception_classes": [
+    "PapermillExecutionError",
+    "RuntimeError"
+  ],
+  "flags": {
+    "out_of_memory": false,
+    "disk_full": false,
+    "missing_module": false,
+    "dtype": true,
+    "network": false,
+    "invalid_model": false,
+    "gpu": false,
+    "model_loaded": false,
+    "inference_started": true,
+    "killed": false
+  },
+  "last_diagnostic_lines": [
+    "PapermillExecutionError",
+    "RuntimeError"
+  ],
+  "log_chars": 19207,
+  "completed_stages": [
+    "STAGE 1 text embeddings only",
+    "STAGE 2 transformer and VAE",
+    "STAGE 3 video generation"
+  ],
+  "nonfinite_embeddings": false,
+  "runtime_error_messages": [
+    "RuntimeError                              Traceback (most recent call last)\\n\"}",
+    "RuntimeError: Expected all tensors to be on the same device, but got mat1 is on cpu, different from other tensors on cuda:0 (when checking argument in method wrapper_CUDA_addmm)\\n\"}"
+  ],
+  "frame_sources": [
+    [
+      "validator.py",
+      "434"
+    ],
+    [
+      "mistune.py",
+      "435"
+    ],
+    [
+      "filter_links.py",
+      "36"
+    ]
+  ],
+  "traceback_functions": [
+    "execute_notebook",
+    "raise_for_execution_errors"
+  ],
+  "known_stages": {
+    "vae_decode": false,
+    "vae_encode": false,
+    "attention": true,
+    "text_encoder": false,
+    "pipeline_loading": false,
+    "denoise": false,
+    "tiling": false
+  }
+}
