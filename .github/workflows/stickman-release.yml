@@ -5,6 +5,7 @@ on:
     branches: [arena/1f352b8e-monarch-overall-work]
     paths:
       - '.github/workflows/stickman-release.yml'
+      - 'showreel/stickman/STICKMAN_RELEASE_NOTES.md'
 
 permissions:
   contents: write
