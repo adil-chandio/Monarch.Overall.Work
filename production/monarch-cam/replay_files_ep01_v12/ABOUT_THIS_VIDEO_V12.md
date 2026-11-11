@@ -32,7 +32,9 @@ render planner. It was rendered locally and verified frame-by-frame.
   its own playback speed (1.00×, 0.77×, 0.46×, 1.00×, 1.00×, 0.83×, 1.00×, 0.71×). See
   `CONTACT_SHEET_V12.png` for visual proof they are different moments, and
   `EDL_V12_ACTUAL.json` for exact in/out/speed. **The excluded NASA Artemis II / water-bubble
-  V10 Short is NOT used anywhere in this video.**
+  V10 Short is NOT used anywhere in this video.** The exact trimmed/speed-ramped excerpt of
+  each window is **vendored in `clips/clip_window_01..08.mp4`** and pinned by SHA-256 in the
+  EDL, so the render stays reproducible even when a `deliverables` final is rebuilt by CI.
 - **10 original diagrams** from Phase D (`research/multi_clip_long_form_v12/assets_v12/`),
   used as full-frame analytical holds and as thumbnails inside the clip-window sidebars.
 - **Original commentary VO**: 10 TTS chunks (`vo/vo_A.mp3` … `vo/vo_J.mp3`), one consistent
@@ -63,6 +65,12 @@ sakta hai; builder ka structure waise hi kaam karega.
 Underlying source credits of those earlier finals live in the V4–V9 `CREDITS.md` /
 `review/*ledger*.json` files. This episode adds original commentary, original diagrams and
 original editing on top.
+
+**Reproducibility note.** The Clean V8 workflow regenerates
+`deliverables/..._CLEAN_V8.mp4` on pushes (its bytes changed once right after this render,
+in commit `c4938b3`). That does not change this MP4: slot 2's exact excerpt is vendored in
+`clips/clip_window_02.mp4` and pinned by SHA-256. Re-running `--all` after CI rebuilt V8 was
+verified to produce the **identical** 69,402,336-byte file with the identical SHA-256.
 
 ## 4. What is NOT done (honest, still open)
 
@@ -115,6 +123,9 @@ Requires `imageio-ffmpeg`, `numpy`, `Pillow`, DejaVu fonts. Intermediates live i
 
 ## 7. Files
 
-`REPLAY_FILES_Ep01_V12_10min_1080p30.mp4`, `QC_REPORT_V12.json`, `EDL_V12_ACTUAL.json`,
+`REPLAY_FILES_Ep01_V12_10min_1080p30.mp4`, `QC_REPORT_V12.json/.md`, `EDL_V12_ACTUAL.json`,
 `captions_v12.srt`, `thumbnail_v12.png`, `CONTACT_SHEET_V12.png`,
-`build_video_v12.py`, `make_thumbnail_v12.py`, `vo/*.mp3`, `build.log`, this file.
+`clips/clip_window_01..08.mp4`, `vo/vo_A..J.mp3`, `build_video_v12.py`,
+`make_thumbnail_v12.py`, `serve_v12.py`, `index.html`, `build.log` (ignored), this file.
+
+`index.html` + `serve_v12.py` give a seekable in-browser player (HTTP Range / 206 support).

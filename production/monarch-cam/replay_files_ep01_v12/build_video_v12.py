@@ -25,6 +25,7 @@ import hashlib
 import json
 import math
 import re
+import shutil
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -320,20 +321,26 @@ def build_assets(diag_cache):
     # 4. hold diagrams annotated (02..09)
     for s in range(1, 9):
         annotate_hold(diag_cache[s + 1], s).save(WORK / ("hold_svg_%02d.png" % s))
-    # 5. eight clip loops (own-work archive moments, slowed/scaled to centre strip)
+    # 5. eight clip loops. PREFER the vendored, exact excerpts committed with this
+    #    episode: they pin the precise bytes embedded in the final MP4 and keep the
+    #    render reproducible even when a deliverables/*.mp4 final is rebuilt by CI.
+    VENDOR = OUT / "clips"
     for s, c in CLIPS.items():
+        out = WORK / ("loop_%02d.mp4" % s)
+        vend = VENDOR / ("clip_window_%02d.mp4" % s)
+        if vend.exists():
+            shutil.copyfile(vend, out)   # always pin the exact committed bytes
+            continue
         src = DELIV / c["f"]
         if not src.exists():
             raise SystemExit("missing source moment: %s" % src)
-        out = WORK / ("loop_%02d.mp4" % s)
-        if not out.exists():
-            vf = ("scale=608:1080:force_original_aspect_ratio=decrease,"
-                  "pad=608:1080:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30,"
-                  "setpts=%.4f*(PTS-STARTPTS),format=yuv420p" % c["speed"])
-            run([FF, "-y", "-ss", c["ss"], "-t", c["dur"], "-i", src,
-                 "-vf", vf, "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-                 "-pix_fmt", "yuv420p", "-r", "30", "-g", "60",
-                 "-video_track_timescale", "15360", out])
+        vf = ("scale=608:1080:force_original_aspect_ratio=decrease,"
+              "pad=608:1080:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30,"
+              "setpts=%.4f*(PTS-STARTPTS),format=yuv420p" % c["speed"])
+        run([FF, "-y", "-ss", c["ss"], "-t", c["dur"], "-i", src,
+             "-vf", vf, "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+             "-pix_fmt", "yuv420p", "-r", "30", "-g", "60",
+             "-video_track_timescale", "15360", out])
     return diag_cache
 
 
@@ -553,6 +560,9 @@ def sha256(path):
 
 
 def build_edl(blocks, meta, vo_dur, texts, qc):
+    def vsha(s):
+        p = OUT / "clips" / ("clip_window_%02d.mp4" % s)
+        return sha256(p) if p.exists() else None
     return {
         "edition": "V12", "episode": "REPLAY FILES Ep.1",
         "status": "ACTUAL_LOCAL_RENDER_COMPLETE",
@@ -564,7 +574,17 @@ def build_edl(blocks, meta, vo_dur, texts, qc):
                      "integrated_lufs": qc.get("integrated_lufs")},
         "visual_blocks": len(blocks), "diagrams_used": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         "distinct_clip_windows": 8,
+        "reproducibility": {
+            "exact_excerpts_vendored": True,
+            "vendored_dir": "clips/",
+            "note": ("The 8 clip windows are pinned by the SHA-256 of 8 vendored excerpt files "
+                     "committed with this episode. Some deliverables/*.mp4 finals are regenerated "
+                     "by CI on each push, so the final MP4 references these pinned excerpts, not "
+                     "whatever bytes a later rebuild of the origin file happens to contain."),
+        },
         "clip_windows": [{"slot": s, "source": "deliverables/" + CLIPS[s]["f"],
+                          "vendored_excerpt": "clips/clip_window_%02d.mp4" % s,
+                          "vendored_excerpt_sha256": vsha(s),
                           "in_seconds": CLIPS[s]["ss"], "excerpt_seconds": CLIPS[s]["dur"],
                           "playback_speed_factor": 1.0 / CLIPS[s]["speed"],
                           "mechanism": CLIPS[s]["mech"], "origin": "own_work_monarch_cam_archive_final",

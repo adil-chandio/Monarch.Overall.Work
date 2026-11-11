@@ -18,6 +18,12 @@ Re-verified by decoding the complete final MP4.
 
 Extras measured: integrated loudness **−14.02 LUFS** (two-pass linear EBU R128),
 69,402,336 bytes, `+faststart` moov atom, contiguous 18,000-frame silent master before mux.
+**93 sentence-level caption cues** (word-count-proportional timing).
+
+Reproducibility: all 8 clip windows are pinned by vendored excerpt SHA-256 in
+`clips/` + `EDL_V12_ACTUAL.json`. A full `--all` rebuild after CI regenerated the V8 origin
+file produced the **byte-identical** MP4 (same 69,402,336 bytes, same SHA-256) — the render
+is deterministic against the committed assets.
 
 Visual spot-check: frames decoded at 0:05 (hook), 2:30 (annotated diagram hold), 5:40
 ("Sound vs Silence" diagram hold), 9:45 (closing card). All clean, no missing fonts, no
