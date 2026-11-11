@@ -1,8 +1,8 @@
 # Film editing — incomplete workprints
 
-The 796.042-second narration has **not** been turned into a complete film. This folder builds six candidate editorial sections and tracks coverage without labelling missing footage as finished. The sources are existing native-3D development footage; no previously rejected slide/recut video is used. The shots remain provisional and are **not** a substitute for the storyboard's missing narrative action. The opening repeats two visual sources, lacks several requested physical actions, and ends mid-story. The same 3D mammoth model appears repeatedly. The hypothesis and genomic-gap inserts are conceptual work, not observation. Caption timing, visual continuity and science are not reviewed. They need substantial animation and edit work.
+The 796.042-second narration has **not** been turned into a complete film. This folder builds seven candidate editorial sections and tracks coverage without labelling missing footage as finished. The sources are existing native-3D development footage; no previously rejected slide/recut video is used. The shots remain provisional and are **not** a substitute for the storyboard's missing narrative action. The opening repeats two visual sources, lacks several requested physical actions, and ends mid-story. The same 3D mammoth model appears repeatedly. The hypothesis and genomic-gap inserts are conceptual work, not observation. Caption timing, visual continuity and science are not reviewed. They need substantial animation and edit work.
 
-`opening-cut.json` describes a first-pass 0–85s picture edit with exact frame counts and hash-pinned source render files. `build_opening.py` makes an unapproved 85s A/V workprint using the prior unreviewed narration/score. `build_insert.py` builds five separate inserts at provisional 130s (island life), 172.733s (2017 genome comparison), 354s (water inference), 370s (rain-on-snow hypothesis) and 629.0667s (2024 genomic gap). All output is ignored in `.cache/mammoth-edit/`; it is not a deliverable. The map depicts modern shorelines only; the dig is illustrative and not a Wrangel site. The ice sequence is hypothetical, and the gap is explicitly a gap in the 2024 genetic sample set, not in all evidence. No voice sync has been manually reviewed. Of the standalone inserts, only the water insert includes candidate stream ambience; its source, illustrative location and listening caveats are in `../ambience-sources/brook-candidate/README.md`. Other standalone inserts have no scene-specific SFX. The island-life insert uses a temporary 0.88 gain reduction to meet the true-peak guardrail; its level is not a final mastering decision.
+`opening-cut.json` describes a first-pass 0–85s picture edit with exact frame counts and hash-pinned source render files. `build_opening.py` makes an unapproved 85s A/V workprint using the prior unreviewed narration/score. `build_insert.py` builds separate inserts at provisional 130s (island approach), 140s (island chapter), 172.733s (2017 genome comparison), 250s (coat section), 354s (water inference), 370s (rain-on-snow hypothesis), 629.0667s (2024 genomic gap) and 783s (closing crossing). All output is ignored in `.cache/mammoth-edit/`; it is not a deliverable. The map depicts modern shorelines only; the dig is illustrative and not a Wrangel site. The ice sequence is hypothetical, and the gap is explicitly a gap in the 2024 genetic sample set, not in all evidence. No voice sync has been manually reviewed. Of the standalone inserts, only the water insert includes candidate stream ambience; its source, illustrative location and listening caveats are in `../ambience-sources/brook-candidate/README.md`. Other standalone inserts have no scene-specific SFX. The island-life insert uses a temporary 0.88 gain reduction to meet the true-peak guardrail; its level is not a final mastering decision.
 
 The scripts require the exact hash-pinned prior rendered clips in the ignored cache, Python `imageio-ffmpeg` and the soundtrack. Some of those files are local and need rerendering from their respective scene directories. The living-world opening shot specifically requires `MAMMOTH_REVIEW_CACHE="$PWD/.cache/living-world-edit" node production/extinct-life/longform-mammoth/cinematic-rebuild/living-world/render-preview.mjs 690`. Hardware/software differences can change rendered hashes, requiring an intentional editorial check and plan update rather than silent replacement. Map/gap renders are produced with their respective `render-preview.mjs`. Run from repository root:
 
@@ -18,7 +18,21 @@ The scripts require the exact hash-pinned prior rendered clips in the ignored ca
 
 Builds perform full FFmpeg decode, frame count, peak and source-hash checks, but **not** continuous listening, audiovisual sign-off, science accuracy, rights clearance or assessment of storytelling quality. `check_coverage.py` counts a segment only if its QC matches the actual cache file. A complete duration is not equivalent to a finished film, and a partial duration must not be distributed as the completed documentary. See each scene's README and the soundtrack/music/asset READMEs for sources, rights uncertainties and required credits. Nothing authorizes YouTube publication.
 
-## Island seasons (85–115s) and closing crossing (783–796s)
+## Island chapter and coat section (140–170s, 250–274s)
+
+`island-chapter/` is a 60-second, seven-shot sequence in one invented Arctic world.
+Its first 30 seconds are placed at **140.0–170.0 s** (the earlier 140.9 s offset left
+a 0.9 s hole in the coverage union and was corrected). The remaining 30 seconds
+(calf, stream crossing, squall, dusk) still need editorial slots; the calf and
+crossing beats sit naturally around 200–250 s, where the narration discusses
+small-population selection and a moving animal.
+
+`coat-section/` is 34 seconds in five shots: a macro wool-texture pass, a close
+flank, a low leg/weight shot, the herd walking into low sun, and an exit hold. It is
+placed at **250.0–274.0 s**, under the FOXQ1 passage and its explicit caveat that the
+coat was predicted and never observed. It contains **no researcher, sample tray or
+comparison bench** — those subjects have read as toys in this project and were not
+attempted here. The macro pass carries its own disclosure line.
 
 `island-years/` covers the opening of the island chapter: a 30-second continuous
 move through compressed seasons with three animals on invented terrain. `final-crossing/`
@@ -26,19 +40,23 @@ is the 13-second closing motif, ending on a stylised footprint. Both carry their
 README with what is invented; neither has had continuous viewing.
 
 ```
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-chapter
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py coat-section
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-thaw
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py final-crossing
 ```
 
-`island-thaw` is an 8-second excerpt (4.0–12.0 s) of the 30-second seasonal render, placed
-at 140.0–148.0 s where the storyboard asks for compressed seasons; `island-approach`
-is trimmed to 10 s (130–140 s) so the two do not overlap. `check_coverage.py` now
-reports overlapping candidate windows instead of aborting, and measures coverage as
-the union of verified windows.
+`island-approach` is trimmed to 10 s (130–140 s) where the storyboard asks for a
+foraging beat; the island chapter then runs continuously from 140.0 s. `island-thaw`
+remains available as an 8-second alternate excerpt of the seasonal study but is not
+placed. `check_coverage.py` reports overlapping candidate windows instead of aborting
+and measures coverage as the union of verified windows. The current union is
+**205.0 s of 796.0 s**, leaving ~591 s with no picture.
 
 The island-seasons insert adds a low wind bed from the existing candidate recording;
 its provenance and the unverified master identity are recorded in
-`../ambience-sources/README.md`. It has not been auditioned.
+`../ambience-sources/README.md`. It has not been auditioned. The coat-section insert
+uses the shared narration draft only, with no original sound design.
 
 ## Continuous environment passage (354–384s)
 

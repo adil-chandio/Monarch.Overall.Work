@@ -6,10 +6,11 @@ story=json.loads((base.parent/'storyboard-retime/storyboard-retimed-reblocked.js
 # Candidate placements, not listening-approved. Offsets are exact at 30 fps.
 segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json','file':'opening-incomplete-workprint.mp4'},
  {'name':'island-approach','start_frame':3900,'frames':300,'qc':'island-approach-qc.json','file':'island-approach-incomplete-workprint.mp4'},
+ {'name':'island-chapter','start_frame':4200,'frames':900,'qc':'island-chapter-qc.json','file':'island-chapter-incomplete-workprint.mp4'},
+ {'name':'coat-section','start_frame':7500,'frames':720,'qc':'coat-section-qc.json','file':'coat-section-incomplete-workprint.mp4'},
  {'name':'genome-comparison','start_frame':5182,'frames':600,'qc':'genome-comparison-qc.json','file':'genome-comparison-incomplete-workprint.mp4'},
  {'name':'stream','start_frame':10620,'frames':480,'qc':'stream-qc.json','file':'stream-incomplete-workprint.mp4'},
  {'name':'hypothesis','start_frame':11100,'frames':420,'qc':'hypothesis-qc.json','file':'hypothesis-incomplete-workprint.mp4'},
- {'name':'island-thaw','start_frame':4200,'frames':240,'qc':'island-thaw-qc.json','file':'island-thaw-incomplete-workprint.mp4'},
  {'name':'final-crossing','start_frame':23490,'frames':390,'qc':'final-crossing-qc.json','file':'final-crossing-incomplete-workprint.mp4'},
  {'name':'genomic-gap','start_frame':18872,'frames':510,'qc':'genomic-gap-qc.json','file':'genomic-gap-incomplete-workprint.mp4'}]
 end=math.ceil(story['narration_duration_seconds']*30)

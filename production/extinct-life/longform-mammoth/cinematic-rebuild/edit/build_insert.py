@@ -11,24 +11,34 @@ audio=root/'production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrac
 choices={
  # Trimmed to the 10 s the storyboard allows (130-140 s); the remaining 8 s of
  # this render is superseded by the compressed-season excerpt at 140 s.
- 'island-approach':('.cache/mammoth-island-approach/island-approach-motion-review-silent.mp4',None,130.,300),
+ 'island-approach':('.cache/mammoth-island-approach/island-approach-motion-review-silent.mp4',None,130.,300,540),
  # The 8-second thaw/summer excerpt of the 30-second season study fits the
  # storyboard's compressed-season beat at 140-148s exactly.
- 'island-thaw':('.cache/mammoth-island-years/island-years-motion-review-silent.mp4',None,140.,240),  # 4.0-12.0 s of the 30 s render
+ 'island-thaw':('.cache/mammoth-island-years/island-years-motion-review-silent.mp4',None,140.,240,900),  # 4.0-12.0 s of the 30 s render
+ # The first 30 s of the 60 s island chapter (dawn herd -> trunk to grass) sits
+ # under "Picture an island population..." and the 2019 collagen passage.
+ # Uses ffmpeg trim on a verified 1800-frame render; the manifest still records
+ # 1800 frames, so the frame-count guard below accepts a trim of this source.
+ 'island-chapter':('.cache/mammoth-island-chapter/island-chapter-motion-review-silent.mp4',None,140.0,900,1800),
+ # The coat section's five shots sit under the FOXQ1 passage and its "predicted,
+ # never observed" caveat. 34 s render; 24 s placed from 250.0 s so the macro
+ # texture lands with "a gloved researcher compares two markings" and the exit
+ # hold runs into the isotope handoff at 305 s. Nothing at 244-250 s yet.
+ 'coat-section':('.cache/mammoth-coat-section/coat-section-motion-review-silent.mp4',None,250.0,720,1020),
  'genome-comparison':('.cache/mammoth-comparison-lab/comparison-lab-motion-review-silent.mp4',None,5182/30,600),
  'stream':('.cache/mammoth-stream-scene/stream-scene-motion-review-silent.mp4',None,354.,480),
  'hypothesis':('.cache/mammoth-icing-hypothesis/icing-motion-review-silent.mp4','e2ed9b28d179b12d7e7d54d5be3bcbb782d61c6638df3f3c7f64cb75229f6040',370.,420),
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
-name=sys.argv[1];file,expected,offset,frames=choices[name];video=root/file
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|coat-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 manifest=json.loads((video.parent/'render-manifest.json').read_text())
 if manifest['fps']!=30:raise SystemExit('Wrong render rate')
-if seek is None and (manifest['frames']!=frames and name!='island-approach'):raise SystemExit('Wrong render frame count')
-if name=='island-approach' and manifest['frames']<frames:raise SystemExit('Render too short for trim')
+if seek is None and manifest['frames']!=source_frames:raise SystemExit('Wrong render frame count')
+if source_frames<frames:raise SystemExit('Render too short for trim')
 for source,checksum in manifest['input_sha256'].items():
  if not (root/source).is_file() or digest(root/source)!=checksum:raise SystemExit(f'Render source changed: {source}')
 if expected is None:expected=manifest['output_sha256']
