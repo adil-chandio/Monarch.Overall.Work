@@ -15,6 +15,16 @@ must not claim these are accurate if the clips fail that review.
 Planned duration: 0–4 street, 4–9 gate, 9–13 aerial, 13–16 running,
 16–20 turn and glowing-eye close-up. No reference sound was supplied.
 
+
+## V8 cut (current)
+
+`V8-CUT-REPORT.md` records the measured 20-second V8 cut: native frames only,
+per-shot deflicker/stabilisation, learned 2x upscale, tracked iris glow, night
+grade and a loudness-mastered sound pass, with the before/after numbers for each
+change and the reproduce commands. `KNOWN-LIMITS.md` lists what V8 still is not
+(likeness, native 1080p, rights, human review). Any claim about this film must
+match those two files.
+
 ## Native-motion review cut
 
 `monarch-temple-native-review.mp4` is a 20-second review cut using the WAN 2.2

@@ -166,14 +166,20 @@ class Renderer:
 
         eye_track, eye_stats = None, None
         if shot.eye_glow:
-            boxes = [ft.face_box(f) for f in used]
-            eye_track = ft.smooth_points([ft.eye_points(f, b) for f, b in zip(used, boxes)], 5)
-            hits = int(sum(p is not None for p in eye_track))
-            eye_stats = {'face_hits': int(sum(b is not None for b in boxes)),
-                         'eye_hits': hits, 'frames': len(used)}
-            if hits < 0.6 * len(used):
-                eye_track = None
-                eye_stats['glow'] = f'disabled: tracking only {hits}/{len(used)} frames'
+            seed, pts = ft.seed_eyes(used)
+            eye_stats = {'seed_frame': seed, 'seed_points': pts, 'frames': len(used)}
+            if seed is None:
+                eye_stats['glow'] = 'disabled: no verified eye pair found'
+            else:
+                track = ft.track_pair(used, seed, pts)
+                eye_track = ft.smooth_points(track, 5)
+                hits = int(sum(p is not None for p in eye_track))
+                eye_stats['eye_hits'] = hits
+                if hits < 0.6 * len(used):
+                    eye_track = None
+                    eye_stats['glow'] = f'disabled: tracking only {hits}/{len(used)} frames'
+                else:
+                    eye_stats['glow'] = f'tracked on {hits}/{len(used)} frames'
 
         self.log['shots'].append({
             'shot': shot.name, 'source': shot.source, 'source_frames': n,
@@ -223,11 +229,13 @@ class Renderer:
 
         eye = prep['eye']
         if eye is not None and eye[k] is not None:
-            ramp = float(np.clip((i - 30) / 34.0, 0, 1))
-            pulse = 0.90 + 0.10 * np.sin(2 * np.pi * i / 36.0)
-            scale = W / 512.0
+            # ramp in over ~1.4 s, then a slow breathing pulse; capped so it
+            # glows rather than blows out
+            ramp = float(np.clip((i - 26) / 34.0, 0, 1))
+            pulse = 0.92 + 0.08 * np.sin(2 * np.pi * i / 40.0)
+            scale = W / float(prep['used'].shape[2])
             pts = [(x * scale, y * scale) for x, y in eye[k]]
-            frame = ft.brighten_eyes(frame, pts, ramp * pulse, radius_scale=scale)
+            frame = ft.brighten_eyes(frame, pts, 0.92 * ramp * pulse, radius_scale=scale)
 
         return ft.grade_frame(frame, seed=(shot.start + i) * 7919, **GRADE[shot.name])
 

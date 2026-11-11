@@ -270,61 +270,55 @@ def _dark_blob_score(gray: np.ndarray, cx: int, cy: int, radius: int = 2) -> flo
     return float(patch[ring].mean() - patch[inner].mean())
 
 
-def eye_points(frame: np.ndarray, box, band: float = 0.18):
-    """Locate the two iris centres inside a face box, with a symmetry prior.
+# Iris positions as a fraction of the detected face box. Measured on this
+# close-up against a ruled grid: the pupils sit at ~0.30/0.62 of box width and
+# ~0.40 of box height. Haar's box is slightly narrower than the visual face, so
+# blob-hunting alone drifts toward the nose; the prior is the accurate anchor
+# and the darkness check below is what keeps it honest.
+EYE_PRIOR = ((0.297, 0.404), (0.618, 0.404))
 
-    Each eye half is scanned for the pixel whose small dark disk contrasts most
-    with its surrounding ring, but only in narrowed windows and with a hard
-    pair constraint (same height, plausible separation). If no confident pair
-    exists the function returns None, so the caller disables the effect instead
-    of drawing light on the wrong feature.
+
+def prior_eye_points(frame: np.ndarray, box):
+    """Eye centres from the face box prior, verified to be dark pupils.
+
+    Returns None unless both prior points land on a disk that is clearly darker
+    than its surroundings, so the effect switches off instead of lighting up
+    skin, hair or the nose.
     """
     if box is None:
         return None
     x, y, w, h = [float(v) for v in box]
-    x, y = max(x, 0.0), max(y, 0.0)
     if w < 48 or h < 48:
         return None
-    gx0, gy0 = int(round(x)), int(round(y))
+    gx0, gy0 = max(int(round(x)), 0), max(int(round(y)), 0)
     gw = min(int(round(w)), frame.shape[1] - gx0)
     gh = min(int(round(h)), frame.shape[0] - gy0)
     if gw < 48 or gh < 48:
         return None
     roi = frame[gy0:gy0 + gh, gx0:gx0 + gw]
     gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY).astype(np.float32)
-    y_lo = int(gh * 0.30)
-    y_hi = int(gh * 0.30 + gh * band)
     radius = max(2, gw // 26)
-    halves = ((int(gw * 0.24), int(gw * 0.47)),
-              (int(gw * 0.53), int(gw * 0.76)))
-    candidates = []
-    for x_lo, x_hi in halves:
-        scored = []
-        for cy in range(max(y_lo, radius * 3), min(y_hi, gh - radius * 3)):
-            for cx in range(max(x_lo, radius * 3), min(x_hi, gw - radius * 3)):
-                scored.append((_dark_blob_score(gray, cx, cy, radius), cx, cy))
-        scored.sort(reverse=True)
-        candidates.append(scored[:40])            # keep the best few per eye
-    # anatomical priors: iris spacing is ~0.32 of face width, eyes sit level
-    target_sep = 0.32 * gw
-    best = None
-    for s1, x1, y1 in candidates[0]:
-        for s2, x2, y2 in candidates[1]:
-            sep = x2 - x1
-            if not (0.22 * gw <= sep <= 0.46 * gw):
-                continue
-            if abs(y1 - y2) > 0.06 * gh:
-                continue
-            penalty = (abs(sep - target_sep) / gw) * 55.0
-            penalty += (abs(y1 - y2) / gh) * 40.0
-            score = s1 + s2 - penalty
-            if best is None or score > best[0]:
-                best = (score, (x1, y1), (x2, y2))
-    if best is None or min(best[0] / 2.0, 99) < 1.2:
-        return None
-    p1 = (gx0 + best[1][0], gy0 + best[1][1])
-    p2 = (gx0 + best[2][0], gy0 + best[2][1])
-    return [p1, p2]
+    points = []
+    for fx, fy in EYE_PRIOR:
+        cx, cy = int(round(fx * gw)), int(round(fy * gh))
+        if not (radius * 3 < cx < gw - radius * 3 and radius * 3 < cy < gh - radius * 3):
+            return None
+        if _dark_blob_score(gray, cx, cy, radius) < 1.0:
+            return None                      # not a pupil: fail closed
+        # snap to the darkest pixel within one radius, so the glow is centred
+        best = (_dark_blob_score(gray, cx, cy, radius), cx, cy)
+        for dy in range(-radius, radius + 1):
+            for dx in range(-radius, radius + 1):
+                sc = _dark_blob_score(gray, cx + dx, cy + dy, radius)
+                if sc > best[0]:
+                    best = (sc, cx + dx, cy + dy)
+        points.append((gx0 + best[1], gy0 + best[2]))
+    return points
+
+
+def eye_points(frame: np.ndarray, box):
+    """Backwards-compatible alias for the verified prior-based placement."""
+    return prior_eye_points(frame, box)
 
 
 def track_pair(frames, seed_index: int, points, patch: int = 7, search: int = 5,
@@ -370,19 +364,25 @@ def track_pair(frames, seed_index: int, points, patch: int = 7, search: int = 5,
     return seq
 
 
-def seed_eyes(frames, max_probe: int = 60):
-    """Find one frame whose eye pair is confidently verified, for tracking."""
+def seed_eyes(frames, probe: int = 40):
+    """Pick the frame with the largest verified eye pair, to anchor tracking.
+
+    The largest box is the most frontal, least occluded view of the face, which
+    is the frame whose pupil placement can be trusted for the whole shot.
+    """
     order = list(range(len(frames)))
-    if len(order) > max_probe:
-        # probe the second half first: he faces camera by then
-        order = order[len(order) // 3:]
-        order = order[:max_probe]
-    for i in order:
+    step = max(1, len(order) // probe)
+    best = (None, None, 0.0)
+    for i in order[::step]:
         box = face_box(frames[i])
-        pts = eye_points(frames[i], box)
-        if pts is not None:
-            return i, pts
-    return None, None
+        if box is None:
+            continue
+        pts = prior_eye_points(frames[i], box)
+        if pts is None:
+            continue
+        if box[2] * box[3] > best[2]:
+            best = (i, pts, box[2] * box[3])
+    return best[0], best[1]
 
 
 def brighten_eyes(frame: np.ndarray, points, strength: float,
