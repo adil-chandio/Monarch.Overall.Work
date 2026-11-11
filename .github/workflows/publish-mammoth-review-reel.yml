@@ -45,9 +45,23 @@ jobs:
         run: |
           set -euo pipefail
           echo "fetching ${URL}"
-          curl --fail --location --retry 3 --retry-delay 5 \
-               --max-time 900 --output reel.mp4 "${URL}"
-          ls -l reel.mp4
+          # A bare curl failure says nothing useful, and the sandbox preview may put an
+          # interstitial in front of the file. Ask for the status and the first line of
+          # whatever came back, then check it really is an MP4.
+          CODE=$(curl --location --retry 2 --retry-delay 5 --max-time 900 \
+                      --write-out '%{http_code}' --output reel.mp4 "${URL}") || CODE="curl-failed"
+          echo "http status: ${CODE}"
+          ls -l reel.mp4 || true
+          if [ "${CODE}" != "200" ] && [ "${CODE}" != "206" ]; then
+            echo "::error::fetch returned ${CODE}"
+            head -c 400 reel.mp4 2>/dev/null | tr -d '\000' || true
+            exit 1
+          fi
+          head -c 12 reel.mp4 | xxd | head -2
+          case "$(head -c 8 reel.mp4 | tail -c 4)" in
+            ftyp) echo "looks like an MP4 container" ;;
+            *) echo "::error::downloaded bytes are not an MP4"; exit 1 ;;
+          esac
           GOT=$(sha256sum reel.mp4 | awk '{print $1}')
           echo "expected ${WANT}"
           echo "got      ${GOT}"
