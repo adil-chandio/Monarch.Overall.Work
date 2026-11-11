@@ -144,6 +144,24 @@ native picture doing the same narrative work, and both files are kept for compar
 
 ## Handing the reel over
 
+**Where the shipped file lives.** `deliverables/Last-Mammoths-Review-Reel-13min-720p.mp4`
+is force-added past the `deliverables/*.mp4` ignore rule (as this repository already does
+for its other finished cuts) and committed; its build report sits beside it. Nothing else
+of this size is committed — the copy in `.cache/` is the working one.
+
+Why a git commit and not a release asset: the development sandbox cannot reach
+`uploads.github.com` (TLS is blocked at the network edge), so `gh release upload` dies
+with an EOF after sending nothing. `git push` to `github.com` works, so the file travels
+inside the repository instead. A runner-hosted publish workflow
+(`.github/workflows/publish-mammoth-review-reel.yml`) exists for anyone who wants a
+release asset, but it cannot fetch from the sandbox preview either — that preview returns
+403 to an outside client.
+
+Verify a copy with:
+`sha256sum deliverables/Last-Mammoths-Review-Reel-13min-720p.mp4`
+→ `479a30ae59ad2772e918f78da8100ac0390cff57695bb1f177b9e32edac27f63`
+
+
 `edit/serve_review_reel.py` exists because `python -m http.server` answers a Range
 request with the whole 95 MB body and a `200`, which breaks seeking — a player has to
 re-download from zero every time you scrub. This server returns `206` with a correct
