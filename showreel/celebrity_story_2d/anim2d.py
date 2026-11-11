@@ -193,6 +193,64 @@ def warp_between(rgb_a, alpha_a, rgb_b, alpha_b, k):
     return out_rgb, out_a
 
 
+def _ellipse_mask(H, W, centre, rx, ry, soft=0.75):
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    d = np.sqrt(((xx - centre[0]) / max(rx, 1e-3)) ** 2 +
+                ((yy - centre[1]) / max(ry, 1e-3)) ** 2)
+    e = np.clip((1.0 - d) / max(soft, 1e-3), 0, 1)
+    return e * e * (3 - 2 * e)
+
+
+def place_cel(canvas, rgb, alpha, cx, foot_y, height, flip=False, tint=None,
+              opacity=1.0, shadow=0.0, pivot=None):
+    """Composite a cel so its head sits on cx and its feet on foot_y."""
+    H, W = canvas.shape[:2]
+    sc = height / float(alpha.shape[0])
+    nw, nh = max(1, int(round(alpha.shape[1] * sc))), max(1, int(round(height)))
+    if pivot is None:
+        pivot = alpha.shape[1] / 2.0
+    pivot = pivot * sc
+    r, a = resize_float(rgb, alpha, (nw, nh))
+    if flip:
+        r = r[:, ::-1]
+        a = a[:, ::-1]
+        pivot = nw - pivot
+    if tint is not None:
+        r = r * np.array(tint, np.float32)[None, None, :]
+    a = a * opacity
+    x = int(round(cx - pivot))
+    y = int(round(foot_y - nh))
+    if shadow > 0:
+        ry = max(4.0, nh * 0.022)
+        rx = max(6.0, nw * 0.30)
+        mask = _ellipse_mask(H, W, (cx, foot_y - ry * 0.25), rx, ry)
+        canvas *= (1.0 - mask[..., None] * shadow)
+    x0, y0 = max(0, x), max(0, y)
+    x1, y1 = min(W, x + nw), min(H, y + nh)
+    if x1 <= x0 or y1 <= y0:
+        return canvas
+    sx0, sy0 = x0 - x, y0 - y
+    sub_a = a[sy0:sy0 + (y1 - y0), sx0:sx0 + (x1 - x0)]
+    sub_r = r[sy0:sy0 + (y1 - y0), sx0:sx0 + (x1 - x0)]
+    region = canvas[y0:y1, x0:x1]
+    canvas[y0:y1, x0:x1] = region * (1 - sub_a[..., None]) + sub_r * sub_a[..., None]
+    return canvas
+
+
+def warp_block(rgb, alpha, dx, dy, blur=36.0, power=1.0):
+    """Coherent body sway: lean the figure from the feet, weighted by its field."""
+    if abs(dx) < 0.02 and abs(dy) < 0.02:
+        return rgb, alpha
+    h, w = alpha.shape
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    f = _field(alpha, blur)
+    wgt = np.clip(f * power, 0, 1)
+    lean = (h - yy) / max(h, 1)          # pivot at the feet
+    sx = np.clip(xx + dx * wgt * lean, 0, w - 1).astype(np.int32)
+    sy = np.clip(yy + dy * wgt, 0, h - 1).astype(np.int32)
+    return rgb[sy, sx], alpha[sy, sx]
+
+
 def _align_on(cel, W, H):
     """Place a cel in a common canvas, anchored on its head pivot and feet."""
     out_r = np.zeros((H, W, 3), np.float32)
