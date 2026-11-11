@@ -24,6 +24,11 @@ choices={
  # never observed" caveat. 34 s render; 24 s placed from 250.0 s so the macro
  # texture lands with "a gloved researcher compares two markings" and the exit
  # hold runs into the isotope handoff at 305 s. Nothing at 244-250 s yet.
+ # Second, disjoint excerpt of the SAME 60 s island render: the calf, the stream
+ # crossing, the squall and dusk (30.0-60.0 s of the source). Different footage
+ # from the 140 s excerpt, not a repeat of it. Sits under the premature-stop and
+ # smell-receptor lines, ending on the squall-to-macro-fur handoff at 250 s.
+ 'island-chapter-2':('.cache/mammoth-island-chapter/island-chapter-motion-review-silent.mp4',None,220.0,900,1800),
  'coat-section':('.cache/mammoth-coat-section/coat-section-motion-review-silent.mp4',None,250.0,720,1020),
  'genome-comparison':('.cache/mammoth-comparison-lab/comparison-lab-motion-review-silent.mp4',None,5182/30,600),
  'stream':('.cache/mammoth-stream-scene/stream-scene-motion-review-silent.mp4',None,354.,480),
@@ -31,9 +36,9 @@ choices={
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|coat-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
-seek={'island-thaw':4.0}.get(name)
+seek={'island-thaw':4.0,'island-chapter-2':30.0}.get(name)
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 manifest=json.loads((video.parent/'render-manifest.json').read_text())
 if manifest['fps']!=30:raise SystemExit('Wrong render rate')

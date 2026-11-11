@@ -20,12 +20,18 @@ Builds perform full FFmpeg decode, frame count, peak and source-hash checks, but
 
 ## Island chapter and coat section (140–170s, 250–274s)
 
-`island-chapter/` is a 60-second, seven-shot sequence in one invented Arctic world.
-Its first 30 seconds are placed at **140.0–170.0 s** (the earlier 140.9 s offset left
-a 0.9 s hole in the coverage union and was corrected). The remaining 30 seconds
-(calf, stream crossing, squall, dusk) still need editorial slots; the calf and
-crossing beats sit naturally around 200–250 s, where the narration discusses
-small-population selection and a moving animal.
+`island-chapter/` is a 60-second, seven-shot sequence in one invented Arctic world,
+and it is now placed **twice from disjoint parts of the same render**:
+
+| insert | source range | placed | narration under it |
+| --- | --- | --- | --- |
+| `island-chapter` | 0.0–30.0 s | 140.0–170.0 s | "Picture an island population…" and the 2019 collagen passage |
+| `island-chapter-2` | 30.0–60.0 s | 220.0–250.0 s | premature stop signals, smell-receptor losses, selection, the moving-animal handoff to the coat |
+
+They share no frames. Together they cover 60 s of the sequence against a 60 s
+picture requirement, so this is not padding by repetition — but it is also not new
+picture, and it does not reduce how much footage still has to be made. The earlier
+140.9 s offset left a 0.9 s hole in the coverage union and was corrected to 140.0.
 
 `coat-section/` is 34 seconds in five shots: a macro wool-texture pass, a close
 flank, a low leg/weight shot, the herd walking into low sun, and an exit hold. It is
@@ -41,6 +47,7 @@ README with what is invented; neither has had continuous viewing.
 
 ```
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-chapter
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-chapter-2
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py coat-section
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py island-thaw
 .venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/build_insert.py final-crossing
