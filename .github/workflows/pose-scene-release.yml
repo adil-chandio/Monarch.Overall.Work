@@ -1,0 +1,60 @@
+name: Publish pose-scene release asset
+
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths:
+      - '.github/workflows/pose-scene-release.yml'
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+          lfs: false
+
+      - name: Confirm the masters are present
+        run: |
+          ls -lh deliverables/monarch-pose-scene-1080x1920.mp4
+          ls -lh deliverables/monarch-pose-scene-preview.mp4
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete pose-scene-1080x1920 --yes --cleanup-tag 2>/dev/null || true
+          gh release create pose-scene-1080x1920 \
+            deliverables/monarch-pose-scene-1080x1920.mp4 \
+            deliverables/monarch-pose-scene-preview.mp4 \
+            --title "Monarch — painted pose scene (13 s, 1080x1920, 24 fps)" \
+            --notes "Painted model-sheet poses driven behind a moving camera, not a single deformed drawing.
+
+**Contents**
+
+| file | what it is |
+| --- | --- |
+| monarch-pose-scene-1080x1920.mp4 | master, 13.42 s, 1080x1920, 24 fps, 322 frames |
+| monarch-pose-scene-preview.mp4 | same cut at 608x1080, small enough to scrub in a browser |
+
+**What is real in this cut**
+
+- six painted poses from one model sheet, each keyed off the green field and registered with its own rig
+- a crop-and-resample camera on an overscanned plate, so the push-ins are camera moves and not zooms
+- motivated light with a slow flicker, distance haze, shallow depth of field, contact shadow, grade and film grain
+- every frame computed from its own timestamp
+
+**What is not**
+
+This is 13 seconds of held painted poses cut together, not a continuous performance.
+The single-cel rig that preceded it could not lift an arm past roughly 30 degrees,
+because a side view of that arm does not exist in the source drawing. A full-length cut
+needs a larger painted pose library and separately painted face close-ups." \
+            --target arena/1f352b8e-monarch-overall-work
+          echo '--- assets:'
+          gh release view pose-scene-1080x1920 --json assets \
+            -q '.assets[] | .name + " " + (.size|tostring) + " " + .browserDownloadUrl'
