@@ -1,6 +1,44 @@
 {
-  "count": 6,
+  "count": 10,
   "windows": [
+    {
+      "id": 1,
+      "title": "File:How_To_Drop_In_At_Your_Local_Pro_Shop-vKdfnsXiO94.webm",
+      "short": "Golf ceiling drop-in",
+      "window": {
+        "start_s": 9.0,
+        "end_s": 19.0,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 187,
+          "window_frames": 40,
+          "motion_mean": 1.668,
+          "window_score": 4.908,
+          "start_s": 9.0
+        }
+      },
+      "file": "windows/curated_01.mp4"
+    },
+    {
+      "id": 2,
+      "title": "File:Chicago_Parallel_Parking_FAIL.webm",
+      "short": "Parallel parking fail",
+      "window": {
+        "start_s": 126.0,
+        "end_s": 136.0,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 711,
+          "window_frames": 40,
+          "motion_mean": 4.122,
+          "window_score": 28.869,
+          "start_s": 126.0
+        }
+      },
+      "file": "windows/curated_02.mp4"
+    },
     {
       "id": 3,
       "title": "File:Floridian_cop_caught_on_camera_running_from_a_rat.webm",
@@ -78,6 +116,25 @@
       "file": "windows/curated_06.mp4"
     },
     {
+      "id": 7,
+      "title": "File:Eagan_Police_Catch_Man_Reading_Novel_Behind_The_Wheel.webm",
+      "short": "Reading driver",
+      "window": {
+        "start_s": 45.25,
+        "end_s": 55.25,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 813,
+          "window_frames": 40,
+          "motion_mean": 3.753,
+          "window_score": 33.403,
+          "start_s": 45.25
+        }
+      },
+      "file": "windows/curated_07.mp4"
+    },
+    {
       "id": 8,
       "title": "File:30,_Caption_fail.ogv",
       "short": "Caption fail",
@@ -95,6 +152,25 @@
         }
       },
       "file": "windows/curated_08.mp4"
+    },
+    {
+      "id": 9,
+      "title": "File:Amazon_delivery_driver_THROWS_parcel_as_shocked_dad_watches_live_on_CCTV_-_SWNS_TV.webm",
+      "short": "Parcel throw CCTV",
+      "window": {
+        "start_s": 46.0,
+        "end_s": 56.0,
+        "duration_s": 10.0,
+        "score": {
+          "status": "ok",
+          "frames_scored": 226,
+          "window_frames": 40,
+          "motion_mean": 2.314,
+          "window_score": 71.133,
+          "start_s": 46.0
+        }
+      },
+      "file": "windows/curated_09.mp4"
     },
     {
       "id": 10,

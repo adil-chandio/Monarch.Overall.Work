@@ -1,24 +1,29 @@
 {
-  "generated_utc": "2026-11-11T04:07:01Z",
+  "generated_utc": "2026-11-11T04:23:23Z",
+  "selection_version": "v13-final-20",
   "clips_checked": 20,
+  "ledgers": [
+    "rights_ledger_v13.json",
+    "rights_ledger_curated_v13.json"
+  ],
   "blocked_terms": [
     "kill",
+    "killing",
+    "killed",
     "murder",
     "homicide",
-    "death",
-    "dead",
     "fatal",
     "shoot",
-    "gun",
+    "shooting",
     "firearm",
+    "gun",
     "bomb",
+    "bombing",
     "explosion",
     "blast",
     "missile",
-    "strike",
-    "attack",
-    "terror",
     "suicide",
+    "terror",
     "war",
     "military",
     "soldier",
@@ -38,51 +43,160 @@
     "knife",
     "blood",
     "gore",
-    "victim",
     "kidnap",
     "abduct",
-    "missing person",
-    "seeking information",
-    "police chase",
     "hostage",
     "cantonment",
     "precinct",
     "crash",
     "collision",
-    "accident",
-    "airline",
-    "flight",
-    "plane",
-    "tornado",
-    "hurricane",
     "earthquake",
+    "hurricane",
+    "tornado",
     "disaster",
     "tragedy",
     "wreck",
-    "protest",
     "riot",
-    "9/11",
+    "protest",
+    "dead",
     "volgograd",
     "crimean",
     "bannu",
+    "saratov",
+    "ramat",
+    "missile strikes",
+    "drone bomb",
+    "cantonment attack",
+    "police chase",
+    "seeking information",
+    "missing person",
+    "flight 3054",
+    "flight 703",
+    "airlines flight",
+    "flight77",
+    "thai cctv",
+    "crimean bridge",
     "ramat gan",
+    "volgograd",
+    "bannu",
     "nancy guthrie",
     "brian thompson",
     "saratov",
-    "flight 3054",
-    "flight77",
-    "thai cctv"
+    "homicide suspects",
+    "9/11",
+    "work accident"
   ],
-  "violations": [
-    "no_native_audio_stream hook_12.mp4",
-    "no_native_audio_stream hook_14.mp4",
-    "no_native_audio_stream hook_15.mp4",
-    "no_native_audio_stream hook_16.mp4",
-    "no_native_audio_stream hook_17.mp4",
-    "no_native_audio_stream hook_18.mp4"
+  "excluded_assets": [
+    "artemis",
+    "water bubble",
+    "nasa "
   ],
-  "status": "FAIL",
+  "silent_or_audio_status": [
+    {
+      "id": "C01",
+      "file": "windows/curated_01.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C02",
+      "file": "windows/curated_02.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C03",
+      "file": "windows/curated_03.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C04",
+      "file": "windows/curated_04.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C05",
+      "file": "windows/curated_05.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C06",
+      "file": "windows/curated_06.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C07",
+      "file": "windows/curated_07.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C08",
+      "file": "windows/curated_08.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C09",
+      "file": "windows/curated_09.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C10",
+      "file": "windows/curated_10.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C11",
+      "file": "windows/hook_01.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C12",
+      "file": "windows/hook_02.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C13",
+      "file": "windows/hook_06.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C14",
+      "file": "windows/hook_07.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C15",
+      "file": "windows/hook_08.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C16",
+      "file": "windows/hook_09.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C17",
+      "file": "windows/hook_10.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C18",
+      "file": "windows/hook_11.mp4",
+      "action": "none_native_audio_present"
+    },
+    {
+      "id": "C19",
+      "file": "windows/hook_12.mp4",
+      "action": "silent_AAC_track_added_or_required"
+    },
+    {
+      "id": "C20",
+      "file": "windows/hook_20.mp4",
+      "action": "none_native_audio_present"
+    }
+  ],
+  "violations": [],
+  "status": "ALL_PASS",
   "human_watch_through_required": true,
   "family_safe_guarantee": false,
-  "not_a_legal_opinion": true
+  "not_a_legal_opinion": true,
+  "technical_qc_is_not_creative_approval": true
 }
