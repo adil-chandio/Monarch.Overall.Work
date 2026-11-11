@@ -1,0 +1,47 @@
+name: Publish POV stadium release
+
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths:
+      - '.github/workflows/pov-release.yml'
+      - 'showreel/stickman/POV_RELEASE_NOTES.md'
+      - 'deliverables/monarch-pov-stadium-1080x1920.mp4'
+      - 'deliverables/monarch-pov-stadium-preview.mp4'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+          lfs: false
+
+      - name: Confirm the masters are present and are the masters
+        run: |
+          ls -l deliverables/monarch-pov-stadium-1080x1920.mp4
+          ls -l deliverables/monarch-pov-stadium-preview.mp4
+          ls -l deliverables/monarch-pov-stadium-contact-sheet.png
+          test "$(stat -c %s deliverables/monarch-pov-stadium-1080x1920.mp4)" -gt 60000000 \
+            || { echo "the master is not the 90 s cut"; exit 1; }
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete stickman-pov-stadium-1080x1920 --yes --cleanup-tag 2>/dev/null || true
+          gh release create stickman-pov-stadium-1080x1920 \
+            deliverables/monarch-pov-stadium-1080x1920.mp4 \
+            deliverables/monarch-pov-stadium-preview.mp4 \
+            deliverables/monarch-pov-stadium-contact-sheet.png \
+            --title "Monarch - POV: the stadium goes quiet (90 s, 1080x1920, 24 fps)" \
+            --notes-file showreel/stickman/POV_RELEASE_NOTES.md \
+            --target arena/1f352b8e-monarch-overall-work
+          echo '--- assets:'
+          gh release view stickman-pov-stadium-1080x1920 --json assets \
+            -q '.assets[] | .name + " " + (.size|tostring) + " " + .state + " x" + .downloadCount|tostring'
