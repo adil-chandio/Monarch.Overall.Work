@@ -1,0 +1,25 @@
+{
+  "file": "REPLAY_FILES_Ep01_V12_10min_1080p30.mp4",
+  "bytes": 69402336,
+  "sha256": "7920dc6868e2271c9ad0c0ed2f2d99200979358e9ba8e0cd3f875d6e7542b355",
+  "duration_seconds": 600.0,
+  "frames": 18000,
+  "integrated_lufs": -14.02,
+  "streams": [
+    "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 724 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+    "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 191 kb/s (default)"
+  ],
+  "verified_utc": "2026-11-11T01:39:37.960252+00:00",
+  "checks": {
+    "duration_600s": true,
+    "frames_18000": true,
+    "video_h264_1080p": true,
+    "audio_aac_48k_stereo": true,
+    "8_distinct_clip_windows": true,
+    "10_diagrams": true,
+    "10_vo_chunks": true,
+    "sha256_present": true
+  },
+  "all_technical_checks_pass": true,
+  "caption_cues": 93
+}

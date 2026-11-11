@@ -109,3 +109,7 @@ audio/bed-*.wav
 audio/mix-*.wav
 audio/takes/
 audio/ref-full.wav
+
+# V12 long-form render: transient build log + rebuildable work intermediates
+production/monarch-cam/replay_files_ep01_v12/build.log
+production/monarch-cam/work/replay_files_v12/

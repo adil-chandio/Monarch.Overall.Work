@@ -1,0 +1,297 @@
+{
+  "edition": "V12",
+  "episode": "REPLAY FILES Ep.1",
+  "status": "ACTUAL_LOCAL_RENDER_COMPLETE",
+  "generated_utc": "2026-11-11T01:39:37.961420+00:00",
+  "render_spec": {
+    "canvas": "1920x1080 landscape",
+    "fps": 30,
+    "runtime_seconds": 600,
+    "total_frames": 18000,
+    "video_codec": "H.264",
+    "audio_codec": "AAC 48kHz stereo"
+  },
+  "file": "REPLAY_FILES_Ep01_V12_10min_1080p30.mp4",
+  "sha256": "7920dc6868e2271c9ad0c0ed2f2d99200979358e9ba8e0cd3f875d6e7542b355",
+  "bytes": 69402336,
+  "measured": {
+    "duration_seconds": 600.0,
+    "frames": 18000,
+    "integrated_lufs": -14.02
+  },
+  "visual_blocks": 22,
+  "diagrams_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "distinct_clip_windows": 8,
+  "clip_windows": [
+    {
+      "slot": 1,
+      "source": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_HIGH_ACTION_V9.mp4",
+      "in_seconds": 2.0,
+      "excerpt_seconds": 9.0,
+      "playback_speed_factor": 1.0,
+      "mechanism": "EXPECTATION VIOLATION",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    },
+    {
+      "slot": 2,
+      "source": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_CLEAN_V8.mp4",
+      "in_seconds": 12.0,
+      "excerpt_seconds": 9.0,
+      "playback_speed_factor": 0.7692307692307692,
+      "mechanism": "PHYSICS GAP",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    },
+    {
+      "slot": 3,
+      "source": "deliverables/MONARCH_CAM_7_Most_Unexpected_Internet_Moments_Ranked_60s_Short_VIRALSTYLE_V7.mp4",
+      "in_seconds": 22.0,
+      "excerpt_seconds": 8.0,
+      "playback_speed_factor": 0.45454545454545453,
+      "mechanism": "THREE SPEEDS",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    },
+    {
+      "slot": 4,
+      "source": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V6.mp4",
+      "in_seconds": 32.0,
+      "excerpt_seconds": 9.0,
+      "playback_speed_factor": 1.0,
+      "mechanism": "SCALE ERROR",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    },
+    {
+      "slot": 5,
+      "source": "deliverables/MONARCH_CAM_7_Unexpected_Animal_Moments_Ranked_60s_Short_RAW_FULLSCREEN_V5.mp4",
+      "in_seconds": 8.0,
+      "excerpt_seconds": 9.0,
+      "playback_speed_factor": 1.0,
+      "mechanism": "SOUND ON / OFF",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    },
+    {
+      "slot": 6,
+      "source": "deliverables/MONARCH_CAM_5_Unexpected_Animal_Skills_Ranked_35s_Short_RAW_FULLSCREEN_V4.mp4",
+      "in_seconds": 5.0,
+      "excerpt_seconds": 8.0,
+      "playback_speed_factor": 0.8333333333333334,
+      "mechanism": "REACTION SHOT",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    },
+    {
+      "slot": 7,
+      "source": "deliverables/MONARCH_CAM_Bear_Opening_30s_Preview.mp4",
+      "in_seconds": 2.0,
+      "excerpt_seconds": 8.0,
+      "playback_speed_factor": 1.0,
+      "mechanism": "CONVERGENCE",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    },
+    {
+      "slot": 8,
+      "source": "deliverables/MONARCH_CAM_They_Dont_Flirt_They_Choreograph_24s_Short_CLEAN_PREMIUM_V2.mp4",
+      "in_seconds": 2.0,
+      "excerpt_seconds": 8.0,
+      "playback_speed_factor": 0.7142857142857143,
+      "mechanism": "THE GRID",
+      "origin": "own_work_monarch_cam_archive_final",
+      "not_the_excluded_nasa_v10_short": true,
+      "human_legal_review": false
+    }
+  ],
+  "segments": [
+    {
+      "seg": 1,
+      "vo": "A",
+      "vo_seconds": 83.22,
+      "start_frame": 0,
+      "frames": 3097,
+      "vo_offset_seconds": 0.0,
+      "hold_frames": 600
+    },
+    {
+      "seg": 2,
+      "vo": "B",
+      "vo_seconds": 35.02,
+      "start_frame": 3097,
+      "frames": 1832,
+      "vo_offset_seconds": 103.233,
+      "hold_frames": 781
+    },
+    {
+      "seg": 3,
+      "vo": "C",
+      "vo_seconds": 36.82,
+      "start_frame": 4929,
+      "frames": 1826,
+      "vo_offset_seconds": 164.3,
+      "hold_frames": 721
+    },
+    {
+      "seg": 4,
+      "vo": "D",
+      "vo_seconds": 35.65,
+      "start_frame": 6755,
+      "frames": 1821,
+      "vo_offset_seconds": 225.167,
+      "hold_frames": 751
+    },
+    {
+      "seg": 5,
+      "vo": "E",
+      "vo_seconds": 36.71,
+      "start_frame": 8576,
+      "frames": 1822,
+      "vo_offset_seconds": 285.867,
+      "hold_frames": 721
+    },
+    {
+      "seg": 6,
+      "vo": "F",
+      "vo_seconds": 28.11,
+      "start_frame": 10398,
+      "frames": 1534,
+      "vo_offset_seconds": 346.6,
+      "hold_frames": 691
+    },
+    {
+      "seg": 7,
+      "vo": "G",
+      "vo_seconds": 27.86,
+      "start_frame": 11932,
+      "frames": 1497,
+      "vo_offset_seconds": 397.733,
+      "hold_frames": 661
+    },
+    {
+      "seg": 8,
+      "vo": "H",
+      "vo_seconds": 24.36,
+      "start_frame": 13429,
+      "frames": 1362,
+      "vo_offset_seconds": 447.633,
+      "hold_frames": 631
+    },
+    {
+      "seg": 9,
+      "vo": "I",
+      "vo_seconds": 19.53,
+      "start_frame": 14791,
+      "frames": 1187,
+      "vo_offset_seconds": 493.033,
+      "hold_frames": 601
+    },
+    {
+      "seg": 10,
+      "vo": "J",
+      "vo_seconds": 40.41,
+      "start_frame": 15978,
+      "frames": 2022,
+      "vo_offset_seconds": 532.6,
+      "hold_frames": 811
+    }
+  ],
+  "vo": {
+    "chunks": 10,
+    "engine": "add_voice voice-02 (original TTS, generated for this episode)",
+    "chunks_detail": [
+      {
+        "key": "A",
+        "seconds": 83.22,
+        "words": 237
+      },
+      {
+        "key": "B",
+        "seconds": 35.02,
+        "words": 98
+      },
+      {
+        "key": "C",
+        "seconds": 36.82,
+        "words": 105
+      },
+      {
+        "key": "D",
+        "seconds": 35.65,
+        "words": 107
+      },
+      {
+        "key": "E",
+        "seconds": 36.71,
+        "words": 105
+      },
+      {
+        "key": "F",
+        "seconds": 28.11,
+        "words": 83
+      },
+      {
+        "key": "G",
+        "seconds": 27.86,
+        "words": 74
+      },
+      {
+        "key": "H",
+        "seconds": 24.36,
+        "words": 64
+      },
+      {
+        "key": "I",
+        "seconds": 19.53,
+        "words": 58
+      },
+      {
+        "key": "J",
+        "seconds": 40.41,
+        "words": 114
+      }
+    ]
+  },
+  "audio": {
+    "ambience": "original procedural aevalsrc chord bed at ~-30 dB (own-work, no third-party music)",
+    "clip_native_audio_in_mix": false,
+    "note": "native-audio A/B remains a human-review item"
+  },
+  "captions": {
+    "file": "captions_v12.srt",
+    "level": "sentence-level cues, word-count-proportional timing (approximate); NOT forced alignment / word-level timestamps",
+    "cue_count": 93
+  },
+  "honest_flags": {
+    "third_party_clips_acquired_or_cleared": false,
+    "uploaded_or_published": false,
+    "monetisation_changed": false,
+    "human_legal_review_done": false,
+    "human_creative_approval": false,
+    "full_motion_native_audio_review": false,
+    "nasa_endorsement_or_official": false,
+    "guaranteed_views_or_virality": false,
+    "perfection_claim": false,
+    "private_retention_ctr_rpm_used": false,
+    "invented_transcripts": false
+  }
+}

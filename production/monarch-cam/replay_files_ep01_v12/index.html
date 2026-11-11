@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>REPLAY FILES Ep.1 — 10-min long-form (V12)</title>
+<style>
+  :root{--bg:#0a101a;--panel:#131c2b;--line:#24344c;--teal:#5bd6d0;--amber:#ffc06a;--white:#f4f8ff;--sub:#9fb2cc;--dim:#7f92ad}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--white);font:16px/1.55 "DejaVu Sans",Arial,sans-serif}
+  header{border-top:6px solid var(--teal);padding:22px 30px;border-bottom:1px solid var(--line)}
+  header b{font-size:22px;letter-spacing:.5px}
+  header span{float:right;color:var(--teal);font-weight:700}
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 22px 60px}
+  video{width:100%;background:#000;border:1px solid var(--line);border-radius:8px;display:block}
+  h1{font-size:30px;margin:26px 0 6px}
+  .kick{color:var(--teal);font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase}
+  .sub{color:var(--sub)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:22px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .card b{display:block;color:var(--amber);font-size:22px}
+  .card small{color:var(--dim)}
+  h2{font-size:19px;margin:34px 0 10px;border-left:4px solid var(--teal);padding-left:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--teal);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+  td.mono{font-family:"DejaVu Sans Mono",monospace;color:var(--sub)}
+  .links a{color:var(--teal);text-decoration:none;margin-right:18px}
+  .links a:hover{text-decoration:underline}
+  .chapters{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .chapters button{background:var(--panel);color:var(--sub);border:1px solid var(--line);
+    border-radius:6px;padding:7px 12px;font:13px "DejaVu Sans",Arial,sans-serif;cursor:pointer}
+  .chapters button:hover{border-color:var(--teal);color:var(--white)}
+  .note{background:#1a1220;border:1px solid #5a3340;border-radius:8px;padding:14px 16px;color:#ffd7d7;font-size:14px;margin-top:26px}
+  img{width:100%;border:1px solid var(--line);border-radius:8px;margin-top:10px}
+  footer{color:var(--dim);font-size:13px;margin-top:34px;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<header><b>REPLAY FILES / EP.1</b><span>MONARCH CAM</span></header>
+<div class="wrap">
+  <div class="kick">Actual rendered long-form · V12 · local deliverable</div>
+  <h1>Why These 8 Moments Make You Rewatch</h1>
+  <div class="sub">8 different clip windows · one hidden rule · original commentary · 10 original diagrams · 10:00</div>
+
+  <video id="v" controls preload="metadata" playsinline poster="thumbnail_v12.png">
+    <source src="REPLAY_FILES_Ep01_V12_10min_1080p30.mp4" type="video/mp4"/>
+    Your browser cannot play this MP4. Use the direct file link below.
+  </video>
+  <div class="chapters" id="chapters"></div>
+  <script>
+    const chapters = [
+      [0, "Hook / rule"], [103.23, "1 · Expectation"], [164.30, "2 · Physics"],
+      [225.17, "3 · Speeds"], [285.87, "4 · Scale"], [346.60, "5 · Sound"],
+      [397.73, "6 · Reaction"], [447.63, "7 · Convergence"], [493.03, "8 · Grid"],
+      [532.60, "Close / limits"]
+    ];
+    const box = document.getElementById("chapters");
+    chapters.forEach(([t, label]) => {
+      const b = document.createElement("button");
+      b.textContent = label;
+      b.onclick = () => { const v = document.getElementById("v"); v.currentTime = t; v.play(); window.scrollTo({top:0,behavior:"smooth"}); };
+      box.appendChild(b);
+    });
+  </script>
+
+  <div class="grid">
+    <div class="card"><b>10:00.00</b><small>duration · 18,000 frames</small></div>
+    <div class="card"><b>1920×1080</b><small>30 fps · H.264 High</small></div>
+    <div class="card"><b>AAC 48k</b><small>stereo · −14.02 LUFS</small></div>
+    <div class="card"><b>8 / 8</b><small>technical QC checks PASS</small></div>
+    <div class="card"><b>8</b><small>distinct clip windows</small></div>
+    <div class="card"><b>10</b><small>original diagrams + 10 VO chunks</small></div>
+  </div>
+
+  <div class="links">
+    <a href="REPLAY_FILES_Ep01_V12_10min_1080p30.mp4">↓ Download MP4 (69.4 MB)</a>
+    <a href="captions_v12.srt">↓ Captions SRT</a>
+    <a href="EDL_V12_ACTUAL.json">↓ Actual EDL</a>
+    <a href="QC_REPORT_V12.json">↓ QC JSON</a>
+    <a href="ABOUT_THIS_VIDEO_V12.md">↓ About / limits</a>
+  </div>
+
+  <h2>Chapter map</h2>
+  <table>
+    <tr><th>Time</th><th>Job</th><th>Visual</th></tr>
+    <tr><td class="mono">0:00</td><td>Hook, the rule, the method, evidence base</td><td>title card + diagram 01</td></tr>
+    <tr><td class="mono">1:43</td><td>Slot 1 — expectation violation</td><td>clip window + diagram 02</td></tr>
+    <tr><td class="mono">2:44</td><td>Slot 2 — physics gap</td><td>clip window + diagram 03</td></tr>
+    <tr><td class="mono">3:45</td><td>Slot 3 — three speeds (0.46×)</td><td>clip window + diagram 04</td></tr>
+    <tr><td class="mono">4:45</td><td>Slot 4 — scale error</td><td>clip window + diagram 05</td></tr>
+    <tr><td class="mono">5:46</td><td>Slot 5 — sound on / off</td><td>clip window + diagram 06</td></tr>
+    <tr><td class="mono">6:37</td><td>Slot 6 — reaction shot</td><td>clip window + diagram 07</td></tr>
+    <tr><td class="mono">7:27</td><td>Slot 7 — convergence</td><td>clip window + diagram 08</td></tr>
+    <tr><td class="mono">8:13</td><td>Slot 8 — the grid</td><td>clip window + diagram 09</td></tr>
+    <tr><td class="mono">8:52</td><td>Six-step rule, honest limits, CTA</td><td>diagram 10 + closing card</td></tr>
+  </table>
+
+  <h2>8 distinct clip windows — visual proof</h2>
+  <img src="CONTACT_SHEET_V12.png" alt="Contact sheet of the hook, 8 clip windows and the closing card"/>
+
+  <div class="note">
+    <b>Honest limits.</b> This is a local render built only from assets already in this repository.
+    No new third-party clip was acquired or legally cleared; the 8 windows are Monarch Cam's own
+    previously rendered finals (not the excluded NASA V10 Short). No upload, publish, monetisation
+    change, NASA endorsement, human legal review, human creative approval, guaranteed views or
+    virality is claimed. Public viewCount figures only — no private retention / CTR / RPM data.
+  </div>
+
+  <footer>ORIGINAL ANALYSIS — Monarch Cam — no endorsement implied — own-work visuals + own-work archive moments.</footer>
+</div>
+</body>
+</html>
