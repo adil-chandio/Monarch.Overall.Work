@@ -67,6 +67,19 @@ its provenance and the unverified master identity are recorded in
 study, ending on an empty rung rather than a culprit. The coat-section insert
 uses the shared narration draft only, with no original sound design.
 
+## Picture balance — the finding from the first assembly
+
+`report_picture_balance.py` measures how much of the covered timeline is printed plate
+rather than rendered picture, and how long the plates run without interruption. Current
+figures: **531.3 s plate / 246.0 s rendered picture (68.4% plate)**, longest single run
+**173.1 s** (473.0–646.1 s); four runs exceed a minute.
+
+Assembly found this; section QC could not. Every plate is individually defensible and
+several exist to refuse a misleading image — but six minutes of continuous paper in the
+second half turns a documentary into a slide sequence. The fix is more native picture
+under the narration, not shorter plates, and it is the largest outstanding piece of work
+on the film. The same warning is stated at the top of `../README.md`.
+
 ## Continuous review reel
 
 `assemble_review.py` joins every **verified** insert into one narration-locked reel so

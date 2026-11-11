@@ -39,6 +39,38 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `excavation/`, `foraging/`, `shoreline/`, `living-world/`, `sample-workflow/` | Earlier native-3D studies, variously stylised; not continuously reviewed. |
 | `mammoth-rig/`, `skeleton-reference/`, `material-sources/`, `ambience-sources/` | Third-party assets and candidate recordings with documented, **unresolved** master identity and rights questions. |
 
+## The picture-balance problem (found by assembling, not by section QC)
+
+The first continuous assembly made the film's largest structural problem measurable, and
+it is one no per-section check could have caught: **68.4% of the covered timeline is now
+printed plate rather than rendered picture** (531.3 s of 777.3 s). The longest
+uninterrupted run of plates is **173.1 s**, from 473.0 s to 646.1 s.
+
+| plate run | length |
+|---|---|
+| 274.0 – 354.0 | 80.0 s |
+| 391.0 – 471.0 | 80.0 s |
+| 473.0 – 646.1 | 173.1 s |
+| 652.0 – 759.0 | 107.0 s |
+
+`edit/report_picture_balance.py` regenerates these figures from the verified windows.
+
+This is a **documentary problem, not a QC problem**. The plates are each defensible and
+several were built specifically to refuse a misleading image. But a viewer who watches
+391 s to 759 s would see six minutes in which almost nothing living appears: contact
+registers, sample counts, bar charts, and one invented axis after another. The
+narration is carrying the film alone for most of its second half.
+
+The remedy is **native picture under the narration, not shorter plates**: the evidence
+plates should sit *against* the island, not replace it. What is needed is 3D work —
+the herd under a bad winter, water and ice in the season the isotope passage describes,
+the shore the archaeology describes — that can hold the screen while the voice makes
+its careful distinctions, with the plates arriving only for the numbers.
+
+Until that footage exists, this remains a work-in-progress assembly, and the plate share
+must not be presented as a stylistic choice. No distribution version may be cut from
+this timeline as it stands.
+
 ## What is still missing
 
 Roughly 19 s of the narration has no verified picture. The laboratory/genetics
