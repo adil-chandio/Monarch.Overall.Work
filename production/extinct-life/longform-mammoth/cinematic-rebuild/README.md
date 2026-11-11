@@ -19,6 +19,7 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `island-years/` | 30 s compressed-season study. An 8 s excerpt is available as an alternate; not currently placed. |
 | `isolation-section/` | 28 s schematic cross-section of sea-level isolation plus the three-population panel; placed at 86 s. No coastline traced. |
 | `island-approach/` | 18 s walk-and-forage scene; 10 s placed at 130 s. |
+| `verdict-close/` | The film's last 25 s (734–759 s): the same island, settling, under the two closing statements. Lets the ledger stop at 734 s instead of ending the film on a table. |
 | `island-hold/` | 66 s of native picture (four animals, one plain, a drifting overcast) under the genetic argument at 473 s; makes no claim, carries a disclosure burn-in. Built to cut the longest plate run. |
 | `other-islands/` | 16 s plate for St Paul's later loss and the regional-clue caution; placed at 114 s. The St Paul span is open-ended because no start date is spoken. |
 | `gene-disruption/` | 27 s plate for the 2017 disruptive-change detail; placed at 192.7 s. The 43× figure is always shown beside its "not a head count" caveat. |
@@ -47,17 +48,20 @@ it is one no per-section check could have caught: the covered timeline had becom
 **68.4% printed plate** (531.3 s of 777.3 s), with **173.1 s** (473.0–646.1 s) of
 uninterrupted paper through the genetics chapter.
 
-A first fix has been applied: `island-hold/` now carries 473–539 s as native picture —
+Two fixes have been applied. `island-hold/` now carries 473–539 s as native picture —
 the same four animals on the same plain under a drifting overcast, making no claim at
 all — and `genetic-strain` was reduced to the one shot that still has narration of its
-own. `reversal-section` was superseded in that window (its file is kept for comparison
-but is no longer placed).
+own; `reversal-section` was superseded in that window (its file is kept for comparison
+but is no longer placed). Then the close was rebuilt: the ledger stops at 734 s and
+`verdict-close/` carries "a possibility is not a verdict" and "these categories do not
+have to compete" over the island, so the film's last twenty-five seconds are picture
+rather than a table.
 
 | | before | now |
 |---|---|---|
-| plate | 531.3 s (68.4%) | **464.3 s (59.8%)** |
-| rendered picture | 246.0 s (31.6%) | **312.0 s (40.2%)** |
-| longest plate run | 173.1 s | **107.0 s** |
+| plate | 531.3 s (68.4%) | **439.3 s (56.6%)** |
+| rendered picture | 246.0 s (31.6%) | **337.0 s (43.4%)** |
+| longest plate run | 173.1 s | **106.1 s** |
 
 `edit/report_picture_balance.py` regenerates these figures from the verified windows.
 
@@ -67,11 +71,12 @@ but is no longer placed).
 |---|---|
 | 274.0 – 354.0 | 80.0 s |
 | 391.0 – 471.0 | 80.0 s |
-| 557.0 – 646.1 | 89.1 s |
-| 652.0 – 759.0 | 107.0 s |
+| 540.0 – 646.1 | 106.1 s |
+| 652.0 – 734.0 | 82.0 s |
 
 The same remedy is needed twice more — native picture under the human-evidence and
-microbial passages, and under the 652–759 s close. The plates should sit *against* the
+microbial passages, and inside the 540–646 s genetics chapter, which is now the longest
+run and the one where the plates matter most. The plates should sit *against* the
 island, not replace it: they are the honest form of these claims and none should be cut
 to shorten a run.
 

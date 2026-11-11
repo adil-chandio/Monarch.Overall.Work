@@ -71,15 +71,16 @@ uses the shared narration draft only, with no original sound design.
 
 `report_picture_balance.py` measures how much of the covered timeline is printed plate
 rather than rendered picture, and how long the plates run without interruption. Current
-figures: **464.3 s plate / 312.0 s rendered picture (59.8% plate)**, longest single run
-**107.0 s** (652.0–759.0 s).
+figures: **439.3 s plate / 337.0 s rendered picture (56.6% plate)**, longest single run
+**106.1 s** (540.0–646.1 s).
 
 Assembly found this; section QC could not. Every plate is individually defensible and
 several exist to refuse a misleading image — but a run of them turns a documentary into a
-slide sequence. The first fix is `island-hold/` (473–539 s as native picture, with the
-`genetic-strain` trim that followed), which took the share from 68.4% and the longest run
-from 173.1 s. The same remedy is still needed under the human-evidence and microbial
-passages and under 652–759 s. The fix is more native picture, never shorter plates; the
+slide sequence. Two fixes have been made: `island-hold/` (473–539 s as native picture, with the
+`genetic-strain` trim that followed), then `verdict-close/` at 734–759 s, which let the
+ledger stop at 734 s. Together they took the share from 68.4% to 56.6% and the longest
+run from 173.1 s to 106.1 s. The same remedy is still needed under the human-evidence
+and microbial passages, and inside the 540–646 s genetics chapter. The fix is more native picture, never shorter plates; the
 same warning is stated at the top of `../README.md`.
 
 ## Continuous review reel

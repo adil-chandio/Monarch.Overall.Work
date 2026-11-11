@@ -92,7 +92,11 @@ choices={
  # The three-tier confidence ledger: what is supported, what is plausible, what is not
  # established. 70 s placed at 689.0 s, opening on "What can we say?" and closing on
  # "these categories do not have to compete". Deliberately no cause is illustrated.
- 'ledger-section':('.cache/mammoth-ledger-section/ledger-section-motion-review-silent.mp4',None,689.0,2100,2100),
+ # The ledger now stops at 734 s: its final shot was "a possibility is not a verdict", and
+ # that is now said over the island instead of over a table. Its three categories keep the
+ # full 689-734 s, so the cut lands on a shot boundary rather than mid-enumeration.
+ 'ledger-section':('.cache/mammoth-ledger-section/ledger-section-motion-review-silent.mp4',None,689.0,1350,2100),
+ 'verdict-close':('.cache/mammoth-verdict-close/verdict-close-motion-review-silent.mp4',None,734.0,750,750),
  # The 2025 microbial lead: an evidence ladder with the diagnosis rung left visibly
  # empty. 37 s, placed at 652.0 s on "a newer lead shows why careful questions
  # matter" through "the diagnosis is still missing".
@@ -107,7 +111,7 @@ choices={
  'final-crossing':('.cache/mammoth-final-crossing/final-crossing-motion-review-silent.mp4',None,783.,390),
  'genomic-gap':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,629.0666666667,510),
 }
-if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|contact-section|chemistry-section|other-islands|gene-disruption|one-genome|trends-section|genetic-strain|isolation-section|ledger-section|new-lead-section|island-hold|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
+if len(sys.argv)!=2 or sys.argv[1] not in choices:raise SystemExit('usage: build_insert.py island-approach|island-thaw|island-chapter|island-chapter-2|coat-section|contact-section|chemistry-section|other-islands|gene-disruption|one-genome|trends-section|genetic-strain|isolation-section|ledger-section|new-lead-section|island-hold|verdict-close|genome-record|reversal-section|coverage-section|people-section|verdict-section|genome-comparison|stream|hypothesis|final-crossing|genomic-gap')
 name=sys.argv[1];spec=choices[name];file,expected,offset,frames=spec[:4];source_frames=spec[4] if len(spec)>4 else frames;video=root/file
 seek={'island-thaw':4.0,'island-chapter-2':30.0,
       # Only shot 3 of the 62 s render survives: the island hold now carries 473-539 s,
