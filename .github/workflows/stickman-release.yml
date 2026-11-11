@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/stickman-release.yml'
       - 'showreel/stickman/STICKMAN_RELEASE_NOTES.md'
+      - 'deliverables/monarch-stickman-1080x1920.mp4'
+      - 'deliverables/monarch-stickman-preview.mp4'
 
 permissions:
   contents: write
