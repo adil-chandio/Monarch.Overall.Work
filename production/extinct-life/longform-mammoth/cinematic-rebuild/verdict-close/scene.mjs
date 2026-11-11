@@ -1,4 +1,4 @@
-// Verdict close — the last argument over the island (734-759 s).
+// Verdict close — the last argument over the island (734-783 s).
 //
 // The assembled film ended with 107 s of printed plate, then two shots of animals. The
 // ledger is the right form for the film's *enumeration* of what is supported, plausible
@@ -14,7 +14,7 @@
 import * as T from 'three';
 import {GLTFLoader} from '/GLTFLoader.js';
 import {clone} from '/utils/SkeletonUtils.js';
-const W=1280,H=720,PI=Math.PI,FPS=30,DURATION=25;
+const W=1280,H=720,PI=Math.PI,FPS=30,DURATION=49;
 const renderer=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setSize(W,H);renderer.setPixelRatio(1);
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;
 const canvas=document.createElement('canvas');canvas.id='final';canvas.width=W;canvas.height=H;document.body.appendChild(canvas);const g=canvas.getContext('2d');
@@ -80,29 +80,44 @@ function place(a,x,z,y,heading,phase,t){a.root.position.set(x,y,z);a.obj.rotatio
  a.blob.position.set(x+.04,y+.004,z+.40*a.scale);a.blob.scale.setScalar(a.scale/SCALE);}
 // --- camera -------------------------------------------------------------------
 const cam=new T.PerspectiveCamera(34,W/H,.05,460);const look=new T.Vector3(),pos=new T.Vector3();
-const SHOTS=[{n:'the herd, still',s:0,e:13},{n:'settle and hold',s:13,e:25}];
+// Four long holds rather than two: this section now runs the whole closing argument
+// (734-783 s), absorbing what verdict-section did, so that the film does not cut between
+// two nearly identical wide shots of the same plain.
+const SHOTS=[{n:'the herd, still',s:0,e:13},{n:'settle and hold',s:13,e:25},
+ {n:'the plain, and the light moving',s:25,e:37},{n:'deepening toward the horizon',s:37,e:49}];
 function shotIndex(t){for(let i=SHOTS.length-1;i>=0;i--)if(t>=SHOTS[i].s)return i;return 0}
 // Two very slow moves, almost static: this section is an argument, not a spectacle.
 function layout(i,t){const a=herd;
- // Two moves only, and both nearly static: this is the film's last image, so it should
- // settle rather than travel. The herd never fills the frame and is never counted.
- if(i===0){const u=t/13;
-  place(a[0],-10+u*.8,-9,.02,0,.0,t);place(a[1],-18+u*.75,-5,.02,-.1,.31,t);place(a[2],-25+u*.7,-1,.02,.12,.62,t);place(a[3],-14+u*.75,-12.5,.03,.08,.45,t);
-  return{cam:{x:4.0-u*.5,y:1.30,z:24.5-u*1.0},look:{x:-9.0,y:1.10,z:-5.0}}}
- const u=(t-13)/12;
- place(a[0],-11+u*.5,-9.5,.02,0,.0,t);place(a[1],-19+u*.45,-5.5,.02,-.1,.31,t);place(a[2],-26+u*.4,-1.5,.02,.12,.62,t);place(a[3],-15+u*.45,-13,.03,.08,.45,t);
- return{cam:{x:6.6-u*.4,y:1.62,z:27.5},look:{x:-11.0,y:1.26,z:-6.4}};
+ // Slow, continuous, and almost static: the film's last image should settle rather than
+ // travel. The herd never fills the frame and is never counted. The light does the work.
+ const U=[[t/13,0],[(t-13)/12,1],[(t-25)/12,2],[(t-37)/12,3]];
+ const [u,k]=U[i];
+ // The herd stays inside the frame for every shot: it drifts a little, but the camera
+ // never swings past it. An animal half off the edge reads as a mistake, not as distance.
+ place(a[0],-8.5+u*.6-k*.25,-9,.02,0,.0,t);place(a[1],-15+u*.55-k*.22,-5,.02,-.1,.31,t);
+ place(a[2],-20.5+u*.5-k*.18,-1,.02,.12,.62,t);place(a[3],-12+u*.55-k*.22,-12.5,.03,.08,.45,t);
+ const cam=[{x:4.0,y:1.30,z:24.5},{x:6.2,y:1.58,z:27.0},{x:2.6,y:1.44,z:23.5},{x:5.2,y:1.74,z:28.5}][i];
+ const lk=[{x:-9.0,y:1.10,z:-5.0},{x:-10.5,y:1.22,z:-6.0},{x:-12.5,y:1.16,z:-4.5},{x:-9.5,y:1.30,z:-7.5}][i];
+ return{cam:{x:cam.x-u*.4,y:cam.y,z:cam.z-u*.8},look:{x:lk.x,y:lk.y,z:lk.z}};
 }
-// Late light: the film's one warm beat, kept restrained so it reads as evening rather
-// than as a conclusion the evidence does not support.
+// Late light, deepening across the whole section: the film's one warm beat, kept
+// restrained so it reads as evening rather than as a conclusion the evidence does not
+// support.
 const LOOK=[{sky:.52,fog:0xb4bcb6,fogFar:176,exp:1.01,sun:2.02,hemi:1.78},
- {sky:.72,fog:0xaba8a0,fogFar:194,exp:1.00,sun:1.86,hemi:1.70}];
+ {sky:.60,fog:0xb2b7b1,fogFar:182,exp:1.01,sun:1.97,hemi:1.76},
+ {sky:.70,fog:0xafaba2,fogFar:190,exp:1.00,sun:1.90,hemi:1.72},
+ {sky:.80,fog:0xaba298,fogFar:204,exp:1.00,sun:1.80,hemi:1.68}];
 let frame=0;
-function smoothFog(fog,color,far){fog.color.setHex(color);fog.near=Math.min(34,far*.24);fog.far=far}
+// Fog colour must be interpolated per channel. Passing a lerped packed integer to
+// setHex() shows up as a magenta or olive band on the horizon mid-transition, because
+// blending 0xb6c0bb toward 0xafb9b4 in RGB space crosses unrelated hues.
+function hexRGB(h){return[(h>>16)&255,(h>>8)&255,h&255]}
+function lerpHexRGB(a,bv,u){const A=hexRGB(a),B=hexRGB(bv);return[A[0]+(B[0]-A[0])*u,A[1]+(B[1]-A[1])*u,A[2]+(B[2]-A[2])*u]}
+function smoothFog(fog,rgb,far){fog.color.setRGB(rgb[0]/255,rgb[1]/255,rgb[2]/255);fog.near=Math.min(34,far*.24);fog.far=far}
 function draw(t){t=Math.max(0,Math.min(DURATION,t));frame++;wind.value=t;
  const i=shotIndex(t),prev=Math.max(0,i-1),lt=t-SHOTS[i].s,w=smooth(Math.min(1,lt/1.1));
  const L=LOOK[i],P=LOOK[prev],mixv=k=>lerp(P[k],L[k],w);
- uSky.value=mixv('sky');smoothFog(scene.fog,mixv('fog'),mixv('fogFar'));
+ uSky.value=mixv('sky');smoothFog(scene.fog,lerpHexRGB(P.fog,L.fog,w),mixv('fogFar'));
  renderer.toneMappingExposure=mixv('exp');sun.intensity=mixv('sun');hemi.intensity=mixv('hemi');
  snowMat.opacity=.18+.16*mixv('sky');
  const ang=lerp(-.62,.55,uSky.value);sun.position.set(Math.cos(ang)*30,lerp(12,7.5,uSky.value),Math.sin(ang)*24+12);
@@ -132,7 +147,9 @@ function draw(t){t=Math.max(0,Math.min(DURATION,t));frame++;wind.value=t;
   g.save();g.globalAlpha=L1;g.fillStyle='rgba(248,246,240,.95)';
   g.font='700 25px Manrope';g.textAlign='left';g.fillText('A POSSIBILITY IS NOT A VERDICT',114,598);g.restore();
  }
- const LT2=S((t-14.5)/1.3);
+ // The second card clears at 755.5 s so the last half-minute is picture only — the light
+ // deepening toward the horizon, and no type at all over the ending.
+ const LT2=S((t-14.5)/1.3)*(1-S((t-19.9)/1.6));
  if(LT2>0){
   const gr2=g.createLinearGradient(0,720,0,440);gr2.addColorStop(0,'rgba(12,16,18,.60)');gr2.addColorStop(1,'rgba(12,16,18,0)');
   g.save();g.globalAlpha=LT2;g.fillStyle=gr2;g.fillRect(0,440,W,280);g.restore();
@@ -141,4 +158,9 @@ function draw(t){t=Math.max(0,Math.min(DURATION,t));frame++;wind.value=t;
  }
  return{time:t,shot:i,shot_name:SHOTS[i].n,animals:4,triangles,historical_geography:false,sky:uSky.value,fog_far:scene.fog.far,claimMade:false,lowerThird:L1>0.5?1:(LT2>0.5?2:0)}}
 window.__seek=t=>{frame=Math.round(t*30);return draw(t)};window.__probe=window.__seek;
+// Framing guard: the leftmost animal's root must stay well inside the frame, since a
+// half-cropped animal reads as a staging mistake. Read back from the posed scene.
+window.__frameCheck=t=>{draw(t);const p=new T.Vector3();let min=-99,x0=99,x1=-99;
+ herd.forEach(a=>{p.copy(a.root.position);p.project(cam);x0=Math.min(x0,p.x);x1=Math.max(x1,p.x)});
+ return{minX:x0,maxX:x1}};
 window.__shotList=SHOTS;window.__ready=true;draw(0);

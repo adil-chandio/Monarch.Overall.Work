@@ -26,8 +26,9 @@ segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json'
  # passage as native picture. The file is kept in .cache for comparison; it is not placed.
  {'name':'ledger-section','start_frame':20670,'frames':1350,'qc':'ledger-section-qc.json','file':'ledger-section-incomplete-workprint.mp4'},
  {'name':'new-lead-section','start_frame':19560,'frames':1110,'qc':'new-lead-section-qc.json','file':'new-lead-section-incomplete-workprint.mp4'},
- {'name':'verdict-close','start_frame':22020,'frames':750,'qc':'verdict-close-qc.json','file':'verdict-close-incomplete-workprint.mp4'},
- {'name':'verdict-section','start_frame':22770,'frames':720,'qc':'verdict-section-qc.json','file':'verdict-section-incomplete-workprint.mp4'},
+ {'name':'verdict-close','start_frame':22020,'frames':1470,'qc':'verdict-close-qc.json','file':'verdict-close-incomplete-workprint.mp4'},
+# verdict-section (759-783) superseded by verdict-close, which now runs 734-783; kept on disk.
+ # {'name':'verdict-section','start_frame':22770,'frames':720,'qc':'verdict-section-qc.json','file':'verdict-section-incomplete-workprint.mp4'},
  {'name':'final-crossing','start_frame':23490,'frames':390,'qc':'final-crossing-qc.json','file':'final-crossing-incomplete-workprint.mp4'},
  {'name':'trends-section','start_frame':17310,'frames':1562,'qc':'trends-section-qc.json','file':'trends-section-incomplete-workprint.mp4'},
  {'name':'coverage-section','start_frame':16710,'frames':600,'qc':'coverage-section-qc.json','file':'coverage-section-incomplete-workprint.mp4'},

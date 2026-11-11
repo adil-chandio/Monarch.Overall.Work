@@ -8,6 +8,10 @@ try{
  const capture=async(t)=>page.evaluate(t=>{let state=window.__seek(t);return {state,jpeg:document.querySelector('#final').toDataURL('image/jpeg',.94).split(',')[1]}},t);
  const samples=[];for(let t of [0,10,20,30,38,46,54,62,65.5]){let v=await capture(t);fs.writeFileSync(path.join(cache,`still-${String(t).replace('.','_')}.jpg`),Buffer.from(v.jpeg,'base64'));samples.push(v.state)}
  let a=await capture(4),b=await capture(40),c=await capture(4);assert.equal(a.jpeg,c.jpeg);assert.notEqual(a.jpeg,b.jpeg);assert.deepEqual(errors,[]);
- const probes=await page.evaluate(()=>[0,10,18,21,30,38,40,50,52,58,65.9].map(t=>window.__probe(t)));assert.ok(probes.every(p=>p.animals===4&&p.triangles===56994&&p.historical_geography===false&&p.claimMade===false));assert.deepEqual(probes.map(p=>p.shot),[0,0,0,1,1,2,2,2,3,3,3]);assert.ok(Math.abs(probes.at(-1).sky-0.64)<.06);assert.ok(probes.at(-1).time<=66);assert.deepEqual(errors,[]);
+ const probes=await page.evaluate(()=>[0,10,18,21,30,38,40,50,52,58,65.9].map(t=>window.__probe(t)));assert.ok(probes.every(p=>p.animals===4&&p.triangles===56994&&p.historical_geography===false&&p.claimMade===false));assert.deepEqual(probes.map(p=>p.shot),[0,0,0,1,1,2,2,2,3,3,3]);assert.ok(Math.abs(probes.at(-1).sky-0.64)<.06);
+ // Framing: no animal may be cropped. Projected x is -1..1 across the frame; keep every
+ // root inside +-0.82 so no body sits on the edge.
+ const fr=await page.evaluate(()=>[0,10,20,30,38,46,52,58,65.5].map(t=>window.__frameCheck(t)));
+ assert.ok(fr.every(r=>r.minX>-.95&&r.maxX<.95),'animal cropped: '+JSON.stringify(fr.map(r=>[+r.minX.toFixed(2),+r.maxX.toFixed(2)])));assert.ok(probes.at(-1).time<=66);assert.deepEqual(errors,[]);
 console.log(JSON.stringify({samples,probes,page_errors:errors,note:'Structural only; not scientific/anatomical validation or a finished film'},null,2));
 }finally{if(browser)await browser.close();server.close();}

@@ -96,7 +96,9 @@ choices={
  # that is now said over the island instead of over a table. Its three categories keep the
  # full 689-734 s, so the cut lands on a shot boundary rather than mid-enumeration.
  'ledger-section':('.cache/mammoth-ledger-section/ledger-section-motion-review-silent.mp4',None,689.0,1350,2100),
- 'verdict-close':('.cache/mammoth-verdict-close/verdict-close-motion-review-silent.mp4',None,734.0,750,750),
+ # 49 s now, not 25: it absorbs what verdict-section used to cover (759-783), so the film
+ # does not cut between two near-identical wide shots of the same plain.
+ 'verdict-close':('.cache/mammoth-verdict-close/verdict-close-motion-review-silent.mp4',None,734.0,1470,1470),
  # The 2025 microbial lead: an evidence ladder with the diagnosis rung left visibly
  # empty. 37 s, placed at 652.0 s on "a newer lead shows why careful questions
  # matter" through "the diagnosis is still missing".

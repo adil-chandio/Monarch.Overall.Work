@@ -83,19 +83,20 @@ function shotIndex(t){for(let i=SHOTS.length-1;i>=0;i--)if(t>=SHOTS[i].s)return 
 // Two very slow moves, almost static: this section is an argument, not a spectacle.
 function layout(i,t){const a=herd;
  // Four slow moves, each barely perceptible in its own 18 s: nothing here should read as
- // a camera "beat". The animals never approach the lens and are never counted.
- if(i===0){const u=t/20;
-  place(a[0],-11+u*1.6,-7,.02,0,.0,t);place(a[1],-19+u*1.5,-3,.02,-.1,.31,t);place(a[2],-26+u*1.3,1.5,.02,.12,.62,t);place(a[3],-15+u*1.5,-10.5,.03,.08,.45,t);
-  return{cam:{x:7.2-u*1.0,y:1.34,z:27-u*2.4},look:{x:-7.0,y:1.06,z:-2.2}}}
- if(i===1){const u=(t-20)/18;
-  place(a[0],-13+u*1.7,-10,.02,0,.0,t);place(a[1],-20+u*1.6,-6.5,.02,-.1,.31,t);place(a[2],-27+u*1.4,-2.5,.02,.12,.62,t);place(a[3],-17+u*1.6,-13.5,.03,.08,.45,t);
-  return{cam:{x:2.4-u*.6,y:1.06,z:18.2-u*.4},look:{x:-11.0,y:.96,z:-6.8}}}
- if(i===2){const u=(t-38)/14;
-  place(a[0],-16+u*1.2,-14,.02,.05,.0,t);place(a[1],-23+u*1.1,-9.5,.02,-.06,.31,t);place(a[2],-29+u*1.0,-5,.02,.14,.62,t);place(a[3],-20+u*1.1,-17,.03,.10,.45,t);
-  return{cam:{x:-1.0+u*1.4,y:1.42,z:24.0},look:{x:-16.0,y:1.10,z:-9.0}}}
- const u=(t-52)/14;
- place(a[0],-12+u*.9,-11,.02,0,.0,t);place(a[1],-19+u*.8,-7.5,.02,-.1,.31,t);place(a[2],-26+u*.7,-4,.02,.12,.62,t);place(a[3],-16+u*.85,-14,.03,.08,.45,t);
- return{cam:{x:5.4-u*.3,y:1.56,z:23.2},look:{x:-9.4,y:1.20,z:-6.2}};
+ // a camera "beat". The animals never approach the lens, are never counted, and every one
+ // of them stays inside the frame at every moment. The first cut of this section cropped
+ // the leftmost animal against the frame edge, which reads as a staging mistake.
+ const rows=[ // per shot: [startX, driftPerSec, z, heading]
+  [[-6.0,1.0,-7,0],[-12.5,0.95,-3,-.1],[-19,0.85,1.5,.12],[-9,0.95,-10.5,.08]],
+  [[-6.5,1.1,-6,0],[-12.5,1.0,-2.5,-.1],[-18.5,0.9,1,.12],[-9.5,1.0,-9.5,.08]],
+  [[-6.5,0.8,-14,.05],[-13,0.75,-9.5,-.06],[-19,0.7,-5,.14],[-10,0.75,-17,.10]],
+  [[-7.0,0.7,-11,0],[-13,0.65,-7.5,-.1],[-19,0.6,-4,.12],[-9.5,0.7,-14,.08]]];
+ const R=rows[i],st=SHOTS[i].s;
+ for(let j=0;j<4;j++){const q=R[j];place(a[j],q[0]+(t-st)*q[1],q[2],.02+(j===3?.01:0),q[3],j*.31,t)}
+ const cam=[{x:7.2,y:1.34,z:27},{x:3.2,y:1.10,z:25.5},{x:-1.0,y:1.42,z:26.0},{x:5.4,y:1.56,z:23.2}][i];
+ const lk=[{x:-6.0,y:1.06,z:-2.2},{x:-9.0,y:1.02,z:-4.5},{x:-11.5,y:1.10,z:-5.5},{x:-8.4,y:1.20,z:-6.2}][i];
+ const u=(t-st)/(SHOTS[i].e-st),drift=[-1.0,-.6,1.4,-.3][i];
+ return{cam:{x:cam.x+u*drift,y:cam.y,z:cam.z-u*1.2},look:{x:lk.x,y:lk.y,z:lk.z}};
 }
 // A drifting overcast through the passage: it must not cut or jump, because the voice
 // carries several distinct claims underneath it and a picture change would punctuate
@@ -105,11 +106,16 @@ const LOOK=[{sky:.28,fog:0xbdc6c1,fogFar:172,exp:1.02,sun:2.22,hemi:1.86},
  {sky:.53,fog:0xafb9b4,fogFar:168,exp:1.00,sun:1.98,hemi:1.78},
  {sky:.64,fog:0xa9b3b1,fogFar:182,exp:1.00,sun:1.90,hemi:1.74}];
 let frame=0;
-function smoothFog(fog,color,far){fog.color.setHex(color);fog.near=Math.min(34,far*.24);fog.far=far}
+// Fog colour must be interpolated per channel. Passing a lerped packed integer to
+// setHex() shows as a magenta or olive band across the horizon mid-transition, because
+// blending two packed 24-bit values crosses unrelated hues.
+function hexRGB(h){return[(h>>16)&255,(h>>8)&255,h&255]}
+function lerpHexRGB(a,bv,u){const A=hexRGB(a),B=hexRGB(bv);return[A[0]+(B[0]-A[0])*u,A[1]+(B[1]-A[1])*u,A[2]+(B[2]-A[2])*u]}
+function smoothFog(fog,rgb,far){fog.color.setRGB(rgb[0]/255,rgb[1]/255,rgb[2]/255);fog.near=Math.min(34,far*.24);fog.far=far}
 function draw(t){t=Math.max(0,Math.min(DURATION,t));frame++;wind.value=t;
  const i=shotIndex(t),prev=Math.max(0,i-1),lt=t-SHOTS[i].s,w=smooth(Math.min(1,lt/1.1));
  const L=LOOK[i],P=LOOK[prev],mixv=k=>lerp(P[k],L[k],w);
- uSky.value=mixv('sky');smoothFog(scene.fog,mixv('fog'),mixv('fogFar'));
+ uSky.value=mixv('sky');smoothFog(scene.fog,lerpHexRGB(P.fog,L.fog,w),mixv('fogFar'));
  renderer.toneMappingExposure=mixv('exp');sun.intensity=mixv('sun');hemi.intensity=mixv('hemi');
  snowMat.opacity=.18+.16*mixv('sky');
  const ang=lerp(-.62,.55,uSky.value);sun.position.set(Math.cos(ang)*30,lerp(12,7.5,uSky.value),Math.sin(ang)*24+12);
@@ -127,4 +133,9 @@ function draw(t){t=Math.max(0,Math.min(DURATION,t));frame++;wind.value=t;
  g.fillText('WRANGEL · ILLUSTRATIVE RECONSTRUCTION · NOT A DEPICTION OF THE GENETIC RESULT',30,690);g.shadowBlur=0;
  return{time:t,shot:i,shot_name:SHOTS[i].n,animals:4,triangles,historical_geography:false,sky:uSky.value,fog_far:scene.fog.far,claimMade:false}}
 window.__seek=t=>{frame=Math.round(t*30);return draw(t)};window.__probe=window.__seek;
+// Framing guard, read back from the posed scene rather than eyeballed: every animal's
+// root must sit inside the horizontal frame with margin, at every sampled moment.
+window.__frameCheck=t=>{draw(t);const v=new T.Vector3();let lo=9,hi=-9;
+ herd.forEach(a=>{v.copy(a.root.position);v.project(cam);lo=Math.min(lo,v.x);hi=Math.max(hi,v.x)});
+ return{minX:lo,maxX:hi}};
 window.__shotList=SHOTS;window.__ready=true;draw(0);
