@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "research" / "caught_on_camera_v13"
-from acquire_clips_v13 import BLOCK_TERMS, EXCLUDE_TOKENS, ALLOWED_LICENSES  # noqa: E402
+from clip_safety_v13 import BLOCK_TERMS, EXCLUDE_TOKENS, ALLOWED_LICENSES  # noqa: E402
 
 bad = []
 led = json.loads((BASE / "rights_ledger_v13.json").read_text())

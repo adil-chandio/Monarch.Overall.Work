@@ -53,99 +53,18 @@ MAX_CLIPS = int(__import__("os").environ.get("V13_MAX_CLIPS", "20"))
 WINDOW_S = 10.0
 SAMPLE_FPS = 4
 
-# POSITIVE, on-brand discovery: wildlife / animals / funny / surprising / skill moments.
-# (The first pass used generic "caught on camera"/CCTV queries and returned murder CCTV,
-# suicide bombings, missile strikes, plane crashes and robberies. That pass is REJECTED.)
-QUERIES = [
-    'animal "caught on camera" filetype:video',
-    'wildlife "caught on camera" filetype:video',
-    'CCTV animal filetype:video',
-    '"security camera" bear filetype:video',
-    'dog "caught on camera" filetype:video',
-    'cat "caught on camera" filetype:video',
-    'funny animal fail filetype:video',
-    '"unexpected moment" animal filetype:video',
-    'animal rescue "caught on camera" filetype:video',
-    'bird "caught on camera" filetype:video',
-    'squirrel feeder camera filetype:video',
-    'raccoon "caught on camera" filetype:video',
-    'trick shot caught on camera filetype:video',
-    'skateboard fail filetype:video',
-    'parkour fail filetype:video',
-    'flash mob filetype:video',
-    'funny fail video filetype:video',
-    'octopus "caught on camera" filetype:video',
-    'whale "caught on camera" filetype:video',
-    'goat "caught on camera" filetype:video',
-    '"caught on camera" filetype:video',
-    'CCTV filetype:video',
-    'dashcam filetype:video',
-    '"viral video" filetype:video',
-    '"unexpected moment" filetype:video',
-    'funny animals filetype:video',
-    'cute animals filetype:video',
-    'animal fails filetype:video',
-    'cat fails filetype:video',
-    'dog fails filetype:video',
-    'wildlife camera filetype:video',
-    'bear enters house filetype:video',
-    'animal in shop filetype:video',
-    'unexpected animal filetype:video',
-    'amazing animal moment filetype:video',
-    'sports fail filetype:video',
-    'fail compilation filetype:video',
-]
-
-# HARD content-safety gate. A family-safe, engaging caught-on-camera compilation must
-# never contain murder / violence / war / terror / disaster / crime-victim footage.
-BLOCK_TERMS = (
-    "kill", "murder", "homicide", "death", "dead", "fatal", "shoot", "gun", "firearm",
-    "bomb", "explosion", "blast", "missile", "strike", "attack", "terror", "suicide",
-    "war", "military", "soldier", "combat", "drone", "rocket", "artillery", "invasion",
-    "robbery", "burglary", "assault", "crime", "criminal", "suspect", "arrest", "stabbing",
-    "knife", "blood", "gore", "victim", "kidnap", "abduct", "missing person",
-    "seeking information", "police chase", "hostage", "cantonment", "precinct",
-    "crash", "collision", "accident", "airline", "flight", "plane", "tornado", "hurricane",
-    "earthquake", "disaster", "tragedy", "wreck", "protest", "riot", "9/11",
-    "volgograd", "crimean", "bannu", "ramat gan", "nancy guthrie", "brian thompson",
-    "saratov", "flight 3054", "flight77", "thai cctv", "homicide",
-)
-GOOD_TERMS = (
-    "cat", "dog", "puppy", "kitten", "bear", "bird", "squirrel", "raccoon", "animal",
-    "wildlife", "funny", "fail", "unexpected", "surprise", "trick", "skill", "catch",
-    "jump", "dance", "skate", "parkour", "rescue", "monkey", "fox", "deer", "owl",
-    "penguin", "whale", "dolphin", "octopus", "goat", "cow", "horse", "rabbit", "parrot",
-    "hilarious", "cute", "adorable", "incredible", "amazing", "smart", "clever",
+# Content-safety and on-brand discovery live in a dependency-free module so the
+# acquisition script and the hard QC validator share EXACTLY the same gate.
+from clip_safety_v13 import (  # noqa: E402
+    QUERIES, BLOCK_TERMS, GOOD_TERMS, EXCLUDE_TOKENS,
+    ALLOWED_LICENSES, safety_gate,
 )
 
-
-def safety_gate(text):
-    """Return (allowed, blocked_term, positive_score)."""
-    low = (text or "").lower()
-    for b in BLOCK_TERMS:
-        if b in low:
-            return False, b, 0
-    score = sum(1 for g in GOOD_TERMS if g in low)
-    return True, None, score
-
-ALLOWED_LICENSES = {"cc0", "public domain", "pd", "cc by 3.0", "cc by 4.0",
-                    "cc-by-3.0", "cc-by-4.0", "public domain mark 1.0", "pd-usgov"}
 BAD_LICENSE_TOKENS = ("by-sa", "by-nc", "sa 3.0", "sa 4.0", "fair use",
                       "license review needed", "review needed (video)", "all rights reserved")
 VIDEO_EXT = (".webm", ".ogv", ".ogg", ".mp4", ".mov")
 VIDEO_MIME = ("video/webm", "application/ogg", "video/ogg", "video/mp4",
               "video/quicktime", "video/x-matroska")
-
-# The exact ten V7 candidates + the excluded NASA V10 / Short asset.
-EXCLUDE_TOKENS = [
-    "how to drop in at your local pro shop", "chicago parallel parking fail",
-    "floridian cop caught on camera running from a rat",
-    "floridian policeman caught on camera running from a rat",
-    "funny hang-5", "funny fight - jc vs mark webb",
-    "bear enters californian home", "eagan police catch man reading novel",
-    "30, caption fail", "amazon delivery driver throws parcel",
-    "quaker corn bran", "artemis", "water bubble", "nasa ",
-]
 
 
 def log(*a):

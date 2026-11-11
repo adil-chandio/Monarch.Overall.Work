@@ -72,8 +72,24 @@ jobs:
           ls -la research/caught_on_camera_v13/api_evidence/lanes/
 
       - name: Channel statistics, millions-view video details, reverse teardowns
-        continue-on-error: true
         run: python research/caught_on_camera_v13/build_channel_forensic_v13.py
+
+      - name: HARD QC - real channel / million-view evidence must exist
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          b = pathlib.Path('research/caught_on_camera_v13/api_evidence/channels')
+          r = json.loads((b/'run.json').read_text())
+          c = json.loads((b/'channel_statistics_v13.json').read_text())
+          v = json.loads((b/'million_view_videos_v13.json').read_text())
+          t = json.loads((b/'reverse_teardowns_v13.json').read_text())
+          assert r['key_present'] is True, 'key not resolved'
+          assert r['lane_rows'] >= 100, r['lane_rows']
+          assert c['count'] >= 20, c['count']
+          assert v['count'] >= 20, v['count']
+          assert t['count'] >= 1, t['count']
+          print('FORENSIC QC PASS', r['lane_rows'], 'rows,', c['count'], 'channels,', v['count'], 'video details,', t['count'], 'teardowns')
+          PY
 
       - name: Upload API evidence even if the commit fails
         if: always()
