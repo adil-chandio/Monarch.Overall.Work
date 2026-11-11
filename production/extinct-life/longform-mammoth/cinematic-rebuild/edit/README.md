@@ -67,6 +67,30 @@ its provenance and the unverified master identity are recorded in
 study, ending on an empty rung rather than a culprit. The coat-section insert
 uses the shared narration draft only, with no original sound design.
 
+## Continuous review reel
+
+`assemble_review.py` joins every **verified** insert into one narration-locked reel so
+the film can be watched end to end for the first time. It is a review artifact, not the
+final film and not picture lock.
+
+- 796.07 s, 23882 frames, 1280×720, 30 fps, −16.2 LUFS, −0.8 dBTP.
+- Picture is concatenated from the verified workprints; audio is taken from the single
+  continuous narration/score draft, so the voice never restarts or drifts across a cut.
+- The six uncovered ranges become **labelled cards** stating the exact range and that
+  narration continues underneath. A gap is a gap in the edit, not a held shot.
+- The reel is deliberately built from verified QC only; an insert that fails
+  `check_coverage.py` cannot enter it.
+
+What this does **not** establish: artistic quality, scientific accuracy, pacing, tone
+consistency, or that any section belongs where it sits. Those need a human viewing pass,
+which has still not happened. Watching the reel is the next step; the report beside it
+(`.cache/mammoth-edit/review-reel-report.json`) records the running order and levels.
+
+```sh
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/assemble_review.py --list
+.venv/bin/python production/extinct-life/longform-mammoth/cinematic-rebuild/edit/assemble_review.py
+```
+
 ## Continuous environment passage (354–384s)
 
 `build_environment.py` joins the 16-second water inference with the 14-second labelled rain-on-snow hypothesis and places the original narration/score continuously across the cut. A candidate Washington brook derivative fades out across the cut as a candidate Brazil rain derivative leads into the second shot. Neither recording is an Arctic field recording, and both are unreviewed and source-master equivalence remains unresolved. See `../ambience-sources/brook-candidate/README.md`, `../ambience-sources/README.md` and the scene READMEs. The 30-second joined file overlaps the two standalone insert windows and is **not additional coverage**. `check_environment_sync.py` compares three short decoded waveform windows against the source audio, which does not replace human review.

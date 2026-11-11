@@ -13,7 +13,7 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `full-script-v2/` | Ten science-qualified narration takes, 796.042 s, auto-aligned captions, source crosswalk. Human script, caption, pronunciation and science review outstanding. |
 | `soundtrack-draft/` | Continuous narration + music draft (796.1 s). No SFX; not continuously auditioned. |
 | `storyboard-retime/` | 83 provisional blocks over the full narration length. Not picture lock. |
-| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 777.3 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. |
+| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 777.3 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. `assemble_review.py` joins them into a 796 s **review reel** with labelled gap cards; it is not the final film. |
 | `island-chapter/` | 60 s, seven-shot Arctic sequence (dawn herd, tracking walk, trunk to grass, calf, stream crossing, squall, dusk). 30 s placed at 140 s. |
 | `coat-section/` | 34 s, five shots (macro wool texture, close flank, low legs, herd into low sun, exit hold). 24 s placed at 250 s. |
 | `island-years/` | 30 s compressed-season study. An 8 s excerpt is available as an alternate; not currently placed. |
