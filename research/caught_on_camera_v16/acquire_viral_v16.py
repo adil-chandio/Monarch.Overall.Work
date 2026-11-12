@@ -277,6 +277,12 @@ V16_BLOCK_SUBSTRINGS = (
     "phodong", "karma thubten", "monastery", "chokhorling",
     # Dedup Theodore series (keep "rinses", block "oiled")
     "oiled wildlife",
+    # Magic-talk head + autumn Fall false positives (fall=autumn, not slip)
+    "perceptual-elements", "penn", "teller", "cups-and-balls",
+    "fall overlook", "fall drive", "fall leaves",
+    # Military rescue (not funny rescue)
+    "undersea rescue", "submarine", "argentina",
+    "firefighters conduct", "torii station", "rescue training",
 )
 
 BAD_LICENSE_TOKENS = ("by-sa", "by-nc", "sa 3.0", "sa 4.0", "fair use",
