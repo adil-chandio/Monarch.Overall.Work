@@ -1,56 +1,56 @@
 {
-  "million_view_videos": 715,
+  "million_view_videos": 717,
   "hook_type_distribution": {
-    "statement": 366,
-    "belief_challenge": 91,
+    "statement": 377,
+    "belief_challenge": 89,
     "list": 48,
-    "question": 49,
-    "number": 155,
-    "comparison": 6
+    "question": 42,
+    "number": 157,
+    "comparison": 4
   },
   "cta_counts": {
-    "subscribe": 273,
-    "comment": 41,
-    "follow": 129,
-    "link": 350,
-    "part2": 66,
-    "credits": 41,
+    "subscribe": 274,
+    "comment": 43,
+    "follow": 128,
+    "link": 347,
+    "part2": 65,
+    "credits": 50,
     "chapters": 28,
     "ai": 15,
-    "disclaimer": 25,
+    "disclaimer": 32,
     "affiliate": 20,
-    "newsletter": 8,
-    "donate": 8
+    "newsletter": 6,
+    "donate": 9
   },
-  "median_description_words": 94,
+  "median_description_words": 91,
   "median_numbers_in_description": 0,
   "median_hashtags": 3,
   "median_urls": 0,
-  "script_like_rate": 0.431,
-  "chapter_rate": 0.08,
-  "emoji_present_rate": 0.425,
+  "script_like_rate": 0.428,
+  "chapter_rate": 0.086,
+  "emoji_present_rate": 0.418,
   "cross_bucket": {
     "short": {
-      "n": 343,
-      "median_views": 11294218,
-      "total_views": 11770042001,
-      "million_count": 343,
-      "ten_million_count": 177,
-      "median_duration_s": 59,
-      "median_like_rate": 0.01876,
-      "median_comment_rate": 0.00013,
-      "caption_rate": 0.067,
-      "script_like_rate": 0.297,
-      "chapter_rate": 0.0,
-      "median_description_words": 47,
+      "n": 348,
+      "median_views": 9876994,
+      "total_views": 12021720795,
+      "million_count": 348,
+      "ten_million_count": 171,
+      "median_duration_s": 58,
+      "median_like_rate": 0.01784,
+      "median_comment_rate": 0.00012,
+      "caption_rate": 0.075,
+      "script_like_rate": 0.29,
+      "chapter_rate": 0.006,
+      "median_description_words": 44,
       "median_numbers_in_description": 0,
       "hook_types": {
-        "statement": 202,
-        "belief_challenge": 55,
-        "list": 16,
-        "question": 35,
-        "number": 30,
-        "comparison": 5
+        "statement": 216,
+        "belief_challenge": 53,
+        "list": 17,
+        "question": 30,
+        "number": 29,
+        "comparison": 3
       },
       "top_title_tokens": [
         [
@@ -67,7 +67,11 @@
         ],
         [
           "satisfying",
-          46
+          45
+        ],
+        [
+          "geography",
+          38
         ],
         [
           "funny",
@@ -78,19 +82,15 @@
           34
         ],
         [
-          "geography",
-          32
-        ],
-        [
           "scienceandfun",
           29
         ],
         [
-          "map",
-          26
+          "oddlysatisfying",
+          25
         ],
         [
-          "oddlysatisfying",
+          "map",
           25
         ],
         [
@@ -99,33 +99,25 @@
         ],
         [
           "restoration",
-          23
+          22
         ]
       ],
       "top_tags": [
         [
           "geography",
-          40
+          33
         ],
         [
           "shorts",
-          32
+          28
         ],
         [
           "history",
-          31
-        ],
-        [
-          "maps",
-          29
+          28
         ],
         [
           "life hacks",
           27
-        ],
-        [
-          "learn",
-          26
         ],
         [
           "jay finds things",
@@ -144,44 +136,52 @@
           26
         ],
         [
-          "asmr",
+          "maps",
           25
         ],
         [
           "gadgets",
           24
+        ],
+        [
+          "asmr",
+          24
+        ],
+        [
+          "learn",
+          23
         ]
       ]
     },
     "medium": {
-      "n": 187,
-      "median_views": 3209092,
-      "total_views": 1833109728,
-      "million_count": 187,
-      "ten_million_count": 47,
-      "median_duration_s": 601,
-      "median_like_rate": 0.00741,
+      "n": 184,
+      "median_views": 3155452,
+      "total_views": 1798799663,
+      "million_count": 184,
+      "ten_million_count": 45,
+      "median_duration_s": 610,
+      "median_like_rate": 0.00734,
       "median_comment_rate": 0.0002,
-      "caption_rate": 0.198,
-      "script_like_rate": 0.471,
-      "chapter_rate": 0.096,
-      "median_description_words": 113,
+      "caption_rate": 0.196,
+      "script_like_rate": 0.467,
+      "chapter_rate": 0.098,
+      "median_description_words": 112,
       "median_numbers_in_description": 1,
       "hook_types": {
-        "question": 12,
+        "question": 10,
         "belief_challenge": 19,
         "statement": 102,
-        "number": 40,
+        "number": 39,
         "list": 14
       },
       "top_title_tokens": [
         [
           "science",
-          42
+          41
         ],
         [
           "geography",
-          34
+          33
         ],
         [
           "restoration",
@@ -189,7 +189,7 @@
         ],
         [
           "experiments",
-          32
+          31
         ],
         [
           "satisfying",
@@ -209,11 +209,7 @@
         ],
         [
           "song",
-          14
-        ],
-        [
-          "kids",
-          14
+          15
         ],
         [
           "micro",
@@ -222,6 +218,10 @@
         [
           "story",
           14
+        ],
+        [
+          "farrier",
+          13
         ]
       ],
       "top_tags": [
@@ -231,15 +231,15 @@
         ],
         [
           "science",
-          18
-        ],
-        [
-          "science experiments",
           17
         ],
         [
           "asmr",
           17
+        ],
+        [
+          "science experiments",
+          16
         ],
         [
           "satisfying",
@@ -277,34 +277,34 @@
     },
     "long": {
       "n": 185,
-      "median_views": 2635459,
-      "total_views": 1121545636,
+      "median_views": 2540517,
+      "total_views": 1147042230,
       "million_count": 185,
-      "ten_million_count": 20,
-      "median_duration_s": 3200,
-      "median_like_rate": 0.00822,
-      "median_comment_rate": 0.00021,
+      "ten_million_count": 21,
+      "median_duration_s": 3147,
+      "median_like_rate": 0.0084,
+      "median_comment_rate": 0.00025,
       "caption_rate": 0.141,
-      "script_like_rate": 0.638,
-      "chapter_rate": 0.211,
+      "script_like_rate": 0.649,
+      "chapter_rate": 0.227,
       "median_description_words": 146,
       "median_numbers_in_description": 3,
       "hook_types": {
-        "statement": 62,
-        "number": 85,
-        "list": 18,
+        "statement": 59,
+        "number": 89,
+        "list": 17,
         "belief_challenge": 17,
         "question": 2,
         "comparison": 1
       },
       "top_title_tokens": [
         [
-          "granny",
-          38
+          "satisfying",
+          39
         ],
         [
-          "satisfying",
-          37
+          "granny",
+          38
         ],
         [
           "geography",
@@ -316,23 +316,19 @@
         ],
         [
           "makeup",
-          28
+          29
+        ],
+        [
+          "science",
+          24
+        ],
+        [
+          "repair",
+          24
         ],
         [
           "gta",
           23
-        ],
-        [
-          "science",
-          22
-        ],
-        [
-          "repair",
-          22
-        ],
-        [
-          "asmr",
-          22
         ],
         [
           "gta5",
@@ -345,55 +341,59 @@
         [
           "gaming",
           21
+        ],
+        [
+          "asmr",
+          19
         ]
       ],
       "top_tags": [
         [
-          "satisfying",
-          35
+          "asmr",
+          37
         ],
         [
-          "asmr",
-          35
+          "satisfying",
+          36
         ],
         [
           "diy",
-          25
+          28
         ],
         [
           "relaxing",
-          25
+          26
         ],
         [
           "restoration",
-          24
+          25
         ],
         [
           "satisfying video",
-          21
+          24
         ],
         [
           "satisfying makeup",
-          16
+          17
         ],
         [
           "makeup",
-          16
+          17
         ],
         [
           "makeup repair",
-          16
+          17
         ],
         [
           "cosmetic repair",
-          16
+          17
         ],
         [
           "satifying asmr",
-          16
+          17
         ],
         [
-          "asmr sleep",
+          "oddly",
           16
         ]
       ]
@@ -402,27 +402,27 @@
   "top_title_tokens": [
     [
       "science",
-      129
+      130
     ],
     [
       "asmr",
-      118
+      115
     ],
     [
       "satisfying",
-      109
+      110
     ],
     [
       "geography",
-      102
-    ],
-    [
-      "experiment",
-      72
+      107
     ],
     [
       "restoration",
-      70
+      72
+    ],
+    [
+      "experiment",
+      71
     ],
     [
       "experiments",
@@ -438,11 +438,7 @@
     ],
     [
       "makeup",
-      36
-    ],
-    [
-      "map",
-      35
+      37
     ],
     [
       "live",
@@ -457,32 +453,36 @@
       34
     ],
     [
-      "full",
+      "map",
       34
+    ],
+    [
+      "full",
+      33
     ],
     [
       "caught",
-      34
-    ],
-    [
-      "camera",
-      32
-    ],
-    [
-      "india",
-      32
-    ],
-    [
-      "kids",
-      31
-    ],
-    [
-      "oddly",
-      30
+      33
     ],
     [
       "repair",
+      32
+    ],
+    [
+      "camera",
+      31
+    ],
+    [
+      "india",
       30
+    ],
+    [
+      "kids",
+      29
+    ],
+    [
+      "oddly",
+      29
     ],
     [
       "scienceandfun",
@@ -498,15 +498,15 @@
     ],
     [
       "animation",
-      25
+      24
+    ],
+    [
+      "world",
+      24
     ],
     [
       "class",
       24
-    ],
-    [
-      "cleaning",
-      23
     ],
     [
       "animals",
@@ -529,10 +529,6 @@
       22
     ],
     [
-      "world",
-      21
-    ],
-    [
       "gta5",
       21
     ],
@@ -541,30 +537,34 @@
       21
     ],
     [
-      "chapter",
+      "song",
       20
     ],
     [
-      "upsc",
-      19
+      "chapter",
+      20
     ],
     [
       "story",
       18
     ],
     [
-      "through",
-      18
+      "cleaning",
+      17
     ],
     [
-      "water",
+      "countries",
+      16
+    ],
+    [
+      "home",
       16
     ]
   ],
   "top_tags": [
     [
       "asmr",
-      77
+      78
     ],
     [
       "satisfying",
@@ -572,55 +572,59 @@
     ],
     [
       "restoration",
-      60
+      61
     ],
     [
       "geography",
-      56
+      50
     ],
     [
       "science",
-      42
+      41
+    ],
+    [
+      "diy",
+      41
     ],
     [
       "relaxing",
       38
     ],
     [
-      "diy",
-      38
-    ],
-    [
-      "shorts",
-      34
-    ],
-    [
-      "history",
-      34
-    ],
-    [
-      "learn",
-      32
-    ],
-    [
       "science experiments",
       32
     ],
     [
-      "maps",
-      32
-    ],
-    [
-      "repair",
+      "history",
       31
     ],
     [
-      "animals",
-      31
+      "shorts",
+      30
     ],
     [
       "life hacks",
       30
+    ],
+    [
+      "animals",
+      30
+    ],
+    [
+      "satisfying video",
+      30
+    ],
+    [
+      "repair",
+      29
+    ],
+    [
+      "maps",
+      29
+    ],
+    [
+      "learn",
+      27
     ],
     [
       "makeup",
@@ -628,10 +632,6 @@
     ],
     [
       "makeup repair",
-      27
-    ],
-    [
-      "satisfying video",
       27
     ],
     [
@@ -667,28 +667,16 @@
       23
     ],
     [
-      "learning",
-      23
-    ],
-    [
-      "viral",
-      22
+      "experiment",
+      21
     ],
     [
       "fyp",
-      22
+      20
     ],
     [
       "satisfactorio",
-      22
-    ],
-    [
-      "experiment",
-      22
-    ],
-    [
-      "cosmetics",
-      21
+      20
     ],
     [
       "oddlysatisfying",
@@ -699,6 +687,14 @@
       20
     ],
     [
+      "learning",
+      20
+    ],
+    [
+      "cosmetics",
+      19
+    ],
+    [
       "experiments",
       19
     ],
@@ -707,30 +703,34 @@
       19
     ],
     [
-      "asmr makeup",
+      "viral",
       18
     ],
     [
-      "youtube shorts",
+      "asmr makeup",
       17
     ],
     [
-      "map",
+      "satisfying makeup",
       17
     ],
     [
-      "relationship drama",
+      "cosmetic repair",
+      17
+    ],
+    [
+      "satifying asmr",
       17
     ]
   ],
   "top_topic_categories": [
     [
       "Lifestyle (sociology)",
-      257
+      255
     ],
     [
       "Knowledge",
-      163
+      166
     ],
     [
       "Entertainment",
@@ -742,7 +742,7 @@
     ],
     [
       "Pet",
-      72
+      73
     ],
     [
       "Video game culture",
@@ -750,7 +750,7 @@
     ],
     [
       "Film",
-      57
+      58
     ],
     [
       "Action-adventure game",
@@ -770,7 +770,7 @@
     ],
     [
       "Vehicle",
-      29
+      32
     ],
     [
       "Music of Asia",
@@ -793,11 +793,11 @@
       12
     ],
     [
-      "Society",
-      10
+      "Music of Latin America",
+      9
     ],
     [
-      "Music of Latin America",
+      "Society",
       9
     ],
     [
@@ -817,16 +817,16 @@
       6
     ],
     [
-      "Food",
+      "Politics",
       6
     ],
     [
-      "Politics",
-      6
+      "Food",
+      5
     ]
   ],
-  "median_views": 4519601,
-  "median_duration_s": 275,
-  "median_like_rate": 0.01191,
+  "median_views": 4332245,
+  "median_duration_s": 269,
+  "median_like_rate": 0.01155,
   "median_comment_rate": 0.00016
 }

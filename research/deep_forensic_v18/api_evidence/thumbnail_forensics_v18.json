@@ -78,6 +78,30 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
+      "face_share": 0.257,
+      "face_present": true,
+      "face_upper_half": 0.395,
+      "contrast": 0.199,
+      "brightness": 0.257,
+      "accent_share": 0.769,
+      "dominant": {
+        "hex": "#8c614d",
+        "share": 0.769,
+        "hue_deg": 22
+      },
+      "text_edge_energy": {
+        "upper": 1.43,
+        "lower": 1.57,
+        "centre": 1.82
+      },
+      "text_row_span": 42,
+      "busy": 1.71,
+      "id": "ZuA1yaHDB_A"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
       "face_share": 0.013,
       "face_present": false,
       "face_upper_half": 0.005,
@@ -265,30 +289,6 @@
       "text_row_span": 68,
       "busy": 0.55,
       "id": "4aWjjSKAQig"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
-      "face_share": 0.17,
-      "face_present": true,
-      "face_upper_half": 0.201,
-      "contrast": 0.201,
-      "brightness": 0.162,
-      "accent_share": 0.55,
-      "dominant": {
-        "hex": "#80563a",
-        "share": 0.55,
-        "hue_deg": 22
-      },
-      "text_edge_energy": {
-        "upper": 3.45,
-        "lower": 1.38,
-        "centre": 1.6
-      },
-      "text_row_span": 103,
-      "busy": 1.78,
-      "id": "-FmaF5KnJ4c"
     },
     {
       "size": "maxresdefault",
@@ -727,6 +727,30 @@
       "w": 1280,
       "h": 720,
       "face_share": 0.007,
+      "face_present": false,
+      "face_upper_half": 0.01,
+      "contrast": 0.323,
+      "brightness": 0.356,
+      "accent_share": 0.454,
+      "dominant": {
+        "hex": "#4aadda",
+        "share": 0.454,
+        "hue_deg": 202
+      },
+      "text_edge_energy": {
+        "upper": 2.08,
+        "lower": 1.4,
+        "centre": 3.19
+      },
+      "text_row_span": 8,
+      "busy": 2.53,
+      "id": "rGcRe4lt4z4"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.007,
       "face_present": true,
       "face_upper_half": 0.015,
       "contrast": 0.254,
@@ -798,30 +822,6 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.229,
-      "face_present": true,
-      "face_upper_half": 0.199,
-      "contrast": 0.182,
-      "brightness": 0.568,
-      "accent_share": 0.75,
-      "dominant": {
-        "hex": "#ab795a",
-        "share": 0.75,
-        "hue_deg": 22
-      },
-      "text_edge_energy": {
-        "upper": 6.33,
-        "lower": 6.4,
-        "centre": 5.55
-      },
-      "text_row_span": 117,
-      "busy": 5.56,
-      "id": "60g7D6QF1xM"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
       "face_share": 0.028,
       "face_present": true,
       "face_upper_half": 0.03,
@@ -865,6 +865,30 @@
       "text_row_span": 188,
       "busy": 4.05,
       "id": "ian6CXeFUYc"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.136,
+      "face_present": true,
+      "face_upper_half": 0.17,
+      "contrast": 0.28,
+      "brightness": 0.566,
+      "accent_share": 0.307,
+      "dominant": {
+        "hex": "#b37345",
+        "share": 0.307,
+        "hue_deg": 22
+      },
+      "text_edge_energy": {
+        "upper": 2.02,
+        "lower": 2.27,
+        "centre": 2.54
+      },
+      "text_row_span": 15,
+      "busy": 2.96,
+      "id": "IXqBm15EZYA"
     },
     {
       "size": "maxresdefault",
@@ -937,39 +961,15 @@
       "text_row_span": 31,
       "busy": 5.24,
       "id": "JH03xu8R7fo"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
-      "face_share": 0.117,
-      "face_present": true,
-      "face_upper_half": 0.191,
-      "contrast": 0.264,
-      "brightness": 0.539,
-      "accent_share": 0.248,
-      "dominant": {
-        "hex": "#068bcc",
-        "share": 0.248,
-        "hue_deg": 202
-      },
-      "text_edge_energy": {
-        "upper": 3.83,
-        "lower": 2.53,
-        "centre": 5.33
-      },
-      "text_row_span": 23,
-      "busy": 4.38,
-      "id": "icia1tUSoMU"
     }
   ],
   "aggregate": {
-    "face_rate": 0.85,
-    "avg_contrast": 0.222,
-    "avg_brightness": 0.327,
-    "avg_busy": 2.448,
+    "face_rate": 0.825,
+    "avg_contrast": 0.226,
+    "avg_brightness": 0.325,
+    "avg_busy": 2.335,
     "avg_accent_share": 0.508,
-    "avg_lower_text_energy": 2.237,
+    "avg_lower_text_energy": 2.111,
     "hue_families": [
       [
         0,
