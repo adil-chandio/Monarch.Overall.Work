@@ -1,0 +1,100 @@
+name: V18 Deep 10x Forensic - real YouTube API, Shorts + long
+
+# Second-generation deep forensic. Explicit duration buckets (short/medium/long),
+# growing-channel recent uploads, description/script forensics on every >=1M video,
+# and 40 deep teardowns. Public metadata only. No competitor video/audio download.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "v18-deep-trigger.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v18-deep-forensic-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  forensic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve key secret (presence only; value masked)
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then
+            echo "::error::no key secret resolved - cannot be a real API-lane run"
+            exit 1
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          echo "key resolved (${#KEY} chars); value never printed or stored"
+
+      - name: Runtime deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy pillow yt-dlp youtube-transcript-api
+
+      - name: Prove the lane
+        run: python -m yt_intel lanes --json || true
+
+      - name: 24 lanes + growing channels + deep 10x forensic
+        run: python research/deep_forensic_v18/build_deep_forensic_v18.py
+
+      - name: HARD QC - deep real-API evidence must exist
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p = pathlib.Path('research/deep_forensic_v18/api_evidence/run_v18.json')
+          r = json.loads(p.read_text())
+          assert r['key_present'] is True, 'key not resolved'
+          assert r['secret_value_printed_or_stored'] is False, 'secret handling'
+          assert r['lanes'] == 24, r['lanes']
+          assert r['short_bucket_lanes'] == 6, r['short_bucket_lanes']
+          assert r['medium_bucket_lanes'] == 6, r['medium_bucket_lanes']
+          assert r['long_bucket_lanes'] == 6, r['long_bucket_lanes']
+          assert r['recent_lanes'] == 6, r['recent_lanes']
+          assert r['unique_videos'] >= 400, r['unique_videos']
+          assert r['channels_resolved'] >= 100, r['channels_resolved']
+          assert r['growing_channels_sampled'] >= 20, r['growing_channels_sampled']
+          assert r['million_view_videos'] >= 100, r['million_view_videos']
+          assert r['description_forensics'] >= 100, r['description_forensics']
+          assert r['deep_teardowns'] >= 30, r['deep_teardowns']
+          assert r['comments_videos'] >= 20, r['comments_videos']
+          assert r['thumbnail_stats'] >= 25, r['thumbnail_stats']
+          assert r['transcript_attempts'] >= 10, r['transcript_attempts']
+          print('V18 HARD QC PASS', json.dumps(r, indent=2))
+          PY
+
+      - name: Upload deep-forensic evidence even if the commit fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v18-deep-api-evidence
+          path: research/deep_forensic_v18/
+          if-no-files-found: warn
+
+      - name: Commit evidence + data appendix
+        if: always()
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add research/deep_forensic_v18
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore(v18): deep 10x real-API forensic evidence [skip ci]"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }} || echo "::warning::push failed; evidence is in the run artifact"
