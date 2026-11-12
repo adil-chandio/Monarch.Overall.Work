@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-11-12T01:11:34Z",
-  "selection_version": "v14-final-20-funny",
-  "clips_checked": 20,
+  "generated_utc": "2026-11-12T01:31:25Z",
+  "selection_version": "v16-social-20",
+  "clips_checked": 2,
   "ledgers": [
     "rights_ledger_v13.json",
     "rights_ledger_curated_v13.json"
@@ -91,96 +91,6 @@
   ],
   "silent_or_audio_status": [
     {
-      "id": "C01",
-      "file": "windows/curated_01.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C02",
-      "file": "windows/curated_02.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C03",
-      "file": "windows/curated_03.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C04",
-      "file": "windows/curated_04.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C05",
-      "file": "windows/curated_05.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C06",
-      "file": "windows/curated_06.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C07",
-      "file": "windows/curated_07.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C08",
-      "file": "windows/curated_08.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C09",
-      "file": "windows/curated_09.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C10",
-      "file": "windows/curated_10.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C11",
-      "file": "windows/curated_11.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C12",
-      "file": "windows/curated_12.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C13",
-      "file": "windows/curated_13.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C14",
-      "file": "windows/curated_14.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C15",
-      "file": "windows/curated_15.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C16",
-      "file": "windows/curated_16.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C17",
-      "file": "windows/curated_17.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
-      "id": "C18",
-      "file": "windows/curated_18.mp4",
-      "action": "none_native_audio_present"
-    },
-    {
       "id": "C19",
       "file": "windows/curated_19.mp4",
       "action": "none_native_audio_present"
@@ -191,8 +101,16 @@
       "action": "none_native_audio_present"
     }
   ],
-  "violations": [],
-  "status": "ALL_PASS",
+  "violations": [
+    "selection_count_2_not_20",
+    "licence_not_cleared: Social: Bowling trick shot = unknown - human review required",
+    "bad_source_page Social: Bowling trick shot",
+    "no_commons_sha1 Social: Bowling trick shot",
+    "licence_not_cleared: Social: CCTV dashcam fails = unknown - human review required",
+    "bad_source_page Social: CCTV dashcam fails",
+    "no_commons_sha1 Social: CCTV dashcam fails"
+  ],
+  "status": "FAIL",
   "human_watch_through_required": true,
   "family_safe_guarantee": false,
   "not_a_legal_opinion": true,

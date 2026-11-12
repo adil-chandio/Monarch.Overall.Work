@@ -1,27 +1,21 @@
 {
-  "selection_version": "v14-final-20-funny",
-  "count": 20,
-  "note": "V14 final 20 distinct genuinely funny clips for the 9:00 English build. 18 new viral-formula clips (Bean x3, Chiitan, baby monkey, cat wheel, animals workout, baby elephant, DDR, April Fools, projector prank, scary maze x2, COMEDY, cat grooming, Flip cartoons x2, cat meowing) + 2 V13 keepers (parallel parking, greased pigs). The rejected V13 20 (8 vintage/B&W/animation/low-energy clips) are NOT in the final cut. See VIRAL_TEARDOWN_V14.md.",
+  "selection_version": "v16-social-20",
+  "count": 2,
+  "note": "V16 20 NEW social viral clips.",
   "clips": [
-    {"id": "C01", "window_file": "windows/curated_01.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Bean DIVE face-plant"},
-    {"id": "C02", "window_file": "windows/curated_02.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Bean HORROR movie"},
-    {"id": "C03", "window_file": "windows/curated_03.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Bean AMBULANCE hospital"},
-    {"id": "C04", "window_file": "windows/curated_04.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Chiitan mascot fails"},
-    {"id": "C05", "window_file": "windows/curated_05.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Baby monkey jump fail"},
-    {"id": "C06", "window_file": "windows/curated_06.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Cat wheel run"},
-    {"id": "C07", "window_file": "windows/curated_07.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Animals workout mix"},
-    {"id": "C08", "window_file": "windows/curated_08.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Baby elephant play"},
-    {"id": "C09", "window_file": "windows/curated_09.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "DDR frantic feet"},
-    {"id": "C10", "window_file": "windows/curated_10.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "April Fools AI prank"},
-    {"id": "C11", "window_file": "windows/curated_11.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Projector screen prank"},
-    {"id": "C12", "window_file": "windows/curated_12.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Scary maze FAIL scream"},
-    {"id": "C13", "window_file": "windows/curated_13.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Scary maze prank reaction"},
-    {"id": "C14", "window_file": "windows/curated_14.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Sr Pelo COMEDY laugh"},
-    {"id": "C15", "window_file": "windows/curated_15.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Cat self-grooming"},
-    {"id": "C16", "window_file": "windows/curated_16.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Flip Funny Face cartoon"},
-    {"id": "C17", "window_file": "windows/curated_17.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Flip Puddle Pranks cartoon"},
-    {"id": "C18", "window_file": "windows/curated_18.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Cat meowing into lens"},
-    {"id": "C19", "window_file": "windows/curated_19.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Parallel parking fail"},
-    {"id": "C20", "window_file": "windows/curated_20.mp4", "ledger": "rights_ledger_curated_v13.json", "pool": "curated_v14", "short": "Greased pigs helicopter prank"}
+    {
+      "id": "C19",
+      "window_file": "windows/curated_19.mp4",
+      "ledger": "rights_ledger_curated_v13.json",
+      "pool": "social_v16",
+      "short": "Bowling trick shot"
+    },
+    {
+      "id": "C20",
+      "window_file": "windows/curated_20.mp4",
+      "ledger": "rights_ledger_curated_v13.json",
+      "pool": "social_v16",
+      "short": "CCTV dashcam fails"
+    }
   ]
 }
