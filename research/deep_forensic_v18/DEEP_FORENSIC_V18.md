@@ -2,6 +2,17 @@
 
 Generated UTC: `2026-11-12T15:39:12Z`. Key present: `True`. Secret value never printed or stored.
 
+## Ye file final report NAHI hai
+
+Ye **auto-generated raw data appendix** hai (Actions run `43249117208` se). User-facing final Roman Urdu deep report yahan hai:
+
+- **`FINAL_DEEP_FORENSIC_V18_ROMAN_URDU.md`** — poora 10x/microscope Roman Urdu report (status, 24 lanes, 717 candidates, titles, descriptions, chapters, tags, comments, thumbnails, channels, transcript blocker, short/medium/long comparison, scoring tie, recommendation, A/B/C decision).
+- `PRODUCTION_BLUEPRINT_V18_ROMAN_URDU.md` — production blueprint.
+- `EPISODE_00_EDL_V18.json` — teeno formats ke scripts/EDL/descriptions/titles/tags/thumbnails.
+- `EVIDENCE_TABLES_V18.md` — machine evidence tables.
+
+**Koi niche approved nahi. `VISUAL PROOF LAB` sirf provisional recommendation hai.**
+
 ## Honest capability boundary
 
 - Public Data API: views, likes, comments, duration, title, tags, description, category, topic, caption flag, channel stats, recent uploads, top comments.

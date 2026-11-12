@@ -1,0 +1,334 @@
+{
+ "version": "V18.1",
+ "generated_from": {
+  "github_actions_run": "43249117208",
+  "run_generated_utc": "2026-11-12T15:39:12Z",
+  "raw_evidence": "research/deep_forensic_v18/api_evidence/",
+  "derived_extract": "research/deep_forensic_v18/FORENSIC_EVIDENCE_EXTRACT_V18.json",
+  "evidence_tables": "research/deep_forensic_v18/EVIDENCE_TABLES_V18.md"
+ },
+ "decision_status": {
+  "user_approved_niche": false,
+  "final_choice_made": false,
+  "v17_naqsha_files_map_forensics": "NOT_APPROVED; re-checked only as one ranked option",
+  "caught_on_camera_v16": "set_aside_by_user",
+  "note": "Aap ki explicit correction: 'pehle ham Kya karenge abhi decide NAHI hua'. Ye file ek evidence-backed provisional recommendation hai, final niche ya production commit nahi."
+ },
+ "recommended_provisional_target": {
+  "working_name": "VISUAL PROOF LAB — Kya Ye Sach Mein Kaam Karega?",
+  "type": "short-first, original, safe physical visual test + falsifiable prediction + real payoff, with distinct medium/long depth cuts",
+  "why_this_name": "Short/medium/long teeno me science-experiment / satisfying-proof evidence sab se zyada high-view-conditioned hai; JayFindsThings jaisa newer channel kam videos me bada per-video public view proxy dikhata hai; comments me sequel/sibling/did-not-work objections se remake loop milta hai.",
+  "not": [
+   "competitor footage compilation",
+   "dangerous chemical replication",
+   "animal distress or minors-as-spectacle",
+   "verbatim competitor script copy",
+   "mass-produced template series",
+   "guaranteed-views claim"
+  ],
+  "pilot_episode": "Kaagaz Ka Bridge: 1 Kilo, 3 Designs, 1 Hidden Failure",
+  "pilot_question": "Kya sirf kaagaz ka bana pull 1 kilo wazan sambhal sakta hai, aur kaunsa design sab se pehle fail hoga?"
+ },
+ "evidence_for_recommendation": {
+  "high_view_conditioned_lane_medians": {
+   "science_explainer_short_all": {
+    "median_views": 49787595,
+    "n": 50,
+    "ten_million_count": 50,
+    "median_duration_s": 55
+   },
+   "satisfying_restoration_short_all": {
+    "median_views": 22923251,
+    "n": 50,
+    "ten_million_count": 45,
+    "median_duration_s": 57
+   },
+   "satisfying_restoration_medium_all": {
+    "median_views": 3636834,
+    "n": 50,
+    "ten_million_count": 14,
+    "median_duration_s": 828
+   },
+   "science_explainer_medium_all": {
+    "median_views": 3112668,
+    "n": 50,
+    "ten_million_count": 16,
+    "median_duration_s": 627
+   },
+   "satisfying_restoration_long_all": {
+    "median_views": 3555890,
+    "n": 50,
+    "ten_million_count": 4,
+    "median_duration_s": 2084
+   },
+   "science_explainer_long_all": {
+    "median_views": 1049704,
+    "n": 42,
+    "ten_million_count": 7,
+    "median_duration_s": 2810
+   }
+  },
+  "cross_bucket_717_candidates": {
+   "short": {
+    "n": 348,
+    "median_views": 9876994,
+    "ten_million_count": 171,
+    "median_duration_s": 58,
+    "median_description_words": 44,
+    "chapter_ge3_rate": 0.006
+   },
+   "medium": {
+    "n": 184,
+    "median_views": 3155452,
+    "ten_million_count": 45,
+    "median_duration_s": 610,
+    "median_description_words": 112,
+    "chapter_ge3_rate": 0.098
+   },
+   "long": {
+    "n": 185,
+    "median_views": 2540517,
+    "ten_million_count": 21,
+    "median_duration_s": 3147,
+    "median_description_words": 146,
+    "chapter_ge3_rate": 0.227
+   }
+  },
+  "newer_channel_public_proxies": {
+   "jayfindsthings": {
+    "created": "2024-06-02",
+    "subscribers": 7760000,
+    "channel_views": 6412218292,
+    "channel_video_count": 72,
+    "views_per_channel_day": 7180535.6,
+    "views_per_video": 89058587.39,
+    "recent_upload_median_views": 44154290,
+    "million_view_videos_in_corpus": 1
+   },
+   "geoglobetales": {
+    "created": "2023-11-20",
+    "subscribers": 2090000,
+    "channel_views": 1645458617,
+    "channel_video_count": 169,
+    "views_per_channel_day": 1512370.05,
+    "views_per_video": 9736441.52,
+    "recent_upload_median_views": 2889645,
+    "million_view_videos_in_corpus": 5
+   },
+   "newer_channel_million_view_rows_by_lane": {
+    "map_geo_short_all": 17,
+    "microdrama_medium_all": 16,
+    "animal_rescue_short_all": 14,
+    "satisfying_restoration_short_all": 13,
+    "science_explainer_short_all": 2
+   }
+  },
+  "million_view_examples": [
+   {
+    "id": "-xasdJzBVpo",
+    "views": 947286603,
+    "duration_seconds": 60,
+    "title": "Kids are making a volcano - Cool Science Experiment!"
+   },
+   {
+    "id": "jfUU24gaqNg",
+    "views": 366676533,
+    "duration_seconds": 36,
+    "title": "3 Levels of Elephant Toothpaste"
+   },
+   {
+    "id": "huQIyJ1ymEQ",
+    "views": 279870018,
+    "duration_seconds": 55,
+    "title": "The World's Softest Cushion..."
+   },
+   {
+    "id": "qR7vPGcP_ko",
+    "views": 269457699,
+    "duration_seconds": 54,
+    "title": "How To Remove a Stain"
+   },
+   {
+    "id": "5PTL5N5c4jc",
+    "views": 203657158,
+    "duration_seconds": 11,
+    "title": "Square Bubble"
+   },
+   {
+    "id": "B1J6Ou4q8vE",
+    "views": 163566319,
+    "duration_seconds": 843,
+    "title": "Animation vs. Math"
+   }
+  ],
+  "comment_patterns_at_or_above_2_5pct": {
+   "qR7vPGcP_ko": [
+    "asked for a sequel 12%",
+    "said it did not work 4%"
+   ],
+   "7Wx_2kGHqUA": [
+    "asked for a sequel 12%"
+   ],
+   "xZco3o0HLZc": [
+    "asked for a sequel 4%",
+    "objected to cost 8%"
+   ],
+   "5PTL5N5c4jc": [
+    "asked for a sibling topic 4%",
+    "objected to pacing/clarity 4%"
+   ],
+   "pvMPaYHwGVw": [
+    "asked for a sequel 4%",
+    "wants the asset 4%"
+   ]
+  },
+  "policy_directional_not_legal_clearance": {
+   "source": "https://support.google.com/youtube/answer/1311392?hl=en",
+   "takeaway": "Official YouTube Help says monetised channels should be original/authentic and not mass-produced, generic, repetitive or template-like; this report treats it as a production constraint, not legal advice or approval."
+  }
+ },
+ "ranked_options": [
+  {
+   "rank": 1,
+   "option": "VISUAL PROOF LAB — safe original physical test + prediction + payoff",
+   "status": "recommended_provisional",
+   "evidence": "science short median 49.79M and 50/50 >=10M; satisfying short 22.92M and 45/50 >=10M; satisfying medium 3.64M/14 >=10M; satisfying long 3.56M/4 >=10M; 13 newer-channel million-view rows in satisfying short; JayFindsThings 72 videos / 89.06M public views-per-video proxy; comments show sequel, sibling-topic, did-not-work and pacing objections.",
+   "risks": "selection bias, originality/repetition policy, safety, no transcript/edit observation, no private analytics"
+  },
+  {
+   "rank": 2,
+   "option": "Map / geography evidence (V17 'NAQSHA FILES' ko approved na samjha jaye)",
+   "status": "alternative_evidence_backed_not_chosen",
+   "evidence": "map short median 6.63M, 17 newer-channel million-view rows (highest in V18.1), GeoGlobeTales 27 title-safe candidate videos / 5 corpus hits / 9.74M views-per-video proxy; map medium 1.74M; map long 1.52M.",
+   "risks": "lower high-view ceiling than science/satisfying in this conditioned sample; fact-checking and map/source rights burden; V17 recommendation explicitly not user-approved"
+  },
+  {
+   "rank": 3,
+   "option": "Satisfying restoration / ASMR craft",
+   "status": "alternative_evidence_backed_not_chosen_as_standalone",
+   "evidence": "strong medium and long lanes; long tags dominated by asmr/satisfying/restoration; 5 newer-channel million-view rows in long lane.",
+   "risks": "high-volume channel patterns, repetition/mass-production risk, physical asset and rights burden, no observed edit/cut/SFX data"
+  },
+  {
+   "rank": 4,
+   "option": "Animal rescue short-first",
+   "status": "alternative_high_short_but_sensitive",
+   "evidence": "animal short median 7.48M / 19 >=10M; 14 newer-channel million-view rows.",
+   "risks": "medium median 73.7k and long 330.6k; animal welfare, rights, repetitive distress/peril policy sensitivity; no human/legal approval"
+  },
+  {
+   "rank": 5,
+   "option": "Microdrama / vertical serial",
+   "status": "alternative_weaker_view_evidence",
+   "evidence": "Story TV 16 newer-channel million-view rows and 16 corpus hits; microdrama recent fresh_30d_share 0.979.",
+   "risks": "short median 463k, medium 592k, long 191k; only 1 >=10M short and 1 >=10M long in all-time lanes; production and narrative burden"
+  },
+  {
+   "rank": 6,
+   "option": "Viral breakdown / music / kids / trailer lane",
+   "status": "not_recommended_for_this_channel_brief",
+   "evidence": "viral breakdown short 74.2k / medium 42.3k / long 1.7k medians; mostPopular top rows are trailers/music/gaming, not a niche verdict; W Sound and kids channels have huge views but different production/rights model.",
+   "risks": "out-of-fit, rights, minors, no causal inference"
+  }
+ ],
+ "required_user_decision_before_production": [
+  "A) Visual Proof Lab ko provisional pilot ke tor par approve karna",
+  "B) Map/geography option ko dobara deeper lane ke tor par choose karna",
+  "C) Koi aur niche/idea dena",
+  "Language, voice, face/hands-only, cadence, safety/rights aur human review bhi pending hain"
+ ],
+ "boundaries": [
+  "No user-approved niche yet.",
+  "No competitor video/audio download, no video-frame/cut/music/SFX/caption-animation inspection.",
+  "No public transcript usable: 12/12 V18 attempts errored; V17 fallback 18/18 also blocked.",
+  "Creator descriptions are synopses/chapter metadata, NOT verbatim spoken transcripts.",
+  "No private retention/CTR/RPM/revenue/audience analytics.",
+  "No verified growth ranking; growing channels are cumulative public proxies only.",
+  "No causal virality claim, no guaranteed views, no monetisation outcome, no legal clearance, no human/creative approval, no upload/publish, no perfection claim."
+ ],
+ "deliverables": {
+  "final_report_roman_urdu": "research/deep_forensic_v18/FINAL_DEEP_FORENSIC_V18_ROMAN_URDU.md",
+  "production_blueprint": "research/deep_forensic_v18/PRODUCTION_BLUEPRINT_V18_ROMAN_URDU.md",
+  "episode_edl_scripts_titles_tags_thumbnails": "research/deep_forensic_v18/EPISODE_00_EDL_V18.json",
+  "evidence_tables": "research/deep_forensic_v18/EVIDENCE_TABLES_V18.md",
+  "auditable_extract": "research/deep_forensic_v18/FORENSIC_EVIDENCE_EXTRACT_V18.json",
+  "raw_api_dump": "research/deep_forensic_v18/api_evidence/"
+ },
+ "niche_scoring": {
+  "method": "qualitative 0-5 tiers with stated weights; analyst judgment, not user decision and not causal proof",
+  "weights": {
+   "short_lane_high_view_evidence": 0.25,
+   "medium_long_depth_viability": 0.2,
+   "newer_channel_entry_signal": 0.2,
+   "feasibility_small_team": 0.15,
+   "rights_originality_safety": 0.1,
+   "saturation_risk": 0.1
+  },
+  "scores": {
+   "visual_proof_lab": {
+    "short": 5,
+    "depth": 4,
+    "newer": 3,
+    "feasibility": 5,
+    "rights": 5,
+    "saturation": 3,
+    "weighted": 4.2
+   },
+   "map_geography": {
+    "short": 4,
+    "depth": 4,
+    "newer": 5,
+    "feasibility": 4,
+    "rights": 4,
+    "saturation": 4,
+    "weighted": 4.2
+   },
+   "satisfying_restoration": {
+    "short": 5,
+    "depth": 5,
+    "newer": 4,
+    "feasibility": 1,
+    "rights": 2,
+    "saturation": 1,
+    "weighted": 3.5
+   },
+   "animal_rescue": {
+    "short": 4,
+    "depth": 2,
+    "newer": 5,
+    "feasibility": 2,
+    "rights": 2,
+    "saturation": 2,
+    "weighted": 3.1
+   },
+   "microdrama": {
+    "short": 2,
+    "depth": 2,
+    "newer": 2,
+    "feasibility": 1,
+    "rights": 3,
+    "saturation": 2,
+    "weighted": 1.95
+   },
+   "viral_breakdown": {
+    "short": 2,
+    "depth": 1,
+    "newer": 1,
+    "feasibility": 3,
+    "rights": 4,
+    "saturation": 1,
+    "weighted": 1.85
+   }
+  },
+  "note": "Visual Proof Lab and Map/Geography both compute to 4.20 under these weights - a practical tie. The tie-break depends on user assets/skills, language target and appetite for animation, not on this score. Satisfying 3.50 / Animal 3.10 / Microdrama 1.95 / Viral breakdown 1.85."
+ },
+ "not_observed_summary": {
+  "competitor_scripts": "12/12 caption attempts errored; 0 usable words",
+  "competitor_frames_editing": "40/40 teardowns editing_observation.status=not_observed; no video/audio download",
+  "private_analytics": "not available via public Data API",
+  "verified_growth_ranking": "not observed; cumulative views/age proxy only",
+  "thumbnail_ocr_face_id": "not observed; pixel stats plus permissive skin-tone heuristic",
+  "true_aspect_ratio": "not observed; raw dimension/projection fields all 2d/rectangular (API artifact)",
+  "causal_reason": "not observable"
+ }
+}

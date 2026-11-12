@@ -1,0 +1,220 @@
+{
+  "version": "V18.1",
+  "status": "PROPOSED_ORIGINAL_PRODUCTION_PLAN_NOT_USER_APPROVED_NOT_UPLOADED",
+  "provisional_series": "VISUAL PROOF LAB — Kya Ye Sach Mein Kaam Karega?",
+  "pilot_episode": "Kaagaz Ka Bridge: 1 Kilo, 3 Designs, 1 Hidden Failure",
+  "core_question": "Kya sirf kaagaz ka bana pull 1 kilo wazan sambhal sakta hai, aur kaunsa design sab se pehle fail hoga?",
+  "evidence_basis": "research/deep_forensic_v18/RECOMMENDATION_V18.json + FORENSIC_EVIDENCE_EXTRACT_V18.json",
+  "important_boundary": "Ye scripts, titles, descriptions, chapters, tags, comments aur thumbnails HAMARE ORIGINAL PROPOSAL hain. Kisi competitor ka verbatim spoken script, transcript, footage, audio, music ya frame copy nahi kiya gaya. Public competitor transcripts 12/12 blocked the; creator descriptions synopses/chapter metadata the. Is plan ka koi legal/human/creative approval, upload/publish, monetisation outcome ya guaranteed views claim nahi hai.",
+  "safety": {
+    "materials": ["plain printer paper", "ruler", "tape only if disclosed in shot", "1 kg calibrated weight or sealed water bottle", "flat table", "phone/camera", "soft catch tray"],
+    "exclude": ["fire", "concentrated peroxide", "chemicals", "glass under load", "sharp tools", "minors as spectacle", "animals", "competitor clips", "unverified life hacks", "dangerous replication"],
+    "note": "Large-scale chemical stunts ko copy nahi karna; secondary Watchly review bhi high-concentration experiment ke liye adult/professional safety planning batata hai [1](https://watchlyplayer.tv/watchly-safety-review/mark-rober/videos/mark-rober-worlds-largest-elephant-toothpaste-experiment). Ye safety note legal clearance nahi."
+  },
+  "rights_ledger": {
+    "footage": "100% self-shot original table-top footage to be created only after user approval",
+    "voice": "own recorded voice or disclosed TTS; no cloned competitor voice",
+    "music_sfx": "original or licence-documented; no third-party copyrighted track",
+    "maps_graphics": "self-made simple diagrams; no third-party map tiles unless rights verified",
+    "ai_disclosure": "if synthetic/altered media is used, disclose per platform policy; no legal opinion"
+  },
+  "formats": {
+    "short": {
+      "target_duration_seconds": 56,
+      "aspect": "9:16",
+      "resolution": "1080x1920",
+      "fps": 30,
+      "evidence_rationale": "V18.1 short candidates median 58s; science short lane median 55s; satisfying short lane 57s. High-view-conditioned sample, target guarantee nahi.",
+      "title_options": [
+        "Kya Kaagaz 1 Kilo Utha Sakta Hai? 3 Designs Test",
+        "1 Kilo vs Kaagaz Ka Pull | Visual Proof Lab",
+        "Kaagaz Ka Bridge: Pehle Kaunsa Fail Hoga?"
+      ],
+      "description_proposed": "Sirf kaagaz, ek 1 kilo wazan, aur teen designs. Pehle guess karo: flat sheet, accordion fold, ya rolled tubes? Har test ka asli result dikhaya gaya hai, including woh hidden failure jo pehle nazar nahi aata. Ye hamara original table-top proof test hai; koi dangerous chemical, koi animal, koi competitor footage nahi. Aap ka agla sawal comment me likho: 2 kg test ya naya design? #VisualProofLab #ScienceExperiment #KaagazKaBridge",
+      "chapters_proposed": [],
+      "chapter_note": "Short description me chapters nahi; V18.1 short chapter>=3 rate 0.006 tha.",
+      "tags_proposed": ["visual proof lab", "kaagaz ka bridge", "paper bridge test", "science experiment", "physics short", "roman urdu science", "prediction test", "satisfying test", "diy experiment", "stem"],
+      "tag_note": "Tags metadata hain, ranking ya virality ka saboot nahi; keyword stuffing nahi.",
+      "comment_prompt": "Pehle kya guess kiya tha? Agla test 2 kg ya naya design?",
+      "pinned_comment_proposed": "Hamara rule: har claim ka ek visible test, har failure ka close-up, aur agla sawal audience se. Aap ka vote: 2 kg / naya design / mechanism detail?",
+      "thumbnail_spec": {
+        "composition": "one clean 1 kg weight above a visibly thin paper bridge; one bold accent colour; face optional hands only",
+        "text": "1 KG?",
+        "text_placement": "upper clean safe zone; short words; no overlap with subject",
+        "statistics_context": "V18.1 40 thumbnails ka avg contrast 0.226, brightness 0.325, accent 0.508, busy 2.335; ye pixel stats hain, CTR proof nahi; OCR/face recognition nahi kiya gaya"
+      },
+      "original_script": [
+        {"t": "0:00-0:02", "vo": "Kya kaagaz ek kilo utha sakta hai?", "on_screen": "1 KG vs KAAGAZ", "visual": "weight held above thin paper bridge"},
+        {"t": "0:02-0:06", "vo": "Pehle guess karo: flat, fold, ya roll?", "on_screen": "AAPKA GUESS?", "visual": "three designs laid out"},
+        {"t": "0:06-0:11", "vo": "Pehla design: seedha kaagaz.", "on_screen": "TEST 1: FLAT", "visual": "flat sheet placed between two supports"},
+        {"t": "0:11-0:16", "vo": "Dekho, yahan jhuk gaya.", "on_screen": "FAIL", "visual": "slow bend and collapse"},
+        {"t": "0:16-0:22", "vo": "Doosra: accordion fold.", "on_screen": "TEST 2: FOLD", "visual": "folded paper bridge"},
+        {"t": "0:22-0:28", "vo": "Behtar, lekin edge par pressure.", "on_screen": "EDGE PAR LOAD", "visual": "close-up of crease starting to buckle"},
+        {"t": "0:28-0:34", "vo": "Teesra: rolled tubes aur deck.", "on_screen": "TEST 3: TUBES", "visual": "three tubes under a flat deck"},
+        {"t": "0:34-0:41", "vo": "Ek kilo... ruhta hai.", "on_screen": "1 KG HOLD", "visual": "weight resting, timer visible"},
+        {"t": "0:41-0:47", "vo": "Magar failure chhupa tha ek tube me.", "on_screen": "HIDDEN FAILURE", "visual": "macro slow-mo of one tube buckling"},
+        {"t": "0:47-0:52", "vo": "Seedha kaagaz jhukta hai; roll load ko neeche bhejta hai.", "on_screen": "BEND → COMPRESSION", "visual": "simple arrow diagram"},
+        {"t": "0:52-0:56", "vo": "Agla: 2 kilo ya naya design?", "on_screen": "AAP VOTE KARO", "visual": "two options on table"}
+      ],
+      "edl": [
+        {"shot": 1, "start": 0.0, "end": 2.0, "visual": "hook macro", "cut": "hard cut", "audio": "natural paper tap + short VO", "caption": "1 KG vs KAAGAZ"},
+        {"shot": 2, "start": 2.0, "end": 6.0, "visual": "three designs overhead", "cut": "straight", "audio": "VO + light tick", "caption": "AAPKA GUESS?"},
+        {"shot": 3, "start": 6.0, "end": 11.0, "visual": "flat sheet setup", "cut": "straight", "audio": "natural", "caption": "TEST 1: FLAT"},
+        {"shot": 4, "start": 11.0, "end": 16.0, "visual": "flat failure 60fps slow-mo", "cut": "straight", "audio": "paper crumple", "caption": "FAIL"},
+        {"shot": 5, "start": 16.0, "end": 22.0, "visual": "accordion fold build", "cut": "straight", "audio": "folding sound", "caption": "TEST 2: FOLD"},
+        {"shot": 6, "start": 22.0, "end": 28.0, "visual": "fold edge close-up", "cut": "straight", "audio": "natural", "caption": "EDGE PAR LOAD"},
+        {"shot": 7, "start": 28.0, "end": 34.0, "visual": "rolled tubes + deck", "cut": "straight", "audio": "rolling sound", "caption": "TEST 3: TUBES"},
+        {"shot": 8, "start": 34.0, "end": 41.0, "visual": "1 kg hold with timer", "cut": "hold", "audio": "room tone", "caption": "1 KG HOLD"},
+        {"shot": 9, "start": 41.0, "end": 47.0, "visual": "hidden buckle macro slow-mo", "cut": "straight", "audio": "soft creak", "caption": "HIDDEN FAILURE"},
+        {"shot": 10, "start": 47.0, "end": 52.0, "visual": "diagram arrows", "cut": "straight", "audio": "VO", "caption": "BEND → COMPRESSION"},
+        {"shot": 11, "start": 52.0, "end": 56.0, "visual": "two vote options", "cut": "hold", "audio": "VO", "caption": "AAP VOTE KARO"}
+      ],
+      "production_edit_spec": {
+        "cuts": "11 shots / 56s; hook ke baad har 4-7s me ek naya visual proof",
+        "safe_zone": "top 12% and bottom 18% clear for UI; captions short, medium weight",
+        "audio": "natural table-top sounds foreground; optional low room tone; no loud music over proof",
+        "colour": "one accent colour, neutral table, avoid five-hue clutter",
+        "captions": "burned-in short phrases + separate SRT if platform allows",
+        "claim": "editing targets are OUR proposal, NOT observed competitor editing"
+      }
+    },
+    "medium": {
+      "target_duration_seconds": 630,
+      "aspect": "16:9",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "evidence_rationale": "V18.1 medium candidates median 610s; satisfying medium lane 828s; science medium lane 627s; medium description median 112 words; chapter>=3 rate 0.098.",
+      "title_options": [
+        "Kaagaz Ka Bridge: 1 Kilo, 3 Designs Aur Ek Chhupa Failure",
+        "Kya Kaagaz 1 Kilo Sambhal Sakta Hai? Full Visual Proof Test",
+        "1 Kilo Ka Test: Flat, Fold aur Rolled Tubes ka Asli Result"
+      ],
+      "description_proposed": "Ek simple sawal: kya sirf kaagaz ka pull 1 kilo wazan sambhal sakta hai? Is original table-top test me teen designs, ek control, ek hidden failure, aur failure ki wajah ka simple mechanism dikhaya gaya hai. Har design ka result timer aur close-up ke saath hai; koi dangerous chemical, koi animal aur koi competitor footage nahi. Comments me agla vote dijiye: 2 kg load ya naya design. Sources, material list aur limitations neeche likhi hain. #VisualProofLab #PaperBridge #ScienceExperiment",
+      "chapters_proposed": [
+        {"time": "0:00", "label": "Cold open: 1 kilo ka challenge"},
+        {"time": "0:20", "label": "Teen designs aur aapka prediction"},
+        {"time": "1:10", "label": "Control: seedha kaagaz"},
+        {"time": "2:20", "label": "Design 2: accordion fold"},
+        {"time": "3:40", "label": "Design 3: rolled tubes"},
+        {"time": "5:00", "label": "Hidden failure close-up"},
+        {"time": "6:10", "label": "Mechanism: bending vs compression"},
+        {"time": "7:30", "label": "Cost aur clarity objection ka jawab"},
+        {"time": "8:20", "label": "Viewer-voted rematch"},
+        {"time": "9:20", "label": "Results table aur limitations"},
+        {"time": "10:00", "label": "Agla sawal"}
+      ],
+      "tags_proposed": ["visual proof lab", "paper bridge experiment", "science experiment explained", "physics experiment", "roman urdu science", "diy science", "prediction test", "satisfying science", "stem", "engineering basics"],
+      "comment_prompt": "Kaunsa design aapko pehle pass lagaa? Agli episode: 2 kg ya hybrid design?",
+      "thumbnail_spec": {
+        "composition": "split but clean: left flat failure, right tube bridge holding weight; one accent arrow",
+        "text": "1 KG / 3 TESTS",
+        "text_placement": "upper third, small medium-weight font",
+        "statistics_context": "medium thumbnail sample n=8; avg contrast 0.250, busy 3.734, lower text energy 3.312; small sample, heuristic only"
+      },
+      "original_script_beats": [
+        {"t": "0:00", "vo": "Aaj ka sawal chhota hai, lekin test sakht: kya kaagaz ek kilo uthayega?", "visual": "weight + paper bridge cold open"},
+        {"t": "0:20", "vo": "Teen designs hain. Pehle aap guess karo, phir main result dikhata hoon.", "visual": "three designs overhead"},
+        {"t": "1:10", "vo": "Control sab se seedha: ek plain sheet. Isme bending force seedhi dikhti hai.", "visual": "flat sheet, side camera"},
+        {"t": "2:20", "vo": "Accordion fold se height milti hai, magar har crease ek weak point ban sakti hai.", "visual": "fold build + crease macro"},
+        {"t": "3:40", "vo": "Rolled tubes load ko neeche bhejte hain. Deck upar, compression neeche.", "visual": "tube bridge + arrows"},
+        {"t": "5:00", "vo": "Yahan asli failure tha: ek tube ka edge dheere-dheere buckle hua.", "visual": "slow-mo hidden failure"},
+        {"t": "6:10", "vo": "Farq ye nahi ke kaagaz 'strong' ho gaya; farq ye hai ke force ka rasta badal gaya.", "visual": "simple force-path diagram"},
+        {"t": "7:30", "vo": "Cost objection ka jawab: sirf printer paper, ruler aur ek calibrated weight. Koi special kit nahi.", "visual": "material flat-lay"},
+        {"t": "8:20", "vo": "Comments me sab se zyada sequel aur 'ye kaam nahi kiya' wali baat aati hai, is liye rematch audience ke vote se.", "visual": "two vote cards"},
+        {"t": "9:20", "vo": "Result table: flat fail, fold partial, tubes pass with one edge failure. Ye lab claim nahi, ek repeatable ghar ka test hai.", "visual": "results table"},
+        {"t": "10:00", "vo": "Agla vote: 2 kilo ya hybrid design?", "visual": "end card"}
+      ],
+      "production_edit_spec": {
+        "structure": "11 chapters; har chapter ka ek promise, ek visual proof, ek chhota recap",
+        "pacing": "first 20s cold open; har 60-90s me ek naya test ya failure; no long unsupported talking stretch",
+        "audio": "VO clear, natural test sounds preserved, music low and licence-documented only",
+        "graphics": "self-made force arrows and results table; no third-party footage",
+        "originality": "har episode ka alag sawal, alag failure aur alag mechanism; template repetition se bachna",
+        "claim": "editing targets are OUR proposal, NOT observed competitor editing"
+      }
+    },
+    "long": {
+      "target_duration_seconds": 1680,
+      "aspect": "16:9",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "evidence_rationale": "V18.1 long candidates median 3147s in a high-view-conditioned sample; long description median 146 words; chapter>=3 rate 0.227. Ham 28-minute original single-session narrative choose kar rahe hain, generic compilation nahi.",
+      "title_options": [
+        "Kaagaz Se Pull Tak: 1 Kilo Ka Poora Visual Proof Test",
+        "5 Designs, 1 Kilo, 1 Asli Failure: Kaagaz Ka Bridge",
+        "Kya Kaagaz 1 Kilo Utha Sakta Hai? Full Mechanism + Rematch"
+      ],
+      "description_proposed": "Ek continuous original experiment session: kaagaz ke paanch designs, ek 1 kilo load, aur har failure ka close-up. Is lambi version me material constraints, safety, control test, force-path diagram, load ramp, results table, limitations aur viewer-voted rematch shamil hain. Ye compilation nahi; ek hi sawal ka poora arc hai. Koi dangerous chemical, animal, minor spectacle ya competitor footage nahi. Har claim ka test dikhaiya gaya hai aur jo cheez verify nahi hui usay 'not observed' kaha gaya hai. #VisualProofLab #PaperBridge #EngineeringBasics",
+      "chapters_proposed": [
+        {"time": "0:00", "label": "Cold open: kya 1 kilo rukega?"},
+        {"time": "1:00", "label": "Hypothesis aur design rules"},
+        {"time": "3:00", "label": "Material, safety aur measurement"},
+        {"time": "5:00", "label": "Test 1: flat control"},
+        {"time": "7:30", "label": "Test 2: accordion folds"},
+        {"time": "10:30", "label": "Test 3: rolled tubes"},
+        {"time": "13:30", "label": "Test 4: hybrid deck"},
+        {"time": "16:30", "label": "Test 5: load ramp aur failure analysis"},
+        {"time": "20:00", "label": "Simple mechanism: bending vs compression"},
+        {"time": "23:00", "label": "Viewer-voted rematch"},
+        {"time": "26:00", "label": "Results, limits aur agla sawal"}
+      ],
+      "tags_proposed": ["visual proof lab", "paper bridge full test", "engineering basics", "science experiment", "physics explained", "roman urdu science", "load test", "failure analysis", "diy experiment", "stem"],
+      "comment_prompt": "Long version me kaunsa chapter sab se zyada clear tha? Agla mega-test kis object par?",
+      "thumbnail_spec": {
+        "composition": "one bold bridge silhouette under 1 kg, small five-test strip at bottom, one accent colour",
+        "text": "5 TESTS / 1 KG",
+        "text_placement": "upper clean area; no clutter over the bridge",
+        "statistics_context": "long thumbnail sample n=6; avg brightness 0.513, contrast 0.265, busy 3.225; very small sample, heuristic only"
+      },
+      "original_script_beats": [
+        {"t": "0:00", "vo": "Ek kilo. Sirf kaagaz. Aur paanch izzat-daar koshishein.", "visual": "cold open payoff glimpse"},
+        {"t": "1:00", "vo": "Rule simple: wahi paper, wahi span, wahi weight. Sirf design badlega.", "visual": "constraint card"},
+        {"t": "3:00", "vo": "Pehle measurement aur safety. Weight calibrated, table flat, neeche soft tray.", "visual": "material and safety flat-lay"},
+        {"t": "5:00", "vo": "Control test hamesha boring hota hai, is liye zaroori hota hai.", "visual": "flat sheet failure"},
+        {"t": "7:30", "vo": "Fold se height milti hai, magar crease par load jamaa hota hai.", "visual": "fold test + macro crease"},
+        {"t": "10:30", "vo": "Tube geometry force ka rasta badalti hai. Yahan pehla asli pass milta hai.", "visual": "tube bridge hold"},
+        {"t": "13:30", "vo": "Hybrid deck zyada stable lagta hai, magar joints naye weak points laate hain.", "visual": "hybrid build + joint close-up"},
+        {"t": "16:30", "vo": "Ab load ramp: 250 gram, 500 gram, 750 gram, 1 kilo. Har step par timer aur side view.", "visual": "load ramp multi-cam"},
+        {"t": "20:00", "vo": "Mechanism ek line me: flat sheet bending me haarti hai, tube compression me jeetti hai.", "visual": "force arrows and simple equation-free diagram"},
+        {"t": "23:00", "vo": "Comments ka vote tha 'ye kaam nahi kiya' aur 'next part'. Dono ka jawab rematch me.", "visual": "viewer-voted rematch"},
+        {"t": "26:00", "vo": "Jo verify hua wo table me; jo nahi hua wo not observed. Agla sawal aap likhiye.", "visual": "results + limitations card"}
+      ],
+      "production_edit_spec": {
+        "structure": "single narrative arc with 11 chapters; NOT a stitched compilation of unrelated clips",
+        "pacing": "har 2-3 min me ek measurable change; recaps after each failure; chapter labels in description",
+        "audio": "clear VO, preserved natural test sounds, low licence-documented bed only",
+        "graphics": "self-made diagrams/results; source card for any factual claim",
+        "originality": "unique question, unique failure, unique mechanism per episode; official policy ke mutabiq generic/template/mass-produced se bachna [1](https://support.google.com/youtube/answer/1311392?hl=en)",
+        "claim": "editing targets are OUR proposal, NOT observed competitor editing"
+      }
+    }
+  },
+  "editing_observation_ledger": {
+    "competitor_frames": "not_observed",
+    "cuts_per_second": "not_observed",
+    "transitions": "not_observed",
+    "music": "not_observed",
+    "sound_design": "not_observed",
+    "caption_animation": "not_observed",
+    "colour_grade": "not_observed",
+    "retention_curve": "not_observed",
+    "proof": "all 40 deep_teardowns_v18.json editing_observation.status=not_observed; no video/audio download"
+  },
+  "qc_before_any_future_upload": [
+    "User has explicitly chosen/approved the provisional niche or another option",
+    "Original footage proof and rights ledger complete",
+    "Safety review: no dangerous chemical, animal, minor-risk or sharp-load setup",
+    "Factual claims checked against visible test and noted limitations",
+    "No competitor clips, audio, music, maps or transcript text used",
+    "AI/synthetic disclosure if applicable; no legal clearance claimed",
+    "Title, description, chapters, tags, captions and thumbnail match the actual video",
+    "Technical QC: duration, aspect, resolution, audio level, caption readability, safe zones",
+    "Human creative review pending; no upload/publish performed by this report"
+  ],
+  "measurement_after_any_future_upload_only": {
+    "public_metrics": "own views/likes/comments at 24h, 7d, 28d via Data API or creator analytics",
+    "private_metrics": "retention/CTR/RPM only inside creator's own analytics, not in this public-API report",
+    "comparison": "compare against own channel baseline, NOT against high-view-conditioned competitor medians",
+    "no_claim": "no guaranteed views, virality, RPM, monetisation outcome or perfection"
+  }
+}
