@@ -93,7 +93,9 @@ def jpeg_size(path):
 
 
 thumbs = sorted((root / 'public/thumbnails').glob('*.jpg'))
-check(len(thumbs) >= 3, f'only {len(thumbs)} thumbnails found; package describes 3')
+check(len(thumbs) == 4, f'{len(thumbs)} thumbnails found; package describes exactly 4 (A-D)')
+# The native test caps at three variants, so the package must supply 3 launch + 1 spare.
+check(len(thumbs) >= 3, 'Test & Compare needs at least three variants')
 for p in thumbs:
     w, h = jpeg_size(p)
     check(w * 9 == h * 16, f'{p.name} is {w}x{h}, not 16:9')
@@ -102,6 +104,16 @@ for p in thumbs:
 
 print(f'chapters     : {len(chapters)}  (shortest gap '
       f'{min((b - a) for (a, _), (b, _) in zip(chapters, chapters[1:]))}s)')
+# 1920x1080 test copies: one sub-1280 variant degrades the whole experiment to 854x480
+big = sorted((root / 'public/thumbnails/upload-1920').glob('*.jpg'))
+check(len(big) == len(thumbs), f'{len(big)} upload copies for {len(thumbs)} thumbnails')
+for p in big:
+    w, h = jpeg_size(p)
+    check((w, h) == (1920, 1080), f'{p.name} is {w}x{h}, test variants must be >= 1280x720')
+    check(p.stat().st_size < 2_000_000,
+          f'{p.name} is {p.stat().st_size / 1e6:.2f} MB, over the 2 MB ceiling')
+
+print(f'upload copies: {len(big)}  all 1920x1080')
 print(f'thumbnails   : {len(thumbs)}  '
       + ', '.join(f'{p.name.split("-")[0]} {jpeg_size(p)[0]}x{jpeg_size(p)[1]}' for p in thumbs))
 print(f'reel duration: {reel_duration}s')

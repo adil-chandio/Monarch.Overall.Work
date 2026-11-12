@@ -1,35 +1,54 @@
 # PASTE THIS — The Last Mammoths (13:16 review reel)
 
-Everything below is ready to paste. Do not edit the chapter timestamps: they were pulled
-from the reel's caption track and verified by `edit/validate_metadata.py`. If the edit
-changes, re-run the validator before uploading.
+Upload-ready copy for YouTube. Nothing to edit except the contact address.
 
-Recommended pairing for launch: **TITLE 1 + thumbnail A**.
+Chapter timestamps were pulled from the reel's own caption track and machine-checked by
+`edit/validate_metadata.py`. If the cut changes, re-run the validator before uploading.
 
 ---
 
-## TITLE (choose one)
+## THE THREE PACKAGES (Test & Compare takes exactly three)
 
-Launch:
+YouTube's native test accepts **three variants** — and the useful unit is a **title +
+thumbnail pair**, not a thumbnail alone. Ship these three, in this order. **Slot 1 first**,
+because an inconclusive test falls back to variant 1.
+
+| slot | title | thumbnail | the argument it makes |
+|---|---|---|---|
+| **1** | `Who Killed The Last Mammoths?` | `A-they-were-still-here.jpg` | crime + animal |
+| **2** | `Four Witnesses. No Verdict.` | `D-no-verdict.jpg` | this is a case file, not a nature doc |
+| **3** | `They Were Still Here 4,000 Years Ago` | `B-what-killed-them.jpg` | the fact first, the mystery second |
+
+Round 2 swaps the losing slot for `C-one-genome.jpg` (map). See §8 of
+`METADATA-RESEARCH.md` for the full four-round sequence.
+
+**Upload from `public/thumbnails/upload-1920/`** — 1920×1080 copies. A single variant under
+1280×720 makes YouTube downscale *every* variant in the test to 854×480.
+
+---
+
+## TITLE
+
+Primary (slot 1):
 
     Who Killed The Last Mammoths?
 
-Alternate for the A/B test:
+Alternates: `Four Witnesses. No Verdict.` · `They Were Still Here 4,000 Years Ago`
 
-    They Were Still Here 4,000 Years Ago
+Spares, in launch order, with character counts:
 
-Spare, if neither holds:
-
-    Four Witnesses. No Verdict.
-
----
-
-## THUMBNAIL
-
-Upload `public/thumbnails/A-they-were-still-here.jpg` (1280×720).
-
-Test against `C-one-genome.jpg` from day 2. `B-what-killed-them.jpg` is the middle option if
-A and C both underperform.
+| title | chars | mechanism |
+|---|---|---|
+| Who Killed The Last Mammoths? | 29 | case file + specificity |
+| They Were Still Here 4,000 Years Ago | 36 | scale shock |
+| Four Witnesses. No Verdict. | 27 | the film's structure |
+| The Last Mammoths Didn't Die Out. They Were Trapped. | 52 | belief reversal |
+| Why The Last Mammoths Went Extinct (Nobody Agrees) | 50 | conceded uncertainty |
+| Ten Generations. No Witnesses. | 30 | absence as the object |
+| One Island. One Herd. 4,000 Years. | 34 | scale ladder |
+| The Mammoth's Last 10 Generations Are Missing | 45 | missing-data mystery |
+| What Killed The Wrangel Island Mammoths? | 40 | case file + place |
+| A Possibility Is Not A Verdict | 30 | brand title, not a launch title |
 
 ---
 
@@ -89,6 +108,8 @@ A and C both underperform.
 
 ## HASHTAGS
 
+Three, above the fold. More than three and YouTube ignores all but the first three shown.
+
     #mammoth #wrangelisland #ancientDNA
 
 ---
@@ -119,10 +140,12 @@ this cut — do not upload it.
 
 ## BEFORE YOU PUBLISH
 
+- [ ] Advanced Features enabled and account verified — otherwise Test & Compare is not offered
+- [ ] Test configured **on desktop**, not the mobile Studio app
+- [ ] All three thumbnails uploaded from `upload-1920/` (a 720p variant silently degrades the whole test)
+- [ ] Slot 1 is the package you would be happy to keep, because inconclusive is the likely outcome
 - [ ] Captions reviewed by a human, not just force-aligned
-- [ ] `<address>` in the description replaced with a real contact
-- [ ] Confirm the cut is still 13:16 / four witnesses; if not, re-run
-      `edit/validate_metadata.py` and re-derive chapters
+- [ ] `<address>` replaced with a real contact
+- [ ] Confirm the cut is still 13:16 / four witnesses; if not, re-run `edit/validate_metadata.py`
 - [ ] Rig rights resolved — nothing here authorises distribution
-- [ ] Decide the A/B window (48 h per variable) and write the result into
-      `../youtube-v14/EXPERIMENT-LOG.csv`
+- [ ] After the test: write the result, including *Inconclusive*, into `../youtube-v14/EXPERIMENT-LOG.csv`

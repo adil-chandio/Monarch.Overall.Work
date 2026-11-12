@@ -165,6 +165,7 @@ promise something the film does not contain. Output in `public/thumbnails/`, 128
 | `A-they-were-still-here.jpg` | 790 s, golden-hour herd | `4,000 YEARS AGO` / **STILL HERE** | The only warm field in 13 minutes. A cold-blue feed is the natural habitat of every other ice-age thumbnail; this one is amber, so it wins the colour fight before the eye reads anything. Four animals with a calf: *something happened to them*, not *here is an animal*. |
 | `B-what-killed-them.jpg` | 745 s, pale plain | `WRANGEL ISLAND` / **WHO KILLED THEM?** | The question form, paired with the film's actual mystery. Low-contrast snow is a liability, so the type carries the contrast (62 % black shadow). Zero overlap between type and tusks. |
 | `C-one-genome.jpg` | 640 s, island map | `ONE ISLAND, ONE HERD` / **TEN GENERATIONS** | The Eons map move — one unexplained shape in an empty field, literal to the film's missing-samples argument. Weakest on emotion, strongest on specificity. |
+| `D-no-verdict.jpg` | 725 s, verdict ledger | `FOUR WITNESSES` / **NO VERDICT** | A near-white document card in a feed of dark ice is a contrast anomaly *before* it is a design. Dark type on light, because white type on a near-white card is invisible at shelf size — measured, not guessed. Unique to this film: no competitor has a ledger. |
 
 Rules every carrier obeys, and the evidence for each:
 
@@ -188,6 +189,38 @@ Rules every carrier obeys, and the evidence for each:
 animal subject reads as a reaction channel and destroys the specificity that wins here. *(If
 a presenter is ever cast, re-test — the +38 % face result is real, it simply does not apply
 to a faceless channel.)*
+
+### 4b. The rule that changes everything: the test is **three packages**, not three pictures
+
+YouTube's native **Test & Compare** accepts **three variants** — as titles, as thumbnails, or
+as *title + thumbnail pairs*. That cap is the real constraint on this package, and it means
+the useful unit of design is not "the best thumbnail" but **three complete arguments**:
+
+| slot | package | what argument it makes | why it gets a slot |
+|---|---|---|---|
+| **1** | `Who Killed The Last Mammoths?` + **A** (amber herd) | *there was a crime and here is the animal* | the mechanism that produced 2.6M in this niche, in the warmest frame the film owns |
+| **2** | `Four Witnesses. No Verdict.` + **D** (verdict ledger) | *this is not another nature doc — it is a case file* | the one package no competitor can copy, because it is the film's actual structure on screen |
+| **3** | `They Were Still Here 4,000 Years Ago` + **B** (herd + question) | *the fact first, the mystery second* | the scale-shock play, with the herd large enough to survive a 168 px shelf |
+
+**Slot 1 is uploaded first and deliberately**, because YouTube falls back to the first
+variant when a test ends inconclusive — and inconclusive is the *common* outcome, not the
+exception.
+
+B and C are not both in the test. They are the **second round**: whichever package loses is
+replaced by the other, so the cap of three is never the reason a good option went untested.
+
+### 4c. Mobile legibility, measured rather than asserted
+
+Every carrier was downscaled to the three surface sizes that matter and inspected:
+**168×94** (phone browse shelf), **246×138** (desktop grid), **400×225** (hover preview).
+
+The first B failed this test. At 168×94 the herd reduced to four grey smudges, because the
+animals were only ~15 % of frame width. It was re-cropped to **1.9×** (`crop=680:382:351:162`)
+with the type moved into empty sky. All four now hold at 168×94: the animals read as animals
+and the words read as words.
+
+This is the reason the package does not simply scale a 1280×720 frame down and call it a
+thumbnail. A tile that is only checked at full size has not been checked.
 
 ---
 
@@ -305,27 +338,36 @@ makes someone click the next video.
 
 ---
 
-## 8. What to test, in what order, and what would prove us wrong
+## 8. The test plan, corrected to how the tool actually works
 
-This package is an **informed bet, not a measurement**. Nobody has run a CTR test on this
-film.
+The first draft of this section described a manual 48-hour swap. That is out of date.
+**YouTube Studio → Test & Compare** now runs the experiment natively, and its rules change
+the plan in five concrete ways:
 
-| test | what changes | what would prove the bet wrong |
-|---|---|---|
-| 1. Title A/B (first 48 h) | `Who Killed The Last Mammoths?` vs `They Were Still Here 4,000 Years Ago` | If the second wins by >20 % CTR, the case-file frame does not transfer to a faceless channel and the niche-specific lesson is wrong |
-| 2. Thumbnail A/B (day 2) | A (golden herd) vs C (map) | If the map wins, this audience arrives for the *evidence* and "the animal sells the click" is wrong for a 13-minute cut |
-| 3. Like-rate watch (day 7) | measurement only | Below 1.2 % means the click is being oversold. The fix is the first 30 seconds, never the title |
-| 4. Retention at 30 s | measurement only | Below 55 % means the opening is losing people the thumbnail won — an edit problem, at 00:00–00:58 |
+| the tool's actual behaviour | what it does to this package |
+|---|---|
+| **Three variants**, as titles, thumbnails, or title+thumbnail pairs | the package is designed as **three complete arguments**, not four loose tiles (§4b) |
+| Winner is decided by **watch time share**, not CTR | the ledger (D) is riskier than its CTR suggests — a case file attracts the right viewer, but a wrong-audience click is punished harder here than anywhere else |
+| A variant under **1280×720** drops **every** variant to 854×480 | hence `public/thumbnails/upload-1920/` — 1920×1080 upscales, so the test never degrades |
+| Runs up to **14 days**; needs roughly **1,000–5,000 impressions per variant** | a new channel on a first video may never reach significance. Inconclusive is the *expected* outcome, which is why slot 1 must be a keeper |
+| **Advanced Features** + verified account required; desktop only; not Shorts; not Made-for-Kids | confirm eligibility *before* upload. If it is missing, that is a verification problem, not a design problem |
 
-**Thresholds.** CTR ≥ 5 % on browse in the first 48 h is healthy for a new channel on this
-subject. The 2.6M came from a channel with an existing audience, so benchmark against
-**like-rate and 30-second retention**, not absolute views. A first video at 40–60k with a
-2 % like-rate beats 200k at 0.6 % — because the second one cannot make a second video.
+### The four-round sequence
 
-**Sequencing rule.** Change one variable at a time and give each 48 hours. Swapping title and
-thumbnail together tells you that *something* worked and nothing about which.
+| round | variable | variants | what would prove the bet wrong |
+|---|---|---|---|
+| **1** | the whole package | A + *Who Killed…* · D + *Four Witnesses. No Verdict.* · B + *They Were Still Here…* | If the ledger (D) wins, this audience arrives for the **evidence**, not the animal — and the entire "warm herd" thesis is wrong for a 13-minute cut |
+| **2** | thumbnail only, winner's title fixed | add **C** (map) against the surviving two | If C wins, specificity beats both emotion and structure |
+| **3** | title only, winning tile fixed | two new titles from §3 against the winner | If a *spare* title wins over slot 1, the case-file frame is weaker than the 2.6M video made it look |
+| **4** | nothing — measurement | — | Like-rate under **1.2 %** means the click is oversold. The fix is the first 30 s, never the tile |
 
----
+**One variable per round.** The tool allows combined title+thumbnail tests, and for round 1
+that is correct — you are choosing a *package*. From round 2 onward, hold one side fixed or
+you learn nothing about which side moved.
+
+**What to record either way.** Whatever the tool reports — *Winner*, *Preferred*, or
+*Inconclusive* — write the outcome into `../youtube-v14/EXPERIMENT-LOG.csv`. A null result
+recorded is worth more than a hunch remembered.
 
 ## 9. The reverse-engineering method, stated plainly
 
@@ -361,6 +403,9 @@ This is the honest version, and it is what produced §4:
   fetches, the repo's own 20-row corpus, and the niche thumbnails themselves.
 - **The sample is small — eight videos.** It is enough to identify a mechanism and a loser
   to diff against. It is not a regression.
+- **The native test's winner is watch time, not CTR.** A package can win the test while
+  looking like it lost on a CTR graph. Judge the tool's verdict, and read retention
+  alongside it.
 - **The film is still a review reel.** These titles and thumbnails describe the cut as it
   stands (13:16, four witnesses). If the edit changes the witness structure, §3 and §5 change
   with it.
@@ -376,5 +421,7 @@ This is the honest version, and it is what produced §4:
 | `public/thumbnails/A-they-were-still-here.jpg` | 1280×720, amber herd |
 | `public/thumbnails/B-what-killed-them.jpg` | 1280×720, pale plain + question |
 | `public/thumbnails/C-one-genome.jpg` | 1280×720, island map |
+| `public/thumbnails/D-no-verdict.jpg` | 1280×720, verdict ledger |
+| `public/thumbnails/upload-1920/` | 1920×1080 copies, so no test variant triggers 854×480 |
 | `REFERENCE-VIDEO-TEARDOWN.md` | what the Drive reference actually shows, and what it does not |
 | `../youtube-v14/RESEARCH-CORPUS.csv` | the 20-row science-channel comparator set |
