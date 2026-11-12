@@ -9,6 +9,9 @@ from showreel.celebrity_premium_3d.render import Film
 
 film = Film(320, 2)
 film.reset('street')
+for actor in (film.hero, film.fan, film.press, *film.extra):
+    visible = [o.name.split('.')[0] for o in actor.visible_actor.meshes if not o.hide_render]
+    assert any(part.startswith(('Outfit_', 'Top_')) for part in visible), (actor.visible_actor.role, visible)
 positions = []
 for t in (24., 25., 26., 27., 28., 41., 42., 43.):
     film.w.t = t

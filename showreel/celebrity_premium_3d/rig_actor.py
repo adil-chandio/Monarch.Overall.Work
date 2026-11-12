@@ -67,10 +67,17 @@ class RigPuppet:
                     mix.inputs[2].default_value=tint;links.new(source,mix.inputs[1]);links.new(mix.outputs[0],bs.inputs['Base Color'])
 
     def outfit(self, name):
+        parts={o.name.split('.')[0] for o in self.meshes}
+        # Some characters already wear their formal outfit as "original" and
+        # have no separate Outfit_formal. Never render a head without its body.
+        if name=='formal' and 'Outfit_formal' not in parts:
+            name='smart' if 'Outfit_original' in parts else 'shirt'
         keep=_GROUPS[name]
         for o in self.meshes:
             part=o.name.split('.')[0]
             o.hide_render=part in _CLOTHING and part not in keep
+        if not any(o.name.split('.')[0] in keep and not o.hide_render for o in self.meshes):
+            raise RuntimeError('no visible clothing for '+self.role)
 
     def contact(self, side, target, influence=1.0, group='hand'):
         """Solve against actual joint heads, not the exported dummy bone tails.
