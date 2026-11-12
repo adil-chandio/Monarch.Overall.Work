@@ -19,31 +19,37 @@ package and both are load-bearing, so they are stated before the copy:
 
 ## TITLE
 
+**Revised 2026-11-12 against a real 30-video API sample.** The first version of this section
+recommended a possessive hook. The measurement disagrees: on this topic a **number in the
+title is +45.3 %**, a **question is −94.3 %**, and a shouted word is −51 %. Questions are the
+biggest single negative in the sample, so the longform mammoth package's "Who Killed…" frame
+must not be carried over. Full evidence: `MEASURED-2026-11-12.md`.
+
 Primary:
 
-    This Cub Still Has Its Fur After 35,000 Years
+    Sabertooth Mummy Found In Permafrost: 35,000 Years Old
 
-45 characters. Front-loads the contradiction (*cub* + *fur* + *35,000 years*) inside the
-first 50 characters, which is all a phone shows in the Shorts shelf.
+54 characters. Statement, two concrete nouns the audience actually searches (*mummy*,
+*permafrost*), and the number — the only pattern in the sample with a positive effect.
 
-Alternates, all verified lengths:
+Alternates, all verified lengths, ordered by what the sample supports:
 
-| title | chars | mechanism |
-|---|---|---|
-| This Cub Still Has Its Fur After 35,000 Years | 45 | contradiction, number led by the subject |
-| 35,000 Years Old. Still Covered In Fur. | 39 | number first, two-beat |
-| This Saber-Toothed Cub Still Has Its Fur | 40 | the channel's existing title, kept for continuity |
-| A Saber-Toothed Cub, Still Covered In Fur | 41 | species-led, for search |
-| It Died 35,000 Years Ago. The Fur Is Still Here. | 48 | strongest *emotional* beat, weakest search |
-| The Fur Outlived The Species | 28 | brand line, not a launch line |
-| Three Weeks Old. 35,000 Years Dead. Still Furry. | 48 | three-beat, highest rhythm risk |
-| A Real Cub, Not A Reconstruction | 32 | authenticity play, pairs with poster B |
-| What Bones Could Not Tell Us | 28 | soft-tissue angle, pairs with poster C |
+| title | chars | mechanism | evidence |
+|---|---|---|---|
+| Sabertooth Mummy Found In Permafrost: 35,000 Years Old | 54 | statement + number | `mummy`/`found`/`frozen` are top word-signal terms |
+| 35,000 Years Old. Still Covered In Fur. | 39 | number first | number +45 %, shortest number-led option |
+| This Cub Still Has Its Fur After 35,000 Years | 45 | possessive hook | the earlier pick; kept because it still carries the number, but it leads with the weakest element |
+| Sabretooth Kitten Found In Permafrost | 37 | mirrors the 357k performer | 357,245 views, 0.85 % like — reach without resonance |
+| A Sabertooth Mummy! | 19 | mirrors the 12.36 % like-rate | highest like-rate in the sample, tiny reach |
+| It Died 35,000 Years Ago. The Fur Is Still Here. | 48 | emotional two-beat | keeps the number, adds the death beat |
+| A Real Cub, Not A Reconstruction | 32 | authenticity | no number; pairs with poster B |
+| The Fur Outlived The Species | 28 | brand line | no number; not a launch title |
+
+**Removed from the shortlist:** every question-form title. One measured −94.3 % and zero of
+the top decile use one.
 
 **Do not** put hashtags in the title. Up to three description hashtags render as clickable
 links *above* the title, so a title hashtag spends visible characters and buys nothing.
-
----
 
 ## DESCRIPTION
 
