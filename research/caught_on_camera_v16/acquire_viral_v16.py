@@ -9,6 +9,7 @@ FailArmy/AFV recorded in metadata) OR strong viral-funny terms. Hard-excludes
 all 20 V14 titles. Licence gate PD/CC0/CC BY only. Safety gate blocks
 graphic/tragic. Objective 10s hook window (motion + surprise). Writes
 rights ledger + selection + contact sheet for validate_clips_v13.py.
+V7: 20 manually reviewed titles are pinned first after contact-sheet review.
 
 No direct TikTok/Instagram/Reddit downloads. Commons video2commons mirrors
 with recorded social origin are the rights-documented source. No legal opinion,
@@ -129,7 +130,72 @@ VIRAL_QUERIES = [
     'caught on camera funny filetype:video',
     'FailArmy filetype:video',
     'America Funniest filetype:video',
+    'intitle:blooper filetype:video',
+    'intitle:wipeout filetype:video',
+    'intitle:"epic fail" filetype:video',
+    'intitle:"funny cat" filetype:video',
+    'intitle:"funny dog" filetype:video',
+    'intitle:"pig race" filetype:video',
+    'intitle:kitten filetype:video',
+    'intitle:puppies filetype:video',
 ]
+
+# V7 curated pin: 20 exact Commons titles chosen after manual contact-sheet
+# review of the v6 sheet. Replaces the three off-brand v6 picks (an old paper
+# print, an abstract animation, a military training clip) and one generic
+# rescue clip with four NEW cute/funny animal moments. Pinned first in the
+# download order; all still pass licence, safety, social-origin and V14
+# hard-exclude gates in acceptable().
+V7_PINNED_TITLES = (
+    "File:Instant karma for treating the drivethru employee.webm",
+    "File:Unexpected hatchlings (4887337135).webm",
+    "File:Male Polyphylla fullo beetle slipping from a Zea mays leaf in Dnipro by baby-bear.org.webm",
+    "File:Burmese Kitten Grooming Itself.webm",
+    "File:Three orange kittens following their mother.webm",
+    "File:Pig race 2005-08-20 16-04-34.crf18.webm",
+    "File:RopeJump 160m free fall, Aiglun, France.webm",
+    "File:FHP trooper rescues kitten stuck in sewer.webm",
+    "File:Squirrel Fishing.webm",
+    "File:Sleepy short eared owl on Seedskadee NWR (32574446276).webm",
+    "File:Red Squirrel eats a nut.webm",
+    "File:Bear inside Mammoth Lakes Library.webm",
+    "File:Teen dives on Summersville Lake Cliff Jump.-d8Jo xqxEn0.webm",
+    "File:Muntjac Deer Barking.webm",
+    "File:Base jump.webm",
+    "File:Dirt jump biking.webm",
+    "File:P-42 and Kittens (40008024811).webm",
+    "File:Red fox pups playing along Owens Bay Nature Trail (53369021529).webm",
+    "File:Young Raccoons Napping (33602520003).webm",
+    "File:Baby tropicbird vocalization (41376162461).webm",
+)
+V7_PINNED_INDEX = {t.lower(): i for i, t in enumerate(V7_PINNED_TITLES)}
+
+# V7 title-only blocks: institutional / military / abstract / old-film titles
+# that slipped through intitle:sports / rescue / amazing / comedy queries.
+# Applied to the title only, so descriptions mentioning e.g. a base do not
+# accidentally kill a good animal clip.
+V7_TITLE_BLOCK_SUBSTRINGS = (
+    "belt trick", "plot that failed", "12jun09", "h128247", "copy b",
+    "spartan density", "density training", "mcas iwakuni", "atago dog park",
+    "joint task force", "saving baby's life", "sports day", "sports championship",
+    "amazing race", "incredible race", "dragoon week", "soccer game",
+    "yokota", "incirlik", "sasebo", "pacific passport", "pacific spotlight",
+    "pacific update", "radio around the region", "carat indonesia",
+    "kadena air base", "airborne division", "oval office", "nicki minaj",
+    "search and rescue", "rescue squadron", "fuel tank rescue", "air rescue",
+    "updating with technology", "spca animal shelter", "mass ascent",
+    "kiganda dance", "folk dance of austria", "traditional dance",
+    "elephant walk", "wild horse auction", "horse assisted learning",
+    "red horse squadron", "goat herders", "yellow-eyed penguins",
+    "pygoscelis", "rhincodon", "bowhead whales", "pod of whales",
+    "spinner dolphins", "dolphins visit", "giant pacific octopus",
+    "octopus-shaped", "emso", "20th century-fox fanfare", "odocoileus",
+    "sambhar deer", "nagerhole", "owyhee river", "puma 34", "p-63 and sibling",
+    "falconry glove", "plano, tx", "puerto rican parrot", "pr parrot release",
+    "camp humphreys", "life skills in wiesbaden", "mountain shock",
+    "critter cam", "saylor creek", "birding at desoto", "piedras blancas",
+    "elephant seal", "sykes monkey",
+)
 
 # V14 20 titles — HARD EXCLUDE (owner rejected reuse). Lowercase substrings.
 V14_EXCLUDE_SUBSTRINGS = [
@@ -398,6 +464,8 @@ def acceptable(page, meta):
         return False
     if v16_blocked(title, meta) is not None:
         return False
+    if any(b in low for b in V7_TITLE_BLOCK_SUBSTRINGS):
+        return False
     blob = " ".join([title, meta.get("description", ""), meta.get("categories", ""),
                      meta.get("credit", "")])
     ok, blocked, _ = safety_gate(blob)
@@ -599,7 +667,9 @@ def main():
     # Prefer funny titles first (karma/prank/trick/fail), then social-origin,
     # then on-brand, then small files. Funny-first puts Instant karma #1
     # (boost=0 but funny_score=2) ahead of boost=1 animal titles.
-    pool.sort(key=lambda x: (-x["funny_score"], -x["social_boost"], -x["priority"], x["size"] or 1 << 30))
+    pool.sort(key=lambda x: (V7_PINNED_INDEX.get(x["title"].lower(), 999),
+                             -x["funny_score"], -x["social_boost"], -x["priority"],
+                             x["size"] or 1 << 30))
     accepted, failures = [], []
     seen_norm = set()
     for cand in pool:
