@@ -217,6 +217,45 @@ def cap_attempt(vid):
             "words": len(re.findall(r"\b[\w'-]+\b", txt))}
 
 
+
+PHRASE_BUCKETS = {
+    "sequel_or_next": r"\b(part\s*2|part two|next (video|part|episode)|more of this|do more|make more)\b",
+    "did_not_know": r"\b(i (never|didn'?t) kn(e|o)w|had no idea|never knew|til that|today i learned|tIL)\b",
+    "correction_claim": r"\b(actually|wrong|incorrect|not true|false|misleading|you forgot|umm actually)\b",
+    "ask_how_made": r"\b(how (did|do) you (make|animate|edit)|what (app|software|program)|which (app|software)|blender|after effects)\b",
+    "country_request": r"\b(do|make|cover|please do)\b.{0,40}\b(country|countries|state|india|china|usa|america|africa|europe|brazil|russia)\b",
+    "personal_tie": r"\b(i (live|am from|was born)|my (country|city|town|state)|here in)\b",
+    "map_nerd": r"\b(border|enclave|exclave|parallel|meridian|projection|cartograph)\w*\b",
+}
+
+
+def mine_comments(vid, max_results=20):
+    """Public commentThreads, relevance order. Counts are of FETCHED comments only."""
+    try:
+        d = client._api("commentThreads", {"part": "snippet", "videoId": vid,
+                                          "maxResults": max_results, "order": "relevance",
+                                          "textFormat": "plainText"}, "commentThreads")
+    except Exception as e:  # noqa: BLE001
+        return {"id": vid, "status": "error", "detail": repr(e)[:160], "fetched": 0, "buckets": {}}
+    texts = []
+    for it in d.get("items", []) or []:
+        sn = ((it.get("snippet") or {}).get("topLevelComment") or {}).get("snippet") or {}
+        t = (sn.get("textDisplay") or "").strip()
+        if t:
+            texts.append(t)
+    if not texts:
+        return {"id": vid, "status": "no_comments_returned", "fetched": 0, "buckets": {}}
+    buckets = {}
+    for name, rx in PHRASE_BUCKETS.items():
+        n = sum(1 for t in texts if re.search(rx, t, re.I))
+        buckets[name] = {"n": n, "share": round(n / len(texts), 3)}
+    lenses = sum(1 for t in texts if len(re.findall(r"\b\w+\b", t)) >= 25)
+    questions = sum(1 for t in texts if "?" in t)
+    return {"id": vid, "status": "ok", "fetched": len(texts), "buckets": buckets,
+            "questions": questions, "long_comments": lenses,
+            "sample": [t[:220] for t in texts[:5]]}
+
+
 def main():
     t0 = time.time()
     lanes_out, all_ids = [], []
@@ -291,6 +330,25 @@ def main():
                   "duration_seconds": r["duration_seconds"]})
         caps.append(c)
 
+    cm = []
+    for r in [x for x in allv if x["views"] >= 2_000_000][:12]:
+        c = mine_comments(r["id"])
+        c.update({"title": r["title"], "channel": r["channel"], "views": r["views"],
+                  "duration_seconds": r["duration_seconds"]})
+        cm.append(c)
+    agg = defaultdict(int)
+    fetched = 0
+    for c in cm:
+        fetched += c.get("fetched", 0)
+        for k, v in (c.get("buckets") or {}).items():
+            agg[k] += v["n"]
+    comment_agg = {"videos_attempted": len(cm), "comments_fetched": fetched,
+                   "order": "relevance, max 20 per video", "bucket_counts": dict(agg),
+                   "bucket_share_of_fetched": {k: round(v / fetched, 3) for k, v in agg.items()} if fetched else {},
+                   "boundary": ("Shares are of FETCHED relevance-ordered comments only, not of all "
+                                "viewers; the silent majority is invisible. No sentiment scoring, no "
+                                "demographic inference.")}
+
     run = {
         "generated_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "key_present": True, "secret_value_printed_or_stored": False,
@@ -300,6 +358,7 @@ def main():
         "channels_deep": len(catalogue), "catalogue_videos": sum(c["stats"].get("n", 0) for c in catalogue.values()),
         "niche_outliers_3x": len(nic_out),
         "thumbnail_stats": len(thumbs), "caption_attempts": len(caps),
+        "comments_fetched": comment_agg["comments_fetched"],
         "caption_status_counts": dict(Counter(c["status"] for c in caps)),
         "quota_used_approx": client.BUDGET.state.get("used", 0),
         "quota_calls": dict(client.BUDGET.state.get("calls", {})),
@@ -318,6 +377,8 @@ def main():
                                   "outlier_cross": {"outliers": stats(nic_out), "rest": stats(rest)}})
     save("thumbnails_v20.json", {"count": len(thumbs), "rows": thumbs})
     save("captions_v20.json", {"count": len(caps), "attempts": caps})
+    save("comments_v20.json", {"aggregate": comment_agg, "videos": cm})
+    log(f"comments fetched {comment_agg['comments_fetched']} across {len(cm)} videos; buckets {comment_agg['bucket_counts']}")
     log(f"done in {run['elapsed_s']}s — {run['unique_videos']} videos, {len(catalogue)} channels, "
         f"{len(nic_out)} outliers, {len(thumbs)} thumbs, captions {run['caption_status_counts']}")
     print(json.dumps(run, indent=1))
