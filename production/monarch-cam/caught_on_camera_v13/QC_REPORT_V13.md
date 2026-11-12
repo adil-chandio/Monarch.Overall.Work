@@ -1,4 +1,4 @@
-# V14 technical QC
+# V15 technical QC
 
 Technical pass: **True**. This is NOT creative approval, legal clearance, or human sign-off.
 
@@ -19,10 +19,10 @@ Technical pass: **True**. This is NOT creative approval, legal clearance, or hum
 - `no_static_cards_or_diagrams`: PASS
 - `english_only`: PASS
 
-- bytes: 55884606
-- sha256: `72a335bf3e0e404039de0e2b9b891361a0a5066642b7dc8ede59a3f41480bf01`
+- bytes: 56249199
+- sha256: `0e6c0c1c5db20453034fe13c843b91ffd2b8f512ad311d6d4c7168b0653ced11`
 - duration: 540.0 s
 - frames: 16200
-- loudness: -14.1 LUFS
-- captions: 107 cues
+- loudness: -14.14 LUFS
+- captions: 114 cues
 

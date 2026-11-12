@@ -1,4 +1,4 @@
-# V14 clip credits and rights ledger
+# V15 clip credits and rights ledger
 
 All 20 clips are original Wikimedia Commons namespace-6 file pages with PD / CC0 / CC BY 3.0 / CC BY 4.0 commercial-reuse metadata recorded by the live Commons API. These are NOT unverified Instagram / TikTok / Reddit / Twitter / Dailymotion reposts. No legal opinion, no monetisation claim, no human legal review, no upload/publish.
 
