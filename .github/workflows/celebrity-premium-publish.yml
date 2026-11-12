@@ -101,10 +101,17 @@ jobs:
           path: ${{ runner.temp }}/sha256.txt
           retention-days: 2
           if-no-files-found: error
-      - name: Upload verified cut to the draft release
+      - name: Create a new draft and upload the verified cut
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh release upload celebrity-3d-cycles-upgrade --repo "$GH_REPO" --clobber \
+          set -euo pipefail
+          tag=celebrity-3d-cycles-final
+          if ! gh release view "$tag" --repo "$GH_REPO" >/dev/null 2>&1; then
+            gh release create "$tag" --repo "$GH_REPO" --target "$GITHUB_SHA" --draft --prerelease \
+              --title 'Fictional celebrity — Cycles 3D upgrade' \
+              --notes-file showreel/celebrity_premium_3d/RELEASE_NOTES.md
+          fi
+          gh release upload "$tag" --repo "$GH_REPO" --clobber \
             "$RUNNER_TEMP/celebrity-cycles-3d-upgrade.mp4" showreel/celebrity_premium_3d/ASSET_CREDITS.txt
