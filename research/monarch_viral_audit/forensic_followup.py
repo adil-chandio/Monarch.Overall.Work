@@ -1,18 +1,19 @@
 """Follow-up API inventory and *unverified* Gemini YouTube-input descriptions.
 
-Public thumbnails and caption files, if accessible, go in an ephemeral review
-zip, never committed to this repository. No video is downloaded. Captions are
+Public thumbnails go in a review zip, not committed to this repository. The
+workflow uploads that zip as a repository Git blob for review; provider retention
+is not guaranteed to be short. Caption files, if any, stay in a local temporary
+directory and are not included in the zip. No video is downloaded. Captions are
 requested without authentication or bypassing access controls. Credentials are
-never printed. Public comments are anonymised in the local working data.
+never printed. Future comment receipts contain only aggregate counts, not text
+or author identifiers.
 """
 from __future__ import annotations
 import datetime as dt
 import hashlib
-import html
 import json
 import os
 from pathlib import Path
-import re
 import statistics
 import subprocess
 import tempfile
@@ -21,9 +22,9 @@ import urllib.error
 import urllib.request
 import zipfile
 try:
-    from .collect_youtube import API, before_cutoff, compact_channel, compact_video
+    from .collect_youtube import API, before_cutoff, before_timestamp, compact_channel, compact_video
 except ImportError:
-    from collect_youtube import API, before_cutoff, compact_channel, compact_video
+    from collect_youtube import API, before_cutoff, before_timestamp, compact_channel, compact_video
 
 ROOT=Path(__file__).resolve().parent
 META_OUT=Path('/tmp/monarch-forensic-followup.json')
@@ -68,9 +69,9 @@ PROMPT=(
 
 
 def choose_median(rows):
-    """A typical 8–60 s item >=14 days old at the trusted publication cutoff."""
+    """A typical 8–60 s item published strictly before the 14-day boundary."""
     eligible=[v for v in rows if v.get('views') is not None and v.get('duration_seconds') is not None
-              and 8<=v['duration_seconds']<=60 and v.get('published_at','')<'2026-10-23T00:00:00Z']
+              and 8<=v['duration_seconds']<=60 and before_timestamp(v.get('published_at'), '2026-10-23T00:00:00Z')]
     if not eligible:
         eligible=[v for v in rows if v.get('views') is not None and v.get('duration_seconds') is not None
                   and 8<=v['duration_seconds']<=60]
@@ -78,6 +79,18 @@ def choose_median(rows):
     ordered=sorted(eligible,key=lambda v:(v['views'],v['id']))
     midpoint=statistics.median(v['views'] for v in ordered)
     return min(ordered,key=lambda v:(abs(v['views']-midpoint),v['id'])),len(ordered)
+
+
+def summarize_comments(vid, payload):
+    """Discard individual public comments/identifiers before any file output."""
+    items = payload.get('items', [])
+    mentions = 0
+    for thread in items:
+        snippet = thread.get('snippet', {}).get('topLevelComment', {}).get('snippet', {})
+        text = (snippet.get('textDisplay') or '')[:500]
+        mentions += 'thumbnail' in text.lower()
+    return {'video_id': vid, 'status': 'ok', 'returned': len(items),
+            'comment_text_not_committed': True, 'mentions_thumbnail_case_insensitive': mentions}
 
 
 def get_channel_sample(api,cid,purpose):
@@ -168,7 +181,7 @@ def main():
             if v:
                 label=s['channel']['title']+': sampled ordinary upload selected by median'
                 targets.append((v['id'],label));auto_choices.append({'channel_id':cid,'video_id':v['id'],
-                   'eligible_count':n,'fallback_used':v.get('published_at','')>='2026-10-23T00:00:00Z', 'selection_rule':'nearest median views of sampled 8–60s uploads published before 2026-10-23; fallback any sampled 8–60s if none'})
+                   'eligible_count':n,'fallback_used':not before_timestamp(v.get('published_at'), '2026-10-23T00:00:00Z'), 'selection_rule':'nearest median views of sampled 8–60s uploads published before 2026-10-23; fallback any sampled 8–60s if none'})
 
     descriptions=[];thumbs=[];comment_rows=[];caption_rows=[]
     with tempfile.TemporaryDirectory(prefix='monarch-research-') as td:
@@ -200,19 +213,16 @@ def main():
             if obj is None:
                 comment_rows.append({'video_id':vid,'status':'error','http_status':api.calls[-1]['http_status'],'reason':api.calls[-1]['reason']})
             else:
-                # Public text without author names or identifiers; retained only for manual
-                # review and stripped before the working report is committed to Git.
-                items=[]
-                for thread in obj.get('items',[]):
-                    c=thread.get('snippet',{}).get('topLevelComment',{}).get('snippet',{})
-                    items.append({'text':(c.get('textDisplay') or '')[:500],
-                                  'like_count':c.get('likeCount'),'published_at':c.get('publishedAt')})
-                comment_rows.append({'video_id':vid,'status':'ok','returned':len(items),'comments':items})
+                # Public comment text can identify a commenter indirectly; compute
+                # aggregate counts in memory and never write individual text.
+                comment_rows.append(summarize_comments(vid, obj))
         for vid in CAPTION_TARGETS:
             c=captions_probe(vid,tmp/'subs');caption_rows.append(c)
             print('captions',vid,c['status'],flush=True)
         with zipfile.ZipFile(REVIEW_ZIP,'w',compression=zipfile.ZIP_DEFLATED) as z:
-            for p in sorted(tmp.rglob('*')):
+            # Only thumbnails are transferable for visual review; do not copy
+            # any downloaded caption files into the GitHub blob receipt.
+            for p in sorted((tmp/'thumbs').glob('*')):
                 if p.is_file():z.write(p,p.relative_to(tmp))
 
     follow={

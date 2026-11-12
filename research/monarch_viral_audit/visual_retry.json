@@ -1,0 +1,127 @@
+{
+  "method": "Bounded retries after transient HTTP 503; model outputs are unverified sampled descriptions, not inspected frames or exact scripts. Overlap consistency does not prove truth.",
+  "runner_reported_utc": "2026-11-12T19:11:08.176139+00:00",
+  "visual_descriptions": [
+    {
+      "video_id": "O68pHy2gRSw",
+      "label": "retry lower-view stickman day",
+      "requested_window_seconds": [
+        0,
+        20
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1871,
+        "candidatesTokenCount": 230,
+        "totalTokenCount": 2101,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1733
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Here is the requested information based on the provided video:\n\n**(1) Visible subjects and setting**\nThe video features a black stick figure character. The settings include a bedroom, a bathroom with a mirror, a kitchen/dining area, a city street, and an office workspace.\n\n**(2) Broad sequence**\nThe stick figure wakes up in a bedroom, brushes its teeth in a bathroom, eats breakfast, walks down a city street, works at a computer, and finally returns to the bedroom to sleep.\n\n**(3) Apparent character/object motion, framing and transitions**\nThe video uses a series of static shots, each representing a different location or time of day. Transitions between these scenes are achieved through quick cuts to black. Within each scene, the stick figure performs a repetitive action, such as moving its arm to turn off an alarm, brush its teeth, or type on a keyboard.\n\n**(4) Unknowns**\nThe specific nature of the stick figure's job is not shown, only that it involves typing at a computer. The identities of other stick figures seen on the city street are not established.",
+      "attempt": 1
+    },
+    {
+      "video_id": "G-qnKRnnnAI",
+      "label": "retry ordinary Mischief upload",
+      "requested_window_seconds": [
+        0,
+        31
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 2874,
+        "candidatesTokenCount": 323,
+        "totalTokenCount": 3197,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 2736
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "The video is a static shot of three individuals sitting at a table with two plates of liquid in front of them.\n\n**1. Visible subjects and setting**\nThe scene features three individuals wearing soccer jerseys. The person on the left wears a green jersey, the person in the middle wears a red jersey, and the person on the right wears a blue and red striped jersey. They are seated at a marble-patterned table in front of a colorful, multi-paneled wall.\n\n**2. Broad sequence**\nThe video begins with the person on the left holding a skewer of colorful, round, fuzzy objects. The person on the right holds a single, smaller, white fuzzy object. Throughout the video, the individuals take turns dipping these objects into the liquid on the plates, which causes the objects to dissolve or transform into different items, such as a dollar bill, a donut, and a small, dark, fish-like object. The individuals react with surprise and laughter as these transformations occur.\n\n**3. Apparent character/object motion, framing and transitions**\nThe camera remains in a fixed, static position throughout the video. The primary motion consists of the individuals’ hands moving the skewers and objects into and out of the liquid on the plates. The objects appear to change form instantaneously upon contact with the liquid.\n\n**4. Unknowns**\nThe specific nature of the liquid in the plates is not visible. It is unclear how the objects transform upon contact with the liquid, as the process is not shown in detail. The identities of the individuals are not explicitly stated.",
+      "attempt": 1
+    },
+    {
+      "video_id": "fMrGLuNe67U",
+      "label": "independent repeated bridge opening",
+      "requested_window_seconds": [
+        0,
+        5
+      ],
+      "requested_fps": 3,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1254,
+        "candidatesTokenCount": 227,
+        "totalTokenCount": 1481,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1116
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "This video shows a 3D animation of the construction of a bridge pillar in the middle of a body of water.\n\n1. **Visible subjects and setting:** The setting is a large body of water under a clear sky. A 3D-rendered bridge pillar is the central subject.\n2. **Broad sequence:** The video begins with a finished bridge pillar and its supporting structure. The animation then reverses, showing the pillar being dismantled or constructed in reverse, starting with the removal of the pillar's base and ending with a crane lowering a single, long, thin pole into the water.\n3. **Apparent character/object motion, framing and transitions:** The camera remains in a static, slightly elevated position throughout the video. The motion is entirely within the animation, showing the pillar and its base being removed or constructed in reverse. The transition is a continuous, smooth animation.\n4. **Unknowns:** It is unclear if the video is meant to show the construction or the demolition of the bridge pillar, as the animation is played in reverse. The specific type of bridge or the location is not identified.",
+      "attempt": 1
+    },
+    {
+      "video_id": "F1rTsvWTbZc",
+      "label": "independent repeated map opening",
+      "requested_window_seconds": [
+        0,
+        5
+      ],
+      "requested_fps": 3,
+      "status": "error",
+      "error_type": "TimeoutError",
+      "attempt": 1
+    }
+  ],
+  "monarchs_edit_channel": {
+    "id": "UCW8ZE5m7AjINN9EzpxNYGCA",
+    "url": "https://www.youtube.com/channel/UCW8ZE5m7AjINN9EzpxNYGCA",
+    "title": "MONARCHs Edit",
+    "handle": "@monarchsedit",
+    "created_at": "2026-01-16T11:33:23.57416Z",
+    "public_subscribers": 1460,
+    "hidden_subscribers": false,
+    "public_video_count": 9,
+    "public_channel_views": 632356,
+    "uploads_playlist": "UUW8ZE5m7AjINN9EzpxNYGCA"
+  },
+  "api_call_receipts": [
+    {
+      "resource": "channels",
+      "http_status": 200,
+      "reason": null
+    }
+  ]
+}

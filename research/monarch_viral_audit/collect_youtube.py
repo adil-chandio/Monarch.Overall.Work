@@ -63,16 +63,32 @@ KNOWN_VIDEOS = [
 ]
 
 
-def duration_seconds(value: str) -> int | None:
-    match = re.fullmatch(r'P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?', value or '')
-    if not match:
+def duration_seconds(value: str) -> int | float | None:
+    # YouTube uses ISO 8601 durations. A whole-day duration may omit the T
+    # component; PT and P alone are not valid durations.
+    match = re.fullmatch(r'P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?', value or '')
+    if not match or (value or '').endswith('T') or not any(part is not None for part in match.groups()):
         return None
-    day, hour, minute, second = (int(x or 0) for x in match.groups())
-    return day*86400 + hour*3600 + minute*60 + second
+    day, hour, minute, second = match.groups()
+    total = int(day or 0)*86400 + int(hour or 0)*3600 + int(minute or 0)*60 + float(second or 0)
+    return int(total) if total.is_integer() else total
+
+
+def before_timestamp(published: str | None, exclusive_end: str) -> bool:
+    # String comparison mishandles timestamps exactly at a boundary when one
+    # includes fractional seconds. Parse offsets and reject naive timestamps.
+    if not isinstance(published, str) or not isinstance(exclusive_end, str) or not published:
+        return False
+    try:
+        value = dt.datetime.fromisoformat(published.replace('Z', '+00:00'))
+        cutoff = dt.datetime.fromisoformat(exclusive_end.replace('Z', '+00:00'))
+        return value.tzinfo is not None and cutoff.tzinfo is not None and value < cutoff
+    except (TypeError, ValueError):
+        return False
 
 
 def before_cutoff(published: str | None) -> bool:
-    return bool(published and published < TRUSTED_END)
+    return before_timestamp(published, TRUSTED_END)
 
 
 def chunks(values, count=50):

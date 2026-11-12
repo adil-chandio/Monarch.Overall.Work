@@ -6,6 +6,7 @@
   "search_unique_ids": 393,
   "resolved_videos_total": 780,
   "resolved_channels_total": 319,
+  "broad_records_at_least_1m_views": 187,
   "selected_channel_samples": 17,
   "exact_celebrity_queries": 2,
   "exact_celebrity_unique_ids": 4,
@@ -221,11 +222,26 @@
   "monarchs_edit_laser_share_of_sum": 0.922417,
   "followup_runner_reported_utc": "2026-11-12T19:05:38.341855+00:00",
   "followup_channel_samples": 4,
+  "followup_resolved_videos": 103,
+  "distinct_video_ids_across_snapshots": 881,
   "model_windows": 20,
   "model_windows_ok": 18,
   "model_target_videos": 13,
   "thumbnail_successes": 13,
   "caption_statuses": {
     "blocked_bot_verification": 5
-  }
+  },
+  "retry_model_windows": 4,
+  "retry_model_windows_ok": 3,
+  "retry_statuses": {
+    "error": 1,
+    "ok": 3
+  },
+  "distinct_video_ids_with_model_response": 13,
+  "page_extractor_selected_video_ids": 25,
+  "page_extractor_transcript_sections_returned": 20,
+  "page_extractor_transcript_warning": "Returned text not independently audio-verified; source and completeness unknown.",
+  "mischief_provider_dated_displayed_subscriber_difference": 80000,
+  "mischief_provider_dated_channel_view_difference": 399202505,
+  "third_party_growth_warning": "Retrospective provider rows, not verified current growth; date conflict and public rounding apply."
 }

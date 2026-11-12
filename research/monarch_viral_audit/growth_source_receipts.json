@@ -1,0 +1,29 @@
+{
+  "trusted_session_date": "2026-11-05",
+  "method": "Third-party historical public-count tables accessed through Arena page retrieval. The rendered pages also contained rows or updates dated 2026-11-12, conflicting with the trusted date. Historical rows are retrospective third-party records, not independently verified YouTube Studio data or verified current counts; they may be revised. Public subscribers are rounded.",
+  "sources": [
+    {
+      "channel_id": "UC0Badcq36RBDHN-e3N1Papg",
+      "channel_title": "Mischief Time",
+      "provider": "Social Blade",
+      "url": "https://socialblade.com/youtube/handle/mtime4",
+      "recorded_rows": [
+        {"date": "2026-10-29", "displayed_public_subscribers": 9780000, "channel_views": 17566483714},
+        {"date": "2026-11-05", "displayed_public_subscribers": 9860000, "channel_views": 17965686219}
+      ],
+      "displayed_subscriber_step_difference": 80000,
+      "public_channel_view_difference": 399202505,
+      "interpretation": "A large established channel's displayed public counters rose between provider-dated rows; no attribution to a particular video, verified net subscriber gain, exact daily velocity, current trend, income or small-channel expectation is justified."
+    },
+    {
+      "channel_id": "UChFs0d8syPIK6x8q4C6BrJw",
+      "channel_title": "Nutshell Animations",
+      "provider": "vidIQ",
+      "url": "https://vidiq.com/youtube-stats/channel/@nutshellanimations/",
+      "recorded_month": "2026-10",
+      "reported_displayed_subscriber_change": 100000,
+      "reported_channel_view_change": 120233762,
+      "interpretation": "Retrospective provider-reported October change. The subscriber change reflects rounded display steps, not a verified exact increase; the page was rendered as updated 2026-11-12, after the trusted date."
+    }
+  ]
+}
