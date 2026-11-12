@@ -1,0 +1,187 @@
+name: Render deluxe 3D celebrity film
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/celebrity-deluxe-3d.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CINEMA_ASSETS: /tmp/cinema-assets
+      CINEMA_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libgl1 libxrender1 libxi6 libxkbcommon0 libsm6 libxfixes3 libx11-6 libxxf86vm1 libegl1 libxrandr2 libxinerama1 libxcursor1 libxft2 ffmpeg fonts-dejavu-core
+          python -m pip install --quiet 'bpy==4.2.23' 'numpy==2.2.6' 'Pillow==13.0.0' 'imageio-ffmpeg==0.8.1' 'pybullet==3.2.7'
+      - name: Fetch and verify assets
+        run: |
+          python showreel/celebrity_cinematic_3d/fetch_assets.py "$CINEMA_ASSETS"
+          python showreel/celebrity_deluxe_3d/fetch_assets.py "$CINEMA_ASSETS" --group visual
+      - name: Check pipeline, contacts and full-HD multi-set render
+        run: |
+          set -euo pipefail
+          free -h
+          python -m unittest discover -s showreel/celebrity_deluxe_3d/tests -v
+          python showreel/celebrity_deluxe_3d/probe_scene.py
+          python -u showreel/celebrity_deluxe_3d/render.py --width 1080 --samples 16 --stills 42,49.5 --out /tmp/preflight-stills > /tmp/preflight.log 2>&1 || { tail -150 /tmp/preflight.log; exit 1; }
+          grep -E '^(JOBS|FRAME|DONE)' /tmp/preflight.log
+          test "$(find /tmp/preflight-stills -name '*.png' | wc -l)" -eq 2
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: deluxe-preflight-log
+          path: /tmp/preflight.log
+          retention-days: 2
+          if-no-files-found: ignore
+  render:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 210
+    strategy:
+      fail-fast: false
+      max-parallel: 40
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39]
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CINEMA_ASSETS: /tmp/cinema-assets
+      CINEMA_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Blender and multimedia dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libgl1 libxrender1 libxi6 libxkbcommon0 libsm6 libxfixes3 libx11-6 libxxf86vm1 libegl1 libxrandr2 libxinerama1 libxcursor1 libxft2 ffmpeg fonts-dejavu-core
+          python -m pip install --quiet 'bpy==4.2.23' 'numpy==2.2.6' 'Pillow==13.0.0' 'imageio-ffmpeg==0.8.1' 'pybullet==3.2.7'
+      - name: Fetch and verify modeled assets
+        run: |
+          python showreel/celebrity_cinematic_3d/fetch_assets.py "$CINEMA_ASSETS"
+          python showreel/celebrity_deluxe_3d/fetch_assets.py "$CINEMA_ASSETS" --group visual
+      - name: Render 36 native full-HD frames
+        run: |
+          set -euo pipefail
+          shard=${{ matrix.shard }}
+          first=$(( shard * 36 ))
+          start=$(awk "BEGIN { print $shard * 1.5 }")
+          end=$(awk "BEGIN { print ($shard + 1) * 1.5 }")
+          python -u showreel/celebrity_deluxe_3d/render.py --width 1080 --samples 16 --start "$start" --end "$end" --out /tmp/frames > /tmp/render.log 2>&1 || { tail -200 /tmp/render.log; exit 1; }
+          grep -E '^(JOBS|FRAME|DONE)' /tmp/render.log
+          test "$(find /tmp/frames -name 'frame_*.png' | wc -l)" -eq 36
+          mkdir -p /tmp/clip
+          printf -v name '%02d' "$shard"
+          ffmpeg -hide_banner -loglevel error -y -framerate 24 -start_number "$first" -i /tmp/frames/frame_%05d.png -frames:v 36 -c:v libx264 -crf 15 -preset medium -pix_fmt yuv420p -an "/tmp/clip/$name.mp4"
+          test "$(ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 "/tmp/clip/$name.mp4")" = 36
+          ffmpeg -hide_banner -loglevel error -i "/tmp/clip/$name.mp4" -f null -
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: deluxe-render-log-${{ matrix.shard }}
+          path: /tmp/render.log
+          retention-days: 2
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: deluxe-clip-${{ matrix.shard }}
+          path: /tmp/clip/*.mp4
+          retention-days: 2
+          if-no-files-found: error
+          compression-level: 0
+  assemble:
+    needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install audio and caption tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install --quiet 'numpy==2.2.6' 'Pillow==13.0.0' 'imageio-ffmpeg==0.8.1' 'pybullet==3.2.7'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: deluxe-clip-*
+          path: /tmp/clips
+          merge-multiple: true
+      - name: Fetch verified soundtrack assets
+        run: python showreel/celebrity_deluxe_3d/fetch_assets.py /tmp/deluxe-audio --group audio
+      - name: Assemble the finished film
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/deliver
+          python showreel/celebrity_deluxe_3d/assemble.py /tmp/clips /tmp/deluxe-audio /tmp/deliver/celebrity-deluxe-3d.mp4
+          cp showreel/celebrity_deluxe_3d/ASSET_CREDITS.txt /tmp/deliver/ASSET_CREDITS.txt
+          cd /tmp/deliver
+          sha256sum celebrity-deluxe-3d.mp4 > SHA256SUMS.txt
+          ffprobe -v error -count_frames -show_streams -show_format -of json celebrity-deluxe-3d.mp4 > probe.json
+          python - <<'PY'
+          import json
+          p=json.load(open('probe.json'))
+          v=next(s for s in p['streams'] if s['codec_type']=='video')
+          a=next(s for s in p['streams'] if s['codec_type']=='audio')
+          assert (v['codec_name'],v['width'],v['height'],v['avg_frame_rate'],int(v['nb_read_frames']))==('h264',1080,1920,'24/1',1440),v
+          assert (a['codec_name'],a['sample_rate'],a['channels'])==('aac','48000',2),a
+          assert abs(float(p['format']['duration'])-60)<.05,p['format']['duration']
+          print('Verified native 1080x1920, 1440 frames, 60 seconds and stereo 48 kHz AAC')
+          PY
+          ffmpeg -hide_banner -loglevel error -i celebrity-deluxe-3d.mp4 -f null -
+          ffmpeg -hide_banner -nostats -i celebrity-deluxe-3d.mp4 -filter_complex ebur128=peak=true -f null - 2>&1 | tail -20
+          cat SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deluxe-film
+          path: |
+            /tmp/deliver/celebrity-deluxe-3d.mp4
+            /tmp/deliver/ASSET_CREDITS.txt
+            /tmp/deliver/SHA256SUMS.txt
+            /tmp/deliver/probe.json
+          retention-days: 2
+          if-no-files-found: error
+          compression-level: 0
+      - name: Store a checksum-verified review copy
+        id: blob
+        run: |
+          python - <<'PY'
+          import base64,hashlib,json,os,urllib.request
+          data=open('/tmp/deliver/celebrity-deluxe-3d.mp4','rb').read()
+          digest=hashlib.sha256(data).hexdigest()
+          payload=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode()
+          req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',data=payload,
+            headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          with urllib.request.urlopen(req,timeout=300) as response: blob=json.load(response)['sha']
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              print('sha='+blob,file=out); print('digest='+digest,file=out)
+          print('Review copy:',len(data),'bytes')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deluxe-review-${{ steps.blob.outputs.sha }}-${{ steps.blob.outputs.digest }}
+          path: /tmp/deliver/SHA256SUMS.txt
+          retention-days: 2
+          if-no-files-found: error
+      - name: Stage downloadable release
+        run: |
+          set -euo pipefail
+          tag=celebrity-3d-deluxe-2026
+          gh release create "$tag" --draft --prerelease --target "$GITHUB_SHA" --title "Fictional celebrity: deluxe 3D reconstruction" --notes-file showreel/celebrity_deluxe_3d/RELEASE_NOTES.md
+          gh release upload "$tag" /tmp/deliver/celebrity-deluxe-3d.mp4 /tmp/deliver/ASSET_CREDITS.txt /tmp/deliver/SHA256SUMS.txt

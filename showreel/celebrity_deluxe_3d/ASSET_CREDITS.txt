@@ -1,0 +1,86 @@
+Fictional celebrity — cinematic 3D pass: third-party credits
+
+The people and their motion clips are from Microsoft Rocketbox Avatar Library,
+Copyright (c) 2020 Microsoft, MIT License; adapted GLBs from Avatar Studio by
+Rohit Biradar. These are generic fictional characters, not likenesses of an
+actual celebrity. https://github.com/memoriesrohit/avatar-studio
+https://github.com/microsoft/Microsoft-Rocketbox
+
+The curbside car is “Fairheaven LT '80 - Low poly model” (listed by Kyard as
+“80s Generic midsize sedan - Low poly model”) by Daniel Zhabotinsky
+(@DanielZhabotinsky), Creative Commons Attribution 4.0 International (CC BY 4.0):
+https://sketchfab.com/3d-models/e2678da920cc4be68dbc193727919ffb
+https://creativecommons.org/licenses/by/4.0/
+Adapted to GLB, restructured and texture-compressed by Kyard, with the car
+paint changed and badge/number-plate meshes omitted for this video:
+https://github.com/yixuanchen189756-source/Kyard-assets#director3d-models-v2
+This attribution does not imply endorsement by the original author or Kyard.
+
+The following Poly Haven assets are CC0 1.0:
+- Painted Wooden Nightstand by Kirill Sannikov:
+  https://polyhaven.com/a/painted_wooden_nightstand
+- Modern Arm Chair 01 by Vibrant Nordic:
+  https://polyhaven.com/a/modern_arm_chair_01
+  These two converted furniture files are documented by INTERIO:
+  https://github.com/Sanikaa205/INTERIO/blob/main/public/assets/furniture/LICENSES.md
+- Potted Plant 01 by Rico Cilliers, Street Lamp 01 by Josh Dean, and Ceramic
+  Vase 01, and the following texture materials: painted_plaster_wall,
+  oak_veneer_01, wood_floor, concrete_floor_02, marble_01, weathered_planks,
+  rough_linen. The converted, compressed files are from Kyard:
+  https://github.com/yixuanchen189756-source/Kyard-assets#director3d-models-v2
+  https://polyhaven.com/a/potted_plant_01
+  https://polyhaven.com/a/street_lamp_01
+  https://polyhaven.com/a/ceramic_vase_01
+Poly Haven license: https://polyhaven.com/license
+
+Rocketbox MIT License
+
+Copyright (c) 2020 Microsoft
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Additional assets for the deluxe 3D revision
+
+- Throw Pillows 01 geometry by Serhii Khromov, Poly Haven, CC0 1.0:
+  https://polyhaven.com/a/throw_pillows_01
+  Geometry-only GLB adaptation from https://github.com/peteteaa/myroom-
+- Sad Piano Chord Progression by michael_grinnell, CC0 1.0:
+  https://freesound.org/people/michael_grinnell/sounds/530977/
+- Camera Shutter by roachpowder, CC0 1.0:
+  https://freesound.org/people/roachpowder/sounds/170229/
+  The piano and shutter files were cut/normalized to MP3 by:
+  https://github.com/S3Electronics/anim-sounds
+- Film-premiere crowd walla by kyles, CC0 1.0:
+  https://freesound.org/people/kyles/sounds/455689/
+  Adapted as a loop by https://github.com/deadgamestudio/manif (16 s from 30 s,
+  normalized, mono, and crossfaded).
+- Highway from Bridge, Center by stephan, public-domain dedication:
+  https://commons.wikimedia.org/wiki/File:Highway_from_bridge_center.ogg
+  Adapted as a seamless loop by https://github.com/nathanjmetz/city.
+- Concrete and wood footsteps from Kenney Impact Sounds, CC0 1.0:
+  https://kenney.nl/assets/impact-sounds
+- Door close and fabric rustle from Kenney RPG Audio, CC0 1.0:
+  https://kenney.nl/assets/rpg-audio
+  These Kenney recordings were trimmed and normalized by
+  https://github.com/receptron/jinglescript/tree/main/samples/sfx.
+
+The above sounds are mixed, panned, faded and level-adjusted for this film.
+The concrete/wood steps and camera shutter are repeated in sync with the
+animation; no new spoken dialogue is represented as the characters' voices.
+The files' exact sources, Git blob identifiers and SHA-256s are in assets.json.
