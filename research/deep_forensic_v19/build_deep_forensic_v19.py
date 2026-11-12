@@ -232,7 +232,7 @@ def channel_stats(rows):
 def outliers(rows, k=3.0):
     """Videos >= k x the channel's own median. The real 'this one popped' set."""
     if len(rows) < 5:
-        return [], statistics.median([r["views"] for r in rows]) if rows else 0
+        return [], (statistics.median([r["views"] for r in rows]) if rows else 0)
     med = statistics.median([r["views"] for r in rows])
     out = [r for r in rows if med and r["views"] >= k * med]
     out.sort(key=lambda r: -r["views"])
@@ -299,7 +299,7 @@ def main():
             seen.add(cid)
             focus.append({"channel_id": cid, "why": "top_corpus_hit_count", "name": d["name"]})
     # 3) named winners (map / animation / long-form / farrier / science)
-    name_map = {d["name"]: cid for cid, d in ranked.items() if d["name"]}
+    name_map = {d["name"]: cid for cid, d in ranked if d.get("name")}
     for nm in FOCUS_NAMES:
         cid = name_map.get(nm)
         if cid and cid not in seen:
@@ -309,7 +309,9 @@ def main():
     log(f"  focus channels: {len(focus)}")
 
     chans, catalogue, all_rows = [], {}, []
+    failures = []
     for i, f in enumerate(focus, 1):
+      try:
         ch, pid = channel_by_id(f["channel_id"])
         if not ch:
             log(f"  [{i}/{len(focus)}] {f['channel_id']} unresolved")
@@ -339,6 +341,11 @@ def main():
         all_rows.extend(rows)
         log(f"  [{i}/{len(focus)}] {ch['title'][:28]:28s} uploads={len(rows):3d} med={stats.get('median',0):>11,} "
             f"outliers={len(outl):2d} short/med/long={stats.get('short_share')}/{stats.get('medium_share')}/{stats.get('long_share')}")
+      except Exception as e:  # noqa: BLE001
+        import traceback
+        failures.append({"channel_id": f["channel_id"], "name": f.get("name"), "error": repr(e)[:300]})
+        log(f"  [{i}/{len(focus)}] FAILED {f['channel_id']} {type(e).__name__}: {e}")
+        traceback.print_exc()
 
     # ---------- cross-channel aggregates
     outlier_ids = {o["id"] for c in catalogue.values() for o in c["outliers_ge_3x_channel_median"]}
@@ -382,6 +389,7 @@ def main():
         "quota_calls": dict(client.BUDGET.state.get("calls", {})),
         "quota_used_approx": client.BUDGET.state.get("used", 0),
         "elapsed_s": round(time.time() - started, 1),
+        "channel_failures": failures,
         "boundary": ("Public Data API metadata only. No competitor video/audio download, no frame "
                      "inspection, no private retention/CTR/RPM, no invented transcripts, no verified "
                      "growth ranking, no causal claim, no legal/human/upload/monetisation claim. "
