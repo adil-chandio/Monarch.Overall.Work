@@ -1,0 +1,87 @@
+name: V16 Viral social-origin 20-clip acquisition
+
+# 20 NEW viral funny/shocking Commons video2commons mirrors (YouTube/TikTok/
+# Dailymotion origin recorded in metadata). NOT V14 repeats. Live Commons API
+# search with viral queries, social-origin filter, V14 hard-excluded.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "v16-viral-trigger.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v16-viral-clips-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: System tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      - name: Python deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy Pillow requests
+
+      - name: Live viral Commons acquisition + objective hook windows
+        run: python research/caught_on_camera_v16/acquire_viral_v16.py
+
+      - name: HARD QC - final 20-clip selection
+        run: python research/caught_on_camera_v13/validate_clips_v13.py
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "=== viral windows ==="
+          ls -la research/caught_on_camera_v13/windows/curated_*.mp4 2>/dev/null | head -25 || true
+          echo "=== validation ==="
+          cat research/caught_on_camera_v13/review/validation_v13.json 2>/dev/null || true
+
+      - name: Upload evidence even if QC fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v16-viral-20-clip-evidence
+          path: |
+            research/caught_on_camera_v13/rights_ledger_curated_v13.json
+            research/caught_on_camera_v13/hook_windows_curated_v13.json
+            research/caught_on_camera_v13/selected_windows_v13.json
+            research/caught_on_camera_v13/review/validation_v13.json
+            research/caught_on_camera_v13/review/curated_contact_sheet_v13.jpg
+            research/caught_on_camera_v13/review/candidate_pool_v16.json
+          if-no-files-found: warn
+
+      - name: Commit viral windows + selection + QC
+        if: always()
+        run: |
+          git config user.name "monarch-yt-bot"
+          git config user.email "workadilchandio@gmail.com"
+          git add research/caught_on_camera_v13/windows \
+                  research/caught_on_camera_v13/review \
+                  research/caught_on_camera_v13/rights_ledger_curated_v13.json \
+                  research/caught_on_camera_v13/hook_windows_curated_v13.json \
+                  research/caught_on_camera_v13/selected_windows_v13.json \
+                  research/caught_on_camera_v16/acquire_viral_v16.py
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "feat(v16): 20 NEW viral social-origin windows [skip ci]"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }} || echo "::warning::push failed; evidence is in the run artifact"
