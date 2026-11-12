@@ -1,0 +1,113 @@
+name: V20 Map Niche - English US-first, 12 lanes + 25 channel catalogues
+
+# Niche-locked: map / geography only. 4 sub-themes x short/medium/long, then the top
+# channels' own catalogues, their 3x outliers, niche thumbnails and a caption attempt.
+# Public metadata + public thumbnails + public caption text. No video/audio download.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "v20-map-trigger.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v20-map-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve key secret (presence only; value masked)
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then
+            echo "::error::no key secret resolved - cannot be a real API-lane run"
+            exit 1
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          echo "key resolved (${#KEY} chars); value never printed or stored"
+
+      - name: Runtime deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy pillow
+
+      - name: V20 map niche deep dive
+        run: python research/map_niche_v20/build_map_niche_v20.py
+
+      - name: Diagnostics (always)
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          base = pathlib.Path('research/map_niche_v20/api_evidence')
+          out = {}
+          for n in ('run_v20.json', 'channel_deep_v20.json', 'videos_v20.json'):
+              p = base / n
+              out[n] = 'MISSING' if not p.exists() else p.stat().st_size
+          if (base / 'run_v20.json').exists():
+              out['run'] = json.loads((base / 'run_v20.json').read_text())
+          if (base / 'channel_deep_v20.json').exists():
+              d = json.loads((base / 'channel_deep_v20.json').read_text())
+              out['channels'] = [{'name': k, 'n': v['stats'].get('n'), 'median': v['stats'].get('median'),
+                                  'outliers': len(v['outliers'])} for k, v in d['catalogue'].items()]
+          (base / 'diagnostics_v20.json').write_text(json.dumps(out, indent=1, ensure_ascii=False) + '\n')
+          print(json.dumps(out, indent=1)[:4000])
+          PY
+
+      - name: Commit V20 evidence
+        if: always()
+        run: |
+          git config user.name "monarch-forensic-bot"
+          git config user.email "forensic-bot@users.noreply.github.com"
+          git add research/map_niche_v20/api_evidence || true
+          if git diff --cached --quiet; then echo "no change"; else
+            git commit -m "chore(v20): map niche deep dive evidence [skip ci]"
+            git push origin HEAD:arena/2b012328-monarch-overall-work
+          fi
+
+      - name: HARD QC - V20 evidence must exist
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          base = pathlib.Path('research/map_niche_v20/api_evidence')
+          run = json.loads((base / 'run_v20.json').read_text())
+          assert run['key_present'] is True
+          assert run['secret_value_printed_or_stored'] is False
+          assert run['lanes'] == 12, run['lanes']
+          assert run['unique_videos'] >= 300, run['unique_videos']
+          assert run['channels_deep'] >= 15, run['channels_deep']
+          assert run['catalogue_videos'] >= 500, run['catalogue_videos']
+          vids = json.loads((base / 'videos_v20.json').read_text())
+          assert vids['count'] == run['unique_videos'], (vids['count'], run['unique_videos'])
+          deep = json.loads((base / 'channel_deep_v20.json').read_text())
+          by_id = {v['id'] for v in vids['videos']}
+          missing = sum(1 for c in deep['catalogue'].values() for o in c['outliers'] if o['id'] not in by_id)
+          assert missing == 0, missing
+          print('V20 HARD QC PASS')
+          PY
+
+      - name: Upload V20 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v20-map-evidence
+          path: research/map_niche_v20/api_evidence/
+          if-no-files-found: warn
