@@ -804,6 +804,8 @@ Next map: the lake, the peninsula, or the main street? Vote.
 
 ## 20. Editing & animation blueprint
 
+**Style test mojood hai:** `s1_animatic_v20.mp4` (58s, 9:16, 15fps) — ye ek **layout/pace animatic** hai jo sirf teen cheezein lock karta hai: (a) 9:16 me text kahan baithta hai bina UI ke neeche dabne, (b) 4–7s ka cut rhythm, (c) headline vs caption ka size ratio. Isme **na VO hai, na music, na asli geography** — shapes schematic blocks hain, Natural Earth geometry nahi. Yani ye "video" nahi, **graphic system ka test** hai. Jab asli map data aayega, wahi layout us par baithega.
+
 | Element | Spec | Kyun (evidence) |
 |---|---|---|
 | Aspect | 16:9 long/medium, 9:16 shorts | lane data |
@@ -902,6 +904,10 @@ Main in paanch me se kisi par bhi **aap ke bina** aage nahi barhunga — kyunki 
 | `api_evidence/google_suggest_v20.json` | autocomplete probes (ordered demand signal) |
 | `EPISODE_01_PLAN_V20.json` | machine-readable episode plan (9 chapters, VO blocks, metadata, shorts, medium) |
 | `SHOTLIST_EP01_V20.csv` | **128 timed shots** for Ep 01 (in/out, set, camera, 2.5D vs 3D hero, text, SFX) |
+| `render_s1_animatic_v20.py` | S1 ka layout/pace test renderer (PIL frames → ffmpeg). Reproducible, no third-party assets |
+| `s1_animatic_v20.mp4` | **58s, 9:16, style-test animatic** — composition/pacing/text-size lock (South: schematic shapes, no VO, not final art) |
+| `s1_poster.png` · `qa_contact_sheet.png` | animatic ke key frames (poster + 9-scene contact sheet) |
+| `thumb_v2_A.png` · `thumb_v2_B.png` | thumbnail layout mocks (A = kink close-up, B = enclave emphasis) |
 
 ---
 
