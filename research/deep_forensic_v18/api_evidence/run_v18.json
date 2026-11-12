@@ -1,0 +1,38 @@
+{
+  "generated_utc": "2026-11-12T15:27:40Z",
+  "key_present": true,
+  "secret_value_printed_or_stored": false,
+  "lanes": 24,
+  "short_bucket_lanes": 6,
+  "medium_bucket_lanes": 6,
+  "long_bucket_lanes": 6,
+  "recent_lanes": 6,
+  "lane_rows": 1124,
+  "unique_videos": 2352,
+  "channels_resolved": 801,
+  "growing_channels_sampled": 45,
+  "recent_upload_channels": 45,
+  "most_popular_regions": 4,
+  "video_categories": 32,
+  "million_view_videos": 720,
+  "ten_million_videos": 245,
+  "candidate_videos_after_title_safety": 715,
+  "description_forensics": 715,
+  "deep_teardowns": 40,
+  "comments_videos": 23,
+  "transcript_attempts": 12,
+  "transcript_status_counts": {
+    "error": 12
+  },
+  "thumbnail_stats": 40,
+  "quota_used_approx": 2550,
+  "quota_calls": {
+    "videoCategories": 1,
+    "search": 24,
+    "videos": 64,
+    "channels": 17,
+    "playlistItems": 45,
+    "commentThreads": 23
+  },
+  "boundary": "Public Data API fields + public metadata only. No competitor video/audio download, no video-frame inspection, no private retention/CTR/RPM, no invented transcripts, no verified growth ranking, no causal virality claim, no legal opinion, no upload/publish/monetisation claim, no guaranteed views, no human approval, no perfection claim. Creator-published descriptions are synopses / chapter metadata, NOT verbatim spoken transcripts."
+}
