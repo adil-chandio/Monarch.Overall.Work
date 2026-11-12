@@ -772,8 +772,8 @@ def composite_hair_raytraced(img, alpha, zc, hair_prims, frame, eye, target,
 # indistinguishable from an open eye, and it never intersects the mesh.
 # Eye geometry in metres, in the head's own frame (eye line at y = 0):
 #   half-width 22 mm, half-height 7.5 mm, sclera pale, iris 8 mm across.
-EYE_HALF_W = 0.0132
-EYE_HALF_H = 0.0042
+EYE_HALF_W = 0.0102
+EYE_HALF_H = 0.0032
 EYE_POS = {1: np.array([0.0220, -0.0062, 0.0430], np.float32),
            -1: np.array([-0.0220, -0.0062, 0.0430], np.float32)}
 
@@ -850,9 +850,9 @@ def paint_eyes(col, p, n, glow=1.0, open_amount=1.0):
         out = out * (1.0 - 0.90 * m_open)[:, None] + \
             np.array([0.032, 0.014, 0.020], np.float32) * (0.90 * m_open)[:, None]
         # sclera: pale, slightly warm, filling the opening
-        m_scl = _soft(ra, 0.94, 0.80) * front
+        m_scl = _soft(ra, 0.92, 0.74) * front
         out = out * (1.0 - 0.85 * m_scl)[:, None] + \
-            np.array([0.105, 0.086, 0.090], np.float32) * (0.85 * m_scl)[:, None]
+            np.array([0.072, 0.060, 0.064], np.float32) * (0.85 * m_scl)[:, None]
         # upper lid line: a shadow arc, which is what makes a painted eye sit
         lid = _soft(np.abs(ra - 0.96), 0.26, 0.02) * front * (dy > -0.002)
         out = out * (1.0 - 0.55 * lid)[:, None]
