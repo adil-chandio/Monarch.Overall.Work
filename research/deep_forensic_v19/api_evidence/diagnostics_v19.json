@@ -1,0 +1,401 @@
+{
+ "run_v19.json": "823 bytes",
+ "channel_deep_v19.json": "358053 bytes",
+ "catalogue_videos_v19.json": "6026180 bytes",
+ "run": {
+  "generated_utc": "2026-11-12T19:46:31Z",
+  "key_present": true,
+  "secret_value_printed_or_stored": false,
+  "v18_source": "research/deep_forensic_v18/api_evidence",
+  "focus_channels_requested": 34,
+  "focus_channels_resolved": 34,
+  "catalogue_videos": 3229,
+  "outlier_videos_ge_3x": 427,
+  "channels_with_short_and_long": 20,
+  "quota_calls": {
+   "channels": 34,
+   "playlistItems": 66,
+   "videos": 66
+  },
+  "quota_used_approx": 166,
+  "elapsed_s": 185.8,
+  "channel_failures": [],
+  "boundary": "Public Data API metadata only. No competitor video/audio download, no frame inspection, no private retention/CTR/RPM, no invented transcripts, no verified growth ranking, no causal claim, no legal/human/upload/monetisation claim. 'Outlier' means >=3x that channel's own median views in the sampled catalogue."
+ },
+ "cross": {
+  "outliers_ge_3x": {
+   "bucket": "outlier",
+   "n": 427,
+   "median_views": 3323756,
+   "median_duration": 59,
+   "short_share": 0.77,
+   "medium_share": 0.096,
+   "long_share": 0.133,
+   "number_rate": 0.162,
+   "question_rate": 0.136,
+   "median_title_words": 8,
+   "median_desc_words": 51,
+   "chapter_ge3_rate": 0.08,
+   "caption_rate": 0.171,
+   "median_tag_count": 13,
+   "median_like_rate": 0.01305
+  },
+  "the_rest": {
+   "bucket": "rest",
+   "n": 2802,
+   "median_views": 73167,
+   "median_duration": 58,
+   "short_share": 0.809,
+   "medium_share": 0.108,
+   "long_share": 0.083,
+   "number_rate": 0.156,
+   "question_rate": 0.116,
+   "median_title_words": 8.0,
+   "median_desc_words": 39.0,
+   "chapter_ge3_rate": 0.055,
+   "caption_rate": 0.149,
+   "median_tag_count": 13.0,
+   "median_like_rate": 0.01723
+  },
+  "by_duration_bucket_outliers": {
+   "short": {
+    "bucket": "short",
+    "n": 329,
+    "median_views": 3700683,
+    "median_duration": 51,
+    "short_share": 1.0,
+    "medium_share": 0.0,
+    "long_share": 0.0,
+    "number_rate": 0.116,
+    "question_rate": 0.149,
+    "median_title_words": 7,
+    "median_desc_words": 18,
+    "chapter_ge3_rate": 0.0,
+    "caption_rate": 0.176,
+    "median_tag_count": 1,
+    "median_like_rate": 0.01703
+   },
+   "medium": {
+    "bucket": "medium",
+    "n": 41,
+    "median_views": 12372504,
+    "median_duration": 916,
+    "short_share": 0.0,
+    "medium_share": 1.0,
+    "long_share": 0.0,
+    "number_rate": 0.317,
+    "question_rate": 0.122,
+    "median_title_words": 8,
+    "median_desc_words": 104,
+    "chapter_ge3_rate": 0.22,
+    "caption_rate": 0.0,
+    "median_tag_count": 17,
+    "median_like_rate": 0.00673
+   },
+   "long": {
+    "bucket": "long",
+    "n": 57,
+    "median_views": 1020324,
+    "median_duration": 2474,
+    "short_share": 0.0,
+    "medium_share": 0.0,
+    "long_share": 1.0,
+    "number_rate": 0.316,
+    "question_rate": 0.07,
+    "median_title_words": 14,
+    "median_desc_words": 181,
+    "chapter_ge3_rate": 0.439,
+    "caption_rate": 0.263,
+    "median_tag_count": 20,
+    "median_like_rate": 0.00581
+   }
+  }
+ },
+ "channels": [
+  {
+   "name": "JayFindsThings",
+   "n": 72,
+   "median": 39892749,
+   "outliers": 15,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "Science and fun",
+   "n": 100,
+   "median": 7134315,
+   "outliers": 15,
+   "short": 0.76,
+   "long": 0.0
+  },
+  {
+   "name": "Vlad and Niki",
+   "n": 100,
+   "median": 6176947,
+   "outliers": 15,
+   "short": 0.09,
+   "long": 0.51
+  },
+  {
+   "name": "W Sound",
+   "n": 11,
+   "median": 14653321,
+   "outliers": 2,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "Satisfying Shorts",
+   "n": 100,
+   "median": 24862,
+   "outliers": 4,
+   "short": 0.99,
+   "long": 0.01
+  },
+  {
+   "name": "Mark Rober",
+   "n": 100,
+   "median": 30052113,
+   "outliers": 15,
+   "short": 0.82,
+   "long": 0.12
+  },
+  {
+   "name": "Sam Marlow Farrier Life",
+   "n": 100,
+   "median": 15131,
+   "outliers": 15,
+   "short": 0.94,
+   "long": 0.0
+  },
+  {
+   "name": "Sick Science!",
+   "n": 100,
+   "median": 27568,
+   "outliers": 15,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "Oddly Satisfying",
+   "n": 100,
+   "median": 18029,
+   "outliers": 10,
+   "short": 0.8,
+   "long": 0.14
+  },
+  {
+   "name": "Ryan's World",
+   "n": 100,
+   "median": 80091,
+   "outliers": 4,
+   "short": 0.73,
+   "long": 0.19
+  },
+  {
+   "name": "The Pet Collective",
+   "n": 100,
+   "median": 24189,
+   "outliers": 11,
+   "short": 0.96,
+   "long": 0.03
+  },
+  {
+   "name": "Story Arc Paws",
+   "n": 100,
+   "median": 285130,
+   "outliers": 15,
+   "short": 0.99,
+   "long": 0.0
+  },
+  {
+   "name": "KLT",
+   "n": 100,
+   "median": 404992,
+   "outliers": 9,
+   "short": 0.85,
+   "long": 0.09
+  },
+  {
+   "name": "TAMU Physics & Astronomy",
+   "n": 100,
+   "median": 90815,
+   "outliers": 15,
+   "short": 0.99,
+   "long": 0.01
+  },
+  {
+   "name": "Maupin Farrier Co",
+   "n": 100,
+   "median": 7331,
+   "outliers": 9,
+   "short": 0.84,
+   "long": 0.02
+  },
+  {
+   "name": "Alan Becker",
+   "n": 100,
+   "median": 18051696,
+   "outliers": 8,
+   "short": 0.69,
+   "long": 0.07
+  },
+  {
+   "name": "GeoGlobeTales",
+   "n": 100,
+   "median": 4290031,
+   "outliers": 15,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "Ross Smith",
+   "n": 100,
+   "median": 59341,
+   "outliers": 15,
+   "short": 0.97,
+   "long": 0.01
+  },
+  {
+   "name": "Dr. Abdom Fora",
+   "n": 100,
+   "median": 358940,
+   "outliers": 15,
+   "short": 0.71,
+   "long": 0.02
+  },
+  {
+   "name": "TysyTube Restoration",
+   "n": 100,
+   "median": 1876431,
+   "outliers": 15,
+   "short": 0.17,
+   "long": 0.09
+  },
+  {
+   "name": "Story TV",
+   "n": 100,
+   "median": 45724,
+   "outliers": 15,
+   "short": 0.63,
+   "long": 0.0
+  },
+  {
+   "name": "Cosmetic Plus",
+   "n": 100,
+   "median": 15652,
+   "outliers": 13,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "FPS",
+   "n": 100,
+   "median": 30830,
+   "outliers": 15,
+   "short": 0.95,
+   "long": 0.01
+  },
+  {
+   "name": "Nature Global",
+   "n": 100,
+   "median": 36611,
+   "outliers": 8,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "Geo All Day",
+   "n": 100,
+   "median": 123365,
+   "outliers": 15,
+   "short": 0.88,
+   "long": 0.0
+  },
+  {
+   "name": "Vivid Venture",
+   "n": 100,
+   "median": 76186,
+   "outliers": 15,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "Kuku TV",
+   "n": 100,
+   "median": 52561,
+   "outliers": 15,
+   "short": 0.38,
+   "long": 0.41
+  },
+  {
+   "name": "PW Class 8 ",
+   "n": 100,
+   "median": 42645,
+   "outliers": 14,
+   "short": 0.65,
+   "long": 0.3
+  },
+  {
+   "name": "Howtown",
+   "n": 100,
+   "median": 601159,
+   "outliers": 15,
+   "short": 0.75,
+   "long": 0.17
+  },
+  {
+   "name": "Earthstic",
+   "n": 46,
+   "median": 927203,
+   "outliers": 10,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "Hafu Go",
+   "n": 100,
+   "median": 9250711,
+   "outliers": 15,
+   "short": 0.71,
+   "long": 0.18
+  },
+  {
+   "name": "NileRed",
+   "n": 100,
+   "median": 15017771,
+   "outliers": 11,
+   "short": 0.9,
+   "long": 0.1
+  },
+  {
+   "name": "MinuteMinis",
+   "n": 100,
+   "median": 22461,
+   "outliers": 14,
+   "short": 1.0,
+   "long": 0.0
+  },
+  {
+   "name": "National Geographic",
+   "n": 100,
+   "median": 150859,
+   "outliers": 15,
+   "short": 0.52,
+   "long": 0.41
+  }
+ ],
+ "captions": {
+  "generated_utc": "2026-11-12T19:47:49Z",
+  "source": "public page youtubetotranscript.com (third-party renderer of YouTube captions)",
+  "targets": 60,
+  "ok": 0,
+  "no_captions": 0,
+  "unavailable": 0,
+  "too_short": 0,
+  "network_error": 0,
+  "parse_failed": 0,
+  "total_words": 0,
+  "boundary": "Public caption text only, captured verbatim for quote-level analysis. Used to describe hook/timing/structure of the reference video. NOT copied into our scripts, NOT re-uploaded, NOT claimed as our writing."
+ }
+}
