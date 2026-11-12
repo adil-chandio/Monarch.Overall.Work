@@ -12,6 +12,10 @@ on:
         description: "Release tag to attach the rendered 20 s cut to (e.g. temple-v8-20s). Leave empty to skip the render."
         type: string
         default: ""
+      publish_tag_3d:
+        description: "Release tag for the 3D cut (e.g. temple-3d-20s). Leave empty to skip the 3D render."
+        type: string
+        default: ""
   push:
     paths:
       - "production/mafia-temple/**"
@@ -47,7 +51,14 @@ jobs:
 
       - name: Re-measure every source clip
         working-directory: production/mafia-temple
-        run: python qc/measure_shots.py --clips clips --output /tmp/clip_metrics.json
+        run: |
+          if [ -d clips ] && [ -n "$(ls -A clips 2>/dev/null)" ]; then
+            python qc/measure_shots.py --clips clips --output /tmp/clip_metrics.json
+          else
+            echo "source clips are not in this checkout (they are not committed);"
+            echo "using the committed measurements instead"
+            cp qc/clip_metrics.json /tmp/clip_metrics.json
+          fi
 
       - name: Assert no chosen shot is frozen or black
         working-directory: production/mafia-temple
@@ -102,6 +113,7 @@ jobs:
           need = {
             'V8-CUT-REPORT.md': ['Not creative acceptance', 'not a finished', 'KNOWN-LIMITS.md'],
             'KNOWN-LIMITS.md': ['Likeness match', 'Human review', 'Rights'],
+            'V8-3D-REPORT.md': ['Not creative acceptance', 'likeness match', 'Rights', 'Human review'],
           }
           for name, phrases in need.items():
               text = Path(name).read_text()
@@ -162,16 +174,20 @@ jobs:
           test -n "$found"
           cp "$found" production/mafia-temple/qc/models/ESPCN_x2.pb
 
-      - name: Build sound master and picture
+      - name: Build sound master and picture (photo lane)
         working-directory: production/mafia-temple
         run: |
           set -euo pipefail
           mkdir -p render-v8
-          python qc/make_sound_v8.py --source monarch-mafia-temple-20s.mp4 \
-            --out render-v8/sound_v8.wav --log render-v8/sound_log.json
-          python qc/render_film_v8.py --out render-v8/monarch-temple-v8.mp4 \
-            --superres qc/models/ESPCN_x2.pb --audio render-v8/sound_v8.wav \
-            --log render-v8/render_log.json --preset medium --crf 17
+          if [ -d clips ] && [ -n "$(ls -A clips 2>/dev/null)" ]; then
+            python qc/make_sound_v8.py --source monarch-mafia-temple-20s.mp4 \
+              --out render-v8/sound_v8.wav --log render-v8/sound_log.json
+            python qc/render_film_v8.py --out render-v8/monarch-temple-v8.mp4 \
+              --superres qc/models/ESPCN_x2.pb --audio render-v8/sound_v8.wav \
+              --log render-v8/render_log.json --preset medium --crf 17
+          else
+            echo "photo lane skipped: source clips are not in this checkout" >&2
+          fi
 
       - name: Verify before publishing
         working-directory: production/mafia-temple
@@ -224,4 +240,76 @@ jobs:
           path: |
             production/mafia-temple/render-v8/monarch-temple-v8.mp4
             production/mafia-temple/render-v8/*.json
+          retention-days: 14
+
+  # ---------------------------------------------------------------------------
+  # The 3D cut. Same 20-second beat, but every pixel is ray-traced from geometry
+  # by qc/vfx3d/ rather than cut from footage, so it needs no source clips and
+  # runs anywhere. Trigger with a commit message containing [publish-3d], or from
+  # the Actions UI with publish_tag_3d set.
+  publish3d:
+    if: >-
+      ${{
+        inputs.publish_tag_3d != '' ||
+        (github.event_name == 'push' && contains(github.event.head_commit.message, '[publish-3d]'))
+      }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install toolchain
+        run: |
+          set -euo pipefail
+          python -m pip install -q --upgrade pip
+          python -m pip install -q "numpy>=1.26,<3" "pillow>=10" imageio-ffmpeg \
+            "opencv-contrib-python-headless==4.10.0.84"
+
+      - name: Render the 3D cut
+        working-directory: production/mafia-temple
+        run: |
+          set -euo pipefail
+          mkdir -p render-3d
+          python qc/vfx3d/sound3d.py --source monarch-mafia-temple-20s.mp4 \
+            --out render-3d/sound_v8.wav --shots-log render-3d/render_log.json \
+            --log render-3d/sound_log.json || true
+          python qc/vfx3d/film3d.py --out render-3d/monarch-temple-3d.mp4 \
+            --width 1280 --height 720 --workers 2 --frames-dir render-3d/frames \
+            --audio render-3d/sound_v8.wav --preset medium --crf 17 \
+            --log render-3d/render_log.json
+
+      - name: Technical gates
+        working-directory: production/mafia-temple
+        run: python qc/vfx3d/verify.py render-3d/monarch-temple-3d.mp4
+
+      - name: Attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="${{ inputs.publish_tag_3d || 'temple-3d-20s' }}"
+          if ! gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release create "$TAG" --repo "${{ github.repository }}" \
+              --title "MONARCH — night temple (3D cut, 20 s)" \
+              --notes "Rendered from geometry by qc/vfx3d (CPU ray tracer, no GPU, no footage). Read production/mafia-temple/V8-3D-REPORT.md for the honest scope."
+          fi
+          for f in monarch-temple-3d.mp4 render_log.json sound_log.json; do
+            [ -f "production/mafia-temple/render-3d/$f" ] && \
+              gh release upload "$TAG" "production/mafia-temple/render-3d/$f" \
+                --clobber --repo "${{ github.repository }}"
+          done
+          gh release view "$TAG" --repo "${{ github.repository }}" --json assets \
+            --jq '.assets[] | "\(.name)  \(.size) bytes"'
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: temple-3d-render
+          path: |
+            production/mafia-temple/render-3d/monarch-temple-3d.mp4
+            production/mafia-temple/render-3d/*.json
           retention-days: 14
