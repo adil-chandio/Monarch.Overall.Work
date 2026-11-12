@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-11T03:45:02Z",
+  "generated_utc": "2026-11-12T01:11:44Z",
   "lane_reports": [
     {
       "file": "co-cctv.json",
@@ -7,7 +7,7 @@
       "order": "viewCount",
       "status": "ok",
       "count": 30,
-      "verdict": "NO"
+      "verdict": "SHARPEN"
     },
     {
       "file": "co-compilation.json",
@@ -31,7 +31,7 @@
       "order": "viewCount",
       "status": "ok",
       "count": 30,
-      "verdict": "SHARPEN"
+      "verdict": "NO"
     },
     {
       "file": "co-fails.json",
@@ -63,11 +63,11 @@
       "order": "viewCount",
       "status": "ok",
       "count": 30,
-      "verdict": "SHARPEN"
+      "verdict": "NO"
     }
   ],
   "lane_rows": 240,
-  "channels_resolved": 146,
+  "channels_resolved": 141,
   "video_details_resolved": 60,
   "reverse_teardowns": 6,
   "key_present": true,
