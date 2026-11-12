@@ -236,3 +236,7 @@ Per-thumbnail rows are in `thumbnail_forensics_v17.json`. These are crude image 
 ---
 
 **NOT claimed:** YouTube upload/publish, monetisation, legal clearance, human creative approval, family-safety guarantee, guaranteed views, virality, perfection, private retention/CTR/RPM, invented transcripts, verified growth ranking, social-platform origin, view-count causation, NASA endorsement, official status. Technical/API evidence is not creative approval. A human must still watch candidate videos and review rights before any publication.
+
+## Transcript fallback pointer
+
+The default `yt-dlp` teardowns in this report all returned a YouTube sign-in bot-check. A second pass with `youtube-transcript-api` + alternate `yt-dlp` clients is recorded in `TRANSCRIPT_FORENSICS_V17.md` and `api_evidence/transcript_teardowns_v17.json`. Usable public captions: 0/18. No transcript was invented and no full third-party transcript is reproduced.
