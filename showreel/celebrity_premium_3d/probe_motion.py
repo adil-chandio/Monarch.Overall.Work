@@ -23,4 +23,12 @@ for t in (24., 25., 26., 27., 28., 41., 42., 43.):
         print('contact', t, 'grip-centre gap', round(gap, 4), flush=True)
         assert gap < .12, (t, gap)
 assert (positions[0] - positions[4]).length > 1.0, 'hero did not walk into the street'
+film.reset('kitchen')
+for t in (13.5, 14., 14.5, 15.5, 16.):
+    film.w.t = t
+    film.update_kitchen(t)
+    bpy.context.view_layer.update()
+    gap = (film.hero.visible_actor.hand_position('Left') - film.props['cup'].location).length
+    print('coffee', t, 'grip-to-cup distance', round(gap, 4), flush=True)
+    assert gap < .13, (t, gap)
 print('Pose probe passed; still requires visual review.', flush=True)

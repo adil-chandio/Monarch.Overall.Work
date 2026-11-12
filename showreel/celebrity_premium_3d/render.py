@@ -411,8 +411,11 @@ class Film(base.Film):
     def update_kitchen(self,t):
         w=self.w;u=t-11.914;b=base.vec((-.05,.55,0))
         take=base.smooth((u-1.0)/.6);lift=base.smooth((u-1.8)/.65)*(1-base.smooth((u-3.25)/.8));put=base.smooth((u-4.1)/.55)
-        cup=base.blend(base.vec((.55,-.24,1.005)),base.vec((.17,.18,1.44)),lift)
-        if put>0:cup=base.blend(cup,base.vec((.55,-.24,1.005)),put)
+        # Keep the resting mug within arm's reach, so the hand meets the
+        # handle before the cup rises and stays with it through the put-down.
+        resting=base.vec((.31,.18,1.005))
+        cup=base.blend(resting,base.vec((.17,.18,1.44)),lift)
+        if put>0:cup=base.blend(cup,resting,put)
         for key,delta in (('cup',(0,0,0)),('coffee',(0,0,.058)),('handle',(.065,0,.013))):w.move(self.props[key],cup+base.vec(delta))
         hand=base.blend(b+base.vec((.27,-.03,.93)),cup+base.vec((.06,0,0)),take*(1-put))
         self.hero.pose(b,targets={1:hand},headyaw=-.12*lift)
