@@ -104,6 +104,7 @@ def compact_channel(c):
         'title': s.get('title'), 'handle': s.get('customUrl'), 'created_at': s.get('publishedAt'),
         'public_subscribers': int(a['subscriberCount']) if 'subscriberCount' in a and not a.get('hiddenSubscriberCount') else None,
         'hidden_subscribers': bool(a.get('hiddenSubscriberCount')), 'public_video_count': int(a['videoCount']) if 'videoCount' in a else None,
+        'public_channel_views': int(a['viewCount']) if 'viewCount' in a else None,
         'uploads_playlist': r.get('uploads'),
     }
 

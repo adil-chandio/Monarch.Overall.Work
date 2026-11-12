@@ -1,0 +1,50 @@
+name: Monarch video research — focused visual forensics
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/monarch-viral-forensics.yml']
+permissions:
+  contents: write
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test public data handling
+        run: python -m unittest discover -s research/monarch_viral_audit/tests -v
+      - name: Install public caption probe
+        run: python -m pip install --disable-pip-version-check --quiet yt-dlp
+      - name: Research selected samples
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -u research/monarch_viral_audit/forensic_followup.py
+      - name: Store short-lived data and visual-review receipts
+        id: data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64,hashlib,json,os,urllib.request
+          names={'json':'/tmp/monarch-forensic-followup.json','zip':'/tmp/monarch-research-review.zip'}
+          receipt=[]
+          for name,path in names.items():
+              data=open(path,'rb').read()
+              payload=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode()
+              req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',data=payload,
+                headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+              with urllib.request.urlopen(req,timeout=120) as response: sha=json.load(response)['sha']
+              with open(os.environ['GITHUB_OUTPUT'],'a') as out:print(name+'_sha='+sha,file=out)
+              receipt.append(name+' bytes='+str(len(data))+' sha256='+hashlib.sha256(data).hexdigest())
+          open('/tmp/forensic-receipt.txt','w').write('\n'.join(receipt)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: forensic-data-${{ steps.data.outputs.json_sha }}-${{ steps.data.outputs.zip_sha }}
+          path: /tmp/forensic-receipt.txt
+          retention-days: 2
+          if-no-files-found: error

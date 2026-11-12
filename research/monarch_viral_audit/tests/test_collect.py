@@ -16,4 +16,25 @@ class CollectionTests(unittest.TestCase):
     def test_batches(self):
         self.assertEqual([len(x) for x in chunks(range(101))],[50,50,1])
 
+
+class ChannelSummaryTests(unittest.TestCase):
+    def test_hidden_subscribers_and_channel_views(self):
+        from research.monarch_viral_audit.collect_youtube import compact_channel
+        c=compact_channel({'id':'x','statistics':{'subscriberCount':'100','hiddenSubscriberCount':True,'viewCount':'987'},'snippet':{}})
+        self.assertIsNone(c['public_subscribers'])
+        self.assertEqual(c['public_channel_views'],987)
+
+class FollowupChoiceTests(unittest.TestCase):
+    def test_median_excludes_too_new_and_wrong_duration(self):
+        from research.monarch_viral_audit.forensic_followup import choose_median
+        rows=[
+            {'id':'a','views':100,'duration_seconds':20,'published_at':'2026-10-01T00:00:00Z'},
+            {'id':'b','views':300,'duration_seconds':20,'published_at':'2026-10-02T00:00:00Z'},
+            {'id':'c','views':200,'duration_seconds':20,'published_at':'2026-10-03T00:00:00Z'},
+            {'id':'recent','views':1,'duration_seconds':20,'published_at':'2026-11-05T00:00:00Z'},
+            {'id':'long','views':1,'duration_seconds':900,'published_at':'2026-10-01T00:00:00Z'},
+        ]
+        chosen,n=choose_median(rows)
+        self.assertEqual(chosen['id'],'c');self.assertEqual(n,3)
+
 if __name__=='__main__':unittest.main()
