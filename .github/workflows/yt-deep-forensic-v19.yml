@@ -60,6 +60,47 @@ jobs:
       - name: V19 - caption acquisition pass (public text, honest outcomes)
         run: python research/deep_forensic_v19/fetch_captions_v19.py 60 || true
 
+      - name: Diagnostics (always) - record what actually came back
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          base = pathlib.Path('research/deep_forensic_v19/api_evidence')
+          out = {}
+          for name in ('run_v19.json', 'channel_deep_v19.json', 'catalogue_videos_v19.json'):
+              p = base / name
+              out[name] = 'MISSING' if not p.exists() else f'{p.stat().st_size} bytes'
+          if (base / 'run_v19.json').exists():
+              out['run'] = json.loads((base / 'run_v19.json').read_text())
+          if (base / 'channel_deep_v19.json').exists():
+              d = json.loads((base / 'channel_deep_v19.json').read_text())
+              out['cross'] = d.get('cross')
+              out['channels'] = [
+                  {'name': n, 'n': c['stats'].get('n'), 'median': c['stats'].get('median'),
+                   'outliers': len(c.get('outliers_ge_3x_channel_median', [])),
+                   'short': c['stats'].get('short_share'), 'long': c['stats'].get('long_share')}
+                  for n, c in d.get('catalogue', {}).items()]
+          cap = pathlib.Path('research/deep_forensic_v19/captions/run_v19_captions.json')
+          if cap.exists():
+              out['captions'] = json.loads(cap.read_text())
+          base.mkdir(parents=True, exist_ok=True)
+          (base / 'diagnostics_v19.json').write_text(json.dumps(out, indent=1, ensure_ascii=False) + '\n')
+          print(json.dumps(out, indent=1)[:6000])
+          PY
+
+      - name: Commit V19 evidence
+        if: always()
+        run: |
+          git config user.name "monarch-forensic-bot"
+          git config user.email "forensic-bot@users.noreply.github.com"
+          git add research/deep_forensic_v19/api_evidence research/deep_forensic_v19/captions
+          if git diff --cached --quiet; then
+            echo "no evidence change to commit"
+          else
+            git commit -m "chore(v19): winner-catalogue deep dive + caption ledger [skip ci]"
+            git push origin HEAD:arena/2b012328-monarch-overall-work
+          fi
+
       - name: HARD QC - V19 evidence must exist and join
         run: |
           python - <<'PY'
@@ -117,16 +158,3 @@ jobs:
             research/deep_forensic_v19/api_evidence/
             research/deep_forensic_v19/captions/
           if-no-files-found: warn
-
-      - name: Commit V19 evidence
-        if: success()
-        run: |
-          git config user.name "monarch-forensic-bot"
-          git config user.email "forensic-bot@users.noreply.github.com"
-          git add research/deep_forensic_v19/api_evidence research/deep_forensic_v19/captions
-          if git diff --cached --quiet; then
-            echo "no evidence change to commit"
-          else
-            git commit -m "chore(v19): winner-catalogue deep dive + caption ledger [skip ci]"
-            git push origin HEAD:arena/2b012328-monarch-overall-work
-          fi
