@@ -194,9 +194,10 @@ TITLE_ON_BRAND = (
     "shock", "unbelievable", "mind-blowing", "mind blowing",
 )
 
-# Medical / crime / news / volcano / farm / old-film substring blocks.
-# Catches "viral hepatitis", "protests" (plural bug), "police", "spraying",
-# volcano compilations, USDA farm "Animals (...)" series, old silent films.
+# Medical / crime / news / volcano / farm / old-film / NASA / USDA / politics
+# substring blocks. Catches "viral hepatitis", "protests" (plural bug),
+# "police", "spraying", volcano compilations, USDA farm series, old films,
+# NASA space, anime, press briefings, USDA ads, wildfires, tech tutorials.
 V16_BLOCK_SUBSTRINGS = (
     "hiv", "aids", "covid", "vaccine", "vacine", "hepatitis", "epidemic",
     "pandemic", "unaids", "measles", "sarampo", "retroviral", "herpes",
@@ -223,6 +224,42 @@ V16_BLOCK_SUBSTRINGS = (
     "humorous phases", "unappreciated joke", "silent", "shortfilm",
     "kinetoscope", "chalk", "(1903)", "(1900", "(1910", "(1920",
     "cow island", "missouri", "river breaks",
+    # NASA / space (matched trick/unexpected/cat/horse)
+    "nasa", "lucy mission", "dinkinesh", "swift", "black hole",
+    "snacking", "svs", "satellite", "telescope", "webb", "horsehead",
+    "nebula", "cosmic cat", "hubble", "cat's eye", "cat eye",
+    "orbit", "astronaut",
+    # Old films / interviews (matched jump/laugh/comedy)
+    "1911", "salchow", "ulrich", "stop! look", "smurthwaite",
+    "(1921)", "(1925)", "cat and the canary", "monkey business",
+    # Warm Springs horse roundup (matched horse)
+    "warm springs", "horses and burros", "blm corral",
+    "wild horse gather", "horse gather", "burros",
+    "trained wild horses", "southern oregon",
+    # Anime / cartoon (matched slip)
+    "rwby", "chibi", "anime", "cartoon", "animation",
+    # Politics / press (matched viral/baby/rescue)
+    "sean spicer", "united airlines", "answers questions", "spicer",
+    "joe biden", "biden", "american rescue plan", "explained",
+    "press briefing", "white house",
+    # USDA ads (matched animal/bird/pig)
+    "usda", "defend the flock", "healthy harry", "bird market",
+    "swine fever", "african swine", "animal and plant", "stop african",
+    "遏制", "arrêtez", "frenemos", "peste porcine", "fiebre porcina",
+    "inspection service", "kate bowers", "dvm", "veterinary medical",
+    "biosecurity", "pack fun", "not pork", "protect your pigs",
+    "deadly outbreak", "npip", "signs of illness", "learn npip",
+    # Disaster / attack (matched rabbit/dog)
+    "rabbit fire", "riverside county", "wildfire", "attacking",
+    "stray dog", "denizli",
+    # Tech / Wikipedia (matched smart/clever)
+    "eset", "smart security", "download and install",
+    "wikipedia", "being clever", "stepanakert", "wikiclub",
+    # Science / military comedy (matched unexpected/laugh)
+    "from-ugly-duckling", "cell-se", "identification-from",
+    "charting", "exceptional", "heat of 2023", "brooding",
+    "chilean-oyster", "ostrea-chilensis", "unexpected-comple",
+    "afe comedy", "comedy tour", "shape, hq", "bring the laughs",
 )
 
 BAD_LICENSE_TOKENS = ("by-sa", "by-nc", "sa 3.0", "sa 4.0", "fair use",
@@ -536,16 +573,21 @@ def main():
     save_json(REVIEW / "candidate_pool_v16.json", {"count": len(pool), "candidates": pool,
               "rejected_by_safety_or_licence_or_social": rejected})
 
-    # Prefer social-origin + funny titles first, then on-brand, then small files.
-    pool.sort(key=lambda x: (-x["social_boost"], -x["funny_score"], -x["priority"], x["size"] or 1 << 30))
+    # Prefer funny titles first (karma/prank/trick/fail), then social-origin,
+    # then on-brand, then small files. Funny-first puts Instant karma #1
+    # (boost=0 but funny_score=2) ahead of boost=1 animal titles.
+    pool.sort(key=lambda x: (-x["funny_score"], -x["social_boost"], -x["priority"], x["size"] or 1 << 30))
     accepted, failures = [], []
     seen_norm = set()
     for cand in pool:
         if len(accepted) >= MAX_CLIPS:
             break
-        # Dedup near-duplicates (SD/HD, 1080p/720p variants of same title).
+        # Dedup near-duplicates (SD/HD, IDs, parenthetical numbers).
         norm = re.sub(r"\.(webm|mp4|ogv|ogg|mov)$", "", cand["title"].lower())
         norm = re.sub(r"\s+(hd|sd|1080p|720p|480p|360p|full hd|new)$", "", norm).strip()
+        norm = re.sub(r"\([^)]*\d[^)]*\)", "", norm)  # strip (IDs/years)
+        norm = re.sub(r"\d+", "", norm)  # strip remaining numbers
+        norm = re.sub(r"\s+", " ", norm).strip()
         if norm in seen_norm:
             failures.append({"title": cand["title"], "reason": "duplicate_title"})
             continue
