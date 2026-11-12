@@ -94,6 +94,14 @@ Spares, in launch order, with character counts:
 
     Corrections welcome: <address>
 
+    CREDITS
+    Mammoth 3D model: "3D High-poly Baby Woolly Mammoth" by SDPM Esare, licensed CC BY 4.0
+    (https://creativecommons.org/licenses/by/4.0/). Modified for this film: rigged, re-skinned
+    and re-animated; the original model has no armature. The model's title says "Baby", but its
+    tusks and proportions do not reliably establish an age, and it is not presented as a
+    documented calf or an actual Wrangel specimen.
+
+
 ---
 
 ## TAGS
