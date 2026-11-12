@@ -52,7 +52,9 @@ WINDOW_S = 10.0
 SAMPLE_FPS = 4
 MAX_CLIPS = 20
 
-# VIRAL FUNNY queries — NOT animal-generic. Focus on fail/prank/trick/karma/viral.
+# VIRAL FUNNY queries — NOT animal-generic. Focus on fail/prank/trick/karma.
+# NOTE: bare "viral" queries pull medical "viral hepatitis/epidemic" — removed.
+# Title on-brand + medical/crime blocks below reject any medical/news leakage.
 VIRAL_QUERIES = [
     'fail compilation filetype:video',
     'funny fail filetype:video',
@@ -60,11 +62,7 @@ VIRAL_QUERIES = [
     'trick shot filetype:video',
     'instant karma filetype:video',
     'slip fall funny filetype:video',
-    'viral video filetype:video',
     'hilarious fail filetype:video',
-    'unexpected viral filetype:video',
-    'shocking moment filetype:video',
-    'unbelievable moment filetype:video',
     'cat fail filetype:video',
     'dog fail filetype:video',
     'baby fail filetype:video',
@@ -79,8 +77,8 @@ VIRAL_QUERIES = [
     'security camera funny filetype:video',
     'CCTV funny filetype:video',
     'caught on camera funny filetype:video',
-    'YouTube viral filetype:video',
-    'TikTok viral filetype:video',
+    'YouTube funny filetype:video',
+    'TikTok funny filetype:video',
     'FailArmy filetype:video',
     'America Funniest filetype:video',
     'funny prank caught on camera filetype:video',
@@ -88,10 +86,15 @@ VIRAL_QUERIES = [
     'slip fall caught on camera filetype:video',
     'instant karma caught on camera filetype:video',
     'funny viral moment filetype:video',
-    'hilarious viral filetype:video',
+    'viral video funny filetype:video',
     'unexpected funny filetype:video',
-    'mind blowing trick filetype:video',
-    'eye catching viral filetype:video',
+    'funny animal filetype:video',
+    'cute animals filetype:video',
+    'funny animals filetype:video',
+    'funny compilation filetype:video',
+    'hilarious funny filetype:video',
+    'prank caught on camera filetype:video',
+    'fail caught on camera filetype:video',
 ]
 
 # V14 20 titles — HARD EXCLUDE (owner rejected reuse). Lowercase substrings.
@@ -114,7 +117,9 @@ V14_EXCLUDE_SUBSTRINGS = [
     "flip the frog - puddle pranks",
     "cat meowing into camera",
     "chicago_parallel_parking_fail",
+    "chicago parallel parking",
     "greased_pigs",
+    "greased pigs",
 ]
 # Exact-title excludes for generic names (avoid over-blocking "comedy" substring).
 V14_EXCLUDE_EXACT = {
@@ -122,19 +127,58 @@ V14_EXCLUDE_EXACT = {
 }
 
 # Social origin terms — at least one must appear in title/description/credit/categories
-# OR strong viral-funny terms must appear. This enforces "social viral, not Wikipedia generic".
+# OR strong viral-funny terms must appear in title. Bare "viral"/"shocking" removed:
+# they match medical "viral hepatitis" and news. Use phrases "viral video" etc.
 SOCIAL_TERMS = (
     "youtube", "tiktok", "dailymotion", "facebook", "instagram", "vimeo",
-    "viral", "failarmy", "afv", "america's funniest", "americas funniest",
+    "failarmy", "afv", "america's funniest", "americas funniest",
     "video2commons", "social media", "caught on camera", "instant karma",
     "trick shot", "prank", "fail compilation", "funny fail", "hilarious",
-    "unexpected moment", "shocking", "unbelievable", "mind-blowing",
-    "mind blowing", "eye-catching", "eye catching", "hooked",
+    "unexpected moment", "viral video", "viral moment", "viral clip",
+    "went viral", "viral hit",
 )
 STRONG_FUNNY_TERMS = (
     "fail", "prank", "trick", "karma", "hilarious", "funny", "slip",
-    "fall", "unexpected", "shocking", "unbelievable", "viral", "scream",
-    "jump scare", "instant karma", "trick shot",
+    "fall", "unexpected", "scream", "jump scare", "instant karma",
+    "trick shot", "viral video", "viral moment", "caught on camera",
+    "joke", "comedy", "laugh", "humor", "humour",
+)
+
+# Title MUST contain at least one on-brand term. Rejects HIV/COVID/police/
+# protest/game/music/news titles (none contain funny/animal terms).
+TITLE_ON_BRAND = (
+    "fail", "prank", "trick", "karma", "hilarious", "funny", "slip",
+    "fall", "cat", "dog", "puppy", "kitten", "baby", "animal",
+    "monkey", "bear", "bird", "squirrel", "raccoon", "skate",
+    "parkour", "sports", "dance", "jump", "scream", "viral video",
+    "viral moment", "caught on camera", "unexpected", "cute",
+    "adorable", "incredible", "amazing", "smart", "clever", "rescue",
+    "compilation", "fails", "belly rub", "pig", "elephant", "horse",
+    "goat", "cow", "rabbit", "parrot", "penguin", "whale", "dolphin",
+    "octopus", "fox", "deer", "owl", "elk", "critter", "joke",
+    "comedy", "laugh", "humor", "humour", "surprise", "skill",
+    "shock", "unbelievable", "mind-blowing", "mind blowing",
+)
+
+# Medical / crime / news substring blocks (substring, not word-boundary).
+# Catches "viral hepatitis", "protests" (plural bug), "police", "spraying".
+V16_BLOCK_SUBSTRINGS = (
+    "hiv", "aids", "covid", "vaccine", "vacine", "hepatitis", "epidemic",
+    "pandemic", "unaids", "measles", "sarampo", "retroviral", "herpes",
+    "rabies", "gag-protein", "alpharetroviral", "gene-expression",
+    "police", "protest", "spray", "doordash", "kabila", "boris",
+    "johnson", "keke", "palmer", "true jackson", "neffex", "multiversus",
+    "victorious", "fenton", "pandemia", "epidemia", "relatório",
+    "chefe da", "novo relatório", "ulli thiemann", "viralspot",
+    "emmi win", "win ipad", "win iphone", "know your crew",
+    "fails to", "hair fails", "agent smith", "fighter move",
+    "modest", "mayor gordon", "campaign commercial", "dispose of waste",
+    "grand canyon", "applegate river", "fossil lake", "borstar",
+    "dps operations", "shelter medicine", "grape spritzer",
+    "pumpkin curry", "phoebe chicks", "reading novel",
+    "behind the wheel", "eagan police", "christmas tree",
+    "campaign", "commercial, 1959", "interplay-between",
+    "correlates-with", "stress-granules", "infection-induces",
 )
 
 BAD_LICENSE_TOKENS = ("by-sa", "by-nc", "sa 3.0", "sa 4.0", "fair use",
@@ -223,6 +267,20 @@ def has_social_origin(title, meta):
     return False
 
 
+def title_on_brand(title):
+    low = title.lower()
+    return any(t in low for t in TITLE_ON_BRAND)
+
+
+def v16_blocked(title, meta):
+    blob = " ".join([title, meta.get("description", ""), meta.get("categories", ""),
+                     meta.get("credit", "")]).lower()
+    for b in V16_BLOCK_SUBSTRINGS:
+        if b in blob:
+            return b
+    return None
+
+
 def acceptable(page, meta):
     title = page.get("title", "")
     low = title.lower()
@@ -231,6 +289,10 @@ def acceptable(page, meta):
     if any(t in low for t in EXCLUDE_TOKENS):
         return False
     if is_v14_repeat(title):
+        return False
+    if not title_on_brand(title):
+        return False
+    if v16_blocked(title, meta) is not None:
         return False
     blob = " ".join([title, meta.get("description", ""), meta.get("categories", ""),
                      meta.get("credit", "")])
@@ -414,20 +476,24 @@ def main():
             _, _, prio = safety_gate(" ".join([title, meta["description"], meta["categories"]]))
             # Social-origin boost: explicit platform mention ranks higher.
             blob = " ".join([title, meta["description"], meta["credit"], meta["categories"]]).lower()
-            social_boost = sum(1 for t in ("youtube", "tiktok", "dailymotion", "facebook", "instagram", "viral", "failarmy") if t in blob)
+            social_boost = sum(1 for t in ("youtube", "tiktok", "dailymotion", "facebook", "instagram", "viral video", "viral moment", "failarmy", "caught on camera") if t in blob)
+            # Funny-title score: count strong funny terms in title (ranks prank/karma/fail first).
+            title_low = title.lower()
+            funny_score = sum(1 for t in STRONG_FUNNY_TERMS if t in title_low)
             pool.append({"title": title, "pageid": pg.get("pageid"),
                          "url": ii.get("url", ""), "size": ii.get("size", 0),
                          "mime": mime, "width": ii.get("width"), "height": ii.get("height"),
                          "duration": dur, "commons_sha1": ii.get("sha1", ""),
                          "descriptionurl": ii.get("descriptionurl", ""), "meta": meta,
-                         "priority": prio, "social_boost": social_boost, "query": q})
+                         "priority": prio, "social_boost": social_boost,
+                         "funny_score": funny_score, "query": q})
         time.sleep(0.4)
     log(f"acceptable viral pool: {len(pool)} (rejected: {rejected})")
     save_json(REVIEW / "candidate_pool_v16.json", {"count": len(pool), "candidates": pool,
               "rejected_by_safety_or_licence_or_social": rejected})
 
-    # Prefer social-origin + on-brand titles first, then small files.
-    pool.sort(key=lambda x: (-x["social_boost"], -x["priority"], x["size"] or 1 << 30))
+    # Prefer social-origin + funny titles first, then on-brand, then small files.
+    pool.sort(key=lambda x: (-x["social_boost"], -x["funny_score"], -x["priority"], x["size"] or 1 << 30))
     accepted, failures = [], []
     for cand in pool:
         if len(accepted) >= MAX_CLIPS:
