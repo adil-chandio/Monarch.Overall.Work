@@ -37,4 +37,18 @@ class FollowupChoiceTests(unittest.TestCase):
         chosen,n=choose_median(rows)
         self.assertEqual(chosen['id'],'c');self.assertEqual(n,3)
 
+
+class SummaryTests(unittest.TestCase):
+    def test_median_and_missing_public_counts(self):
+        from research.monarch_viral_audit.summarize import summarize
+        broad={'videos':[{'id':'1','views':10},{'id':'2','views':30},{'id':'3','views':None}],
+               'channels':[{'id':'c','title':'C'}],
+               'queries':[{'group':'exact_celebrity','status':'ok','video_ids':['1','2']}],
+               'runner_reported_utc':'clock',
+               'upload_samples':[{'channel_id':'c','purpose':'test','status':'ok','ids':['1','2','3']}] }
+        data=summarize(broad)
+        self.assertEqual(data['samples'][0]['sample_median_views'],20)
+        self.assertEqual(data['samples'][0]['views_observed_n'],2)
+        self.assertEqual(data['exact_celebrity_unique_ids'],2)
+
 if __name__=='__main__':unittest.main()

@@ -168,7 +168,7 @@ def main():
             if v:
                 label=s['channel']['title']+': sampled ordinary upload selected by median'
                 targets.append((v['id'],label));auto_choices.append({'channel_id':cid,'video_id':v['id'],
-                   'eligible_count':n,'selection_rule':'nearest median views of sampled 8–60s uploads published before 2026-10-23; fallback any sampled 8–60s if none'})
+                   'eligible_count':n,'fallback_used':v.get('published_at','')>='2026-10-23T00:00:00Z', 'selection_rule':'nearest median views of sampled 8–60s uploads published before 2026-10-23; fallback any sampled 8–60s if none'})
 
     descriptions=[];thumbs=[];comment_rows=[];caption_rows=[]
     with tempfile.TemporaryDirectory(prefix='monarch-research-') as td:
