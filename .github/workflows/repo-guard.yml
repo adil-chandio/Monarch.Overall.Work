@@ -12,7 +12,11 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main]
+    branches:
+      - main
+      # the working branch, so a guard failure is visible on the commit that
+      # caused it rather than only when a PR is opened
+      - arena/ba8d901e-monarch-overall-work
   workflow_dispatch:
 
 permissions:
