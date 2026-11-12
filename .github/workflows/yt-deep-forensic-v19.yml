@@ -133,7 +133,8 @@ jobs:
               s = json.loads(cap.read_text())
               assert s['targets'] >= 10, s['targets']
               assert s['ok'] + s['no_captions'] + s['unavailable'] + s['too_short'] \
-                     + s['network_error'] + s['parse_failed'] == s['targets'], s
+                     + s['network_error'] + s['parse_failed'] + s['http_blocked'] \
+                     + s['no_response'] == s['targets'], s
           print('V19 HARD QC PASS: catalogues, outliers, caption ledger consistent')
           PY
 

@@ -53,6 +53,7 @@ def _get(url: str, timeout: int = 25) -> tuple[int, str]:
 
 
 NO_CAPTIONS = ("This video has no captions",)
+HTTP_BLOCKED = (401, 403, 429)
 UNAVAILABLE = ("This video isn't available",)
 
 
@@ -60,6 +61,8 @@ def parse(html: str) -> dict:
     """Pull the transcript block out of the public page. Returns text + status."""
     if not html:
         return {"status": "no_response", "text": "", "words": 0}
+    if not html:
+        return {"status": "no_body", "text": "", "words": 0}
     for marker, status in ((NO_CAPTIONS[0], "no_captions"), (UNAVAILABLE[0], "unavailable")):
         if marker in html:
             return {"status": status, "text": "", "words": 0}
@@ -85,6 +88,9 @@ def fetch_one(video_id: str) -> dict:
     if code == 0:
         return {"id": video_id, "url": url, "http": 0, "status": "network_error",
                 "detail": html[:200], "text": "", "words": 0}
+    if code in HTTP_BLOCKED:
+        return {"id": video_id, "url": url, "http": code, "status": "http_blocked",
+                "detail": f"HTTP {code} - datacenter IP refused", "text": "", "words": 0}
     parsed = parse(html)
     parsed.update({"id": video_id, "url": url, "http": code})
     return parsed
@@ -146,6 +152,8 @@ def main(argv: list[str]) -> int:
         "too_short": sum(1 for r in results if r["status"] == "too_short"),
         "network_error": sum(1 for r in results if r["status"] == "network_error"),
         "parse_failed": sum(1 for r in results if r["status"] == "parse_failed"),
+        "http_blocked": sum(1 for r in results if r["status"] == "http_blocked"),
+        "no_response": sum(1 for r in results if r["status"] == "no_response"),
         "total_words": sum(r["words"] for r in ok),
         "boundary": ("Public caption text only, captured verbatim for quote-level analysis. "
                      "Used to describe hook/timing/structure of the reference video. NOT copied "
@@ -153,6 +161,11 @@ def main(argv: list[str]) -> int:
     }
     (OUT / "captions_v19.json").write_text(json.dumps({"summary": summary, "records": results},
                                                       indent=1, ensure_ascii=False) + "\n")
+    total = sum(v for k, v in summary.items() if isinstance(v, int) and k in (
+        "ok", "no_captions", "unavailable", "too_short", "network_error", "parse_failed",
+        "http_blocked", "no_response"))
+    if total != summary["targets"]:
+        raise SystemExit(f"caption ledger does not reconcile: {total} != {summary['targets']}")
     (OUT / "run_v19_captions.json").write_text(json.dumps(summary, indent=1) + "\n")
     print(json.dumps(summary, indent=1), flush=True)
     return 0
