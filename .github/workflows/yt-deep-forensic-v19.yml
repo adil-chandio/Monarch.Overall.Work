@@ -1,0 +1,132 @@
+name: V19 Deep Dive - winners' own catalogues, short + long
+
+# V19 asks a different question than V18: not "what ranks in a search lane", but
+# "what does a winning channel's OWN catalogue look like, and which of its videos beat
+# its own median by 3x". Plus a caption pass that records every outcome honestly
+# (including "this video has no captions", which is itself a finding).
+# Public metadata + public caption text only. No video/audio download.
+on:
+  push:
+    branches:
+      - arena/2b012328-monarch-overall-work
+    paths:
+      - "v19-deep-trigger.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v19-deep-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/2b012328-monarch-overall-work
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve key secret (presence only; value masked)
+        env:
+          KEY_PRIMARY: ${{ secrets.YOUTUBE_API_KEY }}
+          KEY_ALT: ${{ secrets.YTAP1 }}
+        run: |
+          KEY="${KEY_PRIMARY:-$KEY_ALT}"
+          if [ -z "$KEY" ]; then
+            echo "::error::no key secret resolved - cannot be a real API-lane run"
+            exit 1
+          fi
+          echo "::add-mask::$KEY"
+          echo "YOUTUBE_API_KEY=$KEY" >> "$GITHUB_ENV"
+          echo "key resolved (${#KEY} chars); value never printed or stored"
+
+      - name: Runtime deps
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet numpy pillow yt-dlp youtube-transcript-api
+
+      - name: Prove the lane
+        run: python -m yt_intel lanes --json || true
+
+      - name: V19 - winner channel catalogues, outliers, format ladder
+        run: python research/deep_forensic_v19/build_deep_forensic_v19.py
+
+      - name: V19 - caption acquisition pass (public text, honest outcomes)
+        run: python research/deep_forensic_v19/fetch_captions_v19.py 60 || true
+
+      - name: HARD QC - V19 evidence must exist and join
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          base = pathlib.Path('research/deep_forensic_v19/api_evidence')
+          run = json.loads((base / 'run_v19.json').read_text())
+          assert run['key_present'] is True, 'key not resolved'
+          assert run['secret_value_printed_or_stored'] is False, 'secret handling'
+          assert run['focus_channels_resolved'] >= 15, run['focus_channels_resolved']
+          assert run['catalogue_videos'] >= 500, run['catalogue_videos']
+          assert run['outlier_videos_ge_3x'] >= 20, run['outlier_videos_ge_3x']
+
+          cat = json.loads((base / 'catalogue_videos_v19.json').read_text())
+          assert cat['count'] == run['catalogue_videos'], (cat['count'], run['catalogue_videos'])
+          by_id = {v['id']: v for v in cat['videos']}
+          deep = json.loads((base / 'channel_deep_v19.json').read_text())
+          missing = 0
+          checked = 0
+          for name, c in deep['catalogue'].items():
+              for o in c.get('outliers_ge_3x_channel_median', []):
+                  checked += 1
+                  if o['id'] not in by_id:
+                      missing += 1
+          assert missing == 0, f'{missing} outlier ids missing from catalogue dump'
+          assert checked >= 20, checked
+          assert deep['cross']['outliers_ge_3x']['n'] == run['outlier_videos_ge_3x']
+
+          cap = pathlib.Path('research/deep_forensic_v19/captions/run_v19_captions.json')
+          if cap.exists():
+              s = json.loads(cap.read_text())
+              assert s['targets'] >= 10, s['targets']
+              assert s['ok'] + s['no_captions'] + s['unavailable'] + s['too_short'] \
+                     + s['network_error'] + s['parse_failed'] == s['targets'], s
+          print('V19 HARD QC PASS: catalogues, outliers, caption ledger consistent')
+          PY
+
+      - name: Publish V19 summary
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          d = json.loads(pathlib.Path('research/deep_forensic_v19/api_evidence/channel_deep_v19.json').read_text())
+          for name, c in list(d['catalogue'].items()):
+              s = c['stats']
+              print(f"{name[:28]:28s} n={s['n']:3d} med={s['median']:>12,} out={len(c['outliers_ge_3x_channel_median']):2d} "
+                    f"short={s['short_share']:.2f} long={s['long_share']:.2f}")
+          print(json.dumps(d['cross'], indent=1)[:1500])
+          PY
+
+      - name: Upload V19 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v19-deep-evidence
+          path: |
+            research/deep_forensic_v19/api_evidence/
+            research/deep_forensic_v19/captions/
+          if-no-files-found: warn
+
+      - name: Commit V19 evidence
+        if: success()
+        run: |
+          git config user.name "monarch-forensic-bot"
+          git config user.email "forensic-bot@users.noreply.github.com"
+          git add research/deep_forensic_v19/api_evidence research/deep_forensic_v19/captions
+          if git diff --cached --quiet; then
+            echo "no evidence change to commit"
+          else
+            git commit -m "chore(v19): winner-catalogue deep dive + caption ledger [skip ci]"
+            git push origin HEAD:arena/2b012328-monarch-overall-work
+          fi
