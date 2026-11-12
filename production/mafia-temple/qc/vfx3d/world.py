@@ -324,14 +324,15 @@ def figure_solids(pose):
     # the capsule runs from head_centre up to head_top (0.185 m), so the skull's
     # centre is about 9 cm above head_centre; a hair mass centred on head_centre
     # itself ends up round the neck
-    hc = hc + np.array([0.0, 0.092, 0.0])
+    hc = hc + np.array([0.0, 0.075, 0.0])
     R = geom.obb_basis(yaw=pose['head_yaw'])
     # pose['head_centre'] is the BASE of the head capsule, so the skull's centre
     # is about 8 cm above it. Offsetting the hair from the base left the skin
     # capsule poking out of the top of the hair like a bald crown.
-    for c, r, mat in (((0.0, 0.020, -0.006), (0.082, 0.070, 0.088), 'hair'),
-                      ((0.0, -0.004, -0.014), (0.078, 0.052, 0.082), 'hair'),
-                      ((0.0, 0.038, -0.008), (0.064, 0.042, 0.072), 'hair')):
+    for c, r, mat in (((0.0, 0.098, -0.006), (0.0830, 0.0720, 0.0880), 'hair'),
+                      ((0.0, 0.052, -0.014), (0.0800, 0.0560, 0.0850), 'hair'),
+                      ((0.0, 0.132, -0.010), (0.0640, 0.0480, 0.0700), 'hair'),
+                      ((0.0, 0.070, -0.052), (0.0700, 0.0700, 0.0480), 'hair')):
         out.append(Ellipsoid(tuple((hc + R @ np.asarray(c)).tolist()), r, mat, R))
     return out
 

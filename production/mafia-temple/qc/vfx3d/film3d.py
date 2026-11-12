@@ -73,7 +73,7 @@ SHOTS = [
     dict(name='S1-street', start=0, end=96, set='street',
          eye=(0.15, 1.50, 10.6), target=(0.0, 1.36, -8.0), fov=46.0,
          ambient=(0.010, 0.013, 0.021), fog=0.030, mist=0.45, wet=0.72,
-         fog_tint=(0.030, 0.043, 0.072), samples=2,
+         fog_tint=(0.030, 0.043, 0.072), samples=1,
          grade=dict(exposure=1.35, contrast=1.26, saturation=1.30, lift=0.0,
                     streak=0.24, vignette=0.46, bloom=0.55),
          figure=dict(root=(-0.10, 4.2), phase0=0.0, walk=1.35, run=False,
@@ -82,14 +82,14 @@ SHOTS = [
     dict(name='S2-facade', start=96, end=216, set='temple',
          eye=(0.0, 2.10, 18.0), target=(0.0, 4.00, -1.0), fov=36.0,
          ambient=(0.009, 0.012, 0.019), fog=0.026, mist=0.55, wet=0.45,
-         fog_tint=(0.028, 0.040, 0.068), samples=2,
+         fog_tint=(0.028, 0.040, 0.068), samples=1,
          grade=dict(exposure=1.20, contrast=1.24, saturation=1.30, lift=0.002,
                     streak=0.22, vignette=0.50, bloom=0.50)),
 
     dict(name='S3-aerial', start=216, end=312, set='aerial',
          eye=(7.0, 19.0, 26.0), target=(0.0, 2.0, -4.0), fov=44.0,
          ambient=(0.011, 0.014, 0.022), fog=0.013, mist=0.30, wet=0.26,
-         fog_tint=(0.032, 0.045, 0.074), samples=2,
+         fog_tint=(0.032, 0.045, 0.074), samples=1,
          grade=dict(exposure=1.10, contrast=1.26, saturation=1.42, lift=0.004,
                     streak=0.22, vignette=0.42, bloom=0.55)),
 
@@ -97,9 +97,9 @@ SHOTS = [
          eye=(-0.90, 1.46, 7.10), target=(-0.90, 1.30, 0.0), fov=36.0,
          dolly_per_frame=(0.0144, 0.0, 0.0),   # 4.4 px/frame at 720p
          blur_taps=4, shutter=0.5, samples=1,
-         ambient=(0.013, 0.016, 0.022), fog=0.022, mist=0.58, wet=0.55,
-         fog_tint=(0.044, 0.046, 0.058), samples_note='motion blur only',
-         grade=dict(exposure=1.05, contrast=1.16, saturation=1.10, lift=0.006,
+         ambient=(0.009, 0.011, 0.017), fog=0.030, mist=0.62, wet=0.55,
+         fog_tint=(0.038, 0.042, 0.058), samples_note='motion blur only',
+         grade=dict(exposure=1.05, contrast=1.16, saturation=0.72, lift=0.006,
                     streak=0.18, vignette=0.46, bloom=0.45),
          figure=dict(root=(0.30, 4.30), phase0=0.35, walk=2.75, run=True,
                      yaw=math.pi / 2, travel=-0.55, back=False)),
@@ -187,7 +187,7 @@ class FaceShot:
 
     def __init__(self, set_name='face', width=W_DEFAULT, height=H_DEFAULT):
         self.head = head_mesh.HeadMesh()
-        self.hair_prims = engine._flatten(head_mesh.hair_solids())
+        self.hair = head_mesh.HairLayer(self.head)
         self.frame = engine.Frame(set_name, 8, 8)      # materials + background
         self.set_name = set_name
         self.width, self.height = width, height
@@ -243,12 +243,11 @@ def render_face_shot(face, shot, f, w, h):
         face.head, eye, target, w, h, shot['fov'], lights,
         ambient=shot['_faceamb'], fog_tint=shot['_bgtint'], yaw=yaw,
         iris_glow=glow, skin_tint=tint, rough=0.50,
-        dof_focus=float(np.linalg.norm(np.asarray(eye) - np.asarray(target))),
-        dof_amount=0.9 if shot['name'] == 'S6-face' else 0.6, flare=0.10)
-    img, alpha, depth = head_mesh.composite_hair_raytraced(
-        img, alpha, depth, face.hair_prims, face.frame, eye, target, w, h,
-        shot['fov'], lights, ambient=(0.004, 0.005, 0.008),
-        fog_tint=shot['_bgtint'])
+        dof_focus=float(np.linalg.norm(np.asarray(eye) - np.asarray(target))) * 1.02,
+        dof_amount=0.22 if shot['name'] == 'S6-face' else 0.16, flare=0.08)
+    img, alpha, depth = head_mesh.composite_hair(
+        img, alpha, depth, face.hair, eye, target, w, h, shot['fov'], lights,
+        ambient=(0.005, 0.006, 0.010), fog_tint=shot['_bgtint'])
 
     out = bg * (1.0 - alpha[..., None]) + img
     out = np.clip(out, 0, None)
