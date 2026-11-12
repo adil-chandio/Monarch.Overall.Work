@@ -594,9 +594,12 @@ def build_courtyard():
         solids.append(Box((0.0, 4.55 + f * 1.75, -4.8),
                           (8.4 - f * 3.0, 0.05, 5.0 - f * 2.2), 'tile'))
     # a lit interior behind the posts
-    solids.append(Box((0.0, 2.0, -7.2), (5.4, 1.4, 0.06), 'paper'))
+    solids.append(Box((0.0, 2.0, -7.2), (5.4, 1.4, 0.06), 'wood'))
     for sx in (-3.0, 0.0, 3.0):
-        lights.append(Light((sx, 2.0, -7.0), (1.0, 0.56, 0.24), 14.0, 0.7))
+        lights.append(Light((sx, 1.7, -6.6), (1.0, 0.50, 0.20), 2.6, 0.5))
+    # the two hanging lanterns that give the reference its warm pools
+    for sx in (-2.4, 2.4):
+        _lantern(solids, lights, sx, 2.5, -6.4, power=2.2)
     # stone lanterns: the two big ones in the reference foreground
     for sx, z, s in ((-4.6, 3.6, 1.35), (4.6, 1.2, 1.15), (-5.2, -0.4, 1.0),
                      (5.4, 3.2, 1.0)):

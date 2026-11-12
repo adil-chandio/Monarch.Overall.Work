@@ -69,15 +69,15 @@ SHOTS = [
                     streak=0.26, vignette=0.40)),
     dict(name='S4-run-wide', start=312, end=384, set='courtyard',
          eye=(0.0, 1.46, 10.4), target=(0.0, 1.16, -1.0), fov=36.0,
-         pan_deg_per_s=4.9, ambient=(0.024, 0.030, 0.042), fog=0.038,
+         pan_deg_per_s=4.9, blur=2, ambient=(0.024, 0.030, 0.042), fog=0.038,
          mist=0.58, wet=0.52,
          grade=dict(exposure=1.05, contrast=1.14, saturation=1.02, lift=0.008,
                     streak=0.20, vignette=0.44),
          figure=dict(root=(-3.4, 1.0), walk=1.9, run=True, yaw=0.0,
                      frames=72, travel=0.105, height=0.0)),
     dict(name='S5-run-close', start=384, end=432, set='courtyard',
-         eye=(1.35, 1.32, 4.35), target=(-0.7, 1.16, -0.7), fov=35.0,
-         pan_deg_per_s=0.15, ambient=(0.013, 0.017, 0.028), fog=0.046,
+         eye=(1.45, 1.30, 5.95), target=(-0.8, 1.18, -0.9), fov=32.0,
+         pan_deg_per_s=0.15, blur=2, ambient=(0.013, 0.017, 0.028), fog=0.046,
          mist=0.70, wet=0.60,
          grade=dict(exposure=0.92, contrast=1.24, saturation=1.28, lift=0.0,
                     streak=0.30, vignette=0.54),
@@ -142,12 +142,15 @@ def render_one(fr, shot, width, height, f, t):
                     fog_tint=shot.get('fog_tint', (0.030, 0.042, 0.068)),
                     mist=shot.get('mist', 0.45), grade=shot['grade'],
                     wet=shot.get('wet', 0.0),
-                    focus=shot.get('focus'), shutter=shot.get('shutter', 0.0),
+                    focus=shot.get('focus'),
+                    shutter=0.5 if shot.get('blur', 1) > 1 else 0.0,
+                    pan_rate=shot.get('pan_deg_per_s', 0.0),
                     mist_layer=shot.get('mist_layer', 1.0))
     dyn = figure_solids_for(shot, f - shot['start'], t)
     prims = engine._flatten(dyn) if dyn else None
     img, _ = engine.render_frame(fr, s, width, height, t=t, dyn=prims,
                                  dof=shot.get('dof', 1),
+                                 blur=shot.get('blur', 1),
                                  ao=shot.get('ao', 0.0),
                                  seed=f * 7 + 1)
     return img

@@ -519,7 +519,7 @@ class Shot:
     def __init__(self, name, eye, target, fov=42.0, roll=0.0,
                  ambient=(0.10, 0.13, 0.19), fog=0.030, fog_tint=(0.055, 0.070, 0.100),
                  mist=0.45, grade=None, wet=0.42, fstop=None, focus=None,
-                 shutter=0.0, moon=None, mist_layer=1.0):
+                 shutter=0.0, moon=None, mist_layer=1.0, pan_rate=0.0):
         self.name = name
         self.eye = np.asarray(eye, np.float32)
         self.target = np.asarray(target, np.float32)
@@ -530,6 +530,7 @@ class Shot:
         self.wet = wet
         self.fstop, self.focus = fstop, focus
         self.shutter = shutter
+        self.pan_rate = pan_rate          # deg/s, used for sub-frame blur
         self.moon = moon
         self.mist_layer = mist_layer
 
@@ -556,9 +557,23 @@ def render_frame(fr, shot, width, height, t=0.0, dyn=None, dof=1, blur=1,
             jx = (rng.random((height, width), np.float32) - 0.5) * 1.2
             jy = (rng.random((height, width), np.float32) - 0.5) * 1.2
             if shot.shutter > 0:
-                jx = ((s + 0.5) / n - 0.5) * shot.shutter * width * 0.004 + jx * 0.3
+                jx = jx * 0.35
+                jy = jy * 0.35
             rd = geom.normalise(rd0 + (jx / width * 2 * ty)[..., None] * right
                                 + (jy / height * 2 * ty)[..., None] * up)
+            if shot.pan_rate and shot.shutter > 0:
+                # true sub-frame camera motion: the pan is sampled across the
+                # shutter window instead of being applied as a post blur
+                ang = np.radians(shot.pan_rate) * ((s + 0.5) / n - 0.5) \
+                    * shot.shutter
+                c, sn = math.cos(ang), math.sin(ang)
+                r2 = right * c - up * sn
+                u2 = up * c + right * sn
+                rd = geom.normalise(fwd[None, None, :] * 1.0
+                                    + (np.linspace(-1, 1, width, dtype=np.float32)
+                                       * ty * aspect)[None, :, None] * r2[None, None, :]
+                                    + (np.linspace(1, -1, height, dtype=np.float32)
+                                       * ty)[:, None, None] * u2[None, None, :])
         t_hit, mat, nrm = fr.trace(eye, rd, dyn=dyn, cam=cam)
         col, hit, dist = fr.shade(eye, rd, t_hit, mat, nrm, lights,
                                   shot.fog, shot.fog_tint, shot.ambient,

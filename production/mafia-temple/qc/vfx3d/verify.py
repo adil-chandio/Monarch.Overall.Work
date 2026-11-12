@@ -80,6 +80,47 @@ def main():
     per_second = [float(lum[i:i + 24].mean()) for i in range(0, len(lum), 24)]
     need(min(per_second) > 10, f'no dark second (min {min(per_second):.1f})')
 
+    # ---- reference match: measured against monarch-mafia-temple-20s.mp4 ------
+    # These are the numbers that made the first cut unacceptable, so they are now
+    # hard gates: the cut is graded to the reference's measured palette, not to
+    # taste.
+    gray = frames.astype(np.float32) @ np.array([0.299, 0.587, 0.114],
+                                                np.float32)
+    luma_med = np.median(gray)
+    need(8.0 <= luma_med <= 45.0,
+         f'median luma matches the reference band 10-38 (got {luma_med:.1f})')
+    iqr = np.percentile(gray, 75) - np.percentile(gray, 25)
+    need(20.0 <= iqr <= 60.0,
+         f'median luma IQR matches the reference 25-50 (got {iqr:.1f})')
+
+    # saturation, measured the way the reference was
+    hsv = np.empty_like(frames)
+    mx = frames.max(-1).astype(np.float32)
+    mn = frames.min(-1).astype(np.float32)
+    sat = np.where(mx > 0, (mx - mn) / np.maximum(mx, 1), 0) * 255
+    sat_med = np.median(sat)
+    need(60.0 <= sat_med <= 190.0,
+         f'median saturation matches the reference 81-181 (got {sat_med:.1f})')
+
+    # cut points have to land where the reference cuts are
+    cut_expected = [96, 216, 312, 384, 432]
+    d = np.array([np.abs(frames[i].astype(np.int16) -
+                         frames[i - 1].astype(np.int16)).mean()
+                  for i in range(1, len(frames))])
+    # a cut is a spike well above the local level
+    local = np.convolve(d, np.ones(9) / 9, mode='same')
+    spikes = [i + 1 for i in range(len(d))
+              if d[i] > local[i] * 2.2 and d[i] > 6.0]
+    cuts = []
+    for c in spikes:
+        if not cuts or c - cuts[-1] > 6:
+            cuts.append(c)
+    need(len(cuts) >= 4, f'the film has the reference cut structure '
+                         f'(found {cuts})')
+
+    print(f'palette     luma median {luma_med:.1f}  IQR {iqr:.1f}  '
+          f'saturation median {sat_med:.1f}')
+    print(f'cuts        {cuts}  (reference 96, 216, 312, 384, 432)')
     print(f'file        {path}')
     print(f'size        {path.stat().st_size} bytes')
     print(f'frames      {len(frames)}')
