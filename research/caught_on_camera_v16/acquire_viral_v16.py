@@ -52,49 +52,83 @@ WINDOW_S = 10.0
 SAMPLE_FPS = 4
 MAX_CLIPS = 20
 
-# VIRAL FUNNY queries — NOT animal-generic. Focus on fail/prank/trick/karma.
-# NOTE: bare "viral" queries pull medical "viral hepatitis/epidemic" — removed.
-# Title on-brand + medical/crime blocks below reject any medical/news leakage.
+# VIRAL FUNNY queries — intitle: forces TITLE match (precise, avoids fuzzy
+# description matches like "Fossil Lake" for "dog fail"). Bare "viral" removed
+# (pulls medical "viral hepatitis"). Title on-brand + blocks reject leakage.
 VIRAL_QUERIES = [
+    'intitle:fail filetype:video',
+    'intitle:prank filetype:video',
+    'intitle:trick filetype:video',
+    'intitle:karma filetype:video',
+    'intitle:funny filetype:video',
+    'intitle:hilarious filetype:video',
+    'intitle:cat filetype:video',
+    'intitle:dog filetype:video',
+    'intitle:baby filetype:video',
+    'intitle:slip filetype:video',
+    'intitle:fall filetype:video',
+    'intitle:scream filetype:video',
+    'intitle:jump filetype:video',
+    'intitle:dance filetype:video',
+    'intitle:skate filetype:video',
+    'intitle:parkour filetype:video',
+    'intitle:sports filetype:video',
+    'intitle:viral filetype:video',
+    'intitle:caught filetype:video',
+    'intitle:unexpected filetype:video',
+    'intitle:surprise filetype:video',
+    'intitle:amazing filetype:video',
+    'intitle:incredible filetype:video',
+    'intitle:smart filetype:video',
+    'intitle:clever filetype:video',
+    'intitle:rescue filetype:video',
+    'intitle:cute filetype:video',
+    'intitle:adorable filetype:video',
+    'intitle:compilation filetype:video',
+    'intitle:funniest filetype:video',
+    'intitle:laugh filetype:video',
+    'intitle:humor filetype:video',
+    'intitle:comedy filetype:video',
+    'intitle:joke filetype:video',
+    'intitle:animal filetype:video',
+    'intitle:monkey filetype:video',
+    'intitle:bear filetype:video',
+    'intitle:bird filetype:video',
+    'intitle:squirrel filetype:video',
+    'intitle:raccoon filetype:video',
+    'intitle:puppy filetype:video',
+    'intitle:kitten filetype:video',
+    'intitle:elephant filetype:video',
+    'intitle:horse filetype:video',
+    'intitle:goat filetype:video',
+    'intitle:rabbit filetype:video',
+    'intitle:penguin filetype:video',
+    'intitle:whale filetype:video',
+    'intitle:dolphin filetype:video',
+    'intitle:octopus filetype:video',
+    'intitle:fox filetype:video',
+    'intitle:deer filetype:video',
+    'intitle:owl filetype:video',
+    'intitle:pig filetype:video',
+    'intitle:cow filetype:video',
+    'intitle:parrot filetype:video',
+    'intitle:skill filetype:video',
+    'intitle:shock filetype:video',
+    'intitle:unbelievable filetype:video',
     'fail compilation filetype:video',
     'funny fail filetype:video',
     'prank filetype:video',
     'trick shot filetype:video',
     'instant karma filetype:video',
-    'slip fall funny filetype:video',
     'hilarious fail filetype:video',
     'cat fail filetype:video',
     'dog fail filetype:video',
     'baby fail filetype:video',
-    'skateboard fail filetype:video',
-    'parkour fail filetype:video',
-    'sports fail filetype:video',
     'funny animal fail filetype:video',
     'cute animal fail filetype:video',
-    'animal fails filetype:video',
-    'doorbell camera funny filetype:video',
-    'dashcam funny filetype:video',
-    'security camera funny filetype:video',
-    'CCTV funny filetype:video',
     'caught on camera funny filetype:video',
-    'YouTube funny filetype:video',
-    'TikTok funny filetype:video',
     'FailArmy filetype:video',
     'America Funniest filetype:video',
-    'funny prank caught on camera filetype:video',
-    'trick shot caught on camera filetype:video',
-    'slip fall caught on camera filetype:video',
-    'instant karma caught on camera filetype:video',
-    'funny viral moment filetype:video',
-    'viral video funny filetype:video',
-    'unexpected funny filetype:video',
-    'funny animal filetype:video',
-    'cute animals filetype:video',
-    'funny animals filetype:video',
-    'funny compilation filetype:video',
-    'hilarious funny filetype:video',
-    'prank caught on camera filetype:video',
-    'fail caught on camera filetype:video',
 ]
 
 # V14 20 titles — HARD EXCLUDE (owner rejected reuse). Lowercase substrings.
@@ -160,8 +194,9 @@ TITLE_ON_BRAND = (
     "shock", "unbelievable", "mind-blowing", "mind blowing",
 )
 
-# Medical / crime / news substring blocks (substring, not word-boundary).
-# Catches "viral hepatitis", "protests" (plural bug), "police", "spraying".
+# Medical / crime / news / volcano / farm / old-film substring blocks.
+# Catches "viral hepatitis", "protests" (plural bug), "police", "spraying",
+# volcano compilations, USDA farm "Animals (...)" series, old silent films.
 V16_BLOCK_SUBSTRINGS = (
     "hiv", "aids", "covid", "vaccine", "vacine", "hepatitis", "epidemic",
     "pandemic", "unaids", "measles", "sarampo", "retroviral", "herpes",
@@ -179,6 +214,15 @@ V16_BLOCK_SUBSTRINGS = (
     "behind the wheel", "eagan police", "christmas tree",
     "campaign", "commercial, 1959", "interplay-between",
     "correlates-with", "stress-granules", "infection-induces",
+    # Volcano / disaster (matched "compilation")
+    "kapoho", "kīlauea", "kilauea", "fissure", "volcano", "eruption",
+    "lava", "bay during", "conditions at",
+    # USDA farm generic series (matched "animals")
+    "fpac", "animals (20", "animals (19",
+    # Old silent / chalk films (boring, static)
+    "humorous phases", "unappreciated joke", "silent", "shortfilm",
+    "kinetoscope", "chalk", "(1903)", "(1900", "(1910", "(1920",
+    "cow island", "missouri", "river breaks",
 )
 
 BAD_LICENSE_TOKENS = ("by-sa", "by-nc", "sa 3.0", "sa 4.0", "fair use",
@@ -495,9 +539,17 @@ def main():
     # Prefer social-origin + funny titles first, then on-brand, then small files.
     pool.sort(key=lambda x: (-x["social_boost"], -x["funny_score"], -x["priority"], x["size"] or 1 << 30))
     accepted, failures = [], []
+    seen_norm = set()
     for cand in pool:
         if len(accepted) >= MAX_CLIPS:
             break
+        # Dedup near-duplicates (SD/HD, 1080p/720p variants of same title).
+        norm = re.sub(r"\.(webm|mp4|ogv|ogg|mov)$", "", cand["title"].lower())
+        norm = re.sub(r"\s+(hd|sd|1080p|720p|480p|360p|full hd|new)$", "", norm).strip()
+        if norm in seen_norm:
+            failures.append({"title": cand["title"], "reason": "duplicate_title"})
+            continue
+        seen_norm.add(norm)
         cid = len(accepted) + 1
         raw = WORK / f"raw_{cid:02d}.media"
         urls = [cand["url"]]
