@@ -1,0 +1,45 @@
+name: Monarch video niche research — YouTube public API
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/monarch-viral-audit.yml']
+permissions:
+  contents: write
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test data collection rules
+        run: python -m unittest discover -s research/monarch_viral_audit/tests -v
+      - name: Gather public API evidence
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+        run: python -u research/monarch_viral_audit/collect_youtube.py --output /tmp/monarch-youtube-audit.json
+      - name: Create a checksum-verified data receipt
+        id: receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64,hashlib,json,os,urllib.request
+          data=open('/tmp/monarch-youtube-audit.json','rb').read()
+          digest=hashlib.sha256(data).hexdigest()
+          payload=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode()
+          req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',data=payload,
+            headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          with urllib.request.urlopen(req,timeout=120) as response: blob=json.load(response)['sha']
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              print('sha='+blob,file=out); print('digest='+digest,file=out)
+          open('/tmp/receipt.txt','w').write('Data bytes: %d\nSHA-256: %s\n' % (len(data),digest))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: monarch-audit-${{ steps.receipt.outputs.sha }}-${{ steps.receipt.outputs.digest }}
+          path: /tmp/receipt.txt
+          retention-days: 2
+          if-no-files-found: error
