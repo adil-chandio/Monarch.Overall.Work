@@ -4,7 +4,7 @@
  "branch": "arena/50e3a0ae-monarch-overall-work",
  "head_at_capture": "e4f918baa9cb45cc3b7bf3a434cb1e91a8f18165",
  "captured_at": "2026-11-08T15:32:32Z",
- "updated_at": "2026-11-11T14:12:00Z",
+ "updated_at": "2026-11-12T02:55:07Z",
  "last_event_id": "evt-20261111T141128Z",
  "active_task": {
   "id": "mafia-temple-v8-measured-cut",
@@ -31,16 +31,27 @@
   "branch_guardrail": "Always work on arena/50e3a0ae-monarch-overall-work; never switch, rename, or push another branch."
  },
  "parallel_task": {
-  "id": "monarch-cam-v6-intent",
-  "title": "Next-level full-motion raw funny-animal ranking Short (unchanged, not started)",
-  "status": "unresolved_not_started",
-  "space": "yt-automation",
-  "evidence_level": "gap",
-  "rejected": [
-   "V4 \u201csirf text likh diya\u201d",
-   "V5 \u201cNAHI abhi bhi theek se nhi\u201d"
+  "id": "mafia-temple-3d-vfx-cut",
+  "title": "Monarch night temple \u2014 20 s 3D / VFX cut (ray-traced, no footage)",
+  "status": "rendered_and_verified_locally",
+  "space": "monarch-studio",
+  "channel": "mafia-temple",
+  "evidence_level": "repo_evidence",
+  "current_step": "A CPU ray tracer written for this sandbox (production/mafia-temple/qc/vfx3d/) renders the same five-beat 20 s night-temple film from geometry: 1280x720, 24 fps, 480 frames, 20.000 s, 30,102,356 bytes, -16.4 LUFS / -3.0 dBTP. verify.py reports VERIFIED: 0 duplicated frames, min frame-to-frame diff 1.79, no black or blown-out seconds.",
+  "next_action": "The publish3d job in .github/workflows/mafia-temple-v8-qc.yml renders the same cut on a runner and attaches it to release tag temple-3d-20s (trigger: commit message containing [publish-3d]). Give the owner that asset link.",
+  "start_here": [
+   "production/mafia-temple/V8-3D-REPORT.md",
+   "production/mafia-temple/qc/vfx3d/film3d.py",
+   "production/mafia-temple/qc/vfx3d/render.py",
+   "production/mafia-temple/qc/vfx3d/verify.py"
   ],
-  "next_action": "Build a separate V6 package only after per-title rights verification, visible hook/list geometry, extracted scenes, renderer, QC contract, workflow, MP4 and run. V5 stays untouched."
+  "blocking_gaps": [
+   "No human review of the 3D cut (technical gates only)",
+   "Figure is a generic low-poly stand-in: no likeness, no facial rig, no cloth sim",
+   "The ten OSS repos in the brief (Pencil2D, Friction, FreeMoCap, Effekseer, Theatre.js, OpenToonz, OpenVDB, Natron, Synfig, SVG.js) are all GUI/GL tools and cannot run headless in this sandbox; none was used",
+   "No GPU: one sample per pixel, no motion blur, no depth of field, no bounce light"
+  ],
+  "branch_guardrail": "Always work on arena/50e3a0ae-monarch-overall-work; never switch, rename, or push another branch."
  },
  "continuation_requirements": [
   "Repo-backed source of truth in Monarch.Overall.Work.",
