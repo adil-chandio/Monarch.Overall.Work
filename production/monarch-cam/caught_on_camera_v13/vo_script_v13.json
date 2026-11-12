@@ -1,11 +1,15 @@
 {
   "language": "en",
-  "voice_id": "voice-04",
-  "note": "V14 English only. Plain words for TTS. No SSML, no markup, no Urdu, no static-card instructions. Rewritten to match V14 20 funny clips (Bean x3, Chiitan, baby monkey, cat wheel, animals workout, baby elephant, DDR, April Fools, projector, scary maze x2, COMEDY, cat grooming, Flip x2, cat meowing, parallel parking, greased pigs). Old V13 cat/dog/bird/squirrel references removed.",
+  "voice_id": "voice-05",
+  "note": "V15 English only. Intro chunk 00 voice-06 (curiosity/FOMO), chunks 01-10 voice-05. Plain words for TTS. No SSML, no markup, no Urdu, no static-card instructions. 20 funny clips (Bean x3, Chiitan, baby monkey, cat wheel, animals workout, baby elephant, DDR, April Fools, projector, scary maze x2, COMEDY, cat grooming, Flip x2, cat meowing, parallel parking, greased pigs).",
   "chunks": [
     {
+      "id": "00",
+      "text": "Stop scrolling. In the next nine minutes you will see twenty moments the camera was never supposed to catch. Clip seventeen will make you rewind. Clip twelve will make you jump. And clip one? You are already watching it. Do not skip. The best one is not first."
+    },
+    {
       "id": "01",
-      "text": "Twenty moments. One camera. No intro, no warning. You are already inside clip one. Mr Bean at the pool. He walks up, he looks at the camera, and the whole scene changes. That is the rule here. If the joke lands in three seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin."
+      "text": "You already heard the warning. Now watch. You are already inside clip one. Mr Bean at the pool. He walks up, he looks at the camera, and the whole scene changes. That is the rule here. If the joke lands in three seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin."
     },
     {
       "id": "02",

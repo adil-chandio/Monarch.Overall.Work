@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build the V14 English caught-on-camera long-form compilation.
+"""Build the V15 English caught-on-camera long-form compilation.
 
 Rules enforced by construction:
-  * frame 1 is real footage (segment 1 from a clip window) - no intro/title/method card
+  * frame 1 is real footage + curiosity intro VO (chunk 00, voice-06) - no static title/method card
   * 120 moving beats of 4.5 s (3-5 s pattern interrupts), no still frame held >4.5 s
   * 20 distinct rights-documented clips, English VO + burned-in English captions
   * small lower-third source / round / counter overlays only, no full-screen diagrams
-  * native audio kept under short VO bursts, silent sources get a silent AAC track
+  * audio ducking: native 0.60 between VO, 0.15 during VO, VO 1.0 (voice clearly audible)
   * 9:00 / 540 s / 16,200 frames / 960x540 / 30 fps / H.264 / AAC
 This is a local render only. No upload, publish, monetisation, legal clearance,
 human creative approval, family-safety guarantee or guaranteed views is claimed.
@@ -45,8 +45,8 @@ TOTAL = BEATS * BEAT                       # 540.0 s
 EXPECTED_FRAMES = BEATS * BEAT_FRAMES      # 16200
 
 VO_DIR = PROD / "vo"
-VO_FILES = [VO_DIR / f"chunk_{i:02d}.mp3" for i in range(1, 11)]
-VO_STARTS = [54 * i for i in range(10)]   # 0,54,...,486
+VO_FILES = [VO_DIR / "chunk_00.mp3"] + [VO_DIR / f"chunk_{i:02d}.mp3" for i in range(1, 11)]
+VO_STARTS = [0] + [15 + 54 * i for i in range(10)]   # intro 0, then 15,69,...,501
 ROUND_LABELS = ["ROUND 1 / THE HOOK", "ROUND 2 / WHAT HAPPENED", "ROUND 3 / ONE MORE TIME"]
 ZOOMS = [(0, 0), (192, 108), (96, 54), (192, 0), (0, 108), (96, 0), (192, 54), (0, 54)]
 SPEEDS = [1.0, 0.85, 1.15, 1.3]
@@ -200,7 +200,7 @@ def make_edl(sel, ledgers, beats):
                               f"assets/overlay/counter_{b+1:03d}.txt"],
         })
     save_json(PROD / "EDL_V13.json", {
-        "version": "v14-clip-first-20-funny",
+        "version": "v15-clip-first-20-funny-intro-ducking",
         "beats": beats, "beat_s": BEAT, "rounds": ROUNDS,
         "total_s": round(beats * BEAT, 3),
         "distinct_clips": sel["count"],
@@ -270,17 +270,26 @@ def build_final(pilot=False):
     inputs = ["-f", "concat", "-safe", "0", "-i", str(concat)]
     for f in VO_FILES:
         inputs += ["-i", str(f)]
+    # V15 audio ducking: native 0.60 between VO, 0.15 during VO (0.60*0.25), VO 1.0.
+    # VO windows from actual mp3 durations so voice is clearly audible, native in gaps.
+    vo_windows = []
+    for _i, _f in enumerate(VO_FILES):
+        _s = VO_STARTS[_i]
+        _d = parse_duration(_f)
+        vo_windows.append((_s, _s + _d))
+    _enable = "+".join([f"between(t,{_s:.2f},{_e:.2f})" for _s, _e in vo_windows])
     filters = [f"[0:v]subtitles={PROD / 'captions_v13.srt'}:force_style='{SUB_STYLE}',"
                f"scale={W}:{H},fps={FPS},format=yuv420p[v]",
-               "[0:a]volume=0.30,aresample=48000,aformat=channel_layouts=stereo[a0]"]
+               f"[0:a]volume=0.60,volume=0.25:enable='{_enable}',"
+               f"aresample=48000,aformat=channel_layouts=stereo[a0]"]
     labels = ["[a0]"]
     for i, f in enumerate(VO_FILES, 1):
         d = int(VO_STARTS[i-1] * 1000)
-        filters.append(f"[{i}:a]adelay={d}|{d},volume=0.95,"
+        filters.append(f"[{i}:a]adelay={d}|{d},volume=1.0,"
                        f"aresample=48000,aformat=channel_layouts=stereo[a{i}]")
         labels.append(f"[a{i}]")
     filters.append("".join(labels) +
-                   f"amix=inputs=11:duration=first:normalize=0,"
+                   f"amix=inputs=12:duration=first:normalize=0,"
                    f"loudnorm=I=-14:TP=-1.5:LRA=11,atrim=0:{total:.3f},"
                    f"aformat=channel_layouts=stereo[a]")
     fc = ";".join(filters)
@@ -374,7 +383,7 @@ def contact_sheet(path, total):
 
 
 def make_credits(sel, ledgers):
-    lines = ["# V14 clip credits and rights ledger", "",
+    lines = ["# V15 clip credits and rights ledger", "",
              "All 20 clips are original Wikimedia Commons namespace-6 file pages with PD / CC0 / CC BY 3.0 / CC BY 4.0 commercial-reuse metadata recorded by the live Commons API. These are NOT unverified Instagram / TikTok / Reddit / Twitter / Dailymotion reposts. No legal opinion, no monetisation claim, no human legal review, no upload/publish.", ""]
     for c in sel["clips"]:
         a = ledgers[(c["ledger"], c["window_file"])]
@@ -454,7 +463,7 @@ def make_qc(probe, edl, cues, total, frames, pilot):
         "not_a_legal_opinion": True,
     }
     save_json(PROD / "QC_REPORT_V13.json", out)
-    md = ["# V14 technical QC", "", f"Technical pass: **{out['technical_pass']}**. "
+    md = ["# V15 technical QC", "", f"Technical pass: **{out['technical_pass']}**. "
           "This is NOT creative approval, legal clearance, or human sign-off.", ""]
     for k, v in checks.items():
         md.append(f"- `{k}`: {'PASS' if v else 'FAIL'}")
@@ -494,11 +503,11 @@ def main():
     make_about(probe, cues, pilot)
     qc = make_qc(probe, edl, cues, total, frames, pilot)
     save_json(PROD / "VIDEO_MANIFEST_V13.json", {
-        "version": "v14-clip-first-20-funny",
+        "version": "v15-clip-first-20-funny-intro-ducking",
         "pilot": pilot,
         "final_file": final.name,
         "vo_language": "en",
-        "vo_voice_id": "voice-05",
+        "vo_voice_id": "voice-05 (intro voice-06)",
         "vo_chunks": len(VO_FILES),
         "vo_starts_s": VO_STARTS,
         "vo_durations_s": [round(parse_duration(f), 2) for f in VO_FILES],

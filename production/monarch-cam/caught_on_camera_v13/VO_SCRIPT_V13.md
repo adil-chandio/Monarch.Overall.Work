@@ -1,14 +1,18 @@
-# V14 English VO Script
+# V15 English VO Script
 
-Language: English only. Voice: `voice-04`. No Urdu, no static cards, no diagrams.
+Language: English only. Intro voice: `voice-06`, main voice: `voice-05`. No Urdu, no static cards, no diagrams.
 
 Machine-readable source: `vo_script_v13.json`.
 
-V14 rewrite: matches 20 funny clips (Bean DIVE/HORROR/AMBULANCE, Chiitan mascot, baby monkey, cat wheel, animals workout, baby elephant, DDR, April Fools AI, projector prank, scary maze x2, Sr Pelo COMEDY, cat grooming, Flip Funny Face/Puddle Pranks, cat meowing, parallel parking, greased pigs). Old V13 cat/dog/bird/squirrel false references removed.
+V15: intro chunk 00 (voice-06) curiosity/FOMO + V14 rewrite: matches 20 funny clips (Bean DIVE/HORROR/AMBULANCE, Chiitan mascot, baby monkey, cat wheel, animals workout, baby elephant, DDR, April Fools AI, projector prank, scary maze x2, Sr Pelo COMEDY, cat grooming, Flip Funny Face/Puddle Pranks, cat meowing, parallel parking, greased pigs). Old V13 cat/dog/bird/squirrel false references removed.
+
+## Chunk 00 (Intro, voice-06)
+
+Stop scrolling. In the next nine minutes you will see twenty moments the camera was never supposed to catch. Clip seventeen will make you rewind. Clip twelve will make you jump. And clip one? You are already watching it. Do not skip. The best one is not first.
 
 ## Chunk 01
 
-Twenty moments. One camera. No intro, no warning. You are already inside clip one. Mr Bean at the pool. He walks up, he looks at the camera, and the whole scene changes. That is the rule here. If the joke lands in three seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin.
+You already heard the warning. Now watch. You are already inside clip one. Mr Bean at the pool. He walks up, he looks at the camera, and the whole scene changes. That is the rule here. If the joke lands in three seconds, we do not hold a card over it, we cut to the next one. Twenty real clips, three rounds, and the first one started before I finished this sentence. The footage is already moving, the captions are already on screen, and nothing is waiting for permission to begin.
 
 ## Chunk 02
 
