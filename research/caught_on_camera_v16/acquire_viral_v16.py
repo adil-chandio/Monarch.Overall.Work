@@ -260,6 +260,23 @@ V16_BLOCK_SUBSTRINGS = (
     "charting", "exceptional", "heat of 2023", "brooding",
     "chilean-oyster", "ostrea-chilensis", "unexpected-comple",
     "afe comedy", "comedy tour", "shape, hq", "bring the laughs",
+    # Science false positives (fail/trick/slip/unexpected in lab titles)
+    "ccl2", "mesenchymal", "stem-cells", "fail-to-establish",
+    "deficient", "cartilage", "phenotype", "cd4", "conditional-sos",
+    "unexpected-cartilage", "construction-of-impossibility",
+    "logic-based", "impossibility", "trics", "huntingtin",
+    "aggregation", "elife00710", "three-dimensional", "paper-based",
+    "slip-device", "one-step-point", "physical-sensing",
+    "microswimmers", "surface-properties", "transformation-from",
+    "plastic-flow", "deformation-mechani", "explanations-of",
+    # Aquarium whales (static pool swimming, not funny)
+    "kiska", "orcinu", "arctic cove", "delphinapterus",
+    "marineland", "niagara",
+    # Military TV spot / monastery (matched comedy/karma)
+    "afn", "naples", "tv spot", "carney park", "brings laughs",
+    "phodong", "karma thubten", "monastery", "chokhorling",
+    # Dedup Theodore series (keep "rinses", block "oiled")
+    "oiled wildlife",
 )
 
 BAD_LICENSE_TOKENS = ("by-sa", "by-nc", "sa 3.0", "sa 4.0", "fair use",
