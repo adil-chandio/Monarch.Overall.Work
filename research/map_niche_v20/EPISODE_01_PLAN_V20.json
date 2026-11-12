@@ -1,0 +1,396 @@
+{
+ "version": "V20",
+ "status": "PROPOSED_ORIGINAL_PRODUCTION_PLAN — NOT USER-APPROVED, NOT UPLOADED",
+ "series": "LINES ON A MAP (working title)",
+ "episode": "EP 01 — The US–Canada Border Is Not Actually Straight",
+ "language": "English (US audience)",
+ "niche_basis": {
+  "v19_corpus": "34 winner channels, 3,229 videos, 427 videos >=3x channel median",
+  "v20_corpus": "520 map/geography videos (12 US-first lanes), 25 channel catalogues = 2,377 videos",
+  "anchor_videos": [
+   {
+    "id": "qMkYlIA7mgw",
+    "channel": "CGP Grey",
+    "views": 37483831,
+    "duration_s": 282,
+    "why": "long-form same subject, 37.5M"
+   },
+   {
+    "id": "Z6NoQ-HI3gw",
+    "channel": "Reed Schultz Geo",
+    "views": 21709633,
+    "duration_s": 60,
+    "why": "60s border fact, 21.7M, US channel"
+   },
+   {
+    "id": "EocJm3Dry4E",
+    "channel": "Tom Scott",
+    "views": 18025997,
+    "duration_s": 175,
+    "why": "the road that crosses the border, 18.0M"
+   },
+   {
+    "id": "f3DnZlduEoE",
+    "channel": "GeoGlobeTales",
+    "views": 47081328,
+    "duration_s": 97,
+    "why": "border-oddities format at 47.1M"
+   },
+   {
+    "id": "7SkiLnZJO-E",
+    "channel": "Howtown",
+    "views": 44837676,
+    "duration_s": 59,
+    "why": "number-as-hook, 44.8M, US channel"
+   }
+  ],
+  "demand_signal": "Google/YouTube autocomplete (gl=us): 'point roberts' 10 completions incl. map/population/usa; 'weird borders' 10 incl. 'weird borders canada us'; 'us canada border' 9 incl. length/latitude/parallel/map; 'map borders explained' 0",
+  "honest_gap": "No video in the V20 corpus is titled 'Point Roberts' (0 hits). The subject has demand signal and one big reference video, not a proven saturated lane. That is an upside and a risk."
+ },
+ "runtime": {
+  "target_seconds": 1020,
+  "vo_words": 1397,
+  "vo_wpm": 155,
+  "chapters": 9,
+  "vo_seconds_at_155wpm": 541,
+  "note": "1397 VO words = ~9.0 min of speech; runtime 1020s leaves ~8.0 min of visual breathing room by design"
+ },
+ "aspect": "16:9 1920x1080 (long/medium) · 9:16 1080x1920 (shorts)",
+ "production_route": "Hybrid: 2.5D orthographic map for 92% of shots, 3D (Blender) for 8-10 hero shots only",
+ "route_hours_estimate": {
+  "2_5d_only": "120-200 h",
+  "full_3d": "325-680 h",
+  "hybrid": "200-280 h",
+  "note": "estimates from shot count x per-shot time; not a vendor quote, not a commitment"
+ },
+ "chapters": [
+  {
+   "n": 1,
+   "t": "0:00",
+   "title": "A line that isn't straight",
+   "vo_key": "co",
+   "visual": "black -> single white line -> kink appears -> pull back to continent strip; title card",
+   "text_on_screen": [
+    "NOT STRAIGHT",
+    "5,525 MILES"
+   ],
+   "claim_type": "contradiction",
+   "verify": [
+    "border length"
+   ]
+  },
+  {
+   "n": 2,
+   "t": "0:50",
+   "title": "The word straight",
+   "vo_key": "c1",
+   "visual": "globe with 49th parallel circle -> flatten to map -> surveyed segments with drift -> zoom to zig-zag",
+   "text_on_screen": [
+    "49TH PARALLEL",
+    "~900 SEGMENTS"
+   ],
+   "claim_type": "definition + mechanism",
+   "verify": [
+    "Treaty of 1818",
+    "survey years",
+    "segment count",
+    "deviation"
+   ]
+  },
+  {
+   "n": 3,
+   "t": "2:40",
+   "title": "The 20-foot gap",
+   "vo_key": "c2",
+   "visual": "aerial forest plane -> 6 m cleared strip -> tree falls on line -> Alaska/Yukon zoom",
+   "text_on_screen": [
+    "20 FEET / 6 METRES",
+    "NOT A FENCE"
+   ],
+   "claim_type": "physical evidence",
+   "verify": [
+    "cleared-strip width",
+    "maintenance practice"
+   ]
+  },
+  {
+   "n": 4,
+   "t": "5:00",
+   "title": "1783: the map with a hole in it",
+   "vo_key": "c3",
+   "visual": "1783 map plane -> inset box slides over NW corner -> line drawn west -> hits nothing -> 1818 correction -> Northwest Angle highlighted -> 3-crossing road route",
+   "text_on_screen": [
+    "SOMEWHERE -> NOWHERE",
+    "NORTHWEST ANGLE",
+    "YOU CANNOT DRIVE HERE"
+   ],
+   "claim_type": "historical",
+   "verify": [
+    "1783 treaty wording",
+    "Mississippi source",
+    "Northwest Angle status"
+   ]
+  },
+  {
+   "n": 5,
+   "t": "8:00",
+   "title": "Point Roberts",
+   "vo_key": "c4",
+   "visual": "1846 line across peninsula -> below turns US blue -> water on 3 sides -> school route with 4 crossings -> dentist/hardware/hospital icons",
+   "text_on_screen": [
+    "POINT ROBERTS",
+    "~1,000 PEOPLE",
+    "4 CROSSINGS A DAY"
+   ],
+   "claim_type": "human consequence",
+   "verify": [
+    "1846 Oregon Treaty",
+    "Vancouver Island routing",
+    "population",
+    "school catchment",
+    "border crossing count"
+   ]
+  },
+  {
+   "n": 6,
+   "t": "11:30",
+   "title": "The other side of the line",
+   "vo_key": "c5",
+   "visual": "4 map vignettes @15-20s: lake peninsula, Atlantic island + lighthouse, Canadian island/bridge, resurveyed parcels",
+   "text_on_screen": [
+    "LAKE",
+    "LIGHTHOUSE",
+    "BRIDGE"
+   ],
+   "claim_type": "pattern",
+   "verify": [
+    "each vignette's facts"
+   ]
+  },
+  {
+   "n": 7,
+   "t": "13:30",
+   "title": "Why it matters",
+   "vo_key": "c6",
+   "visual": "map -> line -> decision diagram (border as man-made object); no politics imagery",
+   "text_on_screen": [
+    "A DECISION, NOT A FACT"
+   ],
+   "claim_type": "synthesis",
+   "verify": []
+  },
+  {
+   "n": 8,
+   "t": "15:30",
+   "title": "What we could not verify",
+   "vo_key": "c7",
+   "visual": "sources card, plain; correction policy; explicit scope boundary",
+   "text_on_screen": [
+    "SOURCES IN DESCRIPTION",
+    "NOT ABOUT POLICY"
+   ],
+   "claim_type": "disclosure",
+   "verify": []
+  },
+  {
+   "n": 9,
+   "t": "16:40",
+   "title": "Close + vote",
+   "vo_key": "c8",
+   "visual": "3 vote cards; end card 'LINES ON A MAP — new map every two weeks'",
+   "text_on_screen": [
+    "LAKE / PENINSULA / MAIN STREET"
+   ],
+   "claim_type": "CTA (vote)",
+   "verify": []
+  }
+ ],
+ "vo_blocks": {
+  "co": {
+   "words": 93,
+   "text": "This is the border between the United States and Canada. It is 5,525 miles long. It is the longest international border on Earth. And for about two hundred years, everyone has described it with the same word: straight. It is not straight. Not because of politics. Not because of a dispute. Because of a map that had a hole in it, a compass, and a ball of string. This is the story of a line that nobody could actually draw, and the one thousand Americans who live on the wrong side of it."
+  },
+  "c1": {
+   "words": 201,
+   "text": "Start with the claim. On almost every map, the western half of this border is a horizontal line. It looks like someone took a ruler to a continent. And the treaties do say that. The Treaty of 1818 set the boundary at the 49th parallel, from Lake of the Woods to the Rocky Mountains. A line of latitude is, mathematically, a perfect circle around the planet. So on paper, the border really is a clean curve. Here is the problem. A treaty line is an idea. A border is a thing that has to exist on the ground, through forest, through muskeg, through lakes, through mountains nobody had surveyed. So between 1872 and 1876, surveyors went out to make the idea real. They did not have GPS. They had a compass, a chain, and the best astronomy of the 1870s. And when you do that for hundreds of miles, small errors accumulate. The result is a border made of roughly nine hundred straight segments, a line that zig-zags above and below the 49th parallel by as much as a few hundred feet. On a globe, you cannot see it. At ground level, it decides which country a tree is standing in."
+  },
+  "c2": {
+   "words": 185,
+   "text": "Here is what most people have never seen. This border is not just a line. It is a physical gap. A cleared strip, about twenty feet wide, running the entire length of the land border. Six metres. Both countries agreed to keep it clear. No trees, no buildings, no touching. Which means if you fly over the northern United States, you can see the border. Not a fence. Not a wall. A mowed line through a forest, three thousand miles long. And here is the detail that tells you how serious this is. In the middle of one of the most remote stretches of North America, the Alaska and Yukon wilderness, the two countries still send people out to cut the trees down. Now hold that image, because it becomes important later. A line that is six metres wide and five thousand miles long is a very strange thing to build. And it exists because two countries wanted it to be completely obvious which side of the continent is whose. Which is ironic, because in about a dozen places, it is not obvious at all."
+  },
+  "c3": {
+   "words": 246,
+   "text": "To understand the weird parts, you have to go back to the end of the American Revolution. In 1783, American and British negotiators sat down to draw a border across a continent that neither side had fully mapped. They had a map. It was the best available. And in the northwest, that map had an inset, a small box drawn over the corner of the map, covering the exact area they were arguing about. So they negotiated blind. They wrote that the border would run from the northwest corner of a lake, west, until it met the Mississippi River. There was one problem. The Mississippi does not go that far north. The line ran west, and kept running, and hit nothing. So the border was vague. It stayed vague for thirty-five years. In 1818, the two sides tried again, and this time they used a line of latitude, the 49th parallel. But the lake they were measuring from turned out to be higher and less round than the map showed. So the new line had to jump north to meet the lake, then drop straight down to the 49th parallel, cutting off a small piece of Canada in the process. That piece of Canada is called the Northwest Angle. It is part of the United States. And you cannot drive to it from the United States. To get there by road, you leave the United States, drive through Canada, and come back into the United States."
+  },
+  "c4": {
+   "words": 252,
+   "text": "Which brings us to the strangest result of that same line. In 1846, Britain and the United States agreed to extend the 49th parallel west, all the way to the sea. They were careful about one thing: Vancouver Island. The line would have cut straight through it. Both sides agreed that would be ridiculous, so the border was routed around the island, through the water. What nobody noticed was a small peninsula just south of the line. The line crossed it. Everything below the line became the United States. Everything above became Canada. And because the peninsula was attached to Canada on its north side, and surrounded by water on the other three, the American part became an island. Not by water. By line. It is called Point Roberts. About a thousand people live there. There is a primary school. There is no high school. Which means, every school day, teenagers who live in the United States get in a car, drive north across an international border into Canada, drive east, and cross back into the United States to go to school. Their school is in their own state. They just cannot get there without leaving their country. Think about what that means practically. A dentist appointment. A hardware store. A hospital. Anything that is not in that small triangle of land requires a passport. This is not a war. Nobody is fighting. It is just a line that was drawn on a map by people who could not see the ground."
+  },
+  "c5": {
+   "words": 138,
+   "text": "Point Roberts is one of a family. Once you know what to look for, you find these places everywhere on this border. There is a lake where the border runs through the water and cuts off a small Canadian peninsula, where about a hundred Americans live. There is an island in the Atlantic that both countries claim, where Canada built a lighthouse and the United States, for years, simply ignored the lighthouse. There is a Canadian island whose only road connection is a bridge into the United States. The pattern is always the same. An old survey, a bad map, or a line that had to be adjusted for something practical, a road, a lake, a farm, and a community that ended up on the wrong side of a decision made two hundred years before they were born."
+  },
+  "c6": {
+   "words": 100,
+   "text": "So why does a two-hundred-year-old surveying error matter now? Three reasons. One. It shows you that a border is not a natural object. It is a decision, made by people, with tools that were imperfect, and every imperfection became somebody's daily life. Two. It explains a whole genre of geography content, the weird border video, which is not really about weirdness. It is about the gap between the map in your head and the ground under your feet. Three. It is a reminder that the most interesting thing on a map is usually not the country. It is the line."
+  },
+  "c7": {
+   "words": 113,
+   "text": "A note on sources, because this video makes a lot of specific claims. Every number in this video is in the description, with where it came from. The treaty dates, the length of the border, the size of the gap, the survey count, the population of Point Roberts. If any of them is wrong, the correction goes in the description and, if it is big enough, in a pinned comment. And there is one thing I want to be clear about. This video is about geometry and history. It is not about immigration policy, border enforcement, or who should be allowed where. That is a different conversation, and it is not this one."
+  },
+  "c8": {
+   "words": 69,
+   "text": "There are about a dozen places on this border where the line does something a line should not do. I have shown you three. The next one is a lake, a piece of Canada that sticks into the United States, and a town where the border runs through the main street. Vote in the comments. The lake, the peninsula, or the main street. I will build whichever one wins."
+  }
+ },
+ "metadata": {
+  "titles": [
+   "The US–Canada Border Is Not Actually Straight",
+   "5,525 Miles of Border, 900 Kinks: Why the US–Canada Line Is Broken",
+   "The Map Mistake That Put 1,000 Americans Behind Canada"
+  ],
+  "description": "The US–Canada border is 5,525 miles long and is usually described as straight.\nIt isn't. This is the story of the map with a hole in it, the surveyors who made\nthe line real, and the ~1,000 Americans who live on the wrong side of it.\n\nCHAPTERS\n0:00 A line that isn't straight\n0:50 The word \"straight\"\n2:40 The 20-foot gap\n5:00 1783: the map with a hole in it\n8:00 Point Roberts\n11:30 The other side of the line\n13:30 Why it matters\n15:30 What we could not verify\n16:40 Next map\n\nSOURCES & NUMBERS  [VERIFY before publish]\n- Border length, 49th parallel, treaty dates: Treaty of 1818 / Oregon Treaty 1846\n- Survey period and monument count: International Boundary Commission records\n- Point Roberts population and school situation: local/county sources\n- 20-foot cleared strip: International Boundary Commission maintenance policy\n\nCORRECTIONS\nIf a number in this video is wrong, we'll note it here and pin a comment.\nCorrections are not embarrassing. Hiding them is.\n\n#geography #map #bordercrossing",
+  "tags": [
+   "us canada border",
+   "49th parallel",
+   "point roberts",
+   "border geography",
+   "map animation",
+   "geography explained",
+   "weird borders",
+   "northwest angle",
+   "international boundary",
+   "cartography",
+   "map facts",
+   "north america geography",
+   "lines on a map"
+  ],
+  "pinned_comment": "Every number in this video is in the description with its source. If you find a mistake, reply here — corrections go in the description, not down the memory hole.\n\nNext map: the lake, the peninsula, or the main street? Vote.",
+  "thumbnail": {
+   "text": "NOT STRAIGHT",
+   "palette": {
+    "land": "#d8cbb4",
+    "water": "#276092",
+    "accent": "#e0473c",
+    "bg": "#1b2a41"
+   },
+   "composition": "left: kinked border line + white 20-ft strip; right: tiny enclave polygon pinned 'US'",
+   "rules": [
+    "no fake arrows",
+    "no shocked face",
+    "every on-thumbnail claim appears in the video",
+    "text in top 18%"
+   ]
+  }
+ },
+ "shorts": [
+  {
+   "id": "S1",
+   "title": "The US Town You Can Only Reach Through Canada",
+   "seconds": 58,
+   "vo_words": 195,
+   "hook": "This is Point Roberts. It's in the United States. You cannot drive to it from the United States.",
+   "beats": [
+    "hook",
+    "1846 line",
+    "line-island",
+    "school route 4 crossings",
+    "dentist/hardware/hospital",
+    "close"
+   ],
+   "thumb_text": "YOU CAN'T DRIVE HERE"
+  },
+  {
+   "id": "S2",
+   "title": "America's Border Has a 20-Foot Gap",
+   "seconds": 47,
+   "vo_words": 160,
+   "hook": "There is a 20-foot gap running through North America. It's 5,525 miles long.",
+   "beats": [
+    "hook",
+    "6m cleared strip",
+    "Alaska/Yukon trees",
+    "900 segments",
+    "close"
+   ],
+   "thumb_text": "20 FEET"
+  },
+  {
+   "id": "S3",
+   "title": "The \"Straight\" Border That Zig-Zags 900 Times",
+   "seconds": 60,
+   "vo_words": 200,
+   "hook": "This is called the longest straight border in the world.",
+   "beats": [
+    "claim",
+    "900 segments",
+    "1870s surveyors",
+    "globe vs ground",
+    "20-ft strip",
+    "close"
+   ],
+   "thumb_text": "NOT STRAIGHT"
+  }
+ ],
+ "medium": {
+  "title": "Why the 49th Parallel Isn't a Straight Line",
+  "seconds": 600,
+  "chapters": 9,
+  "difference_from_long": "long = human consequence (Point Roberts); medium = method (how a treaty line becomes a ground line)"
+ },
+ "editing_spec": {
+  "shot_len_long": "6-9s",
+  "shot_len_short": "4-7s",
+  "vo_wpm_long": 155,
+  "vo_wpm_short": 195,
+  "sentence_words": "14-18",
+  "numbers_on_screen": true,
+  "transitions": "hard cut",
+  "music": "70-85 BPM, no drops",
+  "captions": "burned-in on shorts, YouTube captions on long",
+  "colours": {
+   "land": "#d8cbb4",
+   "water": "#276092",
+   "accent": "#e0473c",
+   "border": "#ffffff",
+   "ink": "#1b2a41"
+  }
+ },
+ "assets": {
+  "map_data": "Natural Earth (public domain, 1:50m admin-0 boundaries + admin-1 for state lines)",
+  "must_credit": "Natural Earth",
+  "forbidden": "competitor footage, competitor audio, competitor frames, unlicensed music"
+ },
+ "safety_and_policy": {
+  "avoid": [
+   "immigration policy",
+   "border enforcement politics",
+   "indigenous land-rights claims without sourcing",
+   "any claim about who should be where"
+  ],
+  "note": "policy/legal context only; not legal advice, not clearance, no upload or monetisation claim"
+ },
+ "verification_backlog": [
+  "border length 5,525 mi",
+  "49th parallel + Treaty of 1818 text",
+  "survey years 1872-1876",
+  "~900 segments/deviation",
+  "20 ft / 6 m cleared strip",
+  "1783 treaty wording + inset-map claim",
+  "Mississippi headwaters vs treaty line",
+  "Oregon Treaty 1846 + Vancouver Island routing",
+  "Point Roberts population + school catchment + 4 crossings",
+  "Northwest Angle road route",
+  "lake peninsula population",
+  "Atlantic island lighthouse dispute",
+  "Canadian island single bridge"
+ ],
+ "not_approved": [
+  "final niche",
+  "series name",
+  "episode subject",
+  "3D route",
+  "publish/upload",
+  "spend"
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "generated_utc": "2026-11-12T21:00:00Z",
+ "bucket_aggregates": {
+  "short": {
+   "n": 15,
+   "face_share": 0.157,
+   "face_present": 0.867,
+   "face_upper_half": 0.159,
+   "contrast": 0.192,
+   "brightness": 0.221,
+   "accent_share": 0.381,
+   "text_edge_energy": null,
+   "text_row_span": 39.267,
+   "busy": 2.235
+  },
+  "medium": {
+   "n": 2,
+   "face_share": 0.228,
+   "face_present": 1,
+   "face_upper_half": 0.137,
+   "contrast": 0.301,
+   "brightness": 0.679,
+   "accent_share": 0.709,
+   "text_edge_energy": null,
+   "text_row_span": 32.5,
+   "busy": 4.64
+  },
+  "long": {
+   "n": 4,
+   "face_share": 0.218,
+   "face_present": 0.5,
+   "face_upper_half": 0.181,
+   "contrast": 0.262,
+   "brightness": 0.504,
+   "accent_share": 0.651,
+   "text_edge_energy": null,
+   "text_row_span": 70.5,
+   "busy": 3.453
+  }
+ },
+ "all": {
+  "n": 21,
+  "face_share": 0.176,
+  "face_present": 0.81,
+  "face_upper_half": 0.161,
+  "contrast": 0.216,
+  "brightness": 0.319,
+  "accent_share": 0.464,
+  "text_edge_energy": null,
+  "text_row_span": 44.571,
+  "busy": 2.696
+ }
+}

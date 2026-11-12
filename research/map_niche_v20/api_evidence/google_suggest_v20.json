@@ -1,0 +1,78 @@
+{
+ "generated_utc": "2026-11-12T21:05:00Z",
+ "method": "Google/YouTube autocomplete via suggestqueries (client=firefox, gl=us); read through the public suggestion endpoint; no key, no account",
+ "boundary": "Ordered demand signal only: appearing at all means some real query volume, position means it beats other completions of the same stem. Not search volume, not trends, not interest over time.",
+ "probes": {
+  "why does the us border": [
+   "why are the us borders closed",
+   "why was the us border patrol created",
+   "why do us border take fingerprints",
+   "why do mexicans cross the us border illegally",
+   "why was the us mexico border created",
+   "why was the us canada border established"
+  ],
+  "us canada border": [
+   "us canada border",
+   "us canada border wait times",
+   "us canada border crossing",
+   "us canada border map",
+   "us canada border crossing times",
+   "us canada border crossing wait times",
+   "us canada border latitude",
+   "us canada border length",
+   "us canada border parallel"
+  ],
+  "point roberts": [
+   "point roberts washington",
+   "point roberts wa",
+   "point roberts weather",
+   "point roberts washington map",
+   "point roberts real estate",
+   "point roberts population",
+   "point roberts marina",
+   "point roberts tides",
+   "point roberts usa",
+   "point roberts golf course"
+  ],
+  "weird borders": [
+   "weird borders",
+   "weird borders in the world",
+   "weird borders in europe",
+   "weird borders canada us",
+   "weird borders in africa",
+   "belgium weird borders",
+   "weird borders between countries",
+   "weird borders in the us",
+   "weird borders book",
+   "weird borders reddit"
+  ],
+  "why is there a town": [
+   "why is there a town called chevy chase",
+   "why is there a town in pennsylvania called jersey shore",
+   "why is there a town called hell in michigan",
+   "why is there a town in idaho called moscow",
+   "why is there a town called intercourse",
+   "why is there a town called king of prussia",
+   "why is there a town named after chevy chase",
+   "why is there a town called truth or consequences"
+  ],
+  "darién gap map": [
+   "darién gap map",
+   "darién gap map google",
+   "darién gap map pdf",
+   "darien gap map route",
+   "darien gap map google earth",
+   "darién gap trail map",
+   "darien gap topographic map",
+   "darien gap road map",
+   "darien gap crossing map"
+  ],
+  "map borders explained": []
+ },
+ "readings": {
+  "point roberts": "real, sustained intent: map + population + 'usa' completions - people already want to know what this place IS",
+  "weird borders": "'weird borders canada us' and 'weird borders in the us' both surface under a US locale - the US-border angle is a live sub-intent",
+  "us canada border": "'length', 'latitude', 'parallel', 'map' - the straight-line/49th-parallel explainer matches how people actually look this up",
+  "map borders explained": "zero completions for this exact stem - 'borders explained' is not a phrase people type; the demand sits in concrete places, not in the abstract topic"
+ }
+}
