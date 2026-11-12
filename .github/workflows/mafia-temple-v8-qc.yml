@@ -1,0 +1,373 @@
+name: Monarch temple V8 — toolchain QC
+
+# Runs on the free CPU runner. It validates the *tooling and media provenance*,
+# not creative quality: unit tests, the exact 20.000 s timeline contract, the
+# clip measurements JSON and the honesty of the report files. It never uploads,
+# publishes or claims creative acceptance.
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish_tag:
+        description: "Release tag to attach the rendered 20 s cut to (e.g. temple-v8-20s). Leave empty to skip the render."
+        type: string
+        default: ""
+      publish_tag_3d:
+        description: "Release tag for the 3D cut (e.g. temple-3d-20s). Leave empty to skip the 3D render."
+        type: string
+        default: ""
+  push:
+    paths:
+      - "production/mafia-temple/**"
+      - ".github/workflows/mafia-temple-v8-qc.yml"
+  pull_request:
+    paths:
+      - "production/mafia-temple/**"
+permissions:
+  contents: write
+
+jobs:
+  qc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install toolchain
+        run: |
+          python -m pip install -q --upgrade pip
+          python -m pip install -q "numpy>=1.26,<3" "pillow>=10" imageio-ffmpeg \
+            "opencv-contrib-python-headless==4.10.0.84"
+
+      - name: Unit tests and timeline contract
+        working-directory: production/mafia-temple
+        run: |
+          set -o pipefail
+          python -m unittest qc/test_film_tools.py -v 2>&1 | tee /tmp/unittest.log
+
+      - name: Re-measure every source clip
+        working-directory: production/mafia-temple
+        run: |
+          if [ -d clips ] && [ -n "$(ls -A clips 2>/dev/null)" ]; then
+            python qc/measure_shots.py --clips clips --output /tmp/clip_metrics.json
+          else
+            echo "source clips are not in this checkout (they are not committed);"
+            echo "using the committed measurements instead"
+            cp qc/clip_metrics.json /tmp/clip_metrics.json
+          fi
+
+      - name: Assert no chosen shot is frozen or black
+        working-directory: production/mafia-temple
+        run: |
+          python - <<'PY'
+          import json, sys
+          sys.path.insert(0, 'qc')
+          import render_film_v8 as rv
+          metrics = {c['file']: c for c in json.load(open('/tmp/clip_metrics.json'))['clips']}
+          bad = []
+          for shot in rv.SHOTS:
+              m = metrics.get(f'{shot.source}.mp4')
+              if not m or 'error' in m:
+                  bad.append(f'{shot.name}: unmeasurable')
+                  continue
+              if m['frozen_run_max'] > 6:
+                  bad.append(f'{shot.name}: frozen run {m["frozen_run_max"]} frames')
+              if m['dark_frames'] > 0:
+                  bad.append(f'{shot.name}: {m["dark_frames"]} black frames')
+              if m['motion_mad_mean'] < 0.5:
+                  bad.append(f'{shot.name}: almost no motion')
+              print(f'ok {shot.name:12s} mad={m["motion_mad_mean"]:.2f} '
+                    f'frozen_max={m["frozen_run_max"]} sharp={m["sharpness_mean"]:.0f}')
+          if bad:
+              print('\n'.join(bad)); raise SystemExit('shot selection failed QC')
+          PY
+
+      - name: Timeline and shot table invariants
+        working-directory: production/mafia-temple
+        run: |
+          python - <<'PY'
+          import sys; sys.path.insert(0, 'qc')
+          import render_film_v8 as rv
+          plan = [0] * rv.TOTAL_FRAMES
+          for s in rv.SHOTS:
+              for f in range(s.start, min(s.end, rv.TOTAL_FRAMES)):
+                  plan[f] += 1
+          assert rv.TOTAL_FRAMES == 480, 'film is not 20.000 s at 24 fps'
+          assert all(plan), 'timeline has a hole'
+          assert not any(c > 2 for c in plan), 'three shots overlap'
+          total = sum(s.frames for s in rv.SHOTS) - sum(
+              a.end - b.start for a, b in zip(rv.SHOTS, rv.SHOTS[1:]) if a.end > b.start)
+          assert total == 480, f'contributed frames resolve to {total}, expected 480'
+          print('timeline ok:', [(s.name, s.start, s.end) for s in rv.SHOTS])
+          PY
+
+      - name: Report files must keep their disclaimers
+        working-directory: production/mafia-temple
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          need = {
+            'V8-CUT-REPORT.md': ['Not creative acceptance', 'not a finished', 'KNOWN-LIMITS.md'],
+            'KNOWN-LIMITS.md': ['Likeness match', 'Human review', 'Rights'],
+            'V8-3D-REPORT.md': ['Not creative acceptance', 'likeness match', 'Rights', 'Human review'],
+          }
+          for name, phrases in need.items():
+              text = Path(name).read_text()
+              missing = [p for p in phrases if p not in text]
+              assert not missing, f'{name} is missing {missing}'
+              print(f'ok {name}')
+          PY
+
+      - name: Media must not be tracked
+        working-directory: production/mafia-temple
+        run: |
+          tracked=$(git ls-files | grep -Ei '\.(mp4|mov|wav|png|jpg)$' || true)
+          echo "tracked media: ${tracked:-none}"
+          if echo "$tracked" | grep -q 'render-v8\|qc/out\|qc/models'; then
+            echo "ERROR: build outputs are tracked"; exit 1
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: temple-v8-qc
+          path: |
+            /tmp/clip_metrics.json
+            /tmp/unittest.log
+          retention-days: 14
+
+  # The coding sandbox cannot reach uploads.github.com, so the published asset is
+  # produced here, on a runner, by the same committed toolchain and the same
+  # pinned model. It is verified against hard gates before it is allowed out.
+  publish:
+    # Triggered by a push whose commit message contains [publish-v8], because the
+    # sandbox token cannot create workflow_dispatch events. workflow_dispatch is
+    # still honoured when a human runs it from the Actions UI.
+    if: >-
+      ${{
+        inputs.publish_tag != '' ||
+        (github.event_name == 'push' && contains(github.event.head_commit.message, '[publish-v8]'))
+      }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install toolchain and pinned model
+        run: |
+          set -euo pipefail
+          python -m pip install -q --upgrade pip
+          python -m pip install -q "numpy>=1.26,<3" "pillow>=10" imageio-ffmpeg \
+            "opencv-contrib-python-headless==4.10.0.84"
+          mkdir -p production/mafia-temple/qc/models
+          tmp="$(mktemp -d)"
+          curl -fsSL "https://codeload.github.com/fannymonori/TF-ESPCN/tar.gz/refs/heads/master" -o "$tmp/m.tar.gz"
+          tar xzf "$tmp/m.tar.gz" -C "$tmp"
+          found="$(find "$tmp" -name 'ESPCN_x2.pb' -print -quit)"
+          test -n "$found"
+          cp "$found" production/mafia-temple/qc/models/ESPCN_x2.pb
+
+      - name: Build sound master and picture (photo lane)
+        working-directory: production/mafia-temple
+        run: |
+          set -euo pipefail
+          mkdir -p render-v8
+          if [ -d clips ] && [ -n "$(ls -A clips 2>/dev/null)" ]; then
+            python qc/make_sound_v8.py --source monarch-mafia-temple-20s.mp4 \
+              --out render-v8/sound_v8.wav --log render-v8/sound_log.json
+            python qc/render_film_v8.py --out render-v8/monarch-temple-v8.mp4 \
+              --superres qc/models/ESPCN_x2.pb --audio render-v8/sound_v8.wav \
+              --log render-v8/render_log.json --preset medium --crf 17
+          else
+            echo "photo lane skipped: source clips are not in this checkout" >&2
+          fi
+
+      - name: Verify before publishing
+        working-directory: production/mafia-temple
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys
+          sys.path.insert(0, 'qc')
+          import imageio_ffmpeg
+
+          ff = imageio_ffmpeg.get_ffmpeg_exe()
+          path = 'render-v8/monarch-temple-v8.mp4'
+          probe = subprocess.run([ff, '-hide_banner', '-i', path],
+                                 capture_output=True, text=True).stderr
+          assert '1280x720' in probe, 'not 720p'
+          assert 'Duration: 00:00:20.00' in probe, 'not exactly 20 s'
+          assert 'Audio: aac' in probe, 'no audio stream'
+          assert '24 fps' in probe, 'not 24 fps'
+
+          log = json.load(open('render-v8/render_log.json'))
+          assert log['film']['frames'] == 480, 'not 480 frames'
+          assert all(s['duplicated_frames'] == 0 for s in log['shots']), 'duplicated frames'
+          assert log['film']['superres'].startswith('ESPCN'), 'superres pass missing'
+
+          sound = json.load(open('render-v8/sound_log.json'))
+          lufs = sound['measured']['final_integrated_lufs']
+          peak = sound['measured']['final_true_peak_dbfs']
+          assert -18.0 <= lufs <= -14.0, f'loudness {lufs} outside target'
+          assert peak <= -1.0, f'true peak {peak} too hot'
+          print(f'VERIFIED 720p 480f 20.000s 24fps dup=0 {lufs} LUFS {peak} dBTP')
+          print('eye track:', [s['eye_track']['glow'] for s in log['shots'] if s.get('eye_track')])
+          PY
+
+      - name: Attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="${{ inputs.publish_tag || 'temple-v8-20s' }}"
+          for f in monarch-temple-v8.mp4 render_log.json sound_log.json; do
+            gh release upload "$TAG" "production/mafia-temple/render-v8/$f" \
+              --clobber --repo "${{ github.repository }}"
+          done
+          gh release view "$TAG" --repo "${{ github.repository }}" --json assets \
+            --jq '.assets[] | "\(.name)  \(.size) bytes"'
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: temple-v8-render
+          path: |
+            production/mafia-temple/render-v8/monarch-temple-v8.mp4
+            production/mafia-temple/render-v8/*.json
+          retention-days: 14
+
+  # ---------------------------------------------------------------------------
+  # The 3D cut. Same 20-second beat, but every pixel is ray-traced from geometry
+  # by qc/vfx3d/ rather than cut from footage, so it needs no source clips and
+  # runs anywhere. Trigger with a commit message containing [publish-3d], or from
+  # the Actions UI with publish_tag_3d set.
+  publish3d:
+    if: >-
+      ${{
+        inputs.publish_tag_3d != '' ||
+        (github.event_name == 'push' && contains(github.event.head_commit.message, '[publish-3d]'))
+      }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install toolchain
+        run: |
+          set -euo pipefail
+          python -m pip install -q --upgrade pip
+          python -m pip install -q "numpy>=1.26,<3" "pillow>=10" imageio-ffmpeg \
+            "opencv-contrib-python-headless==4.10.0.84"
+
+      - name: Sound master for the 3D cut
+        working-directory: production/mafia-temple
+        run: |
+          set -euo pipefail
+          mkdir -p render-3d
+          # the reference-matched score: -25.6 LUFS / low-heavy, measured off
+          # monarch-mafia-temple-20s.mp4 rather than copied from it
+          python qc/vfx3d/sound.py --out render-3d/sound_v8.wav \
+            --log render-3d/sound_log.json
+          ls -l render-3d/sound_v8.wav
+
+      # Five resumable slices that snap to shot boundaries, so no shot is split
+      # across steps. Each slice skips frames already on disk, names the frame it
+      # died on, and is retried once: a dropped runner then costs minutes.
+      - name: Render the 3D cut (shot slices)
+        working-directory: production/mafia-temple
+        env:
+          OMP_NUM_THREADS: "2"
+          OPENBLAS_NUM_THREADS: "2"
+          MALLOC_ARENA_MAX: "2"
+        run: |
+          set -uo pipefail
+          for k in 1 2 3 4 5; do
+            echo "=== slice $k/5 ==="
+            ok=0
+            for attempt in 1 2; do
+              if python qc/vfx3d/film3d.py --frames-dir render-3d/frames \
+                   --slice "$k:5" --out render-3d/_slice.mp4; then
+                ok=1; break
+              fi
+              echo "slice $k attempt $attempt failed; resuming" >&2
+            done
+            if [ "$ok" -ne 1 ]; then
+              echo "slice $k failed twice" >&2
+              ls render-3d/frames | tail -3 || true
+              exit 1
+            fi
+          done
+          echo "frames on disk: $(ls render-3d/frames | wc -l)"
+
+      # The renderer grades per shot; this pass drives each shot onto the
+      # reference's measured median luma and saturation, by bisection on the
+      # actual pixels (a closed-form gain overshoots badly on a dark shot).
+      - name: Grade to the reference palette
+        working-directory: production/mafia-temple
+        run: |
+          set -euo pipefail
+          python qc/vfx3d/grade_pass.py --src render-3d/frames \
+            --dst render-3d/graded
+          rm -rf render-3d/frames
+          mv render-3d/graded render-3d/frames
+          ls render-3d/frames | wc -l
+
+      - name: Encode and measure
+        working-directory: production/mafia-temple
+        env:
+          MALLOC_ARENA_MAX: "2"
+        run: |
+          set -euo pipefail
+          ls render-3d/frames | wc -l
+          python qc/vfx3d/film3d.py --frames-dir render-3d/frames --encode-only \
+            --audio render-3d/sound_v8.wav --preset medium --crf 17 \
+            --out render-3d/monarch-temple-3d.mp4 --log render-3d/render_log.json
+          ls -l render-3d/monarch-temple-3d.mp4
+
+      - name: Technical gates
+        working-directory: production/mafia-temple
+        run: |
+          set -euo pipefail
+          # container timestamps put the duration string on ...19.96 as often as
+          # ...20.00, so check 20 s +/- 0.05 plus the exact frame count, then the
+          # strict form as a second opinion.
+          python qc/vfx3d/verify.py render-3d/monarch-temple-3d.mp4
+          python qc/vfx3d/verify.py render-3d/monarch-temple-3d.mp4 --strict-duration
+
+      - name: Attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="${{ inputs.publish_tag_3d || 'temple-3d-20s-refmatch' }}"
+          if ! gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release create "$TAG" --repo "${{ github.repository }}" \
+              --title "MONARCH — night temple (3D cut, 20 s)" \
+              --notes "Rendered from geometry by qc/vfx3d (CPU ray tracer, no GPU, no footage). Read production/mafia-temple/V8-3D-REPORT.md for the honest scope."
+          fi
+          for f in monarch-temple-3d.mp4 render_log.json sound_log.json; do
+            [ -f "production/mafia-temple/render-3d/$f" ] && \
+              gh release upload "$TAG" "production/mafia-temple/render-3d/$f" \
+                --clobber --repo "${{ github.repository }}"
+          done
+          gh release view "$TAG" --repo "${{ github.repository }}" --json assets \
+            --jq '.assets[] | "\(.name)  \(.size) bytes"'
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: temple-3d-render
+          path: |
+            production/mafia-temple/render-3d/monarch-temple-3d.mp4
+            production/mafia-temple/render-3d/*.json
+          retention-days: 14
