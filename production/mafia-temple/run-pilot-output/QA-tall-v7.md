@@ -1,0 +1,3 @@
+# New likeness-reference running test v7 — research QA, not final
+
+The 24-frame, 24 fps, 576×1024 run generated in 552 seconds from the permitted new generated reference. All 24 full frames were sampled. Despite the closer source still, the rendered face becomes overly smooth/stylized and no longer reliably preserves identity. Hands and fingers deform, shoe/ground contact remains uncertain and the first frame contains a smeared trailing foot. The background is nearly static; no verified running-camera, reflections or real 3D contact is present. This one-second test is rejected, and should not be extended or presented as a finished scene. Model/driver rights remain unresolved.

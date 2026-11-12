@@ -420,3 +420,11 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `.github/workflows/continuity-validate.yml`
 - Ref: `config/continuity.json`
 - Ref: `config/channels.json`
+
+## `2026-11-11T14:11:28Z` · evt-20261111T141128Z · checkpoint
+
+- Title: Mafia-temple V8 measured cut delivered; toolchain and honesty gates in CI
+- Space: `monarch-studio`
+- Evidence level: `repo_evidence`
+- Details: Restored the previous session's branch (arena/6101616c, 64966b0) onto this session and built a measured V8 cut of the 20 s night-temple film. New tooling: qc/measure_shots.py (decoded-pixel metrics for all 26 generated clips), qc/analyse_shot.py (measured effect of each repair), qc/film_tools.py (retime, deflicker, stabilise, camera, grade, face/eye localisation+tracking, ESPCN), qc/render_film_v8.py, qc/make_sound_v8.py, qc/compare_cuts.py, qc/setup_env.sh, qc/test_film_tools.py (30 offline tests incl. an exact 480-frame timeline contract). CI: .github/workflows/mafia-temple-v8-qc.yml runs on ubuntu-latest and every step passed (run 43035871123). Measured: 480 frames/20.000 s, 0 duplicated frames, one 5-frame dissolve; worst luma step 29.50->13.81; per-shot jitter S2 5.39->3.26 px, S3 4.12->2.13 px; ESPCN 2x gives +2..+44 pct high-frequency energy per clip; eye glow verified and tracked on 97/97 close-up frames and fails closed; sound -25.6->-15.7 LUFS, true peak -10.3->-1.3 dBTP from a source that was clipping at +1.3. 8 of 26 source clips contain long freezes; s01/s01a/s05b are unusable. Explicitly NOT claimed: likeness match, finished film, human listening or full-motion review, native 1080p, anatomy/physics correctness, rights clearance. Media untracked and local (render-v8/, qc/out/, qc/models/).
+- Ref: `production/mafia-temple/V8-CUT-REPORT.md`

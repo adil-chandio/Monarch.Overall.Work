@@ -1,0 +1,3 @@
+# Hand-guided running test — research only
+
+Actions 42429064067 generated 72 frames at 24 fps, 512×512. Inspected twelve sampled frames. Adding 21-point hand controls from the approved generated reference makes both hands more consistently visible than the previous test, but the fingers are unnaturally long/splayed and their shape changes; an isolated shoe-shaped blob appears on the ground in the initial frame. The face remains stylised with mouth deformation, some feet appear detached from the ground, and the environment is static. It does not pass the final film's realism, identity or contact requirements. All output remains research-only until third-party visual model licensing is cleared.

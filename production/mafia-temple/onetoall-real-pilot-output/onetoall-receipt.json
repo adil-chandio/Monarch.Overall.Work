@@ -1,0 +1,276 @@
+{
+  "status": "complete_research_only",
+  "private_input": true,
+  "original_photo_used": false,
+  "driver": "Pexels 32740423, actual performance, pose only, source mirrored, 0.25-3.25 seconds",
+  "graph": {
+    "1": {
+      "class_type": "PrivatePilotInput",
+      "inputs": {
+        "width": 480,
+        "height": 832,
+        "frames": 49
+      }
+    },
+    "2": {
+      "class_type": "OnnxDetectionModelLoader",
+      "inputs": {
+        "vitpose_model": "vitpose-l-wholebody.onnx",
+        "yolo_model": "yolov10m.onnx",
+        "onnx_device": "CUDAExecutionProvider"
+      }
+    },
+    "3": {
+      "class_type": "PoseDetectionOneToAllAnimation",
+      "inputs": {
+        "model": [
+          "2",
+          0
+        ],
+        "images": [
+          "1",
+          0
+        ],
+        "ref_image": [
+          "1",
+          1
+        ],
+        "width": 480,
+        "height": 832,
+        "align_to": "none",
+        "draw_face_points": "none",
+        "draw_head": "weak"
+      }
+    },
+    "4": {
+      "class_type": "PrivatePoseAudit",
+      "inputs": {
+        "images": [
+          "3",
+          0
+        ],
+        "reference": [
+          "3",
+          2
+        ]
+      }
+    },
+    "5": {
+      "class_type": "WanVideoVAELoader",
+      "inputs": {
+        "model_name": "Wan2_1_VAE_bf16.safetensors",
+        "precision": "fp16",
+        "use_cpu_cache": false
+      }
+    },
+    "6": {
+      "class_type": "WanVideoEmptyEmbeds",
+      "inputs": {
+        "width": 480,
+        "height": 832,
+        "num_frames": 49
+      }
+    },
+    "7": {
+      "class_type": "WanVideoAddOneToAllReferenceEmbeds",
+      "inputs": {
+        "embeds": [
+          "6",
+          0
+        ],
+        "vae": [
+          "5",
+          0
+        ],
+        "ref_image": [
+          "3",
+          2
+        ],
+        "ref_mask": [
+          "3",
+          3
+        ],
+        "strength": 1.0,
+        "start_percent": 0.0,
+        "end_percent": 1.0
+      }
+    },
+    "8": {
+      "class_type": "WanVideoAddOneToAllPoseEmbeds",
+      "inputs": {
+        "embeds": [
+          "7",
+          0
+        ],
+        "pose_images": [
+          "4",
+          0
+        ],
+        "pose_prefix_image": [
+          "3",
+          1
+        ],
+        "strength": 1.0,
+        "start_percent": 0.0,
+        "end_percent": 1.0,
+        "pose_cfg_scale": 1.0
+      }
+    },
+    "9": {
+      "class_type": "LoadWanVideoT5TextEncoder",
+      "inputs": {
+        "model_name": "umt5-xxl-enc-bf16.safetensors",
+        "precision": "fp16",
+        "load_device": "offload_device",
+        "quantization": "disabled"
+      }
+    },
+    "10": {
+      "class_type": "WanVideoTextEncode",
+      "inputs": {
+        "t5": [
+          "9",
+          0
+        ],
+        "positive_prompt": "A man in a black suit running sideways through a misty temple courtyard at night, realistic natural human motion, cinematic lighting.",
+        "negative_prompt": "cartoon, extra limbs, deformed hands, blurry, distorted face, floating feet, static pose, flicker",
+        "force_offload": true,
+        "use_disk_cache": false,
+        "device": "gpu"
+      }
+    },
+    "11": {
+      "class_type": "WanVideoModelLoader",
+      "inputs": {
+        "model": "Wan21-OneToAllAnimation_1_3B_v2_fp16.safetensors",
+        "base_precision": "fp16",
+        "quantization": "disabled",
+        "load_device": "offload_device",
+        "attention_mode": "sdpa"
+      }
+    },
+    "12": {
+      "class_type": "WanVideoSampler",
+      "inputs": {
+        "model": [
+          "11",
+          0
+        ],
+        "image_embeds": [
+          "8",
+          0
+        ],
+        "text_embeds": [
+          "10",
+          0
+        ],
+        "steps": 8,
+        "cfg": 2.0,
+        "shift": 5.0,
+        "seed": 13147,
+        "force_offload": true,
+        "scheduler": "dpm++_sde",
+        "riflex_freq_index": 0,
+        "batched_cfg": false,
+        "rope_function": "comfy"
+      }
+    },
+    "13": {
+      "class_type": "WanVideoDecode",
+      "inputs": {
+        "vae": [
+          "5",
+          0
+        ],
+        "samples": [
+          "12",
+          0
+        ],
+        "enable_vae_tiling": false,
+        "tile_x": 272,
+        "tile_y": 272,
+        "tile_stride_x": 144,
+        "tile_stride_y": 128
+      }
+    },
+    "14": {
+      "class_type": "PrivatePilotOutput",
+      "inputs": {
+        "images": [
+          "13",
+          0
+        ],
+        "fps": 16,
+        "expected_frames": 49
+      }
+    }
+  },
+  "models": {
+    "diffusion_models/Wan21-OneToAllAnimation_1_3B_v2_fp16.safetensors": {
+      "repo": "Kijai/WanVideo_comfy",
+      "revision": "8260d429d19fd7a72304cad059160b95d843913f",
+      "sha256": "91022cab72733a08610da833bbaa055c2f98b0ff1706e0e72d6b2e4b0a3d6f4e",
+      "bytes": 4421291784
+    },
+    "text_encoders/umt5-xxl-enc-bf16.safetensors": {
+      "repo": "Kijai/WanVideo_comfy",
+      "revision": "8260d429d19fd7a72304cad059160b95d843913f",
+      "sha256": "4fa971faf306cad919033d5bbe192e571dc08452f800cbf2ec3c73977c01b2cc",
+      "bytes": 11361845464
+    },
+    "vae/Wan2_1_VAE_bf16.safetensors": {
+      "repo": "Kijai/WanVideo_comfy",
+      "revision": "8260d429d19fd7a72304cad059160b95d843913f",
+      "sha256": "1ab9a32cc2c740f6e39d80d367ce5dcc28db8c71b79b28670546b8973e9d75f9",
+      "bytes": 253806278
+    },
+    "detection/yolov10m.onnx": {
+      "repo": "Wan-AI/Wan2.2-Animate-14B",
+      "revision": "cb93a225fbaf1ca100f54e79da8f994995b689b3",
+      "sha256": "89b526498a6d55f869a6ab52e3a2eb20ad45b3711c1f7de3dd9ca0b399dfd6d7",
+      "bytes": 61659339
+    },
+    "detection/vitpose-l-wholebody.onnx": {
+      "repo": "JunkyByte/easy_ViTPose",
+      "revision": "e83805274e89428969355ec4afffcbc413e79188",
+      "sha256": "89bdf6692d9224dbd5004dcef23a9ba2d54c5776212b359d5a5b5068ac14fd08",
+      "bytes": 1234579166
+    }
+  },
+  "revisions": {
+    "ComfyUI": "6dd3c67427d65751d42f2dbc0c3db3d829c697de",
+    "wrapper": "088128b224242e110d3906c6750e9a3a348a659b",
+    "preprocessor": "0e0b6a2a555625acf4d4aefb780e27d06937132f"
+  },
+  "fps": 16,
+  "frames_requested": 49,
+  "resolution": [
+    480,
+    832
+  ],
+  "gpu": "Tesla T4",
+  "torch": "2.11.0+cu130",
+  "compute_capability": [
+    7,
+    5
+  ],
+  "bf16_including_emulation": true,
+  "native_bf16": false,
+  "t5_precision_patch": "enum includes existing fp16 dtype implementation",
+  "prompt_id": "bb7bc117-986f-4838-b681-bf590ed5ee69",
+  "seconds_elapsed": 402.9,
+  "pose_audit": {
+    "frames": 49,
+    "nonblack_pixels_min": 4868,
+    "nonblack_pixels_max": 6009,
+    "driver_warning": "Actual running motion; mirrored, uniformly reframed and resampled to 16 fps. Pose detection still requires visual inspection."
+  },
+  "notes": "Generated identity reference, public real driver used only for pose; FP16 on T4. No original user image. Requires visual review.",
+  "output": {
+    "frames": 49,
+    "fps": 16,
+    "width": 480,
+    "height": 832,
+    "status": "research diagnostic; not final"
+  }
+}

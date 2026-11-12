@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T19:03:03Z",
-  "head": "0a7bf14a026921e234b87b15ed602bc3d471ed33",
+  "generated_at": "2026-11-11T14:15:56Z",
+  "head": "13b6678825ef4b4c39ce0a47b7afd8eea47091cc",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -18,8 +18,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 3705,
-      "sha256": "ed5abd1d4a83eb2a3f46ee0875ef9c159732c466ca6a18f1b25390fe852dd677",
+      "bytes": 3906,
+      "sha256": "ced41b7674faf25caf324b827532327410dcec8a33e37f9cb694ff9e3064fdf3",
       "evidence_level": "archive_metadata"
     },
     {
@@ -97,7 +97,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4285,
-      "sha256": "fcbec9cc545c4acac734c7ac5dd77e4333cbdf8cbdc0b33da3c7eefb289639de",
+      "sha256": "70e12a4683cb4526d7369db154aa25621b515905e30ab5965a5f1e3e6575c016",
       "evidence_level": "state_ledger"
     },
     {
@@ -108,8 +108,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 21304,
-      "sha256": "7fbaeeae762ed2587106c35ba8facba5b5bd1860795e80e026774ba5cc46aad8",
+      "bytes": 22943,
+      "sha256": "42725885d66883d7d94c2543083c3796a3a9851565eaf311d074e8e6f7404e6b",
       "evidence_level": "state_ledger"
     },
     {
@@ -132,8 +132,8 @@
     },
     {
       "path": "docs/continuity/NEW_CHAT_PROMPT.md",
-      "bytes": 5443,
-      "sha256": "6dc7f2ae08ce0aa3d60a9c6508b5bf1b2ac2c45da5fba6e04cbe23721c9c106b",
+      "bytes": 6754,
+      "sha256": "74dd0fffd92cd45fa236b96049dd1794026692e6c8211ba1ba98127dad266189",
       "evidence_level": "operating_contract"
     },
     {
@@ -162,8 +162,8 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 9886,
-      "sha256": "2fcb9dcdbc2a0c31920474dac5bb2fef35f22eadb2b91c13bd82c65ce088cf09",
+      "bytes": 9463,
+      "sha256": "38acf27533000387b63a72ded196b5e7f75edebf4e12d1015297cd7df8a18ce0",
       "evidence_level": "state_ledger"
     },
     {

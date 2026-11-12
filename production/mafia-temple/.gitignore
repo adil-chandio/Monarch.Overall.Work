@@ -1,0 +1,27 @@
+# Privacy guard: untracked film media must remain local/private. Git ignores do
+# not affect already-tracked files, revoke public history, or prevent `git add -f`.
+# Review provenance and permissions before intentionally tracking any asset.
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.zip
+/private-*-output/
+/*-output/
+/PRIVATE-CONTINUATION-NOTES.md
+
+# V8 build tooling: environment, downloaded models, renders and logs stay local
+/qc/.env
+/qc/models/
+/qc/out/
+__pycache__/
+/render-v8/

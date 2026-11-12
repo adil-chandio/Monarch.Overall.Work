@@ -1,0 +1,111 @@
+"""Private LTX-2.3 one-shot benchmark. No original photograph or stock motion.
+
+Adapts the inference portions of the referenced AIQUEST notebook at runtime;
+its public UI and Cloudflare tunnels are deliberately excluded. Research only.
+"""
+import hashlib, json, os, pathlib, shutil, subprocess, sys, time, traceback, urllib.request
+
+work=pathlib.Path('/kaggle/working'); scratch=pathlib.Path('/kaggle/tmp/monarch-ltx23')
+scratch.mkdir(parents=True,exist_ok=True); os.chdir(scratch)
+receipt={'status':'initializing','model':'LTX-2.3 22B distilled 1.1 Q4_K_M','original_photo_used':False,'stock_driver_used':False,'motion_source':'CMU 35_17 pose projection, mocap.cs.cmu.edu','private_kernel':True,'source_notebook_commit':'0f782c3a21cba51bd7b56b2fe7345c9b383842a7','wan2gp_commit':'6479db36bdc2619a904a852bba9c2d78e1a83f82'}
+def save(): (work/'private-wide-receipt.json').write_text(json.dumps(receipt,indent=2))
+save()
+try:
+    import torch
+    if torch.cuda.device_count()<2: raise RuntimeError('Two GPU devices not available')
+    receipt['gpus']=[torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())]; save()
+    os.environ.update({'TOKENIZERS_PARALLELISM':'false','USE_TF':'0','USE_FLAX':'0','HF_HUB_ENABLE_HF_TRANSFER':'0','PYTORCH_CUDA_ALLOC_CONF':'expandable_segments:True,garbage_collection_threshold:0.6'})
+    url='https://raw.githubusercontent.com/droiddud/Colab-notebooks/0f782c3a21cba51bd7b56b2fe7345c9b383842a7/kaggle_notebooks/ltx-2-3-22b-distilled-1-1-q4-t2v-kaggle.ipynb'
+    data=urllib.request.urlopen(url,timeout=90).read()
+    if hashlib.sha256(data).hexdigest()!='cfeac10f10e3765940870edcc637e14972795e0d1584c4b1d7c901b2d44a0d84': raise ValueError('Notebook checksum mismatch')
+    nb=json.loads(data); cells=nb['cells']
+    # Clone a fixed code revision. The upstream setup cell then applies its
+    # targeted dtype fixes to this fixed checkout; no public web UI is started.
+    subprocess.run(['git','clone','--quiet','https://github.com/DeepBeepMeep/Wan2GP.git','Wan2GP'],check=True)
+    subprocess.run(['git','-C','Wan2GP','checkout','--quiet',receipt['wan2gp_commit']],check=True)
+    setup=''.join(cells[4]['source']); exec(compile(setup,'reviewed-upstream-setup','exec'),{})
+    downloads=''.join(cells[6]['source']); exec(compile(downloads,'reviewed-upstream-downloads','exec'),{})
+    reference_url='https://raw.githubusercontent.com/adil-chandio/Monarch.Overall.Work/112c21b9db70801dfa038ae248964b2116b03898/production/mafia-temple/keyframes/shot-04.jpg'
+    image=urllib.request.urlopen(reference_url,timeout=90).read()
+    receipt['generated_reference_sha256']=hashlib.sha256(image).hexdigest()
+    if receipt['generated_reference_sha256'] != 'c8542c870fdeda09fc3e23e11028fe39b5a0eefd24496c8c4a1a7db6309f4c28': raise ValueError('Reference checksum mismatch')
+    # Privately create a research-only footwear repair. The source still was
+    # already public; the resulting recognizable image is never uploaded to
+    # GitHub, an artifact, or any other public endpoint.
+    import cv2
+    import numpy as np
+    base='https://raw.githubusercontent.com/adil-chandio/Monarch.Overall.Work/arena/6101616c-monarch-overall-work/production/mafia-temple/'
+    helper=urllib.request.urlopen(base+'repair_reference_shoes_research.py',timeout=90).read()
+    asset=urllib.request.urlopen(base+'assets/generic-dress-shoe-rgba.png',timeout=90).read()
+    if hashlib.sha256(helper).hexdigest()!='f1632b80198b2f31a1150d5c0402011fb57836eae541ec990820f12030dc435d': raise ValueError('Unexpected shoe helper')
+    if hashlib.sha256(asset).hexdigest()!='7bce3170c1c22debb42fd624a217c21ba8ebe77a791d6893d049c6a34a018d78': raise ValueError('Unexpected generic shoe asset')
+    repair={}; exec(compile(helper,'research_shoe_repair','exec'),repair)
+    original=cv2.imdecode(np.frombuffer(image,dtype=np.uint8),cv2.IMREAD_COLOR)
+    shoe=cv2.imdecode(np.frombuffer(asset,dtype=np.uint8),cv2.IMREAD_UNCHANGED)
+    repaired=repair['replace_shoes'](original,shoe)
+    reference=scratch/'generated-reference.png'
+    if not cv2.imwrite(str(reference),repaired): raise RuntimeError('Could not write private reference')
+    receipt['footwear_reference']='Local approximate template composite, unapproved; no contact solver'
+    receipt['shoe_asset_sha256']=hashlib.sha256(asset).hexdigest()
+    src=''.join(cells[8]['source']); assert src.startswith('%%writefile ')
+    src=src.split('\n',1)[1].split('# ==== 9. AIQUEST BRANDED GRADIO INTERFACE ====')[0]
+    # Do not truncate the video to the shorter generated audio track.
+    if src.count('"-shortest", final_path') != 1: raise RuntimeError('Unexpected audio mux code')
+    src=src.replace('"-shortest", final_path','final_path')
+    # Use mmgp's documented quantized-LoRA integration, not prompt-only motion.
+    old='    quantizeTransformer=False,\n    convertWeightsFloatTo=torch.float16,'
+    if src.count(old)!=1: raise RuntimeError('Unexpected mmgp profile')
+    src=src.replace(old,'    quantizeTransformer=False,\n    loras="transformer",\n    convertWeightsFloatTo=torch.float16,')
+    # Use the native 73-frame option; the guide is also exactly 73 frames.
+    src=src.replace('"480p": 480','"480p": 448')
+    src=src.replace('return (width // 32) * 32, (height // 32) * 32','return 832, 448')  # Both dimensions are divisible by 64 for ref0.5.
+    old='        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)'
+    if src.count(old)!=1: raise RuntimeError('Unexpected generation call')
+    src=src.replace(old,'        gen_kwargs.update(input_frames=POSE_GUIDE, video_prompt_type="VG", denoising_strength=0.8, masking_strength=0.0, input_video_strength=CONTROL_STRENGTH, loras_selected=[LORA_PATH], VAE_tile_size=(4,128))\n        t_start = time.time()\n        result = ltx2_model.generate(**gen_kwargs)')
+    # Keep generated output out of the public UI and gather only the final video.
+    # Classes created by the inference code need a real module name: an empty
+    # exec namespace breaks its dynamic multi-GPU Gemma device subclass.
+    namespace={'__name__':'monarch_ltx23_inference'}
+    exec(compile(src,'reviewed-upstream-inference','exec'),namespace)
+    class QuietProgress:
+        def __call__(self,*a,**kw): pass
+    # Lossless pose-only atlas derived from documented CMU 35_17. There is no
+    # stock footage, original photo, face texture, or recorded identity here.
+    from PIL import Image
+    import numpy as np
+    from io import BytesIO
+    u='https://raw.githubusercontent.com/adil-chandio/Monarch.Overall.Work/arena/6101616c-monarch-overall-work/production/mafia-temple/motion-control/cmu-35-17-wide-retarget-73f-research.png'
+    data=urllib.request.urlopen(u,timeout=90).read()
+    if hashlib.sha256(data).hexdigest()!='ae1657228f0295d1441c3d61e4cb8c55d8885d79f75b3d65009c1b7af0809a9b': raise ValueError('Unexpected CMU pose atlas')
+    atlas=Image.open(BytesIO(data)).convert('RGB')
+    if atlas.size!=(6656,4480): raise ValueError('Invalid atlas size')
+    sheets=[atlas.crop(((i%8)*832,(i//8)*448,(i%8+1)*832,(i//8+1)*448)) for i in range(73)]
+    pose=torch.from_numpy(np.stack([np.asarray(im) for im in sheets])).permute(3,0,1,2).contiguous()
+    from huggingface_hub import hf_hub_download
+    lora_name='ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors'
+    lora=hf_hub_download(repo_id='Lightricks/LTX-2.3-22b-IC-LoRA-Union-Control',filename=lora_name,local_dir=str(scratch/'lora'))
+    h=hashlib.sha256()
+    with open(lora,'rb') as f:
+        for chunk in iter(lambda:f.read(8*1024*1024),b''): h.update(chunk)
+    if h.hexdigest()!='a1b888a87f661d27f08b394ae559e8e1050be33900bcc36a5cdf659e48f88d18': raise ValueError('Unexpected union LoRA checksum')
+    namespace['POSE_GUIDE']=pose; namespace['LORA_PATH']=lora; namespace['CONTROL_STRENGTH']=0.85
+    trans,_=namespace['ltx2_model'].get_trans_lora()
+    prep=getattr(trans,'preprocess_loras',None)
+    preprocessor=(lambda sd: prep('ltx2_22B',sd)) if prep is not None else None
+    namespace['offload'].load_loras_into_model(trans,[lora],[1.0],preprocess_sd=preprocessor,split_linear_modules_map=getattr(trans,'split_linear_modules_map',None))
+    if getattr(trans,'_loras_errors',[]): raise RuntimeError('LoRA load errors: '+str(trans._loras_errors))
+    prompt=('Cinematic live action side-view tracking shot of the same man in a black suit running to the right on wet stone in a temple courtyard at night. '
+      'Natural realistic human running with solid anatomically correct shoes, clear alternating steps and natural foot contact, no floating, no warped limbs. '
+      'Maintain consistent hairstyle, face and dark suit. Blue mist, lanterns, realistic photography, single continuous shot.')
+    receipt.update(status='running',guide='CMU 35_17 four repeated gait cycles; approximate 2D retarget onto previously public generated still, no contact solver',vae_tile_size=[4,128],lora_sha256=h.hexdigest(),frames_requested=73,fps=24,variants=[]);save();t=time.monotonic()
+    for seed,strength in [(20261105,0.85)]:
+        namespace['CONTROL_STRENGTH']=strength
+        path,message=namespace['Video_Generation'](prompt,str(reference),None,seed,'3 Seconds (73 frames)','480p','16:9 Landscape',progress=QuietProgress())
+        if not path or not pathlib.Path(path).is_file(): raise RuntimeError('Generation returned no video')
+        target=work/f'private-wide-{seed}.mp4';shutil.copyfile(path,target)
+        receipt['variants'].append({'name':target.name,'seed':seed,'control_strength':strength,'sha256':hashlib.sha256(target.read_bytes()).hexdigest()});save()
+    receipt.update(status='complete_research_only',seconds=round(time.monotonic()-t,2))
+    save();print('PRIVATE_RESEARCH_COMPLETE',flush=True)
+
+except Exception as exc:
+    receipt.update(status='failed',error=repr(exc),traceback=traceback.format_exc());save();raise
