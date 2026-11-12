@@ -1,27 +1,29 @@
 {
-  "generated_utc": "2026-11-12T19:54:50Z",
+  "generated_utc": "2026-11-12T20:02:56Z",
   "key_present": true,
   "secret_value_printed_or_stored": false,
   "niche": "map / geography, English, US-first (regionCode=US, relevanceLanguage=en)",
   "lanes": 12,
   "lane_rows": 542,
-  "unique_videos": 517,
-  "channels_in_lanes": 271,
+  "unique_videos": 520,
+  "channels_in_lanes": 273,
   "channels_deep": 25,
-  "catalogue_videos": 2446,
-  "niche_outliers_3x": 21,
-  "thumbnail_stats": 21,
+  "catalogue_videos": 2377,
+  "niche_outliers_3x": 20,
+  "thumbnail_stats": 20,
   "caption_attempts": 12,
+  "comments_fetched": 220,
   "caption_status_counts": {
     "blocked_or_error": 12
   },
-  "quota_used_approx": 1336,
+  "quota_used_approx": 1345,
   "quota_calls": {
     "search": 12,
-    "videos": 61,
+    "videos": 60,
     "channels": 25,
-    "playlistItems": 50
+    "playlistItems": 49,
+    "commentThreads": 11
   },
-  "elapsed_s": 190.9,
+  "elapsed_s": 208.6,
   "boundary": "Public Data API metadata + public thumbnails + public caption text only. No video/audio download, no frame inspection, no private retention/CTR/RPM, no invented transcripts, no verified growth ranking, no causal claim, no legal/human/upload/monetisation claim."
 }

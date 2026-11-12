@@ -1,0 +1,567 @@
+{
+  "aggregate": {
+    "videos_attempted": 12,
+    "comments_fetched": 220,
+    "order": "relevance, max 20 per video",
+    "bucket_counts": {
+      "sequel_or_next": 0,
+      "did_not_know": 1,
+      "correction_claim": 8,
+      "ask_how_made": 0,
+      "country_request": 0,
+      "personal_tie": 3,
+      "map_nerd": 10
+    },
+    "bucket_share_of_fetched": {
+      "sequel_or_next": 0.0,
+      "did_not_know": 0.005,
+      "correction_claim": 0.036,
+      "ask_how_made": 0.0,
+      "country_request": 0.0,
+      "personal_tie": 0.014,
+      "map_nerd": 0.045
+    },
+    "boundary": "Shares are of FETCHED relevance-ordered comments only, not of all viewers; the silent majority is invisible. No sentiment scoring, no demographic inference."
+  },
+  "videos": [
+    {
+      "id": "B1J6Ou4q8vE",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 1,
+          "share": 0.05
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 0,
+          "share": 0.0
+        }
+      },
+      "questions": 2,
+      "long_comments": 7,
+      "sample": [
+        "To be clear, my lead animator is the math nerd behind all this. And as always, watch DJ and I talk about it: https://youtu.be/dRj3X7IFCjY",
+        "If math lessons were like this, math would for sure be everyone’s favorite subject",
+        "0:07 introduction to numbers\r\n0:11 equations\r\n0:20 addition\r\n1:24 subtraction\r\n1:34 negative numbers\r\n1:40 e^i*pi = -1, euler's identity\r\n2:16 two negatives cancellation\r\n2:24 multiplication\r\n2:29 the commutative propert",
+        "Utterly delightful!",
+        "8:37 POV: your the last person standing from ChatGPT Invasion"
+      ],
+      "title": "Animation vs. Math",
+      "channel": "Alan Becker",
+      "views": 163652371,
+      "duration_seconds": 843
+    },
+    {
+      "id": "kHZitA3CAEY",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 1,
+          "share": 0.05
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 0,
+          "share": 0.0
+        }
+      },
+      "questions": 0,
+      "long_comments": 2,
+      "sample": [
+        "“ when an animal dies” \nDinosaur: *dramatically falls*",
+        "Zach: “When an animal dies”\nT-Rex: “That’s my cue”",
+        "God: how did you die\nDinosaur: slip and fall",
+        "Zach: “When an animal dies”\nT-Rex: “Until we meet again”",
+        "\"Prank him john\"\n\"Haha you already know it\"\n*Fossilizes him meters underground*"
+      ],
+      "title": "How Fossilization Works 🤔",
+      "channel": "Zack D. Films",
+      "views": 50867179,
+      "duration_seconds": 31
+    },
+    {
+      "id": "Gt2mYPwXyAc",
+      "status": "error",
+      "detail": "Blocked('403 for https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=Gt2mYPwXyAc&maxResults=20&order=relevance&textFormat=plainText&key=<r",
+      "fetched": 0,
+      "buckets": {},
+      "title": "50 States Song - USA States and Capitals Song | Geography Explained by KidsLearningTube",
+      "channel": "KLT",
+      "views": 47520764,
+      "duration_seconds": 298
+    },
+    {
+      "id": "f3DnZlduEoE",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 3,
+          "share": 0.15
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 2,
+          "share": 0.1
+        },
+        "map_nerd": {
+          "n": 2,
+          "share": 0.1
+        }
+      },
+      "questions": 10,
+      "long_comments": 2,
+      "sample": [
+        "\"I live in France actually\"\n\"You said you lived in Spain yesterday???\"",
+        "You've opened Andorra's box by bringing up all these territorial oddities.",
+        "“Where do you live?”\n“What month is it?”\n“what”",
+        "\"where do you live\"\n\n\"It depends on the month\"",
+        "\"What's your nationality?\" \n\"Sometimes maybe French, \nsometimes maybe Spanish.\""
+      ],
+      "title": "Spain’s Strangest Borders 🤯 Unexpected Hidden Neighbors 👀",
+      "channel": "GeoGlobeTales",
+      "views": 47081365,
+      "duration_seconds": 97
+    },
+    {
+      "id": "HKdjIFjYZ40",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 1,
+          "share": 0.05
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 0,
+          "share": 0.0
+        }
+      },
+      "questions": 16,
+      "long_comments": 1,
+      "sample": [
+        "\"How do you grow seeds?\"\n\"Well, the seeds grow bigger and bigger until they grow.\"",
+        "\"Why do rivers curve?\"\n\"Rivers make oxbow lakes\"",
+        "\"How are pencils made?\"\n\n\"If you put too much pressure on your pencil, you'll break it in half, giving you two pencils to use.\"",
+        "\"Why do rivers curve?\"\n\"Here's a lake\"",
+        "\"How do rivers curve? \"\n\"It curves\"\n\n*Understandable*"
+      ],
+      "title": "Why do Rivers Curve?",
+      "channel": "MinuteMinis",
+      "views": 46287580,
+      "duration_seconds": 17
+    },
+    {
+      "id": "libKVRa01L8",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 1,
+          "share": 0.05
+        },
+        "correction_claim": {
+          "n": 0,
+          "share": 0.0
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 0,
+          "share": 0.0
+        }
+      },
+      "questions": 3,
+      "long_comments": 3,
+      "sample": [
+        "Whenever i feel depressed or moody,I watch the astronomy related videos to realize how small my problem is in this entire universe!",
+        "Astronomy is so fascinating yet scary at the same time.",
+        "Sun: I have 9 sons.\nPluto: Dad I'm going to make Tiktok videos when I grow up.\nSun: I have 8 sons.",
+        "I get really bored sometimes then I remember I can listen to space stuff and I'll be entertained for the rest of my life.",
+        "I've had enough with Pluto being disrespected"
+      ],
+      "title": "Solar System 101 | National Geographic",
+      "channel": "National Geographic",
+      "views": 39801983,
+      "duration_seconds": 251
+    },
+    {
+      "id": "qMkYlIA7mgw",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 1,
+          "share": 0.05
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 6,
+          "share": 0.3
+        }
+      },
+      "questions": 2,
+      "long_comments": 9,
+      "sample": [
+        "And than there is Europe where you live in Luxemburg, work in Germany, went to school in Belgium, have a boyfriend in France and visit your parents every week in the Netherlands...",
+        "I, with my Canadian father and American mother, am living proof that the \"no touching zone\" thing doesn't always work.",
+        "Person: I think I found oil on the no-touching zone.\nUSA: who said that was a no-touching zone?",
+        "I accidently crossed into Canada during a hunting trip and the Canadian trooper I ran into was super nice and gave me a ride back to my truck and gave me some home made jerky he smoked. \n\nCarlson with the CSBA is great o",
+        "I love how the US and Canada diligently Co-manage a \"no touching zone\"  that maintains the border exactly... and meanwhile in europe some farmer moved a rock slightly which changed the border France, and it took them lik"
+      ],
+      "title": "The US-Canada Border Is 5,500 Miles of Pure Nonsense",
+      "channel": "CGP Grey",
+      "views": 37483882,
+      "duration_seconds": 282
+    },
+    {
+      "id": "ex96M9ICZsY",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 0,
+          "share": 0.0
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 0,
+          "share": 0.0
+        }
+      },
+      "questions": 0,
+      "long_comments": 12,
+      "sample": [
+        "हम एक राजपूत है और राजपूत की आंखे मौत के बाद ही नीचे होती है🗿🗿",
+        "हमारे बच्चों को पता ही नहीं है कि भारत में कैसे-कैसे वीर योद्धा हुए हैं उन्हें हमारे इतिहास में पढ़ाया ही नहीं जाता सबको मिलकर यह प्रयास करना चाहिए",
+        "⚔️ Jay Jay Bhawani ⚔️ \n⚔️ Jay Jay Rajputana ⚔️ \n⚔️ Jay Jay Prithviraj Chauhan ⚔️\n⚔️ Jay Jay Maharana Pratap ⚔️ \n⚔️ Jay Jay Shivaji Maharaj⚔️",
+        "This short animated documentary far better than Bollywood movie 😂😂",
+        "इतिहास गवाह है कि जितने भी वीर हिंदू योद्धा थे सबको छल से मारा गया हैं\nऔर सबको अपनो से ही धोका मिला है \nजय हो हिंदू वीर योद्धा पृथिवीराज चौहान की"
+      ],
+      "title": "Prithviraj Chauhan | 3d Animation Movie | Cordova Joyful Learning",
+      "channel": "Cordova Joyful Learning",
+      "views": 33319286,
+      "duration_seconds": 1337
+    },
+    {
+      "id": "VEJWE6cpqw0",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 1,
+          "share": 0.05
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 1,
+          "share": 0.05
+        }
+      },
+      "questions": 4,
+      "long_comments": 7,
+      "sample": [
+        "I explain a lot of this video here: https://youtu.be/yVBV7MwYclw\nALSO - \"The Golden Ratio\" by Avenza available on streaming platforms!\r\nSpotify: https://open.spotify.com/track/5IUMLupc2zKtUkC5mXoSEj\r\nApple music: https:/",
+        "2007 Alan: Entertaining us with animations\n2024 Alan: Entertaining us with math and chemistery",
+        "2024: Animation vs. Geometry\n2026: Animation vs. Geometry *Dash*",
+        "So now we have Animation vs. Math Animation vs. Physics and *Animation vs. Geometry* what’s next!? Biology??",
+        "2 years ago: Animation vs Geometry\nRight now: Animation vs Geometry *Dash*"
+      ],
+      "title": "Animation vs. Geometry",
+      "channel": "Alan Becker",
+      "views": 32867594,
+      "duration_seconds": 542
+    },
+    {
+      "id": "t1DECN9zS_8",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 0,
+          "share": 0.0
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 1,
+          "share": 0.05
+        }
+      },
+      "questions": 1,
+      "long_comments": 5,
+      "sample": [
+        "Even time is political",
+        "Imagine waking up at 10am and it’s dark 😂. Us Americans will go back to sleep",
+        "that explains why while I was in china, 7PM still looked like 3PM\nit was bright dude 💀",
+        "In Sweden we have one day per year when the sun doesn't show up at all and one day when the sun doesn't go down at all",
+        "China: good evening morning! 😂"
+      ],
+      "title": "Why Do Time Zones Look So Strange 🌍 How They Work 🕒",
+      "channel": "GeoGlobeTales",
+      "views": 32034419,
+      "duration_seconds": 61
+    },
+    {
+      "id": "VNGUdObDoLk",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 0,
+          "share": 0.0
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 0,
+          "share": 0.0
+        },
+        "map_nerd": {
+          "n": 0,
+          "share": 0.0
+        }
+      },
+      "questions": 3,
+      "long_comments": 5,
+      "sample": [
+        "Volcanoes have created more than 80 percent of our planet's surface, laying the foundation that has allowed life to thrive. To learn more about these fiery peaks, you can read on here: https://on.natgeo.com/2FqAH5m",
+        "Let's pray Taal eruption doesn't get worse",
+        "The earth takes and gives. We are all just inhabitants that either benefit or perish from it. The earth does not care about our sentiment nor needs. And the cycle continues with or without us.",
+        "It's more fun to learn something when you're not forced to.",
+        "This is top-notch content all the way through!"
+      ],
+      "title": "Volcanoes 101 | National Geographic",
+      "channel": "National Geographic",
+      "views": 31910094,
+      "duration_seconds": 299
+    },
+    {
+      "id": "29wzfEvVUVg",
+      "status": "ok",
+      "fetched": 20,
+      "buckets": {
+        "sequel_or_next": {
+          "n": 0,
+          "share": 0.0
+        },
+        "did_not_know": {
+          "n": 0,
+          "share": 0.0
+        },
+        "correction_claim": {
+          "n": 0,
+          "share": 0.0
+        },
+        "ask_how_made": {
+          "n": 0,
+          "share": 0.0
+        },
+        "country_request": {
+          "n": 0,
+          "share": 0.0
+        },
+        "personal_tie": {
+          "n": 1,
+          "share": 0.05
+        },
+        "map_nerd": {
+          "n": 0,
+          "share": 0.0
+        }
+      },
+      "questions": 5,
+      "long_comments": 1,
+      "sample": [
+        "Indian's come here 👇🏻🇮🇳🇮🇳\n\nOmg this much Indians oh God that's great Jay Hind 🇮🇳🇮🇳",
+        "Any indians here?.\n👇",
+        "Im from Pakistan but i still support india 😊",
+        "Respect India. A great nation which is exploited by the British for almost 200 years (also Bangladesh and Pakistan). \nWe are South Asian brothers❤❤",
+        "Hey every Indian assemble here 😊😊😊😊😊\n👇"
+      ],
+      "title": "Where is INDIA? 🔥 | #shorts #india #fyp #geography",
+      "channel": "GrowBig",
+      "views": 30746245,
+      "duration_seconds": 30
+    }
+  ]
+}
