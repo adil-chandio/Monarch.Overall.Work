@@ -240,3 +240,7 @@ Per-thumbnail rows are in `thumbnail_forensics_v17.json`. These are crude image 
 ## Transcript fallback pointer
 
 The default `yt-dlp` teardowns in this report all returned a YouTube sign-in bot-check. A second pass with `youtube-transcript-api` + alternate `yt-dlp` clients is recorded in `TRANSCRIPT_FORENSICS_V17.md` and `api_evidence/transcript_teardowns_v17.json`. Usable public captions: 0/18. No transcript was invented and no full third-party transcript is reproduced.
+
+## Final decision pointer (added after transcript fallback)
+
+The evidence above is the **data appendix**, not the final creative answer. The reproducible filter funnel is in `build_v17_decision.py` / `DECISION_V17.json`; the exhaustive Roman Urdu decision, 10x forensic and honest limitations are in `FINAL_FORENSIC_REPORT_V17_ROMAN_URDU.md`; the original Episode-01 script, beat sheet, EDL, QC and 30-day plan are in `PRODUCTION_BLUEPRINT_V17.md` and `EPISODE_01_EDL_V17.json`. Selected direction: `NAQSHA FILES — Map Forensics` (viral-potential, not a guarantee). No upload/publish, legal clearance, human creative approval, monetisation outcome, private analytics, invented transcript or perfection claim.

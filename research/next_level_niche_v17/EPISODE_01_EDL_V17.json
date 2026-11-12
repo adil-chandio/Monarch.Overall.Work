@@ -1,0 +1,248 @@
+{
+  "episode": "NAQSHA_FILES_EP01",
+  "title_primary": "Why Greenland Looks As Big As Africa 🌍 (It Isn't)",
+  "language_primary": "Roman Urdu VO + English alt VO",
+  "master": {
+    "runtime_s": 75.0,
+    "fps": 30,
+    "short": "1080x1920",
+    "long_reframe": "1920x1080"
+  },
+  "rules": {
+    "frame_1": "real map animation, no static title/method/diagram card",
+    "captions": "burned-in + .srt; sync +/-0.15s; no overlap",
+    "audio_target": "VO -14 LUFS, music ducked under VO, 48kHz stereo",
+    "safe_zone": "top text only; no text over subject; medium-weight small type",
+    "verify_tags": "every [VERIFY] must be replaced with a checked primary source or dropped before render",
+    "original_only": "no competitor video/audio/frame/verbatim transcript used",
+    "disclosure": "AI SIMULATION label for full duration of any synthetic 3D shot"
+  },
+  "beats": [
+    {
+      "id": "B01",
+      "start_s": 0.0,
+      "end_s": 2.5,
+      "duration_s": 2.5,
+      "vo_roman_urdu": "Dekho… ye dono barabar lag rahe hain. Lekin inme se ek jhooth hai.",
+      "vo_english": "These two look the same size. One of them is lying.",
+      "on_screen_text": "Dono barabar? 😳",
+      "map_action": "Split frame: Greenland aur Africa barabar size mein, halke glow ke saath; frame-1 hi map hai",
+      "sfx": "low sub thump",
+      "caption": "2-line burned-in",
+      "verify_tag": "",
+      "assets": [
+        "A01",
+        "A02",
+        "A03"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "B02",
+      "start_s": 2.5,
+      "end_s": 7.0,
+      "duration_s": 4.5,
+      "vo_roman_urdu": "Ye koi printing ki galti nahi. Ye naqshe ka tareeqa hai.",
+      "vo_english": "That's not a printing error — that's a projection.",
+      "on_screen_text": "Ye projection hai",
+      "map_action": "Corner label NAQSHA / PROJECTION map ke andar animate",
+      "sfx": "soft click",
+      "caption": "burned-in",
+      "verify_tag": "",
+      "assets": [
+        "A01"
+      ],
+      "transition": "morph"
+    },
+    {
+      "id": "B03",
+      "start_s": 7.0,
+      "end_s": 13.0,
+      "duration_s": 6.0,
+      "vo_roman_urdu": "Dunya gol hai, kagaz seedha. Gol ko seedha karne ke liye kuch na kuch tootna hi parega.",
+      "vo_english": "The Earth is round, the page is flat. Something has to give.",
+      "on_screen_text": "Gol → Seedha",
+      "map_action": "3D globe flatten; grid lines khinchti hain",
+      "sfx": "paper stretch",
+      "caption": "burned-in",
+      "verify_tag": "",
+      "assets": [
+        "A04",
+        "A05"
+      ],
+      "transition": "morph"
+    },
+    {
+      "id": "B04",
+      "start_s": 13.0,
+      "end_s": 20.0,
+      "duration_s": 7.0,
+      "vo_roman_urdu": "Is tareeqe ne jahazron ko rasta diya… aur badle mein size le liya.",
+      "vo_english": "It saved navigation… and quietly spent the size.",
+      "on_screen_text": "Rasta bacha, size gaya",
+      "map_action": "Navigation line globe par draw, phir latitude bands stretch",
+      "sfx": "pen scratch",
+      "caption": "burned-in",
+      "verify_tag": "VERIFY: projection name + date",
+      "assets": [
+        "A04",
+        "A05"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "B05",
+      "start_s": 20.0,
+      "end_s": 27.0,
+      "duration_s": 7.0,
+      "vo_roman_urdu": "Haqeeqat mein Africa, Greenland se [X] guna bada hai.",
+      "vo_english": "In reality Africa is [X] times larger than Greenland.",
+      "on_screen_text": "Africa [X]× bada",
+      "map_action": "True-size side-by-side; Greenland chhota, number placeholder",
+      "sfx": "reveal whoosh",
+      "caption": "burned-in",
+      "verify_tag": "VERIFY: exact ratio + primary source",
+      "assets": [
+        "A07"
+      ],
+      "transition": "scale"
+    },
+    {
+      "id": "B06",
+      "start_s": 27.0,
+      "end_s": 33.0,
+      "duration_s": 6.0,
+      "vo_roman_urdu": "Jitna koi jagah pole ke qareeb, utni hi wo upar khinchti gayi. Isliye Greenland bada dikh gaya.",
+      "vo_english": "The closer a place is to the pole, the more it stretches upward.",
+      "on_screen_text": "Pole = zyada stretch",
+      "map_action": "Equator se pole tak vertical stretch gradient, Greenland highlight",
+      "sfx": "rising tone",
+      "caption": "burned-in",
+      "verify_tag": "VERIFY: projection math",
+      "assets": [
+        "A05",
+        "A02"
+      ],
+      "transition": "morph"
+    },
+    {
+      "id": "B07",
+      "start_s": 33.0,
+      "end_s": 39.0,
+      "duration_s": 6.0,
+      "vo_roman_urdu": "To kya har naqsha jhooth bolta hai? Chalo, teen tareeqe saamne rakhte hain.",
+      "vo_english": "So is every map wrong? Let's put three methods side by side.",
+      "on_screen_text": "Har naqsha? 🤔",
+      "map_action": "Sawal-bubble map ke upar; loop khula",
+      "sfx": "tick",
+      "caption": "burned-in",
+      "verify_tag": "",
+      "assets": [
+        "A01"
+      ],
+      "transition": "hold"
+    },
+    {
+      "id": "B08",
+      "start_s": 39.0,
+      "end_s": 46.0,
+      "duration_s": 7.0,
+      "vo_roman_urdu": "Har projection kisi ek cheez ko bachata hai — shape, ya size, ya direction — aur doosri ko kharch karta hai.",
+      "vo_english": "Every projection saves one thing — shape, area, or direction — and spends another.",
+      "on_screen_text": "Shape / Size / Direction",
+      "map_action": "3 apne banaye projection tiles",
+      "sfx": "3 soft ticks",
+      "caption": "burned-in",
+      "verify_tag": "VERIFY: projection names",
+      "assets": [
+        "A06"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "B09",
+      "start_s": 46.0,
+      "end_s": 53.0,
+      "duration_s": 7.0,
+      "vo_roman_urdu": "Isliye apne sheher ko bhi kabhi flat naqshe par na tolna.",
+      "vo_english": "So don't judge your own city by a flat map either.",
+      "on_screen_text": "Apna sheher bhi…",
+      "map_action": "Sindh/Pakistan par marker, koi number nahi, dotted scale",
+      "sfx": "ambient",
+      "caption": "burned-in",
+      "verify_tag": "VERIFY: local example; no number",
+      "assets": [
+        "A08"
+      ],
+      "transition": "pan"
+    },
+    {
+      "id": "B10",
+      "start_s": 53.0,
+      "end_s": 60.0,
+      "duration_s": 7.0,
+      "vo_roman_urdu": "Yaad rakho teen labels: SAABIT, MUKHTALIF, NA-MALOOM. Jo confirm na ho, usse confirm mat kehna.",
+      "vo_english": "Three labels: CONFIRMED, DISPUTED, UNKNOWN. Don't label a guess as a fact.",
+      "on_screen_text": "SAABIT / MUKHTALIF / NA-MALOOM",
+      "map_action": "Map legend ke andar 3 animated chips; static card nahi",
+      "sfx": "3 chips",
+      "caption": "burned-in",
+      "verify_tag": "",
+      "assets": [
+        "A09"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "B11",
+      "start_s": 60.0,
+      "end_s": 67.0,
+      "duration_s": 7.0,
+      "vo_roman_urdu": "Jawab ye nahi ke naqsha jhootha hai. Jawab ye hai ke har naqsha ek cheez chunta hai.",
+      "vo_english": "The map isn't lying. It's choosing.",
+      "on_screen_text": "Wo chunta hai",
+      "map_action": "True-size reveal + globe wapas; payoff deliver",
+      "sfx": "resolve chord",
+      "caption": "burned-in",
+      "verify_tag": "",
+      "assets": [
+        "A07",
+        "A04"
+      ],
+      "transition": "morph"
+    },
+    {
+      "id": "B12",
+      "start_s": 67.0,
+      "end_s": 75.0,
+      "duration_s": 8.0,
+      "vo_roman_urdu": "Agla raaz: time zones itni ajeeb kyun hain? Aur aap ke sheher mein is jheel ko kya kehte hain? Comment mein likho.",
+      "vo_english": "Next: why do time zones look so strange? What do you call this lake where you live?",
+      "on_screen_text": "Agla raaz: Time Zones ⏱️",
+      "map_action": "Map zoom-out → time-zone lines ka 0.8s teaser → community question",
+      "sfx": "fade",
+      "caption": "burned-in",
+      "verify_tag": "",
+      "assets": [
+        "A10",
+        "A01"
+      ],
+      "transition": "fade"
+    }
+  ],
+  "long_form_chapters_s": [
+    0,
+    40,
+    70,
+    140,
+    190,
+    240,
+    310,
+    380,
+    450,
+    520,
+    590,
+    630
+  ],
+  "boundary": "Original pre-production EDL. No upload/publish, no legal clearance, no human creative approval, no guaranteed views/virality/monetisation, no private analytics, no invented competitor transcript."
+}

@@ -1,0 +1,677 @@
+{
+  "generated_utc": "2026-11-12T04:39:20Z",
+  "source": "committed V17 YouTube Data API evidence, run.json 2026-11-12T04:24:09Z",
+  "api_run_counts": {
+    "lane_reports": 20,
+    "lane_rows": 927,
+    "unique_videos": 1567,
+    "channels_resolved": 822,
+    "most_popular_regions": 4,
+    "video_categories": 32,
+    "million_view_videos": 418,
+    "ten_million_videos": 99,
+    "candidate_videos_after_title_safety": 415,
+    "comments_videos": 12,
+    "teardowns": 12,
+    "thumbnail_stats": 24,
+    "quota_used_approx": 2098
+  },
+  "secret_value_printed_or_stored": false,
+  "filter_definitions": {
+    "C1_all_time_depth": "all-time lane has >=10 videos with >=1M views and >=1 with >=10M views",
+    "C2_not_winner_takes_all": "top3_share < 0.60",
+    "C3_reachable_median": "winner_ratio < 100",
+    "C5_fresh_million_view": "matching recent lane has >=1 video with >=1M views",
+    "C4_C6_qualitative": "100% ownable original assets, no third-party clip dependency, no repetitive-template risk"
+  },
+  "filter_funnel": [
+    {
+      "lane": "ai_tutorial_all",
+      "million_count": 13,
+      "ten_million_count": 1,
+      "median_views": 619324,
+      "top3_share": 0.393,
+      "winner_ratio": 25.0,
+      "caption_rate": 0.16,
+      "recent_million_count": 0,
+      "C1_all_time_depth": true,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": false,
+      "numeric_pass": false
+    },
+    {
+      "lane": "animal_rescue_all",
+      "million_count": 49,
+      "ten_million_count": 25,
+      "median_views": 10894898,
+      "top3_share": 0.402,
+      "winner_ratio": 21.0,
+      "caption_rate": 0.06,
+      "recent_million_count": 3,
+      "C1_all_time_depth": true,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": true,
+      "numeric_pass": true
+    },
+    {
+      "lane": "faceless_comedy_all",
+      "million_count": 4,
+      "ten_million_count": 2,
+      "median_views": 10987,
+      "top3_share": 0.861,
+      "winner_ratio": 1548.3,
+      "caption_rate": 0.08,
+      "recent_million_count": 0,
+      "C1_all_time_depth": false,
+      "C2_not_winner_takes_all": false,
+      "C3_reachable_median": false,
+      "C5_fresh_million_view": false,
+      "numeric_pass": false
+    },
+    {
+      "lane": "map_animation_all",
+      "million_count": 50,
+      "ten_million_count": 15,
+      "median_views": 5858000,
+      "top3_share": 0.252,
+      "winner_ratio": 8.1,
+      "caption_rate": 0.28,
+      "recent_million_count": 5,
+      "C1_all_time_depth": true,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": true,
+      "numeric_pass": true
+    },
+    {
+      "lane": "microdrama_all",
+      "million_count": 21,
+      "ten_million_count": 1,
+      "median_views": 819359,
+      "top3_share": 0.383,
+      "winner_ratio": 22.7,
+      "caption_rate": 0.04,
+      "recent_million_count": 1,
+      "C1_all_time_depth": true,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": true,
+      "numeric_pass": true
+    },
+    {
+      "lane": "mini_doc_all",
+      "million_count": 5,
+      "ten_million_count": 0,
+      "median_views": 234638,
+      "top3_share": 0.349,
+      "winner_ratio": 11.6,
+      "caption_rate": 0.103,
+      "recent_million_count": 2,
+      "C1_all_time_depth": false,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": true,
+      "numeric_pass": false
+    },
+    {
+      "lane": "satisfying_all",
+      "million_count": 50,
+      "ten_million_count": 25,
+      "median_views": 10188173,
+      "top3_share": 0.344,
+      "winner_ratio": 14.9,
+      "caption_rate": 0.12,
+      "recent_million_count": 0,
+      "C1_all_time_depth": true,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": false,
+      "numeric_pass": false
+    },
+    {
+      "lane": "science_humor_all",
+      "million_count": 25,
+      "ten_million_count": 7,
+      "median_views": 962939,
+      "top3_share": 0.567,
+      "winner_ratio": 73.4,
+      "caption_rate": 0.02,
+      "recent_million_count": 0,
+      "C1_all_time_depth": true,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": false,
+      "numeric_pass": false
+    },
+    {
+      "lane": "sleep_ambient_all",
+      "million_count": 8,
+      "ten_million_count": 0,
+      "median_views": 37282,
+      "top3_share": 0.443,
+      "winner_ratio": 177.3,
+      "caption_rate": 0.06,
+      "recent_million_count": 2,
+      "C1_all_time_depth": false,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": false,
+      "C5_fresh_million_view": true,
+      "numeric_pass": false
+    },
+    {
+      "lane": "viral_breakdown_all",
+      "million_count": 2,
+      "ten_million_count": 0,
+      "median_views": 152960,
+      "top3_share": 0.297,
+      "winner_ratio": 19.6,
+      "caption_rate": 0.102,
+      "recent_million_count": 7,
+      "C1_all_time_depth": false,
+      "C2_not_winner_takes_all": true,
+      "C3_reachable_median": true,
+      "C5_fresh_million_view": true,
+      "numeric_pass": false
+    }
+  ],
+  "numeric_winners": [
+    "animal_rescue_all",
+    "map_animation_all",
+    "microdrama_all"
+  ],
+  "qualitative_rejections": {
+    "animal_rescue_all": "needs third-party animal/rescue footage (rights + reused-content risk); user set caught-on-camera aside",
+    "microdrama_all": "needs serialized cast/dubbing and has 20.0% fresh-30d share; higher repetition/template risk",
+    "satisfying_all": "fresh lane 0 million-view videos; physical restoration footage not 100% ownable at low cost",
+    "science_humor_all": "fresh lane 0 million-view videos; 56.7% top3 share",
+    "ai_tutorial_all": "fresh lane median 5 views, 0 million-view videos",
+    "viral_breakdown_recent": "71.3% top3 share; top hits are trend/dance clips, not an ownable series"
+  },
+  "chosen": {
+    "theme": "Map / geo-forensics explainers (evergreen map mysteries + recent-event map forensics)",
+    "all_time_lane": {
+      "n": 50,
+      "total_views": 529862279,
+      "median_views": 5858000,
+      "top3_share": 0.252,
+      "winner_ratio": 8.1,
+      "million_count": 50,
+      "ten_million_count": 15,
+      "fresh_30d_share": 0.0,
+      "median_duration_s": 277,
+      "short_share": 0.42,
+      "caption_rate": 0.28,
+      "median_like_rate": 0.02152,
+      "median_comment_rate": 0.00023,
+      "median_views_per_day": 4477.4,
+      "top_titles": [
+        {
+          "title": "50 States Song - USA States and Capitals Song | Geography Explained by KidsLearningTube",
+          "views": 47518465,
+          "id": "Gt2mYPwXyAc"
+        },
+        {
+          "title": "Why do Rivers Curve?",
+          "views": 46287002,
+          "id": "HKdjIFjYZ40"
+        },
+        {
+          "title": "Solar System 101 | National Geographic",
+          "views": 39793568,
+          "id": "libKVRa01L8"
+        },
+        {
+          "title": "Why Do Time Zones Look So Strange 🌍 How They Work 🕒",
+          "views": 32021623,
+          "id": "t1DECN9zS_8"
+        },
+        {
+          "title": "The Difference Between UAE, Dubai & Abu Dhabi 🇦🇪 What Are the Emirates 🤯",
+          "views": 28973666,
+          "id": "TIP_4hrzLTk"
+        }
+      ]
+    },
+    "recent_lane": {
+      "n": 17,
+      "total_views": 14592457,
+      "median_views": 210562,
+      "top3_share": 0.727,
+      "winner_ratio": 19.8,
+      "million_count": 5,
+      "ten_million_count": 0,
+      "fresh_30d_share": 0.235,
+      "median_duration_s": 109,
+      "short_share": 0.706,
+      "caption_rate": 0.0,
+      "median_like_rate": 0.0095,
+      "median_comment_rate": 0.00024,
+      "median_views_per_day": 2633.5,
+      "top_titles": [
+        {
+          "title": "What Is El Niño & Why Is It So Powerful 🌡️🤯 Super El Niño 🌊",
+          "views": 4162996,
+          "id": "J_sNJjrN4J4"
+        },
+        {
+          "title": "Nepal Floods 2026 Explained: What Caused the Deadly Flash Flood?",
+          "views": 4110486,
+          "id": "u5F175REX_U"
+        },
+        {
+          "title": "Nepal Flood Disaster 2026: Glacier Collapse",
+          "views": 2331403,
+          "id": "RF5Nw4g7AxE"
+        },
+        {
+          "title": "Nepal Floods Explained with Satellite Images | Nepal Flash Flood unfolded for UPSC Aspirants",
+          "views": 1305861,
+          "id": "Vr209Lt6_cA"
+        },
+        {
+          "title": "Cyclone Arnab 2026 : Where Will It Hit? IMD Forecast & Geography Explained | Sudarshan Gurjar",
+          "views": 1186149,
+          "id": "2tjiaBnx5fE"
+        }
+      ]
+    },
+    "newer_channel_million_view_videos_by_lane": {
+      "map_animation_all": 8,
+      "animal_rescue_all": 7,
+      "satisfying_all": 5,
+      "viral_breakdown_recent": 2
+    },
+    "evergreen_examples": [
+      {
+        "id": "t1DECN9zS_8",
+        "title": "Why Do Time Zones Look So Strange 🌍 How They Work 🕒",
+        "channel": "GeoGlobeTales",
+        "views": 32021623,
+        "duration_seconds": 61,
+        "published": "2024-07-03T15:43:48Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en"
+      },
+      {
+        "id": "TIP_4hrzLTk",
+        "title": "The Difference Between UAE, Dubai & Abu Dhabi 🇦🇪 What Are the Emirates 🤯",
+        "channel": "GeoGlobeTales",
+        "views": 28973666,
+        "duration_seconds": 73,
+        "published": "2025-12-14T16:17:43Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en"
+      },
+      {
+        "id": "lwglySYUuSY",
+        "title": "🌪️ Hurricanes, Tornadoes, Typhoons, Cyclones & Monsoons 🌧️ What’s the Difference?",
+        "channel": "GeoGlobeTales",
+        "views": 15637653,
+        "duration_seconds": 61,
+        "published": "2024-09-02T15:47:51Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en"
+      },
+      {
+        "id": "cvZls9tcCTI",
+        "title": "The Difference Between New York & NYC 🗽 Manhattan & Long Island 🤯",
+        "channel": "GeoGlobeTales",
+        "views": 14195803,
+        "duration_seconds": 76,
+        "published": "2025-11-16T17:24:43Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en"
+      },
+      {
+        "id": "HA1hs67ThXc",
+        "title": "Why there are 2 Irelands 🇮🇪🇬🇧 Ireland vs Northern Ireland 🤯",
+        "channel": "GeoGlobeTales",
+        "views": 10798267,
+        "duration_seconds": 96,
+        "published": "2026-04-16T15:09:26Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en"
+      },
+      {
+        "id": "DjhZuN0woDY",
+        "title": "All Maps are Lying to You 😱 The Real Size of Counties 🗺️",
+        "channel": "GeoGlobeTales",
+        "views": 10433647,
+        "duration_seconds": 61,
+        "published": "2024-05-01T15:38:50Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en"
+      },
+      {
+        "id": "Gt2mYPwXyAc",
+        "title": "50 States Song - USA States and Capitals Song | Geography Explained by KidsLearningTube",
+        "channel": "KLT",
+        "views": 47518465,
+        "duration_seconds": 298,
+        "published": "2016-01-11T05:32:54Z",
+        "category_id": "1",
+        "caption": true,
+        "default_language": "en"
+      },
+      {
+        "id": "HKdjIFjYZ40",
+        "title": "Why do Rivers Curve?",
+        "channel": "MinuteMinis",
+        "views": 46287002,
+        "duration_seconds": 17,
+        "published": "2022-06-21T18:00:11Z",
+        "category_id": "27",
+        "caption": true,
+        "default_language": "en"
+      },
+      {
+        "id": "libKVRa01L8",
+        "title": "Solar System 101 | National Geographic",
+        "channel": "National Geographic",
+        "views": 39793568,
+        "duration_seconds": 251,
+        "published": "2017-08-30T12:00:26Z",
+        "category_id": "24",
+        "caption": true,
+        "default_language": "en"
+      },
+      {
+        "id": "RSeWI6Ar-j0",
+        "title": "1.8 billion years in 60 seconds",
+        "channel": "Howtown",
+        "views": 25825202,
+        "duration_seconds": 74,
+        "published": "2025-04-03T17:29:07Z",
+        "category_id": "28",
+        "caption": false,
+        "default_language": "en"
+      },
+      {
+        "id": "ovyoQMhGsYU",
+        "title": "What If Pangea Came Back? 🌍",
+        "channel": "Geo All Day",
+        "views": 12478215,
+        "duration_seconds": 63,
+        "published": "2025-07-08T20:57:50Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en-US"
+      },
+      {
+        "id": "tT-BzWbyqkw",
+        "title": "Why Nobody Can Cross Darien Gap 🤔 What's Wrong here? 🤯",
+        "channel": "Geo All Day",
+        "views": 9716818,
+        "duration_seconds": 60,
+        "published": "2024-09-09T18:43:13Z",
+        "category_id": "24",
+        "caption": false,
+        "default_language": "en-US"
+      }
+    ],
+    "recent_event_examples": [
+      {
+        "id": "J_sNJjrN4J4",
+        "title": "What Is El Niño & Why Is It So Powerful 🌡️🤯 Super El Niño 🌊",
+        "channel": "GeoGlobeTales",
+        "views": 4162996,
+        "duration_seconds": 78,
+        "published": "2026-09-20T15:12:03Z",
+        "category_id": "27",
+        "caption": false
+      },
+      {
+        "id": "u5F175REX_U",
+        "title": "Nepal Floods 2026 Explained: What Caused the Deadly Flash Flood?",
+        "channel": "UnderTheHeadline",
+        "views": 4110486,
+        "duration_seconds": 751,
+        "published": "2026-08-28T10:25:50Z",
+        "category_id": "25",
+        "caption": false
+      },
+      {
+        "id": "RF5Nw4g7AxE",
+        "title": "Nepal Flood Disaster 2026: Glacier Collapse",
+        "channel": "Clarity UPSC",
+        "views": 2331403,
+        "duration_seconds": 136,
+        "published": "2026-08-27T13:25:17Z",
+        "category_id": "27",
+        "caption": false
+      },
+      {
+        "id": "Vr209Lt6_cA",
+        "title": "Nepal Floods Explained with Satellite Images | Nepal Flash Flood unfolded for UPSC Aspirants",
+        "channel": "UPSC Wallah",
+        "views": 1305861,
+        "duration_seconds": 509,
+        "published": "2026-08-27T08:59:19Z",
+        "category_id": "27",
+        "caption": false
+      },
+      {
+        "id": "2tjiaBnx5fE",
+        "title": "Cyclone Arnab 2026 : Where Will It Hit? IMD Forecast & Geography Explained | Sudarshan Gurjar",
+        "channel": "Sudarshan Gurjar Unacademy",
+        "views": 1186149,
+        "duration_seconds": 99,
+        "published": "2026-10-26T07:58:21Z",
+        "category_id": "27",
+        "caption": false
+      }
+    ]
+  },
+  "channel_public_proxies": [
+    {
+      "channel": "GeoGlobeTales",
+      "created": "2023-11-20",
+      "age_days": 1088,
+      "subscribers": 2090000,
+      "channel_views": 1644854369,
+      "channel_video_count": 169,
+      "views_per_channel_day": 1511814.68,
+      "views_per_video": 9732866.09,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    },
+    {
+      "channel": "Geo All Day",
+      "created": "2023-11-24",
+      "age_days": 1084,
+      "subscribers": 392000,
+      "channel_views": 296589637,
+      "channel_video_count": 237,
+      "views_per_channel_day": 273606.68,
+      "views_per_video": 1251433.07,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    },
+    {
+      "channel": "Howtown",
+      "created": "2024-03-22",
+      "age_days": 965,
+      "subscribers": 1440000,
+      "channel_views": 256000965,
+      "channel_video_count": 119,
+      "views_per_channel_day": 265285.97,
+      "views_per_video": 2151268.61,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    },
+    {
+      "channel": "Rainlit Village",
+      "created": "2026-06-28",
+      "age_days": 137,
+      "subscribers": 664000,
+      "channel_views": 437146675,
+      "channel_video_count": 126,
+      "views_per_channel_day": 3190851.64,
+      "views_per_video": 3469418.06,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    },
+    {
+      "channel": "W Sound",
+      "created": "2024-07-19",
+      "age_days": 846,
+      "subscribers": 918000,
+      "channel_views": 1165657058,
+      "channel_video_count": 11,
+      "views_per_channel_day": 1377845.22,
+      "views_per_video": 105968823.45,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    },
+    {
+      "channel": "Nature Global",
+      "created": "2024-03-08",
+      "age_days": 979,
+      "subscribers": 2390000,
+      "channel_views": 748056521,
+      "channel_video_count": 882,
+      "views_per_channel_day": 764102.68,
+      "views_per_video": 848136.65,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    },
+    {
+      "channel": "Tarazai",
+      "created": "2025-01-13",
+      "age_days": 668,
+      "subscribers": 257000,
+      "channel_views": 506813463,
+      "channel_video_count": 214,
+      "views_per_channel_day": 758702.79,
+      "views_per_video": 2368287.21,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    },
+    {
+      "channel": "Story Arc Paws",
+      "created": "2024-08-19",
+      "age_days": 815,
+      "subscribers": 548000,
+      "channel_views": 390930801,
+      "channel_video_count": 164,
+      "views_per_channel_day": 479669.69,
+      "views_per_video": 2383724.4,
+      "newer_channel_created_since_2023": true,
+      "recent_upload_median_views": null,
+      "note": "public cumulative/age proxy only, NOT verified subscriber growth"
+    }
+  ],
+  "creator_published_chapter_beats": {
+    "u5F175REX_U": {
+      "title": "Nepal Floods 2026 Explained: What Caused the Deadly Flash Flood?",
+      "views": 4110486,
+      "duration_seconds": 751,
+      "chapter_markers": [
+        "0:00",
+        "0:37",
+        "0:58",
+        "2:06",
+        "2:58",
+        "3:50",
+        "5:06",
+        "6:17",
+        "7:00",
+        "7:40",
+        "8:58",
+        "10:13",
+        "11:24"
+      ]
+    },
+    "ZTimVStLZh0": {
+      "title": "Restoration Gumball Machine Stahlberg 1980s",
+      "views": 10704450,
+      "duration_seconds": 1003,
+      "chapter_markers": [
+        "00:00",
+        "00:12",
+        "00:52",
+        "01:26",
+        "01:50",
+        "02:07",
+        "03:00",
+        "03:50",
+        "04:58",
+        "05:26",
+        "05:52",
+        "07:49",
+        "08:48",
+        "12:48",
+        "13:23",
+        "13:45",
+        "15:36",
+        "16:21"
+      ]
+    },
+    "xT10kTnYLDQ": {
+      "title": "Climate class 9 full chapter (Animation) | Class 9 geography chapter 4 | CBSE | NCERT",
+      "views": 7582459,
+      "duration_seconds": 1723,
+      "chapter_markers": [
+        "00:00",
+        "00:51",
+        "02:27",
+        "04:52",
+        "10:23",
+        "17:42",
+        "18:27",
+        "21:07",
+        "22:02",
+        "22:38",
+        "24:31",
+        "27:44",
+        "28:14"
+      ]
+    },
+    "d-CuF6dlqLg": {
+      "title": "Microsoft Copilot Tutorial",
+      "views": 1922315,
+      "duration_seconds": 850,
+      "chapter_markers": [
+        "00:00",
+        "00:43",
+        "00:56",
+        "01:26",
+        "02:52",
+        "03:27",
+        "04:07",
+        "04:53",
+        "06:01",
+        "07:56",
+        "09:07",
+        "10:29",
+        "12:04",
+        "12:33"
+      ]
+    }
+  },
+  "transcript_access": {
+    "first_pass_attempts": 12,
+    "first_pass_errors": 12,
+    "second_pass_targets": 18,
+    "second_pass_usable": 0,
+    "second_pass_errors": 18,
+    "reason": "YouTube datacenter sign-in bot-check / RequestBlocked",
+    "claimed": "no verbatim competitor transcript from YouTube captions was obtained"
+  },
+  "boundary": "Public Data API fields + public metadata only. No competitor video/audio download, no video-frame inspection, no private retention/CTR/RPM, no invented transcripts, no verified growth ranking, no causal virality claim, no legal opinion, no upload/publish/monetisation claim, no guaranteed views, no human approval, no perfection claim."
+}
