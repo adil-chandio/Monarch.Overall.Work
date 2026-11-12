@@ -27,6 +27,7 @@ jobs:
           expected=$(awk '{print $1}' "$RUNNER_TEMP/film/sha256.txt")
           echo "$expected  $file" | sha256sum -c -
       - name: Copy the verified bytes to a Git object for sandbox review
+        id: blob
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -38,5 +39,14 @@ jobs:
           req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',data=payload,
             headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
           with urllib.request.urlopen(req,timeout=300) as response: blob=json.load(response)['sha']
-          print('TRANSFER_BLOB',blob,'SHA256',hashlib.sha256(data).hexdigest(),'SIZE',len(data),flush=True)
+          digest=hashlib.sha256(data).hexdigest()
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              print('sha='+blob,file=output);print('digest='+digest,file=output)
+          print('Verified transfer object created; size',len(data),flush=True)
           PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: old-review-${{ steps.blob.outputs.sha }}-${{ steps.blob.outputs.digest }}
+          path: ${{ runner.temp }}/film/sha256.txt
+          retention-days: 1
+          if-no-files-found: error
