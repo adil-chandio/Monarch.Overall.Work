@@ -77,7 +77,13 @@ jobs:
           assert r['comments_videos'] >= 20, r['comments_videos']
           assert r['thumbnail_stats'] >= 25, r['thumbnail_stats']
           assert r['transcript_attempts'] >= 10, r['transcript_attempts']
-          print('V18 HARD QC PASS', json.dumps(r, indent=2))
+          raw = json.loads(pathlib.Path('research/deep_forensic_v18/api_evidence/video_details_v18.json').read_text())
+          assert raw['count'] == r['unique_videos'], (raw['count'], r['unique_videos'])
+          manifest = json.loads(pathlib.Path('research/deep_forensic_v18/api_evidence/analysis_manifest_v18.json').read_text())
+          assert manifest['unique_videos_in_memory_and_raw_dump'] == r['unique_videos']
+          assert manifest['description_forensics'] == r['description_forensics']
+          assert manifest['deep_teardowns'] == r['deep_teardowns']
+          print('V18 HARD QC PASS (raw dump matches in-memory corpus)', json.dumps(r, indent=2))
           PY
 
       - name: Upload deep-forensic evidence even if the commit fails

@@ -472,6 +472,11 @@ def main():
     upl_rows = video_details(new_upload_ids)
     for r in upl_rows:
         vby[r["id"]] = r
+    # Re-save the FULL resolved corpus (lanes + mostPopular + recent uploads).
+    # V18.1 fix: the first save happened before recent-upload resolution, so it
+    # omitted ~1,100 legitimate API rows. Every derived artifact was computed
+    # from the full in-memory vby, but the raw dump must match it exactly.
+    save("video_details_v18.json", {"count": len(vby), "videos": list(vby.values())})
     recent_by_channel = defaultdict(list)
     for r in upl_rows:
         recent_by_channel[r["channel_id"]].append(r)
@@ -682,6 +687,18 @@ def main():
                      "synopses / chapter metadata, NOT verbatim spoken transcripts."),
     }
     save("run_v18.json", run)
+    save("analysis_manifest_v18.json", {
+        "note": "every derived artifact below was computed from the full in-memory video map; the raw video_details dump is re-saved after recent-upload resolution",
+        "unique_videos_in_memory_and_raw_dump": len(vby),
+        "lane_reports": len(lane_reports), "lane_rows": len(lane_ids),
+        "most_popular_regions": len(pop), "channels_resolved": len(chans),
+        "growing_channels_sampled": len(growing), "recent_upload_channels": len(uploads),
+        "million_view_videos": len(million), "candidate_videos": len(candidates),
+        "description_forensics": len(desc_rows), "deep_teardowns": len(deep_rows),
+        "comments_videos": sum(1 for c in comments_out if c["status"] == "ok"),
+        "transcript_attempts": len(teardowns), "thumbnail_stats": thumbs.get("n", 0),
+        "duration_bucket_lanes": {"short": 6, "medium": 6, "long": 6, "recent_any": 6},
+    })
     log("run record", json.dumps(run, indent=2))
 
     # 12) data appendix
