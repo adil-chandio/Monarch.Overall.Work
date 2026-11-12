@@ -195,3 +195,19 @@ layers, so no library music enters the file.
   nothing from the ten repositories in the brief.
 * **Human review of the audio:** none. `sound3d.py` measures loudness and true
   peak; nobody has listened to the result.
+
+## Where to get the file
+
+The rendered master is not committed to the repository (34.9 MB of H.264 does
+not belong in a git tree). It is published as a release, `temple-3d-refmatch-20s`:
+
+- Direct download: https://drive.google.com/uc?export=download&id=1fIJtc4xACAHp6V8l7JodAdklqLwnuuWj
+- View: https://drive.google.com/file/d/1fIJtc4xACAHp6V8l7JodAdklqLwnuuWj/view
+- Size 34,874,233 bytes; 1280x720, 24 fps, 480 frames, 20.00 s
+
+The release carries no attached asset because GitHub's asset-upload host
+(`uploads.github.com`) is unreachable from the render sandbox: the TLS handshake
+is reset before any bytes move, reproduced across two sessions and twelve
+attempts. `api.github.com` and `github.com` both work from the same sandbox, so
+this is specific to the upload host, not to the credentials. The same file is
+available from the links above.
