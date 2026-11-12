@@ -1,5 +1,11 @@
 # Fictional celebrity 3D upgrade
 
+[Download the 60-second MP4](https://github.com/adil-chandio/Monarch.Overall.Work/releases/download/celebrity-3d-cycles-final/celebrity-cycles-3d-upgrade.mp4)
+(6,769,622 bytes; SHA-256 `8568768f11a448337aba847892e38074465e591b0913df4155ec7fd749c33470`).
+The final file decoded all 1,440 video frames and its AAC audio. Sixteen
+representative frames were visually checked, along with numerical contact and
+framing probes; there was no continuous playback or listening review.
+
 This is an independently rendered revision of `celebrity-rebuilt-3d-preview`,
 not a recovery of the missing original. It keeps the same ten narration takes,
 script timings, score/foley and estimated captions. The protagonist is a generic
