@@ -28,6 +28,12 @@ cache = root / '.cache/mammoth-edit'
 audio = (root / 'production/extinct-life/longform-mammoth/cinematic-rebuild'
          / 'soundtrack-draft/Narration-Score-DRAFT.m4a')
 out = cache / 'review-reel-continuous.mp4'
+# Delivery encodes can be redirected without touching the cached master.
+for _flag, _key in (('--out', 'OUT'), ('--crf', 'CRF')):
+    if _flag in sys.argv:
+        globals()[_key] = sys.argv[sys.argv.index(_flag) + 1]
+out = Path(globals().get('OUT', out))
+CRF = str(globals().get('CRF', '20'))
 W, H, FPS = 1280, 720, 30
 
 
@@ -42,15 +48,25 @@ def verify():
 
 
 def running_order(data):
-    """Expand verified windows into a contiguous, gap-free running order."""
+    """Expand the verified segments into a contiguous, gap-free running order.
+
+    Each verified segment is its own piece. Merging neighbours into one window would be
+    wrong here: once the timeline is continuous, a window is the union of many inserts,
+    and no single workprint file covers it.
+    """
     total = data['timeline_frames']
     pieces, gaps = [], []
-    for a, b, name in data['verified_windows']:
-        pieces.append({'kind': 'picture', 'a': a, 'b': b, 'name': name})
+    for seg in data['segments']:
+        if not seg.get('built'):
+            continue
+        pieces.append({'kind': 'picture', 'a': seg['start_frame'],
+                       'b': seg['start_frame'] + seg['frames'],
+                       'frame': seg['start_frame'], 'name': seg['name'],
+                       'file': seg.get('file', seg['name'] + '-incomplete-workprint.mp4')})
     for a, b in data['missing_ranges_frames']:
         gaps.append({'kind': 'gap', 'a': a, 'b': b})
         pieces.append({'kind': 'gap', 'a': a, 'b': b})
-    pieces.sort(key=lambda p: p['a'])
+    pieces.sort(key=lambda p: (p['a'], p.get('kind') == 'gap'))
     return pieces, gaps, total
 
 
@@ -101,7 +117,7 @@ def main():
     for p in pieces:
         dur = (p['b'] - p['a']) / FPS
         if p['kind'] == 'picture':
-            src = cache / f"{p['name'].split(' + ')[0]}-incomplete-workprint.mp4"
+            src = cache / p['file']
             if not src.is_file():
                 raise SystemExit(f'missing verified workprint for {p["name"]}: {src}')
             inputs += ['-i', str(src)]
@@ -123,7 +139,7 @@ def main():
     cmd += inputs + ['-i', str(audio)]
     cmd += ['-filter_complex', graph, '-map', '[vout]', '-map', f'{idx}:a',
             '-t', f'{total / FPS:.4f}', '-c:v', 'libx264', '-preset', 'fast',
-            '-crf', '20', '-threads', '2', '-pix_fmt', 'yuv420p',
+            '-crf', str(CRF), '-threads', '2', '-pix_fmt', 'yuv420p',
             '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', str(out)]
     subprocess.run(cmd, check=True)
 

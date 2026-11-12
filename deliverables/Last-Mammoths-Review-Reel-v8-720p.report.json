@@ -1,0 +1,36 @@
+{
+  "status": "continuous review reel v8; NOT the final film, NOT picture lock; rig rights unresolved and no human continuous viewing yet",
+  "frames": 23882,
+  "seconds": 796.067,
+  "lufs": -16.2,
+  "true_peak_dbtp": -0.8,
+  "covered_seconds": 796.0,
+  "gap_count": 1,
+  "gaps_seconds": [
+    [
+      796.0,
+      796.07
+    ]
+  ],
+  "audio_source": "production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrack-draft/Narration-Score-DRAFT.m4a",
+  "audio_sha256": "434f2c344b428982edf8b00607b8361c4c45bec95da6ac5330c87428a45c3760",
+  "output_sha256": "deee8881e913814108def5d742bce92edd526ef1429b8db627a36a2c8d2d91df",
+  "note": "Gaps are labelled cards, not black. Audio is one continuous score; no section audio was mixed in. Not auditioned by a human.",
+  "deliverable": "deliverables/Last-Mammoths-Review-Reel-v8-720p.mp4",
+  "bytes": 86744204,
+  "sha256": "deee8881e913814108def5d742bce92edd526ef1429b8db627a36a2c8d2d91df",
+  "what_changed_from_v7": [
+    "coverage: 655.3 s of the 796 s timeline verified -> 796.0 s (0 gaps, 0 overlapping placements)",
+    "opening (85 s) and the 30 s environment sequence were missing from the derived timeline and are now counted",
+    "17 narrated holes closed with native footage from renders that were already in the film, each a disjoint slice",
+    "duplicate-shot audit: 0 repeated source seconds across the whole cut",
+    "plate share 56.6% -> 38.7%; longest continuous plate run 173 s -> 50 s",
+    "assembly fixed: it used to expect one workprint per merged coverage window, which only worked while the timeline had gaps"
+  ],
+  "encode": {
+    "crf": 23,
+    "preset": "fast",
+    "pix_fmt": "yuv420p",
+    "audio": "aac 160k from the continuous narration/score draft"
+  }
+}

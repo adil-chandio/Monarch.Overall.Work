@@ -4,35 +4,25 @@ from pathlib import Path
 root=Path(__file__).resolve().parents[5];base=Path(__file__).resolve().parent
 story=json.loads((base.parent/'storyboard-retime/storyboard-retimed-reblocked.json').read_text())
 # Candidate placements, not listening-approved. Offsets are exact at 30 fps.
-segments=[{'name':'opening','start_frame':0,'frames':2550,'qc':'opening-qc.json','file':'opening-incomplete-workprint.mp4'},
- {'name':'contact-section','start_frame':12330,'frames':1320,'qc':'contact-section-qc.json','file':'contact-section-incomplete-workprint.mp4'},
- {'name':'chemistry-section','start_frame':9150,'frames':1470,'qc':'chemistry-section-qc.json','file':'chemistry-section-incomplete-workprint.mp4'},
- {'name':'one-genome','start_frame':8220,'frames':930,'qc':'one-genome-qc.json','file':'one-genome-incomplete-workprint.mp4'},
- {'name':'isolation-section','start_frame':2580,'frames':840,'qc':'isolation-section-qc.json','file':'isolation-section-incomplete-workprint.mp4'},
- {'name':'other-islands','start_frame':3420,'frames':480,'qc':'other-islands-qc.json','file':'other-islands-incomplete-workprint.mp4'},
- {'name':'island-approach','start_frame':3900,'frames':300,'qc':'island-approach-qc.json','file':'island-approach-incomplete-workprint.mp4'},
- {'name':'island-chapter','start_frame':4200,'frames':900,'qc':'island-chapter-qc.json','file':'island-chapter-incomplete-workprint.mp4'},
- {'name':'island-chapter-2','start_frame':6600,'frames':900,'qc':'island-chapter-2-qc.json','file':'island-chapter-2-incomplete-workprint.mp4'},
- {'name':'coat-section','start_frame':7500,'frames':720,'qc':'coat-section-qc.json','file':'coat-section-incomplete-workprint.mp4'},
- {'name':'gene-disruption','start_frame':5782,'frames':818,'qc':'gene-disruption-qc.json','file':'gene-disruption-incomplete-workprint.mp4'},
- {'name':'genome-comparison','start_frame':5182,'frames':600,'qc':'genome-comparison-qc.json','file':'genome-comparison-incomplete-workprint.mp4'},
- {'name':'stream','start_frame':10620,'frames':480,'qc':'stream-qc.json','file':'stream-incomplete-workprint.mp4'},
- {'name':'hypothesis','start_frame':11100,'frames':420,'qc':'hypothesis-qc.json','file':'hypothesis-incomplete-workprint.mp4'},
- {'name':'people-section','start_frame':11730,'frames':600,'qc':'people-section-qc.json','file':'people-section-incomplete-workprint.mp4'},
- {'name':'genome-record','start_frame':13650,'frames':480,'qc':'genome-record-qc.json','file':'genome-record-incomplete-workprint.mp4'},
- {'name':'genetic-strain','start_frame':16200,'frames':510,'qc':'genetic-strain-qc.json','file':'genetic-strain-incomplete-workprint.mp4'},
- {'name':'island-hold','start_frame':14190,'frames':1980,'qc':'island-hold-qc.json','file':'island-hold-incomplete-workprint.mp4'},
- # reversal-section (473-495 s) is superseded by island-hold, which now carries that
- # passage as native picture. The file is kept in .cache for comparison; it is not placed.
- {'name':'ledger-section','start_frame':20670,'frames':1350,'qc':'ledger-section-qc.json','file':'ledger-section-incomplete-workprint.mp4'},
- {'name':'new-lead-section','start_frame':19560,'frames':1110,'qc':'new-lead-section-qc.json','file':'new-lead-section-incomplete-workprint.mp4'},
- {'name':'verdict-close','start_frame':22020,'frames':1470,'qc':'verdict-close-qc.json','file':'verdict-close-incomplete-workprint.mp4'},
-# verdict-section (759-783) superseded by verdict-close, which now runs 734-783; kept on disk.
- # {'name':'verdict-section','start_frame':22770,'frames':720,'qc':'verdict-section-qc.json','file':'verdict-section-incomplete-workprint.mp4'},
- {'name':'final-crossing','start_frame':23490,'frames':390,'qc':'final-crossing-qc.json','file':'final-crossing-incomplete-workprint.mp4'},
- {'name':'trends-section','start_frame':17310,'frames':1562,'qc':'trends-section-qc.json','file':'trends-section-incomplete-workprint.mp4'},
- {'name':'coverage-section','start_frame':16710,'frames':600,'qc':'coverage-section-qc.json','file':'coverage-section-incomplete-workprint.mp4'},
- {'name':'genomic-gap','start_frame':18872,'frames':510,'qc':'genomic-gap-qc.json','file':'genomic-gap-incomplete-workprint.mp4'}]
+# The placed list is DERIVED, not hand-maintained. Every build writes
+# <name>-qc.json with its own narration offset and frame count, so the timeline is read
+# back from the artefacts. A hand-written table kept drifting out of sync with what had
+# actually been built, which is how two inserts ended up stacked on one window.
+# These sections still exist on disk but are not in the cut.
+SUPERSEDED={'verdict-section','reversal-section','contact-section'}
+segments=[]
+for qc in sorted((root/'.cache/mammoth-edit').glob('*-qc.json')):
+    name=qc.name[:-len('-qc.json')]
+    if name in SUPERSEDED:continue
+    try:d=json.loads(qc.read_text())
+    except Exception:continue
+    if 'narration_offset_seconds' in d and 'frames' in d:
+        # Most builds are <name>-incomplete-workprint.mp4; a few older sequences use
+        # their own filename, which the qc records as `file` when it differs.
+        fname=d.get('file',name+'-incomplete-workprint.mp4')
+        segments.append({'name':name,'start_frame':round(d['narration_offset_seconds']*30),
+                         'frames':d['frames'],'qc':qc.name,'file':fname})
+segments.sort(key=lambda x:x['start_frame'])
 end=math.ceil(story['narration_duration_seconds']*30)
 intervals=[]
 for x in segments:

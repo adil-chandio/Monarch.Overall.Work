@@ -13,7 +13,7 @@ sampled geometry probes) is not evidence of artistic, anatomical or scientific q
 | `full-script-v2/` | Ten science-qualified narration takes, 796.042 s, auto-aligned captions, source crosswalk. Human script, caption, pronunciation and science review outstanding. |
 | `soundtrack-draft/` | Continuous narration + music draft (796.1 s). No SFX; not continuously auditioned. |
 | `storyboard-retime/` | 83 provisional blocks over the full narration length. Not picture lock. |
-| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 777.3 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. `assemble_review.py` joins them into a 796 s **review reel** with labelled gap cards; it is not the final film. |
+| `edit/` | Editor scripts that place verified silent renders under the narration draft, plus coverage accounting. 777.3 s of the 796.0 s timeline is covered by verified candidate windows, with overlaps reported rather than hidden. `assemble_review.py` joins them into a 796 s **review reel**; coverage is now 796.0 s of 796.07 s with no overlapping placements and no repeated source seconds. It is not the final film. |
 | `island-chapter/` | 60 s, seven-shot Arctic sequence (dawn herd, tracking walk, trunk to grass, calf, stream crossing, squall, dusk). 30 s placed at 140 s. |
 | `coat-section/` | 34 s, five shots (macro wool texture, close flank, low legs, herd into low sun, exit hold). 24 s placed at 250 s. |
 | `island-years/` | 30 s compressed-season study. An 8 s excerpt is available as an alternate; not currently placed. |
@@ -58,32 +58,33 @@ have to compete" over the island, running to the end of the film, so the last fo
 seconds are picture rather than a table. `verdict-section` is no longer placed — its own
 wide shot of the same plain made the cut read as a repeat.
 
-| | before | now |
-|---|---|---|
-| plate | 531.3 s (68.4%) | **439.3 s (56.6%)** |
-| rendered picture | 246.0 s (31.6%) | **337.0 s (43.4%)** |
-| longest plate run | 173.1 s | **106.1 s** |
+| | first assembly | second pass | now |
+|---|---|---|---|
+| plate | 531.3 s (68.4%) | 439.3 s (56.6%) | **307.8 s (38.7%)** |
+| rendered picture | 246.0 s (31.6%) | 337.0 s (43.4%) | **488.2 s (61.3%)** |
+| longest plate run | 173.1 s | 106.1 s | **50.0 s** |
 
 `edit/report_picture_balance.py` regenerates these figures from the verified windows.
 
-**This is improved, not solved.** The remaining runs are still long:
+The third pass cut all four remaining over-long runs with rendered picture that already
+existed but was not yet on screen: two disjoint excerpts of the island-approach render
+(170–172.7 and 181.7–187, where the 2017 cohort is described), the unused tail of
+island-years (187–192.7 and 278–280), the unused generations of the coat, chemistry,
+coverage, genome-gap, new-lead and ledger renders, and the first fifteen seconds of the
+environment sequence, which had been built as a candidate and then never placed. Each
+slice is disjoint from every other use of the same render; `.cache/audit_duplicates.py`
+reports **0 repeated source seconds**.
+No plate was shortened and no plate was cut.
 
-| plate run | length |
-|---|---|
-| 274.0 – 354.0 | 80.0 s |
-| 391.0 – 471.0 | 80.0 s |
-| 540.0 – 646.1 | 106.1 s |
-| 652.0 – 734.0 | 82.0 s |
+**This is now within the stated limit, not merely improved.** No plate run exceeds 60 s.
+The remaining long stretches are 50 s of verdict plates at 684–734 and 44 s of ledger
+plates before them; both are the honest form of their claims (a three-column evidence
+ledger, and a "what can we say" verdict), and both are built as progressive reveals
+rather than held stills.
 
-The same remedy is needed twice more — native picture under the human-evidence and
-microbial passages, and inside the 540–646 s genetics chapter, which is now the longest
-run and the one where the plates matter most. The plates should sit *against* the
-island, not replace it: they are the honest form of these claims and none should be cut
-to shorten a run.
-
-Until that footage exists this remains a work-in-progress assembly, and the plate share
-must not be presented as a stylistic choice. No distribution version may be cut from
-this timeline as it stands.
+It remains a work-in-progress assembly: the rig's rights are unresolved, the narration is
+a draft recording, there has been no continuous human viewing, and there is no final mix
+or grade. No distribution version may be cut from this timeline as it stands.
 
 ## Two bugs the contact sheet caught
 

@@ -56,9 +56,12 @@ README with what is invented; neither has had continuous viewing.
 `island-approach` is trimmed to 10 s (130–140 s) where the storyboard asks for a
 foraging beat; the island chapter then runs continuously from 140.0 s. `island-thaw`
 remains available as an 8-second alternate excerpt of the seasonal study but is not
-placed. `check_coverage.py` reports overlapping candidate windows instead of aborting
-and measures coverage as the union of verified windows. The current union is
-**777.3 s of 796.0 s**, leaving ~19 s uncovered, all fragments under 7 s.
+placed. `check_coverage.py` derives the placed timeline from every `*-qc.json` rather
+than a hand-kept table (that table drifted twice and stacked two inserts on one window),
+reports overlapping candidate windows instead of aborting, and measures coverage as the
+union of verified windows. The current union is **796.0 s of 796.07 s**: the only
+uncovered frames are the last two, which carry no narration. There are no overlapping
+placements and no repeated source seconds (`.cache/audit_duplicates.py`).
 
 The island-seasons insert adds a low wind bed from the existing candidate recording;
 its provenance and the unverified master identity are recorded in
@@ -71,17 +74,18 @@ uses the shared narration draft only, with no original sound design.
 
 `report_picture_balance.py` measures how much of the covered timeline is printed plate
 rather than rendered picture, and how long the plates run without interruption. Current
-figures: **439.3 s plate / 337.0 s rendered picture (56.6% plate)**, longest single run
-**106.1 s** (540.0–646.1 s).
+figures: **307.8 s plate / 488.2 s rendered picture (38.7% plate)**, longest single run
+**50.0 s** (684–734 s, the verdict plates). No plate run exceeds 60 s.
 
 Assembly found this; section QC could not. Every plate is individually defensible and
 several exist to refuse a misleading image — but a run of them turns a documentary into a
 slide sequence. Two fixes have been made: `island-hold/` (473–539 s as native picture, with the
 `genetic-strain` trim that followed), then `verdict-close/` at 734–759 s, which let the
-ledger stop at 734 s. Together they took the share from 68.4% to 56.6% and the longest
-run from 173.1 s to 106.1 s. The same remedy is still needed under the human-evidence
-and microbial passages, and inside the 540–646 s genetics chapter. The fix is more native picture, never shorter plates; the
-same warning is stated at the top of `../README.md`.
+ledger stop at 734 s. Then a third pass cut the four remaining over-long runs of paper
+(274–354, 391–471, 540–646.1, 652–734) with rendered picture taken from renders already
+in the film but not yet on screen. Together they took the share from 68.4% to 38.7% and
+the longest run from 173.1 s to 50.0 s. The fix is more native picture, never shorter
+plates; the same warning is stated at the top of `../README.md`.
 
 ## Continuous review reel
 
@@ -89,11 +93,14 @@ same warning is stated at the top of `../README.md`.
 the film can be watched end to end for the first time. It is a review artifact, not the
 final film and not picture lock.
 
-- 796.07 s, 23882 frames, 1280×720, 30 fps, −16.2 LUFS, −0.8 dBTP.
+- 796.07 s, 23882 frames, 1280×720, 30 fps, −16.2 LUFS, −0.8 dBTP, 86.7 MB (CRF 23).
+- Every one of the 56 placed segments is verified before assembly: frame count, fps,
+  narration offset, audio digest and file digest. An insert that fails is excluded.
 - Picture is concatenated from the verified workprints; audio is taken from the single
   continuous narration/score draft, so the voice never restarts or drifts across a cut.
-- The six uncovered ranges become **labelled cards** stating the exact range and that
-  narration continues underneath. A gap is a gap in the edit, not a held shot.
+- There is at most one labelled card, for the final two frames past the end of the
+  narration. A gap card states its exact range and that narration continues underneath:
+  a gap is a gap in the edit, not a held shot.
 - The reel is deliberately built from verified QC only; an insert that fails
   `check_coverage.py` cannot enter it.
 
@@ -124,19 +131,60 @@ that is regenerated rather than written by hand:
 | | |
 |---|---|
 | 0–85 | opening |
-| 85–86 | gap card |
-| 86–170 | isolation, another island, approach, chapter one |
-| 170–172.73 | gap card |
-| 172.73–455 | comparison, gene disruption, chapter two, coat, one genome, chemistry, stream, hypothesis |
-| 384–391 | gap card (inside the above) |
-| 391–471 | people, contact, genome record |
-| 471–473 | gap card |
-| 473–539 | **island hold** (new) |
-| 539–540 | gap card |
-| 540–646.07 | genetic strain (trimmed), coverage, trends, genomic gap |
-| 646.07–652 | gap card |
-| 652–734 | new lead, ledger (trimmed) |
-| 734–783 | **verdict close** (new; absorbs the old verdict section) |
+| 85–86 | post-verdict beat (coat render) |
+| 86–114 | isolation |
+| 114–130 | other islands |
+| 130–140 | island approach |
+| 140–170 | island chapter one |
+| 170–172.73 | chapter breath (approach render, final second) |
+| 172.73–181.73 | 2017 genome comparison |
+| 181.73–187 | 2017 cohort (approach render, second excerpt) |
+| 187–192.73 | island population's isolation |
+| 192.73–220 | gene disruption |
+| 220–250 | island chapter two |
+| 250–274 | coat |
+| 274–278 | the animal itself |
+| 278–280 | Arctic conditions |
+| 280–311 | one genome |
+| 311–319 | two genomes |
+| 319–344.5 | chemistry |
+| 344.5–351.8 | seasonal stress |
+| 351.8–354 | sparse record (coat render, unused tail) |
+| 354–369 | environment: water inference into rain-on-snow |
+| 369–383 | hypothesis |
+| 383–399 | stream |
+| 399–401.4 | dating question |
+| 401.4–411 | archaeology |
+| 411–411.4 | the gap in the record |
+| 411.4–431.4 | people |
+| 431.4–437 | foraging |
+| 437–448 | shore uncertainty |
+| 448–450 | proof of innocence |
+| 450–455 | three witnesses |
+| 455–471 | genome record |
+| 471–472 | fourteen Wrangel animals |
+| 472–473 | severity lead-in |
+| 473–539 | **island hold** |
+| 539–540 | comparative stability lead-in |
+| 540–557 | genetic strain |
+| 557–562 | windows of different sizes |
+| 562–579 | coverage |
+| 579–603 | trends |
+| 603–609 | no clear accelerating collapse |
+| 609–617 | trends, second excerpt |
+| 617–625 | lasting strain |
+| 625–625.2 | neither finding |
+| 625.2–636.2 | genomic gap |
+| 636.2–638.2 | final ten generations |
+| 638.2–650.2 | island extent |
+| 650.2–652 | other evidence |
+| 652–655 | 2025 specimens |
+| 655–657.7 | the missing witness |
+| 657.7–660 | the gap is in the dataset |
+| 660–676 | new lead |
+| 676–684 | authentication and contamination |
+| 684–734 | ledger |
+| 734–783 | **verdict close** |
 | 783–796.07 | final crossing |
 
 `reversal-section` and `verdict-section` are no longer placed. Both were superseded by
