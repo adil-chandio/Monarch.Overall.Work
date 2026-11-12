@@ -1,0 +1,54 @@
+name: Prepare licensed scenery for local review
+
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/celebrity-scenery-prepare.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  transfer:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {name: materials, id: 727900531, digest: 97351daa52df0db7ad31dac0639342aef8c525cacad7e0d053f5a7c11adc5b8c}
+          - {name: planter, id: 727901049, digest: abdf673fd7ea998cc4b119904269c4662ccaa25faed3d0539a6500963a1c8b2a}
+          - {name: streetLamp, id: 727901577, digest: fc5f26977cdb17c19f94d44d5ec4e7737a1bfc9525330f62bb577181cced5d52}
+          - {name: car, id: 727899560, digest: 915e32aa7c3718e9b0fee3c5804fc2d0e5fd1e8bcaeb440043358e49d247ce0a}
+          - {name: vase, id: 727901952, digest: ffd3c8e9c426fa4896ac8972f3f7ecd5bf05acbec2c4234fd4ed20e1b16e194f}
+    steps:
+      - name: Fetch, validate and make review copy
+        id: blob
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ASSET_NAME: ${{ matrix.name }}
+          ASSET_ID: ${{ matrix.id }}
+          ASSET_DIGEST: ${{ matrix.digest }}
+        run: |
+          set -euo pipefail
+          gh api "repos/yixuanchen189756-source/Kyard-assets/releases/assets/$ASSET_ID" \
+            -H 'Accept: application/octet-stream' > "$RUNNER_TEMP/asset.glb"
+          echo "$ASSET_DIGEST  $RUNNER_TEMP/asset.glb" | sha256sum -c -
+          python - <<'PY'
+          import base64,hashlib,json,os,urllib.request
+          path=os.path.join(os.environ['RUNNER_TEMP'],'asset.glb')
+          data=open(path,'rb').read()
+          assert hashlib.sha256(data).hexdigest()==os.environ['ASSET_DIGEST']
+          payload=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode()
+          req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs',
+              data=payload,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          with urllib.request.urlopen(req,timeout=300) as response: sha=json.load(response)['sha']
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f: print('sha='+sha,file=f)
+          with open(os.path.join(os.environ['RUNNER_TEMP'],'manifest.txt'),'w') as f:
+              print(os.environ['ASSET_NAME'],sha,os.environ['ASSET_DIGEST'],len(data),file=f)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-${{ matrix.name }}-${{ steps.blob.outputs.sha }}
+          path: ${{ runner.temp }}/manifest.txt
+          retention-days: 2
