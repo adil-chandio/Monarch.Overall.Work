@@ -226,7 +226,11 @@ class Frame:
         if float(bump.max()) > 0:
             nrm = self._perturb(p, nrm, mat, bump)
 
-        col = alb * np.asarray(ambient, np.float32)[None, None, :]
+        up = np.clip(nrm[..., 1], -1, 1)
+        sky_amb = np.asarray(fog_tint, np.float32)[None, None, :] * 1.05
+        gnd_amb = np.asarray(ambient, np.float32)[None, None, :] * 1.6
+        hemi = gnd_amb + (sky_amb - gnd_amb) * ((up * 0.5 + 0.5) ** 1.4)[..., None]
+        col = alb * (hemi + np.asarray(ambient, np.float32)[None, None, :] * 0.5)
         dist = np.where(hit, t, 0.0).astype(np.float32)
 
         shadow = {}
@@ -357,7 +361,11 @@ class Frame:
         out = np.where(stone, out * (0.78 + 0.22 * mortar), out)
 
         wood = mat == world.MAT_ID['wood']
-        out = np.where(wood, 0.84 + 0.28 * (np.sin(x * 52.0 + z * 44.0) * 0.5 + 0.5), out)
+        # broad timber tones, not vertical stripes: the walls in the reference are
+        # near-black with a wet sheen, and a high-frequency grain reads as corduroy
+        plank = np.sin(y * 34.0 + z * 2.0) * 0.5 + 0.5
+        grain = np.sin(x * 9.0 + z * 7.0 + y * 3.0) * 0.5 + 0.5
+        out = np.where(wood, 0.94 + 0.08 * (0.35 * plank + 0.65 * grain), out)
 
         tile = mat == world.MAT_ID['tile']
         out = np.where(tile, 0.70 + 0.30 * (np.abs(np.sin(x * 11.0)) ** 0.55), out)
@@ -366,8 +374,8 @@ class Frame:
         out = np.where(pl, 0.90 + 0.14 * n2, out)
 
         ground = mat == world.MAT_ID['ground']
-        wet = 0.66 + 0.34 * np.clip(n1 * n2 * 2.1, 0, 1)
-        out = np.where(ground, wet, out)
+        mottle = 0.90 + 0.16 * np.clip(n1 * 0.6 + n2 * 0.4, 0, 1)
+        out = np.where(ground, mottle, out)
 
         skin = (mat == world.MAT_ID['skin']) | (mat == world.MAT_ID['skin_dark'])
         fine = 0.955 + 0.090 * n3
@@ -396,10 +404,14 @@ class Frame:
                 continue
             lv = np.asarray(L.pos, np.float32)[None, :] - pts
             d2 = (lv * lv).sum(-1) + 0.20
-            align = np.clip((lv / np.sqrt(d2)[:, None] * ry[m]).sum(-1), 0, 1) ** 120
+            align = np.clip((lv / np.sqrt(d2)[:, None] * ry[m]).sum(-1), 0, 1) ** 26
             acc += np.asarray(L.colour, np.float32)[None, :] * \
-                (align * L.intensity / (d2 * 5.0 + 2.0))[:, None]
-        ripple = 0.62 + 0.38 * np.sin(pts[:, 0] * 6.0 + pts[:, 2] * 3.4 + time * 1.5)
+                (align * L.intensity / (d2 * 2.2 + 0.9))[:, None]
+        # irregular, high-frequency ripple: a single low-frequency sine reads as
+        # painted diagonal stripes on the floor, which is exactly what it did
+        rp = (np.sin(pts[:, 0] * 23.0 + pts[:, 2] * 17.0 + time * 2.1)
+              * np.sin(pts[:, 0] * -11.0 + pts[:, 2] * 29.0 - time * 1.3))
+        ripple = 0.55 + 0.45 * (rp * 0.5 + 0.5)
         rw = (strength * ripple)[:, None]
         out = col.copy()
         out[m] = col[m] * (1.0 - rw) + np.clip(acc, 0, 2.5) * rw
@@ -438,7 +450,8 @@ class Frame:
     def grade(col, exposure=1.0, contrast=1.16, saturation=1.10,
               shadow_tint=(-0.012, 0.004, 0.030),
               highlight_tint=(0.022, 0.010, -0.012),
-              lift=0.0, streak=0.22, vignette=0.42, grain=0.010, seed=0):
+              lift=0.0, streak=0.22, vignette=0.42, grain=0.010, seed=0,
+              bloom=0.55):
         """Filmic curve, then a cool-shadow / warm-highlight split tone."""
         c = np.nan_to_num(col, nan=0.0, posinf=0.0, neginf=0.0) * exposure
         c = np.clip(c, 0, None)
@@ -454,6 +467,27 @@ class Frame:
             np.asarray(highlight_tint, np.float32) * h_w
         c = lum + (c - lum) * saturation
         c = (c - 0.20) * contrast + 0.20 + lift
+
+        # bloom: a wide, soft halo round the lanterns and lit windows. Two
+        # downsample-upsample passes give a long-tailed falloff for the cost of
+        # one small blur and are what stop an emissive box reading as a flat quad.
+        if bloom > 0:
+            hi = np.clip(c - 0.55, 0, None)
+            if hi.max() > 0:
+                from PIL import Image as _Im
+                def _blur(plane, div):
+                    im = _Im.fromarray(np.ascontiguousarray(plane, np.float32),
+                                       mode='F')
+                    sw_, sh_ = im.size
+                    return np.asarray(im.resize((max(sw_ // div, 1),
+                                                 max(sh_ // div, 1)), _Im.BILINEAR)
+                                      .resize((sw_, sh_), _Im.BILINEAR), np.float32)
+                if np.ndim(hi) == 2:
+                    c = c + (_blur(hi, 8) * 0.55 + _blur(hi, 32) * 0.85) * bloom
+                else:
+                    for ch in range(hi.shape[-1]):
+                        c[..., ch] += (_blur(hi[..., ch], 8) * 0.55
+                                       + _blur(hi[..., ch], 32) * 0.85) * bloom
 
         # cheap anamorphic streak: a horizontal smear of the bright highlights
         if streak > 0:
@@ -519,7 +553,8 @@ class Shot:
     def __init__(self, name, eye, target, fov=42.0, roll=0.0,
                  ambient=(0.10, 0.13, 0.19), fog=0.030, fog_tint=(0.055, 0.070, 0.100),
                  mist=0.45, grade=None, wet=0.42, fstop=None, focus=None,
-                 shutter=0.0, moon=None, mist_layer=1.0, pan_rate=0.0):
+                 shutter=0.0, moon=None, mist_layer=1.0, pan_rate=0.0,
+                 ao=0.0, moon_size=1.0):
         self.name = name
         self.eye = np.asarray(eye, np.float32)
         self.target = np.asarray(target, np.float32)
@@ -533,6 +568,8 @@ class Shot:
         self.pan_rate = pan_rate          # deg/s, used for sub-frame blur
         self.moon = moon
         self.mist_layer = mist_layer
+        self.ao = ao
+        self.moon_size = moon_size
 
 
 def render_frame(fr, shot, width, height, t=0.0, dyn=None, dof=1, blur=1,
@@ -624,3 +661,142 @@ def render_frame(fr, shot, width, height, t=0.0, dyn=None, dof=1, blur=1,
     acc = fr.mist_layer(acc, t_hit, np.broadcast_to(np.inf, t_hit.shape), rd0,
                         strength=shot.mist_layer)
     return fr.grade(acc, seed=seed, **shot.grade), acc
+
+
+# ---------------------------------------------------------- the film renderer
+def _single_pass(fr, shot, w, h, eye, target, *, dyn=None, jitter=None,
+                 time=0.0, want_depth=False):
+    """One full-res pass: trace, shade, sky, wet ground, mist, and the depth."""
+    rd, ro, right, up = geom.camera_rays(w, h, eye, target, fov_deg=shot.fov,
+                                        roll=shot.roll)
+    if jitter is not None:
+        ty = np.tan(np.radians(shot.fov) * 0.5)
+        rd = geom.normalise(rd + (jitter[0] * 2.0 * ty / w) * right[None, None, :]
+                            + (jitter[1] * 2.0 * ty / h) * up[None, None, :])
+    fwd = geom.normalise(np.asarray(target, np.float32) - np.asarray(eye, np.float32))
+    ty = float(np.tan(np.radians(shot.fov) * 0.5))
+    cam = (np.asarray(eye, np.float32), fwd, right, up, ty, w / h)
+
+    t, mat, nrm = fr.trace(ro, rd, dyn=dyn, cam=cam)
+    col, hit, _dist = fr.shade(ro, rd, t, mat, nrm, fr.lights, shot.fog,
+                               shot.fog_tint, shot.ambient, mist=shot.mist,
+                               time=time)
+    if (~hit).any():
+        m = ~hit
+        col[m] = fr.sky(rd[m], shot.fog_tint, shot.moon, shot.moon_size, time)
+    if shot.wet:
+        col = fr.wet(col, ro, rd, t, mat, nrm, fr.lights, shot.fog_tint,
+                     strength=shot.wet, time=time)
+    if shot.ao:
+        col = col * fr.ao(ro, rd, t, hit, nrm, strength=shot.ao)
+    col = fr.mist_layer(col, hit, t, rd, strength=shot.mist_layer,
+                        tint=shot.fog_tint)
+    col = np.nan_to_num(col, nan=0.0, posinf=0.0, neginf=0.0)
+    depth = np.where(np.isfinite(t), t, 250.0).astype(np.float32)
+    return col, depth
+
+
+def _defocus(col, coc, taps=9, radius=10.0):
+    """Disc defocus with per-pixel circle of confusion, done as a spiral of taps.
+
+    A true bokeh kernel would need one pass per pixel; this samples the disc at
+    `taps` golden-angle positions, which is enough for the reference's shallow
+    background fall-off and costs the same at every blur radius.
+    """
+    h, w = coc.shape
+    acc = col.copy()
+    wsum = np.ones((h, w), np.float32)
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    ga = 2.399963
+    for k in range(taps):
+        ang = ga * k
+        r = np.sqrt((k + 0.5) / taps) * radius
+        ox = (np.cos(ang) * r).astype(np.float32)
+        oy = (np.sin(ang) * r).astype(np.float32)
+        sx = np.clip(xx + ox * coc, 0, w - 1).astype(np.int32)
+        sy = np.clip(yy + oy * coc, 0, h - 1).astype(np.int32)
+        samp = col[sy, sx]
+        wt = coc
+        acc += samp * wt[..., None]
+        wsum += wt
+    return acc / wsum[..., None]
+
+
+def _time_blur(fr, shot, w, h, eye_fn, target_fn, dyn_fn, *, taps=5,
+               shutter=0.5, base_time=0.0):
+    """Sub-frame motion blur: sample the set at several instants inside the shutter.
+
+    This is real motion blur — the geometry and the camera both move between
+    taps — not a post-process smear of one frame.
+    """
+    acc = None
+    depth = None
+    for k in range(taps):
+        frac = (k + 0.5) / taps - 0.5
+        tt = base_time + frac * shutter / 24.0
+        eye, target = eye_fn(tt), target_fn(tt)
+        dyn = dyn_fn(tt)
+        c, _d = _single_pass(fr, shot, w, h, eye, target, dyn=dyn,
+                             jitter=(float(k) * 0.37 % 1.0 - 0.5,
+                                     float(k) * 0.71 % 1.0 - 0.5),
+                             time=tt)
+        acc = c if acc is None else acc + c
+        if depth is None:
+            depth = _d
+        else:
+            depth = np.minimum(depth, _d)
+    return acc / taps, depth
+
+
+def render(fr, shot, width, height, *, time=0.0, eye=None, target=None,
+           dyn=None, dyn_fn=None, eye_fn=None, target_fn=None, samples=2,
+           dof=0, focus=None, blur_taps=0, seed=0):
+    """Render one finished frame, graded.
+
+    `samples` > 1 supersamples with a rotated-grid jitter, which is what removes
+    the CG pixel stair on every silhouette. `dof` > 0 applies a disc defocus
+    using the true per-pixel depth. `blur_taps` > 0 rebuilds the frame from
+    several sub-frame instants instead of smearing a single frame.
+    """
+    eye = shot.eye if eye is None else eye
+    target = shot.target if target is None else target
+    h, w = height, width
+
+    if blur_taps > 0 and (eye_fn is not None or dyn_fn is not None):
+        e = eye_fn or (lambda _t: eye)
+        tg = target_fn or (lambda _t: target)
+        d = dyn_fn or (lambda _t: dyn)
+        acc, depth = _time_blur(fr, shot, w, h, e, tg, d, taps=blur_taps,
+                                shutter=max(shot.shutter, 0.5) if shot.shutter else 0.5,
+                                base_time=time)
+    else:
+        acc = None
+        depth = None
+        rng = np.random.default_rng(seed)
+        n = max(1, samples)
+        jitters = [None]
+        if n > 1:
+            # rotated grid: n*n samples per pixel, evenly spaced, sub-pixel
+            side = int(math.ceil(math.sqrt(n)))
+            pts = []
+            for iy in range(side):
+                for ix in range(side):
+                    pts.append(((ix + 0.5) / side - 0.5 + (0.5 / side) * (iy % 2),
+                                (iy + 0.5) / side - 0.5))
+            jitters = [(float(np.clip(px, -0.5, 0.5)), float(np.clip(py, -0.5, 0.5)))
+                       for px, py in pts[:n]]
+        for k, j in enumerate(jitters):
+            c, dep = _single_pass(fr, shot, w, h, eye, target, dyn=dyn,
+                                  jitter=j, time=time)
+            acc = c if acc is None else acc + c
+            if depth is None:
+                depth = dep
+        acc /= len(jitters)
+
+    if dof and dof > 0:
+        f_plane = focus if focus is not None else getattr(shot, 'focus', None)
+        if f_plane:
+            coc = np.clip(np.abs(depth - f_plane) / max(f_plane, 0.2) * dof, 0, 1) ** 0.8
+            acc = _defocus(acc, coc.astype(np.float32), taps=7,
+                           radius=float(width) / 220.0)
+    return fr.grade(acc, seed=seed, **shot.grade)
