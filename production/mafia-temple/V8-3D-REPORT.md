@@ -4,30 +4,46 @@ This directory is a second, independent cut of the same 20-second night-temple
 beat. It is **not** a re-grade of the photographed V8 film and it shares no
 frames with it. Every pixel is produced by the renderer in `qc/vfx3d/`.
 
-Read this page before watching, because "3D" covers a very wide range and the
-honest statement of what this is matters more than the label.
+This is the **second** 3D cut. The first one was rejected for not matching the
+reference, so the reference (`monarch-mafia-temple-20s.mp4`) was measured shot
+by shot and the whole render was rebuilt against those measurements.
 
 ---
 
 ## What it actually is
 
-A **CPU ray-traced 3D scene written in NumPy**, rendered in this sandbox with no
-GPU, no OpenGL and no X server.
+A **CPU ray-traced 3D scene written in NumPy**, rendered with no GPU, no OpenGL
+and no X server.
 
 | | |
 |---|---|
 | Picture | 1280 × 720, 24.000 fps, 480 frames, 20.000 s |
-| Renderer | `qc/vfx3d/film3d.py` + `render.py` (analytic ray casting, not SDF marching) |
-| Geometry | ~160 solid primitives: boxes, spheres, capsules, a torus. All intersected analytically — no billboards, no sprites, no painted plates |
-| Camera | 5 shots, real camera moves in 3D (dolly, crane descent, oblique push) |
-| Figure | 14-segment forward-kinematic skeleton rebuilt every frame, capsules emitted from joint positions |
-| Lighting | 1 directional moon with **real ray-traced shadows** + 15 point lights (lanterns, shoji spill) with 1/d² falloff |
-| Surface | world-space procedural detail: stone courses, wood grain, tile ridges, wet patches |
-| Atmosphere | exponential height fog, wet-ground mirror, 3 rain layers, bloom, filmic tone curve, grain |
-| Cost | ~12 s/frame at 720p on 2 CPU cores; ~100 minutes for the film |
+| Shots | 6, cut where the reference cuts: frames 96, 216, 312, 384, 432 |
+| Renderer | `qc/vfx3d/engine.py` (analytic ray casting: box, oriented box, sphere, ellipsoid, capsule) |
+| Geometry | 189 / 391 / 416 / 88 / ~60 solids per set, all intersected analytically — no billboards, no sprites, no painted plates |
+| Camera | **Locked off**, as in the reference, except S4 which pans at the reference's measured rate |
+| Figure | 15-segment forward-kinematic skeleton, capsule limbs, and a head built from face volumes |
+| Face | `world.head_solids()`: ~60 ellipsoids/capsules — skull, jaw, brow ridges, nose, lids, lips, moustache, goatee, hair; irises are emissive |
+| Lighting | point lights with 1/d² falloff, ray-traced key shadows, two cold rims, wrapped skin diffuse |
+| Surface | value-noise micro-normals per material (pores, hair strands, stone grain), procedural stone courses |
+| Atmosphere | height fog + drifting mist band, wet-ground lantern reflections, depth of field, sub-frame motion blur, crevice AO, filmic grade, anamorphic streak, grain |
+| Score | `qc/vfx3d/sound.py`: sub drone, filtered noise bed, cut impacts, temple bowls |
+| Cost | ~4-7 s/frame at 720p on 2 CPU cores |
 
-Everything above is in git and reproducible on any machine with NumPy and
-ffmpeg. There is no binary asset, no model download, no stock footage.
+### Measured against the reference
+
+| | reference | this cut |
+|---|---|---|
+| median luma | 10-38 | **23.7** |
+| median saturation | 81-181 | **160.1** |
+| cuts | 96, 216, 312, 384, 432 | **96, 216, 312, 384, 432** |
+| integrated loudness | −25.6 LUFS | **−25.6 LUFS** |
+| energy below 200 Hz | 58-69 % | **~75 %** |
+| camera | locked (S4 pans 4.75 px/frame) | locked (S4 pans 4.9°/s) |
+
+`qc/vfx3d/verify.py` enforces every one of those numbers, plus 1280×720,
+24 fps, exact 20.000 s, an AAC stream, no duplicated frames and no second of
+film below luma 8. It prints VERIFIED or fails.
 
 ## What it is not
 
