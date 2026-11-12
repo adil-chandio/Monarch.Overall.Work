@@ -1,0 +1,121 @@
+name: Render upgraded celebrity 3D preview
+
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/celebrity-premium-3d.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        index: ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19']
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxrender1 libxi6 libxfixes3 libxxf86vm1 libsm6 libice6 libxkbcommon0 libgl1 ffmpeg
+          python -m pip install -q 'bpy==4.2.23' 'numpy==2.2.6' 'Pillow==13.0.0' 'imageio-ffmpeg==0.8.1' 'pybullet==3.2.7'
+      - name: Fetch and verify licensed assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python showreel/celebrity_premium_3d/fetch_assets.py "$RUNNER_TEMP/assets"
+      - name: Render three-second shard
+        env:
+          IDX: ${{ matrix.index }}
+          CINEMA_ASSETS: ${{ runner.temp }}/assets
+          CINEMA_THREADS: '2'
+        run: |
+          set -euo pipefail
+          n=$((10#$IDX)); first=$((n*72)); start=$((n*3)); end=$((start+3))
+          if [ "$IDX" = 00 ]; then python showreel/celebrity_premium_3d/probe_motion.py; fi
+          mkdir -p "$RUNNER_TEMP/frames"
+          python -u showreel/celebrity_premium_3d/render.py \
+            --width 480 --samples 4 --start "$start" --end "$end" \
+            --out "$RUNNER_TEMP/frames" > "$RUNNER_TEMP/render.log" 2>&1 || { tail -120 "$RUNNER_TEMP/render.log"; exit 1; }
+          test "$(find "$RUNNER_TEMP/frames" -name 'frame_*.png' | wc -l)" -eq 72
+          ffmpeg -y -v error -framerate 24 -start_number "$first" -i "$RUNNER_TEMP/frames/frame_%05d.png" \
+            -frames:v 72 -an -c:v libx264 -preset fast -crf 16 -pix_fmt yuv420p -r 24 "$RUNNER_TEMP/$IDX.mp4"
+          test "$(ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 "$RUNNER_TEMP/$IDX.mp4")" = 72
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: render-log-${{ matrix.index }}
+          path: ${{ runner.temp }}/render.log
+          retention-days: 1
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: clip-${{ matrix.index }}
+          path: ${{ runner.temp }}/${{ matrix.index }}.mp4
+          retention-days: 1
+          if-no-files-found: error
+  assemble:
+    needs: render
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: clip-*
+          path: ${{ runner.temp }}/clips
+          merge-multiple: true
+      - name: Assemble and check picture and audio
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -q 'numpy==2.2.6' 'Pillow==13.0.0' 'imageio-ffmpeg==0.8.1' 'pybullet==3.2.7'
+          python -m unittest discover -s showreel/celebrity_premium_3d/tests -v
+          python showreel/celebrity_premium_3d/assemble.py "$RUNNER_TEMP/clips" "$RUNNER_TEMP/celebrity-cycles-3d-upgrade.mp4"
+          ffprobe -v error -count_frames -show_streams -show_format -of json "$RUNNER_TEMP/celebrity-cycles-3d-upgrade.mp4" > "$RUNNER_TEMP/probe.json"
+          python - "$RUNNER_TEMP/probe.json" <<'PY'
+          import json, sys
+          p=json.load(open(sys.argv[1]))
+          video=next(s for s in p['streams'] if s['codec_type']=='video')
+          audio=next(s for s in p['streams'] if s['codec_type']=='audio')
+          assert (video['width'],video['height']) == (480,854), video
+          assert video['r_frame_rate']=='24/1' and int(video['nb_read_frames'])==1440, video
+          assert audio['codec_name']=='aac' and audio['sample_rate']=='48000', audio
+          assert abs(float(p['format']['duration'])-60)<.05, p['format']['duration']
+          print('Verified:',video['nb_read_frames'],'frames,',p['format']['duration'],'seconds, AAC',audio['sample_rate'],'Hz')
+          PY
+          sha256sum "$RUNNER_TEMP/celebrity-cycles-3d-upgrade.mp4" | tee "$RUNNER_TEMP/sha256.txt"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upgraded-film
+          path: |
+            ${{ runner.temp }}/celebrity-cycles-3d-upgrade.mp4
+            ${{ runner.temp }}/probe.json
+            ${{ runner.temp }}/sha256.txt
+          retention-days: 2
+          if-no-files-found: error
+      - name: Upload to an unpublished release for review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          tag=celebrity-3d-cycles-upgrade
+          if ! gh release view "$tag" --repo "$GH_REPO" >/dev/null 2>&1; then
+            gh release create "$tag" --repo "$GH_REPO" --target "$GITHUB_SHA" --draft --prerelease \
+              --title 'Fictional celebrity — Cycles 3D upgrade' \
+              --notes-file showreel/celebrity_premium_3d/RELEASE_NOTES.md
+          fi
+          gh release upload "$tag" --repo "$GH_REPO" --clobber \
+            "$RUNNER_TEMP/celebrity-cycles-3d-upgrade.mp4" showreel/celebrity_premium_3d/ASSET_CREDITS.txt
