@@ -1,43 +1,39 @@
 {
   "status": "ok",
   "n": 12,
-  "face_rate": 0.75,
-  "avg_contrast": 0.255,
-  "avg_busy": 1.77,
-  "text_band_energy": 1.5,
+  "face_rate": 0.83,
+  "avg_contrast": 0.23,
+  "avg_busy": 2.69,
+  "text_band_energy": 2.15,
   "hue_families": [
     [
       "red",
-      5
+      10
     ],
     [
       "teal",
-      5
-    ],
-    [
-      "green",
       2
     ]
   ],
   "top_hexes": [
     [
-      "#0598bb",
+      "#7f481c",
       1
     ],
     [
-      "#976358",
+      "#67452d",
       1
     ],
     [
-      "#068808",
+      "#75563e",
       1
     ],
     [
-      "#956752",
+      "#724424",
       1
     ],
     [
-      "#303d46",
+      "#765032",
       1
     ]
   ],
@@ -46,148 +42,148 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.003,
-      "face_present": false,
-      "face_upper_half": 0.003,
-      "contrast": 0.29,
-      "brightness": 0.282,
-      "accent_share": 0.63,
-      "dominant": {
-        "hex": "#0598bb",
-        "share": 0.63,
-        "hue_deg": 187
-      },
-      "text_edge_energy": {
-        "upper": 1.98,
-        "lower": 3.03,
-        "centre": 2.5
-      },
-      "text_row_span": 29,
-      "busy": 2.6,
-      "id": "IPW-MF8Kp0I"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
-      "face_share": 0.129,
+      "face_share": 0.073,
       "face_present": true,
-      "face_upper_half": 0.17,
-      "contrast": 0.227,
-      "brightness": 0.273,
-      "accent_share": 0.444,
+      "face_upper_half": 0.072,
+      "contrast": 0.283,
+      "brightness": 0.174,
+      "accent_share": 0.769,
       "dominant": {
-        "hex": "#976358",
-        "share": 0.444,
-        "hue_deg": 7
-      },
-      "text_edge_energy": {
-        "upper": 0.72,
-        "lower": 0.45,
-        "centre": 1.13
-      },
-      "text_row_span": 28,
-      "busy": 0.85,
-      "id": "WlRt8Ov4kBk"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
-      "face_share": 0.198,
-      "face_present": true,
-      "face_upper_half": 0.258,
-      "contrast": 0.273,
-      "brightness": 0.293,
-      "accent_share": 0.47,
-      "dominant": {
-        "hex": "#068808",
-        "share": 0.47,
-        "hue_deg": 127
-      },
-      "text_edge_energy": {
-        "upper": 5.14,
-        "lower": 2.78,
-        "centre": 4.04
-      },
-      "text_row_span": 113,
-      "busy": 4.1,
-      "id": "DHjR3HpA0PI"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
-      "face_share": 0.166,
-      "face_present": true,
-      "face_upper_half": 0.106,
-      "contrast": 0.377,
-      "brightness": 0.488,
-      "accent_share": 0.404,
-      "dominant": {
-        "hex": "#956752",
-        "share": 0.404,
+        "hex": "#7f481c",
+        "share": 0.769,
         "hue_deg": 22
       },
       "text_edge_energy": {
-        "upper": 4.11,
-        "lower": 4.05,
-        "centre": 2.61
+        "upper": 2.32,
+        "lower": 0.79,
+        "centre": 3.6
       },
-      "text_row_span": 141,
-      "busy": 3.36,
-      "id": "MBz9nSE7OMg"
+      "text_row_span": 36,
+      "busy": 2.54,
+      "id": "pNWlLx2e6mQ"
     },
     {
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.013,
+      "face_share": 0.247,
       "face_present": true,
-      "face_upper_half": 0.025,
-      "contrast": 0.21,
-      "brightness": 0.205,
-      "accent_share": 0.446,
+      "face_upper_half": 0.225,
+      "contrast": 0.213,
+      "brightness": 0.225,
+      "accent_share": 0.708,
       "dominant": {
-        "hex": "#303d46",
-        "share": 0.446,
-        "hue_deg": 202
+        "hex": "#67452d",
+        "share": 0.708,
+        "hue_deg": 22
       },
       "text_edge_energy": {
-        "upper": 0.32,
-        "lower": 0.21,
-        "centre": 0.7
+        "upper": 1.21,
+        "lower": 0.67,
+        "centre": 1.57
       },
-      "text_row_span": 27,
-      "busy": 0.52,
-      "id": "dru9WO90e6g"
+      "text_row_span": 58,
+      "busy": 1.13,
+      "id": "hWV8pZDaNP4"
     },
     {
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.067,
+      "face_share": 0.119,
       "face_present": true,
-      "face_upper_half": 0.109,
-      "contrast": 0.194,
-      "brightness": 0.155,
-      "accent_share": 0.357,
+      "face_upper_half": 0.084,
+      "contrast": 0.222,
+      "brightness": 0.271,
+      "accent_share": 0.552,
       "dominant": {
-        "hex": "#5e562d",
-        "share": 0.357,
-        "hue_deg": 52
+        "hex": "#75563e",
+        "share": 0.552,
+        "hue_deg": 22
       },
       "text_edge_energy": {
-        "upper": 2.02,
-        "lower": 0.77,
-        "centre": 2.35
+        "upper": 2.43,
+        "lower": 2.17,
+        "centre": 3.41
       },
-      "text_row_span": 66,
-      "busy": 1.63,
-      "id": "m8J7t1JXCLA"
+      "text_row_span": 22,
+      "busy": 2.59,
+      "id": "rvYzc3HC2Ug"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.422,
+      "face_present": true,
+      "face_upper_half": 0.454,
+      "contrast": 0.209,
+      "brightness": 0.359,
+      "accent_share": 0.497,
+      "dominant": {
+        "hex": "#724424",
+        "share": 0.497,
+        "hue_deg": 22
+      },
+      "text_edge_energy": {
+        "upper": 3.92,
+        "lower": 2.85,
+        "centre": 3.75
+      },
+      "text_row_span": 87,
+      "busy": 3.27,
+      "id": "Asl5qSPrNN8"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.107,
+      "face_present": true,
+      "face_upper_half": 0.061,
+      "contrast": 0.203,
+      "brightness": 0.214,
+      "accent_share": 0.537,
+      "dominant": {
+        "hex": "#765032",
+        "share": 0.537,
+        "hue_deg": 22
+      },
+      "text_edge_energy": {
+        "upper": 2.43,
+        "lower": 1.8,
+        "centre": 2.84
+      },
+      "text_row_span": 29,
+      "busy": 2.56,
+      "id": "s5FbK1lnpec"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.036,
+      "face_present": true,
+      "face_upper_half": 0.046,
+      "contrast": 0.084,
+      "brightness": 0.051,
+      "accent_share": 0.508,
+      "dominant": {
+        "hex": "#754b40",
+        "share": 0.508,
+        "hue_deg": 7
+      },
+      "text_edge_energy": {
+        "upper": 1.52,
+        "lower": 0.67,
+        "centre": 0.78
+      },
+      "text_row_span": 90,
+      "busy": 0.8,
+      "id": "PeEAZ8ZTlcg"
     }
   ],
-  "reading": "face-led: people are the product; house colour is red (5/12 thumbnails)",
-  "topic": "shorts retention hook",
+  "reading": "face-led: people are the product; house colour is red (10/12 thumbnails)",
+  "topic": "sabertooth cub",
   "taken_from": "newest measured report"
 }
