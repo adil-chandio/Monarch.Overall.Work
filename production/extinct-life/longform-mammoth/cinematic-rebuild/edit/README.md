@@ -216,7 +216,7 @@ size is committed — the copy in `.cache/` is the working master.
 Direct download, pinned to the commit that added it:
 
 ```
-https://github.com/adil-chandio/Monarch.Overall.Work/raw/f2ddd97/deliverables/Last-Mammoths-Review-Reel-v9-720p.mp4
+https://github.com/adil-chandio/Monarch.Overall.Work/raw/34e4948/deliverables/Last-Mammoths-Review-Reel-v9-720p.mp4
 ```
 
 Why a git commit and not a release asset: the development sandbox cannot reach
