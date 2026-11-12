@@ -1,0 +1,72 @@
+# ---------------------------------------------------------------------------
+# Git attributes — added 2026-11-13
+# Two jobs: (1) stop line-ending churn across machines, (2) tell Git that
+# media is binary so it never tries to diff or merge it.
+# ---------------------------------------------------------------------------
+
+# --- text: normalise to LF in the repo ------------------------------------
+* text=auto eol=lf
+
+*.md      text eol=lf
+*.json    text eol=lf
+*.mjs     text eol=lf
+*.js      text eol=lf
+*.jsx     text eol=lf
+*.css     text eol=lf
+*.html    text eol=lf
+*.py      text eol=lf
+*.sh      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.txt     text eol=lf
+*.csv     text eol=lf
+*.svg     text eol=lf
+
+# --- binary: never diff, never merge, never convert -----------------------
+*.mp4     binary
+*.mov     binary
+*.webm    binary
+*.mkv     binary
+*.m4v     binary
+*.enc     binary
+*.wav     binary
+*.mp3     binary
+*.flac    binary
+*.m4a     binary
+*.aac     binary
+*.ogg     binary
+*.opus    binary
+*.aiff    binary
+*.jpg     binary
+*.jpeg    binary
+*.png     binary
+*.webp    binary
+*.gif     binary
+*.psd     binary
+*.exr     binary
+*.hdr     binary
+*.tif     binary
+*.tiff    binary
+*.blend   binary
+*.blend1  binary
+*.glb     binary
+*.gltf    binary
+*.fbx     binary
+*.obj     binary
+*.usd     binary
+*.usdz    binary
+*.zip     binary
+*.7z      binary
+*.bundle  binary
+*.gz      binary
+*.iso     binary
+*.dmg     binary
+*.pdf     binary
+
+# --- generated: keep out of diffs and out of review ----------------------
+package-lock.json  linguist-generated=true -diff
+*.min.js           linguist-generated=true
+*.min.css          linguist-generated=true
+
+# --- vendored skill packs: do not pollute language stats ----------------
+skills/**          linguist-vendored=true

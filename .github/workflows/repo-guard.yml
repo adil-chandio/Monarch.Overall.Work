@@ -1,0 +1,93 @@
+name: Repo guard
+
+# The rule that keeps this repo under 1 GB, enforced by a machine instead of a memory.
+#
+#  - media-check --all        : no new media in Git, no file near GitHub's 100 MB ceiling
+#  - deliverables index check : the index must match reality, so "where did it go?" always answers
+#  - guard tests              : the rule itself cannot be quietly loosened
+#
+# This workflow reports. It never deletes, never rewrites history, never force-pushes.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repo-guard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Size and media policy
+        id: media
+        continue-on-error: true
+        run: node scripts/media-check.mjs --all
+
+      - name: Guard rules still hold
+        id: rules
+        if: always()
+        run: node scripts/guard.test.mjs
+
+      - name: Deliverables index matches reality
+        id: index
+        if: always()
+        continue-on-error: true
+        run: node scripts/build-deliverables-index.mjs --check
+
+      - name: Config shape tests
+        id: config
+        if: always()
+        run: npm test
+
+      - name: Build
+        id: build
+        if: always()
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Repo guard"
+            echo ""
+            echo "| check | result |"
+            echo "|---|---|"
+            echo "| media & size policy | ${{ steps.media.outcome }} |"
+            echo "| guard rule tests | ${{ steps.rules.outcome }} |"
+            echo "| deliverables index | ${{ steps.index.outcome }} |"
+            echo "| config tests | ${{ steps.config.outcome }} |"
+            echo "| build | ${{ steps.build.outcome }} |"
+            echo ""
+            echo "\`media-check\` failing means media is sitting in Git. That is a to-do list, not a broken build:"
+            echo "the fix is \`git rm --cached\` plus an index line, and it is spelled out in \`docs/architecture/07-MEDIA-AND-REPO-SIZE.md\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Hard failures: the rule was loosened, the index lies, or the app no longer builds.
+      # The media backlog is reported but does not block, because it is pre-existing
+      # debt and blocking on it would stop every unrelated PR until 148 files are moved.
+      - name: Enforce
+        if: always()
+        run: |
+          test "${{ steps.rules.outcome }}" = "success" || { echo "::error::guard rules failed"; exit 1; }
+          test "${{ steps.config.outcome }}" = "success" || { echo "::error::config tests failed"; exit 1; }
+          test "${{ steps.build.outcome }}" = "success" || { echo "::error::build failed"; exit 1; }
+          test "${{ steps.index.outcome }}" = "success" || { echo "::error::deliverables/INDEX.md is stale — run node scripts/build-deliverables-index.mjs"; exit 1; }

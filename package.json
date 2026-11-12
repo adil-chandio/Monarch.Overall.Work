@@ -15,7 +15,14 @@
     "yt:queue": "node scripts/yt-queue.mjs",
     "yt:index": "node scripts/yt-index.mjs",
     "test:yt": "python3 -m yt_intel.test_offline",
-    "yt:doctor": "python3 -m yt_intel doctor"
+    "yt:doctor": "python3 -m yt_intel doctor",
+    "guard": "node scripts/media-check.mjs --all",
+    "guard:staged": "node scripts/media-check.mjs --staged",
+    "guard:test": "node scripts/guard.test.mjs",
+    "index:deliverables": "node scripts/build-deliverables-index.mjs",
+    "index:check": "node scripts/build-deliverables-index.mjs --check",
+    "hooks:install": "bash scripts/install-hooks.sh",
+    "test:all": "npm test && npm run guard:test"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",

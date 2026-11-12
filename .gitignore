@@ -7,8 +7,11 @@ dist/
 .vite/
 coverage/
 __pycache__/
-deliverables/*.mp4
+# deliverables: media stays out of Git. The old `deliverables/*.mp4` matched one
+# directory shallower than the real tree and let 816 MB through. The repo-wide
+# patterns in the MEDIA GUARD block below cover this folder at any depth.
 !deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4
+!deliverables/INDEX.md
 
 
 # transient clone workspace for skill vendoring
@@ -48,3 +51,77 @@ production/extinct-life/*/assets/
 
 # Scratch render frames, decoded audio and browser bundles
 /.cache/
+
+# ---------------------------------------------------------------------------
+# MEDIA GUARD — added 2026-11-13
+# Rule: Git holds knowledge. Media lives outside and gets one index line.
+# Source of truth: config/media-policy.json
+# Enforced by: scripts/media-check.mjs  +  .github/workflows/repo-guard.yml
+#
+# Why a whole section and not one line: the old rule was `deliverables/*.mp4`,
+# which matched one directory and nothing else. 185 media files (1.1 GB) had
+# already got through. Patterns below are anchored with ** so a file three
+# folders deep is caught the same as a file in the root.
+# ---------------------------------------------------------------------------
+
+# video
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.m4v
+*.enc
+
+# audio
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.aac
+*.opus
+*.aiff
+
+# image plates / heavy lossless
+*.psd
+*.exr
+*.hdr
+*.tif
+*.tiff
+*.ai
+*.sketch
+
+# 3d
+*.blend
+*.blend1
+*.glb
+*.gltf
+*.fbx
+*.obj
+*.usd
+*.usdz
+
+# archives and bundles
+*.zip
+*.7z
+*.bundle
+*.iso
+*.dmg
+
+# --- the exceptions: small, load-bearing, referenced by the app ------------
+!public/thumbnails/**
+!public/proof/**
+!public/showreel/**
+!public/demo-poster.jpg
+
+# --- working folders that hold media but are not media -------------------
+references/
+refs/**/*.enc
+google_drive/
+image-search/
+gpu-engine/keyframes/
+gpu-engine/clips/
+production/extinct-life/*/keyframes/
+production/extinct-life/*/renders/
+production/extinct-life/*/frames/
+production/extinct-life/*/output/
+production/extinct-life/*/working/

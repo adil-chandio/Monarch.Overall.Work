@@ -18,11 +18,20 @@ test('priceRange handles a range, a number and a missing value', () => {
 });
 
 test('every channel normalises with a name, handle and KPI string', () => {
-  const rows = channelRows(read('channels.json'));
-  assert.equal(rows.length, 3);
+  const file = read('channels.json');
+  const rows = channelRows(file);
+  // The count is not hardcoded: a test that breaks when a real channel is added
+  // teaches people to edit the test instead of reading it.
+  assert.equal(rows.length, file.channels.length);
+  assert.ok(rows.length >= 3, 'the original three channels must stay');
   for (const r of rows) {
-    assert.ok(r.name && r.handle, `channel ${r.id} missing identity`);
+    assert.ok(r.name, `channel ${r.id} missing a name`);
     assert.ok(r.kpi.includes('≥') || r.kpi.includes('≤'), `channel ${r.id} KPI not rendered`);
+  }
+  // handle is allowed to be null (unconfirmed) but never blank-and-unnoticed
+  const noHandle = file.channels.filter((c) => !c.handle);
+  for (const c of noHandle) {
+    assert.ok(c.handle_status, `channel ${c.id} has no handle and no handle_status explaining why`);
   }
 });
 

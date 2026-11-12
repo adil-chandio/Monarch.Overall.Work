@@ -22,7 +22,35 @@ Start here → **[docs/architecture/](./docs/architecture/README.md)**
 ```bash
 node scripts/audit-repos.mjs            # live drift check against GitHub
 node scripts/audit-repos.mjs --offline  # config only
+
+npm run guard              # media & size policy over the whole tracked tree
+npm run guard:test         # 21 tests on the guard rules themselves
+npm run index:deliverables # regenerate deliverables/INDEX.md
+npm run hooks:install      # install the pre-commit media guard
 ```
+
+## Git holds knowledge, not media
+
+This repo is the operating system. It is not a media locker.
+
+| Inside Git | Outside Git |
+|---|---|
+| skills, docs, config, code, measurements | video, audio, image plates, models, archives |
+| **and one index row per media file**, naming where the surviving copy lives | |
+
+The rule lives in [`config/media-policy.json`](./config/media-policy.json), is enforced by
+[`scripts/media-check.mjs`](./scripts/media-check.mjs) and by
+[`.github/workflows/repo-guard.yml`](./.github/workflows/repo-guard.yml), and is explained in
+**[07-MEDIA-AND-REPO-SIZE.md](./docs/architecture/07-MEDIA-AND-REPO-SIZE.md)**.
+
+Measured on 2026-11-13: tracked tree 1,348 MB, of which 1.09 GB was media across 185 files — 816 MB of it in
+`deliverables/`. The old guard was a single line, `deliverables/*.mp4`, which matched one directory depth and
+nothing else. That is fixed; nothing new can enter. **Nothing has been deleted** — the backlog is listed, with
+sizes and hashes, in [`deliverables/INDEX.md`](./deliverables/INDEX.md).
+
+Where media lives instead: **YouTube Unlisted** (unlimited, permanent, free) for masters, **Drive** for delivery
+and packaging, **Dropbox** as cold storage. Folder ids are recorded in
+[`config/drive-map.json`](./config/drive-map.json) — read live from Drive, never guessed.
 
 Last run: **22 repos · 3,207 MB · 11 empty · 10 archive candidates**, no drift.
 

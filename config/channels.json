@@ -1,8 +1,8 @@
 {
-  "version": 1,
-  "updated": "2026-11-03",
+  "version": 2,
+  "updated": "2026-11-13",
   "space": "yt-automation",
-  "note": "Names and handles carried over from the existing workspace defaults. Confirm or rename; nothing here is invented.",
+  "note": "ch-01..ch-03 were carried over on 2026-11-03 and are unchanged — same ids, same names, same KPIs, same banned lists. ch-04 and ch-05 are added because two channels of work exist in this repo with no config entry: production/extinct-life/ (33 subdirs, 145 markdown files, the largest body of work here) and the stickman experiment. Fields marked status=unconfirmed follow the same rule as the original file: nothing invented.",
   "channels": [
     {
       "id": "ch-01",
@@ -17,7 +17,9 @@
       "status": "setup",
       "kpi": { "primary": "avg_view_duration_pct", "target": 50 },
       "pillars": ["tools I actually use", "build in public", "one concept, one demo"],
-      "banned": ["stock b-roll as hero", "reaction-only videos", "clickbait with no payoff"]
+      "banned": ["stock b-roll as hero", "reaction-only videos", "clickbait with no payoff"],
+      "drive_folder_id": null,
+      "drive_gap": "no Drive folder under 'Yt automation' for this channel yet"
     },
     {
       "id": "ch-02",
@@ -33,7 +35,9 @@
       "kpi": { "primary": "swipe_away_pct", "target": 25, "direction": "below" },
       "pillars": ["discipline over motivation", "start before ready", "quiet consistency"],
       "banned": ["hustle-porn", "fake quotes", "generic stock montage"],
-      "conflict_flag": "Overlaps with the personal-brand motivational account. Decide: one owns motivational shorts, the other owns long-form talk. Do not run both on the same voice."
+      "conflict_flag": "Overlaps with the personal-brand motivational account. Decide: one owns motivational shorts, the other owns long-form talk. Do not run both on the same voice.",
+      "drive_folder_id": null,
+      "drive_gap": "no Drive folder for this channel yet"
     },
     {
       "id": "ch-03",
@@ -48,7 +52,75 @@
       "status": "setup",
       "kpi": { "primary": "ctr_pct", "target": 6 },
       "pillars": ["how it actually works", "one place, one lesson", "myth vs measured"],
-      "banned": ["voice-over stock documentary", "unsourced claims"]
+      "banned": ["voice-over stock documentary", "unsourced claims"],
+      "drive_folder_id": "1hea56P6QPoduvwINvkubtRmclU4aoP2f",
+      "drive_gap": "Drive folder 'Monarch World Channel' is the likely match but nothing proves it — confirm before treating it as this channel"
+    },
+    {
+      "id": "ch-04",
+      "slot": "CH-04",
+      "name": "Extinct Life",
+      "handle": null,
+      "handle_status": "unconfirmed — do not invent a handle",
+      "niche": "Palaeontology, deep time & extinct animals",
+      "format": "long-form + shorts",
+      "cadence": "1 / week",
+      "length_target": "8-12 min + 60 s vertical",
+      "color": "#5b8c6e",
+      "status": "live-in-production",
+      "kpi": { "primary": "avg_view_duration_pct", "target": 50 },
+      "pillars": [
+        "real specimens, cited",
+        "measured claims only",
+        "3D reconstruction over stock footage"
+      ],
+      "banned": [
+        "unsourced claims",
+        "fake-alive framing",
+        "reaction-only videos",
+        "AI reconstruction presented as a photograph"
+      ],
+      "evidence": {
+        "production_dir": "production/extinct-life/",
+        "subdirs": 33,
+        "markdown_files": 145,
+        "workflows": 26,
+        "delivered": [
+          "Homotherium-Cub-3D-Rebuild-1080x1920.mp4 (51 s, 7.2 MB)",
+          "Extinct_Life_EP01_Amber_Atlas_Full_1080p.mp4",
+          "Extinct_Life_EP01_Lost_World_1080p.mp4",
+          "Last-Mammoths-Full-Film-3D-1080p.mp4 (12 min, 63 MB)"
+        ]
+      },
+      "drive_folder_id": "1rGggY_c-bHZHnU5ubPdLK9ZqeBbED6iu",
+      "drive_folder_name": "Monarch Extinct Channel",
+      "added_because": "the repo's largest body of work had no entry in this file, so no automation could route work to it or know it existed"
+    },
+    {
+      "id": "ch-05",
+      "slot": "CH-05",
+      "name": "Stickman",
+      "handle": null,
+      "handle_status": "unconfirmed — do not invent a handle",
+      "niche": "Stickman-style animation",
+      "format": "shorts",
+      "cadence": "unconfirmed",
+      "length_target": "60 s vertical",
+      "color": "#4a6fa5",
+      "status": "experiment-gated",
+      "gate": "docs/research/stickman-study/RESEARCH-PROTOCOL.md — no new stickman film until research is presented and the owner approves the treatment",
+      "kpi": { "primary": "swipe_away_pct", "target": 25, "direction": "below" },
+      "pillars": ["rendered 3D figures, not panes", "acting and timing", "measure, don't assume"],
+      "banned": ["slapped-together slideshow sold as animation"],
+      "evidence": {
+        "workflows": 12,
+        "scripts": "scripts/stickman-*.py, scripts/stickman-browser-study.mjs",
+        "research": "docs/research/stickman-study/ (329,732 decoded frames indexed)"
+      },
+      "drive_folder_id": "1lVutiUkHnvulV5-dZ0kLEWyRqtACwruS",
+      "drive_folder_name": "Monarch stickman animation Channel",
+      "added_because": "12 workflows and a research programme exist; the channel had no config entry",
+      "note": "this is an experiment inside the extinct programme, not yet proven as a standalone channel. status says so."
     }
   ]
 }

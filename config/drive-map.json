@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "updated": "2026-11-13",
+  "note": "Every folder id below was read live from Drive on 2026-11-13. Nothing here is guessed. Where the Drive name and the repo channel do not provably match, the entry says status=unmapped instead of inventing a pairing. Fixing those is a named, clickable task, not a silent assumption.",
+  "drive_root": {
+    "id": "156j7QV3XHG_O3Zbk1JoWZ9a2fZ3V8t_x",
+    "name": "Monarch Overall Work ",
+    "owner": "alipvip19@gmail.com",
+    "note": "name carries a trailing space — do not 'fix' it in code, match it exactly"
+  },
+  "quota_measured": {
+    "at": "2026-11-13T03:35+05:00",
+    "total_gb": 15,
+    "used_gb": 4.29,
+    "free_gb": 10.71,
+    "source": "Drive app → Storage panel, screenshot from the operator"
+  },
+  "folders": [
+    {
+      "id": "1O5OXQJA-ujaBlTXCW9oJTlyD01mFxnwB",
+      "name": "Yt automation",
+      "purpose": "youtube automation space — one child per channel + packaging",
+      "maps_to_space": "yt-automation",
+      "status": "mapped"
+    },
+    {
+      "id": "1rGggY_c-bHZHnU5ubPdLK9ZqeBbED6iu",
+      "name": "Monarch Extinct Channel",
+      "purpose": "extinct-life channel deliveries",
+      "maps_to_channel": "ch-04",
+      "status": "mapped",
+      "evidence": "repo has production/extinct-life/ with 33 subdirs and 145 markdown files; name matches the channel the operator named",
+      "maps_to_channel_name": "Extinct Life"
+    },
+    {
+      "id": "1DreqKGZvPHTFch0lqFtphArF-b1guVlS",
+      "name": "3d animation",
+      "parent": "Monarch Extinct Channel",
+      "purpose": "3D renders for the extinct channel",
+      "status": "mapped",
+      "currently_holds": [
+        {
+          "name": "How To Survive In A Subway Tunnel (3D Animation in Hindi) #shorts.mp4",
+          "bytes": 6237666
+        },
+        {
+          "name": "How To Trick Old Vending Machines (3D Animation in Hindi) #shorts.mp4",
+          "bytes": 7378711
+        }
+      ]
+    },
+    {
+      "id": "15bNSSAxGbC9diW8TpuBHjL6NUP3uD-4h",
+      "name": "Best competitors work",
+      "parent": "Monarch Extinct Channel",
+      "purpose": "competitor reference the operator collects by hand",
+      "status": "mapped",
+      "note": "this is research input, not output. It should be pointed at from docs, never copied into Git."
+    },
+    {
+      "id": "1MB6xTH98PL9zPofQg2-3D8vHV2-88wQV",
+      "name": "Channel 1",
+      "parent": "Best competitors work",
+      "status": "mapped",
+      "currently_holds": [
+        {
+          "name": "Why Orcas Are Terrified Of Humpback whales.mp4",
+          "bytes": 31631374
+        },
+        {
+          "name": "Screenshot_20261112-225759.png",
+          "bytes": 521397
+        },
+        {
+          "name": "Screenshot_20261112-225805.png",
+          "bytes": 501458
+        }
+      ]
+    },
+    {
+      "id": "1lVutiUkHnvulV5-dZ0kLEWyRqtACwruS",
+      "name": "Monarch stickman animation Channel",
+      "purpose": "stickman channel deliveries",
+      "maps_to_channel": "ch-05",
+      "status": "mapped",
+      "evidence": "repo has stickman workflows (.github/workflows/stickman-*.yml, 12 of them) and scripts/stickman-*.py",
+      "currently_holds": [
+        {
+          "name": "Screen_Recording_20261105_220208.mp4",
+          "bytes": 37354070
+        },
+        {
+          "name": "videoplayback.mp4",
+          "bytes": 161325156
+        }
+      ],
+      "maps_to_channel_name": "Stickman"
+    },
+    {
+      "id": "1RNVU6H2lVikSOZzh-wPciZ1bAT5gYsO4",
+      "name": "Video packaging",
+      "purpose": "shared packaging layer — thumbnails, titles, metadata for every channel",
+      "status": "mapped"
+    },
+    {
+      "id": "1XmdWAxghLWvlERSsYGQLxlqv67Bn1ohn",
+      "name": "Metadeta+title+thumb",
+      "parent": "Video packaging",
+      "purpose": "live packaging assets",
+      "status": "mapped",
+      "note": "folder name keeps the operator's spelling 'Metadeta'. Do not rename from code.",
+      "currently_holds": [
+        {
+          "name": "THUMB-1-A-they-were-still-here-1920x1080.jpg",
+          "bytes": 160773
+        },
+        {
+          "name": "THUMB-2-D-no-verdict-1920x1080.jpg",
+          "bytes": 138674
+        },
+        {
+          "name": "THUMB-3-B-what-killed-them-1920x1080.jpg",
+          "bytes": 132354
+        },
+        {
+          "name": "THUMB-4-C-one-genome-SPARE-1920x1080.jpg",
+          "bytes": 116688
+        },
+        {
+          "name": "VID_20261110_120809_036.mp4",
+          "bytes": 28669705
+        }
+      ],
+      "note_on_contents": "the four THUMB files are the Mammoth longform carriers already recorded in the repo; this folder is where packaging actually lands"
+    },
+    {
+      "id": "1hea56P6QPoduvwINvkubtRmclU4aoP2f",
+      "name": "Monarch World Channel",
+      "purpose": "world channel deliveries",
+      "status": "unmapped",
+      "reason": "empty folder; the repo has ch-03 'Curious Miles' (@curiousmiles, exploration & learning) which is a plausible match but nothing proves it",
+      "candidates": [
+        "ch-03 Curious Miles"
+      ],
+      "action": "operator confirms yes/no; if yes set maps_to_channel=ch-03, if no the channel needs its own folder or a config entry"
+    },
+    {
+      "id": "1jIRph_jQ_4tniLDZGU9zUWJWOq2Jk1r3",
+      "name": "My Face Sheet",
+      "purpose": "personal-brand raw material",
+      "maps_to_space": "personal-brand",
+      "status": "mapped",
+      "currently_holds": [
+        {
+          "name": "VID_20261101_095235.mp4",
+          "bytes": 45298789
+        }
+      ]
+    },
+    {
+      "id": "1g1Y6QU1g9i77_SBb_RUJrdEP8FIFjc4v",
+      "name": "Video editing/ Animation",
+      "purpose": "monarch-studio space",
+      "maps_to_space": "monarch-studio",
+      "status": "mapped",
+      "children_empty": [
+        {
+          "id": "1ak-qDoe4FfuhXe8j9KGWuOsH3vb21-4y",
+          "name": "3d animations"
+        },
+        {
+          "id": "1SOrsvk4LkiAo-sE149Yyih3Dlm2p6clG",
+          "name": "Video editing"
+        }
+      ]
+    }
+  ],
+  "channel_gaps": [
+    {
+      "channel": "ch-01 Monarch Lab",
+      "drive_folder": null,
+      "status": "no_folder",
+      "action": "create a Drive folder under 'Yt automation' and add its id here, or retire the channel"
+    },
+    {
+      "channel": "ch-02 Mindful Momentum",
+      "drive_folder": null,
+      "status": "no_folder",
+      "action": "same — and note channels.json already flags a conflict with the personal-brand motivational account"
+    },
+    {
+      "channel": "ch-03 Curious Miles",
+      "drive_folder": "1hea56P6QPoduvwINvkubtRmclU4aoP2f?",
+      "status": "candidate_only",
+      "action": "confirm whether 'Monarch World Channel' is this channel"
+    },
+    {
+      "channel": "ch-04 Extinct Life",
+      "drive_folder": "1rGggY_c-bHZHnU5ubPdLK9ZqeBbED6iu",
+      "status": "missing_from_channels_json",
+      "action": "production/extinct-life/ is the largest body of work in the repo (33 subdirs, 145 md) but config/channels.json does not list it. Add it, keeping the existing ch-01..ch-03 untouched."
+    },
+    {
+      "channel": "ch-05 Stickman",
+      "drive_folder": "1lVutiUkHnvulV5-dZ0kLEWyRqtACwruS",
+      "status": "missing_from_channels_json",
+      "action": "12 workflows + a scripts/ family exist for it; add it to config/channels.json"
+    }
+  ]
+}

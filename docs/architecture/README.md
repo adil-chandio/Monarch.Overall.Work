@@ -8,6 +8,7 @@ Read in this order:
 4. **[04-BUILD-WAVES.md](./04-BUILD-WAVES.md)** — the five shipping waves, each with its own verify list and rollback.
 5. **[05-SPACES-OPERATING-MODEL.md](./05-SPACES-OPERATING-MODEL.md)** — the as-built space model.
 6. **[06-YT-INTEL.md](./06-YT-INTEL.md)** — the research desk as it actually runs: lanes, report format, what is proven and what is still borrowed confidence.
+7. **[07-MEDIA-AND-REPO-SIZE.md](./07-MEDIA-AND-REPO-SIZE.md)** — what may enter Git, where media actually lives, the measured size history, and the four guard layers. **Read before adding any video, audio, image plate, 3D model or archive.**
 
 ## The short version
 
@@ -16,3 +17,4 @@ Read in this order:
 - 22 repos stay where they are, classified by role and linked through `config/repos.json`. Nothing is merged into this repo; nothing is deleted.
 - Data lives in Supabase (already provisioned) and `config/*.json`. Never in JSX.
 - Ships in five waves. Old URLs never break.
+- **Git holds knowledge, not media.** `config/media-policy.json` is the rule; `scripts/media-check.mjs` enforces it; every file that lives outside Git has a row in `deliverables/INDEX.md` proving where it went. Repo target: under 1 GB, of which ~90% is text.

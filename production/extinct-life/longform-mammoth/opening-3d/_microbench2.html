@@ -1,0 +1,176 @@
+<!doctype html><html><head><meta charset="utf-8"><title>micro2</title>
+<style>html,body{margin:0;background:#000;color:#eee;font:13px monospace}</style></head>
+<body><div id="out">running…</div><script type="importmap">{"imports":{"three":"/three.module.js"}}</script>
+<script type="module">
+import * as T from 'three';
+const W = 1920, H = 1080;
+const renderer = new T.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H, false);
+document.body.appendChild(renderer.domElement);
+const scene = new T.Scene();
+scene.background = new T.Color(0x102030);
+const camera = new T.PerspectiveCamera(40, W / H, 0.1, 500);
+camera.position.set(0, 0, 6);
+
+scene.add(new T.HemisphereLight(0x9cc4e0, 0x16222e, 0.9));
+const k = new T.DirectionalLight(0xffcf9c, 3.0); k.position.set(9, 3, -26); scene.add(k);
+const r = new T.DirectionalLight(0x9fd4ff, 1.9); r.position.set(-13, 7, -14); scene.add(r);
+
+function icoIndexed() {
+  const t = (1 + Math.sqrt(5)) / 2;
+  const v = [[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],[0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],[t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]];
+  const f = [[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
+  const pos = [], nor = [], idx = [];
+  for (const p of v) { const l = Math.hypot(p[0], p[1], p[2]); pos.push(p[0]/l, p[1]/l, p[2]/l); nor.push(p[0]/l, p[1]/l, p[2]/l); }
+  for (const fa of f) idx.push(fa[0], fa[1], fa[2]);
+  const g = new T.BufferGeometry();
+  g.setAttribute('position', new T.Float32BufferAttribute(pos, 3));
+  g.setAttribute('normal', new T.Float32BufferAttribute(nor, 3));
+  g.setIndex(idx);
+  return g;
+}
+
+const N = 60000;
+// deterministic pseudo-random layout so every variant draws the same picture
+let seed = 12345;
+const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+const layout = [];
+for (let i = 0; i < N; i++) {
+  layout.push({
+    p: [(rnd() - 0.5) * 8, (rnd() - 0.5) * 4.5, (rnd() - 0.5) * 4],
+    rx: rnd() * 3, ry: rnd() * 3, rz: rnd() * 3,
+    s: 0.02 + rnd() * 0.012,
+    c: [0.3 + rnd() * 0.2, 0.2 + rnd() * 0.15, 0.12 + rnd() * 0.1],
+  });
+}
+
+function makeInstanced(geo) {
+  const mat = new T.MeshStandardMaterial({ color: 0x9a7550, roughness: 0.92, metalness: 0 });
+  const mesh = new T.InstancedMesh(geo, mat, N);
+  const d = new T.Object3D(); const col = new T.Color();
+  for (let i = 0; i < N; i++) {
+    const L = layout[i];
+    d.position.set(...L.p); d.rotation.set(L.rx, L.ry, L.rz);
+    d.scale.set(L.s, L.s * 2, L.s); d.updateMatrix();
+    mesh.setMatrixAt(i, d.matrix);
+    col.setRGB(L.c[0], L.c[1], L.c[2]);
+    mesh.setColorAt(i, col);
+  }
+  scene.add(mesh);
+  return mesh;
+}
+
+// Merge every clump into ONE BufferGeometry: one draw call, no instancing.
+function makeMerged(geo, withColor) {
+  const src = geo.attributes.position.array;
+  const srcN = geo.attributes.normal.array;
+  const idxSrc = geo.index.array;
+  const vcount = geo.attributes.position.count;
+  const outPos = new Float32Array(N * vcount * 3);
+  const outNor = new Float32Array(N * vcount * 3);
+  const outCol = withColor ? new Float32Array(N * vcount * 3) : null;
+  const outIdx = new Uint32Array(N * idxSrc.length);
+  const m = new T.Matrix4(); const nm = new T.Matrix3();
+  const v = new T.Vector3(); const nrm = new T.Vector3();
+  for (let i = 0; i < N; i++) {
+    const L = layout[i];
+    m.identity();
+    m.makeRotationFromEuler(new T.Euler(L.rx, L.ry, L.rz));
+    m.scale(new T.Vector3(L.s, L.s * 2, L.s));
+    m.setPosition(L.p[0], L.p[1], L.p[2]);
+    nm.setFromMatrix4(m).invert().transpose();
+    const vo = i * vcount;
+    for (let j = 0; j < vcount; j++) {
+      v.set(src[j*3], src[j*3+1], src[j*3+2]).applyMatrix4(m);
+      outPos[(vo+j)*3] = v.x; outPos[(vo+j)*3+1] = v.y; outPos[(vo+j)*3+2] = v.z;
+      nrm.set(srcN[j*3], srcN[j*3+1], srcN[j*3+2]).applyMatrix3(nm).normalize();
+      outNor[(vo+j)*3] = nrm.x; outNor[(vo+j)*3+1] = nrm.y; outNor[(vo+j)*3+2] = nrm.z;
+      if (outCol) { outCol[(vo+j)*3] = L.c[0]; outCol[(vo+j)*3+1] = L.c[1]; outCol[(vo+j)*3+2] = L.c[2]; }
+    }
+    const io = i * idxSrc.length;
+    for (let j = 0; j < idxSrc.length; j++) outIdx[io+j] = idxSrc[j] + vo;
+  }
+  const g = new T.BufferGeometry();
+  g.setAttribute('position', new T.BufferAttribute(outPos, 3));
+  g.setAttribute('normal', new T.BufferAttribute(outNor, 3));
+  if (outCol) g.setAttribute('color', new T.BufferAttribute(outCol, 3));
+  g.setIndex(new T.BufferAttribute(outIdx, 1));
+  const mat = new T.MeshStandardMaterial({ color: 0xffffff, roughness: 0.92, metalness: 0, vertexColors: !!outCol });
+  const mesh = new T.Mesh(g, mat);
+  scene.add(mesh);
+  return mesh;
+}
+
+// Points cloud with a custom shader: one quad per tuft.
+function makePoints() {
+  const pos = new Float32Array(N * 3);
+  const col = new Float32Array(N * 3);
+  const siz = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    const L = layout[i];
+    pos[i*3] = L.p[0]; pos[i*3+1] = L.p[1]; pos[i*3+2] = L.p[2];
+    col[i*3] = L.c[0]; col[i*3+1] = L.c[1]; col[i*3+2] = L.c[2];
+    siz[i] = L.s * 40;
+  }
+  const g = new T.BufferGeometry();
+  g.setAttribute('position', new T.BufferAttribute(pos, 3));
+  g.setAttribute('color', new T.BufferAttribute(col, 3));
+  g.setAttribute('psize', new T.BufferAttribute(siz, 1));
+  const mat = new T.ShaderMaterial({
+    uniforms: { uScale: { value: H * 0.5 } },
+    vertexShader: `
+      attribute float psize; attribute vec3 color; varying vec3 vCol;
+      uniform float uScale;
+      void main() {
+        vCol = color;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = psize * uScale / max(0.001, -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      varying vec3 vCol;
+      void main() {
+        vec2 d = gl_PointCoord - 0.5;
+        float a = smoothstep(0.5, 0.18, length(d));
+        if (a < 0.02) discard;
+        gl_FragColor = vec4(vCol, a);
+      }`,
+    transparent: true, depthWrite: true,
+  });
+  const pts = new T.Points(g, mat);
+  scene.add(pts);
+  return pts;
+}
+
+function timeIt(frames = 8) {
+  const gl = renderer.getContext();
+  const px = new Uint8Array(4);
+  for (let i = 0; i < 3; i++) { renderer.render(scene, camera); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px); }
+  const t0 = performance.now();
+  for (let i = 0; i < frames; i++) { renderer.render(scene, camera); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px); }
+  return (performance.now() - t0) / frames;
+}
+
+const results = {};
+const geo = icoIndexed();
+
+const m1 = makeInstanced(geo);
+results.instanced_60k = timeIt();
+scene.remove(m1); m1.material.dispose();
+
+const m2 = makeMerged(geo, false);
+results.merged_nocolor_60k = timeIt();
+scene.remove(m2); m2.material.dispose();
+
+const m3 = makeMerged(geo, true);
+results.merged_color_60k = timeIt();
+scene.remove(m3); m3.material.dispose();
+
+const m4 = makePoints();
+results.points_60k = timeIt();
+scene.remove(m4);
+
+results.empty = timeIt();
+window.__results = results;
+document.getElementById('out').textContent = JSON.stringify(results, null, 2);
+</script></body></html>

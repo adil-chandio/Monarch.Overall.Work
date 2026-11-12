@@ -1,0 +1,234 @@
+{
+  "version": 1,
+  "updated": "2026-11-13",
+  "why": "The repo is an operating system, not a media locker. Git holds knowledge; media lives outside. This file is the single source of truth for that rule, and scripts/media-check.mjs + .github/workflows/repo-guard.yml enforce it.",
+  "principle": {
+    "git_holds": "text — knowledge, skills, docs, config, code, measurements, and one small line per media file",
+    "git_does_not_hold": "media binaries — video, audio, image plates, 3D models, archives",
+    "every_media_gets": "an index line (path, bytes, sha256, where-it-lives, why-it-matters) so nothing is lost when the binary leaves Git"
+  },
+  "size_gate": {
+    "hard_fail_bytes": 100000000,
+    "hard_fail_note": "GitHub rejects any single file over 100 MB. 100,000,000 is GitHub's own threshold, not 104857600.",
+    "warn_bytes": 20971520,
+    "warn_note": "20 MB is the point where someone should ask 'is this knowledge or media?'"
+  },
+  "repo_budget": {
+    "target_bytes": 1073741824,
+    "target_human": "1 GB — Rule 5 of docs/architecture/01-REPO-STRUCTURE.md",
+    "warn_bytes": 1610612736,
+    "warn_human": "1.5 GB — approaching the point where clones get slow"
+  },
+  "outside_git_roots": [
+    {
+      "path": ".cache/",
+      "id": "cache",
+      "why": "regenerable scratch: frames, decoded audio, browser bundles"
+    },
+    {
+      "path": ".harvest/",
+      "id": "harvest",
+      "why": "transient clones used for skill vendoring"
+    },
+    {
+      "path": ".venv/",
+      "id": "venv",
+      "why": "python environment, reinstalled on demand"
+    },
+    {
+      "path": "node_modules/",
+      "id": "node_modules",
+      "why": "npm install"
+    }
+  ],
+  "media_extensions": {
+    "video": [
+      ".mp4",
+      ".mov",
+      ".webm",
+      ".mkv",
+      ".m4v",
+      ".avi",
+      ".enc"
+    ],
+    "audio": [
+      ".wav",
+      ".mp3",
+      ".flac",
+      ".m4a",
+      ".aac",
+      ".ogg",
+      ".opus",
+      ".aiff"
+    ],
+    "image_plate": [
+      ".psd",
+      ".exr",
+      ".hdr",
+      ".tif",
+      ".tiff",
+      ".ai",
+      ".sketch"
+    ],
+    "model": [
+      ".blend",
+      ".blend1",
+      ".glb",
+      ".gltf",
+      ".fbx",
+      ".obj",
+      ".usd",
+      ".usdz"
+    ],
+    "archive": [
+      ".zip",
+      ".tar",
+      ".gz",
+      ".tgz",
+      ".7z",
+      ".bundle",
+      ".iso",
+      ".dmg"
+    ]
+  },
+  "keep_in_git": {
+    "note": "These are small, they are the product surface, and they break the site if removed. They are exempt from the media rule.",
+    "paths": [
+      "public/thumbnails/",
+      "public/proof/",
+      "public/showreel/",
+      "public/demo-poster.jpg",
+      "docs/research/**/*.csv.gz",
+      "deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4"
+    ],
+    "why_per_path": {
+      "public/thumbnails/": "1.7 MB of 1080x1920 posters; the app renders them; they are launch assets, not archive",
+      "public/proof/": "9.8 MB of proof images on the public portfolio surface — the page is blank without them",
+      "public/showreel/": "2.6 MB website showreel, referenced by src/",
+      "public/demo-poster.jpg": "432 KB poster frame paired with the demo video; cheap and used by the UI",
+      "docs/research/**/*.csv.gz": "measured frame-index data, not footage — small, text-derived, cited in reports",
+      "deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4": "the one approved public proof master; already gated by an explicit negation in .gitignore"
+    }
+  },
+  "tiers": [
+    {
+      "id": "youtube_unlisted",
+      "rank": 1,
+      "holds": "the master file of every finished video",
+      "cost": "free, unlimited, permanent",
+      "gives": "streaming + download, survives sandbox reset and phone storage limits",
+      "rule": "every finished render goes here before it is considered delivered"
+    },
+    {
+      "id": "drive",
+      "rank": 2,
+      "holds": "delivery copies, packaging (thumbnails, metadata), client handoff, competitor reference",
+      "cost": "15 GB quota shared with Gmail and Photos",
+      "measured": "10.71 GB free of 15 GB as of 2026-11-13",
+      "rule": "one copy per delivered video; never the only copy of something irreplaceable"
+    },
+    {
+      "id": "sandbox_disk",
+      "rank": 3,
+      "holds": "work in progress only",
+      "cost": "21 GB total, 4.5 GB free as of 2026-11-13",
+      "rule": "treated as temporary. A reset must never destroy the only copy of anything."
+    },
+    {
+      "id": "dropbox",
+      "rank": 4,
+      "holds": "cold tier — a second off-machine copy for anything that must not be lost",
+      "measured": "2.00 GB allocated, 35 MB used as of 2026-11-13",
+      "rule": "use only when YouTube and Drive are both wrong for the artefact"
+    }
+  ],
+  "upload_limits": {
+    "connector_max_bytes": 100000000,
+    "connector_note": "The Drive/Dropbox upload tools in this environment refuse files over 100 MB. This is a hard ceiling on any automatable upload path.",
+    "consequence": "A 12-minute video must be encoded at or below ~1.1 Mbps VBR to stay under 100 MB. Measured reference: the existing 12-minute 3D 1080p film in deliverables/ is 63 MB.",
+    "verified_upload_max_bytes": 50000000,
+    "verified_note": "Only ~50 MB has actually been exercised end to end. Anything larger is untested; test before promising it."
+  },
+  "encode_targets": {
+    "longform_1080p": {
+      "duration_max_minutes": 12,
+      "video_bitrate_mbps": 0.85,
+      "audio_bitrate_kbps": 128,
+      "container_overhead_pct": 8,
+      "size_target_mb": 95,
+      "arithmetic": "(0.85 + 0.128) Mbps x 720 s / 8 x 1.08 overhead = 95.1 MB, inside the 100 MB ceiling with 4.9 MB to spare",
+      "measured_example": "deliverables/Last-Mammoths-Full-Film-3D-1080p.mp4 = 63.4 MB for 12 min (0.7 Mbps effective, 1080p 3D)",
+      "note": "0.85 Mbps is generous next to the 0.7 Mbps master already shipped. Rendered 3D animation has large flat regions and slow camera moves, so it compresses far better than live action at the same perceptual quality. YouTube re-encodes every upload, so a fatter master buys no visible quality — it only costs upload time, phone storage and sandbox disk."
+    },
+    "shortform_1080x1920": {
+      "duration_max_seconds": 60,
+      "video_bitrate_mbps": 3.0,
+      "audio_bitrate_kbps": 128,
+      "container_overhead_pct": 8,
+      "size_target_mb": 25,
+      "arithmetic": "(3.0 + 0.128) Mbps x 60 s / 8 x 1.08 = 25.3 MB"
+    }
+  },
+  "delivery_flow": [
+    "render inside the sandbox, targeting the encode_targets above",
+    "upload to Drive into the channel folder recorded in config/drive-map.json",
+    "add one line to deliverables/INDEX.md: file, bytes, sha256, Drive link, what it is, what it teaches",
+    "hand the link to the operator for the YouTube upload (Studio can import from Drive directly)",
+    "delete the sandbox copy only after the index line exists and the Drive upload is confirmed"
+  ],
+  "never": [
+    "force-push without a git bundle backup of --all",
+    "delete a file to free space without an index line proving where the surviving copy is",
+    "promise an upload size that has not been tested at that size",
+    "put a video in Git 'temporarily'"
+  ],
+  "regenerable_evidence": {
+    "principle": "Some tracked images are not creative assets — they are measurement output extracted from an already-released master. They are reproducible from the master with a script that is already in the repo, so keeping them in Git stores the answer twice and the question once.",
+    "requirement": "A folder may be treated as regenerable evidence only if it contains BOTH (a) the script that produces it and (b) a manifest pinning the exact source (sha256 of the master). Otherwise it is creative work and stays.",
+    "regenerate_command": "python <folder>/extract_evidence.py   # run from repo root after restoring the pinned master into .cache/",
+    "folders": [
+      {
+        "path": "production/extinct-life/review-v13/",
+        "generator": "production/extinct-life/review-v13/extract_evidence.py",
+        "source_sha256": "29639cfd09dc15c7aa76568865618002fad69ff3ffda5307b2d01d6dc90719d0",
+        "evidence_bytes": "22.9 MB across 101 images",
+        "keep_in_git_anyway": [
+          "EVIDENCE.json",
+          "MEASUREMENTS.json",
+          "V13-FORENSIC-REVIEW.md",
+          "analyze_metrics.py",
+          "extract_evidence.py",
+          "audio-per-second.csv",
+          "every-frame-metrics.csv"
+        ],
+        "why_csv_stays": "the CSVs are the measurements themselves in text form — kilobytes, diffable, citable. The JPGs are a rendering of the same numbers.",
+        "source_sha256_from": "hardcoded assert at the top of review-v13/extract_evidence.py"
+      },
+      {
+        "path": "production/extinct-life/review-v14/",
+        "generator": "production/extinct-life/review-v14/extract_evidence.py",
+        "evidence_bytes": "22.4 MB across 102 images",
+        "keep_in_git_anyway": [
+          "EVIDENCE.json",
+          "V14-ENCODED-REVIEW.md",
+          "audio-per-second.csv",
+          "every-frame-metrics.csv",
+          "extract_evidence.py"
+        ],
+        "source_sha256": "9ff2ebf9a007ab6118f4cf0417dedacb09e67bec2ba95e1d1c3d6995e4238f26",
+        "source_sha256_from": "production/extinct-life/review-v14/EVIDENCE.json asset_sha256 (226 MB master), re-verified by the script against film-v14-directed/QC.json",
+        "source_bytes": 224372827,
+        "why_csv_stays": "the CSVs are the measurements themselves in text form — kilobytes, diffable, citable. The JPGs are a rendering of the same numbers."
+      }
+    ],
+    "not_regenerable": "film-v*-dir/*/inspection/ and */inspection/ stills are copied from .cache/ by the producing workflow (cp -r .cache/extinct-v14/stills production/...). They are outputs of a render, not of a script with a pinned source, so they are not covered here and stay until their owning workflow is changed to upload instead of commit."
+  },
+  "workflow_handoff": {
+    "problem": "20 of the 42 workflows that commit use `git add production/extinct-life/<film>`, `git add docs/research/assets/...` or `git add deliverables/<name>.mp4` — they push inspection stills and evidence frames straight into Git on every run. That is the mechanism that keeps regrowing the repo. Adding an ignore rule while they still do this would fail their commits; changing them all at once is a 20-workflow change that needs each one verified.",
+    "rule": "A workflow that produces media must upload it (GitHub Actions artifact or Drive), not commit it. `scripts/check-workflow-media.mjs` reports which ones still commit.",
+    "count_now": 20,
+    "of_total_committing": 42,
+    "measured_by": "node scripts/check-workflow-media.mjs",
+    "worst_offender": "extinct-feature-3d.yml does `git add deliverables/Extinct_Life_3D_Chapter03_Production_1080p.mp4` — a video file added to Git by name, deliberately, in a workflow"
+  }
+}

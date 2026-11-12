@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Pre-commit hook: stop media before it enters history.
+#
+# Installed by: bash scripts/install-hooks.sh
+# Bypass (only when you know why): git commit --no-verify
+#
+# This hook checks ONLY what is being committed, so it costs nothing on a normal
+# commit. It never edits or deletes anything — it says no and explains.
+
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+if [ ! -f config/media-policy.json ]; then
+  echo "repo-guard: config/media-policy.json is missing — refusing to commit blind." >&2
+  exit 1
+fi
+
+node scripts/media-check.mjs --staged
