@@ -389,17 +389,26 @@ def main():
     # produced 217 duplicated frames and an undecodable file.
     have = len(sorted(Path(frames_dir).glob('f*.jpg')))
     print(f'encoding {have} frames from {frames_dir}', flush=True)
+    # -fps_mode is an OUTPUT option: placing it between the two inputs made
+    # ffmpeg try to apply it to the wav and die with status 234. It belongs with
+    # the encoder flags at the end.
     cmd = [ff, '-hide_banner', '-loglevel', 'error', '-y',
            '-start_number', '0', '-framerate', str(FPS),
-           '-i', str(frames_dir / 'f%05d.jpg'), '-fps_mode', 'cfr']
+           '-i', str(frames_dir / 'f%05d.jpg')]
     has_audio = bool(a.audio) and Path(a.audio).exists()
     if has_audio:
         cmd += ['-i', a.audio, '-map', '0:v', '-map', '1:a',
                 '-c:a', 'aac', '-b:a', '256k', '-shortest']
-    cmd += ['-c:v', 'libx264', '-preset', a.preset, '-crf', str(a.crf),
+    cmd += ['-fps_mode', 'cfr',
+            '-c:v', 'libx264', '-preset', a.preset, '-crf', str(a.crf),
             '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-tune', 'film',
             '-movflags', '+faststart', str(out)]
-    subprocess.run(cmd, check=True)
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode != 0:
+        # never let a silent encode failure look like a successful build
+        print('ffmpeg failed\n  cmd: ' + ' '.join(cmd) + '\n  stderr:\n'
+              + (res.stderr or '')[-4000:], flush=True)
+        raise SystemExit(f'encode failed with status {res.returncode}')
 
     for si, shot in enumerate(shots):
         f0, f1 = shot_frames[si]
