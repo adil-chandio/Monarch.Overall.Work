@@ -72,6 +72,14 @@ for t in (23.5, 24., 24.5, 25., 26., 27., 28., 41., 42., 43.):
     head = position(actor.rig, 'Head')
     assert all(math.isfinite(v) for v in head)
     heads.append(head)
+    if t <= 28.:
+        # The outward-swinging door must not pass through the actor's joints.
+        inverse = film.props['door'].matrix_world.inverted()
+        for bone in ('Head', 'Spine2', 'Hips', 'LeftArm', 'LeftForeArm', 'LeftHand',
+                     'RightArm', 'RightForeArm', 'RightHand', 'LeftUpLeg', 'RightUpLeg',
+                     'LeftLeg', 'RightLeg', 'LeftFoot', 'RightFoot'):
+            local = inverse @ position(actor.rig, bone)
+            assert not all(abs(v) < 1.05 for v in local), ('door intersects joint', t, bone)
     if 24.5 <= t <= 28.:
         p = world_to_camera_view(film.w.scene, film.w.scene.camera, head)
         assert .04 < p.x < .96 and .04 < p.y < .96 and p.z > 0, (t, p)
