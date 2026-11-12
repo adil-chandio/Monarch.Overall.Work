@@ -4,22 +4,22 @@
  "branch": "arena/50e3a0ae-monarch-overall-work",
  "head_at_capture": "e4f918baa9cb45cc3b7bf3a434cb1e91a8f18165",
  "captured_at": "2026-11-08T15:32:32Z",
- "updated_at": "2026-11-12T05:32:27Z",
- "last_event_id": "evt-20261111T141128Z",
+ "updated_at": "2026-11-12T10:10:00Z",
+ "last_event_id": "evt-052-refmatch-3d",
  "active_task": {
   "id": "mafia-temple-v8-measured-cut",
   "title": "Monarch night temple \u2014 20 s film, V8 measured cut",
-  "status": "v8_measured_cut_delivered",
+  "status": "refmatch_3d_cut_delivered",
   "space": "monarch-studio",
   "channel": "monarch-cam",
   "evidence_level": "repo_evidence",
-  "current_step": "A measured V8 cut exists (480 frames / 20.000 s, zero duplicated frames) with a test-backed toolchain in production/mafia-temple/qc/ and CI at .github/workflows/mafia-temple-v8-qc.yml. Every repair is reported with a before/after number; nothing about likeness, anatomy, native 1080p, rights or human review is claimed.",
-  "next_action": "Do not add another CPU filter pass. The source is the ceiling. Next step is a GPU render of the final scene at 1080p with a reference-matched character, or the owner accepting V8 as an internal study.",
+  "current_step": "A reference-matched 3D cut exists and is published: six shots cut on the reference's frames, locked cameras, per-shot grade driven onto the reference's measured palette, a face built from volumes, and a score at -25.6 LUFS. 14/14 technical gates pass. PR #7 is merged.",
+  "next_action": "Owner review of the published cut is the only open item. Technical QC is not creative acceptance: nothing about likeness, photoreal quality or human audio approval is claimed. If the look is still short of the reference, the next step is a GPU renderer with a scanned head, not more CPU tuning.",
   "start_here": [
-   "production/mafia-temple/V8-CUT-REPORT.md",
-   "production/mafia-temple/KNOWN-LIMITS.md",
-   "production/mafia-temple/qc/setup_env.sh",
-   "production/mafia-temple/qc/render_film_v8.py"
+   "production/mafia-temple/V8-3D-REPORT.md",
+   "production/mafia-temple/qc/vfx3d/world.py",
+   "production/mafia-temple/qc/vfx3d/engine.py",
+   "production/mafia-temple/qc/vfx3d/verify.py"
   ],
   "blocking_gaps": [
    "No reference-matched character or verified likeness",
