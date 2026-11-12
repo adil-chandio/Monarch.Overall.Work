@@ -192,10 +192,17 @@ native picture doing the same narrative work, and both files are kept for compar
 
 ## Handing the reel over
 
-**Where the shipped file lives.** `deliverables/Last-Mammoths-Review-Reel-13min-720p.mp4`
+**Where the shipped file lives.** `deliverables/Last-Mammoths-Review-Reel-v8-720p.mp4`
 is force-added past the `deliverables/*.mp4` ignore rule (as this repository already does
-for its other finished cuts) and committed; its build report sits beside it. Nothing else
-of this size is committed — the copy in `.cache/` is the working one.
+for its other finished cuts) and committed; its build report sits beside it. v8 supersedes
+the v7 reel, which stays in history and on the release page. Nothing else of this size is
+committed — the copy in `.cache/` is the working master.
+
+Direct download, pinned to the commit that added it:
+
+```
+https://github.com/adil-chandio/Monarch.Overall.Work/raw/f2ddd97/deliverables/Last-Mammoths-Review-Reel-v8-720p.mp4
+```
 
 Why a git commit and not a release asset: the development sandbox cannot reach
 `uploads.github.com` (TLS is blocked at the network edge), so `gh release upload` dies
@@ -206,12 +213,12 @@ release asset, but it cannot fetch from the sandbox preview either — that prev
 403 to an outside client.
 
 Verify a copy with:
-`sha256sum deliverables/Last-Mammoths-Review-Reel-13min-720p.mp4`
-→ `479a30ae59ad2772e918f78da8100ac0390cff57695bb1f177b9e32edac27f63`
+`sha256sum deliverables/Last-Mammoths-Review-Reel-v8-720p.mp4`
+→ `deee8881e913814108def5d742bce92edd526ef1429b8db627a36a2c8d2d91df`
 
 
 `edit/serve_review_reel.py` exists because `python -m http.server` answers a Range
-request with the whole 95 MB body and a `200`, which breaks seeking — a player has to
+request with the whole 87 MB body and a `200`, which breaks seeking — a player has to
 re-download from zero every time you scrub. This server returns `206` with a correct
 `Content-Range`, so the reel can be watched and scrubbed in a browser.
 
@@ -222,7 +229,8 @@ re-download from zero every time you scrub. This server returns `206` with a cor
 Only `review-reel-continuous.mp4` is served, from an explicit allowlist — there is no
 directory listing and no path traversal. A plain URL downloads the file; appending
 `?inline=1` plays it in place instead. It resolves `.cache/mammoth-edit/` from the repo
-root, so the script is committed but the 95 MB reel never is.
+root, so the script is committed but the 87 MB reel itself is only in the one deliberate
+delivery commit.
 
 **Not for distribution.** The reel is a work-in-progress assembly and the mammoth rig's
 rights are unresolved; this exists to get a review copy to a reader, not to publish.
