@@ -1,7 +1,7 @@
 {
-  "project": "Monarch Cam V16 - NEW viral social-origin clips",
+  "project": "Monarch Cam V16 - 20 NEW Commons funny / animal / stunt clips",
   "generated_utc": "2026-11-12T02:04:50Z",
-  "method": "Live Commons API namespace-6 search with VIRAL FUNNY queries; social-origin filter; V14 20 hard-excluded; extmetadata licence gate PD/CC0/CC BY; objective motion/surprise hook-window scoring; native audio kept (silent AAC added where needed); 10s normalized MP4 windows committed.",
+  "method": "Live Commons API namespace-6 intitle search for funny / animal / stunt terms; title on-brand gate, safety gate, licence gate PD/CC0/CC BY, V14 20 hard-excluded; social / viral keywords used ONLY as search recall and ranking heuristics; 20 exact titles pinned after manual contact-sheet review; objective 10s motion hook window; native audio kept (silent AAC added where needed); normalized MP4 windows committed.",
   "queries": [
     "intitle:fail filetype:video",
     "intitle:prank filetype:video",
@@ -234,14 +234,14 @@
       "smart",
       "clever"
     ],
-    "reason": "Viral funny/shocking-but-safe only. Graphic/tragic blocked. V14 20 hard-excluded.",
+    "reason": "Funny / cute / safe stunt only. Graphic/tragic blocked. V14 20 hard-excluded. No family-safety guarantee.",
     "human_watch_through_required": true,
     "family_safe_guarantee": false
   },
   "accepted_count": 20,
   "failed_count": 0,
   "failures": [],
-  "boundary": "Commons video2commons mirrors with recorded social origin (YouTube/TikTok/Dailymotion/Facebook/Instagram/Vimeo/viral) are the rights-documented source. No direct TikTok/Instagram/Reddit download. No legal opinion, no human legal review, no upload/publish/monetisation, no virality or perfection claim.",
+  "boundary": "Source is Wikimedia Commons namespace-6 file pages with recorded PD / CC0 / CC BY reuse metadata. Direct TikTok/Instagram/Reddit/YouTube downloads were attempted and abandoned: YouTube downloads failed 18/20 and the two non-YouTube files had no usable rights metadata, so none are in this final pool. No claim that any selected clip was viral, originated on a social platform, or has a view count. No legal opinion, no human legal review, no upload/publish/monetisation, no guaranteed views, no perfection claim. Human full-motion watch-through and per-clip rights-page review still required.",
   "assets": [
     {
       "id": 1,
@@ -2803,5 +2803,6 @@
       "human_legal_review": false,
       "not_a_legal_opinion": true
     }
-  ]
+  ],
+  "selection_review": "v7 pinned list chosen after six automated runs and manual contact-sheet inspection. Rejected off-brand runs: HIV/COVID/news/games, volcano/farm/silent films, old films/NASA/USDA/Warm Springs, lab science/whales/AFN/monastery, autumn Fall clips, old print/abstract animation/military training. Technical QC ALL_PASS is not creative approval."
 }

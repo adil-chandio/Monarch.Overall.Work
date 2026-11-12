@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Build the V15 English caught-on-camera long-form compilation.
+"""Build the V16 English caught-on-camera long-form compilation.
 
 Rules enforced by construction:
   * frame 1 is real footage + curiosity intro VO (chunk 00, voice-06) - no static title/method card
   * 120 moving beats of 4.5 s (3-5 s pattern interrupts), no still frame held >4.5 s
-  * 20 distinct rights-documented clips, English VO + burned-in English captions
+  * 20 distinct rights-documented NEW V16 Commons clips (NOT the rejected V14/V15 pool)
+  * English VO + burned-in English captions
   * small lower-third source / round / counter overlays only, no full-screen diagrams
   * audio ducking: native 0.60 between VO, 0.15 during VO, VO 1.0 (voice clearly audible)
   * 9:00 / 540 s / 16,200 frames / 960x540 / 30 fps / H.264 / AAC
@@ -200,7 +201,7 @@ def make_edl(sel, ledgers, beats):
                               f"assets/overlay/counter_{b+1:03d}.txt"],
         })
     save_json(PROD / "EDL_V13.json", {
-        "version": "v15-clip-first-20-funny-intro-ducking",
+        "version": "v16-new-20-clips-intro-ducking",
         "beats": beats, "beat_s": BEAT, "rounds": ROUNDS,
         "total_s": round(beats * BEAT, 3),
         "distinct_clips": sel["count"],
@@ -270,7 +271,7 @@ def build_final(pilot=False):
     inputs = ["-f", "concat", "-safe", "0", "-i", str(concat)]
     for f in VO_FILES:
         inputs += ["-i", str(f)]
-    # V15 audio ducking: native 0.60 between VO, 0.15 during VO (0.60*0.25), VO 1.0.
+    # V16 audio ducking: native 0.60 between VO, 0.15 during VO (0.60*0.25), VO 1.0.
     # VO windows from actual mp3 durations so voice is clearly audible, native in gaps.
     vo_windows = []
     for _i, _f in enumerate(VO_FILES):
@@ -383,8 +384,8 @@ def contact_sheet(path, total):
 
 
 def make_credits(sel, ledgers):
-    lines = ["# V15 clip credits and rights ledger", "",
-             "All 20 clips are original Wikimedia Commons namespace-6 file pages with PD / CC0 / CC BY 3.0 / CC BY 4.0 commercial-reuse metadata recorded by the live Commons API. These are NOT unverified Instagram / TikTok / Reddit / Twitter / Dailymotion reposts. No legal opinion, no monetisation claim, no human legal review, no upload/publish.", ""]
+    lines = ["# V16 clip credits and rights ledger", "",
+             "All 20 clips are NEW Wikimedia Commons namespace-6 file pages with PD / CC0 / CC BY 3.0 / CC BY 4.0 reuse metadata recorded by the live Commons API. They are NOT the rejected V14/V15 20-clip pool, and NOT unverified Instagram / TikTok / Reddit / Twitter / Dailymotion reposts. These are Commons animal / stunt / funny moments selected by intitle search and a manual contact-sheet review; no view counts, no virality claim, no platform-origin claim. No legal opinion, no monetisation claim, no human legal review, no upload/publish.", ""]
     for c in sel["clips"]:
         a = ledgers[(c["ledger"], c["window_file"])]
         lines += [f"## {c['id']} — {c['short']}", "",
@@ -405,10 +406,12 @@ def make_about(probe, cues, pilot):
     (PROD / "ABOUT_THIS_VIDEO_V13.md").write_text(
         "# CAUGHT ON CAMERA: 20 Moments The Lens Was Not Supposed To Catch\n\n"
         f"English long-form compilation. {'PILOT 36 s.' if pilot else '9:00 (540 s).'} "
-        "20 different rights-documented clips, three escalating rounds, original English "
+        "20 NEW rights-documented Commons clips, three escalating rounds, original English "
         "commentary, burned-in English captions, native audio, zooms, speed ramps and "
         "replays. Real footage at frame 1; no intro card, no title card, no method card, "
-        "no full-screen diagram, no static slide, no reused V12 final, no NASA Short.\n\n"
+        "no full-screen diagram, no static slide, no reused V12 final, no NASA Short, "
+        "and none of the rejected V14/V15 clips. Internal V13 filenames are pipeline "
+        "identifiers only; this render is V16.\n\n"
         f"Technical probe: {probe['duration_s']} s, {probe['frame_count']} frames, "
         f"{probe['width']}x{probe['height']}, {probe['fps']} fps, {probe['video_codec']}, "
         f"{probe['audio_codec']} {probe['sample_rate']} Hz, {probe['integrated_lufs']} LUFS. "
@@ -463,7 +466,7 @@ def make_qc(probe, edl, cues, total, frames, pilot):
         "not_a_legal_opinion": True,
     }
     save_json(PROD / "QC_REPORT_V13.json", out)
-    md = ["# V15 technical QC", "", f"Technical pass: **{out['technical_pass']}**. "
+    md = ["# V16 technical QC", "", f"Technical pass: **{out['technical_pass']}**. "
           "This is NOT creative approval, legal clearance, or human sign-off.", ""]
     for k, v in checks.items():
         md.append(f"- `{k}`: {'PASS' if v else 'FAIL'}")
@@ -503,11 +506,12 @@ def main():
     make_about(probe, cues, pilot)
     qc = make_qc(probe, edl, cues, total, frames, pilot)
     save_json(PROD / "VIDEO_MANIFEST_V13.json", {
-        "version": "v15-clip-first-20-funny-intro-ducking",
+        "version": "v16-new-20-clips-intro-ducking",
+        "clip_pool": "v16-viral-20-v7 (20 NEW Commons clips, NOT V14/V15)",
         "pilot": pilot,
         "final_file": final.name,
         "vo_language": "en",
-        "vo_voice_id": "voice-05 (intro voice-06)",
+        "vo_voice_id": "voice-05 (intro voice-06, V15 audio reused)",
         "vo_chunks": len(VO_FILES),
         "vo_starts_s": VO_STARTS,
         "vo_durations_s": [round(parse_duration(f), 2) for f in VO_FILES],

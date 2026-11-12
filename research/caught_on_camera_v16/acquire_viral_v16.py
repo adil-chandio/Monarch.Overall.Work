@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
-"""V16 viral Commons acquisition: 20 NEW social-origin funny/shocking clips.
+"""V16 Commons acquisition: 20 NEW funny / animal / stunt clips.
 
-NOT V14 repeats. Live Commons API search with VIRAL FUNNY queries (fail, prank,
-trick shot, instant karma, slip, viral, hilarious, unexpected, shocking) — NOT
-animal-generic queries that produced low-energy V13 safe pass. Filters for
-social origin (YouTube/TikTok/Dailymotion/Facebook/Instagram/Vimeo/viral/
-FailArmy/AFV recorded in metadata) OR strong viral-funny terms. Hard-excludes
+NOT V14 repeats. Live Commons API intitle search for funny / animal / stunt
+terms. Social / viral keywords are used ONLY as recall and ranking heuristics,
+NOT as proof of social origin or virality. Hard-excludes
 all 20 V14 titles. Licence gate PD/CC0/CC BY only. Safety gate blocks
 graphic/tragic. Objective 10s hook window (motion + surprise). Writes
 rights ledger + selection + contact sheet for validate_clips_v13.py.
 V7: 20 manually reviewed titles are pinned first after contact-sheet review.
 
-No direct TikTok/Instagram/Reddit downloads. Commons video2commons mirrors
-with recorded social origin are the rights-documented source. No legal opinion,
-no monetisation claim, no upload/publish, no virality claim.
+Source is Wikimedia Commons namespace-6 file pages with recorded PD / CC0 /
+CC BY reuse metadata. Direct social downloads were abandoned after YouTube
+failed 18/20 and two non-YouTube files had no usable rights metadata. No legal
+opinion, no monetisation claim, no upload/publish, no virality claim.
 """
 from __future__ import annotations
 import hashlib
@@ -754,9 +753,9 @@ def main():
 
     contact(accepted)
     ledger = {
-        "project": "Monarch Cam V16 - NEW viral social-origin clips",
+        "project": "Monarch Cam V16 - 20 NEW Commons funny / animal / stunt clips",
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "method": "Live Commons API namespace-6 search with VIRAL FUNNY queries; social-origin filter; V14 20 hard-excluded; extmetadata licence gate PD/CC0/CC BY; objective motion/surprise hook-window scoring; native audio kept (silent AAC added where needed); 10s normalized MP4 windows committed.",
+        "method": "Live Commons API namespace-6 intitle search for funny / animal / stunt terms; title on-brand gate, safety gate, licence gate PD/CC0/CC BY, V14 20 hard-excluded; social / viral keywords used ONLY as recall and ranking heuristics; 20 exact titles pinned after manual contact-sheet review; objective 10s motion hook window; native audio kept (silent AAC added where needed); normalized MP4 windows committed.",
         "queries": VIRAL_QUERIES,
         "v14_excluded": V14_EXCLUDE_SUBSTRINGS + ["File:COMEDY.webm"],
         "candidate_pool_size": len(pool),
@@ -764,23 +763,29 @@ def main():
         "content_safety_gate": {
             "hard_blocked_terms": list(BLOCK_TERMS),
             "positive_terms": list(GOOD_TERMS),
-            "reason": "Viral funny/shocking-but-safe only. Graphic/tragic blocked. V14 20 hard-excluded.",
+            "reason": "Funny / cute / safe stunt only. Graphic/tragic blocked. V14 20 hard-excluded. No family-safety guarantee.",
             "human_watch_through_required": True,
             "family_safe_guarantee": False,
         },
         "accepted_count": len(accepted),
         "failed_count": len(failures),
         "failures": failures,
-        "boundary": ("Commons video2commons mirrors with recorded social origin (YouTube/TikTok/"
-                     "Dailymotion/Facebook/Instagram/Vimeo/viral) are the rights-documented source. "
-                     "No direct TikTok/Instagram/Reddit download. No legal opinion, no human legal review, "
-                     "no upload/publish/monetisation, no virality or perfection claim."),
+        "boundary": ("Source is Wikimedia Commons namespace-6 file pages with recorded PD / CC0 / "
+                     "CC BY reuse metadata. Direct TikTok/Instagram/Reddit/YouTube downloads were "
+                     "attempted and abandoned: YouTube failed 18/20 and the two non-YouTube files "
+                     "had no usable rights metadata, so none are in this final pool. No claim that "
+                     "any selected clip was viral, originated on a social platform, or has a view "
+                     "count. No legal opinion, no human legal review, no upload/publish/"
+                     "monetisation, no guaranteed views, no perfection claim. Human full-motion "
+                     "watch-through and per-clip rights-page review still required."),
         "assets": accepted,
     }
     save_json(BASE13 / "rights_ledger_curated_v13.json", ledger)
     save_json(BASE13 / "hook_windows_curated_v13.json", {"accepted": accepted, "failures": failures})
     sel = {"selection_version": "v16-viral-20", "count": len(accepted),
-           "note": "V16 20 NEW viral social-origin Commons clips. NOT V14 repeats.",
+           "note": ("V16 20 NEW Commons funny / animal / stunt clips selected by intitle search "
+                    "and manual contact-sheet review. NOT V14/V15 repeats. No virality or "
+                    "social-origin claim."),
            "clips": [{"id": f"C{a['id']:02d}", "window_file": a["local_window_file"],
                       "ledger": "rights_ledger_curated_v13.json", "pool": "viral_v16",
                       "short": a["short"]} for a in accepted]}
