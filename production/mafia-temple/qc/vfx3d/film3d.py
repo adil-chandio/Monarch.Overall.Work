@@ -81,6 +81,27 @@ def ease(t):
     return t * t * (3 - 2 * t)
 
 
+def split_slices(total_frames, n_slices):
+    """Split the timeline into n contiguous ranges that end on shot boundaries.
+
+    A boundary in the middle of a shot means two steps render the same shot at
+    different phases — the kind of thing that quietly duplicates or skips
+    frames. Snapping to the cuts avoids it.
+    """
+    bounds, acc = [0], 0
+    for s in SHOTS:
+        acc += s.frames
+        bounds.append(acc)
+    bounds = [b for b in bounds if b <= total_frames]
+    if bounds[-1] != total_frames:
+        bounds.append(total_frames)
+    n_slices = max(1, min(n_slices, len(bounds) - 1))
+    targets = [total_frames * (k + 1) / n_slices for k in range(n_slices - 1)]
+    picked = sorted({min(bounds[1:-1], key=lambda b: abs(b - t)) for t in targets})
+    edges = [0] + picked + [total_frames]
+    return [(edges[i], edges[i + 1]) for i in range(len(edges) - 1)]
+
+
 def smooth(t):
     """C1 ease with a touch of hold at both ends."""
     t = min(max(t, 0.0), 1.0)
@@ -240,17 +261,37 @@ class Film3D:
         return self.F.finish(col, exposure=shot.exposure, seed=shot.frames * 31 + i)
 
 
-def _render_range(job):
-    """Worker: render a list of (global_frame_index, shot_index, local_index)."""
-    width, height, frames_dir, items, shot_specs = job
-    import cv2
+def render_items(width, height, frames_dir, items, resume=True, tag=''):
+    """Render (global, shot, local) items to jpg, skipping frames already on disk.
+
+    Every frame is written tmp-then-rename, so a killed run cannot leave a
+    truncated jpg that poisons the encode. A failure prints its frame index and
+    re-raises: a silent partial render is worse than a loud stop.
+    """
+    import traceback
+    from PIL import Image
     film = Film3D(width, height)
+    done = 0
+    last = items[-1][0] if items else 0
     for gi, si, li in items:
-        shot = SHOTS[si]
-        frame = film.render(shot, li)
-        cv2.imwrite(str(Path(frames_dir) / f'f{gi:05d}.jpg'), frame[..., ::-1],
-                    [cv2.IMWRITE_JPEG_QUALITY, 96])
-    return len(items)
+        dst = Path(frames_dir) / f'f{gi:05d}.jpg'
+        if resume and dst.exists() and dst.stat().st_size > 4000:
+            continue
+        try:
+            frame = film.render(SHOTS[si], li)
+            tmp = dst.with_suffix('.tmp.jpg')
+            Image.fromarray(frame).save(tmp, quality=96, subsampling=1)
+            tmp.replace(dst)
+        except Exception:
+            print(f'FATAL while rendering frame {gi} (shot {SHOTS[si].name})',
+                  flush=True)
+            traceback.print_exc()
+            raise
+        done += 1
+        if done % 10 == 0:
+            print(f'  {tag}frame {gi + 1}/{last + 1} ({done} new this run)',
+                  flush=True)
+    return done
 
 
 def main():
@@ -259,6 +300,12 @@ def main():
     ap.add_argument('--width', type=int, default=W_DEFAULT)
     ap.add_argument('--height', type=int, default=H_DEFAULT)
     ap.add_argument('--workers', type=int, default=1)
+    ap.add_argument('--range', default='', help='START:END global frame range')
+    ap.add_argument('--slice', default='', help='K:N — render slice K of N on shot boundaries')
+    ap.add_argument('--list-slices', type=int, default=0,
+                    help='print the K:N ranges for N slices and exit')
+    ap.add_argument('--encode-only', action='store_true',
+                    help='skip rendering, encode the frames already on disk')
     ap.add_argument('--frames-dir', default='')
     ap.add_argument('--shots', default='', help='comma list of shot name filters')
     ap.add_argument('--audio', default='')
@@ -303,17 +350,32 @@ def main():
            'workers': a.workers, 'shots': [], 'output': str(out)}
     t_start = time.time()
 
-    if a.workers > 1:
-        import multiprocessing as mp
-        chunks = [items[i::a.workers] for i in range(a.workers)]
-        jobs = [(a.width, a.height, str(frames_dir), c, None) for c in chunks]
-        with mp.Pool(a.workers) as pool:
-            done = 0
-            for n in pool.imap_unordered(_render_range, jobs):
-                done += n
-                print(f'  {done}/{total} frames', flush=True)
+    if a.workers != 1:
+        print(f'note: --workers {a.workers} is no longer used to shard the render; '
+              'the render is single-process and resumable. Use --slice to split '
+              'a build across steps.', flush=True)
+
+    if a.list_slices:
+        for k, (a0, a1) in enumerate(split_slices(total, a.list_slices), 1):
+            print(f'slice{k}/{a.list_slices} {a0}:{a1} ({a1 - a0} frames)')
+        return
+
+    if a.slice:
+        k, n = (int(v) for v in a.slice.split(':'))
+        a0, a1 = split_slices(total, n)[k - 1]
+        a.range = f'{a0}:{a1}'
+        print(f'slice {k}/{n} -> frames {a0}:{a1}', flush=True)
+
+    if a.range:
+        a0, a1 = (int(v) for v in a.range.split(':'))
+        items = [it for it in items if a0 <= it[0] < a1]
+        print(f'render range {a0}:{a1} -> {len(items)} frames', flush=True)
+
+    if not a.encode_only:
+        render_items(a.width, a.height, str(frames_dir), items, resume=True,
+                     tag=f'[{a.range or "all"}] ')
     else:
-        _render_range((a.width, a.height, str(frames_dir), items, None))
+        print('encode-only: using frames already on disk', flush=True)
     render_seconds = time.time() - t_start
 
     # ---- encode
@@ -322,6 +384,11 @@ def main():
     # -start_number 0 and -fps_mode cfr are not optional: without them ffmpeg's
     # image demuxer starts at 1, misses frame 0 and re-times the whole stream,
     # which produced duplicated frames and an undecodable file.
+    # -start_number 0 and -fps_mode cfr are not optional: without them ffmpeg's
+    # image demuxer starts at 1, misses frame 0 and re-times the stream, which
+    # produced 217 duplicated frames and an undecodable file.
+    have = len(sorted(Path(frames_dir).glob('f*.jpg')))
+    print(f'encoding {have} frames from {frames_dir}', flush=True)
     cmd = [ff, '-hide_banner', '-loglevel', 'error', '-y',
            '-start_number', '0', '-framerate', str(FPS),
            '-i', str(frames_dir / 'f%05d.jpg'), '-fps_mode', 'cfr']
@@ -351,7 +418,8 @@ def main():
     Path(a.log).parent.mkdir(parents=True, exist_ok=True)
     Path(a.log).write_text(json.dumps(log, indent=1))
     size = out.stat().st_size
-    print(f'\nWROTE {out}  {total} frames  {total / FPS:.3f}s  {size} bytes')
+    log['frames_encoded'] = have
+    print(f'\nWROTE {out}  {have} frames  {have / FPS:.3f}s  {size} bytes')
     print(f'log   {a.log}')
 
 

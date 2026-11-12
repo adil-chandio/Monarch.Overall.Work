@@ -298,8 +298,9 @@ class Frame:
                 acc += pad[k + dy:k + dy + h, k + dx:k + dx + w]
         lit = acc / float((2 * k + 1) ** 2)
         lit = np.clip(lit * 1.35, 0, 1)
-        import cv2
-        return cv2.resize(lit, (W, H), interpolation=cv2.INTER_LINEAR)
+        from PIL import Image
+        return np.asarray(Image.fromarray(lit.astype(np.float32), mode='F')
+                          .resize((W, H), Image.BILINEAR), np.float32)
 
     # ------------------------------------------------------------------ shade
     def shade(self, ro, rd, t, mat, nrm, lights, eye_lights, fog_density,

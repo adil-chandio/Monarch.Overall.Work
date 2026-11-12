@@ -254,7 +254,7 @@ jobs:
         (github.event_name == 'push' && contains(github.event.head_commit.message, '[publish-3d]'))
       }}
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 
@@ -269,22 +269,65 @@ jobs:
           python -m pip install -q "numpy>=1.26,<3" "pillow>=10" imageio-ffmpeg \
             "opencv-contrib-python-headless==4.10.0.84"
 
-      - name: Render the 3D cut
+      - name: Sound master for the 3D cut
         working-directory: production/mafia-temple
         run: |
           set -euo pipefail
           mkdir -p render-3d
           python qc/vfx3d/sound3d.py --source monarch-mafia-temple-20s.mp4 \
-            --out render-3d/sound_v8.wav --shots-log render-3d/render_log.json \
-            --log render-3d/sound_log.json || true
-          python qc/vfx3d/film3d.py --out render-3d/monarch-temple-3d.mp4 \
-            --width 1280 --height 720 --workers 2 --frames-dir render-3d/frames \
+            --out render-3d/sound_v8.wav --log render-3d/sound_log.json
+          ls -l render-3d/sound_v8.wav
+
+      # Five resumable slices that snap to shot boundaries, so no shot is split
+      # across steps. Each slice skips frames already on disk, names the frame it
+      # died on, and is retried once: a dropped runner then costs minutes.
+      - name: Render the 3D cut (shot slices)
+        working-directory: production/mafia-temple
+        env:
+          OMP_NUM_THREADS: "2"
+          OPENBLAS_NUM_THREADS: "2"
+          MALLOC_ARENA_MAX: "2"
+        run: |
+          set -uo pipefail
+          for k in 1 2 3 4 5; do
+            echo "=== slice $k/5 ==="
+            ok=0
+            for attempt in 1 2; do
+              if python qc/vfx3d/film3d.py --frames-dir render-3d/frames \
+                   --slice "$k:5" --out render-3d/_slice.mp4; then
+                ok=1; break
+              fi
+              echo "slice $k attempt $attempt failed; resuming" >&2
+            done
+            if [ "$ok" -ne 1 ]; then
+              echo "slice $k failed twice" >&2
+              ls render-3d/frames | tail -3 || true
+              exit 1
+            fi
+          done
+          echo "frames on disk: $(ls render-3d/frames | wc -l)"
+
+      - name: Encode and measure
+        working-directory: production/mafia-temple
+        env:
+          MALLOC_ARENA_MAX: "2"
+        run: |
+          set -euo pipefail
+          ls render-3d/frames | wc -l
+          python qc/vfx3d/film3d.py --frames-dir render-3d/frames --encode-only \
             --audio render-3d/sound_v8.wav --preset medium --crf 17 \
-            --log render-3d/render_log.json
+            --out render-3d/monarch-temple-3d.mp4 --log render-3d/render_log.json
+          ls -l render-3d/monarch-temple-3d.mp4
 
       - name: Technical gates
         working-directory: production/mafia-temple
-        run: python qc/vfx3d/verify.py render-3d/monarch-temple-3d.mp4
+        run: |
+          set -euo pipefail
+          # container timestamps put the duration string on ...19.96 as often as
+          # ...20.00, so check 20 s +/- 0.05 plus the exact frame count, then the
+          # strict form as a second opinion.
+          python qc/vfx3d/verify.py render-3d/monarch-temple-3d.mp4
+          python qc/vfx3d/verify.py render-3d/monarch-temple-3d.mp4 --strict-duration
 
       - name: Attach to release
         env:

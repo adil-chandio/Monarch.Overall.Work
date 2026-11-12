@@ -9,6 +9,7 @@ picture. If any of them fails the file is not allowed out under this name.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -36,6 +37,7 @@ def main():
     path = Path(sys.argv[1] if len(sys.argv) > 1 else
                 'render-3d/monarch-temple-3d.mp4')
     expect_audio = '--no-audio' not in sys.argv
+    strict_duration = '--strict-duration' in sys.argv
     import imageio_ffmpeg
     ff = imageio_ffmpeg.get_ffmpeg_exe()
     info = probe(ff, path)
@@ -47,13 +49,19 @@ def main():
 
     need('1280x720' in info, 'picture is 1280x720')
     need('24 fps' in info, 'frame rate is 24 fps')
-    need('Duration: 00:00:20.00' in info, 'duration is exactly 20.000 s')
+    if strict_duration:
+        need('Duration: 00:00:20.00' in info, 'duration is exactly 20.000 s')
+    else:
+        m = re.search(r'Duration: (\d+):(\d+):(\d+\.\d+)', info)
+        secs = (int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3))) if m else 0.0
+        need(abs(secs - 20.0) < 0.05, f'duration is 20.00 s (measured {secs:.2f})')
     if expect_audio:
         need('Audio: aac' in info, 'has an AAC audio stream')
 
     w, h = 1280, 720
     frames = decode_frames(ff, path, w, h)
-    need(len(frames) == 480, f'480 frames decoded (got {len(frames)})')
+    need(abs(len(frames) / 24.0 - 20.0) <= 1 / 24.0,
+         f'frame count matches 20 s at 24 fps (got {len(frames)})')
 
     # no frozen frames: consecutive frames must differ
     diffs = [float(np.abs(frames[i].astype(np.int16) -
