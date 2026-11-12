@@ -61,7 +61,22 @@ than a hand-kept table (that table drifted twice and stacked two inserts on one 
 reports overlapping candidate windows instead of aborting, and measures coverage as the
 union of verified windows. The current union is **796.0 s of 796.07 s**: the only
 uncovered frames are the last two, which carry no narration. There are no overlapping
-placements and no repeated source seconds (`.cache/audit_duplicates.py`).
+placements and no repeated source seconds (`audit_source_duplicates.py`).
+
+There are two separate repetition questions and they need two tools:
+
+- `audit_source_duplicates.py` — is any render shown twice? It reads `build_insert.py`,
+  applies the `seek` offsets and reports overlapping ranges per source file.
+- `audit_picture_repeats.py` — is any *picture* shown twice? Two different renders can
+  look the same, which is how the 30 s `environment` sequence survived several passes:
+  its first half WAS the stream render and its second half WAS the icing render, so it
+  replayed both shots that the cut already used. This samples segment frames from the
+  assembled reel and compares them. It found that one and one more (a coat-herd frame at
+  85 s that repeated the same render's opening at 365.83 s).
+
+Both are clean on the current cut: 0 repeated source seconds, and the only near-identical
+segment frames left are the cream entry frames of the paper plates, which share a
+template and are not a repeated shot.
 
 The island-seasons insert adds a low wind bed from the existing candidate recording;
 its provenance and the unverified master identity are recorded in
@@ -93,7 +108,7 @@ plates; the same warning is stated at the top of `../README.md`.
 the film can be watched end to end for the first time. It is a review artifact, not the
 final film and not picture lock.
 
-- 796.07 s, 23882 frames, 1280×720, 30 fps, −16.2 LUFS, −0.8 dBTP, 86.7 MB (CRF 23).
+- 796.07 s, 23882 frames, 1280×720, 30 fps, −16.2 LUFS, −0.8 dBTP, 82.0 MiB (CRF 23).
 - Every one of the 56 placed segments is verified before assembly: frame count, fps,
   narration offset, audio digest and file digest. An insert that fails is excluded.
 - Picture is concatenated from the verified workprints; audio is taken from the single
@@ -192,16 +207,16 @@ native picture doing the same narrative work, and both files are kept for compar
 
 ## Handing the reel over
 
-**Where the shipped file lives.** `deliverables/Last-Mammoths-Review-Reel-v8-720p.mp4`
+**Where the shipped file lives.** `deliverables/Last-Mammoths-Review-Reel-v9-720p.mp4`
 is force-added past the `deliverables/*.mp4` ignore rule (as this repository already does
-for its other finished cuts) and committed; its build report sits beside it. v8 supersedes
-the v7 reel, which stays in history and on the release page. Nothing else of this size is
-committed — the copy in `.cache/` is the working master.
+for its other finished cuts) and committed; its build report sits beside it. v9 supersedes
+the v8 and v7 reels, which stay in history and on the release page. Nothing else of this
+size is committed — the copy in `.cache/` is the working master.
 
 Direct download, pinned to the commit that added it:
 
 ```
-https://github.com/adil-chandio/Monarch.Overall.Work/raw/f2ddd97/deliverables/Last-Mammoths-Review-Reel-v8-720p.mp4
+https://github.com/adil-chandio/Monarch.Overall.Work/raw/f2ddd97/deliverables/Last-Mammoths-Review-Reel-v9-720p.mp4
 ```
 
 Why a git commit and not a release asset: the development sandbox cannot reach
@@ -213,8 +228,8 @@ release asset, but it cannot fetch from the sandbox preview either — that prev
 403 to an outside client.
 
 Verify a copy with:
-`sha256sum deliverables/Last-Mammoths-Review-Reel-v8-720p.mp4`
-→ `deee8881e913814108def5d742bce92edd526ef1429b8db627a36a2c8d2d91df`
+`sha256sum deliverables/Last-Mammoths-Review-Reel-v9-720p.mp4`
+→ `ef6448a5f6cfddf92a46ed4a92701d3ac0568b2c92ac39c0322f5ede67a17240`
 
 
 `edit/serve_review_reel.py` exists because `python -m http.server` answers a Range

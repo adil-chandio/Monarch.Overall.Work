@@ -1,0 +1,35 @@
+{
+  "status": "continuous review reel v9; NOT the final film, NOT picture lock; rig rights unresolved and no human continuous viewing yet",
+  "frames": 23882,
+  "seconds": 796.067,
+  "lufs": -16.2,
+  "true_peak_dbtp": -0.8,
+  "covered_seconds": 796.0,
+  "gap_count": 1,
+  "gaps_seconds": [
+    [
+      796.0,
+      796.07
+    ]
+  ],
+  "audio_source": "production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrack-draft/Narration-Score-DRAFT.m4a",
+  "audio_sha256": "434f2c344b428982edf8b00607b8361c4c45bec95da6ac5330c87428a45c3760",
+  "output_sha256": "ef6448a5f6cfddf92a46ed4a92701d3ac0568b2c92ac39c0322f5ede67a17240",
+  "note": "Gaps are labelled cards, not black. Audio is one continuous score; no section audio was mixed in. Not auditioned by a human.",
+  "deliverable": "deliverables/Last-Mammoths-Review-Reel-v9-720p.mp4",
+  "bytes": 85979548,
+  "sha256": "ef6448a5f6cfddf92a46ed4a92701d3ac0568b2c92ac39c0322f5ede67a17240",
+  "what_changed_from_v8": [
+    "withdrew the 30 s environment sequence: its first half WAS the stream render and its second half WAS the icing render, so it played both shots twice (354-369 and again 369-399)",
+    "the 354-365.83 sulfur/strontium passage now sits on the chemistry plate's own unused second half, which is that evidence",
+    "365.83-369 is a neutral cutaway rather than a repeated herd frame",
+    "85-86 moved from a coat-herd frame (which repeated the coat render's opening at 365.83) to the excavation's unused middle, a tusk in sediment",
+    "new audit: .cache/audit_picture_repeats.py compares segment entry frames in the REEL, because audit_duplicates.py only sees one render used twice, not two renders that look the same"
+  ],
+  "encode": {
+    "crf": 23,
+    "preset": "fast",
+    "pix_fmt": "yuv420p",
+    "audio": "aac 160k from the continuous narration/score draft"
+  }
+}

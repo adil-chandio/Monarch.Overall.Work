@@ -42,7 +42,7 @@ choices={
  'coat-section':('.cache/mammoth-coat-section/coat-section-motion-review-silent.mp4',None,250.0,720,1020),
  'genome-comparison':('.cache/mammoth-comparison-lab/comparison-lab-motion-review-silent.mp4',None,5182/30,270,600),
  'stream':('.cache/mammoth-stream-scene/stream-scene-motion-review-silent.mp4',None,383.,480,480),
- 'hypothesis':('.cache/mammoth-icing-hypothesis/icing-motion-review-silent.mp4','e2ed9b28d179b12d7e7d54d5be3bcbb782d61c6638df3f3c7f64cb75229f6040',369.,420),
+ 'hypothesis':('.cache/mammoth-icing-hypothesis/icing-motion-review-silent.mp4','e2ed9b28d179b12d7e7d54d5be3bcbb782d61c6638df3f3c7f64cb75229f6040',369.0,420,420),
  # The verdict needs one sustained landscape, not another montage of evidence.
  # 24 s, placed at 759.0 s under "a dramatic clue is not the same thing as a cause"
  # and the conservation/devastating-final-question lines; the closing crossing then
@@ -181,8 +181,15 @@ choices={
  # genome-gap 11-17, coverage 17-20).
  # Batch 2: the mid-length holes that still carried narration. Each slice comes from
  # native footage no other insert uses, so the audit stays at zero repeats.
- 'hole-join':('.cache/mammoth-coat-section/coat-section-motion-review-silent.mp4',None,85.0,30,1020),
+ 'hole-join':('.cache/mammoth-excavation/excavation-motion-review-silent.mp4',None,85.0,30,420),
  'hole-season-tail':('.cache/mammoth-coat-section/coat-section-motion-review-silent.mp4',None,351.8,66,1020),
+ # 354.0-365.83 is the sulfur/strontium passage. The chemistry plate's unused second half
+ # is literally that evidence, and the stream render is already fully spent at 383-399,
+ # so it cannot be used twice.
+ 'hole-water-chem':('.cache/mammoth-chemistry-section/chemistry-section-motion-review-silent.mp4',None,354.0,355,1470),
+ # 365.83-369.0 "an inference, not a directly tested glass of ancient water" - a neutral
+ # cutaway, making no claim, from the coat render's unused final generation.
+ 'hole-water-inference':('.cache/mammoth-coat-section/coat-section-motion-review-silent.mp4',None,10975/30,95,1020),
  'hole-record-tail':('.cache/mammoth-genome-gap/genome-gap-motion-review-silent.mp4',None,471.0,30,510),
  'hole-hold-open':('.cache/mammoth-ledger-section/ledger-section-motion-review-silent.mp4',None,539.0,30,2100),
  'hole-hold-close':('.cache/mammoth-ledger-section/ledger-section-motion-review-silent.mp4',None,625.0,6,2100),
@@ -207,13 +214,16 @@ seek={'island-thaw':4.0,'island-chapter-2':30.0,
       # Second batch: mid-length holes that still carried narration, each from native footage no
  # other insert uses (ledger 50-70, new-lead 16-37, chemistry 25.5+, coat 24-34,
  # genome-gap 11-17, coverage 17-20).
-      'hole-join':27.0,   # coat 27-28 s (insert holds 0-24)
+      'hole-join':300/30,  # excavation 10.0-11.0 s (archaeology holds 0-9.6)
       'hole-season-tail':24.0,
       'hole-record-tail':11.0,
       'hole-hold-open':50.0,
       'hole-hold-close':51.0,
       'hole-gap-open':16.0,
       'hole-extent-tail':18.0,
+      'hole-water-chem':35.4,     # chemistry 35.4-47.23 s (chemistry-section holds 0-25.5)
+      'hole-water-inference':28.0,# coat 28-31.17 s (insert holds 0-24, hole-join 27-28)
+      'hypothesis':0.0,         # icing render from frame 0, 369-383
       'hole-after-excavation':18.4, # coverage 18.4-18.8 s
       'hole-ask-human':28.0,      # chemistry 28-30.4 s (otherevidence holds 25.5-27.8)
       'hole-three-witnesses':30.4,# chemistry 30.4-35.4 s

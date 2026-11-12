@@ -70,10 +70,17 @@ The third pass cut all four remaining over-long runs with rendered picture that 
 existed but was not yet on screen: two disjoint excerpts of the island-approach render
 (170–172.7 and 181.7–187, where the 2017 cohort is described), the unused tail of
 island-years (187–192.7 and 278–280), the unused generations of the coat, chemistry,
-coverage, genome-gap, new-lead and ledger renders, and the first fifteen seconds of the
-environment sequence, which had been built as a candidate and then never placed. Each
-slice is disjoint from every other use of the same render; `.cache/audit_duplicates.py`
-reports **0 repeated source seconds**.
+coverage, genome-gap, new-lead and ledger renders, and the chemistry plate's own unused second half. Each slice is disjoint from every
+other use of the same render; `edit/audit_source_duplicates.py` reports **0 repeated
+source seconds**.
+
+A second, harder check came out of that pass: `edit/audit_picture_repeats.py` compares
+frames of the assembled reel, because two *different* renders can show the same thing.
+It caught the 30 s environment sequence, whose first half was the stream render and whose
+second half was the icing render — placing it had replayed two shots the cut already
+used — and a coat-herd frame at 85 s that repeated that render's own opening. The
+sequence is withdrawn; the 354–365.8 s sulfur/strontium passage now sits on the chemistry
+plate's unused half, which is literally that evidence.
 No plate was shortened and no plate was cut.
 
 **This is now within the stated limit, not merely improved.** No plate run exceeds 60 s.
