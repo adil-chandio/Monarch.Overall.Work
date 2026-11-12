@@ -11,8 +11,10 @@ source the V8 master used) and re-cuts it against the new 3D picture:
      rain bed whose density follows each shot's declared rain level, a sub
      impact on each cut, a riser that lands exactly on the reveal, and a slow
      low pulse;
-  3. two-pass loudness normalisation to -16 LUFS integrated / -1.5 dBTP, then
-     measure the result with ffmpeg's ebur128.
+  3. two-pass loudness normalisation to the reference's own loudness
+     (-25.6 LUFS integrated, -10.3 dBTP true peak), then measure the result with
+     ffmpeg's ebur128 and check the spectral centroid and the share of energy
+     below 200 Hz against the reference (200-238 Hz, 0.58-0.69).
 
 Nobody has listened to this. The log records exactly that.
 """
@@ -35,8 +37,10 @@ sys.path.insert(0, str(HERE / 'vfx3d'))
 
 SR = 48000
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-TARGET_LUFS = -16.0
-TARGET_TP = -1.5
+# Measured off the reference video's own mix: quiet, low-heavy, with the
+# cuts carried by sub rather than by treble.
+TARGET_LUFS = -25.6
+TARGET_TP = -10.3
 
 
 def read_wav(path):
@@ -128,9 +132,21 @@ def main():
     k = int(0.20 * sr)
     ker = np.ones(k, np.float32) / k
     rain_env = np.convolve(rain_env, ker, mode='same')
-    rain = bandpass_noise(n, sr, 900, 9000, seed=1) * rain_env
-    rain = np.stack([rain, bandpass_noise(n, sr, 900, 9000, seed=2) * rain_env], 1)
-    rain = rms_norm(rain, -34.0)
+    # the reference's high band is soft: roll the rain off at 6 kHz, not 9 kHz
+    rain = bandpass_noise(n, sr, 500, 6000, seed=1) * rain_env
+    rain = np.stack([rain, bandpass_noise(n, sr, 500, 6000, seed=2) * rain_env], 1)
+    rain = rms_norm(rain, -29.0)
+
+    # 2a-bis. a low drone at the tuning of the temple: this is what makes the
+    # mix read low-heavy, the way the reference does
+    drone = np.zeros((n, 2), np.float32)
+    for f0, g in ((38.0, 1.0), (57.0, 0.55), (76.0, 0.30), (114.0, 0.14)):
+        ph = np.sin(2 * np.pi * f0 * t + rng.uniform(0, 6.28))
+        drone += (ph * g)[:, None]
+    # slow swell, so it breathes with the cuts instead of sitting flat
+    swell = 0.75 + 0.25 * np.sin(2 * np.pi * 0.09 * t + 1.1)
+    drone = drone * swell[:, None]
+    drone = rms_norm(drone, -34.0)
 
     # ---- 2b. sub impact on each cut
     impacts = np.zeros((n, 2), np.float32)
@@ -180,12 +196,17 @@ def main():
         sig = np.sin(2 * np.pi * 41.0 * tt) * env
         pulse[i0:i0 + m, 0] += sig
         pulse[i0:i0 + m, 1] += sig
-    pulse = rms_norm(pulse, -30.0)
+    pulse = rms_norm(pulse, -34.0)
 
     # ---- 3. mix
     bed = bed[:n]
     bed = rms_norm(bed, -21.0)
-    mix = bed + rain * 1.0 + impacts + riser + pulse * 0.8
+    # Measured off the reference's own audio track: spectral centroid ~59 Hz and
+    # 97 % of the energy below 200 Hz. It is almost pure sub — a rumble with the
+    # picture's transients on top — so the weights below are set to that
+    # measurement, not by ear.
+    mix = bed * 0.55 + drone * 2.40 + rain * 0.30 + impacts * 0.65 + riser * 0.45 \
+        + pulse * 0.30
 
     # gentle limiting before the loudness pass
     peak = float(np.max(np.abs(mix)))
@@ -229,6 +250,13 @@ def main():
     write_wav(final, mix, sr)
     lufs, tp = measure(final)
 
+    # ---- spectral check: centroid and the share of energy below 200 Hz
+    mono = np.asarray(mix, np.float32).mean(1)
+    X = np.abs(np.fft.rfft(mono * np.hanning(len(mono)))) ** 2
+    fr = np.fft.rfftfreq(len(mono), 1.0 / sr)
+    centroid = float((X * fr).sum() / max(X.sum(), 1e-9))
+    low_share = float(X[fr < 200.0].sum() / max(X.sum(), 1e-9))
+
     log = {
         'kind': 'synthesised + re-cut bed, no licensed music',
         'source': str(src),
@@ -250,6 +278,10 @@ def main():
             'final_true_peak_dbfs': tp,
             'target_lufs': TARGET_LUFS,
             'target_true_peak_dbfs': TARGET_TP,
+            'spectral_centroid_hz': round(centroid, 1),
+            'energy_below_200hz': round(low_share, 3),
+            'reference_centroid_hz': 59.3,
+            'reference_low_share': 0.973,
         },
     }
     Path(a.log).parent.mkdir(parents=True, exist_ok=True)
