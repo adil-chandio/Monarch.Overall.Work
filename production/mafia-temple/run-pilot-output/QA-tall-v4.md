@@ -1,0 +1,3 @@
+# Likeness-guided running take — research QA, not final
+
+24 frames at 24 fps, 576×1024 (520.3 seconds inference) from a new generated likeness-guided reference. Body framing stays within the image, and the start frame's sleeve is darker than v2. However, the initial shoe/ground has detached artifacts, the forearm and hands merge into an unnatural flesh-colored bar around frames 9–12, the face remains approximate, and foot contact is inconsistent. This is a one-second test, not a three-second shot, and it fails final QA. The source reference image was not publicly uploaded; the generated keyframe is allowed. Model and driver terms remain unresolved.

@@ -1,0 +1,5 @@
+# Likeness-guided head-turn v4 — research QA, not final
+
+The 96-frame, 24 fps, 1280×714 turn ran successfully (55.7 s inference). The source is the generated `shot-05-identity-study-b.jpg`, not the private original. A 13-frame contact sheet shows a turn from three-quarter view toward camera followed by a slight smile. A local, pose-dependent face-descriptor sanity check on the final sampled frame was closer to the private reference than prior generated close-ups; this is not identity verification or a substitute for visual approval.
+
+The body and background remain static, facial movement and teeth show some synthetic deformation, and the gaze is effectively held; this is not yet a natural performance. A locally generated iris-glow pass was inspected across all 35 frames where the effect begins and is visible: it tracks the eyes but reads as flat red dots rather than physically integrated illumination. It is not a finished effect. The video has no sound and does not resolve other scenes' motion, hands, foot contact or continuity. Driver/model rights remain unresolved. Do not present this as the finished film.

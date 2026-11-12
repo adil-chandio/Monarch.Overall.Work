@@ -1,0 +1,3 @@
+# Likeness-anchored head-turn v3 — research QA, not final
+
+96 frames/24 fps, 1280×536, generated from a new keyframe guided by the approved generated scene and the privately supplied reference sheet. The source photograph was not uploaded to the public branch. A sampled contact sheet shows the head turning toward camera and a late smile; the new identity is still an approximation rather than verified likeness. Lips/teeth deform subtly, the body and background stay static, and the broad crop differs from the 16:9 film. Bloom and texture-preserving red-eye tests track the eyes but are visibly synthetic and need artistic review. Model and driver rights remain unresolved. Do not present as a finished shot.

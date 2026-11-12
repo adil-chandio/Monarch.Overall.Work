@@ -1,0 +1,768 @@
+{
+ "tool": "qc/measure_shots.py",
+ "note": "Decoded-pixel engineering metrics only. Not creative acceptance.",
+ "clips": [
+  {
+   "file": "s01.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 0.1997,
+   "motion_mad_min": 0.1219,
+   "motion_mad_p05": 0.1458,
+   "motion_mad_max": 0.2838,
+   "frozen_pairs": 43,
+   "frozen_runs": [
+    [
+     1,
+     7
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     17,
+     29
+    ]
+   ],
+   "frozen_run_max": 29,
+   "luma_mean": 32.94,
+   "luma_std_over_time": 0.087,
+   "luma_flicker_max_step": 0.099,
+   "sharpness_mean": 198.62,
+   "sharpness_min": 186.46,
+   "dark_frames": 0
+  },
+  {
+   "file": "s01a.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 0.2016,
+   "motion_mad_min": 0.1114,
+   "motion_mad_p05": 0.1391,
+   "motion_mad_max": 0.329,
+   "frozen_pairs": 44,
+   "frozen_runs": [
+    [
+     0,
+     4
+    ],
+    [
+     6,
+     10
+    ],
+    [
+     17,
+     7
+    ],
+    [
+     25,
+     23
+    ]
+   ],
+   "frozen_run_max": 23,
+   "luma_mean": 32.31,
+   "luma_std_over_time": 0.081,
+   "luma_flicker_max_step": 0.149,
+   "sharpness_mean": 182.82,
+   "sharpness_min": 174.29,
+   "dark_frames": 0
+  },
+  {
+   "file": "s01b.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 1.3079,
+   "motion_mad_min": 0.8444,
+   "motion_mad_p05": 0.9366,
+   "motion_mad_max": 1.9259,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 33.43,
+   "luma_std_over_time": 0.405,
+   "luma_flicker_max_step": 0.297,
+   "sharpness_mean": 119.7,
+   "sharpness_min": 89.94,
+   "dark_frames": 0
+  },
+  {
+   "file": "s02.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 0.2359,
+   "motion_mad_min": 0.0757,
+   "motion_mad_p05": 0.1019,
+   "motion_mad_max": 0.3783,
+   "frozen_pairs": 24,
+   "frozen_runs": [
+    [
+     0,
+     4
+    ],
+    [
+     6,
+     10
+    ],
+    [
+     17,
+     1
+    ],
+    [
+     19,
+     5
+    ],
+    [
+     40,
+     4
+    ]
+   ],
+   "frozen_run_max": 10,
+   "luma_mean": 25.07,
+   "luma_std_over_time": 0.123,
+   "luma_flicker_max_step": 0.239,
+   "sharpness_mean": 301.13,
+   "sharpness_min": 267.99,
+   "dark_frames": 0
+  },
+  {
+   "file": "s03.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 1.3867,
+   "motion_mad_min": 1.1226,
+   "motion_mad_p05": 1.2113,
+   "motion_mad_max": 1.7403,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 35.05,
+   "luma_std_over_time": 0.426,
+   "luma_flicker_max_step": 0.469,
+   "sharpness_mean": 542.25,
+   "sharpness_min": 471.83,
+   "dark_frames": 0
+  },
+  {
+   "file": "s04.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 8.1062,
+   "motion_mad_min": 6.9476,
+   "motion_mad_p05": 7.3661,
+   "motion_mad_max": 9.1371,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 41.13,
+   "luma_std_over_time": 4.142,
+   "luma_flicker_max_step": 1.236,
+   "sharpness_mean": 78.38,
+   "sharpness_min": 49.53,
+   "dark_frames": 0
+  },
+  {
+   "file": "s05a.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 0.6776,
+   "motion_mad_min": 0.1713,
+   "motion_mad_p05": 0.191,
+   "motion_mad_max": 1.2281,
+   "frozen_pairs": 9,
+   "frozen_runs": [
+    [
+     1,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     9,
+     3
+    ]
+   ],
+   "frozen_run_max": 3,
+   "luma_mean": 24.32,
+   "luma_std_over_time": 1.036,
+   "luma_flicker_max_step": 0.237,
+   "sharpness_mean": 16.29,
+   "sharpness_min": 11.11,
+   "dark_frames": 0
+  },
+  {
+   "file": "s05b.mp4",
+   "width": 768,
+   "height": 448,
+   "frames": 49,
+   "fps": 24,
+   "seconds": 2.042,
+   "motion_mad_mean": 0.1498,
+   "motion_mad_min": 0.0443,
+   "motion_mad_p05": 0.0527,
+   "motion_mad_max": 0.3422,
+   "frozen_pairs": 41,
+   "frozen_runs": [
+    [
+     1,
+     3
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     14,
+     1
+    ],
+    [
+     17,
+     29
+    ],
+    [
+     47,
+     1
+    ]
+   ],
+   "frozen_run_max": 29,
+   "luma_mean": 24.29,
+   "luma_std_over_time": 0.146,
+   "luma_flicker_max_step": 0.114,
+   "sharpness_mean": 15.03,
+   "sharpness_min": 12.39,
+   "dark_frames": 0
+  },
+  {
+   "file": "v2faceA.mp4",
+   "width": 576,
+   "height": 320,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 0.4614,
+   "motion_mad_min": 0.1632,
+   "motion_mad_p05": 0.1882,
+   "motion_mad_max": 1.3363,
+   "frozen_pairs": 16,
+   "frozen_runs": [
+    [
+     18,
+     2
+    ],
+    [
+     34,
+     1
+    ],
+    [
+     45,
+     3
+    ],
+    [
+     53,
+     3
+    ],
+    [
+     57,
+     7
+    ]
+   ],
+   "frozen_run_max": 7,
+   "luma_mean": 19.21,
+   "luma_std_over_time": 0.163,
+   "luma_flicker_max_step": 0.131,
+   "sharpness_mean": 70.16,
+   "sharpness_min": 54.81,
+   "dark_frames": 0
+  },
+  {
+   "file": "v2faceB.mp4",
+   "width": 576,
+   "height": 320,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 0.4957,
+   "motion_mad_min": 0.1066,
+   "motion_mad_p05": 0.1436,
+   "motion_mad_max": 0.8845,
+   "frozen_pairs": 25,
+   "frozen_runs": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     17,
+     9
+    ],
+    [
+     27,
+     3
+    ]
+   ],
+   "frozen_run_max": 9,
+   "luma_mean": 18.53,
+   "luma_std_over_time": 0.343,
+   "luma_flicker_max_step": 0.53,
+   "sharpness_mean": 65.48,
+   "sharpness_min": 48.34,
+   "dark_frames": 0
+  },
+  {
+   "file": "v2runA.mp4",
+   "width": 640,
+   "height": 384,
+   "frames": 73,
+   "fps": 24,
+   "seconds": 3.042,
+   "motion_mad_mean": 5.075,
+   "motion_mad_min": 3.3591,
+   "motion_mad_p05": 3.685,
+   "motion_mad_max": 8.5341,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 32.72,
+   "luma_std_over_time": 7.093,
+   "luma_flicker_max_step": 0.912,
+   "sharpness_mean": 80.67,
+   "sharpness_min": 40.46,
+   "dark_frames": 0
+  },
+  {
+   "file": "v2runB.mp4",
+   "width": 640,
+   "height": 384,
+   "frames": 73,
+   "fps": 24,
+   "seconds": 3.042,
+   "motion_mad_mean": 0.2088,
+   "motion_mad_min": 0.0846,
+   "motion_mad_p05": 0.0945,
+   "motion_mad_max": 0.3682,
+   "frozen_pairs": 47,
+   "frozen_runs": [
+    [
+     1,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     10,
+     2
+    ],
+    [
+     13,
+     3
+    ],
+    [
+     18,
+     4
+    ],
+    [
+     23,
+     3
+    ],
+    [
+     28,
+     4
+    ],
+    [
+     33,
+     1
+    ]
+   ],
+   "frozen_run_max": 14,
+   "luma_mean": 48.68,
+   "luma_std_over_time": 0.262,
+   "luma_flicker_max_step": 0.185,
+   "sharpness_mean": 300.89,
+   "sharpness_min": 275.19,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan-face-pilot.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 65,
+   "fps": 24,
+   "seconds": 2.708,
+   "motion_mad_mean": 4.4943,
+   "motion_mad_min": 0.9057,
+   "motion_mad_p05": 1.367,
+   "motion_mad_max": 8.5424,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 19.29,
+   "luma_std_over_time": 0.756,
+   "luma_flicker_max_step": 1.19,
+   "sharpness_mean": 94.26,
+   "sharpness_min": 57.44,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan3-aerial.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 10.1413,
+   "motion_mad_min": 1.2762,
+   "motion_mad_p05": 3.1649,
+   "motion_mad_max": 19.553,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 49.18,
+   "luma_std_over_time": 10.288,
+   "luma_flicker_max_step": 2.759,
+   "sharpness_mean": 1132.07,
+   "sharpness_min": 432.25,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan3-face.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 2.8594,
+   "motion_mad_min": 0.1686,
+   "motion_mad_p05": 0.311,
+   "motion_mad_max": 22.7197,
+   "frozen_pairs": 3,
+   "frozen_runs": [
+    [
+     3,
+     1
+    ],
+    [
+     35,
+     1
+    ],
+    [
+     78,
+     1
+    ]
+   ],
+   "frozen_run_max": 1,
+   "luma_mean": 28.14,
+   "luma_std_over_time": 1.911,
+   "luma_flicker_max_step": 2.824,
+   "sharpness_mean": 59.16,
+   "sharpness_min": 39.94,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan3-gate.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 121,
+   "fps": 24,
+   "seconds": 5.042,
+   "motion_mad_mean": 0.887,
+   "motion_mad_min": 0.1479,
+   "motion_mad_p05": 0.253,
+   "motion_mad_max": 4.4973,
+   "frozen_pairs": 6,
+   "frozen_runs": [
+    [
+     6,
+     2
+    ],
+    [
+     51,
+     1
+    ],
+    [
+     63,
+     1
+    ],
+    [
+     99,
+     1
+    ],
+    [
+     107,
+     1
+    ]
+   ],
+   "frozen_run_max": 2,
+   "luma_mean": 13.27,
+   "luma_std_over_time": 4.521,
+   "luma_flicker_max_step": 3.731,
+   "sharpness_mean": 85.6,
+   "sharpness_min": 21.2,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan3-running.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 73,
+   "fps": 24,
+   "seconds": 3.042,
+   "motion_mad_mean": 9.6477,
+   "motion_mad_min": 6.9895,
+   "motion_mad_p05": 7.4309,
+   "motion_mad_max": 12.2973,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 27.76,
+   "luma_std_over_time": 8.927,
+   "luma_flicker_max_step": 2.552,
+   "sharpness_mean": 298.82,
+   "sharpness_min": 140.05,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan3-street.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 2.2399,
+   "motion_mad_min": 0.138,
+   "motion_mad_p05": 0.2882,
+   "motion_mad_max": 15.5937,
+   "frozen_pairs": 5,
+   "frozen_runs": [
+    [
+     58,
+     2
+    ],
+    [
+     69,
+     3
+    ]
+   ],
+   "frozen_run_max": 3,
+   "luma_mean": 9.99,
+   "luma_std_over_time": 9.323,
+   "luma_flicker_max_step": 15.421,
+   "sharpness_mean": 84.89,
+   "sharpness_min": 1.28,
+   "dark_frames": 54
+  },
+  {
+   "file": "wan4-aerial.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 4.801,
+   "motion_mad_min": 1.0727,
+   "motion_mad_p05": 1.5506,
+   "motion_mad_max": 19.9095,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 48.28,
+   "luma_std_over_time": 9.665,
+   "luma_flicker_max_step": 18.363,
+   "sharpness_mean": 582.79,
+   "sharpness_min": 364.33,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan4-face-a.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 3.2574,
+   "motion_mad_min": 0.308,
+   "motion_mad_p05": 0.5807,
+   "motion_mad_max": 9.8365,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 26.08,
+   "luma_std_over_time": 1.213,
+   "luma_flicker_max_step": 1.246,
+   "sharpness_mean": 37.47,
+   "sharpness_min": 28.62,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan4-face-b.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 5.0105,
+   "motion_mad_min": 0.3257,
+   "motion_mad_p05": 0.6572,
+   "motion_mad_max": 17.2265,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 37.13,
+   "luma_std_over_time": 6.925,
+   "luma_flicker_max_step": 10.466,
+   "sharpness_mean": 44.49,
+   "sharpness_min": 32.37,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan4-gate.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 121,
+   "fps": 24,
+   "seconds": 5.042,
+   "motion_mad_mean": 5.2736,
+   "motion_mad_min": 0.8306,
+   "motion_mad_p05": 1.3386,
+   "motion_mad_max": 10.7189,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 28.45,
+   "luma_std_over_time": 0.998,
+   "luma_flicker_max_step": 2.269,
+   "sharpness_mean": 313.47,
+   "sharpness_min": 203.22,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan4-running-a.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 73,
+   "fps": 24,
+   "seconds": 3.042,
+   "motion_mad_mean": 16.7823,
+   "motion_mad_min": 0.8909,
+   "motion_mad_p05": 1.3502,
+   "motion_mad_max": 50.8061,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 48.99,
+   "luma_std_over_time": 13.404,
+   "luma_flicker_max_step": 48.181,
+   "sharpness_mean": 426.42,
+   "sharpness_min": 240.36,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan4-running-b.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 73,
+   "fps": 24,
+   "seconds": 3.042,
+   "motion_mad_mean": 10.3393,
+   "motion_mad_min": 0.6148,
+   "motion_mad_p05": 0.8837,
+   "motion_mad_max": 24.01,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 36.23,
+   "luma_std_over_time": 5.907,
+   "luma_flicker_max_step": 7.594,
+   "sharpness_mean": 599.04,
+   "sharpness_min": 135.84,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan4-street-a.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 4.5364,
+   "motion_mad_min": 0.4651,
+   "motion_mad_p05": 1.197,
+   "motion_mad_max": 10.0053,
+   "frozen_pairs": 0,
+   "frozen_runs": [],
+   "frozen_run_max": 0,
+   "luma_mean": 31.28,
+   "luma_std_over_time": 2.21,
+   "luma_flicker_max_step": 4.773,
+   "sharpness_mean": 350.3,
+   "sharpness_min": 197.29,
+   "dark_frames": 0
+  },
+  {
+   "file": "wan4-street-b.mp4",
+   "width": 512,
+   "height": 288,
+   "frames": 97,
+   "fps": 24,
+   "seconds": 4.042,
+   "motion_mad_mean": 2.2184,
+   "motion_mad_min": 0.1365,
+   "motion_mad_p05": 0.5307,
+   "motion_mad_max": 6.5557,
+   "frozen_pairs": 3,
+   "frozen_runs": [
+    [
+     22,
+     2
+    ],
+    [
+     75,
+     1
+    ]
+   ],
+   "frozen_run_max": 2,
+   "luma_mean": 31.49,
+   "luma_std_over_time": 1.391,
+   "luma_flicker_max_step": 1.941,
+   "sharpness_mean": 145.7,
+   "sharpness_min": 88.27,
+   "dark_frames": 0
+  }
+ ]
+}

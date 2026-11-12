@@ -1,0 +1,73 @@
+{
+  "log_received": true,
+  "exception_classes": [
+    "CalledProcessError",
+    "PapermillExecutionError"
+  ],
+  "flags": {
+    "out_of_memory": false,
+    "disk_full": false,
+    "missing_module": false,
+    "dtype": false,
+    "network": false,
+    "invalid_model": false,
+    "gpu": false,
+    "model_loaded": false,
+    "inference_started": false,
+    "killed": false
+  },
+  "last_diagnostic_lines": [
+    "PapermillExecutionError",
+    "CalledProcessError"
+  ],
+  "log_chars": 11066,
+  "completed_stages": [],
+  "nonfinite_embeddings": false,
+  "safe_failure_messages": [
+    ",{\"stream_name\":\"stderr\",\"time\":235.765494963,\"data\":\"Exception encountered at \\\"In [1]\\\":\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765509047,\"data\":\"CalledProcessError                        Traceback (most recent call last)\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765602192,\"data\":\"--\\u003e 578             raise CalledProcessError(retcode, process.args,\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765616186,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'tyro==0.8.5', 'pykalma"
+  ],
+  "pip_errors": [
+    ",{\"stream_name\":\"stderr\",\"time\":234.33463594,\"data\":\"  error: subprocess-exited-with-error\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.33515042,\"data\":\"  ERROR: Failed building wheel for onnx\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.436610076,\"data\":\"error: failed-wheel-build-for-install\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541386865,\"data\":\"  error: subprocess-exited-with-error\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541450199,\"data\":\"  ERROR: Failed building wheel for onnx\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541466151,\"data\":\"error: failed-wheel-build-for-install\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.54148356,\"data\":\"  error: subprocess-exited-with-error\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.541507865,\"data\":\"  ERROR: Failed building wheel for onnx\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":234.54151088,\"data\":\"error: failed-wheel-build-for-install\\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765487317,\"data\":\"papermill.exceptions.PapermillExecutionError: \\n\"}",
+    ",{\"stream_name\":\"stderr\",\"time\":235.765616186,\"data\":\"CalledProcessError: Command '['<path> '-m', 'pip', 'install', '-q', 'numpy\\u003c2', 'onnxruntime==1.20.1', 'onnx==1.16.1', 'tyro==0.8.5', 'pykalman==0.9.7', 'rich', 'scikit-image', 'imag"
+  ],
+  "runtime_error_messages": [],
+  "frame_sources": [
+    [
+      "validator.py",
+      "434"
+    ],
+    [
+      "mistune.py",
+      "435"
+    ],
+    [
+      "filter_links.py",
+      "36"
+    ]
+  ],
+  "traceback_functions": [
+    "execute_notebook",
+    "raise_for_execution_errors"
+  ],
+  "known_stages": {
+    "vae_decode": false,
+    "vae_encode": false,
+    "attention": false,
+    "text_encoder": false,
+    "pipeline_loading": false,
+    "denoise": false,
+    "tiling": false
+  }
+}

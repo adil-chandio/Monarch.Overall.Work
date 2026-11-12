@@ -1,0 +1,96 @@
+{
+  "job_id": "monarch-mafia-temple-20s",
+  "width": 768,
+  "height": 448,
+  "frames": 49,
+  "fps": 24,
+  "steps": 28,
+  "style": "cinematic realistic film, natural continuous motion, high detail, low key night photography, soft haze, consistent appearance",
+  "negative": "cartoon, animation, blurry, text, letters, logo, watermark, duplicate person, duplicate limbs, distorted face, melting, morphing, jitter, camera shake, overexposed",
+  "scenes": [
+    {
+      "id": "s01",
+      "image": "production/mafia-temple/keyframes/shot-01.jpg",
+      "seed": 123,
+      "prompt": "A single man in a black suit is walking steadily away from the camera down a wet Japanese street at night. His legs take natural alternating steps and his arms swing gently. Camera tracks smoothly low behind him. Fog drifts gently and distant city lights shimmer. Maintain the same man, face not visible, no changes in body or clothing."
+    },
+    {
+      "id": "s02",
+      "image": "production/mafia-temple/keyframes/shot-02.jpg",
+      "seed": 236,
+      "prompt": "A locked-off static wide shot of the Japanese temple gate at night. Thin ground fog slowly rolls across the stone pathway and lantern lights gently flicker, while gate architecture and camera remain completely still. No people."
+    },
+    {
+      "id": "s03",
+      "image": "production/mafia-temple/keyframes/shot-03.jpg",
+      "seed": 349,
+      "prompt": "A continuous smooth aerial drone descent toward the temple compound at night, top down crane camera steadily moving closer. One small black suited man on the courtyard path remains consistent, mist drifting lightly, buildings remain architecturally stable."
+    },
+    {
+      "id": "s04",
+      "image": "production/mafia-temple/keyframes/shot-04.jpg",
+      "seed": 462,
+      "prompt": "The man in a black suit runs quickly to the right with natural realistic alternating leg strides and moving arms. The camera tracks his motion smoothly across the stone temple courtyard. Natural human anatomy, his black hair and jacket move slightly with the running. Same face, same outfit."
+    },
+    {
+      "id": "s05a",
+      "image": "production/mafia-temple/keyframes/shot-05a.jpg",
+      "seed": 575,
+      "prompt": "The black suited man slowly and naturally turns his head from looking left toward the camera, realistic continuous neck and face movement, black hair shifting slightly. His expression becomes intensely threatening. Keep his exact face, beard and suit unchanged, cinematic shadows."
+    },
+    {
+      "id": "s05b",
+      "image": "production/mafia-temple/keyframes/shot-05b.jpg",
+      "seed": 688,
+      "prompt": "Close-up of the same black suited man staring directly into camera, his eyes glow a deep supernatural red and he makes a subtle sinister smile. Realistic small facial movement, slight forward camera push, keep face, hair and anatomy unchanged."
+    },
+    {
+      "id": "s01a",
+      "image": "production/mafia-temple/keyframes/shot-01.jpg",
+      "seed": 781,
+      "prompt": "A rear view of a man WALKING FORWARD AWAY FROM CAMERA down the street. Clearly visible natural alternating footfalls: his left leg steps forward, then his right leg steps forward, one foot leaves the wet ground on each step. His arms swing in rhythm. His body moves forward continuously as the low camera tracks behind him. Preserve the black suit and anatomy, no frozen legs."
+    },
+    {
+      "id": "s01b",
+      "image": "production/mafia-temple/keyframes/shot-01.jpg",
+      "seed": 2197,
+      "prompt": "Low-angle follow shot. The suited man takes multiple distinct steps walking away into the futuristic street, camera glides forward behind him. His feet lift off and contact the wet stones in a natural walking gait and his arms gently swing. Wet reflections and fog move subtly. Maintain one realistic man, no change in clothing or anatomy."
+    },
+    {
+      "id": "v2runA",
+      "image": "production/mafia-temple/keyframes/shot-04.jpg",
+      "seed": 2389,
+      "frames": 73,
+      "prompt": "A single continuous tracking shot follows the same man in a black tailored suit running from left to right across a temple courtyard at night. His arms and legs move with a realistic alternating running gait, one foot contacts the stone while the other foot leaves the ground. Camera tracks him at the same speed, keeping his full body visible. His dark hair and face remain the same throughout; one person only. Smooth natural motion.",
+      "width": 640,
+      "height": 384
+    },
+    {
+      "id": "v2runB",
+      "image": "production/mafia-temple/keyframes/shot-04.jpg",
+      "seed": 6723,
+      "frames": 73,
+      "prompt": "Side view, the dark-haired bearded man in a black suit runs rightward in a continuous natural sprint through the Japanese temple courtyard. His legs alternate with clear strides and his arms swing in opposition. The camera smoothly tracks him at a matching speed while preserving realistic proportions and the same face, hair, and clothing. Only one person; no added limbs or duplicates.",
+      "width": 640,
+      "height": 384
+    },
+    {
+      "id": "v2faceA",
+      "image": "production/mafia-temple/keyframes/v2-close-start.png",
+      "seed": 3419,
+      "frames": 97,
+      "prompt": "One continuous cinematic close-up in a dark Japanese temple. The man subtly turns his head to face the camera, maintaining exactly the same facial structure, hair, beard and black suit. His eyes look directly toward the viewer and gradually glow deep red, then he makes a subtle menacing smile. Natural continuous movement. Fixed stable camera and background, no cuts, no morphing, no change of identity.",
+      "width": 576,
+      "height": 320
+    },
+    {
+      "id": "v2faceB",
+      "image": "production/mafia-temple/keyframes/v2-close-start.png",
+      "seed": 741,
+      "frames": 97,
+      "prompt": "A realistic continuous close-up of a bearded dark-haired man in a black suit. He gently turns toward the camera and holds a cold direct gaze, his eyes subtly glowing red as a restrained sinister smile appears. Camera and temple background remain still; preserve the exact facial identity, skin, beard, hair and clothing throughout. Natural small head motion, no cuts, no duplicates.",
+      "width": 576,
+      "height": 320
+    }
+  ]
+}
