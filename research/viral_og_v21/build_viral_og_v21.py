@@ -349,20 +349,29 @@ def cap_attempt(vid):
 def main():
     t0 = time.time()
     idx = json.loads((OUT / "drive_swipe_index.json").read_text())
+    cache_file = OUT / "channel_cache_v21.json"
+    cache = json.loads(cache_file.read_text()) if cache_file.exists() else {}
     resolved, unresolved = {}, []
     for name, c in idx["channels"].items():
-        it, how = with_backoff(resolve_channel, c.get("handle"), name)
-        if it:
-            b = chan_brief(it)
-            b["resolved_by"] = how
-            b["screenshot_name"] = name
-            b["screenshot_subs"] = c.get("subs")
-            b["screenshot_videos"] = c.get("video_count")
-            b["cluster"] = c.get("cluster")
-            resolved[name] = b
+        b = cache.get(name)
+        if b:
+            b = dict(b)
         else:
-            unresolved.append({"screenshot_name": name, "handle": c.get("handle"), "why": how})
-        pause(0.8)
+            it, how = with_backoff(resolve_channel, c.get("handle"), name)
+            b = chan_brief(it) if it else None
+            if b:
+                b["resolved_by"] = how
+            else:
+                unresolved.append({"screenshot_name": name, "handle": c.get("handle"), "why": how})
+                pause(2)
+                continue
+            pause(1.5)
+        b["screenshot_name"] = name
+        b["screenshot_subs"] = c.get("subs")
+        b["screenshot_videos"] = c.get("video_count")
+        b["cluster"] = c.get("cluster")
+        b.setdefault("age_days", 0)
+        resolved[name] = b
     log(f"resolved {len(resolved)}/{len(idx['channels'])} screenshot channels; unresolved {len(unresolved)}")
 
     catalogue, catalogue_rows, audit = {}, [], []

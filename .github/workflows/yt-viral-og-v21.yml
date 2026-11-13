@@ -45,6 +45,9 @@ jobs:
           python -m pip install --quiet --upgrade pip
           python -m pip install --quiet numpy pillow
 
+      - name: V21 resolve channels once (cached; search only on miss)
+        run: python research/viral_og_v21/resolve_v21.py
+
       - name: V21 viral OG forensic
         run: python research/viral_og_v21/build_viral_og_v21.py
 
@@ -87,8 +90,8 @@ jobs:
           assert run['key_present'] is True
           assert run['secret_value_printed_or_stored'] is False
           assert run['screenshot_channels'] >= 30, run['screenshot_channels']
-          assert run['resolved_channels'] >= 20, run['resolved_channels']
-          assert run['identity_verified_channels'] >= 15, run['identity_verified_channels']
+          assert run['resolved_channels'] >= 28, run['resolved_channels']
+          assert run['identity_verified_channels'] >= 22, run['identity_verified_channels']
           assert run['catalogue_videos'] >= 500, run['catalogue_videos']
           assert run['lanes'] == 16, run['lanes']
           assert run['unique_videos'] >= 800, run['unique_videos']
