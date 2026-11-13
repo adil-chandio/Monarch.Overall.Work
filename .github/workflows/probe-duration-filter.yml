@@ -1,0 +1,45 @@
+name: probe duration filter
+on:
+  push:
+    paths: [ "probe-duration-trigger.txt" ]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Probe
+        run: |
+          set -o pipefail
+          mkdir -p research/viral_og_v21/api_evidence
+          python - <<'PY' 2>&1 | tee research/viral_og_v21/api_evidence/probe_duration_filter.log
+          import sys, json, statistics
+          sys.path.insert(0, ".")
+          from research.viral_og_v21 import discovery_v21 as d
+          Q = "what did ancient humans do all day animation"
+          for b in (None, "short", "medium", "long"):
+              try:
+                  rows = d.inner_search(Q, pages=1, duration=b)
+              except Exception as e:
+                  print(b, "ERR", repr(e)[:120]); continue
+              secs = [r["duration_seconds_hint"] for r in rows if r["duration_seconds_hint"]]
+              lens = [r["length_text"] for r in rows[:6]]
+              print(f"{str(b):6s} n={len(rows):3d} ids={[r['id'] for r in rows[:3]]} "
+                    f"secs_med={int(statistics.median(secs)) if secs else None} min={min(secs) if secs else None} "
+                    f"max={max(secs) if secs else None} lengths={lens}")
+          print("distinct id counts:")
+          sets = {b: set(r["id"] for r in d.inner_search(Q, 1, b)) for b in (None, "short", "medium", "long")}
+          print({b: len(v) for b, v in sets.items()}, "short&long overlap:", len(sets["short"] & sets["long"]))
+          PY
+      - name: Commit log
+        if: always()
+        run: |
+          git config user.name "monarch-forensic-bot"
+          git config user.email "forensic-bot@users.noreply.github.com"
+          git add research/viral_og_v21/api_evidence/probe_duration_filter.log
+          git commit -m "chore(v21): duration-filter probe log [skip ci]" || true
+          git push origin HEAD:arena/2b012328-monarch-overall-work || true

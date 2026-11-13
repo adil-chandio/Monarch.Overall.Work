@@ -49,9 +49,13 @@ def sp_param(duration: str | None = None) -> str:
     """sp protobuf: field1 sortBy (3 = view count), field2 type (1 = video),
     field3 duration (1 = <4 min, 2 = >20 min, 3 = 4-20 min). Built by hand so we
     do not guess base64 strings."""
-    body = b"\x08" + _varint(3) + b"\x12\x02\x10\x01"
+    # field2 is the filters sub-message; duration lives INSIDE it (field3). Appending
+    # duration at the top level silently does nothing - that bug made short and long lanes
+    # return identical rows in run 43380197994.
+    filters = b"\x10\x01"
     if duration in ("short", "medium", "long"):
-        body += b"\x18" + _varint({"short": 1, "long": 2, "medium": 3}[duration])
+        filters += b"\x18" + _varint({"short": 1, "long": 2, "medium": 3}[duration])
+    body = b"\x08" + _varint(3) + b"\x12" + _varint(len(filters)) + filters
     return base64.urlsafe_b64encode(body).decode().rstrip("=")
 
 
