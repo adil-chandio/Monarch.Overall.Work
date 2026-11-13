@@ -248,6 +248,10 @@ def unit_to_px(lines, bbox, flip=False):
         pts = []
         for (ux, uy) in ln:
             ux2 = (1 - ux) if flip else ux
+            # clamp: a detail that runs slightly past the unit box must not produce
+            # an inverted ellipse box when the caller's bbox starts off-screen
+            ux2 = max(0.0, min(1.0, ux2))
+            uy = max(0.0, min(1.0, uy))
             pts.append((x0 + ux2 * w, y0 + uy * h))
         out.append(pts)
     return out
@@ -290,3 +294,230 @@ HUMPBACK_MOUTH = [
 ]
 
 HUMPBACK_EYE = (0.075, 0.455)
+
+
+# ---------------------------------------------------------------------------
+# Blue whale — the animal the orcas are afraid of. Long, flat-backed, small dorsal
+# set far back, wide flat rostrum. The reference draws it almost as a slab, and
+# that is right: a blue whale has no waist.
+# ---------------------------------------------------------------------------
+BLUE_WHALE = [
+    ("M", 0.008, 0.520),
+    ("C", 0.030, 0.430, 0.085, 0.372, 0.160, 0.352),
+    ("C", 0.300, 0.318, 0.470, 0.315, 0.620, 0.330),
+    ("C", 0.700, 0.338, 0.760, 0.352, 0.800, 0.368),
+    ("C", 0.826, 0.352, 0.846, 0.320, 0.862, 0.300),
+    ("C", 0.872, 0.318, 0.878, 0.352, 0.876, 0.386),
+    ("C", 0.912, 0.400, 0.948, 0.412, 0.978, 0.434),
+    ("C", 0.960, 0.470, 0.938, 0.500, 0.906, 0.514),
+    ("C", 0.880, 0.560, 0.862, 0.600, 0.836, 0.628),
+    ("C", 0.780, 0.640, 0.700, 0.648, 0.610, 0.650),
+    ("C", 0.470, 0.655, 0.320, 0.652, 0.210, 0.634),
+    ("C", 0.140, 0.622, 0.075, 0.586, 0.008, 0.520),
+    ("Z",),
+]
+
+BLUE_WHALE_EYE = (0.118, 0.452)
+BLUE_WHALE_MOUTH = [
+    ("M", 0.012, 0.545),
+    ("C", 0.060, 0.556, 0.110, 0.566, 0.166, 0.570),
+    ("C", 0.226, 0.574, 0.288, 0.572, 0.340, 0.566),
+]
+
+# Tall, upright pectoral fin. Used for the "humpback rising" beat, where the fin
+# is the subject rather than a detail on a body.
+WHALE_FIN_UP = [
+    ("M", 0.470, 0.930),
+    ("C", 0.420, 0.800, 0.400, 0.660, 0.408, 0.540),
+    ("C", 0.412, 0.420, 0.452, 0.300, 0.494, 0.210),
+    ("C", 0.520, 0.140, 0.552, 0.070, 0.578, 0.020),
+    ("C", 0.606, 0.090, 0.618, 0.190, 0.618, 0.290),
+    ("C", 0.618, 0.420, 0.604, 0.560, 0.576, 0.680),
+    ("C", 0.566, 0.770, 0.552, 0.860, 0.536, 0.930),
+    ("Z",),
+]
+
+
+# ---------------------------------------------------------------------------
+# Great white shark. Distinct from the Megalodon silhouette above: narrower
+# snout, lunate tail, a second small dorsal, and a much sharper pectoral.
+# ---------------------------------------------------------------------------
+GREAT_WHITE = [
+    ("M", 0.985, 0.545),
+    ("C", 0.930, 0.500, 0.880, 0.470, 0.830, 0.452),
+    ("C", 0.790, 0.398, 0.762, 0.338, 0.740, 0.300),
+    ("C", 0.716, 0.346, 0.700, 0.398, 0.686, 0.436),
+    ("C", 0.600, 0.420, 0.520, 0.418, 0.440, 0.428),
+    ("C", 0.400, 0.398, 0.372, 0.368, 0.348, 0.348),
+    ("C", 0.352, 0.398, 0.360, 0.440, 0.366, 0.468),
+    ("C", 0.330, 0.478, 0.296, 0.490, 0.268, 0.500),
+    ("C", 0.250, 0.560, 0.240, 0.600, 0.226, 0.628),
+    ("C", 0.200, 0.600, 0.176, 0.578, 0.156, 0.570),
+    ("C", 0.170, 0.606, 0.176, 0.636, 0.178, 0.658),
+    ("C", 0.160, 0.668, 0.132, 0.660, 0.108, 0.642),
+    ("C", 0.094, 0.700, 0.076, 0.752, 0.052, 0.792),
+    ("C", 0.030, 0.740, 0.014, 0.690, 0.006, 0.646),
+    ("C", 0.004, 0.606, 0.004, 0.572, 0.008, 0.548),
+    ("C", 0.250, 0.560, 0.560, 0.556, 0.760, 0.552),
+    ("C", 0.850, 0.550, 0.930, 0.550, 0.985, 0.545),
+    ("Z",),
+]
+
+GREAT_WHITE_EYE = (0.951, 0.522)
+
+# ---------------------------------------------------------------------------
+# Krill — a single body plus a fan of legs and antennae. Drawn as one path so the
+# swarm in the reference reads as thousands of small soft shapes.
+# ---------------------------------------------------------------------------
+KRILL = [
+    ("M", 0.060, 0.500),
+    ("C", 0.120, 0.420, 0.240, 0.380, 0.400, 0.378),
+    ("C", 0.560, 0.376, 0.700, 0.402, 0.800, 0.440),
+    ("C", 0.870, 0.466, 0.920, 0.492, 0.950, 0.510),
+    ("C", 0.920, 0.536, 0.870, 0.556, 0.800, 0.570),
+    ("C", 0.700, 0.600, 0.560, 0.612, 0.400, 0.606),
+    ("C", 0.240, 0.600, 0.120, 0.572, 0.060, 0.500),
+    ("Z",),
+]
+
+
+# ---------------------------------------------------------------------------
+# Detail sets for the animals above
+# ---------------------------------------------------------------------------
+def blue_whale_pleats(n=26, x0=0.045, x1=0.46, y0=0.560):
+    """Long parallel grooves down the throat, the blue whale's defining texture."""
+    lines = []
+    for i in range(n):
+        k = i / max(1, n - 1)
+        y = y0 + k * 0.070
+        lines.append([(x0 + k * 0.030, y), (x1 - k * 0.045, y + k * 0.012)])
+    return lines
+
+
+def shark_teeth_row(n=14, x0=0.760, x1=0.960, y=0.578):
+    """A tight row of small triangles along the jaw."""
+    out = []
+    for i in range(n):
+        k = i / max(1, n - 1)
+        x = x0 + k * (x1 - x0)
+        h = 0.016
+        out.append([(x, y), (x + 0.006, y + h), (x + 0.012, y)])
+    return out
+
+
+def great_white_gills(n=5, x=0.760, y=0.470, step=0.020, h=0.070):
+    return [[(x + i * step, y), (x + i * step - 0.004, y + h)] for i in range(n)]
+
+
+def checks():
+    """Every path must close and stay inside the unit box."""
+    import math as _m
+    for name in ("BLUE_WHALE", "WHALE_FIN_UP", "GREAT_WHITE", "KRILL"):
+        p = globals()[name]
+        assert p[-1][0] == "Z", name + " does not close"
+        for op in p:
+            for v in op[1:]:
+                assert 0.0 <= v <= 1.0, (name, op)
+    for fn in (blue_whale_pleats(), shark_teeth_row(), great_white_gills()):
+        for line in fn:
+            for (x, y) in line:
+                assert 0.0 <= x <= 1.0 and 0.0 <= y <= 1.0, (fn, x, y)
+    return True
+
+
+# ---------------------------------------------------------------------------
+# Profile builder
+# ---------------------------------------------------------------------------
+def _catmull(points, closed=False):
+    """Smooth C-segment path through `points` (Catmull-Rom -> cubic Bezier).
+
+    Hand-writing control points for a 200-pixel-wide animal is how you end up with
+    a shark whose tail is three unrelated polygons; specifying the outline as a
+    top edge and a bottom edge and letting this smooth them is both faster to
+    author and impossible to break.
+    """
+    pts = [(float(x), float(y)) for x, y in points]
+    n = len(pts)
+    if n < 3:
+        return [("M", *pts[0]), ("L", *pts[-1]), ("Z",)]
+    out = [("M", *pts[0])]
+    for i in range(n - 1):
+        p0 = pts[i - 1] if i > 0 else (2 * pts[0][0] - pts[1][0], 2 * pts[0][1] - pts[1][1])
+        p1, p2 = pts[i], pts[i + 1]
+        p3 = pts[i + 2] if i + 2 < n else (2 * pts[-1][0] - pts[-2][0], 2 * pts[-1][1] - pts[-2][1])
+        c1 = (p1[0] + (p2[0] - p0[0]) / 6.0, p1[1] + (p2[1] - p0[1]) / 6.0)
+        c2 = (p2[0] - (p3[0] - p1[0]) / 6.0, p2[1] - (p3[1] - p1[1]) / 6.0)
+        out.append(("C", c1[0], c1[1], c2[0], c2[1], p2[0], p2[1]))
+    out.append(("Z",))
+    return out
+
+
+def profile(top, bottom):
+    """Close a top profile and a bottom profile into one smooth silhouette."""
+    top = [(max(0.0, min(1.0, x)), max(0.0, min(1.0, y))) for x, y in top]
+    bottom = [(max(0.0, min(1.0, x)), max(0.0, min(1.0, y))) for x, y in bottom]
+    return _catmull(top + bottom, closed=True)
+
+
+# Blue whale: head at the left, blunt rostrum, flat back, 4 % dorsal set far aft.
+BLUE_WHALE = profile(
+    [(0.030, 0.470), (0.050, 0.395), (0.110, 0.342), (0.220, 0.318), (0.360, 0.310),
+     (0.500, 0.312), (0.620, 0.322), (0.720, 0.336), (0.790, 0.350),
+     # dorsal
+     (0.812, 0.322), (0.828, 0.306), (0.842, 0.318), (0.852, 0.352),
+     # peduncle
+     (0.900, 0.368), (0.940, 0.392), (0.966, 0.418),
+     (0.995, 0.372), (0.995, 0.470), (0.966, 0.470)],
+    [(0.030, 0.470), (0.042, 0.545), (0.090, 0.596), (0.180, 0.626), (0.320, 0.642),
+     (0.470, 0.648), (0.610, 0.644), (0.730, 0.628), (0.830, 0.596),
+     (0.890, 0.556), (0.930, 0.520), (0.966, 0.500), (0.995, 0.580), (0.995, 0.470)],
+)
+
+BLUE_WHALE_EYE = (0.100, 0.452)
+BLUE_WHALE_MOUTH = [
+    ("M", 0.034, 0.500),
+    ("C", 0.090, 0.516, 0.160, 0.526, 0.240, 0.528),
+    ("C", 0.300, 0.529, 0.360, 0.526, 0.410, 0.520),
+]
+
+# Great white: pointed snout right, lunate caudal fin, small second dorsal.
+GREAT_WHITE = profile(
+    [(0.995, 0.560), (0.930, 0.520), (0.860, 0.492), (0.800, 0.470),
+     # first dorsal
+     (0.762, 0.430), (0.740, 0.330), (0.722, 0.398), (0.700, 0.452),
+     # second dorsal
+     (0.610, 0.436), (0.596, 0.398), (0.582, 0.432),
+     # caudal upper lobe
+     (0.520, 0.420), (0.400, 0.412), (0.300, 0.418), (0.230, 0.430),
+     (0.180, 0.400), (0.140, 0.352), (0.118, 0.330),
+     (0.128, 0.420), (0.146, 0.500), (0.150, 0.560)],
+    [(0.995, 0.560), (0.955, 0.588), (0.900, 0.606), (0.840, 0.618),
+     # pectoral
+     (0.800, 0.660), (0.760, 0.720), (0.740, 0.760),
+     (0.716, 0.700), (0.700, 0.648), (0.680, 0.628),
+     (0.600, 0.628), (0.500, 0.632), (0.380, 0.640), (0.280, 0.652),
+     (0.220, 0.672), (0.180, 0.700), (0.150, 0.700),
+     (0.134, 0.648), (0.128, 0.600), (0.150, 0.560)],
+)
+
+GREAT_WHITE_EYE = (0.944, 0.536)
+
+# Humpback pectoral fin, the animal's signature. Long, narrow at the root,
+# widest at about a third of its length, tapering to a rounded knobbly tip.
+# Both edges must actually diverge or the closed path self-intersects and PIL
+# fills it as a needle, which is what the first version looked like.
+WHALE_FIN_UP = profile(
+    [(0.500, 0.020), (0.556, 0.110), (0.590, 0.230), (0.606, 0.360),
+     (0.604, 0.480), (0.586, 0.600), (0.562, 0.700), (0.544, 0.790), (0.530, 0.860),
+     (0.520, 0.930)],
+    [(0.500, 0.020), (0.452, 0.120), (0.414, 0.250), (0.396, 0.390),
+     (0.398, 0.510), (0.416, 0.630), (0.446, 0.730), (0.474, 0.810), (0.500, 0.870),
+     (0.520, 0.930)],
+)
+
+KRILL = profile(
+    [(0.030, 0.470), (0.090, 0.402), (0.200, 0.372), (0.340, 0.366),
+     (0.480, 0.376), (0.620, 0.404), (0.740, 0.442), (0.830, 0.478), (0.900, 0.492)],
+    [(0.030, 0.470), (0.080, 0.530), (0.180, 0.572), (0.320, 0.590),
+     (0.470, 0.592), (0.610, 0.578), (0.730, 0.548), (0.820, 0.514), (0.900, 0.492)],
+)

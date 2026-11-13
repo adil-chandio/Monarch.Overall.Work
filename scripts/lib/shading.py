@@ -124,3 +124,52 @@ def detail_strokes(f, strokes, colour, width, alpha=1.0):
     for s in strokes:
         if len(s) >= 2:
             f.d.line(s, fill=col, width=width, joint="curve")
+
+
+# ---------------------------------------------------------------------------
+# Depth of field
+# ---------------------------------------------------------------------------
+def paste_dof(f, layer, xy, blur=0.0, alpha=1.0, haze=None):
+    """Paste an RGBA layer with optional blur and aerial haze.
+
+    In the reference nothing is uniformly sharp: the animal that is meant to be far
+    away is both blurred and pushed toward the water colour. A blur alone still
+    reads as a sharp sticker you cannot focus on; haze alone leaves hard edges.
+    Together they read as distance.
+    """
+    im = layer
+    if blur > 0.2:
+        im = im.filter(ImageFilter.GaussianBlur(blur))
+    if haze is not None:
+        hz = Image.new("RGBA", im.size, haze + (int(255 * alpha),))
+        im = Image.alpha_composite(im, hz)
+        alpha = 1.0
+    if alpha < 0.999:
+        a = im.getchannel("A").point(lambda v: int(v * alpha))
+        im = im.copy()
+        im.putalpha(a)
+    f.im.paste(im, (int(xy[0]), int(xy[1])), im)
+
+
+def animal_layer(size, path, bbox, stops, flip=False, segs=30, glow=None):
+    """Render one shaded animal onto its own transparent tile.
+
+    Drawing straight onto the frame makes blurring a distant animal impossible,
+    because the blur would pick up the water behind it. Every animal that has to be
+    depth-graded is built here first.
+    """
+    tile = Image.new("RGBA", size, (0, 0, 0, 0))
+    if glow:
+        pass
+    g = Image.new("RGBA", size, (0, 0, 0, 0))
+    class _F:  # minimal frame so fill_shaded can draw into the tile
+        pass
+    fr = _F()
+    fr.im = tile.convert("RGB")
+    fr.d = ImageDraw.Draw(fr.im, "RGBA")
+    fr.w, fr.h = size
+    fill_shaded(fr, path, bbox, stops, flip=flip, segs=segs)
+    mask = mask_from_path(size, path, bbox, flip=flip, segs=segs)
+    out = fr.im.convert("RGBA")
+    out.putalpha(mask)
+    return out
