@@ -16,4 +16,15 @@ jobs:
         run: echo "key_present=$([ -n "$YOUTUBE_API_KEY" ] && echo true || echo false)"
       - name: Probe
         env: { YOUTUBE_API_KEY: "${{ secrets.YOUTUBE_API_KEY }}" }
-        run: python research/viral_og_v21/probe_search_routes.py
+        run: |
+          set -o pipefail
+          mkdir -p research/viral_og_v21/api_evidence
+          python research/viral_og_v21/probe_search_routes.py 2>&1 | tee research/viral_og_v21/api_evidence/probe_search_routes.log || true
+      - name: Commit probe log
+        if: always()
+        run: |
+          git config user.name "monarch-forensic-bot"
+          git config user.email "forensic-bot@users.noreply.github.com"
+          git add research/viral_og_v21/api_evidence/probe_search_routes.log
+          git commit -m "chore(v21): discovery route probe log [skip ci]" || true
+          git push origin HEAD:arena/2b012328-monarch-overall-work || true
