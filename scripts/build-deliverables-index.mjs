@@ -41,15 +41,25 @@ for (const [kind, exts] of Object.entries(POLICY.media_extensions)) {
  * Everything else stays UNRECORDED — the index is not allowed to guess.
  * --------------------------------------------------------------------------*/
 /** Every Drive copy we actually know about, read from config/drive-map.json.
- *  Hardcoding a second list here is how the two drift apart. */
+ *  Hardcoding a second list here is how the two drift apart.
+ *
+ *  This map — not the working tree — is the source of truth for what exists.
+ *  A file that was released from Git is NOT in a fresh clone: CI, and anyone
+ *  who just cloned, has an empty deliverables/. Building rows from the disk
+ *  alone therefore makes the ledger shrink every time the repo is cloned, and
+ *  `--check` then fails CI forever (found on a fresh clone, 2026-11-13: 26 rows
+ *  in the committed file vs 1 row generated). The ledger has to survive the
+ *  absence of the bytes it is describing. */
 const KNOWN_DRIVE = new Map();
 for (const folder of DRIVE.folders ?? []) {
   for (const f of folder.currently_holds ?? []) {
     if (!f.name || !f.drive_id) continue;
     KNOWN_DRIVE.set(f.name, {
+      rel: f.path ?? `deliverables/${f.name}`,
       folder: folder.name,
       id: f.drive_id,
       sha256: f.sha256 ?? null,
+      bytes: typeof f.bytes === "number" ? f.bytes : null,
     });
   }
 }
@@ -113,11 +123,14 @@ const media = trackedMedia();
 
 /* ---------- build sections ---------- */
 
-const deliverableFiles = [...new Set([...onDisk, ...tracked])]
+const deliverableFiles = [
+  ...new Set([...onDisk, ...tracked, ...[...KNOWN_DRIVE.values()].map((v) => v.rel)]),
+]
   .filter((p) => p.startsWith("deliverables/"))
   .filter((p) => {
     const ext = p.slice(p.lastIndexOf(".")).toLowerCase();
-    return EXT_KIND.has(ext);
+    // A recorded Drive copy counts as media even when the extension list moves.
+    return EXT_KIND.has(ext) || KNOWN_DRIVE.has(basename(p));
   })
   .sort();
 
@@ -133,7 +146,9 @@ for (const rel of deliverableFiles) {
     hash = await sha256(abs);
   } else {
     const t = media.find((m) => m.path === rel);
-    bytes = t?.bytes ?? 0;
+    // Not on disk and not in the index of this checkout: the size we recorded
+    // when it left Git is the only honest number left.
+    bytes = t?.bytes ?? KNOWN_DRIVE.get(name)?.bytes ?? 0;
   }
   const isTracked = tracked.has(rel);
   const drive = KNOWN_DRIVE.get(name);
@@ -142,8 +157,19 @@ for (const rel of deliverableFiles) {
     name,
     bytes,
     hash,
-    kind: EXT_KIND.get(rel.slice(rel.lastIndexOf(".")).toLowerCase()),
-    status: isTracked ? "tracked" : present ? "on-disk-only" : "missing",
+    kind:
+      EXT_KIND.get(rel.slice(rel.lastIndexOf(".")).toLowerCase()) ??
+      EXT_KIND.get(`.${name.split(".").pop().toLowerCase()}`) ??
+      "media",
+    // "external" = provably elsewhere. That is a different thing from "missing",
+    // which means nobody knows where it went and must be loud.
+    status: isTracked
+      ? "tracked"
+      : drive
+        ? "external"
+        : present
+          ? "on-disk-only"
+          : "missing",
     where: drive ? `Drive ${drive.folder} · ${drive.id}` : "UNRECORDED",
     present,
     isTracked,
@@ -192,8 +218,22 @@ lines.push("");
 lines.push("| File | Size | Kind | In Git | Where | sha256 |");
 lines.push("|---|---:|---|---|---|---|");
 for (const r of rows.sort((a, b) => b.bytes - a.bytes)) {
-  const shortHash = r.hash ? r.hash.slice(0, 12) : r.status === "missing" ? "—" : "n/a";
-  const whereCell = r.where === "UNRECORDED" ? "**UNRECORDED**" : r.where;
+  // No local hash means the bytes are not in this checkout. That is normal for a
+  // released file and is NOT the same as "missing": the hash below is the one
+  // recorded at release time, and the Where column says where to find it.
+  const shortHash = r.hash
+    ? r.hash.slice(0, 12)
+    : KNOWN_DRIVE.get(r.name)?.sha256
+      ? `${KNOWN_DRIVE.get(r.name).sha256.slice(0, 12)} †`
+      : r.status === "missing"
+        ? "—"
+        : "n/a";
+  const whereCell =
+    r.where === "UNRECORDED"
+      ? "**UNRECORDED**"
+      : r.present
+        ? r.where
+        : `${r.where} (not in this checkout)`;
     const matchMark = (() => {
     const known = KNOWN_DRIVE.get(r.name);
     if (!known?.sha256 || !r.hash) return "";
@@ -202,6 +242,10 @@ for (const r of rows.sort((a, b) => b.bytes - a.bytes)) {
   lines.push(`| \`${r.name}\` | ${human(r.bytes)} | ${r.kind} | ${r.isTracked ? "yes" : "no"} | ${whereCell}${matchMark} | \`${shortHash}\` |`);
 }
 
+lines.push("");
+lines.push("`†` = the file is not in this checkout, so its hash is the one recorded when it left Git rather than a fresh reading.");
+lines.push("That is the normal state of a released file: `git clone` does not fetch Drive. `✓` still means the recorded Drive hash");
+lines.push("equalled the local hash at release time.");
 lines.push("");
 lines.push("## To do — media over 20 MB with no recorded external home");
 lines.push("");
