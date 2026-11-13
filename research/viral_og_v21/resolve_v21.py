@@ -57,7 +57,7 @@ def try_handle(h):
     return None
 
 
-def try_title(title, wait=50):
+def try_title(title, wait=25):
     """A screenshot's own video title -> the channel that owns that exact video."""
     for attempt in range(3):
         try:
@@ -111,7 +111,7 @@ def main():
         else:
             log(f"  FAILED {name}")
         CACHE.write_text(json.dumps(cache, indent=1, ensure_ascii=False) + "\n")
-        time.sleep(20)
+        time.sleep(6)
 
     log(f"cache now {len(cache)}/{len(idx)}; unresolved {[n for n in idx if n not in cache]}")
 

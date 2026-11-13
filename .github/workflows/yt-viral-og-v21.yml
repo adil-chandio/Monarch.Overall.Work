@@ -19,7 +19,7 @@ concurrency:
 jobs:
   og:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,6 +47,17 @@ jobs:
 
       - name: V21 resolve channels once (cached; search only on miss)
         run: python research/viral_og_v21/resolve_v21.py
+
+      - name: Commit channel cache immediately
+        if: always()
+        run: |
+          git config user.name "monarch-forensic-bot"
+          git config user.email "forensic-bot@users.noreply.github.com"
+          git add research/viral_og_v21/api_evidence/channel_cache_v21.json || true
+          if git diff --cached --quiet; then echo "cache unchanged"; else
+            git commit -m "chore(v21): channel resolution cache [skip ci]"
+            git push origin HEAD:arena/2b012328-monarch-overall-work || true
+          fi
 
       - name: V21 viral OG forensic
         run: python research/viral_og_v21/build_viral_og_v21.py
