@@ -13,10 +13,10 @@ that state are listed under **To do** at the bottom.
 | | |
 |---|---|
 | Files listed here | 26 |
-| Media inside Git (whole repo) | 1.03 GB across 179 files |
-| Media inside Git, this folder only | 616.6 MB |
-| Recorded in an external location | 16 |
-| Tracking to-do (>20 MB, no external copy) | 10 |
+| Media inside Git (whole repo) | 887.0 MB across 169 files |
+| Media inside Git, this folder only | 42.2 MB |
+| Recorded in an external location | 25 |
+| Tracking to-do (>20 MB, no external copy) | 1 |
 
 ## Rules these rows obey
 
@@ -28,15 +28,15 @@ that state are listed under **To do** at the bottom.
 
 | File | Size | Kind | In Git | Where | sha256 |
 |---|---:|---|---|---|---|
-| `Last-Mammoths-Review-Reel-13min-720p.mp4` | 94.8 MB | video | yes | **UNRECORDED** | `479a30ae59ad` |
-| `Last-Mammoths-Review-Reel-v8-720p.mp4` | 82.7 MB | video | yes | **UNRECORDED** | `deee8881e913` |
-| `Last-Mammoths-Review-Reel-v9-720p.mp4` | 82.0 MB | video | yes | **UNRECORDED** | `ef6448a5f6cf` |
-| `Extinct_Life_EP01_Amber_Atlas_Full_1080p.mp4` | 66.6 MB | video | yes | **UNRECORDED** | `345ad8314ac1` |
-| `Last-Mammoths-Full-Film-3D-1080p.mp4` | 63.4 MB | video | yes | **UNRECORDED** | `d63a7cfd288a` |
-| `Extinct_Life_EP01_Urdnglish_ShortShot_Rebuild_1080p.mp4` | 51.3 MB | video | yes | **UNRECORDED** | `08bf4770262a` |
-| `Homotherium-Cub-3D-Rebuild-1080x1920.mp4` | 46.1 MB | video | yes | **UNRECORDED** | `38fa5c8d2060` |
-| `Last-Mammoths-Opening-01-3D-1080p.mp4` | 45.3 MB | video | yes | **UNRECORDED** | `7102afe463cb` |
-| `MON-DEMO26_v3_Master_60fps.enc` | 42.2 MB | video | yes | **UNRECORDED** | `15daeebe1171` |
+| `Last-Mammoths-Review-Reel-13min-720p.mp4` | 94.8 MB | video | no | Drive 3d animation · 1qkk9ToYrGqnJ8ZHHNZYdwXf4WcoEEAdF ✓ | `479a30ae59ad` |
+| `Last-Mammoths-Review-Reel-v8-720p.mp4` | 82.7 MB | video | no | Drive 3d animation · 1KjPI5JXcOrGSIbfoszd6hGsWKInpCHLA ✓ | `deee8881e913` |
+| `Last-Mammoths-Review-Reel-v9-720p.mp4` | 82.0 MB | video | no | Drive 3d animation · 1s4FB3drU37dWLITxiJ2B2dxEG6KedAHe ✓ | `ef6448a5f6cf` |
+| `Extinct_Life_EP01_Amber_Atlas_Full_1080p.mp4` | 66.6 MB | video | no | Drive 3d animation · 1ZYYqjdebz8ul-UREoJmH1TvkweTLM-LJ ✓ | `345ad8314ac1` |
+| `Last-Mammoths-Full-Film-3D-1080p.mp4` | 63.4 MB | video | no | Drive 3d animation · 1a9Md7zP0bytXtC7mokdaebuuXSK8zFnz ✓ | `d63a7cfd288a` |
+| `Extinct_Life_EP01_Urdnglish_ShortShot_Rebuild_1080p.mp4` | 51.3 MB | video | no | Drive 3d animation · 1amVLI_vorNgplfbz0PBP77SaSJvNVMzO ✓ | `08bf4770262a` |
+| `Homotherium-Cub-3D-Rebuild-1080x1920.mp4` | 46.1 MB | video | no | Drive 3d animation · 1YnxZmyFKqy7P-9K3b_IrG-jzhK9GZKKG ✓ | `38fa5c8d2060` |
+| `Last-Mammoths-Opening-01-3D-1080p.mp4` | 45.3 MB | video | no | Drive 3d animation · 1kC2mMfyPTuVi0DVTdFM0Qqzt0UAR8YlE ✓ | `7102afe463cb` |
+| `MON-DEMO26_v3_Master_60fps.enc` | 42.2 MB | video | no | Drive 3d animation · 12gVvE1BHH5e-bVkqdc5qHOeht93n763i ✓ | `15daeebe1171` |
 | `MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4` | 42.2 MB | video | yes | **UNRECORDED** | `6b0addb742c8` |
 | `Extinct_Life_EP01_Lost_World_1080p.mp4` | 28.5 MB | video | no | Drive 3d animation · 1Xr3OnOKaUMkquH5Kan1Sej8O76-DrPur ✓ | `ce49a107621e` |
 | `Extinct_Life_Opening_25D_Cinema_Polish_45s_1080p.mp4` | 20.1 MB | video | no | Drive 3d animation · 1Dn-2YKA0dRDkdOj0_jHrDytMp1RhdcTu ✓ | `90be37109e63` |
@@ -57,18 +57,9 @@ that state are listed under **To do** at the bottom.
 
 ## To do — media over 20 MB with no recorded external home
 
-**10 files, 616.6 MB.** Each needs one of:
+**1 files, 42.2 MB.** Each needs one of:
 upload to YouTube Unlisted, move into the Drive folder named in `config/drive-map.json`, or an explicit decision to keep it in Git.
 
-- [ ] `Last-Mammoths-Review-Reel-13min-720p.mp4` — 94.8 MB
-- [ ] `Last-Mammoths-Review-Reel-v8-720p.mp4` — 82.7 MB
-- [ ] `Last-Mammoths-Review-Reel-v9-720p.mp4` — 82.0 MB
-- [ ] `Extinct_Life_EP01_Amber_Atlas_Full_1080p.mp4` — 66.6 MB
-- [ ] `Last-Mammoths-Full-Film-3D-1080p.mp4` — 63.4 MB
-- [ ] `Extinct_Life_EP01_Urdnglish_ShortShot_Rebuild_1080p.mp4` — 51.3 MB
-- [ ] `Homotherium-Cub-3D-Rebuild-1080x1920.mp4` — 46.1 MB
-- [ ] `Last-Mammoths-Opening-01-3D-1080p.mp4` — 45.3 MB
-- [ ] `MON-DEMO26_v3_Master_60fps.enc` — 42.2 MB
 - [ ] `MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4` — 42.2 MB
 
 ## Repo-wide media by folder
@@ -78,13 +69,13 @@ reports on, kept here so it is readable without running anything.
 
 | Folder | Media files | Size |
 |---|---:|---:|
-| `deliverables` | 20 | 784.0 MB |
+| `deliverables` | 10 | 616.6 MB |
 | `production` | 91 | 157.1 MB |
 | `refs` | 14 | 73.8 MB |
 | `public` | 6 | 33.5 MB |
 | `gpu-engine` | 17 | 3.4 MB |
 | `docs` | 31 | 2.7 MB |
-| **all folders** | **179** | **1.03 GB** |
+| **all folders** | **169** | **887.0 MB** |
 
 **Why the images are not simply ignored:** 20 of the 42 workflows that commit run `git add` on a media folder.
 An ignore rule would turn those into failed commits. Workflow uploads must change first — see
