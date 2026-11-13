@@ -1,0 +1,51 @@
+name: Monarch reference research — separate Shorts and long-form
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/monarch-og-youtube.yml']
+permissions:
+  contents: write
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify research and safety rules
+        run: |
+          python -m unittest discover -s research/monarch_og_audit/tests -v
+          python -m unittest discover -s research/monarch_viral_audit/tests -v
+      - name: Collect YouTube public API snapshot
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+        run: python -u research/monarch_og_audit/fresh_youtube.py --output "$RUNNER_TEMP/og-youtube-refresh.json"
+      - name: Store public metadata as checksum-verified Git blob
+        id: receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64,hashlib,json,os,urllib.request
+          path=os.path.join(os.environ['RUNNER_TEMP'],'og-youtube-refresh.json')
+          data=open(path,'rb').read()
+          digest=hashlib.sha256(data).hexdigest()
+          body=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode()
+          url='https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs'
+          req=urllib.request.Request(url,data=body,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          with urllib.request.urlopen(req,timeout=120) as response:sha=json.load(response)['sha']
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              print('sha='+sha,file=out);print('digest='+digest,file=out)
+          open(os.path.join(os.environ['RUNNER_TEMP'],'yt-receipt.txt'),'w').write('bytes='+str(len(data))+'\nsha256='+digest+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: og-youtube-${{ steps.receipt.outputs.sha }}-${{ steps.receipt.outputs.digest }}
+          path: ${{ runner.temp }}/yt-receipt.txt
+          retention-days: 2
+          if-no-files-found: error
