@@ -21,7 +21,7 @@
 set -uo pipefail
 
 BRANCH="${1:?branch required}"
-ATTEMPTS="${2:-6}"
+ATTEMPTS="${2:-12}"
 
 for attempt in $(seq 1 "$ATTEMPTS"); do
   # Rebase onto whatever landed while we were working. --autostash because a
@@ -38,8 +38,14 @@ for attempt in $(seq 1 "$ATTEMPTS"); do
     exit 0
   fi
 
-  # Jitter by attempt number so 17 jobs do not retry in lockstep.
-  sleep $(( (attempt * 7) % 23 + 3 ))
+  # Exponential backoff with jitter. Measured in a 6-client race against a bare
+  # remote: a fixed 6-10 s wait still lost, because all six wake up together and
+  # the winner is whichever single push the ref lock admits. Backing off further
+  # each round is what actually breaks the pile-up.
+  #   1:3-8s  2:6-12s  3:12-18s  4:24-30s  5:48-54s  …  capped at 90s
+  BASE=$(( 3 * (1 << (attempt - 1)) ))
+  [ "$BASE" -gt 87 ] && BASE=87
+  sleep $(( BASE + RANDOM % 6 ))
   echo "git-push-retrying: push rejected on attempt $attempt (likely another workflow pushed first), retrying…"
 done
 
