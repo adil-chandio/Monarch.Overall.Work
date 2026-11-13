@@ -108,6 +108,40 @@ def ray_capsule(ro, rd, a, b, radius):
     return np.where(ok, tt, INF).astype(np.float32), t.astype(np.float32)
 
 
+def ray_frustum(ro, rd, a, b, r_a, r_b):
+    """Cone frustum from a (radius r_a) to b (radius r_b).
+
+    Same algebra as the capsule, but the radius is interpolated along the axis
+    instead of being constant, so a limb can taper. Returns (t, s) where s is
+    0..1 along the axis for shading.
+    """
+    a = np.asarray(a, np.float32)
+    b = np.asarray(b, np.float32)
+    ba = b - a
+    oa = ro - a
+    baba = max(float(ba @ ba), 1e-8)
+    if rd.ndim == 3:
+        bard = (ba[None, None, :] * rd).sum(-1)
+        baoa = (ba[None, None, :] * oa).sum(-1)
+    else:
+        bard = ba @ rd
+        baoa = ba @ oa
+    rdoa = (rd * oa).sum(-1)
+    oaoa = (oa * oa).sum(-1)
+    s = np.clip((baoa - bard * rdoa) / np.maximum(baba - bard * bard, 1e-8), 0.0, 1.0)
+    # radius at the closest point, then a sphere test against it
+    rad = r_a + (r_b - r_a) * s
+    cx = a + s[..., None] * ba
+    oc = ro - cx
+    bq = (oc * rd).sum(-1)
+    cq = (oc * oc).sum(-1) - rad * rad
+    disc = bq * bq - cq
+    sq = np.sqrt(np.maximum(disc, 0))
+    tt = -bq - sq
+    ok = (disc > 0) & (tt > 1e-3)
+    return np.where(ok, tt, INF).astype(np.float32), s.astype(np.float32)
+
+
 def ray_torus(ro, rd, centre, R, r, axis='y'):
     """Approximate torus on the y (or z) axis via a bounded cylinder test.
 

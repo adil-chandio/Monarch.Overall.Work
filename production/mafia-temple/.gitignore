@@ -4,6 +4,10 @@
 *.png
 *.jpg
 *.jpeg
+# ...except the CC BY 3.0 face-scan colour map, which is source data for the
+# close-ups, not film media. Without it the checkouts render flat grey skin and
+# nobody can tell why: it is how the map went missing in the first place.
+!assets/face-scan/Map-COL.jpg
 *.webp
 *.gif
 *.mp4

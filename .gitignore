@@ -115,3 +115,8 @@ production/mafia-temple/qc/.env
 
 # Mafia-temple 3D cut: frames and rendered masters are regenerated, never committed
 production/mafia-temple/render-3d/
+
+# VFX3D hair field cache: regenerated automatically, never committed
+production/render-3d/cache/
+production/render-3d/frames/
+production/render-3d/stills/
