@@ -134,6 +134,13 @@ production/extinct-life/*/working/
 !public/proof/**
 !public/showreel/**
 !public/demo-poster.jpg
+# The showreel the portfolio plays (25 MB) is load-bearing product surface, not
+# a deliverable: src/B2BStudio.jsx renders <video src="/demo-preview.mp4">.
+# Without this line it is tracked-but-ignored, which is a trap — the moment
+# anybody releases it with `git rm --cached` (exactly what this migration does
+# to every other video), render-showreel-60fps.yml's `git add public/demo-preview.mp4`
+# starts exiting 1 and that pipeline dies. Naming it here closes that door.
+!public/demo-preview.mp4
 !deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4
 !docs/research/**/*.csv.gz
 
@@ -146,14 +153,42 @@ production/extinct-life/*/working/
 # Rule for a scripted extraction folder: generator + pinned sha256 must exist
 # in config/media-policy.json -> regenerable_evidence.
 # Workflow-produced stills (film-*/inspection/) are output, not evidence.
+#
+# WHY THESE ARE MEDIA GLOBS AND NOT BARE FOLDER RULES (fixed 2026-11-13):
+# they used to read `production/extinct-life/film-*/inspection/`, which ignored
+# the WHOLE folder. That folder also holds the QC text — motion-QC.json,
+# render-<a>-<b>.json — which is the actual evidence, and the header two lines
+# up says text evidence stays. Two things broke because of it:
+#   1. `git add production/.../inspection` exits 1 on an ignored path, and
+#      GitHub Actions runs steps with `bash -e`, so extinct-v8-premium.yml
+#      failed the job outright (run 43340437009, step "Preserve original
+#      production inspection"). Re-adding a bare `!` negation does NOT help:
+#      git never re-includes files under an excluded directory.
+#   2. Every new QC json would have been silently dropped from the repo.
+# Ignoring the extensions instead keeps the stills out and the numbers in.
+# `git add <folder>` on a folder with ignored children is legal and exits 0.
 # ---------------------------------------------------------------------------
-production/extinct-life/film-*/inspection/
-production/extinct-life/film-*/encoded-inspection/
-production/extinct-life/film-*/native-meshes/*.glb
-production/extinct-life/review-v*/full-resolution/
-production/extinct-life/review-v*/seconds/
-production/extinct-life/review-v*/motion/
-production/extinct-life/longform-mammoth/**/inspection/
-production/extinct-life/longform-mammoth/**/stills/
-production/extinct-life/homotherium-short/inspection/
-gpu-engine/keyframes/
+production/extinct-life/film-*/inspection/**
+production/extinct-life/film-*/encoded-inspection/**
+production/extinct-life/review-v*/full-resolution/**
+production/extinct-life/review-v*/seconds/**
+production/extinct-life/review-v*/motion/**
+production/extinct-life/longform-mammoth/**/inspection/**
+production/extinct-life/longform-mammoth/**/stills/**
+production/extinct-life/homotherium-short/inspection/**
+gpu-engine/keyframes/**
+
+# ...but keep the measurement text inside those folders. Last-match-wins, so
+# these must sit BELOW the rules above; they are scoped to the folders named
+# above and cannot re-admit media anywhere else in the repo.
+!production/extinct-life/**/inspection/**/*.json
+!production/extinct-life/**/inspection/**/*.csv
+!production/extinct-life/**/inspection/**/*.md
+!production/extinct-life/**/inspection/**/*.txt
+!production/extinct-life/**/seconds/**/*.json
+!production/extinct-life/**/seconds/**/*.csv
+!production/extinct-life/**/motion/**/*.json
+!production/extinct-life/**/motion/**/*.csv
+!production/extinct-life/**/full-resolution/**/*.json
+!production/extinct-life/**/full-resolution/**/*.csv
+!gpu-engine/keyframes/**/*.json

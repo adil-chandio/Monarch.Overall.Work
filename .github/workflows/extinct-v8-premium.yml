@@ -50,16 +50,18 @@ jobs:
         run: |
           git config user.name 'Monarch native look development'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          # inspection/ is render output, not evidence: .gitignore now excludes it
-          # (config/media-policy.json -> render evidence). `git add` therefore stages
-          # nothing. The old `git diff --cached --quiet || git commit` form is
-          # backwards — `--quiet` returns 1 when there IS a diff, so with nothing
-          # staged it ran `git commit` with an empty index and failed the job.
-          # .gitignore keeps the PNG->JPG loop above untouched: it reads .cache and
-          # writes the working tree, it does not read this folder back.
-          git add production/extinct-life/film-v8-premium/inspection
+          # inspection/ stills are render output and are ignored by extension
+          # (config/media-policy.json -> render evidence). The QC text in the
+          # same folder — motion-QC.json, render-*.json — is NOT ignored: it is
+          # the evidence this step exists to keep.
+          #
+          # `|| true` is load-bearing. `git add` exits 1 when every path it was
+          # given resolves to something ignored, and Actions runs each step with
+          # `bash -e`, so that 1 killed the whole job (run 43340437009). Staging
+          # nothing is a normal outcome here, not an error.
+          git add production/extinct-life/film-v8-premium/inspection || true
           if git diff --cached --quiet; then
-            echo "inspection/ is produced from .cache and excluded from Git by policy — nothing to commit"
+            echo "inspection/ holds only ignored render output — nothing to commit"
           else
             git commit -m 'Preserve V8 native Cycles look-development frames [skip ci]'
             bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

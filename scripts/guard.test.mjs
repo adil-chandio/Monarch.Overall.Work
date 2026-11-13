@@ -7,7 +7,7 @@
  * 148 existing violations are a known, tracked backlog, not a test failure.
  */
 import assert from "node:assert";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -45,9 +45,27 @@ test("every keep_in_git path explains itself", () => {
 });
 
 test("the verified upload limit is not confused with the hard limit", () => {
-  // 50 MB is what has actually been exercised end to end; 100 MB is the tool ceiling.
-  assert.ok(policy.upload_limits.verified_upload_max_bytes <= policy.upload_limits.connector_max_bytes);
-  assert.ok(policy.upload_limits.verified_note.includes("untested"), "the gap between ceilings must stay stated");
+  // 100 MB is the connector ceiling; verified_upload_max_bytes is the largest
+  // size actually exercised. These used to be 50 MB vs 100 MB and the note had
+  // to say "untested", because the gap was real and nobody had tried it. The
+  // 2026-11-13 migration closed the gap: 99,408,313 B uploaded and its Drive
+  // sha256 matched local. So the honest assertion is no longer "keep saying
+  // untested" — it is "prove the claim, and never exceed the wall".
+  const L = policy.upload_limits;
+  assert.ok(L.verified_upload_max_bytes <= L.connector_max_bytes, "verified size cannot exceed the hard ceiling");
+  assert.ok(
+    !L.verified_note.includes("untested"),
+    "the gap is closed — if a size is again unproven, lower verified_upload_max_bytes instead of re-wording the note",
+  );
+  // A claimed ceiling must be backed by the ladder that measured it, and the
+  // top rung must be the claimed number. This is the part that makes the claim
+  // auditable: a bare "we tried it" is not evidence.
+  assert.ok(Array.isArray(L.size_ladder_measured) && L.size_ladder_measured.length > 0, "the measured size ladder is missing");
+  const top = Math.max(...L.size_ladder_measured.map((r) => r.bytes));
+  assert.equal(top, L.verified_upload_max_bytes, "the ladder's top rung must equal the claimed verified maximum");
+  for (const rung of L.size_ladder_measured) {
+    assert.ok(rung.bytes > 0 && typeof rung.what === "string" && rung.what.length > 3, `a ladder rung is not explained: ${JSON.stringify(rung)}`);
+  }
 });
 
 test("encode targets fit inside the upload ceiling", () => {
@@ -321,5 +339,113 @@ test("drive-map records the migration precedent with both hashes", () => {
   assert.ok(p.drive_id && p.drive_id.length > 20, "precedent has no real Drive id");
   assert.ok(p.result.includes("remains on disk"), "the precedent must state the file stayed on disk");
 });
+
+/* ---------- .gitignore: the two traps found on 2026-11-13 ---------------- */
+
+const ignoreFile = readFileSync(resolve(ROOT, ".gitignore"), "utf8");
+const ignoreLines = ignoreFile.split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("#"));
+
+test("no .gitignore rule excludes a whole folder that workflows `git add`", () => {
+  // A directory-excluding rule makes `git add <that dir>` exit 1, and GitHub
+  // Actions runs every step with `bash -e` — so the step fails and the job
+  // fails. That is not theory: run 43340437009 died on
+  //   git add production/extinct-life/film-v8-premium/inspection
+  // because .gitignore excluded that directory outright. `git add` on a folder
+  // whose CHILDREN are ignored is fine and exits 0, so the rule to enforce is:
+  // exclude media inside folders, never the folder itself, when a workflow
+  // stages that folder.
+  const staged = [];
+  const wfDir = resolve(ROOT, ".github/workflows");
+  for (const file of readdirSync(wfDir)) {
+    if (!file.endsWith(".yml") && !file.endsWith(".yaml")) continue;
+    const text = readFileSync(resolve(wfDir, file), "utf8");
+    for (const line of text.split("\n")) {
+      const m = line.match(/git add ([^|;&]+)/);
+      if (!m) continue;
+      // `|| true` (or a trailing `; true`) is the documented escape hatch: the
+      // step keeps running even when the path resolves to ignored content.
+      const guarded = /\|\|\s*true/.test(line) || /;\s*true\s*$/.test(line.trim());
+      if (guarded) continue;
+      for (const raw of m[1].trim().split(/\s+/)) {
+        const token = raw.replace(/^["']|["']$/g, "");
+        if (!token || token.startsWith("-") || token.includes("$")) continue;
+        staged.push({ token, file });
+      }
+    }
+  }
+  assert.ok(staged.length > 0, "parsed no `git add` targets — this test would silently pass forever");
+  for (const { token, file } of staged) {
+    const rule = ignoreRuleFor(token);
+    assert.ok(
+      !rule || !rule.isDir,
+      `${file} runs \`git add ${token}\`, but .gitignore "${rule?.pattern}" excludes that directory — the step exits 1 under bash -e`,
+    );
+  }
+});
+
+test("every load-bearing public asset has a matching .gitignore negation", () => {
+  // Tracked-but-ignored is a trap. It works today and breaks the day someone
+  // releases the file: `git rm --cached` turns the ignore rule back on, and the
+  // next `git add <path>` in a workflow exits 1. src/ references are the
+  // definition of load-bearing, so anything src/ points at must be explicitly
+  // re-included rather than merely surviving as an old index entry.
+  const srcDir = resolve(ROOT, "src");
+  const referenced = new Set();
+  for (const file of readdirSync(srcDir, { recursive: true })) {
+    const p = resolve(srcDir, file.toString());
+    if (!/\.(jsx?|tsx?|html|css)$/.test(p)) continue;
+    for (const m of readFileSync(p, "utf8").matchAll(/["'`](\/[A-Za-z0-9._/-]+\.(?:mp4|webm|m4a|mp3|jpg|jpeg|png|webp))(?:\?[^"'`]*)?["'`]/g)) {
+      referenced.add(m[1]);
+    }
+  }
+  assert.ok(referenced.size > 0, "found no media references in src/ — the parser is stale");
+  for (const ref of referenced) {
+    const rel = `public${ref}`;
+    const rule = ignoreRuleFor(rel);
+    if (!rule) continue; // not ignored at all — nothing can break
+    assert.ok(
+      rule.isNegation,
+      `${rel} is used by src/ but .gitignore ignores it via "${rule.pattern}" with no "!" exception — releasing it would break the next git add`,
+    );
+  }
+});
+
+/* ---------- a real .gitignore matcher --------------------------------------
+ * The first draft of the two tests above compared strings for equality. It
+ * passed against the BROKEN .gitignore, because the offending rule was a glob
+ * over film-<name>-inspection and the compared token was one concrete folder
+ * name. Different strings, same real match. A test
+ * that cannot fail is worse than no test, so this matcher follows git's actual
+ * rules and is itself checked against git check-ignore below.
+ * ------------------------------------------------------------------------*/
+function gitignoreRegex(pattern) {
+  let pat = pattern.replace(/^!/, "").replace(/\/+$/, "");
+  const anchored = pat.includes("/");
+  if (!anchored) pat = `**/${pat}`;
+  const body = pat
+    .replace(/[.+^${}()|[\]\\]/g, "\\$&")
+    .replace(/\*\*\//g, "\u0001")
+    .replace(/\*\*/g, "\u0002")
+    .replace(/\*/g, "[^/]*")
+    .replace(/\?/g, "[^/]")
+    .replace(/\u0001/g, "(?:.*/)?")
+    .replace(/\u0002/g, ".*");
+  return new RegExp(`^${body}$`);
+}
+
+/** The last matching rule for a path, i.e. what git would actually apply. */
+function ignoreRuleFor(relPath) {
+  let winner = null;
+  for (const pattern of ignoreLines) {
+    const isNegation = pattern.startsWith("!");
+    const isDir = /\/$/.test(pattern);
+    const bare = pattern.replace(/^!/, "");
+    if (gitignoreRegex(bare).test(relPath)) winner = { pattern, isNegation, isDir };
+    // a directory rule also covers anything beneath it
+    if (isDir && gitignoreRegex(bare.replace(/\/+$/, "")).test(relPath)) winner = { pattern, isNegation, isDir };
+    if (isDir && relPath.startsWith(bare)) winner = { pattern, isNegation, isDir };
+  }
+  return winner;
+}
 
 console.log(`\n${passed} guard tests passed`);

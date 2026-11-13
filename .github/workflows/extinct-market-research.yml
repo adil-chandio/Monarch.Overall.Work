@@ -50,7 +50,9 @@ jobs:
           git config user.name 'Monarch channel audit'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add "$SOURCE"
-          if [ -d docs/research/assets/extinct-market ]; then git add docs/research/assets/extinct-market; fi
+          # `|| true`: assets/ is media and may be fully ignored; the JSON report
+          # above is the evidence and must still be committed.
+          if [ -d docs/research/assets/extinct-market ]; then git add docs/research/assets/extinct-market || true; fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'docs(yt): record current English market research sample'
           bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

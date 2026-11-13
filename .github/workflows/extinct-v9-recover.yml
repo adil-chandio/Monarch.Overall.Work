@@ -56,7 +56,9 @@ jobs:
         run: |
           git config user.name 'Monarch full native 3D production'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add production/extinct-life/film-v9-full/ASSEMBLY-LOG.txt production/extinct-life/film-v9-full/ASSEMBLY-STATE.json
+          # `|| true`: these two are text and always stage; the guard is for the day
+          # a sibling media path is added to this line.
+          git add production/extinct-life/film-v9-full/ASSEMBLY-LOG.txt production/extinct-life/film-v9-full/ASSEMBLY-STATE.json || true
           git diff --cached --quiet || git commit -m 'Record full-master assembly diagnostics [skip ci]'
           bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
       - name: Publish the complete English master, with honest scope and music attribution
