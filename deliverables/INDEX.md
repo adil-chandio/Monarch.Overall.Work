@@ -55,9 +55,10 @@ that state are listed under **To do** at the bottom.
 | `Last-Mammoths-3D-Isolation-Test-22s.mp4` | 5.3 MB | video | no | Drive 3d animation · 1vPMmFQvTJ53fKM2IqBh3Vo8mcqIwIEGr ✓ | `09583cfca74e` |
 | `Last-Mammoths-Gait-Test-3s.mp4` | 612 KB | video | no | Drive 3d animation · 1BxRaf5lucFswbBvAJahUelm4r6YMgzQd ✓ | `a7603a2592cb` |
 
-`†` = the file is not in this checkout, so its hash is the one recorded when it left Git rather than a fresh reading.
-That is the normal state of a released file: `git clone` does not fetch Drive. `✓` still means the recorded Drive hash
-equalled the local hash at release time.
+`sha256` is the hash recorded when the file left Git, and `✓` means it equalled a fresh local hash at that
+moment. The hash is not re-read on every run: this page must read the same on a machine that has the videos and
+on a fresh clone that has none of them. To re-check the bytes against these hashes on a machine that does have
+them, run `node scripts/build-deliverables-index.mjs --verify-local` — it prints and never writes.
 
 ## To do — media over 20 MB with no recorded external home
 

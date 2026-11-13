@@ -448,4 +448,27 @@ function ignoreRuleFor(relPath) {
   return winner;
 }
 
+test("the deliverables page is built from records, not from the local disk", () => {
+  // The bug this encodes: rows were built from `find deliverables/`, so the
+  // machine doing the migration (26 videos present) and CI (none present)
+  // generated different pages, `--check` failed in CI forever, and repo-guard
+  // went red on every commit. A ledger may not depend on which bytes happen to
+  // be lying around. Assert on the generator's SOURCE, because running it twice
+  // here cannot catch a disk dependency — this machine has the files.
+  const gen = readFileSync(resolve(ROOT, "scripts/build-deliverables-index.mjs"), "utf8");
+  assert.ok(
+    /KNOWN_DRIVE\.values\(\)/.test(gen),
+    "generator must union records from config/drive-map.json, or released files vanish from the page",
+  );
+  assert.ok(
+    /--verify-local/.test(gen),
+    "the 'are the bytes still here' question needs its own command; folding it into the page is what broke CI",
+  );
+  // The rendered row must not contain any local-reading result. A page cell
+  // that changes with the machine has no business in a committed file.
+  const idx = readFileSync(resolve(ROOT, "deliverables/INDEX.md"), "utf8");
+  assert.ok(!/not in this checkout/.test(idx), "the page still reports local presence");
+  assert.ok(!/†/.test(idx), "the page still shows per-machine hash state");
+});
+
 console.log(`\n${passed} guard tests passed`);

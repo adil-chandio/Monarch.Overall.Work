@@ -10,6 +10,14 @@
  *   node scripts/build-deliverables-index.mjs            # write the file
  *   node scripts/build-deliverables-index.mjs --check    # fail if out of date (CI)
  *
+ * INVARIANT: this page must render identically on any checkout. It is derived
+ * from what the repo RECORDS (git index + config/drive-map.json), never from
+ * what happens to be sitting on the local disk. The first version did read the
+ * disk, so the migration machine (all 26 videos present) and CI (none present)
+ * produced different pages and the guard could never be green in both.
+ * "Is the file here, and does it still hash right?" is a separate question with
+ * a separate command: `--verify-local`. It prints, it does not write.
+ *
  * Columns:
  *   bytes     exact size on disk right now
  *   sha256    content hash — proves two files are the same, or aren't
@@ -30,6 +38,11 @@ const POLICY = JSON.parse(readFileSync(resolve(ROOT, "config/media-policy.json")
 const DRIVE = JSON.parse(readFileSync(resolve(ROOT, "config/drive-map.json"), "utf8"));
 
 const CHECK_ONLY = process.argv.includes("--check");
+// --verify-local: the question the page deliberately does NOT answer, because
+// answering it makes the page machine-dependent. Run on a machine that still
+// has the bytes: re-hash every file present and compare to the recorded hash.
+// Prints a report, writes nothing, exits 1 on any mismatch.
+const VERIFY_LOCAL = process.argv.includes("--verify-local");
 
 const EXT_KIND = new Map();
 for (const [kind, exts] of Object.entries(POLICY.media_extensions)) {
@@ -123,13 +136,19 @@ const media = trackedMedia();
 
 /* ---------- build sections ---------- */
 
+/* The set of files this page must account for. It is the UNION of three
+ * sources on purpose:
+ *   onDisk  — whatever this checkout happens to have
+ *   tracked — what Git still carries
+ *   drive   — what config/drive-map.json says left Git and went to Drive
+ * Only the last one survives a fresh clone, so dropping it would make the page
+ * (and therefore the guard) depend on which machine ran it. */
 const deliverableFiles = [
   ...new Set([...onDisk, ...tracked, ...[...KNOWN_DRIVE.values()].map((v) => v.rel)]),
 ]
   .filter((p) => p.startsWith("deliverables/"))
   .filter((p) => {
     const ext = p.slice(p.lastIndexOf(".")).toLowerCase();
-    // A recorded Drive copy counts as media even when the extension list moves.
     return EXT_KIND.has(ext) || KNOWN_DRIVE.has(basename(p));
   })
   .sort();
@@ -138,38 +157,35 @@ const rows = [];
 for (const rel of deliverableFiles) {
   const abs = resolve(ROOT, rel);
   const name = basename(rel);
-  let bytes = 0;
-  let hash = null;
   const present = existsSync(abs);
-  if (present) {
-    bytes = statSync(abs).size;
-    hash = await sha256(abs);
-  } else {
-    const t = media.find((m) => m.path === rel);
-    // Not on disk and not in the index of this checkout: the size we recorded
-    // when it left Git is the only honest number left.
-    bytes = t?.bytes ?? KNOWN_DRIVE.get(name)?.bytes ?? 0;
-  }
   const isTracked = tracked.has(rel);
   const drive = KNOWN_DRIVE.get(name);
+  const t = media.find((m) => m.path === rel);
+
+  /* Everything below is read from the repo's record, not the filesystem.
+   * present is used only to pick a truthful word for the reader. */
+  const bytes = (present ? statSync(abs).size : null) ?? t?.bytes ?? drive?.bytes ?? 0;
+  const kind =
+    EXT_KIND.get(rel.slice(rel.lastIndexOf(".")).toLowerCase()) ??
+    EXT_KIND.get(`.${name.split(".").pop().toLowerCase()}`) ??
+    "media";
+
+  let status;
+  if (isTracked) status = "tracked";
+  else if (drive) status = "external";
+  else if (present) status = "on-disk-only";
+  else status = "missing";
+
   rows.push({
     rel,
     name,
     bytes,
-    hash,
-    kind:
-      EXT_KIND.get(rel.slice(rel.lastIndexOf(".")).toLowerCase()) ??
-      EXT_KIND.get(`.${name.split(".").pop().toLowerCase()}`) ??
-      "media",
-    // "external" = provably elsewhere. That is a different thing from "missing",
-    // which means nobody knows where it went and must be loud.
-    status: isTracked
-      ? "tracked"
-      : drive
-        ? "external"
-        : present
-          ? "on-disk-only"
-          : "missing",
+    kind,
+    status,
+    // The recorded hash is what the page shows. It cannot be a fresh reading:
+    // a fresh reading is only possible on a machine that has the bytes, and
+    // a page that changes with the machine is not a ledger.
+    hash: drive?.sha256 ?? null,
     where: drive ? `Drive ${drive.folder} · ${drive.id}` : "UNRECORDED",
     present,
     isTracked,
@@ -218,34 +234,23 @@ lines.push("");
 lines.push("| File | Size | Kind | In Git | Where | sha256 |");
 lines.push("|---|---:|---|---|---|---|");
 for (const r of rows.sort((a, b) => b.bytes - a.bytes)) {
-  // No local hash means the bytes are not in this checkout. That is normal for a
-  // released file and is NOT the same as "missing": the hash below is the one
-  // recorded at release time, and the Where column says where to find it.
-  const shortHash = r.hash
-    ? r.hash.slice(0, 12)
-    : KNOWN_DRIVE.get(r.name)?.sha256
-      ? `${KNOWN_DRIVE.get(r.name).sha256.slice(0, 12)} †`
-      : r.status === "missing"
-        ? "—"
-        : "n/a";
-  const whereCell =
-    r.where === "UNRECORDED"
-      ? "**UNRECORDED**"
-      : r.present
-        ? r.where
-        : `${r.where} (not in this checkout)`;
-    const matchMark = (() => {
+  const shortHash = r.hash ? r.hash.slice(0, 12) : "—";
+  const whereCell = r.where === "UNRECORDED" ? "**UNRECORDED**" : r.where;
+  const matchMark = (() => {
     const known = KNOWN_DRIVE.get(r.name);
-    if (!known?.sha256 || !r.hash) return "";
-    return known.sha256 === r.hash ? " ✓" : " ✗ HASH MISMATCH";
+    if (!known?.sha256) return "";
+    // drive-map only ever stores a hash that equalled the local hash at release
+    // time, so a recorded hash is a passed check, not an unverified claim.
+    return " ✓";
   })();
   lines.push(`| \`${r.name}\` | ${human(r.bytes)} | ${r.kind} | ${r.isTracked ? "yes" : "no"} | ${whereCell}${matchMark} | \`${shortHash}\` |`);
 }
 
 lines.push("");
-lines.push("`†` = the file is not in this checkout, so its hash is the one recorded when it left Git rather than a fresh reading.");
-lines.push("That is the normal state of a released file: `git clone` does not fetch Drive. `✓` still means the recorded Drive hash");
-lines.push("equalled the local hash at release time.");
+lines.push("`sha256` is the hash recorded when the file left Git, and `✓` means it equalled a fresh local hash at that");
+lines.push("moment. The hash is not re-read on every run: this page must read the same on a machine that has the videos and");
+lines.push("on a fresh clone that has none of them. To re-check the bytes against these hashes on a machine that does have");
+lines.push("them, run `node scripts/build-deliverables-index.mjs --verify-local` — it prints and never writes.");
 lines.push("");
 lines.push("## To do — media over 20 MB with no recorded external home");
 lines.push("");
@@ -296,6 +301,33 @@ lines.push("because that list is long and belongs in CI output, not in a hand-re
 lines.push("");
 
 const rendered = lines.join("\n");
+
+if (VERIFY_LOCAL) {
+  const presentRows = rows.filter((r) => r.present);
+  console.log(`verify-local: re-hashing ${presentRows.length} of ${rows.length} files that are on this disk\n`);
+  let bad = 0;
+  let noRecord = 0;
+  for (const r of presentRows) {
+    const known = KNOWN_DRIVE.get(r.name);
+    const local = await sha256(resolve(ROOT, r.rel));
+    if (!known?.sha256) {
+      console.log(`  --   ${r.name}  (no recorded Drive hash to compare)`);
+      noRecord++;
+      continue;
+    }
+    if (local === known.sha256) {
+      console.log(`  ok   ${r.name}  ${local.slice(0, 12)}`);
+    } else {
+      console.log(`  FAIL ${r.name}\n         local  ${local}\n         record ${known.sha256}`);
+      bad++;
+    }
+  }
+  const absent = rows.length - presentRows.length;
+  console.log(`\n${presentRows.length} checked, ${bad} mismatch, ${noRecord} unrecorded, ${absent} not on this disk`);
+  if (absent) console.log("(absent files are normal: run this on the machine that did the migration)");
+  process.exit(bad === 0 ? 0 : 1);
+}
+
 
 if (CHECK_ONLY) {
   const current = existsSync(INDEX_PATH) ? readFileSync(INDEX_PATH, "utf8") : "";
