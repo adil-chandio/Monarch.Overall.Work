@@ -19,6 +19,8 @@ redrawn rather than decorated.
 """
 from __future__ import annotations
 
+import math
+
 from .bezier import draw_path, stroke_path
 
 # ---------------------------------------------------------------------------
@@ -166,3 +168,125 @@ def scale_point(bbox, unit):
     """Map a unit-box point to pixels inside `bbox`."""
     x0, y0, w, h = bbox
     return (x0 + unit[0] * w, y0 + unit[1] * h)
+
+
+# ---------------------------------------------------------------------------
+# DETAIL SETS — the paths a viewer actually recognises the animal by.
+# Each is a list of polylines in UNIT-BOX coordinates, so they scale with the body.
+# The reference's humpback is identifiable from three things at a glance: the
+# throat pleats, the knobbly flipper, and the baleen comb. Without them a whale is
+# just a grey lozenge, which is the failure the operator spotted immediately.
+# ---------------------------------------------------------------------------
+def _unit_line(x0, y0, x1, y1, n=6, bow=0.0):
+    """A slightly bowed line, because a dead-straight pleat looks like a ruler mark."""
+    pts = []
+    for i in range(n + 1):
+        k = i / n
+        x = x0 + (x1 - x0) * k
+        y = y0 + (y1 - y0) * k + math.sin(k * math.pi) * bow
+        pts.append((x, y))
+    return pts
+
+
+def humpback_pleats(n=14):
+    """Throat grooves running from under the jaw back along the belly."""
+    out = []
+    for i in range(n):
+        f0 = i / (n - 1)
+        x = 0.045 + f0 * 0.34
+        y0 = 0.70 - f0 * 0.16
+        out.append(_unit_line(x, y0, x + 0.055, y0 + 0.115, n=5, bow=-0.012))
+    return out
+
+
+def flipper_knobs(n=9):
+    """The tubercles on a humpback pectoral flipper — the giveaway detail."""
+    out = []
+    for i in range(n):
+        f0 = (i + 0.5) / n
+        x = 0.26 + f0 * 0.16
+        y = 0.86 - f0 * 0.34
+        out.append([(x - 0.008, y), (x + 0.008, y)])
+    return out
+
+
+def baleen_comb(n=22):
+    """Vertical baleen plates in the mouth — gold in the reference, and gold here."""
+    out = []
+    for i in range(n):
+        f0 = i / (n - 1)
+        x = 0.055 + f0 * 0.19
+        y_top = 0.585 - f0 * 0.02
+        out.append([(x, y_top), (x + 0.002, y_top + 0.075)])
+    return out
+
+
+def shark_gill_slits(n=5):
+    out = []
+    for i in range(n):
+        x = 0.23 + i * 0.022
+        out.append([(x, 0.42 + i * 0.004), (x + 0.006, 0.52 + i * 0.004)])
+    return out
+
+
+def whale_belly_lines(n=10):
+    """Generic ventral creases, for the sperm whale / Livyatan."""
+    out = []
+    for i in range(n):
+        f0 = i / (n - 1)
+        x = 0.06 + f0 * 0.30
+        y = 0.625 - f0 * 0.03
+        out.append(_unit_line(x, y, x + 0.10, y + 0.012, n=4, bow=0.006))
+    return out
+
+
+def unit_to_px(lines, bbox, flip=False):
+    """Map a detail set onto the canvas using the same transform as the body."""
+    x0, y0, w, h = bbox
+    out = []
+    for ln in lines:
+        pts = []
+        for (ux, uy) in ln:
+            ux2 = (1 - ux) if flip else ux
+            pts.append((x0 + ux2 * w, y0 + uy * h))
+        out.append(pts)
+    return out
+
+
+# A humpback: the body the reference actually shows. Same box, fuller profile,
+# throat expanded, and a clearly separate long pectoral flipper.
+HUMPBACK = [
+    ("M", 0.010, 0.42),
+    # head, blunt and slightly down-turned
+    ("C", 0.045, 0.30, 0.115, 0.24, 0.205, 0.235),
+    ("C", 0.30, 0.225, 0.40, 0.225, 0.50, 0.25),
+    ("C", 0.60, 0.275, 0.66, 0.31, 0.72, 0.35),
+    ("C", 0.78, 0.38, 0.82, 0.42, 0.855, 0.475),
+    # fluke
+    ("C", 0.895, 0.395, 0.945, 0.335, 0.985, 0.30),
+    ("C", 0.965, 0.42, 0.945, 0.475, 0.905, 0.515),
+    ("C", 0.945, 0.555, 0.962, 0.615, 0.975, 0.685),
+    ("C", 0.935, 0.655, 0.895, 0.60, 0.855, 0.555),
+    # belly, expanding into the throat
+    ("C", 0.80, 0.63, 0.70, 0.70, 0.58, 0.72),
+    ("C", 0.44, 0.745, 0.28, 0.735, 0.16, 0.70),
+    ("C", 0.085, 0.675, 0.035, 0.61, 0.018, 0.53),
+    ("C", 0.012, 0.49, 0.008, 0.45, 0.010, 0.42),
+    ("Z",),
+]
+
+HUMPBACK_FLIPPER = [
+    ("M", 0.245, 0.60),
+    ("C", 0.235, 0.72, 0.215, 0.84, 0.175, 0.95),
+    ("C", 0.255, 0.905, 0.315, 0.82, 0.355, 0.715),
+    ("C", 0.335, 0.655, 0.29, 0.615, 0.245, 0.60),
+    ("Z",),
+]
+
+HUMPBACK_MOUTH = [
+    ("M", 0.018, 0.50),
+    ("C", 0.075, 0.545, 0.135, 0.565, 0.195, 0.562),
+    ("C", 0.145, 0.585, 0.075, 0.575, 0.020, 0.545),
+]
+
+HUMPBACK_EYE = (0.075, 0.455)

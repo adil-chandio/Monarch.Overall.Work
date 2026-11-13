@@ -44,6 +44,7 @@ except ImportError:  # pragma: no cover
     sys.exit("needs Pillow")
 
 import scripts.lib.creatures as C
+import scripts.lib.shading as S
 from scripts.lib.bezier import draw_path, stroke_path
 
 W, H = 1280, 720
@@ -124,46 +125,47 @@ def water(f, t, depth=1.0, ray_strength=1.0):
     Gradient first: 720 line draws is cheap and gives an exactly flat wash with no
     banding, unlike a resized 2x2 image.
     """
+    WW, HH = f.im.size
     top = tuple(int(c * lerp(1.0, 0.55, 1 - depth)) for c in DEEP_TOP)
     bot = tuple(int(c * lerp(1.0, 0.45, 1 - depth)) for c in DEEP_BOT)
-    for y in range(H):
+    for y in range(HH):
         k = y / H
-        f.d.line([(0, y), (W, y)],
+        f.d.line([(0, y), (WW, y)],
                  fill=(int(lerp(top[0], bot[0], k)),
                        int(lerp(top[1], bot[1], k)),
                        int(lerp(top[2], bot[2], k))))
 
     # god-rays: a cached mask of soft wedges, scrolled horizontally so they appear
     # to move with the water rather than with the camera.
-    key = (int(depth * 10), int(ray_strength * 10))
+    key = (int(depth * 10), int(ray_strength * 10), WW, HH)
     if key not in _RAY_CACHE:
-        ray = Image.new("L", (W, H), 0)
+        ray = Image.new("L", (WW, HH), 0)
         rd = ImageDraw.Draw(ray)
-        for i in range(7):
-            x = int(W * (0.06 + i * 0.145))
+        for i in range(9):
+            x = int(WW * (0.04 + i * 0.115))
             wdt = 26 + (i * 37) % 60
             slant = 90 + (i * 23) % 70
             rd.polygon([(x, -40), (x + wdt, -40),
-                        (x + wdt + slant, H + 40), (x + slant, H + 40)],
+                        (x + wdt + slant, HH + 40), (x + slant, HH + 40)],
                        fill=int(26 * ray_strength))
         ray = ray.filter(ImageFilter.GaussianBlur(26))
         _RAY_CACHE[key] = ray
     rays = _RAY_CACHE[key]
-    off = int((t * 9) % W)
-    layer = Image.new("RGB", (W, H), (150, 205, 215))
-    f.im.paste(layer, (0, 0), rays.rotate(0))  # paste twice, wrapped, for a seamless scroll
-    f.im.paste(layer, (off - W, 0), rays)
+    off = int((t * 9) % WW)
+    layer = Image.new("RGB", (WW, HH), (150, 205, 215))
+    f.im.paste(layer, (0, 0), rays)
+    f.im.paste(layer, (off - WW, 0), rays)
     f.im.paste(layer, (off, 0), rays)
 
     # matter: three parallax layers. Near layer is bigger and faster, far layer is
     # a fine dust that barely moves. This is what gives the frame depth.
     for layer_id, (count, rmin, rmax, speed, alpha) in enumerate(
-        [(70, 1, 2, 26, 34), (46, 2, 4, 15, 46), (22, 3, 7, 8, 40)]
+        [(80, 1, 2, 26, 34), (52, 2, 4, 15, 46), (26, 3, 7, 8, 40)]
     ):
         for i in range(count):
             seed = (i * 2654435761 + layer_id * 40503) % 1000003
-            x = (seed % W + int(math.sin(t * 0.3 + i) * 12)) % W
-            y = ((seed // 977) % H - t * speed) % H
+            x = (seed % WW + int(math.sin(t * 0.3 + i) * 12)) % WW
+            y = ((seed // 977) % HH - t * speed) % HH
             r = rmin + (i % (rmax - rmin + 1))
             f.d.ellipse([x - r, y - r, x + r, y + r],
                         fill=(198, 226, 232, alpha))
@@ -221,6 +223,7 @@ def sonar(f, cx, cy, t, period=2.2, n=3, radius=340, alpha=1.0):
 
 
 def counter(f, cx, cy, value, size=110, colour=GOLD, label=None, alpha=1.0):
+    cx = f.im.size[0] / 2 if cx is None else cx
     ft = font(size)
     s = str(value)
     bb = f.d.textbbox((0, 0), s, font=ft)
@@ -255,7 +258,7 @@ def stamp(f, cy, text, t_in, t, size=46, colour=(198, 58, 46), alpha=1.0):
     a = int(255 * p * alpha)
     if a < 255:
         card.putalpha(card.split()[3].point(lambda v: int(v * a / 255)))
-    f.im.paste(card, (W // 2 - card.width // 2, int(cy - card.height / 2)), card)
+    f.im.paste(card, (f.im.size[0] // 2 - card.width // 2, int(cy - card.height / 2)), card)
 
 
 # ---------------------------------------------------------------------------
@@ -270,9 +273,9 @@ def beats():
         (0.0, 3.2, b_hook),
         (3.2, 7.0, b_sperm),
         (7.0, 11.2, b_two_giants),
-        (11.2, 14.6, b_nine_million),
+        (10.8, 15.0, b_nine_million),
         (14.6, 18.0, b_head),
-        (18.0, 21.2, b_teeth),
+        (17.4, 21.6, b_teeth),
         (21.2, 26.0, b_four_dozen),
         (26.0, 30.4, b_not_biggest),
         (30.4, 35.0, b_blue_whale),
@@ -286,6 +289,39 @@ def beats():
     ]
 
 
+# ---------------------------------------------------------------------------
+# Camera. Every beat renders into a canvas that is CAM_ZOOM times larger than the
+# output, then gets cropped along a slow push. A static frame reads as a slide; the
+# same frame moving one pixel a second reads as film. The reference does this in
+# every shot and it is why nothing in it ever feels parked.
+# ---------------------------------------------------------------------------
+CAM_S = 1.14
+
+
+def cam_crop(im, t, t0, t1, drift=(0.02, -0.015)):
+    """Crop the enlarged canvas to output size with a slow push and lateral drift.
+
+    The crop is always resized to exactly W x H. An earlier version computed the
+    crop box in float and rounded it twice, which produced a 1279 px wide frame on
+    some timestamps and crashed the encoder mid-render — 1036 frames in. Clamping
+    and an explicit resize makes the output size invariant.
+    """
+    k = clamp01((t - t0) / max(0.001, t1 - t0))
+    e = ease_in_out(k)
+    sw, sh = im.size
+    scale = 1.04 + 0.06 * e
+    cw = max(8, min(sw, int(round(W / scale))))
+    ch = max(8, min(sh, int(round(H / scale))))
+    cx = (sw - cw) / 2 + drift[0] * sw * (e - 0.5)
+    cy = (sh - ch) / 2 + drift[1] * sh * (e - 0.5)
+    cx = int(max(0, min(sw - cw, round(cx))))
+    cy = int(max(0, min(sh - ch, round(cy))))
+    out = im.crop((cx, cy, cx + cw, cy + ch))
+    if out.size != (W, H):
+        out = out.resize((W, H), Image.LANCZOS)
+    return out
+
+
 def _subject(f, shape_fn, x, y, w, h, t, flip=False, colour=None, speed=12.0, bob=5.0, alpha=1.0):
     """Draw an animal that drifts. The bob keeps even a 'held' shot alive, which is
     what the reference does in every single shot."""
@@ -294,34 +330,109 @@ def _subject(f, shape_fn, x, y, w, h, t, flip=False, colour=None, speed=12.0, bo
     shape_fn(f, xx, yy, w, h, flip=flip, colour=colour, alpha=alpha)
 
 
-def _whale(f, x, y, w, h, flip=False, colour=None, alpha=1.0):
-    col = tuple(colour or WHALE) + (int(255 * alpha),)
-    C.draw_path(f.d, C.LIVYATAN, (x, y, w, h), col, flip=flip, segs=30)
-    stroke_path(f.d, C.LIVYATAN_JAW, (x, y, w, h), (8, 10, 14, int(210 * alpha)),
-                width=max(2, int(h * 0.028)), flip=flip, segs=24)
-    ex, ey = C.scale_point((x, y, w, h), C.LIVYATAN_EYE)
+def _whale(f, x, y, w, h, flip=False, colour=None, alpha=1.0, detail=True):
+    """A sperm whale, lit top-to-bottom and pleated along the throat.
+
+    `colour` still exists because several beats want a hazier, distant animal; when
+    it is None the body gets the full three-stop gradient that makes it read as a
+    lit object rather than a sticker.
+    """
+    bb = (x, y, w, h)
+    if colour is None:
+        stops = [(0.0, (12, 14, 18)), (0.40, (26, 29, 35)), (0.74, (74, 80, 88)), (1.0, (122, 128, 136))]
+    else:
+        c0 = tuple(max(0, int(v * 0.55)) for v in colour)
+        c1 = tuple(int(v) for v in colour)
+        c2 = tuple(min(255, int(v * 1.45)) for v in colour)
+        stops = [(0.0, c0), (0.55, c1), (1.0, c2)]
+    S.fill_shaded(f, C.LIVYATAN, bb, stops, flip=flip, segs=30, alpha=alpha)
+
+    if detail and alpha > 0.5:
+        # throat creases, the feature that says "whale" at a glance
+        for pts in C.unit_to_px(C.whale_belly_lines(11), bb, flip=flip):
+            f.d.line(pts, fill=(10, 12, 16, int(150 * alpha)), width=max(2, int(h * 0.012)), joint="curve")
+        S.rim_light(f, C.LIVYATAN, bb, colour=(150, 195, 210), width=max(2, int(h * 0.010)),
+                    alpha=0.34 * alpha, flip=flip, segs=30)
+        S.streaks(f, C.LIVYATAN, bb, alpha=0.055 * alpha, n=26, flip=flip)
+
+    stroke_path(f.d, C.LIVYATAN_JAW, bb, (6, 8, 12, int(225 * alpha)),
+                width=max(2, int(h * 0.026)), flip=flip, segs=24)
+    ex, ey = C.scale_point(bb, C.LIVYATAN_EYE)
     if flip:
         ex = x + w - (ex - x)
-    r = max(2.0, h * 0.032)
+    r = max(2.0, h * 0.030)
     f.d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=(240, 238, 232, int(255 * alpha)))
+    f.d.ellipse([ex - r * 0.45, ey - r * 0.45, ex + r * 0.45, ey + r * 0.45],
+                fill=(16, 18, 22, int(255 * alpha)))
 
 
-def _meg(f, x, y, w, h, flip=False, colour=None, alpha=1.0):
-    col = tuple(colour or SHARK) + (int(255 * alpha),)
-    fin = tuple(max(0, c - 10) for c in (colour or SHARK)) + (int(255 * alpha),)
-    C.draw_path(f.d, C.MEGALODON_FIN, (x, y, w, h), fin, flip=flip, segs=24)
-    C.draw_path(f.d, C.MEGALODON, (x, y, w, h), col, flip=flip, segs=30)
-    ex, ey = C.scale_point((x, y, w, h), C.MEGALODON_EYE)
+def _meg(f, x, y, w, h, flip=False, colour=None, alpha=1.0, detail=True):
+    bb = (x, y, w, h)
+    if colour is None:
+        stops = [(0.0, (26, 30, 36)), (0.45, (52, 58, 66)), (1.0, (118, 126, 134))]
+    else:
+        c0 = tuple(max(0, int(v * 0.55)) for v in colour)
+        c1 = tuple(int(v) for v in colour)
+        c2 = tuple(min(255, int(v * 1.4)) for v in colour)
+        stops = [(0.0, c0), (0.55, c1), (1.0, c2)]
+
+    # pectoral fin first, darker, so it sits under the body
+    fin = [(0.0, tuple(max(0, int(c * 0.7)) for c in stops[1][1])),
+           (1.0, tuple(max(0, int(c * 0.95)) for c in stops[1][1]))]
+    S.fill_shaded(f, C.MEGALODON_FIN, bb, fin, flip=flip, segs=24, alpha=alpha)
+    S.fill_shaded(f, C.MEGALODON, bb, stops, flip=flip, segs=30, alpha=alpha)
+
+    if detail and alpha > 0.5:
+        for pts in C.unit_to_px(C.shark_gill_slits(5), bb, flip=flip):
+            f.d.line(pts, fill=(12, 14, 18, int(170 * alpha)), width=max(2, int(h * 0.014)), joint="curve")
+        S.rim_light(f, C.MEGALODON, bb, colour=(150, 190, 205), width=max(2, int(h * 0.010)),
+                    alpha=0.32 * alpha, flip=flip, segs=30)
+        S.streaks(f, C.MEGALODON, bb, alpha=0.05 * alpha, n=18, flip=flip)
+
+    ex, ey = C.scale_point(bb, C.MEGALODON_EYE)
     if flip:
         ex = x + w - (ex - x)
-    r = max(2.0, h * 0.026)
+    r = max(2.0, h * 0.024)
     f.d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=(240, 238, 232, int(255 * alpha)))
 
 
 def _orca(f, x, y, w, h, flip=False, alpha=1.0):
-    C.draw_path(f.d, C.ORCA, (x, y, w, h), (18, 20, 24, int(255 * alpha)), flip=flip, segs=30)
-    C.draw_path(f.d, C.ORCA_PATCH, (x, y, w, h), BONE + (int(250 * alpha),), flip=flip, segs=26)
-    C.draw_path(f.d, C.ORCA_EYEPATCH, (x, y, w, h), BONE + (int(250 * alpha),), flip=flip, segs=20)
+    bb = (x, y, w, h)
+    S.fill_shaded(f, C.ORCA, bb, [(0.0, (8, 9, 12)), (0.5, (20, 22, 27)), (1.0, (44, 48, 54))],
+                  flip=flip, segs=30, alpha=alpha)
+    C.draw_path(f.d, C.ORCA_PATCH, bb, BONE + (int(250 * alpha),), flip=flip, segs=26)
+    C.draw_path(f.d, C.ORCA_EYEPATCH, bb, BONE + (int(250 * alpha),), flip=flip, segs=20)
+    S.rim_light(f, C.ORCA, bb, colour=(150, 190, 210), width=max(2, int(h * 0.010)),
+                alpha=0.36 * alpha, flip=flip, segs=30)
+
+
+def _humpback(f, x, y, w, h, flip=False, alpha=1.0, detail=True):
+    """The reference's animal: pleated throat, knobbly flipper, gold baleen comb."""
+    bb = (x, y, w, h)
+    S.fill_shaded(f, C.HUMPBACK, bb,
+                  [(0.0, (12, 14, 19)), (0.40, (32, 36, 42)), (0.74, (100, 106, 114)), (1.0, (156, 162, 168))],
+                  flip=flip, segs=30, alpha=alpha)
+    S.fill_shaded(f, C.HUMPBACK_FLIPPER, bb,
+                  [(0.0, (206, 208, 204)), (1.0, (128, 132, 138))], flip=flip, segs=26, alpha=alpha)
+    if detail and alpha > 0.5:
+        for pts in C.unit_to_px(C.flipper_knobs(9), bb, flip=flip):
+            (ax, ay), (bx, by) = pts
+            r = max(2.0, h * 0.010)
+            f.d.ellipse([ax - r, ay - r, bx + r, by + r], fill=(235, 232, 225, int(235 * alpha)))
+        for pts in C.unit_to_px(C.humpback_pleats(14), bb, flip=flip):
+            f.d.line(pts, fill=(58, 62, 68, int(190 * alpha)), width=max(2, int(h * 0.008)), joint="curve")
+        for pts in C.unit_to_px(C.baleen_comb(22), bb, flip=flip):
+            f.d.line(pts, fill=(226, 180, 60, int(235 * alpha)), width=max(2, int(h * 0.009)))
+        S.rim_light(f, C.HUMPBACK, bb, colour=(170, 210, 222), width=max(2, int(h * 0.010)),
+                    alpha=0.32 * alpha, flip=flip, segs=30)
+        S.streaks(f, C.HUMPBACK, bb, alpha=0.05 * alpha, n=30, flip=flip)
+    stroke_path(f.d, C.HUMPBACK_MOUTH, bb, (6, 8, 12, int(235 * alpha)),
+                width=max(2, int(h * 0.012)), flip=flip, segs=24)
+    ex, ey = C.scale_point(bb, C.HUMPBACK_EYE)
+    if flip:
+        ex = x + w - (ex - x)
+    r = max(2.0, h * 0.011)
+    f.d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=(240, 238, 232, int(255 * alpha)))
 
 
 # -- beats -------------------------------------------------------------------
@@ -368,7 +479,7 @@ def b_nine_million(f, t, t0, t1):
         return
     water(f, t, depth=0.95, ray_strength=0.7)
     p = ease_in_out((t - t0) / max(0.4, (t1 - t0) * 0.85))
-    counter(f, W // 2, H * 0.42, f"{lerp(0, 9, p):.1f}", size=132,
+    counter(f, f.im.size[0] / 2, f.im.size[1] * 0.42, f"{lerp(0, 9, p):.1f}", size=132,
             label="MILLION YEARS AGO", alpha=k)
 
 
@@ -396,7 +507,7 @@ def b_teeth(f, t, t0, t1):
         th = 150 + (i * 37) % 60
         C.draw_path(f.d, C.TOOTH, (x - 26, y, 52, th), (238, 234, 224, int(252 * k)), segs=18)
     p = ease_in_out((t - t0) / max(0.4, (t1 - t0) * 0.85))
-    counter(f, W // 2, H * 0.20, f"{int(lerp(0, 40, p))}", size=118, label="CM EACH", alpha=k)
+    counter(f, f.im.size[0] / 2, f.im.size[1] * 0.20, f"{int(lerp(0, 40, p))}", size=118, label="CM EACH", alpha=k)
 
 
 def b_four_dozen(f, t, t0, t1):
@@ -439,15 +550,17 @@ def b_real_question(f, t, t0, t1):
     if k <= 0:
         return
     water(f, t, depth=1.0, ray_strength=0.5)
-    dark = Image.new("RGBA", (W, H), (0, 0, 0, int(150 * k)))
+    WW, HH = f.im.size
+    dark = Image.new("RGBA", (WW, HH), (0, 0, 0, int(150 * k)))
     f.im.paste(Image.alpha_composite(f.im.convert("RGBA"), dark).convert("RGB"), (0, 0))
+    CW, CH = f.im.size
     ft = font(50)
     s = "WHAT WAS IT HUNTING?"
     bb = f.d.textbbox((0, 0), s, font=ft)
-    f.d.text((W / 2 - (bb[2] - bb[0]) / 2 + 3, H * 0.40 + 4), s, font=ft, fill=(0, 0, 0, int(120 * k)))
-    f.d.text((W / 2 - (bb[2] - bb[0]) / 2, H * 0.40), s, font=ft, fill=WHITE + (int(250 * k),))
+    f.d.text((CW / 2 - (bb[2] - bb[0]) / 2 + 3, CH * 0.40 + 4), s, font=ft, fill=(0, 0, 0, int(120 * k)))
+    f.d.text((CW / 2 - (bb[2] - bb[0]) / 2, CH * 0.40), s, font=ft, fill=WHITE + (int(250 * k),))
     a = win(t, t0 + 0.9, t1, 0.3)
-    label_box(f, (W // 2 - 190, H * 0.58), "THE ANSWER IS NOT SIZE", alpha=a * k, size=26)
+    label_box(f, (f.im.size[0] / 2 - 190, f.im.size[1] * 0.58), "THE ANSWER IS NOT SIZE", alpha=a * k, size=26)
 
 
 def b_bite_marks(f, t, t0, t1):
@@ -487,15 +600,16 @@ def b_no_fight(f, t, t0, t1):
     if k <= 0:
         return
     water(f, t, depth=0.9, ray_strength=0.6)
+    CW, CH = f.im.size
     ft = font(46)
     s = "WE CANNOT SAY THEY FOUGHT"
     bb = f.d.textbbox((0, 0), s, font=ft)
-    f.d.text((W / 2 - (bb[2] - bb[0]) / 2, H * 0.30), s, font=ft, fill=WHITE + (int(245 * k),))
+    f.d.text((CW / 2 - (bb[2] - bb[0]) / 2, CH * 0.30), s, font=ft, fill=WHITE + (int(245 * k),))
     a = win(t, t0 + 0.8, t1, 0.3)
     ft2 = font(34)
     s2 = "WE CAN SAY THEY SHARED THE WATER"
     bb2 = f.d.textbbox((0, 0), s2, font=ft2)
-    f.d.text((W / 2 - (bb2[2] - bb2[0]) / 2, H * 0.44), s2, font=ft2,
+    f.d.text((CW / 2 - (bb2[2] - bb2[0]) / 2, CH * 0.44), s2, font=ft2,
              fill=GOLD + (int(240 * a * k),))
 
 
@@ -515,12 +629,13 @@ def b_not_monster(f, t, t0, t1):
     if k <= 0:
         return
     water(f, t, depth=1.0, ray_strength=0.4)
+    CW, CH = f.im.size
     ft = font(44)
     s = "NOT A MONSTER"
     bb = f.d.textbbox((0, 0), s, font=ft)
-    f.d.text((W / 2 - (bb[2] - bb[0]) / 2, H * 0.34), s, font=ft, fill=WHITE + (int(245 * k),))
+    f.d.text((CW / 2 - (bb[2] - bb[0]) / 2, CH * 0.34), s, font=ft, fill=WHITE + (int(245 * k),))
     a = win(t, t0 + 0.7, t1, 0.3)
-    label_box(f, (W // 2 - 240, H * 0.50), "AN ANIMAL THAT WAS REALLY THERE", alpha=a * k, size=28)
+    label_box(f, (f.im.size[0] / 2 - 240, f.im.size[1] * 0.50), "AN ANIMAL THAT WAS REALLY THERE", alpha=a * k, size=28)
 
 
 def b_title_close(f, t, t0, t1):
@@ -532,12 +647,13 @@ def b_title_close(f, t, t0, t1):
     ft = font(58)
     s = "LIVYATAN"
     bb = f.d.textbbox((0, 0), s, font=ft)
-    f.d.text((W / 2 - (bb[2] - bb[0]) / 2 + 3, H * 0.14 + 4), s, font=ft, fill=(0, 0, 0, int(130 * k)))
-    f.d.text((W / 2 - (bb[2] - bb[0]) / 2, H * 0.14), s, font=ft, fill=WHITE + (int(250 * k),))
+    CW, CH = f.im.size
+    f.d.text((CW / 2 - (bb[2] - bb[0]) / 2 + 3, CH * 0.14 + 4), s, font=ft, fill=(0, 0, 0, int(130 * k)))
+    f.d.text((CW / 2 - (bb[2] - bb[0]) / 2, CH * 0.14), s, font=ft, fill=WHITE + (int(250 * k),))
     ft2 = font(24)
     s2 = "EXTINCT LIFE"
     bb2 = f.d.textbbox((0, 0), s2, font=ft2)
-    f.d.text((W / 2 - (bb2[2] - bb2[0]) / 2, H * 0.26), s2, font=ft2, fill=GOLD + (int(240 * k),))
+    f.d.text((CW / 2 - (bb2[2] - bb2[0]) / 2, CH * 0.26), s2, font=ft2, fill=GOLD + (int(240 * k),))
 
 
 # ---------------------------------------------------------------------------
@@ -556,14 +672,24 @@ def main() -> int:
     total = int(a.duration * a.fps)
 
     def render(t):
+        BW, BH = int(W * CAM_S), int(H * CAM_S)
         f = type("F", (), {})()
-        f.im = Image.new("RGB", (W, H), DEEP_TOP)
+        f.im = Image.new("RGB", (BW, BH), DEEP_TOP)
         f.d = ImageDraw.Draw(f.im, "RGBA")
-        f.w, f.h = W, H
+        f.w, f.h = BW, BH
+        f.cam = CAM_S
+        active = None
         for (s, e, fn) in bs:
             if s - 0.7 <= t <= e + 0.7:
                 fn(f, t, s, e)
-        return f.im
+                if s <= t <= e:
+                    active = (s, e)
+        if active:
+            drift = (0.0, 0.0)
+            if active[2:] == () or True:
+                drift = (0.02, -0.015)
+            return cam_crop(f.im, t, active[0], active[1], drift=drift)
+        return cam_crop(f.im, t, 0.0, 1.0)
 
     if a.still is not None:
         p = out / f"still-{a.still:06.2f}.png"
