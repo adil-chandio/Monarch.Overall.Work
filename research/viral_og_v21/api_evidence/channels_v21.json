@@ -1,17 +1,48 @@
 {
- "resolved": 35,
+ "resolved": 29,
  "unresolved": [
+  {
+   "screenshot_name": "Oddlyhuman",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Relatos Pintados",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
   {
    "screenshot_name": "Whymuntary",
    "handle": "@Whymuntary",
-   "why": "unresolved:"
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "how really?",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Fact Minded",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Beyond the Obvious",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
   },
   {
    "screenshot_name": "Mysterious Things (Unsolved India)",
    "handle": null,
-   "why": "unresolved:"
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Dhruv Rathee",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
   }
  ],
+ "identity_audit": [],
  "channels": [
   {
    "channel_id": "UClhEbIxXuHSm_yAZjWRMXBw",
@@ -31,7 +62,14 @@
    "cluster": "stickman_prehistory",
    "catalogue_n": 1,
    "median_views": 711,
-   "outlier_count": 0
+   "outlier_count": 0,
+   "identity": {
+    "screenshot_titles": 6,
+    "matched": 0,
+    "rate": 0.0,
+    "verified": false,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCK8TbMQGDbB94EOR3aGJo3Q",
@@ -50,8 +88,15 @@
    "screenshot_videos": 25,
    "cluster": "stickman_prehistory",
    "catalogue_n": 39,
-   "median_views": 32158,
-   "outlier_count": 11
+   "median_views": 32157,
+   "outlier_count": 11,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC_7R-sfi7bi8dkzmSlBdUVw",
@@ -71,7 +116,14 @@
    "cluster": "stickman_prehistory",
    "catalogue_n": 28,
    "median_views": 13644,
-   "outlier_count": 6
+   "outlier_count": 6,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCH59TmQhPOPhC3M17jCWpRQ",
@@ -91,7 +143,14 @@
    "cluster": "stickman_history_dark",
    "catalogue_n": 5,
    "median_views": 238429,
-   "outlier_count": 2
+   "outlier_count": 2,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 3,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCS3iXffTKXrhKWGXaPckb8A",
@@ -111,27 +170,14 @@
    "cluster": "stickman_prehistory",
    "catalogue_n": 35,
    "median_views": 5675,
-   "outlier_count": 9
-  },
-  {
-   "channel_id": "UCxyQ6jK98CCOsy-gwV8QaFA",
-   "title": "Oddlyhuman",
-   "handle": "@oddlyhuma-n",
-   "country": "IN",
-   "published": "2026-06-12T11:48:27.921187Z",
-   "subs": 4510,
-   "channel_views": 1026596,
-   "video_count": 14,
-   "age_days": 154,
-   "uploads": "UUxyQ6jK98CCOsy-gwV8QaFA",
-   "resolved_by": "search:exact-title",
-   "screenshot_name": "Oddlyhuman",
-   "screenshot_subs": null,
-   "screenshot_videos": null,
-   "cluster": "stickman_prehistory_cold",
-   "catalogue_n": 14,
-   "median_views": 3067,
-   "outlier_count": 1
+   "outlier_count": 9,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 3,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCuQYm04-WU7jN6r8UvwHk8g",
@@ -151,7 +197,14 @@
    "cluster": "stickman_prehistory_cold",
    "catalogue_n": 7,
    "median_views": 23,
-   "outlier_count": 2
+   "outlier_count": 2,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 3,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCGor2L_Co7NrwLEWrgIbaBw",
@@ -171,7 +224,14 @@
    "cluster": "stickman_prehistory_cold",
    "catalogue_n": 9,
    "median_views": 1884,
-   "outlier_count": 3
+   "outlier_count": 3,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 0,
+    "rate": 0.0,
+    "verified": false,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCXbCOOoXE09V6StOp0gbTFQ",
@@ -189,9 +249,16 @@
    "screenshot_subs": "464K",
    "screenshot_videos": 107,
    "cluster": "stickman_dark_facts",
-   "catalogue_n": 100,
-   "median_views": 367992,
-   "outlier_count": 18
+   "catalogue_n": 140,
+   "median_views": 460912,
+   "outlier_count": 25,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC4xDcLGTEslWvwBD7HAogqQ",
@@ -209,9 +276,16 @@
    "screenshot_subs": "1.52M",
    "screenshot_videos": 215,
    "cluster": "stickman_curiosity",
-   "catalogue_n": 100,
-   "median_views": 50677,
-   "outlier_count": 24
+   "catalogue_n": 235,
+   "median_views": 62271,
+   "outlier_count": 73,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC725RW3Vr69Z9VpCqFT1Ujw",
@@ -230,8 +304,15 @@
    "screenshot_videos": 36,
    "cluster": "stickman_curiosity",
    "catalogue_n": 38,
-   "median_views": 134555,
-   "outlier_count": 8
+   "median_views": 134552,
+   "outlier_count": 8,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC0L9hD7HMwWU7xuU5HRA6Iw",
@@ -250,28 +331,15 @@
    "screenshot_videos": 34,
    "cluster": "pov_historical",
    "catalogue_n": 41,
-   "median_views": 382434,
-   "outlier_count": 7
-  },
-  {
-   "channel_id": "UCQIQdoc79Mjy0ZuiQE12WBg",
-   "title": "Relatos Pintados",
-   "handle": "@relatospintados",
-   "country": "AR",
-   "published": "2026-01-28T01:07:26.295465Z",
-   "subs": 8220,
-   "channel_views": 1422686,
-   "video_count": 69,
-   "age_days": 289,
-   "uploads": "UUQIQdoc79Mjy0ZuiQE12WBg",
-   "resolved_by": "search:exact-title",
-   "screenshot_name": "Relatos Pintados",
-   "screenshot_subs": null,
-   "screenshot_videos": null,
-   "cluster": "pov_historical",
-   "catalogue_n": 69,
-   "median_views": 7648,
-   "outlier_count": 13
+   "median_views": 382433,
+   "outlier_count": 7,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC9m3w-9L_Bt34x02IQXQ5kg",
@@ -291,7 +359,14 @@
    "cluster": "pov_wealth",
    "catalogue_n": 24,
    "median_views": 4419,
-   "outlier_count": 8
+   "outlier_count": 8,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 3,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCv1ulnrecU29kjtIlJfWaIQ",
@@ -311,7 +386,14 @@
    "cluster": "stickman_selfimprove",
    "catalogue_n": 18,
    "median_views": 32276,
-   "outlier_count": 4
+   "outlier_count": 4,
+   "identity": {
+    "screenshot_titles": 17,
+    "matched": 10,
+    "rate": 0.59,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCUWG17RpxXBZ4avKIqPX6CQ",
@@ -331,7 +413,14 @@
    "cluster": "animated_short_film",
    "catalogue_n": 23,
    "median_views": 67710,
-   "outlier_count": 5
+   "outlier_count": 5,
+   "identity": {
+    "screenshot_titles": 10,
+    "matched": 10,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCPdVPilEjfAJ1kAFHdndm6w",
@@ -351,7 +440,14 @@
    "cluster": "animated_short_film",
    "catalogue_n": 23,
    "median_views": 58676,
-   "outlier_count": 6
+   "outlier_count": 6,
+   "identity": {
+    "screenshot_titles": 7,
+    "matched": 7,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCBEGdZ3YyZ1qG1gSwUKKTCg",
@@ -370,8 +466,15 @@
    "screenshot_videos": 4,
    "cluster": "animated_short_film",
    "catalogue_n": 12,
-   "median_views": 8940,
-   "outlier_count": 3
+   "median_views": 8945,
+   "outlier_count": 3,
+   "identity": {
+    "screenshot_titles": 4,
+    "matched": 1,
+    "rate": 0.25,
+    "verified": false,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCfac5RFAzNlk1IQnHs2lPRA",
@@ -391,7 +494,14 @@
    "cluster": "animal_2d",
    "catalogue_n": 43,
    "median_views": 530,
-   "outlier_count": 4
+   "outlier_count": 4,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 0,
+    "rate": 0.0,
+    "verified": false,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCJw3_4gpD9dicj1ZGr5wdHQ",
@@ -411,7 +521,14 @@
    "cluster": "animal_2d",
    "catalogue_n": 46,
    "median_views": 943,
-   "outlier_count": 13
+   "outlier_count": 13,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCUXZgSMTJmPNFHUvKJGMe-Q",
@@ -431,7 +548,14 @@
    "cluster": "animal_2d_dark",
    "catalogue_n": 7,
    "median_views": 65406,
-   "outlier_count": 3
+   "outlier_count": 3,
+   "identity": {
+    "screenshot_titles": 6,
+    "matched": 6,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCW6H7SKOlO8ShEILHoHUnHA",
@@ -451,7 +575,14 @@
    "cluster": "animal_2d",
    "catalogue_n": 37,
    "median_views": 12869,
-   "outlier_count": 13
+   "outlier_count": 13,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 2,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC4ZpfvppuvCefRu3T7p0ojg",
@@ -471,7 +602,14 @@
    "cluster": "explainer_2d",
    "catalogue_n": 29,
    "median_views": 110045,
-   "outlier_count": 8
+   "outlier_count": 8,
+   "identity": {
+    "screenshot_titles": 1,
+    "matched": 1,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCm1yxl_4qMbStLHpHQu6xWg",
@@ -490,8 +628,15 @@
    "screenshot_videos": 21,
    "cluster": "explainer_2d",
    "catalogue_n": 24,
-   "median_views": 362147,
-   "outlier_count": 3
+   "median_views": 362153,
+   "outlier_count": 3,
+   "identity": {
+    "screenshot_titles": 1,
+    "matched": 1,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCTMRR8OubH0YmYR57xJIapQ",
@@ -510,8 +655,15 @@
    "screenshot_videos": 1,
    "cluster": "true_crime_2d",
    "catalogue_n": 2,
-   "median_views": 1184735,
-   "outlier_count": 0
+   "median_views": 1185022,
+   "outlier_count": 0,
+   "identity": {
+    "screenshot_titles": 1,
+    "matched": 1,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC_9A1c12YJXjADklUU2MVug",
@@ -531,7 +683,14 @@
    "cluster": "dark_doc_2d",
    "catalogue_n": 24,
    "median_views": 315,
-   "outlier_count": 8
+   "outlier_count": 8,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 1,
+    "rate": 0.5,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC14Fb2zWTEZklONPXFbLrTQ",
@@ -551,27 +710,14 @@
    "cluster": "economics_2d",
    "catalogue_n": 30,
    "median_views": 296941,
-   "outlier_count": 10
-  },
-  {
-   "channel_id": "UCNsb9fdy1D7aRZimReTrcMw",
-   "title": "how really?",
-   "handle": "@howreallyvideos",
-   "country": "US",
-   "published": "2024-07-05T17:48:57.060092Z",
-   "subs": 24300,
-   "channel_views": 3322903,
-   "video_count": 11,
-   "age_days": 861,
-   "uploads": "UUNsb9fdy1D7aRZimReTrcMw",
-   "resolved_by": "search:exact-title",
-   "screenshot_name": "how really?",
-   "screenshot_subs": null,
-   "screenshot_videos": null,
-   "cluster": "explainer_2d_money",
-   "catalogue_n": 11,
-   "median_views": 89661,
-   "outlier_count": 3
+   "outlier_count": 10,
+   "identity": {
+    "screenshot_titles": 7,
+    "matched": 7,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCeeXtCBrqQz_1bsAK4X34hg",
@@ -591,7 +737,14 @@
    "cluster": "ai_anime",
    "catalogue_n": 0,
    "median_views": 0,
-   "outlier_count": 0
+   "outlier_count": 0,
+   "identity": {
+    "screenshot_titles": 2,
+    "matched": 0,
+    "rate": 0.0,
+    "verified": false,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCtthclQj3xsCXJjBBmdPoWQ",
@@ -609,9 +762,16 @@
    "screenshot_subs": "41.2K",
    "screenshot_videos": 102,
    "cluster": "stickman_science",
-   "catalogue_n": 100,
-   "median_views": 1342,
-   "outlier_count": 5
+   "catalogue_n": 128,
+   "median_views": 1480,
+   "outlier_count": 19,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 3,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UCgdljd9PHGxqvDGgabrKvZg",
@@ -629,49 +789,16 @@
    "screenshot_subs": "108K",
    "screenshot_videos": 141,
    "cluster": "practical_2d",
-   "catalogue_n": 100,
-   "median_views": 1526,
-   "outlier_count": 16
-  },
-  {
-   "channel_id": "UCPMKJ4bLnAK5DtuQuO0aZiQ",
-   "title": "Fact Minded",
-   "handle": "@factminded",
-   "country": "IN",
-   "published": "2021-07-06T04:00:38.667595Z",
-   "subs": 372000,
-   "channel_views": 258156471,
-   "video_count": 722,
-   "age_days": 1956,
-   "uploads": "UUPMKJ4bLnAK5DtuQuO0aZiQ",
-   "resolved_by": "search:exact-title",
-   "screenshot_name": "Fact Minded",
-   "screenshot_subs": null,
-   "screenshot_videos": null,
-   "cluster": "photoreal_animal_facts",
-   "catalogue_n": 100,
-   "median_views": 33719,
-   "outlier_count": 19
-  },
-  {
-   "channel_id": "UCvbm6K5cbK4Ik7Vd293HjXw",
-   "title": "Beyond the Obvious",
-   "handle": "@beyondtheobvious-hq",
-   "country": "US",
-   "published": "2025-01-03T18:44:41.558337Z",
-   "subs": 49800,
-   "channel_views": 420183,
-   "video_count": 76,
-   "age_days": 679,
-   "uploads": "UUvbm6K5cbK4Ik7Vd293HjXw",
-   "resolved_by": "search:exact-title",
-   "screenshot_name": "Beyond the Obvious",
-   "screenshot_subs": null,
-   "screenshot_videos": null,
-   "cluster": "stickman_science",
-   "catalogue_n": 76,
-   "median_views": 935,
-   "outlier_count": 10
+   "catalogue_n": 195,
+   "median_views": 1907,
+   "outlier_count": 50,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 3,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   },
   {
    "channel_id": "UC-0Ypq01GqX9zx0-NcbDLVA",
@@ -691,27 +818,14 @@
    "cluster": "stickman_curiosity",
    "catalogue_n": 11,
    "median_views": 758,
-   "outlier_count": 4
-  },
-  {
-   "channel_id": "UC-CSyyi47VX1lD9zyeABW3w",
-   "title": "Dhruv Rathee",
-   "handle": "@dhruvrathee",
-   "country": "DE",
-   "published": "2013-01-07T19:08:50Z",
-   "subs": 33300000,
-   "channel_views": 6522431871,
-   "video_count": 805,
-   "age_days": 5058,
-   "uploads": "UU-CSyyi47VX1lD9zyeABW3w",
-   "resolved_by": "search:exact-title",
-   "screenshot_name": "Dhruv Rathee",
-   "screenshot_subs": null,
-   "screenshot_videos": null,
-   "cluster": "hindi_explainer",
-   "catalogue_n": 100,
-   "median_views": 12129627,
-   "outlier_count": 0
+   "outlier_count": 4,
+   "identity": {
+    "screenshot_titles": 3,
+    "matched": 3,
+    "rate": 1.0,
+    "verified": true,
+    "method": "exact:forHandle"
+   }
   }
  ]
 }

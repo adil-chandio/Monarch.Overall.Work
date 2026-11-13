@@ -1,18 +1,48 @@
 {
- "run_v21.json": 920,
- "channel_deep_v21.json": 222134,
- "videos_v21.json": 4252379,
- "comments_v21.json": 15690,
+ "run_v21.json": 1074,
+ "channel_deep_v21.json": 191911,
+ "videos_v21.json": 3213171,
+ "comments_v21.json": 15149,
  "unresolved": [
+  {
+   "screenshot_name": "Oddlyhuman",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Relatos Pintados",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
   {
    "screenshot_name": "Whymuntary",
    "handle": "@Whymuntary",
-   "why": "unresolved:"
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "how really?",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Fact Minded",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Beyond the Obvious",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
   },
   {
    "screenshot_name": "Mysterious Things (Unsolved India)",
    "handle": null,
-   "why": "unresolved:"
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+  },
+  {
+   "screenshot_name": "Dhruv Rathee",
+   "handle": null,
+   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
   }
  ],
  "channels": [
@@ -30,7 +60,7 @@
    "api": "Zenn",
    "subs": 200000,
    "cat": 39,
-   "med": 32158,
+   "med": 32157,
    "out": 11,
    "by": "exact:forHandle"
   },
@@ -62,15 +92,6 @@
    "by": "exact:forHandle"
   },
   {
-   "n": "Oddlyhuman",
-   "api": "Oddlyhuman",
-   "subs": 4510,
-   "cat": 14,
-   "med": 3067,
-   "out": 1,
-   "by": "search:exact-title"
-  },
-  {
    "n": "Slightly Conscious",
    "api": "Slightly Conscious",
    "subs": 36,
@@ -92,18 +113,18 @@
    "n": "Simple Paint",
    "api": "Simple Paint",
    "subs": 549000,
-   "cat": 100,
-   "med": 367992,
-   "out": 18,
+   "cat": 140,
+   "med": 460912,
+   "out": 25,
    "by": "exact:forHandle"
   },
   {
    "n": "Good Enough",
    "api": "Good Enough",
    "subs": 1580000,
-   "cat": 100,
-   "med": 50677,
-   "out": 24,
+   "cat": 235,
+   "med": 62271,
+   "out": 73,
    "by": "exact:forHandle"
   },
   {
@@ -111,7 +132,7 @@
    "api": "If Humans",
    "subs": 140000,
    "cat": 38,
-   "med": 134555,
+   "med": 134552,
    "out": 8,
    "by": "exact:forHandle"
   },
@@ -120,18 +141,9 @@
    "api": "Hypothetically",
    "subs": 343000,
    "cat": 41,
-   "med": 382434,
+   "med": 382433,
    "out": 7,
    "by": "exact:forHandle"
-  },
-  {
-   "n": "Relatos Pintados",
-   "api": "Relatos Pintados",
-   "subs": 8220,
-   "cat": 69,
-   "med": 7648,
-   "out": 13,
-   "by": "search:exact-title"
   },
   {
    "n": "My Chaotic Stories",
@@ -174,7 +186,7 @@
    "api": "Last Soul",
    "subs": 19100,
    "cat": 12,
-   "med": 8940,
+   "med": 8945,
    "out": 3,
    "by": "exact:forHandle"
   },
@@ -228,7 +240,7 @@
    "api": "Unknown Frequencies",
    "subs": 92700,
    "cat": 24,
-   "med": 362147,
+   "med": 362153,
    "out": 3,
    "by": "exact:forHandle"
   },
@@ -237,7 +249,7 @@
    "api": "Kaktus",
    "subs": 14100,
    "cat": 2,
-   "med": 1184735,
+   "med": 1185022,
    "out": 0,
    "by": "exact:forHandle"
   },
@@ -260,15 +272,6 @@
    "by": "exact:forHandle"
   },
   {
-   "n": "how really?",
-   "api": "how really?",
-   "subs": 24300,
-   "cat": 11,
-   "med": 89661,
-   "out": 3,
-   "by": "search:exact-title"
-  },
-  {
    "n": "AnimeAI Boost",
    "api": "AnimeAI Boost",
    "subs": 66300,
@@ -281,37 +284,19 @@
    "n": "The Stickman Scientist",
    "api": "The Stickman Scientist",
    "subs": 41300,
-   "cat": 100,
-   "med": 1342,
-   "out": 5,
+   "cat": 128,
+   "med": 1480,
+   "out": 19,
    "by": "exact:forHandle"
   },
   {
    "n": "Hidden Homestead",
    "api": "Hidden Homestead",
    "subs": 111000,
-   "cat": 100,
-   "med": 1526,
-   "out": 16,
+   "cat": 195,
+   "med": 1907,
+   "out": 50,
    "by": "exact:forHandle"
-  },
-  {
-   "n": "Fact Minded",
-   "api": "Fact Minded",
-   "subs": 372000,
-   "cat": 100,
-   "med": 33719,
-   "out": 19,
-   "by": "search:exact-title"
-  },
-  {
-   "n": "Beyond the Obvious",
-   "api": "Beyond the Obvious",
-   "subs": 49800,
-   "cat": 76,
-   "med": 935,
-   "out": 10,
-   "by": "search:exact-title"
   },
   {
    "n": "RAOUL Explains",
@@ -321,15 +306,6 @@
    "med": 758,
    "out": 4,
    "by": "exact:forHandle"
-  },
-  {
-   "n": "Dhruv Rathee",
-   "api": "Dhruv Rathee",
-   "subs": 33300000,
-   "cat": 100,
-   "med": 12129627,
-   "out": 0,
-   "by": "search:exact-title"
   }
  ]
 }
