@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       drive_file_id:
-        description: "Google Drive file id of the reference video (blank = use the committed job folder)"
+        description: "Google Drive file id of the reference video (must be shared: anyone with the link)"
         required: false
         default: "16vYFVlKJwTE7tZYJ5jSrv90KT09r4SgF"
       model:
@@ -51,26 +51,30 @@ jobs:
 
       # Drive is the only transfer path in this repo. The token is optional: when it is
       # absent the step says so and the job still works if the video is already present.
-      - name: Fetch the reference video from Drive
+      - name: Fetch the reference video
         env:
-          DRIVE_TOKEN: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
           FILE_ID: ${{ inputs.drive_file_id }}
         run: |
           mkdir -p .cache/ref
           OUT=.cache/ref/reference.mp4
           if [ -z "$FILE_ID" ]; then
-            echo "::warning::no drive_file_id given"
+            echo '::warning::no drive_file_id given'
             exit 0
           fi
-          if [ -z "$DRIVE_TOKEN" ]; then
-            echo "::warning::GOOGLE_DRIVE_TOKEN secret is not set — cannot fetch from Drive."
-            echo "::warning::Set it, or commit the video to .cache/ref/ yourself. Nothing else will work without the file."
-            exit 0
+          # Confirm-avoid-login is required: Drive serves an HTML interstitial to
+          # anything that looks like a browser, and saving that instead of the
+          # video produces a 60 KB "file" that fails at the transcribe step with a
+          # message about audio rather than about the download.
+          curl -sS -L -o "$OUT"             "https://drive.usercontent.google.com/download?id=${FILE_ID}&export=download&confirm=t"
+          SIZE=$(stat -c%s "$OUT" 2>/dev/null || echo 0)
+          echo "downloaded $SIZE bytes"
+          if [ "$SIZE" -lt 1000000 ]; then
+            echo '::error::the download is too small to be the video — Drive served HTML, or the file is not shared.'
+            echo '::error::Share the file as "anyone with the link" and re-run. This is not an audio problem.'
+            head -c 400 "$OUT" || true
+            rm -f "$OUT"
+            exit 1
           fi
-          curl -sS -L -o "$OUT" \
-            -H "Authorization: Bearer $DRIVE_TOKEN" \
-            "https://www.googleapis.com/drive/v3/files/${FILE_ID}?alt=media"
-          ls -l "$OUT"
           file "$OUT"
 
       - name: Transcribe
