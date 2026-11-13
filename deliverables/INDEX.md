@@ -13,9 +13,9 @@ that state are listed under **To do** at the bottom.
 | | |
 |---|---|
 | Files listed here | 26 |
-| Media inside Git (whole repo) | 1.06 GB across 185 files |
-| Media inside Git, this folder only | 815.6 MB |
-| Recorded in an external location | 1 |
+| Media inside Git (whole repo) | 1.06 GB across 184 files |
+| Media inside Git, this folder only | 784.0 MB |
+| Recorded in an external location | 6 |
 | Tracking to-do (>20 MB, no external copy) | 12 |
 
 ## Rules these rows obey
@@ -48,11 +48,11 @@ that state are listed under **To do** at the bottom.
 | `Extinct_Life_Opening_V2_45s_1080p.mp4` | 13.4 MB | video | yes | **UNRECORDED** | `b71cae9520d7` |
 | `Homotherium-Cub-Premium-Fast-Cut-1080x1920.mp4` | 12.1 MB | video | yes | **UNRECORDED** | `be1a2c936fb0` |
 | `Homotherium-Cub-Clean-Fast-Cut-1080x1920.mp4` | 10.9 MB | video | yes | **UNRECORDED** | `d626152ff81b` |
-| `Last-Mammoths-Genetics-3D-Scene-Test.mp4` | 7.0 MB | video | yes | **UNRECORDED** | `b1f028b7df63` |
-| `Homotherium-Cub-This-Saber-Toothed-Cub-Still-Has-Its-Fur-1080x1920.mp4` | 6.8 MB | video | yes | **UNRECORDED** | `cd6402bff52d` |
-| `Last-Mammoths-Genetics-3D-Recut-Test.mp4` | 6.6 MB | video | yes | **UNRECORDED** | `cc4b9412cd8b` |
-| `Extinct-Life-V14-YouTube-Launch-Kit.zip` | 5.9 MB | archive | yes | **UNRECORDED** | `67db480950d4` |
-| `Last-Mammoths-3D-Isolation-Test-22s.mp4` | 5.3 MB | video | yes | **UNRECORDED** | `09583cfca74e` |
+| `Last-Mammoths-Genetics-3D-Scene-Test.mp4` | 7.0 MB | video | no | Drive 3d animation · 1RSCqnJx7CmhPpOLl7BCIlJdLkDFQx46r ✓ | `b1f028b7df63` |
+| `Homotherium-Cub-This-Saber-Toothed-Cub-Still-Has-Its-Fur-1080x1920.mp4` | 6.8 MB | video | no | Drive 3d animation · 1zPhrMr_feoaVWRm7vdiSGaIs_VU7-xlC ✓ | `cd6402bff52d` |
+| `Last-Mammoths-Genetics-3D-Recut-Test.mp4` | 6.6 MB | video | no | Drive 3d animation · 1MRkZml5uKb0Zf4lAyuOZuCbeqjtKKEY7 ✓ | `cc4b9412cd8b` |
+| `Extinct-Life-V14-YouTube-Launch-Kit.zip` | 5.9 MB | archive | no | Drive 3d animation · 1r0qKE1bL0-nKRoRCS3rskQCd1MnlCGQI ✓ | `67db480950d4` |
+| `Last-Mammoths-3D-Isolation-Test-22s.mp4` | 5.3 MB | video | no | Drive 3d animation · 1vPMmFQvTJ53fKM2IqBh3Vo8mcqIwIEGr ✓ | `09583cfca74e` |
 | `Last-Mammoths-Gait-Test-3s.mp4` | 612 KB | video | no | Drive 3d animation · 1BxRaf5lucFswbBvAJahUelm4r6YMgzQd ✓ | `a7603a2592cb` |
 
 ## To do — media over 20 MB with no recorded external home
@@ -80,13 +80,13 @@ reports on, kept here so it is readable without running anything.
 
 | Folder | Media files | Size |
 |---|---:|---:|
-| `deliverables` | 26 | 816.2 MB |
+| `deliverables` | 25 | 815.6 MB |
 | `production` | 91 | 157.1 MB |
 | `refs` | 14 | 73.8 MB |
 | `public` | 6 | 33.5 MB |
 | `gpu-engine` | 17 | 3.4 MB |
 | `docs` | 31 | 2.7 MB |
-| **all folders** | **185** | **1.06 GB** |
+| **all folders** | **184** | **1.06 GB** |
 
 **Why the images are not simply ignored:** 20 of the 42 workflows that commit run `git add` on a media folder.
 An ignore rule would turn those into failed commits. Workflow uploads must change first — see
