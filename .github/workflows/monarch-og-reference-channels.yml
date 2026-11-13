@@ -1,4 +1,5 @@
 name: Check public channels in the reference screenshots
+# Repeat after correcting a same-name handle candidate; prior receipt is retained.
 on:
   push:
     branches: [arena/1f352b8e-monarch-overall-work]
