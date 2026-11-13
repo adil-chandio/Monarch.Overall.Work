@@ -3,6 +3,7 @@ import importlib.util
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
@@ -42,6 +43,22 @@ class MultilingualPlanTests(unittest.TestCase):
         self.assertIsNone(result);self.assertEqual(attempts,[])
         self.assertEqual(status,'skipped_backoff_circuit')
         self.assertNotIn('sensitive',str((attempts,status)))
+
+    def test_rate_limit_opens_circuit_after_three_bounded_searches(self):
+        def limited(api,resource,**params):
+            api.calls.append({'resource':resource,'http_status':429,'reason':'rateLimitExceeded'})
+            return None
+        api=m.ResearchAPI('sensitive',sleep=lambda _:None)
+        with patch.object(m.API,'get',new=limited):
+            for _ in range(3):
+                payload,attempts,status=api.search({'q':'x'})
+                self.assertIsNone(payload);self.assertIsNone(status)
+                self.assertEqual(len(attempts),3)
+            payload,attempts,status=api.search({'q':'x'})
+        self.assertEqual(len(api.calls),9)
+        self.assertEqual(status,'skipped_backoff_circuit')
+        self.assertEqual(attempts,[])
+        self.assertNotIn('sensitive',str(api.calls))
 
     def test_trusted_cutoff(self):
         self.assertTrue(m.before_timestamp('2026-11-05T23:59:59Z',m.TRUSTED_END))

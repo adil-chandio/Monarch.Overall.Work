@@ -1,0 +1,62 @@
+name: Supplement language evidence and inspect public stills
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/monarch-language-supplement.yml']
+permissions:
+  contents: write
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify research guards
+        run: python -m unittest discover -s research/monarch_language_audit/tests -v
+      - name: Collect selected channel and video metadata without search
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY || secrets.YTAP1 || secrets.YTAPI1 || secrets.YT_KEY || secrets.YT_API_KEY }}
+        run: python -u research/monarch_language_audit/supplemental_youtube.py
+      - name: Collect stills and bounded visual descriptions
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -u research/monarch_language_audit/sample_visuals.py
+      - name: Store checksummed metadata and encrypted review bundle
+        id: receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import hashlib,os,sys
+          from pathlib import Path
+          sys.path.insert(0,'research/monarch_og_audit')
+          from inspect_archive import encrypt_for_transfer,put_blob
+          r=Path(os.environ['RUNNER_TEMP'])
+          data=(r/'language-supplement.json').read_bytes()
+          visual=(r/'language-visual.json').read_bytes()
+          cipher=encrypt_for_transfer((r/'language-stills.zip').read_bytes(),Path('research/monarch_language_audit/review_public.pem'))
+          records={'data':data,'visual':visual,'cipher':cipher}
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              for name,raw in records.items():
+                  print(name+'='+put_blob(raw),file=output)
+                  print(name+'digest='+hashlib.sha256(raw).hexdigest(),file=output)
+          (r/'language-supplement-receipt.txt').write_text('Checksum-verified public metadata and encrypted stills.\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: language-supplement-${{ steps.receipt.outputs.data }}-${{ steps.receipt.outputs.datadigest }}-${{ steps.receipt.outputs.visual }}-${{ steps.receipt.outputs.visualdigest }}
+          path: ${{ runner.temp }}/language-supplement-receipt.txt
+          retention-days: 2
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: language-stills-${{ steps.receipt.outputs.cipher }}-${{ steps.receipt.outputs.cipherdigest }}
+          path: ${{ runner.temp }}/language-supplement-receipt.txt
+          retention-days: 2
+          if-no-files-found: error
