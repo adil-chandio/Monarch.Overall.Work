@@ -1,12 +1,12 @@
 {
   "id": "monarch-temple-3d",
-  "status": "running",
+  "status": "artifacts-pending",
   "goal": "Mafia temple 3D — 480 frames, 20s, 1280x720, 14/14 QC; final MP4 to Drive then YouTube",
   "total": 480,
   "done": 480,
   "unit": "frames",
   "created": "2026-11-13T05:56:46.901Z",
-  "updated": "2026-11-13T05:56:46.901Z",
+  "updated": "2026-11-13T05:56:50.305Z",
   "resume": {
     "next_command": "bash scripts/render-all.sh   # re-render only if frames are missing; otherwise encode + upload",
     "notes": ""
@@ -17,6 +17,10 @@
     {
       "at": "2026-11-13T05:56:46.901Z",
       "what": "started: Mafia temple 3D — 480 frames, 20s, 1280x720, 14/14 QC; final MP4 to Drive then YouTube"
+    },
+    {
+      "at": "2026-11-13T05:56:50.305Z",
+      "what": "480/480 frames + 20s MP4 verified in the other session's sandbox; that sandbox is gone, so the file must be re-produced and uploaded"
     }
   ]
 }
