@@ -497,8 +497,56 @@ test("no evidence folder was emptied of its text", () => {
       );
     }
   }
-  assert.ok(checked > 0, "found no evidence folders — this test would pass forever");
-  assert.ok(checked >= 5, `only ${checked} evidence folders seen; expected the nine that were migrated`);
+  /* Two very different states are both fine, and confusing them is what made
+   * this test red in CI while green locally — the same disk-vs-record mistake
+   * as the index page:
+   *   - this checkout HAS the folders (migration machine): check every one
+   *   - it does not (fresh clone, CI): the folders are gone from disk because
+   *     the JPGs were released, and there is nothing to check. Asserting a
+   *     minimum count here would demand bytes that are not supposed to be in
+   *     the repo any more.
+   * What must hold in BOTH cases is that the measurement text is still tracked. */
+  const trackedText = execFileSync("git", ["ls-files", "production/extinct-life"], {
+    cwd: ROOT,
+    encoding: "utf8",
+  })
+    .split("\n")
+    .filter((f) => /\.(json|csv|md|txt)$/.test(f) && /extinct-life\/[^/]+\//.test(f));
+  assert.ok(
+    trackedText.length > 200,
+    `only ${trackedText.length} measurement files are still tracked under production/extinct-life — text evidence was released along with the frames`,
+  );
+});
+
+test("no guard test requires bytes that a fresh clone does not have", () => {
+  // Twice today a check was green here and red in CI, both times because it
+  // measured the disk: the deliverables page (26 rows here, 1 in CI) and the
+  // evidence-folder count (9 here, 0 in CI). Released media is SUPPOSED to be
+  // absent from a clone, so any assertion on its presence is a bug waiting for
+  // a clean machine.
+  //
+  // This does not try to run the suite in a sandbox. It asserts the property
+  // that matters in the source: no test may demand a file that only exists
+  // because someone kept it locally. The concrete shapes are a minimum count of
+  // on-disk folders, or existsSync used as a hard assert on released media.
+  const src = readFileSync(resolve(ROOT, "scripts/guard.test.mjs"), "utf8");
+  // Narrow on purpose. The first version flagged any `checked >= N` and hit a
+  // count of ROWS PARSED FROM deliverables/INDEX.md, which is records, not
+  // disk — a false positive. The shape that actually breaks is a count
+  // accumulated while walking the filesystem, then asserted to be at least N.
+  const lines = src.split("\n");
+  const offenders = [];
+  let countsDisk = false;
+  for (const [i, line] of lines.entries()) {
+    if (/readdirSync|existsSync|find\b|statSync/.test(line) && !/^\s*\*|^\s*\/\//.test(line)) countsDisk = true;
+    if (/assert\.(ok|equal)\(\s*checked\s*>=/.test(line)) {
+      // look back for the loop that produced `checked`
+      const window = lines.slice(Math.max(0, i - 40), i).join("\n");
+      if (/for \(.*of (rows|idx|lines|media|deliverableFiles|driveNames)/.test(window)) continue;
+      if (countsDisk) offenders.push(`${i + 1}: ${line.trim()}`);
+    }
+  }
+  assert.deepEqual(offenders, [], `a guard test demands a minimum number of on-disk folders — it will fail on a fresh clone: ${offenders.join(" | ")}`);
 });
 
 console.log(`\n${passed} guard tests passed`);
