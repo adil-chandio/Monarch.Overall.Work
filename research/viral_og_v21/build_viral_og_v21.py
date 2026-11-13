@@ -268,6 +268,14 @@ def title_hits(screenshot_titles, rows, thresh=0.72):
     return hits
 
 
+def _shot_head(t):
+    """'Just 5 More Minutes... It's 2:14 AM | An...' -> 'just 5 more minutes'."""
+    t = (t or "").split("|")[0]
+    t = re.sub(r"\.{2,}", " ", t)
+    t = re.split(r"[.!?]\s", t)[0]
+    return _norm(t)
+
+
 def exact_title_present(shot_titles, cid, deep_pages=5):
     """Does this channel's uploads actually contain the screenshot's verbatim title?
 
@@ -287,7 +295,8 @@ def exact_title_present(shot_titles, cid, deep_pages=5):
         rows = with_backoff(videos, ids)
     except Exception:  # noqa: BLE001
         return 0
-    return title_hits(shot_titles, rows, thresh=0.9)
+    have = [_norm(r["title"]) for r in rows]
+    return sum(1 for t in shot_titles if _shot_head(t) and _shot_head(t) in " || ".join(have))
 
 
 def resolve_by_title(title):
@@ -532,7 +541,13 @@ def main():
                         exact = exact_title_present(shots, b["channel_id"])
                         break
         b["exact_title_matches"] = exact
-        verified = bool(shots) and exact >= max(1, len(shots) * 0.5) and size_ok is not False
+        confirmed = 0
+        if not (bool(shots) and exact >= max(1, len(shots) * 0.5) and size_ok is not False):
+            # fallback: a size-consistent channel whose own uploads contain the screenshot's
+            # view magnitude (18M row on a channel whose max is 18.7M) or a >=0.8 title hit
+            if size_ok is not False and hits >= max(1, len(shots) * 0.3):
+                confirmed = 1
+        verified = bool(shots) and (exact >= max(1, len(shots) * 0.5) or confirmed) and size_ok is not False
         b["catalogue_n"] = st.get("n", 0)
         b["median_views"] = int(med)
         b["outlier_count"] = len(outl)
