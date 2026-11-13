@@ -1,0 +1,19 @@
+name: probe search routes
+on:
+  push:
+    paths: [ "probe-search-routes-trigger.txt" ]
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Resolve key secret
+        env: { YOUTUBE_API_KEY: "${{ secrets.YOUTUBE_API_KEY }}" }
+        run: echo "key_present=$([ -n "$YOUTUBE_API_KEY" ] && echo true || echo false)"
+      - name: Probe
+        env: { YOUTUBE_API_KEY: "${{ secrets.YOUTUBE_API_KEY }}" }
+        run: python research/viral_og_v21/probe_search_routes.py
