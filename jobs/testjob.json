@@ -1,0 +1,22 @@
+{
+  "id": "testjob",
+  "status": "running",
+  "goal": "prove the ledger works",
+  "total": 4,
+  "done": 0,
+  "unit": "steps",
+  "created": "2026-11-13T05:55:46.505Z",
+  "updated": "2026-11-13T05:55:46.514Z",
+  "resume": {
+    "next_command": "echo continue",
+    "notes": ""
+  },
+  "artifacts": [],
+  "decisions": [],
+  "log": [
+    {
+      "at": "2026-11-13T05:55:46.514Z",
+      "what": "started: prove the ledger works"
+    }
+  ]
+}
