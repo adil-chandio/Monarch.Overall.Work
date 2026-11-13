@@ -1,12 +1,12 @@
 {
- "generated_utc": "2026-11-13T09:26:59Z",
+ "generated_utc": "2026-11-13T09:43:23Z",
  "key_present": true,
  "secret_value_printed_or_stored": false,
  "input": "user's Google Drive swipe file (71 screenshots) -> drive_swipe_index.json",
  "screenshot_channels": 37,
  "resolved_channels": 35,
  "unresolved_channels": 2,
- "identity_verified_channels": 31,
+ "identity_verified_channels": 28,
  "identity_re_resolved": 2,
  "identity_cache_overrides": [
   {
@@ -31,15 +31,24 @@
  "identity_unverified_names": [
   "AnimeAI Boost",
   "Beyond the Obvious",
+  "Fact Minded",
+  "Hidden Homestead",
   "Last Soul",
-  "Relatos Pintados"
+  "Relatos Pintados",
+  "The Stickman Scientist"
  ],
+ "identity_views_claim_failures": [
+  "Fact Minded",
+  "Hidden Homestead",
+  "The Stickman Scientist"
+ ],
+ "catalogue_page_cap_per_channel": 100,
  "identity_size_contradictions": [],
  "catalogue_videos": 1293,
  "lanes": 36,
- "lane_rows": 929,
- "unique_videos": 2157,
- "niche_outliers_3x": 203,
+ "lane_rows": 942,
+ "unique_videos": 2175,
+ "niche_outliers_3x": 178,
  "thumbnail_stats": 30,
  "caption_attempts": 12,
  "caption_status_counts": {
@@ -54,6 +63,6 @@
   "videos": 115,
   "commentThreads": 12
  },
- "elapsed_s": 339.4,
+ "elapsed_s": 336.5,
  "boundary": "Public Data API metadata + public thumbnails + public caption text only. No video/audio download, no frame inspection, no private retention/CTR/RPM, no invented transcripts, no causal claim, no upload/monetisation claim."
 }
