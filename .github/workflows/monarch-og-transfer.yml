@@ -1,0 +1,36 @@
+name: Transfer encrypted user reference screenshots for local review
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/monarch-og-transfer.yml']
+permissions:
+  contents: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download the explicitly shared Drive ZIP
+        run: |
+          python -m pip install -q gdown==5.2.0
+          gdown 'https://drive.google.com/uc?id=1SGF3F8GjzvVdMaRVeG7Ujg9XccLaB35W' -O "$RUNNER_TEMP/og-reference.zip"
+      - name: Verify, encrypt and transport without extracting
+        id: receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u research/monarch_og_audit/transfer_archive.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: og-archive-${{ steps.receipt.outputs.sha }}-${{ steps.receipt.outputs.digest }}
+          path: ${{ runner.temp }}/transfer-receipt.txt
+          retention-days: 1
+      - name: Remove runner archive
+        if: always()
+        run: rm -f "$RUNNER_TEMP/og-reference.zip"
