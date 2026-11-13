@@ -1,0 +1,7 @@
+key_present=True
+[dataapi_search] FAIL -> HTTPError: HTTP Error 429: Too Many Requests
+[yt_inner_WEB] OK -> videoIds=20 sample=['5SD3_pkOgRs', '4khjbVtl4PY', '9AFO6MHy8y4'] bytes=482264
+[yt_inner_ANDROID] FAIL -> HTTPError: HTTP Error 400: Bad Request
+[yt_inner_IOS] FAIL -> HTTPError: HTTP Error 400: Bad Request
+[yt_html_results] OK -> videoIds=20 consent_wall=False bytes=1517306
+[google_suggest] OK -> len=566 sample=["what did ancient humans",["what did ancient humans do all day","what did ancient humans do when they were bored","what
