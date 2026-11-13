@@ -1,12 +1,12 @@
 {
   "id": "livyatan-short",
-  "status": "artifacts-pending",
+  "status": "paused",
   "goal": "Flat-vector documentary short in the reference style: Livyatan vs Megalodon, 66s",
   "total": 16,
   "done": 16,
   "unit": "steps",
   "created": "2026-11-13T10:11:06.381Z",
-  "updated": "2026-11-13T10:11:36.935Z",
+  "updated": "2026-11-13T10:11:38.444Z",
   "resume": {
     "next_command": "extend scripts/livyatan-film.py with the remaining reference devices: counting grid, fake rewind UI, water-surface shots; then rebuild at 1080p for upload",
     "notes": ""
@@ -33,6 +33,10 @@
     {
       "at": "2026-11-13T10:11:35.553Z",
       "what": "uploaded Livyatan-Whale-That-Fought-Megalodon-66s-720p.mp4 -> Drive 12Evyr8qBt4MeIi8LRzhq54MmkRvJaN7b"
+    },
+    {
+      "at": "2026-11-13T10:11:38.444Z",
+      "what": "paused"
     }
   ]
 }
