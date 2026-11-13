@@ -71,11 +71,14 @@ TARGETS = {
 
 SHOTS = [
     dict(name='S1-street', start=0, end=96, set='street',
+         # the reference is walking backwards ahead of the man, so the camera
+         # creeps forward through the shot; 96 frames at 2 mm is a 19 cm push
          eye=(0.15, 1.50, 10.6), target=(0.0, 1.36, -8.0), fov=46.0,
+         dolly_per_frame=(0.0, 0.0, -0.0020),
          ambient=(0.010, 0.013, 0.021), fog=0.030, mist=0.45, wet=0.72,
-         fog_tint=(0.030, 0.043, 0.072), samples=1,
+         fog_tint=(0.030, 0.043, 0.072), samples=1, rain=1.0,
          grade=dict(exposure=1.35, contrast=1.26, saturation=1.30, lift=0.0,
-                    streak=0.24, vignette=0.46, bloom=0.55),
+                    streak=0.24, vignette=0.46, bloom=0.34),
          figure=dict(root=(-0.10, 4.2), phase0=0.0, walk=1.35, run=False,
                      yaw=0.0, travel=0.0, back=True)),
 
@@ -94,15 +97,22 @@ SHOTS = [
                     streak=0.22, vignette=0.42, bloom=0.55)),
 
     dict(name='S4-run', start=312, end=384, set='runhall',
-         eye=(-0.90, 1.46, 7.10), target=(-0.90, 1.30, 0.0), fov=36.0,
+         # 3.4 m from the subject, chest height, looking across the veranda: the
+         # reference is tight enough that the man is half the frame height
+         eye=(0.20, 1.44, 3.40), target=(0.05, 1.18, -0.40), fov=38.0,
          dolly_per_frame=(0.0144, 0.0, 0.0),   # 4.4 px/frame at 720p
-         blur_taps=4, shutter=0.5, samples=1,
+         blur_taps=2, shutter=0.5, samples=1,
          ambient=(0.009, 0.011, 0.017), fog=0.030, mist=0.62, wet=0.55,
          fog_tint=(0.038, 0.042, 0.058), samples_note='motion blur only',
          grade=dict(exposure=1.05, contrast=1.16, saturation=0.72, lift=0.006,
                     streak=0.18, vignette=0.46, bloom=0.45),
-         figure=dict(root=(0.30, 4.30), phase0=0.35, walk=2.75, run=True,
-                     yaw=math.pi / 2, travel=-0.55, back=False)),
+         # The man has to be in frame at frame 348, not 6 m up the corridor: the
+         # shot is a lateral pan, so his root rides with the dolly.
+         # 4.2 m from the lens: that is the distance at which a 1.75 m man fills
+         # ~60 % of a 38-degree frame, which is the reference's framing. He
+         # drifts slowly left relative to the pan, as in the reference.
+         figure=dict(root=(0.42, -0.80), phase0=0.35, walk=2.75, run=True,
+                     yaw=math.pi / 2, travel=-0.26, back=True)),
 
     dict(name='S5-face3q', start=384, end=432, set='face3q',
          eye=(0.135, 0.004, 0.400), target=(0.0, -0.012, 0.0), fov=28.0,
@@ -119,17 +129,34 @@ SHOTS = [
 # camera-left, two cold rims from behind, almost nothing from the front.
 FACE_LIGHTS = {
     'S6': [
-        world.Light((-0.40, 0.170, 0.470), (1.0, 0.74, 0.52), 0.055, 0.03),
-        world.Light((0.50, -0.020, 0.380), (0.46, 0.56, 0.90), 0.016, 0.05),
-        world.Light((0.17, 0.250, -0.400), (0.62, 0.78, 1.0), 0.120, 0.04),
-        world.Light((-0.30, 0.090, -0.420), (0.55, 0.72, 1.0), 0.070, 0.05),
+        # Key from camera-left and LOW, not high. At y=0.170 the key was level
+        # with the brow, so the brow shelf cast the whole upper face into
+        # shadow while the chin and neck caught everything: the forehead
+        # measured 13 where the reference has 116. In the reference the key
+        # comes up from below the eye line and the forehead is the brightest
+        # part of the skin.
+        world.Light((-0.30, 0.055, 0.440), (1.0, 0.74, 0.54), 0.30, 0.02),
+        # The brow shelf still dropped the forehead to 79 and the brow itself to
+        # 36 while the cheek sat at 156: a hard terminator across the sockets,
+        # which is what made the upper face read as a mask. A large-radius fill
+        # just above the camera levels the bone structure without flattening
+        # it, the way a soft box does.
+        world.Light((-0.06, 0.045, 0.470), (1.0, 0.88, 0.78), 0.085, 0.14),
+        # a second, softer source from camera-left at forehead height, which is
+        # what actually lights the brow plane without flattening the sockets
+        world.Light((-0.16, 0.170, 0.380), (1.0, 0.86, 0.74), 0.150, 0.05),
+        # cool fill from the right, low: stops the shadow side going to mud
+        world.Light((0.44, -0.030, 0.330), (0.42, 0.52, 0.86), 0.075, 0.05),
+        # two rims from behind, the reference's cold edge on the hair
+        world.Light((0.14, 0.250, -0.380), (0.62, 0.78, 1.0), 0.22, 0.04),
+        world.Light((-0.28, 0.090, -0.400), (0.55, 0.72, 1.0), 0.15, 0.05),
     ],
     # S5 is lit warm from in front-left, from the shoji screens behind the camera
     'S5': [
-        world.Light((-0.34, 0.130, 0.420), (1.0, 0.62, 0.30), 0.075, 0.04),
-        world.Light((0.42, 0.020, 0.330), (0.86, 0.58, 0.30), 0.026, 0.06),
-        world.Light((0.10, 0.230, -0.380), (0.72, 0.62, 0.44), 0.040, 0.05),
-        world.Light((0.34, -0.060, -0.300), (0.30, 0.34, 0.46), 0.030, 0.06),
+        world.Light((-0.34, 0.130, 0.420), (1.0, 0.62, 0.30), 0.34, 0.03),
+        world.Light((0.42, 0.020, 0.330), (0.86, 0.58, 0.30), 0.090, 0.06),
+        world.Light((0.10, 0.230, -0.380), (0.72, 0.62, 0.44), 0.085, 0.05),
+        world.Light((0.34, -0.060, -0.300), (0.30, 0.34, 0.46), 0.060, 0.06),
     ],
 }
 
@@ -210,6 +237,11 @@ class FaceShot:
         grade['grain'] = 0.004
         grade['contrast'] = 1.10
         grade['bloom'] = 0.30
+        # The portrait's grade tints shadows blue, which on a dark timber shoji
+        # frame turns it electric blue — the grid the last cut showed over the
+        # subject's head. The background is graded separately, so it gets a
+        # warm shadow tint of its own: the room behind this face is amber.
+        grade['shadow_tint'] = (0.020, 0.004, -0.004)
         sh = engine.Shot(shot['name'] + '-bg', eye, target, shot['fov'],
                          ambient=shot['_bgamb'], fog=shot['_bgfog'],
                          fog_tint=shot['_bgtint'], mist=shot['_bgmist'],
@@ -292,7 +324,7 @@ def render_one(cache, shot, f, w, h):
                      fog_tint=shot['fog_tint'], mist=shot['mist'],
                      grade=shot['grade'], wet=shot['wet'],
                      shutter=shot.get('shutter', 0.0),
-                     mist_layer=1.0)
+                     mist_layer=1.0, rain=shot.get('rain', 0.0))
     return engine.render(fr, sh, w, h, time=t, dyn=dyn, dyn_fn=dyn_fn,
                          eye_fn=eye_fn, target_fn=target_fn,
                          samples=shot.get('samples', 2),
@@ -388,14 +420,17 @@ def prep_face_sets():
     """
     for shot in SHOTS:
         if shot['set'] == 'face3q':
-            shot['_bgset'] = 'courtyard'
-            shot['_bgamb'] = (0.0075, 0.0050, 0.0028)
-            shot['_bgfog'] = 0.085
-            shot['_bgtint'] = (0.050, 0.031, 0.016)
-            shot['_bgmist'] = 0.25
-            shot['_faceamb'] = (0.020, 0.013, 0.008)
-            shot['_bgeye'] = (0.30, 1.55, 5.60)
-            shot['_bgtarget'] = (0.10, 1.52, 0.0)
+            # The reference's S5 background is lit shoji screens, so the set is
+            # the room, not the courtyard: a grid of warm paper panels behind the
+            # subject, thrown out of focus.
+            shot['_bgset'] = 'shoji'
+            shot['_bgamb'] = (0.030, 0.019, 0.010)
+            shot['_bgfog'] = 0.030
+            shot['_bgtint'] = (0.080, 0.048, 0.024)
+            shot['_bgmist'] = 0.12
+            shot['_faceamb'] = (0.026, 0.017, 0.010)
+            shot['_bgeye'] = (0.22, 1.60, 1.35)
+            shot['_bgtarget'] = (0.05, 1.62, -3.4)
         elif shot['set'] == 'face':
             shot['_bgset'] = 'temple'
             shot['_bgamb'] = (0.0022, 0.0028, 0.0044)

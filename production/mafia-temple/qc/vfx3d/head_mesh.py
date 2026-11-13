@@ -117,8 +117,14 @@ class HeadMesh:
         self.vn = n.astype(np.float32)
         self.texture = None
         if Path(tex).exists():
-            from PIL import Image
+            from PIL import Image, ImageFilter
             im = Image.open(tex).convert('RGB')
+            # The scan's colour map is pore-noise: fine, high-contrast mottling
+            # that is invisible on a 1 m model but aliases badly when the map is
+            # magnified to fill a 1280-wide portrait, reading as wet sand. A
+            # small blur keeps the albedo's actual structure (brows, lips, eye
+            # sockets, cheek colour) and drops the pore noise to film grain.
+            im = im.filter(ImageFilter.GaussianBlur(1.8))
             self.texture = np.asarray(im, np.float32) / 255.0
         self._area = self._eye_area()
 
@@ -212,7 +218,7 @@ def _downsample(a, ss):
 
 def render_head(head, eye, target, w, h, fov, lights, *, ambient=(0.01, 0.012, 0.02),
                 fog_tint=(0.03, 0.042, 0.07), yaw=0.0, gaze=0.0, roll=0.0,
-                scale=1.0, centre=(0.0, 0.0, 0.0), ss=2, iris_glow=0.0,
+                scale=1.0, centre=(0.0, 0.0, 0.0), ss=3, iris_glow=0.0,
                 skin_tint=(1.0, 0.94, 0.90), rough=0.52,
                 dof_focus=None, dof_amount=0.0, time=0.0, flare=0.0):
     """Render the head over a transparent background.
@@ -266,9 +272,19 @@ def render_head(head, eye, target, w, h, fov, lights, *, ambient=(0.01, 0.012, 0
     # ---- albedo from the colour map, modulated towards the film's palette
     if head.texture is not None:
         th, tw = head.texture.shape[:2]
-        tx = np.clip((uv[:, 0] % 1.0) * (tw - 1), 0, tw - 1).astype(np.int32)
-        tyy = np.clip((1.0 - (uv[:, 1] % 1.0)) * (th - 1), 0, th - 1).astype(np.int32)
-        alb = head.texture[tyy, tx] ** 2.2
+        # Bilinear, not nearest. The scan's colour map carries pore-level
+        # noise: sampled nearest at this projected size it aliases into a
+        # speckle field over the whole face, which is why the skin came out
+        # looking like wet sand no matter how the lights were tuned.
+        fx = np.clip((uv[:, 0] % 1.0) * (tw - 1), 0, tw - 1.001)
+        fy = np.clip((1.0 - (uv[:, 1] % 1.0)) * (th - 1), 0, th - 1.001)
+        x0 = fx.astype(np.int32)
+        y0 = fy.astype(np.int32)
+        ax = (fx - x0)[:, None]
+        ay = (fy - y0)[:, None]
+        tex = head.texture
+        alb = ((tex[y0, x0] * (1 - ax) + tex[y0, x0 + 1] * ax) * (1 - ay)
+               + (tex[y0 + 1, x0] * (1 - ax) + tex[y0 + 1, x0 + 1] * ax) * ay) ** 2.2
     else:
         alb = np.full((uv.shape[0], 3), 0.35, np.float32)
     alb = alb * np.asarray(skin_tint, np.float32)
@@ -402,24 +418,53 @@ def scalp_vertices(head):
     # f is +1 at the brow, -1 at the occiput, so the hairline is high in front
     # and low at the nape; the halves were swapped in the first version of this
     # and the hair grew straight down over the face.
-    line = 0.0300 * (1.0 + f) * 0.5 + (-0.0340) * (1.0 - f) * 0.5
-    line = line - 0.0060 * np.clip(np.abs(x) / 0.050, 0, 1) ** 2
+    # The reference's hairline is high and slightly receding at the temples, and
+    # comes down to mid-ear at the sides. The first pass put it at the brow in
+    # front, which on a 3/4 view reads as a bowl cut.
+    line = 0.0395 * (1.0 + f) * 0.5 + (-0.0330) * (1.0 - f) * 0.5
+    line = line - 0.0125 * np.clip(np.abs(x) / 0.052, 0, 1) ** 1.7
     line = line + 0.0035 * np.cos(x * 46.0) + 0.0022 * np.sin(x * 112.0)
-    hair = soft((y - line) / 0.022 + 0.5)
+    # Feathered hairline. A smooth ramp over 22 mm still terminates in a clean
+    # line once the volume is marched; a real hairline is a soft gradient over
+    # 10-15 mm with individual hairs straying above it. The stray term is a
+    # deterministic function of x, so it does not crawl between frames.
+    # The leading edge has to be ragged at the scale of a few hairs. Varying the
+    # hairline per VERTEX aliased into a row of sawteeth; this is a smooth field
+    # of position, so the fringe breaks into strands and the outline stops
+    # looking cut out with scissors.
+    edge = (y - line) / 0.0090 + 0.5
+    # three octaves of a 4-10 mm stray-hair field: the amplitude has to be large
+    # relative to the ramp or the fringe is a smooth arc with a hard rim
+    edge = (edge
+            + 0.85 * np.sin(x * 300.0 + z * 120.0) * np.cos(x * 61.0 - z * 44.0)
+            + 0.45 * np.sin(x * 690.0 - z * 260.0)
+            + 0.25 * np.cos(x * 1180.0 + z * 540.0))
+    hair = soft(edge)
     # the face is skin: in front of the temple plane the hair has to be above
     # the eyebrow, and it fades out along the cheekbone
     faceward = soft((z - 0.006) / 0.020)
     above = soft((y - 0.011) / 0.018)
     hair = hair * (1.0 - faceward * (1.0 - above))
     hair = np.where(y > 0.055, 0.0, hair)
+    # and it may hang: the old field zeroed everything below the brow
+    # line at the sides, which clipped the length that was just added.
     keep = hair > 0.06
     idx = np.nonzero(keep)[0]
     pts = v[idx]
     # swept back and fuller at the back of the head
-    thick = (0.0115
-             + 0.0090 * np.clip((-pts[:, 2] - 0.004) / 0.060, 0, 1) ** 0.9
-             + 0.0045 * np.clip((np.abs(pts[:, 0]) - 0.034) / 0.040, 0, 1))
-    return pts.astype(np.float32), (thick * hair[idx]).astype(np.float32)
+    thick = (0.0135
+             + 0.0150 * np.clip((-pts[:, 2] - 0.002) / 0.062, 0, 1) ** 0.8
+             + 0.0090 * np.clip((np.abs(pts[:, 0]) - 0.030) / 0.042, 0, 1)
+             # waves: the reference's hair is not a smooth cap, it breaks into
+             # locks. Two incommensurate waves along the sweep keep it from
+             # resolving into a regular rib pattern.
+             + 0.0034 * np.sin(pts[:, 2] * 62.0 + pts[:, 0] * 27.0)
+             + 0.0021 * np.sin(pts[:, 0] * 96.0 - pts[:, 1] * 41.0))
+    # Taper towards the hairline: a fringe that starts at full thickness has a
+    # hard rim. Halving the radius over the last ~2 cm of the boundary lets the
+    # ragged edge in the distance field reach the silhouette.
+    rim = np.clip((pts[:, 1] - (line[idx] - 0.006)) / 0.026, 0.20, 1.0)
+    return pts.astype(np.float32), (thick * hair[idx] * rim).astype(np.float32)
 
 
 def _sphere_union_sdf(q, pts, rad, chunk=20000):
@@ -430,6 +475,17 @@ def _sphere_union_sdf(q, pts, rad, chunk=20000):
         b = min(a + chunk, len(q32))
         d = np.sqrt(((q32[a:b, None, :] - pts[None, :, :]) ** 2).sum(-1))
         out[a:b] = (d - rad[None, :]).min(1)
+    # Ragged silhouette. A union of spheres with a smooth radius produces a
+    # surface that is, by construction, the skull offset by a constant; that is
+    # a bowl cut no matter how it is shaded. Displacing the distance field by a
+    # lock-shaped noise field gives clumps with gaps and stray strands at the
+    # edge, which is the only way the outline stops reading as moulded.
+    qq = q32
+    lock = (np.sin(qq[:, 0] * 148.0 + qq[:, 1] * 61.0)
+            * np.sin(qq[:, 2] * 131.0 - qq[:, 1] * 89.0))
+    fine = (np.sin(qq[:, 0] * 379.0 - qq[:, 2] * 311.0)
+            * np.sin(qq[:, 1] * 417.0 + qq[:, 2] * 263.0))
+    out -= (0.0016 * lock + 0.0007 * fine).astype(np.float32)
     return out
 
 
@@ -442,7 +498,7 @@ class HairLayer:
     the scalp vertices takes about half a minute and depends only on the scan.
     """
 
-    def __init__(self, head, yaw=0.0, res=0.0032,
+    def __init__(self, head, yaw=0.0, res=0.0024,
                  lo=(-0.115, -0.075, -0.130), hi=(0.115, 0.235, 0.085)):
         self.yaw = yaw
         self.lo = np.asarray(lo, np.float32)
@@ -540,13 +596,43 @@ def composite_hair(img, alpha, zc, hair, eye, target, w, h, fov, lights,
     ro = np.broadcast_to(eye, rd.shape)
 
     flat_rd = rd.reshape(-1, 3).astype(np.float32)
-    th, hit = _march_sdf(hair, ro.reshape(-1, 3), flat_rd, max_dist=1.2, steps=64)
+    th, hit, dmin = _march_sdf(hair, ro.reshape(-1, 3), flat_rd, max_dist=1.2,
+                               steps=64)
     p = ro.reshape(-1, 3) + flat_rd * th[:, None]
     n = _sdf_normal(hair, p)
     hp = _sdf_ao(hair, p, n)
 
     alb = 0.0070
     col = np.full((p.shape[0], 3), alb, np.float32)
+
+    # ---- strands. A hair surface lit as one continuous shell always reads as
+    # moulded plastic. A real head of hair is thousands of thin cylinders whose
+    # brightness varies per strand, plus a shadowing term between them. Both are
+    # a deterministic function of surface position, so they hold frame to frame.
+    sd = p
+    # --- the strand frame. A 1.5 mm strand is sub-pixel at 720p, so an analytic
+    #     strand phase can only alias — it resolved into concentric rings, which
+    #     is exactly what the previous pass looked like. The detail is kept at
+    #     lock scale and the fine octave is bandwidth-limited below.
+    across = (sd[:, 0] * 1.55 + sd[:, 1] * 0.30
+              + 0.020 * np.sin(sd[:, 2] * 46.0 + sd[:, 0] * 30.0)
+              + 0.011 * np.sin(sd[:, 0] * 120.0 - sd[:, 1] * 70.0))
+    # The locks follow the sweep: phase advances along z, and the across-
+    # coordinate only shifts each lock sideways. A phase that advances with
+    # across alone produces concentric zebra bands, which is what this was.
+    flow = sd[:, 2] * 24.0 + sd[:, 1] * 9.0
+    lock_phase = across * 78.0 + flow
+    strand_phase = across * 520.0 + flow * 2.7 + np.sin(flow * 0.7) * 2.0
+    coarse = 0.5 + 0.5 * np.cos(lock_phase)
+    # bandwidth limit: the fine octave only survives where the surface turns
+    # steeply, i.e. where a strand's projected spacing is wide enough to see
+    band = np.clip(1.0 - np.abs(n[:, 2]) * 0.80, 0.0, 1.0)
+    fine_s = 0.5 + 0.5 * np.cos(strand_phase) * band + 0.5 * (1.0 - band)
+    # a strand is lit along its length and dark in the crevice beside it
+    lock = (0.30 + 0.95 * coarse ** 1.6) * (0.62 + 0.55 * fine_s ** 1.3)
+    # the crevice between locks is where the shadow lives
+    gap = np.clip(1.0 - np.abs(np.cos(lock_phase * 0.5)), 0, 1) ** 2.2
+    lock = lock * (1.0 - 0.62 * gap)
     ndv = np.clip((n * -flat_rd).sum(-1), 0, 1)
     sky = np.asarray(fog_tint, np.float32)[None, :] * 1.15
     strand = np.array([0.34, 0.88, 0.33], np.float32)
@@ -554,7 +640,7 @@ def composite_hair(img, alpha, zc, hair, eye, target, w, h, fov, lights,
     sheen = np.clip((n * strand).sum(-1), 0, 1) ** 2
     # a hair shell is almost black. The visible signal is the strand sheen and a
     # little sky on the upper surface, not a diffuse response to every lamp.
-    col = col + sky * (0.30 + 0.95 * ndv[:, None]) * alb * 30.0
+    col = col + sky * (0.30 + 0.95 * ndv[:, None]) * alb * 26.0
     col = col + sheen[:, None] * sky * 0.045
     for L in lights:
         lv = np.asarray(L.pos, np.float32)[None, :] - p
@@ -569,6 +655,33 @@ def composite_hair(img, alpha, zc, hair, eye, target, w, h, fov, lights,
         ndh = np.clip((n * hv).sum(-1), 0, 1)
         col = col + lc * ((ndh ** 70) * att * 0.030 * (0.25 + sheen))[:, None]
     col = col * hp[:, None]
+    # per-strand tone and self-shadowing between strands
+    # Wave ridges: broad, smooth bands that follow the sweep and light up on the
+    # crest. Without these the hair renders as a flat black slab no matter how
+    # the fine strands are tuned, because a wave is a *shape*, not a texture.
+    wave = (0.5 + 0.5 * np.sin(sd[:, 2] * 21.0 + sd[:, 1] * 12.0
+                               + 0.9 * np.sin(sd[:, 0] * 26.0)))
+    ridge = np.clip(wave, 0, 1) ** 1.4
+    col = col * (0.10 + 0.95 * lock + 0.55 * ridge)[:, None]
+    # anisotropic specular: a strand is a cylinder, so its highlight is a band
+    # that runs along it and is widest where the surface turns away
+    aniso = np.clip((n * strand).sum(-1), 0, 1) ** 2.4
+    hilo = np.clip(1.0 - np.abs(np.cos(lock_phase)), 0, 1) ** 3.0
+    col = col + sky * (aniso * hilo * 0.16 * (0.35 + 0.9 * ridge))[:, None]
+    # the finest tips catch a little light; this is what keeps a dark mass from
+    # going to flat black in a low-key frame
+    tip = np.clip(1.0 - np.abs(np.cos(strand_phase)), 0, 1) ** 6.0
+    col = col + sky * (tip * 0.045)[:, None]
+    # A hair shell is one of the darkest surfaces in a frame. In the warm, bright
+    # S5 interior the sheen terms alone pushed it to grey; a hard ceiling on the
+    # hair's luminance keeps it reading as black hair in every shot.
+    # Measured: the reference's hair sits at (8, 11, 12) of 255 — about 0.040
+    # luminance, cooler than it is bright. The 0.055 ceiling let the S6 key
+    # push it to 27, which reads as silver-grey, so the ceiling now matches the
+    # reference and the tone is pulled blue rather than neutral.
+    lum = col.mean(-1, keepdims=True)
+    col = col * np.minimum(1.0, 0.036 / np.maximum(lum, 1e-4))
+    col = col * np.array([0.86, 1.00, 1.06], np.float32)
     col = col.reshape(h, w, 3)
     hm_ = hit.reshape(h, w)
     hz = np.where(hm_, th.reshape(h, w), 1e3)
@@ -585,9 +698,60 @@ def composite_hair(img, alpha, zc, hair, eye, target, w, h, fov, lights,
     out = img.copy()
     a = alpha.copy()
     out = out * (1.0 - scalp_dark * np.clip(soft * 1.25, 0, 1))[..., None]
+
+    # ---- the hairline itself. This is the one place where skin and hair meet on
+    # screen, and a hard boundary there is what makes procedural hair read as a
+    # wig. Sample the hair field at every head pixel: the closer a pixel is to
+    # the volume, the darker the skin, and because the field is noisy the
+    # gradient is ragged rather than a swept line.
+    head_px = alpha > 0.5
+    if head_px.any():
+        hh, ww = h, w
+        # camera position -> world point for each covered head pixel
+        yy2, xx2 = np.nonzero(head_px)
+        # depth is in camera space along the view axis; reconstruct the point
+        zc_pt = zc[yy2, xx2]
+        ty2 = np.tan(np.radians(fov) * 0.5)
+        rel_x = ((xx2 + 0.5) / ww * 2.0 - 1.0) * ty2 * (ww / hh)
+        rel_y = (1.0 - (yy2 + 0.5) / hh * 2.0) * ty2
+        fwd2 = np.asarray(target, np.float32) - np.asarray(eye, np.float32)
+        fwd2 /= np.linalg.norm(fwd2)
+        right2 = np.cross(fwd2, np.array([0, 1, 0], np.float32))
+        right2 /= np.linalg.norm(right2)
+        up2 = np.cross(right2, fwd2)
+        pts2 = (np.asarray(eye, np.float32)[None, :]
+                + fwd2[None, :] * (zc_pt / np.maximum(fwd2 @ fwd2, 1e-6))[:, None]
+                + right2[None, :] * (rel_x * zc_pt)[:, None]
+                + up2[None, :] * (rel_y * zc_pt)[:, None])
+        d_hair = hair._sample(pts2)
+        # The distance to the hair volume is ~0 over the *whole* face on this
+        # skull, because the volume wraps it. A 16 mm ramp therefore darkened
+        # the forehead, the nose and the cheeks as if they were in hair, and the
+        # remaining skin read as speckled grey. Restrict the shade to skin that
+        # is also high on the head: the hairline is a boundary, not a fog.
+        hi_skin = np.clip((pts2[:, 1] - 0.0245) / 0.0160, 0, 1)
+        hairline = np.clip(1.0 - d_hair / 0.0075, 0, 1) ** 1.6 * hi_skin
+        shade = np.zeros((h, w), np.float32)
+        shade[yy2, xx2] = hairline
+        out = out * (1.0 - 0.55 * shade)[..., None]
+    from PIL import Image as _Im
+    cov = np.asarray(_Im.fromarray(hm_.astype(np.float32), mode='F')
+                     .resize((w * 2, h * 2), _Im.BILINEAR)
+                     .resize((w, h), _Im.BILINEAR), np.float32)
+    # Fringe: rays that only just miss the volume pick up partial coverage, so
+    # the outline is made of hairs rather than the rim of a shell. This must be
+    # restricted to rays that hit nothing else -- the march runs past the head,
+    # so every pixel on the face also passes within centimetres of the hair
+    # volume behind it, and an unrestricted wisp mask painted hair over the face.
+    wisp = np.clip(1.0 - (dmin.reshape(h, w) - 0.0009) / 0.0060, 0, 1) ** 1.6
+    empty = alpha < 0.5
+    wisp = np.where(hz < 1e2, 0.0, wisp * empty * 0.75)
+    cov = np.clip(np.maximum(cov * 1.25, wisp), 0, 1)
     front = hm_ & (hz < zc)
-    out[front] = col[front]
-    a[front] = 1.0
+    soft = (cov > 0.02) & ((hz < zc) | empty)
+    out[soft] = (img[soft] * (1.0 - cov[soft])[:, None]
+                 + col[soft] * cov[soft][:, None])
+    a[soft] = np.maximum(a[soft], cov[soft])
     out = np.clip(out, 0, None)
     return out, a, np.where(front, hz, zc)
 
@@ -601,11 +765,22 @@ def hair_depth_shadow(hair, p, hit, h, w, reach=0.055):
 
 
 def _march_sdf(layer, ro, rd, max_dist=1.2, steps=64, eps=0.0009):
+    """Sphere-trace the hair field, also reporting how close each ray came.
+
+    The closest-approach distance is what gives the fringe its softness: a ray
+    that misses the hair volume by 2 mm should still pick up a little colour,
+    because a real fringe is made of individual hairs with gaps between them, not
+    a solid boundary. Without this the hair is a hard-edged mass, which is the
+    single thing that made it look like a wig.
+    """
     n = ro.shape[0]
     t = np.full(n, 0.004, np.float32)
+    dmin = np.full(n, np.inf, np.float32)
     alive = np.ones(n, bool)
     for _ in range(steps):
-        d = layer._sample(ro + rd * t[:, None])
+        p = ro + rd * t[:, None]
+        d = layer._sample(p)
+        dmin = np.minimum(dmin, d)
         alive &= ~(d < eps)
         if not alive.any():
             break
@@ -613,8 +788,10 @@ def _march_sdf(layer, ro, rd, max_dist=1.2, steps=64, eps=0.0009):
         alive &= t < max_dist
         if not alive.any():
             break
-    hit = (layer._sample(ro + rd * t[:, None]) < eps * 2.5) & (t < max_dist)
-    return t, hit
+    d = layer._sample(ro + rd * t[:, None])
+    dmin = np.minimum(dmin, d)
+    hit = (d < eps * 2.5) & (t < max_dist)
+    return t, hit, dmin
 
 
 def _sdf_normal(layer, p, h=0.0015):
@@ -774,8 +951,8 @@ def composite_hair_raytraced(img, alpha, zc, hair_prims, frame, eye, target,
 #   half-width 22 mm, half-height 7.5 mm, sclera pale, iris 8 mm across.
 EYE_HALF_W = 0.0102
 EYE_HALF_H = 0.0032
-EYE_POS = {1: np.array([0.0220, -0.0062, 0.0430], np.float32),
-           -1: np.array([-0.0220, -0.0062, 0.0430], np.float32)}
+EYE_POS = {1: np.array([0.0220, -0.0044, 0.0430], np.float32),
+           -1: np.array([-0.0220, -0.0044, 0.0430], np.float32)}
 
 
 def eye_centres():
@@ -794,83 +971,218 @@ def _hash1(p, k):
 
 
 def paint_stubble(col, p, n):
-    """Beard and moustache, painted over the clean-shaven scan.
+    """Beard, moustache and stubble, painted onto the scan.
 
-    The reference close-up is a man with a short dark beard; the scan has none,
-    and without it the face reads as a boy's. The beard is an ellipse around the
-    jaw and chin, clipped away from the lips so the mouth stays legible, plus a
-    moustache band above the lip. Everything is soft-edged and carries a fine
-    stable grain, so it reads as hair rather than as a painted block.
+    The scan is clean-shaven and the character in the reference is not: he has a
+    full dark beard along the jaw, a moustache, and stubble over the cheeks.
+
+    The first version stippled individual hairs and left 28 % bare skin between
+    them at full density, which read as a grey mesh — a stocking pulled over the
+    jaw, not a beard. A beard is opaque: the *mass* is what you see, and the
+    hair structure only modulates its tone and roughs up its edge. So coverage
+    now saturates to fully opaque in the middle and the hash-driven strokes
+    shade the beard rather than punch holes in it, and the boundary carries
+    low-frequency noise so it is a ragged beard line and not a drawn curve.
     """
+    out = col.copy()
     x, y, z = p[:, 0], p[:, 1], p[:, 2]
-    front = (z > 0.005) & (n[:, 2] > -0.20)
+    front = _soft(z, -0.010, 0.020) * _soft(n[:, 2], -0.45, -0.05)
 
-    def ell(cx, cy, rx, ry):
-        return np.sqrt(((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2)
+    # --- a low-frequency wobble on the growth boundary. Real beard lines are
+    #     not level: they rise over the jaw and dip at the chin, and the edge
+    #     breaks up over a couple of millimetres.
+    wob = (_hash1(np.stack([np.round(x / 0.0055) * 0.0055,
+                            np.round(y / 0.0055) * 0.0055,
+                            np.round(z / 0.0055) * 0.0055], -1), 3.7) - 0.5)
+    edge = wob * 0.0045
 
-    # beard mass: jaw and chin
-    beard = _soft(ell(0.0, -0.070, 0.044, 0.032), 1.10, 0.80)
-    # a clean shave line just under the cheekbone
-    beard = beard * _soft(-y, 0.014, 0.026)
-    # keep the lips clear
-    beard = beard * (1.0 - _soft(ell(0.0, -0.0520, 0.0240, 0.0115), 1.08, 0.75))
-    # moustache: under the nose, above the lip, thicker in the middle
-    mo = _soft(ell(0.0, -0.0435, 0.0235, 0.0068), 1.00, 0.60)
-    mask = np.clip(beard + mo, 0, 1) * front
-    grain = 0.90 + 0.10 * _hash1(p * 260.0, 1.0)
-    mask = mask * grain
-    shade = np.array([0.0140, 0.0150, 0.0175], np.float32)
-    return col * (1.0 - 0.72 * mask)[:, None] + shade * (0.72 * mask)[:, None]
+    # --- where the hair grows. A goatee-and-jaw beard, thicker at the chin,
+    #     with the upper lip moustache broken from it at the corners.
+    # The forehead measured 4.6 of high-frequency detail against the
+    # reference's 0.68, and the cause was this line: the jaw ramp started at
+    # y=-0.020 with a soft edge, so 'beard' covered the mouth, the nose and the
+    # upper lip and its hash strokes stippled them. The beard starts at the
+    # jaw, which on this head is below -0.030, and the cheek stubble rides the
+    # cheekbone rather than the whole face.
+    # A wide ramp: a beard's edge is a gradient over a centimetre, not a step.
+    # The narrow version produced a hard mask line across the cheeks, which is
+    # more obviously fake than no beard at all.
+    jaw = _soft(y + edge, -0.0160, -0.0520)             # 0 at cheekbone, 1 low
+    sides = _soft(np.abs(x), 0.050, 0.032)             # 0 at mouth, 1 at ear
+    chin = np.clip(1.0 - np.abs(x) / 0.036, 0, 1) ** 1.1
+    # The beard in the reference is a solid dark mass over the jaw and chin, not
+    # stubble scattered up the cheek: it starts below the cheekbone.
+    beard = np.clip(0.92 * jaw * (0.80 + 0.30 * sides)
+                    + 0.55 * chin * _soft(y + edge, -0.026, -0.056), 0, 1)
+    # moustache: a band just under the nose, above the mouth
+    lip_y = -0.0330
+    must = (np.clip(1.0 - np.abs(y - lip_y - 0.0075) / 0.0085, 0, 1) ** 0.8
+            * np.clip(1.0 - np.abs(x) / 0.028, 0, 1) ** 0.6)
+    # --- stubble is stipple by definition, and the hash strokes that make it
+    #     read as hair are 0.6 mm across. On a portrait this size that is a
+    #     salt-and-pepper field over the whole cheek, which measured as 8.5 of
+    #     high-frequency detail against the reference's 0.68: wet sand, not
+    #     stubble. So the cheeks get a soft, low-frequency shadow stubble — no
+    #     strokes — and the stroked hair is confined to the beard mass itself,
+    #     where it is opaque and the strokes only shade tone.
+    stub = np.clip(0.20 * _soft(y + edge, -0.0255, -0.0380)
+                   * _soft(np.abs(x), 0.048, 0.032), 0, 1)
+    stroked = np.clip(beard + 1.00 * must, 0, 1) * front
+    cover = np.clip(stroked + stub, 0, 1) * front
+
+    # --- hair structure: per-cell strokes and their inter-hair shadow. This
+    #     now only varies the beard's brightness — it never lets skin through.
+    cell = 0.00060
+    cx = np.round(x / cell)
+    cy = np.round(y / cell)
+    cz = np.round(z / cell)
+    h1 = _hash1(np.stack([cx, cy, cz], -1), 1.0)
+    h2 = _hash1(np.stack([cx, cy, cz], -1), 7.3)
+    h3 = _hash1(np.stack([cx, cy, cz], -1), 13.9)
+    dxh = x / cell - cx - (h1 - 0.5) * 0.7
+    dyh = y / cell - cy - (h2 - 0.5) * 0.7
+    ang = (h3 - 0.5) * 2.2
+    u = dxh * np.cos(ang) + dyh * np.sin(ang)
+    v = -dxh * np.sin(ang) + dyh * np.cos(ang)
+    stroke = np.clip(1.0 - np.sqrt((u / 0.70) ** 2 + (v / 0.38) ** 2), 0, 1) ** 0.55
+
+    # --- the mouth stays a mouth. A beard is not a balaclava: the lips are a
+    #     different surface, and painting the whole lower face one colour made
+    #     a black mask with no mouth in it. The aperture below the moustache is
+    #     cut out of the coverage, and the lips themselves get their own tone.
+    mouth_y = -0.0455
+    lip = (np.clip(1.0 - np.abs(x) / 0.0225, 0, 1) ** 0.7
+           * np.clip(1.0 - np.abs(y - mouth_y) / 0.0058, 0, 1) ** 0.6)
+    cover = np.clip(cover - 1.15 * lip, 0, 1)
+
+    # the soft stubble: a diffuse darkening with no stroke structure at all
+    out = out * (1.0 - 0.34 * (stub * front))[:, None]
+
+    # --- opacity: this is hair lying ON SKIN, so it must never be a flat
+    #     colour. Cap it below 1 and multiply the skin underneath instead of
+    #     replacing it: a beard then darkens and shapes with the same light as
+    #     the face, which is the whole difference between hair and face paint.
+    opacity = np.clip(stroked * 1.55, 0, 0.90)
+    # Strokes catch light, the gaps between them stay dark — but only where the
+    # beard is thick enough to be opaque. In the stippled zone near the beard
+    # line this must fade to nothing: it was still drawing full-strength 0.6 mm
+    # strokes at 20 % coverage, and 20 % of a portrait's cheek covered in
+    # single-pixel dots measures 12 units of high-frequency detail. The reference
+    # has 0.68, because a real beard at that scale is a soft edge, not a field of
+    # dots. So the stroke term is weighted by how solid the mass is.
+    solid = np.clip(stroked * 1.55, 0, 1) ** 1.5
+    shade = 0.30 + 0.75 * stroke + 0.20 * h2
+    dark = (1.0 - 0.86 * (shade * solid + (1.0 - solid)))[:, None]
+    out = out * dark
+    # a thin cool sheen riding the strokes, so the mass is not a matte hole
+    sheen = (stroke ** 3) * 0.045 * (0.5 + 0.5 * h2) * solid
+    out = out + np.stack([sheen * 0.85, sheen * 0.95, sheen], -1)
+
+    # --- the lips: slightly lighter and warmer than the beard around them
+    lip_alb = np.stack([0.30 + 0.05 * h1, 0.135 + 0.03 * h2,
+                        0.115 + 0.02 * h2], -1)
+    lw = np.clip(lip * 0.85, 0, 1)[:, None]
+    out = out * (1.0 - lw) + out * lip_alb * lw
+    return out
 
 
 def paint_eyes(col, p, n, glow=1.0, open_amount=1.0):
-    """Paint an open eye onto the scan's shut lids.
+    """A photoreal eye on a scan whose own eyes are shut.
 
-    The scan's lids are closed and the iris cannot be modelled without cutting
-    the mesh, so the eye is painted: a dark socket that hides the lid bulge, a
-    pale sclera, a red iris a few millimetres across, and a pupil. At the size
-    the head occupies on screen this reads as an open, staring eye, and it can
-    never intersect the geometry. The reference's iris is the brightest thing in
-    the frame, so it is the only thing here that goes above the skin's exposure.
+    The scan's lids are closed and the eyeball cannot be uncovered without
+    cutting the mesh, so the eye is built in layers, the same way a real one
+    reads: a shadowed socket, the white of the eye, a limbal ring where the iris
+    meets the sclera, the stroma, a dark pupil, a specular catchlight, and a wet
+    meniscus along the lid margin. The upper lid is a soft shadow arc — that one
+    dark edge is most of what makes a painted eye look like an eye instead of a
+    sticker.
+
+    Every layer is a smooth mask in head-local space, so nothing can intersect
+    the geometry and nothing has a hard edge to betray it.
     """
     out = col.copy()
     for sx, c in EYE_POS.items():
         dx = p[:, 0] - c[0]
         dy = p[:, 1] - c[1]
         dz = p[:, 2] - c[2]
-        front = (n[:, 2] > -0.10) & (np.abs(dx) < 0.040) & (np.abs(dy) < 0.030)
-        front &= dz > -0.030
-        tilt = sx * 0.12 * dx / EYE_HALF_W
-        ra = np.sqrt(np.maximum((dx / EYE_HALF_W) ** 2 +
-                                ((dy - tilt * EYE_HALF_H) / EYE_HALF_H) ** 2, 0))
-        # the socket: shade the lid stone that covers the eyeball
-        out = out * (1.0 - 0.30 * _soft(ra, 1.45, 0.98) * front)[:, None]
-        # the opening itself
-        m_open = _soft(ra, 1.00, 0.86) * front
-        out = out * (1.0 - 0.90 * m_open)[:, None] + \
-            np.array([0.032, 0.014, 0.020], np.float32) * (0.90 * m_open)[:, None]
-        # sclera: pale, slightly warm, filling the opening
-        m_scl = _soft(ra, 0.92, 0.74) * front
-        out = out * (1.0 - 0.85 * m_scl)[:, None] + \
-            np.array([0.072, 0.060, 0.064], np.float32) * (0.85 * m_scl)[:, None]
-        # upper lid line: a shadow arc, which is what makes a painted eye sit
-        lid = _soft(np.abs(ra - 0.96), 0.26, 0.02) * front * (dy > -0.002)
-        out = out * (1.0 - 0.55 * lid)[:, None]
-        # iris and pupil
-        m_iris = _soft(ra, 0.62, 0.44) * front
-        out = out * (1.0 - 0.94 * m_iris)[:, None] + \
-            np.array([0.115, 0.0080, 0.0060], np.float32) * (0.94 * m_iris)[:, None]
-        m_pupil = _soft(ra, 0.20, 0.11) * front
+        front = (n[:, 2] > -0.10) & (np.abs(dx) < 0.044) & (np.abs(dy) < 0.032)
+        front &= dz > -0.032
+
+        # -- the socket: shade falls off from the orbit rim inwards.
+        #    The radius here was 38 x 24 mm centred on the eye, i.e. a disc
+        #    covering the brow, the inner cheek and the nose bridge: it painted
+        #    a brown bandit mask across the middle of the face, which is most of
+        #    what the last cut's portrait was. A socket is a much tighter ellipse
+        #    and it is shallower than it was.
+        out = out * (1.0 - 0.24 * _soft(np.sqrt((dx / 0.0235) ** 2 +
+                                                ((dy + 0.001) / 0.0165) ** 2),
+                                        1.20, 0.90) * front)[:, None]
+
+        # -- aperture: a lid-shaped almond, tilted, not a circle
+        tilt = sx * 0.13 * dx / EYE_HALF_W
+        ey = (dy - tilt * EYE_HALF_H)
+        # the upper lid cuts deeper than the lower: an eye is not symmetric
+        half_h = np.where(ey > 0, EYE_HALF_H * 0.72, EYE_HALF_H * 1.02)
+        ra = np.sqrt(np.maximum((dx / EYE_HALF_W) ** 2 + (ey / half_h) ** 2, 0))
+        m_open = _soft(ra, 1.00, 0.90) * front
+
+        # -- the eye white, with the faintest grey at the corners
+        corner = np.clip(np.abs(dx) / EYE_HALF_W, 0, 1) ** 2
+        sclera = (np.array([0.118, 0.104, 0.104], np.float32)[None, :]
+                  * (1.0 - 0.50 * corner[:, None]))
+        out = out * (1.0 - 0.92 * m_open)[:, None] + sclera * (0.92 * m_open)[:, None]
+
+        # -- iris, limbal ring, stroma, pupil
+        iris_r = 0.60
+        limbal = _soft(np.abs(ra - iris_r), 0.20, 0.02) * m_open
+        out = out * (1.0 - 0.75 * limbal)[:, None]
+
+        m_iris = _soft(ra, iris_r + 0.02, iris_r - 0.14) * m_open
+        # the stroma is not flat: a radial fibre pattern and a lighter inner
+        # zone give the iris the depth a two-tone disc never has
+        ang = np.arctan2(ey, dx)
+        fibre = 0.5 + 0.5 * np.sin(ang * 26.0 + ra * 9.0)
+        inner = np.clip(1.0 - ra / (iris_r + 0.04), 0, 1) ** 1.6
+        stroma = (np.array([0.130, 0.0125, 0.0085], np.float32)[None, :]
+                  * (0.72 + 0.55 * fibre[:, None])
+                  + np.array([0.230, 0.045, 0.020], np.float32)[None, :]
+                  * inner[:, None])
+        out = out * (1.0 - 0.95 * m_iris)[:, None] + stroma * (0.95 * m_iris)[:, None]
+
+        m_pupil = _soft(ra, 0.19, 0.13) * m_open
         out = out * (1.0 - m_pupil)[:, None] + \
-            np.array([0.0018, 0.0011, 0.0011], np.float32) * m_pupil[:, None]
+            np.array([0.0022, 0.0016, 0.0016], np.float32) * m_pupil[:, None]
+
+        # -- catchlight: one small, hard highlight up and to camera-left. Without
+        # it the eye reads as dead, which is the single biggest tell.
+        cdx = dx + 0.0060
+        cdy = ey - 0.0062
+        catch = np.clip(1.0 - np.sqrt(cdx ** 2 + cdy ** 2) / 0.0034, 0, 1) ** 1.4
+        out = out + np.array([0.55, 0.50, 0.46], np.float32)[None, :] * \
+            (catch * m_open)[:, None]
+
+        # -- inner glow: the reveal's red bleeds into the sclera and the lid
         if glow > 0:
-            ring = _soft(ra, 0.58, 0.34) * front * (1.0 - 0.55 * m_pupil)
-            out = out + np.array([0.62, 0.045, 0.028], np.float32)[None, :] * \
+            ring = _soft(ra, iris_r + 0.06, iris_r - 0.06) * m_open
+            out = out + np.array([0.30, 0.022, 0.014], np.float32)[None, :] * \
                 (ring * glow)[:, None]
-            cache = _soft(ra, 2.6, 1.0) * front
-            out = out + np.array([0.055, 0.008, 0.005], np.float32)[None, :] * \
-                (cache * glow)[:, None]
-        # brow: a soft dark arc above the socket, thicker at the nose end
+            spill = _soft(np.sqrt((dx / 0.040) ** 2 + (ey / 0.028) ** 2),
+                          2.2, 0.7) * front
+            out = out + np.array([0.030, 0.004, 0.003], np.float32)[None, :] * \
+                (spill * glow)[:, None]
+
+        # -- lid margins: the dark upper line, and a wet lower line that catches
+        #    the light. Both are thin and soft, and they are what closes the eye.
+        upper = _soft(np.abs(ra - 0.99), 0.13, 0.01) * front * (ey > 0)
+        out = out * (1.0 - 0.80 * upper)[:, None]
+        lower = _soft(np.abs(ra - 0.99), 0.10, 0.01) * front * (ey < 0)
+        out = out + np.array([0.045, 0.030, 0.028], np.float32)[None, :] * \
+            (lower * 0.8)[:, None]
+        # crease above the lid: a soft shadow, sits higher than the margin
+        crease = _soft(np.abs(ra - 1.34), 0.20, 0.02) * front * (ey > 0)
+        out = out * (1.0 - 0.30 * crease)[:, None]
+
+        # -- brow: soft, angled, thicker at the nose end
         bx = dx / 0.0215
         by = (dy - 0.0152) / 0.0032
         bq = np.sqrt(np.maximum(bx ** 2 + (by + 0.30 * bx) ** 2, 0))

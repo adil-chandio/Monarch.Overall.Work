@@ -54,7 +54,16 @@ MATS = {
                          bump=0.45, bump_scale=90.0),
     'darkstone': Material('darkstone', _c(0.020, 0.024, 0.030), 0.86, 0.07),
     'moss':     Material('moss',     _c(0.030, 0.042, 0.028), 0.92, 0.03),
+    # cedar bark and canopy: the reference's forest is nearly black with a wet
+    # vertical seam of reflected sky down each trunk
+    'bark':     Material('bark',     _c(0.030, 0.023, 0.019), 0.74, 0.16,
+                         bump=0.85, bump_scale=90.0),
+    'cedar':    Material('cedar',    _c(0.011, 0.020, 0.016), 0.96, 0.02,
+                         bump=0.80, bump_scale=140.0),
     'wood':     Material('wood',     _c(0.026, 0.017, 0.013), 0.80, 0.07),
+    # aged, near-black timber: the reference's alley walls, battens and eaves
+    'wood_dark': Material('wood_dark', _c(0.014, 0.011, 0.010), 0.86, 0.05,
+                          bump=0.55, bump_scale=140.0),
     'vermilion': Material('vermilion', _c(0.072, 0.020, 0.013), 0.80, 0.06),
     'tile_ridge': Material('tile_ridge', _c(0.145, 0.170, 0.210), 0.24, 0.66),
     'tile':     Material('tile',     _c(0.115, 0.135, 0.170), 0.26, 0.58),
@@ -63,12 +72,23 @@ MATS = {
                           emissive=_c(0.030, 0.013, 0.004)),
     'paper':    Material('paper',    _c(0.075, 0.052, 0.030), 0.95, 0.02,
                          emissive=_c(0.030, 0.014, 0.005)),
+    # shoji paper lit from behind: the only bright surface in S5, and the reason
+    # the portrait's background is amber rather than black
+    'paper_lit': Material('paper_lit', _c(0.340, 0.215, 0.105), 0.98, 0.01,
+                          emissive=_c(0.235, 0.130, 0.048),
+                          bump=0.10, bump_scale=260.0),
     'lantern':  Material('lantern',  _c(1.000, 0.480, 0.150), 1.00, 0.00,
                          emissive=_c(0.86, 0.300, 0.070)),
     'lantern_dim': Material('lantern_dim', _c(0.30, 0.115, 0.030), 1.00, 0.00,
                             emissive=_c(0.145, 0.040, 0.008)),
     'lantern_rib': Material('lantern_rib', _c(0.135, 0.048, 0.016), 0.90, 0.05,
                             emissive=_c(0.055, 0.014, 0.003)),
+    # weathered bamboo: greener and lighter than the timber, with a waxy sheen
+    'bamboo':   Material('bamboo',   _c(0.052, 0.050, 0.026), 0.58, 0.24,
+                         bump=0.30, bump_scale=190.0),
+    # the red paper lantern the reference puts on the right-hand wall
+    'lantern_red': Material('lantern_red', _c(0.90, 0.230, 0.070), 1.00, 0.00,
+                            emissive=_c(0.330, 0.035, 0.012)),
     'neon':     Material('neon',     _c(0.400, 0.700, 1.000), 1.00, 0.00,
                          emissive=_c(0.16, 0.30, 0.46)),
     'neon_red': Material('neon_red', _c(1.000, 0.200, 0.120), 1.00, 0.00,
@@ -156,7 +176,7 @@ class Light:
 
 # ------------------------------------------------------------------- helpers
 def _lantern(solids, lights, x, y, z, power=1.5, h=0.0, warm=(1.0, 0.52, 0.17),
-             scale=1.0):
+             scale=1.0, red=False):
     """A chochin: a ribbed paper lantern hanging from a short cord.
 
     The body is an ellipsoid, because a lantern is a rounded volume and a box
@@ -165,12 +185,16 @@ def _lantern(solids, lights, x, y, z, power=1.5, h=0.0, warm=(1.0, 0.52, 0.17),
     """
     sc = scale
     cy = y + h
+    body = 'lantern_red' if red else 'lantern'
+    rib = 'lantern_rib'
+    if red:
+        warm = (1.0, 0.20, 0.08)
     solids.append(Ellipsoid((x, cy, z), (0.105 * sc, 0.150 * sc, 0.105 * sc),
-                            'lantern'))
+                            body))
     for k in (-0.55, 0.0, 0.55):
         solids.append(Ellipsoid((x, cy + k * 0.150 * sc, z),
                                 (0.108 * sc, 0.006 * sc, 0.108 * sc),
-                                'lantern_rib'))
+                                rib))
     solids.append(Ellipsoid((x, cy + 0.150 * sc, z),
                             (0.036 * sc, 0.016 * sc, 0.036 * sc), 'darkstone'))
     solids.append(Ellipsoid((x, cy - 0.152 * sc, z),
@@ -272,11 +296,11 @@ def pose_at(t, root=(0.0, 0.0), yaw=0.0, run=False, lean_extra=0.0,
     head_c = neck + np.array([0, 0.13, 0.012])
     head_top = neck + np.array([0, 0.27, 0.012])
 
-    segs = [('pelvis', pelvis, spine, 0.150, 'cloth'),
-            ('spine', spine, chest, 0.155, 'cloth'),
-            ('chest', chest, neck, 0.175, 'shirt'),
-            ('neck', neck, head_c, 0.058, 'skin'),
-            ('head', head_c, head_top, 0.070, 'skin')]
+    segs = [('pelvis', pelvis, spine, 0.148, 'cloth'),
+            ('spine', spine, chest, 0.165, 'cloth'),
+            ('chest', chest, neck, 0.186, 'shirt'),
+            ('neck', neck, head_c, 0.055, 'skin'),
+            ('head', head_c, head_top, 0.068, 'skin')]
 
     for side, th, kn in (('L', a['thighL'], a['kneeL']),
                          ('R', a['thighR'], a['kneeR'])):
@@ -284,8 +308,8 @@ def pose_at(t, root=(0.0, 0.0), yaw=0.0, run=False, lean_extra=0.0,
         hip = pelvis + np.array([sx, -0.04, 0.0])
         knee = hip + np.array([0, -0.46 * math.cos(th), 0.46 * math.sin(th)])
         ank = knee + np.array([0, -0.44 * math.cos(th - kn), 0.44 * math.sin(th - kn)])
-        segs.append((f'thigh{side}', hip, knee, 0.090, 'cloth'))
-        segs.append((f'shin{side}', knee, ank, 0.064, 'cloth'))
+        segs.append((f'thigh{side}', hip, knee, 0.108, 'cloth'))
+        segs.append((f'shin{side}', knee, ank, 0.076, 'cloth'))
         foot = ank + np.array([0, -0.035, 0.13])
         segs.append((f'foot{side}', ank, foot, 0.054, 'cloth'))
 
@@ -297,8 +321,8 @@ def pose_at(t, root=(0.0, 0.0), yaw=0.0, run=False, lean_extra=0.0,
         el = sh + np.array([0, -0.30 * math.cos(ar), 0.30 * math.sin(ar)])
         wr = el + np.array([0, -0.27 * math.cos(ar + a['elbow']),
                             0.27 * math.sin(ar + a['elbow'])])
-        segs.append((f'upperArm{side}', sh, el, 0.060, 'shirt'))
-        segs.append((f'foreArm{side}', el, wr, 0.046, 'shirt'))
+        segs.append((f'upperArm{side}', sh, el, 0.072, 'shirt'))
+        segs.append((f'foreArm{side}', el, wr, 0.056, 'shirt'))
 
     if yaw or head_turn:
         c, s = math.cos(yaw), math.sin(yaw)
@@ -529,7 +553,13 @@ def build_street():
     # ---- ground: wet flagstone. Courses run across the alley, one every 0.9 m.
     for i in range(34):
         z = 14.0 - i * 0.9
-        solids.append(Box((0.0, 0.010, z), (HALF + 0.4, 0.010, 0.40), 'stone'))
+        # 0.46 half-depth against a 0.90 pitch: the courses meet, and the joint
+        # is a 2 mm bevel rather than a black slot. The previous 0.40 left a
+        # 10 cm trench between every course, which read as a ladder on the floor.
+        solids.append(Box((0.0, 0.011, z), (HALF + 0.4, 0.011, 0.452), 'stone'))
+        # a narrow darker fillet sunk a millimetre below the joint
+        solids.append(Box((0.0, 0.004, z + 0.452), (HALF + 0.4, 0.004, 0.016),
+                          'darkstone'))
 
     # ---- alley walls: timber ground floor, plaster above, tile eaves
     for side in (-1, 1):
@@ -540,7 +570,7 @@ def build_street():
                               'wood'))
             # dark plaster above the timber, under the eave
             solids.append(Box((x + side * 0.10, WALL_H + 0.30, z),
-                              (0.10, 0.30, 1.05), 'plaster'))
+                              (0.10, 0.30, 1.05), 'wood_dark'))
             # lattice window on every third bay, lit faintly from inside
             if i % 3 == 1:
                 solids.append(Box((x - side * 0.16, 1.55, z), (0.04, 0.55, 0.42),
@@ -550,18 +580,81 @@ def build_street():
             if i % 3 == 0:
                 # a slatted wooden screen on the opposite beat, so the rhythm is
                 # not a metronome
-                for k in range(4):
-                    solids.append(Box((x - side * 0.15, 1.35 + k * 0.16, z),
-                                      (0.03, 0.05, 0.40), 'wood'))
+                for k in range(9):
+                    solids.append(Box((x - side * 0.13, 0.86 + k * 0.115, z),
+                                      (0.026, 0.042, 0.40), 'wood'))
+                # two vertical stiles frame the lattice
+                for dz2 in (-0.40, 0.40):
+                    solids.append(Box((x - side * 0.13, 1.30, z + dz2),
+                                      (0.028, 0.52, 0.035), 'wood'))
+            # vertical battens every 0.34 m, standing 6 cm proud of the wall
+            for k in range(6):
+                bz = z - 0.88 + k * 0.352
+                solids.append(Box((x - side * 0.045, 1.35, bz),
+                                  (0.035, 1.35, 0.035), 'wood_dark'))
             # eave: projects inward and is the dark band at the top of frame
-            solids.append(OBox((x - side * 0.52, WALL_H + 0.62, z),
-                               (0.62, 0.07, 1.12), 0.0, side * 0.30, 0.0, 'tile'))
+            # A continuous eave, sloping with the wall, and deep enough that its
+            # underside is a dark band. The previous per-bay box, tilted and
+            # spaced 2.2 m apart, read as a row of floating slabs.
+            solids.append(OBox((x - side * 0.46, WALL_H + 0.58, z),
+                               (0.52, 0.045, 1.13), 0.0, side * 0.34, 0.0, 'tile'))
+            # the fascia board along the eave's outer edge, which hides the joint
+            solids.append(Box((x - side * 0.94, WALL_H + 0.74, z),
+                              (0.035, 0.055, 1.13), 'darkstone'))
+            # rafters under it, every 0.45 m: the reference's eave is open below
+            for k in range(5):
+                solids.append(Box((x - side * 0.46, WALL_H + 0.50,
+                                   z - 0.90 + k * 0.45),
+                                  (0.50, 0.028, 0.035), 'wood_dark'))
             solids.append(Box((x - side * 0.24, WALL_H + 0.30, z),
                               (0.06, 0.12, 1.10), 'darkstone'))
 
         # paper lanterns hung off the eaves: the reference's dominant warm accent
-        for i, z in enumerate((10.0, 5.0, 0.2, -4.6)):
-            _lantern(solids, lights, x - side * 0.72, 2.35, z, power=5.5)
+        # The reference hangs a handful of small lanterns whose pools fall on
+        # the wall, not a continuous orange wash. Four per side at the old power
+        # lit the whole alley red; two, weaker, at the right height, read as night.
+        for i, z in enumerate((9.2, 3.4, -2.6)):
+            _lantern(solids, lights, x - side * 0.66, 2.28, z, power=2.1,
+                     scale=0.85)
+            # the cord up to the eave, and the bracket that carries it
+            solids.append(Box((x - side * 0.42, 2.98, z), (0.28, 0.022, 0.022),
+                              'wood_dark'))
+            solids.append(Box((x - side * 0.66, 2.62, z), (0.010, 0.36, 0.010),
+                              'wood_dark'))
+
+    # ---- left-hand side of the alley: a bamboo fence with a stone plinth, and
+    # a gate at the far end. The reference's left wall is not a blank timber
+    # plane: the fence's vertical canes catch a thin specular line and that is
+    # most of what the left third of the frame is made of.
+    FZ0, FZ1 = 8.6, -6.4
+    n_cane = int((FZ0 - FZ1) / 0.052)
+    for i in range(n_cane):
+        z = FZ0 - i * 0.052
+        x = -HALF + 0.245
+        solids.append(Box((x, 0.72, z), (0.022, 0.62, 0.022), 'bamboo'))
+    for yy in (0.16, 0.62, 1.30):
+        solids.append(Box((-HALF + 0.245, yy, (FZ0 + FZ1) * 0.5),
+                          (0.026, 0.030, (FZ0 - FZ1) * 0.5), 'bamboo'))
+    # the stone kerb the fence stands on
+    solids.append(Box((-HALF + 0.26, 0.075, (FZ0 + FZ1) * 0.5),
+                      (0.14, 0.075, (FZ0 - FZ1) * 0.5), 'darkstone'))
+
+    # ---- a cluster of red lanterns on the right wall near the camera: the
+    # reference's brightest colour, three globes on one bracket
+    for k, (dz, sc) in enumerate(((-0.34, 0.62), (0.0, 0.70), (0.36, 0.58))):
+        _lantern(solids, lights, HALF - 0.66, 2.06 + (0.0 if k == 1 else 0.10),
+                 6.35 + dz, power=1.1, scale=sc, red=True)
+    solids.append(Box((HALF - 0.30, 2.92, 6.35), (0.34, 0.024, 0.024), 'wood_dark'))
+    solids.append(Box((HALF - 0.62, 2.62, 6.35), (0.012, 0.30, 0.012), 'wood_dark'))
+
+    # ---- a timber gate frame across the alley at the far end, with the
+    # cross-street's light spilling round it
+    for sx in (-HALF + 0.30, HALF - 0.30):
+        solids.append(Box((sx, 1.62, -9.4), (0.16, 1.62, 0.16), 'wood_dark'))
+    solids.append(Box((0.0, 3.28, -9.4), (HALF - 0.10, 0.16, 0.20), 'wood_dark'))
+    solids.append(Box((0.0, 3.62, -9.4), (HALF + 0.2, 0.10, 0.34), 'tile'))
+    # the gate's own hanging lamp
+    _lantern(solids, lights, 0.0, 2.86, -9.15, power=2.2, scale=1.0)
 
     # ---- far end: the alley continues into a lit cross-street
     solids.append(Box((0.0, 1.75, -18.2), (HALF + 1.2, 1.75, 0.35), 'wood'))
@@ -612,6 +705,24 @@ def build_temple():
     lanterns stand in the near foreground either side.
     """
     solids, lights = [], []
+
+    # ------------------------------------------------------------------ forest
+    # The reference frames the hall with cedar trunks at both edges and mist
+    # between them. Without them the facade floats on a black field, which is
+    # exactly how the first pass read.
+    for side in (-1, 1):
+        for i in range(7):
+            x = side * (7.2 + i * 1.85 + 0.5 * ((i * 37) % 5))
+            z = 9.0 - ((i * 53) % 11) * 1.35
+            h = 13.0 + ((i * 29) % 7)
+            solids.append(Box((x, h * 0.5 - 0.4, z), (0.34, h * 0.5, 0.34), 'bark'))
+            solids.append(Ellipsoid((x, h - 0.4, z), (1.5, 1.9, 1.5), 'cedar',
+                                    None))
+        # a low mossy bank either side of the stair, so the ground is not a plane
+        for i in range(9):
+            solids.append(Ellipsoid((side * (4.6 + i * 0.7), -0.15,
+                                     8.4 - i * 1.25 + 0.6),
+                                    (1.5, 0.55, 1.7), 'moss', None))
 
     # ---------------------------------------------------------- approach stair
     for i in range(9):
@@ -679,7 +790,7 @@ def build_temple():
     # Two pitches: a shallow eave out to the drip line, then a steep upper slope,
     # with the eave line curving up at the corners. Courses every 0.30 m carry a
     # row of half-round tiles; that corduroy is the reference roof's texture.
-    COURSES = 22
+    COURSES = 46
     for i in range(COURSES):
         f = i / (COURSES - 1)
         # eave (f<0.45) is shallow, upper pitch steeper
@@ -693,20 +804,20 @@ def build_temple():
             y = 5.04 + t ** 1.25 * 3.35
             hz = 4.20 - t * 3.05
             hx = 8.20 - t * 5.15
-        solids.append(Box((0.0, y, -1.2), (hx, 0.042, hz), 'tile'))
+        solids.append(Box((0.0, y, -1.2), (hx, 0.030, hz), 'tile'))
         # raised lip at the drip edge of each course
-        solids.append(Box((0.0, y + 0.050, -1.2 + hz - 0.055),
-                          (hx, 0.026, 0.05), 'tile_ridge'))
+        solids.append(Box((0.0, y + 0.034, -1.2 + hz - 0.038),
+                          (hx, 0.016, 0.036), 'tile_ridge'))
         # half-round tiles down the slope, at the course spacing, 3 per metre
-        cols = max(int(hx * 2 * 0.60), 5)
+        cols = max(int(hx * 2 * 0.75), 6)
         for k in range(cols):
             tx = -hx + (k + 0.5) * (2 * hx / cols)
-            solids.append(Box((tx, y + 0.048, -1.2),
-                              (0.058, 0.026, hz), 'tile_ridge'))
+            solids.append(Box((tx, y + 0.036, -1.2),
+                              (0.048, 0.020, hz), 'tile_ridge'))
     # the continuous shell under the courses. Without it the shrinking courses
     # read as steps; with it they read as tiles on a slope.
-    for i in range(30):
-        f = i / 29.0
+    for i in range(60):
+        f = i / 59.0
         if f < 0.45:
             t = f / 0.45
             y = 4.30 + t * 0.72
@@ -717,7 +828,7 @@ def build_temple():
             y = 5.02 + t ** 1.25 * 3.35
             hz = 4.25 - t * 3.05
             hx = 8.25 - t * 5.15
-        solids.append(Box((0.0, y - 0.030, -1.2), (hx + 0.02, 0.032, hz + 0.02),
+        solids.append(Box((0.0, y - 0.075, -1.2), (hx + 0.02, 0.026, hz + 0.02),
                           'tile'))
     # the eave edge itself: a fascia board and a drip gutter
     solids.append(Box((0.0, 4.30, 4.34), (8.60, 0.075, 0.06), 'darkstone'))
@@ -729,11 +840,11 @@ def build_temple():
                                (0.30, 0.048, 0.55 - k * 0.08),
                                0.0, 0.0, sx * (0.16 + k * 0.11), 'tile_ridge'))
         # barge board up the gable, and the ornamental end of the ridge
-        for k in range(6):
-            f = k / 5.0
+        for k in range(12):
+            f = k / 11.0
             solids.append(OBox((sx * (5.05 - f * 2.45), 5.10 + f * 3.25, -1.2),
-                               (0.09, 0.10, 4.25 - f * 3.05), 0.0, 0.0,
-                               -sx * 0.62, 'darkstone'))
+                               (0.055, 0.070, 4.25 - f * 3.05), 0.0, 0.0,
+                               -sx * 0.62, 'tile_ridge'))
     # gable wall and ridge
     for k in range(8):
         f = k / 7.0
@@ -776,7 +887,7 @@ def build_temple():
             solids.append(Ellipsoid((sx * 9.0, 9.2 + k * 2.3, zz),
                                     (rr * 4.0, 2.1, rr * 4.0), 'foliage'))
     # weak moon high behind the roof, rimming the tiles and the ridge
-    lights.append(Light((0.0, 27.0, -16.0), (0.34, 0.46, 0.72), 90.0, 0.0))
+    lights.append(Light((0.0, 24.0, -14.0), (0.42, 0.50, 0.70), 260.0, 0.0))
     return solids, lights
 
 
@@ -888,6 +999,77 @@ def build_aerial():
     return solids, lights
 
 
+def build_shoji():
+    """S5: the warm interior the portrait is shot in.
+
+    The reference's three-quarter portrait sits in front of paper screens that
+    are lit from behind, so the background is a grid of amber rectangles with
+    soft mist between them — not a dark temple. The screens are real geometry:
+    a frame of dark timber, a paper panel per bay, and the light behind them, so
+    the grain and the defocus have something to act on.
+    """
+    solids, lights = [], []
+    # floor and ceiling of the room, kept near-black so nothing competes
+    solids.append(Box((0.0, -0.02, -1.0), (9.0, 0.02, 7.0), 'wood_dark'))
+    solids.append(Box((0.0, 3.20, -1.0), (9.0, 0.06, 7.0), 'wood_dark'))
+    # the screen wall, 3.4 m behind the subject, in a 4 x 2 grid of bays
+    BW, BH = 1.62, 1.42
+    for cx in range(-2, 3):
+        for cy in range(2):
+            x = cx * BW
+            y = 0.92 + cy * BH
+            # A solid backing panel behind the whole wall. The bays used to be
+            # inset by 5 cm on each side against a 1.62 m pitch, so every bay
+            # boundary was a 10 cm slot straight through the screen: the sky
+            # lit by the exterior showed through it as a blue grid over the
+            # portrait. The backing closes every slot without moving the paper.
+            solids.append(Box((x, y, -3.44), (BW * 0.5, BH * 0.5, 0.010),
+                              'wood_dark'))
+            # Only two bays are lit paper at all, both off to the sides. The
+            # reference's room is 71 % below 20 % luma and the lit panel sits
+            # behind the subject's shoulder; an evenly lit wall of amber paper
+            # (what this set was) fills the frame with glow and kills the
+            # portrait's contrast. The rest are dim paper or bare timber.
+            if (cx, cy) in ((-2, 1), (2, 0)):
+                mat, power = 'paper_lit', 0.85
+            elif (cx, cy) in ((-2, 0), (2, 1)):
+                mat, power = 'paper_dim', 0.0
+            else:
+                mat, power = 'wood_dark', 0.0
+            solids.append(Box((x, y, -3.40),
+                              (BW * 0.5 - 0.004, BH * 0.5 - 0.004, 0.012), mat))
+            if power:
+                lights.append(Light((x, y, -3.85), (1.0, 0.68, 0.36), power, 0.55))
+            # the timber frame round each bay
+            for dx in (-BW * 0.5, BW * 0.5):
+                solids.append(Box((x + dx, y, -3.38), (0.035, BH * 0.5, 0.030),
+                                  'wood_dark'))
+            for dy in (-BH * 0.5, BH * 0.5):
+                solids.append(Box((x, y + dy, -3.38), (BW * 0.5, 0.035, 0.030),
+                                  'wood_dark'))
+            # two muntins per bay, so the paper reads as a screen, not a panel
+            solids.append(Box((x, y, -3.39), (0.016, BH * 0.5 - 0.05, 0.020),
+                              'wood_dark'))
+            solids.append(Box((x, y, -3.39), (BW * 0.5 - 0.05, 0.016, 0.020),
+                              'wood_dark'))
+    # a low table edge and a hanging lamp off to one side, for depth
+    solids.append(Box((1.9, 0.34, -1.6), (0.7, 0.03, 0.45), 'wood'))
+    _lantern(solids, lights, -1.9, 2.05, -1.9, power=1.5, scale=0.9)
+    # Close the room. The screen wall is 9.7 m wide and 3.05 m tall inside a
+    # ceiling at 3.20 m, so above and past it the camera had a clear view of
+    # sky: that is what drew the blue grid over the portrait. Side walls and a
+    # lintel band seal the gaps. The backing wall sits BEHIND the panel lights
+    # at z=-3.85 — putting it at -3.62 (as a first attempt did) blocked every
+    # one of them and turned the screens from lit paper into dark timber.
+    solids.append(Box((0.0, 1.75, -4.02), (5.4, 1.80, 0.06), 'wood_dark'))
+    for sx in (-5.05, 5.05):
+        solids.append(Box((sx, 1.60, -1.0), (0.10, 1.62, 4.6), 'wood_dark'))
+    solids.append(Box((0.0, 3.16, -3.40), (5.4, 0.10, 0.16), 'wood_dark'))
+    # warm bounce off the paper into the room, kept low so the face still models
+    lights.append(Light((0.0, 1.6, 1.8), (0.42, 0.30, 0.18), 0.55, 0.9))
+    return solids, lights
+
+
 def build_courtyard():
     """S4/S5: open courtyard in front of a vermilion hall, mist and lanterns."""
     solids, lights = [], []
@@ -960,64 +1142,91 @@ def build_face():
 
 
 def build_runhall():
-    """S4: the front of a long vermilion hall, seen from the side.
+    """S4: a narrow veranda, seen close and side-on, while the man runs past.
 
-    The reference shot is a lateral tracking pan across a temple veranda: the
-    hall runs left to right across the frame at a slight angle, its steps come
-    down into the foreground where the man runs, and two lanterns give the only
-    warm light. Building the hall along the x axis is what makes a pan along x
-    read as a pan across a facade.
+    The reference's S4 is not a wide establishing shot of a hall: it is tight on
+    the man from a few metres away, with two vermilion posts and a lit lantern
+    filling the frame, and everything behind them is stone and paper. The earlier
+    build made a 32 m facade, which put the camera 12 m back and turned the shot
+    into a dim, empty room. This is the opposite: a corridor 5.6 m wide, a post
+    every 2.4 m, a lantern at 2.1 m, and the camera 3.4 m from the subject.
     """
     solids, lights = [], []
-    # wet flagstone court, extending well past the frame in both directions
-    for i in range(30):
-        z = 12.0 - i * 1.0
-        solids.append(Box((0.0, 0.010, z), (22.0, 0.010, 0.45), 'stone'))
-    # the hall: plinth, veranda, six bays of posts, deep eave
-    solids.append(Box((0.0, 0.52, -3.4), (17.0, 0.52, 3.4), 'darkstone'))
-    solids.append(Box((0.0, 1.06, -3.4), (16.6, 0.03, 3.1), 'tile_ridge'))
-    # steps down into the court, running the whole length
-    for i in range(5):
-        solids.append(Box((0.0, 0.09 + i * 0.10, 0.55 - i * 0.30),
-                          (16.2, 0.052, 0.16), 'stone'))
-    for i in range(15):
-        x = -15.4 + i * 2.2
-        for zz in (0.0, -3.0, -6.0):
-            solids.append(Box((x, 2.55, zz), (0.19, 1.80, 0.19), 'vermilion'))
-        solids.append(Box((x, 4.32, 0.0), (0.21, 0.16, 0.24), 'darkstone'))
-    # beams
-    for zz in (0.0, -3.0, -6.0):
-        solids.append(Box((0.0, 4.34, zz), (15.6, 0.17, 0.22), 'vermilion'))
-    solids.append(Box((0.0, 3.30, 0.0), (15.6, 0.09, 0.18), 'wood'))
-    # screens behind the posts, lit from inside
-    for i in range(14):
-        x = -14.3 + i * 2.2
-        solids.append(Box((x, 2.30, -5.95), (0.92, 1.20, 0.05), 'paper_dim'))
-        # a wooden lattice over each screen, so it is not a lit slab
-        for k in range(5):
-            solids.append(Box((x - 0.62 + k * 0.31, 2.30, -5.88),
-                              (0.022, 1.20, 0.02), 'wood'))
+    # wet flagstone, close enough that its surface reads
+    for i in range(26):
+        z = 9.0 - i * 0.92
+        solids.append(Box((0.0, 0.010, z), (9.0, 0.010, 0.462), 'stone'))
+        solids.append(Box((0.0, 0.004, z + 0.462), (9.0, 0.004, 0.014), 'darkstone'))
+
+    # the hall's edge: plinth and steps to the left of frame
+    solids.append(Box((-4.6, 0.46, -1.0), (2.6, 0.46, 6.0), 'darkstone'))
+    for i in range(4):
+        solids.append(Box((-2.1 + i * 0.26, 0.08 + i * 0.10, -1.0),
+                          (0.13, 0.05, 5.4), 'stone'))
+
+    # the veranda: two rows of heavy vermilion posts, only 5.6 m apart, so the
+    # frame is full of them
+    for i in range(9):
+        z = 6.2 - i * 2.4
+        for x in (-1.35, 1.55):
+            solids.append(Box((x, 2.35, z), (0.22, 2.35, 0.22), 'vermilion'))
+            # the stone footing each post stands on
+            solids.append(Box((x, 0.13, z), (0.30, 0.13, 0.30), 'darkstone'))
+        # head beam and the tie between the posts
+        solids.append(Box((0.10, 4.62, z), (1.55, 0.19, 0.22), 'vermilion'))
+        solids.append(Box((0.10, 3.55, z), (1.50, 0.10, 0.16), 'wood'))
+
+    # a paper screen wall behind the far row: the bright surface in the reference
+    for i in range(9):
+        z = 6.2 - i * 2.4
+        solids.append(Box((2.90, 2.05, z), (0.05, 1.55, 1.05), 'paper_dim'))
         for k in range(4):
-            solids.append(Box((x, 1.55 + k * 0.48, -5.88), (0.92, 0.018, 0.02),
-                              'wood'))
-    for x in (-9.0, -3.0, 3.0, 9.0):
-        lights.append(Light((x, 2.1, -4.0), (1.0, 0.52, 0.22), 16.0, 1.1))
-    # roof: courses running the length of the hall, with the eave overhead
-    for i in range(10):
-        f = i / 9.0
-        solids.append(Box((0.0, 4.60 + f * 1.55, -3.4 + f * 1.7),
-                          (16.4 - f * 1.2, 0.05, 3.9 - f * 1.5), 'tile'))
-        solids.append(Box((0.0, 4.60 + f * 1.55, -3.4 + f * 1.7 + (3.9 - f * 1.5) - 0.05),
-                          (16.4 - f * 1.2, 0.03, 0.06), 'tile_ridge'))
-    # two lanterns: the reference has one on a post at the near end and one
-    # lower, on the ground, throwing a pool of amber
-    _stone_lantern(solids, lights, -1.55, 5.05, scale=1.30)
-    lights.append(Light((-1.52, 1.50, 5.02), (1.0, 0.50, 0.16), 6.0, 0.26))
-    _lantern(solids, lights, 1.15, 1.15, 3.55, power=9.0, scale=1.15)
-    solids.append(Box((1.15, 0.55, 3.55), (0.058, 0.62, 0.058), 'darkstone'))
-    _lantern(solids, lights, -4.1, 3.30, 2.7, power=7.0, scale=0.95)
-    # mist that pools against the steps
-    lights.append(Light((0.0, 16.0, 8.0), (0.30, 0.40, 0.60), 90.0, 0.0))
+            solids.append(Box((2.84, 2.05, z - 0.78 + k * 0.52),
+                              (0.02, 1.55, 0.026), 'wood'))
+        for k in range(3):
+            solids.append(Box((2.84, 1.10 + k * 0.60, z),
+                              (0.02, 0.022, 1.02), 'wood'))
+        lights.append(Light((2.35, 2.05, z), (1.0, 0.56, 0.26), 2.4, 0.55))
+
+    # the eaves, low overhead
+    for i in range(9):
+        z = 6.2 - i * 2.4
+        solids.append(Box((0.10, 4.86, z), (1.75, 0.07, 1.24), 'tile'))
+        solids.append(Box((0.10, 4.72, z), (1.70, 0.10, 1.18), 'darkstone'))
+
+    # the two lanterns that light the shot: one hung at head height close to
+    # camera, one on a stand further down the veranda
+    _lantern(solids, lights, 0.95, 1.95, 3.30, power=4.5, scale=1.05)
+    solids.append(Box((0.95, 2.95, 3.30), (0.010, 0.85, 0.010), 'wood_dark'))
+    _lantern(solids, lights, -1.05, 2.20, -1.10, power=3.0, scale=0.95)
+
+    # Close the left side. With only the right-hand screen wall, the camera's
+    # left edge looked straight out into empty sky, which read as a hole in the
+    # set. This is the inner face of the hall, its own beat off the right posts.
+    solids.append(Box((-2.55, 2.10, -1.0), (0.10, 1.90, 9.0), 'wood_dark'))
+    for i in range(9):
+        z = 6.2 - i * 2.4
+        solids.append(Box((-2.30, 2.05, z), (0.06, 1.60, 1.02), 'paper_dim'))
+        for k in range(4):
+            solids.append(Box((-2.23, 2.05, z - 0.76 + k * 0.51),
+                              (0.025, 1.60, 0.028), 'wood'))
+        lights.append(Light((-1.95, 2.05, z), (1.0, 0.58, 0.28), 1.6, 0.5))
+    solids.append(Box((-2.4, 0.0, -1.0), (1.4, 0.02, 9.0), 'stone'))
+    # a ceiling over the veranda, so no sky shows through the beam gaps
+    solids.append(Box((0.10, 4.98, -1.0), (2.9, 0.06, 9.0), 'wood_dark'))
+
+    # The veranda must close behind the subject, not open onto empty sky: the
+    # reference's background is a lit hall wall.
+    solids.append(Box((0.0, 2.4, -9.6), (5.2, 2.4, 0.22), 'vermilion'))
+    solids.append(Box((0.0, 4.70, -9.6), (5.6, 0.20, 0.34), 'darkstone'))
+    for sx in (-2.4, -0.8, 0.8, 2.4):
+        solids.append(Box((sx, 2.30, -9.35), (0.62, 1.30, 0.05), 'paper_dim'))
+        lights.append(Light((sx, 2.30, -8.9), (1.0, 0.54, 0.24), 2.0, 0.5))
+
+    # cold sky bounce from above, so the dark side is blue and not black
+    lights.append(Light((-2.0, 9.0, 6.0), (0.30, 0.40, 0.62), 24.0, 0.0,))
+    # a warm kicker just behind the lantern, to separate the runner's silhouette
+    lights.append(Light((2.0, 1.9, 2.2), (1.0, 0.58, 0.28), 1.4, 0.30))
     return solids, lights
 
 
@@ -1028,6 +1237,7 @@ BUILDERS = {
     'courtyard': build_courtyard,
     'runhall': build_runhall,
     'face': build_face,
+    'shoji': build_shoji,
 }
 
 

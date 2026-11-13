@@ -387,9 +387,22 @@ class Frame:
         return out.astype(np.float32)
 
     # ------------------------------------------------------------- wet floor
+    # materials whose up-facing surfaces are wet: the pavement, the stone of the
+    # court, and the earth. The first version tested only 'ground', but every
+    # floor in every set is built from 'stone' boxes laid over the ground plane,
+    # so the wet pass never ran on a single visible pixel of the street.
+    _WET_MATS = None
+
+    def _wet_mask(self, mat):
+        if Frame._WET_MATS is None:
+            Frame._WET_MATS = np.array([world.MAT_ID[k] for k in
+                                        ('ground', 'stone', 'darkstone')])
+        return np.isin(mat, Frame._WET_MATS)
+
     def wet(self, col, ro, rd, t, mat, nrm, lights, fog_tint, strength=0.42,
             time=0.0):
-        m = (mat == world.MAT_ID['ground']) & np.isfinite(t) & (t < 160)
+        m = (self._wet_mask(mat) & (nrm[..., 1] > 0.75)
+             & np.isfinite(t) & (t < 160))
         if not m.any() or strength <= 0:
             return col
         ry = np.array(rd, np.float32, copy=True)
@@ -404,17 +417,49 @@ class Frame:
                 continue
             lv = np.asarray(L.pos, np.float32)[None, :] - pts
             d2 = (lv * lv).sum(-1) + 0.20
-            align = np.clip((lv / np.sqrt(d2)[:, None] * ry[m]).sum(-1), 0, 1) ** 26
+            # A lantern reflection is broad and smeared, not a pinpoint: a wet
+            # flagstone scatters the lobe over a wide angle. A tight 26th power
+            # produced small bright dots that never read as a reflection.
+            align = np.clip((lv / np.sqrt(d2)[:, None] * ry[m]).sum(-1), 0, 1) ** 11
+            # falloff with distance keeps each pool under its own lamp instead
+            # of letting one lamp light the whole street
             acc += np.asarray(L.colour, np.float32)[None, :] * \
-                (align * L.intensity / (d2 * 2.2 + 0.9))[:, None]
-        # irregular, high-frequency ripple: a single low-frequency sine reads as
-        # painted diagonal stripes on the floor, which is exactly what it did
-        rp = (np.sin(pts[:, 0] * 23.0 + pts[:, 2] * 17.0 + time * 2.1)
-              * np.sin(pts[:, 0] * -11.0 + pts[:, 2] * 29.0 - time * 1.3))
-        ripple = 0.55 + 0.45 * (rp * 0.5 + 0.5)
-        rw = (strength * ripple)[:, None]
+                (align * L.intensity / (d2 * 0.55 + 0.35)
+                 * np.exp(-np.sqrt(d2) / 9.0))[:, None]
+        # A wet flagstone is a low, rough mirror. What the reference actually
+        # shows is a bright vertical smear under each lantern and almost nothing
+        # between them, plus one long mirror line where a nearby lamp's lobe is
+        # grazing. The earlier passes either lit the whole floor (a glowing
+        # carpet) or added a two-sine product (a literal checkerboard). This
+        # weights the reflection by how tightly each lamp's lobe is aligned, so
+        # the pools stay local, and elongates the noise along the view so the
+        # texture is a smear, never a grid.
+        # real value noise, 8:1 elongated along z, drifting slowly: anything
+        # built from single sines at these frequencies produces a visible
+        # interference pattern, which is precisely how the last three passes
+        # turned the pavement into a carpet
+        q = np.stack([pts[:, 0] * 26.0,
+                      pts[:, 1] * 26.0,
+                      pts[:, 2] * 3.2 + time * 0.35], -1).astype(np.float32)
+        n1 = self._noise(q)
+        n2 = self._noise(q * np.array([2.7, 1.0, 2.3], np.float32) + 11.0)
+        sm = np.clip(0.30 + 1.15 * (0.65 * n1 + 0.35 * n2), 0.0, 1.0)
+        # A wet floor is not only a mirror for the lamps: at the grazing angles a
+        # street is shot from, Fresnel makes it a mirror for the sky as well, and
+        # in this film the sky is the cold blue haze. Without this the pavement
+        # was lit purely by warm lanterns and came out brown, like a timber
+        # floor, where the reference's wet stone is blue-grey with the lamps
+        # sitting on top of it.
+        cos_i = np.clip(np.abs((rd[m] * nrm[m]).sum(-1)), 0, 1)
+        fres = (1.0 - cos_i) ** 3.4
+        sky_refl = (np.asarray(fog_tint, np.float32)[None, :] * 2.6
+                    * (0.55 + 1.30 * sm)[:, None]
+                    * fres[:, None])
+        refl = np.clip(acc * sm[:, None] + sky_refl, 0, 1.4)
+        refl = refl + np.asarray(fog_tint, np.float32)[None, :] * 0.06 * sm[:, None]
+        rw = np.clip(strength * 0.92 * (0.22 + 0.78 * sm), 0, 0.85)[:, None]
         out = col.copy()
-        out[m] = col[m] * (1.0 - rw) + np.clip(acc, 0, 2.5) * rw
+        out[m] = col[m] * (1.0 - rw) + refl * rw
         return np.nan_to_num(out, nan=0.0, posinf=0.0, neginf=0.0)
 
     # ------------------------------------------------------------ atmosphere
@@ -444,6 +489,82 @@ class Frame:
         m = (graze ** 2.0) * depth * strength
         tint = np.asarray(tint, np.float32)
         return col * (1 - m[..., None] * 0.35) + tint * (m[..., None] * 0.35)
+
+    # -------------------------------------------------------------------- rain
+    @staticmethod
+    def rain_streaks(col, depth, eye, right, up, fwd, t, *, amount=1.0,
+                     wind=(0.10, -0.06), seed=0, ty=0.5):
+        """Rain as motion-blurred streaks in camera space.
+
+        A drop at 24 fps under a 1/48 s shutter lays down a streak tens of
+        centimetres long, not a dot, so each drop is drawn as a line along its
+        own velocity. Drops live in a cell that wraps around the camera, which
+        makes the field infinite without rebuilding anything, and each drop is
+        placed with true perspective and depth-tested against the geometry — so
+        rain in front of a lantern is lit by it and rain behind the wall is not
+        drawn at all.
+
+        This has to be done in camera space, not screen space. Screen-space
+        streaks do not share a vanishing point, do not parallax, and do not
+        respect occlusion, and the result looks like scratches on the negative.
+        """
+        if amount <= 0:
+            return col
+        h, w = col.shape[:2]
+        rng = np.random.default_rng(1000 + int(seed))
+        out = col.copy()
+        img = out.reshape(-1, 3)
+        aspect = w / h
+        shells = ((0.40, 5.5, 320), (1.30, 15.0, 520), (3.40, 30.0, 780))
+        for ci, (near, far, count) in enumerate(shells):
+            n = int(count * amount)
+            base = rng.random((n, 3), np.float32)
+            span = far - near
+            fall = (base[:, 1] * span + t * 9.5) % span
+            bx = (base[:, 0] - 0.5) * 2.0 * (near + fall) * 1.15
+            bz = near + ((base[:, 2] * span + t * 1.1) % span)
+            wy = near * 0.20 + fall
+            wx = bx + wind[0] * fall
+            pw = (np.asarray(eye, np.float32)[None, :]
+                  + np.asarray(fwd, np.float32)[None, :] * bz[:, None]
+                  + np.asarray(right, np.float32)[None, :] * wx[:, None]
+                  + np.asarray(up, np.float32)[None, :] * wy[:, None])
+            rel = pw - np.asarray(eye, np.float32)[None, :]
+            zc = rel @ np.asarray(fwd, np.float32)
+            ok = zc > 0.30
+            if not ok.any():
+                continue
+            xs = (rel @ np.asarray(right, np.float32)) / np.maximum(zc, 1e-4) / (ty * aspect)
+            ys = (rel @ np.asarray(up, np.float32)) / np.maximum(zc, 1e-4) / ty
+            px = (xs * 0.5 + 0.5) * w
+            py = (0.5 - ys * 0.5) * h
+            keep = ok & (px >= 0) & (px < w - 1) & (py >= 0) & (py < h - 1)
+            if not keep.any():
+                continue
+            pi = np.nonzero(keep)[0]
+            z_at = depth[py[pi].astype(np.int32), px[pi].astype(np.int32)]
+            vis = pi[zc[pi] < z_at + 0.08]
+            if len(vis) == 0:
+                continue
+            # streak length in pixels: the distance the drop travels during the
+            # shutter, projected through the same perspective
+            speed = 9.0 + 3.5 * base[vis, 0]
+            k = (ty * h)
+            ln = np.clip(0.020 * speed * k / np.maximum(zc[vis], 1e-3), 2.0, 70.0)
+            amp = (0.20 if ci == 0 else 0.115 if ci == 1 else 0.055) * amount
+            for j, i in enumerate(vis):
+                L = float(ln[j])
+                steps = int(np.clip(L, 2, 34))
+                u = np.linspace(0.0, 1.0, steps, dtype=np.float32)
+                sx = px[i] + wind[0] * L * 3.0 * u
+                sy = py[i] + L * u
+                xi = np.clip(sx.astype(np.int32), 0, w - 1)
+                yi = np.clip(sy.astype(np.int32), 0, h - 1)
+                taper = (np.sin(np.pi * u) ** 0.8) * amp
+                np.add.at(img, yi * w + xi,
+                          np.array([0.55, 0.63, 0.76], np.float32)[None, :]
+                          * taper[:, None])
+        return out
 
     # ------------------------------------------------------------------ grade
     @staticmethod
@@ -554,7 +675,7 @@ class Shot:
                  ambient=(0.10, 0.13, 0.19), fog=0.030, fog_tint=(0.055, 0.070, 0.100),
                  mist=0.45, grade=None, wet=0.42, fstop=None, focus=None,
                  shutter=0.0, moon=None, mist_layer=1.0, pan_rate=0.0,
-                 ao=0.0, moon_size=1.0):
+                 ao=0.0, moon_size=1.0, rain=0.0, rain_wind=(0.10, -0.06)):
         self.name = name
         self.eye = np.asarray(eye, np.float32)
         self.target = np.asarray(target, np.float32)
@@ -570,6 +691,8 @@ class Shot:
         self.mist_layer = mist_layer
         self.ao = ao
         self.moon_size = moon_size
+        self.rain = rain
+        self.rain_wind = rain_wind
 
 
 def render_frame(fr, shot, width, height, t=0.0, dyn=None, dof=1, blur=1,
@@ -799,4 +922,16 @@ def render(fr, shot, width, height, *, time=0.0, eye=None, target=None,
             coc = np.clip(np.abs(depth - f_plane) / max(f_plane, 0.2) * dof, 0, 1) ** 0.8
             acc = _defocus(acc, coc.astype(np.float32), taps=7,
                            radius=float(width) / 220.0)
+
+    # Rain goes on last, after defocus and before the grade, because that is
+    # where it is in the optical path: drops are in front of the lens, so they
+    # are in focus even when the set behind them is not.
+    if getattr(shot, 'rain', 0.0) > 0:
+        _, _, right, up = geom.camera_rays(8, 8, eye, target, shot.fov, shot.roll)
+        fwd = geom.normalise(np.asarray(target, np.float32) - np.asarray(eye, np.float32))
+        ty_r = float(np.tan(np.radians(shot.fov) * 0.5))
+        acc = fr.rain_streaks(
+            acc, np.where(np.isfinite(depth), depth, 60.0), eye, right, up, fwd,
+            time, amount=shot.rain, wind=getattr(shot, 'rain_wind', (0.10, -0.06)),
+            seed=seed, ty=ty_r)
     return fr.grade(acc, seed=seed, **shot.grade)

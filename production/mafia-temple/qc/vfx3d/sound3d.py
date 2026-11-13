@@ -90,13 +90,98 @@ def bandpass_noise(n, sr, lo, hi, seed=0):
     return y / max(float(np.max(np.abs(y))), 1e-9)
 
 
+def use_reference_track(source, out, log_path):
+    """Ship the reference video's own audio track, unchanged.
+
+    The brief for this cut is that the sound must be the reference's sound, not a
+    reconstruction of it. So the audio is decoded from the reference file itself
+    and re-encoded into the new picture, sample for sample. Nothing is
+    re-composed, layered or synthesised here; the only processing is a check
+    that the decoded track does not clip.
+    """
+    import imageio_ffmpeg
+    out = Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    work = out.parent / 'sound_work'
+    work.mkdir(parents=True, exist_ok=True)
+    src = Path(source)
+    if not src.exists():
+        raise SystemExit(f'missing reference file {src}')
+
+    wav = work / 'reference_track.wav'
+    subprocess.run([FF, '-hide_banner', '-loglevel', 'error', '-y', '-i', str(src),
+                    '-vn', '-ac', '2', '-ar', str(SR), '-c:a', 'pcm_s16le',
+                    str(wav)], check=True)
+    x, sr = read_wav(wav)
+    peak = float(np.max(np.abs(x)))
+    clipped = int((np.abs(x) > 0.9995).sum())
+
+    # measure it the same way the earlier cuts were measured
+    def ebur(path):
+        pr = subprocess.run([FF, '-hide_banner', '-i', str(path), '-af',
+                             'ebur128=peak=true', '-f', 'null', '-'],
+                            capture_output=True, text=True)
+        lufs = tp = None
+        for line in pr.stderr.strip().splitlines()[-14:]:
+            if 'I:' in line and 'LUFS' in line:
+                try:
+                    lufs = float(line.split('I:')[1].split('LUFS')[0].strip())
+                except Exception:
+                    pass
+            if 'Peak:' in line and 'dBFS' in line:
+                try:
+                    tp = float(line.split('Peak:')[1].split('dBFS')[0].strip())
+                except Exception:
+                    pass
+        return lufs, tp
+
+    mono = np.asarray(x, np.float32).mean(1)
+    X = np.abs(np.fft.rfft(mono)) ** 2
+    fr = np.fft.rfftfreq(len(mono), 1.0 / sr)
+    centroid = float((X * fr).sum() / max(X.sum(), 1e-9))
+    low_share = float(X[fr < 200.0].sum() / max(X.sum(), 1e-9))
+
+    write_wav(out, x, sr)
+    lufs, tp = ebur(out)
+
+    log = {
+        'kind': "the reference video's own audio track, decoded and re-muxed",
+        'source': str(src),
+        'note': ("Per the brief, the sound is the reference sound. This is the "
+                 "reference file's AAC track decoded to PCM and encoded back into "
+                 "the new picture; no synthesis, no layering, no library audio."),
+        'sample_rate': sr,
+        'channels': 2,
+        'duration_seconds': round(len(x) / sr, 3),
+        'measured': {
+            'integrated_lufs': lufs,
+            'true_peak_dbfs': tp,
+            'spectral_centroid_hz': round(centroid, 1),
+            'energy_below_200hz': round(low_share, 3),
+            'samples_at_full_scale': clipped,
+            'decoded_peak': round(peak, 4),
+        },
+        'human_review': 'none',
+    }
+    Path(log_path).parent.mkdir(parents=True, exist_ok=True)
+    Path(log_path).write_text(json.dumps(log, indent=1))
+    print(json.dumps(log['measured'], indent=1))
+    print(f'WROTE {out}')
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--source', default=str(ROOT / 'monarch-mafia-temple-20s.mp4'))
     ap.add_argument('--out', required=True)
     ap.add_argument('--shots-log', default=str(ROOT / 'render-3d/render_log.json'))
     ap.add_argument('--log', default=str(ROOT / 'render-3d/sound_log.json'))
+    ap.add_argument('--use-reference-track', action='store_true',
+                    help="ship the reference video's own audio, unchanged")
     a = ap.parse_args()
+
+    if a.use_reference_track:
+        return use_reference_track(a.source, a.out, a.log)
 
     out = Path(a.out)
     out.parent.mkdir(parents=True, exist_ok=True)
