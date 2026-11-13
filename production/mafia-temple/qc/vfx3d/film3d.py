@@ -98,10 +98,10 @@ SHOTS = [
 
     dict(name='S4-run', start=312, end=384, set='runhall',
          # 3.4 m from the subject, chest height, looking across the veranda: the
-         # reference is tight enough that the man is half the frame height
+         # reference is tight enough that the man is half the frame height.
          eye=(0.20, 1.44, 3.40), target=(0.05, 1.18, -0.40), fov=38.0,
          dolly_per_frame=(0.0144, 0.0, 0.0),   # 4.4 px/frame at 720p
-         blur_taps=2, shutter=0.5, samples=1,
+         blur_taps=1, shutter=0.5, samples=1,
          ambient=(0.009, 0.011, 0.017), fog=0.030, mist=0.62, wet=0.55,
          fog_tint=(0.038, 0.042, 0.058), samples_note='motion blur only',
          grade=dict(exposure=1.05, contrast=1.16, saturation=0.72, lift=0.006,
@@ -111,6 +111,11 @@ SHOTS = [
          # 4.2 m from the lens: that is the distance at which a 1.75 m man fills
          # ~60 % of a 38-degree frame, which is the reference's framing. He
          # drifts slowly left relative to the pan, as in the reference.
+         #
+         # yaw is pi/2 = facing +x, i.e. running across the frame from the
+         # lanterward side toward the camera's right; travel is toward the lens.
+         # The camera crop in the reference shows his front three-quarter, which
+         # is what this yaw/travel pair produces.
          figure=dict(root=(0.42, -0.80), phase0=0.35, walk=2.75, run=True,
                      yaw=math.pi / 2, travel=-0.26, back=True)),
 

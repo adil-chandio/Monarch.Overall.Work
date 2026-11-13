@@ -31,7 +31,7 @@ from . import geom, world
 INF = np.float32(np.inf)
 
 # primitives, flattened
-K_BOX, K_OBB, K_SPHERE, K_ELLIP, K_CAPSULE = 0, 1, 2, 3, 4
+K_BOX, K_OBB, K_SPHERE, K_ELLIP, K_CAPSULE, K_FRUSTUM = 0, 1, 2, 3, 4, 5
 
 
 def _flatten(solids):
@@ -58,6 +58,11 @@ def _flatten(solids):
             prims.append((K_CAPSULE, np.array(s.a, np.float32),
                           np.array(s.b, np.float32),
                           (np.float32(s.radius),), world.MAT_ID[s.mat]))
+        elif isinstance(s, world.Frustum):
+            prims.append((K_FRUSTUM, np.array(s.a, np.float32),
+                          np.array(s.b, np.float32),
+                          (np.float32(s.r_a), np.float32(s.r_b)),
+                          world.MAT_ID[s.mat]))
     return prims
 
 
@@ -74,7 +79,10 @@ def _bounds(prim):
     if kind == K_ELLIP:
         r = float(np.max(p2))
         return p1 - r, p1 + r
-    r = float(p3[0])
+    if kind == K_FRUSTUM:
+        r = max(float(p3[0]), float(p3[1]))
+    else:
+        r = float(p3[0])
     return np.minimum(p1, p2) - r, np.maximum(p1, p2) + r
 
 
@@ -161,8 +169,8 @@ class Frame:
             mat_sub[m] = mi
             p = sub_ro + sub_rd * tp[..., None]
             nrm_sub[m] = geom.ellipsoid_normal(p, p1, p2, B)[m]
-        else:                                    # capsule
-            tp, _ = geom.ray_capsule(sub_ro, sub_rd, p1, p2, p3[0])
+        elif kind == K_FRUSTUM:
+            tp, _ss = geom.ray_frustum(sub_ro, sub_rd, p1, p2, p3[0], p3[1])
             m = tp < t_sub
             if not m.any():
                 return
@@ -171,7 +179,14 @@ class Frame:
             ba = p2 - p1
             pp = sub_ro + sub_rd * tp[..., None]
             k = np.clip(((pp - p1) @ ba) / max(float(ba @ ba), 1e-8), 0, 1)
-            nrm_sub[m] = geom.normalise(pp - (p1 + k[..., None] * ba))[m]
+            axis_pt = p1 + k[..., None] * ba
+            radial = pp - axis_pt
+            # the surface normal of a cone is not radial: it leans back along
+            # the axis by the taper angle, or the shading is a cylinder's
+            dr = float(p3[1]) - float(p3[0])
+            L = math.sqrt(max(float(ba @ ba), 1e-8))
+            nrm_sub[m] = geom.normalise(
+                radial * L + ba[None, None, :] * (-dr))[m]
 
     def trace(self, ro, rd, dyn=None, cam=None, prims=None, cull=True):
         """Nearest hit for every ray. `dyn` are extra primitives (the figure)."""

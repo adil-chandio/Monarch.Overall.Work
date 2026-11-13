@@ -106,6 +106,10 @@ MATS = {
                          bump=0.10, bump_scale=900.0),
     'skin_dark': Material('skin_dark', _c(0.110, 0.070, 0.054), 0.70, 0.08, wrap=0.05,
                          bump=0.08, bump_scale=900.0),
+    # the shoes: polished black leather, so they catch a highlight and the feet
+    # read as feet even in silhouette
+    'shoe':     Material('shoe',     _c(0.0130, 0.0125, 0.0135), 0.34, 0.42,
+                         wrap=0.03, bump=0.20, bump_scale=320.0),
     'hair':     Material('hair',     _c(0.014, 0.012, 0.012), 0.66, 0.07, wrap=0.04,
                          bump=0.55, bump_scale=420.0),
     'stubble':  Material('stubble',  _c(0.028, 0.022, 0.019), 0.80, 0.06, wrap=0.05,
@@ -162,6 +166,16 @@ class Capsule:
     a: tuple
     b: tuple
     radius: float
+    mat: str
+
+
+@dataclass
+class Frustum:
+    """Cone frustum: a at radius r_a, b at radius r_b. Limbs and the coat."""
+    a: tuple
+    b: tuple
+    r_a: float
+    r_b: float
     mat: str
 
 
@@ -257,106 +271,266 @@ SEGMENTS = [
 ]
 
 
-def gait_angles(t, speed=1.0, run=False):
-    """Joint angles for the run/walk cycle.
+def _ease(t):
+    t = np.clip(t, 0.0, 1.0)
+    return t * t * (3.0 - 2.0 * t)
 
-    Run cadence is 2.7 strides/s with a forward lean, because the reference run
-    is a sprint, not a jog. This is procedural animation, not performance capture.
+
+def gait_angles(t, speed=1.0, run=False, phase=0.0):
+    """Joint angles for one frame of the walk / run cycle.
+
+    Angles are measured from vertical, positive swinging the knee or elbow
+    forward (+z is the direction of travel). The cycle is built from three
+    measured properties of real gait rather than from a sine on each joint:
+
+    * The hip swings near-sinusoidally, but the *knee* is a function of the
+      hip's phase, not of the clock: it flexes hard through swing, then extends
+      and stays extended through stance. Driving it from sin(p - 0.7) directly
+      gave a knee that bent while the leg was planted.
+    * The support leg must reach the ground. With a 0.46 m thigh, a 0.44 m shin
+      and a 0.92 m hip height, a planted leg at 20 degrees of hip flexion has
+      its ankle 4 cm above the floor unless the pelvis drops. The pelvis height
+      is therefore solved from the stance leg every frame — a real walk bobs
+      downwards at mid-stance, and the earlier fixed offset bobbed upwards.
+    * The arms counter-swing the legs, and the amount they swing is the one
+      thing that most separates a walk from a mannequin being dragged.
     """
-    w = (2 * math.pi) * ((1.35 if run else 0.95) * speed)
-    p = t * w
-    hip = 0.95 if run else 0.45
-    knee = 1.75 if run else 0.75
-    arm = 1.15 if run else 0.45
-    lean = 0.34 if run else 0.06
-    thL = hip * math.sin(p)
-    thR = hip * math.sin(p + math.pi)
-    knL = knee * max(0.0, -math.sin(p - 0.7)) + 0.10
-    knR = knee * max(0.0, -math.sin(p + math.pi - 0.7)) + 0.10
-    aL = arm * math.sin(p + math.pi)
-    aR = arm * math.sin(p)
-    bob = (0.055 if run else 0.020) * math.cos(2 * p)
+    w = 2.0 * math.pi * ((2.45 if run else 1.05) * speed)
+    p = t * w + phase
+
+    hip_a = 0.62 if run else 0.36          # peak hip flexion, radians
+    knee_a = 1.95 if run else 1.05
+    arm_a = 0.95 if run else 0.34
+
+    def leg(ph):
+        th = hip_a * math.sin(ph)
+        # swing phase is the half-cycle where the hip travels forward
+        swing = max(0.0, math.sin(ph + 0.30))
+        # toe-off / heel-strike flexion, biggest just after the leg leaves the ground
+        # a real knee never fully locks in a walk: it keeps ~8 degrees of flex
+        kn = 0.14 + knee_a * (swing ** 1.25)
+        return th, kn
+
+    thL, knL = leg(p)
+    thR, knR = leg(p + math.pi)
+
+    # Arms counter-swing the legs. On a run the forearm is held at a fixed
+    # ~80 degrees and the whole arm pumps from the shoulder; the earlier
+    # version added a constant +0.20 rad to BOTH arms, which held both hands
+    # out in front like a sleepwalker instead of one forward and one back.
+    aL = -arm_a * math.sin(p)
+    aR = -arm_a * math.sin(p + math.pi)
+    # The elbow flex has to be asymmetric or both forearms end up in front of
+    # the chest: the forward arm carries a tight ~80 degrees, while the back
+    # arm opens out to ~45 so its hand finishes beside the hip, which is what a
+    # runner's back arm actually does.
+    # The flex is driven by where the arm IS, not by the clock: a sprint arm
+    # closes to ~85 degrees as the hand comes up to the chin and opens to ~35 as
+    # it drives back past the hip. A constant flex is what made both forearms
+    # sit out in front of the chest at the passing frame and read as a man
+    # carrying a tray.
+    if run:
+        uL = -math.sin(p) / max(arm_a, 1e-6) * arm_a / arm_a
+        uL = -math.sin(p)
+        uR = -math.sin(p + math.pi)
+        elbowL = 1.15 + 0.55 * uL
+        elbowR = 1.15 + 0.55 * uR
+        elbow = 0.5 * (elbowL + elbowR)
+    else:
+        elbowL = elbowR = 0.34
+        elbow = 0.34
+
+    # ---- pelvis height from the stance leg ---------------------------------
+    # For each side, how far the ankle sits below the hip for the current
+    # angles. The support leg is the one with the smaller drop (the straighter
+    # leg), and the pelvis rides at that height.
+    def drop(th, kn):
+        return THIGH * math.cos(th) + SHIN * math.cos(th - kn)
+
+    dL, dR = drop(thL, knL), drop(thR, knR)
+    stance = max(dL, dR)                    # the straighter leg carries
+    hip_y = ANKLE_H + stance
+    # a sprint leaves the ground; a walk never does
+    if run:
+        hip_y += 0.045 * max(0.0, math.sin(2 * p))
+
+    lean = (0.30 if run else 0.055) + 0.02 * math.sin(2 * p)
     return dict(thighL=thL, thighR=thR, kneeL=knL, kneeR=knR,
-                armL=aL, armR=aR, lean=lean, bob=bob,
-                elbow=0.95 if run else 0.30)
+                armL=aL, armR=aR, lean=lean, hip_y=hip_y,
+                elbow=elbow, elbowL=elbowL, elbowR=elbowR,
+                # lateral pelvis roll: the hip on the swing side drops
+                roll=0.035 * math.sin(p + math.pi),
+                # shoulders counter-rotate against the pelvis
+                twist=0.10 * math.sin(p) * (2.0 if run else 1.0))
+
+
+# lengths, metres: 1.78 m man
+THIGH, SHIN = 0.455, 0.435
+ANKLE_H = 0.075
 
 
 def pose_at(t, root=(0.0, 0.0), yaw=0.0, run=False, lean_extra=0.0,
-            head_turn=0.0, height=0.0, arms=None):
+            head_turn=0.0, height=0.0, arms=None, speed=1.0, phase=0.0):
     """World-space capsule list plus the head frame for the figure."""
-    a = gait_angles(t, run=run)
-    hip_y = 0.92 + a['bob'] + height
+    a = gait_angles(t, speed=speed, run=run, phase=phase)
+    hip_y = a['hip_y'] + height
     base = np.array([root[0], hip_y, root[1]], np.float64)
     lean = a['lean'] + lean_extra
 
     pelvis = base
-    spine = pelvis + np.array([0, 0.30 * math.cos(lean), 0.30 * math.sin(lean)])
+    spine = pelvis + np.array([0, 0.28 * math.cos(lean), 0.28 * math.sin(lean)])
     chest = spine + np.array([0, 0.26 * math.cos(lean), 0.26 * math.sin(lean)])
-    neck = chest + np.array([0, 0.11, 0.015 * math.sin(lean)])
-    head_c = neck + np.array([0, 0.13, 0.012])
-    head_top = neck + np.array([0, 0.27, 0.012])
+    neck = chest + np.array([0, 0.10 * math.cos(lean), 0.10 * math.sin(lean)])
+    head_c = neck + np.array([0, 0.115, 0.012])
+    head_top = neck + np.array([0, 0.255, 0.012])
 
-    segs = [('pelvis', pelvis, spine, 0.148, 'cloth'),
-            ('spine', spine, chest, 0.165, 'cloth'),
-            ('chest', chest, neck, 0.186, 'shirt'),
-            ('neck', neck, head_c, 0.055, 'skin'),
-            ('head', head_c, head_top, 0.068, 'skin')]
+    # A coat is a truncated cone, not a cylinder: the torso is broad at the
+    # shoulders and narrow at the waist, and reading that taper is most of what
+    # makes a dark silhouette look like a person in a suit.
+    # The torso is built from ellipsoids rather than cones: a chest is wide and
+    # shallow (a person is ~40 cm across and ~22 cm deep), and a circular
+    # frustum wide enough to be a pair of shoulders is far too deep, which is
+    # what turned the front view into a fridge. The taper still lives in the
+    # limb frustums, where it belongs.
+    segs = [
+        # name, a, b, r_a, r_b, material
+        ('hips', pelvis + np.array([0, -0.07, 0]), pelvis + np.array([0, 0.07, 0]),
+         0.148, 0.152, 'cloth'),
+        ('waist', pelvis + np.array([0, 0.07, 0]), spine,
+         0.152, 0.140, 'cloth'),
+        ('chest', spine, chest, 0.140, 0.132, 'cloth'),
+        # trapezius: a narrow cone from the shoulder line up to the neck, so
+        # the head sits on a neck instead of straight on the shoulders
+        ('trap', chest, neck, 0.105, 0.062, 'cloth'),
+        ('neck', neck, head_c, 0.047, 0.045, 'skin'),
+        ('head', head_c, head_top, 0.070, 0.070, 'skin'),
+    ]
 
     for side, th, kn in (('L', a['thighL'], a['kneeL']),
                          ('R', a['thighR'], a['kneeR'])):
-        sx = 0.105 if side == 'L' else -0.105
-        hip = pelvis + np.array([sx, -0.04, 0.0])
-        knee = hip + np.array([0, -0.46 * math.cos(th), 0.46 * math.sin(th)])
-        ank = knee + np.array([0, -0.44 * math.cos(th - kn), 0.44 * math.sin(th - kn)])
-        segs.append((f'thigh{side}', hip, knee, 0.108, 'cloth'))
-        segs.append((f'shin{side}', knee, ank, 0.076, 'cloth'))
-        foot = ank + np.array([0, -0.035, 0.13])
-        segs.append((f'foot{side}', ank, foot, 0.054, 'cloth'))
+        sx = 0.098 if side == 'L' else -0.098
+        hip = pelvis + np.array([sx, -0.055, 0.0])
+        knee = hip + np.array([0, -THIGH * math.cos(th), THIGH * math.sin(th)])
+        ank = knee + np.array([0, -SHIN * math.cos(th - kn), SHIN * math.sin(th - kn)])
+        # thigh and shin taper: 0.098 m radius at the hip to 0.062 at the knee,
+        # 0.062 at the knee to 0.042 at the ankle. Uniform capsules were what
+        # made the legs read as pipes.
+        segs.append((f'thigh{side}', hip, knee, 0.104, 0.068, 'cloth'))
+        segs.append((f'shin{side}', knee, ank, 0.070, 0.042, 'cloth'))
+        # ---- the shoe. A foot is not a stub: it has a heel that strikes, an
+        # arch, and a toe that rolls. Built as three volumes so the sole stays
+        # flat on the floor through stance and only the toe peels up at the end
+        # of the push-off.
+        # foot pitch: 0 flat, positive = heel up (toe-off), negative = toe up
+        drive = max(0.0, math.sin(th - kn - 0.35))       # in late stance
+        strike = max(0.0, -math.sin(th - kn + 0.55))     # just before heel strike
+        pitch = 0.55 * drive - 0.28 * strike
+        # sole sits on the floor: ankle is ANKLE_H up, so the shoe's bottom is
+        # 0.055 below the ankle
+        heel = ank + np.array([0, -0.048 + 0.075 * math.sin(pitch), -0.048 - 0.030 * math.sin(pitch)])
+        ball = ank + np.array([0, -0.056 + 0.030 * math.sin(pitch), 0.085 + 0.055 * math.sin(pitch)])
+        toe = ank + np.array([0, -0.050 + 0.115 * math.sin(pitch), 0.155 + 0.075 * math.sin(pitch)])
+        segs.append((f'foot{side}', heel, ball, 0.041, 0.043, 'shoe'))
+        segs.append((f'toe{side}', ball, toe, 0.043, 0.026, 'shoe'))
+        segs.append((f'ankle{side}', ank, heel, 0.046, 0.040, 'cloth'))
 
     arm_l = a['armL'] if arms is None else arms[0]
     arm_r = a['armR'] if arms is None else arms[1]
-    for side, ar in (('L', arm_l), ('R', arm_r)):
-        sx = 0.205 if side == 'L' else -0.205
-        sh = chest + np.array([sx, -0.02, 0.0])
-        el = sh + np.array([0, -0.30 * math.cos(ar), 0.30 * math.sin(ar)])
-        wr = el + np.array([0, -0.27 * math.cos(ar + a['elbow']),
-                            0.27 * math.sin(ar + a['elbow'])])
-        segs.append((f'upperArm{side}', sh, el, 0.072, 'shirt'))
-        segs.append((f'foreArm{side}', el, wr, 0.056, 'shirt'))
+    for side, ar, eb in (('L', arm_l, a.get('elbowL', a['elbow'])),
+                         ('R', arm_r, a.get('elbowR', a['elbow']))):
+        sx = 0.168 if side == 'L' else -0.168
+        sh = chest + np.array([sx, -0.030, 0.0])
+        el = sh + np.array([0, -0.285 * math.cos(ar), 0.285 * math.sin(ar)])
+        # The elbow flex must be measured from the UPPER ARM's hang, with the
+        # forearm bending forward:
+        #     dir = (0, -cos(a - e), sin(a - e))
+        # Writing it as a + e instead made a back-swinging upper arm throw its
+        # forearm forward, so both hands always ended up in front of the chest
+        # and the run read as a man holding a tray. Check: a = -0.8 (arm back),
+        # e = 1.0 gives the hand well behind and below the shoulder.
+        fa = ar + eb
+        wr = el + np.array([0, -0.255 * math.cos(fa), 0.255 * math.sin(fa)])
+        segs.append((f'upperArm{side}', sh, el, 0.055, 0.045, 'cloth'))
+        segs.append((f'foreArm{side}', el, wr, 0.046, 0.034, 'cloth'))
+        # hand: a palm, then a slight finger taper. The arms used to end in a
+        # cone, which is the single most obvious "it is a mannequin" tell at
+        # this size.
+        segs.append((f'hand{side}', wr, wr + np.array([0, -0.050, 0.012]),
+                     0.031, 0.028, 'skin'))
+        segs.append((f'fingers{side}', wr + np.array([0, -0.052, 0.012]),
+                     wr + np.array([0, -0.115, 0.028]), 0.031, 0.020, 'skin'))
 
     if yaw or head_turn:
-        c, s = math.cos(yaw), math.sin(yaw)
-        M = np.array([[c, 0, s], [0, 1, 0], [-s, 0, c]])
+        c, s_ = math.cos(yaw), math.sin(yaw)
+        M = np.array([[c, 0, s_], [0, 1, 0], [-s_, 0, c]])
         pivot = np.array([base[0], 0.0, base[2]])
-        segs = [(n, (a0 - pivot) @ M.T + pivot, (a1 - pivot) @ M.T + pivot, r, m)
-                for n, a0, a1, r, m in segs]
+        segs = [(n, (a0 - pivot) @ M.T + pivot, (a1 - pivot) @ M.T + pivot, ra, rb, m)
+                for n, a0, a1, ra, rb, m in segs]
         head_c = (head_c - pivot) @ M.T + pivot
+        # the joints handed to figure_solids must be rotated too: the torso and
+        # deltoid ellipsoids hang off `chest`, and leaving it unrotated put the
+        # whole rib cage a shoulder-width to the side of the body
+        neck = (neck - pivot) @ M.T + pivot
+        chest = (chest - pivot) @ M.T + pivot
 
     head_yaw = yaw + head_turn
     return dict(segs=segs, head_centre=tuple(head_c), head_yaw=head_yaw,
-                neck=tuple(neck), torso_up=tuple(neck - pelvis))
+                neck=tuple(neck), torso_up=tuple(neck - pelvis),
+                chest=tuple(chest), yaw=yaw)
 
 
 def figure_solids(pose):
-    """The man: capsules for the body, plus a hair cap on the head.
+    """The man: tapered limbs, a coat with a real shoulder line, and hair.
 
-    A capsule head with no hair reads as a bald mannequin at any distance, and
-    this figure is on screen at 4-8 m in S1 and S4.
+    Every limb is a cone frustum (two radii) rather than a capsule: at the
+    distances this figure appears, the taper at the wrist, the knee and the
+    ankle is the difference between a person and a set of pipes.
     """
-    out = [Capsule(tuple(a), tuple(b), r, m) for _n, a, b, r, m in pose['segs']]
+    out = []
+    for _n, a0, a1, ra, rb, m in pose['segs']:
+        if abs(ra - rb) < 1e-4:
+            out.append(Capsule(tuple(a0), tuple(a1), ra, m))
+        else:
+            out.append(Frustum(tuple(a0), tuple(a1), float(ra), float(rb), m))
+    # ---- the torso block: chest, back and the two deltoids ---------------
+    # These are ellipsoids, not cones, so the body has a front-back thickness
+    # much smaller than its width. The suit is a dark silhouette in every shot
+    # it appears in, and the shoulder line is most of what that silhouette says.
+    yaw = float(pose.get('yaw', 0.0))
+    Rt = geom.obb_basis(yaw=yaw)
+    ch = np.asarray(pose['chest'], np.float64)
+    pel = np.asarray(pose['neck'], np.float64)
+    def E(off, rad, mat='cloth'):
+        out.append(Ellipsoid(tuple((ch + Rt @ np.asarray(off)).tolist()), rad, mat, Rt))
+    E((0.0, -0.040, 0.0), (0.136, 0.115, 0.101))     # rib cage
+    E((0.0, -0.150, 0.0), (0.124, 0.105, 0.096))     # waist / abdomen
+    for sgn in (-1.0, 1.0):
+        # deltoid caps: the shoulder ends at the arm socket, not at the neck
+        E((sgn * 0.130, -0.018, 0.0), (0.055, 0.066, 0.064))
     hc = np.asarray(pose['head_centre'], np.float64)
-    # the capsule runs from head_centre up to head_top (0.185 m), so the skull's
-    # centre is about 9 cm above head_centre; a hair mass centred on head_centre
-    # itself ends up round the neck
-    hc = hc + np.array([0.0, 0.075, 0.0])
+    hc = hc + np.array([0.0, 0.080, 0.0])
     R = geom.obb_basis(yaw=pose['head_yaw'])
-    # pose['head_centre'] is the BASE of the head capsule, so the skull's centre
-    # is about 8 cm above it. Offsetting the hair from the base left the skin
-    # capsule poking out of the top of the hair like a bald crown.
-    for c, r, mat in (((0.0, 0.098, -0.006), (0.0830, 0.0720, 0.0880), 'hair'),
-                      ((0.0, 0.052, -0.014), (0.0800, 0.0560, 0.0850), 'hair'),
-                      ((0.0, 0.132, -0.010), (0.0640, 0.0480, 0.0700), 'hair'),
-                      ((0.0, 0.070, -0.052), (0.0700, 0.0700, 0.0480), 'hair')):
+    # A skull, then hair as a shell over the back and sides, then a fringe that
+    # comes forward over the brow. The previous set was hair only, with no skull
+    # under it, so the head read as a black helmet floating on the collar.
+    for c, r, mat in (((0.0, 0.000, 0.004), (0.0715, 0.0930, 0.0850), 'skin'),
+                      ((0.0, -0.040, 0.020), (0.0620, 0.0560, 0.0620), 'skin'),
+                      ((0.0, 0.034, -0.014), (0.0765, 0.0830, 0.0900), 'hair'),
+                      ((0.0, -0.020, -0.032), (0.0790, 0.0700, 0.0700), 'hair'),
+                      ((0.0, 0.062, 0.030), (0.0700, 0.0400, 0.0600), 'hair'),
+                      ((0.0, 0.076, 0.048), (0.0560, 0.0180, 0.0350), 'hair')):
+        out.append(Ellipsoid(tuple((hc + R @ np.asarray(c)).tolist()), r, mat, R))
+    # ---- a face, at least in profile -------------------------------------
+    # Without a nose and a brow the head is a smooth egg, and in the S4 profile
+    # shot that smooth egg is the whole read of the character. These are three
+    # small ellipsoids, not a texture: a brow ridge, a nose, and the jaw/chin,
+    # plus ears to break the silhouette at the sides.
+    for c, r, mat in (((0.0, 0.040, 0.062), (0.0430, 0.0135, 0.0250), 'skin'),   # brow ridge
+                      ((0.0, 0.006, 0.082), (0.0140, 0.0300, 0.0300), 'skin'),   # nose
+                      ((0.0, -0.048, 0.062), (0.0385, 0.0330, 0.0300), 'skin'),  # chin / jaw
+                      ((0.0, -0.086, 0.030), (0.0330, 0.0220, 0.0330), 'skin'),  # under-jaw
+                      ((0.0565, 0.004, -0.010), (0.0105, 0.0250, 0.0175), 'skin'),  # ear L
+                      ((-0.0565, 0.004, -0.010), (0.0105, 0.0250, 0.0175), 'skin')):  # ear R
         out.append(Ellipsoid(tuple((hc + R @ np.asarray(c)).tolist()), r, mat, R))
     return out
 
