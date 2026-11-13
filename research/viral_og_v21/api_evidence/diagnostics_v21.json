@@ -1,36 +1,36 @@
 {
- "run_v21.json": 1112,
- "channel_deep_v21.json": 239510,
- "videos_v21.json": 5232570,
- "comments_v21.json": 16015,
+ "run_v21.json": 1692,
+ "channel_deep_v21.json": 242140,
+ "videos_v21.json": 5834358,
+ "comments_v21.json": 15834,
  "unresolved": [
   {
    "screenshot_name": "Whymuntary",
    "handle": "@Whymuntary",
-   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+   "why": "unresolved:"
   },
   {
-   "screenshot_name": "Dhruv Rathee",
+   "screenshot_name": "Mysterious Things (Unsolved India)",
    "handle": null,
-   "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
+   "why": "unresolved:"
   }
  ],
  "channels": [
   {
    "n": "Ink Explainer",
    "api": "Ink Explainer",
-   "subs": 49,
-   "cat": null,
-   "med": null,
-   "out": null,
-   "by": "forHandle"
+   "subs": 169000,
+   "cat": 21,
+   "med": 291389,
+   "out": 6,
+   "by": "catalogue-match:4 titles"
   },
   {
    "n": "Zenn",
    "api": "Zenn",
    "subs": 200000,
    "cat": 39,
-   "med": 32159,
+   "med": 32158,
    "out": 11,
    "by": "forHandle"
   },
@@ -66,7 +66,7 @@
    "api": "Oddlyhuman",
    "subs": 4540,
    "cat": 14,
-   "med": 3072,
+   "med": 3074,
    "out": 1,
    "by": "inner:title"
   },
@@ -86,14 +86,14 @@
    "cat": null,
    "med": null,
    "out": null,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "Simple Paint",
    "api": "Simple Paint",
    "subs": 549000,
    "cat": 100,
-   "med": 368086,
+   "med": 368088,
    "out": 18,
    "by": "forHandle"
   },
@@ -126,12 +126,12 @@
   },
   {
    "n": "Relatos Pintados",
-   "api": "Jack Explains Money",
-   "subs": 81800,
-   "cat": 33,
-   "med": 6848,
-   "out": 8,
-   "by": "inner:title"
+   "api": "Relatos Pintados",
+   "subs": 8230,
+   "cat": null,
+   "med": null,
+   "out": null,
+   "by": "catalogue-match:5 titles"
   },
   {
    "n": "My Chaotic Stories",
@@ -149,14 +149,14 @@
    "cat": 18,
    "med": 32314,
    "out": 4,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "Day One Films",
    "api": "Day One Films",
    "subs": 97100,
    "cat": 23,
-   "med": 67782,
+   "med": 67778,
    "out": 5,
    "by": "forHandle"
   },
@@ -165,7 +165,7 @@
    "api": "Monk Mode Films",
    "subs": 30900,
    "cat": 23,
-   "med": 58870,
+   "med": 58871,
    "out": 6,
    "by": "forHandle"
   },
@@ -176,7 +176,7 @@
    "cat": null,
    "med": null,
    "out": null,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "Zoodle",
@@ -217,29 +217,29 @@
   {
    "n": "Bluntly Explained",
    "api": "Bluntly Explained",
-   "subs": 48300,
+   "subs": 48400,
    "cat": 29,
-   "med": 110104,
+   "med": 110132,
    "out": 8,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "Unknown Frequencies",
    "api": "Unknown Frequencies",
    "subs": 92700,
    "cat": 24,
-   "med": 362410,
+   "med": 362429,
    "out": 3,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "Kaktus",
    "api": "Kaktus",
    "subs": 14100,
    "cat": 2,
-   "med": 1190815,
+   "med": 1191064,
    "out": 0,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "TALEYE",
@@ -248,7 +248,7 @@
    "cat": 24,
    "med": 315,
    "out": 8,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "Primate Economics",
@@ -264,7 +264,7 @@
    "api": "how really?",
    "subs": 24300,
    "cat": 11,
-   "med": 89684,
+   "med": 89685,
    "out": 3,
    "by": "inner:title"
   },
@@ -275,14 +275,14 @@
    "cat": 0,
    "med": 0,
    "out": 0,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "The Stickman Scientist",
    "api": "The Stickman Scientist",
    "subs": 41300,
    "cat": 100,
-   "med": 1342,
+   "med": 1343,
    "out": 5,
    "by": "forHandle"
   },
@@ -293,25 +293,25 @@
    "cat": 100,
    "med": 1528,
    "out": 16,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
    "n": "Fact Minded",
-   "api": "Animal Abilities",
-   "subs": 41,
-   "cat": 34,
-   "med": 191,
-   "out": 8,
-   "by": "inner:title"
+   "api": "Fact Minded",
+   "subs": 372000,
+   "cat": null,
+   "med": null,
+   "out": null,
+   "by": "search:exact-title"
   },
   {
    "n": "Beyond the Obvious",
-   "api": "Howsthat",
-   "subs": 14,
-   "cat": 7,
-   "med": 6,
-   "out": 1,
-   "by": "inner:title"
+   "api": "Beyond the Obvious",
+   "subs": 49800,
+   "cat": 76,
+   "med": 935,
+   "out": 10,
+   "by": "search:exact-title"
   },
   {
    "n": "RAOUL Explains",
@@ -320,16 +320,16 @@
    "cat": 11,
    "med": 758,
    "out": 4,
-   "by": "forHandle"
+   "by": "exact:forHandle"
   },
   {
-   "n": "Mysterious Things (Unsolved India)",
-   "api": "Unsolved India",
-   "subs": 66500,
-   "cat": 40,
-   "med": 110659,
-   "out": 7,
-   "by": "inner:title"
+   "n": "Dhruv Rathee",
+   "api": "Dhruv Rathee",
+   "subs": 33300000,
+   "cat": 100,
+   "med": 12132895,
+   "out": 0,
+   "by": "search:exact-title"
   }
  ]
 }

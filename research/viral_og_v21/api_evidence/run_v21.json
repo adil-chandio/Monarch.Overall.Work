@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-13T07:51:47Z",
+ "generated_utc": "2026-11-13T08:13:00Z",
  "key_present": true,
  "secret_value_printed_or_stored": false,
  "input": "user's Google Drive swipe file (71 screenshots) -> drive_swipe_index.json",
@@ -7,7 +7,27 @@
  "resolved_channels": 35,
  "unresolved_channels": 2,
  "identity_verified_channels": 31,
- "identity_re_resolved": 3,
+ "identity_re_resolved": 4,
+ "identity_cache_overrides": [
+  {
+   "name": "Ink Explainer",
+   "old_id": "UClhEbIxXuHSm_yAZjWRMXBw",
+   "old_title": "Ink Explainer",
+   "new_id": "UCpgrEMx8diLrw7YNQ6r3uUw",
+   "new_title": "Ink Explainer",
+   "matches": 4,
+   "fix": "cache pick replaced by catalogue-shape match"
+  },
+  {
+   "name": "Relatos Pintados",
+   "old_id": "UCZJnbHQTYBy1I8GpHlsAUMg",
+   "old_title": "Jack Explains Money",
+   "new_id": "UCQIQdoc79Mjy0ZuiQE12WBg",
+   "new_title": "Relatos Pintados",
+   "matches": 5,
+   "fix": "cache pick replaced by catalogue-shape match"
+  }
+ ],
  "identity_unverified_names": [
   "AnimeAI Boost",
   "Beyond the Obvious",
@@ -15,24 +35,25 @@
   "Relatos Pintados"
  ],
  "identity_size_contradictions": [],
- "catalogue_videos": 1107,
+ "catalogue_videos": 1248,
  "lanes": 36,
- "lane_rows": 956,
- "unique_videos": 2009,
- "niche_outliers_3x": 203,
+ "lane_rows": 951,
+ "unique_videos": 2137,
+ "niche_outliers_3x": 199,
  "thumbnail_stats": 30,
  "caption_attempts": 12,
  "caption_status_counts": {
   "http_blocked": 12
  },
  "comments_fetched": 240,
- "quota_used_approx": 121,
+ "quota_used_approx": 647,
  "quota_calls": {
-  "channels": 7,
-  "playlistItems": 41,
-  "videos": 61,
+  "channels": 23,
+  "search": 5,
+  "playlistItems": 46,
+  "videos": 66,
   "commentThreads": 12
  },
- "elapsed_s": 264.7,
+ "elapsed_s": 283.1,
  "boundary": "Public Data API metadata + public thumbnails + public caption text only. No video/audio download, no frame inspection, no private retention/CTR/RPM, no invented transcripts, no causal claim, no upload/monetisation claim."
 }
