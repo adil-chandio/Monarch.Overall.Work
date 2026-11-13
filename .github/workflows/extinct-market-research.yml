@@ -53,7 +53,7 @@ jobs:
           if [ -d docs/research/assets/extinct-market ]; then git add docs/research/assets/extinct-market; fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'docs(yt): record current English market research sample'
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
       - name: Preserve report including partial/error evidence
         if: always()
         uses: actions/upload-artifact@v4

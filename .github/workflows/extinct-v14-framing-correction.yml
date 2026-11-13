@@ -110,7 +110,6 @@ jobs:
       - run: |
           python -m venv .venv
           .venv/bin/pip install imageio-ffmpeg==0.8.1 numpy==2.4.6 pillow==12.1.0
-          git pull --ff-only origin arena/ba8d901e-monarch-overall-work
       - uses: actions/download-artifact@v4
         with:
           run-id: 42410398404
@@ -168,4 +167,4 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           # media folders are excluded by .gitignore now, so the commit must be conditional
           bash scripts/git-commit-if-changed.sh 'Preserve corrected V14 full-master identity and exact encoded evidence [skip ci]' production/extinct-life/film-v14-directed production/extinct-life/review-v14
-          git push origin arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

@@ -62,8 +62,7 @@ jobs:
             echo "inspection/ is produced from .cache and excluded from Git by policy — nothing to commit"
           else
             git commit -m 'Preserve V8 native Cycles look-development frames [skip ci]'
-            git pull --rebase origin arena/ba8d901e-monarch-overall-work
-            git push origin HEAD:arena/ba8d901e-monarch-overall-work
+            bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
           fi
   audio:
     runs-on: ubuntu-24.04
@@ -159,5 +158,4 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           # media folders are excluded by .gitignore now, so the commit must be conditional
           bash scripts/git-commit-if-changed.sh 'Record V8 one-minute development delivery and measured QC [skip ci]' production/extinct-life/film-v8-premium
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

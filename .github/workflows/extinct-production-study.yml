@@ -42,5 +42,4 @@ jobs:
           git add docs/research/extinct-production-study/evidence/
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Record public production-craft retrieval evidence [skip ci]'
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

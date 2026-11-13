@@ -58,8 +58,7 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add production/extinct-life/film-v9-full/ASSEMBLY-LOG.txt production/extinct-life/film-v9-full/ASSEMBLY-STATE.json
           git diff --cached --quiet || git commit -m 'Record full-master assembly diagnostics [skip ci]'
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
       - name: Publish the complete English master, with honest scope and music attribution
         if: steps.finish.outcome == 'success'
         env:
@@ -84,8 +83,7 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           # media folders are excluded by .gitignore now, so the commit must be conditional
           bash scripts/git-commit-if-changed.sh 'Record full English 7:19 master delivery and verified QC [skip ci]' production/extinct-life/film-v9-full
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
       - name: Fail honestly if full verification failed
         if: steps.finish.outcome != 'success'
         run: exit 1

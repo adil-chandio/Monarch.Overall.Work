@@ -53,8 +53,7 @@ jobs:
           git add production/extinct-life/film-v6-motion
           if ! git diff --cached --quiet; then
             git commit -m 'Record actual 3D assembly measurements or explicit failure diagnostics [skip ci]'
-            git pull --rebase origin arena/ba8d901e-monarch-overall-work
-            git push origin HEAD:arena/ba8d901e-monarch-overall-work
+            bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
           fi
       - name: Publish only if unchanged strict checks passed
         if: steps.assemble.outcome == 'success'
@@ -73,5 +72,4 @@ jobs:
           cp .cache/extinct-v6/seek-QC.json production/extinct-life/film-v6-motion/seek-QC.json
           # media folders are excluded by .gitignore now, so the commit must be conditional
           bash scripts/git-commit-if-changed.sh 'Record published actual-motion excerpt delivery [skip ci]' production/extinct-life/film-v6-motion
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

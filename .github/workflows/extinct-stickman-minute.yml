@@ -117,5 +117,4 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           # media folders are excluded by .gitignore now, so the commit must be conditional
           bash scripts/git-commit-if-changed.sh 'Deliver approved 61-second rendered stickman English experiment and technical QC [skip ci]' production/extinct-life/film-v10-stickman
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

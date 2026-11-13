@@ -34,5 +34,4 @@ jobs:
           git add docs/research/zack-original-access/video-api-probe.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Record direct public-video API feasibility [skip ci]'
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work

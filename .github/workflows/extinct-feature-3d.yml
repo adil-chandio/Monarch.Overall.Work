@@ -91,6 +91,5 @@ jobs:
             echo "only reports changed nothing - no media enters Git from this job"
           else
             git commit -m 'Record approved-style Extinct Life chapter 3 render reports [skip ci]'
-            git pull --rebase origin arena/ba8d901e-monarch-overall-work
-            git push origin HEAD:arena/ba8d901e-monarch-overall-work
+            bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
           fi
