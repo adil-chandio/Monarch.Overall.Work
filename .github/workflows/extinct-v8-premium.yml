@@ -48,7 +48,11 @@ jobs:
           (p/'motion-QC.json').write_text(json.dumps(q,indent=2))
           PY
       - name: Preserve original production inspection on the session branch
+        # `bash -e` plus no `set -x` means a failure here reports only "exit code
+        # 1" and the log is not fetchable from every environment. Setting -x
+        # makes each command echo, so the failing line names itself.
         run: |
+          set -x
           git config user.name 'Monarch native look development'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           # inspection/ stills are render output and are ignored by extension
@@ -60,6 +64,11 @@ jobs:
           # given resolves to something ignored, and Actions runs each step with
           # `bash -e`, so that 1 killed the whole job (run 43340437009). Staging
           # nothing is a normal outcome here, not an error.
+          # `git add` on this folder CAN exit 1 while still staging the files it
+          # is allowed to stage: tracked-and-ignored JPGs show as modified, new
+          # ignored files are refused. Measured:
+          #   git add sub/  ->  exit 1, yet "M sub/tracked.png" appears in
+          #                     git status. So exit 1 here is not fatal.
           git add production/extinct-life/film-v8-premium/inspection || true
           if git diff --cached --quiet; then
             echo "inspection/ holds only ignored render output — nothing to commit"
