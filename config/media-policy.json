@@ -145,9 +145,31 @@
   "upload_limits": {
     "connector_max_bytes": 100000000,
     "connector_note": "The Drive/Dropbox upload tools in this environment refuse files over 100 MB. This is a hard ceiling on any automatable upload path.",
-    "consequence": "A 12-minute video must be encoded at or below ~1.1 Mbps VBR to stay under 100 MB. Measured reference: the existing 12-minute 3D 1080p film in deliverables/ is 63 MB.",
-    "verified_upload_max_bytes": 50000000,
-    "verified_note": "Only ~50 MB has actually been exercised end to end. Anything larger is untested; test before promising it."
+    "consequence": "The 100 MB connector ceiling is the only real size wall. A 12-minute 1080p master still ships comfortably: the existing 12-minute 3D film is 63 MB. Encode targets stay conservative so a future render never lands at 101 MB.",
+    "verified_upload_max_bytes": 99408313,
+    "verified_note": "Measured end to end on 2026-11-13 during the deliverable migration. 99408313 B (Last-Mammoths-Review-Reel-13min-720p.mp4) uploaded and its Drive sha256Checksum equalled the local sha256sum, so the real ceiling is the connector's 100 MB request limit, not the older ~50 MB guess. Every size from 0.6 MB to 99.4 MB is now proven; treat 100 MB as the wall, verify each hash.",
+    "size_ladder_measured": [
+      {
+        "bytes": 626489,
+        "what": "Gait test 3s"
+      },
+      {
+        "bytes": 7343645,
+        "what": "Genetics 3D scene"
+      },
+      {
+        "bytes": 29845595,
+        "what": "EP01 Lost World"
+      },
+      {
+        "bytes": 53842746,
+        "what": "EP01 Urdnglish rebuild — first file above the old 50 MB guess"
+      },
+      {
+        "bytes": 99408313,
+        "what": "Review reel 13 min — largest tracked file, ceiling probe"
+      }
+    ]
   },
   "encode_targets": {
     "longform_1080p": {
