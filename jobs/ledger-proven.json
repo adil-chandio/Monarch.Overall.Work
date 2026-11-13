@@ -1,0 +1,22 @@
+{
+  "id": "ledger-proven",
+  "status": "running",
+  "goal": "Prove the durability system end to end: render → artifact → upload → verify hash → pause → fresh clone resume",
+  "total": 3,
+  "done": 0,
+  "unit": "checks",
+  "created": "2026-11-13T05:59:54.353Z",
+  "updated": "2026-11-13T05:59:54.353Z",
+  "resume": {
+    "next_command": "node scripts/job.mjs resume ledger-proven",
+    "notes": ""
+  },
+  "artifacts": [],
+  "decisions": [],
+  "log": [
+    {
+      "at": "2026-11-13T05:59:54.353Z",
+      "what": "started: Prove the durability system end to end: render → artifact → upload → verify hash → pause → fresh clone resume"
+    }
+  ]
+}
