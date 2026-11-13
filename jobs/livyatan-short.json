@@ -6,17 +6,28 @@
   "done": 16,
   "unit": "steps",
   "created": "2026-11-13T10:11:06.381Z",
-  "updated": "2026-11-13T10:11:32.655Z",
+  "updated": "2026-11-13T10:11:34.079Z",
   "resume": {
     "next_command": "",
     "notes": ""
   },
-  "artifacts": [],
+  "artifacts": [
+    {
+      "path": "/tmp/Livyatan-Whale-That-Fought-Megalodon-66s-720p.mp4",
+      "bytes": 6242865,
+      "sha256": "43c061d16f56e62a8aca4a1b71cf67d332a62ae40753708998f472834ce327c8",
+      "drive_id": null
+    }
+  ],
   "decisions": [],
   "log": [
     {
       "at": "2026-11-13T10:11:06.382Z",
       "what": "started: Flat-vector documentary short in the reference style: Livyatan vs Megalodon, 66s"
+    },
+    {
+      "at": "2026-11-13T10:11:34.079Z",
+      "what": "artifact /tmp/Livyatan-Whale-That-Fought-Megalodon-66s-720p.mp4 6.0 MB sha256 43c061d16f56"
     }
   ]
 }
