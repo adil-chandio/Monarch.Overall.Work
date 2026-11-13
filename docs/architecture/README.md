@@ -8,6 +8,7 @@ Read in this order:
 4. **[04-BUILD-WAVES.md](./04-BUILD-WAVES.md)** — the five shipping waves, each with its own verify list and rollback.
 5. **[05-SPACES-OPERATING-MODEL.md](./05-SPACES-OPERATING-MODEL.md)** — the as-built space model.
 6. **[06-YT-INTEL.md](./06-YT-INTEL.md)** — the research desk as it actually runs: lanes, report format, what is proven and what is still borrowed confidence.
+0. **[08-HANDOVER.md](./08-HANDOVER.md)** — start here in a new session. The reasoning behind the media rule, the migration loop, the traps that already cost red CI runs, and the known dead ends. It exists so nothing has to be re-derived or re-explained.
 7. **[07-MEDIA-AND-REPO-SIZE.md](./07-MEDIA-AND-REPO-SIZE.md)** — what may enter Git, where media actually lives, the measured size history, and the four guard layers. **Read before adding any video, audio, image plate, 3D model or archive.**
 
 ## The short version
