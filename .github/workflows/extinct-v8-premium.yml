@@ -74,7 +74,27 @@ jobs:
             echo "inspection/ holds only ignored render output — nothing to commit"
           else
             git commit -m 'Preserve V8 native Cycles look-development frames [skip ci]'
-            bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work
+            # Capture why the push path failed, and publish it to the step
+            # summary. The job log lives on blob storage that is unreachable
+            # from some environments (confirmed: curl exit 35), so "look at the
+            # log" is not always advice that can be followed. GITHUB_STEP_SUMMARY
+            # is plain text in the UI and always readable.
+            if ! bash scripts/git-push-retrying.sh arena/ba8d901e-monarch-overall-work 2>&1 | tee /tmp/push.log; then
+              {
+                echo "## v8 push failed"
+                echo ""
+                echo '```'
+                tail -40 /tmp/push.log
+                echo '```'
+                echo ""
+                echo "git status:"
+                echo '```'
+                git status --short | head -20
+                echo '```'
+                echo "branch: $(git rev-parse --abbrev-ref HEAD)  ahead/behind: $(git rev-list --left-right --count origin/arena/ba8d901e-monarch-overall-work...HEAD 2>&1)"
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 1
+            fi
           fi
   audio:
     runs-on: ubuntu-24.04
