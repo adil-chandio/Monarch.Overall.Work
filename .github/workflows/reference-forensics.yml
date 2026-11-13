@@ -1,0 +1,128 @@
+name: Reference video — forensic transcript
+
+# Why this exists: the development sandbox cannot reach any speech-to-text model host
+# (huggingface.co 000, cdn-lfs 000, ggml files 404 at their old GitHub paths), so the
+# competitor analysis could describe the picture but not one word of the narration.
+# Runners have the network; this is where the transcript gets made.
+#
+# The source video is NOT committed. It is 31 MB of someone else's channel, and the
+# repo's rule is that Git holds knowledge, not media. The video lives in Drive; its
+# file id is the input. Pull it with a Drive token, or drop it at the path below.
+
+on:
+  workflow_dispatch:
+    inputs:
+      drive_file_id:
+        description: "Google Drive file id of the reference video (blank = use the committed job folder)"
+        required: false
+        default: "16vYFVlKJwTE7tZYJ5jSrv90KT09r4SgF"
+      model:
+        description: "faster-whisper model"
+        required: false
+        default: "base.en"
+      out_dir:
+        description: "where the transcript is written"
+        required: false
+        default: "docs/research/competitor-apexmorph/forensics"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reference-forensics-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  transcribe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg and faster-whisper
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --quiet 'faster-whisper>=1.1,<2'
+
+      # Drive is the only transfer path in this repo. The token is optional: when it is
+      # absent the step says so and the job still works if the video is already present.
+      - name: Fetch the reference video from Drive
+        env:
+          DRIVE_TOKEN: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
+          FILE_ID: ${{ inputs.drive_file_id }}
+        run: |
+          mkdir -p .cache/ref
+          OUT=.cache/ref/reference.mp4
+          if [ -z "$FILE_ID" ]; then
+            echo "::warning::no drive_file_id given"
+            exit 0
+          fi
+          if [ -z "$DRIVE_TOKEN" ]; then
+            echo "::warning::GOOGLE_DRIVE_TOKEN secret is not set — cannot fetch from Drive."
+            echo "::warning::Set it, or commit the video to .cache/ref/ yourself. Nothing else will work without the file."
+            exit 0
+          fi
+          curl -sS -L -o "$OUT" \
+            -H "Authorization: Bearer $DRIVE_TOKEN" \
+            "https://www.googleapis.com/drive/v3/files/${FILE_ID}?alt=media"
+          ls -l "$OUT"
+          file "$OUT"
+
+      - name: Transcribe
+        run: |
+          if [ ! -s .cache/ref/reference.mp4 ]; then
+            echo "::error::the reference video is not present. Nothing to transcribe."
+            echo "::error::Either set GOOGLE_DRIVE_TOKEN so the fetch step works, or place the file at .cache/ref/reference.mp4."
+            exit 1
+          fi
+          python scripts/research/reference-forensic-transcribe.py \
+            .cache/ref/reference.mp4 "${{ inputs.out_dir }}" "${{ inputs.model }}"
+
+      - name: Show the numbers in the run summary
+        if: always()
+        run: |
+          F="${{ inputs.out_dir }}/speech-stats.json"
+          if [ -f "$F" ]; then
+            {
+              echo "## Reference speech forensics"
+              python - <<'PY'
+import json, os
+d = json.load(open(os.environ["F"]))
+for k in ("duration_s","word_count","words_per_minute","first_word_at_s","gaps_over_0_5s","gaps_over_1s","segment_count","mean_segment_s"):
+    print(f"| {k} | {d.get(k)} |")
+print("\n**Longest pauses**\n")
+print("| at (s) | seconds |")
+print("|---|---|")
+for g in d.get("longest_gaps", [])[:10]:
+    print(f"| {g['at']} | {g['seconds']} |")
+PY
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "no speech-stats.json produced" >> "$GITHUB_STEP_SUMMARY"
+          fi
+        env:
+          F: ${{ inputs.out_dir }}/speech-stats.json
+
+      - name: Commit the transcript
+        run: |
+          D="${{ inputs.out_dir }}"
+          if [ ! -f "$D/transcript.json" ]; then
+            echo "::error::no transcript was written — nothing to commit"
+            exit 1
+          fi
+          git config user.name 'Monarch reference forensics'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          bash scripts/git-commit-if-changed.sh \
+            'research: forensic transcript of the ApexMorph orca video [skip ci]' "$D"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-transcript
+          path: ${{ inputs.out_dir }}/
+          retention-days: 90
