@@ -617,6 +617,17 @@ test("AGENTS.md tells a new session that a sandbox is temporary", () => {
     /Do not wait at 75%/.test(agents) || /75%/.test(agents),
     "the 'ask approvals early, not at 75%' lesson must stay — deferring a question strands the render",
   );
+  // The rule only holds if the "never block an upload on a question" half is
+  // there too. Uploading is a safety step, not a decision, and the incident was
+  // precisely a finished file waiting on nothing in particular.
+  assert.ok(
+    /upload first, ask second/i.test(agents),
+    "AGENTS.md must say to upload before asking, not after",
+  );
+  assert.ok(
+    /Batch, do not stream/i.test(agents),
+    "the batching rule must stay — streaming questions across a long render strands it",
+  );
 });
 
 console.log(`\n${passed} guard tests passed`);

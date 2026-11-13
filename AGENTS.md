@@ -126,6 +126,44 @@ Four things, written down **before** the first pause, not after:
 3. **Every approval recorded with `decide`** — so the next session does not ask the operator the same question at the same 75%.
 4. **The ledger pushed.** A commit in the sandbox is still in the sandbox.
 
+### The approval window — ask early, ask once
+
+The operator is a phone user in a different time zone from the work. "I will ask
+at 75% when it is ready to look at" is the single decision that turns a working
+render into a lost one, because 75% is exactly when nobody is looking.
+
+| When to ask | What to ask | Why then |
+|---|---|---|
+| **Before any long run starts** | the whole list: lighting, camera, palette, music, duration, output name. Ten questions at 5% cost one message | every one of them is cheaper to answer now than to re-render later |
+| **As soon as a file exists** | nothing — just upload it, then report the link with progress | the upload is not a decision, it is a safety step. Never wait for approval to upload |
+| **At a genuine fork** | one question, with your recommendation and the cost of each branch | a fork with two defensible answers is the only thing worth stopping for |
+| **Never** | "should I continue?", "is this okay?", "shall I proceed?" | the answer is always yes, and asking it strands the job |
+
+**Never let a question be the thing that stands between a finished file and an
+upload.** If you must ask something, upload first, ask second, and record the
+question in the job ledger so the next session sees it without the operator
+repeating it.
+
+**Batch, do not stream.** One message with five questions beats five messages
+with one, because the operator answers them in one sitting. Streaming questions
+across a 2-hour render guarantees at least one of them arrives while the phone is
+in a pocket.
+
+### If you are about to be idle anyway
+
+Sometimes the work genuinely cannot continue without an answer. Then:
+
+1. Register every finished artifact (`job.mjs artifact`) and upload every one
+   (`job.mjs uploaded --drive-id`).
+2. Write `resume.next_command` as a literal command, so a new session does not
+   have to reconstruct your intent from a log.
+3. Record the question with `job.mjs decide`-style framing and leave the job
+   `paused`.
+4. `job.mjs check` must exit 0. If it exits 1, the job is not resumable and you
+   are about to repeat the incident.
+5. Push. Then tell the operator in one line: what is done, where the file is,
+   what you need.
+
 ### While the operator is away
 
 The operator works from a phone and is often not looking. That is normal, not an
