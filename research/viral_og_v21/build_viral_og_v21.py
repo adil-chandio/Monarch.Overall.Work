@@ -54,6 +54,8 @@ LANES = [
     {"slug": "animal_2d_essay", "q": "why it sucks to be born as animal animated"},
     {"slug": "dark_doc_2d", "q": "animated documentary disaster last minutes"},
     {"slug": "money_2d", "q": "economics explained animation banana"},
+    {"slug": "prehistory_short", "q": "ancient humans daily life animation"},
+    {"slug": "stickman_motivation", "q": "animated short film about discipline"},
 ]
 BUCKETS = [("short", "short"), ("long", "long")]
 
@@ -188,6 +190,60 @@ def upload_ids(pid, pages=2):
     return [i for i in out if i]
 
 
+def deep_uploads(pid, pages=6):
+    """Up to 300 uploads, newest first - enough to find the screenshot videos."""
+    out, token = [], None
+    for _ in range(pages):
+        p = {"part": "contentDetails", "playlistId": pid, "maxResults": 50}
+        if token:
+            p["pageToken"] = token
+        try:
+            d = client._api("playlistItems", p, "playlistItems")
+        except Exception:  # noqa: BLE001
+            break
+        out += [(i.get("contentDetails") or {}).get("videoId") for i in d.get("items", []) or []]
+        token = d.get("nextPageToken")
+        if not token:
+            break
+    return [i for i in out if i]
+
+
+def _norm(s):
+    return re.sub(r"[^a-z0-9 ]", "", (s or "").lower()).strip()
+
+
+def title_hits(screenshot_titles, rows, thresh=0.72):
+    """How many of the screenshot titles actually appear in this channel's catalogue."""
+    import difflib
+    have = [_norm(r["title"]) for r in rows]
+    hits = 0
+    for t in screenshot_titles:
+        t = _norm(t)
+        if not t:
+            continue
+        if any(difflib.SequenceMatcher(None, t, h).ratio() > thresh for h in have):
+            hits += 1
+    return hits
+
+
+def resolve_by_title(title):
+    """A screenshot video's exact title -> the channel that really owns it."""
+    try:
+        d = client._api("search", {"part": "snippet", "q": title, "type": "video",
+                                   "maxResults": 5, "regionCode": "US",
+                                   "relevanceLanguage": "en"}, "search")
+    except Exception:  # noqa: BLE001
+        return None
+    import difflib
+    best, bestr = None, 0.0
+    for it in d.get("items", []) or []:
+        sn = it.get("snippet") or {}
+        r = difflib.SequenceMatcher(None, _norm(title), _norm(sn.get("title"))).ratio()
+        if r > bestr:
+            best, bestr = sn.get("channelId"), r
+    return best if bestr > 0.8 else None
+
+
 def stats(rows):
     if not rows:
         return {"n": 0}
@@ -289,14 +345,56 @@ def main():
         time.sleep(0.05)
     log(f"resolved {len(resolved)}/{len(idx['channels'])} screenshot channels; unresolved {len(unresolved)}")
 
-    catalogue, catalogue_rows = {}, []
+    catalogue, catalogue_rows, audit = {}, [], []
     for i, (name, b) in enumerate(resolved.items(), 1):
-        ids = upload_ids(b["uploads"]) if b.get("uploads") else []
+        shots = [v["title"] for v in idx["channels"][name]["videos"] if v.get("title")]
+        ids = deep_uploads(b["uploads"]) if b.get("uploads") else []
         cr = [r for r in videos(ids) if r["channel_id"] == b["channel_id"]]
+        hits = title_hits(shots, cr)
+        method = b["resolved_by"]
+        # identity check: if the screenshot's own titles are not in this catalogue, the handle
+        # pointed at the wrong channel. Re-derive the channel from a screenshot title.
+        if shots and hits < max(1, len(shots) * 0.5):
+            for t in sorted(shots, key=len, reverse=True)[:2]:
+                cid = resolve_by_title(t)
+                if not cid or cid == b["channel_id"]:
+                    continue
+                try:
+                    d = client._api("channels", {"part": "snippet,statistics,contentDetails",
+                                                 "id": cid}, "channels")
+                    it = (d.get("items") or [None])[0]
+                except Exception:  # noqa: BLE001
+                    it = None
+                if not it:
+                    continue
+                cand = chan_brief(it)
+                cand["resolved_by"] = "title-search:" + t[:60]
+                cand["screenshot_name"] = name
+                cand["screenshot_subs"] = idx["channels"][name].get("subs")
+                cand["screenshot_videos"] = idx["channels"][name].get("video_count")
+                cand["cluster"] = idx["channels"][name].get("cluster")
+                cids = deep_uploads(cand["uploads"]) if cand.get("uploads") else []
+                cand_rows = [r for r in videos(cids) if r["channel_id"] == cand["channel_id"]]
+                cand_hits = title_hits(shots, cand_rows)
+                if cand_hits > hits:
+                    audit.append({"name": name, "old_id": b["channel_id"], "old_title": b["title"],
+                                  "old_hits": hits, "new_id": cand["channel_id"],
+                                  "new_title": cand["title"], "new_hits": cand_hits,
+                                  "shots": len(shots), "fix": "re-resolved by video title"})
+                    b, cr, hits, method = cand, cand_rows, cand_hits, cand["resolved_by"]
+                    break
         st = stats(cr)
         med = statistics.median([r["views"] for r in cr]) if cr else 0
         outl = sorted([r for r in cr if med and r["views"] >= 3 * med], key=lambda r: -r["views"])
+        verified = bool(shots) and hits >= max(1, len(shots) * 0.5)
+        b["catalogue_n"] = st.get("n", 0)
+        b["median_views"] = int(med)
+        b["outlier_count"] = len(outl)
+        b["identity"] = {"screenshot_titles": len(shots), "matched": hits,
+                         "rate": round(hits / len(shots), 2) if shots else None,
+                         "verified": verified, "method": method}
         catalogue[name] = {"channel": b, "stats": st, "median_views": int(med),
+                           "identity": b["identity"],
                            "ladder": {k: stats([r for r in cr if bucket(r["duration_seconds"]) == k])
                                       for k in ("short", "medium", "long")},
                            "outliers": [{k: r[k] for k in ("id", "title", "views", "duration_seconds",
@@ -306,11 +404,8 @@ def main():
                            "top_by_views": [{k: r[k] for k in ("id", "title", "views", "duration_seconds", "published")}
                                             for r in sorted(cr, key=lambda r: -r["views"])[:10]]}
         catalogue_rows += cr
-        b["catalogue_n"] = st.get("n", 0)
-        b["median_views"] = int(med)
-        b["outlier_count"] = len(outl)
-        log(f"  [{i}/{len(resolved)}] {name[:26]:26s} subs={b['subs']} n={st.get('n',0):3d} "
-            f"med={int(med):>11,} out={len(outl)}")
+        log(f"  [{i}/{len(resolved)}] {name[:24]:24s} n={st.get('n',0):3d} med={int(med):>11,} "
+            f"out={len(outl)} verified={verified} ({hits}/{len(shots)})")
 
     lanes_out, lane_ids = [], []
     for l in LANES:
@@ -335,12 +430,15 @@ def main():
         allrows.setdefault(r["id"], r)
     allrows = list(allrows.values())
 
-    out_ids = {o["id"] for c in catalogue.values() for o in c["outliers"]}
+    verified_names = {n for n, c in catalogue.items() if c["identity"]["verified"]}
+    out_ids = {o["id"] for n, c in catalogue.items() if n in verified_names for o in c["outliers"]}
     niche_out = [r for r in allrows if r["id"] in out_ids]
     rest = [r for r in allrows if r["id"] not in out_ids]
 
     by_cluster = defaultdict(list)
     for name, c in catalogue.items():
+        if name not in verified_names:
+            continue
         by_cluster[c["channel"].get("cluster") or "unknown"].append(
             {"name": name, "subs": c["channel"]["subs"], "n": c["stats"].get("n", 0),
              "median": c["median_views"], "max": c["stats"].get("max"),
@@ -380,6 +478,9 @@ def main():
         "input": "user's Google Drive swipe file (71 screenshots) -> drive_swipe_index.json",
         "screenshot_channels": len(idx["channels"]),
         "resolved_channels": len(resolved), "unresolved_channels": len(unresolved),
+        "identity_verified_channels": len(verified_names),
+        "identity_re_resolved": len(audit),
+        "identity_unverified_names": sorted(set(catalogue) - verified_names),
         "catalogue_videos": len(catalogue_rows), "lanes": len(lanes_out),
         "lane_rows": len(lane_rows), "unique_videos": len(allrows),
         "niche_outliers_3x": len(niche_out),
@@ -395,6 +496,7 @@ def main():
     }
     save("run_v21.json", run)
     save("channels_v21.json", {"resolved": len(resolved), "unresolved": unresolved,
+                               "identity_audit": audit,
                                "channels": list(resolved.values())})
     save("channel_deep_v21.json", {"catalogue": catalogue,
                                    "by_cluster": {k: v for k, v in by_cluster.items()},

@@ -88,9 +88,10 @@ jobs:
           assert run['secret_value_printed_or_stored'] is False
           assert run['screenshot_channels'] >= 30, run['screenshot_channels']
           assert run['resolved_channels'] >= 20, run['resolved_channels']
+          assert run['identity_verified_channels'] >= 15, run['identity_verified_channels']
           assert run['catalogue_videos'] >= 500, run['catalogue_videos']
-          assert run['lanes'] == 12, run['lanes']
-          assert run['unique_videos'] >= 600, run['unique_videos']
+          assert run['lanes'] == 16, run['lanes']
+          assert run['unique_videos'] >= 800, run['unique_videos']
           vids = json.loads((b/'videos_v21.json').read_text())
           assert vids['count'] == run['unique_videos'], (vids['count'], run['unique_videos'])
           deep = json.loads((b/'channel_deep_v21.json').read_text())
