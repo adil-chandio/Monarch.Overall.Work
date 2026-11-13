@@ -235,6 +235,34 @@ def deep_uploads(pid, pages=2):
     return [i for i in out if i]
 
 
+def view_num(txt):
+    """'18M' / '738K' / '1,203,027' -> number."""
+    if txt is None:
+        return None
+    t = str(txt).strip().replace(",", "").upper()
+    mult = 1.0
+    if t.endswith("K"):
+        mult, t = 1e3, t[:-1]
+    elif t.endswith("M"):
+        mult, t = 1e6, t[:-1]
+    elif t.endswith("B"):
+        mult, t = 1e9, t[:-1]
+    try:
+        return float(t) * mult
+    except ValueError:
+        return None
+
+
+def claim_supported(shot_views, ch_stats, factor=3.0):
+    """The screenshots show specific view counts. If the channel we resolved never came
+    close to them, we are looking at the wrong channel - names and subscriber counts can
+    coincide (The Stickman Scientist: screenshot 5.2M, resolved channel max 18K)."""
+    claims = [c for c in (view_num(v) for v in shot_views) if c]
+    if not claims or not ch_stats or not ch_stats.get("max"):
+        return None
+    return ch_stats["max"] * factor >= max(claims)
+
+
 def subs_ok(ch, shot_subs, shot_videos=None):
     """Does the resolved channel's public size match the screenshot's own numbers?
 
@@ -540,14 +568,18 @@ def main():
                                       "new_title": cand["title"], "fix": "exact-title validation"})
                         exact = exact_title_present(shots, b["channel_id"])
                         break
+        claim_ok = claim_supported([v.get("views_text") for v in idx["channels"][name].get("videos", [])], st)
         b["exact_title_matches"] = exact
+        b["claim_max_views"] = max([c for c in (view_num(v.get("views_text"))
+                                               for v in idx["channels"][name].get("videos", [])) if c] or [0])
         confirmed = 0
         if not (bool(shots) and exact >= max(1, len(shots) * 0.5) and size_ok is not False):
             # fallback: a size-consistent channel whose own uploads contain the screenshot's
             # view magnitude (18M row on a channel whose max is 18.7M) or a >=0.8 title hit
             if size_ok is not False and hits >= max(1, len(shots) * 0.3):
                 confirmed = 1
-        verified = bool(shots) and (exact >= max(1, len(shots) * 0.5) or confirmed) and size_ok is not False
+        verified = (bool(shots) and (exact >= max(1, len(shots) * 0.5) or confirmed)
+                    and size_ok is not False and claim_ok is not False)
         b["catalogue_n"] = st.get("n", 0)
         b["median_views"] = int(med)
         b["outlier_count"] = len(outl)
@@ -558,6 +590,7 @@ def main():
                          "screenshot_subs": idx["channels"][name].get("subs"),
                          "resolved_subs": b.get("subs"),
                          "size_consistent": size_ok,
+                         "views_claim_supported": claim_ok,
                          "note": ("subscriber size contradicts the screenshot"
                                   if size_ok is False else
                                   ("size matches" if size_ok else "no size on screenshot"))}
@@ -660,6 +693,9 @@ def main():
         "identity_re_resolved": len(audit),
         "identity_cache_overrides": audit_cache,
         "identity_unverified_names": sorted(set(catalogue) - verified_names),
+        "identity_views_claim_failures": sorted(n for n, c in catalogue.items()
+                                                if c["identity"].get("views_claim_supported") is False),
+        "catalogue_page_cap_per_channel": 100,
         "identity_size_contradictions": sorted(n for n, c in catalogue.items()
                                                if c["identity"].get("size_consistent") is False),
         "catalogue_videos": len(catalogue_rows), "lanes": len(lanes_out),
