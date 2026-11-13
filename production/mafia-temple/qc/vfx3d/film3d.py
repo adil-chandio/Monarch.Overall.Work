@@ -152,11 +152,16 @@ FACE_LIGHTS = {
         world.Light((-0.28, 0.090, -0.400), (0.55, 0.72, 1.0), 0.15, 0.05),
     ],
     # S5 is lit warm from in front-left, from the shoji screens behind the camera
+    # S5 sits in front of lit shoji, so its key is BEHIND the head, not beside
+    # the camera. A camera-side key lit the outside of the hair mass and it
+    # rendered pale grey; the reference's hair is black and the light comes from
+    # the screens behind him, wrapping the cheek and the jaw and leaving the hair
+    # a silhouette. Two low fills from camera-left keep the face from going flat.
     'S5': [
-        world.Light((-0.34, 0.130, 0.420), (1.0, 0.62, 0.30), 0.34, 0.03),
-        world.Light((0.42, 0.020, 0.330), (0.86, 0.58, 0.30), 0.090, 0.06),
-        world.Light((0.10, 0.230, -0.380), (0.72, 0.62, 0.44), 0.085, 0.05),
-        world.Light((0.34, -0.060, -0.300), (0.30, 0.34, 0.46), 0.060, 0.06),
+        world.Light((0.24, 0.150, -0.400), (1.0, 0.70, 0.42), 0.52, 0.06),
+        world.Light((-0.30, 0.120, -0.360), (1.0, 0.62, 0.32), 0.30, 0.06),
+        world.Light((-0.34, 0.020, 0.400), (1.0, 0.66, 0.38), 0.115, 0.09),
+        world.Light((0.40, -0.050, 0.320), (0.80, 0.56, 0.34), 0.055, 0.08),
     ],
 }
 

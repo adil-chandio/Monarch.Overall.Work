@@ -680,7 +680,7 @@ def composite_hair(img, alpha, zc, hair, eye, target, w, h, fov, lights,
     # push it to 27, which reads as silver-grey, so the ceiling now matches the
     # reference and the tone is pulled blue rather than neutral.
     lum = col.mean(-1, keepdims=True)
-    col = col * np.minimum(1.0, 0.036 / np.maximum(lum, 1e-4))
+    col = col * np.minimum(1.0, 0.017 / np.maximum(lum, 1e-4))
     col = col * np.array([0.86, 1.00, 1.06], np.float32)
     col = col.reshape(h, w, 3)
     hm_ = hit.reshape(h, w)
@@ -949,8 +949,11 @@ def composite_hair_raytraced(img, alpha, zc, hair_prims, frame, eye, target,
 # indistinguishable from an open eye, and it never intersects the mesh.
 # Eye geometry in metres, in the head's own frame (eye line at y = 0):
 #   half-width 22 mm, half-height 7.5 mm, sclera pale, iris 8 mm across.
-EYE_HALF_W = 0.0102
-EYE_HALF_H = 0.0032
+# 10.2 x 3.2 mm is a two-thirds-closed eye. An open adult eye is ~13 x 6 mm
+# between the lids, and the reference's eyes are wide open and level. At the
+# old height the sclera was a 2-pixel sliver and the face read as asleep.
+EYE_HALF_W = 0.0125
+EYE_HALF_H = 0.0058
 EYE_POS = {1: np.array([0.0220, -0.0044, 0.0430], np.float32),
            -1: np.array([-0.0220, -0.0044, 0.0430], np.float32)}
 
@@ -1114,9 +1117,9 @@ def paint_eyes(col, p, n, glow=1.0, open_amount=1.0):
         #    a brown bandit mask across the middle of the face, which is most of
         #    what the last cut's portrait was. A socket is a much tighter ellipse
         #    and it is shallower than it was.
-        out = out * (1.0 - 0.24 * _soft(np.sqrt((dx / 0.0235) ** 2 +
-                                                ((dy + 0.001) / 0.0165) ** 2),
-                                        1.20, 0.90) * front)[:, None]
+        out = out * (1.0 - 0.13 * _soft(np.sqrt((dx / 0.0175) ** 2 +
+                                                ((dy + 0.0005) / 0.0105) ** 2),
+                                        1.10, 0.95) * front)[:, None]
 
         # -- aperture: a lid-shaped almond, tilted, not a circle
         tilt = sx * 0.13 * dx / EYE_HALF_W
@@ -1128,7 +1131,7 @@ def paint_eyes(col, p, n, glow=1.0, open_amount=1.0):
 
         # -- the eye white, with the faintest grey at the corners
         corner = np.clip(np.abs(dx) / EYE_HALF_W, 0, 1) ** 2
-        sclera = (np.array([0.118, 0.104, 0.104], np.float32)[None, :]
+        sclera = (np.array([0.175, 0.150, 0.148], np.float32)[None, :]
                   * (1.0 - 0.50 * corner[:, None]))
         out = out * (1.0 - 0.92 * m_open)[:, None] + sclera * (0.92 * m_open)[:, None]
 
