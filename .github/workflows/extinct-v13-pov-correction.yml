@@ -185,7 +185,7 @@ jobs:
           PY
           git config user.name 'Monarch full native 3D production'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add production/extinct-life/film-v13-full-pov
-          git commit -m 'Record corrected full English 7:19 POV master delivery and verified QC [skip ci]'
+          # media folders are excluded by .gitignore now, so the commit must be conditional
+          bash scripts/git-commit-if-changed.sh 'Record corrected full English 7:19 POV master delivery and verified QC [skip ci]' production/extinct-life/film-v13-full-pov
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
           git push origin HEAD:arena/ba8d901e-monarch-overall-work

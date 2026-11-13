@@ -113,7 +113,7 @@ jobs:
           PY
           git config user.name 'Monarch native 3D production'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add production/extinct-life/film-v6-motion
-          git commit -m 'Record released moving-3D excerpt QC and attribution [skip ci]'
+          # media folders are excluded by .gitignore now, so the commit must be conditional
+          bash scripts/git-commit-if-changed.sh 'Record released moving-3D excerpt QC and attribution [skip ci]' production/extinct-life/film-v6-motion
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
           git push origin HEAD:arena/ba8d901e-monarch-overall-work

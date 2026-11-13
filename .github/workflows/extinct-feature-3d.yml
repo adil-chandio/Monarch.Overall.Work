@@ -83,8 +83,14 @@ jobs:
         run: |
           git config user.name 'Monarch 3D production'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
+          # `-f` was overriding .gitignore to force a 1080p mp4 into history.
+          # A finished film is delivered through a Release (the pattern v14 already
+          # uses) or Drive, not through a commit. Only the render reports stay here.
           git add production/extinct-life/feature-3d/render-reports/
-          git add -f deliverables/Extinct_Life_3D_Chapter03_Production_1080p.mp4
-          git commit -m 'Render approved-style Extinct Life production chapter 3 [skip ci]'
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          if git diff --cached --quiet; then
+            echo "only reports changed nothing - no media enters Git from this job"
+          else
+            git commit -m 'Record approved-style Extinct Life chapter 3 render reports [skip ci]'
+            git pull --rebase origin arena/ba8d901e-monarch-overall-work
+            git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          fi

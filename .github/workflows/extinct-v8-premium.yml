@@ -50,10 +50,21 @@ jobs:
         run: |
           git config user.name 'Monarch native look development'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
+          # inspection/ is render output, not evidence: .gitignore now excludes it
+          # (config/media-policy.json -> render evidence). `git add` therefore stages
+          # nothing. The old `git diff --cached --quiet || git commit` form is
+          # backwards — `--quiet` returns 1 when there IS a diff, so with nothing
+          # staged it ran `git commit` with an empty index and failed the job.
+          # .gitignore keeps the PNG->JPG loop above untouched: it reads .cache and
+          # writes the working tree, it does not read this folder back.
           git add production/extinct-life/film-v8-premium/inspection
-          git diff --cached --quiet || git commit -m 'Preserve V8 native Cycles look-development frames [skip ci]'
-          git pull --rebase origin arena/ba8d901e-monarch-overall-work
-          git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          if git diff --cached --quiet; then
+            echo "inspection/ is produced from .cache and excluded from Git by policy — nothing to commit"
+          else
+            git commit -m 'Preserve V8 native Cycles look-development frames [skip ci]'
+            git pull --rebase origin arena/ba8d901e-monarch-overall-work
+            git push origin HEAD:arena/ba8d901e-monarch-overall-work
+          fi
   audio:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -146,7 +157,7 @@ jobs:
           PY
           git config user.name 'Monarch premium 3D production'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add production/extinct-life/film-v8-premium
-          git commit -m 'Record V8 one-minute development delivery and measured QC [skip ci]'
+          # media folders are excluded by .gitignore now, so the commit must be conditional
+          bash scripts/git-commit-if-changed.sh 'Record V8 one-minute development delivery and measured QC [skip ci]' production/extinct-life/film-v8-premium
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
           git push origin HEAD:arena/ba8d901e-monarch-overall-work

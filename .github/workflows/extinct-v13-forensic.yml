@@ -28,7 +28,7 @@ jobs:
         run: |
           git config user.name 'Monarch released-film forensic audit'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add production/extinct-life/review-v13
-          git commit -m 'Extract exact released V13 frame, timing and signal evidence for independent creative audit [skip ci]'
+          # media folders are excluded by .gitignore now, so the commit must be conditional
+          bash scripts/git-commit-if-changed.sh 'Extract exact released V13 frame, timing and signal evidence for independent creative audit [skip ci]' production/extinct-life/review-v13
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
           git push origin HEAD:arena/ba8d901e-monarch-overall-work

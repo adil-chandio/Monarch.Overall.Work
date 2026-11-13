@@ -71,7 +71,7 @@ jobs:
           (b/'DELIVERY.json').write_text(json.dumps(d,indent=2)+'\n')
           PY
           cp .cache/extinct-v6/seek-QC.json production/extinct-life/film-v6-motion/seek-QC.json
-          git add production/extinct-life/film-v6-motion
-          git commit -m 'Record published actual-motion excerpt delivery [skip ci]'
+          # media folders are excluded by .gitignore now, so the commit must be conditional
+          bash scripts/git-commit-if-changed.sh 'Record published actual-motion excerpt delivery [skip ci]' production/extinct-life/film-v6-motion
           git pull --rebase origin arena/ba8d901e-monarch-overall-work
           git push origin HEAD:arena/ba8d901e-monarch-overall-work

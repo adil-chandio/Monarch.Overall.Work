@@ -188,8 +188,10 @@ jobs:
         run: |
           git config user.name "MONARCH GPU Runner"
           git config user.email "gpu@monarch.studio"
-          git add -f gpu-engine/clips/*.mp4 gpu-engine/clips/*.json
-          git commit -m "chore(gpu): add 8 Kaggle T4x2 AI motion clips [skip ci]" || exit 0
+          # `-f` was overriding .gitignore and forcing render clips into history.
+          # Only the measurement JSON belongs in Git; the .mp4 clips do not.
+          git add gpu-engine/clips/*.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "chore(gpu): record 8 Kaggle T4x2 AI motion clip measurements [skip ci]" || exit 0
           for attempt in 1 2 3; do
             git pull --rebase origin arena/9960286a-monarch-overall-work && \
             git push origin HEAD:arena/9960286a-monarch-overall-work && break
