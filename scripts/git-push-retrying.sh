@@ -27,7 +27,20 @@ for attempt in $(seq 1 "$ATTEMPTS"); do
   # Rebase onto whatever landed while we were working. --autostash because a
   # render job may have left working-tree changes; -X theirs is deliberately NOT
   # used — a real conflict must surface rather than be silently discarded.
-  if ! git pull --rebase origin "$BRANCH"; then
+  #
+  # --autostash is not cosmetic and it was missing here for weeks. This comment
+  # claimed it; the command did not have it. Consequence, measured on
+  # extinct-v8-premium.yml run 43353753210: the render step leaves .cache/ (and
+  # a regenerated PNG->JPG set) as UNSTAGED changes, `git pull --rebase` refuses
+  # to run with unstaged changes at all ("cannot pull with rebase: You have
+  # unstaged changes"), the helper exits 1 on attempt 1, and the step fails —
+  # even though the commit it just made is perfect. Every workflow that renders
+  # and then calls this helper had the same latent failure.
+  #
+  # Reproduced locally by writing an unstaged file and running the old line:
+  #   exit 1, "cannot pull with rebase: You have unstaged changes"
+  # With --autostash: the commit pushes and the unstaged work is restored after.
+  if ! git pull --rebase --autostash origin "$BRANCH"; then
     echo "git-push-retrying: pull --rebase failed on attempt $attempt (real conflict, not contention)" >&2
     git rebase --abort 2>/dev/null || true
     exit 1
