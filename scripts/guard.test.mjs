@@ -9,6 +9,7 @@
 import assert from "node:assert";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
+import * as yamlMod from "yaml";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const read = (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8"));
@@ -213,6 +214,39 @@ test("AGENTS.md keeps the two-account publishing model", () => {
   ]) {
     assert.ok(agents.includes(phrase), `AGENTS.md lost: ${phrase}`);
   }
+});
+
+/* ---------- reference forensics workflow ---------- */
+
+test("every workflow YAML parses", () => {
+  const { parse } = yamlMod;
+  const dir = resolve(ROOT, ".github/workflows");
+  const bad = [];
+  for (const f of readdirSync(dir).filter((n) => n.endsWith(".yml"))) {
+    try {
+      const doc = parse(readFileSync(resolve(dir, f), "utf8"));
+      if (!doc || !doc.jobs) bad.push(`${f}: no jobs key`);
+    } catch (e) {
+      bad.push(`${f}: ${e.message.split("\n")[0]}`);
+    }
+  }
+  assert.deepEqual(bad, [], `unparseable workflows: ${bad.join("; ")}`);
+});
+
+test("the reference forensics workflow still refuses to fake a transcript", () => {
+  const f = readFileSync(resolve(ROOT, ".github/workflows/reference-forensics.yml"), "utf8");
+  for (const phrase of [
+    "GOOGLE_DRIVE_TOKEN",
+    "Nothing to transcribe",
+    "no transcript was written",
+    "retention-days: 90",
+  ]) {
+    assert.ok(f.includes(phrase), `reference-forensics.yml lost: ${phrase}`);
+  }
+  assert.ok(!/\.cache\/ref\/reference\.mp4$\s*$/m.test("") , "sanity");
+  // the video must never be committed — Git holds knowledge, not media
+  const ignore = readFileSync(resolve(ROOT, ".gitignore"), "utf8");
+  assert.ok(ignore.includes(".cache"), ".gitignore no longer excludes .cache");
 });
 
 /* ---------- config/accounts.json ---------- */

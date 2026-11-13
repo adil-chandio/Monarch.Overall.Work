@@ -85,28 +85,14 @@ jobs:
 
       - name: Show the numbers in the run summary
         if: always()
-        run: |
-          F="${{ inputs.out_dir }}/speech-stats.json"
-          if [ -f "$F" ]; then
-            {
-              echo "## Reference speech forensics"
-              python - <<'PY'
-import json, os
-d = json.load(open(os.environ["F"]))
-for k in ("duration_s","word_count","words_per_minute","first_word_at_s","gaps_over_0_5s","gaps_over_1s","segment_count","mean_segment_s"):
-    print(f"| {k} | {d.get(k)} |")
-print("\n**Longest pauses**\n")
-print("| at (s) | seconds |")
-print("|---|---|")
-for g in d.get("longest_gaps", [])[:10]:
-    print(f"| {g['at']} | {g['seconds']} |")
-PY
-            } >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "no speech-stats.json produced" >> "$GITHUB_STEP_SUMMARY"
-          fi
         env:
           F: ${{ inputs.out_dir }}/speech-stats.json
+        run: |
+          if [ -f "$F" ]; then
+            python scripts/research/speech-stats-to-summary.py "$F" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'no speech-stats.json produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Commit the transcript
         run: |
