@@ -198,8 +198,23 @@ Sets `core.hooksPath=scripts/hooks`, so a forced `git add -f` of a video is refu
 | | |
 |---|---|
 | Tool ceiling for Drive/Dropbox uploads from this environment | **100 MB** |
-| Actually exercised end to end | **~50 MB** |
-| Anything above 50 MB | **untested** — do not promise it before trying it |
+| Largest size actually exercised end to end | **99,408,313 B (94.8 MB)** on 2026-11-13 |
+
+This table used to say "~50 MB exercised, anything above that untested", and it cost real work: nine
+files between 44 and 99 MB sat in Git for weeks purely because nobody had tried them. During the
+deliverable migration all nine uploaded, and Drive's `sha256Checksum` matched a fresh local
+`sha256sum` for every one. The wall is the connector's 100 MB request limit and nothing else.
+
+| rung | bytes | what |
+|---|---:|---|
+| 1 | 626,489 | Gait test 3 s |
+| 2 | 7,343,645 | Genetics 3D scene |
+| 3 | 29,845,595 | EP01 Lost World |
+| 4 | 53,842,746 | EP01 Urdnglish rebuild — first file above the old 50 MB guess |
+| 5 | **99,408,313** | Review reel 13 min — largest tracked file, ceiling probe |
+
+Still true, and worth keeping: verify the hash after every upload (`google_drive get_file` →
+`sha256Checksum`), and do not treat "upload returned success" as proof of content.
 
 **Consequence:** a 12-minute master must be encoded at **≤ 0.85 Mbps + 128 kbps audio** to land at ~95 MB. That is not a quality compromise:
 
@@ -230,8 +245,27 @@ Sets `core.hooksPath=scripts/hooks`, so a forced `git add -f` of a video is refu
 
 ```
 | File | Size | Kind | In Git | Where | sha256 |
-| `Homotherium-Cub-3D-Rebuild-1080x1920.mp4` | 46.1 MB | video | yes | **UNRECORDED** | `38fa5c8d2060` |
+| `Homotherium-Cub-3D-Rebuild-1080x1920.mp4` | 46.1 MB | video | no | Drive 3d animation · 1YnxZmyFKqy7P-9K3b_IrG-jzhK9GZKKG ✓ | `38fa5c8d2060` |
 ```
+
+**The page must render identically on every checkout.** It is built from what the repo *records* — the
+Git index plus `config/drive-map.json` — never from what happens to be on the local disk. The first
+version read the disk, which meant the machine doing the migration (26 videos present) and CI (none
+present) generated different pages; `--check` then failed in CI on every commit and the guard could
+never be green. Found on a real fresh clone: 2 insertions, 27 deletions.
+
+So `✓` means *the hash recorded at release time equalled a fresh local hash at that moment*. Asking
+"are the bytes still here, and do they still hash right?" is a different question with its own
+command, because its answer is per-machine and the page's is not:
+
+```bash
+node scripts/build-deliverables-index.mjs --verify-local
+# verify-local: re-hashing 26 of 26 files that are on this disk
+#   ok   Last-Mammoths-Gait-Test-3s.mp4  a7603a2592cb
+# 26 checked, 0 mismatch, 0 unrecorded, 0 not on this disk
+```
+
+Run it on the machine that holds the videos. It prints and never writes.
 
 `UNRECORDED` is deliberate. The index refuses to pretend a file is safe.
 
@@ -272,9 +306,10 @@ These are decisions, not oversights. Each needs the operator's explicit yes beca
 ```bash
 npm run guard              # audit the whole tracked tree
 npm run guard:staged       # what a commit would add
-npm run guard:test         # 21 tests on the rule itself
+npm run guard:test         # 32 tests on the rule itself
 npm run index:deliverables # regenerate deliverables/INDEX.md
 npm run index:check        # CI: fail if the index is stale
+node scripts/build-deliverables-index.mjs --verify-local  # re-hash what is on this disk
 npm run hooks:install      # install the pre-commit guard
 npm run test:all           # config tests + guard tests
 node scripts/check-workflow-media.mjs            # which workflows still commit media
