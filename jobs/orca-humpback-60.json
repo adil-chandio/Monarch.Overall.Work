@@ -6,17 +6,28 @@
   "done": 0,
   "unit": "steps",
   "created": "2026-11-13T12:11:50.552Z",
-  "updated": "2026-11-13T12:11:52.308Z",
+  "updated": "2026-11-13T12:11:54.036Z",
   "resume": {
     "next_command": "",
     "notes": ""
   },
-  "artifacts": [],
+  "artifacts": [
+    {
+      "path": "/tmp/Orca-Humpback-60s-720p.mp4",
+      "bytes": 9054783,
+      "sha256": "e75f7e10c0435e9a286cc8e71b313e662332b7fc062186c57232f38ec169256c",
+      "drive_id": null
+    }
+  ],
   "decisions": [],
   "log": [
     {
       "at": "2026-11-13T12:11:50.552Z",
       "what": "started: "
+    },
+    {
+      "at": "2026-11-13T12:11:54.036Z",
+      "what": "artifact /tmp/Orca-Humpback-60s-720p.mp4 8.6 MB sha256 e75f7e10c043"
     }
   ]
 }
