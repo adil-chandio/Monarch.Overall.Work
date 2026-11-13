@@ -29,7 +29,7 @@ jobs:
       - name: Publish ciphertext receipt only
         uses: actions/upload-artifact@v4
         with:
-          name: encrypted-inventory-receipt
+          name: encrypted-inventory-${{ steps.inspect.outputs.blob }}-${{ steps.inspect.outputs.digest }}
           path: ${{ runner.temp }}/og-inventory-receipt.txt
           retention-days: 1
       - name: Remove runner archive

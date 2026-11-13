@@ -102,6 +102,7 @@ def main():
                        'ciphertext_sha256=' + hashlib.sha256(payload).hexdigest() + '\n')
     with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
         print('blob=' + blob, file=output)
+        print('digest=' + hashlib.sha256(payload).hexdigest(), file=output)
     print('Archive identity verified; encrypted inventory stored. Entry count:', report['entry_count'], flush=True)
 
 
