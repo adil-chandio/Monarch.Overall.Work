@@ -178,6 +178,33 @@ exception. So:
   first. If it fails, fix it or say plainly that the work is at risk — but do not
   go quiet.
 
+### Frames: the expensive part, and how to not pay twice
+
+Re-rendering 480 frames takes hours. Encoding them to MP4 takes seconds. So the
+frames, not the MP4, are what a job must protect.
+
+| Layer | Protects | Cost |
+|---|---|---|
+| PNG frames on sandbox disk | nothing once the sandbox resets | free |
+| **A release / Drive copy of the finished MP4** | the thing you actually deliver | the upload |
+| **`actions/upload-artifact` on each shard** | the frames, if the render runs in CI | free, 90-day retention, set `retention-days` explicitly |
+| A local `tar` in the sandbox | nothing — it is still the sandbox | free |
+
+The pattern already in this repo (`extinct-v8-premium.yml`, `extinct-film-v4.yml`):
+shard the render, and after **each** shard `actions/upload-artifact` its frames.
+If shard 5 of 6 dies, shards 1-4 are still downloadable. Re-run costs one shard,
+not the film.
+
+**If the render runs in the interactive sandbox (no CI), the rule is different
+and stricter** — there is no artifact store:
+
+> Encode to MP4 at every shard boundary and upload each one. A 20-second MP4 is
+> ~12 MB and uploads in seconds. A 480-frame PNG set is ~340 MB and cannot go to
+> Drive through the connector at all.
+
+So the durable unit is **the MP4**, not the frames. Do not accumulate 480 frames
+and hope; encode and upload as you go.
+
 ### Checkpoints are not git history
 
 Frames, MP4s and renders are **media**: they never enter Git, no matter how small
