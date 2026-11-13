@@ -243,8 +243,10 @@ def subs_ok(ch, shot_subs, shot_videos=None):
     """
     want = disc._subs_num(shot_subs)
     got = ch.get("subs")
-    if not want or not got:
+    if not want:
         return None
+    if not got:  # hidden subscriber count, or a dead 0
+        return False if want >= 100 else None
     return got >= want / 8
 
 
@@ -439,7 +441,8 @@ def main():
         method = b["resolved_by"]
         # identity check: if the screenshot's own titles are not in this catalogue, the handle
         # pointed at the wrong channel. Re-derive the channel from a screenshot title.
-        if shots and hits < max(1, len(shots) * 0.5):
+        strong_match = (b.get("catalogue_match_evidence") or {}).get("matches", 0) >= 3
+        if shots and hits < max(1, len(shots) * 0.5) and not strong_match:
             for t in sorted(shots, key=len, reverse=True)[:2]:
                 cid = resolve_by_title(t)
                 if not cid or cid == b["channel_id"]:
