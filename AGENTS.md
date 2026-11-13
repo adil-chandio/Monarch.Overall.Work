@@ -47,6 +47,45 @@ The **operating system** for five work domains — not the content itself.
 
 ---
 
+## The publishing model — two accounts, two shapes
+
+Stated by the operator on 2026-11-13. `config/accounts.json` is the source of truth;
+`soc-01`/`soc-02`/`soc-03` in `config/social.json` predate this and are wrong (see gap
+`gap-supersedes-social-json`).
+
+**Two accounts, every platform:**
+
+| id | label | handle |
+|---|---|---|
+| `acc-01` | Motivational / Self Improvement | `m.adil.chandio` |
+| `acc-02` | AI Learning & Earning | `adil.chandio.ai` |
+
+**Two shapes, and they are not interchangeable:**
+
+| Shape | Goes to | Cadence |
+|---|---|---|
+| **Short** (30-45 s vertical) | TikTok + Instagram + YouTube Shorts + Facebook — **the same file, four platforms** | as often as quality allows |
+| **Long** (8-12 min) | **YouTube only. Never TikTok, Instagram or Facebook.** | 1-2 per week, maximum |
+
+Three things this settles that were previously guessed:
+
+- One short is cut **once** and delivered four times. Four platform-specific edits is a
+  defect, not thoroughness.
+- Long-form is capped at 1-2/week **on purpose**. The cap is the strategy — Shorts are a
+  distribution game, long-form is a trust game, and they need different rhythms.
+- The two accounts never share a voice. Remove either one's voice and the other reads as a
+  repost, which is the fastest way to lose both audiences.
+
+**Blocked, and this is not a reading — it is measured:** this sandbox cannot reach any of
+the four platforms. `graph.facebook.com`, `graph.instagram.com`, `open-api.tiktok.com`
+and `oauth2.googleapis.com` all return `000` here. Publishing must run from GitHub
+Actions. Before writing `publish-short.yml`, read `known_gaps` in
+`config/accounts.json` — YouTube needs an OAuth client (the existing `YT_API_KEY` is
+read-only and **cannot upload**), Meta and TikTok both need an app review that takes
+weeks. Start those reviews first; they are the long pole.
+
+---
+
 ## The one rule that gets broken most
 
 > **Git holds knowledge. Media lives outside Git and gets one line inside it.**

@@ -192,6 +192,79 @@ test("every Drive folder that claims a channel exists in channels.json", () => {
   }
 });
 
+test("AGENTS.md keeps the two-account publishing model", () => {
+  const agents = readFileSync(resolve(ROOT, "AGENTS.md"), "utf8");
+  for (const phrase of [
+    "m.adil.chandio",
+    "adil.chandio.ai",
+    "YouTube only",
+    "the same file, four platforms",
+    "1-2 per week",
+  ]) {
+    assert.ok(agents.includes(phrase), `AGENTS.md lost: ${phrase}`);
+  }
+});
+
+/* ---------- config/accounts.json ---------- */
+
+const accountsFile = read("config/accounts.json");
+const accounts = accountsFile.accounts;
+
+test("there are exactly two publishing accounts", () => {
+  assert.equal(accounts.length, 2, `expected 2 accounts, found ${accounts.length}`);
+  assert.deepEqual(accounts.map((a) => a.id), ["acc-01", "acc-02"]);
+});
+
+test("both accounts publish shorts to all four platforms", () => {
+  const want = ["TikTok", "Instagram", "YouTube Shorts", "Facebook"];
+  for (const a of accounts) {
+    assert.deepEqual(
+      [...a.platforms.shorts].sort(),
+      [...want].sort(),
+      `${a.id} does not publish shorts to exactly ${want.join(", ")}`
+    );
+  }
+});
+
+test("long-form is YouTube only, on both accounts", () => {
+  for (const a of accounts) {
+    assert.deepEqual(a.platforms.long, ["YouTube"], `${a.id} long-form escapes YouTube`);
+    assert.ok(a.cadence.long, `${a.id} has no long-form cadence`);
+  }
+});
+
+test("long-form is capped at 1-2 per week, in the file and in the model block", () => {
+  for (const a of accounts) {
+    assert.ok(/1-2\s*\/\s*week/.test(a.cadence.long), `${a.id} does not cap long-form at 1-2/week`);
+  }
+  assert.ok(/1-2 per week/.test(accountsFile.the_model.long_form.cadence), "the_model lost its cadence cap");
+});
+
+test("every handle is recorded with its raw form and an honesty flag", () => {
+  for (const a of accounts) {
+    assert.ok(a.handle, `${a.id} has no handle`);
+    assert.equal(typeof a.handle_unverified, "boolean", `${a.id} does not say whether the handle is verified`);
+    assert.ok(a.handle_note && a.handle_note.length > 20, `${a.id} does not explain its handle`);
+    assert.ok(!/[\s"]/.test(a.handle), `${a.id} handle contains whitespace or a quote: ${JSON.stringify(a.handle)}`);
+  }
+});
+
+test("both handles match what the operator gave on 2026-11-13", () => {
+  const byId = Object.fromEntries(accounts.map((a) => [a.id, a]));
+  assert.equal(byId["acc-01"].handle, "m.adil.chandio");
+  assert.equal(byId["acc-02"].handle, "adil.chandio.ai");
+});
+
+test("the four upload gaps are named, not hidden", () => {
+  const ids = new Set(accountsFile.known_gaps.map((g) => g.id));
+  for (const want of ["gap-handles", "gap-supersedes-social-json", "gap-upload-not-built"]) {
+    assert.ok(ids.has(want), `known_gaps lost ${want}`);
+  }
+  for (const g of accountsFile.known_gaps) {
+    assert.ok(g.fix && g.fix.length > 20, `${g.id} has no fix`);
+  }
+});
+
 /* ---------- .gitignore ---------- */
 
 const ignore = readFileSync(resolve(ROOT, ".gitignore"), "utf8");
