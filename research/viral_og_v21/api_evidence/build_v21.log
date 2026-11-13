@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/runner/work/Monarch.Overall.Work/Monarch.Overall.Work/research/viral_og_v21/build_viral_og_v21.py", line 37, in <module>
+    from research.viral_og_v21 import discovery_v21 as disc, forensic, thumbprint  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: cannot import name 'forensic' from 'research.viral_og_v21' (unknown location)
