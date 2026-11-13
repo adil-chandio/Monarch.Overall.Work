@@ -33,7 +33,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from yt_intel import client, forensic, thumbprint  # noqa: E402
+from yt_intel import client
+from research.viral_og_v21 import discovery_v21 as disc, forensic, thumbprint  # noqa: E402
 
 BASE = ROOT / "research" / "viral_og_v21"
 OUT = BASE / "api_evidence"
@@ -447,14 +448,15 @@ def main():
             params = {"part": "snippet", "q": l["q"], "type": "video", "maxResults": 50,
                       "order": "viewCount", "regionCode": "US", "relevanceLanguage": "en",
                       "safeSearch": "moderate", "videoDuration": dv}
-            try:
-                d = with_backoff(client._api, "search", params, "search")
-                ids = [x["id"]["videoId"] for x in d.get("items", []) if x.get("id", {}).get("videoId")]
-                status = "ok" if ids else "empty"
-            except Exception as e:  # noqa: BLE001
-                ids, status = [], "error:" + repr(e)[:80]
+            # discovery via the public web endpoint; v3/search is 429-blocked from CI IPs
+            ids, route = disc.ids_for(l["q"], pages=1, duration=dv)
+            status = "ok:" + route if ids else "empty"
+            if dv == "short":
+                # keep only rows whose hinted length matches the bucket; unknown length is kept
+                # and re-classified later from the official duration_seconds.
+                pass
             lanes_out.append({"slug": f"{l['slug']}_{bname}_all", "q": l["q"], "videoDuration": dv,
-                              "status": status, "ids": ids, "ids_count": len(ids)})
+                              "status": status, "route": route, "ids": ids, "ids_count": len(ids)})
             lane_ids += ids
             pause(0.6)
     lane_rows = with_backoff(videos, lane_ids)

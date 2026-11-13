@@ -60,7 +60,9 @@ jobs:
           fi
 
       - name: V21 viral OG forensic
-        run: python research/viral_og_v21/build_viral_og_v21.py
+        run: |
+          mkdir -p research/viral_og_v21/api_evidence
+          python research/viral_og_v21/build_viral_og_v21.py 2>&1 | tee research/viral_og_v21/api_evidence/build_v21.log
 
       - name: Diagnostics (always)
         if: always()
@@ -105,6 +107,8 @@ jobs:
           assert run['identity_verified_channels'] >= 22, run['identity_verified_channels']
           assert run['catalogue_videos'] >= 500, run['catalogue_videos']
           assert run['lanes'] == 20, run['lanes']
+          assert run['lane_rows'] >= 600, run['lane_rows']
+          assert all(l['ids_count'] > 0 for l in json.loads((b/'lanes_v21.json').read_text())['lanes']), 'empty lane'
           assert run['unique_videos'] >= 800, run['unique_videos']
           vids = json.loads((b/'videos_v21.json').read_text())
           assert vids['count'] == run['unique_videos'], (vids['count'], run['unique_videos'])

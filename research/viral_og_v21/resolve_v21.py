@@ -19,6 +19,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from yt_intel import client  # noqa: E402
+sys.path.insert(0, str(ROOT / "research" / "viral_og_v21"))
+import discovery_v21 as disc  # noqa: E402
 
 BASE = ROOT / "research" / "viral_og_v21"
 OUT = BASE / "api_evidence"
@@ -102,7 +104,21 @@ def main():
                     except ValueError:
                         pass
         if not got and titles:
-            got = try_title(max(titles, key=len))
+            # v3/search is 429-blocked from CI IPs; the public web search is not.
+            for t_ in sorted(titles, key=len, reverse=True)[:3]:
+                cid = disc.resolve_channel_via_inner(t_)
+                if not cid:
+                    continue
+                try:
+                    dd = client._api("channels", {"part": "snippet,statistics,contentDetails",
+                                                  "id": cid}, "channels")
+                    cit = (dd.get("items") or [None])[0]
+                    if cit:
+                        got = brief(cit, "inner:title")
+                        break
+                except Exception as e:  # noqa: BLE001
+                    log("   channel fetch err", repr(e)[:80])
+                time.sleep(2)
         if got:
             got["screenshot_name"] = name
             got["cluster"] = c.get("cluster")
