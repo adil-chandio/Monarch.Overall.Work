@@ -2,7 +2,9 @@
 
 **Research aur creative proposal — final niche approval ya published video nahin.**
 
-**Primary proposal:** MONARCHs Edit ke liye ek original, premium 3D celebrity-life POV challenge pilot.
+**Baad ki broader comparison:** user ke reference archive aur dono formats ke liye [nayi Shorts vs long-form research](../monarch_og_audit/SHORTS_VS_LONG_FORM_RESEARCH_ROMAN_URDU.md) engineering mechanism ko ek separate conditional test candidate rakhti hai. Neeche ka celebrity pilot earlier lifestyle-POV scope ka option hai; koi bhi direction, channel pivot ya upload approve nahin hua.
+
+**Primary proposal within the earlier lifestyle-POV scope:** MONARCHs Edit ke liye ek original, premium 3D celebrity-life POV challenge pilot.
 
 **Session ki trusted date:** 5 November 2026. API runner aur Google ke response headers ne **12 November 2026** dikhaya; yeh mismatch resolve nahin hua. Neeche diye gaye counters us runner-reported waqt ke snapshots hain, **5 November ke verified counters nahin**. Is wajah se inhein current growth rate, views/day ya live trend mat samjhein.
 

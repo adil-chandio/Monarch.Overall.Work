@@ -1,0 +1,1031 @@
+{
+  "schema": 1,
+  "runner_reported_utc": "2026-11-13T01:07:11.629246+00:00",
+  "method": "Public thumbnail variants manually reviewed separately. Numbered variants are still images, not verified timed video frames. Gemini input: selected windows, one frame per second requested, potentially imperfect; answers are model-generated descriptions and do not establish continuous playback, exact cuts, audio or audience reactions.",
+  "model": "gemini-3.1-flash-lite-preview",
+  "targets": [
+    {
+      "video_id": "NArAKj4zbB8",
+      "duration_seconds": 41,
+      "label": "Discover Inside high-view ATM short candidate"
+    },
+    {
+      "video_id": "qhBUAOIXvbY",
+      "duration_seconds": 41,
+      "label": "Discover Inside lower-view manufacturing short candidate"
+    },
+    {
+      "video_id": "BTTccTEjjyQ",
+      "duration_seconds": 53,
+      "label": "3D Eye high-view bridge explainer short candidate"
+    },
+    {
+      "video_id": "e4lhVG25HIw",
+      "duration_seconds": 49,
+      "label": "3D Eye low-view cricket-object short candidate"
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "duration_seconds": 552,
+      "label": "Simple History high-view long-form example"
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "duration_seconds": 608,
+      "label": "Simple History lower-view long-form comparator"
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "duration_seconds": 906,
+      "label": "Kelevin million-view mythology long-form discovery"
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "duration_seconds": 479,
+      "label": "What If Stickman tornado long-form discovery"
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "duration_seconds": 976,
+      "label": "Lower-view water bridge long-form comparator from public page"
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "duration_seconds": 99,
+      "label": "Million-view reverse bridge example: format ambiguous"
+    }
+  ],
+  "thumbnails": [
+    {
+      "video_id": "NArAKj4zbB8",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/NArAKj4zbB8/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 11951,
+      "sha256": "58684b39212f740e41cdd963582ff51fef7c48aa159003622878516af610eccf",
+      "filename": "NArAKj4zbB8-hqdefault.jpg"
+    },
+    {
+      "video_id": "NArAKj4zbB8",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/NArAKj4zbB8/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3022,
+      "sha256": "784f5fe5b2fea19cf5929c1e46515bbc451c349ffe656acb5b204cabdc1db392",
+      "filename": "NArAKj4zbB8-1.jpg"
+    },
+    {
+      "video_id": "NArAKj4zbB8",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/NArAKj4zbB8/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3094,
+      "sha256": "bee9702a0fb1e1d23624b526a56c85468c36d9d213bdad81c06d098fe0373296",
+      "filename": "NArAKj4zbB8-2.jpg"
+    },
+    {
+      "video_id": "NArAKj4zbB8",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/NArAKj4zbB8/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2503,
+      "sha256": "54e2bf2477d52b261dd9e1de2de37c4d326cf2562f179b0fe84389d87e1525ad",
+      "filename": "NArAKj4zbB8-3.jpg"
+    },
+    {
+      "video_id": "qhBUAOIXvbY",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/qhBUAOIXvbY/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 14241,
+      "sha256": "d8e11b520371f16173b8bc2937ca35c24a3c45900a4226c87c45723e4ae6da73",
+      "filename": "qhBUAOIXvbY-hqdefault.jpg"
+    },
+    {
+      "video_id": "qhBUAOIXvbY",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/qhBUAOIXvbY/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2894,
+      "sha256": "4f2664bfb9d7e4fc3094a9dbf4183c91dcdf65f32385f47e3593b17ed604af55",
+      "filename": "qhBUAOIXvbY-1.jpg"
+    },
+    {
+      "video_id": "qhBUAOIXvbY",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/qhBUAOIXvbY/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3239,
+      "sha256": "b5f1d277d949c376c29d592559228f060c9fea44bf0f24d97bc500c80c64dd85",
+      "filename": "qhBUAOIXvbY-2.jpg"
+    },
+    {
+      "video_id": "qhBUAOIXvbY",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/qhBUAOIXvbY/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3646,
+      "sha256": "b4c516f20b0a78e9f0f9041d1643e7285830f60196dd1714063116ffe058ed4d",
+      "filename": "qhBUAOIXvbY-3.jpg"
+    },
+    {
+      "video_id": "BTTccTEjjyQ",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/BTTccTEjjyQ/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 10789,
+      "sha256": "a33c6e64b89de46e6417f396f1139e42fe144e3f7cae140adab4df80b827dc5a",
+      "filename": "BTTccTEjjyQ-hqdefault.jpg"
+    },
+    {
+      "video_id": "BTTccTEjjyQ",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/BTTccTEjjyQ/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2161,
+      "sha256": "699559650da9a61be3047386c3c729ce092804bca59252dafc89962cffb6c1b9",
+      "filename": "BTTccTEjjyQ-1.jpg"
+    },
+    {
+      "video_id": "BTTccTEjjyQ",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/BTTccTEjjyQ/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2209,
+      "sha256": "01a65634ba0894a758eddaabcd28535dde1fe651afbe488f09f1891addb89abf",
+      "filename": "BTTccTEjjyQ-2.jpg"
+    },
+    {
+      "video_id": "BTTccTEjjyQ",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/BTTccTEjjyQ/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2499,
+      "sha256": "a4cbd475c67f0040ee2c7e1c8f0e37f7eb0cfff988ac02a3c944f292e352d271",
+      "filename": "BTTccTEjjyQ-3.jpg"
+    },
+    {
+      "video_id": "e4lhVG25HIw",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/e4lhVG25HIw/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 17123,
+      "sha256": "bb48d0e96e4537bcc2082525fec7a02bd3c8c3bb909d0d96cd03ae885bc9ab38",
+      "filename": "e4lhVG25HIw-hqdefault.jpg"
+    },
+    {
+      "video_id": "e4lhVG25HIw",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/e4lhVG25HIw/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3489,
+      "sha256": "481951362e520a016d5d467d9c1ba1d8ecb2f6b6f689dbcd800f96e7acfca303",
+      "filename": "e4lhVG25HIw-1.jpg"
+    },
+    {
+      "video_id": "e4lhVG25HIw",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/e4lhVG25HIw/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3551,
+      "sha256": "64f85e349d022464b0a816525c3b20617c66841a094105b56f9c652d5239f38a",
+      "filename": "e4lhVG25HIw-2.jpg"
+    },
+    {
+      "video_id": "e4lhVG25HIw",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/e4lhVG25HIw/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3036,
+      "sha256": "1086d4b6feaba2365ddbdf95ba5bf18ad09cd8b618e9154729c74c9238200ff2",
+      "filename": "e4lhVG25HIw-3.jpg"
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/HKYQqRcAeEU/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 22270,
+      "sha256": "e1c828139c81d1dd06cacbd99f67838bb218ff3744c624e3da7a2a974392849c",
+      "filename": "HKYQqRcAeEU-hqdefault.jpg"
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/HKYQqRcAeEU/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2666,
+      "sha256": "04580f64ee960668697ea610cff14cd4a07aca71be5be0a797a1ab1b73346f2a",
+      "filename": "HKYQqRcAeEU-1.jpg"
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/HKYQqRcAeEU/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2399,
+      "sha256": "33384002791bfd2ebb7b00e48cb6435efb1e70942bd7a54e99027cfc04152d0b",
+      "filename": "HKYQqRcAeEU-2.jpg"
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/HKYQqRcAeEU/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3207,
+      "sha256": "52d2439b056c6247c2f14c1229b8e4a93dd124031acec805386a0a293ed3eb3e",
+      "filename": "HKYQqRcAeEU-3.jpg"
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/sW8ZEn4Ce2Y/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 25670,
+      "sha256": "e8c954cd433b2442feb27489d2843f5d30744479a882e7c6e7ddfe0924903702",
+      "filename": "sW8ZEn4Ce2Y-hqdefault.jpg"
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/sW8ZEn4Ce2Y/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3206,
+      "sha256": "ff2f3edd4690d21ea3929d8489eb35c8a40f163a253d8abae430f5bbf07832ee",
+      "filename": "sW8ZEn4Ce2Y-1.jpg"
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/sW8ZEn4Ce2Y/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3529,
+      "sha256": "8cc7a15c6de3f20eabf02220cd50007f8afff6ce1872efc230d94c2a3d09d965",
+      "filename": "sW8ZEn4Ce2Y-2.jpg"
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/sW8ZEn4Ce2Y/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2607,
+      "sha256": "8d8ddb484a59faa20a04d4318e6679c48601c673becde62e8225766bb45659ea",
+      "filename": "sW8ZEn4Ce2Y-3.jpg"
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/t7zjiFULuUc/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 22548,
+      "sha256": "3c2ab1c95237c28ecc2022b073d8a706cf73ca7141874428689825388d5215b2",
+      "filename": "t7zjiFULuUc-hqdefault.jpg"
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/t7zjiFULuUc/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2279,
+      "sha256": "7523de9a5c10bf31e993273ffae199e300079f8c75b89d18695a9f80f039956e",
+      "filename": "t7zjiFULuUc-1.jpg"
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/t7zjiFULuUc/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3101,
+      "sha256": "13145a92f1c25fbd00054ed1c6cc0b53747017761fe2c5463ecfc3835d2fb7bd",
+      "filename": "t7zjiFULuUc-2.jpg"
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/t7zjiFULuUc/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2681,
+      "sha256": "78e8a67123e531eb0e4004b97226989c238adeac6d4fe453197a36f1e28adbe8",
+      "filename": "t7zjiFULuUc-3.jpg"
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/Gfq4UlhSsYg/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 27497,
+      "sha256": "9f05ec2ff5adf758535809e0a838378ef87983860351b2c320bdf5f2ed1d1634",
+      "filename": "Gfq4UlhSsYg-hqdefault.jpg"
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/Gfq4UlhSsYg/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2497,
+      "sha256": "ff6f4e8f1dbc034a85c47ebfd2e207758c3961efa50ac95035453378e3c850f3",
+      "filename": "Gfq4UlhSsYg-1.jpg"
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/Gfq4UlhSsYg/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2733,
+      "sha256": "29e3569a9802e9d417d975ff0d388f915f21769b433bc50e21733a2c59ca33ff",
+      "filename": "Gfq4UlhSsYg-2.jpg"
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/Gfq4UlhSsYg/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2352,
+      "sha256": "5889f3a19005826ce3177bb075713db5c1c132752f90a0cf8833404a53eb8878",
+      "filename": "Gfq4UlhSsYg-3.jpg"
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/QAeAkiYhid8/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 28525,
+      "sha256": "8057f9fa2f88b89021ec385d5928ec7eecaf8084fe3e9dc786aa90c6abe12fe5",
+      "filename": "QAeAkiYhid8-hqdefault.jpg"
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/QAeAkiYhid8/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3954,
+      "sha256": "a4cf74fb35e94ac13fd3ea60c75b5b25c903c8440e6f591650f6dba71d61dbc9",
+      "filename": "QAeAkiYhid8-1.jpg"
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/QAeAkiYhid8/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3675,
+      "sha256": "a5f90172d1d5ade9021ec9921cf2fa0f696b703eb546c593ee150b6249dd752c",
+      "filename": "QAeAkiYhid8-2.jpg"
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/QAeAkiYhid8/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3156,
+      "sha256": "c8da2a92e4113b6d89e1473cc2826b5233d6ba3c5c64cc6ed18e7a7c4b11dddd",
+      "filename": "QAeAkiYhid8-3.jpg"
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "kind": "hqdefault",
+      "url": "https://i.ytimg.com/vi/2lHgsn7_LBo/hqdefault.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 12718,
+      "sha256": "5bf0aaf45bba35f67e24073d52b013a5cfeeda3e4cdf40425a3be8ceba1d8a76",
+      "filename": "2lHgsn7_LBo-hqdefault.jpg"
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "kind": "1",
+      "url": "https://i.ytimg.com/vi/2lHgsn7_LBo/1.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 3119,
+      "sha256": "26b64802fb72427d49cf85b39f1a73e65a3c160453f1b236515f32521a537d34",
+      "filename": "2lHgsn7_LBo-1.jpg"
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "kind": "2",
+      "url": "https://i.ytimg.com/vi/2lHgsn7_LBo/2.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2944,
+      "sha256": "69cf854b199c32881a648ec8139dd4c41e3599a7d6dcab2eeefa0c1df6aa9f89",
+      "filename": "2lHgsn7_LBo-2.jpg"
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "kind": "3",
+      "url": "https://i.ytimg.com/vi/2lHgsn7_LBo/3.jpg",
+      "http_status": 200,
+      "status": "ok",
+      "bytes": 2967,
+      "sha256": "87ec8fa7c53293cfc258920322c1d3d75c585343605821a10e33dd398f61318f",
+      "filename": "2lHgsn7_LBo-3.jpg"
+    }
+  ],
+  "visual_descriptions": [
+    {
+      "video_id": "qhBUAOIXvbY",
+      "label": "Discover Inside lower-view manufacturing short candidate / full requested short duration",
+      "requested_window_seconds": [
+        0,
+        41
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 3782,
+        "candidatesTokenCount": 263,
+        "totalTokenCount": 4045,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 3644
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "(1) Visible subjects and setting: The video depicts an automated industrial facility for manufacturing, filling, and packaging plastic water bottles. The setting is a clean, brightly lit factory floor with stainless steel machinery, conveyor belts, and robotic arms.\n\n(2) Broad sequence: The process begins with raw plastic pellets being fed into a machine to create preforms. These preforms are then heated and blow-molded into the final bottle shape. The bottles are cleaned, labeled, filled with liquid, and capped. Finally, the bottles are grouped, shrink-wrapped into packs, and stacked onto pallets by robotic arms for storage.\n\n(3) Apparent character/object motion, framing, and transitions: The video uses a series of close-up and medium shots to track the production line. Motion is consistent and linear, following the flow of the product from raw material to finished pallet. Transitions between stages are smooth, often using cuts that jump to the next part of the assembly process. The camera remains focused on the machinery and the bottles as they move through each station.\n\n(4) Unknowns: The specific brand of the water, the exact chemical composition of the plastic, the specific location of the factory, and the total number of bottles produced per hour are not visible or identifiable from the video."
+    },
+    {
+      "video_id": "NArAKj4zbB8",
+      "label": "Discover Inside high-view ATM short candidate / full requested short duration",
+      "requested_window_seconds": [
+        0,
+        41
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 3782,
+        "candidatesTokenCount": 271,
+        "totalTokenCount": 4053,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 3644
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "This video shows a clear-cased, functional model of an automated teller machine (ATM) or similar cash-dispensing device.\n\n**1. Visible Subjects and Setting**\nThe subject is a transparent, mechanical device that performs the functions of an ATM. The setting is a neutral, dark background.\n\n**2. Broad Sequence**\nThe video begins with a hand inserting a debit card into the machine. The internal mechanisms engage, moving the card and activating the electronic components. The machine then proceeds to count and dispense stacks of paper currency, which are moved through various internal rollers and gears. Finally, the machine prints a receipt and returns the card.\n\n**3. Apparent Motion, Framing, and Transitions**\nThe video uses a series of close-up shots that follow the internal processes of the machine. The camera remains focused on the mechanical components as they move, with smooth transitions between the card insertion, the electronic processing, the currency handling, and the final receipt printing. The framing is tight, highlighting the intricate movement of the gears, rollers, and circuit boards.\n\n**4. Unknowns**\nIt is not possible to determine the specific brand or model of the machine, the exact currency denominations being handled, or the specific software or programming controlling the device. The identity of the person operating the machine is not visible."
+    },
+    {
+      "video_id": "BTTccTEjjyQ",
+      "label": "3D Eye high-view bridge explainer short candidate / full requested short duration",
+      "requested_window_seconds": [
+        0,
+        53
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 4962,
+        "candidatesTokenCount": 279,
+        "totalTokenCount": 5241,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 4824
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "This video provides a 3D animated demonstration of bridge engineering concepts.\n\n**(1) Visible Subjects and Setting**\nThe setting is a flat, tan-colored landscape with a few scattered trees. The primary subject is a concrete bridge structure consisting of a long, horizontal deck supported by vertical pillars.\n\n**(2) Broad Sequence**\nThe video begins by showing a bridge with multiple pillars, then illustrates the potential structural failure if pillars are removed or improperly designed. It then progresses through several theoretical design iterations—including the use of rollers and, finally, rubber pads—to show how engineers manage the stress and movement of a bridge deck.\n\n**(3) Apparent Motion, Framing, and Transitions**\nThe video uses a series of static shots and smooth camera pans that move around the bridge structure to highlight specific components. The animation shows the bridge deck bending under the weight of a passing truck, which then causes the top of the pillars to crack and crumble. Subsequent segments show the bridge deck moving horizontally on rollers, and finally, the deck compressing and decompressing on top of rubber pads as a truck passes over it.\n\n**(4) Unknowns**\nThe specific materials used in the animation are not identified beyond their general appearance (e.g., concrete, rubber). The exact weight of the truck or the specific structural load-bearing capacity of the bridge design is not provided."
+    },
+    {
+      "video_id": "e4lhVG25HIw",
+      "label": "3D Eye low-view cricket-object short candidate / full requested short duration",
+      "requested_window_seconds": [
+        0,
+        49
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 4599,
+        "candidatesTokenCount": 273,
+        "totalTokenCount": 4872,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 4461
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "This video provides a 3D-animated, cross-sectional view of cricket stumps and their internal components.\n\n**(1) Visible subjects and setting**\nThe setting is a cricket pitch inside a stadium. The primary subjects are a set of three cricket stumps and two bails, a batter, and a wicketkeeper.\n\n**(2) Broad sequence**\nThe video begins with a batter taking a swing at a ball. The camera then shifts to show the internal components of the stumps, including wires, microphones, and cameras. It then shows a cross-section of the ground, revealing a junction box and the cabling running beneath the surface. The video concludes with a sequence of the batter hitting the ball, followed by a close-up of the stumps and bails.\n\n**(3) Apparent character/object motion, framing and transitions**\nThe video uses a series of animated, computer-generated shots. The camera moves dynamically, transitioning from a wide view of the pitch to close-ups of the stumps and then to a \"cutaway\" view showing the underground components. The animation depicts the batter swinging the bat and the ball moving toward the stumps.\n\n**(4) Unknowns**\nThe specific brand or model of the technology shown is not identified. The video does not show the actual broadcast room or the specific personnel operating the equipment."
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "label": "Simple History high-view long-form example / opening 20s",
+      "requested_window_seconds": [
+        0,
+        20
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1959,
+        "candidatesTokenCount": 264,
+        "totalTokenCount": 2223,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1821
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Here is the requested information based on the provided video:\n\n**1. Visible Subjects and Setting**\nThe video features several animated characters wearing gas masks and tactical gear. The settings include a dark, wooded area at night with a campfire, a dimly lit, cluttered interior space, and a room with a desk and books.\n\n**2. Broad Sequence**\nThe video begins with a close-up of a character adjusting their gas mask. It then transitions to a wider shot of several characters sitting around a campfire in a wooded area. The scene shifts to a character sitting in a cluttered room, followed by a character standing in a different room, and finally, a character sitting at a desk in a room filled with books.\n\n**3. Apparent Character/Object Motion, Framing, and Transitions**\nThe video utilizes a series of cuts between different scenes. Characters are shown performing various actions, such as adjusting their masks, sitting, and holding objects. The framing varies between close-ups and wider shots to show the characters in their respective environments.\n\n**4. Unknowns**\nThe specific identities of the characters, the nature of the environment they are in, and the purpose of the objects they are handling are not explicitly stated or shown. The exact relationship between the characters and their motivations remain unclear."
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "label": "Simple History high-view long-form example / middle 20s",
+      "requested_window_seconds": [
+        266,
+        286
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1959,
+        "candidatesTokenCount": 266,
+        "totalTokenCount": 2225,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1821
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Based on the provided video, here is the requested information:\n\n**(1) Visible subjects and setting**\nThe video features an animated soldier wearing a gas mask and tactical gear, holding a rifle. The setting appears to be a dark, indoor environment. Later, the video displays two different types of gas masks against a textured, grey background.\n\n**(2) Broad sequence**\nThe video begins with a soldier in a dark environment drinking from a canteen through a tube connected to their gas mask. The scene then transitions to a static display of two different gas masks, with a green outline highlighting the internal drinking tube mechanism within each mask. The video concludes with a close-up of the second mask, focusing on the internal tube.\n\n**(3) Apparent character/object motion, framing and transitions**\nThe initial scene is a medium shot of the soldier, who moves their arm to lift a canteen to their mask. The transition to the second scene is a hard cut to a static graphic. In the second scene, the green outline appears over the masks, and the final shot is a zoom-in on the second mask.\n\n**(4) Unknowns**\nThe specific identity of the soldier, the exact location, the type of rifle, and the specific brand or model of the canteen are not clearly identifiable."
+    },
+    {
+      "video_id": "HKYQqRcAeEU",
+      "label": "Simple History high-view long-form example / ending 20s",
+      "requested_window_seconds": [
+        532,
+        552
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1881,
+        "candidatesTokenCount": 274,
+        "totalTokenCount": 2155,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1743
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Based on the provided video, here is the requested analysis:\n\n**(1) Visible Subjects and Setting**\nThe video displays a series of static, animated scenes depicting a workplace environment. The setting appears to be an office or studio space with various desks, computers, bookshelves, and wall decorations. Throughout the scenes, multiple animated figures are shown in various poses, such as sitting at desks, standing, or interacting with each other.\n\n**(2) Broad Sequence**\nThe video consists of a sequence of static images, each displayed for a few seconds. Each image features a different arrangement of the animated characters within the office setting. The sequence progresses through several distinct scenes, each showing different groupings of characters.\n\n**(3) Apparent Character/Object Motion, Framing, and Transitions**\nThe video is composed of a series of static shots. There is no apparent motion of the characters or objects within each individual scene. The transition between scenes is a simple, abrupt cut from one static image to the next. The framing remains consistent throughout, maintaining a wide view of the office environment.\n\n**(4) Unknowns**\nThe specific identities of the animated characters are not provided. The exact nature of the work being performed by the characters is not explicitly shown, although they appear to be engaged in office-related tasks. The purpose of the changing scenes is not stated."
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "label": "Simple History lower-view long-form comparator / opening 20s",
+      "requested_window_seconds": [
+        0,
+        20
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1959,
+        "candidatesTokenCount": 282,
+        "totalTokenCount": 2241,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1821
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Here is the requested information based on the provided video:\n\n**(1) Visible subjects and setting**\nThe video features two distinct settings. The first is an outdoor, arid, desert-like environment with several military tanks, soldiers in uniform, and a medical gurney. The second setting is an indoor classroom with a teacher in military uniform standing in front of a projection screen, facing a group of students seated at desks.\n\n**(2) Broad sequence**\nThe video begins with an outdoor scene showing tanks and soldiers. It then transitions to an indoor classroom setting where a teacher is presenting information about a tank on a screen. The video ends while the teacher is still presenting in the classroom.\n\n**(3) Apparent character/object motion, framing and transitions**\nThe video uses a hard cut to transition from the outdoor scene to the indoor classroom. In the outdoor scene, tanks are shown moving into position, and soldiers are seen walking or standing near the vehicles. In the indoor scene, the teacher moves their arm to point at the screen, and the students remain seated. The framing is static in both scenes, with no camera movement.\n\n**(4) Unknowns**\nThe specific identities of the soldiers and students are not provided. The exact location of the outdoor setting is not specified. The specific type of tank shown in the classroom projection is not explicitly identified by name within the visual content."
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "label": "Simple History lower-view long-form comparator / middle 20s",
+      "requested_window_seconds": [
+        294,
+        314
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1959,
+        "candidatesTokenCount": 252,
+        "totalTokenCount": 2211,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1821
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "This video window contains the following elements:\n\n**(1) Visible subjects and setting**\nThe video features a series of 2D, side-profile illustrations of military tanks, specifically the M1 Abrams series. The tanks are depicted against solid black or illustrated desert backgrounds.\n\n**(2) Broad sequence**\nThe video begins with a detailed diagram of an M1A1 tank, highlighting its components with labels and arrows. This is followed by a similar diagram of an M1A2 tank. The sequence then transitions to a wider, illustrated scene showing two tanks side-by-side with a group of soldiers standing in front of them. Finally, the video returns to a single, side-profile view of a tank, which remains static for the remainder of the clip.\n\n**(3) Apparent character/object motion, framing and transitions**\nThe video is composed of a series of static images. Transitions between these images are abrupt, with one image replacing the previous one instantly. There is no motion within the individual frames.\n\n**(4) Unknowns**\nThe specific technical specifications or historical context of the tanks beyond what is labeled in the diagrams are not provided. The identities of the soldiers shown in the group scene are not specified."
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "label": "Kelevin million-view mythology long-form discovery / opening 20s",
+      "requested_window_seconds": [
+        0,
+        20
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1959,
+        "candidatesTokenCount": 377,
+        "totalTokenCount": 2336,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1821
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Based on the provided video, here is the requested information:\n\n**1. Visible subjects and setting**\n*   **Subjects:** A stick-figure narrator wearing a yellow hat, a stick-figure woman with a flower crown and green dress, a stick-figure man with a white beard and toga, and a group of various stick-figure characters with distinct features (e.g., one with a single eye, one with wings, one with a crown).\n*   **Setting:** A dark, misty void that transitions to a simple landscape with a blue sky and green ground, followed by a dark, starry night sky over a mountain range.\n\n**2. Broad sequence**\n*   The video begins with a dark, misty void.\n*   A stick-figure narrator appears, followed by the appearance of a stick-figure woman and then a stick-figure man.\n*   The scene shifts to a text-based informational graphic.\n*   The video concludes with a group of stick-figure characters standing in front of a mountain range under a starry sky.\n\n**3. Apparent character/object motion, framing, and transitions**\n*   **Motion:** The stick-figure characters appear to float or stand in place. The narrator moves across the screen.\n*   **Framing:** The video uses a mix of static shots and cuts between different scenes.\n*   **Transitions:** The video uses simple cuts to transition between the different scenes and the informational graphic.\n\n**4. Unknowns**\n*   The specific identities of the stick-figure characters are not explicitly stated within the visual content, although they are presented in a way that suggests they represent mythological figures.\n*   The exact nature of the \"nothing\" or \"chaos\" depicted at the beginning is not visually defined beyond a dark, misty void."
+    },
+    {
+      "video_id": "sW8ZEn4Ce2Y",
+      "label": "Simple History lower-view long-form comparator / ending 20s",
+      "requested_window_seconds": [
+        588,
+        608
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1877,
+        "candidatesTokenCount": 307,
+        "totalTokenCount": 2184,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1739
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Based on the provided video window, here is the requested information:\n\n**(1) Visible subjects and setting**\nThe video features a series of static, animated scenes depicting various office and library environments. The subjects are stylized, two-dimensional human characters shown in different poses, such as sitting at desks with computers, standing in groups, or reading. The settings include a modern office with multiple workstations, a library with floor-to-ceiling bookshelves, and a room with a large map on the wall.\n\n**(2) Broad sequence**\nThe video consists of a sequence of static images, each displayed for several seconds. Each image features a different background setting and a unique list of names overlaid on the screen. The sequence progresses through these different office and library scenes, with each scene remaining static until the transition to the next.\n\n**(3) Apparent character/object motion, framing, and transitions**\nThe video is composed entirely of static shots; there is no character or object motion within the scenes. The framing is consistent, with each scene presented as a wide or medium shot. Transitions between the scenes are abrupt, with the screen briefly blurring or flickering before cutting to the next static image.\n\n**(4) Unknowns**\nThe identities of the individuals depicted in the animations are unknown. The specific purpose or context of the list of names is not explicitly stated within the video window. The exact nature of the transition effects (whether they are intentional stylistic choices or artifacts of the video's creation) is not clear.",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "label": "Kelevin million-view mythology long-form discovery / middle 20s",
+      "requested_window_seconds": [
+        443,
+        463
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1958,
+        "candidatesTokenCount": 371,
+        "totalTokenCount": 2329,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1820
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Based on the provided video, here is the requested information:\n\n**(1) Visible subjects and setting**\n*   **Subjects:** A female stick figure character with black hair wearing a pink dress, a male stick figure character wearing a brown hat, and a male stick figure character with long hair and a beard wearing a tan cloak.\n*   **Settings:** A bright, outdoor landscape with a blue sky and green grass; a dark, red-toned landscape with lightning; and a dark, stone-walled room with a table.\n\n**(2) Broad sequence**\n*   The female character holds a jar in a bright, outdoor setting.\n*   The scene shifts to a dark, red-toned landscape where the female character opens the jar, releasing dark, smoky shapes.\n*   The male character in the hat appears in the dark landscape.\n*   The female character closes the jar, which now emits a bright, golden light.\n*   The scene shifts to a dark, stone-walled room where the bearded male character stands.\n*   The bearded male character lifts a metal cover from a dish on a table, revealing a small, orange-colored figure inside.\n\n**(3) Apparent character/object motion, framing and transitions**\n*   The video consists of a series of static shots that transition through cuts.\n*   In the dark landscape, the female character moves her arms as the jar opens and closes.\n*   In the stone-walled room, the bearded male character moves his arm to lift the metal cover.\n\n**(4) Unknowns**\n*   The specific nature of the objects released from the jar is not clearly defined beyond their dark, smoky appearance.\n*   The identity of the small, orange-colored figure revealed under the metal cover is not clear."
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "label": "What If Stickman tornado long-form discovery / opening 20s",
+      "requested_window_seconds": [
+        0,
+        20
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1959,
+        "candidatesTokenCount": 292,
+        "totalTokenCount": 2251,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1821
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "This video is a static, animated presentation.\n\n**(1) Visible subjects and setting**\nThe video features a cartoon-style stick figure with glasses and brown hair, set against a plain white background that later transitions to a simple outdoor scene with a house, green hills, and a road. Various graphical elements, including a speedometer, color-coded boxes, and arrows, appear throughout the presentation.\n\n**(2) Broad sequence**\nThe video begins with a title card introducing a scale of tornado intensity. The stick figure appears and gestures toward the scale. A speedometer graphic is shown, followed by a scene of a car driving on a road. The scene then transitions to a house, which begins to sustain damage as the sky darkens.\n\n**(3) Apparent character/object motion, framing and transitions**\nThe video uses a static framing technique. The stick figure remains in a relatively fixed position, with occasional arm movements. The speedometer needle moves to indicate a range of speeds. The car moves horizontally across the screen. In the final scene, the house remains stationary while graphical elements (representing debris) move away from the roof, and the sky color shifts from blue to gray-green.\n\n**(4) Unknowns**\nThe specific identity of the stick figure is not provided. The exact nature of the graphical software used to create the animation is not visible. The video does not provide context regarding the specific location or time period being depicted."
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "label": "What If Stickman tornado long-form discovery / middle 20s",
+      "requested_window_seconds": [
+        229,
+        249
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1958,
+        "candidatesTokenCount": 303,
+        "totalTokenCount": 2261,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1820
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Based on the provided video, here is the requested information:\n\n**1. Visible Subjects and Setting**\nThe video features a series of animated and real-world scenes depicting the destructive power of a tornado. Animated subjects include a house, a shopping center, a car, and a stick figure. A real-world scene shows a train derailed on tracks near a tornado. A final graphic displays a color-coded scale ranging from EF0 to EF5.\n\n**2. Broad Sequence**\nThe video begins with an animation showing a house losing its top floor, followed by a real-world shot of a derailed train. It then transitions to animations of a car being thrown and a shopping center sustaining damage. The video concludes with a graphic showing the EF scale, followed by an animation of a stick figure in an underground shelter.\n\n**3. Apparent Character/Object Motion, Framing, and Transitions**\nThe video uses a mix of static shots and simple animations. The animations feature objects moving across the screen, such as the top of a house lifting away, a car flying through the air, and a stick figure appearing in an underground space. Transitions between scenes are abrupt cuts. The framing is generally centered on the primary subject of each scene.\n\n**4. Unknowns**\nThe specific location of the real-world train derailment is not identified. The exact wind speeds or specific meteorological data associated with the EF3 tornado are not provided. The identity of the stick figure is not specified."
+    },
+    {
+      "video_id": "Gfq4UlhSsYg",
+      "label": "What If Stickman tornado long-form discovery / ending 20s",
+      "requested_window_seconds": [
+        459,
+        479
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1870,
+        "candidatesTokenCount": 236,
+        "totalTokenCount": 2106,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          },
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1732
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Here is the requested analysis based on the provided video window:\n\n**1. Visible Subjects and Setting**\nThe video features two animated stick figures: one wearing a blue beanie and goggles, and another wearing glasses and a bowtie. A cartoon tornado character also appears. The background is a simple, light-colored, flat surface.\n\n**2. Broad Sequence**\nThe video begins with the character in the beanie standing next to a framed sign. The character with glasses then appears, and a series of colorful, numbered boxes representing tornado ratings (EF0 through EF6) are displayed. The video concludes with the character with glasses and the tornado character standing together on a green, grassy-looking area.\n\n**3. Apparent Character/Object Motion, Framing, and Transitions**\nThe video is composed of a series of static shots. The characters and objects appear and disappear through simple cuts. The tornado character enters the frame by appearing next to the character with glasses in the final scene.\n\n**4. Unknowns**\nThe specific identities of the characters are not provided. The meaning of the symbols and text displayed on the screen is not explained within the video window.",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    },
+    {
+      "video_id": "t7zjiFULuUc",
+      "label": "Kelevin million-view mythology long-form discovery / ending 20s",
+      "requested_window_seconds": [
+        886,
+        906
+      ],
+      "requested_fps": 1,
+      "status": "http_error",
+      "http_status": 503,
+      "error_status": "UNAVAILABLE",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "label": "Lower-view water bridge long-form comparator from public page / middle 20s",
+      "requested_window_seconds": [
+        478,
+        498
+      ],
+      "requested_fps": 1,
+      "status": "http_error",
+      "http_status": 503,
+      "error_status": "UNAVAILABLE",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "label": "Lower-view water bridge long-form comparator from public page / opening 20s",
+      "requested_window_seconds": [
+        0,
+        20
+      ],
+      "requested_fps": 1,
+      "status": "http_error",
+      "http_status": 503,
+      "error_status": "UNAVAILABLE",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    },
+    {
+      "video_id": "QAeAkiYhid8",
+      "label": "Lower-view water bridge long-form comparator from public page / ending 20s",
+      "requested_window_seconds": [
+        956,
+        976
+      ],
+      "requested_fps": 1,
+      "status": "http_error",
+      "http_status": 503,
+      "error_status": "UNAVAILABLE",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "label": "Million-view reverse bridge example: format ambiguous / opening 20s",
+      "requested_window_seconds": [
+        0,
+        20
+      ],
+      "requested_fps": 1,
+      "status": "ok",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 1959,
+        "candidatesTokenCount": 393,
+        "totalTokenCount": 2352,
+        "promptTokensDetails": [
+          {
+            "modality": "VIDEO",
+            "tokenCount": 1821
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 138
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "model_description": "Here is the analysis based on the provided video:\n\n**1. Visible subjects and setting**\nThe video features a large cargo ship traveling through a waterway that passes over a multi-lane highway. The setting appears to be a coastal or canal area with land on either side of the water. Later in the video, a computer-generated animation shows a wider view of the waterway, land, and traffic. Finally, a different location is shown featuring a large, tall-masted ship passing through an open drawbridge.\n\n**2. Broad sequence**\nThe video begins with an aerial view of a cargo ship passing over a highway. The perspective shifts to a computer-generated animation showing the layout of the waterway and surrounding land. The video concludes with a shot of a tall-masted ship passing through an open drawbridge.\n\n**3. Apparent character/object motion, framing, and transitions**\n*   **Initial shot:** The camera is positioned high above the highway, looking down at the cargo ship as it moves forward, passing over the road. The camera follows the ship's movement.\n*   **Transition:** A cut transitions to a computer-generated animation.\n*   **Animation:** The camera pans over a simulated landscape, showing traffic on the highway and ships in the water.\n*   **Transition:** A cut transitions to a shot of a drawbridge.\n*   **Final shot:** The camera is positioned at water level, looking up at the open drawbridge as the tall-masted ship passes through.\n\n**4. Unknowns**\n*   The specific geographic locations of the waterway and the drawbridge are not identified.\n*   The exact scale of the structures cannot be determined from the video.\n*   The nature of the transition between the first and second shots (e.g., whether it is a seamless edit or a distinct change in perspective) is not explicitly stated."
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "label": "Million-view reverse bridge example: format ambiguous / middle 20s",
+      "requested_window_seconds": [
+        39,
+        59
+      ],
+      "requested_fps": 1,
+      "status": "http_error",
+      "http_status": 503,
+      "error_status": "UNAVAILABLE",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    },
+    {
+      "video_id": "2lHgsn7_LBo",
+      "label": "Million-view reverse bridge example: format ambiguous / ending 20s",
+      "requested_window_seconds": [
+        79,
+        99
+      ],
+      "requested_fps": 1,
+      "status": "http_error",
+      "http_status": 503,
+      "error_status": "UNAVAILABLE",
+      "earlier_attempt": {
+        "http_status": 503,
+        "status": "http_error"
+      }
+    }
+  ],
+  "stills_zip_sha256": "688cd32115d2c6cc871d053c9578388ffb04203db0220cea52daeca9f4a233a5"
+}

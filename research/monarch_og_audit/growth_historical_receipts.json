@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "trusted_session_date_utc": "2026-11-05",
+  "method": "Third-party vidIQ pages retrieved through the page tool. Their pages reported an update on 2026-11-12, later than the trusted session date; these are retrospective provider claims, not independently verified YouTube Studio data or verified current growth. Subscriber changes follow rounded public displays; views are channel-wide and include back catalogue. Period and attribution limitations apply.",
+  "monthly_provider_reported_history": [
+    {
+      "channel": "3D Eye",
+      "url": "https://vidiq.com/youtube-stats/channel/@3d_eyee/",
+      "period": "2026-10",
+      "reported_subscriber_change": 39900,
+      "reported_channel_view_change": 20041365
+    },
+    {
+      "channel": "Discover Inside",
+      "url": "https://vidiq.com/youtube-stats/channel/@discoverinsideworld/",
+      "period": "2026-10",
+      "reported_subscriber_change": 10600,
+      "reported_channel_view_change": 4760372
+    },
+    {
+      "channel": "Kelevin",
+      "url": "https://vidiq.com/youtube-stats/channel/@kelevins/",
+      "period": "2026-10",
+      "reported_subscriber_change": 12000,
+      "reported_channel_view_change": 5283220
+    },
+    {
+      "channel": "Simple History",
+      "url": "https://vidiq.com/youtube-stats/channel/@simplehistory/",
+      "period": "2026-10",
+      "reported_subscriber_change": 10000,
+      "reported_channel_view_change": 12718097
+    }
+  ],
+  "daily_provider_reported_history": [
+    {
+      "channel": "What If Stickman",
+      "url": "https://vidiq.com/youtube-stats/channel/@whatifstickmanexplain/",
+      "rows_reported_utc": [
+        {"date": "2026-10-29", "displayed_subscribers": "442", "displayed_channel_views": "139.78K"},
+        {"date": "2026-11-04", "displayed_subscribers": "2.47K", "displayed_channel_views": "239.82K"}
+      ],
+      "interpretation": "Rounded display values on a provider's retrospective daily page. No exact gain, verified current velocity, audience geography, Studio analytics or particular-video attribution is established."
+    }
+  ]
+}
