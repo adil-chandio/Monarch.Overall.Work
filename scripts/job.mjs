@@ -149,7 +149,20 @@ function render(job) {
   return L.join("\n");
 }
 
+/** Returns true only when the ledger is on disk AND committed AND pushed.
+ *  Anything less is not durable, and callers that matter (`pause`) must treat
+ *  a false return as a blocker rather than a warning. */
+function pathIsTracked(id) {
+  try {
+    execFileSync("git", ["ls-files", "--error-unmatch", `jobs/${id}.json`], { cwd: ROOT, stdio: "pipe" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function save(job, note) {
+  let pushed = false;
   mkdirSync(JOBS, { recursive: true });
   job.updated = new Date().toISOString();
   if (note) job.log.push({ at: job.updated, what: note });
@@ -171,12 +184,20 @@ function save(job, note) {
       execFileSync("git", ["commit", "-q", "-m", `job(${job.id}): ${job.status} ${job.done}/${job.total} — checkpoint`], { cwd: ROOT, stdio: "pipe" });
       console.log(`job: committed jobs/${job.id}.*`);
     }
+    if (!pathIsTracked(job.id)) {
+      console.error(
+        "job: WARNING jobs/ is not tracked by git — the ledger is only in the sandbox.\n" +
+          "     Check .gitignore and `git status jobs/`.",
+      );
+      return false;
+    }
     // A commit in the sandbox is still in the sandbox. Push, or the ledger has
     // exactly the durability of the thing it was written to protect.
     const branch = execFileSync("git", ["rev-parse", "--abbrev-ref", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
     try {
       execFileSync("git", ["push", "-q", "origin", `HEAD:${branch}`], { cwd: ROOT, stdio: "pipe" });
       console.log(`job: pushed to origin/${branch}`);
+      pushed = true;
     } catch {
       console.error(
         `job: WARNING committed locally but NOT pushed (branch ${branch}).\n` +
@@ -186,7 +207,9 @@ function save(job, note) {
     }
   } catch (e) {
     console.error("job: WARNING could not commit the ledger — check `git status` before you stop");
+    return false;
   }
+  return pushed;
 }
 
 /* ---------- commands ------------------------------------------------------ */
@@ -320,8 +343,16 @@ if (cmd === "pause") {
   job.status = "paused";
   const q = flag("q");
   if (q) job.log.push({ at: new Date().toISOString(), what: `awaiting operator: ${q}` });
-  save(job, "paused");
-  console.log(`job: ${ID} paused safely. State is committed; a reset loses nothing.`);
+  const durable = save(job, "paused");
+  if (!durable) {
+    console.error(
+      "job: REFUSING to call this paused. The ledger was written but is NOT durable\n" +
+        "     (not committed, or not pushed, or jobs/ is untracked).\n" +
+        "     Fix it with: git add -A jobs && git commit -m 'job checkpoint' && bash scripts/git-push-retrying.sh <branch>",
+    );
+    process.exit(1);
+  }
+  console.log(`job: ${ID} paused safely. State is committed and pushed; a reset loses nothing.`);
   if (q) console.log(`job: question for the operator: ${q}`);
   console.log("job: remember to `git push` — a commit that only exists locally is still in the sandbox.");
   process.exit(0);
