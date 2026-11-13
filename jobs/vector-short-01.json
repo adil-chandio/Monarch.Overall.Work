@@ -6,17 +6,28 @@
   "done": 12,
   "unit": "steps",
   "created": "2026-11-13T09:32:50.750Z",
-  "updated": "2026-11-13T09:33:11.259Z",
+  "updated": "2026-11-13T09:33:12.645Z",
   "resume": {
     "next_command": "",
     "notes": ""
   },
-  "artifacts": [],
+  "artifacts": [
+    {
+      "path": "/tmp/homotherium-1min.mp4",
+      "bytes": 1960000,
+      "sha256": "49d8ecdd19bd36e5c63c39811ffecce857860d809ea1107605b7298a018129a1",
+      "drive_id": null
+    }
+  ],
   "decisions": [],
   "log": [
     {
       "at": "2026-11-13T09:32:50.781Z",
       "what": "started: Flat-vector motion-graphics short, ApexMorph grammar, saber-toothed cub, 50s"
+    },
+    {
+      "at": "2026-11-13T09:33:12.645Z",
+      "what": "artifact /tmp/homotherium-1min.mp4 1.9 MB sha256 49d8ecdd19bd"
     }
   ]
 }
