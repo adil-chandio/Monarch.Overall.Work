@@ -13,10 +13,10 @@ that state are listed under **To do** at the bottom.
 | | |
 |---|---|
 | Files listed here | 26 |
-| Media inside Git (whole repo) | 1.06 GB across 184 files |
-| Media inside Git, this folder only | 784.0 MB |
-| Recorded in an external location | 6 |
-| Tracking to-do (>20 MB, no external copy) | 12 |
+| Media inside Git (whole repo) | 1.03 GB across 179 files |
+| Media inside Git, this folder only | 616.6 MB |
+| Recorded in an external location | 16 |
+| Tracking to-do (>20 MB, no external copy) | 10 |
 
 ## Rules these rows obey
 
@@ -38,16 +38,16 @@ that state are listed under **To do** at the bottom.
 | `Last-Mammoths-Opening-01-3D-1080p.mp4` | 45.3 MB | video | yes | **UNRECORDED** | `7102afe463cb` |
 | `MON-DEMO26_v3_Master_60fps.enc` | 42.2 MB | video | yes | **UNRECORDED** | `15daeebe1171` |
 | `MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4` | 42.2 MB | video | yes | **UNRECORDED** | `6b0addb742c8` |
-| `Extinct_Life_EP01_Lost_World_1080p.mp4` | 28.5 MB | video | yes | **UNRECORDED** | `ce49a107621e` |
-| `Extinct_Life_Opening_25D_Cinema_Polish_45s_1080p.mp4` | 20.1 MB | video | yes | **UNRECORDED** | `90be37109e63` |
-| `Extinct_Life_24s_Continuity_Proof_1080p.mp4` | 18.6 MB | video | yes | **UNRECORDED** | `a598f9a85202` |
-| `Extinct-Life-V15-Continuity-Rebuild-1080x1920.mp4` | 17.7 MB | video | yes | **UNRECORDED** | `20307333d5e9` |
-| `Extinct-Life-V14-Mastodon-Short-1080x1920.mp4` | 17.1 MB | video | yes | **UNRECORDED** | `a0fcd8196b76` |
-| `Extinct-Life-V16-Evolving-Story-1080x1920.mp4` | 14.7 MB | video | yes | **UNRECORDED** | `f53a3266f92d` |
-| `Extinct_Life_Opening_25D_Amber_Atlas_45s_1080p.mp4` | 14.3 MB | video | yes | **UNRECORDED** | `4e52cf91eb29` |
-| `Extinct_Life_Opening_V2_45s_1080p.mp4` | 13.4 MB | video | yes | **UNRECORDED** | `b71cae9520d7` |
-| `Homotherium-Cub-Premium-Fast-Cut-1080x1920.mp4` | 12.1 MB | video | yes | **UNRECORDED** | `be1a2c936fb0` |
-| `Homotherium-Cub-Clean-Fast-Cut-1080x1920.mp4` | 10.9 MB | video | yes | **UNRECORDED** | `d626152ff81b` |
+| `Extinct_Life_EP01_Lost_World_1080p.mp4` | 28.5 MB | video | no | Drive 3d animation · 1Xr3OnOKaUMkquH5Kan1Sej8O76-DrPur ✓ | `ce49a107621e` |
+| `Extinct_Life_Opening_25D_Cinema_Polish_45s_1080p.mp4` | 20.1 MB | video | no | Drive 3d animation · 1Dn-2YKA0dRDkdOj0_jHrDytMp1RhdcTu ✓ | `90be37109e63` |
+| `Extinct_Life_24s_Continuity_Proof_1080p.mp4` | 18.6 MB | video | no | Drive 3d animation · 1fenSnvqZVlh0SF9DvulWXSpYe2KSaUfb ✓ | `a598f9a85202` |
+| `Extinct-Life-V15-Continuity-Rebuild-1080x1920.mp4` | 17.7 MB | video | no | Drive 3d animation · 1NaKkCJlLUqsRLuODzI5eUkm0CS_1code ✓ | `20307333d5e9` |
+| `Extinct-Life-V14-Mastodon-Short-1080x1920.mp4` | 17.1 MB | video | no | Drive 3d animation · 1SxRy16Ymg0ZG32glRABCGgYfVmqG80AG ✓ | `a0fcd8196b76` |
+| `Extinct-Life-V16-Evolving-Story-1080x1920.mp4` | 14.7 MB | video | no | Drive 3d animation · 1GgN7sar-T03khChhnAGunZ181Jhr-v0s ✓ | `f53a3266f92d` |
+| `Extinct_Life_Opening_25D_Amber_Atlas_45s_1080p.mp4` | 14.3 MB | video | no | Drive 3d animation · 1xUXE3W-a1J-eXfEW_Yg-f0B9o9ZHGR9d ✓ | `4e52cf91eb29` |
+| `Extinct_Life_Opening_V2_45s_1080p.mp4` | 13.4 MB | video | no | Drive 3d animation · 1sNRVdGjBMcvIIgQEFRgP-_-g-ln-YaLd ✓ | `b71cae9520d7` |
+| `Homotherium-Cub-Premium-Fast-Cut-1080x1920.mp4` | 12.1 MB | video | no | Drive 3d animation · 1hO7OH2qvb0Od8_AWSwbA9TXeN5ASaxQQ ✓ | `be1a2c936fb0` |
+| `Homotherium-Cub-Clean-Fast-Cut-1080x1920.mp4` | 10.9 MB | video | no | Drive 3d animation · 1m0Ep61QOked2T6E72g82DIxSjKJyVfP4 ✓ | `d626152ff81b` |
 | `Last-Mammoths-Genetics-3D-Scene-Test.mp4` | 7.0 MB | video | no | Drive 3d animation · 1RSCqnJx7CmhPpOLl7BCIlJdLkDFQx46r ✓ | `b1f028b7df63` |
 | `Homotherium-Cub-This-Saber-Toothed-Cub-Still-Has-Its-Fur-1080x1920.mp4` | 6.8 MB | video | no | Drive 3d animation · 1zPhrMr_feoaVWRm7vdiSGaIs_VU7-xlC ✓ | `cd6402bff52d` |
 | `Last-Mammoths-Genetics-3D-Recut-Test.mp4` | 6.6 MB | video | no | Drive 3d animation · 1MRkZml5uKb0Zf4lAyuOZuCbeqjtKKEY7 ✓ | `cc4b9412cd8b` |
@@ -57,7 +57,7 @@ that state are listed under **To do** at the bottom.
 
 ## To do — media over 20 MB with no recorded external home
 
-**12 files, 665.2 MB.** Each needs one of:
+**10 files, 616.6 MB.** Each needs one of:
 upload to YouTube Unlisted, move into the Drive folder named in `config/drive-map.json`, or an explicit decision to keep it in Git.
 
 - [ ] `Last-Mammoths-Review-Reel-13min-720p.mp4` — 94.8 MB
@@ -70,8 +70,6 @@ upload to YouTube Unlisted, move into the Drive folder named in `config/drive-ma
 - [ ] `Last-Mammoths-Opening-01-3D-1080p.mp4` — 45.3 MB
 - [ ] `MON-DEMO26_v3_Master_60fps.enc` — 42.2 MB
 - [ ] `MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4` — 42.2 MB
-- [ ] `Extinct_Life_EP01_Lost_World_1080p.mp4` — 28.5 MB
-- [ ] `Extinct_Life_Opening_25D_Cinema_Polish_45s_1080p.mp4` — 20.1 MB
 
 ## Repo-wide media by folder
 
@@ -80,13 +78,13 @@ reports on, kept here so it is readable without running anything.
 
 | Folder | Media files | Size |
 |---|---:|---:|
-| `deliverables` | 25 | 815.6 MB |
+| `deliverables` | 20 | 784.0 MB |
 | `production` | 91 | 157.1 MB |
 | `refs` | 14 | 73.8 MB |
 | `public` | 6 | 33.5 MB |
 | `gpu-engine` | 17 | 3.4 MB |
 | `docs` | 31 | 2.7 MB |
-| **all folders** | **184** | **1.06 GB** |
+| **all folders** | **179** | **1.03 GB** |
 
 **Why the images are not simply ignored:** 20 of the 42 workflows that commit run `git add` on a media folder.
 An ignore rule would turn those into failed commits. Workflow uploads must change first — see
