@@ -6,7 +6,7 @@
   "done": 16,
   "unit": "steps",
   "created": "2026-11-13T10:11:06.381Z",
-  "updated": "2026-11-13T10:11:38.444Z",
+  "updated": "2026-11-13T11:07:16.464Z",
   "resume": {
     "next_command": "extend scripts/livyatan-film.py with the remaining reference devices: counting grid, fake rewind UI, water-surface shots; then rebuild at 1080p for upload",
     "notes": ""
@@ -18,6 +18,12 @@
       "sha256": "43c061d16f56e62a8aca4a1b71cf67d332a62ae40753708998f472834ce327c8",
       "drive_id": "12Evyr8qBt4MeIi8LRzhq54MmkRvJaN7b",
       "uploaded_at": "2026-11-13T10:11:35.553Z"
+    },
+    {
+      "path": "/tmp/Livyatan-FINAL-66s-720p.mp4",
+      "bytes": 9275955,
+      "sha256": "ab51d8a2f24e4f3bd0576c6ca65d4913a9a77a7cfcdd2cc6129a0076fe6f81f5",
+      "drive_id": null
     }
   ],
   "decisions": [],
@@ -37,6 +43,10 @@
     {
       "at": "2026-11-13T10:11:38.444Z",
       "what": "paused"
+    },
+    {
+      "at": "2026-11-13T11:07:16.464Z",
+      "what": "artifact /tmp/Livyatan-FINAL-66s-720p.mp4 8.8 MB sha256 ab51d8a2f24e"
     }
   ]
 }
