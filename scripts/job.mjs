@@ -288,8 +288,17 @@ if (cmd === "uploaded") {
   const rel = argv[2] && !argv[2].startsWith("--") ? argv[2] : null;
   if (!rel) die("uploaded needs a path");
   const abs = resolve(ROOT, rel);
-  const a = job.artifacts.find((x) => x.path === abs);
-  if (!a) die(`${rel} was never registered — run \`artifact\` first so its sha256 exists`);
+  // Accept either the path that was registered or just its basename. The error a
+  // bare filename produced was "was never registered", which reads like the
+  // artifact step failed when in fact the lookup was too literal. Same trap as
+  // the freeze bug: the message named the wrong problem.
+  const a =
+    job.artifacts.find((x) => x.path === abs) ||
+    job.artifacts.find((x) => basename(x.path) === basename(rel));
+  if (!a) {
+    const known = job.artifacts.map((x) => basename(x.path)).join(", ") || "(none)";
+    die(`${rel} was never registered — run \`artifact\` first so its sha256 exists\n     registered: ${known}`);
+  }
   const id = flag("drive-id");
   if (!id) die("--drive-id is required. A file without a Drive id is still one reset away from gone.");
   const claimed = flag("sha256");
