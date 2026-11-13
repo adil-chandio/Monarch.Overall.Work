@@ -107,14 +107,12 @@ production/extinct-life/*/assets/
 *.iso
 *.dmg
 
-# --- the exceptions: small, load-bearing, referenced by the app ------------
-!public/thumbnails/**
-!public/proof/**
-!public/showreel/**
-!public/demo-poster.jpg
 
 # --- working folders that hold media but are not media -------------------
-references/
+# NOTE: must stay root-anchored. A bare 'references/' also swallows
+# skills/*/references/ — 1,149 files of documented skill material (*.md, *.js)
+# that are knowledge, not media.
+/references/
 refs/**/*.enc
 google_drive/
 image-search/
@@ -125,3 +123,37 @@ production/extinct-life/*/renders/
 production/extinct-life/*/frames/
 production/extinct-life/*/output/
 production/extinct-life/*/working/
+
+# ---------------------------------------------------------------------------
+# EXCEPTIONS — must be the LAST thing in this file. Git applies the last
+# matching pattern, so a negation placed above *.mp4 is dead code. Measured:
+# the approved proof master was being ignored by line 68 (*.mp4) even though
+# it sits on config/media-policy.json keep_in_git.paths.
+# ---------------------------------------------------------------------------
+!public/thumbnails/**
+!public/proof/**
+!public/showreel/**
+!public/demo-poster.jpg
+!deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4
+!docs/research/**/*.csv.gz
+
+# ---------------------------------------------------------------------------
+# RENDER EVIDENCE — the bulk of the remaining tracked bytes.
+# Measured 2026-11-13: 560 of 771 tracked images (176 MB) are frame extracts
+# from films that already have a released master. The text evidence stays:
+#   EVIDENCE.json, QC.json, *.csv, *.md, *.py  -> all still tracked
+# The JPGs are a rendering of numbers already stored as text.
+# Rule for a scripted extraction folder: generator + pinned sha256 must exist
+# in config/media-policy.json -> regenerable_evidence.
+# Workflow-produced stills (film-*/inspection/) are output, not evidence.
+# ---------------------------------------------------------------------------
+production/extinct-life/film-*/inspection/
+production/extinct-life/film-*/encoded-inspection/
+production/extinct-life/film-*/native-meshes/*.glb
+production/extinct-life/review-v*/full-resolution/
+production/extinct-life/review-v*/seconds/
+production/extinct-life/review-v*/motion/
+production/extinct-life/longform-mammoth/**/inspection/
+production/extinct-life/longform-mammoth/**/stills/
+production/extinct-life/homotherium-short/inspection/
+gpu-engine/keyframes/

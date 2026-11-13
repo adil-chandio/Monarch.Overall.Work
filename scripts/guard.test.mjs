@@ -248,4 +248,46 @@ test("the workflow growth mechanism is measured, not assumed", () => {
   );
 });
 
+/* ---------- the gitignore traps that were actually found ---------- */
+
+const { execFileSync } = await import("node:child_process");
+const ignored = (p) => {
+  try {
+    execFileSync("git", ["check-ignore", "-q", "--no-index", p], { cwd: ROOT });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+test("keep_in_git files are never caught by an ignore rule", () => {
+  for (const p of policy.keep_in_git.paths) {
+    // directory-shaped globs cannot be tested literally; test a file inside them
+    const probe = p.endsWith("/") ? p + "__probe__.jpg" : p.replace("**/", "");
+    assert.ok(!ignored(probe), `keep_in_git path is being ignored: ${probe}`);
+  }
+});
+
+test("skills/*/references is not swallowed by the root references/ rule", () => {
+  // Measured 2026-11-13: a bare `references/` ignored 1,149 skill files.
+  assert.ok(
+    !ignored("skills/ffmpeg-skill/references/scripts.md"),
+    "the root references/ rule is eating skills/*/references/ again"
+  );
+  assert.ok(ignored("references/some-video.mp4"), "the root references/ folder is no longer guarded");
+});
+
+test("render evidence is ignored but its text evidence is not", () => {
+  assert.ok(ignored("production/extinct-life/review-v14/full-resolution/000.jpg"), "extracted frames are not ignored");
+  assert.ok(!ignored("production/extinct-life/review-v14/EVIDENCE.json"), "EVIDENCE.json must stay tracked");
+  assert.ok(!ignored("production/extinct-life/review-v14/every-frame-metrics.csv"), "the numbers must stay tracked");
+});
+
+test("the approved public proof master is exempt", () => {
+  assert.ok(
+    !ignored("deliverables/MON-DEMO26_Proof_Over_Promises_v3_1080p60_Master.mp4"),
+    "the one approved master is being ignored despite being on keep_in_git"
+  );
+});
+
 console.log(`\n${passed} guard tests passed`);

@@ -1,6 +1,6 @@
 # Deliverables index
 
-Generated 2026-11-12 by `node scripts/build-deliverables-index.mjs`. **Do not edit by hand** — regenerate.
+Generated 2026-11-13 by `node scripts/build-deliverables-index.mjs`. **Do not edit by hand** — regenerate.
 
 This file is the reason media can live outside Git without being lost. Every render gets one row: what it is,
 how many bytes, its content hash, whether Git still carries it, and where the surviving copy lives.
