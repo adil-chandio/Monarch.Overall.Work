@@ -14,8 +14,8 @@ that state are listed under **To do** at the bottom.
 |---|---|
 | Files listed here | 26 |
 | Media inside Git (whole repo) | 1.06 GB across 185 files |
-| Media inside Git, this folder only | 816.2 MB |
-| Recorded in an external location | 0 |
+| Media inside Git, this folder only | 815.6 MB |
+| Recorded in an external location | 1 |
 | Tracking to-do (>20 MB, no external copy) | 12 |
 
 ## Rules these rows obey
@@ -53,7 +53,7 @@ that state are listed under **To do** at the bottom.
 | `Last-Mammoths-Genetics-3D-Recut-Test.mp4` | 6.6 MB | video | yes | **UNRECORDED** | `cc4b9412cd8b` |
 | `Extinct-Life-V14-YouTube-Launch-Kit.zip` | 5.9 MB | archive | yes | **UNRECORDED** | `67db480950d4` |
 | `Last-Mammoths-3D-Isolation-Test-22s.mp4` | 5.3 MB | video | yes | **UNRECORDED** | `09583cfca74e` |
-| `Last-Mammoths-Gait-Test-3s.mp4` | 612 KB | video | yes | **UNRECORDED** | `a7603a2592cb` |
+| `Last-Mammoths-Gait-Test-3s.mp4` | 612 KB | video | no | Drive 3d animation · 1BxRaf5lucFswbBvAJahUelm4r6YMgzQd ✓ | `a7603a2592cb` |
 
 ## To do — media over 20 MB with no recorded external home
 

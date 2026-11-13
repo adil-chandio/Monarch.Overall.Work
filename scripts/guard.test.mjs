@@ -290,4 +290,36 @@ test("the approved public proof master is exempt", () => {
   );
 });
 
+test("a file released from Git must have a Drive copy with a matching hash", () => {
+  const idx = readFileSync(resolve(ROOT, "deliverables/INDEX.md"), "utf8");
+  const driveNames = new Map();
+  for (const folder of drive.folders ?? []) {
+    for (const f of folder.currently_holds ?? []) {
+      if (f.name) driveNames.set(f.name, f.sha256 ?? null);
+    }
+  }
+  // every file the index marks as NOT in Git and NOT recorded is a to-do, which
+  // is allowed — but anything marked as having a Drive copy must match its hash
+  let checked = 0;
+  for (const line of idx.split("\n")) {
+    const m = line.match(/^\| `([^`]+)` \| [^|]+ \| [^|]+ \| no \| Drive [^|·]+·[^|]+\| `([0-9a-f]{12})` \|$/);
+    if (!m) continue;
+    const [, name, shortHash] = m;
+    const known = driveNames.get(name);
+    assert.ok(known, `${name} is listed with a Drive copy but is not in config/drive-map.json`);
+    assert.ok(known.startsWith(shortHash), `${name} hash in the index does not match drive-map.json`);
+    checked++;
+  }
+  assert.ok(checked >= 1, "no fully-migrated file was verified — the migration loop is untested");
+});
+
+test("drive-map records the migration precedent with both hashes", () => {
+  const p = policy.migration_precedent;
+  assert.ok(p, "migration_precedent missing — the loop has never been proven end to end");
+  assert.equal(p.sha256_local, p.sha256_drive, "local and Drive hashes disagree");
+  assert.match(p.sha256_local, /^[0-9a-f]{64}$/);
+  assert.ok(p.drive_id && p.drive_id.length > 20, "precedent has no real Drive id");
+  assert.ok(p.result.includes("remains on disk"), "the precedent must state the file stayed on disk");
+});
+
 console.log(`\n${passed} guard tests passed`);

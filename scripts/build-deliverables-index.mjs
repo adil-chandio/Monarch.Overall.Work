@@ -40,13 +40,19 @@ for (const [kind, exts] of Object.entries(POLICY.media_extensions)) {
  * Only entries verified against a live Drive listing on 2026-11-13 live here.
  * Everything else stays UNRECORDED — the index is not allowed to guess.
  * --------------------------------------------------------------------------*/
-const KNOWN_DRIVE = new Map(Object.entries({
-  // Drive file name -> folder it was observed in
-  "THUMB-1-A-they-were-still-here-1920x1080.jpg": { folder: "Metadeta+title+thumb", id: "1jGcXgWBCst4v9gTBUjXFghTazbGoB025" },
-  "THUMB-2-D-no-verdict-1920x1080.jpg": { folder: "Metadeta+title+thumb", id: "140DMoxQvZv2YgGsSS3ykFeFE3YUFOJgG" },
-  "THUMB-3-B-what-killed-them-1920x1080.jpg": { folder: "Metadeta+title+thumb", id: "1eicZ5Jbc1o3LeOV1y2hNySv8o8OLEV5w" },
-  "THUMB-4-C-one-genome-SPARE-1920x1080.jpg": { folder: "Metadeta+title+thumb", id: "135vtRQl9fJ-Dz4waFYxyws8p_wbjNmLC" },
-}));
+/** Every Drive copy we actually know about, read from config/drive-map.json.
+ *  Hardcoding a second list here is how the two drift apart. */
+const KNOWN_DRIVE = new Map();
+for (const folder of DRIVE.folders ?? []) {
+  for (const f of folder.currently_holds ?? []) {
+    if (!f.name || !f.drive_id) continue;
+    KNOWN_DRIVE.set(f.name, {
+      folder: folder.name,
+      id: f.drive_id,
+      sha256: f.sha256 ?? null,
+    });
+  }
+}
 
 function git(args) {
   return execFileSync("git", args, { cwd: ROOT, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
@@ -188,7 +194,12 @@ lines.push("|---|---:|---|---|---|---|");
 for (const r of rows.sort((a, b) => b.bytes - a.bytes)) {
   const shortHash = r.hash ? r.hash.slice(0, 12) : r.status === "missing" ? "—" : "n/a";
   const whereCell = r.where === "UNRECORDED" ? "**UNRECORDED**" : r.where;
-  lines.push(`| \`${r.name}\` | ${human(r.bytes)} | ${r.kind} | ${r.isTracked ? "yes" : "no"} | ${whereCell} | \`${shortHash}\` |`);
+    const matchMark = (() => {
+    const known = KNOWN_DRIVE.get(r.name);
+    if (!known?.sha256 || !r.hash) return "";
+    return known.sha256 === r.hash ? " ✓" : " ✗ HASH MISMATCH";
+  })();
+  lines.push(`| \`${r.name}\` | ${human(r.bytes)} | ${r.kind} | ${r.isTracked ? "yes" : "no"} | ${whereCell}${matchMark} | \`${shortHash}\` |`);
 }
 
 lines.push("");

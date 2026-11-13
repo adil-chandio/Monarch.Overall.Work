@@ -230,5 +230,16 @@
     "of_total_committing": 42,
     "measured_by": "node scripts/check-workflow-media.mjs",
     "worst_offender": "extinct-feature-3d.yml does `git add deliverables/Extinct_Life_3D_Chapter03_Production_1080p.mp4` — a video file added to Git by name, deliberately, in a workflow"
+  },
+  "migration_precedent": {
+    "date": "2026-11-13",
+    "file": "deliverables/Last-Mammoths-Gait-Test-3s.mp4",
+    "bytes": 626489,
+    "sha256_local": "a7603a2592cb8fa71bf26b82b2096f0970d5a37ce0e91ef8897b62c3e66d3d3b",
+    "sha256_drive": "a7603a2592cb8fa71bf26b82b2096f0970d5a37ce0e91ef8897b62c3e66d3d3b",
+    "drive_id": "1BxRaf5lucFswbBvAJahUelm4r6YMgzQd",
+    "drive_folder": "1DreqKGZvPHTFch0lqFtphArF-b1guVlS (Monarch Extinct Channel / 3d animation)",
+    "result": "git rm --cached ran; file remains on disk at the same path; Drive copy verified byte-for-byte by sha256",
+    "why_this_matters": "proves the whole loop end to end before touching 25 more files: upload -> verify hash -> release from Git -> file still present on disk"
   }
 }
