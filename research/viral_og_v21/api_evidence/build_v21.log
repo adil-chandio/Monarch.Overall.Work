@@ -1,5 +1,5 @@
 resolved 35/37 screenshot channels; unresolved 2
-  [1/35] Ink Explainer            n= 41 med=      5,260 out=11 verified=True (3/6)
+  [1/35] Ink Explainer            n=  9 med=        343 out=3 verified=True (3/6)
   [2/35] Zenn                     n= 39 med=     32,159 out=11 verified=True (2/2)
   [3/35] Axen                     n= 28 med=     13,645 out=6 verified=True (2/2)
   [4/35] Barely Evolved           n=  5 med=    238,429 out=2 verified=True (3/3)
@@ -9,23 +9,23 @@ resolved 35/37 screenshot channels; unresolved 2
   [8/35] Mack                     n= 17 med=        141 out=4 verified=False (1/3)
   [9/35] Simple Paint             n=100 med=    368,086 out=18 verified=True (2/2)
   [10/35] Good Enough              n=100 med=     50,680 out=24 verified=True (2/2)
-  [11/35] If Humans                n= 38 med=    134,573 out=8 verified=True (2/2)
+  [11/35] If Humans                n= 38 med=    134,582 out=8 verified=True (2/2)
   [12/35] Hypothetically           n= 41 med=    382,445 out=7 verified=True (2/2)
   [13/35] Relatos Pintados         n= 33 med=      6,848 out=8 verified=False (1/5)
   [14/35] My Chaotic Stories       n= 24 med=      4,421 out=8 verified=True (3/3)
-  [15/35] StickFigure Explains     n= 18 med=     32,303 out=4 verified=True (10/17)
-  [16/35] Day One Films            n= 23 med=     67,747 out=5 verified=True (10/10)
-  [17/35] Monk Mode Films          n= 23 med=     58,857 out=6 verified=True (7/7)
+  [15/35] StickFigure Explains     n= 18 med=     32,314 out=4 verified=True (10/17)
+  [16/35] Day One Films            n= 23 med=     67,782 out=5 verified=True (10/10)
+  [17/35] Monk Mode Films          n= 23 med=     58,870 out=6 verified=True (7/7)
   [18/35] Last Soul                n=  4 med=         10 out=0 verified=True (2/4)
-  [19/35] Zoodle                   n= 47 med=     61,523 out=12 verified=True (2/2)
+  [19/35] Zoodle                   n= 47 med=     61,586 out=12 verified=True (2/2)
   [20/35] The Blue Wilds           n= 46 med=        945 out=13 verified=True (2/2)
   [21/35] ApexMorph                n=  7 med=     65,667 out=3 verified=True (6/6)
   [22/35] The Curious Kid          n= 37 med=     12,869 out=13 verified=True (2/2)
   [23/35] Bluntly Explained        n= 29 med=    110,104 out=8 verified=True (1/1)
-  [24/35] Unknown Frequencies      n= 24 med=    362,401 out=3 verified=True (1/1)
-  [25/35] Kaktus                   n=  2 med=  1,190,592 out=0 verified=True (1/1)
+  [24/35] Unknown Frequencies      n= 24 med=    362,410 out=3 verified=True (1/1)
+  [25/35] Kaktus                   n=  2 med=  1,190,815 out=0 verified=True (1/1)
   [26/35] TALEYE                   n= 24 med=        315 out=8 verified=True (1/2)
-  [27/35] Primate Economics        n= 30 med=    296,985 out=10 verified=True (7/7)
+  [27/35] Primate Economics        n= 30 med=    296,986 out=10 verified=True (7/7)
   [28/35] how really?              n= 11 med=     89,684 out=3 verified=True (5/5)
   [29/35] AnimeAI Boost            n=  0 med=          0 out=0 verified=False (0/2)
   [30/35] The Stickman Scientist   n=100 med=      1,342 out=5 verified=True (3/3)
@@ -34,9 +34,9 @@ resolved 35/37 screenshot channels; unresolved 2
   [33/35] Beyond the Obvious       n=  7 med=          6 out=1 verified=False (1/5)
   [34/35] RAOUL Explains           n= 11 med=        758 out=4 verified=True (3/3)
   [35/35] Mysterious Things (Unsol n= 40 med=    110,659 out=7 verified=True (1/1)
-done 255.5s | channels 35 | catalogue 1139 | unique 2029 | outliers 211 | thumbs 30 | captions {'http_blocked': 12} | comments 240
+done 264.7s | channels 35 | catalogue 1107 | unique 2009 | outliers 203 | thumbs 30 | captions {'http_blocked': 12} | comments 240
 {
- "generated_utc": "2026-11-13T07:36:00Z",
+ "generated_utc": "2026-11-13T07:51:47Z",
  "key_present": true,
  "secret_value_printed_or_stored": false,
  "input": "user's Google Drive swipe file (71 screenshots) -> drive_swipe_index.json",
@@ -51,24 +51,25 @@ done 255.5s | channels 35 | catalogue 1139 | unique 2029 | outliers 211 | thumbs
   "Mack",
   "Relatos Pintados"
  ],
- "catalogue_videos": 1139,
+ "identity_size_contradictions": [],
+ "catalogue_videos": 1107,
  "lanes": 36,
- "lane_rows": 945,
- "unique_videos": 2029,
- "niche_outliers_3x": 211,
+ "lane_rows": 956,
+ "unique_videos": 2009,
+ "niche_outliers_3x": 203,
  "thumbnail_stats": 30,
  "caption_attempts": 12,
  "caption_status_counts": {
   "http_blocked": 12
  },
  "comments_fetched": 240,
- "quota_used_approx": 120,
+ "quota_used_approx": 121,
  "quota_calls": {
   "channels": 7,
   "playlistItems": 41,
-  "videos": 60,
+  "videos": 61,
   "commentThreads": 12
  },
- "elapsed_s": 255.5,
+ "elapsed_s": 264.7,
  "boundary": "Public Data API metadata + public thumbnails + public caption text only. No video/audio download, no frame inspection, no private retention/CTR/RPM, no invented transcripts, no causal claim, no upload/monetisation claim."
 }
