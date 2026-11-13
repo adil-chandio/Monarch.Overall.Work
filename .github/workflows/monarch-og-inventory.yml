@@ -1,6 +1,8 @@
 name: Inspect shared reference archive without extracting
 on:
-  workflow_dispatch:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/monarch-og-inventory.yml']
 permissions:
   contents: write
 jobs:
