@@ -33,8 +33,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from yt_intel import client
-from research.viral_og_v21 import discovery_v21 as disc, forensic, thumbprint  # noqa: E402
+from yt_intel import client, forensic, thumbprint  # noqa: E402
+
+sys.path.insert(0, str(ROOT / "research" / "viral_og_v21"))
+import discovery_v21 as disc  # noqa: E402
 
 BASE = ROOT / "research" / "viral_og_v21"
 OUT = BASE / "api_evidence"
