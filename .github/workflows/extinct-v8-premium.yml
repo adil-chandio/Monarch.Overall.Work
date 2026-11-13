@@ -115,7 +115,7 @@ jobs:
             .cache/extinct-v8/mix.wav
             .cache/extinct-v8/audio-QC.json
           include-hidden-files: true
-          retention-days: 3
+          retention-days: 90
   pictures:
     if: true
     needs: lookdev
@@ -149,9 +149,22 @@ jobs:
           name: v8-native-${{ matrix.part }}
           path: .cache/extinct-v8/part-*.mp4
           include-hidden-files: true
-          retention-days: 3
+          # 90 is GitHub's free maximum. It was 3. Those artifacts are the
+          # expensive part of this workflow — 30 shards, ~31 MB of rendered
+          # video. A 3-day window means any failure in the final `assemble`
+          # step throws away two hours of render and forces a full re-run.
+          # Measured 2026-11-13: assemble never started, the run was cancelled,
+          # and the only reason the work was not lost was that the artifacts
+          # had not yet expired.
+          retention-days: 90
   assemble:
     needs: [pictures, audio]
+    # `always()` so this job still runs when it is reached via re-run-failed-jobs
+    # or when a matrix leg was cancelled after the others succeeded. Without it
+    # GitHub skips the whole job the moment `needs` is not a clean success, and
+    # the 30 shards that DID render are never assembled — which is exactly what
+    # happened on run 43371207707: pictures 0-29 all green, assemble never started.
+    if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -171,8 +184,29 @@ jobs:
         with:
           name: v8-narration-priority-mix
           path: .cache/extinct-v8
-      - run: .venv/bin/python production/extinct-life/film-v8-premium/finish.py --assemble
+      - name: Assemble the film from the rendered shards
+        id: assemble
+        run: .venv/bin/python production/extinct-life/film-v8-premium/finish.py --assemble
+
+      # Fail here, with the right words, rather than three steps later with
+      # "gh release create: no such file" — which names the wrong problem and
+      # sends the next person looking at the release step.
+      - name: Confirm the assembled film exists
+        id: film
+        run: |
+          F=.cache/extinct-v8/Extinct_Life_V8_Premium_Opening_English_1080p.mp4
+          if [ -s "$F" ]; then
+            echo "found $F ($(stat -c%s "$F") bytes)"
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::finish.py --assemble exited without error but wrote no film."
+            echo "::error::The 30 rendered shards are still in this run's artifacts (90-day retention now). Do NOT re-render — re-run this job."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
       - name: Deliver the actual finished development film
+        if: steps.film.outputs.ok == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
