@@ -1,0 +1,49 @@
+name: Review public video stills and limited model windows
+on:
+  push:
+    branches: [arena/1f352b8e-monarch-overall-work]
+    paths: ['.github/workflows/monarch-og-media.yml']
+permissions:
+  contents: write
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/1f352b8e-monarch-overall-work
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect public thumbnail variants and bounded model windows
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -u research/monarch_og_audit/sample_media.py
+      - name: Transport metadata and encrypt still-image review bundle
+        id: receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import hashlib,os,sys
+          from pathlib import Path
+          sys.path.insert(0,'research/monarch_og_audit')
+          from inspect_archive import encrypt_for_transfer,put_blob
+          root=Path(os.environ['RUNNER_TEMP'])
+          meta=(root/'og-media.json').read_bytes()
+          bundle=(root/'og-stills.zip').read_bytes()
+          cipher=encrypt_for_transfer(bundle,Path('research/monarch_og_audit/transfer_public.pem'))
+          j=put_blob(meta);c=put_blob(cipher)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              print('json='+j,file=out);print('jsondigest='+hashlib.sha256(meta).hexdigest(),file=out)
+              print('cipher='+c,file=out);print('cipherdigest='+hashlib.sha256(cipher).hexdigest(),file=out)
+          (root/'media-receipt.txt').write_text('metadata_sha256='+hashlib.sha256(meta).hexdigest()+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: og-media-${{ steps.receipt.outputs.json }}-${{ steps.receipt.outputs.jsondigest }}-${{ steps.receipt.outputs.cipher }}-${{ steps.receipt.outputs.cipherdigest }}
+          path: ${{ runner.temp }}/media-receipt.txt
+          retention-days: 2
+          if-no-files-found: error
