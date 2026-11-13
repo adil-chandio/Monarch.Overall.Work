@@ -6,7 +6,7 @@
   "done": 3,
   "unit": "steps",
   "created": "2026-11-13T05:55:46.505Z",
-  "updated": "2026-11-13T05:55:47.588Z",
+  "updated": "2026-11-13T05:55:50.886Z",
   "resume": {
     "next_command": "echo continue",
     "notes": ""
@@ -16,7 +16,8 @@
       "path": "/tmp/fake.mp4",
       "bytes": 2000,
       "sha256": "569a7f82277ae79efbcaffc5df651979fdcb2de6f1892c87c546672745bb0260",
-      "drive_id": null
+      "drive_id": "1FAKEfakeFake123456789",
+      "uploaded_at": "2026-11-13T05:55:50.886Z"
     }
   ],
   "decisions": [],
@@ -32,6 +33,10 @@
     {
       "at": "2026-11-13T05:55:47.588Z",
       "what": "artifact /tmp/fake.mp4 2 KB sha256 569a7f82277a"
+    },
+    {
+      "at": "2026-11-13T05:55:50.886Z",
+      "what": "uploaded /tmp/fake.mp4 -> Drive 1FAKEfakeFake123456789"
     }
   ]
 }
