@@ -74,18 +74,92 @@ Full detail: [`docs/architecture/07-MEDIA-AND-REPO-SIZE.md`](./docs/architecture
 
 ---
 
+## Long jobs — the rule that cost a finished video
+
+On 2026-11-13 this happened, and it must never happen again:
+
+| | |
+|---|---|
+| Work done | 480/480 frames rendered, all 14 QC checks passing, a 12.6 MB MP4 encoded |
+| What the agent did | reported it ready and ended the turn |
+| What it did **not** do | upload it, or write down that it was unuploaded |
+| What happened | the operator was away; the sandbox reset; frames, MP4 and ~2 hours of compute were gone |
+| What it cost | the entire render, start to finish, twice over |
+
+**This was not a `.gitignore` problem.** The repo had no concept of a job: nowhere
+to write "480/480 done, MP4 exists, NOT yet on Drive", and no rule that a session
+may not go idle in that state. The agent was not careless; it was never told.
+
+### The rule
+
+> **A sandbox is temporary. Before you pause, approve, or end a turn, everything
+> needed to continue must already exist somewhere a reset cannot reach.**
+> Text → GitHub (committed **and pushed**). Media → Drive (with a `drive_id`).
+
+A finished video that exists only in the sandbox is not finished. It is one
+reset away from never having existed.
+
+### The mechanism
+
+`node scripts/job.mjs` — a ledger in `jobs/`, committed to Git on every write.
+
+```bash
+node scripts/job.mjs start <id> --goal "..." --total 480 --unit frames --next "bash scripts/render-all.sh --from 319"
+node scripts/job.mjs progress <id> --done 320 --note "S4 done, S5 lighting next"
+node scripts/job.mjs artifact <id> <file>              # records bytes + sha256
+node scripts/job.mjs uploaded <id> <file> --drive-id <id> [--sha256 <h>]
+node scripts/job.mjs decide <id> --q "..." --a "..."   # an approval, so it is never re-asked
+node scripts/job.mjs pause <id> [--q "..."]            # REFUSES if the job is not resumable
+node scripts/job.mjs resume <id>                       # what a new session reads first
+```
+
+`pause` exits 1 when an artifact has no `drive_id` or no `sha256`, or when
+`resume.next_command` is empty. That refusal is the point: it turns "the agent
+forgot" into a command that cannot succeed.
+
+### What every long job must carry
+
+Four things, written down **before** the first pause, not after:
+
+1. **`resume.next_command`** — the literal command a fresh session runs to continue. Not a description. A command.
+2. **Every finished artifact registered with its sha256**, and every one uploaded with a `drive_id`.
+3. **Every approval recorded with `decide`** — so the next session does not ask the operator the same question at the same 75%.
+4. **The ledger pushed.** A commit in the sandbox is still in the sandbox.
+
+### While the operator is away
+
+The operator works from a phone and is often not looking. That is normal, not an
+exception. So:
+
+- **Do not wait at 75% to ask something you could have asked at 5%.** Batch the
+  approvals early. Every question you defer to the middle of a render is a
+  question that strands the render.
+- **Upload as soon as the file exists**, not at the end of the job. An uploaded
+  partial beats a perfect file that evaporated.
+- **Never end a turn with unuploaded media.** Run `node scripts/job.mjs check <id>`
+  first. If it fails, fix it or say plainly that the work is at risk — but do not
+  go quiet.
+
+### Checkpoints are not git history
+
+Frames, MP4s and renders are **media**: they never enter Git, no matter how small
+or temporary. Durability for media is Drive, not a commit. Git carries the
+**ledger and the knowledge** — what was done, what is next, what was decided.
+
+---
+
 ## Storage ceilings, measured
 
 | Thing | Number | Source |
 |---|---|---|
 | GitHub single-file hard cap | **100 MB** | GitHub's own limit |
 | Drive/Dropbox upload tool ceiling from this environment | **100 MB** | the tool refuses above this |
-| Actually exercised end to end | **~50 MB** | only this much is proven |
-| Sandbox disk | 21 GB total, **4.5 GB free** | `df -h` on 2026-11-13 |
+| Actually exercised end to end | **99,408,313 B (94.8 MB)** | measured 2026-11-13, 9 files 44-99 MB, sha256 verified on Drive |
+| Sandbox disk | 21 GB total, **5.9 GB free** | `df -h` on 2026-11-13 |
 | Drive | 15 GB total, **10.71 GB free** | operator screenshot 2026-11-13 |
 | Dropbox | 2.00 GB allocated, 35 MB used | live API 2026-11-13 |
-| `.git` today | **4.5 GB** | `du -sh .git` |
-| tracked tree today | **1,348 MB** | `git ls-tree -r -l HEAD` |
+| `.git` today | **3.1 GB** | `du -sh .git`, after repack |
+| tracked tree today | **470.9 MB** | `git ls-tree -r -l HEAD`, 46% of the 1 GB budget |
 
 **Encode to stay under the ceiling**, do not discover the ceiling mid-render:
 

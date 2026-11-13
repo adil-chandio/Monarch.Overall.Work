@@ -581,4 +581,38 @@ test("the source assets that renders need are still tracked", () => {
   );
 });
 
+/* ---------- the durability rule (2026-11-13: a finished video was lost) ---- */
+
+test("the job ledger exists and refuses an unsafe pause", () => {
+  // The incident: 480/480 frames rendered, a 12.6 MB MP4 encoded, nothing
+  // uploaded, sandbox reset, everything gone. The repo had nowhere to record
+  // "done but not delivered" and no rule against going idle there.
+  const gen = readFileSync(resolve(ROOT, "scripts/job.mjs"), "utf8");
+  assert.ok(/function blockers\(/.test(gen), "job.mjs lost its notion of what makes a pause unsafe");
+  assert.ok(/drive_id/.test(gen), "an artifact without a Drive id must be a blocker");
+  assert.ok(/sha256/.test(gen), "an artifact without a hash must be a blocker");
+  assert.ok(/REFUSING to pause/.test(gen), "pause must refuse, not warn");
+  assert.ok(/next_command/.test(gen), "a job with no resume command is not resumable");
+  assert.ok(
+    /git.*commit.*jobs|\["commit"/.test(gen),
+    "the ledger must commit itself — an entry that only exists on disk is the thing this file exists to prevent",
+  );
+});
+
+test("AGENTS.md tells a new session that a sandbox is temporary", () => {
+  // The rule only works if it is in the file every new chat reads first.
+  const agents = readFileSync(resolve(ROOT, "AGENTS.md"), "utf8");
+  assert.ok(/Long jobs/.test(agents), "AGENTS.md lost the long-jobs section — a new session would repeat the incident");
+  for (const must of ["reset", "drive_id", "before you pause", "next_command"]) {
+    assert.ok(
+      agents.toLowerCase().includes(must.toLowerCase()),
+      `AGENTS.md no longer mentions "${must}" in the durability rule`,
+    );
+  }
+  assert.ok(
+    /Do not wait at 75%/.test(agents) || /75%/.test(agents),
+    "the 'ask approvals early, not at 75%' lesson must stay — deferring a question strands the render",
+  );
+});
+
 console.log(`\n${passed} guard tests passed`);

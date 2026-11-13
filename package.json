@@ -22,7 +22,8 @@
     "index:deliverables": "node scripts/build-deliverables-index.mjs",
     "index:check": "node scripts/build-deliverables-index.mjs --check",
     "hooks:install": "bash scripts/install-hooks.sh",
-    "test:all": "npm test && npm run guard:test"
+    "test:all": "npm test && npm run guard:test",
+    "job": "node scripts/job.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
