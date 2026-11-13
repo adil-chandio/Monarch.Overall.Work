@@ -268,6 +268,28 @@ def title_hits(screenshot_titles, rows, thresh=0.72):
     return hits
 
 
+def exact_title_present(shot_titles, cid, deep_pages=5):
+    """Does this channel's uploads actually contain the screenshot's verbatim title?
+
+    Retitles are common on copycat uploads; a channel that owns the row will carry
+    the string. This is the check that separated the real Ink Explainer (18.76M) from
+    a 41-sub impostor using the same six words.
+    """
+    if not cid:
+        return 0
+    try:
+        d = client._api("channels", {"part": "contentDetails", "id": cid}, "channels")
+        up = (((d.get("items") or [{}])[0].get("contentDetails") or {})
+              .get("relatedPlaylists") or {}).get("uploads")
+        if not up:
+            return 0
+        ids = with_backoff(deep_uploads, up, deep_pages)
+        rows = with_backoff(videos, ids)
+    except Exception:  # noqa: BLE001
+        return 0
+    return title_hits(shot_titles, rows, thresh=0.9)
+
+
 def resolve_by_title(title):
     """A screenshot video's exact title -> the channel that really owns it.
 
@@ -476,13 +498,48 @@ def main():
         med = statistics.median([r["views"] for r in cr]) if cr else 0
         outl = sorted([r for r in cr if med and r["views"] >= 3 * med], key=lambda r: -r["views"])
         size_ok = subs_ok(b, idx["channels"][name].get("subs"))
-        verified = bool(shots) and hits >= max(1, len(shots) * 0.5) and size_ok is not False
+        exact = exact_title_present(shots, b.get("channel_id"))
+        # A wrong channel can look verified on fuzzy hits (copycats keep 80% of the words).
+        # Exact-title presence on the channel's own uploads is the tie-breaker.
+        if exact == 0 and hits < len(shots):
+            for t in sorted(shots, key=len, reverse=True)[:3]:
+                alt = resolve_by_title(t)
+                if not alt or alt == b.get("channel_id"):
+                    continue
+                if exact_title_present(shots, alt) > exact:
+                    try:
+                        dd = client._api("channels", {"part": "snippet,statistics,contentDetails",
+                                                      "id": alt}, "channels")
+                        it = (dd.get("items") or [None])[0]
+                    except Exception:  # noqa: BLE001
+                        it = None
+                    if it:
+                        cand = chan_brief(it)
+                        cids = with_backoff(deep_uploads, cand["uploads"]) if cand.get("uploads") else []
+                        crow = [r for r in with_backoff(videos, cids)
+                                if r["channel_id"] == cand["channel_id"]]
+                        cand["resolved_by"] = "exact-title:" + t[:50]
+                        cand["screenshot_name"] = name
+                        cand["screenshot_subs"] = idx["channels"][name].get("subs")
+                        cand["cluster"] = idx["channels"][name].get("cluster")
+                        b, cr, hits, method = cand, crow, title_hits(shots, crow), cand["resolved_by"]
+                        st = stats(cr)
+                        med = statistics.median([r["views"] for r in cr]) if cr else 0
+                        outl = sorted([r for r in cr if med and r["views"] >= 3 * med],
+                                      key=lambda r: -r["views"])
+                        audit.append({"name": name, "new_id": cand["channel_id"],
+                                      "new_title": cand["title"], "fix": "exact-title validation"})
+                        exact = exact_title_present(shots, b["channel_id"])
+                        break
+        b["exact_title_matches"] = exact
+        verified = bool(shots) and exact >= max(1, len(shots) * 0.5) and size_ok is not False
         b["catalogue_n"] = st.get("n", 0)
         b["median_views"] = int(med)
         b["outlier_count"] = len(outl)
         b["identity"] = {"screenshot_titles": len(shots), "matched": hits,
                          "rate": round(hits / len(shots), 2) if shots else None,
                          "verified": verified, "method": method,
+                         "exact_title_matches": b.get("exact_title_matches", 0),
                          "screenshot_subs": idx["channels"][name].get("subs"),
                          "resolved_subs": b.get("subs"),
                          "size_consistent": size_ok,
