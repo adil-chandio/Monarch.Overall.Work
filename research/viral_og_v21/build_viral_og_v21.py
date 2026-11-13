@@ -60,6 +60,26 @@ LANES = [
 BUCKETS = [("short", "short"), ("long", "long")]
 
 
+def pause(sec=1.0):
+    time.sleep(sec)
+
+
+def with_backoff(fn, *a, tries=3, wait=45, **kw):
+    """YouTube returns 429 bursts; wait it out instead of losing the channel."""
+    last = None
+    for i in range(tries):
+        try:
+            return fn(*a, **kw)
+        except Exception as e:  # noqa: BLE001
+            last = e
+            if "RateLimited" in type(e).__name__ or "quota" in repr(e).lower() or "429" in repr(e):
+                log(f"    rate limited; waiting {wait}s (try {i + 1}/{tries})")
+                time.sleep(wait)
+                continue
+            raise
+    raise last
+
+
 def save(n, o):
     (OUT / n).write_text(json.dumps(o, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
 
@@ -190,7 +210,7 @@ def upload_ids(pid, pages=2):
     return [i for i in out if i]
 
 
-def deep_uploads(pid, pages=6):
+def deep_uploads(pid, pages=2):
     """Up to 300 uploads, newest first - enough to find the screenshot videos."""
     out, token = [], None
     for _ in range(pages):
@@ -331,7 +351,7 @@ def main():
     idx = json.loads((OUT / "drive_swipe_index.json").read_text())
     resolved, unresolved = {}, []
     for name, c in idx["channels"].items():
-        it, how = resolve_channel(c.get("handle"), name)
+        it, how = with_backoff(resolve_channel, c.get("handle"), name)
         if it:
             b = chan_brief(it)
             b["resolved_by"] = how
@@ -342,14 +362,14 @@ def main():
             resolved[name] = b
         else:
             unresolved.append({"screenshot_name": name, "handle": c.get("handle"), "why": how})
-        time.sleep(0.05)
+        pause(0.8)
     log(f"resolved {len(resolved)}/{len(idx['channels'])} screenshot channels; unresolved {len(unresolved)}")
 
     catalogue, catalogue_rows, audit = {}, [], []
     for i, (name, b) in enumerate(resolved.items(), 1):
         shots = [v["title"] for v in idx["channels"][name]["videos"] if v.get("title")]
-        ids = deep_uploads(b["uploads"]) if b.get("uploads") else []
-        cr = [r for r in videos(ids) if r["channel_id"] == b["channel_id"]]
+        ids = with_backoff(deep_uploads, b["uploads"]) if b.get("uploads") else []
+        cr = [r for r in with_backoff(videos, ids) if r["channel_id"] == b["channel_id"]]
         hits = title_hits(shots, cr)
         method = b["resolved_by"]
         # identity check: if the screenshot's own titles are not in this catalogue, the handle
@@ -373,8 +393,8 @@ def main():
                 cand["screenshot_subs"] = idx["channels"][name].get("subs")
                 cand["screenshot_videos"] = idx["channels"][name].get("video_count")
                 cand["cluster"] = idx["channels"][name].get("cluster")
-                cids = deep_uploads(cand["uploads"]) if cand.get("uploads") else []
-                cand_rows = [r for r in videos(cids) if r["channel_id"] == cand["channel_id"]]
+                cids = with_backoff(deep_uploads, cand["uploads"]) if cand.get("uploads") else []
+                cand_rows = [r for r in with_backoff(videos, cids) if r["channel_id"] == cand["channel_id"]]
                 cand_hits = title_hits(shots, cand_rows)
                 if cand_hits > hits:
                     audit.append({"name": name, "old_id": b["channel_id"], "old_title": b["title"],
@@ -404,6 +424,7 @@ def main():
                            "top_by_views": [{k: r[k] for k in ("id", "title", "views", "duration_seconds", "published")}
                                             for r in sorted(cr, key=lambda r: -r["views"])[:10]]}
         catalogue_rows += cr
+        pause(1.2)
         log(f"  [{i}/{len(resolved)}] {name[:24]:24s} n={st.get('n',0):3d} med={int(med):>11,} "
             f"out={len(outl)} verified={verified} ({hits}/{len(shots)})")
 
@@ -414,7 +435,7 @@ def main():
                       "order": "viewCount", "regionCode": "US", "relevanceLanguage": "en",
                       "safeSearch": "moderate", "videoDuration": dv}
             try:
-                d = client._api("search", params, "search")
+                d = with_backoff(client._api, "search", params, "search")
                 ids = [x["id"]["videoId"] for x in d.get("items", []) if x.get("id", {}).get("videoId")]
                 status = "ok" if ids else "empty"
             except Exception as e:  # noqa: BLE001
@@ -422,8 +443,8 @@ def main():
             lanes_out.append({"slug": f"{l['slug']}_{bname}_all", "q": l["q"], "videoDuration": dv,
                               "status": status, "ids": ids, "ids_count": len(ids)})
             lane_ids += ids
-            time.sleep(0.05)
-    lane_rows = videos(lane_ids)
+            pause(0.6)
+    lane_rows = with_backoff(videos, lane_ids)
 
     allrows = {r["id"]: r for r in catalogue_rows}
     for r in lane_rows:
