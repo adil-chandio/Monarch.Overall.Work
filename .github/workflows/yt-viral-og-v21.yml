@@ -13,8 +13,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: v21-viral-${{ github.ref }}
-  cancel-in-progress: false
+  group: v21-discovery-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   og:
