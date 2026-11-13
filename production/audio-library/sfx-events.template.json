@@ -1,0 +1,31 @@
+{
+  "fps": 30,
+  "duration_seconds": 12.0,
+  "events": [
+    {
+      "frame": 30,
+      "visual_action": "The title card finishes sliding into place",
+      "effect": "soft UI click",
+      "tags": ["ui", "click", "soft"],
+      "vibe": ["clean", "confident"],
+      "gain_db": -18,
+      "foreground": true
+    },
+    {
+      "frame": 96,
+      "visual_action": "A paper layer sweeps left into the next shot",
+      "effect": "short airy paper sweep",
+      "tags": ["sweep", "whoosh", "paper"],
+      "vibe": ["warm", "light"],
+      "gain_db": -22,
+      "foreground": false
+    }
+  ],
+  "intentional_silence": [
+    {
+      "start_frame": 190,
+      "end_frame": 240,
+      "reason": "Hold a quiet beat under an important narration line"
+    }
+  ]
+}

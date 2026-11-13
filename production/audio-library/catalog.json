@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "default_sample_rate_hz": 48000,
+  "default_fps": 30,
+  "description": "Shared, frame-synchronised SFX catalog for every MONARCH video space. This manifest stores provenance and excerpt timings, not third-party audio payloads.",
+  "sources": [
+    {
+      "id": "user-reel-ribbon",
+      "path": "google_drive/VID_20261113_012128_753.mp4",
+      "media_type": "video_with_audio",
+      "rights_status": "user_provided_unverified",
+      "use_scope": "private_review_only",
+      "provenance": "User-provided SFX-demo reel; the audio excerpts below are cued against the reel's visible SFX demonstration. Licensing has not been independently verified.",
+      "duration_seconds": 14.61,
+      "cues": [
+        { "id": "softSweep", "start_seconds": 3.2, "duration_seconds": 0.45, "tags": ["sweep", "whoosh", "ui", "transition", "airy"], "vibe": ["clean", "light", "modern"] }
+      ]
+    },
+    {
+      "id": "user-reel-interface",
+      "path": "google_drive/VID_20261113_012137_703.mp4",
+      "media_type": "video_with_audio",
+      "rights_status": "user_provided_unverified",
+      "use_scope": "private_review_only",
+      "provenance": "User-provided UI-SFX demo reel; selected audio excerpt only. Licensing has not been independently verified.",
+      "duration_seconds": 14.84,
+      "cues": [
+        { "id": "airySweep", "start_seconds": 7.2, "duration_seconds": 0.44, "tags": ["sweep", "whoosh", "interface", "transition"], "vibe": ["clean", "light", "modern"] }
+      ]
+    },
+    {
+      "id": "user-reel-talking-head-sfx",
+      "path": "google_drive/VID_20261113_012154_590.mp4",
+      "media_type": "video_with_audio",
+      "rights_status": "user_provided_unverified",
+      "use_scope": "private_review_only",
+      "provenance": "User-provided SFX-demo reel with on-screen labels such as typing, UI animation, riser, finger snap and whoosh. The source video is not used in edits. Licensing has not been independently verified.",
+      "duration_seconds": 21.88,
+      "cues": [
+        { "id": "typing", "start_seconds": 0.62, "duration_seconds": 0.38, "tags": ["typing", "keyboard", "tactile", "detail", "foley"], "vibe": ["focused", "soft", "technical"] },
+        { "id": "uiMotion", "start_seconds": 3.55, "duration_seconds": 0.42, "tags": ["ui", "interface", "motion", "sweep"], "vibe": ["clean", "modern", "light"] },
+        { "id": "riser", "start_seconds": 6.5, "duration_seconds": 0.46, "tags": ["riser", "build", "anticipation"], "vibe": ["tense", "anticipatory", "cinematic"] },
+        { "id": "fingerSnap", "start_seconds": 9.55, "duration_seconds": 0.24, "tags": ["finger_snap", "click", "accent", "tick"], "vibe": ["playful", "crisp", "light"] },
+        { "id": "uiRiser", "start_seconds": 12.55, "duration_seconds": 0.44, "tags": ["ui", "riser", "interface", "build"], "vibe": ["modern", "anticipatory"] },
+        { "id": "whoosh", "start_seconds": 15.55, "duration_seconds": 0.48, "tags": ["whoosh", "sweep", "transition"], "vibe": ["cinematic", "smooth", "forward"] }
+      ]
+    },
+    {
+      "id": "user-reel-50-plus-sfx",
+      "path": "google_drive/VID_20261113_012158_998.mp4",
+      "media_type": "video_with_audio",
+      "rights_status": "user_provided_unverified",
+      "use_scope": "private_review_only",
+      "provenance": "User-provided SFX-demo reel; on-screen examples include crack flash, digital click, synth sparkle, lighter/ignite, riser, camera click/ring, gleam, conjure charge and shutter. Licensing has not been independently verified.",
+      "duration_seconds": 29.36,
+      "cues": [
+        { "id": "crackFlash", "start_seconds": 0.55, "duration_seconds": 0.34, "tags": ["impact", "flash", "accent", "hit"], "vibe": ["bold", "sharp", "cinematic"] },
+        { "id": "digitalClick", "start_seconds": 2.1, "duration_seconds": 0.26, "tags": ["click", "ui", "digital", "tick"], "vibe": ["clean", "technical", "crisp"] },
+        { "id": "golfHit", "start_seconds": 4.2, "duration_seconds": 0.3, "tags": ["hit", "impact", "accent"], "vibe": ["energetic", "bold"] },
+        { "id": "synthSparkle", "start_seconds": 7.4, "duration_seconds": 0.44, "tags": ["sparkle", "synth", "chime", "shine"], "vibe": ["bright", "hopeful", "magical"] },
+        { "id": "ignite", "start_seconds": 9.55, "duration_seconds": 0.44, "tags": ["ignite", "riser", "spark", "build"], "vibe": ["anticipatory", "bright"] },
+        { "id": "riserClick", "start_seconds": 12.1, "duration_seconds": 0.36, "tags": ["riser", "click", "transition", "tick"], "vibe": ["technical", "anticipatory"] },
+        { "id": "cameraRing", "start_seconds": 14.1, "duration_seconds": 0.38, "tags": ["camera", "click", "ring", "chime"], "vibe": ["clean", "bright", "polished"] },
+        { "id": "gleam", "start_seconds": 16.1, "duration_seconds": 0.4, "tags": ["gleam", "sparkle", "chime", "shine"], "vibe": ["bright", "polished", "hopeful"] },
+        { "id": "conjure", "start_seconds": 18.1, "duration_seconds": 0.44, "tags": ["conjure", "riser", "synth", "build"], "vibe": ["magical", "anticipatory", "cinematic"] },
+        { "id": "shutter", "start_seconds": 20.2, "duration_seconds": 0.34, "tags": ["shutter", "camera", "click", "tick"], "vibe": ["crisp", "technical", "clean"] }
+      ]
+    }
+  ],
+  "rights_policy": {
+    "public_delivery_requires": ["verified_public_domain", "verified_cc0", "verified_cc_by_with_required_attribution", "owned_or_original"],
+    "private_review_may_use_unverified_user_assets_only_with_explicit_flag": "--private-review",
+    "never_commit_audio_payloads_from_unverified_sources": true
+  }
+}

@@ -420,3 +420,14 @@ Append-only ledger. Older events are preserved; newer checkpoints are appended b
 - Ref: `.github/workflows/continuity-validate.yml`
 - Ref: `config/continuity.json`
 - Ref: `config/channels.json`
+
+## `2026-11-10T00:00:00Z` · evt-20261113T113809Z · checkpoint
+
+- Title: Repository-wide frame-locked SFX workflow added
+- Space: `ops`
+- Evidence level: `repo_evidence`
+- Details: Added a shared SFX catalog for the four user-provided demo reels (private-review-only pending rights verification), a deterministic frame-locked render/mix/mux helper with source-audio stripping and cue reports, inbox scan for future sounds, tests, and repo-wide AGENTS/skill instructions. No unverified audio payload was added to the public repository.
+- Ref: `tools/sfx_sync.py`
+- Ref: `production/audio-library/catalog.json`
+- Ref: `skills/monarch-video-lab/sound-design/SKILL.md`
+- Ref: `AGENTS.md`

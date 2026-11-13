@@ -48,3 +48,30 @@ channel or workflow. Read, in order:
 
 The continuity archive lives in `docs/continuity/`; the validator/importer is
 `tools/continuity.py`; CI enforcement is `.github/workflows/continuity-validate.yml`.
+
+## Repo-wide video sound default
+
+For every future video task in **any** MONARCH space or channel, use the shared
+sound workflow in `skills/monarch-video-lab/sound-design/SKILL.md` and the asset
+catalog in `production/audio-library/catalog.json`. Inventory the shared library
+and the user's newly supplied audio before designing the mix; don't ask them to
+re-send assets already present in the workspace or connected Drive. Derive a
+cue sheet from the actual shot/render timeline, map each cue to a visible action
+and the video's mood, lock cue starts to exact video frames, duck SFX under VO,
+and QC the resolved cue report before final mux. The current standing preference
+is 100+ carefully timed SFX placements across a video where the duration and
+picture support that density; that means placements, not 100+ unique recordings,
+and never filler on arbitrary timestamps.
+
+Use `production/audio-library/inbox/` as the local drop point for future SFX;
+`python3 tools/sfx_sync.py scan ...` inventories new media, and the reviewed
+catalog drives rendering. Private/user-provided files are ignored by Git. The
+four current SFX-demo reels are cataloged as **unverified, private-review-only**;
+the audio payloads must not be committed to this public repository or used for
+public delivery until their rights are verified. A private draft may opt in with
+`--private-review`. Never pass a demo reel's original video/audio track through
+as the finished soundtrack; only use reviewed audio excerpts as cues.
+
+Project/channel-specific constraints and rights rules take precedence over this
+general default. In particular, do not override any explicit native-source-audio,
+rights, silence, or creative restriction on a specific Monarch Cam deliverable.

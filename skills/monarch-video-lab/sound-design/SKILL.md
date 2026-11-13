@@ -6,7 +6,7 @@ license: MIT
 
 # monarch-sound-design
 
-The house method for sound in MONARCH films. Everything here is synthesised or sourced permissively; nothing depends on a paid API.
+The house method for sound in MONARCH films. The default is original synthesis or clearly permissive sources; user-provided but uncleared sounds are a private-draft-only exception until rights are verified. Nothing depends on a paid API.
 
 > **Lineage:** distilled from `storytold/filmcraft` (NLE-grade audio track discipline), `Vincentwei1021/video-shotcraft` §S1/S4 sfx-sourcing, `calesthio/OpenMontage` sound-effects/music orchestration, and the v3 showreel master (`showreel/build_audio_60fps.py`, 755 lines, −14.0 LUFS / −3.6 dBTP).
 
@@ -197,7 +197,7 @@ Reject the render if:
 - **Reese sub + stereo widening** → cancels. Keep sub mono.
 - **Pink-noise "air" shelf alone** never lifts 3–8 kHz; you need a harmonic exciter + coherent bells.
 - **Full-frame reverb on everything** = wash. Send only, 0.2–0.35.
-- **SFX on every cut** = noise. Rate limit yourself: max one SFX per 8 frames.
+- **SFX on every cut** = noise. Keep to at most one foreground accent per 8 frames. Closely spaced low-level texture is allowed only when it follows a visible motion cluster and stays tucked under dialogue; never pad a placement target with arbitrary hits.
 - **A 20-minute reverb IR** on a 36-second film smears the transients that create the impact.
 - **Loudness war** — pushing to −9 LUFS sounds louder for 3 seconds and worse forever.
 
@@ -210,3 +210,32 @@ Reject the render if:
 - `skills/pyloudnorm` — ITU-R BS.1770 loudness measurement (MIT)
 - `skills/video-shotcraft/references/sfx-sourcing.md` — the sourcing protocol this file generalises
 - `skills/openmontage/.agents/skills/sound-effects` — paid-API alternative (ElevenLabs), do not use on $0 projects
+
+---
+
+## 8. Repository-wide frame-synced SFX workflow
+
+Use this for **every video build in every MONARCH space**, not only Monarch Cam or the animated-short style. The current user's standing preference is 100+ carefully timed SFX placements across a full video when the picture can support that density. A placement is not a unique source recording. Preserve pauses and silence; never hit a count by adding random ticks or putting a cue on every cut.
+
+### Shared assets and licensing
+
+- Canonical catalog: `production/audio-library/catalog.json`.
+- Future user-provided assets: `production/audio-library/inbox/` (local-only; Git ignores audio/video payloads).
+- Inventory new sources with `python3 tools/sfx_sync.py scan --root production/audio-library/inbox --output .cache/sfx-inbox-scan.json`. Scanning is not rights clearance or semantic audio review.
+- For each asset, log provenance, precise source excerpt bounds, cue tags, vibe tags and rights status in the catalog. Never label a source as licensed because the user supplied it.
+- The four current SFX demo reels are tagged `user_provided_unverified` and `private_review_only`. Use them only for private review with `--private-review`; do not commit their audio excerpts or release them publicly until rights are verified. A demo's visible label can guide audition/cue semantics but is not proof of what its audio contains.
+- Add later user-provided sounds to this shared catalog so every space can use them. Existing project-specific stricter source-audio / rights rules take precedence; do not overwrite native-source-audio-only or intentional-silence requirements.
+
+### Per-video cue/mix steps
+
+1. Read the active project's shot/edit manifest, render constants and narration timing. Establish exact `fps`, total frames, motion/transition start and landing frames, visible actions, voice phrases, and the mood arc. Do not infer real-world foley for actions not shown.
+2. Write a project-local cue sheet with one record per audible event: frame, visual action, effect family, intended vibe, cue ID (or tags for catalog matching), gain/ducking and any intentional-silence span. Cluster low-level tactile texture only around actual depicted motion.
+3. Resolve and render the stem using the shared engine, e.g.:
+   ```bash
+python3 tools/sfx_sync.py render --catalog production/audio-library/catalog.json --events path/to/project/sfx-events.json --output path/to/project/audio/sfx.wav
+```
+   Add `--private-review` only for private drafts containing the current unverified user-provided reels. Frame starts are derived from integer video frames, not guessed wall-clock timestamps. Review the generated `*.resolved-cues.json` for source, rights, frame and trim evidence.
+4. Mix SFX under VO with voice-reactive ducking; add music/ambience only when the visual/story arc benefits. Use the shared `mix` command or the project's existing calibrated mixer. Final mux must explicitly map the chosen video stream and finished audio stream so raw source/demo audio cannot leak through.
+5. QC frame count/duration, cue density and exact frame starts, narration intelligibility, clipping/true peak, loudness, stereo/mono behavior, and the delivered AAC stream. Listen to the complete render when playback is available; technical checks alone are not creative acceptance. Keep source credits and rights status with the project.
+
+The helper creates/reuses placement; it does **not** watch every render or perform semantic vision without a shot/event map. Repository-wide automatic use means every video workflow invokes this standard and supplies its actual shot events. “Perfect” sound remains subjective; report measured sync/QC honestly and let the user review the draft.

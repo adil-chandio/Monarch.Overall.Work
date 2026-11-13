@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T19:03:03Z",
-  "head": "0a7bf14a026921e234b87b15ed602bc3d471ed33",
+  "generated_at": "2026-11-13T11:38:25Z",
+  "head": "1c63327470d63684cfbd8b45624b6b9e22745194",
   "note": "Hashes cover evidence, raw chat sources, ledgers and operating contracts. Generated *.md summaries are intentionally excluded to avoid circular hashes.",
   "files": [
     {
@@ -18,14 +18,14 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 3705,
-      "sha256": "ed5abd1d4a83eb2a3f46ee0875ef9c159732c466ca6a18f1b25390fe852dd677",
+      "bytes": 4108,
+      "sha256": "dfd891935da186a3b02cf591d9b74691b85790b9c9983f93ce3c8714c3caf977",
       "evidence_level": "archive_metadata"
     },
     {
       "path": "AGENTS.md",
-      "bytes": 3190,
-      "sha256": "c0a1de19a9de40c5cd30a24c91aab59a1268c4423d0a46cf431bab855b32c9e5",
+      "bytes": 4935,
+      "sha256": "ec4c309cae9bc2640786285c677ff8138c240d47d1100e670b02df8db7416c39",
       "evidence_level": "operating_contract"
     },
     {
@@ -97,7 +97,7 @@
     {
       "path": "docs/continuity/COVERAGE.json",
       "bytes": 4285,
-      "sha256": "fcbec9cc545c4acac734c7ac5dd77e4333cbdf8cbdc0b33da3c7eefb289639de",
+      "sha256": "70e12a4683cb4526d7369db154aa25621b515905e30ab5965a5f1e3e6575c016",
       "evidence_level": "state_ledger"
     },
     {
@@ -108,8 +108,8 @@
     },
     {
       "path": "docs/continuity/EVENTS.jsonl",
-      "bytes": 21304,
-      "sha256": "7fbaeeae762ed2587106c35ba8facba5b5bd1860795e80e026774ba5cc46aad8",
+      "bytes": 22017,
+      "sha256": "6aa5a4fc4b544d4d151713f0b0c32b41530a0f72762b783a9d8d35ca89b9caa3",
       "evidence_level": "state_ledger"
     },
     {
@@ -162,8 +162,8 @@
     },
     {
       "path": "docs/continuity/STATE.json",
-      "bytes": 9886,
-      "sha256": "2fcb9dcdbc2a0c31920474dac5bb2fef35f22eadb2b91c13bd82c65ce088cf09",
+      "bytes": 10501,
+      "sha256": "1f75d77d90489486301ae7506deef32c5c97764278458f86324adf7022dd600e",
       "evidence_level": "state_ledger"
     },
     {

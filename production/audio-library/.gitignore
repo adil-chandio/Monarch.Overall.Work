@@ -1,0 +1,15 @@
+# User-provided audio/video payloads remain local until their rights are verified.
+/inbox/*
+!/inbox/.gitkeep
+/cache/
+/*.wav
+/*.mp3
+/*.m4a
+/*.aac
+/*.flac
+/*.ogg
+/*.opus
+/*.mp4
+/*.mov
+/*.webm
+/*.mkv

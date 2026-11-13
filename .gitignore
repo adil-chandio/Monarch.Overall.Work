@@ -106,3 +106,10 @@ audio/bed-*.wav
 audio/mix-*.wav
 audio/takes/
 audio/ref-full.wav
+
+# Adil's private voice references and clone tests; never commit or publish
+production/social/private-voice/
+
+# Agency Agents Episode 01 private review render (deliver via Drive, not Git)
+production/social/adilchandio-ai/episode-01-agency-agents/episode-01-agency-agents-v6-review-draft.mp4
+production/social/adilchandio-ai/episode-01-agency-agents/episode-01-agency-agents-v7-sfx-sync-review-draft.mp4

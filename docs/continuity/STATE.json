@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0.0",
   "repo": "adil-chandio/Monarch.Overall.Work",
-  "branch": "arena/390292fc-monarch-overall-work",
-  "head_at_capture": "4b3574c1c936e47cf2a68d719bae0e9fe6a2380a",
+  "branch": "arena/2263a1b6-monarch-overall-work",
+  "head_at_capture": "1c63327470d63684cfbd8b45624b6b9e22745194",
   "captured_at": "2026-11-08T15:32:32Z",
-  "updated_at": "2026-11-08T17:51:15Z",
-  "last_event_id": "evt-054-monarch-cam-channel-os",
+  "updated_at": "2026-11-10T00:00:00Z",
+  "last_event_id": "evt-20261113T113809Z",
   "active_task": {
     "id": "monarch-cam-easy-continuation",
     "title": "Monarch Cam channel workflow — continue without re-explanation",
@@ -23,7 +23,7 @@
       "No live bidirectional connected-app sync",
       "No V6 rights-verified package or human creative acceptance"
     ],
-    "branch_guardrail": "Always work on arena/390292fc-monarch-overall-work; never switch, rename, or push another branch."
+    "branch_guardrail": "Work only on the current Arena session branch named in the latest branch note; do not switch, rename, or push another branch."
   },
   "parallel_task": {
     "id": "monarch-cam-v6-intent",
@@ -174,5 +174,13 @@
     "workflow": "docs/continuity/channels/monarch-cam/WORKFLOW.md",
     "next_action": "docs/continuity/channels/monarch-cam/NEXT_ACTION.md",
     "note": "A new chat must not need the user to explain the channel, workflow, style, decisions or next action."
+  },
+  "repo_video_sound_workflow": {
+    "status": "implemented_repo_standard",
+    "entrypoint": "skills/monarch-video-lab/sound-design/SKILL.md",
+    "catalog": "production/audio-library/catalog.json",
+    "renderer": "tools/sfx_sync.py",
+    "current_user_sfx_status": "User-provided demo reels are cataloged as unverified and private-review-only; audio payloads are not in Git.",
+    "next_action": "On every future video build, derive a cue sheet from actual shot/action frames, render and QC the shared frame-locked SFX stem; scan and review newly provided assets into the shared catalog."
   }
 }
