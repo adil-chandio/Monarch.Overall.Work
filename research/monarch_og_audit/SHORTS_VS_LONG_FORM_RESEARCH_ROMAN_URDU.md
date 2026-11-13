@@ -2,6 +2,8 @@
 
 **Decision memo aur creative proposal — upload, channel pivot ya kisi niche ki approval nahin.**
 
+**Broader multilingual follow-up:** [new language and niche decision memo](../monarch_language_audit/MULTILINGUAL_YOUTUBE_RESEARCH_ROMAN_URDU.md) compares selected language leads and proposes a Panama lock pilot while retaining this Magdeburg idea as an alternative. The newer study's multilingual API searches were rate-limited, so neither recommendation is a proven language ranking; both remain unapproved.
+
 **Sab se zaroori date caveat:** session ki trusted date **5 November 2026 UTC** hai, lekin YouTube/API runner aur Google ke response headers ne **13 November 2026** report kiya. Yeh farq resolve nahin hua. Neeche `F`, `R` aur `R2` ke views/subscribers **runner-reported snapshots** hain, 5 November ke verified counters nahin. Screenshot ki capture dates bhi unknown hain. In numbers ko aaj ka live trend, views/day ya growth proof na samjhein. Purani report ke runner ne 12 November report kiya tha.
 
 ## 1. Seedha jawab
