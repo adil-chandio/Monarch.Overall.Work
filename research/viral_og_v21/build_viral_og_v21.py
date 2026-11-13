@@ -375,11 +375,43 @@ def main():
     idx = json.loads((OUT / "drive_swipe_index.json").read_text())
     cache_file = OUT / "channel_cache_v21.json"
     cache = json.loads(cache_file.read_text()) if cache_file.exists() else {}
+    cm_file = OUT / "catalogue_match_v21.json"
+    catmatch = json.loads(cm_file.read_text()) if cm_file.exists() else {}
+    audit_cache = []
     resolved, unresolved = {}, []
     for name, c in idx["channels"].items():
         b = cache.get(name)
         if b:
             b = dict(b)
+        # Catalogue-shape override: a copycat reuses winning titles verbatim, so a single
+        # title search can land on a 41-sub impostor. resolve_by_catalogue.py scores every
+        # channel that owns ANY of the screenshot's titles (match count + view magnitude).
+        # If that ranking disagrees with the cached pick, the ranking wins.
+        cm = catmatch.get(name) or {}
+        cands = [x for x in (cm.get("candidates") or []) if x.get("matches", 0) >= 2]
+        if cands:
+            best = cands[0]
+            if not b or best["channel_id"] != b.get("channel_id"):
+                try:
+                    dd = client._api("channels", {"part": "snippet,statistics,contentDetails",
+                                                  "id": best["channel_id"]}, "channels")
+                    it = (dd.get("items") or [None])[0]
+                except Exception:  # noqa: BLE001
+                    it = None
+                if it:
+                    nb = chan_brief(it)
+                    nb["resolved_by"] = f"catalogue-match:{best['matches']} titles"
+                    nb["catalogue_match_evidence"] = {
+                        "matches": best["matches"], "view_penalty": best["view_pen"],
+                        "titles": best["titles"][:5],
+                        "runner_up": (cands[1]["channel_title"] if len(cands) > 1 else None)}
+                    if b:
+                        audit_cache.append({"name": name, "old_id": b.get("channel_id"),
+                                            "old_title": b.get("title"),
+                                            "new_id": nb["channel_id"], "new_title": nb["title"],
+                                            "matches": best["matches"],
+                                            "fix": "cache pick replaced by catalogue-shape match"})
+                    b = nb
         else:
             it, how = with_backoff(resolve_channel, c.get("handle"), name)
             b = chan_brief(it) if it else None
@@ -551,6 +583,7 @@ def main():
         "resolved_channels": len(resolved), "unresolved_channels": len(unresolved),
         "identity_verified_channels": len(verified_names),
         "identity_re_resolved": len(audit),
+        "identity_cache_overrides": audit_cache,
         "identity_unverified_names": sorted(set(catalogue) - verified_names),
         "identity_size_contradictions": sorted(n for n, c in catalogue.items()
                                                if c["identity"].get("size_consistent") is False),
@@ -569,7 +602,7 @@ def main():
     }
     save("run_v21.json", run)
     save("channels_v21.json", {"resolved": len(resolved), "unresolved": unresolved,
-                               "identity_audit": audit,
+                               "identity_audit": audit + audit_cache,
                                "channels": list(resolved.values())})
     save("channel_deep_v21.json", {"catalogue": catalogue,
                                    "by_cluster": {k: v for k, v in by_cluster.items()},
