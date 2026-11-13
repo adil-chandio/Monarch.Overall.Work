@@ -257,43 +257,115 @@ def unit_to_px(lines, bbox, flip=False):
     return out
 
 
-# A humpback: the body the reference actually shows. Same box, fuller profile,
-# throat expanded, and a clearly separate long pectoral flipper.
-HUMPBACK = [
-    ("M", 0.010, 0.42),
-    # head, blunt and slightly down-turned
-    ("C", 0.045, 0.30, 0.115, 0.24, 0.205, 0.235),
-    ("C", 0.30, 0.225, 0.40, 0.225, 0.50, 0.25),
-    ("C", 0.60, 0.275, 0.66, 0.31, 0.72, 0.35),
-    ("C", 0.78, 0.38, 0.82, 0.42, 0.855, 0.475),
-    # fluke
-    ("C", 0.895, 0.395, 0.945, 0.335, 0.985, 0.30),
-    ("C", 0.965, 0.42, 0.945, 0.475, 0.905, 0.515),
-    ("C", 0.945, 0.555, 0.962, 0.615, 0.975, 0.685),
-    ("C", 0.935, 0.655, 0.895, 0.60, 0.855, 0.555),
-    # belly, expanding into the throat
-    ("C", 0.80, 0.63, 0.70, 0.70, 0.58, 0.72),
-    ("C", 0.44, 0.745, 0.28, 0.735, 0.16, 0.70),
-    ("C", 0.085, 0.675, 0.035, 0.61, 0.018, 0.53),
-    ("C", 0.012, 0.49, 0.008, 0.45, 0.010, 0.42),
-    ("Z",),
-]
+# ---------------------------------------------------------------------------
+# Profile builder
+# ---------------------------------------------------------------------------
+def _catmull(points, closed=False):
+    """Smooth C-segment path through `points` (Catmull-Rom -> cubic Bezier).
 
-HUMPBACK_FLIPPER = [
-    ("M", 0.245, 0.60),
-    ("C", 0.235, 0.72, 0.215, 0.84, 0.175, 0.95),
-    ("C", 0.255, 0.905, 0.315, 0.82, 0.355, 0.715),
-    ("C", 0.335, 0.655, 0.29, 0.615, 0.245, 0.60),
-    ("Z",),
-]
+    Hand-writing control points for a 200-pixel-wide animal is how you end up with
+    a shark whose tail is three unrelated polygons; specifying the outline as a
+    top edge and a bottom edge and letting this smooth them is both faster to
+    author and impossible to break.
+    """
+    pts = [(float(x), float(y)) for x, y in points]
+    n = len(pts)
+    if n < 3:
+        return [("M", *pts[0]), ("L", *pts[-1]), ("Z",)]
+    out = [("M", *pts[0])]
+    for i in range(n - 1):
+        p0 = pts[i - 1] if i > 0 else (2 * pts[0][0] - pts[1][0], 2 * pts[0][1] - pts[1][1])
+        p1, p2 = pts[i], pts[i + 1]
+        p3 = pts[i + 2] if i + 2 < n else (2 * pts[-1][0] - pts[-2][0], 2 * pts[-1][1] - pts[-2][1])
+        c1 = (p1[0] + (p2[0] - p0[0]) / 6.0, p1[1] + (p2[1] - p0[1]) / 6.0)
+        c2 = (p2[0] - (p3[0] - p1[0]) / 6.0, p2[1] - (p3[1] - p1[1]) / 6.0)
+        out.append(("C", c1[0], c1[1], c2[0], c2[1], p2[0], p2[1]))
+    out.append(("Z",))
+    return out
 
+
+def profile(top, bottom):
+    """Close a top profile and a bottom profile into one smooth silhouette."""
+    top = [(max(0.0, min(1.0, x)), max(0.0, min(1.0, y))) for x, y in top]
+    bottom = [(max(0.0, min(1.0, x)), max(0.0, min(1.0, y))) for x, y in bottom]
+    return _catmull(top + bottom, closed=True)
+
+
+# A humpback, head LEFT. Body, mouth, eye, pleats, baleen and flipper are all
+# authored against this one contour, which is the only way they stay aligned: the
+# previous version placed the baleen in front of the chin and the flipper inside the
+# belly, and no amount of nudging fixed it because the pieces came from different
+# sketches.
+#
+# Landmarks on this contour:
+#   rostrum tip      0.020, 0.400
+#   head top         0.075, 0.340
+#   dorsal fin       0.760, 0.282
+#   peduncle         0.945, 0.412
+#   fluke tips       0.995, 0.360 / 0.995, 0.520
+#   throat bottom    0.180, 0.790
+#   chin             0.060, 0.760
+HUMPBACK = profile(
+    [(0.020, 0.400), (0.035, 0.358), (0.075, 0.338), (0.175, 0.328), (0.300, 0.322),
+     (0.450, 0.316), (0.600, 0.320), (0.700, 0.330),
+     (0.740, 0.300), (0.762, 0.280), (0.782, 0.308), (0.800, 0.344),
+     (0.860, 0.368), (0.910, 0.398), (0.945, 0.410),
+     (0.980, 0.356), (0.996, 0.418), (0.986, 0.468)],
+    [(0.996, 0.520), (0.952, 0.502), (0.910, 0.520), (0.860, 0.546), (0.800, 0.576),
+     (0.720, 0.612), (0.620, 0.652), (0.500, 0.692), (0.380, 0.732), (0.270, 0.766),
+     (0.180, 0.790), (0.110, 0.788), (0.060, 0.758), (0.025, 0.700), (0.020, 0.400)],
+)
+
+HUMPBACK_EYE = (0.086, 0.462)
 HUMPBACK_MOUTH = [
-    ("M", 0.018, 0.50),
-    ("C", 0.075, 0.545, 0.135, 0.565, 0.195, 0.562),
-    ("C", 0.145, 0.585, 0.075, 0.575, 0.020, 0.545),
+    ("M", 0.022, 0.470),
+    ("C", 0.090, 0.500, 0.170, 0.524, 0.250, 0.540),
+    ("C", 0.290, 0.548, 0.322, 0.556, 0.344, 0.562),
 ]
 
-HUMPBACK_EYE = (0.075, 0.455)
+# The long pectoral fin, drawn in the same box. Root at the shoulder (0.26, 0.64),
+# sweeping back and down to a rounded tip near (0.42, 0.88).
+HUMPBACK_FLIPPER = profile(
+    [(0.268, 0.630), (0.310, 0.680), (0.352, 0.742), (0.388, 0.800),
+     (0.412, 0.848), (0.424, 0.884)],
+    [(0.262, 0.650), (0.300, 0.706), (0.338, 0.766), (0.370, 0.820),
+     (0.392, 0.862), (0.404, 0.884)],
+)
+
+
+def humpback_pleats(n=14):
+    """Throat grooves, fanned along the underside from chin to mid-belly."""
+    out = []
+    for i in range(n):
+        k = i / max(1, n - 1)
+        x0 = 0.040 + k * 0.300
+        y0 = 0.706 + k * 0.030
+        x1 = 0.062 + k * 0.330
+        y1 = y0 + 0.052 + k * 0.020
+        out.append([(x0, y0), ((x0 + x1) / 2, y0 + (y1 - y0) * 0.55), (x1, min(0.775, y1))])
+    return out
+
+
+def baleen_comb(n=20):
+    """Plates hanging from the mouth line, x 0.03 to 0.31, length 0.045..0.062."""
+    out = []
+    for i in range(n):
+        k = i / max(1, n - 1)
+        x = 0.032 + k * 0.278
+        ytop = 0.474 + k * 0.086
+        out.append([(x, ytop), (x - 0.002, ytop + 0.046 + 0.014 * (1 - k))])
+    return out
+
+
+def flipper_knobs(n=10):
+    """Tubercles along the fin's leading edge."""
+    out = []
+    for i in range(n):
+        k = i / max(1, n - 1)
+        x = 0.274 + k * 0.132
+        y = 0.646 + k * 0.222
+        out.append([(x, y), (x + 0.011, y + 0.004)])
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -423,40 +495,6 @@ def checks():
             for (x, y) in line:
                 assert 0.0 <= x <= 1.0 and 0.0 <= y <= 1.0, (fn, x, y)
     return True
-
-
-# ---------------------------------------------------------------------------
-# Profile builder
-# ---------------------------------------------------------------------------
-def _catmull(points, closed=False):
-    """Smooth C-segment path through `points` (Catmull-Rom -> cubic Bezier).
-
-    Hand-writing control points for a 200-pixel-wide animal is how you end up with
-    a shark whose tail is three unrelated polygons; specifying the outline as a
-    top edge and a bottom edge and letting this smooth them is both faster to
-    author and impossible to break.
-    """
-    pts = [(float(x), float(y)) for x, y in points]
-    n = len(pts)
-    if n < 3:
-        return [("M", *pts[0]), ("L", *pts[-1]), ("Z",)]
-    out = [("M", *pts[0])]
-    for i in range(n - 1):
-        p0 = pts[i - 1] if i > 0 else (2 * pts[0][0] - pts[1][0], 2 * pts[0][1] - pts[1][1])
-        p1, p2 = pts[i], pts[i + 1]
-        p3 = pts[i + 2] if i + 2 < n else (2 * pts[-1][0] - pts[-2][0], 2 * pts[-1][1] - pts[-2][1])
-        c1 = (p1[0] + (p2[0] - p0[0]) / 6.0, p1[1] + (p2[1] - p0[1]) / 6.0)
-        c2 = (p2[0] - (p3[0] - p1[0]) / 6.0, p2[1] - (p3[1] - p1[1]) / 6.0)
-        out.append(("C", c1[0], c1[1], c2[0], c2[1], p2[0], p2[1]))
-    out.append(("Z",))
-    return out
-
-
-def profile(top, bottom):
-    """Close a top profile and a bottom profile into one smooth silhouette."""
-    top = [(max(0.0, min(1.0, x)), max(0.0, min(1.0, y))) for x, y in top]
-    bottom = [(max(0.0, min(1.0, x)), max(0.0, min(1.0, y))) for x, y in bottom]
-    return _catmull(top + bottom, closed=True)
 
 
 # Blue whale: head at the left, blunt rostrum, flat back, 4 % dorsal set far aft.

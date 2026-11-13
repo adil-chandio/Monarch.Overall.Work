@@ -1,0 +1,469 @@
+{
+ "duration": 60.0,
+ "fps": 30,
+ "narration": {
+  "file": "oNarr.mp3",
+  "starts": 1.2,
+  "length": 40.76
+ },
+ "beats": [
+  {
+   "t0": 0.0,
+   "t1": 5.2,
+   "dur": 5.2,
+   "beat": "b_orcas_in",
+   "desc": "1. Orcas glide in from the left in loose formation, nothing on screen."
+  },
+  {
+   "t0": 5.2,
+   "t1": 6.1,
+   "dur": 0.9,
+   "beat": "b_wash",
+   "desc": "2. The reference cuts through a bright god-ray wash between scenes."
+  },
+  {
+   "t0": 6.1,
+   "t1": 9.4,
+   "dur": 3.3,
+   "beat": "b_arc",
+   "desc": "3. An orca arcs upward and a fish breaks above it."
+  },
+  {
+   "t0": 9.4,
+   "t1": 14.25,
+   "dur": 4.85,
+   "beat": "b_escort",
+   "desc": "4. Five orcas escort a blue whale \u2014 the reference's hero establishing shot."
+  },
+  {
+   "t0": 14.25,
+   "t1": 18.6,
+   "dur": 4.35,
+   "beat": "b_krill",
+   "desc": "5. Krill swarm; the orcas feed straight through it."
+  },
+  {
+   "t0": 18.6,
+   "t1": 22.4,
+   "dur": 3.8,
+   "beat": "b_card",
+   "desc": "13. The species card: Humpback Whale / 40 tonnes / 14 m, over the animal."
+  },
+  {
+   "t0": 22.4,
+   "t1": 25.6,
+   "dur": 3.2,
+   "beat": "b_pyramid",
+   "desc": "6. The trophic pyramid builds bottom-up."
+  },
+  {
+   "t0": 25.6,
+   "t1": 27.64,
+   "dur": 2.04,
+   "beat": "b_boss",
+   "desc": "7. THE BOSS OF THE SEA, an orca sitting above the pyramid's apex."
+  },
+  {
+   "t0": 27.64,
+   "t1": 31.4,
+   "dur": 3.76,
+   "beat": "b_scan",
+   "desc": "8. Orca scanning; sonar rings; a hazy whale far off, out of focus."
+  },
+  {
+   "t0": 31.4,
+   "t1": 35.6,
+   "dur": 4.2,
+   "beat": "b_flock",
+   "desc": "9. A flock of upright flippers around the orca."
+  },
+  {
+   "t0": 35.6,
+   "t1": 39.2,
+   "dur": 3.6,
+   "beat": "b_wheel",
+   "desc": "10. The same flippers rotate into a radial wheel \u2014 the reference's oddest shot."
+  },
+  {
+   "t0": 39.2,
+   "t1": 42.4,
+   "dur": 3.2,
+   "beat": "b_plan",
+   "desc": "11. Plan view: an orca ring with sonar sweeping in the middle."
+  },
+  {
+   "t0": 42.4,
+   "t1": 45.6,
+   "dur": 3.2,
+   "beat": "b_rise",
+   "desc": "12. A humpback rises toward camera: a huge soft mass entering frame."
+  },
+  {
+   "t0": 45.6,
+   "t1": 49.6,
+   "dur": 4.0,
+   "beat": "b_gansbaai",
+   "desc": "14. GANSBAAI, SOUTH AFRICA \u00b7 2017, then great whites in the water."
+  },
+  {
+   "t0": 49.6,
+   "t1": 54.0,
+   "dur": 4.4,
+   "beat": "b_kill",
+   "desc": "15. Orcas arrive; the kill-data panel slides in."
+  },
+  {
+   "t0": 54.0,
+   "t1": 60.0,
+   "dur": 6.0,
+   "beat": "b_defence",
+   "desc": "16. JUST PLAYING DEFENCE, a humpback between two orcas."
+  }
+ ],
+ "cues": [
+  {
+   "t": 0.15,
+   "cue": "sub_boom",
+   "gain": 0.55,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_orcas_in"
+  },
+  {
+   "t": 0.6,
+   "cue": "whoosh",
+   "gain": 0.42,
+   "pan": -0.5,
+   "len": 0.55,
+   "beat": "b_orcas_in"
+  },
+  {
+   "t": 1.3,
+   "cue": "whale_call",
+   "gain": 0.34,
+   "pan": -0.25,
+   "len": 2.6,
+   "beat": "b_orcas_in"
+  },
+  {
+   "t": 5.05,
+   "cue": "whoosh",
+   "gain": 0.55,
+   "pan": 0.3,
+   "len": 0.55,
+   "beat": "b_orcas_in"
+  },
+  {
+   "t": 6.1,
+   "cue": "whoosh",
+   "gain": 0.45,
+   "pan": 0.6,
+   "len": 0.55,
+   "beat": "b_wash"
+  },
+  {
+   "t": 6.3,
+   "cue": "whale_call",
+   "gain": 0.22,
+   "pan": 0.4,
+   "len": 2.6,
+   "beat": "b_arc"
+  },
+  {
+   "t": 9.4,
+   "cue": "sub_boom",
+   "gain": 0.62,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_arc"
+  },
+  {
+   "t": 9.55,
+   "cue": "whale_call",
+   "gain": 0.38,
+   "pan": -0.3,
+   "len": 2.6,
+   "beat": "b_escort"
+  },
+  {
+   "t": 10.4,
+   "cue": "sonar_ping",
+   "gain": 0.3,
+   "pan": 0.5,
+   "len": 1.14,
+   "beat": "b_escort"
+  },
+  {
+   "t": 14.25,
+   "cue": "whoosh",
+   "gain": 0.4,
+   "pan": -0.4,
+   "len": 0.55,
+   "beat": "b_escort"
+  },
+  {
+   "t": 14.6,
+   "cue": "bubble_burst",
+   "gain": 0.32,
+   "pan": -0.2,
+   "len": 1.5,
+   "beat": "b_krill"
+  },
+  {
+   "t": 15.6,
+   "cue": "bubble_burst",
+   "gain": 0.24,
+   "pan": 0.3,
+   "len": 1.5,
+   "beat": "b_krill"
+  },
+  {
+   "t": 18.05,
+   "cue": "riser",
+   "gain": 0.6,
+   "pan": 0.0,
+   "len": 1.5,
+   "beat": "b_krill"
+  },
+  {
+   "t": 18.6,
+   "cue": "sub_boom",
+   "gain": 0.72,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_krill"
+  },
+  {
+   "t": 18.75,
+   "cue": "whale_call",
+   "gain": 0.42,
+   "pan": 0.0,
+   "len": 2.6,
+   "beat": "b_card"
+  },
+  {
+   "t": 22.4,
+   "cue": "impact_tick",
+   "gain": 0.5,
+   "pan": 0.0,
+   "len": 0.22,
+   "beat": "b_card"
+  },
+  {
+   "t": 22.72,
+   "cue": "impact_tick",
+   "gain": 0.44,
+   "pan": 0.0,
+   "len": 0.22,
+   "beat": "b_pyramid"
+  },
+  {
+   "t": 23.04,
+   "cue": "impact_tick",
+   "gain": 0.4,
+   "pan": 0.0,
+   "len": 0.22,
+   "beat": "b_pyramid"
+  },
+  {
+   "t": 23.36,
+   "cue": "impact_tick",
+   "gain": 0.36,
+   "pan": 0.0,
+   "len": 0.22,
+   "beat": "b_pyramid"
+  },
+  {
+   "t": 25.6,
+   "cue": "sub_boom",
+   "gain": 0.55,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_pyramid"
+  },
+  {
+   "t": 25.7,
+   "cue": "teeth_sting",
+   "gain": 0.42,
+   "pan": 0.0,
+   "len": 0.9,
+   "beat": "b_boss"
+  },
+  {
+   "t": 27.64,
+   "cue": "sonar_ping",
+   "gain": 0.5,
+   "pan": 0.0,
+   "len": 1.14,
+   "beat": "b_boss"
+  },
+  {
+   "t": 28.56,
+   "cue": "sonar_ping",
+   "gain": 0.36,
+   "pan": 0.25,
+   "len": 1.14,
+   "beat": "b_scan"
+  },
+  {
+   "t": 29.48,
+   "cue": "sonar_ping",
+   "gain": 0.26,
+   "pan": -0.25,
+   "len": 1.14,
+   "beat": "b_scan"
+  },
+  {
+   "t": 31.4,
+   "cue": "whoosh",
+   "gain": 0.36,
+   "pan": -0.6,
+   "len": 0.55,
+   "beat": "b_scan"
+  },
+  {
+   "t": 32.2,
+   "cue": "whale_call",
+   "gain": 0.26,
+   "pan": 0.2,
+   "len": 2.6,
+   "beat": "b_flock"
+  },
+  {
+   "t": 35.6,
+   "cue": "whoosh",
+   "gain": 0.4,
+   "pan": 0.6,
+   "len": 0.55,
+   "beat": "b_flock"
+  },
+  {
+   "t": 35.8,
+   "cue": "sonar_ping",
+   "gain": 0.34,
+   "pan": -0.4,
+   "len": 1.14,
+   "beat": "b_wheel"
+  },
+  {
+   "t": 39.2,
+   "cue": "sonar_ping",
+   "gain": 0.46,
+   "pan": 0.0,
+   "len": 1.14,
+   "beat": "b_wheel"
+  },
+  {
+   "t": 40.6,
+   "cue": "teeth_sting",
+   "gain": 0.26,
+   "pan": 0.0,
+   "len": 0.9,
+   "beat": "b_plan"
+  },
+  {
+   "t": 42.1,
+   "cue": "riser",
+   "gain": 0.5,
+   "pan": 0.0,
+   "len": 1.5,
+   "beat": "b_plan"
+  },
+  {
+   "t": 42.4,
+   "cue": "whale_call",
+   "gain": 0.46,
+   "pan": 0.0,
+   "len": 2.6,
+   "beat": "b_plan"
+  },
+  {
+   "t": 42.55,
+   "cue": "bubble_burst",
+   "gain": 0.26,
+   "pan": 0.0,
+   "len": 1.5,
+   "beat": "b_rise"
+  },
+  {
+   "t": 45.6,
+   "cue": "sub_boom",
+   "gain": 0.58,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_rise"
+  },
+  {
+   "t": 45.6,
+   "cue": "whoosh",
+   "gain": 0.3,
+   "pan": -0.5,
+   "len": 0.55,
+   "beat": "b_rise"
+  },
+  {
+   "t": 49.6,
+   "cue": "whoosh",
+   "gain": 0.44,
+   "pan": 0.5,
+   "len": 0.55,
+   "beat": "b_gansbaai"
+  },
+  {
+   "t": 49.85,
+   "cue": "sub_boom",
+   "gain": 0.5,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_kill"
+  },
+  {
+   "t": 50.6,
+   "cue": "sonar_ping",
+   "gain": 0.32,
+   "pan": 0.35,
+   "len": 1.14,
+   "beat": "b_kill"
+  },
+  {
+   "t": 54.0,
+   "cue": "sub_boom",
+   "gain": 0.66,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_kill"
+  },
+  {
+   "t": 54.05,
+   "cue": "teeth_sting",
+   "gain": 0.46,
+   "pan": 0.0,
+   "len": 0.9,
+   "beat": "b_defence"
+  },
+  {
+   "t": 54.6,
+   "cue": "whale_call",
+   "gain": 0.4,
+   "pan": 0.0,
+   "len": 2.6,
+   "beat": "b_defence"
+  },
+  {
+   "t": 57.2,
+   "cue": "whoosh",
+   "gain": 0.34,
+   "pan": -0.4,
+   "len": 0.55,
+   "beat": "b_defence"
+  },
+  {
+   "t": 58.4,
+   "cue": "sub_boom",
+   "gain": 0.48,
+   "pan": 0.0,
+   "len": 1.6,
+   "beat": "b_defence"
+  }
+ ]
+}

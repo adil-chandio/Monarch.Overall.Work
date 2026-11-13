@@ -367,24 +367,26 @@ def humpback(f, x, y, w, h, flip=False, alpha=1.0, detail=True, blur=0.0):
                   flip=flip, segs=26, alpha=alpha)
     S.fill_shaded(f, C.HUMPBACK, bb, stops, flip=flip, segs=30, alpha=alpha)
     if detail and alpha > 0.5:
-        for pts in C.unit_to_px(C.humpback_pleats(16), bb, flip=flip):
-            f.d.line(pts, fill=(52, 57, 64, int(170 * alpha)),
-                     width=max(2, int(h * 0.010)), joint="curve")
-        for pts in C.unit_to_px(C.flipper_knobs(10), bb, flip=flip):
+        # throat grooves
+        for pts in C.unit_to_px(C.humpback_pleats(15), bb, flip=flip):
+            f.d.line(pts, fill=(48, 53, 60, int(175 * alpha)),
+                     width=max(2, int(h * 0.009)), joint="curve")
+        # baleen: gold plates hanging inside the mouth line
+        for pts in C.unit_to_px(C.baleen_comb(22), bb, flip=flip):
+            f.d.line(pts, fill=(226, 180, 60, int(238 * alpha)),
+                     width=max(2, int(h * 0.011)))
+        # tubercles along the fin's leading edge
+        for pts in C.unit_to_px(C.flipper_knobs(11), bb, flip=flip):
             (ax, ay), (bx, by) = pts
-            r = max(2.0, h * 0.012)
-            # a flipped bbox reverses x, so normalise before building the ellipse box
             x0k, x1k = min(ax, bx), max(ax, bx)
             y0k, y1k = min(ay, by), max(ay, by)
-            f.d.ellipse([x0k - r, y0k - r, x1k + r, y1k + r],
-                        fill=(236, 233, 226, int(230 * alpha)))
-        for pts in C.unit_to_px(C.baleen_comb(24), bb, flip=flip):
-            f.d.line(pts, fill=(226, 180, 60, int(235 * alpha)), width=max(2, int(h * 0.011)))
+            f.d.ellipse([x0k - 2.5, y0k - 2.5, x1k + 2.5, y1k + 2.5],
+                        fill=(238, 235, 228, int(234 * alpha)))
         S.rim_light(f, C.HUMPBACK, bb, colour=(175, 212, 224), width=max(2, int(h * 0.010)),
                     alpha=0.34 * alpha, flip=flip, segs=30)
-        S.streaks(f, C.HUMPBACK, bb, alpha=0.05 * alpha, n=32, flip=flip)
-    stroke_path(f.d, C.HUMPBACK_MOUTH, bb, (6, 8, 12, int(230 * alpha)),
-                width=max(2, int(h * 0.014)), flip=flip, segs=24)
+        S.streaks(f, C.HUMPBACK, bb, alpha=0.045 * alpha, n=28, flip=flip)
+    stroke_path(f.d, C.HUMPBACK_MOUTH, bb, (6, 8, 12, int(232 * alpha)),
+                width=max(2, int(h * 0.013)), flip=flip, segs=24)
     ex, ey = C.scale_point(bb, C.HUMPBACK_EYE)
     if flip:
         ex = x + w - (ex - x)
