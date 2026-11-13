@@ -561,7 +561,8 @@ def main():
             "share_10m": round(sum(1 for x in v if x >= 10_000_000) / len(v), 3),
             "median_duration": int(statistics.median([r["duration_seconds"] for r in rows])),
             "median_vpd": int(statistics.median([r["views_per_day"] for r in rows])),
-            "median_like_rate": statistics.median([r["like_rate"] for r in rows]),
+            "median_like_rate": (statistics.median([r["like_rate"] for r in rows if r["like_rate"] is not None])
+                                 if any(r["like_rate"] is not None for r in rows) else None),
             "question_rate": round(sum(1 for r in rows if r["has_question"]) / len(rows), 3),
             "number_rate": round(sum(1 for r in rows if r["has_number"]) / len(rows), 3),
             "second_person_rate": round(sum(1 for r in rows if r["second_person"]) / len(rows), 3),
