@@ -1,13 +1,13 @@
 # livyatan-short
 
-**artifacts-pending** · 16/16 steps (100%) · updated 2026-11-13T10:11:35.553Z
+**artifacts-pending** · 16/16 steps (100%) · updated 2026-11-13T10:11:36.935Z
 
 > Flat-vector documentary short in the reference style: Livyatan vs Megalodon, 66s
 
 ## Resume here
 
 ```bash
-(not set)
+extend scripts/livyatan-film.py with the remaining reference devices: counting grid, fake rewind UI, water-surface shots; then rebuild at 1080p for upload
 ```
 
 ## Artifacts
