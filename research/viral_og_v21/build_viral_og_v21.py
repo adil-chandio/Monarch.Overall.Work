@@ -510,7 +510,7 @@ def main():
         exact = exact_title_present(shots, b.get("channel_id"))
         # A wrong channel can look verified on fuzzy hits (copycats keep 80% of the words).
         # Exact-title presence on the channel's own uploads is the tie-breaker.
-        if exact == 0 and hits < len(shots):
+        if exact == 0 and hits < len(shots) and not strong_match:
             for t in sorted(shots, key=len, reverse=True)[:3]:
                 alt = resolve_by_title(t)
                 if not alt or alt == b.get("channel_id"):
