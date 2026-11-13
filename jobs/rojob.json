@@ -1,0 +1,22 @@
+{
+  "id": "rojob",
+  "status": "running",
+  "goal": "x",
+  "total": 2,
+  "done": 0,
+  "unit": "steps",
+  "created": "2026-11-13T05:59:23.382Z",
+  "updated": "2026-11-13T05:59:23.382Z",
+  "resume": {
+    "next_command": "echo go",
+    "notes": ""
+  },
+  "artifacts": [],
+  "decisions": [],
+  "log": [
+    {
+      "at": "2026-11-13T05:59:23.382Z",
+      "what": "started: x"
+    }
+  ]
+}
