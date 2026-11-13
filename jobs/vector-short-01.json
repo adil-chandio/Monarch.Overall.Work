@@ -6,9 +6,9 @@
   "done": 12,
   "unit": "steps",
   "created": "2026-11-13T09:32:50.750Z",
-  "updated": "2026-11-13T09:33:12.645Z",
+  "updated": "2026-11-13T09:33:14.037Z",
   "resume": {
-    "next_command": "",
+    "next_command": "open docs/research/competitor-apexmorph/2026-11-13-frame-by-frame.md, then extend scripts/vector-film.py with device 2 (counting grid), device 7 (visible sound), device 9 (fake rewind); rebuild with: /tmp/venv-ff/bin/python scripts/vector-film.py --srt production/extinct-life/homotherium-short/English.srt --out FRAMES --fps 30, then encode against the flac narration",
     "notes": ""
   },
   "artifacts": [
