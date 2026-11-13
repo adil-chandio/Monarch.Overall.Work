@@ -1,12 +1,12 @@
 {
   "id": "testjob",
-  "status": "running",
+  "status": "paused",
   "goal": "prove the ledger works",
   "total": 4,
   "done": 3,
   "unit": "steps",
   "created": "2026-11-13T05:55:46.505Z",
-  "updated": "2026-11-13T05:55:50.886Z",
+  "updated": "2026-11-13T05:55:51.057Z",
   "resume": {
     "next_command": "echo continue",
     "notes": ""
@@ -37,6 +37,14 @@
     {
       "at": "2026-11-13T05:55:50.886Z",
       "what": "uploaded /tmp/fake.mp4 -> Drive 1FAKEfakeFake123456789"
+    },
+    {
+      "at": "2026-11-13T05:55:51.057Z",
+      "what": "awaiting operator: approve S5 lighting?"
+    },
+    {
+      "at": "2026-11-13T05:55:51.057Z",
+      "what": "paused"
     }
   ]
 }
