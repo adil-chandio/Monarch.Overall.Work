@@ -16,7 +16,7 @@ QUERIES = [
 out = {}
 for q in QUERIES:
     try:
-        rows = disc.inner_search(q, pages=1)
+        rows = disc.inner_search(q, max_pages=1)
     except Exception as e:  # noqa: BLE001
         print(f"### {q}  -> ERROR {repr(e)[:80]}", flush=True)
         continue
