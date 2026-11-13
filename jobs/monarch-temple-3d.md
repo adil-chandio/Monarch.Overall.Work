@@ -1,6 +1,6 @@
 # monarch-temple-3d
 
-**artifacts-pending** · 480/480 frames (100%) · updated 2026-11-13T05:56:50.305Z
+**artifacts-pending** · 480/480 frames (100%) · updated 2026-11-13T05:56:50.435Z
 
 > Mafia temple 3D — 480 frames, 20s, 1280x720, 14/14 QC; final MP4 to Drive then YouTube
 
@@ -9,6 +9,8 @@
 ```bash
 bash scripts/render-all.sh   # re-render only if frames are missing; otherwise encode + upload
 ```
+
+LESSON from 2026-11-13: the previous attempt finished all 480 frames and a 12.6 MB MP4, then went idle without uploading. The reset took everything. This time: upload the MP4 to Drive the moment ffmpeg exits, run 'job.mjs uploaded' with the drive_id, and only then pause.
 
 ## Artifacts
 
