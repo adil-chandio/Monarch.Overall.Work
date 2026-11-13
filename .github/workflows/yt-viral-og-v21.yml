@@ -106,8 +106,9 @@ jobs:
           assert run['resolved_channels'] >= 33, run['resolved_channels']
           assert run['identity_verified_channels'] >= 22, run['identity_verified_channels']
           assert run['catalogue_videos'] >= 1000, run['catalogue_videos']
-          assert run['lanes'] == 24, run['lanes']
+          assert run['lanes'] == 36, run['lanes']
           assert run['lane_rows'] >= 700, run['lane_rows']
+          assert run['unique_videos'] >= 1200, run['unique_videos']
           assert all(l['ids_count'] > 0 for l in json.loads((b/'lanes_v21.json').read_text())['lanes']), 'empty lane'
           assert run['unique_videos'] >= 1100, run['unique_videos']
           vids = json.loads((b/'videos_v21.json').read_text())

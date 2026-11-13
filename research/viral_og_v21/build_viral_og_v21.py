@@ -64,7 +64,7 @@ LANES = [
     {"slug": "every_type_explained", "q": "every type explained in minutes animation"},
     {"slug": "if_humans", "q": "if humans were nocturnal animation"},
 ]
-BUCKETS = [("short", "short"), ("long", "long")]
+BUCKETS = [("short", "short"), ("medium", "medium"), ("long", "long")]
 
 
 def pause(sec=1.0):
@@ -455,7 +455,15 @@ def main():
                       "order": "viewCount", "regionCode": "US", "relevanceLanguage": "en",
                       "safeSearch": "moderate", "videoDuration": dv}
             # discovery via the public web endpoint; v3/search is 429-blocked from CI IPs
-            ids, route = disc.ids_for(l["q"], pages=2, duration=dv)
+            ids, route = disc.ids_for(l["q"], pages=3, duration=dv)
+            if len(ids) < 12:
+                wide, r2 = disc.ids_for(l["q"], pages=2, duration=None)
+                keep = set(ids)
+                for i in wide:
+                    if i not in keep:
+                        ids.append(i)
+                if len(ids) > len(keep):
+                    route += "+" + r2 + ":unfiltered"
             status = "ok:" + route if ids else "empty"
             if dv == "short":
                 # keep only rows whose hinted length matches the bucket; unknown length is kept
