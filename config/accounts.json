@@ -3,24 +3,29 @@
   "updated": "2026-11-13",
   "space": "personal-brand",
   "note": "The operator's real distribution model, stated by him on 2026-11-13. This file replaces the three-account guess in social.json, which was written on 2026-11-03 from workspace defaults and never confirmed. He has TWO accounts, both of which publish to EVERY platform. This is not the same shape as channels.json: channels.json describes YouTube channels with per-channel configs; this file describes the two identities that own the social accounts, because one short is cut once and delivered to four platforms at once.",
-
   "the_model": {
     "shorts": {
       "what": "One vertical short per idea.",
-      "goes_to": ["TikTok", "Instagram", "YouTube Shorts", "Facebook"],
+      "goes_to": [
+        "TikTok",
+        "Instagram",
+        "YouTube Shorts",
+        "Facebook"
+      ],
       "rule": "Cut once. Deliver to all four. The same file, not four edits.",
-      "cadence": "as often as quality allows — both accounts, every week"
+      "cadence": "as often as quality allows \u2014 both accounts, every week"
     },
     "long_form": {
       "what": "One long video per idea.",
-      "goes_to": ["YouTube"],
+      "goes_to": [
+        "YouTube"
+      ],
       "rule": "YouTube only. Never posted to TikTok, Instagram or Facebook.",
       "cadence": "1-2 per week, maximum",
       "why_capped": "stated by the operator: hafte mein 1 ya 2 baar, sirf YouTube par"
     },
-    "why_two_shapes": "Shorts are a distribution game — the same 40 seconds earns on four platforms. Long-form is a trust game — it only works where people subscribe, which is YouTube. Treating them as one pipeline is what produced the earlier confusion."
+    "why_two_shapes": "Shorts are a distribution game \u2014 the same 40 seconds earns on four platforms. Long-form is a trust game \u2014 it only works where people subscribe, which is YouTube. Treating them as one pipeline is what produced the earlier confusion."
   },
-
   "accounts": [
     {
       "id": "acc-01",
@@ -32,54 +37,95 @@
       "niche": "self-improvement, motivation, discipline",
       "voice": "direct, Roman-Urdu + English, no lecture tone",
       "audience": "16-25, Pakistan-first",
-      "formats": ["short", "long"],
+      "formats": [
+        "short",
+        "long"
+      ],
       "platforms": {
-        "shorts": ["TikTok", "Instagram", "YouTube Shorts", "Facebook"],
-        "long": ["YouTube"]
+        "shorts": [
+          "TikTok",
+          "Instagram",
+          "YouTube Shorts",
+          "Facebook"
+        ],
+        "long": [
+          "YouTube"
+        ]
       },
       "cadence": {
         "shorts": "as often as quality allows",
         "long": "1-2 / week, YouTube only"
       },
       "content_unit": "30-45 s vertical",
-      "pillars": ["discipline over motivation", "start before ready", "quiet consistency"],
-      "banned": ["hustle-porn", "fake quotes", "generic stock montage"],
-      "kpi": { "primary": "saves_plus_shares_rate", "target": 4 }
+      "pillars": [
+        "discipline over motivation",
+        "start before ready",
+        "quiet consistency"
+      ],
+      "banned": [
+        "hustle-porn",
+        "fake quotes",
+        "generic stock montage"
+      ],
+      "kpi": {
+        "primary": "saves_plus_shares_rate",
+        "target": 4
+      }
     },
     {
       "id": "acc-02",
       "label": "AI Learning & Earning",
       "handle": "adil.chandio.ai",
       "handle_raw": "adil.chandio.ai",
-      "handle_note": "Stored exactly as the operator gave it. He did not say whether the leading dot form or an @-prefixed form is the actual TikTok/Facebook handle — those platforms do not all use dots. Verify before the first automated post; a wrong handle publishes to a stranger's account or fails.",
+      "handle_note": "Stored exactly as the operator gave it. He did not say whether the leading dot form or an @-prefixed form is the actual TikTok/Facebook handle \u2014 those platforms do not all use dots. Verify before the first automated post; a wrong handle publishes to a stranger's account or fails.",
       "handle_unverified": true,
       "niche": "AI learning, the AI world, and earning with it",
       "voice": "technical honesty, show the failure too, cost in rupees",
       "audience": "builders, learners, prospective clients",
-      "formats": ["short", "long"],
+      "formats": [
+        "short",
+        "long"
+      ],
       "platforms": {
-        "shorts": ["TikTok", "Instagram", "YouTube Shorts", "Facebook"],
-        "long": ["YouTube"]
+        "shorts": [
+          "TikTok",
+          "Instagram",
+          "YouTube Shorts",
+          "Facebook"
+        ],
+        "long": [
+          "YouTube"
+        ]
       },
       "cadence": {
         "shorts": "as often as quality allows",
         "long": "1-2 / week, YouTube only"
       },
       "content_unit": "30-45 s vertical",
-      "pillars": ["how it actually works", "what broke", "cost in rupees"],
-      "banned": ["unsourced claims", "tool-list filler with no demo", "AI-generated faces presented as the creator"],
-      "kpi": { "primary": "saves_plus_shares_rate", "target": 4 }
+      "pillars": [
+        "how it actually works",
+        "what broke",
+        "cost in rupees"
+      ],
+      "banned": [
+        "unsourced claims",
+        "tool-list filler with no demo",
+        "AI-generated faces presented as the creator"
+      ],
+      "kpi": {
+        "primary": "saves_plus_shares_rate",
+        "target": 4
+      }
     }
   ],
-
   "rules": [
     "A short is cut once and delivered to all four platforms. It is never re-edited per platform.",
     "A long video is YouTube only. Posting it to TikTok/Instagram/Facebook is a defect, not a bonus.",
     "Long-form is capped at 1-2 per week on purpose. The cap is the point, not a limitation to work around.",
     "The two accounts never share a voice. Motivational and AI-learning speak differently or the second one reads as a repost.",
-    "Nothing is published with an unverified handle. handle_unverified is true on both accounts until checked against the live platform."
+    "Nothing is published with an unverified handle. handle_unverified is true on both accounts until checked against the live platform.",
+    "The operator publishes by hand. The agent delivers a finished file and the caption text, then stops."
   ],
-
   "known_gaps": [
     {
       "id": "gap-handles",
@@ -96,8 +142,25 @@
     {
       "id": "gap-upload-not-built",
       "what": "There is no upload path. Not to YouTube, not to TikTok, not to Instagram, not to Facebook.",
-      "why_it_matters": "This sandbox cannot reach any of those APIs (measured: graph.facebook.com 000, open-api.tiktok.com 000, graph.instagram.com 000). Publishing has to happen from GitHub Actions, which does have network access.",
-      "fix": "Build .github/workflows/publish-short.yml. Needs YouTube OAuth for video upload (the existing YT_API_KEY is a read-only data key and cannot upload), a Meta app with Instagram Graph + Pages permissions, and a TikTok Content Posting API approval. Meta and TikTok both require an application review that takes weeks — start both reviews before writing the workflow."
+      "why_it_matters": "Nothing. He uploads himself, so a missing API path costs no work. Recorded only so a future session does not spend hours re-measuring the four blocked hosts.",
+      "fix": "NOT needed unless the operator asks. He publishes by hand as of 2026-11-13. If he ever asks: build .github/workflows/publish-short.yml. Needs YouTube OAuth for video upload (the existing YT_API_KEY is read-only and cannot upload), a Meta app with Instagram Graph + Pages permissions, and a TikTok Content Posting API approval. Meta and TikTok each need an application review measured in weeks \u2014 start both before writing the workflow.",
+      "status": "deferred-by-operator"
     }
-  ]
+  ],
+  "publishing": {
+    "who_publishes": "the operator, by hand",
+    "decided": "2026-11-13",
+    "operator_words": "Acha upload me khud kardunga filhal baaqi sab theek ha",
+    "means": [
+      "Do NOT build an upload automation. It was not asked for and it is not wanted right now.",
+      "The agent's job ends when the finished file exists and is reachable: in Drive, or in a GitHub Release.",
+      "Give the operator the file plus the exact caption/hashtags, and stop. Do not print a tutorial on how to upload.",
+      "This is 'filhal' \u2014 for now. If he asks for automation later, gap-upload-not-built in known_gaps still holds every finding, including the app-review lead times."
+    ],
+    "what_the_agent_still_owes": [
+      "The short cut to the right spec: 9:16 vertical, 30-45 s, safe margins for four platforms at once.",
+      "A caption and hashtag set that works on TikTok, Instagram, YouTube Shorts and Facebook without editing.",
+      "The file named so it is obvious which account it belongs to."
+    ]
+  }
 }

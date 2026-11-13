@@ -192,6 +192,16 @@ test("every Drive folder that claims a channel exists in channels.json", () => {
   }
 });
 
+test("the operator-uploads-by-hand decision is recorded and guarded", () => {
+  const a = read("config/accounts.json");
+  assert.equal(a.publishing.who_publishes, "the operator, by hand");
+  const gap = a.known_gaps.find((g) => g.id === "gap-upload-not-built");
+  assert.equal(gap.status, "deferred-by-operator", "gap-upload-not-built is no longer marked deferred");
+  const agents = readFileSync(resolve(ROOT, "AGENTS.md"), "utf8");
+  assert.ok(agents.includes("uploads by hand"), "AGENTS.md lost the by-hand decision");
+  assert.ok(/do \*\*not\*\* build an upload automation/i.test(agents), "AGENTS.md no longer forbids building one");
+});
+
 test("AGENTS.md keeps the two-account publishing model", () => {
   const agents = readFileSync(resolve(ROOT, "AGENTS.md"), "utf8");
   for (const phrase of [

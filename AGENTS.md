@@ -76,13 +76,17 @@ Three things this settles that were previously guessed:
 - The two accounts never share a voice. Remove either one's voice and the other reads as a
   repost, which is the fastest way to lose both audiences.
 
-**Blocked, and this is not a reading — it is measured:** this sandbox cannot reach any of
-the four platforms. `graph.facebook.com`, `graph.instagram.com`, `open-api.tiktok.com`
-and `oauth2.googleapis.com` all return `000` here. Publishing must run from GitHub
-Actions. Before writing `publish-short.yml`, read `known_gaps` in
-`config/accounts.json` — YouTube needs an OAuth client (the existing `YT_API_KEY` is
-read-only and **cannot upload**), Meta and TikTok both need an app review that takes
-weeks. Start those reviews first; they are the long pole.
+**The operator uploads by hand.** Settled 2026-11-13 — his words: *"Acha upload me khud
+kardunga filhal baaqi sab theek ha"*. Do **not** build an upload automation. Your job
+ends when the file is finished and reachable (Drive, or a GitHub Release) and you have
+handed over a caption + hashtags that work on all four platforms unchanged.
+
+Do not re-litigate this, and do not print an upload tutorial he did not ask for. If he
+ever does ask for automation, `known_gaps → gap-upload-not-built` in
+`config/accounts.json` still holds every finding, including the measured facts: this
+sandbox reaches none of the four hosts (all `000`), the existing `YT_API_KEY` is
+read-only and cannot upload, and Meta + TikTok each need an app review measured in
+weeks.
 
 ---
 
