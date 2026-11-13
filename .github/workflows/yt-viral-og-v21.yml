@@ -104,7 +104,7 @@ jobs:
           assert run['resolved_channels'] >= 28, run['resolved_channels']
           assert run['identity_verified_channels'] >= 22, run['identity_verified_channels']
           assert run['catalogue_videos'] >= 500, run['catalogue_videos']
-          assert run['lanes'] == 16, run['lanes']
+          assert run['lanes'] == 20, run['lanes']
           assert run['unique_videos'] >= 800, run['unique_videos']
           vids = json.loads((b/'videos_v21.json').read_text())
           assert vids['count'] == run['unique_videos'], (vids['count'], run['unique_videos'])

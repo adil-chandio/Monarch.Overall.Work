@@ -56,6 +56,10 @@ LANES = [
     {"slug": "money_2d", "q": "economics explained animation banana"},
     {"slug": "prehistory_short", "q": "ancient humans daily life animation"},
     {"slug": "stickman_motivation", "q": "animated short film about discipline"},
+    {"slug": "pov_life_rank", "q": "POV your life as every rank animation"},
+    {"slug": "last_minutes", "q": "the last seconds before disaster animation"},
+    {"slug": "every_type_explained", "q": "every type explained in minutes animation"},
+    {"slug": "if_humans", "q": "if humans were nocturnal animation"},
 ]
 BUCKETS = [("short", "short"), ("long", "long")]
 
