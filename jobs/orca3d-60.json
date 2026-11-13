@@ -6,17 +6,28 @@
   "done": 0,
   "unit": "steps",
   "created": "2026-11-13T14:34:12.671Z",
-  "updated": "2026-11-13T14:34:15.134Z",
+  "updated": "2026-11-13T14:34:16.725Z",
   "resume": {
     "next_command": "",
     "notes": ""
   },
-  "artifacts": [],
+  "artifacts": [
+    {
+      "path": "/tmp/Why-Orcas-Fear-Humpbacks-3D-60s-720p.mp4",
+      "bytes": 24366886,
+      "sha256": "70426a8dbc9c618ac8e6dc9d5f17b46ef4b9a62ab444a6cca673dde985b2492e",
+      "drive_id": null
+    }
+  ],
   "decisions": [],
   "log": [
     {
       "at": "2026-11-13T14:34:12.672Z",
       "what": "started: "
+    },
+    {
+      "at": "2026-11-13T14:34:16.725Z",
+      "what": "artifact /tmp/Why-Orcas-Fear-Humpbacks-3D-60s-720p.mp4 23.2 MB sha256 70426a8dbc9c"
     }
   ]
 }
