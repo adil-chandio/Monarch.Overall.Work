@@ -295,7 +295,7 @@ def gait_angles(t, speed=1.0, run=False, phase=0.0):
     * The arms counter-swing the legs, and the amount they swing is the one
       thing that most separates a walk from a mannequin being dragged.
     """
-    w = 2.0 * math.pi * ((2.45 if run else 1.05) * speed)
+    w = 2.0 * math.pi * ((1.0 if run else 1.05) * speed)
     p = t * w + phase
 
     hip_a = 0.62 if run else 0.36          # peak hip flexion, radians
@@ -330,7 +330,6 @@ def gait_angles(t, speed=1.0, run=False, phase=0.0):
     # sit out in front of the chest at the passing frame and read as a man
     # carrying a tray.
     if run:
-        uL = -math.sin(p) / max(arm_a, 1e-6) * arm_a / arm_a
         uL = -math.sin(p)
         uR = -math.sin(p + math.pi)
         elbowL = 1.15 + 0.55 * uL
@@ -382,7 +381,6 @@ def pose_at(t, root=(0.0, 0.0), yaw=0.0, run=False, lean_extra=0.0,
     chest = spine + np.array([0, 0.26 * math.cos(lean), 0.26 * math.sin(lean)])
     neck = chest + np.array([0, 0.10 * math.cos(lean), 0.10 * math.sin(lean)])
     head_c = neck + np.array([0, 0.115, 0.012])
-    head_top = neck + np.array([0, 0.255, 0.012])
 
     # A coat is a truncated cone, not a cylinder: the torso is broad at the
     # shoulders and narrow at the waist, and reading that taper is most of what
@@ -403,7 +401,6 @@ def pose_at(t, root=(0.0, 0.0), yaw=0.0, run=False, lean_extra=0.0,
         # the head sits on a neck instead of straight on the shoulders
         ('trap', chest, neck, 0.105, 0.062, 'cloth'),
         ('neck', neck, head_c, 0.047, 0.045, 'skin'),
-        ('head', head_c, head_top, 0.070, 0.070, 'skin'),
     ]
 
     for side, th, kn in (('L', a['thighL'], a['kneeL']),
@@ -443,11 +440,7 @@ def pose_at(t, root=(0.0, 0.0), yaw=0.0, run=False, lean_extra=0.0,
         el = sh + np.array([0, -0.285 * math.cos(ar), 0.285 * math.sin(ar)])
         # The elbow flex must be measured from the UPPER ARM's hang, with the
         # forearm bending forward:
-        #     dir = (0, -cos(a - e), sin(a - e))
-        # Writing it as a + e instead made a back-swinging upper arm throw its
-        # forearm forward, so both hands always ended up in front of the chest
-        # and the run read as a man holding a tray. Check: a = -0.8 (arm back),
-        # e = 1.0 gives the hand well behind and below the shoulder.
+        # Keep the forearm flexed forward relative to the upper arm.
         fa = ar + eb
         wr = el + np.array([0, -0.255 * math.cos(fa), 0.255 * math.sin(fa)])
         segs.append((f'upperArm{side}', sh, el, 0.055, 0.045, 'cloth'))

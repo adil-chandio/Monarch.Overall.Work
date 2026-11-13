@@ -169,6 +169,17 @@ class Frame:
             mat_sub[m] = mi
             p = sub_ro + sub_rd * tp[..., None]
             nrm_sub[m] = geom.ellipsoid_normal(p, p1, p2, B)[m]
+        elif kind == K_CAPSULE:
+            tp, _ = geom.ray_capsule(sub_ro, sub_rd, p1, p2, p3[0])
+            m = tp < t_sub
+            if not m.any():
+                return
+            t_sub[m] = tp[m]
+            mat_sub[m] = mi
+            ba = p2 - p1
+            pp = sub_ro[m] + sub_rd[m] * tp[m, None]
+            k = np.clip(((pp - p1) @ ba) / max(float(ba @ ba), 1e-8), 0, 1)
+            nrm_sub[m] = geom.normalise(pp - (p1 + k[..., None] * ba))
         elif kind == K_FRUSTUM:
             tp, _ss = geom.ray_frustum(sub_ro, sub_rd, p1, p2, p3[0], p3[1])
             m = tp < t_sub
