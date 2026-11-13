@@ -6,9 +6,9 @@
   "done": 0,
   "unit": "frames",
   "created": "2026-11-13T22:37:10.929Z",
-  "updated": "2026-11-13T22:37:10.929Z",
+  "updated": "2026-11-13T22:37:14.600Z",
   "resume": {
-    "next_command": "",
+    "next_command": "OUT=/tmp/v2 CHUNK=150 TOTAL=1800 ./scripts/render-orca3d-v2.sh (skips existing parts/), then: ffmpeg mux /tmp/v2/video.mp4 + /tmp/orca-final.m4a -> upload to Drive -> job artifact/uploaded",
     "notes": ""
   },
   "artifacts": [],
