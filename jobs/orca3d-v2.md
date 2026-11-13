@@ -1,6 +1,6 @@
 # orca3d-v2
 
-**running** · 0/1800 frames (0%) · updated 2026-11-13T22:37:14.600Z
+**running** · 300/1800 frames (17%) · updated 2026-11-13T22:41:10.479Z
 
 > Skill-gated rebuild of the 60s orca film: fix the missing white markings, marine snow, god rays; rebuild the sound bed from the repo DSP engine to pass showreel.audio_qc 9/9 and match the shipped showreel master within 2 dB on all 8 bands
 
@@ -17,3 +17,4 @@ _none yet_
 ## Log
 
 - `22:37` started: Skill-gated rebuild of the 60s orca film: fix the missing white markings, marine snow, god rays; rebuild the sound bed from the repo DSP engine to pass showreel.audio_qc 9/9 and match the shipped showreel master within 2 dB on all 8 bands
+- `22:41` chunks 0-1 encoded; chunk pipeline fixed (0-based renumber, resume skip)
