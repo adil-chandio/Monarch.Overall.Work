@@ -12,7 +12,41 @@
    "why": "unresolved:RateLimited('gave up after 3 attempts on https://www.googleapis.com/youtube/v3/s"
   }
  ],
- "identity_audit": [],
+ "identity_audit": [
+  {
+   "name": "Ink Explainer",
+   "old_id": "UClhEbIxXuHSm_yAZjWRMXBw",
+   "old_title": "Ink Explainer",
+   "old_hits": 0,
+   "new_id": "UCLHcyd0lRm0Mb0CDv8oVb5A",
+   "new_title": "Whatly",
+   "new_hits": 3,
+   "shots": 6,
+   "fix": "re-resolved by video title"
+  },
+  {
+   "name": "Mack",
+   "old_id": "UCGor2L_Co7NrwLEWrgIbaBw",
+   "old_title": "Mack",
+   "old_hits": 0,
+   "new_id": "UCmrSinqf-W1xJv8NC7dWxyQ",
+   "new_title": "Zee Explain",
+   "new_hits": 1,
+   "shots": 3,
+   "fix": "re-resolved by video title"
+  },
+  {
+   "name": "Last Soul",
+   "old_id": "UCBEGdZ3YyZ1qG1gSwUKKTCg",
+   "old_title": "Last Soul",
+   "old_hits": 1,
+   "new_id": "UC1KdreKS5rsLrR2USLnykFQ",
+   "new_title": "2 AM Mind",
+   "new_hits": 2,
+   "shots": 4,
+   "fix": "re-resolved by video title"
+  }
+ ],
  "channels": [
   {
    "channel_id": "UClhEbIxXuHSm_yAZjWRMXBw",
@@ -29,17 +63,7 @@
    "cluster": "stickman_prehistory",
    "screenshot_subs": null,
    "screenshot_videos": null,
-   "age_days": 0,
-   "catalogue_n": 1,
-   "median_views": 711,
-   "outlier_count": 0,
-   "identity": {
-    "screenshot_titles": 6,
-    "matched": 0,
-    "rate": 0.0,
-    "verified": false,
-    "method": "forHandle"
-   }
+   "age_days": 0
   },
   {
    "channel_id": "UCK8TbMQGDbB94EOR3aGJo3Q",
@@ -166,7 +190,7 @@
    "screenshot_videos": null,
    "age_days": 0,
    "catalogue_n": 14,
-   "median_views": 3071,
+   "median_views": 3072,
    "outlier_count": 1,
    "identity": {
     "screenshot_titles": 5,
@@ -218,17 +242,7 @@
    "cluster": "stickman_prehistory_cold",
    "screenshot_subs": "47",
    "screenshot_videos": 16,
-   "age_days": 0,
-   "catalogue_n": 9,
-   "median_views": 1887,
-   "outlier_count": 3,
-   "identity": {
-    "screenshot_titles": 3,
-    "matched": 0,
-    "rate": 0.0,
-    "verified": false,
-    "method": "forHandle"
-   }
+   "age_days": 0
   },
   {
    "channel_id": "UCXbCOOoXE09V6StOp0gbTFQ",
@@ -247,7 +261,7 @@
    "screenshot_videos": 107,
    "age_days": 0,
    "catalogue_n": 100,
-   "median_views": 368085,
+   "median_views": 368086,
    "outlier_count": 18,
    "identity": {
     "screenshot_titles": 2,
@@ -328,7 +342,7 @@
    "screenshot_videos": 34,
    "age_days": 0,
    "catalogue_n": 41,
-   "median_views": 382444,
+   "median_views": 382442,
    "outlier_count": 7,
    "identity": {
     "screenshot_titles": 2,
@@ -436,7 +450,7 @@
    "screenshot_videos": 13,
    "age_days": 0,
    "catalogue_n": 23,
-   "median_views": 67747,
+   "median_views": 67730,
    "outlier_count": 5,
    "identity": {
     "screenshot_titles": 10,
@@ -488,17 +502,7 @@
    "cluster": "animated_short_film",
    "screenshot_subs": "4.85K",
    "screenshot_videos": 4,
-   "age_days": 0,
-   "catalogue_n": 12,
-   "median_views": 8967,
-   "outlier_count": 3,
-   "identity": {
-    "screenshot_titles": 4,
-    "matched": 1,
-    "rate": 0.25,
-    "verified": false,
-    "method": "forHandle"
-   }
+   "age_days": 0
   },
   {
    "channel_id": "UChFs6t9iB1yv0X8fuKtNIvA",
@@ -625,7 +629,7 @@
    "screenshot_videos": 21,
    "age_days": 0,
    "catalogue_n": 29,
-   "median_views": 110099,
+   "median_views": 110097,
    "outlier_count": 8,
    "identity": {
     "screenshot_titles": 1,
@@ -652,7 +656,7 @@
    "screenshot_videos": 21,
    "age_days": 0,
    "catalogue_n": 24,
-   "median_views": 362335,
+   "median_views": 362343,
    "outlier_count": 3,
    "identity": {
     "screenshot_titles": 1,
@@ -679,7 +683,7 @@
    "screenshot_videos": 1,
    "age_days": 0,
    "catalogue_n": 2,
-   "median_views": 1189450,
+   "median_views": 1189588,
    "outlier_count": 0,
    "identity": {
     "screenshot_titles": 1,
@@ -841,7 +845,7 @@
    "screenshot_videos": 141,
    "age_days": 0,
    "catalogue_n": 100,
-   "median_views": 1526,
+   "median_views": 1528,
    "outlier_count": 16,
    "identity": {
     "screenshot_titles": 3,
