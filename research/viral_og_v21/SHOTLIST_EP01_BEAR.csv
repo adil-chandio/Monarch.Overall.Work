@@ -1,0 +1,33 @@
+shot,timecode,seconds,chapter,description,camera,3d_build,sound,on_screen_text
+S01,0:00,10,cold,Black. A single bear skull on a rock ledge inside a cave.,"static macro, no move","skull prop (5k tris), rock ledge, dust",-,
+S02,0:10,10,cold,"The skull, firelight flickering from off-frame left.",slow push-in,same set + fire light rig,"fire, distant drip",A SKULL ON A ROCK
+S03,0:20,10,cold,Reveal: we are deep in a cave; the entrance is a tiny dot of blue far behind.,"pull back, wide",hero cave set v1 (interior),echo,
+S04,0:30,10,cold,"Empty cave floor: old bones scattered, bear-sized.",low dolly over floor,bone scatter instancing,-,
+S05,0:40,16,ch1,A modern brown bear silhouette rears up next to a human silhouette.,"side profile, scale chart","2 rigs, no detail",-,THE BEAR THAT COULD LOOK A MAN IN THE EYE
+S06,0:56,22,ch1,"Same shot, cave bear replaces brown bear: taller, heavier, steeper skull.","locked off, morph",cave bear rig,low rumble,
+S07,1:18,20,ch1,"The skull comparison: modern bear vs cave bear, side by side.",macro static,2 skull meshes,-,
+S08,1:38,16,ch1,Cave bear molars grinding plants — a pile of vegetation.,macro,jaw + leaf pile,crunch,
+S09,1:54,16,ch1,Reversal: the bear does not run. It stands its ground at the cave mouth.,low angle,rig + cave mouth matte,breath,
+S10,2:10,18,ch2,A map-less migration: human silhouettes walking into a cold valley.,"wide, slow crane",terrain set (cheap billboards),wind,WE MOVED INTO THEIR HOUSE
+S11,2:28,18,ch2,"A cave entrance in winter, snow, one dark hole in the rock.",static wide,exterior cave set,snow hiss,
+S12,2:46,18,ch2,"Cut inside: a hibernating bear, breathing slowly, in the same cave.",dolly past,"bear rig, sleep pose",breathing,
+S13,3:04,18,ch2,Now the same cave with a human family and a fire. Same framing.,"match cut, identical framing","reuse interior, add fire+people",fire,
+S14,3:22,18,ch2,"Split screen: bear side / human side, same room.",split,composite,-,
+S15,3:40,18,ch3,Firelit hands shaping a stone tool.,macro,hand rig + stone,stone on stone,WHAT A FIGHT LOOKS LIKE IN THE RECORD
+S16,3:58,20,ch3,Close on a bone with a thin straight cut mark.,"macro, slow slide",bone prop with texture,-,
+S17,4:18,20,ch3,The same bone broken open; marrow.,macro,broken bone prop,crack,
+S18,4:38,16,ch3,"Human bone with tooth marks — held briefly, not dwelt on.","macro, then pull away",bone prop,-,
+S19,4:54,11,ch3,"Dark: only footsteps and echoes, a single torch flame moving.","first person, shake",torch light only,"footsteps, echo",
+S20,5:05,18,ch4,"Bear skulls set on ledges, several, in a dark chamber.",slow reveal pan,skull props x4,-,THE SKULLS ON THE ROCKS
+S21,5:23,18,ch4,Long bones crossed under a skull.,macro,bone props,-,
+S22,5:41,18,ch4,Sceptical beat: a bone rolls off a ledge and lands.,static,physics sim,bone clatter,
+S23,5:59,18,ch4,"Water seeping through rock, moving sediment.",macro time-lapse,particle,water,
+S24,6:17,18,ch4,Cave wall art: a bear shape painted in red.,"static, respectful",paint shader on wall,-,
+S25,6:35,18,ch5,"Snow plain, empty. No bears.",wide static,terrain,wind,THE BEAR DIDN'T LOSE A WAR
+S26,6:53,20,ch5,Vegetation change: green plain turning to dry steppe.,time-lapse,shader blend,wind,
+S27,7:13,20,ch5,"A mother bear and one cub, walking. Then nothing.","wide, long hold",2 rigs,-,
+S28,7:33,22,ch5,"Human silhouette at the cave mouth, looking out.",over-shoulder,rig,wind,
+S29,7:55,18,ch6,Back to S01 framing: the skull on the rock.,identical framing,reuse,-,WHAT WAS ACTUALLY IN THE ROOM
+S30,8:13,16,ch6,"Reverse angle: the cave from the skull's position, fire at the entrance.",static,reuse,fire,
+S31,8:29,14,ch6,"A modern brown bear in a modern cave, same silhouette.",static,reuse rig,-,
+S32,8:43,12,close,Cave entrance at night from inside; one warm light.,slow pull to black,reuse,crickets,
