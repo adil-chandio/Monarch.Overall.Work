@@ -12,10 +12,10 @@ that state are listed under **To do** at the bottom.
 
 | | |
 |---|---|
-| Files listed here | 26 |
+| Files listed here | 28 |
 | Media inside Git (whole repo) | 312.5 MB across 160 files |
 | Media inside Git, this folder only | 42.2 MB |
-| Recorded in an external location | 26 |
+| Recorded in an external location | 28 |
 | Tracking to-do (>20 MB, no external copy) | 0 |
 
 ## Rules these rows obey
@@ -31,7 +31,9 @@ that state are listed under **To do** at the bottom.
 | `Last-Mammoths-Review-Reel-13min-720p.mp4` | 94.8 MB | video | no | Drive 3d animation · 1qkk9ToYrGqnJ8ZHHNZYdwXf4WcoEEAdF ✓ | `479a30ae59ad` |
 | `Last-Mammoths-Review-Reel-v8-720p.mp4` | 82.7 MB | video | no | Drive 3d animation · 1KjPI5JXcOrGSIbfoszd6hGsWKInpCHLA ✓ | `deee8881e913` |
 | `Last-Mammoths-Review-Reel-v9-720p.mp4` | 82.0 MB | video | no | Drive 3d animation · 1s4FB3drU37dWLITxiJ2B2dxEG6KedAHe ✓ | `ef6448a5f6cf` |
+| `frame-evidence-part1-280jpg.tar.gz` | 72.8 MB | archive | no | Drive 3d animation · 1fUSYC-T-M6oDkWflV1RaoDfEKdng9vK- ✓ | `6ea32133203f` |
 | `Extinct_Life_EP01_Amber_Atlas_Full_1080p.mp4` | 66.6 MB | video | no | Drive 3d animation · 1ZYYqjdebz8ul-UREoJmH1TvkweTLM-LJ ✓ | `345ad8314ac1` |
+| `frame-evidence-part2-257jpg.tar.gz` | 64.0 MB | archive | no | Drive 3d animation · 1CLnwRAKRnG4wNNeSzT0TE6XC1Nm8GQV9 ✓ | `88ee67cbcb49` |
 | `Last-Mammoths-Full-Film-3D-1080p.mp4` | 63.4 MB | video | no | Drive 3d animation · 1a9Md7zP0bytXtC7mokdaebuuXSK8zFnz ✓ | `d63a7cfd288a` |
 | `Extinct_Life_EP01_Urdnglish_ShortShot_Rebuild_1080p.mp4` | 51.3 MB | video | no | Drive 3d animation · 1amVLI_vorNgplfbz0PBP77SaSJvNVMzO ✓ | `08bf4770262a` |
 | `Homotherium-Cub-3D-Rebuild-1080x1920.mp4` | 46.1 MB | video | no | Drive 3d animation · 1YnxZmyFKqy7P-9K3b_IrG-jzhK9GZKKG ✓ | `38fa5c8d2060` |

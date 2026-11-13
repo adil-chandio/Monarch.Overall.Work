@@ -7,7 +7,7 @@
  * 148 existing violations are a known, tracked backlog, not a test failure.
  */
 import assert from "node:assert";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -469,6 +469,36 @@ test("the deliverables page is built from records, not from the local disk", () 
   const idx = readFileSync(resolve(ROOT, "deliverables/INDEX.md"), "utf8");
   assert.ok(!/not in this checkout/.test(idx), "the page still reports local presence");
   assert.ok(!/†/.test(idx), "the page still shows per-machine hash state");
+});
+
+test("no evidence folder was emptied of its text", () => {
+  // Releasing frames from Git is only safe while the NUMBERS survive. On
+  // 2026-11-13, 537 JPGs (142 MB) came out of nine production/extinct-life
+  // folders. Every one of those folders keeps its measurement text — EVIDENCE.json,
+  // *.csv, *.md — because that is the evidence; the frames are a picture of it.
+  // The failure mode this catches: someone later runs `git rm -r --cached` on a
+  // whole folder instead of the media inside it, and the repo is left with a
+  // JPG's worth of nothing. It also catches a generator that stopped writing
+  // its text: an evidence folder with media and no text is a red flag either way.
+  const root = resolve(ROOT, "production/extinct-life");
+  let checked = 0;
+  for (const dir of readdirSync(root, { withFileTypes: true })) {
+    if (!dir.isDirectory()) continue;
+    const base = resolve(root, dir.name);
+    if (!existsSync(base)) continue;
+    for (const sub of ["inspection", "full-resolution", "seconds", "encoded-inspection"]) {
+      const p = resolve(base, sub);
+      if (!existsSync(p)) continue;
+      checked++;
+      const text = readdirSync(base).filter((f) => /\.(json|csv|md|txt)$/.test(f));
+      assert.ok(
+        text.length > 0,
+        `${dir.name}/${sub} exists but ${dir.name}/ has no measurement text — the evidence would be lost, not moved`,
+      );
+    }
+  }
+  assert.ok(checked > 0, "found no evidence folders — this test would pass forever");
+  assert.ok(checked >= 5, `only ${checked} evidence folders seen; expected the nine that were migrated`);
 });
 
 console.log(`\n${passed} guard tests passed`);
