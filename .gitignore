@@ -169,6 +169,13 @@ production/extinct-life/*/working/
 # `git add <folder>` on a folder with ignored children is legal and exits 0.
 # ---------------------------------------------------------------------------
 production/extinct-life/film-*/inspection/**
+# Frame extracts are measurement output. Measured 2026-11-13: 537 .jpg / 142 MB
+# were tracked across nine folders, all regenerable from a master pinned by
+# sha256 in config/media-policy.json -> regenerable_evidence. Released to Drive
+# (two archives, hashes verified) and ignored from here on so they cannot
+# regrow. Scoped to .jpg only: the .png files under production/ are SOURCE
+# assets (scene plates, thumbnails, textures) and are load-bearing, not stills.
+production/**/*.jpg
 production/extinct-life/film-*/encoded-inspection/**
 production/extinct-life/review-v*/full-resolution/**
 production/extinct-life/review-v*/seconds/**
