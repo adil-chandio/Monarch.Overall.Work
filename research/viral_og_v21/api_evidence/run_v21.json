@@ -1,13 +1,13 @@
 {
- "generated_utc": "2026-11-13T08:42:28Z",
+ "generated_utc": "2026-11-13T09:01:10Z",
  "key_present": true,
  "secret_value_printed_or_stored": false,
  "input": "user's Google Drive swipe file (71 screenshots) -> drive_swipe_index.json",
  "screenshot_channels": 37,
  "resolved_channels": 35,
  "unresolved_channels": 2,
- "identity_verified_channels": 30,
- "identity_re_resolved": 2,
+ "identity_verified_channels": 26,
+ "identity_re_resolved": 3,
  "identity_cache_overrides": [
   {
    "name": "Ink Explainer",
@@ -31,30 +31,34 @@
  "identity_unverified_names": [
   "AnimeAI Boost",
   "Beyond the Obvious",
+  "Fact Minded",
+  "Hidden Homestead",
   "Last Soul",
   "Mack",
-  "Relatos Pintados"
+  "Relatos Pintados",
+  "StickFigure Explains",
+  "Unknown Frequencies"
  ],
  "identity_size_contradictions": [],
- "catalogue_videos": 1292,
+ "catalogue_videos": 1256,
  "lanes": 36,
- "lane_rows": 972,
- "unique_videos": 2200,
- "niche_outliers_3x": 199,
+ "lane_rows": 931,
+ "unique_videos": 2124,
+ "niche_outliers_3x": 172,
  "thumbnail_stats": 30,
  "caption_attempts": 12,
  "caption_status_counts": {
   "http_blocked": 12
  },
  "comments_fetched": 240,
- "quota_used_approx": 644,
+ "quota_used_approx": 789,
  "quota_calls": {
-  "channels": 22,
+  "channels": 60,
   "search": 5,
-  "playlistItems": 45,
-  "videos": 65,
+  "playlistItems": 99,
+  "videos": 118,
   "commentThreads": 12
  },
- "elapsed_s": 282.8,
+ "elapsed_s": 352.8,
  "boundary": "Public Data API metadata + public thumbnails + public caption text only. No video/audio download, no frame inspection, no private retention/CTR/RPM, no invented transcripts, no causal claim, no upload/monetisation claim."
 }
