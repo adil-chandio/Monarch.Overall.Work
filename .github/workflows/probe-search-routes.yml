@@ -3,6 +3,9 @@ on:
   push:
     paths: [ "probe-search-routes-trigger.txt" ]
   workflow_dispatch:
+permissions:
+  contents: write
+
 jobs:
   probe:
     runs-on: ubuntu-latest
