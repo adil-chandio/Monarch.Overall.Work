@@ -549,4 +549,36 @@ test("no guard test requires bytes that a fresh clone does not have", () => {
   assert.deepEqual(offenders, [], `a guard test demands a minimum number of on-disk folders — it will fail on a fresh clone: ${offenders.join(" | ")}`);
 });
 
+test("the source assets that renders need are still tracked", () => {
+  // 312 MB of media is still in Git after the migration, and that is the correct
+  // end state, not leftover work. These files are INPUTS: 3D meshes, a Blender
+  // rig, narration recordings, music stems, scene plates. Declared in
+  // config/media-policy.json -> source_assets so the next session does not read
+  // 312 MB and start "finishing" the migration by breaking the pipeline.
+  //
+  // The specific files are named because they are the ones a render reads by
+  // name. If one leaves Git, the render that needs it fails on a fresh clone.
+  const needed = [
+    "production/extinct-life/longform-mammoth/cinematic-rebuild/mammoth-rig/assets/SDPM-Mammoth-Experimental-Rig.glb",
+    "production/extinct-life/longform-mammoth/cinematic-rebuild/mammoth-rig/assets/SDPM-Wooly-Mammoth.blend",
+    "production/extinct-life/longform-mammoth/cinematic-rebuild/soundtrack-draft/Narration-Score-DRAFT.m4a",
+    "production/extinct-life/longform-mammoth/cinematic-rebuild/full-script-v2/Narration-Draft-v2.m4a",
+    "production/extinct-life/longform-mammoth/full-film/assets/tundra.png",
+    "public/demo-preview.mp4",
+  ];
+  const tracked = new Set(
+    execFileSync("git", ["ls-files"], { cwd: ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
+      .split("\n")
+      .filter(Boolean),
+  );
+  for (const f of needed) {
+    assert.ok(tracked.has(f), `${f} left Git — it is an input, not a deliverable. Releasing it breaks a render on a fresh clone.`);
+  }
+  assert.ok(policy.source_assets, "config/media-policy.json must keep the source_assets section explaining why 312 MB stays");
+  assert.ok(
+    policy.source_assets.the_test_before_releasing_any_of_it.length > 80,
+    "the source_assets section must keep the test that separates input from output",
+  );
+});
+
 console.log(`\n${passed} guard tests passed`);

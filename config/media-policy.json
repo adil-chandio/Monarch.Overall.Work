@@ -263,5 +263,32 @@
     "drive_folder": "1DreqKGZvPHTFch0lqFtphArF-b1guVlS (Monarch Extinct Channel / 3d animation)",
     "result": "git rm --cached ran; file remains on disk at the same path; Drive copy verified byte-for-byte by sha256",
     "why_this_matters": "proves the whole loop end to end before touching 25 more files: upload -> verify hash -> release from Git -> file still present on disk"
+  },
+  "source_assets": {
+    "why_this_section_exists": "After deliverables/ and the frame evidence were released, 312 MB of media still sits in Git and that is CORRECT. It is not backlog. It is the input to the renders: 3D meshes, Blender rigs, narration recordings, music stems, scene plates. Deleting or moving them does not free the repo, it breaks the pipeline that produces every video. This section records that decision so a future session does not mistake it for unfinished work.",
+    "measured_2026_11_13": {
+      "audio": {
+        "files": 87,
+        "bytes": 121996902,
+        "what": "narration m4a/mp3, music stems flac, VO in gpu-engine/audio"
+      },
+      "video": {
+        "files": 23,
+        "bytes": 104647885,
+        "what": "42.2 MB exempt proof master, 24.0 MB public/demo-preview.mp4 (the app plays it), 64 MB encrypted refs/research-transfer/*.enc (a workflow writes them with git add -f on purpose)"
+      },
+      "model": {
+        "files": 13,
+        "bytes": 44145050,
+        "what": ".glb meshes, one 13.7 MB .blend rig — SDPM-Mammoth-Experimental-Rig.glb alone has 87 references in tracked scripts"
+      },
+      "png_and_plates": {
+        "files": 22,
+        "bytes": 39216333,
+        "what": "scene plates for the mammoth film (tundra, ice-storm, laboratory...), youtube-v14 thumbnails, film-v5 style frames"
+      }
+    },
+    "the_test_before_releasing_any_of_it": "Ask: if this file vanished from a fresh clone, would a render or the app break? If yes, it is a source asset and stays. The 537 frame JPGs passed the opposite test — they are output, and the numbers they picture are stored as text next to them.",
+    "extension_rule_that_follows": "This is why .gitignore carries `production/**/*.jpg` and NOT `production/**/*.png`. Under production/ the JPGs were output and the PNGs are input. An extension-family rule would have quietly started refusing the scene plates."
   }
 }
