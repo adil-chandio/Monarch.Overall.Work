@@ -254,20 +254,24 @@ def title_hits(screenshot_titles, rows, thresh=0.72):
 
 
 def resolve_by_title(title):
-    """A screenshot video's exact title -> the channel that really owns it."""
+    """A screenshot video's exact title -> the channel that really owns it.
+
+    v3/search is 429-blocked from CI IPs, so this uses the public web search route.
+    """
+    cid = disc.resolve_channel_via_inner(title)
+    if cid:
+        return cid
+    # second pass: the owning channel page of the exact-title video, via html route
     try:
-        d = client._api("search", {"part": "snippet", "q": title, "type": "video",
-                                   "maxResults": 5, "regionCode": "US",
-                                   "relevanceLanguage": "en"}, "search")
+        rows = disc.inner_search(title)
     except Exception:  # noqa: BLE001
         return None
     import difflib
     best, bestr = None, 0.0
-    for it in d.get("items", []) or []:
-        sn = it.get("snippet") or {}
-        r = difflib.SequenceMatcher(None, _norm(title), _norm(sn.get("title"))).ratio()
-        if r > bestr:
-            best, bestr = sn.get("channelId"), r
+    for r in rows:
+        ratio = difflib.SequenceMatcher(None, _norm(title), _norm(r.get("title", ""))).ratio()
+        if ratio > bestr:
+            best, bestr = r.get("channel_id"), ratio
     return best if bestr > 0.8 else None
 
 
@@ -451,7 +455,7 @@ def main():
                       "order": "viewCount", "regionCode": "US", "relevanceLanguage": "en",
                       "safeSearch": "moderate", "videoDuration": dv}
             # discovery via the public web endpoint; v3/search is 429-blocked from CI IPs
-            ids, route = disc.ids_for(l["q"], pages=1, duration=dv)
+            ids, route = disc.ids_for(l["q"], pages=2, duration=dv)
             status = "ok:" + route if ids else "empty"
             if dv == "short":
                 # keep only rows whose hinted length matches the bucket; unknown length is kept
@@ -539,7 +543,43 @@ def main():
     save("channel_deep_v21.json", {"catalogue": catalogue,
                                    "by_cluster": {k: v for k, v in by_cluster.items()},
                                    "outlier_cross": {"outliers": stats(niche_out), "rest": stats(rest)}})
-    save("lanes_v21.json", {"lanes": lanes_out})
+    # ---- lane-level statistics: the search-discovery half of the forensic -----------
+    by_id = {r["id"]: r for r in allrows}
+    lanes_stats, lane_health = [], []
+    for l in lanes_out:
+        rows = [by_id[i] for i in l["ids"] if i in by_id]
+        if not rows:
+            lane_health.append({"slug": l["slug"], "status": l["status"], "join_rate": 0.0})
+            continue
+        v = sorted(r["views"] for r in rows)
+        lanes_stats.append({
+            "slug": l["slug"], "q": l["q"], "bucket": l["videoDuration"], "route": l.get("route"),
+            "n": len(rows), "join_rate": round(len(rows) / max(1, l["ids_count"]), 3),
+            "median_views": int(statistics.median(v)), "max_views": v[-1],
+            "min_views": v[0], "p90_views": v[int(len(v) * 0.9)],
+            "share_1m": round(sum(1 for x in v if x >= 1_000_000) / len(v), 3),
+            "share_10m": round(sum(1 for x in v if x >= 10_000_000) / len(v), 3),
+            "median_duration": int(statistics.median([r["duration_seconds"] for r in rows])),
+            "median_vpd": int(statistics.median([r["views_per_day"] for r in rows])),
+            "median_like_rate": statistics.median([r["like_rate"] for r in rows]),
+            "question_rate": round(sum(1 for r in rows if r["has_question"]) / len(rows), 3),
+            "number_rate": round(sum(1 for r in rows if r["has_number"]) / len(rows), 3),
+            "second_person_rate": round(sum(1 for r in rows if r["second_person"]) / len(rows), 3),
+            "emoji_rate": round(sum(1 for r in rows if r["has_emoji"]) / len(rows), 3),
+            "chapter_ge3_rate": round(sum(1 for r in rows if r["chapter_count"] >= 3) / len(rows), 3),
+            "median_desc_words": int(statistics.median([r["description_words"] for r in rows])),
+            "median_tag_count": int(statistics.median([r["tag_count"] for r in rows])),
+            "top": [{"title": r["title"], "channel": r["channel"], "views": r["views"],
+                     "seconds": r["duration_seconds"]} for r in sorted(rows, key=lambda r: -r["views"])[:5]],
+            "distinct_channels": len({r["channel"] for r in rows}),
+            "from_swipe_file": sum(1 for r in rows if r["channel"] in catalogue),
+        })
+    save("lanes_v21.json", {"lanes": lanes_out, "lane_stats": lanes_stats,
+                            "lane_health": lane_health,
+                            "route_note": ("discovery = public youtubei WEB search (sp: video + "
+                                           "viewCount + duration bucket); numbers = official Data API v3. "
+                                           "youtube/v3/search returns 429 from GitHub-runner IPs, measured "
+                                           "7/7 runs.")})
     save("videos_v21.json", {"count": len(allrows), "videos": allrows})
     save("thumbnails_v21.json", {"count": len(thumbs), "rows": thumbs})
     save("captions_v21.json", {"count": len(caps), "attempts": caps})
