@@ -106,7 +106,8 @@ def main():
         if not got and titles:
             # v3/search is 429-blocked from CI IPs; the public web search is not.
             for t_ in sorted(titles, key=len, reverse=True)[:3]:
-                cid = disc.resolve_channel_via_inner(t_)
+                pick = disc.pick_channel(t_, c.get("subs"), c.get("video_count"), name)
+                cid = (pick or {}).get("channel_id")
                 if not cid:
                     continue
                 try:
@@ -115,6 +116,7 @@ def main():
                     cit = (dd.get("items") or [None])[0]
                     if cit:
                         got = brief(cit, "inner:title")
+                        got["pick_score"] = pick.get("score")
                         break
                 except Exception as e:  # noqa: BLE001
                     log("   channel fetch err", repr(e)[:80])

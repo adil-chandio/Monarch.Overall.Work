@@ -235,6 +235,19 @@ def deep_uploads(pid, pages=2):
     return [i for i in out if i]
 
 
+def subs_ok(ch, shot_subs, shot_videos=None):
+    """Does the resolved channel's public size match the screenshot's own numbers?
+
+    Copycat channels lift winning titles verbatim but not the subscriber count.
+    A 20x mismatch is treated as a wrong resolution, not a nitpick.
+    """
+    want = disc._subs_num(shot_subs)
+    got = ch.get("subs")
+    if not want or not got:
+        return None
+    return got >= want / 8
+
+
 def _norm(s):
     return re.sub(r"[^a-z0-9 ]", "", (s or "").lower()).strip()
 
@@ -416,7 +429,8 @@ def main():
                 cids = with_backoff(deep_uploads, cand["uploads"]) if cand.get("uploads") else []
                 cand_rows = [r for r in with_backoff(videos, cids) if r["channel_id"] == cand["channel_id"]]
                 cand_hits = title_hits(shots, cand_rows)
-                if cand_hits > hits:
+                size_ok = subs_ok(cand, idx["channels"][name].get("subs"))
+                if cand_hits > hits and size_ok is not False:
                     audit.append({"name": name, "old_id": b["channel_id"], "old_title": b["title"],
                                   "old_hits": hits, "new_id": cand["channel_id"],
                                   "new_title": cand["title"], "new_hits": cand_hits,
@@ -426,13 +440,20 @@ def main():
         st = stats(cr)
         med = statistics.median([r["views"] for r in cr]) if cr else 0
         outl = sorted([r for r in cr if med and r["views"] >= 3 * med], key=lambda r: -r["views"])
-        verified = bool(shots) and hits >= max(1, len(shots) * 0.5)
+        size_ok = subs_ok(b, idx["channels"][name].get("subs"))
+        verified = bool(shots) and hits >= max(1, len(shots) * 0.5) and size_ok is not False
         b["catalogue_n"] = st.get("n", 0)
         b["median_views"] = int(med)
         b["outlier_count"] = len(outl)
         b["identity"] = {"screenshot_titles": len(shots), "matched": hits,
                          "rate": round(hits / len(shots), 2) if shots else None,
-                         "verified": verified, "method": method}
+                         "verified": verified, "method": method,
+                         "screenshot_subs": idx["channels"][name].get("subs"),
+                         "resolved_subs": b.get("subs"),
+                         "size_consistent": size_ok,
+                         "note": ("subscriber size contradicts the screenshot"
+                                  if size_ok is False else
+                                  ("size matches" if size_ok else "no size on screenshot"))}
         catalogue[name] = {"channel": b, "stats": st, "median_views": int(med),
                            "identity": b["identity"],
                            "ladder": {k: stats([r for r in cr if bucket(r["duration_seconds"]) == k])
@@ -531,6 +552,8 @@ def main():
         "identity_verified_channels": len(verified_names),
         "identity_re_resolved": len(audit),
         "identity_unverified_names": sorted(set(catalogue) - verified_names),
+        "identity_size_contradictions": sorted(n for n, c in catalogue.items()
+                                               if c["identity"].get("size_consistent") is False),
         "catalogue_videos": len(catalogue_rows), "lanes": len(lanes_out),
         "lane_rows": len(lane_rows), "unique_videos": len(allrows),
         "niche_outliers_3x": len(niche_out),

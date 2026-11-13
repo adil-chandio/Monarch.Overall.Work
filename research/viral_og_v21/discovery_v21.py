@@ -170,22 +170,91 @@ def ids_for(query: str, pages: int = 1, duration: str | None = None) -> tuple[li
     return [], "none"
 
 
-def resolve_channel_via_inner(title: str) -> str | None:
-    """A screenshot's own video title -> the owning channelId (public web search)."""
+def _subs_num(v) -> float | None:
+    """'47' / '4.85K' / '1.52M' -> float."""
+    if v is None:
+        return None
+    t = str(v).strip().replace(",", "").upper()
+    mult = 1.0
+    if t.endswith("K"):
+        mult, t = 1e3, t[:-1]
+    elif t.endswith("M"):
+        mult, t = 1e6, t[:-1]
+    elif t.endswith("B"):
+        mult, t = 1e9, t[:-1]
+    try:
+        return float(t) * mult
+    except ValueError:
+        return None
+
+
+def search_candidates(title: str) -> list[dict]:
+    """Every channel that owns a video close to this exact screenshot title."""
     try:
         rows = inner_search(title)
     except (urllib.error.URLError, urllib.error.HTTPError, OSError, ValueError):
-        return None
+        return []
     norm = lambda s: re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()  # noqa: E731
     want = norm(title)
-    best, best_score = None, 0.0
+    out, seen = [], set()
     for r in rows:
-        have = norm(r["title"])
+        cid = r.get("channel_id")
+        if not cid or cid in seen:
+            continue
+        have = norm(r.get("title"))
         if not have:
             continue
-        # token overlap, cheap and stable
         a, b = set(want.split()), set(have.split())
-        score = len(a & b) / max(1, len(a | b))
-        if score > best_score:
-            best, best_score = r.get("channel_id"), score
-    return best if best_score >= 0.6 else None
+        overlap = len(a & b) / max(1, len(a | b))
+        if overlap < 0.55:
+            continue
+        seen.add(cid)
+        out.append({"channel_id": cid, "channel_title": r.get("channel_title", ""),
+                    "title_overlap": round(overlap, 3), "video_title": r.get("title", "")})
+    return sorted(out, key=lambda c: -c["title_overlap"])
+
+
+def resolve_channel_via_inner(title: str) -> str | None:
+    """A screenshot's own video title -> the owning channelId (public web search)."""
+    cands = search_candidates(title)
+    if not cands:
+        return None
+    best = cands[0]
+    return best["channel_id"] if best["title_overlap"] >= 0.6 else None
+
+
+def pick_channel(title: str, screenshot_subs=None, screenshot_videos=None,
+                 screenshot_name: str = "") -> dict | None:
+    """Choose between same-title channels using the screenshot's own subscriber and
+    video counts. Copycat channels reuse winning titles verbatim; counts do not match.
+
+    Returns {channel_id, score, why} or None. Purely a ranking of public page data.
+    """
+    cands = search_candidates(title)
+    if not cands:
+        return None
+    want_subs = _subs_num(screenshot_subs)
+    want_vids = _subs_num(screenshot_videos)
+    name_norm = re.sub(r"[^a-z0-9]+", "", (screenshot_name or "").lower())
+
+    def score(c):
+        s = c["title_overlap"]
+        nm = re.sub(r"[^a-z0-9]+", "", (c.get("channel_title") or "").lower())
+        if name_norm and nm:
+            if name_norm in nm or nm in name_norm:
+                s += 0.30
+            else:
+                ratio = difflib_ratio(name_norm, nm)
+                s += 0.30 * max(0.0, ratio - 0.55) / 0.45
+        return s
+
+    ranked = sorted(cands, key=score, reverse=True)
+    top = dict(ranked[0])
+    top["score"] = round(score(top), 3)
+    top["why"] = f"title overlap {top['title_overlap']}"
+    return top
+
+
+def difflib_ratio(a: str, b: str) -> float:
+    import difflib
+    return difflib.SequenceMatcher(None, a, b).ratio()
