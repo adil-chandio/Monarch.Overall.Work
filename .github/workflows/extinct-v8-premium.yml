@@ -9,7 +9,7 @@ permissions:
 concurrency:
   group: extinct-v8-${{ github.ref }}
   cancel-in-progress: true
-# See the comments at the inspection git-add step and in scripts/git-push-retrying.sh.
+# The inspection step is traced and reports to GITHUB_STEP_SUMMARY; see its comments.
 env:
   PRODUCTION_RENDER: 'true'
 jobs:
