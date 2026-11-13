@@ -6,7 +6,7 @@
   "done": 12,
   "unit": "steps",
   "created": "2026-11-13T09:32:50.750Z",
-  "updated": "2026-11-13T09:33:14.037Z",
+  "updated": "2026-11-13T09:33:42.456Z",
   "resume": {
     "next_command": "open docs/research/competitor-apexmorph/2026-11-13-frame-by-frame.md, then extend scripts/vector-film.py with device 2 (counting grid), device 7 (visible sound), device 9 (fake rewind); rebuild with: /tmp/venv-ff/bin/python scripts/vector-film.py --srt production/extinct-life/homotherium-short/English.srt --out FRAMES --fps 30, then encode against the flac narration",
     "notes": ""
@@ -16,7 +16,8 @@
       "path": "/tmp/homotherium-1min.mp4",
       "bytes": 1960000,
       "sha256": "49d8ecdd19bd36e5c63c39811ffecce857860d809ea1107605b7298a018129a1",
-      "drive_id": null
+      "drive_id": "1UkJGm-JiGmdNu4G9ZHKWgCyycIvJ9fa8",
+      "uploaded_at": "2026-11-13T09:33:42.455Z"
     }
   ],
   "decisions": [],
@@ -28,6 +29,10 @@
     {
       "at": "2026-11-13T09:33:12.645Z",
       "what": "artifact /tmp/homotherium-1min.mp4 1.9 MB sha256 49d8ecdd19bd"
+    },
+    {
+      "at": "2026-11-13T09:33:42.456Z",
+      "what": "uploaded homotherium-1min.mp4 -> Drive 1UkJGm-JiGmdNu4G9ZHKWgCyycIvJ9fa8"
     }
   ]
 }
