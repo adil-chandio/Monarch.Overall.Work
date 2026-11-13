@@ -597,6 +597,10 @@ test("the job ledger exists and refuses an unsafe pause", () => {
     /git.*commit.*jobs|\["commit"/.test(gen),
     "the ledger must commit itself — an entry that only exists on disk is the thing this file exists to prevent",
   );
+  assert.ok(
+    /\["push"/.test(gen),
+    "the ledger must PUSH itself — a commit in the sandbox is still in the sandbox, so a ledger that only commits protects nothing",
+  );
 });
 
 test("AGENTS.md tells a new session that a sandbox is temporary", () => {

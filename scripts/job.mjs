@@ -171,6 +171,19 @@ function save(job, note) {
       execFileSync("git", ["commit", "-q", "-m", `job(${job.id}): ${job.status} ${job.done}/${job.total} — checkpoint`], { cwd: ROOT, stdio: "pipe" });
       console.log(`job: committed jobs/${job.id}.*`);
     }
+    // A commit in the sandbox is still in the sandbox. Push, or the ledger has
+    // exactly the durability of the thing it was written to protect.
+    const branch = execFileSync("git", ["rev-parse", "--abbrev-ref", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
+    try {
+      execFileSync("git", ["push", "-q", "origin", `HEAD:${branch}`], { cwd: ROOT, stdio: "pipe" });
+      console.log(`job: pushed to origin/${branch}`);
+    } catch {
+      console.error(
+        `job: WARNING committed locally but NOT pushed (branch ${branch}).\n` +
+          "     Run `bash scripts/git-push-retrying.sh " + branch + "` before you pause.\n" +
+          "     A ledger that only exists in the sandbox protects nothing.",
+      );
+    }
   } catch (e) {
     console.error("job: WARNING could not commit the ledger — check `git status` before you stop");
   }
