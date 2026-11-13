@@ -9,6 +9,7 @@ permissions:
 concurrency:
   group: extinct-v8-${{ github.ref }}
   cancel-in-progress: true
+# `|| true` on the inspection git-add below: see the comment at that step.
 env:
   PRODUCTION_RENDER: 'true'
 jobs:
