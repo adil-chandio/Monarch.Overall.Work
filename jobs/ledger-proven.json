@@ -6,13 +6,19 @@
   "done": 3,
   "unit": "checks",
   "created": "2026-11-13T05:59:54.353Z",
-  "updated": "2026-11-13T05:59:55.591Z",
+  "updated": "2026-11-13T05:59:57.104Z",
   "resume": {
     "next_command": "node scripts/job.mjs resume ledger-proven",
     "notes": ""
   },
   "artifacts": [],
-  "decisions": [],
+  "decisions": [
+    {
+      "at": "2026-11-13T05:59:57.104Z",
+      "q": "Kya pause se pehle upload lazmi hai?",
+      "a": "Haan — pause tab tak refuse hota hai jab tak har artifact ka drive_id na ho"
+    }
+  ],
   "log": [
     {
       "at": "2026-11-13T05:59:54.353Z",
@@ -21,6 +27,10 @@
     {
       "at": "2026-11-13T05:59:55.591Z",
       "what": "3/3: guard 37/37, index --check, config 6/6, all verified in a fresh clone"
+    },
+    {
+      "at": "2026-11-13T05:59:57.104Z",
+      "what": "decision recorded: Kya pause se pehle upload lazmi hai? -> Haan — pause tab tak refuse hota hai jab tak har artifact ka drive_id na ho"
     }
   ]
 }
