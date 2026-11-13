@@ -263,24 +263,41 @@ def orca(length_m=8.0, colour=(22, 24, 29), n=22):
 
 
 def orca_patches(length_m=8.0, n_ang=14):
-    """White markings as a slightly larger shell around the hull.
+    """The three markings that make an orca read as an orca, as offset shells.
 
-    Building them as a surface *offset outward* from the body is what makes them
-    visible: a patch laid on the exact hull z-fights with the body and loses, and a
-    patch built with the wrong winding gets culled. The renderer treats this mesh as
-    two-sided, so only the offset matters.
+    The first version painted a band from z=+1.05*s to z=-1.45*s across TWO separate
+    angle ranges - 2.15..3.95 rad and -0.99..0.81 rad. Those two ranges together
+    cover most of the circumference, so the animal came out as a white barrel with a
+    black nose, which is a panda with a dorsal fin. Real markings are narrow:
+
+      * an eye patch: a small oval above and behind the eye, one per flank
+      * a saddle: a grey blaze *behind* the dorsal fin, low on the back
+      * a chin/belly: white from the jaw back along the underside only
+
+    Everything below is expressed in the profile's own coordinates (z toward the
+    head is positive, angle pi/2 is up), so it stays attached when the body bends.
     """
-    s = length_m / 5.2
-    prof = [(z * s, cy * s, rx * s, ry * s) for (z, cy, rx, ry) in ORCA_PROFILE]
+    s_ = length_m / 5.2
+    prof = [(z * s_, cy * s_, rx * s_, ry * s_) for (z, cy, rx, ry) in ORCA_PROFILE]
     vs, ts = [], []
 
-    def add_shell(z0, z1, a0, a1, grow=1.035):
+    def add_shell(z0, z1, a0, a1, grow=1.03, taper=0.0):
         base = len(vs)
-        pts = [p for p in prof if z1 <= p[0] <= z0]
+        pts = [p for p in prof if z0 <= p[0] <= z1]
+        if len(pts) < 2:
+            return
         nn = n_ang
-        for (z, cy, rx, ry) in pts:
+        for k, (z, cy, rx, ry) in enumerate(pts):
+            # taper the angle span toward the ends so the patch has a soft edge
+            # instead of a rectangle cut out of the hull
+            f = 1.0
+            if taper > 0.0:
+                u = k / max(1, len(pts) - 1)
+                f = math.sin(math.pi * u) ** (taper * 0.5) * 0.85 + 0.15
+            mid = 0.5 * (a0 + a1)
+            half = 0.5 * (a1 - a0) * f
             for j in range(nn):
-                a = a0 + (a1 - a0) * j / (nn - 1)
+                a = mid - half + 2 * half * j / (nn - 1)
                 vs.append((math.cos(a) * rx * grow, cy + math.sin(a) * ry * grow, z))
         rows = len(pts)
         for i in range(rows - 1):
@@ -290,23 +307,38 @@ def orca_patches(length_m=8.0, n_ang=14):
                 ts.append((a, b, b + 1))
                 ts.append((a, b + 1, a + 1))
 
-    # saddle patch: the big grey-white blaze behind the dorsal, both flanks
-    add_shell(1.05 * s, -1.45 * s, 2.15, 3.95)
-    add_shell(1.05 * s, -1.45 * s, -0.99, 0.81)
-    # eyepatch: an oval above and behind the eye, both sides
+    # --- eye patch: small oval, above and slightly behind the eye, both flanks ---
+    # The eye sits near z=+1.9*s, about 40 degrees up from the waterline.
     for side in (1, -1):
         base = len(vs)
-        ez, ey = 1.62 * s, 0.30 * s
-        rows, cols = 6, 6
+        rows, cols = 7, 7
+        cz, ca = 1.78 * s_, 0.62          # centre: behind the snout, high on the flank
         for i in range(rows):
             for j in range(cols):
-                u = i / (rows - 1) - 0.5
-                v = j / (cols - 1) - 0.5
-                if u * u + v * v > 0.26:
-                    u *= 0.7
-                    v *= 0.7
-                x = side * (0.40 * s + u * 0.05 * s)
-                vs.append((x, ey + v * 0.26 * s, ez + u * 0.46 * s))
+                u = i / (rows - 1) - 0.5      # along the body
+                v = j / (cols - 1) - 0.5      # around the body
+                rr = (u / 0.5) ** 2 + (v / 0.5) ** 2
+                if rr > 1.0:
+                    k = 1.0 / math.sqrt(rr)
+                    u *= k * 0.98
+                    v *= k * 0.98
+                z = cz + u * 0.62 * s_
+                ang = ca + v * 0.66 * (1 if side > 0 else 1)
+                # sample the local hull radius at this z
+                rx = ry = 0.0
+                cy = 0.0
+                for (pz, pcy, prx, pry) in prof:
+                    if pz <= z:
+                        rx, ry, cy = prx, pry, pcy
+                        break
+                if rx == 0.0:
+                    rx, ry, cy = prof[-1][2], prof[-1][3], prof[-1][1]
+                g = 1.028
+                x = math.cos(ang) * rx * g
+                y = cy + math.sin(ang) * ry * g
+                if side < 0:
+                    x = -x
+                vs.append((x, y, z))
         for i in range(rows - 1):
             for j in range(cols - 1):
                 a = base + i * cols + j
@@ -314,8 +346,14 @@ def orca_patches(length_m=8.0, n_ang=14):
                 ts.append((a, b, b + 1))
                 ts.append((a, b + 1, a + 1))
 
+    # --- saddle: a grey blaze behind the dorsal fin, only on the upper back ---
+    add_shell(-0.30 * s_, -1.25 * s_, 0.72, 2.42, grow=1.022, taper=1.4)
+
+    # --- chin / belly: white underside from the jaw back, never up the flank ---
+    add_shell(-0.05 * s_, 2.18 * s_, -2.55, -0.62, grow=1.024, taper=1.0)
+
     out = Mesh(np.array(vs, dtype=np.float32), np.array(ts, dtype=np.int32),
-               (232, 230, 224), "patch")
+               (238, 236, 230), "patch")
     out.two_sided = True
     return out
 

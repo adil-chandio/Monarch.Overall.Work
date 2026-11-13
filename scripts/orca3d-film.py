@@ -113,8 +113,15 @@ def swim(model_matrix, t, phase=0.0, amp=0.06, freq=1.1):
 
 
 def travelling_wave_mesh(mesh, t, phase=0.0, amp=0.22, freq=1.3, speed=1.0):
-    """Displace vertices sideways by a wave that travels from head to fluke."""
+    """Displace vertices sideways by a wave that travels from head to fluke.
+
+    The patches are deformed through the same displacement as the hull they sit on,
+    so they stay locked to the body instead of sliding off it.
+    """
     out = mesh.copy()
+    pat = getattr(mesh, "patches", None)
+    if pat is not None and pat is not mesh:
+        out.patches = travelling_wave_mesh(pat, t, phase, amp, freq, speed)
     z = out.v[:, 2]
     k = np.clip((1.0 - (z - z.min()) / max(1e-6, z.max() - z.min())), 0, 1)
     # more amplitude toward the tail

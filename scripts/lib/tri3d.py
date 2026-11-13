@@ -114,6 +114,11 @@ class Mesh:
     def copy(self):
         m = Mesh(self.v.copy(), self.t.copy(), self.colour * 255.0, self.material)
         m.uv = None if self.uv is None else self.uv.copy()
+        # copy() used to drop these, which silently deleted the orca's white
+        # markings: draw_orca() deforms the body through copy(), then looks for
+        # body.patches - and found nothing, so the animal rendered pure black.
+        m.two_sided = getattr(self, "two_sided", False)
+        m.patches = getattr(self, "patches", None)
         return m
 
     def transform(self, m3):
@@ -383,6 +388,14 @@ class Renderer:
                  + self.key_col[None, :] * sp_tight[:, None] * 0.42
                  + self.rim_col[None, :] * sp_wide[:, None] * 0.16
                  + self.rim_col[None, :] * rm[:, None] * 0.62)
+            # Markings read as markings. A white patch is a diffuse scatterer - it has
+            # no specular lobe and it picks up light from everywhere, which is exactly
+            # why an orca's flank is legible at 40 m in murky water while its black
+            # back is not. Shaded like skin, the patch came out the same value as the
+            # body and the animal looked plain black.
+            if mesh.material == "patch":
+                c = (c * 0.55 + mesh.colour[None, :] * self.ambient[None, :] * 1.7
+                     + mesh.colour[None, :] * 0.30)
             colour[by0:by1 + 1, bx0:bx1 + 1][hit] = c
 
     def _vertex_normals(self, mesh, m4):
@@ -425,7 +438,7 @@ class Renderer:
 
     def depth_of_field(self, im, focus_depth, strength=6.0):
         """Cheap CoC: blend the frame with two blurred copies by depth error."""
-        from PIL import Image, ImageFilter
+        from PIL import Image, ImageDraw, ImageFilter
         z = self.depth.copy()
         if self.ssaa > 1:
             z = z.reshape(self.oh, self.ssaa, self.ow, self.ssaa).mean(axis=(1, 3))
@@ -463,34 +476,85 @@ def caustics(w, h, t, scale=1.0, seed=0):
 
 
 def god_rays(w, h, t, n=9, strength=0.35, seed=3):
-    """Vertical shafts from the surface, slowly drifting. Screen-space, additive."""
-    from PIL import Image, ImageFilter
+    """Shafts of surface light, as a volume rather than as painted bars.
+
+    The first version drew hard-edged parallelograms of constant fill over the whole
+    frame and blurred them. That has no falloff in any axis, so on screen it reads as
+    flat stripes hanging in front of the scene - the single most "cheap render" cue
+    in the film. Real shafts:
+
+      * are brightest at the surface and die out with depth (exponential, and they
+        never reach the bottom of frame at full strength)
+      * spread as they descend, the way a beam widens through a scattering medium
+      * have soft, ragged edges because the surface above them is moving
+      * are blocked by whatever is in front of them, which the caller applies as a
+        depth mask
+    """
+    from PIL import Image, ImageDraw, ImageFilter
     m = Image.new("L", (w, h), 0)
-    from PIL import ImageDraw
     d = ImageDraw.Draw(m)
     for i in range(n):
-        x = int(w * (0.03 + i * 0.108) + math.sin(t * 0.25 + i * 1.7) * w * 0.012)
-        wd = int(18 + (i * 37) % 52)
-        sl = int(90 + (i * 23) % 80)
-        d.polygon([(x, -20), (x + wd, -20), (x + wd + sl, h + 20), (x + sl, h + 20)],
-                  fill=int(150 * (0.55 + 0.45 * math.sin(t * 0.8 + i))))
-    m = m.filter(ImageFilter.GaussianBlur(max(6, w // 90)))
-    arr = np.asarray(m, dtype=np.float32)[..., None] / 255.0
-    return arr * strength
+        base = 0.03 + i * 0.108
+        drift = math.sin(t * 0.25 + i * 1.7) * 0.012
+        x = w * (base + drift)
+        wd = (14 + (i * 37) % 44) * (w / 1280.0)
+        # beams lean and widen as they descend
+        lean = (i % 3 - 1) * 0.06 * w + math.sin(t * 0.4 + i) * 0.01 * w
+        spread = 2.1 + 0.5 * math.sin(i * 2.3)
+        amp = 0.55 + 0.35 * math.sin(t * 0.8 + i * 2.1) + 0.10 * math.sin(t * 2.3 + i)
+        # brightness follows an exponential depth falloff, so multiply the polygon's
+        # vertical extent but shade it with a per-row ramp afterwards
+        d.polygon([(x, -h * 0.05), (x + wd, -h * 0.05),
+                   (x + wd + lean + wd * spread, h), (x + lean - wd * spread, h)],
+                  fill=int(np.clip(190 * amp, 0, 255)))
+    m = m.filter(ImageFilter.GaussianBlur(max(8, w // 70)))
+    arr = np.asarray(m, dtype=np.float32) / 255.0
+
+    # depth falloff: full strength at the surface, essentially gone by the seafloor
+    yy = np.linspace(0.0, 1.0, h, dtype=np.float32)[:, None]
+    arr *= np.exp(-3.1 * yy ** 1.15) * 0.92 + 0.08
+
+    # horizontal falloff so the beams are not at the frame edges at full tilt
+    xx = np.linspace(-1.0, 1.0, w, dtype=np.float32)[None, :]
+    arr *= np.clip(1.15 - 0.55 * np.abs(xx) ** 1.6, 0, 1)
+
+    # ragged breakup: the surface above the water is never a still sheet of glass
+    rng = np.random.default_rng(seed)
+    coarse = rng.standard_normal((max(2, h // 46), max(2, w // 46))).astype(np.float32)
+    ci = Image.fromarray(((coarse * 0.5 + 0.5) * 255).astype(np.uint8), "L")
+    ci = ci.resize((w, h), Image.BICUBIC).filter(ImageFilter.GaussianBlur(w // 90))
+    arr *= 0.55 + 0.75 * (np.asarray(ci, dtype=np.float32) / 255.0)
+
+    return (arr * strength)[..., None]
 
 
 def particles_overlay(w, h, t, n=170, seed=0):
-    from PIL import Image, ImageDraw
+    """Marine snow: soft defocused motes, not snowflakes.
+
+    The first version drew hard ellipses of 0.6-3.2 px at up to 120/255 alpha with
+    no depth term, so every mote was a crisp white dot the same size regardless of
+    where it sat in the water. On screen that reads as falling snow. Real marine
+    snow is out of focus at every distance except the focal plane: each mote is a
+    soft blob whose radius and alpha both fall off with distance, and the near ones
+    are larger and dimmer rather than brighter.
+    """
+    from PIL import Image, ImageDraw, ImageFilter
     lay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)
     rng = np.random.default_rng(seed)
     for i in range(n):
         px = rng.random()
-        py = (rng.random() - t * (0.006 + 0.012 * rng.random())) % 1.0
-        r = 0.6 + rng.random() * 2.6
-        a = int(30 + rng.random() * 90)
+        # parallax: near motes travel further than far ones
+        depth = rng.random() ** 1.6                      # 0 = far, 1 = near
+        speed = 0.004 + 0.020 * depth
+        py = (rng.random() - t * speed) % 1.0
+        r = (0.5 + 2.2 * depth) * (w / 1280.0)
+        # near = bigger, softer, dimmer; far = smaller, sharper, still faint
+        a = int((10 + 26 * (1.0 - depth)) * (0.55 + 0.45 * rng.random()))
         x, y = px * w, py * h
-        d.ellipse([x - r, y - r, x + r, y + r], fill=(210, 232, 240, a))
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(198, 226, 238, max(6, a)))
+    # one defocus pass over the whole layer: nothing in this plate is in focus
+    lay = lay.filter(ImageFilter.GaussianBlur(radius=max(0.8, 1.6 * w / 1280.0)))
     return np.asarray(lay, dtype=np.float32) / 255.0
 
 

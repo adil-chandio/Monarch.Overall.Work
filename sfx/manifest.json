@@ -1,0 +1,296 @@
+{
+  "schema": "monarch-sfx-manifest/1",
+  "generated_at": "2026-11-13T22:33:28Z",
+  "sample_rate": 48000,
+  "entries": [
+    {
+      "id": "sfx-ui-thock-warm-001",
+      "file": "ui/ui-thock-warm-001.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "5d76596f72b2d6e95f4ce3b31e9196b21a2f95fb47a53abb3ef6ab35b8bc0b43",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 0.105,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -6.41,
+      "attack_ms": 2.5,
+      "tail_ms": 47.8,
+      "spectral_centre_hz": 735,
+      "band_energy": {
+        "low": 0.5803,
+        "mid": 0.4193,
+        "high": 0.0004
+      },
+      "harsh": false,
+      "tags": [
+        "ui",
+        "warm",
+        "wood",
+        "no-high-click"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::film_tick()",
+      "generator": "scripts/orca3d-audio.py::film_tick"
+    },
+    {
+      "id": "sfx-transition-whoosh-silk-002",
+      "file": "transition/transition-whoosh-silk-002.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "b559a4aa01ba72f0c6ffc97a56ed9c05440243288abb7e5d7d4c405d42a59568",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 0.46,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -8.59,
+      "attack_ms": 109.96,
+      "tail_ms": 209.2,
+      "spectral_centre_hz": 3208,
+      "band_energy": {
+        "low": 0.8796,
+        "mid": 0.063,
+        "high": 0.0575
+      },
+      "harsh": false,
+      "tags": [
+        "transition",
+        "water",
+        "airy",
+        "formant"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::silk_whoosh()",
+      "generator": "scripts/orca3d-audio.py::silk_whoosh"
+    },
+    {
+      "id": "sfx-transition-riser-spectral-003",
+      "file": "transition/transition-riser-spectral-003.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "ad0ac3a2e910972a3fb4b02919451decc3370d914f07d471e2558b9754d3f675",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 1.5,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -0.0,
+      "attack_ms": 833.1,
+      "tail_ms": 82.6,
+      "spectral_centre_hz": 2287,
+      "band_energy": {
+        "low": 0.0188,
+        "mid": 0.7191,
+        "high": 0.2621
+      },
+      "harsh": false,
+      "tags": [
+        "transition",
+        "tension",
+        "build",
+        "sweep"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::spectral_riser()",
+      "generator": "scripts/orca3d-audio.py::spectral_riser"
+    },
+    {
+      "id": "sfx-impact-boom-sub-004",
+      "file": "impact/impact-boom-sub-004.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "415dd3ce8b4ff1ca7bdee5ff5b74722204c4534f91fb3b0f82e7ceb55b95a51a",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 1.25,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -1.03,
+      "attack_ms": 12.23,
+      "tail_ms": 1237.3,
+      "spectral_centre_hz": 132,
+      "band_energy": {
+        "low": 0.9984,
+        "mid": 0.0016,
+        "high": 0.0
+      },
+      "harsh": false,
+      "tags": [
+        "impact",
+        "sub",
+        "cinema",
+        "low"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::cinema_sub_boom()",
+      "generator": "scripts/orca3d-audio.py::cinema_sub_boom"
+    },
+    {
+      "id": "sfx-musical-sting-glass-005",
+      "file": "musical/musical-sting-glass-005.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "76bc523272ceba4fefea26da49c4416cc083f819ab364f6a705760daee12ab07",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 0.7,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -7.41,
+      "attack_ms": 4.96,
+      "tail_ms": 693.0,
+      "spectral_centre_hz": 542,
+      "band_energy": {
+        "low": 0.0025,
+        "mid": 0.9974,
+        "high": 0.0
+      },
+      "harsh": false,
+      "tags": [
+        "musical",
+        "in-key-D",
+        "glass",
+        "soft-attack"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::glass_sting()",
+      "generator": "scripts/orca3d-audio.py::glass_sting"
+    },
+    {
+      "id": "sfx-ambience-shimmer-krill-006",
+      "file": "ambience/ambience-shimmer-krill-006.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "34b29cafd8ac1719b7adbbdf4352dfeeb688d0a0ebe37c4fd1d60f90b0f0abeb",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 3.2,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -0.0,
+      "attack_ms": 1032.88,
+      "tail_ms": 1892.8,
+      "spectral_centre_hz": 2093,
+      "band_energy": {
+        "low": 0.0,
+        "mid": 0.8483,
+        "high": 0.1517
+      },
+      "harsh": false,
+      "tags": [
+        "ambience",
+        "texture",
+        "biological",
+        "wide"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::krill_shimmer()",
+      "generator": "scripts/orca3d-audio.py::krill_shimmer"
+    },
+    {
+      "id": "sfx-ambience-bubble-rise-007",
+      "file": "ambience/ambience-bubble-rise-007.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "a716f20f9cbb50563a29426f599ec27efbd1526ee6964b5122aeb19944793d42",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 1.6,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -0.0,
+      "attack_ms": 273.98,
+      "tail_ms": 1117.5,
+      "spectral_centre_hz": 1590,
+      "band_energy": {
+        "low": 0.0009,
+        "mid": 0.9596,
+        "high": 0.0395
+      },
+      "harsh": false,
+      "tags": [
+        "ambience",
+        "water",
+        "biological",
+        "sparse"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::bubble_rise()",
+      "generator": "scripts/orca3d-audio.py::bubble_rise"
+    },
+    {
+      "id": "sfx-musical-ping-sonar-008",
+      "file": "musical/musical-ping-sonar-008.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "c5559d35108a6b3de9d6025851ea3d1acd1458dbc0faf1e05a19a6d58601d870",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 1.25,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -0.0,
+      "attack_ms": 0.92,
+      "tail_ms": 618.3,
+      "spectral_centre_hz": 1506,
+      "band_energy": {
+        "low": 0.0,
+        "mid": 0.9996,
+        "high": 0.0004
+      },
+      "harsh": false,
+      "tags": [
+        "musical",
+        "clean",
+        "signal",
+        "sci"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::sonar_ping()",
+      "generator": "scripts/orca3d-audio.py::sonar_ping"
+    },
+    {
+      "id": "sfx-natural-moan-humpback-009",
+      "file": "natural/natural-moan-humpback-009.wav",
+      "source": "synth",
+      "url": "",
+      "author": "Monarch.Overall.Work",
+      "license": "own",
+      "license_url": "",
+      "sha256": "383c523ae6921315dfd5b6073bd106b05c53ba65a7f9ad36c80e3edb7ef4723a",
+      "downloaded_at": "2026-11-13T22:33:28Z",
+      "duration_s": 2.9,
+      "sample_rate": 48000,
+      "channels": 1,
+      "peak_dbfs": -0.0,
+      "attack_ms": 1190.77,
+      "tail_ms": 1690.8,
+      "spectral_centre_hz": 579,
+      "band_energy": {
+        "low": 0.1188,
+        "mid": 0.8811,
+        "high": 0.0
+      },
+      "harsh": false,
+      "tags": [
+        "natural",
+        "biological",
+        "low",
+        "long"
+      ],
+      "changes": "synthesised by scripts/orca3d-audio.py::whale_moan()",
+      "generator": "scripts/orca3d-audio.py::whale_moan"
+    }
+  ],
+  "note": "*.wav is gitignored in this repo (see .gitignore:76 and the media-check hook), so the rendered files are not committed. Every row is fully reproducible: run `python scripts/build-sfx-library.py --out sfx` and the sha256 fields below will match byte for byte, because every generator is deterministic."
+}
