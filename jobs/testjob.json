@@ -3,10 +3,10 @@
   "status": "running",
   "goal": "prove the ledger works",
   "total": 4,
-  "done": 0,
+  "done": 3,
   "unit": "steps",
   "created": "2026-11-13T05:55:46.505Z",
-  "updated": "2026-11-13T05:55:46.514Z",
+  "updated": "2026-11-13T05:55:47.277Z",
   "resume": {
     "next_command": "echo continue",
     "notes": ""
@@ -17,6 +17,10 @@
     {
       "at": "2026-11-13T05:55:46.514Z",
       "what": "started: prove the ledger works"
+    },
+    {
+      "at": "2026-11-13T05:55:47.277Z",
+      "what": "step 3 done"
     }
   ]
 }
