@@ -59,13 +59,17 @@ class Cam:
 
 
 class Light:
-    def __init__(self, pos, col, power, kind="point", spot_dir=None, spot_cos=0.0):
+    def __init__(self, pos, col, power, kind="point", spot_dir=None, spot_cos=0.0,
+                 in_air=True):
         self.pos = np.asarray(pos, np.float32)
         self.col = np.asarray(col, np.float32)
         self.power = float(power)
         self.kind = kind
         self.spot_dir = None if spot_dir is None else nrm(np.asarray(spot_dir, np.float32))
         self.spot_cos = spot_cos
+        # a light that exists only to shape the props must not add a glow to the
+        # air, or it reads as a floating sun in an empty frame
+        self.in_air = bool(in_air)
 
     def attenuation(self, P):
         d = self.pos[None, :] - P
@@ -80,24 +84,53 @@ class Light:
         return a, d / dist[:, None], dist
 
 
-def visibility(P, L, cave, steps=10):
+def solid_shadow(P, L, objs, steps=8, soft=0.09):
+    """Soft shadow cast BY the solid props (bear, skull, boulder, torch) onto
+    everything else. Without this the animal floats and the skull sits on the
+    rock like a sticker. Marched against the union of the object SDFs."""
+    if not objs:
+        return np.ones(len(P), np.float32)
+    seg = L.pos[None, :] - P
+    d = np.linalg.norm(seg, axis=1)
+    u = seg / np.maximum(d, 1e-6)[:, None]
+    worst = np.full(len(P), 1e3, np.float32)
+    for i in range(1, steps + 1):
+        t = d * (i / (steps + 1.0))
+        q = P + u * t[:, None]
+        dist = np.full(len(P), 1e3, np.float32)
+        for ob in objs:
+            c = np.asarray(ob.centre, np.float32)
+            keep = np.linalg.norm(q - c[None, :], axis=1) < float(ob.radius) * 1.35
+            if keep.any():
+                dist[keep] = np.minimum(dist[keep], ob.sdf(q[keep]))
+        worst = np.minimum(worst, dist / np.maximum(t, 1e-3))
+    return np.clip(worst / soft, 0.0, 1.0).astype(np.float32)
+
+
+def visibility(P, L, cave, steps=7, objs=None):
     """Soft shadow along the segment P -> light, using the cave's own SDF.
 
     Paths are 1 m or less, so a handful of taps is enough; the penumbra comes
     from how far the worst tap sits inside the rock, not from a binary test.
     """
     seg = L.pos[None, :] - P
-    worst = np.full(len(P), -1e3, np.float32)
-    for i in range(1, steps + 1):
-        q = P + seg * (i / (steps + 1.0))
-        worst = np.maximum(worst, cave.sdf(q))
-    return (1.0 - smoothstep(-0.015, 0.075, worst)).astype(np.float32)
+    if cave is None:                       # object-only pass (silhouette / tests)
+        vis = np.ones(len(P), np.float32)
+    else:
+        worst = np.full(len(P), -1e3, np.float32)
+        for i in range(1, steps + 1):
+            q = P + seg * (i / (steps + 1.0))
+            worst = np.maximum(worst, cave.sdf(q))
+        vis = (1.0 - smoothstep(-0.015, 0.075, worst)).astype(np.float32)
+    if objs:
+        vis = vis * solid_shadow(P, L, objs)
+    return vis
 
 
 # ---------------------------------------------------------------- set
 
 
-def march_set(cam, cave, W, H, tmax=46.0, steps=52):
+def march_set(cam, cave, W, H, tmax=46.0, steps=38):
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     d = cam.rays(xx.ravel(), yy.ravel())
     o = cam.eye[None, :]
@@ -133,7 +166,7 @@ def march_set(cam, cave, W, H, tmax=46.0, steps=52):
                 hit=hit.reshape(H, W), d=d, xx=xx.ravel(), yy=yy.ravel(), W=W, H=H)
 
 
-def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013, sky=None):
+def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013, sky=None, objs=None):
     P, N, t = hit["P"], hit["N"], hit["t"]
     isfloor = P[:, 1] < cave.floor_y + 0.06
 
@@ -162,9 +195,9 @@ def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013, sky=None):
     fl = np.array([0.150, 0.140, 0.126], np.float32)[None, :] * (0.55 + 0.85 * band)[:, None]
     fl = fl * (0.72 + 0.55 * grav[:, None])
     alb = np.where(isfloor[:, None], fl, rock)
-    wet = smoothstep(0.60, 0.80, fbm(P[:, 0] * 1.1, P[:, 1] * 1.1, P[:, 2] * 1.1, 3)) * (~isfloor)
-    alb = alb * (1.0 - 0.40 * wet[:, None])
-    specamt = 0.07 + 0.55 * wet
+    wet = smoothstep(0.68, 0.86, fbm(P[:, 0] * 1.1, P[:, 1] * 1.1, P[:, 2] * 1.1, 3)) * (~isfloor)
+    alb = alb * (1.0 - 0.25 * wet[:, None])
+    specamt = 0.045 + 0.16 * wet
 
     V = cam.eye[None, :] - P
     vd = np.linalg.norm(V, axis=1) + 1e-6
@@ -174,11 +207,11 @@ def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013, sky=None):
     # ambient: dark room + a cold sky fill from the mouth direction
     skyv = visibility(P, Light([0, 0.6, cave.mouth_z + 0.5], (0, 0, 0), 1.0), cave)
     col = alb * (skyv[:, None] * np.array([0.018, 0.028, 0.052], np.float32)[None, :]
-                 + np.array([0.004, 0.005, 0.008], np.float32)[None, :])
+                 + np.array([0.010, 0.012, 0.019], np.float32)[None, :])
 
     for L in lights:
         att, l, dist = L.attenuation(P)
-        vis = visibility(P, L, cave)
+        vis = visibility(P, L, cave, objs=objs)
         att = att * vis
         ndl = (Nd * l).sum(1)
         diff = np.clip((ndl + 0.22) / 1.22, 0, 1)
@@ -205,8 +238,10 @@ def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013, sky=None):
             dd = hit["d"][miss]
             up = np.clip(dd[:, 1], -0.4, 1.0)
             k = np.clip((up + 0.4) / 1.4, 0, 1)[:, None]
+            # the haze thickens towards the ground: outside is a snowy morning, and
+            # it should not be brighter than the rock around the opening
             sk = (np.asarray(sky, np.float32)[None, :]
-                  * (0.55 + 0.75 * k) * (0.8 + 0.4 * np.clip(dd[:, 2], 0, 1))[:, None])
+                  * (0.35 + 0.55 * k) * (0.8 + 0.4 * np.clip(dd[:, 2], 0, 1))[:, None])
             flat = img.reshape(-1, 3)
             flat[np.nonzero(miss)[0]] = sk
             img = flat.reshape(img.shape)
@@ -350,7 +385,7 @@ def composite(img, g, cam, lights, cave, amb=0.02):
 # ---------------------------------------------------------------- solid objects
 
 
-def march_objects(cam, objs, W, H, zbuf, steps=38):
+def march_objects(cam, objs, W, H, zbuf, steps=30):
     """Raymarch solid SDF props/characters, keeping whatever is nearest.
 
     Each object is culled by its bounding sphere and only traced where it can
@@ -437,7 +472,7 @@ def sdf_ao(fn, P, N, radii=(0.045, 0.11, 0.24)):
     return np.clip(1.0 - occ * 0.85, 0.0, 1.0).astype(np.float32)
 
 
-def shade_surface(P, N, mat, cam, lights, cave, ao):
+def shade_surface(P, N, mat, cam, lights, cave, ao, objs=None, self_obj=None):
     """Cook-Torrance-ish shading for one surface, with cave occlusion + AO."""
     C = mat["C"]
     V = cam.eye[None, :] - P
@@ -447,10 +482,14 @@ def shade_surface(P, N, mat, cam, lights, cave, ao):
     col = C * (mat.get("amb", 0.02) * ao)[:, None]
     for L in lights:
         att, l, dist = L.attenuation(P)
-        att = att * visibility(P, L, cave)
+        # a solid does not shadow itself with its own SDF taps (that would
+        # blacken its own lit side), but it does receive the others' shadows
+        occ = [o for o in (objs or []) if o is not self_obj]
+        att = att * visibility(P, L, cave, objs=occ)
         ndl = (N * l).sum(1)
         wrap = np.clip((ndl + 0.03) / 1.03, 0, 1)
-        col = col + C * L.col[None, :] * (wrap * att)[:, None]
+        # contact occlusion: the darkest possible crease is where two limbs meet
+        col = col + C * L.col[None, :] * (wrap * att * ao)[:, None]
         h = nrm(l + V)
         ndh = np.clip((N * h).sum(1), 0, 1)
         a = np.maximum(mat["R"], 0.03) ** 2

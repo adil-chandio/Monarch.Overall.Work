@@ -58,23 +58,30 @@ def _rot(p, c, axis, ang):
 
 # part, centre, radii  (metres, origin at the feet, nose towards +z)
 BEAR = [
-    ("torso",  (0.00, 1.06, 0.05), (0.44, 0.47, 0.86)),
-    ("hump",   (0.00, 1.42, 0.44), (0.29, 0.21, 0.33)),
-    ("rump",   (0.00, 0.99, -0.58), (0.37, 0.41, 0.38)),
-    ("chest",  (0.00, 0.96, 0.72), (0.37, 0.41, 0.35)),
-    ("neck",   (0.00, 1.03, 0.96), (0.26, 0.26, 0.26)),
-    ("head",   (0.00, 0.99, 1.23), (0.235, 0.215, 0.26)),
-    ("snout",  (0.00, 0.93, 1.46), (0.125, 0.110, 0.20)),
-    ("nose",   (0.00, 0.92, 1.63), (0.070, 0.060, 0.050)),
-    ("earL",   (0.155, 1.16, 1.17), (0.065, 0.070, 0.040)),
-    ("earR",   (-0.155, 1.16, 1.17), (0.065, 0.070, 0.040)),
-    ("tail",   (0.00, 1.02, -0.90), (0.050, 0.070, 0.050)),
+    ("torso",   (0.00, 1.02, 0.02), (0.46, 0.50, 0.80)),
+    ("hump",    (0.00, 1.44, 0.34), (0.34, 0.26, 0.40)),   # the shoulder hump: the giveaway
+    ("rump",    (0.00, 0.96, -0.56), (0.40, 0.44, 0.40)),
+    ("chest",   (0.00, 0.90, 0.62), (0.50, 0.46, 0.38)),
+    ("shldrL",  (0.34, 1.20, 0.46), (0.20, 0.30, 0.30)),
+    ("shldrR",  (-0.34, 1.20, 0.46), (0.20, 0.30, 0.30)),
+    ("brisket", (0.00, 0.62, 0.68), (0.30, 0.26, 0.28)),   # deep chest between the forelegs
+    ("neck",    (0.00, 1.06, 0.92), (0.32, 0.32, 0.30)),
+    ("nape",    (0.00, 1.26, 0.84), (0.20, 0.14, 0.22)),
+    ("brow",    (0.00, 1.18, 1.14), (0.22, 0.10, 0.13)),   # low forehead ridge
+    ("head",    (0.00, 1.02, 1.16), (0.215, 0.215, 0.235)),
+    ("cheekL",  (0.14, 0.96, 1.16), (0.10, 0.11, 0.13)),
+    ("cheekR",  (-0.14, 0.96, 1.16), (0.10, 0.11, 0.13)),
+    ("snout",   (0.00, 0.94, 1.36), (0.115, 0.098, 0.15)),  # short, blunt
+    ("nose",    (0.00, 0.925, 1.48), (0.062, 0.052, 0.042)),
+    ("earL",    (0.185, 1.20, 1.06), (0.055, 0.062, 0.032)),  # small, low, round
+    ("earR",    (-0.185, 1.20, 1.06), (0.055, 0.062, 0.032)),
+    ("tail",    (0.00, 1.00, -0.92), (0.045, 0.060, 0.045)),
 ]
 LEGS = [  # name, hip pivot, hip centre, radii, paw centre, paw radii, phase
-    ("hipL", (0.32, 0.86, 0.52), (0.32, 0.50, 0.56), (0.150, 0.40, 0.185), (0.32, 0.115, 0.66), (0.145, 0.105, 0.215), 0.0),
-    ("hipR", (-0.32, 0.86, 0.52), (-0.32, 0.50, 0.56), (0.150, 0.40, 0.185), (-0.32, 0.115, 0.66), (0.145, 0.105, 0.215), math.pi),
-    ("shL",  (0.30, 0.86, -0.50), (0.30, 0.50, -0.50), (0.160, 0.40, 0.200), (0.30, 0.115, -0.40), (0.150, 0.105, 0.210), math.pi),
-    ("shR",  (-0.30, 0.86, -0.50), (-0.30, 0.50, -0.50), (0.160, 0.40, 0.200), (-0.30, 0.115, -0.40), (0.150, 0.105, 0.210), 0.0),
+    ("hipL", (0.36, 0.86, 0.50), (0.36, 0.50, 0.54), (0.145, 0.40, 0.160), (0.36, 0.115, 0.62), (0.140, 0.105, 0.200), 0.0),
+    ("hipR", (-0.36, 0.86, 0.50), (-0.36, 0.50, 0.54), (0.145, 0.40, 0.160), (-0.36, 0.115, 0.62), (0.140, 0.105, 0.200), math.pi),
+    ("shL",  (0.36, 0.86, -0.58), (0.36, 0.50, -0.60), (0.150, 0.40, 0.170), (0.36, 0.115, -0.56), (0.140, 0.105, 0.190), math.pi),
+    ("shR",  (-0.36, 0.86, -0.58), (-0.36, 0.50, -0.60), (0.150, 0.40, 0.170), (-0.36, 0.115, -0.56), (0.140, 0.105, 0.190), 0.0),
 ]
 
 # rearing pose targets for the body parts (legs stay planted)
@@ -160,12 +167,12 @@ class Bear:
                 e = ellipsoid(qq, c, r)
                 if w:  # arms only fade in with the rear
                     e = e + (1.0 - w[0]) * 0.6
-                d = smin(d, e, 0.09)
+                d = smin(d, e, 0.05)
         # fur: displace the surface with noise so the silhouette is not a tube
         if self.fur > 0:
             n = fbm(q[..., 0] * 16.0, q[..., 1] * 16.0, q[..., 2] * 16.0, 2) - 0.5
             n2 = vnoise(q[..., 0] * 41.0, q[..., 1] * 41.0, q[..., 2] * 41.0) - 0.5
-            d = d - self.fur * (0.010 * n + 0.0045 * n2)
+            d = d - self.fur * (0.013 * n + 0.006 * n2)
             d = d + self.fur * 0.014        # keeps the body from inflating
         return d
 
@@ -173,14 +180,14 @@ class Bear:
 # ------------------------------------------------------------------ skull
 
 SKULL_PARTS = [
-    ((0.000, 0.000, -0.020), (0.112, 0.098, 0.132)),   # cranium
-    ((0.000, 0.034, -0.060), (0.070, 0.052, 0.095)),   # occiput / crest mass
-    ((0.000, 0.058, 0.010), (0.026, 0.030, 0.118)),    # sagittal crest
-    ((0.000, -0.004, 0.130), (0.068, 0.056, 0.098)),   # muzzle root
-    ((0.000, -0.012, 0.205), (0.045, 0.039, 0.058)),   # muzzle
-    ((0.076, -0.016, 0.078), (0.026, 0.038, 0.068)),   # zygomatic L
-    ((-0.076, -0.016, 0.078), (0.026, 0.038, 0.068)),  # zygomatic R
-    ((0.000, 0.040, 0.070), (0.086, 0.026, 0.060)),    # forehead plate
+    ((0.000, 0.000, -0.055), (0.110, 0.092, 0.112)),      # braincase
+    ((0.000, 0.052, -0.090), (0.078, 0.044, 0.070)),      # occiput
+    ((0.000, 0.064, -0.010), (0.014, 0.040, 0.118)),      # sagittal crest
+    ((0.000, 0.004, 0.072), (0.086, 0.056, 0.076)),       # frontal / brow
+    ((0.000, -0.028, 0.186), (0.047, 0.040, 0.118)),      # muzzle
+    ((0.000, -0.030, 0.258), (0.034, 0.031, 0.036)),      # premaxilla
+    ((0.076, -0.018, 0.088), (0.020, 0.025, 0.074)),      # zygomatic arch L
+    ((-0.076, -0.018, 0.088), (0.020, 0.025, 0.074)),     # zygomatic arch R
 ]
 
 
@@ -199,19 +206,27 @@ class Skull:
         q = np.stack([q[..., 0] * ca + q[..., 2] * sa, q[..., 1], -q[..., 0] * sa + q[..., 2] * ca], -1)
         d = np.full(q.shape[:-1], 1e3, np.float32)
         for c, r in SKULL_PARTS:
-            d = smin(d, ellipsoid(q, c, r), 0.030)
+            # a tight weld keeps the crest, the orbits and the arch as separate forms
+            d = smin(d, ellipsoid(q, c, r), 0.020)
         # eye sockets, nasal aperture, foramen magnum: carved out of the bone
         for sx in (-1, 1):
-            d = smax(d, -ellipsoid(q, (0.058 * sx, 0.020, 0.150), (0.030, 0.030, 0.032)), 0.012)
-        d = smax(d, -ellipsoid(q, (0.0, -0.004, 0.246), (0.020, 0.032, 0.030)), 0.010)
-        d = smax(d, -ellipsoid(q, (0.0, -0.030, -0.150), (0.030, 0.030, 0.026)), 0.010)
+            # orbit, then the gap under the cheekbone that reads as an arch
+            d = smax(d, -ellipsoid(q, (0.058 * sx, 0.010, 0.092), (0.036, 0.034, 0.034)), 0.006)
+            d = smax(d, -ellipsoid(q, (0.070 * sx, -0.048, 0.080), (0.026, 0.016, 0.050)), 0.008)
+        d = smax(d, -ellipsoid(q, (0.0, -0.024, 0.286), (0.017, 0.024, 0.022)), 0.006)   # nasal aperture
+        d = smax(d, -ellipsoid(q, (0.0, -0.014, -0.168), (0.028, 0.026, 0.022)), 0.006)  # foramen magnum
         # teeth: two rows along the maxilla
         for sx in (-1, 1):
             for k in range(8):
                 tz = 0.086 + k * 0.0205
                 tx = sx * (0.040 - 0.0038 * k)
-                ty = -0.044 - 0.006 * math.sin(k / 7.0 * math.pi)
-                d = smin(d, ellipsoid(q, (tx, ty, tz), (0.0095, 0.017, 0.0080)), 0.004)
+                ty = -0.060 - 0.007 * math.sin(k / 7.0 * math.pi)
+                d = smin(d, ellipsoid(q, (tx, ty, tz), (0.0105, 0.020, 0.0085)), 0.003)
+        # canines: the pair that makes a bear skull unmistakable
+        for sx in (-1, 1):
+            d = smin(d, ellipsoid(q, (sx * 0.042, -0.070, 0.246), (0.0105, 0.026, 0.0105)), 0.003)
+        # the post-orbital constriction: a narrow waist behind the eyes
+        d = smax(d, -ellipsoid(q, (0.0, 0.030, 0.020), (0.052, 0.030, 0.030)), 0.020)
         # bone grain
         d = d - 0.0016 * (fbm(q[..., 0] * 34, q[..., 1] * 34, q[..., 2] * 34, 2) - 0.5)
         return d * self.s
@@ -238,6 +253,32 @@ class Boulder:
         return d - (0.045 * n + 0.016 * n2) + 0.02
 
 
+class Fire:
+    """The humans' fire: a low ring of stones and the burning wood inside it.
+
+    This is what lights the cave. Every warm light in the film is anchored here,
+    so the shadows all agree with each other.
+    """
+
+    def __init__(self, base=(0.0, -1.35, 0.0), ring=0.42):
+        self.b = np.asarray(base, np.float32)
+        self.ring = float(ring)
+        self.centre = self.b + np.array([0.0, 0.22, 0.0], np.float32)
+        self.radius = float(ring) + 0.55
+
+    def sdf(self, p):
+        q = p - self.b[None, :]
+        # stone ring: a torus flattened into the floor
+        rxz = np.sqrt(q[..., 0] ** 2 + q[..., 2] ** 2)
+        d = np.sqrt((rxz - self.ring) ** 2 + (q[..., 1] - 0.05) ** 2) - 0.085
+        # crossed logs
+        for ax in (0.0, 1.0):
+            c, sn = math.cos(ax * 1.9), math.sin(ax * 1.9)
+            qq = np.stack([q[..., 0] * c - q[..., 2] * sn, q[..., 1] - 0.07, q[..., 0] * sn + q[..., 2] * c], -1)
+            d = smin(d, np.linalg.norm(qq / np.array([0.40, 0.045, 0.045], np.float32), axis=-1) * 0.045 - 0.045, 0.03)
+        return d
+
+
 class Torch:
     """The hand torch: a tapered handle with a charred head."""
 
@@ -252,10 +293,12 @@ class Torch:
         q = _rot(q, (0, 0, 0), "x", -self.tilt)
         # capsule along -y
         a = np.array([0.0, 0.0, 0.0], np.float32)
-        bb = np.array([0.0, -0.26, 0.0], np.float32)
+        bb = np.array([0.0, -0.30, 0.0], np.float32)
         pa = q - a
         ba = bb - a
         h = np.clip((pa @ ba) / (ba @ ba), 0.0, 1.0)
-        d = np.linalg.norm(pa - h[..., None] * ba, axis=-1) - 0.014
-        d = smin(d, ellipsoid(q, (0.0, 0.030, 0.0), (0.028, 0.040, 0.028)), 0.02)
+        d = np.linalg.norm(pa - h[..., None] * ba, axis=-1) - 0.026
+        d = smin(d, ellipsoid(q, (0.0, 0.036, 0.0), (0.042, 0.055, 0.042)), 0.02)
+        # a rag wrap, so it reads as something a hand made
+        d = smin(d, ellipsoid(q, (0.0, -0.16, 0.0), (0.036, 0.090, 0.036)), 0.03)
         return d

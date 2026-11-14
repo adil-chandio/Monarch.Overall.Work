@@ -441,6 +441,37 @@ class Flame:
         return P.astype(np.float32), C, heat
 
 
+class Embers:
+    """Sparks that leave the fire, drift, cool and die. Purely additive."""
+
+    def __init__(self, n=120, seed=77):
+        self.rng = np.random.default_rng(seed)
+        self.n = n
+        self.age = self.rng.random(n).astype(np.float32)
+        self.life = self.rng.uniform(1.1, 3.0, n).astype(np.float32)
+        self.v = np.stack([self.rng.normal(0, 0.18, n), self.rng.uniform(0.35, 0.95, n),
+                           self.rng.normal(0, 0.18, n)], 1).astype(np.float32)
+        self.ph = self.rng.random(n).astype(np.float32) * 6.283
+
+    def step(self, dt, base, t=0.0):
+        self.age += dt / self.life
+        dead = self.age > 1.0
+        if dead.any():
+            k = int(dead.sum())
+            self.age[dead] = 0.0
+            self.life[dead] = self.rng.uniform(1.1, 3.0, k).astype(np.float32)
+            self.v[dead] = np.stack([self.rng.normal(0, 0.18, k), self.rng.uniform(0.35, 0.95, k),
+                                     self.rng.normal(0, 0.18, k)], 1)
+        a = np.clip(self.age, 0, 1)
+        b = np.asarray(base, np.float32)
+        swirl = np.stack([np.sin(a * 9 + self.ph) * 0.10 * a,
+                          np.zeros(self.n), np.cos(a * 7 + self.ph * 1.3) * 0.10 * a], 1)
+        P = b + swirl + self.v * (a * self.life)[:, None] * 0.55
+        P[:, 1] += 0.18
+        heat = np.clip(1.0 - a, 0, 1) ** 2.2 * self.rng.uniform(0.6, 1.0, self.n).astype(np.float32)
+        return P.astype(np.float32), heat.astype(np.float32)
+
+
 def torch_prop(base, seed=41):
     """A hand torch: charred handle points plus a flame cluster."""
     rng = np.random.default_rng(seed)

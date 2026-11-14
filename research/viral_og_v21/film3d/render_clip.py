@@ -4,6 +4,7 @@ import sys, os, json, math, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 import geo3d as G, render3d as R, sdf as S, film1min as F
+from film1min import FIRE_POS
 from PIL import Image, ImageDraw, ImageFont
 
 FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
@@ -32,6 +33,8 @@ def _particles():
     if "dust" not in _PARTICLES:
         _PARTICLES["dust"] = G.Dust(n=900)
         _PARTICLES["flame"] = G.Flame(150, seed=31)
+        _PARTICLES["logs"] = G.Flame(260, seed=91)
+        _PARTICLES["embers"] = G.Embers(130, seed=77)
         _PARTICLES["t"] = 0.0
     return _PARTICLES
 
@@ -50,8 +53,8 @@ def _mats(nd, kind):
 
 
 def kind_hint(act):
-    """Only shots with no subject look out of the mouth, so only they get sky."""
-    return act.get("kind") == "none"
+    """The mouth is outside the cave in every shot; rays that miss the rock see it."""
+    return True
 
 
 def build_frame(T, W, H, cave, shots, starts, seed=0):
@@ -62,24 +65,31 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
     s = shots[k]
     eye, tgt, fov, lts, act, exp = s.sample(local)
     cam = R.Cam(W, H, eye, tgt, fov=fov)
-    lights = [R.Light(a, b, c, kind=d) for (a, b, c, d) in lts]
+    lights = [R.Light(a, b, c, kind=d, in_air=ai) for (a, b, c, d, ai) in lts]
     _advance_to(T)
 
-    hg = R.march_set(cam, cave, W, H, steps=44)
-    img, depth, tr = R.shade_set(hg, cam, cave, lights,
-                                  sky=(0.052, 0.088, 0.172) if kind_hint(act) else None)
+    hg = R.march_set(cam, cave, W, H, steps=34)
 
     kind = act.get("kind")
     objs, mats = [], []
+    if kind != "none":
+        objs.append(S.Fire(FIRE_POS))
+        mats.append(dict(C=np.array([0.085, 0.072, 0.062], np.float32),
+                         S=0.06, R=0.90, amb=0.02, rim=0.20))
     if kind == "skull":
         b = act.get("boulder")
         if b:
             objs.append(S.Boulder(b["centre"], b["radii"]))
-            mats.append(dict(C=np.array([0.145, 0.136, 0.120], np.float32),
-                             S=0.09, R=0.88, amb=0.02, rim=0.30))
+            mats.append(dict(C=np.array([0.072, 0.067, 0.059], np.float32),
+                             S=0.07, R=0.90, amb=0.015, rim=0.22))
         objs.append(S.Skull(act["pos"], act.get("rot", 0.0), act.get("scale", 1.0)))
-        mats.append(dict(C=np.array([0.46, 0.415, 0.335], np.float32),
-                         S=0.24, R=0.52, amb=0.035, rim=0.55))
+        mats.append(dict(C=np.array([0.42, 0.385, 0.318], np.float32),
+                         S=0.055, R=0.72, amb=0.024, rim=0.26))
+        sec = act.get("second")
+        if sec:
+            objs.append(S.Skull(sec["pos"], sec.get("rot", 0.0), sec.get("scale", 1.0)))
+            mats.append(dict(C=np.array([0.30, 0.274, 0.226], np.float32),
+                             S=0.045, R=0.76, amb=0.022, rim=0.20))
     elif kind == "bear":
         objs.append(S.Bear(act["pos"], act.get("yaw", 0.0), fur=1.0,
                            pose=act.get("pose", 0.0), walk=act.get("walk", 0.0),
@@ -92,8 +102,14 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
         mats.append(dict(C=np.array([0.055, 0.040, 0.028], np.float32),
                          S=0.08, R=0.85, amb=0.02, rim=0.3))
 
+    # the set is lit with the props already in the world, so their contact shadows
+    # land on the floor and the walls
+    img, depth, tr = R.shade_set(hg, cam, cave, lights,
+                                  sky=(0.075, 0.100, 0.118) if kind_hint(act) else None,
+                                  objs=objs)
+
     if objs:
-        hit = R.march_objects(cam, objs, W, H, depth, steps=44)
+        hit = R.march_objects(cam, objs, W, H, depth, steps=26)
         if hit is not None:
             # the air (flame, dust) has to be occluded by the solids, not drawn on top
             depth.reshape(-1)[hit["idx"]] = hit["t"]
@@ -104,27 +120,41 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
             for oi, ob in enumerate(objs):
                 sel = hit["obj"] == oi
                 if sel.any():
-                    ao[sel] = R.sdf_ao(ob.sdf, hit["P"][sel], N[sel])
+                    ao[sel] = R.sdf_ao(ob.sdf, hit["P"][sel], N[sel], radii=(0.05, 0.16))
             P = hit["P"]
             for oi, m in enumerate(mats):
                 sel = hit["obj"] == oi
                 if not sel.any():
                     continue
-                mm = dict(C=np.repeat(np.asarray(m["C"], np.float32)[None, :], int(sel.sum()), 0),
-                          S=m["S"], R=m["R"], amb=m["amb"], rim=m["rim"])
-                if kind == "bear" and oi == 0:
+                nsel = int(sel.sum())
+                mm = dict(C=np.repeat(np.asarray(m["C"], np.float32)[None, :], nsel, 0),
+                          S=np.full(nsel, m["S"], np.float32), R=np.full(nsel, m["R"], np.float32),
+                          amb=m["amb"], rim=m["rim"])
+                if kind == "bear" and objs[oi].__class__.__name__ == "Bear":
                     q = P[sel] - np.asarray(act["pos"], np.float32)[None, :]
                     # face, muzzle and eyes read lighter/darker: tells you it is a bear
-                    muz = (G.smoothstep(1.34, 1.52, q[:, 2]) * G.smoothstep(0.20, 0.06, np.abs(q[:, 0])))[:, None]
-                    mm["C"] = mm["C"] * (1 - muz) + np.array([0.155, 0.118, 0.088], np.float32)[None, :] * muz
+                    muz = (G.smoothstep(1.26, 1.42, q[:, 2]) * G.smoothstep(0.16, 0.05, np.abs(q[:, 0])))[:, None]
+                    mm["C"] = mm["C"] * (1 - muz) + np.array([0.150, 0.112, 0.082], np.float32)[None, :] * muz
+                    # wet black nose pad at the tip
+                    nz = np.linalg.norm(q - np.array([0.0, 0.925, 1.48], np.float32), axis=1) < 0.062
+                    mm["C"][nz] = np.array([0.020, 0.017, 0.016], np.float32)
+                    mm["R"][nz] = 0.10
+                    mm["S"][nz] = 1.5
                     eye = np.zeros(len(q), bool)
                     for sx in (-1, 1):
-                        c = np.array([0.098 * sx, 1.222, 1.455], np.float32)
-                        eye |= np.linalg.norm(q - c, axis=1) < 0.052
+                        c = np.array([0.088 * sx, 1.115, 1.245], np.float32)
+                        eye |= np.linalg.norm(q - c, axis=1) < 0.045
                     mm["C"][eye] = np.array([0.010, 0.009, 0.009], np.float32)
                     mm["R"] = np.where(eye, 0.05, mm["R"])
                     mm["S"] = np.where(eye, 2.4, mm["S"])
-                flat_i[hit["idx"][sel]] = R.shade_surface(P[sel], N[sel], mm, cam, lights, cave, ao[sel])
+                    # fur: a darker under-layer in the crevices, a lighter sheen on
+                    # the outer coat. This is the only "texture" the animal gets.
+                    fb = G.fbm(q[:, 0] * 7.0, q[:, 1] * 7.0, q[:, 2] * 7.0, 3)[:, None]
+                    fd = G.fbm(q[:, 0] * 30.0, q[:, 1] * 30.0, q[:, 2] * 30.0, 2)[:, None]
+                    fur = (0.72 + 0.62 * fb) * (0.86 + 0.28 * fd)
+                    mm["C"] = mm["C"] * np.clip(fur, 0.45, 1.45)
+                flat_i[hit["idx"][sel]] = R.shade_surface(P[sel], N[sel], mm, cam, lights, cave, ao[sel],
+                                                           objs=objs, self_obj=objs[oi])
             img = flat_i.reshape(img.shape)
 
     # flame + dust: additive light in the air, still simulated, never a still
@@ -138,14 +168,39 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
         fs = R.splat(fnd, cam, W, H, depth, rad=1.1)
         if fs is not None:
             flat_i = img.reshape(-1, 3)
-            flat_i[fs["idx"]] = flat_i[fs["idx"]] + np.clip(fs["C"], 0, 1) * (fs["EM"] * 1.6)[:, None]
+            flat_i[fs["idx"]] = flat_i[fs["idx"]] + np.clip(fs["C"], 0, 1) * (fs["EM"] * 1.2)[:, None]
+            img = flat_i.reshape(img.shape)
+
+    # the fire itself: log flame (bigger, slower) plus sparks leaving it
+    if kind != "none":
+        fbase = np.asarray(FIRE_POS, np.float32) + np.array([0.0, 0.10, 0.0], np.float32)
+        fp2, fc2, fh2 = P["logs"].step(1.0 / 24.0, fbase)
+        fn2 = dict(P=fp2.astype(np.float32), N=R.nrm(cam.eye[None, :] - fp2).astype(np.float32),
+                   C=np.clip(fc2 * np.array([1.0, 0.72, 0.55], np.float32), 0, 1).astype(np.float32),
+                   S=np.full(len(fp2), 0.0, np.float32),
+                   R=np.full(len(fp2), 0.9, np.float32), PX=np.full(len(fp2), 0.030, np.float32),
+                   EM=(fh2 * 1.45).astype(np.float32))
+        fs2 = R.splat(fn2, cam, W, H, depth, rad=1.4)
+        if fs2 is not None:
+            flat_i = img.reshape(-1, 3)
+            flat_i[fs2["idx"]] = flat_i[fs2["idx"]] + np.clip(fs2["C"], 0, 1) * (fs2["EM"] * 1.5)[:, None]
+            img = flat_i.reshape(img.shape)
+        ep, eh = P["embers"].step(1.0 / 24.0, fbase, T)
+        en = dict(P=ep, N=R.nrm(cam.eye[None, :] - ep).astype(np.float32),
+                  C=np.tile(np.array([[1.0, 0.42, 0.10]], np.float32), (len(ep), 1)),
+                  S=np.zeros(len(ep), np.float32), R=np.full(len(ep), 0.9, np.float32),
+                  PX=np.full(len(ep), 0.0050, np.float32), EM=(eh * 0.55).astype(np.float32))
+        es = R.splat(en, cam, W, H, depth, rad=1.0)
+        if es is not None:
+            flat_i = img.reshape(-1, 3)
+            flat_i[es["idx"]] = flat_i[es["idx"]] + np.clip(es["C"], 0, 1) * es["EM"][:, None]
             img = flat_i.reshape(img.shape)
 
     dustP = P["dust"].P
     near = np.linalg.norm(dustP - cam.eye[None, :], axis=1) < 7.0
     if near.sum() > 8:
         dn = dict(P=dustP[near], N=R.nrm(cam.eye[None, :] - dustP[near]).astype(np.float32),
-                  C=np.full((int(near.sum()), 3), 0.62, np.float32),
+                  C=np.full((int(near.sum()), 3), 0.16, np.float32),
                   S=np.full(int(near.sum()), 0.0, np.float32),
                   R=np.full(int(near.sum()), 0.9, np.float32),
                   PX=np.full(int(near.sum()), 0.0045, np.float32),
@@ -158,7 +213,7 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
             flat_i[ds["idx"]] = flat_i[ds["idx"]] + glow * 0.35
             img = flat_i.reshape(img.shape)
 
-    vol, vt = R.volumetrics(cam, cave, lights, W, H, density=0.0075, res=0.34)
+    vol, vt = R.volumetrics(cam, cave, lights, W, H, density=0.0042, res=0.34)
     img = img * vt[..., None] + vol
     fin = R.finish(img, seed=seed, exposure=exp)
     # an edit opens and closes: 1 s up from black, 1.2 s down to black
