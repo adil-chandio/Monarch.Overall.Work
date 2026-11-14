@@ -1,0 +1,114 @@
+[
+  {
+    "skill": "frutiger-aero-style",
+    "prompt": "Make a mid-2000s Frutiger Aero scene: a glossy mp3 player on a wet green lawn with bubbles.",
+    "must": [
+      "0\\.0?[89]\\s*[-\\u2013]\\s*0\\.18|0\\.08|0\\.1[0-8]",
+      "clearcoat|coat",
+      "1\\.3[5-9]|1\\.4[0-5]",
+      "bevel|10\\s*[-\\u2013]\\s*30\\s*mm"
+    ],
+    "must_not": [
+      "matte",
+      "roughness 0\\.[3-9]"
+    ]
+  },
+  {
+    "skill": "genre-shooter",
+    "prompt": "Block out a TPS arena map with cover and loot.",
+    "must": [
+      "0\\.9|1\\.35|2\\.1",
+      "sightline",
+      "80\\s*m|80\\s*metre",
+      "colourblind|colorblind"
+    ],
+    "must_not": [
+      "cover at 1\\.0",
+      "cover height 1\\.0"
+    ]
+  },
+  {
+    "skill": "genre-stealth",
+    "prompt": "Design a stealth corridor with cover a crouched player can hide behind.",
+    "must": [
+      "1\\.1",
+      "1\\.25",
+      "collision|collider",
+      "light"
+    ],
+    "must_not": [
+      "1\\.0\\s*m cover",
+      "cover 1\\.0"
+    ]
+  },
+  {
+    "skill": "anime-style",
+    "prompt": "Set up cel shading for an anime character with outlines.",
+    "must": [
+      "2|3",
+      "hard",
+      "3\\s*[-\\u2013]\\s*5\\s*px|1\\s*[-\\u2013]\\s*2\\s*px",
+      "screen[- ]space"
+    ],
+    "must_not": [
+      "soft gradient",
+      "smooth falloff"
+    ]
+  },
+  {
+    "skill": "liminal-space-style",
+    "prompt": "Build a liminal corridor scene.",
+    "must": [
+      "2\\.6|9\\s*m|ceiling",
+      "clean",
+      "exit",
+      "3200|6500"
+    ],
+    "must_not": [
+      "dust",
+      "decay",
+      "abandoned"
+    ]
+  },
+  {
+    "skill": "mascot-puppet-horror",
+    "prompt": "Model a creepy mascot costume character.",
+    "must": [
+      "1:3",
+      "felt|seam",
+      "0\\.05",
+      "idle|blink|breathing"
+    ],
+    "must_not": [
+      "cgi"
+    ]
+  },
+  {
+    "skill": "retro-8bit-style",
+    "prompt": "Make an 8-bit style character and environment.",
+    "must": [
+      "4\\s*colou?r",
+      "point",
+      "8\\s*px|16\\s*px",
+      "anti-?aliasing|1\\s*px"
+    ],
+    "must_not": [
+      "bilinear",
+      "16-?bit",
+      "photoreal"
+    ]
+  },
+  {
+    "skill": "noir-style",
+    "prompt": "Light a noir interrogation room.",
+    "must": [
+      "1\\s*:\\s*(8|16)|8\\s*to\\s*16",
+      "hard",
+      "skin",
+      "15\\s*[-\\u2013]\\s*25"
+    ],
+    "must_not": [
+      "fully desaturat"
+    ]
+  }
+]

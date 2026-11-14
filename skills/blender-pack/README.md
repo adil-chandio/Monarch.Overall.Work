@@ -120,3 +120,33 @@ The art direction — the 94 skill subjects, the shared references, the MCP prot
 is upstream's work, MIT licensed and credited in `LICENSE` and `UPSTREAM-README.md`.
 This fork contributes the rewritten skill bodies, the shared reference layout, the
 API contract, and the two build scripts.
+
+---
+
+## Testing the pack
+
+Two layers, because they answer different questions.
+
+**`validate.py` — is it well-formed?** Frontmatter parses and matches the directory,
+body clears a floor, every `related-skills` entry resolves, every relative link
+resolves, the API contract is pinned, no duplicate YAML keys. This is what catches
+the upstream `blender-director` duplicate `role:` and the dangling `surreal-mood`.
+
+**`evals/` — does it change the answer?** Eight cases, each a real request plus the
+regexes a competent response must contain and the failure mode it must not contain.
+A model that never read the skill writes a plausible paragraph; plausibility cannot
+be checked, but the presence of the skill's own numbers can. `frutiger-aero-style`
+is passable only if the answer carries roughness 0.08-0.18, a clearcoat, IOR
+1.35-1.45 and 10-30 mm bevels — the things the upstream one-liner did not contain.
+
+```bash
+python3 evals/run.py              # score with a model, SKIP cleanly without one
+python3 evals/run.py --selftest   # no model: do the cases still discriminate?
+```
+
+`--selftest` is the interesting one for CI. For each case it feeds the skill's own
+body in and requires PASS, then feeds a one-sentence stub in and requires FAIL. A
+case that cannot be passed is a broken test; a case the upstream stub passes tests
+nothing. Both stay invisible while the runner is skipping for lack of a connection,
+so `blender-skills-validate.yml` runs the selftest on every change to this directory
+alongside `validate.py` and `build.py --check`.

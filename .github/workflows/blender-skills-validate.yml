@@ -1,0 +1,75 @@
+name: Blender skills — structure and API contract
+
+# The upstream pack had 48 of 95 skills that were a title and one sentence, a
+# related-skills pointer to a skill that does not exist, and a duplicate YAML key
+# that silently dropped a field. None of that fails loudly at load time: the tool
+# finds a skill, the agent produces work, and the direction is simply absent.
+#
+# This runs only when the pack changes, so it costs nothing on the other 50
+# workflows in this repository.
+on:
+  push:
+    branches: [arena/ba8d901e-monarch-overall-work]
+    paths:
+      - 'skills/blender-pack/**'
+      - '.github/workflows/blender-skills-validate.yml'
+  pull_request:
+    paths:
+      - 'skills/blender-pack/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate skill structure
+        working-directory: skills/blender-pack
+        run: python3 validate.py
+
+      - name: Check the evals themselves still discriminate
+        working-directory: skills/blender-pack
+        run: python3 evals/run.py --selftest
+
+      - name: Fail if a generated tool copy has drifted
+        working-directory: skills/blender-pack
+        run: python3 build.py --check
+
+      - name: Confirm the manifests and the tree agree
+        working-directory: skills/blender-pack
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+
+          root = pathlib.Path(".")
+          skills = [p for p in (root / "skills").iterdir()
+                    if p.is_dir() and (p / "SKILL.md").exists()]
+          n = len(skills)
+
+          bad = []
+          plugin = json.loads((root / ".claude-plugin/plugin.json").read_text())
+          market = json.loads((root / ".claude-plugin/marketplace.json").read_text())
+
+          if "94" in plugin["description"] and n != 94:
+              bad.append(f"plugin.json says 94 skills, tree has {n}")
+          if plugin["version"] != market["metadata"]["version"]:
+              bad.append("plugin.json and marketplace.json versions disagree")
+          if plugin.get("skills") != "./.claude/skills/":
+              bad.append(f"plugin.json skills path is {plugin.get('skills')!r}")
+
+          print(f"{n} skills, manifests at {plugin['version']}")
+          if bad:
+              for b in bad:
+                  print(f"  FAIL {b}")
+              sys.exit(1)
+          print("PASS manifests agree with the tree")
+          PY
