@@ -6,9 +6,9 @@
   "done": 0,
   "unit": "frames",
   "created": "2026-11-14T04:51:09.854Z",
-  "updated": "2026-11-14T04:51:11.506Z",
+  "updated": "2026-11-14T05:06:23.550Z",
   "resume": {
-    "next_command": "OUT=/tmp/v3 ./scripts/render-orca3d-v3.sh (resumes, skips encoded chunks); then mux /tmp/v3/video.mp4 + audio, QC via .venv/bin/python -m showreel.audio_qc.gates, upload, job uploaded",
+    "next_command": "OUT=/tmp/v3 ./scripts/render-orca3d-v3.sh; mux /tmp/orca-v3-final.m4a; gates; upload",
     "notes": ""
   },
   "artifacts": [],
