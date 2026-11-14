@@ -51,7 +51,7 @@ def render_shot(cave, shots, starts, k):
                           "-c:v", "libx264", "-preset", "medium", "-crf", "16",
                           "-pix_fmt", "yuv420p", "-f", "mp4", part],
                          stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
-                         stderr=subprocess.DEVNULL)
+                         stderr=subprocess.PIPE)
     t_start = time.time()
     for i in range(n):
         T = t0 + i / FPS
@@ -62,7 +62,7 @@ def render_shot(cave, shots, starts, k):
             print(f"{s.name} frame {i}/{n}  {el / (i + 1):.2f}s/f  "
                   f"eta {(el / (i + 1)) * (n - i - 1) / 60:.1f} min", flush=True)
     p.stdin.close()
-    err = p.stderr.read().decode("utf-8", "replace")
+    err = p.stderr.read().decode("utf-8", "replace") if p.stderr else ""
     if p.wait() != 0:
         print(f"{s.name}: ffmpeg failed\n{err[-2000:]}", flush=True)
         return
