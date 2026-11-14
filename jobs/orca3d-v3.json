@@ -1,12 +1,12 @@
 {
   "id": "orca3d-v3",
-  "status": "artifacts-pending",
+  "status": "done",
   "goal": "Orca 60s v3: volumetric water surface (Snell window + TIR mirror), depth-masked god rays, linear-metre fog, contact shadows, per-shot light rig, cinematic filmic grade with exponential shoulder + teal-orange split",
   "total": 1800,
   "done": 1800,
   "unit": "frames",
   "created": "2026-11-14T04:51:09.854Z",
-  "updated": "2026-11-14T08:42:47.004Z",
+  "updated": "2026-11-14T08:42:50.607Z",
   "resume": {
     "next_command": "OUT=/tmp/v3 ./scripts/render-orca3d-v3.sh; mux /tmp/orca-v3-final.m4a; gates; upload",
     "notes": ""
@@ -33,6 +33,10 @@
     {
       "at": "2026-11-14T08:42:47.004Z",
       "what": "uploaded /tmp/Why-Orcas-Fear-Humpbacks-3D-v3-60s-720p.mp4 -> Drive 1uwp7uteOsVINKZwKTsF9OjZVD_0qpGzK"
+    },
+    {
+      "at": "2026-11-14T08:42:50.607Z",
+      "what": "done"
     }
   ]
 }
