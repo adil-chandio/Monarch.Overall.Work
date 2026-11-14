@@ -816,7 +816,14 @@ def b_scan(r, t, t0, t1):
            bank(ry=-92, pos=(6.0, 0.4, 16.0)))
     draw_orca(r, bank(ry=-88, rz=6 * math.sin(t * 0.9),
                       pos=(-1.0, -0.2, 2.0)), t, 0.0, 0.12)
-    im = to_pil(composite(r, t, focus=3.2, dof=8.0, rays=0.24, particle_n=160,
+    # This beat was near-black: the orca is at 2 m, the whale at 16 m, and `focus`
+    # was 3.2 with a clipped CoC, so everything past 6 m took the widest kernel and
+    # the fog then covered the rest. Focus on the animal that is actually the
+    # subject, lift the ambient for a deep shot, and let the far whale be soft -
+    # that is the shot, not a mistake.
+    r.light_rig(ambient=(0.085, 0.140, 0.180),
+                fill=(0.30, 0.52, 0.66), rim=(0.70, 0.90, 1.00))
+    im = to_pil(composite(r, t, focus=2.6, dof=1.6, rays=0.34, particle_n=160,
                            ray_far=24.0, surface={"height": 0.030, "strength": 0.72}))
     sonar(im, W * 0.46, H * 0.52, t, period=2.6, n=3, radius=W * 0.34, alpha=0.85)
     return from_pil(im)
@@ -850,10 +857,16 @@ def b_flock(r, t, t0, t1):
         swing = math.sin(ph_t) ** 3
         # roll the animal onto its side; the raised pectoral then stands clear
         roll = roll_dir * (34.0 + 46.0 * max(0.0, swing))
-        draw_orca(r, bank(ry=-94 + 8 * math.sin(t * 0.6 + ph),
-                          rx=10 * swing, rz=roll,
-                          pos=(x, y + 0.22 * (1.0 - swing), z), scale=sc),
-                  t, ph, 0.085)
+        # This is a HUMPBACK slapping, so it is a humpback - the beat was drawing an
+        # orca, and then a bare `flipper()` plate next to it, which is why the shots
+        # showed a small black dolphin beside a 5 m white plank with no animal
+        # attached to it. The whale's own pectoral is a third of its body length and
+        # is already part of the humpback mesh, so posing the animal IS the shot.
+        draw_whale(r, "humpback", 14.0,
+                   bank(ry=-94 + 8 * math.sin(t * 0.6 + ph),
+                        rx=10 * swing, rz=roll,
+                        pos=(x, y + 0.22 * (1.0 - swing), z), scale=sc),
+                   t, ph, 0.085)
         # the flipper shaft that has just struck the surface: a thin sheet of
         # entrained air along the leading edge, drawn only while it is landing
         if swing < -0.35:
@@ -906,8 +919,8 @@ def b_wheel(r, t, t0, t1):
     # Close and low-angle: at 17 m the fog shader had eaten the whole pod and the
     # ring read as a small dark smudge. A carousel is a *behaviour* shot - the
     # viewer has to see animals, not a diagram of a circle.
-    eye = np.array([2.4 * math.sin(t * 0.5), 5.6 + 2.4 * k, -11.0 + 1.8 * k])
-    r.set_camera(eye, np.array([0.0, -0.5, 0.6]), fov=54)
+    eye = np.array([2.4 * math.sin(t * 0.5), 9.5 + 3.0 * k, -17.5 + 2.4 * k])
+    r.set_camera(eye, np.array([0.0, -0.4, 0.6]), fov=50)
     r.light_rig(key=(0.35, 0.70, 0.55), key_gain=1.45,
                 ambient=(0.075, 0.125, 0.165),
                 fill=(0.28, 0.48, 0.62), rim=(0.65, 0.86, 0.98))
@@ -916,15 +929,21 @@ def b_wheel(r, t, t0, t1):
     ball = mesh("krill_cluster", 300, 1.5, 5)
     r.draw(ball, bank(pos=(0.0, -0.3, 0.6), scale=1.15))
 
-    n = 6
-    rad = 2.9 - 0.7 * k
+    # Six bodies on a 5.8 m ring, nose to tail, is a ring of animals each 8 m long:
+    # their flukes reach further than their spacing, so from above the pod renders
+    # as a six-armed cross with a solid wheel at the hub. A carousel pod spreads
+    # out - the animals are a loose circle a body-length apart, and each is angled
+    # slightly in toward the ball rather than tangent to a mathematical ring.
+    n = 5
+    rad = 8.2 - 1.1 * k
     for i in range(n):
-        ang = (360.0 / n) * i + t * 34.0
+        ang = (360.0 / n) * i + t * 22.0
         x = math.sin(math.radians(ang)) * rad
-        z = math.cos(math.radians(ang)) * rad + 0.6
-        # each animal banks into the turn and its heading follows the circle
-        draw_orca(r, bank(ry=-ang + 90.0, rx=-12.0, rz=-26.0,
-                          pos=(x, -0.2 + 0.22 * math.sin(t * 1.4 + i), z)),
+        z = math.cos(math.radians(ang)) * rad * 0.78 + 0.6
+        # angle in toward the bait ball, and bank into the turn
+        head = -ang + 90.0 - 22.0 * (1.0 if i % 2 else 0.6)
+        draw_orca(r, bank(ry=head, rx=-10.0, rz=-18.0,
+                          pos=(x, -0.2 + 0.30 * math.sin(t * 1.2 + i * 1.7), z)),
                   t, i * 1.3, 0.13)
     im = composite(r, t, focus=10.0, dof=3.6, rays=0.30, particle_n=150,
                    ray_far=15.0, surface={"height": 0.040, "strength": 0.90})
