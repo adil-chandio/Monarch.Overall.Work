@@ -104,7 +104,81 @@ def _attach(mesh, x, y, z, yaw=0.0, pitch=0.0, roll=0.0):
     return out
 
 
-def humpback(length_m=14.0, colour=(78, 84, 92), n=22):
+def _ventral_pleats(profiles, s, from_k=0.02, to_k=0.40, n_groove=20,
+                    width=0.040):
+    """Throat grooves: the defining feature of a rorqual, and it was missing.
+
+    A humpback's throat inflates with every mouthful, and the pleats are the folds
+    that let it stretch to several times its resting girth. Seen from below - the
+    angle this film looks at a rising whale - they are the thing that says
+    "humpback" rather than "generic whale".
+
+    The grooves are strips that run ALONG the body, so each one is a ribbon of
+    quads connecting consecutive sections. v3.0 emitted one flat quad per section
+    instead, i.e. twenty little cross-section plates buried inside the throat,
+    which is why they never appeared in a single frame.
+    """
+    from scripts.lib.tri3d import Mesh
+    i0 = int(len(profiles) * from_k)
+    i1 = int(len(profiles) * to_k)
+    rows = profiles[i0:i1 + 1]
+    if len(rows) < 3:
+        return None
+    vs, ts = [], []
+    for g in range(n_groove):
+        # -pi/2 is straight down the throat; fan out across the belly only. Spreading
+        # the arc across the whole section put them on the back, inside the body.
+        th = -math.pi * 0.5 + (math.pi * 0.66) * ((g / max(1, n_groove - 1)) - 0.5)
+        strip = []
+        for j, (z, cy, rx, ry) in enumerate(rows):
+            life = math.sin(math.pi * (j / max(1, len(rows) - 1))) ** 0.55
+            if life < 0.06:
+                strip.append(None)
+                continue
+            wv = width * s * life * (1.0 + 0.45 * (g % 2))
+            # +y is dorsal in this rig (the dorsal fin sits at +y), so the ventral
+            # surface is cy + sin(th)*ry: at th = -pi/2 that is cy - ry, the throat.
+            # Getting this sign backwards laid all twenty grooves along the animal's
+            # back, inside the body, which is why three renders showed no pleats.
+            cx = math.cos(th) * rx * 1.004
+            cyy = cy + math.sin(th) * ry * 1.004
+            # offset a hair along the surface normal so it is never co-planar
+            nx = math.cos(th) * 0.020 * s
+            ny = math.sin(th) * 0.020 * s
+            strip.append((cx + nx, cyy + ny, z * s))
+        # stitch consecutive live sections into a ribbon. The width axis is the local
+        # tangent around the section, so the groove stays the same width all the way
+        # down the throat instead of twisting with the profile.
+        prev = None
+        for j, pt in enumerate(strip):
+            if pt is None:
+                prev = None
+                continue
+            z, cy, rx, ry = rows[j]
+            life = math.sin(math.pi * (j / max(1, len(rows) - 1))) ** 0.55
+            wv = (width * 0.5) * s * life * (1.0 + 0.45 * (g % 2))
+            # tangential direction in the section plane
+            tx, ty = math.sin(th) * 1.0, math.cos(th) * 1.0
+            a = (pt[0] - tx * wv, pt[1] - ty * wv, pt[2])
+            b = (pt[0] + tx * wv, pt[1] + ty * wv, pt[2])
+            if prev is not None:
+                base = len(vs)
+                vs.extend([prev[0], prev[1], b, a])
+                ts.extend([[base, base + 1, base + 2], [base, base + 2, base + 3]])
+            prev = (a, b)
+    if not vs:
+        return None
+    # NOT material="patch": the patch shader is deliberately a diffuse scatterer
+    # (that is what makes an orca's saddle legible at distance), so a dark
+    # patch-coloured ribbon washed out to the body's own value and the grooves
+    # vanished. A groove is a crease - it has to read as a dark line.
+    m = Mesh(np.asarray(vs, dtype=np.float32), np.asarray(ts, dtype=np.int32),
+             colour=(4, 6, 9), material="slab")
+    m.two_sided = True
+    return m
+
+
+def humpback(length_m=14.0, colour=(150, 152, 148), n=22):
     """The whole animal: body tube, fluke, two pectoral fins, dorsal, jawline carved
     with a dark material band so the mouth reads without a texture map."""
     s = length_m / 14.0
@@ -137,6 +211,9 @@ def humpback(length_m=14.0, colour=(78, 84, 92), n=22):
         e = eye_sphere(0.11 * s)
         e = _attach(e, sx * 0.66 * s, -0.30 * s, 2.72 * s)
         parts.append(e)
+    pleats = _ventral_pleats(shaped, 1.0)   # shaped is already in metres
+    if pleats is not None:
+        parts.append(pleats)
     vs, ts, off = [], [], 0
     for p in parts:
         vs.append(p.v)
@@ -155,7 +232,7 @@ def _dorsal(h, base, z, y, thick=0.09):
     return Mesh(v, t, (60, 65, 72))
 
 
-def _pec_fin(length, width, thick=0.10, n=8):
+def _pec_fin(length, width, thick=0.10, n=8, colour=(196, 198, 196), material="skin"):
     """A humpback pectoral fin, extending along -Y with its chord along X.
 
     The cross-section MUST be in the X-Z plane. An earlier version used
@@ -177,7 +254,7 @@ def _pec_fin(length, width, thick=0.10, n=8):
             a = 2 * math.pi * m / 14
             ring.append((math.cos(a) * w * 0.5, y, math.sin(a) * th))
         rings.append(ring)
-    return tube(rings, (196, 198, 196), "skin")
+    return tube(rings, colour, material)
 
 
 def mouth_band(profile, length_scale=1.0, from_k=0.02, to_k=0.30, width=0.05):
@@ -246,7 +323,12 @@ def orca(length_m=8.0, colour=(22, 24, 29), n=22):
     fluke = _fluke(1.05 * s, 0.62 * s, 0.035 * s, z=-2.50 * s)
     fluke.colour = np.asarray(colour, dtype=np.float32) / 255.0
     dorsal = _tall_dorsal(0.85 * s, 0.34 * s, z=0.15 * s, y=0.52 * s)
-    finr = _pec_fin(1.10 * s, 0.62 * s, thick=0.09 * s, n=7)
+    dorsal.colour = np.asarray(colour, dtype=np.float32) / 255.0
+    # An orca's pectoral is a near-flat black blade. Shaded as glossy skin it does
+    # nothing but catch a rim highlight along its whole span, so it renders as a
+    # white pole twice the width of the animal - which is what the pec-slap beat
+    # showed. "slab" is the matte, non-specular path: it stays black, as it should.
+    finr = _pec_fin(1.10 * s, 0.62 * s, thick=0.09 * s, n=7, colour=colour, material="fin")
     finl = mirror_x(finr)
     finr = _attach(finr, 0.50 * s, -0.30 * s, 0.80 * s, yaw=-16, pitch=-10, roll=-30)
     finl = _attach(finl, -0.50 * s, -0.30 * s, 0.80 * s, yaw=16, pitch=-10, roll=30)

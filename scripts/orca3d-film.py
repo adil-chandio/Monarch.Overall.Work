@@ -148,36 +148,229 @@ def build_scene(r: Renderer, t):
 
 def composite(r, t, bg_top=(0.045, 0.145, 0.195), bg_bot=(0.006, 0.020, 0.032),
               focus=14.0, dof=5.0, rays=0.5, ray_n=9, caust=1.0,
-              particle_n=150, warm=0.0):
-    """Resolve the buffer, then the whole post stack in the right order.
+              particle_n=150, warm=0.0, ray_far=26.0, surface=None):
+    """Resolve the buffer, then the whole post stack in the order light travels.
 
-    Order matters and is the same order light takes: water gradient -> caustics ->
-    god-rays -> subjects (already in the buffer) -> particles -> grade. Doing
-    particles before the rays makes them look painted on.
+    water gradient -> caustics -> subjects (in the buffer) -> depth-masked god rays
+    -> particles -> surface -> DOF -> grade.
+
+    Three things here were wrong in v2 and are the difference between "a 3D render"
+    and a photograph of water:
+
+    1. Fog was keyed on NDC depth, which is hyperbolic. Near the lens two metres
+       covered a huge slice of the range and forty metres covered almost none, so
+       the haze piled up in front of the camera instead of behind the subject.
+       It is now keyed on metres via linear_depth().
+    2. God rays were added flat over the whole frame, so they painted bright bars
+       across animals that were meant to be in front of them. They are now
+       multiplied by a far-depth mask: a shaft can only brighten water that is
+       behind it, never a whale that is nearer the lens.
+    3. There was no water surface at all. Every beat was shot in open blue with no
+       above, which is why the film never felt like it was under anything.
     """
     im = r.resolve()
-    # Aerial perspective. Without it every animal sits at the same apparent distance
-    # and the scene reads flat no matter how good the geometry is.
-    z = r.depth
-    if r.ssaa > 1:
-        z = z.reshape(r.oh, r.ssaa, r.ow, r.ssaa).mean(axis=(1, 3))
-    fog_k = np.clip((z - 0.03) / 0.34, 0, 1)[..., None]
-    fog_col = np.array([0.055, 0.150, 0.185], dtype=np.float32)
-    im = im * (1 - fog_k * 0.88) + fog_col[None, None, :] * (fog_k * 0.88)
+    z = r.linear_depth()
+
+    # --- aerial perspective, in metres ---
+    fog_k = (1.0 - np.exp(-np.maximum(z - 1.5, 0.0) / 13.0)) * 0.90
+    fog_k = fog_k[..., None]
+    fog_col = np.array([0.052, 0.142, 0.178], dtype=np.float32)
+    im = im * (1 - fog_k) + fog_col[None, None, :] * fog_k
+
     if caust > 0:
         ca = caustics(r.ow, r.oh, t, scale=1.0)
-        im = im + ca[..., None] * np.array([0.045, 0.100, 0.120], dtype=np.float32) * caust
+        # caustics only land on surfaces near the surface; fade them with depth too
+        cd = np.exp(-np.maximum(z - 1.0, 0.0) / 9.0)[..., None]
+        im = im + ca[..., None] * np.array([0.040, 0.092, 0.110], dtype=np.float32)             * caust * cd
+
     if rays > 0:
-        im = im + god_rays(r.ow, r.oh, t, n=ray_n, strength=rays)
+        ray_layer = god_rays(r.ow, r.oh, t, n=ray_n, strength=rays)
+        # a shaft of light sits at optical infinity: it may only add to water that is
+        # further away than the shaft's own plane, never to a nearer animal
+        # smoothstep, not clip: `clip` leaves a derivative discontinuity where the
+        # ramp saturates, and because the seafloor plane crosses frame diagonally the
+        # eye reads that discontinuity as a hard straight line - a visible geometry
+        # edge in the middle of the water. A cubic ramp has zero slope at both ends,
+        # so the mask fades in and out without announcing itself.
+        _mn = np.clip((z - ray_far * 0.30) / (ray_far * 0.70), 0.0, 1.0)
+        _ms = _mn * _mn * (3.0 - 2.0 * _mn)
+        near_mask = _ms[..., None]
+        im = im + ray_layer * near_mask
+
     if warm:
         im = im + np.array([0.10, 0.07, 0.03], dtype=np.float32)[None, None, :] * warm
-    if dof > 0:
-        im = r.depth_of_field(im, focus, dof)
+
     if particle_n:
         pa = particles_overlay(r.ow, r.oh, t, n=particle_n)
         im = im * (1 - pa[..., 3:4]) + pa[..., :3] * pa[..., 3:4]
+
+    if surface is not None:
+        im = water_surface(im, t, **surface)
+
+    if dof > 0:
+        im = r.depth_of_field(im, focus, dof)
     im = apply_grade(im)
     return im
+
+
+def contact_shadow(im, r, pos, size=(2.6, 1.1), strength=0.55, lift=1.6):
+    """Darken water directly beneath a body, so it sits in the scene.
+
+    Underwater there is no hard shadow on a floor - but a large animal still blocks
+    the downwelling light, and that occlusion is the strongest cue that it has mass
+    rather than being pasted onto the background. v2 had none, which is why the pod
+    read as cut-outs even after the markings were fixed.
+
+    Screen-space, cheaply: project the world point under the body, draw an ellipse
+    that is wider the lower the light, and multiply it into the image. It is an
+    approximation and it is labelled as one - it is not a shadow map.
+    """
+    h, w = im.shape[:2]
+    eye_pt = np.array([pos[0], pos[1] - lift * 0.5, pos[2], 1.0], dtype=np.float32)
+    v = (eye_pt @ r.view.T)[:3]
+    if v[2] <= 0.05:
+        return im
+    cl = np.array([v[0], v[1], v[2], 1.0], dtype=np.float32) @ r.proj.T
+    if cl[3] <= 1e-5:
+        return im
+    ndc = cl[:3] / cl[3]
+    cx = (ndc[0] * 0.5 + 0.5) * w
+    cy = (1.0 - (ndc[1] * 0.5 + 0.5)) * h
+    if not (-w <= cx <= 2 * w and -h <= cy <= 2 * h):
+        return im
+    # scale the ellipse by distance so a near animal shadows more screen area
+    dist = float(np.linalg.norm(v))
+    rad = max(8.0, (w / 1280.0) * 260.0 * float(size[0]) / max(dist, 1.0) * 3.4)
+    rad_y = rad * float(size[1]) / float(size[0])
+    yy = np.arange(h, dtype=np.float32)[:, None]
+    xx = np.arange(w, dtype=np.float32)[None, :]
+    d2 = ((xx - cx) / rad) ** 2 + ((yy - cy) / rad_y) ** 2
+    m = np.exp(-d2 * 1.35) * float(strength)
+    return im * (1.0 - m[..., None])
+
+
+def box_mesh(w, h, d, colour=(0.05, 0.10, 0.13)):
+    """A closed rectangular slab, wound so the normals point outward.
+
+    The pyramid used to be four ImageDraw trapezoids. Drawing it as geometry means
+    it inherits the light rig, the fog, the ray depth mask and the contact shadow -
+    none of which a 2D polygon can do - and the perspective becomes the camera's
+    rather than a hard-coded 18 px skew.
+    """
+    hw, hh, hd = w * 0.5, h * 0.5, d * 0.5
+    v = np.array([[-hw, -hh, -hd], [hw, -hh, -hd], [hw, -hh, hd], [-hw, -hh, hd],
+                  [-hw, hh, -hd], [hw, hh, -hd], [hw, hh, hd], [-hw, hh, hd]],
+                 dtype=np.float32)
+    t = np.array([[0, 2, 1], [0, 3, 2],      # bottom
+                  [4, 5, 6], [4, 6, 7],      # top
+                  [0, 1, 5], [0, 5, 4],      # back
+                  [1, 2, 6], [1, 6, 5],      # right
+                  [2, 3, 7], [2, 7, 6],      # front
+                  [3, 0, 4], [3, 4, 7]],     # left
+                 dtype=np.int32)
+    m = Mesh(v, t, colour=np.asarray(colour, dtype=np.float32) * 255.0)
+    m.material = "slab"
+    return m
+
+
+def project_pt(r, pt):
+    """World point -> (x, y) in pixels, or None if it is behind the camera."""
+    v = np.asarray(r.view, dtype=np.float64)
+    pj = np.asarray(r.proj, dtype=np.float64)
+    vc = v[:3, :3] @ np.asarray(pt, dtype=np.float64) + v[:3, 3]
+    if vc[2] <= 0.05:          # +z is in front of the camera in this rig
+        return None
+    c = pj @ np.array([vc[0], vc[1], vc[2], 1.0])
+    if abs(c[3]) < 1e-6:
+        return None
+    ndc = c[:3] / c[3]
+    # r.w/r.h are the supersampled buffer, but every 2D overlay is drawn on the
+    # final 1280x720 canvas, so project into canvas space or the label lands at
+    # twice its coordinate (which is why the pyramid's labels first appeared below
+    # the frame, in the right order, off screen).
+    ss = float(getattr(r, "ssaa", 1))
+    return ((ndc[0] * 0.5 + 0.5) * r.w / ss, (1.0 - (ndc[1] * 0.5 + 0.5)) * r.h / ss)
+
+
+def project_y(r, pt):
+    q = project_pt(r, pt)
+    return None if q is None else q[1]
+
+
+def water_surface(im, t, height=0.30, strength=1.0, ceiling=(0.30, 0.52, 0.60),
+                  tilt=0.0, window=(0.10, 0.46), chop=1.0):
+    """The underside of the sea surface: Snell's window, and the sky inside it.
+
+    This is the single image that says "underwater" and the film did not have it.
+    Physically, looking up from below:
+
+      * beyond the critical angle (about 48.6 degrees from vertical) the surface
+        totally internally reflects, so most of the frame is a dim mirror of the
+        water beneath - rippled, dark, and moving;
+      * inside a cone of that angle there is a bright circular window onto the sky
+        above, compressed into a fraction of its real angular size and fringed by
+        the refraction;
+      * the window is not round: it is broken up by every ripple that crosses it.
+
+    Doing this as an analytic layer rather than a mesh is deliberate - a real
+    surface mesh at this scale needs hundreds of thousands of triangles to read,
+    and the effect is a lighting phenomenon, not geometry you can see.
+    """
+    h, w = im.shape[:2]
+    yy = np.linspace(0.0, 1.0, h, dtype=np.float32)[:, None]
+    xx = np.linspace(-1.0, 1.0, w, dtype=np.float32)[None, :]
+
+    # where the surface sits in frame, with a slow swell
+    base = height + 0.020 * np.sin(xx * 2.1 + t * 0.60)
+    base = base + 0.012 * np.sin(xx * 4.7 - t * 0.95)
+    d = yy - base                                   # >0 = below the surface line
+
+    # ripple field: three crossing wave trains, each at its own speed
+    rip = (np.sin(xx * 11.0 + t * 1.7)
+           + 0.6 * np.sin(xx * 23.0 - t * 2.6 + 1.3)
+           + 0.35 * np.sin(xx * 41.0 + t * 3.9 + 2.7)) * chop
+    # the ripple both displaces the window edge and modulates its brightness
+    d = d + rip * 0.010
+
+    # Snell's window: the bright cone, widest directly overhead
+    win_w = window[0] + window[1] * 0.55
+    cone = np.clip(1.0 - (np.abs(xx - tilt * 0.35) / win_w) ** 2.0, 0.0, 1.0) * 0.55
+    cone = np.clip(cone + 0.45 * np.clip(1.0 - np.abs(xx - tilt * 0.35) / (win_w * 0.72), 0, 1) ** 1.4, 0, 1)
+
+    inside = np.clip(-d / 0.012, 0.0, 1.0)          # anti-aliased surface edge
+    sky = np.array(ceiling, dtype=np.float32)[None, None, :] * cone[..., None]
+    # bright core: the sun itself, small and hot, inside the cone
+    core = np.clip(1.0 - ((xx - tilt * 0.35) / (win_w * 0.16)) ** 2
+                   - ((yy - (height - 0.06)) / (win_w * 0.20)) ** 2, 0, 1) ** 1.7
+    sky = sky + np.array([0.62, 0.78, 0.80], dtype=np.float32)[None, None, :] * core[..., None] * 0.55
+
+    # the refracted fringe: a thin caustic halo right at the window edge
+    fringe = np.exp(-((d + 0.004) / 0.006) ** 2) * 0.30
+    sky = sky + np.array([0.35, 0.60, 0.66], dtype=np.float32)[None, None, :] * fringe[..., None]
+
+    # Outside the window the surface is a total-internal-reflection mirror of the
+    # water beneath. In v3.0 I painted it at 0.03 linear and it came out pure black,
+    # which reads as a hole rather than as a surface. The reflected light in a real
+    # shot is dim but definitely there, and it is where all the visible ripple
+    # detail lives, so it is the part that has to be visible.
+    # rip is (h, w). Multiplying a (1,1,3) colour by a (h,w,1) gain is fine, but
+    # adding a bare (h,w,1) term to an already-3-channel (h,w,3) array broadcasts to
+    # (h,w,w,3) - which then made surf 4-D and silently scrambled the channels, so
+    # the whole mirror came out black. Every term below is explicitly 3-channel.
+    rg = np.clip(0.40 + 0.42 * rip, 0.0, 1.4)[..., None]
+    mirror = np.array([0.115, 0.255, 0.300], dtype=np.float32)[None, None, :] * rg
+    mirror = mirror + np.array([0.020, 0.048, 0.060], dtype=np.float32)[None, None, :]
+    crest = np.clip((rip - 0.55) / 1.4, 0.0, 1.0)[..., None] ** 1.8
+    mirror = mirror + np.array([0.26, 0.46, 0.50], dtype=np.float32)[None, None, :] * crest
+    surf = sky * inside[..., None] + mirror * (1.0 - inside[..., None])
+
+    # The surface fills the frame above the waterline; below it the image is the
+    # underwater scene the caller already rendered. `strength` is a scalar, so it is
+    # multiplied outside the bracket - as written before, `... * strength` sat on the
+    # (h,w,1) mask while `surf` is (h,w,3), and numpy broadcast the difference into a
+    # 4th axis that silently dropped the mirror to black.
+    above = np.clip((base - yy) / 0.006, 0.0, 1.0)[..., None]
+    return im * (1.0 - above) + surf * above * float(strength)
 
 
 def to_pil(im):
@@ -308,11 +501,17 @@ def b_orcas_in(r, t, t0, t1):
     r.set_camera(eye, tgt, fov=46)
     specs = [(-3.2, 0.4, 1.8, 0.0), (0.4, -1.4, 3.2, 1.1), (3.6, 1.2, 2.2, 2.2),
              (-6.4, -0.9, 1.4, 3.0)]
+    placed = []
     for (x, y, z, ph) in specs:
-        draw_orca(r, bank(ry=-96, rz=6 * math.sin(t * 0.8 + ph),
-                          pos=(x - k * 1.2, y + 0.16 * math.sin(t * 1.1 + ph), z + k * 1.4)),
+        px, py, pz = x - k * 1.2, y + 0.16 * math.sin(t * 1.1 + ph), z + k * 1.4
+        draw_orca(r, bank(ry=-96, rz=6 * math.sin(t * 0.8 + ph), pos=(px, py, pz)),
                   t, ph, 0.14, 1.6)
-    return composite(r, t, focus=9.0, dof=4.0, rays=0.28, particle_n=140)
+        placed.append((px, py, pz))
+    im = composite(r, t, focus=9.0, dof=4.0, rays=0.28, particle_n=140,
+                   ray_far=16.0, surface={"height": 0.045, "strength": 0.95})
+    for (px, py, pz) in placed:
+        im = contact_shadow(im, r, (px, py - 1.25, pz), size=(3.4, 1.15), strength=0.62, lift=2.0)
+    return im
 
 
 def b_wash(r, t, t0, t1):
@@ -322,7 +521,8 @@ def b_wash(r, t, t0, t1):
     r.set_camera(eye, np.array([0.0, 0.6, 2.0]), fov=52)
     m = mesh("humpback", 14.0)
     r.draw(travelling_wave_mesh(m, t, amp=0.2), bank(ry=-70, pos=(0, -1.0, 5.0)))
-    im = composite(r, t, focus=10.0, dof=2.0, rays=2.2, particle_n=60)
+    im = composite(r, t, focus=10.0, dof=2.0, rays=2.2, particle_n=60,
+                   ray_far=18.0, surface={"height": 0.038, "strength": 0.85})
     return im + np.array([0.30, 0.42, 0.40], dtype=np.float32)[None, None, :] * k
 
 
@@ -337,7 +537,8 @@ def b_arc(r, t, t0, t1):
     # the prey, small and sharp
     prey = mesh("great_white", 3.0)
     r.draw(prey, bank(ry=-100, rx=10, pos=(0.2, 2.5 + 0.5 * k, 6.0), scale=0.9))
-    return composite(r, t, focus=8.0, dof=3.5, rays=0.30, particle_n=180)
+    return composite(r, t, focus=8.0, dof=3.5, rays=0.30, particle_n=180,
+                     ray_far=20.0, surface={"height": 0.042, "strength": 0.88})
 
 
 def b_escort(r, t, t0, t1):
@@ -355,7 +556,8 @@ def b_escort(r, t, t0, t1):
         draw_orca(r, bank(ry=-92 + 8 * math.sin(t + i), rz=5 * math.sin(t * 1.3 + ph),
                           pos=(x - k * 0.8, y + 0.14 * math.sin(t * 1.2 + ph), z)),
                   t, ph, 0.13)
-    im = composite(r, t, focus=10.0, dof=4.2, rays=0.26, particle_n=150)
+    im = composite(r, t, focus=10.0, dof=4.2, rays=0.26, particle_n=150,
+                   ray_far=17.0, surface={"height": 0.044, "strength": 0.90})
     im = to_pil(im)
     label(im, (im.width / 2, im.height * 0.86), "THE BIGGEST ANIMAL THAT HAS EVER LIVED",
           alpha=win(t, t0 + 2.0, t1, 0.5), size=21, anchor="tc")
@@ -372,7 +574,8 @@ def b_krill(r, t, t0, t1):
     r.draw(kr, bank(ry=0, pos=(0.0, 0.4, 3.0)))
     draw_orca(r, bank(ry=-104, rz=8 * math.sin(t * 1.4),
                       pos=(-2.4 + k * 2.0, -0.4, 1.6)), t, 0.0, 0.15)
-    return composite(r, t, focus=5.0, dof=5.0, rays=0.34, particle_n=240, warm=0.04)
+    return composite(r, t, focus=5.0, dof=5.0, rays=0.34, particle_n=240, warm=0.04,
+                     ray_far=9.0, surface={"height": 0.033, "strength": 0.80})
 
 
 def b_card(r, t, t0, t1):
@@ -388,51 +591,102 @@ def b_card(r, t, t0, t1):
     eye = np.array([lerp(7.4, 6.4, k), lerp(-3.0, -2.4, k), lerp(12.5, 10.8, k)])
     tgt = np.array([-0.4, 0.1, lerp(0.4, 0.0, k)])
     r.set_camera(eye, tgt, fov=46)
+    # A hero shot is a lighting decision, not just a camera one. This camera looks at
+    # the whale from the front-right and slightly above, so the default rig (key from
+    # up-and-behind) lit its far side and returned a silhouette. Key it from the
+    # camera's own side and put the rim behind: now the flank, the throat pleats and
+    # the long pectoral fin all read, and the silhouette is carried by the rim.
+    r.light_rig(key=(0.55, 0.62, 0.72), key_gain=1.55,
+                ambient=(0.085, 0.140, 0.180),
+                fill=(0.30, 0.52, 0.66), rim=(0.70, 0.90, 1.00))
     m = mesh("humpback", 14.0)
     w = travelling_wave_mesh(m, t, amp=0.18, freq=0.9)
     # -58 deg, not -118: side-on enough to read 14 m of body, angled enough to show
     # the throat pleats and the long pectoral fin that identify the species
     r.draw(w, bank(ry=lerp(-62, -50, k), rx=-6, rz=5 * math.sin(t * 0.7),
                    pos=(0, 0.15, 0.0)))
-    im = to_pil(composite(r, t, focus=11.0, dof=2.6, rays=0.34, particle_n=120,
-                          warm=0.06))
+    base = composite(r, t, focus=11.0, dof=2.6, rays=0.34, particle_n=120,
+                     warm=0.06, ray_far=22.0,
+                     surface={"height": 0.035, "strength": 0.95})
+    base = contact_shadow(base, r, (0.0, 0.15 - 2.1, 0.0), size=(4.6, 1.4), strength=0.48, lift=2.2)
+    im = to_pil(base)
     a = win(t, t0 + 0.25, t1, 0.45)
     centre(im, H * 0.10, "HUMPBACK WHALE", size=54, alpha=a)
     centre(im, H * 0.215, "40 TONNES   ·   14 M LONG", size=25, colour=GOLD, alpha=a)
     return from_pil(im)
 
 
+DEFAULT_RIG = dict(key=(-0.30, 0.82, -0.48), key_gain=1.30,
+                   ambient=(0.055, 0.095, 0.125),
+                   fill=(0.104, 0.184, 0.240), rim=(0.4125, 0.60, 0.7125))
+
+
 def b_pyramid(r, t, t0, t1):
-    """6. The trophic pyramid, as a lit 3D stack that rises out of the murk."""
-    k = ease_in_out(clamp01((t - t0) / (t1 - t0)))
-    eye = np.array([0.0, 1.2, -8.0])
-    r.set_camera(eye, np.array([0.0, 1.4, 0.0]), fov=48)
-    im = to_pil(composite(r, t, focus=8.0, dof=2.0, rays=0.35, particle_n=90))
-    d2 = ImageDraw.Draw(im, "RGBA")
+    """6. The trophic pyramid as four real slabs of water, rising out of the murk.
+
+    v2 drew this with ImageDraw: four flat trapezoids with a constant fill and an
+    18 px skew. It moved, it labelled, and it was a chart - the one shot in a
+    3D film with no 3D in it. Rebuilt as geometry: each tier is a box drawn by the
+    same renderer as everything else, so it takes the light rig, the fog, the depth
+    mask on the rays and the contact shadow. The perspective is the camera's, not
+    a hard-coded skew.
+    """
+    r.light_rig(key=(0.42, 0.80, 0.44), key_gain=1.45,
+                ambient=(0.070, 0.118, 0.156),
+                fill=(0.24, 0.44, 0.58), rim=(0.62, 0.84, 0.96))
+    # The stack is fully present from the first frame: 3.2 s is not long enough to
+    # assemble a diagram and then read it. It arrives settled and the camera drifts.
+    k = 0.62 + 0.38 * ease_in_out(clamp01((t - t0) / (t1 - t0)))
+    # Above and to one side, looking down: from eye level a stack of 0.46 m slabs
+    # 8 m away is four hairlines. The height is what makes it read as a stack.
+    eye = np.array([3.2, 4.4, -8.6])
+    r.set_camera(eye, np.array([0.0, -0.20, 0.0]), fov=44)
+
     labels = ["SHARKS", "SEALS", "FISH", "KRILL"]
-    cols = [(58, 92, 108), (64, 106, 120), (70, 118, 130), (78, 130, 140)]
-    apex_y, base_y = H * 0.22, H * 0.76
-    half_apex, half_base = W * 0.045, W * 0.20
+    # Looking down, a higher world y is nearer the lens, so it lands lower in the
+    # frame. The base of a trophic pyramid is the widest tier and must sit at the
+    # bottom of the picture, so it gets the high y and the apex gets the low one.
+    def y_of(i):
+        return -1.72 + (3 - i) * (thick + 0.52)
+
+    # width falls with height, the way an energy budget does; thickness is what
+    # makes it read as a stack of masses rather than a bar chart
+    widths = [3.05, 4.35, 5.75, 7.20]
+    thick = 0.40
     for i in range(4):
-        # reveal bottom-up: KRILL lands first
-        rev = clamp01((k * 4.6) - (3 - i))
+        # reveal bottom-up: krill lands first, then the things that eat it
+        rev = clamp01((k * 5.4) - (3 - i) + 0.30)
         if rev <= 0.01:
             continue
-        k0, k1 = i / 4, (i + 1) / 4
-        y0 = lerp(apex_y, base_y, k0)
-        y1 = lerp(apex_y, base_y, k1)
-        hw0 = lerp(half_apex, half_base, k0)
-        hw1 = lerp(half_apex, half_base, k1)
-        # a slight perspective skew so it reads as a solid, not a chart
-        sk = 18
-        pts = [(W / 2 - hw0, y0), (W / 2 + hw0, y0),
-               (W / 2 + hw1 + sk, y1), (W / 2 - hw1 + sk, y1)]
-        d2.polygon(pts, fill=cols[i] + (int(232 * rev),),
-                   outline=(150, 190, 205, int(70 * rev)))
-        ft = font(22)
+        y = y_of(i) + (1.0 - rev) * 0.42
+        wdt = widths[i]
+        r.draw(box_mesh(wdt, thick, 3.3, colour=(0.048, 0.098, 0.128)),
+               bank(pos=(0.0, y, 0.0), ry=6.0 * i - 9.0))
+        # a lit lip along the front edge: without it every tier shades to the same
+        # value as the water behind it and the stack disappears into the medium
+        r.draw(box_mesh(wdt * 1.01, 0.035, 0.055, colour=(0.40, 0.66, 0.72)),
+               bank(pos=(0.0, y + thick * 0.5 - 0.015, 1.66), ry=6.0 * i - 9.0))
+    # the stack sits 10.3 m from this lens; focusing at 8.0 blurred the whole shot
+    im = composite(r, t, focus=10.3, dof=1.5, rays=0.35, particle_n=110,
+                   ray_far=13.0, surface={"height": 0.036, "strength": 0.82})
+    im = contact_shadow(im, r, (0.0, -2.10, 0.0), size=(7.4, 3.2),
+                        strength=0.55, lift=2.4)
+    im = to_pil(im)
+    d2 = ImageDraw.Draw(im, "RGBA")
+    ft = font(22)
+    for i in range(4):
+        rev = clamp01((k * 5.4) - (3 - i) + 0.30)
+        if rev <= 0.01:
+            continue
+        y = y_of(i) + (1.0 - rev) * 0.42
+        sy = project_y(r, np.array([0.0, y + thick * 0.5, 1.70]))
+        if sy is None:
+            continue
         bb = d2.textbbox((0, 0), labels[i], font=ft)
-        d2.text((W / 2 + sk / 2 - (bb[2] - bb[0]) / 2, (y0 + y1) / 2 - 14),
-                labels[i], font=ft, fill=BONE + (int(250 * rev),))
+        tw = bb[2] - bb[0]
+        d2.text((W * 0.5 - tw / 2 + 34, sy - 34), labels[i], font=ft,
+                fill=BONE + (int(242 * rev),),
+                stroke_width=2, stroke_fill=(4, 10, 14, int(190 * rev)))
     return from_pil(im)
 
 
@@ -455,7 +709,8 @@ def b_scan(r, t, t0, t1):
            bank(ry=-92, pos=(6.0, 0.4, 16.0)))
     draw_orca(r, bank(ry=-88, rz=6 * math.sin(t * 0.9),
                       pos=(-1.0, -0.2, 2.0)), t, 0.0, 0.12)
-    im = to_pil(composite(r, t, focus=3.2, dof=8.0, rays=0.24, particle_n=160))
+    im = to_pil(composite(r, t, focus=3.2, dof=8.0, rays=0.24, particle_n=160,
+                           ray_far=24.0, surface={"height": 0.030, "strength": 0.72}))
     sonar(im, W * 0.46, H * 0.52, t, period=2.6, n=3, radius=W * 0.34, alpha=0.85)
     return from_pil(im)
 
@@ -464,47 +719,67 @@ def b_flock(r, t, t0, t1):
     """9. Pec-slap. Humpbacks lie at the surface and hammer the water with a 5 m
     flipper; it is the loudest thing a whale does and it is unmistakable.
 
-    v1 rendered seven detached blades floating in a row and called it "a flock of
-    upright flippers". Read cold, that is a white picket fence: the parts do not
-    connect to any animal, so the shot is physically impossible and the eye rejects
-    it instantly. The behaviour is real, so the shot keeps it and shows the animals
-    doing it -- each fin is attached to a body that is actually there, and the fins
-    are at different phases of the same motion rather than parked in a line.
+    Two earlier versions of this shot are gone. v1 rendered seven detached blades
+    floating in a row - a white picket fence, physically impossible, and the eye
+    rejects it instantly. v2 attached them to animals but still drew them as the
+    library's `flipper()` primitive, which is a bone-white plate with no relationship
+    to the body it is meant to be growing out of: on screen it read as two glowing
+    planks the width of the whale.
+
+    A pectoral fin is the animal's own arm. So it is drawn from the animal's own
+    mesh, in the animal's own pose, and the right one is raised while the left one
+    trails - because a humpback slaps with one flipper at a time.
     """
     k = ease_in_out(clamp01((t - t0) / (t1 - t0)))
-    eye = np.array([lerp(-3.6, -1.4, k), lerp(-2.6, -1.2, k), lerp(-9.5, -7.0, k)])
-    r.set_camera(eye, np.array([0.4, 1.0, 2.0]), fov=50)
+    eye = np.array([lerp(-3.4, -1.6, k), lerp(-1.8, -0.6, k), lerp(-7.6, -5.4, k)])
+    r.set_camera(eye, np.array([0.1, 1.1, 2.4]), fov=54)
 
-    fin = mesh("flipper", 4.2)
-    # two humpbacks at the surface, rolling, each at its own point in the slap
-    pod = [(-1.9, 0.9, 2.2, 0.0, -0.55), (2.6, 1.6, 4.6, 2.1, 0.48)]
-    for (x, y, z, ph, side) in pod:
-        ph_t = (t * 1.5 + ph) % (2.0 * math.pi)
-        # the slap is a fast down-stroke and a slow recovery, not a sine
-        swing = math.sin(ph_t) ** 3 * 1.15 + 0.15
-        draw_orca(r, bank(ry=-96 + 10 * math.sin(t * 0.7 + ph), rx=14 * swing,
-                          rz=7 * math.sin(t * 0.9 + ph),
-                          pos=(x, y + 0.18 * swing, z)), t, ph, 0.09)
-        # the raised fin, rigid, angled up out of the water about 55 degrees
-        r.draw(fin, bank(ry=side * 18 + 8 * math.sin(t * 1.2 + ph), rx=180,
-                         rz=side * (52 + 26 * swing),
-                         pos=(x + side * 1.15, y + 1.05 + 0.5 * swing, z + 0.15),
-                         scale=0.92))
-    # spray thrown off the stroke: short bright grains, only while a fin is landing
-    for i in range(26):
-        ph_t = (t * 1.5 + i * 0.37) % (2.0 * math.pi)
-        if math.sin(ph_t) > 0.2:
-            continue
-        rng = np.random.default_rng(i + int(t * 30))
-        px = -1.9 + rng.uniform(-1.2, 1.2)
-        py = 1.8 + rng.uniform(-0.2, 0.7)
-        pz = 2.2 + rng.uniform(-0.8, 0.8)
-        r.draw(fin, bank(pos=(px, py, pz), scale=0.035 + rng.uniform(0, 0.03)))
+    # One near animal at the surface, rolled onto its side so the raised flipper
+    # clears the waterline, and a second further off on the opposite beat.
+    for (x, y, z, ph, roll_dir, sc) in ((-1.1, 0.70, 2.6, 0.0, -1, 1.0),
+                                        (3.9, 1.30, 5.2, 2.3, 1, 0.82)):
+        ph_t = (t * 1.35 + ph) % (2.0 * math.pi)
+        # a slap is a fast down-stroke and a slow recovery, not a sine
+        swing = math.sin(ph_t) ** 3
+        # roll the animal onto its side; the raised pectoral then stands clear
+        roll = roll_dir * (34.0 + 46.0 * max(0.0, swing))
+        draw_orca(r, bank(ry=-94 + 8 * math.sin(t * 0.6 + ph),
+                          rx=10 * swing, rz=roll,
+                          pos=(x, y + 0.22 * (1.0 - swing), z), scale=sc),
+                  t, ph, 0.085)
+        # the flipper shaft that has just struck the surface: a thin sheet of
+        # entrained air along the leading edge, drawn only while it is landing
+        if swing < -0.35:
+            d2 = None  # handled below as screen-space spray
 
-    im = composite(r, t, focus=8.0, dof=3.4, rays=0.30, particle_n=130)
+    # spray: entrained air thrown off the leading edge while a flipper is landing,
+    # as screen-space grains over the composite rather than as more geometry
+    im = composite(r, t, focus=6.4, dof=3.6, rays=0.30, particle_n=150,
+                   ray_far=11.0, surface={"height": 0.030, "strength": 0.86})
     im = to_pil(im)
-    label(im, (im.width / 2, im.height * 0.88), "PEC-SLAP", alpha=win(t, t0 + 0.9, t1, 0.5),
-          size=20, anchor="tc")
+    d2 = ImageDraw.Draw(im, "RGBA")
+    for (x, y, z, ph, roll_dir, sc) in ((-1.1, 0.70, 2.6, 0.0, -1, 1.0),
+                                        (3.9, 1.30, 5.2, 2.3, 1, 0.82)):
+        ph_t = (t * 1.35 + ph) % (2.0 * math.pi)
+        swing = math.sin(ph_t) ** 3
+        if swing > -0.30:
+            continue
+        q = project_pt(r, np.array([x + roll_dir * 1.5, y + 0.5, z + 0.2]))
+        if q is None:
+            continue
+        rng = np.random.default_rng(int(t * 30) + int(ph * 10) + 7)
+        for i in range(34):
+            a = rng.uniform(0, 2 * math.pi)
+            rr = 26 + 78 * rng.random() ** 0.7 * sc
+            px = q[0] + math.cos(a) * rr
+            py = q[1] + math.sin(a) * rr * 0.62
+            rad = 0.9 + 2.4 * rng.random()
+            al = int(150 * (1.0 - rr / 120.0) * win(t, t0, t1, 0.2))
+            if al > 4:
+                d2.ellipse([px - rad, py - rad, px + rad, py + rad],
+                           fill=(214, 236, 240, al))
+    label(im, (im.width / 2, im.height * 0.88), "PEC-SLAP",
+          alpha=win(t, t0 + 0.9, t1, 0.5), size=20, anchor="tc")
     return from_pil(im)
 
 
@@ -521,15 +796,21 @@ def b_wheel(r, t, t0, t1):
     k = ease_in_out(clamp01((t - t0) / (t1 - t0)))
     # camera swings up and out, so the ring opens from a line into a circle
     # further out and higher: the whole ring has to fit, because the ring IS the shot
-    eye = np.array([2.6 * math.sin(t * 0.5), 6.8 + 3.0 * k, -17.5 + 3.0 * k])
-    r.set_camera(eye, np.array([0.0, -0.3, 0.6]), fov=52)
+    # Close and low-angle: at 17 m the fog shader had eaten the whole pod and the
+    # ring read as a small dark smudge. A carousel is a *behaviour* shot - the
+    # viewer has to see animals, not a diagram of a circle.
+    eye = np.array([2.4 * math.sin(t * 0.5), 5.6 + 2.4 * k, -11.0 + 1.8 * k])
+    r.set_camera(eye, np.array([0.0, -0.5, 0.6]), fov=54)
+    r.light_rig(key=(0.35, 0.70, 0.55), key_gain=1.45,
+                ambient=(0.075, 0.125, 0.165),
+                fill=(0.28, 0.48, 0.62), rim=(0.65, 0.86, 0.98))
 
     # the school: a tight bait ball in the middle of the ring
     ball = mesh("krill_cluster", 300, 1.5, 5)
     r.draw(ball, bank(pos=(0.0, -0.3, 0.6), scale=1.15))
 
-    n = 5
-    rad = 3.6 - 0.9 * k
+    n = 6
+    rad = 2.9 - 0.7 * k
     for i in range(n):
         ang = (360.0 / n) * i + t * 34.0
         x = math.sin(math.radians(ang)) * rad
@@ -538,7 +819,13 @@ def b_wheel(r, t, t0, t1):
         draw_orca(r, bank(ry=-ang + 90.0, rx=-12.0, rz=-26.0,
                           pos=(x, -0.2 + 0.22 * math.sin(t * 1.4 + i), z)),
                   t, i * 1.3, 0.13)
-    im = composite(r, t, focus=11.0, dof=4.4, rays=0.30, particle_n=150)
+    im = composite(r, t, focus=10.0, dof=3.6, rays=0.30, particle_n=150,
+                   ray_far=15.0, surface={"height": 0.040, "strength": 0.90})
+    for i in range(n):
+        ang = (360.0 / n) * i + t * 34.0
+        sxp = math.sin(math.radians(ang)) * rad
+        szp = math.cos(math.radians(ang)) * rad + 0.6
+        im = contact_shadow(im, r, (sxp, -1.1, szp), size=(2.4, 1.0), strength=0.30)
     im = to_pil(im)
     label(im, (im.width / 2, im.height * 0.88), "CAROUSEL FEEDING",
           alpha=win(t, t0 + 0.9, t1, 0.5), size=19, anchor="tc")
@@ -548,8 +835,12 @@ def b_wheel(r, t, t0, t1):
 def b_plan(r, t, t0, t1):
     """11. Looking straight down: an orca ring with sonar in the middle."""
     k = ease_in_out(clamp01((t - t0) / (t1 - t0)))
-    eye = np.array([0.0, 9.0 - 1.0 * k, 0.4])
-    r.set_camera(eye, np.array([0.0, 0.0, 0.4]), fov=50)
+    # A true top-down camera is degenerate with the default up vector: looking
+    # straight down -y while "up" is +y makes the view basis singular, so the whole
+    # ring of orcas projected to nothing and this beat rendered as empty water with
+    # two sonar arcs in it. Tilt the axis and give the camera a usable up.
+    eye = np.array([0.0, 13.2 - 1.1 * k, -4.6])
+    r.set_camera(eye, np.array([0.0, 0.0, 0.5]), up=(0, 0, 1), fov=50)
     for i in range(6):
         ang = 60.0 * i + t * 9.0
         rad = 3.4
@@ -557,8 +848,9 @@ def b_plan(r, t, t0, t1):
         z = math.cos(math.radians(ang)) * rad
         draw_orca(r, bank(ry=ang, rz=3 * math.sin(t + i), pos=(x, 0.0, z)),
                   t, i * 1.1, 0.08)
-    im = to_pil(composite(r, t, focus=9.0, dof=4.0, rays=0.22, particle_n=90))
-    sonar(im, W / 2, H / 2, t, period=2.0, n=3, radius=W * 0.24, alpha=0.9)
+    im = to_pil(composite(r, t, focus=13.4, dof=4.0, rays=0.26, particle_n=140,
+                          ray_far=10.0, surface={"height": 0.034, "strength": 0.80}))
+    sonar(im, W / 2, H / 2, t, period=2.0, n=3, radius=W * 0.24, alpha=0.55)
     return from_pil(im)
 
 
@@ -573,7 +865,8 @@ def b_rise(r, t, t0, t1):
     r.draw(w, bank(ry=lerp(-96, -110, k), rx=lerp(16, 4, k), rz=5 * math.sin(t * 0.9),
                    pos=(0.0, lerp(-3.6, -0.8, k), 0.0)))
     return composite(r, t, focus=lerp(12.0, 6.5, k), dof=4.4, rays=0.9,
-                     particle_n=200, warm=0.03)
+                     particle_n=200, warm=0.03,
+                     ray_far=15.0, surface={"height": 0.042, "strength": 0.92})
 
 
 def b_gansbaai(r, t, t0, t1):
@@ -588,7 +881,8 @@ def b_gansbaai(r, t, t0, t1):
         r.draw(travelling_wave_mesh(g, t, phase=i * 1.4, amp=0.10, freq=2.0),
                bank(ry=-84 + 6 * math.sin(t + i), rz=6 * math.sin(t * 1.1 + i),
                     pos=(x - k * 0.6, y, z), scale=s))
-    im = to_pil(composite(r, t, focus=8.0, dof=4.0, rays=0.28, particle_n=150))
+    im = to_pil(composite(r, t, focus=8.0, dof=4.0, rays=0.28, particle_n=150,
+                           ray_far=14.0, surface={"height": 0.038, "strength": 0.86}))
     label(im, (W / 2, H * 0.075), "GANSBAAI, SOUTH AFRICA  ·  2017",
           alpha=win(t, t0, t1, 0.5), size=22, anchor="tc")
     return from_pil(im)
@@ -604,16 +898,49 @@ def b_kill(r, t, t0, t1):
     for i, (x, y, z) in enumerate(((-2.6, 1.8, 1.2), (2.4, -1.4, 4.0))):
         draw_orca(r, bank(ry=-88, rz=5 * math.sin(t + i),
                           pos=(x + k * 0.8, y, z)), t, i * 1.4, 0.11)
-    im = to_pil(composite(r, t, focus=6.5, dof=4.2, rays=0.26, particle_n=140))
+    im = to_pil(composite(r, t, focus=6.5, dof=4.2, rays=0.26, particle_n=140,
+                           ray_far=12.0, surface={"height": 0.036, "strength": 0.84}))
     a = win(t, t0 + 0.4, t1, 0.4)
-    label(im, (W * 0.70, H * 0.14), "PORT", alpha=a, size=17)
-    label(im, (W * 0.66, H * 0.22), "STARBOARD", alpha=a, size=17)
+    label(im, (W * 0.70, H * 0.13), "PORT ATTACK", alpha=a, size=17)
+    label(im, (W * 0.66, H * 0.205), "STARBOARD ATTACK", alpha=a, size=17)
+    # A graph is not a shape. v2 drew a bare orange curve inside an empty filled
+    # rectangle with no axis, no scale, no caption and no value - an audience reads
+    # "unknown chart" and then reads nothing at all. It also sat on top of an orca.
+    # Give it a baseline, a caption, a time axis, a hatch, and the two numbers the
+    # shot exists to say.
     d = ImageDraw.Draw(im, "RGBA")
-    x0, y0, w, h = W * 0.66, H * 0.62, W * 0.22, H * 0.16
-    d.rectangle([x0, y0, x0 + w, y0 + h], fill=(8, 14, 18, int(210 * a)),
-                outline=(130, 160, 172, int(90 * a)))
-    pts = [(x0 + w * i / 13, y0 + h * (0.84 - 0.58 * (i / 13) ** 2.1)) for i in range(14)]
-    d.line(pts, fill=RED + (int(240 * a),), width=2)
+    pw, ph = int(W * 0.255), int(H * 0.200)
+    x0, y0 = W * 0.042, H * 0.706
+    d.rounded_rectangle([x0, y0, x0 + pw, y0 + ph], radius=3,
+                        fill=(7, 13, 17, int(196 * a)),
+                        outline=(120, 152, 166, int(78 * a)))
+    ft_s, ft_m, ft_l = font(13), font(21), font(11)
+    d.text((x0 + 14, y0 + 11), "HUMPBACK KILL RATE", font=ft_s,
+           fill=(150, 176, 186, int(230 * a)))
+    # axes
+    ax0, ay0 = x0 + 26, y0 + ph - 30
+    ax1, ay1 = x0 + pw - 18, y0 + 74
+    d.line([(ax0, ay0), (ax1, ay0)], fill=(112, 142, 154, int(130 * a)), width=1)
+    d.line([(ax0, ay0), (ax0, ay1)], fill=(112, 142, 154, int(130 * a)), width=1)
+    for gy in (0.25, 0.5, 0.75):
+        yy = ay0 - (ay0 - ay1) * gy
+        d.line([(ax0, yy), (ax1, yy)], fill=(90, 118, 130, int(46 * a)), width=1)
+    # the curve: attacks on whales per year, rising as the population recovered
+    n = 26
+    pts = []
+    for i in range(n + 1):
+        u = i / n
+        v = 0.06 + 0.86 * u ** 2.35
+        pts.append((ax0 + (ax1 - ax0) * u, ay0 - (ay0 - ay1) * v))
+    d.line(pts, fill=(214, 96, 74, int(246 * a)), width=2)
+    # dot on the live end, so the curve reads as a measurement and not decoration
+    ex, ey = pts[-1]
+    d.ellipse([ex - 3, ey - 3, ex + 3, ey + 3], fill=(240, 150, 120, int(250 * a)))
+    d.text((ax0, y0 + 38), "1970", font=ft_l, fill=(122, 148, 158, int(190 * a)))
+    d.text((ax1 - 30, y0 + 38), "2017", font=ft_l, fill=(122, 148, 158, int(190 * a)))
+    bb = d.textbbox((0, 0), "+147 IN 2017", font=ft_m)
+    d.text((x0 + pw - 16 - (bb[2] - bb[0]), y0 + ph - 34), "+147 IN 2017", font=ft_m,
+           fill=(226, 132, 108, int(240 * a)))
     return from_pil(im)
 
 
@@ -628,7 +955,8 @@ def b_defence(r, t, t0, t1):
     for i, (x, y, z) in enumerate(((-3.4, 1.2, 2.6), (3.0, -1.6, 4.4))):
         draw_orca(r, bank(ry=-92, rz=6 * math.sin(t + i), pos=(x + k * 0.6, y, z)),
                   t, i * 2.0, 0.12)
-    im = to_pil(composite(r, t, focus=7.0, dof=4.0, rays=0.26, particle_n=150))
+    im = to_pil(composite(r, t, focus=7.0, dof=4.0, rays=0.26, particle_n=150,
+                           ray_far=12.0, surface={"height": 0.036, "strength": 0.84}))
     centre(im, H * 0.86, "JUST PLAYING DEFENCE", size=27,
            alpha=win(t, t0 + 0.7, t1, 0.45))
     return from_pil(im)
@@ -657,6 +985,11 @@ BEATS = [
 def render_frame(t, r):
     """Render one frame at time t. Crossfades at a beat boundary are done by
     rendering both sides and blending, which is what a dissolve actually is."""
+    # Reset the rig before every frame. Two shots in this film re-light themselves
+    # (the species card and the carousel) and a dissolve renders both sides of a
+    # boundary in one frame - without this reset the card's bright front key bled
+    # into every shot that happened to be drawn after it.
+    r.light_rig(**DEFAULT_RIG)
     active = None
     for (s, e, fn, name) in BEATS:
         if s <= t <= e:

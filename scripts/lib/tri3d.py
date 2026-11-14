@@ -251,6 +251,12 @@ class Renderer:
         self.fill_col = np.array([0.26, 0.46, 0.60], dtype=np.float32) * 0.40
         self.rim_col = np.array([0.55, 0.80, 0.95], dtype=np.float32) * 0.75
         self.ambient = np.array([0.055, 0.095, 0.125], dtype=np.float32)
+        # The rig is a *direction*, not a fixture. Every shot inherits it, and a shot
+        # that wants a different key (a hero shot where the animal must read, not
+        # silhouette) sets it. v2 had it hard-coded inside draw(), so the card shot
+        # put the key behind the whale relative to that camera and rendered a
+        # featureless dark shape under the title - correct lighting, wrong shot.
+        self.key_dir = np.array([-0.30, 0.82, -0.48], dtype=np.float32)
 
     # -- scene ------------------------------------------------------------
     def clear(self, top=(0.05, 0.16, 0.21), bottom=(0.010, 0.030, 0.045)):
@@ -259,6 +265,18 @@ class Renderer:
         bottom = np.asarray(bottom, dtype=np.float32)
         self.colour[:] = top[None, None, :] * (1 - k) + bottom[None, None, :] * k
         self.depth[:] = 1.0
+
+    def light_rig(self, key=None, key_gain=1.30, ambient=None, fill=None, rim=None):
+        """Re-light for one shot. Pass a world-space direction to move the key."""
+        if key is not None:
+            self.key_dir = norm(np.asarray(key, dtype=np.float32))
+        self.key_col = np.array([0.94, 0.98, 1.00], dtype=np.float32) * key_gain
+        if ambient is not None:
+            self.ambient = np.asarray(ambient, dtype=np.float32)
+        if fill is not None:
+            self.fill_col = np.asarray(fill, dtype=np.float32)
+        if rim is not None:
+            self.rim_col = np.asarray(rim, dtype=np.float32)
 
     def set_camera(self, eye, target, up=(0, 1, 0), fov=42.0, clear=True):
         """Point the camera and, by default, reset the buffers.
@@ -334,7 +352,7 @@ class Renderer:
         # to shade as a smooth surface.
         vn = self._vertex_normals(mesh, m4)
 
-        key = norm(np.array([-0.30, 0.82, -0.48], dtype=np.float32))
+        key = norm(np.asarray(self.key_dir, dtype=np.float32))
         kd_f = np.clip(fn @ key, 0, None)
         half_f = norm(key[None, :] + to_eye)
         spec_f = np.clip((fn * half_f).sum(axis=1), 0, None) ** 42.0
@@ -393,9 +411,21 @@ class Renderer:
             # why an orca's flank is legible at 40 m in murky water while its black
             # back is not. Shaded like skin, the patch came out the same value as the
             # body and the animal looked plain black.
+            # A flat appendage seen from above is a grazing surface: every lighting
+            # term that depends on orientation - specular, rim, the ^2.2 Fresnel-ish
+            # falloff - fires at once along its whole length, so a black pectoral fin
+            # from the top is a solid white blade. That is a shading artefact, not the
+            # animal. "fin" keeps the diffuse response and drops the view-dependent
+            # terms, which is what an organ that is a matte black plate actually does.
+            # ORCA_FIN_MARKER
             if mesh.material == "patch":
                 c = (c * 0.55 + mesh.colour[None, :] * self.ambient[None, :] * 1.7
                      + mesh.colour[None, :] * 0.30)
+            elif mesh.material == "fin":
+                # diffuse only: no specular lobe, no rim, no wrap-around
+                c = (mesh.colour[None, :] * (self.ambient[None, :] * 1.35
+                                             + self.key_col[None, :] * kd[:, None] * 0.42
+                                             + self.fill_col[None, :] * fl[:, None] * 0.55))
             colour[by0:by1 + 1, bx0:bx1 + 1][hit] = c
 
     def _vertex_normals(self, mesh, m4):
@@ -430,6 +460,21 @@ class Renderer:
         return out
 
     # -- post -------------------------------------------------------------
+    def linear_depth(self):
+        """View-space distance for every pixel, in the same units as the camera.
+
+        self.depth holds NDC z, which is hyperbolic: two metres near the lens covers
+        a huge NDC range and ten metres at distance covers almost none. Fog keyed on
+        NDC therefore thickens in front of the camera and barely acts on the far
+        plane - the opposite of aerial perspective. This converts back to metres.
+        """
+        z = self.depth
+        if self.ssaa > 1:
+            z = z.reshape(self.oh, self.ssaa, self.ow, self.ssaa).mean(axis=(1, 3))
+        n, f = 0.05, 400.0
+        ndc = np.clip(z, -1.0, 1.0)
+        return (2.0 * n * f) / (f + n - ndc * (f - n))
+
     def resolve(self):
         im = self.colour
         if self.ssaa > 1:
@@ -558,30 +603,62 @@ def particles_overlay(w, h, t, n=170, seed=0):
     return np.asarray(lay, dtype=np.float32) / 255.0
 
 
-def apply_grade(im, tint=(0.90, 1.00, 1.06), lift=(0.012, 0.026, 0.034),
+def apply_grade(im, tint=(0.94, 1.00, 1.045), lift=(0.012, 0.026, 0.034),
                 contrast=1.10, sat=1.06, vignette=0.34):
-    """Filmic-ish grade: lift the blacks toward teal, roll the highlights, vignette."""
-    from PIL import Image
-    h, w = im.shape[:2]
-    x = np.clip(im, 0, 1)
-    # S-curve contrast
-    x = np.clip((x - 0.5) * contrast + 0.5, 0, 1)
-    x = x * x * (3 - 2 * x) * 0.55 + x * 0.45          # gentle S
-    # tint + lift
-    x = x * np.asarray(tint, dtype=np.float32)[None, None, :] + np.asarray(lift, dtype=np.float32)[None, None, :]
-    # saturation
-    lum = x @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
-    x = lum[..., None] + (x - lum[..., None]) * sat
-    # vignette
+    """Filmic grade: toe, shoulder, split tone, vignette, grain.
+
+    v2's grade clipped hard at 1.0 (np.clip before and after a simple S-curve), so
+    every highlight - the Snell's window, the sun core, a white flank catching a
+    shaft - flattened to the same value and the image looked like a video game
+    rather than film. Here the shoulder is exponential, so values above ~0.75
+    compress instead of clipping, which is what gives bright water its bloom.
+
+    The split tone is the other half: shadows go teal (water absorbs red first, so
+    deep water *is* teal) and highlights go slightly warm (sunlight). That split is
+    what makes an underwater frame read as lit from above rather than uniformly
+    blue, and it costs two multiplies.
+    """
+    x = np.clip(im, 0.0, 4.0).astype(np.float32)
+
+    # --- shoulder: compress into the top end without ever hitting a hard 1.0 ---
+    knee = 0.76
+    over = np.maximum(x - knee, 0.0)
+    x = np.where(x > knee, knee + (1.0 - knee) * (1.0 - np.exp(-over / (1.0 - knee))), x)
+
+    # --- toe: lift the blacks a touch so nothing crushes to pure video black ---
+    x = x + np.asarray(lift, dtype=np.float32)[None, None, :] * np.clip(1.0 - x * 2.2, 0, 1)
+
+    # --- contrast around mid grey, then a gentle filmic S ---
+    x = np.clip((x - 0.42) * contrast + 0.42, 0.0, 1.6)
+    x = x * x * (3.0 - 2.0 * np.clip(x, 0, 1)) * 0.30 + x * 0.70
+
+    # --- split tone ---
+    lum = (x @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32))[..., None]
+    shadow_w = np.clip(1.0 - lum * 2.6, 0.0, 1.0)
+    high_w = np.clip((lum - 0.45) * 2.2, 0.0, 1.0)
+    x = x + (np.array([0.006, 0.030, 0.046], dtype=np.float32)[None, None, :] * shadow_w
+             + np.array([0.045, 0.024, -0.010], dtype=np.float32)[None, None, :] * high_w)
+
+    x = x * np.asarray(tint, dtype=np.float32)[None, None, :]
+
+    # --- saturation, weighted so the teal does not overwhelm the skin tones ---
+    lum2 = (x @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32))[..., None]
+    x = lum2 + (x - lum2) * sat
+
+    # --- vignette ---
+    h, w = x.shape[:2]
     yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    cx, cy = w / 2, h / 2
-    r = np.sqrt(((xx - cx) / cx) ** 2 + ((yy - cy) / cy) ** 2) / math.sqrt(2)
-    v = 1.0 - vignette * np.clip(r, 0, 1) ** 2.2
-    x = x * v[..., None]
-    # grain
+    cx, cy = w / 2.0, h / 2.0
+    rr = np.sqrt(((xx - cx) / cx) ** 2 + ((yy - cy) / cy) ** 2) / math.sqrt(2)
+    x = x * (1.0 - vignette * np.clip(rr, 0, 1) ** 2.2)[..., None]
+
+    # --- grain, monochrome, stronger in the shadows like real sensor noise ---
     rng = np.random.default_rng(7)
-    x = x + (rng.standard_normal((h, w, 1)).astype(np.float32) * 0.006)
-    return np.clip(x, 0, 1)
+    g = rng.standard_normal((h, w, 1)).astype(np.float32)
+    gl = (x @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32))[..., None]
+    x = x + g * 0.010 * np.clip(1.25 - gl * 1.6, 0.25, 1.25)
+
+    return np.clip(x, 0.0, 1.0)
 
 
 if __name__ == "__main__":
