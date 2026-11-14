@@ -1,12 +1,12 @@
 {
   "id": "orca3d-v2",
-  "status": "running",
+  "status": "artifacts-pending",
   "goal": "Skill-gated rebuild of the 60s orca film: fix the missing white markings, marine snow, god rays; rebuild the sound bed from the repo DSP engine to pass showreel.audio_qc 9/9 and match the shipped showreel master within 2 dB on all 8 bands",
   "total": 1800,
-  "done": 750,
+  "done": 1800,
   "unit": "frames",
   "created": "2026-11-13T22:37:10.929Z",
-  "updated": "2026-11-13T22:53:28.998Z",
+  "updated": "2026-11-14T00:51:51.108Z",
   "resume": {
     "next_command": "OUT=/tmp/v2 CHUNK=150 TOTAL=1800 ./scripts/render-orca3d-v2.sh (skips existing parts/), then: ffmpeg mux /tmp/v2/video.mp4 + /tmp/orca-final.m4a -> upload to Drive -> job artifact/uploaded",
     "notes": ""
@@ -25,6 +25,10 @@
     {
       "at": "2026-11-13T22:53:28.998Z",
       "what": "chunks 0-3 encoded (~11.7MB); chunk 4 running"
+    },
+    {
+      "at": "2026-11-14T00:51:51.108Z",
+      "what": "all 12 chunks final: card 3/4, scan+flock 5/6, carousel 7 re-rendered after fixes"
     }
   ]
 }
