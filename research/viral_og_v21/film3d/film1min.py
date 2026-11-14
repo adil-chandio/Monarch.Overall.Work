@@ -118,7 +118,7 @@ class Rig:
                  for L in self.lights], self.act(u), self.exposure)
 
 
-def _skull(act_extra=None, torch=(0.66, -1.18, 0.52), rot=0.42):
+def _skull(act_extra=None, torch=(0.98, -1.30, 0.50), rot=0.42):
     d = dict(kind="skull", scale=1.0, pos=SKULL_ORIGIN, rot=rot,
              boulder=BOULDER, torch=torch)
     if act_extra:
@@ -139,8 +139,8 @@ def film():
         "S1", 9.0,
         cam=lambda u: orbit(SKULL_MID, 12.0 + 7.0 * u, 1.32 - 0.10 * u, -0.90,
                             0.36, 0.52, cave, shake=0.004, seed=0.4),
-        lights=[dict(pos=lambda u: (0.66, -1.18, 0.52), col=(1.00, 0.47, 0.15),
-                     pow=lambda u: 0.72, kind="fire", flicker=True),
+        lights=[dict(pos=lambda u: (0.98, -1.30, 0.50), col=(1.00, 0.47, 0.15),
+                     pow=lambda u: 1.15, kind="fire", flicker=True),
                 dict(pos=lambda u: (0.0, 0.7, cave.mouth_z), col=(0.40, 0.58, 1.00),
                      pow=lambda u: 24.0, kind="portal")],
         act=lambda u: _skull(dict(rot=0.40 + 0.05 * u)),
@@ -151,8 +151,8 @@ def film():
         "S2", 8.0,
         cam=lambda u: orbit(SKULL_MID, 19.0 + 10.0 * u, 1.30 + 2.10 * u, -0.90 + 0.34 * u,
                             0.36, 0.52 / (1.0 + 1.35 * u), cave, shake=0.005, seed=1.1),
-        lights=[dict(pos=lambda u: (0.66, -1.18, 0.52), col=(1.00, 0.47, 0.15),
-                     pow=lambda u: 0.62, kind="fire", flicker=True),
+        lights=[dict(pos=lambda u: (0.98, -1.30, 0.50), col=(1.00, 0.47, 0.15),
+                     pow=lambda u: 1.00, kind="fire", flicker=True),
                 dict(pos=lambda u: (0.0, 0.7, cave.mouth_z), col=(0.42, 0.60, 1.00),
                      pow=lambda u: 34.0, kind="portal")],
         act=lambda u: _skull(),
@@ -192,11 +192,11 @@ def film():
         "S5", 10.0,
         cam=lambda u: orbit(SKULL_MID, -28.0 - 9.0 * u, 1.22 - 0.20 * u, -0.88,
                             0.36, 0.54, cave, shake=0.004, seed=4.0),
-        lights=[dict(pos=lambda u: (0.58, -1.14, 0.58), col=(1.00, 0.46, 0.14),
-                     pow=lambda u: 0.66, kind="fire", flicker=True),
+        lights=[dict(pos=lambda u: (0.92, -1.28, 0.62), col=(1.00, 0.46, 0.14),
+                     pow=lambda u: 1.05, kind="fire", flicker=True),
                 dict(pos=lambda u: (0.0, 0.6, cave.mouth_z), col=(0.40, 0.58, 1.0),
                      pow=lambda u: 20.0, kind="portal")],
-        act=lambda u: _skull(dict(rot=0.38 + 0.08 * u), torch=(0.58, -1.14, 0.58)),
+        act=lambda u: _skull(dict(rot=0.38 + 0.08 * u), torch=(0.92, -1.28, 0.62)),
         text="600 KG - NOT THE BIGGEST", exposure=1.10))
 
     # ---------------------------------------------------------------- S6  the walk
@@ -209,20 +209,23 @@ def film():
                 dict(pos=lambda u: (1.10, -1.25, -1.10), col=(1.00, 0.52, 0.20),
                      pow=lambda u: 1.35, kind="fire", flicker=True),
                 dict(pos=lambda u: (-1.50, 0.40, 1.20), col=(0.52, 0.66, 1.00),
-                     pow=lambda u: 1.50, kind="fire", flicker=True)],
+                     pow=lambda u: 0.90, kind="fire", flicker=True)],
         act=lambda u: _bear(pose=0.0, walk=1.0, phase=u * 2 * math.pi * BEAR_WALK["freq"],
                             pos=bear_walk_pos(u), yaw=math.pi * 0.5),
-        text="", exposure=1.95))
+        text="", exposure=1.42))
 
     # ---------------------------------------------------------------- S7  the mouth, cold
     shots.append(Rig(
         "S7", 6.0,
-        cam=lambda u: (np.array([0.0, -0.55, cave.mouth_z - 5.6 + 0.9 * u], np.float32),
-                       np.array([0.0, 0.28, cave.mouth_z + 1.6], np.float32), 52.0),
-        lights=[dict(pos=lambda u: (0.0, 1.1, cave.mouth_z + 1.6), col=(0.50, 0.66, 1.00),
-                     pow=lambda u: 150.0, kind="portal")],
+        # the opening must sit *inside* the frame: its angular radius is about
+        # atan(2.4 / d), so the lens has to be wider than that or the frame is
+        # nothing but daylight
+        cam=lambda u: (np.array([0.55 - 0.20 * u, -0.50, cave.mouth_z - 9.2 + 0.9 * u], np.float32),
+                       np.array([-0.10, 0.42, cave.mouth_z + 0.6], np.float32), 64.0),
+        lights=[dict(pos=lambda u: (0.0, 1.0, cave.mouth_z + 1.2), col=(0.52, 0.68, 1.00),
+                     pow=lambda u: 120.0, kind="portal")],
         act=lambda u: dict(kind="none"),
-        text="NOT A BEAR'S ANY MORE", exposure=0.95))
+        text="NOT A BEAR'S ANY MORE", exposure=1.05))
 
     return cave, shots
 

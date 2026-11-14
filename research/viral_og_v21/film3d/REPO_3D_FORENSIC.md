@@ -121,4 +121,34 @@ Aur file jo pehle miss ho gayi thi: **`audio/cues-23.json`** — ek asli cue she
 | `research/viral_og_v21/film3d/sfx_cues.py` | cue sheet kit levels + onset alignment se |
 | `research/viral_og_v21/film3d/score3d.py` | 60 s score, repo score grammar |
 | `research/viral_og_v21/film3d/build_mix3d.py` | VO + score + SFX + ambience mix, −16 LUFS |
-| `research/viral_og_v21/film3d/out/EP01_1min_3d.mp4` | 60 s, 1440 3D frames |
+| `research/viral_og_v21/film3d/out/EP01_BEAR_1min_3D_640x360_MASTER.mp4` | 60 s, 1440 3D frames, repo SFX + score muxed |
+| `research/viral_og_v21/film3d/sdf.py` | bear / skull / boulder / torch **solid SDFs** (raymarched, not splatted) |
+| `research/viral_og_v21/film3d/REPO_3D_FORENSIC.md` | ye audit |
+
+---
+
+## 9. Version 2 — jo 14 Nov ko rebuild hua (aur kyun)
+
+Pehla 60 s render **bekaar** nikla: poora frame blue haze tha. Forensic karne par 6 asli bugs mile:
+
+| # | Bug | Asar | Fix |
+|---|---|---|---|
+| 1 | `march_set` step 0.42 m × 34 steps = **14 m**, magar tunnel 30 m | deewar kabhi hit nahi hoti, rays mid-air shade hoti hain | sphere tracing + tmax 46 m |
+| 2 | **normals ulti** (`N·V = −0.147`) | har surface backfacing, lighting flat | `normal()` = −gradient (sdf>0 = solid) |
+| 3 | floor SDF ka **sign inverted** | floor kabhi solid nahi tha | `ff = floor_y − y` |
+| 4 | `visibility()` light ko wall ke aar-paar maanta tha, aur skull ke liye **hamesha 0** | warm key light ka koi asar nahi | SDF soft shadow, 10 taps, penumbra |
+| 5 | compositing `img + vol*1.5` | haze image ke upar add, transmittance ignore | `img*T + inscatter` |
+| 6 | auto-exposure percentile par | ek blown highlight poori frame ko 0.4 stop kar deta | **per-shot fixed exposure** (DOP stop) |
+
+Aur ek architectural badlav: **point-splatting hata diya.** Point cloud surface nahi banti — bear 9 alag ellipsoids jaisa dikhta tha, skull par bubbles. `sdf.py` me poora model smooth-union SDF hai (watertight, continuous normals, SDF AO), aur `march_objects()` usko cave ke saath hi raymarch karta hai. Isse parallax, occlusion, silhouette, sab asli hai.
+
+**Nateeja (honest):** ab ye *indie 3D documentary* level hai — asli geometry, asli lights, asli camera, asli physics clock. Ye **Pixar/Blender cinema level nahi** hai, kyunki fur strands, GI, SSS, motion blur, DOF, 4K — inka koi rasta is machine par maujood nahi (section 4 ka table wahi hai).
+
+## 10. Audio sync — kaise exactly sync hai
+
+`sfx_cues.events()` hand-timed nahi hai:
+- cut points seedha `film1min.film()` ke shot durations se aate hain,
+- footsteps `BEAR_WALK` ke gait clock se (freq 1.0 Hz, 2 steps per cycle) — wahi clock jo pairon ko hilata hai,
+- har cue ka level `audio/kit.json` ke measured `bed_db`, alignment `offset_ms`, gap `min_gap_ms` se.
+
+Is liye agar kal shot ki length badle, **audio khud saath badal jayega** — kuch manually shift nahi karna padega.

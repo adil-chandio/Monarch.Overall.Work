@@ -133,7 +133,7 @@ def march_set(cam, cave, W, H, tmax=46.0, steps=52):
                 hit=hit.reshape(H, W), d=d, xx=xx.ravel(), yy=yy.ravel(), W=W, H=H)
 
 
-def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013):
+def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013, sky=None):
     P, N, t = hit["P"], hit["N"], hit["t"]
     isfloor = P[:, 1] < cave.floor_y + 0.06
 
@@ -197,6 +197,19 @@ def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013):
     fv = 1.0 - np.exp(-fog * np.maximum(vd - 1.0, 0.0))
     col = col * (1 - fv[:, None]) + np.array([0.006, 0.009, 0.016], np.float32)[None, :] * fv[:, None]
     img = col.reshape(hit["H"], hit["W"], 3).astype(np.float32)
+    if sky is not None:
+        # rays that leave the cave see the day outside the mouth: a cold aperture,
+        # not a hole. Graded by the ray's angle to the opening.
+        miss = ~hit["hit"].reshape(-1)
+        if miss.any():
+            dd = hit["d"][miss]
+            up = np.clip(dd[:, 1], -0.4, 1.0)
+            k = np.clip((up + 0.4) / 1.4, 0, 1)[:, None]
+            sk = (np.asarray(sky, np.float32)[None, :]
+                  * (0.55 + 0.75 * k) * (0.8 + 0.4 * np.clip(dd[:, 2], 0, 1))[:, None])
+            flat = img.reshape(-1, 3)
+            flat[np.nonzero(miss)[0]] = sk
+            img = flat.reshape(img.shape)
     depth = np.where(hit["hit"], hit["t"].reshape(hit["H"], hit["W"]), 1e4).astype(np.float32)
     trans = (1.0 - fv).reshape(hit["H"], hit["W"]).astype(np.float32)
     trans = trans * hit["hit"].astype(np.float32) ** 1  # sky (no hit) = open mouth, still fogged by volume only
@@ -404,7 +417,7 @@ def march_objects(cam, objs, W, H, zbuf, steps=38):
         sel = best_o[gi] == oi
         if sel.any():
             N[sel] = _sdf_normal(ob.sdf, P[sel])
-    return dict(idx=gi, P=P, N=N, obj=best_o[gi])
+    return dict(idx=gi, P=P, N=N, obj=best_o[gi], t=best_t[gi])
 
 
 def _sdf_normal(fn, P, e=6e-4):

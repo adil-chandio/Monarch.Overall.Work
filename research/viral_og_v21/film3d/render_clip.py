@@ -49,6 +49,11 @@ def _mats(nd, kind):
     return m
 
 
+def kind_hint(act):
+    """Only shots with no subject look out of the mouth, so only they get sky."""
+    return act.get("kind") == "none"
+
+
 def build_frame(T, W, H, cave, shots, starts, seed=0):
     """One fully shaded 3D frame at film time T: cave raymarch, then solid props,
     then deferred-shaded air, then post."""
@@ -61,7 +66,8 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
     _advance_to(T)
 
     hg = R.march_set(cam, cave, W, H, steps=44)
-    img, depth, tr = R.shade_set(hg, cam, cave, lights)
+    img, depth, tr = R.shade_set(hg, cam, cave, lights,
+                                  sky=(0.052, 0.088, 0.172) if kind_hint(act) else None)
 
     kind = act.get("kind")
     objs, mats = [], []
@@ -89,6 +95,8 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
     if objs:
         hit = R.march_objects(cam, objs, W, H, depth, steps=44)
         if hit is not None:
+            # the air (flame, dust) has to be occluded by the solids, not drawn on top
+            depth.reshape(-1)[hit["idx"]] = hit["t"]
             flat_i = img.reshape(-1, 3)
             N = hit["N"]
             # object-specific material + ambient occlusion straight from the SDF
@@ -153,6 +161,10 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
     vol, vt = R.volumetrics(cam, cave, lights, W, H, density=0.0075, res=0.34)
     img = img * vt[..., None] + vol
     fin = R.finish(img, seed=seed, exposure=exp)
+    # an edit opens and closes: 1 s up from black, 1.2 s down to black
+    fade = min(1.0, T / 1.0) * min(1.0, max(0.0, (60.0 - T) / 1.2))
+    if fade < 1.0:
+        fin = fin * max(fade, 0.0) ** 1.4
     fr = Image.fromarray((fin * 255).astype(np.uint8))
     return draw_text(fr, s.text, s.texpos), k, s
 
