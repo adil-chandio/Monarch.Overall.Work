@@ -6,12 +6,19 @@
   "done": 1800,
   "unit": "frames",
   "created": "2026-11-13T22:37:10.929Z",
-  "updated": "2026-11-14T00:51:51.108Z",
+  "updated": "2026-11-14T00:51:52.770Z",
   "resume": {
     "next_command": "OUT=/tmp/v2 CHUNK=150 TOTAL=1800 ./scripts/render-orca3d-v2.sh (skips existing parts/), then: ffmpeg mux /tmp/v2/video.mp4 + /tmp/orca-final.m4a -> upload to Drive -> job artifact/uploaded",
     "notes": ""
   },
-  "artifacts": [],
+  "artifacts": [
+    {
+      "path": "/tmp/Why-Orcas-Fear-Humpbacks-3D-v2-60s-720p.mp4",
+      "bytes": 18770687,
+      "sha256": "4acf8f5862254a3beebc6edced43a7237fdc2bee7995433f5ac5719a591b4c04",
+      "drive_id": null
+    }
+  ],
   "decisions": [],
   "log": [
     {
@@ -29,6 +36,10 @@
     {
       "at": "2026-11-14T00:51:51.108Z",
       "what": "all 12 chunks final: card 3/4, scan+flock 5/6, carousel 7 re-rendered after fixes"
+    },
+    {
+      "at": "2026-11-14T00:51:52.770Z",
+      "what": "artifact /tmp/Why-Orcas-Fear-Humpbacks-3D-v2-60s-720p.mp4 17.9 MB sha256 4acf8f586225"
     }
   ]
 }
