@@ -212,14 +212,14 @@ def build_bear(col, face=True):
                                              location=loc - nor * 0.017)
         o = bpy.context.object
         o.name = f"FACE_eyeball_{sx}"
-        o.data.materials.append(principled("EYE_white", (0.17, 0.13, 0.10), rough=0.24, spec=0.45))
+        o.data.materials.append(principled("EYE_white", (0.055, 0.042, 0.034), rough=0.20, spec=0.5))
         # iris: sits on the front of the eyeball, facing the same way as the socket
         bpy.ops.mesh.primitive_uv_sphere_add(radius=0.017, segments=20, ring_count=10,
                                              location=loc - nor * 0.017 + nor * 0.015)
         o2 = bpy.context.object
         o2.name = f"FACE_iris_{sx}"
         o2.scale = (1.0, 1.0, 0.55)
-        o2.data.materials.append(principled("EYE_iris", (0.014, 0.011, 0.009), rough=0.16, spec=0.9))
+        o2.data.materials.append(principled("EYE_iris", (0.006, 0.005, 0.004), rough=0.08, spec=1.0))
         face.extend([o, o2])
 
     for sx in (-1, 1):

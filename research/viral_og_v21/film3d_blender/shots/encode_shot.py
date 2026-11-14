@@ -5,7 +5,7 @@ The shot scripts render stills (PNG) so a render can be resumed or inspected fra
 by frame; this turns whatever is on disk into something playable.
 
     python3 shots/encode_shot.py out/walk_preview_0099.mp4 --fps 8
-    python3 shots/encode_shot.py out/bear_walk_10s.mp4 --fps 24 --pattern walk_final_
+    python3 shots/encode_shot.py out/bear_walk_10s.mp4 --fps 24 --pattern walk_facebeat_final_
 
 Notes:
   * --fps is the playback rate, which is NOT the scene rate if you rendered with

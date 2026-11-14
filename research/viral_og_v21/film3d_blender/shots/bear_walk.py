@@ -91,30 +91,33 @@ def key_rig(bear, fire, cam):
     cam.keyframe_insert(data_path="rotation_euler", frame=int(DUR * FPS))
 
 
-def key_face_beat(bear, fire, cam):
-    """6 s face shot: the head lifts towards the lens, breath, fire flicker.
+def key_face_beat(bear, fire, cam, dur=9.0):
+    """The face beat: the head lifts and turns into the lens, breath, fire flicker.
 
-    The camera sits in front of the muzzle, below the line of the brow, so the eyes
-    and the nose pad are the only specular marks in the frame. The animal does not
-    walk here - the beat is "look at it", not "watch it move".
+    Camera sits in front of the muzzle and below the brow line, so the eye and the nose
+    pad are the only specular marks in the frame. The animal does not walk here - the
+    beat is "look at it", not "watch it move". Written for 9 s so it can be cut in for
+    S4 ("ONE DOOR"), the shot where the animal comes up and fills the doorway.
     """
     sc = bpy.context.scene
     sc.render.fps = FPS
-    sc.frame_start, sc.frame_end = 1, 6 * FPS
-    end = 6 * FPS
+    end = int(dur * FPS)
+    sc.frame_start, sc.frame_end = 1, end
 
     def key(ob, path, frame, value):
         setattr(ob, path, value)
         ob.keyframe_insert(data_path=path, frame=frame)
 
-    # head comes up and turns into the lens
-    key(bear, "rotation_euler", 1, (math.radians(-2.0), 0.0, math.radians(-7.0)))
-    key(bear, "rotation_euler", int(2.4 * FPS), (math.radians(-5.0), 0.0, math.radians(-4.0)))
-    key(bear, "rotation_euler", end, (math.radians(-8.0), 0.0, math.radians(-1.5)))
-    # breath: one and a half cycles, on a 3.6 s clock
+    # head: down and away at first, then up and into the lens by 3.2 s, then held
+    key(bear, "rotation_euler", 1, (math.radians(2.0), 0.0, math.radians(-9.0)))
+    key(bear, "rotation_euler", int(1.4 * FPS), (math.radians(-1.0), 0.0, math.radians(-5.0)))
+    key(bear, "rotation_euler", int(3.2 * FPS), (math.radians(-3.0), 0.0, math.radians(-1.0)))
+    key(bear, "rotation_euler", int(6.4 * FPS), (math.radians(-2.0), 0.0, math.radians(-2.5)))
+    key(bear, "rotation_euler", end, (math.radians(-1.0), 0.0, math.radians(-1.5)))
+    # breath: 4 s cycle, always moving
     for f in range(1, end + 1, 5):
         t = f / FPS
-        key(bear, "scale", f, (1.0, 1.0, 1.0 + 0.010 * math.sin(t * 2 * math.pi / 3.6)))
+        key(bear, "scale", f, (1.0, 1.0, 1.0 + 0.010 * math.sin(t * 2 * math.pi / 4.0)))
 
     for f in range(1, end + 1, 3):
         t = f / FPS
@@ -122,19 +125,18 @@ def key_face_beat(bear, fire, cam):
         fire.energy = 780.0 * (0.7 + 0.6 * n)
         fire.keyframe_insert(data_path="energy", frame=f)
 
-    # camera: starts wide-ish on the head, ends close on the eye
-    lens = cam.data
-    key(lens, "lens", 1, 46.0)
-    key(lens, "lens", end, 58.0)
-    key(cam, "location", 1, (1.15, 3.25, 1.40))
-    key(cam, "location", end, (0.95, 3.00, 1.36))
-    t0 = Vector((0.02, 1.34, 1.20))
-    t1 = Vector((0.0, 1.44, 1.18))
-    cam.rotation_euler = (t0 - Vector((1.15, 3.25, 1.40))).to_track_quat("-Z", "Y").to_euler()
+    # camera: one slow push the whole way, so the head grows instead of the lens zooming
+    loc0, loc1 = Vector((1.55, 4.35, 1.62)), Vector((1.20, 3.72, 1.50))
+    t0, t1 = Vector((0.03, 1.10, 1.18)), Vector((0.0, 1.22, 1.14))
+    key(cam, "location", 1, loc0)
+    key(cam, "location", end, loc1)
+    cam.rotation_euler = (t0 - loc0).to_track_quat("-Z", "Y").to_euler()
     cam.keyframe_insert(data_path="rotation_euler", frame=1)
-    cam.location = Vector((0.95, 3.00, 1.36))
-    cam.rotation_euler = (t1 - Vector((0.95, 3.00, 1.36))).to_track_quat("-Z", "Y").to_euler()
+    cam.location = loc1
+    cam.rotation_euler = (t1 - loc1).to_track_quat("-Z", "Y").to_euler()
     cam.keyframe_insert(data_path="rotation_euler", frame=end)
+    key(cam.data, "lens", 1, 42.0)
+    key(cam.data, "lens", end, 50.0)
 
 
 def add_eye_light(target=(0.03, 1.42, 1.18), loc=(1.05, 3.55, 1.90), energy=110.0):
@@ -201,7 +203,8 @@ def main():
     ap.add_argument("--face", action="store_true", help="include eyes / nose / mouth")
     ap.add_argument("--tag", default=None, help="output prefix (default: preview/final/test)")
     ap.add_argument("--face-beat", action="store_true",
-                    help="render the 6 s face beat instead of the walk")
+                    help="render the face beat instead of the walk")
+    ap.add_argument("--dur", type=float, default=9.0, help="face beat length in seconds")
     a = ap.parse_args()
 
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -220,7 +223,7 @@ def main():
     add_embers(col_fx)
     if a.face_beat:
         add_eye_light()
-        key_face_beat(bear, fire.data, cam)
+        key_face_beat(bear, fire.data, cam, a.dur)
     else:
         key_rig(bear, fire.data, cam)
 

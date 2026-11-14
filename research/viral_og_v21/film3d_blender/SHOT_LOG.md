@@ -37,10 +37,10 @@ Two pieces come out of `bear_walk.py`:
 
 * `--face` walk (default timeline, 240 frames = 10 s): the animal stands, swings its
   head to the lens, takes two heavy steps, stops. Used for S3, S4, S6.
-* `--face-beat --face` (144 frames = 6 s): the head lifts into the lens, breath, fire
-  flicker; a separate close piece for the face beat. Extra light `LIGHT_eye` (area,
-  110 W, just off the lens) because the fire is *behind* the animal there — without it
-  the eyes and muzzle fall into shadow.
+* `--face-beat --face --dur 9` (216 frames = 9 s): the head lifts into the lens, breath,
+  fire flicker; the close piece. Extra light `LIGHT_eye` (area, 110 W, just off the lens)
+  because the fire is *behind* the animal there — without it the eyes and muzzle fall
+  into shadow. Length is a parameter because the shot it replaces (S4) is 9 s.
 * `--tag NAME` sets the frame prefix, `--res W H` overrides output size.
 
 `--step 3` on a 24 fps scene means each stored frame is 3/24 s, so the sequence plays
@@ -134,14 +134,15 @@ H.264 High + AAC 192k stereo, ~9.7 MB.
 |---|---|---|
 | S1, S2 | v3 segment, stream-copied | skull on the rock, pull back |
 | S3 | Blender walk, full take | caption `PLACED.` |
-| S4 | Blender walk, in 0.8 s, punch-in 1.45x | caption `ONE DOOR` |
+| S4 | Blender **face beat**, full take | caption `ONE DOOR` |
 | S5 | v3 segment | `600 KG - NOT THE BIGGEST` |
 | S6 | Blender walk, in 1.8 s | the walk, no caption |
 | S7 | v3 segment | `NOT A BEAR'S ANY MORE` |
 
-The three animal shots were raymarched blobs in v3 and are real geometry here. S4 is a
-punched-in later part of the same take rather than a fourth render: the ten seconds
-used twice in a row would read as a repeated shot.
+The three animal shots were raymarched blobs in v3 and are real geometry here. S3 and
+S6 share the walk take (S6 enters 1.8 s in, so the two do not look identical); S4 is a
+different take — the face beat — so the three animal shots are not the same shot three
+times.
 
 The Blender renders are clean plates; the two captions are burnt at cut time with
 ffmpeg `drawtext`, at the same position/size/colour the v3 renderer used (centred,

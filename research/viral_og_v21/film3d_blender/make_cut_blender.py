@@ -34,15 +34,16 @@ OUT = os.path.join(HERE, "out", "final_v4")
 FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
 
 # shot name -> the Blender render that replaces it (None = keep the v3 file)
-BLENDER_SHOT = os.path.join(HERE, "shots", "out", "bear_walk_10s.mp4")
-# shot -> (file, in-point in the source, zoom). S3 and S4 both belong to the animal,
-# and the same ten seconds twice in a row would read as a repeated shot, so S4 is
-# taken from a later in-point and framed tighter (a punched-in version of the take,
-# not a second render). S6 is the walk, full take.
+WALK = os.path.join(HERE, "shots", "out", "bear_walk_10s.mp4")
+FACE = os.path.join(HERE, "shots", "out", "bear_face_9s.mp4")
+# shot -> (file, in-point in the source, zoom). S3 and S4 are both the animal but not
+# the same take: S3 is the wide walk (it appears), S4 is the face beat (it comes up and
+# fills the doorway), S6 is the walk again from a later in-point. Using one render
+# three times would read as a repeated shot.
 REPLACE = {
-    "S3": (BLENDER_SHOT, 0.0, 1.00),
-    "S4": (BLENDER_SHOT, 0.85, 1.45),
-    "S6": (BLENDER_SHOT, 1.80, 1.00),
+    "S3": (WALK, 0.0, 1.00),
+    "S4": (FACE, 0.0, 1.00),
+    "S6": (WALK, 1.8, 1.00),
 }
 MASTER = "EP01_BEAR_1min_3D_v4_640x360_MASTER.mp4"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
