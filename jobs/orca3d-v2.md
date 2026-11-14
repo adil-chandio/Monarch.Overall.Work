@@ -1,6 +1,6 @@
 # orca3d-v2
 
-**artifacts-pending** · 1800/1800 frames (100%) · updated 2026-11-14T00:51:52.770Z
+**artifacts-pending** · 1800/1800 frames (100%) · updated 2026-11-14T00:51:57.446Z
 
 > Skill-gated rebuild of the 60s orca film: fix the missing white markings, marine snow, god rays; rebuild the sound bed from the repo DSP engine to pass showreel.audio_qc 9/9 and match the shipped showreel master within 2 dB on all 8 bands
 
@@ -14,7 +14,7 @@ OUT=/tmp/v2 CHUNK=150 TOTAL=1800 ./scripts/render-orca3d-v2.sh (skips existing p
 
 | file | bytes | sha256 | Drive |
 |---|---:|---|---|
-| `../../../tmp/Why-Orcas-Fear-Humpbacks-3D-v2-60s-720p.mp4` | 17.9 MB | `4acf8f586225` | **NOT UPLOADED** |
+| `../../../tmp/Why-Orcas-Fear-Humpbacks-3D-v2-60s-720p.mp4` | 17.9 MB | `4acf8f586225` | `1pzeP4jT_hMZ4tDkQespCcB1Wb94qgY-g` |
 
 ## Log
 
@@ -23,3 +23,4 @@ OUT=/tmp/v2 CHUNK=150 TOTAL=1800 ./scripts/render-orca3d-v2.sh (skips existing p
 - `22:53` chunks 0-3 encoded (~11.7MB); chunk 4 running
 - `00:51` all 12 chunks final: card 3/4, scan+flock 5/6, carousel 7 re-rendered after fixes
 - `00:51` artifact /tmp/Why-Orcas-Fear-Humpbacks-3D-v2-60s-720p.mp4 17.9 MB sha256 4acf8f586225
+- `00:51` uploaded /tmp/Why-Orcas-Fear-Humpbacks-3D-v2-60s-720p.mp4 -> Drive 1pzeP4jT_hMZ4tDkQespCcB1Wb94qgY-g
