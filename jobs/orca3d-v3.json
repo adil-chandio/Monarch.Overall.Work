@@ -6,17 +6,28 @@
   "done": 1800,
   "unit": "frames",
   "created": "2026-11-14T04:51:09.854Z",
-  "updated": "2026-11-14T08:42:01.856Z",
+  "updated": "2026-11-14T08:42:43.313Z",
   "resume": {
     "next_command": "OUT=/tmp/v3 ./scripts/render-orca3d-v3.sh; mux /tmp/orca-v3-final.m4a; gates; upload",
     "notes": ""
   },
-  "artifacts": [],
+  "artifacts": [
+    {
+      "path": "/tmp/Why-Orcas-Fear-Humpbacks-3D-v3-60s-720p.mp4",
+      "bytes": 14998466,
+      "sha256": "7ee382a244242a9eb93647d9ab01eeda997802fb02b151b4925ad9d60986dfd1",
+      "drive_id": null
+    }
+  ],
   "decisions": [],
   "log": [
     {
       "at": "2026-11-14T04:51:09.854Z",
       "what": "started: Orca 60s v3: volumetric water surface (Snell window + TIR mirror), depth-masked god rays, linear-metre fog, contact shadows, per-shot light rig, cinematic filmic grade with exponential shoulder + teal-orange split"
+    },
+    {
+      "at": "2026-11-14T08:42:43.313Z",
+      "what": "artifact /tmp/Why-Orcas-Fear-Humpbacks-3D-v3-60s-720p.mp4 14.3 MB sha256 7ee382a24424"
     }
   ]
 }
