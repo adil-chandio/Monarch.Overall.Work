@@ -84,19 +84,40 @@ def ease_out(t):
 class Cave:
     """A limestone tube with a floor, closed at the back, open at the mouth."""
 
-    def __init__(self, length=30.0, radius=2.05, floor_y=-1.35, mouth_z=None):
+    def __init__(self, length=30.0, radius=2.05, floor_y=-1.35, mouth_z=None,
+                 chambers=((1.5, 2.4, 2.3), (-9.0, 3.0, 1.1))):
         self.L = length
         self.R0 = radius
         self.floor_y = floor_y
         self.mouth_z = length * 0.5 - 0.5 if mouth_z is None else mouth_z
+        # a chamber is where the bore opens out; without one a 2.6 m animal cannot
+        # be filmed from the side, because the camera would be inside the wall
+        self.chambers = chambers
+        self.mouth_z = length * 0.5 - 0.5 if mouth_z is None else mouth_z
 
     def radius_at(self, z):
+        lut = getattr(self, "_lut", None)
+        if lut is not None:
+            return np.interp(z, self._lutz, lut).astype(np.float32)
+        return self._radius_exact(z)
+
+    def _build_lut(self, n=3072):
+        z0, z1 = -self.L * 0.5 - 4.0, self.mouth_z + 4.0
+        self._lutz = np.linspace(z0, z1, n).astype(np.float32)
+        self._lut = self._radius_exact(self._lutz)
+        return self
+
+    def _radius_exact(self, z):
+        z = np.asarray(z, np.float32)
         V = np.clip(z / self.L + 0.5, -0.3, 1.4)
         wide = (1.0 + 0.26 * np.sin(V * math.pi * 2.1 + 0.55)
                 + 0.13 * np.sin(V * math.pi * 5.3 + 1.8)
                 + 0.07 * np.sin(V * math.pi * 10.7 + 4.1))
         flare = 1.0 + 0.22 * smoothstep(0.86, 1.00, V) ** 1.5
-        return self.R0 * wide * flare
+        r = self.R0 * wide * flare
+        for (zc, zh, extra) in self.chambers:
+            r = r + extra * np.exp(-((z - zc) / zh) ** 2)
+        return r
 
     def sdf(self, p):
         x = p[..., 0]; y = p[..., 1]; z = p[..., 2]
@@ -106,16 +127,18 @@ class Cave:
                + 0.06 * np.sin(9.0 * th + 4.4))
         r = np.sqrt(x ** 2 + (y / 0.80) ** 2)
         ft = r - self.radius_at(z) * wob
-        ff = p[..., 1] - self.floor_y
+        ff = self.floor_y - p[..., 1]   # positive BELOW the floor = solid rock
         ft = np.where(p[..., 2] > self.mouth_z, -1e3, ft)
         ft = np.where(p[..., 2] < -self.L * 0.5, 1e3, ft)
         return np.minimum(ft, ff)
 
     def normal(self, p, e=0.012):
+        """Surface normal facing the cave air. sdf > 0 is solid, so the gradient
+        points into the rock; the visible normal is its negation."""
         gx = self.sdf(p + np.array([e, 0, 0], np.float32)) - self.sdf(p - np.array([e, 0, 0], np.float32))
         gy = self.sdf(p + np.array([0, e, 0], np.float32)) - self.sdf(p - np.array([0, e, 0], np.float32))
         gz = self.sdf(p + np.array([0, 0, e], np.float32)) - self.sdf(p - np.array([0, 0, e], np.float32))
-        return nrm(np.stack([gx, gy, gz], -1))
+        return nrm(-np.stack([gx, gy, gz], -1))
 
 
 # ------------------------------------------------------------------ shapes
@@ -193,7 +216,7 @@ def bear(t, pose=0.0, walk=0.0, phase=0.0, breathe=0.0, head_yaw=0.0,
     for pi, (c, r) in enumerate(parts):
         w = 1.0 if pi < 5 else 0.82
         area = 4 * math.pi * ((r[0] * r[1] + r[1] * r[2] + r[0] * r[2]) / 3.0)
-        n = max(150, int(area * 900 * density * (0.6 + 0.4 * w)))
+        n = max(420, int(area * 3000 * density * (0.6 + 0.4 * w)))
         P, N = _shell(c, r, n, rng, 0.045)
         if pi in LEG_IDX and walk > 0:
             ang = math.sin(phase + PHASE[pi]) * 0.40 * walk
@@ -221,12 +244,12 @@ def bear(t, pose=0.0, walk=0.0, phase=0.0, breathe=0.0, head_yaw=0.0,
         P[stray] += N[stray] * (0.022 + 0.02 * rng.random(stray.sum(), dtype=np.float32))[:, None]
 
     # colour: near-black fur with a warm tip and a lighter muzzle
-    base = np.array([0.030, 0.023, 0.018], np.float32)
+    base = np.array([0.088, 0.064, 0.046], np.float32)
     C = np.repeat(base[None, :], len(P), 0)
     warm = fbm(P[:, 0] * 3.0, P[:, 1] * 3.0, P[:, 2] * 3.0, 3)
     C *= (0.70 + 0.85 * warm)[:, None]
     muz = smoothstep(1.34, 1.48, P[:, 2]) * smoothstep(0.13, 0.03, np.abs(P[:, 0]))
-    C = C * (1 - muz[:, None]) + np.array([0.075, 0.055, 0.040], np.float32)[None, :] * muz[:, None]
+    C = C * (1 - muz[:, None]) + np.array([0.150, 0.108, 0.078], np.float32)[None, :] * muz[:, None]
     nose = smoothstep(1.50, 1.56, P[:, 2]) * smoothstep(0.075, 0.02, np.abs(P[:, 0]))
     C = C * (1 - nose[:, None]) + np.array([0.006, 0.006, 0.007], np.float32)[None, :] * nose[:, None]
 
@@ -245,7 +268,7 @@ def bear(t, pose=0.0, walk=0.0, phase=0.0, breathe=0.0, head_yaw=0.0,
     nfur = len(P) - len(PE)
     S = np.concatenate([np.full(nfur, 0.14, np.float32), np.full(len(PE), 2.2, np.float32)])
     Rg = np.concatenate([np.full(nfur, 0.66, np.float32), np.full(len(PE), 0.045, np.float32)])
-    PX = np.concatenate([np.full(nfur, 0.0175, np.float32), np.full(len(PE), 0.006, np.float32)])
+    PX = np.concatenate([np.full(nfur, 0.0115, np.float32), np.full(len(PE), 0.0035, np.float32)])
     return dict(P=P.astype(np.float32), N=N.astype(np.float32), C=C.astype(np.float32),
                 S=S, R=Rg, PX=PX, EM=np.zeros(len(P), np.float32))
 
@@ -263,7 +286,7 @@ def skull(scale=1.0, seed=3, density=1.0):
     Ps, Ns = [], []
     for (c, r) in parts:
         area = 4 * math.pi * ((r[0] * r[1] + r[1] * r[2] + r[0] * r[2]) / 3.0)
-        n = max(220, int(area * 6400 * density))
+        n = max(900, int(area * 30000 * density))
         P, N = _shell(c, r, n, rng, 0.02)
         Ps.append(P); Ns.append(N)
     P = np.concatenate(Ps); N = nrm(np.concatenate(Ns))
@@ -279,11 +302,11 @@ def skull(scale=1.0, seed=3, density=1.0):
     stain = 0.76 + 0.30 * fbm(P[:, 0] * 9, P[:, 1] * 9, P[:, 2] * 9, 3)
     dirt = smoothstep(0.55, 0.85, fbm(P[:, 0] * 3.1, P[:, 1] * 3.1, P[:, 2] * 3.1, 3))
     bone = np.array([0.62, 0.565, 0.455], np.float32)
-    C = (bone[None, :] * stain[:, None]) * (0.50 + 0.50 * cav[:, None] ** 0.7)
+    C = (bone[None, :] * stain[:, None]) * (0.80 + 0.20 * cav[:, None] ** 0.7)
     C *= (1.0 - 0.42 * dirt)[:, None]
     S = 0.24 - 0.16 * dirt
     Rg = 0.42 + 0.24 * dirt
-    PX = np.full(len(P), 0.0030, np.float32)
+    PX = np.full(len(P), 0.0021, np.float32)
 
     # teeth
     tp = []
@@ -295,17 +318,17 @@ def skull(scale=1.0, seed=3, density=1.0):
             tp.append((tx, ty, tz))
     cp, cn = [], []
     for c in np.array(tp, np.float32):
-        i = np.arange(70, dtype=np.float32) + 0.5
-        phi = np.arccos(1 - 2 * i / 70); th = math.pi * (1 + 5 ** 0.5) * i
+        i = np.arange(190, dtype=np.float32) + 0.5
+        phi = np.arccos(1 - 2 * i / 190); th = math.pi * (1 + 5 ** 0.5) * i
         ex, ey, ez = np.sin(phi) * np.cos(th), np.cos(phi), np.sin(phi) * np.sin(th)
         cp.append(np.stack([ex * 0.0105, ey * 0.021 + 0.021, ez * 0.0085], 1) + c)
         cn.append(nrm(np.stack([ex, ey * 2.6, ez], 1)))
     P = np.concatenate([P, np.concatenate(cp)]); N = np.concatenate([N, np.concatenate(cn)])
-    nt = 20 * 70
+    nt = 20 * 190
     C = np.concatenate([C, np.repeat(np.array([[0.55, 0.50, 0.38]], np.float32), nt, 0)])
     S = np.concatenate([S, np.full(nt, 0.32, np.float32)])
     Rg = np.concatenate([Rg, np.full(nt, 0.26, np.float32)])
-    PX = np.concatenate([PX, np.full(nt, 0.0015, np.float32)])
+    PX = np.concatenate([PX, np.full(nt, 0.0011, np.float32)])
     return dict(P=(P * scale).astype(np.float32), N=N.astype(np.float32),
                 C=np.clip(C, 0, 1), S=S, R=Rg, PX=PX, EM=np.zeros(len(P), np.float32))
 
@@ -330,6 +353,22 @@ def rocks(centre, n=900, radius=0.7, seed=9):
     return dict(P=P, N=N, C=np.clip(C, 0, 1), S=np.full(n, 0.12, np.float32),
                 R=np.full(n, 0.8, np.float32), PX=np.full(n, 0.024, np.float32),
                 EM=np.zeros(n, np.float32))
+
+
+def boulder(centre, radii=(0.42, 0.30, 0.42), n=14000, seed=17):
+    """A squat dome sitting on the floor: the slab the skull rests on."""
+    rng = np.random.default_rng(seed)
+    P, N = _shell((0, 0, 0), radii, n, rng, 0.10)
+    P[:, 1] = np.abs(P[:, 1])                       # keep the upper half -> dome
+    N[:, 1] = np.abs(N[:, 1])
+    wob = fbm(P[:, 0] * 5.5, P[:, 1] * 5.5, P[:, 2] * 5.5, 3) - 0.5
+    P = P + N * (wob * 0.055)[:, None]
+    P = P + np.asarray(centre, np.float32)
+    g = fbm(P[:, 0] * 6, P[:, 1] * 6, P[:, 2] * 6, 3)
+    C = np.repeat(np.array([[0.215, 0.203, 0.180]], np.float32), len(P), 0) * (0.62 + 0.80 * g)[:, None]
+    return dict(P=P.astype(np.float32), N=nrm(N), C=np.clip(C, 0, 1),
+                S=np.full(len(P), 0.10, np.float32), R=np.full(len(P), 0.82, np.float32),
+                PX=np.full(len(P), 0.0062, np.float32), EM=np.zeros(len(P), np.float32))
 
 
 # ------------------------------------------------------------------ particles

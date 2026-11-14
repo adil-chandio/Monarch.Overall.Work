@@ -80,50 +80,49 @@ class Light:
         return a, d / dist[:, None], dist
 
 
-def visibility(P, L, cave, steps=7):
-    """Can the light actually reach this surface point through the tube?"""
-    d = L.pos[None, :] - P
-    worst = np.full(len(P), 1e3, np.float32)
-    rr = None
+def visibility(P, L, cave, steps=10):
+    """Soft shadow along the segment P -> light, using the cave's own SDF.
+
+    Paths are 1 m or less, so a handful of taps is enough; the penumbra comes
+    from how far the worst tap sits inside the rock, not from a binary test.
+    """
+    seg = L.pos[None, :] - P
+    worst = np.full(len(P), -1e3, np.float32)
     for i in range(1, steps + 1):
-        q = P + d * (i / (steps + 1.0))
-        th = np.arctan2(q[:, 1] / 0.80, q[:, 0])
-        wob = (1.0 + 0.20 * np.sin(3.0 * th + 0.7) + 0.12 * np.sin(5.0 * th + 2.1)
-               + 0.06 * np.sin(9.0 * th + 4.4))
-        r = np.sqrt(q[:, 0] ** 2 + (q[:, 1] / 0.80) ** 2)
-        Rz = cave.radius_at(q[:, 2]) * wob
-        worst = np.minimum(worst, np.minimum((Rz - r) / np.maximum(Rz, 1e-3),
-                                            (q[:, 1] - cave.floor_y) / 2.4))
-    return smoothstep(-0.10, 0.22, worst).astype(np.float32)
+        q = P + seg * (i / (steps + 1.0))
+        worst = np.maximum(worst, cave.sdf(q))
+    return (1.0 - smoothstep(-0.015, 0.075, worst)).astype(np.float32)
 
 
 # ---------------------------------------------------------------- set
 
 
-def march_set(cam, cave, W, H, tmax=44.0, steps=40):
+def march_set(cam, cave, W, H, tmax=46.0, steps=52):
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     d = cam.rays(xx.ravel(), yy.ravel())
     o = cam.eye[None, :]
     rng = np.random.default_rng(int(cam.eye[0] * 977) & 0xffff)
-    t = 0.25 + rng.random(d.shape[0]).astype(np.float32) * 0.03
+    t = 0.20 + rng.random(d.shape[0]).astype(np.float32) * 0.06
     hit = np.zeros(d.shape[0], bool)
     beyond = np.zeros(d.shape[0], bool)
-    step = 0.42
     for _ in range(steps):
         p = o + d * t[:, None]
         s = cave.sdf(p)
         now = (~hit) & (~beyond) & (s > 0)
         if now.any():
-            lo = np.maximum(t - step, 0.02)
+            lo = np.maximum(t - s, 0.02)
             hi = t.copy()
-            for _ in range(5):
+            for _ in range(6):
                 mid = 0.5 * (lo + hi)
                 ins = cave.sdf(o + d * mid[:, None]) < 0
                 lo = np.where(ins, mid, lo)
                 hi = np.where(ins, hi, mid)
             t = np.where(now, lo, t)
             hit |= now
-        t += step
+        # sphere tracing: advance by the (clamped) distance to the surface, so a
+        # 30 m bore is crossed in tens of samples instead of ~100
+        st = np.clip(np.abs(s) * 0.92, 0.10, 2.6) * (~hit) * (~beyond)
+        t += st
         far = (~hit) & (t > tmax)
         beyond |= far
         if (hit | beyond).all():
@@ -134,7 +133,7 @@ def march_set(cam, cave, W, H, tmax=44.0, steps=40):
                 hit=hit.reshape(H, W), d=d, xx=xx.ravel(), yy=yy.ravel(), W=W, H=H)
 
 
-def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.028):
+def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.013):
     P, N, t = hit["P"], hit["N"], hit["t"]
     isfloor = P[:, 1] < cave.floor_y + 0.06
 
@@ -199,7 +198,9 @@ def shade_set(hit, cam, cave, lights, exposure=1.0, fog=0.028):
     col = col * (1 - fv[:, None]) + np.array([0.006, 0.009, 0.016], np.float32)[None, :] * fv[:, None]
     img = col.reshape(hit["H"], hit["W"], 3).astype(np.float32)
     depth = np.where(hit["hit"], hit["t"].reshape(hit["H"], hit["W"]), 1e4).astype(np.float32)
-    return img * exposure, depth
+    trans = (1.0 - fv).reshape(hit["H"], hit["W"]).astype(np.float32)
+    trans = trans * hit["hit"].astype(np.float32) ** 1  # sky (no hit) = open mouth, still fogged by volume only
+    return img * exposure, depth, trans
 
 
 # ---------------------------------------------------------------- characters
@@ -252,52 +253,208 @@ def _taps(n):
     return out
 
 
-def splat(nd, cam, W, H, zbuf, col, max_taps=40, rad=0.60):
+def splat(nd, cam, W, H, zbuf, col=None, max_taps=24, rad=2.2):
+    """Deferred point splatting.
+
+    Points are only used to (a) win the depth test and (b) hand over a surface
+    normal, albedo and material for each pixel. Shading then happens per pixel
+    in screen space, so a cloud of points reads as one solid surface instead of
+    a heap of overlapping blobs. Returns None when nothing is visible.
+    """
     x, y, z = cam.view(nd["P"])
-    ok = z > 0.12
+    ok = z > 0.10
     if ok.sum() < 4:
         return None
+    P, N = nd["P"][ok], nd["N"][ok]
     x, y, z = x[ok], y[ok], z[ok]
-    col = col[ok]
     sx, sy, inv = cam.to_screen(x, y, z)
-    rpx = np.clip(nd["PX"][ok] * cam.f * inv * rad, 0.7, 22.0)
+    rpx = np.clip(nd["PX"][ok] * cam.f * inv * rad, 1.1, 26.0)
     nb = W * H
+
+    # ---- pass 1: nearest depth per pixel
     zmin = np.full(nb, 1e9, np.float32)
-    f0 = np.floor(sy).astype(np.int32) * W + np.floor(sx).astype(np.int32)
-    inb = (f0 >= 0) & (f0 < nb)
-    np.minimum.at(zmin, np.where(inb, f0, 0), np.where(inb, z, 1e9))
-    nt = np.clip(np.rint(np.pi * rpx * rpx * 1.3), 1, max_taps).astype(np.int32)
-    order = np.argsort(nt, kind="stable")
-    acc = np.zeros((nb, 3), np.float32)
-    wsum = np.zeros(nb, np.float32)
-    dsum = np.zeros(nb, np.float32)
-    for n in np.unique(nt):
-        sel = order[nt[order] == n]
-        if sel.size == 0:
-            continue
-        T = _taps(int(n))[None, :, :] * (rpx[sel][:, None, None] * 0.95)
-        tx = sx[sel][:, None] + T[..., 0]
-        ty = sy[sel][:, None] + T[..., 1]
-        ix = np.floor(tx).astype(np.int32)
-        iy = np.floor(ty).astype(np.int32)
-        inb2 = (ix >= 0) & (ix < W) & (iy >= 0) & (iy < H)
-        fl = np.where(inb2, iy.astype(np.int64) * W + ix.astype(np.int64), 0)
-        zr = np.where(inb2, z[sel][:, None], 1e9)
-        keep = zr <= zbuf.reshape(-1)[fl] * 1.002 + 2e-3
-        ddx = tx - np.floor(tx) - 0.5
-        ddy = ty - np.floor(ty) - 0.5
-        sw = np.exp(-(ddx * ddx + ddy * ddy) / 0.44).astype(np.float32)
-        wgt = (keep.astype(np.float32) * sw / (n * 0.5)).ravel()
+    for k in range(2):
+        n = 1 if k == 0 else 5
+        T = _taps(n) * (rpx[:, None] * (0.55 if k == 0 else 0.95))[:, None, :]
+        tx = sx[:, None] + T[..., 0]
+        ty = sy[:, None] + T[..., 1]
+        ix = np.floor(tx).astype(np.int32); iy = np.floor(ty).astype(np.int32)
+        inb = (ix >= 0) & (ix < W) & (iy >= 0) & (iy < H)
+        fl = np.where(inb, iy.astype(np.int64) * W + ix.astype(np.int64), 0)
+        zz = np.where(inb, z[:, None], 1e9)
+        np.minimum.at(zmin, fl.ravel(), zz.ravel())
+    zmin = np.minimum(zmin, zbuf.reshape(-1))          # geometry in front wins
+
+    # ---- pass 2: gather material for the pixels the nearest points own
+    hit = np.zeros(nb, bool)
+    accN = np.zeros((nb, 3), np.float32)
+    accC = np.zeros((nb, 3), np.float32)
+    accM = np.zeros((nb, 4), np.float32)
+    cnt = np.zeros(nb, np.float32)
+    for k in range(2):
+        n = 1 if k == 0 else 5
+        T = _taps(n) * (rpx[:, None] * (0.55 if k == 0 else 0.95))[:, None, :]
+        tx = sx[:, None] + T[..., 0]
+        ty = sy[:, None] + T[..., 1]
+        ix = np.floor(tx).astype(np.int32); iy = np.floor(ty).astype(np.int32)
+        inb = (ix >= 0) & (ix < W) & (iy >= 0) & (iy < H)
+        fl = np.where(inb, iy.astype(np.int64) * W + ix.astype(np.int64), 0)
+        keep = inb & (z[:, None] <= zmin[fl] * 1.004 + 1e-3)
+        w = keep.astype(np.float32)
         for c in range(3):
-            acc[:, c] += np.bincount(fl.ravel(), weights=wgt * np.repeat(col[sel, c], int(n)),
-                                     minlength=nb)[:nb].astype(np.float32)
-        wsum += np.bincount(fl.ravel(), weights=wgt, minlength=nb)[:nb].astype(np.float32)
-        dsum += np.bincount(fl.ravel(), weights=wgt * np.repeat(z[sel], int(n)),
-                            minlength=nb)[:nb].astype(np.float32)
-    ws = np.maximum(wsum, 1e-6)
-    cov = np.clip(wsum / 0.80, 0, 1)
-    return dict(col=np.stack([acc[:, 0] / ws, acc[:, 1] / ws, acc[:, 2] / ws], 1).reshape(H, W, 3),
-                cov=cov.reshape(H, W), depth=(dsum / ws).reshape(H, W))
+            accN[:, c] += np.bincount(fl.ravel(), weights=(N[:, c][:, None] * w).ravel(), minlength=nb)[:nb]
+            accC[:, c] += np.bincount(fl.ravel(), weights=(nd["C"][ok][:, c][:, None] * w).ravel(), minlength=nb)[:nb]
+        for j, key in enumerate(("S", "R", "PX", "EM")):
+            accM[:, j] += np.bincount(fl.ravel(), weights=(nd[key][ok][:, None] * w).ravel(), minlength=nb)[:nb]
+        cnt += np.bincount(fl.ravel(), weights=w.ravel(), minlength=nb)[:nb]
+        hit |= np.bincount(fl.ravel(), weights=w.ravel(), minlength=nb)[:nb] > 0
+
+    if not hit.any():
+        return None
+    idx = np.nonzero(hit)[0]
+    c = np.maximum(cnt[idx], 1e-6)[:, None]
+    Np = nrm(accN[idx] / c)
+    d = cam.rays((idx % W).astype(np.float32) + 0.5, (idx // W).astype(np.float32) + 0.5)
+    Pp = cam.eye[None, :] + d * zmin[idx][:, None]
+    return dict(idx=idx, P=Pp.astype(np.float32), N=Np.astype(np.float32),
+                C=(accC[idx] / c).astype(np.float32),
+                S=(accM[idx, 0] / c[:, 0]).astype(np.float32),
+                R=(accM[idx, 1] / c[:, 0]).astype(np.float32),
+                PX=(accM[idx, 2] / c[:, 0]).astype(np.float32),
+                EM=(accM[idx, 3] / c[:, 0]).astype(np.float32))
+
+
+def composite(img, g, cam, lights, cave, amb=0.02):
+    """Shade a gathered surface per pixel and over it on the plate."""
+    if g is None:
+        return img
+    col = shade_points(g, cam, lights, cave, amb=amb)
+    flat = img.reshape(-1, 3)
+    flat[g["idx"]] = col
+    return flat.reshape(img.shape)
+
+
+# ---------------------------------------------------------------- solid objects
+
+
+def march_objects(cam, objs, W, H, zbuf, steps=38):
+    """Raymarch solid SDF props/characters, keeping whatever is nearest.
+
+    Each object is culled by its bounding sphere and only traced where it can
+    beat the geometry that is already there, so the cost stays on the pixels the
+    animal actually covers.
+    """
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    d = cam.rays(xx.ravel(), yy.ravel())
+    o = cam.eye[None, :]
+    best_t = zbuf.reshape(-1).astype(np.float32).copy()
+    best_o = np.full(d.shape[0], -1, np.int16)
+    for oi, ob in enumerate(objs):
+        c = np.asarray(ob.centre, np.float32)
+        R = float(ob.radius)
+        oc = o - c[None, :]
+        b = (d * oc).sum(1)
+        cc = (oc * oc).sum(1) - R * R
+        disc = b * b - cc
+        m = disc > 0
+        if not m.any():
+            continue
+        sq = np.sqrt(np.maximum(disc, 0))
+        t0 = np.maximum(-b - sq, 0.02)
+        t1 = -b + sq
+        m = m & (t0 < best_t) & (t1 > 0.02)
+        idx = np.nonzero(m)[0]
+        if idx.size == 0:
+            continue
+        t = t0[idx].copy()
+        live = np.ones(idx.size, bool)
+        hit = np.zeros(idx.size, bool)
+        for _ in range(steps):
+            sel = np.nonzero(live)[0]
+            if sel.size == 0:
+                break
+            p = o + d[idx[sel]] * t[sel][:, None]
+            s = ob.sdf(p)
+            got = s < 1.2e-3
+            if got.any():
+                g = sel[got]
+                lo = np.maximum(t[g] - np.abs(s[got]) - 1e-3, 0.01)
+                hi = t[g].copy()
+                for _k in range(5):
+                    mid = 0.5 * (lo + hi)
+                    ins = ob.sdf(o + d[idx[g]] * mid[:, None]) < 0
+                    lo = np.where(ins, mid, lo)
+                    hi = np.where(ins, hi, mid)
+                t[g] = lo
+                hit[g] = True
+                live[g] = False
+            t[sel] = t[sel] + np.clip(np.abs(s) * 0.85, 8e-4, 0.30)
+            live &= t < np.minimum(best_t[idx], t1[idx])
+        if hit.any():
+            gi = idx[hit]
+            best_t[gi] = t[hit]
+            best_o[gi] = oi
+    mask = best_o >= 0
+    if not mask.any():
+        return None
+    gi = np.nonzero(mask)[0]
+    P = (o + d[gi] * best_t[gi][:, None]).astype(np.float32)
+    N = np.zeros_like(P)
+    for oi, ob in enumerate(objs):
+        sel = best_o[gi] == oi
+        if sel.any():
+            N[sel] = _sdf_normal(ob.sdf, P[sel])
+    return dict(idx=gi, P=P, N=N, obj=best_o[gi])
+
+
+def _sdf_normal(fn, P, e=6e-4):
+    gx = fn(P + np.array([e, 0, 0], np.float32)) - fn(P - np.array([e, 0, 0], np.float32))
+    gy = fn(P + np.array([0, e, 0], np.float32)) - fn(P - np.array([0, e, 0], np.float32))
+    gz = fn(P + np.array([0, 0, e], np.float32)) - fn(P - np.array([0, 0, e], np.float32))
+    return nrm(-np.stack([gx, gy, gz], -1))
+
+
+def sdf_ao(fn, P, N, radii=(0.045, 0.11, 0.24)):
+    """Contact darkening from five taps along the normal: creases, sockets, gaps."""
+    occ = np.zeros(len(P), np.float32)
+    for i, r in enumerate(radii):
+        h = r * (0.55 + 0.45 * (i / max(len(radii) - 1, 1)))
+        s = fn(P + N * h)
+        occ += np.clip((h - s) / h, 0.0, 1.0) * (1.0 / (i + 1.4))
+    return np.clip(1.0 - occ * 0.85, 0.0, 1.0).astype(np.float32)
+
+
+def shade_surface(P, N, mat, cam, lights, cave, ao):
+    """Cook-Torrance-ish shading for one surface, with cave occlusion + AO."""
+    C = mat["C"]
+    V = cam.eye[None, :] - P
+    vd = np.linalg.norm(V, axis=1) + 1e-6
+    V = V / vd[:, None]
+    ndv = np.clip((N * V).sum(1), 1e-3, 1.0)
+    col = C * (mat.get("amb", 0.02) * ao)[:, None]
+    for L in lights:
+        att, l, dist = L.attenuation(P)
+        att = att * visibility(P, L, cave)
+        ndl = (N * l).sum(1)
+        wrap = np.clip((ndl + 0.03) / 1.03, 0, 1)
+        col = col + C * L.col[None, :] * (wrap * att)[:, None]
+        h = nrm(l + V)
+        ndh = np.clip((N * h).sum(1), 0, 1)
+        a = np.maximum(mat["R"], 0.03) ** 2
+        den = ndh * ndh * (a * a - 1) + 1
+        D = a * a / (math.pi * den * den + 1e-9)
+        Fs = 0.04 + 0.96 * (1 - ndv) ** 5
+        sp = (D * Fs * mat["S"])[:, None] * L.col[None, :] * (np.clip(ndl, 0, 1) * att)[:, None]
+        col = col + np.minimum(sp, 6.0)
+        rim = (np.clip(1 - ndv, 0, 1) ** 2.0) * np.clip(-ndl * 0.5 + 0.6, 0, 1) * att * mat.get("rim", 0.45)
+        col = col + rim[:, None] * L.col[None, :] * (0.35 + 0.65 * C)
+    em = mat.get("EM")
+    if em is not None:
+        em = np.asarray(em, np.float32)
+        col = col + C * (em[:, None] if em.ndim else em) * 6.0
+    fv = 1.0 - np.exp(-0.013 * np.maximum(vd - 1.0, 0.0))
+    col = col * (1 - fv[:, None]) + np.array([0.006, 0.009, 0.016], np.float32)[None, :] * fv[:, None]
+    return col.astype(np.float32)
 
 
 # ---------------------------------------------------------------- volumetrics
@@ -313,6 +470,7 @@ def volumetrics(cam, cave, lights, W, H, density=0.016, res=0.30, steps=24,
     dt = 30.0 / steps
     jit = rng.random(d.shape[0]).astype(np.float32) * dt
     acc = np.zeros((d.shape[0], 3), np.float32)
+    tau = np.zeros(d.shape[0], np.float32)
     for i in range(steps):
         t = 0.3 + i * dt + jit
         p = o + d * t[:, None]
@@ -327,15 +485,22 @@ def volumetrics(cam, cave, lights, W, H, density=0.016, res=0.30, steps=24,
             hg = (1 - hg_g ** 2) / (4 * math.pi * (1 + hg_g ** 2 - 2 * hg_g * cos) ** 1.5) * 3.2
             seg += (hg * att)[:, None] * L.col[None, :]
         acc += seg * dens[:, None] * dt
+        tau += dens * dt * 0.55
     acc += np.asarray(base, np.float32)[None, :]
+    tr = np.exp(-tau)
     vol = acc.reshape(sh, sw, 3)
+    trv = tr.reshape(sh, sw)
     yi = (np.arange(H) + .5) * (sh / H) - .5
     xi = (np.arange(W) + .5) * (sw / W) - .5
     y0 = np.clip(np.floor(yi).astype(np.int32), 0, sh - 1); y1 = np.clip(y0 + 1, 0, sh - 1)
     x0 = np.clip(np.floor(xi).astype(np.int32), 0, sw - 1); x1 = np.clip(x0 + 1, 0, sw - 1)
-    fy = np.clip(yi - y0, 0, 1)[:, None, None]; fx = np.clip(xi - x0, 0, 1)[None, :, None]
-    return (vol[y0][:, x0] * (1 - fx) * (1 - fy) + vol[y0][:, x1] * fx * (1 - fy)
-            + vol[y1][:, x0] * (1 - fx) * fy + vol[y1][:, x1] * fx * fy).astype(np.float32)
+    fy3 = np.clip(yi - y0, 0, 1)[:, None, None]; fx3 = np.clip(xi - x0, 0, 1)[None, :, None]
+    fy = np.clip(yi - y0, 0, 1)[:, None]; fx = np.clip(xi - x0, 0, 1)[None, :]
+    vos = (vol[y0][:, x0] * (1 - fx3) * (1 - fy3) + vol[y0][:, x1] * fx3 * (1 - fy3)
+           + vol[y1][:, x0] * (1 - fx3) * fy3 + vol[y1][:, x1] * fx3 * fy3).astype(np.float32)
+    trs = (trv[y0][:, x0] * (1 - fx) * (1 - fy) + trv[y0][:, x1] * fx * (1 - fy)
+           + trv[y1][:, x0] * (1 - fx) * fy + trv[y1][:, x1] * fx * fy).astype(np.float32)
+    return vos, trs
 
 
 # ---------------------------------------------------------------- post
@@ -427,10 +592,10 @@ def vignette(H, W, k=0.32):
 def auto_exposure(img, hi=0.90, mid=0.105, pct=99.6):
     a = img.reshape(-1, 3).mean(1)
     a = a[np.isfinite(a)]
-    hv = float(np.percentile(a, pct)); mv = float(np.percentile(a, 62))
-    e1 = hi / hv if hv > 1e-7 else 40.0
-    e2 = mid / mv if mv > 1e-7 else 40.0
-    return float(np.clip(min(e1, e2), 0.4, 90.0))
+    lum = np.maximum(a, 1e-6)
+    logavg = float(np.exp(np.mean(np.log(lum + 1e-4))))
+    e = 0.16 / max(logavg, 1e-5)
+    return float(np.clip(e, 0.30, 60.0))
 
 
 def finish(img, seed=0, exposure=None, bloom_k=0.26, streak_k=0.18,
