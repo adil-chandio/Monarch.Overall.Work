@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "name": "S1",
+      "v3": "out/v3/seg_S1.mp4",
+      "dur": 9.0,
+      "replaced_by": null,
+      "in_point": null,
+      "zoom": null
+    },
+    {
+      "name": "S2",
+      "v3": "out/v3/seg_S2.mp4",
+      "dur": 8.0,
+      "replaced_by": null,
+      "in_point": null,
+      "zoom": null
+    },
+    {
+      "name": "S3",
+      "v3": "out/v3/seg_S3.mp4",
+      "dur": 10.0,
+      "replaced_by": "shots/out/bear_walk_10s.mp4",
+      "in_point": 0.0,
+      "zoom": 1.0
+    },
+    {
+      "name": "S4",
+      "v3": "out/v3/seg_S4.mp4",
+      "dur": 9.0,
+      "replaced_by": "shots/out/bear_walk_10s.mp4",
+      "in_point": 0.85,
+      "zoom": 1.45
+    },
+    {
+      "name": "S5",
+      "v3": "out/v3/seg_S5.mp4",
+      "dur": 10.0,
+      "replaced_by": null,
+      "in_point": null,
+      "zoom": null
+    },
+    {
+      "name": "S6",
+      "v3": "out/v3/seg_S6.mp4",
+      "dur": 8.0,
+      "replaced_by": "shots/out/bear_walk_10s.mp4",
+      "in_point": 1.8,
+      "zoom": 1.0
+    },
+    {
+      "name": "S7",
+      "v3": "out/v3/seg_S7.mp4",
+      "dur": 6.0,
+      "replaced_by": null,
+      "in_point": null,
+      "zoom": null
+    }
+  ],
+  "master": "EP01_BEAR_1min_3D_v4_640x360_MASTER.mp4"
+}

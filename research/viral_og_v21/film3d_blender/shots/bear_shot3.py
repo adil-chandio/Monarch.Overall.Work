@@ -3,7 +3,7 @@
 
 This replaces the raymarched "blob" of the previous cut with an actual mesh: a
 subdivided body with per-part deformation, a sculpted head (brow, orbits, muzzle,
-ears), four legs, real fur strands on the silhouette, a rock floor, a fire, and a
+ears), four legs, a shaded coat (no strand hair: see notes), a rock floor, a fire, and a
 camera with depth of field.
 
 Everything is authored here so the shot is reproducible: no .blend is required to
@@ -74,7 +74,7 @@ def noise_bump(mat, scale=40.0, strength=0.25, detail=6.0):
 
 
 # --------------------------------------------------------------------- bear
-def build_bear(col):
+def build_bear(col, face=True):
     """A cave bear: heavy shoulder hump, low head, short blunt muzzle, small ears.
 
     Built from one subdivided cube chain (so it deforms smoothly) plus separate
@@ -109,27 +109,31 @@ def build_bear(col):
         return o
 
     # ---- body volumes (metres, origin at the feet, nose towards +Y)
-    ellipsoid("torso", (0, 0.05, 1.00), (0.46, 0.80, 0.50), 4)
-    ellipsoid("hump", (0, 0.34, 1.30), (0.34, 0.42, 0.30), 3)      # shoulder hump
-    ellipsoid("rump", (0, -0.55, 0.96), (0.40, 0.40, 0.44), 3)
-    ellipsoid("chest", (0, 0.62, 0.90), (0.40, 0.34, 0.46), 3)
-    ellipsoid("neck", (0, 0.92, 1.02), (0.28, 0.26, 0.30), 3)
+    ellipsoid("torso", (0, -0.05, 0.98), (0.46, 0.76, 0.50), 4)
+    ellipsoid("hump", (0, 0.26, 1.27), (0.33, 0.40, 0.28), 3)      # shoulder hump
+    ellipsoid("rump", (0, -0.62, 0.94), (0.40, 0.38, 0.44), 3)
+    ellipsoid("chest", (0, 0.56, 0.88), (0.41, 0.34, 0.47), 3)
+    # neck has to leave a gap under the head, otherwise the remesh welds head to chest
+    capsule("neck", (0, 0.84, 0.99), (0, 1.12, 1.05), 0.245, 0.185)
 
-    # ---- head: cranium + brow + muzzle + ears
-    ellipsoid("head", (0, 1.18, 1.06), (0.25, 0.26, 0.25), 4)
-    ellipsoid("brow", (0, 1.26, 1.16), (0.23, 0.11, 0.11), 3)
-    capsule("muzzle", (0, 1.30, 1.00), (0, 1.52, 0.93), 0.130, 0.092)
-    ellipsoid("nose", (0, 1.535, 0.935), (0.068, 0.050, 0.052), 3)
+    # ---- head: carried LOW and forward, under the shoulder hump. That hump-over-head
+    # silhouette is the whole read of a cave bear; if the head is level with the hump
+    # the animal turns into one lump (see earlier test frames).
+    ellipsoid("head", (0, 1.32, 1.14), (0.250, 0.300, 0.245), 4)
+    ellipsoid("brow", (0, 1.455, 1.215), (0.200, 0.100, 0.098), 3)  # heavy brow ridge
+    capsule("muzzle", (0, 1.455, 1.100), (0, 1.790, 1.010), 0.132, 0.072)
+    capsule("jaw", (0, 1.455, 1.040), (0, 1.745, 0.975), 0.110, 0.064)
+    ellipsoid("nose", (0, 1.800, 1.012), (0.060, 0.044, 0.044), 3)
     for sx in (-1, 1):
-        ellipsoid(f"ear{sx}", (0.195 * sx, 1.13, 1.28), (0.060, 0.038, 0.068), 2)
-        ellipsoid(f"cheek{sx}", (0.14 * sx, 1.20, 1.00), (0.09, 0.10, 0.11), 2)
+        ellipsoid(f"ear{sx}", (0.196 * sx, 1.275, 1.315), (0.064, 0.042, 0.074), 2)
+        ellipsoid(f"cheek{sx}", (0.152 * sx, 1.375, 1.065), (0.098, 0.112, 0.112), 2)
 
     # ---- legs: fore pair forward of the hump, hind pair under the rump
     for sx in (-1, 1):
-        capsule(f"fore{sx}", (0.30 * sx, 0.62, 0.92), (0.31 * sx, 0.66, 0.10), 0.155, 0.115)
-        ellipsoid(f"forepaw{sx}", (0.31 * sx, 0.70, 0.075), (0.145, 0.20, 0.075), 2)
-        capsule(f"hind{sx}", (0.33 * sx, -0.52, 0.90), (0.34 * sx, -0.56, 0.10), 0.150, 0.110)
-        ellipsoid(f"hindpaw{sx}", (0.34 * sx, -0.50, 0.075), (0.140, 0.19, 0.072), 2)
+        capsule(f"fore{sx}", (0.30 * sx, 0.56, 0.90), (0.31 * sx, 0.62, 0.10), 0.152, 0.098)
+        ellipsoid(f"forepaw{sx}", (0.32 * sx, 0.68, 0.075), (0.150, 0.21, 0.075), 2)
+        capsule(f"hind{sx}", (0.33 * sx, -0.56, 0.90), (0.34 * sx, -0.60, 0.10), 0.150, 0.095)
+        ellipsoid(f"hindpaw{sx}", (0.35 * sx, -0.48, 0.072), (0.145, 0.20, 0.072), 2)
     capsule("tail", (0, -0.92, 1.05), (0, -1.02, 1.00), 0.05, 0.03)
 
     # join into one mesh, then smooth
@@ -145,18 +149,18 @@ def build_bear(col):
     # remesh so the volumes read as one skin, not as glued balls
     vox = bear.modifiers.new("remesh", "REMESH")
     vox.mode = "VOXEL"
-    vox.voxel_size = 0.022
+    vox.voxel_size = 0.026
     vox.adaptivity = 0.0
     bpy.ops.object.modifier_apply(modifier=vox.name)
 
     # relax the voxel stair-stepping
     sm = bear.modifiers.new("smooth", "SMOOTH")
-    sm.factor = 0.9
-    sm.iterations = 6
+    sm.factor = 1.0
+    sm.iterations = 8
     bpy.ops.object.modifier_apply(modifier=sm.name)
 
     dec = bear.modifiers.new("dec", "DECIMATE")
-    dec.ratio = 0.35
+    dec.ratio = 0.30
     bpy.ops.object.modifier_apply(modifier=dec.name)
 
     # a second, finer relax pass + subdivision for the shading normal
@@ -166,32 +170,101 @@ def build_bear(col):
 
     # ---- fur: real strands on the silhouette
     bpy.context.view_layer.objects.active = bear
-    bear.data.materials.append(principled("BEAR_fur", (0.055, 0.040, 0.030), rough=0.72,
+    bear.data.materials.append(principled("BEAR_fur", (0.062, 0.044, 0.032), rough=0.78,
                                           spec=0.25, sss=0.0))
-    noise_bump(bear.data.materials[0], scale=90.0, strength=0.35, detail=8.0)
+    noise_bump(bear.data.materials[0], scale=48.0, strength=0.34, detail=8.0)
 
-    # fur shell: a copy of the body, inflated a few millimetres and broken up by a
-    # fine noise displace. Particle strands were tried first and blew up to metres
-    # (hair_length is not in object space here) — see V3 notes.
-    bpy.ops.object.select_all(action="DESELECT")
-    bear.select_set(True)
-    bpy.context.view_layer.objects.active = bear
-    bpy.ops.object.duplicate()
-    fur = bpy.context.object
-    fur.name = "BEAR_fur_shell"
-    sol = fur.modifiers.new("shell", "SOLIDIFY")
-    sol.thickness = 0.012
-    sol.offset = 1.0
-    tex = bpy.data.textures.new("fur_noise", type="VORONOI")
-    tex.noise_scale = 0.012
-    tex.distance_metric = "DISTANCE"
-    disp = fur.modifiers.new("furdisp", "DISPLACE")
-    disp.texture = tex
-    disp.strength = 0.018
-    disp.mid_level = 0.35
-    fur.data.materials.clear()
-    fur.data.materials.append(principled("BEAR_fur_shell", (0.115, 0.082, 0.058), rough=0.88, spec=0.16))
-    noise_bump(fur.data.materials[0], scale=200.0, strength=0.35, detail=10.0)
+    # fur: a shell over the body proved to read as a ghost second silhouette
+    # (it did not follow the pose tightly enough and its displaced copy showed up as
+    # a woolly outline next to the body). Dropped: the coat is shading only, on the
+    # body mesh itself, plus the bump below. Everything visible is the bear.
+    fur = None
+
+    if not face:
+        bear["face_parts"] = []
+        bear["fur"] = "shading-only"
+        link(bear, col)
+        return bear
+
+    # ---- face: a young cave bear reads from three marks only - eye, nose, mouth
+    # The body has been remeshed and relaxed by now, which moves the surface by a
+    # couple of centimetres: anything placed from hand-written coordinates ends up
+    # buried inside the head (that is exactly what happened on the first pass - two
+    # spheres rendered nowhere and only the nose showed). So every mark is placed by
+    # casting a ray at the finished mesh and sitting it just proud of the hit point.
+    face = []
+
+    def surface_hit(origin, direction):
+        dg = bpy.context.evaluated_depsgraph_get()
+        ev = bear.evaluated_get(dg)
+        ok, loc, nor, _ = ev.ray_cast(Vector(origin), Vector(direction).normalized())
+        return (Vector(loc), Vector(nor)) if ok else (None, None)
+
+    def eye(sx):
+        # from the front, a little to the side: the natural eye socket direction
+        d = Vector((0.62 * sx, 0.70, 0.30)).normalized()
+        origin = Vector((0.0, 1.32, 1.14)) + d * 0.9
+        loc, nor = surface_hit(origin, -d)
+        if loc is None:
+            print(f"WARN eye{sx}: no surface hit")
+            return
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.026, segments=24, ring_count=12,
+                                             location=loc - nor * 0.017)
+        o = bpy.context.object
+        o.name = f"FACE_eyeball_{sx}"
+        o.data.materials.append(principled("EYE_white", (0.17, 0.13, 0.10), rough=0.24, spec=0.45))
+        # iris: sits on the front of the eyeball, facing the same way as the socket
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.017, segments=20, ring_count=10,
+                                             location=loc - nor * 0.017 + nor * 0.015)
+        o2 = bpy.context.object
+        o2.name = f"FACE_iris_{sx}"
+        o2.scale = (1.0, 1.0, 0.55)
+        o2.data.materials.append(principled("EYE_iris", (0.014, 0.011, 0.009), rough=0.16, spec=0.9))
+        face.extend([o, o2])
+
+    for sx in (-1, 1):
+        eye(sx)
+
+    # nose pad: wet, dark, and the only specular thing on the animal
+    loc, nor = surface_hit((0.0, 2.6, 1.045), (0.0, -1.0, 0.0))
+    if loc is not None:
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.050, segments=24, ring_count=12,
+                                             location=loc + nor * 0.008)
+        nose = bpy.context.object
+        nose.name = "FACE_nose_pad"
+        nose.scale = (1.0, 0.55, 0.80)
+        nose.data.materials.append(principled("NOSE_wet", (0.030, 0.026, 0.024), rough=0.34, spec=0.55))
+        face.append(nose)
+    else:
+        print("WARN nose: no surface hit")
+
+    # mouth line: a thin dark curve tucked under the muzzle, sampled on the skin
+    pts = []
+    for x in (-0.085, -0.05, 0.0, 0.05, 0.085):
+        loc, nor = surface_hit((x, 2.6, 0.965), (0.0, -1.0, 0.0))
+        if loc is not None:
+            pts.append((x, loc.y + 0.004, 0.975))
+    if len(pts) >= 3:
+        cu = bpy.data.curves.new("mouth", type="CURVE")
+        cu.dimensions = "3D"
+        cu.bevel_depth = 0.006
+        cu.bevel_resolution = 2
+        sp = cu.splines.new("BEZIER")
+        sp.bezier_points.add(len(pts) - 1)
+        for bp, co in zip(sp.bezier_points, pts):
+            bp.co = co
+            bp.handle_left_type = bp.handle_right_type = "AUTO"
+        mouth = bpy.data.objects.new("FACE_mouth", cu)
+        col.objects.link(mouth)
+        mouth.data.materials.append(principled("MOUTH", (0.006, 0.005, 0.004), rough=0.55))
+        face.append(mouth)
+
+    for o in face:
+        link(o, col)
+        o.parent = bear
+        o.matrix_parent_inverse = bear.matrix_world.inverted()
+    bear["face_parts"] = [o.name for o in face]
+    bear["fur"] = "shading-only"
 
     link(bear, col)
     return bear
@@ -260,7 +333,7 @@ def build_set(col):
     bpy.ops.object.light_add(type="AREA", location=(0.0, 6.0, 2.2))
     fill = bpy.context.object
     fill.name = "LIGHT_mouth"
-    fill.data.energy = 260.0
+    fill.data.energy = 200.0
     fill.data.color = (0.42, 0.58, 0.95)
     fill.data.size = 4.0
     fill.rotation_euler = Euler((math.radians(-70), 0, 0))
@@ -268,25 +341,33 @@ def build_set(col):
     bpy.ops.object.light_add(type="AREA", location=(3.4, -2.6, 2.4))
     key = bpy.context.object
     key.name = "LIGHT_torch"
-    key.data.energy = 420.0
+    key.data.energy = 260.0
     key.data.color = (1.0, 0.62, 0.34)
     key.data.size = 0.8
     key.rotation_euler = (Vector((0, 0.2, 1.1)) - Vector((3.4, -2.6, 2.4))).to_track_quat("-Z", "Y").to_euler()
 
-    for o in (floor, wall, ring, log, fire, fill, key):
+    bpy.ops.object.light_add(type="AREA", location=(-2.2, -1.6, 2.0))
+    rim = bpy.context.object
+    rim.name = "LIGHT_rim"
+    rim.data.energy = 95.0
+    rim.data.color = (0.38, 0.52, 0.90)
+    rim.data.size = 2.6
+    rim.rotation_euler = (Vector((0, 0.3, 1.15)) - Vector((-2.2, -1.6, 2.0))).to_track_quat("-Z", "Y").to_euler()
+
+    for o in (floor, wall, ring, log, fire, fill, key, rim):
         link(o, col)
     return floor
 
 
-def build_camera(col, target=(0, 0.30, 1.00), loc=(5.4, -4.6, 1.30)):
+def build_camera(col, target=(0, 0.42, 1.05), loc=(3.35, 4.75, 1.26)):
     bpy.ops.object.camera_add(location=loc)
     cam = bpy.context.object
     cam.name = "CAM_shot3"
-    cam.data.lens = 42.0
+    cam.data.lens = 44.0
     cam.data.sensor_width = 36.0
     cam.data.dof.use_dof = True
     cam.data.dof.focus_distance = (Vector(target) - Vector(loc)).length
-    cam.data.dof.aperture_fstop = 2.8
+    cam.data.dof.aperture_fstop = 3.5
     d = Vector(target) - Vector(loc)
     cam.rotation_euler = d.to_track_quat("-Z", "Y").to_euler()
     link(cam, col)
@@ -344,9 +425,9 @@ def main():
     print("blend:", blend)
 
     if a.stills:
-        for i, (loc, tgt) in enumerate([((3.6, -3.1, 1.55), (0, 0.35, 1.15)),      # 3/4 front
-                                        ((4.4, 0.2, 1.35), (0, 0.3, 1.05)),        # side
-                                        ((1.8, -3.6, 1.15), (0, 0.35, 1.10))]):    # low, near fire
+        for i, (loc, tgt) in enumerate([((3.3, 3.5, 1.60), (0, 0.30, 1.10)),      # 3/4 front
+                                        ((4.5, 0.55, 1.40), (0, 0.25, 1.05)),      # side
+                                        ((1.35, 3.30, 0.85), (0, 0.35, 1.15))]):   # low hero
             cam.location = Vector(loc)
             cam.rotation_euler = (Vector(tgt) - Vector(loc)).to_track_quat("-Z", "Y").to_euler()
             path = os.path.join(out_dir, f"shot3_view{i}.png")

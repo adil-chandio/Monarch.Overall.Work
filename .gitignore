@@ -131,10 +131,16 @@ research/viral_og_v21/film3d/out/*.mp4
 
 # render output (large, regenerable): keep the preview sheet, not the frames
 research/viral_og_v21/film3d/out/v3/*.mp4
+research/viral_og_v21/film3d_blender/shots/out/*.mp4
 
 # blender_local: machine-local build products
 tools/blender_local/.vendored/
 tools/blender_local/x11_shim/*.so*
 tools/blender_local/x11_shim/libx11shim.so
 research/viral_og_v21/film3d_blender/shots/out/*.blend
-research/viral_og_v21/film3d_blender/shots/out/*.png1
+research/viral_og_v21/film3d_blender/shots/out/*.blend1
+# frame sequences are rebuildable and large; only the contact sheet / stitched mp4 stays
+research/viral_og_v21/film3d_blender/shots/out/walk_*.png
+research/viral_og_v21/film3d_blender/shots/out/_seq/
+research/viral_og_v21/film3d_blender/out/final_v4/seg_*.mp4
+research/viral_og_v21/film3d_blender/out/final_v4/video_only.mp4
