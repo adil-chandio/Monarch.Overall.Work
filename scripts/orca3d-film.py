@@ -112,18 +112,32 @@ def swim(model_matrix, t, phase=0.0, amp=0.06, freq=1.1):
     return m
 
 
-def travelling_wave_mesh(mesh, t, phase=0.0, amp=0.22, freq=1.3, speed=1.0):
+def travelling_wave_mesh(mesh, t, phase=0.0, amp=0.22, freq=1.3, speed=1.0,
+                         _span=None):
     """Displace vertices sideways by a wave that travels from head to fluke.
 
-    The patches are deformed through the same displacement as the hull they sit on,
-    so they stay locked to the body instead of sliding off it.
+    The displacement amplitude is keyed on where a vertex sits along the body, so
+    the same formula has to see the same body for the hull AND for the markings
+    painted on it. It did not: the recursion below handed the patch mesh back
+    through this function, and the patch's own z-range is shorter than the body's
+    (it stops at the throat and the peduncle). Normalising each by its own extent
+    meant one world z got two different amplitudes - measured 0.069 m of relative
+    slip mid-body - so the markings slid across the hull and sank through it. On
+    screen that is a black blob where a white flank should be, changing shape from
+    frame to frame.
+
+    `_span` pins the normalisation to the body's extent for both calls.
     """
     out = mesh.copy()
+    if _span is None:
+        z_all = mesh.v[:, 2]
+        _span = (float(z_all.min()), float(z_all.max()))
     pat = getattr(mesh, "patches", None)
     if pat is not None and pat is not mesh:
-        out.patches = travelling_wave_mesh(pat, t, phase, amp, freq, speed)
+        out.patches = travelling_wave_mesh(pat, t, phase, amp, freq, speed, _span)
     z = out.v[:, 2]
-    k = np.clip((1.0 - (z - z.min()) / max(1e-6, z.max() - z.min())), 0, 1)
+    z0, z1 = _span
+    k = np.clip((1.0 - (z - z0) / max(1e-6, z1 - z0)), 0, 1)
     # more amplitude toward the tail
     a = amp * (0.25 + 1.6 * k ** 2.2)
     out.v[:, 0] += np.sin(z * freq - t * 3.4 * speed + phase) * a
@@ -219,6 +233,47 @@ def composite(r, t, bg_top=(0.045, 0.145, 0.195), bg_bot=(0.006, 0.020, 0.032),
     return im
 
 
+
+def _shadow_into_buffer(r, pos, size=(3.0, 1.0), strength=0.5):
+    """Multiply an occlusion ellipse into the render buffer, in place.
+
+    Same projection as contact_shadow(), but it must run before composite(): once
+    the depth has been resolved into metres the buffer no longer knows which pixels
+    are water behind the animal and which are open water beside it.
+    """
+    h, w = r.h, r.w
+    p = np.array([pos[0], pos[1], pos[2], 1.0], dtype=np.float32)
+    v = (p @ r.view.T)[:3]
+    if v[2] <= 0.05:
+        return
+    cl = np.array([v[0], v[1], v[2], 1.0], dtype=np.float32) @ r.proj.T
+    if cl[3] <= 1e-5:
+        return
+    ndc = cl[:3] / cl[3]
+    cx = (ndc[0] * 0.5 + 0.5) * w
+    cy = (1.0 - (ndc[1] * 0.5 + 0.5)) * h
+    dist = float(np.linalg.norm(v))
+    rad = max(6.0, (w / 1280.0) * 300.0 * float(size[0]) / max(dist, 1.0))
+    rad_y = rad * float(size[1]) / float(size[0])
+    if not (-2 * rad <= cx <= w + 2 * rad and -2 * rad_y <= cy <= h + 2 * rad_y):
+        return
+    # work in the BUFFER's pixel space, which is w*ssaa by h*ssaa - the mask was
+    # built at display resolution and then multiplied into the supersampled buffer
+    bw, bh = r.w, r.h
+    sc = bw / float(w)
+    cx, cy, rad, rad_y = cx * sc, cy * sc, rad * sc, rad_y * sc
+    yy = np.arange(bh, dtype=np.float32)[:, None]
+    xx = np.arange(bw, dtype=np.float32)[None, :]
+    d2 = ((xx - cx) / rad) ** 2 + ((yy - cy) / rad_y) ** 2
+    m = np.exp(-d2 * 1.5) * float(strength)
+    # only darken water that is behind the animal; never the animal itself.
+    # linear_depth() resolves to display resolution, so compare against a
+    # nearest-neighbour upsample of the same mask at buffer size.
+    zl = r.linear_depth()
+    behind = (zl > dist * 0.85)
+    behind = np.repeat(np.repeat(behind, r.ssaa, axis=0), r.ssaa, axis=1)
+    r.colour *= 1.0 - (m[..., None] * behind[..., None])
+
 def contact_shadow(im, r, pos, size=(2.6, 1.1), strength=0.55, lift=1.6):
     """Darken water directly beneath a body, so it sits in the scene.
 
@@ -254,6 +309,30 @@ def contact_shadow(im, r, pos, size=(2.6, 1.1), strength=0.55, lift=1.6):
     m = np.exp(-d2 * 1.35) * float(strength)
     return im * (1.0 - m[..., None])
 
+
+
+def frustum_mesh(hw_bot, hw_top, height, depth, colour=(0.05, 0.10, 0.13)):
+    """A truncated pyramid: rectangular top and bottom faces, four tapered sides.
+
+    box_mesh() can only make a slab. A trophic pyramid needs the sides to lean, and
+    a stacked slab is what made the diagram read as a bar chart on its back.
+    """
+    y0, y1 = -height * 0.5, height * 0.5
+    hz = depth * 0.5
+    v = [
+        (-hw_bot, y0, -hz), (hw_bot, y0, -hz), (hw_bot, y0, hz), (-hw_bot, y0, hz),
+        (-hw_top, y1, -hz), (hw_top, y1, -hz), (hw_top, y1, hz), (-hw_top, y1, hz),
+    ]
+    t = [
+        (0, 1, 5), (0, 5, 4),      # back
+        (3, 7, 6), (3, 6, 2),      # front
+        (0, 4, 7), (0, 7, 3),      # left
+        (1, 2, 6), (1, 6, 5),      # right
+        (4, 5, 6), (4, 6, 7),      # top
+        (0, 3, 2), (0, 2, 1),      # bottom
+    ]
+    return Mesh(np.array(v, dtype=np.float32), np.array(t, dtype=np.int32),
+                np.asarray(colour, dtype=np.float32) * 255.0)
 
 def box_mesh(w, h, d, colour=(0.05, 0.10, 0.13)):
     """A closed rectangular slab, wound so the normals point outward.
@@ -486,7 +565,7 @@ def draw_orca(r, model, t=None, phase=0.0, amp=0.12, freq=1.6):
     patches = getattr(body, "patches", None)
     if patches is not None:
         # draw the markings as decals so they always beat the hull they sit on
-        r.draw(patches, model, decal=0.0009)
+        r.draw(patches, model)
 
 
 def draw_whale(r, name, length, model, t=None, phase=0.0, amp=0.16, freq=0.9, speed=1.0):
@@ -513,10 +592,22 @@ def b_orcas_in(r, t, t0, t1):
         draw_orca(r, bank(ry=-96, rz=6 * math.sin(t * 0.8 + ph), pos=(px, py, pz)),
                   t, ph, 0.14, 1.6)
         placed.append((px, py, pz))
-    im = composite(r, t, focus=9.0, dof=4.0, rays=0.28, particle_n=140,
-                   ray_far=16.0, surface={"height": 0.045, "strength": 0.95})
+    # Contact shadow BEFORE the post stack, not after it.
+    #
+    # It used to run on the finished image, i.e. after fog, caustics, rays and
+    # grade. By then the frame has no depth left to reason about and the shadow is
+    # just a dark ellipse multiplied into whatever pixels happen to be there - so it
+    # darkened open water beside the animals as often as the water under them, and
+    # because `lift` subtracted 2.0 m from a body only 1.9 m above the axis, the
+    # ellipse landed mostly off the bottom of frame. The pod read as floating.
+    #
+    # Applied to the render buffer instead, the ellipse sits under the body in
+    # screen space and the post stack then hazes it along with everything else at
+    # that distance, which is what a real occlusion does.
     for (px, py, pz) in placed:
-        im = contact_shadow(im, r, (px, py - 1.25, pz), size=(3.4, 1.15), strength=0.62, lift=2.0)
+        _shadow_into_buffer(r, (px, py - 0.75, pz), size=(3.0, 0.95), strength=0.55)
+    im = composite(r, t, focus=9.0, dof=1.2, rays=0.28, particle_n=140,
+                   ray_far=16.0, surface={"height": 0.045, "strength": 0.95})
     return im
 
 
@@ -645,38 +736,47 @@ def b_pyramid(r, t, t0, t1):
     k = 0.62 + 0.38 * ease_in_out(clamp01((t - t0) / (t1 - t0)))
     # Above and to one side, looking down: from eye level a stack of 0.46 m slabs
     # 8 m away is four hairlines. The height is what makes it read as a stack.
-    eye = np.array([3.2, 4.4, -8.6])
-    r.set_camera(eye, np.array([0.0, -0.20, 0.0]), fov=44)
+    eye = np.array([2.1, 3.0, -7.0])
+    r.set_camera(eye, np.array([0.0, -0.55, 0.0]), fov=42)
 
     labels = ["SHARKS", "SEALS", "FISH", "KRILL"]
-    # Looking down, a higher world y is nearer the lens, so it lands lower in the
-    # frame. The base of a trophic pyramid is the widest tier and must sit at the
-    # bottom of the picture, so it gets the high y and the apex gets the low one.
-    def y_of(i):
-        return -1.72 + (3 - i) * (thick + 0.52)
 
-    # width falls with height, the way an energy budget does; thickness is what
-    # makes it read as a stack of masses rather than a bar chart
-    widths = [3.05, 4.35, 5.75, 7.20]
-    thick = 0.40
+    # A trophic pyramid is a pyramid. The old version drew four rectangular slabs
+    # of decreasing width at decreasing y and stacked them, which is a bar chart
+    # lying on its back - and because every tier shared one depth and one colour,
+    # the five planes read as a single crumpled sheet of blue paper.
+    #
+    # Built here as four truncated pyramids stacked apex-up, each one an actual
+    # solid with four tapered sides. Krill at the bottom (index 3), sharks at the
+    # apex (index 0), so the widest tier sits at the base.
+    THICK = 0.58
+    half = [1.52, 2.20, 3.00, 3.95]        # half-width of each tier's top face
+    base_y = -2.05
     for i in range(4):
         # reveal bottom-up: krill lands first, then the things that eat it
         rev = clamp01((k * 5.4) - (3 - i) + 0.30)
         if rev <= 0.01:
             continue
-        y = y_of(i) + (1.0 - rev) * 0.42
-        wdt = widths[i]
-        r.draw(box_mesh(wdt, thick, 3.3, colour=(0.048, 0.098, 0.128)),
-               bank(pos=(0.0, y, 0.0), ry=6.0 * i - 9.0))
+        # bottom of the stack is krill; each tier sits on the one below
+        tier_from_bottom = 3 - i
+        y0 = base_y + tier_from_bottom * (THICK - 0.015)
+        y0 += (1.0 - rev) * 0.42
+        hw_top = half[i]
+        hw_bot = half[i] + 0.42           # each tier flares out at its base
+        depth = 1.10
+        yaw = -8.0
+        shade = 0.052 + 0.020 * i
+        r.draw(frustum_mesh(hw_bot, hw_top, THICK, depth,
+                            colour=(shade, shade * 1.95, shade * 2.55)),
+               bank(pos=(0.0, y0, 0.0), ry=yaw))
         # a lit lip along the front edge: without it every tier shades to the same
         # value as the water behind it and the stack disappears into the medium
-        r.draw(box_mesh(wdt * 1.01, 0.035, 0.055, colour=(0.40, 0.66, 0.72)),
-               bank(pos=(0.0, y + thick * 0.5 - 0.015, 1.66), ry=6.0 * i - 9.0))
+        r.draw(box_mesh(hw_top * 2.02, 0.030, 0.05, colour=(0.44, 0.70, 0.76)),
+               bank(pos=(0.0, y0 + THICK * 0.5 - 0.012, depth * 0.52), ry=yaw))
+
     # the stack sits 10.3 m from this lens; focusing at 8.0 blurred the whole shot
-    im = composite(r, t, focus=10.3, dof=1.5, rays=0.35, particle_n=110,
+    im = composite(r, t, focus=7.6, dof=0.9, rays=0.35, particle_n=110,
                    ray_far=13.0, surface={"height": 0.036, "strength": 0.82})
-    im = contact_shadow(im, r, (0.0, -2.10, 0.0), size=(7.4, 3.2),
-                        strength=0.55, lift=2.4)
     im = to_pil(im)
     d2 = ImageDraw.Draw(im, "RGBA")
     ft = font(22)
@@ -684,13 +784,14 @@ def b_pyramid(r, t, t0, t1):
         rev = clamp01((k * 5.4) - (3 - i) + 0.30)
         if rev <= 0.01:
             continue
-        y = y_of(i) + (1.0 - rev) * 0.42
-        sy = project_y(r, np.array([0.0, y + thick * 0.5, 1.70]))
+        tier_from_bottom = 3 - i
+        y = base_y + tier_from_bottom * (THICK - 0.015) + (1.0 - rev) * 0.42
+        sy = project_y(r, np.array([0.0, y, 0.58]))
         if sy is None:
             continue
         bb = d2.textbbox((0, 0), labels[i], font=ft)
         tw = bb[2] - bb[0]
-        d2.text((W * 0.5 - tw / 2 + 34, sy - 34), labels[i], font=ft,
+        d2.text((W * 0.5 - tw / 2 + 26, sy - 12), labels[i], font=ft,
                 fill=BONE + (int(242 * rev),),
                 stroke_width=2, stroke_fill=(4, 10, 14, int(190 * rev)))
     return from_pil(im)

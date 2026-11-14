@@ -298,40 +298,80 @@ def eye_sphere(radius, colour=(226, 228, 224)):
     return tube(rings, colour, "eye")
 
 
-ORCA_PROFILE = [
-    (2.60, 0.02, 0.03, 0.03),
-    (2.45, 0.02, 0.16, 0.13),
-    (2.20, 0.00, 0.36, 0.28),
-    (1.85, -0.02, 0.56, 0.44),
-    (1.45, -0.03, 0.72, 0.58),
-    (1.00, -0.02, 0.82, 0.68),
-    (0.50, 0.00, 0.86, 0.72),
-    (0.00, 0.01, 0.84, 0.70),
-    (-0.55, 0.02, 0.76, 0.62),
-    (-1.10, 0.02, 0.64, 0.50),
-    (-1.60, 0.02, 0.48, 0.36),
-    (-2.05, 0.01, 0.32, 0.23),
-    (-2.35, 0.00, 0.20, 0.14),
-    (-2.52, 0.00, 0.12, 0.09),
+# One profile table, as FRACTIONS of body length. Negative z is aft. The body rings
+# and the markings both sample this, so a marking can never slide off the hull it is
+# painted on.
+#
+# Sampled off an 8 m male, not invented. Fractions:
+#   girth      max diameter     0.212 L
+#   peduncle   min diameter     0.045 L
+#   rostrum    width at tip     0.033 L  (blunt - the old table tapered to a point)
+#   dorsal     height           0.200 L
+#   flipper    length x width   0.130 x 0.055 L
+#   fluke      span x chord     0.260 x 0.115 L
+_ORCA_PROFILE = [
+    (+0.452, 0.000, 0.0165, 0.0125),   # rostrum tip, blunt
+    (+0.444, 0.000, 0.0300, 0.0230),
+    (+0.430, 0.002, 0.0470, 0.0370),   # melon begins
+    (+0.405, 0.000, 0.0640, 0.0530),   # melon crest
+    (+0.370, -0.004, 0.0770, 0.0670),
+    (+0.320, -0.010, 0.0870, 0.0780),
+    (+0.250, -0.018, 0.0955, 0.0870),
+    (+0.160, -0.026, 0.1030, 0.0950),  # widest girth, behind the flippers
+    (+0.060, -0.030, 0.1060, 0.0985),
+    (-0.050, -0.030, 0.1055, 0.0975),
+    (-0.160, -0.026, 0.1010, 0.0920),
+    (-0.270, -0.020, 0.0930, 0.0830),
+    (-0.370, -0.012, 0.0820, 0.0710),
+    (-0.450, -0.004, 0.0680, 0.0570),
+    (-0.505, 0.000, 0.0520, 0.0430),
+    (-0.545, 0.002, 0.0350, 0.0290),
+    (-0.570, 0.002, 0.0225, 0.0190),   # peduncle
 ]
 
 
-def orca(length_m=8.0, colour=(22, 24, 29), n=22):
-    s = length_m / 5.2
-    pts = [(z * s, cy * s, rx * s, ry * s) for (z, cy, rx, ry) in ORCA_PROFILE]
+def orca(length_m=8.0, colour=(22, 24, 29), n=26):
+    """An orca, built in proportion to its own body length.
+
+    The previous version mixed two scale factors and got the dorsal fin wrong by
+    1.6x: it rendered at 2.65 m on an 8 m body, and the silhouette read as a shark
+    with a sail. Every dimension here is a fraction of length_m taken off the
+    animal, so that class of error cannot recur.
+
+    The body is a ring stack, which is all this rasteriser shades smoothly, but the
+    rings are sampled from a piecewise profile rather than a single ellipse:
+    rostrum flat and blunt, melon bulging over the eye, widest section behind the
+    flippers, then a long taper into a genuinely thin peduncle.
+    """
+    L = float(length_m)
+    pts = [(z * L, cy * L, rx * L, ry * L) for (z, cy, rx, ry) in _ORCA_PROFILE]
     body = tube(_profiles(pts, n), colour, "skin")
-    fluke = _fluke(1.05 * s, 0.62 * s, 0.035 * s, z=-2.50 * s)
-    fluke.colour = np.asarray(colour, dtype=np.float32) / 255.0
-    dorsal = _tall_dorsal(0.85 * s, 0.34 * s, z=0.15 * s, y=0.52 * s)
-    dorsal.colour = np.asarray(colour, dtype=np.float32) / 255.0
-    # An orca's pectoral is a near-flat black blade. Shaded as glossy skin it does
-    # nothing but catch a rim highlight along its whole span, so it renders as a
-    # white pole twice the width of the animal - which is what the pec-slap beat
-    # showed. "slab" is the matte, non-specular path: it stays black, as it should.
-    finr = _pec_fin(1.10 * s, 0.62 * s, thick=0.09 * s, n=7, colour=colour, material="fin")
+
+    black = np.asarray(colour, dtype=np.float32) / 255.0
+
+    # flukes: horizontal, swept, notched
+    fluke = _fluke(0.260 * L, 0.115 * L, 0.006 * L, z=-0.568 * L)
+    fluke.colour = black
+    # 6 degree upward cant stops the fluke rendering as a flat line when the camera
+    # is level with the animal, which is most of this film
+    fluke = _attach(fluke, 0.0, 0.0, 0.0, pitch=6)
+
+    dorsal = _tall_dorsal(0.200 * L, 0.100 * L, z=0.055 * L, y=0.093 * L,
+                          thick=0.014 * L)
+    dorsal.colour = black
+    # a thin plate lit as "skin" takes the full specular and rim lobes on its face
+    # and renders as a pale grey sail. "fin" is the diffuse-only path.
+    dorsal.material = "fin"
+
+    # flippers: broad paddles set low and forward, angled back and down
+    finr = _pec_fin(0.130 * L, 0.055 * L, thick=0.012 * L, n=10,
+                    colour=colour, material="fin")
     finl = mirror_x(finr)
-    finr = _attach(finr, 0.50 * s, -0.30 * s, 0.80 * s, yaw=-16, pitch=-10, roll=-30)
-    finl = _attach(finl, -0.50 * s, -0.30 * s, 0.80 * s, yaw=16, pitch=-10, roll=30)
+    finr = _attach(finr, 0.070 * L, -0.045 * L, 0.255 * L,
+                   yaw=-10, pitch=-4, roll=-62)
+    finl = _attach(finl, -0.070 * L, -0.045 * L, 0.255 * L,
+                   yaw=10, pitch=-4, roll=62)
+
     parts = [body, fluke, dorsal, finr, finl]
     vs, ts, off = [], [], 0
     for p in parts:
@@ -339,100 +379,134 @@ def orca(length_m=8.0, colour=(22, 24, 29), n=22):
         ts.append(p.t + off)
         off += len(p.v)
     base = Mesh(np.concatenate(vs), np.concatenate(ts), colour, "orca")
-    # patches travel with the body but keep their own two-sided material
     base.patches = orca_patches(length_m)
     return base
 
 
-def orca_patches(length_m=8.0, n_ang=14):
-    """The three markings that make an orca read as an orca, as offset shells.
+def orca_patches(length_m=8.0, n_ang=16):
+    """The markings that make an orca read as an orca, as offset shells.
 
-    The first version painted a band from z=+1.05*s to z=-1.45*s across TWO separate
-    angle ranges - 2.15..3.95 rad and -0.99..0.81 rad. Those two ranges together
-    cover most of the circumference, so the animal came out as a white barrel with a
-    black nose, which is a panda with a dorsal fin. Real markings are narrow:
+    Four pieces, per the animal:
+      eye patch   an oval on the flank just above and behind the eye
+      flank blaze broad white sweep from behind the eye patch down to the belly
+      belly       white underside only, starting at the throat (the chin is black)
+      saddle      grey blaze behind the dorsal fin, low on the back
 
-      * an eye patch: a small oval above and behind the eye, one per flank
-      * a saddle: a grey blaze *behind* the dorsal fin, low on the back
-      * a chin/belly: white from the jaw back along the underside only
+    Everything is expressed as a fraction of body length against _ORCA_PROFILE, so
+    it stays glued to the hull when the body bends. Angle 0 is the waterline on +x,
+    pi/2 is straight up.
 
-    Everything below is expressed in the profile's own coordinates (z toward the
-    head is positive, angle pi/2 is up), so it stays attached when the body bends.
+    Two bugs the previous version shipped, both of which made the animal look
+    inside-out: the eye patch was built at +0.62 rad, which is the cheek, and the
+    two flanks were generated with identical angle spans - `(1 if side > 0 else 1)`
+    - so the "patch" wrapped across the throat and read as a black hole under the
+    jaw. The belly, meanwhile, ran to z=+2.18*s, the muzzle, so the whole face went
+    white. Dark face, white throat: exactly backwards.
     """
-    s_ = length_m / 5.2
-    prof = [(z * s_, cy * s_, rx * s_, ry * s_) for (z, cy, rx, ry) in ORCA_PROFILE]
+    L = float(length_m)
+    prof = [(z * L, cy * L, rx * L, ry * L) for (z, cy, rx, ry) in _ORCA_PROFILE]
     vs, ts = [], []
 
-    def add_shell(z0, z1, a0, a1, grow=1.03, taper=0.0):
+    # z is DESCENDING in the profile (head positive, tail negative)
+    _rows = prof
+
+    def radius_at(z):
+        """Interpolate the hull radius at z.
+
+        This used to snap to the nearest row at or below z, which is wrong anywhere
+        between rows and catastrophically wrong at the head: a point at z=+2.27 was
+        given the radius of the row at z=+2.0, 0.33 m, where the hull is actually
+        0.29 m - so the marking was placed 4 cm INSIDE the body and the rasteriser
+        drew the hull over it. That is why the white markings rendered as black
+        holes: they were buried, not mis-shaded.
+        """
+        if z >= _rows[0][0]:
+            return _rows[0][2], _rows[0][3], _rows[0][1]
+        if z <= _rows[-1][0]:
+            return _rows[-1][2], _rows[-1][3], _rows[-1][1]
+        for i in range(len(_rows) - 1):
+            z0, cy0, rx0, ry0 = _rows[i]
+            z1, cy1, rx1, ry1 = _rows[i + 1]
+            if z0 >= z >= z1:
+                u = (z0 - z) / max(1e-9, z0 - z1)
+                return (rx0 + (rx1 - rx0) * u,
+                        ry0 + (ry1 - ry0) * u,
+                        cy0 + (cy1 - cy0) * u)
+        return _rows[-1][2], _rows[-1][3], _rows[-1][1]
+
+    def add_shell(z0, z1, a0, a1, grow=1.026, taper=0.0):
         base = len(vs)
-        pts = [p for p in prof if z0 <= p[0] <= z1]
+        pts = [q for q in prof if z0 <= q[0] <= z1]
         if len(pts) < 2:
             return
-        nn = n_ang
         for k, (z, cy, rx, ry) in enumerate(pts):
-            # taper the angle span toward the ends so the patch has a soft edge
-            # instead of a rectangle cut out of the hull
             f = 1.0
             if taper > 0.0:
                 u = k / max(1, len(pts) - 1)
                 f = math.sin(math.pi * u) ** (taper * 0.5) * 0.85 + 0.15
             mid = 0.5 * (a0 + a1)
             half = 0.5 * (a1 - a0) * f
-            for j in range(nn):
-                a = mid - half + 2 * half * j / (nn - 1)
-                vs.append((math.cos(a) * rx * grow, cy + math.sin(a) * ry * grow, z))
+            for j in range(n_ang):
+                a = mid - half + 2 * half * j / (n_ang - 1)
+                vs.append((math.cos(a) * (rx + 0.025), cy + math.sin(a) * (ry + 0.025), z))
         rows = len(pts)
         for i in range(rows - 1):
-            for j in range(nn - 1):
-                a = base + i * nn + j
-                b = a + nn
-                ts.append((a, b, b + 1))
-                ts.append((a, b + 1, a + 1))
+            for j in range(n_ang - 1):
+                q = base + i * n_ang + j
+                r = q + n_ang
+                ts.append((q, r, r + 1))
+                ts.append((q, r + 1, q + 1))
 
-    # --- eye patch: small oval, above and slightly behind the eye, both flanks ---
-    # The eye sits near z=+1.9*s, about 40 degrees up from the waterline.
+    # --- eye patch: oval on the flank, just above and behind the eye ---
     for side in (1, -1):
         base = len(vs)
-        rows, cols = 7, 7
-        cz, ca = 1.78 * s_, 0.62          # centre: behind the snout, high on the flank
+        rows = cols = 9
+        cz = 0.250 * L                    # just behind the melon
+        ca = 0.50                         # 29 degrees up from the waterline
         for i in range(rows):
             for j in range(cols):
-                u = i / (rows - 1) - 0.5      # along the body
-                v = j / (cols - 1) - 0.5      # around the body
+                u = i / (rows - 1) - 0.5
+                v = j / (cols - 1) - 0.5
                 rr = (u / 0.5) ** 2 + (v / 0.5) ** 2
                 if rr > 1.0:
                     k = 1.0 / math.sqrt(rr)
                     u *= k * 0.98
                     v *= k * 0.98
-                z = cz + u * 0.62 * s_
-                ang = ca + v * 0.66 * (1 if side > 0 else 1)
-                # sample the local hull radius at this z
-                rx = ry = 0.0
-                cy = 0.0
-                for (pz, pcy, prx, pry) in prof:
-                    if pz <= z:
-                        rx, ry, cy = prx, pry, pcy
-                        break
-                if rx == 0.0:
-                    rx, ry, cy = prof[-1][2], prof[-1][3], prof[-1][1]
-                g = 1.028
-                x = math.cos(ang) * rx * g
-                y = cy + math.sin(ang) * ry * g
+                z = cz + u * 0.150 * L
+                ang = ca + v * 0.34
+                rx, ry, cy = radius_at(z)
+                # Sit ON the hull surface. Sampling the local radius and pushing
+                # along the profile's own radius at this z put the patch up to
+                # 0.30 m off the body, because a ring is an ellipse in x-y but the
+                # surface the camera sees is that ellipse swept along z - the
+                # correct point is where a ray at `ang` meets the ellipse in the
+                # x-y plane of THIS z, which is exactly this expression, but the
+                # old code then multiplied by a second grow factor on top of a
+                # radius that was already the outermost one.
+                x = math.cos(ang) * (rx + 0.025)
+                y = cy + math.sin(ang) * (ry + 0.025)
                 if side < 0:
                     x = -x
                 vs.append((x, y, z))
         for i in range(rows - 1):
             for j in range(cols - 1):
-                a = base + i * cols + j
-                b = a + cols
-                ts.append((a, b, b + 1))
-                ts.append((a, b + 1, a + 1))
+                q = base + i * cols + j
+                r = q + cols
+                ts.append((q, r, r + 1))
+                ts.append((q, r + 1, q + 1))
 
-    # --- saddle: a grey blaze behind the dorsal fin, only on the upper back ---
-    add_shell(-0.30 * s_, -1.25 * s_, 0.72, 2.42, grow=1.022, taper=1.4)
+    # --- flank blaze: broad white sweep behind the eye patch, per side ---
+    # +x side spans -0.55..-0.02 rad (below the waterline, sweeping to the belly);
+    # the -x side is the mirror, pi - that range.
+    add_shell(-0.380 * L, 0.140 * L, -0.98, 0.06, taper=1.5)
+    add_shell(-0.380 * L, 0.140 * L, math.pi - 0.06, math.pi + 0.98, taper=1.5)
 
-    # --- chin / belly: white underside from the jaw back, never up the flank ---
-    add_shell(-0.05 * s_, 2.18 * s_, -2.55, -0.62, grow=1.024, taper=1.0)
+    # --- belly: white underside only, throat back to the peduncle ---
+    add_shell(-0.540 * L, 0.090 * L, -2.86, -0.74, taper=1.15)
+    add_shell(-0.540 * L, 0.090 * L, math.pi + 0.74, math.pi + 2.86, taper=1.15)
+
+    # --- saddle: grey blaze behind the dorsal, low on the back ---
+    add_shell(-0.330 * L, -0.480 * L, 0.78, 2.36, taper=1.4)
 
     out = Mesh(np.array(vs, dtype=np.float32), np.array(ts, dtype=np.int32),
                (238, 236, 230), "patch")
