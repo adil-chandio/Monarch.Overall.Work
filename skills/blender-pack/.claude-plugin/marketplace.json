@@ -1,0 +1,52 @@
+{
+  "name": "blender-skills",
+  "owner": {
+    "name": "arjun988",
+    "url": "https://github.com/arjun988"
+  },
+  "metadata": {
+    "description": "Blender Skills production skills for Cursor, Claude Code, Kiro and Codex with a Blender 4.x API contract and validated skill structure",
+    "version": "1.4.0"
+  },
+  "plugins": [
+    {
+      "name": "blender-skills",
+      "source": "./",
+      "description": "94 specialized Blender skills: director orchestration, modeling/production/pipeline, extended art styles, horror packs, world/mood packs, gameplay genre direction, character archetypes, and visual eras. Every skill is validated: no stubs, resolvable references, and a pinned Blender 4.2/4.5 API contract. Built for Blender MCP.",
+      "version": "1.4.0",
+      "author": {
+        "name": "blender-skills"
+      },
+      "homepage": "https://github.com/arjun988/blender-skills",
+      "repository": "https://github.com/adil-chandio/Monarch.Overall.Work",
+      "license": "MIT",
+      "keywords": [
+        "blender",
+        "3d",
+        "game-art",
+        "technical-artist",
+        "blender-mcp",
+        "hard-surface",
+        "prop-artist",
+        "vehicle-artist",
+        "environment-art",
+        "character-art",
+        "rigging",
+        "pbr",
+        "geometry-nodes",
+        "export-pipeline",
+        "unity-export",
+        "unreal-export"
+      ],
+      "category": "creative",
+      "tags": [
+        "blender",
+        "3d",
+        "game-development",
+        "technical-art",
+        "mcp"
+      ],
+      "skills": "./.claude/skills/"
+    }
+  ]
+}
