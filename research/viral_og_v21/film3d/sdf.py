@@ -26,16 +26,26 @@ def smin(a, b, k):
     return b * (1 - h) + a * h - k * h * (1 - h)
 
 
+def _cap(p, c, r):
+    """Conservative bound for an ellipsoid at (c, r): cheap, never underestimates."""
+    return ellipsoid(p, (c[0], c[1], c[2]), (r[0] * 1.02, r[1] * 1.02, r[2] * 1.02))
+
+
 def smax(a, b, k):
     return -smin(-a, -b, k)
 
 
 def ellipsoid(p, c, r):
-    """Approximate SDF of an axis-aligned ellipsoid (good enough for sphere tracing)."""
-    q = (p - np.asarray(c, np.float32)) / np.asarray(r, np.float32)
-    k0 = np.linalg.norm(q, axis=-1)
-    q2 = q / np.asarray(r, np.float32)
-    k1 = np.linalg.norm(q2, axis=-1) + 1e-8
+    """Approximate SDF of an axis-aligned ellipsoid (good enough for sphere tracing).
+
+    Written out with a single squared-norm pass: it is called thousands of times
+    per frame, and this is the hot inner loop of the whole renderer.
+    """
+    qx = (p[..., 0] - c[0]) * (1.0 / r[0])
+    qy = (p[..., 1] - c[1]) * (1.0 / r[1])
+    qz = (p[..., 2] - c[2]) * (1.0 / r[2])
+    k0 = np.sqrt(qx * qx + qy * qy + qz * qz) + 1e-9
+    k1 = np.sqrt((qx / r[0]) ** 2 + (qy / r[1]) ** 2 + (qz / r[2]) ** 2) + 1e-9
     return k0 * (k0 - 1.0) / k1
 
 
@@ -160,7 +170,11 @@ class Bear:
         for part in self._parts(pose, walk, phase, breathe):
             if len(part) == 3:
                 c, r, _ = part
-                d = smin(d, ellipsoid(q, c, r), 0.13)
+                far = (np.abs(q[..., 0] - c[0]) > r[0] * 4.0) | \
+                      (np.abs(q[..., 1] - c[1]) > r[1] * 4.0) | \
+                      (np.abs(q[..., 2] - c[2]) > r[2] * 4.0)
+                e = np.where(far, 9.0, ellipsoid(q, c, r))
+                d = smin(d, e, 0.13)
             else:
                 c, r, ang, piv, axis, *w = part
                 qq = _rot(q, piv, axis, ang)
@@ -206,8 +220,13 @@ class Skull:
         q = np.stack([q[..., 0] * ca + q[..., 2] * sa, q[..., 1], -q[..., 0] * sa + q[..., 2] * ca], -1)
         d = np.full(q.shape[:-1], 1e3, np.float32)
         for c, r in SKULL_PARTS:
-            # a tight weld keeps the crest, the orbits and the arch as separate forms
-            d = smin(d, ellipsoid(q, c, r), 0.020)
+            # a part only affects samples inside (roughly) its own shell; skipping the
+            # far ones is exact for the same reason smin with a big b is a no-op
+            far = (np.abs(q[..., 0] - c[0]) > r[0] * 3.2) | \
+                  (np.abs(q[..., 1] - c[1]) > r[1] * 3.2) | \
+                  (np.abs(q[..., 2] - c[2]) > r[2] * 3.2)
+            e = np.where(far, 9.0, ellipsoid(q, c, r))
+            d = smin(d, e, 0.020)
         # eye sockets, nasal aperture, foramen magnum: carved out of the bone
         for sx in (-1, 1):
             # orbit, then the gap under the cheekbone that reads as an arch

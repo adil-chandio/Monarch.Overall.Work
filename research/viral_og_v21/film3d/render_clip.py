@@ -26,6 +26,20 @@ def draw_text(img, txt, pos="low"):
     d.text(((img.width - tw) / 2, y), txt, font=f, fill=(235, 233, 229))
     return img
 
+def _up(a, W, H):
+    """Bilinear upsample a low-res set pass (grey or RGB float) to frame size."""
+    if a.shape[0] == H and a.shape[1] == W:
+        return a
+    a = np.asarray(a, np.float32)
+    if a.ndim == 3 and a.shape[2] == 1:
+        a = a[..., 0]
+    if a.ndim == 3 and a.shape[2] == 3:
+        chans = [_up(a[..., i], W, H) for i in range(3)]
+        return np.stack(chans, -1)
+    im = Image.fromarray(np.ascontiguousarray(a), mode="F")
+    return np.asarray(im.resize((W, H), Image.BILINEAR), np.float32)
+
+
 _PARTICLES = {}
 
 
@@ -57,7 +71,7 @@ def kind_hint(act):
     return True
 
 
-def build_frame(T, W, H, cave, shots, starts, seed=0):
+def build_frame(T, W, H, cave, shots, starts, seed=0, set_scale=1.0):
     """One fully shaded 3D frame at film time T: cave raymarch, then solid props,
     then deferred-shaded air, then post."""
     k = max(j for j, st in enumerate(starts) if st <= T + 1e-6)
@@ -68,7 +82,11 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
     lights = [R.Light(a, b, c, kind=d, in_air=ai) for (a, b, c, d, ai) in lts]
     _advance_to(T)
 
-    hg = R.march_set(cam, cave, W, H, steps=34)
+    # march the set at (optionally) reduced resolution and upsample: the cave is a
+    # smooth tube, so this costs almost nothing in the final image
+    sw, sh = int(W * set_scale), int(H * set_scale)
+    cam_s = R.Cam(sw, sh, cam.eye, cam.eye + cam.F, fov=2.0 * np.degrees(np.arctan(sw * 0.5 / cam.f)))
+    hg = R.march_set(cam_s, cave, sw, sh, steps=34)
 
     kind = act.get("kind")
     objs, mats = [], []
@@ -104,9 +122,13 @@ def build_frame(T, W, H, cave, shots, starts, seed=0):
 
     # the set is lit with the props already in the world, so their contact shadows
     # land on the floor and the walls
-    img, depth, tr = R.shade_set(hg, cam, cave, lights,
+    img, depth, tr = R.shade_set(hg, cam_s, cave, lights,
                                   sky=(0.075, 0.100, 0.118) if kind_hint(act) else None,
                                   objs=objs)
+    if sw != W:
+        img = _up(img, W, H)
+        depth = _up(depth, W, H).copy()
+        tr = _up(tr, W, H).copy()
 
     if objs:
         hit = R.march_objects(cam, objs, W, H, depth, steps=26)
