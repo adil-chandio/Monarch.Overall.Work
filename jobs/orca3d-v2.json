@@ -1,12 +1,12 @@
 {
   "id": "orca3d-v2",
-  "status": "artifacts-pending",
+  "status": "done",
   "goal": "Skill-gated rebuild of the 60s orca film: fix the missing white markings, marine snow, god rays; rebuild the sound bed from the repo DSP engine to pass showreel.audio_qc 9/9 and match the shipped showreel master within 2 dB on all 8 bands",
   "total": 1800,
   "done": 1800,
   "unit": "frames",
   "created": "2026-11-13T22:37:10.929Z",
-  "updated": "2026-11-14T00:51:57.446Z",
+  "updated": "2026-11-14T00:52:13.188Z",
   "resume": {
     "next_command": "OUT=/tmp/v2 CHUNK=150 TOTAL=1800 ./scripts/render-orca3d-v2.sh (skips existing parts/), then: ffmpeg mux /tmp/v2/video.mp4 + /tmp/orca-final.m4a -> upload to Drive -> job artifact/uploaded",
     "notes": ""
@@ -45,6 +45,10 @@
     {
       "at": "2026-11-14T00:51:57.446Z",
       "what": "uploaded /tmp/Why-Orcas-Fear-Humpbacks-3D-v2-60s-720p.mp4 -> Drive 1pzeP4jT_hMZ4tDkQespCcB1Wb94qgY-g"
+    },
+    {
+      "at": "2026-11-14T00:52:13.188Z",
+      "what": "done"
     }
   ]
 }
