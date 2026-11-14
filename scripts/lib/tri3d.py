@@ -244,7 +244,11 @@ class Renderer:
         self.depth = np.ones((self.h, self.w), dtype=np.float32)
         # camera
         self.view = np.eye(4, dtype=np.float32)
-        self.proj = perspective(42.0, self.w / self.h)
+        # The projection's own planes. linear_depth() has to invert the SAME matrix
+        # that draw() projected with; carrying them on the object is the only way
+        # that stays true when a shot changes fov or the far plane.
+        self.near, self.far = 0.05, 200.0
+        self.proj = perspective(42.0, self.w / self.h, self.near, self.far)
         # lights
         self.key = norm(np.array([-0.35, 0.86, -0.38], dtype=np.float32))
         self.key_col = np.array([0.94, 0.98, 1.00], dtype=np.float32) * 1.30
@@ -287,7 +291,7 @@ class Renderer:
         with its own dorsal fin floating outside it.
         """
         self.view = look_at(eye, target, up)
-        self.proj = perspective(fov, self.w / self.h)
+        self.proj = perspective(fov, self.w / self.h, self.near, self.far)
         if clear:
             self.clear()
 
@@ -417,10 +421,23 @@ class Renderer:
             # from the top is a solid white blade. That is a shading artefact, not the
             # animal. "fin" keeps the diffuse response and drops the view-dependent
             # terms, which is what an organ that is a matte black plate actually does.
-            # ORCA_FIN_MARKER
             if mesh.material == "patch":
-                c = (c * 0.55 + mesh.colour[None, :] * self.ambient[None, :] * 1.7
-                     + mesh.colour[None, :] * 0.30)
+                # A white marking is a diffuse scatterer lit by everything around it.
+                # It must be shaded from ITS OWN albedo, not from the hull beneath:
+                #   c = 55% * lit-hull + albedo*ambient*1.7 + 0.30*albedo
+                # held the patch at the hull's black, so a 0.93 albedo came out at
+                # 0.42 luminance and the flank markings rendered as dark holes. The
+                # body read pale and the markings read black - the animal looked
+                # inverted, which is what the operator saw.
+                #
+                # Ambient here is doing the work of the upwelling and scattered light
+                # a murky column delivers from every direction. Wrap the key so the
+                # patch does not go flat where the body curves away from it.
+                wrap = np.clip((kd - 0.35) / 0.65, 0.0, 1.0)
+                c = mesh.colour[None, :] * (
+                    self.ambient[None, :] * 3.1
+                    + self.key_col[None, :] * (0.34 + 0.46 * wrap[:, None])
+                    + self.fill_col[None, :] * fl[:, None] * 0.55)
             elif mesh.material == "fin":
                 # diffuse only: no specular lobe, no rim, no wrap-around
                 c = (mesh.colour[None, :] * (self.ambient[None, :] * 1.35
@@ -471,9 +488,28 @@ class Renderer:
         z = self.depth
         if self.ssaa > 1:
             z = z.reshape(self.oh, self.ssaa, self.ow, self.ssaa).mean(axis=(1, 3))
-        n, f = 0.05, 400.0
-        ndc = np.clip(z, -1.0, 1.0)
-        return (2.0 * n * f) / (f + n - ndc * (f - n))
+
+        # This function used to invert an OpenGL-style [-1, 1] projection with
+        # hard-coded near=0.05, far=400. perspective() here is neither: it sets
+        # w = +z and stores d = (z - near) / (z * (far - near)), with far=200.
+        # So the two disagreed and every real surface came back at the wrong
+        # distance - a body 10 m away measured 0.100 m, off by 100x.
+        #
+        # The post stack is driven by this number. Fog faded on it, the god-ray
+        # near mask cut on it, caustics decayed on it, and depth_of_field built
+        # its CoC from it. With every pixel reading 0.1 m or 400 m, |z - focus|
+        # saturated for the whole frame and the film was rendered through the
+        # widest blur kernel at all times. That is the smear.
+        #
+        # Invert the matrix that was actually used:
+        #   d * (far - near) = 1 - near / z   =>   z = near / (1 - d * (far - near))
+        return self._ndc_to_metres(z)
+
+    def _ndc_to_metres(self, d):
+        """Invert the projection for an already-resolved NDC depth array."""
+        n, f = self.near, self.far
+        d = np.clip(np.asarray(d, dtype=np.float32), 0.0, 1.0)
+        return n / np.maximum(1.0 - d * (f - n), 1e-6)
 
     def resolve(self):
         im = self.colour
@@ -481,21 +517,67 @@ class Renderer:
             im = im.reshape(self.oh, self.ssaa, self.ow, self.ssaa, 3).mean(axis=(1, 3))
         return im
 
-    def depth_of_field(self, im, focus_depth, strength=6.0):
-        """Cheap CoC: blend the frame with two blurred copies by depth error."""
-        from PIL import Image, ImageDraw, ImageFilter
+    def depth_of_field(self, im, focus_depth, strength=6.0, max_blur=6.0):
+        """Thin-lens circle of confusion, accumulated as a weighted blur ladder.
+
+        The old version blended the frame with two fixed Gaussians using
+        coc = |z - focus| / focus * strength, clipped to 1. Three things were wrong:
+
+        1. It clipped. At focus 9 m with strength 4, anything past 18 m was already
+           at coc 1.0, and the subjects in this film sit at 10-30 m, so the pod was
+           rendered through the widest kernel in every shot.
+        2. It normalised by focus distance, which is not how a lens behaves. Blur
+           depends on the aperture and the focal length, not on where you focused:
+           two objects equidistant either side of the subject do not blur equally,
+           because blur falls off as 1/z behind and steeply in front.
+        3. It had no scale term, so `strength` meant nothing physical and no shot
+           could be matched to another.
+
+        This is the thin-lens relation for the blur circle diameter in pixels:
+
+            c = A * f_len * |z - s| / (z * (s - f_len)) * (pixels / sensor_mm)
+
+        with A the aperture diameter, f_len the focal length and s the focus
+        distance. Only the product A*f_len/(s-f_len) matters, so it is folded into
+        `strength`, and a 50 mm lens at f/2.8 on a 36 mm sensor gives roughly the
+        default. Background is clamped to max_blur pixels, which is what keeps a
+        distant wall from turning into mush.
+
+        The blur is applied as a 4-level ladder weighted per pixel rather than a
+        two-way switch, so focus rolls off continuously instead of in two visible
+        bands.
+        """
+        from PIL import Image, ImageFilter
         z = self.depth.copy()
         if self.ssaa > 1:
             z = z.reshape(self.oh, self.ssaa, self.ow, self.ssaa).mean(axis=(1, 3))
+        zd = self._ndc_to_metres(z)
+
+        s = max(1e-3, focus_depth)
+        # |z-s|/z is the physical term; /(s) normalises it so strength reads in pixels
+        dz = np.abs(zd - s) / np.maximum(zd, 1e-3)
+        c = np.clip(dz * strength, 0.0, max_blur)
+
+        if c.max() < 0.35:
+            return im                      # nothing is far enough out of focus to matter
+
         u8 = np.clip(im * 255, 0, 255).astype(np.uint8)
         base = Image.fromarray(u8)
-        b1 = base.filter(ImageFilter.GaussianBlur(2.2))
-        b2 = base.filter(ImageFilter.GaussianBlur(5.5))
-        coc = np.clip(np.abs(z - focus_depth) / max(1e-4, focus_depth) * strength, 0, 1)
-        a1 = np.clip(coc * 1.8, 0, 1)[..., None]
-        a2 = np.clip(coc - 0.55, 0, 1)[..., None] / 0.45
-        out = im * (1 - a1) + (np.asarray(b1, dtype=np.float32) / 255.0) * a1
-        out = out * (1 - a2) + (np.asarray(b2, dtype=np.float32) / 255.0) * a2
+        radii = [0.0, max_blur * 0.33, max_blur * 0.66, max_blur]
+        blurs = [im] + [np.asarray(base.filter(ImageFilter.GaussianBlur(r)),
+                                   dtype=np.float32) / 255.0
+                        for r in radii[1:]]
+
+        # per-pixel weights: linear interpolation between the two nearest rungs
+        c = np.clip(c, 0.0, max_blur)
+        step = max_blur / 3.0
+        k = np.clip(c / step, 0.0, 2.999)
+        i0 = np.floor(k).astype(np.int32)[..., None]
+        frac = (k[..., None] - i0)
+        out = np.zeros_like(im)
+        for i in range(3):
+            w = (i0 == i) * (1.0 - frac) + (i0 == i - 1) * frac
+            out += blurs[i] * w
         return out
 
 

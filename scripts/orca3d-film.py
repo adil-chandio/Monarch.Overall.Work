@@ -172,7 +172,13 @@ def composite(r, t, bg_top=(0.045, 0.145, 0.195), bg_bot=(0.006, 0.020, 0.032),
     z = r.linear_depth()
 
     # --- aerial perspective, in metres ---
-    fog_k = (1.0 - np.exp(-np.maximum(z - 1.5, 0.0) / 13.0)) * 0.90
+    # Attenuation is a property of the water, not of the shot: 1 - exp(-z/L) with
+    # L the visibility distance. It used to be 13 m with a 0.90 ceiling, which
+    # fogged a subject at 10 m to 43% and at 20 m to 68% - the animals were being
+    # dissolved into the background. The reference footage shows a whale clearly
+    # at ~15 m with the water reading behind it. L=34 m puts 10 m at 25% and 25 m
+    # at 50%, which is haze you can see through.
+    fog_k = (1.0 - np.exp(-np.maximum(z - 1.5, 0.0) / 34.0)) * 0.94
     fog_k = fog_k[..., None]
     fog_col = np.array([0.052, 0.142, 0.178], dtype=np.float32)
     im = im * (1 - fog_k) + fog_col[None, None, :] * fog_k
