@@ -60,6 +60,26 @@ high_mid +1.15   presence +1.37   harsh +1.34   air  in range
 | particles read as falling snow | 0.6–3.2 px hard dots, opacity independent of depth | marine snow: depth-scaled radius and alpha, whole layer defocused |
 | god rays read as flat bars | constant fill, blurred — no falloff in any axis | exponential depth falloff, spread with descent, ragged surface breakup, horizontal falloff |
 
+## Shots rebuilt
+
+Three beats were rendering body parts with no animal attached — the exact
+"impossible floating geometry" problem that makes a render read as cheap:
+
+| Beat | Was | Now |
+|---|---|---|
+| 31.40–35.60 flippers | seven detached blades in a row = a white picket fence | **pec-slap**: two humpbacks at the surface hammering the water, fins attached, spray thrown |
+| 35.60–39.20 wheel | eight flippers rotating on a ring, no whale anywhere | **carousel feeding**: the pod circles a bait ball and closes, every animal banking into the turn |
+| 18.60–22.40 species card | camera at the whale's nose, so 14 m foreshortened to a stick with a detached fluke | three-quarter profile, whole animal in frame |
+| 27.64–31.40 sonar | 2 px arc stroked onto the frame, reading as a lens scratch | soft expanding wavefront with core + skirts, blurred |
+
+All four are behaviours humpbacks actually perform, so the shots now carry
+information as well as looking correct.
+
+## Delivered
+
+Drive `1pzeP4jT_hMZ4tDkQespCcB1Wb94qgY-g` · 18,770,687 B · 60.00 s · 720p30 ·
+stereo 48 k · sha256 `4acf8f58…1b4c04`
+
 ## Reproduce
 
 ```bash

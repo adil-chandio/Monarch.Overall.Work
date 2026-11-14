@@ -22,6 +22,10 @@ while [ "$start" -lt "$TOTAL" ]; do
   [ "$end" -gt "$TOTAL" ] && end=$TOTAL
   a=$(python3 -c "print(f'{$start/30:.4f}')")
   b=$(python3 -c "print(f'{$end/30:.4f}')")
+  if [ -f "$OUT/parts/p$(printf '%03d' "$idx").mp4" ]; then
+    echo "[chunk $idx] already encoded, skipping"
+    start=$end; idx=$((idx + 1)); continue
+  fi
   dir="$OUT/frames"
   rm -rf "$dir"; mkdir -p "$dir"
   echo "[chunk $idx] frames $start-$end  (${a}s-${b}s)"
@@ -46,11 +50,20 @@ EOF
     done
   fi
 
-  "$FF" -y -hide_banner -loglevel error -framerate 30 -i "$dir/f_%05d.png" \
+  # orca3d-film.py names frames by absolute index (f_00150...), but the image2
+  # demuxer always starts a sequence at 0, so every chunk after the first encoded
+  # nothing and ffmpeg exited 254. Renumber to a 0-based sequence for the encode.
+  tmp="$OUT/enc"; rm -rf "$tmp"; mkdir -p "$tmp"
+  n=0
+  for f in $(ls "$dir" | sort); do
+    ln -s "$dir/$f" "$tmp/$(printf 'f_%05d.png' "$n")"
+    n=$((n + 1))
+  done
+  "$FF" -y -hide_banner -loglevel error -framerate 30 -i "$tmp/f_%05d.png" \
     -c:v libx264 -preset medium -crf 17 -pix_fmt yuv420p -r 30 \
     -movflags +faststart "$OUT/parts/p$(printf '%03d' "$idx").mp4"
   echo "  -> $(du -h "$OUT/parts/p$(printf '%03d' "$idx").mp4" | cut -f1)"
-  rm -rf "$dir" "$OUT/repair"
+  rm -rf "$dir" "$tmp" "$OUT/repair"
   start=$end; idx=$((idx + 1))
 done
 

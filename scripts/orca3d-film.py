@@ -231,17 +231,38 @@ def bar(img, x0, x1, y, alpha=1.0, colour=GOLD):
 
 
 def sonar(img, cx, cy, t, period=2.4, n=3, radius=340, alpha=1.0):
+    """A sonar pulse as a soft expanding wavefront, not a drawn arc.
+
+    v1 stroked a 2 px arc straight onto the frame. At 720p that is a hairline
+    scratch, and because it was the only perfectly sharp object in an otherwise
+    defocused shot the eye went straight to it - it read as dirt on the lens rather
+    than as sound. A real wavefront is bright at the crest and gone within a few
+    pixels either side, and it fades as it expands. So: build it on its own layer,
+    stack a narrow core with two wider, dimmer skirts, and blur the whole thing.
+    """
     if alpha <= 0.01:
         return
-    d = ImageDraw.Draw(img, "RGBA")
+    from PIL import Image as _I, ImageFilter as _F
+    lay = _I.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(lay)
     for i in range(n):
         age = ((t + i * period / n) % period) / period
         r = 40 + age * radius
-        a = int(130 * (1 - age) * alpha)
-        if a <= 2:
+        a = (1 - age) ** 1.5 * alpha
+        if a <= 0.02:
             continue
-        d.arc([cx - r, cy - r * 0.92, cx + r, cy + r * 0.92], 200, 340,
-              fill=(160, 205, 215, a), width=2)
+        box = lambda rad: [cx - rad, cy - rad * 0.92, cx + rad, cy + rad * 0.92]
+        d.arc(box(r), 200, 340, fill=(150, 200, 214, int(38 * a)), width=9)
+        d.arc(box(r), 200, 340, fill=(175, 216, 228, int(70 * a)), width=4)
+        d.arc(box(r), 200, 340, fill=(205, 234, 242, int(92 * a)), width=1)
+    lay = lay.filter(_F.GaussianBlur(3.2))
+    # Image.alpha_composite works in place on an RGBA image and needs every pixel to
+    # have sane alpha. The previous branch used Image.composite(img, lay, lay), which
+    # uses lay's ALPHA as a mask AND as a source - so the whole frame outside the
+    # arcs was multiplied by zero alpha and went black.
+    base = img.convert("RGBA")
+    base.alpha_composite(lay)
+    img.paste(base.convert(img.mode), (0, 0))
 
 
 # ---------------------------------------------------------------------------
@@ -355,16 +376,26 @@ def b_krill(r, t, t0, t1):
 
 
 def b_card(r, t, t0, t1):
-    """13. Species card over the animal, shot from below so it towers."""
+    """13. Species card: the animal in three-quarter profile, close and low.
+
+    v1 put the camera at the whale's nose (ry=-118, nearly head-on) and called it a
+    hero shot. Head-on, a 14 m body foreshortens to its own width, so the humpback
+    read as a thin stick with a detached fluke behind it - the single worst frame in
+    the film, and it sat under the title card. Three-quarter is the angle that shows
+    length and girth at once, which is why every wildlife film uses it.
+    """
     k = ease_in_out(clamp01((t - t0) / (t1 - t0)))
-    eye = np.array([lerp(5.0, 4.2, k), -2.4, lerp(8.0, 6.4, k)])
-    tgt = np.array([0.0, 0.6, 0.0])
-    r.set_camera(eye, tgt, fov=50)
+    eye = np.array([lerp(7.4, 6.4, k), lerp(-3.0, -2.4, k), lerp(12.5, 10.8, k)])
+    tgt = np.array([-0.4, 0.1, lerp(0.4, 0.0, k)])
+    r.set_camera(eye, tgt, fov=46)
     m = mesh("humpback", 14.0)
     w = travelling_wave_mesh(m, t, amp=0.18, freq=0.9)
-    r.draw(w, bank(ry=lerp(-118, -104, k), rx=-8, rz=4 * math.sin(t * 0.7),
-                   pos=(0, 0.2, 0.0)))
-    im = to_pil(composite(r, t, focus=9.0, dof=3.2, rays=0.30, particle_n=130))
+    # -58 deg, not -118: side-on enough to read 14 m of body, angled enough to show
+    # the throat pleats and the long pectoral fin that identify the species
+    r.draw(w, bank(ry=lerp(-62, -50, k), rx=-6, rz=5 * math.sin(t * 0.7),
+                   pos=(0, 0.15, 0.0)))
+    im = to_pil(composite(r, t, focus=11.0, dof=2.6, rays=0.34, particle_n=120,
+                          warm=0.06))
     a = win(t, t0 + 0.25, t1, 0.45)
     centre(im, H * 0.10, "HUMPBACK WHALE", size=54, alpha=a)
     centre(im, H * 0.215, "40 TONNES   ·   14 M LONG", size=25, colour=GOLD, alpha=a)
@@ -430,40 +461,88 @@ def b_scan(r, t, t0, t1):
 
 
 def b_flock(r, t, t0, t1):
-    """9. A flock of upright flippers — the reference's strangest image, in 3D."""
+    """9. Pec-slap. Humpbacks lie at the surface and hammer the water with a 5 m
+    flipper; it is the loudest thing a whale does and it is unmistakable.
+
+    v1 rendered seven detached blades floating in a row and called it "a flock of
+    upright flippers". Read cold, that is a white picket fence: the parts do not
+    connect to any animal, so the shot is physically impossible and the eye rejects
+    it instantly. The behaviour is real, so the shot keeps it and shows the animals
+    doing it -- each fin is attached to a body that is actually there, and the fins
+    are at different phases of the same motion rather than parked in a line.
+    """
     k = ease_in_out(clamp01((t - t0) / (t1 - t0)))
-    eye = np.array([lerp(-4.0, -2.0, k), lerp(-1.0, 0.6, k), lerp(-8.0, -6.0, k)])
-    r.set_camera(eye, np.array([0.0, 0.4, 2.0]), fov=48)
-    draw_orca(r, bank(ry=-92, rz=4 * math.sin(t * 0.8),
-                      pos=(0.0, -1.2, 2.0)), t, 0.0, 0.10)
-    fin = mesh("flipper", 4.0)
-    spots = [(-2.6, 1.6, 3.0, -34), (-1.2, 2.4, 4.0, -14), (0.4, 2.6, 3.4, 6),
-             (1.8, 2.2, 4.6, 22), (3.0, 1.4, 3.2, 34), (-3.2, 0.2, 4.4, -46),
-             (2.4, 0.4, 5.0, 42)]
-    for i, (x, y, z, ang) in enumerate(spots):
-        a = win(t, t0 + i * 0.14, t1, 0.4)
-        if a <= 0:
+    eye = np.array([lerp(-3.6, -1.4, k), lerp(-2.6, -1.2, k), lerp(-9.5, -7.0, k)])
+    r.set_camera(eye, np.array([0.4, 1.0, 2.0]), fov=50)
+
+    fin = mesh("flipper", 4.2)
+    # two humpbacks at the surface, rolling, each at its own point in the slap
+    pod = [(-1.9, 0.9, 2.2, 0.0, -0.55), (2.6, 1.6, 4.6, 2.1, 0.48)]
+    for (x, y, z, ph, side) in pod:
+        ph_t = (t * 1.5 + ph) % (2.0 * math.pi)
+        # the slap is a fast down-stroke and a slow recovery, not a sine
+        swing = math.sin(ph_t) ** 3 * 1.15 + 0.15
+        draw_orca(r, bank(ry=-96 + 10 * math.sin(t * 0.7 + ph), rx=14 * swing,
+                          rz=7 * math.sin(t * 0.9 + ph),
+                          pos=(x, y + 0.18 * swing, z)), t, ph, 0.09)
+        # the raised fin, rigid, angled up out of the water about 55 degrees
+        r.draw(fin, bank(ry=side * 18 + 8 * math.sin(t * 1.2 + ph), rx=180,
+                         rz=side * (52 + 26 * swing),
+                         pos=(x + side * 1.15, y + 1.05 + 0.5 * swing, z + 0.15),
+                         scale=0.92))
+    # spray thrown off the stroke: short bright grains, only while a fin is landing
+    for i in range(26):
+        ph_t = (t * 1.5 + i * 0.37) % (2.0 * math.pi)
+        if math.sin(ph_t) > 0.2:
             continue
-        sc = 0.6 + 0.4 * a
-        r.draw(fin, bank(ry=ang, rx=180, rz=ang * 0.3,
-                         pos=(x, y + 0.3 * math.sin(t + i), z), scale=sc))
-    return composite(r, t, focus=7.0, dof=3.6, rays=0.28, particle_n=120)
+        rng = np.random.default_rng(i + int(t * 30))
+        px = -1.9 + rng.uniform(-1.2, 1.2)
+        py = 1.8 + rng.uniform(-0.2, 0.7)
+        pz = 2.2 + rng.uniform(-0.8, 0.8)
+        r.draw(fin, bank(pos=(px, py, pz), scale=0.035 + rng.uniform(0, 0.03)))
+
+    im = composite(r, t, focus=8.0, dof=3.4, rays=0.30, particle_n=130)
+    im = to_pil(im)
+    label(im, (im.width / 2, im.height * 0.88), "PEC-SLAP", alpha=win(t, t0 + 0.9, t1, 0.5),
+          size=20, anchor="tc")
+    return from_pil(im)
 
 
 def b_wheel(r, t, t0, t1):
-    """10. The flippers rotate into a radial wheel."""
+    """10. Carousel feeding: the pod circles a herring school and closes.
+
+    The beat used to be eight flippers rotating on a ring, with no whale attached to
+    any of them. It came out of the reference as an abstract graphic, but in 3D an
+    abstract graphic of body parts is just a white wheel of blades - and the same
+    "impossible floating parts" problem as the old flipper row. Carousel feeding is
+    the real behaviour it was reaching for, and it is a much better shot: you see
+    the pod, you see the ring, and you see why the fish are trapped.
+    """
     k = ease_in_out(clamp01((t - t0) / (t1 - t0)))
-    eye = np.array([0.0, 0.0, -9.0 + 1.5 * k])
-    r.set_camera(eye, np.array([0.0, 0.0, 0.0]), fov=46)
-    fin = mesh("flipper", 4.2)
-    for i in range(8):
-        ang = 45.0 * i + t * 26.0
-        rad = 2.6
+    # camera swings up and out, so the ring opens from a line into a circle
+    # further out and higher: the whole ring has to fit, because the ring IS the shot
+    eye = np.array([2.6 * math.sin(t * 0.5), 6.8 + 3.0 * k, -17.5 + 3.0 * k])
+    r.set_camera(eye, np.array([0.0, -0.3, 0.6]), fov=52)
+
+    # the school: a tight bait ball in the middle of the ring
+    ball = mesh("krill_cluster", 300, 1.5, 5)
+    r.draw(ball, bank(pos=(0.0, -0.3, 0.6), scale=1.15))
+
+    n = 5
+    rad = 3.6 - 0.9 * k
+    for i in range(n):
+        ang = (360.0 / n) * i + t * 34.0
         x = math.sin(math.radians(ang)) * rad
-        y = math.cos(math.radians(ang)) * rad
-        r.draw(fin, bank(ry=ang, rx=180, rz=ang,
-                         pos=(x, y, 1.0 + 0.3 * math.sin(t + i)), scale=0.8))
-    return composite(r, t, focus=9.0, dof=3.0, rays=0.30, particle_n=110)
+        z = math.cos(math.radians(ang)) * rad + 0.6
+        # each animal banks into the turn and its heading follows the circle
+        draw_orca(r, bank(ry=-ang + 90.0, rx=-12.0, rz=-26.0,
+                          pos=(x, -0.2 + 0.22 * math.sin(t * 1.4 + i), z)),
+                  t, i * 1.3, 0.13)
+    im = composite(r, t, focus=11.0, dof=4.4, rays=0.30, particle_n=150)
+    im = to_pil(im)
+    label(im, (im.width / 2, im.height * 0.88), "CAROUSEL FEEDING",
+          alpha=win(t, t0 + 0.9, t1, 0.5), size=19, anchor="tc")
+    return from_pil(im)
 
 
 def b_plan(r, t, t0, t1):
