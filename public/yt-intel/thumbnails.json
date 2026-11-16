@@ -2,9 +2,9 @@
   "status": "ok",
   "n": 12,
   "face_rate": 0.67,
-  "avg_contrast": 0.252,
-  "avg_busy": 1.77,
-  "text_band_energy": 1.49,
+  "avg_contrast": 0.269,
+  "avg_busy": 1.79,
+  "text_band_energy": 1.5,
   "hue_families": [
     [
       "red",
@@ -33,11 +33,11 @@
       1
     ],
     [
-      "#956752",
+      "#303d46",
       1
     ],
     [
-      "#303d46",
+      "#5e562d",
       1
     ]
   ],
@@ -118,30 +118,6 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.166,
-      "face_present": true,
-      "face_upper_half": 0.106,
-      "contrast": 0.377,
-      "brightness": 0.488,
-      "accent_share": 0.404,
-      "dominant": {
-        "hex": "#956752",
-        "share": 0.404,
-        "hue_deg": 22
-      },
-      "text_edge_energy": {
-        "upper": 4.11,
-        "lower": 4.05,
-        "centre": 2.61
-      },
-      "text_row_span": 141,
-      "busy": 3.36,
-      "id": "MBz9nSE7OMg"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
       "face_share": 0.013,
       "face_present": true,
       "face_upper_half": 0.025,
@@ -161,6 +137,30 @@
       "text_row_span": 27,
       "busy": 0.52,
       "id": "dru9WO90e6g"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.067,
+      "face_present": true,
+      "face_upper_half": 0.109,
+      "contrast": 0.194,
+      "brightness": 0.155,
+      "accent_share": 0.357,
+      "dominant": {
+        "hex": "#5e562d",
+        "share": 0.357,
+        "hue_deg": 52
+      },
+      "text_edge_energy": {
+        "upper": 2.02,
+        "lower": 0.77,
+        "centre": 2.35
+      },
+      "text_row_span": 66,
+      "busy": 1.63,
+      "id": "m8J7t1JXCLA"
     },
     {
       "size": "maxresdefault",
