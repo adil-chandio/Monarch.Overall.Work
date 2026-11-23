@@ -1,10 +1,10 @@
 {
   "status": "ok",
   "n": 12,
-  "face_rate": 0.67,
-  "avg_contrast": 0.269,
-  "avg_busy": 1.79,
-  "text_band_energy": 1.5,
+  "face_rate": 0.75,
+  "avg_contrast": 0.234,
+  "avg_busy": 1.54,
+  "text_band_energy": 1.25,
   "hue_families": [
     [
       "red",
@@ -33,11 +33,11 @@
       1
     ],
     [
-      "#303d46",
+      "#5e562d",
       1
     ],
     [
-      "#5e562d",
+      "#2a9c41",
       1
     ]
   ],
@@ -118,30 +118,6 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.013,
-      "face_present": true,
-      "face_upper_half": 0.025,
-      "contrast": 0.21,
-      "brightness": 0.205,
-      "accent_share": 0.446,
-      "dominant": {
-        "hex": "#303d46",
-        "share": 0.446,
-        "hue_deg": 202
-      },
-      "text_edge_energy": {
-        "upper": 0.32,
-        "lower": 0.21,
-        "centre": 0.7
-      },
-      "text_row_span": 27,
-      "busy": 0.52,
-      "id": "dru9WO90e6g"
-    },
-    {
-      "size": "maxresdefault",
-      "w": 1280,
-      "h": 720,
       "face_share": 0.067,
       "face_present": true,
       "face_upper_half": 0.109,
@@ -166,25 +142,49 @@
       "size": "maxresdefault",
       "w": 1280,
       "h": 720,
-      "face_share": 0.104,
+      "face_share": 0.038,
       "face_present": true,
-      "face_upper_half": 0.077,
-      "contrast": 0.286,
-      "brightness": 0.374,
-      "accent_share": 0.666,
+      "face_upper_half": 0.064,
+      "contrast": 0.363,
+      "brightness": 0.75,
+      "accent_share": 0.488,
       "dominant": {
-        "hex": "#836250",
-        "share": 0.666,
-        "hue_deg": 22
+        "hex": "#2a9c41",
+        "share": 0.488,
+        "hue_deg": 127
       },
       "text_edge_energy": {
-        "upper": 2.47,
-        "lower": 0.95,
-        "centre": 1.31
+        "upper": 3.57,
+        "lower": 2.16,
+        "centre": 2.94
       },
-      "text_row_span": 102,
-      "busy": 1.41,
-      "id": "d5cxElwUeao"
+      "text_row_span": 54,
+      "busy": 2.69,
+      "id": "5vNbegdKQOA"
+    },
+    {
+      "size": "maxresdefault",
+      "w": 1280,
+      "h": 720,
+      "face_share": 0.013,
+      "face_present": true,
+      "face_upper_half": 0.025,
+      "contrast": 0.21,
+      "brightness": 0.205,
+      "accent_share": 0.446,
+      "dominant": {
+        "hex": "#303d46",
+        "share": 0.446,
+        "hue_deg": 202
+      },
+      "text_edge_energy": {
+        "upper": 0.32,
+        "lower": 0.21,
+        "centre": 0.7
+      },
+      "text_row_span": 27,
+      "busy": 0.52,
+      "id": "dru9WO90e6g"
     }
   ],
   "reading": "face-led: people are the product; house colour is red (7/12 thumbnails)",
